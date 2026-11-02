@@ -1,0 +1,39 @@
+{
+  "challenge": {
+    "bases": 3,
+    "description": "Defend the tower base against an adaptive survival army.",
+    "difficulty": "Medium",
+    "map": "TowerDefense2_m-T1",
+    "maxPlayers": 2,
+    "name": "Warzone Towers: Survival",
+    "powerLevel": 1,
+    "scavengers": 0,
+    "techLevel": 1,
+    "version": 2
+  },
+  "locked": {
+    "ai": true,
+    "alliances": true,
+    "bases": true,
+    "difficulty": true,
+    "position": true,
+    "power": true,
+    "scavengers": true,
+    "teams": true
+  },
+  "scripts": {
+    "rules": "warzone-towers-rules.js"
+  },
+  "player_0": {
+    "name": "Tower Commander",
+    "position": 1,
+    "team": 0
+  },
+  "player_1": {
+    "ai": "multiplay/skirmish/warzone-towers-ai.js",
+    "difficulty": "Medium",
+    "name": "Survival Army",
+    "position": 0,
+    "team": 1
+  }
+}

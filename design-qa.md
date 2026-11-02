@@ -1,0 +1,134 @@
+# Warzone Towers design QA
+
+final result: passed
+
+## v4.5 graphics choice — current
+
+Startup/download flow passed. Native launch artwork fills the screen, with
+aligned Normal/High Quality cards, a saved selection and a fixed bottom action.
+Actual Android screenshots at 1280x532 and 1280x800 were inspected. Download
+progress, cancel, paused progress, friendly network failure and cached/offline
+states were exercised. A premature resize capture was discarded; additional
+emulator size changes were blocked by automatic approval review, with no more
+specific reason supplied. No stable 800x360 check is claimed.
+
+High Quality loaded the original 95 MiB official archive, selected native
+terrainMode=2 and read over 40 MiB of its data during actual battlefield startup.
+Cached High Quality and included Normal both started offline. Ten regression
+scripts passed. The complete engine JS/WASM/data and 439 existing assets remain
+byte-identical to v4.4; only the wrapper index changed and one loader was added.
+
+Visual quality comparison remains unverified: the emulator has a pre-existing
+black-terrain problem in both modes, including with software rendering. This
+release verifies pack loading and the startup flow, not that rendering issue or
+physical Samsung compatibility. See `qa/v4.5/graphics-qa.md` for evidence.
+
+## v4.4 HELP return
+
+A verified v4.3 APK/source fallback was saved before edits. HELP now uses an
+explicit overlay return path to restore the command header, viewport, interaction
+state and engine focus. The host is fixed to the screen; closing HELP cannot
+rely on browser-native dialog focus restoration. No engine or wave change.
+
+Six physical adb touch/scroll/return cycles passed on the new APK. The last
+three checked panning plus native CLOSE/MAP/BATTLE zoom acknowledgements after
+every return, followed by opening the native Build menu. No stuck key or runtime
+exception remained. See `qa/v4.4/help-return-qa.md` for evidence and the explicit
+limit: the reported device-specific disappearance did not reproduce on this
+emulator, so the user's tablet still needs to confirm the mitigation.
+
+## v4.3 wave header, camera and preparation
+
+Before any project edit, the v4.2 APK and a fresh 621-file source archive were
+saved, hashed and verified under
+`C:/timerApp/_backups/warzone-towers-v4.2-before-wave-camera-20261102-212219`.
+The previous delivered APK and ZIP were preserved as well.
+
+Wave status/Skip Wave now sit at the header's top-right. Compact layouts use
+two rows with no overlap. Up/down panning was measured against native saved
+camera coordinates, and the minimap hit area was corrected for this square
+map. Two-finger vertical dragging adds native camera tilt, preserving heading
+and map position, with restrained sensitivity and release/cancel handling.
+
+A dialog announces four minutes to prepare. The first wave starts at the
+deadline even without a defence or combat unit; Skip Wave can start sooner.
+The natural four-minute emulator test produced four enemies at Wave 1, and an
+early Wave 2 preserved those survivors and increased the total to eight.
+
+Camera, initial orientation, phone/tablet/compact header dimensions, HELP and
+research return passed on the final build. See `qa/v4.3/camera-waves-qa.md`.
+The official engine code/WASM/data prefix, supplied map/mod and branding are
+preserved. Physical Samsung S8 verification remains pending.
+
+## v4.2 fullscreen correction
+
+The old v4.0/v4.1 canvas-fit layout exposed grey side gutters. Calling those
+gutters an intentional adaptation in the earlier report was a poor decision.
+It has been replaced by a true full-width engine viewport below a separate
+command row. No finished-frame CSS transform remains. TECH opens full-height
+and restores the battlefield when closed. The native loading image now fills
+the display with CENTER_CROP and panoramic scenery, rather than a fitted square
+over a blurred backdrop. The launcher illustration is unchanged.
+
+Live Android viewport and interaction checks passed; see
+`qa/v4.2/fullscreen-qa.md`, `viewport-results.json`, and `gameplay-results.json`.
+The sections below are historical evidence for earlier releases, including the
+superseded canvas-fit implementation.
+
+## v4.1 branding update
+
+The first selected green-field image is now the actual launcher icon, Android 12+ system splash icon and full engine-loading artwork. Native launcher, cold-start splash, fitted image and transition into gameplay were checked on the audio-disabled emulator. See `qa/v4.1/branding-qa.md` and its screenshots/results. All 439 packaged gameplay/engine assets remain byte-identical to the delivered v4.0 APK. Physical Samsung S8 testing is still pending.
+
+The remaining report records the historical v4.0 controls and gameplay verification.
+
+**Evidence and normalization**
+
+- Selected source: `qa/v4/selected-reference.png`, copied from the third displayed Minimal Tactical mockup at `C:/Users/punke/.codex/generated_images/01a1988c-2332-7013-9716-b021281aa5a7/exec-78cc9124-3277-4ae5-a1bc-ba9861b49a97.png`.
+- Live Android captures: `qa/v4/wide.png`, `compact.png`, `tablet-final.png`, and their HELP captures. Captured using adb, including the real WebGL canvas.
+- Same comparison viewport: 1280 × 576 CSS pixels. Source 1870 × 841 resampled to 1280 × 576. Implementation DPR 2, captured within the 2560 × 1600 Android surface; the visible 2560 × 1152 region was cropped and downsampled without stretching.
+- Opened together and inspected: `comparison-full.png`, `comparison-controls.png`, `comparison-wave.png`. Also opened `compact-help-bottom-normalized.png` to check scroll and return control.
+- State: Wave 6, +Q enabled, BATTLE selected. Enemy counts and camera location differ because this is a running match; the map is not a static image.
+
+**Findings**
+
+No remaining actionable P0/P1/P2 findings in the implemented command rail, wave panel, or HELP flow.
+
+- Fonts/typography: local Oswald 600 matches the condensed command labels and wave heading; system UI supports longer guidance. Labels remain single-line at 642 × 482. The mock's labels are slightly heavier, a P3 refinement.
+- Layout/rhythm: joined command zones, separated zoom group, left icons, 7px top/left spacing and compact upper-right wave panel follow the reference. HELP is the requested extra control. The whole native frame is uniformly fitted below a 50px command area to preserve the engine's message strip; small side gutters are an intentional functional adaptation, preserving aspect ratio and touch mapping.
+- Colors/tokens: charcoal surfaces, warm ivory labels, moss green +Q, cyan BATTLE, amber TECH and coral wave rule match the source. Gold outlined button boxes, decorative wave dot, SURVIVAL CONTROL and pulse jargon were removed.
+- Asset fidelity: the actual Warzone canvas and stock native UI are retained. No generated gameplay or research art was inserted. Local unmodified Phosphor Bold SVG icons and Oswald are accompanied by MIT/OFL licences. All toolbar images/fonts loaded.
+- Copy/content: HELP explains select trucks → +Q → select defence once → repeated placement, changing defence, STOP, gestures, zoom, research, Skip Wave keeping survivors and command-centre defeat. It states the battle continues while open.
+- States/accessibility: semantic buttons, titles, +Q/zoom pressed state, visible focus; labelled modal HELP with native Escape, CLOSE and BACK TO BATTLE. Internal scrolling exposes the footer on compact screens. On research completion the wave panel temporarily moves below native messages.
+
+**Comparison history**
+
+1. P1: native messages overlapped the command rail. Fixed with a separate wrapper command area and uniform native-frame inset. Final evidence: native frame top=50, rail bottom=45 in `layout-results.json` and the normalized screenshot.
+2. P2: initial resize experiment measured an already transformed frame, causing progressive shrinkage. Fixed by removing presentation scaling before SDL measures resize, restoring full canvas CSS dimensions, then fitting afterward. Three consecutive resize events finish at 1200 × 750 within the original 1280 × 800 tablet viewport.
+3. P2: compact viewport expanded to fit old launcher content. Fixed page-level scale and removed the launcher's body minimum height during play; game pinch remains available. Final 642 × 482 viewport fits every toolbar control without scrolling.
+4. P2: wave heading initially centred and build copy wrapped unnecessarily. Fixed left alignment and shortened build instruction. The final focused comparison shows aligned title, status and Skip Wave.
+
+**Runtime and interactions**
+
+- Version 4.0-towers, code 40, installed on API 36.1 emulator, WebView 158.0.8127.2, audio disabled. Normal splash startup reached gameplay.
+- `gameplay-results.json`: real adb touches selected a truck, enabled +Q, selected Heavy Machinegun Guard Tower once, and submitted three placement taps. Two armed defences completed during the interval; native queue and build ghost stayed active. No second defence selection was sent.
+- Six real Skip Wave button taps reached Wave 6, adding fresh enemies. Camera facing count stayed one, including BASE, waves and repeated viewport changes. Native minimap north marker stayed at the south-facing position.
+- `layout-results.json`: 1280 × 576 wide, 642 × 482 compact and 1280 × 800 tablet. Every toolbar control fits; whole native frame fits; local icons/font load; HELP opens, scrolls, returns and closes. These are WebView-only viewport checks; underlying emulator display settings were not reset.
+- A real adb swipe produced one pan and six native pan updates. Synthetic two-finger pointer input in the live WebView produced seven pinch steps; BOX drag completed and released its state. No held key remained.
+- CLOSE/MAP/BATTLE received engine acknowledgements at 1600/3600/2600. Medium Body - Cobra was explicitly queued through TECH and returned to battle immediately; its command was acknowledged in 192ms, with no rejection, timeout or bridge error.
+- `interaction-results.json` confirms that Medium Body - Cobra subsequently completed, its lab returned to idle, and no research bridge error occurred. All four labs are ready. This test selected the topic explicitly; no automatic player research was added.
+- Runtime logs checked: known streaming-WASM warning successfully falls back to ArrayBuffer instantiation. No Android fatal exception observed. Initial missing-log counters occur before engine log-directory creation.
+- Physical Samsung S8 remains unverified; emulator layout tests are not physical-device certification.
+
+**Implementation checklist**
+
+- [x] Selected styling in the existing Android wrapper, HELP, and supported gear-hide config.
+- [x] One startup orientation before reveal; no delayed wave turn.
+- [x] Sticky mode arming separated from menu Ctrl; STOP releases sticky construction.
+- [x] Message lane, aspect ratio, repeated resize and input mapping checked.
+- [x] Wave/research polls read appended bytes, preserve partial UTF-8/JSON and handle truncation.
+- [x] Build, regression suites, actual touch construction and combined visual QA passed.
+- [x] Complete engine JS/WASM/data and all 32 supplied extracted mod files match v2.2 byte for byte.
+
+**Follow-up polish**
+
+P3: slightly heavier command-label weight on large tablets. Physical S8 startup still requires a device test.

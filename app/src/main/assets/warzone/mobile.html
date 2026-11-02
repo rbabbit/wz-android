@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+  <title>Warzone Towers</title>
+  <style>
+    html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: #05090b; }
+    #warzone-host { position: fixed; inset: 0; display: grid; grid-template-rows: 0 minmax(0, 1fr); width: 100%; height: 100%; }
+    body[data-playing="true"]:not([data-research="true"]) #warzone-host { grid-template-rows: 50px minmax(0, 1fr); }
+    @media (max-width: 1000px) {
+      body[data-playing="true"]:not([data-research="true"]) #warzone-host { grid-template-rows: 94px minmax(0, 1fr); }
+    }
+    #warzone-command-strip { position: relative; min-width: 0; overflow: hidden; }
+    #warzone-command-strip #blocknight-combat-hud { position: absolute; }
+    #warzone-game-frame { display: block; width: 100%; height: 100%; min-width: 0; min-height: 0; border: 0; }
+  </style>
+</head>
+<body>
+  <main id="warzone-host">
+    <header id="warzone-command-strip" aria-label="Battle commands"></header>
+    <iframe id="warzone-game-frame" title="Warzone battlefield" allow="autoplay; fullscreen; cross-origin-isolated"></iframe>
+  </main>
+  <script>
+    // Give the unchanged engine a real viewport, rather than shrinking its
+    // finished frame. Browser layout and SDL now agree on both dimensions.
+    window.WarzoneHost = {
+      setPlaying() {
+        document.body.dataset.playing = "true";
+        dispatchEvent(new Event("warzone-battle-ready"));
+      },
+      setResearchOpen(open) { document.body.dataset.research = String(Boolean(open)); },
+      restoreBattlefield() {
+        const frame = document.getElementById("warzone-game-frame");
+        const header = document.getElementById("warzone-command-strip");
+        document.body.dataset.playing = "true";
+        if (!frame.contentWindow.__blockNightResearch?.report().open) document.body.dataset.research = "false";
+        header.hidden = false;
+        frame.hidden = false;
+        scrollTo(0, 0);
+        document.documentElement.scrollTop = document.body.scrollTop = 0;
+        document.documentElement.scrollLeft = document.body.scrollLeft = 0;
+        frame.contentWindow.scrollTo(0, 0);
+      }
+    };
+    document.getElementById("warzone-game-frame").src = "index.html" + location.search;
+  </script>
+</body>
+</html>

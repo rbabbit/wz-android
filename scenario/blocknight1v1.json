@@ -1,0 +1,39 @@
+{
+  "challenge": {
+    "bases": 3,
+    "description": "One human commander versus one Warzone AI on the Block Night 20-oil map.",
+    "difficulty": "Medium",
+    "map": "BlockNight20-T1",
+    "maxPlayers": 2,
+    "name": "Block Night: Human vs Bot",
+    "powerLevel": 1,
+    "scavengers": 0,
+    "techLevel": 1,
+    "version": 2
+  },
+  "locked": {
+    "ai": true,
+    "alliances": true,
+    "bases": true,
+    "difficulty": true,
+    "position": true,
+    "power": true,
+    "scavengers": true,
+    "teams": true
+  },
+  "scripts": {
+    "rules": "blocknight-queue-rules.js"
+  },
+  "player_0": {
+    "name": "Commander",
+    "position": 0,
+    "team": 0
+  },
+  "player_1": {
+    "ai": "multiplay/skirmish/nb_generic.js",
+    "difficulty": "Medium",
+    "name": "Block Bot",
+    "position": 1,
+    "team": 1
+  }
+}

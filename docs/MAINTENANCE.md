@@ -37,6 +37,14 @@ newer working tree just to inspect an older version.
 The original v4.5 frozen source ZIP contains the original PC-specific tool paths.
 The main Git branch has portable tool paths; use Git for ongoing development.
 
+## Signing continuity
+
+The delivered APKs use this machine's Android debug signing identity. The key is
+kept outside the public repository, normally at `%USERPROFILE%/.android/debug.keystore`.
+Keep a private copy when migrating machines if future test APKs must install as
+updates over these APKs. A different debug key requires a separate install or an
+uninstall first. Production upload/release keys are not supplied by this archive.
+
 ## Build and edit boundaries
 
 The already-packaged engine is included, so Android builds do not need to

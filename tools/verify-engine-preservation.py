@@ -23,7 +23,7 @@ with ZipFile(args.baseline) as old,ZipFile(args.candidate) as new:
     entry_pattern=r'\{filename:"([^"]+)",start:(\d+),end:(\d+)\}'
     previous={name:(int(start),int(end)) for name,start,end in re.findall(entry_pattern,old_index.group())}
     current={name:(int(start),int(end)) for name,start,end in re.findall(entry_pattern,new_index.group())}
-    custom={'/data/mp/tests/warzone-towers-bridge.js'}
+    custom={'/data/mp/tests/warzone-towers-bridge.js','/data/mp/tests/warzone-towers-rules.js'}
     count=0
     for name,(start,end) in previous.items():
         if name in custom:continue

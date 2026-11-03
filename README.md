@@ -2,10 +2,11 @@
 
 Full Android project for Warzone Towers, based on the supplied Survival Mod and
 TowerDefense2_m map. The editable project is at the repository root; open this
-folder in Android Studio. Current Android version: **4.7-startup-music (47)**.
+folder in Android Studio. Current Android version: **4.8-command-pages (48)**.
 
 ## Downloads and saved versions
 
+- [v4.8 APK and complete editable source](https://github.com/rbabbit/wz-android/releases/tag/v4.8-command-pages)
 - [v4.7 APK and complete editable source](https://github.com/rbabbit/wz-android/releases/tag/v4.7-startup-music)
 - [v4.6 frozen APK/source and original Music recovery pack/notices](https://github.com/rbabbit/wz-android/releases/tag/v4.6-music-controls)
 - [v4.5 APK, frozen source ZIP and optional HQ pack](https://github.com/rbabbit/wz-android/releases/tag/v4.5-graphics-choice)
@@ -15,7 +16,8 @@ folder in Android Studio. Current Android version: **4.7-startup-music (47)**.
 - [Restore and maintenance guide](docs/MAINTENANCE.md)
 
 Releases preserve the original delivered files. The working source includes the
-v4.7 startup playlist; the previous releases remain frozen fallbacks.
+v4.8 command pages and startup playlist; previous releases remain frozen fallbacks.
+The BUILD/DESIGN command pages are documented in [COMMAND-PAGES.md](docs/COMMAND-PAGES.md).
 The repository's original manual-release README is retained in
 `archive/repository-bootstrap-README.md`. Existing release 1.1.1 is preserved.
 
@@ -72,10 +74,33 @@ cache use passed. The emulator has an existing black-terrain rendering issue in
 both modes, so HQ visual improvement and physical Samsung tablet compatibility
 remain unconfirmed. The native input audit reads the engine's saved truck orders to
 check sticky construction, including bad taps and overlay returns. The exact
-builds and results are recorded under `qa/v4.7/`.
+builds and results are recorded under `qa/v4.8/`.
 [Known issues](docs/KNOWN-ISSUES.md) records the remaining device limits.
 
 ## Release history
+
+## Version 4.8-command-pages (48)
+
+BUILD replaces the small native construction menu with larger, searchable cards,
+stock research images and BUILD THIS. Selected constructors take priority; with
+none selected the nearest reachable truck is assigned. Every tower placement
+queues, and the chosen structure survives invalid taps, camera movement and
+overlay returns. The queue page provides blocked-job Retry/Remove. Native work
+is preserved until idle; the wrapper does not hold Ctrl or repeatedly reissue
+build orders. A cached structure lookup keeps large queues from repeatedly
+marshalling native lists every tick.
+
+DESIGN validates researched body/propulsion/weapon or system combinations using
+the original engine. SAVE DESIGN persists an editable device library. FACTORY
+queues these real designs or existing templates using normal power/build time.
+STATS opens the actual player/kill table. MORE holds secondary combat controls,
+commanders and interface size. The duplicate native research/hex menu is hidden;
+the minimap, TECH, Music startup, waves and supplied roster remain available.
+
+The engine program/WASM and previous data prefix remain unchanged. Custom
+scenario files are appended through the existing embedder. The tested v4.7 APK
+and source were saved before changes. See the versioned QA report for exact
+native tests and remaining physical-device limits.
 
 ## Version 4.7-startup-music (47)
 

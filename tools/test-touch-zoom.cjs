@@ -143,7 +143,7 @@ async function run() {
     await sleep(20);
     assert.equal(controls.report().pendingClicks,0,'native input queue must drain');
   };
-  assert.equal(controls.version, 50);
+  assert.equal(controls.version, 51);
   assert.equal(controls.showCombatHud(), true);
   assert.equal(elements.has("blocknight-music"),false,"battle header must not expose Music navigation");
   assert.equal(controls.openMusic,undefined);

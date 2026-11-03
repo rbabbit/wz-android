@@ -20,7 +20,7 @@
 (() => {
   "use strict";
 
-  if (window.__kalaWarzoneTouch?.version >= 50) return "already-installed";
+  if (window.__kalaWarzoneTouch?.version >= 51) return "already-installed";
 
   // Android's touch-slop model: tolerate a small finger wobble, then commit
   // immediately to a movement gesture. Scale gently for high-density panels.
@@ -904,6 +904,10 @@
     if (!target || radarPoint(x, y) !== null) return false;
     const bounds = target.getBoundingClientRect();
     if (bounds.width <= 0 || bounds.height <= 0) return false;
+    if (window.__warzoneCommands?.tower) {
+      if (window.__warzoneCommands.nativeMenuOpen()) return false;
+      return x >= bounds.left && y >= bounds.top && x < bounds.right && y < bounds.bottom;
+    }
     const normalizedX = (x - bounds.left) / bounds.width;
     const normalizedY = (y - bounds.top) / bounds.height;
 
@@ -929,6 +933,7 @@
   }
 
   function trackNativePanelTap(x, y) {
+    if (window.__warzoneCommands?.tower) return;
     if (!state.hudVisible) return;
     const ui = nativeUiRects();
     if (!ui) return;
@@ -1099,6 +1104,7 @@
       zoomControl.append(...zoomButtons);
       const tech = makeButton("blocknight-tech", "TECH",
         "Open the tactical research queue", () => {
+          window.__warzoneCommands?.close?.();
           window.__blockNightResearch?.open?.();
         });
       const help = makeButton("blocknight-help", "HELP", "How to play and use +Q", showHelp);
@@ -1111,6 +1117,19 @@
       const techGroup = document.createElement("div");
       techGroup.className = "bn-command-group";
       techGroup.append(tech, help);
+      if (window.__warzoneCommands?.tower) {
+        hud.classList.add("wt-modern");
+        const commands = document.createElement("div");
+        commands.className = "bn-command-group";
+        for (const page of ["build", "design", "factory", "stats", "more"]) {
+          const b = document.createElement("button");
+          b.id = `wt-open-${page}`; b.type = "button"; b.textContent = page.toUpperCase();
+          b.title = `Open ${page}`;
+          bindTouchCommand(b, () => window.__warzoneCommands.open(page));
+          commands.appendChild(b);
+        }
+        hud.appendChild(commands);
+      }
       hud.append(orderGroup, zoomGroup, techGroup);
       (hudDocument.getElementById("warzone-command-strip") || hudDocument.body).appendChild(hud);
     }
@@ -1130,6 +1149,8 @@
   }
 
   function showHelp() {
+    window.__warzoneCommands?.close?.();
+    window.__warzoneCommands?.closeNative?.();
     const hudDocument = commandDocument();
     let help = hudDocument.getElementById("warzone-towers-help");
     if (!help) {
@@ -1147,13 +1168,13 @@
           <h1 id="wt-help-title">FIELD GUIDE</h1></div>
           <button type="button" class="wt-help-close" aria-label="Close help">CLOSE</button></header>
         <div class="wt-help-content">
-          <section class="wt-help-queue"><h2>+Q · BUILD THE SAME DEFENCE REPEATEDLY</h2>
-            <ol><li><b>Select your trucks.</b> Tap a truck, or use BOX to select several.</li>
-              <li><b>Turn on +Q.</b> Green means the queue is enabled.</li>
-              <li><b>Open Build and tap a defence once.</b> Choose, for example, Cannon Fortress.</li>
-              <li><b>Tap each valid location.</b> The same defence stays selected and the trucks build in order.</li></ol>
-            <p>To change defence, open Build and choose another. Turn +Q off to finish placing.
-              STOP cancels the selected trucks’ orders.</p></section>
+          <section class="wt-help-queue"><h2>BUILD · QUEUE YOUR DEFENCES</h2>
+            <ol><li><b>Open BUILD.</b> Choose a structure and press BUILD THIS.</li>
+              <li><b>Tap each valid location.</b> Every placement queues and the structure stays selected.</li>
+              <li><b>A truck is assigned automatically.</b> Select your own trucks first to use that group instead.</li>
+              <li><b>Press DONE</b> to finish placing, or CHANGE to choose a different structure.</li></ol>
+            <p>Invalid taps keep your chosen structure active. STOP cancels selected trucks’ orders,
+              or the automatically assigned builders when no units are selected.</p></section>
           <section><h2>PROTECT YOUR COMMAND CENTRE</h2>
             <p>You have <b>4 minutes to prepare</b>. Wave 1 starts automatically, even if you have not built anything.
               If your command centre is destroyed, you have failed.</p>
@@ -1164,10 +1185,13 @@
               <b>Hold, then drag</b> to select a group, or tap <b>BOX</b> then drag.</p>
             <p><b>CLOSE / BATTLE / MAP</b> set camera distance. <b>BASE</b> returns to your command centre.</p></section>
           <section><h2>COMMANDS &amp; RESEARCH</h2>
-            <p><b>ALL</b> keeps combat units selected; trucks are excluded. <b>AUTO</b> uses native patrol orders.
+            <p><b>MORE</b> contains ALL, AUTO patrol, BOX selection and control size. <b>ALL</b> keeps combat units selected; trucks are excluded.
               <b>STOP</b> stops selected units.</p>
             <p><b>TECH</b> opens research. Choose a lab and add available topics to its queue.
-              Each lab completes your choices in order. Use <b>BACK TO BATTLE</b> to return.</p></section>
+              Each lab completes your choices in order. Use <b>BACK TO BATTLE</b> to return.</p>
+            <p><b>DESIGN</b> creates blueprints from researched parts. SAVE DESIGN keeps them on this device.
+              <b>FACTORY</b> produces saved or existing designs with normal power and build time.
+              <b>STATS</b> opens player and kill statistics.</p></section>
           <section><h2>MUSIC</h2><p>Choose your tracks on the start screen before starting a battle. Download Music once, select your playlist, then press <b>START GAME</b>. Your choices are saved for the next game.</p></section>
         </div>
         <footer><span>The battle continues while this guide is open.</span>
@@ -1252,6 +1276,7 @@
       // Classify taps first: tiny finger drift must not become a native drag.
       return;
     }
+    if (window.__warzoneCommands?.isPlacement()) window.__warzoneCommands.previewAt(event.clientX, event.clientY);
     mouseMove(event.clientX, event.clientY, 0);
     if (boxOneShot) {
       beginBoxSelection(state.single);
@@ -1264,7 +1289,7 @@
         const gesture = state.single;
           if (state.primaryId !== pointerId || !gesture
                   || gesture.moved || gesture.panning || state.multi) return;
-          if (state.queueMode || !isBattlefieldPoint(gesture.startX, gesture.startY)) return;
+          if (state.queueMode || window.__warzoneCommands?.isPlacement() || !isBattlefieldPoint(gesture.startX, gesture.startY)) return;
           // Menu buttons are always ordinary clicks; a slow renderer must not
           // turn truck/defence selection into a right-click cancellation.
           gesture.longPressArmed = true;
@@ -1282,6 +1307,7 @@
 
   function beginPan(gesture) {
     if (gesture.panning) return;
+    window.__warzoneCommands?.hidePreview?.();
     clearLongPress();
     releaseMouse();
     gesture.panning = true;
@@ -1292,6 +1318,7 @@
   }
 
   function beginMulti() {
+    window.__warzoneCommands?.hidePreview?.();
     clearMultiMove();
     clearLongPress();
     releaseTilt();
@@ -1570,7 +1597,10 @@
       state.orders += 1;
       feedback(gesture.x, gesture.y, "double");
     } else if (!canceled && !gesture.moved) {
-      if (state.combatLock && isBattlefieldPoint(gesture.x, gesture.y)) {
+      if (window.__warzoneCommands?.isPlacement() && isBattlefieldPoint(gesture.x, gesture.y)) {
+        window.__warzoneCommands.placeAt(gesture.x, gesture.y);
+        state.taps += 1;
+      } else if (state.combatLock && isBattlefieldPoint(gesture.x, gesture.y)) {
         queueCombatOrder(gesture.x, gesture.y, state.autoFight);
       } else if (state.queueMode && isQueuePlacementPoint(gesture.x, gesture.y)) {
         contextualClick(gesture.x, gesture.y, true);
@@ -1720,7 +1750,7 @@
     // their focus transfer to SDL clears every native key, cancelling the
     // engine's quick-build ghost even though +Q is still armed. A real app or
     // window focus loss must still reach SDL and release transient input.
-    if (host.hasFocus?.() && ((help && !help.hidden) || tech?.open || tech?.opening)) {
+    if (host.hasFocus?.() && ((help && !help.hidden) || tech?.open || tech?.opening || window.__warzoneCommands?.isOpen())) {
       event.stopImmediatePropagation();
       return;
     }
@@ -1737,7 +1767,7 @@
   }, 500);
   setTimeout(() => clearInterval(canvasTimer), 20000);
   window.__kalaWarzoneTouch = {
-    version: 50,
+    version: 51,
     ready: true,
     key,
     zoom,
@@ -1765,7 +1795,7 @@
     isGestureActive: () => state.pointers.size > 0 || state.mouseButton !== null || state.heldKeys.size > 0 || state.tiltKey !== null,
     report: () => ({
       active: true,
-      version: 50,
+      version: 51,
       intercepted: state.intercepted,
       mouseEvents: state.mouseEvents,
       taps: state.taps,

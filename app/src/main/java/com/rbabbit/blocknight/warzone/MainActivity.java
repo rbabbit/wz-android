@@ -56,7 +56,7 @@ public final class MainActivity extends Activity {
     private static final String URL = ORIGIN + "/warzone/mobile.html?blocknight=1";
     private static final float MIN_ENGINE_CSS_WIDTH = 642f;
     private static final float MIN_ENGINE_CSS_HEIGHT = 482f;
-    private static final float COMMAND_STRIP_CSS_HEIGHT = 50f;
+    private static final float COMMAND_STRIP_CSS_HEIGHT = 72f;
 
     private FrameLayout root;
     private WebView webView;
@@ -300,7 +300,9 @@ public final class MainActivity extends Activity {
         // Compact layouts keep all commands visible on a second row, with
         // wave status at the top-right. Preserve the engine minimum below both.
         if (width / (scale * density) <= 1100f) {
-            scale = Math.min(scale, height / ((MIN_ENGINE_CSS_HEIGHT + 94f) * density));
+            // Leave room for Extra large wrapper controls as well as the
+            // second-row wave status, without taking SDL below its minimum.
+            scale = Math.min(scale, height / ((MIN_ENGINE_CSS_HEIGHT + 116f) * density));
         }
         int virtualWidth = (int) Math.ceil(width / scale);
         int virtualHeight = (int) Math.ceil(height / scale);
@@ -471,6 +473,8 @@ public final class MainActivity extends Activity {
 
     private void installTouchControls() {
         String[] scripts = {
+                "warzone-terrain-picker.js",
+                "warzone-command-pages.js",
                 "warzone-touch-controls.js",
                 "warzone-mobile-research.js",
                 "warzone-towers-wave-hud.js"
@@ -494,6 +498,35 @@ public final class MainActivity extends Activity {
     }
 
     public final class EngineBridge {
+        @JavascriptInterface
+        public String loadDesigns() {
+            return getPreferences(MODE_PRIVATE).getString("saved_designs_v1", "{\"version\":1,\"designs\":[]}");
+        }
+
+        @JavascriptInterface
+        public boolean saveDesigns(String data) {
+            if (data == null || data.length() > 262144) return false;
+            try {
+                JSONObject document = new JSONObject(data);
+                org.json.JSONArray designs = document.getJSONArray("designs");
+                if (document.optInt("version") != 1 || designs.length() > 100) return false;
+                for (int i = 0; i < designs.length(); i++) {
+                    JSONObject design = designs.getJSONObject(i);
+                    for (String key : new String[]{"id", "name", "body", "propulsion"}) {
+                        String value = design.getString(key);
+                        if (value.isEmpty() || value.length() > 128) return false;
+                    }
+                    org.json.JSONArray turrets = design.getJSONArray("turrets");
+                    if (turrets.length() < 1 || turrets.length() > 3) return false;
+                    for (int j = 0; j < turrets.length(); j++) {
+                        String value = turrets.getString(j);
+                        if (value.isEmpty() || value.length() > 128) return false;
+                    }
+                }
+                return getPreferences(MODE_PRIVATE).edit().putString("saved_designs_v1", document.toString()).commit();
+            } catch (Exception error) { return false; }
+        }
+
         @JavascriptInterface
         public String musicSelection() {
             return musicCatalog.selectionJson(selectedMusicTracks());

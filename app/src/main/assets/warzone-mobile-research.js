@@ -2,7 +2,7 @@
 (() => {
   "use strict";
 
-  const VERSION = 34;
+  const VERSION = 35;
   const QUEUE_COMMAND_PATH = "/data/mp/tests/blocknight-queue-command.json";
   const CATEGORIES = ["ALL", "WEAPONS", "DEFENCE", "VEHICLES", "CYBORG", "SYSTEMS", "STRUCTURES"];
 
@@ -122,6 +122,11 @@
   function handleEngineOutput(event) {
     const text = String(event?.detail?.text || "");
     try {
+      if (text.includes("WTCMD:")) {
+        const response = parsePayload(text, "WTCMD:");
+        if (response?.nonce) window.dispatchEvent(new CustomEvent("warzone-command-reply", { detail: response }));
+        return;
+      }
       if (text.includes("BNCONTROL:")) {
         const applied = parsePayload(text, "BNCONTROL:");
         if (applied?.nonce) window.dispatchEvent(new CustomEvent("warzone-towers-control-ack", { detail: applied }));
@@ -250,7 +255,7 @@
         const lines = addition.split(/\r?\n/);
         state.logPartials[path] = lines.pop();
         lines.forEach(line => {
-          if (line.includes("BNTECH") || line.includes("BNQUEUE") || line.includes("BNZOOM") || line.includes("BNCONTROL")) {
+          if (line.includes("BNTECH") || line.includes("BNQUEUE") || line.includes("BNZOOM") || line.includes("BNCONTROL") || line.includes("WTCMD:")) {
             handleEngineOutput({ detail: { text: line } });
           }
         });
@@ -403,6 +408,8 @@
 
   function open() {
     if (state.open || state.opening) return true;
+    window.__warzoneCommands?.close?.();
+    window.__warzoneCommands?.closeNative?.();
     const target = canvas(); if (!target) return false;
     const bounds = target.getBoundingClientRect();
     state.baseWidth = bounds.width; state.baseHeight = bounds.height; state.opening = true;
@@ -778,6 +785,6 @@
   }
 
   window.addEventListener("pagehide", () => { if (state.open || state.opening) finishClose(false); });
-  window.__blockNightResearch = { version: VERSION, open, close, selectLab, setCategory, selectTopic, assignSelectedTopic, chooseTopic, removeQueuedTopic, processQueues, afterNativeTap, runSyntheticSuite, report };
+  window.__blockNightResearch = { version: VERSION, open, close, selectLab, setCategory, selectTopic, assignSelectedTopic, chooseTopic, removeQueuedTopic, processQueues, afterNativeTap, runSyntheticSuite, report, pollOutput: pollResearchLogs };
   return "blocknight-warzone-mobile-research-v32-atomic-queues-ready";
 })();

@@ -1,6 +1,10 @@
 # Known issues and verification limits
 
-1. **+Q physical retest:** v4.6 corrects the unrelated-tap input path and verifies
+1. **BUILD physical retest:** v4.8 replaces the native sticky +Q route with an
+   always-queued BUILD catalogue and explicit native FIFO scheduling. Native
+   structure completion, one/six-truck assignment and factory production were
+   checked on the emulator. The new controls need a physical tablet retest.
+   v4.6 corrected the earlier unrelated-tap input path and verified
    actual native queues for one and six trucks, two defence types, rapid taps,
    occupied/edge/held taps, cancellation, tilt, minimap and HELP/TECH returns.
    STOP is acknowledged by the native scenario and clears the selected trucks.
@@ -24,7 +28,9 @@
    device. Native selection/persistence/playback and battle controls passed on
    the emulator; exact physical-device behavior still needs a retest. Testing uses
    `-no-audio`; speaker/headphone quality has not been assessed.
-7. **Performance:** v4.6 removes repeated Android layout requests and avoids
+7. **Performance:** v4.8 caches structure enumeration during queue ticks and
+   prewarms the terrain projection used for placement. v4.6 removed repeated
+   Android layout requests and avoided
    treating minimap finger drift as a camera drag. This emulator can still have
    long cold-start/render stalls. It does not establish a frame-rate guarantee
    for physical devices or resolve its pre-existing black-terrain issue.

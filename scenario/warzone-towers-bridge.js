@@ -97,9 +97,11 @@ function warzoneTowersPollControlCommand()
 	const stopped = [];
 	// Only the user's explicit STOP command acts on their currently selected
 	// units. Run before the wrapper releases the native quick-build modifier.
-	const units = enumSelected().filter(function (object) {
+	let units = enumSelected().filter(function (object) {
 		return object.type === DROID && object.player === selectedPlayer;
 	});
+	if (!units.length && typeof wtcmd_activeAutoWorkers === "function") units = wtcmd_activeAutoWorkers();
+	if (typeof wtcmd_stopWorkers === "function") wtcmd_stopWorkers(units.map(function (unit) { return unit.id; }));
 	for (let index = 0; index < units.length; ++index)
 	{
 		if (orderDroid(units[index], DORDER_STOP)) stopped.push(units[index].id);
@@ -193,6 +195,7 @@ function blockNightV32PollQueueCommand()
 
 function blockNightV32PollBridgeCommands()
 {
+	if (typeof wtcmd_poll === "function") wtcmd_poll();
 	warzoneTowersPollControlCommand();
 	blockNightV31PollZoomCommand();
 	blockNightV32PollQueueCommand();

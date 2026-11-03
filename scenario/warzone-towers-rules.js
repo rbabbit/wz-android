@@ -26,3 +26,4 @@ include("SurvivalMod/spawn.js");
 include("warzone-towers-waves.js");
 include("warzone-towers-objective.js");
 include("warzone-towers-bridge.js");
+include("warzone-towers-commands.js");

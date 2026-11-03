@@ -2,7 +2,46 @@
 
 final result: passed
 
-## v4.7 startup Music — current
+## v4.8 command pages — current
+
+The final installed/tested APK has SHA-256
+`efff0474e805c99be92c23ed77fc6a33d3658bbb0b7689ebe6fa1b4b0d77d4c0`.
+BUILD, DESIGN/Saved Designs, FACTORY and STATS replace the small native hex menu.
+The minimap stays visible; TECH is the only research entry. MORE contains the
+secondary controls and interface size. Original stock icons are reused.
+
+Real Android touches queued three cannon hardpoints with no selected truck;
+fresh native QuickSave files confirmed all three completed at the requested
+sites, in order. A six-truck manually selected group accepted a build, STOP
+cleared its queues, invalid taps kept placement active with red feedback, and
+BASE/zoom changes kept the selected structure. A 25-command burst exceeded the
+eight-command transport batch and all replies arrived. A separate 100-job test
+verifies bounded native enumeration and no overwriting of busy workers.
+
+Saved blueprints survived process/APK restart, reopened and edited without
+duplicating the entry. Two real factories queued the same design and delivered
+native tanks without cancelling each other. Native droid records confirm
+Body1REC, wheeled01 and Cannon1Mk1, using ordinary production.
+
+Native pan, pinch and tilt changed camera state; tilt preserved heading. Minimap,
+cancelled touches and HELP/TECH returns did not accidentally place a building.
+Held-touch footprint rendering passed. Six scrolled HELP/repeated BACK TO BATTLE
+and TECH cycles preserved header visibility/input. Extra large BUILD buttons,
+loaded stock art, no header/wave overlap and the engine's minimum viewport passed
+at the tested 1280×800 landscape WebView extent. An earlier 800×600 extent was
+also exercised during implementation; it is not physical-device certification.
+
+Fourteen regression suites, Android build and APK signature verification passed.
+The official engine program/WASM, the previous complete data prefix and all
+3,281 prior resolved assets are unchanged. Only custom rule/bridge records are
+overridden and new command files appended. The v4.7 fallback was saved first.
+
+Testing uses Pixel_10_Pro, Android 16, WebView 158 and SwiftShader with `-no-audio`.
+The emulator's black terrain remains. Physical Samsung tablet startup, HQ visual
+quality and audible output still require a real-device retest. Evidence and
+exact result logs are under `qa/v4.8/`.
+
+## v4.7 startup Music
 
 The tested installed APK has SHA-256
 `4911ed72f21809327076cc4881dd6139781cba614a9e686150d21bf63fdca87b`.

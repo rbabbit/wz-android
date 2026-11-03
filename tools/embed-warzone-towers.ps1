@@ -27,6 +27,9 @@ Add-PackageFile '/data/mp/multiplay/skirmish/warzone-towers-ai.json' (Join-Path 
 Add-PackageFile '/data/mp/tests/warzone-towers-wave-command.json' (Join-Path $scenarioRoot 'warzone-towers-wave-command.json')
 Add-PackageFile '/data/mp/tests/warzone-towers-bridge.js' (Join-Path $scenarioRoot 'warzone-towers-bridge.js')
 Add-PackageFile '/data/mp/tests/warzone-towers-control-command.json' (Join-Path $scenarioRoot 'warzone-towers-control-command.json')
+Add-PackageFile '/data/mp/tests/warzone-towers-commands.js' (Join-Path $scenarioRoot 'warzone-towers-commands.js')
+Add-PackageFile '/data/mp/tests/warzone-towers-command.json' (Join-Path $scenarioRoot 'warzone-towers-command.json')
+Add-PackageFile '/data/mp/tests/warzone-towers-catalog.json' (Join-Path $scenarioRoot 'warzone-towers-catalog.json')
 
 Get-ChildItem -LiteralPath $mapRoot -Recurse -File |
 	Where-Object { $_.Name -notlike '*.addon.lev' } |
@@ -75,6 +78,9 @@ if ($javaScript.Contains('/data/mp/tests/warzonetowers.json')) {
 	Redirect-PackageFile '/data/mp/tests/warzone-towers-wave-command.json' (Join-Path $scenarioRoot 'warzone-towers-wave-command.json')
 	Redirect-PackageFile '/data/mp/tests/warzone-towers-bridge.js' (Join-Path $scenarioRoot 'warzone-towers-bridge.js')
 	Redirect-PackageFile '/data/mp/tests/warzone-towers-control-command.json' (Join-Path $scenarioRoot 'warzone-towers-control-command.json')
+	Redirect-PackageFile '/data/mp/tests/warzone-towers-commands.js' (Join-Path $scenarioRoot 'warzone-towers-commands.js')
+	Redirect-PackageFile '/data/mp/tests/warzone-towers-command.json' (Join-Path $scenarioRoot 'warzone-towers-command.json')
+	Redirect-PackageFile '/data/mp/tests/warzone-towers-catalog.json' (Join-Path $scenarioRoot 'warzone-towers-catalog.json')
 	$newSize = (Get-Item -LiteralPath $dataPath).Length
 	$javaScript = [regex]::Replace($javaScript, 'remote_package_size:\d+', ('remote_package_size:' + $newSize), 1)
 	$javaScript = [regex]::Replace(

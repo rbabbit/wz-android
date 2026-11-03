@@ -1,6 +1,12 @@
 # Known issues and verification limits
 
-1. **BUILD physical retest:** v4.9 fixes ignored mouse/pen placement, tolerates
+1. **BUILD physical retest:** v5.0 replaces the default custom FIFO with native
+   construction selection and native queued blueprint rendering. Nearby-group
+   selection, placement completion/exit, normal unit movement and production
+   returns passed the versioned v5.0 emulator audit. The persistent field
+   console and changed construction UI still need a physical-device retest.
+   Historical v4.9 evidence follows; it does not certify v5.0's new input flow.
+   v4.9 fixes ignored mouse/pen placement, tolerates
    small placement-touch drift, and recognizes optimized terrain shaders. Real
    emulator tests completed automatic FIFO defences and a 2x2 facility, and
    verified native mouse/pen/touch-drift jobs. The physical finger-placement
@@ -21,9 +27,10 @@
    mounted and read by the engine with terrainMode=2. The emulator has black
    terrain in both Normal and High Quality, including software rendering.
    Visual improvement needs confirmation on a rendering-capable device.
-4. **Small startup screen:** 1280x532 and 1280x800 were inspected. The 800x360
-   capture was taken during a resize and discarded; further display changes were
-   blocked by automatic approval review. A stable compact-phone check is pending.
+4. **Compact coverage:** v5.0 passed a stable 1080x600 WebView test, including
+   keyboard return, MORE, two control sizes, all six field buttons, HELP/TECH
+   and actual truck movement. A density change retained the same running game.
+   Other physical screen sizes and device-specific cutouts still need testing.
 5. **HELP device-specific issue:** v4.4 hardened the return path and passed real
    repeated Android tap/scroll/return tests, but the user's exact disappearing-UI
    report was not reproduced on the emulator. A physical-device retest is needed.

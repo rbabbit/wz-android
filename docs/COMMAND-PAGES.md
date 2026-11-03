@@ -1,46 +1,51 @@
 # BUILD, DESIGN and factory commands
 
-v4.8 replaces the native blue hexagon with larger header commands. TECH remains
+v5.0 provides larger header commands and a persistent lower-left field console. TECH remains
 the single research entry; STATS opens Warzone's real intelligence/player table.
-MORE contains combat selection, patrol, BOX, commanders and control size. Music
+ALL UNITS, PATROL, BOX, STOP, TRUCKS and SELECT / MOVE stay visible on the field.
+MORE remains in the header and contains commanders and control size. Music
 stays on startup. Existing zoom, BASE, STOP, HELP and wave controls remain.
 
 ## Construction
 
-Open BUILD, choose a structure and press BUILD THIS. Tap open ground to place it
-repeatedly. Every tower-map placement queues; there is no queue toggle to forget.
-DONE ends placement and CHANGE opens the catalogue again. Research controls which
-items appear. Prices come from native Stats, including supplied mod overrides.
-Stock research images are reused, with a neutral category symbol where no stock
-picture exists. No generated game art is introduced.
+Open BUILD and choose a structure from Warzone's original construction panel.
+Tap valid ground repeatedly. The touch adapter sends native Ctrl-clicks, so the
+engine retains the actual pending order lists and draws its original green
+queued building blueprints. Research, power, footprints, modules and prices
+remain native. SELECT / MOVE exits placement and retains accepted orders; STOP
+cancels selected units' orders. Placement also closes after the group has worked
+and returned to idle. There is no custom neon footprint in this flow.
 
-Selected friendly constructors take priority. With none selected, the scenario
-chooses the nearest reachable constructor, then retains it for that placement
-session. Bad, occupied, unreachable and duplicate taps do not cancel the chosen
-structure. A selected group is retained without issuing a native click at the
-placement location. The queue page shows waiting/working/blocked jobs, Retry and
-Remove. STOP clears selected constructors' queues, or automatically assigned
-builders if no friendly units are selected. A destroyed worker leaves a blocked
-job; Retry assigns a live reachable builder.
+BUILD includes all constructors within eight map tiles of the nearest
+constructor in view (or the selected constructor). A manually selected group
+expands to include nearby constructors around its members. TRUCKS explicitly
+selects the nearby group and leaves
+normal movement active. Selection uses the original upper builder cards across
+all pages, retaining the camera position. No one-truck or three-truck cap is
+introduced. Original game limits remain in force, including 15 constructors.
+Reopening BUILD keeps a complete selection without replaying every builder card.
 
-Warzone's public `orderDroidBuild` replaces a droid's current native order list.
-Its ModeQueue argument orders network messages; it does not append a construction
-job. The custom scenario therefore keeps a FIFO per worker, waits for the native
-worker to become idle, and issues only the next explicit user job. Completion is
-confirmed by the real structure/status/module count. It never repeatedly sends
-orders to a busy truck. Existing native work is allowed to finish first. Queued
-sites reserve their footprint and structure-limit slot; invalid sites are rejected
-rather than silently moved to a nearby tile. Modules require the matching parent.
+Warzone's public `orderDroidBuild` replaces the native order list. The earlier
+custom FIFO could therefore hide future sites from the engine's blueprint
+renderer. The default BUILD path now uses native input instead. A generation
+guard waits for the original build-selection callback before dispatching early
+site taps. SELECT and menu navigation drain accepted placement input before
+releasing modifiers; STOP explicitly discards unsent input. The old custom FIFO
+is retained for protocol compatibility, not used by the normal BUILD button.
+
+STOP clears explicit native orders. Under original Warzone rules, idle
+constructors may automatically help nearby unfinished structures or repairs.
+Move a constructor away to interrupt that assistance; tapping an unfinished
+friendly structure with a constructor selected issues normal HELPBUILD.
 
 The read-only terrain adapter observes the engine's terrain MVP and vertex/index
-buffers. It ray-picks the rendered terrain instead of estimating map coordinates
-from screen proportions. It restores the COPY_READ buffer binding after reading,
-caches mesh/projection data, and invalidates the mesh when terrain buffers change.
-It does not edit shaders, engine program code, WASM, models or textures. Pan,
-pinch, tilt and minimap gestures remain native input. Camera movement hides the
-old footprint; a tap previews its new site. Invalid placements show red feedback.
+buffers for the viewport anchor and QA projection. It restores the COPY_READ
+binding, caches projection data and invalidates changed meshes. Native
+construction uses the engine's own pointer picking and blueprint renderer.
+Neither adapter edits shaders, engine program code, WASM, models or textures.
+Pan, pinch, tilt and minimap gestures remain native input.
 
-v4.9 also accepts mouse/pen placement, preserves native middle-button camera
+The touch adapter also accepts mouse/pen placement, preserves native middle-button camera
 input, supports right-click cancellation, and tolerates small touch drift while
 placing. Optimized original terrain shaders remain eligible for projection.
 
@@ -91,7 +96,12 @@ Units are confirmed through native `eventDroidBuilt`, not a wrapper timer.
 - `tools/test-command-pages.cjs`: deterministic validation/save/menu race and
   persistence-failure regressions.
 - `tools/command-audit.cjs`: real Android taps, native QuickSave proof, six-worker
-  checks, overlay returns and transport bursts. Its default QA output is v4.8.
+  checks, overlay returns and transport bursts for the historical v4.8 catalogue.
+- `tools/gameplay-audit.cjs`: v5.0 Android/native-input flows and fresh native
+  order, completion, production, movement and viewport evidence. Use a separate
+  output directory for each candidate; each case checks the installed APK hash.
+- `tools/finalize-v50-audit.cjs`: rejects missing, prototype or mismatched-artifact
+  evidence before the final report is marked passed.
 
 After changing scenario/catalogue sources, run the embedder and build. After only
 wrapper changes, build directly. Repeated embedding grows the data file; do not

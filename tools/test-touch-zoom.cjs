@@ -99,6 +99,7 @@ globalThis.innerWidth = 1000;
 globalThis.innerHeight = 600;
 globalThis.devicePixelRatio = 2;
 globalThis.addEventListener = (type,listener) => windowListeners.set(type,listener);
+globalThis.dispatchEvent = event => {windowListeners.get(event.type)?.(event);return true;};
 globalThis.KeyboardEvent = FakeInputEvent;
 globalThis.PointerEvent = FakeInputEvent;
 globalThis.WheelEvent = FakeInputEvent;
@@ -144,7 +145,7 @@ async function run() {
     await sleep(20);
     assert.equal(controls.report().pendingClicks,0,'native input queue must drain');
   };
-  assert.equal(controls.version, 52);
+  assert.equal(controls.version, 54);
   assert.equal(controls.showCombatHud(), true);
   assert.equal(elements.has("blocknight-music"),false,"battle header must not expose Music navigation");
   assert.equal(controls.openMusic,undefined);
@@ -395,7 +396,7 @@ async function run() {
   controls.releaseAll(true);
   const placed=[],previewed=[];let placing=true;
   window.__warzoneCommands={tower:true,isPlacement:()=>placing,nativeMenuOpen:()=>false,
-    placeAt:(x,y)=>placed.push([x,y]),previewAt:(x,y)=>previewed.push([x,y]),hidePreview(){},cancelPlacement:()=>placing=false};
+    placeAt:(x,y)=>placed.push([x,y]),previewAt:(x,y)=>previewed.push([x,y]),hidePreview(){},cancelPlacement:()=>placing=false,selectMode:()=>placing=false};
   const pointer=(type,id,x,y,kind,button=0,buttons=type==='pointerup'?0:1)=>documentListeners.get(type)(new FakeInputEvent(type,{target:canvas,pointerId:id,clientX:x,clientY:y,pointerType:kind,button,buttons,timeStamp:performance.now()}));
   for(const kind of ['mouse','pen','touch']){pointer('pointerdown',600,420,250,kind);pointer('pointerup',600,420,250,kind);}
   assert.equal(placed.length,3,'mouse, pen and touch all use the custom build scheduler');
@@ -405,6 +406,19 @@ async function run() {
   pointer('pointerdown',603,420,250,'mouse',2,2);assert.equal(placing,false,'right click exits placement');
   assert.equal(controls.report().gestureActive,false);
   delete window.__warzoneCommands;
+  controls.releaseAll(true);canvas.events.length=0;
+  const gl={COLOR_BUFFER_BIT:16384,FRAMEBUFFER_BINDING:36006,getParameter:()=>null,clear:()=>7};LaunchedModule.ctx=gl;
+  controls.nativeClick(220,220);nextFrame();assert.equal(canvas.events.filter(e=>e.type==='pointerdown').length,0,'browser frames alone must not press before a native render frame');
+  assert.equal(gl.clear(gl.COLOR_BUFFER_BIT),7,'frame observation preserves the original GL call');nextFrame();assert.equal(canvas.events.filter(e=>e.type==='pointerdown').length,1);
+  nextFrame();assert.equal(canvas.events.filter(e=>e.type==='pointerup').length,0,'mouse down remains held until the engine consumes a frame');
+  gl.clear(gl.COLOR_BUFFER_BIT);nextFrame();assert.equal(canvas.events.filter(e=>e.type==='pointerup').length,1);assert.ok(controls.report().pendingClicks,'mouse up is still pending until native consumption');
+  gl.clear(gl.COLOR_BUFFER_BIT);nextFrame();assert.ok(controls.report().pendingClicks,'the final native handoff frame remains pending');gl.clear(gl.COLOR_BUFFER_BIT);nextFrame();assert.equal(controls.report().pendingClicks,0);
+  canvas.events.length=0;controls.nativeClick(220,220);controls.nativeClick(240,220);
+  pointer('pointerdown',700,400,250,'touch');pointer('pointermove',700,500,250,'touch');pointer('pointerup',700,500,250,'touch');assert.ok(controls.report().queuedPointerEvents);
+  const nativeClockInterval=setInterval(()=>gl.clear(gl.COLOR_BUFFER_BIT),20);await settleClicks();clearInterval(nativeClockInterval);
+  const downs=canvas.events.filter(e=>e.type==='pointerdown');assert.deepEqual(downs.map(e=>e.button),[0,0,1],'both accepted taps precede the queued camera drag');assert.equal(controls.report().gestureActive,false);
+  const writes=controls.report().zoomCommandWrites;controls.nativeClick(220,220);controls.applyZoomPreset('map');assert.equal(controls.report().zoomCommandWrites,writes,'camera changes wait behind accepted world input');
+  const cameraFrames=setInterval(()=>gl.clear(gl.COLOR_BUFFER_BIT),20);await settleClicks();clearInterval(cameraFrames);assert.equal(controls.report().zoomCommandWrites,writes+1);
   console.log("PASS: sticky building across menus and BASE, tablet lobby coordinates, absolute zoom, rapid switching, and pinch cancellation");
   process.exit(0);
 }
@@ -413,3 +427,6 @@ run().catch(error => {
   console.error(error);
   process.exit(1);
 });
+
+
+

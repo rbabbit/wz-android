@@ -1,0 +1,55 @@
+{
+  "passed": true,
+  "scope": "Reported gameplay flows and related menus; finite emulator coverage",
+  "apkSHA256": "1b99ef69e369a75c86ee42e1c545874b57293083cc476ccc6357aa2421e30006",
+  "versionCode": 50,
+  "installedHashMatches": true,
+  "appAliveAtFinalCheck": true,
+  "regressionScripts": [
+    "test-command-bridge.cjs",
+    "test-command-pages.cjs",
+    "test-graphics-loader.cjs",
+    "test-music-loader.cjs",
+    "test-native-placement-lifecycle.cjs",
+    "test-research-queue-bridge.cjs",
+    "test-terrain-picker.cjs",
+    "test-touch-zoom.cjs",
+    "test-towers-ai.cjs",
+    "test-towers-camera.cjs",
+    "test-towers-controls.cjs",
+    "test-towers-objective.cjs",
+    "test-wave-log-reader.cjs",
+    "test-wave-rules.cjs",
+    "test-waves-survival.cjs",
+    "test-zoom-rule.cjs"
+  ],
+  "evidence": [
+    "ship-normal/production-return-results.json",
+    "ship-normal/controls-results.json",
+    "ship-normal/gestures-results.json",
+    "ship-normal/generated-template-results.json",
+    "ship-normal/build-interrupt-results.json",
+    "ship-hq/large-group-results.json",
+    "ship-hq/fast-queue-pan-results.json",
+    "ship-hq/queue-cancel-results.json",
+    "ship-pages/invalid-tool-results.json",
+    "ship-pages/native-queue-results.json",
+    "ship-pages/roundtrip-results.json",
+    "ship-pages/native-switch-results.json",
+    "ship-pages/wave-play-results.json",
+    "ship-compact/partial-resume-results.json",
+    "ship-compact/density-resize-results.json",
+    "ship-compact/compact-smoke-results.json"
+  ],
+  "environment": {
+    "avd": "Pixel_10_Pro",
+    "renderer": "SwiftShader",
+    "audio": false,
+    "android": "16"
+  },
+  "limits": [
+    "Pre-existing emulator black terrain in Normal and HQ",
+    "No physical Samsung tablet test or audio-output assessment",
+    "No exhaustive late-game, every map/module/research combination, or QuickLoad certification"
+  ]
+}

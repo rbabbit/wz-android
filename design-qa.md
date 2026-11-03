@@ -2,7 +2,21 @@
 
 final result: passed
 
-## v4.9 construction and design fixes — current
+## v5.0 gameplay audit — current
+
+Tested APK SHA-256:
+`1b99ef69e369a75c86ee42e1c545874b57293083cc476ccc6357aa2421e30006`.
+
+The reported controls and related emulator flows passed: native build queues,
+15-truck grouping/work/completion, normal unit movement, production and repeated
+page returns, rapid input/pan, pause/resume, compact layout, density retention
+and actual wave combat. All 16 regressions, build/signature and engine/asset
+preservation checks passed. This is finite emulator coverage; black terrain,
+physical Samsung behavior and audio-output limits remain.
+
+See [the v5.0 report](qa/v5.0/REPORT.md) and its artifact-bound final-tests.json.
+
+## v4.9 construction and design fixes — historical
 
 Tested APK SHA-256:
 `c9d717c5e390224b15529f0afc39637df90389cf727af156d3b6e9ffb42a7d71`.

@@ -1,0 +1,329 @@
+'use strict';
+// Real Android touches plus native QuickSave order lists; wrapper counters alone
+// are not treated as proof that the engine accepted a build queue.
+const fs=require('node:fs'),path=require('node:path'),{execFileSync}=require('node:child_process');
+const {adb}=require('./android-sdk.cjs');
+const device=process.env.WZ_QA_DEVICE||'emulator-5554',out=path.resolve(__dirname,'..',process.env.WZ_QA_OUTPUT||'qa/v5.0');
+const socket=new WebSocket(fs.readFileSync(path.join(__dirname,'live-cdp-url.txt'),'utf8').trim());
+let id=0;const pending=new Map();
+let testedAPKHash=null;
+function completeCase(){const action=process.argv[2]||'console',name=action==='grow-group'?'large-group-results':action==='native-queue'?'native-queue-results':action+'-results',file=path.join(out,name+'.json');if(fs.existsSync(file)){const result=JSON.parse(fs.readFileSync(file,'utf8'));result.apkSHA256=testedAPKHash;result.completedAt=new Date().toISOString();fs.writeFileSync(file,JSON.stringify(result,null,2));}}
+socket.addEventListener('message',e=>{const m=JSON.parse(String(e.data)),p=pending.get(m.id);if(p){pending.delete(m.id);clearTimeout(p.timer);m.error?p.reject(m.error):p.resolve(m.result)}});
+function connectionFailed(){for(const p of pending.values()){clearTimeout(p.timer);p.reject(Error('WebView debugger disconnected'))}pending.clear()}
+socket.addEventListener('close',connectionFailed);socket.addEventListener('error',connectionFailed);
+const wait=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+function run(...args){return execFileSync(adb,['-s',device,...args],{maxBuffer:24*1024*1024,timeout:20000})}
+async function evaluate(expression,engine=true){const n=++id;const r=await new Promise((resolve,reject)=>{const timer=setTimeout(()=>{pending.delete(n);reject(Error('WebView evaluation timed out: '+expression.slice(0,120)))},15000);pending.set(n,{resolve,reject,timer});socket.send(JSON.stringify({id:n,method:'Runtime.evaluate',params:{expression:engine?`document.getElementById('warzone-game-frame').contentWindow.eval(${JSON.stringify(expression)})`:expression,returnByValue:true,awaitPromise:true}}))});if(r.exceptionDetails)throw r.exceptionDetails;return r.result.value}
+function windowBounds(){const dump=run('shell','dumpsys','window','windows').toString();const sections=dump.split(/\n\s*Window #\d+ /);const app=sections.find(s=>/^Window\{[^\n]*com\.rbabbit\.warzonetowers\/com\.rbabbit\.blocknight\.warzone\.MainActivity\}/.test(s));const m=app?.match(/Frames:.*?frame=\[(\d+),(\d+)\]\[(\d+),(\d+)\]/);if(!m)throw Error('Cannot locate actual app frame');return m.slice(1).map(Number)}
+async function hostTap(x,y){const [w,h]=await evaluate('[innerWidth,innerHeight]',false),[l,t,r,b]=windowBounds();run('shell','input','tap',String(Math.round(l+x*(r-l)/w)),String(Math.round(t+y*(b-t)/h)));await wait(450)}
+async function tap(x,y){const p=await evaluate(`(()=>{const r=document.getElementById('warzone-game-frame').getBoundingClientRect();return [r.x+${x},r.y+${y}]})()`,false);await hostTap(...p)}
+async function button(selector){await evaluate(`document.querySelector(${JSON.stringify(selector)})?.scrollIntoView({block:"nearest",inline:"nearest"})`,false);await wait(100);const p=await evaluate(`(()=>{const e=document.querySelector(${JSON.stringify(selector)});if(!e)throw Error('Missing button');const r=e.getBoundingClientRect();return [r.x+r.width/2,r.y+r.height/2]})()`,false);await hostTap(...p);if(selector==='#blocknight-stop'){for(let i=0;i<120;i++){if(!await evaluate('__kalaWarzoneTouch.report().stopPending'))return;await wait(25)}throw Error('STOP acknowledgement did not arrive')}if(selector==='#blocknight-music'){const deadline=Date.now()+90000;while(Date.now()<deadline){if(!await evaluate('__kalaWarzoneTouch.report().musicOpening'))return;await wait(100)}throw Error('Music menu transition did not finish')}}
+async function swipe(x1,y1,x2,y2,duration=300){const [w,h]=await evaluate('[innerWidth,innerHeight]',false),f=await evaluate("document.getElementById('warzone-game-frame').getBoundingClientRect().toJSON()",false),[l,t,r,b]=windowBounds();const point=(x,y)=>[Math.round(l+(f.x+x)*(r-l)/w),Math.round(t+(f.y+y)*(b-t)/h)];run('shell','input','swipe',...point(x1,y1).map(String),...point(x2,y2).map(String),String(duration));await wait(450)}
+function shot(name){fs.writeFileSync(path.join(out,name+'.png'),run('exec-out','screencap','-p'))}
+async function save(name){
+ for(let i=0;i<600;i++){if(!await evaluate('__kalaWarzoneTouch.report().pendingClicks||0'))break;await wait(50)}
+ if(await evaluate('__kalaWarzoneTouch.report().pendingClicks||0'))throw Error('Native input did not drain; refusing to interrupt it with QuickSave');
+ const inputTick=await evaluate('__warzoneTowersWaves.report().snapshot?.gameTime||0');
+ if(await evaluate('__warzoneTowersWaves.report().snapshot?.phase!=="defeated"'))for(let i=0;i<80;i++){if(await evaluate(`(__warzoneTowersWaves.report().snapshot?.gameTime||0)>${inputTick}`))break;await wait(50);}
+ const before=await evaluate("(()=>{try{return LaunchedModule.FS.stat((LaunchedModule.WZVAL_configDirPath||'/warzone2100')+'/savegames/skirmish/QuickSave/droid.json').mtime.getTime()}catch(_){return 0}})()");
+ await evaluate('__kalaWarzoneTouch.nativePressKey("F7","F7",118);true');
+ let fresh=false;for(let i=0;i<60;i++){await wait(100);const stamp=await evaluate("(()=>{try{return LaunchedModule.FS.stat((LaunchedModule.WZVAL_configDirPath||'/warzone2100')+'/savegames/skirmish/QuickSave/droid.json').mtime.getTime()}catch(_){return 0}})()");if(stamp>before){fresh=true;break}}
+ if(!fresh)throw Error('Native QuickSave did not update; refusing to use stale order data');
+ await wait(150);
+ const state=await evaluate(`(()=>{const m=LaunchedModule,p=(m.WZVAL_configDirPath||'/warzone2100')+'/savegames/skirmish/QuickSave';const names=m.FS.readdir(p);const result={touch:__kalaWarzoneTouch.report(),wave:__warzoneTowersWaves.report().snapshot,files:names};for(const f of names){if(f.endsWith('.json')){try{result[f]=JSON.parse(m.FS.readFile(p+'/'+f,{encoding:'utf8'}))}catch(_){}}}return result})()`);
+ fs.writeFileSync(path.join(out,name+'.json'),JSON.stringify(state,null,2));
+ // Saving can briefly suspend native simulation after the files appear. Never
+ // fire a short camera gesture into that pause and call the lost motion a bug.
+ if(!state.touch.musicOpen&&state.wave?.phase!=='defeated'){
+  let resumed=false;for(let i=0;i<100;i++){if(await evaluate(`(__warzoneTowersWaves.report().snapshot?.gameTime||0)>${state.wave?.gameTime||0}`)){resumed=true;break}await wait(100)}
+  if(!resumed)throw Error('The native battle did not resume after QuickSave');
+ }
+ return state;
+}
+function builders(state){return Object.values(state['droid.json']).filter(d=>d.player===0&&d.droidType===3)}
+function buildPlan(state){const plan=new Set();for(const d of builders(state)){for(const prefix of ['order',...Array.from({length:d['orderList/size']||0},(_,i)=>'orderList/'+i)]){if(d[prefix+'/type']===4)plan.add(d[prefix+'/stats']+'@'+d[prefix+'/pos'].join(','))}}for(const s of Object.values(state['struct.json']))if(s.player===0&&/GuardTower|PillBox|WallTower|Emplacement|Howitzer|Cannon|MG/i.test(s.name||''))plan.add(s.name+'@'+s.position.slice(0,2).join(','));return plan}
+async function waitReady(){const deadline=Date.now()+240000;let stable=0;while(Date.now()<deadline){try{if(await evaluate(`(()=>{const t=document.getElementById('warzone-game-frame')?.contentWindow?.__kalaWarzoneTouch;return Boolean(innerHeight===${Number(process.env.WZ_QA_EXPECT_HEIGHT||800)}&&t?.report().hudVisible&&!t?.report().cameraFacingPending&&document.getElementById('warzone-game-frame').contentWindow.__warzoneTowersWaves?.report().snapshot?.phase!=='defeated')})()`,false)){if(++stable>=2)return;}else stable=0;}catch(error){if(!String(error.message).includes('evaluation timed out'))throw error}await wait(500)}throw Error('Battlefield did not become ready at the expected stable viewport')}
+async function dismissPreparation(){
+ for(let i=0;i<50;i++){if(await evaluate("Boolean(document.getElementById('warzone-towers-preparation'))",false))break;await wait(100)}
+ for(let i=0;i<10;i++){
+  if(!await evaluate("Boolean(document.getElementById('warzone-towers-preparation')?.open)",false))return;
+  await button('#warzone-towers-preparation button');await wait(250);
+ }
+ throw Error('Preparation dialog did not close; refusing to send gameplay gestures behind it');
+}
+async function screenshot(name){fs.writeFileSync(path.join(out,name+'.png'),run('exec-out','screencap','-p'));}
+async function snapshot(name){const report=await evaluate('__warzoneCommands.report()');fs.writeFileSync(path.join(out,name+'-commands.json'),JSON.stringify(report,null,2));return report;}
+async function settle(){for(let i=0;i<50;i++){if(!await evaluate('__warzoneCommands.report().pending'))return;await wait(200)}throw Error('command replies did not settle');}
+async function engineButton(selector){const p=await evaluate(`(()=>{const e=document.querySelector(${JSON.stringify(selector)});if(!e)throw Error('Missing engine button');const r=e.getBoundingClientRect();return[r.x+r.width/2,r.y+r.height/2]})()`);await tap(...p);}
+async function mapTo(x,y){const [w,h]=await evaluate('[innerWidth,innerHeight]');await tap(w-24-192+(64-x)*3,h-24-192+(64-y)*3);await wait(1800);}
+async function projectTile(x,y,height=256){
+ const result=await evaluate(`(()=>{let height=${height},p,pick;for(let i=0;i<16;i++){p=WarzoneTerrain.project(${(x+.5)*128},${(y+.5)*128},height);if(!p)return null;pick=WarzoneTerrain.pick(p.x,p.y);if(!pick)return null;if(pick.x===Math.floor(${x+.5})&&pick.y===Math.floor(${y+.5}))return p;height=(height+pick.height)/2;}return null})()`);
+ if(!result)throw Error(`No visible terrain projection for tile ${x},${y}`);return[result.x,result.y];
+}
+async function touch(x,y){
+ const p=await evaluate(`(()=>{const r=document.getElementById('warzone-game-frame').getBoundingClientRect();return{x:r.x+${x},y:r.y+${y}}})()`,false);
+ const request=(method,params)=>new Promise((resolve,reject)=>{const n=++id;const timer=setTimeout(()=>reject(Error('touch timeout')),5000);pending.set(n,{resolve,reject,timer});socket.send(JSON.stringify({id:n,method,params}));});
+ await request('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{...p,id:1,radiusX:2,radiusY:2}]});await wait(30);
+ await request('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});
+}
+async function rawTouch(type,points){
+ const offset=await evaluate(`(()=>{const r=document.getElementById('warzone-game-frame').getBoundingClientRect();return{x:r.x,y:r.y}})()`,false);
+ const n=++id;return new Promise((resolve,reject)=>{const timer=setTimeout(()=>reject(Error('gesture timeout')),5000);pending.set(n,{resolve,reject,timer});socket.send(JSON.stringify({id:n,method:'Input.dispatchTouchEvent',params:{type,touchPoints:points.map((p,i)=>({x:p[0]+offset.x,y:p[1]+offset.y,id:i+1,radiusX:2,radiusY:2}))}}));});
+}
+async function gesture(start,end){await rawTouch('touchStart',start);await wait(80);for(let k=1;k<=6;k++){await rawTouch('touchMove',start.map((p,i)=>[p[0]+(end[i][0]-p[0])*k/6,p[1]+(end[i][1]-p[1])*k/6]));await wait(110);}await rawTouch('touchEnd',[]);await wait(400);}
+async function cdp(method,params){const n=++id;return new Promise((resolve,reject)=>{const timer=setTimeout(()=>reject(Error(method+' timeout')),10000);pending.set(n,{resolve,reject,timer});socket.send(JSON.stringify({id:n,method,params}));});}
+async function mouseAt(x,y,pointerType='mouse'){
+ const offset=await evaluate(`(()=>{const r=document.getElementById('warzone-game-frame').getBoundingClientRect();return{x:r.x,y:r.y}})()`,false);
+ const point={x:x+offset.x,y:y+offset.y,button:'left',clickCount:1,pointerType};
+ await cdp('Input.dispatchMouseEvent',{type:'mousePressed',...point});await wait(50);await cdp('Input.dispatchMouseEvent',{type:'mouseReleased',...point});await wait(800);
+}
+async function selectNative(selector,label){
+ await button(selector);
+ execFileSync(process.env.WZ_PYTHON||'C:/Users/punke/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe',[path.join(__dirname,'native-choice.py'),label],{env:{...process.env,WZ_QA_DEVICE:device},timeout:25000});await wait(250);
+}
+async function typeName(text){
+ await button('#wt-design-name');await cdp('Input.dispatchKeyEvent',{type:'keyDown',key:'a',code:'KeyA',windowsVirtualKeyCode:65,modifiers:2});await cdp('Input.dispatchKeyEvent',{type:'keyUp',key:'a',code:'KeyA',windowsVirtualKeyCode:65,modifiers:2});
+ await cdp('Input.insertText',{text});run('shell','input','keyevent','KEYCODE_BACK');await wait(250);
+}
+async function main(){
+ fs.mkdirSync(out,{recursive:true});await waitReady();await dismissPreparation();await settle();
+ const action=process.argv[2]||'console';const assert=require('node:assert/strict');
+ assert.ok([...fs.readFileSync(__filename,'utf8').matchAll(/if\(action==='([^']+)'/g)].some(m=>m[1]===action),'Unknown gameplay audit case: '+action);
+ const crypto=require('node:crypto'),apk=path.resolve(__dirname,'../app/build/outputs/apk/debug/app-debug.apk'),hash=crypto.createHash('sha256').update(fs.readFileSync(apk)).digest('hex');
+ testedAPKHash=hash;
+ const installed=run('shell','pm','path','com.rbabbit.warzonetowers').toString().trim().slice(8),deviceHash=run('shell','sha256sum',installed).toString().split(/\s/)[0];assert.equal(deviceHash,hash);fs.writeFileSync(path.join(out,'tested-'+action+'.json'),JSON.stringify({apkSHA256:hash,installedMatches:true,graphics:await evaluate('WarzoneGraphics.report()'),startedAt:new Date().toISOString()},null,2));
+ async function layout(name){
+  const r=await evaluate(`(()=>{const f=parent.document.getElementById('warzone-game-frame'),c=document.getElementById('canvas');return{host:[parent.innerWidth,parent.innerHeight],frame:f.getBoundingClientRect().toJSON(),canvas:c.getBoundingClientRect().toJSON(),buffer:[c.width,c.height],scroll:[parent.scrollX,parent.scrollY,scrollX,scrollY],inert:f.inert,buttons:[...parent.document.querySelectorAll('#wt-field-centre button')].map(b=>{const r=b.getBoundingClientRect(),e=parent.document.elementFromPoint(r.x+r.width/2,r.y+r.height/2);return{id:b.id,visible:r.width>0&&r.height>0,hit:e?.closest('button')===b}})}})()`);
+  assert.equal(r.host[1],Number(process.env.WZ_QA_EXPECT_HEIGHT||800),'full viewport restored after keyboard/page');assert.equal(r.inert,false);const header=await evaluate("['wt-open-build','wt-open-design','wt-open-factory','wt-open-stats','wt-open-more','blocknight-tech','blocknight-help','warzone-towers-next-wave'].map(id=>{const d=parent.document,b=d.getElementById(id),r=b.getBoundingClientRect();return{id,visible:r.width>0&&r.height>0,hit:d.elementFromPoint(r.x+r.width/2,r.y+r.height/2)?.closest('button')===b}})");assert.ok(header.every(b=>b.visible&&b.hit),JSON.stringify(header));r.header=header;assert.deepEqual(r.scroll,[0,0,0,0]);assert.equal(r.frame.bottom,r.host[1]);assert.equal(r.canvas.width,r.frame.width);assert.equal(r.canvas.height,r.frame.height);assert.ok(Math.abs(r.buffer[0]*r.frame.height-r.buffer[1]*r.frame.width)<=Math.max(...r.buffer),"native framebuffer aspect ratio matches the restored viewport");assert.ok(r.buttons.length===6&&r.buttons.every(b=>b.visible&&b.hit),JSON.stringify(r.buttons));await screenshot(name);fs.writeFileSync(path.join(out,name+'-layout.json'),JSON.stringify(r,null,2));return r;
+ }
+ async function openGround(native,candidates){
+  const objects=Object.values(native['droid.json']).filter(d=>d.player===0);
+  for(const p of candidates){if(objects.some(d=>Math.hypot(d.position[0]/128-p[0]-.5,d.position[1]/128-p[1]-.5)<1.5))continue;
+   const r=await evaluate(`__warzoneCommands.send('preview-build',{itemId:'GuardTower6',x:${p[0]},y:${p[1]}})`);if(r.ok){try{await projectTile(...p);return p;}catch(_){}}
+  }
+  for(const y of [260,350,440])for(const x of [400,540,680,820]){
+   const tile=await evaluate(`WarzoneTerrain.pick(${x},${y})`);if(!tile||objects.some(d=>Math.hypot(d.position[0]/128-tile.x-.5,d.position[1]/128-tile.y-.5)<1.5))continue;
+   const r=await evaluate(`__warzoneCommands.send('preview-build',{itemId:'GuardTower6',x:${tile.x},y:${tile.y}})`);if(r.ok){try{await projectTile(tile.x,tile.y,tile.height);return[tile.x,tile.y,tile.height];}catch(_){}}
+  }throw Error('No empty reachable test destination');
+ }
+ async function selectTank(d){
+  await button('#wt-select-move');await evaluate('WarzoneTerrain.active(true);true');await mapTo(d.position[0]/128,d.position[1]/128);const fresh=await save('selection-live-position');d=Object.values(fresh['droid.json']).find(v=>v.id===d.id);const p=await evaluate(`WarzoneTerrain.project(${d.position[0]},${d.position[1]},${d.position[2]+24})`);assert.ok(p);
+  let chosen=false;for(const dy of [0,-8,8]){await tap(p.x,p.y+dy);await evaluate('__warzoneCommands.send("state")');if(await evaluate(`__warzoneCommands.report().snapshot.selectedUnits.some(u=>u.id===${d.id})`)){chosen=true;break;}}
+  assert.ok(chosen,'actual tank can be selected by battlefield touch');
+ }
+ async function visibleBuildSites(count,nearest=false,minDistance=0){
+  const sites=[],points=[],seen=new Set(),trucks=await evaluate('__warzoneCommands.report().snapshot.trucks');
+  let candidates=await evaluate(`(()=>{const tiles=[];for(const y of [180,260,340,420,500])for(const x of [300,410,520,630,740,850,960]){const t=WarzoneTerrain.pick(x,y);if(t)tiles.push(t);}return tiles})()`);
+  const distance=t=>Math.min(...trucks.map(d=>Math.hypot(d.x-t.x,d.y-t.y)));candidates=candidates.filter(t=>distance(t)>=minDistance);if(nearest)candidates.sort((a,b)=>distance(a)-distance(b));
+  for(const tile of candidates){if(sites.length===count)break;const key=tile.x+','+tile.y;if(seen.has(key))continue;seen.add(key);const preview=await evaluate(`__warzoneCommands.send('preview-build',{itemId:'GuardTower6',x:${tile.x},y:${tile.y}})`);if(!preview.ok)continue;let p;try{p=await projectTile(tile.x,tile.y,tile.height)}catch(_){continue;}if(p[0]<260||p[0]>1000||p[1]<130||p[1]>560)continue;sites.push([tile.x,tile.y]);points.push(p);}
+  assert.equal(sites.length,count,'distinct valid sites clear of native controls');return{sites,points};
+ }
+ if(action==='production-return'){
+  await button('#wt-open-design');await button('[data-action="new-design"]');await selectNative('#wt-design-body','Viper');await selectNative('#wt-design-propulsion','Wheels');await selectNative('[data-turret="0"]','Light Cannon');
+  const name='Gameplay Tank '+Date.now();await button('#wt-design-name');await cdp('Input.dispatchKeyEvent',{type:'keyDown',key:'a',code:'KeyA',windowsVirtualKeyCode:65,modifiers:2});await cdp('Input.dispatchKeyEvent',{type:'keyUp',key:'a',code:'KeyA',windowsVirtualKeyCode:65,modifiers:2});await cdp('Input.insertText',{text:name});await wait(600);await settle();await button('#wt-save-design');await settle();
+  const design=(await evaluate('__warzoneCommands.report().saved')).find(d=>d.name===name);assert.ok(design);
+  await button('[data-page="factory"]');await selectNative('#wt-factory-select','Factory 2 · 1 module');await selectNative('#wt-produce-count','5');await button(`[data-produce="${design.id}"]`);await settle();await button('[data-action="back"]');await settle();const layouts=[await layout('production-immediate-return')];
+  let ready=false;for(let i=0;i<500;i++){if((await evaluate('__warzoneCommands.report().snapshot.finishedUnits')).some(u=>u.name===name)){ready=true;break;}await wait(200);}assert.ok(ready,'native factory actually produces tank');
+  const produced=await save('produced-tanks'),units=Object.values(produced['droid.json']).filter(d=>d.player===0&&d.name?.startsWith(name));assert.ok(units.length);let tank=units[0];await selectTank(tank);await layout('tank-selected');
+  const movements=[];
+  for(let i=0;i<3;i++){
+   await button('#wt-open-factory');await button('[data-action="back"]');await settle();layouts.push(await layout('factory-return-'+i));
+   const before=await save('tank-move-before-'+i);tank=Object.values(before['droid.json']).find(d=>d.id===tank.id);const selected=await evaluate('__warzoneCommands.report().snapshot.selectedUnits');assert.ok(selected.some(d=>d.id===tank.id),'factory return preserves tank selection');
+   const target=await openGround(before,[[7,42],[8,43],[7,45],[8,45],[6,43],[7,40]].slice(i).concat([[7,42],[8,43],[7,45]]));await tap(...await projectTile(...target));await wait(4000);const after=await save('tank-move-after-'+i),moved=Object.values(after['droid.json']).find(d=>d.id===tank.id);assert.ok(Math.hypot(moved.position[0]-tank.position[0],moved.position[1]-tank.position[1])>20,'tank really moves after returning from factory');movements.push({id:tank.id,before:tank.position,after:moved.position});tank=moved;
+  }
+  fs.writeFileSync(path.join(out,'production-return-results.json'),JSON.stringify({design,units:units.map(d=>({id:d.id,parts:d.parts})),layouts,movements,keyboardNotManuallyDismissedBeforeSave:true},null,2));console.log('PASS: native-picker design, keyboard save, production/back, tank touch selection, three factory returns and real tank movement after each return');
+ }
+ if(action==='resume-production-movement'){
+  const native=await save('resume-tank-before');let tank=Object.values(native['droid.json']).find(d=>d.player===0&&d.name?.startsWith('Gameplay Tank'));
+  assert.ok(tank);await selectTank(tank);const layouts=[],movements=[];
+  for(let i=0;i<3;i++){
+   await button('#wt-open-factory');await button('[data-action="back"]');await settle();layouts.push(await layout('resumed-factory-return-'+i));
+   const before=await save('resumed-move-before-'+i);tank=Object.values(before['droid.json']).find(d=>d.id===tank.id);const target=await openGround(before,[[7,42],[8,43],[7,45],[8,45],[6,43],[7,40]].slice(i).concat([[7,42],[8,43],[7,45]]));await tap(...await projectTile(...target));await wait(4000);const after=await save('resumed-move-after-'+i),moved=Object.values(after['droid.json']).find(d=>d.id===tank.id);
+   assert.ok(Math.hypot(moved.position[0]-tank.position[0],moved.position[1]-tank.position[1])>20);movements.push({id:tank.id,before:tank.position,after:moved.position});tank=moved;
+  }
+  fs.writeFileSync(path.join(out,'resumed-production-movement-results.json'),JSON.stringify({layouts,movements},null,2));console.log('PASS: touch selects an actual tank and native position changes after three factory returns');
+ }
+ if(action==='grow-group'){
+  await button('#wt-select-move');await evaluate('__kalaWarzoneTouch.selectAllUnits();WarzoneTerrain.active(true);true');await wait(500);await evaluate('__warzoneCommands.send("state")');assert.equal((await evaluate('__warzoneCommands.report().snapshot.trucks.filter(t=>t.selected)')).length,6);
+  await button('#blocknight-zoom-close');await mapTo(7,38);await tap(...await projectTile(8,40));
+  await button('#wt-open-factory');await selectNative('#wt-factory-select','Factory 2 · 1 module');await selectNative('#wt-produce-count','10');await button('[data-produce-template="ConstructionDroid"]');await settle();await button('[data-action="back"]');
+  const counts=[];let complete=false;
+  for(let i=0;i<2400;i++){await wait(200);const trucks=await evaluate('__warzoneCommands.report().snapshot.trucks.filter(t=>Math.hypot(t.x-7,t.y-39)<=8)');if(!counts.includes(trucks.length)){counts.push(trucks.length);console.log('Nearby constructors:',trucks.length);}if(trucks.length>=15){complete=true;break;}}
+  assert.ok(complete,'nine extra constructors produced and all six original trucks moved into the local area');
+  await button('#wt-open-factory');await settle();const f=(await evaluate('__warzoneCommands.report().snapshot.factories')).find(f=>f.number===2);assert.deepEqual(f.waitingReason,{kind:'constructors',current:15,limit:15});assert.ok(await evaluate('parent.document.getElementById("wt-factory-progress").textContent.includes("LIMIT 15 / 15")'));await screenshot('constructor-limit-visible');await button('[data-clear-production="'+f.id+'"]');await settle();await button('[data-action="back"]');
+  await button('#wt-select-trucks');for(let i=0;i<1800;i++){if(!await evaluate('__warzoneCommands.report().buildingOpening'))break;await wait(100);}await settle();
+  const native=await save('fifteen-trucks-selected');await screenshot('fifteen-trucks-selected');const selected=builders(native).filter(t=>t.selected);assert.equal(selected.length,15,'all fifteen nearby trucks selected across builder pages');assert.equal(await evaluate('__kalaWarzoneTouch.report().queueMode'),false);
+  await mapTo(7,36);if(process.env.WZ_QA_PAIR==='1'){await button('#wt-open-build');for(let i=0;i<1800;i++){if(!await evaluate('__warzoneCommands.report().buildingOpening'))break;await wait(100);}const base=144+((await evaluate('innerWidth'))-640)/2,y=(await evaluate('innerHeight'))-85;for(const [x,add]of [[base+34,false],[base+96,true]]){await evaluate('__kalaWarzoneTouch.nativeSelectClick('+x+','+y+','+add+');true');for(let i=0;i<200;i++){if(!await evaluate('__kalaWarzoneTouch.report().pendingClicks'))break;await wait(50);}await wait(250);}const pair=await save('fifteen-manual-pair');assert.equal(builders(pair).filter(d=>d.selected).length,2);}await button('#wt-open-build');for(let i=0;i<1800;i++){if(!await evaluate('__warzoneCommands.report().buildingOpening'))break;await wait(100);}assert.equal(await evaluate('__warzoneCommands.report().buildingOpening'),false);await screenshot('fifteen-native-options');const h=await evaluate('innerHeight');await tap(56,h-437);await wait(250);await tap(40,(await evaluate('innerHeight'))-355);for(let i=0;i<30;i++){if(await evaluate('__warzoneCommands.report().nativeToolReady'))break;await wait(100);}assert.equal(await evaluate('__warzoneCommands.report().nativeToolReady'),true);const groupSites=await visibleBuildSites(3,true);for(const point of groupSites.points)await tap(...point);
+  const queued=await save('fifteen-native-queue');await screenshot('fifteen-native-queue');assert.equal(builders(queued).filter(d=>d.selected).length,15);assert.ok(builders(queued).filter(d=>d.selected).every(d=>d['order/stats']==='GuardTower6'||d['order/type']===5||Object.entries(d).some(([k,v])=>k.startsWith('orderList/')&&k.endsWith('/stats')&&v==='GuardTower6')),'every truck receives native construction work');
+  let finished=false;for(let i=0;i<700;i++){if(!await evaluate('__kalaWarzoneTouch.report().queueMode')){finished=true;break;}await wait(200);}assert.ok(finished);const built=await save('fifteen-queue-completed');assert.ok(Object.values(built['struct.json']).filter(d=>d.player===0&&d.name==='GuardTower6'&&d.currentBuildPts===400).length>=Object.values(native['struct.json']).filter(d=>d.player===0&&d.name==='GuardTower6'&&d.currentBuildPts===400).length+3);await screenshot('fifteen-queue-completed');
+  const sync=await evaluate('new Promise(resolve=>LaunchedModule.FS.syncfs(false,e=>resolve({error:e?String(e):null})))');assert.equal(sync.error,null);
+  fs.writeFileSync(path.join(out,'large-group-results.json'),JSON.stringify({counts,selected:selected.map(d=>({id:d.id,position:d.position})),limit:f.waitingReason,ordinaryProduction:true,nativeQueue:true,completed:true,savedAndSynced:true},null,2));console.log('PASS: fifteen nearby real constructors selected; native queue assigned all fifteen and completed; constructor limit displayed and waiting queue cleared');
+ }
+ if(action==='large-existing'){
+  const counts=[];let ready=false;for(let i=0;i<1800;i++){await wait(200);const trucks=await evaluate('__warzoneCommands.report().snapshot.trucks');if(trucks.length===15&&trucks.every(t=>Math.hypot(t.x-7,t.y-39)<=8)){ready=true;break;}}assert.ok(ready,'all fifteen real trucks reach the same area');
+  await button('#wt-open-factory');await settle();const f=(await evaluate('__warzoneCommands.report().snapshot.factories')).find(f=>f.number===2);assert.deepEqual(f.waitingReason,{kind:'constructors',current:15,limit:15});assert.ok(await evaluate('parent.document.getElementById("wt-factory-progress").textContent.includes("LIMIT 15 / 15")'));await screenshot('constructor-limit-visible');await button('[data-clear-production="'+f.id+'"]');await settle();await button('[data-action="back"]');
+  await button('#wt-select-trucks');for(let i=0;i<1800;i++){if(!await evaluate('__warzoneCommands.report().buildingOpening'))break;await wait(100);}await settle();
+  const native=await save('fifteen-trucks-selected');await screenshot('fifteen-trucks-selected');const selected=builders(native).filter(t=>t.selected);assert.equal(selected.length,15,'all fifteen nearby trucks selected across builder pages');assert.equal(await evaluate('__kalaWarzoneTouch.report().queueMode'),false);
+  await mapTo(7,36);if(process.env.WZ_QA_PAIR==='1'){await button('#wt-open-build');for(let i=0;i<1800;i++){if(!await evaluate('__warzoneCommands.report().buildingOpening'))break;await wait(100);}const base=144+((await evaluate('innerWidth'))-640)/2,y=(await evaluate('innerHeight'))-85;for(const [x,add]of [[base+34,false],[base+96,true]]){await evaluate('__kalaWarzoneTouch.nativeSelectClick('+x+','+y+','+add+');true');for(let i=0;i<200;i++){if(!await evaluate('__kalaWarzoneTouch.report().pendingClicks'))break;await wait(50);}await wait(250);}const pair=await save('fifteen-manual-pair');assert.equal(builders(pair).filter(d=>d.selected).length,2);}await button('#wt-open-build');for(let i=0;i<1800;i++){if(!await evaluate('__warzoneCommands.report().buildingOpening'))break;await wait(100);}assert.equal(await evaluate('__warzoneCommands.report().buildingOpening'),false);await screenshot('fifteen-native-options');const h=await evaluate('innerHeight');await tap(56,h-437);await wait(250);await tap(40,(await evaluate('innerHeight'))-355);for(let i=0;i<30;i++){if(await evaluate('__warzoneCommands.report().nativeToolReady'))break;await wait(100);}assert.equal(await evaluate('__warzoneCommands.report().nativeToolReady'),true);const groupSites=await visibleBuildSites(3,true);for(const point of groupSites.points)await tap(...point);
+  const queued=await save('fifteen-native-queue');await screenshot('fifteen-native-queue');assert.equal(builders(queued).filter(d=>d.selected).length,15);assert.ok(builders(queued).filter(d=>d.selected).every(d=>d['order/stats']==='GuardTower6'||d['order/type']===5||Object.entries(d).some(([k,v])=>k.startsWith('orderList/')&&k.endsWith('/stats')&&v==='GuardTower6')),'every truck receives native construction work');
+  let finished=false;for(let i=0;i<700;i++){if(!await evaluate('__kalaWarzoneTouch.report().queueMode')){finished=true;break;}await wait(200);}assert.ok(finished);const built=await save('fifteen-queue-completed');assert.ok(Object.values(built['struct.json']).filter(d=>d.player===0&&d.name==='GuardTower6'&&d.currentBuildPts===400).length>=Object.values(native['struct.json']).filter(d=>d.player===0&&d.name==='GuardTower6'&&d.currentBuildPts===400).length+3);await screenshot('fifteen-queue-completed');
+  const sync=await evaluate('new Promise(resolve=>LaunchedModule.FS.syncfs(false,e=>resolve({error:e?String(e):null})))');assert.equal(sync.error,null);
+  fs.writeFileSync(path.join(out,'large-group-results.json'),JSON.stringify({counts,selected:selected.map(d=>({id:d.id,position:d.position})),limit:f.waitingReason,ordinaryProduction:true,nativeQueue:true,completed:true,savedAndSynced:true},null,2));console.log('PASS: fifteen nearby real constructors selected; native queue assigned all fifteen and completed; constructor limit displayed and waiting queue cleared');
+ }
+ if(action==='checkpoint'){
+  const s=await save('checkpoint');const sync=await evaluate('new Promise(resolve=>LaunchedModule.FS.syncfs(false,e=>resolve({error:e?String(e):null})))');assert.equal(sync.error,null);await screenshot('checkpoint');console.log(JSON.stringify({trucks:builders(s).length,gameTime:s.wave.gameTime,synced:true}));
+ }
+ if(action==='load-checkpoint'){
+  const before=await evaluate('__warzoneCommands.report().snapshot.gameTime'),count=(await evaluate('__warzoneCommands.report().snapshot.trucks')).length;
+  await evaluate('__kalaWarzoneTouch.nativePressKey("F8","F8",119);true');let resumed=false;
+  for(let i=0;i<900;i++){await wait(200);const time=await evaluate('__warzoneCommands.report().snapshot.gameTime');if(time!==before){await wait(1200);if(await evaluate(`__warzoneCommands.report().snapshot.gameTime!==${time}`)){resumed=true;break;}}}
+  assert.ok(resumed,'native QuickLoad finishes and simulation resumes before any subsequent input');await screenshot('load-checkpoint');await settle();const loaded=await save('loaded-checkpoint');assert.equal(builders(loaded).length,count);await layout('load-return');fs.writeFileSync(path.join(out,'load-results.json'),JSON.stringify({before,loadedGameTime:loaded.wave.gameTime,constructors:builders(loaded).length,resumed:true},null,2));console.log('PASS: same-build native QuickLoad resumes the saved battle and full input layout');
+ }
+ if(action==='large-build-only'){
+  await button('#wt-select-move');await evaluate('WarzoneTerrain.active(true);true');await button('#blocknight-zoom-close');await mapTo(7,36);const before=await save('large-camera-before');
+  await button('#wt-select-trucks');for(let i=0;i<1800;i++){if(!await evaluate('__warzoneCommands.report().buildingOpening'))break;await wait(100);}await settle();const selected=await save('large-selected');assert.equal(builders(selected).filter(d=>d.selected).length,15);assert.deepEqual(selected['gam.json'].viewDataP,before['gam.json'].viewDataP,'automatic truck selection preserves camera');
+  await button('#wt-open-build');for(let i=0;i<1800;i++){if(!await evaluate('__warzoneCommands.report().buildingOpening'))break;await wait(100);}await wait(600);const h=await evaluate('innerHeight');await tap(56,h-437);await screenshot('large-native-options');await tap(40,(await evaluate('innerHeight'))-355);for(let i=0;i<30;i++){if(await evaluate('__warzoneCommands.report().nativeToolReady'))break;await wait(100);}assert.equal(await evaluate('__warzoneCommands.report().nativeToolReady'),true);const groupSites=await visibleBuildSites(3,true);for(const point of groupSites.points)await tap(...point);
+  const queued=await save('large-native-queued');await screenshot('large-native-queued');const units=builders(queued).filter(d=>d.selected);assert.equal(units.length,15);assert.ok(units.every(d=>[4,5].includes(d['order/type'])||d['orderList/size']>0));
+  let complete=false;for(let i=0;i<700;i++){if(!await evaluate('__kalaWarzoneTouch.report().queueMode')){complete=true;break;}await wait(200);}assert.ok(complete);const built=await save('large-native-completed');assert.equal(Object.values(built['struct.json']).filter(s=>s.player===0&&s.name==='GuardTower6'&&s.currentBuildPts===400).length,3);await layout('large-native-completed');fs.writeFileSync(path.join(out,'large-build-results.json'),JSON.stringify({selected:units.map(d=>d.id),cameraPreserved:true,nativeQueued:true,completed:true,placementCleared:true},null,2));console.log('PASS: fifteen-truck selection preserves camera; all fifteen receive native queued work; three structures complete and placement clears');
+ }
+ if(action==='queue-cancel'){
+  await button('#wt-select-move');await evaluate('WarzoneTerrain.active(true);true');await mapTo(7,32);await button('#wt-open-build');for(let i=0;i<1800;i++){if(!await evaluate('__warzoneCommands.report().buildingOpening'))break;await wait(100);}await wait(400);await tap(56,(await evaluate('innerHeight'))-437);await tap(40,(await evaluate('innerHeight'))-355);
+  const {sites,points}=await visibleBuildSites(12);
+  for(const p of points)await tap(...p);const queued=await save('cancel-queued-native');await screenshot('cancel-queued-native');const plans=[...buildPlan(queued)];assert.ok(sites.every(([x,y])=>plans.includes(`GuardTower6@${x*128+64},${y*128+64}`)),'all intended sites reach original native order lists');
+  await tap(...await projectTile(...sites[0]));await wait(300);const invalid=await save('occupied-retained-native');assert.ok(builders(invalid).some(d=>d['orderList/size']>0));
+  await button('#wt-select-move');await settle();const exited=await save('placement-exit-keeps-native-queue');assert.ok(builders(exited).some(d=>d['orderList/size']>0));assert.equal(await evaluate('__kalaWarzoneTouch.report().queueMode'),false);await screenshot('placement-exit-keeps-native-queue');
+  await button('#blocknight-stop');const stopped=await save('stop-clears-native-queue');assert.ok(builders(stopped).filter(d=>d.selected).every(d=>[0,1].includes(d['order/type'])&&!d['orderList/size']));await layout('stop-clears-native-queue');
+  const partial=Object.values(stopped['struct.json']).find(d=>d.player===0&&d.name==='GuardTower6'&&d.currentBuildPts<400);let resumed=false;
+  if(partial){await evaluate('WarzoneTerrain.active(true);true');const p=await evaluate(`WarzoneTerrain.project(${partial.position[0]},${partial.position[1]},${partial.position[2]+8})`);await tap(p.x,p.y);for(let i=0;i<120;i++){const r=await evaluate(`__warzoneCommands.send('preview-build',{itemId:'GuardTower6',x:${Math.floor(partial.position[0]/128)},y:${Math.floor(partial.position[1]/128)}})`);if(r.reason==='occupied'){resumed=true;break;}await wait(250);}assert.ok(resumed,'a normal ground-object tap resumes the unfinished building');const finished=await save('resume-unfinished-native');assert.equal(Object.values(finished['struct.json']).find(d=>d.id===partial.id).currentBuildPts,400);await screenshot('resume-unfinished-native');}
+  fs.writeFileSync(path.join(out,'queue-cancel-results.json'),JSON.stringify({sites,nativeOrdersVisible:true,occupiedRetainsQueue:true,exitKeepsQueue:true,stopClearsQueue:true,partial:partial?.id,resumed},null,2));console.log('PASS: visible native queue, occupied tap retention, SELECT preserves orders, STOP clears orders and unfinished building resumes when present');
+ }
+ if(action==='invalid-tool'){
+  await button('#wt-select-move');await button('#blocknight-zoom-close');await evaluate('WarzoneTerrain.active(true);true');await mapTo(7,36);await button('#wt-open-build');for(let i=0;i<1800;i++){if(!await evaluate('__warzoneCommands.report().buildingOpening'))break;await wait(100);}const {points}=await visibleBuildSites(1),before=await save('empty-choice-before');await tap(56,(await evaluate('innerHeight'))-437);await tap(40,(await evaluate('innerHeight'))-211);await tap(...points[0]);let drained=false,sawPending=false;for(let i=0;i<120;i++){const r=await evaluate('({pending:__warzoneCommands.report().nativePendingSites,input:__kalaWarzoneTouch.report().pendingClicks})');sawPending||=r.pending>0;if(!r.pending&&!r.input){drained=true;break;}await wait(100);}assert.ok(drained,'empty/disabled native option cannot block later input');const after=await save('empty-choice-rejected');assert.equal(buildPlan(after).size,buildPlan(before).size,'an unactivated tool must not silently queue a site');await button('#wt-open-more');await button('[data-action="back"]');await settle();await layout('empty-choice-recovered');fs.writeFileSync(path.join(out,'invalid-tool-results.json'),JSON.stringify({recovered:true,unsentSiteRejected:true,sawPending},null,2));console.log('PASS: empty native build choice rejects unsent input and leaves navigation usable');
+ }
+ if(action==='native-queue'){
+  await button('#wt-select-move');await button('#blocknight-zoom-close');await evaluate('WarzoneTerrain.active(true);true');await mapTo(7,36);await button('#wt-open-build');
+  for(let i=0;i<100;i++){if(!await evaluate('__warzoneCommands.report().buildingOpening'))break;await wait(100);}
+  const h=await evaluate('innerHeight');await tap(56,h-437);await wait(250);await tap(40,(await evaluate('innerHeight'))-355);await wait(350);
+  const sites=[[8,36],[9,36],[8,38]];
+  for(const tile of sites){await tap(...await projectTile(...tile));}
+  const queued=await save('native-visible-queue');await screenshot('native-visible-queue');
+  const selected=builders(queued).filter(d=>d.selected);assert.equal(selected.length,3);
+  const plans=[...buildPlan(queued)];assert.equal(plans.filter(p=>p.startsWith('GuardTower6@')).length,3,'all three native orders or structures exist');
+  assert.ok(selected.some(d=>(d['orderList/size']||0)>0),'pending orders live in original native order list');
+  let complete=false,native;
+  for(let i=0;i<400;i++){await wait(200);if(!await evaluate('__kalaWarzoneTouch.report().queueMode')){native=await save('native-queue-completed');const built=Object.values(native['struct.json']).filter(v=>v.player===0&&v.name==='GuardTower6'&&v.currentBuildPts===400);if(built.length>=3){complete=true;break;}}}
+  assert.ok(complete,'all queued sites complete and placement exits automatically');await screenshot('native-queue-completed');
+  assert.equal(await evaluate('document.getElementById("wt-build-ghost").hidden'),true);
+  const before=builders(native).filter(d=>d.selected).map(d=>({id:d.id,position:d.position}));await tap(...await projectTile(7,40));await wait(3000);const moved=await save('post-build-movement');await screenshot('post-build-movement');
+  const after=builders(moved).filter(d=>before.some(b=>b.id===d.id));assert.ok(after.some(d=>{const b=before.find(b=>b.id===d.id);return Math.hypot(d.position[0]-b.position[0],d.position[1]-b.position[1])>20}),'ground tap actually moves trucks after construction');
+  assert.ok(after.some(d=>d['order/type']===2)&&after.every(d=>![4,5,20].includes(d['order/type'])),'movement must be MOVE, not a new construction order');assert.equal(Object.values(moved['struct.json']).filter(d=>d.player===0&&d.name==='GuardTower6').length,Object.values(native['struct.json']).filter(d=>d.player===0&&d.name==='GuardTower6').length);
+  fs.writeFileSync(path.join(out,'native-queue-results.json'),JSON.stringify({selected:selected.map(d=>d.id),nativePlans:plans,completed:true,placementCleared:true,before,after:after.map(d=>({id:d.id,position:d.position,order:d['order/type']}))},null,2));
+  console.log('PASS: three native queued blueprints, three nearby constructors, native completion, preview cleared and subsequent ground tap moves trucks');
+ }
+ if(action==='post-move'){
+  await button('#wt-select-move');await evaluate('WarzoneTerrain.active(true);true');const before=await save('movement-before');
+  await tap(...await projectTile(7,40));await wait(4000);const after=await save('movement-after');await screenshot('movement-after');
+  const selected=builders(before).filter(d=>d.selected);const changed=builders(after).filter(d=>selected.some(b=>b.id===d.id&&Math.hypot(d.position[0]-b.position[0],d.position[1]-b.position[1])>20));assert.ok(changed.length);
+  console.log(JSON.stringify({moved:changed.map(d=>({id:d.id,pos:d.position,order:d['order/type']}))}));
+ }
+ if(action==='wave-play'){
+  await button('#wt-select-move');const before=await save('wave-before'),wave=before.wave.wave;await button('#warzone-towers-next-wave');let advanced=false;for(let i=0;i<200;i++){const s=await evaluate('__warzoneTowersWaves.report().snapshot');if(s.wave===wave+1&&s.enemyDroids>0){advanced=true;break;}await wait(150);}assert.ok(advanced,'one actual Skip Wave tap spawns the next native wave');
+  const spawned=await save('wave-spawned'),enemy=s=>Object.values(s['droid.json']).filter(d=>d.player!==0),prior=enemy(before),current=enemy(spawned);assert.ok(current.length);if(prior.length)assert.ok(current.some(d=>prior.some(p=>p.id===d.id)),'surviving enemies remain after skip');
+  await mapTo(14,54);let combat,shots=[];for(let i=0;i<24;i++){await wait(3000);const s=await save('wave-combat-latest');shots=Object.values(s['droid.json']).filter(d=>(d['shotsFired/0']||0)>0);if(shots.length){combat=s;break;}}assert.ok(combat,'real native units fire during the battle');await layout('wave-combat');fs.writeFileSync(path.join(out,'wave-play-results.json'),JSON.stringify({from:wave,to:spawned.wave.wave,spawnedEnemies:current.length,survivorsRetained:!prior.length||current.some(d=>prior.some(p=>p.id===d.id)),firing:shots.map(d=>({id:d.id,player:d.player,shots:d['shotsFired/0'],target:d['actionTarget/0/id']})),phase:combat.wave.phase},null,2));console.log('PASS: actual wave advance, native enemies/survivors and real weapon firing');
+ }
+ if(action==='density-resize'){
+  await button('#wt-select-move');const marker='density-'+Date.now();await evaluate(`window.__qaDensityMarker=${JSON.stringify(marker)}`);const before=await save('density-before');let retained=false;
+  try{run('shell','wm','density','260');await wait(3000);assert.equal(await evaluate('window.__qaDensityMarker'),marker,'density changes retain the existing WebView/game');assert.ok((await evaluate('__warzoneCommands.report().snapshot.gameTime'))>=before.wave.gameTime);retained=true;}finally{run('shell','wm','density','240');await wait(3000);}
+  assert.equal(await evaluate('window.__qaDensityMarker'),marker);await layout('density-restored');fs.writeFileSync(path.join(out,'density-resize-results.json'),JSON.stringify({retained,marker,restoredDensity:240,gameContinues:true},null,2));console.log('PASS: density change preserves the same game and restores the original viewport');
+ }
+ if(action==='compact-smoke'){
+  await button('#wt-select-move');const layouts=[await layout('compact-battle')];await button('#wt-open-design');await button('#wt-design-name');await wait(600);await button('[data-action="back"]');await settle();layouts.push(await layout('compact-keyboard-return'));
+  for(const size of ['Extra large','Standard']){await button('#wt-open-more');await selectNative('#wt-command-size',size);await button('[data-action="back"]');await settle();layouts.push(await layout('compact-size-'+size.replace(' ','-')));}
+  await button('#blocknight-help');await button('.wt-help-close');await button('#blocknight-tech');await engineButton('.bn-tech-done');await settle();layouts.push(await layout('compact-help-tech-return'));
+  await button('#wt-select-trucks');for(let i=0;i<1800;i++){if(!await evaluate('__warzoneCommands.report().buildingOpening'))break;await wait(100);}await evaluate('WarzoneTerrain.active(true);true');await mapTo(7,40);const before=await save('compact-trucks-before'),selected=builders(before).filter(d=>d.selected);assert.ok(selected.length>=3);const target=await openGround(before,[[7,42],[8,43],[6,40]]);await tap(...await projectTile(...target));await wait(3000);const after=await save('compact-trucks-after');assert.ok(builders(after).some(d=>selected.some(b=>b.id===d.id&&Math.hypot(b.position[0]-d.position[0],b.position[1]-d.position[1])>20)));layouts.push(await layout('compact-trucks-moved'));fs.writeFileSync(path.join(out,'compact-smoke-results.json'),JSON.stringify({layouts,keyboardReturn:true,controlSizes:true,truckMovement:true},null,2));console.log('PASS: compact keyboard return, MORE, sizes, persistent controls, HELP/TECH and real truck movement');
+ }
+ if(action==='generated-template'){
+  await button('#wt-open-factory');await selectNative('#wt-factory-select','Factory 2 · 1 module');await selectNative('#wt-produce-count','1');const templates=await evaluate('__warzoneCommands.report().snapshot.templates');assert.equal(new Set(templates.map(t=>t.id)).size,templates.length,'no duplicate template cards');
+  const template=templates.find(t=>t.id.startsWith('native:')&&t.droidType===0);assert.ok(template);let idle=false;for(let i=0;i<800;i++){const f=(await evaluate('__warzoneCommands.report().snapshot.factories')).find(f=>f.number===2);if(f.idle&&!f.queue.length&&!f.active){idle=true;break;}await wait(250);}assert.ok(idle,'prior production completes before measuring generated template');const before=await save('generated-template-before');await button('[data-produce-template^="native:"]');await settle();await button('[data-action="back"]');let produced=false;
+  const count=s=>Object.values(s['droid.json']).filter(d=>d.player===0&&d.droidType===0).length;
+  for(let i=0;i<400;i++){await wait(250);const f=(await evaluate('__warzoneCommands.report().snapshot.factories')).find(f=>f.number===2);if(f.idle&&!f.queue.length&&!f.active){produced=true;break;}}assert.ok(produced);const after=await save('generated-template-after');assert.equal(count(after),count(before)+1);await layout('generated-template-return');fs.writeFileSync(path.join(out,'generated-template-results.json'),JSON.stringify({unique:true,template:template.id,before:count(before),after:count(after)},null,2));console.log('PASS: generated empty-ID template cards are unique and produce real units');
+ }
+ if(action==='build-interrupt'){
+  await button('#blocknight-select-all');await button('#blocknight-select-all');await evaluate('__warzoneCommands.send("state")');await button('#wt-open-build');assert.equal(await evaluate('__warzoneCommands.report().buildingOpening'),true,'TECH is tested during actual automatic selection, not after it finished');await button('#blocknight-tech');for(let i=0;i<100;i++){if(await evaluate('__blockNightResearch.report().open'))break;await wait(100);}await engineButton('.bn-tech-done');await settle();for(let i=0;i<200;i++){if(!await evaluate('__warzoneCommands.report().buildingOpening'))break;await wait(100);}assert.equal(await evaluate('__warzoneCommands.report().nativeMenu'),'');assert.equal(await evaluate('__kalaWarzoneTouch.report().queueMode'),false);await layout('build-interrupt-tech-return');fs.writeFileSync(path.join(out,'build-interrupt-results.json'),JSON.stringify({interrupted:true,openingInterrupted:true,buildClosed:true,queueMode:false},null,2));console.log('PASS: TECH interrupts opening BUILD without a late placement/menu callback');
+ }
+ if(action==='controls'){
+  await button('#wt-select-move');await button('#blocknight-select-all');await wait(700);const all=await save('all-combat-selected');const combat=Object.values(all['droid.json']).filter(d=>d.player===0&&d.droidType===0);assert.ok(combat.length&&combat.every(d=>d.selected));assert.ok(builders(all).every(d=>!d.selected));
+  await button('#blocknight-select-all');assert.equal(await evaluate('__kalaWarzoneTouch.report().combatLock'),false);
+  await evaluate('WarzoneTerrain.active(true);true');await mapTo(7,43);const patrolTarget=await openGround(all,[[7,42],[8,43],[7,40],[9,42],[6,42]]);await button('#blocknight-auto-fight');await tap(...await projectTile(...patrolTarget));await wait(600);const patrol=await save('patrol-native-orders');assert.ok(Object.values(patrol['droid.json']).some(d=>d.player===0&&d['order/type']===31),'real native patrol order');
+  await button('#blocknight-stop');const stopped=await save('combat-stop');assert.ok(Object.values(stopped['droid.json']).filter(d=>d.player===0&&d.selected).every(d=>[0,1,25].includes(d['order/type'])&&!d['orderList/size']));
+  await button('#wt-select-trucks');for(let i=0;i<1800;i++){if(!await evaluate('__warzoneCommands.report().buildingOpening'))break;await wait(100);}await mapTo(7,40);await button('#blocknight-box-select');const a=await projectTile(5.5,38.5),b=await projectTile(9.5,41.5);await swipe(...a,...b,800);const boxed=await save('box-trucks-selected'),selected=builders(boxed).filter(d=>d.selected);assert.ok(selected.length>=2,'real box selects trucks');assert.equal(await evaluate('__kalaWarzoneTouch.report().boxMode'),false);
+  const target=await openGround(boxed,[[7,44],[8,44],[6,43]]);await tap(...await projectTile(...target));await wait(3000);const moved=await save('box-trucks-moved');assert.ok(builders(moved).some(d=>selected.some(t=>t.id===d.id&&Math.hypot(t.position[0]-d.position[0],t.position[1]-d.position[1])>20)));await layout('all-field-controls');fs.writeFileSync(path.join(out,'controls-results.json'),JSON.stringify({combat:combat.length,patrol:true,stop:true,box:selected.length,movement:true},null,2));console.log('PASS: ALL combat selection, toggle off, native PATROL, STOP, TRUCKS, BOX and real group movement');
+ }
+ if(action==='roundtrip'){
+  const layouts=[];for(let i=0;i<3;i++){
+   for(const page of ['design','saved','factory','queue','more']){await button('#wt-open-design');await button(`[data-page="${page}"]`);await button('[data-action="back"]');await settle();layouts.push(await layout(`return-${page}-${i}`));}
+   await button('#wt-open-stats');await button('#wt-native-back');layouts.push(await layout('return-stats-'+i));
+   await button('#wt-open-factory');await button('[data-action="native-factory"]');await button('#wt-native-back');layouts.push(await layout('return-native-factory-'+i));
+   await button('#wt-open-more');await button('[data-action="commanders"]');await button('#wt-native-back');layouts.push(await layout('return-commanders-'+i));
+   await button('#blocknight-help');await button('.wt-help-close');await button('#blocknight-tech');await engineButton('.bn-tech-done');await wait(400);layouts.push(await layout('return-help-tech-'+i));
+  }
+  fs.writeFileSync(path.join(out,'roundtrip-results.json'),JSON.stringify({cycles:3,layouts},null,2));console.log('PASS: repeated custom and native page returns preserve full battlefield and persistent controls');
+ }
+ if(action==='native-switch'){
+  assert.ok((await evaluate('__warzoneCommands.report().snapshot.gameTime'))<200000,'Use a fresh battle for the other-base constructor fixture; do not confuse Command Centre defeat with a menu failure');
+  await button('#wt-select-move');await evaluate('WarzoneTerrain.active(true);true');await mapTo(7,36);await button('#wt-select-trucks');for(let i=0;i<1800;i++){if(!await evaluate('__warzoneCommands.report().buildingOpening'))break;await wait(100);}await button('#wt-open-build');for(let i=0;i<1800;i++){if(!await evaluate('__warzoneCommands.report().buildingOpening'))break;await wait(100);}
+  const trucks=(await evaluate('__warzoneCommands.report().snapshot.trucks')).slice().reverse(),remote=trucks.find(d=>d.x>45&&d.y<15);assert.ok(remote);const index=trucks.findIndex(d=>d.id===remote.id),base=144+((await evaluate('innerWidth'))-640)/2;await tap(base+22+Math.floor(index/5)*28,(await evaluate('innerHeight'))-125);await tap(base+34+(index%5)*62,(await evaluate('innerHeight'))-85);await evaluate('__warzoneCommands.send("state")');assert.equal((await evaluate('__warzoneCommands.report().snapshot.trucks.filter(d=>d.selected)'))[0].id,remote.id);await mapTo(remote.x,remote.y+3);
+  await tap(56,(await evaluate('innerHeight'))-437);await tap(40,(await evaluate('innerHeight'))-355);const {sites,points}=await visibleBuildSites(1);await tap(...points[0]);const queued=await save('remote-truck-native-work');assert.ok(builders(queued).some(d=>d.id===remote.id&&[4,5].includes(d['order/type'])));let closed=false;for(let i=0;i<900;i++){if(!await evaluate('__kalaWarzoneTouch.report().queueMode')){closed=true;break;}await wait(200);}assert.ok(closed,'changing native constructor cards still auto-closes placement after completion');const built=await save('remote-truck-completed');assert.ok(Object.values(built['struct.json']).some(d=>d.player===0&&d.name==='GuardTower6'&&d.position[0]===sites[0][0]*128+64&&d.position[1]===sites[0][1]*128+64&&d.currentBuildPts===400));const d=builders(built).find(d=>d.id===remote.id),target=await openGround(built,[[remote.x-2,remote.y+3],[remote.x-3,remote.y+2]]);await tap(...await projectTile(...target));await wait(3000);const moved=await save('remote-truck-moved');assert.ok(builders(moved).some(t=>t.id===d.id&&Math.hypot(t.position[0]-d.position[0],t.position[1]-d.position[1])>20));await layout('remote-truck-return');fs.writeFileSync(path.join(out,'native-switch-results.json'),JSON.stringify({remote:remote.id,site:sites[0],completed:true,placementClosed:true,movement:true},null,2));console.log('PASS: native builder switch to other base, construction completion, automatic placement exit and normal movement');
+ }
+ if(action==='partial-resume'){
+  await button('#wt-select-move');await button('#blocknight-stop');await evaluate('WarzoneTerrain.active(true);true');await mapTo(...(process.env.WZ_QA_PARTIAL_CENTER||'7,36').split(',').map(Number));await button('#wt-open-build');for(let i=0;i<1800;i++){if(!await evaluate('__warzoneCommands.report().buildingOpening'))break;await wait(100);}const {sites,points}=await visibleBuildSites(1,true,6),trucks=(await evaluate('__warzoneCommands.report().snapshot.trucks')).slice().reverse(),worker=trucks.slice().sort((a,b)=>Math.hypot(a.x-sites[0][0],a.y-sites[0][1])-Math.hypot(b.x-sites[0][0],b.y-sites[0][1]))[0],index=trucks.findIndex(d=>d.id===worker.id),base=144+((await evaluate('innerWidth'))-640)/2;await tap(base+22+Math.floor(index/5)*28,(await evaluate('innerHeight'))-125);await tap(base+34+(index%5)*62,(await evaluate('innerHeight'))-85);await evaluate('__warzoneCommands.send("state")');assert.equal((await evaluate('__warzoneCommands.report().snapshot.trucks.filter(d=>d.selected)')).length,1);
+  await tap(56,(await evaluate('innerHeight'))-437);await tap(40,(await evaluate('innerHeight'))-355);await tap(...points[0]);let partial;
+  for(let i=0;i<8;i++){await wait(2000);const s=await save('partial-started');partial=Object.values(s['struct.json']).find(d=>d.player===0&&d.name==='GuardTower6'&&d.position[0]===sites[0][0]*128+64&&d.position[1]===sites[0][1]*128+64&&d.currentBuildPts<400);if(partial)break;}assert.ok(partial,'one real constructor starts an unfinished foundation');await button('#blocknight-stop');const stopped=await save('partial-stopped'),foundation=Object.values(stopped['struct.json']).find(d=>d.id===partial.id);assert.ok(foundation&&foundation.currentBuildPts<400);assert.ok(builders(stopped).filter(d=>d.selected).every(d=>[0,1].includes(d['order/type'])));
+  // Native idle constructors automatically help nearby unfinished buildings.
+  // Move this isolated worker away and prove a real pause before resuming.
+  const sx=sites[0][0],sy=sites[0][1],awayCandidates=[[sx-8,sy],[sx+8,sy],[sx,sy-8],[sx,sy+8],[sx-6,sy-6],[sx+6,sy-6],[sx-6,sy+6],[sx+6,sy+6]].filter(([x,y])=>x>1&&y>1&&x<62&&y<62);let away;
+  for(const tile of awayCandidates){if(Object.values(stopped['struct.json']).some(d=>d.player===0&&Math.hypot(d.position[0]/128-tile[0]-.5,d.position[1]/128-tile[1]-.5)<3))continue;const r=await evaluate(`__warzoneCommands.send('preview-build',{itemId:'GuardTower6',x:${tile[0]},y:${tile[1]}})`);if(r.ok){away=tile;break;}}assert.ok(away);await evaluate('WarzoneTerrain.active(true);true');await mapTo(away[0],away[1]-2);await tap(...await projectTile(...away));await wait(2500);const paused=await save('partial-moved-away'),pausedFoundation=Object.values(paused['struct.json']).find(d=>d.id===foundation.id);assert.ok(pausedFoundation.currentBuildPts<400);assert.equal(builders(paused).find(d=>d.id===worker.id)['order/type'],2);await wait(2500);const stable=await save('partial-paused-stable');assert.equal(Object.values(stable['struct.json']).find(d=>d.id===foundation.id).currentBuildPts,pausedFoundation.currentBuildPts,'construction really pauses after moving the isolated worker away');
+  await mapTo(foundation.position[0]/128,foundation.position[1]/128-2);const p=await evaluate(`WarzoneTerrain.project(${foundation.position[0]},${foundation.position[1]},${foundation.position[2]+16})`);assert.ok(p.x>0&&p.y>0&&p.x<(await evaluate('innerWidth'))&&p.y<(await evaluate('innerHeight')));await tap(p.x,p.y);const resumed=await save('partial-explicit-help');assert.equal(builders(resumed).find(d=>d.id===worker.id)['order/type'],5,'normal touch explicitly issues native HELPBUILD');let completed;
+  for(let i=0;i<30;i++){await wait(1500);const s=await save('partial-resumed-completed');const d=Object.values(s['struct.json']).find(d=>d.id===foundation.id);if(d?.currentBuildPts===400){completed=d;break;}}assert.ok(completed,'normal battlefield touch resumes and completes the same foundation');await layout('partial-resume-finished');fs.writeFileSync(path.join(out,'partial-resume-results.json'),JSON.stringify({workerCount:1,site:sites[0],id:foundation.id,stoppedPoints:foundation.currentBuildPts,pausedPoints:pausedFoundation.currentBuildPts,explicitHelpBuild:true,completedPoints:completed.currentBuildPts},null,2));console.log('PASS: native single-worker foundation pauses after moving away and explicitly resumes to completion through normal touch');
+ }
+ if(action==='fast-queue-pan'){
+  await button('#wt-select-move');await evaluate('WarzoneTerrain.active(true);true');await mapTo(11,35);await button('#wt-open-build');for(let i=0;i<1800;i++){if(!await evaluate('__warzoneCommands.report().buildingOpening'))break;await wait(100);}await tap(56,(await evaluate('innerHeight'))-437);await tap(40,(await evaluate('innerHeight'))-355);
+  for(let i=0;i<30;i++){if(await evaluate('__warzoneCommands.report().nativeToolReady'))break;await wait(100);}assert.equal(await evaluate('__warzoneCommands.report().nativeToolReady'),true);const {sites,points}=await visibleBuildSites(6);
+  const cameraBefore=await save('fast-camera-before');for(const p of points)await touch(...p);const [w,h]=await evaluate('[innerWidth,innerHeight]');await gesture([[w*.45,h*.35]],[[w*.55,h*.45]]);const s=await save('fast-queue-pan'),plans=[...buildPlan(s)];await screenshot('fast-queue-pan');assert.ok(sites.every(([x,y])=>plans.includes(`GuardTower6@${x*128+64},${y*128+64}`)),JSON.stringify({sites,points,plans}));assert.notDeepEqual(s['gam.json'].viewDataP,cameraBefore['gam.json'].viewDataP,'the deferred pan actually moves the native camera');fs.writeFileSync(path.join(out,'fast-queue-pan-results.json'),JSON.stringify({sites,points,plans,pan:true,cameraBefore:cameraBefore['gam.json'].viewDataP,cameraAfter:s['gam.json'].viewDataP},null,2));console.log('PASS: rapid native queue survives immediate camera pan');
+ }
+ if(action==='gestures'){
+  await button('#wt-select-move');await button('#blocknight-zoom-close');await mapTo(7,36);const before=await save('gestures-before'),[w,h]=await evaluate('[innerWidth,innerHeight]');
+  // Stream one-finger input on Android. Sequential debugger round trips can
+  // accidentally hold the first finger long enough to request box selection.
+  await swipe(w*.4,h*.35,w*.52,h*.46,500);const pan=await save('gestures-pan');assert.notDeepEqual(pan['gam.json'].viewDataP,before['gam.json'].viewDataP);
+  await evaluate('WarzoneTerrain.active(true);true');await wait(300);const span=()=>evaluate(`(()=>{const a=WarzoneTerrain.project(128,4034,0),b=WarzoneTerrain.project(256,4034,0);if(!a||!b)throw Error('Native terrain projection unavailable');return Math.hypot(a.x-b.x,a.y-b.y)})()`),zoomBefore=await span();
+  await gesture([[w*.4,h*.4],[w*.6,h*.4]],[[w*.36,h*.4],[w*.64,h*.4]]);const pinch=await save('gestures-pinch'),zoomAfter=await span();assert.ok(pinch.touch.pinchSteps>before.touch.pinchSteps);assert.ok(Math.abs(zoomAfter-zoomBefore)>.1,'pinch changes the native terrain projection scale');
+  await gesture([[w*.4,h*.4],[w*.6,h*.4]],[[w*.4,h*.4+90],[w*.6,h*.4+90]]);const tilt=await save('gestures-tilt');assert.ok(tilt.touch.tiltMoves>before.touch.tiltMoves);assert.notDeepEqual(tilt['gam.json'].viewDataR,pinch['gam.json'].viewDataR,'tilt changes the saved native camera rotation');assert.deepEqual(tilt.touch.heldKeys,[]);await layout('gestures-finished');fs.writeFileSync(path.join(out,'gestures-results.json'),JSON.stringify({pan:true,pinch:true,tilt:true,released:true,zoomBefore,zoomAfter,rotationBefore:pinch['gam.json'].viewDataR,rotationAfter:tilt['gam.json'].viewDataR},null,2));console.log('PASS: native camera pan, pinch projection scale, tilt rotation and released input after gestures');
+ }
+ if(action==='inspect-menu'){
+  await button('#wt-select-move');await button('#wt-open-build');for(let i=0;i<1800;i++){if(!await evaluate('__warzoneCommands.report().buildingOpening'))break;await wait(100);}await wait(500);await screenshot('inspect-menu-open');await snapshot('inspect-menu-open');
+  await tap(56,(await evaluate('innerHeight'))-437);await screenshot('inspect-menu-tab');await tap(40,(await evaluate('innerHeight'))-355);await screenshot('inspect-menu-choice');await snapshot('inspect-menu-choice');console.log(JSON.stringify({ready:await evaluate('__warzoneCommands.report().nativeToolReady')}));
+ }
+ if(action==='console'){
+  await button('#blocknight-zoom-close');await mapTo(7,36);await button('#wt-open-build');await wait(4500);await settle();
+  const report=await snapshot('native-build-open');await screenshot('native-build-open');const native=await save('native-build-group');
+  console.log(JSON.stringify({selected:builders(native).filter(t=>t.selected).map(t=>({id:t.id,pos:t.position})),touch:report.snapshot.trucks,notice:await evaluate('parent.document.getElementById("wt-command-notice").textContent')}));
+ }
+ if(action==='tap'){await tap(Number(process.argv[3]),Number(process.argv[4]));await wait(500);await screenshot(process.argv[5]||'tap');await snapshot(process.argv[5]||'tap');}
+ if(action==='button'){await button(process.argv[3]);await settle();await screenshot(process.argv[4]||'button');await snapshot(process.argv[4]||'button');}
+ if(action==='save'){await save(process.argv[3]||'state');await screenshot(process.argv[3]||'state');}
+}
+socket.addEventListener('open',()=>main().then(()=>{completeCase();socket.close();}).catch(e=>{console.error(e);socket.close();process.exitCode=1;}));
+
+
+
+
+
+
+
+
+
+
+
+
+

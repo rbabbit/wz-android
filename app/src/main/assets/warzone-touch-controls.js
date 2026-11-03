@@ -20,7 +20,7 @@
 (() => {
   "use strict";
 
-  if (window.__kalaWarzoneTouch?.version >= 52) return "already-installed";
+  if (window.__kalaWarzoneTouch?.version >= 54) return "already-installed";
 
   // Android's touch-slop model: tolerate a small finger wobble, then commit
   // immediately to a movement gesture. Scale gently for high-density panels.
@@ -68,6 +68,12 @@
     clickJob: null,
     clickFrame: null,
     clickTimer: null,
+    pointerQueue: [],
+    physicalPointers: new Set(),
+    replayingPointers: false,
+    afterInput: [],
+    nativeFrameContext: null,
+    nativeFrames: 0,
     nativeMusicInput: false,
     stopNonce: null,
     stopTimer: null,
@@ -182,6 +188,7 @@
   }
 
   function own(event) {
+    if(state.replayingPointers)return;
     event.preventDefault();
     event.stopImmediatePropagation();
     state.intercepted += 1;
@@ -255,18 +262,42 @@
     state.mouseButton = null;
   }
 
-  function clickStep(callback) {
+  function observeNativeFrames() {
+    const ctx=window.LaunchedModule?.ctx||window.Module?.ctx;
+    if(!ctx||ctx===state.nativeFrameContext||typeof ctx.clear!=='function'||typeof ctx.getParameter!=='function'||!ctx.FRAMEBUFFER_BINDING)return;
+    const original=ctx.clear;
+    ctx.clear=function(mask,...args){
+      let screen=false;try{screen=ctx.getParameter(ctx.FRAMEBUFFER_BINDING)===null;}catch(_){}
+      const result=original.call(this,mask,...args);
+      if(screen&&(mask&ctx.COLOR_BUFFER_BIT))state.nativeFrames++;
+      return result;
+    };
+    state.nativeFrameContext=ctx;
+  }
+  function pendingNativeInput(){return Boolean(state.clickJob||state.clickQueue.length||state.clickFrame!==null||state.clickTimer!==null||state.pointerQueue.length||window.__warzoneCommands?.report?.()?.nativePendingSites);}
+  function afterNativeInput(callback){if(!pendingNativeInput())return false;state.afterInput.push(callback);return true;}
+  function flushAfterInput(){if(!pendingNativeInput())state.afterInput.splice(0).forEach(callback=>callback());}
+  function pumpPointerQueue(){
+    if(state.clickJob||state.clickQueue.length||state.clickFrame!==null||state.clickTimer!==null||window.__warzoneCommands?.report?.()?.nativePendingSites)return;
+    const event=state.pointerQueue.shift();
+    if(!event){flushAfterInput();return;}
+    state.replayingPointers=true;try{processPointer(event,true);}finally{state.replayingPointers=false;}
+    if(!state.clickJob&&state.clickFrame===null&&state.clickTimer===null)clickStep(()=>{pumpClicks();pumpPointerQueue();});
+  }
+  function clickStep(callback,frames=1) {
+    observeNativeFrames();const clock=state.nativeFrameContext,frame=state.nativeFrames;
     let complete = false;
     const finish = () => {
-      if (complete) return; complete = true;
+      if (complete) return;
       if (state.clickFrame !== null && typeof cancelAnimationFrame === "function") cancelAnimationFrame(state.clickFrame);
       clearTimeout(state.clickTimer); state.clickFrame = null; state.clickTimer = null;
+      // Browser animation frames can run without an engine render/input frame.
+      // Hold each mouse phase until the original renderer has consumed it.
+      if(clock&&clock===state.nativeFrameContext&&state.nativeFrames-frame<frames){schedule();return;}
+      complete = true;
       callback();
     };
-    if (typeof requestAnimationFrame === "function") {
-      state.clickFrame = requestAnimationFrame(finish);
-      state.clickTimer = setTimeout(finish, 50);
-    } else state.clickTimer = setTimeout(finish, 16);
+    const schedule=()=>{if(typeof requestAnimationFrame==='function'){state.clickFrame=requestAnimationFrame(finish);state.clickTimer=setTimeout(finish,50);}else state.clickTimer=setTimeout(finish,16);};schedule();
   }
 
   function cancelClicks() {
@@ -283,7 +314,8 @@
   }
 
   function pumpClicks() {
-    if (state.clickJob || state.clickFrame !== null || state.clickTimer !== null || !state.clickQueue.length) return;
+    if (state.clickJob || state.clickFrame !== null || state.clickTimer !== null) return;
+    if(!state.clickQueue.length){pumpPointerQueue();return;}
     const job = state.clickJob = state.clickQueue.shift();
     focusCanvas(); releaseMouse(); setQueueModifier(job.ctrl, job.ctrl);
     mouseMove(job.x, job.y, 0);
@@ -295,9 +327,9 @@
       state.mouseButton = job.button;
       clickStep(() => {
         if (state.clickJob !== job) return;
-        releaseMouse(job.x, job.y); state.clickJob = null;
+        releaseMouse(job.x, job.y);
         if (!state.queueMode && job.ctrl) setQueueModifier(false);
-        clickStep(pumpClicks);
+        clickStep(()=>{state.clickJob=null;window.dispatchEvent(new CustomEvent('warzone-native-input-finished'));pumpClicks();},2);
       });
     });
   }
@@ -322,6 +354,7 @@
     // their structure list. Queue placements need Ctrl; menu taps do not.
     state.combatLock = false;
     state.autoFight = false;
+    window.__warzoneCommands?.nativeBuildMenuTap?.(x,y);
     trackNativePanelTap(x, y);
     const result = click(0, x, y, false);
     // Keep Ctrl released throughout menu navigation. Restore it on the next
@@ -445,7 +478,7 @@
     if (box) box.classList.toggle("active", state.boxMode);
     if (queue) queue.classList.toggle("active", state.queueMode);
     if (queue) queue.setAttribute("aria-pressed", String(state.queueMode));
-    for (const button of hudDocument.querySelectorAll?.('#blocknight-combat-hud button') || []) {
+    for (const button of hudDocument.querySelectorAll?.('#blocknight-combat-hud button,#wt-field-centre button') || []) {
       button.disabled = Boolean(state.stopNonce);
     }
     for (const preset of Object.keys(ZOOM_PRESETS)) {
@@ -572,6 +605,7 @@
   });
 
   function jumpToBase() {
+    if(afterNativeInput(()=>jumpToBase()))return true;
     if (!writeZoomCommand("base")) return false;
     state.baseJumps += 1;
     vibrate(8);
@@ -787,6 +821,7 @@
   function applyZoomPreset(preset) {
     const spec = ZOOM_PRESETS[preset];
     if (!spec || !canvas()) return false;
+    if(afterNativeInput(()=>applyZoomPreset(preset)))return true;
     const nonce = writeZoomCommand(preset);
     if (!nonce) return false;
 
@@ -909,6 +944,10 @@
     if (bounds.width <= 0 || bounds.height <= 0) return false;
     if (window.__warzoneCommands?.tower) {
       if (window.__warzoneCommands.nativeMenuOpen()) return false;
+      if (window.__warzoneCommands.nativeBuildOpen?.()) {
+        const ui=nativeUiRects(),lx=x-bounds.left,ly=y-bounds.top;
+        if((window.__warzoneCommands.nativeBuildMenuOpen?.()&&inRect(lx,ly,ui.stats))||inRect(lx,ly,ui.objects))return false;
+      }
       return x >= bounds.left && y >= bounds.top && x < bounds.right && y < bounds.bottom;
     }
     const normalizedX = (x - bounds.left) / bounds.width;
@@ -959,8 +998,8 @@
     x -= ui.bounds.left; y -= ui.bounds.top;
     if (x < 0 || y < 0 || x >= ui.bounds.width || y >= ui.bounds.height) return false;
     if (inRect(x, y, ui.reticle)) return false;
-    if (state.nativeObjectsOpen && inRect(x, y, ui.objects)) return false;
-    if (state.nativeStatsOpen && inRect(x, y, ui.stats)) return false;
+    if ((state.nativeObjectsOpen||window.__warzoneCommands?.nativeBuildOpen?.()) && inRect(x, y, ui.objects)) return false;
+    if ((state.nativeStatsOpen||window.__warzoneCommands?.nativeBuildMenuOpen?.()) && inRect(x, y, ui.stats)) return false;
     return true;
   }
 
@@ -1066,7 +1105,7 @@
           "blocknight-stop": "hand-palm", "blocknight-base": "house",
           "blocknight-zoom-close": "x", "blocknight-zoom-battle": "crosshair",
           "blocknight-zoom-map": "map-pin", "blocknight-tech": "flask",
-          "blocknight-help": "question"
+          "blocknight-help": "question", "wt-select-move": "crosshair", "wt-select-trucks": "stack"
         };
         const icon = document.createElement("img");
         icon.src = `/warzone/ui/icons/${iconNames[id]}.svg`;
@@ -1082,15 +1121,15 @@
         return button;
       };
       const all = makeButton("blocknight-select-all", "ALL",
-        "Keep all combat units selected (constructors excluded)", toggleCombatLock);
+        "Keep all combat units selected (constructors excluded)", async()=>{const enabled=state.combatLock;if(window.__warzoneCommands?.afterBuildExit)await window.__warzoneCommands.afterBuildExit(()=>toggleCombatLock(!enabled));else toggleCombatLock(!enabled);});
       const auto = makeButton("blocknight-auto-fight", "AUTO",
-        "Native Patrol orders for all combat units", toggleAutoFight);
+        "Native Patrol orders for all combat units", async()=>{const enabled=state.autoFight;if(window.__warzoneCommands?.afterBuildExit)await window.__warzoneCommands.afterBuildExit(()=>toggleAutoFight(!enabled));else toggleAutoFight(!enabled);});
       const box = makeButton("blocknight-box-select", "BOX",
-        "One-shot rectangle selection: tap BOX, then drag", toggleBoxMode);
+        "One-shot rectangle selection: tap BOX, then drag", async()=>{const enabled=state.boxMode;if(window.__warzoneCommands?.afterBuildExit)await window.__warzoneCommands.afterBuildExit(()=>toggleBoxMode(!enabled));else toggleBoxMode(!enabled);});
       const queue = makeButton("blocknight-queue-orders", "+Q",
         "Sticky build queue: select a structure once, then place it repeatedly", toggleQueueMode);
       const stop = makeButton("blocknight-stop", "STOP",
-        "Stop currently selected units", stopSelected);
+        "Stop currently selected units", async()=>{if(window.__warzoneCommands?.afterBuildExit)await window.__warzoneCommands.afterBuildExit(stopSelected,true);else stopSelected();});
       const base = makeButton("blocknight-base", "BASE",
         "Center camera on HQ", jumpToBase);
       const zoomControl = document.createElement("div");
@@ -1107,8 +1146,8 @@
       zoomControl.append(...zoomButtons);
       const tech = makeButton("blocknight-tech", "TECH",
         "Open the tactical research queue", () => {
-          window.__warzoneCommands?.close?.();
-          window.__blockNightResearch?.open?.();
+          if(window.__warzoneCommands?.afterBuildExit)window.__warzoneCommands.afterBuildExit(()=>window.__blockNightResearch?.open?.());
+          else window.__blockNightResearch?.open?.();
         });
       const help = makeButton("blocknight-help", "HELP", "How to play and use +Q", showHelp);
       const orderGroup = document.createElement("div");
@@ -1133,6 +1172,14 @@
         }
         hud.appendChild(commands);
       }
+      if(window.__warzoneCommands?.tower){
+        const centre=hudDocument.createElement('section');centre.id='wt-field-centre';centre.setAttribute('aria-label','Battlefield command centre');
+        const select=makeButton('wt-select-move','SELECT / MOVE','Exit build placement and return to unit selection and movement',()=>window.__warzoneCommands.selectMode());
+        const trucks=makeButton('wt-select-trucks','TRUCKS','Select the nearby group of construction trucks',()=>window.__warzoneCommands.selectNearbyTrucks());
+        all.querySelector?.('span')&&(all.querySelector('span').textContent='ALL UNITS');
+        auto.querySelector?.('span')&&(auto.querySelector('span').textContent='PATROL');
+        centre.append(select,all,auto,box,stop,trucks);hudDocument.body.appendChild(centre);
+      }
       hud.append(orderGroup, zoomGroup, techGroup);
       (hudDocument.getElementById("warzone-command-strip") || hudDocument.body).appendChild(hud);
     }
@@ -1152,6 +1199,7 @@
   }
 
   function showHelp() {
+    if(window.__warzoneCommands?.nativeBuildOpen?.()){window.__warzoneCommands.afterBuildExit(showHelp);return true;}
     window.__warzoneCommands?.close?.();
     window.__warzoneCommands?.closeNative?.();
     const hudDocument = commandDocument();
@@ -1172,12 +1220,12 @@
           <button type="button" class="wt-help-close" aria-label="Close help">CLOSE</button></header>
         <div class="wt-help-content">
           <section class="wt-help-queue"><h2>BUILD · QUEUE YOUR DEFENCES</h2>
-            <ol><li><b>Open BUILD.</b> Choose a structure and press BUILD THIS.</li>
-              <li><b>Tap each valid location.</b> Every placement queues and the structure stays selected.</li>
-              <li><b>A truck is assigned automatically.</b> Select your own trucks first to use that group instead.</li>
-              <li><b>Press DONE</b> to finish placing, or CHANGE to choose a different structure.</li></ol>
+            <ol><li><b>Open BUILD.</b> Choose a structure in Warzone’s original build list.</li>
+              <li><b>Tap each valid location.</b> Queued sites appear as Warzone’s green building blueprints.</li>
+              <li><b>Nearby trucks work together.</b> BUILD selects the nearby group; multiple manually selected trucks are retained.</li>
+              <li><b>SELECT / MOVE</b> leaves placement and keeps queued work. Placement also ends when your group finishes.</li></ol>
             <p>Invalid taps keep your chosen structure active. STOP cancels selected trucks’ orders,
-              or the automatically assigned builders when no units are selected.</p></section>
+              and clears their remaining native queued sites.</p></section>
           <section><h2>PROTECT YOUR COMMAND CENTRE</h2>
             <p>You have <b>4 minutes to prepare</b>. Wave 1 starts automatically, even if you have not built anything.
               If your command centre is destroyed, you have failed.</p>
@@ -1185,10 +1233,10 @@
           <section><h2>MOVE &amp; LOOK</h2>
             <p><b>Tap</b> to select, move or attack. <b>Swipe</b> to pan. <b>Pinch</b> to zoom.
               <b>Slide two fingers together up/down</b> to tilt the camera. Map edges limit panning.
-              <b>Hold, then drag</b> to select a group, or tap <b>BOX</b> then drag.</p>
+              <b>SELECT / MOVE</b> returns to ordinary unit selection and orders. Tap <b>BOX</b> then drag to select a group.</p>
             <p><b>CLOSE / BATTLE / MAP</b> set camera distance. <b>BASE</b> returns to your command centre.</p></section>
           <section><h2>COMMANDS &amp; RESEARCH</h2>
-            <p><b>MORE</b> contains ALL, AUTO patrol, BOX selection and control size. <b>ALL</b> keeps combat units selected; trucks are excluded.
+            <p>The bottom-left console keeps <b>ALL UNITS</b>, <b>PATROL</b>, <b>BOX</b>, <b>STOP</b> and <b>TRUCKS</b> available. ALL selects combat units; TRUCKS selects the nearby constructor group. MORE contains control size and extra options.
               <b>STOP</b> stops selected units.</p>
             <p><b>TECH</b> opens research. Choose a lab and add available topics to its queue.
               Each lab completes your choices in order. Use <b>BACK TO BATTLE</b> to return.</p>
@@ -1273,7 +1321,7 @@
       radarDragging: false,
       boxOneShot
     };
-    state.single.slop = window.__warzoneCommands?.isPlacement() ? Math.max(TAP_SLOP, 14) : TAP_SLOP;
+    state.single.slop = (window.__warzoneCommands?.isPlacement()||window.__warzoneCommands?.nativeBuildOpen?.()) ? Math.max(TAP_SLOP, 14) : TAP_SLOP;
     focusCanvas();
     if (radar !== null) {
       state.lastRadarPoint = radar;
@@ -1313,6 +1361,7 @@
     if (gesture.panning) return;
     window.__warzoneCommands?.hidePreview?.();
     clearLongPress();
+    gesture.longPressArmed=false;
     releaseMouse();
     gesture.panning = true;
     state.pans += 1;
@@ -1441,28 +1490,46 @@
 
   function handlePointer(event) {
     if (forwardedPointers.has(event)) return;
-    const desktopPlacement = window.__warzoneCommands?.isPlacement()
+    const desktopPlacement = (window.__warzoneCommands?.isPlacement()||window.__warzoneCommands?.nativeBuildOpen?.())
         && (event.pointerType === "mouse" || event.pointerType === "pen");
-    if (event.pointerType !== "touch" && !desktopPlacement && !state.pointers.has(event.pointerId)) return;
+    if (event.pointerType !== "touch" && !desktopPlacement && !state.physicalPointers.has(event.pointerId)) return;
     const target = canvas();
     if (!target) return;
     if (state.stopNonce && event.target === target) { own(event); return; }
+    if(window.__warzoneCommands?.report?.()?.exitingBuild&&!state.physicalPointers.has(event.pointerId)&&event.target===target){own(event);return;}
     if (desktopPlacement && event.target === target) {
       if (event.type === "pointermove" && !state.pointers.has(event.pointerId) && !event.buttons) {
         if (radarPoint(event.clientX, event.clientY) === null) window.__warzoneCommands.previewAt(event.clientX, event.clientY);
         return;
       }
       if (event.type === "pointerdown" && event.button !== 0) {
-        if (event.button === 2) { own(event); window.__warzoneCommands.cancelPlacement(); }
+        if (event.button === 2) { own(event); window.__warzoneCommands.selectMode?.(); }
         return; // Middle-button native camera movement remains available.
       }
     }
-
+    const physical=event.target===target||state.physicalPointers.has(event.pointerId);
+    if(event.type==='pointerdown'){if(event.target!==target)return;state.physicalPointers.add(event.pointerId);}
+    if(!physical)return;
+    if(event.type==='pointerup'||event.type==='pointercancel')state.physicalPointers.delete(event.pointerId);
+    if(pendingNativeInput()){
+      own(event);forwardedPointers.add(event);
+      if(event.type==='pointerdown')capturePointer(target,event.pointerId);
+      if(event.type==='pointerup'||event.type==='pointercancel')releasePointer(target,event.pointerId);
+      if(event.type==='pointermove'){
+        const moves=[];for(let i=state.pointerQueue.length-1;i>=0;i--){const prior=state.pointerQueue[i];if(prior.pointerId!==event.pointerId)continue;if(prior.type!=='pointermove')break;moves.push(i);}
+        if(moves.length>=2)state.pointerQueue.splice(moves[0],1);
+      }
+      state.pointerQueue.push(event);pumpPointerQueue();return;
+    }
+    processPointer(event);
+  }
+  function processPointer(event,replayed=false){
+    const target=canvas();if(!target)return;
     const tracked = state.pointers.has(event.pointerId);
     if (event.type === "pointerdown") {
       if (event.target !== target) return;
       own(event);
-      capturePointer(target, event.pointerId);
+      if(!replayed)capturePointer(target, event.pointerId);
       state.pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
       if (state.pointers.size === 1 && !state.ignoreUntilAllUp) {
         beginSingle(event);
@@ -1479,7 +1546,7 @@
 
     own(event);
     if (event.type === "pointerup" || event.type === "pointercancel") {
-      releasePointer(target, event.pointerId);
+      if(!replayed)releasePointer(target, event.pointerId);
     }
     const point = state.pointers.get(event.pointerId);
     point.x = event.clientX;
@@ -1538,6 +1605,7 @@
       }
 
       const inputElapsed = (Number.isFinite(event.timeStamp) ? event.timeStamp : performance.now()) - gesture.downInputTime;
+      if(inputElapsed>=LONG_PRESS_MS&&!gesture.moved&&!gesture.panning&&!state.queueMode&&!window.__warzoneCommands?.isPlacement()&&isBattlefieldPoint(gesture.startX,gesture.startY))gesture.longPressArmed=true;
       if (gesture.longPressArmed && inputElapsed >= LONG_PRESS_MS) {
         if (!gesture.selecting && distance >= BOX_SELECT_START) {
           beginBoxSelection(gesture);
@@ -1589,6 +1657,8 @@
     gesture.x = event.clientX;
     gesture.y = event.clientY;
     clearLongPress();
+    const heldFor=(Number.isFinite(event.timeStamp)?event.timeStamp:performance.now())-gesture.downInputTime;
+    if(!canceled&&!gesture.moved&&!gesture.panning&&heldFor>=LONG_PRESS_MS&&!state.queueMode&&!window.__warzoneCommands?.isPlacement()&&isBattlefieldPoint(gesture.startX,gesture.startY))gesture.longPressArmed=true;
 
     if (gesture.radar) {
       if (gesture.radarDragging && !canceled) {
@@ -1621,7 +1691,7 @@
       } else if (state.combatLock && isBattlefieldPoint(gesture.x, gesture.y)) {
         queueCombatOrder(gesture.x, gesture.y, state.autoFight);
       } else if (state.queueMode && isQueuePlacementPoint(gesture.x, gesture.y)) {
-        contextualClick(gesture.x, gesture.y, true);
+        if(!window.__warzoneCommands?.queueNativeSite?.(gesture.x,gesture.y,state.replayingPointers))contextualClick(gesture.x, gesture.y, true);
         feedback(gesture.x, gesture.y, "order");
         vibrate(8);
         state.taps += 1;
@@ -1647,6 +1717,9 @@
     releaseTilt();
     releaseCameraKeys();
     cancelClicks();
+    state.pointerQueue.length=0;state.afterInput.length=0;
+    for(const pointerId of state.physicalPointers)releasePointer(canvas(),pointerId);
+    state.physicalPointers.clear();
     for (const pointerId of state.pointers.keys()) releasePointer(canvas(), pointerId);
     state.pointers.clear();
     state.primaryId = null;
@@ -1657,7 +1730,11 @@
       dispatchKey("Control", "ControlLeft", 17, false, false, false, 1);
       state.queueModifierHeld = false;
     }
-    if (clearModes) state.queueMode = false;
+    if (clearModes) {
+      state.queueMode=false;state.combatLock=false;state.autoFight=false;
+      setQueueModifier(false,true);
+      dispatchKey('Shift','ShiftLeft',16,false,false,false,1);
+    }
     updateCombatHud();
     if (state.boxMode) {
       state.boxMode = false;
@@ -1785,7 +1862,7 @@
   }, 500);
   setTimeout(() => clearInterval(canvasTimer), 20000);
   window.__kalaWarzoneTouch = {
-    version: 52,
+    version: 54,
     ready: true,
     key,
     zoom,
@@ -1802,8 +1879,10 @@
     stopSelected,
     jumpToBase,
     nativeClick: (x, y, button = 0) => click(button, x, y),
+    nativeSelectClick: (x,y,add=false)=>click(0,x,y,add),
     nativeUiClick,
     queuedClick: (x, y) => contextualClick(x, y, true),
+    resumeInput: ()=>pumpClicks(),
     nativeMove: (x, y, buttons = 0) => mouseMove(x, y, buttons),
     nativePressKey: (keyValue, code, keyCode, shiftKey = false) => pressKey(keyValue, code, keyCode, shiftKey),
     runSyntheticSuite,
@@ -1813,7 +1892,7 @@
     isGestureActive: () => state.pointers.size > 0 || state.mouseButton !== null || state.heldKeys.size > 0 || state.tiltKey !== null,
     report: () => ({
       active: true,
-      version: 52,
+      version: 54,
       intercepted: state.intercepted,
       mouseEvents: state.mouseEvents,
       taps: state.taps,
@@ -1842,7 +1921,9 @@
       stickyBuildActivations: state.stickyBuildActivations,
       nativeStatsOpen: state.nativeStatsOpen,
       nativeObjectsOpen: state.nativeObjectsOpen,
-      pendingClicks: state.clickQueue.length + (state.clickJob ? 1 : 0),
+      pendingClicks: state.clickQueue.length + (state.clickJob ? 1 : 0) + state.pointerQueue.length + ((state.clickFrame!==null||state.clickTimer!==null)&&!state.clickJob?1:0),
+      nativeRenderFrames: state.nativeFrames,
+      queuedPointerEvents: state.pointerQueue.length,
       selectAlls: state.selectAlls,
       manualSelectAlls: state.manualSelectAlls,
       combatOrders: state.combatOrders,
@@ -1873,3 +1954,4 @@
 
   return "warzone-towers-touch-v49-music-controls";
 })();
+

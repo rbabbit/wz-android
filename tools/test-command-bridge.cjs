@@ -3,7 +3,7 @@ const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/st
 const root=path.resolve(__dirname,'..'),catalog=JSON.parse(fs.readFileSync(path.join(root,'scenario/warzone-towers-catalog.json')));
 const source=fs.readFileSync(path.join(root,'scenario/warzone-towers-commands.js'),'utf8');
 function setup(){
- let droids=[{id:1,x:8,y:8,order:0,type:0,player:0,droidType:2},{id:2,x:30,y:30,order:0,type:0,player:0,droidType:2}],structures=[],selected=[],commands,enumerations=0;
+ let templates=[];let droids=[{id:1,x:8,y:8,order:0,type:0,player:0,droidType:2},{id:2,x:30,y:30,order:0,type:0,player:0,droidType:2}],structures=[],selected=[],commands,enumerations=0;
  const unavailable=new Set(),unreachable=new Set(),calls=[],replies=[],stats={Building:{}};
  for(const b of catalog.buildings)stats.Building[b.name]={Id:b.id,BuildPower:b.power};
  for(const [group,parts]of Object.entries(catalog.components)){stats[group]={};for(const p of parts)stats[group][p.name]={Id:p.id,BuildPower:p.power,WeaponSlots:p.slots||1};}
@@ -17,11 +17,11 @@ function setup(){
  pickStructLocation:(d,id,x,y)=>{const b=catalog.buildings.find(b=>b.id===id);return{x:x+Math.floor(b.width/2),y:y+Math.floor(b.breadth/2)};},
  orderDroidBuild:(d,o,id,x,y)=>{calls.push({op:'build',truck:d.id,id,x,y});d.order=o;return true;},orderDroidObj:(d,o,s)=>{calls.push({op:'help',truck:d.id,id:s.id});d.order=o;return true;},
  orderDroid:(d,o)=>{d.order=o;calls.push({op:'stop',truck:d.id});return true;},
- enumTemplates:()=>[],makeTemplate:(p,name,body,prop,n,...turrets)=>({fullname:name,body,propulsion:prop,cost:123,points:456,droidType:0,weapons:turrets}),
+ enumTemplates:()=>templates,makeTemplate:(p,name,body,prop,n,...turrets)=>({fullname:name,body,propulsion:prop,cost:123,points:456,droidType:0,weapons:turrets}),
  buildDroid:(s,name,body,prop,n,a,...turrets)=>{calls.push({op:'produce',factory:s.id,name,body,prop,turrets});s.busy=true;return true;},
  dump:line=>{if(line.startsWith('WTCMD:'))replies.push(JSON.parse(line.slice(6)));},setTimer(){},queue(){},showInterface(){},hideInterface(){},showReticuleWidget(){}});
  vm.runInContext(source,c);c.wtcmd_initialize();let serial=0;
- return{c,calls,replies,droids,structures,unavailable,unreachable,select:s=>selected=s,resetEnumerations:()=>enumerations=0,enumerations:()=>enumerations,
+ return{c,calls,replies,droids,structures,templates,unavailable,unreachable,select:s=>selected=s,resetEnumerations:()=>enumerations=0,enumerations:()=>enumerations,
  send:(action,data={})=>{commands={revision:String(++serial),commands:[{nonce:`test-${serial}`,action,...data}]};c.wtcmd_poll();return replies.at(-1);},
  replay:()=>{commands.revision=String(++serial);c.wtcmd_poll();return replies.at(-1);}};
 }
@@ -62,5 +62,20 @@ const defence=catalog.buildings.find(b=>b.category==='DEFENCES'&&b.width===1),bo
  assert.equal(t.c.wtcmd_openJobs().length,100);t.resetEnumerations();t.c.wtcmd_tickBuilds();
  assert.ok(t.enumerations()<=2,'100 queued sites must reuse native structure enumeration, not marshal 100 native arrays every tick');
  assert.equal(t.calls.length,0,'100 waiting jobs still must not overwrite busy native work');
+}
+{
+ const t=setup();for(let i=0;i<13;i++)t.droids.push({id:10+i,x:8+i%3,y:8+Math.floor(i/3)%3,order:0,type:0,player:0,droidType:2});
+ const r=t.send('queue-build',{itemId:defence.id,x:9,y:9});assert.equal(r.result.workers.length,14,'automatic group has no one-truck or three-truck cap');assert.ok(!r.result.workers.includes(2),'distant group is excluded');
+}
+{
+ const t=setup();t.structures.push({id:31,type:1,player:0,stattype:4,status:1});t.templates.push({id:'',fullname:'Generated design F31',name:'',body:body.id,propulsion:prop.id,weapons:[weapon.id],droidType:0,cost:123,points:456});
+ t.templates.push({...t.templates[0]});const snapshot=t.send('state').result;assert.equal(snapshot.templates.length,1,'equivalent generated native templates appear once');
+ const key=snapshot.templates[0].id;assert.ok(key.startsWith('native:'));assert.equal(t.send('queue-production',{factoryId:31,count:1,templateId:key}).ok,true,'generated native designs with empty engine IDs remain producible');
+}
+{
+ const t=setup();t.c.getDroidLimit=(player,type)=>type===2?2:150;t.structures.push({id:31,type:1,player:0,stattype:4,status:1});
+ const construct=catalog.components.Construct[0];t.templates.push({id:'Constructor',fullname:'Constructor',body:body.id,propulsion:prop.id,weapons:[],construct:construct.id,droidType:2,cost:62,points:310});
+ assert.equal(t.send('queue-production',{factoryId:31,count:1,templateId:'Constructor'}).ok,true);assert.equal(t.calls.length,0,'capacity wait must not start an impossible native build');
+ assert.equal(t.send('state').result.factories[0].waitingReason.kind,'constructors');t.droids.pop();t.c.wtcmd_tickProduction();assert.equal(t.calls.at(-1).op,'produce','normal production resumes after capacity frees');
 }
 console.log('PASS: FIFO builds, manual/automatic workers, sticky sessions, STOP, deduplication, validation, factory queues and bounded 100-job polling');

@@ -18,6 +18,7 @@ var wtcmd_nativeMenu = "";
 var wtcmd_finishedUnits = [];
 var wtcmd_finishedBuilds = [];
 var wtcmd_structureCache = null;
+var wtcmd_buildGeneration = 0;
 
 wtcmd_catalog.buildings.forEach(function (item) { wtcmd_buildings[item.id] = item; });
 Object.keys(wtcmd_catalog.components).forEach(function (group) {
@@ -82,6 +83,29 @@ function wtcmd_partAvailable(id)
     return Boolean(wtcmd_components[id] && wtcmd_native[id] && componentAvailable(id));
 }
 
+function wtcmd_selectedUnits()
+{
+    return enumSelected().filter(function(d){return d.type===DROID&&d.player===selectedPlayer;}).map(function(d){return {id:d.id,x:d.x,y:d.y,z:d.z,order:d.order,constructor:wtcmd_isBuilder(d)};});
+}
+function wtcmd_templateKey(t)
+{
+    return t.id || "native:" + JSON.stringify([t.fullname||t.name,t.body,t.propulsion,t.weapons||[],t.construct||"",t.sensor||"",t.repair||"",t.brain||"",t.ecm||""]);
+}
+function wtcmd_capacityWait(design)
+{
+    if (!design || typeof getDroidLimit !== "function") return null;
+    const units=enumDroid(selectedPlayer,DROID_ANY),general=getDroidLimit(selectedPlayer);
+    if (units.length>=general) return {kind:"units",current:units.length,limit:general};
+    if (design.droidType===DROID_CONSTRUCT) {
+        const count=units.filter(wtcmd_isBuilder).length,limit=getDroidLimit(selectedPlayer,DROID_CONSTRUCT);
+        if(count>=limit)return {kind:"constructors",current:count,limit:limit};
+    }
+    if (typeof DROID_COMMAND!=="undefined" && design.droidType===DROID_COMMAND) {
+        const count=units.filter(function(d){return d.droidType===DROID_COMMAND;}).length,limit=getDroidLimit(selectedPlayer,DROID_COMMAND);
+        if(count>=limit)return {kind:"commanders",current:count,limit:limit};
+    }
+    return null;
+}
 function wtcmd_snapshot()
 {
     const buildings = wtcmd_catalog.buildings.filter(function (item) {
@@ -90,25 +114,35 @@ function wtcmd_snapshot()
         return { id: item.id, power: Number(wtcmd_native[item.id].value.BuildPower || 0) };
     });
     const parts = Object.keys(wtcmd_components).filter(wtcmd_partAvailable);
-    const templates = enumTemplates(selectedPlayer).filter(wtcmd_templateAvailable);
+    // buildDroid may leave equivalent generated templates with empty engine IDs.
+    // Present one producible entry per stable key rather than repeated cards.
+    const templateKeys = new Set();
+    const templates = enumTemplates(selectedPlayer).filter(wtcmd_templateAvailable).filter(function (t) {
+        const key = wtcmd_templateKey(t);
+        if (templateKeys.has(key)) return false;
+        templateKeys.add(key); return true;
+    });
     const factories = enumStruct(selectedPlayer).filter(function (s) {
         return s.stattype === FACTORY || s.stattype === CYBORG_FACTORY || s.stattype === VTOL_FACTORY;
     }).sort(function (a, b) { return a.id - b.id; }).map(function (s, index) {
         return { id: s.id, number: index + 1, x: s.x, y: s.y, type: s.stattype,
             kind: s.stattype === CYBORG_FACTORY ? "Cyborg factory" : s.stattype === VTOL_FACTORY ? "VTOL factory" : "Factory",
-            templates: templates.filter(function (t) { return wtcmd_factoryAllows(wtcmd_templateParts(t), s); }).map(function (t) { return t.id; }),
+            templates: templates.filter(function (t) { return wtcmd_factoryAllows(wtcmd_templateParts(t), s); }).map(wtcmd_templateKey),
             modules: s.modules || 0, ready: s.status === BUILT, idle: structureIdle(s),
             active: wtcmd_factoryActive[String(s.id)] || null,
+            waitingReason: wtcmd_capacityWait((wtcmd_factoryActive[String(s.id)] || (wtcmd_production[String(s.id)] || [])[0])?.design),
             queue: wtcmd_production[String(s.id)] || [] };
     });
     return { version: 1, gameTime: gameTime, player: selectedPlayer, power: playerPower(selectedPlayer),
         mapWidth: mapWidth, mapHeight: mapHeight, alwaysQueue: true,
         hasHQ: enumStruct(selectedPlayer, HQ).some(function (s) { return s.status === BUILT; }),
+        selectedUnits: wtcmd_selectedUnits(),
         buildings: buildings, parts: parts, trucks: wtcmd_builders().map(function (d) {
             return { id: d.id, x: d.x, y: d.y, z: d.z, selected: Boolean(d.selected), order: d.order,
+                building: d.order===DORDER_BUILD||d.order===DORDER_HELPBUILD||(typeof DORDER_LINEBUILD!=="undefined"&&d.order===DORDER_LINEBUILD)||(typeof DORDER_BUILDMODULE!=="undefined"&&d.order===DORDER_BUILDMODULE),
                 queued: (wtcmd_workers[String(d.id)] || []).length };
         }), jobs: wtcmd_openJobs(), factories: factories, nativeMenu: wtcmd_nativeMenu,
-        templates: templates, finishedUnits: wtcmd_finishedUnits.slice(-16), finishedBuilds: wtcmd_finishedBuilds.slice(-32) };
+        templates: templates.map(function(t){return Object.assign({},t,{id:wtcmd_templateKey(t)});}), finishedUnits: wtcmd_finishedUnits.slice(-16), finishedBuilds: wtcmd_finishedBuilds.slice(-32) };
 }
 
 function wtcmd_answer(command, ok, reason, result)
@@ -148,7 +182,10 @@ function wtcmd_chooseWorkers(command, x, y)
         const db = (b.x - x) * (b.x - x) + (b.y - y) * (b.y - y);
         return da - db || a.id - b.id;
     });
-    if (automatic) candidates = candidates.slice(0, 1);
+    if (automatic && candidates.length) {
+        const anchor = candidates[0];
+        candidates = candidates.filter(function (d) { return Math.hypot(d.x - anchor.x, d.y - anchor.y) <= 8; });
+    }
     return { units: candidates, automatic: automatic };
 }
 
@@ -317,7 +354,7 @@ function wtcmd_templateParts(template)
             return false;
         });
     }
-    return { name: template.fullname || template.name, body: template.body,
+    return { name: String(template.fullname || template.name).replace(/(?: · F\d+)+$/, ""), body: template.body,
         propulsion: template.propulsion, turrets: turrets, cost: template.cost,
         points: template.points, droidType: template.droidType };
 }
@@ -354,7 +391,7 @@ function wtcmd_queueProduction(command)
     }
     let design;
     if (command.templateId) {
-        const native = enumTemplates(selectedPlayer).filter(function (t) { return t.id === command.templateId; })[0];
+        const native = enumTemplates(selectedPlayer).filter(function (t) { return wtcmd_templateKey(t) === command.templateId; })[0];
         if (!native || !wtcmd_templateAvailable(native)) { wtcmd_answer(command, false, "template-unavailable"); return; }
         design = wtcmd_templateParts(native);
     } else {
@@ -390,6 +427,8 @@ function wtcmd_tickProduction()
         }
         if (!jobs.length || jobs[0].status === "blocked") return;
         const job = jobs[0], d = job.design;
+        if(wtcmd_capacityWait(d)){job.status="waiting";job.reason="unit-capacity";return;}
+        job.status="queued";job.reason="";
         // buildDroid replaces equal-name templates. A stable factory suffix
         // prevents production at one factory cancelling another factory's unit.
         const nativeName = d.name + " · F" + factory.id;
@@ -457,12 +496,13 @@ function wtcmd_poll()
                 wtcmd_answer(command, true, "");
             }
             else if (command.action === "native-menu") {
-                const codes = { stats: 5, commanders: 6, factory: 1, close: 0 };
+                const codes = { stats: 5, commanders: 6, factory: 1, build: 3, close: 0 };
                 if (!Object.prototype.hasOwnProperty.call(codes, command.menu)) { wtcmd_answer(command, false, "invalid"); return; }
+                if(command.menu==="build")++wtcmd_buildGeneration;
                 showInterface();showReticuleWidget(0);
                 if (codes[command.menu]) showReticuleWidget(codes[command.menu]);
                 hideInterface();wtcmd_nativeMenu = command.menu === "close" ? "" : command.menu;
-                wtcmd_answer(command, true, "", { menu: wtcmd_nativeMenu });
+                wtcmd_answer(command, true, "", { menu: wtcmd_nativeMenu, generation: wtcmd_buildGeneration });
             }
             else wtcmd_answer(command, false, "invalid");
         } catch (error) { wtcmd_answer(command, false, "engine-rejected", { detail: String(error.message || error) }); }
@@ -493,4 +533,15 @@ function wtcmd_eventDroidBuilt(droid, factory)
     wtcmd_finishedUnits.push({ id: droid.id, factoryId: factory.id, name: active.design.name,
         body: active.design.body, propulsion: active.design.propulsion, gameTime: gameTime });
     wtcmd_finishedUnits = wtcmd_finishedUnits.slice(-32);
+}
+
+function wtcmd_eventSelectionChanged()
+{
+    if (!wtcmd_started) return;
+    dump("WTCMD:"+JSON.stringify({nonce:"selection",action:"selection",ok:true,result:wtcmd_selectedUnits(),gameTime:gameTime}));
+}
+
+function wtcmd_eventMenuBuildSelected()
+{
+    if(wtcmd_started)dump("WTCMD:"+JSON.stringify({nonce:"build-ready",action:"build-ready",ok:true,generation:wtcmd_buildGeneration,gameTime:gameTime}));
 }

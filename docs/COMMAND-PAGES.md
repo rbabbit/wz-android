@@ -40,6 +40,10 @@ It does not edit shaders, engine program code, WASM, models or textures. Pan,
 pinch, tilt and minimap gestures remain native input. Camera movement hides the
 old footprint; a tap previews its new site. Invalid placements show red feedback.
 
+v4.9 also accepts mouse/pen placement, preserves native middle-button camera
+input, supports right-click cancellation, and tolerates small touch drift while
+placing. Optimized original terrain shaders remain eligible for projection.
+
 ## Designs and production
 
 DESIGN selects researched body, propulsion and weapon/system components. Multiple
@@ -50,7 +54,11 @@ and starts no production.
 
 Saved Designs is an app-private JSON library, persisted through the Android
 bridge. It survives process restart and APK updates using the same signing key.
-Saved designs can be reopened, edited or deleted. Research is checked again in
+NEW DESIGN starts a separate, automatically named draft. SAVE CHANGES updates
+the selected blueprint; SAVE AS NEW gives the copy a distinct identity. Saved
+designs can be reopened, edited or deleted. Late validation/save replies cannot
+replace a newer draft or redirect a later page; repeated Save is suppressed,
+and a failed save can be retried. Research is checked again in
 each new battle. Deleting a library entry does not mutate production already
 queued from it. The library is bounded to 100 designs/256 KiB.
 
@@ -78,6 +86,10 @@ Units are confirmed through native `eventDroidBuilt`, not a wrapper timer.
   wrapper UI, private library, terrain observation and input handoff.
 - `tools/generate-command-catalog.py`: reads packaged original stats and existing
   icons into both catalogue copies; never changes the stats.
+- `tools/user-flow-audit.cjs`: trusted mouse/pen/touch, actual Android component
+  pickers, new/edit/copy, production, restart and focused search tests.
+- `tools/test-command-pages.cjs`: deterministic validation/save/menu race and
+  persistence-failure regressions.
 - `tools/command-audit.cjs`: real Android taps, native QuickSave proof, six-worker
   checks, overlay returns and transport bursts. Its default QA output is v4.8.
 

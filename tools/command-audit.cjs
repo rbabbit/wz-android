@@ -122,7 +122,7 @@ async function main(){
  }
  if(action==='matrix'){
   const assert=require('node:assert/strict');
-  await button('#wt-open-build');await button('[data-build="WallTower02"]');await button('#blocknight-zoom-close');await mapTo(7,36);
+  await button('#wt-open-build');await button('[data-category="ALL"]');await button('[data-build="WallTower02"]');await button('#blocknight-zoom-close');await mapTo(7,36);
   const historyStart=await evaluate('__warzoneCommands.report().history.length');
   const results=[];
   const sites=JSON.parse(process.env.WZ_QA_SITES||'[[8,36],[9,36],[8,38]]');
@@ -144,7 +144,7 @@ async function main(){
   // then uses this manually selected group rather than assigning an auto truck.
   await evaluate('__kalaWarzoneTouch.selectAllUnits();true');await wait(300);
   await evaluate('__warzoneCommands.send("state")');report=await snapshot('matrix-manual-selected');assert.equal(report.snapshot.trucks.filter(t=>t.selected).length,6);
-  await button('#wt-open-build');await button('[data-build="PillBox1"]');
+  await button('#wt-open-build');await button('[data-category="ALL"]');await button('[data-build="PillBox1"]');
   const p=await projectTile(7,35);await tap(...p);await settle();report=await snapshot('matrix-manual-six');
   const manual=report.history.filter(r=>r.action==='queue-build').at(-1);assert.equal(manual.ok,true);assert.equal(manual.result.automatic,false);assert.equal(manual.result.workers.length,6);
   results.push({case:'manual-six',accepted:manual.result});
@@ -169,7 +169,7 @@ async function main(){
  }
  if(action==='gestures'){
   const assert=require('node:assert/strict');
-  await button('#wt-open-build');await button('[data-build="WallTower02"]');await button('#blocknight-zoom-close');await mapTo(7,36);
+  await button('#wt-open-build');await button('[data-category="ALL"]');await button('[data-build="WallTower02"]');await button('#blocknight-zoom-close');await mapTo(7,36);
   const before=await save('gestures-before'),[w,h]=await evaluate('[innerWidth,innerHeight]'),count=await evaluate('__warzoneCommands.report().placements');
   await gesture([[w*.4,h*.35]],[[w*.52,h*.46]]);const panned=await save('gestures-pan');
   assert.notDeepEqual(panned['gam.json'].viewDataP,before['gam.json'].viewDataP,'one finger changes native camera position');

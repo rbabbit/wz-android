@@ -64,6 +64,7 @@ class FakeElement {
   }
 
   dispatchEvent(event) {
+    if(event.type.startsWith('pointer')){event.target=this;documentListeners.get(event.type)?.(event);}
     this.events.push(event);
     return true;
   }
@@ -143,7 +144,7 @@ async function run() {
     await sleep(20);
     assert.equal(controls.report().pendingClicks,0,'native input queue must drain');
   };
-  assert.equal(controls.version, 51);
+  assert.equal(controls.version, 52);
   assert.equal(controls.showCombatHud(), true);
   assert.equal(elements.has("blocknight-music"),false,"battle header must not expose Music navigation");
   assert.equal(controls.openMusic,undefined);
@@ -391,6 +392,19 @@ async function run() {
   controls.toggleQueueMode(false);
   assert.ok(canvas.events.filter(e=>e.code==='ControlLeft').every(e=>e.location===1),
       'native Ctrl press and release must both use the left modifier scancode');
+  controls.releaseAll(true);
+  const placed=[],previewed=[];let placing=true;
+  window.__warzoneCommands={tower:true,isPlacement:()=>placing,nativeMenuOpen:()=>false,
+    placeAt:(x,y)=>placed.push([x,y]),previewAt:(x,y)=>previewed.push([x,y]),hidePreview(){},cancelPlacement:()=>placing=false};
+  const pointer=(type,id,x,y,kind,button=0,buttons=type==='pointerup'?0:1)=>documentListeners.get(type)(new FakeInputEvent(type,{target:canvas,pointerId:id,clientX:x,clientY:y,pointerType:kind,button,buttons,timeStamp:performance.now()}));
+  for(const kind of ['mouse','pen','touch']){pointer('pointerdown',600,420,250,kind);pointer('pointerup',600,420,250,kind);}
+  assert.equal(placed.length,3,'mouse, pen and touch all use the custom build scheduler');
+  pointer('pointerdown',601,420,250,'touch');pointer('pointermove',601,431,257,'touch');pointer('pointerup',601,431,257,'touch');
+  assert.equal(placed.length,4,'small natural finger drift must remain a placement tap');
+  pointer('pointerdown',602,420,250,'pen');pointer('pointercancel',602,420,250,'pen');assert.equal(placed.length,4,'cancelled stylus input must not build');
+  pointer('pointerdown',603,420,250,'mouse',2,2);assert.equal(placing,false,'right click exits placement');
+  assert.equal(controls.report().gestureActive,false);
+  delete window.__warzoneCommands;
   console.log("PASS: sticky building across menus and BASE, tablet lobby coordinates, absolute zoom, rapid switching, and pinch cancellation");
   process.exit(0);
 }

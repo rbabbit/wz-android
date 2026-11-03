@@ -8,7 +8,8 @@
   const state = {page:'',catalog:null,snapshot:null,pending:new Map(),serial:0,writes:0,acks:0,
     timeouts:0,lastWrite:0,lastPoll:0,nativeMenu:'',history:[],placement:null,session:'',category:'DEFENCES',search:'',
     selected:'',saved:[],draft:{id:'',name:'',body:'',propulsion:'',turrets:['']},validation:null,
-    validationSerial:0,factory:0,notice:'',size:1,opens:0,closes:0,placements:0,rejects:0};
+    validationSerial:0,saving:new Set(),factory:0,productionCount:1,menuRevision:0,nativeMenuPending:false,
+    notice:'',size:1,opens:0,closes:0,placements:0,rejects:0,scroll:{}};
   const esc = value => String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const element = id => doc.getElementById(id);
   const module = () => window.LaunchedModule?.FS ? window.LaunchedModule : window.Module;
@@ -29,7 +30,7 @@
 
   function loadSaved(){
     try { const value=JSON.parse(window.BlockNightAndroid?.loadDesigns?.() || localStorage.getItem('wt-designs-v1') || '{}');
-      state.saved=Array.isArray(value.designs)?value.designs.slice(0,100):[];
+      state.saved=Array.isArray(value.designs)?value.designs.filter(d=>d&&d.id&&d.name&&d.body&&d.propulsion&&Array.isArray(d.turrets)&&d.turrets.length>0&&d.turrets.length<=3).slice(0,100):[];
       state.size=Number(localStorage.getItem('wt-command-size'))||1;
     } catch (_) {state.saved=[];}
   }
@@ -58,7 +59,7 @@
     state.pending.delete(reply.nonce);state.acks++;
     if(!['state','preview-build','validate-design'].includes(reply.action)){state.history.push(reply);state.history=state.history.slice(-100);}
     if(reply.action==='state'&&reply.ok){const before=state.snapshot;
-      const changed=before&&(before.buildings.map(b=>b.id).join()!==reply.result.buildings.map(b=>b.id).join()||before.parts.join()!==reply.result.parts.join());
+      const changed=before&&(before.buildings.map(b=>b.id).join()!==reply.result.buildings.map(b=>b.id).join()||before.parts.join()!==reply.result.parts.join()||JSON.stringify(before.factories.map(f=>[f.id,f.ready,f.modules,f.templates]))!==JSON.stringify(reply.result.factories.map(f=>[f.id,f.ready,f.modules,f.templates]))||JSON.stringify(before.templates)!==JSON.stringify(reply.result.templates));
       state.snapshot=reply.result;updateHUD();refreshLive();if(changed&&['build','saved','factory'].includes(state.page))render();}
     if(!reply.ok)state.rejects++;
     pending.resolve(reply);flush(true);
@@ -116,28 +117,35 @@
     install();window.__blockNightResearch?.close?.();
     const help=element('warzone-towers-help-overlay');
     if(help&&!help.hidden)help.querySelector('.wt-help-back')?.click();
-    if(state.nativeMenu)closeNative();
+    if(state.nativeMenu||state.nativeMenuPending)closeNative();
     if(page==='stats'||page==='commanders'){openNative(page);return;}
+    if(state.page)state.scroll[state.page]=element('wt-page-content')?.scrollTop||0;
     if(state.page!==page)state.notice='';
     state.page=page;state.opens++;element('wt-command-pages').hidden=false;
+    window.__warzoneCommands?.hidePreview?.();
     const frame=element('warzone-game-frame');if(frame)frame.inert=true;
-    window.__kalaWarzoneTouch?.releaseAll?.();render();requestState();
+    window.__kalaWarzoneTouch?.releaseAll?.();render();element('wt-page-content').scrollTop=state.scroll[page]||0;requestState();
   }
   function close(){
     if(!state.page)return;
+    state.scroll[state.page]=element('wt-page-content')?.scrollTop||0;
     state.page='';state.closes++;element('wt-command-pages').hidden=true;
     const frame=element('warzone-game-frame');if(frame)frame.inert=false;
     host.WarzoneHost?.restoreBattlefield?.();document.getElementById('canvas')?.focus({preventScroll:true});
   }
   function openNative(menu){
     cancelPlacement();close();window.__blockNightResearch?.close?.();
-    send('native-menu',{menu}).then(r=>{if(!r.ok){notify(reason(r.reason));return;}
-      state.nativeMenu=menu;element('wt-native-back').hidden=false;document.getElementById('canvas')?.focus({preventScroll:true});});
+    const revision=++state.menuRevision;state.nativeMenu=menu;state.nativeMenuPending=true;element('wt-native-back').hidden=false;
+    send('native-menu',{menu}).then(r=>{if(revision!==state.menuRevision)return;
+      state.nativeMenuPending=false;
+      if(!r.ok){state.nativeMenu='';element('wt-native-back').hidden=true;notify(reason(r.reason));return;}
+      document.getElementById('canvas')?.focus({preventScroll:true});});
   }
   function closeNative(){
-    if(!state.nativeMenu)return Promise.resolve();
+    if(!state.nativeMenu&&!state.nativeMenuPending)return Promise.resolve();
+    const revision=++state.menuRevision;state.nativeMenuPending=false;
     state.nativeMenu='';element('wt-native-back').hidden=true;
-    return send('native-menu',{menu:'close'}).then(r=>{if(!r.ok)notify(reason(r.reason));});
+    return send('native-menu',{menu:'close'}).then(r=>{if(!r.ok&&revision===state.menuRevision)notify(reason(r.reason));});
   }
   function requestState(){if(!Array.from(state.pending.values()).some(p=>p.command.action==='state'))send('state');state.lastPoll=Date.now();}
   function render(){
@@ -147,7 +155,7 @@
     const content=element('wt-page-content');
     if(!state.snapshot||!state.catalog){content.innerHTML='<p class="wt-empty">Connecting to the battlefield…</p>';return;}
     const pages={build:renderBuild,design:renderDesign,saved:renderSaved,factory:renderFactory,queue:renderQueue,more:renderMore};
-    content.innerHTML=(pages[state.page]||renderBuild)();
+    const scroll=content.scrollTop;content.innerHTML=(pages[state.page]||renderBuild)();content.scrollTop=scroll;
     element('wt-command-notice').textContent=state.notice;
   }
   function renderBuild(){
@@ -155,21 +163,23 @@
     return `<div class="wt-page-intro"><p>Choose a structure, then tap the battlefield to place it. Every placement queues.</p><span class="wt-tag" id="wt-build-mode">${builderMode()}</span></div>
       <div class="wt-filter-row"><div>${['DEFENCES','STRUCTURES','MODULES','ALL'].map(c=>button(c,`data-category="${c}"`,state.category===c?'active':'')).join('')}</div>
       <input id="wt-build-search" type="search" placeholder="Find a structure" aria-label="Find a structure" value="${esc(state.search)}"></div>
-      <div class="wt-card-grid">${items.map(b=>`<article class="wt-command-card">${image(b)}<div><h2>${esc(b.name)}</h2><p>${b.width} × ${b.breadth} tiles <span>⚡ ${Math.round(b.power)}</span></p></div>
-      ${button('BUILD THIS',`data-build="${esc(b.id)}"`,'wt-primary')}</article>`).join('')||'<p class="wt-empty">No structures in this category yet. Research more in TECH.</p>'}</div>`;
+      <div class="wt-card-grid" id="wt-build-grid">${buildCards(items)}</div>`;
   }
+  function buildCards(items){return items.map(b=>`<article class="wt-command-card">${image(b)}<div><h2>${esc(b.name)}</h2><p>${b.width} × ${b.breadth} tiles <span>⚡ ${Math.round(b.power)}</span></p></div>${button('BUILD THIS',`data-build="${esc(b.id)}"`,'wt-primary')}</article>`).join('')||'<p class="wt-empty">No structures in this category yet. Research more in TECH.</p>';}
   function selectOptions(group,selected,placeholder){return `<option value="">${placeholder}</option>`+availableParts(group).map(p=>`<option value="${esc(p.id)}" ${p.id===selected?'selected':''}>${esc(p.name)}</option>`).join('');}
   function turretOptions(selected){return '<option value="">Choose weapon or system</option>'+['Weapon','Construct','Repair','Sensor','ECM','Brain'].map(g=>{
     const parts=availableParts(g);return parts.length?`<optgroup label="${g}">${parts.map(p=>`<option value="${esc(p.id)}" ${p.id===selected?'selected':''}>${esc(p.name)}</option>`).join('')}</optgroup>`:'';}).join('');}
   function renderDesign(){
     const d=state.draft,b=findPart(d.body),slots=Math.min(3,b?.slots||1);
-    return `<div class="wt-page-intro"><p>Design with the components you have researched. Warzone checks compatibility before saving.</p>${state.snapshot.hasHQ?'':'<span class="wt-tag">COMMAND CENTRE REQUIRED</span>'}</div>
+    const editing=state.saved.some(s=>s.id===d.id),busy=state.saving.has(d.id);
+    return `<div class="wt-page-intro"><p>Choose a body, propulsion and weapon or system, then save your blueprint.</p>${button('NEW DESIGN','data-action="new-design"','wt-primary')}${state.snapshot.hasHQ?'':'<span class="wt-tag">COMMAND CENTRE REQUIRED</span>'}</div>
       <div class="wt-design-layout"><form id="wt-design-form"><label>DESIGN NAME<input id="wt-design-name" maxlength="48" value="${esc(d.name)}" placeholder="Name your unit"></label>
       <div class="wt-design-step"><span>01</span><label>BODY<select id="wt-design-body">${selectOptions('Body',d.body,'Choose body')}</select></label>${image(b)}</div>
       <div class="wt-design-step"><span>02</span><label>PROPULSION<select id="wt-design-propulsion">${selectOptions('Propulsion',d.propulsion,'Choose propulsion')}</select></label>${image(findPart(d.propulsion))}</div>
       <div class="wt-design-step"><span>03</span><div>${Array.from({length:slots},(_,i)=>`<label>${i===0?'WEAPON / SYSTEM':'ADDITIONAL WEAPON (OPTIONAL)'}<select data-turret="${i}">${turretOptions(d.turrets[i]||'')}</select></label>`).join('')}</div>${image(findPart(d.turrets[0]))}</div>
-      </form><aside class="wt-design-summary"><span class="wt-eyebrow">BLUEPRINT</span><h2 id="wt-blueprint-name">${esc(d.name||'New design')}</h2><p id="wt-design-valid">${state.validation?.ok?`POWER ${state.validation.result.cost} · BUILD POINTS ${state.validation.result.points}`:esc(state.validation?reason(state.validation.reason):'Choose components to validate your design.')}</p>
-      ${button('SAVE DESIGN','data-action="save-design" id="wt-save-design"'+(!state.validation?.ok?' disabled':''),'wt-primary')}
+      </form><aside class="wt-design-summary"><span class="wt-eyebrow">${editing?'EDITING SAVED DESIGN':'NEW BLUEPRINT'}</span><h2 id="wt-blueprint-name">${esc(d.name||'New design')}</h2><p id="wt-design-valid" role="status" aria-live="polite">${state.validation?.ok?`POWER ${state.validation.result.cost} · BUILD POINTS ${state.validation.result.points}`:esc(state.validation?reason(state.validation.reason):'Choose components to validate your design.')}</p>
+      ${button(busy?'SAVING…':editing?'SAVE CHANGES':'SAVE DESIGN','data-action="save-design" id="wt-save-design"'+(!state.validation?.ok||busy?' disabled':''),'wt-primary')}
+      ${editing?button('SAVE AS NEW','data-action="save-as-new" id="wt-save-as-new"'+(!state.validation?.ok||busy?' disabled':'')):''}
       <p>Saved designs stay on this device. Produce them from FACTORY using normal power and build time.</p>${button('SAVED DESIGNS','data-page="saved"')}</aside></div>`;
   }
   function renderSaved(){return `<div class="wt-page-intro"><p>Your blueprints stay saved between games. Components must be researched in the current battle to produce them.</p>${button('NEW DESIGN','data-action="new-design"','wt-primary')}</div>
@@ -179,7 +189,7 @@
     const factory=factories.find(f=>f.id===state.factory);
     const designs=state.saved.filter(availableDesign);
     return `<div class="wt-page-intro"><p>Production uses normal factory time and power. Additional units queue behind the current job.</p>${button('FACTORY CONTROLS','data-action="native-factory"')}</div>
-      ${factory?`<div class="wt-filter-row"><label>FACTORY <select id="wt-factory-select">${factories.map(f=>`<option value="${f.id}" ${f.id===state.factory?'selected':''}>${esc(f.kind||'Factory')} ${f.number} · ${f.modules} module${f.modules===1?'':'s'}</option>`).join('')}</select></label><label>QUANTITY <select id="wt-produce-count"><option>1</option><option>5</option><option>10</option><option>20</option></select></label></div>
+      ${factory?`<div class="wt-filter-row"><label>FACTORY <select id="wt-factory-select">${factories.map(f=>`<option value="${f.id}" ${f.id===state.factory?'selected':''}>${esc(f.kind||'Factory')} ${f.number} · ${f.modules} module${f.modules===1?'':'s'}</option>`).join('')}</select></label><label>QUANTITY <select id="wt-produce-count">${[1,5,10,20].map(n=>`<option ${n===state.productionCount?'selected':''}>${n}</option>`).join('')}</select></label></div>
       <div id="wt-factory-progress">${factoryProgress(factory)}</div><h2 class="wt-section-title">SAVED DESIGNS</h2><div class="wt-card-grid">${designs.map(d=>productionCard(d,false)).join('')||'<p>No researched saved designs yet.</p>'}</div>
       <h2 class="wt-section-title">EXISTING UNIT DESIGNS</h2><div class="wt-card-grid">${state.snapshot.templates.filter(d=>!factory.templates||factory.templates.includes(d.id)).map(d=>productionCard(d,true)).join('')||'<p>No existing designs.</p>'}</div>`:
       '<p class="wt-empty">No completed factory. Open BUILD → STRUCTURES to place one.</p>'}`;
@@ -237,37 +247,48 @@
       if(polygon&&!r.ok){polygon.setAttribute('stroke','#f28777');polygon.setAttribute('fill','#e2605044');}
       notify(r.ok?`${item.name} queued · ${r.result.workers.length} truck${r.result.workers.length===1?'':'s'} assigned`:reason(r.reason));requestState();});return true;
   }
+  let validationTimer;
+  function resetDraft(saved){
+    clearTimeout(validationTimer);++state.validationSerial;state.validation=null;
+    let n=1;while(state.saved.some(d=>d.name===`Design ${n}`))n++;
+    state.draft=saved?JSON.parse(JSON.stringify(saved)):{id:`design-${Date.now()}-${++state.serial}`,name:`Design ${n}`,body:'',propulsion:'',turrets:['']};state.scroll.design=0;
+  }
   function readDraft(){
     const d=state.draft;d.name=element('wt-design-name')?.value??d.name;
     d.body=element('wt-design-body')?.value??d.body;d.propulsion=element('wt-design-propulsion')?.value??d.propulsion;
-    const selects=element('wt-design-form')?.querySelectorAll('[data-turret]');if(selects)d.turrets=Array.from(selects).map(s=>s.value).filter(Boolean);
+    const selects=element('wt-design-form')?.querySelectorAll('[data-turret]');if(selects)d.turrets=Array.from(selects).map(s=>s.value);
   }
-  let validationTimer;
+  function designStatus(){
+    const r=state.validation,busy=state.saving.has(state.draft.id),label=element('wt-design-valid');
+    if(label)label.textContent=r?.ok?`POWER ${r.result.cost} · BUILD POINTS ${r.result.points}`:r?reason(r.reason):'Choose components to validate your design.';
+    for(const id of ['wt-save-design','wt-save-as-new']){const b=element(id);if(b)b.disabled=!r?.ok||busy;}
+  }
+  function payload(d){return {...d,turrets:d.turrets[0]?d.turrets.filter(Boolean):[]};}
   function validateDraft(){
-    clearTimeout(validationTimer);state.validation=null;const version=++state.validationSerial;
-    if(element('wt-save-design'))element('wt-save-design').disabled=true;
-    validationTimer=setTimeout(()=>{readDraft();const draft=JSON.parse(JSON.stringify(state.draft));
-      send('validate-design',{design:draft}).then(r=>{if(version!==state.validationSerial)return;state.validation=r;
-        const label=element('wt-design-valid');if(label)label.textContent=r.ok?`POWER ${r.result.cost} · BUILD POINTS ${r.result.points}`:reason(r.reason);
-        const save=element('wt-save-design');if(save)save.disabled=!r.ok;});},220);
+    clearTimeout(validationTimer);state.validation=null;const version=++state.validationSerial,draft=payload(JSON.parse(JSON.stringify(state.draft)));designStatus();
+    if(!draft.name.trim()||!draft.body||!draft.propulsion||!draft.turrets.length)return;
+    validationTimer=setTimeout(()=>send('validate-design',{design:draft}).then(r=>{if(version!==state.validationSerial||draft.id!==state.draft.id)return;state.validation=r;designStatus();}),220);
   }
-  function saveDesign(){
-    readDraft();const draft=JSON.parse(JSON.stringify(state.draft));const version=state.validationSerial;
-    element('wt-save-design').disabled=true;
+  function saveDesign(asNew=false){
+    readDraft();const sourceId=state.draft.id;if(state.saving.has(sourceId)||!state.validation?.ok)return;
+    const draft=payload(JSON.parse(JSON.stringify(state.draft))),version=state.validationSerial;
+    if(asNew)draft.id=`design-${Date.now()}-${++state.serial}`;
+    if(!state.saved.some(d=>d.id===draft.id)&&state.saved.length>=100){notify('The library holds 100 designs. Delete a design first.');return;}
+    state.saving.add(sourceId);designStatus();
     send('save-design',{design:draft}).then(r=>{
       if(!r.ok){notify(reason(r.reason));return;}
-      const d={...r.result,id:draft.id||`design-${Date.now()}-${++state.serial}`};delete d.native;
+      const d={...r.result,id:draft.id};delete d.native;
       const before=state.saved.slice(),index=state.saved.findIndex(v=>v.id===d.id);
-      if(index<0&&state.saved.length>=100){notify('The library holds 100 designs. Delete a design first.');return;}
       if(index>=0)state.saved[index]=d;else state.saved.push(d);
       if(!persist()){state.saved=before;notify('Could not save to this device. Try again.');return;}
-      if(version===state.validationSerial)state.draft=d;
-      notify(`${d.name} saved on this device.`);open('saved');});
+      if(version===state.validationSerial&&sourceId===state.draft.id&&state.page==='design'){resetDraft(d);open('saved');}else if(state.page==='saved')render();
+      notify(`${d.name} saved on this device.`);
+    }).finally(()=>{state.saving.delete(sourceId);designStatus();});
   }
   function applySize(value){state.size=Math.max(1,Math.min(1.4,Number(value)||1));doc.documentElement.style.setProperty('--wt-command-scale',state.size);
     try{localStorage.setItem('wt-command-size',String(state.size));}catch(_){} }
   function onInput(event){
-    if(event.target.id==='wt-build-search'){state.search=event.target.value;const start=event.target.selectionStart;render();const search=element('wt-build-search');search.focus();try{search.setSelectionRange(start,start);}catch(_){} }
+    if(event.target.id==='wt-build-search'){state.search=event.target.value;element('wt-build-grid').innerHTML=buildCards(availableBuildings().filter(b=>(state.category==='ALL'||b.category===state.category)&&b.name.toLowerCase().includes(state.search.toLowerCase())));}
     if(event.target.closest('#wt-design-form')){readDraft();if(element('wt-blueprint-name'))element('wt-blueprint-name').textContent=state.draft.name||'New design';
       const parts=[state.draft.body,state.draft.propulsion,state.draft.turrets[0]];
       element('wt-design-form').querySelectorAll('.wt-design-step').forEach((step,i)=>{const wrap=doc.createElement('div');wrap.innerHTML=image(findPart(parts[i]));step.lastElementChild.replaceWith(wrap.firstElementChild);});
@@ -275,7 +296,8 @@
   }
   function onChange(event){
     const target=event.target;
-    if(target.id==='wt-design-body'){readDraft();state.draft.turrets=state.draft.turrets.slice(0,Math.min(3,findPart(state.draft.body)?.slots||1));state.validation=null;render();validateDraft();}
+    if(target.id==='wt-design-body'){readDraft();state.draft.turrets=state.draft.turrets.slice(0,Math.min(3,findPart(state.draft.body)?.slots||1));state.validation=null;const container=element('wt-design-form').querySelectorAll('.wt-design-step')[2].children[1];container.innerHTML=Array.from({length:Math.min(3,findPart(state.draft.body)?.slots||1)},(_,i)=>`<label>${i?'ADDITIONAL WEAPON (OPTIONAL)':'WEAPON / SYSTEM'}<select data-turret="${i}">${turretOptions(state.draft.turrets[i]||'')}</select></label>`).join('');validateDraft();}
+    if(target.id==='wt-produce-count')state.productionCount=Number(target.value);
     if(target.id==='wt-factory-select'){state.factory=Number(target.value);render();}
     if(target.id==='wt-command-size')applySize(target.value);
   }
@@ -285,7 +307,7 @@
     if(d.page)open(d.page);
     else if(d.category){state.category=d.category;render();}
     else if(d.build)beginPlacement(d.build);
-    else if(d.edit){const saved=state.saved.find(s=>s.id===d.edit);if(saved){state.draft=JSON.parse(JSON.stringify(saved));state.validation=null;open('design');validateDraft();}}
+    else if(d.edit){const saved=state.saved.find(s=>s.id===d.edit);if(saved){resetDraft(saved);open('design');validateDraft();}}
     else if(d.delete){const before=state.saved.slice();state.saved=state.saved.filter(s=>s.id!==d.delete);if(!persist())state.saved=before;render();}
     else if(d.produceDesign){state.selected=d.produceDesign;open('factory');}
     else if(d.produce||d.produceTemplate){
@@ -299,15 +321,16 @@
     else if(d.action==='back')close();
     else if(d.action==='cancel-placement')cancelPlacement();
     else if(d.action==='save-design')saveDesign();
-    else if(d.action==='new-design'){state.draft={id:'',name:'',body:'',propulsion:'',turrets:['']};state.validation=null;open('design');}
+    else if(d.action==='save-as-new')saveDesign(true);
+    else if(d.action==='new-design'){resetDraft();open('design');}
     else if(d.action==='native-factory')openNative('factory');
     else if(d.action==='commanders')openNative('commanders');
   }
-  loadSaved();
+  loadSaved();resetDraft();
   window.__warzoneCommands={tower:true,open,close,closeNative,beginPlacement,cancelPlacement,placeAt,previewAt,send,accept,
     hidePreview:()=>{const ghost=document.getElementById('wt-build-ghost');if(ghost)ghost.hidden=true;},
     isOpen:()=>Boolean(state.page),isPlacement:()=>Boolean(state.placement),nativeMenuOpen:()=>Boolean(state.nativeMenu),
-    report:()=>({version:48,page:state.page,pending:state.pending.size,writes:state.writes,acks:state.acks,timeouts:state.timeouts,
+    report:()=>({version:49,page:state.page,pending:state.pending.size,writes:state.writes,acks:state.acks,timeouts:state.timeouts,
       placements:state.placements,rejects:state.rejects,opens:state.opens,closes:state.closes,placement:state.placement?.id,
       session:state.session,saved:state.saved,history:state.history,snapshot:state.snapshot,terrain:window.WarzoneTerrain?.report()})};
   fetch('/warzone/command-catalog.json').then(r=>{if(!r.ok)throw Error('catalog');return r.json();}).then(c=>{state.catalog=c;render();}).catch(()=>notify('The command catalogue could not load. Restart the app.'));

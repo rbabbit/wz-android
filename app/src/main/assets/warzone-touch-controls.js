@@ -20,7 +20,7 @@
 (() => {
   "use strict";
 
-  if (window.__kalaWarzoneTouch?.version >= 51) return "already-installed";
+  if (window.__kalaWarzoneTouch?.version >= 52) return "already-installed";
 
   // Android's touch-slop model: tolerate a small finger wobble, then commit
   // immediately to a movement gesture. Scale gently for high-density panels.
@@ -49,6 +49,7 @@
     ArrowLeft: 37,
     ArrowRight: 39
   };
+  const forwardedPointers = new WeakSet();
 
   const state = {
     pointers: new Map(),
@@ -202,7 +203,7 @@
     if (!target || !window.PointerEvent) return false;
     state.lastX = x;
     state.lastY = y;
-    target.dispatchEvent(new PointerEvent(type, {
+    const forwarded = new PointerEvent(type, {
       bubbles: true,
       cancelable: true,
       pointerId: 1,
@@ -219,7 +220,9 @@
       ctrlKey: state.queueModifierHeld,
       shiftKey: false,
       pressure: buttons ? 0.5 : 0
-    }));
+    });
+    forwardedPointers.add(forwarded);
+    target.dispatchEvent(forwarded);
     state.mouseEvents += 1;
     return true;
   }
@@ -1270,6 +1273,7 @@
       radarDragging: false,
       boxOneShot
     };
+    state.single.slop = window.__warzoneCommands?.isPlacement() ? Math.max(TAP_SLOP, 14) : TAP_SLOP;
     focusCanvas();
     if (radar !== null) {
       state.lastRadarPoint = radar;
@@ -1436,10 +1440,23 @@
   }
 
   function handlePointer(event) {
-    if (event.pointerType !== "touch") return;
+    if (forwardedPointers.has(event)) return;
+    const desktopPlacement = window.__warzoneCommands?.isPlacement()
+        && (event.pointerType === "mouse" || event.pointerType === "pen");
+    if (event.pointerType !== "touch" && !desktopPlacement && !state.pointers.has(event.pointerId)) return;
     const target = canvas();
     if (!target) return;
     if (state.stopNonce && event.target === target) { own(event); return; }
+    if (desktopPlacement && event.target === target) {
+      if (event.type === "pointermove" && !state.pointers.has(event.pointerId) && !event.buttons) {
+        if (radarPoint(event.clientX, event.clientY) === null) window.__warzoneCommands.previewAt(event.clientX, event.clientY);
+        return;
+      }
+      if (event.type === "pointerdown" && event.button !== 0) {
+        if (event.button === 2) { own(event); window.__warzoneCommands.cancelPlacement(); }
+        return; // Middle-button native camera movement remains available.
+      }
+    }
 
     const tracked = state.pointers.has(event.pointerId);
     if (event.type === "pointerdown") {
@@ -1537,10 +1554,11 @@
         }
         return;
       }
-      if (distance > TAP_SLOP) gesture.moved = true;
+      const slop = gesture.slop || TAP_SLOP;
+      if (distance > slop) gesture.moved = true;
 
       const wasPanning = gesture.panning;
-      if (!gesture.panning && distance >= PAN_START) beginPan(gesture);
+      if (!gesture.panning && distance >= Math.max(PAN_START, slop)) beginPan(gesture);
       if (wasPanning && gesture.panning) {
         for (const sample of samples) {
           advancePan(gesture, sample.clientX, sample.clientY);
@@ -1767,7 +1785,7 @@
   }, 500);
   setTimeout(() => clearInterval(canvasTimer), 20000);
   window.__kalaWarzoneTouch = {
-    version: 51,
+    version: 52,
     ready: true,
     key,
     zoom,
@@ -1795,7 +1813,7 @@
     isGestureActive: () => state.pointers.size > 0 || state.mouseButton !== null || state.heldKeys.size > 0 || state.tiltKey !== null,
     report: () => ({
       active: true,
-      version: 51,
+      version: 52,
       intercepted: state.intercepted,
       mouseEvents: state.mouseEvents,
       taps: state.taps,

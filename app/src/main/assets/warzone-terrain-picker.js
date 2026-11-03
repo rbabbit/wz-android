@@ -16,7 +16,9 @@
         let meta=state.meta.get(program);
         if(!meta&&gl.getProgramParameter(program,gl.LINK_STATUS)){
           const names=Array.from({length:gl.getProgramParameter(program,gl.ACTIVE_UNIFORMS)},(_,i)=>gl.getActiveUniform(program,i).name);
-          const terrain=names.includes('ModelViewProjectionMatrix')&&(names.includes('groundScale')||names.includes('paramx1'));
+          // The depth fragment shader consumes uv2 only. GPU linkers may
+          // remove paramx1/uv1; paramx2 and lightmap_tex remain active.
+          const terrain=names.includes('ModelViewProjectionMatrix')&&(names.includes('groundScale')||names.includes('paramx1')||(names.includes('paramx2')&&names.includes('lightmap_tex')));
           meta={terrain,program,needed:true};
           if(terrain){meta.mvp=gl.getUniformLocation(program,'ModelViewProjectionMatrix');meta.vertex=gl.getAttribLocation(program,'vertex');}
           state.meta.set(program,meta);

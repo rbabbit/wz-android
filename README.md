@@ -2,9 +2,12 @@
 
 Full Android project for Warzone Towers, based on the supplied Survival Mod and
 TowerDefense2_m map. The editable project is at the repository root; open this
-folder in Android Studio. Current Android version: **4.8-command-pages (48)**.
+folder in Android Studio. Current Android version: **4.9-command-fixes (49)**.
 
 ## Downloads and saved versions
+
+- [v4.9 APK and complete editable source](https://github.com/rbabbit/wz-android/releases/tag/v4.9-command-fixes)
+- [v4.9 fixes and emulator test evidence](qa/v4.9/REPORT.md)
 
 - [v4.8 APK and complete editable source](https://github.com/rbabbit/wz-android/releases/tag/v4.8-command-pages)
 - [v4.7 APK and complete editable source](https://github.com/rbabbit/wz-android/releases/tag/v4.7-startup-music)
@@ -16,7 +19,7 @@ folder in Android Studio. Current Android version: **4.8-command-pages (48)**.
 - [Restore and maintenance guide](docs/MAINTENANCE.md)
 
 Releases preserve the original delivered files. The working source includes the
-v4.8 command pages and startup playlist; previous releases remain frozen fallbacks.
+v4.9 command fixes and startup playlist; previous releases remain frozen fallbacks.
 The BUILD/DESIGN command pages are documented in [COMMAND-PAGES.md](docs/COMMAND-PAGES.md).
 The repository's original manual-release README is retained in
 `archive/repository-bootstrap-README.md`. Existing release 1.1.1 is preserved.

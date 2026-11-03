@@ -2,7 +2,39 @@
 
 final result: passed
 
-## v4.8 command pages — current
+## v4.9 construction and design fixes — current
+
+Tested APK SHA-256:
+`c9d717c5e390224b15529f0afc39637df90389cf727af156d3b6e9ffb42a7d71`.
+
+Actual Android native pickers created two distinct designs. Editing one preserved
+the other; Save as New retained the original. Two factories delivered native
+tanks whose saved parts match Body1REC, wheeled01 and Cannon1Mk1. Quantity 5
+survived switching factories. Three automatic queued cannon defences completed;
+native records show currentBuildPts=400 at all three sites. A real touch also
+placed and completed a 2x2 research facility. Manual six-truck assignment, STOP,
+occupied-site retention and a 25-command burst passed. Trusted mouse, pen and an
+11px drifting touch each queued exactly one native job.
+
+Native camera pan/pinch/tilt, stable heading, minimap/cancel/overlay retention,
+held footprint preview, six HELP/TECH returns, native Stats/Factory/Commanders
+returns, four command-page cycles, continuous search typing/focus, stock images
+and Extra large layout passed at 1280x800 WebView extent. Fifteen regression
+scripts and the negative optimizer regression passed. APK signature verification
+passed. The official engine/WASM, complete 65,434,780-byte v4.8 data prefix and
+all 3,284 resolved assets are identical. No scenario, research, roster or artwork
+changes were needed.
+
+Normal-mode restart preserved all four design identities/components and an
+existing design reopened/validated. Normal-mode FIFO construction passed again;
+a direct battlefield selection used one truck to complete a defence, and a
+selected real combat unit fell back to an automatic truck and completed another.
+
+See [the detailed v4.9 report](qa/v4.9/REPORT.md) for evidence and test limits.
+Emulator black terrain, physical Samsung startup/compatibility, HQ appearance,
+compact-phone coverage and audible quality remain unverified limitations.
+
+## v4.8 command pages — frozen fallback
 
 The final installed/tested APK has SHA-256
 `efff0474e805c99be92c23ed77fc6a33d3658bbb0b7689ebe6fa1b4b0d77d4c0`.

@@ -21,4 +21,12 @@ assert.equal(bound.get(5),originalCopy,'GPU copy-read binding is restored');asse
 picker.pick(point.x,point.y);assert.equal(picker.report().reads,1,'mesh is cached between taps');
 gl.bindBuffer(20,vb);assert.equal(gl.bufferSubData(20,0,vertices),19);picker.pick(point.x,point.y);assert.equal(picker.report().reads,2,'terraform updates invalidate cached geometry');
 assert.equal(picker.pick(-10,-20),null);assert.equal(bound.get(5),originalCopy);
+// Real GPU linkers remove the unused uv1/paramx1 from the depth shader.
+const optimizedProgram={};
+matrix=Float32Array.from(matrix);matrix[12]+=.25;
+gl.getProgramParameter=(p,key)=>key===1?true:3;
+gl.getActiveUniform=(p,i)=>({name:['ModelViewProjectionMatrix','paramx2','lightmap_tex'][i]});
+assert.equal(gl.useProgram(optimizedProgram),7);assert.equal(gl.drawElements(0,6,11,0),23);
+const optimizedPoint=picker.project(64,64,0);assert.ok(optimizedPoint.x>point.x+40,'optimized depth shader updates the live matrix');
+const optimized=picker.pick(optimizedPoint.x,optimizedPoint.y);assert.ok(optimized&&Math.abs(optimized.worldX-64)<.001);
 console.log('PASS: perspective terrain picking, projection, native GL delegation, buffer-state restoration and mesh invalidation');

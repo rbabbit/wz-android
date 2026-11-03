@@ -1,0 +1,55 @@
+{
+  "passed": true,
+  "apkSHA256": "c9d717c5e390224b15529f0afc39637df90389cf727af156d3b6e9ffb42a7d71",
+  "versionCode": 49,
+  "versionName": "4.9-command-fixes",
+  "installedHashMatches": true,
+  "appAliveAtFinalCheck": true,
+  "regressionScripts": [
+    "test-command-bridge.cjs",
+    "test-command-pages.cjs",
+    "test-graphics-loader.cjs",
+    "test-music-loader.cjs",
+    "test-research-queue-bridge.cjs",
+    "test-terrain-picker.cjs",
+    "test-touch-zoom.cjs",
+    "test-towers-ai.cjs",
+    "test-towers-camera.cjs",
+    "test-towers-controls.cjs",
+    "test-towers-objective.cjs",
+    "test-wave-log-reader.cjs",
+    "test-wave-rules.cjs",
+    "test-waves-survival.cjs",
+    "test-zoom-rule.cjs"
+  ],
+  "environment": {
+    "avd": "Pixel_10_Pro",
+    "android": "16",
+    "webview": "Current WebView package (name, version): (com.google.android.webview, 158.0.8127.2)",
+    "gpu": "swiftshader",
+    "audio": false,
+    "webviewExtent": [
+      1280,
+      800
+    ]
+  },
+  "evidence": [
+    "matrix-results.json",
+    "design-library-results.json",
+    "production-results.json",
+    "input-results.json",
+    "large-build-results.json",
+    "gesture-results.json",
+    "page-results.json",
+    "normal-smoke-results.json",
+    "restart-results.json",
+    "normal/single-truck-results.json",
+    "normal/combat-fallback-results.json"
+  ],
+  "limits": [
+    "Emulator black terrain in both graphics modes",
+    "Physical Samsung tablet not tested",
+    "Audio silent",
+    "Compact phone and exhaustive module/oil combinations not tested"
+  ]
+}

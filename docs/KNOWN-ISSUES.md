@@ -1,6 +1,11 @@
 # Known issues and verification limits
 
-1. **BUILD physical retest:** v4.8 replaces the native sticky +Q route with an
+1. **BUILD physical retest:** v4.9 fixes ignored mouse/pen placement, tolerates
+   small placement-touch drift, and recognizes optimized terrain shaders. Real
+   emulator tests completed automatic FIFO defences and a 2x2 facility, and
+   verified native mouse/pen/touch-drift jobs. The physical finger-placement
+   report has not been reproduced on the user's hardware.
+   v4.8 replaces the native sticky +Q route with an
    always-queued BUILD catalogue and explicit native FIFO scheduling. Native
    structure completion, one/six-truck assignment and factory production were
    checked on the emulator. The new controls need a physical tablet retest.
@@ -34,5 +39,12 @@
    treating minimap finger drift as a camera drag. This emulator can still have
    long cold-start/render stalls. It does not establish a frame-rate guarantee
    for physical devices or resolve its pre-existing black-terrain issue.
+
+8. **Design and page fixes:** v4.9 adds explicit New/Edit/Save as New, protects
+   drafts from late validation/save replies, permits failed-save retry, preserves
+   search focus, quantity and page scroll, and invalidates stale native menus.
+   Native-picker creation/edit/copy and factory production passed on the emulator.
+   Delayed/failure behavior is covered by deterministic regressions; this is not
+   a claim that every possible device-specific page issue was reproduced.
 
 See the versioned `qa/` reports for exact conditions, results and screenshots.

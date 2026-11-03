@@ -2,19 +2,20 @@
 
 Full Android project for Warzone Towers, based on the supplied Survival Mod and
 TowerDefense2_m map. The editable project is at the repository root; open this
-folder in Android Studio. Current Android version: **4.6-music-controls (46)**.
+folder in Android Studio. Current Android version: **4.7-startup-music (47)**.
 
 ## Downloads and saved versions
 
-- [v4.6 APK, complete source, optional Music pack and notices](https://github.com/rbabbit/wz-android/releases/tag/v4.6-music-controls)
+- [v4.7 APK and complete editable source](https://github.com/rbabbit/wz-android/releases/tag/v4.7-startup-music)
+- [v4.6 frozen APK/source and original Music recovery pack/notices](https://github.com/rbabbit/wz-android/releases/tag/v4.6-music-controls)
 - [v4.5 APK, frozen source ZIP and optional HQ pack](https://github.com/rbabbit/wz-android/releases/tag/v4.5-graphics-choice)
 - [Older Towers APKs/source ZIPs, verified fallbacks and reference material](https://github.com/rbabbit/wz-android/releases/tag/project-archive-2026-11-02)
 - [Earlier archive catalogue, sizes and SHA-256 values](archive/releases.json)
-- [v4.6 snapshot metadata](archive/v4.6-release.json)
+- [v4.7 snapshot metadata](archive/v4.7-release.json)
 - [Restore and maintenance guide](docs/MAINTENANCE.md)
 
 Releases preserve the original delivered files. The working source includes the
-v4.6 Music and input changes; the previous v4.5 release remains a frozen fallback.
+v4.7 startup playlist; the previous releases remain frozen fallbacks.
 The repository's original manual-release README is retained in
 `archive/repository-bootstrap-README.md`. Existing release 1.1.1 is preserved.
 
@@ -69,12 +70,25 @@ See [AGENTS.md](AGENTS.md) and the maintenance guide before changing game logic.
 Both graphics modes reached actual gameplay; cancel/resume, checksum and offline
 cache use passed. The emulator has an existing black-terrain rendering issue in
 both modes, so HQ visual improvement and physical Samsung tablet compatibility
-remain unconfirmed. The v4.6 input audit reads the engine's saved truck orders to
+remain unconfirmed. The native input audit reads the engine's saved truck orders to
 check sticky construction, including bad taps and overlay returns. The exact
-builds and results are recorded under `qa/v4.6/`.
+builds and results are recorded under `qa/v4.7/`.
 [Known issues](docs/KNOWN-ISSUES.md) records the remaining device limits.
 
 ## Release history
+
+## Version 4.7-startup-music (47)
+
+Music track selection happens before the engine starts, with the original album
+and track names, saved checkboxes, ALL/CLEAR and a small top-right START GAME
+button. Startup choices use Warzone's native playlist preferences. Empty enabled
+playlists require a selection or turning Music off. The original VPS pack and
+all official engine/audio bytes remain unchanged.
+
+The in-battle Music button, asynchronous pause/options navigation, injected
+Music touches and rules that hid the command bar have been removed. The user's
+screenshots showed that route getting stuck during gameplay. The command bar
+now stays in its normal battle state while the selected music plays.
 
 ## Version 4.6-music-controls (46)
 

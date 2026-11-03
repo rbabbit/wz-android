@@ -10,10 +10,11 @@ if(process.env.WZ_MUSIC_DATA){const b=fs.readFileSync(process.env.WZ_MUSIC_DATA)
  for(const entry of catalog.files.filter(f=>f.filename.endsWith('.opus')))assert.equal(b.toString('ascii',entry.start,entry.start+4),'OggS');
 }else payload=new ArrayBuffer(catalog.bytes);
 function setup(query,response){const calls={fetch:[],added:[],removed:[],files:[],failures:[]};
- const module={addRunDependency:x=>calls.added.push(x),removeRunDependency:x=>calls.removed.push(x),FS_createPath(){},FS_createDataFile:(...args)=>calls.files.push(args),FS:{open:path=>({path}),read:()=>128}};
+ const prefs=new Map();
+ const module={addRunDependency:x=>calls.added.push(x),removeRunDependency:x=>calls.removed.push(x),FS_createPath(){},FS_createDataFile:(...args)=>calls.files.push(args),FS:{open:path=>({path}),read:()=>128,readFile:p=>{if(!prefs.has(p))throw Error('Missing');return prefs.get(p)},writeFile:(p,v)=>prefs.set(p,v),rename:(a,b)=>{prefs.set(b,prefs.get(a));prefs.delete(a)}}};
  const window={WarzoneMusicCatalog:catalog,BlockNightAndroid:{musicFailed:e=>calls.failures.push(e)}};
  vm.runInNewContext(code,{window,location:{search:query},URLSearchParams,Uint8Array,fetch:(...args)=>{calls.fetch.push(args);return response()}});
- return {calls,module,music:window.WarzoneMusic};
+ return {calls,module,music:window.WarzoneMusic,window,prefs};
 }
 (async()=>{
  assert.equal(catalog.albums.length,4);assert.equal(catalog.files.filter(e=>e.filename.endsWith('.opus')).length,40);
@@ -27,6 +28,22 @@ function setup(query,response){const calls={fetch:[],added:[],removed:[],files:[
  const track=on.module.FS.open('/data/music/menu.opus');on.module.FS.read(track);
  assert.equal(on.music.report().nativeAlbums.length,4);assert.equal(on.music.report().nativeTracks.length,1);assert.equal(on.music.report().nativeReadBytes,640);
  on.module.FS.open('/data/music/albums/original_soundtrack/albumcover.png');assert.equal(on.music.report().nativeCoverReads,1);
+ assert.equal(catalog.trackIds.length,39);
+ assert.equal(on.music.applySelection(on.module,'/config'),true);
+ assert.equal(on.music.report().selectedTracks.length,39);
+ const selection=['original_soundtrack/track2.opus'];
+ on.window.BlockNightAndroid.musicSelection=()=>JSON.stringify(selection);
+ assert.equal(on.music.applySelection(on.module,'/config'),true);
+ const saved=JSON.parse(on.prefs.get('/config/music.json'));
+ for(const id of catalog.trackIds)assert.deepEqual(saved.tracks[id].settings.music_modes,Array(4).fill(selection.includes(id)),'each native mode must honor the exact user selection');
+ assert.equal(on.prefs.has('/config/music.json.tmp'),false,'preferences must replace atomically');
+ on.module.FS.open('/config/music.json');assert.equal(on.music.report().nativePreferenceOpens,1);
+ for(const raw of ['[]','["../outside.opus"]','{}','not json']){
+  on.window.BlockNightAndroid.musicSelection=()=>raw;
+  const previous=on.prefs.get('/config/music.json');
+  assert.equal(on.music.applySelection(on.module,'/config'),false);
+  assert.equal(on.prefs.get('/config/music.json'),previous,'invalid/empty selections cannot overwrite working preferences');
+ }
  for(const response of [async()=>({ok:false}),async()=>({ok:true,arrayBuffer:async()=>new ArrayBuffer(7)}),async()=>{throw Error('Unavailable')}]){
   const bad=setup('?music=1',response);bad.music.prepare(bad.module);await tick();assert.equal(bad.calls.files.length,0);assert.equal(bad.calls.failures.length,1);assert.equal(bad.calls.removed.length,0,'failed requested music cannot silently pretend to be loaded');
  }

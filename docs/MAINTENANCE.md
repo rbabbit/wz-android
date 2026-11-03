@@ -99,5 +99,11 @@ original pack, VPS location, pinned source and rebuild instructions are in
 `tools/queue-audit.cjs` checks actual saved native orders on Android, rather than
 treating wrapper tap counters as proof that construction was queued.
 
+For v4.7 startup Music, run `tools/startup-music-audit.py setup` on the native
+startup screen, then its `start` action. With a fresh CDP target, use
+`WZ_QA_OUTPUT=qa/v4.7` and `tools/queue-audit.cjs startupmusic`, `matrix`,
+`extended` and `layout`. Startup track choices must drive real native Opus
+opens while all eleven battle commands stay visible. Music has no battle button.
+
 `tools/package-v4.py` packages the current version after the built APK has been
 copied to the versioned filename beside the project, as described in its source.

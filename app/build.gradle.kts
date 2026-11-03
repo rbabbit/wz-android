@@ -10,8 +10,8 @@ android {
         applicationId = "com.rbabbit.warzonetowers"
         minSdk = 26
         targetSdk = 36
-        versionCode = 46
-        versionName = "4.6-music-controls"
+        versionCode = 47
+        versionName = "4.7-startup-music"
     }
 
     compileOptions {

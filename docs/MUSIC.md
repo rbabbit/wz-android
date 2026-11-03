@@ -1,11 +1,15 @@
 # Optional Music
 
-The startup **Music** screen downloads the original Warzone soundtrack collection
-once. Enable **Use music in battle**, start the battle, and use **Music** in the
-command bar to open Warzone's original Music Manager. Select tracks and their
-game-mode checkboxes there; **Back to Battle** returns to the game. The original
-manager pauses a local battle while it is open. Finish placing defences by turning
-off **+Q** before opening Music; the trucks keep their existing construction queues.
+Open **Music** on the start screen. Download the original soundtrack collection
+once, turn **Music on**, and tick the tracks you want in your battle playlist.
+**ALL** and **CLEAR** change the selection together. Choices save automatically
+and survive restarting the app. An empty playlist requires choosing a track or
+turning Music off before starting.
+
+The small **START GAME** button stays at the top right, including while scrolling
+through the albums. It starts with your selected graphics setting. There is no
+Music button or Music-menu automation in the battle header. Change your playlist
+before starting your next battle.
 
 The four original albums contain 39 tracks, plus the menu theme:
 
@@ -30,7 +34,10 @@ Music is optional: turning it off starts the ordinary game without mounting it.
 
 The wrapper mounts the 55 unchanged original files under `/data/music/`, including
 all album descriptions, original covers and 40 Opus audio files. It preserves
-native track selection and does not stream tracks from third-party sites.
+the original player and does not stream tracks from third-party sites. Startup
+choices are written to Warzone's normal `music.json` user preferences after
+saved storage is restored and before the engine reads its playlist. Album and
+audio files are unchanged. The menu theme remains the original menu theme.
 
 ## Source and maintenance
 
@@ -41,11 +48,12 @@ The pack concatenates original file bytes; it does not transcode audio or edit a
 
 `tools/build-music-pack.py` rebuilds and verifies the source collection; source
 ingestion from upstream happens during preparation, not on players' devices.
-`tools/generate-music-catalog.py` creates the bundled loader catalogue.
+`tools/generate-music-catalog.py --pack PATH/TO/music.data` creates the bundled
+loader catalogue and original track-title metadata after checking the pack SHA.
 `tools/test-music-loader.cjs` validates mounting, optional/off behavior and failures.
 Set `WZ_MUSIC_DATA` to the pack path to additionally verify its checksum, every
 original file checksum and all 40 Ogg/Opus headers.
 
 Native Music screenshots and the real engine read/selection results are recorded
-under `qa/v4.6/`. Emulator tests are silent (`-no-audio`); audible speaker quality
+under `qa/v4.7/`. Emulator tests are silent (`-no-audio`); audible speaker quality
 and physical Samsung tablet compatibility require a physical-device retest.

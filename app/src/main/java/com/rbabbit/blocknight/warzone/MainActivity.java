@@ -9,11 +9,8 @@ import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Build;
-import android.os.SystemClock;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.InputDevice;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -49,6 +46,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
+import java.util.HashSet;
 
 /** Android shell for the official Warzone 2100 4.7 WebAssembly engine. */
 public final class MainActivity extends Activity {
@@ -77,7 +76,8 @@ public final class MainActivity extends Activity {
     private String graphicsMode = "normal";
     private MusicPackStore musicStore;
     private MusicSetupView musicSetup;
-    private boolean musicEnabled, musicCached, inGameMusicOpen;
+    private MusicTrackCatalog musicCatalog;
+    private boolean musicEnabled, musicCached;
 
     @Override
     protected void onCreate(Bundle state) {
@@ -100,6 +100,7 @@ public final class MainActivity extends Activity {
         createWebView();
         graphicsStore = new GraphicsPackStore(this);
         musicStore = new MusicPackStore(this);
+        musicCatalog = new MusicTrackCatalog(this);
         musicEnabled = getPreferences(MODE_PRIVATE).getBoolean("music_enabled", false);
         graphicsMode = getPreferences(MODE_PRIVATE).getString("graphics_mode", "normal");
         showGraphicsSetup();
@@ -129,7 +130,7 @@ public final class MainActivity extends Activity {
 
     private void showMusicSetup() {
         if (musicSetup != null) return;
-        musicSetup = new MusicSetupView(this, new MusicSetupView.Actions() {
+        musicSetup = new MusicSetupView(this, musicCatalog, selectedMusicTracks(), new MusicSetupView.Actions() {
             @Override public void download() { downloadMusic(); }
             @Override public void cancel() { musicStore.cancel(); }
             @Override public void enabled(boolean on) {
@@ -137,6 +138,13 @@ public final class MainActivity extends Activity {
                 getPreferences(MODE_PRIVATE).edit().putBoolean("music_enabled", musicEnabled).apply();
             }
             @Override public void close() { closeMusicSetup(); }
+            @Override public void tracks(Set<String> selected) {
+                getPreferences(MODE_PRIVATE).edit().putStringSet("music_tracks",new HashSet<>(selected)).apply();
+            }
+            @Override public void start() {
+                String mode=graphicsSetup != null ? graphicsSetup.selectedMode() : graphicsMode;
+                closeMusicSetup();startWithGraphics(mode);
+            }
         });
         musicSetup.setCached(musicCached, musicEnabled);
         root.addView(musicSetup, new FrameLayout.LayoutParams(-1, -1));
@@ -167,6 +175,9 @@ public final class MainActivity extends Activity {
     }
 
     private void startWithGraphics(String mode) {
+        if (musicEnabled && musicCached && selectedMusicTracks().isEmpty()) {
+            showMusicSetup();return;
+        }
         graphicsMode = "high".equals(mode) ? "high" : "normal";
         if ("normal".equals(graphicsMode)) { graphicsStore.cancel(); launchGame(); return; }
         if (graphicsSetup != null) graphicsSetup.downloadProgress(0, false);
@@ -186,6 +197,12 @@ public final class MainActivity extends Activity {
         if (graphicsSetup != null) { root.removeView(graphicsSetup); graphicsSetup = null; }
         createLoadingPanel();
         webView.loadUrl(gameUrl());
+    }
+
+    private Set<String> selectedMusicTracks() {
+        Set<String> allowed=musicCatalog.allIds();
+        Set<String> selected=new HashSet<>(getPreferences(MODE_PRIVATE).getStringSet("music_tracks",allowed));
+        selected.retainAll(allowed);return selected;
     }
 
     private String gameUrl() {
@@ -478,48 +495,8 @@ public final class MainActivity extends Activity {
 
     public final class EngineBridge {
         @JavascriptInterface
-        public void musicVisibility(boolean open) {
-            runOnUiThread(() -> inGameMusicOpen = open);
-        }
-        @JavascriptInterface
-        public void tapMusic(String nonce, float x, float y, float cssWidth) {
-            runOnUiThread(() -> {
-                if (webView == null || !inGameMusicOpen || cssWidth <= 0
-                        || !Float.isFinite(x) || !Float.isFinite(y)) return;
-                WebView target = webView;
-                float scale = target.getWidth() / cssWidth;
-                float px = x * scale, py = y * scale;
-                if (px < 0 || py < 0 || px > target.getWidth() || py > target.getHeight()) return;
-                long down = SystemClock.uptimeMillis();
-                target.requestFocus();
-                dispatchMusicTouch(target, down, down, MotionEvent.ACTION_DOWN, px, py);
-                target.postDelayed(() -> {
-                    if (webView != target) return;
-                    dispatchMusicTouch(target, down, SystemClock.uptimeMillis(),
-                            MotionEvent.ACTION_UP, px, py);
-                    target.evaluateJavascript("window.dispatchEvent(new CustomEvent('warzone-native-music-tap',"
-                            + "{detail:" + JSONObject.quote(nonce) + "}));", null);
-                }, 80);
-            });
-        }
-        @JavascriptInterface
-        public void scrollMusic(float x, float y, float cssWidth, float direction) {
-            runOnUiThread(() -> {
-                if (webView == null || !inGameMusicOpen || !Float.isFinite(cssWidth) || cssWidth <= 0
-                        || !Float.isFinite(x) || !Float.isFinite(y) || !Float.isFinite(direction)) return;
-                float scale = webView.getWidth() / cssWidth;
-                MotionEvent.PointerProperties pointer = new MotionEvent.PointerProperties();
-                pointer.id = 0; pointer.toolType = MotionEvent.TOOL_TYPE_MOUSE;
-                MotionEvent.PointerCoords point = new MotionEvent.PointerCoords();
-                point.x = x * scale; point.y = y * scale;
-                point.setAxisValue(MotionEvent.AXIS_VSCROLL, -Math.max(-48f, Math.min(48f, direction)));
-                long now = SystemClock.uptimeMillis();
-                MotionEvent event = MotionEvent.obtain(now, now, MotionEvent.ACTION_SCROLL, 1,
-                        new MotionEvent.PointerProperties[]{pointer}, new MotionEvent.PointerCoords[]{point},
-                        0, 0, 1, 1, 0, 0, InputDevice.SOURCE_MOUSE, 0);
-                webView.dispatchGenericMotionEvent(event);
-                event.recycle();
-            });
+        public String musicSelection() {
+            return musicCatalog.selectionJson(selectedMusicTracks());
         }
         @JavascriptInterface
         public void musicFailed(String detail) {
@@ -590,21 +567,6 @@ public final class MainActivity extends Activity {
             runOnUiThread(MainActivity.this::showReplayPanel);
         }
 
-    }
-
-    private static void dispatchMusicTouch(WebView target, long down, long when, int action,
-                                          float x, float y) {
-        MotionEvent.PointerProperties pointer = new MotionEvent.PointerProperties();
-        pointer.id = 0;
-        pointer.toolType = MotionEvent.TOOL_TYPE_FINGER;
-        MotionEvent.PointerCoords point = new MotionEvent.PointerCoords();
-        point.x = x; point.y = y; point.pressure = action == MotionEvent.ACTION_UP ? 0 : 1; point.size = 1;
-        MotionEvent event = MotionEvent.obtain(down, when, action, 1,
-                new MotionEvent.PointerProperties[]{pointer}, new MotionEvent.PointerCoords[]{point},
-                0, 0, 1, 1, 0, 0, InputDevice.SOURCE_TOUCHSCREEN, 0);
-        target.dispatchTouchEvent(event);
-        target.postInvalidateOnAnimation();
-        event.recycle();
     }
 
     private void showReplayPanel() {
@@ -887,13 +849,6 @@ public final class MainActivity extends Activity {
     @Override
     public void onBackPressed() {
         if (musicSetup != null) { closeMusicSetup(); return; }
-        if (webView != null && inGameMusicOpen) {
-            webView.evaluateJavascript("(()=>{const t=window.__kalaWarzoneTouch;"
-                    + "if(t?.report().musicOpen){t.closeMusic();return true}return false})()", value -> {
-                if (!"true".equals(value)) { inGameMusicOpen = false; MainActivity.super.onBackPressed(); }
-            });
-            return;
-        }
         super.onBackPressed();
     }
 }

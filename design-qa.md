@@ -2,7 +2,34 @@
 
 final result: passed
 
-## v4.6 Music and input — current
+## v4.7 startup Music — current
+
+The tested installed APK has SHA-256
+`4911ed72f21809327076cc4881dd6139781cba614a9e686150d21bf63fdca87b`.
+The user's screenshots show the old battle Music route stuck during pause/menu
+navigation with the command bar hidden. That route, injected Music touches,
+Music pointer interception and header-hiding CSS are removed. Startup now has
+original track checkboxes, saved choices, ALL/CLEAR and fixed top-right START
+GAME. Choices are applied as native playlist user preferences before main().
+
+Native Android tests passed selecting tracks, Music off allowing Start, blocking
+an empty enabled playlist, ALL/CLEAR, Back and process-restart persistence, and
+scrolling to the last album with Start still visible. The engine then opened
+and streamed the sole selected battle track, plus its original menu theme, with
+all eleven battle commands visible and active. One- and six-truck native queue
+tests passed, including mixed defences, rapid/invalid/cancelled taps, zoom,
+pan/tilt, ten minimap taps, TECH and three scrolled HELP returns with live wave
+enemies. STOP cleared all original selected trucks. Header geometry passed.
+
+Twelve regression suites, Android build and APK signature checks passed. All
+three compiled engine payloads are byte-identical to v4.6; the original optional
+Music pack is unchanged. The v4.6 APK/source fallback remains intact.
+
+The emulator uses SwiftShader and `-no-audio`. Audible output quality and exact
+physical-device behavior require a device retest. Its existing black terrain
+remains. Exact evidence and the supplied screenshots are under `qa/v4.7/`.
+
+## v4.6 Music and input
 
 The tested APK has SHA-256
 `baad27be8ac2271f8f4dc3560981309beee864a00a591fff366b34d97389a94c`.

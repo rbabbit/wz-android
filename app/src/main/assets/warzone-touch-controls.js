@@ -20,7 +20,7 @@
 (() => {
   "use strict";
 
-  if (window.__kalaWarzoneTouch?.version >= 49) return "already-installed";
+  if (window.__kalaWarzoneTouch?.version >= 50) return "already-installed";
 
   // Android's touch-slop model: tolerate a small finger wobble, then commit
   // immediately to a movement gesture. Scale gently for high-density panels.
@@ -67,15 +67,7 @@
     clickJob: null,
     clickFrame: null,
     clickTimer: null,
-    musicOpen: false,
-    musicOpening: false,
     nativeMusicInput: false,
-    musicResized: false,
-    musicStage: 'audio',
-    musicNotified: null,
-    musicGesture: null,
-    musicFrameClock: null,
-    musicScrollJob: null,
     stopNonce: null,
     stopTimer: null,
     stopAcks: 0,
@@ -452,18 +444,6 @@
     if (queue) queue.setAttribute("aria-pressed", String(state.queueMode));
     for (const button of hudDocument.querySelectorAll?.('#blocknight-combat-hud button') || []) {
       button.disabled = Boolean(state.stopNonce);
-    }
-    const music = hudDocument.getElementById("blocknight-music");
-    if (music) {
-      music.disabled = Boolean(state.stopNonce) || state.musicOpening || (state.queueMode && !state.musicOpen);
-      music.classList.toggle("active", state.musicOpen);
-      music.querySelector?.("span") && (music.querySelector("span").textContent = state.musicOpening && state.musicStage !== 'manager' ? 'OPENING MUSIC…' : state.musicOpen ? "BACK TO BATTLE" : "MUSIC");
-      music.title = state.musicOpen ? "Close Warzone Music Manager" : (state.queueMode ? "Turn off +Q to open Music; queued builds continue" : "Music, albums and themes");
-    }
-    hudDocument.body.dataset.nativeMusic = String(state.musicOpen);
-    if (state.musicNotified !== state.musicOpen) {
-      state.musicNotified = state.musicOpen;
-      window.BlockNightAndroid?.musicVisibility?.(state.musicOpen);
     }
     for (const preset of Object.keys(ZOOM_PRESETS)) {
       const button = hudDocument.getElementById(`blocknight-zoom-${preset}`);
@@ -1078,7 +1058,7 @@
           "blocknight-stop": "hand-palm", "blocknight-base": "house",
           "blocknight-zoom-close": "x", "blocknight-zoom-battle": "crosshair",
           "blocknight-zoom-map": "map-pin", "blocknight-tech": "flask",
-          "blocknight-help": "question", "blocknight-music": "music-notes"
+          "blocknight-help": "question"
         };
         const icon = document.createElement("img");
         icon.src = `/warzone/ui/icons/${iconNames[id]}.svg`;
@@ -1122,7 +1102,6 @@
           window.__blockNightResearch?.open?.();
         });
       const help = makeButton("blocknight-help", "HELP", "How to play and use +Q", showHelp);
-      const music = makeButton("blocknight-music", "MUSIC", "Music, albums and themes", openMusic);
       const orderGroup = document.createElement("div");
       orderGroup.className = "bn-command-group";
       orderGroup.append(all, auto, box, queue, stop, base);
@@ -1131,7 +1110,7 @@
       zoomGroup.append(zoomControl);
       const techGroup = document.createElement("div");
       techGroup.className = "bn-command-group";
-      techGroup.append(tech, music, help);
+      techGroup.append(tech, help);
       hud.append(orderGroup, zoomGroup, techGroup);
       (hudDocument.getElementById("warzone-command-strip") || hudDocument.body).appendChild(hud);
     }
@@ -1148,237 +1127,6 @@
     container.style.transform = "none";
     container.style.transformOrigin = "";
     window.parent?.WarzoneHost?.setPlaying();
-  }
-
-  function nativeFrames(count = 2) {
-    return new Promise(resolve => {
-      const step = () => {
-        let done = false, frame;
-        const finish = () => {
-          if (done) return; done = true;
-          clearTimeout(timer);
-          if (frame != null) cancelAnimationFrame(frame);
-          if (--count <= 0) resolve(); else step();
-        };
-        const timer = setTimeout(finish, 50);
-        frame = requestAnimationFrame(finish);
-      };
-      step();
-    });
-  }
-
-  function gameFrameClock() {
-    try {
-      const gl = window.LaunchedModule?.ctx || canvas()?.getContext?.('webgl2');
-      if (!gl?.clear || !gl?.bindFramebuffer) return null;
-      if (gl.__warzoneUiFrames) return state.musicFrameClock = gl.__warzoneUiFrames;
-      const clock = { sequence: 0 };
-      let framebuffer = gl.getParameter(gl.DRAW_FRAMEBUFFER_BINDING || gl.FRAMEBUFFER_BINDING);
-      const bind = gl.bindFramebuffer, clear = gl.clear;
-      // Observe only; every GL call keeps its original receiver and arguments.
-      gl.bindFramebuffer = function(target, buffer) {
-        const result = bind.call(this, target, buffer);
-        if (target === gl.FRAMEBUFFER || target === gl.DRAW_FRAMEBUFFER) framebuffer = buffer;
-        return result;
-      };
-      gl.clear = function(mask) {
-        const result = clear.call(this, mask);
-        if (framebuffer === null && (mask & gl.COLOR_BUFFER_BIT)) clock.sequence++;
-        return result;
-      };
-      Object.defineProperty(gl, '__warzoneUiFrames', { value: clock });
-      return state.musicFrameClock = clock;
-    } catch (_) { return null; }
-  }
-
-  async function waitGameFrames(count = 2, openingAnimation = false) {
-    const clock = gameFrameClock();
-    if (!clock) { await new Promise(resolve => setTimeout(resolve, openingAnimation ? 1500 : 250)); return; }
-    const start = clock.sequence, deadline = performance.now() + 10000;
-    let firstFrame = null, animationFrame = null;
-    while (performance.now() < deadline) {
-      if (!openingAnimation && clock.sequence >= start + count) return;
-      if (clock.sequence > start && firstFrame === null) firstFrame = performance.now();
-      if (openingAnimation && firstFrame !== null && performance.now() - firstFrame >= 200) {
-        if (animationFrame === null) animationFrame = clock.sequence;
-        if (clock.sequence >= animationFrame + count) return;
-      }
-      await new Promise(resolve => setTimeout(resolve, 10));
-    }
-    throw Error('The native menu is not rendering');
-  }
-
-  async function musicClick(x, y) {
-    if (window.BlockNightAndroid?.tapMusic) {
-      // Let SDL receive one native Android touch, bypassing our battlefield
-      // gesture conversion while the stock menu owns input.
-      const nonce = 'music-' + Date.now() + '-' + Math.random().toString(36).slice(2);
-      state.nativeMusicInput = true;
-      try { await new Promise((resolve, reject) => {
-        let androidDone = false, pointerDone = false, pointerId = null;
-        const cleanup = () => {
-          clearTimeout(timer); window.removeEventListener('warzone-native-music-tap', done);
-          document.removeEventListener('pointerdown', delivered, true);
-          document.removeEventListener('pointerup', delivered, true);
-        };
-        const finish = () => { if (androidDone && pointerDone) { cleanup(); resolve(); } };
-        const done = event => { if (event.detail === nonce) { androidDone = true; finish(); } };
-        const delivered = event => {
-          if (!event.isTrusted || event.pointerType !== 'touch' || event.target !== canvas()) return;
-          if (Math.hypot(event.clientX - x, event.clientY - y) > 3) return;
-          if (event.type === 'pointerdown') pointerId = event.pointerId;
-          else if (pointerId === event.pointerId) { pointerDone = true; setTimeout(finish, 0); }
-        };
-        const timer = setTimeout(() => {
-          cleanup();
-          reject(Error('Android music input did not complete'));
-        }, 20000);
-        window.addEventListener('warzone-native-music-tap', done);
-        document.addEventListener('pointerdown', delivered, true);
-        document.addEventListener('pointerup', delivered, true);
-        const frame = window.frameElement?.getBoundingClientRect();
-        window.BlockNightAndroid.tapMusic(nonce, x + (frame?.left || 0),
-          y + (frame?.top || 0), window.parent.innerWidth);
-      }); } finally { state.nativeMusicInput = false; }
-      await waitGameFrames(1);
-      return;
-    }
-    click(0, x, y);
-    const deadline = performance.now() + 5000;
-    while (state.clickJob || state.clickQueue.length) {
-      if (performance.now() > deadline) throw Error("The native music menu did not respond");
-      await new Promise(resolve => setTimeout(resolve, 16));
-    }
-    await nativeFrames(2);
-  }
-
-  async function closeMusic() {
-    if (!state.musicOpen || state.musicOpening) return false;
-    state.musicOpening = true; state.musicScrollJob = null; updateCombatHud();
-    try {
-    const b = canvas().getBoundingClientRect();
-    // The stock 4.7 MusicManagerForm initially requests 400 + 0 pixels;
-    // its parent adds the 30px title bar and two 1px borders. Its details
-    // preview contributes 80px after a subsequent native window resize.
-    const height = Math.min(b.height - 20, state.musicStage === 'manager' ? (state.musicResized ? 512 : 432) : 672);
-    const width = Math.min(b.width - 20, state.musicStage === 'manager' ? 626 : 642);
-    if (state.musicStage !== 'manager') {
-      pressKey('Escape', 'Escape', 27);
-      await new Promise(resolve => setTimeout(resolve, 200));
-    }
-    else await musicClick(b.left + (b.width + width) / 2 - 15,
-        b.top + (b.height - height) / 2 + 14);
-    await waitGameFrames(2);
-    state.musicOpen = false; state.musicGesture = null;
-    updateCombatHud(); focusCanvas();
-    return true;
-    } catch (error) {
-      console.warn('[Warzone Music]', error);
-      window.BlockNightAndroid?.showNotice('Music has not closed yet. Please try Back to Battle again.');
-      return false;
-    } finally { state.musicOpening = false; updateCombatHud(); }
-  }
-
-  async function openMusic() {
-    if (state.musicOpening) return false;
-    if (state.musicOpen) return closeMusic();
-    if (state.queueMode) {
-      window.BlockNightAndroid?.showNotice('Turn off +Q to open Music. Queued builds continue.');
-      return false;
-    }
-    if (!window.WarzoneMusic?.report().loaded) {
-      window.BlockNightAndroid?.showNotice("Download and enable Music on the start screen.");
-      return false;
-    }
-    releaseAll();
-    state.musicOpen = true; state.musicOpening = true; state.musicResized = false; state.musicStage = 'pause'; state.musicScrollJob = null;
-    updateCombatHud();
-    try {
-      // Use the standard native pause route, which enables widgets and resets
-      // interface state. The direct mappings shortcut can leave inert options.
-      pressKey("Escape", "Escape", 27);
-      // Browser rAF can run between the engine worker's render frames. Wait
-      // for the native form to display and finish its 167ms animation.
-      await waitGameFrames(2, true);
-      const b = canvas().getBoundingClientRect();
-      // hci.h uses BASE_COORDS_Y=460, including the classic pause-menu offset.
-      await musicClick(b.left + b.width / 2, b.top + b.height / 2);
-      state.musicStage = 'audio';
-      await waitGameFrames(2, true);
-      const panelTop = Math.max(10, (b.height - 672) / 2);
-      await musicClick(b.left + b.width / 2 + 54, b.top + panelTop + 54);
-      await waitGameFrames(2, true);
-      await musicClick(b.left + b.width / 2 + 145, b.top + panelTop + 430);
-      await waitGameFrames(2, true);
-      // Album art can already be cached after reopening the manager; file
-      // reads are useful diagnostics, not a reliable second-opening signal.
-      state.musicStage = 'manager';
-    } catch (error) {
-      console.warn("[Warzone Music]", error);
-      window.BlockNightAndroid?.showNotice("Music controls are still opening. Use the native X to return.");
-    }
-    state.musicOpening = false; updateCombatHud();
-    return true;
-  }
-
-  async function scrollMusic(x, y, delta) {
-    if (state.musicScrollJob) {
-      Object.assign(state.musicScrollJob, { x, y, delta: state.musicScrollJob.delta + delta }); return;
-    }
-    const job = state.musicScrollJob = { x, y, delta };
-    try {
-      mouseMove(x, y, 0);
-      // The native widget must process the new hover target before its wheel
-      // input. Otherwise a swipe can be consumed by the previous widget.
-      await waitGameFrames(2);
-      if (state.musicScrollJob !== job || !state.musicOpen || state.musicOpening) return;
-      if (window.BlockNightAndroid?.scrollMusic) {
-        const frame = window.frameElement?.getBoundingClientRect();
-        window.BlockNightAndroid.scrollMusic(job.x + (frame?.left || 0),
-          job.y + (frame?.top || 0), window.parent.innerWidth, job.delta / 10);
-      } else canvas().dispatchEvent(new WheelEvent('wheel', { bubbles: true, cancelable: true,
-        clientX: job.x, clientY: job.y, deltaX: 0, deltaY: job.delta * 5, deltaMode: 0 }));
-    } catch (error) { console.warn('[Warzone Music]', error); }
-    finally { if (state.musicScrollJob === job) state.musicScrollJob = null; }
-  }
-
-  function handleMusicPointer(event) {
-    own(event);
-    if (state.musicOpening) return;
-    if (event.type === "pointerdown") {
-      if (state.musicGesture) return;
-      capturePointer(canvas(), event.pointerId);
-      state.musicGesture = { id: event.pointerId, x: event.clientX, y: event.clientY,
-        startX: event.clientX, startY: event.clientY, moved: false, budget: 0 };
-      return;
-    }
-    const g = state.musicGesture;
-    if (!g || event.pointerId !== g.id) return;
-    if (event.type === "pointermove") {
-      g.x = event.clientX; g.y = event.clientY;
-      if (Math.hypot(g.x - g.startX, g.y - g.startY) > TAP_SLOP) g.moved = true;
-      return;
-    }
-    if (event.type !== "pointerup" && event.type !== "pointercancel") return;
-    releasePointer(canvas(), g.id); state.musicGesture = null;
-    if (event.type === "pointercancel") return;
-    g.x = event.clientX; g.y = event.clientY;
-    g.moved ||= Math.hypot(g.x - g.startX, g.y - g.startY) > TAP_SLOP;
-    if (g.moved) {
-      // The native list reads one wheel velocity per game frame. Deliver the
-      // whole swipe once so slower frames do not discard most of the distance.
-      const delta = g.startY - g.y;
-      scrollMusic(g.x, g.y, delta);
-      return;
-    }
-    const b = canvas().getBoundingClientRect();
-    const h = Math.min(b.height - 20, state.musicStage === 'manager' ? (state.musicResized ? 512 : 432) : 672);
-    const w = Math.min(b.width - 20, state.musicStage === 'manager' ? 626 : 642);
-    const closeX = b.left + (b.width + w) / 2 - 15;
-    const closeY = b.top + (b.height - h) / 2 + 14;
-    if (Math.abs(event.clientX - closeX) < 20 && Math.abs(event.clientY - closeY) < 16) {
-      closeMusic();
-    } else musicClick(event.clientX, event.clientY).catch(error => console.warn('[Warzone Music]', error));
   }
 
   function showHelp() {
@@ -1420,9 +1168,7 @@
               <b>STOP</b> stops selected units.</p>
             <p><b>TECH</b> opens research. Choose a lab and add available topics to its queue.
               Each lab completes your choices in order. Use <b>BACK TO BATTLE</b> to return.</p></section>
-          <section><h2>MUSIC</h2><p>Download and enable Music on the start screen, then use <b>MUSIC</b>
-            to choose albums and tracks in the original Music Manager. It pauses a local battle.
-            Turn off <b>+Q</b> before opening Music; your queued construction continues.</p></section>
+          <section><h2>MUSIC</h2><p>Choose your tracks on the start screen before starting a battle. Download Music once, select your playlist, then press <b>START GAME</b>. Your choices are saved for the next game.</p></section>
         </div>
         <footer><span>The battle continues while this guide is open.</span>
           <button type="button" class="wt-help-back">BACK TO BATTLE</button></footer>`;
@@ -1664,13 +1410,9 @@
 
   function handlePointer(event) {
     if (event.pointerType !== "touch") return;
-    if (state.nativeMusicInput) return;
     const target = canvas();
     if (!target) return;
     if (state.stopNonce && event.target === target) { own(event); return; }
-    if (state.musicOpen && (event.target === target || state.musicGesture?.id === event.pointerId)) {
-      handleMusicPointer(event); return;
-    }
 
     const tracked = state.pointers.has(event.pointerId);
     if (event.type === "pointerdown") {
@@ -1978,7 +1720,7 @@
     // their focus transfer to SDL clears every native key, cancelling the
     // engine's quick-build ghost even though +Q is still armed. A real app or
     // window focus loss must still reach SDL and release transient input.
-    if (host.hasFocus?.() && ((help && !help.hidden) || tech?.open || tech?.opening || state.musicOpen)) {
+    if (host.hasFocus?.() && ((help && !help.hidden) || tech?.open || tech?.opening)) {
       event.stopImmediatePropagation();
       return;
     }
@@ -1988,8 +1730,6 @@
     clearZoomAckTimer();
     releaseAll(true);
   });
-  window.addEventListener("resize", () => { if (state.musicOpen) state.musicResized = true; });
-  window.addEventListener('warzone-music-manager-ready', () => { if (state.musicOpen) state.musicStage = 'manager'; });
 
   prepareCanvas();
   const canvasTimer = setInterval(() => {
@@ -1997,7 +1737,7 @@
   }, 500);
   setTimeout(() => clearInterval(canvasTimer), 20000);
   window.__kalaWarzoneTouch = {
-    version: 49,
+    version: 50,
     ready: true,
     key,
     zoom,
@@ -2022,12 +1762,10 @@
     showCombatHud,
     saveName,
     releaseAll,
-    openMusic,
-    closeMusic,
-    isGestureActive: () => state.musicOpen || state.pointers.size > 0 || state.mouseButton !== null || state.heldKeys.size > 0 || state.tiltKey !== null,
+    isGestureActive: () => state.pointers.size > 0 || state.mouseButton !== null || state.heldKeys.size > 0 || state.tiltKey !== null,
     report: () => ({
       active: true,
-      version: 49,
+      version: 50,
       intercepted: state.intercepted,
       mouseEvents: state.mouseEvents,
       taps: state.taps,
@@ -2057,12 +1795,6 @@
       nativeStatsOpen: state.nativeStatsOpen,
       nativeObjectsOpen: state.nativeObjectsOpen,
       pendingClicks: state.clickQueue.length + (state.clickJob ? 1 : 0),
-      musicOpen: state.musicOpen,
-      musicOpening: state.musicOpening,
-      musicStage: state.musicStage,
-      musicRenderFrames: state.musicFrameClock?.sequence || 0,
-      musicScrollPending: Boolean(state.musicScrollJob),
-      musicNativeInputPending: state.nativeMusicInput,
       selectAlls: state.selectAlls,
       manualSelectAlls: state.manualSelectAlls,
       combatOrders: state.combatOrders,

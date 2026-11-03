@@ -1291,6 +1291,9 @@
             try { Module.FS_unlink(configPath); } catch (_) {}
             Module.FS_createDataFile(configDir, 'config',
               new TextEncoder().encode(touchConfig + graphicsConfig + musicConfig), true, true, true);
+            // Apply startup choices after IDBFS restores saved preferences and
+            // before the official playlist loads. No battle-menu navigation.
+            if (window.WarzoneMusic?.applySelection(Module, configDir) === false) return;
           }
           return originalRemoveRunDependency(id);
         };

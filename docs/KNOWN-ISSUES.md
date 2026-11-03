@@ -19,7 +19,10 @@
    repeated Android tap/scroll/return tests, but the user's exact disappearing-UI
    report was not reproduced on the emulator. A physical-device retest is needed.
 6. **Music sound output:** original albums/audio are checksum-verified and the
-   native engine opens and streams selected Opus tracks. Emulator testing uses
+   native engine opens and streams selected Opus tracks. v4.7 moves track choices
+   to startup and removes the battle menu route that hid controls on the user's
+   device. Native selection/persistence/playback and battle controls passed on
+   the emulator; exact physical-device behavior still needs a retest. Testing uses
    `-no-audio`; speaker/headphone quality has not been assessed.
 7. **Performance:** v4.6 removes repeated Android layout requests and avoids
    treating minimap finger drift as a camera drag. This emulator can still have

@@ -6,9 +6,35 @@
   const probe=parameters.get('music_probe')==='1'||parameters.get('graphics_probe')==='1';
   const catalog=window.WarzoneMusicCatalog;
   const state={enabled,loaded:false,files:0,bytes:0,nativeOpens:0,nativeReadBytes:0,
-    nativeAlbums:[],nativeTracks:[],nativeCoverReads:0,error:null};
+    nativeAlbums:[],nativeTracks:[],nativeCoverReads:0,selectedTracks:[],selectionApplied:false,nativePreferenceOpens:0,error:null};
   window.WarzoneMusic={
     enabled,
+    applySelection(module,configDir){
+      if(!enabled)return true;
+      try{
+        const raw=window.BlockNightAndroid?.musicSelection?.();
+        const requested=raw?JSON.parse(raw):null;
+        const allowed=new Set(catalog.trackIds);
+        if(requested!==null&&(!Array.isArray(requested)||requested.some(id=>!allowed.has(id))))throw Error('Invalid Music selection. Please choose your tracks again.');
+        const selected=new Set(requested===null?catalog.trackIds:requested);
+        if(!selected.size)throw Error('Select a Music track on the start screen, or turn Music off.');
+        const path=configDir+'/music.json';let preferences={};
+        try{preferences=JSON.parse(module.FS.readFile(path,{encoding:'utf8'}));}catch(_){}
+        if(!preferences||typeof preferences!=='object'||Array.isArray(preferences))preferences={};
+        if(!preferences.tracks||typeof preferences.tracks!=='object'||Array.isArray(preferences.tracks))preferences.tracks={};
+        // Warzone 4.7 playlist.cpp reads these user preferences before selecting
+        // a track. The four modes are campaign, challenge, skirmish, multiplayer.
+        // Original album definitions and all audio bytes remain unchanged.
+        for(const id of catalog.trackIds){
+          const previous=preferences.tracks[id];
+          preferences.tracks[id]={...(previous&&typeof previous==='object'?previous:{}),
+            settings:{music_modes:Array(4).fill(selected.has(id))}};
+        }
+        module.FS.writeFile(path+'.tmp',JSON.stringify(preferences),{encoding:'utf8'});
+        module.FS.rename(path+'.tmp',path);
+        state.selectedTracks=[...selected];state.selectionApplied=true;return true;
+      }catch(error){state.error=String(error.message||error);window.BlockNightAndroid?.musicFailed(state.error);return false;}
+    },
     prepare(module){
       if(!enabled)return;
       const dependency='warzone-towers-music';module.addRunDependency(dependency);
@@ -34,13 +60,10 @@
             const fs=module.FS,open=fs.open,read=fs.read;
             fs.open=function(...args){
               const stream=open.apply(this,args),path=String(stream.path);
-              // The original Music Manager creates its album-art widget only
-              // after the native form is open. This confirms navigation without
-              // editing the engine or trusting a short UI timer.
               if(path.includes('/music/albums/')&&path.endsWith('.png')){
                 state.nativeCoverReads++;
-                window.dispatchEvent?.(new CustomEvent('warzone-music-manager-ready'));
               }
+              if(probe&&path.endsWith('/music.json'))state.nativePreferenceOpens++;
               if(probe&&path.includes('/music/')){
                 state.nativeOpens++;
                 const list=path.endsWith('/album.json')?state.nativeAlbums:path.endsWith('.opus')?state.nativeTracks:null;
@@ -57,6 +80,6 @@
         .catch(error=>{state.error=String(error.message||error);
           window.BlockNightAndroid?.musicFailed(state.error)});
     },
-    report(){return {...state,nativeAlbums:[...state.nativeAlbums],nativeTracks:[...state.nativeTracks]}}
+    report(){return {...state,selectedTracks:[...state.selectedTracks],nativeAlbums:[...state.nativeAlbums],nativeTracks:[...state.nativeTracks]}}
   };
 })();

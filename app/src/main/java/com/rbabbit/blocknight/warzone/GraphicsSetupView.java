@@ -45,6 +45,14 @@ final class GraphicsSetupView extends FrameLayout {
         panel.setPadding(dp(24), dp(18), dp(24), dp(18));
         LayoutParams panelParams = new LayoutParams(-1, -1, Gravity.CENTER);
         addView(panel, panelParams);
+        LinearLayout header = new LinearLayout(context); header.setGravity(Gravity.CENTER_VERTICAL);
+        TextView brand = text("WARZONE TOWERS", 16, CYAN, true);
+        header.addView(brand, new LinearLayout.LayoutParams(0, dp(44), 1));
+        start = button("START GAME", true); start.setEnabled(false);
+        start.setContentDescription("Start game");
+        start.setOnClickListener(v -> { if (!downloading) actions.start(mode); });
+        header.addView(start, new LinearLayout.LayoutParams(dp(126), dp(44)));
+        panel.addView(header);
         ScrollView scroll = new ScrollView(context); scroll.setFillViewport(true);
         scroll.setClipToPadding(false); scroll.setVerticalScrollBarEnabled(false);
         LinearLayout content = new LinearLayout(context); content.setOrientation(LinearLayout.VERTICAL);
@@ -52,8 +60,6 @@ final class GraphicsSetupView extends FrameLayout {
         scroll.addView(content, new ScrollView.LayoutParams(-1, -1));
         panel.addView(scroll, new LinearLayout.LayoutParams(-1, 0, 1));
 
-        TextView eyebrow = text("WARZONE TOWERS", 12, CYAN, true); eyebrow.setLetterSpacing(.16f);
-        content.addView(eyebrow);
         TextView heading = text("CHOOSE YOUR GRAPHICS", 28, INK, true);
         LinearLayout.LayoutParams headingParams = new LinearLayout.LayoutParams(-1, -2);
         headingParams.topMargin = dp(5); content.addView(heading, headingParams);
@@ -92,10 +98,6 @@ final class GraphicsSetupView extends FrameLayout {
         cancel.setOnClickListener(v -> { actions.cancel(); setDownloading(false); showStatus("Download paused. Your progress is saved.", false); });
         LinearLayout.LayoutParams cancelParams = new LinearLayout.LayoutParams(-2, dp(46)); cancelParams.rightMargin = dp(12);
         buttons.addView(cancel, cancelParams);
-        start = button("START BATTLE", true);
-        start.setEnabled(false);
-        start.setOnClickListener(v -> { if (!downloading) actions.start(mode); });
-        buttons.addView(start, new LinearLayout.LayoutParams(0, dp(48), 1));
         panel.addView(buttons, new LinearLayout.LayoutParams(-1, -2));
         select("high".equals(selected) ? "high" : "normal");
         // Keep the launch panel comfortably sized on large tablets.
@@ -126,8 +128,8 @@ final class GraphicsSetupView extends FrameLayout {
         if (!downloading) status.setVisibility(GONE);
         decorate(normalCard, normalMark, value.equals("normal"), "Normal graphics");
         decorate(highCard, highMark, value.equals("high"), "High Quality graphics");
-        start.setText(mode.equals("high") && !cached ? "DOWNLOAD & START" : "START BATTLE");
-        start.setContentDescription(start.getText());
+        start.setText("START GAME");
+        start.setContentDescription("Start game");
     }
     private void decorate(LinearLayout card, TextView mark, boolean selected, String name) {
         GradientDrawable background = new GradientDrawable(); background.setColor(selected ? 0xEE10292D : 0xDB101A1D);
@@ -144,14 +146,15 @@ final class GraphicsSetupView extends FrameLayout {
         downloading = value; normalCard.setEnabled(!value); highCard.setEnabled(!value); start.setEnabled(!value && musicChecked);
         music.setEnabled(!value && musicChecked);
         cancel.setVisibility(value ? VISIBLE : GONE); progress.setVisibility(value ? VISIBLE : GONE);
-        start.setText(value ? "PREPARING HIGH QUALITY…" : (mode.equals("high") && !cached ? "DOWNLOAD & START" : "START BATTLE"));
-        start.setContentDescription(start.getText());
+        start.setText(value ? "PREPARING…" : "START GAME");
+        start.setContentDescription(value ? "Preparing High Quality" : "Start game");
     }
     void setMusicState(boolean ready, boolean on) {
         musicChecked = true;
         music.setText(ready ? (on ? "MUSIC · ON" : "MUSIC · OFF") : "MUSIC · DOWNLOAD");
         music.setContentDescription(music.getText());music.setEnabled(!downloading);start.setEnabled(!downloading);
     }
+    String selectedMode() { return mode; }
     void downloadProgress(long bytes, boolean verifying) {
         setDownloading(true); progress.setIndeterminate(verifying);
         progress.setProgress((int) (bytes * 1000 / GraphicsPackStore.BYTES));

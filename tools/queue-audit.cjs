@@ -3,7 +3,7 @@
 // are not treated as proof that the engine accepted a build queue.
 const fs=require('node:fs'),path=require('node:path'),{execFileSync}=require('node:child_process');
 const {adb}=require('./android-sdk.cjs');
-const device=process.env.WZ_QA_DEVICE||'emulator-5554',out=path.join(__dirname,'../qa/v4.6');
+const device=process.env.WZ_QA_DEVICE||'emulator-5554',out=path.resolve(__dirname,'..',process.env.WZ_QA_OUTPUT||'qa/v4.6');
 const socket=new WebSocket(fs.readFileSync(path.join(__dirname,'live-cdp-url.txt'),'utf8').trim());
 let id=0;const pending=new Map();
 socket.addEventListener('message',e=>{const m=JSON.parse(String(e.data)),p=pending.get(m.id);if(p){pending.delete(m.id);clearTimeout(p.timer);m.error?p.reject(m.error):p.resolve(m.result)}});
@@ -77,38 +77,6 @@ async function matrix(){
  const stopTargets=builders(await save('matrix-before-stop')).filter(d=>d.selected).map(d=>d.id);assert.ok(stopTargets.length,'STOP must have actual selected trucks to test');
  await button('#blocknight-stop');const stopped=await capture('explicit-stop');assert.equal(stopped.touch.queueMode,false);assert.ok(builders(stopped).filter(d=>stopTargets.includes(d.id)).every(d=>d['orderList/size']===0&&d['order/type']===0),'STOP must clear the original trucks, even if the engine deselects them');
  shot('matrix-after-stop');console.log('PASS: native queue matrix completed');
-}
-async function musicAudit(){
- const assert=require('node:assert/strict');
- await waitReady();
- await dismissPreparation();
- await evaluate("(()=>{window.__musicOpenedPaths=[];const f=LaunchedModule.FS.open;LaunchedModule.FS.open=function(...a){const s=f.apply(this,a);if(String(s.path).includes('/music/'))__musicOpenedPaths.push(s.path);return s};return true})()");
- await button('#blocknight-music');
- const menuDeadline=Date.now()+90000;while(Date.now()<menuDeadline){if(!await evaluate('__kalaWarzoneTouch.report().musicOpening'))break;await wait(100)}
- const opened=await evaluate('({touch:__kalaWarzoneTouch.report(),music:WarzoneMusic.report(),paths:__musicOpenedPaths})');
- assert.equal(opened.touch.musicOpen,true);assert.equal(opened.touch.musicOpening,false);assert.equal(opened.touch.musicStage,'manager','native manager must acknowledge its actual form');assert.equal(opened.music.nativeAlbums.length,4);
- shot('music-native-manager');
- const [w,h]=await evaluate('[innerWidth,innerHeight]');const top=(h-Math.min(h-20,432))/2;
- const trackNumber=[1,2,3].find(n=>!opened.music.nativeTracks.some(p=>p.endsWith('/original_soundtrack/track'+n+'.opus')))||2;
- await tap(w/2-160,top+74+(trackNumber-1)*25);
- for(let i=0;i<30;i++){if(await evaluate(`__musicOpenedPaths.some(p=>p.endsWith('/original_soundtrack/track${trackNumber}.opus'))`))break;await wait(100)}
- const selected=await evaluate('({music:WarzoneMusic.report(),paths:__musicOpenedPaths})');shot('music-original-track-selected');
- assert.ok(selected.paths.some(p=>p.endsWith('/original_soundtrack/track'+trackNumber+'.opus')),'the original manager must open a different selected original track');
- const beforeScroll=selected.paths.length;
- for(let i=0;i<3;i++)await swipe(w/2-120,top+240,w/2-120,top+100,350);
- for(let i=0;i<100;i++){if(!await evaluate('__kalaWarzoneTouch.report().musicScrollPending'))break;await wait(100)}
- const scrollFrame=await evaluate('__kalaWarzoneTouch.report().musicRenderFrames');
- for(let i=0;i<100;i++){if(await evaluate(`__kalaWarzoneTouch.report().musicRenderFrames>=${scrollFrame+2}`))break;await wait(100)}
- shot('music-native-scrolled');
- await tap(w/2-160,top+74);
- for(let i=0;i<30;i++){if(await evaluate(`__musicOpenedPaths.slice(${beforeScroll}).some(p=>p.endsWith('.opus')&&!p.includes('/original_soundtrack/'))`))break;await wait(100)}
- const scrolled=await evaluate('({music:WarzoneMusic.report(),paths:__musicOpenedPaths})');
- assert.ok(scrolled.paths.slice(beforeScroll).some(p=>p.endsWith('.opus')&&!p.includes('/original_soundtrack/')),'scroll must expose and play a track from another album');
- if(process.argv[3]==='android-back')run('shell','input','keyevent','4');else await button('#blocknight-music');
- await wait(1200);
- const returned=await save('music-return-to-battle');assert.equal(returned.touch.musicOpen,false);assert.ok(returned.wave.gameTime>0);
- fs.writeFileSync(path.join(out,'music-native-report'+(process.argv[3]==='android-back'?'-android-back':'')+'.json'),JSON.stringify({opened,selected,scrolled,returned:{touch:returned.touch,wave:returned.wave}},null,2));
- console.log('PASS: native Music Manager, four albums, original track selection, touch scrolling and return to battle');
 }
 async function protocol(method,params){const n=++id;return new Promise((resolve,reject)=>{const timer=setTimeout(()=>{pending.delete(n);reject(Error(method+' timed out'))},15000);pending.set(n,{resolve,reject,timer});socket.send(JSON.stringify({id:n,method,params}))})}
 async function touch(type,points=[]){const f=await evaluate("document.getElementById('warzone-game-frame').getBoundingClientRect().toJSON()",false);await protocol('Input.dispatchTouchEvent',{type,touchPoints:points.map(([x,y],id)=>({id,x:x+f.x,y:y+f.y,force:.5,radiusX:3,radiusY:3}))})}
@@ -189,7 +157,23 @@ async function main(){
  else if(action==='shot')shot(args[0]);
  else if(action==='key'){const code=/^[a-z]$/i.test(args[0])?'Key'+args[0].toUpperCase():args[0];await evaluate(`__kalaWarzoneTouch.nativePressKey(${JSON.stringify(args[0])},${JSON.stringify(code)},${Number(args[1])});true`);await wait(1000)}
  else if(action==='matrix')await matrix();
- else if(action==='music')await musicAudit();
+ else if(action==='startupmusic'){
+  const assert=require('node:assert/strict');await waitReady();await dismissPreparation();
+  const expected=JSON.parse(fs.readFileSync(path.join(out,'startup-music-results.json'),'utf8')).selectedTrack;
+  for(let i=0;i<100;i++){if(await evaluate(`WarzoneMusic.report().nativeTracks.includes('/data/music/albums/'+${JSON.stringify(expected)})`))break;await wait(100)}
+  const report=await evaluate('WarzoneMusic.report()');
+  assert.equal(report.loaded,true);assert.equal(report.selectionApplied,true);assert.deepEqual(report.selectedTracks,[expected]);
+  assert.ok(report.nativeReadBytes>4096,'the engine must stream actual original audio');
+  assert.ok(report.nativeTracks.includes('/data/music/albums/'+expected),'the official engine must open the selected battle track');
+  assert.ok(report.nativeTracks.every(p=>p==='/data/music/menu.opus'||p==='/data/music/albums/'+expected),'an excluded battle track must not play');
+  const preferences=await evaluate("JSON.parse(LaunchedModule.FS.readFile((LaunchedModule.WZVAL_configDirPath||'/warzone2100')+'/music.json',{encoding:'utf8'}))");
+  for(const [id,value] of Object.entries(preferences.tracks))assert.deepEqual(value.settings.music_modes,Array(4).fill(id===expected));
+  const header=await evaluate("({musicButton:!!document.getElementById('blocknight-music'),musicMode:document.body.dataset.nativeMusic,buttons:[...document.querySelectorAll('#blocknight-combat-hud button')].map(e=>({id:e.id,visible:!!e.getClientRects().length,enabled:!e.disabled}))})",false);
+  assert.equal(header.musicButton,false);assert.equal(header.musicMode,undefined);assert.equal(header.buttons.length,11);assert.ok(header.buttons.every(b=>b.visible&&b.enabled));
+  const saved=await save('startup-music-battle');shot('startup-music-battle');
+  fs.writeFileSync(path.join(out,'startup-music-battle-report.json'),JSON.stringify({expected,report,preferences,header,wave:saved.wave},null,2));
+  console.log('PASS: startup playlist drives actual native Opus playback; all eleven battle controls remain visible and active');
+ }
  else if(action==='extended')await extended();
  else if(action==='pancheck'){
   const assert=require('node:assert/strict'),before=await save('pancheck-before');
@@ -202,15 +186,16 @@ async function main(){
  else if(action==='layout'){
   const assert=require('node:assert/strict');
   const layout=await evaluate("(()=>{const strip=document.getElementById('warzone-command-strip').getBoundingClientRect();return {width:innerWidth,strip:strip.toJSON(),items:[...document.querySelectorAll('#blocknight-combat-hud button,#warzone-towers-wave-hud')].filter(e=>e.getClientRects().length).map(e=>({id:e.id,r:e.getBoundingClientRect().toJSON()}))}})()",false);
-  assert.ok(layout.items.length>=13,'all battle commands and the wave panel must be visible');
+  assert.ok(layout.items.length>=12,'all battle commands and the wave panel must be visible');
   for(const {id,r} of layout.items)assert.ok(r.left>=0&&r.right<=layout.width+1&&r.top>=0&&r.bottom<=layout.strip.bottom+1,id+' must fit inside the command area');
   for(let i=0;i<layout.items.length;i++)for(let j=i+1;j<layout.items.length;j++){
    const a=layout.items[i],b=layout.items[j];assert.ok(Math.min(a.r.right,b.r.right)-Math.max(a.r.left,b.r.left)<=1||Math.min(a.r.bottom,b.r.bottom)-Math.max(a.r.top,b.r.top)<=1,a.id+' overlaps '+b.id);
   }
-  fs.writeFileSync(path.join(out,'header-layout.json'),JSON.stringify(layout,null,2));console.log('PASS: all twelve commands and the wave panel fit without overlap');
+  assert.ok(!layout.items.some(i=>i.id==='blocknight-music'),'Music belongs on the start screen');
+  fs.writeFileSync(path.join(out,'header-layout.json'),JSON.stringify(layout,null,2));console.log('PASS: all eleven commands and the wave panel fit without overlap; Music is absent');
  }
  else if(action==='inspect')console.log(JSON.stringify({nativeFrame:windowBounds(),...await evaluate('({view:[innerWidth,innerHeight],touch:__kalaWarzoneTouch.report(),wave:__warzoneTowersWaves.report().snapshot})')}));
  else throw Error('Unknown audit action');
  socket.close();
 }
-const timeout=setTimeout(()=>process.exit(1),process.argv[2]==='extended'?480000:['matrix','music','prepare'].includes(process.argv[2])?300000:120000);main().then(()=>{clearTimeout(timeout);process.exit(0)}).catch(error=>{console.error(error);process.exit(1)});
+const timeout=setTimeout(()=>process.exit(1),process.argv[2]==='extended'?480000:['matrix','startupmusic','prepare'].includes(process.argv[2])?300000:120000);main().then(()=>{clearTimeout(timeout);process.exit(0)}).catch(error=>{console.error(error);process.exit(1)});

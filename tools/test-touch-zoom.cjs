@@ -143,54 +143,10 @@ async function run() {
     await sleep(20);
     assert.equal(controls.report().pendingClicks,0,'native input queue must drain');
   };
-  assert.equal(controls.version, 49);
-  {
-    const calls=[];let binding=null;
-    const gl={FRAMEBUFFER:36160,DRAW_FRAMEBUFFER:36009,FRAMEBUFFER_BINDING:36006,DRAW_FRAMEBUFFER_BINDING:36006,COLOR_BUFFER_BIT:16384,
-      getParameter:()=>binding,
-      bindFramebuffer(target,buffer){assert.equal(this,gl);calls.push(['bind',target,buffer]);binding=buffer;},
-      clear(mask){assert.equal(this,gl);calls.push(['clear',mask]);}};
-    const frameContext={window:{LaunchedModule:{ctx:gl}},state:{},canvas:()=>null,performance,setTimeout,clearTimeout};
-    vm.createContext(frameContext);
-    vm.runInContext(source.slice(source.indexOf('  function gameFrameClock()'),source.indexOf('  async function musicClick(')),frameContext);
-    const clock=frameContext.gameFrameClock(),fbo={};
-    gl.bindFramebuffer(gl.FRAMEBUFFER,fbo);gl.clear(17664);assert.equal(clock.sequence,0,'offscreen passes must not masquerade as UI frames');
-    gl.bindFramebuffer(gl.FRAMEBUFFER,null);gl.clear(256);assert.equal(clock.sequence,0,'depth-only clears are not a new UI frame');
-    gl.clear(17664);assert.equal(clock.sequence,1);assert.equal(frameContext.gameFrameClock(),clock,'observe each context once');
-    assert.deepEqual(calls,[['bind',36160,fbo],['clear',17664],['bind',36160,null],['clear',256],['clear',17664]],'frame observation must preserve every engine GL call unchanged');
-    let ready=false;const waiting=frameContext.waitGameFrames(2).then(()=>{ready=true});
-    gl.clear(17664);await sleep(15);assert.equal(ready,false,'one submitted frame cannot satisfy a two-frame wait');
-    gl.clear(17664);await waiting;assert.equal(ready,true);
-  }
-  {
-    const listeners = new Map(), target = {}, inputState = {};
-    const eventTarget = label => ({
-      addEventListener(type, callback) { listeners.set(label + type, callback); },
-      removeEventListener(type) { listeners.delete(label + type); }
-    });
-    let nonce, finished = false;
-    const inputContext = {window: {...eventTarget('window:'), parent: {innerWidth:800},
-      BlockNightAndroid: {tapMusic(value) { nonce = value; }}},
-      document:eventTarget('document:'), state:inputState, canvas:()=>target,
-      waitGameFrames:async()=>{}, setTimeout,clearTimeout,Date,Math,performance};
-    vm.createContext(inputContext);
-    vm.runInContext(source.slice(source.indexOf('  async function musicClick('),source.indexOf('  async function closeMusic(')),inputContext);
-    const delivery = inputContext.musicClick(400,250).then(()=>{finished=true;});
-    listeners.get('window:warzone-native-music-tap')({detail:nonce});
-    await sleep(5);
-    assert.equal(finished,false,'Android dispatch alone must not advance the native menu');
-    const pointer = type => ({type,isTrusted:true,pointerType:'touch',target,clientX:400,clientY:250,pointerId:7});
-    listeners.get('document:pointerup')(pointer('pointerup'));
-    await sleep(5);assert.equal(finished,false,'a release without its matching press is insufficient');
-    listeners.get('document:pointerdown')(pointer('pointerdown'));
-    listeners.get('document:pointerup')({...pointer('pointerup'),pointerId:8});
-    await sleep(5);assert.equal(finished,false,'unrelated fingers must not acknowledge the menu tap');
-    assert.equal(inputState.nativeMusicInput,true,'the native touch must keep bypassing battlefield conversion until complete');
-    listeners.get('document:pointerup')(pointer('pointerup'));
-    await delivery;assert.equal(finished,true);assert.equal(inputState.nativeMusicInput,false);
-    assert.equal(listeners.size,0,'completed input must remove its acknowledgement listeners');
-  }
+  assert.equal(controls.version, 50);
   assert.equal(controls.showCombatHud(), true);
+  assert.equal(elements.has("blocknight-music"),false,"battle header must not expose Music navigation");
+  assert.equal(controls.openMusic,undefined);
   assert.ok(elements.has("blocknight-zoom-control"), "compact zoom group should exist");
   for (const id of ["blocknight-zoom-close", "blocknight-zoom-battle",
     "blocknight-zoom-map"]) {

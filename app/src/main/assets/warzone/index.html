@@ -286,6 +286,8 @@
       }
     </style>
     <script src="graphics-loader.js"></script>
+    <script src="music-catalog.js"></script>
+    <script src="music-loader.js"></script>
   </head>
   <body class="d-flex text-center text-bg-dark unselectable">
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
@@ -1279,9 +1281,16 @@
             const graphicsConfig = window.WarzoneGraphics?.high
               ? 'terrainMode=2\nterrainShadingQuality=1024\ntextureSize=2048\n'
               : 'terrainMode=1\nterrainShadingQuality=512\ntextureSize=2048\n';
+            let previousConfig = '';
+            try { previousConfig = Module.FS.readFile(configPath, { encoding: 'utf8' }); } catch (_) {}
+            const audioLevels = ['cdvol', 'fxvol', 'voicevol'].map(key => {
+              const value = previousConfig.match(new RegExp('^' + key + '=(\\d+)', 'm'))?.[1];
+              return value === undefined ? '' : key + '=' + Math.max(0, Math.min(100, Number(value))) + '\n';
+            }).join('');
+            const musicConfig = 'music_enabled=' + (window.WarzoneMusic?.enabled ? '1' : '0') + '\n' + audioLevels;
             try { Module.FS_unlink(configPath); } catch (_) {}
             Module.FS_createDataFile(configDir, 'config',
-              new TextEncoder().encode(touchConfig + graphicsConfig), true, true, true);
+              new TextEncoder().encode(touchConfig + graphicsConfig + musicConfig), true, true, true);
           }
           return originalRemoveRunDependency(id);
         };
@@ -1293,6 +1302,7 @@
   
       Module['preRun'].push(blockNightPrepareCustomMapDirectory);
       Module['preRun'].push(module => window.WarzoneGraphics.prepare(module));
+      Module['preRun'].push(module => window.WarzoneMusic.prepare(module));
       Module['preRun'].push(wz_pre_run_fixup_canvas);
       Module['postRun'].push(wz_handle_post_run);
       Module.arguments = ['--configdir='+wz_js_get_config_dir_path()];
@@ -1419,7 +1429,7 @@
       
       // optional data file loads
       let start_optional_promises = data_load_promises.length;
-      if (WZ_LAUNCH_OPTIONS['load_music']) {
+      if (!window.BlockNightAndroid && WZ_LAUNCH_OPTIONS['load_music']) {
         data_load_promises.push(loadScriptAsync(WZ_MUSIC_PKG_SUBDIR + 'warzone2100-music.js'));
       }
       if (WZ_LAUNCH_OPTIONS['load_classic_terrain']) {

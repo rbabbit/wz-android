@@ -2,17 +2,19 @@
 
 Full Android project for Warzone Towers, based on the supplied Survival Mod and
 TowerDefense2_m map. The editable project is at the repository root; open this
-folder in Android Studio. Current Android version: **4.5-graphics-choice (45)**.
+folder in Android Studio. Current Android version: **4.6-music-controls (46)**.
 
 ## Downloads and saved versions
 
+- [v4.6 APK, complete source, optional Music pack and notices](https://github.com/rbabbit/wz-android/releases/tag/v4.6-music-controls)
 - [v4.5 APK, frozen source ZIP and optional HQ pack](https://github.com/rbabbit/wz-android/releases/tag/v4.5-graphics-choice)
 - [Older Towers APKs/source ZIPs, verified fallbacks and reference material](https://github.com/rbabbit/wz-android/releases/tag/project-archive-2026-11-02)
-- [Complete archive catalogue, sizes and SHA-256 values](archive/releases.json)
+- [Earlier archive catalogue, sizes and SHA-256 values](archive/releases.json)
+- [v4.6 snapshot metadata](archive/v4.6-release.json)
 - [Restore and maintenance guide](docs/MAINTENANCE.md)
 
-Releases preserve the original delivered files. The source here also makes test
-paths portable; those tooling/documentation changes do not change the v4.5 game.
+Releases preserve the original delivered files. The working source includes the
+v4.6 Music and input changes; the previous v4.5 release remains a frozen fallback.
 The repository's original manual-release README is retained in
 `archive/repository-bootstrap-README.md`. Existing release 1.1.1 is preserved.
 
@@ -49,6 +51,7 @@ the owner's private signing keys are not part of the project archive.
 | Embedding, map registration, regression/live QA tools | `tools/` |
 | Screenshots, interaction results and QA reports | `qa/`, `design-qa.md` |
 | HQ provenance/manifest/notices | `vendor/graphics/hq-v3/` |
+| Optional Music, pinned files and notices | `docs/MUSIC.md`, `vendor/music/official-v1/`, `warzone/music-*.js` |
 
 Scenario edits must be embedded before building:
 
@@ -66,12 +69,37 @@ See [AGENTS.md](AGENTS.md) and the maintenance guide before changing game logic.
 Both graphics modes reached actual gameplay; cancel/resume, checksum and offline
 cache use passed. The emulator has an existing black-terrain rendering issue in
 both modes, so HQ visual improvement and physical Samsung tablet compatibility
-remain unconfirmed. The reported +Q loss of selection after an unrelated tap is
-still open. [Known issues](docs/KNOWN-ISSUES.md) records these explicitly.
+remain unconfirmed. The v4.6 input audit reads the engine's saved truck orders to
+check sticky construction, including bad taps and overlay returns. The exact
+builds and results are recorded under `qa/v4.6/`.
+[Known issues](docs/KNOWN-ISSUES.md) records the remaining device limits.
 
 ## Release history
 
-## Current release: 4.5-graphics-choice (45)
+## Version 4.6-music-controls (46)
+
+Optional Music downloads the complete original four-album collection from the
+owner's VPS, verifies its SHA-256 and keeps it in private offline storage. The
+Music command uses the original engine's options and track manager. See
+[Music setup, provenance and notices](docs/MUSIC.md).
+
+The input adapter preserves +Q through unrelated taps, small minimap finger
+drift, camera tilt and HELP/TECH returns. Native menu taps release Ctrl; the next
+construction placement restores it. STOP uses an acknowledged custom scenario
+command for the selected friendly units. Repeated identical Android layouts no
+longer request a new layout on every frame. No research automation or enemy
+roster change is included.
+
+Two-finger pointer updates are batched before choosing pan, pinch or tilt, so
+parallel horizontal motion does not accidentally choose zoom. Skip Wave also
+handles touch release directly and deduplicates the later compatibility click.
+
+Official compiled engine code, WASM and the existing packaged data prefix are
+preserved. Only the custom scenario bridge is appended/reindexed for STOP.
+`tools/verify-engine-preservation.py` checks the complete engine and all 3,281
+previous resolved assets against the frozen v4.5 APK.
+
+## Version 4.5-graphics-choice (45)
 
 The native launch screen offers Normal (included, offline) or High Quality
 (optional 95 MiB terrain/water download). Downloads come from the owner's VPS,

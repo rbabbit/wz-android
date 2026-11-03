@@ -8,8 +8,12 @@ import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Build;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.InputDevice;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -28,6 +32,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.window.OnBackInvokedDispatcher;
 
 import androidx.webkit.WebViewAssetLoader;
 import androidx.webkit.WebViewCompat;
@@ -70,10 +75,17 @@ public final class MainActivity extends Activity {
     private GraphicsPackStore graphicsStore;
     private GraphicsSetupView graphicsSetup;
     private String graphicsMode = "normal";
+    private MusicPackStore musicStore;
+    private MusicSetupView musicSetup;
+    private boolean musicEnabled, musicCached, inGameMusicOpen;
 
     @Override
     protected void onCreate(Bundle state) {
         super.onCreate(state);
+        if (Build.VERSION.SDK_INT >= 33) {
+            getOnBackInvokedDispatcher().registerOnBackInvokedCallback(
+                    OnBackInvokedDispatcher.PRIORITY_DEFAULT, this::onBackPressed);
+        }
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
         touchTestMode = getIntent().getBooleanExtra("touch_test", false);
         touchSuiteMode = getIntent().getBooleanExtra("touch_suite", false);
@@ -87,6 +99,8 @@ public final class MainActivity extends Activity {
 
         createWebView();
         graphicsStore = new GraphicsPackStore(this);
+        musicStore = new MusicPackStore(this);
+        musicEnabled = getPreferences(MODE_PRIVATE).getBoolean("music_enabled", false);
         graphicsMode = getPreferences(MODE_PRIVATE).getString("graphics_mode", "normal");
         showGraphicsSetup();
     }
@@ -95,11 +109,61 @@ public final class MainActivity extends Activity {
         graphicsSetup = new GraphicsSetupView(this, graphicsMode, new GraphicsSetupView.Actions() {
             @Override public void start(String mode) { startWithGraphics(mode); }
             @Override public void cancel() { graphicsStore.cancel(); }
+            @Override public void music() { showMusicSetup(); }
         });
         root.addView(graphicsSetup, new FrameLayout.LayoutParams(-1, -1));
         graphicsStore.inspect(cached -> {
             if (graphicsSetup != null && !isFinishing()) graphicsSetup.setCached(cached);
         });
+        inspectMusic();
+    }
+
+    private void inspectMusic() {
+        musicStore.inspect(cached -> {
+            musicCached = cached;
+            if (!cached) musicEnabled = false;
+            if (graphicsSetup != null && !isFinishing()) graphicsSetup.setMusicState(cached, musicEnabled);
+            if (musicSetup != null && !isFinishing()) musicSetup.setCached(cached, musicEnabled);
+        });
+    }
+
+    private void showMusicSetup() {
+        if (musicSetup != null) return;
+        musicSetup = new MusicSetupView(this, new MusicSetupView.Actions() {
+            @Override public void download() { downloadMusic(); }
+            @Override public void cancel() { musicStore.cancel(); }
+            @Override public void enabled(boolean on) {
+                musicEnabled = musicCached && on;
+                getPreferences(MODE_PRIVATE).edit().putBoolean("music_enabled", musicEnabled).apply();
+            }
+            @Override public void close() { closeMusicSetup(); }
+        });
+        musicSetup.setCached(musicCached, musicEnabled);
+        root.addView(musicSetup, new FrameLayout.LayoutParams(-1, -1));
+    }
+
+    private void downloadMusic() {
+        if (musicSetup != null) musicSetup.progress(0, false);
+        musicStore.download(new OptionalPackStore.Listener() {
+            @Override public void progress(long bytes, boolean verifying) {
+                if (musicSetup != null) musicSetup.progress(bytes, verifying);
+            }
+            @Override public void ready() {
+                musicCached = true; musicEnabled = true;
+                getPreferences(MODE_PRIVATE).edit().putBoolean("music_enabled", true).apply();
+                if (musicSetup != null) musicSetup.ready(true);
+                if (graphicsSetup != null) graphicsSetup.setMusicState(true, true);
+            }
+            @Override public void failed(String message) {
+                if (musicSetup != null) musicSetup.failed(message);
+            }
+        });
+    }
+
+    private void closeMusicSetup() {
+        musicStore.cancel();
+        if (musicSetup != null) { root.removeView(musicSetup); musicSetup = null; }
+        inspectMusic();
     }
 
     private void startWithGraphics(String mode) {
@@ -121,9 +185,15 @@ public final class MainActivity extends Activity {
         getPreferences(MODE_PRIVATE).edit().putString("graphics_mode", graphicsMode).apply();
         if (graphicsSetup != null) { root.removeView(graphicsSetup); graphicsSetup = null; }
         createLoadingPanel();
-        String url = URL + "&graphics=" + graphicsMode;
+        webView.loadUrl(gameUrl());
+    }
+
+    private String gameUrl() {
+        String url = URL + "&graphics=" + graphicsMode + "&music=" + (musicEnabled && musicCached ? "1" : "0");
         if (getIntent().getBooleanExtra("graphics_probe", false)) url += "&graphics_probe=1";
-        webView.loadUrl(url);
+        if ((getApplicationInfo().flags & android.content.pm.ApplicationInfo.FLAG_DEBUGGABLE) != 0
+                || getIntent().getBooleanExtra("music_probe", false)) url += "&music_probe=1";
+        return url;
     }
 
     private void createWebView() {
@@ -133,6 +203,7 @@ public final class MainActivity extends Activity {
         webView.setHorizontalScrollBarEnabled(false);
         webView.setVerticalScrollBarEnabled(false);
         webView.setLongClickable(false);
+        webView.setOnLongClickListener(view -> true);
         webView.setHapticFeedbackEnabled(false);
         webView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
         webView.setRendererPriorityPolicy(WebView.RENDERER_PRIORITY_IMPORTANT, false);
@@ -211,18 +282,24 @@ public final class MainActivity extends Activity {
                 height / ((MIN_ENGINE_CSS_HEIGHT + COMMAND_STRIP_CSS_HEIGHT) * density)));
         // Compact layouts keep all commands visible on a second row, with
         // wave status at the top-right. Preserve the engine minimum below both.
-        if (width / (scale * density) <= 1000f) {
+        if (width / (scale * density) <= 1100f) {
             scale = Math.min(scale, height / ((MIN_ENGINE_CSS_HEIGHT + 94f) * density));
         }
         int virtualWidth = (int) Math.ceil(width / scale);
         int virtualHeight = (int) Math.ceil(height / scale);
         FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) webView.getLayoutParams();
-        params.width = virtualWidth;
-        params.height = virtualHeight;
-        params.gravity = Gravity.TOP | Gravity.START;
-        webView.setLayoutParams(params);
-        webView.setScaleX(scale);
-        webView.setScaleY(scale);
+        int gravity = Gravity.TOP | Gravity.START;
+        // The root's layout callback also runs when its bounds have not changed.
+        // Reapplying identical child parameters requests another layout, which
+        // otherwise creates a continuous layout loop during play and loading.
+        if (params.width != virtualWidth || params.height != virtualHeight || params.gravity != gravity) {
+            params.width = virtualWidth;
+            params.height = virtualHeight;
+            params.gravity = gravity;
+            webView.setLayoutParams(params);
+        }
+        if (webView.getScaleX() != scale) webView.setScaleX(scale);
+        if (webView.getScaleY() != scale) webView.setScaleY(scale);
     }
 
     private void createLoadingPanel() {
@@ -401,6 +478,67 @@ public final class MainActivity extends Activity {
 
     public final class EngineBridge {
         @JavascriptInterface
+        public void musicVisibility(boolean open) {
+            runOnUiThread(() -> inGameMusicOpen = open);
+        }
+        @JavascriptInterface
+        public void tapMusic(String nonce, float x, float y, float cssWidth) {
+            runOnUiThread(() -> {
+                if (webView == null || !inGameMusicOpen || cssWidth <= 0
+                        || !Float.isFinite(x) || !Float.isFinite(y)) return;
+                WebView target = webView;
+                float scale = target.getWidth() / cssWidth;
+                float px = x * scale, py = y * scale;
+                if (px < 0 || py < 0 || px > target.getWidth() || py > target.getHeight()) return;
+                long down = SystemClock.uptimeMillis();
+                target.requestFocus();
+                dispatchMusicTouch(target, down, down, MotionEvent.ACTION_DOWN, px, py);
+                target.postDelayed(() -> {
+                    if (webView != target) return;
+                    dispatchMusicTouch(target, down, SystemClock.uptimeMillis(),
+                            MotionEvent.ACTION_UP, px, py);
+                    target.evaluateJavascript("window.dispatchEvent(new CustomEvent('warzone-native-music-tap',"
+                            + "{detail:" + JSONObject.quote(nonce) + "}));", null);
+                }, 80);
+            });
+        }
+        @JavascriptInterface
+        public void scrollMusic(float x, float y, float cssWidth, float direction) {
+            runOnUiThread(() -> {
+                if (webView == null || !inGameMusicOpen || !Float.isFinite(cssWidth) || cssWidth <= 0
+                        || !Float.isFinite(x) || !Float.isFinite(y) || !Float.isFinite(direction)) return;
+                float scale = webView.getWidth() / cssWidth;
+                MotionEvent.PointerProperties pointer = new MotionEvent.PointerProperties();
+                pointer.id = 0; pointer.toolType = MotionEvent.TOOL_TYPE_MOUSE;
+                MotionEvent.PointerCoords point = new MotionEvent.PointerCoords();
+                point.x = x * scale; point.y = y * scale;
+                point.setAxisValue(MotionEvent.AXIS_VSCROLL, -Math.max(-48f, Math.min(48f, direction)));
+                long now = SystemClock.uptimeMillis();
+                MotionEvent event = MotionEvent.obtain(now, now, MotionEvent.ACTION_SCROLL, 1,
+                        new MotionEvent.PointerProperties[]{pointer}, new MotionEvent.PointerCoords[]{point},
+                        0, 0, 1, 1, 0, 0, InputDevice.SOURCE_MOUSE, 0);
+                webView.dispatchGenericMotionEvent(event);
+                event.recycle();
+            });
+        }
+        @JavascriptInterface
+        public void musicFailed(String detail) {
+            runOnUiThread(() -> {
+                showEngineFailure("Music could not load. " + detail);
+                if (loading != null) {
+                    loading.append("\n\nTAP HERE TO CONTINUE WITHOUT MUSIC");
+                    loading.setOnClickListener(v -> {
+                        getPreferences(MODE_PRIVATE).edit().putBoolean("music_enabled", false).apply();
+                        recreate();
+                    });
+                }
+            });
+        }
+        @JavascriptInterface
+        public void showNotice(String message) {
+            runOnUiThread(() -> Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show());
+        }
+        @JavascriptInterface
         public void graphicsFailed(String detail) {
             runOnUiThread(() -> {
                 showEngineFailure("High Quality graphics could not load. " + detail);
@@ -454,6 +592,21 @@ public final class MainActivity extends Activity {
 
     }
 
+    private static void dispatchMusicTouch(WebView target, long down, long when, int action,
+                                          float x, float y) {
+        MotionEvent.PointerProperties pointer = new MotionEvent.PointerProperties();
+        pointer.id = 0;
+        pointer.toolType = MotionEvent.TOOL_TYPE_FINGER;
+        MotionEvent.PointerCoords point = new MotionEvent.PointerCoords();
+        point.x = x; point.y = y; point.pressure = action == MotionEvent.ACTION_UP ? 0 : 1; point.size = 1;
+        MotionEvent event = MotionEvent.obtain(down, when, action, 1,
+                new MotionEvent.PointerProperties[]{pointer}, new MotionEvent.PointerCoords[]{point},
+                0, 0, 1, 1, 0, 0, InputDevice.SOURCE_TOUCHSCREEN, 0);
+        target.dispatchTouchEvent(event);
+        target.postInvalidateOnAnimation();
+        event.recycle();
+    }
+
     private void showReplayPanel() {
         if (root == null || isFinishing()) return;
         TextView replay = new TextView(this);
@@ -467,7 +620,7 @@ public final class MainActivity extends Activity {
             root.removeView(view);
             startupAutomationStarted = false;
             createLoadingPanel();
-            webView.loadUrl(URL + "&replay=" + System.currentTimeMillis());
+            webView.loadUrl(gameUrl() + "&replay=" + System.currentTimeMillis());
         });
         root.addView(replay, new FrameLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
@@ -626,8 +779,9 @@ public final class MainActivity extends Activity {
                 return response404(path);
             }
             try {
-                if ("optional/high-v3.wz".equals(path)) {
-                    File archive = graphicsStore == null ? null : graphicsStore.readyFile();
+                if ("optional/high-v3.wz".equals(path) || "optional/music-v1.data".equals(path)) {
+                    OptionalPackStore store = path.endsWith(".wz") ? graphicsStore : musicStore;
+                    File archive = store == null ? null : store.readyFile();
                     if (archive == null) return response404(path);
                     return new WebResourceResponse("application/octet-stream", null, 200, "OK",
                             isolationHeaders(), new FileInputStream(archive));
@@ -716,6 +870,7 @@ public final class MainActivity extends Activity {
     @Override
     protected void onDestroy() {
         if (graphicsStore != null) graphicsStore.close();
+        if (musicStore != null) musicStore.close();
         if (root != null && viewportListener != null) {
             root.removeOnLayoutChangeListener(viewportListener);
             viewportListener = null;
@@ -727,5 +882,18 @@ public final class MainActivity extends Activity {
             webView = null;
         }
         super.onDestroy();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (musicSetup != null) { closeMusicSetup(); return; }
+        if (webView != null && inGameMusicOpen) {
+            webView.evaluateJavascript("(()=>{const t=window.__kalaWarzoneTouch;"
+                    + "if(t?.report().musicOpen){t.closeMusic();return true}return false})()", value -> {
+                if (!"true".equals(value)) { inGameMusicOpen = false; MainActivity.super.onBackPressed(); }
+            });
+            return;
+        }
+        super.onBackPressed();
     }
 }

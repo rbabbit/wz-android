@@ -59,3 +59,23 @@ log=Buffer.concat([log,Buffer.from('}\n')]);
 researchContext.pollResearchLogs();assert.equal(outputs.length,2);
 assert.equal(researchContext.state.fsErrors,0);
 console.log("PASS: research polling also skips archived bytes and waits for complete event lines");
+
+// A real WebView touch can suppress compatibility click after pointerdown was
+// cancelled. Calling nextWave() directly would miss this reported input bug.
+const handlers=new Map();let waveCalls=0,now=1000;
+const button={disabled:false,addEventListener:(type,fn)=>handlers.set(type,fn),
+ getBoundingClientRect:()=>({left:0,top:0,right:100,bottom:50})};
+const owner={getElementById:()=>null,createElement:()=>({querySelector:()=>button,setAttribute:()=>{}}),body:{appendChild:()=>{}}};
+const touchContext={hudDocument:()=>owner,nextWave:()=>waveCalls++,performance:{now:()=>now},Math};
+vm.createContext(touchContext);
+vm.runInContext(source.slice(source.indexOf('  function ensureHud()'),source.indexOf('  function showPreparation()')),touchContext);
+touchContext.ensureHud();
+const event=(extra={})=>({pointerType:'touch',pointerId:1,clientX:20,clientY:20,preventDefault(){},...extra});
+handlers.get('pointerdown')(event());handlers.get('pointerup')(event());
+assert.equal(waveCalls,1,'touch release calls the wave even if no compatibility click follows');
+handlers.get('click')(event({detail:1}));assert.equal(waveCalls,1,'compatibility click cannot call two waves');
+handlers.get('pointerdown')(event());handlers.get('pointercancel')();handlers.get('pointerup')(event());assert.equal(waveCalls,1);
+handlers.get('pointerdown')(event());handlers.get('pointerup')(event({clientX:80}));assert.equal(waveCalls,1,'dragging away cannot call a wave');
+handlers.get('click')(event({pointerType:undefined,detail:0}));assert.equal(waveCalls,2,'keyboard activation remains available');
+button.disabled=true;now+=1000;handlers.get('click')(event({detail:1}));assert.equal(waveCalls,2);
+console.log('PASS: Skip Wave accepts touch release once, ignores cancellation/drag/duplicates, and retains keyboard activation');

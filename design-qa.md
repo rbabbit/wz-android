@@ -2,7 +2,38 @@
 
 final result: passed
 
-## v4.5 graphics choice — current
+## v4.6 Music and input — current
+
+The tested APK has SHA-256
+`baad27be8ac2271f8f4dc3560981309beee864a00a591fff366b34d97389a94c`.
+The previous tested APK and a verified complete source snapshot were saved
+before edits. Twelve regression suites, the Android build and APK signature
+verification passed. Official compiled engine code/WASM, the original data
+prefix, 3,281 resolved assets and the supplied mod/map are preserved.
+
+Actual Android 16/WebView 158 tests ran silently on Pixel_10_Pro using software
+rendering after the host renderer hung and then failed during restart. One- and
+six-truck tests read fresh native QuickSave orders, including mixed machine-gun
+tower/cannon-hardpoint queues. Six trucks each accepted six initial build
+intents; changing defence once added cannon hardpoints to every truck's queue.
+Occupied, edge and held taps, rapid touches, cancellation, pan, pinch, tilt,
+three zoom presets, header gaps, minimap, HELP and TECH returns passed. Ten
+minimap taps and three scrolled HELP returns passed with native wave enemies
+present. Skip Wave started a real wave; STOP cleared all six original trucks.
+All twelve commands and the wave panel fit the 800px header without overlap.
+
+Native Music tests passed original track selection, scrolling to another album,
+and returning through both the header and Android Back. The original four-album
+pack passed native download cancellation/resume and SHA-256 verification. Cached
+Music started with Android reporting no active network. Runtime downloads use
+the owner's VPS. The manager's actual Opus opens/reads were checked; audible
+output was not assessed because the emulator uses `-no-audio`.
+
+The emulator's pre-existing black terrain remains. HQ visual improvement and
+physical Samsung tablet startup are unconfirmed. Exact native snapshots,
+conditions, failed prototypes and final pass logs are under `qa/v4.6/`.
+
+## v4.5 graphics choice
 
 Startup/download flow passed. Native launch artwork fills the screen, with
 aligned Normal/High Quality cards, a saved selection and a fixed bottom action.

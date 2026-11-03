@@ -18,16 +18,16 @@ import android.widget.TextView;
 
 /** Native launch choices over the selected artwork; scales without web page zoom. */
 final class GraphicsSetupView extends FrameLayout {
-    interface Actions { void start(String mode); void cancel(); }
+    interface Actions { void start(String mode); void cancel(); void music(); }
     private static final int INK = 0xFFF0E8D3, MUTED = 0xFFB4C4C3, CYAN = 0xFF83CDD1;
     private final Actions actions;
     private final Typeface titleFace;
     private final LinearLayout normalCard, highCard;
     private final TextView normalMark, highMark, highNote, status;
-    private final Button start, cancel;
+    private final Button start, cancel, music;
     private final ProgressBar progress;
     private String mode = "normal";
-    private boolean cached, downloading;
+    private boolean cached, downloading, musicChecked;
 
     GraphicsSetupView(Context context, String selected, Actions actions) {
         super(context); this.actions = actions;
@@ -84,11 +84,16 @@ final class GraphicsSetupView extends FrameLayout {
         LinearLayout.LayoutParams progressParams = new LinearLayout.LayoutParams(-1, dp(5));
         progressParams.topMargin = dp(8); progressParams.bottomMargin = dp(8); panel.addView(progress, progressParams);
         LinearLayout buttons = new LinearLayout(context); buttons.setGravity(Gravity.CENTER_VERTICAL);
+        music = button("MUSIC · CHECKING…", false); music.setEnabled(false);
+        music.setOnClickListener(v -> actions.music());
+        LinearLayout.LayoutParams musicParams = new LinearLayout.LayoutParams(-2, dp(48)); musicParams.rightMargin = dp(12);
+        buttons.addView(music, musicParams);
         cancel = button("CANCEL DOWNLOAD", false); cancel.setVisibility(GONE);
         cancel.setOnClickListener(v -> { actions.cancel(); setDownloading(false); showStatus("Download paused. Your progress is saved.", false); });
         LinearLayout.LayoutParams cancelParams = new LinearLayout.LayoutParams(-2, dp(46)); cancelParams.rightMargin = dp(12);
         buttons.addView(cancel, cancelParams);
         start = button("START BATTLE", true);
+        start.setEnabled(false);
         start.setOnClickListener(v -> { if (!downloading) actions.start(mode); });
         buttons.addView(start, new LinearLayout.LayoutParams(0, dp(48), 1));
         panel.addView(buttons, new LinearLayout.LayoutParams(-1, -2));
@@ -136,10 +141,16 @@ final class GraphicsSetupView extends FrameLayout {
         if (!downloading) select(mode);
     }
     void setDownloading(boolean value) {
-        downloading = value; normalCard.setEnabled(!value); highCard.setEnabled(!value); start.setEnabled(!value);
+        downloading = value; normalCard.setEnabled(!value); highCard.setEnabled(!value); start.setEnabled(!value && musicChecked);
+        music.setEnabled(!value && musicChecked);
         cancel.setVisibility(value ? VISIBLE : GONE); progress.setVisibility(value ? VISIBLE : GONE);
         start.setText(value ? "PREPARING HIGH QUALITY…" : (mode.equals("high") && !cached ? "DOWNLOAD & START" : "START BATTLE"));
         start.setContentDescription(start.getText());
+    }
+    void setMusicState(boolean ready, boolean on) {
+        musicChecked = true;
+        music.setText(ready ? (on ? "MUSIC · ON" : "MUSIC · OFF") : "MUSIC · DOWNLOAD");
+        music.setContentDescription(music.getText());music.setEnabled(!downloading);start.setEnabled(!downloading);
     }
     void downloadProgress(long bytes, boolean verifying) {
         setDownloading(true); progress.setIndeterminate(verifying);

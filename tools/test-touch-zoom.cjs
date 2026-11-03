@@ -7,6 +7,7 @@ const vm = require("node:vm");
 
 const elements = new Map();
 const documentListeners = new Map();
+const windowListeners = new Map();
 
 class FakeClassList {
   constructor() {
@@ -24,6 +25,7 @@ class FakeElement {
   constructor(tagName) {
     this.tagName = tagName.toUpperCase();
     this.style = {};
+    this.dataset = {};
     this.classList = new FakeClassList();
     this.attributes = new Map();
     this.children = [];
@@ -80,6 +82,7 @@ class FakeInputEvent {
   }
   preventDefault() {}
   stopImmediatePropagation() {}
+  stopPropagation() {}
 }
 
 const canvas = new FakeElement("canvas");
@@ -94,7 +97,7 @@ globalThis.window = globalThis;
 globalThis.innerWidth = 1000;
 globalThis.innerHeight = 600;
 globalThis.devicePixelRatio = 2;
-globalThis.addEventListener = () => {};
+globalThis.addEventListener = (type,listener) => windowListeners.set(type,listener);
 globalThis.KeyboardEvent = FakeInputEvent;
 globalThis.PointerEvent = FakeInputEvent;
 globalThis.WheelEvent = FakeInputEvent;
@@ -135,7 +138,58 @@ const sleep = milliseconds => new Promise(resolve => setTimeout(resolve, millise
 
 async function run() {
   const controls = window.__kalaWarzoneTouch;
-  assert.equal(controls.version, 34);
+  const settleClicks = async () => {
+    for(let i=0;i<100&&controls.report().pendingClicks;i++)await sleep(20);
+    await sleep(20);
+    assert.equal(controls.report().pendingClicks,0,'native input queue must drain');
+  };
+  assert.equal(controls.version, 49);
+  {
+    const calls=[];let binding=null;
+    const gl={FRAMEBUFFER:36160,DRAW_FRAMEBUFFER:36009,FRAMEBUFFER_BINDING:36006,DRAW_FRAMEBUFFER_BINDING:36006,COLOR_BUFFER_BIT:16384,
+      getParameter:()=>binding,
+      bindFramebuffer(target,buffer){assert.equal(this,gl);calls.push(['bind',target,buffer]);binding=buffer;},
+      clear(mask){assert.equal(this,gl);calls.push(['clear',mask]);}};
+    const frameContext={window:{LaunchedModule:{ctx:gl}},state:{},canvas:()=>null,performance,setTimeout,clearTimeout};
+    vm.createContext(frameContext);
+    vm.runInContext(source.slice(source.indexOf('  function gameFrameClock()'),source.indexOf('  async function musicClick(')),frameContext);
+    const clock=frameContext.gameFrameClock(),fbo={};
+    gl.bindFramebuffer(gl.FRAMEBUFFER,fbo);gl.clear(17664);assert.equal(clock.sequence,0,'offscreen passes must not masquerade as UI frames');
+    gl.bindFramebuffer(gl.FRAMEBUFFER,null);gl.clear(256);assert.equal(clock.sequence,0,'depth-only clears are not a new UI frame');
+    gl.clear(17664);assert.equal(clock.sequence,1);assert.equal(frameContext.gameFrameClock(),clock,'observe each context once');
+    assert.deepEqual(calls,[['bind',36160,fbo],['clear',17664],['bind',36160,null],['clear',256],['clear',17664]],'frame observation must preserve every engine GL call unchanged');
+    let ready=false;const waiting=frameContext.waitGameFrames(2).then(()=>{ready=true});
+    gl.clear(17664);await sleep(15);assert.equal(ready,false,'one submitted frame cannot satisfy a two-frame wait');
+    gl.clear(17664);await waiting;assert.equal(ready,true);
+  }
+  {
+    const listeners = new Map(), target = {}, inputState = {};
+    const eventTarget = label => ({
+      addEventListener(type, callback) { listeners.set(label + type, callback); },
+      removeEventListener(type) { listeners.delete(label + type); }
+    });
+    let nonce, finished = false;
+    const inputContext = {window: {...eventTarget('window:'), parent: {innerWidth:800},
+      BlockNightAndroid: {tapMusic(value) { nonce = value; }}},
+      document:eventTarget('document:'), state:inputState, canvas:()=>target,
+      waitGameFrames:async()=>{}, setTimeout,clearTimeout,Date,Math,performance};
+    vm.createContext(inputContext);
+    vm.runInContext(source.slice(source.indexOf('  async function musicClick('),source.indexOf('  async function closeMusic(')),inputContext);
+    const delivery = inputContext.musicClick(400,250).then(()=>{finished=true;});
+    listeners.get('window:warzone-native-music-tap')({detail:nonce});
+    await sleep(5);
+    assert.equal(finished,false,'Android dispatch alone must not advance the native menu');
+    const pointer = type => ({type,isTrusted:true,pointerType:'touch',target,clientX:400,clientY:250,pointerId:7});
+    listeners.get('document:pointerup')(pointer('pointerup'));
+    await sleep(5);assert.equal(finished,false,'a release without its matching press is insufficient');
+    listeners.get('document:pointerdown')(pointer('pointerdown'));
+    listeners.get('document:pointerup')({...pointer('pointerup'),pointerId:8});
+    await sleep(5);assert.equal(finished,false,'unrelated fingers must not acknowledge the menu tap');
+    assert.equal(inputState.nativeMusicInput,true,'the native touch must keep bypassing battlefield conversion until complete');
+    listeners.get('document:pointerup')(pointer('pointerup'));
+    await delivery;assert.equal(finished,true);assert.equal(inputState.nativeMusicInput,false);
+    assert.equal(listeners.size,0,'completed input must remove its acknowledgement listeners');
+  }
   assert.equal(controls.showCombatHud(), true);
   assert.ok(elements.has("blocknight-zoom-control"), "compact zoom group should exist");
   for (const id of ["blocknight-zoom-close", "blocknight-zoom-battle",
@@ -171,6 +225,7 @@ async function run() {
   await sleep(80);
   canvas.events.length = 0;
   controls.nativeUiClick(60, 260);
+  await settleClicks();
   assert.equal(canvas.events.find(event => event.type === "pointerdown").ctrlKey, false,
       "builder selection must be an unmodified click or its build list stays closed");
   assert.equal(controls.report().combatLock, false, "native menus must release combat selection");
@@ -179,12 +234,14 @@ async function run() {
   assert.equal(controls.report().queueMode, true, "logical sticky mode must stay enabled");
   canvas.events.length = 0;
   controls.queuedClick(500, 250);
+  await settleClicks();
   assert.equal(controls.report().queueModifierHeld, true, "next world placement must restore native Ctrl");
   assert.equal(canvas.events.find(event => event.type === "pointerdown").ctrlKey, true);
   await sleep(40);
   controls.toggleQueueMode(false);
   canvas.events.length = 0;
   controls.tapFrontend(170, 392);
+  await settleClicks();
   assert.equal(canvas.events.find(event => event.type === "pointerdown").clientX, 350);
   assert.equal(canvas.events.find(event => event.type === "pointerdown").clientY, 452);
   await sleep(55);
@@ -193,6 +250,7 @@ async function run() {
     canvas.getBoundingClientRect = () => ({left: 0, top: 0, right: width, bottom: height, width, height});
     canvas.events.length = 0;
     controls.tapFrontend(585, 70, true);
+    await settleClicks();
     const readyTap = canvas.events.find(event => event.type === "pointerdown");
     assert.equal(readyTap.clientX, (width - 640) / 2 + 585);
     assert.equal(readyTap.clientY, (height - Math.max(480, Math.min(640, height - 80))) / 2 + 70);
@@ -251,15 +309,57 @@ async function run() {
   controls.toggleQueueMode(false);
   controls.toggleQueueMode(true);
   controls.releaseAll();
-  assert.equal(controls.report().queueMode, false,
-      "focus loss must clear armed +Q even before the first placement");
+  assert.equal(controls.report().queueMode, true,
+      "overlay/focus transitions must preserve the user's logical +Q choice");
+  controls.releaseAll(true);
 
   const fire = (type,id,x,y) => documentListeners.get(type)(new FakeInputEvent(type,{
     target:canvas,pointerType:"touch",pointerId:id,clientX:x,clientY:y
   }));
+  controls.toggleQueueMode(true);
+  controls.nativeUiClick(105,545); // native Build reticule
+  assert.equal(controls.report().nativeStatsOpen,true);
+  controls.nativeUiClick(350,535); // constructor object, no Ctrl
+  controls.nativeUiClick(103,190); // structure, closes stats only
+  await settleClicks();
+  assert.equal(controls.report().nativeStatsOpen,false);
+  canvas.events.length=0;
+  fire('pointerdown',81,950,250);fire('pointerup',81,950,250);
+  await settleClicks();
+  assert.ok(canvas.events.some(e=>e.type==='pointerdown'&&e.ctrlKey),
+      'right-edge world placements must queue instead of dropping Ctrl as menu taps');
+  controls.releaseAll();
+  assert.equal(controls.report().queueMode,true);
+  assert.equal(controls.report().queueModifierHeld,true,
+      'transient cleanup must not cancel the engine construction ghost');
+  canvas.events.length=0;
+  fire('pointerdown',82,650,260);await sleep(310);fire('pointerup',82,650,260);
+  assert.ok(!canvas.events.some(e=>e.type==='pointerdown'&&e.button===2),
+      'a held build tap must never become a right-click cancellation');
+  controls.releaseAll(true);
+  canvas.events.length=0;
+  fire('pointerdown',83,900,480);
+  fire('pointermove',83,903,482);
+  assert.ok(!canvas.events.some(e=>e.type==='pointerdown'),
+      'small minimap finger drift must not start native dragging');
+  fire('pointerup',83,903,482);
+  await settleClicks();
+  assert.equal(canvas.events.filter(e=>e.type==='pointerdown'&&e.button===2).length,1);
+  controls.releaseAll(true);
+  controls.toggleQueueMode(true);controls.queuedClick(600,260);
+  controls.releaseAll();canvas.events.length=0;
+  fire('pointerdown',84,900,480);fire('pointermove',84,930,510);
+  assert.equal(canvas.events.filter(e=>e.type==='pointerdown').length,0,
+      'active +Q minimap movement must not send native Ctrl+drag, which turns North');
+  fire('pointerup',84,930,510);
+  await settleClicks();
+  assert.equal(canvas.events.filter(e=>e.type==='pointerdown'&&e.button===2).length,1);
+  assert.equal(canvas.events.filter(e=>e.type==='keyup'&&e.code==='ControlLeft').length,0);
+  controls.releaseAll(true);
   canvas.events.length=0;
   fire("pointerdown",31,430,260);fire("pointerdown",32,550,260);
   for(let i=1;i<=12;i++){fire("pointermove",31,430,260-i*4);fire("pointermove",32,550,260-i*4)}
+  await sleep(25);
   assert.ok(canvas.events.some(e=>e.type==="keydown"&&e.code==="Numpad2"&&e.location===3),"parallel vertical gesture must use native pitch, not camera translation/yaw");
   assert.ok(controls.report().tiltMoves>0);
   fire("pointercancel",31,430,212);fire("pointercancel",32,550,212);
@@ -276,8 +376,13 @@ async function run() {
   controls.queuedClick(500, 250);
   canvas.events.length = 0;
   controls.stopSelected();
-  assert.equal(controls.report().queueMode, false, "STOP must leave sticky construction");
-  assert.equal(canvas.events[0].type, "keyup", "STOP releases Ctrl before sending native S");
+  assert.equal(controls.report().queueMode, true, "STOP preserves native selection until acknowledgement");
+  assert.equal(controls.report().stopPending, true);
+  assert.ok(!canvas.events.some(e=>e.code==='KeyS'),'STOP must never invoke the conflicting keyboard shortcut');
+  const stopCommand=JSON.parse(virtualFiles.get('/data/mp/tests/warzone-towers-control-command.json'));
+  windowListeners.get('warzone-towers-control-ack')({detail:{nonce:stopCommand.nonce,action:'stop-selected',stopped:[123]}});
+  assert.equal(controls.report().queueMode,false,'acknowledged STOP leaves sticky construction');
+  assert.deepEqual(controls.report().stoppedUnitIds,[123]);
   await sleep(80);
   const frames = new Map();
   let frameId = 0;
@@ -292,10 +397,44 @@ async function run() {
       "at least one complete engine frame must see the held mouse button");
   nextFrame();
   assert.equal(canvas.events.filter(e => e.type === "pointerup").length, 1);
+  while(frames.size)nextFrame();
+  controls.toggleQueueMode(true);canvas.events.length=0;
+  controls.queuedClick(420,250);controls.queuedClick(480,250);controls.queuedClick(540,250);
+  assert.equal(controls.report().pendingClicks,3);
+  while(frames.size)nextFrame();
+  assert.deepEqual(canvas.events.filter(e=>e.type==='pointerdown').map(e=>[e.clientX,e.clientY,e.ctrlKey]),
+      [[420,250,true],[480,250,true],[540,250,true]],'rapid placements must preserve every destination in FIFO order');
+  assert.equal(canvas.events.filter(e=>e.type==='pointerup').length,3,'each rapid placement needs a native release');
+  assert.equal(controls.report().pendingClicks,0);
   controls.faceOpponent();
   assert.equal(controls.report().cameraFacingPending,true,"startup overlays must know when the native camera chord is still held");
   while(frames.size)nextFrame();
   assert.equal(controls.report().cameraFacingPending,false,"orientation must finish before the preparation dialog takes focus");
+  controls.releaseAll(true);canvas.events.length=0;
+  const parallelPans=controls.report().pans,parallelPinches=controls.report().pinchSteps;
+  fire('pointerdown',41,340,230);fire('pointerdown',42,430,230);
+  fire('pointermove',41,380,230);fire('pointermove',42,470,230);
+  assert.equal(controls.report().pinchSteps,parallelPinches,'one incomplete pointer update must not choose pinch');
+  nextFrame();
+  assert.equal(controls.report().pans,parallelPans+1,'parallel horizontal pointers must choose pan');
+  assert.equal(controls.report().pinchSteps,parallelPinches,'horizontal pan must not zoom');
+  fire('pointerup',41,380,230);fire('pointerup',42,470,230);
+  fire('pointerdown',43,300,230);fire('pointerdown',44,450,230);
+  fire('pointermove',43,260,230);fire('pointermove',44,490,230);nextFrame();
+  assert.ok(controls.report().pinchSteps>parallelPinches,'opposing pointer movement must still zoom');
+  fire('pointercancel',43,260,230);fire('pointercancel',44,490,230);
+  while(frames.size)nextFrame();
+  const queueButton=elements.get('blocknight-queue-orders');
+  const touchButtonEvent=type=>new FakeInputEvent(type,{pointerType:'touch',pointerId:500,clientX:50,clientY:50});
+  queueButton.listeners.get('pointerdown')(touchButtonEvent('pointerdown'));
+  queueButton.listeners.get('pointerup')(touchButtonEvent('pointerup'));
+  assert.equal(controls.report().queueMode,true,'touch release must activate +Q without a compatibility click');
+  queueButton.listeners.get('click')(new FakeInputEvent('click',{pointerType:'touch',detail:1}));
+  assert.equal(controls.report().queueMode,true,'a later touch click must not toggle +Q off again');
+  canvas.events.length=0;controls.queuedClick(420,250);while(frames.size)nextFrame();
+  controls.toggleQueueMode(false);
+  assert.ok(canvas.events.filter(e=>e.code==='ControlLeft').every(e=>e.location===1),
+      'native Ctrl press and release must both use the left modifier scancode');
   console.log("PASS: sticky building across menus and BASE, tablet lobby coordinates, absolute zoom, rapid switching, and pinch cancellation");
   process.exit(0);
 }

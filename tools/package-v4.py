@@ -1,7 +1,7 @@
 from pathlib import Path
 from hashlib import sha256
 from zipfile import ZipFile, ZIP_DEFLATED
-import re
+import re, subprocess
 
 root=Path(__file__).resolve().parents[1]
 output=root.parent
@@ -11,15 +11,22 @@ version_code=int(re.search(r'versionCode = (\d+)',gradle)[1])
 apk=output/f"Warzone-Towers-v{version}.apk"
 archive=output/f"warzone-towers-v{version}-source.zip"
 assert apk.is_file(), f"Copy the built APK to {apk} before packaging"
-excluded={".gradle",".git",".kotlin","build","node_modules","__pycache__"}
+excluded={".gradle",".git",".kotlin",".idea","build","node_modules","__pycache__"}
 with ZipFile(archive,"w",compression=ZIP_DEFLATED,compresslevel=5) as zipped:
-    for file in sorted(root.rglob("*")):
+    names=subprocess.check_output(['git','ls-files','--cached','--others','--exclude-standard','-z'],cwd=root).decode('utf8').split('\0')
+    for name in sorted(set(names)):
+        if not name:
+            continue
+        file=root/name
         if not file.is_file():
             continue
         relative=file.relative_to(root)
         if any(part in excluded for part in relative.parts):
             continue
-        if relative.as_posix() in {"local.properties","tools/live-cdp-url.txt"}:
+        if file.suffix in {".jks", ".keystore", ".pyc"} or file.name == ".env" or file.name.startswith(".env."):
+            continue
+        if relative.as_posix() in {"local.properties","tools/live-cdp-url.txt"} or (
+                relative.parent.as_posix() == "qa/v4.6" and file.name.startswith("emulator-restart") and file.suffix == ".log"):
             continue
         zipped.write(file,relative.as_posix())
 with ZipFile(archive) as zipped:

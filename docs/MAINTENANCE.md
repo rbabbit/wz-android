@@ -82,7 +82,7 @@ No VPS credential is needed to build or play. Hosting credentials remain private
 
 ## Tests and live debugging
 
-Run every `tools/test-*.cjs` from the repo; there are ten regression suites.
+Run every `tools/test-*.cjs` from the repo; there are twelve regression suites.
 `tools/verify-project.py` checks the imported snapshot's tracked-file manifest.
 After an intentional code/content edit, regenerate it with `--refresh`.
 
@@ -92,6 +92,12 @@ Start an isolated AVD with `-no-audio`. Refresh `tools/live-cdp-url.txt` from th
 chosen WebView's /json debugger endpoint after navigation/process restart; do
 not commit that temporary file. The debug activity also accepts graphics_probe
 for native archive-read evidence. Document actual runtime limits, not just passes.
+
+Optional Music follows the same private-cache verification path. Its complete
+original pack, VPS location, pinned source and rebuild instructions are in
+`docs/MUSIC.md`. Runtime Music downloads must remain on the owner's VPS.
+`tools/queue-audit.cjs` checks actual saved native orders on Android, rather than
+treating wrapper tap counters as proof that construction was queued.
 
 `tools/package-v4.py` packages the current version after the built APK has been
 copied to the versioned filename beside the project, as described in its source.

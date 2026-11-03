@@ -1,0 +1,34 @@
+'use strict';
+const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm'),path=require('node:path'),crypto=require('node:crypto');
+const root=path.join(__dirname,'..'),code=fs.readFileSync(path.join(root,'app/src/main/assets/warzone/music-loader.js'),'utf8');
+const catalogContext={window:{}};vm.runInNewContext(fs.readFileSync(path.join(root,'app/src/main/assets/warzone/music-catalog.js'),'utf8'),catalogContext);
+const catalog=catalogContext.window.WarzoneMusicCatalog;
+const tick=()=>new Promise(resolve=>setImmediate(resolve));
+let payload;
+if(process.env.WZ_MUSIC_DATA){const b=fs.readFileSync(process.env.WZ_MUSIC_DATA);assert.equal(crypto.createHash('sha256').update(b).digest('hex'),catalog.sha256);payload=b.buffer.slice(b.byteOffset,b.byteOffset+b.byteLength);
+ for(const entry of catalog.files)assert.equal(crypto.createHash('sha256').update(b.subarray(entry.start,entry.end)).digest('hex'),entry.sha256,entry.filename);
+ for(const entry of catalog.files.filter(f=>f.filename.endsWith('.opus')))assert.equal(b.toString('ascii',entry.start,entry.start+4),'OggS');
+}else payload=new ArrayBuffer(catalog.bytes);
+function setup(query,response){const calls={fetch:[],added:[],removed:[],files:[],failures:[]};
+ const module={addRunDependency:x=>calls.added.push(x),removeRunDependency:x=>calls.removed.push(x),FS_createPath(){},FS_createDataFile:(...args)=>calls.files.push(args),FS:{open:path=>({path}),read:()=>128}};
+ const window={WarzoneMusicCatalog:catalog,BlockNightAndroid:{musicFailed:e=>calls.failures.push(e)}};
+ vm.runInNewContext(code,{window,location:{search:query},URLSearchParams,Uint8Array,fetch:(...args)=>{calls.fetch.push(args);return response()}});
+ return {calls,module,music:window.WarzoneMusic};
+}
+(async()=>{
+ assert.equal(catalog.albums.length,4);assert.equal(catalog.files.filter(e=>e.filename.endsWith('.opus')).length,40);
+ const off=setup('?music=0',()=>{throw Error('Music off must not fetch')});off.music.prepare(off.module);assert.equal(off.calls.fetch.length,0);assert.equal(off.calls.added.length,0);
+ const on=setup('?music=1&music_probe=1',async()=>({ok:true,arrayBuffer:async()=>payload}));on.music.prepare(on.module);
+ assert.equal(on.calls.removed.length,0);await tick();
+ assert.equal(on.calls.fetch.length,1);assert.equal(on.calls.fetch[0][0],'/warzone/optional/music-v1.data','runtime reads only the verified local copy of the VPS download');
+ assert.equal(on.calls.files.length,55);assert.equal(on.music.report().loaded,true);assert.deepEqual(on.calls.added,on.calls.removed);
+ for(let i=0;i<catalog.files.length;i++){const e=catalog.files[i],[dir,name,view,r,w,own]=on.calls.files[i];assert.equal(dir+'/'+name,e.filename);assert.equal(view.buffer,payload,'original buffer bytes are mounted unchanged');assert.equal(view.byteOffset,e.start);assert.equal(view.byteLength,e.end-e.start);assert.ok(r&&w&&own)}
+ for(const a of catalog.albums){const stream=on.module.FS.open('/data/music/'+a.path);on.module.FS.read(stream)}
+ const track=on.module.FS.open('/data/music/menu.opus');on.module.FS.read(track);
+ assert.equal(on.music.report().nativeAlbums.length,4);assert.equal(on.music.report().nativeTracks.length,1);assert.equal(on.music.report().nativeReadBytes,640);
+ on.module.FS.open('/data/music/albums/original_soundtrack/albumcover.png');assert.equal(on.music.report().nativeCoverReads,1);
+ for(const response of [async()=>({ok:false}),async()=>({ok:true,arrayBuffer:async()=>new ArrayBuffer(7)}),async()=>{throw Error('Unavailable')}]){
+  const bad=setup('?music=1',response);bad.music.prepare(bad.module);await tick();assert.equal(bad.calls.files.length,0);assert.equal(bad.calls.failures.length,1);assert.equal(bad.calls.removed.length,0,'failed requested music cannot silently pretend to be loaded');
+ }
+ console.log('PASS: Music off, four albums/40 tracks, all 55 original file views, native-read probe, failure blocking'+(process.env.WZ_MUSIC_DATA?', actual VPS pack and every original file SHA-256':''));
+})().catch(error=>{console.error(error);process.exitCode=1});

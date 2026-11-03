@@ -8,6 +8,7 @@ var blockNightV28OriginalEventResearched = eventResearched;
 var blockNightV31LastZoomNonce = "";
 var blockNightV31ZoomDistances = { close: 1600, battle: 2600, map: 3600 };
 var blockNightV32LastQueueNonce = "";
+var warzoneTowersLastControlNonce = "";
 
 function warzoneTowersDiagnosticSnapshot()
 {
@@ -82,6 +83,29 @@ function blockNightV31PollZoomCommand()
 		distance: distance,
 		gameTime: gameTime
 	}));
+}
+
+function warzoneTowersPollControlCommand()
+{
+	let command;
+	try { command = includeJSON("warzone-towers-control-command.json"); }
+	catch (error) { return; }
+	if (!command || !command.nonce || typeof command.nonce !== "string"
+		|| command.nonce === warzoneTowersLastControlNonce) return;
+	warzoneTowersLastControlNonce = command.nonce;
+	if (command.action !== "stop-selected") return;
+	const stopped = [];
+	// Only the user's explicit STOP command acts on their currently selected
+	// units. Run before the wrapper releases the native quick-build modifier.
+	const units = enumSelected().filter(function (object) {
+		return object.type === DROID && object.player === selectedPlayer;
+	});
+	for (let index = 0; index < units.length; ++index)
+	{
+		if (orderDroid(units[index], DORDER_STOP)) stopped.push(units[index].id);
+	}
+	dump("BNCONTROL:" + JSON.stringify({ version: 1, nonce: command.nonce,
+		action: command.action, stopped: stopped, gameTime: gameTime }));
 }
 
 function blockNightV32PollQueueCommand()
@@ -169,6 +193,7 @@ function blockNightV32PollQueueCommand()
 
 function blockNightV32PollBridgeCommands()
 {
+	warzoneTowersPollControlCommand();
 	blockNightV31PollZoomCommand();
 	blockNightV32PollQueueCommand();
 }

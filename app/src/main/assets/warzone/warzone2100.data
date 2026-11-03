@@ -728654,3 +728654,1490 @@ eventResearched = function (research, structure, player)
 
 setTimer("blockNightV32PollBridgeCommands", 120);
 setTimer("warzoneTowersDiagnosticSnapshot", 5000);
+{
+  "challenge": {
+    "bases": 3,
+    "description": "Defend the tower base against an adaptive survival army.",
+    "difficulty": "Medium",
+    "map": "TowerDefense2_m-T1",
+    "maxPlayers": 2,
+    "name": "Warzone Towers: Survival",
+    "powerLevel": 1,
+    "scavengers": 0,
+    "techLevel": 1,
+    "version": 2
+  },
+  "locked": {
+    "ai": true,
+    "alliances": true,
+    "bases": true,
+    "difficulty": true,
+    "position": true,
+    "power": true,
+    "scavengers": true,
+    "teams": true
+  },
+  "scripts": {
+    "rules": "warzone-towers-rules.js"
+  },
+  "player_0": {
+    "name": "Tower Commander",
+    "position": 1,
+    "team": 0
+  },
+  "player_1": {
+    "ai": "multiplay/skirmish/warzone-towers-ai.js",
+    "difficulty": "Medium",
+    "name": "Survival Army",
+    "position": 0,
+    "team": 1
+  }
+}
+/* Warzone Towers rules wrapper: stock Warzone rules + supplied Survival Mod + mobile bridge. */
+receiveAllEvents(true);
+
+include("multiplay/script/rules/init.js");
+
+include("SurvivalMod/ENEMY.js");
+include("SurvivalMod/ENTRANCES.js");
+include("SurvivalMod/TEMPLATES.js");
+include("SurvivalMod/LATEST_RESEARCH.js");
+
+include("SurvivalMod/reticule.js");
+include("SurvivalMod/audio.js");
+include("SurvivalMod/minimap.js");
+include("SurvivalMod/power.js");
+include("SurvivalMod/research.js");
+include("SurvivalMod/texture.js");
+include("SurvivalMod/weather.js");
+include("SurvivalMod/gameOver.js");
+include("SurvivalMod/base.js");
+include("SurvivalMod/limits.js");
+include("SurvivalMod/enableStructure.js");
+include("SurvivalMod/experience.js");
+include("SurvivalMod/vtol.js");
+include("SurvivalMod/spawn.js");
+
+include("warzone-towers-waves.js");
+include("warzone-towers-objective.js");
+include("warzone-towers-bridge.js");
+/* Numbered tower-defence rounds built from the supplied Survival Mod. */
+namespace("warzoneTowersWaves_");
+
+// spawn.js is loaded immediately before this wrapper. Replace only its start
+// event so the supplied continuous timer is never installed. The original
+// spawn_tick() and every calculation it uses remain untouched and are called
+// below as the four pulses that make up each numbered wave.
+function spawn_eventStartLevel()
+{
+}
+
+const warzoneTowersWaves_FIRST_PREP_MS = 4 * 60 * 1000;
+const warzoneTowersWaves_INTERMISSION_MS = 20 * 1000;
+// Survival Mod intentionally fills one quarter of the missing power per tick.
+// Four compressed ticks form one discrete wave without inventing a new roster
+// or a second balance model.
+const warzoneTowersWaves_PULSES = 4;
+const warzoneTowersWaves_PULSE_MS = 1000;
+
+var warzoneTowersWaves_phase = "build";
+var warzoneTowersWaves_wave = 0;
+var warzoneTowersWaves_deadline = 0;
+var warzoneTowersWaves_pulsesRemaining = 0;
+var warzoneTowersWaves_nextPulse = 0;
+var warzoneTowersWaves_lastSignature = "";
+var warzoneTowersWaves_lastCommand = "";
+var warzoneTowersWaves_carriedIds = {};
+var warzoneTowersWaves_frontierTime = 0;
+
+function warzoneTowersWaves_eventStartLevel()
+{
+	// The wave controller replaces the continuous Survival timer. The supplied
+	// roster, entrances and power calculations still produce each wave.
+	queue("warzoneTowersWaves_start", 200);
+}
+
+function warzoneTowersWaves_start()
+{
+	setTimer("warzoneTowersWaves_tick", 1000);
+	// Preparation runs from the start of the match, never from the first
+	// completed defence or vehicle. Doing nothing must not stop the waves.
+	warzoneTowersWaves_beginCountdown(warzoneTowersWaves_FIRST_PREP_MS);
+}
+
+function warzoneTowersWaves_beginCountdown(delay)
+{
+	warzoneTowersWaves_phase = "countdown";
+	warzoneTowersWaves_deadline = gameTime + delay;
+	warzoneTowersWaves_pulsesRemaining = 0;
+	warzoneTowersWaves_nextPulse = 0;
+	warzoneTowersWaves_emit(true);
+}
+
+function warzoneTowersWaves_beginWave()
+{
+	warzoneTowersWaves_carriedIds = {};
+	enumDroid(ENEMY, DROID_ANY).forEach(function (d) { warzoneTowersWaves_carriedIds[String(d.id)] = true; });
+	warzoneTowersWaves_wave += 1;
+	// Supplied templates are indexed by research-minutes. Each numbered round
+	// advances that existing roster one minute; completed player research can
+	// still lead it. Do not grant research to the player or replace the roster.
+	const baseline = typeof research_offset === "number" ? research_offset : 0;
+	warzoneTowersWaves_frontierTime = Math.max(Number(LATEST_RESEARCH.minimumResearchTime) || 0,
+		baseline + (warzoneTowersWaves_wave - 1) * 60);
+	if (typeof research_completeOnTime === "function") research_completeOnTime(warzoneTowersWaves_frontierTime, ENEMY);
+	warzoneTowersWaves_phase = "active";
+	warzoneTowersWaves_deadline = 0;
+	warzoneTowersWaves_pulsesRemaining += warzoneTowersWaves_PULSES;
+	warzoneTowersWaves_nextPulse = gameTime;
+	warzoneTowersWaves_spawnPulse();
+}
+
+function warzoneTowersWaves_spawnPulse()
+{
+	if (warzoneTowersWaves_pulsesRemaining <= 0) return;
+	// Surviving enemies stay when the player calls the next wave early. They
+	// must not consume the NEW wave's spawn budget or skipping spawns nothing.
+	const suppliedPowerEnemy = spawn_getPowerEnemy;
+	const suppliedPowerTeam = spawn_getPowerTeam;
+	const suppliedResearch = LATEST_RESEARCH;
+	LATEST_RESEARCH = { id: suppliedResearch.id, minimumResearchTime: warzoneTowersWaves_frontierTime, gameTime: gameTime };
+	spawn_getPowerEnemy = function () {
+		let carriedPower = 0;
+		enumDroid(ENEMY, DROID_ANY).forEach(function (d) {
+			if (warzoneTowersWaves_carriedIds[String(d.id)]) carriedPower += Math.max(spawn_MIN_COST, d.cost);
+		});
+		return Math.max(0, suppliedPowerEnemy() - carriedPower);
+	};
+	// The original adaptive spawner divides current power by its best power.
+	// An unarmed player otherwise produces 0/0 and no enemy budget. Supply a
+	// small opening threat only in that case; keep the supplied roster/spawner.
+	spawn_getPowerTeam = function () {
+		const power = suppliedPowerTeam();
+		return power > 0 ? power : spawn_MIN_COST * 4;
+	};
+	try { spawn_tick(); } finally {
+		spawn_getPowerEnemy = suppliedPowerEnemy;
+		spawn_getPowerTeam = suppliedPowerTeam;
+		LATEST_RESEARCH = suppliedResearch;
+	}
+	warzoneTowersWaves_pulsesRemaining -= 1;
+	warzoneTowersWaves_nextPulse = gameTime + warzoneTowersWaves_PULSE_MS;
+	warzoneTowersWaves_emit(true);
+}
+
+function warzoneTowersWaves_tick()
+{
+	warzoneTowersWaves_pollCommand();
+	const enemyDroids = enumDroid(ENEMY, DROID_ANY).length;
+
+	if (warzoneTowersWaves_phase === "countdown")
+	{
+		if (gameTime >= warzoneTowersWaves_deadline)
+		{
+			warzoneTowersWaves_beginWave();
+		}
+	}
+	else if (warzoneTowersWaves_phase === "active")
+	{
+		if (warzoneTowersWaves_pulsesRemaining > 0 && gameTime >= warzoneTowersWaves_nextPulse)
+		{
+			warzoneTowersWaves_spawnPulse();
+		}
+		else if (warzoneTowersWaves_pulsesRemaining === 0 && enemyDroids === 0)
+		{
+			warzoneTowersWaves_beginCountdown(warzoneTowersWaves_INTERMISSION_MS);
+		}
+	}
+
+	warzoneTowersWaves_emit(false);
+}
+
+function warzoneTowersWaves_pollCommand()
+{
+	const command = includeJSON("warzone-towers-wave-command.json");
+	if (!command || typeof command.nonce !== "string" || !command.nonce
+		|| command.nonce === warzoneTowersWaves_lastCommand) return;
+	warzoneTowersWaves_lastCommand = command.nonce;
+	if (command.action === "next" && (warzoneTowersWaves_phase === "countdown" || warzoneTowersWaves_phase === "active"))
+	{
+		warzoneTowersWaves_beginWave();
+	}
+}
+
+function warzoneTowersWaves_emit(force)
+{
+	const enemyDroids = enumDroid(ENEMY, DROID_ANY).length;
+	const nextWaveIn = warzoneTowersWaves_phase === "countdown"
+		? Math.max(0, Math.ceil((warzoneTowersWaves_deadline - gameTime) / 1000))
+		: null;
+	const payload = {
+		version: 2,
+		lastCommand: warzoneTowersWaves_lastCommand,
+		mode: "numbered-waves",
+		phase: warzoneTowersWaves_phase,
+		wave: warzoneTowersWaves_wave,
+		nextWave: warzoneTowersWaves_wave + 1,
+		nextWaveIn: nextWaveIn,
+		pulsesRemaining: warzoneTowersWaves_pulsesRemaining,
+		pulsesPerWave: warzoneTowersWaves_PULSES,
+		enemyDroids: enemyDroids,
+		humanPower: spawn_getPowerTeam(),
+		enemyPower: spawn_getPowerEnemy(),
+		entrances: ENTRANCES.length,
+		templates: TEMPLATES.length,
+		rosterFrontier: Math.min(TEMPLATES.length, Math.max(1, Math.floor(warzoneTowersWaves_frontierTime / 60))),
+		gameTime: gameTime
+	};
+	const signature = JSON.stringify(payload);
+	if (force || signature !== warzoneTowersWaves_lastSignature)
+	{
+		warzoneTowersWaves_lastSignature = signature;
+		dump("BNWAVE:" + signature);
+	}
+}
+/* The command centre is the tower-defence objective. */
+namespace("warzoneTowersObjective_");
+var warzoneTowersObjective_armed = false;
+var warzoneTowersObjective_failed = false;
+
+function warzoneTowersObjective_eventStartLevel()
+{
+	warzoneTowersObjective_armed = enumStruct(selectedPlayer, HQ).length > 0;
+	setTimer("warzoneTowersObjective_tick", 500);
+}
+
+function warzoneTowersObjective_tick()
+{
+	const hqs = enumStruct(selectedPlayer, HQ);
+	if (hqs.length) warzoneTowersObjective_armed = true;
+	if (warzoneTowersObjective_armed && !hqs.length) warzoneTowersObjective_fail();
+}
+
+function warzoneTowersObjective_eventDestroyed(object)
+{
+	if (object.player === selectedPlayer && object.stattype === HQ
+		&& warzoneTowersObjective_armed && !enumStruct(selectedPlayer, HQ).length)
+	{
+		warzoneTowersObjective_fail();
+	}
+}
+
+function warzoneTowersObjective_fail()
+{
+	if (warzoneTowersObjective_failed) return;
+	warzoneTowersObjective_failed = true;
+	warzoneTowersWaves_phase = "defeated";
+	warzoneTowersWaves_deadline = 0;
+	warzoneTowersWaves_pulsesRemaining = 0;
+	removeTimer("warzoneTowersWaves_tick");
+	removeTimer("warzoneTowersObjective_tick");
+	warzoneTowersWaves_emit(true);
+	gameOverMessage(false);
+}
+/* Survival army orders for Towers. Roster and spawn budgets come from the supplied mod. */
+var towersAi_units = {};
+var towersAi_orders = 0;
+var towersAi_recoveries = 0;
+
+function eventStartLevel()
+{
+	setTimer("towersAi_tick", 1000);
+}
+
+function towersAi_distance(a, b)
+{
+	return Math.hypot(a.x - b.x, a.y - b.y);
+}
+
+function towersAi_targets()
+{
+	const targets = [];
+	for (let player = 0; player < maxPlayers; player++)
+	{
+		if (player === me || allianceExistsBetween(me, player)) continue;
+		enumStruct(player).forEach(function (s) { targets.push(s); });
+	}
+	return targets;
+}
+
+function towersAi_tick()
+{
+	const targets = towersAi_targets();
+	const targetsById = {};
+	targets.forEach(function (s) { targetsById[String(s.id)] = s; });
+	const live = {};
+	const units = enumDroid(me, DROID_ANY);
+	for (const droid of units)
+	{
+		// Keep the supplied mod's empty-VTOL exit lane; vtol.js removes aircraft
+		// at (1,1), so an exhausted plane cannot hold a wave open forever.
+		if (droid.isVTOL && droid.weapons && droid.weapons[0] && droid.weapons[0].armed === 0)
+		{
+			if (droid.order !== DORDER_MOVE) orderDroidLoc(droid, DORDER_MOVE, 1, 1);
+			continue;
+		}
+		const key = String(droid.id);
+		const old = towersAi_units[key];
+		const progress = !old || towersAi_distance(droid, old) >= 0.5;
+		const record = old || { x: droid.x, y: droid.y, movedAt: gameTime, orderedAt: -10000, target: -1 };
+		if (progress) { record.x = droid.x; record.y = droid.y; record.movedAt = gameTime; }
+		live[key] = record;
+		const firing = droid.action === 6 || droid.action === 36;
+		const stuck = gameTime - record.movedAt >= 8000 && !firing;
+		// Leave a valid moving/firing order alone. Avoid repeated reachability
+		// scans and path resets when many waves and hundreds of towers are live.
+		if (old && targetsById[String(record.target)] && (firing || (!stuck
+			&& (droid.order === DORDER_ATTACK || droid.order === DORDER_OBSERVE)))) continue;
+
+		// Prefer the command centre. Reachability excludes entrances disconnected
+		// from a target by terrain; blocked roads are handled by attacking blockers.
+		const reachable = targets.filter(function (s) { return droidCanReach(droid, s.x, s.y); });
+		reachable.sort(function (a, b) {
+			return (a.stattype === HQ ? 0 : 1) - (b.stattype === HQ ? 0 : 1)
+				|| towersAi_distance(droid, a) - towersAi_distance(droid, b) || a.id - b.id;
+		});
+		let target = reachable[0];
+		if (!target) continue;
+
+		// An attack may legitimately be stationary while firing. Never restart
+		// that action every tick. MOVE/SCOUT with no displacement must be retried.
+		if (stuck)
+		{
+			const blockers = reachable.filter(function (s) { return towersAi_distance(droid, s) <= 12; });
+			blockers.sort(function (a, b) { return towersAi_distance(droid, a) - towersAi_distance(droid, b) || a.id - b.id; });
+			if (blockers.length) target = blockers[0];
+		}
+		if (!old || record.target !== target.id || (stuck && gameTime - record.orderedAt >= 4000)
+			|| (droid.order !== DORDER_ATTACK && droid.order !== DORDER_OBSERVE))
+		{
+			const order = droid.droidType === DROID_SENSOR ? DORDER_OBSERVE : DORDER_ATTACK;
+			if (orderDroidObj(droid, order, target))
+			{
+				record.target = target.id;
+				record.orderedAt = gameTime;
+				towersAi_orders++;
+				if (stuck) towersAi_recoveries++;
+			}
+		}
+	}
+	towersAi_units = live;
+	if (gameTime % 5000 < 1000)
+	{
+		dump("BNTOWERSAI:" + JSON.stringify({ gameTime: gameTime, units: units.length,
+			orders: towersAi_orders, recoveries: towersAi_recoveries,
+			hqs: targets.filter(function (s) { return s.stattype === HQ; }).map(function (s) {
+				return { id: s.id, health: s.health, x: s.x, y: s.y };
+			}), sample: units.slice(0, 8).map(function (d) {
+				return { id: d.id, x: d.x, y: d.y, body: d.body, propulsion: d.propulsion, order: d.order, action: d.action,
+					target: live[String(d.id)] ? live[String(d.id)].target : -1 };
+			}) }));
+	}
+}
+{"AI":{"js":"warzone-towers-ai.js","name":"Towers Survival Army","tip":"Advances on the command centre."}}
+{"nonce":"","action":""}
+/* Warzone Towers mobile research and camera bridge. Base rules are loaded by the wrapper. */
+
+var blockNightV28Queues = {};
+var blockNightV28ContinueAttempts = {};
+var blockNightV28Responses = {};
+var blockNightV28OriginalEventChat = eventChat;
+var blockNightV28OriginalEventResearched = eventResearched;
+var blockNightV31LastZoomNonce = "";
+var blockNightV31ZoomDistances = { close: 1600, battle: 2600, map: 3600 };
+var blockNightV32LastQueueNonce = "";
+var warzoneTowersLastControlNonce = "";
+
+function warzoneTowersDiagnosticSnapshot()
+{
+	let humanPower = 0;
+	let enemyPower = 0;
+	let diagnosticError = "";
+	const players = [];
+	try
+	{
+		humanPower = spawn_getPowerTeam();
+		enemyPower = spawn_getPowerEnemy();
+	}
+	catch (error)
+	{
+		diagnosticError = String(error && error.message ? error.message : error);
+	}
+	for (let player = 0; player < maxPlayers; ++player)
+	{
+		const allDroids = enumDroid(player, DROID_ANY);
+		const weaponDroids = enumDroid(player, DROID_WEAPON);
+		players.push({
+			player: player,
+			isAI: Boolean(playerData[player] && playerData[player].isAI),
+			allDroids: allDroids.length,
+			weaponDroids: weaponDroids.length,
+			defenses: enumStruct(player, DEFENSE).filter(function (structure) {
+				return structure.status === BUILT && structure.canHitGround;
+			}).length
+		});
+	}
+	dump("BNTOWERS:" + JSON.stringify({
+		version: 1,
+		gameTime: gameTime,
+		enemyPlayer: ENEMY,
+		entrances: Array.isArray(ENTRANCES) ? ENTRANCES.length : 0,
+		humanPower: humanPower,
+		enemyPower: enemyPower,
+		enemyDroids: ENEMY === null ? 0 : enumDroid(ENEMY, DROID_ANY).length,
+		spawnPowerBest: typeof spawn_powerTeamBest === "number" ? spawn_powerTeamBest : null,
+		spawnTickAvailable: typeof spawn_tick === "function",
+		diagnosticError: diagnosticError,
+		players: players
+	}));
+}
+
+function blockNightV31PollZoomCommand()
+{
+	let command = null;
+	try
+	{
+		command = includeJSON("blocknight-zoom-command.json");
+	}
+	catch (error)
+	{
+		return;
+	}
+	if (!command || typeof command.nonce !== "string" || !command.nonce || command.nonce === blockNightV31LastZoomNonce) return;
+
+	blockNightV31LastZoomNonce = command.nonce;
+	const preset = String(command.preset || "");
+	const distance = Number(blockNightV31ZoomDistances[preset] || 0);
+	if (distance > 0) cameraZoom(distance, 0);
+	if (preset === "base")
+	{
+		const hqs = enumStruct(selectedPlayer, HQ);
+		if (hqs.length) centreView(hqs[0].x, hqs[0].y);
+	}
+	dump("BNZOOM:" + JSON.stringify({
+		version: 31,
+		nonce: command.nonce,
+		preset: preset,
+		distance: distance,
+		gameTime: gameTime
+	}));
+}
+
+function warzoneTowersPollControlCommand()
+{
+	let command;
+	try { command = includeJSON("warzone-towers-control-command.json"); }
+	catch (error) { return; }
+	if (!command || !command.nonce || typeof command.nonce !== "string"
+		|| command.nonce === warzoneTowersLastControlNonce) return;
+	warzoneTowersLastControlNonce = command.nonce;
+	if (command.action !== "stop-selected") return;
+	const stopped = [];
+	// Only the user's explicit STOP command acts on their currently selected
+	// units. Run before the wrapper releases the native quick-build modifier.
+	const units = enumSelected().filter(function (object) {
+		return object.type === DROID && object.player === selectedPlayer;
+	});
+	for (let index = 0; index < units.length; ++index)
+	{
+		if (orderDroid(units[index], DORDER_STOP)) stopped.push(units[index].id);
+	}
+	dump("BNCONTROL:" + JSON.stringify({ version: 1, nonce: command.nonce,
+		action: command.action, stopped: stopped, gameTime: gameTime }));
+}
+
+function blockNightV32PollQueueCommand()
+{
+	let command = null;
+	try
+	{
+		command = includeJSON("blocknight-queue-command.json");
+	}
+	catch (error)
+	{
+		return;
+	}
+	if (!command || typeof command.nonce !== "string" || !command.nonce || command.nonce === blockNightV32LastQueueNonce) return;
+	blockNightV32LastQueueNonce = command.nonce;
+
+	if (blockNightV28Responses[command.nonce])
+	{
+		dump("BNQUEUE:" + JSON.stringify(blockNightV28Responses[command.nonce]));
+		return;
+	}
+	if (!Array.isArray(command.labs) || command.labs.length < 1 || command.labs.length > 16)
+	{
+		blockNightV28EmitQueueState(command.nonce, false, "invalid", []);
+		return;
+	}
+
+	const available = blockNightV28AvailableResearch();
+	const availableById = {};
+	for (let availableIndex = 0; availableIndex < available.length; ++availableIndex)
+	{
+		availableById[String(available[availableIndex].id)] = available[availableIndex];
+	}
+	const prepared = [];
+	const seenLabs = {};
+	const seenTopics = {};
+	for (let commandIndex = 0; commandIndex < command.labs.length; ++commandIndex)
+	{
+		const requested = command.labs[commandIndex];
+		const labId = Number(requested && requested.labId);
+		const lab = Number.isFinite(labId) ? getObject(STRUCTURE, selectedPlayer, labId) : null;
+		if (!lab || lab.player !== selectedPlayer || lab.stattype !== RESEARCH_LAB || lab.status !== BUILT || seenLabs[String(labId)])
+		{
+			blockNightV28EmitQueueState(command.nonce, false, "lab-missing", []);
+			return;
+		}
+		if (!Array.isArray(requested.topicIds) || requested.topicIds.length > 64)
+		{
+			blockNightV28EmitQueueState(command.nonce, false, "invalid", []);
+			return;
+		}
+		seenLabs[String(labId)] = true;
+		const topicIds = [];
+		for (let topicIndex = 0; topicIndex < requested.topicIds.length; ++topicIndex)
+		{
+			const topicId = String(requested.topicIds[topicIndex]);
+			if (!availableById[topicId] || seenTopics[topicId])
+			{
+				blockNightV28EmitQueueState(command.nonce, false, "topic-unavailable", []);
+				return;
+			}
+			seenTopics[topicId] = true;
+			topicIds.push(topicId);
+		}
+		prepared.push({ labId: labId, topicIds: topicIds });
+	}
+
+	const labsToStart = [];
+	for (let preparedIndex = 0; preparedIndex < prepared.length; ++preparedIndex)
+	{
+		const entry = prepared[preparedIndex];
+		blockNightV28Queues[String(entry.labId)] = entry.topicIds.slice();
+		labsToStart.push(entry.labId);
+	}
+	const started = [];
+	for (let labIndex = 0; labIndex < labsToStart.length; ++labIndex)
+	{
+		const assignment = blockNightV28StartNext(labsToStart[labIndex]);
+		if (assignment) started.push(assignment);
+	}
+	if (typeof blockNightLastResearchSnapshot === "string") blockNightLastResearchSnapshot = "";
+	if (typeof blockNightEmitResearchSnapshotV23 === "function") queue("blockNightEmitResearchSnapshotV23", 80);
+	blockNightV28EmitQueueState(command.nonce, true, "synced", started);
+}
+
+function blockNightV32PollBridgeCommands()
+{
+	warzoneTowersPollControlCommand();
+	blockNightV31PollZoomCommand();
+	blockNightV32PollQueueCommand();
+}
+
+function blockNightV28AvailableResearch()
+{
+	return enumResearch().sort(function (a, b) {
+		const rankA = typeof blockNightResearchRank === "function" ? blockNightResearchRank(a) : -1;
+		const rankB = typeof blockNightResearchRank === "function" ? blockNightResearchRank(b) : -1;
+		const rankDelta = rankA - rankB;
+		return rankDelta !== 0 ? rankDelta : (a.id < b.id ? -1 : (a.id > b.id ? 1 : 0));
+	});
+}
+
+function blockNightV28QueuePayload()
+{
+	const queues = [];
+	Object.keys(blockNightV28Queues).forEach(function (key) {
+		queues.push({ labId: Number(key), topicIds: blockNightV28Queues[key].slice() });
+	});
+	return queues;
+}
+
+function blockNightV28EmitQueueState(nonce, ok, reason, started)
+{
+	const payload = {
+		version: 32,
+		nonce: nonce || "",
+		ok: ok !== false,
+		reason: reason || "synced",
+		started: started || [],
+		queues: blockNightV28QueuePayload(),
+		gameTime: gameTime
+	};
+	if (payload.nonce) blockNightV28Responses[payload.nonce] = payload;
+	dump("BNQUEUE:" + JSON.stringify(payload));
+}
+
+function blockNightV28StartNext(labId)
+{
+	const key = String(labId);
+	const queued = blockNightV28Queues[key] || [];
+	const lab = getObject(STRUCTURE, selectedPlayer, Number(labId));
+	if (!lab || lab.player !== selectedPlayer || lab.stattype !== RESEARCH_LAB || lab.status !== BUILT)
+	{
+		delete blockNightV28Queues[key];
+		return null;
+	}
+	if (!structureIdle(lab)) return null;
+
+	while (queued.length)
+	{
+		const topicId = queued[0];
+		const topic = getResearch(topicId, selectedPlayer);
+		if (!topic || topic.done || topic.started)
+		{
+			queued.shift();
+			continue;
+		}
+		if (pursueResearch(lab, topicId))
+		{
+			queued.shift();
+			if (typeof blockNightLabTopics === "object")
+			{
+				blockNightLabTopics[key] = { topicId: topicId, assignedAt: gameTime };
+			}
+			return { labId: lab.id, topicId: topicId };
+		}
+		return null;
+	}
+	return null;
+}
+
+function blockNightV28ContinueQueue(lab)
+{
+	if (!lab || typeof lab.id !== "number") return;
+	const labId = lab.id;
+	const key = String(labId);
+	const started = blockNightV28StartNext(labId);
+	const remaining = blockNightV28Queues[key] || [];
+	const attempt = Number(blockNightV28ContinueAttempts[key] || 0);
+	if (!started && remaining.length && attempt < 12)
+	{
+		blockNightV28ContinueAttempts[key] = attempt + 1;
+		queue("blockNightV28ContinueQueue", 300, lab);
+		return;
+	}
+	delete blockNightV28ContinueAttempts[key];
+	if (typeof blockNightLastResearchSnapshot === "string") blockNightLastResearchSnapshot = "";
+	if (typeof blockNightEmitResearchSnapshotV23 === "function") queue("blockNightEmitResearchSnapshotV23", 80);
+	blockNightV28EmitQueueState("", true, started ? "continued" : remaining.length ? "waiting" : "idle", started ? [started] : []);
+}
+
+function blockNightV28HandleQueueCommand(from, message)
+{
+	if (typeof message !== "string" || !/^q[0-9]+ /.test(message)) return false;
+	const parts = message.trim().split(/\s+/);
+	const nonce = parts.length ? parts[0].slice(1) : "";
+	if (from !== selectedPlayer || parts.length !== 2)
+	{
+		blockNightV28EmitQueueState(nonce, false, from !== selectedPlayer ? "wrong-player" : "invalid", []);
+		return true;
+	}
+	if (blockNightV28Responses[nonce])
+	{
+		dump("BNQUEUE:" + JSON.stringify(blockNightV28Responses[nonce]));
+		return true;
+	}
+
+	const available = blockNightV28AvailableResearch();
+	const sections = parts[1].split(";");
+	const labs = enumStruct(selectedPlayer, RESEARCH_LAB).filter(function (lab) {
+		return lab.status === BUILT;
+	}).reverse();
+	const labsToStart = [];
+	for (let sectionIndex = 0; sectionIndex < sections.length; ++sectionIndex)
+	{
+		const fields = sections[sectionIndex].split(",");
+		if (fields.length < 2) continue;
+		const lab = labs[Number(fields[0])];
+		if (!lab || lab.player !== from || lab.stattype !== RESEARCH_LAB || lab.status !== BUILT) continue;
+		const labId = lab.id;
+		const topicIds = [];
+		if (fields[1] !== "-")
+		{
+			for (let indexPosition = 1; indexPosition < fields.length; ++indexPosition)
+			{
+				const topic = available[Number(fields[indexPosition])];
+				if (topic && topicIds.indexOf(topic.id) < 0) topicIds.push(topic.id);
+			}
+		}
+		blockNightV28Queues[String(labId)] = topicIds;
+		labsToStart.push(labId);
+	}
+
+	const started = [];
+	for (let labIndex = 0; labIndex < labsToStart.length; ++labIndex)
+	{
+		const assignment = blockNightV28StartNext(labsToStart[labIndex]);
+		if (assignment) started.push(assignment);
+	}
+	if (typeof blockNightLastResearchSnapshot === "string") blockNightLastResearchSnapshot = "";
+	if (typeof blockNightEmitResearchSnapshotV23 === "function") queue("blockNightEmitResearchSnapshotV23", 80);
+	blockNightV28EmitQueueState(nonce, true, "synced", started);
+	return true;
+}
+
+eventChat = function (from, to, message)
+{
+	if (blockNightV28HandleQueueCommand(from, message)) return;
+	blockNightV28OriginalEventChat(from, to, message);
+};
+
+eventResearched = function (research, structure, player)
+{
+	blockNightV28OriginalEventResearched(research, structure, player);
+	if (gameTime > 1000 && player === selectedPlayer && structure)
+	{
+		blockNightV28ContinueAttempts[String(structure.id)] = 0;
+		queue("blockNightV28ContinueQueue", 300, structure);
+	}
+};
+
+setTimer("blockNightV32PollBridgeCommands", 120);
+setTimer("warzoneTowersDiagnosticSnapshot", 5000);
+{
+  "challenge": {
+    "bases": 3,
+    "description": "Defend the tower base against an adaptive survival army.",
+    "difficulty": "Medium",
+    "map": "TowerDefense2_m-T1",
+    "maxPlayers": 2,
+    "name": "Warzone Towers: Survival",
+    "powerLevel": 1,
+    "scavengers": 0,
+    "techLevel": 1,
+    "version": 2
+  },
+  "locked": {
+    "ai": true,
+    "alliances": true,
+    "bases": true,
+    "difficulty": true,
+    "position": true,
+    "power": true,
+    "scavengers": true,
+    "teams": true
+  },
+  "scripts": {
+    "rules": "warzone-towers-rules.js"
+  },
+  "player_0": {
+    "name": "Tower Commander",
+    "position": 1,
+    "team": 0
+  },
+  "player_1": {
+    "ai": "multiplay/skirmish/warzone-towers-ai.js",
+    "difficulty": "Medium",
+    "name": "Survival Army",
+    "position": 0,
+    "team": 1
+  }
+}
+/* Warzone Towers rules wrapper: stock Warzone rules + supplied Survival Mod + mobile bridge. */
+receiveAllEvents(true);
+
+include("multiplay/script/rules/init.js");
+
+include("SurvivalMod/ENEMY.js");
+include("SurvivalMod/ENTRANCES.js");
+include("SurvivalMod/TEMPLATES.js");
+include("SurvivalMod/LATEST_RESEARCH.js");
+
+include("SurvivalMod/reticule.js");
+include("SurvivalMod/audio.js");
+include("SurvivalMod/minimap.js");
+include("SurvivalMod/power.js");
+include("SurvivalMod/research.js");
+include("SurvivalMod/texture.js");
+include("SurvivalMod/weather.js");
+include("SurvivalMod/gameOver.js");
+include("SurvivalMod/base.js");
+include("SurvivalMod/limits.js");
+include("SurvivalMod/enableStructure.js");
+include("SurvivalMod/experience.js");
+include("SurvivalMod/vtol.js");
+include("SurvivalMod/spawn.js");
+
+include("warzone-towers-waves.js");
+include("warzone-towers-objective.js");
+include("warzone-towers-bridge.js");
+/* Numbered tower-defence rounds built from the supplied Survival Mod. */
+namespace("warzoneTowersWaves_");
+
+// spawn.js is loaded immediately before this wrapper. Replace only its start
+// event so the supplied continuous timer is never installed. The original
+// spawn_tick() and every calculation it uses remain untouched and are called
+// below as the four pulses that make up each numbered wave.
+function spawn_eventStartLevel()
+{
+}
+
+const warzoneTowersWaves_FIRST_PREP_MS = 4 * 60 * 1000;
+const warzoneTowersWaves_INTERMISSION_MS = 20 * 1000;
+// Survival Mod intentionally fills one quarter of the missing power per tick.
+// Four compressed ticks form one discrete wave without inventing a new roster
+// or a second balance model.
+const warzoneTowersWaves_PULSES = 4;
+const warzoneTowersWaves_PULSE_MS = 1000;
+
+var warzoneTowersWaves_phase = "build";
+var warzoneTowersWaves_wave = 0;
+var warzoneTowersWaves_deadline = 0;
+var warzoneTowersWaves_pulsesRemaining = 0;
+var warzoneTowersWaves_nextPulse = 0;
+var warzoneTowersWaves_lastSignature = "";
+var warzoneTowersWaves_lastCommand = "";
+var warzoneTowersWaves_carriedIds = {};
+var warzoneTowersWaves_frontierTime = 0;
+
+function warzoneTowersWaves_eventStartLevel()
+{
+	// The wave controller replaces the continuous Survival timer. The supplied
+	// roster, entrances and power calculations still produce each wave.
+	queue("warzoneTowersWaves_start", 200);
+}
+
+function warzoneTowersWaves_start()
+{
+	setTimer("warzoneTowersWaves_tick", 1000);
+	// Preparation runs from the start of the match, never from the first
+	// completed defence or vehicle. Doing nothing must not stop the waves.
+	warzoneTowersWaves_beginCountdown(warzoneTowersWaves_FIRST_PREP_MS);
+}
+
+function warzoneTowersWaves_beginCountdown(delay)
+{
+	warzoneTowersWaves_phase = "countdown";
+	warzoneTowersWaves_deadline = gameTime + delay;
+	warzoneTowersWaves_pulsesRemaining = 0;
+	warzoneTowersWaves_nextPulse = 0;
+	warzoneTowersWaves_emit(true);
+}
+
+function warzoneTowersWaves_beginWave()
+{
+	warzoneTowersWaves_carriedIds = {};
+	enumDroid(ENEMY, DROID_ANY).forEach(function (d) { warzoneTowersWaves_carriedIds[String(d.id)] = true; });
+	warzoneTowersWaves_wave += 1;
+	// Supplied templates are indexed by research-minutes. Each numbered round
+	// advances that existing roster one minute; completed player research can
+	// still lead it. Do not grant research to the player or replace the roster.
+	const baseline = typeof research_offset === "number" ? research_offset : 0;
+	warzoneTowersWaves_frontierTime = Math.max(Number(LATEST_RESEARCH.minimumResearchTime) || 0,
+		baseline + (warzoneTowersWaves_wave - 1) * 60);
+	if (typeof research_completeOnTime === "function") research_completeOnTime(warzoneTowersWaves_frontierTime, ENEMY);
+	warzoneTowersWaves_phase = "active";
+	warzoneTowersWaves_deadline = 0;
+	warzoneTowersWaves_pulsesRemaining += warzoneTowersWaves_PULSES;
+	warzoneTowersWaves_nextPulse = gameTime;
+	warzoneTowersWaves_spawnPulse();
+}
+
+function warzoneTowersWaves_spawnPulse()
+{
+	if (warzoneTowersWaves_pulsesRemaining <= 0) return;
+	// Surviving enemies stay when the player calls the next wave early. They
+	// must not consume the NEW wave's spawn budget or skipping spawns nothing.
+	const suppliedPowerEnemy = spawn_getPowerEnemy;
+	const suppliedPowerTeam = spawn_getPowerTeam;
+	const suppliedResearch = LATEST_RESEARCH;
+	LATEST_RESEARCH = { id: suppliedResearch.id, minimumResearchTime: warzoneTowersWaves_frontierTime, gameTime: gameTime };
+	spawn_getPowerEnemy = function () {
+		let carriedPower = 0;
+		enumDroid(ENEMY, DROID_ANY).forEach(function (d) {
+			if (warzoneTowersWaves_carriedIds[String(d.id)]) carriedPower += Math.max(spawn_MIN_COST, d.cost);
+		});
+		return Math.max(0, suppliedPowerEnemy() - carriedPower);
+	};
+	// The original adaptive spawner divides current power by its best power.
+	// An unarmed player otherwise produces 0/0 and no enemy budget. Supply a
+	// small opening threat only in that case; keep the supplied roster/spawner.
+	spawn_getPowerTeam = function () {
+		const power = suppliedPowerTeam();
+		return power > 0 ? power : spawn_MIN_COST * 4;
+	};
+	try { spawn_tick(); } finally {
+		spawn_getPowerEnemy = suppliedPowerEnemy;
+		spawn_getPowerTeam = suppliedPowerTeam;
+		LATEST_RESEARCH = suppliedResearch;
+	}
+	warzoneTowersWaves_pulsesRemaining -= 1;
+	warzoneTowersWaves_nextPulse = gameTime + warzoneTowersWaves_PULSE_MS;
+	warzoneTowersWaves_emit(true);
+}
+
+function warzoneTowersWaves_tick()
+{
+	warzoneTowersWaves_pollCommand();
+	const enemyDroids = enumDroid(ENEMY, DROID_ANY).length;
+
+	if (warzoneTowersWaves_phase === "countdown")
+	{
+		if (gameTime >= warzoneTowersWaves_deadline)
+		{
+			warzoneTowersWaves_beginWave();
+		}
+	}
+	else if (warzoneTowersWaves_phase === "active")
+	{
+		if (warzoneTowersWaves_pulsesRemaining > 0 && gameTime >= warzoneTowersWaves_nextPulse)
+		{
+			warzoneTowersWaves_spawnPulse();
+		}
+		else if (warzoneTowersWaves_pulsesRemaining === 0 && enemyDroids === 0)
+		{
+			warzoneTowersWaves_beginCountdown(warzoneTowersWaves_INTERMISSION_MS);
+		}
+	}
+
+	warzoneTowersWaves_emit(false);
+}
+
+function warzoneTowersWaves_pollCommand()
+{
+	const command = includeJSON("warzone-towers-wave-command.json");
+	if (!command || typeof command.nonce !== "string" || !command.nonce
+		|| command.nonce === warzoneTowersWaves_lastCommand) return;
+	warzoneTowersWaves_lastCommand = command.nonce;
+	if (command.action === "next" && (warzoneTowersWaves_phase === "countdown" || warzoneTowersWaves_phase === "active"))
+	{
+		warzoneTowersWaves_beginWave();
+	}
+}
+
+function warzoneTowersWaves_emit(force)
+{
+	const enemyDroids = enumDroid(ENEMY, DROID_ANY).length;
+	const nextWaveIn = warzoneTowersWaves_phase === "countdown"
+		? Math.max(0, Math.ceil((warzoneTowersWaves_deadline - gameTime) / 1000))
+		: null;
+	const payload = {
+		version: 2,
+		lastCommand: warzoneTowersWaves_lastCommand,
+		mode: "numbered-waves",
+		phase: warzoneTowersWaves_phase,
+		wave: warzoneTowersWaves_wave,
+		nextWave: warzoneTowersWaves_wave + 1,
+		nextWaveIn: nextWaveIn,
+		pulsesRemaining: warzoneTowersWaves_pulsesRemaining,
+		pulsesPerWave: warzoneTowersWaves_PULSES,
+		enemyDroids: enemyDroids,
+		humanPower: spawn_getPowerTeam(),
+		enemyPower: spawn_getPowerEnemy(),
+		entrances: ENTRANCES.length,
+		templates: TEMPLATES.length,
+		rosterFrontier: Math.min(TEMPLATES.length, Math.max(1, Math.floor(warzoneTowersWaves_frontierTime / 60))),
+		gameTime: gameTime
+	};
+	const signature = JSON.stringify(payload);
+	if (force || signature !== warzoneTowersWaves_lastSignature)
+	{
+		warzoneTowersWaves_lastSignature = signature;
+		dump("BNWAVE:" + signature);
+	}
+}
+/* The command centre is the tower-defence objective. */
+namespace("warzoneTowersObjective_");
+var warzoneTowersObjective_armed = false;
+var warzoneTowersObjective_failed = false;
+
+function warzoneTowersObjective_eventStartLevel()
+{
+	warzoneTowersObjective_armed = enumStruct(selectedPlayer, HQ).length > 0;
+	setTimer("warzoneTowersObjective_tick", 500);
+}
+
+function warzoneTowersObjective_tick()
+{
+	const hqs = enumStruct(selectedPlayer, HQ);
+	if (hqs.length) warzoneTowersObjective_armed = true;
+	if (warzoneTowersObjective_armed && !hqs.length) warzoneTowersObjective_fail();
+}
+
+function warzoneTowersObjective_eventDestroyed(object)
+{
+	if (object.player === selectedPlayer && object.stattype === HQ
+		&& warzoneTowersObjective_armed && !enumStruct(selectedPlayer, HQ).length)
+	{
+		warzoneTowersObjective_fail();
+	}
+}
+
+function warzoneTowersObjective_fail()
+{
+	if (warzoneTowersObjective_failed) return;
+	warzoneTowersObjective_failed = true;
+	warzoneTowersWaves_phase = "defeated";
+	warzoneTowersWaves_deadline = 0;
+	warzoneTowersWaves_pulsesRemaining = 0;
+	removeTimer("warzoneTowersWaves_tick");
+	removeTimer("warzoneTowersObjective_tick");
+	warzoneTowersWaves_emit(true);
+	gameOverMessage(false);
+}
+/* Survival army orders for Towers. Roster and spawn budgets come from the supplied mod. */
+var towersAi_units = {};
+var towersAi_orders = 0;
+var towersAi_recoveries = 0;
+
+function eventStartLevel()
+{
+	setTimer("towersAi_tick", 1000);
+}
+
+function towersAi_distance(a, b)
+{
+	return Math.hypot(a.x - b.x, a.y - b.y);
+}
+
+function towersAi_targets()
+{
+	const targets = [];
+	for (let player = 0; player < maxPlayers; player++)
+	{
+		if (player === me || allianceExistsBetween(me, player)) continue;
+		enumStruct(player).forEach(function (s) { targets.push(s); });
+	}
+	return targets;
+}
+
+function towersAi_tick()
+{
+	const targets = towersAi_targets();
+	const targetsById = {};
+	targets.forEach(function (s) { targetsById[String(s.id)] = s; });
+	const live = {};
+	const units = enumDroid(me, DROID_ANY);
+	for (const droid of units)
+	{
+		// Keep the supplied mod's empty-VTOL exit lane; vtol.js removes aircraft
+		// at (1,1), so an exhausted plane cannot hold a wave open forever.
+		if (droid.isVTOL && droid.weapons && droid.weapons[0] && droid.weapons[0].armed === 0)
+		{
+			if (droid.order !== DORDER_MOVE) orderDroidLoc(droid, DORDER_MOVE, 1, 1);
+			continue;
+		}
+		const key = String(droid.id);
+		const old = towersAi_units[key];
+		const progress = !old || towersAi_distance(droid, old) >= 0.5;
+		const record = old || { x: droid.x, y: droid.y, movedAt: gameTime, orderedAt: -10000, target: -1 };
+		if (progress) { record.x = droid.x; record.y = droid.y; record.movedAt = gameTime; }
+		live[key] = record;
+		const firing = droid.action === 6 || droid.action === 36;
+		const stuck = gameTime - record.movedAt >= 8000 && !firing;
+		// Leave a valid moving/firing order alone. Avoid repeated reachability
+		// scans and path resets when many waves and hundreds of towers are live.
+		if (old && targetsById[String(record.target)] && (firing || (!stuck
+			&& (droid.order === DORDER_ATTACK || droid.order === DORDER_OBSERVE)))) continue;
+
+		// Prefer the command centre. Reachability excludes entrances disconnected
+		// from a target by terrain; blocked roads are handled by attacking blockers.
+		const reachable = targets.filter(function (s) { return droidCanReach(droid, s.x, s.y); });
+		reachable.sort(function (a, b) {
+			return (a.stattype === HQ ? 0 : 1) - (b.stattype === HQ ? 0 : 1)
+				|| towersAi_distance(droid, a) - towersAi_distance(droid, b) || a.id - b.id;
+		});
+		let target = reachable[0];
+		if (!target) continue;
+
+		// An attack may legitimately be stationary while firing. Never restart
+		// that action every tick. MOVE/SCOUT with no displacement must be retried.
+		if (stuck)
+		{
+			const blockers = reachable.filter(function (s) { return towersAi_distance(droid, s) <= 12; });
+			blockers.sort(function (a, b) { return towersAi_distance(droid, a) - towersAi_distance(droid, b) || a.id - b.id; });
+			if (blockers.length) target = blockers[0];
+		}
+		if (!old || record.target !== target.id || (stuck && gameTime - record.orderedAt >= 4000)
+			|| (droid.order !== DORDER_ATTACK && droid.order !== DORDER_OBSERVE))
+		{
+			const order = droid.droidType === DROID_SENSOR ? DORDER_OBSERVE : DORDER_ATTACK;
+			if (orderDroidObj(droid, order, target))
+			{
+				record.target = target.id;
+				record.orderedAt = gameTime;
+				towersAi_orders++;
+				if (stuck) towersAi_recoveries++;
+			}
+		}
+	}
+	towersAi_units = live;
+	if (gameTime % 5000 < 1000)
+	{
+		dump("BNTOWERSAI:" + JSON.stringify({ gameTime: gameTime, units: units.length,
+			orders: towersAi_orders, recoveries: towersAi_recoveries,
+			hqs: targets.filter(function (s) { return s.stattype === HQ; }).map(function (s) {
+				return { id: s.id, health: s.health, x: s.x, y: s.y };
+			}), sample: units.slice(0, 8).map(function (d) {
+				return { id: d.id, x: d.x, y: d.y, body: d.body, propulsion: d.propulsion, order: d.order, action: d.action,
+					target: live[String(d.id)] ? live[String(d.id)].target : -1 };
+			}) }));
+	}
+}
+{"AI":{"js":"warzone-towers-ai.js","name":"Towers Survival Army","tip":"Advances on the command centre."}}
+{"nonce":"","action":""}
+/* Warzone Towers mobile research and camera bridge. Base rules are loaded by the wrapper. */
+
+var blockNightV28Queues = {};
+var blockNightV28ContinueAttempts = {};
+var blockNightV28Responses = {};
+var blockNightV28OriginalEventChat = eventChat;
+var blockNightV28OriginalEventResearched = eventResearched;
+var blockNightV31LastZoomNonce = "";
+var blockNightV31ZoomDistances = { close: 1600, battle: 2600, map: 3600 };
+var blockNightV32LastQueueNonce = "";
+var warzoneTowersLastControlNonce = "";
+
+function warzoneTowersDiagnosticSnapshot()
+{
+	let humanPower = 0;
+	let enemyPower = 0;
+	let diagnosticError = "";
+	const players = [];
+	try
+	{
+		humanPower = spawn_getPowerTeam();
+		enemyPower = spawn_getPowerEnemy();
+	}
+	catch (error)
+	{
+		diagnosticError = String(error && error.message ? error.message : error);
+	}
+	for (let player = 0; player < maxPlayers; ++player)
+	{
+		const allDroids = enumDroid(player, DROID_ANY);
+		const weaponDroids = enumDroid(player, DROID_WEAPON);
+		players.push({
+			player: player,
+			isAI: Boolean(playerData[player] && playerData[player].isAI),
+			allDroids: allDroids.length,
+			weaponDroids: weaponDroids.length,
+			defenses: enumStruct(player, DEFENSE).filter(function (structure) {
+				return structure.status === BUILT && structure.canHitGround;
+			}).length
+		});
+	}
+	dump("BNTOWERS:" + JSON.stringify({
+		version: 1,
+		gameTime: gameTime,
+		enemyPlayer: ENEMY,
+		entrances: Array.isArray(ENTRANCES) ? ENTRANCES.length : 0,
+		humanPower: humanPower,
+		enemyPower: enemyPower,
+		enemyDroids: ENEMY === null ? 0 : enumDroid(ENEMY, DROID_ANY).length,
+		spawnPowerBest: typeof spawn_powerTeamBest === "number" ? spawn_powerTeamBest : null,
+		spawnTickAvailable: typeof spawn_tick === "function",
+		diagnosticError: diagnosticError,
+		players: players
+	}));
+}
+
+function blockNightV31PollZoomCommand()
+{
+	let command = null;
+	try
+	{
+		command = includeJSON("blocknight-zoom-command.json");
+	}
+	catch (error)
+	{
+		return;
+	}
+	if (!command || typeof command.nonce !== "string" || !command.nonce || command.nonce === blockNightV31LastZoomNonce) return;
+
+	blockNightV31LastZoomNonce = command.nonce;
+	const preset = String(command.preset || "");
+	const distance = Number(blockNightV31ZoomDistances[preset] || 0);
+	if (distance > 0) cameraZoom(distance, 0);
+	if (preset === "base")
+	{
+		const hqs = enumStruct(selectedPlayer, HQ);
+		if (hqs.length) centreView(hqs[0].x, hqs[0].y);
+	}
+	dump("BNZOOM:" + JSON.stringify({
+		version: 31,
+		nonce: command.nonce,
+		preset: preset,
+		distance: distance,
+		gameTime: gameTime
+	}));
+}
+
+function warzoneTowersPollControlCommand()
+{
+	let command;
+	try { command = includeJSON("warzone-towers-control-command.json"); }
+	catch (error) { return; }
+	if (!command || !command.nonce || typeof command.nonce !== "string"
+		|| command.nonce === warzoneTowersLastControlNonce) return;
+	warzoneTowersLastControlNonce = command.nonce;
+	if (command.action !== "stop-selected") return;
+	const stopped = [];
+	// Only the user's explicit STOP command acts on their currently selected
+	// units. Run before the wrapper releases the native quick-build modifier.
+	const units = enumSelected().filter(function (object) {
+		return object.type === DROID && object.player === selectedPlayer;
+	});
+	for (let index = 0; index < units.length; ++index)
+	{
+		if (orderDroid(units[index], DORDER_STOP)) stopped.push(units[index].id);
+	}
+	dump("BNCONTROL:" + JSON.stringify({ version: 1, nonce: command.nonce,
+		action: command.action, stopped: stopped, gameTime: gameTime }));
+}
+
+function blockNightV32PollQueueCommand()
+{
+	let command = null;
+	try
+	{
+		command = includeJSON("blocknight-queue-command.json");
+	}
+	catch (error)
+	{
+		return;
+	}
+	if (!command || typeof command.nonce !== "string" || !command.nonce || command.nonce === blockNightV32LastQueueNonce) return;
+	blockNightV32LastQueueNonce = command.nonce;
+
+	if (blockNightV28Responses[command.nonce])
+	{
+		dump("BNQUEUE:" + JSON.stringify(blockNightV28Responses[command.nonce]));
+		return;
+	}
+	if (!Array.isArray(command.labs) || command.labs.length < 1 || command.labs.length > 16)
+	{
+		blockNightV28EmitQueueState(command.nonce, false, "invalid", []);
+		return;
+	}
+
+	const available = blockNightV28AvailableResearch();
+	const availableById = {};
+	for (let availableIndex = 0; availableIndex < available.length; ++availableIndex)
+	{
+		availableById[String(available[availableIndex].id)] = available[availableIndex];
+	}
+	const prepared = [];
+	const seenLabs = {};
+	const seenTopics = {};
+	for (let commandIndex = 0; commandIndex < command.labs.length; ++commandIndex)
+	{
+		const requested = command.labs[commandIndex];
+		const labId = Number(requested && requested.labId);
+		const lab = Number.isFinite(labId) ? getObject(STRUCTURE, selectedPlayer, labId) : null;
+		if (!lab || lab.player !== selectedPlayer || lab.stattype !== RESEARCH_LAB || lab.status !== BUILT || seenLabs[String(labId)])
+		{
+			blockNightV28EmitQueueState(command.nonce, false, "lab-missing", []);
+			return;
+		}
+		if (!Array.isArray(requested.topicIds) || requested.topicIds.length > 64)
+		{
+			blockNightV28EmitQueueState(command.nonce, false, "invalid", []);
+			return;
+		}
+		seenLabs[String(labId)] = true;
+		const topicIds = [];
+		for (let topicIndex = 0; topicIndex < requested.topicIds.length; ++topicIndex)
+		{
+			const topicId = String(requested.topicIds[topicIndex]);
+			if (!availableById[topicId] || seenTopics[topicId])
+			{
+				blockNightV28EmitQueueState(command.nonce, false, "topic-unavailable", []);
+				return;
+			}
+			seenTopics[topicId] = true;
+			topicIds.push(topicId);
+		}
+		prepared.push({ labId: labId, topicIds: topicIds });
+	}
+
+	const labsToStart = [];
+	for (let preparedIndex = 0; preparedIndex < prepared.length; ++preparedIndex)
+	{
+		const entry = prepared[preparedIndex];
+		blockNightV28Queues[String(entry.labId)] = entry.topicIds.slice();
+		labsToStart.push(entry.labId);
+	}
+	const started = [];
+	for (let labIndex = 0; labIndex < labsToStart.length; ++labIndex)
+	{
+		const assignment = blockNightV28StartNext(labsToStart[labIndex]);
+		if (assignment) started.push(assignment);
+	}
+	if (typeof blockNightLastResearchSnapshot === "string") blockNightLastResearchSnapshot = "";
+	if (typeof blockNightEmitResearchSnapshotV23 === "function") queue("blockNightEmitResearchSnapshotV23", 80);
+	blockNightV28EmitQueueState(command.nonce, true, "synced", started);
+}
+
+function blockNightV32PollBridgeCommands()
+{
+	warzoneTowersPollControlCommand();
+	blockNightV31PollZoomCommand();
+	blockNightV32PollQueueCommand();
+}
+
+function blockNightV28AvailableResearch()
+{
+	return enumResearch().sort(function (a, b) {
+		const rankA = typeof blockNightResearchRank === "function" ? blockNightResearchRank(a) : -1;
+		const rankB = typeof blockNightResearchRank === "function" ? blockNightResearchRank(b) : -1;
+		const rankDelta = rankA - rankB;
+		return rankDelta !== 0 ? rankDelta : (a.id < b.id ? -1 : (a.id > b.id ? 1 : 0));
+	});
+}
+
+function blockNightV28QueuePayload()
+{
+	const queues = [];
+	Object.keys(blockNightV28Queues).forEach(function (key) {
+		queues.push({ labId: Number(key), topicIds: blockNightV28Queues[key].slice() });
+	});
+	return queues;
+}
+
+function blockNightV28EmitQueueState(nonce, ok, reason, started)
+{
+	const payload = {
+		version: 32,
+		nonce: nonce || "",
+		ok: ok !== false,
+		reason: reason || "synced",
+		started: started || [],
+		queues: blockNightV28QueuePayload(),
+		gameTime: gameTime
+	};
+	if (payload.nonce) blockNightV28Responses[payload.nonce] = payload;
+	dump("BNQUEUE:" + JSON.stringify(payload));
+}
+
+function blockNightV28StartNext(labId)
+{
+	const key = String(labId);
+	const queued = blockNightV28Queues[key] || [];
+	const lab = getObject(STRUCTURE, selectedPlayer, Number(labId));
+	if (!lab || lab.player !== selectedPlayer || lab.stattype !== RESEARCH_LAB || lab.status !== BUILT)
+	{
+		delete blockNightV28Queues[key];
+		return null;
+	}
+	if (!structureIdle(lab)) return null;
+
+	while (queued.length)
+	{
+		const topicId = queued[0];
+		const topic = getResearch(topicId, selectedPlayer);
+		if (!topic || topic.done || topic.started)
+		{
+			queued.shift();
+			continue;
+		}
+		if (pursueResearch(lab, topicId))
+		{
+			queued.shift();
+			if (typeof blockNightLabTopics === "object")
+			{
+				blockNightLabTopics[key] = { topicId: topicId, assignedAt: gameTime };
+			}
+			return { labId: lab.id, topicId: topicId };
+		}
+		return null;
+	}
+	return null;
+}
+
+function blockNightV28ContinueQueue(lab)
+{
+	if (!lab || typeof lab.id !== "number") return;
+	const labId = lab.id;
+	const key = String(labId);
+	const started = blockNightV28StartNext(labId);
+	const remaining = blockNightV28Queues[key] || [];
+	const attempt = Number(blockNightV28ContinueAttempts[key] || 0);
+	if (!started && remaining.length && attempt < 12)
+	{
+		blockNightV28ContinueAttempts[key] = attempt + 1;
+		queue("blockNightV28ContinueQueue", 300, lab);
+		return;
+	}
+	delete blockNightV28ContinueAttempts[key];
+	if (typeof blockNightLastResearchSnapshot === "string") blockNightLastResearchSnapshot = "";
+	if (typeof blockNightEmitResearchSnapshotV23 === "function") queue("blockNightEmitResearchSnapshotV23", 80);
+	blockNightV28EmitQueueState("", true, started ? "continued" : remaining.length ? "waiting" : "idle", started ? [started] : []);
+}
+
+function blockNightV28HandleQueueCommand(from, message)
+{
+	if (typeof message !== "string" || !/^q[0-9]+ /.test(message)) return false;
+	const parts = message.trim().split(/\s+/);
+	const nonce = parts.length ? parts[0].slice(1) : "";
+	if (from !== selectedPlayer || parts.length !== 2)
+	{
+		blockNightV28EmitQueueState(nonce, false, from !== selectedPlayer ? "wrong-player" : "invalid", []);
+		return true;
+	}
+	if (blockNightV28Responses[nonce])
+	{
+		dump("BNQUEUE:" + JSON.stringify(blockNightV28Responses[nonce]));
+		return true;
+	}
+
+	const available = blockNightV28AvailableResearch();
+	const sections = parts[1].split(";");
+	const labs = enumStruct(selectedPlayer, RESEARCH_LAB).filter(function (lab) {
+		return lab.status === BUILT;
+	}).reverse();
+	const labsToStart = [];
+	for (let sectionIndex = 0; sectionIndex < sections.length; ++sectionIndex)
+	{
+		const fields = sections[sectionIndex].split(",");
+		if (fields.length < 2) continue;
+		const lab = labs[Number(fields[0])];
+		if (!lab || lab.player !== from || lab.stattype !== RESEARCH_LAB || lab.status !== BUILT) continue;
+		const labId = lab.id;
+		const topicIds = [];
+		if (fields[1] !== "-")
+		{
+			for (let indexPosition = 1; indexPosition < fields.length; ++indexPosition)
+			{
+				const topic = available[Number(fields[indexPosition])];
+				if (topic && topicIds.indexOf(topic.id) < 0) topicIds.push(topic.id);
+			}
+		}
+		blockNightV28Queues[String(labId)] = topicIds;
+		labsToStart.push(labId);
+	}
+
+	const started = [];
+	for (let labIndex = 0; labIndex < labsToStart.length; ++labIndex)
+	{
+		const assignment = blockNightV28StartNext(labsToStart[labIndex]);
+		if (assignment) started.push(assignment);
+	}
+	if (typeof blockNightLastResearchSnapshot === "string") blockNightLastResearchSnapshot = "";
+	if (typeof blockNightEmitResearchSnapshotV23 === "function") queue("blockNightEmitResearchSnapshotV23", 80);
+	blockNightV28EmitQueueState(nonce, true, "synced", started);
+	return true;
+}
+
+eventChat = function (from, to, message)
+{
+	if (blockNightV28HandleQueueCommand(from, message)) return;
+	blockNightV28OriginalEventChat(from, to, message);
+};
+
+eventResearched = function (research, structure, player)
+{
+	blockNightV28OriginalEventResearched(research, structure, player);
+	if (gameTime > 1000 && player === selectedPlayer && structure)
+	{
+		blockNightV28ContinueAttempts[String(structure.id)] = 0;
+		queue("blockNightV28ContinueQueue", 300, structure);
+	}
+};
+
+setTimer("blockNightV32PollBridgeCommands", 120);
+setTimer("warzoneTowersDiagnosticSnapshot", 5000);
+{"version":1,"nonce":"","action":""}

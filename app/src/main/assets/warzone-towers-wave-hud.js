@@ -2,7 +2,7 @@
 (() => {
   "use strict";
 
-  const VERSION = 5;
+  const VERSION = 6;
   if (window.__warzoneTowersWaves?.version >= VERSION) return;
 
   const state = {
@@ -37,8 +37,26 @@
       <button id="warzone-towers-next-wave" type="button" title="Call the next wave now. Surviving enemies remain.">SKIP WAVE</button>`;
     (owner.getElementById("warzone-command-strip") || owner.body).appendChild(hud);
     const button = hud.querySelector("button");
-    button.addEventListener("pointerdown", event => event.preventDefault());
-    button.addEventListener("click", nextWave);
+    let press = null, lastTouch = -Infinity;
+    button.addEventListener('pointerdown', event => {
+      event.preventDefault();
+      if (event.pointerType === 'touch') press = { id: event.pointerId, x: event.clientX, y: event.clientY };
+    });
+    button.addEventListener('pointercancel', () => { press = null; });
+    button.addEventListener('pointerup', event => {
+      const start = press; press = null;
+      if (!start || start.id !== event.pointerId || button.disabled) return;
+      event.preventDefault();
+      const r = button.getBoundingClientRect();
+      if (Math.hypot(event.clientX - start.x, event.clientY - start.y) > 8
+          || event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom) return;
+      lastTouch = performance.now(); nextWave();
+    });
+    button.addEventListener('click', event => {
+      event.preventDefault();
+      if (performance.now() - lastTouch < 700 && (event.detail > 0 || event.pointerType === 'touch')) return;
+      if (!button.disabled) nextWave();
+    });
     return hud;
   }
 

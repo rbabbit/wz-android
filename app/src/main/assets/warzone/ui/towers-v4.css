@@ -40,6 +40,12 @@ html body, html body.bg-dark { min-height: 0; background: #05090b !important; }
 #blocknight-combat-hud #blocknight-tech { color: #f6bf69; }
 #blocknight-combat-hud #blocknight-tech img { filter: invert(81%) sepia(62%) saturate(1100%) hue-rotate(329deg); }
 #blocknight-combat-hud #blocknight-help { color: #c2d0cf; }
+#blocknight-combat-hud #blocknight-music { color: #a9dfe0; }
+#blocknight-combat-hud button:disabled { opacity: .5; cursor: default; }
+body[data-native-music="true"] #blocknight-combat-hud button:not(#blocknight-music),
+body[data-native-music="true"] #blocknight-zoom-control { display: none; }
+body[data-native-music="true"] #blocknight-combat-hud .bn-command-group { margin: 0; padding: 0; border: 0; }
+body[data-native-music="true"] #warzone-towers-next-wave { pointer-events: none; opacity: .45; }
 #blocknight-combat-hud button:focus-visible,
 #warzone-towers-wave-hud button:focus-visible,
 #warzone-towers-help button:focus-visible { outline: 2px solid #b7e6e8; outline-offset: -2px; }
@@ -68,7 +74,7 @@ html body, html body.bg-dark { min-height: 0; background: #05090b !important; }
 }
 #warzone-towers-next-wave:disabled { opacity: .42; cursor: default; }
 
-@media (max-width: 1000px) {
+@media (max-width: 1100px) {
   #warzone-command-strip #blocknight-combat-hud { top: 51px; }
 }
 #warzone-towers-preparation {

@@ -2,7 +2,7 @@
 (() => {
   "use strict";
 
-  const VERSION = 32;
+  const VERSION = 34;
   const QUEUE_COMMAND_PATH = "/data/mp/tests/blocknight-queue-command.json";
   const CATEGORIES = ["ALL", "WEAPONS", "DEFENCE", "VEHICLES", "CYBORG", "SYSTEMS", "STRUCTURES"];
 
@@ -122,6 +122,11 @@
   function handleEngineOutput(event) {
     const text = String(event?.detail?.text || "");
     try {
+      if (text.includes("BNCONTROL:")) {
+        const applied = parsePayload(text, "BNCONTROL:");
+        if (applied?.nonce) window.dispatchEvent(new CustomEvent("warzone-towers-control-ack", { detail: applied }));
+        return;
+      }
       if (text.includes("BNZOOM:")) {
         const applied = parsePayload(text, "BNZOOM:");
         if (!applied?.nonce) return;
@@ -245,7 +250,7 @@
         const lines = addition.split(/\r?\n/);
         state.logPartials[path] = lines.pop();
         lines.forEach(line => {
-          if (line.includes("BNTECH") || line.includes("BNQUEUE") || line.includes("BNZOOM")) {
+          if (line.includes("BNTECH") || line.includes("BNQUEUE") || line.includes("BNZOOM") || line.includes("BNCONTROL")) {
             handleEngineOutput({ detail: { text: line } });
           }
         });
@@ -319,8 +324,16 @@
       button.dataset.category = category; button.textContent = category;
       categories.appendChild(button);
     });
-    shell.addEventListener("pointerdown", event => event.stopPropagation());
+    shell.addEventListener("pointerdown", event => {
+      event.stopPropagation();
+      // Suppress compatibility mouse events: SDL otherwise sees HTML menu
+      // touches as unmodified canvas clicks and can cancel a native build.
+      if (!event.target.closest("input, textarea, [contenteditable]")) event.preventDefault();
+    });
     shell.addEventListener("pointerup", event => event.stopPropagation());
+    for (const type of ["mousedown", "mouseup", "mousemove", "keydown", "keyup"]) {
+      shell.addEventListener(type, event => event.stopPropagation());
+    }
     shell.addEventListener("click", event => {
       const button = event.target.closest("button");
       if (!button) return;

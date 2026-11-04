@@ -1,0 +1,582 @@
+--------- beginning of main
+11-04 18:00:50.639 22876 22876 I Zygote  : Process 22876 created for com.rbabbit.warzonetowers
+11-04 18:00:50.641 22876 22876 I t.warzonetowers: Late-enabling -Xcheck:jni
+11-04 18:00:50.722 22876 22876 I t.warzonetowers: Using generational CollectorTypeCMC GC.
+11-04 18:00:50.732 22876 22876 W t.warzonetowers: Unexpected CPU variant for x86: x86_64.
+11-04 18:00:50.732 22876 22876 W t.warzonetowers: Known variants: atom, sandybridge, silvermont, goldmont, goldmont-plus, goldmont-without-sha-xsaves, tremont, kabylake, alderlake, pantherlake, default
+11-04 18:00:50.775 22876 22876 D nativeloader: Load libframework-connectivity-tiramisu-jni.so using APEX ns com_android_tethering for caller /apex/com.android.tethering/javalib/framework-connectivity-t.jar: ok
+11-04 18:00:51.114 22876 22876 D nativeloader: Configuring clns-9 for other apk /data/app/~~6N7nC3OmwGz04usCkmzC7g==/com.rbabbit.warzonetowers-rZCInbilK7QUhWrcXJaPAA==/base.apk. target_sdk_version=36, uses_libraries=, library_path=/data/app/~~6N7nC3OmwGz04usCkmzC7g==/com.rbabbit.warzonetowers-rZCInbilK7QUhWrcXJaPAA==/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.rbabbit.warzonetowers
+11-04 18:00:51.151 22876 22876 V GraphicsEnvironment: Currently set values for:
+11-04 18:00:51.152 22876 22876 V GraphicsEnvironment:   angle_gl_driver_selection_pkgs=[]
+11-04 18:00:51.152 22876 22876 V GraphicsEnvironment:   angle_gl_driver_selection_values=[]
+11-04 18:00:51.152 22876 22876 V GraphicsEnvironment: com.rbabbit.warzonetowers is not listed in per-application setting
+11-04 18:00:51.156 22876 22876 V GraphicsEnvironment: ANGLE allowlist from config: com.dreamgames.royalmatch com.dts.freefiremax com.dxx.firenow com.gramgames.mergedragons com.ludo.king com.mojang.minecraftpe com.my.defense com.nintendo.zaka com.os.airforce com.playrix.fishdomdd.gplay io.teslatech.callbreak jp.konami.prospia net.peakgames.toonblast
+11-04 18:00:51.156 22876 22876 V GraphicsEnvironment: No special selections for ANGLE, returning default driver choice
+11-04 18:00:51.157 22876 22876 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+--------- beginning of system
+11-04 18:00:51.243 22876 22896 I DisplayManager: Choreographer implicitly registered for the refresh rate.
+11-04 18:00:51.303 22876 22876 E ashmem  : Pinning is deprecated since Android Q. Please use trim or other methods.
+11-04 18:00:51.346 22876 22876 D CompatChangeReporter: Compat change id reported: 377864165; UID 10230; state: ENABLED
+11-04 18:00:51.347 22876 22876 D DesktopExperienceFlags: Toggle override initialized to: false
+11-04 18:00:51.347 22876 22876 D DesktopModeFlags: Toggle override initialized to: OVERRIDE_UNSET
+11-04 18:00:51.385 22876 22896 I GFXSTREAM: [eglDisplay.cpp(297)] Opening libGLESv1_CM_emulation.so
+11-04 18:00:51.388 22876 22896 I GFXSTREAM: [eglDisplay.cpp(297)] Opening libGLESv2_emulation.so
+11-04 18:00:51.408 22876 22896 W HWUI    : Failed to initialize 101010-2 format, error = EGL_SUCCESS
+11-04 18:00:51.428 22876 22876 I WebViewFactory: Loading com.google.android.webview version 158.0.8127.2 (code 812700218)
+11-04 18:00:51.431 22876 22876 V ResourcesManager: The following library key has been added: ResourcesKey{ mHash=ef11a9b8 mResDir=null mSplitDirs=[] mOverlayDirs=[] mLibDirs=[/data/app/~~hLOhFPU5Pd-yum2hVb347w==/com.google.android.webview-C1wI8LKRlMUAXMLVFQ1s4A==/base.apk,/system/framework/android.test.base.jar,/system_ext/framework/androidx.window.extensions.jar] mDisplayId=0 mOverrideConfig=v36 mCompatInfo={480dpi always-compat} mLoaders=[]}
+11-04 18:00:51.443 22876 22876 D ApplicationLoaders: Returning zygote-cached class loader: /system/framework/android.test.base.jar
+11-04 18:00:51.443 22876 22876 D ApplicationLoaders: Returning zygote-cached class loader: /system_ext/framework/androidx.window.extensions.jar
+11-04 18:00:51.447 22876 22876 D nativeloader: Configuring clns-10 for other apk /data/app/~~hLOhFPU5Pd-yum2hVb347w==/com.google.android.webview-C1wI8LKRlMUAXMLVFQ1s4A==/base.apk. target_sdk_version=36, uses_libraries=, library_path=/data/app/~~hLOhFPU5Pd-yum2hVb347w==/com.google.android.webview-C1wI8LKRlMUAXMLVFQ1s4A==/lib/x86_64:/data/app/~~hLOhFPU5Pd-yum2hVb347w==/com.google.android.webview-C1wI8LKRlMUAXMLVFQ1s4A==/base.apk!/lib/x86_64, permitted_path=/data:/mnt/expand
+11-04 18:00:51.484 22876 22876 I cr_WVCFactoryProvider: version=158.0.8127.2 (812700218) minSdkVersion=29 multiprocess=true packageId=2 splits=<none>
+11-04 18:00:51.559 22876 22876 D nativeloader: Load /data/app/~~hLOhFPU5Pd-yum2hVb347w==/com.google.android.webview-C1wI8LKRlMUAXMLVFQ1s4A==/base.apk!/lib/x86_64/libwebviewchromium.so using class loader ns clns-10 (caller=/data/app/~~hLOhFPU5Pd-yum2hVb347w==/com.google.android.webview-C1wI8LKRlMUAXMLVFQ1s4A==/base.apk): ok
+11-04 18:00:51.562 22876 22876 D nativeloader: Load /system/lib64/libwebviewchromium_plat_support.so using class loader ns clns-10 (caller=/data/app/~~hLOhFPU5Pd-yum2hVb347w==/com.google.android.webview-C1wI8LKRlMUAXMLVFQ1s4A==/base.apk): ok
+11-04 18:00:51.566 22876 22900 E chromium: [1104/180051.566629:ERROR:android_webview/browser/variations/variations_seed_loader.cc:36] Seed missing signature.
+11-04 18:00:51.568 22876 22876 I cr_LibraryLoader: Successfully loaded native library
+11-04 18:00:51.569 22876 22876 I cr_CachingUmaRecorder: Flushed 31 samples from 11 histograms, 0 samples were dropped.
+11-04 18:00:51.575 22876 22876 I cr_ChildProcLH: ScopedServiceBindingBatch.tryActivate: false
+11-04 18:00:51.576 22876 22876 I cr_CombinedPProvider: #registerProvider() provider:WV.lj@6766585 isPolicyCacheEnabled:false policyProvidersSize:0
+11-04 18:00:51.577 22876 22876 I cr_PolicyProvider: #setManagerAndSource() 0
+11-04 18:00:51.579 22876 22902 I cr_policy: registerReceiver succeeded after 2ms
+11-04 18:00:51.580 22876 22876 I cr_DisplayManager: Is Display Topology available: false
+11-04 18:00:51.602 22876 22876 I cr_CombinedPProvider: #linkNativeInternal() 1
+11-04 18:00:51.603 22876 22876 I cr_AppResProvider: #getApplicationRestrictionsFromUserManager() Bundle[EMPTY_PARCEL]
+11-04 18:00:51.603 22876 22876 I cr_PolicyProvider: #notifySettingsAvailable() 0
+11-04 18:00:51.603 22876 22876 I cr_CombinedPProvider: #onSettingsAvailable() 0
+11-04 18:00:51.603 22876 22876 I cr_CombinedPProvider: #flushPolicies()
+11-04 18:00:51.665 22876 22926 W chromium: [WARNING:net/dns/dns_config_service_android.cc:69] Failed to read DnsConfig.
+11-04 18:00:51.756 22876 22876 I BlockNightWZ: WebView 158.0.8127.2, profile=true, cross-origin allowlist=true
+11-04 18:00:51.808 22876 22876 I HWUI    : Using FreeType backend (prop=Auto)
+11-04 18:00:51.874 22876 22876 D CompatChangeReporter: Compat change id reported: 376561342; UID 10230; state: ENABLED
+11-04 18:00:51.934 22876 22876 W HWUI    : Unknown dataspace 0
+11-04 18:00:51.941 22876 22876 D InsetsController: Setting requestedVisibleTypes to 496 (was 503)
+11-04 18:00:51.956 22876 22876 I cr_AppResProvider: #getApplicationRestrictionsFromUserManager() Bundle[EMPTY_PARCEL]
+11-04 18:00:51.956 22876 22876 I cr_PolicyProvider: #notifySettingsAvailable() 0
+11-04 18:00:51.956 22876 22876 I cr_CombinedPProvider: #onSettingsAvailable() 0
+11-04 18:00:51.956 22876 22876 I cr_CombinedPProvider: #flushPolicies()
+11-04 18:00:51.967 22876 22876 D WindowOnBackDispatcher: setTopOnBackInvokedCallback (unwrapped): android.app.Activity$$ExternalSyntheticLambda0@dd9d190
+11-04 18:00:51.967 22876 22876 D WindowOnBackDispatcher: setTopOnBackInvokedCallback (unwrapped): com.rbabbit.blocknight.warzone.MainActivity$$ExternalSyntheticLambda17@8f84a89
+11-04 18:00:51.980 22876 22876 D VRI[MainActivity]: WindowInsets changed: 1920x1200 statusBars:[0,78,0,0] navigationBars:[0,0,0,48] mandatorySystemGestures:[0,78,0,48] 
+11-04 18:00:52.013 22876 22943 I CameraManagerGlobal: Connecting to camera service
+11-04 18:00:52.049 22876 22876 D VRI[MainActivity]: WindowInsets changed: statusBars:null navigationBars:null 
+11-04 18:00:52.082 22876 22876 W View    : requestLayout() improperly called by android.widget.LinearLayout{d0e42a8 V.E...... ......ID 0,0-1920,1200} during layout: running second layout pass
+11-04 18:00:52.082 22876 22876 W View    : requestLayout() improperly called by com.rbabbit.blocknight.warzone.MainActivity$EngineWebView{cf95641 VFED..CL. ......ID 0,0-1920,1200} during layout: running second layout pass
+11-04 18:00:52.716 22876 22876 I Choreographer: Skipped 43 frames!  The application may be doing too much work on its main thread.
+11-04 18:00:52.734 22876 22945 I HWUI    : Davey! duration=840ms; Flags=1, FrameTimelineVsyncId=3001596, IntendedVsync=12642157549679, Vsync=12642224216343, InputEventId=0, HandleInputStart=12642237142158, AnimationStart=12642237151128, PerformTraversalsStart=12642237413801, DrawStart=12642380325858, FrameDeadline=12642174216345, FrameStartTime=12642237082262, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=12642435766659, SyncStart=12642436256038, IssueDrawCommandsStart=12642436399999, SwapBuffers=12642824007910, FrameCompleted=12642998380422, DequeueBufferDuration=5650, QueueBufferDuration=257672, GpuCompleted=12642998380422, SwapBuffersCompleted=12642986089749, DisplayPresentTime=0, CommandSubmissionCompleted=12642824007910, 
+11-04 18:00:52.950 22876 22893 I HWUI    : Davey! duration=944ms; Flags=0, FrameTimelineVsyncId=3001620, IntendedVsync=12642257549675, Vsync=12642974216313, InputEventId=0, HandleInputStart=12642991966618, AnimationStart=12642991973219, PerformTraversalsStart=12642992084955, DrawStart=12642993704233, FrameDeadline=12643024216311, FrameStartTime=12642990689202, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=12642994065311, SyncStart=12642994085134, IssueDrawCommandsStart=12642997671632, SwapBuffers=12643146008633, FrameCompleted=12643202486237, DequeueBufferDuration=7083, QueueBufferDuration=3384167, GpuCompleted=12643202486237, SwapBuffersCompleted=12643181809004, DisplayPresentTime=0, CommandSubmissionCompleted=12643146008633, 
+11-04 18:00:53.143 22876 22951 W InteractionJankMonitor: Initializing without READ_DEVICE_CONFIG permission. enabled=false, interval=1, missedFrameThreshold=3, frameTimeThreshold=64, package=com.rbabbit.warzonetowers
+11-04 18:00:53.223 22876 22876 D InsetsController: hide(ime())
+11-04 18:00:53.223 22876 22876 I ImeTracker: com.rbabbit.warzonetowers:4d0b0ecc: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+11-04 18:00:53.722 22876 22886 I t.warzonetowers: Compiler allocated 5193KB to compile void android.view.ViewRootImpl.performTraversals()
+11-04 18:00:54.285 22876 22876 I cr_A11yState: Enabled accessibility services list updated. []
+11-04 18:00:54.289 22876 22876 I cr_A11yState: New AccessibilityState: State{isComplexUserInteractionServiceEnabled=false, isTouchExplorationEnabled=false, isPerformGesturesEnabled=false, isAnyAccessibilityServiceEnabled=false, isAccessibilityToolPresent=false, isTextShowPasswordEnabled=true, isOnlyAutofillRunning=false, isOnlyPasswordManagersEnabled=false, isKnownScreenReaderEnabled=false, isSamsungTalkBackEnabled=false}
+11-04 18:00:57.691 22876 22928 W cr_media: BLUETOOTH_CONNECT permission is missing.
+11-04 18:00:57.692 22876 22928 W cr_media: getBluetoothAdapter() requires BLUETOOTH permission
+11-04 18:00:57.692 22876 22928 W cr_media: registerBluetoothIntentsIfNeeded: Requires BLUETOOTH permission
+11-04 18:00:57.697 22876 22928 D AudioSystem: onNewService: media.audio_policy service obtained 0x71100ce77e30
+11-04 18:00:57.704 22876 22928 D AudioSystem: getService: IAudioPolicyService retrieved: 0x71100ce77e30  cached: 0x71100ce77e30
+11-04 18:00:58.531 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (1)
+11-04 18:00:58.532 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (1)
+11-04 18:01:01.398 22876 22876 I Choreographer: Skipped 178 frames!  The application may be doing too much work on its main thread.
+11-04 18:01:01.421 22876 22893 I HWUI    : Davey! duration=3021ms; Flags=0, FrameTimelineVsyncId=3002727, IntendedVsync=12648657549419, Vsync=12648657549419, InputEventId=0, HandleInputStart=12648659264168, AnimationStart=12648659265630, PerformTraversalsStart=12648660139144, DrawStart=12648660250172, FrameDeadline=12648707549417, FrameStartTime=12648659259224, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=12648660847466, SyncStart=12648664947314, IssueDrawCommandsStart=12648665163946, SwapBuffers=12651652042788, FrameCompleted=12651683037593, DequeueBufferDuration=3098, QueueBufferDuration=226145, GpuCompleted=12651683037593, SwapBuffersCompleted=12651659462070, DisplayPresentTime=0, CommandSubmissionCompleted=12651652042788, 
+11-04 18:01:01.544 22876 22876 I BlockNightWZ: Warzone WebView capabilities: "{\"crossOriginIsolated\":true,\"sharedArrayBuffer\":true,\"innerWidth\":1280,\"innerHeight\":800}"
+11-04 18:01:01.548 22876 22893 I HWUI    : Davey! duration=3021ms; Flags=0, FrameTimelineVsyncId=3002749, IntendedVsync=12648690882751, Vsync=12651657549299, InputEventId=0, HandleInputStart=12651673151667, AnimationStart=12651673153423, PerformTraversalsStart=12651674315881, DrawStart=12651674397002, FrameDeadline=12651807549293, FrameStartTime=12651672193201, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=12651675026426, SyncStart=12651778481378, IssueDrawCommandsStart=12651779029468, SwapBuffers=12651790813351, FrameCompleted=12651816025560, DequeueBufferDuration=6334838, QueueBufferDuration=329408, GpuCompleted=12651816025560, SwapBuffersCompleted=12651807007058, DisplayPresentTime=0, CommandSubmissionCompleted=12651790813351, 
+11-04 18:01:01.778 22876 22887 I t.warzonetowers: Background concurrent mark compact GC freed 3774KB AllocSpace bytes, 27(888KB) LOS objects, 49% free, 8200KB/16MB, paused 32us,15.655ms total 384.538ms
+11-04 18:01:01.825 22876 22876 I BlockNightWZConsole: LOG WebAssembly.Memory {allocated: 256 MiB, maximum memory: 1024 MiB} (1178)
+11-04 18:01:01.829 22876 22876 I BlockNightWZConsole: TIP Loading: /warzone/warzone2100.data (1341)
+11-04 18:01:01.894 22876 22927 I BlockNightWZ: Serving packaged engine asset: warzone2100.wasm
+11-04 18:01:01.902 22876 22916 I BlockNightWZ: Serving packaged engine asset: warzone2100.wasm
+11-04 18:01:07.056 22876 22876 I BlockNightWZConsole: LOG loaded from idbfs .,..,autohost,cache,challenges,config,keymap.json,knownPlayers.db,knownPlayers.db-shm,knownPlayers.db-wal,logs,maps,mods,multiplay,music,music.json,replay,savegames,screenshots,stats.db,stats.db-shm,stats.db-wal,tests,userdata (7)
+11-04 18:01:07.481 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:01:07.493 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:01:07.752 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:01:09.035 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:01:09.105 22876 22928 D AudioSystem: onNewServiceWithAdapter: media.audio_flinger service obtained 0x71102ce748c0
+11-04 18:01:09.109 22876 22928 D AudioSystem: getService: IAudioFlingerService retrieved: 0x71100ce22ed0  IAudioFlinger cached: 0x71102ce748c0
+11-04 18:01:09.151 22876 22928 I AAudio  : AAudioStreamBuilder_openStream() called ----------------------------------------
+11-04 18:01:09.152 22876 22928 I AudioStreamBuilder: rate   =  48000, channels  = 2, channelMask = 0x3, format   = 0x5, sharing = SH, dir = OUTPUT
+11-04 18:01:09.152 22876 22928 I AudioStreamBuilder: devices = AUDIO_PORT_HANDLE_NONE, sessionId = -1, perfMode = 12, callback: ON with frames = 4360
+11-04 18:01:09.152 22876 22928 I AudioStreamBuilder: usage  =      1, contentType = 0, inputPreset = 0, allowedCapturePolicy = 0
+11-04 18:01:09.152 22876 22928 I AudioStreamBuilder: privacy sensitive = false, opPackageName = (null), attributionTag = (null)
+11-04 18:01:09.152 22876 22928 D AudioStreamBuilder: build, global mmap policy is 0
+11-04 18:01:09.153 22876 22928 D AudioStreamBuilder: build, system mmap policy is 1
+11-04 18:01:09.153 22876 22928 D AudioStreamBuilder: build, final mmap policy is 1
+11-04 18:01:09.153 22876 22928 D AudioStreamBuilder: build, system mmap exclusive policy is 1
+11-04 18:01:09.153 22876 22928 D AudioStreamBuilder: build, final mmap exclusive policy is 1
+11-04 18:01:09.153 22876 22928 D t.warzonetowers: PlayerBase::PlayerBase()
+11-04 18:01:09.154 22876 22928 D AudioStreamTrack: open(), request notificationFrames = -8, frameCount = 0
+11-04 18:01:09.186 22876 22928 D AudioStreamTrack: open() flags changed from 0x00000104 to 0x00000000
+11-04 18:01:09.186 22876 22928 D AudioStreamTrack: open() perfMode changed from 12 to 10
+11-04 18:01:09.186 22876 22928 D AAudioStream: setState(s#1) from 0 to 2
+11-04 18:01:09.196 22876 22928 I AAudio  : AAudioStreamBuilder_openStream() got Legacy, devIds = [2], perf = NO, burst = 960
+11-04 18:01:09.196 22876 22928 I AAudio  : AAudioStreamBuilder_openStream() returns 0 = AAUDIO_OK for s#1 ----------------
+11-04 18:01:09.230 22876 22928 D AAudio  : AAudioStream_requestStart(s#1) called --------------
+11-04 18:01:09.230 22876 22928 D AAudioStream: setState(s#1) from 2 to 3
+11-04 18:01:09.238 22876 22928 D AAudio  : AAudioStream_requestStart(s#1) returned 0 ---------
+11-04 18:01:09.240 22876 23100 D AAudioStream: setState(s#1) from 3 to 4
+11-04 18:01:09.245 22876 22892 D AudioStreamLegacy: onAudioDeviceUpdate() devices 2 => 2
+11-04 18:01:13.284 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:01:13.418 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:01:13.598 22876 22876 I BlockNightWZ: Automatic Warzone Start Hosting tap: true
+11-04 18:01:14.419 22876 22876 I BlockNightWZ: Engine error buffer: "[\"wasm streaming compile failed: TypeError: Cannot read properties of undefined (reading 'substring')\",\"falling back to ArrayBuffer instantiation\"]"
+11-04 18:01:14.426 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:01:15.126 22876 22876 I BlockNightWZ: Automatic Warzone Limits tap: true
+11-04 18:01:18.513 22876 22876 I BlockNightWZ: Automatic Warzone VTOL minus tap: true
+11-04 18:01:19.346 22876 22876 I Choreographer: Skipped 48 frames!  The application may be doing too much work on its main thread.
+11-04 18:01:19.386 22876 22892 I HWUI    : Davey! duration=848ms; Flags=0, FrameTimelineVsyncId=3011828, IntendedVsync=12668774215281, Vsync=12668774215281, InputEventId=0, HandleInputStart=12668777393860, AnimationStart=12668777395438, PerformTraversalsStart=12668778525892, DrawStart=12668778658711, FrameDeadline=12668824215279, FrameStartTime=12668777387845, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=12668779085396, SyncStart=12668782737869, IssueDrawCommandsStart=12668782897684, SwapBuffers=12669598548753, FrameCompleted=12669626729547, DequeueBufferDuration=6617, QueueBufferDuration=888098, GpuCompleted=12669626729547, SwapBuffersCompleted=12669613553488, DisplayPresentTime=0, CommandSubmissionCompleted=12669598548753, 
+11-04 18:01:19.400 22876 22876 I BlockNightWZ: Automatic Warzone VTOL minus tap: true
+11-04 18:01:19.459 22876 22892 I HWUI    : Davey! duration=885ms; Flags=0, FrameTimelineVsyncId=3011850, IntendedVsync=12668807548613, Vsync=12669590881915, InputEventId=0, HandleInputStart=12669623488011, AnimationStart=12669623489939, PerformTraversalsStart=12669629382402, DrawStart=12669629488106, FrameDeadline=12669690881911, FrameStartTime=12669619681671, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=12669629925270, SyncStart=12669659238861, IssueDrawCommandsStart=12669659388472, SwapBuffers=12669691673583, FrameCompleted=12669722382083, DequeueBufferDuration=4715, QueueBufferDuration=361122, GpuCompleted=12669722382083, SwapBuffersCompleted=12669702750397, DisplayPresentTime=0, CommandSubmissionCompleted=12669691673583, 
+11-04 18:01:19.845 22876 22876 I BlockNightWZ: Automatic Warzone VTOL minus tap: true
+11-04 18:01:20.262 22876 22876 I BlockNightWZ: Automatic Warzone VTOL minus tap: true
+11-04 18:01:20.695 22876 22876 I BlockNightWZ: Automatic Warzone VTOL minus tap: true
+11-04 18:01:21.112 22876 22876 I BlockNightWZ: Automatic Warzone VTOL minus tap: true
+11-04 18:01:21.488 22876 22876 I BlockNightWZ: Automatic Warzone Accept limits tap: true
+11-04 18:01:23.380 22876 22876 I BlockNightWZ: Automatic Warzone Ready tap: true
+11-04 18:01:33.884 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:01:43.251 22876 22876 I BlockNightWZ: Engine error buffer: "[\"wasm streaming compile failed: TypeError: Cannot read properties of undefined (reading 'substring')\",\"falling back to ArrayBuffer instantiation\"]"
+11-04 18:01:50.993 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:01:51.014 22876 22876 I BlockNightWZ: Automatic Warzone Face South: true
+11-04 18:01:51.016 22876 22876 I BlockNightWZ: Show Warzone Towers combat HUD: true
+11-04 18:01:53.720 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:01:53.935 22876 22895 I HWUI    : Davey! duration=2922ms; Flags=0, FrameTimelineVsyncId=3029182, IntendedVsync=12701190880651, Vsync=12701290880647, InputEventId=0, HandleInputStart=12701293337256, AnimationStart=12701293340058, PerformTraversalsStart=12701296411599, DrawStart=12701296516389, FrameDeadline=12701390880643, FrameStartTime=12701291594024, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=12701297367199, SyncStart=12701373874355, IssueDrawCommandsStart=12701374624187, SwapBuffers=12704178761509, FrameCompleted=12704189932197, DequeueBufferDuration=5815, QueueBufferDuration=2866917, GpuCompleted=12704189613613, SwapBuffersCompleted=12704189932197, DisplayPresentTime=0, CommandSubmissionCompleted=12704178761509, 
+11-04 18:01:53.940 22876 22876 I Choreographer: Skipped 167 frames!  The application may be doing too much work on its main thread.
+11-04 18:01:54.112 22876 22895 I HWUI    : Davey! duration=2937ms; Flags=0, FrameTimelineVsyncId=3029240, IntendedVsync=12701424213975, Vsync=12704207547197, InputEventId=0, HandleInputStart=12704215006616, AnimationStart=12704215008773, PerformTraversalsStart=12704216682938, DrawStart=12704216819146, FrameDeadline=12704257547195, FrameStartTime=12704214783846, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=12704217080233, SyncStart=12704217198598, IssueDrawCommandsStart=12704217299981, SwapBuffers=12704351034279, FrameCompleted=12704362131972, DequeueBufferDuration=6507, QueueBufferDuration=1331545, GpuCompleted=12704362031067, SwapBuffersCompleted=12704362131972, DisplayPresentTime=0, CommandSubmissionCompleted=12704351034279, 
+11-04 18:01:54.881 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:01:55.928 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:01:56.046 22876 22876 I Choreographer: Skipped 37 frames!  The application may be doing too much work on its main thread.
+11-04 18:01:56.070 22876 22892 I HWUI    : Davey! duration=806ms; Flags=0, FrameTimelineVsyncId=3029455, IntendedVsync=12705474224915, Vsync=12705607558243, InputEventId=0, HandleInputStart=12705612057551, AnimationStart=12705612060317, PerformTraversalsStart=12705613139297, DrawStart=12705613253708, FrameDeadline=12705690880471, FrameStartTime=12705611287036, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=12705613579548, SyncStart=12705665136290, IssueDrawCommandsStart=12705665174997, SwapBuffers=12706308987330, FrameCompleted=12706331888983, DequeueBufferDuration=4648, QueueBufferDuration=713389, GpuCompleted=12706331888983, SwapBuffersCompleted=12706316864150, DisplayPresentTime=0, CommandSubmissionCompleted=12706308987330, 
+11-04 18:01:56.192 22876 22895 I HWUI    : Davey! duration=726ms; Flags=0, FrameTimelineVsyncId=3029479, IntendedVsync=12705690892582, Vsync=12706307559187, InputEventId=0, HandleInputStart=12706322319954, AnimationStart=12706322321934, PerformTraversalsStart=12706323593912, DrawStart=12706323708804, FrameDeadline=12706407547063, FrameStartTime=12706320005328, FrameInterval=16666665, WorkloadTarget=16666666, SyncQueued=12706324624563, SyncStart=12706365565383, IssueDrawCommandsStart=12706365613344, SwapBuffers=12706427560343, FrameCompleted=12706458579569, DequeueBufferDuration=4494, QueueBufferDuration=315218, GpuCompleted=12706458579569, SwapBuffersCompleted=12706434856520, DisplayPresentTime=0, CommandSubmissionCompleted=12706427560343, 
+11-04 18:01:56.992 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:01:58.120 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:01:59.236 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:02:00.322 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:02:00.999 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:02:02.293 22876 22876 I BlockNightWZConsole: LOG saved to idbfs .,..,autohost,cache,challenges,keymap.json,knownPlayers.db,knownPlayers.db-shm,knownPlayers.db-wal,logs,maps,mods,multiplay,music,music.json,replay,savegames,screenshots,stats.db,stats.db-shm,stats.db-wal,tests,userdata,config (7)
+11-04 18:02:02.318 22876 22876 I BlockNightWZConsole: TIP Storage may be cleared by the UA under storage pressure. (711)
+11-04 18:02:03.792 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:02:04.906 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:02:05.551 22876 22876 I BlockNightWZConsole: LOG [BlockNight zoom] close applied at 1600 (2737)
+11-04 18:02:05.565 22876 22876 W cr_VibrationManager: Failed to use vibrate API, requires VIBRATE permission.
+11-04 18:02:07.062 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:02:08.086 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:02:09.147 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:02:11.440 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:02:12.465 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:02:13.574 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:02:14.608 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:02:15.656 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:02:16.673 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:02:17.690 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:02:18.717 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:02:21.898 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:02:24.101 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:02:25.187 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:02:26.867 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:02:27.423 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:02:28.011 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:02:28.451 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:02:29.549 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:02:30.506 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:02:30.681 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:02:31.135 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:02:31.739 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:02:32.769 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:02:33.811 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:02:34.860 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:02:35.923 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:02:36.977 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:02:38.081 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:02:39.079 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:02:40.099 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:02:41.216 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:02:42.285 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:02:43.514 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:02:46.734 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:02:47.050 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:02:47.891 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:02:48.118 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:02:49.650 22876 22876 I Choreographer: Skipped 88 frames!  The application may be doing too much work on its main thread.
+11-04 18:02:49.666 22876 22893 I HWUI    : Davey! duration=1653ms; Flags=0, FrameTimelineVsyncId=3039823, IntendedVsync=12758207545037, Vsync=12758340878365, InputEventId=0, HandleInputStart=12758351656042, AnimationStart=12758351658329, PerformTraversalsStart=12758352781981, DrawStart=12758352872923, FrameDeadline=12758440878361, FrameStartTime=12758351126762, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=12758353268744, SyncStart=12758423337961, IssueDrawCommandsStart=12758427235585, SwapBuffers=12759908807632, FrameCompleted=12759931169466, DequeueBufferDuration=3944, QueueBufferDuration=293170, GpuCompleted=12759931169466, SwapBuffersCompleted=12759917263809, DisplayPresentTime=0, CommandSubmissionCompleted=12759908807632, 
+11-04 18:02:50.087 22876 22982 I HWUI    : Davey! duration=1563ms; Flags=0, FrameTimelineVsyncId=3039847, IntendedVsync=12758440883906, Vsync=12759907550426, InputEventId=0, HandleInputStart=12759929119562, AnimationStart=12759929121920, PerformTraversalsStart=12759936854213, DrawStart=12759936959007, FrameDeadline=12760324211619, FrameStartTime=12759924014040, FrameInterval=16666665, WorkloadTarget=16666666, SyncQueued=12759939743260, SyncStart=12760281039203, IssueDrawCommandsStart=12760281371670, SwapBuffers=12760311312213, FrameCompleted=12760346012432, DequeueBufferDuration=4189, QueueBufferDuration=480037, GpuCompleted=12760346012432, SwapBuffersCompleted=12760333924499, DisplayPresentTime=0, CommandSubmissionCompleted=12760311312213, 
+11-04 18:02:50.723 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:02:51.920 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:02:52.960 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:02:54.001 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:02:55.041 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:02:56.079 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:02:56.601 22876 22876 I Choreographer: Skipped 88 frames!  The application may be doing too much work on its main thread.
+11-04 18:02:56.630 22876 22982 I HWUI    : Davey! duration=1548ms; Flags=0, FrameTimelineVsyncId=3041484, IntendedVsync=12765324211419, Vsync=12765324211419, InputEventId=0, HandleInputStart=12765331213182, AnimationStart=12765331214598, PerformTraversalsStart=12765332441928, DrawStart=12765332562247, FrameDeadline=12765340878085, FrameStartTime=12765331207468, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=12765332866160, SyncStart=12765333164501, IssueDrawCommandsStart=12765333431567, SwapBuffers=12766863301017, FrameCompleted=12766873100702, DequeueBufferDuration=6406, QueueBufferDuration=1441702, GpuCompleted=12766873001316, SwapBuffersCompleted=12766873100702, DisplayPresentTime=0, CommandSubmissionCompleted=12766863301017, 
+11-04 18:02:56.958 22876 22893 I HWUI    : Davey! duration=1694ms; Flags=0, FrameTimelineVsyncId=3041519, IntendedVsync=12765407544749, Vsync=12766874211357, InputEventId=0, HandleInputStart=12766875930003, AnimationStart=12766875931918, PerformTraversalsStart=12766883129998, DrawStart=12766883241296, FrameDeadline=12767007544685, FrameStartTime=12766875142886, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=12766883665900, SyncStart=12766974355313, IssueDrawCommandsStart=12766974518746, SwapBuffers=12767178758614, FrameCompleted=12767192725521, DequeueBufferDuration=7781, QueueBufferDuration=390034, GpuCompleted=12767192605621, SwapBuffersCompleted=12767192725521, DisplayPresentTime=0, CommandSubmissionCompleted=12767178758614, 
+11-04 18:02:57.110 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:02:59.362 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:03:00.540 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:03:01.027 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:03:01.594 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:03:02.708 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:03:03.816 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:03:08.077 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:03:09.252 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:03:12.537 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:03:13.564 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:03:14.663 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:03:15.759 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:03:16.402 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:03:16.853 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:03:18.002 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:03:19.070 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:03:19.881 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:03:20.194 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:03:20.415 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:03:21.257 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:03:23.623 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:03:24.786 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:03:25.973 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:03:27.098 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:03:28.267 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:03:29.475 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:03:34.982 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:03:36.029 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:03:36.860 22876 22876 I Choreographer: Skipped 98 frames!  The application may be doing too much work on its main thread.
+11-04 18:03:36.868 22876 22892 I HWUI    : Davey! duration=1741ms; Flags=0, FrameTimelineVsyncId=3045766, IntendedVsync=12805390876483, Vsync=12805390876483, InputEventId=0, HandleInputStart=12805394164290, AnimationStart=12805394165926, PerformTraversalsStart=12805396776687, DrawStart=12805396903285, FrameDeadline=12805407543149, FrameStartTime=12805394158675, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=12805397300794, SyncStart=12805397342678, IssueDrawCommandsStart=12805397388237, SwapBuffers=12807103251427, FrameCompleted=12807131956227, DequeueBufferDuration=3058, QueueBufferDuration=276831, GpuCompleted=12807131956227, SwapBuffersCompleted=12807115494425, DisplayPresentTime=0, CommandSubmissionCompleted=12807103251427, 
+11-04 18:03:37.096 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:03:37.136 22876 22892 I HWUI    : Davey! duration=1843ms; Flags=0, FrameTimelineVsyncId=3045808, IntendedVsync=12805490876479, Vsync=12807124209747, InputEventId=0, HandleInputStart=12807134819878, AnimationStart=12807134821502, PerformTraversalsStart=12807151943595, DrawStart=12807152074952, FrameDeadline=12807224209743, FrameStartTime=12807133935304, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=12807152486473, SyncStart=12807205999723, IssueDrawCommandsStart=12807206069586, SwapBuffers=12807380162389, FrameCompleted=12807388137633, DequeueBufferDuration=6092, QueueBufferDuration=1376537, GpuCompleted=12807388054400, SwapBuffersCompleted=12807388137633, DisplayPresentTime=0, CommandSubmissionCompleted=12807380162389, 
+11-04 18:03:37.332 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:03:39.380 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:03:40.427 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:03:41.483 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:03:42.495 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:03:43.558 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:03:44.574 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:03:45.587 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:03:46.652 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:03:47.671 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:03:48.704 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:03:49.923 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:03:50.745 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:03:51.760 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:03:52.826 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:03:53.862 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:03:54.897 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:03:56.943 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:03:57.945 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:03:58.959 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:03:59.980 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:00.994 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:02.002 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:03.002 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:04.078 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:04.118 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:05.111 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:06.119 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:07.151 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:08.192 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:09.243 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:10.261 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:11.296 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:12.337 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:13.351 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:14.369 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:15.384 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:16.402 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:17.438 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:18.236 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:18.467 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:19.936 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:20.551 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:21.584 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:22.585 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:23.621 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:24.653 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:25.660 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:26.718 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:27.731 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:28.768 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:29.806 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:30.870 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:31.906 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:32.959 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:34.001 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:35.013 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:36.038 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:37.036 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:38.078 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:39.116 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:40.127 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:41.139 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:42.169 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:43.197 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:44.229 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:45.268 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:46.308 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:47.345 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:48.382 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:50.420 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:51.434 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:52.451 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:53.487 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:54.504 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:55.521 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:56.555 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:58.652 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:04:59.762 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:05:00.085 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:05:00.776 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:05:01.263 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:05:01.850 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:05:02.888 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:05:03.385 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:05:03.546 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:05:03.894 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:05:04.898 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:05:05.969 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:05:07.014 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:05:08.060 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:05:09.077 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:05:10.097 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:05:11.113 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:05:12.144 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:05:13.180 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:05:14.213 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:05:15.247 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:05:16.264 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:05:17.299 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:05:18.380 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:05:19.416 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:05:20.481 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:05:21.515 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:05:23.045 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:05:23.170 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:05:23.537 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:05:25.299 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:05:25.560 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:05:27.624 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:05:28.763 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:05:30.012 22876 22876 I BlockNightWZConsole: LOG saved to idbfs .,..,autohost,cache,challenges,keymap.json,knownPlayers.db,knownPlayers.db-shm,knownPlayers.db-wal,logs,maps,mods,multiplay,music,music.json,replay,savegames,screenshots,stats.db,stats.db-shm,stats.db-wal,tests,userdata,config (7)
+11-04 18:05:30.045 22876 22876 I BlockNightWZConsole: TIP Storage may be cleared by the UA under storage pressure. (711)
+11-04 18:05:30.750 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:05:31.792 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:05:34.955 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:05:35.965 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:05:36.987 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:05:38.022 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:05:39.549 22876 22876 I BlockNightWZConsole: LOG saved to idbfs .,..,autohost,cache,challenges,keymap.json,knownPlayers.db,knownPlayers.db-shm,knownPlayers.db-wal,logs,maps,mods,multiplay,music,music.json,replay,savegames,screenshots,stats.db,stats.db-shm,stats.db-wal,tests,userdata,config (7)
+11-04 18:05:39.552 22876 22876 I BlockNightWZConsole: TIP Storage may be cleared by the UA under storage pressure. (711)
+11-04 18:05:39.606 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:05:41.142 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:05:42.164 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:05:43.194 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:05:44.257 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:05:45.277 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:05:46.304 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:05:47.357 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:05:48.385 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:05:49.395 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:05:51.425 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:05:53.537 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:05:55.644 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:05:56.674 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:05:57.596 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:05:57.687 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:05:58.777 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:05:59.842 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:06:00.878 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:06:01.669 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:06:01.787 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:06:01.909 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:06:02.935 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:06:03.989 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:06:05.027 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:06:06.075 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:06:07.142 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:06:08.212 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:06:10.252 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:06:11.329 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:06:12.351 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:06:13.375 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:06:14.399 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:06:15.433 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:06:16.454 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:06:17.500 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:06:21.636 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:06:23.682 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:06:24.465 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:06:24.791 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:06:25.949 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:06:27.206 22876 22876 I BlockNightWZConsole: LOG saved to idbfs .,..,autohost,cache,challenges,keymap.json,knownPlayers.db,knownPlayers.db-shm,knownPlayers.db-wal,logs,maps,mods,multiplay,music,music.json,replay,savegames,screenshots,stats.db,stats.db-shm,stats.db-wal,tests,userdata,config (7)
+11-04 18:06:27.235 22876 22876 I BlockNightWZConsole: TIP Storage may be cleared by the UA under storage pressure. (711)
+11-04 18:06:27.874 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:06:28.979 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:06:29.568 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:06:30.123 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:06:32.267 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:06:33.382 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:06:34.494 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:06:36.769 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:06:37.103 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:06:37.972 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:06:38.555 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:06:39.084 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:06:40.195 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:06:40.437 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:06:40.450 22876 22876 I BlockNightWZConsole: LOG [BlockNight zoom] close applied at 1600 (2737)
+11-04 18:06:40.753 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:06:40.871 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:06:41.233 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:06:42.269 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:06:43.349 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:06:44.482 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:06:45.455 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:06:46.464 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:06:46.960 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:06:49.596 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:06:50.280 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:06:50.713 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:06:51.698 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:06:52.786 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:06:55.148 22876 22876 I BlockNightWZConsole: LOG saved to idbfs .,..,autohost,cache,challenges,keymap.json,knownPlayers.db,knownPlayers.db-shm,knownPlayers.db-wal,logs,maps,mods,multiplay,music,music.json,replay,savegames,screenshots,stats.db,stats.db-shm,stats.db-wal,tests,userdata,config (7)
+11-04 18:06:55.178 22876 22876 I BlockNightWZConsole: TIP Storage may be cleared by the UA under storage pressure. (711)
+11-04 18:06:55.972 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:06:56.980 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:06:59.108 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:07:01.180 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:07:02.233 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:07:03.410 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:07:04.850 22876 22876 I BlockNightWZConsole: LOG saved to idbfs .,..,autohost,cache,challenges,keymap.json,knownPlayers.db,knownPlayers.db-shm,knownPlayers.db-wal,logs,maps,mods,multiplay,music,music.json,replay,savegames,screenshots,stats.db,stats.db-shm,stats.db-wal,tests,userdata,config (7)
+11-04 18:07:04.883 22876 22876 I BlockNightWZConsole: TIP Storage may be cleared by the UA under storage pressure. (711)
+11-04 18:07:04.935 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:07:05.300 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:07:05.367 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:07:06.514 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:07:08.575 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:07:09.632 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:07:10.666 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:07:11.668 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:07:12.701 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:07:13.708 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:07:14.776 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:07:15.844 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:07:16.859 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:07:17.884 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:07:18.909 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:07:19.918 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:07:21.991 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:07:23.182 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:07:26.370 22876 22876 I BlockNightWZConsole: LOG saved to idbfs .,..,autohost,cache,challenges,keymap.json,knownPlayers.db,knownPlayers.db-shm,knownPlayers.db-wal,logs,maps,mods,multiplay,music,music.json,replay,savegames,screenshots,stats.db,stats.db-shm,stats.db-wal,tests,userdata,config (7)
+11-04 18:07:26.397 22876 22876 I BlockNightWZConsole: TIP Storage may be cleared by the UA under storage pressure. (711)
+11-04 18:07:27.330 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:07:28.450 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:07:29.643 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:07:30.481 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:07:30.581 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:07:30.742 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:07:31.835 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:07:32.853 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:07:33.854 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:07:34.855 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:07:37.006 22876 22876 I BlockNightWZConsole: LOG saved to idbfs .,..,autohost,cache,challenges,keymap.json,knownPlayers.db,knownPlayers.db-shm,knownPlayers.db-wal,logs,maps,mods,multiplay,music,music.json,replay,savegames,screenshots,stats.db,stats.db-shm,stats.db-wal,tests,userdata,config (7)
+11-04 18:07:37.042 22876 22876 I BlockNightWZConsole: TIP Storage may be cleared by the UA under storage pressure. (711)
+11-04 18:07:38.511 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:07:39.624 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:07:40.661 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:07:44.509 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:07:44.636 22876 22876 I BlockNightWZConsole: LOG [BlockNight zoom] close applied at 1600 (2737)
+11-04 18:07:45.990 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:07:47.053 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:07:48.069 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:07:49.279 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:07:50.577 22876 22876 I BlockNightWZConsole: LOG saved to idbfs .,..,autohost,cache,challenges,keymap.json,knownPlayers.db,knownPlayers.db-shm,knownPlayers.db-wal,logs,maps,mods,multiplay,music,music.json,replay,savegames,screenshots,stats.db,stats.db-shm,stats.db-wal,tests,userdata,config (7)
+11-04 18:07:50.603 22876 22876 I BlockNightWZConsole: TIP Storage may be cleared by the UA under storage pressure. (711)
+11-04 18:07:51.203 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:07:52.280 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:07:53.361 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:07:54.216 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:07:54.449 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:07:55.452 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:07:57.489 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:07:58.182 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:07:59.558 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:08:00.615 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:08:02.693 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:08:03.715 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:08:04.739 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:08:05.784 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:08:06.803 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:08:07.865 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:08:08.916 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:08:09.932 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:08:10.941 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:08:11.974 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:08:13.041 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:08:14.103 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:08:15.123 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:08:16.197 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:08:17.280 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:08:18.349 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:08:19.403 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:08:20.399 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:08:20.516 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:08:21.653 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:08:23.210 22876 22876 I BlockNightWZConsole: LOG saved to idbfs .,..,autohost,cache,challenges,keymap.json,knownPlayers.db,knownPlayers.db-shm,knownPlayers.db-wal,logs,maps,mods,multiplay,music,music.json,replay,savegames,screenshots,stats.db,stats.db-shm,stats.db-wal,tests,userdata,config (7)
+11-04 18:08:23.240 22876 22876 I BlockNightWZConsole: TIP Storage may be cleared by the UA under storage pressure. (711)
+11-04 18:08:24.826 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:08:25.960 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:08:28.151 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:08:29.351 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:08:31.548 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:08:32.549 22876 22876 I Choreographer: Skipped 98 frames!  The application may be doing too much work on its main thread.
+11-04 18:08:32.560 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:08:32.572 22876 22893 I HWUI    : Davey! duration=1678ms; Flags=0, FrameTimelineVsyncId=3143926, IntendedVsync=13101140864653, Vsync=13101140864653, InputEventId=0, HandleInputStart=13101143670555, AnimationStart=13101143672140, PerformTraversalsStart=13101147457672, DrawStart=13101147562767, FrameDeadline=13101157531319, FrameStartTime=13101143665113, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=13101148545498, SyncStart=13101148579026, IssueDrawCommandsStart=13101148618229, SwapBuffers=13102807562994, FrameCompleted=13102819452067, DequeueBufferDuration=10887, QueueBufferDuration=1196687, GpuCompleted=13102819319650, SwapBuffersCompleted=13102819452067, DisplayPresentTime=0, CommandSubmissionCompleted=13102807562994, 
+11-04 18:08:32.641 22876 22893 I HWUI    : Davey! duration=1702ms; Flags=0, FrameTimelineVsyncId=3143940, IntendedVsync=13101174197985, Vsync=13102807531253, InputEventId=0, HandleInputStart=13102823146224, AnimationStart=13102823147503, PerformTraversalsStart=13102825987264, DrawStart=13102826086136, FrameDeadline=13102874197917, FrameStartTime=13102822816940, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=13102826291078, SyncStart=13102857307734, IssueDrawCommandsStart=13102857429637, SwapBuffers=13102891261915, FrameCompleted=13102907461488, DequeueBufferDuration=6796, QueueBufferDuration=804558, GpuCompleted=13102907375209, SwapBuffersCompleted=13102907461488, DisplayPresentTime=0, CommandSubmissionCompleted=13102891261915, 
+11-04 18:08:33.578 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:08:34.247 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:08:36.714 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:08:37.732 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:08:38.766 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:08:39.778 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:08:41.939 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:08:43.049 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:08:44.092 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:08:45.832 22876 22876 I BlockNightWZConsole: LOG saved to idbfs .,..,autohost,cache,challenges,keymap.json,knownPlayers.db,knownPlayers.db-shm,knownPlayers.db-wal,logs,maps,mods,multiplay,music,music.json,replay,savegames,screenshots,stats.db,stats.db-shm,stats.db-wal,tests,userdata,config (7)
+11-04 18:08:45.871 22876 22876 I BlockNightWZConsole: TIP Storage may be cleared by the UA under storage pressure. (711)
+11-04 18:08:47.306 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:08:49.560 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:08:50.749 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:08:51.854 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:08:52.429 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:08:52.821 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:08:53.024 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:08:54.381 22876 22876 I BlockNightWZConsole: LOG saved to idbfs .,..,autohost,cache,challenges,keymap.json,knownPlayers.db,knownPlayers.db-shm,knownPlayers.db-wal,logs,maps,mods,multiplay,music,music.json,replay,savegames,screenshots,stats.db,stats.db-shm,stats.db-wal,tests,userdata,config (7)
+11-04 18:08:54.414 22876 22876 I BlockNightWZConsole: TIP Storage may be cleared by the UA under storage pressure. (711)
+11-04 18:08:54.965 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:08:56.230 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:08:57.210 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:08:58.350 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:08:59.540 22876 22876 I BlockNightWZConsole: LOG saved to idbfs .,..,autohost,cache,challenges,keymap.json,knownPlayers.db,knownPlayers.db-shm,knownPlayers.db-wal,logs,maps,mods,multiplay,music,music.json,replay,savegames,screenshots,stats.db,stats.db-shm,stats.db-wal,tests,userdata,config (7)
+11-04 18:08:59.568 22876 22876 I BlockNightWZConsole: TIP Storage may be cleared by the UA under storage pressure. (711)
+11-04 18:08:59.594 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:09:01.498 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:09:02.392 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:09:03.400 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:09:05.493 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:09:06.638 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:09:07.775 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:09:09.807 22876 22876 I BlockNightWZConsole: LOG saved to idbfs .,..,autohost,cache,challenges,keymap.json,knownPlayers.db,knownPlayers.db-shm,knownPlayers.db-wal,logs,maps,mods,multiplay,music,music.json,replay,savegames,screenshots,stats.db,stats.db-shm,stats.db-wal,tests,userdata,config (7)
+11-04 18:09:09.838 22876 22876 I BlockNightWZConsole: TIP Storage may be cleared by the UA under storage pressure. (711)
+11-04 18:09:11.309 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:09:14.604 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:09:15.764 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:09:17.922 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:09:19.008 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:09:20.166 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:09:21.292 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:09:21.938 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:09:22.404 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:09:23.024 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:09:23.521 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:09:25.597 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:09:26.704 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:09:27.792 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:09:30.953 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:09:32.086 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:09:34.381 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:09:35.521 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 18:09:36.003 22876 23057 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)

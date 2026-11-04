@@ -27,6 +27,15 @@ function setup(){
 }
 const defence=catalog.buildings.find(b=>b.category==='DEFENCES'&&b.width===1),body=catalog.components.Body[0],prop=catalog.components.Propulsion[0],weapon=catalog.components.Weapon[0];
 {
+ const t=setup(),snapshot=t.send('state').result;
+ assert.ok(t.c.wtcmd_native.A0TankTrap,'same-name corner stats must not erase straight Tank Traps');
+ assert.ok(snapshot.nativeBuildOptions.includes('A0TankTrap'),'native picker keeps the otherwise missing Tank Traps slot');
+ assert.ok(snapshot.nativeBuildOptions.indexOf('A0TankTrap')<snapshot.nativeBuildOptions.indexOf('GuardTower6'),'subsequent native picker indices account for the recovered slot');
+ assert.ok(!snapshot.nativeBuildOptions.includes('TankTrapC'),'automatic corner pieces are not offered as manual build choices');
+ t.unavailable.add('A0VTolFactory1');t.c.getStructureLimit=()=>1;t.structures.push({id:88,stattype:4,status:1,modules:2});
+ assert.ok(!t.send('state').result.nativeBuildOptions.includes('A0FacMod1'),'locked VTOL capacity must not keep a fully used factory-module picker slot alive');
+}
+{
  const t=setup();t.droids[0].order=99;
  let r=t.send('queue-build',{itemId:defence.id,x:12,y:12,session:'same'});assert.equal(r.ok,true);assert.equal(r.result.workers[0],1);assert.equal(t.calls.length,0,'busy native orders must not be overwritten');
  t.replay();assert.equal(t.c.wtcmd_jobs.length,1,'retry must not duplicate order');

@@ -39,7 +39,7 @@ def top_right(nodes):
     assert x2>=r-65 and y1<t+70,'START GAME must remain at the top right'
     return [x1,y1,x2,y2]
 if sys.argv[1]=='start':
-    tap('Start game');print('PASS: native top-right START GAME tapped from Music');sys.exit()
+    ready();tap('Start game');print('PASS: native top-right START GAME tapped from Music');sys.exit()
 ready();top_right(screenshot('graphics-startup'))
 tap('MUSIC ·');nodes=screenshot('music-startup-all')
 assert find(nodes,'SAVE & BACK') is not None,'Verified cached Music should be available'

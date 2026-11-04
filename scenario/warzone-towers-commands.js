@@ -34,6 +34,14 @@ function wtcmd_indexStats()
             if (value && value.Id) wtcmd_native[value.Id] = { name: name, group: group, value: value };
         });
     });
+    // The stock scripting Stats object is keyed by display name. Two structures
+    // named "Tank Traps" overwrite one another there, although both IDs remain
+    // in the native build list. Recover same-name IDs from the packaged stats so
+    // our picker indices and native choices stay aligned.
+    wtcmd_catalog.buildings.forEach(function(item){
+        const shared=(Stats.Building||{})[item.name];
+        if(!wtcmd_native[item.id]&&shared)wtcmd_native[item.id]={name:item.name,group:"Building",value:Object.assign({},shared,{Id:item.id,BuildPower:item.power})};
+    });
 }
 
 function wtcmd_isBuilder(droid)
@@ -106,6 +114,22 @@ function wtcmd_capacityWait(design)
     }
     return null;
 }
+function wtcmd_nativeBuildOptions()
+{
+    const structures=enumStruct(selectedPlayer),available=Object.keys(wtcmd_native).filter(function(id){return wtcmd_native[id].group==="Building"&&isStructureAvailable(id,selectedPlayer);}).sort();
+    const count=function(kind){return structures.filter(function(b){return b.stattype===kind;}).length;};
+    const limit=function(kind,id){return count(kind)||isStructureAvailable(id,selectedPlayer)?getStructureLimit(id,selectedPlayer):0;};
+    const modules=function(kind){return structures.filter(function(b){return b.stattype===kind&&b.status===BUILT;}).reduce(function(n,b){return n+(b.modules||0);},0);};
+    return available.filter(function(id){
+        const item=wtcmd_buildings[id];if(!item)return wtcmd_native[id].value.Type==="Demolish";
+        if(/CORNER|WALLCORNER/.test(item.kind))return false;
+        if(item.kind==='RESEARCH MODULE')return count(RESEARCH_LAB)>0&&modules(RESEARCH_LAB)<getStructureLimit('A0ResearchFacility',selectedPlayer);
+        if(item.kind==='FACTORY MODULE')return count(FACTORY)>0&&modules(FACTORY)+modules(VTOL_FACTORY)<2*(limit(FACTORY,'A0LightFactory')+limit(VTOL_FACTORY,'A0VTolFactory1'));
+        if(item.kind==='POWER MODULE')return count(POWER_GEN)>0&&modules(POWER_GEN)<getStructureLimit('A0PowerGenerator',selectedPlayer);
+        return true;
+    });
+}
+
 function wtcmd_snapshot()
 {
     const buildings = wtcmd_catalog.buildings.filter(function (item) {
@@ -138,7 +162,7 @@ function wtcmd_snapshot()
         hasHQ: enumStruct(selectedPlayer, HQ).some(function (s) { return s.status === BUILT; }),
         selectedUnits: wtcmd_selectedUnits(),
         construction: enumStruct(selectedPlayer).filter(function(s){return s.status!==BUILT;}).map(function(s){return{id:s.id,name:s.name||"Structure",x:s.x,y:s.y};}),
-        buildings: buildings, parts: parts, trucks: wtcmd_builders().map(function (d) {
+        nativeBuildOptions: wtcmd_nativeBuildOptions(), buildings: buildings, parts: parts, trucks: wtcmd_builders().map(function (d) {
             return { id: d.id, x: d.x, y: d.y, z: d.z, selected: Boolean(d.selected), order: d.order,
                 building: d.order===DORDER_BUILD||d.order===DORDER_HELPBUILD||(typeof DORDER_LINEBUILD!=="undefined"&&d.order===DORDER_LINEBUILD)||(typeof DORDER_BUILDMODULE!=="undefined"&&d.order===DORDER_BUILDMODULE),
                 queued: (wtcmd_workers[String(d.id)] || []).length };
@@ -499,7 +523,12 @@ function wtcmd_poll()
             else if (command.action === "native-menu") {
                 const codes = { stats: 5, commanders: 6, factory: 1, build: 3, close: 0 };
                 if (!Object.prototype.hasOwnProperty.call(codes, command.menu)) { wtcmd_answer(command, false, "invalid"); return; }
-                if(command.menu==="build")++wtcmd_buildGeneration;
+                if(command.menu==="build"){
+                    ++wtcmd_buildGeneration;
+                    // Include researched obsolete structures consistently in our
+                    // picker and the native tool. Never unlock new research.
+                    Object.keys(wtcmd_native).forEach(function(id){if(wtcmd_native[id].group==="Building"&&isStructureAvailable(id,selectedPlayer))enableStructure(id,selectedPlayer);});
+                }
                 showInterface();showReticuleWidget(0);
                 if (codes[command.menu]) showReticuleWidget(codes[command.menu]);
                 hideInterface();wtcmd_nativeMenu = command.menu === "close" ? "" : command.menu;

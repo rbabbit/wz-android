@@ -2,9 +2,12 @@
 
 Full Android project for Warzone Towers, based on the supplied Survival Mod and
 TowerDefense2_m map. The editable project is at the repository root; open this
-folder in Android Studio. Current Android version: **5.1-functional-screens (51)**.
+folder in Android Studio. Current Android version: **5.2-tactical-interface (52)**.
 
 ## Downloads and saved versions
+
+- [v5.2 tactical interface: APK, complete source and checksums](https://github.com/rbabbit/wz-android/releases/tag/v5.2-tactical-interface)
+- [v5.2 tactical interface: tested flows, screenshots and explicit limits](qa/v5.2/REPORT.md)
 
 - [v5.1 functional fixes: APK, source and checksums](https://github.com/rbabbit/wz-android/releases/tag/v5.1-functional-screens)
 - [v5.1 screen verification and deferred redesign](qa/v5.1-fixes/REPORT.md)
@@ -80,13 +83,17 @@ See [AGENTS.md](AGENTS.md) and the maintenance guide before changing game logic.
 
 ## Current verification limits
 
-Both graphics modes reached actual gameplay; cancel/resume, checksum and offline
-cache use passed. The emulator has an existing black-terrain rendering issue in
-both modes, so HQ visual improvement and physical Samsung tablet compatibility
-remain unconfirmed. The native input audit reads the engine's saved truck orders to
-check sticky construction, including bad taps and overlay returns. The exact
-builds and results are recorded under `qa/v4.8/`.
-[Known issues](docs/KNOWN-ISSUES.md) records the remaining device limits.
+The exact v5.2 APK passed the reported command-screen and related native flows
+at 1280x800 and 1080x600, with additional screen checks at the screenshot's
+1600x720 aspect ratio. Native saved orders, structure completion, produced units
+and movement support the screenshots. The wide pass also verifies a prepared
+fifteen-constructor group, a 2x2 facility/module and native wave weapon firing.
+See [the scoped evidence and remaining limits](qa/v5.2/REPORT.md).
+
+The emulator's existing black terrain remains in Normal and HQ. Physical Samsung
+behavior, cutouts, HQ appearance, audible quality and native Save/Load are not
+certified by this pass. [Known issues](docs/KNOWN-ISSUES.md) retains the historical
+device and renderer limits; previous releases remain frozen fallbacks.
 
 ## Release history
 

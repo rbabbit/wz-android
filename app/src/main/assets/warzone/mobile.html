@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
   <title>Warzone Towers</title>
   <style>
-    html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: #05090b; }
+    html, body { position:fixed; inset:0; width: 100%; height: 100%; margin: 0; overflow: clip; overscroll-behavior:none; background: #05090b; }
     #warzone-host { position: fixed; inset: 0; display: grid; grid-template-rows: 0 minmax(0, 1fr); width: 100%; height: 100%; }
     body[data-playing="true"] #warzone-host { grid-template-rows: var(--wt-command-top,56px) minmax(0, 1fr); }
     @media (max-width: 1100px) {
@@ -25,6 +25,10 @@
     // Give the unchanged engine a real viewport, rather than shrinking its
     // finished frame. Browser layout and SDL now agree on both dimensions.
     window.WarzoneHost = {
+      resetScroll() {
+        if(scrollX||scrollY)scrollTo(0,0);
+        document.documentElement.scrollTop=document.body.scrollTop=0;
+      },
       setPlaying() {
         document.body.dataset.playing = "true";
         dispatchEvent(new Event("warzone-battle-ready"));
@@ -43,6 +47,7 @@
         frame.contentWindow.scrollTo(0, 0);
       }
     };
+    addEventListener('scroll',()=>WarzoneHost.resetScroll(),{passive:true});
     document.getElementById("warzone-game-frame").src = "index.html" + location.search;
   </script>
 </body>

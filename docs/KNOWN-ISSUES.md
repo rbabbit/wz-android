@@ -1,12 +1,16 @@
 # Known issues and verification limits
 
-v5.1 fixes functional screen navigation, queue visibility, template deduplication,
-error reporting and library/draft protection. Research is retained. Visual
-redesign, top BUILD choices, MORE removal and replacement of grey native pickers
-remain deferred. Header sizing is hardened, but the intermittent upward-shift
-report was not reproduced. Native future build sites remain battlefield
-blueprints; Queue lists current construction and factory jobs. See
-[the scoped verification](../qa/v5.1-fixes/REPORT.md).
+v5.2 implements the command-page redesign, top BUILD structure choices, MORE
+removal, integrated component buttons, stable header and native selection/queue
+fixes. Both emulator sizes passed the finite flows in [the v5.2 report](../qa/v5.2/REPORT.md).
+Research's 408 files are identical to the frozen v5.1 APK.
+
+Future build orders remain native battlefield blueprints; QUEUE lists current
+construction and factory jobs. A copied native QuickSave test fixture failed to
+restore the custom scenario context; that fixture was abandoned. Native
+Save/Load is not certified. The fifteen-constructor selection fixture uses
+stock debug cloning only in the owned emulator; ordinary production is tested
+separately. Physical-device, HQ rendering and audio limits below remain.
 
 1. **BUILD physical retest:** v5.0 replaces the default custom FIFO with native
    construction selection and native queued blueprint rendering. Nearby-group

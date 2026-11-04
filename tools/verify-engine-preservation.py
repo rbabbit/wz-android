@@ -31,9 +31,21 @@ with ZipFile(args.baseline) as old,ZipFile(args.candidate) as new:
         assert old_data[start:end]==new_data[a:b],f'Original asset changed: {name}'
         count+=1
     assert '/data/mp/tests/warzone-towers-control-command.json' in current
+    root=Path(__file__).resolve().parents[1]
+    editable=list((root/'app/src/main/assets').rglob('*'))
+    checked=0
+    for asset in editable:
+        if asset.is_file():
+            name='assets/'+asset.relative_to(root/'app/src/main/assets').as_posix()
+            assert new.read(name)==asset.read_bytes(),f'Candidate is stale: {name} differs from editable source'
+            checked+=1
+    for name in custom:
+        a,b=current[name]
+        assert new_data[a:b]==(root/'scenario'/Path(name).name).read_bytes(),f'Embedded scenario is stale: {name}'
     result={'candidateAPK_SHA256':hashlib.sha256(args.candidate.read_bytes()).hexdigest(),
         'officialEngineCodeIdentical':True,'wasmIdentical':True,'frozenDataPrefixPreserved':True,
         'previousDataBytes':len(old_data),'newDataBytes':len(new_data),'unchangedResolvedAssets':count,
-        'customBridgeOverride':sorted(custom),'normalizedEngineSHA256':hashlib.sha256(old_code.encode()).hexdigest()}
+        'customBridgeOverride':sorted(custom),'normalizedEngineSHA256':hashlib.sha256(old_code.encode()).hexdigest(),
+        'editableAssetsMatchCandidate':True,'checkedEditableAssetFiles':checked,'embeddedScenarioMatchesSource':True}
     print(json.dumps(result,indent=2))
     if args.report:args.report.write_text(json.dumps(result,indent=2)+'\n')

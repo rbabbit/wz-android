@@ -38,7 +38,7 @@
   const DOUBLE_TAP_SLOP = 28;
   const ZOOM_COMMAND_PATH = "/data/mp/tests/blocknight-zoom-command.json";
   const ZOOM_PRESETS = Object.freeze({
-    close: Object.freeze({ label: "CLOSE", distance: 1600 }),
+    close: Object.freeze({ label: "NEAR", distance: 1600 }),
     battle: Object.freeze({ label: "BATTLE", distance: 2600 }),
     map: Object.freeze({ label: "MAP", distance: 3600 })
   });
@@ -1163,7 +1163,7 @@
         hud.classList.add("wt-modern");
         const commands = document.createElement("div");
         commands.className = "bn-command-group";
-        for (const page of ["build", "design", "factory", "stats", "more"]) {
+        for (const page of ["build", "design", "factory", "queue", "stats"]) {
           const b = document.createElement("button");
           b.id = `wt-open-${page}`; b.type = "button"; b.textContent = page.toUpperCase();
           b.title = `Open ${page}`;
@@ -1220,7 +1220,7 @@
           <button type="button" class="wt-help-close" aria-label="Close help">CLOSE</button></header>
         <div class="wt-help-content">
           <section class="wt-help-queue"><h2>BUILD · QUEUE YOUR DEFENCES</h2>
-            <ol><li><b>Open BUILD.</b> Choose a structure in Warzone’s original build list.</li>
+            <ol><li><b>Open BUILD.</b> Choose a structure, then tap PLACE STRUCTURE.</li>
               <li><b>Tap each valid location.</b> Queued sites appear as Warzone’s green building blueprints.</li>
               <li><b>Nearby trucks work together.</b> BUILD selects the nearby group; multiple manually selected trucks are retained.</li>
               <li><b>SELECT / MOVE</b> leaves placement and keeps queued work. Placement also ends when your group finishes.</li></ol>
@@ -1234,9 +1234,9 @@
             <p><b>Tap</b> to select, move or attack. <b>Swipe</b> to pan. <b>Pinch</b> to zoom.
               <b>Slide two fingers together up/down</b> to tilt the camera. Map edges limit panning.
               <b>SELECT / MOVE</b> returns to ordinary unit selection and orders. Tap <b>BOX</b> then drag to select a group.</p>
-            <p><b>CLOSE / BATTLE / MAP</b> set camera distance. <b>BASE</b> returns to your command centre.</p></section>
+            <p><b>NEAR / BATTLE / MAP</b> set camera distance. <b>BASE</b> returns to your command centre.</p></section>
           <section><h2>COMMANDS &amp; RESEARCH</h2>
-            <p>The bottom-left console keeps <b>ALL UNITS</b>, <b>PATROL</b>, <b>BOX</b>, <b>STOP</b> and <b>TRUCKS</b> available. ALL selects combat units; TRUCKS selects the nearby constructor group. MORE contains control size and extra options.
+            <p>The bottom-left console keeps <b>ALL UNITS</b>, <b>PATROL</b>, <b>BOX</b>, <b>STOP</b> and <b>TRUCKS</b> available. ALL selects combat units; TRUCKS selects the nearby constructor group. Control size and Commanders are at the top of this guide.
               <b>STOP</b> stops selected units.</p>
             <p><b>TECH</b> opens research. Choose a lab and add available topics to its queue.
               Each lab completes your choices in order. Use <b>BACK TO BATTLE</b> to return.</p>
@@ -1247,6 +1247,10 @@
         </div>
         <footer><span>The battle continues while this guide is open.</span>
           <button type="button" class="wt-help-back">BACK TO BATTLE</button></footer>`;
+      const settings=hudDocument.createElement('div');settings.className='wt-help-settings';
+      settings.innerHTML='<span>CONTROL SIZE</span>'+[1,1.2,1.4].map((n,i)=>`<button type="button" data-ui-size="${n}">${['STANDARD','LARGE','EXTRA LARGE'][i]}</button>`).join('')+'<button type="button" data-commanders>COMMANDERS</button>';
+      settings.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.uiSize){window.__warzoneCommands.setSize(b.dataset.uiSize);}else if(b.hasAttribute('data-commanders')){restoreBattle();window.__warzoneCommands.open('commanders');}});
+      help.querySelector('header').after(settings);
       overlay.appendChild(help);
       hudDocument.body.appendChild(overlay);
       const restoreBattle = () => {

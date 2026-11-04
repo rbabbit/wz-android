@@ -1,0 +1,71 @@
+{
+  "passed": true,
+  "scope": "Reported command UI and related default mobile gameplay flows",
+  "versionCode": 52,
+  "apkSHA256": "2bc1fee640277eacacfd21f8c9d4b72fc19a23c304461f5c026efb0b71f20441",
+  "installedHashMatches": true,
+  "sourceMatchesAPK": true,
+  "cases": [
+    "wide/tactical-screens-results.json",
+    "compact/tactical-screens-results.json",
+    "wide/tactical-build-results.json",
+    "compact/tactical-build-results.json",
+    "wide/functional-screens-results.json",
+    "compact/controls-results.json",
+    "compact/tactical-extra-results.json",
+    "wide/tactical-large-results.json",
+    "wide/tactical-facility-results.json",
+    "wide/wave-play-results.json",
+    "screenshot-aspect/interface-layout-results.json"
+  ],
+  "regressionScripts": 17,
+  "researchFilesIdentical": 408,
+  "viewports": [
+    [
+      1280,
+      800
+    ],
+    [
+      1080,
+      600
+    ]
+  ],
+  "additionalScreenViewport": [
+    1600,
+    720
+  ],
+  "nativeFifteenConstructors": true,
+  "largeGroupFixture": {
+    "nativeClones": 10,
+    "retiredRemoteConstructors": 3,
+    "normalProduced": 2
+  },
+  "nativeFacilityAndFactoryModule": true,
+  "nativeWaveCombat": true,
+  "live": {
+    "version": 52,
+    "page": "",
+    "header": {
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 56,
+      "top": 0,
+      "right": 1280,
+      "bottom": 56,
+      "left": 0
+    },
+    "scroll": [
+      0,
+      0
+    ],
+    "pending": 0,
+    "held": [],
+    "phase": "active"
+  },
+  "limits": [
+    "Physical tablet/cutout behavior and HQ rendering are not certified; emulator black terrain remains.",
+    "Construction waiting sites use native battlefield blueprints; the activity page lists current construction and production.",
+    "A copied native QuickSave fixture failed to restore the custom scenario script context; checkpoint-based reuse was abandoned and default-play tests used fresh sessions. Native save/load is not certified."
+  ]
+}

@@ -1,29 +1,33 @@
 # BUILD, DESIGN and factory commands
 
-v5.0 provides larger header commands and a persistent lower-left field console. TECH remains
-the single research entry; STATS opens Warzone's real intelligence/player table.
-ALL UNITS, PATROL, BOX, STOP, TRUCKS and SELECT / MOVE stay visible on the field.
-MORE remains in the header and contains commanders and control size. Music
-stays on startup. Existing zoom, BASE, STOP, HELP and wave controls remain.
+v5.2 uses the Research screen's dark cyan workspace style for BUILD, DESIGN,
+BLUEPRINTS, FACTORY and QUEUE. Research itself is unchanged. Header commands
+remain visible above pages; BATTLE returns to the field. MORE is removed.
+Commanders and interface size are available in HELP. ALL UNITS, PATROL, BOX,
+STOP, TRUCKS and SELECT / MOVE remain in the lower-left field console.
+Music stays on startup; BASE, NEAR/BATTLE/MAP and wave controls remain available.
 
 ## Construction
 
-Open BUILD and choose a structure from Warzone's original construction panel.
-Tap valid ground repeatedly. The touch adapter sends native Ctrl-clicks, so the
+Open the header BUILD menu, choose a category and structure, then press PLACE
+STRUCTURE. The original native picker activates beneath this page; the chosen
+structure opens on the battlefield with nearby constructors selected. Tap valid
+ground repeatedly. The touch adapter sends native Ctrl-clicks, so the
 engine retains the actual pending order lists and draws its original green
 queued building blueprints. Research, power, footprints, modules and prices
 remain native. SELECT / MOVE exits placement and retains accepted orders; STOP
 cancels selected units' orders. Placement also closes after the group has worked
-and returned to idle. There is no custom neon footprint in this flow.
+and remained idle in native simulation time, so gaps between queued sites cannot
+close placement early. There is no custom neon footprint in this flow.
 
-BUILD includes all constructors within eight map tiles of the nearest
-constructor in view (or the selected constructor). A manually selected group
-expands to include nearby constructors around its members. TRUCKS explicitly
-selects the nearby group and leaves
-normal movement active. Selection uses the original upper builder cards across
-all pages, retaining the camera position. No one-truck or three-truck cap is
-introduced. Original game limits remain in force, including 15 constructors.
-Reopening BUILD keeps a complete selection without replaying every builder card.
+BUILD includes the whole connected local constructor group: each constructor
+within eight tiles of an included constructor joins the group. This reaches the
+opposite edge of the same working area when the initially selected truck is at
+one edge. Separate manually selected groups remain included. TRUCKS explicitly
+selects the nearby group and leaves normal movement active. Selection uses the
+original builder cards across every page and retains the camera position. No
+wrapper unit cap is introduced; original game limits remain in force.
+Reopening BUILD retains a complete selection without replaying every card.
 
 Warzone's public `orderDroidBuild` replaces the native order list. The earlier
 custom FIFO could therefore hide future sites from the engine's blueprint
@@ -51,7 +55,9 @@ placing. Optimized original terrain shaders remain eligible for projection.
 
 ## Designs and production
 
-DESIGN selects researched body, propulsion and weapon/system components. Multiple
+DESIGN uses three clear component steps: BODY, PROPULSION and WEAPON / SYSTEM.
+Components are buttons with stock artwork; no native grey selection popups open.
+The summary and editable name remain visible beside the component grid. Multiple
 weapon slots follow the body's real slot count. The original engine's
 `makeTemplate` validates compatibility and calculates power/build points before
 SAVE DESIGN is enabled. A Command Centre is required. Saving adds no free unit
@@ -63,13 +69,19 @@ NEW DESIGN starts a separate, automatically named draft. SAVE CHANGES updates
 the selected blueprint; SAVE AS NEW gives the copy a distinct identity. Saved
 designs can be reopened, edited or deleted. Late validation/save replies cannot
 replace a newer draft or redirect a later page; repeated Save is suppressed,
-and a failed save can be retried. Research is checked again in
+and a failed save can be retried. Header DESIGN revalidates a saved draft when
+returning. Editing a name preserves component identities even when a component
+is unavailable in the current battle. Research is checked again in
 each new battle. Deleting a library entry does not mutate production already
 queued from it. The library is bounded to 100 designs/256 KiB.
 
-FACTORY offers saved designs and available native templates. Select a completed
-factory and quantity; production waits behind existing native work and uses
-normal power/build time. Body size, factory role and component availability are
+FACTORY shows completed facilities in its left rail, unit designs as full-width
+rows and the real active/waiting queue in its right panel. The selected saved
+design appears first. Choose a factory and quantity (1, 5, 10 or 20); production waits behind existing native work and uses
+normal power/build time. Manufactured copies of available saved blueprints are omitted from the native
+template rows, while original stock units remain directly accessible. Internal
+factory suffixes are hidden from displayed unit names.
+Body size, factory role and component availability are
 checked. A native rejection blocks that job for Retry instead of deleting the
 rest of the queue. Factory controls provides the original production panel for
 native cancellation and other factory settings.
@@ -100,7 +112,7 @@ Units are confirmed through native `eventDroidBuilt`, not a wrapper timer.
 - `tools/gameplay-audit.cjs`: v5.0 Android/native-input flows and fresh native
   order, completion, production, movement and viewport evidence. Use a separate
   output directory for each candidate; each case checks the installed APK hash.
-- `tools/finalize-v50-audit.cjs`: rejects missing, prototype or mismatched-artifact
+- `tools/finalize-v52-audit.cjs`: rejects missing, prototype or mismatched-artifact
   evidence before the final report is marked passed.
 
 After changing scenario/catalogue sources, run the embedder and build. After only
@@ -108,4 +120,12 @@ wrapper changes, build directly. Repeated embedding grows the data file; do not
 run it needlessly. Read-only preservation verification compares the previous APK's
 entire data prefix, official code/WASM and every previous resolved stock/mod asset.
 
-No automatic research, wave roster changes or free-unit shortcuts are involved.
+QUEUE shows current native construction plus active and waiting factory jobs.
+Future construction orders use Warzone's original green battlefield blueprints;
+the public engine API does not expose the complete native pending order list to
+the page. SELECT / MOVE retains accepted construction orders.
+
+The large-group QA fixture uses stock debug cloning only in the owned emulator
+to prepare real units quickly; ordinary production is tested independently.
+No debug fixture is added to the shipped game, and there is no automatic research,
+wave roster change or free-unit feature in the command pages.

@@ -2,7 +2,20 @@
 
 final result: passed
 
-## v5.1 functional screens — current
+## v5.2 tactical interface — current
+
+APK SHA-256: `2bc1fee640277eacacfd21f8c9d4b72fc19a23c304461f5c026efb0b71f20441`.
+
+The exact installed APK passed the redesigned command screens and native
+construction, production, selection/movement and keyboard/page returns at 1280×800 and 1080×600. The wide pass also verified native wave weapon firing and facility/module
+completion. Fifteen constructors received native queued work; the large-group preparation uses an explicitly recorded debug
+fixture, with ordinary production checked separately. All Research assets,
+official engine/WASM and previous stock/mod assets are preserved.
+
+See [the v5.2 report](qa/v5.2/REPORT.md) for the issue list, screenshots, exact
+fixtures and remaining physical/HQ/audio/Save-Load verification limits.
+
+## v5.1 functional screens — historical
 
 APK SHA-256: `c1ed550f9024c1a5a2e80d771a4c31b40de7c504a56137be628ea6cbda1dbc0d`.
 

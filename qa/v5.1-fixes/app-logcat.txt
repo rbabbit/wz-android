@@ -1,0 +1,345 @@
+--------- beginning of main
+11-04 13:47:34.561  6494  6494 I Zygote  : Process 6494 created for com.rbabbit.warzonetowers
+11-04 13:47:34.564  6494  6494 I t.warzonetowers: Late-enabling -Xcheck:jni
+11-04 13:47:34.638  6494  6494 I t.warzonetowers: Using generational CollectorTypeCMC GC.
+11-04 13:47:34.639  6494  6494 W t.warzonetowers: Unexpected CPU variant for x86: x86_64.
+11-04 13:47:34.639  6494  6494 W t.warzonetowers: Known variants: atom, sandybridge, silvermont, goldmont, goldmont-plus, goldmont-without-sha-xsaves, tremont, kabylake, alderlake, pantherlake, default
+11-04 13:47:34.673  6494  6494 D nativeloader: Load libframework-connectivity-tiramisu-jni.so using APEX ns com_android_tethering for caller /apex/com.android.tethering/javalib/framework-connectivity-t.jar: ok
+11-04 13:47:35.306  6494  6494 D nativeloader: Configuring clns-9 for other apk /data/app/~~PVG7gCW47ct5rvaZLS9P4g==/com.rbabbit.warzonetowers-GYnMv_9NPiNOWueC6BRi7w==/base.apk. target_sdk_version=36, uses_libraries=, library_path=/data/app/~~PVG7gCW47ct5rvaZLS9P4g==/com.rbabbit.warzonetowers-GYnMv_9NPiNOWueC6BRi7w==/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.rbabbit.warzonetowers
+11-04 13:47:35.367  6494  6494 V GraphicsEnvironment: Currently set values for:
+11-04 13:47:35.367  6494  6494 V GraphicsEnvironment:   angle_gl_driver_selection_pkgs=[]
+11-04 13:47:35.368  6494  6494 V GraphicsEnvironment:   angle_gl_driver_selection_values=[]
+11-04 13:47:35.368  6494  6494 V GraphicsEnvironment: com.rbabbit.warzonetowers is not listed in per-application setting
+11-04 13:47:35.368  6494  6494 V GraphicsEnvironment: ANGLE allowlist from config: com.dreamgames.royalmatch com.dts.freefiremax com.dxx.firenow com.gramgames.mergedragons com.ludo.king com.mojang.minecraftpe com.my.defense com.nintendo.zaka com.os.airforce com.playrix.fishdomdd.gplay io.teslatech.callbreak jp.konami.prospia net.peakgames.toonblast
+11-04 13:47:35.369  6494  6494 V GraphicsEnvironment: No special selections for ANGLE, returning default driver choice
+11-04 13:47:35.369  6494  6494 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+--------- beginning of system
+11-04 13:47:35.545  6494  6533 I DisplayManager: Choreographer implicitly registered for the refresh rate.
+11-04 13:47:35.749  6494  6533 I GFXSTREAM: [eglDisplay.cpp(297)] Opening libGLESv1_CM_emulation.so
+11-04 13:47:35.751  6494  6533 I GFXSTREAM: [eglDisplay.cpp(297)] Opening libGLESv2_emulation.so
+11-04 13:47:35.783  6494  6533 W HWUI    : Failed to initialize 101010-2 format, error = EGL_SUCCESS
+11-04 13:47:36.084  6494  6494 E ashmem  : Pinning is deprecated since Android Q. Please use trim or other methods.
+11-04 13:47:36.205  6494  6494 D CompatChangeReporter: Compat change id reported: 377864165; UID 10230; state: ENABLED
+11-04 13:47:36.216  6494  6494 D DesktopExperienceFlags: Toggle override initialized to: false
+11-04 13:47:36.216  6494  6494 D DesktopModeFlags: Toggle override initialized to: OVERRIDE_UNSET
+11-04 13:47:36.327  6494  6494 I WebViewFactory: Loading com.google.android.webview version 158.0.8127.2 (code 812700218)
+11-04 13:47:36.345  6494  6494 V ResourcesManager: The following library key has been added: ResourcesKey{ mHash=ef11a9b8 mResDir=null mSplitDirs=[] mOverlayDirs=[] mLibDirs=[/data/app/~~hLOhFPU5Pd-yum2hVb347w==/com.google.android.webview-C1wI8LKRlMUAXMLVFQ1s4A==/base.apk,/system/framework/android.test.base.jar,/system_ext/framework/androidx.window.extensions.jar] mDisplayId=0 mOverrideConfig=v36 mCompatInfo={480dpi always-compat} mLoaders=[]}
+11-04 13:47:36.349  6494  6494 D ApplicationLoaders: Returning zygote-cached class loader: /system/framework/android.test.base.jar
+11-04 13:47:36.349  6494  6494 D ApplicationLoaders: Returning zygote-cached class loader: /system_ext/framework/androidx.window.extensions.jar
+11-04 13:47:36.355  6494  6494 D nativeloader: Configuring clns-10 for other apk /data/app/~~hLOhFPU5Pd-yum2hVb347w==/com.google.android.webview-C1wI8LKRlMUAXMLVFQ1s4A==/base.apk. target_sdk_version=36, uses_libraries=, library_path=/data/app/~~hLOhFPU5Pd-yum2hVb347w==/com.google.android.webview-C1wI8LKRlMUAXMLVFQ1s4A==/lib/x86_64:/data/app/~~hLOhFPU5Pd-yum2hVb347w==/com.google.android.webview-C1wI8LKRlMUAXMLVFQ1s4A==/base.apk!/lib/x86_64, permitted_path=/data:/mnt/expand
+11-04 13:47:36.445  6494  6494 I cr_WVCFactoryProvider: version=158.0.8127.2 (812700218) minSdkVersion=29 multiprocess=true packageId=2 splits=<none>
+11-04 13:47:36.507  6494  6494 D nativeloader: Load /data/app/~~hLOhFPU5Pd-yum2hVb347w==/com.google.android.webview-C1wI8LKRlMUAXMLVFQ1s4A==/base.apk!/lib/x86_64/libwebviewchromium.so using class loader ns clns-10 (caller=/data/app/~~hLOhFPU5Pd-yum2hVb347w==/com.google.android.webview-C1wI8LKRlMUAXMLVFQ1s4A==/base.apk): ok
+11-04 13:47:36.510  6494  6494 D nativeloader: Load /system/lib64/libwebviewchromium_plat_support.so using class loader ns clns-10 (caller=/data/app/~~hLOhFPU5Pd-yum2hVb347w==/com.google.android.webview-C1wI8LKRlMUAXMLVFQ1s4A==/base.apk): ok
+11-04 13:47:36.513  6494  6551 E chromium: [ERROR:android_webview/browser/variations/variations_seed_loader.cc:36] Seed missing signature.
+11-04 13:47:36.521  6494  6494 I cr_LibraryLoader: Successfully loaded native library
+11-04 13:47:36.529  6494  6494 I cr_CachingUmaRecorder: Flushed 31 samples from 11 histograms, 0 samples were dropped.
+11-04 13:47:36.555  6494  6494 I cr_ChildProcLH: ScopedServiceBindingBatch.tryActivate: false
+11-04 13:47:36.556  6494  6494 I cr_CombinedPProvider: #registerProvider() provider:WV.lj@f776d2a isPolicyCacheEnabled:false policyProvidersSize:0
+11-04 13:47:36.556  6494  6494 I cr_PolicyProvider: #setManagerAndSource() 0
+11-04 13:47:36.560  6494  6494 I cr_DisplayManager: Is Display Topology available: false
+11-04 13:47:36.569  6494  6552 I cr_policy: registerReceiver succeeded after 2ms
+11-04 13:47:36.587  6494  6494 I cr_CombinedPProvider: #linkNativeInternal() 1
+11-04 13:47:36.588  6494  6494 I cr_AppResProvider: #getApplicationRestrictionsFromUserManager() Bundle[EMPTY_PARCEL]
+11-04 13:47:36.588  6494  6494 I cr_PolicyProvider: #notifySettingsAvailable() 0
+11-04 13:47:36.588  6494  6494 I cr_CombinedPProvider: #onSettingsAvailable() 0
+11-04 13:47:36.588  6494  6494 I cr_CombinedPProvider: #flushPolicies()
+11-04 13:47:36.705  6494  6567 W chromium: [WARNING:net/dns/dns_config_service_android.cc:69] Failed to read DnsConfig.
+11-04 13:47:36.793  6494  6494 I BlockNightWZ: WebView 158.0.8127.2, profile=true, cross-origin allowlist=true
+11-04 13:47:36.836  6494  6494 I HWUI    : Using FreeType backend (prop=Auto)
+11-04 13:47:36.908  6494  6494 D CompatChangeReporter: Compat change id reported: 376561342; UID 10230; state: ENABLED
+11-04 13:47:36.985  6494  6494 W HWUI    : Unknown dataspace 0
+11-04 13:47:37.004  6494  6494 D InsetsController: Setting requestedVisibleTypes to 496 (was 503)
+11-04 13:47:37.044  6494  6494 I cr_AppResProvider: #getApplicationRestrictionsFromUserManager() Bundle[EMPTY_PARCEL]
+11-04 13:47:37.044  6494  6494 I cr_PolicyProvider: #notifySettingsAvailable() 0
+11-04 13:47:37.045  6494  6494 I cr_CombinedPProvider: #onSettingsAvailable() 0
+11-04 13:47:37.045  6494  6494 I cr_CombinedPProvider: #flushPolicies()
+11-04 13:47:37.053  6494  6494 D WindowOnBackDispatcher: setTopOnBackInvokedCallback (unwrapped): android.app.Activity$$ExternalSyntheticLambda0@dd99219
+11-04 13:47:37.054  6494  6595 I CameraManagerGlobal: Connecting to camera service
+11-04 13:47:37.054  6494  6494 D WindowOnBackDispatcher: setTopOnBackInvokedCallback (unwrapped): com.rbabbit.blocknight.warzone.MainActivity$$ExternalSyntheticLambda17@87d02de
+11-04 13:47:37.064  6494  6494 D VRI[MainActivity]: WindowInsets changed: 1920x1200 statusBars:[0,78,0,0] navigationBars:[0,0,0,48] mandatorySystemGestures:[0,84,0,48] 
+11-04 13:47:37.108  6494  6494 D VRI[MainActivity]: WindowInsets changed: statusBars:null navigationBars:null 
+11-04 13:47:37.150  6494  6494 W View    : requestLayout() improperly called by android.widget.LinearLayout{eb16b8d V.E...... ......ID 0,0-1920,1200} during layout: running second layout pass
+11-04 13:47:37.150  6494  6494 W View    : requestLayout() improperly called by com.rbabbit.blocknight.warzone.MainActivity$EngineWebView{6816355 VFED..CL. ......ID 0,0-1920,1200} during layout: running second layout pass
+11-04 13:47:37.913  6494  6494 I Choreographer: Skipped 50 frames!  The application may be doing too much work on its main thread.
+11-04 13:47:37.926  6494  6510 I HWUI    : Davey! duration=985ms; Flags=1, FrameTimelineVsyncId=140954, IntendedVsync=1233225577307, Vsync=1233342243969, InputEventId=0, HandleInputStart=1233345195490, AnimationStart=1233345207420, PerformTraversalsStart=1233345307684, DrawStart=1233458798578, FrameDeadline=1233242243973, FrameStartTime=1233343867392, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=1233515642836, SyncStart=1233516060822, IssueDrawCommandsStart=1233516305166, SwapBuffers=1233985672363, FrameCompleted=1234211592253, DequeueBufferDuration=6717, QueueBufferDuration=2250761, GpuCompleted=1234211592253, SwapBuffersCompleted=1234203645055, DisplayPresentTime=0, CommandSubmissionCompleted=1233985672363, 
+11-04 13:47:38.058  6494  6514 I HWUI    : Davey! duration=987ms; Flags=0, FrameTimelineVsyncId=140984, IntendedVsync=1233358910635, Vsync=1234192243935, InputEventId=0, HandleInputStart=1234208891989, AnimationStart=1234208899273, PerformTraversalsStart=1234209075638, DrawStart=1234210489255, FrameDeadline=1234242243933, FrameStartTime=1234207097046, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=1234211404273, SyncStart=1234211424125, IssueDrawCommandsStart=1234213820077, SwapBuffers=1234303195424, FrameCompleted=1234346340406, DequeueBufferDuration=4236, QueueBufferDuration=382680, GpuCompleted=1234346340406, SwapBuffersCompleted=1234333047681, DisplayPresentTime=0, CommandSubmissionCompleted=1234303195424, 
+11-04 13:47:38.297  6494  6601 W InteractionJankMonitor: Initializing without READ_DEVICE_CONFIG permission. enabled=false, interval=1, missedFrameThreshold=3, frameTimeThreshold=64, package=com.rbabbit.warzonetowers
+11-04 13:47:38.313  6494  6494 D InsetsController: hide(ime())
+11-04 13:47:38.313  6494  6494 I ImeTracker: com.rbabbit.warzonetowers:92733749: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+11-04 13:47:38.721  6494  6505 I t.warzonetowers: Compiler allocated 5193KB to compile void android.view.ViewRootImpl.performTraversals()
+11-04 13:48:30.577  6494  6494 I cr_A11yState: Enabled accessibility services list updated. []
+11-04 13:48:30.579  6494  6494 I cr_A11yState: New AccessibilityState: State{isComplexUserInteractionServiceEnabled=false, isTouchExplorationEnabled=false, isPerformGesturesEnabled=false, isAnyAccessibilityServiceEnabled=false, isAccessibilityToolPresent=false, isTextShowPasswordEnabled=true, isOnlyAutofillRunning=false, isOnlyPasswordManagersEnabled=false, isKnownScreenReaderEnabled=false, isSamsungTalkBackEnabled=false}
+11-04 13:48:34.167  6494  6578 W cr_media: BLUETOOTH_CONNECT permission is missing.
+11-04 13:48:34.167  6494  6578 W cr_media: getBluetoothAdapter() requires BLUETOOTH permission
+11-04 13:48:34.167  6494  6578 W cr_media: registerBluetoothIntentsIfNeeded: Requires BLUETOOTH permission
+11-04 13:48:34.194  6494  6578 D AudioSystem: onNewService: media.audio_policy service obtained 0x78f8a9078910
+11-04 13:48:34.196  6494  6578 D AudioSystem: getService: IAudioPolicyService retrieved: 0x78f8a9078910  cached: 0x78f8a9078910
+11-04 13:48:35.219  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (1)
+11-04 13:48:35.223  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (1)
+11-04 13:48:38.457  6494  6494 I Choreographer: Skipped 202 frames!  The application may be doing too much work on its main thread.
+11-04 13:48:38.457  6494  6521 I HWUI    : Davey! duration=3391ms; Flags=0, FrameTimelineVsyncId=142318, IntendedVsync=1291342241649, Vsync=1291342241649, InputEventId=0, HandleInputStart=1291343575014, AnimationStart=1291343576259, PerformTraversalsStart=1291345867177, DrawStart=1291346015303, FrameDeadline=1291392241647, FrameStartTime=1291343571033, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=1291349603542, SyncStart=1291350007527, IssueDrawCommandsStart=1291350064527, SwapBuffers=1294724064592, FrameCompleted=1294734586822, DequeueBufferDuration=6373, QueueBufferDuration=1183294, GpuCompleted=1294734385834, SwapBuffersCompleted=1294734586822, DisplayPresentTime=0, CommandSubmissionCompleted=1294724064592, 
+11-04 13:48:38.633  6494  6494 I BlockNightWZ: Warzone WebView capabilities: "{\"crossOriginIsolated\":true,\"sharedArrayBuffer\":true,\"innerWidth\":1280,\"innerHeight\":800}"
+11-04 13:48:38.647  6494  6521 I HWUI    : Davey! duration=3417ms; Flags=0, FrameTimelineVsyncId=142340, IntendedVsync=1291375574981, Vsync=1294725574847, InputEventId=0, HandleInputStart=1294751299480, AnimationStart=1294751301519, PerformTraversalsStart=1294755174977, DrawStart=1294755270613, FrameDeadline=1294925574839, FrameStartTime=1294750814090, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=1294755720905, SyncStart=1294896630000, IssueDrawCommandsStart=1294896702904, SwapBuffers=1294910289294, FrameCompleted=1294934300290, DequeueBufferDuration=5975202, QueueBufferDuration=280558, GpuCompleted=1294934300290, SwapBuffersCompleted=1294925671329, DisplayPresentTime=0, CommandSubmissionCompleted=1294910289294, 
+11-04 13:48:38.798  6494  6506 I t.warzonetowers: Background young concurrent mark compact GC freed 1536KB AllocSpace bytes, 20(932KB) LOS objects, 0% free, 7124KB/7124KB, paused 35us,5.202ms total 144.829ms
+11-04 13:48:38.882  6494  6506 I t.warzonetowers: Background concurrent mark compact GC freed 176KB AllocSpace bytes, 9(3704KB) LOS objects, 49% free, 3499KB/6999KB, paused 287us,7.166ms total 80.883ms
+11-04 13:48:39.073  6494  6494 I BlockNightWZConsole: LOG WebAssembly.Memory {allocated: 256 MiB, maximum memory: 1024 MiB} (1178)
+11-04 13:48:39.075  6494  6494 I BlockNightWZConsole: TIP Loading: /warzone/warzone2100.data (1341)
+11-04 13:48:39.140  6494  6567 I BlockNightWZ: Serving packaged engine asset: warzone2100.wasm
+11-04 13:48:39.142  6494  6567 I BlockNightWZ: Serving packaged engine asset: warzone2100.wasm
+11-04 13:48:43.632  6494  6494 I BlockNightWZConsole: LOG loaded from idbfs .,..,autohost,cache,challenges,config,keymap.json,knownPlayers.db,knownPlayers.db-shm,knownPlayers.db-wal,logs (7)
+11-04 13:48:44.611  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:48:44.615  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:48:45.887  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:48:45.973  6494  6578 D AudioSystem: onNewServiceWithAdapter: media.audio_flinger service obtained 0x78f91905ade0
+11-04 13:48:45.974  6494  6578 D AudioSystem: getService: IAudioFlingerService retrieved: 0x78f8a90688d0  IAudioFlinger cached: 0x78f91905ade0
+11-04 13:48:46.005  6494  6578 I AAudio  : AAudioStreamBuilder_openStream() called ----------------------------------------
+11-04 13:48:46.010  6494  6578 I AudioStreamBuilder: rate   =  48000, channels  = 2, channelMask = 0x3, format   = 0x5, sharing = SH, dir = OUTPUT
+11-04 13:48:46.010  6494  6578 I AudioStreamBuilder: devices = AUDIO_PORT_HANDLE_NONE, sessionId = -1, perfMode = 12, callback: ON with frames = 4360
+11-04 13:48:46.010  6494  6578 I AudioStreamBuilder: usage  =      1, contentType = 0, inputPreset = 0, allowedCapturePolicy = 0
+11-04 13:48:46.010  6494  6578 I AudioStreamBuilder: privacy sensitive = false, opPackageName = (null), attributionTag = (null)
+11-04 13:48:46.010  6494  6578 D AudioStreamBuilder: build, global mmap policy is 0
+11-04 13:48:46.010  6494  6578 D AudioStreamBuilder: build, system mmap policy is 1
+11-04 13:48:46.010  6494  6578 D AudioStreamBuilder: build, final mmap policy is 1
+11-04 13:48:46.011  6494  6578 D AudioStreamBuilder: build, system mmap exclusive policy is 1
+11-04 13:48:46.011  6494  6578 D AudioStreamBuilder: build, final mmap exclusive policy is 1
+11-04 13:48:46.011  6494  6578 D t.warzonetowers: PlayerBase::PlayerBase()
+11-04 13:48:46.011  6494  6578 D AudioStreamTrack: open(), request notificationFrames = -8, frameCount = 0
+11-04 13:48:46.029  6494  6578 D AudioStreamTrack: open() flags changed from 0x00000104 to 0x00000000
+11-04 13:48:46.029  6494  6578 D AudioStreamTrack: open() perfMode changed from 12 to 10
+11-04 13:48:46.030  6494  6578 D AAudioStream: setState(s#1) from 0 to 2
+11-04 13:48:46.035  6494  6578 I AAudio  : AAudioStreamBuilder_openStream() got Legacy, devIds = [2], perf = NO, burst = 960
+11-04 13:48:46.046  6494  6578 I AAudio  : AAudioStreamBuilder_openStream() returns 0 = AAUDIO_OK for s#1 ----------------
+11-04 13:48:46.059  6494  6578 D AAudio  : AAudioStream_requestStart(s#1) called --------------
+11-04 13:48:46.059  6494  6578 D AAudioStream: setState(s#1) from 2 to 3
+11-04 13:48:46.065  6494  6578 D AAudio  : AAudioStream_requestStart(s#1) returned 0 ---------
+11-04 13:48:46.065  6494  6521 D AudioStreamLegacy: onAudioDeviceUpdate() devices 2 => 2
+11-04 13:48:46.074  6494  6726 D AAudioStream: setState(s#1) from 3 to 4
+11-04 13:48:46.944  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:48:49.087  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:48:49.108  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:48:49.821  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:48:50.025  6494  6494 I BlockNightWZ: Automatic Warzone Start Hosting tap: true
+11-04 13:48:50.760  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:48:50.830  6494  6494 I BlockNightWZ: Engine error buffer: "[\"wasm streaming compile failed: TypeError: Cannot read properties of undefined (reading 'substring')\",\"falling back to ArrayBuffer instantiation\"]"
+11-04 13:48:50.837  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:48:51.639  6494  6494 I BlockNightWZ: Automatic Warzone Limits tap: true
+11-04 13:48:54.736  6494  6494 I BlockNightWZ: Automatic Warzone VTOL minus tap: true
+11-04 13:48:55.685  6494  6494 I Choreographer: Skipped 53 frames!  The application may be doing too much work on its main thread.
+11-04 13:48:55.721  6494  6513 I HWUI    : Davey! duration=947ms; Flags=0, FrameTimelineVsyncId=151504, IntendedVsync=1311025585297, Vsync=1311025585297, InputEventId=0, HandleInputStart=1311031857158, AnimationStart=1311031859216, PerformTraversalsStart=1311033310078, DrawStart=1311033439098, FrameDeadline=1311075585290, FrameStartTime=1311031843261, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=1311033803387, SyncStart=1311038045850, IssueDrawCommandsStart=1311038277219, SwapBuffers=1311965869436, FrameCompleted=1311977021796, DequeueBufferDuration=5376, QueueBufferDuration=786707, GpuCompleted=1311976787171, SwapBuffersCompleted=1311977021796, DisplayPresentTime=0, CommandSubmissionCompleted=1311965869436, 
+11-04 13:48:55.795  6494  6513 I HWUI    : Davey! duration=941ms; Flags=0, FrameTimelineVsyncId=151540, IntendedVsync=1311092240859, Vsync=1311958907491, InputEventId=0, HandleInputStart=1311980573504, AnimationStart=1311980575018, PerformTraversalsStart=1311983811712, DrawStart=1311983985354, FrameDeadline=1312058918532, FrameStartTime=1311979331647, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=1312002574400, SyncStart=1312029747388, IssueDrawCommandsStart=1312030769592, SwapBuffers=1312042385843, FrameCompleted=1312061306610, DequeueBufferDuration=132963, QueueBufferDuration=321382, GpuCompleted=1312061058817, SwapBuffersCompleted=1312061306610, DisplayPresentTime=0, CommandSubmissionCompleted=1312042385843, 
+11-04 13:48:55.796  6494  6494 I BlockNightWZ: Automatic Warzone VTOL minus tap: true
+11-04 13:48:56.237  6494  6494 I BlockNightWZ: Automatic Warzone VTOL minus tap: true
+11-04 13:48:56.656  6494  6494 I BlockNightWZ: Automatic Warzone VTOL minus tap: true
+11-04 13:48:57.088  6494  6494 I BlockNightWZ: Automatic Warzone VTOL minus tap: true
+11-04 13:48:57.506  6494  6494 I BlockNightWZ: Automatic Warzone VTOL minus tap: true
+11-04 13:48:57.941  6494  6494 I BlockNightWZ: Automatic Warzone Accept limits tap: true
+11-04 13:48:59.784  6494  6494 I BlockNightWZ: Automatic Warzone Ready tap: true
+11-04 13:49:08.975  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:49:17.882  6494  6494 I BlockNightWZ: Engine error buffer: "[\"wasm streaming compile failed: TypeError: Cannot read properties of undefined (reading 'substring')\",\"falling back to ArrayBuffer instantiation\"]"
+11-04 13:49:25.232  6494  6494 I BlockNightWZ: Automatic Warzone Face South: true
+11-04 13:49:25.233  6494  6494 I BlockNightWZ: Show Warzone Towers combat HUD: true
+11-04 13:49:26.121  6494  6494 I Choreographer: Skipped 40 frames!  The application may be doing too much work on its main thread.
+11-04 13:49:26.153  6494  6513 I HWUI    : Davey! duration=838ms; Flags=0, FrameTimelineVsyncId=168213, IntendedVsync=1341525572975, Vsync=1341525572975, InputEventId=0, HandleInputStart=1341532713574, AnimationStart=1341532714766, PerformTraversalsStart=1341538805882, DrawStart=1341538909089, FrameDeadline=1341625572971, FrameStartTime=1341532708864, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=1341539344921, SyncStart=1341596820734, IssueDrawCommandsStart=1341597115438, SwapBuffers=1342399720296, FrameCompleted=1342421668796, DequeueBufferDuration=5378, QueueBufferDuration=316709, GpuCompleted=1342421668796, SwapBuffersCompleted=1342411897961, DisplayPresentTime=0, CommandSubmissionCompleted=1342399720296, 
+11-04 13:49:27.232  6494  6494 I Choreographer: Skipped 50 frames!  The application may be doing too much work on its main thread.
+11-04 13:49:27.245  6494  6513 I HWUI    : Davey! duration=956ms; Flags=0, FrameTimelineVsyncId=168364, IntendedVsync=1342575572933, Vsync=1342575572933, InputEventId=0, HandleInputStart=1342582867956, AnimationStart=1342582870241, PerformTraversalsStart=1342583914846, DrawStart=1342584046557, FrameDeadline=1342592239599, FrameStartTime=1342582860957, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=1342584483944, SyncStart=1342584886445, IssueDrawCommandsStart=1342585072442, SwapBuffers=1343512744830, FrameCompleted=1343532420666, DequeueBufferDuration=6741, QueueBufferDuration=312997, GpuCompleted=1343532420666, SwapBuffersCompleted=1343520118348, DisplayPresentTime=0, CommandSubmissionCompleted=1343512744830, 
+11-04 13:49:29.994  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:49:30.069  6494  6514 I HWUI    : Davey! duration=2837ms; Flags=0, FrameTimelineVsyncId=168407, IntendedVsync=1342675572929, Vsync=1342675572929, InputEventId=0, HandleInputStart=1342677221730, AnimationStart=1342677223442, PerformTraversalsStart=1342678384300, DrawStart=1342678468569, FrameDeadline=1343558906227, FrameStartTime=1342677215838, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=1342678906740, SyncStart=1343520162178, IssueDrawCommandsStart=1343520281957, SwapBuffers=1346331339857, FrameCompleted=1346354182920, DequeueBufferDuration=5652, QueueBufferDuration=415530, GpuCompleted=1346354182920, SwapBuffersCompleted=1346341464548, DisplayPresentTime=0, CommandSubmissionCompleted=1346331339857, 
+11-04 13:49:30.431  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:49:31.145  6494  6494 I Choreographer: Skipped 35 frames!  The application may be doing too much work on its main thread.
+11-04 13:49:32.682  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:49:33.820  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:49:34.863  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:49:35.984  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:49:36.218  6494  6494 I AssistStructure: Flattened final assist data: 5332 bytes, containing 1 windows, 6 views
+11-04 13:49:37.587  6494  6494 I Choreographer: Skipped 31 frames!  The application may be doing too much work on its main thread.
+11-04 13:49:38.170  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:49:38.951  6494  6494 I AssistStructure: Flattened final assist data: 6276 bytes, containing 1 windows, 7 views
+11-04 13:49:40.325  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:49:40.947  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:49:41.462  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:49:41.997  6494  6494 D WindowOnBackDispatcher: setTopOnBackInvokedCallback (unwrapped): android.widget.PopupWindow$PopupDecorView$$ExternalSyntheticLambda1@3b2ddd5
+11-04 13:49:42.621  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:49:43.725  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:49:44.865  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:49:46.063  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:49:46.107  6494  6494 D WindowOnBackDispatcher: setTopOnBackInvokedCallback (unwrapped): null
+11-04 13:49:46.233  6494  6494 D InsetsController: hide(ime())
+11-04 13:49:46.233  6494  6494 I ImeTracker: com.rbabbit.warzonetowers:7785dfaa: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+11-04 13:49:47.208  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:49:47.330  6494  6494 I AssistStructure: Flattened final assist data: 6276 bytes, containing 1 windows, 7 views
+11-04 13:49:48.218  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:49:49.381  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:49:50.470  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:49:51.760  6494  6494 I AssistStructure: Flattened final assist data: 6276 bytes, containing 1 windows, 7 views
+11-04 13:49:51.911  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:49:52.081  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:49:52.248  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:49:52.676  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:49:53.780  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:49:54.935  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:49:55.631  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:49:56.008  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:49:57.015  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:49:57.110  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:49:57.202  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:49:58.109  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:49:59.198  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:50:00.264  6494  6494 I AssistStructure: Flattened final assist data: 5348 bytes, containing 1 windows, 6 views
+11-04 13:50:00.300  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:50:00.643  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:50:01.465  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:50:04.783  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:50:05.914  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:50:07.068  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:50:08.169  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:50:08.369  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:50:10.494  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:50:10.838  6494  6494 I AssistStructure: Flattened final assist data: 5348 bytes, containing 1 windows, 6 views
+11-04 13:50:10.904  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:50:11.610  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:50:12.065  6494  6494 I ImeTracker: com.rbabbit.warzonetowers:4ea0ccc0: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+11-04 13:50:12.071  6494  6494 D InsetsController: show(ime())
+11-04 13:50:12.076  6494  6494 D InsetsController: Setting requestedVisibleTypes to 504 (was 496)
+11-04 13:50:12.310  6494  6494 I AssistStructure: Flattened final assist data: 5448 bytes, containing 2 windows, 7 views
+11-04 13:50:12.318  6494  6494 D WindowOnBackDispatcher: setTopOnBackInvokedCallback (unwrapped): android.widget.PopupWindow$PopupDecorView$$ExternalSyntheticLambda1@6b7bb6d
+11-04 13:50:12.714  6494  6494 D WindowOnBackDispatcher: setTopOnBackInvokedCallback (unwrapped): null
+11-04 13:50:12.813  6494  6494 D WindowOnBackDispatcher: setTopOnBackInvokedCallback (unwrapped): android.view.ImeBackAnimationController@729eb25
+11-04 13:50:12.820  6494  6494 D VRI[MainActivity]: WindowInsets changed: navigationBars:[0,0,0,48] 
+11-04 13:50:12.847  6494  6494 D VRI[MainActivity]: WindowInsets changed: ime:[0,0,0,492] 
+11-04 13:50:13.272  6494  6494 I ImeTracker: com.rbabbit.warzonetowers:4ea0ccc0: onShown
+11-04 13:50:13.760  6494  6494 I ImeTracker: com.rbabbit.warzonetowers:4776f004: onRequestHide at ORIGIN_CLIENT reason HIDE_SOFT_INPUT fromUser false
+11-04 13:50:13.760  6494  6494 D InsetsController: hide(ime())
+11-04 13:50:13.760  6494  6494 D WindowOnBackDispatcher: setTopOnBackInvokedCallback (unwrapped): com.rbabbit.blocknight.warzone.MainActivity$$ExternalSyntheticLambda17@87d02de
+11-04 13:50:13.761  6494  6494 D InsetsController: Setting requestedVisibleTypes to 496 (was 504)
+11-04 13:50:13.767  6494  6494 D CompatChangeReporter: Compat change id reported: 395521150; UID 10230; state: ENABLED
+11-04 13:50:13.787  6494  6494 D VRI[MainActivity]: WindowInsets changed: ime:null 
+11-04 13:50:14.055  6494  6494 I ImeTracker: system_server:6392efe4: onCancelled at PHASE_CLIENT_ON_CONTROLS_CHANGED
+11-04 13:50:14.081  6494  6494 D VRI[MainActivity]: WindowInsets changed: navigationBars:null 
+11-04 13:50:14.873  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:50:15.528  6494  6494 I AssistStructure: Flattened final assist data: 5364 bytes, containing 1 windows, 6 views
+11-04 13:50:15.931  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:50:17.939  6494  6494 I AssistStructure: Flattened final assist data: 5280 bytes, containing 1 windows, 6 views
+11-04 13:50:19.454  6494  6494 I AssistStructure: Flattened final assist data: 5364 bytes, containing 1 windows, 6 views
+11-04 13:50:20.217  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:50:20.719  6494  6494 I AssistStructure: Flattened final assist data: 5332 bytes, containing 1 windows, 6 views
+11-04 13:50:21.233  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:50:22.342  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:50:23.492  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:50:24.640  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:50:25.738  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:50:26.851  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:50:27.992  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:50:30.269  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:50:31.421  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:50:32.524  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:50:33.247  6494  6494 I AssistStructure: Flattened final assist data: 5332 bytes, containing 1 windows, 6 views
+11-04 13:50:35.764  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:50:36.853  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:50:37.143  6494  6494 I AssistStructure: Flattened final assist data: 6276 bytes, containing 1 windows, 7 views
+11-04 13:50:37.992  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:50:41.276  6494  6494 I AssistStructure: Flattened final assist data: 5332 bytes, containing 1 windows, 6 views
+11-04 13:50:42.380  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:50:43.555  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:50:44.226  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:50:44.705  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:50:45.421  6494  6494 I AssistStructure: Flattened final assist data: 6276 bytes, containing 1 windows, 7 views
+11-04 13:50:46.775  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:50:47.202  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:50:47.561  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:50:47.915  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:50:48.980  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:50:49.246  6494  6494 I AssistStructure: Flattened final assist data: 5332 bytes, containing 1 windows, 6 views
+11-04 13:50:49.281  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:50:50.084  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:50:51.258  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:50:52.374  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:50:53.033  6494  6494 I AssistStructure: Flattened final assist data: 6276 bytes, containing 1 windows, 7 views
+11-04 13:50:53.495  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:50:54.497  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:50:55.652  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:50:56.737  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:50:56.935  6494  6494 W cr_VibrationManager: Failed to use vibrate API, requires VIBRATE permission.
+11-04 13:50:57.838  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:50:58.895  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:50:59.984  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:00.668  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:01.074  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:02.209  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:02.308  6494  6494 D VRI[MainActivity]: WindowInsets changed: 1620x900 mandatorySystemGestures:[0,78,0,48] 
+11-04 13:51:02.428  6494  6494 W View    : requestLayout() improperly called by com.rbabbit.blocknight.warzone.MainActivity$EngineWebView{6816355 VFED..CL. .F....I. 0,0-1920,1200 aid=1073741824} during layout: running second layout pass
+11-04 13:51:03.253  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:04.361  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:05.422  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:05.498  6494  6494 I AssistStructure: Flattened final assist data: 5332 bytes, containing 1 windows, 6 views
+11-04 13:51:05.882  6494  6506 I t.warzonetowers: Background young concurrent mark compact GC freed 2756KB AllocSpace bytes, 6(248KB) LOS objects, 45% free, 3780KB/6999KB, paused 39us,9.355ms total 393.072ms
+11-04 13:51:07.051  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:07.187  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:07.557  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:07.594  6494  6494 I AssistStructure: Flattened final assist data: 6276 bytes, containing 1 windows, 7 views
+11-04 13:51:07.932  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:08.602  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:08.653  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:09.736  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:10.754  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:11.838  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:12.480  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:12.596  6494  6494 I AssistStructure: Flattened final assist data: 5332 bytes, containing 1 windows, 6 views
+11-04 13:51:12.950  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:13.994  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:15.844  6494  6494 I AssistStructure: Flattened final assist data: 6276 bytes, containing 1 windows, 7 views
+11-04 13:51:15.899  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:16.025  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:16.036  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:18.176  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:18.811  6494  6494 I AssistStructure: Flattened final assist data: 5332 bytes, containing 1 windows, 6 views
+11-04 13:51:19.010  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:19.247  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:20.352  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:21.414  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:22.101  6494  6494 I AssistStructure: Flattened final assist data: 6276 bytes, containing 1 windows, 7 views
+11-04 13:51:22.423  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:23.506  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:25.291  6494  6494 I AssistStructure: Flattened final assist data: 5332 bytes, containing 1 windows, 6 views
+11-04 13:51:25.612  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:27.728  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:28.213  6494  6494 I AssistStructure: Flattened final assist data: 6276 bytes, containing 1 windows, 7 views
+11-04 13:51:28.809  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:30.900  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:31.070  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:32.924  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:34.960  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:36.069  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:36.516  6494  6494 D VRI[MainActivity]: WindowInsets changed: 1920x1200 mandatorySystemGestures:[0,84,0,48] 
+11-04 13:51:36.530  6494  6494 W View    : requestLayout() improperly called by com.rbabbit.blocknight.warzone.MainActivity$EngineWebView{6816355 VFED..CL. .F....ID 0,0-1620,900 aid=1073741824} during layout: running second layout pass
+11-04 13:51:37.155  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:37.695  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:38.177  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:38.760  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:39.194  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:40.342  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:40.609  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:40.881  6494  6494 I BlockNightWZConsole: LOG [BlockNight zoom] close applied at 1600 (2676)
+11-04 13:51:41.390  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:42.411  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:43.444  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:44.508  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:45.541  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:46.605  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:47.653  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:48.727  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:49.767  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:50.822  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:51.875  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:52.917  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:53.973  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:55.010  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:55.704  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:56.166  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:56.944  6494  6494 I AssistStructure: Flattened final assist data: 6276 bytes, containing 1 windows, 7 views
+11-04 13:51:57.321  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:58.326  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:51:59.474  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:52:00.576  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:52:02.814  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:52:03.931  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)
+11-04 13:52:04.959  6494  6680 E GFXSTREAM: [GLClientState.cpp(298)] set vao to self, no-op (2)

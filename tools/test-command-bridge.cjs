@@ -79,3 +79,9 @@ const defence=catalog.buildings.find(b=>b.category==='DEFENCES'&&b.width===1),bo
  assert.equal(t.send('state').result.factories[0].waitingReason.kind,'constructors');t.droids.pop();t.c.wtcmd_tickProduction();assert.equal(t.calls.at(-1).op,'produce','normal production resumes after capacity frees');
 }
 console.log('PASS: FIFO builds, manual/automatic workers, sticky sessions, STOP, deduplication, validation, factory queues and bounded 100-job polling');
+{
+ const t=setup();t.structures.push({id:31,type:1,player:0,stattype:4,status:1});const construct=catalog.components.Construct[0];
+ t.templates.push({id:'ConstructionDroid',fullname:'Truck',body:body.id,propulsion:prop.id,weapons:[],construct:construct.id,droidType:2,cost:62,points:310});
+ t.templates.push({...t.templates[0],id:'',fullname:'Truck · F31'});assert.equal(t.send('state').result.templates.length,1,'stock and generated templates with equivalent parts merge');
+ assert.equal(t.send('queue-production',{factoryId:31,count:1,templateId:t.send('state').result.templates[0].id}).ok,true);
+}

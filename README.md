@@ -2,9 +2,12 @@
 
 Full Android project for Warzone Towers, based on the supplied Survival Mod and
 TowerDefense2_m map. The editable project is at the repository root; open this
-folder in Android Studio. Current Android version: **5.0-gameplay-audit (50)**.
+folder in Android Studio. Current Android version: **5.1-functional-screens (51)**.
 
 ## Downloads and saved versions
+
+- [v5.1 functional fixes: APK, source and checksums](https://github.com/rbabbit/wz-android/releases/tag/v5.1-functional-screens)
+- [v5.1 screen verification and deferred redesign](qa/v5.1-fixes/REPORT.md)
 
 - [v5.0 APK, editable source and checksums](https://github.com/rbabbit/wz-android/releases/tag/v5.0-gameplay-audit)
 - [v5.0 gameplay evidence and explicit test limits](qa/v5.0/REPORT.md)

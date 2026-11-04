@@ -118,7 +118,7 @@ function wtcmd_snapshot()
     // Present one producible entry per stable key rather than repeated cards.
     const templateKeys = new Set();
     const templates = enumTemplates(selectedPlayer).filter(wtcmd_templateAvailable).filter(function (t) {
-        const key = wtcmd_templateKey(t);
+        const d=wtcmd_templateParts(t),key=JSON.stringify([d.body,d.propulsion,d.turrets,d.droidType]);
         if (templateKeys.has(key)) return false;
         templateKeys.add(key); return true;
     });
@@ -137,6 +137,7 @@ function wtcmd_snapshot()
         mapWidth: mapWidth, mapHeight: mapHeight, alwaysQueue: true,
         hasHQ: enumStruct(selectedPlayer, HQ).some(function (s) { return s.status === BUILT; }),
         selectedUnits: wtcmd_selectedUnits(),
+        construction: enumStruct(selectedPlayer).filter(function(s){return s.status!==BUILT;}).map(function(s){return{id:s.id,name:s.name||"Structure",x:s.x,y:s.y};}),
         buildings: buildings, parts: parts, trucks: wtcmd_builders().map(function (d) {
             return { id: d.id, x: d.x, y: d.y, z: d.z, selected: Boolean(d.selected), order: d.order,
                 building: d.order===DORDER_BUILD||d.order===DORDER_HELPBUILD||(typeof DORDER_LINEBUILD!=="undefined"&&d.order===DORDER_LINEBUILD)||(typeof DORDER_BUILDMODULE!=="undefined"&&d.order===DORDER_BUILDMODULE),

@@ -1,5 +1,8 @@
 /* Larger command surfaces, using the existing tactical type and stock art. */
 :root { --wt-command-scale: 1; }
+body[data-command-page] #wt-field-centre,body[data-command-page] #wt-build-status {visibility:hidden;}
+.wt-command-card[data-selected-design="true"] {border-color:#b4d477;}
+.wt-command-card h2,.wt-design-summary h2 {overflow-wrap:anywhere;}
 #wt-command-pages { position:fixed; inset:var(--wt-command-top,94px) 0 0; z-index:2147483645; display:flex; flex-direction:column; color:#e8e6dd; background:#0c1418f9; font:calc(13px * var(--wt-command-scale))/1.5 system-ui,sans-serif; text-align:left; }
 #wt-command-pages[hidden],#wt-build-status[hidden],#wt-command-toast[hidden],#wt-native-back[hidden],#wt-build-ghost[hidden] { display:none!important; }
 #wt-command-pages * {box-sizing:border-box;}

@@ -10,8 +10,8 @@ android {
         applicationId = "com.rbabbit.warzonetowers"
         minSdk = 26
         targetSdk = 36
-        versionCode = 50
-        versionName = "5.0-gameplay-audit"
+        versionCode = 51
+        versionName = "5.1-functional-screens"
     }
 
     compileOptions {

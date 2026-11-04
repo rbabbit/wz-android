@@ -1,5 +1,13 @@
 # Known issues and verification limits
 
+v5.1 fixes functional screen navigation, queue visibility, template deduplication,
+error reporting and library/draft protection. Research is retained. Visual
+redesign, top BUILD choices, MORE removal and replacement of grey native pickers
+remain deferred. Header sizing is hardened, but the intermittent upward-shift
+report was not reproduced. Native future build sites remain battlefield
+blueprints; Queue lists current construction and factory jobs. See
+[the scoped verification](../qa/v5.1-fixes/REPORT.md).
+
 1. **BUILD physical retest:** v5.0 replaces the default custom FIFO with native
    construction selection and native queued blueprint rendering. Nearby-group
    selection, placement completion/exit, normal unit movement and production

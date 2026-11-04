@@ -2,7 +2,17 @@
 
 final result: passed
 
-## v5.0 gameplay audit — current
+## v5.1 functional screens — current
+
+APK SHA-256: `c1ed550f9024c1a5a2e80d771a4c31b40de7c504a56137be628ea6cbda1dbc0d`.
+
+Affected functional screen flows passed on the delivery APK at 1280x800 and
+1080x600: retained design selection, real production, deduplication, live queues,
+error reporting, deletion/draft protection, repeated returns and Research.
+All 408 research-named files are identical. The redesign remains deferred.
+See [the scoped v5.1 report](qa/v5.1-fixes/REPORT.md) for evidence and limits.
+
+## v5.0 gameplay audit — historical
 
 Tested APK SHA-256:
 `1b99ef69e369a75c86ee42e1c545874b57293083cc476ccc6357aa2421e30006`.

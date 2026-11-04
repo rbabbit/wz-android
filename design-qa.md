@@ -2,7 +2,21 @@
 
 final result: passed
 
-## v5.3 header and live queues — current
+## v5.4 selected-lab sidebar — current
+
+APK SHA-256: `07b81acec83421999770912e304abcbffe058bdfcafdb685865281f3a26b3057`.
+
+The exact APK passed the four-lab research journey on the real emulator at
+1280×576 and the compact screen checks at 1080×600. Current names/images,
+waiting lists and counts follow the selected lab, while the catalogue preview
+and queue action are in the centre. Native targets, automatic advancement,
+queue editing, filters and menu returns were verified; Standard/Extra large
+controls were visually checked. Engine, WASM and scenario data are unchanged.
+
+See [the v5.4 report](qa/v5.4/REPORT.md) for screenshots, the native evidence,
+delivery hash gate and retained limitations. This is a focused research audit.
+
+## v5.3 header and live queues — historical
 
 APK SHA-256: `f9c9d4ad98d000eb933ff93b4f5018cb80c89face9c527b26ea6ea823ceb78b8`.
 

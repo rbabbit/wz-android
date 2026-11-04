@@ -10,8 +10,8 @@ android {
         applicationId = "com.rbabbit.warzonetowers"
         minSdk = 26
         targetSdk = 36
-        versionCode = 53
-        versionName = "5.3-live-queues"
+        versionCode = 54
+        versionName = "5.4-lab-sidebar"
     }
 
     compileOptions {

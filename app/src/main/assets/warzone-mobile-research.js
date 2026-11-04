@@ -2,7 +2,7 @@
 (() => {
   "use strict";
 
-  const VERSION = 36;
+  const VERSION = 37;
   const QUEUE_COMMAND_PATH = "/data/mp/tests/blocknight-queue-command.json";
   const CATEGORIES = ["ALL", "WEAPONS", "DEFENCE", "VEHICLES", "CYBORG", "SYSTEMS", "STRUCTURES"];
 
@@ -309,20 +309,17 @@
         <section class="bn-tech-browser">
           <div class="bn-tech-browser-head"><h2 class="bn-tech-browser-title">ALL TECHNOLOGIES</h2><span><b class="bn-tech-available-count">0</b> AVAILABLE NOW</span></div>
           <div class="bn-tech-list" role="list"></div>
-        </section>
-        <aside class="bn-tech-detail">
-          <h2>SELECTED TECHNOLOGY</h2>
-          <div class="bn-tech-detail-card">
-            <div class="bn-tech-hero"><img class="bn-tech-detail-image" src="research-icons/Research%20Module.gif" alt=""></div>
-            <div class="bn-tech-detail-copy"><strong class="bn-tech-detail-name">SELECT A TECHNOLOGY</strong><small class="bn-tech-detail-category">LIVE WARZONE RESEARCH</small><b class="bn-tech-detail-status">WAITING</b><dl><div><dt>RESEARCH POINTS</dt><dd class="bn-tech-detail-points">—</dd></div><div><dt>POWER COST</dt><dd class="bn-tech-detail-cost">—</dd></div></dl></div>
-          </div>
-          <section class="bn-tech-active" aria-live="polite"><header>NOW RESEARCHING <b class="bn-tech-active-lab">LAB 1</b></header><strong class="bn-tech-active-name">Ready for research</strong><div class="bn-tech-progress"><i></i></div><small class="bn-tech-time">Choose a technology to start.</small></section>
-          <section class="bn-tech-queue-panel"><header><b class="bn-tech-queue-title">UP NEXT · LAB 1</b><span class="bn-tech-queue-count">EMPTY</span></header><ol class="bn-tech-queue-list"></ol></section>
-          <p class="bn-tech-error" role="status"></p>
-          <div class="bn-tech-actions">
-            <div><span>SELECTED LAB</span><b class="bn-tech-selected-lab">LAB 1</b><small class="bn-tech-lab-state">Waiting for the engine…</small></div>
+          <section class="bn-tech-preview" aria-label="Catalogue selection">
+            <img class="bn-tech-detail-image" src="research-icons/Research%20Module.gif" alt="">
+            <div class="bn-tech-preview-copy"><small class="bn-tech-preview-label">CATALOGUE SELECTION</small><strong class="bn-tech-detail-name">SELECT A TECHNOLOGY</strong><div class="bn-tech-preview-metrics"><span class="bn-tech-detail-category"></span><span>PTS <b class="bn-tech-detail-points">—</b></span><span>POWER <b class="bn-tech-detail-cost">—</b></span></div><b class="bn-tech-detail-status">WAITING</b></div>
             <button class="bn-tech-assign" type="button">ADD TO LAB 1 QUEUE</button>
-          </div>
+            <p class="bn-tech-error" role="status"></p>
+          </section>
+        </section>
+        <aside class="bn-tech-detail" aria-label="Selected laboratory research">
+          <h2><span><b class="bn-tech-selected-lab">LAB 1</b> RESEARCH</span><small class="bn-tech-lab-total">0 ITEMS</small></h2>
+          <section class="bn-tech-active" aria-live="polite"><div class="bn-tech-current"><img class="bn-tech-current-image" src="research-icons/Research%20Module.gif" alt=""><div class="bn-tech-current-copy"><small class="bn-tech-current-status">LAB READY</small><strong class="bn-tech-active-name">No active research</strong></div></div><div class="bn-tech-progress"><i></i></div><small class="bn-tech-time">Choose a technology to start.</small></section>
+          <section class="bn-tech-queue-panel"><header><b class="bn-tech-queue-title">UP NEXT · LAB 1</b><span class="bn-tech-queue-count">EMPTY</span></header><ol class="bn-tech-queue-list"></ol></section>
         </aside>
       </div>
     `;
@@ -341,8 +338,17 @@
       @media(max-width:800px){.bn-tech-header{gap:7px;padding-left:8px;padding-right:8px}.bn-tech-brand{min-width:180px}.bn-tech-brand strong{font-size:15px}.bn-tech-live{padding:0 8px}.bn-tech-main{grid-template-columns:155px minmax(0,1fr) 230px;gap:5px;padding-left:5px;padding-right:5px}.bn-tech-detail-card{grid-template-columns:82px 1fr}.bn-tech-hero{height:105px}.bn-tech-detail-image{width:105px;height:105px}.bn-tech-card{grid-template-columns:45px minmax(0,1fr) 46px 10px}.bn-tech-icon{width:42px;height:48px}.bn-tech-icon img{width:50px;height:50px}}
     `;
     style.textContent += `
-      .bn-tech-detail{overflow:hidden}.bn-tech-detail-card{flex:none;max-height:145px}.bn-tech-active{flex:none;margin-top:7px;padding:9px;border:1px solid #28734c;border-radius:5px;background:#0b241b}.bn-tech-active header{display:flex;justify-content:space-between;color:#68e98f;font-size:8px;letter-spacing:.8px}.bn-tech-active-name{display:block;margin:6px 0;color:#e1f5e6;font-size:12px;line-height:15px;overflow-wrap:anywhere}.bn-tech-progress{height:5px;background:#193c2b;border-radius:3px;overflow:hidden}.bn-tech-progress i{display:block;height:100%;background:#68e98f;transition:width .6s linear}.bn-tech-time{display:block;margin-top:5px;color:#a6d8b6;font-size:9px}.bn-tech-queue-panel{height:auto;min-height:62px;flex:1;display:flex;flex-direction:column;overflow:hidden}.bn-tech-queue-list{height:auto;min-height:0;flex:1}.bn-tech-queue-item{min-height:25px;height:auto;grid-template-columns:16px minmax(0,1fr) 24px;font-size:9px;padding:3px 0}.bn-tech-queue-item span{white-space:normal;overflow-wrap:anywhere}.bn-tech-queue-remove{width:22px!important;height:22px!important}.bn-tech-error{min-height:0;flex:none}.bn-tech-actions{flex:none}.bn-tech-detail-card .bn-tech-hero{max-height:125px}.bn-tech-lab small{font-size:8px}.bn-tech-lab.running{height:41px}.bn-tech-lab.running small{white-space:normal;line-height:10px;max-height:20px;overflow:hidden}
-      @media(max-height:590px){.bn-tech-detail-card{max-height:98px}.bn-tech-detail-card .bn-tech-hero{height:82px}.bn-tech-detail-image{width:82px;height:82px}.bn-tech-detail-name{font-size:11px;line-height:13px}.bn-tech-detail-copy dl{display:none}.bn-tech-active{padding:7px}.bn-tech-active-name{font-size:11px;margin:4px 0}.bn-tech-error{margin:2px}.bn-tech-queue-panel{min-height:55px}.bn-tech-main .bn-tech-detail{padding:7px}}
+      .bn-tech-browser-head{flex:none}.bn-tech-list{flex:1}
+      .bn-tech-preview{flex:none;display:grid;grid-template-columns:44px minmax(0,1fr) 170px;align-items:center;gap:8px;padding:10px 3px 3px;margin-top:7px;border-top:1px solid #24515c;background:#071217}
+      .bn-tech-preview .bn-tech-detail-image{width:44px;height:44px;object-fit:contain;border:1px solid #24515c;border-radius:4px}.bn-tech-preview-copy{min-width:0;text-align:left}.bn-tech-preview-label{font-size:7px;letter-spacing:1px;color:#72adb9}.bn-tech-preview .bn-tech-detail-name{font-size:12px;line-height:15px;overflow-wrap:anywhere;margin:3px 0}
+      .bn-tech-preview-metrics{display:flex;flex-wrap:wrap;gap:3px 9px;color:#759ba5;font-size:8px}.bn-tech-preview-metrics b{color:#b6e2eb}.bn-tech-preview .bn-tech-detail-category{margin:0;font-size:8px;letter-spacing:0}.bn-tech-preview .bn-tech-detail-status{margin:3px 0 0;padding:0;background:transparent;color:#68e98f;font-size:8px;letter-spacing:.3px}
+      .bn-tech-preview .bn-tech-assign{width:100%;min-height:42px;padding:8px;border-radius:5px;font-size:9px!important;font-weight:900;line-height:13px;letter-spacing:.4px}.bn-tech-preview .bn-tech-error{grid-column:1/-1;min-height:0;margin:0;color:#efa56f;font-size:8px;line-height:11px;text-align:left}.bn-tech-error:empty{display:none}
+      .bn-tech-detail{overflow:hidden}.bn-tech-detail>h2{display:flex;align-items:center;justify-content:space-between;gap:7px;flex:none;height:28px;font-size:11px}.bn-tech-selected-lab{color:#68e98f}.bn-tech-lab-total{color:#799ea7;font-size:8px;letter-spacing:.4px;white-space:nowrap}
+      .bn-tech-active{flex:none;margin-top:8px;padding:12px;border:1px solid #28734c;border-radius:5px;background:#0b241b}.bn-tech-current{display:flex;align-items:center;gap:10px;text-align:left}.bn-tech-current-image{width:80px;height:80px;object-fit:contain;border:1px solid #285341;border-radius:5px;background:#081a14;flex:none}.bn-tech-current-copy{min-width:0}.bn-tech-current-status{display:block;color:#68e98f;font-size:8px;letter-spacing:.8px}.bn-tech-active-name{display:block;margin-top:7px;color:#e1f5e6;font-size:15px;line-height:19px;overflow-wrap:anywhere}
+      .bn-tech-progress{height:5px;margin-top:12px;background:#193c2b;border-radius:3px;overflow:hidden}.bn-tech-progress i{display:block;height:100%;background:#68e98f;transition:width .6s linear}.bn-tech-time{display:block;margin-top:7px;color:#a6d8b6;font-size:10px;text-align:left}.bn-tech-active.idle{border-color:#21414b;background:#0a1b22}.bn-tech-active.idle .bn-tech-progress{display:none}.bn-tech-active.idle .bn-tech-current-status{color:#90b2bc}
+      .bn-tech-queue-panel{height:auto;min-height:62px;flex:1;display:flex;flex-direction:column;overflow:hidden}.bn-tech-queue-list{height:auto;min-height:0;flex:1}.bn-tech-queue-item{min-height:32px;height:auto;grid-template-columns:18px minmax(0,1fr) 28px;font-size:10px;padding:5px 0}.bn-tech-queue-item span{white-space:normal;overflow-wrap:anywhere}.bn-tech-queue-remove{width:26px!important;height:26px!important}.bn-tech-queue-empty{font-size:9px;text-align:left;padding:12px 0}.bn-tech-lab small{font-size:8px}.bn-tech-lab.running{height:41px}.bn-tech-lab.running small{white-space:normal;line-height:10px;max-height:20px;overflow:hidden}
+      @media(max-width:1100px){.bn-tech-main{grid-template-columns:180px minmax(0,1fr) 300px}.bn-tech-preview{grid-template-columns:38px minmax(0,1fr) 142px;gap:6px}.bn-tech-preview .bn-tech-detail-image{width:38px;height:38px}.bn-tech-preview .bn-tech-detail-name{font-size:11px}.bn-tech-preview .bn-tech-assign{font-size:8px!important}.bn-tech-current-image{width:68px;height:68px}.bn-tech-active-name{font-size:13px;line-height:17px}}
+      @media(max-width:800px){.bn-tech-main{grid-template-columns:145px minmax(0,1fr) 230px}.bn-tech-preview{grid-template-columns:minmax(0,1fr) 120px}.bn-tech-preview .bn-tech-detail-image{display:none}.bn-tech-active{padding:8px}.bn-tech-current{gap:7px}.bn-tech-current-image{width:52px;height:52px}.bn-tech-active-name{font-size:12px;line-height:15px}}
     `;
     document.head.appendChild(style);
 
@@ -735,21 +741,27 @@
     const lab = state.engineLabs[state.activeLab];
     const topic = state.catalog.find(value => value.nativeIndex === state.selectedTopicIndex) || null;
     shell.querySelector(".bn-tech-selected-lab").textContent = `LAB ${state.activeLab + 1}`;
-    let labState = "Waiting for the engine…";
     const labQueue = lab ? queueForLab(lab.id) : [];
-    if (lab?.idle) labState = state.runner?.labIds.includes(lab.id) ? "Syncing queue…" : `Ready${labQueue.length ? ` · ${labQueue.length} queued` : ""}`;
-    else if (lab?.topicName) labState = `Running · ${lab.topicName}`;
-    else if (lab) labState = "Research in progress";
-    shell.querySelector(".bn-tech-lab-state").textContent = labState;
-    shell.querySelector('.bn-tech-active-lab').textContent = `LAB ${state.activeLab + 1}`;
-    shell.querySelector('.bn-tech-active-name').textContent = lab && !lab.idle ? lab.topicName || 'Starting research…' : 'Ready for research';
+    const researching = Boolean(lab && !lab.idle);
+    const current = researching ? { ...knownTopic(lab.topicId), id: lab.topicId,
+      name: lab.topicName || knownTopic(lab.topicId)?.name || 'Starting research…' } : null;
+    const total = labQueue.length + (researching ? 1 : 0);
+    shell.querySelector('.bn-tech-lab-total').textContent = `${total} ITEM${total === 1 ? '' : 'S'}`;
+    shell.querySelector('.bn-tech-active').classList.toggle('idle', !researching);
+    shell.querySelector('.bn-tech-current-status').textContent = researching ? 'NOW RESEARCHING' : !lab ? 'SYNCING LABORATORIES' : labQueue.length ? 'WAITING TO START' : 'LAB READY';
+    shell.querySelector('.bn-tech-active-name').textContent = current?.name || 'No active research';
+    const currentImage = shell.querySelector('.bn-tech-current-image');
+    const currentSource = current ? topicImage(current) : 'research-icons/Research%20Module.gif';
+    if (currentImage.getAttribute('src') !== currentSource) currentImage.src = currentSource;
+    currentImage.alt = current?.name || 'Laboratory ready';
+    currentImage.onerror = () => { currentImage.onerror = null; currentImage.src = 'research-icons/Research%20Module.gif'; };
     const remaining = lab?.remainingSeconds;
     const time = lab?.waitingPower ? 'Waiting for power · timer paused' : remaining === null || remaining === undefined ? 'Linking live research status…' : remaining > 0 ? `~${Math.floor(remaining / 60)}:${String(Math.ceil(remaining % 60)).padStart(2, '0')} left · estimated` : 'Finishing · waiting for engine confirmation';
     shell.querySelector('.bn-tech-time').textContent = lab && !lab.idle ? time : 'Add a technology to start immediately.';
     shell.querySelector('.bn-tech-progress i').style.width = `${lab && !lab.idle ? Math.min(99, Math.max(0, lab.estimatedProgress * 100)) : 0}%`;
     shell.querySelector(".bn-tech-error").textContent = state.assignmentError;
     shell.querySelector(".bn-tech-detail-name").textContent = topic?.name || "SELECT A TECHNOLOGY";
-    shell.querySelector(".bn-tech-detail-category").textContent = topic ? `${topic.category} · LIVE WARZONE RESEARCH` : "LIVE WARZONE RESEARCH";
+    shell.querySelector(".bn-tech-detail-category").textContent = topic?.category || "";
     const active = topic ? activeLabForTopic(topic.id) : null;
     const queuedLabId = topic ? queuedLocation(topic.id) : null;
     const queuedLab = state.engineLabs.find(value => value.id === queuedLabId);
@@ -758,10 +770,10 @@
     shell.querySelector(".bn-tech-detail-cost").textContent = topic ? topic.power.toLocaleString() : "—";
     const detailImage = shell.querySelector(".bn-tech-detail-image");
     const expectedSource = topic ? topicImage(topic) : "research-icons/Research%20Module.gif";
-    if (!detailImage.src.endsWith(expectedSource)) detailImage.src = expectedSource;
+    if (detailImage.getAttribute('src') !== expectedSource) detailImage.src = expectedSource;
     detailImage.onerror = () => { detailImage.onerror = null; detailImage.src = "research-icons/Research%20Module.gif"; };
     shell.querySelector(".bn-tech-queue-title").textContent = `UP NEXT · LAB ${state.activeLab + 1}`;
-    shell.querySelector(".bn-tech-queue-count").textContent = labQueue.length ? `${labQueue.length} ITEM${labQueue.length === 1 ? "" : "S"}` : "EMPTY";
+    shell.querySelector(".bn-tech-queue-count").textContent = labQueue.length ? `${labQueue.length} WAITING` : "EMPTY";
     const queueList = shell.querySelector('.bn-tech-queue-list');
     const queueSignature = JSON.stringify([lab?.id, labQueue.map(value => value.id), state.pendingClose, Boolean(state.runner?.labIds.includes(lab?.id))]);
     if (queueList.dataset.signature !== queueSignature) {

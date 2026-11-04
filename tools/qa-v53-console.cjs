@@ -12,6 +12,7 @@ const installedPath=run('shell','pm','path','com.rbabbit.warzonetowers').slice(8
 const installedSHA256=run('shell','sha256sum',installedPath).split(/\s/)[0];
 if(installedSHA256!==apkSHA256)throw Error('Installed APK differs from delivery candidate');
 const report={apkSHA256,installedSHA256,pid,scriptExceptions,...observed,checkedAt:new Date().toISOString()};
-fs.writeFileSync(path.join(root,'qa/v5.3/console-check.json'),JSON.stringify(report,null,2)+'\n');
+const output=path.resolve(root,process.env.WZ_QA_OUTPUT||'qa/v5.3');fs.mkdirSync(output,{recursive:true});
+fs.writeFileSync(path.join(output,'console-check.json'),JSON.stringify(report,null,2)+'\n');
 console.log(JSON.stringify(report,null,2));
 if(scriptExceptions.length||observed.bridgeErrors)process.exitCode=1;

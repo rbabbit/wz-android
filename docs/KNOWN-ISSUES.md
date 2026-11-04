@@ -1,5 +1,12 @@
 # Known issues and verification limits
 
+v5.4 dedicates the right Research sidebar to the selected lab and moves the
+catalogue preview/action to the centre. Four real labs, queued topics, native
+completion/advancement and related returns passed at 1280×576; compact layout,
+filters and two wrapper control sizes passed at 1080×600. See
+[the v5.4 report](../qa/v5.4/REPORT.md). This focused UI change leaves the
+engine/scenario and the limits below unchanged.
+
 v5.3 fixes the reported header clipping protection, live research/ordered queue
 visibility and overlapping builder window. The exact delivery APK passed the
 finite emulator flows at 1280×576, 1080×600 and 1600×720 in

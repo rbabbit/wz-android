@@ -2,9 +2,12 @@
 
 Full Android project for Warzone Towers, based on the supplied Survival Mod and
 TowerDefense2_m map. The editable project is at the repository root; open this
-folder in Android Studio. Current Android version: **5.3-live-queues (53)**.
+folder in Android Studio. Current Android version: **5.4-lab-sidebar (54)**.
 
 ## Downloads and saved versions
+
+- [v5.4 lab sidebar: APK, complete source and checksums](https://github.com/rbabbit/wz-android/releases/tag/v5.4-lab-sidebar)
+- [v5.4 selected-lab emulator verification](qa/v5.4/REPORT.md)
 
 - [v5.3 header and live queues: APK, complete source and checksums](https://github.com/rbabbit/wz-android/releases/tag/v5.3-live-queues)
 - [v5.3 emulator evidence and remaining limits](qa/v5.3/REPORT.md)

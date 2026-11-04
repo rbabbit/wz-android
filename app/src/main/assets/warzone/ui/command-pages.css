@@ -121,3 +121,13 @@ body[data-command-page="saved"] .wt-card-grid{grid-template-columns:repeat(auto-
 @media(max-width:1100px){#wt-build-status{left:auto;right:8px;top:calc(var(--wt-command-top,56px) + 8px);bottom:auto;width:175px;max-width:175px}}
 @media(max-width:800px){#warzone-command-strip{padding-right:226px}#warzone-command-strip #warzone-towers-wave-hud{width:212px}.wt-workspace{grid-template-columns:120px minmax(0,1fr) 210px;gap:5px}.wt-command-title>div{min-width:130px}.wt-command-title h1{font-size:17px}.wt-command-title .wt-eyebrow{display:none}#wt-command-tabs button{padding:7px 5px;font-size:8px}#wt-command-pages .wt-command-title>button{font-size:8px;padding:8px}.wt-rail{padding:7px}.wt-rail button{padding:7px;font-size:9px}#wt-command-pages #wt-build-search{width:125px}.wt-list-heading{flex-wrap:wrap}.wt-work-list{padding:7px}.wt-parts-grid{grid-template-columns:repeat(auto-fill,minmax(90px,1fr))}}
 @media(max-height:590px){.wt-command-title{min-height:51px;padding-top:5px;padding-bottom:5px}.wt-detail>img{height:80px}.wt-detail .wt-unit-parts{padding:3px 0}.wt-detail{gap:7px}.wt-configuration>div{margin:6px 0}.wt-detail h2{font-size:18px}.wt-detail-action{min-height:36px!important}.wt-rail-note{margin-top:5px;padding-top:8px}}
+
+/* Replace the stock builder-card window in its own reserved footprint. The
+   native tool remains alive underneath to retain real queued blueprints. */
+#wt-build-status.native-building{left:calc(50vw - 178px);right:auto;top:auto;bottom:19px;width:324px;max-width:none;height:139px;padding:10px;display:grid;grid-template-columns:1fr auto;grid-template-rows:32px 26px 20px 32px;gap:3px 7px;background:#07171d;border:1px solid #2d606a;border-radius:5px}
+#wt-build-status.native-building #wt-power{font-size:12px}
+#wt-build-status.native-building #wt-field-status{min-height:28px;padding:5px 7px;font-size:9px}
+#wt-build-status.native-building #wt-placement-label{grid-column:1/-1;font:700 12px/1.2 system-ui,sans-serif;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#wt-build-status.native-building #wt-builder-summary{grid-column:1/-1;font:9px/1.2 system-ui,sans-serif;color:#7eabb6}
+#wt-builder-summary:empty{display:none}
+#wt-build-status.native-building [data-page="build"]{grid-column:1/-1;min-height:23px;padding:3px;color:#8be6f0;background:#11313b;border:1px solid #2a5965}

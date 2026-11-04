@@ -15,7 +15,7 @@ const wait=ms=>new Promise(resolve=>setTimeout(resolve,ms));
 function run(...args){return execFileSync(adb,['-s',device,...args],{maxBuffer:24*1024*1024,timeout:20000})}
 async function evaluate(expression,engine=true){const n=++id;const r=await new Promise((resolve,reject)=>{const timer=setTimeout(()=>{pending.delete(n);reject(Error('WebView evaluation timed out: '+expression.slice(0,120)))},15000);pending.set(n,{resolve,reject,timer});socket.send(JSON.stringify({id:n,method:'Runtime.evaluate',params:{expression:engine?`document.getElementById('warzone-game-frame').contentWindow.eval(${JSON.stringify(expression)})`:expression,returnByValue:true,awaitPromise:true}}))});if(r.exceptionDetails)throw r.exceptionDetails;return r.result.value}
 function windowBounds(){const dump=run('shell','dumpsys','window','windows').toString();const sections=dump.split(/\n\s*Window #\d+ /);const app=sections.find(s=>/^Window\{[^\n]*com\.rbabbit\.warzonetowers\/com\.rbabbit\.blocknight\.warzone\.MainActivity\}/.test(s));const m=app?.match(/Frames:.*?frame=\[(\d+),(\d+)\]\[(\d+),(\d+)\]/);if(!m)throw Error('Cannot locate actual app frame');return m.slice(1).map(Number)}
-async function hostTap(x,y){const [w,h]=await evaluate('[innerWidth,innerHeight]',false),[l,t,r,b]=windowBounds();run('shell','input','tap',String(Math.round(l+x*(r-l)/w)),String(Math.round(t+y*(r-l)/w)));await wait(450)}
+async function hostTap(x,y){const phase=await evaluate("window.__warzoneTowersWaves?.report().snapshot?.phase");if(!phase||phase==="defeated")throw Error("Native fixture ended or reloaded; refusing to tap the Android replay overlay");const [w,h]=await evaluate('[innerWidth,innerHeight]',false),[l,t,r,b]=windowBounds();run('shell','input','tap',String(Math.round(l+x*(r-l)/w)),String(Math.round(t+y*(r-l)/w)));await wait(450)}
 async function tap(x,y){const p=await evaluate(`(()=>{const r=document.getElementById('warzone-game-frame').getBoundingClientRect();return [r.x+${x},r.y+${y}]})()`,false);await hostTap(...p)}
 async function button(selector){await evaluate(`document.querySelector(${JSON.stringify(selector)})?.scrollIntoView({block:"nearest",inline:"nearest"})`,false);await wait(100);const p=await evaluate(`(()=>{const e=document.querySelector(${JSON.stringify(selector)});if(!e)throw Error('Missing button');const r=e.getBoundingClientRect();return [r.x+r.width/2,r.y+r.height/2]})()`,false);await hostTap(...p);if(selector==='#blocknight-stop'){for(let i=0;i<120;i++){if(!await evaluate('__kalaWarzoneTouch.report().stopPending'))return;await wait(25)}throw Error('STOP acknowledgement did not arrive')}if(selector==='#blocknight-music'){const deadline=Date.now()+90000;while(Date.now()<deadline){if(!await evaluate('__kalaWarzoneTouch.report().musicOpening'))return;await wait(100)}throw Error('Music menu transition did not finish')}}
 async function swipe(x1,y1,x2,y2,duration=300){const [w,h]=await evaluate('[innerWidth,innerHeight]',false),f=await evaluate("document.getElementById('warzone-game-frame').getBoundingClientRect().toJSON()",false),[l,t,r,b]=windowBounds();const point=(x,y)=>[Math.round(l+(f.x+x)*(r-l)/w),Math.round(t+(f.y+y)*(b-t)/h)];run('shell','input','swipe',...point(x1,y1).map(String),...point(x2,y2).map(String),String(duration));await wait(450)}
@@ -93,8 +93,10 @@ async function main(){
  testedAPKHash=hash;
  const installed=run('shell','pm','path','com.rbabbit.warzonetowers').toString().trim().slice(8),deviceHash=run('shell','sha256sum',installed).toString().split(/\s/)[0];assert.equal(deviceHash,hash);fs.writeFileSync(path.join(out,'tested-'+action+'.json'),JSON.stringify({apkSHA256:hash,installedMatches:true,graphics:await evaluate('WarzoneGraphics.report()'),startedAt:new Date().toISOString()},null,2));
  async function layout(name){
+  const fullHeader=await evaluate(`(()=>{const d=parent.document,limit=d.getElementById('warzone-game-frame').getBoundingClientRect().top;return [...d.querySelectorAll('#warzone-command-strip button,#warzone-towers-wave-hud')].filter(e=>e.getClientRects().length).map(e=>({id:e.id,rect:e.getBoundingClientRect().toJSON(),limit}));})()`);
+  assert.ok(fullHeader.every(item=>item.rect.top>=6 && item.rect.bottom<=item.limit && item.rect.left>=0 && item.rect.right<=(Number(process.env.WZ_QA_EXPECT_WIDTH)||1600)),JSON.stringify(fullHeader));
   const r=await evaluate(`(()=>{const f=parent.document.getElementById('warzone-game-frame'),c=document.getElementById('canvas');return{host:[parent.innerWidth,parent.innerHeight],frame:f.getBoundingClientRect().toJSON(),canvas:c.getBoundingClientRect().toJSON(),buffer:[c.width,c.height],scroll:[parent.scrollX,parent.scrollY,scrollX,scrollY],inert:f.inert,buttons:[...parent.document.querySelectorAll('#wt-field-centre button')].map(b=>{const r=b.getBoundingClientRect(),e=parent.document.elementFromPoint(r.x+r.width/2,r.y+r.height/2);return{id:b.id,visible:r.width>0&&r.height>0,hit:e?.closest('button')===b}})}})()`);
-  assert.equal(r.host[1],Number(process.env.WZ_QA_EXPECT_HEIGHT||800),'full viewport restored after keyboard/page');assert.equal(r.inert,false);const header=await evaluate("['wt-open-build','wt-open-design','wt-open-factory','wt-open-stats','wt-open-queue','blocknight-tech','blocknight-help','warzone-towers-next-wave'].map(id=>{const d=parent.document,b=d.getElementById(id),r=b.getBoundingClientRect();return{id,visible:r.width>0&&r.height>0,hit:d.elementFromPoint(r.x+r.width/2,r.y+r.height/2)?.closest('button')===b}})");assert.ok(header.every(b=>b.visible&&b.hit),JSON.stringify(header));r.header=header;assert.deepEqual(r.scroll,[0,0,0,0]);assert.equal(r.frame.bottom,r.host[1]);assert.equal(r.canvas.width,r.frame.width);assert.equal(r.canvas.height,r.frame.height);assert.ok(Math.abs(r.buffer[0]*r.frame.height-r.buffer[1]*r.frame.width)<=Math.max(...r.buffer),"native framebuffer aspect ratio matches the restored viewport");assert.ok(r.buttons.length===6&&r.buttons.every(b=>b.visible&&b.hit),JSON.stringify(r.buttons));await screenshot(name);fs.writeFileSync(path.join(out,name+'-layout.json'),JSON.stringify(r,null,2));return r;
+  assert.equal(r.host[1],Number(process.env.WZ_QA_EXPECT_HEIGHT||800),'full viewport restored after keyboard/page');assert.equal(r.inert,false);const header=await evaluate("['wt-open-build','wt-open-design','wt-open-factory','wt-open-stats','wt-open-queue','blocknight-tech','blocknight-help','warzone-towers-next-wave'].map(id=>{const d=parent.document,b=d.getElementById(id),r=b.getBoundingClientRect();return{id,visible:r.width>0&&r.height>0,hit:d.elementFromPoint(r.x+r.width/2,r.y+r.height/2)?.closest('button')===b}})");assert.ok(header.every(b=>b.visible&&b.hit),JSON.stringify(header));r.header=header;assert.deepEqual(r.scroll,[0,0,0,0]);assert.ok(Math.abs(r.frame.bottom-r.host[1])<.05);assert.equal(r.canvas.width,r.frame.width);assert.equal(r.canvas.height,r.frame.height);assert.ok(Math.abs(r.buffer[0]*r.frame.height-r.buffer[1]*r.frame.width)<=Math.max(...r.buffer),"native framebuffer aspect ratio matches the restored viewport");assert.ok(r.buttons.length===6&&r.buttons.every(b=>b.visible&&b.hit),JSON.stringify(r.buttons));await screenshot(name);fs.writeFileSync(path.join(out,name+'-layout.json'),JSON.stringify(r,null,2));return r;
  }
  async function openGround(native,candidates){
   const objects=Object.values(native['droid.json']).filter(d=>d.player===0);
@@ -115,10 +117,136 @@ async function main(){
   const sites=[],points=[],seen=new Set(),trucks=await evaluate('__warzoneCommands.report().snapshot.trucks');
   let candidates=await evaluate(`(()=>{const tiles=[];for(const y of [180,260,340,420,500])for(const x of [300,410,520,630,740,850,960]){const t=WarzoneTerrain.pick(x,y);if(t)tiles.push(t);}return tiles})()`);
   const distance=t=>Math.min(...trucks.map(d=>Math.hypot(d.x-t.x,d.y-t.y)));candidates=candidates.filter(t=>distance(t)>=minDistance);if(nearest)candidates.sort((a,b)=>distance(a)-distance(b));
-  for(const tile of candidates){if(sites.length===count)break;const key=tile.x+','+tile.y;if(seen.has(key))continue;seen.add(key);const preview=await evaluate(`__warzoneCommands.send('preview-build',{itemId:'GuardTower6',x:${tile.x},y:${tile.y}})`);if(!preview.ok)continue;let p;try{p=await projectTile(tile.x,tile.y,tile.height)}catch(_){continue;}if(p[0]<260||p[0]>1000||p[1]<130||p[1]>560)continue;sites.push([tile.x,tile.y]);points.push(p);}
+  for(const tile of candidates){if(sites.length===count)break;const key=tile.x+','+tile.y;if(seen.has(key))continue;seen.add(key);const preview=await evaluate(`__warzoneCommands.send('preview-build',{itemId:'GuardTower6',x:${tile.x},y:${tile.y}})`);if(!preview.ok)continue;let p;try{p=await projectTile(tile.x,tile.y,tile.height)}catch(_){continue;}if(p[0]<260||p[0]>1000||p[1]<130||p[1]>560)continue;if(!await evaluate(`(()=>{const d=parent.document,f=d.getElementById('warzone-game-frame'),r=f.getBoundingClientRect();return d.elementFromPoint(r.x+${p[0]},r.y+${p[1]})===f})()`))continue;sites.push([tile.x,tile.y]);points.push(p);}
+  // Validate the prepared sites against real overlay hit targets too. Terrain
+  // projection alone can return a point underneath the construction footer.
+  for(let i=points.length-1;i>=0;i--){if(!await evaluate(`(()=>{const d=parent.document,f=d.getElementById('warzone-game-frame'),r=f.getBoundingClientRect();return d.elementFromPoint(r.x+${points[i][0]},r.y+${points[i][1]})===f})()`)){points.splice(i,1);sites.splice(i,1);}}
   assert.equal(sites.length,count,'distinct valid sites clear of native controls');return{sites,points};
  }
 // Included by gameplay-audit.cjs inside its live, hash-checked main routine.
+if(action==='v53-build-visual'){
+ await button('#wt-select-move');await settle();await button('#wt-open-build');await button('[data-build-choice="GuardTower6"]');await button('[data-build="GuardTower6"]');
+ let ready=false;for(let i=0;i<200;i++){ready=await evaluate('__warzoneCommands.report().nativeToolReady&&!__warzoneCommands.report().page&&!__warzoneCommands.report().buildingOpening&&parent.document.getElementById("wt-build-busy").hidden');if(ready)break;await wait(100);}assert.ok(ready,'wait for the actual placement screen, not its preparing overlay');
+ await evaluate('new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(()=>resolve(true))))');
+ const footer=await evaluate(`(()=>{const d=parent.document,e=d.getElementById('wt-build-status'),r=e.getBoundingClientRect(),c=d.getElementById('wt-field-centre').getBoundingClientRect();return{rect:r.toJSON(),console:c.toJSON(),visible:getComputedStyle(e).visibility==='visible',native:e.classList.contains('native-building'),hit:d.elementFromPoint(r.x+r.width/2,r.y+r.height/2)?.closest('#wt-build-status')===e}})()`);
+ assert.ok(footer.native&&footer.visible&&footer.hit);assert.ok(footer.rect.left>=footer.console.right);assert.ok(footer.rect.bottom>=Number(process.env.WZ_QA_EXPECT_HEIGHT)-20);
+ await screenshot('build-window-replacement-ready');await button('#wt-select-move');await settle();
+ for(let i=0;i<100 && await evaluate('__warzoneCommands.report().nativeMenu!==""||__kalaWarzoneTouch.report().queueMode');i++)await wait(100);
+ assert.equal(await evaluate('__warzoneCommands.report().nativeMenu'), '');assert.equal(await evaluate('__kalaWarzoneTouch.report().queueMode'),false);await layout('ready-build-exit');
+ fs.writeFileSync(path.join(out,'v53-build-visual-results.json'),JSON.stringify({readyPlacementScreen:true,footer,nativeToolCleared:true},null,2));console.log('PASS: ready construction screen visually captured, complete replacement and real SELECT/MOVE exit verified');return;
+}
+if(action==='v53-production'){
+ const initial=await evaluate('__warzoneCommands.report().snapshot.trucks.map(t=>t.id)');
+ await button('#wt-open-factory');const factories=await evaluate('__warzoneCommands.report().snapshot.factories');const local=factories.find(f=>f.x<20)||factories[0];
+ await button(`[data-factory="${local.id}"]`);await button('[data-count="1"]');await button('[data-produce-template="ConstructionDroid"]');await settle();await screenshot('normal-production-queued');await button('[data-action="back"]');await settle();
+ const deadline=Date.now()+70000;while(Date.now()<deadline && !await evaluate(`__warzoneCommands.report().snapshot.trucks.some(t=>!${JSON.stringify(initial)}.includes(t.id))`))await wait(250);
+ const created=await evaluate(`__warzoneCommands.report().snapshot.trucks.find(t=>!${JSON.stringify(initial)}.includes(t.id))`);assert.ok(created,'one ordinary truck really completes production');
+ await button('#blocknight-zoom-close');await evaluate('WarzoneTerrain.active(true);true');await mapTo(created.x,created.y);await button('#wt-select-trucks');await settle();
+ for(let i=0;i<100 && await evaluate('__warzoneCommands.report().buildingOpening');i++)await wait(100);
+ const before=await save('produced-truck-selected');const original=builders(before).find(d=>d.id===created.id);assert.ok(original.selected);
+ const ground=await openGround(before,[[10,39],[10,40],[9,40],[8,41]]);await tap(...await projectTile(...ground));
+ let moved=false;for(let i=0;i<100;i++){const live=await evaluate(`__warzoneCommands.report().snapshot.trucks.find(t=>t.id===${created.id})`);if(live && Math.hypot(live.x-created.x,live.y-created.y)>=1){moved=true;break;}await wait(150);}assert.ok(moved,'produced truck moves after Factory return');
+ const after=await save('produced-truck-moved');const actual=builders(after).find(d=>d.id===created.id);assert.ok(Math.hypot(actual.position[0]-original.position[0],actual.position[1]-original.position[1])>64);await layout('production-move-return');
+ fs.writeFileSync(path.join(out,'v53-production-results.json'),JSON.stringify({ordinaryProduction:true,newTruck:created.id,factory:local.id,selected:true,moved:true,returnRestored:true},null,2));console.log('PASS: one ordinary truck produced, selected and moved after Factory return');return;
+}
+if(action==='v53-layout'){
+ for(const page of ['build','design','factory','queue']){await button('#wt-open-'+page);await screenshot('page-'+page);if(page==='design')await typeName('Header keyboard return');await button('[data-action="back"]');await settle();await layout(page+'-return');}
+ await button('#blocknight-tech');await screenshot('page-research');await engineButton('.bn-tech-done');await layout('tech-return');
+ await button('#blocknight-help');await button('[data-ui-size="1.4"]');await screenshot('help-extra-large');await button('.wt-help-back');await layout('extra-large-return');
+ await button('#blocknight-help');await button('[data-ui-size="1"]');await button('.wt-help-back');await layout('standard-return');
+ await button('#wt-open-build');await button('[data-build-choice="GuardTower6"]');await button('[data-build="GuardTower6"]');
+ const deadline=Date.now()+20000;while(Date.now()<deadline && !await evaluate('__warzoneCommands.report().nativeToolReady&&!__warzoneCommands.report().page&&!__warzoneCommands.report().buildingOpening&&parent.document.getElementById("wt-build-busy").hidden'))await wait(100);
+ assert.ok(await evaluate('__warzoneCommands.report().nativeToolReady'));await screenshot('build-window-replacement');
+ const footer=await evaluate('parent.document.getElementById("wt-build-status").getBoundingClientRect().toJSON()');
+ assert.ok(footer.bottom>=Number(process.env.WZ_QA_EXPECT_HEIGHT)-20,'replacement covers the entire native truck strip');
+ await button('#wt-select-move');await settle();await layout('build-exit-return');
+ fs.writeFileSync(path.join(out,'v53-layout-results.json'),JSON.stringify({pages:['build','design','factory','queue','research','help'],keyboardReturn:true,extraLargeAndStandard:true,fullNativeStripCovered:true,footer,viewport:await evaluate('[parent.innerWidth,parent.innerHeight]')},null,2));
+ console.log('PASS: all relevant pages, keyboard, two control sizes, complete builder replacement and battle returns');return;
+}
+if(action==='v53-research-resume'){
+ const initial=JSON.parse(fs.readFileSync(path.join(out,'research-native-progress.json'),'utf8'));
+ assert.equal(Object.values(initial['struct.json']).find(s=>s.id===160169)['Research/target'],'R-Vehicle-Prop-Hover');
+ assert.ok(Object.values(initial['resstate.json']).find(r=>r.name==='R-Vehicle-Prop-Hover').currentPoints[0]>0,'native points confirm real progress');
+ if(await evaluate('__blockNightResearch.report().open'))await engineButton('.bn-tech-done');
+ await layout('research-battle-return');await button('#blocknight-tech');
+ const reopened=await evaluate('__blockNightResearch.report()');
+ assert.ok(['Hover Propulsion','Medium Body - Cobra'].includes(reopened.labs[0].topicName) || (reopened.labs[0].idle && reopened.completedEvents>=3),'native research continues or completes through return');
+ assert.deepEqual(reopened.queues[0],reopened.labs[0].topicName==='Hover Propulsion'?['Medium Body - Cobra']:[]);
+ await screenshot('research-return-persistent');await screenshot('research-next-started');await engineButton('.bn-tech-done');
+ for(const page of ['build','design','factory','queue']){await button('#wt-open-'+page);if(page==='design')await typeName('Viewport return check');await button('[data-action="back"]');await settle();await layout('research-during-'+page+'-return');}
+ const deadline=Date.now()+140000;
+ while(Date.now()<deadline && await evaluate('__blockNightResearch.report().labs[0].topicName==="Hover Propulsion"'))await wait(250);
+ assert.notEqual(await evaluate('__blockNightResearch.report().labs[0].topicName'),'Hover Propulsion');
+ await button('#blocknight-tech');await screenshot('research-next-started');const advanced=await evaluate('__blockNightResearch.report()');
+ assert.deepEqual(advanced.queues[0],[]);assert.ok(advanced.completedEvents>=2,'both independent first jobs completed');
+ await engineButton('.bn-tech-done');const complete=await save('research-native-advanced');
+ const results=Object.values(complete['resstate.json']);
+ assert.equal(results.find(r=>r.name==='R-Vehicle-Prop-Hover').researched[0]&4,4);
+ assert.ok(Object.values(complete['struct.json']).find(s=>s.id===160169)['Research/target']==='R-Vehicle-Body05' || results.some(r=>r.name==='R-Vehicle-Body05' && (r.researched[0]&4)),'queued Cobra starts or completes after Hover');
+ assert.ok(!results.some(r=>r.name==='R-Vehicle-Engine03' && (r.currentPoints[0]>0 || r.researched[0]&4)),'removed waiting job never starts');
+ await layout('research-completed-return');
+ fs.writeFileSync(path.join(out,'v53-research-resume-results.json'),JSON.stringify({resumedAfterCSSRoundingAssertion:true,immediateStartAndQueueScreenshot:'research-active-and-ordered-queue.png',nativeProgress:true,queueRemoval:true,twoLabs:true,orderedAdvance:true,repeatedKeyboardAndPageReturns:true,advanced},null,2));
+ console.log('PASS: same native research fixture resumed after CSS rounding assertion; progress, queue removal, two labs, native ordered advance and repeated returns verified');return;
+}
+if(action==='v53-research'){
+ const until=async(test,message,ms=10000)=>{const deadline=Date.now()+ms;while(Date.now()<deadline){if(await test())return;await wait(150);}throw Error(message);};
+ const openTech=async()=>{await button('#blocknight-tech');await until(()=>evaluate('__blockNightResearch.report().open'),'Research did not open');};
+ await openTech();
+ let cards=await evaluate('[...document.querySelectorAll("[data-topic-index]")].slice(0,6).map(e=>({index:Number(e.dataset.topicIndex),name:e.querySelector("strong").textContent}))');
+ assert.ok(cards.length>=4);
+ const hover=cards.find(c=>c.name==='Hover Propulsion');if(hover)cards=[hover,...cards.filter(c=>c!==hover)];
+ const choose=async name=>{const index=await evaluate(`(()=>{const e=[...document.querySelectorAll('[data-topic-index]')].find(e=>e.querySelector('strong').textContent===${JSON.stringify(name)});if(!e)throw Error('Technology missing');e.scrollIntoView({block:'nearest'});return e.dataset.topicIndex})()`);await engineButton(`[data-topic-index="${index}"]`);};
+ await choose(cards[0].name);
+ await engineButton('.bn-tech-assign');
+ await until(()=>evaluate('__blockNightResearch.report().labs[0].idle===false && !__blockNightResearch.report().runner'),'Research must start while its page is still open');
+ for(const card of cards.slice(1,3)){await choose(card.name);await engineButton('.bn-tech-assign');await until(()=>evaluate('!__blockNightResearch.report().runner'),'Queue addition did not sync');}
+ let first=await evaluate('__blockNightResearch.report()');
+ assert.equal(first.labs[0].topicName,cards[0].name);assert.deepEqual(first.queues[0],cards.slice(1,3).map(c=>c.name));
+ assert.ok(Number.isFinite(first.labs[0].remainingSeconds),'native simulation must provide an estimate');
+ await screenshot('research-active-and-ordered-queue');
+ await engineButton('[data-queue-index="1"]');await until(()=>evaluate('!__blockNightResearch.report().runner'),'Queue removal did not sync');
+ assert.deepEqual(await evaluate('__blockNightResearch.report().queues[0]'),[cards[1].name]);
+ await engineButton('[data-lab="1"]');await choose(cards[3].name);await engineButton('.bn-tech-assign');
+ await until(()=>evaluate('!__blockNightResearch.report().runner && !__blockNightResearch.report().labs[1].idle'),'Second lab did not start');
+ await engineButton('[data-lab="0"]');
+ await until(async()=>await evaluate('__blockNightResearch.report().labs[0].remainingSeconds')<first.labs[0].remainingSeconds,'Countdown did not advance in game time');
+ const live=await evaluate('__blockNightResearch.report()');await screenshot('research-live-countdown');
+ await engineButton('.bn-tech-done');await until(()=>evaluate('!__blockNightResearch.report().open'),'Research did not close');
+ const native=await save('research-native-progress');
+ await layout('research-battle-return');await openTech();
+ assert.equal(await evaluate('__blockNightResearch.report().labs[0].topicName'),cards[0].name);
+ assert.deepEqual(await evaluate('__blockNightResearch.report().queues[0]'),[cards[1].name]);
+ await screenshot('research-return-persistent');await engineButton('.bn-tech-done');
+ // Exercise related page and keyboard returns while real research continues.
+ for(const page of ['build','design','factory','queue']){await button('#wt-open-'+page);if(page==='design')await typeName('Viewport return check');await button('[data-action="back"]');await layout('research-during-'+page+'-return');}
+ await openTech();await choose(cards[2].name);
+ await until(()=>evaluate(`__blockNightResearch.report().labs[0].topicName===${JSON.stringify(cards[1].name)}`),'Ordered research did not advance after native completion',180000);
+ assert.equal(await evaluate('document.querySelector(".bn-tech-detail-name").textContent'),cards[2].name,'selected topic stays attached to its ID when the live list changes');
+ await screenshot('research-next-started');const advanced=await evaluate('__blockNightResearch.report()');
+ assert.ok(advanced.completedEvents>first.completedEvents);assert.deepEqual(advanced.queues[0],[]);
+ await engineButton('.bn-tech-done');const completed=await save('research-native-advanced');await layout('research-completed-return');
+ fs.writeFileSync(path.join(out,'v53-research-results.json'),JSON.stringify({startedWhileOpen:true,cards,first,live,advanced,nativeFiles:native.files,completionFiles:completed.files,queueRemoval:true,twoLabs:true,orderedAdvance:true,repeatedReturns:true},null,2));
+ console.log('PASS: immediate native research, live countdown, two labs, ordered waiting queue/removal, native completion/advance and keyboard/page returns');return;
+}
+if(action==='v53-baseline-build'){
+ if(!await evaluate('__warzoneCommands.isOpen()'))await button('#wt-open-build');
+ await button('[data-build-choice="GuardTower6"]');await button('[data-build="GuardTower6"]');
+ for(let i=0;i<100;i++){if(await evaluate('__warzoneCommands.report().nativeToolReady'))break;await wait(100);}
+ await screenshot('baseline-build-overlap');await evaluate('__warzoneCommands.selectMode()');return;
+}
+if(action==='v53-baseline'){
+ await layout('baseline-header');
+ await button('#blocknight-tech');await engineButton('.bn-tech-assign');
+ await wait(2000);await screenshot('baseline-research-queued');
+ const before=await evaluate('__blockNightResearch.report()');
+ await engineButton('.bn-tech-done');await wait(1600);await button('#blocknight-tech');
+ await screenshot('baseline-research-active');const after=await evaluate('__blockNightResearch.report()');
+ await engineButton('.bn-tech-done');await button('#wt-open-build');
+ await button('[data-build-choice="GuardTower6"]');await button('[data-build="GuardTower6"]');
+ await wait(1500);await screenshot('baseline-build-overlap');
+ fs.writeFileSync(path.join(out,'v53-baseline-results.json'),JSON.stringify({before,after},null,2));
+ return;
+}
 if(action==='interface-layout'){
  for(const page of ['build','design','factory','queue']){await button('#wt-open-'+page);const rect=await evaluate('parent.document.getElementById("wt-command-pages").getBoundingClientRect().toJSON()');assert.ok(rect.top>=0&&rect.bottom<=Number(process.env.WZ_QA_EXPECT_HEIGHT),JSON.stringify(rect));await screenshot('50-'+page);await button('[data-action="back"]');await layout('51-'+page+'-return');}
  await button('#blocknight-tech');await screenshot('52-research');await engineButton('.bn-tech-done');await layout('53-research-return');fs.writeFileSync(path.join(out,'interface-layout-results.json'),JSON.stringify({pages:['build','design','factory','queue','research'],returns:true,headerStable:true},null,2));console.log('PASS: screenshot-aspect command screens and stable header after all returns');return;
@@ -220,6 +348,8 @@ if(action==='tactical-large-production'){
   if(!ready){await screenshot('FAILED-build-tool');console.log(await evaluate('parent.document.getElementById("wt-command-notice").textContent'));}
   assert.ok(ready,'PLACE activates the chosen native tool and returns to battle');
   const before=await save('03-selected-native-trucks'),selected=builders(before).filter(d=>d.selected);assert.ok(selected.length>=2,'all nearby constructors are selected');
+  const replacement=await evaluate(`(()=>{const d=parent.document,e=d.getElementById('wt-build-status'),r=e.getBoundingClientRect(),c=d.getElementById('wt-field-centre').getBoundingClientRect();return{rect:r.toJSON(),console:c.toJSON(),opaque:getComputedStyle(e).backgroundColor,active:e.classList.contains('native-building'),buttons:[...e.querySelectorAll('button')].filter(b=>b.getClientRects().length).map(b=>{const p=b.getBoundingClientRect();return d.elementFromPoint(p.x+p.width/2,p.y+p.height/2)?.closest('button')===b;})}})()`);
+  assert.equal(replacement.active,true);assert.ok(replacement.rect.left>=replacement.console.right);assert.equal(replacement.opaque,'rgb(7, 23, 29)');assert.ok(replacement.buttons.every(Boolean));
   await screenshot('03-selected-native-trucks');
   const {sites,points}=await visibleBuildSites(3,true);for(const p of points)await tap(...p);
   const queued=await save('04-native-queued'),plans=[...buildPlan(queued)];await screenshot('04-native-blueprints');

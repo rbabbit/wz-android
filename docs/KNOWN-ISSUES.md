@@ -1,5 +1,14 @@
 # Known issues and verification limits
 
+v5.3 fixes the reported header clipping protection, live research/ordered queue
+visibility and overlapping builder window. The exact delivery APK passed the
+finite emulator flows at 1280×576, 1080×600 and 1600×720 in
+[the v5.3 report](../qa/v5.3/REPORT.md). Research time/progress are labelled
+estimates based on simulation time and upgraded lab rates, with native
+completion authoritative. Native UI scale was 100%; wrapper control sizes
+Standard and Extra large were checked. The physical/HQ/audio/Save-Load limits
+below remain.
+
 v5.2 implements the command-page redesign, top BUILD structure choices, MORE
 removal, integrated component buttons, stable header and native selection/queue
 fixes. Both emulator sizes passed the finite flows in [the v5.2 report](../qa/v5.2/REPORT.md).

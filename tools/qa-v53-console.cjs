@@ -1,0 +1,17 @@
+'use strict';
+const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto'),{execFileSync}=require('node:child_process'),{adb}=require('./android-sdk.cjs');
+const root=path.resolve(__dirname,'..'),device=process.env.WZ_QA_DEVICE||'emulator-5554';
+const run=(...args)=>execFileSync(adb,['-s',device,...args],{encoding:'utf8',maxBuffer:24*1024*1024,timeout:20000}).trim();
+const pid=run('shell','pidof','com.rbabbit.warzonetowers');
+const logs=run('logcat','-d','--pid='+pid);
+const scriptExceptions=logs.split('\n').filter(line=>/Uncaught exception calling function|Uncaught (TypeError|ReferenceError|SyntaxError)|ReferenceError|SyntaxError/.test(line));
+const expression='JSON.stringify({bridgeErrors:__blockNightResearch.report().bridgeErrors,errorLog:window.errorLog||[],viewport:[parent.innerWidth,parent.innerHeight]})';
+const observed=JSON.parse(execFileSync(process.execPath,[path.join(__dirname,'cdp-evaluate.cjs'),fs.readFileSync(path.join(__dirname,'live-cdp-url.txt'),'utf8').trim(),expression],{encoding:'utf8',timeout:15000}).trim());
+const apkSHA256=crypto.createHash('sha256').update(fs.readFileSync(path.join(root,'app/build/outputs/apk/debug/app-debug.apk'))).digest('hex');
+const installedPath=run('shell','pm','path','com.rbabbit.warzonetowers').slice(8);
+const installedSHA256=run('shell','sha256sum',installedPath).split(/\s/)[0];
+if(installedSHA256!==apkSHA256)throw Error('Installed APK differs from delivery candidate');
+const report={apkSHA256,installedSHA256,pid,scriptExceptions,...observed,checkedAt:new Date().toISOString()};
+fs.writeFileSync(path.join(root,'qa/v5.3/console-check.json'),JSON.stringify(report,null,2)+'\n');
+console.log(JSON.stringify(report,null,2));
+if(scriptExceptions.length||observed.bridgeErrors)process.exitCode=1;

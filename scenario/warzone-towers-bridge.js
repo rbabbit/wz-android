@@ -9,6 +9,64 @@ var blockNightV31LastZoomNonce = "";
 var blockNightV31ZoomDistances = { close: 1600, battle: 2600, map: 3600 };
 var blockNightV32LastQueueNonce = "";
 var warzoneTowersLastControlNonce = "";
+var warzoneTowersLabResearch = {};
+
+// The public scripting API exposes total research points and upgraded lab
+// rates, but not currentPoints. Report a labelled estimate in simulation time;
+// native topic/idle/completion state remains authoritative.
+function warzoneTowersResearchProgress(lab, topic, assignment)
+{
+	if (!topic || topic.done || !assignment) return {};
+	// Stats and Upgrades are keyed by display name, not the structure ID.
+	const statName = Object.keys(Stats.Building).find(function (name) { return Stats.Building[name].Id === "A0ResearchFacility"; });
+	const upgrade = Upgrades[selectedPlayer].Building[statName];
+	if (!upgrade) return {};
+	const rate = Number(upgrade.ResearchPoints || 0) + Number(upgrade.ModuleResearchPoints || 0) * Number(lab.modules || 0);
+	if (!(rate > 0)) return {};
+	if (typeof assignment.estimatePoints !== "number") assignment.estimatePoints = 0;
+	if (typeof assignment.estimateTick !== "number") assignment.estimateTick = assignment.assignedAt;
+	if (!assignment.estimatePaid && (playerPower(selectedPlayer) >= topic.power || queuedPower(selectedPlayer) === 0)) assignment.estimatePaid = true;
+	if (assignment.estimatePaid) assignment.estimatePoints += Math.max(0, gameTime - assignment.estimateTick) * rate / 1000;
+	assignment.estimateTick = gameTime;
+	return {
+		remainingSeconds: Math.max(0, Math.ceil((topic.points - assignment.estimatePoints) / rate)),
+		estimatedProgress: Math.min(0.99, assignment.estimatePoints / Math.max(1, topic.points)),
+		waitingPower: !assignment.estimatePaid,
+		researchRate: rate
+	};
+}
+
+// Override the original snapshot in the custom scenario, preserving the
+// packaged engine and its research completion/queue events.
+function blockNightEmitResearchSnapshotV23()
+{
+	const topics = blockNightV28AvailableResearch().map(function (topic, nativeIndex) {
+		return { id: topic.id, name: topic.fullname, power: topic.power, points: topic.points,
+			started: topic.started, done: topic.done, category: blockNightResearchCategory(topic), nativeIndex: nativeIndex };
+	});
+	const live = {};
+	const labs = enumStruct(selectedPlayer, RESEARCH_LAB).filter(function (lab) { return lab.status === BUILT; }).reverse().map(function (lab, nativeIndex) {
+		const key = String(lab.id);
+		live[key] = true;
+		let assignment = warzoneTowersLabResearch[key] || blockNightLabTopics[key] || null;
+		const topic = assignment ? getResearch(assignment.topicId, selectedPlayer) : null;
+		// An accepted network research order can temporarily report idle. Keep
+		// its assignment until the topic completes; do not erase it after 2.5s.
+		const active = Boolean(topic && !topic.done && assignment);
+		const idle = !active && structureIdle(lab);
+		if (topic && topic.done) { delete warzoneTowersLabResearch[key]; delete blockNightLabTopics[key]; assignment = null; }
+		const result = { id: lab.id, nativeIndex: nativeIndex, idle: idle, modules: lab.modules, health: lab.health,
+			topicId: topic && !topic.done ? topic.id : "", topicName: topic && !topic.done ? topic.fullname : "" };
+		const progress = idle ? {} : warzoneTowersResearchProgress(lab, topic, assignment);
+		Object.keys(progress).forEach(function (name) { result[name] = progress[name]; });
+		return result;
+	});
+	Object.keys(warzoneTowersLabResearch).forEach(function (key) { if (!live[key]) delete warzoneTowersLabResearch[key]; });
+	const payload = { version: 53, gameTime: gameTime, power: playerPower(selectedPlayer), topics: topics, labs: labs };
+	// A one-second game clock keeps the countdown live even at constant power.
+	const stable = JSON.stringify({ topics: topics, labs: labs, power: payload.power, tick: Math.floor(gameTime / 1000) });
+	if (stable !== blockNightLastResearchSnapshot) { blockNightLastResearchSnapshot = stable; dump("BNTECH:" + JSON.stringify(payload)); }
+}
 
 function warzoneTowersDiagnosticSnapshot()
 {
@@ -246,6 +304,8 @@ function blockNightV28StartNext(labId)
 		return null;
 	}
 	if (!structureIdle(lab)) return null;
+	const current = warzoneTowersLabResearch[key];
+	if (current && !getResearch(current.topicId, selectedPlayer).done) return null;
 
 	while (queued.length)
 	{
@@ -261,7 +321,8 @@ function blockNightV28StartNext(labId)
 			queued.shift();
 			if (typeof blockNightLabTopics === "object")
 			{
-				blockNightLabTopics[key] = { topicId: topicId, assignedAt: gameTime };
+				blockNightLabTopics[key] = { topicId: topicId, assignedAt: gameTime, estimatePaid: playerPower(selectedPlayer) >= topic.power };
+				warzoneTowersLabResearch[key] = blockNightLabTopics[key];
 			}
 			return { labId: lab.id, topicId: topicId };
 		}
@@ -352,6 +413,7 @@ eventChat = function (from, to, message)
 
 eventResearched = function (research, structure, player)
 {
+	if (player === selectedPlayer && structure) delete warzoneTowersLabResearch[String(structure.id)];
 	blockNightV28OriginalEventResearched(research, structure, player);
 	if (gameTime > 1000 && player === selectedPlayer && structure)
 	{

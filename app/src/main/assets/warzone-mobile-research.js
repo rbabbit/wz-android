@@ -2,7 +2,7 @@
 (() => {
   "use strict";
 
-  const VERSION = 35;
+  const VERSION = 36;
   const QUEUE_COMMAND_PATH = "/data/mp/tests/blocknight-queue-command.json";
   const CATEGORIES = ["ALL", "WEAPONS", "DEFENCE", "VEHICLES", "CYBORG", "SYSTEMS", "STRUCTURES"];
 
@@ -12,7 +12,7 @@
     opening: false, open: false, assigning: false,
     activeLab: 0, activeCategory: "ALL", baseWidth: 0, baseHeight: 0,
     savedCanvasStyle: null, savedHudVisibility: "", savedWaveVisibility: "", savedWavePriority: "", catalog: [], engineLabs: [],
-    lastSnapshotGameTime: null, playerPower: 0, pendingCommand: null,
+    lastSnapshotGameTime: null, playerPower: 0, pendingCommand: null, topicHistory: {},
     labQueues: {}, syncedQueues: {}, dirtyLabs: {}, runner: null, statusTimer: null,
     assignmentError: "", selectedTopicIndex: null, pendingClose: false, syncBlocked: false,
     opens: 0, closes: 0, topicSelections: 0, labSelections: 0,
@@ -100,7 +100,7 @@
       const queued = queue.find(topic => topic.id === topicId);
       if (queued) return { ...queued };
     }
-    return state.runner?.topics?.find(topic => topic.id === topicId) || null;
+    return state.runner?.topics?.find(topic => topic.id === topicId) || state.topicHistory[topicId] || null;
   }
 
   function applyEngineQueueState(payload) {
@@ -162,6 +162,16 @@
         state.assigning = false;
         state.queueSyncs += 1;
         const started = Array.isArray(ack.started) ? ack.started : [];
+        // A started item belongs in NOW RESEARCHING, not in the waiting list.
+        // Preserve edits made while this atomic command was in flight.
+        for (const assignment of started) {
+          const lab = state.engineLabs.find(value => value.id === Number(assignment.labId));
+          const topic = knownTopic(String(assignment.topicId));
+          const key = String(assignment.labId);
+          state.labQueues[key] = queueForLab(assignment.labId).filter(value => value.id !== assignment.topicId);
+          if (lab) Object.assign(lab, { idle: false, topicId: assignment.topicId, topicName: topic?.name || assignment.topicId });
+          updateDirtyLab(assignment.labId);
+        }
         state.directAssignments += started.length;
         const lastStarted = started.length ? knownTopic(String(started[started.length - 1].topicId)) : null;
         if (lastStarted) {
@@ -177,6 +187,7 @@
         } else if (state.pendingClose) {
           finishClose(true);
         }
+        processQueues();
         return;
       }
       if (text.includes("BNTECHDONE:")) {
@@ -191,6 +202,9 @@
       if (!text.includes("BNTECH:")) return;
       const snapshot = parsePayload(text, "BNTECH:");
       if (!snapshot || !Array.isArray(snapshot.topics)) return;
+      const previousCatalog = JSON.stringify(state.catalog);
+      const previousAssignments = JSON.stringify(state.engineLabs.map(lab => [lab.id, lab.idle, lab.topicId]));
+      const selectedTopicId = state.catalog.find(topic => topic.nativeIndex === state.selectedTopicIndex)?.id;
       state.catalog = snapshot.topics.map((topic, snapshotIndex) => ({
         id: String(topic.id || ""), name: String(topic.name || topic.id || "Unknown technology"),
         power: Number(topic.power || 0), points: Number(topic.points || 0),
@@ -198,16 +212,22 @@
         nativeIndex: Number.isFinite(Number(topic.nativeIndex)) ? Number(topic.nativeIndex) : snapshotIndex,
         category: categoryFor(topic)
       }));
+      state.selectedTopicIndex = state.catalog.find(topic => topic.id === selectedTopicId)?.nativeIndex ?? null;
+      for (const topic of state.catalog) state.topicHistory[topic.id] = topic;
       state.engineLabs = Array.isArray(snapshot.labs) ? snapshot.labs.map((lab, snapshotIndex) => ({
         id: Number(lab.id), nativeIndex: Number.isFinite(Number(lab.nativeIndex)) ? Number(lab.nativeIndex) : snapshotIndex,
         idle: Boolean(lab.idle), modules: Number(lab.modules || 0), health: Number(lab.health || 0),
-        topicId: String(lab.topicId || ""), topicName: String(lab.topicName || "")
+        topicId: String(lab.topicId || ""), topicName: String(lab.topicName || ""),
+        remainingSeconds: Number.isFinite(lab.remainingSeconds) ? lab.remainingSeconds : null,
+        estimatedProgress: Number(lab.estimatedProgress || 0), waitingPower: Boolean(lab.waitingPower)
       })) : [];
       if (state.activeLab >= state.engineLabs.length) state.activeLab = Math.max(0, state.engineLabs.length - 1);
       state.playerPower = Number(snapshot.power || 0);
       state.lastSnapshotGameTime = Number(snapshot.gameTime || 0);
       state.bridgeSyncs += 1;
-      renderAll();
+      // A countdown tick must not replace a technology button under a finger.
+      if (previousCatalog !== JSON.stringify(state.catalog) || previousAssignments !== JSON.stringify(state.engineLabs.map(lab => [lab.id, lab.idle, lab.topicId]))) renderAll();
+      else { renderLabs(); renderSummary(); }
     } catch (_) { state.bridgeErrors += 1; }
   }
   window.addEventListener("blocknight-engine-output", handleEngineOutput);
@@ -296,7 +316,8 @@
             <div class="bn-tech-hero"><img class="bn-tech-detail-image" src="research-icons/Research%20Module.gif" alt=""></div>
             <div class="bn-tech-detail-copy"><strong class="bn-tech-detail-name">SELECT A TECHNOLOGY</strong><small class="bn-tech-detail-category">LIVE WARZONE RESEARCH</small><b class="bn-tech-detail-status">WAITING</b><dl><div><dt>RESEARCH POINTS</dt><dd class="bn-tech-detail-points">—</dd></div><div><dt>POWER COST</dt><dd class="bn-tech-detail-cost">—</dd></div></dl></div>
           </div>
-          <section class="bn-tech-queue-panel"><header><b class="bn-tech-queue-title">LAB 1 QUEUE</b><span class="bn-tech-queue-count">EMPTY</span></header><ol class="bn-tech-queue-list"></ol></section>
+          <section class="bn-tech-active" aria-live="polite"><header>NOW RESEARCHING <b class="bn-tech-active-lab">LAB 1</b></header><strong class="bn-tech-active-name">Ready for research</strong><div class="bn-tech-progress"><i></i></div><small class="bn-tech-time">Choose a technology to start.</small></section>
+          <section class="bn-tech-queue-panel"><header><b class="bn-tech-queue-title">UP NEXT · LAB 1</b><span class="bn-tech-queue-count">EMPTY</span></header><ol class="bn-tech-queue-list"></ol></section>
           <p class="bn-tech-error" role="status"></p>
           <div class="bn-tech-actions">
             <div><span>SELECTED LAB</span><b class="bn-tech-selected-lab">LAB 1</b><small class="bn-tech-lab-state">Waiting for the engine…</small></div>
@@ -318,6 +339,10 @@
       .bn-tech-browser{display:flex;flex-direction:column;padding:7px}.bn-tech-browser-head{display:flex;align-items:center;justify-content:space-between;height:28px;padding:0 3px 6px;border-bottom:1px solid #112a32}.bn-tech-browser-head h2{color:#d7e4e7;font-size:12px}.bn-tech-browser-head span{color:#7c969c;font-size:7px;font-weight:900;letter-spacing:.7px}.bn-tech-browser-head span b{color:var(--green);font-size:9px}.bn-tech-list{min-height:0;overflow-y:auto;padding:5px 2px 2px;display:flex;flex-direction:column;gap:4px;scrollbar-color:#2a5964 transparent}.bn-tech-card{position:relative;display:grid;grid-template-columns:56px minmax(0,1fr) 56px 12px;align-items:center;gap:8px;flex:0 0 60px;min-width:0;padding:4px 8px 4px 4px;border-radius:6px!important;text-align:left;color:#dce8ea;background:#0a1a20;outline:1px solid #1b3740}.bn-tech-card:after{content:"";width:6px;height:6px;border-top:1px solid #55d9ee;border-right:1px solid #55d9ee;transform:rotate(45deg)}.bn-tech-card.selected{background:#0d2932;outline:2px solid var(--cyan);box-shadow:0 0 14px rgba(83,223,245,.14)}.bn-tech-card:active{transform:translateY(1px)}.bn-tech-card:disabled{opacity:.55}.bn-tech-icon{display:grid;place-items:center;width:52px;height:52px;overflow:hidden;border:1px solid #20505c;border-radius:5px;background:#071319}.bn-tech-icon img{width:60px;height:60px;object-fit:contain}.bn-tech-copy{min-width:0}.bn-tech-copy strong,.bn-tech-copy small{display:block;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}.bn-tech-copy strong{color:#eef6f7;font-size:11px;line-height:15px}.bn-tech-copy small{margin-top:3px;color:#69a3af;font-size:7px;font-weight:900;letter-spacing:.4px}.bn-tech-ready{text-align:right}.bn-tech-ready b{display:block;color:var(--green);font-size:8px;letter-spacing:.7px}.bn-tech-ready small{display:block;margin-top:4px;color:#d7e2e3;font-size:8px;font-weight:900}.bn-tech-empty{min-height:160px;display:grid;place-items:center;padding:20px;text-align:center;color:#789096}.bn-tech-empty b{display:block;color:#c2d2d5;font-size:11px}.bn-tech-empty small{font-size:8px}
       .bn-tech-detail{display:flex;flex-direction:column;padding:7px}.bn-tech-detail>h2{height:28px;padding:0 3px 6px;border-bottom:1px solid #112a32;color:#d7e4e7;font-size:12px}.bn-tech-detail-card{display:grid;grid-template-columns:145px minmax(0,1fr);gap:10px;margin-top:6px;padding:6px;border:1px solid #1d3a43;border-radius:6px;background:#09191f}.bn-tech-hero{display:grid;place-items:center;height:126px;overflow:hidden;border:1px solid #173a45;border-radius:5px;background:#061116}.bn-tech-detail-image{width:145px;height:145px;object-fit:contain}.bn-tech-detail-copy{min-width:0;padding:5px 2px}.bn-tech-detail-name{display:block;color:#f1f6f6;font-size:14px;line-height:17px}.bn-tech-detail-category{display:block;margin-top:3px;color:#73a5af;font-size:8px;font-weight:900;letter-spacing:.5px}.bn-tech-detail-status{display:inline-block;margin-top:8px;padding:4px 12px;border-radius:4px;color:#07120b;background:var(--green);font-size:8px;letter-spacing:.7px}.bn-tech-detail-copy dl{margin:9px 0 0;padding-top:7px;border-top:1px solid #173039}.bn-tech-detail-copy dl div{display:flex;align-items:center;justify-content:space-between;margin-top:4px}.bn-tech-detail-copy dt{color:#7f999f;font-size:7px}.bn-tech-detail-copy dd{margin:0;color:#9eeafa;font-size:10px;font-weight:900}.bn-tech-queue-panel{height:74px;margin-top:7px;padding:6px 8px;border:1px solid #1b3e49;border-radius:5px;background:#07171d}.bn-tech-queue-panel header{display:flex;align-items:center;justify-content:space-between}.bn-tech-queue-title{color:#66d9ec;font-size:8px;letter-spacing:.8px}.bn-tech-queue-count{color:#6f8d94;font-size:7px;font-weight:900}.bn-tech-queue-list{height:47px;margin:4px 0 0;padding:0;overflow-y:auto;list-style:none}.bn-tech-queue-empty{padding-top:12px;color:#658087;font-size:7px;text-align:center}.bn-tech-queue-item{display:grid;grid-template-columns:16px minmax(0,1fr) 20px;align-items:center;height:22px;border-top:1px solid #142e36;color:#c7d8db;font-size:7px}.bn-tech-queue-item:first-child{border-top:0}.bn-tech-queue-item b{color:#64e78d;font-size:8px}.bn-tech-queue-item span{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}.bn-tech-queue-remove{width:18px!important;height:18px!important;border-radius:3px!important;color:#e88989;background:#321317;outline:1px solid #68262b;font-size:10px!important}.bn-tech-error{min-height:18px;margin:4px 2px;color:#efa56f;font-size:7px;line-height:10px}.bn-tech-actions{margin-top:auto;padding-top:5px;border-top:1px solid #173039}.bn-tech-actions>div{display:grid;grid-template-columns:auto auto 1fr;align-items:baseline;gap:5px;margin:0 3px 5px}.bn-tech-actions span{color:#67b8c6;font-size:7px;font-weight:900;letter-spacing:.7px}.bn-tech-selected-lab{color:var(--green);font-size:9px}.bn-tech-lab-state{overflow:hidden;white-space:nowrap;text-overflow:ellipsis;color:#7f989e;font-size:7px;text-align:right}.bn-tech-actions button{width:100%;height:37px;border-radius:6px!important;font-size:9px!important;font-weight:1000;letter-spacing:.6px}.bn-tech-assign{color:#07120b;background:var(--green);outline:1px solid #adffc3}.bn-tech-assign:disabled{color:#70827a;background:#173027;outline-color:#294d3d}
       @media(max-width:800px){.bn-tech-header{gap:7px;padding-left:8px;padding-right:8px}.bn-tech-brand{min-width:180px}.bn-tech-brand strong{font-size:15px}.bn-tech-live{padding:0 8px}.bn-tech-main{grid-template-columns:155px minmax(0,1fr) 230px;gap:5px;padding-left:5px;padding-right:5px}.bn-tech-detail-card{grid-template-columns:82px 1fr}.bn-tech-hero{height:105px}.bn-tech-detail-image{width:105px;height:105px}.bn-tech-card{grid-template-columns:45px minmax(0,1fr) 46px 10px}.bn-tech-icon{width:42px;height:48px}.bn-tech-icon img{width:50px;height:50px}}
+    `;
+    style.textContent += `
+      .bn-tech-detail{overflow:hidden}.bn-tech-detail-card{flex:none;max-height:145px}.bn-tech-active{flex:none;margin-top:7px;padding:9px;border:1px solid #28734c;border-radius:5px;background:#0b241b}.bn-tech-active header{display:flex;justify-content:space-between;color:#68e98f;font-size:8px;letter-spacing:.8px}.bn-tech-active-name{display:block;margin:6px 0;color:#e1f5e6;font-size:12px;line-height:15px;overflow-wrap:anywhere}.bn-tech-progress{height:5px;background:#193c2b;border-radius:3px;overflow:hidden}.bn-tech-progress i{display:block;height:100%;background:#68e98f;transition:width .6s linear}.bn-tech-time{display:block;margin-top:5px;color:#a6d8b6;font-size:9px}.bn-tech-queue-panel{height:auto;min-height:62px;flex:1;display:flex;flex-direction:column;overflow:hidden}.bn-tech-queue-list{height:auto;min-height:0;flex:1}.bn-tech-queue-item{min-height:25px;height:auto;grid-template-columns:16px minmax(0,1fr) 24px;font-size:9px;padding:3px 0}.bn-tech-queue-item span{white-space:normal;overflow-wrap:anywhere}.bn-tech-queue-remove{width:22px!important;height:22px!important}.bn-tech-error{min-height:0;flex:none}.bn-tech-actions{flex:none}.bn-tech-detail-card .bn-tech-hero{max-height:125px}.bn-tech-lab small{font-size:8px}.bn-tech-lab.running{height:41px}.bn-tech-lab.running small{white-space:normal;line-height:10px;max-height:20px;overflow:hidden}
+      @media(max-height:590px){.bn-tech-detail-card{max-height:98px}.bn-tech-detail-card .bn-tech-hero{height:82px}.bn-tech-detail-image{width:82px;height:82px}.bn-tech-detail-name{font-size:11px;line-height:13px}.bn-tech-detail-copy dl{display:none}.bn-tech-active{padding:7px}.bn-tech-active-name{font-size:11px;margin:4px 0}.bn-tech-error{margin:2px}.bn-tech-queue-panel{min-height:55px}.bn-tech-main .bn-tech-detail{padding:7px}}
     `;
     document.head.appendChild(style);
 
@@ -346,7 +371,10 @@
       if (button.classList.contains("bn-tech-done")) close(false);
       else if (button.dataset.lab !== undefined) selectLab(Number(button.dataset.lab));
       else if (button.dataset.category !== undefined) setCategory(button.dataset.category);
-      else if (button.dataset.topicIndex !== undefined) selectTopic(Number(button.dataset.topicIndex));
+      else if (button.dataset.topicId !== undefined) {
+        const topic = state.catalog.find(value => value.id === button.dataset.topicId);
+        if (topic) selectTopic(topic.nativeIndex);
+      }
       else if (button.dataset.queueLab !== undefined) removeQueuedTopic(Number(button.dataset.queueLab), Number(button.dataset.queueIndex));
       else if (button.classList.contains("bn-tech-assign")) assignSelectedTopic(button);
     });
@@ -563,7 +591,7 @@
   }
 
   function startQueueSync() {
-    if (state.runner || !state.open) return false;
+    if (state.runner) return false;
     const labIds = Object.keys(state.dirtyLabs).map(Number).filter(Number.isFinite);
     if (!labIds.length) return false;
     const labCommands = [];
@@ -572,7 +600,7 @@
       const topicIds = [];
       queueForLab(labId).forEach(queued => {
         const live = state.catalog.find(topic => topic.id === queued.id);
-        if (!live) return;
+        if (!live || activeLabForTopic(live.id)) return;
         topicIds.push(live.id);
         topics.push({ ...live });
       });
@@ -583,7 +611,7 @@
     const nonce = `${Date.now().toString(36)}-${state.queueAdds.toString(36)}`;
     const runner = {
       labIds, topics, nonce, timeoutId: null, startedAt: performance.now(),
-      background: false, transport: "atomic-file"
+      background: !state.open, transport: "atomic-file"
     };
     state.runner = runner;
     state.pendingCommand = runner;
@@ -601,7 +629,7 @@
   }
 
   function processQueues() {
-    if (state.runner || state.syncBlocked || !state.engineLabs.length || !state.open) return false;
+    if (state.runner || state.syncBlocked || !state.engineLabs.length) return false;
     return startQueueSync();
   }
 
@@ -626,6 +654,7 @@
     state.queueAdds += 1;
     state.assignmentError = `${topic.name} added to Lab ${lab.nativeIndex + 1}.`;
     renderAll();
+    processQueues();
     vibrate(12);
     return true;
   }
@@ -639,7 +668,7 @@
     state.syncBlocked = false;
     state.queueRemovals += 1;
     state.assignmentError = "";
-    renderAll(); vibrate(8); return true;
+    renderAll(); processQueues(); vibrate(8); return true;
   }
 
   function escapeHtml(value) {
@@ -692,7 +721,7 @@
       const queuedLabId = queuedLocation(topic.id);
       const queuedLab = state.engineLabs.find(lab => lab.id === queuedLabId);
       const status = active ? `LAB ${active.nativeIndex + 1} ACTIVE` : queuedLab ? `LAB ${queuedLab.nativeIndex + 1} QUEUED` : "READY";
-      return `<button class="bn-tech-card${topic.nativeIndex === state.selectedTopicIndex ? " selected" : ""}" type="button" role="listitem" data-topic-index="${topic.nativeIndex}"><span class="bn-tech-icon"><img src="${topicImage(topic)}" alt=""></span><span class="bn-tech-copy"><strong>${escapeHtml(topic.name)}</strong><small>${topic.category} · ${topic.points.toLocaleString()} RESEARCH PTS</small></span><span class="bn-tech-ready"><b>${status}</b><small>POWER ${topic.power.toLocaleString()}</small></span></button>`;
+      return `<button class="bn-tech-card${topic.nativeIndex === state.selectedTopicIndex ? " selected" : ""}" type="button" role="listitem" data-topic-id="${escapeHtml(topic.id)}" data-topic-index="${topic.nativeIndex}"><span class="bn-tech-icon"><img src="${topicImage(topic)}" alt=""></span><span class="bn-tech-copy"><strong>${escapeHtml(topic.name)}</strong><small>${topic.category} · ${topic.points.toLocaleString()} RESEARCH PTS</small></span><span class="bn-tech-ready"><b>${status}</b><small>POWER ${topic.power.toLocaleString()}</small></span></button>`;
     }).join("");
     list.querySelectorAll("img").forEach(image => image.addEventListener("error", () => {
       if (image.dataset.fallback) return;
@@ -712,6 +741,12 @@
     else if (lab?.topicName) labState = `Running · ${lab.topicName}`;
     else if (lab) labState = "Research in progress";
     shell.querySelector(".bn-tech-lab-state").textContent = labState;
+    shell.querySelector('.bn-tech-active-lab').textContent = `LAB ${state.activeLab + 1}`;
+    shell.querySelector('.bn-tech-active-name').textContent = lab && !lab.idle ? lab.topicName || 'Starting research…' : 'Ready for research';
+    const remaining = lab?.remainingSeconds;
+    const time = lab?.waitingPower ? 'Waiting for power · timer paused' : remaining === null || remaining === undefined ? 'Linking live research status…' : remaining > 0 ? `~${Math.floor(remaining / 60)}:${String(Math.ceil(remaining % 60)).padStart(2, '0')} left · estimated` : 'Finishing · waiting for engine confirmation';
+    shell.querySelector('.bn-tech-time').textContent = lab && !lab.idle ? time : 'Add a technology to start immediately.';
+    shell.querySelector('.bn-tech-progress i').style.width = `${lab && !lab.idle ? Math.min(99, Math.max(0, lab.estimatedProgress * 100)) : 0}%`;
     shell.querySelector(".bn-tech-error").textContent = state.assignmentError;
     shell.querySelector(".bn-tech-detail-name").textContent = topic?.name || "SELECT A TECHNOLOGY";
     shell.querySelector(".bn-tech-detail-category").textContent = topic ? `${topic.category} · LIVE WARZONE RESEARCH` : "LIVE WARZONE RESEARCH";
@@ -725,11 +760,16 @@
     const expectedSource = topic ? topicImage(topic) : "research-icons/Research%20Module.gif";
     if (!detailImage.src.endsWith(expectedSource)) detailImage.src = expectedSource;
     detailImage.onerror = () => { detailImage.onerror = null; detailImage.src = "research-icons/Research%20Module.gif"; };
-    shell.querySelector(".bn-tech-queue-title").textContent = `LAB ${state.activeLab + 1} QUEUE`;
+    shell.querySelector(".bn-tech-queue-title").textContent = `UP NEXT · LAB ${state.activeLab + 1}`;
     shell.querySelector(".bn-tech-queue-count").textContent = labQueue.length ? `${labQueue.length} ITEM${labQueue.length === 1 ? "" : "S"}` : "EMPTY";
-    shell.querySelector(".bn-tech-queue-list").innerHTML = labQueue.length ? labQueue.map((queued, index) => {
-      return `<li class="bn-tech-queue-item"><b>${index + 1}</b><span>${escapeHtml(queued.name)}</span><button class="bn-tech-queue-remove" type="button" data-queue-lab="${lab.id}" data-queue-index="${index}" aria-label="Remove ${escapeHtml(queued.name)}" ${state.pendingClose ? "disabled" : ""}>×</button></li>`;
-    }).join("") : `<li class="bn-tech-queue-empty">Select any available item to build this lab's queue.</li>`;
+    const queueList = shell.querySelector('.bn-tech-queue-list');
+    const queueSignature = JSON.stringify([lab?.id, labQueue.map(value => value.id), state.pendingClose, Boolean(state.runner?.labIds.includes(lab?.id))]);
+    if (queueList.dataset.signature !== queueSignature) {
+    queueList.dataset.signature = queueSignature;
+    queueList.innerHTML = labQueue.length ? labQueue.map((queued, index) => {
+      return `<li class="bn-tech-queue-item"><b>${index + 1}</b><span>${escapeHtml(queued.name)}</span><button class="bn-tech-queue-remove" type="button" data-queue-lab="${lab.id}" data-queue-index="${index}" aria-label="Remove ${escapeHtml(queued.name)}" ${state.pendingClose || state.runner?.labIds.includes(lab.id) ? "disabled" : ""}>×</button></li>`;
+    }).join("") : `<li class="bn-tech-queue-empty">No waiting technologies.</li>`;
+    }
     const assign = shell.querySelector(".bn-tech-assign");
     assign.textContent = queuedLab ? `ALREADY QUEUED · LAB ${queuedLab.nativeIndex + 1}` : active ? `RESEARCHING · LAB ${active.nativeIndex + 1}` : `ADD TO LAB ${state.activeLab + 1} QUEUE`;
     assign.disabled = state.pendingClose || !topic || !lab || Boolean(queuedLab || active);
@@ -759,6 +799,7 @@
       catalogCount: state.catalog.length, catalogSample: state.catalog.slice(0, 4).map(topic => topic.name),
       labCount: state.engineLabs.length, readyLabs: state.engineLabs.filter(lab => lab.idle).length,
       labIds: state.engineLabs.map(lab => lab.id), playerPower: state.playerPower,
+      labs: state.engineLabs.map(lab => ({...lab})),
       bridgeSyncs: state.bridgeSyncs, bridgeErrors: state.bridgeErrors,
       commandAcks: state.commandAcks, commandRejects: state.commandRejects,
       commandTimeouts: state.commandTimeouts,

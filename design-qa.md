@@ -2,7 +2,21 @@
 
 final result: passed
 
-## v5.2 tactical interface — current
+## v5.3 header and live queues — current
+
+APK SHA-256: `f9c9d4ad98d000eb933ff93b4f5018cb80c89face9c527b26ea6ea823ceb78b8`.
+
+The installed APK passed real research progress/completion and ordered queue
+advancement, native construction completion/preview exit, ordinary truck
+production and movement, and keyboard/menu returns. Screen and hit-target
+checks covered 1280×576, 1080×600 and 1600×720 with Standard and Extra large
+controls. The redundant truck window is covered by the construction panel;
+native queued blueprints are retained. Research times are labelled estimates.
+
+See [the v5.3 report](qa/v5.3/REPORT.md) and its delivery gate for exact evidence
+and the retained black-terrain, physical-device, HQ, audio and Save/Load limits.
+
+## v5.2 tactical interface — historical
 
 APK SHA-256: `2bc1fee640277eacacfd21f8c9d4b72fc19a23c304461f5c026efb0b71f20441`.
 

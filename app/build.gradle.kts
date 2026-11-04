@@ -10,8 +10,8 @@ android {
         applicationId = "com.rbabbit.warzonetowers"
         minSdk = 26
         targetSdk = 36
-        versionCode = 52
-        versionName = "5.2-tactical-interface"
+        versionCode = 53
+        versionName = "5.3-live-queues"
     }
 
     compileOptions {

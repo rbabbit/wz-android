@@ -100,7 +100,7 @@
     panel.addEventListener('click',onClick);panel.addEventListener('input',onInput);panel.addEventListener('change',onChange);
     panel.addEventListener('submit',event=>event.preventDefault());
     const hud=doc.createElement('div');hud.id='wt-build-status';hud.hidden=true;
-    hud.innerHTML=`<span id="wt-power">POWER —</span>${button('SELECTION','data-action="select-mode" id="wt-field-status"')}<span id="wt-placement-label"></span>${button('CHANGE','data-page="build"')}${button('DONE','data-action="cancel-placement"')}`;
+    hud.innerHTML=`<span id="wt-power">POWER —</span>${button('SELECTION','data-action="select-mode" id="wt-field-status"')}<span id="wt-placement-label"></span><span id="wt-builder-summary"></span>${button('CHANGE','data-page="build"')}${button('DONE','data-action="cancel-placement"')}`;
     hud.addEventListener('click',onClick);doc.body.appendChild(hud);
     const toast=doc.createElement('div');toast.id='wt-command-toast';toast.hidden=true;toast.setAttribute('role','status');doc.body.appendChild(toast);
     const ghost=document.createElementNS('http://www.w3.org/2000/svg','svg');ghost.id='wt-build-ghost';ghost.style.pointerEvents='none';
@@ -243,6 +243,9 @@
     if(state.nativeMenu==='build'&&state.nativeBuildPlaced&&!state.exitingBuild){const group=state.snapshot.trucks.filter(t=>state.nativeBuildGroup.includes(t.id));if(nativeConstructionFinished(state,group,state.snapshot.gameTime,Boolean(state.nativePendingSites.length||window.__kalaWarzoneTouch.report().pendingClicks))){state.nativeBuildSawWork=false;state.nativeBuildIdleAt=0;selectMode();notify('Placement closed. Tap a unit to select; tap ground to move.');}}
     const native=state.nativeMenu==='build'&&state.nativeToolReady,item=state.catalog?.buildings.find(b=>b.id===state.nativeItem);
     hud.classList.toggle('placing',Boolean(state.placement)||native);
+    hud.classList.toggle('native-building',native);
+    const participants=state.snapshot.trucks.filter(t=>state.nativeBuildGroup.includes(t.id));
+    element('wt-builder-summary').textContent=native?`${participants.length} TRUCKS · ${participants.filter(t=>t.building).length} BUILDING · GREEN PLANS = QUEUED`:'';
     element('wt-placement-label').textContent=state.placement?`${state.placement.name} · TAP TO QUEUE`:native&&item?`${item.name} · TAP TO QUEUE`:'';
     for(const b of hud.querySelectorAll('[data-action="cancel-placement"]'))b.hidden=!state.placement;
     for(const b of hud.querySelectorAll('[data-page="build"]'))b.hidden=!state.placement&&!native;

@@ -824,6 +824,18 @@ public final class MainActivity extends Activity {
     private static final class EngineWebView extends WebView {
         EngineWebView(Context context) { super(context); }
 
+        // The game is a fixed viewport. Android's focus reveal can scroll the
+        // WebView itself even while both HTML documents report scrollY == 0.
+        // Let HTML lists scroll, but never move the native viewport/header.
+        @Override
+        public void scrollTo(int x, int y) { super.scrollTo(0, 0); }
+
+        @Override
+        protected void onScrollChanged(int x, int y, int oldX, int oldY) {
+            super.onScrollChanged(x, y, oldX, oldY);
+            if (x != 0 || y != 0) super.scrollTo(0, 0);
+        }
+
         @Override
         public void evaluateJavascript(String script, ValueCallback<String> callback) {
             String routed = "(() => {const f=document.getElementById('warzone-game-frame');"

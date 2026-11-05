@@ -95,11 +95,15 @@ function wtcmd_constructionState()
         const item=wtcmd_buildings[j.itemId];
         const target=structures.filter(function(s){return s.id===j.structureId;})[0];
         const live=target&&rows.filter(function(r){return r.id===target.id;})[0];
-        if(live){j.status=live.status;j.observed=true;j.structureId=target.id;j.progress=live.progress;j.remaining=live.remaining;j.workersActive=live.workers;return;}
+        if(live){j.idleAt=null;j.status=live.status;j.observed=true;j.structureId=target.id;j.progress=live.progress;j.remaining=live.remaining;j.workersActive=live.workers;return;}
         if(target&&target.status===BUILT&&(!j.parentId||target.modules>=j.targetModules)){j.status="done";j.completed=gameTime;return;}
         const assigned=trucks.filter(function(d){return j.workers.indexOf(d.id)>=0;});
         const orders=[DORDER_BUILD,DORDER_HELPBUILD,DORDER_LINEBUILD];if(typeof DORDER_BUILDMODULE!=="undefined")orders.push(DORDER_BUILDMODULE);
-        if(!assigned.length||(gameTime-j.created>2000&&assigned.every(function(d){return !orders.includes(d.order);}))) {j.status="interrupted";j.remaining=null;return;}
+        // Native FIFO handoff briefly reports idle before the next foundation
+        // exists. Require sustained simulation time, not one idle sample.
+        const idle=gameTime-j.created>2000&&assigned.every(function(d){return !orders.includes(d.order);});
+        if(!idle)j.idleAt=null;else if(j.idleAt==null)j.idleAt=gameTime;
+        if(!assigned.length||(idle&&gameTime-j.idleAt>=1200)) {j.status="interrupted";j.remaining=null;return;}
         j.status=wtcmd_nativeSites.some(function(a){return a!==j&&a.created<=j.created&&["building","waiting-power","waiting-trucks"].includes(a.status)&&a.workers.some(function(id){return j.workers.indexOf(id)>=0;});})?"queued":"travelling";
         j.remaining=null;
     });

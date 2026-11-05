@@ -3,7 +3,7 @@
 Full Android project for Warzone Towers, using the supplied
 WZmodTowerDefense-v4.7.0-a mod and TowerDefense2_m map. The editable project is
 at the repository root; open this folder in Android Studio.
-Current Android version: **5.9-single-tap-build (59)**.
+Current Android version: **5.10-build-response (60)**.
 
 The original mod owns all 30 timed rounds, enemy templates, ranks, research
 delay, per-kill power rewards and HQ objective. Preparation lasts three minutes.
@@ -28,6 +28,13 @@ it clears selection and activates no tool. Tap clear terrain to append native
 build orders. Exit
 keeps the orders. The queue shows live progress and approximate remaining build
 time from actual truck work; completion remains controlled by Warzone.
+
+v5.10 removes duplicate state requests, redundant selection and fixed input
+waits. Every item tap, including a repeated item, still gets a fresh native
+placement acknowledgement. Native world clicks keep their picking/input frame
+barriers. Exit during setup cancels late activation; a brief native FIFO idle
+gap no longer discards a queued site's progress display. See
+[the response and gameplay evidence](qa/v5.10/REPORT.md).
 
 The cards use existing Warzone research art and original engine-rendered build
 thumbnails. On compact screens, the bottom-left units icon expands the field

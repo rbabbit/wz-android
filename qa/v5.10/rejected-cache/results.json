@@ -1,0 +1,1157 @@
+{
+  "tag": "delivery",
+  "cases": [
+    {
+      "label": "first",
+      "item": "PillBox1",
+      "ms": 1173,
+      "events": [
+        {
+          "t": 245074.16500000097,
+          "type": "item-click",
+          "item": "PillBox1"
+        },
+        {
+          "t": 245128.70000000112,
+          "type": "ui",
+          "pending": "PillBox1",
+          "item": "",
+          "ready": false,
+          "opening": false,
+          "freeze": true,
+          "menu": ""
+        },
+        {
+          "t": 245130.75,
+          "type": "send",
+          "action": "state",
+          "nonce": "cmd-1793901551177-209"
+        },
+        {
+          "t": 245170.66500000097,
+          "type": "ui",
+          "pending": "PillBox1",
+          "item": "",
+          "ready": false,
+          "opening": false,
+          "freeze": false,
+          "menu": ""
+        },
+        {
+          "t": 245225.36500000022,
+          "type": "reply",
+          "action": "state",
+          "nonce": "cmd-1793901551177-209"
+        },
+        {
+          "t": 245232.11000000127,
+          "type": "send",
+          "action": "native-menu",
+          "menu": "build",
+          "nonce": "cmd-1793901551278-210"
+        },
+        {
+          "t": 245277.50500000082,
+          "type": "ui",
+          "pending": "PillBox1",
+          "item": "",
+          "ready": false,
+          "opening": true,
+          "freeze": false,
+          "menu": "build"
+        },
+        {
+          "t": 245335.69000000134,
+          "type": "reply",
+          "action": "native-menu",
+          "nonce": "cmd-1793901551278-210"
+        },
+        {
+          "t": 245337.60500000045,
+          "type": "native-tap",
+          "x": 56,
+          "y": 107,
+          "add": false
+        },
+        {
+          "t": 245408.93500000052,
+          "type": "ui",
+          "pending": "PillBox1",
+          "item": "",
+          "ready": false,
+          "opening": false,
+          "freeze": false,
+          "menu": "build"
+        },
+        {
+          "t": 245462.0700000003,
+          "type": "native-input-finished"
+        },
+        {
+          "t": 245462.30000000075,
+          "type": "native-tap",
+          "x": 102,
+          "y": 189,
+          "add": false
+        },
+        {
+          "t": 245591.83000000007,
+          "type": "native-input-finished"
+        },
+        {
+          "t": 245592.11000000127,
+          "type": "reply",
+          "action": "build-ready",
+          "nonce": "build-ready",
+          "generation": 8
+        },
+        {
+          "t": 245647.60500000045,
+          "type": "ui",
+          "pending": "PillBox1",
+          "item": "",
+          "ready": true,
+          "opening": false,
+          "freeze": false,
+          "menu": "build"
+        },
+        {
+          "t": 245744.00999999978,
+          "type": "ui",
+          "pending": "PillBox1",
+          "item": "PillBox1",
+          "ready": true,
+          "opening": false,
+          "freeze": false,
+          "menu": "build"
+        },
+        {
+          "t": 246241.54000000097,
+          "type": "ui",
+          "pending": "",
+          "item": "PillBox1",
+          "ready": true,
+          "opening": false,
+          "freeze": true,
+          "menu": "build"
+        },
+        {
+          "t": 246247.08999999985,
+          "type": "send",
+          "action": "state",
+          "nonce": "cmd-1793901552292-211"
+        }
+      ],
+      "interactiveMs": 1167
+    },
+    {
+      "label": "repeat",
+      "item": "PillBox1",
+      "ms": 104,
+      "events": [
+        {
+          "t": 247375.48500000127,
+          "type": "item-click",
+          "item": "PillBox1"
+        },
+        {
+          "t": 247377.91999999993,
+          "type": "send",
+          "action": "state",
+          "nonce": "cmd-1793901553423-214"
+        },
+        {
+          "t": 247416.31000000052,
+          "type": "ui",
+          "pending": "PillBox1",
+          "item": "PillBox1",
+          "ready": true,
+          "opening": false,
+          "freeze": true,
+          "menu": "build"
+        },
+        {
+          "t": 247418.89499999955,
+          "type": "reply",
+          "action": "state",
+          "nonce": "cmd-1793901553423-214"
+        },
+        {
+          "t": 247479.45000000112,
+          "type": "ui",
+          "pending": "",
+          "item": "PillBox1",
+          "ready": true,
+          "opening": false,
+          "freeze": true,
+          "menu": "build"
+        }
+      ],
+      "interactiveMs": 104
+    },
+    {
+      "label": "change",
+      "item": "GuardTower1",
+      "ms": 1327,
+      "events": [
+        {
+          "t": 248649.6400000006,
+          "type": "item-click",
+          "item": "GuardTower1"
+        },
+        {
+          "t": 248694.64499999955,
+          "type": "ui",
+          "pending": "GuardTower1",
+          "item": "PillBox1",
+          "ready": true,
+          "opening": false,
+          "freeze": true,
+          "menu": "build"
+        },
+        {
+          "t": 248695.8200000003,
+          "type": "send",
+          "action": "state",
+          "nonce": "cmd-1793901554742-218"
+        },
+        {
+          "t": 248773.4299999997,
+          "type": "ui",
+          "pending": "GuardTower1",
+          "item": "PillBox1",
+          "ready": true,
+          "opening": false,
+          "freeze": false,
+          "menu": "build"
+        },
+        {
+          "t": 248908.125,
+          "type": "reply",
+          "action": "state",
+          "nonce": "cmd-1793901554742-218"
+        },
+        {
+          "t": 248912.25500000082,
+          "type": "send",
+          "action": "native-menu",
+          "menu": "build",
+          "nonce": "cmd-1793901554958-219"
+        },
+        {
+          "t": 248965.16999999993,
+          "type": "ui",
+          "pending": "GuardTower1",
+          "item": "PillBox1",
+          "ready": false,
+          "opening": true,
+          "freeze": false,
+          "menu": "build"
+        },
+        {
+          "t": 249034.35500000045,
+          "type": "reply",
+          "action": "native-menu",
+          "nonce": "cmd-1793901554958-219"
+        },
+        {
+          "t": 249035.61000000127,
+          "type": "native-tap",
+          "x": 56,
+          "y": 339,
+          "add": false
+        },
+        {
+          "t": 249110.45500000007,
+          "type": "ui",
+          "pending": "GuardTower1",
+          "item": "PillBox1",
+          "ready": false,
+          "opening": false,
+          "freeze": false,
+          "menu": "build"
+        },
+        {
+          "t": 249191.78500000015,
+          "type": "native-input-finished"
+        },
+        {
+          "t": 249192.06000000052,
+          "type": "native-tap",
+          "x": 102,
+          "y": 373,
+          "add": false
+        },
+        {
+          "t": 249348.58999999985,
+          "type": "native-input-finished"
+        },
+        {
+          "t": 249348.79000000097,
+          "type": "reply",
+          "action": "build-ready",
+          "nonce": "build-ready",
+          "generation": 9
+        },
+        {
+          "t": 249426.46499999985,
+          "type": "ui",
+          "pending": "GuardTower1",
+          "item": "PillBox1",
+          "ready": true,
+          "opening": false,
+          "freeze": false,
+          "menu": "build"
+        },
+        {
+          "t": 249561.50500000082,
+          "type": "ui",
+          "pending": "GuardTower1",
+          "item": "GuardTower1",
+          "ready": true,
+          "opening": false,
+          "freeze": false,
+          "menu": "build"
+        },
+        {
+          "t": 249905.88000000082,
+          "type": "ui",
+          "pending": "",
+          "item": "GuardTower1",
+          "ready": true,
+          "opening": false,
+          "freeze": true,
+          "menu": "build"
+        },
+        {
+          "t": 249976.15000000037,
+          "type": "send",
+          "action": "state",
+          "nonce": "cmd-1793901556022-220"
+        }
+      ],
+      "interactiveMs": 1256
+    },
+    {
+      "label": "back",
+      "item": "PillBox1",
+      "ms": 1081,
+      "events": [
+        {
+          "t": 250983.8200000003,
+          "type": "item-click",
+          "item": "PillBox1"
+        },
+        {
+          "t": 251024.36000000127,
+          "type": "ui",
+          "pending": "PillBox1",
+          "item": "GuardTower1",
+          "ready": true,
+          "opening": false,
+          "freeze": true,
+          "menu": "build"
+        },
+        {
+          "t": 251025.4050000012,
+          "type": "send",
+          "action": "state",
+          "nonce": "cmd-1793901557071-223"
+        },
+        {
+          "t": 251094.23000000045,
+          "type": "ui",
+          "pending": "PillBox1",
+          "item": "GuardTower1",
+          "ready": true,
+          "opening": false,
+          "freeze": false,
+          "menu": "build"
+        },
+        {
+          "t": 251166.14499999955,
+          "type": "reply",
+          "action": "state",
+          "nonce": "cmd-1793901557071-223"
+        },
+        {
+          "t": 251169.72499999963,
+          "type": "send",
+          "action": "native-menu",
+          "menu": "build",
+          "nonce": "cmd-1793901557216-224"
+        },
+        {
+          "t": 251226.58999999985,
+          "type": "ui",
+          "pending": "PillBox1",
+          "item": "GuardTower1",
+          "ready": false,
+          "opening": true,
+          "freeze": false,
+          "menu": "build"
+        },
+        {
+          "t": 251231.12000000104,
+          "type": "reply",
+          "action": "native-menu",
+          "nonce": "cmd-1793901557216-224"
+        },
+        {
+          "t": 251233.66999999993,
+          "type": "native-tap",
+          "x": 56,
+          "y": 339,
+          "add": false
+        },
+        {
+          "t": 251289.84500000067,
+          "type": "ui",
+          "pending": "PillBox1",
+          "item": "GuardTower1",
+          "ready": false,
+          "opening": false,
+          "freeze": false,
+          "menu": "build"
+        },
+        {
+          "t": 251362.35500000045,
+          "type": "native-input-finished"
+        },
+        {
+          "t": 251362.70000000112,
+          "type": "native-tap",
+          "x": 102,
+          "y": 421,
+          "add": false
+        },
+        {
+          "t": 251524.64499999955,
+          "type": "native-input-finished"
+        },
+        {
+          "t": 251524.98000000045,
+          "type": "reply",
+          "action": "build-ready",
+          "nonce": "build-ready",
+          "generation": 10
+        },
+        {
+          "t": 251587.95000000112,
+          "type": "ui",
+          "pending": "PillBox1",
+          "item": "GuardTower1",
+          "ready": true,
+          "opening": false,
+          "freeze": false,
+          "menu": "build"
+        },
+        {
+          "t": 251720.66999999993,
+          "type": "ui",
+          "pending": "PillBox1",
+          "item": "PillBox1",
+          "ready": true,
+          "opening": false,
+          "freeze": false,
+          "menu": "build"
+        },
+        {
+          "t": 252062.9299999997,
+          "type": "ui",
+          "pending": "",
+          "item": "PillBox1",
+          "ready": true,
+          "opening": false,
+          "freeze": true,
+          "menu": "build"
+        },
+        {
+          "t": 252064.81500000134,
+          "type": "send",
+          "action": "state",
+          "nonce": "cmd-1793901558111-225"
+        }
+      ],
+      "interactiveMs": 1079
+    }
+  ],
+  "apkSHA256": "881a99399e50ffe6b83870323ab1fee47545ae4b5db39fbcbba778222c355ae3",
+  "installedSHA256": "881a99399e50ffe6b83870323ab1fee47545ae4b5db39fbcbba778222c355ae3",
+  "fixture": {
+    "viewport": [
+      1080,
+      600
+    ],
+    "trucks": [
+      {
+        "id": 164497,
+        "x": 57,
+        "y": 8,
+        "z": 2,
+        "selected": true,
+        "order": 0,
+        "action": 0,
+        "rate": 9,
+        "building": false,
+        "queued": 0
+      }
+    ],
+    "gameTime": 174502
+  },
+  "trace": [
+    {
+      "t": 243787.78500000015,
+      "type": "ui",
+      "pending": "",
+      "item": "",
+      "ready": false,
+      "opening": false,
+      "freeze": true,
+      "menu": ""
+    },
+    {
+      "t": 244053.39499999955,
+      "type": "send",
+      "action": "state",
+      "nonce": "cmd-1793901550099-207"
+    },
+    {
+      "t": 244205.625,
+      "type": "reply",
+      "action": "state",
+      "nonce": "cmd-1793901550099-207"
+    },
+    {
+      "t": 244485.27500000037,
+      "type": "send",
+      "action": "state",
+      "nonce": "cmd-1793901550531-208"
+    },
+    {
+      "t": 244652.01999999955,
+      "type": "reply",
+      "action": "state",
+      "nonce": "cmd-1793901550531-208"
+    },
+    {
+      "t": 245074.16500000097,
+      "type": "item-click",
+      "item": "PillBox1"
+    },
+    {
+      "t": 245128.70000000112,
+      "type": "ui",
+      "pending": "PillBox1",
+      "item": "",
+      "ready": false,
+      "opening": false,
+      "freeze": true,
+      "menu": ""
+    },
+    {
+      "t": 245130.75,
+      "type": "send",
+      "action": "state",
+      "nonce": "cmd-1793901551177-209"
+    },
+    {
+      "t": 245170.66500000097,
+      "type": "ui",
+      "pending": "PillBox1",
+      "item": "",
+      "ready": false,
+      "opening": false,
+      "freeze": false,
+      "menu": ""
+    },
+    {
+      "t": 245225.36500000022,
+      "type": "reply",
+      "action": "state",
+      "nonce": "cmd-1793901551177-209"
+    },
+    {
+      "t": 245232.11000000127,
+      "type": "send",
+      "action": "native-menu",
+      "menu": "build",
+      "nonce": "cmd-1793901551278-210"
+    },
+    {
+      "t": 245277.50500000082,
+      "type": "ui",
+      "pending": "PillBox1",
+      "item": "",
+      "ready": false,
+      "opening": true,
+      "freeze": false,
+      "menu": "build"
+    },
+    {
+      "t": 245335.69000000134,
+      "type": "reply",
+      "action": "native-menu",
+      "nonce": "cmd-1793901551278-210"
+    },
+    {
+      "t": 245337.60500000045,
+      "type": "native-tap",
+      "x": 56,
+      "y": 107,
+      "add": false
+    },
+    {
+      "t": 245408.93500000052,
+      "type": "ui",
+      "pending": "PillBox1",
+      "item": "",
+      "ready": false,
+      "opening": false,
+      "freeze": false,
+      "menu": "build"
+    },
+    {
+      "t": 245462.0700000003,
+      "type": "native-input-finished"
+    },
+    {
+      "t": 245462.30000000075,
+      "type": "native-tap",
+      "x": 102,
+      "y": 189,
+      "add": false
+    },
+    {
+      "t": 245591.83000000007,
+      "type": "native-input-finished"
+    },
+    {
+      "t": 245592.11000000127,
+      "type": "reply",
+      "action": "build-ready",
+      "nonce": "build-ready",
+      "generation": 8
+    },
+    {
+      "t": 245647.60500000045,
+      "type": "ui",
+      "pending": "PillBox1",
+      "item": "",
+      "ready": true,
+      "opening": false,
+      "freeze": false,
+      "menu": "build"
+    },
+    {
+      "t": 245744.00999999978,
+      "type": "ui",
+      "pending": "PillBox1",
+      "item": "PillBox1",
+      "ready": true,
+      "opening": false,
+      "freeze": false,
+      "menu": "build"
+    },
+    {
+      "t": 246241.54000000097,
+      "type": "ui",
+      "pending": "",
+      "item": "PillBox1",
+      "ready": true,
+      "opening": false,
+      "freeze": true,
+      "menu": "build"
+    },
+    {
+      "t": 246247.08999999985,
+      "type": "send",
+      "action": "state",
+      "nonce": "cmd-1793901552292-211"
+    },
+    {
+      "t": 246329.9299999997,
+      "type": "reply",
+      "action": "state",
+      "nonce": "cmd-1793901552292-211"
+    },
+    {
+      "t": 246695.6400000006,
+      "type": "send",
+      "action": "state",
+      "nonce": "cmd-1793901552742-212"
+    },
+    {
+      "t": 246842.04000000097,
+      "type": "reply",
+      "action": "state",
+      "nonce": "cmd-1793901552742-212"
+    },
+    {
+      "t": 247002.14499999955,
+      "type": "send",
+      "action": "state",
+      "nonce": "cmd-1793901553048-213"
+    },
+    {
+      "t": 247257.5,
+      "type": "reply",
+      "action": "state",
+      "nonce": "cmd-1793901553048-213"
+    },
+    {
+      "t": 247375.48500000127,
+      "type": "item-click",
+      "item": "PillBox1"
+    },
+    {
+      "t": 247377.91999999993,
+      "type": "send",
+      "action": "state",
+      "nonce": "cmd-1793901553423-214"
+    },
+    {
+      "t": 247416.31000000052,
+      "type": "ui",
+      "pending": "PillBox1",
+      "item": "PillBox1",
+      "ready": true,
+      "opening": false,
+      "freeze": true,
+      "menu": "build"
+    },
+    {
+      "t": 247418.89499999955,
+      "type": "reply",
+      "action": "state",
+      "nonce": "cmd-1793901553423-214"
+    },
+    {
+      "t": 247479.45000000112,
+      "type": "ui",
+      "pending": "",
+      "item": "PillBox1",
+      "ready": true,
+      "opening": false,
+      "freeze": true,
+      "menu": "build"
+    },
+    {
+      "t": 247603.63000000082,
+      "type": "send",
+      "action": "state",
+      "nonce": "cmd-1793901553650-215"
+    },
+    {
+      "t": 247704.20000000112,
+      "type": "reply",
+      "action": "state",
+      "nonce": "cmd-1793901553650-215"
+    },
+    {
+      "t": 247900.7800000012,
+      "type": "send",
+      "action": "state",
+      "nonce": "cmd-1793901553945-216"
+    },
+    {
+      "t": 248014.9050000012,
+      "type": "reply",
+      "action": "state",
+      "nonce": "cmd-1793901553945-216"
+    },
+    {
+      "t": 248305.68500000052,
+      "type": "send",
+      "action": "state",
+      "nonce": "cmd-1793901554352-217"
+    },
+    {
+      "t": 248498.47000000067,
+      "type": "reply",
+      "action": "state",
+      "nonce": "cmd-1793901554352-217"
+    },
+    {
+      "t": 248649.6400000006,
+      "type": "item-click",
+      "item": "GuardTower1"
+    },
+    {
+      "t": 248694.64499999955,
+      "type": "ui",
+      "pending": "GuardTower1",
+      "item": "PillBox1",
+      "ready": true,
+      "opening": false,
+      "freeze": true,
+      "menu": "build"
+    },
+    {
+      "t": 248695.8200000003,
+      "type": "send",
+      "action": "state",
+      "nonce": "cmd-1793901554742-218"
+    },
+    {
+      "t": 248773.4299999997,
+      "type": "ui",
+      "pending": "GuardTower1",
+      "item": "PillBox1",
+      "ready": true,
+      "opening": false,
+      "freeze": false,
+      "menu": "build"
+    },
+    {
+      "t": 248908.125,
+      "type": "reply",
+      "action": "state",
+      "nonce": "cmd-1793901554742-218"
+    },
+    {
+      "t": 248912.25500000082,
+      "type": "send",
+      "action": "native-menu",
+      "menu": "build",
+      "nonce": "cmd-1793901554958-219"
+    },
+    {
+      "t": 248965.16999999993,
+      "type": "ui",
+      "pending": "GuardTower1",
+      "item": "PillBox1",
+      "ready": false,
+      "opening": true,
+      "freeze": false,
+      "menu": "build"
+    },
+    {
+      "t": 249034.35500000045,
+      "type": "reply",
+      "action": "native-menu",
+      "nonce": "cmd-1793901554958-219"
+    },
+    {
+      "t": 249035.61000000127,
+      "type": "native-tap",
+      "x": 56,
+      "y": 339,
+      "add": false
+    },
+    {
+      "t": 249110.45500000007,
+      "type": "ui",
+      "pending": "GuardTower1",
+      "item": "PillBox1",
+      "ready": false,
+      "opening": false,
+      "freeze": false,
+      "menu": "build"
+    },
+    {
+      "t": 249191.78500000015,
+      "type": "native-input-finished"
+    },
+    {
+      "t": 249192.06000000052,
+      "type": "native-tap",
+      "x": 102,
+      "y": 373,
+      "add": false
+    },
+    {
+      "t": 249348.58999999985,
+      "type": "native-input-finished"
+    },
+    {
+      "t": 249348.79000000097,
+      "type": "reply",
+      "action": "build-ready",
+      "nonce": "build-ready",
+      "generation": 9
+    },
+    {
+      "t": 249426.46499999985,
+      "type": "ui",
+      "pending": "GuardTower1",
+      "item": "PillBox1",
+      "ready": true,
+      "opening": false,
+      "freeze": false,
+      "menu": "build"
+    },
+    {
+      "t": 249561.50500000082,
+      "type": "ui",
+      "pending": "GuardTower1",
+      "item": "GuardTower1",
+      "ready": true,
+      "opening": false,
+      "freeze": false,
+      "menu": "build"
+    },
+    {
+      "t": 249905.88000000082,
+      "type": "ui",
+      "pending": "",
+      "item": "GuardTower1",
+      "ready": true,
+      "opening": false,
+      "freeze": true,
+      "menu": "build"
+    },
+    {
+      "t": 249976.15000000037,
+      "type": "send",
+      "action": "state",
+      "nonce": "cmd-1793901556022-220"
+    },
+    {
+      "t": 250149.57500000112,
+      "type": "reply",
+      "action": "state",
+      "nonce": "cmd-1793901556022-220"
+    },
+    {
+      "t": 250366.63499999978,
+      "type": "send",
+      "action": "state",
+      "nonce": "cmd-1793901556410-221"
+    },
+    {
+      "t": 250590.40000000037,
+      "type": "reply",
+      "action": "state",
+      "nonce": "cmd-1793901556410-221"
+    },
+    {
+      "t": 250756.0150000006,
+      "type": "send",
+      "action": "state",
+      "nonce": "cmd-1793901556802-222"
+    },
+    {
+      "t": 250806.45500000007,
+      "type": "reply",
+      "action": "state",
+      "nonce": "cmd-1793901556802-222"
+    },
+    {
+      "t": 250983.8200000003,
+      "type": "item-click",
+      "item": "PillBox1"
+    },
+    {
+      "t": 251024.36000000127,
+      "type": "ui",
+      "pending": "PillBox1",
+      "item": "GuardTower1",
+      "ready": true,
+      "opening": false,
+      "freeze": true,
+      "menu": "build"
+    },
+    {
+      "t": 251025.4050000012,
+      "type": "send",
+      "action": "state",
+      "nonce": "cmd-1793901557071-223"
+    },
+    {
+      "t": 251094.23000000045,
+      "type": "ui",
+      "pending": "PillBox1",
+      "item": "GuardTower1",
+      "ready": true,
+      "opening": false,
+      "freeze": false,
+      "menu": "build"
+    },
+    {
+      "t": 251166.14499999955,
+      "type": "reply",
+      "action": "state",
+      "nonce": "cmd-1793901557071-223"
+    },
+    {
+      "t": 251169.72499999963,
+      "type": "send",
+      "action": "native-menu",
+      "menu": "build",
+      "nonce": "cmd-1793901557216-224"
+    },
+    {
+      "t": 251226.58999999985,
+      "type": "ui",
+      "pending": "PillBox1",
+      "item": "GuardTower1",
+      "ready": false,
+      "opening": true,
+      "freeze": false,
+      "menu": "build"
+    },
+    {
+      "t": 251231.12000000104,
+      "type": "reply",
+      "action": "native-menu",
+      "nonce": "cmd-1793901557216-224"
+    },
+    {
+      "t": 251233.66999999993,
+      "type": "native-tap",
+      "x": 56,
+      "y": 339,
+      "add": false
+    },
+    {
+      "t": 251289.84500000067,
+      "type": "ui",
+      "pending": "PillBox1",
+      "item": "GuardTower1",
+      "ready": false,
+      "opening": false,
+      "freeze": false,
+      "menu": "build"
+    },
+    {
+      "t": 251362.35500000045,
+      "type": "native-input-finished"
+    },
+    {
+      "t": 251362.70000000112,
+      "type": "native-tap",
+      "x": 102,
+      "y": 421,
+      "add": false
+    },
+    {
+      "t": 251524.64499999955,
+      "type": "native-input-finished"
+    },
+    {
+      "t": 251524.98000000045,
+      "type": "reply",
+      "action": "build-ready",
+      "nonce": "build-ready",
+      "generation": 10
+    },
+    {
+      "t": 251587.95000000112,
+      "type": "ui",
+      "pending": "PillBox1",
+      "item": "GuardTower1",
+      "ready": true,
+      "opening": false,
+      "freeze": false,
+      "menu": "build"
+    },
+    {
+      "t": 251720.66999999993,
+      "type": "ui",
+      "pending": "PillBox1",
+      "item": "PillBox1",
+      "ready": true,
+      "opening": false,
+      "freeze": false,
+      "menu": "build"
+    },
+    {
+      "t": 252062.9299999997,
+      "type": "ui",
+      "pending": "",
+      "item": "PillBox1",
+      "ready": true,
+      "opening": false,
+      "freeze": true,
+      "menu": "build"
+    },
+    {
+      "t": 252064.81500000134,
+      "type": "send",
+      "action": "state",
+      "nonce": "cmd-1793901558111-225"
+    },
+    {
+      "t": 252202.17500000075,
+      "type": "reply",
+      "action": "state",
+      "nonce": "cmd-1793901558111-225"
+    },
+    {
+      "t": 252370.36000000127,
+      "type": "send",
+      "action": "state",
+      "nonce": "cmd-1793901558416-226"
+    },
+    {
+      "t": 252538.07500000112,
+      "type": "reply",
+      "action": "state",
+      "nonce": "cmd-1793901558416-226"
+    },
+    {
+      "t": 252643.68500000052,
+      "type": "send",
+      "action": "state",
+      "nonce": "cmd-1793901558690-227"
+    },
+    {
+      "t": 252738.74500000104,
+      "type": "send",
+      "action": "native-menu",
+      "menu": "close",
+      "nonce": "cmd-1793901558785-228"
+    },
+    {
+      "t": 252749.25999999978,
+      "type": "ui",
+      "pending": "",
+      "item": "",
+      "ready": false,
+      "opening": false,
+      "freeze": false,
+      "menu": ""
+    },
+    {
+      "t": 252752.47499999963,
+      "type": "reply",
+      "action": "state",
+      "nonce": "cmd-1793901558690-227"
+    },
+    {
+      "t": 252752.57500000112,
+      "type": "reply",
+      "action": "state",
+      "nonce": "cmd-1793901558690-227"
+    },
+    {
+      "t": 252752.59500000067,
+      "type": "reply",
+      "action": "native-menu",
+      "nonce": "cmd-1793901558785-228"
+    },
+    {
+      "t": 253053.41000000015,
+      "type": "ui",
+      "pending": "",
+      "item": "",
+      "ready": false,
+      "opening": false,
+      "freeze": true,
+      "menu": ""
+    },
+    {
+      "t": 253146.99500000104,
+      "type": "reply",
+      "action": "native-menu",
+      "nonce": "cmd-1793901558785-228"
+    },
+    {
+      "t": 253950.5,
+      "type": "send",
+      "action": "state",
+      "nonce": "cmd-1793901559996-229"
+    }
+  ]
+}

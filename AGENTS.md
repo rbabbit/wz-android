@@ -36,6 +36,13 @@
 - Exercise BUILD followed immediately by one item tap; waiting for hidden
   setup first masks dropped taps. Confirm the requested structure ID in actual
   native orders/completion, not merely a generic build-ready callback.
+- Repeating an active item must also reconfirm native placement. Focus/native
+  QuickSave can close the engine tool while the cached ready flag remains true.
+  Test repeat-item placement and mixed-item FIFO orders. Do not insert a native
+  save between activation and a world tap without reselecting the item afterward.
+- Native FIFO handoff can briefly look idle before the next foundation appears.
+  Verify the final requested structure/completion, not one idle sample. Queue
+  display interruption also requires sustained idle in simulation time.
 - Legacy custom-path rules failed native QuickLoad context matching. v5.7 uses
   the canonical rules/init.js entry and mirrored command JSON paths. Validate
   fresh native command replies and restored round state after any load; do not

@@ -2,7 +2,26 @@
 
 final result: passed
 
-## v5.9 single item tap — current
+## v5.10 construction response — current
+
+Clean installed APK SHA-256:
+`5b9d515e7c7e5e24008c4c82b5f46ef109952a1939112a9ada10308ffd0a2f65`.
+
+Single-run selection samples fell from 2.9–3.3 seconds to 1.0–1.5 seconds on the
+emulator. Every item, including a repeated choice, still requires genuine native
+placement acknowledgement. The rejected cached-ready shortcut is not shipped.
+Native repeat/item-switch/Exit FIFO and completion, movement, manual/automatic
+exits, zero/one/three constructors, keyboard and repeated screen returns, and
+three viewports passed on this exact APK. Sixty compositor frames were inspected.
+The last solo check was recovered in an early saved match after the original
+fixture reached HQ defeat; that limitation and the rejected candidate checks
+are explicit in [v5.10 evidence](qa/v5.10/REPORT.md).
+
+Engine logic/WASM, original mod, Research and CSS are preserved. The appended
+queue observer now tolerates brief native FIFO idle gaps. Physical performance,
+existing emulator rendering limits and full native endurance remain unverified.
+
+## v5.9 single item tap — historical
 
 Clean installed APK SHA-256:
 `5d88d0866cfac08bd9eef2ed346b174f4555d908cecd4d642f080917098a87f2`.

@@ -303,6 +303,7 @@
   function cancelClicks() {
     if (state.clickFrame !== null && typeof cancelAnimationFrame === "function") cancelAnimationFrame(state.clickFrame);
     clearTimeout(state.clickTimer); state.clickFrame = null; state.clickTimer = null;
+    for(const job of [state.clickJob,...state.clickQueue])job?.resolve?.(false);
     state.clickQueue.length = 0; state.clickJob = null;
     releaseMouse();
   }
@@ -321,7 +322,7 @@
     mouseMove(job.x, job.y, 0);
     // A complete frame must update terrain picking before mouse-down. Keep
     // up/down separate too; rapid taps are FIFO, never shortened by the next tap.
-    clickStep(() => {
+    const down = () => {
       if (state.clickJob !== job) return;
       mouse("pointerdown", job.x, job.y, job.button, mouseButtonMask(job.button));
       state.mouseButton = job.button;
@@ -329,15 +330,22 @@
         if (state.clickJob !== job) return;
         releaseMouse(job.x, job.y);
         if (!state.queueMode && job.ctrl) setQueueModifier(false);
-        clickStep(()=>{state.clickJob=null;window.dispatchEvent(new CustomEvent('warzone-native-input-finished'));pumpClicks();},2);
+        clickStep(()=>{state.clickJob=null;job.resolve?.(true);window.dispatchEvent(new CustomEvent('warzone-native-input-finished'));pumpClicks();},job.ui?1:2);
       });
-    });
+    };
+    // Known widget coordinates do not need a terrain-picking frame before
+    // mouse-down. World orders retain every existing picking/release barrier.
+    if(job.ui)down();else clickStep(down);
   }
 
   function click(button, x = state.lastX, y = state.lastY, ctrl = state.queueModifierHeld) {
     if (!canvas()) return false;
     state.clickQueue.push({ button, x, y, ctrl }); pumpClicks();
     return true;
+  }
+  function nativeMenuClick(x,y,ctrl=false){
+    if(!canvas())return Promise.resolve(false);
+    return new Promise(resolve=>{state.clickQueue.push({button:0,x,y,ctrl,ui:true,resolve});pumpClicks();});
   }
 
   function tapNormalized(normalizedX, normalizedY) {
@@ -1919,6 +1927,7 @@
     jumpToBase,
     nativeClick: (x, y, button = 0) => click(button, x, y),
     nativeSelectClick: (x,y,add=false)=>click(0,x,y,add),
+    nativeMenuClick,
     nativeUiClick,
     queuedClick: (x, y) => contextualClick(x, y, true),
     resumeInput: ()=>pumpClicks(),

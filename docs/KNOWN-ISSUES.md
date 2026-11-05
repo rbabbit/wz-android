@@ -1,5 +1,15 @@
 # Known issues and verification limits
 
+v5.10 reduces construction-selection overhead while retaining a fresh native
+placement acknowledgement for every choice. A cached ready flag can outlive the
+engine's placement tool, so it is deliberately not used to skip acknowledgement
+on repeated choices. Entry/exit still need the native viewport transition and
+an engine response; this is not an instant-selection or device frame-rate
+guarantee. See [v5.10 evidence](../qa/v5.10/REPORT.md). Existing black terrain on
+the software-rendered emulator, physical-device performance/audio/rendering,
+and a complete native 30-round playthrough remain unverified or unresolved as
+described below.
+
 v5.9 fixes the first structure tap being ignored during hidden truck selection.
 BUILD now opens the catalogue immediately; one item tap selects the nearest
 group and activates placement. Native MG-bunker orders/completion, a prior

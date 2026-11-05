@@ -413,6 +413,12 @@ async function run() {
   nextFrame();assert.equal(canvas.events.filter(e=>e.type==='pointerup').length,0,'mouse down remains held until the engine consumes a frame');
   gl.clear(gl.COLOR_BUFFER_BIT);nextFrame();assert.equal(canvas.events.filter(e=>e.type==='pointerup').length,1);assert.ok(controls.report().pendingClicks,'mouse up is still pending until native consumption');
   gl.clear(gl.COLOR_BUFFER_BIT);nextFrame();assert.ok(controls.report().pendingClicks,'the final native handoff frame remains pending');gl.clear(gl.COLOR_BUFFER_BIT);nextFrame();assert.equal(controls.report().pendingClicks,0);
+  canvas.events.length=0;let menuCompleted=false;const menuClick=controls.nativeMenuClick(40,100).then(v=>{menuCompleted=v;});
+  assert.equal(canvas.events.filter(e=>e.type==='pointerdown').length,1,'known menu coordinates press immediately without the world-picking barrier');
+  nextFrame();assert.equal(canvas.events.filter(e=>e.type==='pointerup').length,0,'menu down still waits for a real native frame');
+  gl.clear(gl.COLOR_BUFFER_BIT);nextFrame();assert.equal(canvas.events.filter(e=>e.type==='pointerup').length,1);
+  assert.equal(menuCompleted,false);gl.clear(gl.COLOR_BUFFER_BIT);nextFrame();await menuClick;assert.equal(menuCompleted,true,'menu promise resolves after native release consumption');
+  const cancelled=[controls.nativeMenuClick(40,100),controls.nativeMenuClick(80,100)];controls.releaseAll(true);assert.deepEqual(await Promise.all(cancelled),[false,false],'navigation settles both active and queued native menu jobs');
   canvas.events.length=0;controls.nativeClick(220,220);controls.nativeClick(240,220);
   pointer('pointerdown',700,400,250,'touch');pointer('pointermove',700,500,250,'touch');pointer('pointerup',700,500,250,'touch');assert.ok(controls.report().queuedPointerEvents);
   const nativeClockInterval=setInterval(()=>gl.clear(gl.COLOR_BUFFER_BIT),20);await settleClicks();clearInterval(nativeClockInterval);

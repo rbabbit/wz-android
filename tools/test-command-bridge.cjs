@@ -125,6 +125,15 @@ console.log('PASS: construction ETA follows actual worker actions/upgrades, paus
 }
 console.log('PASS: a snapped 2x2 foundation binds to its own queue entry without matching older adjacent buildings');
 {
+ const t=setup(),item=catalog.buildings.find(b=>b.id==='PillBox1');t.select([t.droids[0]]);Object.assign(t.droids[0],{body:'Body1REC',order:10});
+ assert.equal(t.send('track-site',{itemId:item.id,x:11,y:11}).ok,true);t.c.gameTime+=2500;t.droids[0].order=0;
+ let j=t.send('state').result.constructionSites[0];assert.notEqual(j.status,'interrupted','one native idle sample during FIFO handoff must not discard a queued site');
+ t.c.gameTime+=500;Object.assign(t.droids[0],{order:10,action:2,x:11,y:10});const foundation={id:101,player:0,type:1,stattype:20,status:0,name:item.name,x:11,y:11,health:28};t.structures.push(foundation);
+ j=t.send('state').result.constructionSites[0];assert.equal(j.status,'building');assert.equal(j.structureId,101);foundation.status=1;assert.equal(t.send('state').result.constructionSites[0].status,'done');
+ assert.equal(t.send('track-site',{itemId:item.id,x:13,y:11}).ok,true);t.c.gameTime+=2500;t.droids[0].order=0;t.send('state');t.c.gameTime+=1200;assert.equal(t.send('state').result.constructionSites[0].status,'interrupted','sustained native idle after cancelled work is still detected');
+}
+console.log('PASS: native queue handoff preserves progress/completion; sustained cancellation still interrupts');
+{
  const t=setup();t.structures.push({id:31,type:1,player:0,stattype:4,status:1});const construct=catalog.components.Construct[0];
  t.templates.push({id:'ConstructionDroid',fullname:'Truck',body:body.id,propulsion:prop.id,weapons:[],construct:construct.id,droidType:2,cost:62,points:310});
  t.templates.push({...t.templates[0],id:'',fullname:'Truck · F31'});assert.equal(t.send('state').result.templates.length,1,'stock and generated templates with equivalent parts merge');

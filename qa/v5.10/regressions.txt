@@ -1,0 +1,18 @@
+PASS: BUILD leaves first item available, one item request selects nearest group, and empty-truck selection uses a real held Shift chord
+PASS: sticky building across menus and BASE, tablet lobby coordinates, absolute zoom, rapid switching, and pinch cancellation
+PASS: stale validation, draft identity, duplicate save, save-as-new, failure retry, persistence rollback, native-menu races and required turret slot
+PASS: native readiness buffers early taps, SELECT drains accepted sites, STOP cancels pending input and later navigation wins
+PASS: nested build transitions keep the battlefield covered until the last owner releases it
+PASS: FIFO builds, manual/automatic workers, sticky sessions, STOP, deduplication, validation, factory queues and bounded 100-job polling
+PASS: construction ETA follows actual worker actions/upgrades, pauses and power; modules use observed work; journal never replaces native orders
+PASS: a snapped 2x2 foundation binds to its own queue entry without matching older adjacent buildings
+PASS: native queue handoff preserves progress/completion; sustained cancellation still interrupts
+PASS: perspective terrain picking, projection, native GL delegation, buffer-state restoration and mesh invalidation
+PASS: acknowledged STOP affects only selected friendly units, deduplicates, and respects cancellation
+PASS: selected-design handoff, native-first ordering, live queue rows, deletion cancel/storage rollback, draft discard protection, queue rejection and scoped notifications
+PASS: {"passed":true,"rounds":30,"configuredEnemies":2526,"firstRoundEnemies":35,"reward100Medium":46,"enemyResearchOnly":true,"skipDeduplicated":true,"oldWaitCancelled":true,"survivorsRetained":true,"victory":true,"hqDefeat":true,"nativeComponentResolution":"checked by live preflight"}
+PASS: selected lab owns its name, image, total and queue; catalogue Hover cannot leak into lab status; idle and native-advance states reset correctly
+PASS: actual Towers bridge validates atomic ordered queues, game-time estimates, module rates and waiting power
+PASS: incremental wave log reads skip history, preserve partial UTF-8/JSON lines, handle truncation, and close files
+PASS: research polling also skips archived bytes and waits for complete event lines
+PASS: Skip Wave accepts touch release once, ignores cancellation/drag/duplicates, and retains keyboard activation

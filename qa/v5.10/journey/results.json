@@ -1,0 +1,50 @@
+{
+  "device": "emulator-5556",
+  "seeded": false,
+  "screens": [
+    "early-exit",
+    "large-ready",
+    "standard-ready",
+    "compact-ready",
+    "nearest-overrides-distant-ready",
+    "no-trucks",
+    "one-truck-ready"
+  ],
+  "cases": [
+    "Exit during in-flight structure selection stays closed",
+    "BUILD followed by one MG tap at three sizes, exact native MG orders/targets and completion, closest group overrides distant selection",
+    "zero constructors clears previous combat selection and never activates placement; ordinary replacement truck restores one-tap MG placement and completion"
+  ],
+  "errors": [],
+  "sites": [
+    {
+      "x": 8,
+      "y": 40
+    },
+    {
+      "x": 9,
+      "y": 40
+    },
+    {
+      "x": 9,
+      "y": 42
+    },
+    {
+      "x": 8,
+      "y": 43
+    },
+    {
+      "x": 56,
+      "y": 8
+    }
+  ],
+  "emptyFixture": {
+    "constructorsRemovedFromNativeSave": true,
+    "combatProducedNormally": true,
+    "noSelection": true,
+    "noBuildTool": true
+  },
+  "apkSHA256": "881a99399e50ffe6b83870323ab1fee47545ae4b5db39fbcbba778222c355ae3",
+  "installedSHA256": "881a99399e50ffe6b83870323ab1fee47545ae4b5db39fbcbba778222c355ae3",
+  "passed": true
+}

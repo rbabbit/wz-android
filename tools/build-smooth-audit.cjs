@@ -1,7 +1,7 @@
 'use strict';
 // Android input and compositor frames, with per-frame geometry/DOM observations.
 const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict'),{execFileSync}=require('node:child_process');
-const root=path.resolve(__dirname,'..'),tag=process.argv.includes('--baseline')?'baseline':'delivery',out=path.join(root,'qa/v5.8',tag);
+const root=path.resolve(__dirname,'..'),tag=process.argv.includes('--baseline')?'baseline':'delivery',out=process.env.WZ_QA_OUT?path.resolve(process.env.WZ_QA_OUT):path.join(root,'qa/v5.8',tag);
 fs.mkdirSync(out,{recursive:true});
 const adbExe=path.join(process.env.ANDROID_HOME||'C:/Users/punke/AppData/Local/Android/Sdk','platform-tools/adb.exe'),device='emulator-5556';
 const adb=(...a)=>execFileSync(adbExe,['-s',device,...a],{timeout:20000,maxBuffer:20*1024*1024});
@@ -17,7 +17,7 @@ async function main(){
  const request=(method,params={})=>new Promise((resolve,reject)=>{const n=++id;pending.set(n,{resolve,reject,timer:setTimeout(()=>reject(Error('CDP '+method+' timeout')),45000)});socket.send(JSON.stringify({id:n,method,params}));});
  socket.onmessage=e=>{const m=JSON.parse(String(e.data));if(m.method==='Page.screencastFrame'){socket.send(JSON.stringify({id:++id,method:'Page.screencastFrameAck',params:{sessionId:m.params.sessionId}}));if(Date.now()-lastFrame>80){lastFrame=Date.now();fs.writeFileSync(path.join(out,'frame-'+String(++frames).padStart(4,'0')+'.jpg'),Buffer.from(m.params.data,'base64'));}return;}const p=pending.get(m.id);if(p){pending.delete(m.id);clearTimeout(p.timer);m.error||m.result.exceptionDetails?p.reject(m.error||m.result.exceptionDetails):p.resolve(m.result);}};
  evaluate=async expr=>(await request('Runtime.evaluate',{expression:`(()=>{const f=document.getElementById('warzone-game-frame');return f?f.contentWindow.eval(${JSON.stringify(expr)}):undefined})()`,returnByValue:true,awaitPromise:true})).result?.value;
- await until('Boolean(window.__warzoneCommands?.report().snapshot?.trucks.length>=6)','ordinary native starting trucks',90000);
+ await until('Boolean(window.__warzoneCommands?.report().snapshot?.trucks.length)','live native constructor fixture',90000);
  if(process.argv.includes('--resume'))await evaluate('__kalaWarzoneTouch.nativePressKey("Escape","Escape",27);true');
  const time=await evaluate('__warzoneTowersWaves.report().snapshot.gameTime');await until(`__warzoneTowersWaves.report().snapshot.gameTime>${time}`,'simulation is running');
  await evaluate('parent.__smoothRecording=false;true');await sleep(100);

@@ -4,7 +4,7 @@ final result: passed
 
 ## v5.5 construction sidebar — current
 
-APK SHA-256: `a5a765710345d91bc59e440878a6d77a5f337c0d694fc020c1df51673ea9e61e`.
+APK SHA-256: `37b9ac288ade3477fb9b8357e85c6a5ab10f846dbf6f27d5bfbf8fcd6addd5e5`.
 
 The exact installed APK passed the fresh-match construction/UI journey at
 1280×576 and 1080×600: scrolling/fixed controls, native multi-truck mixed queues,

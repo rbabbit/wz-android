@@ -20,5 +20,14 @@
   official HQ terrain is optional; Normal must stay usable without the download.
 - Keep credentials, signing keys, local SDK settings and temporary CDP endpoints
   out of Git and release archives. Public VPS paths/manifests are documented.
+- After scenario data grows, make the delivery APK with a clean Gradle build.
+  Incremental packaging can retain a large unused ZIP gap. Compare payloads and
+  rerun the relevant installed-APK verification before packaging the source.
+- In emulator audits, wait for the Android keyboard to be visibly open before
+  sending Back. Otherwise Back can exit the Activity. Wait for images and the
+  actual viewport/camera before asserting layout or sending world taps.
+- Native QuickLoad has a documented custom-scenario bridge restore failure.
+  Do not use it as routine recovery; validate command replies immediately, and
+  abandon the fixture for a fresh ordinary match if the bridge does not recover.
 - Archive upload checksums are in `archive/`; after intentional edits regenerate
   the repository file manifest with `python tools/verify-project.py --refresh`.

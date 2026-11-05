@@ -1,7 +1,7 @@
 # v5.5 — field construction sidebar and live build estimates
 
 Delivery APK SHA-256:
-`a5a765710345d91bc59e440878a6d77a5f337c0d694fc020c1df51673ea9e61e`.
+`37b9ac288ade3477fb9b8357e85c6a5ab10f846dbf6f27d5bfbf8fcd6addd5e5`.
 
 Option 2 is implemented in the actual Towers app. BUILD opens the left field
 sidebar and selects the nearby constructor group. Only the structure cards
@@ -80,3 +80,8 @@ frozen v5.4 data prefix and 3,282 resolved assets. Catalogue gameplay statistics
 are identical; only artwork references changed. All 455 editable assets and the
 embedded custom scenario match the delivery APK. The frozen v5.4 APK/source are
 retained independently of this worktree.
+
+The clean distribution APK is 90,765,982 bytes. Gradle incremental packaging had
+retained a 67 MB unused gap; a clean build removed it. `clean-package.json`
+records identical unsigned payload entries, and the complete installed-APK
+journey was repeated successfully on the clean distribution hash above.

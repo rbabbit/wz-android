@@ -10,8 +10,8 @@ android {
         applicationId = "com.rbabbit.warzonetowers"
         minSdk = 26
         targetSdk = 36
-        versionCode = 55
-        versionName = "5.5-build-sidebar"
+        versionCode = 56
+        versionName = "5.6-compact-controls"
     }
 
     compileOptions {

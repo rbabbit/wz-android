@@ -1,0 +1,100 @@
+{
+  "device": "emulator-5556",
+  "seeded": false,
+  "screens": [
+    "delivery-wide-build",
+    "delivery-controls-expanded",
+    "delivery-wide-scroll",
+    "delivery-stock-base-icons",
+    "delivery-live-time-and-queue",
+    "delivery-reclaimed-window",
+    "delivery-minimap-restored",
+    "delivery-mixed-queue",
+    "delivery-queue-details",
+    "delivery-normal-production",
+    "delivery-keyboard-visible",
+    "delivery-saved-design",
+    "delivery-research-return-0",
+    "delivery-research-return-1",
+    "delivery-movement-restored",
+    "delivery-compact-build",
+    "delivery-compact-placement",
+    "delivery-compact-research",
+    "delivery-compact-battle",
+    "delivery-large-expanded",
+    "delivery-large-collapsed",
+    "delivery-auto-completion-building",
+    "delivery-large-expanded",
+    "delivery-large-collapsed",
+    "delivery-auto-completion-building",
+    "delivery-auto-completion-restored"
+  ],
+  "cases": [
+    "scrolling catalogue, fixed footer, genuine artwork, three native builders, two FIFO orders, duplicate rejection, live ETA, pause/resume, queue return",
+    "native construction completion, mixed tower/facility/module queue and completion, ordinary factory production, valid design/save, Android keyboard return, repeated research/factory/battle returns, produced-unit selection and movement",
+    "collapsed controls expand, real combat selection/patrol/STOP and nearby truck selection, BOX and Select/Move",
+    "1080x600 compact sidebar, placement, field controls, top bar, research and return",
+    "1600x720 expanded/collapsed console, actual construction and automatic placement/minimap restoration"
+  ],
+  "errors": [],
+  "timingSample": [
+    {
+      "id": 160193,
+      "itemId": "GuardTower1",
+      "name": "Heavy Machinegun Guard Tower",
+      "x": 7,
+      "y": 39,
+      "progress": 0.36666666666666664,
+      "approximate": true,
+      "workers": 3,
+      "rate": 27,
+      "status": "building",
+      "remaining": 8
+    }
+  ],
+  "reclaimedSite": {
+    "x": 8,
+    "y": 35,
+    "result": {
+      "nonce": "cmd-1793859927736-112",
+      "action": "preview-build",
+      "ok": true,
+      "reason": "",
+      "result": {
+        "id": "cmd-1793859927736-112",
+        "itemId": "A0TankTrap",
+        "x": 8,
+        "y": 35,
+        "workers": [
+          160005,
+          160003,
+          160011
+        ],
+        "automatic": false,
+        "status": "queued",
+        "created": 84402,
+        "attempts": {},
+        "issued": {},
+        "parentId": 0,
+        "targetModules": 0,
+        "reason": ""
+      },
+      "gameTime": 84402
+    }
+  },
+  "patrolOrder": 31,
+  "resumedAt": "2026-11-05T06:38:42.801Z",
+  "largeFreshOrdinaryMatch": true,
+  "large": {
+    "sidebarBottom": 512,
+    "controlsTop": 520,
+    "controlsBottom": 660,
+    "width": 1600,
+    "height": 720
+  },
+  "apkSHA256": "4fa958415efa22f57b389bb7847a0ba1e89beb11089a30137e41efee716fa3aa",
+  "installedSHA256": "4fa958415efa22f57b389bb7847a0ba1e89beb11089a30137e41efee716fa3aa",
+  "quietHudViolations": [],
+  "passed": true,
+  "finishedAt": "2026-11-05T06:39:29.679Z"
+}

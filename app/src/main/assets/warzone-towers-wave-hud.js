@@ -61,26 +61,9 @@
   }
 
   function showPreparation() {
-    const owner = hudDocument();
-    const touch = window.__kalaWarzoneTouch?.report();
-    if (state.preparationShown || !touch?.hudVisible || touch.cameraFacingPending
-        || !state.snapshot || state.snapshot.wave !== 0 || state.snapshot.phase !== "countdown") return;
+    // The live wave HUD and Help carry preparation instructions. Keep the
+    // battlefield available immediately instead of opening a routine modal.
     state.preparationShown = true;
-    const dialog = owner.createElement("dialog");
-    dialog.id = "warzone-towers-preparation";
-    dialog.setAttribute("aria-labelledby", "wt-preparation-title");
-    dialog.innerHTML = `<h1 id="wt-preparation-title">PREPARE YOUR DEFENCES</h1>
-      <p><strong>You have 4 minutes to prepare your defences.</strong></p>
-      <p>Wave 1 starts automatically when the countdown ends, even if you have not built anything.
-      Use SKIP WAVE if you are ready sooner.</p>
-      <button type="button">START PREPARING</button>`;
-    dialog.querySelector("button").addEventListener("click", () => dialog.close());
-    dialog.addEventListener("close", () => {
-      window.__kalaWarzoneTouch?.releaseAll?.();
-      document.getElementById("canvas")?.focus({ preventScroll: true });
-    });
-    owner.body.appendChild(dialog);
-    dialog.showModal();
   }
 
   function nextWave() {

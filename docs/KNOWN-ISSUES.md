@@ -1,5 +1,9 @@
 # Known issues and verification limits
 
+v5.6 verified the compact construction/control cleanup and native gameplay
+journey at three emulator viewports. Research retains the v5.4 implementation.
+See [the v5.6 report](../qa/v5.6/REPORT.md) for exact coverage and remaining limits.
+
 v5.4 dedicates the right Research sidebar to the selected lab and moves the
 catalogue preview/action to the centre. Four real labs, queued topics, native
 completion/advancement and related returns passed at 1280×576; compact layout,
@@ -80,6 +84,9 @@ separately. Physical-device, HQ rendering and audio limits below remain.
    treating minimap finger drift as a camera drag. This emulator can still have
    long cold-start/render stalls. It does not establish a frame-rate guarantee
    for physical devices or resolve its pre-existing black-terrain issue.
+   v5.6 keeps the native truck window outside the placement view by extending the
+   real viewport below the host. The additional rendering work has not been
+   benchmarked on physical hardware.
 
 8. **Design and page fixes:** v4.9 adds explicit New/Edit/Save as New, protects
    drafts from late validation/save replies, permits failed-save retry, preserves

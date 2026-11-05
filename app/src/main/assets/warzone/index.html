@@ -286,6 +286,7 @@
       }
     </style>
     <script src="graphics-loader.js"></script>
+    <script src="native-notification-prefs.js"></script>
     <script src="music-catalog.js"></script>
     <script src="music-loader.js"></script>
   </head>
@@ -1291,6 +1292,7 @@
             try { Module.FS_unlink(configPath); } catch (_) {}
             Module.FS_createDataFile(configDir, 'config',
               new TextEncoder().encode(touchConfig + graphicsConfig + musicConfig), true, true, true);
+            window.WarzoneNativeNotifications.prepare(Module, configDir);
             // Apply startup choices after IDBFS restores saved preferences and
             // before the official playlist loads. No battle-menu navigation.
             if (window.WarzoneMusic?.applySelection(Module, configDir) === false) return;

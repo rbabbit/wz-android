@@ -6,7 +6,7 @@
   const doc = host.document;
   const PATH = '/data/mp/tests/warzone-towers-command.json';
   const state = {page:'',catalog:null,snapshot:null,pending:new Map(),serial:0,writes:0,acks:0,
-    timeouts:0,lastWrite:0,lastPoll:0,nativeMenu:'',history:[],placement:null,session:'',category:'DEFENCES',search:'',buildChoice:'',buildOpen:false,siteChecks:0,cancelSerial:0,designStep:'body',designSearch:'',nativeItem:'',
+    timeouts:0,lastWrite:0,lastPoll:0,nativeMenu:'',history:[],placement:null,session:'',category:'DEFENCES',search:'',buildChoice:'',buildOpen:false,siteChecks:0,cancelSerial:0,nativeHudHidden:false,pendingItem:'',designStep:'body',designSearch:'',nativeItem:'',
     selected:'',deletePending:'',confirmNew:false,draftOriginal:'',saved:[],draft:{id:'',name:'',body:'',propulsion:'',turrets:['']},validation:null,
     validationSerial:0,saving:new Set(),factory:0,productionCount:1,menuRevision:0,nativeMenuPending:false,
     navigationSerial:0,nativeBuildGeneration:0,nativeToolReady:false,nativeToolSelectionAt:0,nativePendingSites:[],exitPromise:null,exitingBuild:false,nativeBuildGroup:[],nativeBuildPlaced:false,nativeBuildSawWork:false,nativeBuildIdleAt:0,buildingOpening:false,notice:'',size:1,opens:0,closes:0,placements:0,rejects:0,scroll:{}};
@@ -70,7 +70,8 @@
   window.addEventListener('warzone-native-input-finished',()=>requestState());
   function notify(message){
     state.notice=message;const target=element('wt-command-notice');if(target)target.textContent=message;
-    const toast=element('wt-command-toast');if(toast){toast.textContent=message;toast.hidden=Boolean(state.page);
+    const inline=element('wt-sidebar-notice');if(inline){inline.textContent=message;inline.hidden=!state.buildOpen;}
+    const toast=element('wt-command-toast');if(toast){toast.textContent=message;toast.hidden=Boolean(state.page)||state.buildOpen;
       clearTimeout(toast._timer);toast._timer=setTimeout(()=>{toast.hidden=true;},4500);}
   }
   function image(item){
@@ -96,15 +97,19 @@
     panel.innerHTML=`<header class="wt-command-title"><div><span class="wt-eyebrow">WARZONE TOWERS / COMMAND CENTRE</span><h1 id="wt-page-title">BUILD</h1><span id="wt-command-resources"></span></div>
       <nav id="wt-command-tabs" aria-label="Command pages">${['build','design','saved','factory','queue'].map(p=>button(p==='saved'?'BLUEPRINTS':p.toUpperCase(),`data-page="${p}"`)).join('')}</nav>${button('BATTLE ↗','data-action="back"','wt-primary')}</header>
       <div id="wt-command-notice" role="status" aria-live="polite"></div><div id="wt-page-content"></div>`;
-    doc.body.appendChild(panel);const busy=doc.createElement('div');busy.id='wt-build-busy';busy.hidden=true;busy.setAttribute('role','status');busy.textContent='Selecting nearby construction trucks…';doc.body.appendChild(busy);
+    doc.body.appendChild(panel);const busy=doc.createElement('canvas');busy.id='wt-build-busy';busy.hidden=true;busy.setAttribute('aria-hidden','true');doc.body.appendChild(busy);
     panel.addEventListener('click',onClick);panel.addEventListener('input',onInput);panel.addEventListener('change',onChange);
     panel.addEventListener('submit',event=>event.preventDefault());
     const hud=doc.createElement('div');hud.id='wt-build-status';hud.hidden=true;
     hud.innerHTML=`<span id="wt-power">POWER —</span>${button('SELECTION','data-action="select-mode" id="wt-field-status"')}<span id="wt-placement-label"></span><span id="wt-builder-summary"></span>${button('CHANGE','data-page="build"')}${button('DONE','data-action="cancel-placement"')}`;
     hud.addEventListener('click',onClick);doc.body.appendChild(hud);
     const sidebar=doc.createElement('section');sidebar.id='wt-build-sidebar';sidebar.hidden=true;sidebar.setAttribute('aria-label','Construction');
-    sidebar.innerHTML=`<header><div><span class="wt-eyebrow">FIELD CONSTRUCTION</span><h1>BUILD <small id="wt-sidebar-power"></small></h1></div><span id="wt-sidebar-builders"></span></header><nav aria-label="Structure category">${[['DEFENCES','DEFENCE'],['STRUCTURES','BASE'],['MODULES','MODULES'],['ALL','ALL']].map(([id,label])=>button(label,`data-category="${id}"`)).join('')}</nav><div id="wt-sidebar-catalogue" tabindex="0" aria-label="Available structures; scroll for more"></div><section id="wt-sidebar-queue" aria-label="Live construction queue"></section>${button('EXIT BUILD · KEEP ORDERS','data-action="select-mode"','wt-sidebar-exit')}`;
+    sidebar.innerHTML=`<header><span id="wt-sidebar-power"></span><span id="wt-sidebar-builders"></span><span class="wt-sidebar-spinner" aria-hidden="true"></span></header><nav aria-label="Structure category">${[['DEFENCES','DEFENCE'],['STRUCTURES','BASE'],['MODULES','MODULES'],['ALL','ALL']].map(([id,label])=>button(label,`data-category="${id}"`)).join('')}</nav><div id="wt-sidebar-notice" role="status" hidden></div><div id="wt-catalogue-wrap"><div id="wt-sidebar-catalogue" tabindex="0" aria-label="Available structures; scroll for more"></div><span id="wt-catalogue-track" aria-hidden="true"><i></i></span></div><section id="wt-sidebar-queue" aria-label="Live construction queue"></section>${button('EXIT · KEEP ORDERS','data-action="select-mode"','wt-sidebar-exit')}`;
     sidebar.addEventListener('click',onClick);doc.body.appendChild(sidebar);
+    element('wt-sidebar-catalogue').addEventListener('scroll',updateCatalogueScroll,{passive:true});
+    if(host.ResizeObserver)new host.ResizeObserver(updateCatalogueScroll).observe(element('wt-sidebar-catalogue'));
+    const map=doc.createElement('button');map.id='wt-placement-map';map.hidden=true;map.type='button';map.title='Show minimap; leave placement';map.setAttribute('aria-label','Show minimap; leave placement');map.innerHTML='<img src="/warzone/ui/icons/map-pin.svg" alt=""><span>MAP</span>';
+    map.addEventListener('click',async()=>{await selectMode();state.buildOpen=true;element('wt-build-sidebar').hidden=false;renderSidebar();updateHUD();});doc.body.appendChild(map);
     const nativeMask=doc.createElement('div');nativeMask.id='wt-native-build-mask';nativeMask.hidden=true;nativeMask.setAttribute('aria-hidden','true');doc.body.appendChild(nativeMask);
     const toast=doc.createElement('div');toast.id='wt-command-toast';toast.hidden=true;toast.setAttribute('role','status');doc.body.appendChild(toast);
     const ghost=document.createElementNS('http://www.w3.org/2000/svg','svg');ghost.id='wt-build-ghost';ghost.style.pointerEvents='none';
@@ -113,6 +118,7 @@
     ghost.hidden=true;document.body.appendChild(ghost);
     const back=doc.createElement('button');back.id='wt-native-back';back.hidden=true;back.textContent='BACK TO BATTLE';back.addEventListener('click',()=>closeNative());doc.body.appendChild(back);
     doc.addEventListener('keydown',e=>{if(e.key==='Escape'){if(state.page)close();else if(state.placement)cancelPlacement();else if(state.nativeMenu)closeNative();}});
+    document.addEventListener('keydown',e=>{if(state.nativeHudHidden&&e.isTrusted&&(e.key==='Escape'||e.key==='Tab')){e.preventDefault();e.stopImmediatePropagation();selectMode();}},true);
     applySize(state.size);
     const strip=element('warzone-command-strip');
     if(strip&&host.ResizeObserver){let scheduled=false;const observed=new WeakSet();const resize=()=>{
@@ -162,10 +168,10 @@
       const help=element('warzone-towers-help-overlay');if(help&&!help.hidden)help.querySelector('.wt-help-back')?.click();
       if(state.page)await close();
       if(navigation!==state.navigationSerial)return;
-      state.buildOpen=true;element('wt-build-sidebar').hidden=false;renderSidebar();
-      if(state.nativeMenu!=='build'&&!await openBuild(false,true)){state.buildOpen=false;element('wt-build-sidebar').hidden=true;}
+      state.buildOpen=true;window.dispatchEvent(new Event('warzone-build-sidebar-open'));element('wt-build-sidebar').hidden=false;renderSidebar();
+      if(state.nativeMenu!=='build')await openBuild(false,true);
       if(navigation===state.navigationSerial){renderSidebar();updateHUD();}
-    }finally{state.sidebarOpening=false;}
+    }catch(error){await closeNative(true);notify(error.message);}finally{state.sidebarOpening=false;}
   }
   function siteStatus(site){return ({building:'BUILDING',queued:'QUEUED',travelling:'TRUCKS EN ROUTE','waiting-trucks':'WAITING FOR TRUCKS','waiting-power':'WAITING FOR POWER',done:'COMPLETE',interrupted:'ORDERS ENDED'})[site.status]||'PLANNED';}
   function remainingTime(seconds){return seconds==null?'':`~${Math.floor(seconds/60)}:${String(seconds%60).padStart(2,'0')} LEFT`;}
@@ -173,22 +179,26 @@
     const s=state.snapshot;if(!s)return [];
     const sites=(s.constructionSites||[]).filter(j=>j.status!=='interrupted').map(j=>({...j,name:state.catalog?.buildings.find(b=>b.id===j.itemId)?.name||'Structure'}));
     for(const b of s.construction||[])if(!sites.some(j=>j.structureId===b.id))sites.push(b);
-    return sites.sort((a,b)=>(a.status==='done')-(b.status==='done'));
+    const rank={building:0,'waiting-power':1,'waiting-trucks':2,travelling:3,queued:4,done:5};
+    return sites.sort((a,b)=>(rank[a.status]??4)-(rank[b.status]??4));
   }
-  function constructionRow(j,index){return `<article class="wt-site-row" data-site-id="${esc(j.id)}"><span class="wt-site-number">${j.status==='done'?'✓':index+1}</span><div><strong>${esc(j.name)}</strong><small>${siteStatus(j)}${j.remaining!=null?' · '+remainingTime(j.remaining):''}</small>${j.progress!=null&&j.status!=='done'?`<progress max="1" value="${j.progress}" aria-label="Approximate construction progress"></progress>`:''}</div></article>`;}
+  function constructionRow(j,index){return `<article class="wt-site-row" data-site-id="${esc(j.id)}"><span class="wt-site-number">${j.status==='done'?'✓':index+1}</span><div><strong>${esc(j.name)}</strong><small>${siteStatus(j)}${j.status!=='done'&&j.remaining!=null?' · '+remainingTime(j.remaining):''}</small>${j.progress!=null&&j.status!=='done'?`<progress max="1" value="${j.progress}" aria-label="Approximate construction progress"></progress>`:''}</div></article>`;}
   function renderSidebar(){
     const sidebar=element('wt-build-sidebar');if(!sidebar||!state.buildOpen)return;
     const items=availableBuildings().filter(b=>state.category==='ALL'||b.category===state.category),grid=element('wt-sidebar-catalogue');
-    const signature=JSON.stringify([state.category,state.nativeItem,items.map(b=>[b.id,b.power,b.image])]);
-    if(grid.dataset.signature!==signature){const scroll=grid.dataset.category===state.category?grid.scrollTop:state.scroll['sidebar-'+state.category]||0;grid.innerHTML=items.map(b=>button(`${b.image?image(b):`<span class="wt-native-art-label">${b.width} × ${b.breadth}<small>FOOTPRINT</small></span>`}<strong>${esc(b.name)}</strong><small>⚡ ${Math.round(b.power)}</small>`,`data-build="${esc(b.id)}" aria-pressed="${state.nativeItem===b.id}"`,state.nativeItem===b.id?'active':'')).join('')||'<p class="wt-empty">No available structures. Unlock more in TECH.</p>';grid.dataset.signature=signature;grid.dataset.category=state.category;grid.scrollTop=scroll;}
+    const active=state.nativeToolReady&&state.nativeMenu==='build'?state.nativeItem:'',busy=Boolean(state.buildingOpening||state.pendingItem);
+    sidebar.setAttribute('aria-busy',String(busy));
+    const signature=JSON.stringify([state.category,active,state.pendingItem,busy,items.map(b=>[b.id,b.power,b.image])]);
+    if(grid.dataset.signature!==signature){const scroll=grid.dataset.category===state.category?grid.scrollTop:state.scroll['sidebar-'+state.category]||0;grid.innerHTML=items.map(b=>button(`${b.image?image(b):`<span class="wt-native-art-label">${b.width} × ${b.breadth}<small>FOOTPRINT</small></span>`}<strong>${esc(b.name)}</strong><small>⚡ ${Math.round(b.power)}</small>`,`data-build="${esc(b.id)}" aria-pressed="${active===b.id}" ${busy?'disabled':''}`,`${active===b.id?'active ':''}${state.pendingItem===b.id?'loading':''}`)).join('')||'<p class="wt-empty">No available structures. Unlock more in TECH.</p>';grid.dataset.signature=signature;grid.dataset.category=state.category;grid.scrollTop=scroll;}
     for(const b of sidebar.querySelectorAll('[data-category]')){b.classList.toggle('active',b.dataset.category===state.category);b.setAttribute('aria-pressed',String(b.dataset.category===state.category));}
-    updateSidebarQueue();
+    updateSidebarQueue();updateCatalogueScroll();
   }
+  function updateCatalogueScroll(){const grid=element('wt-sidebar-catalogue'),track=element('wt-catalogue-track');if(!grid||!track)return;const range=grid.scrollHeight-grid.clientHeight;track.hidden=range<2;if(range>0){const thumb=track.firstElementChild,height=Math.max(22,grid.clientHeight/grid.scrollHeight*grid.clientHeight);thumb.style.height=`${height}px`;thumb.style.transform=`translateY(${grid.scrollTop/range*(grid.clientHeight-height)}px)`;}}
   function updateSidebarQueue(){
     if(!state.buildOpen)return;
     const s=state.snapshot;const selected=(s?.trucks||[]).filter(t=>t.selected);
     element('wt-sidebar-power').textContent=s?`⚡ ${Math.floor(s.power)}`:'';
-    element('wt-sidebar-builders').textContent=`${selected.length} TRUCK${selected.length===1?'':'S'} SELECTED`;
+    element('wt-sidebar-builders').textContent=`${selected.length} TRUCK${selected.length===1?'':'S'}`;
     const rows=constructionRows(),live=rows.filter(j=>j.status!=='done');
     element('wt-sidebar-queue').innerHTML=`<h2>CONSTRUCTION <span>${live.length?live.length+' SITE'+(live.length===1?'':'S'):'READY'}</span></h2><div class="wt-site-list">${rows.slice(0,2).map(constructionRow).join('')||'<p>Choose a structure, then tap clear terrain.</p>'}</div>${rows.length>2?button(`VIEW ALL ${rows.length} SITES →`,'data-page="queue"','wt-all-sites'):''}`;
   }
@@ -202,12 +212,12 @@
   }
   function closeNative(discard=false){
     if(!discard&&(state.nativeMenu==='build'||window.__kalaWarzoneTouch?.report().pendingClicks))return selectMode();
-    state.nativeToolReady=false;state.nativePendingSites=[];
-    if(!state.nativeMenu&&!state.nativeMenuPending)return Promise.resolve();
+    state.nativeToolReady=false;state.nativeItem='';state.nativePendingSites=[];
+    if(!state.nativeMenu&&!state.nativeMenuPending)return setNativeHudHidden(false);
     window.__kalaWarzoneTouch?.releaseAll?.(true);
     const revision=++state.menuRevision;state.nativeMenuPending=false;
     state.nativeMenu='';element('wt-native-back').hidden=true;
-    return send('native-menu',{menu:'close'}).then(r=>{if(!r.ok&&revision===state.menuRevision)notify(reason(r.reason));});
+    return send('native-menu',{menu:'close'}).then(async r=>{await setNativeHudHidden(false);if(!r.ok&&revision===state.menuRevision)notify(reason(r.reason));renderSidebar();});
   }
   function requestState(){if(!Array.from(state.pending.values()).some(p=>p.command.action==='state'))send('state');state.lastPoll=Date.now();}
   function render(){
@@ -279,13 +289,16 @@
     else if(state.page&&element('wt-page-content')?.querySelector('.wt-empty')?.textContent.includes('Connecting'))render();
   }
   function updateHUD(){
-    install();const hud=element('wt-build-status');hud.hidden=!state.snapshot;
+    install();const hud=element('wt-build-status');hud.hidden=true;
+    doc.body.dataset.buildSidebar=String(state.buildOpen);
+    element('wt-placement-map').hidden=!state.nativeHudHidden;
     if(!state.snapshot)return;
     element('wt-power').textContent=`POWER ${Math.floor(state.snapshot.power)}`;
     element('wt-command-resources').textContent=`⚡ ${Math.floor(state.snapshot.power)}`;
     const queue=element('wt-field-status');const selected=state.snapshot.selectedUnits||state.snapshot.trucks.filter(t=>t.selected);queue.textContent=state.nativeMenu==='build'?'EXIT BUILD / KEEP ORDERS':`${selected.length} UNIT${selected.length===1?'':'S'} SELECTED`;
+    const badge=element('wt-field-toggle-count');if(badge){badge.textContent=selected.length||'';element('wt-field-toggle').setAttribute('aria-label',selected.length?`Unit controls: ${selected.length} selected`:'Unit controls');}
     if(state.nativeMenu==='build'&&!state.buildingOpening)state.nativeBuildGroup=constructionParticipants(state.nativeBuildGroup,state.snapshot.trucks);
-    if(state.nativeMenu==='build'&&state.nativeBuildPlaced&&!state.exitingBuild){const group=state.snapshot.trucks.filter(t=>state.nativeBuildGroup.includes(t.id));if(nativeConstructionFinished(state,group,state.snapshot.gameTime,Boolean(state.siteChecks||state.nativePendingSites.length||window.__kalaWarzoneTouch.report().pendingClicks))){state.nativeBuildSawWork=false;state.nativeBuildIdleAt=0;selectMode();notify('Placement closed. Tap a unit to select; tap ground to move.');}}
+    if(state.nativeMenu==='build'&&state.nativeBuildPlaced&&!state.exitingBuild){const group=state.snapshot.trucks.filter(t=>state.nativeBuildGroup.includes(t.id));if(nativeConstructionFinished(state,group,state.snapshot.gameTime,Boolean(state.siteChecks||state.nativePendingSites.length||window.__kalaWarzoneTouch.report().pendingClicks))){state.nativeBuildSawWork=false;state.nativeBuildIdleAt=0;selectMode();}}
     const native=state.nativeMenu==='build',item=state.catalog?.buildings.find(b=>b.id===state.nativeItem);
     element('wt-native-build-mask').hidden=!native;
     hud.classList.toggle('placing',Boolean(state.placement)||native);
@@ -298,6 +311,30 @@
     updateSidebarQueue();
   }
   const pause=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+  async function nativeFrames(count=2){const frame=window.__kalaWarzoneTouch.report().nativeRenderFrames;for(let i=0;i<80;i++){await pause(20);if(window.__kalaWarzoneTouch.report().nativeRenderFrames>=frame+count)return;}}
+  async function setNativeHudHidden(hidden){
+    if(state.nativeHudHidden===hidden)return;
+    // Keep Warzone's widget processing running: it commits native build orders.
+    // Extend the real viewport below the clipped host to put its bottom truck
+    // window/radar outside the playing surface. SDL and terrain picking still
+    // share the same viewport; no finished-frame scaling or hidden hit regions.
+    state.nativeHudHidden=hidden;
+    element('warzone-game-frame').style.height=hidden?'calc(100% + 232px)':'';
+    await nativeFrames(3);
+    if(element('wt-placement-map'))element('wt-placement-map').hidden=!hidden;
+  }
+  async function freezeBattlefield(){
+    const shot=element('wt-build-busy');if(!shot.hidden)return;
+    const canvas=document.getElementById('canvas'),frame=window.__kalaWarzoneTouch.report().nativeRenderFrames;
+    // Copy a fresh rendered frame before browser buffer discard. The unchanged
+    // battlefield remains visible while native menu clicks run behind it.
+    await new Promise((resolve,reject)=>{const deadline=Date.now()+1600;function capture(){
+      if(window.__kalaWarzoneTouch.report().nativeRenderFrames<=frame){if(Date.now()>deadline){reject(Error('Battlefield is not ready.'));return;}requestAnimationFrame(capture);return;}
+      const r=element('warzone-game-frame').getBoundingClientRect();shot.width=canvas.width;shot.height=canvas.height;
+      shot.getContext('2d').drawImage(canvas,0,0);Object.assign(shot.style,{left:r.x+'px',top:r.y+'px',width:r.width+'px',height:r.height+'px'});shot.hidden=false;resolve();
+    }requestAnimationFrame(capture);});
+  }
+  async function releaseBattlefield(){await nativeFrames();element('wt-build-busy').hidden=true;}
   async function nativeTap(x,y,add=false){
     window.__kalaWarzoneTouch.nativeSelectClick(x,y,add);
     for(let i=0;i<80;i++){await pause(50);if(!window.__kalaWarzoneTouch.report().pendingClicks)break;}
@@ -325,11 +362,12 @@
     // Keep prior participants too: their earlier queued work must still finish.
     return Array.from(new Set([...group,...trucks.filter(t=>t.selected).map(t=>t.id)]));
   }
-  async function openBuild(forceNearby=false,keepPage=false){
+  async function openBuild(forceNearby=false,keepPage=false,forPlacement=false){
     install();if(state.buildingOpening)return;
     if(window.__kalaWarzoneTouch?.report().pendingClicks){const navigation=++state.navigationSerial;await selectMode();if(navigation!==state.navigationSerial)return;}
-    state.buildingOpening=true;element('wt-build-busy').hidden=false;
+    state.buildingOpening=true;renderSidebar();
     try{
+      await freezeBattlefield();await setNativeHudHidden(false);
       state.nativeBuildPlaced=false;state.nativeBuildSawWork=false;state.nativeBuildIdleAt=0;state.nativeToolReady=false;state.nativeToolSelectionAt=0;state.nativePendingSites=[];
       cancelPlacement();if(!keepPage)close();window.__blockNightResearch?.close?.();window.__kalaWarzoneTouch.releaseAll(true);
       const reply=await send('state');if(!reply.ok)return;
@@ -359,26 +397,28 @@
       }
       const check=await send('state');if(revision!==state.menuRevision)return;
       const actual=check.result.trucks.filter(t=>t.selected).map(t=>t.id);
-      if(group.some(t=>!actual.includes(t.id))){notify('Choose your trucks in the native builder strip, then choose a structure.');}
-      else if(!state.buildOpen)notify(`${actual.length} nearby truck${actual.length===1?'':'s'} selected. Choose a structure; tap sites to queue. SELECT returns to normal orders.`);
+      if(group.some(t=>!actual.includes(t.id)))throw Error('Truck selection could not be completed. Try again.');
       window.__kalaWarzoneTouch.toggleQueueMode(true);element('wt-native-back').hidden=true;updateHUD();return true;
-    }finally{state.buildingOpening=false;element('wt-build-busy').hidden=true;}
+    }finally{state.buildingOpening=false;if(!forPlacement){await closeNative(true);await releaseBattlefield();}renderSidebar();}
   }
   async function beginPlacement(itemId){
-    const item=availableBuildings().find(b=>b.id===itemId);if(!item||state.buildingOpening)return;
-    element('wt-build-busy').textContent=`Preparing ${item.name}…`;
+    const item=availableBuildings().find(b=>b.id===itemId);if(!item||state.buildingOpening||state.pendingItem)return;
+    state.pendingItem=itemId;state.notice='';element('wt-sidebar-notice').hidden=true;renderSidebar();
     try{
+      await freezeBattlefield();
       if(state.nativeMenu==='build')await selectMode();
       state.buildOpen=true;element('wt-build-sidebar').hidden=false;
-      if(!await openBuild(false,true))return;
-      element('wt-build-busy').hidden=false;
+      if(!await openBuild(false,true,true))return;
+      const revision=state.menuRevision;
       const reply=await send('state'),options=reply.result?.nativeBuildOptions||[],index=options.indexOf(itemId);
       if(index<0)throw Error('This structure needs a matching building or has reached its limit.');
       const page=Math.floor(index/12),cell=index%12;
       await nativeTap(28+page*28,innerHeight-437);
+      if(revision!==state.menuRevision)return;
       state.nativeToolReady=false;state.nativeToolSelectionAt=Date.now();
       await nativeTap(40+(cell%2)*62,innerHeight-403+Math.floor(cell/2)*48);
-      for(let i=0;i<60&&!state.nativeToolReady;i++){window.__blockNightResearch?.pollOutput?.();await pause(50);}
+      for(let i=0;i<60&&!state.nativeToolReady&&revision===state.menuRevision;i++){window.__blockNightResearch?.pollOutput?.();await pause(50);}
+      if(revision!==state.menuRevision)return;
       if(!state.nativeToolReady)throw Error('The build tool did not activate. Please choose the structure again.');
       state.nativeItem=itemId;
       // Keep the real native build tool and its queued blueprints alive. Closing
@@ -387,13 +427,14 @@
       element('wt-command-pages').hidden=true;delete doc.body.dataset.commandPage;
       element('warzone-game-frame').inert=false;host.WarzoneHost?.restoreBattlefield?.();
       document.getElementById('canvas')?.focus({preventScroll:true});
+      await setNativeHudHidden(true);
       renderSidebar();updateHUD();
-    }catch(error){await closeNative(true);notify(error.message);}
-    finally{element('wt-build-busy').hidden=true;}
+    }catch(error){if(state.nativeMenu==='build')await closeNative(true);notify(error.message);}
+    finally{state.pendingItem='';await releaseBattlefield();renderSidebar();}
   }
   function nativeBuildTap(){if(state.nativeMenu==='build')state.nativeBuildPlaced=true;}
   function nativeBuildMenuTap(x,y){
-    if(state.nativeMenu!=='build')return;
+    if(state.nativeMenu!=='build'||state.nativeHudHidden)return;
     const base=144+(innerWidth-640)/2;
     if(x>=base&&x<base+320&&y>innerHeight-136){state.nativeToolReady=false;state.nativeToolSelectionAt=0;}
     else if(x>=6&&x<140&&y>innerHeight-430&&y<innerHeight-138){state.nativeToolReady=false;state.nativeToolSelectionAt=Date.now();}
@@ -498,7 +539,6 @@
       if(index>=0)state.saved[index]=d;else state.saved.push(d);
       if(!persist()){state.saved=before;notify('Could not save to this device. Try again.');return;}
       if(version===state.validationSerial&&sourceId===state.draft.id&&state.page==='design'){resetDraft(d);open('saved');}else if(state.page==='saved')render();
-      notify(`${d.name} saved on this device.`);
     }).finally(()=>{state.saving.delete(sourceId);designStatus();});
   }
   function applySize(value){state.size=Math.max(1,Math.min(1.4,Number(value)||1));doc.documentElement.style.setProperty('--wt-command-scale',state.size);
@@ -534,10 +574,10 @@
     else if(d.produce||d.produceTemplate){
       const count=Number(element('wt-produce-count')?.value||1);
       const design=state.saved.find(s=>s.id===d.produce);
-      send('queue-production',{factoryId:state.factory,count,...(d.produceTemplate?{templateId:d.produceTemplate}:{design})}).then(r=>{notify(r.ok?`${count} unit${count===1?'':'s'} queued for production.`:reason(r.reason));requestState();});
+      send('queue-production',{factoryId:state.factory,count,...(d.produceTemplate?{templateId:d.produceTemplate}:{design})}).then(r=>{if(!r.ok)notify(reason(r.reason));requestState();});
     }
     else if(d.cancelJob||d.retryJob)send(d.cancelJob?'cancel-job':'retry-job',{jobId:d.cancelJob||d.retryJob}).then(r=>{if(!r.ok)notify(reason(r.reason));requestState();});
-    else if(d.clearProduction||d.retryProduction)send(d.clearProduction?'clear-production':'retry-production',{factoryId:Number(d.clearProduction||d.retryProduction)}).then(r=>{notify(r.ok?(d.clearProduction?'Waiting queue cleared.':'Production retry requested.'):reason(r.reason));requestState();});
+    else if(d.clearProduction||d.retryProduction)send(d.clearProduction?'clear-production':'retry-production',{factoryId:Number(d.clearProduction||d.retryProduction)}).then(r=>{if(!r.ok)notify(reason(r.reason));requestState();});
     else if(d.control){afterBuildExit(()=>window.__kalaWarzoneTouch?.[d.control]?.());}
     else if(d.action==='back')close();
     else if(d.action==='cancel-placement')selectMode();
@@ -553,8 +593,8 @@
   loadSaved();resetDraft();
   window.__warzoneCommands={tower:true,setSize:applySize,open,close,closeNative,beginPlacement,cancelPlacement,placeAt,previewAt,send,accept,
     hidePreview:()=>{const ghost=document.getElementById('wt-build-ghost');if(ghost)ghost.hidden=true;},
-    isOpen:()=>Boolean(state.page),isPlacement:()=>Boolean(state.placement),nativeMenuOpen:()=>Boolean(state.nativeMenu&&state.nativeMenu!=='build'),nativeBuildOpen:()=>state.nativeMenu==='build',nativeBuildMenuOpen:()=>state.nativeMenu==='build'&&!state.nativeToolReady,nativeBuildTap,nativeBuildMenuTap,queueNativeSite,selectMode,afterBuildExit,selectNearbyTrucks,openBuild,
-    report:()=>({version:55,page:state.page,buildOpen:state.buildOpen,siteChecks:state.siteChecks,pending:state.pending.size,writes:state.writes,acks:state.acks,timeouts:state.timeouts,
+    isOpen:()=>Boolean(state.page),isPlacement:()=>Boolean(state.placement),nativeMenuOpen:()=>Boolean(state.nativeMenu&&state.nativeMenu!=='build'),nativeBuildOpen:()=>state.nativeMenu==='build',nativeBuildMenuOpen:()=>state.nativeMenu==='build'&&!state.nativeToolReady,nativeHudHidden:()=>state.nativeHudHidden,nativeBuildTap,nativeBuildMenuTap,queueNativeSite,selectMode,afterBuildExit,selectNearbyTrucks,openBuild,
+    report:()=>({version:56,page:state.page,buildOpen:state.buildOpen,nativeHudHidden:state.nativeHudHidden,pendingItem:state.pendingItem,siteChecks:state.siteChecks,pending:state.pending.size,writes:state.writes,acks:state.acks,timeouts:state.timeouts,
       placements:state.placements,rejects:state.rejects,opens:state.opens,closes:state.closes,placement:state.placement?.id,
       session:state.session,nativeMenu:state.nativeMenu,nativeItem:state.nativeItem,nativeBuildGroup:state.nativeBuildGroup,nativeToolReady:state.nativeToolReady,nativePendingSites:state.nativePendingSites.length,exitingBuild:state.exitingBuild,nativeBuildPlaced:state.nativeBuildPlaced,nativeBuildSawWork:state.nativeBuildSawWork,buildingOpening:state.buildingOpening,saved:state.saved,history:state.history,snapshot:state.snapshot,terrain:window.WarzoneTerrain?.report()})};
   fetch('/warzone/command-catalog.json').then(r=>{if(!r.ok)throw Error('catalog');return r.json();}).then(c=>{state.catalog=c;render();}).catch(()=>notify('The command catalogue could not load. Restart the app.'));

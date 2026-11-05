@@ -2,7 +2,21 @@
 
 final result: passed
 
-## v5.5 construction sidebar — current
+## v5.6 compact field controls — current
+
+APK SHA-256: `3cfb98b4cd12f1236ded54387edc4694f4ac62bd21991573eef8f3d67b86f147`.
+
+The exact installed APK passed the fresh native Towers journey at 1280x576,
+1080x600 and 1600x720: construction FIFO/completion and ETA, ordinary production,
+design/save/keyboard returns, repeated navigation, selection/movement, Patrol,
+STOP, BOX, compact controls, minimap return and automatic placement cleanup.
+Screenshots were inspected, including the large native scale prompt discovered
+and removed during iteration. Engine/WASM/data and Research layout are preserved.
+Physical-device, black-terrain, Save/Load, audio and performance limits remain.
+
+See [v5.6 evidence and scope](qa/v5.6/REPORT.md).
+
+## v5.5 construction sidebar — historical
 
 APK SHA-256: `37b9ac288ade3477fb9b8357e85c6a5ab10f846dbf6f27d5bfbf8fcd6addd5e5`.
 

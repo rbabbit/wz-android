@@ -911,6 +911,7 @@
   }
 
   function radarPoint(x, y) {
+    if(window.__warzoneCommands?.nativeHudHidden?.())return null;
     const target = canvas();
     if (!target) return null;
     const bounds = target.getBoundingClientRect();
@@ -944,7 +945,7 @@
     if (bounds.width <= 0 || bounds.height <= 0) return false;
     if (window.__warzoneCommands?.tower) {
       if (window.__warzoneCommands.nativeMenuOpen()) return false;
-      if (window.__warzoneCommands.nativeBuildOpen?.()) {
+      if (window.__warzoneCommands.nativeBuildOpen?.()&&!window.__warzoneCommands.nativeHudHidden?.()) {
         const ui=nativeUiRects(),lx=x-bounds.left,ly=y-bounds.top;
         if((window.__warzoneCommands.nativeBuildMenuOpen?.()&&inRect(lx,ly,ui.stats))||inRect(lx,ly,ui.objects))return false;
       }
@@ -997,6 +998,7 @@
     if (!ui || radarPoint(x, y)) return false;
     x -= ui.bounds.left; y -= ui.bounds.top;
     if (x < 0 || y < 0 || x >= ui.bounds.width || y >= ui.bounds.height) return false;
+    if(window.__warzoneCommands?.nativeHudHidden?.())return true;
     if (inRect(x, y, ui.reticle)) return false;
     if ((state.nativeObjectsOpen||window.__warzoneCommands?.nativeBuildOpen?.()) && inRect(x, y, ui.objects)) return false;
     if ((state.nativeStatsOpen||window.__warzoneCommands?.nativeBuildMenuOpen?.()) && inRect(x, y, ui.stats)) return false;
@@ -1179,6 +1181,20 @@
         all.querySelector?.('span')&&(all.querySelector('span').textContent='ALL UNITS');
         auto.querySelector?.('span')&&(auto.querySelector('span').textContent='PATROL');
         centre.append(select,all,auto,box,stop,trucks);hudDocument.body.appendChild(centre);
+        const toggle=hudDocument.createElement('button');toggle.id='wt-field-toggle';toggle.type='button';
+        toggle.setAttribute('aria-controls','wt-field-centre');toggle.setAttribute('aria-label','Unit controls');toggle.title='Unit controls';
+        toggle.innerHTML='<img src="/warzone/ui/icons/stack.svg" alt=""><span id="wt-field-toggle-count"></span>';
+        const compact=hudDocument.defaultView.matchMedia('(max-width:1100px), (max-height:650px)');let expanded=!compact.matches;
+        const update=()=>{hudDocument.body.dataset.fieldCompact=String(compact.matches);hudDocument.body.dataset.fieldExpanded=String(expanded);toggle.setAttribute('aria-expanded',String(expanded));centre.setAttribute('aria-hidden',String(!expanded));centre.inert=!expanded;};
+        bindTouchCommand(toggle,()=>{expanded=!expanded;update();});
+        const collapse=()=>{if(compact.matches){expanded=false;update();}};
+        // Complete the button's release/click handler before making its parent
+        // inert. A microtask here runs before the target listener in WebView.
+        centre.addEventListener('click',()=>setTimeout(collapse,0),true);
+        centre.addEventListener('pointerup',e=>{const b=e.target.closest('button');if(!b)return;const r=b.getBoundingClientRect();if(e.clientX>=r.left&&e.clientX<=r.right&&e.clientY>=r.top&&e.clientY<=r.bottom)setTimeout(collapse,0);},true);
+        compact.addEventListener('change',()=>{expanded=!compact.matches;update();});
+        window.addEventListener('warzone-build-sidebar-open',()=>{if(compact.matches){expanded=false;update();}});
+        hudDocument.body.appendChild(toggle);update();
       }
       hud.append(orderGroup, zoomGroup, techGroup);
       (hudDocument.getElementById("warzone-command-strip") || hudDocument.body).appendChild(hud);
@@ -1220,7 +1236,7 @@
           <button type="button" class="wt-help-close" aria-label="Close help">CLOSE</button></header>
         <div class="wt-help-content">
           <section class="wt-help-queue"><h2>BUILD · QUEUE YOUR DEFENCES</h2>
-            <ol><li><b>Open BUILD.</b> Choose a structure, then tap PLACE STRUCTURE.</li>
+            <ol><li><b>Open BUILD.</b> Scroll the sidebar and choose a structure.</li>
               <li><b>Tap each valid location.</b> Queued sites appear as Warzone’s green building blueprints.</li>
               <li><b>Nearby trucks work together.</b> BUILD selects the nearby group; multiple manually selected trucks are retained.</li>
               <li><b>SELECT / MOVE</b> leaves placement and keeps queued work. Placement also ends when your group finishes.</li></ol>
@@ -1236,7 +1252,7 @@
               <b>SELECT / MOVE</b> returns to ordinary unit selection and orders. Tap <b>BOX</b> then drag to select a group.</p>
             <p><b>NEAR / BATTLE / MAP</b> set camera distance. <b>BASE</b> returns to your command centre.</p></section>
           <section><h2>COMMANDS &amp; RESEARCH</h2>
-            <p>The bottom-left console keeps <b>ALL UNITS</b>, <b>PATROL</b>, <b>BOX</b>, <b>STOP</b> and <b>TRUCKS</b> available. ALL selects combat units; TRUCKS selects the nearby constructor group. Control size and Commanders are at the top of this guide.
+            <p>On small screens, tap the bottom-left units icon to expand <b>ALL UNITS</b>, <b>PATROL</b>, <b>BOX</b>, <b>STOP</b> and <b>TRUCKS</b>. ALL selects combat units; TRUCKS selects the nearby constructor group. Control size and Commanders are at the top of this guide.
               <b>STOP</b> stops selected units.</p>
             <p><b>TECH</b> opens research. Choose a lab and add available topics to its queue.
               Each lab completes your choices in order. Use <b>BACK TO BATTLE</b> to return.</p>

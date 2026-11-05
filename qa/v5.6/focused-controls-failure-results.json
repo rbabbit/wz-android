@@ -1,0 +1,72 @@
+{
+  "device": "emulator-5556",
+  "seeded": false,
+  "screens": [
+    "delivery-wide-build",
+    "delivery-controls-expanded",
+    "delivery-wide-scroll",
+    "delivery-stock-base-icons",
+    "delivery-live-time-and-queue",
+    "delivery-reclaimed-window",
+    "delivery-minimap-restored",
+    "delivery-mixed-queue",
+    "delivery-queue-details",
+    "delivery-normal-production",
+    "delivery-keyboard-visible",
+    "delivery-saved-design",
+    "delivery-research-return-0",
+    "delivery-research-return-1",
+    "delivery-movement-restored"
+  ],
+  "cases": [
+    "scrolling catalogue, fixed footer, genuine artwork, three native builders, two FIFO orders, duplicate rejection, live ETA, pause/resume, queue return",
+    "native construction completion, mixed tower/facility/module queue and completion, ordinary factory production, valid design/save, Android keyboard return, repeated research/factory/battle returns, produced-unit selection and movement"
+  ],
+  "errors": [],
+  "timingSample": [
+    {
+      "id": 160193,
+      "itemId": "GuardTower1",
+      "name": "Heavy Machinegun Guard Tower",
+      "x": 7,
+      "y": 39,
+      "progress": 0.2777777777777778,
+      "approximate": true,
+      "workers": 3,
+      "rate": 27,
+      "status": "building",
+      "remaining": 9
+    }
+  ],
+  "reclaimedSite": {
+    "x": 8,
+    "y": 35,
+    "result": {
+      "nonce": "cmd-1793859392497-250",
+      "action": "preview-build",
+      "ok": true,
+      "reason": "",
+      "result": {
+        "id": "cmd-1793859392497-250",
+        "itemId": "A0TankTrap",
+        "x": 8,
+        "y": 35,
+        "workers": [
+          160005,
+          160003,
+          160011
+        ],
+        "automatic": false,
+        "status": "queued",
+        "created": 171202,
+        "attempts": {},
+        "issued": {},
+        "parentId": 0,
+        "targetModules": 0,
+        "reason": ""
+      },
+      "gameTime": 171202
+    }
+  },
+  "failure": "Error: Timed out: All Units selects combat unit\n    at until (C:\\timerApp\\wz-towers-compact\\tools\\sidebar-audit.cjs:15:168)\n    at async main (C:\\timerApp\\wz-towers-compact\\tools\\sidebar-audit.cjs:140:2)"
+}

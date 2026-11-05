@@ -22,7 +22,7 @@ function valid(){Object.assign(state.draft,{body:'Body1REC',propulsion:'wheeled0
  state.page='design';c.resetDraft(state.saved[0]);state.validation={ok:true};persisted=false;const before=JSON.stringify(state.saved);c.saveDesign();const failure=requests.shift();failure.resolve({ok:true,result:{...failure.data.design,name:'storage failure'}});await flush();assert.equal(JSON.stringify(state.saved),before,'failed persistence restores library');assert.equal(state.saving.size,0);persisted=true;
  const menuState={menuRevision:0,nativeMenu:'',nativeMenuPending:false},back={hidden:true},menuRequests=[];
  const menu=vm.createContext({state:menuState,cancelPlacement(){},close(){},window:{},document:{getElementById:()=>({focus(){}})},element:()=>back,notify(){},reason:x=>x,
- send:()=>new Promise(resolve=>menuRequests.push(resolve))});
+ setNativeHudHidden:()=>Promise.resolve(),renderSidebar(){},send:()=>new Promise(resolve=>menuRequests.push(resolve))});
  vm.runInContext(source.slice(source.indexOf('  function openNative('),source.indexOf('  function requestState(')),menu);
  menu.openNative('stats');menu.closeNative();menuRequests[0]({ok:true});await flush();assert.equal(back.hidden,true,'late open acknowledgement must not resurrect native back button');assert.equal(menuState.nativeMenu,'');
  menu.openNative('factory');menuRequests[1]({ok:false,reason:'timeout'});await flush();assert.equal(menuState.nativeMenu,'factory','old close failure cannot clear newer native menu');menuRequests[2]({ok:true});await flush();assert.equal(back.hidden,false);

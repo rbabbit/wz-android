@@ -5,6 +5,13 @@ WZmodTowerDefense-v4.7.0-a mod with two selectable maps. The editable project is
 at the repository root; open this folder in Android Studio.
 Current Android version: **5.12-footer (62)**.
 
+**Latest download:** [v5.12 release](https://github.com/rbabbit/wz-android/releases/tag/v5.12-footer)
+— [Android APK](https://github.com/rbabbit/wz-android/releases/download/v5.12-footer/Warzone-Towers-v5.12.apk),
+[complete tested source ZIP](https://github.com/rbabbit/wz-android/releases/download/v5.12-footer/warzone-towers-v5.12-source.zip),
+[SHA-256 checksums](https://github.com/rbabbit/wz-android/releases/download/v5.12-footer/Warzone-Towers-v5.12-SHA256.txt).
+The frozen release source is commit `83345e2`; subsequent release-documentation
+updates do not change the tested APK or its source archive.
+
 The start screen offers two included offline maps: **Dustfall**
 (NoQ's td1_v3, 64×80) and **Iron Valley** (arc's TowerDefense2_m, 64×64).
 These are display names; internal map IDs and authored map data are unchanged.
@@ -79,6 +86,9 @@ current build-selection/exit checks and their limits.
 orders/completion, nearest constructors, an empty roster and a replacement truck.
 
 ## Downloads and saved versions
+
+- [v5.12 official-art footer, Dustfall and Iron Valley: APK, complete source and checksums](https://github.com/rbabbit/wz-android/releases/tag/v5.12-footer)
+- [v5.12 native emulator verification and limits](qa/v5.12/REPORT.md)
 
 - [v5.4 lab sidebar: APK, complete source and checksums](https://github.com/rbabbit/wz-android/releases/tag/v5.4-lab-sidebar)
 - [v5.4 selected-lab emulator verification](qa/v5.4/REPORT.md)

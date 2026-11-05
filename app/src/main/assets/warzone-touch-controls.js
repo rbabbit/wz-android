@@ -944,9 +944,8 @@
     const normalizedX = (x - bounds.left) / bounds.width;
     const normalizedY = (y - bounds.top) / bounds.height;
 
-    // TowerDefense2_m uses the native square radar. Warzone radar.cpp fits
-    // its longest side to 128 * radarZoom / 16 and leaves BASE_GAP * 4 (24px).
-    // The previous tall-map hit area consumed drags above the actual minimap.
+    // radar.cpp fits the longest map side to 128 * radarZoom / 16. Both
+    // supported maps use the startup's absolute 180-degree radar orientation.
     if (!state.radarSide) {
       try {
         const module = window.LaunchedModule?.FS ? window.LaunchedModule : window.Module;
@@ -957,9 +956,13 @@
       } catch (_) { /* The engine config may not exist during startup. */ }
     }
     const side = state.radarSide || 192;
+    const snapshot=window.__warzoneCommands?.report?.().snapshot;
+    const mapWidth=snapshot?.mapWidth||64,mapHeight=snapshot?.mapHeight||64,span=Math.max(mapWidth,mapHeight);
+    const radarWidth=side*mapWidth/span,radarHeight=side*mapHeight/span;
+    const centreX=bounds.width-24-side/2,centreY=bounds.height-24-side/2;
     const localX = x - bounds.left, localY = y - bounds.top;
-    if (localX < bounds.width - 24 - side || localX > bounds.width - 24
-        || localY < bounds.height - 24 - side || localY > bounds.height - 24) return null;
+    if (localX < centreX-radarWidth/2 || localX > centreX+radarWidth/2
+        || localY < centreY-radarHeight/2 || localY > centreY+radarHeight/2) return null;
     return { x: normalizedX, y: normalizedY };
   }
 

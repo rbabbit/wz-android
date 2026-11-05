@@ -74,6 +74,7 @@ public final class MainActivity extends Activity {
     private GraphicsPackStore graphicsStore;
     private GraphicsSetupView graphicsSetup;
     private String graphicsMode = "normal";
+    private String mapId = "td2";
     private MusicPackStore musicStore;
     private MusicSetupView musicSetup;
     private MusicTrackCatalog musicCatalog;
@@ -103,14 +104,18 @@ public final class MainActivity extends Activity {
         musicCatalog = new MusicTrackCatalog(this);
         musicEnabled = getPreferences(MODE_PRIVATE).getBoolean("music_enabled", false);
         graphicsMode = getPreferences(MODE_PRIVATE).getString("graphics_mode", "normal");
+        String requestedMap = getIntent().getStringExtra("map");
+        mapId = "td1".equals(requestedMap != null ? requestedMap : getPreferences(MODE_PRIVATE).getString("map_id", "td2")) ? "td1" : "td2";
         showGraphicsSetup();
     }
 
     private void showGraphicsSetup() {
-        graphicsSetup = new GraphicsSetupView(this, graphicsMode, new GraphicsSetupView.Actions() {
-            @Override public void start(String mode) { startWithGraphics(mode); }
+        graphicsSetup = new GraphicsSetupView(this, graphicsMode, mapId, new GraphicsSetupView.Actions() {
+            @Override public void start(String mode, String map) { mapId=map;startWithGraphics(mode); }
             @Override public void cancel() { graphicsStore.cancel(); }
             @Override public void music() { showMusicSetup(); }
+            @Override public void download() { downloadGraphics(); }
+            @Override public void map(String id) { mapId=id;getPreferences(MODE_PRIVATE).edit().putString("map_id",id).apply(); }
         });
         root.addView(graphicsSetup, new FrameLayout.LayoutParams(-1, -1));
         graphicsStore.inspect(cached -> {
@@ -130,6 +135,7 @@ public final class MainActivity extends Activity {
 
     private void showMusicSetup() {
         if (musicSetup != null) return;
+        if (graphicsSetup != null) graphicsSetup.setVisibility(View.GONE);
         musicSetup = new MusicSetupView(this, musicCatalog, selectedMusicTracks(), new MusicSetupView.Actions() {
             @Override public void download() { downloadMusic(); }
             @Override public void cancel() { musicStore.cancel(); }
@@ -157,10 +163,10 @@ public final class MainActivity extends Activity {
                 if (musicSetup != null) musicSetup.progress(bytes, verifying);
             }
             @Override public void ready() {
-                musicCached = true; musicEnabled = true;
-                getPreferences(MODE_PRIVATE).edit().putBoolean("music_enabled", true).apply();
-                if (musicSetup != null) musicSetup.ready(true);
-                if (graphicsSetup != null) graphicsSetup.setMusicState(true, true);
+                musicCached = true; musicEnabled = musicEnabled && !selectedMusicTracks().isEmpty();
+                getPreferences(MODE_PRIVATE).edit().putBoolean("music_enabled", musicEnabled).apply();
+                if (musicSetup != null) musicSetup.ready(musicEnabled);
+                if (graphicsSetup != null) graphicsSetup.setMusicState(true, musicEnabled);
             }
             @Override public void failed(String message) {
                 if (musicSetup != null) musicSetup.failed(message);
@@ -171,6 +177,7 @@ public final class MainActivity extends Activity {
     private void closeMusicSetup() {
         musicStore.cancel();
         if (musicSetup != null) { root.removeView(musicSetup); musicSetup = null; }
+        if (graphicsSetup != null) graphicsSetup.setVisibility(View.VISIBLE);
         inspectMusic();
     }
 
@@ -179,13 +186,17 @@ public final class MainActivity extends Activity {
             showMusicSetup();return;
         }
         graphicsMode = "high".equals(mode) ? "high" : "normal";
-        if ("normal".equals(graphicsMode)) { graphicsStore.cancel(); launchGame(); return; }
+        if ("normal".equals(graphicsMode) || graphicsStore.readyFile()!=null) { graphicsStore.cancel();launchGame();return; }
+        if (graphicsSetup!=null) graphicsSetup.showError("Download the HQ pack, or choose Normal to play offline.");
+    }
+
+    private void downloadGraphics() {
         if (graphicsSetup != null) graphicsSetup.downloadProgress(0, false);
         graphicsStore.download(new GraphicsPackStore.Listener() {
             @Override public void progress(long bytes, boolean verifying) {
                 if (graphicsSetup != null) graphicsSetup.downloadProgress(bytes, verifying);
             }
-            @Override public void ready() { launchGame(); }
+            @Override public void ready() { if(graphicsSetup!=null){graphicsSetup.setDownloading(false);graphicsSetup.setCached(true);graphicsSetup.showStatus("HQ ready offline. Choose your graphics and play.",false);} }
             @Override public void failed(String message) {
                 if (graphicsSetup != null) graphicsSetup.showError(message);
             }
@@ -193,7 +204,7 @@ public final class MainActivity extends Activity {
     }
 
     private void launchGame() {
-        getPreferences(MODE_PRIVATE).edit().putString("graphics_mode", graphicsMode).apply();
+        getPreferences(MODE_PRIVATE).edit().putString("graphics_mode", graphicsMode).putString("map_id", mapId).apply();
         if (graphicsSetup != null) { root.removeView(graphicsSetup); graphicsSetup = null; }
         createLoadingPanel();
         webView.loadUrl(gameUrl());
@@ -201,12 +212,12 @@ public final class MainActivity extends Activity {
 
     private Set<String> selectedMusicTracks() {
         Set<String> allowed=musicCatalog.allIds();
-        Set<String> selected=new HashSet<>(getPreferences(MODE_PRIVATE).getStringSet("music_tracks",allowed));
+        Set<String> selected=new HashSet<>(getPreferences(MODE_PRIVATE).getStringSet("music_tracks",Collections.emptySet()));
         selected.retainAll(allowed);return selected;
     }
 
     private String gameUrl() {
-        String url = URL + "&graphics=" + graphicsMode + "&music=" + (musicEnabled && musicCached ? "1" : "0");
+        String url = URL + "&map=" + mapId + "&graphics=" + graphicsMode + "&music=" + (musicEnabled && musicCached ? "1" : "0");
         if (getIntent().getBooleanExtra("graphics_probe", false)) url += "&graphics_probe=1";
         if ((getApplicationInfo().flags & android.content.pm.ApplicationInfo.FLAG_DEBUGGABLE) != 0
                 || getIntent().getBooleanExtra("music_probe", false)) url += "&music_probe=1";
@@ -657,7 +668,7 @@ public final class MainActivity extends Activity {
         if (remaining <= 0) {
             updateLoadingStatus("DEPLOYING TO THE BATTLEFIELD…");
             evaluateTouchTapThen(535, 431, "Accept limits", 1800,
-                    () -> evaluateTouchTapThen(585, 70,
+                    () -> evaluateTouchTapThen(585, "td1".equals(mapId) ? 30 : 70,
                             "Ready", 1500, this::finishStartupAutomation));
             return;
         }

@@ -1,0 +1,84 @@
+{
+  "device": "emulator-5556",
+  "cases": [
+    "zero default tracks, explicit All/Clear, track choice before download, map/playlist retained through Back and process restart",
+    "download does not enable playback; empty enabled playlist blocks Start and asks for selection; one explicit track allows Start",
+    "real network failure retains offline Normal; seeded valid prefix survives native cancellation; actual HQ resume verifies and stays on splash; cached High enables Play"
+  ],
+  "layouts": [
+    {
+      "screen": "large",
+      "bounds": [
+        0,
+        0,
+        2400,
+        1080
+      ],
+      "play": [
+        1875,
+        820,
+        2355,
+        892
+      ]
+    },
+    {
+      "screen": "standard",
+      "bounds": [
+        0,
+        0,
+        2400,
+        1080
+      ],
+      "play": [
+        1744,
+        820,
+        2355,
+        892
+      ]
+    },
+    {
+      "screen": "compact",
+      "bounds": [
+        0,
+        0,
+        1620,
+        900
+      ],
+      "play": [
+        1095,
+        640,
+        1575,
+        712
+      ]
+    },
+    {
+      "screen": "large-final",
+      "bounds": [
+        0,
+        0,
+        2400,
+        1080
+      ],
+      "play": [
+        1875,
+        820,
+        2355,
+        892
+      ]
+    }
+  ],
+  "resumedAfterFixtureCorrection": true,
+  "graphicsFixtureRetried": true,
+  "hqPartialBytes": 345031,
+  "hqCancellationFixture": {
+    "seededVerifiedPrefixBytes": 1048576,
+    "retainedOnCancelBytes": 1048576,
+    "nativeCancelObserved": true,
+    "actualNetworkResumeCompleted": true
+  },
+  "musicSHA256": "602ea6c69f4073a9617676a39f8397232953637a9b7a36e7cc28e93dd15184cd",
+  "hqSHA256": "a16a06c2a6b68e86a03934240880ec0b0fd72666606af3bf12ed5ffda7734f0e",
+  "apkSHA256": "08e9d1610d55c927b000026331f25013a608d0d05764bc05ff725ab90916a36a",
+  "installedSHA256": "08e9d1610d55c927b000026331f25013a608d0d05764bc05ff725ab90916a36a",
+  "passed": true
+}

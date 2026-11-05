@@ -29,7 +29,10 @@ function setup(query,response){const calls={fetch:[],added:[],removed:[],files:[
  assert.equal(on.music.report().nativeAlbums.length,4);assert.equal(on.music.report().nativeTracks.length,1);assert.equal(on.music.report().nativeReadBytes,640);
  on.module.FS.open('/data/music/albums/original_soundtrack/albumcover.png');assert.equal(on.music.report().nativeCoverReads,1);
  assert.equal(catalog.trackIds.length,39);
- assert.equal(on.music.applySelection(on.module,'/config'),true);
+ assert.equal(on.music.applySelection(on.module,'/config'),false,'missing user choice must not select the entire catalogue');
+ assert.equal(on.music.report().selectedTracks.length,0);
+ on.window.BlockNightAndroid.musicSelection=()=>JSON.stringify(catalog.trackIds);
+ assert.equal(on.music.applySelection(on.module,'/config'),true,'all tracks require an explicit selection');
  assert.equal(on.music.report().selectedTracks.length,39);
  const selection=['original_soundtrack/track2.opus'];
  on.window.BlockNightAndroid.musicSelection=()=>JSON.stringify(selection);

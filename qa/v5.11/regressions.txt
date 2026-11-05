@@ -1,0 +1,35 @@
+test-touch-zoom :
+PASS: sticky building across menus and BASE, tablet lobby coordinates, absolute zoom, rapid switching, and pinch cancellation
+test-music-loader :
+PASS: Music off, four albums/40 tracks, all 55 original file views, native-read probe, failure blocking
+test-graphics-loader :
+Graphics loader: Normal, original HQ mount, native read probe, unavailable/truncated/network failure passed
+test-single-tap-build :
+PASS: BUILD leaves first item available, one item request selects nearest group, and empty-truck selection uses a real held Shift chord
+test-command-pages :
+PASS: stale validation, draft identity, duplicate save, save-as-new, failure retry, persistence rollback, native-menu races and required turret slot
+test-command-bridge :
+PASS: FIFO builds, manual/automatic workers, sticky sessions, STOP, deduplication, validation, factory queues and bounded 100-job polling
+PASS: construction ETA follows actual worker actions/upgrades, pauses and power; modules use observed work; journal never replaces native orders
+PASS: a snapped 2x2 foundation binds to its own queue entry without matching older adjacent buildings
+PASS: native queue handoff preserves progress/completion; sustained cancellation still interrupts
+test-native-placement-lifecycle :
+PASS: native readiness buffers early taps, SELECT drains accepted sites, STOP cancels pending input and later navigation wins
+test-build-transition :
+PASS: nested build transitions keep the battlefield covered until the last owner releases it
+test-terrain-picker :
+PASS: perspective terrain picking, projection, native GL delegation, buffer-state restoration and mesh invalidation
+test-towers-controls :
+PASS: acknowledged STOP affects only selected friendly units, deduplicates, and respects cancellation
+test-functional-screens :
+PASS: selected-design handoff, native-first ordering, live queue rows, deletion cancel/storage rollback, draft discard protection, queue rejection and scoped notifications
+test-research-sidebar :
+PASS: selected lab owns its name, image, total and queue; catalogue Hover cannot leak into lab status; idle and native-advance states reset correctly
+test-research-queue-bridge :
+PASS: actual Towers bridge validates atomic ordered queues, game-time estimates, module rates and waiting power
+test-wave-log-reader :
+PASS: incremental wave log reads skip history, preserve partial UTF-8/JSON lines, handle truncation, and close files
+PASS: research polling also skips archived bytes and waits for complete event lines
+PASS: Skip Wave accepts touch release once, ignores cancellation/drag/duplicates, and retains keyboard activation
+test-native-notification-prefs :
+PASS: native scale tips suppressed before startup; unrelated notification preferences preserved

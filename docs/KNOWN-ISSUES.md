@@ -1,5 +1,13 @@
 # Known issues and verification limits
 
+v5.11 adds the exact supplied td1_v3 map alongside the original TD2 map, with
+the same unchanged Towers mod. TD1's trucks build on raised platforms; the HQ
+route is not reachable from those platforms. This is authored map geometry.
+The compact start screen, optional downloads and explicit music selection are
+covered in [v5.11 evidence](../qa/v5.11/REPORT.md). Physical rendering, performance,
+audible output and complete native 30-round endurance remain unverified. The
+existing software-emulator black-terrain limitation below remains.
+
 v5.10 reduces construction-selection overhead while retaining a fresh native
 placement acknowledgement for every choice. A cached ready flag can outlive the
 engine's placement tool, so it is deliberately not used to skip acknowledgement

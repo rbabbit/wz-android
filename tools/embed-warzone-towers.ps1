@@ -19,6 +19,7 @@ function Add-PackageFile([string]$VirtualPath, [string]$SourcePath) {
 }
 
 Add-PackageFile '/data/mp/tests/warzonetowers.json' (Join-Path $scenarioRoot 'warzonetowers.json')
+Add-PackageFile '/data/mp/tests/warzonetowers-td1.json' (Join-Path $scenarioRoot 'warzonetowers-td1.json')
 Add-PackageFile '/data/mp/tests/warzone-towers-rules.js' (Join-Path $scenarioRoot 'warzone-towers-rules.js')
 Add-PackageFile '/data/mp/multiplay/script/rules/init.js' (Join-Path $scenarioRoot 'warzone-towers-rules.js')
 Add-PackageFile '/data/mp/tests/warzone-towers-waves.js' (Join-Path $scenarioRoot 'warzone-towers-waves.js')
@@ -46,6 +47,10 @@ Get-ChildItem -LiteralPath $modRoot -Recurse -File | Sort-Object FullName | ForE
 		return
 	}
 	Add-PackageFile ('/data/mp/' + $relative) $_.FullName
+}
+
+Get-ChildItem -LiteralPath (Join-Path $ProjectRoot 'vendor\maps\td1-v3\map') -File | Sort-Object Name | ForEach-Object {
+    Add-PackageFile ('/data/mp/multiplay/maps/td1_v3/' + $_.Name) $_.FullName
 }
 
 

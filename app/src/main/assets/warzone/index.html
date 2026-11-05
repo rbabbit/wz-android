@@ -1252,6 +1252,7 @@
         Module.FS_createPath('/data/mp/multiplay', 'maps', true, true);
         Module.FS_createPath('/data/mp/multiplay/maps', '2c-blocknight20', true, true);
         Module.FS_createPath('/data/mp/multiplay/maps', '2c-TowerDefense2_m', true, true);
+        Module.FS_createPath('/data/mp/multiplay/maps', 'td1_v3', true, true);
         Module.FS_createPath('/data/mp', 'SurvivalMod', true, true);
         Module.FS_createPath('/data/mp', 'diffs', true, true);
         Module.FS_createPath('/data/mp/diffs', 'x1_5_WZmodBig', true, true);
@@ -1317,7 +1318,8 @@
       if (additional_command_line_args) {
         Module.arguments = Module.arguments.concat(additional_command_line_args);
       }
-      Module.arguments.push('--skirmish=warzonetowers.json');
+      const towerMap = new URLSearchParams(location.search).get('map');
+      Module.arguments.push(towerMap === 'td1' ? '--skirmish=warzonetowers-td1.json' : '--skirmish=warzonetowers.json');
     
       Module['locateFile'] = function(path, prefix) {
         // Custom handling for .data files

@@ -2,7 +2,28 @@
 
 final result: passed
 
-## v5.10 construction response — current
+## v5.11 two maps and compact startup — current
+
+Clean installed APK SHA-256:
+`08e9d1610d55c927b000026331f25013a608d0d05764bc05ff725ab90916a36a`.
+
+The supplied NoQ td1_v3 map was integrated and tested before the start-screen
+redesign. Both named maps use the unchanged supplied Towers mod and are bundled
+offline. The compact console preserves the splash artwork; downloads remain
+separate from Play. Music defaults to zero tracks and preserves explicit choices.
+
+The exact delivery APK passed native TD1 construction/completion, ordinary unit
+production/movement, both labs, menu returns and first-wave attack orders; TD2
+passed related FIFO/completion/movement and repeated menu/keyboard returns at
+three viewports. Offline TD1 startup, native music preference reads and actual
+optional-pack download/error/cancel/resume cases passed. The cancellation test
+used a disclosed verified-prefix fixture. See [v5.11 evidence](qa/v5.11/REPORT.md).
+
+Engine logic/WASM, the prior data prefix, original mod and Research are preserved.
+The existing emulator black-terrain limitation, physical-device rendering/audio/
+performance and a full native 30-round playthrough remain outside this result.
+
+## v5.10 construction response — historical
 
 Clean installed APK SHA-256:
 `5b9d515e7c7e5e24008c4c82b5f46ef109952a1939112a9ada10308ffd0a2f65`.

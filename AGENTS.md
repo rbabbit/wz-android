@@ -49,3 +49,12 @@
   mistake a stale cached snapshot for a working bridge or repeat a failed load.
 - Archive upload checksums are in `archive/`; after intentional edits regenerate
   the repository file manifest with `python tools/verify-project.py --refresh`.
+- Both selectable maps use the unchanged supplied Towers mod. TD1 is the exact
+  NoQ td1_v3 archive (four starts; human position 0, native Ready y=30). Existing
+  TD2 uses human position 1 (Ready y=70). Do not assume one lobby row for both.
+- TD1's construction trucks live on raised platforms disconnected from the HQ
+  route. Validate reachability and native height before field taps; use the
+  authored 63x79 scroll bounds to fit its rectangular radar, not a square hitbox.
+- Startup download tests must distinguish on-device music.data from the WebView
+  music-v1.data route. If transfer is too fast to cancel after a hierarchy read,
+  use a disclosed verified-prefix fixture and prepared native Cancel coordinates.

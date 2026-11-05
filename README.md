@@ -1,9 +1,26 @@
 # Warzone Towers — Android
 
 Full Android project for Warzone Towers, using the supplied
-WZmodTowerDefense-v4.7.0-a mod and TowerDefense2_m map. The editable project is
+WZmodTowerDefense-v4.7.0-a mod with two selectable maps. The editable project is
 at the repository root; open this folder in Android Studio.
-Current Android version: **5.10-build-response (60)**.
+Current Android version: **5.11-two-maps (61)**.
+
+The start screen offers two included offline maps: **Tower Defense 1**
+(NoQ's td1_v3, 64×80) and **Tower Defense 2** (arc's TowerDefense2_m, 64×64).
+Both use the same supplied Tower Defense mod and 30-round schedule. TD1 keeps
+its authored raised building platforms and four starting trucks; TD2 keeps its
+existing starts and six trucks. Use the minimap to choose a building platform
+on TD1; the trucks cannot build on its disconnected HQ route.
+
+The original splash artwork remains visible behind a compact launch console.
+Graphics and music downloads are separate controls; HQ download completion
+stays on the start screen. Normal graphics work offline without either pack.
+Music starts with no tracks selected. Choose tracks explicitly; saved choices
+are retained, and enabling an empty playlist asks for a selection. Downloading
+music does not switch playback on automatically.
+
+See [v5.11 emulator evidence and limits](qa/v5.11/REPORT.md) for both maps,
+offline launch, downloads, music selection and the three tested screen sizes.
 
 The original mod owns all 30 timed rounds, enemy templates, ranks, research
 delay, per-kill power rewards and HQ objective. Preparation lasts three minutes.

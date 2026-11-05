@@ -39,11 +39,26 @@ $towerText = [IO.File]::ReadAllText($towerLevelPath)
 $towerText = [regex]::Replace($towerText, $legacyResourcePattern, '')
 $encoding = [Text.UTF8Encoding]::new($false)
 
+# The modern map keeps its original gam.json and object JSON in its own folder;
+# native game loading resolves the virtual .gam path to that gam.json.
+$secondLevel = @'
+
+level td1_v3-T1
+players 4
+type 14
+dataset MULTI_CAM_1
+game "multiplay/maps/td1_v3.gam"
+'@
+
 if ($existingText.Contains('TowerDefense2_m-T1')) {
 	$combinedBytes = $encoding.GetBytes([regex]::Replace($existingText, $legacyResourcePattern, ''))
 	if ($combinedBytes.Length -eq $existingBytes.Length) {
+		if (-not $existingText.Contains('level td1_v3-T1')) {
+			$combinedBytes = $encoding.GetBytes($existingText + "`n" + $secondLevel + "`n")
+		} else {
 		Write-Output 'Warzone Towers map is already registered in /data/mp/addon.lev.'
 		exit 0
+		}
 	}
 } else {
 	$towerBytes = $encoding.GetBytes($towerText)
@@ -52,6 +67,10 @@ if ($existingText.Contains('TowerDefense2_m-T1')) {
 	[Array]::Copy($existingBytes, 0, $combinedBytes, 0, $existingBytes.Length)
 	[Array]::Copy($separator, 0, $combinedBytes, $existingBytes.Length, $separator.Length)
 	[Array]::Copy($towerBytes, 0, $combinedBytes, $existingBytes.Length + $separator.Length, $towerBytes.Length)
+}
+
+if (-not $encoding.GetString($combinedBytes).Contains('level td1_v3-T1')) {
+    $combinedBytes = $encoding.GetBytes($encoding.GetString($combinedBytes) + "`n" + $secondLevel + "`n")
 }
 
 $newStart = (Get-Item -LiteralPath $dataPath).Length

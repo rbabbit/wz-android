@@ -329,6 +329,12 @@ async function run() {
   const radarBefore=controls.report().radarTaps;
   fire("pointerdown",34,900,480);fire("pointerup",34,900,480);
   assert.equal(controls.report().radarTaps,radarBefore+1,"actual square radar must retain native interaction");
+  controls.releaseAll(true);window.__warzoneCommands={report:()=>({snapshot:{mapWidth:63,mapHeight:79}}),isPlacement:()=>false,nativeBuildOpen:()=>false,nativeMenuOpen:()=>false};
+  const rectangularPans=controls.report().pans;
+  fire('pointerdown',35,790,480);fire('pointermove',35,790,515);fire('pointerup',35,790,515);
+  assert.equal(controls.report().pans,rectangularPans+1,'world beside the narrow TD1 radar must pan rather than being consumed by the old square hit area');
+  const rectangularTaps=controls.report().radarTaps;fire('pointerdown',36,900,480);fire('pointerup',36,900,480);
+  assert.equal(controls.report().radarTaps,rectangularTaps+1,'rectangular TD1 radar still passes actual map taps to native input');delete window.__warzoneCommands;
   controls.releaseAll();
   controls.toggleQueueMode(true);
   controls.queuedClick(500, 250);

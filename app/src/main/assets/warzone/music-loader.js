@@ -16,7 +16,7 @@
         const requested=raw?JSON.parse(raw):null;
         const allowed=new Set(catalog.trackIds);
         if(requested!==null&&(!Array.isArray(requested)||requested.some(id=>!allowed.has(id))))throw Error('Invalid Music selection. Please choose your tracks again.');
-        const selected=new Set(requested===null?catalog.trackIds:requested);
+        const selected=new Set(requested===null?[]:requested);
         if(!selected.size)throw Error('Select a Music track on the start screen, or turn Music off.');
         const path=configDir+'/music.json';let preferences={};
         try{preferences=JSON.parse(module.FS.readFile(path,{encoding:'utf8'}));}catch(_){}

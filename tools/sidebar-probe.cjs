@@ -28,7 +28,7 @@ async function connect(){
   if(mode==='eval'||mode==='eval-file'){const value=await c.evaluate(mode==='eval-file'?fs.readFileSync(args[0],'utf8'):args.join(' '));console.log(typeof value==='string'?value:JSON.stringify(value));}
   else if(mode==='wait'){
    const expression=args.join(' ');let value;
-   const deadline=Date.now()+40000;while(Date.now()<deadline){value=await c.evaluate(expression);if(value){console.log(JSON.stringify(value));return;}await new Promise(r=>setTimeout(r,250));}
+   const deadline=Date.now()+Math.min(120000,Math.max(5000,Number(process.env.WZ_QA_WAIT_MS)||40000));while(Date.now()<deadline){value=await c.evaluate(expression);if(value){console.log(JSON.stringify(value));return;}await new Promise(r=>setTimeout(r,250));}
    throw Error('Observable condition did not become true: '+expression);
   }
   else if(mode==='map'){

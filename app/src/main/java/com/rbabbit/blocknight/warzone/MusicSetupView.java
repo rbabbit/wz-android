@@ -55,7 +55,7 @@ final class MusicSetupView extends FrameLayout {
         LinearLayout content=new LinearLayout(context);content.setOrientation(LinearLayout.VERTICAL);
         scroll.addView(content,new ScrollView.LayoutParams(-1,-2));
         panel.addView(scroll,new LinearLayout.LayoutParams(-1,0,1));
-        add(content,text("Choose your battle playlist before you start.",14,INK),8,5);
+        add(content,text("Choose your tracks. Nothing is selected by default.",14,INK),8,5);
         add(content,text("39 original tracks · Four albums · Original menu theme\n110 MiB · Download once from our server · Play offline",12,MUTED),0,8);
         enabled=new CheckBox(context);enabled.setText("Music on");enabled.setTextColor(INK);
         enabled.setButtonTintList(ColorStateList.valueOf(CYAN));
@@ -100,7 +100,7 @@ final class MusicSetupView extends FrameLayout {
     private Set<String> selection(){Set<String> ids=new HashSet<>();for(Map.Entry<String,CheckBox> e:tracks.entrySet())if(e.getValue().isChecked())ids.add(e.getKey());return ids;}
     private void selectAll(boolean checked){updating=true;for(CheckBox c:tracks.values())c.setChecked(checked);updating=false;actions.tracks(selection());refresh();}
     private void refresh(){
-        boolean usable=cached&&enabled.isChecked()&&!busy;
+        boolean usable=!busy;
         for(CheckBox c:tracks.values())c.setEnabled(usable);all.setEnabled(usable);clear.setEnabled(usable);
         int selected=selection().size();count.setText(selected+" / 39 selected");
         start.setEnabled(!busy&&(!enabled.isChecked()||selected>0));
@@ -109,7 +109,7 @@ final class MusicSetupView extends FrameLayout {
     void setCached(boolean ready,boolean on){
         cached=ready;updating=true;enabled.setChecked(ready&&on);updating=false;
         enabled.setEnabled(ready&&!busy);download.setText(ready?"SAVE & BACK":"DOWNLOAD MUSIC");
-        download.setContentDescription(download.getText());status.setText(ready?"Saved automatically · Ready offline":"Download Music to enable track selection.");refresh();
+        download.setContentDescription(download.getText());status.setText(ready?"Saved automatically · Ready offline":"Choose tracks, then download Music. Normal play needs no download.");refresh();
     }
     void progress(long bytes,boolean verifying){
         busy=true;enabled.setEnabled(false);progress.setVisibility(VISIBLE);progress.setIndeterminate(verifying);

@@ -1,0 +1,50 @@
+{
+  "challenge": {
+    "bases": 3,
+    "description": "Protect your command centre through the supplied 30-round Tower Defense schedule.",
+    "difficulty": "Medium",
+    "map": "td1_v3-T1",
+    "maxPlayers": 4,
+    "name": "Warzone Towers: Tower Defense 1",
+    "powerLevel": 1,
+    "scavengers": 0,
+    "techLevel": 1,
+    "version": 2
+  },
+  "locked": {
+    "ai": true,
+    "alliances": true,
+    "bases": true,
+    "difficulty": true,
+    "position": true,
+    "power": true,
+    "scavengers": true,
+    "teams": true
+  },
+  "player_0": {
+    "name": "Tower Commander",
+    "position": 0,
+    "team": 0
+  },
+  "player_1": {
+    "ai": "multiplay/skirmish/Scavengers.js",
+    "difficulty": "Medium",
+    "name": "Scavengers 1",
+    "position": 1,
+    "team": 1
+  },
+  "player_2": {
+    "ai": "multiplay/skirmish/Scavengers.js",
+    "difficulty": "Medium",
+    "name": "Scavengers 2",
+    "position": 2,
+    "team": 1
+  },
+  "player_3": {
+    "ai": "multiplay/skirmish/Scavengers.js",
+    "difficulty": "Medium",
+    "name": "Scavengers 3",
+    "position": 3,
+    "team": 1
+  }
+}

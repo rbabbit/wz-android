@@ -58,3 +58,8 @@
 - Startup download tests must distinguish on-device music.data from the WebView
   music-v1.data route. If transfer is too fast to cancel after a hierarchy read,
   use a disclosed verified-prefix fixture and prepared native Cancel coordinates.
+- Dustfall and Iron Valley are UI names for td1 and td2. Keep map IDs, native
+  authored names and data unchanged. Preserve the original official splash PNG
+  and logo; the generated concept screenshot is a reference, not a UI asset.
+- Native footer controls keep at least 48dp touch height. Inspect compact and
+  narrow/enlarged-text layouts, graphics popup dismissal and Music/Back returns.

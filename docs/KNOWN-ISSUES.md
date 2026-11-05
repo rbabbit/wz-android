@@ -1,5 +1,14 @@
 # Known issues and verification limits
 
+v5.12 applies the selected official-art/footer design, with Dustfall and Iron
+Valley as display names for the existing maps. Native startup, graphics/music
+returns, download states and small/enlarged-text layouts are covered in
+[v5.12 evidence](../qa/v5.12/REPORT.md). All existing engine/gameplay assets are
+byte-identical to v5.11. Physical-device rendering/audio/performance and full
+native 30-round endurance remain unverified; the emulator terrain limit below
+is unchanged. The source backdrop is square, so its sharp central composition
+uses a soft surround on wider screens rather than generating new artwork.
+
 v5.11 adds the exact supplied td1_v3 map alongside the original TD2 map, with
 the same unchanged Towers mod. TD1's trucks build on raised platforms; the HQ
 route is not reachable from those platforms. This is authored map geometry.

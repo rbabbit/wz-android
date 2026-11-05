@@ -10,8 +10,8 @@ android {
         applicationId = "com.rbabbit.warzonetowers"
         minSdk = 26
         targetSdk = 36
-        versionCode = 61
-        versionName = "5.11-two-maps"
+        versionCode = 62
+        versionName = "5.12-footer"
     }
 
     compileOptions {

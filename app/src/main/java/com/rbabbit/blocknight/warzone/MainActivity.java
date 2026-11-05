@@ -24,7 +24,6 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -341,12 +340,7 @@ public final class MainActivity extends Activity {
         loadingOverlay.setClickable(true);
         loadingOverlay.setFocusable(true);
 
-        ImageView artwork = new ImageView(this);
-        artwork.setImageResource(R.drawable.warzone_splash);
-        // The panoramic landscape adaptation fills phones and tablets without
-        // stretching. Android clips spare scenery rather than leaving borders.
-        artwork.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        artwork.setContentDescription("Warzone 2100 Tower Games: tank and tower on a green field");
+        WarzoneSplashView artwork = new WarzoneSplashView(this);
         loadingOverlay.addView(artwork, new FrameLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 
@@ -355,13 +349,13 @@ public final class MainActivity extends Activity {
         card.setGravity(Gravity.CENTER_VERTICAL);
         card.setPadding(dp(16), dp(12), dp(16), dp(12));
         GradientDrawable cardBackground = new GradientDrawable();
-        cardBackground.setColor(0xDE101B13);
+        cardBackground.setColor(0xE6071215);
         cardBackground.setCornerRadius(dp(9));
         card.setBackground(cardBackground);
 
         loadingSpinner = new ProgressBar(this, null, android.R.attr.progressBarStyleSmall);
         loadingSpinner.setIndeterminate(true);
-        loadingSpinner.getIndeterminateDrawable().setTint(0xFFB9E394);
+        loadingSpinner.getIndeterminateDrawable().setTint(0xFF83CDD1);
         LinearLayout.LayoutParams spinnerParams = new LinearLayout.LayoutParams(dp(24), dp(24));
         spinnerParams.rightMargin = dp(12);
         card.addView(loadingSpinner, spinnerParams);

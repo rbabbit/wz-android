@@ -8,7 +8,6 @@ import android.view.Gravity;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
@@ -38,8 +37,7 @@ final class MusicSetupView extends FrameLayout {
         super(context); this.actions=actions;
         face=Typeface.createFromAsset(context.getAssets(),"warzone/ui/Oswald.ttf");
         setBackgroundColor(0xFF050B0C);setClickable(true);setFocusable(true);
-        ImageView art=new ImageView(context);art.setImageResource(R.drawable.warzone_splash);
-        art.setScaleType(ImageView.ScaleType.CENTER_CROP);addView(art,new LayoutParams(-1,-1));
+        addView(new WarzoneSplashView(context),new LayoutParams(-1,-1));
         android.view.View shade=new android.view.View(context);
         shade.setBackground(new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM,
                 new int[]{0xEB081315,0xE8071012,0xF5050B0C}));addView(shade,new LayoutParams(-1,-1));

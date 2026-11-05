@@ -2,7 +2,42 @@
 
 final result: passed
 
-## v5.11 two maps and compact startup — current
+## v5.12 selected official-art footer — current
+
+final result: passed
+
+Installed delivery APK SHA-256:
+`102316bdb80435971a2fd6561e4b269671774048d751d7d49663325d198f9313`.
+
+Source visual truth: [selected heavy-armour mock](qa/v5.12/selected-target.png),
+with the user's approved Dustfall/Iron Valley display names and rectangular Play.
+Implementation: [native capture](qa/v5.12/startup/compact-finished.png).
+Both are normalized to 1080x600 for [full comparison](qa/v5.12/comparison-full.png)
+and [footer detail](qa/v5.12/comparison-footer.png). Source is 1681x936; native is
+1620x900 at density 1.5, 1080x600 logical. The native state has cached HQ and Music
+off; the mock depicts uncached HQ/Music choice. Those copy differences are state.
+
+Fonts/typography: live Oswald labels match the condensed treatment; body copy
+remains readable. Spacing/layout: centred rectangular Play, direct underlined
+map tabs and a shallow footer match the selected hierarchy; native 48dp targets
+are retained. Colours: cream, cyan and dark teal match the target. Image quality:
+original logo and upstream backdrop PNG are used, not the generated screenshot.
+The original square composition is proportionally fitted, with softened source
+edge colours filling the sides. Copy: approved map names and dynamic Play text.
+
+Iteration history: the first native crop produced sharp repeated ground stripes
+(P2). A flat surround exposed a rectangular ground patch (P2). Averaging the
+outer source pixels and blending the edges removed those harsh transitions;
+the post-fix comparison above was inspected. Narrow utility labels wrap to two
+lines; enlarged-text/very narrow footers use two rows. Six native viewport/text
+settings passed bounds, no control overlap and 48dp touch-height checks.
+
+No actionable P0/P1/P2 findings remain in these checked screens. The square
+source's softer outer ground and slightly different hero framing from the
+generated concept are intentional asset-preservation differences (P3). Physical
+device rendering/audio/performance limits remain. See [v5.12 evidence](qa/v5.12/REPORT.md).
+
+## v5.11 two maps and compact startup — historical
 
 Clean installed APK SHA-256:
 `08e9d1610d55c927b000026331f25013a608d0d05764bc05ff725ab90916a36a`.

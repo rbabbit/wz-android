@@ -2,7 +2,7 @@
 // Real Android input, screenshots and fresh native saves on the installed APK.
 const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict'),crypto=require('node:crypto');
 const {execFileSync}=require('node:child_process');
-const root=path.resolve(__dirname,'..'),out=path.join(root,'qa/v5.6');
+const root=path.resolve(__dirname,'..'),out=path.join(root,'qa/v5.7');
 const device=process.env.WZ_QA_DEVICE||'emulator-5556';
 const adbExe=path.join(process.env.ANDROID_HOME||'C:/Users/punke/AppData/Local/Android/Sdk','platform-tools/adb.exe');
 const adb=(...args)=>execFileSync(adbExe,['-s',device,...args],{timeout:20000,maxBuffer:20*1024*1024});
@@ -29,7 +29,20 @@ async function tap(selector){
  await pointTap(p.x,p.y);
 }
 async function settle(){await until('__warzoneCommands.report().pending===0&&!__warzoneCommands.report().buildingOpening&&!__kalaWarzoneTouch.report().pendingClicks','native input and replies');}
-async function map(x,y){assert.equal(await evaluate('__warzoneCommands.report().nativeHudHidden'),false,'restore minimap before a radar tap');const p=await evaluate(`(()=>{const r=parent.document.getElementById('warzone-game-frame').getBoundingClientRect();return{x:r.x+innerWidth-216+(64-${x})*3,y:r.y+innerHeight-216+(64-${y})*3};})()`);await pointTap(p.x,p.y);await evaluate('WarzoneTerrain.active(true);true');await until('(()=>{const p=WarzoneTerrain.pick(innerWidth/2,innerHeight/2);return p&&Math.abs(p.x-'+x+')<=5&&Math.abs(p.y-'+y+')<=5})()','camera reaches radar target');await sleep(150);}
+let radarInverted=true;
+async function map(x,y){
+ assert.equal(await evaluate('__warzoneCommands.report().nativeHudHidden'),false,'restore minimap before a radar tap');
+ for(let attempt=0;attempt<2;attempt++){
+  const rx=radarInverted?64-x:x,ry=radarInverted?64-y:y;
+  const p=await evaluate(`(()=>{const r=parent.document.getElementById('warzone-game-frame').getBoundingClientRect();return{x:r.x+innerWidth-216+${rx}*3,y:r.y+innerHeight-216+${ry}*3};})()`);
+  await pointTap(p.x,p.y);await evaluate('WarzoneTerrain.active(true);true');const frame=await evaluate('__kalaWarzoneTouch.report().nativeRenderFrames');await until('__kalaWarzoneTouch.report().nativeRenderFrames>'+frame+'+3','radar view renders');
+  const c=await evaluate('WarzoneTerrain.pick(innerWidth/2,innerHeight/2)');
+  if(c&&Math.abs(c.x-x)<=6&&Math.abs(c.y-y)<=6)return;
+  if(c&&Math.abs(c.x-(64-x))<=7&&Math.abs(c.y-(64-y))<=7){radarInverted=!radarInverted;continue;}
+  throw Error('Radar target mismatch: '+JSON.stringify({x,y,c,radarInverted}));
+ }
+ throw Error('Radar calibration failed');
+}
 async function world(wx,wy,z=0){
  await evaluate('WarzoneTerrain.active(true);true');
  const frames=await evaluate('__kalaWarzoneTouch.report().nativeRenderFrames');await until(`__kalaWarzoneTouch.report().nativeRenderFrames>${frames+1}`,'fresh terrain frame');
@@ -54,6 +67,50 @@ async function layout(name){
 async function build(){await tap('#wt-open-build');await until('__warzoneCommands.report().buildOpen&&!__warzoneCommands.report().buildingOpening','build sidebar');await settle();}
 async function choose(item,category='DEFENCES'){await tap(`#wt-build-sidebar [data-category="${category}"]`);await tap(`#wt-build-sidebar [data-build="${item}"]`);await until(`__warzoneCommands.report().nativeToolReady&&__warzoneCommands.report().nativeItem===${JSON.stringify(item)}`,'selected native structure');await settle();}
 async function closeBuild(){await tap('.wt-sidebar-exit');await until('!__warzoneCommands.report().buildOpen&&!__warzoneCommands.report().nativeMenu&&!__warzoneCommands.report().exitingBuild','exit keeps orders');await settle();}
+async function prepareHQ(){
+ await tap('#blocknight-base');await until('__kalaWarzoneTouch.report().zoomPending===false','BASE centres HQ');await map(12,46);if(await evaluate('parent.document.body.dataset.fieldExpanded!=="true"'))await tap('#wt-field-toggle');await tap('#wt-select-trucks');await settle();
+ await until('__warzoneCommands.report().snapshot.trucks.filter(t=>t.selected).length>=3&&__warzoneCommands.report().snapshot.trucks.filter(t=>t.selected).every(t=>t.x<32)','HQ constructors');
+ const candidates=[[14,46],[12,46],[12,48],[14,44],[12,44],[10,48],[10,46]],sites=[];
+ for(const [x,y]of candidates){const v=await evaluate(`__warzoneCommands.send('preview-build',{itemId:'GuardTower1',x:${x},y:${y}})`);if(v.ok)sites.push({x,y});if(sites.length===5)break;}assert.equal(sites.length,5,'validate five reachable clear HQ sites before the run');
+ await build();await choose('GuardTower1');for(const p of sites)await tile(p.x,p.y);await closeBuild();
+ await until('__warzoneCommands.report().snapshot.construction.length===0&&__warzoneCommands.report().snapshot.trucks.filter(t=>t.x<32).every(t=>t.order===0)','normally constructed HQ defenses',100000);
+ const data=await save('hq-ready-native');for(const p of sites)assert.ok(Object.values(data['struct.json']).some(s=>s.name==='GuardTower1'&&s.position[0]===p.x*128+64&&s.position[1]===p.y*128+64&&s.currentBuildPts>=300),'native HQ tower completed');
+ results.hqSites=sites;await screen('hq-ready');fs.writeFileSync(path.join(out,'hq-setup-results.json'),JSON.stringify(results,null,2));
+}
+async function modAudit(){
+ const details={seeded:false,apkSHA256:crypto.createHash('sha256').update(fs.readFileSync(path.join(root,'app/build/outputs/apk/debug/app-debug.apk'))).digest('hex')};
+ const readSave=()=>evaluate(`(()=>{const f=LaunchedModule.FS,p=LaunchedModule.WZVAL_configDirPath+'/savegames/skirmish/QuickSave',r={};for(const n of f.readdir(p))if(n.endsWith('.json'))r[n]=JSON.parse(f.readFile(p+'/'+n,{encoding:'utf8'}));return r;})()`);
+ await tap('#blocknight-tech');await until('__blockNightResearch.report().open','research opens');
+ assert.ok((await evaluate('__blockNightResearch.report().labs')).every(l=>l.idle),'human research was not automatically assigned by the mod');
+ const add=async(lab,name)=>{await tap(`.bn-tech-lab[data-lab="${lab}"]`);const selector=await evaluate(`(()=>{const b=Array.from(document.querySelectorAll('.bn-tech-card')).find(e=>e.textContent.includes(${JSON.stringify(name)}));if(!b)throw Error('Missing native topic '+${JSON.stringify(name)});return '.bn-tech-card[data-topic-id="'+b.dataset.topicId+'"]';})()`);await tap(selector);await tap('.bn-tech-assign');};
+ await add(0,'Hover Propulsion');await add(0,'Composite Alloys');await add(1,'Fuel Injection Engine Mk3');
+ await tap('.bn-tech-done');await until('!__blockNightResearch.report().open&&!__blockNightResearch.report().pendingClose&&!__blockNightResearch.report().runner','research commands committed',30000);
+ await until('__blockNightResearch.report().labs[0].topicName.includes("Hover")&&__blockNightResearch.report().labs[1].topicName.includes("Fuel")','different native lab topics',15000);
+ details.research=await evaluate('__blockNightResearch.report()');assert.equal(details.research.queues[0][0],'Composite Alloys');
+ await tap('#blocknight-tech');await until('__blockNightResearch.report().open','research reopen');
+ for(const [lab,name]of [[0,'Hover Propulsion'],[1,'Fuel Injection Engine Mk3']]){await tap(`.bn-tech-lab[data-lab="${lab}"]`);assert.ok(await evaluate(`document.querySelector('.bn-tech-detail').textContent.includes(${JSON.stringify(name)})`));await screen('mod-research-lab-'+(lab+1));}
+ await tap('.bn-tech-done');await until('!__blockNightResearch.report().open&&!__blockNightResearch.report().pendingClose','return from labs');await settle();
+ const before=await save('mod-before-skip'),oldWave=before.wave.wave,oldIds=Object.values(before['droid.json']).filter(d=>d.player===1).map(d=>d.id);
+ assert.ok(before.wave.canSkip);await tap('#warzone-towers-next-wave');await until(`__warzoneTowersWaves.report().snapshot.wave===${oldWave+1}&&!__warzoneTowersWaves.report().pendingCommand`,'Skip advances authored round once',15000);
+ await until('__warzoneTowersWaves.report().snapshot.queuedEnemies===0','authored spawn queue drains',10000);
+ const skipped=await save('mod-after-skip');assert.equal(skipped.wave.wave,oldWave+1);const enemies=Object.values(skipped['droid.json']).filter(d=>d.player===1);assert.ok(enemies.some(d=>oldIds.includes(d.id)),'Skip keeps surviving enemies');details.skip={before:before.wave,after:skipped.wave,survivorsRetained:true};await screen('mod-skip-survivors');
+ const stored=await readSave(),g=stored['scriptstate.json'].globals_0;assert.equal(g.scriptName,'init');assert.ok(g.SaveLoad_objects[0].locations.length);details.beforeLoad={time:skipped.wave.gameTime,wave:g.warzoneTowersWaves_state,index:g.index,spawner:g.SaveLoad_objects[0],labs:g.warzoneTowersLabResearch};
+ fs.writeFileSync(path.join(out,'mod-before-load-native.json'),JSON.stringify(stored,null,2));
+ // Let the clock move beyond the saved state, then load only from normal play.
+ await until(`__warzoneCommands.report().snapshot.gameTime>${skipped.commands.snapshot.gameTime+3000}`,'clock advances before load',8000);
+ const loadAt=await evaluate('__warzoneCommands.report().snapshot.gameTime');await evaluate('__kalaWarzoneTouch.nativePressKey("F8","F8",119);true');
+ await until(`__warzoneCommands.report().snapshot.gameTime<${loadAt-1500}`,'native QuickLoad restores earlier clock',45000);
+ const reply=await evaluate('__warzoneCommands.send("state",{})');assert.ok(reply.ok&&reply.result.trucks.length>=6,'fresh command reply after load');
+ const loaded=await save('mod-after-load'),restored=await readSave(),h=restored['scriptstate.json'].globals_0;
+ assert.equal(h.scriptName,'init');assert.equal(h.index,g.index);assert.equal(h.warzoneTowersWaves_state.wave,g.warzoneTowersWaves_state.wave);assert.equal(h.warzoneTowersWaves_state.deadline,g.warzoneTowersWaves_state.deadline);assert.equal(h.scavAI,g.scavAI);
+ const a=g.SaveLoad_objects[0],b=h.SaveLoad_objects[0];assert.deepEqual(b.locations,a.locations);assert.equal(b.player,a.player);assert.equal(b.rank,a.rank);assert.ok(b.queue.length<=a.queue.length);assert.deepEqual(b.queue,a.queue.slice(a.queue.length-b.queue.length),'restored spawning continues through the saved FIFO');
+ assert.deepEqual(Object.keys(h.warzoneTowersLabResearch),Object.keys(g.warzoneTowersLabResearch));for(const key of Object.keys(g.warzoneTowersLabResearch))assert.equal(h.warzoneTowersLabResearch[key].topicId,g.warzoneTowersLabResearch[key].topicId);
+ details.afterLoad={time:loaded.wave.gameTime,wave:h.warzoneTowersWaves_state,index:h.index,spawner:h.SaveLoad_objects[0],labs:h.warzoneTowersLabResearch,freshCommandReply:true};fs.writeFileSync(path.join(out,'mod-after-load-native.json'),JSON.stringify(restored,null,2));await screen('mod-loaded-battle');
+ const rewards=await evaluate(`(()=>{const f=LaunchedModule.FS,p=LaunchedModule.WZVAL_configDirPath+'/logs/init.0.log';return f.readFile(p,{encoding:'utf8'}).split(/\r?\n/).filter(l=>l.includes('BNTDREWARD:')).map(l=>JSON.parse(l.slice(l.indexOf('BNTDREWARD:')+11)));})()`);
+ assert.ok(rewards.length>=35,'ordinary native combat kills');for(const r of rewards){assert.equal(r.credited,r.expected);assert.equal(r.after-r.before,r.expected);assert.equal(r.player,0);}
+ details.rewards={events:rewards.length,allExact:true,samples:rewards.slice(0,12),current:loaded.wave};
+ await evaluate('__kalaWarzoneTouch.nativePressKey("Escape","Escape",27);true');details.passed=true;fs.writeFileSync(path.join(out,'mod-gameplay-results.json'),JSON.stringify(details,null,2));console.log('PASS: native cost-based rewards, manual multi-lab research/queues, Skip survivors and native mod Save/Load');
+}
 async function main(){
  const pid=adb('shell','pidof','com.rbabbit.warzonetowers').toString().trim();adb('forward','tcp:9227',`localabstract:webview_devtools_remote_${pid}`);
  const tabs=await(await fetch('http://127.0.0.1:9227/json')).json(),tab=tabs.find(t=>t.url.includes('/mobile.html'));assert.ok(tab);
@@ -64,7 +121,9 @@ async function main(){
  await until('window.__warzoneCommands?.report().snapshot?.trucks.length>=6','ordinary native starting units',120000);
  // This run starts in the ordinary native Escape pause menu, preserving the
  // ready fixture while writing this audit. No objects/research/power are seeded.
- if(process.argv.includes('--fresh')){assert.equal(await evaluate('Boolean(parent.document.getElementById("warzone-towers-preparation")?.open)'),false,'no routine preparation modal');}else if(!process.argv.includes('--running')){const before=await evaluate('__warzoneCommands.report().snapshot.gameTime');await evaluate('__kalaWarzoneTouch.nativePressKey("Escape","Escape",27);true');await until(`__warzoneCommands.report().snapshot.gameTime>${before}`,'resume prepared native game');}
+ if(process.argv.includes('--fresh')){assert.equal(await evaluate('Boolean(parent.document.getElementById("warzone-towers-preparation")?.open)'),false,'no routine preparation modal');}else if(!process.argv.includes('--running')){const before=await evaluate('__warzoneCommands.report().snapshot.gameTime');await sleep(700);if(await evaluate('__warzoneCommands.report().snapshot.gameTime')===before){await evaluate('__kalaWarzoneTouch.nativePressKey("Escape","Escape",27);true');await until(`__warzoneCommands.report().snapshot.gameTime>${before}`,'resume prepared native game');}}
+ if(process.argv.includes('--setup-hq')){await prepareHQ();await evaluate('__kalaWarzoneTouch.nativePressKey("Escape","Escape",27);true');console.log('PASS: five ordinary HQ defenses completed');return;}
+ if(process.argv.includes('--mod')){await modAudit();return;}
  let complete,ids;if(!continuation){
  if(!screensResume){
  if(!mixedResume){
@@ -87,7 +146,7 @@ async function main(){
  await until('__warzoneCommands.report().snapshot.constructionSites.length===2','both native sites journalled');
  const queued=await save('delivery-native-queued');ids=queued.commands.nativeBuildGroup;
  for(const truck of Object.values(queued['droid.json']).filter(d=>ids.includes(d.id))){assert.equal(truck['order/stats'],'GuardTower1');assert.equal(truck['orderList/size'],1);assert.equal(truck['orderList/0/stats'],'GuardTower1');assert.deepEqual(truck['orderList/0/pos'],[960,5312]);}
- await until('__warzoneCommands.report().snapshot.construction.some(b=>b.remaining>0&&b.workers>0)','live native work and estimate');await screen('delivery-live-time-and-queue');
+ await until('__warzoneCommands.report().snapshot.construction.some(b=>b.remaining>0&&b.workers>0)','live native work and estimate',60000);await screen('delivery-live-time-and-queue');
  const timed=await evaluate('__warzoneCommands.report().snapshot.construction');results.timingSample=timed;
  await tile(7,39);await settle();assert.equal(await evaluate('__warzoneCommands.report().snapshot.constructionSites.length'),2,'duplicate site rejected');
  }else{await build();ids=await evaluate('__warzoneCommands.report().nativeBuildGroup');await map(10,37);}
@@ -177,4 +236,4 @@ async function main(){
  await evaluate('__kalaWarzoneTouch.nativePressKey("Escape","Escape",27);true');
  console.log('PASS:',results.cases.join('; '));
 }
-main().then(()=>socket?.close()).catch(async e=>{results.failure=String(e.stack||JSON.stringify(e));fs.writeFileSync(path.join(out,'delivery-failure.json'),JSON.stringify(results,null,2));try{await screen('delivery-failure');}catch(_){}console.error(e);socket?.close();process.exitCode=1;});
+main().then(()=>socket?.close()).catch(async e=>{results.failure=String(e.stack||JSON.stringify(e));fs.writeFileSync(path.join(out,'delivery-failure.json'),JSON.stringify(results,null,2));try{await screen('delivery-failure');const t=await evaluate('__warzoneCommands.report().snapshot.gameTime');await sleep(500);if(await evaluate('__warzoneCommands.report().snapshot.gameTime')>t)await evaluate('__kalaWarzoneTouch.nativePressKey("Escape","Escape",27);true');}catch(_){}console.error(e);socket?.close();process.exitCode=1;});

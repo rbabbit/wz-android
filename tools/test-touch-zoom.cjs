@@ -227,14 +227,14 @@ async function run() {
       "presets must not synthesize wheel events");
   assert.equal(canvas.events.filter(event => event.type.startsWith("key")).length, 0,
       "presets must not synthesize keyboard events");
-  let command = JSON.parse(virtualFiles.get("/data/mp/tests/blocknight-zoom-command.json"));
+  let command = JSON.parse(virtualFiles.get("/data/mp/multiplay/script/rules/blocknight-zoom-command.json"));
   assert.equal(command.preset, "close");
   assert.equal(command.distance, 1600);
 
   controls.zoom(1, 500, 300);
   assert.equal(controls.report().zoomPreset, null,
       "manual/pinch zoom should clear the selected preset");
-  command = JSON.parse(virtualFiles.get("/data/mp/tests/blocknight-zoom-command.json"));
+  command = JSON.parse(virtualFiles.get("/data/mp/multiplay/script/rules/blocknight-zoom-command.json"));
   assert.equal(command.preset, "manual",
       "manual zoom should cancel any command the engine has not consumed yet");
 
@@ -243,7 +243,7 @@ async function run() {
   controls.applyZoomPreset("map");
   report = controls.report();
   assert.equal(report.zoomPreset, "map", "last rapid preset should win");
-  command = JSON.parse(virtualFiles.get("/data/mp/tests/blocknight-zoom-command.json"));
+  command = JSON.parse(virtualFiles.get("/data/mp/multiplay/script/rules/blocknight-zoom-command.json"));
   assert.equal(command.preset, "map");
   assert.equal(command.distance, 3600);
   assert.equal(canvas.events.filter(event => event.type === "wheel").length, 0);
@@ -263,7 +263,7 @@ async function run() {
       "BASE must preserve armed +Q without holding Ctrl over a menu");
   assert.ok(!canvas.events.some(event => event.code === "KeyB" || event.code === "ArrowDown"),
       "BASE must never issue the native camera-turning shortcut");
-  assert.equal(JSON.parse(virtualFiles.get("/data/mp/tests/blocknight-zoom-command.json")).preset, "base");
+  assert.equal(JSON.parse(virtualFiles.get("/data/mp/multiplay/script/rules/blocknight-zoom-command.json")).preset, "base");
   controls.toggleQueueMode(false);
   controls.toggleQueueMode(true);
   controls.releaseAll();
@@ -337,7 +337,7 @@ async function run() {
   assert.equal(controls.report().queueMode, true, "STOP preserves native selection until acknowledgement");
   assert.equal(controls.report().stopPending, true);
   assert.ok(!canvas.events.some(e=>e.code==='KeyS'),'STOP must never invoke the conflicting keyboard shortcut');
-  const stopCommand=JSON.parse(virtualFiles.get('/data/mp/tests/warzone-towers-control-command.json'));
+  const stopCommand=JSON.parse(virtualFiles.get('/data/mp/multiplay/script/rules/warzone-towers-control-command.json'));
   windowListeners.get('warzone-towers-control-ack')({detail:{nonce:stopCommand.nonce,action:'stop-selected',stopped:[123]}});
   assert.equal(controls.report().queueMode,false,'acknowledged STOP leaves sticky construction');
   assert.deepEqual(controls.report().stoppedUnitIds,[123]);

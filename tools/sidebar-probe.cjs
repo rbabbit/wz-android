@@ -5,7 +5,7 @@ const path=require('node:path');
 const adbExe=path.join(process.env.ANDROID_HOME||'C:/Users/punke/AppData/Local/Android/Sdk','platform-tools/adb.exe');
 const device=process.env.WZ_QA_DEVICE||'emulator-5556';
 const adb=(...args)=>execFileSync(adbExe,['-s',device,...args],{timeout:20000,maxBuffer:16*1024*1024});
-const out=path.resolve(__dirname,'../qa/v5.6');fs.mkdirSync(out,{recursive:true});
+const out=process.env.WZ_QA_OUT?path.resolve(process.env.WZ_QA_OUT):path.resolve(__dirname,'../qa/v5.7');fs.mkdirSync(out,{recursive:true});
 async function connect(){
  const pid=adb('shell','pidof','com.rbabbit.warzonetowers').toString().trim();
  adb('forward','tcp:9226',`localabstract:webview_devtools_remote_${pid}`);
@@ -15,7 +15,7 @@ async function connect(){
  const socket=new WebSocket(tab.webSocketDebuggerUrl);let id=0;const pending=new Map();
  await new Promise((resolve,reject)=>{socket.onopen=resolve;socket.onerror=reject;});
  socket.onmessage=event=>{const m=JSON.parse(String(event.data));if(pending.has(m.id)){const p=pending.get(m.id);pending.delete(m.id);clearTimeout(p.timer);m.error||m.result.exceptionDetails?p.reject(m.error||m.result.exceptionDetails):p.resolve(m.result.result.value);}};
- function evaluate(expression){return new Promise((resolve,reject)=>{const key=++id;pending.set(key,{resolve,reject,timer:setTimeout(()=>reject(Error('CDP timeout')),15000)});socket.send(JSON.stringify({id:key,method:'Runtime.evaluate',params:{expression:`(()=>{const f=document.getElementById('warzone-game-frame');return f?f.contentWindow.eval(${JSON.stringify(expression)}):eval(${JSON.stringify(expression)});})()`,returnByValue:true,awaitPromise:true}}));});}
+ function evaluate(expression){return new Promise((resolve,reject)=>{const key=++id;pending.set(key,{resolve,reject,timer:setTimeout(()=>reject(Error('CDP timeout')),45000)});socket.send(JSON.stringify({id:key,method:'Runtime.evaluate',params:{expression:`(()=>{const f=document.getElementById('warzone-game-frame');return f?f.contentWindow.eval(${JSON.stringify(expression)}):eval(${JSON.stringify(expression)});})()`,returnByValue:true,awaitPromise:true}}));});}
  return {evaluate,close:()=>socket.close()};
 }
 (async()=>{

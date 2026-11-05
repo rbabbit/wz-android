@@ -1,8 +1,23 @@
 # Warzone Towers — Android
 
-Full Android project for Warzone Towers, based on the supplied Survival Mod and
-TowerDefense2_m map. The editable project is at the repository root; open this
-folder in Android Studio. Current Android version: **5.6-compact-controls (56)**.
+Full Android project for Warzone Towers, using the supplied
+WZmodTowerDefense-v4.7.0-a mod and TowerDefense2_m map. The editable project is
+at the repository root; open this folder in Android Studio.
+Current Android version: **5.7-tower-defense (57)**.
+
+The original mod owns all 30 timed rounds, enemy templates, ranks, research
+delay, per-kill power rewards and HQ objective. Preparation lasts three minutes.
+Rounds advance on the authored clock even while enemies survive. Skip Wave
+advances the current wait once and keeps survivors. Defend the command centre;
+clear all 30 rounds to win. Player research remains manual.
+
+The previous Survival rules are no longer active. Their original archive and
+the frozen v5.6 fallback remain preserved. Start a new battle when upgrading;
+old Survival saves are not compatible with this scenario.
+
+See [v5.7 verification and limits](qa/v5.7/REPORT.md). The exact APK passed the
+mobile gameplay journey and native combat through round 5; all 30 rounds are
+covered by the rules harness, with no claim of a complete native playthrough.
 
 ## Construction sidebar
 
@@ -83,8 +98,9 @@ the owner's private signing keys are not part of the project archive.
 | --- | --- |
 | Android startup, downloader, splash, viewport | `app/src/main/java/com/rbabbit/blocknight/warzone/` |
 | Header, touch, HELP, research and wave HUD | `app/src/main/assets/warzone-*.js`, `blocknight-*.js`, `warzone/mobile.html`, `warzone/ui/` |
-| Tower wave rules, objective and enemy AI | `scenario/` |
-| Supplied mod/map and exact original ZIP | `vendor/survival/` |
+| Mobile round HUD, Skip and objective adapters | `scenario/` |
+| Active supplied mod and exact original ZIP | `vendor/tower-defense/` |
+| Preserved original map and superseded Survival archive | `vendor/survival/` |
 | Engine and packaged gameplay payload | `app/src/main/assets/warzone/warzone2100.{js,wasm,data}` |
 | Selected launcher/loading art | `app/src/main/res/` |
 | Embedding, map registration, regression/live QA tools | `tools/` |

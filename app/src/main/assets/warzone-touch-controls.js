@@ -36,7 +36,7 @@
   const CLICK_HOLD_MS = 8;
   const DOUBLE_TAP_MS = 290;
   const DOUBLE_TAP_SLOP = 28;
-  const ZOOM_COMMAND_PATH = "/data/mp/tests/blocknight-zoom-command.json";
+  const ZOOM_COMMAND_PATH = "/data/mp/multiplay/script/rules/blocknight-zoom-command.json";
   const ZOOM_PRESETS = Object.freeze({
     close: Object.freeze({ label: "NEAR", distance: 1600 }),
     battle: Object.freeze({ label: "BATTLE", distance: 2600 }),
@@ -578,7 +578,7 @@
     if (!fs?.writeFile || !fs?.rename) return false;
     releaseAll(); state.autoFight = false;
     const nonce = `${Date.now().toString(36)}-stop-${state.stopOrders + 1}`;
-    const path = '/data/mp/tests/warzone-towers-control-command.json';
+    const path = '/data/mp/multiplay/script/rules/warzone-towers-control-command.json';
     try {
       fs.writeFile(path + '.tmp', JSON.stringify({ version: 1, nonce, action: 'stop-selected' }), { encoding: 'utf8' });
       fs.rename(path + '.tmp', path);
@@ -1243,9 +1243,10 @@
             <p>Invalid taps keep your chosen structure active. STOP cancels selected trucks’ orders,
               and clears their remaining native queued sites.</p></section>
           <section><h2>PROTECT YOUR COMMAND CENTRE</h2>
-            <p>You have <b>4 minutes to prepare</b>. Wave 1 starts automatically, even if you have not built anything.
+            <p>You have <b>3 minutes to prepare</b>. Wave 1 starts automatically, even if you have not built anything.
               If your command centre is destroyed, you have failed.</p>
-            <p><b>SKIP WAVE</b> calls the next wave immediately. Every surviving enemy stays on the map.</p></section>
+            <p>The mod schedules <b>30 rounds</b>. Later rounds arrive on their own timer; surviving enemies stay.
+              <b>SKIP WAVE</b> calls the next round early. Destroying enemies awards power.</p></section>
           <section><h2>MOVE &amp; LOOK</h2>
             <p><b>Tap</b> to select, move or attack. <b>Swipe</b> to pan. <b>Pinch</b> to zoom.
               <b>Slide two fingers together up/down</b> to tilt the camera. Map edges limit panning.

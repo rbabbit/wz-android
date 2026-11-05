@@ -10,8 +10,8 @@ android {
         applicationId = "com.rbabbit.warzonetowers"
         minSdk = 26
         targetSdk = 36
-        versionCode = 56
-        versionName = "5.6-compact-controls"
+        versionCode = 57
+        versionName = "5.7-tower-defense"
     }
 
     compileOptions {

@@ -5,6 +5,10 @@
   `scenario/`, then use `tools/embed-warzone-towers.ps1` to append and reindex.
 - Preserve `vendor/survival/original/survival_mod.zip` and the supplied original
   map/mod. Add explicit custom overrides rather than silently replacing them.
+- v5.7 explicitly replaces the active Survival rules with the user's supplied
+  `vendor/tower-defense/original/WZmodTowerDefense-v4.7.0-a.zip`. Keep its extracted
+  files byte-identical. Mobile adapters observe the authored schedule and rewards.
+  Use `tools/verify-tower-defense-package.py` for this authorized migration.
 - Before gameplay/input/layout work, save the current tested APK plus a source
   snapshot and SHA-256 manifest as a fallback. Existing release assets are frozen.
 - Run the relevant regression scripts and build. For input/startup changes,
@@ -26,8 +30,9 @@
 - In emulator audits, wait for the Android keyboard to be visibly open before
   sending Back. Otherwise Back can exit the Activity. Wait for images and the
   actual viewport/camera before asserting layout or sending world taps.
-- Native QuickLoad has a documented custom-scenario bridge restore failure.
-  Do not use it as routine recovery; validate command replies immediately, and
-  abandon the fixture for a fresh ordinary match if the bridge does not recover.
+- Legacy custom-path rules failed native QuickLoad context matching. v5.7 uses
+  the canonical rules/init.js entry and mirrored command JSON paths. Validate
+  fresh native command replies and restored round state after any load; do not
+  mistake a stale cached snapshot for a working bridge or repeat a failed load.
 - Archive upload checksums are in `archive/`; after intentional edits regenerate
   the repository file manifest with `python tools/verify-project.py --refresh`.

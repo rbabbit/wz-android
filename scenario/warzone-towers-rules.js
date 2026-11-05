@@ -1,29 +1,7 @@
-/* Warzone Towers rules wrapper: stock Warzone rules + supplied Survival Mod + mobile bridge. */
+/* Canonical init entry also used by native Save/Load. Includes the mod once. */
 receiveAllEvents(true);
-
-include("multiplay/script/rules/init.js");
-
-include("SurvivalMod/ENEMY.js");
-include("SurvivalMod/ENTRANCES.js");
-include("SurvivalMod/TEMPLATES.js");
-include("SurvivalMod/LATEST_RESEARCH.js");
-
-include("SurvivalMod/reticule.js");
-include("SurvivalMod/audio.js");
-include("SurvivalMod/minimap.js");
-include("SurvivalMod/power.js");
-include("SurvivalMod/research.js");
-include("SurvivalMod/texture.js");
-include("SurvivalMod/weather.js");
-include("SurvivalMod/gameOver.js");
-include("SurvivalMod/base.js");
-include("SurvivalMod/limits.js");
-include("SurvivalMod/enableStructure.js");
-include("SurvivalMod/experience.js");
-include("SurvivalMod/vtol.js");
-include("SurvivalMod/spawn.js");
-
-include("warzone-towers-waves.js");
-include("warzone-towers-objective.js");
-include("warzone-towers-bridge.js");
-include("warzone-towers-commands.js");
+include("multiplay/script/rules/includes.js");
+include("tests/warzone-towers-waves.js");
+include("tests/warzone-towers-objective.js");
+include("tests/warzone-towers-bridge.js");
+include("tests/warzone-towers-commands.js");

@@ -3,7 +3,7 @@
   "use strict";
 
   const VERSION = 37;
-  const QUEUE_COMMAND_PATH = "/data/mp/tests/blocknight-queue-command.json";
+  const QUEUE_COMMAND_PATH = "/data/mp/multiplay/script/rules/blocknight-queue-command.json";
   const CATEGORIES = ["ALL", "WEAPONS", "DEFENCE", "VEHICLES", "CYBORG", "SYSTEMS", "STRUCTURES"];
 
   if (window.__blockNightResearch?.version >= VERSION) return "already-installed";

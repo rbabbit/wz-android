@@ -8,7 +8,7 @@ $dataPath = Join-Path $assetRoot 'warzone2100.data'
 $javaScriptPath = Join-Path $assetRoot 'warzone2100.js'
 $scenarioRoot = Join-Path $ProjectRoot 'scenario'
 $mapRoot = Join-Path $ProjectRoot 'vendor\survival\map'
-$modRoot = Join-Path $ProjectRoot 'vendor\survival\mod'
+$modRoot = Join-Path $ProjectRoot 'vendor\tower-defense\mod'
 
 $files = [Collections.Generic.List[object]]::new()
 function Add-PackageFile([string]$VirtualPath, [string]$SourcePath) {
@@ -20,16 +20,18 @@ function Add-PackageFile([string]$VirtualPath, [string]$SourcePath) {
 
 Add-PackageFile '/data/mp/tests/warzonetowers.json' (Join-Path $scenarioRoot 'warzonetowers.json')
 Add-PackageFile '/data/mp/tests/warzone-towers-rules.js' (Join-Path $scenarioRoot 'warzone-towers-rules.js')
+Add-PackageFile '/data/mp/multiplay/script/rules/init.js' (Join-Path $scenarioRoot 'warzone-towers-rules.js')
 Add-PackageFile '/data/mp/tests/warzone-towers-waves.js' (Join-Path $scenarioRoot 'warzone-towers-waves.js')
 Add-PackageFile '/data/mp/tests/warzone-towers-objective.js' (Join-Path $scenarioRoot 'warzone-towers-objective.js')
-Add-PackageFile '/data/mp/multiplay/skirmish/warzone-towers-ai.js' (Join-Path $scenarioRoot 'warzone-towers-ai.js')
-Add-PackageFile '/data/mp/multiplay/skirmish/warzone-towers-ai.json' (Join-Path $scenarioRoot 'warzone-towers-ai.json')
 Add-PackageFile '/data/mp/tests/warzone-towers-wave-command.json' (Join-Path $scenarioRoot 'warzone-towers-wave-command.json')
 Add-PackageFile '/data/mp/tests/warzone-towers-bridge.js' (Join-Path $scenarioRoot 'warzone-towers-bridge.js')
 Add-PackageFile '/data/mp/tests/warzone-towers-control-command.json' (Join-Path $scenarioRoot 'warzone-towers-control-command.json')
 Add-PackageFile '/data/mp/tests/warzone-towers-commands.js' (Join-Path $scenarioRoot 'warzone-towers-commands.js')
 Add-PackageFile '/data/mp/tests/warzone-towers-command.json' (Join-Path $scenarioRoot 'warzone-towers-command.json')
 Add-PackageFile '/data/mp/tests/warzone-towers-catalog.json' (Join-Path $scenarioRoot 'warzone-towers-catalog.json')
+foreach ($name in @('warzone-towers-command.json', 'warzone-towers-wave-command.json', 'warzone-towers-control-command.json', 'warzone-towers-catalog.json', 'blocknight-queue-command.json', 'blocknight-zoom-command.json')) {
+    Add-PackageFile ('/data/mp/multiplay/script/rules/' + $name) (Join-Path $scenarioRoot $name)
+}
 
 Get-ChildItem -LiteralPath $mapRoot -Recurse -File |
 	Where-Object { $_.Name -notlike '*.addon.lev' } |
@@ -46,8 +48,7 @@ Get-ChildItem -LiteralPath $modRoot -Recurse -File | Sort-Object FullName | ForE
 	Add-PackageFile ('/data/mp/' + $relative) $_.FullName
 }
 
-$minimumResearchPath = Join-Path $modRoot 'multiplay\script\rules\minimumResearchTime.json'
-Add-PackageFile '/data/mp/tests/minimumResearchTime.json' $minimumResearchPath
+
 
 $javaScript = [IO.File]::ReadAllText($javaScriptPath)
 if ($javaScript.Contains('/data/mp/tests/warzonetowers.json')) {
@@ -69,18 +70,19 @@ if ($javaScript.Contains('/data/mp/tests/warzonetowers.json')) {
 		}
 	}
 
-	Redirect-PackageFile '/data/mp/tests/warzonetowers.json' (Join-Path $scenarioRoot 'warzonetowers.json')
-	Redirect-PackageFile '/data/mp/tests/warzone-towers-rules.js' (Join-Path $scenarioRoot 'warzone-towers-rules.js')
-	Redirect-PackageFile '/data/mp/tests/warzone-towers-waves.js' (Join-Path $scenarioRoot 'warzone-towers-waves.js')
-	Redirect-PackageFile '/data/mp/tests/warzone-towers-objective.js' (Join-Path $scenarioRoot 'warzone-towers-objective.js')
-	Redirect-PackageFile '/data/mp/multiplay/skirmish/warzone-towers-ai.js' (Join-Path $scenarioRoot 'warzone-towers-ai.js')
-	Redirect-PackageFile '/data/mp/multiplay/skirmish/warzone-towers-ai.json' (Join-Path $scenarioRoot 'warzone-towers-ai.json')
-	Redirect-PackageFile '/data/mp/tests/warzone-towers-wave-command.json' (Join-Path $scenarioRoot 'warzone-towers-wave-command.json')
-	Redirect-PackageFile '/data/mp/tests/warzone-towers-bridge.js' (Join-Path $scenarioRoot 'warzone-towers-bridge.js')
-	Redirect-PackageFile '/data/mp/tests/warzone-towers-control-command.json' (Join-Path $scenarioRoot 'warzone-towers-control-command.json')
-	Redirect-PackageFile '/data/mp/tests/warzone-towers-commands.js' (Join-Path $scenarioRoot 'warzone-towers-commands.js')
-	Redirect-PackageFile '/data/mp/tests/warzone-towers-command.json' (Join-Path $scenarioRoot 'warzone-towers-command.json')
-	Redirect-PackageFile '/data/mp/tests/warzone-towers-catalog.json' (Join-Path $scenarioRoot 'warzone-towers-catalog.json')
+    # Stop exposing the superseded Survival mod. Its archived bytes remain in
+    # the frozen data prefix, but are no longer resolved or loaded by the engine.
+    $previousModRoot = Join-Path $ProjectRoot 'vendor\survival\mod'
+    Get-ChildItem -LiteralPath $previousModRoot -Recurse -File | ForEach-Object {
+        $relative = $_.FullName.Substring($previousModRoot.Length).TrimStart('\').Replace('\', '/')
+        if ($relative -eq 'multiplay/script/rules/init.js' -or (Test-Path -LiteralPath (Join-Path $modRoot $relative))) { return }
+        # Entries are never first here. Keep the following separator if present.
+        $script:javaScript = [regex]::Replace($script:javaScript, ',\{filename:"' + [regex]::Escape('/data/mp/' + $relative) + '",start:\d+,end:\d+\}', '')
+    }
+    foreach ($retired in @('/data/mp/tests/minimumResearchTime.json', '/data/mp/multiplay/skirmish/warzone-towers-ai.js', '/data/mp/multiplay/skirmish/warzone-towers-ai.json')) {
+        $script:javaScript = [regex]::Replace($script:javaScript, ',\{filename:"' + [regex]::Escape($retired) + '",start:\d+,end:\d+\}', '')
+    }
+    foreach ($entry in $files) { Redirect-PackageFile $entry[0] $entry[1] }
 	$newSize = (Get-Item -LiteralPath $dataPath).Length
 	$javaScript = [regex]::Replace($javaScript, 'remote_package_size:\d+', ('remote_package_size:' + $newSize), 1)
 	$javaScript = [regex]::Replace(

@@ -1,5 +1,19 @@
 # Known issues and verification limits
 
+v5.7 replaces the active Survival rules with the exact supplied Tower Defense
+mod, preserving the existing interface. See [v5.7 evidence](../qa/v5.7/REPORT.md).
+Native combat was observed through round 5, including exact kill rewards and HQ
+defeat; all 30 rounds/victory are covered by the rules harness. A native complete
+30-round win/endurance run remains unverified. Native research assignment,
+progress, queues and restoration passed; research completion after restoration
+was not observed before that match's HQ defeat.
+
+Fresh v5.7 native saves restore the canonical rules context, round/deadline,
+spawn FIFO, manual lab queues and command bridge in the tested case. This fixes
+the legacy custom-script-name mismatch described below. It does not certify
+every Save/Load case. Start a new battle on upgrade; Survival saves are
+incompatible. Physical rendering/audio/performance limits remain.
+
 v5.6 verified the compact construction/control cleanup and native gameplay
 journey at three emulator viewports. Research retains the v5.4 implementation.
 See [the v5.6 report](../qa/v5.6/REPORT.md) for exact coverage and remaining limits.

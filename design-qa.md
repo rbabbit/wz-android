@@ -2,7 +2,21 @@
 
 final result: passed
 
-## v5.6 compact field controls — current
+## v5.7 supplied Tower Defense mod — current
+
+Clean installed APK SHA-256:
+`f8e9e93fe8d4332247c54f861986e670329f443b83159ca665470d001324ebbb`.
+
+The supplied mod is active unchanged, with the mobile UI preserved. The exact
+APK passed the three-viewport construction/production/design/navigation and
+unit-command journey. Native combat through round 5 verified kill power;
+manual lab queues, Skip survivors and native Save/Load restoration were checked.
+All 30 rounds and victory were exercised in the rules harness. This is not a
+claim of a 30-round native playthrough or physical-device certification.
+
+See [v5.7 evidence and limits](qa/v5.7/REPORT.md).
+
+## v5.6 compact field controls — historical
 
 APK SHA-256: `3cfb98b4cd12f1236ded54387edc4694f4ac62bd21991573eef8f3d67b86f147`.
 

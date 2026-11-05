@@ -4,7 +4,7 @@
   if (window.__warzoneCommands) return;
   const host = window.parent?.WarzoneHost ? window.parent : window;
   const doc = host.document;
-  const PATH = '/data/mp/tests/warzone-towers-command.json';
+  const PATH = '/data/mp/multiplay/script/rules/warzone-towers-command.json';
   const state = {page:'',catalog:null,snapshot:null,pending:new Map(),serial:0,writes:0,acks:0,
     timeouts:0,lastWrite:0,lastPoll:0,nativeMenu:'',history:[],placement:null,session:'',category:'DEFENCES',search:'',buildChoice:'',buildOpen:false,siteChecks:0,cancelSerial:0,nativeHudHidden:false,pendingItem:'',designStep:'body',designSearch:'',nativeItem:'',
     selected:'',deletePending:'',confirmNew:false,draftOriginal:'',saved:[],draft:{id:'',name:'',body:'',propulsion:'',turrets:['']},validation:null,

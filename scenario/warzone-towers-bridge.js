@@ -70,46 +70,13 @@ function blockNightEmitResearchSnapshotV23()
 
 function warzoneTowersDiagnosticSnapshot()
 {
-	let humanPower = 0;
-	let enemyPower = 0;
-	let diagnosticError = "";
-	const players = [];
-	try
-	{
-		humanPower = spawn_getPowerTeam();
-		enemyPower = spawn_getPowerEnemy();
-	}
-	catch (error)
-	{
-		diagnosticError = String(error && error.message ? error.message : error);
-	}
-	for (let player = 0; player < maxPlayers; ++player)
-	{
-		const allDroids = enumDroid(player, DROID_ANY);
-		const weaponDroids = enumDroid(player, DROID_WEAPON);
-		players.push({
-			player: player,
-			isAI: Boolean(playerData[player] && playerData[player].isAI),
-			allDroids: allDroids.length,
-			weaponDroids: weaponDroids.length,
-			defenses: enumStruct(player, DEFENSE).filter(function (structure) {
-				return structure.status === BUILT && structure.canHitGround;
-			}).length
-		});
-	}
-	dump("BNTOWERS:" + JSON.stringify({
-		version: 1,
-		gameTime: gameTime,
-		enemyPlayer: ENEMY,
-		entrances: Array.isArray(ENTRANCES) ? ENTRANCES.length : 0,
-		humanPower: humanPower,
-		enemyPower: enemyPower,
-		enemyDroids: ENEMY === null ? 0 : enumDroid(ENEMY, DROID_ANY).length,
-		spawnPowerBest: typeof spawn_powerTeamBest === "number" ? spawn_powerTeamBest : null,
-		spawnTickAvailable: typeof spawn_tick === "function",
-		diagnosticError: diagnosticError,
-		players: players
-	}));
+    dump("BNTOWERS:" + JSON.stringify({ version:2, mode:"tower-defense", gameTime:gameTime,
+        enemyPlayer:scavAI, enemyDroids:enumDroid(scavAI, DROID_ANY).length,
+        humanPower:playerPower(selectedPlayer), enemyPower:playerPower(scavAI),
+        entrances:Spawner.locations.length, queuedEnemies:Spawner.queue.length,
+        totalRounds:totalRounds, wave:warzoneTowersWaves_state.wave,
+        rewardCount:warzoneTowersWaves_state.rewardCount, rewardPower:warzoneTowersWaves_state.rewardPower,
+        configCheck:warzoneTowersWaves_configCheck }));
 }
 
 function blockNightV31PollZoomCommand()

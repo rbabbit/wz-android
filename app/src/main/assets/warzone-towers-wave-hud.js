@@ -2,7 +2,7 @@
 (() => {
   "use strict";
 
-  const VERSION = 6;
+  const VERSION = 7;
   if (window.__warzoneTowersWaves?.version >= VERSION) return;
 
   const state = {
@@ -67,11 +67,11 @@
   }
 
   function nextWave() {
-    if (state.pendingCommand || !state.snapshot || !["countdown", "active"].includes(state.snapshot.phase)) return false;
+    if (state.pendingCommand || !state.snapshot || state.snapshot.canSkip === false || !["countdown", "active"].includes(state.snapshot.phase)) return false;
     const module = window.LaunchedModule?.FS ? window.LaunchedModule : window.Module;
     const fs = module?.FS;
     if (!fs?.writeFile || !fs?.rename) return false;
-    const path = "/data/mp/tests/warzone-towers-wave-command.json";
+    const path = "/data/mp/multiplay/script/rules/warzone-towers-wave-command.json";
     const nonce = `wave-${Date.now()}-${state.commandWrites + 1}`;
     try {
       fs.writeFile(`${path}.tmp`, JSON.stringify({ nonce, action: "next" }), { encoding: "utf8" });
@@ -93,10 +93,11 @@
       const preparation = hudDocument().getElementById("warzone-towers-preparation");
       if (preparation?.open) preparation.close();
     }
-    if (wave.phase === "defeated" && !state.failureShown) {
+    if (["defeated","victory"].includes(wave.phase) && !state.failureShown) {
       state.failureShown = true;
       window.__kalaWarzoneTouch?.releaseAll?.();
-      window.BlockNightAndroid?.battleFinished?.();
+      if(wave.phase === "victory")window.BlockNightAndroid?.battleWon?.();
+      else window.BlockNightAndroid?.battleFinished?.();
     }
     if (state.pendingCommand && (wave.lastCommand === state.pendingCommand
         || Date.now() - state.commandSentAt > 5000)) state.pendingCommand = "";
@@ -109,19 +110,22 @@
       const seconds = Math.max(0, Number(wave.nextWaveIn) || 0);
       const remaining = `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, "0")}`;
       title = `WAVE ${wave.nextWave} IN ${remaining}`;
-      detail = wave.wave > 0 ? "Rebuild your defences" : "Prepare your defences";
+      detail = wave.enemyDroids > 0 ? `${wave.enemyDroids} hostiles remaining` : wave.wave > 0 ? "Rebuild your defences" : "Prepare your defences";
+    } else if (wave.phase === "victory") {
+      title = "VICTORY";
+      detail = `All ${wave.totalRounds || 30} rounds cleared`;
     } else if (wave.phase === "defeated") {
       title = "YOU HAVE FAILED";
       detail = "Command centre destroyed";
     } else if (wave.phase === "active") {
       const hostileLabel = Number(wave.enemyDroids) === 1 ? "hostile" : "hostiles";
-      title = `WAVE ${wave.wave}`;
+      title = `WAVE ${wave.wave}${wave.totalRounds ? '/' + wave.totalRounds : ''}`;
       detail = `${wave.enemyDroids} ${hostileLabel} remaining`;
     }
     hud.querySelector("strong").textContent = title;
     hud.querySelector(".wt-wave-detail").textContent = detail;
     const button = hud.querySelector("button");
-    button.disabled = Boolean(state.pendingCommand) || !["countdown", "active"].includes(wave.phase);
+    button.disabled = Boolean(state.pendingCommand) || wave.canSkip === false || !["countdown", "active"].includes(wave.phase);
     button.textContent = state.pendingCommand ? "CALLING…" : "SKIP WAVE";
   }
 

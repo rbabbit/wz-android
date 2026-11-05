@@ -565,7 +565,7 @@ public final class MainActivity extends Activity {
         public void engineReady() {
             runOnUiThread(() -> {
                 if (getIntent().getBooleanExtra("engine_debug", false)) hideLoadingPanel();
-                updateLoadingStatus("CONFIGURING SURVIVAL BATTLE…");
+                updateLoadingStatus("CONFIGURING TOWER DEFENSE…");
                 webView.requestFocus();
                 beginStartupAutomation();
                 if (touchTestMode) {
@@ -597,15 +597,21 @@ public final class MainActivity extends Activity {
 
         @JavascriptInterface
         public void battleFinished() {
-            runOnUiThread(MainActivity.this::showReplayPanel);
+            runOnUiThread(() -> showReplayPanel(false));
+        }
+
+        @JavascriptInterface
+        public void battleWon() {
+            runOnUiThread(() -> showReplayPanel(true));
         }
 
     }
 
-    private void showReplayPanel() {
+    private void showReplayPanel(boolean won) {
         if (root == null || isFinishing()) return;
         TextView replay = new TextView(this);
-        replay.setText("WARZONE TOWERS\n\nYOU HAVE FAILED\n\nCommand centre destroyed\n\nTap to try again");
+        replay.setText(won ? "WARZONE TOWERS\n\nVICTORY\n\nAll 30 rounds cleared\n\nTap to play again"
+                : "WARZONE TOWERS\n\nYOU HAVE FAILED\n\nCommand centre destroyed\n\nTap to try again");
         replay.setTextColor(0xFFF0B43C);
         replay.setTextSize(22);
         replay.setGravity(Gravity.CENTER);
@@ -642,7 +648,7 @@ public final class MainActivity extends Activity {
                 () -> evaluateTouchTapThen(
                         290, 327, "Limits", 1800,
                         () -> {
-                            updateLoadingStatus("APPLYING SURVIVAL LIMITS…");
+                            updateLoadingStatus("APPLYING TOWER DEFENSE LIMITS…");
                             decreaseVtolLimit(6);
                         })), 1200);
     }
@@ -660,7 +666,7 @@ public final class MainActivity extends Activity {
     }
 
     private void finishStartupAutomation() {
-        updateLoadingStatus("WAITING FOR SURVIVAL CONTROL…");
+        updateLoadingStatus("WAITING FOR TOWER DEFENSE RULES…");
         awaitBattlefieldReady(0);
     }
 
@@ -668,7 +674,7 @@ public final class MainActivity extends Activity {
         if (webView == null || isFinishing()) return;
         String script = "(() => {const r=window.__warzoneTowersWaves?.report?.();"
                 + "return Boolean(document.getElementById('canvas')"
-                + "&&r?.snapshot?.mode==='numbered-waves');})()";
+                + "&&r?.snapshot?.mode==='tower-defense');})()";
         webView.evaluateJavascript(script, result -> {
             if ("true".equals(result)) {
                 revealBattlefield();
@@ -678,7 +684,7 @@ public final class MainActivity extends Activity {
                 showEngineFailure("The tower-defence battlefield did not become ready in time.");
                 return;
             }
-            if (attempt == 40) updateLoadingStatus("LOADING MAP AND SURVIVAL ARMY…");
+            if (attempt == 40) updateLoadingStatus("LOADING MAP AND ENEMY ROUNDS…");
             if (attempt == 120) updateLoadingStatus("FINALISING BATTLEFIELD…");
             webView.postDelayed(() -> awaitBattlefieldReady(attempt + 1), 500);
         });

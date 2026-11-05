@@ -1,0 +1,27 @@
+{
+  "device": "emulator-5556",
+  "seeded": false,
+  "screens": [
+    "map-exit-sidebar",
+    "trucks-after-placement",
+    "automatic-exit",
+    "compact-placement",
+    "compact-exit",
+    "standard-placement",
+    "standard-exit",
+    "compact-placement",
+    "compact-exit",
+    "standard-placement",
+    "standard-exit",
+    "large-placement",
+    "large-exit",
+    "three-site-queue"
+  ],
+  "cases": [
+    "stable card nodes and sidebar, Map retained without blink, real multi-truck FIFO survives item change/Exit, both towers complete, fixed catalogue height, Trucks selection and native MOVE",
+    "Select/Move exit, ordinary construction automatic exit, Research and Factory returns restore field input",
+    "compact, standard and large placement/exit screens and hit targets"
+  ],
+  "errors": [],
+  "failure": "AssertionError [ERR_ASSERTION]: View All is fully visible with a three-site native queue\n    at smoothJourney (C:\\timerApp\\wz-tower-defense\\tools\\sidebar-audit.cjs:117:483)\n    at async main (C:\\timerApp\\wz-tower-defense\\tools\\sidebar-audit.cjs:168:127)"
+}

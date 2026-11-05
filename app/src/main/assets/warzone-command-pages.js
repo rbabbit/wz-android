@@ -109,7 +109,7 @@
     element('wt-sidebar-catalogue').addEventListener('scroll',updateCatalogueScroll,{passive:true});
     if(host.ResizeObserver)new host.ResizeObserver(updateCatalogueScroll).observe(element('wt-sidebar-catalogue'));
     const map=doc.createElement('button');map.id='wt-placement-map';map.hidden=true;map.type='button';map.title='Show minimap; leave placement';map.setAttribute('aria-label','Show minimap; leave placement');map.innerHTML='<img src="/warzone/ui/icons/map-pin.svg" alt=""><span>MAP</span>';
-    map.addEventListener('click',async()=>{await selectMode();state.buildOpen=true;element('wt-build-sidebar').hidden=false;renderSidebar();updateHUD();});doc.body.appendChild(map);
+    map.addEventListener('click',async()=>{await selectMode(false,true);renderSidebar();updateHUD();});doc.body.appendChild(map);
     const nativeMask=doc.createElement('div');nativeMask.id='wt-native-build-mask';nativeMask.hidden=true;nativeMask.setAttribute('aria-hidden','true');doc.body.appendChild(nativeMask);
     const toast=doc.createElement('div');toast.id='wt-command-toast';toast.hidden=true;toast.setAttribute('role','status');doc.body.appendChild(toast);
     const ghost=document.createElementNS('http://www.w3.org/2000/svg','svg');ghost.id='wt-build-ghost';ghost.style.pointerEvents='none';
@@ -188,8 +188,11 @@
     const items=availableBuildings().filter(b=>state.category==='ALL'||b.category===state.category),grid=element('wt-sidebar-catalogue');
     const active=state.nativeToolReady&&state.nativeMenu==='build'?state.nativeItem:'',busy=Boolean(state.buildingOpening||state.pendingItem);
     sidebar.setAttribute('aria-busy',String(busy));
-    const signature=JSON.stringify([state.category,active,state.pendingItem,busy,items.map(b=>[b.id,b.power,b.image])]);
+    // Keep cards/images/focus/scroll alive while the native picker changes.
+    // Only a different catalogue needs new nodes, not busy/selection replies.
+    const signature=JSON.stringify([state.category,items.map(b=>[b.id,b.name,b.image])]);
     if(grid.dataset.signature!==signature){const scroll=grid.dataset.category===state.category?grid.scrollTop:state.scroll['sidebar-'+state.category]||0;grid.innerHTML=items.map(b=>button(`${b.image?image(b):`<span class="wt-native-art-label">${b.width} × ${b.breadth}<small>FOOTPRINT</small></span>`}<strong>${esc(b.name)}</strong><small>⚡ ${Math.round(b.power)}</small>`,`data-build="${esc(b.id)}" aria-pressed="${active===b.id}" ${busy?'disabled':''}`,`${active===b.id?'active ':''}${state.pendingItem===b.id?'loading':''}`)).join('')||'<p class="wt-empty">No available structures. Unlock more in TECH.</p>';grid.dataset.signature=signature;grid.dataset.category=state.category;grid.scrollTop=scroll;}
+    for(const b of grid.querySelectorAll('[data-build]')){const chosen=b.dataset.build===active;b.classList.toggle('active',chosen);b.classList.toggle('loading',b.dataset.build===state.pendingItem);b.setAttribute('aria-pressed',String(chosen));b.disabled=busy;const item=items.find(i=>i.id===b.dataset.build),cost=b.querySelector(':scope > small');if(cost&&item)cost.textContent=`⚡ ${Math.round(item.power)}`;}
     for(const b of sidebar.querySelectorAll('[data-category]')){b.classList.toggle('active',b.dataset.category===state.category);b.setAttribute('aria-pressed',String(b.dataset.category===state.category));}
     updateSidebarQueue();updateCatalogueScroll();
   }
@@ -200,7 +203,8 @@
     element('wt-sidebar-power').textContent=s?`⚡ ${Math.floor(s.power)}`:'';
     element('wt-sidebar-builders').textContent=`${selected.length} TRUCK${selected.length===1?'':'S'}`;
     const rows=constructionRows(),live=rows.filter(j=>j.status!=='done');
-    element('wt-sidebar-queue').innerHTML=`<h2>CONSTRUCTION <span>${live.length?live.length+' SITE'+(live.length===1?'':'S'):'READY'}</span></h2><div class="wt-site-list">${rows.slice(0,2).map(constructionRow).join('')||'<p>Choose a structure, then tap clear terrain.</p>'}</div>${rows.length>2?button(`VIEW ALL ${rows.length} SITES →`,'data-page="queue"','wt-all-sites'):''}`;
+    const html=`<h2>CONSTRUCTION <span>${live.length?live.length+' SITE'+(live.length===1?'':'S'):'READY'}</span></h2><div class="wt-site-list">${rows.slice(0,2).map(constructionRow).join('')||'<p>Choose a structure, then tap clear terrain.</p>'}</div>${rows.length>2?button(`VIEW ALL ${rows.length} SITES →`,'data-page="queue"','wt-all-sites'):''}`;
+    const queue=element('wt-sidebar-queue');if(queue._html!==html){queue.innerHTML=html;queue._html=html;}
   }
   function openNative(menu){
     cancelPlacement();close();window.__kalaWarzoneTouch?.releaseAll?.(true);window.__blockNightResearch?.close?.();
@@ -298,7 +302,7 @@
     const queue=element('wt-field-status');const selected=state.snapshot.selectedUnits||state.snapshot.trucks.filter(t=>t.selected);queue.textContent=state.nativeMenu==='build'?'EXIT BUILD / KEEP ORDERS':`${selected.length} UNIT${selected.length===1?'':'S'} SELECTED`;
     const badge=element('wt-field-toggle-count');if(badge){badge.textContent=selected.length||'';element('wt-field-toggle').setAttribute('aria-label',selected.length?`Unit controls: ${selected.length} selected`:'Unit controls');}
     if(state.nativeMenu==='build'&&!state.buildingOpening)state.nativeBuildGroup=constructionParticipants(state.nativeBuildGroup,state.snapshot.trucks);
-    if(state.nativeMenu==='build'&&state.nativeBuildPlaced&&!state.exitingBuild){const group=state.snapshot.trucks.filter(t=>state.nativeBuildGroup.includes(t.id));if(nativeConstructionFinished(state,group,state.snapshot.gameTime,Boolean(state.siteChecks||state.nativePendingSites.length||window.__kalaWarzoneTouch.report().pendingClicks))){state.nativeBuildSawWork=false;state.nativeBuildIdleAt=0;selectMode();}}
+    if(state.nativeMenu==='build'&&state.nativeBuildPlaced&&!state.exitingBuild&&!state.pendingItem&&!state.buildingOpening){const group=state.snapshot.trucks.filter(t=>state.nativeBuildGroup.includes(t.id));if(nativeConstructionFinished(state,group,state.snapshot.gameTime,Boolean(state.siteChecks||state.nativePendingSites.length||window.__kalaWarzoneTouch.report().pendingClicks))){state.nativeBuildSawWork=false;state.nativeBuildIdleAt=0;selectMode();}}
     const native=state.nativeMenu==='build',item=state.catalog?.buildings.find(b=>b.id===state.nativeItem);
     element('wt-native-build-mask').hidden=!native;
     hud.classList.toggle('placing',Boolean(state.placement)||native);
@@ -323,18 +327,27 @@
     await nativeFrames(3);
     if(element('wt-placement-map'))element('wt-placement-map').hidden=!hidden;
   }
+  let battlefieldHolds=0,battlefieldFade=null;
   async function freezeBattlefield(){
-    const shot=element('wt-build-busy');if(!shot.hidden)return;
+    battlefieldHolds++;
+    const shot=element('wt-build-busy');battlefieldFade?.cancel();battlefieldFade=null;shot.style.opacity='1';if(!shot.hidden)return;
     const canvas=document.getElementById('canvas'),frame=window.__kalaWarzoneTouch.report().nativeRenderFrames;
     // Copy a fresh rendered frame before browser buffer discard. The unchanged
     // battlefield remains visible while native menu clicks run behind it.
-    await new Promise((resolve,reject)=>{const deadline=Date.now()+1600;function capture(){
+    try{await new Promise((resolve,reject)=>{const deadline=Date.now()+1600;function capture(){
       if(window.__kalaWarzoneTouch.report().nativeRenderFrames<=frame){if(Date.now()>deadline){reject(Error('Battlefield is not ready.'));return;}requestAnimationFrame(capture);return;}
       const r=element('warzone-game-frame').getBoundingClientRect();shot.width=canvas.width;shot.height=canvas.height;
       shot.getContext('2d').drawImage(canvas,0,0);Object.assign(shot.style,{left:r.x+'px',top:r.y+'px',width:r.width+'px',height:r.height+'px'});shot.hidden=false;resolve();
-    }requestAnimationFrame(capture);});
+    }requestAnimationFrame(capture);});}catch(error){battlefieldHolds--;throw error;}
   }
-  async function releaseBattlefield(){await nativeFrames();element('wt-build-busy').hidden=true;}
+  async function releaseBattlefield(){
+    battlefieldHolds=Math.max(0,battlefieldHolds-1);if(battlefieldHolds)return;
+    await nativeFrames();if(battlefieldHolds)return;
+    const shot=element('wt-build-busy');if(shot.hidden)return;
+    const fade=shot.animate?.([{opacity:1},{opacity:0}],{duration:host.matchMedia?.('(prefers-reduced-motion: reduce)').matches?0:120,fill:'forwards'});
+    battlefieldFade=fade;if(fade)try{await fade.finished;}catch(_){}
+    if(!battlefieldHolds&&battlefieldFade===fade){shot.hidden=true;fade?.cancel();battlefieldFade=null;shot.style.opacity='1';}
+  }
   async function nativeTap(x,y,add=false){
     window.__kalaWarzoneTouch.nativeSelectClick(x,y,add);
     for(let i=0;i<80;i++){await pause(50);if(!window.__kalaWarzoneTouch.report().pendingClicks)break;}
@@ -365,9 +378,9 @@
   async function openBuild(forceNearby=false,keepPage=false,forPlacement=false){
     install();if(state.buildingOpening)return;
     if(window.__kalaWarzoneTouch?.report().pendingClicks){const navigation=++state.navigationSerial;await selectMode();if(navigation!==state.navigationSerial)return;}
-    state.buildingOpening=true;renderSidebar();
+    state.buildingOpening=true;renderSidebar();let frozen=false;
     try{
-      await freezeBattlefield();await setNativeHudHidden(false);
+      await freezeBattlefield();frozen=true;if(!forPlacement)await setNativeHudHidden(false);
       state.nativeBuildPlaced=false;state.nativeBuildSawWork=false;state.nativeBuildIdleAt=0;state.nativeToolReady=false;state.nativeToolSelectionAt=0;state.nativePendingSites=[];
       cancelPlacement();if(!keepPage)close();window.__blockNightResearch?.close?.();window.__kalaWarzoneTouch.releaseAll(true);
       const reply=await send('state');if(!reply.ok)return;
@@ -399,14 +412,16 @@
       const actual=check.result.trucks.filter(t=>t.selected).map(t=>t.id);
       if(group.some(t=>!actual.includes(t.id)))throw Error('Truck selection could not be completed. Try again.');
       window.__kalaWarzoneTouch.toggleQueueMode(true);element('wt-native-back').hidden=true;updateHUD();return true;
-    }finally{state.buildingOpening=false;if(!forPlacement){await closeNative(true);await releaseBattlefield();}renderSidebar();}
+    }finally{state.buildingOpening=false;if(!forPlacement)await closeNative(true);if(frozen)await releaseBattlefield();renderSidebar();}
   }
   async function beginPlacement(itemId){
     const item=availableBuildings().find(b=>b.id===itemId);if(!item||state.buildingOpening||state.pendingItem)return;
     state.pendingItem=itemId;state.notice='';element('wt-sidebar-notice').hidden=true;renderSidebar();
-    try{
-      await freezeBattlefield();
-      if(state.nativeMenu==='build')await selectMode();
+    let frozen=false;try{
+      await freezeBattlefield();frozen=true;
+      // The native reticule command replaces its picker without hiding our
+      // sidebar or shrinking/re-expanding the engine viewport between items.
+      if(state.nativeMenu==='build')await drainBuildInput();
       state.buildOpen=true;element('wt-build-sidebar').hidden=false;
       if(!await openBuild(false,true,true))return;
       const revision=state.menuRevision;
@@ -430,7 +445,7 @@
       await setNativeHudHidden(true);
       renderSidebar();updateHUD();
     }catch(error){if(state.nativeMenu==='build')await closeNative(true);notify(error.message);}
-    finally{state.pendingItem='';await releaseBattlefield();renderSidebar();}
+    finally{if(frozen)await releaseBattlefield();state.pendingItem='';renderSidebar();}
   }
   function nativeBuildTap(){if(state.nativeMenu==='build')state.nativeBuildPlaced=true;}
   function nativeBuildMenuTap(x,y){
@@ -463,21 +478,33 @@
     }
     flushNativeSites();return true;
   }
-  function selectMode(discard=false){
+  async function drainBuildInput(){
+    const started=Date.now();let warned=false;
+    while(state.siteChecks||state.nativePendingSites.length||window.__kalaWarzoneTouch?.report().pendingClicks){flushNativeSites();window.__blockNightResearch?.pollOutput?.();if(!warned&&Date.now()-started>5000){warned=true;notify('Waiting for accepted game input. STOP cancels pending taps.');}await pause(40);}
+  }
+  function selectMode(discard=false,keepSidebar=false){
     if(discard)++state.cancelSerial;
     if(state.exitPromise){if(discard){state.nativePendingSites=[];window.__kalaWarzoneTouch?.releaseAll?.(true);}return state.exitPromise;}
     state.exitingBuild=true;++state.menuRevision;
     state.exitPromise=(async()=>{
       if(discard){state.nativePendingSites=[];window.__kalaWarzoneTouch?.releaseAll?.(true);}
-      else{const started=Date.now();let warned=false;
-        while(state.siteChecks||state.nativePendingSites.length||window.__kalaWarzoneTouch?.report().pendingClicks){flushNativeSites();window.__blockNightResearch?.pollOutput?.();if(!warned&&Date.now()-started>5000){warned=true;notify('Waiting for accepted game input. STOP cancels pending taps.');}await pause(40);}
-      }
-      state.buildOpen=false;element('wt-build-sidebar').hidden=true;cancelPlacement();window.__kalaWarzoneTouch?.releaseAll?.(true);await close();await closeNative(true);
-      host.WarzoneHost?.restoreBattlefield?.();document.getElementById('canvas')?.focus({preventScroll:true});updateHUD();
+      else await drainBuildInput();
+      let frozen=false;try{
+        if(state.nativeMenu==='build'||state.nativeHudHidden){await freezeBattlefield();frozen=true;}
+        state.buildOpen=Boolean(keepSidebar&&state.buildOpen);element('wt-build-sidebar').hidden=!state.buildOpen;cancelPlacement();window.__kalaWarzoneTouch?.releaseAll?.(true);await close();await closeNative(true);
+        host.WarzoneHost?.restoreBattlefield?.();document.getElementById('canvas')?.focus({preventScroll:true});updateHUD();
+      }finally{if(frozen)await releaseBattlefield();}
     })().finally(()=>{state.exitPromise=null;state.exitingBuild=false;});return state.exitPromise;
   }
   async function afterBuildExit(action,discard=false){const navigation=++state.navigationSerial;await selectMode(discard);if(navigation===state.navigationSerial)return action();}
-  async function selectNearbyTrucks(){const navigation=++state.navigationSerial;await selectMode();if(navigation!==state.navigationSerial)return;const selected=await openBuild(true);if(selected&&navigation===state.navigationSerial)await selectMode();}
+  async function selectNearbyTrucks(){
+    const navigation=++state.navigationSerial;
+    // BUILD already selected this local group in the common case. Keep that
+    // real selection instead of reopening the native truck cards a second time.
+    const s=state.snapshot,visibleHeight=Math.min(innerHeight,host.innerHeight-element('warzone-game-frame').getBoundingClientRect().y),centre=window.WarzoneTerrain?.pick(innerWidth/2,visibleHeight/2);
+    if(centre&&s?.trucks.length){const anchor=s.trucks.slice().sort((a,b)=>Math.hypot(a.x-centre.x,a.y-centre.y)-Math.hypot(b.x-centre.x,b.y-centre.y))[0],group=nearbyBuildGroup(s.trucks,[],anchor,true),selected=s.selectedUnits||s.trucks.filter(t=>t.selected);if(selected.length===group.length&&group.every(t=>selected.some(d=>d.id===t.id))){await selectMode();return;}}
+    await selectMode();if(navigation!==state.navigationSerial)return;const selected=await openBuild(true);if(selected&&navigation===state.navigationSerial)await selectMode();
+  }
   function cancelPlacement(){state.placement=null;window.WarzoneTerrain?.active(false);const ghost=document.getElementById('wt-build-ghost');if(ghost)ghost.hidden=true;updateHUD();}
   function previewAt(x,y){
     if(!state.placement)return null;const point=window.WarzoneTerrain?.pick(x,y);if(!point)return null;
@@ -594,7 +621,7 @@
   window.__warzoneCommands={tower:true,setSize:applySize,open,close,closeNative,beginPlacement,cancelPlacement,placeAt,previewAt,send,accept,
     hidePreview:()=>{const ghost=document.getElementById('wt-build-ghost');if(ghost)ghost.hidden=true;},
     isOpen:()=>Boolean(state.page),isPlacement:()=>Boolean(state.placement),nativeMenuOpen:()=>Boolean(state.nativeMenu&&state.nativeMenu!=='build'),nativeBuildOpen:()=>state.nativeMenu==='build',nativeBuildMenuOpen:()=>state.nativeMenu==='build'&&!state.nativeToolReady,nativeHudHidden:()=>state.nativeHudHidden,nativeBuildTap,nativeBuildMenuTap,queueNativeSite,selectMode,afterBuildExit,selectNearbyTrucks,openBuild,
-    report:()=>({version:56,page:state.page,buildOpen:state.buildOpen,nativeHudHidden:state.nativeHudHidden,pendingItem:state.pendingItem,siteChecks:state.siteChecks,pending:state.pending.size,writes:state.writes,acks:state.acks,timeouts:state.timeouts,
+    report:()=>({version:58,page:state.page,buildOpen:state.buildOpen,nativeHudHidden:state.nativeHudHidden,pendingItem:state.pendingItem,siteChecks:state.siteChecks,pending:state.pending.size,writes:state.writes,acks:state.acks,timeouts:state.timeouts,
       placements:state.placements,rejects:state.rejects,opens:state.opens,closes:state.closes,placement:state.placement?.id,
       session:state.session,nativeMenu:state.nativeMenu,nativeItem:state.nativeItem,nativeBuildGroup:state.nativeBuildGroup,nativeToolReady:state.nativeToolReady,nativePendingSites:state.nativePendingSites.length,exitingBuild:state.exitingBuild,nativeBuildPlaced:state.nativeBuildPlaced,nativeBuildSawWork:state.nativeBuildSawWork,buildingOpening:state.buildingOpening,saved:state.saved,history:state.history,snapshot:state.snapshot,terrain:window.WarzoneTerrain?.report()})};
   fetch('/warzone/command-catalog.json').then(r=>{if(!r.ok)throw Error('catalog');return r.json();}).then(c=>{state.catalog=c;render();}).catch(()=>notify('The command catalogue could not load. Restart the app.'));

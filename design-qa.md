@@ -2,7 +2,21 @@
 
 final result: passed
 
-## v5.7 supplied Tower Defense mod — current
+## v5.8 build transition smoothing — current
+
+Clean installed APK SHA-256:
+`8e885733bcc4b905791a1db7c6973702814ec016b7401e7bb7c562aef6090455`.
+
+The real-emulator transition recording retained the catalogue nodes and sidebar
+through item changes, reducing full catalogue renders from 15 to one. The exact
+APK passed related native FIFO/completion/movement and explicit/automatic exit
+checks, Map/Trucks and menu returns, three-site queue visibility, and compact/
+standard/large screen checks. Engine, mod/scenario and Research assets are
+identical to v5.7. Physical performance and existing rendering limits remain.
+
+See [v5.8 evidence and limits](qa/v5.8/REPORT.md).
+
+## v5.7 supplied Tower Defense mod — historical
 
 Clean installed APK SHA-256:
 `f8e9e93fe8d4332247c54f861986e670329f443b83159ca665470d001324ebbb`.

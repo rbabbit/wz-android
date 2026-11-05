@@ -30,6 +30,9 @@
 - In emulator audits, wait for the Android keyboard to be visibly open before
   sending Back. Otherwise Back can exit the Activity. Wait for images and the
   actual viewport/camera before asserting layout or sending world taps.
+- Confirm pause with the frequently updated native wave clock, not a cached
+  command snapshot. Exit the build tool normally before synthetic Escape;
+  Escape may close a native picker instead of pausing. Preserve accepted orders.
 - Legacy custom-path rules failed native QuickLoad context matching. v5.7 uses
   the canonical rules/init.js entry and mirrored command JSON paths. Validate
   fresh native command replies and restored round state after any load; do not

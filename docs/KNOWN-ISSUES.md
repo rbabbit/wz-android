@@ -1,5 +1,12 @@
 # Known issues and verification limits
 
+v5.8 smooths construction selection and exits, with persistent cards/sidebar,
+stable queue geometry and covered native transitions. The exact APK passed the
+reported flow, native orders/completion/movement and three emulator viewports.
+See [v5.8 evidence](../qa/v5.8/REPORT.md). Native placement still needs a viewport
+change on entry/exit; item changes retain it. This is not a physical-device
+frame-rate guarantee, and the rendering/audio/performance limits below remain.
+
 v5.7 replaces the active Survival rules with the exact supplied Tower Defense
 mod, preserving the existing interface. See [v5.7 evidence](../qa/v5.7/REPORT.md).
 Native combat was observed through round 5, including exact kill rewards and HQ

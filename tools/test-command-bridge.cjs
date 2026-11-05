@@ -7,9 +7,10 @@ function setup(){
  const unavailable=new Set(),unreachable=new Set(),calls=[],replies=[],stats={Building:{}};
  for(const b of catalog.buildings)stats.Building[b.name]={Id:b.id,BuildPower:b.power};
  for(const [group,parts]of Object.entries(catalog.components)){stats[group]={};for(const p of parts)stats[group][p.name]={Id:p.id,BuildPower:p.power,WeaponSlots:p.slots||1};}
- const c=vm.createContext({namespace(){},includeJSON:file=>file.includes('catalog')?catalog:commands,Stats:stats,DROID:0,STRUCTURE:1,DROID_ANY:99,DROID_CONSTRUCT:2,DROID_CYBORG_CONSTRUCT:3,
+ const upgrades=[{Construct:Object.fromEntries(catalog.components.Construct.map(p=>[p.name,{ConstructorPoints:9}]))}];
+ const c=vm.createContext({namespace(){},includeJSON:file=>file.includes('catalog')?catalog:commands,Stats:stats,Upgrades:upgrades,DROID:0,STRUCTURE:1,DROID_ANY:99,DROID_CONSTRUCT:2,DROID_CYBORG_CONSTRUCT:3,
  selectedPlayer:0,gameTime:2000,mapWidth:64,mapHeight:64,BUILT:1,FACTORY:4,CYBORG_FACTORY:5,VTOL_FACTORY:6,HQ:7,RESEARCH_LAB:8,POWER_GEN:9,
- DORDER_STOP:1,DORDER_BUILD:10,DORDER_HELPBUILD:11,TER_WATER:1,TER_CLIFFFACE:2,
+ DORDER_STOP:1,DORDER_BUILD:10,DORDER_HELPBUILD:11,DORDER_LINEBUILD:12,TER_WATER:1,TER_CLIFFFACE:2,
  enumDroid:()=>droids,enumSelected:()=>selected,enumStruct:(p,type)=>{enumerations++;return structures.filter(s=>type===undefined||s.stattype===type||s.itemId===type);},
  getObject:(type,p,id)=>(type===0?droids:structures).find(o=>o.player===p&&o.id===id),
  componentAvailable:id=>!unavailable.has(id),isStructureAvailable:id=>!unavailable.has(id),getStructureLimit:()=>1000,
@@ -88,6 +89,41 @@ const defence=catalog.buildings.find(b=>b.category==='DEFENCES'&&b.width===1),bo
  assert.equal(t.send('state').result.factories[0].waitingReason.kind,'constructors');t.droids.pop();t.c.wtcmd_tickProduction();assert.equal(t.calls.at(-1).op,'produce','normal production resumes after capacity frees');
 }
 console.log('PASS: FIFO builds, manual/automatic workers, sticky sessions, STOP, deduplication, validation, factory queues and bounded 100-job polling');
+{
+ const t=setup(),item=catalog.buildings.find(b=>b.id==='GuardTower1');
+ const building={id:70,player:0,type:1,stattype:20,status:0,name:item.name,x:8,y:9,health:10};t.structures.push(building);
+ Object.assign(t.droids[0],{body:'Body1REC',action:18,x:8,y:8,order:10});
+ let row=t.send('state').result.construction[0];assert.equal(row.remaining,null,'travel is not construction time');assert.equal(row.rate,0);
+ t.droids[0].action=2;building.health=55;row=t.send('state').result.construction[0];assert.equal(row.rate,9);assert.equal(row.remaining,17);
+ Object.assign(t.droids[1],{body:'Body1REC',action:2,x:9,y:9,order:10});row=t.send('state').result.construction[0];assert.equal(row.rate,18);assert.equal(row.remaining,9,'live worker arrivals shorten the estimate');
+ t.c.playerPower=()=>0;building.health=10;t.send('state');t.c.gameTime+=1000;row=t.send('state').result.construction[0];assert.equal(row.status,'waiting-power');assert.equal(row.remaining,null);
+ t.c.playerPower=()=>1000;building.health=19;row=t.send('state').result.construction[0];assert.equal(row.status,'building');assert.equal(row.remaining,15);
+ const paused=JSON.stringify(row);assert.equal(JSON.stringify(t.send('state').result.construction[0]),paused,'a paused simulation cannot tick down an estimate');
+ t.select([t.droids[0]]);const before=t.calls.length,plan=t.send('track-site',{itemId:item.id,x:11,y:11});assert.equal(plan.ok,true);assert.equal(t.calls.length,before,'the display journal must not issue or replace native orders');
+ t.structures.push({id:71,player:0,type:1,stattype:20,status:1,name:item.name,x:12,y:11,health:100});
+ assert.notEqual(t.send('state').result.constructionSites[0].status,'done','an adjacent building cannot complete the queued site');
+ t.structures.push({id:72,player:0,type:1,stattype:20,status:1,name:item.name,x:11,y:11,health:100});
+ assert.equal(t.send('state').result.constructionSites[0].status,'done');
+}
+{
+ const t=setup(),factory={id:80,player:0,type:1,stattype:4,status:1,name:'Factory',x:8,y:9,health:60,modules:1};t.structures.push(factory);t.select([t.droids[0]]);
+ Object.assign(t.droids[0],{body:'Body1REC',action:2,order:10});assert.equal(t.send('track-site',{itemId:'A0FacMod1',x:8,y:9}).ok,true);
+ factory.status=0;t.send('state');t.c.gameTime+=500;let j=t.send('state').result.constructionSites[0];assert.ok(j.estimatedPoints>0);const points=j.estimatedPoints;
+ j=t.send('state').result.constructionSites[0];assert.equal(j.estimatedPoints,points,'module work uses simulation time, not polling frequency');
+ factory.modules=2;factory.status=1;assert.equal(t.send('state').result.constructionSites[0].status,'done');
+}
+console.log('PASS: construction ETA follows actual worker actions/upgrades, pauses and power; modules use observed work; journal never replaces native orders');
+{
+ const t=setup(),item=catalog.buildings.find(b=>b.id==='A0ResearchFacility');t.select([t.droids[0]]);
+ const old={id:90,player:0,type:1,stattype:8,status:1,name:item.name,x:8,y:38,health:100};t.structures.push(old);
+ Object.assign(t.droids[0],{body:'Body1REC',action:2,order:10,x:9,y:37});
+ assert.equal(t.send('track-site',{itemId:item.id,x:9,y:37}).ok,true);
+ let j=t.send('state').result.constructionSites[0];assert.notEqual(j.status,'done','an old adjacent facility cannot satisfy a new order');
+ const foundation={id:91,player:0,type:1,stattype:8,status:0,name:item.name,x:9,y:38,health:28};t.structures.push(foundation);
+ j=t.send('state').result.constructionSites[0];assert.equal(j.structureId,91);assert.equal(j.nativeY,38);assert.equal(j.y,37);assert.equal(j.observed,true);assert.equal(j.status,'building');assert.ok(j.remaining>0);
+ foundation.status=1;foundation.health=100;assert.equal(t.send('state').result.constructionSites[0].status,'done','even-footprint snapping preserves native completion matching');
+}
+console.log('PASS: a snapped 2x2 foundation binds to its own queue entry without matching older adjacent buildings');
 {
  const t=setup();t.structures.push({id:31,type:1,player:0,stattype:4,status:1});const construct=catalog.components.Construct[0];
  t.templates.push({id:'ConstructionDroid',fullname:'Truck',body:body.id,propulsion:prop.id,weapons:[],construct:construct.id,droidType:2,cost:62,points:310});

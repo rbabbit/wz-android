@@ -23,7 +23,13 @@ with ZipFile(args.baseline) as old,ZipFile(args.candidate) as new:
     entry_pattern=r'\{filename:"([^"]+)",start:(\d+),end:(\d+)\}'
     previous={name:(int(start),int(end)) for name,start,end in re.findall(entry_pattern,old_index.group())}
     current={name:(int(start),int(end)) for name,start,end in re.findall(entry_pattern,new_index.group())}
-    custom={'/data/mp/tests/warzone-towers-bridge.js','/data/mp/tests/warzone-towers-rules.js','/data/mp/tests/warzone-towers-commands.js'}
+    custom={'/data/mp/tests/warzone-towers-bridge.js','/data/mp/tests/warzone-towers-rules.js','/data/mp/tests/warzone-towers-commands.js','/data/mp/tests/warzone-towers-catalog.json'}
+    catalogue='/data/mp/tests/warzone-towers-catalog.json'
+    old_catalogue=json.loads(old_data[slice(*previous[catalogue])])
+    new_catalogue=json.loads(new_data[slice(*current[catalogue])])
+    for value in (old_catalogue,new_catalogue):
+        for item in value['buildings']:item.pop('image',None)
+    assert old_catalogue==new_catalogue,'Catalogue gameplay statistics changed'
     count=0
     for name,(start,end) in previous.items():
         if name in custom:continue
@@ -43,7 +49,7 @@ with ZipFile(args.baseline) as old,ZipFile(args.candidate) as new:
         a,b=current[name]
         assert new_data[a:b]==(root/'scenario'/Path(name).name).read_bytes(),f'Embedded scenario is stale: {name}'
     result={'candidateAPK_SHA256':hashlib.sha256(args.candidate.read_bytes()).hexdigest(),
-        'officialEngineCodeIdentical':True,'wasmIdentical':True,'frozenDataPrefixPreserved':True,
+        'officialEngineCodeIdentical':True,'wasmIdentical':True,'frozenDataPrefixPreserved':True,'catalogueGameplayStatisticsIdentical':True,
         'previousDataBytes':len(old_data),'newDataBytes':len(new_data),'unchangedResolvedAssets':count,
         'customBridgeOverride':sorted(custom),'normalizedEngineSHA256':hashlib.sha256(old_code.encode()).hexdigest(),
         'editableAssetsMatchCandidate':True,'checkedEditableAssetFiles':checked,'embeddedScenarioMatchesSource':True}

@@ -34,7 +34,7 @@ for key,value in read_stats('structure').items():
     buildings.append({'id':key,'name':name,'kind':kind,'category':category,
       'width':value.get('width',1),'breadth':value.get('breadth',1),
       'power':value.get('buildPower',0),'points':value.get('buildPoints',0),
-      'image':picture(name)})
+      'image':'build-icons/'+key+'.png' if (assets/'build-icons'/(key+'.png')).exists() else picture(name)})
 components={}
 for group,filename in [('Body','body'),('Propulsion','propulsion'),('Weapon','weapons'),
                        ('Sensor','sensor'),('Repair','repair'),('Construct','construction'),('ECM','ecm'),('Brain','brain')]:

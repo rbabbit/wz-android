@@ -2,7 +2,21 @@
 
 final result: passed
 
-## v5.4 selected-lab sidebar — current
+## v5.5 construction sidebar — current
+
+APK SHA-256: `a5a765710345d91bc59e440878a6d77a5f337c0d694fc020c1df51673ea9e61e`.
+
+The exact installed APK passed the fresh-match construction/UI journey at
+1280×576 and 1080×600: scrolling/fixed controls, native multi-truck mixed queues,
+2×2 foundation matching, tower/facility/module completion, live timing,
+pause/resume, normal production, produced-unit movement, design save, visible
+Android keyboard return and repeated menu/navigation returns. Research is
+unchanged. Remaining construction time is an estimate; physical-device, HQ,
+audio and Save/Load limitations remain.
+
+See [v5.5 evidence and scope](qa/v5.5/REPORT.md).
+
+## v5.4 selected-lab sidebar — historical
 
 APK SHA-256: `07b81acec83421999770912e304abcbffe058bdfcafdb685865281f3a26b3057`.
 

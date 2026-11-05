@@ -2,7 +2,18 @@
 
 Full Android project for Warzone Towers, based on the supplied Survival Mod and
 TowerDefense2_m map. The editable project is at the repository root; open this
-folder in Android Studio. Current Android version: **5.4-lab-sidebar (54)**.
+folder in Android Studio. Current Android version: **5.5-build-sidebar (55)**.
+
+## Construction sidebar
+
+BUILD opens the field sidebar and selects the nearby construction group. Scroll
+its structure cards; categories, construction activity and Exit stay visible.
+Choose a structure, then tap clear terrain to append native build orders. Exit
+keeps the orders. The queue shows live progress and approximate remaining build
+time from actual truck work; completion remains controlled by Warzone.
+
+The cards use existing Warzone research art and original engine-rendered build
+thumbnails. Research retains the v5.4 layout. See [v5.5 verification](qa/v5.5/REPORT.md).
 
 ## Downloads and saved versions
 

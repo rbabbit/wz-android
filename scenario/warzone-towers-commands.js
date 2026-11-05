@@ -19,6 +19,104 @@ var wtcmd_finishedUnits = [];
 var wtcmd_finishedBuilds = [];
 var wtcmd_structureCache = null;
 var wtcmd_buildGeneration = 0;
+// A display journal for ordinary Ctrl-build input. These entries never issue
+// orders: Warzone owns the real queue, pathfinding, power and blueprints.
+var wtcmd_nativeSites = [];
+var wtcmd_siteHealth = {};
+
+function wtcmd_bindNativeSites(structures)
+{
+    wtcmd_nativeSites.forEach(function(j){
+        if(j.parentId){j.structureId=j.parentId;return;}
+        if(j.structureId||j.status==='done'||j.status==='interrupted')return;
+        const item=wtcmd_buildings[j.itemId],known=j.knownStructures||[];
+        // Native cursor rounding and the terrain observer can disagree at an
+        // even footprint's grid boundary. Bind a newly observed foundation,
+        // never an older neighbouring building or another journal's target.
+        const dx=item.width%2===0?1:0,dy=item.breadth%2===0?1:0;
+        const candidates=structures.filter(function(s){return s.name===item.name&&known.indexOf(s.id)<0&&Math.abs(s.x-j.x)<=dx&&Math.abs(s.y-j.y)<=dy&&!wtcmd_nativeSites.some(function(other){return other!==j&&other.structureId===s.id;});});
+        candidates.sort(function(a,b){return Math.hypot(a.x-j.x,a.y-j.y)-Math.hypot(b.x-j.x,b.y-j.y)||a.id-b.id;});
+        if(candidates.length){j.structureId=candidates[0].id;j.nativeX=candidates[0].x;j.nativeY=candidates[0].y;}
+    });
+}
+
+function wtcmd_constructorRate(droid)
+{
+    const group = Stats.Construct || {};
+    // Stock trucks and combat engineers use these original construction tools.
+    // Droid script objects expose body/propulsion, not their construction slot.
+    const tool = /^Cyborg/.test(droid.body) ? "CyborgSpade" : "Spade1Mk1";
+    const key = Object.keys(group).filter(function (name) { return group[name].Id === tool; })[0];
+    return key ? Number(Upgrades[selectedPlayer].Construct[key].ConstructorPoints || 0) : 0;
+}
+
+function wtcmd_constructionState()
+{
+    const structures = enumStruct(selectedPlayer), trucks = wtcmd_builders();
+    wtcmd_bindNativeSites(structures);
+    const active = structures.filter(function (s) { return s.status !== BUILT; });
+    const assignments = {};
+    trucks.filter(function (d) { return d.action === 2 || d.action === 21; }).forEach(function (d) {
+        // Public scripts expose the worker action, but not its order target.
+        // Associate only a nearby unfinished footprint; never count travellers.
+        const nearest = active.map(function (s) {
+            const item = wtcmd_catalog.buildings.filter(function (b) { return b.name === s.name; })[0];
+            return { s: s, distance: Math.hypot(d.x-s.x,d.y-s.y), reach: Math.max(item ? item.width : 1,item ? item.breadth : 1)/2+2 };
+        }).filter(function (v) { return v.distance <= v.reach; }).sort(function (a,b) { return a.distance-b.distance; })[0];
+        if (nearest) { const key=String(nearest.s.id);if(!assignments[key])assignments[key]=[];assignments[key].push(d); }
+    });
+    const rows = active.map(function (s) {
+        const journal = wtcmd_nativeSites.filter(function (j) { return s.id===j.structureId&&j.status!=="done"&&j.status!=="interrupted"; })[0];
+        const item = journal ? wtcmd_buildings[journal.itemId] : wtcmd_catalog.buildings.filter(function (b) { return b.name === s.name; })[0];
+        const workers=assignments[String(s.id)]||[],rate=workers.reduce(function (n,d) { return n+wtcmd_constructorRate(d); },0);
+        const health=Number(s.health),previous=wtcmd_siteHealth[String(s.id)];
+        const changed=!previous||previous.health!==health;
+        wtcmd_siteHealth[String(s.id)]={health:health,changed:changed?gameTime:previous.changed};
+        const moduleWork=Boolean(item&&item.category==='MODULES'&&journal);
+        const stalled=!changed&&gameTime-previous.changed>=750;
+        const waitingPower=(health<=10||moduleWork)&&stalled&&playerPower(selectedPlayer)<Number(item?item.power:0);
+        // Foundations start at 10% body. Health gives a coarse, damage-sensitive
+        // estimate, not the engine's private currentBuildPts. Label it as such.
+        if(moduleWork){
+            // A module extends an existing building, whose body is not a fresh
+            // 10% foundation. Integrate observed work in simulation time instead.
+            const elapsed=journal.sampleAt==null?0:Math.max(0,Math.min(1500,gameTime-journal.sampleAt));
+            journal.estimatedPoints=(journal.estimatedPoints||0)+(!waitingPower?elapsed*Math.min(rate,journal.sampleRate||0)/1000:0);
+            journal.sampleAt=gameTime;journal.sampleRate=waitingPower?0:rate;
+        }
+        const progress=Math.max(0,Math.min(.99,moduleWork?journal.estimatedPoints/Math.max(1,item.points):(health-10)/90));
+        return {id:s.id,itemId:item?item.id:"",name:item?item.name:s.name||"Structure",x:s.x,y:s.y,
+            progress:progress,approximate:true,workers:workers.length,rate:rate,
+            status:waitingPower?"waiting-power":rate?"building":"waiting-trucks",
+            remaining:!waitingPower&&rate&&item?Math.max(1,Math.ceil(item.points*(1-progress)/rate)):null};
+    });
+    wtcmd_nativeSites.forEach(function (j) {
+        if(j.status==="done"||j.status==="interrupted")return;
+        const item=wtcmd_buildings[j.itemId];
+        const target=structures.filter(function(s){return s.id===j.structureId;})[0];
+        const live=target&&rows.filter(function(r){return r.id===target.id;})[0];
+        if(live){j.status=live.status;j.observed=true;j.structureId=target.id;j.progress=live.progress;j.remaining=live.remaining;j.workersActive=live.workers;return;}
+        if(target&&target.status===BUILT&&(!j.parentId||target.modules>=j.targetModules)){j.status="done";j.completed=gameTime;return;}
+        const assigned=trucks.filter(function(d){return j.workers.indexOf(d.id)>=0;});
+        const orders=[DORDER_BUILD,DORDER_HELPBUILD,DORDER_LINEBUILD];if(typeof DORDER_BUILDMODULE!=="undefined")orders.push(DORDER_BUILDMODULE);
+        if(!assigned.length||(gameTime-j.created>2000&&assigned.every(function(d){return !orders.includes(d.order);}))) {j.status="interrupted";j.remaining=null;return;}
+        j.status=wtcmd_nativeSites.some(function(a){return a!==j&&a.created<=j.created&&["building","waiting-power","waiting-trucks"].includes(a.status)&&a.workers.some(function(id){return j.workers.indexOf(id)>=0;});})?"queued":"travelling";
+        j.remaining=null;
+    });
+    return {active:rows,sites:wtcmd_nativeSites.filter(function(j){return !j.completed||gameTime-j.completed<4000;})};
+}
+
+function wtcmd_trackSite(command)
+{
+    const plan=wtcmd_planBuild(command);
+    if(plan.error){wtcmd_answer(command,false,plan.error);return;}
+    if(wtcmd_nativeSites.some(function(j){return j.itemId===plan.job.itemId&&j.x===plan.job.x&&j.y===plan.job.y&&!['done','interrupted'].includes(j.status);})){wtcmd_answer(command,false,'already-queued');return;}
+    wtcmd_nativeSites=wtcmd_nativeSites.filter(function(j){return !['done','interrupted'].includes(j.status);}).slice(-127);
+    plan.job.knownStructures=enumStruct(selectedPlayer).filter(function(s){return s.name===wtcmd_buildings[plan.job.itemId].name;}).map(function(s){return s.id;});
+    const existing=wtcmd_structAt(plan.job);if(existing&&existing.status!==BUILT)plan.job.structureId=existing.id;
+    wtcmd_nativeSites.push(plan.job);
+    wtcmd_answer(command,true,'',plan.job);
+}
 
 wtcmd_catalog.buildings.forEach(function (item) { wtcmd_buildings[item.id] = item; });
 Object.keys(wtcmd_catalog.components).forEach(function (group) {
@@ -132,6 +230,7 @@ function wtcmd_nativeBuildOptions()
 
 function wtcmd_snapshot()
 {
+    const construction = wtcmd_constructionState();
     const buildings = wtcmd_catalog.buildings.filter(function (item) {
         return wtcmd_native[item.id] && isStructureAvailable(item.id, selectedPlayer);
     }).map(function (item) {
@@ -161,9 +260,9 @@ function wtcmd_snapshot()
         mapWidth: mapWidth, mapHeight: mapHeight, alwaysQueue: true,
         hasHQ: enumStruct(selectedPlayer, HQ).some(function (s) { return s.status === BUILT; }),
         selectedUnits: wtcmd_selectedUnits(),
-        construction: enumStruct(selectedPlayer).filter(function(s){return s.status!==BUILT;}).map(function(s){return{id:s.id,name:s.name||"Structure",x:s.x,y:s.y};}),
+        construction: construction.active, constructionSites: construction.sites,
         nativeBuildOptions: wtcmd_nativeBuildOptions(), buildings: buildings, parts: parts, trucks: wtcmd_builders().map(function (d) {
-            return { id: d.id, x: d.x, y: d.y, z: d.z, selected: Boolean(d.selected), order: d.order,
+            return { id: d.id, x: d.x, y: d.y, z: d.z, selected: Boolean(d.selected), order: d.order, action:d.action,rate:wtcmd_constructorRate(d),
                 building: d.order===DORDER_BUILD||d.order===DORDER_HELPBUILD||(typeof DORDER_LINEBUILD!=="undefined"&&d.order===DORDER_LINEBUILD)||(typeof DORDER_BUILDMODULE!=="undefined"&&d.order===DORDER_BUILDMODULE),
                 queued: (wtcmd_workers[String(d.id)] || []).length };
         }), jobs: wtcmd_openJobs(), factories: factories, nativeMenu: wtcmd_nativeMenu,
@@ -481,6 +580,7 @@ function wtcmd_poll()
         if (wtcmd_replies[command.nonce]) { dump("WTCMD:" + JSON.stringify(wtcmd_replies[command.nonce])); return; }
         try {
             if (command.action === "state") wtcmd_answer(command, true, "", wtcmd_snapshot());
+            else if (command.action === "track-site") wtcmd_trackSite(command);
             else if (command.action === "queue-build") wtcmd_queueBuild(command);
             else if (command.action === "preview-build") {
                 const plan = wtcmd_planBuild(command);

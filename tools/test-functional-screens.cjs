@@ -5,12 +5,14 @@ const state={page:'saved',saved:[{id:'a',name:'Chosen tank',turrets:['gun'],body
 let persists=true,reset=0;const notices=[],requests=[];
 const c=vm.createContext({state,esc:String,unitParts:()=>'',image:()=>'',findPart:()=>null,availableDesign:()=>true,button:(label,attrs)=>`<button ${attrs}>${label}</button>`,reason:x=>x,render(){},persist:()=>persists,notify:m=>notices.push(m),open:p=>state.page=p,requestState(){},readDraft(){},resetDraft(){reset++;state.draft={};state.confirmNew=false;},element:()=>null,send:(action,data)=>new Promise(resolve=>requests.push({action,data,resolve}))});
 vm.runInContext(source.slice(source.indexOf('  function renderSaved('),source.indexOf('  function builderMode(')),c);
+vm.runInContext(source.slice(source.indexOf('  function siteStatus('),source.indexOf('  function renderSidebar(')),c);
 vm.runInContext(source.slice(source.indexOf('  function onClick('),source.indexOf('  loadSaved();')),c);
 const click=dataset=>c.onClick({target:{closest:()=>({dataset})}}),flush=()=>new Promise(r=>setImmediate(r));
 (async()=>{
  assert.ok(c.renderSaved().includes('CHOOSE FACTORY'));const html=c.renderFactory();assert.ok(html.includes('data-selected-design="true"'));assert.ok(html.indexOf('EXISTING UNIT DESIGNS')<html.indexOf('SAVED DESIGNS'));
  state.snapshot.templates.push({id:'native:generated',fullname:'Chosen tank F2',body:'body',propulsion:'wheels',weapons:['gun'],cost:20});state.snapshot.factories[0].templates.push('native:generated');assert.ok(!c.renderFactory().includes('data-produce-template="native:generated"'),'manufactured copies of saved blueprints do not add duplicate rows');assert.ok(c.renderFactory().includes('Constructor'),'stock constructor remains directly available');
- const queue=c.liveQueueRows();for(const text of ['Tank','Truck','CONSTRUCTOR 4','Tower'])assert.ok(queue.includes(text));
+ state.snapshot.construction[0]={id:10,name:'Tower',x:7,y:8,status:'building',remaining:8,progress:.25};
+ const queue=c.liveQueueRows();for(const text of ['Tank','Truck','Tower','~0:08 LEFT','<progress'])assert.ok(queue.includes(text));
  click({delete:'a'});assert.equal(state.saved.length,1);assert.ok(c.renderSaved().includes('DELETE PERMANENTLY'));click({cancelDelete:'a'});assert.equal(state.saved.length,1);assert.equal(state.deletePending,'');
  persists=false;click({confirmDelete:'a'});assert.equal(state.saved.length,1);assert.ok(notices.at(-1).includes('kept'));persists=true;click({confirmDelete:'a'});assert.equal(state.saved.length,0);
  state.page='saved';state.draft={name:'Edited'};state.draftOriginal=JSON.stringify({name:'Original'});click({action:'new-design'});assert.equal(reset,0);assert.equal(state.page,'design');assert.equal(state.confirmNew,true);click({action:'keep-draft'});assert.equal(state.draft.name,'Edited');click({action:'discard-draft'});assert.equal(reset,1);

@@ -21,8 +21,14 @@ removal, integrated component buttons, stable header and native selection/queue
 fixes. Both emulator sizes passed the finite flows in [the v5.2 report](../qa/v5.2/REPORT.md).
 Research's 408 files are identical to the frozen v5.1 APK.
 
-Future build orders remain native battlefield blueprints; QUEUE lists current
-construction and factory jobs. A copied native QuickSave test fixture failed to
+v5.5 journals sites placed through the field sidebar and lists pending/current
+construction with live estimates; original green blueprints remain native.
+Construction points are private to the engine script API: ordinary progress
+uses foundation health and live worker rates, while modules integrate observed
+work. Damage and missed samples can affect the estimate. Power-starvation timing
+is covered by bridge tests, without a separate real-emulator power-starved run.
+Older native saves may contain queued orders without journal entries.
+QUEUE also lists factory jobs. A copied native QuickSave test fixture failed to
 restore the custom scenario context; that fixture was abandoned. Native
 Save/Load is not certified. The fifteen-constructor selection fixture uses
 stock debug cloning only in the owned emulator; ordinary production is tested

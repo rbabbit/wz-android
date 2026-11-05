@@ -10,8 +10,8 @@ android {
         applicationId = "com.rbabbit.warzonetowers"
         minSdk = 26
         targetSdk = 36
-        versionCode = 58
-        versionName = "5.8-smooth-build"
+        versionCode = 59
+        versionName = "5.9-single-tap-build"
     }
 
     compileOptions {

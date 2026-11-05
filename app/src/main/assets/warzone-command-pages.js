@@ -169,7 +169,9 @@
       if(state.page)await close();
       if(navigation!==state.navigationSerial)return;
       state.buildOpen=true;window.dispatchEvent(new Event('warzone-build-sidebar-open'));element('wt-build-sidebar').hidden=false;renderSidebar();
-      if(state.nativeMenu!=='build')await openBuild(false,true);
+      // Opening the catalogue must not disable its first item tap while an
+      // unseen truck picker runs. The chosen item owns that native setup.
+      requestState();
       if(navigation===state.navigationSerial){renderSidebar();updateHUD();}
     }catch(error){await closeNative(true);notify(error.message);}finally{state.sidebarOpening=false;}
   }
@@ -384,12 +386,20 @@
       state.nativeBuildPlaced=false;state.nativeBuildSawWork=false;state.nativeBuildIdleAt=0;state.nativeToolReady=false;state.nativeToolSelectionAt=0;state.nativePendingSites=[];
       cancelPlacement();if(!keepPage)close();window.__blockNightResearch?.close?.();window.__kalaWarzoneTouch.releaseAll(true);
       const reply=await send('state');if(!reply.ok)return;
-      const trucks=reply.result.trucks;if(!trucks.length){notify(reason('no-truck'));return;}
+      const trucks=reply.result.trucks;if(!trucks.length){
+        state.nativeBuildGroup=[];await closeNative(true);
+        // Warzone's Select All Trucks binding clears the previous selection
+        // even when it finds no constructors. Never leave a combat unit or an
+        // old construction ghost selected as a substitute.
+        await window.__kalaWarzoneTouch.selectAllTrucks();
+        await nativeFrames(2);await send('state');notify(reason('no-truck'));return;
+      }
       window.WarzoneTerrain?.active(true);
       // The observer sleeps between placements. Let the current camera render
       // before choosing its local group, rather than using the previous view.
       await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
-      const centre=window.WarzoneTerrain?.pick(innerWidth/2,innerHeight/2)||{x:reply.result.mapWidth/2,y:reply.result.mapHeight/2};
+      const visibleHeight=Math.min(innerHeight,host.innerHeight-element('warzone-game-frame').getBoundingClientRect().y);
+      const centre=window.WarzoneTerrain?.pick(innerWidth/2,visibleHeight/2)||{x:reply.result.mapWidth/2,y:reply.result.mapHeight/2};
       const selected=trucks.filter(t=>t.selected),anchor=(forceNearby?trucks:selected.length?selected:trucks).slice().sort((a,b)=>Math.hypot(a.x-centre.x,a.y-centre.y)-Math.hypot(b.x-centre.x,b.y-centre.y))[0];
       const group=nearbyBuildGroup(trucks,selected,anchor,forceNearby);
       state.nativeBuildGroup=group.map(t=>t.id);state.nativeBuildPlaced=false;state.nativeBuildSawWork=false;
@@ -423,7 +433,7 @@
       // sidebar or shrinking/re-expanding the engine viewport between items.
       if(state.nativeMenu==='build')await drainBuildInput();
       state.buildOpen=true;element('wt-build-sidebar').hidden=false;
-      if(!await openBuild(false,true,true))return;
+      if(!await openBuild(true,true,true))return;
       const revision=state.menuRevision;
       const reply=await send('state'),options=reply.result?.nativeBuildOptions||[],index=options.indexOf(itemId);
       if(index<0)throw Error('This structure needs a matching building or has reached its limit.');
@@ -621,7 +631,7 @@
   window.__warzoneCommands={tower:true,setSize:applySize,open,close,closeNative,beginPlacement,cancelPlacement,placeAt,previewAt,send,accept,
     hidePreview:()=>{const ghost=document.getElementById('wt-build-ghost');if(ghost)ghost.hidden=true;},
     isOpen:()=>Boolean(state.page),isPlacement:()=>Boolean(state.placement),nativeMenuOpen:()=>Boolean(state.nativeMenu&&state.nativeMenu!=='build'),nativeBuildOpen:()=>state.nativeMenu==='build',nativeBuildMenuOpen:()=>state.nativeMenu==='build'&&!state.nativeToolReady,nativeHudHidden:()=>state.nativeHudHidden,nativeBuildTap,nativeBuildMenuTap,queueNativeSite,selectMode,afterBuildExit,selectNearbyTrucks,openBuild,
-    report:()=>({version:58,page:state.page,buildOpen:state.buildOpen,nativeHudHidden:state.nativeHudHidden,pendingItem:state.pendingItem,siteChecks:state.siteChecks,pending:state.pending.size,writes:state.writes,acks:state.acks,timeouts:state.timeouts,
+    report:()=>({version:59,page:state.page,buildOpen:state.buildOpen,nativeHudHidden:state.nativeHudHidden,pendingItem:state.pendingItem,siteChecks:state.siteChecks,pending:state.pending.size,writes:state.writes,acks:state.acks,timeouts:state.timeouts,
       placements:state.placements,rejects:state.rejects,opens:state.opens,closes:state.closes,placement:state.placement?.id,
       session:state.session,nativeMenu:state.nativeMenu,nativeItem:state.nativeItem,nativeBuildGroup:state.nativeBuildGroup,nativeToolReady:state.nativeToolReady,nativePendingSites:state.nativePendingSites.length,exitingBuild:state.exitingBuild,nativeBuildPlaced:state.nativeBuildPlaced,nativeBuildSawWork:state.nativeBuildSawWork,buildingOpening:state.buildingOpening,saved:state.saved,history:state.history,snapshot:state.snapshot,terrain:window.WarzoneTerrain?.report()})};
   fetch('/warzone/command-catalog.json').then(r=>{if(!r.ok)throw Error('catalog');return r.json();}).then(c=>{state.catalog=c;render();}).catch(()=>notify('The command catalogue could not load. Restart the app.'));

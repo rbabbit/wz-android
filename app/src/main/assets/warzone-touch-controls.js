@@ -467,6 +467,23 @@
     return selected;
   }
 
+  async function selectAllTrucks() {
+    if (!canvas()) return false;
+    releaseAll(true);
+    const frames = () => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+    // SDL needs a held modifier key, not only KeyboardEvent.shiftKey on T.
+    dispatchKey('Shift', 'ShiftLeft', 16, true, true, false, 1);
+    try {
+      await frames();
+      dispatchKey('t', 'KeyT', 84, true, true, false);
+      await frames();
+    } finally {
+      dispatchKey('t', 'KeyT', 84, false, true, false);
+      dispatchKey('Shift', 'ShiftLeft', 16, false, false, false, 1);
+    }
+    return true;
+  }
+
   function updateCombatHud() {
     const hudDocument = commandDocument();
     const all = hudDocument.getElementById("blocknight-select-all");
@@ -1893,6 +1910,7 @@
     faceOpponent,
     selectAllCombat,
     selectAllUnits,
+    selectAllTrucks,
     toggleCombatLock,
     toggleAutoFight,
     toggleBoxMode,

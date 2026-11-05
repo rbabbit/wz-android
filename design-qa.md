@@ -2,7 +2,19 @@
 
 final result: passed
 
-## v5.8 build transition smoothing — current
+## v5.9 single item tap — current
+
+Clean installed APK SHA-256:
+`5d88d0866cfac08bd9eef2ed346b174f4555d908cecd4d642f080917098a87f2`.
+
+BUILD opens immediately; one item tap selects the closest constructor group and
+activates the requested structure. The exact APK passed rapid MG-bunker selection,
+actual native orders/completion at three sizes, distant-selection override,
+zero-constructor/no-selection behavior and recovery with a normally produced
+single constructor. The empty-roster fixture and limits are explicit in
+[v5.9 evidence](qa/v5.9/REPORT.md). Engine, mod, Research and v5.8 CSS are preserved.
+
+## v5.8 build transition smoothing — historical
 
 Clean installed APK SHA-256:
 `8e885733bcc4b905791a1db7c6973702814ec016b7401e7bb7c562aef6090455`.

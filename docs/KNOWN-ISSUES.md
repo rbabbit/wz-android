@@ -1,5 +1,12 @@
 # Known issues and verification limits
 
+v5.9 fixes the first structure tap being ignored during hidden truck selection.
+BUILD now opens the catalogue immediately; one item tap selects the nearest
+group and activates placement. Native MG-bunker orders/completion, a prior
+distant selection, an empty-constructor fixture and one normally produced
+replacement constructor passed. See [v5.9 evidence](../qa/v5.9/REPORT.md).
+The physical-device/rendering/performance limits below remain.
+
 v5.8 smooths construction selection and exits, with persistent cards/sidebar,
 stable queue geometry and covered native transitions. The exact APK passed the
 reported flow, native orders/completion/movement and three emulator viewports.

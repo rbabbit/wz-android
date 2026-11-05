@@ -3,7 +3,7 @@
 Full Android project for Warzone Towers, using the supplied
 WZmodTowerDefense-v4.7.0-a mod and TowerDefense2_m map. The editable project is
 at the repository root; open this folder in Android Studio.
-Current Android version: **5.8-smooth-build (58)**.
+Current Android version: **5.9-single-tap-build (59)**.
 
 The original mod owns all 30 timed rounds, enemy templates, ranks, research
 delay, per-kill power rewards and HQ objective. Preparation lasts three minutes.
@@ -21,9 +21,11 @@ covered by the rules harness, with no claim of a complete native playthrough.
 
 ## Construction sidebar
 
-BUILD opens the field sidebar and selects the nearby construction group. Scroll
-its structure cards; categories, construction activity and Exit stay visible.
-Choose a structure, then tap clear terrain to append native build orders. Exit
+BUILD opens the field sidebar immediately. Scroll its structure cards;
+categories, construction activity and Exit stay visible. One structure tap
+selects the closest construction group and activates placement. With no trucks,
+it clears selection and activates no tool. Tap clear terrain to append native
+build orders. Exit
 keeps the orders. The queue shows live progress and approximate remaining build
 time from actual truck work; completion remains controlled by Warzone.
 
@@ -41,6 +43,9 @@ retains the v5.4 layout. See [v5.6 verification](qa/v5.6/REPORT.md).
 
 See [v5.8 transition and native-order verification](qa/v5.8/REPORT.md) for the
 current build-selection/exit checks and their limits.
+
+[v5.9 rapid Build/item verification](qa/v5.9/REPORT.md) covers actual MG-bunker
+orders/completion, nearest constructors, an empty roster and a replacement truck.
 
 ## Downloads and saved versions
 

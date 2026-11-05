@@ -9,9 +9,10 @@ Music stays on startup; BASE, NEAR/BATTLE/MAP and wave controls remain available
 
 ## Construction
 
-Open the header BUILD menu, choose a category and structure, then press PLACE
-STRUCTURE. The original native picker activates beneath this page; the chosen
-structure opens on the battlefield with nearby constructors selected. Tap valid
+Open the header BUILD menu and tap a structure once. The catalogue opens without
+starting a hidden truck-selection task. That single item tap selects the closest
+constructor group to the visible area and activates the original native picker.
+With no constructors it clears selection and activates no build tool. Tap valid
 ground repeatedly. The touch adapter sends native Ctrl-clicks, so the
 engine retains the actual pending order lists and draws its original green
 queued building blueprints. Research, power, footprints, modules and prices
@@ -23,7 +24,8 @@ close placement early. There is no custom neon footprint in this flow.
 BUILD includes the whole connected local constructor group: each constructor
 within eight tiles of an included constructor joins the group. This reaches the
 opposite edge of the same working area when the initially selected truck is at
-one edge. Separate manually selected groups remain included. TRUCKS explicitly
+one edge. A distant previous selection does not override this nearest group.
+TRUCKS explicitly
 selects the nearby group and leaves normal movement active. Selection uses the
 original builder cards across every page and retains the camera position. No
 wrapper unit cap is introduced; original game limits remain in force.

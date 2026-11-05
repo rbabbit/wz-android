@@ -1,0 +1,40 @@
+{
+  "device": "emulator-5556",
+  "seeded": false,
+  "screens": [
+    "large-ready",
+    "standard-ready",
+    "compact-ready",
+    "nearest-overrides-distant-ready",
+    "no-trucks"
+  ],
+  "cases": [
+    "BUILD followed by one MG tap at three sizes, exact native MG orders/targets and completion, closest group overrides distant selection"
+  ],
+  "errors": [],
+  "sites": [
+    {
+      "x": 8,
+      "y": 40
+    },
+    {
+      "x": 9,
+      "y": 40
+    },
+    {
+      "x": 9,
+      "y": 42
+    },
+    {
+      "x": 8,
+      "y": 43
+    }
+  ],
+  "emptyFixture": {
+    "constructorsRemovedFromNativeSave": true,
+    "combatProducedNormally": true,
+    "noSelection": true,
+    "noBuildTool": true
+  },
+  "failure": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert.ok(truck.ok)\n\n    at singleTapJourney (C:\\timerApp\\wz-tower-defense\\tools\\sidebar-audit.cjs:98:140)\n    at async main (C:\\timerApp\\wz-tower-defense\\tools\\sidebar-audit.cjs:188:44)"
+}

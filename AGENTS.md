@@ -33,6 +33,9 @@
 - Confirm pause with the frequently updated native wave clock, not a cached
   command snapshot. Exit the build tool normally before synthetic Escape;
   Escape may close a native picker instead of pausing. Preserve accepted orders.
+- Exercise BUILD followed immediately by one item tap; waiting for hidden
+  setup first masks dropped taps. Confirm the requested structure ID in actual
+  native orders/completion, not merely a generic build-ready callback.
 - Legacy custom-path rules failed native QuickLoad context matching. v5.7 uses
   the canonical rules/init.js entry and mirrored command JSON paths. Validate
   fresh native command replies and restored round state after any load; do not

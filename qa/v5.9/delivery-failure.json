@@ -1,0 +1,33 @@
+{
+  "device": "emulator-5556",
+  "seeded": false,
+  "screens": [
+    "large-ready",
+    "standard-ready",
+    "compact-ready",
+    "nearest-overrides-distant-ready"
+  ],
+  "cases": [
+    "BUILD followed by one MG tap at three sizes, exact native MG orders/targets and completion, closest group overrides distant selection"
+  ],
+  "errors": [],
+  "sites": [
+    {
+      "x": 8,
+      "y": 40
+    },
+    {
+      "x": 9,
+      "y": 40
+    },
+    {
+      "x": 9,
+      "y": 42
+    },
+    {
+      "x": 8,
+      "y": 43
+    }
+  ],
+  "failure": "AssertionError [ERR_ASSERTION]: zero constructors leaves nothing selected\n\n1 !== 0\n\n    at singleTapJourney (C:\\timerApp\\wz-tower-defense\\tools\\sidebar-audit.cjs:96:271)\n    at async main (C:\\timerApp\\wz-tower-defense\\tools\\sidebar-audit.cjs:188:44)"
+}

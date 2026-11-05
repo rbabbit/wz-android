@@ -977,7 +977,7 @@
       if (WZ_CONFIG_DIR_SUFFIX === null) {
         console.error('Config dir not initialized yet');
       }
-      return '/warzone2100' + WZ_CONFIG_DIR_SUFFIX;
+      return '/warzone2100-campaign-test' + WZ_CONFIG_DIR_SUFFIX;
     }
     
     // Deletes the current configuration directory
@@ -1245,6 +1245,7 @@
       }
 
       function blockNightPrepareCustomMapDirectory(Module) {
+        Module.FS_createPath('/', 'data/base/script/campaign/mobile', true, true);
         Module.FS_createPath('/', 'data', true, true);
         Module.FS_createPath('/data', 'mp', true, true);
         Module.FS_createPath('/data/mp', 'multiplay', true, true);
@@ -1277,7 +1278,8 @@
               + 'radarJump=1\n'
               + 'groupmenu=0\n'
               + 'optionsButtonVisibility=0\n'
-              + 'cameraAccel=0\n';
+              + 'cameraAccel=0\n'
+              + 'displayScale=100\nautoAdjustDisplayScale=false\n';
             const graphicsConfig = window.WarzoneGraphics?.high
               ? 'terrainMode=2\nterrainShadingQuality=1024\ntextureSize=2048\n'
               : 'terrainMode=1\nterrainShadingQuality=512\ntextureSize=2048\n';
@@ -1315,7 +1317,7 @@
       if (additional_command_line_args) {
         Module.arguments = Module.arguments.concat(additional_command_line_args);
       }
-      Module.arguments.push('--skirmish=warzonetowers.json');
+      Module.arguments.push('--game=CAM_1A');
     
       Module['locateFile'] = function(path, prefix) {
         // Custom handling for .data files

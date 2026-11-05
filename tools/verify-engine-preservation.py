@@ -7,6 +7,7 @@ parser=argparse.ArgumentParser()
 parser.add_argument('--baseline',required=True,type=Path)
 parser.add_argument('--candidate',type=Path,default=Path('app/build/outputs/apk/debug/app-debug.apk'))
 parser.add_argument('--report',type=Path)
+parser.add_argument('--campaign',action='store_true',help='Allow only exact additive mission bridge suffixes')
 args=parser.parse_args()
 prefix='assets/warzone/'
 pattern=r'loadPackage\(\{files:\[.*?\],remote_package_size:.*?\}\)'
@@ -25,9 +26,17 @@ with ZipFile(args.baseline) as old,ZipFile(args.candidate) as new:
     current={name:(int(start),int(end)) for name,start,end in re.findall(entry_pattern,new_index.group())}
     custom={'/data/mp/tests/warzone-towers-bridge.js','/data/mp/tests/warzone-towers-rules.js','/data/mp/tests/warzone-towers-commands.js'}
     count=0
+    campaign_overrides=[]
     for name,(start,end) in previous.items():
-        if name in custom:continue
+        if name in custom and not args.campaign:continue
         a,b=current[name]
+        if args.campaign and re.fullmatch(r'/data/base/script/campaign/cam[^/]+\.js',name):
+            tail=('\n// Mobile campaign bridge (append-only).\n'
+                  'include("script/campaign/mobile/campaign-bridge.js");\n'
+                  'campmobile_level = '+json.dumps(Path(name).stem)+';\n').encode()
+            assert new_data[a:b]==old_data[start:end]+tail,f'Campaign mission modified: {name}'
+            campaign_overrides.append(name)
+            continue
         assert old_data[start:end]==new_data[a:b],f'Original asset changed: {name}'
         count+=1
     assert '/data/mp/tests/warzone-towers-control-command.json' in current
@@ -45,7 +54,8 @@ with ZipFile(args.baseline) as old,ZipFile(args.candidate) as new:
     result={'candidateAPK_SHA256':hashlib.sha256(args.candidate.read_bytes()).hexdigest(),
         'officialEngineCodeIdentical':True,'wasmIdentical':True,'frozenDataPrefixPreserved':True,
         'previousDataBytes':len(old_data),'newDataBytes':len(new_data),'unchangedResolvedAssets':count,
-        'customBridgeOverride':sorted(custom),'normalizedEngineSHA256':hashlib.sha256(old_code.encode()).hexdigest(),
-        'editableAssetsMatchCandidate':True,'checkedEditableAssetFiles':checked,'embeddedScenarioMatchesSource':True}
+        'customBridgeOverride':[] if args.campaign else sorted(custom),'normalizedEngineSHA256':hashlib.sha256(old_code.encode()).hexdigest(),
+        'editableAssetsMatchCandidate':True,'checkedEditableAssetFiles':checked,'embeddedScenarioMatchesSource':True,
+        'additiveCampaignMissionHooks':campaign_overrides}
     print(json.dumps(result,indent=2))
     if args.report:args.report.write_text(json.dumps(result,indent=2)+'\n')

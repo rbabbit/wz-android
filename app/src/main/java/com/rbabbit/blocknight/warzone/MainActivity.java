@@ -53,7 +53,7 @@ import java.util.HashSet;
 public final class MainActivity extends Activity {
     private static final String TAG = "BlockNightWZ";
     private static final String ORIGIN = "https://appassets.androidplatform.net";
-    private static final String URL = ORIGIN + "/warzone/mobile.html?blocknight=1";
+    private static final String URL = ORIGIN + "/warzone/mobile.html?blocknight=1&campaign=1";
     private static final float MIN_ENGINE_CSS_WIDTH = 642f;
     private static final float MIN_ENGINE_CSS_HEIGHT = 482f;
     private static final float COMMAND_STRIP_CSS_HEIGHT = 72f;
@@ -477,7 +477,7 @@ public final class MainActivity extends Activity {
                 "warzone-command-pages.js",
                 "warzone-touch-controls.js",
                 "warzone-mobile-research.js",
-                "warzone-towers-wave-hud.js"
+                "warzone-campaign-hud.js"
         };
         try (ByteArrayOutputStream output = new ByteArrayOutputStream()) {
             byte[] buffer = new byte[8192];
@@ -565,9 +565,9 @@ public final class MainActivity extends Activity {
         public void engineReady() {
             runOnUiThread(() -> {
                 if (getIntent().getBooleanExtra("engine_debug", false)) hideLoadingPanel();
-                updateLoadingStatus("CONFIGURING SURVIVAL BATTLE…");
+                updateLoadingStatus("LOADING ALPHA MISSION 1…");
                 webView.requestFocus();
-                beginStartupAutomation();
+                awaitBattlefieldReady(0);
                 if (touchTestMode) {
                     webView.postDelayed(MainActivity.this::selectAllUnitsForTouchTest, 30000);
                     webView.postDelayed(MainActivity.this::issueTouchTestOrder, 32000);
@@ -666,20 +666,20 @@ public final class MainActivity extends Activity {
 
     private void awaitBattlefieldReady(int attempt) {
         if (webView == null || isFinishing()) return;
-        String script = "(() => {const r=window.__warzoneTowersWaves?.report?.();"
+        String script = "(() => {const r=window.__warzoneCampaign?.report?.();"
                 + "return Boolean(document.getElementById('canvas')"
-                + "&&r?.snapshot?.mode==='numbered-waves');})()";
+                + "&&r?.snapshot?.mode==='campaign');})()";
         webView.evaluateJavascript(script, result -> {
             if ("true".equals(result)) {
                 revealBattlefield();
                 return;
             }
             if (attempt >= 240) {
-                showEngineFailure("The tower-defence battlefield did not become ready in time.");
+                showEngineFailure("The campaign mission did not become ready in time.");
                 return;
             }
-            if (attempt == 40) updateLoadingStatus("LOADING MAP AND SURVIVAL ARMY…");
-            if (attempt == 120) updateLoadingStatus("FINALISING BATTLEFIELD…");
+            if (attempt == 40) updateLoadingStatus("LOADING CAMPAIGN MAP…");
+            if (attempt == 120) updateLoadingStatus("PREPARING ALPHA MISSION…");
             webView.postDelayed(() -> awaitBattlefieldReady(attempt + 1), 500);
         });
     }
@@ -688,7 +688,6 @@ public final class MainActivity extends Activity {
         if (webView == null || isFinishing()) return;
         // Establish this map's south-facing view while the splash still covers
         // the canvas. Waves and BASE must never change the camera direction.
-        faceOpponent();
         showCombatHud();
         webView.postDelayed(() -> {
             hideLoadingPanel();

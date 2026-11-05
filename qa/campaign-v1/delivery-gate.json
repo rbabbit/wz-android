@@ -1,0 +1,717 @@
+{
+  "passed": true,
+  "scope": "Original Alpha opening mission and mobile screen journey; not a campaign playthrough",
+  "apkSHA256": "630c594149860a61c66780933576fcd606cc326cd9704855df9e0cd40cd00b29",
+  "installedAPKMatches": true,
+  "completedAt": "2026-11-05T02:09:32.946Z",
+  "cases": [
+    "native splash and direct Alpha 1 startup",
+    "available structures on initial Build tab",
+    "Intel/native pause and repeated page returns",
+    "normal factory production and waiting queue",
+    "five native constructors and completed generator",
+    "native truck movement after page/keyboard returns",
+    "native campaign QuickSave/QuickLoad",
+    "idle lab and original research availability",
+    "1080x600 and 1280x576 screen/hit-target checks"
+  ],
+  "produced": [
+    {
+      "id": 162723,
+      "name": "Truck Viper Wheels · F160285",
+      "type": 3
+    },
+    {
+      "id": 162721,
+      "name": "CampaignMG · F160285",
+      "type": 0
+    }
+  ],
+  "generator": {
+    "id": 162725,
+    "buildPoints": 500,
+    "workerIds": [
+      162723,
+      162691,
+      160001,
+      160003,
+      160005
+    ]
+  },
+  "truckMovements": [
+    {
+      "id": 162723,
+      "before": [
+        3158,
+        7014,
+        25
+      ],
+      "after": [
+        2490,
+        7018,
+        1
+      ]
+    },
+    {
+      "id": 162691,
+      "before": [
+        3283,
+        6907,
+        32
+      ],
+      "after": [
+        2560,
+        7178,
+        11
+      ]
+    },
+    {
+      "id": 160001,
+      "before": [
+        3158,
+        6841,
+        21
+      ],
+      "after": [
+        2563,
+        7051,
+        1
+      ]
+    },
+    {
+      "id": 160003,
+      "before": [
+        3080,
+        6819,
+        16
+      ],
+      "after": [
+        2632,
+        7222,
+        16
+      ]
+    },
+    {
+      "id": 160005,
+      "before": [
+        3079,
+        6919,
+        10
+      ],
+      "after": [
+        2607,
+        7120,
+        8
+      ]
+    }
+  ],
+  "limitations": [
+    "Known emulator black terrain remains",
+    "No full Alpha/Beta/Gamma or off-world/transporter/mission-transition playthrough",
+    "Active campaign research after artefact recovery not exercised",
+    "No new physical-device, HQ, audio or general Save/Load certification"
+  ],
+  "live": {
+    "args": [
+      "./this.program",
+      "--configdir=/warzone2100-campaign-test",
+      "--videourl=sequences/",
+      "--game=CAM_1A"
+    ],
+    "campaign": {
+      "snapshot": {
+        "mode": "campaign",
+        "mission": "cam1a",
+        "session": "cam1a-1793843442052",
+        "gameTime": 1967202,
+        "missionTime": -1,
+        "missionType": 2,
+        "ended": false
+      },
+      "paused": false,
+      "errors": 0
+    },
+    "commands": {
+      "version": 52,
+      "page": "",
+      "pending": 0,
+      "writes": 1744,
+      "acks": 1727,
+      "timeouts": 0,
+      "placements": 0,
+      "rejects": 3,
+      "opens": 5,
+      "closes": 5,
+      "session": "",
+      "nativeMenu": "",
+      "nativeItem": "A0PowerGenerator",
+      "nativeBuildGroup": [
+        162723,
+        162691,
+        160001,
+        160003,
+        160005
+      ],
+      "nativeToolReady": false,
+      "nativePendingSites": 0,
+      "exitingBuild": false,
+      "nativeBuildPlaced": true,
+      "nativeBuildSawWork": true,
+      "buildingOpening": false,
+      "saved": [
+        {
+          "id": "design-1793842162083-1",
+          "name": "CampaignMG",
+          "body": "Body1REC",
+          "propulsion": "wheeled01",
+          "turrets": [
+            "MG1Mk1"
+          ],
+          "cost": 47,
+          "points": 237,
+          "droidType": 0
+        }
+      ],
+      "history": [
+        {
+          "nonce": "cmd-1793843423671-7",
+          "action": "native-menu",
+          "ok": true,
+          "reason": "",
+          "result": {
+            "menu": "",
+            "generation": 0
+          },
+          "gameTime": 5402
+        },
+        {
+          "nonce": "cmd-1793843427394-11",
+          "action": "native-menu",
+          "ok": true,
+          "reason": "",
+          "result": {
+            "menu": "",
+            "generation": 0
+          },
+          "gameTime": 8202
+        },
+        {
+          "nonce": "cmd-1793843443966-17",
+          "action": "native-menu",
+          "ok": true,
+          "reason": "",
+          "result": {
+            "menu": "stats",
+            "generation": 5
+          },
+          "gameTime": 858802
+        },
+        {
+          "nonce": "cmd-1793843459590-26",
+          "action": "native-menu",
+          "ok": true,
+          "reason": "",
+          "result": {
+            "menu": "",
+            "generation": 5
+          },
+          "gameTime": 866202
+        },
+        {
+          "nonce": "cmd-1793843496129-49",
+          "action": "queue-production",
+          "ok": true,
+          "reason": "queued",
+          "result": {
+            "factoryId": 160285,
+            "count": 1
+          },
+          "gameTime": 901802
+        },
+        {
+          "nonce": "cmd-1793843497303-51",
+          "action": "queue-production",
+          "ok": true,
+          "reason": "queued",
+          "result": {
+            "factoryId": 160285,
+            "count": 1
+          },
+          "gameTime": 902902
+        },
+        {
+          "nonce": "cmd-1793843499823-54",
+          "action": "native-menu",
+          "ok": true,
+          "reason": "",
+          "result": {
+            "menu": "",
+            "generation": 5
+          },
+          "gameTime": 905502
+        },
+        {
+          "nonce": "cmd-1793843503390-59",
+          "action": "native-menu",
+          "ok": true,
+          "reason": "",
+          "result": {
+            "menu": "",
+            "generation": 5
+          },
+          "gameTime": 908402
+        },
+        {
+          "nonce": "cmd-1793843507577-63",
+          "action": "native-menu",
+          "ok": true,
+          "reason": "",
+          "result": {
+            "menu": "build",
+            "generation": 6
+          },
+          "gameTime": 912102
+        },
+        {
+          "nonce": "cmd-1793843561561-211",
+          "action": "native-menu",
+          "ok": true,
+          "reason": "",
+          "result": {
+            "menu": "",
+            "generation": 6
+          },
+          "gameTime": 965902
+        },
+        {
+          "nonce": "cmd-1793843888067-466",
+          "action": "native-menu",
+          "ok": true,
+          "reason": "",
+          "result": {
+            "menu": "",
+            "generation": 6
+          },
+          "gameTime": 1291502
+        },
+        {
+          "nonce": "cmd-1793843890531-470",
+          "action": "native-menu",
+          "ok": true,
+          "reason": "",
+          "result": {
+            "menu": "build",
+            "generation": 7
+          },
+          "gameTime": 1294002
+        },
+        {
+          "nonce": "cmd-1793844227387-1462",
+          "action": "native-menu",
+          "ok": true,
+          "reason": "",
+          "result": {
+            "menu": "",
+            "generation": 7
+          },
+          "gameTime": 1630202
+        },
+        {
+          "nonce": "cmd-1793844401015-1596",
+          "action": "native-menu",
+          "ok": true,
+          "reason": "",
+          "result": {
+            "menu": "",
+            "generation": 7
+          },
+          "gameTime": 1799302
+        },
+        {
+          "nonce": "cmd-1793844406876-1601",
+          "action": "native-menu",
+          "ok": true,
+          "reason": "",
+          "result": {
+            "menu": "",
+            "generation": 7
+          },
+          "gameTime": 1804802
+        }
+      ],
+      "snapshot": {
+        "version": 1,
+        "gameTime": 1967302,
+        "player": 0,
+        "power": 748,
+        "mapWidth": 128,
+        "mapHeight": 128,
+        "alwaysQueue": true,
+        "hasHQ": true,
+        "selectedUnits": [
+          {
+            "id": 162723,
+            "x": 19,
+            "y": 54,
+            "z": 0,
+            "order": 0,
+            "constructor": true
+          },
+          {
+            "id": 162691,
+            "x": 20,
+            "y": 56,
+            "z": 0,
+            "order": 0,
+            "constructor": true
+          },
+          {
+            "id": 160001,
+            "x": 20,
+            "y": 55,
+            "z": 0,
+            "order": 0,
+            "constructor": true
+          },
+          {
+            "id": 160003,
+            "x": 20,
+            "y": 56,
+            "z": 0,
+            "order": 0,
+            "constructor": true
+          },
+          {
+            "id": 160005,
+            "x": 20,
+            "y": 55,
+            "z": 0,
+            "order": 0,
+            "constructor": true
+          }
+        ],
+        "construction": [],
+        "nativeBuildOptions": [
+          "A0ADemolishStructure",
+          "A0LightFactory",
+          "A0PowerGenerator",
+          "A0ResearchFacility",
+          "A0ResourceExtractor"
+        ],
+        "buildings": [
+          {
+            "id": "A0LightFactory",
+            "power": 100
+          },
+          {
+            "id": "A0PowerGenerator",
+            "power": 50
+          },
+          {
+            "id": "A0ResearchFacility",
+            "power": 100
+          },
+          {
+            "id": "A0ResourceExtractor",
+            "power": 0
+          }
+        ],
+        "parts": [
+          "Body1REC",
+          "MG1Mk1",
+          "Spade1Mk1",
+          "wheeled01"
+        ],
+        "trucks": [
+          {
+            "id": 162723,
+            "x": 19,
+            "y": 54,
+            "z": 0,
+            "selected": true,
+            "order": 0,
+            "building": false,
+            "queued": 0
+          },
+          {
+            "id": 162691,
+            "x": 20,
+            "y": 56,
+            "z": 0,
+            "selected": true,
+            "order": 0,
+            "building": false,
+            "queued": 0
+          },
+          {
+            "id": 160001,
+            "x": 20,
+            "y": 55,
+            "z": 0,
+            "selected": true,
+            "order": 0,
+            "building": false,
+            "queued": 0
+          },
+          {
+            "id": 160003,
+            "x": 20,
+            "y": 56,
+            "z": 0,
+            "selected": true,
+            "order": 0,
+            "building": false,
+            "queued": 0
+          },
+          {
+            "id": 160005,
+            "x": 20,
+            "y": 55,
+            "z": 0,
+            "selected": true,
+            "order": 0,
+            "building": false,
+            "queued": 0
+          }
+        ],
+        "jobs": [],
+        "factories": [
+          {
+            "id": 160285,
+            "number": 1,
+            "x": 18,
+            "y": 51,
+            "type": 1,
+            "kind": "Factory",
+            "templates": [
+              "native:[\"Truck Viper Wheels\",\"Body1REC\",\"wheeled01\",[],\"Spade1Mk1\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+              "native:[\"CampaignMG · F160285\",\"Body1REC\",\"wheeled01\",[\"MG1Mk1\"],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]"
+            ],
+            "modules": 0,
+            "ready": true,
+            "idle": true,
+            "active": null,
+            "waitingReason": null,
+            "queue": []
+          }
+        ],
+        "nativeMenu": "",
+        "templates": [
+          {
+            "fullname": "Truck Viper Wheels",
+            "name": "",
+            "id": "native:[\"Truck Viper Wheels\",\"Body1REC\",\"wheeled01\",[],\"Spade1Mk1\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+            "points": 272,
+            "power": 54,
+            "cost": 54,
+            "droidType": 3,
+            "body": "Body1REC",
+            "propulsion": "wheeled01",
+            "brain": "ZNULLBRAIN",
+            "repair": "ZNULLREPAIR",
+            "ecm": "ZNULLECM",
+            "sensor": "ZNULLSENSOR",
+            "construct": "Spade1Mk1",
+            "weapons": []
+          },
+          {
+            "fullname": "CampaignMG · F160285",
+            "name": "",
+            "id": "native:[\"CampaignMG · F160285\",\"Body1REC\",\"wheeled01\",[\"MG1Mk1\"],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+            "points": 237,
+            "power": 47,
+            "cost": 47,
+            "droidType": 0,
+            "body": "Body1REC",
+            "propulsion": "wheeled01",
+            "brain": "ZNULLBRAIN",
+            "repair": "ZNULLREPAIR",
+            "ecm": "ZNULLECM",
+            "sensor": "ZNULLSENSOR",
+            "construct": "ZNULLCONSTRUCT",
+            "weapons": [
+              "MG1Mk1"
+            ]
+          }
+        ],
+        "finishedUnits": [
+          {
+            "body": "Body1REC",
+            "factoryId": 160285,
+            "gameTime": 430502,
+            "id": 162689,
+            "name": "CampaignMG",
+            "propulsion": "wheeled01"
+          },
+          {
+            "body": "Body1REC",
+            "factoryId": 160285,
+            "gameTime": 458102,
+            "id": 162691,
+            "name": "Truck Viper Wheels",
+            "propulsion": "wheeled01"
+          },
+          {
+            "id": 162721,
+            "factoryId": 160285,
+            "name": "CampaignMG",
+            "body": "Body1REC",
+            "propulsion": "wheeled01",
+            "gameTime": 925702
+          },
+          {
+            "id": 162723,
+            "factoryId": 160285,
+            "name": "Truck Viper Wheels",
+            "body": "Body1REC",
+            "propulsion": "wheeled01",
+            "gameTime": 953202
+          }
+        ],
+        "finishedBuilds": []
+      },
+      "terrain": {
+        "ready": true,
+        "active": false,
+        "reads": 2,
+        "picks": 33,
+        "lastPickMs": 1.834999999962747,
+        "maxPickMs": 62.66500000003725,
+        "error": ""
+      }
+    },
+    "research": {
+      "active": true,
+      "version": 37,
+      "open": false,
+      "opening": false,
+      "opens": 2,
+      "closes": 2,
+      "topicSelections": 0,
+      "labSelections": 0,
+      "categoryChanges": 0,
+      "activeLab": 0,
+      "activeCategory": "ALL",
+      "catalogCount": 0,
+      "catalogSample": [],
+      "labCount": 1,
+      "readyLabs": 1,
+      "labIds": [
+        162693
+      ],
+      "playerPower": 748,
+      "labs": [
+        {
+          "id": 162693,
+          "nativeIndex": 0,
+          "idle": true,
+          "modules": 0,
+          "health": 100,
+          "topicId": "",
+          "topicName": "",
+          "remainingSeconds": null,
+          "estimatedProgress": 0,
+          "waitingPower": false
+        }
+      ],
+      "bridgeSyncs": 1124,
+      "bridgeErrors": 0,
+      "commandAcks": 0,
+      "commandRejects": 0,
+      "commandTimeouts": 0,
+      "queueAdds": 0,
+      "queueRemovals": 0,
+      "directAssignments": 0,
+      "directFailures": 0,
+      "queueSyncs": 0,
+      "queueStateEvents": 2,
+      "queueCommandWrites": 0,
+      "queueCommandErrors": 0,
+      "backgroundSyncs": 0,
+      "lastSyncDurationMs": null,
+      "queues": [
+        []
+      ],
+      "dirtyLabIds": [],
+      "pendingClose": false,
+      "syncBlocked": false,
+      "runner": null,
+      "pendingCommand": null,
+      "fsPolls": 5062,
+      "fsErrors": 3,
+      "fsLogFiles": [
+        "cam1a.0.log",
+        "rules.0.log"
+      ],
+      "completedEvents": 4,
+      "lastTopic": null,
+      "lastCompleted": "Machinegun",
+      "canvasRestored": true
+    },
+    "touch": {
+      "active": true,
+      "version": 54,
+      "intercepted": 46,
+      "mouseEvents": 137,
+      "taps": 3,
+      "orders": 0,
+      "pans": 3,
+      "panMoves": 67,
+      "lastPanStartLatencyMs": 0.9300000001676381,
+      "lastPanDispatchMs": 0.15499999979510903,
+      "maxPanDispatchMs": 1.5750000001862645,
+      "boxSelections": 0,
+      "pinchSteps": 0,
+      "tiltMoves": 0,
+      "tiltHeld": null,
+      "saveNames": 0,
+      "radarTaps": 0,
+      "radarDrags": 0,
+      "radarMoves": 0,
+      "cameraFacings": 0,
+      "cameraFacingPending": false,
+      "lastRadarPoint": null,
+      "combatLock": false,
+      "autoFight": false,
+      "boxMode": false,
+      "queueMode": false,
+      "queueModifierHeld": false,
+      "stickyBuildActivations": 2,
+      "nativeStatsOpen": false,
+      "nativeObjectsOpen": false,
+      "pendingClicks": 0,
+      "nativeRenderFrames": 15478,
+      "queuedPointerEvents": 0,
+      "selectAlls": 2,
+      "manualSelectAlls": 0,
+      "combatOrders": 1,
+      "patrolOrders": 0,
+      "queuedOrders": 2,
+      "stopOrders": 0,
+      "stopPending": false,
+      "stopAcks": 0,
+      "stoppedUnitIds": [],
+      "baseJumps": 1,
+      "feedbacks": 4,
+      "doubleTaps": 0,
+      "coalescedSamples": 47,
+      "pointerCaptures": 7,
+      "zoomPreset": "map",
+      "zoomPresetSelections": 1,
+      "zoomWheelEvents": 0,
+      "zoomCommandWrites": 2,
+      "zoomCommandErrors": 0,
+      "zoomAcks": 1,
+      "zoomPending": false,
+      "lastZoomDistance": 3600,
+      "gestureActive": false,
+      "hudVisible": true,
+      "heldKeys": []
+    },
+    "errors": [
+      "wasm streaming compile failed: TypeError: Cannot read properties of undefined (reading 'substring')",
+      "falling back to ArrayBuffer instantiation"
+    ],
+    "towers": false
+  }
+}

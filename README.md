@@ -1,3 +1,5 @@
+> Campaign test branch: see [CAMPAIGN-TEST.md](CAMPAIGN-TEST.md) for this separate APK. Historical Towers documentation follows.
+
 # Warzone Towers — Android
 
 Full Android project for Warzone Towers, based on the supplied Survival Mod and

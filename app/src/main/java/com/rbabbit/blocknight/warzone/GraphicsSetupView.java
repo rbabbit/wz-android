@@ -46,7 +46,7 @@ final class GraphicsSetupView extends FrameLayout {
         LayoutParams panelParams = new LayoutParams(-1, -1, Gravity.CENTER);
         addView(panel, panelParams);
         LinearLayout header = new LinearLayout(context); header.setGravity(Gravity.CENTER_VERTICAL);
-        TextView brand = text("WARZONE TOWERS", 16, CYAN, true);
+        TextView brand = text("WARZONE CAMPAIGN", 16, CYAN, true);
         header.addView(brand, new LinearLayout.LayoutParams(0, dp(44), 1));
         start = button("START GAME", true); start.setEnabled(false);
         start.setContentDescription("Start game");
@@ -63,7 +63,7 @@ final class GraphicsSetupView extends FrameLayout {
         TextView heading = text("CHOOSE YOUR GRAPHICS", 28, INK, true);
         LinearLayout.LayoutParams headingParams = new LinearLayout.LayoutParams(-1, -2);
         headingParams.topMargin = dp(5); content.addView(heading, headingParams);
-        TextView intro = text("Set the look of your next battle.", 14, MUTED, false);
+        TextView intro = text("Start the original campaign from Alpha mission 1.", 14, MUTED, false);
         LinearLayout.LayoutParams introParams = new LinearLayout.LayoutParams(-1, -2);
         introParams.topMargin = dp(5); introParams.bottomMargin = dp(18); content.addView(intro, introParams);
 

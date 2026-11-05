@@ -36,7 +36,7 @@
   const CLICK_HOLD_MS = 8;
   const DOUBLE_TAP_MS = 290;
   const DOUBLE_TAP_SLOP = 28;
-  const ZOOM_COMMAND_PATH = "/data/mp/tests/blocknight-zoom-command.json";
+  const ZOOM_COMMAND_PATH = "/data/base/script/campaign/mobile/blocknight-zoom-command.json";
   const ZOOM_PRESETS = Object.freeze({
     close: Object.freeze({ label: "NEAR", distance: 1600 }),
     battle: Object.freeze({ label: "BATTLE", distance: 2600 }),
@@ -578,7 +578,7 @@
     if (!fs?.writeFile || !fs?.rename) return false;
     releaseAll(); state.autoFight = false;
     const nonce = `${Date.now().toString(36)}-stop-${state.stopOrders + 1}`;
-    const path = '/data/mp/tests/warzone-towers-control-command.json';
+    const path = '/data/base/script/campaign/mobile/warzone-towers-control-command.json';
     try {
       fs.writeFile(path + '.tmp', JSON.stringify({ version: 1, nonce, action: 'stop-selected' }), { encoding: 'utf8' });
       fs.rename(path + '.tmp', path);
@@ -1165,7 +1165,7 @@
         commands.className = "bn-command-group";
         for (const page of ["build", "design", "factory", "queue", "stats"]) {
           const b = document.createElement("button");
-          b.id = `wt-open-${page}`; b.type = "button"; b.textContent = page.toUpperCase();
+          b.id = `wt-open-${page}`; b.type = "button"; b.textContent = page === 'stats' ? 'INTEL' : page.toUpperCase();
           b.title = `Open ${page}`;
           bindTouchCommand(b, () => window.__warzoneCommands.open(page));
           commands.appendChild(b);
@@ -1215,7 +1215,7 @@
       help.setAttribute("aria-labelledby", "wt-help-title");
       help.tabIndex = -1;
       help.innerHTML = `
-        <header><div><span class="wt-help-eyebrow">WARZONE TOWERS</span>
+        <header><div><span class="wt-help-eyebrow">WARZONE CAMPAIGN</span>
           <h1 id="wt-help-title">FIELD GUIDE</h1></div>
           <button type="button" class="wt-help-close" aria-label="Close help">CLOSE</button></header>
         <div class="wt-help-content">
@@ -1226,10 +1226,9 @@
               <li><b>SELECT / MOVE</b> leaves placement and keeps queued work. Placement also ends when your group finishes.</li></ol>
             <p>Invalid taps keep your chosen structure active. STOP cancels selected trucks’ orders,
               and clears their remaining native queued sites.</p></section>
-          <section><h2>PROTECT YOUR COMMAND CENTRE</h2>
-            <p>You have <b>4 minutes to prepare</b>. Wave 1 starts automatically, even if you have not built anything.
-              If your command centre is destroyed, you have failed.</p>
-            <p><b>SKIP WAVE</b> calls the next wave immediately. Every surviving enemy stays on the map.</p></section>
+          <section><h2>CAMPAIGN OBJECTIVES</h2>
+            <p>Follow the original mission objectives. <b>INTEL</b> opens intelligence reports. Research and units unlock through the campaign.</p>
+            <p><b>MENU</b> opens the original pause menu, including Save Game and Load Game.</p></section>
           <section><h2>MOVE &amp; LOOK</h2>
             <p><b>Tap</b> to select, move or attack. <b>Swipe</b> to pan. <b>Pinch</b> to zoom.
               <b>Slide two fingers together up/down</b> to tilt the camera. Map edges limit panning.
@@ -1242,7 +1241,7 @@
               Each lab completes your choices in order. Use <b>BACK TO BATTLE</b> to return.</p>
             <p><b>DESIGN</b> creates blueprints from researched parts. SAVE DESIGN keeps them on this device.
               <b>FACTORY</b> produces saved or existing designs with normal power and build time.
-              <b>STATS</b> opens player and kill statistics.</p></section>
+              <b>INTEL</b> opens campaign intelligence and objectives.</p></section>
           <section><h2>MUSIC</h2><p>Choose your tracks on the start screen before starting a battle. Download Music once, select your playlist, then press <b>START GAME</b>. Your choices are saved for the next game.</p></section>
         </div>
         <footer><span>The battle continues while this guide is open.</span>

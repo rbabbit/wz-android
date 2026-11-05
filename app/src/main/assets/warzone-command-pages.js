@@ -4,9 +4,9 @@
   if (window.__warzoneCommands) return;
   const host = window.parent?.WarzoneHost ? window.parent : window;
   const doc = host.document;
-  const PATH = '/data/mp/tests/warzone-towers-command.json';
+  const PATH = '/data/base/script/campaign/mobile/warzone-towers-command.json';
   const state = {page:'',catalog:null,snapshot:null,pending:new Map(),serial:0,writes:0,acks:0,
-    timeouts:0,lastWrite:0,lastPoll:0,nativeMenu:'',history:[],placement:null,session:'',category:'DEFENCES',search:'',buildChoice:'',designStep:'body',designSearch:'',nativeItem:'',
+    timeouts:0,lastWrite:0,lastPoll:0,nativeMenu:'',history:[],placement:null,session:'',category:'STRUCTURES',search:'',buildChoice:'',designStep:'body',designSearch:'',nativeItem:'',
     selected:'',deletePending:'',confirmNew:false,draftOriginal:'',saved:[],draft:{id:'',name:'',body:'',propulsion:'',turrets:['']},validation:null,
     validationSerial:0,saving:new Set(),factory:0,productionCount:1,menuRevision:0,nativeMenuPending:false,
     navigationSerial:0,nativeBuildGeneration:0,nativeToolReady:false,nativeToolSelectionAt:0,nativePendingSites:[],exitPromise:null,exitingBuild:false,nativeBuildGroup:[],nativeBuildPlaced:false,nativeBuildSawWork:false,nativeBuildIdleAt:0,buildingOpening:false,notice:'',size:1,opens:0,closes:0,placements:0,rejects:0,scroll:{}};
@@ -93,7 +93,7 @@
     const link=doc.createElement('link');link.rel='stylesheet';link.href='/warzone/ui/command-pages.css';doc.head.appendChild(link);
     const panel=doc.createElement('section');panel.id='wt-command-pages';panel.hidden=true;
     panel.setAttribute('aria-label','Tower command centre');
-    panel.innerHTML=`<header class="wt-command-title"><div><span class="wt-eyebrow">WARZONE TOWERS / COMMAND CENTRE</span><h1 id="wt-page-title">BUILD</h1><span id="wt-command-resources"></span></div>
+    panel.innerHTML=`<header class="wt-command-title"><div><span class="wt-eyebrow">WARZONE CAMPAIGN / COMMAND CENTRE</span><h1 id="wt-page-title">BUILD</h1><span id="wt-command-resources"></span></div>
       <nav id="wt-command-tabs" aria-label="Command pages">${['build','design','saved','factory','queue'].map(p=>button(p==='saved'?'BLUEPRINTS':p.toUpperCase(),`data-page="${p}"`)).join('')}</nav>${button('BATTLE ↗','data-action="back"','wt-primary')}</header>
       <div id="wt-command-notice" role="status" aria-live="polite"></div><div id="wt-page-content"></div>`;
     doc.body.appendChild(panel);const busy=doc.createElement('div');busy.id='wt-build-busy';busy.hidden=true;busy.setAttribute('role','status');busy.textContent='Selecting nearby construction trucks…';doc.body.appendChild(busy);
@@ -156,7 +156,12 @@
       if(!r.ok){state.nativeMenu='';element('wt-native-back').hidden=true;notify(reason(r.reason));return;}
       document.getElementById('canvas')?.focus({preventScroll:true});});
   }
+  function resumeNativePause(){
+    if(state.nativeMenu!=="build"){state.nativeMenu="";state.nativeMenuPending=false;state.menuRevision++;const back=element("wt-native-back");if(back)back.hidden=true;}
+    window.__kalaWarzoneTouch?.nativePressKey("Escape","Escape",27);return Promise.resolve();
+  }
   function closeNative(discard=false){
+    if(doc.body.dataset.campaignPaused==="true")return resumeNativePause();
     if(!discard&&(state.nativeMenu==='build'||window.__kalaWarzoneTouch?.report().pendingClicks))return selectMode();
     state.nativeToolReady=false;state.nativePendingSites=[];
     if(!state.nativeMenu&&!state.nativeMenuPending)return Promise.resolve();
@@ -492,7 +497,7 @@
     else if(d.action==='commanders')openNative('commanders');
   }
   loadSaved();resetDraft();
-  window.__warzoneCommands={tower:true,setSize:applySize,open,close,closeNative,beginPlacement,cancelPlacement,placeAt,previewAt,send,accept,
+  window.__warzoneCommands={tower:true,resumeNativePause,revealNativePause:()=>{state.page="";state.navigationSerial++;const panel=element("wt-command-pages");if(panel)panel.hidden=true;delete doc.body.dataset.commandPage;const f=element("warzone-game-frame");if(f)f.inert=false;},resetSession:()=>{state.pending.forEach(p=>p.resolve({ok:false,reason:"mission-changed"}));state.pending.clear();state.nativeMenu="";state.nativeMenuPending=false;state.snapshot=null;state.nativePendingSites=[];state.nativeToolReady=false;state.nativeItem="";state.nativeBuildGroup=[];state.placement=null;state.page="";state.buildingOpening=false;state.exitingBuild=false;state.navigationSerial++;state.menuRevision++;for(const id of ["wt-command-pages","wt-native-back","wt-build-ghost"]) {const e=element(id)||document.getElementById(id);if(e)e.hidden=true;}delete doc.body.dataset.commandPage;const frame=element("warzone-game-frame");if(frame)frame.inert=false;},setSize:applySize,open,close,closeNative,beginPlacement,cancelPlacement,placeAt,previewAt,send,accept,
     hidePreview:()=>{const ghost=document.getElementById('wt-build-ghost');if(ghost)ghost.hidden=true;},
     isOpen:()=>Boolean(state.page),isPlacement:()=>Boolean(state.placement),nativeMenuOpen:()=>Boolean(state.nativeMenu&&state.nativeMenu!=='build'),nativeBuildOpen:()=>state.nativeMenu==='build',nativeBuildMenuOpen:()=>state.nativeMenu==='build'&&!state.nativeToolReady,nativeBuildTap,nativeBuildMenuTap,queueNativeSite,selectMode,afterBuildExit,selectNearbyTrucks,openBuild,
     report:()=>({version:52,page:state.page,pending:state.pending.size,writes:state.writes,acks:state.acks,timeouts:state.timeouts,
@@ -500,6 +505,7 @@
       session:state.session,nativeMenu:state.nativeMenu,nativeItem:state.nativeItem,nativeBuildGroup:state.nativeBuildGroup,nativeToolReady:state.nativeToolReady,nativePendingSites:state.nativePendingSites.length,exitingBuild:state.exitingBuild,nativeBuildPlaced:state.nativeBuildPlaced,nativeBuildSawWork:state.nativeBuildSawWork,buildingOpening:state.buildingOpening,saved:state.saved,history:state.history,snapshot:state.snapshot,terrain:window.WarzoneTerrain?.report()})};
   fetch('/warzone/command-catalog.json').then(r=>{if(!r.ok)throw Error('catalog');return r.json();}).then(c=>{state.catalog=c;render();}).catch(()=>notify('The command catalogue could not load. Restart the app.'));
   setInterval(()=>{
+    if(doc.body.dataset.campaignPaused==="true")return;
     if(!state.snapshot&&window.__kalaWarzoneTouch?.report().hudVisible)install();
     if(window.__kalaWarzoneTouch?.report().hudVisible&&Date.now()-state.lastPoll>(state.nativeMenu==='build'?250:state.page?1600:1200))requestState();
     if(state.pending.size){window.__blockNightResearch?.pollOutput?.();if(Date.now()-state.lastWrite>1500)flush(true);

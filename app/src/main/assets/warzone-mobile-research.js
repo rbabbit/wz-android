@@ -3,7 +3,7 @@
   "use strict";
 
   const VERSION = 37;
-  const QUEUE_COMMAND_PATH = "/data/mp/tests/blocknight-queue-command.json";
+  const QUEUE_COMMAND_PATH = "/data/base/script/campaign/mobile/blocknight-queue-command.json";
   const CATEGORIES = ["ALL", "WEAPONS", "DEFENCE", "VEHICLES", "CYBORG", "SYSTEMS", "STRUCTURES"];
 
   if (window.__blockNightResearch?.version >= VERSION) return "already-installed";
@@ -720,7 +720,7 @@
     const topics = state.activeCategory === "ALL" ? state.catalog : state.catalog.filter(topic => topic.category === state.activeCategory);
     shell.querySelector(".bn-tech-available-count").textContent = String(topics.length);
     if (!state.bridgeSyncs) { list.innerHTML = `<div class="bn-tech-empty"><div><b>Syncing the live Warzone tree…</b><small>Preparing real names, costs and availability.</small></div></div>`; return; }
-    if (!topics.length) { list.innerHTML = `<div class="bn-tech-empty"><div><b>No ${escapeHtml(state.activeCategory.toLowerCase())} research is ready.</b><small>Complete another technology to unlock more.</small></div></div>`; return; }
+    if (!topics.length) { list.innerHTML = `<div class="bn-tech-empty"><div><b>${state.activeCategory === "ALL" ? "No research is available yet." : "No " + escapeHtml(state.activeCategory.toLowerCase()) + " research is ready."}</b><small>Complete current research or recover artefacts from enemy bases to unlock more.</small></div></div>`; return; }
     if (!topics.some(topic => topic.nativeIndex === state.selectedTopicIndex)) state.selectedTopicIndex = topics[0].nativeIndex;
     list.innerHTML = topics.map(topic => {
       const active = activeLabForTopic(topic.id);
@@ -838,6 +838,6 @@
   }
 
   window.addEventListener("pagehide", () => { if (state.open || state.opening) finishClose(false); });
-  window.__blockNightResearch = { version: VERSION, open, close, selectLab, setCategory, selectTopic, assignSelectedTopic, chooseTopic, removeQueuedTopic, processQueues, afterNativeTap, runSyntheticSuite, report, pollOutput: pollResearchLogs };
+  window.__blockNightResearch = { version: VERSION, revealNativePause:()=>finishClose(false), resetSession:()=>{if(state.runner)clearRunnerTimers(state.runner);state.runner=null;state.pendingCommand=null;state.assigning=false;state.dirtyLabs={};state.labQueues={};state.syncedQueues={};state.catalog=[];state.engineLabs=[];state.topicHistory={};state.activeLab=0;state.selectedTopicIndex=null;finishClose();}, open, close, selectLab, setCategory, selectTopic, assignSelectedTopic, chooseTopic, removeQueuedTopic, processQueues, afterNativeTap, runSyntheticSuite, report, pollOutput: pollResearchLogs };
   return "blocknight-warzone-mobile-research-v32-atomic-queues-ready";
 })();

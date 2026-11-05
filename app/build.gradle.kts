@@ -7,11 +7,11 @@ android {
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.rbabbit.warzonetowers"
+        applicationId = "com.rbabbit.warzonecampaign"
         minSdk = 26
         targetSdk = 36
-        versionCode = 54
-        versionName = "5.4-lab-sidebar"
+        versionCode = 1
+        versionName = "1.0-campaign-test"
     }
 
     compileOptions {

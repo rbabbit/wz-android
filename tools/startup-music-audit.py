@@ -7,7 +7,7 @@ OUT.mkdir(parents=True,exist_ok=True)
 SDK=Path(os.environ.get('ANDROID_HOME') or Path.home()/'AppData/Local/Android/Sdk')
 ADB=str(SDK/'platform-tools/adb.exe') if os.name=='nt' else 'adb'
 DEVICE=os.environ.get('WZ_QA_DEVICE','emulator-5554')
-PACKAGE='com.rbabbit.warzonetowers'
+PACKAGE=os.environ.get('WZ_QA_PACKAGE','com.rbabbit.warzonecampaign')
 def adb(*args):return subprocess.check_output([ADB,'-s',DEVICE,*args],timeout=20)
 def tree():
     p='/sdcard/startup-music-'+str(os.getpid())+'.xml'

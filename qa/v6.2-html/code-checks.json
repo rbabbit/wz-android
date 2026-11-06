@@ -1,0 +1,27 @@
+{
+  "passed": true,
+  "candidateAPK_SHA256": "a5f66ed5b9af0b3240b33a0d3841e88f47c07f6a86ca49d042d7f77a425976cb",
+  "emulatorTesting": false,
+  "gameplayTesting": false,
+  "syntaxChecked": 6,
+  "tests": [
+    {
+      "file": "tools/test-html-return.cjs",
+      "passed": true,
+      "output": "PASS: consumed transport, exact in-flight/loaded/dead-lab queues, phone template persistence/rollback, research gating, preserved draft, results and Back navigation (code checks only)",
+      "sha256": "2097fbfe3f3e1805c3e4a66c0e91dc069d580f69691321602a8956852c5ebf03"
+    },
+    {
+      "file": "tools/test-html-input-modes.cjs",
+      "passed": true,
+      "output": "PASS: HTML Patrol/Queue modes stay unarmed; navigation cancels delayed combat input (no emulator)",
+      "sha256": "28c1170ef595d31d0e1ec11acfd7f894d0ca2bf7e6aeb34a574b18e41bc56cdf"
+    },
+    {
+      "file": "tools/test-html-design.cjs",
+      "passed": true,
+      "output": "PASS: stale validation, draft identity, duplicate save, save-as-new, failure retry, persistence rollback, native-menu races and required turret slot",
+      "sha256": "4cd7ef3e92b8f0441a441ace824f0984ac63fa4a7d4e4c425531eccb38175707"
+    }
+  ]
+}

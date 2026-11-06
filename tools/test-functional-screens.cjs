@@ -1,6 +1,6 @@
 'use strict';
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
-const source=fs.readFileSync('app/src/main/assets/warzone-command-pages.js','utf8');
+const source=fs.readFileSync('archive/legacy-html-ui/warzone-command-pages.js','utf8');
 const state={page:'saved',saved:[{id:'a',name:'Chosen tank',turrets:['gun'],body:'body',propulsion:'wheels',cost:20}],selected:'a',productionCount:1,factory:2,scroll:{},snapshot:{factories:[{id:2,number:1,kind:'Factory',ready:true,idle:false,templates:['truck'],active:{design:{name:'Tank'}},queue:[{design:{name:'Truck'},status:'waiting',reason:'limit'}]}],templates:[{id:'truck',name:'Constructor',cost:10}],trucks:[{id:4,building:true,x:5,y:6}],construction:[{name:'Tower',x:7,y:8}],jobs:[]}};
 let persists=true,reset=0;const notices=[],requests=[];
 const c=vm.createContext({state,esc:String,unitParts:()=>'',image:()=>'',findPart:()=>null,availableDesign:()=>true,button:(label,attrs)=>`<button ${attrs}>${label}</button>`,reason:x=>x,render(){},persist:()=>persists,notify:m=>notices.push(m),open:p=>state.page=p,requestState(){},readDraft(){},resetDraft(){reset++;state.draft={};state.confirmNew=false;},element:()=>null,send:(action,data)=>new Promise(resolve=>requests.push({action,data,resolve}))});

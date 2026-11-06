@@ -22,7 +22,7 @@
     queueCommandWrites: 0, queueCommandErrors: 0, backgroundSyncs: 0,
     lastSyncDurationMs: null,
     queueAdds: 0, queueRemovals: 0, directAssignments: 0, directFailures: 0,
-    queueSyncs: 0, queueStateEvents: 0,
+    queueSyncs: 0, queueStateEvents: 0, queueSerial: 0, queueStateTime: -1,
     fsPolls: 0, fsErrors: 0, fsLogFiles: [], logOffsets: {},
     lastTopic: null, lastCompleted: null
   };
@@ -103,8 +103,10 @@
     return state.runner?.topics?.find(topic => topic.id === topicId) || state.topicHistory[topicId] || null;
   }
 
-  function applyEngineQueueState(payload) {
+  function applyEngineQueueState(payload, matchingAck = false) {
     if (!Array.isArray(payload?.queues)) return;
+    if(Number.isFinite(payload.gameTime)&&payload.gameTime<state.queueStateTime)return;
+    if(Number.isFinite(payload.gameTime))state.queueStateTime=payload.gameTime;
     state.queueStateEvents += 1;
     payload.queues.forEach(engineQueue => {
       const labId = Number(engineQueue.labId);
@@ -112,13 +114,32 @@
       if (!Number.isFinite(labId)) return;
       const topicIds = Array.isArray(engineQueue.topicIds) ? engineQueue.topicIds.map(String) : [];
       state.syncedQueues[key] = topicIds.slice();
-      if (state.dirtyLabs[key]) return;
+      if (state.dirtyLabs[key] || !matchingAck && state.runner?.labIds.includes(labId)) return;
       state.labQueues[key] = topicIds
         .map(topicId => knownTopic(String(topicId)))
         .filter(Boolean);
     });
   }
 
+  function resetOnLoad(){
+    {
+      clearRunnerTimers(state.runner);state.runner=null;state.pendingCommand=null;state.assigning=false;state.syncBlocked=false;
+      state.labQueues={};state.syncedQueues={};state.dirtyLabs={};state.queueStateTime=-1;
+    }
+  }
+  function pruneLabs(){
+    const live=new Set(state.engineLabs.map(l=>String(l.id)));
+    for(const map of [state.labQueues,state.syncedQueues,state.dirtyLabs])for(const key of Object.keys(map))if(!live.has(key))delete map[key];
+    if(state.runner?.labIds.some(id=>!live.has(String(id))))finishRunnerFailure(state.runner,'A laboratory was removed.',false);
+  }
+  function acceptQueues(queues,time,rewound=false){
+    if(!Array.isArray(queues))return;
+    if(rewound)resetOnLoad();
+    // Fresh command snapshots are authoritative, including after loading an older save.
+    state.queueStateTime=Number.isFinite(time)?time:-1;
+    applyEngineQueueState({queues,gameTime:time});
+    renderAll();
+  }
   function handleEngineOutput(event) {
     const text = String(event?.detail?.text || "");
     try {
@@ -143,8 +164,11 @@
         const ack = parsePayload(text, "BNQUEUE:");
         const runner = state.runner;
         if (!ack) return;
-        applyEngineQueueState(ack);
-        if (!runner || !ack.nonce || String(ack.nonce) !== runner.nonce) {
+        window.__towersHtml?.consume('blocknight-queue-command.json',ack.nonce);
+        const matching = Boolean(runner && ack.nonce && String(ack.nonce) === runner.nonce);
+        if(ack.nonce && !matching)return;
+        applyEngineQueueState(ack,matching);
+        if (!matching) {
           renderAll();
           return;
         }
@@ -203,6 +227,7 @@
       const snapshot = parsePayload(text, "BNTECH:");
       if (!snapshot || !Array.isArray(snapshot.topics)) return;
       const previousCatalog = JSON.stringify(state.catalog);
+      const selectedLabId = state.engineLabs[state.activeLab]?.id;
       const previousAssignments = JSON.stringify(state.engineLabs.map(lab => [lab.id, lab.idle, lab.topicId]));
       const selectedTopicId = state.catalog.find(topic => topic.nativeIndex === state.selectedTopicIndex)?.id;
       state.catalog = snapshot.topics.map((topic, snapshotIndex) => ({
@@ -220,7 +245,9 @@
         topicId: String(lab.topicId || ""), topicName: String(lab.topicName || ""),
         remainingSeconds: Number.isFinite(lab.remainingSeconds) ? lab.remainingSeconds : null,
         estimatedProgress: Number(lab.estimatedProgress || 0), waitingPower: Boolean(lab.waitingPower)
-      })) : [];
+      })).sort((a,b)=>a.id-b.id).map((lab,nativeIndex)=>({...lab,nativeIndex})) : [];
+      pruneLabs();
+      const selectedLab = state.engineLabs.findIndex(l=>l.id===selectedLabId);if(selectedLab>=0)state.activeLab=selectedLab;
       if (state.activeLab >= state.engineLabs.length) state.activeLab = Math.max(0, state.engineLabs.length - 1);
       state.playerPower = Number(snapshot.power || 0);
       state.lastSnapshotGameTime = Number(snapshot.gameTime || 0);
@@ -582,7 +609,7 @@
     if (state.runner !== runner) return;
     const background = runner.background || !state.open;
     clearRunnerTimers(runner);
-    runner.labIds.forEach(labId => { state.dirtyLabs[String(labId)] = true; });
+    runner.labIds.forEach(labId => { if(state.engineLabs.some(l=>l.id===labId))state.dirtyLabs[String(labId)] = true; });
     state.runner = null;
     state.pendingCommand = null;
     state.assigning = false;
@@ -614,7 +641,7 @@
       if (lab) labCommands.push({ labId: lab.id, topicIds });
       delete state.dirtyLabs[String(labId)];
     });
-    const nonce = `${Date.now().toString(36)}-${state.queueAdds.toString(36)}`;
+    const nonce = `${Date.now().toString(36)}-${(++state.queueSerial).toString(36)}`;
     const runner = {
       labIds, topics, nonce, timeoutId: null, startedAt: performance.now(),
       background: !state.open, transport: "atomic-file"
@@ -838,6 +865,6 @@
   }
 
   window.addEventListener("pagehide", () => { if (state.open || state.opening) finishClose(false); });
-  window.__blockNightResearch = { version: VERSION, open, close, selectLab, setCategory, selectTopic, assignSelectedTopic, chooseTopic, removeQueuedTopic, processQueues, afterNativeTap, runSyntheticSuite, report, pollOutput: pollResearchLogs };
+  window.__blockNightResearch = { version: VERSION, open, close, selectLab, setCategory, selectTopic, assignSelectedTopic, chooseTopic, removeQueuedTopic, processQueues, afterNativeTap, runSyntheticSuite, report, pollOutput: pollResearchLogs, acceptQueues };
   return "blocknight-warzone-mobile-research-v32-atomic-queues-ready";
 })();

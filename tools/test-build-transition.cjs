@@ -1,6 +1,6 @@
 'use strict';
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
-const source=fs.readFileSync('app/src/main/assets/warzone-command-pages.js','utf8');
+const source=fs.readFileSync('archive/legacy-html-ui/warzone-command-pages.js','utf8');
 (async()=>{
  let frames=0,copies=0;
  const shot={hidden:true,style:{},getContext:()=>({drawImage(){copies++}}),animate:()=>({finished:Promise.resolve(),cancel(){}})};

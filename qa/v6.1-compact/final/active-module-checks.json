@@ -1,0 +1,49 @@
+{
+  "passed": true,
+  "candidateAPK_SHA256": "d9a56ac548d479dce04dbddf8ad56ede2500754ddf7441265bff1d22475e4624",
+  "tests": [
+    {
+      "name": "test-native-data-bridge.cjs",
+      "sha256": "0eaee0483c2d0b4b3e011b45b4ce87e64a28cf037f5e679a0db375609d077afb",
+      "output": "PASS: headless data, exact manual queues, all acknowledged transport consumption, in-flight edits, duplicate prevention, removal, persistence rollback, navigation cancellation and action whitelist\n",
+      "passed": true
+    },
+    {
+      "name": "test-native-input-modes.cjs",
+      "sha256": "2869aae7cf2d1d83aebdae3731046b640eb0c8618b26c7a242a4bc1ac1e1049f",
+      "output": "PASS: active native input modes leave no armed Patrol order or Queue modifier without a destination\n",
+      "passed": true
+    },
+    {
+      "name": "test-native-wave-results.cjs",
+      "sha256": "040ab38fa74b695a0677caf6da841687b09494db31de276222a2edbbcc302152",
+      "output": "PASS: active wave adapter sends one session-bound native result; generic exit preserves native victory\n",
+      "passed": true
+    },
+    {
+      "name": "test-terrain-picker.cjs",
+      "sha256": "d75207c1cadd43693803648fd360f0dcba59a2e6c4a44dfc412e87dadf43cd5e",
+      "output": "PASS: perspective terrain picking, projection, native GL delegation, buffer-state restoration and mesh invalidation\n",
+      "passed": true
+    },
+    {
+      "name": "test-tower-defense.cjs",
+      "sha256": "2e2a33c50626001e5eadd5da8187f97b3abe291c5a56d5c3791940c749e103b6",
+      "output": "PASS: {\"passed\":true,\"rounds\":30,\"configuredEnemies\":2526,\"firstRoundEnemies\":35,\"reward100Medium\":46,\"enemyResearchOnly\":true,\"skipDeduplicated\":true,\"oldWaitCancelled\":true,\"survivorsRetained\":true,\"victory\":true,\"hqDefeat\":true,\"nativeComponentResolution\":\"checked by live preflight\"}\n",
+      "passed": true
+    },
+    {
+      "name": "test-towers-controls.cjs",
+      "sha256": "9bd8cfcbf8aac60f410675e7b34c10e063a16bedf805795f2fa94594ca990418",
+      "output": "PASS: acknowledged STOP affects only selected friendly units, deduplicates, and respects cancellation\n",
+      "passed": true
+    },
+    {
+      "name": "test-production-removal.cjs",
+      "sha256": "bf6a31322e0aa8f7782161432311f65c97fd00cabf74fde8147907f4278e98af",
+      "output": "PASS: exact waiting-group removal preserves active/promoted units, other orders/factories and stale-row identity\n",
+      "passed": true
+    }
+  ],
+  "rulesHarnessIsNotNativeEndurance": true
+}

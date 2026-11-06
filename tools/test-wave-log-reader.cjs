@@ -3,7 +3,7 @@ const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const vm = require("node:vm");
 const path = require("node:path");
-const source = fs.readFileSync(path.join(__dirname, "../app/src/main/assets/warzone-towers-wave-hud.js"), "utf8");
+const source = fs.readFileSync(path.join(__dirname, "../archive/legacy-html-ui/warzone-towers-wave-hud.js"), "utf8");
 const functions = source.slice(source.indexOf("  function consumeLine("), source.indexOf("\n  ensureHud();", source.indexOf("  function pollLogs(")));
 let log = Buffer.from("historical text\n".repeat(100000));
 let bytesRead = 0;
@@ -46,7 +46,7 @@ assert.equal(opens, closes, "every opened file must be closed");
 assert.equal(context.state.errors, 0);
 console.log("PASS: incremental wave log reads skip history, preserve partial UTF-8/JSON lines, handle truncation, and close files");
 
-const researchSource=fs.readFileSync(path.join(__dirname,"../app/src/main/assets/warzone-mobile-research.js"),"utf8");
+const researchSource=fs.readFileSync(path.join(__dirname,"../archive/legacy-html-ui/warzone-mobile-research.js"),"utf8");
 const researchPoll=researchSource.slice(researchSource.indexOf("  function pollResearchLogs()"),researchSource.indexOf("  setTimeout(pollResearchLogs, 500)"));
 const outputs=[];
 const researchContext={...context,state:{logOffsets:{},fsPolls:0,fsErrors:0},handleEngineOutput:event=>outputs.push(event.detail.text)};

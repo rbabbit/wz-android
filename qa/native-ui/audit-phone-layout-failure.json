@@ -1,0 +1,178 @@
+{
+  "phase": "phone-layout",
+  "seeded": false,
+  "cases": [
+    "phone-research-standard"
+  ],
+  "started": "2026-11-06T12:29:34.586Z",
+  "installedAPK_SHA256": "35b9e55e2f078999be87a02516816e344364aa2210d535a00d2ae2b354b9394b",
+  "initial": {
+    "ui": {
+      "implementation": "android.view",
+      "gameVisible": true,
+      "page": "",
+      "pendingRequests": 0,
+      "navigationPending": false,
+      "selectedFactory": 0,
+      "productionQuantity": 1,
+      "selectedLab": 0,
+      "enginePaused": false,
+      "headerClass": "android.widget.LinearLayout",
+      "panelClass": "",
+      "listClass": "",
+      "listSuperclass": "",
+      "editorClass": "",
+      "stageWidth": 2400,
+      "stageHeight": 920,
+      "minimumTouchPx": 126,
+      "viewCount": 21,
+      "dialog": false,
+      "dialogGeneration": 1,
+      "listScrolling": false,
+      "windowFocused": true,
+      "layoutPending": false,
+      "engineClass": "com.rbabbit.blocknight.warzone.MainActivity$EngineWebView",
+      "views": [
+        {
+          "text": "BUILD",
+          "label": "BUILD",
+          "class": "android.widget.Button",
+          "enabled": true,
+          "clickable": true,
+          "bounds": [
+            21,
+            17,
+            252,
+            143
+          ]
+        },
+        {
+          "text": "TECH",
+          "label": "TECH",
+          "class": "android.widget.Button",
+          "enabled": true,
+          "clickable": true,
+          "bounds": [
+            262,
+            17,
+            493,
+            143
+          ]
+        },
+        {
+          "text": "FACTORY",
+          "label": "FACTORY",
+          "class": "android.widget.Button",
+          "enabled": true,
+          "clickable": true,
+          "bounds": [
+            503,
+            17,
+            777,
+            143
+          ]
+        },
+        {
+          "text": "DESIGN",
+          "label": "DESIGN",
+          "class": "android.widget.Button",
+          "enabled": true,
+          "clickable": true,
+          "bounds": [
+            787,
+            17,
+            1018,
+            143
+          ]
+        },
+        {
+          "text": "MORE",
+          "label": "MORE",
+          "class": "android.widget.Button",
+          "enabled": true,
+          "clickable": true,
+          "bounds": [
+            1513,
+            17,
+            1744,
+            143
+          ]
+        },
+        {
+          "text": "W1 · 2:34\n2414 POWER",
+          "label": "null",
+          "class": "android.widget.TextView",
+          "enabled": true,
+          "clickable": false,
+          "bounds": [
+            1749,
+            8,
+            2143,
+            152
+          ]
+        },
+        {
+          "text": "SKIP",
+          "label": "SKIP WAVE",
+          "class": "android.widget.Button",
+          "enabled": true,
+          "clickable": true,
+          "bounds": [
+            2148,
+            17,
+            2379,
+            143
+          ]
+        },
+        {
+          "text": "UNIT CONTROLS",
+          "label": "UNIT CONTROLS",
+          "class": "android.widget.Button",
+          "enabled": true,
+          "clickable": true,
+          "bounds": [
+            37,
+            917,
+            491,
+            1043
+          ]
+        },
+        {
+          "text": "0 selected",
+          "label": "null",
+          "class": "android.widget.TextView",
+          "enabled": true,
+          "clickable": false,
+          "bounds": [
+            496,
+            943,
+            785,
+            1016
+          ]
+        }
+      ]
+    },
+    "waves": {
+      "version": 3,
+      "mode": "tower-defense",
+      "gameTime": 26502,
+      "lastCommand": "",
+      "phase": "countdown",
+      "wave": 0,
+      "totalRounds": 30,
+      "nextWave": 1,
+      "nextWaveIn": 154,
+      "canSkip": true,
+      "enemyDroids": 0,
+      "queuedEnemies": 0,
+      "enemyPlayer": 1,
+      "entrances": 6,
+      "power": 2415,
+      "rewardCount": 0,
+      "rewardPower": 0
+    }
+  },
+  "scope": "Layout reproduction; this is not a delivery pass",
+  "failure": "Error: CDP timeout Runtime.evaluate\n    at Timeout._onTimeout (C:\\timerApp\\wz-tower-defense\\tools\\native-live.cjs:13:160)\n    at listOnTimeout (node:internal/timers:685:17)\n    at process.processTimers (node:internal/timers:618:7)",
+  "fixtureRecoveryError": "Error: CDP timeout Runtime.evaluate"
+}

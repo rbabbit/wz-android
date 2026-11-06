@@ -262,6 +262,9 @@ function wtcmd_snapshot()
     });
     return { version: 1, gameTime: gameTime, player: selectedPlayer, power: playerPower(selectedPlayer),
         mapWidth: mapWidth, mapHeight: mapHeight, alwaysQueue: true,
+        researchQueues: enumStruct(selectedPlayer, RESEARCH_LAB).map(function(lab) {
+            return {labId: lab.id, topicIds: (typeof blockNightV28Queues === "object" && blockNightV28Queues[String(lab.id)] || []).slice()};
+        }),
         hasHQ: enumStruct(selectedPlayer, HQ).some(function (s) { return s.status === BUILT; }),
         selectedUnits: wtcmd_selectedUnits(),
         construction: construction.active, constructionSites: construction.sites,
@@ -296,9 +299,12 @@ function wtcmd_chooseWorkers(command, x, y)
 {
     const builders = wtcmd_builders();
     const selected = enumSelected().filter(wtcmd_isBuilder);
-    let candidates = selected;
+    // The mobile build catalogue supplies its local group directly; opening
+    // stock selection widgets just to assign these trucks stalls the live view.
+    let candidates = Array.isArray(command.workerIds)
+        ? builders.filter(function (d) { return command.workerIds.indexOf(d.id) >= 0; }) : selected;
     let automatic = false;
-    if (!candidates.length) {
+    if (!candidates.length && !Array.isArray(command.workerIds)) {
         automatic = true;
         const pinned = wtcmd_sessionWorkers[String(command.session || "")] || [];
         candidates = builders.filter(function (d) { return pinned.indexOf(d.id) >= 0; });
@@ -368,6 +374,16 @@ function wtcmd_queueBuild(command)
     if (plan.error) { wtcmd_answer(command, false, plan.error); return; }
     const job = plan.job;
     wtcmd_jobs.push(job);
+    // Reuse the construction journal for live travel/progress/module display.
+    // This copy observes the real orders; it never drives the worker queue.
+    const journal = Object.assign({}, job, { workers: job.workers.slice(),
+        knownStructures: enumStruct(selectedPlayer).filter(function (s) {
+            return s.name === wtcmd_buildings[job.itemId].name;
+        }).map(function (s) { return s.id; }) });
+    const existing = wtcmd_structAt(job);
+    if (existing && existing.status !== BUILT) journal.structureId = existing.id;
+    wtcmd_nativeSites = wtcmd_nativeSites.filter(function (j) { return !['done','interrupted'].includes(j.status); });
+    wtcmd_nativeSites.push(journal);
     job.workers.forEach(function (id) {
         const key = String(id); if (!wtcmd_workers[key]) wtcmd_workers[key] = [];
         wtcmd_workers[key].push(job.id);
@@ -429,10 +445,20 @@ function wtcmd_tickBuildsImpl()
     });
     builders.forEach(function (droid) {
         const ids = wtcmd_workers[String(droid.id)] || [];
-        if (!ids.length || !wtcmd_idle(droid)) return;
+        if (!ids.length) return;
         const job = wtcmd_jobs.filter(function (j) { return j.id === ids[0]; })[0];
         if (!job || job.status === "blocked") return;
         const key = String(droid.id);
+        // A new native move/stop/other order overrides this truck's build FIFO,
+        // just as it overrides ordinary Ctrl-build orders. Never restart the
+        // old plan after the player's replacement movement finishes.
+        const building = droid.order === DORDER_BUILD || droid.order === DORDER_HELPBUILD
+            || droid.order === DORDER_LINEBUILD
+            || (typeof DORDER_BUILDMODULE !== "undefined" && droid.order === DORDER_BUILDMODULE);
+        if (job.issued[key] && droid.order !== 0 && !building) {
+            wtcmd_stopWorkers([droid.id]);return;
+        }
+        if (!wtcmd_idle(droid)) return;
         if (job.issued[key] && gameTime - job.issued[key] < 1200) return;
         if ((job.attempts[key] || 0) >= 3) { job.status = "blocked"; job.reason = "build-blocked"; return; }
         const existing = wtcmd_structAt(job);
@@ -523,9 +549,26 @@ function wtcmd_queueProduction(command)
         if (!native || !wtcmd_templateAvailable(native)) { wtcmd_answer(command, false, "template-unavailable"); return; }
         design = wtcmd_templateParts(native);
     } else {
-        const validation = wtcmd_validateDesign(command.design, false);
-        if (validation.error) { wtcmd_answer(command, false, validation.error); return; }
-        design = validation.design;
+        // A stored factory template can contain native systems (e.g. cyborg
+        // bodies) outside the custom designer catalogue. Match a currently
+        // available engine template before accepting it; storage never grants
+        // components or bypasses normal factory/module/research validation.
+        const saved = command.design;
+        const match = saved && saved.factoryTemplate && Array.isArray(saved.turrets)
+            ? enumTemplates(selectedPlayer).find(function (t) {
+                const d = wtcmd_templateParts(t);
+                return wtcmd_templateAvailable(t) && d.body === saved.body && d.propulsion === saved.propulsion
+                    && JSON.stringify(d.turrets) === JSON.stringify(saved.turrets);
+            }) : null;
+        if (match) {
+            design = wtcmd_templateParts(match);
+            design.name = String(saved.name || design.name).replace(/[\x00-\x1f]/g, " ").trim().slice(0, 48);
+            if (!design.name) { wtcmd_answer(command, false, "incomplete-design"); return; }
+        } else {
+            const validation = wtcmd_validateDesign(command.design, false);
+            if (validation.error) { wtcmd_answer(command, false, validation.error); return; }
+            design = validation.design;
+        }
     }
     const count = Number(command.count || 1);
     if (!wtcmd_factoryAllows(design, factory)) { wtcmd_answer(command, false, "factory-incompatible"); return; }
@@ -612,6 +655,25 @@ function wtcmd_poll()
                     job.workers.forEach(function (id) { const key = String(id);if (!wtcmd_workers[key]) wtcmd_workers[key] = [];wtcmd_workers[key].push(job.id); });
                 }
                 wtcmd_answer(command, true, "", job);
+            }
+            else if (command.action === "remove-production") {
+                const factory = getObject(STRUCTURE, selectedPlayer, Number(command.factoryId));
+                if (!factory || [FACTORY, CYBORG_FACTORY, VTOL_FACTORY].indexOf(factory.stattype) < 0) {
+                    wtcmd_answer(command, false, "factory-missing"); return;
+                }
+                const ids = Array.isArray(command.jobIds) ? command.jobIds : [command.jobId];
+                if (!ids.length || ids.length > 64 || ids.some(function (id) {
+                    return typeof id !== "string" || !/^[a-zA-Z0-9_-]{1,128}$/.test(id);
+                })) { wtcmd_answer(command, false, "invalid"); return; }
+                const key = String(factory.id), jobs = wtcmd_production[key] || [];
+                const requested = new Set(ids), removed = jobs.filter(function (job) { return requested.has(job.id); });
+                // A unit may have started since the player touched its waiting group.
+                // Remove only exact IDs still waiting; active production is never touched.
+                if (!removed.length) { wtcmd_answer(command, false, "job-missing"); return; }
+                wtcmd_production[key] = jobs.filter(function (job) { return !requested.has(job.id); });
+                wtcmd_answer(command, true, "waiting-units-removed", {
+                    factoryId: factory.id, jobIds: removed.map(function (job) { return job.id; })
+                });
             }
             else if (command.action === "clear-production") {
                 const factory = getObject(STRUCTURE, selectedPlayer, Number(command.factoryId));

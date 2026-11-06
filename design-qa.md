@@ -1,8 +1,154 @@
+# Current v6.4 HTML/CSS construction display
+
+The exact delivery APK and current runtime source are covered by
+[the v6.4 report](qa/v6.4-build-display/REPORT.md) and its hashed evidence.
+Actual emulator screens were checked on both maps, wide and phone viewports,
+enlarged text, catalogue scrolling and keyboard/menu returns. Native saves
+confirmed actual structure positions and completion. The preceding
+[v6.3 report](qa/v6.3-building/REPORT.md) covers smooth building interaction.
+The native-layout comparisons below remain historical. No physical-device
+performance or complete 30-round verification is claimed.
+
+# Historical v6.2 HTML/CSS release
+
+No emulator or visual gameplay testing was performed, as explicitly requested.
+This release restores the original HTML/CSS layout and implements the scoped
+logic fixes and phone template saving. See qa/v6.2-html/REPORT.md for code/build
+checks. All visual acceptance reports below are historical and do not certify
+v6.2 screenshots or gameplay.
+
+# Compact native Towers v6.1 design QA
+
+final result: passed
+
+Installed clean APK SHA256: `d9a56ac548d479dce04dbddf8ad56ede2500754ddf7441265bff1d22475e4624`.
+
+The source visual truth is `qa/v6.1-compact/reference/battle.png`,
+`research.png` and `factory.png`: the three approved actual Android mocks.
+Implementation captures are `final/reference-match-battle.png`,
+`final/reference-match-research.png` and
+`final/compact-factory-two-waiting-groups.png` under the same QA directory.
+All six images are 1080x600 pixels at density 240 (1.5 pixels/dp), 720x400dp,
+system font scale 1 and Standard app interface size. No CSS scaling is involved.
+Both sides use real Android controls and the retained game artwork.
+
+## Comparison evidence and state
+
+The source and implementation were opened together in each combined input:
+
+- `qa/v6.1-compact/comparisons/final-battle.png`: three selected trucks,
+  collapsed Orders control and the native header. The native engine camera and
+  live power differ; the actual field is rendered by the unchanged engine.
+- `qa/v6.1-compact/comparisons/final-research.png`: same-visit active Cobra,
+  queued Fuel, Composite on lab2 and idle labs3/4. The actual progress/time is
+  live native state, so it differs from the mock's sample62%.
+- `qa/v6.1-compact/comparisons/final-factory.png`: active normal production,
+  two distinct waiting batches, Qty3 and the idle other factory. Actual saved
+  design names/counts replace the illustrative mock models; no mock data is
+  injected into gameplay.
+
+Focused header, research queue and factory queue comparisons were also opened:
+`final-header-focus.png`, `final-research-queue-focus.png` and
+`final-factory-queue-focus.png` in the comparisons directory. These expose
+small type, status colors, cancellation controls and row spacing. All were
+inspected directly, not judged from paths or code alone.
+
+## Required fidelity surfaces
+
+**Fonts and typography.** Android's Roboto/system sans family, bold 14sp names,
+11sp secondary text, header hierarchy and title-case actions preserve the mock.
+Full native font metrics avoid clipped captions. The enlarged selected topic
+can occupy two lines; the collapsed picker may say Lab 1 while the complete
+current topic remains in its summary. All enlarged header/Battle/Qty20 labels
+fit in the actual inspected screenshots. Engine-provided names retain their
+original hyphen/copy; they are not rewritten to match mock punctuation.
+
+**Spacing and layout.** The real header and page toolbar are 48dp, with the
+same two-to-one catalogue/summary split, 32dp images, approximately 60dp rows,
+five fully visible Standard catalogue actions and thin separators. The field
+Orders control collapses back to the compact state. Measured quantity/header
+widths retain full 48dp targets. The actual summary reserves several extra
+pixels for full font lines; native scrollbars and other-lab separators remain.
+These do not hide persistent controls or change the core density/hierarchy.
+
+**Colors and tokens.** Sampled header RGB 22/33/39, catalogue 16/25/30,
+divider 44/60/67, selected accent 237/186/87 and search 26/40/46 match the mock.
+Cyan progress/actions and muted queue/status text preserve its hierarchy.
+The native action surface and transient pressed/ripple tint vary slightly
+from the mock. This is minor native control polish, not a semantic mismatch.
+
+**Image quality and assets.** The original game catalogue images are used at
+32dp with their original aspect ratio and pixel-art character. The APK checks
+preserve 35 original resources, the official engine/WASM and resolved stock
+assets. No generated mock image, fake battlefield or replacement artwork is
+shipped. Different factory thumbnails reflect the actual saved designs.
+
+**Copy and content.** Build/Tech/Factory/Design/Skip/More/Battle and Clear waiting
+match the compact flow. Active/Queued/Lab ownership comes from live queues.
+The factory uses a real elapsed simulation timer and an indeterminate work bar
+because the adapter has no reliable native build-point percentage. The mock's
+sample percentage/count-of-total is deliberately not fabricated. Saved design
+restrictions and body/propulsion labels show actual game data.
+
+## Comparison history and fixes
+
+Initial combined research comparison `comparisons/iteration1-research.png`
+found P2 selector truncation, oversized queue padding, missing catalogue
+separators and header width drift. Native picker padding, measured widths,
+row dividers and queue layout were corrected. The final combined captures
+above show the corrected states on the clean installed APK.
+
+An intermediate real enlarged phone capture exposed P2 clipping in Skip,
+More, Battle, Qty and caption heights despite the older coarse bounds test
+passing. Text width/height and parent-clip checks were added; measured native
+widths and full font line heights fixed those failures. Final
+`compact-enlarged-research.png` and `compact-enlarged-factory.png` were opened
+and passed the stronger checks on the clean candidate.
+
+The first matched battle capture had the Orders panel open due to an extra
+test toggle. The fixture was corrected to observe collapsed Orders before
+capture; the final combined battle input above was reopened and inspected.
+This changed the capture state, not the product.
+
+## Interaction and responsive evidence
+
+Real emulator checks cover manual labs/queues, direct lab/factory changes,
+quantity bounds/presets, grouped waiting removal, active production retention,
+normal unit completion, Android typing/save/search/rename/copy/delete,
+persistent library after restart, repeated page/menu/System Back returns,
+save/load, native selection/movement/Stop/Patrol, mixed construction and
+Dustfall vehicle/cyborg production. The lifecycle result callback is an
+explicit UI fixture, not native victory. No Runtime exceptions were reported
+by the passing interaction checks.
+
+Actual 1080x600/d240/font1.3 and 2400x1080/d420/font1.3 screens were inspected.
+Standard and Extra large app sizes retain 48dp controls and scrolling instead
+of hiding options. `final/actual-profiles.json` records observed geometry;
+nominal wm settings are not accepted as viewport proof.
+
+## Findings and remaining polish
+
+No actionable P0/P1/P2 discrepancy remains in the compared app-owned screens.
+P3: native picker arrows, small queue/divider/line-metric differences and
+pressed-state tint can be refined later. Live data, camera framing and honest
+elapsed production progress are expected differences, not visual defects.
+
+Implementation checklist: corrected compact dimensions, real images, readable
+labels, stable row actions, functional queues, responsive/native interaction
+checks and final combined comparisons are complete. Physical-device GPU,
+audio/FPS and full native 30-round endurance remain outside this design review;
+software-emulator black terrain is unchanged. Live combat and cold-start
+release checks are tracked separately in the delivery summary.
+
+---
+
+# Historical design reviews
+
 # Warzone Towers design QA
 
 final result: passed
 
-## v5.12 selected official-art footer — current
+## v5.12 selected official-art footer — historical
 
 final result: passed
 

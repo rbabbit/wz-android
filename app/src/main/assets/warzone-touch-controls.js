@@ -445,16 +445,29 @@
     return true;
   }
 
+  let combatSerial=0, patrolArmed=false;
+  const combatTimers=new Set();
+  function combatLater(action,delay){
+    const generation=combatSerial;
+    const timer=setTimeout(()=>{combatTimers.delete(timer);if(generation===combatSerial)action();},delay);
+    combatTimers.add(timer);return timer;
+  }
+  function cancelCombatInput(){
+    ++combatSerial;for(const timer of combatTimers)clearTimeout(timer);combatTimers.clear();
+    if(!state.queueModifierHeld)dispatchKey('Control','ControlLeft',17,false);
+    dispatchKey('a','KeyA',65,false);dispatchKey('u','KeyU',85,false);
+    if(patrolArmed){patrolArmed=false;pressKey('Escape','Escape',27);}
+  }
   function ctrlShortcut(keyValue, code, keyCode) {
     if (!canvas()) return false;
     const preserveStickyModifier = state.queueModifierHeld;
     if (!preserveStickyModifier) {
       dispatchKey("Control", "ControlLeft", 17, true, false, true);
     }
-    setTimeout(() => {
+    combatLater(() => {
       dispatchKey(keyValue, code, keyCode, true, false, true);
     }, 12);
-    setTimeout(() => {
+    combatLater(() => {
       dispatchKey(keyValue, code, keyCode, false, false, true);
       if (!preserveStickyModifier) {
         dispatchKey("Control", "ControlLeft", 17, false, false, false);
@@ -518,6 +531,7 @@
   }
 
   function toggleCombatLock(force) {
+    cancelCombatInput();
     state.combatLock = typeof force === "boolean" ? force : !state.combatLock;
     if (!state.combatLock) state.autoFight = false;
     if (state.combatLock) selectAllCombat();
@@ -552,18 +566,19 @@
   }
 
   function toggleAutoFight(force) {
+    cancelCombatInput();
     state.autoFight = typeof force === "boolean" ? force : !state.autoFight;
     if (state.autoFight) {
       state.combatLock = true;
       selectAllCombat();
-      setTimeout(() => pressKey("q", "KeyQ", 81), 90);
-      state.patrolOrders += 1;
+      // A native Patrol is armed only when a destination is supplied.
     }
     updateCombatHud();
     return state.autoFight;
   }
 
   function toggleBoxMode(force) {
+    cancelCombatInput();
     state.boxMode = typeof force === "boolean" ? force : !state.boxMode;
     if (state.boxMode) {
       state.combatLock = false;
@@ -623,6 +638,7 @@
 
   window.addEventListener('warzone-towers-control-ack', event => {
     const ack = event.detail;
+    window.__towersHtml?.consume('warzone-towers-control-command.json',ack?.nonce);
     if (ack?.nonce !== state.stopNonce || ack.action !== 'stop-selected') return;
     clearTimeout(state.stopTimer); state.stopTimer = null; state.stopNonce = null;
     state.stopAcks += 1; state.stoppedUnitIds = Array.isArray(ack.stopped) ? ack.stopped.slice() : [];
@@ -641,13 +657,13 @@
     if (!selectAllCombat()) return false;
     const delay = patrol ? 155 : 105;
     if (patrol) {
-      setTimeout(() => pressKey("q", "KeyQ", 81), 88);
+      combatLater(() => {patrolArmed=true;pressKey("q", "KeyQ", 81);},88);
     }
     // RightClickOrders is deliberately disabled. Warzone's native contextual
     // left click selects a unit when pressed on a unit and issues the correct
     // move / attack / repair order when pressed on a destination. Keeping the
     // same input path here makes ALL and AUTO agree with manual selection.
-    setTimeout(() => contextualClick(x, y, state.queueMode), delay);
+    combatLater(() => {contextualClick(x, y, state.queueMode);patrolArmed=false;},delay);
     state.combatOrders += 1;
     if (patrol) state.patrolOrders += 1;
     feedback(x, y, patrol ? "patrol" : "order");
@@ -868,6 +884,7 @@
 
   window.addEventListener("blocknight-zoom-ack", event => {
     const payload = event?.detail;
+    window.__towersHtml?.consume('blocknight-zoom-command.json',payload?.nonce);
     if (!payload?.nonce || payload.nonce !== state.zoomPendingNonce) return;
     clearZoomAckTimer();
     state.zoomPendingNonce = null;
@@ -973,7 +990,7 @@
     if (bounds.width <= 0 || bounds.height <= 0) return false;
     if (window.__warzoneCommands?.tower) {
       if (window.__warzoneCommands.nativeMenuOpen()) return false;
-      if (window.__warzoneCommands.nativeBuildOpen?.()&&!window.__warzoneCommands.nativeHudHidden?.()) {
+      if (window.__warzoneCommands.nativeBuildOpen?.()&&!window.__warzoneCommands.isPlacement?.()&&!window.__warzoneCommands.nativeHudHidden?.()) {
         const ui=nativeUiRects(),lx=x-bounds.left,ly=y-bounds.top;
         if((window.__warzoneCommands.nativeBuildMenuOpen?.()&&inRect(lx,ly,ui.stats))||inRect(lx,ly,ui.objects))return false;
       }
@@ -1345,6 +1362,7 @@
 
   function beginSingle(event) {
     const radar = radarPoint(event.clientX, event.clientY);
+    if (radar) window.__warzoneCommands?.hidePreview?.();
     const boxOneShot = state.boxMode
         && isBattlefieldPoint(event.clientX, event.clientY);
     state.primaryId = event.pointerId;
@@ -1761,6 +1779,7 @@
   }
 
   function releaseAll(clearModes = false) {
+    cancelCombatInput();
     clearMultiMove();
     clearLongPress();
     releaseTilt();

@@ -1,5 +1,85 @@
 # Known issues and verification limits
 
+## Current v6.4 HTML/CSS construction display
+
+The exact delivered APK passed the focused construction and screen checks in
+[v6.4](../qa/v6.4-build-display/REPORT.md), following the
+[v6.3 building interaction checks](../qa/v6.3-building/REPORT.md). Both maps,
+actual native orders/positions/completions, phone/wide/enlarged-text layouts
+and keyboard/menu returns are covered within those reports' stated scope.
+The build canvas is a display-only projection of original building meshes.
+Software-emulator black terrain remains unchanged. These checks do not verify
+physical-device performance, a complete 30-round victory, or a new combat,
+research and tank-production regression pass. Those systems were preserved
+during the v6.3/v6.4 building-only changes.
+
+## Historical v6.2 HTML/CSS return
+
+The preserved HTML/CSS interface is active with the seven listed logic fixes
+and persistent phone template saving. See [the scoped report](../qa/v6.2-html/REPORT.md).
+The user prohibited emulator testing. Code regressions, the clean build and
+package/source/signature checks passed; this release has no new gameplay,
+UI-layout, physical-device, rendering, audio or FPS verification. Earlier
+native-interface results below do not certify this HTML release. Existing
+software-emulator black terrain and full30-round verification limits remain.
+
+## Historical v6.1 compact native layout
+
+The app-owned header, Research, Factory, Design/library, field commands,
+Build, Orders and Help use Android Views. The official battlefield, radar,
+engine messages, green blueprints and stock engine menus remain WebView/WASM.
+The compact layout changes Android presentation; it does not port the engine.
+
+The exact clean APK is covered in [the current verification report](../qa/v6.1-compact/REPORT.md):
+manual research and queue advancement, real design saving/rename/copy/delete,
+normal vehicle/cyborg production, waiting-batch removal without cancelling
+active work, movement/orders, mixed construction completion on both maps,
+save/load, repeated keyboard/menu returns and compact/enlarged/density layouts.
+The finite Iron Valley combat journey records eight native rewarded kills,
+68 reward power, survivor preservation and a live full-health HQ. Those
+observations do not establish a complete native 30-round victory.
+
+The factory adapter exposes no reliable native build-point percentage. Its
+indeterminate bar and elapsed simulation timer show actual state. Saved models
+persist in private Android storage; production still needs their components
+researched in the current battle. Uninstalling or clearing data removes the
+private library. Install the new APK as an update to retain it.
+
+Software-emulator black terrain persists. Physical-device GPU rendering,
+audio, FPS and a full native 30-round playthrough remain unverified. The rules
+harness is not native endurance; the result/replay callback fixture is not a
+native victory. Multitouch was dispatched into the real WebView via CDP and
+does not certify a physical touchscreen. The preserved baseline emulator ANR
+and test-fixture recovery are documented separately from product behavior.
+
+## Historical v6.0 Android UI delivery
+
+The app-owned header, field commands, Build, Research, Factory, Design,
+blueprint library, Orders and Help use Android Views. The battlefield, radar,
+engine messages, queued green blueprints and original pause/save/load,
+statistics and commander menus still use the official engine inside WebView.
+This is an Android interface migration; the engine has not been ported to
+Android native graphics. The retired HTML/CSS app interface is absent from
+the delivery APK. See [the implementation boundary](NATIVE-ANDROID-UI.md).
+
+The exact v6 APK passed the scoped journeys in [the delivery report](../qa/native-ui/REPORT.md),
+including native save/load with a clock rewind and exact waiting-lab queue
+restoration, normal production, completed construction on both maps, actual
+movement/orders, repeated keyboard/menu returns and compact/enlarged layouts.
+Earlier save/load limits below describe older versions and are superseded only
+for these explicitly tested v6 flows.
+
+Remaining limits: black terrain on the software emulator persists;
+physical-device GPU rendering, audio, FPS and complete native 30-round
+endurance remain unverified. The 30-round rules harness is not an engine
+playthrough. The result/replay lifecycle test uses an explicitly injected UI
+result callback and does not establish a native victory. Multitouch was
+dispatched into the real WebView through CDP, not certified on a physical
+touchscreen. Saved blueprints use private Android storage and are removed by
+uninstalling or clearing app data; install the APK as an update to retain them.
+
+## Historical release notes and limits
+
 v5.12 applies the selected official-art/footer design, with Dustfall and Iron
 Valley as display names for the existing maps. Native startup, graphics/music
 returns, download states and small/enlarged-text layouts are covered in

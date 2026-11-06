@@ -1,0 +1,43 @@
+{
+  "passed": true,
+  "candidateAPK_SHA256": "be349d592e4ee77f706b7630c2e4c3b27a9017aab1be62085432e27f746bb923",
+  "kind": "active source tests; not a native 30-round playthrough",
+  "checks": [
+    {
+      "name": "test-native-data-bridge.cjs",
+      "passed": true,
+      "sha256": "0eaee0483c2d0b4b3e011b45b4ce87e64a28cf037f5e679a0db375609d077afb",
+      "output": "PASS: headless data, exact manual queues, all acknowledged transport consumption, in-flight edits, duplicate prevention, removal, persistence rollback, navigation cancellation and action whitelist"
+    },
+    {
+      "name": "test-native-input-modes.cjs",
+      "passed": true,
+      "sha256": "2869aae7cf2d1d83aebdae3731046b640eb0c8618b26c7a242a4bc1ac1e1049f",
+      "output": "PASS: active native input modes leave no armed Patrol order or Queue modifier without a destination"
+    },
+    {
+      "name": "test-native-wave-results.cjs",
+      "passed": true,
+      "sha256": "040ab38fa74b695a0677caf6da841687b09494db31de276222a2edbbcc302152",
+      "output": "PASS: active wave adapter sends one session-bound native result; generic exit preserves native victory"
+    },
+    {
+      "name": "test-terrain-picker.cjs",
+      "passed": true,
+      "sha256": "d75207c1cadd43693803648fd360f0dcba59a2e6c4a44dfc412e87dadf43cd5e",
+      "output": "PASS: perspective terrain picking, projection, native GL delegation, buffer-state restoration and mesh invalidation"
+    },
+    {
+      "name": "test-tower-defense.cjs",
+      "passed": true,
+      "sha256": "2e2a33c50626001e5eadd5da8187f97b3abe291c5a56d5c3791940c749e103b6",
+      "output": "PASS: {\"passed\":true,\"rounds\":30,\"configuredEnemies\":2526,\"firstRoundEnemies\":35,\"reward100Medium\":46,\"enemyResearchOnly\":true,\"skipDeduplicated\":true,\"oldWaitCancelled\":true,\"survivorsRetained\":true,\"victory\":true,\"hqDefeat\":true,\"nativeComponentResolution\":\"checked by live preflight\"}"
+    },
+    {
+      "name": "test-towers-controls.cjs",
+      "passed": true,
+      "sha256": "9bd8cfcbf8aac60f410675e7b34c10e063a16bedf805795f2fa94594ca990418",
+      "output": "PASS: acknowledged STOP affects only selected friendly units, deduplicates, and respects cancellation"
+    }
+  ]
+}

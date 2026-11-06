@@ -121,6 +121,21 @@
       setTimeout(()=>{if(state.active&&state.matrix&&readMesh()){const b=canvas()?.getBoundingClientRect();if(b)projectedMesh(b);}},100);
     }},
     pick,
+    // Display-only access to the already observed camera and static ground.
+    // Never changes the native viewport, camera, geometry or input pipeline.
+    view(){const b=canvas()?.getBoundingClientRect();return b&&state.matrix?{matrix:state.matrix,left:b.left,top:b.top,width:b.width,height:b.height}:null;},
+    heightAt(x,y){
+      if(!readMesh())return null;
+      const v=state.vertices,ix=state.indices,z=-y;
+      for(let i=0;i+2<ix.length;i+=3){
+        const a=ix[i]*3,b=ix[i+1]*3,c=ix[i+2]*3;
+        if(x<Math.min(v[a],v[b],v[c])-.01||x>Math.max(v[a],v[b],v[c])+.01||z<Math.min(v[a+2],v[b+2],v[c+2])-.01||z>Math.max(v[a+2],v[b+2],v[c+2])+.01)continue;
+        const den=(v[b+2]-v[c+2])*(v[a]-v[c])+(v[c]-v[b])*(v[a+2]-v[c+2]);if(Math.abs(den)<1e-8)continue;
+        const u=((v[b+2]-v[c+2])*(x-v[c])+(v[c]-v[b])*(z-v[c+2]))/den,t=((v[c+2]-v[a+2])*(x-v[c])+(v[a]-v[c])*(z-v[c+2]))/den;
+        if(u>=-.0001&&t>=-.0001&&u+t<=1.0001)return u*v[a+1]+t*v[b+1]+(1-u-t)*v[c+1];
+      }
+      return null;
+    },
     project(x,y,height=0){const b=canvas()?.getBoundingClientRect();const p=b&&projectPoint(x,height,-y,b.width,b.height);return p?{x:p.x+b.left,y:p.y+b.top}:null;},
     report(){return {ready:Boolean(state.matrix&&state.vertexBuffer),active:state.active,reads:state.reads,picks:state.picks,lastPickMs:state.lastPickMs,maxPickMs:state.maxPickMs,error:state.error};}
   };

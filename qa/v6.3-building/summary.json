@@ -1,0 +1,43 @@
+{
+  "passed": true,
+  "candidateAPK_SHA256": "4af89fe1e9ac2719f534459d6d8081a8b7b6b918dec21c5c3c63231a05576eae",
+  "emulatorTesting": true,
+  "gameplayTesting": true,
+  "requiredReports": [
+    "code-checks.json",
+    "package-checks.json",
+    "signature-and-fallback.json",
+    "source-build-match.json",
+    "audit-smooth-fifo.json",
+    "audit-building-returns.json",
+    "audit-building-wide.json",
+    "audit-building-td1.json",
+    "audit-building-visual-return.json"
+  ],
+  "reportSHA256": {
+    "code-checks.json": "006bab39bf213c62cd49eb4a6da8f6617e97dc3a0272ea1f2ec08cfbeaffa2e3",
+    "package-checks.json": "f7db3f3130d9791c2a5f22b045f712fa6ac667473667491f15f41fd0c3cec5ea",
+    "signature-and-fallback.json": "bdfca5d8cb95058b7ac96b62b695b891b8c548f49830e504889d81879f9654b6",
+    "source-build-match.json": "6544c32c4c4e6a5d534fb06dc69592dd80d675e2114e4c334c0e3cb2a216f9dd",
+    "audit-smooth-fifo.json": "55c8fead8aa52867a8d1db534cde90f51efdacbf6e4bab371e8a874be352a446",
+    "audit-building-returns.json": "62e081210798aaa4a5fd2289f29488c1b77d0992f1b240e185e06d0a007ed500",
+    "audit-building-wide.json": "db5351e4a7188506340eb8a3eac86b7bca1a4a300b0f2172b56ea6410bacbc70",
+    "audit-building-td1.json": "58fd77143bfddd0e82bf043e6b9e508b755ea14cab8490e45316c2e8231d8e04",
+    "audit-building-visual-return.json": "23fcee9b8f83cfc20f8b947c83d584bfe2cb190d0b36babd7ec50d9b702b59ef"
+  },
+  "scope": "Only the three building interaction issues and preservation of their existing construction orders/returns",
+  "physicalDeviceTesting": false,
+  "emulator": "emulator-5556, existing Warzone_Help_QA_220604, SwiftShader, no audio",
+  "viewportPixels": [
+    [
+      1080,
+      600
+    ],
+    [
+      2400,
+      1080
+    ]
+  ],
+  "nativeStartingStates": "ordinary authored units on Iron Valley and Dustfall; no debug grants or edited world/save state",
+  "savedTemplateCountRetained": 17
+}

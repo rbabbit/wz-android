@@ -1,0 +1,631 @@
+{
+  "phase": "editor",
+  "seeded": false,
+  "cases": [
+    "native-design-validated"
+  ],
+  "started": "2026-11-06T11:43:21.311Z",
+  "installedAPK_SHA256": "e1f5c1b087e8392f1e70457e33487ff50df7604c6de4550302603a5f8ee0bfca",
+  "initial": {
+    "ui": {
+      "implementation": "android.view",
+      "gameVisible": true,
+      "page": "",
+      "pendingRequests": 0,
+      "navigationPending": false,
+      "selectedFactory": 0,
+      "productionQuantity": 1,
+      "selectedLab": 0,
+      "enginePaused": false,
+      "headerClass": "android.widget.LinearLayout",
+      "panelClass": "",
+      "listClass": "com.rbabbit.blocknight.warzone.TowersNativeUi$StableList",
+      "listSuperclass": "android.widget.ListView",
+      "editorClass": "android.widget.EditText",
+      "stageWidth": 2400,
+      "stageHeight": 992,
+      "minimumTouchPx": 72,
+      "viewCount": 21,
+      "dialog": false,
+      "windowFocused": true,
+      "layoutPending": false,
+      "engineClass": "com.rbabbit.blocknight.warzone.MainActivity$EngineWebView",
+      "views": [
+        {
+          "text": "BUILD",
+          "label": "BUILD",
+          "class": "android.widget.Button",
+          "enabled": true,
+          "clickable": true,
+          "bounds": [
+            12,
+            8,
+            144,
+            80
+          ]
+        },
+        {
+          "text": "TECH",
+          "label": "TECH",
+          "class": "android.widget.Button",
+          "enabled": true,
+          "clickable": true,
+          "bounds": [
+            150,
+            8,
+            282,
+            80
+          ]
+        },
+        {
+          "text": "FACTORY",
+          "label": "FACTORY",
+          "class": "android.widget.Button",
+          "enabled": true,
+          "clickable": true,
+          "bounds": [
+            288,
+            8,
+            420,
+            80
+          ]
+        },
+        {
+          "text": "DESIGN",
+          "label": "DESIGN",
+          "class": "android.widget.Button",
+          "enabled": true,
+          "clickable": true,
+          "bounds": [
+            426,
+            8,
+            558,
+            80
+          ]
+        },
+        {
+          "text": "MORE",
+          "label": "MORE",
+          "class": "android.widget.Button",
+          "enabled": true,
+          "clickable": true,
+          "bounds": [
+            564,
+            8,
+            696,
+            80
+          ]
+        },
+        {
+          "text": "WAVE 1 IN 2:53\n2506 POWER",
+          "label": "null",
+          "class": "android.widget.TextView",
+          "enabled": true,
+          "clickable": false,
+          "bounds": [
+            1950,
+            19,
+            2253,
+            69
+          ]
+        },
+        {
+          "text": "SKIP WAVE",
+          "label": "SKIP WAVE",
+          "class": "android.widget.Button",
+          "enabled": true,
+          "clickable": true,
+          "bounds": [
+            2256,
+            8,
+            2388,
+            80
+          ]
+        },
+        {
+          "text": "UNIT CONTROLS",
+          "label": "UNIT CONTROLS",
+          "class": "android.widget.Button",
+          "enabled": true,
+          "clickable": true,
+          "bounds": [
+            21,
+            987,
+            195,
+            1059
+          ]
+        },
+        {
+          "text": "0 selected",
+          "label": "null",
+          "class": "android.widget.TextView",
+          "enabled": true,
+          "clickable": false,
+          "bounds": [
+            198,
+            1010,
+            304,
+            1035
+          ]
+        }
+      ]
+    },
+    "waves": {
+      "version": 3,
+      "mode": "tower-defense",
+      "gameTime": 8002,
+      "lastCommand": "",
+      "phase": "countdown",
+      "wave": 0,
+      "totalRounds": 30,
+      "nextWave": 1,
+      "nextWaveIn": 172,
+      "canSkip": true,
+      "enemyDroids": 0,
+      "queuedEnemies": 0,
+      "enemyPlayer": 1,
+      "entrances": 6,
+      "power": 2507,
+      "rewardCount": 0,
+      "rewardPower": 0,
+      "lastReward": null
+    }
+  },
+  "failure": "Error: Native control unavailable: Delete from this device\n    at tap (C:\\timerApp\\wz-tower-defense\\tools\\audit-native-ui.cjs:8:630)\n    at async C:\\timerApp\\wz-tower-defense\\tools\\audit-native-ui.cjs:66:71",
+  "failureUi": {
+    "implementation": "android.view",
+    "gameVisible": true,
+    "page": "saved",
+    "pendingRequests": 0,
+    "navigationPending": false,
+    "selectedFactory": 0,
+    "productionQuantity": 1,
+    "selectedLab": 0,
+    "enginePaused": false,
+    "headerClass": "android.widget.LinearLayout",
+    "panelClass": "android.widget.LinearLayout",
+    "listClass": "com.rbabbit.blocknight.warzone.TowersNativeUi$StableList",
+    "listSuperclass": "android.widget.ListView",
+    "editorClass": "",
+    "stageWidth": 2400,
+    "stageHeight": 992,
+    "minimumTouchPx": 72,
+    "viewCount": 75,
+    "dialog": false,
+    "windowFocused": true,
+    "layoutPending": false,
+    "engineClass": "com.rbabbit.blocknight.warzone.MainActivity$EngineWebView",
+    "views": [
+      {
+        "text": "BUILD",
+        "label": "BUILD",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          12,
+          8,
+          144,
+          80
+        ]
+      },
+      {
+        "text": "TECH",
+        "label": "TECH",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          150,
+          8,
+          282,
+          80
+        ]
+      },
+      {
+        "text": "FACTORY",
+        "label": "FACTORY",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          288,
+          8,
+          420,
+          80
+        ]
+      },
+      {
+        "text": "DESIGN",
+        "label": "DESIGN",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          426,
+          8,
+          558,
+          80
+        ]
+      },
+      {
+        "text": "MORE",
+        "label": "MORE",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          564,
+          8,
+          696,
+          80
+        ]
+      },
+      {
+        "text": "WAVE 1 IN 2:25\n2533 POWER",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "clickable": false,
+        "bounds": [
+          1950,
+          19,
+          2253,
+          69
+        ]
+      },
+      {
+        "text": "SKIP WAVE",
+        "label": "SKIP WAVE",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          2256,
+          8,
+          2388,
+          80
+        ]
+      },
+      {
+        "text": "BLUEPRINT LIBRARY",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "clickable": false,
+        "bounds": [
+          18,
+          118,
+          2199,
+          159
+        ]
+      },
+      {
+        "text": "BACK TO BATTLE",
+        "label": "BACK TO BATTLE",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          2202,
+          103,
+          2379,
+          175
+        ]
+      },
+      {
+        "text": "NEW DESIGN",
+        "label": "NEW DESIGN",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          21,
+          214,
+          163,
+          286
+        ]
+      },
+      {
+        "text": "",
+        "label": "Search saved blueprints",
+        "class": "android.widget.EditText",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          166,
+          214,
+          2382,
+          286
+        ]
+      },
+      {
+        "text": "Design 5",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "clickable": false,
+        "bounds": [
+          120,
+          301,
+          1327,
+          332
+        ]
+      },
+      {
+        "text": "Viper · Wheels",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "clickable": false,
+        "bounds": [
+          120,
+          332,
+          1327,
+          365
+        ]
+      },
+      {
+        "text": "OPEN",
+        "label": "OPEN Design 5",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          1330,
+          297,
+          1462,
+          369
+        ]
+      },
+      {
+        "text": "Design 6",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "clickable": false,
+        "bounds": [
+          120,
+          414,
+          1327,
+          445
+        ]
+      },
+      {
+        "text": "Viper · Wheels",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "clickable": false,
+        "bounds": [
+          120,
+          445,
+          1327,
+          478
+        ]
+      },
+      {
+        "text": "OPEN",
+        "label": "OPEN Design 6",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          1330,
+          410,
+          1462,
+          482
+        ]
+      },
+      {
+        "text": "Design 7",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "clickable": false,
+        "bounds": [
+          120,
+          527,
+          1327,
+          558
+        ]
+      },
+      {
+        "text": "Viper · Wheels",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "clickable": false,
+        "bounds": [
+          120,
+          558,
+          1327,
+          591
+        ]
+      },
+      {
+        "text": "OPEN",
+        "label": "OPEN Design 7",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          1330,
+          523,
+          1462,
+          595
+        ]
+      },
+      {
+        "text": "Design 8",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "clickable": false,
+        "bounds": [
+          120,
+          640,
+          1327,
+          671
+        ]
+      },
+      {
+        "text": "Viper · Wheels",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "clickable": false,
+        "bounds": [
+          120,
+          671,
+          1327,
+          704
+        ]
+      },
+      {
+        "text": "OPEN",
+        "label": "OPEN Design 8",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          1330,
+          636,
+          1462,
+          708
+        ]
+      },
+      {
+        "text": "Design 1",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "clickable": false,
+        "bounds": [
+          120,
+          753,
+          1327,
+          784
+        ]
+      },
+      {
+        "text": "Viper · Wheels",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "clickable": false,
+        "bounds": [
+          120,
+          784,
+          1327,
+          817
+        ]
+      },
+      {
+        "text": "OPEN",
+        "label": "OPEN Design 1",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          1330,
+          749,
+          1462,
+          821
+        ]
+      },
+      {
+        "text": "Native-QA-Edited",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "clickable": false,
+        "bounds": [
+          120,
+          866,
+          1327,
+          897
+        ]
+      },
+      {
+        "text": "Viper · Wheels",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "clickable": false,
+        "bounds": [
+          120,
+          897,
+          1327,
+          930
+        ]
+      },
+      {
+        "text": "OPEN",
+        "label": "OPEN Native-QA-Edited",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          1330,
+          862,
+          1462,
+          934
+        ]
+      },
+      {
+        "text": "Native-QA-Copy",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "clickable": false,
+        "bounds": [
+          120,
+          979,
+          1327,
+          1010
+        ]
+      },
+      {
+        "text": "Viper · Wheels",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "clickable": false,
+        "bounds": [
+          120,
+          1010,
+          1327,
+          1043
+        ]
+      },
+      {
+        "text": "OPEN",
+        "label": "OPEN Native-QA-Copy",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          1330,
+          975,
+          1462,
+          1047
+        ]
+      },
+      {
+        "text": "Saved locally on this device. Editing an existing blueprint keeps its identity. SAVE AS NEW creates a separate blueprint.",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "clickable": false,
+        "bounds": [
+          1495,
+          301,
+          2375,
+          354
+        ]
+      }
+    ]
+  },
+  "pausedAt": 37002
+}

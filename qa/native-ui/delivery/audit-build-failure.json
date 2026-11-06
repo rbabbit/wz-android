@@ -1,0 +1,660 @@
+{
+  "phase": "build",
+  "seeded": false,
+  "cases": [],
+  "started": "2026-11-06T13:13:09.931Z",
+  "installedAPK_SHA256": "a8422979061d3ff7a1b284ca8edd3fa46e4d607f8bf20c64e8281f06699324f8",
+  "initial": {
+    "ui": {
+      "implementation": "android.view",
+      "gameVisible": true,
+      "page": "",
+      "pendingRequests": 0,
+      "navigationPending": false,
+      "selectedFactory": 0,
+      "productionQuantity": 1,
+      "selectedLab": 0,
+      "enginePaused": false,
+      "headerClass": "android.widget.LinearLayout",
+      "panelClass": "",
+      "panelBounds": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "listBounds": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "queueBounds": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "listClass": "com.rbabbit.blocknight.warzone.TowersNativeUi$StableList",
+      "listSuperclass": "android.widget.ListView",
+      "editorClass": "",
+      "stageWidth": 2400,
+      "stageHeight": 992,
+      "minimumTouchPx": 72,
+      "viewCount": 21,
+      "dialog": false,
+      "dialogGeneration": 1,
+      "listScrolling": false,
+      "windowFocused": true,
+      "layoutPending": false,
+      "engineClass": "com.rbabbit.blocknight.warzone.MainActivity$EngineWebView",
+      "views": [
+        {
+          "text": "BUILD",
+          "label": "BUILD",
+          "class": "android.widget.Button",
+          "enabled": true,
+          "clickable": true,
+          "bounds": [
+            12,
+            8,
+            144,
+            80
+          ]
+        },
+        {
+          "text": "TECH",
+          "label": "TECH",
+          "class": "android.widget.Button",
+          "enabled": true,
+          "clickable": true,
+          "bounds": [
+            150,
+            8,
+            282,
+            80
+          ]
+        },
+        {
+          "text": "FACTORY",
+          "label": "FACTORY",
+          "class": "android.widget.Button",
+          "enabled": true,
+          "clickable": true,
+          "bounds": [
+            288,
+            8,
+            420,
+            80
+          ]
+        },
+        {
+          "text": "DESIGN",
+          "label": "DESIGN",
+          "class": "android.widget.Button",
+          "enabled": true,
+          "clickable": true,
+          "bounds": [
+            426,
+            8,
+            558,
+            80
+          ]
+        },
+        {
+          "text": "MORE",
+          "label": "MORE",
+          "class": "android.widget.Button",
+          "enabled": true,
+          "clickable": true,
+          "bounds": [
+            1929,
+            8,
+            2061,
+            80
+          ]
+        },
+        {
+          "text": "W1 · 1:15\n2491 POWER",
+          "label": "null",
+          "class": "android.widget.TextView",
+          "enabled": true,
+          "clickable": false,
+          "bounds": [
+            2064,
+            9,
+            2253,
+            78
+          ]
+        },
+        {
+          "text": "SKIP",
+          "label": "SKIP WAVE",
+          "class": "android.widget.Button",
+          "enabled": true,
+          "clickable": true,
+          "bounds": [
+            2256,
+            8,
+            2388,
+            80
+          ]
+        },
+        {
+          "text": "UNIT CONTROLS",
+          "label": "UNIT CONTROLS",
+          "class": "android.widget.Button",
+          "enabled": true,
+          "clickable": true,
+          "bounds": [
+            21,
+            987,
+            235,
+            1059
+          ]
+        },
+        {
+          "text": "1 selected",
+          "label": "null",
+          "class": "android.widget.TextView",
+          "enabled": true,
+          "clickable": false,
+          "bounds": [
+            238,
+            1006,
+            375,
+            1040
+          ]
+        }
+      ]
+    },
+    "waves": {
+      "version": 3,
+      "mode": "tower-defense",
+      "gameTime": 105502,
+      "lastCommand": "",
+      "phase": "countdown",
+      "wave": 0,
+      "totalRounds": 30,
+      "nextWave": 1,
+      "nextWaveIn": 75,
+      "canSkip": true,
+      "enemyDroids": 0,
+      "queuedEnemies": 0,
+      "enemyPlayer": 1,
+      "entrances": 6,
+      "power": 2491,
+      "rewardCount": 0,
+      "rewardPower": 0
+    }
+  },
+  "immediateFirstChoice": {
+    "id": "A0HardcreteMk1Gate",
+    "ready": true
+  },
+  "panelTouchContained": true,
+  "failure": "Error: State did not arrive: !JSON.parse(BlockNightAndroid.nativeDiagnostics()).listScrolling\n    at Object.wait (C:\\timerApp\\wz-tower-defense\\tools\\native-live.cjs:16:170)\n    at async Object.scrollTo (C:\\timerApp\\wz-tower-defense\\tools\\native-audit-controls.cjs:18:905)\n    at async choose (C:\\timerApp\\wz-tower-defense\\tools\\audit-native-ui.cjs:17:32)\n    at async C:\\timerApp\\wz-tower-defense\\tools\\audit-native-ui.cjs:36:4",
+  "failureUi": {
+    "implementation": "android.view",
+    "gameVisible": true,
+    "page": "build",
+    "pendingRequests": 0,
+    "navigationPending": false,
+    "selectedFactory": 0,
+    "productionQuantity": 1,
+    "selectedLab": 0,
+    "enginePaused": false,
+    "headerClass": "android.widget.LinearLayout",
+    "panelClass": "android.widget.LinearLayout",
+    "panelBounds": [
+      0,
+      88,
+      630,
+      1080
+    ],
+    "listBounds": [
+      18,
+      260,
+      612,
+      927
+    ],
+    "queueBounds": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "listClass": "com.rbabbit.blocknight.warzone.TowersNativeUi$StableList",
+    "listSuperclass": "android.widget.ListView",
+    "editorClass": "",
+    "stageWidth": 2400,
+    "stageHeight": 992,
+    "minimumTouchPx": 72,
+    "viewCount": 72,
+    "dialog": false,
+    "dialogGeneration": 1,
+    "listScrolling": true,
+    "windowFocused": true,
+    "layoutPending": false,
+    "engineClass": "com.rbabbit.blocknight.warzone.MainActivity$EngineWebView",
+    "views": [
+      {
+        "text": "BUILD",
+        "label": "BUILD",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          12,
+          8,
+          144,
+          80
+        ]
+      },
+      {
+        "text": "TECH",
+        "label": "TECH",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          150,
+          8,
+          282,
+          80
+        ]
+      },
+      {
+        "text": "FACTORY",
+        "label": "FACTORY",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          288,
+          8,
+          420,
+          80
+        ]
+      },
+      {
+        "text": "DESIGN",
+        "label": "DESIGN",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          426,
+          8,
+          558,
+          80
+        ]
+      },
+      {
+        "text": "MORE",
+        "label": "MORE",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          1929,
+          8,
+          2061,
+          80
+        ]
+      },
+      {
+        "text": "W1 · 0:58\n2507 POWER",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "clickable": false,
+        "bounds": [
+          2064,
+          9,
+          2253,
+          78
+        ]
+      },
+      {
+        "text": "SKIP",
+        "label": "SKIP WAVE",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          2256,
+          8,
+          2388,
+          80
+        ]
+      },
+      {
+        "text": "BUILD",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "clickable": false,
+        "bounds": [
+          18,
+          116,
+          474,
+          162
+        ]
+      },
+      {
+        "text": "EXIT",
+        "label": "EXIT",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          477,
+          103,
+          609,
+          175
+        ]
+      },
+      {
+        "text": "",
+        "label": "null",
+        "class": "com.rbabbit.blocknight.warzone.TowersNativeUi$NativePicker",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          23,
+          183,
+          607,
+          255
+        ]
+      },
+      {
+        "text": "DEFENCES",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "clickable": false,
+        "bounds": [
+          23,
+          183,
+          535,
+          255
+        ]
+      },
+      {
+        "text": "Heavy Machinegun Bunker",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "clickable": false,
+        "bounds": [
+          120,
+          260,
+          462,
+          308
+        ]
+      },
+      {
+        "text": "100 power · 1 × 1",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "clickable": false,
+        "bounds": [
+          120,
+          308,
+          462,
+          350
+        ]
+      },
+      {
+        "text": "BUILD",
+        "label": "BUILD Heavy Machinegun Bunker",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          465,
+          260,
+          597,
+          325
+        ]
+      },
+      {
+        "text": "Light Cannon Bunker",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "clickable": false,
+        "bounds": [
+          120,
+          375,
+          462,
+          418
+        ]
+      },
+      {
+        "text": "100 power · 1 × 1",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "clickable": false,
+        "bounds": [
+          120,
+          418,
+          462,
+          460
+        ]
+      },
+      {
+        "text": "BUILD",
+        "label": "BUILD Light Cannon Bunker",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          465,
+          382,
+          597,
+          454
+        ]
+      },
+      {
+        "text": "Flamer Bunker",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "clickable": false,
+        "bounds": [
+          120,
+          488,
+          462,
+          531
+        ]
+      },
+      {
+        "text": "100 power · 1 × 1",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "clickable": false,
+        "bounds": [
+          120,
+          531,
+          462,
+          573
+        ]
+      },
+      {
+        "text": "BUILD",
+        "label": "BUILD Flamer Bunker",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          465,
+          495,
+          597,
+          567
+        ]
+      },
+      {
+        "text": "Sensor Tower",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "clickable": false,
+        "bounds": [
+          120,
+          601,
+          462,
+          644
+        ]
+      },
+      {
+        "text": "50 power · 1 × 1",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "clickable": false,
+        "bounds": [
+          120,
+          644,
+          462,
+          686
+        ]
+      },
+      {
+        "text": "BUILD",
+        "label": "BUILD Sensor Tower",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          465,
+          608,
+          597,
+          680
+        ]
+      },
+      {
+        "text": "Hardened Sensor Tower",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "clickable": false,
+        "bounds": [
+          120,
+          714,
+          462,
+          757
+        ]
+      },
+      {
+        "text": "100 power · 1 × 1",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "clickable": false,
+        "bounds": [
+          120,
+          757,
+          462,
+          799
+        ]
+      },
+      {
+        "text": "BUILD",
+        "label": "BUILD Hardened Sensor Tower",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          465,
+          721,
+          597,
+          793
+        ]
+      },
+      {
+        "text": "Light Cannon Hardpoint",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "clickable": false,
+        "bounds": [
+          120,
+          827,
+          462,
+          870
+        ]
+      },
+      {
+        "text": "100 power · 1 × 1",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "clickable": false,
+        "bounds": [
+          120,
+          870,
+          462,
+          912
+        ]
+      },
+      {
+        "text": "BUILD",
+        "label": "BUILD Light Cannon Hardpoint",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          465,
+          834,
+          597,
+          906
+        ]
+      },
+      {
+        "text": "Tap clear terrain to queue.\nAccepted orders continue after EXIT.",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "clickable": false,
+        "bounds": [
+          18,
+          927,
+          612,
+          990
+        ]
+      },
+      {
+        "text": "ORDERS",
+        "label": "ORDERS",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          21,
+          993,
+          153,
+          1065
+        ]
+      },
+      {
+        "text": "SHOW MAP",
+        "label": "SHOW MAP",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          159,
+          993,
+          317,
+          1065
+        ]
+      }
+    ]
+  },
+  "fixtureRecoveryError": "Error: Native control unavailable: EXIT"
+}

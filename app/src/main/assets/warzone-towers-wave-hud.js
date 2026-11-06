@@ -89,6 +89,7 @@
     const wave = state.snapshot;
     if (!wave) return;
     showPreparation();
+    window.__towersHtml?.consume("warzone-towers-wave-command.json", wave.lastCommand);
     if (wave.wave > 0 || wave.phase === "defeated") {
       const preparation = hudDocument().getElementById("warzone-towers-preparation");
       if (preparation?.open) preparation.close();
@@ -96,8 +97,7 @@
     if (["defeated","victory"].includes(wave.phase) && !state.failureShown) {
       state.failureShown = true;
       window.__kalaWarzoneTouch?.releaseAll?.();
-      if(wave.phase === "victory")window.BlockNightAndroid?.battleWon?.();
-      else window.BlockNightAndroid?.battleFinished?.();
+      window.__towersHtml?.finish(wave.phase === "victory");
     }
     if (state.pendingCommand && (wave.lastCommand === state.pendingCommand
         || Date.now() - state.commandSentAt > 5000)) state.pendingCommand = "";
@@ -194,6 +194,7 @@
   window.__warzoneTowersWaves = {
     version: VERSION,
     nextWave,
+    engineExited: () => { pollLogs(); window.__towersHtml?.finish(state.snapshot?.phase === "victory"); },
     report: () => ({
       active: true,
       version: VERSION,

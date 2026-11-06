@@ -1,0 +1,691 @@
+{
+  "screens": [
+    "research",
+    "factory",
+    "design",
+    "saved",
+    "queue",
+    "help",
+    "build"
+  ],
+  "engine": "Warzone WebAssembly/WebGL; custom gameplay overlays currently HTML/CSS/JS",
+  "initial": {
+    "waves": {
+      "active": true,
+      "version": 7,
+      "polls": 111,
+      "errors": 3,
+      "commandWrites": 0,
+      "pendingCommand": "",
+      "snapshot": {
+        "version": 3,
+        "mode": "tower-defense",
+        "gameTime": 47002,
+        "lastCommand": "",
+        "phase": "countdown",
+        "wave": 0,
+        "totalRounds": 30,
+        "nextWave": 1,
+        "nextWaveIn": 133,
+        "canSkip": true,
+        "enemyDroids": 0,
+        "queuedEnemies": 0,
+        "enemyPlayer": 1,
+        "entrances": 6,
+        "power": 2545,
+        "rewardCount": 0,
+        "rewardPower": 0,
+        "lastReward": null
+      }
+    },
+    "research": {
+      "active": true,
+      "version": 37,
+      "open": false,
+      "opening": false,
+      "opens": 0,
+      "closes": 0,
+      "topicSelections": 0,
+      "labSelections": 0,
+      "categoryChanges": 0,
+      "activeLab": 0,
+      "activeCategory": "ALL",
+      "catalogCount": 18,
+      "catalogSample": [
+        "Medium Body - Cobra",
+        "Fuel Injection Engine Mk3",
+        "Composite Alloys",
+        "Hover Propulsion"
+      ],
+      "labCount": 4,
+      "readyLabs": 4,
+      "labIds": [
+        160169,
+        160171,
+        160173,
+        160175
+      ],
+      "playerPower": 2545,
+      "labs": [
+        {
+          "id": 160169,
+          "nativeIndex": 0,
+          "idle": true,
+          "modules": 1,
+          "health": 100,
+          "topicId": "",
+          "topicName": "",
+          "remainingSeconds": null,
+          "estimatedProgress": 0,
+          "waitingPower": false
+        },
+        {
+          "id": 160171,
+          "nativeIndex": 1,
+          "idle": true,
+          "modules": 1,
+          "health": 100,
+          "topicId": "",
+          "topicName": "",
+          "remainingSeconds": null,
+          "estimatedProgress": 0,
+          "waitingPower": false
+        },
+        {
+          "id": 160173,
+          "nativeIndex": 2,
+          "idle": true,
+          "modules": 1,
+          "health": 100,
+          "topicId": "",
+          "topicName": "",
+          "remainingSeconds": null,
+          "estimatedProgress": 0,
+          "waitingPower": false
+        },
+        {
+          "id": 160175,
+          "nativeIndex": 3,
+          "idle": true,
+          "modules": 1,
+          "health": 100,
+          "topicId": "",
+          "topicName": "",
+          "remainingSeconds": null,
+          "estimatedProgress": 0,
+          "waitingPower": false
+        }
+      ],
+      "bridgeSyncs": 48,
+      "bridgeErrors": 0,
+      "commandAcks": 0,
+      "commandRejects": 0,
+      "commandTimeouts": 0,
+      "queueAdds": 0,
+      "queueRemovals": 0,
+      "directAssignments": 0,
+      "directFailures": 0,
+      "queueSyncs": 0,
+      "queueStateEvents": 0,
+      "queueCommandWrites": 0,
+      "queueCommandErrors": 0,
+      "backgroundSyncs": 0,
+      "lastSyncDurationMs": null,
+      "queues": [
+        [],
+        [],
+        [],
+        []
+      ],
+      "dirtyLabIds": [],
+      "pendingClose": false,
+      "syncBlocked": false,
+      "runner": null,
+      "pendingCommand": null,
+      "fsPolls": 203,
+      "fsErrors": 2,
+      "fsLogFiles": [
+        "Scavengers.1.log",
+        "Scavengers.2.log",
+        "Scavengers.3.log",
+        "init.0.log",
+        "warzone-towers-ai.1.log",
+        "warzone-towers-rules.0.log"
+      ],
+      "completedEvents": 0,
+      "lastTopic": null,
+      "lastCompleted": null,
+      "canvasRestored": true
+    },
+    "commands": {
+      "version": 60,
+      "page": "",
+      "buildOpen": false,
+      "nativeHudHidden": false,
+      "pendingItem": "",
+      "siteChecks": 0,
+      "pending": 1,
+      "writes": 40,
+      "acks": 35,
+      "timeouts": 1,
+      "placements": 0,
+      "rejects": 0,
+      "opens": 0,
+      "closes": 0,
+      "session": "",
+      "nativeMenu": "",
+      "nativeItem": "",
+      "nativeBuildGroup": [],
+      "nativeToolReady": false,
+      "nativePendingSites": 0,
+      "exitingBuild": false,
+      "nativeBuildPlaced": false,
+      "nativeBuildSawWork": false,
+      "buildingOpening": false,
+      "saved": [
+        {
+          "id": "design-1793848581773-1",
+          "name": "Design 1",
+          "body": "Body1REC",
+          "propulsion": "wheeled01",
+          "turrets": [
+            "MG1Mk1"
+          ],
+          "cost": 55,
+          "points": 275,
+          "droidType": 0
+        },
+        {
+          "id": "design-1793850572642-1",
+          "name": "Design 2",
+          "body": "Body1REC",
+          "propulsion": "wheeled01",
+          "turrets": [
+            "MG1Mk1"
+          ],
+          "cost": 55,
+          "points": 275,
+          "droidType": 0
+        },
+        {
+          "id": "design-1793851167704-1",
+          "name": "Design 3",
+          "body": "Body1REC",
+          "propulsion": "wheeled01",
+          "turrets": [
+            "MG1Mk1"
+          ],
+          "cost": 55,
+          "points": 275,
+          "droidType": 0
+        },
+        {
+          "id": "design-1793851980075-1",
+          "name": "Design 4",
+          "body": "Body1REC",
+          "propulsion": "wheeled01",
+          "turrets": [
+            "MG1Mk1"
+          ],
+          "cost": 55,
+          "points": 275,
+          "droidType": 0
+        },
+        {
+          "id": "design-1793859132559-1",
+          "name": "Design 5",
+          "body": "Body1REC",
+          "propulsion": "wheeled01",
+          "turrets": [
+            "MG1Mk1"
+          ],
+          "cost": 55,
+          "points": 275,
+          "droidType": 0
+        },
+        {
+          "id": "design-1793859758355-1",
+          "name": "Design 6",
+          "body": "Body1REC",
+          "propulsion": "wheeled01",
+          "turrets": [
+            "MG1Mk1"
+          ],
+          "cost": 55,
+          "points": 275,
+          "droidType": 0
+        },
+        {
+          "id": "design-1793861023041-1",
+          "name": "Design 7",
+          "body": "Body1REC",
+          "propulsion": "wheeled01",
+          "turrets": [
+            "MG1Mk1"
+          ],
+          "cost": 55,
+          "points": 275,
+          "droidType": 0
+        },
+        {
+          "id": "design-1793890615888-1",
+          "name": "Design 8",
+          "body": "Body1REC",
+          "propulsion": "wheeled01",
+          "turrets": [
+            "MG1Mk1"
+          ],
+          "cost": 55,
+          "points": 275,
+          "droidType": 0
+        }
+      ],
+      "history": [],
+      "snapshot": {
+        "version": 1,
+        "gameTime": 46402,
+        "player": 0,
+        "power": 2544,
+        "mapWidth": 64,
+        "mapHeight": 64,
+        "alwaysQueue": true,
+        "hasHQ": true,
+        "selectedUnits": [],
+        "construction": [],
+        "constructionSites": [],
+        "nativeBuildOptions": [
+          "A0ADemolishStructure",
+          "A0ComDroidControl",
+          "A0CyborgFactory",
+          "A0FacMod1",
+          "A0HardcreteMk1Gate",
+          "A0HardcreteMk1Wall",
+          "A0LightFactory",
+          "A0PowMod1",
+          "A0PowerGenerator",
+          "A0ResearchFacility",
+          "A0ResearchModule1",
+          "A0ResourceExtractor",
+          "A0TankTrap",
+          "GuardTower1",
+          "GuardTower6",
+          "PillBox1",
+          "PillBox4",
+          "PillBox5",
+          "Sys-SensoTower01",
+          "Sys-SensoTower02",
+          "WallTower02"
+        ],
+        "buildings": [
+          {
+            "id": "A0ComDroidControl",
+            "power": 100
+          },
+          {
+            "id": "A0CyborgFactory",
+            "power": 100
+          },
+          {
+            "id": "A0FacMod1",
+            "power": 100
+          },
+          {
+            "id": "A0HardcreteMk1CWall",
+            "power": 25
+          },
+          {
+            "id": "A0HardcreteMk1Gate",
+            "power": 50
+          },
+          {
+            "id": "A0HardcreteMk1Wall",
+            "power": 25
+          },
+          {
+            "id": "A0LightFactory",
+            "power": 100
+          },
+          {
+            "id": "A0PowMod1",
+            "power": 0
+          },
+          {
+            "id": "A0PowerGenerator",
+            "power": 50
+          },
+          {
+            "id": "A0ResearchFacility",
+            "power": 100
+          },
+          {
+            "id": "A0ResearchModule1",
+            "power": 100
+          },
+          {
+            "id": "A0ResourceExtractor",
+            "power": 0
+          },
+          {
+            "id": "A0TankTrap",
+            "power": 15
+          },
+          {
+            "id": "GuardTower1",
+            "power": 100
+          },
+          {
+            "id": "GuardTower6",
+            "power": 100
+          },
+          {
+            "id": "PillBox1",
+            "power": 100
+          },
+          {
+            "id": "PillBox4",
+            "power": 100
+          },
+          {
+            "id": "PillBox5",
+            "power": 100
+          },
+          {
+            "id": "Sys-SensoTower01",
+            "power": 50
+          },
+          {
+            "id": "Sys-SensoTower02",
+            "power": 100
+          },
+          {
+            "id": "WallTower02",
+            "power": 100
+          }
+        ],
+        "parts": [
+          "Body1REC",
+          "HalfTrack",
+          "wheeled01",
+          "Cannon1-VTOL",
+          "Cannon1Mk1",
+          "Flame1Mk1",
+          "MG1-VTOL",
+          "MG1Mk1",
+          "MG2-VTOL",
+          "MG2Mk1",
+          "Mortar1Mk1",
+          "Rocket-Pod",
+          "Rocket-VTOL-Pod",
+          "SensorTurret1Mk1",
+          "LightRepair1",
+          "Spade1Mk1",
+          "CommandBrain01"
+        ],
+        "trucks": [
+          {
+            "id": 160011,
+            "x": 7,
+            "y": 36,
+            "z": 2,
+            "selected": false,
+            "order": 0,
+            "action": 0,
+            "rate": 9,
+            "building": false,
+            "queued": 0
+          },
+          {
+            "id": 160009,
+            "x": 59,
+            "y": 9,
+            "z": 2,
+            "selected": false,
+            "order": 0,
+            "action": 0,
+            "rate": 9,
+            "building": false,
+            "queued": 0
+          },
+          {
+            "id": 160007,
+            "x": 59,
+            "y": 7,
+            "z": 2,
+            "selected": false,
+            "order": 0,
+            "action": 0,
+            "rate": 9,
+            "building": false,
+            "queued": 0
+          },
+          {
+            "id": 160005,
+            "x": 7,
+            "y": 38,
+            "z": 2,
+            "selected": false,
+            "order": 0,
+            "action": 0,
+            "rate": 9,
+            "building": false,
+            "queued": 0
+          },
+          {
+            "id": 160003,
+            "x": 7,
+            "y": 37,
+            "z": 2,
+            "selected": false,
+            "order": 0,
+            "action": 0,
+            "rate": 9,
+            "building": false,
+            "queued": 0
+          },
+          {
+            "id": 160001,
+            "x": 59,
+            "y": 8,
+            "z": 2,
+            "selected": false,
+            "order": 0,
+            "action": 0,
+            "rate": 9,
+            "building": false,
+            "queued": 0
+          }
+        ],
+        "jobs": [],
+        "factories": [
+          {
+            "id": 160157,
+            "number": 1,
+            "x": 59,
+            "y": 4,
+            "type": 1,
+            "kind": "Factory",
+            "templates": [
+              "ConstructionDroid"
+            ],
+            "modules": 1,
+            "ready": true,
+            "idle": true,
+            "active": null,
+            "waitingReason": null,
+            "queue": []
+          },
+          {
+            "id": 160167,
+            "number": 2,
+            "x": 4,
+            "y": 38,
+            "type": 1,
+            "kind": "Factory",
+            "templates": [
+              "ConstructionDroid"
+            ],
+            "modules": 1,
+            "ready": true,
+            "idle": true,
+            "active": null,
+            "waitingReason": null,
+            "queue": []
+          }
+        ],
+        "nativeMenu": "",
+        "templates": [
+          {
+            "fullname": "Truck Viper Wheels",
+            "name": "ConstructionDroid",
+            "id": "ConstructionDroid",
+            "points": 310,
+            "power": 62,
+            "cost": 62,
+            "droidType": 3,
+            "body": "Body1REC",
+            "propulsion": "wheeled01",
+            "brain": "ZNULLBRAIN",
+            "repair": "ZNULLREPAIR",
+            "ecm": "ZNULLECM",
+            "sensor": "ZNULLSENSOR",
+            "construct": "Spade1Mk1",
+            "weapons": []
+          },
+          {
+            "fullname": "Heavy Gunner Cyborg",
+            "name": "Cyb-Cannon-GROUND",
+            "id": "Cyb-Cannon-GROUND",
+            "points": 382,
+            "power": 87,
+            "cost": 87,
+            "droidType": 5,
+            "body": "CyborgLightBody",
+            "propulsion": "CyborgLegs",
+            "brain": "ZNULLBRAIN",
+            "repair": "ZNULLREPAIR",
+            "ecm": "ZNULLECM",
+            "sensor": "ZNULLSENSOR",
+            "construct": "ZNULLCONSTRUCT",
+            "weapons": [
+              "CyborgCannon"
+            ]
+          },
+          {
+            "fullname": "Machinegunner Cyborg",
+            "name": "Cyb-Chain-GROUND",
+            "id": "Cyb-Chain-GROUND",
+            "points": 302,
+            "power": 67,
+            "cost": 67,
+            "droidType": 5,
+            "body": "CyborgLightBody",
+            "propulsion": "CyborgLegs",
+            "brain": "ZNULLBRAIN",
+            "repair": "ZNULLREPAIR",
+            "ecm": "ZNULLECM",
+            "sensor": "ZNULLSENSOR",
+            "construct": "ZNULLCONSTRUCT",
+            "weapons": [
+              "CyborgChaingun"
+            ]
+          },
+          {
+            "fullname": "Combat Engineer Cyborg",
+            "name": "Cyb-ComEng",
+            "id": "Cyb-ComEng",
+            "points": 207,
+            "power": 37,
+            "cost": 37,
+            "droidType": 10,
+            "body": "CyborgLightBody",
+            "propulsion": "CyborgLegs",
+            "brain": "ZNULLBRAIN",
+            "repair": "ZNULLREPAIR",
+            "ecm": "ZNULLECM",
+            "sensor": "ZNULLSENSOR",
+            "construct": "CyborgSpade",
+            "weapons": []
+          },
+          {
+            "fullname": "Flamer Cyborg",
+            "name": "Cyb-Flamer-GROUND",
+            "id": "Cyb-Flamer-GROUND",
+            "points": 342,
+            "power": 82,
+            "cost": 82,
+            "droidType": 5,
+            "body": "CyborgLightBody",
+            "propulsion": "CyborgLegs",
+            "brain": "ZNULLBRAIN",
+            "repair": "ZNULLREPAIR",
+            "ecm": "ZNULLECM",
+            "sensor": "ZNULLSENSOR",
+            "construct": "ZNULLCONSTRUCT",
+            "weapons": [
+              "CyborgFlamer01"
+            ]
+          },
+          {
+            "fullname": "Grenadier Cyborg",
+            "name": "Cyb-Gren",
+            "id": "Cyb-Gren",
+            "points": 462,
+            "power": 107,
+            "cost": 107,
+            "droidType": 5,
+            "body": "CyborgLightBody",
+            "propulsion": "CyborgLegs",
+            "brain": "ZNULLBRAIN",
+            "repair": "ZNULLREPAIR",
+            "ecm": "ZNULLECM",
+            "sensor": "ZNULLSENSOR",
+            "construct": "ZNULLCONSTRUCT",
+            "weapons": [
+              "Cyb-Wpn-Grenade"
+            ]
+          },
+          {
+            "fullname": "Mechanic Cyborg",
+            "name": "Cyb-Mechanic",
+            "id": "Cyb-Mechanic",
+            "points": 242,
+            "power": 62,
+            "cost": 62,
+            "droidType": 11,
+            "body": "CyborgLightBody",
+            "propulsion": "CyborgLegs",
+            "brain": "ZNULLBRAIN",
+            "repair": "CyborgRepair",
+            "ecm": "ZNULLECM",
+            "sensor": "ZNULLSENSOR",
+            "construct": "ZNULLCONSTRUCT",
+            "weapons": []
+          }
+        ],
+        "finishedUnits": [],
+        "finishedBuilds": []
+      },
+      "terrain": {
+        "ready": false,
+        "active": false,
+        "reads": 0,
+        "picks": 0,
+        "lastPickMs": 0,
+        "maxPickMs": 0,
+        "error": ""
+      }
+    },
+    "viewport": [
+      1600,
+      720
+    ]
+  },
+  "dom": {
+    "header": "<div id=\"blocknight-combat-hud\" role=\"toolbar\" aria-label=\"Warzone Towers commands\" class=\"wt-modern\"><div class=\"bn-command-group\"><button id=\"wt-open-build\" type=\"button\" title=\"Open build\">BUILD</button><button id=\"wt-open-design\" type=\"button\" title=\"Open design\">DESIGN</button><button id=\"wt-open-factory\" type=\"button\" title=\"Open factory\">FACTORY</button><button id=\"wt-open-queue\" type=\"button\" title=\"Open queue\">QUEUE</button><button id=\"wt-open-stats\" type=\"button\" title=\"Open stats\">STATS</button></div><div class=\"bn-command-group\"><button id=\"blocknight-queue-orders\" type=\"button\" title=\"Sticky build queue: select a structure once, then place it repeatedly\" aria-pressed=\"false\"><img src=\"/warzone/ui/icons/stack-plus.svg\" alt=\"\" aria-hidden=\"true\"><span>+Q</span></button><button id=\"blocknight-base\" type=\"button\" title=\"Center camera on HQ\"><img src=\"/warzone/ui/icons/house.svg\" alt=\"\" aria-hidden=\"true\"><span>BASE</span></button></div><div class=\"bn-command-group\"><div id=\"blocknight-zoom-control\" role=\"group\" aria-label=\"Camera distance\"><button id=\"blocknight-zoom-close\" type=\"button\" title=\"near camera view\" class=\"zoom\" aria-pressed=\"false\"><img src=\"/warzone/ui/icons/x.svg\" alt=\"\" aria-hidden=\"true\"><span>NEAR</span></button><button id=\"blocknight-zoom-battle\" type=\"button\" title=\"battle camera view\" class=\"zoom\" aria-pressed=\"false\"><img src=\"/warzone/ui/icons/crosshair.svg\" alt=\"\" aria-hidden=\"true\"><span>BATTLE</span></button><button id=\"blocknight-zoom-map\" type=\"button\" title=\"map camera view\" class=\"zoom\" aria-pressed=\"false\"><img src=\"/warzone/ui/icons/map-pin.svg\" alt=\"\" aria-hidden=\"true\"><span>MAP</span></button></div></div><div class=\"bn-command-group\"><button id=\"blocknight-tech\" type=\"button\" title=\"Open the tactical research queue\"><img src=\"/warzone/ui/icons/flask.svg\" alt=\"\" aria-hidden=\"true\"><span>TECH</span></button><button id=\"blocknight-help\" type=\"button\" title=\"How to play and use +Q\"><img src=\"/warzone/ui/icons/question.svg\" alt=\"\" aria-hidden=\"true\"><span>HELP</span></button></div></div>",
+    "commands": "<section id=\"wt-command-pages\" aria-label=\"Tower command centre\" hidden=\"\"><header class=\"wt-command-title\"><div><span class=\"wt-eyebrow\">WARZONE TOWERS / COMMAND CENTRE</span><h1 id=\"wt-page-title\">ORDERS</h1><span id=\"wt-command-resources\">⚡ 2560</span></div>\n      <nav id=\"wt-command-tabs\" aria-label=\"Command pages\"><button type=\"button\" data-page=\"build\" class=\"\" aria-current=\"false\">BUILD</button><button type=\"button\" data-page=\"design\" class=\"\" aria-current=\"false\">DESIGN</button><button t",
+    "wave": "<aside id=\"warzone-towers-wave-hud\" aria-live=\"polite\" class=\"visible\" data-phase=\"countdown\">\n      <div><strong>WAVE 1 IN 1:58</strong>\n      <span class=\"wt-wave-detail\">Prepare your defences</span></div>\n      <button id=\"warzone-towers-next-wave\" type=\"button\" title=\"Call the next wave now. Surviving enemies remain.\">SKIP WAVE</button></aside>"
+  },
+  "errors": [],
+  "time": 62502,
+  "observedPaused": true
+}

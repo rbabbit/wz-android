@@ -1,0 +1,23 @@
+'use strict';
+const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
+const source=fs.readFileSync('app/src/main/assets/warzone-command-pages.js','utf8');
+const state={buildOpen:true,siteNumbers:new Map(),nativeBuildGroup:[],catalog:{buildings:[{id:'GuardTower6',name:'Mini-Rocket Tower'}]},snapshot:{power:1000,trucks:[],construction:[],jobs:[],finishedBuilds:[],constructionSites:[]}};
+const elements=new Map(),element=id=>{if(!elements.has(id))elements.set(id,{});return elements.get(id)};let observed;
+const c=vm.createContext({state,Map,Array,JSON,element,esc:String,button:(t)=>t,remainingTime:s=>'~'+s,window:{WarzoneBuildDisplay:{update:rows=>observed=rows}}});
+vm.runInContext(source.slice(source.indexOf('  function siteStatus('),source.indexOf('  function renderSidebar(')),c);
+vm.runInContext(source.slice(source.indexOf('  function updateSidebarQueue('),source.indexOf('  function openNative(')),c);
+const jobs=[1,2,3].map(n=>({id:'cmd-170000000000'+n+'-'+n,itemId:'GuardTower6',x:8+n,y:40,created:n*100,status:n===1?'building':'queued'}));
+state.snapshot.constructionSites=jobs;c.updateSidebarQueue();assert.deepEqual(Array.from(observed,r=>r.number),[1,2,3]);assert.match(element('wt-sidebar-queue').innerHTML,/3 PENDING/);
+state.snapshot.constructionSites=[{...jobs[1],status:'building'},jobs[2]];state.snapshot.finishedBuilds=[{...jobs[0],gameTime:900}];c.updateSidebarQueue();
+assert.deepEqual(Array.from(observed,r=>[r.id,r.number]),[[jobs[1].id,2],[jobs[2].id,3],[jobs[0].id,1]],'completion does not renumber or lose a site');
+assert.match(element('wt-sidebar-queue').innerHTML,/2 PENDING · 1 DONE/);assert.match(element('wt-sidebar-queue').innerHTML,/AT 10,40/);assert.match(element('wt-sidebar-queue').innerHTML,/#2/);
+state.snapshot.constructionSites.push({...jobs[0],status:'done'});c.updateSidebarQueue();assert.equal(observed.length,3,'journal and native completed list count the same site once');
+state.buildOpen=false;c.updateSidebarQueue();assert.equal(observed.length,3,'map display remains updated after closing the catalogue');
+const picker=fs.readFileSync('app/src/main/assets/warzone-terrain-picker.js','utf8');const height=picker.slice(picker.indexOf('    heightAt(x,y){'),picker.indexOf('    project(x,y,height=0)')).trim().replace(/^heightAt\(x,y\)/,'function heightAt(x,y)').replace(/,$/,'');
+const ground=vm.createContext({state:{vertices:[0,256,0,128,256,0,0,256,-128,128,256,-128],indices:[0,1,2,1,3,2]},readMesh:()=>true,Math});vm.runInContext(height,ground);assert.equal(ground.heightAt(64,64),256);assert.equal(ground.heightAt(1000,1000),null);
+const models=JSON.parse(fs.readFileSync('app/src/main/assets/warzone/build-ghost-models.json','utf8')).models;
+const catalog=JSON.parse(fs.readFileSync('app/src/main/assets/warzone/command-catalog.json','utf8'));
+for(const item of catalog.buildings)assert.ok(models[item.id],item.id+' has its actual original building mesh');
+for(const [id,m] of Object.entries(models)){assert.ok(m.p.every(Number.isFinite),id);assert.ok(m.f.every(i=>Number.isInteger(i)&&i>=0&&i<m.p.length/3),id);assert.ok(m.e.every(i=>i>=0&&i<m.p.length/3),id)}
+assert.ok(models.GuardTower6.height>113,'rocket launcher is mounted above the original tower connector');assert.notDeepEqual(models.GuardTower6,models.GuardTower1,'different towers use different original geometry');
+console.log('PASS: stable site identities, locations, pending/completed counts, no duplicate completion, closed-catalogue map updates, raised-ground interpolation and complete original-mesh coverage');

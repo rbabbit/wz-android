@@ -1,6 +1,6 @@
 'use strict';
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
-const source=fs.readFileSync('app/src/main/assets/warzone-command-pages.js','utf8');
+const source=fs.readFileSync('archive/legacy-html-ui/warzone-command-pages.js','utf8');
 function setup(){
  const state={nativeMenu:'build',nativeToolReady:false,nativeToolSelectionAt:Date.now(),nativePendingSites:[],siteChecks:0,cancelSerial:0,exitingBuild:false,exitPromise:null,menuRevision:0,navigationSerial:0};const events=[];let pending=0;
  const c=vm.createContext({state,Date,setTimeout,clearTimeout,innerWidth:1280,innerHeight:744,pause:ms=>new Promise(r=>setTimeout(r,ms)),notify:m=>events.push(m),cancelPlacement(){},updateHUD(){},host:{WarzoneHost:{restoreBattlefield(){}}},document:{getElementById:()=>({focus(){}})},

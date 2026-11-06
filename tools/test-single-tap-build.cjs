@@ -1,6 +1,6 @@
 'use strict';
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
-const commands=fs.readFileSync('app/src/main/assets/warzone-command-pages.js','utf8'),touch=fs.readFileSync('app/src/main/assets/warzone-touch-controls.js','utf8');
+const commands=fs.readFileSync('archive/legacy-html-ui/warzone-command-pages.js','utf8'),touch=fs.readFileSync('archive/legacy-html-ui/warzone-touch-controls.js','utf8');
 (async()=>{
  const bridgeState={pending:new Map(),serial:0};let writes=0;const bridge=vm.createContext({state:bridgeState,Date,flush:()=>writes++});vm.runInContext(commands.slice(commands.indexOf('  function send('),commands.indexOf('  function flush(')),bridge);
  const firstRead=bridge.send('state'),secondRead=bridge.send('state');assert.equal(firstRead,secondRead,'overlapping native reads share one outstanding reply');assert.equal(writes,1);const entry=Array.from(bridgeState.pending.values())[0];bridgeState.pending.clear();entry.resolve({ok:true});await firstRead;bridge.send('state');assert.equal(writes,2,'a later read must ask the engine again');bridge.send('native-menu',{menu:'build'});bridge.send('native-menu',{menu:'build'});assert.equal(writes,4,'mutating commands are never coalesced');

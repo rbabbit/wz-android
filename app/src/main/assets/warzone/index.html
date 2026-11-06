@@ -1855,7 +1855,7 @@
     });
     
     function wz_js_handle_app_exit() {
-      try { window.BlockNightAndroid.battleFinished(); } catch (_) {}
+      try { window.__warzoneTowersWaves?.engineExited?.(); } catch (_) {}
       document.getElementById('emscripten_container').style.display = 'none';
       document.getElementById('viewLogsLink').style.display = (shouldSaveErrors && errorLog.length > 0) ? 'block' : 'none';
       document.getElementById('post-exit').style.display = 'block';

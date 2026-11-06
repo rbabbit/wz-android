@@ -1,6 +1,6 @@
 'use strict';
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
-const source=fs.readFileSync('app/src/main/assets/warzone-mobile-research.js','utf8');
+const source=fs.readFileSync('archive/legacy-html-ui/warzone-mobile-research.js','utf8');
 const nodes=new Map();
 function node(selector){if(!nodes.has(selector))nodes.set(selector,{textContent:'',innerHTML:'',src:'',alt:'',disabled:false,dataset:{},style:{},classList:{toggle(){}},getAttribute(name){return this[name];}});return nodes.get(selector);}
 const hover={id:'hover',name:'Hover Propulsion',nativeIndex:7,category:'VEHICLES',points:3600,power:112};

@@ -1,11 +1,38 @@
 # Warzone Towers — Android
 
-Full Android project for Warzone Towers, using the supplied
-WZmodTowerDefense-v4.7.0-a mod with two selectable maps. The editable project is
-at the repository root; open this folder in Android Studio.
-Current Android version: **5.12-footer (62)**.
+Current tested delivery: **6.4-build-display (67)**.
 
-**Latest download:** [v5.12 release](https://github.com/rbabbit/wz-android/releases/tag/v5.12-footer)
+The working v5.12 HTML/CSS gameplay interface is restored, with the seven
+listed audit fixes and persistent on-phone factory template saving. Use
+**SAVE TO PHONE** on a Factory template, then **BLUEPRINTS → USE TEMPLATE**
+in later games. Existing custom designs remain in the same private library;
+production still requires current-game research and a compatible factory.
+
+[v6.4 build display and emulator evidence](qa/v6.4-build-display/REPORT.md)
+covers numbered queued building models, original-mesh placement previews,
+stable site identities/counts and complete catalogue rows. The exact delivery
+APK passed focused gameplay and screen checks on both included maps, phone
+and wide viewports, enlarged text and repeated keyboard/menu returns.
+[v6.3 construction evidence](qa/v6.3-building/REPORT.md) records the preceding
+smooth selection, native minimap, FIFO, STOP and movement fixes.
+The official battlefield engine, WASM, mod, maps and startup artwork are
+preserved. These focused checks do not establish a complete 30-round run or
+physical-device performance; see [verification limits](docs/KNOWN-ISSUES.md).
+
+Delivery APK SHA-256:
+`12532300d9ce2010b911fae879a6e197eb059a98bd672901bd65307cd9f3532a`.
+The v6.3 APK and complete source remain frozen in
+`C:/timerApp/_backups/towers-v6.3-before-build-display-20261106/`
+and at their original delivery paths.
+
+The previous v6.1 native APK and complete source are preserved at
+`C:/timerApp/_backups/towers-v6.1-before-html-return-20261106/` and in their
+original delivery paths. Its source is also archived under `archive/native-ui-v6.1/`.
+[Historical v6.2 evidence](qa/v6.2-html/summary.json) records the initial HTML
+return and template fixes, which were checked without emulator testing at
+that stage. The later v6.3/v6.4 reports above record their scoped gameplay checks.
+
+**Latest published fallback:** [v5.12 release](https://github.com/rbabbit/wz-android/releases/tag/v5.12-footer)
 — [Android APK](https://github.com/rbabbit/wz-android/releases/download/v5.12-footer/Warzone-Towers-v5.12.apk),
 [complete tested source ZIP](https://github.com/rbabbit/wz-android/releases/download/v5.12-footer/warzone-towers-v5.12-source.zip),
 [SHA-256 checksums](https://github.com/rbabbit/wz-android/releases/download/v5.12-footer/Warzone-Towers-v5.12-SHA256.txt).
@@ -50,7 +77,32 @@ See [v5.7 verification and limits](qa/v5.7/REPORT.md). The exact APK passed the
 mobile gameplay journey and native combat through round 5; all 30 rounds are
 covered by the rules harness, with no claim of a complete native playthrough.
 
-## Construction sidebar
+## Historical v6.0/v6.1 native gameplay controls
+
+The compact native header is 48dp. Research and Factory use one toolbar,
+five complete Standard catalogue rows at the approved phone profile, and a
+narrow live queue panel. Lab selection remains manual. Production has minus,
+quantity presets and plus; waiting units group by order, and removing a group
+preserves the active unit and other orders/factories. The work bar shows actual
+elapsed simulation time rather than an invented production percentage.
+
+TECH opens manual laboratory research with the selected lab’s current topic and
+waiting queue. FACTORY shows compatible designs, quantity and the selected
+factory’s active/waiting production. DESIGN uses native component choices and
+name editing. Saved blueprints stay in Android private app storage between
+games and process restarts, using the existing library format. Production still
+requires those components to be researched in the current battle.
+
+BUILD opens a native field catalogue. Select a structure and tap reachable
+terrain to queue native orders. EXIT preserves accepted orders. Unit Controls
+expands selection, Combat, Patrol, Box, Queue and Stop. More contains the
+blueprint library, all orders, camera presets, Help/interface size and original
+engine menus. Towers retains its page-based flow; no 1v1 interface is included.
+
+## Historical construction interface through v5.12
+
+The following notes describe the retired HTML interface. Current presentation
+uses Android Views; the proven engine selection and queue transport are retained.
 
 BUILD opens the field sidebar immediately. Scroll its structure cards;
 categories, construction activity and Exit stay visible. One structure tap
@@ -150,7 +202,8 @@ the owner's private signing keys are not part of the project archive.
 | Area | Files |
 | --- | --- |
 | Android startup, downloader, splash, viewport | `app/src/main/java/com/rbabbit/blocknight/warzone/` |
-| Header, touch, HELP, research and wave HUD | `app/src/main/assets/warzone-*.js`, `blocknight-*.js`, `warzone/mobile.html`, `warzone/ui/` |
+| Android gameplay interface | `app/src/main/java/com/rbabbit/blocknight/warzone/TowersNativeUi.java` |
+| Engine input, queue/data transport and iframe host | `app/src/main/assets/warzone-*-core.js`, `warzone-engine-input.js`, `warzone-native-bridge.js`, `warzone/mobile.html` |
 | Mobile round HUD, Skip and objective adapters | `scenario/` |
 | Active supplied mod and exact original ZIP | `vendor/tower-defense/` |
 | Preserved original map and superseded Survival archive | `vendor/survival/` |
@@ -173,6 +226,11 @@ It does not rewrite official engine code or the original packaged data prefix.
 See [AGENTS.md](AGENTS.md) and the maintenance guide before changing game logic.
 
 ## Current verification limits
+
+The following v5.2 paragraph is historical. Current v6.1 evidence is in
+[the compact native report](qa/v6.1-compact/REPORT.md). Its 29 required
+reports passed on the exact clean APK; physical-device rendering/audio/FPS and
+full native 30-round endurance remain outside that scoped verification.
 
 The exact v5.2 APK passed the reported command-screen and related native flows
 at 1280x800 and 1080x600, with additional screen checks at the screenshot's

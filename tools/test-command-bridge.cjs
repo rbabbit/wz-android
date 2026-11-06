@@ -28,6 +28,21 @@ function setup(){
 }
 const defence=catalog.buildings.find(b=>b.category==='DEFENCES'&&b.width===1),body=catalog.components.Body[0],prop=catalog.components.Propulsion[0],weapon=catalog.components.Weapon[0];
 {
+ const t=setup();t.send('queue-build',{itemId:defence.id,x:12,y:12,workerIds:[1]});
+ t.send('queue-build',{itemId:defence.id,x:15,y:15,workerIds:[1]});
+ t.droids[0].order=99;t.c.wtcmd_tick();assert.equal(t.c.wtcmd_openJobs().length,0,'replacement native movement overrides the truck build FIFO');
+ const count=t.calls.length;t.droids[0].order=0;t.c.gameTime+=2500;t.c.wtcmd_tick();assert.equal(t.calls.length,count,'completed replacement movement must not restart cancelled construction');
+}
+
+{
+ const t=setup();t.select([t.droids[1]]);
+ const r=t.send('queue-build',{itemId:defence.id,x:12,y:12,workerIds:[1]});
+ assert.equal(r.ok,true);assert.deepEqual(r.result.workers,[1],'catalogue local group cannot be replaced by a previously selected combat/other group');
+ assert.equal(t.send('queue-build',{itemId:defence.id,x:15,y:15,workerIds:[999]}).reason,'unreachable','dead or foreign requested workers cannot silently reassign work across the map');
+ t.unreachable.add(1);assert.equal(t.send('queue-build',{itemId:defence.id,x:16,y:16,workerIds:[1]}).reason,'unreachable');
+}
+
+{
  const t=setup(),snapshot=t.send('state').result;
  assert.ok(t.c.wtcmd_native.A0TankTrap,'same-name corner stats must not erase straight Tank Traps');
  assert.ok(snapshot.nativeBuildOptions.includes('A0TankTrap'),'native picker keeps the otherwise missing Tank Traps slot');

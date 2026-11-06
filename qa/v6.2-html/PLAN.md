@@ -1,0 +1,5 @@
+# Scoped HTML/CSS return
+
+User authorized fixing the seven static-audit findings plus persistent factory template saving. No emulator, installation, UI automation or gameplay tests. Keep original HTML/CSS layout and official engine/mod/maps. Current6.1 APK/source frozen and hash-verified before edits in C:/timerApp/_backups/towers-v6.1-before-html-return-20261106/. Active legacy UI restored byte-for-byte from preserved5.12; native sources archived separately.
+
+Issue/check list: consumed request files and save/load reconciliation; Patrol and delayed orders cancellation; research in-flight queue protection and missing labs; Design unlock/selector synchronization; result deduplication/session ownership; Android Back into HTML navigation; save factory templates to the existing private phone library and reuse with current-battle research/factory checks. Validate changed JavaScript and targeted code regressions, clean-build APK, compare packaged assets/signature and preserve explicit no-gameplay-verification status. No unrelated work.

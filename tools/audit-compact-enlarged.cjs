@@ -1,0 +1,17 @@
+'use strict';
+const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
+const {connect,adb,out}=require('./native-live.cjs');let c,a;
+const report={started:new Date().toISOString(),seeded:false,cases:[]};
+function fits(d,label){const b=d.views.find(v=>v.label===label);assert.ok(b,label+' visible');assert.ok(b.bounds[3]-b.bounds[1]>=d.minimumTouchPx,label+' full touch height');assert.ok(b.textWidthPx<=b.availableTextWidthPx+2,label+' full text fits');assert.ok(b.textLayoutHeightPx<=b.availableTextHeightPx+2,label+' full text height fits');assert.ok(b.bounds[2]-b.bounds[0]>=b.viewWidthPx-2,label+' is not clipped by its parent');return b;}
+(async()=>{c=await connect();a=require('./native-audit-controls.cjs')(c,report);try{
+ const apk=adb('shell','pm','path','com.rbabbit.warzonetowers').toString().trim().replace('package:','');report.installedAPK_SHA256=adb('shell','sha256sum',apk).toString().split(/\s/)[0];
+ await a.resume();await a.menu('Help & interface size');await c.wait('JSON.parse(BlockNightAndroid.nativeDiagnostics()).page==="help"');await a.scrollTo('Extra large');await a.tap('Extra large');await a.close();
+ await a.tap('TECH');await c.wait('JSON.parse(BlockNightAndroid.nativeDiagnostics()).page==="research"');await c.wait('!JSON.parse(BlockNightAndroid.nativeDiagnostics()).layoutPending');
+ report.research=await a.ui();for(const label of ['BUILD','TECH','FACTORY','DESIGN','MORE','SKIP WAVE','BACK TO BATTLE'])fits(report.research,label);
+ const captions=report.research.views.filter(v=>v.text==='OTHER LABS'||/^LAB \d+ · (RESEARCHING|IDLE)$/.test(v.text));assert.ok(captions.length);for(const v of captions)assert.ok(v.textLayoutHeightPx<=v.availableTextHeightPx+2,v.text+' has full native text height');
+ const lab=await c.evaluate('__blockNightResearch.report().labs.find(l=>l.id===JSON.parse(BlockNightAndroid.nativeDiagnostics()).selectedLab)');
+ if(lab&&!lab.idle){const current=report.research.views.find(v=>v.label===lab.topicName);assert.ok(current&&!current.ellipsizedCharacters,'selected topic remains readable in its two-line summary');}
+ await a.capture('compact-enlarged-research');await a.close();await a.tap('FACTORY');await c.wait('JSON.parse(BlockNightAndroid.nativeDiagnostics()).page==="factory"');
+ await a.tap('Production quantity');await a.tap('20 units');await c.wait('JSON.parse(BlockNightAndroid.nativeDiagnostics()).productionQuantity===20');await c.wait('!JSON.parse(BlockNightAndroid.nativeDiagnostics()).layoutPending');report.factory=await a.ui();for(const label of ['MORE','SKIP WAVE','BACK TO BATTLE','Production quantity','Decrease production quantity','Increase production quantity'])fits(report.factory,label);
+ await a.capture('compact-enlarged-factory');await a.tap('Production quantity');await a.tap('1 unit');await a.close();await a.pause();report.errors=c.errors;assert.deepEqual(c.errors,[]);report.passed=true;fs.writeFileSync(path.join(out,'audit-compact-enlarged.json'),JSON.stringify(report,null,2));console.log('PASS: actual enlarged action labels, native text heights, topic summary and quantity20 fit without clipping');
+}catch(e){report.failure=String(e.stack||e);try{await a.capture('compact-enlarged-failure');report.ui=await a.ui();if(report.ui.dialog)await a.tap('Cancel');await a.pause();}catch(x){report.recoveryError=String(x);}fs.writeFileSync(path.join(out,'audit-compact-enlarged-failure.json'),JSON.stringify(report,null,2));throw e;}finally{c.close();}})().catch(e=>{console.error(e);process.exitCode=1});

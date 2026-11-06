@@ -1,0 +1,614 @@
+{
+  "phase": "remove-research",
+  "seeded": false,
+  "cases": [],
+  "started": "2026-11-06T15:09:05.036Z",
+  "installedAPK_SHA256": "91e1dce693df9063d54f609856e4aaf4b534518c371abd8f9ff507d0e7a17d34",
+  "initial": {
+    "ui": {
+      "implementation": "android.view",
+      "gameVisible": true,
+      "page": "",
+      "pendingRequests": 0,
+      "navigationPending": false,
+      "selectedFactory": 160143,
+      "productionQuantity": 1,
+      "selectedLab": 160125,
+      "enginePaused": false,
+      "headerClass": "android.widget.LinearLayout",
+      "panelClass": "",
+      "panelBounds": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "listBounds": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "queueBounds": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "feedback": {
+        "x": 1263,
+        "y": 903,
+        "started": 23751749
+      },
+      "listClass": "com.rbabbit.blocknight.warzone.TowersNativeUi$StableList",
+      "listSuperclass": "android.widget.ListView",
+      "editorClass": "android.widget.EditText",
+      "stageWidth": 2400,
+      "stageHeight": 920,
+      "minimumTouchPx": 126,
+      "viewCount": 21,
+      "dialog": false,
+      "dialogGeneration": 5,
+      "listScrolling": false,
+      "windowFocused": true,
+      "layoutPending": false,
+      "engineClass": "com.rbabbit.blocknight.warzone.MainActivity$EngineWebView",
+      "views": [
+        {
+          "text": "BUILD",
+          "label": "BUILD",
+          "class": "android.widget.Button",
+          "enabled": true,
+          "clickable": true,
+          "bounds": [
+            21,
+            17,
+            213,
+            143
+          ]
+        },
+        {
+          "text": "TECH",
+          "label": "TECH",
+          "class": "android.widget.Button",
+          "enabled": true,
+          "clickable": true,
+          "bounds": [
+            223,
+            17,
+            401,
+            143
+          ]
+        },
+        {
+          "text": "FACTORY",
+          "label": "FACTORY",
+          "class": "android.widget.Button",
+          "enabled": true,
+          "clickable": true,
+          "bounds": [
+            411,
+            17,
+            685,
+            143
+          ]
+        },
+        {
+          "text": "DESIGN",
+          "label": "DESIGN",
+          "class": "android.widget.Button",
+          "enabled": true,
+          "clickable": true,
+          "bounds": [
+            695,
+            17,
+            926,
+            143
+          ]
+        },
+        {
+          "text": "MORE",
+          "label": "MORE",
+          "class": "android.widget.Button",
+          "enabled": true,
+          "clickable": true,
+          "bounds": [
+            1616,
+            17,
+            1807,
+            143
+          ]
+        },
+        {
+          "text": "W1 · 0:09\n2393 POWER",
+          "label": "null",
+          "class": "android.widget.TextView",
+          "enabled": true,
+          "clickable": false,
+          "bounds": [
+            1812,
+            8,
+            2206,
+            152
+          ]
+        },
+        {
+          "text": "SKIP",
+          "label": "SKIP WAVE",
+          "class": "android.widget.Button",
+          "enabled": true,
+          "clickable": true,
+          "bounds": [
+            2211,
+            17,
+            2379,
+            143
+          ]
+        },
+        {
+          "text": "UNIT CONTROLS",
+          "label": "UNIT CONTROLS",
+          "class": "android.widget.Button",
+          "enabled": true,
+          "clickable": true,
+          "bounds": [
+            37,
+            917,
+            491,
+            1043
+          ]
+        },
+        {
+          "text": "2 selected",
+          "label": "null",
+          "class": "android.widget.TextView",
+          "enabled": true,
+          "clickable": false,
+          "bounds": [
+            496,
+            943,
+            785,
+            1016
+          ]
+        }
+      ]
+    },
+    "waves": {
+      "version": 3,
+      "mode": "tower-defense",
+      "gameTime": 171002,
+      "lastCommand": "",
+      "phase": "countdown",
+      "wave": 0,
+      "totalRounds": 30,
+      "nextWave": 1,
+      "nextWaveIn": 9,
+      "canSkip": true,
+      "enemyDroids": 0,
+      "queuedEnemies": 0,
+      "enemyPlayer": 1,
+      "entrances": 14,
+      "power": 2393,
+      "rewardCount": 0,
+      "rewardPower": 0,
+      "lastReward": null
+    }
+  },
+  "failure": "Error: State did not arrive: __blockNightResearch.model().queueItems.some(q=>q.labId===160125&&q.topics.some(t=>t.name===\"Fuel Injection Engine Mk3\"))\n    at Object.wait (C:\\timerApp\\wz-tower-defense\\tools\\native-live.cjs:16:170)\n    at async C:\\timerApp\\wz-tower-defense\\tools\\audit-native-ui.cjs:63:473",
+  "failureUi": {
+    "implementation": "android.view",
+    "gameVisible": true,
+    "page": "research",
+    "pendingRequests": 0,
+    "navigationPending": false,
+    "selectedFactory": 160143,
+    "productionQuantity": 1,
+    "selectedLab": 160125,
+    "enginePaused": false,
+    "headerClass": "android.widget.LinearLayout",
+    "panelClass": "android.widget.LinearLayout",
+    "panelBounds": [
+      0,
+      160,
+      2400,
+      1080
+    ],
+    "listBounds": [
+      32,
+      459,
+      1473,
+      1059
+    ],
+    "queueBounds": [
+      1505,
+      480,
+      2357,
+      1059
+    ],
+    "feedback": {
+      "x": 1263,
+      "y": 903,
+      "started": 23751749
+    },
+    "listClass": "com.rbabbit.blocknight.warzone.TowersNativeUi$StableList",
+    "listSuperclass": "android.widget.ListView",
+    "editorClass": "",
+    "stageWidth": 2400,
+    "stageHeight": 920,
+    "minimumTouchPx": 126,
+    "viewCount": 65,
+    "dialog": false,
+    "dialogGeneration": 5,
+    "listScrolling": false,
+    "windowFocused": true,
+    "layoutPending": false,
+    "engineClass": "com.rbabbit.blocknight.warzone.MainActivity$EngineWebView",
+    "views": [
+      {
+        "text": "BUILD",
+        "label": "BUILD",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          21,
+          17,
+          213,
+          143
+        ]
+      },
+      {
+        "text": "TECH",
+        "label": "TECH",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          223,
+          17,
+          401,
+          143
+        ]
+      },
+      {
+        "text": "FACTORY",
+        "label": "FACTORY",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          411,
+          17,
+          685,
+          143
+        ]
+      },
+      {
+        "text": "DESIGN",
+        "label": "DESIGN",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          695,
+          17,
+          926,
+          143
+        ]
+      },
+      {
+        "text": "MORE",
+        "label": "MORE",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          1616,
+          17,
+          1807,
+          143
+        ]
+      },
+      {
+        "text": "W2 · 1:18\n2401 POWER",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "clickable": false,
+        "bounds": [
+          1812,
+          8,
+          2206,
+          152
+        ]
+      },
+      {
+        "text": "SKIP",
+        "label": "SKIP WAVE",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          2211,
+          17,
+          2379,
+          143
+        ]
+      },
+      {
+        "text": "RESEARCH",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "clickable": false,
+        "bounds": [
+          32,
+          198,
+          2123,
+          299
+        ]
+      },
+      {
+        "text": "BATTLE",
+        "label": "BACK TO BATTLE",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          2128,
+          186,
+          2363,
+          312
+        ]
+      },
+      {
+        "text": "",
+        "label": "Choose laboratory",
+        "class": "com.rbabbit.blocknight.warzone.TowersNativeUi$NativePicker",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          40,
+          325,
+          657,
+          451
+        ]
+      },
+      {
+        "text": "Lab 1 · Medium Body - Cobra",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "clickable": false,
+        "bounds": [
+          40,
+          325,
+          531,
+          451
+        ]
+      },
+      {
+        "text": "",
+        "label": "null",
+        "class": "com.rbabbit.blocknight.warzone.TowersNativeUi$NativePicker",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          673,
+          325,
+          1054,
+          451
+        ]
+      },
+      {
+        "text": "ALL",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "clickable": false,
+        "bounds": [
+          673,
+          325,
+          928,
+          451
+        ]
+      },
+      {
+        "text": "",
+        "label": "Search technology",
+        "class": "android.widget.EditText",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          1062,
+          325,
+          2368,
+          451
+        ]
+      },
+      {
+        "text": "Fuel Injection Engine Mk3",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "clickable": false,
+        "bounds": [
+          210,
+          480,
+          1274,
+          566
+        ]
+      },
+      {
+        "text": "150 power · VEHICLES",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "clickable": false,
+        "bounds": [
+          210,
+          566,
+          1274,
+          652
+        ]
+      },
+      {
+        "text": "ADD",
+        "label": "ADD Fuel Injection Engine Mk3",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          1279,
+          503,
+          1447,
+          629
+        ]
+      },
+      {
+        "text": "Composite Alloys",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "clickable": false,
+        "bounds": [
+          210,
+          693,
+          1215,
+          779
+        ]
+      },
+      {
+        "text": "56 power · VEHICLES",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "clickable": false,
+        "bounds": [
+          210,
+          779,
+          1215,
+          865
+        ]
+      },
+      {
+        "text": "Queued",
+        "label": "Queued Composite Alloys",
+        "class": "android.widget.Button",
+        "enabled": false,
+        "clickable": true,
+        "bounds": [
+          1220,
+          716,
+          1447,
+          842
+        ]
+      },
+      {
+        "text": "Hover Propulsion",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "clickable": false,
+        "bounds": [
+          210,
+          906,
+          1274,
+          992
+        ]
+      },
+      {
+        "text": "112 power · VEHICLES",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "clickable": false,
+        "bounds": [
+          210,
+          992,
+          1274,
+          1059
+        ]
+      },
+      {
+        "text": "ADD",
+        "label": "ADD Hover Propulsion",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          1279,
+          929,
+          1447,
+          1055
+        ]
+      },
+      {
+        "text": "Medium Body - Cobra",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "clickable": false,
+        "bounds": [
+          1505,
+          480,
+          2357,
+          557
+        ]
+      },
+      {
+        "text": "~48% · ~0:33 remaining",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "clickable": false,
+        "bounds": [
+          1505,
+          557,
+          2357,
+          630
+        ]
+      },
+      {
+        "text": "Composite Alloys",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "clickable": false,
+        "bounds": [
+          1531,
+          686,
+          2200,
+          772
+        ]
+      },
+      {
+        "text": "Waiting",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "clickable": false,
+        "bounds": [
+          1531,
+          772,
+          2200,
+          858
+        ]
+      },
+      {
+        "text": "×",
+        "label": "REMOVE Composite Alloys",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          2205,
+          709,
+          2331,
+          835
+        ]
+      }
+    ]
+  },
+  "pausedAt": 205502
+}

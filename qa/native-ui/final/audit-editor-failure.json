@@ -1,0 +1,556 @@
+{
+  "phase": "editor",
+  "seeded": false,
+  "cases": [
+    "native-design-validated"
+  ],
+  "started": "2026-11-06T16:29:31.121Z",
+  "installedAPK_SHA256": "be349d592e4ee77f706b7630c2e4c3b27a9017aab1be62085432e27f746bb923",
+  "initial": {
+    "ui": {
+      "implementation": "android.view",
+      "gameVisible": true,
+      "page": "",
+      "pendingRequests": 0,
+      "navigationPending": false,
+      "selectedFactory": 0,
+      "productionQuantity": 1,
+      "selectedLab": 160169,
+      "enginePaused": false,
+      "headerClass": "android.widget.LinearLayout",
+      "panelClass": "",
+      "panelBounds": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "listBounds": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "queueBounds": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "feedback": {
+        "x": 0,
+        "y": 0,
+        "started": 0
+      },
+      "listClass": "com.rbabbit.blocknight.warzone.TowersNativeUi$StableList",
+      "listSuperclass": "android.widget.ListView",
+      "editorClass": "android.widget.EditText",
+      "stageWidth": 1080,
+      "stageHeight": 508,
+      "minimumTouchPx": 72,
+      "viewCount": 21,
+      "dialog": false,
+      "dialogGeneration": 5,
+      "listScrolling": false,
+      "windowFocused": true,
+      "layoutPending": false,
+      "engineClass": "com.rbabbit.blocknight.warzone.MainActivity$EngineWebView",
+      "views": [
+        {
+          "text": "BUILD",
+          "label": "BUILD",
+          "class": "android.widget.Button",
+          "enabled": true,
+          "clickable": true,
+          "bounds": [
+            12,
+            10,
+            116,
+            82
+          ]
+        },
+        {
+          "text": "TECH",
+          "label": "TECH",
+          "class": "android.widget.Button",
+          "enabled": true,
+          "clickable": true,
+          "bounds": [
+            122,
+            10,
+            218,
+            82
+          ]
+        },
+        {
+          "text": "FACTORY",
+          "label": "FACTORY",
+          "class": "android.widget.Button",
+          "enabled": true,
+          "clickable": true,
+          "bounds": [
+            224,
+            10,
+            376,
+            82
+          ]
+        },
+        {
+          "text": "DESIGN",
+          "label": "DESIGN",
+          "class": "android.widget.Button",
+          "enabled": true,
+          "clickable": true,
+          "bounds": [
+            382,
+            10,
+            508,
+            82
+          ]
+        },
+        {
+          "text": "MORE",
+          "label": "MORE",
+          "class": "android.widget.Button",
+          "enabled": true,
+          "clickable": true,
+          "bounds": [
+            637,
+            10,
+            746,
+            82
+          ]
+        },
+        {
+          "text": "W1 · 2:32\n2417 POWER",
+          "label": "null",
+          "class": "android.widget.TextView",
+          "enabled": true,
+          "clickable": false,
+          "bounds": [
+            749,
+            5,
+            969,
+            87
+          ]
+        },
+        {
+          "text": "SKIP",
+          "label": "SKIP WAVE",
+          "class": "android.widget.Button",
+          "enabled": true,
+          "clickable": true,
+          "bounds": [
+            972,
+            10,
+            1068,
+            82
+          ]
+        },
+        {
+          "text": "UNIT CONTROLS",
+          "label": "UNIT CONTROLS",
+          "class": "android.widget.Button",
+          "enabled": true,
+          "clickable": true,
+          "bounds": [
+            21,
+            507,
+            282,
+            579
+          ]
+        },
+        {
+          "text": "0 selected",
+          "label": "null",
+          "class": "android.widget.TextView",
+          "enabled": true,
+          "clickable": false,
+          "bounds": [
+            285,
+            522,
+            449,
+            564
+          ]
+        }
+      ]
+    },
+    "waves": {
+      "version": 3,
+      "mode": "tower-defense",
+      "gameTime": 28502,
+      "lastCommand": "",
+      "phase": "countdown",
+      "wave": 0,
+      "totalRounds": 30,
+      "nextWave": 1,
+      "nextWaveIn": 152,
+      "canSkip": true,
+      "enemyDroids": 0,
+      "queuedEnemies": 0,
+      "enemyPlayer": 1,
+      "entrances": 6,
+      "power": 2417,
+      "rewardCount": 0,
+      "rewardPower": 0
+    }
+  },
+  "blueprints": {
+    "alpha": "Towers-QA-mw56wlml-Draft",
+    "edited": "Towers-QA-mw56wlml-Saved",
+    "copy": "Towers-QA-mw56wlml-Copy"
+  },
+  "imeConnectionTrace": [
+    {
+      "expected": "Towe",
+      "editor": "16a9e25"
+    },
+    {
+      "expected": "Towers-Q",
+      "editor": "16a9e25"
+    },
+    {
+      "expected": "Towers-QA-mw",
+      "editor": "16a9e25"
+    },
+    {
+      "expected": "Towers-QA-mw56wl",
+      "editor": "16a9e25"
+    },
+    {
+      "expected": "Towers-QA-mw56wlml-D",
+      "editor": "16a9e25"
+    },
+    {
+      "expected": "Towers-QA-mw56wlml-Draft",
+      "editor": "16a9e25"
+    }
+  ],
+  "typingMethod": "ADB key batches with observed native text and served-view identity after each batch",
+  "failure": "Error: Saved blueprint row not visible: Towers-QA-mw56wlml-Draft\n    at findSaved (C:\\timerApp\\wz-tower-defense\\tools\\audit-native-ui.cjs:24:460)\n    at async C:\\timerApp\\wz-tower-defense\\tools\\audit-native-ui.cjs:83:4",
+  "failureUi": {
+    "implementation": "android.view",
+    "gameVisible": true,
+    "page": "saved",
+    "pendingRequests": 0,
+    "navigationPending": false,
+    "selectedFactory": 0,
+    "productionQuantity": 1,
+    "selectedLab": 160169,
+    "enginePaused": false,
+    "headerClass": "android.widget.LinearLayout",
+    "panelClass": "android.widget.LinearLayout",
+    "panelBounds": [
+      0,
+      92,
+      1080,
+      600
+    ],
+    "listBounds": [
+      18,
+      260,
+      1062,
+      588
+    ],
+    "queueBounds": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "feedback": {
+      "x": 0,
+      "y": 0,
+      "started": 0
+    },
+    "listClass": "com.rbabbit.blocknight.warzone.TowersNativeUi$StableList",
+    "listSuperclass": "android.widget.ListView",
+    "editorClass": "",
+    "stageWidth": 1080,
+    "stageHeight": 508,
+    "minimumTouchPx": 72,
+    "viewCount": 55,
+    "dialog": false,
+    "dialogGeneration": 11,
+    "listScrolling": false,
+    "windowFocused": true,
+    "layoutPending": false,
+    "engineClass": "com.rbabbit.blocknight.warzone.MainActivity$EngineWebView",
+    "views": [
+      {
+        "text": "BUILD",
+        "label": "BUILD",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          12,
+          10,
+          116,
+          82
+        ]
+      },
+      {
+        "text": "TECH",
+        "label": "TECH",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          122,
+          10,
+          218,
+          82
+        ]
+      },
+      {
+        "text": "FACTORY",
+        "label": "FACTORY",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          224,
+          10,
+          376,
+          82
+        ]
+      },
+      {
+        "text": "DESIGN",
+        "label": "DESIGN",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          382,
+          10,
+          508,
+          82
+        ]
+      },
+      {
+        "text": "MORE",
+        "label": "MORE",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          637,
+          10,
+          746,
+          82
+        ]
+      },
+      {
+        "text": "W1 · 2:01\n2447 POWER",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "clickable": false,
+        "bounds": [
+          749,
+          5,
+          969,
+          87
+        ]
+      },
+      {
+        "text": "SKIP",
+        "label": "SKIP WAVE",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          972,
+          10,
+          1068,
+          82
+        ]
+      },
+      {
+        "text": "BLUEPRINT LIBRARY",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "clickable": false,
+        "bounds": [
+          18,
+          114,
+          920,
+          172
+        ]
+      },
+      {
+        "text": "BATTLE",
+        "label": "BACK TO BATTLE",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          923,
+          107,
+          1059,
+          179
+        ]
+      },
+      {
+        "text": "NEW DESIGN",
+        "label": "NEW DESIGN",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          21,
+          185,
+          227,
+          257
+        ]
+      },
+      {
+        "text": "",
+        "label": "Search saved blueprints",
+        "class": "android.widget.EditText",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          230,
+          185,
+          1062,
+          257
+        ]
+      },
+      {
+        "text": "Viper · Wheels",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "clickable": false,
+        "bounds": [
+          120,
+          260,
+          940,
+          266
+        ]
+      },
+      {
+        "text": "Towers-QA-mw53acl0-Saved",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "clickable": false,
+        "bounds": [
+          120,
+          289,
+          940,
+          338
+        ]
+      },
+      {
+        "text": "Viper · Wheels",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "clickable": false,
+        "bounds": [
+          120,
+          338,
+          940,
+          388
+        ]
+      },
+      {
+        "text": "OPEN",
+        "label": "OPEN Towers-QA-mw53acl0-Saved",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          943,
+          302,
+          1047,
+          374
+        ]
+      },
+      {
+        "text": "Towers-QA-mw55dyeq-Saved",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "clickable": false,
+        "bounds": [
+          120,
+          411,
+          940,
+          460
+        ]
+      },
+      {
+        "text": "Viper · Wheels",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "clickable": false,
+        "bounds": [
+          120,
+          460,
+          940,
+          510
+        ]
+      },
+      {
+        "text": "OPEN",
+        "label": "OPEN Towers-QA-mw55dyeq-Saved",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          943,
+          424,
+          1047,
+          496
+        ]
+      },
+      {
+        "text": "Towers-QA-mw56wlml-Draft",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "clickable": false,
+        "bounds": [
+          120,
+          533,
+          940,
+          582
+        ]
+      },
+      {
+        "text": "Viper · Wheels",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "clickable": false,
+        "bounds": [
+          120,
+          582,
+          940,
+          588
+        ]
+      },
+      {
+        "text": "OPEN",
+        "label": "OPEN Towers-QA-mw56wlml-Draft",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "clickable": true,
+        "bounds": [
+          943,
+          546,
+          1047,
+          588
+        ]
+      }
+    ]
+  },
+  "pausedAt": 62502
+}

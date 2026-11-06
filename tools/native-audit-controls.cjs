@@ -1,0 +1,32 @@
+'use strict';
+// ADB touches operate real Android Views and the WebView. CDP reads actual state.
+const assert=require('node:assert/strict');
+const {adb,delay,screen}=require('./native-live.cjs');
+module.exports=function controls(c,report){
+ const ui=()=>c.evaluate('JSON.parse(BlockNightAndroid.nativeDiagnostics())');
+ async function tap(label){
+  const end=Date.now()+8000;
+  while(Date.now()<end){
+   const d=await ui();assert.notEqual(d.gameVisible,false,'active game must be visible');
+   if(d.layoutPending||!d.windowFocused||d.listScrolling){await delay(60);continue;}
+   const v=d.views.find(v=>(v.label===label||v.text===label||v.text?.toLowerCase()===label.toLowerCase())&&v.enabled&&v.bounds[3]-v.bounds[1]>=d.minimumTouchPx);
+   if(v){const [x,y,r,b]=v.bounds;adb('shell','input','tap',String(Math.round((x+r)/2)),String(Math.round((y+b)/2)));if(d.dialog)await c.wait(`!JSON.parse(BlockNightAndroid.nativeDiagnostics()).dialog||JSON.parse(BlockNightAndroid.nativeDiagnostics()).dialogGeneration!==${d.dialogGeneration}`,5000);else if(v.class.endsWith('$NativePicker')||label==='MORE'||label==='Production quantity'||label.startsWith('OPEN '))await c.wait(`(()=>{const d=JSON.parse(BlockNightAndroid.nativeDiagnostics());return d.dialog&&d.dialogGeneration>${d.dialogGeneration}&&!d.layoutPending&&d.windowFocused;})()`,8000);return;}
+   await delay(80);
+  }
+  throw Error('Real native control unavailable: '+label);
+ }
+ async function scrollTo(label){for(let i=0;i<9;i++){const d=await ui();if(d.views.some(v=>(v.label===label||v.text===label)&&v.bounds[3]-v.bounds[1]>=d.minimumTouchPx))return;const png=adb('exec-out','screencap','-p'),height=png.readUInt32BE(20),items=d.dialog?d.views.filter(v=>v.class==='android.widget.TextView'):[],first=items[0]?.bounds,last=items.at(-1)?.bounds;let x=first?Math.round((first[0]+first[2])/2):Math.round(d.stageWidth*.7),bottom=last?last[3]-Math.round(d.minimumTouchPx*.2):Math.round(height*.85),top=first?first[1]+Math.round(d.minimumTouchPx*.4):Math.round(height*.45);if(d.page==='factory'&&!d.dialog&&label.startsWith('PRODUCE ')){const b=d.listBounds;assert.ok(b&&b[3]>b[1],'measured native factory catalogue');x=Math.round((b[0]+b[2])/2);bottom=b[3]-Math.round(d.minimumTouchPx*.25);top=b[1]+Math.round(d.minimumTouchPx*.5);}if(d.page==='build'&&!d.dialog){const b=d.listBounds;assert.ok(b&&b[3]>b[1],'measured real native build ListView');x=Math.round((b[0]+b[2])/2);bottom=b[3]-Math.round(d.minimumTouchPx*.25);top=b[1]+Math.round(d.minimumTouchPx*.5);const names=await c.evaluate('__warzoneCommands.model().buildings.map(b=>b.name)'),wanted=names.indexOf(label.replace(/^(BUILD|RESELECT) /,'')),first=d.views.find(v=>/^(BUILD|RESELECT) /.test(v.label));if(wanted>=0&&first&&wanted<=names.indexOf(first.label.replace(/^(BUILD|RESELECT) /,'')))[top,bottom]=[bottom,top];}adb('shell','input','swipe',String(x),String(bottom),String(x),String(top),'500');await c.wait('!JSON.parse(BlockNightAndroid.nativeDiagnostics()).listScrolling',5000);await delay(150);}throw Error('Control outside scroll: '+label);}
+ async function menu(label){await tap('MORE');await scrollTo(label);await tap(label);}
+ async function settle(){await c.wait('!__warzoneCommands.report().pending&&!__warzoneCommands.report().pendingItem&&!__warzoneCommands.report().buildingOpening&&!__warzoneCommands.report().exitingBuild&&!__kalaWarzoneTouch.report().pendingClicks',20000);}
+ async function close(){const d=await ui();if(d.page)await tap(d.page==='build'?'EXIT':'BACK TO BATTLE');await c.wait('JSON.parse(BlockNightAndroid.nativeDiagnostics()).page===""');await settle();}
+ async function point(x,y){const d=await ui(),v=await c.host('({w:innerWidth,h:innerHeight})'),png=adb('exec-out','screencap','-p');return {x:Math.round(x*d.stageWidth/v.w),y:Math.round(png.readUInt32BE(20)-d.stageHeight+y*d.stageHeight/v.h)};}
+ async function rawTouch(x,y){const p=await point(x,y);adb('shell','input','tap',String(p.x),String(p.y));await c.wait('!__kalaWarzoneTouch.report().pendingClicks',6000);}
+ async function touch(x,y){await rawTouch(x,y);await settle();}
+ async function swipe(a,b,ms=420){const p=await point(...a),q=await point(...b);adb('shell','input','swipe',String(p.x),String(p.y),String(q.x),String(q.y),String(ms));await settle();}
+ async function camera(x,y){assert.equal(await c.evaluate('__warzoneCommands.report().nativeHudHidden'),false);const [mw,mh]=await c.evaluate('[__warzoneCommands.report().snapshot.mapWidth,__warzoneCommands.report().snapshot.mapHeight]');for(const inverted of [true,false]){const p=await c.evaluate(`({x:innerWidth-120+(${inverted?mw-x:x}-${mw}/2)*${192/Math.max(mw,mh)},y:innerHeight-120+(${inverted?mh-y:y}-${mh}/2)*${192/Math.max(mw,mh)}})`);await touch(p.x,p.y);await c.evaluate('WarzoneTerrain.active(true);true');const f=await c.evaluate('__kalaWarzoneTouch.report().nativeRenderFrames');await c.wait(`__kalaWarzoneTouch.report().nativeRenderFrames>${f+3}`);const centre=await c.evaluate('WarzoneTerrain.pick(innerWidth/2,innerHeight/2)');if(centre&&Math.hypot(centre.x-x,centre.y-y)<8)return;}throw Error('Radar did not reach observed map site.');}
+ async function tile(x,y){const p=await c.evaluate(`(()=>{let z=(__warzoneCommands.report().snapshot.selectedUnits[0]?.z||0)*128;const wx=(${x}+.5)*128,wy=(${y}+.5)*128;for(let i=0;i<30;i++){const p=WarzoneTerrain.project(wx,wy,z),q=p&&WarzoneTerrain.pick(p.x,p.y);if(!q)throw Error('Site not visible');if(Math.hypot(q.worldX-wx,q.worldY-wy)<2)return p;z=(z+q.height)/2;}throw Error('Projection did not converge');})()`);await touch(p.x,p.y);}
+ async function capture(name){await c.paint();screen(name);(report.cases??=[]).push(name);}
+ async function resume(){const a=await c.evaluate('__warzoneTowersWaves.report().snapshot.gameTime');await delay(1100);assert.equal(a,await c.evaluate('__warzoneTowersWaves.report().snapshot.gameTime'),'prepared fixture is paused');await c.evaluate('__kalaWarzoneTouch.nativePressKey("Escape","Escape",27);true');await c.wait('__warzoneTowersWaves.report().snapshot.gameTime>'+a);await settle();}
+ async function pause(){await close();await c.evaluate('__kalaWarzoneTouch.nativePressKey("Escape","Escape",27);true');await delay(1100);const a=await c.evaluate('__warzoneTowersWaves.report().snapshot.gameTime');await delay(1100);assert.equal(a,await c.evaluate('__warzoneTowersWaves.report().snapshot.gameTime'),'native simulation is paused');report.pausedAt=a;}
+ return {ui,tap,scrollTo,menu,settle,close,point,rawTouch,touch,swipe,camera,tile,capture,resume,pause};
+};

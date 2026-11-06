@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "passed": true,
+  "candidateAPK_SHA256": "be349d592e4ee77f706b7630c2e4c3b27a9017aab1be62085432e27f746bb923",
+  "versionName": "6.0-native-ui",
+  "versionCode": 63,
+  "requiredReports": [
+    "active-module-checks.json",
+    "audit-editor.json",
+    "audit-native-build-returns.json",
+    "audit-native-field-toggles.json",
+    "audit-native-field.json",
+    "audit-native-gestures.json",
+    "audit-native-lifecycle.json",
+    "audit-native-menus-pause-load.json",
+    "audit-native-narrow-build.json",
+    "audit-native-research-completion.json",
+    "audit-native-returns.json",
+    "audit-native-td1.json",
+    "audit-phone-layout.json",
+    "audit-production.json",
+    "audit-remove-research.json",
+    "audit-research.json",
+    "audit-screens.json",
+    "checkpoint-restores.json",
+    "engine-preservation.json",
+    "native-package.json",
+    "native-transport-files.json",
+    "signature-and-fallback.json",
+    "source-build-match.json"
+  ],
+  "scope": "Finite exact-APK native Android UI and engine gameplay journeys on Dustfall and Iron Valley; not a full native 30-round playthrough.",
+  "testEnvironment": {
+    "device": "emulator-5556",
+    "avd": "Warzone_Help_QA_220604",
+    "graphics": "Normal / software-emulator renderer",
+    "audio": "disabled",
+    "profiles": [
+      {
+        "viewportPx": [
+          1080,
+          600
+        ],
+        "densityDpi": 240,
+        "systemFontScale": 1.3
+      },
+      {
+        "viewportPx": [
+          2400,
+          1080
+        ],
+        "densityDpi": 240,
+        "systemFontScale": 1.0
+      },
+      {
+        "viewportPx": [
+          2400,
+          1080
+        ],
+        "densityDpi": 420,
+        "systemFontScale": 1.3
+      }
+    ],
+    "appInterfaceSizes": [
+      "Standard",
+      "Extra large"
+    ]
+  },
+  "fixtures": {
+    "ordinaryNativeQuickSavesRestoredAsCompleteFiles": true,
+    "unitsPowerResearchGranted": false,
+    "resultScreenUsesExplicitUICallbackFixture": true,
+    "nativeVictoryClaim": false,
+    "rulesHarness30RoundsIsNotNativeEndurance": true
+  },
+  "remainingBrowserRendering": [
+    "Official WebGL/WASM battlefield, radar, engine messages and queued green blueprints",
+    "Stock Warzone pause/save/load, statistics and commander menus"
+  ],
+  "limits": [
+    "No physical-device rendering/audio/FPS certification",
+    "Software-emulator black terrain remains",
+    "No complete native 30-round endurance run",
+    "Multitouch checks dispatched into the real WebView through CDP; not a physical touchscreen certification",
+    "Private blueprint storage is removed by uninstall/app-data clearing"
+  ],
+  "historicalEvidence": "Older failure snapshots and other qa/native-ui directories are retained as intermediate diagnosis records. The 23 required current-hash reports determine this delivery status.",
+  "report": "../REPORT.md"
+}

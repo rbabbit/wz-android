@@ -213,3 +213,14 @@ body[data-field-compact=false][data-field-expanded=true] #wt-build-sidebar{botto
 body[data-command-page] #wt-field-toggle,body[data-research=true] #wt-field-toggle,body[data-command-page] #wt-placement-map,body[data-research=true] #wt-placement-map{display:none}
 @keyframes wt-spin{to{transform:rotate(360deg)}}
 @media(prefers-reduced-motion:reduce){.wt-sidebar-spinner,#wt-sidebar-catalogue button.loading:before{animation:none}}
+
+/* Keep complete catalogue rows and their full names inside the viewport. */
+#wt-sidebar-catalogue{grid-auto-rows:var(--wt-catalogue-row,86px);scroll-snap-type:y mandatory;scroll-padding:2px 0 7px}
+#wt-sidebar-catalogue>button{grid-template-rows:var(--wt-build-art,47px) minmax(min-content,1fr);scroll-snap-align:start}
+#wt-sidebar-catalogue img{height:var(--wt-build-art,47px)}
+#wt-sidebar-catalogue strong{overflow:visible;white-space:normal;min-height:min-content}
+#wt-sidebar-queue .wt-site-number{width:24px;font-size:12px}
+#wt-sidebar-queue h2 span{white-space:nowrap;font-size:8px}
+#wt-sidebar-queue .wt-site-row small{white-space:nowrap;font-size:8px}
+.wt-site-row .wt-site-number{width:26px}
+#wt-sidebar-catalogue{padding-bottom:0;scroll-padding-bottom:0}

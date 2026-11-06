@@ -1,0 +1,1570 @@
+{
+  "started": "2026-11-06T18:29:34.776Z",
+  "seeded": false,
+  "cases": [
+    "compact-enlarged-research",
+    "compact-enlarged-factory"
+  ],
+  "installedAPK_SHA256": "ae760cab8aaf74835a381f72a5145f16b47ff7273a4be8d90ebf8111be0e39a7",
+  "research": {
+    "implementation": "android.view",
+    "gameVisible": true,
+    "page": "research",
+    "pendingRequests": 0,
+    "navigationPending": false,
+    "selectedFactory": 0,
+    "productionQuantity": 1,
+    "selectedLab": 160169,
+    "enginePaused": false,
+    "headerClass": "android.widget.LinearLayout",
+    "headerBounds": [
+      0,
+      0,
+      1080,
+      72
+    ],
+    "mergedHeaderStatus": false,
+    "controlScale": 1.4,
+    "panelClass": "android.widget.LinearLayout",
+    "panelBounds": [
+      0,
+      72,
+      1080,
+      600
+    ],
+    "listBounds": [
+      0,
+      146,
+      718,
+      600
+    ],
+    "queueBounds": [
+      738,
+      146,
+      1062,
+      600
+    ],
+    "feedback": {
+      "x": 0,
+      "y": 0,
+      "started": 0
+    },
+    "listClass": "com.rbabbit.blocknight.warzone.TowersNativeUi$StableList",
+    "listSuperclass": "android.widget.ListView",
+    "editorClass": "",
+    "stageWidth": 1080,
+    "stageHeight": 528,
+    "minimumTouchPx": 72,
+    "viewCount": 86,
+    "dialog": false,
+    "dialogGeneration": 3,
+    "listScrolling": false,
+    "windowFocused": true,
+    "layoutPending": false,
+    "engineClass": "com.rbabbit.blocknight.warzone.MainActivity$EngineWebView",
+    "views": [
+      {
+        "text": "Build",
+        "label": "BUILD",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 72,
+        "availableTextWidthPx": 72,
+        "textLayoutHeightPx": 38,
+        "availableTextHeightPx": 72,
+        "viewWidthPx": 102,
+        "clickable": true,
+        "bounds": [
+          12,
+          0,
+          114,
+          72
+        ]
+      },
+      {
+        "text": "Tech",
+        "label": "TECH",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 71,
+        "availableTextWidthPx": 71,
+        "textLayoutHeightPx": 38,
+        "availableTextHeightPx": 72,
+        "viewWidthPx": 101,
+        "clickable": true,
+        "bounds": [
+          114,
+          0,
+          215,
+          72
+        ]
+      },
+      {
+        "text": "Factory",
+        "label": "FACTORY",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 108,
+        "availableTextWidthPx": 108,
+        "textLayoutHeightPx": 38,
+        "availableTextHeightPx": 72,
+        "viewWidthPx": 138,
+        "clickable": true,
+        "bounds": [
+          215,
+          0,
+          353,
+          72
+        ]
+      },
+      {
+        "text": "Design",
+        "label": "DESIGN",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 98,
+        "availableTextWidthPx": 98,
+        "textLayoutHeightPx": 38,
+        "availableTextHeightPx": 72,
+        "viewWidthPx": 128,
+        "clickable": true,
+        "bounds": [
+          353,
+          0,
+          481,
+          72
+        ]
+      },
+      {
+        "text": "2,412 power",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 175,
+        "availableTextWidthPx": 187,
+        "textLayoutHeightPx": 38,
+        "availableTextHeightPx": 72,
+        "viewWidthPx": 187,
+        "clickable": false,
+        "bounds": [
+          521,
+          0,
+          708,
+          72
+        ]
+      },
+      {
+        "text": "Wave 1 / 30\nNext in 1:00",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 152,
+        "availableTextWidthPx": 164,
+        "textLayoutHeightPx": 70,
+        "availableTextHeightPx": 72,
+        "viewWidthPx": 164,
+        "clickable": false,
+        "bounds": [
+          708,
+          0,
+          872,
+          72
+        ]
+      },
+      {
+        "text": "Skip",
+        "label": "SKIP WAVE",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 62,
+        "availableTextWidthPx": 62,
+        "textLayoutHeightPx": 38,
+        "availableTextHeightPx": 72,
+        "viewWidthPx": 92,
+        "clickable": true,
+        "bounds": [
+          872,
+          0,
+          964,
+          72
+        ]
+      },
+      {
+        "text": "More",
+        "label": "MORE",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 74,
+        "availableTextWidthPx": 74,
+        "textLayoutHeightPx": 38,
+        "availableTextHeightPx": 72,
+        "viewWidthPx": 104,
+        "clickable": true,
+        "bounds": [
+          964,
+          0,
+          1068,
+          72
+        ]
+      },
+      {
+        "text": "",
+        "label": "Choose laboratory",
+        "class": "com.rbabbit.blocknight.warzone.TowersNativeUi$NativePicker",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 0,
+        "availableTextWidthPx": 0,
+        "textLayoutHeightPx": 0,
+        "availableTextHeightPx": 0,
+        "viewWidthPx": 225,
+        "clickable": true,
+        "bounds": [
+          12,
+          72,
+          237,
+          144
+        ]
+      },
+      {
+        "text": "Lab 1",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 78,
+        "availableTextWidthPx": 171,
+        "textLayoutHeightPx": 38,
+        "availableTextHeightPx": 72,
+        "viewWidthPx": 225,
+        "clickable": false,
+        "bounds": [
+          12,
+          72,
+          237,
+          144
+        ]
+      },
+      {
+        "text": "",
+        "label": "null",
+        "class": "com.rbabbit.blocknight.warzone.TowersNativeUi$NativePicker",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 0,
+        "availableTextWidthPx": 0,
+        "textLayoutHeightPx": 0,
+        "availableTextHeightPx": 0,
+        "viewWidthPx": 168,
+        "clickable": true,
+        "bounds": [
+          237,
+          72,
+          405,
+          144
+        ]
+      },
+      {
+        "text": "All tech",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 108,
+        "availableTextWidthPx": 114,
+        "textLayoutHeightPx": 38,
+        "availableTextHeightPx": 72,
+        "viewWidthPx": 168,
+        "clickable": false,
+        "bounds": [
+          237,
+          72,
+          405,
+          144
+        ]
+      },
+      {
+        "text": "",
+        "label": "Search technology",
+        "class": "android.widget.EditText",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 0,
+        "availableTextWidthPx": 549,
+        "textLayoutHeightPx": 38,
+        "availableTextHeightPx": 60,
+        "viewWidthPx": 549,
+        "clickable": true,
+        "bounds": [
+          405,
+          72,
+          954,
+          144
+        ]
+      },
+      {
+        "text": "Battle",
+        "label": "BACK TO BATTLE",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 84,
+        "availableTextWidthPx": 84,
+        "textLayoutHeightPx": 38,
+        "availableTextHeightPx": 72,
+        "viewWidthPx": 114,
+        "clickable": true,
+        "bounds": [
+          954,
+          72,
+          1068,
+          144
+        ]
+      },
+      {
+        "text": "Fuel Injection Engine Mk3",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 391,
+        "availableTextWidthPx": 469,
+        "textLayoutHeightPx": 40,
+        "availableTextHeightPx": 40,
+        "viewWidthPx": 469,
+        "clickable": false,
+        "bounds": [
+          81,
+          154,
+          550,
+          194
+        ]
+      },
+      {
+        "text": "150 power · Vehicles",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 265,
+        "availableTextWidthPx": 460,
+        "textLayoutHeightPx": 35,
+        "availableTextHeightPx": 35,
+        "viewWidthPx": 469,
+        "clickable": false,
+        "bounds": [
+          81,
+          194,
+          550,
+          234
+        ]
+      },
+      {
+        "text": "Queued",
+        "label": "QUEUED Fuel Injection Engine Mk3",
+        "class": "android.widget.Button",
+        "enabled": false,
+        "rowId": "tech:R-Vehicle-Engine03",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 100,
+        "availableTextWidthPx": 120,
+        "textLayoutHeightPx": 35,
+        "availableTextHeightPx": 72,
+        "viewWidthPx": 150,
+        "clickable": true,
+        "bounds": [
+          550,
+          158,
+          700,
+          230
+        ]
+      },
+      {
+        "text": "Hover Propulsion",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 263,
+        "availableTextWidthPx": 469,
+        "textLayoutHeightPx": 40,
+        "availableTextHeightPx": 40,
+        "viewWidthPx": 469,
+        "clickable": false,
+        "bounds": [
+          81,
+          252,
+          550,
+          292
+        ]
+      },
+      {
+        "text": "112 power · Vehicles",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 265,
+        "availableTextWidthPx": 460,
+        "textLayoutHeightPx": 35,
+        "availableTextHeightPx": 35,
+        "viewWidthPx": 469,
+        "clickable": false,
+        "bounds": [
+          81,
+          292,
+          550,
+          332
+        ]
+      },
+      {
+        "text": "Add",
+        "label": "ADD Hover Propulsion",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "rowId": "tech:R-Vehicle-Prop-Hover",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 57,
+        "availableTextWidthPx": 120,
+        "textLayoutHeightPx": 38,
+        "availableTextHeightPx": 72,
+        "viewWidthPx": 150,
+        "clickable": true,
+        "bounds": [
+          550,
+          256,
+          700,
+          328
+        ]
+      },
+      {
+        "text": "HEAT Cannon Shells Mk2",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 386,
+        "availableTextWidthPx": 469,
+        "textLayoutHeightPx": 40,
+        "availableTextHeightPx": 40,
+        "viewWidthPx": 469,
+        "clickable": false,
+        "bounds": [
+          81,
+          350,
+          550,
+          390
+        ]
+      },
+      {
+        "text": "76 power · Weapons",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 262,
+        "availableTextWidthPx": 460,
+        "textLayoutHeightPx": 35,
+        "availableTextHeightPx": 35,
+        "viewWidthPx": 469,
+        "clickable": false,
+        "bounds": [
+          81,
+          390,
+          550,
+          430
+        ]
+      },
+      {
+        "text": "Add",
+        "label": "ADD HEAT Cannon Shells Mk2",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "rowId": "tech:R-Wpn-Cannon-Damage02",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 57,
+        "availableTextWidthPx": 120,
+        "textLayoutHeightPx": 38,
+        "availableTextHeightPx": 72,
+        "viewWidthPx": 150,
+        "clickable": true,
+        "bounds": [
+          550,
+          354,
+          700,
+          426
+        ]
+      },
+      {
+        "text": "Medium Cannon",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 249,
+        "availableTextWidthPx": 469,
+        "textLayoutHeightPx": 40,
+        "availableTextHeightPx": 40,
+        "viewWidthPx": 469,
+        "clickable": false,
+        "bounds": [
+          81,
+          448,
+          550,
+          488
+        ]
+      },
+      {
+        "text": "112 power · Weapons",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 278,
+        "availableTextWidthPx": 460,
+        "textLayoutHeightPx": 35,
+        "availableTextHeightPx": 35,
+        "viewWidthPx": 469,
+        "clickable": false,
+        "bounds": [
+          81,
+          488,
+          550,
+          528
+        ]
+      },
+      {
+        "text": "Add",
+        "label": "ADD Medium Cannon",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "rowId": "tech:R-Wpn-Cannon2Mk1",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 57,
+        "availableTextWidthPx": 120,
+        "textLayoutHeightPx": 38,
+        "availableTextHeightPx": 72,
+        "viewWidthPx": 150,
+        "clickable": true,
+        "bounds": [
+          550,
+          452,
+          700,
+          524
+        ]
+      },
+      {
+        "text": "High Temperature Flamer Gel Mk3",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 520,
+        "availableTextWidthPx": 469,
+        "textLayoutHeightPx": 80,
+        "availableTextHeightPx": 80,
+        "viewWidthPx": 469,
+        "clickable": false,
+        "bounds": [
+          81,
+          546,
+          550,
+          600
+        ]
+      },
+      {
+        "text": "Add",
+        "label": "ADD High Temperature Flamer Gel Mk3",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "rowId": "tech:R-Wpn-Flamer-Damage03",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 57,
+        "availableTextWidthPx": 120,
+        "textLayoutHeightPx": 38,
+        "availableTextHeightPx": 72,
+        "viewWidthPx": 150,
+        "clickable": true,
+        "bounds": [
+          550,
+          570,
+          700,
+          600
+        ]
+      },
+      {
+        "text": "LAB 1 · RESEARCHING",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 287,
+        "availableTextWidthPx": 324,
+        "textLayoutHeightPx": 33,
+        "availableTextHeightPx": 33,
+        "viewWidthPx": 324,
+        "clickable": false,
+        "bounds": [
+          738,
+          155,
+          1062,
+          188
+        ]
+      },
+      {
+        "text": "Medium Body - Cobra",
+        "label": "Medium Body - Cobra",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 327,
+        "availableTextWidthPx": 324,
+        "textLayoutHeightPx": 80,
+        "availableTextHeightPx": 80,
+        "viewWidthPx": 324,
+        "clickable": false,
+        "bounds": [
+          738,
+          188,
+          1062,
+          268
+        ]
+      },
+      {
+        "text": "~29% · ~0:33 remaining",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 305,
+        "availableTextWidthPx": 324,
+        "textLayoutHeightPx": 35,
+        "availableTextHeightPx": 35,
+        "viewWidthPx": 324,
+        "clickable": false,
+        "bounds": [
+          738,
+          276,
+          1062,
+          311
+        ]
+      },
+      {
+        "text": "NEXT IN LAB 1",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 187,
+        "availableTextWidthPx": 243,
+        "textLayoutHeightPx": 33,
+        "availableTextHeightPx": 33,
+        "viewWidthPx": 252,
+        "clickable": false,
+        "bounds": [
+          738,
+          328,
+          990,
+          361
+        ]
+      },
+      {
+        "text": "Fuel Injection Engine Mk3",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 367,
+        "availableTextWidthPx": 252,
+        "textLayoutHeightPx": 76,
+        "availableTextHeightPx": 76,
+        "viewWidthPx": 252,
+        "clickable": false,
+        "bounds": [
+          738,
+          361,
+          990,
+          442
+        ]
+      },
+      {
+        "text": "×",
+        "label": "REMOVE Fuel Injection Engine Mk3",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "rowId": "rq:R-Vehicle-Engine03",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 23,
+        "availableTextWidthPx": 42,
+        "textLayoutHeightPx": 52,
+        "availableTextHeightPx": 72,
+        "viewWidthPx": 72,
+        "clickable": true,
+        "bounds": [
+          990,
+          349,
+          1062,
+          421
+        ]
+      },
+      {
+        "text": "OTHER LABS",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 166,
+        "availableTextWidthPx": 324,
+        "textLayoutHeightPx": 33,
+        "availableTextHeightPx": 33,
+        "viewWidthPx": 324,
+        "clickable": false,
+        "bounds": [
+          738,
+          450,
+          1062,
+          483
+        ]
+      },
+      {
+        "text": "Lab 2 · Composite Alloys",
+        "label": "SELECT Lab 2",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 343,
+        "availableTextWidthPx": 324,
+        "textLayoutHeightPx": 74,
+        "availableTextHeightPx": 73,
+        "viewWidthPx": 324,
+        "clickable": true,
+        "bounds": [
+          738,
+          485,
+          1062,
+          570
+        ]
+      },
+      {
+        "text": "Lab 3 · Idle",
+        "label": "SELECT Lab 3",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 149,
+        "availableTextWidthPx": 324,
+        "textLayoutHeightPx": 37,
+        "availableTextHeightPx": 73,
+        "viewWidthPx": 324,
+        "clickable": true,
+        "bounds": [
+          738,
+          572,
+          1062,
+          600
+        ]
+      }
+    ]
+  },
+  "factory": {
+    "implementation": "android.view",
+    "gameVisible": true,
+    "page": "factory",
+    "pendingRequests": 0,
+    "navigationPending": false,
+    "selectedFactory": 160157,
+    "productionQuantity": 20,
+    "selectedLab": 160169,
+    "enginePaused": false,
+    "headerClass": "android.widget.LinearLayout",
+    "headerBounds": [
+      0,
+      0,
+      1080,
+      72
+    ],
+    "mergedHeaderStatus": false,
+    "controlScale": 1.4,
+    "panelClass": "android.widget.LinearLayout",
+    "panelBounds": [
+      0,
+      72,
+      1080,
+      600
+    ],
+    "listBounds": [
+      0,
+      146,
+      718,
+      600
+    ],
+    "queueBounds": [
+      738,
+      146,
+      1062,
+      600
+    ],
+    "feedback": {
+      "x": 0,
+      "y": 0,
+      "started": 0
+    },
+    "listClass": "com.rbabbit.blocknight.warzone.TowersNativeUi$StableList",
+    "listSuperclass": "android.widget.ListView",
+    "editorClass": "",
+    "stageWidth": 1080,
+    "stageHeight": 528,
+    "minimumTouchPx": 72,
+    "viewCount": 78,
+    "dialog": false,
+    "dialogGeneration": 5,
+    "listScrolling": false,
+    "windowFocused": true,
+    "layoutPending": false,
+    "engineClass": "com.rbabbit.blocknight.warzone.MainActivity$EngineWebView",
+    "views": [
+      {
+        "text": "Build",
+        "label": "BUILD",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 72,
+        "availableTextWidthPx": 72,
+        "textLayoutHeightPx": 38,
+        "availableTextHeightPx": 72,
+        "viewWidthPx": 102,
+        "clickable": true,
+        "bounds": [
+          12,
+          0,
+          114,
+          72
+        ]
+      },
+      {
+        "text": "Tech",
+        "label": "TECH",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 71,
+        "availableTextWidthPx": 71,
+        "textLayoutHeightPx": 38,
+        "availableTextHeightPx": 72,
+        "viewWidthPx": 101,
+        "clickable": true,
+        "bounds": [
+          114,
+          0,
+          215,
+          72
+        ]
+      },
+      {
+        "text": "Factory",
+        "label": "FACTORY",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 108,
+        "availableTextWidthPx": 108,
+        "textLayoutHeightPx": 38,
+        "availableTextHeightPx": 72,
+        "viewWidthPx": 138,
+        "clickable": true,
+        "bounds": [
+          215,
+          0,
+          353,
+          72
+        ]
+      },
+      {
+        "text": "Design",
+        "label": "DESIGN",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 98,
+        "availableTextWidthPx": 98,
+        "textLayoutHeightPx": 38,
+        "availableTextHeightPx": 72,
+        "viewWidthPx": 128,
+        "clickable": true,
+        "bounds": [
+          353,
+          0,
+          481,
+          72
+        ]
+      },
+      {
+        "text": "2,415 power",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 175,
+        "availableTextWidthPx": 187,
+        "textLayoutHeightPx": 38,
+        "availableTextHeightPx": 72,
+        "viewWidthPx": 187,
+        "clickable": false,
+        "bounds": [
+          521,
+          0,
+          708,
+          72
+        ]
+      },
+      {
+        "text": "Wave 1 / 30\nNext in 0:56",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 152,
+        "availableTextWidthPx": 164,
+        "textLayoutHeightPx": 70,
+        "availableTextHeightPx": 72,
+        "viewWidthPx": 164,
+        "clickable": false,
+        "bounds": [
+          708,
+          0,
+          872,
+          72
+        ]
+      },
+      {
+        "text": "Skip",
+        "label": "SKIP WAVE",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 62,
+        "availableTextWidthPx": 62,
+        "textLayoutHeightPx": 38,
+        "availableTextHeightPx": 72,
+        "viewWidthPx": 92,
+        "clickable": true,
+        "bounds": [
+          872,
+          0,
+          964,
+          72
+        ]
+      },
+      {
+        "text": "More",
+        "label": "MORE",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 74,
+        "availableTextWidthPx": 74,
+        "textLayoutHeightPx": 38,
+        "availableTextHeightPx": 72,
+        "viewWidthPx": 104,
+        "clickable": true,
+        "bounds": [
+          964,
+          0,
+          1068,
+          72
+        ]
+      },
+      {
+        "text": "",
+        "label": "Choose factory",
+        "class": "com.rbabbit.blocknight.warzone.TowersNativeUi$NativePicker",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 0,
+        "availableTextWidthPx": 0,
+        "textLayoutHeightPx": 0,
+        "availableTextHeightPx": 0,
+        "viewWidthPx": 207,
+        "clickable": true,
+        "bounds": [
+          12,
+          72,
+          219,
+          144
+        ]
+      },
+      {
+        "text": "Factory 1",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 134,
+        "availableTextWidthPx": 153,
+        "textLayoutHeightPx": 38,
+        "availableTextHeightPx": 72,
+        "viewWidthPx": 207,
+        "clickable": false,
+        "bounds": [
+          12,
+          72,
+          219,
+          144
+        ]
+      },
+      {
+        "text": "−",
+        "label": "Decrease production quantity",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 18,
+        "availableTextWidthPx": 42,
+        "textLayoutHeightPx": 38,
+        "availableTextHeightPx": 72,
+        "viewWidthPx": 72,
+        "clickable": true,
+        "bounds": [
+          219,
+          72,
+          291,
+          144
+        ]
+      },
+      {
+        "text": "Qty 20",
+        "label": "Production quantity",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 93,
+        "availableTextWidthPx": 93,
+        "textLayoutHeightPx": 38,
+        "availableTextHeightPx": 72,
+        "viewWidthPx": 105,
+        "clickable": true,
+        "bounds": [
+          291,
+          72,
+          396,
+          144
+        ]
+      },
+      {
+        "text": "+",
+        "label": "Increase production quantity",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 18,
+        "availableTextWidthPx": 42,
+        "textLayoutHeightPx": 38,
+        "availableTextHeightPx": 72,
+        "viewWidthPx": 72,
+        "clickable": true,
+        "bounds": [
+          396,
+          72,
+          468,
+          144
+        ]
+      },
+      {
+        "text": "",
+        "label": "Search designs",
+        "class": "android.widget.EditText",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 0,
+        "availableTextWidthPx": 486,
+        "textLayoutHeightPx": 38,
+        "availableTextHeightPx": 60,
+        "viewWidthPx": 486,
+        "clickable": true,
+        "bounds": [
+          468,
+          72,
+          954,
+          144
+        ]
+      },
+      {
+        "text": "Battle",
+        "label": "BACK TO BATTLE",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 84,
+        "availableTextWidthPx": 84,
+        "textLayoutHeightPx": 38,
+        "availableTextHeightPx": 72,
+        "viewWidthPx": 114,
+        "clickable": true,
+        "bounds": [
+          954,
+          72,
+          1068,
+          144
+        ]
+      },
+      {
+        "text": "Truck Viper Wheels",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 295,
+        "availableTextWidthPx": 517,
+        "textLayoutHeightPx": 40,
+        "availableTextHeightPx": 40,
+        "viewWidthPx": 517,
+        "clickable": false,
+        "bounds": [
+          81,
+          154,
+          598,
+          194
+        ]
+      },
+      {
+        "text": "62 power · Existing design",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 333,
+        "availableTextWidthPx": 508,
+        "textLayoutHeightPx": 35,
+        "availableTextHeightPx": 35,
+        "viewWidthPx": 517,
+        "clickable": false,
+        "bounds": [
+          81,
+          194,
+          598,
+          234
+        ]
+      },
+      {
+        "text": "Build",
+        "label": "PRODUCE Truck Viper Wheels",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "rowId": "template:native:[\"Truck Viper Wheels\",\"Body1REC\",\"wheeled01\",[],\"Spade1Mk1\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 72,
+        "availableTextWidthPx": 72,
+        "textLayoutHeightPx": 38,
+        "availableTextHeightPx": 72,
+        "viewWidthPx": 102,
+        "clickable": true,
+        "bounds": [
+          598,
+          158,
+          700,
+          230
+        ]
+      },
+      {
+        "text": "Design 1",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 132,
+        "availableTextWidthPx": 517,
+        "textLayoutHeightPx": 40,
+        "availableTextHeightPx": 40,
+        "viewWidthPx": 517,
+        "clickable": false,
+        "bounds": [
+          81,
+          252,
+          598,
+          292
+        ]
+      },
+      {
+        "text": "55 power · Saved blueprint",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 338,
+        "availableTextWidthPx": 508,
+        "textLayoutHeightPx": 35,
+        "availableTextHeightPx": 35,
+        "viewWidthPx": 517,
+        "clickable": false,
+        "bounds": [
+          81,
+          292,
+          598,
+          332
+        ]
+      },
+      {
+        "text": "Build",
+        "label": "PRODUCE Design 1",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "rowId": "saved:design-1793848581773-1",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 72,
+        "availableTextWidthPx": 72,
+        "textLayoutHeightPx": 38,
+        "availableTextHeightPx": 72,
+        "viewWidthPx": 102,
+        "clickable": true,
+        "bounds": [
+          598,
+          256,
+          700,
+          328
+        ]
+      },
+      {
+        "text": "Design 2",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 132,
+        "availableTextWidthPx": 517,
+        "textLayoutHeightPx": 40,
+        "availableTextHeightPx": 40,
+        "viewWidthPx": 517,
+        "clickable": false,
+        "bounds": [
+          81,
+          350,
+          598,
+          390
+        ]
+      },
+      {
+        "text": "55 power · Saved blueprint",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 338,
+        "availableTextWidthPx": 508,
+        "textLayoutHeightPx": 35,
+        "availableTextHeightPx": 35,
+        "viewWidthPx": 517,
+        "clickable": false,
+        "bounds": [
+          81,
+          390,
+          598,
+          430
+        ]
+      },
+      {
+        "text": "Build",
+        "label": "PRODUCE Design 2",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "rowId": "saved:design-1793850572642-1",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 72,
+        "availableTextWidthPx": 72,
+        "textLayoutHeightPx": 38,
+        "availableTextHeightPx": 72,
+        "viewWidthPx": 102,
+        "clickable": true,
+        "bounds": [
+          598,
+          354,
+          700,
+          426
+        ]
+      },
+      {
+        "text": "Design 3",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 132,
+        "availableTextWidthPx": 517,
+        "textLayoutHeightPx": 40,
+        "availableTextHeightPx": 40,
+        "viewWidthPx": 517,
+        "clickable": false,
+        "bounds": [
+          81,
+          448,
+          598,
+          488
+        ]
+      },
+      {
+        "text": "55 power · Saved blueprint",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 338,
+        "availableTextWidthPx": 508,
+        "textLayoutHeightPx": 35,
+        "availableTextHeightPx": 35,
+        "viewWidthPx": 517,
+        "clickable": false,
+        "bounds": [
+          81,
+          488,
+          598,
+          528
+        ]
+      },
+      {
+        "text": "Build",
+        "label": "PRODUCE Design 3",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "rowId": "saved:design-1793851167704-1",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 72,
+        "availableTextWidthPx": 72,
+        "textLayoutHeightPx": 38,
+        "availableTextHeightPx": 72,
+        "viewWidthPx": 102,
+        "clickable": true,
+        "bounds": [
+          598,
+          452,
+          700,
+          524
+        ]
+      },
+      {
+        "text": "Design 4",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 132,
+        "availableTextWidthPx": 517,
+        "textLayoutHeightPx": 40,
+        "availableTextHeightPx": 40,
+        "viewWidthPx": 517,
+        "clickable": false,
+        "bounds": [
+          81,
+          546,
+          598,
+          586
+        ]
+      },
+      {
+        "text": "55 power · Saved blueprint",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 338,
+        "availableTextWidthPx": 508,
+        "textLayoutHeightPx": 35,
+        "availableTextHeightPx": 35,
+        "viewWidthPx": 517,
+        "clickable": false,
+        "bounds": [
+          81,
+          586,
+          598,
+          600
+        ]
+      },
+      {
+        "text": "Build",
+        "label": "PRODUCE Design 4",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "rowId": "saved:design-1793851980075-1",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 72,
+        "availableTextWidthPx": 72,
+        "textLayoutHeightPx": 38,
+        "availableTextHeightPx": 72,
+        "viewWidthPx": 102,
+        "clickable": true,
+        "bounds": [
+          598,
+          550,
+          700,
+          600
+        ]
+      },
+      {
+        "text": "FACTORY 1 · IDLE",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 221,
+        "availableTextWidthPx": 324,
+        "textLayoutHeightPx": 33,
+        "availableTextHeightPx": 33,
+        "viewWidthPx": 324,
+        "clickable": false,
+        "bounds": [
+          738,
+          155,
+          1062,
+          188
+        ]
+      },
+      {
+        "text": "Idle",
+        "label": "Idle",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 56,
+        "availableTextWidthPx": 324,
+        "textLayoutHeightPx": 40,
+        "availableTextHeightPx": 80,
+        "viewWidthPx": 324,
+        "clickable": false,
+        "bounds": [
+          738,
+          188,
+          1062,
+          268
+        ]
+      },
+      {
+        "text": "Choose a design",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 214,
+        "availableTextWidthPx": 324,
+        "textLayoutHeightPx": 35,
+        "availableTextHeightPx": 35,
+        "viewWidthPx": 324,
+        "clickable": false,
+        "bounds": [
+          738,
+          276,
+          1062,
+          311
+        ]
+      },
+      {
+        "text": "No waiting units",
+        "label": "null",
+        "class": "android.widget.TextView",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 203,
+        "availableTextWidthPx": 324,
+        "textLayoutHeightPx": 33,
+        "availableTextHeightPx": 33,
+        "viewWidthPx": 324,
+        "clickable": false,
+        "bounds": [
+          738,
+          322,
+          1062,
+          355
+        ]
+      },
+      {
+        "text": "Factory 2 · Idle",
+        "label": "SELECT Factory 2",
+        "class": "android.widget.Button",
+        "enabled": true,
+        "rowId": "",
+        "ellipsizedCharacters": 0,
+        "textWidthPx": 202,
+        "availableTextWidthPx": 324,
+        "textLayoutHeightPx": 37,
+        "availableTextHeightPx": 73,
+        "viewWidthPx": 324,
+        "clickable": true,
+        "bounds": [
+          738,
+          357,
+          1062,
+          442
+        ]
+      }
+    ]
+  },
+  "pausedAt": 127502,
+  "errors": [],
+  "passed": true
+}

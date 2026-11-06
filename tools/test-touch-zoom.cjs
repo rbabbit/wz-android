@@ -133,7 +133,7 @@ Object.defineProperty(globalThis, "navigator", {
 });
 
 const source = fs.readFileSync(path.join(__dirname,
-    "..", "app", "src", "main", "assets", "warzone-touch-controls.js"), "utf8");
+    "..", "archive", "legacy-html-ui", "warzone-touch-controls.js"), "utf8");
 vm.runInThisContext(source, { filename: "warzone-touch-controls.js" });
 
 const sleep = milliseconds => new Promise(resolve => setTimeout(resolve, milliseconds));

@@ -1,6 +1,6 @@
 'use strict';
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
-const source=fs.readFileSync('app/src/main/assets/warzone-command-pages.js','utf8');
+const source=fs.readFileSync('archive/legacy-html-ui/warzone-command-pages.js','utf8');
 const state={saved:[],draft:{},serial:0,validationSerial:0,saving:new Set(),scroll:{},page:'design'};
 const requests=[],elements=new Map(),notices=[];let persisted=true;
 const c=vm.createContext({state,element:id=>elements.get(id),clearTimeout,setTimeout,JSON,Date,reason:x=>x,

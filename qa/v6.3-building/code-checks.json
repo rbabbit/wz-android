@@ -1,0 +1,31 @@
+{
+  "passed": true,
+  "candidateAPK_SHA256": "4af89fe1e9ac2719f534459d6d8081a8b7b6b918dec21c5c3c63231a05576eae",
+  "checks": [
+    {
+      "script": "tools/test-smooth-building.cjs",
+      "passed": true,
+      "output": "PASS: immediate/repeated selection, immutable rapid mixed orders, accepted-input exit and scoped STOP; no frame freeze or viewport change\n"
+    },
+    {
+      "script": "tools/test-command-bridge.cjs",
+      "passed": true,
+      "output": "PASS: FIFO builds, manual/automatic workers, sticky sessions, STOP, deduplication, validation, factory queues and bounded 100-job polling\nPASS: construction ETA follows actual worker actions/upgrades, pauses and power; modules use observed work; journal never replaces native orders\nPASS: a snapped 2x2 foundation binds to its own queue entry without matching older adjacent buildings\nPASS: native queue handoff preserves progress/completion; sustained cancellation still interrupts\n"
+    },
+    {
+      "script": "tools/test-html-return.cjs",
+      "passed": true,
+      "output": "PASS: consumed transport, exact in-flight/loaded/dead-lab queues, phone template persistence/rollback, research gating, preserved draft, results and Back navigation (code checks only)\n"
+    },
+    {
+      "script": "tools/test-html-design.cjs",
+      "passed": true,
+      "output": "PASS: stale validation, draft identity, duplicate save, save-as-new, failure retry, persistence rollback, native-menu races and required turret slot\n"
+    },
+    {
+      "script": "tools/test-html-input-modes.cjs",
+      "passed": true,
+      "output": "PASS: HTML Patrol/Queue modes stay unarmed; navigation cancels delayed combat input (no emulator)\n"
+    }
+  ]
+}

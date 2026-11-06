@@ -10,8 +10,8 @@ android {
         applicationId = "com.rbabbit.warzonetowers"
         minSdk = 26
         targetSdk = 36
-        versionCode = 62
-        versionName = "5.12-footer"
+        versionCode = 67
+        versionName = "6.4-build-display"
     }
 
     compileOptions {
@@ -26,4 +26,8 @@ android {
 
 dependencies {
     implementation("androidx.webkit:webkit:1.18.0")
+}
+
+tasks.withType<org.gradle.api.tasks.compile.JavaCompile>().configureEach {
+    options.encoding = "UTF-8"
 }

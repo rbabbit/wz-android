@@ -1,0 +1,235 @@
+{
+  "passed": false,
+  "started": "2026-11-07T15:18:49.601Z",
+  "seeded": false,
+  "identity": {
+    "packageId": "com.rbabbit.warzonetowers.lab",
+    "device": "emulator-5556",
+    "candidateAPK_SHA256": "6f143ed3ca0f0678cd805e59fda00d97e8e859373e73b438f725e301f7201734",
+    "installedPath": "/data/app/~~AqPs8xfivFOIwtFpoduDhw==/com.rbabbit.warzonetowers.lab-0CPaC5sn3X7pk7oQww7CSg==/base.apk"
+  },
+  "fixture": "existing ordinary battle with native Pause menu visibly open",
+  "screensRequireVisualInspection": true,
+  "officialGeometry": {
+    "source": "local unchanged Warzone2100 4.7.0 src/ingameop.cpp + ingameop.h + hci.h",
+    "pauseLines": 6,
+    "resumeCentreOffset": -33.5,
+    "quitCentreOffset": 51.5,
+    "quitTouchOffset": 54,
+    "confirmationLines": 3,
+    "confirmCentreOffset": 9.5,
+    "confirmTouchOffset": 10,
+    "explanation": "17px widget rows, 10px margin, 15px buttons; D_H uses 460px base while form anchor is 240px, adding 10px to the centre. Exact-APK screenshot calibration uses CSS offsets because native UI 150% scaling cancels framebuffer DPR; measured fixture is constrained before input."
+  },
+  "before": {
+    "clock": 239002,
+    "session": {
+      "phase": "playing",
+      "result": "",
+      "exitReason": "",
+      "session": "2d512cbf-f1cd-44f8-9e2c-30c3f981ec9b"
+    },
+    "frameInert": false,
+    "frameHidden": false,
+    "frameVisibility": "visible",
+    "page": "",
+    "buildOpen": false,
+    "placement": "",
+    "nativeMenu": "",
+    "nativeBackVisible": false,
+    "exitingBuild": false,
+    "buildingOpening": false,
+    "selectingTrucks": false,
+    "pendingItem": "",
+    "pendingCommands": 1,
+    "pendingClicks": 0,
+    "researchOpen": false,
+    "researchOpening": false,
+    "researchPendingClose": false,
+    "researchRunner": null,
+    "helpOpen": false,
+    "hudVisible": true,
+    "battleActive": true,
+    "mapWidth": 64,
+    "mapHeight": 64
+  },
+  "map": "td2",
+  "pausedClock": 239002,
+  "beforeGhostSites": [],
+  "pauseScreen": "C:\\timerApp\\wz-towers-lab\\qa\\test-04\\quit-return\\quit-journey-01-native-pause.png",
+  "quitTouch": {
+    "hostWidth": 1077,
+    "hostHeight": 598,
+    "frame": {
+      "x": 0,
+      "y": 56,
+      "width": 1076.666748046875,
+      "height": 542
+    },
+    "canvas": {
+      "x": 0,
+      "y": 0,
+      "width": 1077,
+      "height": 542,
+      "pixelWidth": 1616,
+      "pixelHeight": 813
+    },
+    "childPoint": {
+      "x": 538.5,
+      "y": 325
+    },
+    "hostPoint": {
+      "x": 538.5,
+      "y": 381
+    },
+    "hostHit": "warzone-game-frame",
+    "childHit": "canvas",
+    "frameInert": false,
+    "device": {
+      "width": 1080,
+      "height": 600,
+      "fontScale": "1.0"
+    },
+    "coordinateBasis": "Exact-APK native Pause screenshot; Resume offset -32 CSS px, native UI scale 150%",
+    "devicePoint": {
+      "x": 540,
+      "y": 382
+    },
+    "offsetCssPixels": 54
+  },
+  "confirmationPausedClock": 239002,
+  "confirmation": {
+    "clock": 239002,
+    "session": {
+      "phase": "playing",
+      "result": "",
+      "exitReason": "",
+      "session": "2d512cbf-f1cd-44f8-9e2c-30c3f981ec9b"
+    },
+    "frameInert": false,
+    "frameHidden": false,
+    "frameVisibility": "visible",
+    "page": "",
+    "buildOpen": false,
+    "placement": "",
+    "nativeMenu": "",
+    "nativeBackVisible": false,
+    "exitingBuild": false,
+    "buildingOpening": false,
+    "selectingTrucks": false,
+    "pendingItem": "",
+    "pendingCommands": 1,
+    "pendingClicks": 0,
+    "researchOpen": false,
+    "researchOpening": false,
+    "researchPendingClose": false,
+    "researchRunner": null,
+    "helpOpen": false,
+    "hudVisible": true,
+    "battleActive": true,
+    "mapWidth": 64,
+    "mapHeight": 64
+  },
+  "confirmationScreen": "C:\\timerApp\\wz-towers-lab\\qa\\test-04\\quit-return\\quit-journey-02-native-confirmation.png",
+  "confirmTouch": {
+    "hostWidth": 1077,
+    "hostHeight": 598,
+    "frame": {
+      "x": 0,
+      "y": 56,
+      "width": 1076.666748046875,
+      "height": 542
+    },
+    "canvas": {
+      "x": 0,
+      "y": 0,
+      "width": 1077,
+      "height": 542,
+      "pixelWidth": 1616,
+      "pixelHeight": 813
+    },
+    "childPoint": {
+      "x": 538.5,
+      "y": 281
+    },
+    "hostPoint": {
+      "x": 538.5,
+      "y": 337
+    },
+    "hostHit": "warzone-game-frame",
+    "childHit": "canvas",
+    "frameInert": false,
+    "device": {
+      "width": 1080,
+      "height": 600,
+      "fontScale": "1.0"
+    },
+    "coordinateBasis": "Exact-APK native Pause screenshot; Resume offset -32 CSS px, native UI scale 150%",
+    "devicePoint": {
+      "x": 540,
+      "y": 338
+    },
+    "offsetCssPixels": 10
+  },
+  "ended": {
+    "session": {
+      "phase": "ended",
+      "result": "exited",
+      "exitReason": "quit",
+      "session": "2d512cbf-f1cd-44f8-9e2c-30c3f981ec9b"
+    },
+    "frameInert": true,
+    "frameVisibility": "hidden",
+    "hostEnded": "true",
+    "hostPlaying": "false",
+    "headerHidden": true,
+    "dockHidden": true,
+    "page": "",
+    "buildOpen": false,
+    "placement": "",
+    "nativeMenu": "",
+    "snapshotCleared": true,
+    "pending": 0,
+    "battleActive": false,
+    "hudVisible": false,
+    "pendingClicks": 0,
+    "researchOpen": false,
+    "researchOpening": false,
+    "researchRunner": null,
+    "researchPendingClose": false,
+    "ghostSites": [],
+    "ghostPreview": "",
+    "ghostDrawnCache": []
+  },
+  "nativeEndScreen": [
+    {
+      "text": "",
+      "label": "",
+      "bounds": "[0,0][1080,600]"
+    },
+    {
+      "text": "",
+      "label": "",
+      "bounds": "[0,0][1080,600]"
+    },
+    {
+      "text": "",
+      "label": "",
+      "bounds": "[0,0][1080,600]"
+    },
+    {
+      "text": "",
+      "label": "",
+      "bounds": "[0,0][1080,600]"
+    },
+    {
+      "text": "WARZONE TOWERS&#10;&#10;BATTLE ENDED&#10;&#10;Tap to return to the start screen",
+      "label": "",
+      "bounds": "[0,0][1080,600]"
+    }
+  ],
+  "endedScreen": "C:\\timerApp\\wz-towers-lab\\qa\\test-04\\quit-return\\quit-journey-03-neutral-ended.png",
+  "returnedStartScreen": "C:\\timerApp\\wz-towers-lab\\qa\\test-04\\quit-return\\quit-journey-04-returned-start.png",
+  "failure": "Error: CDP timeout Runtime.evaluate after 20000ms\n    at Timeout._onTimeout (C:\\timerApp\\wz-towers-lab\\tools\\native-live.cjs:32:329)\n    at listOnTimeout (node:internal/timers:685:17)\n    at process.processTimers (node:internal/timers:618:7)",
+  "finished": "2026-11-07T15:20:07.298Z"
+}

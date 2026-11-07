@@ -40,6 +40,7 @@ const defence=catalog.buildings.find(b=>b.category==='DEFENCES'&&b.width===1),bo
  assert.equal(r.ok,true);assert.deepEqual(r.result.workers,[1],'catalogue local group cannot be replaced by a previously selected combat/other group');
  assert.equal(t.send('queue-build',{itemId:defence.id,x:15,y:15,workerIds:[999]}).reason,'unreachable','dead or foreign requested workers cannot silently reassign work across the map');
  t.unreachable.add(1);assert.equal(t.send('queue-build',{itemId:defence.id,x:16,y:16,workerIds:[1]}).reason,'unreachable');
+ assert.equal(t.send('queue-build',{itemId:defence.id,x:17,y:17,workerIds:[1],automaticWorkers:true}).reason,'unreachable','automatic visible workers must never silently fall back to offscreen unselected constructors');
 }
 
 {

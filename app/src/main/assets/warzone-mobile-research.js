@@ -141,6 +141,7 @@
     renderAll();
   }
   function handleEngineOutput(event) {
+    if (window.__towersHtml?.isEnded?.()) return;
     const text = String(event?.detail?.text || "");
     try {
       if (text.includes("WTCMD:")) {
@@ -322,8 +323,8 @@
     shell.setAttribute("aria-label", "Technology command");
     shell.innerHTML = `
       <header class="bn-tech-header">
-        <div class="bn-tech-brand"><span class="bn-tech-mark"><img src="research-icons/Research%20Module.gif" alt=""></span><div><strong>TACTICAL QUEUE</strong><small>RESEARCH AND DEVELOPMENT</small></div></div>
-        <div class="bn-tech-live"><i></i><b>ENGINE LINK</b><span class="bn-tech-count">SYNCING</span><em>POWER</em><strong class="bn-tech-power">0</strong></div>
+        <div class="bn-tech-brand"><span class="bn-tech-mark"><img src="research-icons/Research%20Module.gif" alt=""></span><div><strong>RESEARCH QUEUE</strong><small>RESEARCH</small></div></div>
+        <div class="bn-tech-live"><i></i><b>RESEARCH STATUS</b><span class="bn-tech-count">LOADING</span><em>POWER</em><strong class="bn-tech-power">0</strong></div>
         <button class="bn-tech-done" type="button">BACK TO BATTLE</button>
       </header>
       <div class="bn-tech-main">
@@ -338,7 +339,7 @@
           <div class="bn-tech-list" role="list"></div>
           <section class="bn-tech-preview" aria-label="Catalogue selection">
             <img class="bn-tech-detail-image" src="research-icons/Research%20Module.gif" alt="">
-            <div class="bn-tech-preview-copy"><small class="bn-tech-preview-label">CATALOGUE SELECTION</small><strong class="bn-tech-detail-name">SELECT A TECHNOLOGY</strong><div class="bn-tech-preview-metrics"><span class="bn-tech-detail-category"></span><span>PTS <b class="bn-tech-detail-points">—</b></span><span>POWER <b class="bn-tech-detail-cost">—</b></span></div><b class="bn-tech-detail-status">WAITING</b></div>
+            <div class="bn-tech-preview-copy"><small class="bn-tech-preview-label">SELECTED RESEARCH</small><strong class="bn-tech-detail-name">SELECT A TECHNOLOGY</strong><div class="bn-tech-preview-metrics"><span class="bn-tech-detail-category"></span><span>PTS <b class="bn-tech-detail-points">—</b></span><span>POWER <b class="bn-tech-detail-cost">—</b></span></div><b class="bn-tech-detail-status">WAITING</b></div>
             <button class="bn-tech-assign" type="button">ADD TO LAB 1 QUEUE</button>
             <p class="bn-tech-error" role="status"></p>
           </section>
@@ -458,6 +459,7 @@
   }
 
   function activate() {
+    if (window.__towersHtml?.isEnded?.()) return false;
     if (!canvas() || !state.opening) return false;
     hideQueueStatus();
     saveCanvasStyle(); document.body.appendChild(createShell());
@@ -468,6 +470,7 @@
   }
 
   function open() {
+    if (window.__towersHtml?.isEnded?.()) return false;
     if (state.open || state.opening) return true;
     window.__warzoneCommands?.close?.();
     window.__warzoneCommands?.closeNative?.();
@@ -583,6 +586,7 @@
   }
 
   function writeQueueCommand(command) {
+    if (window.__towersHtml?.isEnded?.()) return false;
     const fs = queueModule()?.FS;
     if (!fs?.writeFile || !fs?.rename) {
       state.queueCommandErrors += 1;
@@ -624,6 +628,7 @@
   }
 
   function startQueueSync() {
+    if (window.__towersHtml?.isEnded?.()) return false;
     if (state.runner) return false;
     const labIds = Object.keys(state.dirtyLabs).map(Number).filter(Number.isFinite);
     if (!labIds.length) return false;
@@ -662,11 +667,13 @@
   }
 
   function processQueues() {
+    if (window.__towersHtml?.isEnded?.()) return false;
     if (state.runner || state.syncBlocked || !state.engineLabs.length) return false;
     return startQueueSync();
   }
 
   function assignTopic(nativeIndex) {
+    if (window.__towersHtml?.isEnded?.()) return false;
     if (!state.open || nativeIndex < 0) return false;
     const topic = state.catalog.find(value => value.nativeIndex === nativeIndex);
     const lab = state.engineLabs[state.activeLab];
@@ -740,7 +747,7 @@
   function renderCatalog() {
     const shell = document.getElementById("blocknight-research-shell"); if (!shell) return;
     renderCategories();
-    shell.querySelector(".bn-tech-count").textContent = state.bridgeSyncs ? `${state.catalog.length} LIVE` : "SYNCING";
+    shell.querySelector(".bn-tech-count").textContent = state.bridgeSyncs ? `${state.catalog.length} TOPICS` : "LOADING";
     shell.querySelector(".bn-tech-power").textContent = state.playerPower.toLocaleString();
     shell.querySelector(".bn-tech-browser-title").textContent = state.activeCategory === "ALL" ? "ALL TECHNOLOGIES" : state.activeCategory;
     const list = shell.querySelector(".bn-tech-list");
@@ -864,6 +871,13 @@
     };
   }
 
+  window.addEventListener('warzone-battle-ended', () => {
+    clearRunnerTimers(state.runner);
+    state.runner = null; state.pendingCommand = null;
+    state.assigning = false; state.pendingClose = false; state.syncBlocked = true;
+    state.dirtyLabs = {}; state.engineLabs = [];
+    hideQueueStatus(); finishClose(false);
+  });
   window.addEventListener("pagehide", () => { if (state.open || state.opening) finishClose(false); });
   window.__blockNightResearch = { version: VERSION, open, close, selectLab, setCategory, selectTopic, assignSelectedTopic, chooseTopic, removeQueuedTopic, processQueues, afterNativeTap, runSyntheticSuite, report, pollOutput: pollResearchLogs, acceptQueues };
   return "blocknight-warzone-mobile-research-v32-atomic-queues-ready";

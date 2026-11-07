@@ -1,0 +1,67 @@
+{
+  "passed": true,
+  "identity": {
+    "packageId": "com.rbabbit.warzonetowers.lab",
+    "device": "emulator-5556",
+    "candidateAPK_SHA256": "a623655e457bb8e397267b711a019b3787a22402b29cd182444f3a21bdae8ef4",
+    "installedPath": "/data/app/~~9sU2E3_pqgtex6ju59hsig==/com.rbabbit.warzonetowers.lab-QTIefljT40PuMAonA6Xt_A==/base.apk"
+  },
+  "started": "2026-11-07T10:58:12.665Z",
+  "phases": [
+    {
+      "name": "normal-branding",
+      "passed": true,
+      "folder": "branding"
+    },
+    {
+      "name": "original-moved-truck-reproduction",
+      "passed": true,
+      "folder": "repro-delivery"
+    },
+    {
+      "name": "research-and-power-modules-save-load",
+      "passed": true,
+      "folder": "module-journey"
+    },
+    {
+      "name": "mixed-units-fifo-movement-and-returns",
+      "passed": true,
+      "folder": "mixed-selection"
+    },
+    {
+      "name": "wide-and-compact-selection",
+      "passed": true,
+      "folder": "layout-selection"
+    },
+    {
+      "name": "twelve-paused-returns",
+      "passed": true,
+      "folder": "paused-returns"
+    },
+    {
+      "name": "keyboard-returns",
+      "passed": true,
+      "folder": "keyboard-returns"
+    },
+    {
+      "name": "native-quit-and-fresh-battle",
+      "passed": true,
+      "folder": "quit-delivery"
+    }
+  ],
+  "current": "completed",
+  "finished": "2026-11-07T11:17:38.453Z",
+  "fixtureRetries": [
+    {
+      "phase": "mixed-units-fifo-movement-and-returns",
+      "reason": "AssertionError [ERR_ASSERTION]: mixed-units-fifo-movement-and-returns must pass\n\n1 !== 0\n\n    at child (C:\\timerApp\\wz-towers-lab\\tools\\run-test-03-delivery.cjs:8:443)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async C:\\timerApp\\wz-towers-lab\\tools\\run-test-03-delivery.cjs:14:2",
+      "correction": "Wait for observable DevTools game-tab registration after Play. Reuse the already launched Iron Valley; no app-source or APK change."
+    }
+  ],
+  "afterIdentity": {
+    "packageId": "com.rbabbit.warzonetowers.lab",
+    "device": "emulator-5556",
+    "candidateAPK_SHA256": "a623655e457bb8e397267b711a019b3787a22402b29cd182444f3a21bdae8ef4",
+    "installedPath": "/data/app/~~9sU2E3_pqgtex6ju59hsig==/com.rbabbit.warzonetowers.lab-QTIefljT40PuMAonA6Xt_A==/base.apk"
+  }
+}

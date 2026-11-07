@@ -1,0 +1,3031 @@
+{
+  "passed": true,
+  "started": "2026-11-07T08:22:47.159Z",
+  "phases": [
+    {
+      "name": "native-build-navigation",
+      "passed": true,
+      "folder": "navigation"
+    },
+    {
+      "name": "paused-returns",
+      "passed": true,
+      "folder": "paused-returns"
+    },
+    {
+      "name": "research-production-models-and-returns",
+      "passed": true,
+      "folder": "gameplay-delivery"
+    },
+    {
+      "name": "keyboard-returns",
+      "passed": true,
+      "folder": "gameplay-delivery"
+    },
+    {
+      "name": "wide-stop-movement-and-building",
+      "passed": true,
+      "folder": "building/wide-controls"
+    },
+    {
+      "name": "three-site-mixed-fifo",
+      "passed": true,
+      "folder": "building/fifo-delivery"
+    },
+    {
+      "name": "compact-layouts",
+      "passed": true,
+      "folder": "layout-delivery"
+    },
+    {
+      "name": "genuine-native-save-load",
+      "passed": true,
+      "folder": "save-roundtrip"
+    },
+    {
+      "name": "native-quit-confirm-and-new-battle",
+      "passed": true,
+      "folder": "quit-delivery"
+    },
+    {
+      "name": "dustfall-camera-and-construction",
+      "passed": true,
+      "folder": "dustfall"
+    }
+  ],
+  "preparations": [
+    {
+      "name": "wide-building",
+      "fixture": "early",
+      "paused": true,
+      "nativeLoadReadiness": [
+        {
+          "source": "native wave clock after load; no stale command snapshot",
+          "before": {
+            "running": true,
+            "clock": 27502,
+            "rewinds": 0,
+            "samples": [
+              {
+                "ms": 1794040460844,
+                "clock": 26502
+              },
+              {
+                "ms": 1794040461080,
+                "clock": 26502
+              },
+              {
+                "ms": 1794040461312,
+                "clock": 27002
+              },
+              {
+                "ms": 1794040461588,
+                "clock": 27002
+              },
+              {
+                "ms": 1794040461907,
+                "clock": 27502
+              }
+            ]
+          }
+        }
+      ],
+      "restores": [
+        {
+          "fixture": "qa/v6.1-compact/final/checkpoints/td2-normal-early.json",
+          "source": "complete native QuickSave from ordinary gameplay",
+          "seeded": false,
+          "fileCount": 24,
+          "completeSaveSHA256": "5d7f10ece8452ee278eed71431a149d91b5999fdb13020f8bf6755fe71c2d7c3",
+          "targetTime": 26302,
+          "observedTime": 28802,
+          "trucks": [
+            {
+              "id": 160001,
+              "x": 59,
+              "y": 8
+            },
+            {
+              "id": 160003,
+              "x": 7,
+              "y": 37
+            },
+            {
+              "id": 160005,
+              "x": 7,
+              "y": 38
+            },
+            {
+              "id": 160007,
+              "x": 59,
+              "y": 7
+            },
+            {
+              "id": 160009,
+              "x": 59,
+              "y": 9
+            },
+            {
+              "id": 160011,
+              "x": 7,
+              "y": 36
+            }
+          ],
+          "researchQueues": [
+            {
+              "labId": 160169,
+              "topicIds": []
+            },
+            {
+              "labId": 160171,
+              "topicIds": []
+            },
+            {
+              "labId": 160173,
+              "topicIds": []
+            },
+            {
+              "labId": 160175,
+              "topicIds": []
+            }
+          ],
+          "finishedUnitRecords": [
+            [
+              160191,
+              160157,
+              19802,
+              "Design 2",
+              "Body1REC",
+              "wheeled01"
+            ],
+            [
+              160193,
+              160167,
+              23202,
+              "Design 2",
+              "Body1REC",
+              "wheeled01"
+            ]
+          ]
+        }
+      ],
+      "native": {
+        "version": 1,
+        "gameTime": 28802,
+        "player": 0,
+        "power": 2417,
+        "mapWidth": 64,
+        "mapHeight": 64,
+        "alwaysQueue": true,
+        "researchQueues": [
+          {
+            "labId": 160169,
+            "topicIds": []
+          },
+          {
+            "labId": 160171,
+            "topicIds": []
+          },
+          {
+            "labId": 160173,
+            "topicIds": []
+          },
+          {
+            "labId": 160175,
+            "topicIds": []
+          }
+        ],
+        "hasHQ": true,
+        "selectedUnits": [],
+        "construction": [],
+        "constructionSites": [],
+        "nativeBuildOptions": [
+          "A0ADemolishStructure",
+          "A0ComDroidControl",
+          "A0CyborgFactory",
+          "A0FacMod1",
+          "A0HardcreteMk1Gate",
+          "A0HardcreteMk1Wall",
+          "A0LightFactory",
+          "A0PowMod1",
+          "A0PowerGenerator",
+          "A0ResearchFacility",
+          "A0ResearchModule1",
+          "A0ResourceExtractor",
+          "A0TankTrap",
+          "GuardTower1",
+          "GuardTower6",
+          "PillBox1",
+          "PillBox4",
+          "PillBox5",
+          "Sys-SensoTower01",
+          "Sys-SensoTower02",
+          "WallTower02"
+        ],
+        "buildings": [
+          {
+            "id": "A0ComDroidControl",
+            "power": 100
+          },
+          {
+            "id": "A0CyborgFactory",
+            "power": 100
+          },
+          {
+            "id": "A0FacMod1",
+            "power": 100
+          },
+          {
+            "id": "A0HardcreteMk1CWall",
+            "power": 25
+          },
+          {
+            "id": "A0HardcreteMk1Gate",
+            "power": 50
+          },
+          {
+            "id": "A0HardcreteMk1Wall",
+            "power": 25
+          },
+          {
+            "id": "A0LightFactory",
+            "power": 100
+          },
+          {
+            "id": "A0PowMod1",
+            "power": 0
+          },
+          {
+            "id": "A0PowerGenerator",
+            "power": 50
+          },
+          {
+            "id": "A0ResearchFacility",
+            "power": 100
+          },
+          {
+            "id": "A0ResearchModule1",
+            "power": 100
+          },
+          {
+            "id": "A0ResourceExtractor",
+            "power": 0
+          },
+          {
+            "id": "A0TankTrap",
+            "power": 15
+          },
+          {
+            "id": "GuardTower1",
+            "power": 100
+          },
+          {
+            "id": "GuardTower6",
+            "power": 100
+          },
+          {
+            "id": "PillBox1",
+            "power": 100
+          },
+          {
+            "id": "PillBox4",
+            "power": 100
+          },
+          {
+            "id": "PillBox5",
+            "power": 100
+          },
+          {
+            "id": "Sys-SensoTower01",
+            "power": 50
+          },
+          {
+            "id": "Sys-SensoTower02",
+            "power": 100
+          },
+          {
+            "id": "WallTower02",
+            "power": 100
+          }
+        ],
+        "parts": [
+          "Body1REC",
+          "Cannon1-VTOL",
+          "Cannon1Mk1",
+          "CommandBrain01",
+          "Flame1Mk1",
+          "HalfTrack",
+          "LightRepair1",
+          "MG1-VTOL",
+          "MG1Mk1",
+          "MG2-VTOL",
+          "MG2Mk1",
+          "Mortar1Mk1",
+          "Rocket-Pod",
+          "Rocket-VTOL-Pod",
+          "SensorTurret1Mk1",
+          "Spade1Mk1",
+          "wheeled01"
+        ],
+        "trucks": [
+          {
+            "id": 160001,
+            "x": 59,
+            "y": 8,
+            "z": 2,
+            "selected": false,
+            "order": 0,
+            "action": 0,
+            "rate": 9,
+            "building": false,
+            "queued": 0
+          },
+          {
+            "id": 160003,
+            "x": 7,
+            "y": 37,
+            "z": 2,
+            "selected": false,
+            "order": 0,
+            "action": 0,
+            "rate": 9,
+            "building": false,
+            "queued": 0
+          },
+          {
+            "id": 160005,
+            "x": 7,
+            "y": 38,
+            "z": 2,
+            "selected": false,
+            "order": 0,
+            "action": 0,
+            "rate": 9,
+            "building": false,
+            "queued": 0
+          },
+          {
+            "id": 160007,
+            "x": 59,
+            "y": 7,
+            "z": 2,
+            "selected": false,
+            "order": 0,
+            "action": 0,
+            "rate": 9,
+            "building": false,
+            "queued": 0
+          },
+          {
+            "id": 160009,
+            "x": 59,
+            "y": 9,
+            "z": 2,
+            "selected": false,
+            "order": 0,
+            "action": 0,
+            "rate": 9,
+            "building": false,
+            "queued": 0
+          },
+          {
+            "id": 160011,
+            "x": 7,
+            "y": 36,
+            "z": 2,
+            "selected": false,
+            "order": 0,
+            "action": 0,
+            "rate": 9,
+            "building": false,
+            "queued": 0
+          }
+        ],
+        "jobs": [],
+        "factories": [
+          {
+            "id": 160157,
+            "number": 1,
+            "x": 59,
+            "y": 4,
+            "type": 1,
+            "kind": "Factory",
+            "templates": [
+              "native:[\"Truck Viper Wheels\",\"Body1REC\",\"wheeled01\",[],\"Spade1Mk1\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+              "native:[\"Design 2 · F160157\",\"Body1REC\",\"wheeled01\",[\"MG1Mk1\"],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]"
+            ],
+            "modules": 1,
+            "ready": true,
+            "idle": true,
+            "active": null,
+            "waitingReason": null,
+            "queue": []
+          },
+          {
+            "id": 160167,
+            "number": 2,
+            "x": 4,
+            "y": 38,
+            "type": 1,
+            "kind": "Factory",
+            "templates": [
+              "native:[\"Truck Viper Wheels\",\"Body1REC\",\"wheeled01\",[],\"Spade1Mk1\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+              "native:[\"Design 2 · F160157\",\"Body1REC\",\"wheeled01\",[\"MG1Mk1\"],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]"
+            ],
+            "modules": 1,
+            "ready": true,
+            "idle": true,
+            "active": null,
+            "waitingReason": null,
+            "queue": []
+          }
+        ],
+        "nativeMenu": "",
+        "templates": [
+          {
+            "fullname": "Truck Viper Wheels",
+            "name": "",
+            "id": "native:[\"Truck Viper Wheels\",\"Body1REC\",\"wheeled01\",[],\"Spade1Mk1\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+            "points": 310,
+            "power": 62,
+            "cost": 62,
+            "droidType": 3,
+            "body": "Body1REC",
+            "propulsion": "wheeled01",
+            "brain": "ZNULLBRAIN",
+            "repair": "ZNULLREPAIR",
+            "ecm": "ZNULLECM",
+            "sensor": "ZNULLSENSOR",
+            "construct": "Spade1Mk1",
+            "weapons": []
+          },
+          {
+            "fullname": "Heavy Gunner Cyborg",
+            "name": "",
+            "id": "native:[\"Heavy Gunner Cyborg\",\"CyborgLightBody\",\"CyborgLegs\",[\"CyborgCannon\"],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+            "points": 382,
+            "power": 87,
+            "cost": 87,
+            "droidType": 5,
+            "body": "CyborgLightBody",
+            "propulsion": "CyborgLegs",
+            "brain": "ZNULLBRAIN",
+            "repair": "ZNULLREPAIR",
+            "ecm": "ZNULLECM",
+            "sensor": "ZNULLSENSOR",
+            "construct": "ZNULLCONSTRUCT",
+            "weapons": [
+              "CyborgCannon"
+            ]
+          },
+          {
+            "fullname": "Machinegunner Cyborg",
+            "name": "",
+            "id": "native:[\"Machinegunner Cyborg\",\"CyborgLightBody\",\"CyborgLegs\",[\"CyborgChaingun\"],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+            "points": 302,
+            "power": 67,
+            "cost": 67,
+            "droidType": 5,
+            "body": "CyborgLightBody",
+            "propulsion": "CyborgLegs",
+            "brain": "ZNULLBRAIN",
+            "repair": "ZNULLREPAIR",
+            "ecm": "ZNULLECM",
+            "sensor": "ZNULLSENSOR",
+            "construct": "ZNULLCONSTRUCT",
+            "weapons": [
+              "CyborgChaingun"
+            ]
+          },
+          {
+            "fullname": "Combat Engineer Cyborg",
+            "name": "",
+            "id": "native:[\"Combat Engineer Cyborg\",\"CyborgLightBody\",\"CyborgLegs\",[],\"CyborgSpade\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+            "points": 207,
+            "power": 37,
+            "cost": 37,
+            "droidType": 10,
+            "body": "CyborgLightBody",
+            "propulsion": "CyborgLegs",
+            "brain": "ZNULLBRAIN",
+            "repair": "ZNULLREPAIR",
+            "ecm": "ZNULLECM",
+            "sensor": "ZNULLSENSOR",
+            "construct": "CyborgSpade",
+            "weapons": []
+          },
+          {
+            "fullname": "Flamer Cyborg",
+            "name": "",
+            "id": "native:[\"Flamer Cyborg\",\"CyborgLightBody\",\"CyborgLegs\",[\"CyborgFlamer01\"],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+            "points": 342,
+            "power": 82,
+            "cost": 82,
+            "droidType": 5,
+            "body": "CyborgLightBody",
+            "propulsion": "CyborgLegs",
+            "brain": "ZNULLBRAIN",
+            "repair": "ZNULLREPAIR",
+            "ecm": "ZNULLECM",
+            "sensor": "ZNULLSENSOR",
+            "construct": "ZNULLCONSTRUCT",
+            "weapons": [
+              "CyborgFlamer01"
+            ]
+          },
+          {
+            "fullname": "Grenadier Cyborg",
+            "name": "",
+            "id": "native:[\"Grenadier Cyborg\",\"CyborgLightBody\",\"CyborgLegs\",[\"Cyb-Wpn-Grenade\"],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+            "points": 462,
+            "power": 107,
+            "cost": 107,
+            "droidType": 5,
+            "body": "CyborgLightBody",
+            "propulsion": "CyborgLegs",
+            "brain": "ZNULLBRAIN",
+            "repair": "ZNULLREPAIR",
+            "ecm": "ZNULLECM",
+            "sensor": "ZNULLSENSOR",
+            "construct": "ZNULLCONSTRUCT",
+            "weapons": [
+              "Cyb-Wpn-Grenade"
+            ]
+          },
+          {
+            "fullname": "Mechanic Cyborg",
+            "name": "",
+            "id": "native:[\"Mechanic Cyborg\",\"CyborgLightBody\",\"CyborgLegs\",[],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"CyborgRepair\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+            "points": 242,
+            "power": 62,
+            "cost": 62,
+            "droidType": 11,
+            "body": "CyborgLightBody",
+            "propulsion": "CyborgLegs",
+            "brain": "ZNULLBRAIN",
+            "repair": "CyborgRepair",
+            "ecm": "ZNULLECM",
+            "sensor": "ZNULLSENSOR",
+            "construct": "ZNULLCONSTRUCT",
+            "weapons": []
+          },
+          {
+            "fullname": "Design 2 · F160157",
+            "name": "",
+            "id": "native:[\"Design 2 · F160157\",\"Body1REC\",\"wheeled01\",[\"MG1Mk1\"],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+            "points": 275,
+            "power": 55,
+            "cost": 55,
+            "droidType": 0,
+            "body": "Body1REC",
+            "propulsion": "wheeled01",
+            "brain": "ZNULLBRAIN",
+            "repair": "ZNULLREPAIR",
+            "ecm": "ZNULLECM",
+            "sensor": "ZNULLSENSOR",
+            "construct": "ZNULLCONSTRUCT",
+            "weapons": [
+              "MG1Mk1"
+            ]
+          }
+        ],
+        "finishedUnits": [
+          {
+            "body": "Body1REC",
+            "factoryId": 160157,
+            "gameTime": 19802,
+            "id": 160191,
+            "name": "Design 2",
+            "propulsion": "wheeled01"
+          },
+          {
+            "body": "Body1REC",
+            "factoryId": 160167,
+            "gameTime": 23202,
+            "id": 160193,
+            "name": "Design 2",
+            "propulsion": "wheeled01"
+          }
+        ],
+        "finishedBuilds": []
+      },
+      "pausedAt": 32502
+    },
+    {
+      "name": "three-site-fifo",
+      "fixture": "early",
+      "paused": false,
+      "nativeLoadReadiness": [
+        {
+          "source": "native wave clock after load; no stale command snapshot",
+          "before": {
+            "running": true,
+            "clock": 27502,
+            "rewinds": 0,
+            "samples": [
+              {
+                "ms": 1794040586312,
+                "clock": 26302
+              },
+              {
+                "ms": 1794040586642,
+                "clock": 26302
+              },
+              {
+                "ms": 1794040586916,
+                "clock": 27002
+              },
+              {
+                "ms": 1794040587163,
+                "clock": 27002
+              },
+              {
+                "ms": 1794040587408,
+                "clock": 27502
+              }
+            ]
+          }
+        }
+      ],
+      "restores": [
+        {
+          "fixture": "qa/v6.1-compact/final/checkpoints/td2-normal-early.json",
+          "source": "complete native QuickSave from ordinary gameplay",
+          "seeded": false,
+          "fileCount": 24,
+          "completeSaveSHA256": "5d7f10ece8452ee278eed71431a149d91b5999fdb13020f8bf6755fe71c2d7c3",
+          "targetTime": 26302,
+          "observedTime": 28702,
+          "trucks": [
+            {
+              "id": 160001,
+              "x": 59,
+              "y": 8
+            },
+            {
+              "id": 160003,
+              "x": 7,
+              "y": 37
+            },
+            {
+              "id": 160005,
+              "x": 7,
+              "y": 38
+            },
+            {
+              "id": 160007,
+              "x": 59,
+              "y": 7
+            },
+            {
+              "id": 160009,
+              "x": 59,
+              "y": 9
+            },
+            {
+              "id": 160011,
+              "x": 7,
+              "y": 36
+            }
+          ],
+          "researchQueues": [
+            {
+              "labId": 160169,
+              "topicIds": []
+            },
+            {
+              "labId": 160171,
+              "topicIds": []
+            },
+            {
+              "labId": 160173,
+              "topicIds": []
+            },
+            {
+              "labId": 160175,
+              "topicIds": []
+            }
+          ],
+          "finishedUnitRecords": [
+            [
+              160191,
+              160157,
+              19802,
+              "Design 2",
+              "Body1REC",
+              "wheeled01"
+            ],
+            [
+              160193,
+              160167,
+              23202,
+              "Design 2",
+              "Body1REC",
+              "wheeled01"
+            ]
+          ]
+        }
+      ],
+      "native": {
+        "version": 1,
+        "gameTime": 28702,
+        "player": 0,
+        "power": 2417,
+        "mapWidth": 64,
+        "mapHeight": 64,
+        "alwaysQueue": true,
+        "researchQueues": [
+          {
+            "labId": 160169,
+            "topicIds": []
+          },
+          {
+            "labId": 160171,
+            "topicIds": []
+          },
+          {
+            "labId": 160173,
+            "topicIds": []
+          },
+          {
+            "labId": 160175,
+            "topicIds": []
+          }
+        ],
+        "hasHQ": true,
+        "selectedUnits": [],
+        "construction": [],
+        "constructionSites": [],
+        "nativeBuildOptions": [
+          "A0ADemolishStructure",
+          "A0ComDroidControl",
+          "A0CyborgFactory",
+          "A0FacMod1",
+          "A0HardcreteMk1Gate",
+          "A0HardcreteMk1Wall",
+          "A0LightFactory",
+          "A0PowMod1",
+          "A0PowerGenerator",
+          "A0ResearchFacility",
+          "A0ResearchModule1",
+          "A0ResourceExtractor",
+          "A0TankTrap",
+          "GuardTower1",
+          "GuardTower6",
+          "PillBox1",
+          "PillBox4",
+          "PillBox5",
+          "Sys-SensoTower01",
+          "Sys-SensoTower02",
+          "WallTower02"
+        ],
+        "buildings": [
+          {
+            "id": "A0ComDroidControl",
+            "power": 100
+          },
+          {
+            "id": "A0CyborgFactory",
+            "power": 100
+          },
+          {
+            "id": "A0FacMod1",
+            "power": 100
+          },
+          {
+            "id": "A0HardcreteMk1CWall",
+            "power": 25
+          },
+          {
+            "id": "A0HardcreteMk1Gate",
+            "power": 50
+          },
+          {
+            "id": "A0HardcreteMk1Wall",
+            "power": 25
+          },
+          {
+            "id": "A0LightFactory",
+            "power": 100
+          },
+          {
+            "id": "A0PowMod1",
+            "power": 0
+          },
+          {
+            "id": "A0PowerGenerator",
+            "power": 50
+          },
+          {
+            "id": "A0ResearchFacility",
+            "power": 100
+          },
+          {
+            "id": "A0ResearchModule1",
+            "power": 100
+          },
+          {
+            "id": "A0ResourceExtractor",
+            "power": 0
+          },
+          {
+            "id": "A0TankTrap",
+            "power": 15
+          },
+          {
+            "id": "GuardTower1",
+            "power": 100
+          },
+          {
+            "id": "GuardTower6",
+            "power": 100
+          },
+          {
+            "id": "PillBox1",
+            "power": 100
+          },
+          {
+            "id": "PillBox4",
+            "power": 100
+          },
+          {
+            "id": "PillBox5",
+            "power": 100
+          },
+          {
+            "id": "Sys-SensoTower01",
+            "power": 50
+          },
+          {
+            "id": "Sys-SensoTower02",
+            "power": 100
+          },
+          {
+            "id": "WallTower02",
+            "power": 100
+          }
+        ],
+        "parts": [
+          "Body1REC",
+          "Cannon1-VTOL",
+          "Cannon1Mk1",
+          "CommandBrain01",
+          "Flame1Mk1",
+          "HalfTrack",
+          "LightRepair1",
+          "MG1-VTOL",
+          "MG1Mk1",
+          "MG2-VTOL",
+          "MG2Mk1",
+          "Mortar1Mk1",
+          "Rocket-Pod",
+          "Rocket-VTOL-Pod",
+          "SensorTurret1Mk1",
+          "Spade1Mk1",
+          "wheeled01"
+        ],
+        "trucks": [
+          {
+            "id": 160001,
+            "x": 59,
+            "y": 8,
+            "z": 2,
+            "selected": false,
+            "order": 0,
+            "action": 0,
+            "rate": 9,
+            "building": false,
+            "queued": 0
+          },
+          {
+            "id": 160003,
+            "x": 7,
+            "y": 37,
+            "z": 2,
+            "selected": false,
+            "order": 0,
+            "action": 0,
+            "rate": 9,
+            "building": false,
+            "queued": 0
+          },
+          {
+            "id": 160005,
+            "x": 7,
+            "y": 38,
+            "z": 2,
+            "selected": false,
+            "order": 0,
+            "action": 0,
+            "rate": 9,
+            "building": false,
+            "queued": 0
+          },
+          {
+            "id": 160007,
+            "x": 59,
+            "y": 7,
+            "z": 2,
+            "selected": false,
+            "order": 0,
+            "action": 0,
+            "rate": 9,
+            "building": false,
+            "queued": 0
+          },
+          {
+            "id": 160009,
+            "x": 59,
+            "y": 9,
+            "z": 2,
+            "selected": false,
+            "order": 0,
+            "action": 0,
+            "rate": 9,
+            "building": false,
+            "queued": 0
+          },
+          {
+            "id": 160011,
+            "x": 7,
+            "y": 36,
+            "z": 2,
+            "selected": false,
+            "order": 0,
+            "action": 0,
+            "rate": 9,
+            "building": false,
+            "queued": 0
+          }
+        ],
+        "jobs": [],
+        "factories": [
+          {
+            "id": 160157,
+            "number": 1,
+            "x": 59,
+            "y": 4,
+            "type": 1,
+            "kind": "Factory",
+            "templates": [
+              "native:[\"Truck Viper Wheels\",\"Body1REC\",\"wheeled01\",[],\"Spade1Mk1\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+              "native:[\"Design 2 · F160157\",\"Body1REC\",\"wheeled01\",[\"MG1Mk1\"],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]"
+            ],
+            "modules": 1,
+            "ready": true,
+            "idle": true,
+            "active": null,
+            "waitingReason": null,
+            "queue": []
+          },
+          {
+            "id": 160167,
+            "number": 2,
+            "x": 4,
+            "y": 38,
+            "type": 1,
+            "kind": "Factory",
+            "templates": [
+              "native:[\"Truck Viper Wheels\",\"Body1REC\",\"wheeled01\",[],\"Spade1Mk1\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+              "native:[\"Design 2 · F160157\",\"Body1REC\",\"wheeled01\",[\"MG1Mk1\"],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]"
+            ],
+            "modules": 1,
+            "ready": true,
+            "idle": true,
+            "active": null,
+            "waitingReason": null,
+            "queue": []
+          }
+        ],
+        "nativeMenu": "",
+        "templates": [
+          {
+            "fullname": "Truck Viper Wheels",
+            "name": "",
+            "id": "native:[\"Truck Viper Wheels\",\"Body1REC\",\"wheeled01\",[],\"Spade1Mk1\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+            "points": 310,
+            "power": 62,
+            "cost": 62,
+            "droidType": 3,
+            "body": "Body1REC",
+            "propulsion": "wheeled01",
+            "brain": "ZNULLBRAIN",
+            "repair": "ZNULLREPAIR",
+            "ecm": "ZNULLECM",
+            "sensor": "ZNULLSENSOR",
+            "construct": "Spade1Mk1",
+            "weapons": []
+          },
+          {
+            "fullname": "Heavy Gunner Cyborg",
+            "name": "",
+            "id": "native:[\"Heavy Gunner Cyborg\",\"CyborgLightBody\",\"CyborgLegs\",[\"CyborgCannon\"],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+            "points": 382,
+            "power": 87,
+            "cost": 87,
+            "droidType": 5,
+            "body": "CyborgLightBody",
+            "propulsion": "CyborgLegs",
+            "brain": "ZNULLBRAIN",
+            "repair": "ZNULLREPAIR",
+            "ecm": "ZNULLECM",
+            "sensor": "ZNULLSENSOR",
+            "construct": "ZNULLCONSTRUCT",
+            "weapons": [
+              "CyborgCannon"
+            ]
+          },
+          {
+            "fullname": "Machinegunner Cyborg",
+            "name": "",
+            "id": "native:[\"Machinegunner Cyborg\",\"CyborgLightBody\",\"CyborgLegs\",[\"CyborgChaingun\"],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+            "points": 302,
+            "power": 67,
+            "cost": 67,
+            "droidType": 5,
+            "body": "CyborgLightBody",
+            "propulsion": "CyborgLegs",
+            "brain": "ZNULLBRAIN",
+            "repair": "ZNULLREPAIR",
+            "ecm": "ZNULLECM",
+            "sensor": "ZNULLSENSOR",
+            "construct": "ZNULLCONSTRUCT",
+            "weapons": [
+              "CyborgChaingun"
+            ]
+          },
+          {
+            "fullname": "Combat Engineer Cyborg",
+            "name": "",
+            "id": "native:[\"Combat Engineer Cyborg\",\"CyborgLightBody\",\"CyborgLegs\",[],\"CyborgSpade\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+            "points": 207,
+            "power": 37,
+            "cost": 37,
+            "droidType": 10,
+            "body": "CyborgLightBody",
+            "propulsion": "CyborgLegs",
+            "brain": "ZNULLBRAIN",
+            "repair": "ZNULLREPAIR",
+            "ecm": "ZNULLECM",
+            "sensor": "ZNULLSENSOR",
+            "construct": "CyborgSpade",
+            "weapons": []
+          },
+          {
+            "fullname": "Flamer Cyborg",
+            "name": "",
+            "id": "native:[\"Flamer Cyborg\",\"CyborgLightBody\",\"CyborgLegs\",[\"CyborgFlamer01\"],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+            "points": 342,
+            "power": 82,
+            "cost": 82,
+            "droidType": 5,
+            "body": "CyborgLightBody",
+            "propulsion": "CyborgLegs",
+            "brain": "ZNULLBRAIN",
+            "repair": "ZNULLREPAIR",
+            "ecm": "ZNULLECM",
+            "sensor": "ZNULLSENSOR",
+            "construct": "ZNULLCONSTRUCT",
+            "weapons": [
+              "CyborgFlamer01"
+            ]
+          },
+          {
+            "fullname": "Grenadier Cyborg",
+            "name": "",
+            "id": "native:[\"Grenadier Cyborg\",\"CyborgLightBody\",\"CyborgLegs\",[\"Cyb-Wpn-Grenade\"],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+            "points": 462,
+            "power": 107,
+            "cost": 107,
+            "droidType": 5,
+            "body": "CyborgLightBody",
+            "propulsion": "CyborgLegs",
+            "brain": "ZNULLBRAIN",
+            "repair": "ZNULLREPAIR",
+            "ecm": "ZNULLECM",
+            "sensor": "ZNULLSENSOR",
+            "construct": "ZNULLCONSTRUCT",
+            "weapons": [
+              "Cyb-Wpn-Grenade"
+            ]
+          },
+          {
+            "fullname": "Mechanic Cyborg",
+            "name": "",
+            "id": "native:[\"Mechanic Cyborg\",\"CyborgLightBody\",\"CyborgLegs\",[],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"CyborgRepair\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+            "points": 242,
+            "power": 62,
+            "cost": 62,
+            "droidType": 11,
+            "body": "CyborgLightBody",
+            "propulsion": "CyborgLegs",
+            "brain": "ZNULLBRAIN",
+            "repair": "CyborgRepair",
+            "ecm": "ZNULLECM",
+            "sensor": "ZNULLSENSOR",
+            "construct": "ZNULLCONSTRUCT",
+            "weapons": []
+          },
+          {
+            "fullname": "Design 2 · F160157",
+            "name": "",
+            "id": "native:[\"Design 2 · F160157\",\"Body1REC\",\"wheeled01\",[\"MG1Mk1\"],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+            "points": 275,
+            "power": 55,
+            "cost": 55,
+            "droidType": 0,
+            "body": "Body1REC",
+            "propulsion": "wheeled01",
+            "brain": "ZNULLBRAIN",
+            "repair": "ZNULLREPAIR",
+            "ecm": "ZNULLECM",
+            "sensor": "ZNULLSENSOR",
+            "construct": "ZNULLCONSTRUCT",
+            "weapons": [
+              "MG1Mk1"
+            ]
+          }
+        ],
+        "finishedUnits": [
+          {
+            "body": "Body1REC",
+            "factoryId": 160157,
+            "gameTime": 19802,
+            "id": 160191,
+            "name": "Design 2",
+            "propulsion": "wheeled01"
+          },
+          {
+            "body": "Body1REC",
+            "factoryId": 160167,
+            "gameTime": 23202,
+            "id": 160193,
+            "name": "Design 2",
+            "propulsion": "wheeled01"
+          }
+        ],
+        "finishedBuilds": []
+      }
+    },
+    {
+      "name": "genuine-save-roundtrip",
+      "fixture": "research",
+      "paused": false,
+      "nativeLoadReadiness": [
+        {
+          "source": "native wave clock after load; no stale command snapshot",
+          "before": {
+            "running": true,
+            "clock": 113502,
+            "rewinds": 0,
+            "samples": [
+              {
+                "ms": 1794041040206,
+                "clock": 112802
+              },
+              {
+                "ms": 1794041040553,
+                "clock": 113002
+              },
+              {
+                "ms": 1794041040847,
+                "clock": 113002
+              },
+              {
+                "ms": 1794041041137,
+                "clock": 113002
+              },
+              {
+                "ms": 1794041041438,
+                "clock": 113502
+              }
+            ]
+          }
+        }
+      ],
+      "restores": [
+        {
+          "fixture": "qa/v6.1-compact/final/checkpoints/td2-manual-labs.json",
+          "source": "complete native QuickSave from ordinary gameplay",
+          "seeded": false,
+          "fileCount": 24,
+          "completeSaveSHA256": "58a0f85d7f062822c216fb98ca310dc6e0126565a8ee1eac2aca4d7222432113",
+          "targetTime": 112802,
+          "observedTime": 115202,
+          "trucks": [
+            {
+              "id": 160001,
+              "x": 59,
+              "y": 8
+            },
+            {
+              "id": 160003,
+              "x": 7,
+              "y": 37
+            },
+            {
+              "id": 160005,
+              "x": 7,
+              "y": 38
+            },
+            {
+              "id": 160007,
+              "x": 59,
+              "y": 7
+            },
+            {
+              "id": 160009,
+              "x": 59,
+              "y": 9
+            },
+            {
+              "id": 160011,
+              "x": 7,
+              "y": 36
+            }
+          ],
+          "researchQueues": [
+            {
+              "labId": 160169,
+              "topicIds": [
+                "R-Vehicle-Engine03"
+              ]
+            },
+            {
+              "labId": 160171,
+              "topicIds": []
+            },
+            {
+              "labId": 160173,
+              "topicIds": []
+            },
+            {
+              "labId": 160175,
+              "topicIds": []
+            }
+          ],
+          "finishedUnitRecords": [
+            [
+              160191,
+              160157,
+              18202,
+              "Design 2",
+              "Body1REC",
+              "wheeled01"
+            ],
+            [
+              160193,
+              160167,
+              21802,
+              "Design 2",
+              "Body1REC",
+              "wheeled01"
+            ]
+          ]
+        }
+      ],
+      "native": {
+        "version": 1,
+        "gameTime": 115202,
+        "player": 0,
+        "power": 2407,
+        "mapWidth": 64,
+        "mapHeight": 64,
+        "alwaysQueue": true,
+        "researchQueues": [
+          {
+            "labId": 160169,
+            "topicIds": [
+              "R-Vehicle-Engine03"
+            ]
+          },
+          {
+            "labId": 160171,
+            "topicIds": []
+          },
+          {
+            "labId": 160173,
+            "topicIds": []
+          },
+          {
+            "labId": 160175,
+            "topicIds": []
+          }
+        ],
+        "hasHQ": true,
+        "selectedUnits": [
+          {
+            "id": 160193,
+            "x": 8,
+            "y": 42,
+            "z": 2,
+            "order": 25,
+            "constructor": false
+          }
+        ],
+        "construction": [],
+        "constructionSites": [],
+        "nativeBuildOptions": [
+          "A0ADemolishStructure",
+          "A0ComDroidControl",
+          "A0CyborgFactory",
+          "A0FacMod1",
+          "A0HardcreteMk1Gate",
+          "A0HardcreteMk1Wall",
+          "A0LightFactory",
+          "A0PowMod1",
+          "A0PowerGenerator",
+          "A0ResearchFacility",
+          "A0ResearchModule1",
+          "A0ResourceExtractor",
+          "A0TankTrap",
+          "GuardTower1",
+          "GuardTower6",
+          "PillBox1",
+          "PillBox4",
+          "PillBox5",
+          "Sys-SensoTower01",
+          "Sys-SensoTower02",
+          "WallTower02"
+        ],
+        "buildings": [
+          {
+            "id": "A0ComDroidControl",
+            "power": 100
+          },
+          {
+            "id": "A0CyborgFactory",
+            "power": 100
+          },
+          {
+            "id": "A0FacMod1",
+            "power": 100
+          },
+          {
+            "id": "A0HardcreteMk1CWall",
+            "power": 25
+          },
+          {
+            "id": "A0HardcreteMk1Gate",
+            "power": 50
+          },
+          {
+            "id": "A0HardcreteMk1Wall",
+            "power": 25
+          },
+          {
+            "id": "A0LightFactory",
+            "power": 100
+          },
+          {
+            "id": "A0PowMod1",
+            "power": 0
+          },
+          {
+            "id": "A0PowerGenerator",
+            "power": 50
+          },
+          {
+            "id": "A0ResearchFacility",
+            "power": 100
+          },
+          {
+            "id": "A0ResearchModule1",
+            "power": 100
+          },
+          {
+            "id": "A0ResourceExtractor",
+            "power": 0
+          },
+          {
+            "id": "A0TankTrap",
+            "power": 15
+          },
+          {
+            "id": "GuardTower1",
+            "power": 100
+          },
+          {
+            "id": "GuardTower6",
+            "power": 100
+          },
+          {
+            "id": "PillBox1",
+            "power": 100
+          },
+          {
+            "id": "PillBox4",
+            "power": 100
+          },
+          {
+            "id": "PillBox5",
+            "power": 100
+          },
+          {
+            "id": "Sys-SensoTower01",
+            "power": 50
+          },
+          {
+            "id": "Sys-SensoTower02",
+            "power": 100
+          },
+          {
+            "id": "WallTower02",
+            "power": 100
+          }
+        ],
+        "parts": [
+          "Body1REC",
+          "Cannon1-VTOL",
+          "Cannon1Mk1",
+          "CommandBrain01",
+          "Flame1Mk1",
+          "HalfTrack",
+          "LightRepair1",
+          "MG1-VTOL",
+          "MG1Mk1",
+          "MG2-VTOL",
+          "MG2Mk1",
+          "Mortar1Mk1",
+          "Rocket-Pod",
+          "Rocket-VTOL-Pod",
+          "SensorTurret1Mk1",
+          "Spade1Mk1",
+          "wheeled01"
+        ],
+        "trucks": [
+          {
+            "id": 160001,
+            "x": 59,
+            "y": 8,
+            "z": 2,
+            "selected": false,
+            "order": 0,
+            "action": 0,
+            "rate": 9,
+            "building": false,
+            "queued": 0
+          },
+          {
+            "id": 160003,
+            "x": 7,
+            "y": 37,
+            "z": 2,
+            "selected": false,
+            "order": 0,
+            "action": 0,
+            "rate": 9,
+            "building": false,
+            "queued": 0
+          },
+          {
+            "id": 160005,
+            "x": 7,
+            "y": 38,
+            "z": 2,
+            "selected": false,
+            "order": 0,
+            "action": 0,
+            "rate": 9,
+            "building": false,
+            "queued": 0
+          },
+          {
+            "id": 160007,
+            "x": 59,
+            "y": 7,
+            "z": 2,
+            "selected": false,
+            "order": 0,
+            "action": 0,
+            "rate": 9,
+            "building": false,
+            "queued": 0
+          },
+          {
+            "id": 160009,
+            "x": 59,
+            "y": 9,
+            "z": 2,
+            "selected": false,
+            "order": 0,
+            "action": 0,
+            "rate": 9,
+            "building": false,
+            "queued": 0
+          },
+          {
+            "id": 160011,
+            "x": 7,
+            "y": 36,
+            "z": 2,
+            "selected": false,
+            "order": 0,
+            "action": 0,
+            "rate": 9,
+            "building": false,
+            "queued": 0
+          }
+        ],
+        "jobs": [],
+        "factories": [
+          {
+            "id": 160157,
+            "number": 1,
+            "x": 59,
+            "y": 4,
+            "type": 1,
+            "kind": "Factory",
+            "templates": [
+              "native:[\"Truck Viper Wheels\",\"Body1REC\",\"wheeled01\",[],\"Spade1Mk1\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+              "native:[\"Design 2 · F160157\",\"Body1REC\",\"wheeled01\",[\"MG1Mk1\"],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]"
+            ],
+            "modules": 1,
+            "ready": true,
+            "idle": true,
+            "active": null,
+            "waitingReason": null,
+            "queue": []
+          },
+          {
+            "id": 160167,
+            "number": 2,
+            "x": 4,
+            "y": 38,
+            "type": 1,
+            "kind": "Factory",
+            "templates": [
+              "native:[\"Truck Viper Wheels\",\"Body1REC\",\"wheeled01\",[],\"Spade1Mk1\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+              "native:[\"Design 2 · F160157\",\"Body1REC\",\"wheeled01\",[\"MG1Mk1\"],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]"
+            ],
+            "modules": 1,
+            "ready": true,
+            "idle": true,
+            "active": null,
+            "waitingReason": null,
+            "queue": []
+          }
+        ],
+        "nativeMenu": "",
+        "templates": [
+          {
+            "fullname": "Truck Viper Wheels",
+            "name": "",
+            "id": "native:[\"Truck Viper Wheels\",\"Body1REC\",\"wheeled01\",[],\"Spade1Mk1\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+            "points": 310,
+            "power": 62,
+            "cost": 62,
+            "droidType": 3,
+            "body": "Body1REC",
+            "propulsion": "wheeled01",
+            "brain": "ZNULLBRAIN",
+            "repair": "ZNULLREPAIR",
+            "ecm": "ZNULLECM",
+            "sensor": "ZNULLSENSOR",
+            "construct": "Spade1Mk1",
+            "weapons": []
+          },
+          {
+            "fullname": "Heavy Gunner Cyborg",
+            "name": "",
+            "id": "native:[\"Heavy Gunner Cyborg\",\"CyborgLightBody\",\"CyborgLegs\",[\"CyborgCannon\"],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+            "points": 382,
+            "power": 87,
+            "cost": 87,
+            "droidType": 5,
+            "body": "CyborgLightBody",
+            "propulsion": "CyborgLegs",
+            "brain": "ZNULLBRAIN",
+            "repair": "ZNULLREPAIR",
+            "ecm": "ZNULLECM",
+            "sensor": "ZNULLSENSOR",
+            "construct": "ZNULLCONSTRUCT",
+            "weapons": [
+              "CyborgCannon"
+            ]
+          },
+          {
+            "fullname": "Machinegunner Cyborg",
+            "name": "",
+            "id": "native:[\"Machinegunner Cyborg\",\"CyborgLightBody\",\"CyborgLegs\",[\"CyborgChaingun\"],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+            "points": 302,
+            "power": 67,
+            "cost": 67,
+            "droidType": 5,
+            "body": "CyborgLightBody",
+            "propulsion": "CyborgLegs",
+            "brain": "ZNULLBRAIN",
+            "repair": "ZNULLREPAIR",
+            "ecm": "ZNULLECM",
+            "sensor": "ZNULLSENSOR",
+            "construct": "ZNULLCONSTRUCT",
+            "weapons": [
+              "CyborgChaingun"
+            ]
+          },
+          {
+            "fullname": "Combat Engineer Cyborg",
+            "name": "",
+            "id": "native:[\"Combat Engineer Cyborg\",\"CyborgLightBody\",\"CyborgLegs\",[],\"CyborgSpade\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+            "points": 207,
+            "power": 37,
+            "cost": 37,
+            "droidType": 10,
+            "body": "CyborgLightBody",
+            "propulsion": "CyborgLegs",
+            "brain": "ZNULLBRAIN",
+            "repair": "ZNULLREPAIR",
+            "ecm": "ZNULLECM",
+            "sensor": "ZNULLSENSOR",
+            "construct": "CyborgSpade",
+            "weapons": []
+          },
+          {
+            "fullname": "Flamer Cyborg",
+            "name": "",
+            "id": "native:[\"Flamer Cyborg\",\"CyborgLightBody\",\"CyborgLegs\",[\"CyborgFlamer01\"],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+            "points": 342,
+            "power": 82,
+            "cost": 82,
+            "droidType": 5,
+            "body": "CyborgLightBody",
+            "propulsion": "CyborgLegs",
+            "brain": "ZNULLBRAIN",
+            "repair": "ZNULLREPAIR",
+            "ecm": "ZNULLECM",
+            "sensor": "ZNULLSENSOR",
+            "construct": "ZNULLCONSTRUCT",
+            "weapons": [
+              "CyborgFlamer01"
+            ]
+          },
+          {
+            "fullname": "Grenadier Cyborg",
+            "name": "",
+            "id": "native:[\"Grenadier Cyborg\",\"CyborgLightBody\",\"CyborgLegs\",[\"Cyb-Wpn-Grenade\"],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+            "points": 462,
+            "power": 107,
+            "cost": 107,
+            "droidType": 5,
+            "body": "CyborgLightBody",
+            "propulsion": "CyborgLegs",
+            "brain": "ZNULLBRAIN",
+            "repair": "ZNULLREPAIR",
+            "ecm": "ZNULLECM",
+            "sensor": "ZNULLSENSOR",
+            "construct": "ZNULLCONSTRUCT",
+            "weapons": [
+              "Cyb-Wpn-Grenade"
+            ]
+          },
+          {
+            "fullname": "Mechanic Cyborg",
+            "name": "",
+            "id": "native:[\"Mechanic Cyborg\",\"CyborgLightBody\",\"CyborgLegs\",[],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"CyborgRepair\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+            "points": 242,
+            "power": 62,
+            "cost": 62,
+            "droidType": 11,
+            "body": "CyborgLightBody",
+            "propulsion": "CyborgLegs",
+            "brain": "ZNULLBRAIN",
+            "repair": "CyborgRepair",
+            "ecm": "ZNULLECM",
+            "sensor": "ZNULLSENSOR",
+            "construct": "ZNULLCONSTRUCT",
+            "weapons": []
+          },
+          {
+            "fullname": "Design 2 · F160157",
+            "name": "",
+            "id": "native:[\"Design 2 · F160157\",\"Body1REC\",\"wheeled01\",[\"MG1Mk1\"],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+            "points": 275,
+            "power": 55,
+            "cost": 55,
+            "droidType": 0,
+            "body": "Body1REC",
+            "propulsion": "wheeled01",
+            "brain": "ZNULLBRAIN",
+            "repair": "ZNULLREPAIR",
+            "ecm": "ZNULLECM",
+            "sensor": "ZNULLSENSOR",
+            "construct": "ZNULLCONSTRUCT",
+            "weapons": [
+              "MG1Mk1"
+            ]
+          }
+        ],
+        "finishedUnits": [
+          {
+            "body": "Body1REC",
+            "factoryId": 160157,
+            "gameTime": 18202,
+            "id": 160191,
+            "name": "Design 2",
+            "propulsion": "wheeled01"
+          },
+          {
+            "body": "Body1REC",
+            "factoryId": 160167,
+            "gameTime": 21802,
+            "id": 160193,
+            "name": "Design 2",
+            "propulsion": "wheeled01"
+          }
+        ],
+        "finishedBuilds": []
+      }
+    },
+    {
+      "name": "ordinary-quit-queue",
+      "fixture": "early",
+      "paused": false,
+      "nativeLoadReadiness": [
+        {
+          "source": "native wave clock after load; no stale command snapshot",
+          "before": {
+            "running": true,
+            "clock": 27502,
+            "rewinds": 0,
+            "samples": [
+              {
+                "ms": 1794041856238,
+                "clock": 26502
+              },
+              {
+                "ms": 1794041856509,
+                "clock": 26502
+              },
+              {
+                "ms": 1794041856842,
+                "clock": 27002
+              },
+              {
+                "ms": 1794041857153,
+                "clock": 27002
+              },
+              {
+                "ms": 1794041857504,
+                "clock": 27502
+              }
+            ]
+          }
+        }
+      ],
+      "restores": [
+        {
+          "fixture": "qa/v6.1-compact/final/checkpoints/td2-normal-early.json",
+          "source": "complete native QuickSave from ordinary gameplay",
+          "seeded": false,
+          "fileCount": 24,
+          "completeSaveSHA256": "5d7f10ece8452ee278eed71431a149d91b5999fdb13020f8bf6755fe71c2d7c3",
+          "targetTime": 26302,
+          "observedTime": 28802,
+          "trucks": [
+            {
+              "id": 160001,
+              "x": 59,
+              "y": 8
+            },
+            {
+              "id": 160003,
+              "x": 7,
+              "y": 37
+            },
+            {
+              "id": 160005,
+              "x": 7,
+              "y": 38
+            },
+            {
+              "id": 160007,
+              "x": 59,
+              "y": 7
+            },
+            {
+              "id": 160009,
+              "x": 59,
+              "y": 9
+            },
+            {
+              "id": 160011,
+              "x": 7,
+              "y": 36
+            }
+          ],
+          "researchQueues": [
+            {
+              "labId": 160169,
+              "topicIds": []
+            },
+            {
+              "labId": 160171,
+              "topicIds": []
+            },
+            {
+              "labId": 160173,
+              "topicIds": []
+            },
+            {
+              "labId": 160175,
+              "topicIds": []
+            }
+          ],
+          "finishedUnitRecords": [
+            [
+              160191,
+              160157,
+              19802,
+              "Design 2",
+              "Body1REC",
+              "wheeled01"
+            ],
+            [
+              160193,
+              160167,
+              23202,
+              "Design 2",
+              "Body1REC",
+              "wheeled01"
+            ]
+          ]
+        }
+      ],
+      "native": {
+        "version": 1,
+        "gameTime": 28802,
+        "player": 0,
+        "power": 2417,
+        "mapWidth": 64,
+        "mapHeight": 64,
+        "alwaysQueue": true,
+        "researchQueues": [
+          {
+            "labId": 160169,
+            "topicIds": []
+          },
+          {
+            "labId": 160171,
+            "topicIds": []
+          },
+          {
+            "labId": 160173,
+            "topicIds": []
+          },
+          {
+            "labId": 160175,
+            "topicIds": []
+          }
+        ],
+        "hasHQ": true,
+        "selectedUnits": [],
+        "construction": [],
+        "constructionSites": [],
+        "nativeBuildOptions": [
+          "A0ADemolishStructure",
+          "A0ComDroidControl",
+          "A0CyborgFactory",
+          "A0FacMod1",
+          "A0HardcreteMk1Gate",
+          "A0HardcreteMk1Wall",
+          "A0LightFactory",
+          "A0PowMod1",
+          "A0PowerGenerator",
+          "A0ResearchFacility",
+          "A0ResearchModule1",
+          "A0ResourceExtractor",
+          "A0TankTrap",
+          "GuardTower1",
+          "GuardTower6",
+          "PillBox1",
+          "PillBox4",
+          "PillBox5",
+          "Sys-SensoTower01",
+          "Sys-SensoTower02",
+          "WallTower02"
+        ],
+        "buildings": [
+          {
+            "id": "A0ComDroidControl",
+            "power": 100
+          },
+          {
+            "id": "A0CyborgFactory",
+            "power": 100
+          },
+          {
+            "id": "A0FacMod1",
+            "power": 100
+          },
+          {
+            "id": "A0HardcreteMk1CWall",
+            "power": 25
+          },
+          {
+            "id": "A0HardcreteMk1Gate",
+            "power": 50
+          },
+          {
+            "id": "A0HardcreteMk1Wall",
+            "power": 25
+          },
+          {
+            "id": "A0LightFactory",
+            "power": 100
+          },
+          {
+            "id": "A0PowMod1",
+            "power": 0
+          },
+          {
+            "id": "A0PowerGenerator",
+            "power": 50
+          },
+          {
+            "id": "A0ResearchFacility",
+            "power": 100
+          },
+          {
+            "id": "A0ResearchModule1",
+            "power": 100
+          },
+          {
+            "id": "A0ResourceExtractor",
+            "power": 0
+          },
+          {
+            "id": "A0TankTrap",
+            "power": 15
+          },
+          {
+            "id": "GuardTower1",
+            "power": 100
+          },
+          {
+            "id": "GuardTower6",
+            "power": 100
+          },
+          {
+            "id": "PillBox1",
+            "power": 100
+          },
+          {
+            "id": "PillBox4",
+            "power": 100
+          },
+          {
+            "id": "PillBox5",
+            "power": 100
+          },
+          {
+            "id": "Sys-SensoTower01",
+            "power": 50
+          },
+          {
+            "id": "Sys-SensoTower02",
+            "power": 100
+          },
+          {
+            "id": "WallTower02",
+            "power": 100
+          }
+        ],
+        "parts": [
+          "Body1REC",
+          "Cannon1-VTOL",
+          "Cannon1Mk1",
+          "CommandBrain01",
+          "Flame1Mk1",
+          "HalfTrack",
+          "LightRepair1",
+          "MG1-VTOL",
+          "MG1Mk1",
+          "MG2-VTOL",
+          "MG2Mk1",
+          "Mortar1Mk1",
+          "Rocket-Pod",
+          "Rocket-VTOL-Pod",
+          "SensorTurret1Mk1",
+          "Spade1Mk1",
+          "wheeled01"
+        ],
+        "trucks": [
+          {
+            "id": 160001,
+            "x": 59,
+            "y": 8,
+            "z": 2,
+            "selected": false,
+            "order": 0,
+            "action": 0,
+            "rate": 9,
+            "building": false,
+            "queued": 0
+          },
+          {
+            "id": 160003,
+            "x": 7,
+            "y": 37,
+            "z": 2,
+            "selected": false,
+            "order": 0,
+            "action": 0,
+            "rate": 9,
+            "building": false,
+            "queued": 0
+          },
+          {
+            "id": 160005,
+            "x": 7,
+            "y": 38,
+            "z": 2,
+            "selected": false,
+            "order": 0,
+            "action": 0,
+            "rate": 9,
+            "building": false,
+            "queued": 0
+          },
+          {
+            "id": 160007,
+            "x": 59,
+            "y": 7,
+            "z": 2,
+            "selected": false,
+            "order": 0,
+            "action": 0,
+            "rate": 9,
+            "building": false,
+            "queued": 0
+          },
+          {
+            "id": 160009,
+            "x": 59,
+            "y": 9,
+            "z": 2,
+            "selected": false,
+            "order": 0,
+            "action": 0,
+            "rate": 9,
+            "building": false,
+            "queued": 0
+          },
+          {
+            "id": 160011,
+            "x": 7,
+            "y": 36,
+            "z": 2,
+            "selected": false,
+            "order": 0,
+            "action": 0,
+            "rate": 9,
+            "building": false,
+            "queued": 0
+          }
+        ],
+        "jobs": [],
+        "factories": [
+          {
+            "id": 160157,
+            "number": 1,
+            "x": 59,
+            "y": 4,
+            "type": 1,
+            "kind": "Factory",
+            "templates": [
+              "native:[\"Truck Viper Wheels\",\"Body1REC\",\"wheeled01\",[],\"Spade1Mk1\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+              "native:[\"Design 2 · F160157\",\"Body1REC\",\"wheeled01\",[\"MG1Mk1\"],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]"
+            ],
+            "modules": 1,
+            "ready": true,
+            "idle": true,
+            "active": null,
+            "waitingReason": null,
+            "queue": []
+          },
+          {
+            "id": 160167,
+            "number": 2,
+            "x": 4,
+            "y": 38,
+            "type": 1,
+            "kind": "Factory",
+            "templates": [
+              "native:[\"Truck Viper Wheels\",\"Body1REC\",\"wheeled01\",[],\"Spade1Mk1\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+              "native:[\"Design 2 · F160157\",\"Body1REC\",\"wheeled01\",[\"MG1Mk1\"],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]"
+            ],
+            "modules": 1,
+            "ready": true,
+            "idle": true,
+            "active": null,
+            "waitingReason": null,
+            "queue": []
+          }
+        ],
+        "nativeMenu": "",
+        "templates": [
+          {
+            "fullname": "Truck Viper Wheels",
+            "name": "",
+            "id": "native:[\"Truck Viper Wheels\",\"Body1REC\",\"wheeled01\",[],\"Spade1Mk1\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+            "points": 310,
+            "power": 62,
+            "cost": 62,
+            "droidType": 3,
+            "body": "Body1REC",
+            "propulsion": "wheeled01",
+            "brain": "ZNULLBRAIN",
+            "repair": "ZNULLREPAIR",
+            "ecm": "ZNULLECM",
+            "sensor": "ZNULLSENSOR",
+            "construct": "Spade1Mk1",
+            "weapons": []
+          },
+          {
+            "fullname": "Heavy Gunner Cyborg",
+            "name": "",
+            "id": "native:[\"Heavy Gunner Cyborg\",\"CyborgLightBody\",\"CyborgLegs\",[\"CyborgCannon\"],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+            "points": 382,
+            "power": 87,
+            "cost": 87,
+            "droidType": 5,
+            "body": "CyborgLightBody",
+            "propulsion": "CyborgLegs",
+            "brain": "ZNULLBRAIN",
+            "repair": "ZNULLREPAIR",
+            "ecm": "ZNULLECM",
+            "sensor": "ZNULLSENSOR",
+            "construct": "ZNULLCONSTRUCT",
+            "weapons": [
+              "CyborgCannon"
+            ]
+          },
+          {
+            "fullname": "Machinegunner Cyborg",
+            "name": "",
+            "id": "native:[\"Machinegunner Cyborg\",\"CyborgLightBody\",\"CyborgLegs\",[\"CyborgChaingun\"],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+            "points": 302,
+            "power": 67,
+            "cost": 67,
+            "droidType": 5,
+            "body": "CyborgLightBody",
+            "propulsion": "CyborgLegs",
+            "brain": "ZNULLBRAIN",
+            "repair": "ZNULLREPAIR",
+            "ecm": "ZNULLECM",
+            "sensor": "ZNULLSENSOR",
+            "construct": "ZNULLCONSTRUCT",
+            "weapons": [
+              "CyborgChaingun"
+            ]
+          },
+          {
+            "fullname": "Combat Engineer Cyborg",
+            "name": "",
+            "id": "native:[\"Combat Engineer Cyborg\",\"CyborgLightBody\",\"CyborgLegs\",[],\"CyborgSpade\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+            "points": 207,
+            "power": 37,
+            "cost": 37,
+            "droidType": 10,
+            "body": "CyborgLightBody",
+            "propulsion": "CyborgLegs",
+            "brain": "ZNULLBRAIN",
+            "repair": "ZNULLREPAIR",
+            "ecm": "ZNULLECM",
+            "sensor": "ZNULLSENSOR",
+            "construct": "CyborgSpade",
+            "weapons": []
+          },
+          {
+            "fullname": "Flamer Cyborg",
+            "name": "",
+            "id": "native:[\"Flamer Cyborg\",\"CyborgLightBody\",\"CyborgLegs\",[\"CyborgFlamer01\"],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+            "points": 342,
+            "power": 82,
+            "cost": 82,
+            "droidType": 5,
+            "body": "CyborgLightBody",
+            "propulsion": "CyborgLegs",
+            "brain": "ZNULLBRAIN",
+            "repair": "ZNULLREPAIR",
+            "ecm": "ZNULLECM",
+            "sensor": "ZNULLSENSOR",
+            "construct": "ZNULLCONSTRUCT",
+            "weapons": [
+              "CyborgFlamer01"
+            ]
+          },
+          {
+            "fullname": "Grenadier Cyborg",
+            "name": "",
+            "id": "native:[\"Grenadier Cyborg\",\"CyborgLightBody\",\"CyborgLegs\",[\"Cyb-Wpn-Grenade\"],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+            "points": 462,
+            "power": 107,
+            "cost": 107,
+            "droidType": 5,
+            "body": "CyborgLightBody",
+            "propulsion": "CyborgLegs",
+            "brain": "ZNULLBRAIN",
+            "repair": "ZNULLREPAIR",
+            "ecm": "ZNULLECM",
+            "sensor": "ZNULLSENSOR",
+            "construct": "ZNULLCONSTRUCT",
+            "weapons": [
+              "Cyb-Wpn-Grenade"
+            ]
+          },
+          {
+            "fullname": "Mechanic Cyborg",
+            "name": "",
+            "id": "native:[\"Mechanic Cyborg\",\"CyborgLightBody\",\"CyborgLegs\",[],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"CyborgRepair\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+            "points": 242,
+            "power": 62,
+            "cost": 62,
+            "droidType": 11,
+            "body": "CyborgLightBody",
+            "propulsion": "CyborgLegs",
+            "brain": "ZNULLBRAIN",
+            "repair": "CyborgRepair",
+            "ecm": "ZNULLECM",
+            "sensor": "ZNULLSENSOR",
+            "construct": "ZNULLCONSTRUCT",
+            "weapons": []
+          },
+          {
+            "fullname": "Design 2 · F160157",
+            "name": "",
+            "id": "native:[\"Design 2 · F160157\",\"Body1REC\",\"wheeled01\",[\"MG1Mk1\"],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+            "points": 275,
+            "power": 55,
+            "cost": 55,
+            "droidType": 0,
+            "body": "Body1REC",
+            "propulsion": "wheeled01",
+            "brain": "ZNULLBRAIN",
+            "repair": "ZNULLREPAIR",
+            "ecm": "ZNULLECM",
+            "sensor": "ZNULLSENSOR",
+            "construct": "ZNULLCONSTRUCT",
+            "weapons": [
+              "MG1Mk1"
+            ]
+          }
+        ],
+        "finishedUnits": [
+          {
+            "body": "Body1REC",
+            "factoryId": 160157,
+            "gameTime": 19802,
+            "id": 160191,
+            "name": "Design 2",
+            "propulsion": "wheeled01"
+          },
+          {
+            "body": "Body1REC",
+            "factoryId": 160167,
+            "gameTime": 23202,
+            "id": 160193,
+            "name": "Design 2",
+            "propulsion": "wheeled01"
+          }
+        ],
+        "finishedBuilds": []
+      }
+    }
+  ],
+  "identity": {
+    "packageId": "com.rbabbit.warzonetowers.lab",
+    "device": "emulator-5556",
+    "candidateAPK_SHA256": "64324e568fd21ac449958d3f0d6e0f289e1ef9a06befd1d05de550fee272822f",
+    "installedPath": "/data/app/~~l-N64ddRaVbBK4lqx1MGog==/com.rbabbit.warzonetowers.lab-gPsigZJtg9ae2bFIZtYNOA==/base.apk"
+  },
+  "libraryPreservedAcrossUpdate": true,
+  "current": "completed",
+  "finished": "2026-11-07T09:01:02.130Z",
+  "fixtureRetries": [
+    {
+      "phase": "three-site-mixed-fifo",
+      "reason": "AssertionError [ERR_ASSERTION]: three-site-mixed-fifo process must pass\n\n1 !== 0\n\n    at child (C:\\timerApp\\wz-towers-lab\\tools\\run-test-02-integrated.cjs:13:42)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async C:\\timerApp\\wz-towers-lab\\tools\\run-test-02-integrated.cjs:52:3",
+      "correction": "Read-only reachability preview now waits for the completed real selection after the deliberately immediate first item tap; no game-source change."
+    },
+    {
+      "phase": "genuine-native-save-load",
+      "reason": "AssertionError [ERR_ASSERTION]: genuine-native-save-load process must pass\n\n1 !== 0\n\n    at child (C:\\timerApp\\wz-towers-lab\\tools\\run-test-02-integrated.cjs:13:42)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async C:\\timerApp\\wz-towers-lab\\tools\\run-test-02-integrated.cjs:59:3",
+      "correction": "Research observer now reads actual native script logs and completion events; genuine F8 had already rewound the native clock. Reuse prepared paused world; no game-source change."
+    },
+    {
+      "phase": "genuine-native-save-load",
+      "reason": "AssertionError [ERR_ASSERTION]: genuine-native-save-load process must pass\n\n1 !== 0\n\n    at child (C:\\timerApp\\wz-towers-lab\\tools\\run-test-02-integrated.cjs:13:42)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async C:\\timerApp\\wz-towers-lab\\tools\\run-test-02-integrated.cjs:61:3",
+      "correction": "Research observer now reads actual native script logs and completion events; genuine F8 had already rewound the native clock. Reuse prepared paused world; no game-source change."
+    }
+  ],
+  "quitFixture": {
+    "native": {
+      "version": 1,
+      "gameTime": 42502,
+      "player": 0,
+      "power": 2330,
+      "mapWidth": 64,
+      "mapHeight": 64,
+      "alwaysQueue": true,
+      "researchQueues": [
+        {
+          "labId": 160169,
+          "topicIds": []
+        },
+        {
+          "labId": 160171,
+          "topicIds": []
+        },
+        {
+          "labId": 160173,
+          "topicIds": []
+        },
+        {
+          "labId": 160175,
+          "topicIds": []
+        }
+      ],
+      "hasHQ": true,
+      "selectedUnits": [
+        {
+          "id": 160003,
+          "x": 9,
+          "y": 39,
+          "z": 2,
+          "order": 4,
+          "constructor": true
+        },
+        {
+          "id": 160005,
+          "x": 8,
+          "y": 39,
+          "z": 2,
+          "order": 4,
+          "constructor": true
+        },
+        {
+          "id": 160011,
+          "x": 7,
+          "y": 39,
+          "z": 2,
+          "order": 4,
+          "constructor": true
+        }
+      ],
+      "construction": [
+        {
+          "id": 164513,
+          "itemId": "GuardTower1",
+          "name": "Heavy Machinegun Guard Tower",
+          "x": 8,
+          "y": 40,
+          "progress": 0.2,
+          "approximate": true,
+          "workers": 3,
+          "rate": 27,
+          "status": "building",
+          "remaining": 9
+        }
+      ],
+      "constructionSites": [
+        {
+          "id": "cmd-1794041866215-728",
+          "itemId": "GuardTower1",
+          "x": 8,
+          "y": 40,
+          "workers": [
+            160005,
+            160003,
+            160011
+          ],
+          "automatic": false,
+          "status": "building",
+          "created": 37002,
+          "attempts": {
+            "160003": 1,
+            "160005": 1,
+            "160011": 1
+          },
+          "issued": {
+            "160003": 37002,
+            "160005": 37002,
+            "160011": 37002
+          },
+          "parentId": 0,
+          "targetModules": 0,
+          "reason": "",
+          "knownStructures": [],
+          "idleAt": null,
+          "remaining": 9,
+          "structureId": 164513,
+          "nativeX": 8,
+          "nativeY": 40,
+          "observed": true,
+          "progress": 0.2,
+          "workersActive": 3
+        },
+        {
+          "id": "cmd-1794041867644-733",
+          "itemId": "GuardTower1",
+          "x": 9,
+          "y": 40,
+          "workers": [
+            160005,
+            160003,
+            160011
+          ],
+          "automatic": false,
+          "status": "queued",
+          "created": 38502,
+          "attempts": {},
+          "issued": {},
+          "parentId": 0,
+          "targetModules": 0,
+          "reason": "",
+          "knownStructures": [],
+          "idleAt": null,
+          "remaining": null
+        },
+        {
+          "id": "cmd-1794041869396-739",
+          "itemId": "GuardTower1",
+          "x": 9,
+          "y": 42,
+          "workers": [
+            160005,
+            160003,
+            160011
+          ],
+          "automatic": false,
+          "status": "queued",
+          "created": 40202,
+          "attempts": {},
+          "issued": {},
+          "parentId": 0,
+          "targetModules": 0,
+          "reason": "",
+          "knownStructures": [
+            164513
+          ],
+          "idleAt": null,
+          "remaining": null
+        }
+      ],
+      "nativeBuildOptions": [
+        "A0ADemolishStructure",
+        "A0ComDroidControl",
+        "A0CyborgFactory",
+        "A0FacMod1",
+        "A0HardcreteMk1Gate",
+        "A0HardcreteMk1Wall",
+        "A0LightFactory",
+        "A0PowMod1",
+        "A0PowerGenerator",
+        "A0ResearchFacility",
+        "A0ResearchModule1",
+        "A0ResourceExtractor",
+        "A0TankTrap",
+        "GuardTower1",
+        "GuardTower6",
+        "PillBox1",
+        "PillBox4",
+        "PillBox5",
+        "Sys-SensoTower01",
+        "Sys-SensoTower02",
+        "WallTower02"
+      ],
+      "buildings": [
+        {
+          "id": "A0ComDroidControl",
+          "power": 100
+        },
+        {
+          "id": "A0CyborgFactory",
+          "power": 100
+        },
+        {
+          "id": "A0FacMod1",
+          "power": 100
+        },
+        {
+          "id": "A0HardcreteMk1CWall",
+          "power": 25
+        },
+        {
+          "id": "A0HardcreteMk1Gate",
+          "power": 50
+        },
+        {
+          "id": "A0HardcreteMk1Wall",
+          "power": 25
+        },
+        {
+          "id": "A0LightFactory",
+          "power": 100
+        },
+        {
+          "id": "A0PowMod1",
+          "power": 0
+        },
+        {
+          "id": "A0PowerGenerator",
+          "power": 50
+        },
+        {
+          "id": "A0ResearchFacility",
+          "power": 100
+        },
+        {
+          "id": "A0ResearchModule1",
+          "power": 100
+        },
+        {
+          "id": "A0ResourceExtractor",
+          "power": 0
+        },
+        {
+          "id": "A0TankTrap",
+          "power": 15
+        },
+        {
+          "id": "GuardTower1",
+          "power": 100
+        },
+        {
+          "id": "GuardTower6",
+          "power": 100
+        },
+        {
+          "id": "PillBox1",
+          "power": 100
+        },
+        {
+          "id": "PillBox4",
+          "power": 100
+        },
+        {
+          "id": "PillBox5",
+          "power": 100
+        },
+        {
+          "id": "Sys-SensoTower01",
+          "power": 50
+        },
+        {
+          "id": "Sys-SensoTower02",
+          "power": 100
+        },
+        {
+          "id": "WallTower02",
+          "power": 100
+        }
+      ],
+      "parts": [
+        "Body1REC",
+        "Cannon1-VTOL",
+        "Cannon1Mk1",
+        "CommandBrain01",
+        "Flame1Mk1",
+        "HalfTrack",
+        "LightRepair1",
+        "MG1-VTOL",
+        "MG1Mk1",
+        "MG2-VTOL",
+        "MG2Mk1",
+        "Mortar1Mk1",
+        "Rocket-Pod",
+        "Rocket-VTOL-Pod",
+        "SensorTurret1Mk1",
+        "Spade1Mk1",
+        "wheeled01"
+      ],
+      "trucks": [
+        {
+          "id": 160001,
+          "x": 59,
+          "y": 8,
+          "z": 2,
+          "selected": false,
+          "order": 0,
+          "action": 0,
+          "rate": 9,
+          "building": false,
+          "queued": 0
+        },
+        {
+          "id": 160003,
+          "x": 9,
+          "y": 39,
+          "z": 2,
+          "selected": true,
+          "order": 4,
+          "action": 2,
+          "rate": 9,
+          "building": true,
+          "queued": 3
+        },
+        {
+          "id": 160005,
+          "x": 8,
+          "y": 39,
+          "z": 2,
+          "selected": true,
+          "order": 4,
+          "action": 2,
+          "rate": 9,
+          "building": true,
+          "queued": 3
+        },
+        {
+          "id": 160007,
+          "x": 59,
+          "y": 7,
+          "z": 2,
+          "selected": false,
+          "order": 0,
+          "action": 0,
+          "rate": 9,
+          "building": false,
+          "queued": 0
+        },
+        {
+          "id": 160009,
+          "x": 59,
+          "y": 9,
+          "z": 2,
+          "selected": false,
+          "order": 0,
+          "action": 0,
+          "rate": 9,
+          "building": false,
+          "queued": 0
+        },
+        {
+          "id": 160011,
+          "x": 7,
+          "y": 39,
+          "z": 2,
+          "selected": true,
+          "order": 4,
+          "action": 2,
+          "rate": 9,
+          "building": true,
+          "queued": 3
+        }
+      ],
+      "jobs": [
+        {
+          "id": "cmd-1794041866215-728",
+          "itemId": "GuardTower1",
+          "x": 8,
+          "y": 40,
+          "workers": [
+            160005,
+            160003,
+            160011
+          ],
+          "automatic": false,
+          "status": "working",
+          "created": 37002,
+          "attempts": {
+            "160003": 1,
+            "160005": 1,
+            "160011": 1
+          },
+          "issued": {
+            "160003": 37002,
+            "160005": 37002,
+            "160011": 37002
+          },
+          "parentId": 0,
+          "targetModules": 0,
+          "reason": ""
+        },
+        {
+          "id": "cmd-1794041867644-733",
+          "itemId": "GuardTower1",
+          "x": 9,
+          "y": 40,
+          "workers": [
+            160005,
+            160003,
+            160011
+          ],
+          "automatic": false,
+          "status": "queued",
+          "created": 38502,
+          "attempts": {},
+          "issued": {},
+          "parentId": 0,
+          "targetModules": 0,
+          "reason": ""
+        },
+        {
+          "id": "cmd-1794041869396-739",
+          "itemId": "GuardTower1",
+          "x": 9,
+          "y": 42,
+          "workers": [
+            160005,
+            160003,
+            160011
+          ],
+          "automatic": false,
+          "status": "queued",
+          "created": 40202,
+          "attempts": {},
+          "issued": {},
+          "parentId": 0,
+          "targetModules": 0,
+          "reason": ""
+        }
+      ],
+      "factories": [
+        {
+          "id": 160157,
+          "number": 1,
+          "x": 59,
+          "y": 4,
+          "type": 1,
+          "kind": "Factory",
+          "templates": [
+            "native:[\"Truck Viper Wheels\",\"Body1REC\",\"wheeled01\",[],\"Spade1Mk1\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+            "native:[\"Design 2 · F160157\",\"Body1REC\",\"wheeled01\",[\"MG1Mk1\"],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]"
+          ],
+          "modules": 1,
+          "ready": true,
+          "idle": true,
+          "active": null,
+          "waitingReason": null,
+          "queue": []
+        },
+        {
+          "id": 160167,
+          "number": 2,
+          "x": 4,
+          "y": 38,
+          "type": 1,
+          "kind": "Factory",
+          "templates": [
+            "native:[\"Truck Viper Wheels\",\"Body1REC\",\"wheeled01\",[],\"Spade1Mk1\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+            "native:[\"Design 2 · F160157\",\"Body1REC\",\"wheeled01\",[\"MG1Mk1\"],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]"
+          ],
+          "modules": 1,
+          "ready": true,
+          "idle": true,
+          "active": null,
+          "waitingReason": null,
+          "queue": []
+        }
+      ],
+      "nativeMenu": "",
+      "templates": [
+        {
+          "fullname": "Truck Viper Wheels",
+          "name": "",
+          "id": "native:[\"Truck Viper Wheels\",\"Body1REC\",\"wheeled01\",[],\"Spade1Mk1\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+          "points": 310,
+          "power": 62,
+          "cost": 62,
+          "droidType": 3,
+          "body": "Body1REC",
+          "propulsion": "wheeled01",
+          "brain": "ZNULLBRAIN",
+          "repair": "ZNULLREPAIR",
+          "ecm": "ZNULLECM",
+          "sensor": "ZNULLSENSOR",
+          "construct": "Spade1Mk1",
+          "weapons": []
+        },
+        {
+          "fullname": "Heavy Gunner Cyborg",
+          "name": "",
+          "id": "native:[\"Heavy Gunner Cyborg\",\"CyborgLightBody\",\"CyborgLegs\",[\"CyborgCannon\"],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+          "points": 382,
+          "power": 87,
+          "cost": 87,
+          "droidType": 5,
+          "body": "CyborgLightBody",
+          "propulsion": "CyborgLegs",
+          "brain": "ZNULLBRAIN",
+          "repair": "ZNULLREPAIR",
+          "ecm": "ZNULLECM",
+          "sensor": "ZNULLSENSOR",
+          "construct": "ZNULLCONSTRUCT",
+          "weapons": [
+            "CyborgCannon"
+          ]
+        },
+        {
+          "fullname": "Machinegunner Cyborg",
+          "name": "",
+          "id": "native:[\"Machinegunner Cyborg\",\"CyborgLightBody\",\"CyborgLegs\",[\"CyborgChaingun\"],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+          "points": 302,
+          "power": 67,
+          "cost": 67,
+          "droidType": 5,
+          "body": "CyborgLightBody",
+          "propulsion": "CyborgLegs",
+          "brain": "ZNULLBRAIN",
+          "repair": "ZNULLREPAIR",
+          "ecm": "ZNULLECM",
+          "sensor": "ZNULLSENSOR",
+          "construct": "ZNULLCONSTRUCT",
+          "weapons": [
+            "CyborgChaingun"
+          ]
+        },
+        {
+          "fullname": "Combat Engineer Cyborg",
+          "name": "",
+          "id": "native:[\"Combat Engineer Cyborg\",\"CyborgLightBody\",\"CyborgLegs\",[],\"CyborgSpade\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+          "points": 207,
+          "power": 37,
+          "cost": 37,
+          "droidType": 10,
+          "body": "CyborgLightBody",
+          "propulsion": "CyborgLegs",
+          "brain": "ZNULLBRAIN",
+          "repair": "ZNULLREPAIR",
+          "ecm": "ZNULLECM",
+          "sensor": "ZNULLSENSOR",
+          "construct": "CyborgSpade",
+          "weapons": []
+        },
+        {
+          "fullname": "Flamer Cyborg",
+          "name": "",
+          "id": "native:[\"Flamer Cyborg\",\"CyborgLightBody\",\"CyborgLegs\",[\"CyborgFlamer01\"],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+          "points": 342,
+          "power": 82,
+          "cost": 82,
+          "droidType": 5,
+          "body": "CyborgLightBody",
+          "propulsion": "CyborgLegs",
+          "brain": "ZNULLBRAIN",
+          "repair": "ZNULLREPAIR",
+          "ecm": "ZNULLECM",
+          "sensor": "ZNULLSENSOR",
+          "construct": "ZNULLCONSTRUCT",
+          "weapons": [
+            "CyborgFlamer01"
+          ]
+        },
+        {
+          "fullname": "Grenadier Cyborg",
+          "name": "",
+          "id": "native:[\"Grenadier Cyborg\",\"CyborgLightBody\",\"CyborgLegs\",[\"Cyb-Wpn-Grenade\"],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+          "points": 462,
+          "power": 107,
+          "cost": 107,
+          "droidType": 5,
+          "body": "CyborgLightBody",
+          "propulsion": "CyborgLegs",
+          "brain": "ZNULLBRAIN",
+          "repair": "ZNULLREPAIR",
+          "ecm": "ZNULLECM",
+          "sensor": "ZNULLSENSOR",
+          "construct": "ZNULLCONSTRUCT",
+          "weapons": [
+            "Cyb-Wpn-Grenade"
+          ]
+        },
+        {
+          "fullname": "Mechanic Cyborg",
+          "name": "",
+          "id": "native:[\"Mechanic Cyborg\",\"CyborgLightBody\",\"CyborgLegs\",[],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"CyborgRepair\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+          "points": 242,
+          "power": 62,
+          "cost": 62,
+          "droidType": 11,
+          "body": "CyborgLightBody",
+          "propulsion": "CyborgLegs",
+          "brain": "ZNULLBRAIN",
+          "repair": "CyborgRepair",
+          "ecm": "ZNULLECM",
+          "sensor": "ZNULLSENSOR",
+          "construct": "ZNULLCONSTRUCT",
+          "weapons": []
+        },
+        {
+          "fullname": "Design 2 · F160157",
+          "name": "",
+          "id": "native:[\"Design 2 · F160157\",\"Body1REC\",\"wheeled01\",[\"MG1Mk1\"],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+          "points": 275,
+          "power": 55,
+          "cost": 55,
+          "droidType": 0,
+          "body": "Body1REC",
+          "propulsion": "wheeled01",
+          "brain": "ZNULLBRAIN",
+          "repair": "ZNULLREPAIR",
+          "ecm": "ZNULLECM",
+          "sensor": "ZNULLSENSOR",
+          "construct": "ZNULLCONSTRUCT",
+          "weapons": [
+            "MG1Mk1"
+          ]
+        }
+      ],
+      "finishedUnits": [
+        {
+          "body": "Body1REC",
+          "factoryId": 160157,
+          "gameTime": 19802,
+          "id": 160191,
+          "name": "Design 2",
+          "propulsion": "wheeled01"
+        },
+        {
+          "body": "Body1REC",
+          "factoryId": 160167,
+          "gameTime": 23202,
+          "id": 160193,
+          "name": "Design 2",
+          "propulsion": "wheeled01"
+        }
+      ],
+      "finishedBuilds": []
+    },
+    "ghosts": {
+      "models": 165,
+      "acceptedSites": [
+        {
+          "id": "cmd-1794041866215-728",
+          "number": 1,
+          "itemId": "GuardTower1",
+          "x": 8,
+          "y": 40,
+          "status": "building"
+        },
+        {
+          "id": "cmd-1794041867644-733",
+          "number": 2,
+          "itemId": "GuardTower1",
+          "x": 9,
+          "y": 40,
+          "status": "queued"
+        },
+        {
+          "id": "cmd-1794041869396-739",
+          "number": 3,
+          "itemId": "GuardTower1",
+          "x": 9,
+          "y": 42,
+          "status": "queued"
+        }
+      ],
+      "drawn": [
+        {
+          "id": "cmd-1794041866215-728",
+          "number": 1,
+          "itemId": "GuardTower1",
+          "x": 8,
+          "y": 40,
+          "height": 256,
+          "screenX": 524.3795431600884,
+          "screenY": -112.21189644496296,
+          "model": false,
+          "triangles": 0
+        },
+        {
+          "id": "cmd-1794041867644-733",
+          "number": 2,
+          "itemId": "GuardTower1",
+          "x": 9,
+          "y": 40,
+          "height": 256,
+          "screenX": 551.6204738927422,
+          "screenY": -112.21189644496296,
+          "model": true,
+          "triangles": 86
+        },
+        {
+          "id": "cmd-1794041869396-739",
+          "number": 3,
+          "itemId": "GuardTower1",
+          "x": 9,
+          "y": 42,
+          "height": 256,
+          "screenX": 552.2199336886106,
+          "screenY": -89.03822375734006,
+          "model": true,
+          "triangles": 86
+        }
+      ],
+      "preview": "",
+      "frames": 298,
+      "paintMs": 0.26999999582767487,
+      "maxPaintMs": 23.160000003874302,
+      "error": ""
+    },
+    "pausedAt": 45502
+  },
+  "afterIdentity": {
+    "packageId": "com.rbabbit.warzonetowers.lab",
+    "device": "emulator-5556",
+    "candidateAPK_SHA256": "64324e568fd21ac449958d3f0d6e0f289e1ef9a06befd1d05de550fee272822f",
+    "installedPath": "/data/app/~~l-N64ddRaVbBK4lqx1MGog==/com.rbabbit.warzonetowers.lab-gPsigZJtg9ae2bFIZtYNOA==/base.apk"
+  }
+}

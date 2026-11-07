@@ -1,0 +1,30 @@
+{
+  "passed": false,
+  "identity": {
+    "packageId": "com.rbabbit.warzonetowers.lab",
+    "device": "emulator-5556",
+    "candidateAPK_SHA256": "6f143ed3ca0f0678cd805e59fda00d97e8e859373e73b438f725e301f7201734",
+    "installedPath": "/data/app/~~AqPs8xfivFOIwtFpoduDhw==/com.rbabbit.warzonetowers.lab-0CPaC5sn3X7pk7oQww7CSg==/base.apk"
+  },
+  "started": "2026-11-07T14:54:09.057Z",
+  "phases": [
+    {
+      "name": "research-power-and-native-save-load",
+      "passed": true,
+      "folder": "module-journey"
+    },
+    {
+      "name": "factory-two-levels-and-normal-production",
+      "passed": true,
+      "folder": "factory-journey"
+    },
+    {
+      "name": "module-layout-and-same-item-reselection",
+      "passed": true,
+      "folder": "module-layout"
+    }
+  ],
+  "current": "mixed-selection-fifo-movement-and-returns",
+  "failure": "AssertionError [ERR_ASSERTION]: mixed-selection-fifo-movement-and-returns must pass\n\n1 !== 0\n\n    at C:\\timerApp\\wz-towers-lab\\tools\\run-test-04-delivery.cjs:19:49\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)",
+  "finished": "2026-11-07T15:07:16.589Z"
+}

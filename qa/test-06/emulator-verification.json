@@ -1,0 +1,38 @@
+{
+  "passed": true,
+  "emulatorTesting": true,
+  "gameplayTesting": true,
+  "candidateAPK_SHA256": "fd136c8dcfd8caf52b616348b86245c657136b6ebd160da987d693b5a142bce4",
+  "installedAPK_SHA256": "fd136c8dcfd8caf52b616348b86245c657136b6ebd160da987d693b5a142bce4",
+  "package": "com.rbabbit.warzonetowers.lab",
+  "version": "0.6",
+  "checks": {
+    "cameraSelectionRefresh": true,
+    "truckJobIsolation": true,
+    "moduleQueueIsolation": true,
+    "phoneDesignsPreserved": true,
+    "manualSelection": true,
+    "panelAndKeyboardBack": true,
+    "backConfirmationCancelReturn": true
+  },
+  "sourceReports": [
+    {
+      "path": "qa/test-06/two-groups/two-groups.json",
+      "sha256": "c32c04ea03450cc7d4a9efe9fcc7a54f6a8e8d083f6dc5ab35ccedc729a7f152"
+    },
+    {
+      "path": "qa/test-06/manual-selection/manual-selection.json",
+      "sha256": "87dd5bb7c70e79afedb4bc1dd4a8964000aa928e7fba5507ea5d2254043f8a03"
+    },
+    {
+      "path": "qa/test-06/back-menu/back-menu.json",
+      "sha256": "917509021e76621152d9e44cadfd45b940ce490ad57f1011af33790199e9e1d6"
+    }
+  ],
+  "limitations": [
+    "The emulator's existing black terrain limits ground-texture visual verification; physical Android devices were not tested.",
+    "The confirmation blocks game input while open. The battle simulation continues; this change does not introduce a new pause mechanism.",
+    "Live checks used real authored Dustfall groups and modules. Iron Valley and every structure were not replayed in this focused change; source tests cover shared selection logic and the native payload/maps remain unchanged.",
+    "Actual single-truck selection used the purpose-built native selection-click API with real native state/ID verification; construction, camera changes and menu controls used real ADB touches. Manual-clear safety is covered by focused source regressions."
+  ]
+}

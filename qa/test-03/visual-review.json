@@ -1,0 +1,218 @@
+{
+  "passed": true,
+  "candidateAPK_SHA256": "a623655e457bb8e397267b711a019b3787a22402b29cd182444f3a21bdae8ef4",
+  "method": "Read-only visual inspection of actual current-candidate emulator PNGs, supported by matching passed native reports; no emulator actions by this reviewer.",
+  "checks": {
+    "normalBranding": true,
+    "reproductionHighlights": true,
+    "powerTargetAndCompletedModels": true,
+    "repeatedBuildHighlights": true,
+    "postLoadFieldRestored": true,
+    "compactPanelReadability": true,
+    "mixedCombatExcluded": true,
+    "activeWorkHighlights": true,
+    "noncentralReselection": true,
+    "factoryReturnVisible": true,
+    "wideAndCompactLayouts": true,
+    "pausedFactoryReturnObserved": true,
+    "finalPausedStatsReturnObserved": true,
+    "keyboardOpenAndDismissed": true,
+    "nativeQuitConfirmationObserved": true,
+    "neutralEndedAndOwnStartObserved": true,
+    "freshBattleReturnObserved": true
+  },
+  "sourceReports": [
+    {
+      "path": "qa/test-03/branding/branding.json",
+      "sha256": "dfc781394c0cdf5cedefbc49297ac582dc8c2993533af57f010045b85721b388"
+    },
+    {
+      "path": "qa/test-03/repro-delivery/repro-check.json",
+      "sha256": "07640f632ad0b64b06a09ba09c14b44e7b693f0f563cb398693769d40a8ec132"
+    },
+    {
+      "path": "qa/test-03/module-journey/module-journey.json",
+      "sha256": "6530ffe9d6da526e74bb423d643df2620a13fc9f74df5442bd1190a7d9c465f1"
+    },
+    {
+      "path": "qa/test-03/mixed-selection/mixed-selection.json",
+      "sha256": "7283cc09070d7a21e3177a2b690df40ce30e2cd5189d2606e48de83541e15712"
+    },
+    {
+      "path": "qa/test-03/layout-selection/layout-selection.json",
+      "sha256": "6345215c5ae988f1b1b51fd507f39b9b7580c1d552f01dd7be800fbd7e8e5f5c"
+    },
+    {
+      "path": "qa/test-03/paused-returns/test-02-paused-returns.json",
+      "sha256": "a6ed6175dbc0dc47e3c88bb225587e2817bf90a6edbeac245342e30fa26f25d7"
+    },
+    {
+      "path": "qa/test-03/keyboard-returns/lab-journey-keyboard.json",
+      "sha256": "0f7db245c346404241b858ed838203208545382d694c1c9556511645bdd3b095"
+    },
+    {
+      "path": "qa/test-03/quit-delivery/test-02-quit-journey.json",
+      "sha256": "84d4238fc41e13830db3620c22dda99f34c7d904ffcb37cc6ce2951c0ef67885"
+    },
+    {
+      "path": "qa/test-03/integrated-journey.json",
+      "sha256": "6e7f0b4314391001b727d8baa8b0dd2333e3a0408aa5705f673686984c26b769"
+    }
+  ],
+  "reviewedImages": [
+    {
+      "path": "qa/test-03/branding/normal-warzone-towers-startup.png",
+      "sha256": "dcf05b49895e5f73568a324f07f8af880f6b912a9bc27ffdc40e6967b82b2c84",
+      "observation": "Normal WARZONE TOWERS heading and subtitle; official artwork; both map options and footer settings are readable, with no TEST, Lab badges, slogans or garbled punctuation."
+    },
+    {
+      "path": "qa/test-03/repro-delivery/repro-build-two-native-highlights.png",
+      "sha256": "da7493e0c28b06e34609201198a617bfbb21f9ea010871ef2d6554f342c54705",
+      "observation": "Compact BUILD catalogue visible; two actual constructor models show native white brackets and green bars. Panel labels and bottom Exit button are not clipped."
+    },
+    {
+      "path": "qa/test-03/repro-delivery/repro-trucks-two-native-highlights.png",
+      "sha256": "1c2fbd17e7ff582e013bcd609a36e0ec821d7a06b1db8ee40bc1e669801d0539",
+      "observation": "The same two actual constructors show native selection highlights after TRUCKS; battlefield and compact footer remain visible."
+    },
+    {
+      "path": "qa/test-03/module-journey/module-accepted-A0PowMod1-6-57.png",
+      "sha256": "45fcb3ad1d54b2c90066919ac5e23940d240dad32d7273d04c3002774018d178",
+      "observation": "Power Module card selected and target model green. Immediate panel still shows the preceding 0-pending/2-done frame; this image does not establish the accepted queue count."
+    },
+    {
+      "path": "qa/test-03/module-journey/module-power-complete.png",
+      "sha256": "696e4309bb90c12eebd038619089e47fac5a1c9d42053a5f99c2eb4edfae0e98",
+      "observation": "Completed four-pillar Power Generator model and two highlighted real constructors are visible. Native module count/build points are corroborated by the matching native report."
+    },
+    {
+      "path": "qa/test-03/module-journey/power-repeated-build-two-native-highlights.png",
+      "sha256": "36b798f343e261144292bf9e3257e7a9d49d8e5f70aef40c551eb042c5f631ef",
+      "observation": "After worker travel, repeated BUILD shows two highlighted constructors and the compact module catalogue. Settled construction footer shows 0 pending and 3 done."
+    },
+    {
+      "path": "qa/test-03/module-journey/module-rejected-A0PowMod1-6-57.png",
+      "sha256": "9e0e3f773ca2d6d01f5e6fabe7e6c336e0a472955c32a97a9efc3618a268a243",
+      "observation": "Duplicate target capture is distinct from the accepted image. It shows the existing generator preview, not readable rejection text; the native reply is the module-limit evidence."
+    },
+    {
+      "path": "qa/test-03/module-journey/module-research-complete.png",
+      "sha256": "1fbeca062777eab82c2ea22daea58fafdafd6dae80b7ab3952591e7fb8a5ac70",
+      "observation": "Both completed research-building models and real highlighted constructors are visible; the matching native report establishes one completed module on each parent."
+    },
+    {
+      "path": "qa/test-03/module-journey/module-roundtrip-restored-input.png",
+      "sha256": "d883efbff73a1675e8e29354a12b590b9fe8707a72fea475c1143e9c0bf70668",
+      "observation": "Post-load battlefield contains the upgraded generator, completed ordinary tower and highlighted constructors with the normal compact footer restored."
+    },
+    {
+      "path": "qa/test-03/mixed-selection/mixed-01-combat-and-trucks.png",
+      "sha256": "5c15e30a0418ced3755d666e7da4828f07711305f3ec7fea0184d4179a4c3a8f",
+      "observation": "Prepared ordinary battlefield visibly contains a combat tank and three constructors, before constructor-only selection."
+    },
+    {
+      "path": "qa/test-03/mixed-selection/mixed-02-constructor-only-highlights.png",
+      "sha256": "ff93c85cd39588cfafa1a7c9c769cb8e16a7cfc0038ae4dcbed589708ccdc826",
+      "observation": "BUILD catalogue and Guard Tower choice visible immediately; native highlights appear on the three constructors and not on the nearby tank."
+    },
+    {
+      "path": "qa/test-03/mixed-selection/mixed-05-trucks-while-building.png",
+      "sha256": "57b92c6d40fc74beabfa2f7f4ad8ceb866508a882ce18c4610033028a5acd29d",
+      "observation": "Three real constructors show highlights during ongoing work, with visible blue build beams and two numbered accepted ghost sites. Native report proves continuing jobs."
+    },
+    {
+      "path": "qa/test-03/mixed-selection/mixed-08-noncentral-reselection.png",
+      "sha256": "cb8d5908c9d1cae94a3262cb0908b14304851a1e84d78b9a88368950f66583f7",
+      "observation": "After movement and STOP, all three constructors show native highlights away from their original column; the settled panel lists both towers COMPLETE."
+    },
+    {
+      "path": "qa/test-03/mixed-selection/mixed-09-stats-build.png",
+      "sha256": "3499e47dde65401b604257348ef2fcff1ae66b553383c34514fa0ce1d0e57fcc",
+      "observation": "Direct Stats-to-BUILD return shows the compact catalogue and three actual selected constructors, with both completed towers listed."
+    },
+    {
+      "path": "qa/test-03/mixed-selection/mixed-return-factory-open.png",
+      "sha256": "86ad1b05247d73f12010c51dd6b02c2cfb00fbfbe3b47acf09c8bda3e6417bc4",
+      "observation": "Factory page is readable with facility selection, saved-design entries, production controls and its Battle return control visible. Existing saved design names are retained private library content."
+    },
+    {
+      "path": "qa/test-03/mixed-selection/mixed-return-factory-restored.png",
+      "sha256": "01dd664634b99880fcc07f9fa5e70d121a866ffb804dae103e4fc211fabbfd31",
+      "observation": "Factory return restores the actual battlefield and highlighted constructors; no stale Factory overlay remains."
+    },
+    {
+      "path": "qa/test-03/layout-selection/selection-wide.png",
+      "sha256": "d8e7ad7ed4490451b01c44b0bcb9853cae6034f4a4f1b2d84e06a74039d38b9d",
+      "observation": "At 2400x1080 the compact catalogue, Exit button, full open field controls, three constructor highlights and minimap are visible without clipping."
+    },
+    {
+      "path": "qa/test-03/layout-selection/selection-compact-enlarged.png",
+      "sha256": "d6dd0ec5b6f5ac7b795c6afbc586b6c93e7ba928e65b2d8d902cbcc3e6260999",
+      "observation": "At compact 854-wide landscape with enlarged font/control settings, labels, both catalogue columns, footer Exit control, three highlights and minimap remain visible without overlap."
+    },
+    {
+      "path": "qa/test-03/paused-returns/paused-return-1-factory-opened.png",
+      "sha256": "8546bbea789a9eedae1f8a901a41ce3a323410efbfcb9ceebb07c935389e2358",
+      "observation": "Actual Factory page is readable while native simulation is paused; saved entries, controls and Battle return remain visible."
+    },
+    {
+      "path": "qa/test-03/paused-returns/paused-return-1-factory-native-pause-before-resume.png",
+      "sha256": "69aca7dbf4cb635d2a58605500ced2acf69499caa1f23570049daecce2e85b7f",
+      "observation": "After Factory Back, actual native PAUSED menu is visible with the underlying field and three native constructor highlights; no stale Factory overlay remains."
+    },
+    {
+      "path": "qa/test-03/paused-returns/paused-return-1-factory-resumed.png",
+      "sha256": "7a0de5da13bd536fcc49a95a6e69ef6d0dd489c78b862465b9d0bffc0707eb82",
+      "observation": "Actual resumed field shows three selected constructors, normal compact footer and no pause or Factory overlay."
+    },
+    {
+      "path": "qa/test-03/paused-returns/paused-return-2-stats-resumed.png",
+      "sha256": "f2aae70532e5c09536a4370f1b23eb2e24ab759241c10eafe583503b88990e02",
+      "observation": "Final second-round Stats return shows the resumed field with the same three highlights, normal header/footer and no native Stats or pause menu."
+    },
+    {
+      "path": "qa/test-03/keyboard-returns/lab-repeat-keyboard-visible-1.png",
+      "sha256": "efde38ab4d129baf631008b454714fa494cf6b84b5998461bd59015d8ba24639",
+      "observation": "Actual Android keyboard is visibly open over Design; name input remains visible above it."
+    },
+    {
+      "path": "qa/test-03/keyboard-returns/lab-repeat-keyboard-return-2.png",
+      "sha256": "df54e28cea411e69099e5e1048bebdfc1a68f7f948916cc4e13ae348f40abc7a",
+      "observation": "After the second keyboard Back, keyboard is gone and Design remains readable with the name field, Save Changes, Save As New and Blueprint Library controls."
+    },
+    {
+      "path": "qa/test-03/quit-delivery/quit-journey-02-native-confirmation.png",
+      "sha256": "3ec42d05bdf5a344ed5e0cce4435eb7729ba2b47231fa36cacaa0e9a04c16db9",
+      "observation": "Actual native Quit confirmation is visible over the paused battlefield, with Confirm and Back."
+    },
+    {
+      "path": "qa/test-03/quit-delivery/quit-journey-03-neutral-ended.png",
+      "sha256": "a254c01b99aa9b94e67c8326e90f30a337b6379a000ed04698fee058c197fd61",
+      "observation": "Neutral WARZONE TOWERS / BATTLE ENDED screen has no battle HUD, old field, defeat text or stock frontend menu."
+    },
+    {
+      "path": "qa/test-03/quit-delivery/quit-journey-04-returned-start.png",
+      "sha256": "116e39164d3454c42d1afb22dc8a3345ff9ca25677e7b286e4ffe121a0c30c13",
+      "observation": "Returned own start screen uses WARZONE TOWERS and official artwork, with normal map choices; the music readiness check is transient before the subsequent successful new launch."
+    },
+    {
+      "path": "qa/test-03/quit-delivery/quit-journey-05-new-battle-queue.png",
+      "sha256": "c558b571b4d113e9d35f26fbf7c21d34de725c7a7feb73a9ad39df9b48a5989f",
+      "observation": "Fresh battle opens its ordinary Orders page with Battle return and View Build Sites controls; no stale prior construction is listed."
+    },
+    {
+      "path": "qa/test-03/quit-delivery/quit-journey-new-battle-resumed.png",
+      "sha256": "0f84790e10dd35a02741bcccdfe2ca80ecd0a3e9176d276e6d4083e3f4b2d153",
+      "observation": "Fresh battle after Queue/Back and native Resume shows actual new field models, normal header, compact footer and radar without old pause/queue overlays."
+    }
+  ],
+  "pendingReviewScopes": [],
+  "limits": [
+    "Passed applies to the images and visual checks listed here. All eight native integrated phases also pass in their matching reports; visual paused-return coverage samples Factory and the final Stats return, not every intermediate image.",
+    "Immediate captures can precede the settled compositor frame; actual accepted native orders and completed native structures determine construction success.",
+    "QuickSave banners in native F7 witness captures belong to the QA save operation.",
+    "Software-emulator black terrain is present. No physical-device GPU, audio/FPS, optional-download or full 30-wave victory claim.",
+    "Current Quit run began with zero ghost sites. It does not visually or natively prove clearing nonempty sites; historical Test 02 evidence remains historical."
+  ],
+  "recordedUTC": "2026-11-07T11:25:04.245342+00:00"
+}

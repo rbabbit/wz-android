@@ -14,6 +14,8 @@
     #warzone-command-strip { position: relative; min-width: 0; overflow: hidden; }
     #warzone-command-strip #blocknight-combat-hud { position: absolute; }
     #warzone-game-frame { display: block; width: 100%; height: 100%; min-width: 0; min-height: 0; border: 0; }
+    body[data-battle-ended="true"] #warzone-game-frame { visibility: hidden; pointer-events: none; }
+    body[data-battle-ended="true"] #warzone-command-strip { display: none; }
   </style>
 </head>
 <body>
@@ -30,12 +32,27 @@
         document.documentElement.scrollTop=document.body.scrollTop=0;
       },
       setPlaying() {
+        if (!document.getElementById("warzone-game-frame").contentWindow.__towersHtml?.isActive?.()) return false;
         document.body.dataset.playing = "true";
         dispatchEvent(new Event("warzone-battle-ready"));
+        return true;
+      },
+      endBattle() {
+        document.body.dataset.battleEnded = "true";
+        document.body.dataset.playing = "false";
+        document.body.dataset.research = "false";
+        const frame = document.getElementById("warzone-game-frame");
+        frame.inert = true;
+        document.getElementById("warzone-command-strip").hidden = true;
+        for (const id of ['lab-ops','warzone-towers-help-overlay']) {
+          const node = document.getElementById(id); if (node) node.hidden = true;
+        }
+        dispatchEvent(new Event("warzone-battle-ended"));
       },
       setResearchOpen(open) { document.body.dataset.research = String(Boolean(open)); },
       restoreBattlefield() {
         const frame = document.getElementById("warzone-game-frame");
+        if (!frame.contentWindow.__towersHtml?.isActive?.()) return false;
         const header = document.getElementById("warzone-command-strip");
         document.body.dataset.playing = "true";
         if (!frame.contentWindow.__blockNightResearch?.report().open) document.body.dataset.research = "false";

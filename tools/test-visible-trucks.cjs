@@ -1,0 +1,29 @@
+'use strict';
+const assert=require('node:assert/strict'),{fixture}=require('./box-selection-fixture.cjs');
+const sorted=values=>Array.from(values).sort((a,b)=>a-b),tick=()=>new Promise(resolve=>setImmediate(resolve));
+const wanted=[160001,160003];
+const world=f=>f.units.map(u=>[u.id,u.order,u.queued,...u.position]);
+(async()=>{
+ const pure=fixture(),before=world(pure);const result=await pure.context.selectVisibleTrucks();
+ assert.deepEqual(sorted(result.map(t=>t.id)),wanted,'moved, off-centre workers use real native screen centres, not integer-tile projections');
+ assert.deepEqual(sorted(pure.selected()),wanted);assert.deepEqual(sorted(pure.state.nativeBuildGroup),wanted);
+ assert.equal(pure.state.truckSelection.queries,1,'constructor-only native union needs one post-scan native state query');
+ const blocked=[{left:0,top:0,right:252,bottom:600},pure.bounds.radar,{left:270,top:490,right:450,bottom:530}];
+ for(const r of pure.boxes)for(const b of blocked)assert.ok(Math.min(r.right,b.right)<=Math.max(r.left,b.left)||Math.min(r.bottom,b.bottom)<=Math.max(r.top,b.top),'native rectangles exclude HTML sidebar/dock and radar');
+ assert.deepEqual(world(pure),before,'selection does not move units or replace existing native work');
+ pure.manual([160003]);pure.context.beginPlacement('GuardTower1');assert.deepEqual(Array.from(pure.state.nativeBuildGroup),[160003]);pure.context.beginPlacement('PillBox1');assert.deepEqual(Array.from(pure.state.nativeBuildGroup),[160003],'rechoosing an item respects a subsequent manual native group');
+ const mixed=fixture({mixed:true}),mixedBefore=world(mixed);assert.deepEqual(sorted((await mixed.context.selectVisibleTrucks()).map(t=>t.id)),wanted,'native ID-guided partition excludes nearby combat units');assert.deepEqual(sorted(mixed.selected()),wanted);assert.deepEqual(world(mixed),mixedBefore);assert.ok(mixed.boxes.length<=64,'mixed filtering is bounded');
+ for(const f of [pure,mixed]){assert.deepEqual(f.unsafeMoves,[],'no undersized native gesture can issue a MOVE during scan, filtering or replay');for(const b of f.boxes){assert.ok(b.right-b.left>=8&&b.bottom-b.top>=8,'every real native scan/probe/replay exceeds the native drag threshold');for(const obstacle of blocked)assert.ok(Math.min(b.right,obstacle.right)<=Math.max(b.left,obstacle.left)||Math.min(b.bottom,obstacle.bottom)<=Math.max(b.top,obstacle.top),'native probes stay inside the original unobstructed region');}}
+ const empty=fixture({empty:true});assert.deepEqual(Array.from(await empty.context.selectVisibleTrucks()),[]);assert.deepEqual(empty.selected(),[],'empty native rectangles clear prior offscreen selection without a world click');empty.context.beginPlacement('GuardTower1');assert.deepEqual(Array.from(empty.state.nativeBuildGroup),[],'old selection cannot reappear as a new manual choice');
+ assert.equal(empty.nodes.get('wt-sidebar-notice').hidden,true,'asynchronous selection messages never enter catalogue flow');
+ const overlap=fixture({overlap:true});assert.deepEqual(Array.from(await overlap.context.selectVisibleTrucks()),[]);assert.deepEqual(overlap.selected(),[],'an inseparable mixed overlap fails safely with native selection cleared');assert.ok(overlap.boxes.length<=72);assert.ok(overlap.notices.some(n=>n.includes('overlap')));
+ assert.deepEqual(overlap.unsafeMoves,[],'even failure cleanup uses a safe full-size native rectangle');
+ const early=fixture({hold:true}),selecting=early.context.selectVisibleTrucks();await tick();early.context.beginPlacement('PillBox1');early.context.placeAt(8,71);early.context.beginPlacement('GuardTower1');early.context.placeAt(9,71);await tick();assert.equal(early.requests.filter(r=>r.action==='queue-build').length,0,'early field taps wait for actual native selection');early.release();await selecting;await tick();
+ const jobs=early.requests.filter(r=>r.action==='queue-build');assert.deepEqual(jobs.map(r=>r.data.itemId),['PillBox1','GuardTower1'],'fast item/field taps retain their immutable requested item');assert.ok(jobs.every(r=>sorted(r.data.workerIds).join()===wanted.join()));assert.equal(early.state.siteChecks,0);
+ const cancelled=fixture({hold:true}),pending=cancelled.context.selectVisibleTrucks();await tick();const count=cancelled.boxes.length;cancelled.cancel();await pending;assert.equal(cancelled.boxes.length,count,'cancelled selection cannot issue further native rectangles');assert.equal(cancelled.requests.some(r=>r.action!=='state'),false);
+ const transition=fixture();let close;transition.state.nativeClosePromise=new Promise(resolve=>close=resolve);const changing=transition.context.selectVisibleTrucks();await tick();assert.equal(transition.boxes.length,0,'native STATS/COMMANDERS must acknowledge close before selection');close({ok:true});assert.deepEqual(sorted((await changing).map(t=>t.id)),wanted);
+ const pausedPanel=fixture();pausedPanel.state.nativeClosePromise=new Promise(()=>{});let started=Date.now();assert.deepEqual(Array.from(await pausedPanel.context.selectVisibleTrucks()),[]);assert.ok(Date.now()-started<3500,'paused native panel closure is bounded');
+ const paused=fixture();paused.context.send=()=>new Promise(()=>{});started=Date.now();assert.deepEqual(Array.from(await paused.context.selectVisibleTrucks()),[]);assert.ok(Date.now()-started<3500,'paused native snapshots cannot deadlock selection');
+ pure.end();const countAfterEnd=pure.boxes.length;await pure.context.selectVisibleTrucks();assert.equal(pure.boxes.length,countAfterEnd,'ended sessions reject native selection input');
+ console.log('PASS: native BOX selects off-centre constructors, filters combat/sidebar/radar/dock, preserves orders and early taps, bounds cancellation/paused paths, and keeps notices out of catalogue flow');
+})().catch(error=>{console.error(error);process.exitCode=1;});

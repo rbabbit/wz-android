@@ -5,9 +5,12 @@ No original assets, statistics or embedded engine data are modified.
 """
 from pathlib import Path
 from hashlib import sha256
-import json,re,math
+import argparse,json,re,math
 
 root=Path(__file__).resolve().parents[1]
+parser=argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--report',type=Path,default=root/'qa/v6.4-build-display/model-sources.json',help='Write provenance without replacing a prior release report')
+args=parser.parse_args()
 assets=root/'app/src/main/assets/warzone'
 index={n:(int(a),int(b)) for n,a,b in re.findall(r'\{filename:"([^"]+)",start:(\d+),end:(\d+)\}',(assets/'warzone2100.js').read_text())}
 data=(assets/'warzone2100.data').read_bytes()
@@ -79,9 +82,14 @@ def assembled(s):
     outline=[]
     for group in edges.values():
         if len(group)==1 or any(abs(sum(normals[group[0][0]][i]*normals[g[0]][i] for i in range(3)))<.94 for g in group[1:]):outline.extend(group[0][1:])
-    return {'p':[x for p in points for x in p],'f':[x for f in faces for x in f],'e':outline,'height':max(p[1] for p in points)}
+    # alignStructure samples sDisplay.imd's first level, without the separate
+    # base, mounts or weapon meshes. The native bound components are integers.
+    original=model['levels'][0]['points']
+    bounds={'min':[int(min(p[i] for p in original)) for i in range(3)],'max':[int(max(p[i] for p in original)) for i in range(3)]}
+    return {'p':[x for p in points for x in p],'f':[x for f in faces for x in f],'e':outline,'height':max(p[1] for p in points),'structureBounds':bounds}
 models={key:m for key,s in structures.items() if (m:=assembled(s))}
 out=assets/'build-ghost-models.json'
 out.write_text(json.dumps({'version':1,'description':'Original PIE geometry, including structure mounts/weapons; translucent display only','models':models},separators=(',',':'))+'\n')
-(root/'qa/v6.4-build-display/model-sources.json').write_text(json.dumps({'models':len(models),'generatedSHA256':sha256(out.read_bytes()).hexdigest(),'originalMeshes':sources},indent=2))
+args.report.parent.mkdir(parents=True,exist_ok=True)
+args.report.write_text(json.dumps({'models':len(models),'generatedSHA256':sha256(out.read_bytes()).hexdigest(),'originalMeshes':sources},indent=2))
 print(json.dumps({'models':len(models),'bytes':out.stat().st_size,'originalMeshes':len(sources),'miniRocketVertices':len(models['GuardTower6']['p'])//3}))

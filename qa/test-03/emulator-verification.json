@@ -1,0 +1,132 @@
+{
+  "passed": true,
+  "emulatorTesting": true,
+  "gameplayTesting": true,
+  "candidateAPK_SHA256": "a623655e457bb8e397267b711a019b3787a22402b29cd182444f3a21bdae8ef4",
+  "installedAPK_SHA256": "a623655e457bb8e397267b711a019b3787a22402b29cd182444f3a21bdae8ef4",
+  "package": "com.rbabbit.warzonetowers.lab",
+  "version": "0.3",
+  "label": "Warzone Towers",
+  "recordedUTC": "2026-11-07T11:23:08.508Z",
+  "checks": {
+    "powerModuleSelection": true,
+    "powerModuleCompletion": true,
+    "ordinaryConstruction": true,
+    "truckSelection": true,
+    "inputReturns": true,
+    "branding": true
+  },
+  "additionalChecks": {
+    "genuineNativeSaveLoad": true,
+    "mixedCombatExcluded": true,
+    "selectionPreservesNativeOrdersAndPositions": true,
+    "selectionPreservesActiveConstructionFIFO": true,
+    "wideAndCompactEnlargedSelection": true,
+    "twelvePausedReturns": true,
+    "repeatedRealKeyboardReturns": true,
+    "neutralNativeQuitAndFreshBattle": true,
+    "stableSourceAPKPreferencesAndFallbacksPreserved": true
+  },
+  "observed": {
+    "power": {
+      "id": 160119,
+      "name": "A0PowerGenerator",
+      "modules": 1,
+      "currentBuildPts": 500,
+      "position": [
+        768,
+        7296,
+        256
+      ],
+      "statusEvidence": "native finishedBuilds requires parent status BUILT; genuine F7 confirms modules/build points"
+    },
+    "researchParents": [
+      {
+        "id": 160127,
+        "name": "A0ResearchFacility",
+        "modules": 1,
+        "currentBuildPts": 500,
+        "position": [
+          512,
+          9088,
+          510
+        ],
+        "statusEvidence": "native finishedBuilds requires parent status BUILT; genuine F7 confirms modules/build points"
+      },
+      {
+        "id": 160125,
+        "name": "A0ResearchFacility",
+        "modules": 1,
+        "currentBuildPts": 500,
+        "position": [
+          512,
+          9472,
+          510
+        ],
+        "statusEvidence": "native finishedBuilds requires parent status BUILT; genuine F7 confirms modules/build points"
+      }
+    ],
+    "originalReproductionUnitCount": 4,
+    "mixedUnitCount": 8,
+    "coldMixedBoxes": 9,
+    "coldMixedQueries": 6,
+    "repeatedMixedCacheHit": false,
+    "pausedReturnCases": 12
+  },
+  "sourceReports": [
+    {
+      "path": "qa/test-03/integrated-journey.json",
+      "sha256": "6e7f0b4314391001b727d8baa8b0dd2333e3a0408aa5705f673686984c26b769"
+    },
+    {
+      "path": "qa/test-03/repro-delivery/repro-check.json",
+      "sha256": "07640f632ad0b64b06a09ba09c14b44e7b693f0f563cb398693769d40a8ec132"
+    },
+    {
+      "path": "qa/test-03/module-journey/module-journey.json",
+      "sha256": "6530ffe9d6da526e74bb423d643df2620a13fc9f74df5442bd1190a7d9c465f1"
+    },
+    {
+      "path": "qa/test-03/mixed-selection/mixed-selection.json",
+      "sha256": "7283cc09070d7a21e3177a2b690df40ce30e2cd5189d2606e48de83541e15712"
+    },
+    {
+      "path": "qa/test-03/layout-selection/layout-selection.json",
+      "sha256": "6345215c5ae988f1b1b51fd507f39b9b7580c1d552f01dd7be800fbd7e8e5f5c"
+    },
+    {
+      "path": "qa/test-03/paused-returns/test-02-paused-returns.json",
+      "sha256": "a6ed6175dbc0dc47e3c88bb225587e2817bf90a6edbeac245342e30fa26f25d7"
+    },
+    {
+      "path": "qa/test-03/keyboard-returns/lab-journey-keyboard.json",
+      "sha256": "0f7db245c346404241b858ed838203208545382d694c1c9556511645bdd3b095"
+    },
+    {
+      "path": "qa/test-03/quit-delivery/test-02-quit-journey.json",
+      "sha256": "84d4238fc41e13830db3620c22dda99f34c7d904ffcb37cc6ce2951c0ef67885"
+    },
+    {
+      "path": "qa/test-03/branding/branding.json",
+      "sha256": "dfc781394c0cdf5cedefbc49297ac582dc8c2993533af57f010045b85721b388"
+    },
+    {
+      "path": "qa/test-03/package-verification.json",
+      "sha256": "f4e346f7c162f19ace47e826044e4beea217350dc8bd61cb8953fcaeda702f00"
+    },
+    {
+      "path": "qa/test-03/code-checks.json",
+      "sha256": "e5097fc5f73176d818c9c0d02c137053ecee39d165447a304ab4acb4ae06232d"
+    },
+    {
+      "path": "qa/test-03/final-integrity.json",
+      "sha256": "0559d8ddc684b942b7a7c6055921371b421b15999956a735e78503e833c83aca"
+    }
+  ],
+  "limits": [
+    "Software-emulator black terrain remains; physical-device GPU/audio/FPS performance and a complete 30-wave victory are not certified.",
+    "The mixed fixture restores a complete ordinary native save with six authored trucks and two previously normally produced tanks; no units, power, research or positions are granted.",
+    "Bounded QA fixture corrections and earlier prototype failures remain diagnostics. Current passing reports identify the exact delivery APK.",
+    "Immediate acceptance screenshots may precede the compositor update; fresh native replies, actual orders, completion records, saves and settled screenshots establish gameplay results."
+  ]
+}

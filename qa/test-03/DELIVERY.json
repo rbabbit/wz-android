@@ -1,0 +1,101 @@
+{
+  "passed": true,
+  "emulatorTesting": true,
+  "gameplayTesting": true,
+  "candidateAPK_SHA256": "a623655e457bb8e397267b711a019b3787a22402b29cd182444f3a21bdae8ef4",
+  "package": "com.rbabbit.warzonetowers.lab",
+  "label": "Warzone Towers",
+  "version": "0.3",
+  "scope": "Focused module selection/completion, ordinary construction, visible trucks, returns and wording on the exact installed APK",
+  "checks": {
+    "powerModuleSelection": true,
+    "powerModuleCompletion": true,
+    "ordinaryConstruction": true,
+    "truckSelection": true,
+    "inputReturns": true,
+    "branding": true
+  },
+  "reports": [
+    {
+      "path": "qa/test-03/package-verification.json",
+      "sha256": "f4e346f7c162f19ace47e826044e4beea217350dc8bd61cb8953fcaeda702f00"
+    },
+    {
+      "path": "qa/test-03/code-checks.json",
+      "sha256": "e5097fc5f73176d818c9c0d02c137053ecee39d165447a304ab4acb4ae06232d"
+    },
+    {
+      "path": "qa/test-03/emulator-verification.json",
+      "sha256": "5cf3ed28d748fb3a3c14459e033b1dd7727b8e92b7dec989cc109d2518ac413a"
+    },
+    {
+      "path": "qa/test-03/final-integrity.json",
+      "sha256": "0559d8ddc684b942b7a7c6055921371b421b15999956a735e78503e833c83aca"
+    },
+    {
+      "path": "qa/test-03/integrated-journey.json",
+      "sha256": "6e7f0b4314391001b727d8baa8b0dd2333e3a0408aa5705f673686984c26b769"
+    },
+    {
+      "path": "qa/test-03/repro-delivery/repro-check.json",
+      "sha256": "07640f632ad0b64b06a09ba09c14b44e7b693f0f563cb398693769d40a8ec132"
+    },
+    {
+      "path": "qa/test-03/module-journey/module-journey.json",
+      "sha256": "6530ffe9d6da526e74bb423d643df2620a13fc9f74df5442bd1190a7d9c465f1"
+    },
+    {
+      "path": "qa/test-03/mixed-selection/mixed-selection.json",
+      "sha256": "7283cc09070d7a21e3177a2b690df40ce30e2cd5189d2606e48de83541e15712"
+    },
+    {
+      "path": "qa/test-03/layout-selection/layout-selection.json",
+      "sha256": "6345215c5ae988f1b1b51fd507f39b9b7580c1d552f01dd7be800fbd7e8e5f5c"
+    },
+    {
+      "path": "qa/test-03/paused-returns/test-02-paused-returns.json",
+      "sha256": "a6ed6175dbc0dc47e3c88bb225587e2817bf90a6edbeac245342e30fa26f25d7"
+    },
+    {
+      "path": "qa/test-03/keyboard-returns/lab-journey-keyboard.json",
+      "sha256": "0f7db245c346404241b858ed838203208545382d694c1c9556511645bdd3b095"
+    },
+    {
+      "path": "qa/test-03/quit-delivery/test-02-quit-journey.json",
+      "sha256": "84d4238fc41e13830db3620c22dda99f34c7d904ffcb37cc6ce2951c0ef67885"
+    },
+    {
+      "path": "qa/test-03/branding/branding.json",
+      "sha256": "dfc781394c0cdf5cedefbc49297ac582dc8c2993533af57f010045b85721b388"
+    },
+    {
+      "path": "qa/test-03/visual-review.json",
+      "sha256": "fb1746e3c207760beeb603157618c8a0f92e41d430b0632b5427554b4a4893f1"
+    }
+  ],
+  "supportingReports": [
+    {
+      "path": "qa/test-03/audit/audit.json",
+      "sha256": "69b4b19b2a5d3dff7714386bd86ffea623b9ff6aedfa930b9fafb37379fb1f94"
+    },
+    {
+      "path": "qa/test-03/audit/native-box-proof.json",
+      "sha256": "d4f52995d21a802fc662313e311227ca86a6d3b8fce9fe7601d8be81411728cc"
+    },
+    {
+      "path": "qa/test-03/audit/mixed-startup-webview-race.json",
+      "sha256": "3931168072b2dcc543a9054e1a198cb26cec1c3fa1bb4d88e89e782c5da3820b"
+    },
+    {
+      "path": "qa/test-03/preflight-5168/paced-box-proof.json",
+      "sha256": "0caadc4e20ca1ed8c07465e815180070efe2a124a9744389a53fe3a983325ec9"
+    }
+  ],
+  "limits": [
+    "Software-emulator black terrain remains; physical-device GPU/audio/FPS performance and a complete 30-wave victory are not certified.",
+    "The mixed fixture restores a complete ordinary native save with six authored trucks and two previously normally produced tanks; no units, power, research or positions are granted.",
+    "Bounded QA fixture corrections and earlier prototype failures remain diagnostics. Current passing reports identify the exact delivery APK.",
+    "Immediate acceptance screenshots may precede the compositor update; fresh native replies, actual orders, completion records, saves and settled screenshots establish gameplay results."
+  ],
+  "recordedUTC": "2026-11-07T11:25:36.709307+00:00"
+}

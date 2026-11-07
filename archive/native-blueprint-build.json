@@ -1,0 +1,205 @@
+{
+  "sourceVersion": "4.7.0",
+  "sourceCommit": "7d3d8e51a61ceee89e6bf672a41337e1a9cd7392",
+  "sourceUpstream": "https://github.com/Warzone2100/warzone2100.git",
+  "nativeGameDelta": "Only nine lines in renderBuildOrder: snap local visual x/y by rotated footprint parity. Actual order, foundations, terrain-height rules, modules and line builds unchanged.",
+  "sourceBundle": {
+    "path": "archive/native-blueprint-4.7.0-source.tar.gz",
+    "sha256": "9b7e7edc229c5f40d6fce8b9042659370dc45ee9f006d3d9cde70455cca1186b",
+    "bytes": 565368157
+  },
+  "patch": {
+    "path": "archive/native-blueprint.patch",
+    "sha256": "16420b05d64fb29fed6edb7cccb723f7ab9e3a11ec131e518da6b567bcdcb401"
+  },
+  "recipe": {
+    "path": "tools/build-native-blueprint.sh",
+    "sha256": "6f3835c7eb8441c216f7e0b056affe22b34eb60e2985341029c866ca75e9bc26"
+  },
+  "integrationScript": {
+    "path": "tools/integrate-native-runtime.py",
+    "sha256": "30014384925fdb0dda52d338244fd07d300c1223b841d56e8443a85b77e34ee3"
+  },
+  "runtimeArtifacts": [
+    {
+      "path": "app/src/main/assets/warzone/warzone2100.js",
+      "sha256": "3cdc6d31a3d002c60f8e1c184f48c52d60e6ff1117df4cf69560bfe106be4253"
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100.wasm",
+      "sha256": "d909a4ecb7475643107fa6f489279562c00deae1e0a0f531ddd1328457d78f1e"
+    }
+  ],
+  "frozenData": {
+    "path": "app/src/main/assets/warzone/warzone2100.data",
+    "sha256": "3b8e561f84f755c6d157c86835cb2b82238e6055f900b7b90b18758df9d2e893",
+    "virtualFiles": 3849
+  },
+  "rawRuntime": {
+    "jsPath": "C:\\timerApp\\native-blueprint-build-20261107\\raw\\warzone2100.js",
+    "jsSHA256": "a210b24220efc30a3e5e9bf87f50d61fd4564b0c5b56e1ce9e964e7eaf18d179",
+    "wasmPath": "C:\\timerApp\\native-blueprint-build-20261107\\raw\\warzone2100.wasm",
+    "wasmSHA256": "d909a4ecb7475643107fa6f489279562c00deae1e0a0f531ddd1328457d78f1e"
+  },
+  "build": {
+    "passed": true,
+    "host": "Ubuntu24.04WSL2",
+    "emsdkVersion": "4.0.10",
+    "emsdkCommit": "1693ce7359fc9694f198694f902a2cc061239b86",
+    "vcpkgCommit": "6fdd23fa0a9479a9f9a1c48178696f60cf39255d",
+    "vcpkgBuiltinBaseline": "77df67cfff9c12ccfdb52284e07c87c75092f723",
+    "target": "wasm32-emscripten",
+    "buildType": "Release",
+    "parallel": 6,
+    "flags": [
+      "CMAKE_MAKE_PROGRAM=/usr/bin/ninja",
+      "WZ_DISTRIBUTOR=Towers",
+      "ENABLE_DOCS=OFF",
+      "WZ_ENABLE_WARNINGS=OFF",
+      "WZ_ENABLE_WARNINGS_AS_ERRORS=OFF",
+      "WZ_INCLUDE_TERRAIN_HIGH=OFF",
+      "WZ_EMSCRIPTEN_COMPRESS_OUTPUT=OFF",
+      "CMAKE_EXE_LINKER_FLAGS=-sEXPORTED_RUNTIME_METHODS=FS"
+    ],
+    "exportedRuntimeMethods": [
+      "FS"
+    ],
+    "startupCompatibility": "Restore the baseline early Module.FS export used by unchanged mobile preRun/config/notification adapters."
+  },
+  "verification": {
+    "nativeSourceProbe": {
+      "passed": true,
+      "ordinaryCases": 1932,
+      "beforeMismatch": 216,
+      "afterMismatch": 0,
+      "orderMutations": 0,
+      "heightChanges": 0,
+      "moduleParentUnchanged": true,
+      "lineBuildUnchanged": true,
+      "method": "Actual before/after renderBuildOrder compiled against deterministic engine-type stubs; expected centre from unchanged native foundation snap. Not emulator gameplay.",
+      "catalogueTypes": 161,
+      "directions": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "sampleTiles": [
+        [
+          23,
+          18
+        ],
+        [
+          9,
+          7
+        ],
+        [
+          47,
+          30
+        ]
+      ],
+      "probeSHA256": "4fc976aff0ab9c00f494736c36db0263be857e58e7d8cba93be12cd06e40614a",
+      "rendererBeforeSHA256": "b556077506c2414f56f74cdbf3031251592c40f213839176be4643159ad7bec3",
+      "rendererAfterSHA256": "a6f6b20f8182a2d48b5221d7412703248c859f60af600ceeec9fc47d50f74d8f"
+    },
+    "generatedRuntimeUnchangedExceptFrozenIndexAndExistingWorkerHook": true,
+    "frozenStockDirectoriesAvailable": true,
+    "emulatorGameplay": "Root performs verification on exact APK; not established by this native source build.",
+    "runtimeExportContract": {
+      "baselineExports": [
+        "ASAN_OPTIONS",
+        "FS",
+        "FS_createDataFile",
+        "FS_createDevice",
+        "FS_createLazyFile",
+        "FS_createPath",
+        "FS_createPreloadedFile",
+        "FS_unlink",
+        "SDL3",
+        "WZVAL_configDirPath",
+        "_Emscripten_HandleLockKeysCheck",
+        "_Emscripten_HandleMouseButtonUpGlobal",
+        "_Emscripten_HandlePointerEnter",
+        "_Emscripten_HandlePointerGeneric",
+        "_Emscripten_HandlePointerLeave",
+        "_Emscripten_SendDragCompleteEvent",
+        "_Emscripten_SendDragEvent",
+        "_Emscripten_SendDragFileEvent",
+        "_Emscripten_SendDragTextEvent",
+        "_Emscripten_SendSystemThemeChangedEvent",
+        "_Emscripten_force_free",
+        "_SDLEmscriptenCameraPermissionOutcome",
+        "_SDLEmscriptenThreadIterate",
+        "_SDL_calloc",
+        "_SDL_free",
+        "_SDL_malloc",
+        "_SDL_realloc",
+        "_main",
+        "_requestFullscreenThroughSDL",
+        "addRunDependency",
+        "calledRun",
+        "ctx",
+        "getRandomValue",
+        "onExit",
+        "pauseMainLoop",
+        "postRun",
+        "preRun",
+        "removeRunDependency",
+        "requestAnimationFrame",
+        "requestFullscreen",
+        "resumeMainLoop",
+        "wzSaveConfigDirToPersistentStore"
+      ],
+      "generatedExports": [
+        "ASAN_OPTIONS",
+        "FS",
+        "FS_createDataFile",
+        "FS_createDevice",
+        "FS_createLazyFile",
+        "FS_createPath",
+        "FS_createPreloadedFile",
+        "FS_unlink",
+        "SDL3",
+        "WZVAL_configDirPath",
+        "_Emscripten_HandleLockKeysCheck",
+        "_Emscripten_HandleMouseButtonUpGlobal",
+        "_Emscripten_HandlePointerEnter",
+        "_Emscripten_HandlePointerGeneric",
+        "_Emscripten_HandlePointerLeave",
+        "_Emscripten_SendDragCompleteEvent",
+        "_Emscripten_SendDragEvent",
+        "_Emscripten_SendDragFileEvent",
+        "_Emscripten_SendDragTextEvent",
+        "_Emscripten_SendSystemThemeChangedEvent",
+        "_Emscripten_force_free",
+        "_SDLEmscriptenCameraPermissionOutcome",
+        "_SDLEmscriptenThreadIterate",
+        "_SDL_calloc",
+        "_SDL_free",
+        "_SDL_malloc",
+        "_SDL_realloc",
+        "_main",
+        "_requestFullscreenThroughSDL",
+        "addRunDependency",
+        "calledRun",
+        "ctx",
+        "getRandomValue",
+        "onExit",
+        "pauseMainLoop",
+        "postRun",
+        "preRun",
+        "removeRunDependency",
+        "requestAnimationFrame",
+        "requestFullscreen",
+        "resumeMainLoop",
+        "wzSaveConfigDirToPersistentStore"
+      ],
+      "missing": [],
+      "earlyFSExport": true,
+      "fsExportOffset": 659594,
+      "finalRunOffset": 722928
+    },
+    "missingFSNegativeGuardRejectedBeforeOutput": true,
+    "runtimeExportEvidenceInSourceBundle": "build-record/runtime-export-guard-checks.json"
+  }
+}

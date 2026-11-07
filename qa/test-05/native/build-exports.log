@@ -1,0 +1,134 @@
+[0/2] Re-checking globbed directories...
+[1/77] cd /home/punkech/wz-blueprint-20261107/build/data && /usr/bin/cmake -E chdir /home/punkech/wz-blueprint-20261107/source/data/terrain_overrides/classic /usr/bin/cmake -DSOURCE=texpages -DDEST_DIR=/home/punkech/wz-blueprint-20261107/build/data/terrain_overrides/classic.wz -P /home/punkech/wz-blueprint-20261107/source/cmake/EmscriptenCompressZipCopy.cmake && /usr/bin/cmake -E chdir /home/punkech/wz-blueprint-20261107/source/data/terrain_overrides/classic /usr/bin/cmake -DSOURCE=tileset -DDEST_DIR=/home/punkech/wz-blueprint-20261107/build/data/terrain_overrides/classic.wz -P /home/punkech/wz-blueprint-20261107/source/cmake/EmscriptenCompressZipCopy.cmake
+[2/77] Generating locale/ar_SA/LC_MESSAGES/warzone2100.mo
+2597 translated messages, 1350 untranslated messages.
+[3/77] Generating locale/bg_BG/LC_MESSAGES/warzone2100.mo
+963 translated messages, 2984 untranslated messages.
+[4/77] cd /home/punkech/wz-blueprint-20261107/build/data/empackaged/music && /bin/python3 /home/punkech/wz-blueprint-20261107/emsdk/upstream/emscripten/tools/file_packager.py warzone2100-music.data --preload /home/punkech/wz-blueprint-20261107/build/data/music_staging@/data/music/ --js-output=warzone2100-music.js --use-preload-cache --indexedDB-name=EM_PRELOAD_MUSIC_CACHE --no-node
+Remember to build the main file with `-sFORCE_FILESYSTEM` so that it includes support for loading this file package
+[5/77] Generating locale/ca_ES/LC_MESSAGES/warzone2100.mo
+3878 translated messages, 69 untranslated messages.
+[6/77] Generating locale/cs/LC_MESSAGES/warzone2100.mo
+650 translated messages, 3297 untranslated messages.
+[7/77] Generating locale/da/LC_MESSAGES/warzone2100.mo
+696 translated messages, 3251 untranslated messages.
+[8/77] cd /home/punkech/wz-blueprint-20261107/build/data/empackaged/terrain_overrides && /bin/python3 /home/punkech/wz-blueprint-20261107/emsdk/upstream/emscripten/tools/file_packager.py warzone2100-terrain-classic.data --preload /home/punkech/wz-blueprint-20261107/build/data/terrain_overrides/classic.wz@/data/terrain_overrides/classic/ --js-output=warzone2100-terrain-classic.js --use-preload-cache --indexedDB-name=EM_PRELOAD_TERRAIN_CLASSIC_CACHE --no-node
+Remember to build the main file with `-sFORCE_FILESYSTEM` so that it includes support for loading this file package
+[9/77] Generating locale/de/LC_MESSAGES/warzone2100.mo
+3630 translated messages, 317 untranslated messages.
+[10/77] cd /home/punkech/wz-blueprint-20261107/build/data && /usr/bin/cmake -E chdir /home/punkech/wz-blueprint-20261107/source/data/mp /usr/bin/cmake -DSOURCE=addon.lev -DDEST_DIR=/home/punkech/wz-blueprint-20261107/build/data/mp.wz -P /home/punkech/wz-blueprint-20261107/source/cmake/EmscriptenCompressZipCopy.cmake && /usr/bin/cmake -E chdir /home/punkech/wz-blueprint-20261107/source/data/mp /usr/bin/cmake -DSOURCE=ruleset.json -DDEST_DIR=/home/punkech/wz-blueprint-20261107/build/data/mp.wz -P /home/punkech/wz-blueprint-20261107/source/cmake/EmscriptenCompressZipCopy.cmake && /usr/bin/cmake -E chdir /home/punkech/wz-blueprint-20261107/source/data/mp /usr/bin/cmake -DSOURCE=anims -DDEST_DIR=/home/punkech/wz-blueprint-20261107/build/data/mp.wz -P /home/punkech/wz-blueprint-20261107/source/cmake/EmscriptenCompressZipCopy.cmake && /usr/bin/cmake -E chdir /home/punkech/wz-blueprint-20261107/source/data/mp /usr/bin/cmake -DSOURCE=challenges -DDEST_DIR=/home/punkech/wz-blueprint-20261107/build/data/mp.wz -P /home/punkech/wz-blueprint-20261107/source/cmake/EmscriptenCompressZipCopy.cmake && /usr/bin/cmake -E chdir /home/punkech/wz-blueprint-20261107/source/data/mp /usr/bin/cmake -DSOURCE=tests -DDEST_DIR=/home/punkech/wz-blueprint-20261107/build/data/mp.wz -P /home/punkech/wz-blueprint-20261107/source/cmake/EmscriptenCompressZipCopy.cmake && /usr/bin/cmake -E chdir /home/punkech/wz-blueprint-20261107/source/data/mp /usr/bin/cmake -DSOURCE=components -DDEST_DIR=/home/punkech/wz-blueprint-20261107/build/data/mp.wz -P /home/punkech/wz-blueprint-20261107/source/cmake/EmscriptenCompressZipCopy.cmake && /usr/bin/cmake -E chdir /home/punkech/wz-blueprint-20261107/source/data/mp /usr/bin/cmake -DSOURCE=effects -DDEST_DIR=/home/punkech/wz-blueprint-20261107/build/data/mp.wz -P /home/punkech/wz-blueprint-20261107/source/cmake/EmscriptenCompressZipCopy.cmake && /usr/bin/cmake -E chdir /home/punkech/wz-blueprint-20261107/source/data/mp /usr/bin/cmake -DSOURCE=messages -DDEST_DIR=/home/punkech/wz-blueprint-20261107/build/data/mp.wz -P /home/punkech/wz-blueprint-20261107/source/cmake/EmscriptenCompressZipCopy.cmake && /usr/bin/cmake -E chdir /home/punkech/wz-blueprint-20261107/source/data/mp /usr/bin/cmake -DSOURCE=multiplay -DDEST_DIR=/home/punkech/wz-blueprint-20261107/build/data/mp.wz -P /home/punkech/wz-blueprint-20261107/source/cmake/EmscriptenCompressZipCopy.cmake && /usr/bin/cmake -E chdir /home/punkech/wz-blueprint-20261107/source/data/mp /usr/bin/cmake -DSOURCE=stats -DDEST_DIR=/home/punkech/wz-blueprint-20261107/build/data/mp.wz -P /home/punkech/wz-blueprint-20261107/source/cmake/EmscriptenCompressZipCopy.cmake && /usr/bin/cmake -E chdir /home/punkech/wz-blueprint-20261107/source/data/mp /usr/bin/cmake -DSOURCE=structs -DDEST_DIR=/home/punkech/wz-blueprint-20261107/build/data/mp.wz -P /home/punkech/wz-blueprint-20261107/source/cmake/EmscriptenCompressZipCopy.cmake && /usr/bin/cmake -E chdir /home/punkech/wz-blueprint-20261107/source/data/mp /usr/bin/cmake -DSOURCE=wrf -DDEST_DIR=/home/punkech/wz-blueprint-20261107/build/data/mp.wz -P /home/punkech/wz-blueprint-20261107/source/cmake/EmscriptenCompressZipCopy.cmake
+[11/77] Generating locale/el/LC_MESSAGES/warzone2100.mo
+2736 translated messages, 1211 untranslated messages.
+[12/77] Generating locale/en_GB/LC_MESSAGES/warzone2100.mo
+208 translated messages, 3739 untranslated messages.
+[13/77] Generating locale/eo/LC_MESSAGES/warzone2100.mo
+15 translated messages, 3932 untranslated messages.
+[14/77] Generating locale/et_EE/LC_MESSAGES/warzone2100.mo
+2294 translated messages, 1653 untranslated messages.
+[15/77] Generating locale/es/LC_MESSAGES/warzone2100.mo
+3658 translated messages, 289 untranslated messages.
+[16/77] Generating locale/fa_IR/LC_MESSAGES/warzone2100.mo
+69 translated messages, 3878 untranslated messages.
+[17/77] Generating locale/fi/LC_MESSAGES/warzone2100.mo
+180 translated messages, 3767 untranslated messages.
+[18/77] Generating locale/fy/LC_MESSAGES/warzone2100.mo
+128 translated messages, 3819 untranslated messages.
+[19/77] Generating locale/ga/LC_MESSAGES/warzone2100.mo
+40 translated messages, 3907 untranslated messages.
+[20/77] Generating locale/fr/LC_MESSAGES/warzone2100.mo
+3838 translated messages, 109 untranslated messages.
+[21/77] Generating locale/he_IL/LC_MESSAGES/warzone2100.mo
+393 translated messages, 3554 untranslated messages.
+[22/77] Generating locale/hr/LC_MESSAGES/warzone2100.mo
+1678 translated messages, 2269 untranslated messages.
+[23/77] Generating locale/hu/LC_MESSAGES/warzone2100.mo
+3831 translated messages, 116 untranslated messages.
+[24/77] Generating locale/id/LC_MESSAGES/warzone2100.mo
+3505 translated messages, 442 untranslated messages.
+[25/77] Generating locale/it/LC_MESSAGES/warzone2100.mo
+3583 translated messages, 364 untranslated messages.
+[26/77] Generating locale/ja_JP/LC_MESSAGES/warzone2100.mo
+3395 translated messages, 552 untranslated messages.
+[27/77] Generating locale/la/LC_MESSAGES/warzone2100.mo
+52 translated messages, 3895 untranslated messages.
+[28/77] Generating locale/ko/LC_MESSAGES/warzone2100.mo
+2730 translated messages, 1217 untranslated messages.
+[29/77] cd /home/punkech/wz-blueprint-20261107/build/data && /usr/bin/cmake -E chdir /home/punkech/wz-blueprint-20261107/source/data/base /usr/bin/cmake -DSOURCE=palette.txt -DDEST_DIR=/home/punkech/wz-blueprint-20261107/build/data/base.wz -P /home/punkech/wz-blueprint-20261107/source/cmake/EmscriptenCompressZipCopy.cmake && /usr/bin/cmake -E chdir /home/punkech/wz-blueprint-20261107/source/data/base /usr/bin/cmake -DSOURCE=audio -DDEST_DIR=/home/punkech/wz-blueprint-20261107/build/data/base.wz -P /home/punkech/wz-blueprint-20261107/source/cmake/EmscriptenCompressZipCopy.cmake && /usr/bin/cmake -E chdir /home/punkech/wz-blueprint-20261107/source/data/base /usr/bin/cmake -DSOURCE=campaigns -DDEST_DIR=/home/punkech/wz-blueprint-20261107/build/data/base.wz -P /home/punkech/wz-blueprint-20261107/source/cmake/EmscriptenCompressZipCopy.cmake && /usr/bin/cmake -E chdir /home/punkech/wz-blueprint-20261107/source/data/base /usr/bin/cmake -DSOURCE=components -DDEST_DIR=/home/punkech/wz-blueprint-20261107/build/data/base.wz -P /home/punkech/wz-blueprint-20261107/source/cmake/EmscriptenCompressZipCopy.cmake && /usr/bin/cmake -E chdir /home/punkech/wz-blueprint-20261107/source/data/base /usr/bin/cmake -DSOURCE=effects -DDEST_DIR=/home/punkech/wz-blueprint-20261107/build/data/base.wz -P /home/punkech/wz-blueprint-20261107/source/cmake/EmscriptenCompressZipCopy.cmake && /usr/bin/cmake -E chdir /home/punkech/wz-blueprint-20261107/source/data/base /usr/bin/cmake -DSOURCE=features -DDEST_DIR=/home/punkech/wz-blueprint-20261107/build/data/base.wz -P /home/punkech/wz-blueprint-20261107/source/cmake/EmscriptenCompressZipCopy.cmake && /usr/bin/cmake -E chdir /home/punkech/wz-blueprint-20261107/source/data/base /usr/bin/cmake -DSOURCE=gamedesc.lev -DDEST_DIR=/home/punkech/wz-blueprint-20261107/build/data/base.wz -P /home/punkech/wz-blueprint-20261107/source/cmake/EmscriptenCompressZipCopy.cmake && /usr/bin/cmake -E chdir /home/punkech/wz-blueprint-20261107/source/data/base /usr/bin/cmake -DSOURCE=guidetopics -DDEST_DIR=/home/punkech/wz-blueprint-20261107/build/data/base.wz -P /home/punkech/wz-blueprint-20261107/source/cmake/EmscriptenCompressZipCopy.cmake && /usr/bin/cmake -E chdir /home/punkech/wz-blueprint-20261107/source/data/base /usr/bin/cmake -DSOURCE=ruleset.json -DDEST_DIR=/home/punkech/wz-blueprint-20261107/build/data/base.wz -P /home/punkech/wz-blueprint-20261107/source/cmake/EmscriptenCompressZipCopy.cmake && /usr/bin/cmake -E chdir /home/punkech/wz-blueprint-20261107/source/data/base /usr/bin/cmake -DSOURCE=images -DDEST_DIR=/home/punkech/wz-blueprint-20261107/build/data/base.wz -P /home/punkech/wz-blueprint-20261107/source/cmake/EmscriptenCompressZipCopy.cmake && /usr/bin/cmake -E chdir /home/punkech/wz-blueprint-20261107/source/data/base /usr/bin/cmake -DSOURCE=messages -DDEST_DIR=/home/punkech/wz-blueprint-20261107/build/data/base.wz -P /home/punkech/wz-blueprint-20261107/source/cmake/EmscriptenCompressZipCopy.cmake && /usr/bin/cmake -E chdir /home/punkech/wz-blueprint-20261107/source/data/base /usr/bin/cmake -DSOURCE=misc -DDEST_DIR=/home/punkech/wz-blueprint-20261107/build/data/base.wz -P /home/punkech/wz-blueprint-20261107/source/cmake/EmscriptenCompressZipCopy.cmake && /usr/bin/cmake -E chdir /home/punkech/wz-blueprint-20261107/source/data/base /usr/bin/cmake -DSOURCE=script -DDEST_DIR=/home/punkech/wz-blueprint-20261107/build/data/base.wz -P /home/punkech/wz-blueprint-20261107/source/cmake/EmscriptenCompressZipCopy.cmake && /usr/bin/cmake -E chdir /home/punkech/wz-blueprint-20261107/source/data/base /usr/bin/cmake -DSOURCE=sequenceaudio -DDEST_DIR=/home/punkech/wz-blueprint-20261107/build/data/base.wz -P /home/punkech/wz-blueprint-20261107/source/cmake/EmscriptenCompressZipCopy.cmake && /usr/bin/cmake -E chdir /home/punkech/wz-blueprint-20261107/source/data/base /usr/bin/cmake -DSOURCE=shaders -DDEST_DIR=/home/punkech/wz-blueprint-20261107/build/data/base.wz -P /home/punkech/wz-blueprint-20261107/source/cmake/EmscriptenCompressZipCopy.cmake && /usr/bin/cmake -E chdir /home/punkech/wz-blueprint-20261107/source/data/base /usr/bin/cmake -DSOURCE=stats -DDEST_DIR=/home/punkech/wz-blueprint-20261107/build/data/base.wz -P /home/punkech/wz-blueprint-20261107/source/cmake/EmscriptenCompressZipCopy.cmake && /usr/bin/cmake -E chdir /home/punkech/wz-blueprint-20261107/source/data/base /usr/bin/cmake -DSOURCE=structs -DDEST_DIR=/home/punkech/wz-blueprint-20261107/build/data/base.wz -P /home/punkech/wz-blueprint-20261107/source/cmake/EmscriptenCompressZipCopy.cmake && /usr/bin/cmake -E chdir /home/punkech/wz-blueprint-20261107/source/data/base /usr/bin/cmake -DSOURCE=tileset -DDEST_DIR=/home/punkech/wz-blueprint-20261107/build/data/base.wz -P /home/punkech/wz-blueprint-20261107/source/cmake/EmscriptenCompressZipCopy.cmake && /usr/bin/cmake -E chdir /home/punkech/wz-blueprint-20261107/source/data/base /usr/bin/cmake -DSOURCE=wrf -DDEST_DIR=/home/punkech/wz-blueprint-20261107/build/data/base.wz -P /home/punkech/wz-blueprint-20261107/source/cmake/EmscriptenCompressZipCopy.cmake && /usr/bin/cmake -E chdir /home/punkech/wz-blueprint-20261107/build/data/base /usr/bin/cmake -DSOURCE=texpages -DDEST_DIR=/home/punkech/wz-blueprint-20261107/build/data/base.wz -P /home/punkech/wz-blueprint-20261107/source/cmake/EmscriptenCompressZipCopy.cmake
+[30/77] Generating locale/lt/LC_MESSAGES/warzone2100.mo
+49 translated messages, 3898 untranslated messages.
+[31/77] Generating locale/my_MM/LC_MESSAGES/warzone2100.mo
+1 translated message, 3946 untranslated messages.
+[32/77] Generating locale/nb/LC_MESSAGES/warzone2100.mo
+428 translated messages, 3519 untranslated messages.
+[33/77] Generating locale/pl/LC_MESSAGES/warzone2100.mo
+2851 translated messages, 1096 untranslated messages.
+[34/77] Generating locale/nl/LC_MESSAGES/warzone2100.mo
+2875 translated messages, 1072 untranslated messages.
+[35/77] Generating locale/pt/LC_MESSAGES/warzone2100.mo
+3203 translated messages, 744 untranslated messages.
+[36/77] Generating locale/pt_BR/LC_MESSAGES/warzone2100.mo
+3844 translated messages, 103 untranslated messages.
+[37/77] Generating locale/ro/LC_MESSAGES/warzone2100.mo
+2623 translated messages, 1324 untranslated messages.
+[38/77] Generating locale/sk/LC_MESSAGES/warzone2100.mo
+857 translated messages, 3090 untranslated messages.
+[39/77] Generating locale/ru/LC_MESSAGES/warzone2100.mo
+3831 translated messages, 116 untranslated messages.
+[40/77] Generating locale/sl/LC_MESSAGES/warzone2100.mo
+2774 translated messages, 1173 untranslated messages.
+[41/77] Generating locale/sr_RS/LC_MESSAGES/warzone2100.mo
+1063 translated messages, 2884 untranslated messages.
+[42/77] Generating __shouldnotexist.h, autorevision.h, autorevision.cache
+-- Found Git: /usr/bin/git (found version "2.43.0") 
+-- Gathered revision data from Git
+[43/69] Generating locale/tr/LC_MESSAGES/warzone2100.mo
+3389 translated messages, 558 untranslated messages.
+[44/69] Generating locale/tt_RU/LC_MESSAGES/warzone2100.mo
+120 translated messages, 3827 untranslated messages.
+[45/69] Generating locale/uk_UA/LC_MESSAGES/warzone2100.mo
+3328 translated messages, 619 untranslated messages.
+[46/69] Generating locale/ca_ES/LC_MESSAGES/warzone2100_guide.mo
+231 translated messages, 109 untranslated messages.
+[47/69] Generating locale/zh_CN/LC_MESSAGES/warzone2100.mo
+3838 translated messages, 109 untranslated messages.
+[48/69] cd /home/punkech/wz-blueprint-20261107/build/data/mods_staging && /usr/bin/cmake -E chdir /home/punkech/wz-blueprint-20261107/build/data/mods_staging/generated_info_json/wz2100_camclassic /usr/bin/cmake -E env LC_ALL=C LC_COLLATE=C /bin/zip -X -r -7 -q "--exclude='*/.git*'" /home/punkech/wz-blueprint-20261107/build/data/mods_staging/campaign/wz2100_camclassic.wz mod-info.json && /usr/bin/cmake -E chdir /home/punkech/wz-blueprint-20261107/source/data/mods/campaign/wz2100_camclassic /bin/zip -X -r -7 -q "--exclude='*/.git*'" /home/punkech/wz-blueprint-20261107/build/data/mods_staging/campaign/wz2100_camclassic.wz stats
+[49/69] Generating locale/cs/LC_MESSAGES/warzone2100_guide.mo
+227 translated messages, 113 untranslated messages.
+[50/69] Generating locale/de/LC_MESSAGES/warzone2100_guide.mo
+134 translated messages, 206 untranslated messages.
+[51/69] cd /home/punkech/wz-blueprint-20261107/build/data/mods_staging && /usr/bin/cmake -E chdir /home/punkech/wz-blueprint-20261107/build/data/mods_staging/generated_info_json/wz2100_campumpkin /usr/bin/cmake -E env LC_ALL=C LC_COLLATE=C /bin/zip -X -r -7 -q "--exclude='*/.git*'" /home/punkech/wz-blueprint-20261107/build/data/mods_staging/campaign/wz2100_campumpkin.wz mod-info.json && /usr/bin/cmake -E chdir /home/punkech/wz-blueprint-20261107/source/data/mods/campaign/wz2100_campumpkin /bin/zip -X -r -7 -q "--exclude='*/.git*'" /home/punkech/wz-blueprint-20261107/build/data/mods_staging/campaign/wz2100_campumpkin.wz stats
+[52/69] Generating locale/es/LC_MESSAGES/warzone2100_guide.mo
+168 translated messages, 172 untranslated messages.
+[53/69] Generating locale/zh_TW/LC_MESSAGES/warzone2100.mo
+3521 translated messages, 426 untranslated messages.
+[54/69] Generating locale/fr/LC_MESSAGES/warzone2100_guide.mo
+340 translated messages.
+[55/69] Generating locale/hu/LC_MESSAGES/warzone2100_guide.mo
+217 translated messages, 123 untranslated messages.
+[56/69] Generating locale/id/LC_MESSAGES/warzone2100_guide.mo
+80 translated messages, 260 untranslated messages.
+[57/69] Generating locale/it/LC_MESSAGES/warzone2100_guide.mo
+19 translated messages, 321 untranslated messages.
+[58/69] Generating locale/ja_JP/LC_MESSAGES/warzone2100_guide.mo
+156 translated messages, 184 untranslated messages.
+[59/69] Generating locale/nl/LC_MESSAGES/warzone2100_guide.mo
+50 translated messages, 290 untranslated messages.
+[60/69] Generating locale/pl/LC_MESSAGES/warzone2100_guide.mo
+40 translated messages, 300 untranslated messages.
+[61/69] Generating locale/pt_BR/LC_MESSAGES/warzone2100_guide.mo
+339 translated messages, 1 untranslated message.
+[62/69] Generating locale/ru/LC_MESSAGES/warzone2100_guide.mo
+227 translated messages, 113 untranslated messages.
+[63/69] Generating locale/sr_RS/LC_MESSAGES/warzone2100_guide.mo
+340 translated messages.
+[64/69] Generating locale/tr/LC_MESSAGES/warzone2100_guide.mo
+72 translated messages, 268 untranslated messages.
+[65/69] Generating locale/uk_UA/LC_MESSAGES/warzone2100_guide.mo
+49 translated messages, 291 untranslated messages.
+[66/69] Running utility command for data
+[67/69] Generating locale/zh_TW/LC_MESSAGES/warzone2100_guide.mo
+30 translated messages, 310 untranslated messages.
+[68/69] Generating locale/zh_CN/LC_MESSAGES/warzone2100_guide.mo
+340 translated messages.
+[69/69] Linking CXX executable src/warzone2100.html
+em++: warning: -pthread + ALLOW_MEMORY_GROWTH may run non-wasm code slowly, see https://github.com/WebAssembly/design/issues/1271 [-Wpthreads-mem-growth]

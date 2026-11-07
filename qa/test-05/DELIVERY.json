@@ -1,0 +1,723 @@
+{
+  "passed": true,
+  "emulatorTesting": true,
+  "gameplayTesting": true,
+  "visualReview": true,
+  "candidateAPK_SHA256": "9be9cde8d4d62a4ea205a34e6c53fe2fab7ff8eb0d57f52b9775207853e2866b",
+  "package": "com.rbabbit.warzonetowers.lab",
+  "label": "Warzone Towers",
+  "version": "0.5",
+  "scope": "Audited ordinary/module preview rendering and native queued alignment, parity-correct construction, queues, selection/movement, normal production, native save/load and input/layout returns",
+  "checks": {
+    "queuedBlueprintAlignment": true,
+    "evenFootprints": true,
+    "oddFootprints": true,
+    "ordinaryConstruction": true,
+    "moduleConstruction": true,
+    "mixedQueues": true,
+    "selectionAndMovement": true,
+    "normalProduction": true,
+    "saveLoad": true,
+    "inputReturns": true,
+    "layout": true,
+    "previewPerformance": true
+  },
+  "reports": [
+    {
+      "path": "qa/test-05/package-verification.json",
+      "sha256": "16c18fb2ba0ed6563082d6efdcd690369c013410d413604146514a524c779087"
+    },
+    {
+      "path": "qa/test-05/code-checks.json",
+      "sha256": "94bab09b5c2bb8854e3c8f4492e7d60e7d291d00ad27514fbc684439ef1b3b5b"
+    },
+    {
+      "path": "qa/test-05/visual-review.json",
+      "sha256": "c009192e1c5be8904ff598da0c0a97719141b047e25e146afe5630ff07fd8a83"
+    },
+    {
+      "path": "qa/test-05/native-build-verification.json",
+      "sha256": "db3d9b345091d555549b8d36d4c6a958741f826a9e452b11b595e7596e8bcf3f"
+    },
+    {
+      "path": "qa/test-05/final-integrity.json",
+      "sha256": "b02eb2d33c3ea20fb6b2dfeca32877d4e69576b5faca50af829d4e155ea7ef1d"
+    },
+    {
+      "path": "qa/test-05/emulator-verification.json",
+      "sha256": "7ee94d2baae8fdb5a6e9eb47c44817bc50b8e545cd9f7d9757991d99807ab05d"
+    }
+  ],
+  "sourceReports": [
+    {
+      "path": "qa/test-05/preview-journey/preview-journey.json",
+      "sha256": "6228439ef0b15d2ae2eea1a343b6b697395063c438bdf322dbf2232c0ff7a801"
+    },
+    {
+      "path": "qa/test-05/raised-footprint/audit-build-display-td1.json",
+      "sha256": "ac1967047974c7544acbfa77a019b4e3c919ea98841f58fe53ec65cc2302ae4b"
+    },
+    {
+      "path": "qa/test-05/module-journey/module-journey-dustfall.json",
+      "sha256": "642307946a1e00cb1f491d12060c4186d5601e88ee23ffdcf369c00cbadd5aad"
+    },
+    {
+      "path": "qa/test-05/factory-journey/module-journey-factory.json",
+      "sha256": "849c04cf8e411b699c5e2afc40425bbbdc91979836b0c0bd24f4f4a2d6454eef"
+    },
+    {
+      "path": "qa/test-05/module-layout/module-layout.json",
+      "sha256": "6fc8af260820111f350c22f419cf03c0335a2bca4ebffb0eef36b81631885ee9"
+    },
+    {
+      "path": "qa/test-05/mixed-regression/mixed-selection.json",
+      "sha256": "8250ad1f05f0c2cc4c58bc67defb9f61236bdd78a94700d857ed554d2bad6705"
+    },
+    {
+      "path": "qa/test-05/paused-returns/test-02-paused-returns.json",
+      "sha256": "a9e600e23529047e3fea30b92013f40e51295b14ea00c0d6072ca7aeea5ff96d"
+    },
+    {
+      "path": "qa/test-05/keyboard-returns/lab-journey-keyboard.json",
+      "sha256": "5d844ebe395f9ed3e535d5f4557b8091b1c24e9e55a46298bced55c2f03bcce6"
+    },
+    {
+      "path": "qa/test-05/quit-return/test-02-quit-journey.json",
+      "sha256": "db4effc4efcc4a4eacbf0c78d2933aa6f0f9f8b4057449105092daa7bf0388d2"
+    }
+  ],
+  "supportingReports": [
+    {
+      "path": "qa/test-05/preview-journey/preview-journey.json",
+      "sha256": "6228439ef0b15d2ae2eea1a343b6b697395063c438bdf322dbf2232c0ff7a801"
+    },
+    {
+      "path": "qa/test-05/raised-footprint/audit-build-display-td1.json",
+      "sha256": "ac1967047974c7544acbfa77a019b4e3c919ea98841f58fe53ec65cc2302ae4b"
+    },
+    {
+      "path": "qa/test-05/module-journey/module-journey-dustfall.json",
+      "sha256": "642307946a1e00cb1f491d12060c4186d5601e88ee23ffdcf369c00cbadd5aad"
+    },
+    {
+      "path": "qa/test-05/factory-journey/module-journey-factory.json",
+      "sha256": "849c04cf8e411b699c5e2afc40425bbbdc91979836b0c0bd24f4f4a2d6454eef"
+    },
+    {
+      "path": "qa/test-05/module-layout/module-layout.json",
+      "sha256": "6fc8af260820111f350c22f419cf03c0335a2bca4ebffb0eef36b81631885ee9"
+    },
+    {
+      "path": "qa/test-05/mixed-regression/mixed-selection.json",
+      "sha256": "8250ad1f05f0c2cc4c58bc67defb9f61236bdd78a94700d857ed554d2bad6705"
+    },
+    {
+      "path": "qa/test-05/paused-returns/test-02-paused-returns.json",
+      "sha256": "a9e600e23529047e3fea30b92013f40e51295b14ea00c0d6072ca7aeea5ff96d"
+    },
+    {
+      "path": "qa/test-05/keyboard-returns/lab-journey-keyboard.json",
+      "sha256": "5d844ebe395f9ed3e535d5f4557b8091b1c24e9e55a46298bced55c2f03bcce6"
+    },
+    {
+      "path": "qa/test-05/quit-return/test-02-quit-journey.json",
+      "sha256": "db4effc4efcc4a4eacbf0c78d2933aa6f0f9f8b4057449105092daa7bf0388d2"
+    },
+    {
+      "path": "qa/test-05/integrated-journey.json",
+      "sha256": "c4dfaf35a6aa7b87e8187e127cc28b4ea170a60e2038eeb804545761b7a36cf8"
+    },
+    {
+      "path": "qa/test-05/native/native-preview-probe.json",
+      "sha256": "0d9198394369bcae13ab7987addc1f85075a22242346da6ba76eba0fcbd98b2e"
+    },
+    {
+      "path": "qa/test-05/startup/startup.json",
+      "sha256": "8daef10680eb93b72f18889710c9fd21b61577b0ea8590215deb10f001aa44bd"
+    },
+    {
+      "path": "qa/test-05/native/persistence-compatibility-review.json",
+      "sha256": "33b749b48c29ca24f994f37c68887a3174b4e1edcab6f4a6aca4664baa31ebd3"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/code-checks.json",
+      "sha256": "52e3d3eccfdeeb9f872926ed5a29efb777d9b14a8bd10d9f693c0d78c018f322"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/factory-journey/delivery-run.log",
+      "sha256": "03df3acbb061e8724961b6980f150d801858d9c4d9a3fa1f832afe3a6ff5c228"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/factory-journey/module04-factory-before-production.json",
+      "sha256": "ccf350bb0c018a2519074900c8b0596ebe74c8ff62db57adda748aba15eb20d2"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/factory-journey/module04-factory-first-roof-accepted.png",
+      "sha256": "7db59304934103b7e8ff5702f981d272f1b4b075a47752fe18356cb978f5262b"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/factory-journey/module04-factory-full-feedback.png",
+      "sha256": "9d21db2e03aa9cfa60b765ea9a9ca9f774055ec7e2315e600dfc6b12d76dff34"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/factory-journey/module04-factory-initial.json",
+      "sha256": "de723b6aee49e379b152a5ff4278a78cc9de0523a6db57e9f76c5af6d67dae52"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/factory-journey/module04-factory-native-complete.json",
+      "sha256": "d89a38cfa6f29bd4ed0d9b8621649072e97f909fc59774202105c8dcc8633676"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/factory-journey/module04-factory-native-orders.json",
+      "sha256": "f23b3adcc870b25482f5a635d246f8ca3eee7ebc36f4458cfb8715efb59dd82a"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/factory-journey/module04-factory-one-working-one-queued.png",
+      "sha256": "4b26164481157ad6145e87d229c85e79a078a377a264cfa397dfff72eab8010f"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/factory-journey/module04-factory-second-body-accepted.png",
+      "sha256": "9d980902730092dc292b205e6824a4b1385458f3b29d9a9376592032710af4d4"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/factory-journey/module04-factory-third-pending-feedback.png",
+      "sha256": "aeef3383ab4dc7872f15e16031d111bea3864b55f81be5181c006e2186ac70a7"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/factory-journey/module04-factory-two-of-two-still-open.png",
+      "sha256": "51301f1bfd150ad66e2a34bdfa84fd06153b035b92bb7e0549418b3938cc93ce"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/integrated-journey.json",
+      "sha256": "41198b95846cf9d3ea5b30c78e1afff45154892be58cd0652adf64fac77e9079"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/lab-r2-paused-for-height-optimization.png",
+      "sha256": "391be0e473bb0d507c12bebdd3ae5123b3009eb6423fc190b9268a04b30f60d7"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/module-journey/delivery-run.log",
+      "sha256": "ae98f97ee129989b0d2883e4fca5467b28ed1b4ce98e8ddcc2236111e4779320"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/module-journey/module-journey-dustfall.json",
+      "sha256": "632c124c3b23d21132b05d56d2f12d166f469d5428df74e05a6229cc6186fde3"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/module-journey/module04-dustfall-factory-back.png",
+      "sha256": "686f68a4622e14dcb776cce4493b567f29d1bb69a346fec94e08a0a54deaaf36"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/module-journey/module04-dustfall-factory-open.png",
+      "sha256": "7ff07d56efb259d82fbd4d29e17cb2c552c73f90c6c6cb50db0295a48f561351"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/module-journey/module04-dustfall-initial.json",
+      "sha256": "eba5b72e7e182eb57d46bf3d24ff7217fdd7895901044a33de2bb6574499abdd"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/module-journey/module04-dustfall-radar-guidance.png",
+      "sha256": "83c828c436abc4a5c95a2dfc947bde3c745f24601a15ceb72718ccb8b2673dad"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/module-journey/module04-mixed-native-complete.json",
+      "sha256": "c59a8fffb1227be47f349b477c5b228668d417e01947c5418a94899bd246e55e"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/module-journey/module04-modules-category-guidance.png",
+      "sha256": "5717d21f6cb1c7cecd3929a058844eb6fb1f95b11ebdeb404395092316ebae94"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/module-journey/module04-ordinary-tower-autoexit.png",
+      "sha256": "e868392d25e9a028a27286e6468bd09debc794b4b0611d70ad524c7e611c62fe"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/module-journey/module04-power-full-feedback.png",
+      "sha256": "ef2b7f71b839c2027bab8c3940bbefda5d5c6590949204410e2b8d52ab2543ee"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/module-journey/module04-power-native-orders.json",
+      "sha256": "a7a64787bfb5b9d1e654b0a38f36d2032b253fd6a99764b16f2cb5574772e06c"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/module-journey/module04-power-roof-accepted.png",
+      "sha256": "e28f96cdd3210c0598e6f7fba1035ffaa46ffbc40a5d70cf245259194c36480b"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/module-journey/module04-power-then-tower-queued.png",
+      "sha256": "16e9e90f3a408ad65d76c4958faee9d8df290ceb9918c4736bb930d1f9dcc7b0"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/module-journey/module04-research-body-accepted.png",
+      "sha256": "4a03bcf8e0dc6e0e8f8cc202652435d782f2557ac0839a6a855235adca8457dc"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/module-journey/module04-research-complete-still-open.png",
+      "sha256": "f15209077c19c7bf6cb318f966eb689421082f1a2213bc10a7528edcaada1966"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/module-journey/module04-research-full-feedback.png",
+      "sha256": "6c117147e5329a008af80c67baa50d3eb0dc7d2674f0eb8fc88f47195a9d52d4"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/module-journey/module04-research-native-complete.json",
+      "sha256": "b79cd00fecabcb20c812a6a5d2f1a407115d990a4bb8d8d6589cd1620e58b475"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/module-journey/module04-research-native-orders.json",
+      "sha256": "2f100fb5731681f46074d739cf962a39cd54462b465ec7d2c9a876051925e678"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/module-journey/module04-research-queued-feedback.png",
+      "sha256": "95121fa0f9c5e162e433dbb86e1893aa133895dde4e38d44428fb010d3c73370"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/module-journey/module04-research-roof-accepted.png",
+      "sha256": "affb200027d9c83d4518ef67fc0e67a041d30fb5a4113c2a02805cdab461b0e9"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/module-journey/module04-research-upgrading-feedback.png",
+      "sha256": "f0ba87756f7c04fcbce5e92da3be9e3d86e88d9d9ebeb51ba65a0de44161fdf4"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/module-journey/module04-roundtrip-before.json",
+      "sha256": "fd12989f6bfbe3be68903ff603985a6888e0d53ce4c491b9abae99344c163e91"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/module-journey/module04-roundtrip-factory.png",
+      "sha256": "395a978d994a47ca3b871e71fedca8f669ba93de2978e82edaf0d1297a0a5b11"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/module-journey/module04-roundtrip-loaded.json",
+      "sha256": "14e035ae7833235dbaf0c1c51983c20b879a98460d2c360389acf4ee413daab9"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/module-journey/module04-roundtrip-restored-input.png",
+      "sha256": "5755b3e17db6309ecfe1fe851186eff0d500d15397d91900d32fb60da98cd0e4"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/native-build-verification.json",
+      "sha256": "fe54e17f0306a8506e2480237f1e097c066bfd205ed7764dcbe909527094caef"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/package-verification.json",
+      "sha256": "c7240364fe53df80de9daf77e148d63b47b00432927f3e364a24bfc9f195647e"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/preview-journey/delivery-run.log",
+      "sha256": "88b4a6804520a957af5e854bbfec85e70f6becae0e8d191e18110f6a8a367460"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/preview-journey/preview-journey.json",
+      "sha256": "74e7e203ffd11d4860b8d5e85e459161a95a39a99cd0e53c5c3e818d09f53034"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/preview-journey/preview05-00-initial-native.json",
+      "sha256": "1fd5c53726fd2c5d8f1de458411ff9ef8306abf4364cd41b83cbe3731d91a6ce"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/preview-journey/preview05-00-initial.png",
+      "sha256": "48e19a07866ecd9c4d6dd35fecccef3e43e6e723df776905999553bc77bb78c5"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/preview-journey/preview05-01-research-held-neutral.png",
+      "sha256": "913d353cc80339bcf4e2559a8ae28787cf710830c3a2d910552968bb4743d126"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/preview-journey/preview05-02-A0ResearchFacility-queued.png",
+      "sha256": "07ecda22aae3f161353d4ac426c53807165cc2b56385a311cbc6d69d56dc7fb3"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/preview-journey/preview05-03-A0PowerGenerator-queued.png",
+      "sha256": "0ebf9af74c7514ea9a0cf49ebba1770d18b88fc2914e348257f3d3cc09667366"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/preview-journey/preview05-04-A0CyborgFactory-queued.png",
+      "sha256": "cef8bfb1acb5c8e2228de0d287ea1c84bbc974b2d44bdd5a44c41762a6e65f66"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/preview-journey/preview05-05-GuardTower1-queued.png",
+      "sha256": "72f3e368ddf0077071de94974f820e0abe95f88a3567905e11d2145c2bf3b70a"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/preview-journey/preview05-06-ordinary-native-orders.json",
+      "sha256": "884eb3d7fda08e3d058bbf2af958022fb512238e11ea932cdaef4a1cddeef42c"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/preview-journey/preview05-07-ordinary-and-module-highlights.png",
+      "sha256": "a368bcaed3eae2a6dd5183fd8aa96ee2f9eaccd629baf5778a09bb593592d848"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/preview-journey/preview05-08-radar-preserves-targets.png",
+      "sha256": "b2aa36a31d8127e138018fe87cf3bdc6c6b9f692cc5e514ccf08b629ad3a9f27"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/preview-journey/preview05-09-new-research-module-body-queued.png",
+      "sha256": "0fd5209c8c44ceeb28f1c9b5acc6d94f5bb129ffe3c7912fde8d0f33fe6302fe"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/preview-journey/preview05-10-module-native-orders.json",
+      "sha256": "a1e1ebea07e2778210233162a857d4e71818548919d2a9bea2dd8b2d16e9757c"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/preview-journey/preview05-11-complete-correct-footprints.png",
+      "sha256": "f715dccd1627a1bc1abc19ec43606274583bb776e03a2d7886fff75a9e675144"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/preview-journey/preview05-11-native-complete.json",
+      "sha256": "746971a4158dad632963ad0167df941883d700ed3e9d536944ac27b143f34ccd"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/preview-journey/preview05-return-1-help.png",
+      "sha256": "a3bdc2be5da7532f39b62eecb5861e46c2c446a93afb1171a50c74f12e18c639"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/preview-journey/preview05-return-1-queue.png",
+      "sha256": "29ae6367af2b4864fa080518370e0970713846ee1286d9e163ddc5f2f2053de5"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/preview-journey/preview05-return-1-research.png",
+      "sha256": "1c339ba802b6f3882568ffdf6568069bd32620896ebbbd844d83d9d677e2c88a"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/preview-journey/preview05-return-1-restored-input.png",
+      "sha256": "c6517b3b82b052bc13c9d917a6fe21f154626db299f3c5b0f6efece7ee8b9505"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/preview-journey/preview05-return-2-help.png",
+      "sha256": "8115a283e7f81e6fea57fa9ecf3d2a52e5840ae570f3eadee58429b668e2e57e"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/preview-journey/preview05-return-2-queue.png",
+      "sha256": "058c1dde66293e62d18f45f9cf3a0881b9b00e591f636a7a9386f366bd18d935"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/preview-journey/preview05-return-2-research.png",
+      "sha256": "56a2b6b370bee26393060daa5a51cccf59a9ebf3966308c4fca65cda53109f4e"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/preview-journey/preview05-return-2-restored-input.png",
+      "sha256": "5dc4c58dce2eca724b77a5d4f12b9bcc1ae7b089afad7d43551ae5a82029ecc8"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/preview-journey/preview05-safe-camera-return.png",
+      "sha256": "b09a48575e01ca3d73dca6336602190143d78cfa21da5cd6406b6521b88d7fe1"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/raised-footprint/audit-build-display-td1.json",
+      "sha256": "090287a015bd4dc4a24e8b0d241e9e65c1bbe76fea969b689d287c25de37b07b"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/raised-footprint/delivery-run.log",
+      "sha256": "73d8cade1f2866b336d0a88c7e4885804845602756ea174cabb2ae7d54ba5e1d"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/raised-footprint/dustfall-footer-starting-view.png",
+      "sha256": "940d49be686c4e9ee23b3ec0790c16013beeedc7548e4a884961cbcd07785e50"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/raised-footprint/dustfall-starting-camera.json",
+      "sha256": "004ae36d0b37462cd6ed596a759a21233893f180d04b5c275bc09f42c84a5af4"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/raised-footprint/selected-green-model-confirmed.png",
+      "sha256": "71f4a91006c04adb9ff99acff41c8a5204e624e99d90b5eabc472de931084327"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/raised-footprint/td1-models-cleared-on-completion.png",
+      "sha256": "d5b2a40fd3a0fc96364467c4e9fab8b11ae8c52567bfce8fdb16fba76f796e76"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/raised-footprint/td1-native-completed.json",
+      "sha256": "f2185ce8a635a5f45dcd8768f57da5a724f715877ade2e9957af67e28534859e"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/raised-footprint/td1-raised-models.png",
+      "sha256": "e458208a10104cbdb410e60a4b9550d92c35cbfd18a262fef7414bdd329675d6"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/startup/lab-05-native-startup-ready.png",
+      "sha256": "a79398558e408603315cfc8aeb492fdf4b9caf1220f0be3d3db396ce9b2b9731"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/startup/startup.json",
+      "sha256": "871c27f110361923263873175818eff34fade811b7acaef496e8b2df136c2083"
+    },
+    {
+      "path": "qa/test-05/iteration-r2-performance/stopped-r2.json",
+      "sha256": "3df29d639cb64200174702bda98ae59bc9c22240471466cd56aaa803bcb4bfda"
+    },
+    {
+      "path": "qa/test-05/iteration-r3-aged-save/delivery-run.log",
+      "sha256": "d9eba5e7bf0859b52a32e08da1e78d7546613ec07b26f9f97ab6cb9bc952a582"
+    },
+    {
+      "path": "qa/test-05/iteration-r3-aged-save/integrated-journey.json",
+      "sha256": "9410ae1aba14fa7df975f94b7970a12b103aa07a3983f8c345c6b5bf6ef395fe"
+    },
+    {
+      "path": "qa/test-05/iteration-r3-aged-save/preview-journey.json",
+      "sha256": "72068ccecec92c5ec3e67afef03a08105943c486ab3909c4c0a8c4724482127f"
+    },
+    {
+      "path": "qa/test-05/iteration-r3-aged-save/preview05-00-initial-native.json",
+      "sha256": "35dccb3d3f176c2a18ff5dbf918a02bc8d655938215f65fae38f5891360d3d98"
+    },
+    {
+      "path": "qa/test-05/iteration-r3-aged-save/preview05-00-initial.png",
+      "sha256": "e65b76989c9d30e3dcd498c4bae5a97032ebb88ee55b63466aef8e58b162bb8f"
+    },
+    {
+      "path": "qa/test-05/iteration-r3-aged-save/preview05-01-research-held-neutral.png",
+      "sha256": "2f4b723fb160caea87b6d4b6d4e6e82e1e9c040913141b91467822555958d65d"
+    },
+    {
+      "path": "qa/test-05/iteration-r3-aged-save/preview05-02-A0ResearchFacility-queued.png",
+      "sha256": "1049c153507e5b8d8473a5781f198736f9dc0bb30b78ff0436391738f100ab1d"
+    },
+    {
+      "path": "qa/test-05/iteration-r3-aged-save/preview05-03-A0PowerGenerator-queued.png",
+      "sha256": "48af499b0264c0f7480cef1b98084ce851a944ba0312f98b302fb2005790b708"
+    },
+    {
+      "path": "qa/test-05/iteration-r3-aged-save/preview05-04-A0CyborgFactory-queued.png",
+      "sha256": "4bcee5b30aad8db452f109827a352a7b7500946e5c38270e722fcb7102acb23d"
+    },
+    {
+      "path": "qa/test-05/iteration-r3-aged-save/preview05-05-GuardTower1-queued.png",
+      "sha256": "4da8cec84fcf9717f1f95e89489e4ed53842edbd5d41092f471f34fedcfddd88"
+    },
+    {
+      "path": "qa/test-05/iteration-r3-aged-save/preview05-06-ordinary-native-orders.json",
+      "sha256": "2eee7a8ec6a894e851b8a60531110d844a5381f5d41caff48fdfe8cfb8e38848"
+    },
+    {
+      "path": "qa/test-05/iteration-r3-aged-save/preview05-07-ordinary-and-module-highlights.png",
+      "sha256": "4be6a08432432449d03989aec18c6847f07efdcdc9420d1503b3ee4fc1370e8c"
+    },
+    {
+      "path": "qa/test-05/iteration-r3-aged-save/preview05-08-radar-preserves-targets.png",
+      "sha256": "2ea54bc0a7d657d4369b64331ab280199f1bcd2dfc8ad50d8b793288a2b3d9ec"
+    },
+    {
+      "path": "qa/test-05/iteration-r3-aged-save/preview05-09-new-research-module-body-queued.png",
+      "sha256": "6ea7540c49b2e5b20afc221f7863b2f8f1383df0a151a21acf41e3eef547237b"
+    },
+    {
+      "path": "qa/test-05/iteration-r3-aged-save/preview05-10-module-native-orders.json",
+      "sha256": "51100972bc77345da3e052f5f9930b8561f7345b680ea4ec523876a3ce54b047"
+    },
+    {
+      "path": "qa/test-05/iteration-r3-aged-save/preview05-failure.png",
+      "sha256": "78f57e339802b18693f6196514d7c3cbb61d2699ff9f6834311f10adf5c75dc1"
+    },
+    {
+      "path": "qa/test-05/iteration-r3-aged-save/preview05-prepared-native-save-loaded.png",
+      "sha256": "eb7ec56ac80f06b94ce660565a1f29805d4e83c6a29379ffec0b7a34f92318db"
+    },
+    {
+      "path": "qa/test-05/iteration-r3-aged-save/preview05-safe-camera-return.png",
+      "sha256": "854d47482aba9a522d58de17d113dcfaf5373a5793bd9c31488abf5ed877545f"
+    },
+    {
+      "path": "qa/test-05/iteration-r3-readback/code-checks.json",
+      "sha256": "5c5d27f2771a888b4344ba10f5389ef92fd0affa42fe497e7f54674ee581cb46"
+    },
+    {
+      "path": "qa/test-05/iteration-r3-readback/integrated-journey.json",
+      "sha256": "3d777523e445cc9e01d9e99bbd7fb82de3f8a071b86282fce82a42ecf584b25c"
+    },
+    {
+      "path": "qa/test-05/iteration-r3-readback/native-build-verification.json",
+      "sha256": "34a6b2ced28c79eb2552a2c0378aa41271d7175e61964950283b0e9d3ab5d1c7"
+    },
+    {
+      "path": "qa/test-05/iteration-r3-readback/package-verification.json",
+      "sha256": "602fec2dbc288bebb08c181d6c6818e19b78c4313143f05f0f6903ffcba5ed62"
+    },
+    {
+      "path": "qa/test-05/iteration-r3-readback/preview-journey/delivery-run.log",
+      "sha256": "9fd382986db9ec2c9ca6124ee0e4c6068eb0d5e83698423eb5ab56ddcb5d8ab3"
+    },
+    {
+      "path": "qa/test-05/iteration-r3-readback/preview-journey/preview-journey.json",
+      "sha256": "d5e5110662609aa58a5f54523e2b4e5cd736e05953c7eee690a979f47457b073"
+    },
+    {
+      "path": "qa/test-05/iteration-r3-readback/preview-journey/preview05-00-initial-native.json",
+      "sha256": "f559cdeb682eea7dfe7400191551f29a3f080109f1eefa8ab88ed9fe711f3f5f"
+    },
+    {
+      "path": "qa/test-05/iteration-r3-readback/preview-journey/preview05-00-initial.png",
+      "sha256": "b0c1f997df50159e49533098b413660f86d516230cdb76d7177675b5953ae2cd"
+    },
+    {
+      "path": "qa/test-05/iteration-r3-readback/preview-journey/preview05-01-research-held-neutral.png",
+      "sha256": "8eee0d950a223ecb4ec0d78f3565386d14f8b30c2a159a9ab842b55acf45f113"
+    },
+    {
+      "path": "qa/test-05/iteration-r3-readback/preview-journey/preview05-02-A0ResearchFacility-queued.png",
+      "sha256": "17c14bdb47257f3e20babee756f9e2c2795a7aefa8ec9cc2d89cf089cbf43b36"
+    },
+    {
+      "path": "qa/test-05/iteration-r3-readback/preview-journey/preview05-03-A0PowerGenerator-queued.png",
+      "sha256": "b7713a8850058a1c0aaef012c24bde3df926074c29b5db3d8f1b47d67c06bfa6"
+    },
+    {
+      "path": "qa/test-05/iteration-r3-readback/preview-journey/preview05-04-A0CyborgFactory-queued.png",
+      "sha256": "7fbc1e4bcbf227d6a768e74e7c554a623a59867b17a6229d53fee565f3a40135"
+    },
+    {
+      "path": "qa/test-05/iteration-r3-readback/preview-journey/preview05-05-GuardTower1-queued.png",
+      "sha256": "2279282c7847b7305c0353759cb9f457d63e470fccc60d756e1f78533acb6714"
+    },
+    {
+      "path": "qa/test-05/iteration-r3-readback/preview-journey/preview05-06-ordinary-native-orders.json",
+      "sha256": "9d981f2cc3c85975391d8112927e65e0ec1ec7c7532e93125ba804094b5b3603"
+    },
+    {
+      "path": "qa/test-05/iteration-r3-readback/preview-journey/preview05-07-ordinary-and-module-highlights.png",
+      "sha256": "f9ab897275c5836b3a0699ec4eb9082ad9dd0b2be34f13bf01ba521f5e88b58a"
+    },
+    {
+      "path": "qa/test-05/iteration-r3-readback/preview-journey/preview05-08-radar-preserves-targets.png",
+      "sha256": "9e704906719b02732d3c0bc2058ad9ced183169e0a4d695f118b277563f988d6"
+    },
+    {
+      "path": "qa/test-05/iteration-r3-readback/preview-journey/preview05-09-new-research-module-body-queued.png",
+      "sha256": "a126edbc70f94779ff55c4f765e05486b660fc9b2a1c3546e04a489f099538c3"
+    },
+    {
+      "path": "qa/test-05/iteration-r3-readback/preview-journey/preview05-10-module-native-orders.json",
+      "sha256": "9b93666da8a0deb320aa27f13a56f91def94b980723951b54fda0207940db3fa"
+    },
+    {
+      "path": "qa/test-05/iteration-r3-readback/preview-journey/preview05-11-complete-correct-footprints.png",
+      "sha256": "c555058bc46c942bee04f426e759f08fd03f616e4bb5fb26d9f2908e865e20e3"
+    },
+    {
+      "path": "qa/test-05/iteration-r3-readback/preview-journey/preview05-11-native-complete.json",
+      "sha256": "21133b956973dd4bd7987522a6a4b93cf1e25515a004c121e41e9eeb34bd65df"
+    },
+    {
+      "path": "qa/test-05/iteration-r3-readback/preview-journey/preview05-return-1-help.png",
+      "sha256": "56dee050ada9d387129419babf3ce8b893fe39d054b13260f7915fc353bf42e9"
+    },
+    {
+      "path": "qa/test-05/iteration-r3-readback/preview-journey/preview05-return-1-queue.png",
+      "sha256": "2ff52e872b18d94074aa24652190c2cc4c06f6dc31188d48893f848c9f3b346b"
+    },
+    {
+      "path": "qa/test-05/iteration-r3-readback/preview-journey/preview05-return-1-research.png",
+      "sha256": "54c8f14cb5e0ec3ca2c47aad0a54cc25c8568134028189216b99c71ca3f9781d"
+    },
+    {
+      "path": "qa/test-05/iteration-r3-readback/preview-journey/preview05-return-1-restored-input.png",
+      "sha256": "394a44f7c00eddd6930689e5bce90386c83283768f09181b93762b2259a7f9af"
+    },
+    {
+      "path": "qa/test-05/iteration-r3-readback/preview-journey/preview05-return-2-help.png",
+      "sha256": "162a04a3a8fcc4a844993ef56eee9dbd262acf1bc98c433b8084c55d87b038bc"
+    },
+    {
+      "path": "qa/test-05/iteration-r3-readback/preview-journey/preview05-return-2-queue.png",
+      "sha256": "963c412f3f150f6930189117695075476dd9dd54b373f82b35214216bac33907"
+    },
+    {
+      "path": "qa/test-05/iteration-r3-readback/preview-journey/preview05-return-2-research.png",
+      "sha256": "3adaa60a5d95868a34967c4e8c6b76312e2365537b807bc8bc5b2badbbda2839"
+    },
+    {
+      "path": "qa/test-05/iteration-r3-readback/preview-journey/preview05-return-2-restored-input.png",
+      "sha256": "82fe8722f0f745b7922d88472ef20b33b8058360fa650473c4cac6358b3f2012"
+    },
+    {
+      "path": "qa/test-05/iteration-r3-readback/preview-journey/preview05-safe-camera-return.png",
+      "sha256": "832727ad3c7c12319105bbc1d0732bab356f34068683d6a9f9e26535a09e279b"
+    },
+    {
+      "path": "qa/test-05/iteration-r3-readback/raised-footprint/delivery-run.log",
+      "sha256": "03df3acbb061e8724961b6980f150d801858d9c4d9a3fa1f832afe3a6ff5c228"
+    },
+    {
+      "path": "qa/test-05/iteration-r3-readback/startup/lab-05-native-startup-ready.png",
+      "sha256": "106b73afc615e88b14fbd02cd18022bc40725eee273aba21bcac066371d714ba"
+    },
+    {
+      "path": "qa/test-05/iteration-r3-readback/startup/startup.json",
+      "sha256": "11a96f3f09fb3644fdf7ce71d729bfe65cc6395dcff8b26b1156bae86c056a1a"
+    },
+    {
+      "path": "qa/test-05/iteration-r4-quit-readiness/integrated-journey-before-tail-resume.json",
+      "sha256": "09c691e0017ca7426f14a35578b1a2f63e76b33e72beffd666e9d0413356b13d"
+    },
+    {
+      "path": "qa/test-05/iteration-r4-quit-readiness/quit-delivery-run-before-tail-resume.log",
+      "sha256": "4aa5d254f9421a9bb219c8b74bdf88f7eba42dde1340bcd9331d7c4f614cd12f"
+    },
+    {
+      "path": "qa/test-05/iteration-r4-quit-readiness/quit-return/delivery-run.log",
+      "sha256": "4aa5d254f9421a9bb219c8b74bdf88f7eba42dde1340bcd9331d7c4f614cd12f"
+    },
+    {
+      "path": "qa/test-05/iteration-r4-quit-readiness/quit-return/quit-journey-01-native-pause.png",
+      "sha256": "31e4d7bed41f9c97da66db8fe590c5fb03352e6db86c218e414b1cfca973e08d"
+    },
+    {
+      "path": "qa/test-05/iteration-r4-quit-readiness/quit-return/quit-journey-02-native-confirmation.png",
+      "sha256": "00452b1f3653d438bf1ce93ce1245e490e242f181d2b9ca84a8f5e77c040dbf9"
+    },
+    {
+      "path": "qa/test-05/iteration-r4-quit-readiness/quit-return/quit-journey-03-neutral-ended.png",
+      "sha256": "a254c01b99aa9b94e67c8326e90f30a337b6379a000ed04698fee058c197fd61"
+    },
+    {
+      "path": "qa/test-05/iteration-r4-quit-readiness/quit-return/quit-journey-04-returned-start.png",
+      "sha256": "ecc3c1486244d55d9dd78d80a771eb3ef8b5e58c966b1bb6c408b47e8e64a5c5"
+    },
+    {
+      "path": "qa/test-05/iteration-r4-quit-readiness/quit-return/quit05-timeout-screen.png",
+      "sha256": "086653e0451bf58774be34647f6c71ee9df2edca399ef2a27f3f4761e85c95b8"
+    },
+    {
+      "path": "qa/test-05/iteration-r4-quit-readiness/quit-return/test-02-quit-journey.json",
+      "sha256": "dc520ca10bf090d0add94683d48067d0517185f2d388634dd79240005ce91f20"
+    },
+    {
+      "path": "qa/test-05/native-startup-investigation/first-candidate-code-checks.json",
+      "sha256": "e7f6df604e674bc33c9733cffb634dced1e7772d008469363100b247e120a23b"
+    },
+    {
+      "path": "qa/test-05/native-startup-investigation/first-candidate-integrated-journey.json",
+      "sha256": "58c8a8ae8cbeb604372f258ab93e0597bf1a2935ed5517e0c2d7f2c4c1458e97"
+    },
+    {
+      "path": "qa/test-05/native-startup-investigation/first-candidate-package-verification.json",
+      "sha256": "d9e332a662a04d43975977397d046836ac89cf4596fc814a44d6a689bb0a3aa6"
+    },
+    {
+      "path": "qa/test-05/native-startup-investigation/first-preview-attempt/delivery-run.log",
+      "sha256": "8d9f44767f82e9b56834870d0489eff3e2d57a2fc58dbf2c875f1629948a9548"
+    },
+    {
+      "path": "qa/test-05/native-startup-investigation/first-preview-attempt/preview-journey.json",
+      "sha256": "57efab0e788a39f9b3e46f1ed7782d84bee210ddda1bdb693092d1319e632f67"
+    },
+    {
+      "path": "qa/test-05/native-startup-investigation/initial-native-startup-failure.json",
+      "sha256": "1b2581688241d3c1cbc983544fd40cfb8a6f702198985f18ac83ad6653c317dc"
+    },
+    {
+      "path": "qa/test-05/native-startup-investigation/startup-visible.png",
+      "sha256": "8af38421598b45207f9a66d3fcc87dc27b517500ab98499079c91a9dc4bf4bb5"
+    }
+  ],
+  "supportingInterpretation": "The nine passing raw gameplay reports are hash-bound source evidence referenced by emulator-verification; only the six normalized aggregates are required gate reports. Diagnostic/superseded files added with --supporting are never interpreted as passes.",
+  "limitations": [
+    "The emulator's pre-existing black terrain issue remains in Normal/SwiftShader. Ground textures and the appearance of slopes could not be visually approved; native terrain picks, heights, positions and completion were checked.",
+    "Physical Android devices were not tested in this task.",
+    "All 161 ordinary catalogue types were exercised through the actual JavaScript renderer and 1,932 native source geometry cases. Real emulator construction covered representative 1x1, 2x2 and 1x2 structures, elevated sites and Research/Power/Factory modules; it did not construct every catalogue type or certify all 30 waves.",
+    "Native automatic wall-variant model choice is not published by the scripting API. Preview metadata retains the original selected structure model."
+  ],
+  "recordedUTC": "2026-11-07T18:32:48.250407+00:00"
+}

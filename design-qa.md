@@ -1,13 +1,10 @@
-# Current v6.4 HTML/CSS construction display
+# Current Towers Lab 01
 
-The exact delivery APK and current runtime source are covered by
-[the v6.4 report](qa/v6.4-build-display/REPORT.md) and its hashed evidence.
-Actual emulator screens were checked on both maps, wide and phone viewports,
-enlarged text, catalogue scrolling and keyboard/menu returns. Native saves
-confirmed actual structure positions and completion. The preceding
-[v6.3 report](qa/v6.3-building/REPORT.md) covers smooth building interaction.
-The native-layout comparisons below remain historical. No physical-device
-performance or complete 30-round verification is claimed.
+The compact slate/teal HTML/CSS interface and distinct Android start screen
+were inspected in the actual emulator on the exact delivery APK. The current
+[delivery report](qa/lab-01/REPORT.md) links phone/wide/enlarged/compact screens,
+native outcomes and the retained TRUCKS picker transition. Historical mock
+comparisons and verification statements below apply to their named versions.
 
 # Historical v6.2 HTML/CSS release
 

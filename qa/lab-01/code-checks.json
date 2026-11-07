@@ -1,0 +1,37 @@
+{
+  "passed": true,
+  "candidateAPK_SHA256": "6dafb70bff1dfec5614de3403b5e169f8d720c9507c6f612d0000de9ecf5118c",
+  "certificateSHA256": "4499efe00477c7c724c06a1dd96f935864548665c13ab5e2bd0a9c0f83f7cb15",
+  "checks": [
+    {
+      "script": "tools/test-command-bridge.cjs",
+      "log": "qa/lab-01/test-command-bridge.log",
+      "sha256": "6e82c66c90b0bcf65de7ea9996e1320414bca42e34ba568fb3f4e1c7bf059a89",
+      "result": [
+        "PASS: FIFO builds, manual/automatic workers, sticky sessions, STOP, deduplication, validation, factory queues and bounded 100-job polling",
+        "PASS: construction ETA follows actual worker actions/upgrades, pauses and power; modules use observed work; journal never replaces native orders",
+        "PASS: a snapped 2x2 foundation binds to its own queue entry without matching older adjacent buildings",
+        "PASS: native queue handoff preserves progress/completion; sustained cancellation still interrupts"
+      ]
+    },
+    {
+      "script": "tools/test-build-display.cjs",
+      "log": "qa/lab-01/test-build-display.log",
+      "sha256": "73a2551651c952c11d4882aadd6a5e879a80d6bcdeaf79cdbe8659d05845f4dd",
+      "result": [
+        "PASS: stable site identities, locations, pending/completed counts, no duplicate completion, closed-catalogue map updates, raised-ground interpolation and complete original-mesh coverage"
+      ]
+    },
+    {
+      "script": "tools/test-smooth-building.cjs",
+      "log": "qa/lab-01/test-smooth-building.log",
+      "sha256": "ed4f650cf1b499355ede6619de700ed86fabb754402aac3d89d406f3e414d5a8",
+      "result": [
+        "PASS: immediate/repeated selection, immutable rapid mixed orders, accepted-input exit and scoped STOP; no frame freeze or viewport change"
+      ]
+    }
+  ],
+  "runtimeSourceFiles": 486,
+  "finalCandidateChangesSinceLogicChecks": "Startup map/card spacing and integer art bounds; CSS current-page cue. JavaScript order logic unchanged.",
+  "testedLogicSourceSHA256": "62e8d1a296abcb92e4dd8ef8616bd89c3007f239fa2bc68179ac1ed23fe5136c"
+}

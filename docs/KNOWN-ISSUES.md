@@ -1,17 +1,117 @@
 # Known issues and verification limits
 
-## Current v6.4 HTML/CSS construction display
+## Current Warzone Towers 0.4 - observed verification limits
 
-The exact delivered APK passed the focused construction and screen checks in
-[v6.4](../qa/v6.4-build-display/REPORT.md), following the
-[v6.3 building interaction checks](../qa/v6.3-building/REPORT.md). Both maps,
-actual native orders/positions/completions, phone/wide/enlarged-text layouts
-and keyboard/menu returns are covered within those reports' stated scope.
-The build canvas is a display-only projection of original building meshes.
-Software-emulator black terrain remains unchanged. These checks do not verify
-physical-device performance, a complete 30-round victory, or a new combat,
-research and tank-production regression pass. Those systems were preserved
-during the v6.3/v6.4 building-only changes.
+The experimental app is **Warzone Towers**, version **0.4 (4)**, package
+`com.rbabbit.warzonetowers.lab`. The exact delivery APK passed 23 source
+regressions, package/source checks, all seven scoped integrated emulator phases,
+visual review and preservation checks. See the [0.4 report](../qa/test-04/REPORT.md)
+for native records, inspected screenshots and the APK SHA-256.
+
+Module guidance, matching parent outlines/roof/body touches, queued capacity,
+preview cleanup and a persistent module tool were observed. Two Research
+Modules, a Power Module and both factory levels completed natively; normal
+factory production, ordinary construction, genuine F7/F8 and repeated menu,
+keyboard and Quit/new-battle returns also passed. Phone 1080×600 and compact
+854×480 with enlarged text/controls were inspected. These checks certify their
+recorded scope rather than every possible battle state.
+
+The native factory case used one authored worker for both queued levels.
+Different-worker arbitration on one parent is source-tested, not an additional
+native emulator fixture. Final Quit cases began with zero accepted ghost sites;
+they establish neutral exit/input cleanup and return, not a new nonempty-ghost
+cleanup proof. Immediate captures can precede compositor redraw; native orders
+and later settled frames establish placement and return results.
+
+Two QA readiness corrections are preserved: a bounded fresh terrain draw after
+QuickSave, and continuation of an already running new battle after a startup
+transport timeout. Neither changed the APK. The final integrated verification
+retains valid earlier phases and is not described as an uninterrupted run.
+Older preflights and their failures remain separate supporting evidence.
+
+Software-emulator black terrain remains visible. Physical-device GPU, audio
+and FPS performance and a complete 30-wave victory remain unverified. Optional
+download verification remains limited to historical evidence unless a current
+report records a new run.
+
+The original icon, compact layout, private save/design library, supplied maps,
+mod and wave schedule remain in use. The custom command adapter is intentionally
+updated; compiled engine files are preserved. The complete 0.3 fallback is frozen
+in `C:/timerApp/fallbacks/towers-before-module-ui-fix-20261107`. Final hashes
+verify stable v6.4 source/APK/preferences and older fallback artifacts unchanged.
+
+## Historical Warzone Towers 0.3 - observed verification limits
+
+The current experimental app is **Warzone Towers**, version **0.3 (3)**,
+package `com.rbabbit.warzonetowers.lab`. Visible TEST wording is removed; the
+separate app ID, original icon and compact layout remain.
+
+The exact delivery APK passed 20 source checks, package/preservation checks and
+all eight integrated emulator phases: branding, original-save Dustfall
+reproduction, modules/construction with genuine save/load, mixed combat/truck
+selection and FIFO/movement, wide/compact layouts, twelve paused returns,
+repeated keyboard returns and real Quit/new-battle recovery. See [the current
+report](../qa/test-03/REPORT.md) for exact native records and screenshot scopes.
+Earlier Test 02 and prototype evidence remains historical.
+
+The primary selection fault came from projecting truncated tile coordinates,
+which missed actual moved unit models. Native boxes now verify real selected
+constructor IDs; focus and native press cadence are also guarded. The measured
+cache traces establish fewer native selection operations in repeated cases,
+not an instant-selection or FPS guarantee. Current Quit verification started
+with zero ghost sites, so it does not prove clearing nonempty sites. Immediate
+accepted-placement screenshots may show the preceding compositor frame;
+actual native orders/completion and settled screens establish the result.
+Software-emulator black terrain and physical-device rendering/audio/FPS limits
+remain as previously recorded. No full 30-wave victory is certified.
+
+## Historical Warzone Towers Test 02 - observed verification limits
+
+Test 02 installed as **Warzone Towers Test**, version **0.2-test (2)**,
+package `com.rbabbit.warzonetowers.lab`. It updates the previous test app and
+retains that app's private saves/templates; stable v6.4 is separate.
+
+Implemented changes replace the hidden truck-picker transition with visible
+truck selection, refresh camera information for selection, clear battle
+overlays on exit, distinguish ordinary exits from defeat, restore the original
+icon and normal wording, and change Dustfall's starting camera orientation and
+position. Its exact delivered APK passed all ten integrated emulator phases:
+native-panel navigation, twelve paused returns, the six-phase gameplay journey,
+keyboard returns, STOP/movement/construction, three mixed FIFO construction
+sites, compact/enlarged layouts, genuine native save/load and real Quit with
+nonempty construction ghost cleanup and fresh-battle recovery, and Dustfall's
+native north/footer camera, minimap/world picking and completed raised-platform
+construction. The integrated master is marked passed on the exact delivery
+candidate, with bounded QA retries recorded separately. The final delivery gate
+passes all 18 required reports and 12 scoped checks.
+
+Use [the Test 02 report](../qa/test-02/REPORT.md) for final observed evidence.
+Package/source checks and older reports alone do not establish gameplay success.
+Software-emulator black terrain, physical-device GPU/audio/FPS performance,
+full 30-round victory and the optional-download verification limits remain
+unresolved unless the new report explicitly records otherwise.
+
+The initial test APK/source fallback is preserved in
+`C:/timerApp/fallbacks/towers-test-before-fixes-20261107`; the stable v6.4 project,
+APK and source ZIP are unchanged.
+
+## Historical Towers Lab 01
+
+Lab 01 was the separate HTML/CSS interface experiment based on v6.4, package
+`com.rbabbit.warzonetowers.lab`. See [its exact-APK report](../qa/lab-01/REPORT.md).
+The following notes describe that preserved fallback, not Test 02.
+
+- Explicit **TRUCKS** selection still uses v6.4's stock native picker and briefly
+  covers the battlefield/input with a captured frame. Engine simulation and
+  rendering continue underneath; the cover releases after selection. This is
+  recorded separately from building selection/placement, which stayed live.
+  All seven relevant selection/cover functions are byte-identical to v6.4.
+- Software-emulator black terrain remains unchanged. Physical-device GPU,
+  audio/FPS performance and a complete 30-round victory are not certified.
+- Optional downloads received actual offline-error/recovery checks on Lab;
+  full transfer completion/cancellation was not repeated in this experiment.
+- Lab's private saves, templates and optional downloads are independent of
+  stable v6.4. Stable private designs are not automatically imported.
 
 ## Historical v6.2 HTML/CSS return
 

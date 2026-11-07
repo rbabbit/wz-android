@@ -1,0 +1,84 @@
+/* Towers Lab: a compact field console. Engine viewport and camera stay native. */
+:root{--lab-bg:#0b151b;--lab-panel:#101f26;--lab-line:#294047;--lab-ink:#e2edec;--lab-muted:#8ea8ad;--lab-teal:#8bd3cc;--lab-amber:#f0c27b;--wt-ink:var(--lab-ink);--wt-surface:var(--lab-bg)}
+#warzone-command-strip{background:var(--lab-bg);border-bottom:1px solid var(--lab-line)}
+#warzone-command-strip #blocknight-combat-hud{left:4px;top:0;right:184px;max-width:none;width:auto;height:44px;padding:4px 0;gap:0;border:0;border-radius:0;background:transparent;box-shadow:none;overflow-x:auto;overflow-y:hidden;scrollbar-width:none}
+#blocknight-combat-hud .bn-command-group{height:36px;gap:1px}
+#blocknight-combat-hud .bn-command-group+.bn-command-group{margin-left:4px;padding-left:4px;border-left:1px solid var(--lab-line)}
+#warzone-command-strip #blocknight-combat-hud button{height:36px;min-width:38px;padding:0 8px;gap:5px;border:0;border-radius:4px;background:transparent;color:#b6cace;font:500 12px/1 Towers,system-ui,sans-serif;letter-spacing:.35px}
+#warzone-command-strip #blocknight-combat-hud button.active{color:#e3faf5;background:#25433f;box-shadow:inset 0 -2px var(--lab-teal)}
+#blocknight-combat-hud button img{width:15px;height:15px;opacity:.85}
+#warzone-command-strip #blocknight-zoom-control{height:36px;border:0;border-radius:0;background:none;box-shadow:none}
+#warzone-command-strip #blocknight-combat-hud button.zoom{height:36px;padding:0 8px}
+#warzone-command-strip #blocknight-tech{color:var(--lab-teal)}
+#warzone-command-strip #blocknight-help{color:var(--lab-muted)}
+body[data-command-page=design] #warzone-command-strip #blocknight-combat-hud #wt-open-design,
+body[data-command-page=saved] #warzone-command-strip #blocknight-combat-hud #wt-open-design,
+body[data-command-page=factory] #warzone-command-strip #blocknight-combat-hud #wt-open-factory,
+body[data-command-page=queue] #warzone-command-strip #blocknight-combat-hud #wt-open-queue,
+body[data-research=true] #warzone-command-strip #blocknight-combat-hud #blocknight-tech,
+body[data-build-sidebar=true] #warzone-command-strip #blocknight-combat-hud #wt-open-build{color:#e0f2ed;background:#223c3c;box-shadow:inset 0 -2px #8bd3cc}
+#warzone-command-strip #warzone-towers-wave-hud{top:3px;right:5px;width:174px;height:38px;padding:3px 4px 3px 8px;gap:5px;border:0;border-left:1px solid var(--lab-line);border-radius:0;background:transparent;box-shadow:none}
+#warzone-towers-wave-hud strong{font:500 13px/1.2 Towers,system-ui,sans-serif;color:var(--lab-teal);letter-spacing:.2px}
+#warzone-towers-wave-hud .wt-wave-detail{font-size:8px;color:var(--lab-muted);margin-top:2px}
+#warzone-towers-wave-hud #warzone-towers-next-wave{min-height:30px;padding:4px 7px;border:1px solid #596053;border-radius:4px;background:#242d28;color:#ead8b7;font:500 10px/1.1 Towers,system-ui,sans-serif}
+#wt-build-sidebar{background:var(--lab-bg);border:1px solid var(--lab-line);border-top:2px solid var(--lab-teal);border-radius:6px;box-shadow:4px 5px 18px #0005}
+#wt-build-sidebar header{min-height:32px;background:#13242b;border-bottom:1px solid var(--lab-line);padding:6px 10px}
+#wt-sidebar-power{color:var(--lab-amber)}
+#wt-sidebar-builders{color:#a5c9b6}
+#wt-build-sidebar nav{gap:3px;padding:5px 6px;background:#0d1b21}
+#wt-build-sidebar nav button{min-height:29px;font:500 10px/1 Towers,system-ui,sans-serif;letter-spacing:.4px;border-color:transparent;background:transparent;color:var(--lab-muted)}
+#wt-build-sidebar nav button.active{background:#233d3c;border-color:#436a65;color:#d4efea}
+#wt-sidebar-catalogue{column-gap:5px;row-gap:5px;padding-left:6px;padding-right:7px}
+#wt-sidebar-catalogue>button{position:relative;padding:5px 4px;border:1px solid #2a3e47;border-radius:5px;background:#14242d;color:var(--lab-ink);box-shadow:none}
+#wt-sidebar-catalogue>button.active{background:#203d3e;border-color:var(--lab-teal);box-shadow:inset 2px 0 var(--lab-teal)}
+#wt-sidebar-catalogue strong{font:500 12px/1.25 Towers,system-ui,sans-serif;letter-spacing:.1px}
+#wt-sidebar-catalogue>button>small{color:var(--lab-amber);background:#0c1a21;border-radius:3px;font:600 10px/1.2 system-ui,sans-serif;padding:3px 4px}
+#wt-sidebar-catalogue img{object-fit:contain;max-width:100%;filter:saturate(.8)}
+#wt-sidebar-queue{background:#0d1c23;border-top:1px solid var(--lab-line);padding:7px 8px 3px}
+#wt-sidebar-queue h2{color:var(--lab-teal);font-size:10px;letter-spacing:.55px}
+#wt-sidebar-queue h2 span{color:var(--lab-muted);font-size:8px}
+#wt-sidebar-queue .wt-site-number{color:var(--lab-teal);font-weight:500}
+#wt-sidebar-queue .wt-site-row strong{color:#dce9e8;font-size:10px}
+#wt-sidebar-queue .wt-site-row small{color:#8ba9ae;font-size:8px}
+#wt-sidebar-queue progress{height:3px;accent-color:#9ccfac}
+#wt-build-sidebar .wt-sidebar-exit{border-color:#3b6664;background:#203b3c;color:#cce9e4;border-radius:4px;letter-spacing:.6px}
+#wt-field-centre{height:130px;padding:6px;grid-template-rows:30px 38px 38px;gap:4px;clip-path:none;filter:none;border:1px solid var(--lab-line);border-radius:6px;background:#0d1b23f5;box-shadow:0 4px 16px #0005}
+#wt-field-centre button{background:#172a33;border-color:#2d444d;border-radius:4px;color:#c7dce0;font-weight:500}
+#wt-field-centre #wt-select-move{background:#223c3d;border-color:#416461}
+#wt-field-centre button.active{background:#35564b;color:#e8f5e8;border-color:#88bda4}
+#wt-field-toggle{border-color:#46676b;background:#132730;border-radius:6px;box-shadow:0 2px 8px #0004}
+#wt-field-toggle[aria-expanded=true]{background:#25413f;border-color:var(--lab-teal)}
+#wt-build-status,#wt-command-toast,#wt-native-back{border-radius:5px;box-shadow:0 3px 12px #0005;background:#13232bf5;border-color:#405b62;color:var(--lab-ink)}
+#warzone-towers-help{background:var(--lab-bg);color:var(--lab-ink);border-color:var(--lab-line);box-shadow:0 8px 40px #0008}
+#warzone-towers-help header{background:var(--lab-panel);border-color:var(--lab-line)}
+#warzone-towers-help button{min-height:34px;padding:7px 12px;border-radius:4px;box-shadow:none}
+#lab-ops{position:fixed;left:62px;bottom:12px;z-index:2147483642;display:flex;gap:4px;align-items:stretch;padding:4px;border:1px solid #334d53;border-radius:6px;background:#0d1b23ee;color:var(--lab-ink);box-shadow:0 3px 12px #0004;font:11px/1.2 system-ui,sans-serif;max-width:calc(100vw - 78px)}
+#lab-ops[hidden]{display:none!important}
+#lab-ops button{border:0;border-radius:4px;background:transparent;color:#b8ced1;padding:5px 8px;min-height:34px;text-align:left;cursor:pointer;touch-action:manipulation;font:inherit}
+#lab-ops button:hover,#lab-ops button:focus-visible{background:#21373e;outline:1px solid #6c9d9a;outline-offset:-1px}
+#lab-ops [data-lab-panel]{display:grid;gap:2px;min-width:91px}
+#lab-ops button+button{border-left:1px solid #2b434b}
+#lab-ops b{font:500 11px/1 Towers,system-ui,sans-serif;letter-spacing:.6px;color:var(--lab-teal)}
+#lab-ops small{font-size:9px;color:#92abb1;white-space:nowrap}
+#lab-ops .lab-running small{color:#afd3b8}
+#lab-ops-toggle{min-width:33px!important;text-align:center!important;color:#a6babf!important;font:500 11px/1 Towers,system-ui,sans-serif!important}
+#lab-ops[data-collapsed=true] [data-lab-panel]{display:none}
+body[data-research=true] #lab-ops,body[data-command-page] #lab-ops,body[data-build-sidebar=true] #lab-ops{display:none}
+@media(max-width:900px){
+ #warzone-command-strip #blocknight-combat-hud{right:174px}
+ #warzone-command-strip #warzone-towers-wave-hud{width:164px}
+ #warzone-command-strip #blocknight-combat-hud button{min-width:34px;padding:0 6px;font-size:11px}
+ #blocknight-combat-hud button img{display:none}
+ #warzone-command-strip #blocknight-combat-hud button.zoom{padding:0 7px}
+ #blocknight-combat-hud .bn-command-group+.bn-command-group{margin-left:2px;padding-left:2px}
+}
+@media(max-width:620px){
+ #warzone-command-strip #blocknight-combat-hud{right:153px}
+ #warzone-command-strip #warzone-towers-wave-hud{width:144px}
+ #warzone-towers-wave-hud .wt-wave-detail{display:none}
+ #warzone-towers-wave-hud strong{font-size:12px;white-space:normal}
+ #warzone-command-strip #blocknight-combat-hud button{font-size:10px;padding:0 5px}
+ #lab-ops{left:58px;bottom:12px}
+ #lab-ops [data-lab-panel]{min-width:76px;padding-left:6px;padding-right:6px}
+}
+@media(prefers-reduced-motion:reduce){#lab-ops *,#wt-build-sidebar *{transition:none!important}}

@@ -1,0 +1,317 @@
+{
+  "passed": true,
+  "emulatorTesting": true,
+  "gameplayTesting": true,
+  "candidateAPK_SHA256": "6f143ed3ca0f0678cd805e59fda00d97e8e859373e73b438f725e301f7201734",
+  "installedAPK_SHA256": "6f143ed3ca0f0678cd805e59fda00d97e8e859373e73b438f725e301f7201734",
+  "package": "com.rbabbit.warzonetowers.lab",
+  "version": "0.4",
+  "label": "Warzone Towers",
+  "checks": {
+    "moduleGuidance": true,
+    "moduleTargeting": true,
+    "modulePreviewCleanup": true,
+    "moduleRepeatFeedback": true,
+    "continuousModulePlacement": true,
+    "researchModuleCompletion": true,
+    "powerModuleCompletion": true,
+    "factoryModuleCompletion": true,
+    "factoryTwoLevelFIFO": true,
+    "ordinaryConstruction": true,
+    "saveLoad": true,
+    "inputReturns": true,
+    "layout": true
+  },
+  "observed": {
+    "researchParents": [
+      {
+        "id": 160127,
+        "name": "A0ResearchFacility",
+        "position": [
+          512,
+          9088,
+          510
+        ],
+        "modules": 1,
+        "currentBuildPts": 500
+      },
+      {
+        "id": 160125,
+        "name": "A0ResearchFacility",
+        "position": [
+          512,
+          9472,
+          510
+        ],
+        "modules": 1,
+        "currentBuildPts": 500
+      }
+    ],
+    "powerParent": {
+      "id": 160119,
+      "name": "A0PowerGenerator",
+      "position": [
+        768,
+        7296,
+        256
+      ],
+      "modules": 1,
+      "currentBuildPts": 500
+    },
+    "factoryParent": {
+      "id": 160121,
+      "name": "A0LightFactory",
+      "position": [
+        3648,
+        2368,
+        256
+      ],
+      "modules": 2,
+      "currentBuildPts": 500
+    },
+    "ordinaryTower": {
+      "id": 160145,
+      "currentBuildPts": 300
+    },
+    "factoryProduction": {
+      "applicable": true,
+      "factoryId": 160121,
+      "template": {
+        "fullname": "Truck Viper Wheels",
+        "name": "ConstructionDroid",
+        "id": "ConstructionDroid",
+        "points": 310,
+        "power": 62,
+        "cost": 62,
+        "droidType": 3,
+        "body": "Body1REC",
+        "propulsion": "wheeled01",
+        "brain": "ZNULLBRAIN",
+        "repair": "ZNULLREPAIR",
+        "ecm": "ZNULLECM",
+        "sensor": "ZNULLSENSOR",
+        "construct": "Spade1Mk1",
+        "weapons": []
+      },
+      "route": "existing-native-template",
+      "beforeIds": [
+        160007,
+        160005,
+        160003,
+        160001
+      ],
+      "queuedScreen": "C:\\timerApp\\wz-towers-lab\\qa\\test-04\\factory-journey\\module04-upgraded-factory-produce-one.png",
+      "produced": {
+        "id": 160143,
+        "factoryId": 160121,
+        "name": "Truck Viper Wheels",
+        "body": "Body1REC",
+        "propulsion": "wheeled01",
+        "gameTime": 151002
+      },
+      "nativeUnit": {
+        "action": 1,
+        "action/pos": [
+          3904,
+          2624
+        ],
+        "actionPoints": 0,
+        "actionStarted": 151202,
+        "actionString": "DACTION_MOVE",
+        "attackRun/0": 0,
+        "attackRun/1": 0,
+        "attackRun/2": 0,
+        "born": 151002,
+        "bumpDir": 0,
+        "bumpPosition": [
+          0,
+          0
+        ],
+        "bumpTime": 0,
+        "droidType": 3,
+        "formation": {
+          "direction": 16384,
+          "x": 3904,
+          "y": 2624
+        },
+        "group": 255,
+        "health": 155,
+        "id": 160143,
+        "lastBump": 0,
+        "moveDestination": [
+          3904,
+          2624
+        ],
+        "moveDirection": 15653,
+        "moveSource": [
+          3676,
+          2608
+        ],
+        "moveSpeed": 99,
+        "moveStatus": 4,
+        "moveTarget": [
+          3904,
+          2624
+        ],
+        "name": "Truck Viper Wheels · F160121",
+        "onMission": false,
+        "order/direction": 0,
+        "order/index": 0,
+        "order/pos": [
+          3904,
+          2624
+        ],
+        "order/pos2": [
+          0,
+          0
+        ],
+        "order/rtrType": 0,
+        "order/type": 2,
+        "orderList/size": 0,
+        "originalBody": 155,
+        "parts": {
+          "body": "Body1REC",
+          "brain": "ZNULLBRAIN",
+          "construct": "Spade1Mk1",
+          "ecm": "ZNULLECM",
+          "propulsion": "wheeled01",
+          "repair": "ZNULLREPAIR",
+          "sensor": "ZNULLSENSOR"
+        },
+        "pathIndex": 4,
+        "pathLength": 4,
+        "pathNode/0": [
+          3520,
+          2624
+        ],
+        "pathNode/1": [
+          3648,
+          2624
+        ],
+        "pathNode/2": [
+          3776,
+          2624
+        ],
+        "pathNode/3": [
+          3904,
+          2624
+        ],
+        "pauseTime": 0,
+        "player": 0,
+        "position": [
+          3686,
+          2609,
+          256
+        ],
+        "repairGroup": 255,
+        "rotation": [
+          15653,
+          0,
+          0
+        ],
+        "secondaryOrder": 158,
+        "selected": 0,
+        "shuffleStart": 0,
+        "underRepair": 0,
+        "vertSpeed": 0,
+        "visible/0": 255,
+        "weapons": 0
+      },
+      "nativeFactory": {
+        "Factory/assemblyPoint/number": 0,
+        "Factory/assemblyPoint/pos": [
+          3904,
+          2624,
+          266
+        ],
+        "Factory/buildPointsRemaining": -2,
+        "Factory/loopsPerformed": 0,
+        "Factory/productionLoops": 0,
+        "Factory/productionRuns": 0,
+        "Factory/secondaryOrder": 158,
+        "Factory/timeStartHold": 0,
+        "Factory/timeStarted": 0,
+        "born": 2,
+        "currentBuildPts": 500,
+        "health": 1900,
+        "id": 160121,
+        "modules": 2,
+        "name": "A0LightFactory",
+        "player": 0,
+        "position": [
+          3648,
+          2368,
+          256
+        ],
+        "productToGroup": 255,
+        "resistance": 150,
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "selected": 0,
+        "visible/0": 255,
+        "weapons": 0
+      },
+      "completedScreen": "C:\\timerApp\\wz-towers-lab\\qa\\test-04\\factory-journey\\module04-upgraded-factory-produced-complete.png"
+    },
+    "pausedReturnCases": 12,
+    "layoutProfiles": [
+      "phone",
+      "compact-enlarged"
+    ]
+  },
+  "sourceReports": [
+    {
+      "path": "qa/test-04/module-journey/module-journey-dustfall.json",
+      "sha256": "d882d19a247445dc335a7083d7a02311ea9d1abe2642a3b74d4a2bac3ea7275a"
+    },
+    {
+      "path": "qa/test-04/factory-journey/module-journey-factory.json",
+      "sha256": "8493a1049bcdfe641cd16383ae3008bf8d4cb2520b96513a1a08603424e02573"
+    },
+    {
+      "path": "qa/test-04/module-layout/module-layout.json",
+      "sha256": "ff8eb6f9ae5c9bf2d1d069c0ef5ce80218e772724a4a6b739cb11fd0beff6596"
+    },
+    {
+      "path": "qa/test-04/mixed-regression/mixed-selection.json",
+      "sha256": "8e85cabc41ae9f6a91fe3b768404a82b25fc5c435629ee66951185e6374f021b"
+    },
+    {
+      "path": "qa/test-04/paused-returns/test-02-paused-returns.json",
+      "sha256": "29ed87c6ea2a1a366c1882a88774c6491879b1a1656f02ab09f38eada09a8e39"
+    },
+    {
+      "path": "qa/test-04/keyboard-returns/lab-journey-keyboard.json",
+      "sha256": "ec245ed9ffac938a70381559c085bdcc3507517e3f349be05ed077bd8623a3ca"
+    },
+    {
+      "path": "qa/test-04/quit-return/test-02-quit-journey.json",
+      "sha256": "f49186b91ddf243b006bb7269d9af90f8611b0b091a7201022c021c0ae27b7ad"
+    },
+    {
+      "path": "qa/test-04/package-verification.json",
+      "sha256": "e70b069cb925bb43ee0f235338861c907cf388c95bb5bbe5fd04e79412b8fda9"
+    },
+    {
+      "path": "qa/test-04/code-checks.json",
+      "sha256": "2e4f6aadebbfde6698a60cb629fb76c799c8dc3e6cad5b3741e9991bb748e0a2"
+    },
+    {
+      "path": "qa/test-04/final-integrity.json",
+      "sha256": "5d2ecf49c45968f4106e03fe0f7661976e8b2742afab9fc9b759e27e96432c65"
+    },
+    {
+      "path": "qa/test-04/integrated-journey.json",
+      "sha256": "90dcbf32d7f86948f95a8988c6eaaa939fc2a630bec101fe3e2420c154a65ac2"
+    }
+  ],
+  "limits": [
+    "Software-emulator black terrain remains. Physical-phone GPU/audio/FPS and a full30-wave victory are not certified.",
+    "Module worlds use fresh authored Dustfall. Mixed-selection/return checks reuse a complete ordinary native save with authored trucks and previously normally produced tanks; no grants or position edits.",
+    "Preflight failures and bounded QA readiness corrections remain historical diagnostics and do not establish delivery passes."
+  ],
+  "recordedUTC": "2026-11-07T15:26:09.677Z"
+}

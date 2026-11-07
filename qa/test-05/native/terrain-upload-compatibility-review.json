@@ -1,0 +1,72 @@
+{
+  "readOnlyReview": true,
+  "sourceSHA256": "0942357098f50d32da19f1d0943bbcc521d07f23a4015f99e8d313ff7ad59c3f",
+  "testSHA256": "7aea4c891c170b98af91422fffcd4ab58625f58190e9fa5d50d57a8e93fbcae7",
+  "nativeVersion": "4.7.0/7d3d8e51a61ceee89e6bf672a41337e1a9cd7392",
+  "nativeUploadForms": [
+    "bufferData(target,HEAPU8,usage,dataPtr,sizeBytes)",
+    "bufferSubData(target,dstByteOffset,HEAPU8,dataPtr,sizeBytes)",
+    "numeric bufferData allocation/orphan"
+  ],
+  "nativeSourceRefs": [
+    {
+      "path": "source/lib/ivis_opengl/gfx_api_gl.cpp",
+      "line": 770,
+      "finding": "Upload binds buffer, performs glBufferData, unbinds"
+    },
+    {
+      "path": "source/lib/ivis_opengl/gfx_api_gl.cpp",
+      "line": 789,
+      "finding": "Update validates bounds, skips size0, binds buffer, performs glBufferSubData, unbinds"
+    },
+    {
+      "path": "source/src/terrain.cpp",
+      "line": 529,
+      "finding": "Sector update allocates CPU geometry, uploads bytes then immediately deletes/frees temporary arrays"
+    },
+    {
+      "path": "source/src/terrain.cpp",
+      "line": 1081,
+      "finding": "Initial geometry/index CPU arrays also freed immediately after upload"
+    },
+    {
+      "path": "emscripten4.0.10/src/lib/libwebgl.js",
+      "line": 1911,
+      "finding": "WebGL2 HEAPU8 source-offset/count overload"
+    },
+    {
+      "path": "emscripten4.0.10/src/lib/libwebgl.js",
+      "line": 4230,
+      "finding": "Mapped/flush/unmap emulation also routes through bufferSubData"
+    }
+  ],
+  "review": [
+    "Only observed vertex/index buffers mirrored; owned byte windows avoid retaining mutable or freed HEAP/SAB views",
+    "Native full-HEAP view is bounded to actual srcOffset/length before copying",
+    "Element offsets, view.byteOffset, DataView byte units and length0 remainder handled",
+    "Original GL called once with original receiver/arguments; mirror committed after normal return; no getError consumption",
+    "Only missing mirror uses GPU fallback and COPY_READ binding is restored",
+    "Current pair bounded to two16MiB buffers; identity/delete/context loss purge snapshots",
+    "No additional native game GPU copy/transform-feedback writers found"
+  ],
+  "independentVMCheck": {
+    "passed": true,
+    "coldGpuReads": 2,
+    "additionalGPUReadsForKnownUploads": 0,
+    "covered": [
+      "nativeHEAPU8",
+      "typed source ranges",
+      "view.byteOffset",
+      "DataView",
+      "length0",
+      "ArrayBuffer",
+      "SABownedcopy",
+      "orphan/resize",
+      "vertex/index edits",
+      "copy/invalid-upload fallback",
+      "delete/contextloss"
+    ]
+  },
+  "specification": "https://registry.khronos.org/webgl/specs/latest/2.0/",
+  "limitations": "Code/VM review only. Root must verify actual post-foundation read counters and paint latency on the exact APK. No emulator or project writes by reviewer."
+}

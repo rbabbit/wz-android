@@ -1,8 +1,111 @@
 # Warzone Towers for Android
 
-Warzone Towers is a separate Android wrapper for the supplied TowerDefense2_m map and Survival Mod. It installs alongside Block Night using the application ID `com.rbabbit.warzonetowers`.
+## Current accepted version: Warzone Towers 0.6 (version code 6)
 
-## Content provenance
+The user selected this edition as the current version on 7 November 2026.
+The exact tested APK is retained, including its existing application ID and
+private saves/designs. Development continues from this source on `main`;
+previous releases and the separate v6.4 project remain preserved fallbacks.
+See [the current release](https://github.com/rbabbit/wz-android/releases/tag/v0.6)
+for the unchanged APK, complete source ZIP and checksums.
+
+Version 0.6 fixes cross-area truck assignment and Android Back/menu routing.
+New build orders use the current visible/manual group, preserving earlier job
+workers. Back closes panels/keyboard first, then shows **Return to main menu?**
+with **Cancel / Return**. Return goes directly to the original start screen.
+The confirmation blocks input while simulation continues. The compiled engine,
+data, original icon, maps/mod and compact layout are unchanged from 0.5.
+
+The exact APK passed the focused emulator journey, 14 source checks, package/
+preservation verification and inspection of 12 screenshots. Details and limits:
+[0.6 report](qa/test-06/REPORT.md). The complete pre-change 0.5 fallback is in
+`C:/timerApp/fallbacks/towers-before-truck-back-fix-20261107`. Stable v6.4 remains
+untouched. Install as an update to keep experimental saves/designs.
+
+## Historical experimental edition: Warzone Towers 0.5 (version code 5)
+
+Version 0.5 fixes the ordinary building preview renderer, mixed module highlight
+painting, stale previews, unchecked placement feedback and terrain-height caches.
+The matching 4.7.0 engine is rebuilt from preserved source for a scoped queued
+blueprint centre correction. Actual orders/foundations, data, maps/mod, wave rules,
+original icon and compact layout retain their existing behaviour. The separate
+application ID remains `com.rbabbit.warzonetowers.lab`.
+
+The exact APK passed nine relevant emulator phases, 26 source checks, native
+build/provenance verification and review of 40 screenshots. See
+[the 0.5 report](qa/test-05/REPORT.md) for the APK identity, observed native
+construction/production/save results, QA readiness correction and limitations.
+The emulator's existing black terrain limits ground-texture/slope visual checks;
+physical Android devices were not tested. The complete pre-change 0.4 APK/source/checksum fallback is in
+`C:/timerApp/fallbacks/towers-before-preview-fix-20261107`. Stable v6.4 is untouched.
+
+## Historical experimental edition: Warzone Towers 0.4 (version code 4)
+
+The separate application ID remains `com.rbabbit.warzonetowers.lab`. Version
+0.4 adds module guidance, real parent-building outlines and roof/body hit
+testing, capacity feedback, accepted-preview cleanup and a persistent module
+tool. The custom command bridge validates actual parent IDs and queued module
+capacity, including a factory's second level. The compiled engine, authored
+maps, supplied mod and wave schedule are retained.
+
+The exact 0.4 APK passed all seven scoped integrated emulator phases, 23 source
+regressions, package/source checks, visual review and preservation checks.
+Actual native module completion, normal production/construction, genuine
+save/load and repeated input/menu returns were observed. See [the current
+README](README.md) and [0.4 report](qa/test-04/REPORT.md) for the exact APK hash,
+two QA readiness corrections and verification limits.
+
+Those historical checks missed an ordinary building renderer exception and the
+native queued-blueprint half-tile mismatch discovered in the later structure
+audit. Version 0.5 addresses these with direct actual-renderer coverage and a
+source-built native visual correction; 0.4 remains a frozen fallback.
+
+The complete 0.3 APK/source fallback is frozen in
+`C:/timerApp/fallbacks/towers-before-module-ui-fix-20261107`. Stable v6.4 remains
+separate and untouched. Delivery filenames are `Warzone-Towers-0.4.apk`,
+`warzone-towers-0.4-source.zip` and `Warzone-Towers-0.4-SHA256.txt`.
+
+## Historical experimental edition: Warzone Towers 0.3 (version code 3)
+
+The separate application ID remains `com.rbabbit.warzonetowers.lab`. Version
+0.3 removes visible TEST wording and changes selection used by BUILD/TRUCKS
+and module placement. The old tile-centre projection could miss trucks after
+they moved; selection now verifies real native constructor IDs. The exact
+delivery APK passed 20 source checks, package/preservation checks and all eight
+integrated emulator phases, including original-save reproduction, modules and
+genuine save/load, mixed selection/construction/FIFO, wide/compact layouts,
+twelve paused returns, keyboard and real Quit/new-battle recovery. No compiled
+engine or scenario rules are changed.
+See [the current README](README.md) and [0.3 report](qa/test-03/REPORT.md).
+
+The pre-change APK/source fallback is frozen in
+`C:/timerApp/fallbacks/towers-before-module-fix-20261107`. Stable v6.4 remains
+separate and untouched. Delivery filenames are `Warzone-Towers-0.3.apk` and
+`warzone-towers-0.3-source.zip`.
+
+## Historical Test 02: 0.2-test (version code 2)
+
+Test 02 was the separate test edition of Warzone Towers v6.4, with Android
+application ID `com.rbabbit.warzonetowers.lab`. It updates the previous Towers
+Lab test installation and keeps its private saves and templates. The stable
+v6.4 app (`com.rbabbit.warzonetowers`) and its source/APK remain separate and
+untouched.
+
+The compact battle interface uses HTML/CSS over the official Warzone engine
+compiled to WebAssembly. The original icon and familiar wording are restored.
+Test 02 changes truck selection, battle-menu/exit cleanup and Dustfall's starting
+camera view. All ten integrated emulator phases passed on that version's exact
+APK, including native save/load, real Quit/recovery and Dustfall. The final
+delivery gate passes all 18 required reports and 12 scoped checks. See
+[the historical Test 02 report](qa/test-02/REPORT.md).
+
+The initial test APK and complete source ZIP are preserved with checksums in
+`C:/timerApp/fallbacks/towers-test-before-fixes-20261107`. The unchanged supplied
+Tower Defense mod and both offline maps remain in this project. Sections below
+retain historical implementation and provenance notes; older verification
+results do not certify Test 02.
+
+## Historical content provenance
 
 - Supplied archive: `vendor/survival/original/survival_mod.zip`
 - Supplied archive SHA-256: `D347F71B21EEE245B0AC5FA899F52F46897AD2198F7B337148754EFB23D0A937`
@@ -11,7 +114,17 @@ Warzone Towers is a separate Android wrapper for the supplied TowerDefense2_m ma
 
 ## Engine preservation
 
-The official Warzone engine payload is retained byte-for-byte at the beginning of `warzone2100.data`. Custom scenario, map, mod, and bridge files are appended. The generated Emscripten package index in `warzone2100.js` is extended to expose those appended files and a redirected generated `addon.lev`; official engine code is not edited.
+The original data payload is retained byte-for-byte at the beginning of
+`warzone2100.data`. Custom scenario, map, mod and bridge files are appended.
+The Emscripten package index exposes those files and a redirected `addon.lev`.
+Version 0.5 keeps the complete existing data file and all 3,849 package-index
+entries unchanged. It rebuilds the matching 4.7.0 engine from source with nine
+visual-position lines in `renderBuildOrder`, aligning queued blueprints with
+their native foundations. Real orders, module parents, foundation placement,
+height rules and line building retain their native implementation. The source
+archive, patch, pinned build recipe and runtime provenance are included under
+`archive/` and `tools/`. Earlier editions through 0.4 used the original compiled
+engine without this correction.
 
 The generated compatibility copy of the supplied level descriptor omits three obsolete WRF references that are absent from the packaged Warzone 4.7 web dataset. The original supplied archive remains unchanged in `vendor/survival/original`.
 
@@ -21,12 +134,17 @@ Use Android Studio's bundled JDK and run:
 
 ```powershell
 $env:JAVA_HOME = 'C:\Program Files\Android\Android Studio\jbr'
-.\gradlew.bat assembleDebug
+$env:ANDROID_HOME = 'C:\Users\punke\AppData\Local\Android\Sdk'
+.\gradlew.bat clean assembleDebug
 ```
 
 The debug APK is written to `app/build/outputs/apk/debug/app-debug.apk`. A Play Store upload requires a release build signed with the owner's private upload key; the included APK is debug-signed for direct testing only.
 
-## Current version: 4.5-graphics-choice (version code 45)
+Configure these environment variables for the local machine. SDK settings,
+`local.properties`, signing keys and build caches are excluded from the source
+archive.
+
+## Historical version: 4.5-graphics-choice (version code 45)
 
 Startup offers Normal or High Quality over the existing splash illustration.
 Normal requires no extra download. High Quality downloads the official,

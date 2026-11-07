@@ -101,6 +101,13 @@ function blockNightV31PollZoomCommand()
 		const hqs = enumStruct(selectedPlayer, HQ);
 		if (hqs.length) centreView(hqs[0].x, hqs[0].y);
 	}
+	if (preset === "dustfall-start")
+	{
+		// Position only: retain the player's zoom and the real north-facing
+		// camera, with the southern HQ below the centre of the battlefield.
+		const hqs = enumStruct(selectedPlayer, HQ);
+		if (hqs.length) centreView(hqs[0].x, Math.max(1, hqs[0].y - 2));
+	}
 	dump("BNZOOM:" + JSON.stringify({
 		version: 31,
 		nonce: command.nonce,

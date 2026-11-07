@@ -1,8 +1,22 @@
 # Warzone Towers maintenance rules
 
+- User accepted 0.6 as the current/main version on 2026-11-07. Continue from
+  this project; the directory and Android app ID retain their historical lab
+  names to preserve installed saves/designs. Do not rebuild or rename the APK
+  merely to promote it. Keep the frozen 0.6 APK/source hashes, previous releases
+  and the separate v6.4 fallback project intact.
+- The complete native source tar is stored with a narrow Git LFS rule. Run
+  `git lfs pull` after cloning before checking the full source manifest. The
+  release's attached source ZIP contains the full bytes without requiring LFS.
 - Preserve the official engine and stock assets. Do not hand-edit compiled
   engine JS/WASM or the original data prefix. Custom scenario changes belong in
   `scenario/`, then use `tools/embed-warzone-towers.ps1` to append and reindex.
+- Scoped 0.5 exception, authorized by the user's structure-preview fix: rebuild
+  the matching 4.7.0 engine from source with only the queued-blueprint visual
+  centre correction. Preserve original source/patch/build recipe and paired
+  generated JS/WASM provenance. Reapply existing package/output adapters through
+  a reproducible tool; keep stock data, real orders and foundation rules intact.
+  This does not authorize manual edits to compiled code or changes to v6.4.
 - Preserve `vendor/survival/original/survival_mod.zip` and the supplied original
   map/mod. Add explicit custom overrides rather than silently replacing them.
 - v5.7 explicitly replaces the active Survival rules with the user's supplied

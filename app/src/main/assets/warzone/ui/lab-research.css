@@ -1,0 +1,70 @@
+/* Separate game-document theme; manual queues and engine transport are unchanged. */
+#blocknight-research-shell{--bg:#0b151b;--panel:#101f26;--panel-2:#172a32;--line:#2a424b;--cyan:#8bd3cc;--cyan-soft:#b6e5df;--green:#a0cdb0;--amber:#f0c27b;grid-template-rows:44px minmax(0,1fr);color:#e2edec;background:#0b151b;font-family:system-ui,sans-serif}
+#blocknight-research-shell .bn-tech-header{padding:4px 9px;gap:8px;background:#101f26;border-color:#2a424b}
+#blocknight-research-shell .bn-tech-brand{min-width:190px;gap:7px}
+#blocknight-research-shell .bn-tech-mark{width:30px;height:30px;border-color:#3f6266;border-radius:5px;background:#162a32}
+#blocknight-research-shell .bn-tech-mark img{width:36px;height:36px}
+#blocknight-research-shell .bn-tech-brand strong{font-size:15px;line-height:17px;letter-spacing:.7px;font-weight:600}
+#blocknight-research-shell .bn-tech-brand small{font-size:7px;letter-spacing:1px;color:#90a8ad}
+#blocknight-research-shell .bn-tech-live{height:29px;border:0;border-radius:0;border-left:1px solid #2a424b;padding:0 8px;font-size:8px}
+#blocknight-research-shell .bn-tech-live i{width:5px;height:5px;box-shadow:none}
+#blocknight-research-shell .bn-tech-live em{font-size:8px}
+#blocknight-research-shell .bn-tech-power{font-size:11px;color:#f0c27b!important}
+#blocknight-research-shell .bn-tech-done{width:auto;min-width:110px;height:32px;padding:0 10px;border:1px solid #4b6d6c;border-radius:4px!important;outline:0;background:#253d3d;color:#d8eeea;font-size:9px!important;font-weight:600;letter-spacing:.4px}
+#blocknight-research-shell .bn-tech-main{grid-template-columns:164px minmax(0,1fr) 280px;gap:7px;padding:7px}
+#blocknight-research-shell .bn-tech-rail,#blocknight-research-shell .bn-tech-browser,#blocknight-research-shell .bn-tech-detail{border-radius:5px;border-color:#2a424b;padding:7px;background:#101f26}
+#blocknight-research-shell .bn-tech-rail{overflow:hidden}
+#blocknight-research-shell .bn-tech-rail>h2{flex:none;min-height:20px;padding:1px 2px 4px;font-size:9px;letter-spacing:.6px;color:#8fb5bb}
+#blocknight-research-shell .bn-tech-labs{flex:0 1 auto;min-height:36px;max-height:50%;overflow-y:auto;gap:4px;padding:1px}
+#blocknight-research-shell .bn-tech-lab,#blocknight-research-shell .bn-tech-lab.running{flex:none;height:36px;min-height:36px;padding:3px 16px 3px 33px;border:1px solid #2d454e;border-radius:4px!important;outline:0;background:#172a32;box-shadow:none}
+#blocknight-research-shell .bn-tech-lab:before{left:4px;top:5px;width:24px;height:24px;border:0;border-radius:3px;background:#21363e;font-size:12px;color:#c7dbdf}
+#blocknight-research-shell .bn-tech-lab:after{right:7px;top:14px;border-color:#8bd3cc}
+#blocknight-research-shell .bn-tech-lab b{font-size:10px;line-height:13px}
+#blocknight-research-shell .bn-tech-lab small,#blocknight-research-shell .bn-tech-lab.running small{font-size:8px;line-height:10px;max-height:10px;white-space:nowrap;color:#8daeb5}
+#blocknight-research-shell .bn-tech-lab.active{background:#24413d;border-color:#8bd3cc;color:#d9f2e9;box-shadow:inset 2px 0 #8bd3cc}
+#blocknight-research-shell .bn-tech-lab.active:before{background:#34594d;color:#e3f6eb}
+#blocknight-research-shell .bn-tech-filter-title{flex:none;min-height:25px;padding-top:7px!important;margin-top:7px!important;border-color:#2a424b}
+#blocknight-research-shell .bn-tech-categories{flex:1;min-height:30px;overflow-y:auto;gap:3px;padding:1px;scrollbar-width:thin}
+#blocknight-research-shell .bn-tech-category{flex:none;min-height:30px;height:30px;padding:0 8px;font-size:9px!important;letter-spacing:.4px;font-weight:600;border:1px solid transparent;border-radius:4px!important;outline:0;background:#14252d;color:#9bb5bc}
+#blocknight-research-shell .bn-tech-category.active{background:#25413f;color:#d0eeea;border-color:#557b73}
+#blocknight-research-shell .bn-tech-browser-head,#blocknight-research-shell .bn-tech-detail>h2{height:27px;min-height:27px;border-color:#2a424b}
+#blocknight-research-shell .bn-tech-browser-head h2,#blocknight-research-shell .bn-tech-detail>h2{font-size:10px;letter-spacing:.6px;color:#bcd1d5}
+#blocknight-research-shell .bn-tech-browser-head span{font-size:7px;color:#98b1b7}
+#blocknight-research-shell .bn-tech-list{gap:5px;padding:7px 1px 2px;scrollbar-color:#45636a transparent}
+#blocknight-research-shell .bn-tech-card{flex:0 0 auto;min-height:54px;grid-template-columns:39px minmax(0,1fr) 59px 8px;gap:7px;padding:5px;border:1px solid #2c434c;border-radius:4px!important;outline:0;background:#162831;box-shadow:none}
+#blocknight-research-shell .bn-tech-card.selected{background:#23403f;border-color:#8bd3cc;box-shadow:inset 2px 0 #8bd3cc}
+#blocknight-research-shell .bn-tech-icon{width:38px;height:38px;border:0;border-radius:3px;background:#102027}
+#blocknight-research-shell .bn-tech-icon img{width:42px;height:42px;filter:saturate(.8)}
+#blocknight-research-shell .bn-tech-copy strong{font-size:11px;line-height:14px;white-space:normal;overflow-wrap:anywhere;color:#e2edec;font-weight:600}
+#blocknight-research-shell .bn-tech-copy small{font-size:7px;margin-top:3px;letter-spacing:.3px;color:#91b2b9}
+#blocknight-research-shell .bn-tech-ready b{font-size:7px;letter-spacing:.3px;color:#a0cdb0}
+#blocknight-research-shell .bn-tech-ready small{font-size:9px;color:#f0c27b;white-space:nowrap}
+#blocknight-research-shell .bn-tech-preview{grid-template-columns:32px minmax(0,1fr) 128px;gap:7px;padding:8px 1px 0;margin-top:7px;border-color:#2a424b;background:transparent}
+#blocknight-research-shell .bn-tech-preview .bn-tech-detail-image{width:32px;height:32px;border:0;border-radius:3px;background:#12232b}
+#blocknight-research-shell .bn-tech-preview .bn-tech-detail-name{font-size:11px;line-height:14px;margin:3px 0;color:#e1edec}
+#blocknight-research-shell .bn-tech-preview-label{font-size:7px;color:#8eb0b7}
+#blocknight-research-shell .bn-tech-preview .bn-tech-assign{min-height:36px;padding:7px 6px;border:1px solid #709f8e;border-radius:4px!important;outline:0;background:#aacdb7;color:#14271d;font-size:8px!important;font-weight:700;line-height:12px;letter-spacing:.3px}
+#blocknight-research-shell .bn-tech-preview .bn-tech-assign:disabled{background:#243b35;border-color:#3d5750;color:#a2b8ad;opacity:.75}
+#blocknight-research-shell .bn-tech-preview-metrics{font-size:8px;gap:3px 7px}
+#blocknight-research-shell .bn-tech-preview .bn-tech-detail-status{font-size:8px;color:#a0cdb0}
+#blocknight-research-shell .bn-tech-selected-lab{color:#b7e1ce}
+#blocknight-research-shell .bn-tech-active{padding:9px;margin-top:8px;border:1px solid #466b5c;border-radius:4px;background:#1a302a}
+#blocknight-research-shell .bn-tech-current{gap:8px}
+#blocknight-research-shell .bn-tech-current-image{width:48px;height:48px;border:0;border-radius:3px;background:#12231f;filter:saturate(.8)}
+#blocknight-research-shell .bn-tech-active-name{font-size:12px;line-height:16px;margin-top:4px;font-weight:600;color:#e0eee4}
+#blocknight-research-shell .bn-tech-current-status{font-size:8px;letter-spacing:.6px;color:#b1d6be}
+#blocknight-research-shell .bn-tech-progress{height:3px;margin-top:9px;background:#2d4940}
+#blocknight-research-shell .bn-tech-progress i{background:#a0cdb0;transition:none}
+#blocknight-research-shell .bn-tech-time{font-size:9px;color:#b3cbbb}
+#blocknight-research-shell .bn-tech-active.idle{background:#14262f;border-color:#2d4852}
+#blocknight-research-shell .bn-tech-queue-panel{padding:8px;margin-top:7px;border-radius:4px;border-color:#2a424b;background:#102129}
+#blocknight-research-shell .bn-tech-queue-title{font-size:8px;color:#aad9d2;letter-spacing:.5px}
+#blocknight-research-shell .bn-tech-queue-count{font-size:8px;color:#95adb5}
+#blocknight-research-shell .bn-tech-queue-item{min-height:36px;grid-template-columns:17px minmax(0,1fr) 29px;font-size:10px;line-height:14px;padding:4px 0;border-color:#29424b}
+#blocknight-research-shell .bn-tech-queue-item b{font-weight:500;color:#b4d6c2}
+#blocknight-research-shell .bn-tech-queue-remove{width:28px!important;height:28px!important;border:1px solid #6b4d4b;border-radius:4px!important;outline:0;background:#33292a;color:#e1a5a0;font-size:14px!important}
+#blocknight-research-shell .bn-tech-queue-empty{font-size:9px;color:#95adb5}
+@media(max-width:1000px){#blocknight-research-shell .bn-tech-main{grid-template-columns:146px minmax(0,1fr) 240px}#blocknight-research-shell .bn-tech-preview{grid-template-columns:minmax(0,1fr) 113px}#blocknight-research-shell .bn-tech-preview .bn-tech-detail-image{display:none}}
+@media(max-width:800px){#blocknight-research-shell .bn-tech-main{grid-template-columns:126px minmax(0,1fr) 205px;gap:5px;padding:5px}#blocknight-research-shell .bn-tech-brand{min-width:155px}#blocknight-research-shell .bn-tech-brand strong{font-size:13px}#blocknight-research-shell .bn-tech-live b{display:none}#blocknight-research-shell .bn-tech-live{gap:5px;padding:0 5px}#blocknight-research-shell .bn-tech-current-image{width:39px;height:39px}#blocknight-research-shell .bn-tech-card{grid-template-columns:32px minmax(0,1fr) 37px;gap:5px}#blocknight-research-shell .bn-tech-card:after{display:none}#blocknight-research-shell .bn-tech-icon{width:31px;height:34px}#blocknight-research-shell .bn-tech-icon img{width:35px;height:35px}#blocknight-research-shell .bn-tech-preview{grid-template-columns:minmax(0,1fr)}#blocknight-research-shell .bn-tech-preview .bn-tech-assign{min-height:32px}#blocknight-research-shell .bn-tech-preview .bn-tech-detail-status{display:none}}
+@media(max-width:800px){#blocknight-research-shell .bn-tech-card{grid-template-columns:32px minmax(0,1fr) 50px}}
+@media(max-height:360px){#blocknight-research-shell{grid-template-rows:38px minmax(0,1fr)}#blocknight-research-shell .bn-tech-brand small{display:none}#blocknight-research-shell .bn-tech-labs{max-height:45%}#blocknight-research-shell .bn-tech-active{padding:6px}#blocknight-research-shell .bn-tech-current-image{width:32px;height:32px}#blocknight-research-shell .bn-tech-preview-label{display:none}}

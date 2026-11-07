@@ -75,6 +75,7 @@
     nativeFrameContext: null,
     nativeFrames: 0,
     nativeMusicInput: false,
+    lastNativeLeftDownAt:-Infinity,boxCadenceWaits:0,boxPressGaps:[],
     stopNonce: null,
     stopTimer: null,
     stopAcks: 0,
@@ -91,6 +92,7 @@
     lastPanDispatchMs: null,
     maxPanDispatchMs: 0,
     boxSelections: 0,
+    manualSelectionRevision: 0,
     pinchSteps: 0,
     tiltMoves: 0,
     tiltKey: null,
@@ -103,6 +105,9 @@
     radarMoves: 0,
     cameraFacings: 0,
     cameraFacingPending: false,
+    cameraHeading: null,
+    cameraFacingNonce: null,
+    cameraFacingError: '',
     lastRadarPoint: null,
     combatLock: false,
     autoFight: false,
@@ -125,6 +130,7 @@
     pointerCaptures: 0,
     lastTap: null,
     hudVisible: false,
+    battleActive: true,
     zoomPreset: null,
     zoomPresetSelections: 0,
     zoomWheelEvents: 0,
@@ -195,6 +201,7 @@
   }
 
   function focusCanvas() {
+    if (!state.battleActive) return false;
     const target = canvas();
     if (!target) return false;
     try {
@@ -206,8 +213,10 @@
   }
 
   function mouse(type, x, y, button, buttons, movementX = 0, movementY = 0) {
+    if (!state.battleActive) return false;
     const target = canvas();
     if (!target || !window.PointerEvent) return false;
+    if(type==='pointerdown'&&button===0)state.lastNativeLeftDownAt=performance.now();
     state.lastX = x;
     state.lastY = y;
     const forwarded = new PointerEvent(type, {
@@ -274,11 +283,16 @@
     };
     state.nativeFrameContext=ctx;
   }
-  function pendingNativeInput(){return Boolean(state.clickJob||state.clickQueue.length||state.clickFrame!==null||state.clickTimer!==null||state.pointerQueue.length||window.__warzoneCommands?.report?.()?.nativePendingSites);}
+  function pendingBuildPanelClose(){
+    const commands=window.__warzoneCommands;
+    return Boolean(commands?.nativeClosing?.()&&commands.report?.().buildOpen);
+  }
+  function pendingTruckSelection(){return Boolean(window.__warzoneCommands?.report?.().selectingTrucks);}
+  function pendingNativeInput(){return Boolean(state.clickJob||state.clickQueue.length||state.clickFrame!==null||state.clickTimer!==null||state.pointerQueue.length||window.__warzoneCommands?.report?.()?.nativePendingSites||pendingBuildPanelClose()||pendingTruckSelection());}
   function afterNativeInput(callback){if(!pendingNativeInput())return false;state.afterInput.push(callback);return true;}
   function flushAfterInput(){if(!pendingNativeInput())state.afterInput.splice(0).forEach(callback=>callback());}
   function pumpPointerQueue(){
-    if(state.clickJob||state.clickQueue.length||state.clickFrame!==null||state.clickTimer!==null||window.__warzoneCommands?.report?.()?.nativePendingSites)return;
+    if(state.clickJob||state.clickQueue.length||state.clickFrame!==null||state.clickTimer!==null||window.__warzoneCommands?.report?.()?.nativePendingSites||pendingBuildPanelClose()||pendingTruckSelection())return;
     const event=state.pointerQueue.shift();
     if(!event){flushAfterInput();return;}
     state.replayingPointers=true;try{processPointer(event,true);}finally{state.replayingPointers=false;}
@@ -301,6 +315,11 @@
   }
 
   function cancelClicks() {
+    if(state.battleActive&&state.clickJob?.box&&state.clickJob.down){
+      // Once the native mouse is down, finish its real drag/release. Releasing
+      // at the starting point would turn a cancelled selection into a move click.
+      state.clickJob.cancelled=true;for(const job of state.clickQueue)job.resolve?.(false);state.clickQueue.length=0;return;
+    }
     if (state.clickFrame !== null && typeof cancelAnimationFrame === "function") cancelAnimationFrame(state.clickFrame);
     clearTimeout(state.clickTimer); state.clickFrame = null; state.clickTimer = null;
     for(const job of [state.clickJob,...state.clickQueue])job?.resolve?.(false);
@@ -315,11 +334,40 @@
   }
 
   function pumpClicks() {
+    if (!state.battleActive) { cancelClicks(); return; }
     if (state.clickJob || state.clickFrame !== null || state.clickTimer !== null) return;
     if(!state.clickQueue.length){pumpPointerQueue();return;}
     const job = state.clickJob = state.clickQueue.shift();
     focusCanvas(); releaseMouse(); setQueueModifier(job.ctrl, job.ctrl);
     mouseMove(job.x, job.y, 0);
+    if(job.box){
+      const down=()=>{
+        if(state.clickJob!==job)return;
+        const gap=performance.now()-state.lastNativeLeftDownAt;
+        if(gap<300){waitForPress();return;}
+        state.boxPressGaps.push(gap);if(state.boxPressGaps.length>20)state.boxPressGaps.shift();
+        mouse('pointerdown',job.x,job.y,0,1);state.mouseButton=0;job.down=true;
+        clickStep(()=>{
+          if(state.clickJob!==job)return;
+          mouseMove(job.right,job.bottom,1,job.right-job.x,job.bottom-job.y);
+          clickStep(()=>{
+            if(state.clickJob!==job)return;
+            releaseMouse(job.right,job.bottom);setQueueModifier(state.queueMode);
+            clickStep(()=>{state.clickJob=null;state.boxSelections++;job.resolve?.(!job.cancelled);window.dispatchEvent(new CustomEvent('warzone-native-input-finished'));pumpClicks();},2);
+          });
+        });
+      };
+      const waitForPress=()=>{
+        if(state.clickJob!==job)return;
+        const remaining=300-(performance.now()-state.lastNativeLeftDownAt);
+        if(remaining>0){state.boxCadenceWaits++;state.clickTimer=setTimeout(()=>{state.clickTimer=null;waitForPress();},Math.ceil(remaining));return;}
+        // SDL 4.7 treats every rapid LMB press as DOUBLECLICK regardless of
+        // position, and that state cannot begin a drag. Wait past its 250ms
+        // interval, then consume a fresh native frame before pressing again.
+        clickStep(down);
+      };
+      waitForPress();return;
+    }
     // A complete frame must update terrain picking before mouse-down. Keep
     // up/down separate too; rapid taps are FIFO, never shortened by the next tap.
     const down = () => {
@@ -339,13 +387,34 @@
   }
 
   function click(button, x = state.lastX, y = state.lastY, ctrl = state.queueModifierHeld) {
-    if (!canvas()) return false;
+    if (!canvas() || !state.battleActive) return false;
     state.clickQueue.push({ button, x, y, ctrl }); pumpClicks();
     return true;
   }
   function nativeMenuClick(x,y,ctrl=false){
-    if(!canvas())return Promise.resolve(false);
+    if(!canvas()||!state.battleActive)return Promise.resolve(false);
     return new Promise(resolve=>{state.clickQueue.push({button:0,x,y,ctrl,ui:true,resolve});pumpClicks();});
+  }
+  function nativeWorldClick(x,y,ctrl=false,button=0){
+    if(!canvas()||!state.battleActive)return Promise.resolve(false);
+    return new Promise(resolve=>{state.clickQueue.push({button,x,y,ctrl,resolve});pumpClicks();});
+  }
+
+  function nativeBoxSelect(left,top,right,bottom,add=false){
+    const b=canvas()?.getBoundingClientRect();
+    if(!b||!state.battleActive||![left,top,right,bottom].every(Number.isFinite)||right-left<8||bottom-top<8
+      ||left<b.left||top<b.top||right>b.right||bottom>b.bottom)return Promise.resolve(false);
+    return new Promise(resolve=>{state.clickQueue.push({box:true,button:0,x:left,y:top,right,bottom,ctrl:add,resolve});pumpClicks();});
+  }
+  function nativeSelectionBounds(){
+    const b=canvas()?.getBoundingClientRect();if(!b||b.width<=0||b.height<=24)return null;
+    // Reuse the same native radar configuration as real touch picking.
+    radarPoint(b.left,b.top);
+    const side=state.radarSide||192,s=window.__warzoneCommands?.report?.().snapshot;
+    const mw=s?.mapWidth||64,mh=s?.mapHeight||64,span=Math.max(mw,mh),rw=side*mw/span,rh=side*mh/span;
+    const cx=b.right-24-side/2,cy=b.bottom-24-side/2;
+    return {left:b.left,top:b.top,right:b.right,bottom:b.bottom-24,
+      radar:window.__warzoneCommands?.nativeHudHidden?.()?null:{left:cx-rw/2-3,top:cy-rh/2-3,right:cx+rw/2+3,bottom:cy+rh/2+3}};
   }
 
   function tapNormalized(normalizedX, normalizedY) {
@@ -393,7 +462,7 @@
 
   function dispatchKey(keyValue, code, keyCode, isDown,
       shiftKey = false, ctrlKey = false, location = 0) {
-    if (!canvas()) return false;
+    if (!canvas() || !state.battleActive) return false;
     // SDL distinguishes the left/right modifier scancodes. A generic-location
     // release can leave the left Ctrl synthesized by mouse.ctrlKey held down.
     if (!location && /(?:Control|Shift|Alt|Meta)(?:Left|Right)$/.test(code)) {
@@ -415,30 +484,57 @@
     return true;
   }
 
-  function faceOpponent() {
+  function faceOpponent(mapId = "td2") {
     if (!canvas()) return false;
     releaseAll(true);
     state.cameraFacings += 1;
     state.cameraFacingPending = true;
+    state.cameraFacingError = '';
     // Let SDL settle the real battlefield viewport before sending the chord.
     // The preparation dialog stays suppressed until its release is processed.
     showCombatHud();
 
-    // The supplied map runs north-to-south: player 0 starts in the north and
-    // player 1 in the south. Warzone's absolute Face South binding is
-    // Ctrl+Down. Call once under the startup splash, never on a wave change.
+    // Dustfall's human HQ is at the south of its authored map. Look north
+    // into the battlefield; Iron Valley retains its established south view.
+    // Rotate the real engine camera, so radar and world picking agree.
+    const north = mapId === "td1";
+    const direction = north ? "ArrowUp" : "ArrowDown";
+    const directionCode = north ? 38 : 40;
+    state.cameraHeading = north ? "north" : "south";
     const afterFrames = callback => {
-      if (typeof requestAnimationFrame === "function") requestAnimationFrame(() => requestAnimationFrame(callback));
-      else setTimeout(callback, 40);
+      observeNativeFrames();
+      const before = state.nativeFrames, started = performance.now();
+      const tick = () => {
+        if (!state.battleActive) return;
+        if (state.nativeFrames > before) { callback(); return; }
+        if (performance.now() - started > 3000) {
+          dispatchKey(direction, direction, directionCode, false, false, true);
+          dispatchKey("Control", "ControlLeft", 17, false, false, false);
+          state.cameraFacingError = 'The engine did not consume the starting camera input.';
+          return;
+        }
+        if (typeof requestAnimationFrame === 'function') requestAnimationFrame(tick);
+        else setTimeout(tick, 16);
+      };
+      if (typeof requestAnimationFrame === 'function') requestAnimationFrame(tick);
+      else setTimeout(tick, 16);
     };
     afterFrames(() => {
       dispatchKey("Control", "ControlLeft", 17, true, false, true);
       afterFrames(() => {
-        dispatchKey("ArrowDown", "ArrowDown", 40, true, false, true);
+        dispatchKey(direction, direction, directionCode, true, false, true);
         afterFrames(() => {
-          dispatchKey("ArrowDown", "ArrowDown", 40, false, false, true);
+          dispatchKey(direction, direction, directionCode, false, false, true);
           dispatchKey("Control", "ControlLeft", 17, false, false, false);
-          afterFrames(() => { state.cameraFacingPending = false; });
+          afterFrames(() => {
+            if (north) {
+              state.cameraFacingNonce = writeZoomCommand("dustfall-start");
+              if (state.cameraFacingNonce) return;
+              state.cameraFacingError = 'The starting camera position could not be sent.';
+              return;
+            }
+            state.cameraFacingPending = false;
+          });
         });
       });
     });
@@ -452,11 +548,14 @@
     const timer=setTimeout(()=>{combatTimers.delete(timer);if(generation===combatSerial)action();},delay);
     combatTimers.add(timer);return timer;
   }
-  function cancelCombatInput(){
+  function cancelCombatInput(cancelTool = true){
     ++combatSerial;for(const timer of combatTimers)clearTimeout(timer);combatTimers.clear();
     if(!state.queueModifierHeld)dispatchKey('Control','ControlLeft',17,false);
     dispatchKey('a','KeyA',65,false);dispatchKey('u','KeyU',85,false);
-    if(patrolArmed){patrolArmed=false;pressKey('Escape','Escape',27);}
+    const cancelledTool=patrolArmed;
+    patrolArmed=false;
+    if(cancelledTool&&cancelTool)pressKey('Escape','Escape',27);
+    return cancelledTool&&cancelTool;
   }
   function ctrlShortcut(keyValue, code, keyCode) {
     if (!canvas()) return false;
@@ -549,7 +648,7 @@
     button.addEventListener("pointerup", event => {
       event.stopPropagation();
       const start = press; press = null;
-      if (!start || start.id !== event.pointerId || button.disabled) return;
+      if (!start || start.id !== event.pointerId || button.disabled || !state.battleActive) return;
       event.preventDefault();
       const b = button.getBoundingClientRect();
       if (Math.hypot(event.clientX - start.x, event.clientY - start.y) > TAP_SLOP
@@ -561,7 +660,7 @@
       // Touch commands run on release even when WebView suppresses the later
       // compatibility click. A delivered compatibility click must not run twice.
       if (performance.now() - lastTouch < 700 && (event.detail > 0 || event.pointerType === "touch")) return;
-      if (!button.disabled) action();
+      if (!button.disabled && state.battleActive) action();
     });
   }
 
@@ -680,6 +779,7 @@
   }
 
   function pressKey(keyValue, code, keyCode, shiftKey = false) {
+    if (!canvas() || !state.battleActive) return false;
     dispatchKey(keyValue, code, keyCode, true, shiftKey, state.queueModifierHeld);
     if (keyValue.length === 1 && keyCode >= 32) {
       const characterCode = keyValue.charCodeAt(0);
@@ -791,6 +891,7 @@
   }
 
   function zoom(direction, x = state.lastX, y = state.lastY, keepPreset = false) {
+    if (!state.battleActive) return false;
     const target = canvas();
     if (!target) return false;
     const bounds = target.getBoundingClientRect();
@@ -822,7 +923,7 @@
 
   function writeZoomCommand(preset) {
     const spec = ZOOM_PRESETS[preset];
-    if (!spec && preset !== "manual" && preset !== "base") return null;
+    if (!state.battleActive || (!spec && !["manual", "base", "dustfall-start"].includes(preset))) return null;
     const module = zoomModule();
     const fs = module?.FS;
     if (!fs?.writeFile || !fs?.rename) {
@@ -860,6 +961,7 @@
    * Warzone's cameraZoom(distance, 0), so presets are absolute and immediate.
    */
   function applyZoomPreset(preset) {
+    if (!state.battleActive) return false;
     const spec = ZOOM_PRESETS[preset];
     if (!spec || !canvas()) return false;
     if(afterNativeInput(()=>applyZoomPreset(preset)))return true;
@@ -885,6 +987,10 @@
   window.addEventListener("blocknight-zoom-ack", event => {
     const payload = event?.detail;
     window.__towersHtml?.consume('blocknight-zoom-command.json',payload?.nonce);
+    if (payload?.nonce && payload.nonce === state.cameraFacingNonce) {
+      state.cameraFacingNonce = null;
+      state.cameraFacingPending = false;
+    }
     if (!payload?.nonce || payload.nonce !== state.zoomPendingNonce) return;
     clearZoomAckTimer();
     state.zoomPendingNonce = null;
@@ -1051,6 +1157,7 @@
   }
 
   function showCombatHud() {
+    if (!state.battleActive) return false;
     const hudDocument = commandDocument();
     let hud = hudDocument.getElementById("blocknight-combat-hud");
     if (!hud) {
@@ -1222,7 +1329,7 @@
       if(window.__warzoneCommands?.tower){
         const centre=hudDocument.createElement('section');centre.id='wt-field-centre';centre.setAttribute('aria-label','Battlefield command centre');
         const select=makeButton('wt-select-move','SELECT / MOVE','Exit build placement and return to unit selection and movement',()=>window.__warzoneCommands.selectMode());
-        const trucks=makeButton('wt-select-trucks','TRUCKS','Select the nearby group of construction trucks',()=>window.__warzoneCommands.selectNearbyTrucks());
+        const trucks=makeButton('wt-select-trucks','TRUCKS','Select construction trucks visible in the battlefield',()=>window.__warzoneCommands.selectNearbyTrucks());
         all.querySelector?.('span')&&(all.querySelector('span').textContent='ALL UNITS');
         auto.querySelector?.('span')&&(auto.querySelector('span').textContent='PATROL');
         centre.append(select,all,auto,box,stop,trucks);hudDocument.body.appendChild(centre);
@@ -1260,6 +1367,7 @@
   }
 
   function showHelp() {
+    if (!state.battleActive) return false;
     if(window.__warzoneCommands?.nativeBuildOpen?.()){window.__warzoneCommands.afterBuildExit(showHelp);return true;}
     window.__warzoneCommands?.close?.();
     window.__warzoneCommands?.closeNative?.();
@@ -1283,7 +1391,7 @@
           <section class="wt-help-queue"><h2>BUILD · QUEUE YOUR DEFENCES</h2>
             <ol><li><b>Open BUILD.</b> Scroll the sidebar and choose a structure.</li>
               <li><b>Tap each valid location.</b> Queued sites appear as Warzone’s green building blueprints.</li>
-              <li><b>Nearby trucks work together.</b> BUILD selects the nearby group; multiple manually selected trucks are retained.</li>
+              <li><b>Visible trucks work together.</b> BUILD selects the trucks in view; your later manual selection is retained when choosing a structure.</li>
               <li><b>SELECT / MOVE</b> leaves placement and keeps queued work. Placement also ends when your group finishes.</li></ol>
             <p>Invalid taps keep your chosen structure active. STOP cancels selected trucks’ orders,
               and clears their remaining native queued sites.</p></section>
@@ -1420,6 +1528,7 @@
     if (gesture.selecting) return;
     releaseCameraKeys();
     releaseMouse();
+    state.manualSelectionRevision += 1;
     gesture.selecting = pressMouse(0, gesture.startX, gesture.startY);
     if (gesture.selecting) state.boxSelections += 1;
   }
@@ -1556,10 +1665,11 @@
   }
 
   function handlePointer(event) {
+    if (!state.battleActive) { if (event.target === canvas()) own(event); return; }
     if (forwardedPointers.has(event)) return;
     const desktopPlacement = (window.__warzoneCommands?.isPlacement()||window.__warzoneCommands?.nativeBuildOpen?.())
         && (event.pointerType === "mouse" || event.pointerType === "pen");
-    if (event.pointerType !== "touch" && !desktopPlacement && !state.physicalPointers.has(event.pointerId)) return;
+    if (event.pointerType !== "touch" && !desktopPlacement && !state.physicalPointers.has(event.pointerId)){if(event.type==='pointerdown'&&event.button===0&&event.target===canvas())state.lastNativeLeftDownAt=performance.now();return;}
     const target = canvas();
     if (!target) return;
     if (state.stopNonce && event.target === target) { own(event); return; }
@@ -1753,7 +1863,10 @@
       feedback(gesture.x, gesture.y, "double");
     } else if (!canceled && !gesture.moved) {
       if (window.__warzoneCommands?.isPlacement() && isBattlefieldPoint(gesture.x, gesture.y)) {
-        window.__warzoneCommands.placeAt(gesture.x, gesture.y);
+        if(window.__warzoneCommands.placeAt(gesture.x, gesture.y,state.replayingPointers)){
+          feedback(gesture.x, gesture.y, "tap");
+          vibrate(8);
+        }
         state.taps += 1;
       } else if (state.combatLock && isBattlefieldPoint(gesture.x, gesture.y)) {
         queueCombatOrder(gesture.x, gesture.y, state.autoFight);
@@ -1763,7 +1876,7 @@
         vibrate(8);
         state.taps += 1;
       } else {
-        if (isBattlefieldPoint(gesture.x, gesture.y)) click(0, gesture.x, gesture.y);
+        if (isBattlefieldPoint(gesture.x, gesture.y)) {state.manualSelectionRevision += 1;click(0, gesture.x, gesture.y);}
         else nativeUiClick(gesture.x, gesture.y);
         if (isBattlefieldPoint(gesture.x, gesture.y)) {
           feedback(gesture.x, gesture.y, "tap");
@@ -1778,8 +1891,8 @@
     state.single = null;
   }
 
-  function releaseAll(clearModes = false) {
-    cancelCombatInput();
+  function releaseAll(clearModes = false, cancelTool = true) {
+    const cancelledTool = cancelCombatInput(cancelTool);
     clearMultiMove();
     clearLongPress();
     releaseTilt();
@@ -1807,6 +1920,22 @@
     if (state.boxMode) {
       state.boxMode = false;
       updateCombatHud();
+    }
+    return cancelledTool;
+  }
+
+  function setBattleActive(active) {
+    if (active) { state.battleActive = true; if (canvas()) canvas().inert = false; return; }
+    // Release held buttons before disabling dispatch. A transition out of the
+    // battle must never send Escape into the next native screen.
+    releaseAll(true, false);
+    state.battleActive = false;
+    state.hudVisible = false;
+    if (canvas()) canvas().inert = true;
+    const doc = commandDocument();
+    for (const id of ['blocknight-combat-hud','wt-field-centre','wt-field-toggle','warzone-towers-help-overlay']) {
+      const control = doc.getElementById(id);
+      if (control) { control.hidden = true; control.inert = true; }
     }
   }
 
@@ -1889,8 +2018,14 @@
     return true;
   }
 
+  document.addEventListener('mousedown',event=>{if(event.target===canvas()&&event.button===0)state.lastNativeLeftDownAt=performance.now();},true);
   for (const type of ["pointerdown", "pointermove", "pointerup", "pointercancel"]) {
     document.addEventListener(type, handlePointer, { capture: true, passive: false });
+  }
+  for (const type of ['keydown','keyup','keypress','wheel']) {
+    document.addEventListener(type, event => {
+      if (!state.battleActive && event.target === canvas()) { event.preventDefault(); event.stopImmediatePropagation(); }
+    }, {capture:true, passive:false});
   }
   document.addEventListener("touchstart", event => {
     if (event.target === canvas()) event.preventDefault();
@@ -1909,11 +2044,12 @@
     const host = commandDocument();
     const help = host.getElementById("warzone-towers-help-overlay");
     const tech = window.__blockNightResearch?.report?.();
-    // HELP and TECH are wrapper interfaces inside this WebView. Forwarding
-    // their focus transfer to SDL clears every native key, cancelling the
-    // engine's quick-build ghost even though +Q is still armed. A real app or
-    // window focus loss must still reach SDL and release transient input.
-    if (host.hasFocus?.() && ((help && !help.hidden) || tech?.open || tech?.opening || window.__warzoneCommands?.isOpen())) {
+    const commands=window.__warzoneCommands,commandState=commands?.report?.();
+    // These controls share this WebView. Moving focus from the canvas to a
+    // catalogue card must not cancel an in-flight native rectangle selection.
+    // Actual app/window focus loss still reaches SDL and releases all input.
+    const commandFocus=commands?.isOpen?.()||commandState?.buildOpen||commandState?.selectingTrucks;
+    if (host.hasFocus?.() && ((help && !help.hidden) || tech?.open || tech?.opening || commandFocus)) {
       event.stopImmediatePropagation();
       return;
     }
@@ -1948,7 +2084,9 @@
     stopSelected,
     jumpToBase,
     nativeClick: (x, y, button = 0) => click(button, x, y),
-    nativeSelectClick: (x,y,add=false)=>click(0,x,y,add),
+    nativeSelectClick: (x,y,add=false)=>{state.manualSelectionRevision += 1;return click(0,x,y,add);},
+    nativeWorldClick,nativeBoxSelect,nativeSelectionBounds,
+    isBattlefieldPoint,
     nativeMenuClick,
     nativeUiClick,
     queuedClick: (x, y) => contextualClick(x, y, true),
@@ -1957,6 +2095,7 @@
     nativePressKey: (keyValue, code, keyCode, shiftKey = false) => pressKey(keyValue, code, keyCode, shiftKey),
     runSyntheticSuite,
     showCombatHud,
+    setBattleActive,
     saveName,
     releaseAll,
     isGestureActive: () => state.pointers.size > 0 || state.mouseButton !== null || state.heldKeys.size > 0 || state.tiltKey !== null,
@@ -1972,7 +2111,8 @@
       lastPanStartLatencyMs: state.lastPanStartLatencyMs,
       lastPanDispatchMs: state.lastPanDispatchMs,
       maxPanDispatchMs: state.maxPanDispatchMs,
-      boxSelections: state.boxSelections,
+      boxSelections: state.boxSelections,boxCadenceWaits:state.boxCadenceWaits,boxPressGaps:state.boxPressGaps,lastNativeLeftDownAt:state.lastNativeLeftDownAt,
+      manualSelectionRevision: state.manualSelectionRevision,
       pinchSteps: state.pinchSteps,
       tiltMoves: state.tiltMoves,
       tiltHeld: state.tiltKey?.code || null,
@@ -1982,6 +2122,8 @@
       radarMoves: state.radarMoves,
       cameraFacings: state.cameraFacings,
       cameraFacingPending: state.cameraFacingPending,
+      cameraHeading: state.cameraHeading,
+      cameraFacingError: state.cameraFacingError,
       lastRadarPoint: state.lastRadarPoint,
       combatLock: state.combatLock,
       autoFight: state.autoFight,
@@ -2018,6 +2160,7 @@
       lastZoomDistance: state.lastZoomDistance,
       gestureActive: state.pointers.size > 0 || state.mouseButton !== null || state.heldKeys.size > 0 || state.tiltKey !== null,
       hudVisible: state.hudVisible,
+      battleActive: state.battleActive,
       heldKeys: [...state.heldKeys]
     })
   };

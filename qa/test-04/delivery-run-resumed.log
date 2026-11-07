@@ -1,0 +1,41 @@
+START mixed-selection-fifo-movement-and-returns
+{"passed":true,"identity":{"packageId":"com.rbabbit.warzonetowers.lab","device":"emulator-5556","candidateAPK_SHA256":"6f143ed3ca0f0678cd805e59fda00d97e8e859373e73b438f725e301f7201734","installedPath":"/data/app/~~AqPs8xfivFOIwtFpoduDhw==/com.rbabbit.warzonetowers.lab-0CPaC5sn3X7pk7oQww7CSg==/base.apk"},"cases":["visible combat excluded; exact native constructor IDs/highlights; all eight native orders/positions unchanged","two ordinary GuardTower1 jobs survive EXIT and TRUCKS during work, then complete FIFO at native300points","ordinary movement/STOP away from camera centre, repeated real selection and item choices retained","native STATS to immediate BUILD; Factory, Help and Research Back restore actual input"]}
+PASS mixed-selection-fifo-movement-and-returns
+START twelve-paused-returns
+{"round":1,"name":"factory","resumed":{"before":157002,"after":158002},"frameInputRestored":true}
+{"round":1,"name":"design","resumed":{"before":160502,"after":161502},"frameInputRestored":true}
+{"round":1,"name":"queue","resumed":{"before":163502,"after":164502},"frameInputRestored":true}
+{"round":1,"name":"tech","resumed":{"before":167002,"after":168502},"frameInputRestored":true}
+{"round":1,"name":"help","resumed":{"before":171002,"after":172002},"frameInputRestored":true}
+{"round":1,"name":"stats","resumed":{"before":175002,"after":176502},"frameInputRestored":true}
+{"round":2,"name":"factory","resumed":{"before":178502,"after":179502},"frameInputRestored":true}
+{"round":2,"name":"design","resumed":{"before":182502,"after":183502},"frameInputRestored":true}
+{"round":2,"name":"queue","resumed":{"before":186502,"after":187502},"frameInputRestored":true}
+{"round":2,"name":"tech","resumed":{"before":190502,"after":192002},"frameInputRestored":true}
+{"round":2,"name":"help","resumed":{"before":194002,"after":195502},"frameInputRestored":true}
+{"round":2,"name":"stats","resumed":{"before":199502,"after":200502},"frameInputRestored":true}
+PASS: two paused return rounds, actual native Resume touches and observed simulation clocks on exact installed APK
+PASS twelve-paused-returns
+START keyboard-returns
+START Lab keyboard
+PASS Lab keyboard
+{"passed":true,"phase":"keyboard","cases":["keyboard"],"sha256":"6f143ed3ca0f0678cd805e59fda00d97e8e859373e73b438f725e301f7201734"}
+PASS keyboard-returns
+START native-quit-and-fresh-battle
+Error: CDP timeout Runtime.evaluate after 20000ms
+    at Timeout._onTimeout (C:\timerApp\wz-towers-lab\tools\native-live.cjs:32:329)
+    at listOnTimeout (node:internal/timers:685:17)
+    at process.processTimers (node:internal/timers:618:7)
+AssertionError [ERR_ASSERTION]: native-quit-and-fresh-battle must pass
+
+1 !== 0
+
+    at C:\timerApp\wz-towers-lab\tools\run-test-04-delivery.cjs:23:49
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 1,
+  expected: 0,
+  operator: 'strictEqual',
+  diff: 'simple'
+}

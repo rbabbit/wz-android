@@ -67,6 +67,7 @@
   }
 
   function nextWave() {
+    if (window.__towersHtml?.isEnded?.()) return false;
     if (state.pendingCommand || !state.snapshot || state.snapshot.canSkip === false || !["countdown", "active"].includes(state.snapshot.phase)) return false;
     const module = window.LaunchedModule?.FS ? window.LaunchedModule : window.Module;
     const fs = module?.FS;
@@ -86,8 +87,10 @@
 
   function render() {
     const hud = ensureHud();
+    if (window.__towersHtml?.isEnded?.()) { hud.classList.remove('visible'); return; }
     const wave = state.snapshot;
     if (!wave) return;
+    window.__towersHtml?.activate?.(wave);
     showPreparation();
     window.__towersHtml?.consume("warzone-towers-wave-command.json", wave.lastCommand);
     if (wave.wave > 0 || wave.phase === "defeated") {
@@ -98,6 +101,8 @@
       state.failureShown = true;
       window.__kalaWarzoneTouch?.releaseAll?.();
       window.__towersHtml?.finish(wave.phase === "victory");
+      hud.classList.remove('visible');
+      return;
     }
     if (state.pendingCommand && (wave.lastCommand === state.pendingCommand
         || Date.now() - state.commandSentAt > 5000)) state.pendingCommand = "";
@@ -189,14 +194,26 @@
   // The wave panel now lives above the native message lane, so research
   // notifications never move it back over the battlefield.
   window.parent?.addEventListener("warzone-battle-ready", showPreparation);
+  window.addEventListener('warzone-battle-ended', () => {
+    state.snapshot = null;
+    state.pendingCommand = '';
+    ensureHud().classList.remove('visible');
+  });
   setTimeout(pollLogs, 250);
   setInterval(pollLogs, 500);
   window.__warzoneTowersWaves = {
     version: VERSION,
     nextWave,
-    engineExited: () => { pollLogs(); window.__towersHtml?.finish(state.snapshot?.phase === "victory"); },
+    engineExited: () => {
+      if (window.__towersHtml?.isEnded?.()) return;
+      pollLogs();
+      if (window.__towersHtml?.isEnded?.()) return;
+      const phase = state.snapshot?.phase;
+      if (['victory','defeated'].includes(phase)) window.__towersHtml?.finish(phase === 'victory');
+      else window.__towersHtml?.exit('engine-exit');
+    },
     report: () => ({
-      active: true,
+      active: !window.__towersHtml?.isEnded?.(),
       version: VERSION,
       polls: state.polls,
       errors: state.errors,

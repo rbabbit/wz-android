@@ -1,6 +1,7 @@
 package com.rbabbit.blocknight.warzone;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageInfo;
@@ -60,6 +61,9 @@ public final class MainActivity extends Activity {
   private String battleSession = "";
   private TextView replayPanel;
   private boolean replayWon;
+  private String battleOutcome = "";
+  private AlertDialog mainMenuDialog;
+  private boolean mainMenuReturnPending;
   private FrameLayout loadingOverlay;
   private TextView loading;
   private ProgressBar loadingSpinner;
@@ -395,6 +399,27 @@ public final class MainActivity extends Activity {
         new WebChromeClient() {
           @Override
           public boolean onConsoleMessage(ConsoleMessage message) {
+            String engineMessage = message.message();
+            if (engineMessage.contains("BNWAVE:")
+                && (engineMessage.contains("\"phase\":\"victory\"")
+                    || engineMessage.contains("\"phase\":\"defeated\""))) {
+              // Preserve a worker's explicit result before its subsequent quit
+              // log is routed through the neutral-exit path.
+              webView.evaluateJavascript(
+                  "window.__towersHtml?.nativeOutput(" + JSONObject.quote(engineMessage) + ");true", null);
+            }
+            boolean quitting = engineMessage.contains("GAMECODE_QUITGAME");
+            boolean failedLoad = engineMessage.contains("Exiting to main menu")
+                || engineMessage.contains("Restarting main menu")
+                || (engineMessage.contains("Trying to load Game ") && engineMessage.contains(" failed!"));
+            if ((quitting || failedLoad)
+                && startupAutomationStarted && graphicsSetup == null && replayPanel == null) {
+              // Also cover logs emitted by a native worker, whose console is
+              // outside the page's synchronous lifecycle observer.
+              webView.setVisibility(View.INVISIBLE);
+              webView.evaluateJavascript(
+                  "window.__towersHtml?.exit('" + (quitting ? "quit" : "load-failed") + "');true", null);
+            }
             Log.i(
                 "BlockNightWZConsole",
                 message.messageLevel()
@@ -461,16 +486,20 @@ public final class MainActivity extends Activity {
   }
 
   private void createLoadingPanel() {
+    dismissMainMenuDialog();
+    mainMenuReturnPending = false;
+    if (webView != null) webView.setVisibility(View.VISIBLE);
     battleSession = java.util.UUID.randomUUID().toString();
     if (replayPanel != null) {
       root.removeView(replayPanel);
       replayPanel = null;
     }
     replayWon = false;
+    battleOutcome = "";
     if (loadingOverlay != null) root.removeView(loadingOverlay);
 
     loadingOverlay = new FrameLayout(this);
-    loadingOverlay.setBackgroundColor(0xFF08110C);
+    loadingOverlay.setBackgroundColor(0xFF0B151B);
     // Loading taps must not reach the covered native lobby or battlefield.
     loadingOverlay.setClickable(true);
     loadingOverlay.setFocusable(true);
@@ -486,20 +515,21 @@ public final class MainActivity extends Activity {
     card.setGravity(Gravity.CENTER_VERTICAL);
     card.setPadding(dp(16), dp(12), dp(16), dp(12));
     GradientDrawable cardBackground = new GradientDrawable();
-    cardBackground.setColor(0xE6071215);
-    cardBackground.setCornerRadius(dp(9));
+    cardBackground.setColor(0xF2101F26);
+    cardBackground.setCornerRadius(dp(7));
+    cardBackground.setStroke(dp(1), 0xFF29414A);
     card.setBackground(cardBackground);
 
     loadingSpinner = new ProgressBar(this, null, android.R.attr.progressBarStyleSmall);
     loadingSpinner.setIndeterminate(true);
-    loadingSpinner.getIndeterminateDrawable().setTint(0xFF83CDD1);
-    LinearLayout.LayoutParams spinnerParams = new LinearLayout.LayoutParams(dp(24), dp(24));
+    loadingSpinner.getIndeterminateDrawable().setTint(0xFF8BD3CC);
+    LinearLayout.LayoutParams spinnerParams = new LinearLayout.LayoutParams(dp(18), dp(18));
     spinnerParams.rightMargin = dp(12);
     card.addView(loadingSpinner, spinnerParams);
 
     loading = new TextView(this);
-    loading.setText("STARTING WARZONE 2100 ENGINE…");
-    loading.setTextColor(0xFFF0F5E9);
+    loading.setText("PREPARING THE BATTLEFIELD…");
+    loading.setTextColor(0xFFF0F3ED);
     loading.setTextSize(12);
     loading.setGravity(Gravity.CENTER_VERTICAL);
     loading.setLetterSpacing(0.04f);
@@ -603,6 +633,13 @@ public final class MainActivity extends Activity {
   }
 
   private void installAutoLauncher() {
+    // A narrow official log category exposes authoritative game/frontend
+    // transitions. It lets the HTML shell cover the frontend before it paints.
+    webView.evaluateJavascript(
+        "(() => {if(window.__towersLifecycleLogging)return;window.__towersLifecycleLogging=true;"
+            + "const original=constructWZModuleConfig;constructWZModuleConfig=(args)=>{"
+            + "const m=original(args);if(!m.arguments.includes('--debug=main'))m.arguments.push('--debug=main');return m;};})()",
+        null);
     // Explicit ADB diagnostic mode gets an isolated save directory and
     // verbose engine logs. Normal launches retain the player's data.
     if (getIntent().getBooleanExtra("engine_debug", false)) {
@@ -741,7 +778,7 @@ public final class MainActivity extends Activity {
     public void engineReady() {
       runOnUiThread(() -> {
         if (getIntent().getBooleanExtra("engine_debug", false)) hideLoadingPanel();
-        updateLoadingStatus("CONFIGURING TOWER DEFENSE…");
+        updateLoadingStatus("PREPARING YOUR DEFENCES…");
         webView.requestFocus();
         beginStartupAutomation();
         if (touchTestMode) {
@@ -784,10 +821,116 @@ public final class MainActivity extends Activity {
         if (battleSession.equals(session)) showReplayPanel(true);
       });
     }
+
+    @JavascriptInterface
+    public void confirmReturnToMainMenu(String session) {
+      runOnUiThread(() -> showMainMenuDialog(session));
+    }
+
+    @JavascriptInterface
+    public void battleExited(String session) {
+      runOnUiThread(() -> {
+        if (!battleSession.equals(session)) return;
+        if (mainMenuReturnPending) returnToMainMenu();
+        else showBattleExitPanel();
+      });
+    }
+  }
+
+  private void dismissMainMenuDialog() {
+    if (mainMenuDialog != null) {
+      mainMenuDialog.dismiss();
+      mainMenuDialog = null;
+    }
+  }
+
+  private void cancelMainMenuReturn(String session) {
+    if (webView == null || !battleSession.equals(session) || mainMenuReturnPending) return;
+    webView.evaluateJavascript(
+        "window.__towersHtml?.cancelMainMenuReturn(" + JSONObject.quote(session) + ")", null);
+  }
+
+  private void showMainMenuDialog(String session) {
+    if (root == null || webView == null || isFinishing() || isDestroyed()
+        || !battleSession.equals(session) || battleSession.isEmpty()
+        || !battleOutcome.isEmpty() || graphicsSetup != null || loadingOverlay != null
+        || replayPanel != null || mainMenuReturnPending || mainMenuDialog != null) return;
+    AlertDialog dialog =
+        new AlertDialog.Builder(this)
+            .setTitle("Return to main menu?")
+            .setNegativeButton("Cancel", (ignored, which) -> cancelMainMenuReturn(session))
+            .setPositiveButton("Return", (ignored, which) -> {
+              if (webView == null || !battleSession.equals(session)) return;
+              mainMenuReturnPending = true;
+              webView.evaluateJavascript(
+                  "window.__towersHtml?.returnToMainMenu(" + JSONObject.quote(session) + ")",
+                  result -> {
+                    if (!"true".equals(result) && battleSession.equals(session)) {
+                      mainMenuReturnPending = false;
+                      cancelMainMenuReturn(session);
+                    }
+                  });
+            })
+            .create();
+    mainMenuDialog = dialog;
+    dialog.setCanceledOnTouchOutside(false);
+    dialog.setOnCancelListener(ignored -> cancelMainMenuReturn(session));
+    dialog.setOnDismissListener(ignored -> {
+      if (mainMenuDialog == dialog) mainMenuDialog = null;
+      if (webView != null && !isFinishing() && !isDestroyed()) {
+        immersive();
+        webView.requestFocus();
+      }
+    });
+    dialog.show();
+  }
+
+  private void returnToMainMenu() {
+    dismissMainMenuDialog();
+    mainMenuReturnPending = false;
+    battleSession = "";
+    startupAutomationStarted = false;
+    battleOutcome = "";
+    hideLoadingPanel();
+    if (replayPanel != null) {
+      root.removeView(replayPanel);
+      replayPanel = null;
+    }
+    webView.stopLoading();
+    webView.loadUrl("about:blank");
+    if (graphicsSetup == null) showGraphicsSetup();
+  }
+
+  private void showBattleExitPanel() {
+    if (root == null || isFinishing() || isDestroyed() || !battleOutcome.isEmpty()) return;
+    dismissMainMenuDialog();
+    battleOutcome = "exited";
+    hideLoadingPanel();
+    TextView exit = new TextView(this);
+    replayPanel = exit;
+    exit.setText("WARZONE TOWERS\n\nBATTLE ENDED\n\nTap to return to the start screen");
+    exit.setTextColor(0xFFE2ECE8);
+    exit.setTextSize(22);
+    exit.setGravity(Gravity.CENTER);
+    exit.setBackgroundColor(0xFF070F13);
+    exit.setClickable(true);
+    exit.setOnClickListener(view -> {
+      root.removeView(view);
+      replayPanel = null;
+      battleSession = "";
+      startupAutomationStarted = false;
+      webView.loadUrl("about:blank");
+      showGraphicsSetup();
+    });
+    root.addView(exit, new FrameLayout.LayoutParams(-1, -1));
   }
 
   private void showReplayPanel(boolean won) {
     if (root == null || isFinishing() || isDestroyed()) return;
+    if ("exited".equals(battleOutcome)) return;
+    if ("victory".equals(battleOutcome) && !won) return;
+    dismissMainMenuDialog();
+    battleOutcome = won ? "victory" : "defeated";
     if (replayPanel != null) {
       if (won && !replayWon) {
         replayWon = true;
@@ -835,7 +978,7 @@ public final class MainActivity extends Activity {
   private void beginStartupAutomation() {
     if (startupAutomationStarted || webView == null || isFinishing()) return;
     startupAutomationStarted = true;
-    updateLoadingStatus("OPENING THE TOWER DEFENCE MAP…");
+    updateLoadingStatus("OPENING THE BATTLEFIELD…");
     webView.postDelayed(
         () ->
             evaluateTouchTapThen(
@@ -850,7 +993,7 @@ public final class MainActivity extends Activity {
                         "Limits",
                         1800,
                         () -> {
-                          updateLoadingStatus("APPLYING TOWER DEFENSE LIMITS…");
+                          updateLoadingStatus("PREPARING YOUR COMMAND CENTRE…");
                           decreaseVtolLimit(6);
                         })),
         1200);
@@ -877,7 +1020,7 @@ public final class MainActivity extends Activity {
   }
 
   private void finishStartupAutomation() {
-    updateLoadingStatus("WAITING FOR TOWER DEFENSE RULES…");
+    updateLoadingStatus("PREPARING THE FIRST WAVE…");
     awaitBattlefieldReady(0);
   }
 
@@ -898,7 +1041,7 @@ public final class MainActivity extends Activity {
             showEngineFailure("The tower-defence battlefield did not become ready in time.");
             return;
           }
-          if (attempt == 40) updateLoadingStatus("LOADING MAP AND ENEMY ROUNDS…");
+          if (attempt == 40) updateLoadingStatus("ASSEMBLING THE BATTLEFIELD…");
           if (attempt == 120) updateLoadingStatus("FINALISING BATTLEFIELD…");
           webView.postDelayed(() -> awaitBattlefieldReady(attempt + 1), 500);
         });
@@ -906,23 +1049,34 @@ public final class MainActivity extends Activity {
 
   private void revealBattlefield() {
     if (webView == null || isFinishing()) return;
-    // Establish this map's south-facing view while the splash still covers
+    // Establish this map's battlefield-facing view while the splash still covers
     // the canvas. Waves and BASE must never change the camera direction.
     faceOpponent();
     showCombatHud();
-    webView.postDelayed(
-        () -> {
-          hideLoadingPanel();
-          webView.requestFocus();
-        },
-        300);
+    awaitInitialCamera(0);
+  }
+
+  private void awaitInitialCamera(int attempt) {
+    if (webView == null || isFinishing() || !battleOutcome.isEmpty()) return;
+    webView.evaluateJavascript(
+        "Boolean(window.__kalaWarzoneTouch?.report?.().cameraFacingPending===false)",
+        result -> {
+          if ("true".equals(result)) {
+            hideLoadingPanel();
+            webView.requestFocus();
+          } else if (attempt < 60) {
+            webView.postDelayed(() -> awaitInitialCamera(attempt + 1), 250);
+          } else {
+            showEngineFailure("The starting camera did not become ready. Please start the battle again.");
+          }
+        });
   }
 
   private void faceOpponent() {
     if (webView == null || isFinishing()) return;
     webView.evaluateJavascript(
-        "Boolean(window.__kalaWarzoneTouch?.faceOpponent())",
-        result -> Log.i(TAG, "Automatic Warzone Face South: " + result));
+        "Boolean(window.__kalaWarzoneTouch?.faceOpponent('" + mapId + "'))",
+        result -> Log.i(TAG, "Automatic Warzone battlefield heading (" + mapId + "): " + result));
   }
 
   private void showCombatHud() {
@@ -1124,6 +1278,7 @@ public final class MainActivity extends Activity {
 
   @Override
   protected void onDestroy() {
+    dismissMainMenuDialog();
     if (graphicsStore != null) graphicsStore.close();
     if (musicStore != null) musicStore.close();
     if (root != null && viewportListener != null) {
@@ -1141,6 +1296,11 @@ public final class MainActivity extends Activity {
 
   @Override
   public void onBackPressed() {
+    if (mainMenuDialog != null) {
+      mainMenuDialog.cancel();
+      return;
+    }
+    if (mainMenuReturnPending) return;
     if (musicSetup != null) {
       closeMusicSetup();
       return;

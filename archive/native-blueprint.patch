@@ -1,0 +1,20 @@
+diff --git a/src/display3d.cpp b/src/display3d.cpp
+index 32bcb85..4207a75 100644
+--- a/src/display3d.cpp
++++ b/src/display3d.cpp
+@@ -2140,6 +2140,15 @@ static void renderBuildOrder(uint8_t droidPlayer, DroidOrder const &order, STRUC
+ 	{
+ 		drawLineBuild(droidPlayer, stats, pos, order.pos2, order.direction, state);
+ 	}
++	// Scripted build orders carry tile-centre positions for every footprint.
++	// Match buildStructureDir's parity snap for this visual blueprint only.
++	// Use the rotated size; never alter the actual order or foundation rules.
++	if (order.type == DORDER_BUILD && !IsStatExpansionModule(stats))
++	{
++		const Vector2i size = stats->size(order.direction);
++		pos.x = (pos.x & ~TILE_MASK) + size.x % 2 * TILE_UNITS / 2;
++		pos.y = (pos.y & ~TILE_MASK) + size.y % 2 * TILE_UNITS / 2;
++	}
+ 	if ((order.type == DORDER_BUILD || order.type == DORDER_BUILDMODULE) && !tileHasIncompatibleStructure(mapTile(map_coord(pos)), stats, order.index))
+ 	{
+ 		StructureBounds b = getStructureBounds(stats, pos, order.direction);

@@ -1,0 +1,112 @@
+{
+  "passed": true,
+  "emulatorTesting": true,
+  "gameplayTesting": true,
+  "visualReview": true,
+  "candidateAPK_SHA256": "6f143ed3ca0f0678cd805e59fda00d97e8e859373e73b438f725e301f7201734",
+  "package": "com.rbabbit.warzonetowers.lab",
+  "label": "Warzone Towers",
+  "version": "0.4",
+  "scope": "Audited module guidance/targeting/feedback/repeated placement and native completion, ordinary construction, save/load, returns and layout on the exact installed APK",
+  "checks": {
+    "moduleGuidance": true,
+    "moduleTargeting": true,
+    "modulePreviewCleanup": true,
+    "moduleRepeatFeedback": true,
+    "continuousModulePlacement": true,
+    "researchModuleCompletion": true,
+    "powerModuleCompletion": true,
+    "factoryModuleCompletion": true,
+    "factoryTwoLevelFIFO": true,
+    "ordinaryConstruction": true,
+    "saveLoad": true,
+    "inputReturns": true,
+    "layout": true
+  },
+  "reports": [
+    {
+      "path": "qa/test-04/code-checks.json",
+      "sha256": "2e4f6aadebbfde6698a60cb629fb76c799c8dc3e6cad5b3741e9991bb748e0a2"
+    },
+    {
+      "path": "qa/test-04/emulator-verification.json",
+      "sha256": "ec06101b368024e99bfc4413bf89c75d183d05476150fc3c3a0099daf8582a85"
+    },
+    {
+      "path": "qa/test-04/final-integrity.json",
+      "sha256": "5d2ecf49c45968f4106e03fe0f7661976e8b2742afab9fc9b759e27e96432c65"
+    },
+    {
+      "path": "qa/test-04/package-verification.json",
+      "sha256": "e70b069cb925bb43ee0f235338861c907cf388c95bb5bbe5fd04e79412b8fda9"
+    },
+    {
+      "path": "qa/test-04/visual-review.json",
+      "sha256": "d19349d14c4ed05cd96395fbbf49d662a7791afc33c7675e4537cf2f77375396"
+    },
+    {
+      "path": "qa/test-04/integrated-journey.json",
+      "sha256": "90dcbf32d7f86948f95a8988c6eaaa939fc2a630bec101fe3e2420c154a65ac2"
+    },
+    {
+      "path": "qa/test-04/module-journey/module-journey-dustfall.json",
+      "sha256": "d882d19a247445dc335a7083d7a02311ea9d1abe2642a3b74d4a2bac3ea7275a"
+    },
+    {
+      "path": "qa/test-04/factory-journey/module-journey-factory.json",
+      "sha256": "8493a1049bcdfe641cd16383ae3008bf8d4cb2520b96513a1a08603424e02573"
+    },
+    {
+      "path": "qa/test-04/module-layout/module-layout.json",
+      "sha256": "ff8eb6f9ae5c9bf2d1d069c0ef5ce80218e772724a4a6b739cb11fd0beff6596"
+    },
+    {
+      "path": "qa/test-04/mixed-regression/mixed-selection.json",
+      "sha256": "8e85cabc41ae9f6a91fe3b768404a82b25fc5c435629ee66951185e6374f021b"
+    },
+    {
+      "path": "qa/test-04/paused-returns/test-02-paused-returns.json",
+      "sha256": "29ed87c6ea2a1a366c1882a88774c6491879b1a1656f02ab09f38eada09a8e39"
+    },
+    {
+      "path": "qa/test-04/keyboard-returns/lab-journey-keyboard.json",
+      "sha256": "ec245ed9ffac938a70381559c085bdcc3507517e3f349be05ed077bd8623a3ca"
+    },
+    {
+      "path": "qa/test-04/quit-return/test-02-quit-journey.json",
+      "sha256": "f49186b91ddf243b006bb7269d9af90f8611b0b091a7201022c021c0ae27b7ad"
+    }
+  ],
+  "supportingReports": [
+    {
+      "path": "qa/test-04/diagnostics/mixed-projection-first-attempt.json",
+      "sha256": "d1627c743cd73e8d200d87b6ae0b9d83feb49fec09256a42be4b3d73d8a21038"
+    },
+    {
+      "path": "qa/test-04/mixed-regression/projection-readiness-diagnostic.json",
+      "sha256": "7d88f5d9e5413a6ab32c6110847efd6809eab9591907f721d7f51626587634ee"
+    },
+    {
+      "path": "qa/test-04/diagnostics/quit-startup-first-attempt.json",
+      "sha256": "da6e1465438ec62cbc95d4466421de6c570f22e31677947a921156e51d7aed4b"
+    },
+    {
+      "path": "qa/test-04/quit-return/quit-startup-readiness-diagnostic.json",
+      "sha256": "d12a3558fca8cfd46b74a7d6264bb385889b7d8a8ad39878cd5cad872effdbbc"
+    },
+    {
+      "path": "qa/test-04/visual-review-preflight.json",
+      "sha256": "8b4c0ba28ac3ac7adfc50ae511c9300296242a2e190a8b7b9e2fdd147562a5bb"
+    },
+    {
+      "path": "qa/test-04/signature.log",
+      "sha256": "8ee97f2de4767e242c8ef8e3caf1c008e7b4525ffc929f83cecfd7a12adc1a72"
+    }
+  ],
+  "limits": [
+    "Software-emulator black terrain remains. Physical-phone GPU/audio/FPS and a full30-wave victory are not certified.",
+    "Module worlds use fresh authored Dustfall. Mixed-selection/return checks reuse a complete ordinary native save with authored trucks and previously normally produced tanks; no grants or position edits.",
+    "Preflight failures and bounded QA readiness corrections remain historical diagnostics and do not establish delivery passes."
+  ],
+  "recordedUTC": "2026-11-07T15:30:25.990474+00:00"
+}

@@ -7,11 +7,11 @@ android {
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.rbabbit.warzonetowers"
+        applicationId = "com.rbabbit.warzonetowers.lab"
         minSdk = 26
         targetSdk = 36
-        versionCode = 67
-        versionName = "6.4-build-display"
+        versionCode = 6
+        versionName = "0.6"
     }
 
     compileOptions {

@@ -1,0 +1,67 @@
+Native queued-building blueprint alignment correction
+
+Upstream: Warzone2100/warzone2100 tag 4.7.0
+Commit: 7d3d8e51a61ceee89e6bf672a41337e1a9cd7392
+Native game code change: only src/display3d.cpp, renderBuildOrder local visual
+position. Match buildStructureDir footprint parity using the rotated size before
+constructing the blueprint. Does not alter actual orders, worker destinations,
+terrain height rules, foundation placement, module parent positions or line-build.
+
+Build host: Ubuntu 24.04 under WSL2.
+Required host packages (same categories as upstream Emscripten CI):
+  build-essential cmake ninja-build git zip unzip gettext autoconf
+  autoconf-archive automake libtool pkg-config python3
+The audit/build environment already had these except autoconf-archive. The first
+configure failed specifically on that missing package. Installing Ubuntu package
+autoconf-archive 20220903-3 resolved it. No game/dependency source was patched to
+work around the setup failure. Original failure log retained.
+The first target build also exposed an uninitialized official data/music
+submodule: the raw optional music packaging target had no files. Initializing
+the exact pinned upstream music submodule and reconfiguring resolves that build
+setup issue. The delivery does not use or replace music with the generated raw
+music package. The complete source bundle includes those actual source inputs.
+The first rebuilt runtime then failed the exact-APK startup check because the
+upstream default build did not export Module.FS, which the existing mobile
+preRun/notification/config adapters use. Explicit EXPORTED_RUNTIME_METHODS=FS
+linker configuration restores the baseline export at the same early runtime
+export block. This is a build-setting correction, with no generated JS or WASM
+hand edits. The first failed pair and its source/provenance are retained outside
+the project under attempt-1-startup-failed.
+
+Pinned tools:
+  emsdk repository 1693ce7359fc9694f198694f902a2cc061239b86
+  SDK 4.0.10 = releases-8103ffedfb0c42d231c6af6859a5a1a832260b43-64bit
+  vcpkg repository 6fdd23fa0a9479a9f9a1c48178696f60cf39255d
+  vcpkg package baseline in unchanged upstream vcpkg.json:
+    77df67cfff9c12ccfdb52284e07c87c75092f723
+  CMake host 3.28; vcpkg tools use their pinned downloaded CMake 4.4.4.
+
+See build-native-blueprint.sh for exact configure/build flags. SDK/vcpkg source
+and binary toolchains, compiler caches, .git databases and build output folders
+are excluded from the complete native source bundle. Native submodule sources
+needed for this build are included; the pin inventory is kept separately.
+WZ_INCLUDE_TERRAIN_HIGH=OFF avoids downloading/repackaging the unrelated optional
+HQ terrain package for the raw engine build. Delivery retains the app's complete
+existing data package and optional terrain handling; generated build data is not
+used. The source bundle keeps the upstream CMake option default unchanged.
+
+The bundled source contains the correction already applied. native-blueprint.patch
+records the exact native delta for review; do not apply it a second time. The
+autorevision.cache copied from the actual native build preserves upstream version
+metadata when rebuilding the source bundle without Git. Source download archives
+for external linked dependency libraries are included separately where applicable;
+the pinned vcpkg recipe retains their verified source and patch identities.
+
+Delivery integration must treat generated JS and WASM as a matched pair. Preserve
+the existing frozen virtual-file data package and its package index, and reapply
+the existing reviewed worker-output and runtime adapter hooks through source
+integration tooling. Do not replace authored map/mod/scenario assets with the
+build's stock generated data. No hand editing of binary WASM is used.
+
+Source-level geometry regression probe:
+  Actual before/after renderBuildOrder compiled with deterministic engine-type
+  stubs. Expected centre is extracted from unchanged foundation snap source.
+  161 ordinary catalogue types x 4 rotations x 3 sites = 1932 comparisons.
+  Before: 216 parity mismatches. After: 0. Actual input order unchanged, footprint
+  height unchanged, module parent/line-build unchanged. This is not gameplay or
+  emulator rendering verification; those must be performed on the exact APK.

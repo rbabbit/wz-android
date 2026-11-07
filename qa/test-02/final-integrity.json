@@ -1,0 +1,206 @@
+{
+  "passed": true,
+  "recordedUTC": "2026-11-07T08:56:48.327Z",
+  "verification": "Read-only filesystem, Git and ADB package/preference hashes; no app launch, UI input, install, preference write or project manifest refresh",
+  "scope": "Required stable source/APK/source archives/fallbacks and saved-design preservation; whole stable preference comparison recorded separately and not asserted unchanged",
+  "stableProject": {
+    "root": "C:/timerApp/wz-tower-defense",
+    "head": "9280cccad984320503240d9a39e7d766646c1dfe",
+    "gitStatus": "",
+    "manifestPath": "C:\\timerApp\\wz-tower-defense\\archive\\repository-files.json",
+    "manifestSHA256": "0d4fc2bf65fdef3ac2f62df0e80b54a86b09dd79961a1eb5c99a7376baa9252f",
+    "manifestFilesVerified": 4916,
+    "manifestVerification": {
+      "command": "python tools/verify-project.py",
+      "exitCode": 0,
+      "output": "Verified 4916 project files, including engine, assets, mod/map and evidence",
+      "runBeforeThisReport": true
+    }
+  },
+  "frozenArtifacts": [
+    {
+      "path": "C:\\timerApp\\Warzone-Towers-v6.4-Build-Blueprints.apk",
+      "sha256": "12532300d9ce2010b911fae879a6e197eb059a98bd672901bd65307cd9f3532a",
+      "expectedSHA256": "12532300d9ce2010b911fae879a6e197eb059a98bd672901bd65307cd9f3532a",
+      "bytes": 95753841,
+      "matched": true
+    },
+    {
+      "path": "C:\\timerApp\\warzone-towers-v6.4-build-blueprints-source.zip",
+      "sha256": "46346399ae4df757b2e9f7178fb427b2ae5c66c0352fb1c8e99d63da3302b610",
+      "expectedSHA256": "46346399ae4df757b2e9f7178fb427b2ae5c66c0352fb1c8e99d63da3302b610",
+      "bytes": 785094716,
+      "matched": true
+    },
+    {
+      "path": "C:\\timerApp\\Warzone-Towers-Lab-01.apk",
+      "sha256": "6dafb70bff1dfec5614de3403b5e169f8d720c9507c6f612d0000de9ecf5118c",
+      "expectedSHA256": "6dafb70bff1dfec5614de3403b5e169f8d720c9507c6f612d0000de9ecf5118c",
+      "bytes": 95894514,
+      "matched": true
+    },
+    {
+      "path": "C:\\timerApp\\warzone-towers-lab-01-source.zip",
+      "sha256": "4d63f34d6fdc1c64b34a106c18c2e61bc2e8e4d59638aaae32fac8fe4ac197f7",
+      "expectedSHA256": "4d63f34d6fdc1c64b34a106c18c2e61bc2e8e4d59638aaae32fac8fe4ac197f7",
+      "bytes": 807673967,
+      "matched": true
+    },
+    {
+      "path": "C:\\timerApp\\Warzone-Towers-Lab-01-SHA256.txt",
+      "sha256": "72fdbbd1152a9ac943ac68403c5731d19a77f9629f3ee92422dc1678b7aa7d45",
+      "expectedSHA256": "72fdbbd1152a9ac943ac68403c5731d19a77f9629f3ee92422dc1678b7aa7d45",
+      "bytes": 193,
+      "matched": true
+    }
+  ],
+  "copiedFallback": [
+    {
+      "path": "C:/timerApp/fallbacks/towers-test-before-fixes-20261107/Warzone-Towers-Lab-01.apk",
+      "sha256": "6dafb70bff1dfec5614de3403b5e169f8d720c9507c6f612d0000de9ecf5118c",
+      "expectedSHA256": "6dafb70bff1dfec5614de3403b5e169f8d720c9507c6f612d0000de9ecf5118c",
+      "bytes": 95894514,
+      "matched": true
+    },
+    {
+      "path": "C:/timerApp/fallbacks/towers-test-before-fixes-20261107/warzone-towers-lab-01-source.zip",
+      "sha256": "4d63f34d6fdc1c64b34a106c18c2e61bc2e8e4d59638aaae32fac8fe4ac197f7",
+      "expectedSHA256": "4d63f34d6fdc1c64b34a106c18c2e61bc2e8e4d59638aaae32fac8fe4ac197f7",
+      "bytes": 807673967,
+      "matched": true
+    },
+    {
+      "path": "C:/timerApp/fallbacks/towers-test-before-fixes-20261107/Warzone-Towers-Lab-01-SHA256.txt",
+      "sha256": "72fdbbd1152a9ac943ac68403c5731d19a77f9629f3ee92422dc1678b7aa7d45",
+      "expectedSHA256": "72fdbbd1152a9ac943ac68403c5731d19a77f9629f3ee92422dc1678b7aa7d45",
+      "bytes": 193,
+      "matched": true
+    }
+  ],
+  "identity": {
+    "packageId": "com.rbabbit.warzonetowers.lab",
+    "device": "emulator-5556",
+    "candidateAPK_SHA256": "64324e568fd21ac449958d3f0d6e0f289e1ef9a06befd1d05de550fee272822f",
+    "installedPath": "/data/app/~~l-N64ddRaVbBK4lqx1MGog==/com.rbabbit.warzonetowers.lab-gPsigZJtg9ae2bFIZtYNOA==/base.apk"
+  },
+  "appsInstalled": [
+    {
+      "packageId": "com.rbabbit.warzonetowers",
+      "installedPath": "/data/app/~~hnnjPuI8T_FbgDnWfJlDJw==/com.rbabbit.warzonetowers-xazwhCmstijy0ZkJPxoNjQ==/base.apk",
+      "sha256": "12532300d9ce2010b911fae879a6e197eb059a98bd672901bd65307cd9f3532a"
+    },
+    {
+      "packageId": "com.rbabbit.warzonetowers.lab",
+      "installedPath": "/data/app/~~l-N64ddRaVbBK4lqx1MGog==/com.rbabbit.warzonetowers.lab-gPsigZJtg9ae2bFIZtYNOA==/base.apk",
+      "sha256": "64324e568fd21ac449958d3f0d6e0f289e1ef9a06befd1d05de550fee272822f"
+    }
+  ],
+  "bothAppsInstalled": true,
+  "preferenceComparison": {
+    "allStablePreferencesMatchRecordedBaseline": false,
+    "baselinePath": "C:\\timerApp\\wz-towers-lab\\qa\\test-02\\isolation-before.json",
+    "baselineRecordedUTC": "2026-11-07T06:52:03.383Z",
+    "baselineFileCreatedUTC": "2026-11-07T06:52:05.471Z",
+    "baselineFileModifiedUTC": "2026-11-07T06:52:05.471Z",
+    "deviceUTC": "Sat Nov  7 08:56:56 UTC 2026",
+    "deviceEpoch": 1794041816,
+    "allPreferenceMtimesPredateRecordedBaseline": true,
+    "allPreferenceCtimesPredateRecordedBaseline": true,
+    "files": [
+      {
+        "name": "AwOriginVisitLoggerPrefs.xml",
+        "sha256": "300567a3559ffb27e7d50f06a1b8ab767027e8029bf72f293e60c36684df963b",
+        "modifiedUTC": "2026-11-06T09:53:23.000Z",
+        "changedUTC": "2026-11-06T09:53:23.000Z",
+        "modifiedEpoch": 1793958803,
+        "changedEpoch": 1793958803,
+        "baselineSHA256": "5d9dc4862e247d92d8b1edf22187c1419d5c3764e843b3db5fe25d16aab22ce2",
+        "baselineMatches": false,
+        "mtimePredatesRecordedBaseline": true,
+        "ctimePredatesRecordedBaseline": true
+      },
+      {
+        "name": "WebViewChromiumPrefs.xml",
+        "sha256": "67d17b23f900a05415b40b6ff78433a164d8579bb7ac9379cc9569fe274917fb",
+        "modifiedUTC": "2026-11-06T22:20:21.000Z",
+        "changedUTC": "2026-11-06T22:20:21.000Z",
+        "modifiedEpoch": 1794003621,
+        "changedEpoch": 1794003621,
+        "baselineSHA256": "10bbceb1fc89e63fd06af9f992d78692ecd7ab07be70615c1885a0c582548cfa",
+        "baselineMatches": false,
+        "mtimePredatesRecordedBaseline": true,
+        "ctimePredatesRecordedBaseline": true
+      },
+      {
+        "name": "com.rbabbit.blocknight.warzone.MainActivity.xml",
+        "sha256": "0e5d7aadbc239e14d00053359b1d7ee925620e254c54c6310a3ff2f7473922b7",
+        "modifiedUTC": "2026-11-06T22:17:07.000Z",
+        "changedUTC": "2026-11-06T22:17:07.000Z",
+        "modifiedEpoch": 1794003427,
+        "changedEpoch": 1794003427,
+        "baselineSHA256": "c869e62db154eeb3d53e029212509b5a8575dceb6b4c66b061a0381afa05482a",
+        "baselineMatches": false,
+        "mtimePredatesRecordedBaseline": true,
+        "ctimePredatesRecordedBaseline": true
+      }
+    ],
+    "baselineCreationProvenance": "No baseline creation script was found in repository tools. The report contains hashes and recordedUTC only; its exact capture provenance is not established. The older qa/lab-01/stable-android-baseline.json contains the same MainActivity preference hash as isolation-before.json.",
+    "interpretation": "Whole-file preference hashes differ from the recorded baseline. Modification and change timestamps are recorded rather than attributing the mismatch to this task; no preference files were written or restored during this verification."
+  },
+  "stableInstalled": {
+    "packageId": "com.rbabbit.warzonetowers",
+    "sha256": "12532300d9ce2010b911fae879a6e197eb059a98bd672901bd65307cd9f3532a",
+    "savedDesignsSHA256": "63d88a12a00f008b4f89bebfdbeb564ecaf1f7e00a9507ab68a62de6aee4e780",
+    "savedDesignCount": 17,
+    "savedDesignsUnchanged": true,
+    "preferenceByteIdentityToRecordedBaseline": false
+  },
+  "testInstalled": {
+    "packageId": "com.rbabbit.warzonetowers.lab",
+    "sha256": "64324e568fd21ac449958d3f0d6e0f289e1ef9a06befd1d05de550fee272822f",
+    "preferences": [
+      {
+        "name": "AwOriginVisitLoggerPrefs.xml",
+        "sha256": "71065362471219d79acbd31c4961550c2fcd2e3bc4b1bda31d86816ef6e3c2bd",
+        "modifiedUTC": "2026-11-07T00:01:36.000Z",
+        "changedUTC": "2026-11-07T00:01:36.000Z",
+        "modifiedEpoch": 1794009696,
+        "changedEpoch": 1794009696
+      },
+      {
+        "name": "WebViewChromiumPrefs.xml",
+        "sha256": "ffc8409f4e77e5192fbb0f6ba6f23d9b2b370cbc554d40fc99baf87ccd79ca1e",
+        "modifiedUTC": "2026-11-07T08:30:44.000Z",
+        "changedUTC": "2026-11-07T08:30:44.000Z",
+        "modifiedEpoch": 1794040244,
+        "changedEpoch": 1794040244
+      },
+      {
+        "name": "com.rbabbit.blocknight.warzone.MainActivity.xml",
+        "sha256": "73093709b0c52730f081ad1b52fe764242bc795696c896246af22fc38bb7684d",
+        "modifiedUTC": "2026-11-07T08:30:30.000Z",
+        "changedUTC": "2026-11-07T08:30:30.000Z",
+        "modifiedEpoch": 1794040230,
+        "changedEpoch": 1794040230
+      }
+    ]
+  },
+  "checks": {
+    "stableHeadAndCleanWorktree": true,
+    "stable4916FileManifestVerified": true,
+    "frozenStableAPKAndSourcePreserved": true,
+    "frozenOriginalTestAPKAndSourcePreserved": true,
+    "copiedInitialFallbackPreserved": true,
+    "bothAppsInstalled": true,
+    "exactCandidateInstalled": true,
+    "stableInstalledAPKUnchanged": true,
+    "stableSavedDesignsUnchanged": true
+  },
+  "additionalComparisons": {
+    "allStablePreferenceBytesMatchRecordedBaseline": false,
+    "fullStablePreferencesUnchangedSinceTask": "Not established from the recorded baseline; current file timestamps predate its recordedUTC"
+  },
+  "limitations": [
+    "Whole stable preference XML hashes do not match isolation-before.json. All measured preference modification times predate that report; exact baseline capture provenance is not recorded. This pass establishes source/APK/fallback and 17 saved-design preservation, not whole preference byte identity."
+  ]
+}

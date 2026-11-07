@@ -1,0 +1,75 @@
+{
+  "applicationSourceChanged": false,
+  "actualGameplayCases": [
+    "STOP cancels active/pending jobs for the construction group",
+    "wide minimap navigation, placement after STOP and real tower completion",
+    "real native movement overrides queued building and does not restart it",
+    "new tower completes after replacement movement"
+  ],
+  "viewportStates": [
+    [
+      [
+        1600,
+        664
+      ],
+      [
+        2400,
+        996
+      ],
+      [
+        0,
+        0
+      ]
+    ]
+  ],
+  "frozenSamples": 9,
+  "firstFrozenMs": 51634.12999999896,
+  "lastFrozenMs": 53071.09499999881,
+  "placementDuringFrozen": [
+    ""
+  ],
+  "nativeFramesAdvancedWhileCovered": [
+    7130,
+    7143
+  ],
+  "diagnosis": "Existing explicit TRUCKS/native-picker visual and input cover; simulation/rendering continue. No new Lab regression; building-only actions remain uncovered.",
+  "sourceComparison": [
+    {
+      "name": "openBuild",
+      "sha256": "88829bac3fb605defaf71aed773ef0b25dcfe9ff1769ae350a36edcec47731c0",
+      "identicalToV64": true
+    },
+    {
+      "name": "selectNearbyTrucks",
+      "sha256": "a1bd0e5338f041ee4d7ce0ca78362161554021625f09e0e0f0cc299c80eec083",
+      "identicalToV64": true
+    },
+    {
+      "name": "freezeBattlefield",
+      "sha256": "725d49bac06743472ec070ef326b91d107e94d4b15e2bf5789e088f1551defe0",
+      "identicalToV64": true
+    },
+    {
+      "name": "releaseBattlefield",
+      "sha256": "b7bab8f322e7bf011aec6b78dea8c87341f8bec2b5bd130f701f85577ba83a59",
+      "identicalToV64": true
+    },
+    {
+      "name": "setNativeHudHidden",
+      "sha256": "9403700fb9583fa14674199d1c5914a2a5185cb419b0d42a063ab017db2c0b42",
+      "identicalToV64": true
+    },
+    {
+      "name": "beginPlacement",
+      "sha256": "4fd223a5632e4ff325e79db2078115f25cf9232b2b75caf359f6e817dcc5e505",
+      "identicalToV64": true
+    },
+    {
+      "name": "selectMode",
+      "sha256": "b7bdd02b5e22b73c1ecee4a85522d4a56e9fc34c38e8ad24395bed48648e5f8b",
+      "identicalToV64": true
+    }
+  ],
+  "peerReviewConfirmed": true,
+  "limitation": "A brief captured-field/input hold remains when explicitly selecting TRUCKS through the stock native picker."
+}

@@ -1,0 +1,85 @@
+{
+  "passed": true,
+  "candidateAPK_SHA256": "fd136c8dcfd8caf52b616348b86245c657136b6ebd160da987d693b5a142bce4",
+  "reviewed": true,
+  "screenshots": [
+    {
+      "path": "qa/test-06/two-groups/group-b-same-item-order.png",
+      "accepted": true,
+      "notes": "Second-area build selects the local truck; previous area's workers remain assigned to their earlier job.",
+      "sha256": "22a4033ebbb873c1568f19812817dd5a877363eb01f87832e88ab4f28c953c83"
+    },
+    {
+      "path": "qa/test-06/two-groups/group-b-factory-module.png",
+      "accepted": true,
+      "notes": "Local Factory Module queues behind the second area's tower with the local truck highlighted.",
+      "sha256": "49cc18f607b3febd2dcd25a40b0289d730f92389c6b54e013950e520a50d4aa7"
+    },
+    {
+      "path": "qa/test-06/two-groups/group-a-research-module.png",
+      "accepted": true,
+      "notes": "Returning to the first area uses its original two trucks for a lab module.",
+      "sha256": "2d862419260bf246e874cb6011b4175408bca476e31dd98efd01e6cf958ea998"
+    },
+    {
+      "path": "qa/test-06/two-groups/independent-groups-completed.png",
+      "accepted": true,
+      "notes": "Native completed lab/tower visible; temporary placement outlines clear.",
+      "sha256": "67851925d72bdc780f982b79795edaacc5e85a00a2e487200acedae9ce9a17e3"
+    },
+    {
+      "path": "qa/test-06/manual-selection/one-native-truck-selected.png",
+      "accepted": true,
+      "notes": "The actual native single-truck selection is reflected in the compact Build panel and unit highlight.",
+      "sha256": "b6f1a7a80be538e691b2c3dbe9fbc97f17ef6c185c92e738196ff065d6ffa40a"
+    },
+    {
+      "path": "qa/test-06/back-menu/main-menu-confirmation-1.png",
+      "accepted": true,
+      "notes": "Android Back shows the exact requested native confirmation and Cancel/Return, with no stock pause menu.",
+      "sha256": "51a3dea71a2ad92e09b51060f82671f4cc738dfc395258aad2b4d56660f757de"
+    },
+    {
+      "path": "qa/test-06/back-menu/main-menu-confirmation-3.png",
+      "accepted": true,
+      "notes": "Repeated confirmation remains readable and consistent.",
+      "sha256": "7b4c22b4d3e9d39f2340d45d3b8e249bf7111257159cba8758081b87daddf821"
+    },
+    {
+      "path": "qa/test-06/back-menu/keyboard-before-back.png",
+      "accepted": true,
+      "notes": "Actual Android keyboard shown before Back.",
+      "sha256": "91e23db6b723a853cf19c2494d172534675210fd18c9976542518aaa7000399d"
+    },
+    {
+      "path": "qa/test-06/back-menu/keyboard-and-page-back-restored.png",
+      "accepted": true,
+      "notes": "Keyboard dismissal leaves the full Design layout readable; page closure is verified separately by native/JS state.",
+      "sha256": "21a96dc20e1db83dc76d1e56f96e558e04b38e6abbc6a3a5ff122518af1a3004"
+    },
+    {
+      "path": "qa/test-06/back-menu/cancel-restores-queue-input.png",
+      "accepted": true,
+      "notes": "After repeated Cancel, the Queue page opens normally and lists completed independent work.",
+      "sha256": "2c364bb28f9574f81bae6f635ad8538e44081eaaf3be96c2aa85f2f299999efc"
+    },
+    {
+      "path": "qa/test-06/back-menu/direct-main-menu.png",
+      "accepted": true,
+      "notes": "Confirmed Return opens the original map/start menu directly.",
+      "sha256": "dcf05b49895e5f73568a324f07f8af880f6b912a9bc27ffdc40e6967b82b2c84"
+    },
+    {
+      "path": "qa/test-06/back-menu/fresh-battle-cancel-restored.png",
+      "accepted": true,
+      "notes": "A fresh battle remains usable after its own Back confirmation and Cancel.",
+      "sha256": "dc600c54285bdb22d1ffde2cc76acc47fff2727b8e1537781eb764340cdcb317"
+    }
+  ],
+  "limitations": [
+    "The emulator's existing black terrain limits ground-texture visual verification; physical Android devices were not tested.",
+    "The confirmation blocks game input while open. The battle simulation continues; this change does not introduce a new pause mechanism.",
+    "Live checks used real authored Dustfall groups and modules. Iron Valley and every structure were not replayed in this focused change; source tests cover shared selection logic and the native payload/maps remain unchanged.",
+    "Actual single-truck selection used the purpose-built native selection-click API with real native state/ID verification; construction, camera changes and menu controls used real ADB touches. Manual-clear safety is covered by focused source regressions."
+  ]
+}

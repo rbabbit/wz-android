@@ -1,10 +1,19 @@
 'use strict';
-const {start,capture,pause,point}=require('./audit-build-display.cjs'),{controls}=require('./audit-smooth-building.cjs'),{adb,out,delay}=require('./native-live.cjs');
+const {start,capture,pause,point}=require('./audit-build-display.cjs'),{controls,probe}=require('./audit-smooth-building.cjs'),{adb,out,delay,packageId,device}=require('./native-live.cjs');
 const fs=require('fs'),path=require('path'),assert=require('assert/strict'),{execFile}=require('child_process');
-(async()=>{adb('shell','wm','size','600x1080');const c=await start('td1'),r={passed:false,seeded:false};try{
+(async()=>{adb('shell','wm','size','600x1080');const c=await start('td1'),r={passed:false,seeded:false,identity:require('./lab-journey.cjs').installedIdentity(process.env.WZ_QA_APK)};try{
+ await c.tap('#wt-open-build');await c.tap('#wt-sidebar-catalogue [data-build="GuardTower1"]');await c.wait('!__warzoneCommands.report().selectingTrucks');
+ r.coldSelection=await c.evaluate('__warzoneCommands.send("state")');
+ await c.tap('#wt-sidebar-catalogue [data-build="GuardTower1"]');r.repeatedSelection=await c.evaluate('__warzoneCommands.send("state")');
+ assert.deepEqual(r.coldSelection.result.selectedUnits.map(t=>t.id),r.repeatedSelection.result.selectedUnits.map(t=>t.id),'first and repeated Dustfall choices use the same actual native group');
+ await c.tap('#wt-build-sidebar [data-action="select-mode"]');await c.wait('!__warzoneCommands.report().exitingBuild');
+ const initial=await c.save('dustfall-starting-camera');const hq=Object.values(initial['struct.json']).find(s=>s.name==='A0CommandCentre'&&s.player===0);assert.ok(hq);
+ r.startingCamera=await c.evaluate(`({point:WarzoneTerrain.project(${hq.position[0]},${hq.position[1]},${hq.position[2]}),width:innerWidth,height:innerHeight})`);r.startingCamera.rotation=initial['gam.json'].viewDataR;
+ assert.equal(r.startingCamera.rotation.y,0,'Dustfall native camera faces north');assert.ok(r.startingCamera.point.y>r.startingCamera.height*.7&&r.startingCamera.point.y<r.startingCamera.height-8,'Command Centre is visible toward the footer');await capture(c,'dustfall-footer-starting-view');
+ await probe(c);
  const a=await controls(c);await a.camera(8,72);await c.tap('#wt-open-build');await c.tap('#wt-sidebar-catalogue [data-build="GuardTower1"]');
  const p=await point(c,8,71),png=adb('exec-out','screencap','-p'),x=String(Math.round(p.x*png.readUInt32BE(16)/p.w)),y=String(Math.round(p.y*png.readUInt32BE(20)/p.h));
- const touch=new Promise((resolve,reject)=>execFile(require('./android-sdk.cjs').adb,['-s','emulator-5556','shell','input','swipe',x,y,x,y,'4500'],e=>e?reject(e):resolve()));
+ require('./native-live.cjs').assertLabForeground();const touch=new Promise((resolve,reject)=>execFile(require('./android-sdk.cjs').adb,['-s',device,'shell','input','swipe',x,y,x,y,'4500'],e=>e?reject(e):resolve()));
  r.selected=await c.wait('(()=>{const d=WarzoneBuildDisplay.report();return d.drawn.some(s=>s.id==="preview"&&s.model&&s.triangles>0)&&d})()',2500);await capture(c,'selected-green-model-confirmed');await touch;await c.wait('__warzoneCommands.report().snapshot.jobs.some(s=>s.itemId==="GuardTower1")');
  await c.tap('#wt-build-sidebar [data-category="STRUCTURES"]');await c.tap('#wt-sidebar-catalogue [data-build="A0CyborgFactory"]');
  for(const [x,y]of [[9,73],[10,71],[9,69],[8,74],[7,69]]){const v=await c.evaluate(`__warzoneCommands.send('preview-build',{itemId:'A0CyborgFactory',x:${x},y:${y},workerIds:__warzoneCommands.report().nativeBuildGroup})`);if(v.ok){r.site=[x,y];break}}assert.ok(r.site);await a.tile(...r.site);
@@ -12,5 +21,8 @@ const fs=require('fs'),path=require('path'),assert=require('assert/strict'),{exe
  await a.camera(8,72);assert.equal(await c.evaluate('__warzoneCommands.report().placement'),'A0CyborgFactory');await c.tap('#wt-build-sidebar [data-action="select-mode"]');
  await c.wait('__warzoneCommands.report().snapshot.finishedBuilds.some(s=>s.itemId==="A0CyborgFactory")&&__warzoneCommands.report().snapshot.finishedBuilds.some(s=>s.itemId==="GuardTower1")',90000);await c.wait('!WarzoneBuildDisplay.report().acceptedSites.length&&!WarzoneBuildDisplay.report().drawn.length');
  r.native=await c.save('td1-native-completed');const factory=Object.values(r.native['struct.json']).find(s=>s.name==='A0CyborgFactory');assert.ok(factory&&factory.currentBuildPts>=500);const ghost=r.preview.drawn.find(s=>s.itemId==='A0CyborgFactory');const spec=JSON.parse(fs.readFileSync('app/src/main/assets/warzone/command-catalog.json')).buildings.find(b=>b.id==='A0CyborgFactory');assert.equal(factory.position[0],(ghost.x+(spec.width%2?.5:0))*128);assert.equal(factory.position[1],(ghost.y+(spec.breadth%2?.5:0))*128);assert.ok(Math.abs(factory.position[2]-ghost.height)<2,'ghost height matches actual native foundation');await capture(c,'td1-models-cleared-on-completion');
- await pause(c);r.passed=true;console.log('PASS: raised-platform tower/factory ghosts match native positions and clear after real completion');
+ r.monitor=await c.evaluate('clearInterval(__smoothAudit.timer);__smoothAudit');assert.ok(r.monitor.samples.length>2&&r.monitor.samples.every(s=>!s.frozen),'Dustfall construction never covers the live field');
+ const first=r.monitor.samples[0];assert.ok(r.monitor.samples.every(s=>s.frame.join()===first.frame.join()&&s.canvas.join()===first.canvas.join()&&s.zoom.join()===first.zoom.join()),'Dustfall building and minimap navigation preserve viewport and zoom');
+ r.afterIdentity=require('./lab-journey.cjs').installedIdentity(process.env.WZ_QA_APK);assert.equal(r.afterIdentity.candidateAPK_SHA256,r.identity.candidateAPK_SHA256);
+ await pause(c);r.passed=true;console.log('PASS: Dustfall native north/footer view, cold selection, minimap/world taps, raised-platform tower/factory completion and ghost cleanup');
  }finally{fs.writeFileSync(path.join(out,'audit-build-display-td1.json'),JSON.stringify(r,null,2));c.close()}})().catch(e=>{console.error(e);process.exitCode=1});

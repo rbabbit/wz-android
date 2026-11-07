@@ -1,0 +1,125 @@
+{
+  "passed": true,
+  "emulatorTesting": true,
+  "gameplayTesting": true,
+  "candidateAPK_SHA256": "9be9cde8d4d62a4ea205a34e6c53fe2fab7ff8eb0d57f52b9775207853e2866b",
+  "installedAPK_SHA256": "9be9cde8d4d62a4ea205a34e6c53fe2fab7ff8eb0d57f52b9775207853e2866b",
+  "package": "com.rbabbit.warzonetowers.lab",
+  "version": "0.5",
+  "scope": "Audited ordinary/module preview rendering and native queued alignment, parity-correct construction, queues, selection/movement, normal production, native save/load and input/layout returns",
+  "checks": {
+    "queuedBlueprintAlignment": true,
+    "evenFootprints": true,
+    "oddFootprints": true,
+    "ordinaryConstruction": true,
+    "moduleConstruction": true,
+    "mixedQueues": true,
+    "selectionAndMovement": true,
+    "normalProduction": true,
+    "saveLoad": true,
+    "inputReturns": true,
+    "layout": true,
+    "previewPerformance": true
+  },
+  "performance": {
+    "passed": true,
+    "configuredMaxOverlayPaintMs": 150.0,
+    "measuredMaxOverlayPaintMs": 82.7199999988079,
+    "budgetReason": "Emulator regression ceiling including software GPU mesh readback, spatial-index construction and overlay rendering; not a 60 FPS guarantee",
+    "interpretation": "Observed exact-APK emulator regression measurement; not a 60 FPS or physical-device performance guarantee",
+    "finalDisplay": {
+      "frames": 545,
+      "paintMs": 0.38499999046325684,
+      "maxPaintMs": 82.7199999988079,
+      "error": ""
+    },
+    "finalTerrain": {
+      "heightIndexBuilds": 4,
+      "heightQueries": 640,
+      "heightTriangleTests": 23863,
+      "maxHeightCandidates": 120,
+      "maxHeightMs": 80.89000000059605,
+      "maxHeightIndexMs": 80.73499999940395,
+      "maxMeshReadMs": 67.2199999988079,
+      "gpuBufferReads": 2,
+      "cpuBufferReads": 6,
+      "mirroredUploads": 3,
+      "cpuInvalidations": 0,
+      "error": ""
+    },
+    "heldTerrain": {
+      "gpuBufferReads": 2,
+      "cpuBufferReads": 0,
+      "mirroredUploads": 0,
+      "cpuInvalidations": 0
+    },
+    "postHeldAdditionalGPUReads": 0,
+    "observedDisplayReports": 12,
+    "liveMonitorSamples": 1849
+  },
+  "integratedJourney": {
+    "path": "qa/test-05/integrated-journey.json",
+    "sha256": "c4dfaf35a6aa7b87e8187e127cc28b4ea170a60e2038eeb804545761b7a36cf8"
+  },
+  "sourceReports": [
+    {
+      "path": "qa/test-05/preview-journey/preview-journey.json",
+      "sha256": "6228439ef0b15d2ae2eea1a343b6b697395063c438bdf322dbf2232c0ff7a801"
+    },
+    {
+      "path": "qa/test-05/raised-footprint/audit-build-display-td1.json",
+      "sha256": "ac1967047974c7544acbfa77a019b4e3c919ea98841f58fe53ec65cc2302ae4b"
+    },
+    {
+      "path": "qa/test-05/module-journey/module-journey-dustfall.json",
+      "sha256": "642307946a1e00cb1f491d12060c4186d5601e88ee23ffdcf369c00cbadd5aad"
+    },
+    {
+      "path": "qa/test-05/factory-journey/module-journey-factory.json",
+      "sha256": "849c04cf8e411b699c5e2afc40425bbbdc91979836b0c0bd24f4f4a2d6454eef"
+    },
+    {
+      "path": "qa/test-05/module-layout/module-layout.json",
+      "sha256": "6fc8af260820111f350c22f419cf03c0335a2bca4ebffb0eef36b81631885ee9"
+    },
+    {
+      "path": "qa/test-05/mixed-regression/mixed-selection.json",
+      "sha256": "8250ad1f05f0c2cc4c58bc67defb9f61236bdd78a94700d857ed554d2bad6705"
+    },
+    {
+      "path": "qa/test-05/paused-returns/test-02-paused-returns.json",
+      "sha256": "a9e600e23529047e3fea30b92013f40e51295b14ea00c0d6072ca7aeea5ff96d"
+    },
+    {
+      "path": "qa/test-05/keyboard-returns/lab-journey-keyboard.json",
+      "sha256": "5d844ebe395f9ed3e535d5f4557b8091b1c24e9e55a46298bced55c2f03bcce6"
+    },
+    {
+      "path": "qa/test-05/quit-return/test-02-quit-journey.json",
+      "sha256": "db4effc4efcc4a4eacbf0c78d2933aa6f0f9f8b4057449105092daa7bf0388d2"
+    }
+  ],
+  "nativeGeometryProbe": {
+    "sourceReport": {
+      "path": "qa/test-05/native/native-preview-probe.json",
+      "sha256": "0d9198394369bcae13ab7987addc1f85075a22242346da6ba76eba0fcbd98b2e"
+    },
+    "ordinaryCases": 1932,
+    "afterMismatch": 0,
+    "method": "Actual before/after renderBuildOrder compiled against deterministic engine-type stubs; expected centre from unchanged native foundation snap. Not emulator gameplay."
+  },
+  "fixtureDisclosure": {
+    "previewMethod": "Fresh authored Dustfall; real ADB catalogue, held-finger, terrain and mesh-body touches; genuine native F7 observations. No script-sent build orders or seeded world state.",
+    "preparedSaveRequested": false,
+    "preparedTruckCount": null,
+    "preparedSaveSource": null,
+    "mixedSelectionScope": "mixed visible combat/constructor selection, real two-site construction FIFO, selection during work, noncentral movement/STOP and related returns"
+  },
+  "limitations": [
+    "The emulator's pre-existing black terrain issue remains in Normal/SwiftShader. Ground textures and the appearance of slopes could not be visually approved; native terrain picks, heights, positions and completion were checked.",
+    "Physical Android devices were not tested in this task.",
+    "All 161 ordinary catalogue types were exercised through the actual JavaScript renderer and 1,932 native source geometry cases. Real emulator construction covered representative 1x1, 2x2 and 1x2 structures, elevated sites and Research/Power/Factory modules; it did not construct every catalogue type or certify all 30 waves.",
+    "Native automatic wall-variant model choice is not published by the scripting API. Preview metadata retains the original selected structure model."
+  ],
+  "recordedUTC": "2026-11-07T18:32:47.849817+00:00"
+}

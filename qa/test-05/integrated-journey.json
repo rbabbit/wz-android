@@ -1,0 +1,133 @@
+{
+  "passed": true,
+  "started": "2026-11-07T17:58:45.868Z",
+  "identity": {
+    "packageId": "com.rbabbit.warzonetowers.lab",
+    "device": "emulator-5556",
+    "candidateAPK_SHA256": "9be9cde8d4d62a4ea205a34e6c53fe2fab7ff8eb0d57f52b9775207853e2866b",
+    "installedPath": "/data/app/~~1U40WkG9_YvGw_Lp42Au5g==/com.rbabbit.warzonetowers.lab-d78Pvbh4hbjad1XoyH9DPQ==/base.apk"
+  },
+  "phases": [
+    {
+      "name": "ordinary-preview-and-mixed-module",
+      "folder": "preview-journey",
+      "passed": true
+    },
+    {
+      "name": "raised-platform-and-cyborg-footprint",
+      "folder": "raised-footprint",
+      "passed": true
+    },
+    {
+      "name": "research-power-and-native-save-load",
+      "folder": "module-journey",
+      "passed": true
+    },
+    {
+      "name": "factory-two-levels-and-normal-production",
+      "folder": "factory-journey",
+      "passed": true
+    },
+    {
+      "name": "module-layout-and-same-item-reselection",
+      "folder": "module-layout",
+      "passed": true
+    },
+    {
+      "name": "mixed-selection-fifo-movement-and-returns",
+      "folder": "mixed-regression",
+      "passed": true
+    },
+    {
+      "name": "twelve-paused-returns",
+      "folder": "paused-returns",
+      "passed": true
+    },
+    {
+      "name": "keyboard-returns",
+      "folder": "keyboard-returns",
+      "passed": true
+    },
+    {
+      "name": "native-quit-and-fresh-battle",
+      "folder": "quit-return",
+      "passed": true,
+      "started": "2026-11-07T18:30:56.816Z",
+      "finished": "2026-11-07T18:31:18.605Z",
+      "sourceReport": {
+        "path": "qa/test-05/quit-return/test-02-quit-journey.json",
+        "sha256": "db4effc4efcc4a4eacbf0c78d2933aa6f0f9f8b4057449105092daa7bf0388d2"
+      },
+      "resumed": true
+    }
+  ],
+  "current": "completed",
+  "tailResumptions": [
+    {
+      "started": "2026-11-07T18:30:56.816Z",
+      "method": "Retain eight hash-verified exact-APK phases; resume only the actual fresh-battle startup following recorded native Quit/Confirm and app start.",
+      "previousIntegrated": {
+        "path": "qa/test-05/iteration-r4-quit-readiness/integrated-journey-before-tail-resume.json",
+        "sha256": "09c691e0017ca7426f14a35578b1a2f63e76b33e72beffd666e9d0413356b13d"
+      },
+      "previousLog": {
+        "path": "qa/test-05/iteration-r4-quit-readiness/quit-delivery-run-before-tail-resume.log",
+        "sha256": "4aa5d254f9421a9bb219c8b74bdf88f7eba42dde1340bcd9331d7c4f614cd12f"
+      },
+      "previousFinished": "2026-11-07T18:27:25.745Z",
+      "previousFailure": "AssertionError [ERR_ASSERTION]: native-quit-and-fresh-battle must pass\n\n1 !== 0\n\n    at C:\\timerApp\\wz-towers-lab\\tools\\run-test-05-delivery.cjs:24:55\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)",
+      "installedIdentity": {
+        "packageId": "com.rbabbit.warzonetowers.lab",
+        "device": "emulator-5556",
+        "candidateAPK_SHA256": "9be9cde8d4d62a4ea205a34e6c53fe2fab7ff8eb0d57f52b9775207853e2866b",
+        "installedPath": "/data/app/~~1U40WkG9_YvGw_Lp42Au5g==/com.rbabbit.warzonetowers.lab-d78Pvbh4hbjad1XoyH9DPQ==/base.apk"
+      },
+      "retainedSourceReports": [
+        {
+          "path": "qa/test-05/preview-journey/preview-journey.json",
+          "sha256": "6228439ef0b15d2ae2eea1a343b6b697395063c438bdf322dbf2232c0ff7a801"
+        },
+        {
+          "path": "qa/test-05/raised-footprint/audit-build-display-td1.json",
+          "sha256": "ac1967047974c7544acbfa77a019b4e3c919ea98841f58fe53ec65cc2302ae4b"
+        },
+        {
+          "path": "qa/test-05/module-journey/module-journey-dustfall.json",
+          "sha256": "642307946a1e00cb1f491d12060c4186d5601e88ee23ffdcf369c00cbadd5aad"
+        },
+        {
+          "path": "qa/test-05/factory-journey/module-journey-factory.json",
+          "sha256": "849c04cf8e411b699c5e2afc40425bbbdc91979836b0c0bd24f4f4a2d6454eef"
+        },
+        {
+          "path": "qa/test-05/module-layout/module-layout.json",
+          "sha256": "6fc8af260820111f350c22f419cf03c0335a2bca4ebffb0eef36b81631885ee9"
+        },
+        {
+          "path": "qa/test-05/mixed-regression/mixed-selection.json",
+          "sha256": "8250ad1f05f0c2cc4c58bc67defb9f61236bdd78a94700d857ed554d2bad6705"
+        },
+        {
+          "path": "qa/test-05/paused-returns/test-02-paused-returns.json",
+          "sha256": "a9e600e23529047e3fea30b92013f40e51295b14ea00c0d6072ca7aeea5ff96d"
+        },
+        {
+          "path": "qa/test-05/keyboard-returns/lab-journey-keyboard.json",
+          "sha256": "5d844ebe395f9ed3e535d5f4557b8091b1c24e9e55a46298bced55c2f03bcce6"
+        }
+      ],
+      "rerunPhases": [
+        "native-quit-and-fresh-battle"
+      ],
+      "passed": true,
+      "finished": "2026-11-07T18:31:19.166Z"
+    }
+  ],
+  "afterIdentity": {
+    "packageId": "com.rbabbit.warzonetowers.lab",
+    "device": "emulator-5556",
+    "candidateAPK_SHA256": "9be9cde8d4d62a4ea205a34e6c53fe2fab7ff8eb0d57f52b9775207853e2866b",
+    "installedPath": "/data/app/~~1U40WkG9_YvGw_Lp42Au5g==/com.rbabbit.warzonetowers.lab-d78Pvbh4hbjad1XoyH9DPQ==/base.apk"
+  },
+  "finished": "2026-11-07T18:31:19.166Z"
+}

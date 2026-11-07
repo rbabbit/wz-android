@@ -1,0 +1,68 @@
+{
+  "kind": "fixture-diagnostics",
+  "scope": "Supporting history of test setup corrections; this is not a passing gameplay report",
+  "productChangesForTheseFixtureCorrections": false,
+  "issues": [
+    {
+      "name": "Iron Valley target clipped by footer",
+      "cause": "Candidate construction points projected near screen y 535/542 into the footer exclusion area.",
+      "correction": "Use the reachable ordinary test tile 10,38 after checking the actual viewport, projection and hit target.",
+      "classification": "fixture geometry"
+    },
+    {
+      "name": "Research card reflow selected a different topic",
+      "cause": "A card-position assumption did not survive research list reflow and queued a Metal topic instead of the intended topic.",
+      "correction": "Select by the intended research ID and observe the selected card and actual native laboratory target/queue before continuing.",
+      "classification": "fixture input targeting"
+    },
+    {
+      "name": "Already-saved recipe replaced a duplicate native production button",
+      "cause": "The all-phases runner expected a native-template button which the ordinary saved-recipe display intentionally deduplicated.",
+      "correction": "Preserve the interrupted all-run as preflight-ce/gameplay-all-interrupted.json. Its original completed research phases had scoped evidence; all normative delivery journeys must be rerun against the final APK, using the visible saved recipe for production.",
+      "classification": "fixture selector assumption"
+    },
+    {
+      "name": "Prepared eight-site setup had a stopped clock and no new acknowledgement",
+      "cause": "After fixture setup and cleanup, the observed native clock was stopped and a fresh command-state acknowledgement did not arrive. That observation does not establish that F8 deliberately restored Pause; cleanup and current input state could obscure the transition.",
+      "correction": "Inspect the actual screen and wait for an advancing native clock before requesting running-state evidence, resuming once only when the visible state requires it. The old eight-site setup was later abandoned when a second attempt lacked valid visible/reachable workers; neither interrupted attempt is a delivery pass.",
+      "classification": "fixture save/input readiness"
+    },
+    {
+      "name": "Eight-site worker positions no longer matched the fixture assumptions",
+      "cause": "After the loaded queue advanced, the assumed worker positions and visible/reachable site setup no longer matched the prepared eight-site test.",
+      "correction": "Stop repeating the failed fixture. Use a fresh ordinary three-site mixed FIFO construction run with native orders/completion, plus the independent STOP and movement journey, for the current selection/menu delivery scope.",
+      "classification": "abandoned fixture readiness and reachability"
+    },
+    {
+      "name": "FIFO reachability preview preceded completed truck selection",
+      "cause": "The first structure tap was accepted immediately, but the fixture issued its read-only reachability preview while asynchronous real truck selection was still completing. Empty worker IDs caused an unreachable preview result; the later native state showed all three intended trucks selected and idle with no build jobs.",
+      "correction": "Keep BUILD followed immediately by the first structure tap, then observe completed native selection before running the separate read-only site validation. Preserve integrated-fifo-readiness.json and resume the remaining integrated phases using the validated workers and unchanged APK.",
+      "classification": "fixture asynchronous readiness, not a product failure"
+    },
+    {
+      "name": "Save/load research observer listened on the wrong channel",
+      "cause": "The genuine native F8 load rewound the clock and the normal research bridge synchronization count advanced, but the QA observer waited on a channel that did not carry the expected research packet. This was a missed witness, not evidence that native loading failed.",
+      "correction": "Use the QA filesystem log reader for the actual research output, preserve save-roundtrip/save-roundtrip-observer-miss.json as supporting diagnostics, and rerun the complete save/load checks on the unchanged candidate. A passing save report remains mandatory.",
+      "classification": "QA observation channel, not a native load failure"
+    },
+    {
+      "name": "Native save loading exceeded the QA transport timeout",
+      "cause": "A second genuine F8 check reached the actual native Loading screen but exceeded the QA connection's ordinary 20-second evaluation timeout. Cleanup later paused the battle; that cleanup state does not prove F8 restored Pause.",
+      "correction": "Allow a scoped 90-second readiness budget around the genuine F8 transition while leaving ordinary 20-second operations unchanged. Preserve save-roundtrip-native-loading-timeout.json and integrated-save-loading-timeout.json as supporting diagnostics; require a fully passing round-trip on the same unchanged APK.",
+      "classification": "QA loading/readiness budget, not an established product failure"
+    }
+  ],
+  "productRegressionCorrections": [
+    {
+      "name": "Background state coalescing lost the first selected truck",
+      "classification": "confirmed product bug, separate from fixture failures",
+      "evidence": [
+        "preflight-c930/native-build-navigation.json",
+        "preflight-c930/integrated-journey.json"
+      ],
+      "cause": "An internal selection-state request reused an older background request, allowing a pre-click empty selection reply to be consumed after the first truck had actually been selected.",
+      "correction": "Internal selection-state requests bypass background state coalescing and request a fresh native reply after each real mouse barrier. The causal regression includes a negative control that fails without the fresh-state option. Final emulator journeys must pass separately on the rebuilt APK."
+    }
+  ],
+  "evidencePolicy": "Failed or interrupted setup and product-regression logs remain supporting evidence with their original APK identities. Only separately passing, correctly identified final-APK reports establish delivery checks."
+}

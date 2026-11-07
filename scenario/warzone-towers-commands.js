@@ -95,6 +95,12 @@ function wtcmd_constructionState()
         const item=wtcmd_buildings[j.itemId];
         const target=structures.filter(function(s){return s.id===j.structureId;})[0];
         const live=target&&rows.filter(function(r){return r.id===target.id;})[0];
+        // Two reserved factory levels share one native parent. Its current
+        // construction row belongs only to the active level, not the next one.
+        if(j.parentId&&target&&Number(target.modules||0)<j.targetModules&&wtcmd_nativeSites.some(function(other){
+            return other!==j&&other.parentId===j.parentId&&other.targetModules<j.targetModules
+                && !['done','cancelled','interrupted'].includes(other.status)&&!wtcmd_done(other);
+        })){j.idleAt=null;j.status='queued';j.progress=0;j.remaining=null;j.workersActive=0;return;}
         if(live){j.idleAt=null;j.status=live.status;j.observed=true;j.structureId=target.id;j.progress=live.progress;j.remaining=live.remaining;j.workersActive=live.workers;return;}
         if(target&&target.status===BUILT&&(!j.parentId||target.modules>=j.targetModules)){j.status="done";j.completed=gameTime;return;}
         const assigned=trucks.filter(function(d){return j.workers.indexOf(d.id)>=0;});
@@ -216,6 +222,59 @@ function wtcmd_capacityWait(design)
     }
     return null;
 }
+
+function wtcmd_moduleSpec(structure)
+{
+    if (!structure) return null;
+    if (structure.stattype === RESEARCH_LAB) return { itemId: "A0ResearchFacility", moduleId: "A0ResearchModule1", maximum: 1 };
+    if (structure.stattype === POWER_GEN) return { itemId: "A0PowerGenerator", moduleId: "A0PowMod1", maximum: 1 };
+    if (structure.stattype === FACTORY) return { itemId: "A0LightFactory", moduleId: "A0FacMod1", maximum: 2 };
+    if (structure.stattype === VTOL_FACTORY) return { itemId: "A0VTolFactory1", moduleId: "A0FacMod1", maximum: 2 };
+    return null;
+}
+
+function wtcmd_moduleTarget(structure)
+{
+    const spec = wtcmd_moduleSpec(structure);
+    if (!spec || structure.player !== selectedPlayer) return null;
+    const item = wtcmd_buildings[structure.name] || wtcmd_catalog.buildings.filter(function (b) {
+        return b.category !== "MODULES" && b.name === structure.name;
+    })[0] || wtcmd_buildings[spec.itemId];
+    const modules = Number(structure.modules || 0), pending = {};
+    const nativeOnly = wtcmd_nativeSites.filter(function (site) {
+        return !wtcmd_jobs.some(function (job) { return job.id === site.id; });
+    });
+    wtcmd_openJobs().concat(nativeOnly).forEach(function (job) {
+        if (job.parentId === structure.id && !["done", "cancelled", "interrupted"].includes(job.status)
+            && !wtcmd_done(job)) pending[job.id] = job;
+    });
+    const jobs = Object.keys(pending).map(function (id) { return pending[id]; });
+    // Native capacity includes the module being built. Reserve only levels not
+    // yet reflected by that capacity, rather than counting the active job twice.
+    const occupied = jobs.reduce(function (n, job) { return Math.max(n, Number(job.targetModules || 0)); }, modules);
+    const upgrading = structure.status !== BUILT && modules > 0;
+    let status = jobs.length ? structure.status === BUILT ? "queued" : "upgrading" : upgrading ? "upgrading" : "eligible";
+    let statusReason = "";
+    if (structure.status !== BUILT && !upgrading && !jobs.length) { status = "unfinished"; statusReason = "module-parent"; }
+    else if (occupied >= spec.maximum) {
+        if (jobs.length || upgrading) statusReason = "module-pending";
+        else { status = "full"; statusReason = "module-limit"; }
+    }
+    else if (!wtcmd_native[spec.moduleId] || !isStructureAvailable(spec.moduleId, selectedPlayer)) {
+        status = "unavailable"; statusReason = "unavailable";
+    }
+    return { id: structure.id, itemId: item.id, name: structure.name || item.name, kind: item.kind,
+        moduleId: spec.moduleId, x: structure.x, y: structure.y, z: Number(structure.z || 0),
+        width: item.width, breadth: item.breadth, modules: modules, maximum: spec.maximum,
+        reserved: Math.max(0, occupied - modules), nativeStatus: structure.status,
+        status: status, eligible: !statusReason, statusReason: statusReason };
+}
+
+function wtcmd_moduleTargets()
+{
+    return enumStruct(selectedPlayer).map(wtcmd_moduleTarget).filter(Boolean).sort(function (a, b) { return a.id - b.id; });
+}
+
 function wtcmd_nativeBuildOptions()
 {
     const structures=enumStruct(selectedPlayer),available=Object.keys(wtcmd_native).filter(function(id){return wtcmd_native[id].group==="Building"&&isStructureAvailable(id,selectedPlayer);}).sort();
@@ -226,7 +285,7 @@ function wtcmd_nativeBuildOptions()
         const item=wtcmd_buildings[id];if(!item)return wtcmd_native[id].value.Type==="Demolish";
         if(/CORNER|WALLCORNER/.test(item.kind))return false;
         if(item.kind==='RESEARCH MODULE')return count(RESEARCH_LAB)>0&&modules(RESEARCH_LAB)<getStructureLimit('A0ResearchFacility',selectedPlayer);
-        if(item.kind==='FACTORY MODULE')return count(FACTORY)>0&&modules(FACTORY)+modules(VTOL_FACTORY)<2*(limit(FACTORY,'A0LightFactory')+limit(VTOL_FACTORY,'A0VTolFactory1'));
+        if(item.kind==='FACTORY MODULE')return count(FACTORY)+count(VTOL_FACTORY)>0&&modules(FACTORY)+modules(VTOL_FACTORY)<2*(limit(FACTORY,'A0LightFactory')+limit(VTOL_FACTORY,'A0VTolFactory1'));
         if(item.kind==='POWER MODULE')return count(POWER_GEN)>0&&modules(POWER_GEN)<getStructureLimit('A0PowerGenerator',selectedPlayer);
         return true;
     });
@@ -268,7 +327,7 @@ function wtcmd_snapshot()
         hasHQ: enumStruct(selectedPlayer, HQ).some(function (s) { return s.status === BUILT; }),
         selectedUnits: wtcmd_selectedUnits(),
         construction: construction.active, constructionSites: construction.sites,
-        nativeBuildOptions: wtcmd_nativeBuildOptions(), buildings: buildings, parts: parts, trucks: wtcmd_builders().map(function (d) {
+        nativeBuildOptions: wtcmd_nativeBuildOptions(), moduleTargets: wtcmd_moduleTargets(), buildings: buildings, parts: parts, trucks: wtcmd_builders().map(function (d) {
             return { id: d.id, x: d.x, y: d.y, z: d.z, selected: Boolean(d.selected), order: d.order, action:d.action,rate:wtcmd_constructorRate(d),
                 building: d.order===DORDER_BUILD||d.order===DORDER_HELPBUILD||(typeof DORDER_LINEBUILD!=="undefined"&&d.order===DORDER_LINEBUILD)||(typeof DORDER_BUILDMODULE!=="undefined"&&d.order===DORDER_BUILDMODULE),
                 queued: (wtcmd_workers[String(d.id)] || []).length };
@@ -326,9 +385,30 @@ function wtcmd_chooseWorkers(command, x, y)
 function wtcmd_planBuild(command)
 {
     const item = wtcmd_buildings[String(command.itemId || "")];
-    const x = Number(command.x), y = Number(command.y);
-    if (!item || !wtcmd_native[item.id] || !Number.isInteger(x) || !Number.isInteger(y)
-        || x < 0 || y < 0 || x >= mapWidth || y >= mapHeight) return { error: "invalid" };
+    let x = Number(command.x), y = Number(command.y), parent = null, target = null;
+    if (!item || !wtcmd_native[item.id]) return { error: "invalid" };
+    if (item.category === "MODULES") {
+        if (Object.prototype.hasOwnProperty.call(command, "parentId")) {
+            const id = Number(command.parentId);
+            if (!Number.isInteger(id) || id <= 0) return { error: "module-parent" };
+            parent = getObject(STRUCTURE, selectedPlayer, id);
+            const spec = wtcmd_moduleSpec(parent);
+            if (!parent || parent.player !== selectedPlayer || !spec || spec.moduleId !== item.id) return { error: "module-parent" };
+        } else {
+            parent = enumStruct(selectedPlayer).filter(function (s) {
+                const spec = wtcmd_moduleSpec(s);
+                return s.player === selectedPlayer && spec && spec.moduleId === item.id
+                    && Math.abs(s.x - x) <= 1 && Math.abs(s.y - y) <= 1;
+            }).sort(function (a, b) {
+                return Math.abs(a.x - x) + Math.abs(a.y - y) - Math.abs(b.x - x) - Math.abs(b.y - y) || a.id - b.id;
+            })[0];
+        }
+        if (!parent) return { error: "module-parent" };
+        target = wtcmd_moduleTarget(parent);
+        if (!target.eligible) return { error: target.statusReason };
+        x = parent.x; y = parent.y;
+    }
+    if (!Number.isInteger(x) || !Number.isInteger(y) || x < 0 || y < 0 || x >= mapWidth || y >= mapHeight) return { error: "invalid" };
     if (!isStructureAvailable(item.id, selectedPlayer)) return { error: "unavailable" };
     if (wtcmd_openJobs().length >= 256) return { error: "queue-full" };
     const choice = wtcmd_chooseWorkers(command, x, y);
@@ -337,17 +417,8 @@ function wtcmd_planBuild(command)
         workers: choice.units.map(function (d) { return d.id; }), automatic: choice.automatic,
         status: "queued", created: gameTime, attempts: {}, issued: {}, parentId: 0, targetModules: 0, reason: "" };
     if (item.category === "MODULES") {
-        const parentTypes = { FACTORY_MODULE: FACTORY, RESEARCH_MODULE: RESEARCH_LAB, POWER_MODULE: POWER_GEN };
-        const parentType = parentTypes[item.kind.replace(/[ -]/g, "_")];
-        const parent = enumStruct(selectedPlayer).filter(function (s) {
-            return s.status === BUILT && s.stattype === parentType && Math.abs(s.x - x) <= 1 && Math.abs(s.y - y) <= 1;
-        }).sort(function (a, b) { return Math.abs(a.x - x) + Math.abs(a.y - y) - Math.abs(b.x - x) - Math.abs(b.y - y); })[0];
-        if (!parent) return { error: "module-parent" };
-        const reserved = wtcmd_openJobs().filter(function (j) { return j.parentId === parent.id; }).length;
-        const maximum = parent.stattype === FACTORY ? 2 : 1;
-        if ((parent.modules || 0) + reserved >= maximum) return { error: "module-limit" };
         job.parentId = parent.id; job.x = parent.x; job.y = parent.y;
-        job.targetModules = (parent.modules || 0) + reserved + 1;
+        job.targetModules = target.modules + target.reserved + 1;
     } else {
         if (wtcmd_openJobs().some(function (pending) { return wtcmd_overlap(job, pending); })) return { error: "already-queued" };
         const existing = wtcmd_structAt(job);
@@ -462,6 +533,10 @@ function wtcmd_tickBuildsImpl()
         if (job.issued[key] && gameTime - job.issued[key] < 1200) return;
         if ((job.attempts[key] || 0) >= 3) { job.status = "blocked"; job.reason = "build-blocked"; return; }
         const existing = wtcmd_structAt(job);
+        // Module levels serialize per parent even when different worker groups
+        // queue them. A group may still join the level already being built.
+        if (job.parentId && existing && job.targetModules > Number(existing.modules || 0)
+            && (existing.status !== BUILT || Number(existing.modules || 0) < job.targetModules - 1)) return;
         let accepted;
         if (existing && !job.parentId) accepted = orderDroidObj(droid, DORDER_HELPBUILD, existing);
         else accepted = orderDroidBuild(droid, DORDER_BUILD, job.itemId, job.x, job.y);

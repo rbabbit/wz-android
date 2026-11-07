@@ -1,0 +1,1226 @@
+{
+  "passed": false,
+  "seeded": false,
+  "cases": [
+    {
+      "name": "wide-controls",
+      "report": "qa/test-02/building/wide-controls/audit-building-wide.json",
+      "passed": true
+    }
+  ],
+  "started": "2026-11-07T07:32:45.925Z",
+  "identity": {
+    "packageId": "com.rbabbit.warzonetowers.lab",
+    "device": "emulator-5556",
+    "candidateAPK_SHA256": "ce466316a51eb3983136c495d4cfefcb41b940faa477e1830f1a528da8416713",
+    "installedPath": "/data/app/~~uD43H6CfDZtJ2aL3iEfqFg==/com.rbabbit.warzonetowers.lab-aW0sQ7JOead3q5qV9h21MQ==/base.apk"
+  },
+  "restores": [
+    {
+      "fixture": "qa/v6.1-compact/final/checkpoints/td2-normal-early.json",
+      "source": "complete native QuickSave from ordinary gameplay",
+      "seeded": false,
+      "fileCount": 24,
+      "completeSaveSHA256": "5d7f10ece8452ee278eed71431a149d91b5999fdb13020f8bf6755fe71c2d7c3",
+      "targetTime": 26302,
+      "observedTime": 27802,
+      "trucks": [
+        {
+          "id": 160001,
+          "x": 59,
+          "y": 8
+        },
+        {
+          "id": 160003,
+          "x": 7,
+          "y": 37
+        },
+        {
+          "id": 160005,
+          "x": 7,
+          "y": 38
+        },
+        {
+          "id": 160007,
+          "x": 59,
+          "y": 7
+        },
+        {
+          "id": 160009,
+          "x": 59,
+          "y": 9
+        },
+        {
+          "id": 160011,
+          "x": 7,
+          "y": 36
+        }
+      ],
+      "researchQueues": [
+        {
+          "labId": 160169,
+          "topicIds": []
+        },
+        {
+          "labId": 160171,
+          "topicIds": []
+        },
+        {
+          "labId": 160173,
+          "topicIds": []
+        },
+        {
+          "labId": 160175,
+          "topicIds": []
+        }
+      ],
+      "finishedUnitRecords": [
+        [
+          160191,
+          160157,
+          19802,
+          "Design 2",
+          "Body1REC",
+          "wheeled01"
+        ],
+        [
+          160193,
+          160167,
+          23202,
+          "Design 2",
+          "Body1REC",
+          "wheeled01"
+        ]
+      ]
+    }
+  ],
+  "failure": "Error: numbered-sites failed with exit 1\n    at child (C:\\timerApp\\wz-towers-lab\\tools\\lab-building-journey.cjs:17:20)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async C:\\timerApp\\wz-towers-lab\\tools\\lab-building-journey.cjs:29:3",
+  "failureState": {
+    "commands": {
+      "version": 61,
+      "selectingTrucks": false,
+      "page": "",
+      "buildOpen": false,
+      "nativeHudHidden": false,
+      "pendingItem": "",
+      "siteChecks": 0,
+      "pending": 1,
+      "writes": 275,
+      "acks": 227,
+      "timeouts": 4,
+      "placements": 6,
+      "rejects": 0,
+      "opens": 6,
+      "closes": 3,
+      "placement": "",
+      "session": "build-1794036879222-197",
+      "nativeMenu": "",
+      "nativeItem": "",
+      "nativeBuildGroup": [
+        160003,
+        160005,
+        160011
+      ],
+      "buildParticipants": [
+        160005,
+        160003,
+        160011
+      ],
+      "nativeToolReady": false,
+      "nativePendingSites": 0,
+      "exitingBuild": false,
+      "nativeBuildPlaced": true,
+      "nativeBuildSawWork": false,
+      "buildingOpening": false,
+      "saved": [
+        {
+          "id": "design-1794008136667-113",
+          "name": "Design 2",
+          "body": "Body1REC",
+          "propulsion": "wheeled01",
+          "turrets": [
+            "MG1Mk1"
+          ],
+          "cost": 55,
+          "points": 275,
+          "droidType": 0,
+          "factoryTemplate": true
+        },
+        {
+          "id": "design-1794008147588-129",
+          "name": "Lab Scout 54626",
+          "body": "Body1REC",
+          "propulsion": "wheeled01",
+          "turrets": [
+            "MG1Mk1"
+          ],
+          "cost": 55,
+          "points": 275,
+          "droidType": 0
+        },
+        {
+          "id": "design-1794036575885-223",
+          "name": "Truck Viper Wheels",
+          "body": "Body1REC",
+          "propulsion": "wheeled01",
+          "turrets": [
+            "Spade1Mk1"
+          ],
+          "cost": 62,
+          "points": 310,
+          "droidType": 3,
+          "factoryTemplate": true
+        },
+        {
+          "id": "design-1794036589502-235",
+          "name": "Scout 97609",
+          "body": "Body1REC",
+          "propulsion": "wheeled01",
+          "turrets": [
+            "MG1Mk1"
+          ],
+          "cost": 55,
+          "points": 275,
+          "droidType": 0
+        }
+      ],
+      "history": [
+        {
+          "nonce": "cmd-1794036814060-79",
+          "action": "queue-build",
+          "ok": true,
+          "reason": "queued",
+          "result": {
+            "id": "cmd-1794036814060-79",
+            "itemId": "PillBox1",
+            "x": 11,
+            "y": 40,
+            "workers": [
+              160005,
+              160003,
+              160011
+            ],
+            "automatic": false,
+            "status": "queued",
+            "created": 46302,
+            "attempts": {},
+            "issued": {},
+            "parentId": 0,
+            "targetModules": 0,
+            "reason": ""
+          },
+          "gameTime": 46302
+        },
+        {
+          "nonce": "cmd-1794036819535-88",
+          "action": "queue-build",
+          "ok": true,
+          "reason": "queued",
+          "result": {
+            "id": "cmd-1794036819535-88",
+            "itemId": "GuardTower1",
+            "x": 12,
+            "y": 40,
+            "workers": [
+              160011,
+              160003,
+              160005
+            ],
+            "automatic": false,
+            "status": "queued",
+            "created": 51602,
+            "attempts": {},
+            "issued": {},
+            "parentId": 0,
+            "targetModules": 0,
+            "reason": ""
+          },
+          "gameTime": 51602
+        },
+        {
+          "nonce": "cmd-1794036821625-93",
+          "action": "cancel-job",
+          "ok": true,
+          "reason": "",
+          "result": {
+            "id": "cmd-1794036814060-79",
+            "itemId": "PillBox1",
+            "x": 11,
+            "y": 40,
+            "workers": [
+              160005,
+              160003,
+              160011
+            ],
+            "automatic": false,
+            "status": "cancelled",
+            "created": 46302,
+            "attempts": {
+              "160003": 1,
+              "160005": 1,
+              "160011": 1
+            },
+            "issued": {
+              "160003": 46302,
+              "160005": 46302,
+              "160011": 46302
+            },
+            "parentId": 0,
+            "targetModules": 0,
+            "reason": ""
+          },
+          "gameTime": 53802
+        },
+        {
+          "nonce": "cmd-1794036821625-94",
+          "action": "cancel-job",
+          "ok": true,
+          "reason": "",
+          "result": {
+            "id": "cmd-1794036819535-88",
+            "itemId": "GuardTower1",
+            "x": 12,
+            "y": 40,
+            "workers": [
+              160011,
+              160003,
+              160005
+            ],
+            "automatic": false,
+            "status": "cancelled",
+            "created": 51602,
+            "attempts": {},
+            "issued": {},
+            "parentId": 0,
+            "targetModules": 0,
+            "reason": ""
+          },
+          "gameTime": 53902
+        },
+        {
+          "nonce": "cmd-1794036833628-119",
+          "action": "queue-build",
+          "ok": true,
+          "reason": "queued",
+          "result": {
+            "id": "cmd-1794036833628-119",
+            "itemId": "GuardTower1",
+            "x": 12,
+            "y": 42,
+            "workers": [
+              160011,
+              160003,
+              160005
+            ],
+            "automatic": false,
+            "status": "queued",
+            "created": 65302,
+            "attempts": {},
+            "issued": {},
+            "parentId": 0,
+            "targetModules": 0,
+            "reason": ""
+          },
+          "gameTime": 65302
+        },
+        {
+          "nonce": "cmd-1794036861378-168",
+          "action": "queue-build",
+          "ok": true,
+          "reason": "queued",
+          "result": {
+            "id": "cmd-1794036861378-168",
+            "itemId": "GuardTower1",
+            "x": 12,
+            "y": 44,
+            "workers": [
+              160005,
+              160011,
+              160003
+            ],
+            "automatic": false,
+            "status": "queued",
+            "created": 91602,
+            "attempts": {},
+            "issued": {},
+            "parentId": 0,
+            "targetModules": 0,
+            "reason": ""
+          },
+          "gameTime": 91602
+        },
+        {
+          "nonce": "cmd-1794036863347-175",
+          "action": "queue-build",
+          "ok": true,
+          "reason": "queued",
+          "result": {
+            "id": "cmd-1794036863347-175",
+            "itemId": "GuardTower1",
+            "x": 13,
+            "y": 44,
+            "workers": [
+              160003,
+              160011,
+              160005
+            ],
+            "automatic": false,
+            "status": "queued",
+            "created": 93502,
+            "attempts": {},
+            "issued": {},
+            "parentId": 0,
+            "targetModules": 0,
+            "reason": ""
+          },
+          "gameTime": 93502
+        },
+        {
+          "nonce": "cmd-1794036880788-202",
+          "action": "queue-build",
+          "ok": true,
+          "reason": "queued",
+          "result": {
+            "id": "cmd-1794036880788-202",
+            "itemId": "GuardTower1",
+            "x": 13,
+            "y": 44,
+            "workers": [
+              160005,
+              160003,
+              160011
+            ],
+            "automatic": false,
+            "status": "queued",
+            "created": 109002,
+            "attempts": {},
+            "issued": {},
+            "parentId": 0,
+            "targetModules": 0,
+            "reason": ""
+          },
+          "gameTime": 109002
+        }
+      ],
+      "snapshot": {
+        "version": 1,
+        "gameTime": 23202,
+        "player": 0,
+        "power": 2422,
+        "mapWidth": 64,
+        "mapHeight": 64,
+        "alwaysQueue": true,
+        "researchQueues": [
+          {
+            "labId": 160169,
+            "topicIds": []
+          },
+          {
+            "labId": 160171,
+            "topicIds": []
+          },
+          {
+            "labId": 160173,
+            "topicIds": []
+          },
+          {
+            "labId": 160175,
+            "topicIds": []
+          }
+        ],
+        "hasHQ": true,
+        "selectedUnits": [],
+        "construction": [
+          {
+            "id": 160191,
+            "itemId": "GuardTower6",
+            "name": "Mini-Rocket Tower",
+            "x": 8,
+            "y": 40,
+            "progress": 0.6888888888888889,
+            "approximate": true,
+            "workers": 3,
+            "rate": 27,
+            "status": "building",
+            "remaining": 5
+          }
+        ],
+        "constructionSites": [
+          {
+            "attempts": {
+              "160003": 1,
+              "160005": 1,
+              "160011": 1
+            },
+            "automatic": false,
+            "created": 10402,
+            "id": "cmd-1794001319387-14",
+            "idleAt": null,
+            "issued": {
+              "160003": 10402,
+              "160005": 10402,
+              "160011": 10402
+            },
+            "itemId": "GuardTower6",
+            "knownStructures": [],
+            "nativeX": 8,
+            "nativeY": 40,
+            "observed": true,
+            "parentId": 0,
+            "progress": 0.6888888888888889,
+            "reason": "",
+            "remaining": 5,
+            "status": "building",
+            "structureId": 160191,
+            "targetModules": 0,
+            "workers": [
+              160005,
+              160003,
+              160011
+            ],
+            "workersActive": 3,
+            "x": 8,
+            "y": 40
+          },
+          {
+            "attempts": {},
+            "automatic": false,
+            "created": 12002,
+            "id": "cmd-1794001321077-19",
+            "idleAt": null,
+            "issued": {},
+            "itemId": "GuardTower6",
+            "knownStructures": [],
+            "parentId": 0,
+            "reason": "",
+            "remaining": null,
+            "status": "queued",
+            "targetModules": 0,
+            "workers": [
+              160005,
+              160003,
+              160011
+            ],
+            "x": 9,
+            "y": 40
+          },
+          {
+            "attempts": {},
+            "automatic": false,
+            "created": 13802,
+            "id": "cmd-1794001322784-25",
+            "idleAt": null,
+            "issued": {},
+            "itemId": "GuardTower6",
+            "knownStructures": [
+              160191
+            ],
+            "parentId": 0,
+            "reason": "",
+            "remaining": null,
+            "status": "queued",
+            "targetModules": 0,
+            "workers": [
+              160005,
+              160003,
+              160011
+            ],
+            "x": 9,
+            "y": 42
+          },
+          {
+            "attempts": {},
+            "automatic": false,
+            "created": 15202,
+            "id": "cmd-1794001324152-29",
+            "idleAt": null,
+            "issued": {},
+            "itemId": "GuardTower6",
+            "knownStructures": [
+              160191
+            ],
+            "parentId": 0,
+            "reason": "",
+            "remaining": null,
+            "status": "queued",
+            "targetModules": 0,
+            "workers": [
+              160003,
+              160005,
+              160011
+            ],
+            "x": 11,
+            "y": 40
+          },
+          {
+            "attempts": {},
+            "automatic": false,
+            "created": 16602,
+            "id": "cmd-1794001325600-34",
+            "idleAt": null,
+            "issued": {},
+            "itemId": "GuardTower6",
+            "knownStructures": [
+              160191
+            ],
+            "parentId": 0,
+            "reason": "",
+            "remaining": null,
+            "status": "queued",
+            "targetModules": 0,
+            "workers": [
+              160003,
+              160005,
+              160011
+            ],
+            "x": 11,
+            "y": 42
+          },
+          {
+            "attempts": {},
+            "automatic": false,
+            "created": 18002,
+            "id": "cmd-1794001326968-40",
+            "idleAt": null,
+            "issued": {},
+            "itemId": "GuardTower6",
+            "knownStructures": [
+              160191
+            ],
+            "parentId": 0,
+            "reason": "",
+            "remaining": null,
+            "status": "queued",
+            "targetModules": 0,
+            "workers": [
+              160003,
+              160005,
+              160011
+            ],
+            "x": 12,
+            "y": 42
+          },
+          {
+            "attempts": {},
+            "automatic": false,
+            "created": 19202,
+            "id": "cmd-1794001328226-44",
+            "idleAt": null,
+            "issued": {},
+            "itemId": "GuardTower6",
+            "knownStructures": [
+              160191
+            ],
+            "parentId": 0,
+            "reason": "",
+            "remaining": null,
+            "status": "queued",
+            "targetModules": 0,
+            "workers": [
+              160005,
+              160003,
+              160011
+            ],
+            "x": 8,
+            "y": 43
+          },
+          {
+            "attempts": {},
+            "automatic": false,
+            "created": 20602,
+            "id": "cmd-1794001329691-49",
+            "idleAt": null,
+            "issued": {},
+            "itemId": "GuardTower6",
+            "knownStructures": [
+              160191
+            ],
+            "parentId": 0,
+            "reason": "",
+            "remaining": null,
+            "status": "queued",
+            "targetModules": 0,
+            "workers": [
+              160003,
+              160005,
+              160011
+            ],
+            "x": 12,
+            "y": 44
+          }
+        ],
+        "nativeBuildOptions": [
+          "A0ADemolishStructure",
+          "A0ComDroidControl",
+          "A0CyborgFactory",
+          "A0FacMod1",
+          "A0HardcreteMk1Gate",
+          "A0HardcreteMk1Wall",
+          "A0LightFactory",
+          "A0PowMod1",
+          "A0PowerGenerator",
+          "A0ResearchFacility",
+          "A0ResearchModule1",
+          "A0ResourceExtractor",
+          "A0TankTrap",
+          "GuardTower1",
+          "GuardTower6",
+          "PillBox1",
+          "PillBox4",
+          "PillBox5",
+          "Sys-SensoTower01",
+          "Sys-SensoTower02",
+          "WallTower02"
+        ],
+        "buildings": [
+          {
+            "id": "A0ComDroidControl",
+            "power": 100
+          },
+          {
+            "id": "A0CyborgFactory",
+            "power": 100
+          },
+          {
+            "id": "A0FacMod1",
+            "power": 100
+          },
+          {
+            "id": "A0HardcreteMk1CWall",
+            "power": 25
+          },
+          {
+            "id": "A0HardcreteMk1Gate",
+            "power": 50
+          },
+          {
+            "id": "A0HardcreteMk1Wall",
+            "power": 25
+          },
+          {
+            "id": "A0LightFactory",
+            "power": 100
+          },
+          {
+            "id": "A0PowMod1",
+            "power": 0
+          },
+          {
+            "id": "A0PowerGenerator",
+            "power": 50
+          },
+          {
+            "id": "A0ResearchFacility",
+            "power": 100
+          },
+          {
+            "id": "A0ResearchModule1",
+            "power": 100
+          },
+          {
+            "id": "A0ResourceExtractor",
+            "power": 0
+          },
+          {
+            "id": "A0TankTrap",
+            "power": 15
+          },
+          {
+            "id": "GuardTower1",
+            "power": 100
+          },
+          {
+            "id": "GuardTower6",
+            "power": 100
+          },
+          {
+            "id": "PillBox1",
+            "power": 100
+          },
+          {
+            "id": "PillBox4",
+            "power": 100
+          },
+          {
+            "id": "PillBox5",
+            "power": 100
+          },
+          {
+            "id": "Sys-SensoTower01",
+            "power": 50
+          },
+          {
+            "id": "Sys-SensoTower02",
+            "power": 100
+          },
+          {
+            "id": "WallTower02",
+            "power": 100
+          }
+        ],
+        "parts": [
+          "Body1REC",
+          "Cannon1-VTOL",
+          "Cannon1Mk1",
+          "CommandBrain01",
+          "Flame1Mk1",
+          "HalfTrack",
+          "LightRepair1",
+          "MG1-VTOL",
+          "MG1Mk1",
+          "MG2-VTOL",
+          "MG2Mk1",
+          "Mortar1Mk1",
+          "Rocket-Pod",
+          "Rocket-VTOL-Pod",
+          "SensorTurret1Mk1",
+          "Spade1Mk1",
+          "wheeled01"
+        ],
+        "trucks": [
+          {
+            "id": 160001,
+            "x": 59,
+            "y": 8,
+            "z": 2,
+            "selected": false,
+            "order": 0,
+            "action": 0,
+            "rate": 9,
+            "building": false,
+            "queued": 0
+          },
+          {
+            "id": 160003,
+            "x": 9,
+            "y": 39,
+            "z": 2,
+            "selected": false,
+            "order": 4,
+            "action": 2,
+            "rate": 9,
+            "building": true,
+            "queued": 8
+          },
+          {
+            "id": 160005,
+            "x": 8,
+            "y": 39,
+            "z": 2,
+            "selected": false,
+            "order": 4,
+            "action": 2,
+            "rate": 9,
+            "building": true,
+            "queued": 8
+          },
+          {
+            "id": 160007,
+            "x": 59,
+            "y": 7,
+            "z": 2,
+            "selected": false,
+            "order": 0,
+            "action": 0,
+            "rate": 9,
+            "building": false,
+            "queued": 0
+          },
+          {
+            "id": 160009,
+            "x": 59,
+            "y": 9,
+            "z": 2,
+            "selected": false,
+            "order": 0,
+            "action": 0,
+            "rate": 9,
+            "building": false,
+            "queued": 0
+          },
+          {
+            "id": 160011,
+            "x": 7,
+            "y": 39,
+            "z": 2,
+            "selected": false,
+            "order": 4,
+            "action": 2,
+            "rate": 9,
+            "building": true,
+            "queued": 8
+          }
+        ],
+        "jobs": [
+          {
+            "attempts": {
+              "160003": 1,
+              "160005": 1,
+              "160011": 1
+            },
+            "automatic": false,
+            "created": 10402,
+            "id": "cmd-1794001319387-14",
+            "issued": {
+              "160003": 10402,
+              "160005": 10402,
+              "160011": 10402
+            },
+            "itemId": "GuardTower6",
+            "parentId": 0,
+            "reason": "",
+            "status": "working",
+            "targetModules": 0,
+            "workers": [
+              160005,
+              160003,
+              160011
+            ],
+            "x": 8,
+            "y": 40
+          },
+          {
+            "attempts": {},
+            "automatic": false,
+            "created": 12002,
+            "id": "cmd-1794001321077-19",
+            "issued": {},
+            "itemId": "GuardTower6",
+            "parentId": 0,
+            "reason": "",
+            "status": "queued",
+            "targetModules": 0,
+            "workers": [
+              160005,
+              160003,
+              160011
+            ],
+            "x": 9,
+            "y": 40
+          },
+          {
+            "attempts": {},
+            "automatic": false,
+            "created": 13802,
+            "id": "cmd-1794001322784-25",
+            "issued": {},
+            "itemId": "GuardTower6",
+            "parentId": 0,
+            "reason": "",
+            "status": "queued",
+            "targetModules": 0,
+            "workers": [
+              160005,
+              160003,
+              160011
+            ],
+            "x": 9,
+            "y": 42
+          },
+          {
+            "attempts": {},
+            "automatic": false,
+            "created": 15202,
+            "id": "cmd-1794001324152-29",
+            "issued": {},
+            "itemId": "GuardTower6",
+            "parentId": 0,
+            "reason": "",
+            "status": "queued",
+            "targetModules": 0,
+            "workers": [
+              160003,
+              160005,
+              160011
+            ],
+            "x": 11,
+            "y": 40
+          },
+          {
+            "attempts": {},
+            "automatic": false,
+            "created": 16602,
+            "id": "cmd-1794001325600-34",
+            "issued": {},
+            "itemId": "GuardTower6",
+            "parentId": 0,
+            "reason": "",
+            "status": "queued",
+            "targetModules": 0,
+            "workers": [
+              160003,
+              160005,
+              160011
+            ],
+            "x": 11,
+            "y": 42
+          },
+          {
+            "attempts": {},
+            "automatic": false,
+            "created": 18002,
+            "id": "cmd-1794001326968-40",
+            "issued": {},
+            "itemId": "GuardTower6",
+            "parentId": 0,
+            "reason": "",
+            "status": "queued",
+            "targetModules": 0,
+            "workers": [
+              160003,
+              160005,
+              160011
+            ],
+            "x": 12,
+            "y": 42
+          },
+          {
+            "attempts": {},
+            "automatic": false,
+            "created": 19202,
+            "id": "cmd-1794001328226-44",
+            "issued": {},
+            "itemId": "GuardTower6",
+            "parentId": 0,
+            "reason": "",
+            "status": "queued",
+            "targetModules": 0,
+            "workers": [
+              160005,
+              160003,
+              160011
+            ],
+            "x": 8,
+            "y": 43
+          },
+          {
+            "attempts": {},
+            "automatic": false,
+            "created": 20602,
+            "id": "cmd-1794001329691-49",
+            "issued": {},
+            "itemId": "GuardTower6",
+            "parentId": 0,
+            "reason": "",
+            "status": "queued",
+            "targetModules": 0,
+            "workers": [
+              160003,
+              160005,
+              160011
+            ],
+            "x": 12,
+            "y": 44
+          }
+        ],
+        "factories": [
+          {
+            "id": 160157,
+            "number": 1,
+            "x": 59,
+            "y": 4,
+            "type": 1,
+            "kind": "Factory",
+            "templates": [
+              "native:[\"Truck Viper Wheels\",\"Body1REC\",\"wheeled01\",[],\"Spade1Mk1\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]"
+            ],
+            "modules": 1,
+            "ready": true,
+            "idle": true,
+            "active": null,
+            "waitingReason": null,
+            "queue": []
+          },
+          {
+            "id": 160167,
+            "number": 2,
+            "x": 4,
+            "y": 38,
+            "type": 1,
+            "kind": "Factory",
+            "templates": [
+              "native:[\"Truck Viper Wheels\",\"Body1REC\",\"wheeled01\",[],\"Spade1Mk1\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]"
+            ],
+            "modules": 1,
+            "ready": true,
+            "idle": true,
+            "active": null,
+            "waitingReason": null,
+            "queue": []
+          }
+        ],
+        "nativeMenu": "",
+        "templates": [
+          {
+            "fullname": "Truck Viper Wheels",
+            "name": "",
+            "id": "native:[\"Truck Viper Wheels\",\"Body1REC\",\"wheeled01\",[],\"Spade1Mk1\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+            "points": 310,
+            "power": 62,
+            "cost": 62,
+            "droidType": 3,
+            "body": "Body1REC",
+            "propulsion": "wheeled01",
+            "brain": "ZNULLBRAIN",
+            "repair": "ZNULLREPAIR",
+            "ecm": "ZNULLECM",
+            "sensor": "ZNULLSENSOR",
+            "construct": "Spade1Mk1",
+            "weapons": []
+          },
+          {
+            "fullname": "Heavy Gunner Cyborg",
+            "name": "",
+            "id": "native:[\"Heavy Gunner Cyborg\",\"CyborgLightBody\",\"CyborgLegs\",[\"CyborgCannon\"],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+            "points": 382,
+            "power": 87,
+            "cost": 87,
+            "droidType": 5,
+            "body": "CyborgLightBody",
+            "propulsion": "CyborgLegs",
+            "brain": "ZNULLBRAIN",
+            "repair": "ZNULLREPAIR",
+            "ecm": "ZNULLECM",
+            "sensor": "ZNULLSENSOR",
+            "construct": "ZNULLCONSTRUCT",
+            "weapons": [
+              "CyborgCannon"
+            ]
+          },
+          {
+            "fullname": "Machinegunner Cyborg",
+            "name": "",
+            "id": "native:[\"Machinegunner Cyborg\",\"CyborgLightBody\",\"CyborgLegs\",[\"CyborgChaingun\"],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+            "points": 302,
+            "power": 67,
+            "cost": 67,
+            "droidType": 5,
+            "body": "CyborgLightBody",
+            "propulsion": "CyborgLegs",
+            "brain": "ZNULLBRAIN",
+            "repair": "ZNULLREPAIR",
+            "ecm": "ZNULLECM",
+            "sensor": "ZNULLSENSOR",
+            "construct": "ZNULLCONSTRUCT",
+            "weapons": [
+              "CyborgChaingun"
+            ]
+          },
+          {
+            "fullname": "Combat Engineer Cyborg",
+            "name": "",
+            "id": "native:[\"Combat Engineer Cyborg\",\"CyborgLightBody\",\"CyborgLegs\",[],\"CyborgSpade\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+            "points": 207,
+            "power": 37,
+            "cost": 37,
+            "droidType": 10,
+            "body": "CyborgLightBody",
+            "propulsion": "CyborgLegs",
+            "brain": "ZNULLBRAIN",
+            "repair": "ZNULLREPAIR",
+            "ecm": "ZNULLECM",
+            "sensor": "ZNULLSENSOR",
+            "construct": "CyborgSpade",
+            "weapons": []
+          },
+          {
+            "fullname": "Flamer Cyborg",
+            "name": "",
+            "id": "native:[\"Flamer Cyborg\",\"CyborgLightBody\",\"CyborgLegs\",[\"CyborgFlamer01\"],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+            "points": 342,
+            "power": 82,
+            "cost": 82,
+            "droidType": 5,
+            "body": "CyborgLightBody",
+            "propulsion": "CyborgLegs",
+            "brain": "ZNULLBRAIN",
+            "repair": "ZNULLREPAIR",
+            "ecm": "ZNULLECM",
+            "sensor": "ZNULLSENSOR",
+            "construct": "ZNULLCONSTRUCT",
+            "weapons": [
+              "CyborgFlamer01"
+            ]
+          },
+          {
+            "fullname": "Grenadier Cyborg",
+            "name": "",
+            "id": "native:[\"Grenadier Cyborg\",\"CyborgLightBody\",\"CyborgLegs\",[\"Cyb-Wpn-Grenade\"],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+            "points": 462,
+            "power": 107,
+            "cost": 107,
+            "droidType": 5,
+            "body": "CyborgLightBody",
+            "propulsion": "CyborgLegs",
+            "brain": "ZNULLBRAIN",
+            "repair": "ZNULLREPAIR",
+            "ecm": "ZNULLECM",
+            "sensor": "ZNULLSENSOR",
+            "construct": "ZNULLCONSTRUCT",
+            "weapons": [
+              "Cyb-Wpn-Grenade"
+            ]
+          },
+          {
+            "fullname": "Mechanic Cyborg",
+            "name": "",
+            "id": "native:[\"Mechanic Cyborg\",\"CyborgLightBody\",\"CyborgLegs\",[],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"CyborgRepair\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+            "points": 242,
+            "power": 62,
+            "cost": 62,
+            "droidType": 11,
+            "body": "CyborgLightBody",
+            "propulsion": "CyborgLegs",
+            "brain": "ZNULLBRAIN",
+            "repair": "CyborgRepair",
+            "ecm": "ZNULLECM",
+            "sensor": "ZNULLSENSOR",
+            "construct": "ZNULLCONSTRUCT",
+            "weapons": []
+          }
+        ],
+        "finishedUnits": [],
+        "finishedBuilds": []
+      },
+      "terrain": {
+        "ready": true,
+        "active": true,
+        "observations": 823,
+        "observedAt": 294907.74500000477,
+        "reads": 2,
+        "picks": 82,
+        "lastPickMs": 0.7000000029802322,
+        "maxPickMs": 36.35999999940395,
+        "error": ""
+      }
+    },
+    "waves": {
+      "active": true,
+      "version": 7,
+      "polls": 445,
+      "errors": 7,
+      "commandWrites": 0,
+      "pendingCommand": "",
+      "snapshot": {
+        "version": 3,
+        "mode": "tower-defense",
+        "gameTime": 23002,
+        "lastCommand": "",
+        "phase": "countdown",
+        "wave": 0,
+        "totalRounds": 30,
+        "nextWave": 1,
+        "nextWaveIn": 157,
+        "canSkip": true,
+        "enemyDroids": 0,
+        "queuedEnemies": 0,
+        "enemyPlayer": 1,
+        "entrances": 6,
+        "power": 0,
+        "rewardCount": 0,
+        "rewardPower": 0
+      }
+    }
+  },
+  "finished": "2026-11-07T07:35:29.812Z"
+}

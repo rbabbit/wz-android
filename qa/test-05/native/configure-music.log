@@ -1,0 +1,553 @@
+-- Running vcpkg install
+Detecting compiler hash for triplet x64-linux...
+Compiler found: /usr/bin/c++
+Detecting compiler hash for triplet wasm32-emscripten...
+Compiler found: /home/punkech/wz-blueprint-20261107/emsdk/upstream/emscripten/em++
+The following packages are already installed:
+    basisu:x64-linux@1.50.0#1
+  * bzip2[core,tool]:wasm32-emscripten@1.0.8#6
+    libjpeg-turbo:wasm32-emscripten@3.1.4.1
+    libogg:wasm32-emscripten@1.3.6#1
+    libsodium:wasm32-emscripten@1.0.21#1
+    libspng:wasm32-emscripten@0.7.4
+    libtheora:wasm32-emscripten@1.2.0
+    libvorbis:wasm32-emscripten@1.3.7#4
+    libzip[core,bzip2]:wasm32-emscripten@1.11.4
+    opus:wasm32-emscripten@1.5.2#1
+    physfs:wasm32-emscripten@3.2.0#1
+    sdl3[core,emscripten-pthreads]:wasm32-emscripten@3.4.2#1
+    sqlite3[core,json1]:wasm32-emscripten@3.49.2
+  * vcpkg-cmake:x64-linux@2024-04-23
+  * vcpkg-cmake-config:x64-linux@2024-05-23
+  * vcpkg-cmake-get-vars:x64-linux@2025-05-29
+  * vcpkg-make:x64-linux@2026-01-01
+    zlib:wasm32-emscripten@1.3.1
+libjpeg-turbo is compatible with built-in implementation-agnostic CMake targets:
+
+    find_package(JPEG REQUIRED)
+    target_link_libraries(main PRIVATE JPEG::JPEG)
+
+libjpeg-turbo provides CMake targets for the TurboJPEG C API:
+
+    find_package(libjpeg-turbo CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE $<IF:$<TARGET_EXISTS:libjpeg-turbo::turbojpeg>,libjpeg-turbo::turbojpeg,libjpeg-turbo::turbojpeg-static>)
+
+libogg provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(Ogg CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE Ogg::ogg)
+
+libogg provides pkg-config modules:
+
+  # ogg is a library for manipulating ogg bitstreams
+  ogg
+
+libsodium provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(unofficial-sodium CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE unofficial-sodium::sodium)
+
+libsodium provides pkg-config modules:
+
+  # A modern and easy-to-use crypto library
+  libsodium
+
+The package zlib is compatible with built-in CMake targets:
+
+    find_package(ZLIB REQUIRED)
+    target_link_libraries(main PRIVATE ZLIB::ZLIB)
+
+libspng provides CMake targets:
+
+    find_package(SPNG CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE $<IF:$<TARGET_EXISTS:spng::spng>,spng::spng,spng::spng_static>) 
+libtheora provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(unofficial-theora CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE unofficial::theora::theora unofficial::theora::theoradec unofficial::theora::theoraenc)
+
+libtheora provides pkg-config modules:
+
+  # Theora video codec
+  theora
+
+  # Theora video codec (decoder)
+  theoradec
+
+  # Theora video codec (encoder)
+  theoraenc
+
+The package libvorbis provides CMake targets:
+
+    # Vorbis reference encoder and decoder, low-level API
+    find_package(Vorbis CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE Vorbis::vorbis)
+
+    # Audio stream decoding and basic manipulation, high-level API
+    find_package(Vorbis CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE Vorbis::vorbisfile)
+
+    # Convenience API for setting up an encoding environment
+    find_package(Vorbis CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE Vorbis::vorbisenc)
+
+libzip provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(libzip CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE libzip::zip)
+
+libzip provides pkg-config modules:
+
+  # library for handling zip archives
+  libzip
+
+opus provides CMake targets:
+
+  # this is heuristically generated, and may not be correct
+  find_package(Opus CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE Opus::opus)
+
+opus provides pkg-config modules:
+
+  # Opus IETF audio codec ( build)
+  opus
+
+physfs provides CMake targets:
+
+    find_package(PhysFS CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE $<IF:$<TARGET_EXISTS:PhysFS::PhysFS>,PhysFS::PhysFS,PhysFS::PhysFS-static>)
+
+physfs is compatible with built-in CMake targets:
+
+    find_package(PhysFS REQUIRED)
+    target_include_directories(main PRIVATE ${PHYSFS_INCLUDE_DIR})
+    target_link_libraries(main PRIVATE ${PHYSFS_LIBRARY})
+
+sdl3 provides CMake targets:
+
+  find_package(SDL3 CONFIG REQUIRED)
+  target_link_libraries(main PRIVATE SDL3::SDL3)
+
+sqlite3 provides pkgconfig bindings.
+sqlite3 provides CMake targets:
+
+    find_package(unofficial-sqlite3 CONFIG REQUIRED)
+    target_link_libraries(main PRIVATE unofficial::sqlite3::sqlite3)
+
+All requested installations completed successfully in: 129 us
+-- Running vcpkg install - done
+-- CMAKE_REQUIRED_DEFINITIONS=-D_ALL_SOURCE=1;-D_GNU_SOURCE=1;-D_POSIX_PTHREAD_SEMANTICS=1;-D_TANDEM_SOURCE=1;-D_DARWIN_C_SOURCE=1;-D_XOPEN_SOURCE=700
+-- std::thread support... YES (cached)
+-- WZ_BINDIR="bin"
+-- WZ_LOCALEDIR="/share/locale"
+-- Supports COMPILER_FLAG [CXX]: -Wno-assign-enum ... YES
+-- {fmt} version: 12.1.0
+-- Build type: Release
+-- Found Sodium: /home/punkech/wz-blueprint-20261107/build/vcpkg_installed/wasm32-emscripten/include (found suitable version "1.0.21", minimum required is "1.0.14") 
+-- Using vcpkg unofficial-sodium configuration (1.0.21)
+-- Using vcpkg unofficial-sqlite3 configuration (3.49.2)
+-- Using c++ standard c++17
+-- CMake version: 3.28.3
+-- Project version: 3.3.3
+-- CMAKE_CXX_COMPILER '/home/punkech/wz-blueprint-20261107/emsdk/upstream/emscripten/em++' 'Clang' '21.0.0'
+-- CMAKE_CXX_FLAGS                ' -pthread -fwasm-exceptions -fwasm-exceptions -sWASM_LEGACY_EXCEPTIONS -pthread --use-port=freetype --use-port=harfbuzz -Wall -Wextra -Wpedantic -Wswitch-enum -Wshadow -Wno-long-long'
+-- CMAKE_CXX_FLAGS_RELEASE        '-O3 -DNDEBUG -O2'
+-- Found SQLite3: /home/punkech/wz-blueprint-20261107/build/vcpkg_installed/wasm32-emscripten/include (found version "3.49.2") 
+-- Using vcpkg unofficial-sqlite3 configuration (3.49.2)
+-- Link to sqlite3 system library 3.49.2
+-- SQLITECPP_RUN_CPPLINT OFF
+-- SQLITECPP_RUN_CPPCHECK OFF
+-- SQLITECPP_RUN_DOXYGEN OFF
+-- SQLITECPP_BUILD_EXAMPLES OFF
+-- SQLITECPP_BUILD_TESTS OFF
+-- QuickJS Library: Begin
+-- Performing Test QJS_C_COMPILER_SUPPORTS_Wformat=2
+-- Performing Test QJS_C_COMPILER_SUPPORTS_Wformat=2 - Success
+-- QuickJS Library: End
+-- Pre-installed basisu tool not found - attempting to build for host system
+-- Configuring done (0.2s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/punkech/wz-blueprint-20261107/build/3rdparty/basis_universal_host_tool
+[ 12%] Performing build step for 'basisuExecutable'
+-- basisuExecutable build command succeeded.  See also /home/punkech/wz-blueprint-20261107/build/3rdparty/basis_universal_host_tool/basisuExecutable-prefix/src/basisuExecutable-stamp/basisuExecutable-build-*.log
+[ 25%] No install step for 'basisuExecutable'
+[ 37%] Completed 'basisuExecutable'
+[100%] Built target basisuExecutable
+-- Basis-Universal Host Tool Built
+-- Found basisu: /home/punkech/wz-blueprint-20261107/build/3rdparty/basis_universal_host_tool/basis_install/bin/basisu Basis Universal LDR/HDR GPU Texture Compression and Transcoding System v1.50.0
+Copyright (C) 2019-2024 Binomial LLC, All rights reserved
+No SSE, Multithreading: 1, Zstandard support: 1, OpenCL: 0
+-- Supports COMPILER_FLAG [CXX]: -fno-strict-aliasing ... YES
+-- Supports COMPILER_FLAG [CXX]: -Wno-cast-align ... YES
+-- Supports COMPILER_FLAG [CXX]: -Wno-deprecated-declarations ... YES
+-- Supports COMPILER_FLAG [CXX]: -Wno-unused-but-set-variable ... YES
+-- Supports COMPILER_FLAG [CXX]: -Wno-unused-function ... YES
+-- Supports COMPILER_FLAG [CXX]: -Wno-unused-const-variable ... YES
+-- Supports COMPILER_FLAG [CXX]: -Wno-unknown-warning-option ... YES
+-- Supports COMPILER_FLAG [CXX]: -Wno-nontrivial-memcall ... YES
+-- Supports COMPILER_FLAG [C]: -Wno-shadow ... YES
+-- GameNetworkingSockets backend support: DISABLED
+-- Unable to find glslc
+-- Copy unprocessed image file: compression_overrides.txt
+-- Copy unprocessed image file: helirotor.png
+-- Copy unprocessed image file: page-0-scav.png
+-- Copy unprocessed image file: page-1-icevan.png
+-- Copy unprocessed image file: page-10-laboratories.png
+-- Copy unprocessed image file: page-10_tcmask.png
+-- Copy unprocessed image file: page-110-lab-hq_nex.png
+-- Copy unprocessed image file: page-110_tcmask.png
+-- Copy unprocessed image file: page-112_tcmask.png
+-- Copy unprocessed image file: page-113-player-buildings-bases_Collective.png
+-- Copy unprocessed image file: page-114_tcmask.png
+-- Copy unprocessed image file: page-115-faction-bunkers.png
+-- Copy unprocessed image file: page-115_tcmask.png
+-- Copy unprocessed image file: page-116_tcmask.png
+-- Copy unprocessed image file: page-118-laboratories_nex.png
+-- Copy unprocessed image file: page-118_tcmask.png
+-- Copy unprocessed image file: page-119-minor-faction-buildings.png
+-- Copy unprocessed image file: page-11_tcmask.png
+-- Copy unprocessed image file: page-121_tcmask.png
+-- Copy unprocessed image file: page-122_tcmask.png
+-- Copy unprocessed image file: page-123_tcmask.png
+-- Copy unprocessed image file: page-12_tcmask.png
+-- Copy unprocessed image file: page-13_tcmask.png
+-- Copy unprocessed image file: page-14-droid-hubs.png
+-- Copy unprocessed image file: page-14_tcmask.png
+-- Copy unprocessed image file: page-15-droid-hubs.png
+-- Copy unprocessed image file: page-15_tcmask.png
+-- Copy unprocessed image file: page-16-droid-drives.png
+-- Copy unprocessed image file: page-16_tcmask.png
+-- Copy unprocessed image file: page-17-droid-weapons.png
+-- Copy unprocessed image file: page-17_tcmask.png
+-- Copy unprocessed image file: page-18-fx.png
+-- Copy unprocessed image file: page-19-fx.png
+-- Copy unprocessed image file: page-2-crane.png
+-- Copy unprocessed image file: page-20-fx.png
+-- Copy unprocessed image file: page-21-fx.png
+-- Copy unprocessed image file: page-22-fx.png
+-- Copy unprocessed image file: page-23-fx.png
+-- Copy unprocessed image file: page-24-fx.png
+-- Copy unprocessed image file: page-25-sky-arizona.png
+-- Copy unprocessed image file: page-25-sky-urban.png
+-- Copy unprocessed image file: page-26-sky.png
+-- Copy unprocessed image file: page-27-fx.png
+-- Copy unprocessed image file: page-28-naval.png
+-- Copy unprocessed image file: page-3-bababus.png
+-- Copy unprocessed image file: page-32-soldier.png
+-- Copy unprocessed image file: page-32_tcmask.png
+-- Copy unprocessed image file: page-33-cyborgs.png
+-- Copy unprocessed image file: page-33_tcmask.png
+-- Copy unprocessed image file: page-34_tcmask.png
+-- Copy unprocessed image file: page-4-scav.png
+-- Copy unprocessed image file: page-401.png
+-- Copy unprocessed image file: page-402-scav-vtol-fac.png
+-- Copy unprocessed image file: page-403-chopper.png
+-- Copy unprocessed image file: page-50-chopperblades.png
+-- Copy unprocessed image file: page-51-chopperblades.png
+-- Copy unprocessed image file: page-59-more-weapons.png
+-- Copy unprocessed image file: page-6.png
+-- Copy unprocessed image file: page-7-barbarians-arizona.png
+-- Copy unprocessed image file: page-7-barbarians-kevlar.png
+-- Copy unprocessed image file: page-7-barbarians-urban.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-00.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-01.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-02.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-03.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-04.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-05.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-06.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-07.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-08.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-09.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-10.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-11.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-12.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-13.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-14.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-15.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-16.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-17.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-18.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-19.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-20.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-21.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-22.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-23.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-24.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-25.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-26.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-27.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-28.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-29.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-30.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-31.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-32.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-33.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-34.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-35.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-36.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-37.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-38.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-39.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-40.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-41.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-42.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-43.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-44.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-45.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-46.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-47.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-48.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-49.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-50.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-51.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-52.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-53.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-54.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-55.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-56.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-57.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-58.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-59.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-60.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-61.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-62.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-63.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-64.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-65.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-66.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-67.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-68.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-69.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-70.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-71.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-72.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-73.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-74.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-75.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-76.png
+-- Copy unprocessed image file: tertilesc1hw-128/tile-77.png
+-- Copy unprocessed image file: tertilesc1hw.radar
+-- Copy unprocessed image file: tertilesc2hw-128/tile-00.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-01.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-02.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-03.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-04.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-05.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-06.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-07.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-08.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-09.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-10.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-11.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-12.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-13.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-14.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-15.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-16.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-17.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-18.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-19.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-20.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-21.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-22.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-23.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-24.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-25.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-26.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-27.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-28.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-29.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-30.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-31.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-32.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-33.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-34.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-35.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-36.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-37.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-38.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-39.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-40.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-41.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-42.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-43.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-44.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-45.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-46.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-47.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-48.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-49.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-50.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-51.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-52.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-53.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-54.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-55.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-56.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-57.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-58.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-59.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-60.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-61.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-62.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-63.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-64.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-65.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-66.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-67.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-68.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-69.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-70.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-71.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-72.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-73.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-74.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-75.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-76.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-77.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-78.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-79.png
+-- Copy unprocessed image file: tertilesc2hw-128/tile-80.png
+-- Copy unprocessed image file: tertilesc2hw.radar
+-- Copy unprocessed image file: tertilesc3hw-128/tile-00.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-01.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-02.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-03.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-04.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-05.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-06.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-07.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-08.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-09.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-10.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-11.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-12.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-13.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-14.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-15.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-16.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-17.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-18.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-19.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-20.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-21.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-22.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-23.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-24.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-25.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-26.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-27.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-28.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-29.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-30.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-31.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-32.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-33.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-34.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-35.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-36.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-37.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-38.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-39.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-40.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-41.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-42.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-43.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-44.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-45.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-46.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-47.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-48.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-49.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-50.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-51.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-52.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-53.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-54.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-55.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-56.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-57.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-58.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-59.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-60.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-61.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-62.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-63.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-64.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-65.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-66.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-67.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-68.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-69.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-70.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-71.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-72.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-73.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-74.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-75.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-76.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-77.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-78.png
+-- Copy unprocessed image file: tertilesc3hw-128/tile-79.png
+-- Copy unprocessed image file: tertilesc3hw.radar
+-- Copy unprocessed image file: znull_norm.png
+-- Copy unprocessed image file: znull_spec.png
+-- WZ_INCLUDE_TERRAIN_HIGH is OFF. High terrain texture pack will not be part of build.
+-- Found ZLIB: /home/punkech/wz-blueprint-20261107/build/vcpkg_installed/wasm32-emscripten/lib/libz.a (found suitable version "1.3.1", minimum required is "1.1.2")  
+-- Found libzip version: 1.11.4
+-- Found libzip... (link test successful)
+-- - libzip include dir: /home/punkech/wz-blueprint-20261107/build/vcpkg_installed/wasm32-emscripten/include;/home/punkech/wz-blueprint-20261107/build/vcpkg_installed/wasm32-emscripten/include
+-- Found Sodium: /home/punkech/wz-blueprint-20261107/build/vcpkg_installed/wasm32-emscripten/include (found suitable version "1.0.21", minimum required is "1.0.16") 
+-- Using vcpkg unofficial-sodium configuration (1.0.21)
+-- CMAKE_CXX_BYTE_ORDER: LITTLE_ENDIAN
+-- Supports COMPILER_FLAG [CXX]: -Wno-shift-overflow ... YES
+-- Supports COMPILER_FLAG [CXX]: -Wno-logical-not-parentheses ... YES
+-- Supports COMPILER_FLAG [CXX]: -Wno-cast-align ... YES
+-- Supports COMPILER_FLAG [CXX]: -Wno-macro-redefined ... YES
+-- Supports COMPILER_FLAG [CXX]: -Wno-unused-function ... YES
+-- Supports COMPILER_FLAG [CXX]: -Wno-unused-const-variable ... YES
+-- Supports COMPILER_FLAG [CXX]: -Wno-shadow ... YES
+-- Supports COMPILER_FLAG [CXX]: -Wno-conditional-uninitialized ... YES
+-- Supports COMPILER_FLAG [CXX]: -Wno-return-type ... YES
+-- Found ZLIB: /home/punkech/wz-blueprint-20261107/build/vcpkg_installed/wasm32-emscripten/lib/libz.a (found version "1.3.1")  
+-- Could NOT find Fribidi (missing: FRIBIDI_INCLUDE_DIRS FRIBIDI_LIBRARIES) 
+CMake Warning at lib/ivis_opengl/CMakeLists.txt:115 (message):
+  Fribidi not found - WZ will be compiled *without* Fribidi support
+
+
+-- Could NOT find Miniupnpc (missing: MINIUPNPC_INCLUDE_DIR MINIUPNPC_LIBRARY) (Required is at least version "9")
+-- Using in-tree Miniupnpc
+-- Linking to SDL3 library
+-- Found OpenAL using FindModule
+-- Found Opus: /home/punkech/wz-blueprint-20261107/build/vcpkg_installed/wasm32-emscripten/include;/home/punkech/wz-blueprint-20261107/build/vcpkg_installed/wasm32-emscripten/include/opus
+-- OpenAL INTERFACE_INCLUDE_DIRECTORIES = "/home/punkech/wz-blueprint-20261107/emsdk/upstream/emscripten/cache/sysroot/include/AL"
+-- Building Opusfile from source
+-- Supports COMPILER_FLAG [C]: -Wno-conditional-uninitialized ... YES
+-- Skipping documentation generation
+-- Mapping language name sr_CS -> sr_RS
+-- Mapping language name sr_CS -> sr_RS
+-- Found SQLite3: /home/punkech/wz-blueprint-20261107/build/vcpkg_installed/wasm32-emscripten/include (found suitable version "3.49.2", minimum required is "3.14") 
+-- Using vcpkg unofficial-sqlite3 configuration (3.49.2)
+-- Atomics support built-in
+-- COPYING DATA: base
+-- COPYING DATA: mp
+-- COPYING FONT FILE: DejaVuSans-Bold.ttf (from: /home/punkech/wz-blueprint-20261107/source/data/fonts/DejaVu/DejaVuSans-Bold.ttf)
+-- COPYING FONT FILE: DejaVuSans.ttf (from: /home/punkech/wz-blueprint-20261107/source/data/fonts/DejaVu/DejaVuSans.ttf)
+-- COPYING FONT FILE: DejaVu.LICENSE.txt (from: /home/punkech/wz-blueprint-20261107/build/data/fonts_staging/DejaVu/DejaVu.LICENSE.txt)
+-- COPYING MOD FILE: mods/campaign/wz2100_camclassic.wz
+-- COPYING MOD FILE: mods/campaign/wz2100_campumpkin.wz
+-- Command "/bin/npm list -g workbox-cli" failed with output:
+
+-- Could NOT find WorkboxCLI (missing: WorkboxCLI_COMMAND) 
+CMake Warning at src/CMakeLists.txt:402 (message):
+  workbox-cli is not available - will use a no-op service worker
+
+
+-- Configuring done (86.2s)
+-- Generating done (0.1s)
+-- Build files have been written to: /home/punkech/wz-blueprint-20261107/build

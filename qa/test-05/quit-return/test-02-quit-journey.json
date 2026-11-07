@@ -1,0 +1,1445 @@
+{
+  "passed": true,
+  "started": "2026-11-07T18:26:22.557Z",
+  "seeded": false,
+  "identity": {
+    "packageId": "com.rbabbit.warzonetowers.lab",
+    "device": "emulator-5556",
+    "candidateAPK_SHA256": "9be9cde8d4d62a4ea205a34e6c53fe2fab7ff8eb0d57f52b9775207853e2866b",
+    "installedPath": "/data/app/~~1U40WkG9_YvGw_Lp42Au5g==/com.rbabbit.warzonetowers.lab-d78Pvbh4hbjad1XoyH9DPQ==/base.apk"
+  },
+  "fixture": "existing ordinary battle with native Pause menu visibly open",
+  "screensRequireVisualInspection": true,
+  "officialGeometry": {
+    "source": "local unchanged Warzone2100 4.7.0 src/ingameop.cpp + ingameop.h + hci.h",
+    "pauseLines": 6,
+    "resumeCentreOffset": -33.5,
+    "quitCentreOffset": 51.5,
+    "quitTouchOffset": 54,
+    "confirmationLines": 3,
+    "confirmCentreOffset": 9.5,
+    "confirmTouchOffset": 10,
+    "explanation": "17px widget rows, 10px margin, 15px buttons; D_H uses 460px base while form anchor is 240px, adding 10px to the centre. Exact-APK screenshot calibration uses CSS offsets because native UI 150% scaling cancels framebuffer DPR; measured fixture is constrained before input."
+  },
+  "before": {
+    "clock": 217502,
+    "session": {
+      "phase": "playing",
+      "result": "",
+      "exitReason": "",
+      "session": "0b5cf2d1-5a9e-4487-af9a-5cbb1a6e4675"
+    },
+    "frameInert": false,
+    "frameHidden": false,
+    "frameVisibility": "visible",
+    "page": "",
+    "buildOpen": false,
+    "placement": "",
+    "nativeMenu": "",
+    "nativeBackVisible": false,
+    "exitingBuild": false,
+    "buildingOpening": false,
+    "selectingTrucks": false,
+    "pendingItem": "",
+    "pendingCommands": 1,
+    "pendingClicks": 0,
+    "researchOpen": false,
+    "researchOpening": false,
+    "researchPendingClose": false,
+    "researchRunner": null,
+    "helpOpen": false,
+    "hudVisible": true,
+    "battleActive": true,
+    "mapWidth": 64,
+    "mapHeight": 64
+  },
+  "map": "td2",
+  "pausedClock": 217502,
+  "beforeGhostSites": [],
+  "pauseScreen": "C:\\timerApp\\wz-towers-lab\\qa\\test-05\\quit-return\\quit-journey-01-native-pause.png",
+  "quitTouch": {
+    "hostWidth": 1077,
+    "hostHeight": 598,
+    "frame": {
+      "x": 0,
+      "y": 56,
+      "width": 1076.666748046875,
+      "height": 542
+    },
+    "canvas": {
+      "x": 0,
+      "y": 0,
+      "width": 1077,
+      "height": 542,
+      "pixelWidth": 1616,
+      "pixelHeight": 813
+    },
+    "childPoint": {
+      "x": 538.5,
+      "y": 325
+    },
+    "hostPoint": {
+      "x": 538.5,
+      "y": 381
+    },
+    "hostHit": "warzone-game-frame",
+    "childHit": "canvas",
+    "frameInert": false,
+    "device": {
+      "width": 1080,
+      "height": 600,
+      "fontScale": "1.0"
+    },
+    "coordinateBasis": "Exact-APK native Pause screenshot; Resume offset -32 CSS px, native UI scale 150%",
+    "devicePoint": {
+      "x": 540,
+      "y": 382
+    },
+    "offsetCssPixels": 54
+  },
+  "confirmationPausedClock": 217502,
+  "confirmation": {
+    "clock": 217502,
+    "session": {
+      "phase": "playing",
+      "result": "",
+      "exitReason": "",
+      "session": "0b5cf2d1-5a9e-4487-af9a-5cbb1a6e4675"
+    },
+    "frameInert": false,
+    "frameHidden": false,
+    "frameVisibility": "visible",
+    "page": "",
+    "buildOpen": false,
+    "placement": "",
+    "nativeMenu": "",
+    "nativeBackVisible": false,
+    "exitingBuild": false,
+    "buildingOpening": false,
+    "selectingTrucks": false,
+    "pendingItem": "",
+    "pendingCommands": 1,
+    "pendingClicks": 0,
+    "researchOpen": false,
+    "researchOpening": false,
+    "researchPendingClose": false,
+    "researchRunner": null,
+    "helpOpen": false,
+    "hudVisible": true,
+    "battleActive": true,
+    "mapWidth": 64,
+    "mapHeight": 64
+  },
+  "confirmationScreen": "C:\\timerApp\\wz-towers-lab\\qa\\test-05\\quit-return\\quit-journey-02-native-confirmation.png",
+  "confirmTouch": {
+    "hostWidth": 1077,
+    "hostHeight": 598,
+    "frame": {
+      "x": 0,
+      "y": 56,
+      "width": 1076.666748046875,
+      "height": 542
+    },
+    "canvas": {
+      "x": 0,
+      "y": 0,
+      "width": 1077,
+      "height": 542,
+      "pixelWidth": 1616,
+      "pixelHeight": 813
+    },
+    "childPoint": {
+      "x": 538.5,
+      "y": 281
+    },
+    "hostPoint": {
+      "x": 538.5,
+      "y": 337
+    },
+    "hostHit": "warzone-game-frame",
+    "childHit": "canvas",
+    "frameInert": false,
+    "device": {
+      "width": 1080,
+      "height": 600,
+      "fontScale": "1.0"
+    },
+    "coordinateBasis": "Exact-APK native Pause screenshot; Resume offset -32 CSS px, native UI scale 150%",
+    "devicePoint": {
+      "x": 540,
+      "y": 338
+    },
+    "offsetCssPixels": 10
+  },
+  "ended": {
+    "session": {
+      "phase": "ended",
+      "result": "exited",
+      "exitReason": "quit",
+      "session": "0b5cf2d1-5a9e-4487-af9a-5cbb1a6e4675"
+    },
+    "frameInert": true,
+    "frameVisibility": "hidden",
+    "hostEnded": "true",
+    "hostPlaying": "false",
+    "headerHidden": true,
+    "dockHidden": true,
+    "page": "",
+    "buildOpen": false,
+    "placement": "",
+    "nativeMenu": "",
+    "snapshotCleared": true,
+    "pending": 0,
+    "battleActive": false,
+    "hudVisible": false,
+    "pendingClicks": 0,
+    "researchOpen": false,
+    "researchOpening": false,
+    "researchRunner": null,
+    "researchPendingClose": false,
+    "ghostSites": [],
+    "ghostPreview": "",
+    "ghostDrawnCache": []
+  },
+  "nativeEndScreen": [
+    {
+      "text": "",
+      "label": "",
+      "bounds": "[0,0][1080,600]"
+    },
+    {
+      "text": "",
+      "label": "",
+      "bounds": "[0,0][1080,600]"
+    },
+    {
+      "text": "",
+      "label": "",
+      "bounds": "[0,0][1080,600]"
+    },
+    {
+      "text": "",
+      "label": "",
+      "bounds": "[0,0][1080,600]"
+    },
+    {
+      "text": "WARZONE TOWERS&#10;&#10;BATTLE ENDED&#10;&#10;Tap to return to the start screen",
+      "label": "",
+      "bounds": "[0,0][1080,600]"
+    }
+  ],
+  "endedScreen": "C:\\timerApp\\wz-towers-lab\\qa\\test-05\\quit-return\\quit-journey-03-neutral-ended.png",
+  "returnedStartScreen": "C:\\timerApp\\wz-towers-lab\\qa\\test-05\\quit-return\\quit-journey-04-returned-start.png",
+  "fixtureRetries": [
+    {
+      "phase": "fresh-battle-startup-readiness",
+      "failure": "Error: CDP timeout Runtime.evaluate after 20000ms\n    at Timeout._onTimeout (C:\\timerApp\\wz-towers-lab\\tools\\native-live.cjs:32:329)\n    at listOnTimeout (node:internal/timers:685:17)\n    at process.processTimers (node:internal/timers:618:7)",
+      "sourceReport": "qa/test-05/iteration-r4-quit-readiness/quit-return/test-02-quit-journey.json",
+      "correction": "Reuse the visibly running fresh battle from this exact real Quit/start sequence; wait on native readiness with a scoped 90s startup transport budget."
+    }
+  ],
+  "newBattle": {
+    "version": 1,
+    "gameTime": 197202,
+    "player": 0,
+    "power": 2691,
+    "mapWidth": 64,
+    "mapHeight": 64,
+    "alwaysQueue": true,
+    "researchQueues": [
+      {
+        "labId": 160175,
+        "topicIds": []
+      },
+      {
+        "labId": 160173,
+        "topicIds": []
+      },
+      {
+        "labId": 160171,
+        "topicIds": []
+      },
+      {
+        "labId": 160169,
+        "topicIds": []
+      }
+    ],
+    "hasHQ": true,
+    "selectedUnits": [],
+    "construction": [],
+    "constructionSites": [],
+    "nativeBuildOptions": [
+      "A0ADemolishStructure",
+      "A0ComDroidControl",
+      "A0CyborgFactory",
+      "A0FacMod1",
+      "A0HardcreteMk1Gate",
+      "A0HardcreteMk1Wall",
+      "A0LightFactory",
+      "A0PowMod1",
+      "A0PowerGenerator",
+      "A0ResearchFacility",
+      "A0ResearchModule1",
+      "A0ResourceExtractor",
+      "A0TankTrap",
+      "GuardTower1",
+      "GuardTower6",
+      "PillBox1",
+      "PillBox4",
+      "PillBox5",
+      "Sys-SensoTower01",
+      "Sys-SensoTower02",
+      "WallTower02"
+    ],
+    "moduleTargets": [
+      {
+        "id": 160157,
+        "itemId": "A0LightFactory",
+        "name": "Factory",
+        "kind": "FACTORY",
+        "moduleId": "A0FacMod1",
+        "x": 59,
+        "y": 4,
+        "z": 2,
+        "width": 3,
+        "breadth": 3,
+        "modules": 1,
+        "maximum": 2,
+        "reserved": 0,
+        "nativeStatus": 1,
+        "status": "eligible",
+        "eligible": true,
+        "statusReason": ""
+      },
+      {
+        "id": 160161,
+        "itemId": "A0PowerGenerator",
+        "name": "Power Generator",
+        "kind": "POWER GENERATOR",
+        "moduleId": "A0PowMod1",
+        "x": 5,
+        "y": 59,
+        "z": 2,
+        "width": 2,
+        "breadth": 2,
+        "modules": 1,
+        "maximum": 1,
+        "reserved": 0,
+        "nativeStatus": 1,
+        "status": "full",
+        "eligible": false,
+        "statusReason": "module-limit"
+      },
+      {
+        "id": 160167,
+        "itemId": "A0LightFactory",
+        "name": "Factory",
+        "kind": "FACTORY",
+        "moduleId": "A0FacMod1",
+        "x": 4,
+        "y": 38,
+        "z": 2,
+        "width": 3,
+        "breadth": 3,
+        "modules": 1,
+        "maximum": 2,
+        "reserved": 0,
+        "nativeStatus": 1,
+        "status": "eligible",
+        "eligible": true,
+        "statusReason": ""
+      },
+      {
+        "id": 160169,
+        "itemId": "A0ResearchFacility",
+        "name": "Research Facility",
+        "kind": "RESEARCH",
+        "moduleId": "A0ResearchModule1",
+        "x": 4,
+        "y": 45,
+        "z": 2,
+        "width": 2,
+        "breadth": 2,
+        "modules": 1,
+        "maximum": 1,
+        "reserved": 0,
+        "nativeStatus": 1,
+        "status": "full",
+        "eligible": false,
+        "statusReason": "module-limit"
+      },
+      {
+        "id": 160171,
+        "itemId": "A0ResearchFacility",
+        "name": "Research Facility",
+        "kind": "RESEARCH",
+        "moduleId": "A0ResearchModule1",
+        "x": 56,
+        "y": 4,
+        "z": 2,
+        "width": 2,
+        "breadth": 2,
+        "modules": 1,
+        "maximum": 1,
+        "reserved": 0,
+        "nativeStatus": 1,
+        "status": "full",
+        "eligible": false,
+        "statusReason": "module-limit"
+      },
+      {
+        "id": 160173,
+        "itemId": "A0ResearchFacility",
+        "name": "Research Facility",
+        "kind": "RESEARCH",
+        "moduleId": "A0ResearchModule1",
+        "x": 4,
+        "y": 42,
+        "z": 2,
+        "width": 2,
+        "breadth": 2,
+        "modules": 1,
+        "maximum": 1,
+        "reserved": 0,
+        "nativeStatus": 1,
+        "status": "full",
+        "eligible": false,
+        "statusReason": "module-limit"
+      },
+      {
+        "id": 160175,
+        "itemId": "A0ResearchFacility",
+        "name": "Research Facility",
+        "kind": "RESEARCH",
+        "moduleId": "A0ResearchModule1",
+        "x": 53,
+        "y": 4,
+        "z": 2,
+        "width": 2,
+        "breadth": 2,
+        "modules": 1,
+        "maximum": 1,
+        "reserved": 0,
+        "nativeStatus": 1,
+        "status": "full",
+        "eligible": false,
+        "statusReason": "module-limit"
+      }
+    ],
+    "buildings": [
+      {
+        "id": "A0ComDroidControl",
+        "power": 100
+      },
+      {
+        "id": "A0CyborgFactory",
+        "power": 100
+      },
+      {
+        "id": "A0FacMod1",
+        "power": 100
+      },
+      {
+        "id": "A0HardcreteMk1CWall",
+        "power": 25
+      },
+      {
+        "id": "A0HardcreteMk1Gate",
+        "power": 50
+      },
+      {
+        "id": "A0HardcreteMk1Wall",
+        "power": 25
+      },
+      {
+        "id": "A0LightFactory",
+        "power": 100
+      },
+      {
+        "id": "A0PowMod1",
+        "power": 0
+      },
+      {
+        "id": "A0PowerGenerator",
+        "power": 50
+      },
+      {
+        "id": "A0ResearchFacility",
+        "power": 100
+      },
+      {
+        "id": "A0ResearchModule1",
+        "power": 100
+      },
+      {
+        "id": "A0ResourceExtractor",
+        "power": 0
+      },
+      {
+        "id": "A0TankTrap",
+        "power": 15
+      },
+      {
+        "id": "GuardTower1",
+        "power": 100
+      },
+      {
+        "id": "GuardTower6",
+        "power": 100
+      },
+      {
+        "id": "PillBox1",
+        "power": 100
+      },
+      {
+        "id": "PillBox4",
+        "power": 100
+      },
+      {
+        "id": "PillBox5",
+        "power": 100
+      },
+      {
+        "id": "Sys-SensoTower01",
+        "power": 50
+      },
+      {
+        "id": "Sys-SensoTower02",
+        "power": 100
+      },
+      {
+        "id": "WallTower02",
+        "power": 100
+      }
+    ],
+    "parts": [
+      "Body1REC",
+      "HalfTrack",
+      "wheeled01",
+      "Cannon1-VTOL",
+      "Cannon1Mk1",
+      "Flame1Mk1",
+      "MG1-VTOL",
+      "MG1Mk1",
+      "MG2-VTOL",
+      "MG2Mk1",
+      "Mortar1Mk1",
+      "Rocket-Pod",
+      "Rocket-VTOL-Pod",
+      "SensorTurret1Mk1",
+      "LightRepair1",
+      "Spade1Mk1",
+      "CommandBrain01"
+    ],
+    "trucks": [
+      {
+        "id": 160011,
+        "x": 7,
+        "y": 36,
+        "z": 2,
+        "selected": false,
+        "order": 0,
+        "action": 0,
+        "rate": 9,
+        "building": false,
+        "queued": 0
+      },
+      {
+        "id": 160009,
+        "x": 59,
+        "y": 9,
+        "z": 2,
+        "selected": false,
+        "order": 0,
+        "action": 0,
+        "rate": 9,
+        "building": false,
+        "queued": 0
+      },
+      {
+        "id": 160007,
+        "x": 59,
+        "y": 7,
+        "z": 2,
+        "selected": false,
+        "order": 0,
+        "action": 0,
+        "rate": 9,
+        "building": false,
+        "queued": 0
+      },
+      {
+        "id": 160005,
+        "x": 7,
+        "y": 38,
+        "z": 2,
+        "selected": false,
+        "order": 0,
+        "action": 0,
+        "rate": 9,
+        "building": false,
+        "queued": 0
+      },
+      {
+        "id": 160003,
+        "x": 7,
+        "y": 37,
+        "z": 2,
+        "selected": false,
+        "order": 0,
+        "action": 0,
+        "rate": 9,
+        "building": false,
+        "queued": 0
+      },
+      {
+        "id": 160001,
+        "x": 59,
+        "y": 8,
+        "z": 2,
+        "selected": false,
+        "order": 0,
+        "action": 0,
+        "rate": 9,
+        "building": false,
+        "queued": 0
+      }
+    ],
+    "jobs": [],
+    "factories": [
+      {
+        "id": 160157,
+        "number": 1,
+        "x": 59,
+        "y": 4,
+        "type": 1,
+        "kind": "Factory",
+        "templates": [
+          "ConstructionDroid"
+        ],
+        "modules": 1,
+        "ready": true,
+        "idle": true,
+        "active": null,
+        "waitingReason": null,
+        "queue": []
+      },
+      {
+        "id": 160167,
+        "number": 2,
+        "x": 4,
+        "y": 38,
+        "type": 1,
+        "kind": "Factory",
+        "templates": [
+          "ConstructionDroid"
+        ],
+        "modules": 1,
+        "ready": true,
+        "idle": true,
+        "active": null,
+        "waitingReason": null,
+        "queue": []
+      }
+    ],
+    "nativeMenu": "",
+    "templates": [
+      {
+        "fullname": "Truck Viper Wheels",
+        "name": "ConstructionDroid",
+        "id": "ConstructionDroid",
+        "points": 310,
+        "power": 62,
+        "cost": 62,
+        "droidType": 3,
+        "body": "Body1REC",
+        "propulsion": "wheeled01",
+        "brain": "ZNULLBRAIN",
+        "repair": "ZNULLREPAIR",
+        "ecm": "ZNULLECM",
+        "sensor": "ZNULLSENSOR",
+        "construct": "Spade1Mk1",
+        "weapons": []
+      },
+      {
+        "fullname": "Heavy Gunner Cyborg",
+        "name": "Cyb-Cannon-GROUND",
+        "id": "Cyb-Cannon-GROUND",
+        "points": 382,
+        "power": 87,
+        "cost": 87,
+        "droidType": 5,
+        "body": "CyborgLightBody",
+        "propulsion": "CyborgLegs",
+        "brain": "ZNULLBRAIN",
+        "repair": "ZNULLREPAIR",
+        "ecm": "ZNULLECM",
+        "sensor": "ZNULLSENSOR",
+        "construct": "ZNULLCONSTRUCT",
+        "weapons": [
+          "CyborgCannon"
+        ]
+      },
+      {
+        "fullname": "Machinegunner Cyborg",
+        "name": "Cyb-Chain-GROUND",
+        "id": "Cyb-Chain-GROUND",
+        "points": 302,
+        "power": 67,
+        "cost": 67,
+        "droidType": 5,
+        "body": "CyborgLightBody",
+        "propulsion": "CyborgLegs",
+        "brain": "ZNULLBRAIN",
+        "repair": "ZNULLREPAIR",
+        "ecm": "ZNULLECM",
+        "sensor": "ZNULLSENSOR",
+        "construct": "ZNULLCONSTRUCT",
+        "weapons": [
+          "CyborgChaingun"
+        ]
+      },
+      {
+        "fullname": "Combat Engineer Cyborg",
+        "name": "Cyb-ComEng",
+        "id": "Cyb-ComEng",
+        "points": 207,
+        "power": 37,
+        "cost": 37,
+        "droidType": 10,
+        "body": "CyborgLightBody",
+        "propulsion": "CyborgLegs",
+        "brain": "ZNULLBRAIN",
+        "repair": "ZNULLREPAIR",
+        "ecm": "ZNULLECM",
+        "sensor": "ZNULLSENSOR",
+        "construct": "CyborgSpade",
+        "weapons": []
+      },
+      {
+        "fullname": "Flamer Cyborg",
+        "name": "Cyb-Flamer-GROUND",
+        "id": "Cyb-Flamer-GROUND",
+        "points": 342,
+        "power": 82,
+        "cost": 82,
+        "droidType": 5,
+        "body": "CyborgLightBody",
+        "propulsion": "CyborgLegs",
+        "brain": "ZNULLBRAIN",
+        "repair": "ZNULLREPAIR",
+        "ecm": "ZNULLECM",
+        "sensor": "ZNULLSENSOR",
+        "construct": "ZNULLCONSTRUCT",
+        "weapons": [
+          "CyborgFlamer01"
+        ]
+      },
+      {
+        "fullname": "Grenadier Cyborg",
+        "name": "Cyb-Gren",
+        "id": "Cyb-Gren",
+        "points": 462,
+        "power": 107,
+        "cost": 107,
+        "droidType": 5,
+        "body": "CyborgLightBody",
+        "propulsion": "CyborgLegs",
+        "brain": "ZNULLBRAIN",
+        "repair": "ZNULLREPAIR",
+        "ecm": "ZNULLECM",
+        "sensor": "ZNULLSENSOR",
+        "construct": "ZNULLCONSTRUCT",
+        "weapons": [
+          "Cyb-Wpn-Grenade"
+        ]
+      },
+      {
+        "fullname": "Mechanic Cyborg",
+        "name": "Cyb-Mechanic",
+        "id": "Cyb-Mechanic",
+        "points": 242,
+        "power": 62,
+        "cost": 62,
+        "droidType": 11,
+        "body": "CyborgLightBody",
+        "propulsion": "CyborgLegs",
+        "brain": "ZNULLBRAIN",
+        "repair": "CyborgRepair",
+        "ecm": "ZNULLECM",
+        "sensor": "ZNULLSENSOR",
+        "construct": "ZNULLCONSTRUCT",
+        "weapons": []
+      }
+    ],
+    "finishedUnits": [],
+    "finishedBuilds": []
+  },
+  "startupReadiness": {
+    "transportTimeoutMs": 90000,
+    "wallMs": 1647,
+    "beforeClock": 195502,
+    "advancingClock": 196502,
+    "method": "Observed HUD and advancing native simulation before a fresh native acknowledgement; no keys or world changes."
+  },
+  "newBattleClock": 198502,
+  "newQueueScreen": "C:\\timerApp\\wz-towers-lab\\qa\\test-05\\quit-return\\quit-journey-05-new-battle-queue.png",
+  "newBattleInput": {
+    "clock": 200502,
+    "session": {
+      "phase": "playing",
+      "result": "",
+      "exitReason": "",
+      "session": "3c38e343-565c-4c2d-a4f7-f31a510f658f"
+    },
+    "frameInert": false,
+    "frameHidden": false,
+    "frameVisibility": "visible",
+    "page": "",
+    "buildOpen": false,
+    "placement": "",
+    "nativeMenu": "",
+    "nativeBackVisible": false,
+    "exitingBuild": false,
+    "buildingOpening": false,
+    "selectingTrucks": false,
+    "pendingItem": "",
+    "pendingCommands": 0,
+    "pendingClicks": 0,
+    "researchOpen": false,
+    "researchOpening": false,
+    "researchPendingClose": false,
+    "researchRunner": null,
+    "helpOpen": false,
+    "hudVisible": true,
+    "battleActive": true,
+    "mapWidth": 64,
+    "mapHeight": 64
+  },
+  "newBattlePause": {
+    "pauseClock": 202502,
+    "pausedAgainScreen": "C:\\timerApp\\wz-towers-lab\\qa\\test-05\\quit-return\\quit-journey-new-battle-paused-again.png"
+  },
+  "newBattleResume": {
+    "pauseScreen": "C:\\timerApp\\wz-towers-lab\\qa\\test-05\\quit-return\\quit-journey-new-battle-native-pause-before-resume.png",
+    "resumeViewport": {
+      "hostWidth": 1077,
+      "hostHeight": 598,
+      "frame": {
+        "x": 0,
+        "y": 56,
+        "width": 1076.666748046875,
+        "height": 542
+      },
+      "canvas": {
+        "x": 0,
+        "y": 0,
+        "width": 1077,
+        "height": 542,
+        "pixelWidth": 1616,
+        "pixelHeight": 813
+      },
+      "childPoint": {
+        "x": 538.5,
+        "y": 239
+      },
+      "hostPoint": {
+        "x": 538.5,
+        "y": 295
+      },
+      "hostHit": "warzone-game-frame",
+      "childHit": "canvas",
+      "frameInert": false,
+      "device": {
+        "width": 1080,
+        "height": 600,
+        "fontScale": "1.0"
+      },
+      "coordinateBasis": "Exact-APK native Pause screenshot; Resume offset -32 CSS px, native UI scale 150%",
+      "devicePoint": {
+        "x": 540,
+        "y": 296
+      }
+    },
+    "resumeClock": {
+      "before": 202502,
+      "after": 203502
+    },
+    "nativeAfterResume": {
+      "version": 1,
+      "gameTime": 204202,
+      "player": 0,
+      "power": 2697,
+      "mapWidth": 64,
+      "mapHeight": 64,
+      "alwaysQueue": true,
+      "researchQueues": [
+        {
+          "labId": 160175,
+          "topicIds": []
+        },
+        {
+          "labId": 160173,
+          "topicIds": []
+        },
+        {
+          "labId": 160171,
+          "topicIds": []
+        },
+        {
+          "labId": 160169,
+          "topicIds": []
+        }
+      ],
+      "hasHQ": true,
+      "selectedUnits": [],
+      "construction": [],
+      "constructionSites": [],
+      "nativeBuildOptions": [
+        "A0ADemolishStructure",
+        "A0ComDroidControl",
+        "A0CyborgFactory",
+        "A0FacMod1",
+        "A0HardcreteMk1Gate",
+        "A0HardcreteMk1Wall",
+        "A0LightFactory",
+        "A0PowMod1",
+        "A0PowerGenerator",
+        "A0ResearchFacility",
+        "A0ResearchModule1",
+        "A0ResourceExtractor",
+        "A0TankTrap",
+        "GuardTower1",
+        "GuardTower6",
+        "PillBox1",
+        "PillBox4",
+        "PillBox5",
+        "Sys-SensoTower01",
+        "Sys-SensoTower02",
+        "WallTower02"
+      ],
+      "moduleTargets": [
+        {
+          "id": 160157,
+          "itemId": "A0LightFactory",
+          "name": "Factory",
+          "kind": "FACTORY",
+          "moduleId": "A0FacMod1",
+          "x": 59,
+          "y": 4,
+          "z": 2,
+          "width": 3,
+          "breadth": 3,
+          "modules": 1,
+          "maximum": 2,
+          "reserved": 0,
+          "nativeStatus": 1,
+          "status": "eligible",
+          "eligible": true,
+          "statusReason": ""
+        },
+        {
+          "id": 160161,
+          "itemId": "A0PowerGenerator",
+          "name": "Power Generator",
+          "kind": "POWER GENERATOR",
+          "moduleId": "A0PowMod1",
+          "x": 5,
+          "y": 59,
+          "z": 2,
+          "width": 2,
+          "breadth": 2,
+          "modules": 1,
+          "maximum": 1,
+          "reserved": 0,
+          "nativeStatus": 1,
+          "status": "full",
+          "eligible": false,
+          "statusReason": "module-limit"
+        },
+        {
+          "id": 160167,
+          "itemId": "A0LightFactory",
+          "name": "Factory",
+          "kind": "FACTORY",
+          "moduleId": "A0FacMod1",
+          "x": 4,
+          "y": 38,
+          "z": 2,
+          "width": 3,
+          "breadth": 3,
+          "modules": 1,
+          "maximum": 2,
+          "reserved": 0,
+          "nativeStatus": 1,
+          "status": "eligible",
+          "eligible": true,
+          "statusReason": ""
+        },
+        {
+          "id": 160169,
+          "itemId": "A0ResearchFacility",
+          "name": "Research Facility",
+          "kind": "RESEARCH",
+          "moduleId": "A0ResearchModule1",
+          "x": 4,
+          "y": 45,
+          "z": 2,
+          "width": 2,
+          "breadth": 2,
+          "modules": 1,
+          "maximum": 1,
+          "reserved": 0,
+          "nativeStatus": 1,
+          "status": "full",
+          "eligible": false,
+          "statusReason": "module-limit"
+        },
+        {
+          "id": 160171,
+          "itemId": "A0ResearchFacility",
+          "name": "Research Facility",
+          "kind": "RESEARCH",
+          "moduleId": "A0ResearchModule1",
+          "x": 56,
+          "y": 4,
+          "z": 2,
+          "width": 2,
+          "breadth": 2,
+          "modules": 1,
+          "maximum": 1,
+          "reserved": 0,
+          "nativeStatus": 1,
+          "status": "full",
+          "eligible": false,
+          "statusReason": "module-limit"
+        },
+        {
+          "id": 160173,
+          "itemId": "A0ResearchFacility",
+          "name": "Research Facility",
+          "kind": "RESEARCH",
+          "moduleId": "A0ResearchModule1",
+          "x": 4,
+          "y": 42,
+          "z": 2,
+          "width": 2,
+          "breadth": 2,
+          "modules": 1,
+          "maximum": 1,
+          "reserved": 0,
+          "nativeStatus": 1,
+          "status": "full",
+          "eligible": false,
+          "statusReason": "module-limit"
+        },
+        {
+          "id": 160175,
+          "itemId": "A0ResearchFacility",
+          "name": "Research Facility",
+          "kind": "RESEARCH",
+          "moduleId": "A0ResearchModule1",
+          "x": 53,
+          "y": 4,
+          "z": 2,
+          "width": 2,
+          "breadth": 2,
+          "modules": 1,
+          "maximum": 1,
+          "reserved": 0,
+          "nativeStatus": 1,
+          "status": "full",
+          "eligible": false,
+          "statusReason": "module-limit"
+        }
+      ],
+      "buildings": [
+        {
+          "id": "A0ComDroidControl",
+          "power": 100
+        },
+        {
+          "id": "A0CyborgFactory",
+          "power": 100
+        },
+        {
+          "id": "A0FacMod1",
+          "power": 100
+        },
+        {
+          "id": "A0HardcreteMk1CWall",
+          "power": 25
+        },
+        {
+          "id": "A0HardcreteMk1Gate",
+          "power": 50
+        },
+        {
+          "id": "A0HardcreteMk1Wall",
+          "power": 25
+        },
+        {
+          "id": "A0LightFactory",
+          "power": 100
+        },
+        {
+          "id": "A0PowMod1",
+          "power": 0
+        },
+        {
+          "id": "A0PowerGenerator",
+          "power": 50
+        },
+        {
+          "id": "A0ResearchFacility",
+          "power": 100
+        },
+        {
+          "id": "A0ResearchModule1",
+          "power": 100
+        },
+        {
+          "id": "A0ResourceExtractor",
+          "power": 0
+        },
+        {
+          "id": "A0TankTrap",
+          "power": 15
+        },
+        {
+          "id": "GuardTower1",
+          "power": 100
+        },
+        {
+          "id": "GuardTower6",
+          "power": 100
+        },
+        {
+          "id": "PillBox1",
+          "power": 100
+        },
+        {
+          "id": "PillBox4",
+          "power": 100
+        },
+        {
+          "id": "PillBox5",
+          "power": 100
+        },
+        {
+          "id": "Sys-SensoTower01",
+          "power": 50
+        },
+        {
+          "id": "Sys-SensoTower02",
+          "power": 100
+        },
+        {
+          "id": "WallTower02",
+          "power": 100
+        }
+      ],
+      "parts": [
+        "Body1REC",
+        "HalfTrack",
+        "wheeled01",
+        "Cannon1-VTOL",
+        "Cannon1Mk1",
+        "Flame1Mk1",
+        "MG1-VTOL",
+        "MG1Mk1",
+        "MG2-VTOL",
+        "MG2Mk1",
+        "Mortar1Mk1",
+        "Rocket-Pod",
+        "Rocket-VTOL-Pod",
+        "SensorTurret1Mk1",
+        "LightRepair1",
+        "Spade1Mk1",
+        "CommandBrain01"
+      ],
+      "trucks": [
+        {
+          "id": 160011,
+          "x": 7,
+          "y": 36,
+          "z": 2,
+          "selected": false,
+          "order": 0,
+          "action": 0,
+          "rate": 9,
+          "building": false,
+          "queued": 0
+        },
+        {
+          "id": 160009,
+          "x": 59,
+          "y": 9,
+          "z": 2,
+          "selected": false,
+          "order": 0,
+          "action": 0,
+          "rate": 9,
+          "building": false,
+          "queued": 0
+        },
+        {
+          "id": 160007,
+          "x": 59,
+          "y": 7,
+          "z": 2,
+          "selected": false,
+          "order": 0,
+          "action": 0,
+          "rate": 9,
+          "building": false,
+          "queued": 0
+        },
+        {
+          "id": 160005,
+          "x": 7,
+          "y": 38,
+          "z": 2,
+          "selected": false,
+          "order": 0,
+          "action": 0,
+          "rate": 9,
+          "building": false,
+          "queued": 0
+        },
+        {
+          "id": 160003,
+          "x": 7,
+          "y": 37,
+          "z": 2,
+          "selected": false,
+          "order": 0,
+          "action": 0,
+          "rate": 9,
+          "building": false,
+          "queued": 0
+        },
+        {
+          "id": 160001,
+          "x": 59,
+          "y": 8,
+          "z": 2,
+          "selected": false,
+          "order": 0,
+          "action": 0,
+          "rate": 9,
+          "building": false,
+          "queued": 0
+        }
+      ],
+      "jobs": [],
+      "factories": [
+        {
+          "id": 160157,
+          "number": 1,
+          "x": 59,
+          "y": 4,
+          "type": 1,
+          "kind": "Factory",
+          "templates": [
+            "ConstructionDroid"
+          ],
+          "modules": 1,
+          "ready": true,
+          "idle": true,
+          "active": null,
+          "waitingReason": null,
+          "queue": []
+        },
+        {
+          "id": 160167,
+          "number": 2,
+          "x": 4,
+          "y": 38,
+          "type": 1,
+          "kind": "Factory",
+          "templates": [
+            "ConstructionDroid"
+          ],
+          "modules": 1,
+          "ready": true,
+          "idle": true,
+          "active": null,
+          "waitingReason": null,
+          "queue": []
+        }
+      ],
+      "nativeMenu": "",
+      "templates": [
+        {
+          "fullname": "Truck Viper Wheels",
+          "name": "ConstructionDroid",
+          "id": "ConstructionDroid",
+          "points": 310,
+          "power": 62,
+          "cost": 62,
+          "droidType": 3,
+          "body": "Body1REC",
+          "propulsion": "wheeled01",
+          "brain": "ZNULLBRAIN",
+          "repair": "ZNULLREPAIR",
+          "ecm": "ZNULLECM",
+          "sensor": "ZNULLSENSOR",
+          "construct": "Spade1Mk1",
+          "weapons": []
+        },
+        {
+          "fullname": "Heavy Gunner Cyborg",
+          "name": "Cyb-Cannon-GROUND",
+          "id": "Cyb-Cannon-GROUND",
+          "points": 382,
+          "power": 87,
+          "cost": 87,
+          "droidType": 5,
+          "body": "CyborgLightBody",
+          "propulsion": "CyborgLegs",
+          "brain": "ZNULLBRAIN",
+          "repair": "ZNULLREPAIR",
+          "ecm": "ZNULLECM",
+          "sensor": "ZNULLSENSOR",
+          "construct": "ZNULLCONSTRUCT",
+          "weapons": [
+            "CyborgCannon"
+          ]
+        },
+        {
+          "fullname": "Machinegunner Cyborg",
+          "name": "Cyb-Chain-GROUND",
+          "id": "Cyb-Chain-GROUND",
+          "points": 302,
+          "power": 67,
+          "cost": 67,
+          "droidType": 5,
+          "body": "CyborgLightBody",
+          "propulsion": "CyborgLegs",
+          "brain": "ZNULLBRAIN",
+          "repair": "ZNULLREPAIR",
+          "ecm": "ZNULLECM",
+          "sensor": "ZNULLSENSOR",
+          "construct": "ZNULLCONSTRUCT",
+          "weapons": [
+            "CyborgChaingun"
+          ]
+        },
+        {
+          "fullname": "Combat Engineer Cyborg",
+          "name": "Cyb-ComEng",
+          "id": "Cyb-ComEng",
+          "points": 207,
+          "power": 37,
+          "cost": 37,
+          "droidType": 10,
+          "body": "CyborgLightBody",
+          "propulsion": "CyborgLegs",
+          "brain": "ZNULLBRAIN",
+          "repair": "ZNULLREPAIR",
+          "ecm": "ZNULLECM",
+          "sensor": "ZNULLSENSOR",
+          "construct": "CyborgSpade",
+          "weapons": []
+        },
+        {
+          "fullname": "Flamer Cyborg",
+          "name": "Cyb-Flamer-GROUND",
+          "id": "Cyb-Flamer-GROUND",
+          "points": 342,
+          "power": 82,
+          "cost": 82,
+          "droidType": 5,
+          "body": "CyborgLightBody",
+          "propulsion": "CyborgLegs",
+          "brain": "ZNULLBRAIN",
+          "repair": "ZNULLREPAIR",
+          "ecm": "ZNULLECM",
+          "sensor": "ZNULLSENSOR",
+          "construct": "ZNULLCONSTRUCT",
+          "weapons": [
+            "CyborgFlamer01"
+          ]
+        },
+        {
+          "fullname": "Grenadier Cyborg",
+          "name": "Cyb-Gren",
+          "id": "Cyb-Gren",
+          "points": 462,
+          "power": 107,
+          "cost": 107,
+          "droidType": 5,
+          "body": "CyborgLightBody",
+          "propulsion": "CyborgLegs",
+          "brain": "ZNULLBRAIN",
+          "repair": "ZNULLREPAIR",
+          "ecm": "ZNULLECM",
+          "sensor": "ZNULLSENSOR",
+          "construct": "ZNULLCONSTRUCT",
+          "weapons": [
+            "Cyb-Wpn-Grenade"
+          ]
+        },
+        {
+          "fullname": "Mechanic Cyborg",
+          "name": "Cyb-Mechanic",
+          "id": "Cyb-Mechanic",
+          "points": 242,
+          "power": 62,
+          "cost": 62,
+          "droidType": 11,
+          "body": "CyborgLightBody",
+          "propulsion": "CyborgLegs",
+          "brain": "ZNULLBRAIN",
+          "repair": "CyborgRepair",
+          "ecm": "ZNULLECM",
+          "sensor": "ZNULLSENSOR",
+          "construct": "ZNULLCONSTRUCT",
+          "weapons": []
+        }
+      ],
+      "finishedUnits": [],
+      "finishedBuilds": []
+    },
+    "afterResume": {
+      "clock": 204002,
+      "session": {
+        "phase": "playing",
+        "result": "",
+        "exitReason": "",
+        "session": "3c38e343-565c-4c2d-a4f7-f31a510f658f"
+      },
+      "frameInert": false,
+      "frameHidden": false,
+      "frameVisibility": "visible",
+      "page": "",
+      "buildOpen": false,
+      "placement": "",
+      "nativeMenu": "",
+      "nativeBackVisible": false,
+      "exitingBuild": false,
+      "buildingOpening": false,
+      "selectingTrucks": false,
+      "pendingItem": "",
+      "pendingCommands": 0,
+      "pendingClicks": 0,
+      "researchOpen": false,
+      "researchOpening": false,
+      "researchPendingClose": false,
+      "researchRunner": null,
+      "helpOpen": false,
+      "hudVisible": true,
+      "battleActive": true,
+      "mapWidth": 64,
+      "mapHeight": 64
+    },
+    "resumedScreen": "C:\\timerApp\\wz-towers-lab\\qa\\test-05\\quit-return\\quit-journey-new-battle-resumed.png"
+  },
+  "finalPause": {
+    "pauseClock": 206502,
+    "pausedAgainScreen": "C:\\timerApp\\wz-towers-lab\\qa\\test-05\\quit-return\\quit-journey-final-paused-again.png"
+  },
+  "errors": [],
+  "finished": "2026-11-07T18:31:18.572Z"
+}

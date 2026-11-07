@@ -1,0 +1,518 @@
+{
+  "passed": true,
+  "candidateAPK_SHA256": "64324e568fd21ac449958d3f0d6e0f289e1ef9a06befd1d05de550fee272822f",
+  "reviewedUTC": "2026-11-07T09:04:07.596552+00:00",
+  "verification": "Read-only visual inspection of the listed final-APK screenshots and recorded native/DOM state; no new emulator actions",
+  "checks": {
+    "normalTestNameAndOfficialSplashBranding": true,
+    "correctStartupPunctuation": true,
+    "noExtraneousProductLabBadgesOrSlogansInReviewedImages": true,
+    "phoneWideAndEnlargedStartupControlsReadableWithinViewport": true,
+    "compactFactoryDesignResearchPagesReadable": true,
+    "pausedFactoryBackRestoresBattlefieldAndHUD": true,
+    "recordedReturnStateRestoredInAllTwelveCases": true,
+    "recordedNativeClockResumesInAllTwelveCases": true,
+    "visibleNativeTruckSelectionHighlights": true,
+    "pausedNavigationToastCompact": true,
+    "noStockMainMenuVisibleInReviewedImages": true,
+    "dustfallNativeNorthAndFooterHQObserved": true,
+    "dustfallRaisedPreviewsAndCompletedGhostCleanupObserved": true,
+    "neutralQuitAndOwnStartRecoveryObserved": true
+  },
+  "startupProfiles": [
+    {
+      "name": "phone",
+      "width": 1080,
+      "height": 600,
+      "fontScale": 1
+    },
+    {
+      "name": "wide",
+      "width": 2400,
+      "height": 1080,
+      "fontScale": 1
+    },
+    {
+      "name": "enlarged",
+      "width": 1080,
+      "height": 600,
+      "fontScale": 1.3
+    },
+    {
+      "name": "final-phone",
+      "width": 1080,
+      "height": 600,
+      "fontScale": 1
+    }
+  ],
+  "navigationStateCases": [
+    {
+      "requestedNativePanel": "stats",
+      "requestedStateAcknowledged": "stats",
+      "closedNativeStateAcknowledged": "",
+      "actualSelectedNativeIds": [
+        160003,
+        160005,
+        160011
+      ]
+    },
+    {
+      "requestedNativePanel": "commanders",
+      "requestedStateAcknowledged": "commanders",
+      "closedNativeStateAcknowledged": "",
+      "actualSelectedNativeIds": [
+        160003,
+        160005,
+        160011
+      ]
+    }
+  ],
+  "pausedToastGeometry": {
+    "present": true,
+    "hidden": false,
+    "display": "block",
+    "visibility": "visible",
+    "text": "Resume the game, then tap TRUCKS to select your trucks.",
+    "rect": {
+      "x": 8,
+      "y": 64,
+      "left": 8,
+      "top": 64,
+      "right": 310.82293701171875,
+      "bottom": 97.83333587646484,
+      "width": 302.82293701171875,
+      "height": 33.833335876464844
+    },
+    "viewport": {
+      "width": 1077,
+      "height": 598
+    }
+  },
+  "pausedReturnStateCases": [
+    {
+      "round": 1,
+      "screen": "factory",
+      "returnedFrameVisibleAndInteractive": true,
+      "returnedPageClosed": true,
+      "pausedClock": 39002,
+      "resumedClock": 40002,
+      "freshNativeClock": 40802
+    },
+    {
+      "round": 1,
+      "screen": "design",
+      "returnedFrameVisibleAndInteractive": true,
+      "returnedPageClosed": true,
+      "pausedClock": 43002,
+      "resumedClock": 44002,
+      "freshNativeClock": 44602
+    },
+    {
+      "round": 1,
+      "screen": "queue",
+      "returnedFrameVisibleAndInteractive": true,
+      "returnedPageClosed": true,
+      "pausedClock": 46502,
+      "resumedClock": 47502,
+      "freshNativeClock": 48002
+    },
+    {
+      "round": 1,
+      "screen": "tech",
+      "returnedFrameVisibleAndInteractive": true,
+      "returnedPageClosed": true,
+      "pausedClock": 49502,
+      "resumedClock": 50502,
+      "freshNativeClock": 51202
+    },
+    {
+      "round": 1,
+      "screen": "help",
+      "returnedFrameVisibleAndInteractive": true,
+      "returnedPageClosed": true,
+      "pausedClock": 53002,
+      "resumedClock": 54002,
+      "freshNativeClock": 54602
+    },
+    {
+      "round": 1,
+      "screen": "stats",
+      "returnedFrameVisibleAndInteractive": true,
+      "returnedPageClosed": true,
+      "pausedClock": 56502,
+      "resumedClock": 58002,
+      "freshNativeClock": 58202
+    },
+    {
+      "round": 2,
+      "screen": "factory",
+      "returnedFrameVisibleAndInteractive": true,
+      "returnedPageClosed": true,
+      "pausedClock": 60002,
+      "resumedClock": 61002,
+      "freshNativeClock": 61402
+    },
+    {
+      "round": 2,
+      "screen": "design",
+      "returnedFrameVisibleAndInteractive": true,
+      "returnedPageClosed": true,
+      "pausedClock": 63502,
+      "resumedClock": 64502,
+      "freshNativeClock": 65402
+    },
+    {
+      "round": 2,
+      "screen": "queue",
+      "returnedFrameVisibleAndInteractive": true,
+      "returnedPageClosed": true,
+      "pausedClock": 67502,
+      "resumedClock": 68502,
+      "freshNativeClock": 69002
+    },
+    {
+      "round": 2,
+      "screen": "tech",
+      "returnedFrameVisibleAndInteractive": true,
+      "returnedPageClosed": true,
+      "pausedClock": 70502,
+      "resumedClock": 71502,
+      "freshNativeClock": 72202
+    },
+    {
+      "round": 2,
+      "screen": "help",
+      "returnedFrameVisibleAndInteractive": true,
+      "returnedPageClosed": true,
+      "pausedClock": 74002,
+      "resumedClock": 75002,
+      "freshNativeClock": 75602
+    },
+    {
+      "round": 2,
+      "screen": "stats",
+      "returnedFrameVisibleAndInteractive": true,
+      "returnedPageClosed": true,
+      "pausedClock": 77002,
+      "resumedClock": 78002,
+      "freshNativeClock": 78402
+    }
+  ],
+  "reviewedImages": [
+    {
+      "path": "qa/test-02/startup-delivery/startup-phone.png",
+      "sha256": "28b087e02c7c133f49f178acbf06e1db267992b77a618ca8b7f2bb6e46dc4522",
+      "width": 1080,
+      "height": 600,
+      "reviewedWith": "view_image"
+    },
+    {
+      "path": "qa/test-02/startup-delivery/startup-wide.png",
+      "sha256": "0e6cc3af6fe08ffb97c52fa8781f0d9a2ebea065737071663cdf4d9c9ffc4399",
+      "width": 2400,
+      "height": 1080,
+      "reviewedWith": "view_image"
+    },
+    {
+      "path": "qa/test-02/startup-delivery/startup-enlarged.png",
+      "sha256": "1f987b3c10f4af06af2c6c85ad99d409618755d6b90ba13d493c7f8e44a2e3ec",
+      "width": 1080,
+      "height": 600,
+      "reviewedWith": "view_image"
+    },
+    {
+      "path": "qa/test-02/startup-delivery/startup-dustfall-selected.png",
+      "sha256": "4b28944af086947356f52984ceb64d0a745be29756c1a726b275d89b53c05e88",
+      "width": 1080,
+      "height": 600,
+      "reviewedWith": "view_image"
+    },
+    {
+      "path": "qa/test-02/startup-delivery/startup-loading.png",
+      "sha256": "c2ce5b8e381e32765441f598a5334dfc1f134d59d08ed9ed37d89d2839c2ff9e",
+      "width": 1080,
+      "height": 600,
+      "reviewedWith": "view_image"
+    },
+    {
+      "path": "qa/test-02/startup-delivery/startup-music-open-1.png",
+      "sha256": "00b4823962b7e3de72587e373d397d32bc06db240eae6f47f23e18994fb36b0a",
+      "width": 1080,
+      "height": 600,
+      "reviewedWith": "view_image"
+    },
+    {
+      "path": "qa/test-02/navigation/stats-to-build-01-native-open.png",
+      "sha256": "53f296c4b20b16cb4964fd5482236804caf78b0d24f9fb654eb0cbbd099cecf2",
+      "width": 1080,
+      "height": 600,
+      "reviewedWith": "view_image"
+    },
+    {
+      "path": "qa/test-02/navigation/stats-to-build-02-live-selection.png",
+      "sha256": "71631e7a9053842c810f6ed2cb69ab41d517e8909c5c044a2480687112002308",
+      "width": 1080,
+      "height": 600,
+      "reviewedWith": "view_image"
+    },
+    {
+      "path": "qa/test-02/navigation/commanders-to-build-02-live-selection.png",
+      "sha256": "5408ce51a5ce6804cc573c4fc1053c95aa0a5ce16d654232534bf1267a1008e0",
+      "width": 1080,
+      "height": 600,
+      "reviewedWith": "view_image"
+    },
+    {
+      "path": "qa/test-02/navigation/paused-stats-to-trucks-01-open.png",
+      "sha256": "ed5fdd2dc6b178b7ca58cb6b88bfad75cd0f6b019f052734e611b2dc5e14fbd1",
+      "width": 1080,
+      "height": 600,
+      "reviewedWith": "view_image"
+    },
+    {
+      "path": "qa/test-02/navigation/paused-stats-to-trucks-02-bounded-return.png",
+      "sha256": "410123fc5432bce0ae3d9cbb5d9003bc42e7f213f9e8ae4e151749f498dad05d",
+      "width": 1080,
+      "height": 600,
+      "reviewedWith": "view_image"
+    },
+    {
+      "path": "qa/test-02/navigation/paused-stats-to-trucks-03-restored.png",
+      "sha256": "1b54dacfdfb26af9dc80761d9c9839d474d6550da2fd2625dca7911af69052a3",
+      "width": 1080,
+      "height": 600,
+      "reviewedWith": "view_image"
+    },
+    {
+      "path": "qa/test-02/paused-returns/paused-return-1-factory-opened.png",
+      "sha256": "b6be51f245b49758e452c134840436274a648c3d36e60a9446f294152ccd248b",
+      "width": 1080,
+      "height": 600,
+      "reviewedWith": "view_image"
+    },
+    {
+      "path": "qa/test-02/paused-returns/paused-return-1-factory-returned.png",
+      "sha256": "319409ace9933deefa9f4162d4f54af90221e6a559bf0d4d166adb4dff1e47d9",
+      "width": 1080,
+      "height": 600,
+      "reviewedWith": "view_image"
+    },
+    {
+      "path": "qa/test-02/paused-returns/paused-return-2-design-opened.png",
+      "sha256": "d1f3d8ac6dbeb01de1982dd81e0f917c3acc493fa35a3d18f5e63449cad5a8f7",
+      "width": 1080,
+      "height": 600,
+      "reviewedWith": "view_image"
+    },
+    {
+      "path": "qa/test-02/paused-returns/paused-return-2-design-returned.png",
+      "sha256": "d1f3d8ac6dbeb01de1982dd81e0f917c3acc493fa35a3d18f5e63449cad5a8f7",
+      "width": 1080,
+      "height": 600,
+      "reviewedWith": "view_image"
+    },
+    {
+      "path": "qa/test-02/paused-returns/paused-return-2-tech-opened.png",
+      "sha256": "df11d62abb5b632954266321d01403519feb48091e565d3fcb6ca0d914e05bde",
+      "width": 1080,
+      "height": 600,
+      "reviewedWith": "view_image"
+    },
+    {
+      "path": "qa/test-02/paused-returns/paused-return-2-tech-native-pause-before-resume.png",
+      "sha256": "e51e9b536991b28f200f510b83cc04faa5d19d78c5602bb7017b5273c06af677",
+      "width": 1080,
+      "height": 600,
+      "reviewedWith": "view_image"
+    },
+    {
+      "path": "qa/test-02/paused-returns/paused-return-2-design-native-pause-before-resume.png",
+      "sha256": "539227f34738ec7f07b47f0454ecebb54f9b3f70aa227dab9822977ed5277565",
+      "width": 1080,
+      "height": 600,
+      "reviewedWith": "view_image"
+    },
+    {
+      "path": "qa/test-02/paused-returns/paused-return-2-design-resumed.png",
+      "sha256": "da894a12bb8b887e184e8b27605846244701832ac6ef222ec8086dc6498240f0",
+      "width": 1080,
+      "height": 600,
+      "reviewedWith": "view_image"
+    },
+    {
+      "path": "qa/test-02/paused-returns/paused-return-2-tech-resumed.png",
+      "sha256": "a1af6bb5e49995bb549cb9bd16a696e300c74c8a7085ccebdcd1493acc60712f",
+      "width": 1080,
+      "height": 600,
+      "reviewedWith": "view_image"
+    },
+    {
+      "path": "qa/test-02/paused-returns/paused-return-1-queue-opened.png",
+      "sha256": "6ee22c95a6e4bf6191909e977303ef6ceb5718f272ca2b2f6518e6b1b96d80a9",
+      "width": 1080,
+      "height": 600,
+      "reviewedWith": "view_image"
+    },
+    {
+      "path": "qa/test-02/paused-returns/paused-return-2-help-opened.png",
+      "sha256": "587d3e2eb023683bc90749e1c6060d7834dbdae22feba0256d568800488f7d08",
+      "width": 1080,
+      "height": 600,
+      "reviewedWith": "view_image"
+    },
+    {
+      "path": "qa/test-02/paused-returns/paused-return-2-stats-returned.png",
+      "sha256": "54b3ba0d407dd532063317cff2e9792fb138fb34476faf0fec9f9afe8968de5b",
+      "width": 1080,
+      "height": 600,
+      "reviewedWith": "view_image"
+    },
+    {
+      "path": "qa/test-02/dustfall/dustfall-footer-starting-view.png",
+      "sha256": "634dae9e800870e0cb0aa25b65529d8bf696395d4a4d878371efcaf6bd8f3114",
+      "width": 1080,
+      "height": 600,
+      "reviewedWith": "view_image"
+    },
+    {
+      "path": "qa/test-02/dustfall/selected-green-model-confirmed.png",
+      "sha256": "9fc44c9b0cb4c0bcb7ac00992e28700b6721574a47eb3df70a913b694b379d26",
+      "width": 1080,
+      "height": 600,
+      "reviewedWith": "view_image"
+    },
+    {
+      "path": "qa/test-02/dustfall/td1-raised-models.png",
+      "sha256": "f9dfa15e2b75ff1d8540dfc1e52e2ec476a22851744917318132a0d40e880d05",
+      "width": 1080,
+      "height": 600,
+      "reviewedWith": "view_image"
+    },
+    {
+      "path": "qa/test-02/dustfall/td1-models-cleared-on-completion.png",
+      "sha256": "6d03aeb6275033e8c651f9f621b468016169887ec8b4325907051cd0f21b778a",
+      "width": 1080,
+      "height": 600,
+      "reviewedWith": "view_image"
+    },
+    {
+      "path": "qa/test-02/quit-delivery/quit-journey-02-native-confirmation.png",
+      "sha256": "14dd53f26650359f5e5f48a6abdb4c53e6032605a7e10a1db7ac8143379886ea",
+      "width": 1080,
+      "height": 600,
+      "reviewedWith": "view_image"
+    },
+    {
+      "path": "qa/test-02/quit-delivery/quit-journey-03-neutral-ended.png",
+      "sha256": "a254c01b99aa9b94e67c8326e90f30a337b6379a000ed04698fee058c197fd61",
+      "width": 1080,
+      "height": 600,
+      "reviewedWith": "view_image"
+    },
+    {
+      "path": "qa/test-02/quit-delivery/quit-journey-04-returned-start.png",
+      "sha256": "f20771a9f08ea8afb386b6d10acbe1468201fa3200aefd55640df17f48dfdc49",
+      "width": 1080,
+      "height": 600,
+      "reviewedWith": "view_image"
+    },
+    {
+      "path": "qa/test-02/quit-delivery/quit-journey-new-battle-resumed.png",
+      "sha256": "6a8e12865276105544a9f38b778879410b012b2cd977f2e587ad55878e2f7413",
+      "width": 1080,
+      "height": 600,
+      "reviewedWith": "view_image"
+    }
+  ],
+  "sourceReports": [
+    {
+      "path": "qa/test-02/startup-delivery/lab-startup-qa.json",
+      "sha256": "19dbb8d7e73708c8179a266342f6c0881ca81aafe0195f4213814b83d7bf0fcb"
+    },
+    {
+      "path": "qa/test-02/navigation/native-build-navigation.json",
+      "sha256": "7710e861b470b76331485d2d230097effbb17d0bb334cb627a94db26068ad430"
+    },
+    {
+      "path": "qa/test-02/paused-returns/test-02-paused-returns.json",
+      "sha256": "a9f499a237401faaf3912793ea6550051a18d4efa196c06cb375188ec1ea129d"
+    },
+    {
+      "path": "qa/test-02/package-verification.json",
+      "sha256": "2a4b426640f75e7cdf6d6eab27ad6d9f802ed6ef36fd7ab561d4339018f6dd25"
+    },
+    {
+      "path": "qa/test-02/dustfall/audit-build-display-td1.json",
+      "sha256": "8f66a2605aea95f55b13f5ff39cd31e7d6eec47f70ab932956c9f45d3c024d9e"
+    },
+    {
+      "path": "qa/test-02/quit-delivery/test-02-quit-journey.json",
+      "sha256": "5ac3b6f249ce6d6900a5d38bddc28fe5a171cddde5b051252781b1dd5cc01e5f"
+    },
+    {
+      "path": "qa/test-02/integrated-journey.json",
+      "sha256": "76d18ccd28f4dade2df15c4c6056a8d32b2f626b5be1453dc8f89a91e059fa48"
+    }
+  ],
+  "observations": [
+    "The correct Warzone Towers Test name, official Warzone logo/art and ordinary wording are visible. Startup punctuation is correct on phone, wide and enlarged-text captures.",
+    "The enlarged decorative splash subtitle wraps onto two readable lines; actionable map, Play and settings controls remain within the viewport.",
+    "STATS to BUILD shows the compact catalogue and three real native truck selection highlights. Both navigation records acknowledge the requested native state and its closure, and contain native IDs 160003, 160005 and 160011 as the selected group.",
+    "The paused TRUCKS notification is a compact single-line toast measuring 33.83 pixels high, replacing the previously stretched panel. The restored screenshot shows the three selected trucks.",
+    "Requesting COMMANDERS with no commanders retains the pre-existing native Failed to show interface banner. This review certifies the requested/closed native state acknowledgement and restored selection; it does not certify a populated COMMANDERS window.",
+    "Some immediate captures show a preceding compositor frame: round-two Design returned still shows Design, while its settled native-pause and resumed images show restoration. The COMMANDERS-to-BUILD immediate image also predates the visible catalogue. These immediate captures are not used as independent proof of the returned page; recorded native/DOM state and settled pause/resume witnesses establish recovery.",
+    "The Factory list includes an existing private saved design named Lab Scout 54626. This is retained test-app library data, not packaged branding. The scrollable Factory list and Help text intentionally continue below their viewports.",
+    "Battlefield captures retain the known software-emulator black terrain; no physical GPU, rendering-quality, audio or FPS claim follows from these images.",
+    "Dustfall visibly places the HQ toward the footer. Native QuickSave yaw is 0 and HQ projection is about (538,442) in a 1077x542 field, or 81.6% down the field. Cold and repeated initial selection are consistently empty in that view; after radar navigation, the two visible platform trucks are selected and highlighted.",
+    "The original green selected tower model, two numbered raised-platform previews/queue rows and the actual completed tower/factory were inspected. Native completed workers are 160001/160003, foundation height 510 matches the preview, and the completed screenshot has no construction ghosts.",
+    "Real native Quit confirmation is visible, followed by a neutral BATTLE ENDED screen without the battle HUD or stock frontend. The app returns to its own Warzone Towers Test start screen and a fresh resumed battle. Recorded accepted ghost sites drop from three to zero."
+  ],
+  "productLayoutDefectsObserved": [],
+  "limits": [
+    "Only the listed screenshots and recorded states were reviewed; this is not a claim about every viewport.",
+    "Launcher home-screen icon appearance was not captured here; exact original packaged icon resources are verified in package-verification.json.",
+    "This reviewer performed no new gameplay execution, physical-device test, audio test or full 30-wave victory run."
+  ],
+  "dustfallNativeEvidence": {
+    "startingCamera": {
+      "point": {
+        "x": 538.0000105590868,
+        "y": 442.0466869639924
+      },
+      "width": 1077,
+      "height": 542,
+      "rotation": {
+        "x": 58254,
+        "y": 0,
+        "z": 0
+      }
+    },
+    "hqVerticalFraction": 0.8155842932914988,
+    "coldNativeSelectedIds": [],
+    "repeatedNativeSelectedIds": [],
+    "completedNativeBuilds": [
+      {
+        "id": "cmd-1794042010136-34",
+        "itemId": "GuardTower1",
+        "x": 8,
+        "y": 71,
+        "workers": [
+          160001,
+          160003
+        ],
+        "gameTime": 37702
+      },
+      {
+        "id": "cmd-1794042015495-49",
+        "itemId": "A0CyborgFactory",
+        "x": 7,
+        "y": 69,
+        "workers": [
+          160001,
+          160003
+        ],
+        "gameTime": 65002
+      }
+    ]
+  }
+}

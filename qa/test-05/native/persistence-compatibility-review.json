@@ -1,0 +1,135 @@
+{
+  "readOnly": true,
+  "candidateAPK_SHA256": "6e4a8858b8673ddd41853976f648068f58d5cc77bf284f9e9113de0a83203bab",
+  "indexHTMLIdentical": true,
+  "buildInfoIdentical": true,
+  "configDir": "/warzone2100",
+  "configDirReason": "Both runtimes carry gitTag4.7.0; unchanged HTML selects empty suffix and passes explicit --configdir.",
+  "origin": "https://appassets.androidplatform.net",
+  "applicationId": "com.rbabbit.warzonetowers.lab",
+  "sameSigningCertificateSHA256": "4499efe00477c7c724c06a1dd96f935864548665c13ab5e2bd0a9c0f83f7cb15",
+  "IDBFSObjectIdentical": true,
+  "IDBFSObjectSHA256": "836d20db8d42d3d67295d1eac9e23b1ae67687ed9f2099f8c32fe38fb58ce5d6",
+  "IDBFSSchemaVersion": 21,
+  "IDBFSObjectStore": "FILE_DATA",
+  "IDBFSDatabaseKey": "mount.mountpoint = /warzone2100",
+  "mountFunctionIdentical": true,
+  "mountFunctionSHA256": "545f593734051ab703f1baf9eb148c4261733bfbc09bb4ee00021aa5db1d5c27",
+  "colourProofs": [
+    {
+      "run": "iteration-overlay-emulator",
+      "colour0": 3,
+      "versionFields": {
+        "oldestVersion": 0,
+        "version": 39
+      }
+    },
+    {
+      "run": "preview-journey",
+      "colour0": 7,
+      "versionFields": {
+        "oldestVersion": 0,
+        "version": 39
+      }
+    }
+  ],
+  "colourExplanation": "Unchanged resetPlayerConfiguration swaps each player colour with rand()%(playerIndex+1); default colourMP is -1(random). Saved games restore their own colours.",
+  "distributorScope": "PACKAGE_DISTRIBUTOR is used for build-property and crash-dump reporting, not storage/configdir naming.",
+  "limitations": "Read-only source/artifact comparison. No emulator input or old-user-save upgrade roundtrip performed by this agent.",
+  "mainActivitySourceIdentical": true,
+  "baselineAPK_SHA256": "6f143ed3ca0f0678cd805e59fda00d97e8e859373e73b438f725e301f7201734",
+  "baselineVersion": "0.4/code4",
+  "candidateVersion": "0.5/code5",
+  "androidSDKVersions": {
+    "baseline": {
+      "min": 26,
+      "target": 36,
+      "compile": 36
+    },
+    "candidate": {
+      "min": 26,
+      "target": 36,
+      "compile": 36
+    }
+  },
+  "nativeSaveDataVersions": {
+    "baselineIteration": 39,
+    "candidate": 39,
+    "oldestVersionBoth": 0
+  },
+  "sourceHashes": {
+    "unchangedIndexHTML": "ce1736e9440772ea136b1aa9d2c0b7a2dfd751ca1e02c78f474918458ae6bf8b",
+    "unchangedMainActivity": "ae402809fb595fb652fd21cb1d22001d60ee2e5d7855d4c91d48536b557d43b6"
+  },
+  "sourceRefs": [
+    {
+      "path": "app/src/main/assets/warzone/index.html",
+      "line": 976,
+      "scope": "Configdir /warzone2100 +suffix"
+    },
+    {
+      "path": "app/src/main/assets/warzone/index.html",
+      "line": 1694,
+      "scope": "Release gitTag4.7.0 keeps suffix empty; distributor not consulted"
+    },
+    {
+      "path": "app/src/main/assets/warzone/index.html",
+      "line": 1314,
+      "scope": "Explicit --configdir passed to engine"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MainActivity.java",
+      "line": 52,
+      "scope": "Unchanged appassets origin"
+    },
+    {
+      "path": "source/platforms/emscripten/postjs.js",
+      "line": 3,
+      "scope": "Identical persistent mount and syncfs functions",
+      "container": "archive/native-blueprint-4.7.0-source.tar.gz"
+    },
+    {
+      "path": "emscripten4.0.10/src/lib/libidbfs.js",
+      "line": 24,
+      "scope": "DB_VERSION21, FILE_DATA store; entire emitted IDBFSobject byte-identical",
+      "repository": "https://github.com/emscripten-core/emscripten/tree/4.0.10"
+    },
+    {
+      "path": "emscripten4.0.10/src/lib/libidbfs.js",
+      "line": 199,
+      "scope": "Database name comesfrom mount.mountpoint",
+      "repository": "https://github.com/emscripten-core/emscripten/tree/4.0.10"
+    },
+    {
+      "path": "source/src/main.cpp",
+      "line": 468,
+      "scope": "Explicitconfigdir overrides platformdefault",
+      "container": "archive/native-blueprint-4.7.0-source.tar.gz"
+    },
+    {
+      "path": "source/src/wzpropertyproviders.cpp",
+      "line": 251,
+      "scope": "Distributor only buildproperty; othernativeconsumer crashdumpinfo",
+      "container": "archive/native-blueprint-4.7.0-source.tar.gz"
+    },
+    {
+      "path": "source/src/multiint.cpp",
+      "line": 5126,
+      "scope": "Initialcolour permutation usesrand; preferredcolour restoredonlyifconfigured",
+      "container": "archive/native-blueprint-4.7.0-source.tar.gz"
+    },
+    {
+      "path": "source/src/configuration.cpp",
+      "line": 524,
+      "scope": "colourMP default-1(random)",
+      "container": "archive/native-blueprint-4.7.0-source.tar.gz"
+    },
+    {
+      "path": "source/src/game.cpp",
+      "line": 2819,
+      "scope": "Savedgame colours restoredfromsaveddata",
+      "container": "archive/native-blueprint-4.7.0-source.tar.gz"
+    }
+  ],
+  "conclusion": "No native-save storage namespace/schema migration introduced. Same experimentalpackage and certificate support in-place upgrade; native files remain in same IDBFS mount. Fresh-match colour variation follows unchanged random assignment."
+}

@@ -1,0 +1,24 @@
+START prepared-native-save-load
+START immediate-first-and-repeat-item
+START held-neutral-preview-and-mixed-ordinary-queue
+START ordinary-and-module-same-frame
+START native-fifo-and-completion
+{
+  exceptionId: 1,
+  text: 'Uncaught',
+  lineNumber: 0,
+  columnNumber: 165,
+  scriptId: '378',
+  stackTrace: { callFrames: [ [Object], [Object], [Object] ] },
+  exception: {
+    type: 'object',
+    subtype: 'error',
+    className: 'Error',
+    description: 'Error: HQ lost during ordinary and Research Module FIFO\n' +
+      '    at eval (eval at <anonymous> (:1:63), <anonymous>:1:172)\n' +
+      '    at eval (eval at <anonymous> (:1:63), <anonymous>:1:806)\n' +
+      '    at eval (<anonymous>)\n' +
+      '    at <anonymous>:1:63',
+    objectId: '-6918563829680041156.2.2'
+  }
+}

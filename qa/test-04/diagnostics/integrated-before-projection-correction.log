@@ -1,0 +1,39 @@
+START research-power-and-native-save-load
+ERROR: null root node returned by UiTestAutomationBridge.
+{"passed":true,"identity":{"packageId":"com.rbabbit.warzonetowers.lab","device":"emulator-5556","candidateAPK_SHA256":"6f143ed3ca0f0678cd805e59fda00d97e8e859373e73b438f725e301f7201734","installedPath":"/data/app/~~AqPs8xfivFOIwtFpoduDhw==/com.rbabbit.warzonetowers.lab-0CPaC5sn3X7pk7oQww7CSg==/base.apk"},"cases":["research/power target UI, roof/body real hits, queued/upgrading/full feedback, previews, persistence, module+ordinary FIFO and native save/load"]}
+PASS research-power-and-native-save-load
+START factory-two-levels-and-normal-production
+ERROR: null root node returned by UiTestAutomationBridge.
+{"passed":true,"identity":{"packageId":"com.rbabbit.warzonetowers.lab","device":"emulator-5556","candidateAPK_SHA256":"6f143ed3ca0f0678cd805e59fda00d97e8e859373e73b438f725e301f7201734","installedPath":"/data/app/~~AqPs8xfivFOIwtFpoduDhw==/com.rbabbit.warzonetowers.lab-0CPaC5sn3X7pk7oQww7CSg==/base.apk"},"cases":["fresh authored factory0→1→2, distinct working/queued levels, third repeat rejected, full2/2 and no autoexit"]}
+PASS factory-two-levels-and-normal-production
+START module-layout-and-same-item-reselection
+{"passed":true,"identity":{"packageId":"com.rbabbit.warzonetowers.lab","device":"emulator-5556","candidateAPK_SHA256":"6f143ed3ca0f0678cd805e59fda00d97e8e859373e73b438f725e301f7201734","installedPath":"/data/app/~~AqPs8xfivFOIwtFpoduDhw==/com.rbabbit.warzonetowers.lab-0CPaC5sn3X7pk7oQww7CSg==/base.apk"},"profiles":["phone","compact-enlarged"]}
+PASS module-layout-and-same-item-reselection
+START mixed-selection-fifo-movement-and-returns
+ERROR: null root node returned by UiTestAutomationBridge.
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+false !== true
+
+    at visible (C:\timerApp\wz-towers-lab\tools\test-03-mixed-selection.cjs:27:9)
+    at async run (C:\timerApp\wz-towers-lab\tools\test-03-mixed-selection.cjs:60:16) {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+AssertionError [ERR_ASSERTION]: mixed-selection-fifo-movement-and-returns must pass
+
+1 !== 0
+
+    at C:\timerApp\wz-towers-lab\tools\run-test-04-delivery.cjs:19:49
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 1,
+  expected: 0,
+  operator: 'strictEqual',
+  diff: 'simple'
+}

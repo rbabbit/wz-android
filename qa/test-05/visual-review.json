@@ -1,0 +1,266 @@
+{
+  "passed": true,
+  "candidateAPK_SHA256": "9be9cde8d4d62a4ea205a34e6c53fe2fab7ff8eb0d57f52b9775207853e2866b",
+  "reviewed": true,
+  "method": "Root visually inspected these exact R4 emulator screenshots. Independent overlay review also found no alignment blocker. Gameplay and performance claims are bound separately to native reports.",
+  "checks": {
+    "queuedBlueprintAlignment": true,
+    "neutralPendingPreview": true,
+    "ordinaryAndModulePainting": true,
+    "raisedFootprintAndCleanup": true,
+    "moduleFeedback": true,
+    "compactLayouts": true,
+    "selectionHighlights": true,
+    "keyboardAndMenuReturns": true,
+    "quitAndFreshBattle": true
+  },
+  "screenshots": [
+    {
+      "path": "qa/test-05/preview-journey/preview05-01-research-held-neutral.png",
+      "accepted": true,
+      "notes": "Held unchecked Research preview is neutral; complete footprint and mesh visible.",
+      "sha256": "b6f5d9a8e1754bac1de182d4bd6d1e5771eac43e7b9d0b3edf2360013f310910"
+    },
+    {
+      "path": "qa/test-05/preview-journey/preview05-02-A0ResearchFacility-queued.png",
+      "accepted": true,
+      "notes": "Native queued green Research model aligns with the footprint and wireframe; site #1 visible.",
+      "sha256": "4a5fff488a629d96861065fe6e497826d3453973892ec3e9fe2bdbed853e27ab"
+    },
+    {
+      "path": "qa/test-05/preview-journey/preview05-03-A0PowerGenerator-queued.png",
+      "accepted": true,
+      "notes": "Power 2x2 footprint and site #2 render alongside native Research construction.",
+      "sha256": "b145cd1ed838ccb9cda436baf0f88b03b66f3896bf00d718ebc178d1e879d28d"
+    },
+    {
+      "path": "qa/test-05/preview-journey/preview05-04-A0CyborgFactory-queued.png",
+      "accepted": true,
+      "notes": "Cyborg 1x2 preview and site #3 render in the same frame as prior sites.",
+      "sha256": "0a0e5ebf6adbaf67ebc6b2b90ab60ca4c5f5b05c1017386d85e75e03d770dbcb"
+    },
+    {
+      "path": "qa/test-05/preview-journey/preview05-05-GuardTower1-queued.png",
+      "accepted": true,
+      "notes": "Repositioned camera fully exposes Guard Tower 1x1 outline and site #4.",
+      "sha256": "0408a3258c454df74b61847ebc81ccfe7be6a47c077916384cef70bc88ce7675"
+    },
+    {
+      "path": "qa/test-05/preview-journey/preview05-07-ordinary-and-module-highlights.png",
+      "accepted": true,
+      "notes": "Research module highlight and upgrade label paint while ordinary queued models remain visible.",
+      "sha256": "ebd3029a069ab518cd5a74c719e93a075fb3437854b66d1d2c0e05155c9e8f1f"
+    },
+    {
+      "path": "qa/test-05/preview-journey/preview05-09-new-research-module-body-queued.png",
+      "accepted": true,
+      "notes": "Accepted module stays attached to its parent with QUEUED 1/1 label; no floating duplicate.",
+      "sha256": "1a9b7a2a26cbfc5a0e558eaa0b7fa6808d9424fb9b333f791329e950cd4b1315"
+    },
+    {
+      "path": "qa/test-05/preview-journey/preview05-11-complete-correct-footprints.png",
+      "accepted": true,
+      "notes": "Native structures complete at prior preview sites; temporary models/site labels clear.",
+      "sha256": "5eb597c3bd89641e7ef77d35587384f79840c3bba92b4f9afa0f78cd3b15d995"
+    },
+    {
+      "path": "qa/test-05/raised-footprint/dustfall-footer-starting-view.png",
+      "accepted": true,
+      "notes": "Command Centre remains visible toward the footer.",
+      "sha256": "a0afbfe354aba88d6eef7255a4dca05988f571f9dff6e629e1abd11e4917eb03"
+    },
+    {
+      "path": "qa/test-05/raised-footprint/td1-raised-models.png",
+      "accepted": true,
+      "notes": "Raised-platform tower construction and 1x2 Cyborg preview are visible.",
+      "sha256": "18f8abf173958028b05b678a860ae82379138544305a69c626f3c4ff30f4a327"
+    },
+    {
+      "path": "qa/test-05/raised-footprint/td1-models-cleared-on-completion.png",
+      "accepted": true,
+      "notes": "Completed raised structures have no stale preview meshes.",
+      "sha256": "77c35dc3daedd857e8b257065ab0ba6e984e027dd84efb2b9f3559fcbc99e43d"
+    },
+    {
+      "path": "qa/test-05/module-journey/module04-modules-category-guidance.png",
+      "accepted": true,
+      "notes": "Compact module guidance directs the user to existing buildings.",
+      "sha256": "52c61cb34cd99558440294f07edd153d893c9a26f8e1ffc7a25b9161f7c186ee"
+    },
+    {
+      "path": "qa/test-05/module-journey/module04-research-roof-accepted.png",
+      "accepted": true,
+      "notes": "Roof tap accepts the intended lab; remaining eligible lab remains highlighted.",
+      "sha256": "825c777762f3353c63f960de4e733514f9ce63366c29f5d1d20f2c900e703fa2"
+    },
+    {
+      "path": "qa/test-05/module-journey/module04-research-queued-feedback.png",
+      "accepted": true,
+      "notes": "Queued/upgrading labels and compact duplicate feedback stay readable and clear of sidebar controls.",
+      "sha256": "cc307eb6894cc8c18f0bb234ed7eac863bcd6128ef9d0f6cab84d8257f7a1c21"
+    },
+    {
+      "path": "qa/test-05/module-journey/module04-research-complete-still-open.png",
+      "accepted": true,
+      "notes": "Both native labs show FULL 1/1 with module tool still open.",
+      "sha256": "0cc6b745085f14eead1e12db773d3066aa6138f5eb97a262b77adfae2e1a0f61"
+    },
+    {
+      "path": "qa/test-05/module-journey/module04-research-full-feedback.png",
+      "accepted": true,
+      "notes": "Full-capacity feedback appears beside the compact sidebar with no new preview.",
+      "sha256": "23a7cd0ec1413c1e9aa6b7e3ef0e1546ee489e88a330efb1bd26e21a9cb2edd2"
+    },
+    {
+      "path": "qa/test-05/module-journey/module04-power-then-tower-queued.png",
+      "accepted": true,
+      "notes": "Accepted Power Module and ordinary tower remain listed together with site markers.",
+      "sha256": "32e205cee5fdadcaf2f35dfc5a631087cf980ec4c88f5d2412dbbf46f8f639c5"
+    },
+    {
+      "path": "qa/test-05/module-journey/module04-power-full-feedback.png",
+      "accepted": true,
+      "notes": "Completed native Power Generator shows FULL 1/1 and compact full-capacity feedback.",
+      "sha256": "b380b0ba0d398871312aadbdb364f17f29341ee203c096c240c14eb704818b7e"
+    },
+    {
+      "path": "qa/test-05/module-journey/module04-ordinary-tower-autoexit.png",
+      "accepted": true,
+      "notes": "Ordinary tower completion exits placement and removes transient previews.",
+      "sha256": "bb8d8040efd961c1203eccc27f91581f402203ebdb1db21230bc6c3817641675"
+    },
+    {
+      "path": "qa/test-05/module-journey/module04-roundtrip-restored-input.png",
+      "accepted": true,
+      "notes": "After native F8 load the header, field, compact footer and input return without the stock main menu.",
+      "sha256": "393c8b4596a649299b440db17e394c3feca8eced21d0189e64907ee607f6c452"
+    },
+    {
+      "path": "qa/test-05/factory-journey/module04-factory-one-working-one-queued.png",
+      "accepted": true,
+      "notes": "Factory level one works while the second stays queued; capacity and site markers are readable.",
+      "sha256": "d4488b65bdfd218bc04e229bbd65d879107197ca47e01eb63b6de2ee6458460d"
+    },
+    {
+      "path": "qa/test-05/factory-journey/module04-factory-third-pending-feedback.png",
+      "accepted": true,
+      "notes": "Extra factory-module tap shows compact already-queued feedback without a duplicate preview.",
+      "sha256": "8ca0d83ffd707b9cda9067d17f13571527ef34b63fdc45ca919cdc479e63670f"
+    },
+    {
+      "path": "qa/test-05/factory-journey/module04-factory-full-feedback.png",
+      "accepted": true,
+      "notes": "Completed Factory shows FULL 2/2 and full-capacity feedback without a floating module preview.",
+      "sha256": "c4a1fccd452ae996ab9c46da8adbac8971e82f6ad78eff65475035dcc91ab024"
+    },
+    {
+      "path": "qa/test-05/factory-journey/module04-upgraded-factory-produce-one.png",
+      "accepted": true,
+      "notes": "Normal Factory UI queues one compatible Truck at the actual upgraded parent.",
+      "sha256": "b72496cfcc49bb8f8df56f7fc7e038f8688488e43c9effb87bb45e291045d252"
+    },
+    {
+      "path": "qa/test-05/factory-journey/module04-upgraded-factory-produced-complete.png",
+      "accepted": true,
+      "notes": "After observed native production, the factory queue is idle and normal controls remain usable.",
+      "sha256": "0e5ab5eff78fdf282a4626b7dff8be7ef6a42a829da2944abd2e185a3927b02d"
+    },
+    {
+      "path": "qa/test-05/module-layout/module04-phone-three-cards-guidance.png",
+      "accepted": true,
+      "notes": "Phone profile shows all three module cards and guidance without clipping or oversized controls.",
+      "sha256": "c95fc0853e73e5fb8e3ee654724ca445c55f4b590f179c0771eeb622a00ceedb"
+    },
+    {
+      "path": "qa/test-05/module-layout/module04-compact-enlarged-three-cards-guidance.png",
+      "accepted": true,
+      "notes": "Enlarged compact profile keeps three module choices, guidance and exit controls visible.",
+      "sha256": "56ec0fb40a3778678a14210ee10b68d39d23b4e321b3c08d13b7baa3c6ef5219"
+    },
+    {
+      "path": "qa/test-05/module-layout/module04-compact-enlarged-full-feedback.png",
+      "accepted": true,
+      "notes": "Enlarged-profile capacity label and feedback remain clear of controls.",
+      "sha256": "c723682f91a2183f8019200a7eb627d4d49f9469c218c7131b27323f0bcd8a5b"
+    },
+    {
+      "path": "qa/test-05/mixed-regression/mixed-02-constructor-only-highlights.png",
+      "accepted": true,
+      "notes": "Visible constructor selection highlights agree with the native IDs; combat units remain separate.",
+      "sha256": "27293786a23fb0eb4ce7fdfcee2f4a92bbfc8175e3b01fedc9fa2edcad921754"
+    },
+    {
+      "path": "qa/test-05/mixed-regression/mixed-05-trucks-while-building.png",
+      "accepted": true,
+      "notes": "Reselecting trucks during construction keeps the live field, compact controls and existing jobs.",
+      "sha256": "b8fa0bfc4544846a8fbd01af8f08e090e15a7f5b734f7917e6f9e9ec731a5b57"
+    },
+    {
+      "path": "qa/test-05/mixed-regression/mixed-08-noncentral-reselection.png",
+      "accepted": true,
+      "notes": "Moved native trucks retain proper selection highlights and item choice with live field visible.",
+      "sha256": "98dd1d44597439c7d701f60fd549dfd68033e5c277e84fccc59cf58c74c818fa"
+    },
+    {
+      "path": "qa/test-05/mixed-regression/mixed-return-research-restored.png",
+      "accepted": true,
+      "notes": "Research return restores header, compact footer and usable field without a stock main menu.",
+      "sha256": "f1a5a03152743af6a7466f4f7d474cacb73801a39f600b41f0e434190c2972f1"
+    },
+    {
+      "path": "qa/test-05/paused-returns/paused-return-2-factory-resumed.png",
+      "accepted": true,
+      "notes": "Second paused Factory return resumes the field with header/footer restored.",
+      "sha256": "fae8d1b26a7283868686fd3cc2959f851c01f805158225ea7a5474b7a2fde111"
+    },
+    {
+      "path": "qa/test-05/paused-returns/paused-return-2-help-returned.png",
+      "accepted": true,
+      "notes": "Second paused Help return clears the overlay and restores the expected paused battlefield.",
+      "sha256": "edc3352cb517329fe1804c541261ca0e5f32ccbddacfd9a8ae4a932a86bb97a2"
+    },
+    {
+      "path": "qa/test-05/keyboard-returns/lab-repeat-keyboard-visible-2.png",
+      "accepted": true,
+      "notes": "Second real Android keyboard appears over the design screen.",
+      "sha256": "0e6e67444907d292dd14a72141df995849f7d1fa2da38bd4425a295388f39631"
+    },
+    {
+      "path": "qa/test-05/keyboard-returns/lab-repeat-keyboard-return-2.png",
+      "accepted": true,
+      "notes": "Second keyboard dismissal restores the full Design layout and its controls.",
+      "sha256": "31fa226d0650ce53990ac00d0c1c21092639412b8abfc70da0d655f88d6a110f"
+    },
+    {
+      "path": "qa/test-05/quit-return/quit-journey-03-neutral-ended.png",
+      "accepted": true,
+      "notes": "Real native Quit/Confirm leads to the guarded neutral end screen.",
+      "sha256": "a254c01b99aa9b94e67c8326e90f30a337b6379a000ed04698fee058c197fd61"
+    },
+    {
+      "path": "qa/test-05/quit-return/quit-journey-04-returned-start.png",
+      "accepted": true,
+      "notes": "Returning from the neutral end screen opens the app's map/start screen.",
+      "sha256": "ecc3c1486244d55d9dd78d80a771eb3ef8b5e58c966b1bb6c408b47e8e64a5c5"
+    },
+    {
+      "path": "qa/test-05/quit-return/quit-journey-05-new-battle-queue.png",
+      "accepted": true,
+      "notes": "Fresh native battle accepts the normal Queue screen after real Quit/start.",
+      "sha256": "498d6151f0a625d2d96578426122dc0deff1f953ffb5ab41488630d28fd07c31"
+    },
+    {
+      "path": "qa/test-05/quit-return/quit-journey-new-battle-resumed.png",
+      "accepted": true,
+      "notes": "Fresh battle resumes native time after Queue return and native Pause/Resume, with header/footer restored.",
+      "sha256": "3a703cb0a2f3e562c581751357be2864f0f00f3a0b435e81863be022ff20bf39"
+    }
+  ],
+  "limitations": [
+    "The emulator's pre-existing black terrain issue remains in Normal/SwiftShader. Ground textures and the appearance of slopes could not be visually approved; native terrain picks, heights, positions and completion were checked.",
+    "Physical Android devices were not tested in this task.",
+    "All 161 ordinary catalogue types were exercised through the actual JavaScript renderer and 1,932 native source geometry cases. Real emulator construction covered representative 1x1, 2x2 and 1x2 structures, elevated sites and Research/Power/Factory modules; it did not construct every catalogue type or certify all 30 waves.",
+    "Native automatic wall-variant model choice is not published by the scripting API. Preview metadata retains the original selected structure model."
+  ],
+  "recordedUTC": "2026-11-07T18:32:44.592Z"
+}

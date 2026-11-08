@@ -3,11 +3,14 @@
   'use strict';
   if (window.__towersHtml) return;
   const session = new URLSearchParams(location.search).get('battle_session') || window.__towersHtmlSession || '';
+  const config=window.__warzoneDuelConfig;
+  const duel=config?.mode==='duel'&&Object.isFrozen(config),mode=duel?'duel':'tower-defense';
   let result = '', phase = 'loading', exitReason = '', menuRequested = false;
   function activate(wave) {
     // Only a packet emitted by the running scenario establishes a battle.
     // Pausing stops scenario ticks; absence of a packet is never an exit.
-    if (phase === 'ended' || !wave || wave.mode !== 'tower-defense') return false;
+    if (phase === 'ended' || !wave || wave.mode !== mode) return false;
+    if(duel&&(!['active','victory','defeated'].includes(wave.phase)||wave.humanBranch!==config.humanBranch||wave.botBranch!==config.botBranch))return false;
     if (phase === 'playing') return true;
     phase = 'playing';
     window.__kalaWarzoneTouch?.setBattleActive?.(true);
@@ -50,6 +53,7 @@
     } catch (_) { /* Never clear a newer request or remove a polled file. */ }
   }
   function finish(won) {
+    if(duel&&result)return;
     if (result === 'exited' || result === 'victory' || result === 'defeated' && !won) return;
     result = won ? 'victory' : 'defeated';
     retire(result);
@@ -93,11 +97,11 @@
     return true;
   }
   function observeNativeOutput(text) {
-    const marker = text.indexOf('BNWAVE:');
+    const prefix=duel?'BNDUEL:':'BNWAVE:',marker = text.indexOf(prefix);
     if (marker >= 0) {
       try {
-        const wave = JSON.parse(text.slice(marker + 7));
-        activate(wave);
+        const wave = JSON.parse(text.slice(marker + prefix.length));
+        if(!activate(wave))return;
         if (['defeated','victory'].includes(wave.phase)) finish(wave.phase === 'victory');
       } catch (_) {}
       return;
@@ -116,11 +120,11 @@
     const original = console[method];
     console[method] = function (...args) {
       const text = args.map(String).join(' ');
-      if (/BNWAVE:|\bGAMECODE_QUITGAME\b|Trying to load Game .* failed!|(?:Exiting|Restarting) main menu/i.test(text)) observeNativeOutput(text);
+      if (/BNWAVE:|BNDUEL:|\bGAMECODE_QUITGAME\b|Trying to load Game .* failed!|(?:Exiting|Restarting) main menu/i.test(text)) observeNativeOutput(text);
       return original.apply(this, args);
     };
   }
   window.__towersHtml = {session, consume, activate, finish, exit, back, cancelMainMenuReturn, returnToMainMenu, nativeOutput:observeNativeOutput,
     isActive:()=>phase === 'playing', isEnded:()=>phase === 'ended',
-    result:()=>result, report:()=>({phase,result,exitReason,session,menuRequested})};
+    result:()=>result, report:()=>({phase,result,exitReason,session,menuRequested,mode})};
 })();

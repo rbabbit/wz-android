@@ -1,0 +1,36 @@
+{
+  "challenge": {
+    "bases": 3,
+    "description": "Destroy the enemy Command Centre.",
+    "difficulty": "Medium",
+    "map": "Duel-RO-Half-T1",
+    "maxPlayers": 2,
+    "name": "Offline Duel",
+    "powerLevel": 1,
+    "scavengers": 0,
+    "techLevel": 1,
+    "version": 2
+  },
+  "locked": {
+    "ai": true,
+    "alliances": true,
+    "bases": true,
+    "difficulty": true,
+    "position": true,
+    "power": true,
+    "scavengers": true,
+    "teams": true
+  },
+  "player_0": {
+    "name": "Commander",
+    "position": 0,
+    "team": 0
+  },
+  "player_1": {
+    "ai": "multiplay/skirmish/duel-ai.js",
+    "difficulty": "Medium",
+    "name": "Opponent",
+    "position": 1,
+    "team": 1
+  }
+}

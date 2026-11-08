@@ -1,0 +1,30 @@
+{
+  "reviewed": true,
+  "screenshots": [
+    {"path":"qa/test-10/final-modes/standard-duel-cannon.png","accepted":true,"notes":"Actual native menu, mode and weapon choices; original artwork and name."},
+    {"path":"qa/test-10/final-modes/compact-large-text-duel-rockets.png","accepted":true,"notes":"Actual compact enlarged-text menu: controls fit without overlap."},
+    {"path":"qa/test-10/final-cannon/lab-10-cannon-research-branch-and-manual-queue.png","accepted":true,"notes":"Selected Cannon research plus shared upgrades; manual active and waiting research visible."},
+    {"path":"qa/test-10/final-cannon/lab-10-cannon-normal-active-and-queued-production.png","accepted":true,"notes":"One Cannon starter card after production, with active and queued jobs."},
+    {"path":"qa/test-10/final-cannon/lab-10-cannon-visible-native-truck-highlights.png","accepted":true,"notes":"Real constructor selection and build panel; native IDs are recorded separately."},
+    {"path":"qa/test-10/final-cannon/10-ordinary-native-combat.png","accepted":true,"notes":"Actual ordinary combat and projectiles; existing software-emulator terrain limitation is visible."},
+    {"path":"qa/test-10/final-rockets/lab-10-rockets-research-branch-and-manual-queue.png","accepted":true,"notes":"Rockets and shared research; active HE Rockets and queued Mini-Rocket Tower."},
+    {"path":"qa/test-10/final-save-rewind/10-duel-research-after-native-load.png","accepted":true,"notes":"Research interface usable after real native save/load, with restored Cannon branch."},
+    {"path":"qa/test-10/final-victory/victory-progress.png","accepted":true,"notes":"Actual native victory result after disclosed HQ save fixture."},
+    {"path":"qa/test-10/final-defeat/10-duel-native-defeat.png","accepted":true,"notes":"Actual native defeat result after disclosed HQ save fixture."},
+    {"path":"qa/test-10/final-towers-header/lab-09-header-compact.png","accepted":true,"notes":"Towers compact header with STATS removed and existing activity dock."},
+    {"path":"qa/test-10/final-towers-header/lab-09-research-unchanged.png","accepted":true,"notes":"Existing Towers research layout and full Towers research choices retained."},
+    {"path":"qa/test-10/final-towers-header/lab-09-build-native-highlights.png","accepted":true,"notes":"Existing Towers build panel and actual selected trucks retained."},
+    {"path":"qa/test-10/final-towers-dialog/dialog-cancel-1.png","accepted":true,"notes":"Polished actual Android confirmation: white game-font text, black card and subtle charcoal Return."}
+  ],
+  "observations": [
+    "Reviewed actual emulator PNGs, not generated mockups.",
+    "Native mode/weapon controls fit normal and compact enlarged-text profiles; original game artwork remains.",
+    "Cannon and Rockets research show their respective branches with shared technology, and production has one starter card.",
+    "The existing compact Towers interface remains, with no STATS header button.",
+    "The real Android Back confirmation uses white text on black with a restrained Return button.",
+    "An early replay-confirmation capture preceded dialog compositing and is not accepted as dialog visual evidence; the settled, pixel-verified Towers dialog is used."
+  ],
+  "limitations": [
+    "Black terrain remains visible on the software emulator, as in the preserved benchmark; native units, projectiles, orders, positions and map picking were observed. This is not a physical-handset rendering or FPS test."
+  ]
+}

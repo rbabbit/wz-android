@@ -89,6 +89,9 @@ public final class MainActivity extends Activity {
   private GraphicsSetupView graphicsSetup;
   private String graphicsMode = "normal";
   private String mapId = "td2";
+  private String matchMode = "towers";
+  private String duelWeapon = "cannon";
+  private BattleLaunchSpec battleLaunch;
   private MusicPackStore musicStore;
   private MusicSetupView musicSetup;
   private MusicTrackCatalog musicCatalog;
@@ -130,6 +133,8 @@ public final class MainActivity extends Activity {
                         : getPreferences(MODE_PRIVATE).getString("map_id", "td2"))
             ? "td1"
             : "td2";
+    matchMode = BattleLaunchSpec.matchMode(getIntent().getStringExtra("match_mode"));
+    duelWeapon = BattleLaunchSpec.duelWeapon(getIntent().getStringExtra("duel_weapon"));
     showGraphicsSetup();
   }
 
@@ -139,10 +144,14 @@ public final class MainActivity extends Activity {
             this,
             graphicsMode,
             mapId,
+            matchMode,
+            duelWeapon,
             new GraphicsSetupView.Actions() {
               @Override
-              public void start(String mode, String map) {
+              public void start(String mode, String map, String selectedMatch, String selectedWeapon) {
                 mapId = map;
+                matchMode = BattleLaunchSpec.matchMode(selectedMatch);
+                duelWeapon = BattleLaunchSpec.duelWeapon(selectedWeapon);
                 startWithGraphics(mode);
               }
 
@@ -228,6 +237,11 @@ public final class MainActivity extends Activity {
               @Override
               public void start() {
                 String mode = graphicsSetup != null ? graphicsSetup.selectedMode() : graphicsMode;
+                if (graphicsSetup != null) {
+                  mapId = graphicsSetup.selectedMap();
+                  matchMode = graphicsSetup.selectedMatchMode();
+                  duelWeapon = graphicsSetup.selectedDuelWeapon();
+                }
                 closeMusicSetup();
                 startWithGraphics(mode);
               }
@@ -312,6 +326,8 @@ public final class MainActivity extends Activity {
   }
 
   private void launchGame() {
+    battleLaunch = new BattleLaunchSpec(
+        matchMode, duelWeapon, mapId, graphicsMode, musicEnabled && musicCached);
     getPreferences(MODE_PRIVATE)
         .edit()
         .putString("graphics_mode", graphicsMode)
@@ -335,20 +351,28 @@ public final class MainActivity extends Activity {
   }
 
   private String gameUrl() {
+    BattleLaunchSpec launch = battleLaunch;
     String url =
-        URL
+        (launch.isDuel()
+            ? ORIGIN + "/warzone/mobile-duel.html?blocknight=1&match_mode=duel&weapon="
+                + launch.duelWeapon
+            : URL)
             + "&battle_session="
             + battleSession
             + "&map="
-            + mapId
+            + launch.mapId
             + "&graphics="
-            + graphicsMode
+            + launch.graphicsMode
             + "&music="
-            + (musicEnabled && musicCached ? "1" : "0");
+            + (launch.musicEnabled ? "1" : "0");
     if (getIntent().getBooleanExtra("graphics_probe", false)) url += "&graphics_probe=1";
     if ((getApplicationInfo().flags & android.content.pm.ApplicationInfo.FLAG_DEBUGGABLE) != 0
         || getIntent().getBooleanExtra("music_probe", false)) url += "&music_probe=1";
     return url;
+  }
+
+  private boolean isDuelBattle() {
+    return battleLaunch != null && battleLaunch.isDuel();
   }
 
   private void createWebView() {
@@ -403,7 +427,10 @@ public final class MainActivity extends Activity {
 
           @Override
           public void onPageFinished(WebView view, String url) {
-            if (!url.startsWith(ORIGIN + "/warzone/mobile.html")) return;
+            Uri page = Uri.parse(url);
+            if (!"appassets.androidplatform.net".equals(page.getHost())
+                || !("/warzone/mobile.html".equals(page.getPath())
+                    || "/warzone/mobile-duel.html".equals(page.getPath()))) return;
             verifyEnginePrerequisites();
           }
         });
@@ -412,13 +439,16 @@ public final class MainActivity extends Activity {
           @Override
           public boolean onConsoleMessage(ConsoleMessage message) {
             String engineMessage = message.message();
-            if (engineMessage.contains("BNWAVE:")
+            if ((engineMessage.contains("BNWAVE:") || isDuelBattle() && engineMessage.contains("BNDUEL:"))
                 && (engineMessage.contains("\"phase\":\"victory\"")
                     || engineMessage.contains("\"phase\":\"defeated\""))) {
               // Preserve a worker's explicit result before its subsequent quit
               // log is routed through the neutral-exit path.
               webView.evaluateJavascript(
-                  "window.__towersHtml?.nativeOutput(" + JSONObject.quote(engineMessage) + ");true", null);
+                  (isDuelBattle()
+                      ? "window.__warzoneDuel?.nativeOutput(" + JSONObject.quote(engineMessage) + ");"
+                      : "")
+                      + "window.__towersHtml?.nativeOutput(" + JSONObject.quote(engineMessage) + ");true", null);
             }
             boolean quitting = engineMessage.contains("GAMECODE_QUITGAME");
             boolean failedLoad = engineMessage.contains("Exiting to main menu")
@@ -657,7 +687,8 @@ public final class MainActivity extends Activity {
     if (getIntent().getBooleanExtra("engine_debug", false)) {
       webView.evaluateJavascript(
           "(() => {const original=constructWZModuleConfig;"
-              + "constructWZModuleConfig=(args)=>{WZ_CONFIG_DIR_SUFFIX='-emulator-v22';"
+              + "constructWZModuleConfig=(args)=>{WZ_CONFIG_DIR_SUFFIX='"
+              + (isDuelBattle() ? "-duel-emulator-v22" : "-emulator-v22") + "';"
               + "const m=original(args);m.arguments.push('--debug=all');return m;};})()",
           null);
     }
@@ -688,7 +719,7 @@ public final class MainActivity extends Activity {
       "warzone-command-pages.js",
       "warzone-touch-controls.js",
       "warzone-mobile-research.js",
-      "warzone-towers-wave-hud.js"
+      isDuelBattle() ? "warzone-duel-ui.js" : "warzone-towers-wave-hud.js"
     };
     try (ByteArrayOutputStream output = new ByteArrayOutputStream()) {
       byte[] buffer = new byte[8192];
@@ -702,7 +733,11 @@ public final class MainActivity extends Activity {
         }
       }
       webView.evaluateJavascript(
-          "window.__towersHtmlSession="
+          (isDuelBattle()
+              ? "window.__warzoneDuelConfig=window.__warzoneDuelConfig||Object.freeze({mode:'duel',humanBranch:'"
+                  + battleLaunch.duelWeapon + "',botBranch:'" + battleLaunch.botWeapon() + "'});\n"
+              : "")
+              + "window.__towersHtmlSession="
               + JSONObject.quote(battleSession)
               + ";\n"
               + new String(output.toByteArray(), StandardCharsets.UTF_8),
@@ -790,7 +825,7 @@ public final class MainActivity extends Activity {
     public void engineReady() {
       runOnUiThread(() -> {
         if (getIntent().getBooleanExtra("engine_debug", false)) hideLoadingPanel();
-        updateLoadingStatus("PREPARING YOUR DEFENCES…");
+        updateLoadingStatus(isDuelBattle() ? "PREPARING YOUR MATCH…" : "PREPARING YOUR DEFENCES…");
         webView.requestFocus();
         beginStartupAutomation();
         if (touchTestMode) {
@@ -966,7 +1001,8 @@ public final class MainActivity extends Activity {
     hideLoadingPanel();
     TextView exit = new TextView(this);
     replayPanel = exit;
-    exit.setText("WARZONE TOWERS\n\nBATTLE ENDED\n\nTap to return to the start screen");
+    exit.setText((isDuelBattle() ? "WARZONE 1v1" : "WARZONE TOWERS")
+        + "\n\nBATTLE ENDED\n\nTap to return to the start screen");
     exit.setTextColor(0xFFE2ECE8);
     exit.setTextSize(22);
     exit.setGravity(Gravity.CENTER);
@@ -992,18 +1028,14 @@ public final class MainActivity extends Activity {
     if (replayPanel != null) {
       if (won && !replayWon) {
         replayWon = true;
-        replayPanel.setText(
-            "WARZONE TOWERS\n\nVICTORY\n\nAll 30 rounds cleared\n\nTap to play again");
+        replayPanel.setText(replayText(true));
       }
       return;
     }
     replayWon = won;
     TextView replay = new TextView(this);
     replayPanel = replay;
-    replay.setText(
-        won
-            ? "WARZONE TOWERS\n\nVICTORY\n\nAll 30 rounds cleared\n\nTap to play again"
-            : "WARZONE TOWERS\n\nYOU HAVE FAILED\n\nCommand centre destroyed\n\nTap to try again");
+    replay.setText(replayText(won));
     replay.setTextColor(0xFFF0B43C);
     replay.setTextSize(22);
     replay.setGravity(Gravity.CENTER);
@@ -1019,6 +1051,15 @@ public final class MainActivity extends Activity {
         replay,
         new FrameLayout.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+  }
+
+  private String replayText(boolean won) {
+    if (isDuelBattle()) return won
+        ? "WARZONE 1v1\n\nVICTORY\n\nEnemy command centre destroyed\n\nTap to play again"
+        : "WARZONE 1v1\n\nDEFEAT\n\nYour command centre was destroyed\n\nTap to try again";
+    return won
+        ? "WARZONE TOWERS\n\nVICTORY\n\nAll 30 rounds cleared\n\nTap to play again"
+        : "WARZONE TOWERS\n\nYOU HAVE FAILED\n\nCommand centre destroyed\n\nTap to try again";
   }
 
   private void dumpEngineErrors() {
@@ -1068,7 +1109,7 @@ public final class MainActivity extends Activity {
           () ->
               evaluateTouchTapThen(
                   585,
-                  "td1".equals(mapId) ? 30 : 70,
+                  isDuelBattle() || "td1".equals(battleLaunch.mapId) ? 30 : 70,
                   "Ready",
                   1500,
                   this::finishStartupAutomation));
@@ -1078,16 +1119,17 @@ public final class MainActivity extends Activity {
   }
 
   private void finishStartupAutomation() {
-    updateLoadingStatus("PREPARING THE FIRST WAVE…");
+    updateLoadingStatus(isDuelBattle() ? "PREPARING THE MATCH…" : "PREPARING THE FIRST WAVE…");
     awaitBattlefieldReady(0);
   }
 
   private void awaitBattlefieldReady(int attempt) {
     if (webView == null || isFinishing()) return;
     String script =
-        "(() => {const r=window.__warzoneTowersWaves?.report?.();"
+        "(() => {const r=window."
+            + (isDuelBattle() ? "__warzoneDuel" : "__warzoneTowersWaves") + "?.report?.();"
             + "return Boolean(document.getElementById('canvas')"
-            + "&&r?.snapshot?.mode==='tower-defense');})()";
+            + "&&r?.snapshot?.mode==='" + (isDuelBattle() ? "duel" : "tower-defense") + "');})()";
     webView.evaluateJavascript(
         script,
         result -> {
@@ -1096,7 +1138,9 @@ public final class MainActivity extends Activity {
             return;
           }
           if (attempt >= 240) {
-            showEngineFailure("The tower-defence battlefield did not become ready in time.");
+            showEngineFailure(isDuelBattle()
+                ? "The 1v1 battlefield did not become ready in time."
+                : "The tower-defence battlefield did not become ready in time.");
             return;
           }
           if (attempt == 40) updateLoadingStatus("ASSEMBLING THE BATTLEFIELD…");
@@ -1117,7 +1161,10 @@ public final class MainActivity extends Activity {
   private void awaitInitialCamera(int attempt) {
     if (webView == null || isFinishing() || !battleOutcome.isEmpty()) return;
     webView.evaluateJavascript(
-        "Boolean(window.__kalaWarzoneTouch?.report?.().cameraFacingPending===false)",
+        "Boolean(window.__kalaWarzoneTouch?.report?.().cameraFacingPending===false"
+            + (isDuelBattle()
+                ? "&&window.__warzoneDuel?.report?.().cameraRequested&&window.__warzoneDuel?.report?.().cameraReady"
+                : "") + ")",
         result -> {
           if ("true".equals(result)) {
             hideLoadingPanel();
@@ -1133,8 +1180,10 @@ public final class MainActivity extends Activity {
   private void faceOpponent() {
     if (webView == null || isFinishing()) return;
     webView.evaluateJavascript(
-        "Boolean(window.__kalaWarzoneTouch?.faceOpponent('" + mapId + "'))",
-        result -> Log.i(TAG, "Automatic Warzone battlefield heading (" + mapId + "): " + result));
+        isDuelBattle()
+            ? "Boolean(window.__warzoneDuel?.faceOpponent())"
+            : "Boolean(window.__kalaWarzoneTouch?.faceOpponent('" + battleLaunch.mapId + "'))",
+        result -> Log.i(TAG, "Automatic Warzone battlefield heading (" + battleLaunch.matchMode + "): " + result));
   }
 
   private void showCombatHud() {
@@ -1233,7 +1282,8 @@ public final class MainActivity extends Activity {
         }
         InputStream stream = getAssets().open("warzone/" + path);
         Map<String, String> headers = isolationHeaders();
-        if ("index.html".equals(path) || "mobile.html".equals(path)) {
+        if ("index.html".equals(path) || "mobile.html".equals(path)
+            || "index-duel.html".equals(path) || "mobile-duel.html".equals(path)) {
           headers.put("Cross-Origin-Opener-Policy", "same-origin");
           headers.put("Document-Isolation-Policy", "isolate-and-require-corp");
         }

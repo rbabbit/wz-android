@@ -1,0 +1,113 @@
+{
+  "passed": true,
+  "candidateAPK_SHA256": "d29a3e6e2e6da13a8eac6b2d6540b5c4070b39f0115de1dc44025822237a31b3",
+  "reviewed": true,
+  "recordedUTC": "2026-11-08T01:17:35.351761Z",
+  "reviewInput": {
+    "path": "qa/test-10/accepted.json",
+    "sha256": "1559ae446d749f4c0054fb75cee2b91655b7283047e0d39c579bfc7a77617518"
+  },
+  "screenshots": [
+    {
+      "path": "qa/test-10/final-modes/standard-duel-cannon.png",
+      "sha256": "260a594a0df58dc1e1faf87ea7c6541a6e43d56ab0295f9906fcc99e83dcc47b",
+      "accepted": true,
+      "notes": "Actual native menu, mode and weapon choices; original artwork and name."
+    },
+    {
+      "path": "qa/test-10/final-modes/compact-large-text-duel-rockets.png",
+      "sha256": "5cef4b5676f523ceace13e5352673529f26fb3a6ba35ec301021a4066fcb1ef9",
+      "accepted": true,
+      "notes": "Actual compact enlarged-text menu: controls fit without overlap."
+    },
+    {
+      "path": "qa/test-10/final-cannon/lab-10-cannon-research-branch-and-manual-queue.png",
+      "sha256": "5f2ee8f06a25b7de934073529a7f6ec7d52904a16773f729cffc0694bcf33c1e",
+      "accepted": true,
+      "notes": "Selected Cannon research plus shared upgrades; manual active and waiting research visible."
+    },
+    {
+      "path": "qa/test-10/final-cannon/lab-10-cannon-normal-active-and-queued-production.png",
+      "sha256": "abf11af573b8b2d89ab39f15dce0d8976eed23ef30bb9ebe7cef5c46e1f17abb",
+      "accepted": true,
+      "notes": "One Cannon starter card after production, with active and queued jobs."
+    },
+    {
+      "path": "qa/test-10/final-cannon/lab-10-cannon-visible-native-truck-highlights.png",
+      "sha256": "9840a3fb26050a4f48acdd98bc4ee1d5f4c4d5d03f02114327d65dbe8e33d9bc",
+      "accepted": true,
+      "notes": "Real constructor selection and build panel; native IDs are recorded separately."
+    },
+    {
+      "path": "qa/test-10/final-cannon/10-ordinary-native-combat.png",
+      "sha256": "8811cb5b206381b7bb1d988c47181529d6a6f53427af4b1c8ae62d095b4756dc",
+      "accepted": true,
+      "notes": "Actual ordinary combat and projectiles; existing software-emulator terrain limitation is visible."
+    },
+    {
+      "path": "qa/test-10/final-rockets/lab-10-rockets-research-branch-and-manual-queue.png",
+      "sha256": "28ad2d14456f370743ac5a7aa26af83e10ba5b509e4075bea4167338d7e53ad1",
+      "accepted": true,
+      "notes": "Rockets and shared research; active HE Rockets and queued Mini-Rocket Tower."
+    },
+    {
+      "path": "qa/test-10/final-save-rewind/10-duel-research-after-native-load.png",
+      "sha256": "550418422c587b76154387e8c9361752569634115f67c15e545910188d8a6a0b",
+      "accepted": true,
+      "notes": "Research interface usable after real native save/load, with restored Cannon branch."
+    },
+    {
+      "path": "qa/test-10/final-victory/victory-progress.png",
+      "sha256": "632e08b0c8b4b68a65cc35b8c0b9ecbae710d3ed6e02e53eda291381c29a4985",
+      "accepted": true,
+      "notes": "Actual native victory result after disclosed HQ save fixture."
+    },
+    {
+      "path": "qa/test-10/final-defeat/10-duel-native-defeat.png",
+      "sha256": "c8bb502c28ef61a3fb3f46980f8bc5c032ec65d27d5532f0aa59537cf0abbec4",
+      "accepted": true,
+      "notes": "Actual native defeat result after disclosed HQ save fixture."
+    },
+    {
+      "path": "qa/test-10/final-towers-header/lab-09-header-compact.png",
+      "sha256": "be79a71753158ed6be384616ff54ce5ce08f7febbfdbdeab80e980bce6674618",
+      "accepted": true,
+      "notes": "Towers compact header with STATS removed and existing activity dock."
+    },
+    {
+      "path": "qa/test-10/final-towers-header/lab-09-research-unchanged.png",
+      "sha256": "5533aa0befc00ea533ae6ba2a77dd11ea25cf3a42896dfd6c95668d3ef1e73e2",
+      "accepted": true,
+      "notes": "Existing Towers research layout and full Towers research choices retained."
+    },
+    {
+      "path": "qa/test-10/final-towers-header/lab-09-build-native-highlights.png",
+      "sha256": "6950001d21a849491f25747b5ced5cd1073804f0c0e7f2ae73416bb2139b55f5",
+      "accepted": true,
+      "notes": "Existing Towers build panel and actual selected trucks retained."
+    },
+    {
+      "path": "qa/test-10/final-towers-dialog/dialog-cancel-1.png",
+      "sha256": "954664a70c26494a9f607c2d508117d79c3327b21c694153444764b09f481731",
+      "accepted": true,
+      "notes": "Polished actual Android confirmation: white game-font text, black card and subtle charcoal Return."
+    }
+  ],
+  "observations": [
+    "Reviewed actual emulator PNGs, not generated mockups.",
+    "Native mode/weapon controls fit normal and compact enlarged-text profiles; original game artwork remains.",
+    "Cannon and Rockets research show their respective branches with shared technology, and production has one starter card.",
+    "The existing compact Towers interface remains, with no STATS header button.",
+    "The real Android Back confirmation uses white text on black with a restrained Return button.",
+    "An early replay-confirmation capture preceded dialog compositing and is not accepted as dialog visual evidence; the settled, pixel-verified Towers dialog is used."
+  ],
+  "limitations": [
+    "Verified on the Android emulator; a physical handset, hardware GPU/FPS, audio and HQ graphics were not newly tested.",
+    "Both weapon branches used ordinary authored units, manual research and normal production. Sustained ordinary combat was observed in the Cannon-human/Rockets-bot journey.",
+    "Victory and defeat handling used explicitly seeded complete-save copies with one Command Centre removed. These are native outcome/lifecycle checks, not naturally completed wins/losses.",
+    "The Towers benchmark payload/maps remain byte-identical. Scoped Towers launcher/build/research/overlay/Back regressions were replayed; a complete30-wave run was not repeated.",
+    "An earlier ordinary F8 preflight observed a stale clock packet. The passing final-save-rewind check required an actual native clock rewind, fresh command replies and restored research/input; the earlier transport/readiness attempt is diagnostic only.",
+    "Black terrain remains visible on the software emulator, as in the preserved benchmark; native units, projectiles, orders, positions and map picking were observed. This is not a physical-handset rendering or FPS test.",
+    "Replay readiness fixture continuation: Continued the already replaying native match after the original QA observer hit a20-second CDP transport timeout during engine loading. No additional Replay/engine input was sent. The same already-started battle was checked with a bounded90-second readiness transport; no additional Replay input or runtime change was used. The original20-second observer timeout is retained as diagnostic evidence."
+  ]
+}

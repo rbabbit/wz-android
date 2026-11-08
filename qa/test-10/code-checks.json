@@ -1,0 +1,319 @@
+{
+  "passed": true,
+  "candidateAPK_SHA256": "d29a3e6e2e6da13a8eac6b2d6540b5c4070b39f0115de1dc44025822237a31b3",
+  "recordedUTC": "2026-11-08T01:01:09.492867Z",
+  "scope": "Focused current-source regressions only: actual Duel native scripts under deterministic API stubs, full stock NullBot include contexts, native scriptPath JSON policy/config mirrors, research closure, launch-hook ordering, human/bot production gates, shared lifecycle and existing Back/input/build/queue paths. No emulator inputs, historical emulation runner or engine compilation. r1/r2 diagnostics are not delivery evidence. Actual gameplay/screens require separate exact-installed-APK reports. Final r4 adds the native starter/normal-produced recipe deduplication regression for both doctrines. Earlier r3 source/package reports are preserved in r3-source-checks.",
+  "tests": [
+    {
+      "name": "scenario/duel/test-backend.cjs",
+      "passed": true,
+      "exitCode": 0,
+      "elapsedMs": 177,
+      "output": "PASS native Duel policy/bootstrap/objective/AI research and foreign production: cannon\nPASS native Duel policy/bootstrap/objective/AI research and foreign production: rockets\nPASS native starter/produced recipe deduplication for both doctrines\nPASS persisted/custom/template/queued production policy guards\nPASS actual loader FIFO (cached/async) and branch config before native main\nPASS Duel backend source checks; actual installed gameplay requires separate emulator evidence.\nPASS complete stock NullBot native include context, fixed opposite branch: cannon (19 scripts)\nPASS complete stock NullBot native include context, fixed opposite branch: rockets (19 scripts)"
+    },
+    {
+      "name": "test-duel-ui.cjs",
+      "passed": true,
+      "exitCode": 0,
+      "elapsedMs": 98,
+      "output": "PASS: immutable mode isolation, native Duel lifecycle/results, bounded stale-safe streaming logs, branch labels, compact wave-free status, camera delegation and session-scoped Cancel/Return"
+    },
+    {
+      "name": "test-android-back-routing.cjs",
+      "passed": true,
+      "exitCode": 0,
+      "elapsedMs": 1032,
+      "output": "PASS: actual Java legacy/pre-IME Back and Escape routing, repeat/cancel/orphan guards, IME priority and non-game fallback"
+    },
+    {
+      "name": "test-test-lifecycle.cjs",
+      "passed": true,
+      "exitCode": 0,
+      "elapsedMs": 71,
+      "output": "PASS: authoritative lifecycle, save flush, guarded restore and session-scoped Cancel/Return confirmation without native Escape (code checks only)"
+    },
+    {
+      "name": "test-html-return.cjs",
+      "passed": true,
+      "exitCode": 0,
+      "elapsedMs": 105,
+      "output": "PASS: consumed transport, exact in-flight/loaded/dead-lab queues, phone template persistence/rollback, research gating, preserved draft, results and Back navigation (code checks only)"
+    },
+    {
+      "name": "test-html-page-return.cjs",
+      "passed": true,
+      "exitCode": 0,
+      "elapsedMs": 76,
+      "output": "PASS: paused HTML page return restores iframe input/focus without a native acknowledgement; tracked native close stays ordered and independent"
+    },
+    {
+      "name": "test-html-input-modes.cjs",
+      "passed": true,
+      "exitCode": 0,
+      "elapsedMs": 73,
+      "output": "PASS: Patrol/Queue cancellation, one-Escape Back and ended-battle native input isolation (code checks only)"
+    },
+    {
+      "name": "test-native-box-input.cjs",
+      "passed": true,
+      "exitCode": 0,
+      "elapsedMs": 70,
+      "output": "PASS: native SDL 250ms DOUBLECLICK/MOVE model, BOX-only 300ms cadence after all LMB sources, fresh input frame, normal fast clicks, cancellation and focus preservation"
+    },
+    {
+      "name": "test-smooth-building.cjs",
+      "passed": true,
+      "exitCode": 0,
+      "elapsedMs": 75,
+      "output": "PASS: immediate/repeated selection, immutable rapid mixed orders, accepted-input exit and scoped STOP; no frame freeze or viewport change"
+    },
+    {
+      "name": "test-build-worker-groups.cjs",
+      "passed": true,
+      "exitCode": 0,
+      "elapsedMs": 108,
+      "output": "PASS: actual placement keeps area jobs immutable, honors manual/cleared groups, refreshes once after camera moves, rejects changing/empty views safely, and covers module parents"
+    },
+    {
+      "name": "test-visible-trucks.cjs",
+      "passed": true,
+      "exitCode": 0,
+      "elapsedMs": 5105,
+      "output": "PASS: native BOX selects off-centre constructors, filters combat/sidebar/radar/dock, preserves orders and early taps, bounds cancellation/paused paths, and keeps notices out of catalogue flow"
+    },
+    {
+      "name": "test-selection-cache.cjs",
+      "passed": true,
+      "exitCode": 0,
+      "elapsedMs": 216,
+      "output": "PASS: fresh native cache verification, combat/movement/ID mismatch fallback without orders, four-key bound, world/end reset, and pending-only reader timer cleanup"
+    },
+    {
+      "name": "test-fresh-selection-state.cjs",
+      "passed": true,
+      "exitCode": 0,
+      "elapsedMs": 72,
+      "output": "PASS: delayed pre-box snapshots cannot replace native selected IDs; post-input state is unique while ordinary polling coalesces"
+    },
+    {
+      "name": "test-truck-selection-flicker.cjs",
+      "passed": true,
+      "exitCode": 0,
+      "elapsedMs": 88,
+      "output": "PASS: localized merged tile-volume selection, zero-gesture verified repeat, fresh camera/movement invalidation, bounded large volumes, no GPU mesh read and native order preservation"
+    },
+    {
+      "name": "test-module-placement.cjs",
+      "passed": true,
+      "exitCode": 0,
+      "elapsedMs": 66,
+      "output": "PASS: actual-parent module targeting, immediate reservations, rapid duplicate suppression, two factory slots, capacity-start reconciliation, rejection retry and newer-preview preservation"
+    },
+    {
+      "name": "test-research-queue-bridge.cjs",
+      "passed": true,
+      "exitCode": 0,
+      "elapsedMs": 64,
+      "output": "PASS: actual Towers bridge validates atomic ordered queues, game-time estimates, module rates and waiting power"
+    },
+    {
+      "name": "test-command-bridge.cjs",
+      "passed": true,
+      "exitCode": 0,
+      "elapsedMs": 154,
+      "output": "PASS: FIFO builds, manual/automatic workers, sticky sessions, STOP, deduplication, validation, factory queues and bounded 100-job polling\nPASS: construction ETA follows actual worker actions/upgrades, pauses and power; modules use observed work; journal never replaces native orders\nPASS: a snapped 2x2 foundation binds to its own queue entry without matching older adjacent buildings\nPASS: native queue handoff preserves progress/completion; sustained cancellation still interrupts"
+    },
+    {
+      "name": "test-native-placement-lifecycle.cjs",
+      "passed": true,
+      "exitCode": 0,
+      "elapsedMs": 2976,
+      "output": "PASS: native readiness buffers early taps, SELECT drains accepted sites, STOP cancels pending input and later navigation wins"
+    },
+    {
+      "name": "syntax-current-duel-and-shared-runtime",
+      "passed": true,
+      "exitCode": 0,
+      "elapsedMs": 823,
+      "output": "PASS: JavaScript syntax for 14 current shared and Duel native/wrapper files"
+    }
+  ],
+  "sourceFiles": [
+    {
+      "path": "app/src/main/assets/warzone/index-duel.html",
+      "sha256": "f0f0f18d26c32538e2617ef07965b456755a174e5775418318a61c277c57dc4d"
+    },
+    {
+      "path": "app/src/main/assets/warzone/mobile-duel.html",
+      "sha256": "78da4acbe2edcceffcb161a16aef230548a9fa83508e80e6f23c77a189d8d86a"
+    },
+    {
+      "path": "app/src/main/assets/warzone-command-pages.js",
+      "sha256": "2dd5064677cd8e54550a936c17301ad68b141a15e4ab27546be9be60352deae0"
+    },
+    {
+      "path": "app/src/main/assets/warzone-duel-ui.js",
+      "sha256": "6ef03286038d15c452c2c40efbb11fc9ea08befa91cd49095be8f834c5b522ff"
+    },
+    {
+      "path": "app/src/main/assets/warzone-html-session.js",
+      "sha256": "5e23284cee0ce6b8e84b3be776c5833c619d7e7ceaff7def1188864da6504d27"
+    },
+    {
+      "path": "app/src/main/assets/warzone-mobile-research.js",
+      "sha256": "7e1bc11c8356985eccece46b79b3765b5fa26f3dcab0e2e71899d02ca12b9bfa"
+    },
+    {
+      "path": "app/src/main/assets/warzone-touch-controls.js",
+      "sha256": "28d0c176274366362f5f375b29f2509ce6ca7ced1fccee9528badb60523c9ba4"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/BattleLaunchSpec.java",
+      "sha256": "ae44466f3a46745223de329e265556f40551c3ab3587fe3cad607728205eb207"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/GraphicsSetupView.java",
+      "sha256": "158d14eb3d244bc749c156a671ab933ea8042309b77f7254c652b177060edcf7"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MainActivity.java",
+      "sha256": "3811561532208b56c8c43d8b66f8d0462da40b5f77d09739927c64d8cf8564fb"
+    },
+    {
+      "path": "scenario/duel/ai-production.js",
+      "sha256": "955794526ffd96d5278b333f7113fda6eb3716cf43e93397f7211503dd4b7e29"
+    },
+    {
+      "path": "scenario/duel/ai-research.js",
+      "sha256": "2fb6fc3cdcb35f30cc8bfff9ae8e6cbbd08f62b96d3d67449404fe63d63a2067"
+    },
+    {
+      "path": "scenario/duel/ai.js",
+      "sha256": "402603e8e4b72c07b6cd7b190c8af1dcec466f9d80a653dbd3b7959ef5810843"
+    },
+    {
+      "path": "scenario/duel/ai.json",
+      "sha256": "492e42b53372cacefd168ffb1dd6e5282f3bcd58d87f25e6f64fa22fbd4b7902"
+    },
+    {
+      "path": "scenario/duel/challenge.json",
+      "sha256": "960888b2269c871123be67eb5c608146bae4900068b980e4bfe0be7ae2e2fb89"
+    },
+    {
+      "path": "scenario/duel/command-policy.js",
+      "sha256": "855b5ca93a95ba6f3b5e361ec037e027f5da9a53c91a0658378a125cb19eadfd"
+    },
+    {
+      "path": "scenario/duel/commands.js",
+      "sha256": "c2b7d00e530649373c59581b1d5cc11fe6d764c3d2603f13198f59ec7819e068"
+    },
+    {
+      "path": "scenario/duel/PACKAGE.json",
+      "sha256": "eb7fee99ecd7239fe1037780dd0493d5246d5a7a0018c6e42fb9cd8859c56bb2"
+    },
+    {
+      "path": "scenario/duel/policy.js",
+      "sha256": "492f3b9841cebf01f75f9cfce3df962f7f5c669c23d57fb094b3751307a0d89e"
+    },
+    {
+      "path": "scenario/duel/policy.json",
+      "sha256": "9ee01a5527a6cbcf76cad366a6f654cae4548c30c4082e14e9ac5e94d9b58778"
+    },
+    {
+      "path": "scenario/duel/research-bridge.js",
+      "sha256": "8bc6f7ab603efcee52426abe772dad4c8f043a9ebd76f5ce32b0dcd1d17908a3"
+    },
+    {
+      "path": "scenario/duel/research.json",
+      "sha256": "846b1ca3d53dd9674aadc61706195987815b8c63ec22a90e8d740832674a51fe"
+    },
+    {
+      "path": "scenario/duel/rules.js",
+      "sha256": "b927ea0fac1992226bfe7ef00ec3e6e2466efa96c3ac0c8a5264e62ba5937ec7"
+    },
+    {
+      "path": "scenario/duel/runtime-prepare.js",
+      "sha256": "229d21f411c1f1cf39c66d35425d52749899a7b510914f9ce00a14983339129e"
+    },
+    {
+      "path": "scenario/duel/templates.json",
+      "sha256": "0acd35acd13d8342aafb9c430956d53409a05c7dc1bd31b4e332f2fd6eb12a34"
+    },
+    {
+      "path": "scenario/duel/test-backend.cjs",
+      "sha256": "3298a55e3430c051e7a2fc22c62fe14cc596af95b23a6cee748ee9d413cb8330"
+    },
+    {
+      "path": "tools/build-duel-package.py",
+      "sha256": "31e26fb2ae6d16d780d2c26789bae2ce41419e243cae4e143a93df50d2f326ae"
+    },
+    {
+      "path": "tools/test-android-back-routing.cjs",
+      "sha256": "2d0213d3f8cd99f4087778d805f9c5f099e2a4c20aae9d1b87d3bd27c303312d"
+    },
+    {
+      "path": "tools/test-build-worker-groups.cjs",
+      "sha256": "f85dfa16350e4d4abb65d8ecc1c9bac07b2e16f46d9e20de7df0ee962e57d39e"
+    },
+    {
+      "path": "tools/test-command-bridge.cjs",
+      "sha256": "b9fbd8f391b79d7d8476a9328fc0685fa7e5bc3d4d6c61dabfccacae11859b5d"
+    },
+    {
+      "path": "tools/test-duel-ui.cjs",
+      "sha256": "92515c62286729913b4538fecbdca0f96c0c714a2c02946e1ee15bdbcfc67383"
+    },
+    {
+      "path": "tools/test-fresh-selection-state.cjs",
+      "sha256": "9fde056fb807d7a35d015a5e4a96e6bfb4637ea72c4df77b8d98f60bb411dc81"
+    },
+    {
+      "path": "tools/test-html-input-modes.cjs",
+      "sha256": "ad578cbaecc5cdeff491ca2b29dbc7618a787055d231d6a5a85ff474e76855db"
+    },
+    {
+      "path": "tools/test-html-page-return.cjs",
+      "sha256": "b594b18174a7d79409a60c968404398dcbdd3ecb3bfb2a6c93ef4c86008dda19"
+    },
+    {
+      "path": "tools/test-html-return.cjs",
+      "sha256": "c021c4cced156ac271dec6f31827b9b5a54cd6b6a14c96490d4fa897f9f64d05"
+    },
+    {
+      "path": "tools/test-module-placement.cjs",
+      "sha256": "742913f9359196e7a739c3fd6fbcad1f613d5561d987fb432fe3e4e8688a316d"
+    },
+    {
+      "path": "tools/test-native-box-input.cjs",
+      "sha256": "17bd54aaa4cf0d3acd629f5aac89c72c085815b6187c2a8ebfb2e597fc6124ae"
+    },
+    {
+      "path": "tools/test-native-placement-lifecycle.cjs",
+      "sha256": "ee7119f372fb6f4198c8ca61a8330811f1351c18819cdf91de55557f706890d6"
+    },
+    {
+      "path": "tools/test-research-queue-bridge.cjs",
+      "sha256": "175b2def7ba3911e992141caa95422e5a199e10bfd14e059cd54f6d132be05f3"
+    },
+    {
+      "path": "tools/test-selection-cache.cjs",
+      "sha256": "5325d3ba4ba23e4e74580e0c064075ec1f248444e94879ea0e0b54bcab02a230"
+    },
+    {
+      "path": "tools/test-smooth-building.cjs",
+      "sha256": "cfcea5191f2065e103379dfcd5b6193ac274b466262de1db59a340a4dc774445"
+    },
+    {
+      "path": "tools/test-test-lifecycle.cjs",
+      "sha256": "045a55b9f31a5b50af2a841b4611f6fd45e2d8f46a5fc56d0c764f00e76dc597"
+    },
+    {
+      "path": "tools/test-truck-selection-flicker.cjs",
+      "sha256": "565eaa015c609e82f0ec34ed27fc5a2d542eb83f90ecc301a14828ad1c978925"
+    },
+    {
+      "path": "tools/test-visible-trucks.cjs",
+      "sha256": "c585755d30127fc12cdbaad6ef1d8da5f2b1f961006299f03994b96871598240"
+    }
+  ]
+}

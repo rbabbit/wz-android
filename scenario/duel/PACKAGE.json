@@ -1,0 +1,245 @@
+{
+  "passed": true,
+  "version": 1,
+  "method": "Separate stock-data Duel VFS, latest native runtime copy with metadata-only replacement; shared unmodified WASM",
+  "towersInputs": [
+    {
+      "path": "app/src/main/assets/warzone/warzone2100.js",
+      "sha256": "3cdc6d31a3d002c60f8e1c184f48c52d60e6ff1117df4cf69560bfe106be4253"
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100.wasm",
+      "sha256": "d909a4ecb7475643107fa6f489279562c00deae1e0a0f531ddd1328457d78f1e"
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100.data",
+      "sha256": "3b8e561f84f755c6d157c86835cb2b82238e6055f900b7b90b18758df9d2e893"
+    },
+    {
+      "path": "app/src/main/assets/warzone/index.html",
+      "sha256": "ce1736e9440772ea136b1aa9d2c0b7a2dfd751ca1e02c78f474918458ae6bf8b"
+    },
+    {
+      "path": "app/src/main/assets/warzone/mobile.html",
+      "sha256": "a04071930c9e06e7283a198a37d28c56da124f42005b34732a1deff9ee33fbf6"
+    }
+  ],
+  "stockPrefixBytes": 64424618,
+  "stockPrefixSHA256": "9e89d11c8b67b5f68ddc0be43290233c28cd43b3d2a96fea1a7b4beaf83b8424",
+  "stockRecords": 3789,
+  "duelRecords": 3819,
+  "compiledProgramUnchangedOutsidePackageMetadata": true,
+  "sharedWASM": true,
+  "runtimeHook": "monitorRunDependencies zero before dependenciesFulfilled/callMain; onRuntimeInitialized is absent in frozen runtime",
+  "directoryHook": "constructWZModuleConfig preRun FIFO mkdir before generated runWithFS/DataRequest, including synchronous cache hits",
+  "outputs": [
+    {
+      "path": "app/src/main/assets/warzone/warzone2100-duel.js",
+      "sha256": "6ef65429d1f496bfe5c52e2d8d770b28eaf319d77cb0d61675abd5d78d5420b5",
+      "bytes": 752099
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100-duel.data",
+      "sha256": "584a8be5958871b7d1f133bb4d3ef514737d8cf17b959be05f6659a828ceac47",
+      "bytes": 65093279
+    },
+    {
+      "path": "app/src/main/assets/warzone/index-duel.html",
+      "sha256": "f0f0f18d26c32538e2617ef07965b456755a174e5775418318a61c277c57dc4d",
+      "bytes": 97436
+    },
+    {
+      "path": "app/src/main/assets/warzone/mobile-duel.html",
+      "sha256": "78da4acbe2edcceffcb161a16aef230548a9fa83508e80e6f23c77a189d8d86a",
+      "bytes": 3876
+    }
+  ],
+  "virtualOverrides": [
+    {
+      "path": "/data/mp/addon.lev",
+      "sha256": "1863d6e3d12529e0db0acfabdedb7dfe1ffb7748c28a28a995cedc1ee6e4b63f",
+      "bytes": 7399
+    },
+    {
+      "path": "/data/mp/multiplay/maps/duel-ro-half/game.map",
+      "sha256": "a4fe9e28be6add809c8bb9b827281ada2fbb446c157e874e9ffd71d4a4868ef7",
+      "bytes": 11156
+    },
+    {
+      "path": "/data/mp/multiplay/maps/duel-ro-half/ttypes.ttp",
+      "sha256": "5b10aa98775b2c9a9daa611335a32c191279c3503fb9c0f3d06f97932cdda915",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/duel-ro-half/droid.json",
+      "sha256": "16d33dd8b7b09f3abf8760fb21be820b88e5c3e796f6912912b54d6915105bc3",
+      "bytes": 1365
+    },
+    {
+      "path": "/data/mp/multiplay/maps/duel-ro-half/feature.json",
+      "sha256": "ee838b881e81639651a3260fc3a32995b243a11d754f8256f8222e69eb1e590e",
+      "bytes": 5407
+    },
+    {
+      "path": "/data/mp/multiplay/maps/duel-ro-half/struct.json",
+      "sha256": "b6a31f5722df09066e2202a9147e93fdff362cd3fdcabf263d35ba660d1576a2",
+      "bytes": 19607
+    },
+    {
+      "path": "/data/mp/multiplay/maps/duel-ro-half/gam.json",
+      "sha256": "94a26272a71a5b98564a1c1e0a0bad85345a372b3eb4bf15e0ec308a0e09f1e1",
+      "bytes": 150
+    },
+    {
+      "path": "/data/mp/multiplay/maps/duel-ro-half.gam",
+      "sha256": "94a26272a71a5b98564a1c1e0a0bad85345a372b3eb4bf15e0ec308a0e09f1e1",
+      "bytes": 150
+    },
+    {
+      "path": "/data/mp/tests/duel.json",
+      "sha256": "960888b2269c871123be67eb5c608146bae4900068b980e4bfe0be7ae2e2fb89",
+      "bytes": 695
+    },
+    {
+      "path": "/data/mp/tests/duel-policy.js",
+      "sha256": "492f3b9841cebf01f75f9cfce3df962f7f5c669c23d57fb094b3751307a0d89e",
+      "bytes": 1758
+    },
+    {
+      "path": "/data/mp/tests/duel-rules.js",
+      "sha256": "b927ea0fac1992226bfe7ef00ec3e6e2466efa96c3ac0c8a5264e62ba5937ec7",
+      "bytes": 4040
+    },
+    {
+      "path": "/data/mp/tests/duel-commands.js",
+      "sha256": "c2b7d00e530649373c59581b1d5cc11fe6d764c3d2603f13198f59ec7819e068",
+      "bytes": 49459
+    },
+    {
+      "path": "/data/mp/tests/duel-research-bridge.js",
+      "sha256": "8bc6f7ab603efcee52426abe772dad4c8f043a9ebd76f5ce32b0dcd1d17908a3",
+      "bytes": 15219
+    },
+    {
+      "path": "/data/mp/multiplay/script/rules/init.js",
+      "sha256": "b927ea0fac1992226bfe7ef00ec3e6e2466efa96c3ac0c8a5264e62ba5937ec7",
+      "bytes": 4040
+    },
+    {
+      "path": "/data/mp/multiplay/script/duel-policy.json",
+      "sha256": "9ee01a5527a6cbcf76cad366a6f654cae4548c30c4082e14e9ac5e94d9b58778",
+      "bytes": 44749
+    },
+    {
+      "path": "/data/mp/multiplay/script/duel-config.json",
+      "sha256": "cc01cbe73014ab012e465ace92599f98dc3433318d25396f8adf44a3886282f2",
+      "bytes": 65
+    },
+    {
+      "path": "/data/mp/multiplay/script/rules/duel-config.json",
+      "sha256": "cc01cbe73014ab012e465ace92599f98dc3433318d25396f8adf44a3886282f2",
+      "bytes": 65
+    },
+    {
+      "path": "/data/mp/multiplay/script/rules/duel-policy.json",
+      "sha256": "9ee01a5527a6cbcf76cad366a6f654cae4548c30c4082e14e9ac5e94d9b58778",
+      "bytes": 44749
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/duel-config.json",
+      "sha256": "cc01cbe73014ab012e465ace92599f98dc3433318d25396f8adf44a3886282f2",
+      "bytes": 65
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/duel-policy.json",
+      "sha256": "9ee01a5527a6cbcf76cad366a6f654cae4548c30c4082e14e9ac5e94d9b58778",
+      "bytes": 44749
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/duel-ai.js",
+      "sha256": "402603e8e4b72c07b6cd7b190c8af1dcec466f9d80a653dbd3b7959ef5810843",
+      "bytes": 2932
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/duel-ai.json",
+      "sha256": "492e42b53372cacefd168ffb1dd6e5282f3bcd58d87f25e6f64fa22fbd4b7902",
+      "bytes": 131
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/nb_includes/produce.js",
+      "sha256": "955794526ffd96d5278b333f7113fda6eb3716cf43e93397f7211503dd4b7e29",
+      "bytes": 8379
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/nb_includes/research.js",
+      "sha256": "2fb6fc3cdcb35f30cc8bfff9ae8e6cbbd08f62b96d3d67449404fe63d63a2067",
+      "bytes": 867
+    },
+    {
+      "path": "/data/mp/stats/research.json",
+      "sha256": "846b1ca3d53dd9674aadc61706195987815b8c63ec22a90e8d740832674a51fe",
+      "bytes": 237785
+    },
+    {
+      "path": "/data/mp/stats/templates.json",
+      "sha256": "0acd35acd13d8342aafb9c430956d53409a05c7dc1bd31b4e332f2fd6eb12a34",
+      "bytes": 62684
+    },
+    {
+      "path": "/data/mp/tests/warzone-towers-catalog.json",
+      "sha256": "d70d5672fa1865411b8e574e67e770dc3b13956a6e5710f37e69396f4ff3453e",
+      "bytes": 50233
+    },
+    {
+      "path": "/data/mp/multiplay/script/rules/warzone-towers-catalog.json",
+      "sha256": "d70d5672fa1865411b8e574e67e770dc3b13956a6e5710f37e69396f4ff3453e",
+      "bytes": 50233
+    },
+    {
+      "path": "/data/mp/tests/warzone-towers-command.json",
+      "sha256": "df1e324fde90935439fb53fd2b4e630cd44bef94521b08577196f684f2081a65",
+      "bytes": 30
+    },
+    {
+      "path": "/data/mp/multiplay/script/rules/warzone-towers-command.json",
+      "sha256": "df1e324fde90935439fb53fd2b4e630cd44bef94521b08577196f684f2081a65",
+      "bytes": 30
+    },
+    {
+      "path": "/data/mp/tests/warzone-towers-control-command.json",
+      "sha256": "99cbb1c61cd9c00eb89e7f8b9b6fc8fbdfc8ba4546d074495c308e3bd39ac59a",
+      "bytes": 37
+    },
+    {
+      "path": "/data/mp/multiplay/script/rules/warzone-towers-control-command.json",
+      "sha256": "99cbb1c61cd9c00eb89e7f8b9b6fc8fbdfc8ba4546d074495c308e3bd39ac59a",
+      "bytes": 37
+    },
+    {
+      "path": "/data/mp/tests/blocknight-queue-command.json",
+      "sha256": "53dd57002898f6f166540e6d7aa63789601354abc7340c558d71981fb7df721c",
+      "bytes": 36
+    },
+    {
+      "path": "/data/mp/multiplay/script/rules/blocknight-queue-command.json",
+      "sha256": "53dd57002898f6f166540e6d7aa63789601354abc7340c558d71981fb7df721c",
+      "bytes": 36
+    },
+    {
+      "path": "/data/mp/tests/blocknight-zoom-command.json",
+      "sha256": "bdd487b46d532a234f7a1293b54fa86d79c807d0e0fea8e455442c819374a081",
+      "bytes": 60
+    },
+    {
+      "path": "/data/mp/multiplay/script/rules/blocknight-zoom-command.json",
+      "sha256": "bdd487b46d532a234f7a1293b54fa86d79c807d0e0fea8e455442c819374a081",
+      "bytes": 60
+    }
+  ],
+  "researchCounts": {
+    "core": 130,
+    "cannon": 37,
+    "rockets": 52,
+    "blocked": 171
+  }
+}

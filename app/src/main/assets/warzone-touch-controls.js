@@ -1372,6 +1372,8 @@
     window.__warzoneCommands?.close?.();
     window.__warzoneCommands?.closeNative?.();
     const hudDocument = commandDocument();
+    const duel=window.__warzoneDuelConfig?.mode==='duel'&&Object.isFrozen(window.__warzoneDuelConfig);
+    const humanBranch=window.__warzoneDuelConfig?.humanBranch==='rockets'?'Rockets':'Cannon',botBranch=window.__warzoneDuelConfig?.botBranch==='rockets'?'Rockets':'Cannon';
     let help = hudDocument.getElementById("warzone-towers-help");
     if (!help) {
       const overlay = hudDocument.createElement("div");
@@ -1384,7 +1386,7 @@
       help.setAttribute("aria-labelledby", "wt-help-title");
       help.tabIndex = -1;
       help.innerHTML = `
-        <header><div><span class="wt-help-eyebrow">WARZONE TOWERS</span>
+        <header><div><span class="wt-help-eyebrow">${duel?'WARZONE 1V1':'WARZONE TOWERS'}</span>
           <h1 id="wt-help-title">FIELD GUIDE</h1></div>
           <button type="button" class="wt-help-close" aria-label="Close help">CLOSE</button></header>
         <div class="wt-help-content">
@@ -1395,11 +1397,14 @@
               <li><b>SELECT / MOVE</b> leaves placement and keeps queued work. Placement also ends when your group finishes.</li></ol>
             <p>Invalid taps keep your chosen structure active. STOP cancels selected trucks’ orders,
               and clears their remaining native queued sites.</p></section>
-          <section><h2>PROTECT YOUR COMMAND CENTRE</h2>
+          ${duel?`<section><h2>DESTROY THE ENEMY COMMAND CENTRE</h2>
+            <p>Your weapon branch is <b>${humanBranch}</b>. The opponent uses <b>${botBranch}</b>.
+              Research your weapons and shared body, propulsion, armour and economy upgrades. Each laboratory follows your chosen queue.</p>
+            <p>Build and command your ground forces with normal power and production time. Destroy the enemy Command Centre to win; protect your own to stay in the battle. Aircraft are unavailable.</p></section>`:`<section><h2>PROTECT YOUR COMMAND CENTRE</h2>
             <p>You have <b>3 minutes to prepare</b>. Wave 1 starts automatically, even if you have not built anything.
               If your command centre is destroyed, you have failed.</p>
             <p>The mod schedules <b>30 rounds</b>. Later rounds arrive on their own timer; surviving enemies stay.
-              <b>SKIP WAVE</b> calls the next round early. Destroying enemies awards power.</p></section>
+              <b>SKIP WAVE</b> calls the next round early. Destroying enemies awards power.</p></section>`}
           <section><h2>MOVE &amp; LOOK</h2>
             <p><b>Tap</b> to select, move or attack. <b>Swipe</b> to pan. <b>Pinch</b> to zoom.
               <b>Slide two fingers together up/down</b> to tilt the camera. Map edges limit panning.

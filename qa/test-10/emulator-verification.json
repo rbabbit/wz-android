@@ -1,0 +1,84 @@
+{
+  "passed": true,
+  "candidateAPK_SHA256": "d29a3e6e2e6da13a8eac6b2d6540b5c4070b39f0115de1dc44025822237a31b3",
+  "installedAPK_SHA256": "d29a3e6e2e6da13a8eac6b2d6540b5c4070b39f0115de1dc44025822237a31b3",
+  "version": "0.10",
+  "package": "com.rbabbit.warzonetowers.lab",
+  "emulatorTesting": true,
+  "gameplayTesting": true,
+  "recordedUTC": "2026-11-08T01:17:35.351761Z",
+  "sourceReports": [
+    {
+      "path": "qa/test-10/final-cannon/duel.json",
+      "sha256": "fbe5afd4b26b4d69cee01d00c2346e06b431679aca5dce6979a69fb974d81c45"
+    },
+    {
+      "path": "qa/test-10/final-cannon/combat.json",
+      "sha256": "a22891e2b876bb43eaa089cddc8756e21567fd5c5a4e7f52f52fe99970e01089"
+    },
+    {
+      "path": "qa/test-10/final-rockets/duel.json",
+      "sha256": "d86671f17dced7a405b57025ec1624202261261c7ad6b3b2e36b8fd52c49b793"
+    },
+    {
+      "path": "qa/test-10/final-save-rewind/save-ordinary.json",
+      "sha256": "b6143a4b54a53802bea0aab5a2dcf9c816926c472028bac6717a0713985f6c59"
+    },
+    {
+      "path": "qa/test-10/final-victory/save-victory.json",
+      "sha256": "15f93f6f91713ad8b041b82d2dd2b77e87b3b5aff4240327682e6d2ee4f1060e"
+    },
+    {
+      "path": "qa/test-10/final-defeat/save-defeat.json",
+      "sha256": "88d3e86cfcb9f66e07be5982cbf86a90a6d853bf3851ca7b83a8280ceacba855"
+    },
+    {
+      "path": "qa/test-10/final-modes/modes.json",
+      "sha256": "0abd8dd3801c9bbf133ea277f3e56ee5ce39a2788c7b8a98894c306a89703dc6"
+    },
+    {
+      "path": "qa/test-10/final-towers-header/header.json",
+      "sha256": "e5bc6347558c3a6bd1106b7c68af91da6adf076854c3bb5591f58f12c1145062"
+    },
+    {
+      "path": "qa/test-10/final-towers-dialog/dialog.json",
+      "sha256": "72fbf933b246934196dfc558bdd7857bb9ad4a5cf332c368d8d638041ab0b2d5"
+    },
+    {
+      "path": "qa/test-10/final-replay-recovered/replay.json",
+      "sha256": "f8f0140bf982fd8a5500891a9b3c8e563f9a6fd1c36c7d8e296a472662c92799"
+    }
+  ],
+  "checks": {
+    "rocketsDuel": true,
+    "savesAndMenuReturns": true,
+    "nativeOutcomes": true,
+    "cannonDuel": true,
+    "modeSelection": true,
+    "towersRegression": true,
+    "nativePolicyEnforced": true,
+    "botProductionCombat": true
+  },
+  "fixtureDisclosures": [
+    {
+      "path": "qa/test-10/final-victory/save-victory.json",
+      "seeded": true,
+      "disclosure": "A separate complete genuine QuickSave was copied in memory; only the enemy Command Centre entry was removed from struct.json, then loaded with native F8. This exercises authoritative native HQ detection and result/menu handling; it is not a naturally won/lost match."
+    },
+    {
+      "path": "qa/test-10/final-defeat/save-defeat.json",
+      "seeded": true,
+      "disclosure": "A separate complete genuine QuickSave was copied in memory; only the human Command Centre entry was removed from struct.json, then loaded with native F8. This exercises authoritative native HQ detection and result/menu handling; it is not a naturally won/lost match."
+    }
+  ],
+  "limitations": [
+    "Verified on the Android emulator; a physical handset, hardware GPU/FPS, audio and HQ graphics were not newly tested.",
+    "Both weapon branches used ordinary authored units, manual research and normal production. Sustained ordinary combat was observed in the Cannon-human/Rockets-bot journey.",
+    "Victory and defeat handling used explicitly seeded complete-save copies with one Command Centre removed. These are native outcome/lifecycle checks, not naturally completed wins/losses.",
+    "The Towers benchmark payload/maps remain byte-identical. Scoped Towers launcher/build/research/overlay/Back regressions were replayed; a complete30-wave run was not repeated.",
+    "An earlier ordinary F8 preflight observed a stale clock packet. The passing final-save-rewind check required an actual native clock rewind, fresh command replies and restored research/input; the earlier transport/readiness attempt is diagnostic only.",
+    "Black terrain remains visible on the software emulator, as in the preserved benchmark; native units, projectiles, orders, positions and map picking were observed. This is not a physical-handset rendering or FPS test.",
+    "Replay readiness fixture continuation: Continued the already replaying native match after the original QA observer hit a20-second CDP transport timeout during engine loading. No additional Replay/engine input was sent. The same already-started battle was checked with a bounded90-second readiness transport; no additional Replay input or runtime change was used. The original20-second observer timeout is retained as diagnostic evidence."
+  ],
+  "method": "Derived only from final exact-installed-APK raw launcher/Towers/both-branch/native-policy/ordinary-combat/save-load/outcome reports. Seeded terminal fixtures are separate from ordinary gameplay."
+}

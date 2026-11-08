@@ -1,5 +1,22 @@
 # Warzone Towers maintenance rules
 
+- The user saved Towers 0.9 as the immutable benchmark before adding an offline
+  human-versus-bot mode. GitHub `main` and `v0.9-benchmark` point to
+  `28fe51dc5725d5262b0302de10776ae1a37eb994`; preserve its APK, complete source,
+  checksums and older fallbacks. Combined-mode development belongs on
+  `codex/offline-duel-0.10` until separately accepted.
+- The new Duel mode is offline: human chooses Cannon or Rockets; the bot uses
+  the opposite branch, with shared core upgrades and a Command Centre objective.
+  Keep Towers rules, map/mod, original runtime/index/mobile/data paths unchanged.
+  Duel gets its own generated package/index/entrypoint and config/save directory,
+  sharing the frozen native program/WASM. Replacing package metadata in a copy
+  through the reviewed builder is allowed; assert normalized program identity.
+  Do not manually edit compiled program code or apply Duel policy to Towers.
+- Duel's bot may research, build and attack autonomously as requested. Human
+  research stays manual. Enforce its weapon policy in native research, design,
+  production and queued execution, retaining ordinary costs/times and keeping
+  stored phone designs intact. Do not add mid-match bot grants or online play.
+
 - User accepted 0.6 as the current/main version on 2026-11-07. Continue from
   this project; the directory and Android app ID retain their historical lab
   names to preserve installed saves/designs. Do not rebuild or rename the APK

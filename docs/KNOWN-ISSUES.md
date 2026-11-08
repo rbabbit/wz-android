@@ -1,6 +1,23 @@
 # Known issues and verification limits
 
-## Current Warzone Towers 0.4 - observed verification limits
+## Warzone Towers 0.10 — offline 1v1
+
+The app includes the preserved Towers benchmark and an offline Cannon/Rockets
+match against a bot. The launcher and return dialog are Android views; the
+in-game interface remains HTML/CSS over the existing WebAssembly engine.
+
+The [0.10 report](../qa/test-10/REPORT.md) records exact-APK checks, ordinary
+production/combat, both research branches, save/load, layouts and menu returns.
+Victory and defeat checks use disclosed complete-save copies with one HQ
+removed. They do not establish naturally completed matches. Some QA readiness
+observations were continued after an engine-loading transport timeout; the
+failed attempts remain diagnostics and are excluded from passing reports.
+
+Software-emulator black terrain remains visible. Physical-device GPU/FPS,
+audio, optional HQ downloads and a complete Towers 30-wave run were not newly
+verified. Older verification records below retain their original scope.
+
+## Historical Warzone Towers 0.4 - observed verification limits
 
 The experimental app is **Warzone Towers**, version **0.4 (4)**, package
 `com.rbabbit.warzonetowers.lab`. The exact delivery APK passed 23 source

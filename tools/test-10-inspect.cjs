@@ -1,0 +1,3 @@
+'use strict';
+const fs=require('fs'),l=require('./native-live.cjs');
+(async()=>{const c=await l.connect();try{const result=await c.evaluate(`(()=>{const f=LaunchedModule.FS,p=LaunchedModule.WZVAL_configDirPath;return {duel:window.__warzoneDuel?.report(),logs:f.readdir(p+'/logs').filter(n=>n.endsWith('.txt')).map(n=>({n,t:f.readFile(p+'/logs/'+n,{encoding:'utf8'})})),policyFS:f.stat('/data/mp/multiplay/script/duel-policy.json').size,config:f.readFile('/data/mp/multiplay/script/duel-config.json',{encoding:'utf8'})}})()`);fs.writeFileSync(l.out+'/startup-failure.json',JSON.stringify(result,null,2));console.log({policyFS:result.policyFS,config:result.config,duel:result.duel});}finally{c.close()}})().catch(e=>{console.error(e);process.exitCode=1});

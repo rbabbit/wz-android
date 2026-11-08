@@ -14,12 +14,13 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 /** Compact game setup. Map, download and music actions retain their existing contracts. */
 final class GraphicsSetupView extends FrameLayout {
     interface Actions {
-        void start(String mode, String map);
+        void start(String graphicsMode, String map, String matchMode, String duelWeapon);
         void cancel();
         void music();
         void download();
@@ -32,19 +33,23 @@ final class GraphicsSetupView extends FrameLayout {
     private final Actions actions;
     private final Typeface face;
     private final MapCard mapOne, mapTwo;
-    private final LinearLayout heading, options, message;
-    private final TextView strapline, detail, status;
-    private final Button graphics, start, cancel, music, download;
+    private final LinearLayout heading, matchChoices, weaponChoices, options, message;
+    private final TextView detail, status;
+    private final Button towers, duel, cannon, rockets, graphics, start, cancel, music, download;
     private final ProgressBar progress;
     private final LaunchPanel panel;
-    private String mode, map;
+    private String mode, map, matchMode, duelWeapon;
+    private int viewportHeight;
     private boolean cached, downloading, musicChecked, musicCached, musicOn;
 
-    GraphicsSetupView(Context context, String selected, String selectedMap, Actions actions) {
+    GraphicsSetupView(Context context, String selected, String selectedMap,
+            String selectedMatch, String selectedWeapon, Actions actions) {
         super(context);
         this.actions = actions;
         mode = "high".equals(selected) ? "high" : "normal";
         map = "td1".equals(selectedMap) ? "td1" : "td2";
+        matchMode = BattleLaunchSpec.matchMode(selectedMatch);
+        duelWeapon = BattleLaunchSpec.duelWeapon(selectedWeapon);
         face = Typeface.createFromAsset(context.getAssets(), "warzone/ui/Oswald.ttf");
         setBackgroundColor(0xFF0B151B);
         setClickable(true);
@@ -60,9 +65,16 @@ final class GraphicsSetupView extends FrameLayout {
         title.setGravity(Gravity.CENTER_VERTICAL);
         heading.addView(title, new LinearLayout.LayoutParams(0, -1, 1));
 
-        strapline = text("SELECT A MAP", 11, MUTED);
-        strapline.setLetterSpacing(.04f);
-        strapline.setGravity(Gravity.CENTER_VERTICAL);
+        towers = choice("Towers");
+        duel = choice("1v1 vs Bot");
+        matchChoices = choiceRow(towers, duel);
+        towers.setOnClickListener(v -> chooseMatch("towers"));
+        duel.setOnClickListener(v -> chooseMatch("duel"));
+        cannon = choice("Cannon");
+        rockets = choice("Rockets");
+        weaponChoices = choiceRow(cannon, rockets);
+        cannon.setOnClickListener(v -> chooseWeapon("cannon"));
+        rockets.setOnClickListener(v -> chooseWeapon("rockets"));
 
         mapOne = new MapCard("DUSTFALL", "Raised platforms");
         mapTwo = new MapCard("IRON VALLEY", "Classic battlefield");
@@ -75,7 +87,7 @@ final class GraphicsSetupView extends FrameLayout {
 
         start = button("PLAY", true);
         start.setOnClickListener(v -> {
-            if (start.isEnabled()) actions.start(mode, map);
+            if (start.isEnabled()) actions.start(mode, map, matchMode, duelWeapon);
         });
 
         options = new LinearLayout(context);
@@ -120,7 +132,59 @@ final class GraphicsSetupView extends FrameLayout {
         progress.setVisibility(GONE);
 
         panel = new LaunchPanel(context);
-        addView(panel, new LayoutParams(-1, -1));
+        ScrollView scroll = new ScrollView(context);
+        scroll.setFillViewport(true);
+        scroll.setOverScrollMode(OVER_SCROLL_NEVER);
+        scroll.setVerticalScrollBarEnabled(false);
+        scroll.addView(panel, new ScrollView.LayoutParams(-1, -2));
+        addView(scroll, new LayoutParams(-1, -1));
+        refresh();
+    }
+
+    @Override protected void onMeasure(int width, int height) {
+        viewportHeight = MeasureSpec.getSize(height);
+        super.onMeasure(width, height);
+    }
+
+    private Button choice(String label) {
+        Button b = button(label, false);
+        b.setTextSize(13);
+        b.setSingleLine(true);
+        b.setEllipsize(TextUtils.TruncateAt.END);
+        return b;
+    }
+
+    private LinearLayout choiceRow(Button first, Button second) {
+        LinearLayout row = new LinearLayout(getContext());
+        row.addView(first, new LinearLayout.LayoutParams(0, dp(48), 1));
+        LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(0, dp(48), 1);
+        p.leftMargin = dp(6);
+        row.addView(second, p);
+        return row;
+    }
+
+    private void decorateChoice(Button b, boolean selected, String description) {
+        if (b.getTag() == null || b.isSelected() != selected) {
+            b.setBackground(new RippleDrawable(ColorStateList.valueOf(0x228BD3CC),
+                    shape(selected ? 0xFF18343B : 0xFF101F26,
+                            selected ? TEAL : 0xFF29414A, 6), null));
+            b.setTag(Boolean.TRUE);
+        }
+        b.setSelected(selected);
+        b.setEnabled(!downloading);
+        b.setAlpha(downloading ? .5f : 1f);
+        b.setContentDescription(description + ", " + (selected ? "selected" : "not selected"));
+    }
+
+    private void chooseMatch(String value) {
+        if (downloading) return;
+        matchMode = BattleLaunchSpec.matchMode(value);
+        refresh();
+    }
+
+    private void chooseWeapon(String value) {
+        if (downloading) return;
+        duelWeapon = BattleLaunchSpec.duelWeapon(value);
         refresh();
     }
 
@@ -152,6 +216,17 @@ final class GraphicsSetupView extends FrameLayout {
     }
 
     private void refresh() {
+        boolean botMatch = "duel".equals(matchMode);
+        decorateChoice(towers, !botMatch, "Game mode, Towers");
+        decorateChoice(duel, botMatch, "Game mode, 1v1 vs Bot");
+        decorateChoice(cannon, "cannon".equals(duelWeapon), "Your weapon, Cannon");
+        decorateChoice(rockets, "rockets".equals(duelWeapon), "Your weapon, Rockets");
+        weaponChoices.setVisibility(botMatch ? VISIBLE : GONE);
+        mapOne.setVisibility(botMatch ? GONE : VISIBLE);
+        mapTwo.setVisibility(botMatch ? GONE : VISIBLE);
+        detail.setText(botMatch
+                ? "You: " + ("cannon".equals(duelWeapon) ? "Cannon  ·  Bot: Rockets" : "Rockets  ·  Bot: Cannon")
+                : "30 waves · Defend your command centre");
         mapOne.decorate("td1".equals(map), "Dustfall", !downloading);
         mapTwo.decorate("td2".equals(map), "Iron Valley", !downloading);
         graphics.setText("GRAPHICS\n" + ("high".equals(mode) ? "HQ" : "NORMAL"));
@@ -168,14 +243,18 @@ final class GraphicsSetupView extends FrameLayout {
                 cached ? "HQ pack ready offline" : "Download High Quality graphics");
         download.setEnabled(!downloading && !cached);
         download.setAlpha(downloading ? .45f : cached ? .7f : 1f);
-        start.setText(downloading ? "DOWNLOADING\u2026" : "PLAY " + mapName().toUpperCase(java.util.Locale.ROOT));
-        start.setContentDescription("Start game, " + mapName());
+        start.setText(downloading ? "DOWNLOADING\u2026"
+                : botMatch ? "PLAY 1v1" : "PLAY " + mapName().toUpperCase(java.util.Locale.ROOT));
+        start.setContentDescription("Start game, " + (botMatch ? "1v1 vs Bot" : mapName()));
         start.setEnabled(!downloading && musicChecked && (!"high".equals(mode) || cached));
         start.setAlpha(start.isEnabled() ? 1f : .45f);
+        if (panel != null) panel.requestLayout();
     }
 
     String selectedMode() { return mode; }
     String selectedMap() { return map; }
+    String selectedMatchMode() { return matchMode; }
+    String selectedDuelWeapon() { return duelWeapon; }
 
     void setCached(boolean value) {
         cached = value;
@@ -317,7 +396,7 @@ final class GraphicsSetupView extends FrameLayout {
     private final class LaunchPanel extends FrameLayout {
         private final View base;
         private int left, top, panelWidth, innerWidth, contentHeight, gap, headerHeight;
-        private int strapHeight, mapHeight, mapSpan, detailHeight, messageHeight;
+        private int mapHeight, mapSpan, detailHeight, messageHeight;
         private boolean verticalMaps;
 
         LaunchPanel(Context context) {
@@ -326,7 +405,8 @@ final class GraphicsSetupView extends FrameLayout {
             base.setBackground(shape(0xEF0B151B, 0xFF203640, 12));
             addView(base);
             addView(heading);
-            addView(strapline);
+            addView(matchChoices);
+            addView(weaponChoices);
             addView(mapOne);
             addView(mapTwo);
             addView(detail);
@@ -342,7 +422,8 @@ final class GraphicsSetupView extends FrameLayout {
         }
 
         @Override protected void onMeasure(int width, int height) {
-            int w = MeasureSpec.getSize(width), h = MeasureSpec.getSize(height);
+            int w = MeasureSpec.getSize(width), h = viewportHeight;
+            boolean botMatch = "duel".equals(matchMode);
             boolean enlarged = getResources().getConfiguration().fontScale > 1.15f;
             int outer = dp(16), inset = dp(16);
             messageHeight = message.getVisibility() == VISIBLE ? dp(64) : 0;
@@ -351,53 +432,33 @@ final class GraphicsSetupView extends FrameLayout {
                     Math.max(dp(280), Math.round(w * .44f))));
             innerWidth = Math.max(0, panelWidth - inset * 2);
             headerHeight = dp(enlarged ? 48 : 44);
-            strapHeight = dp(enlarged ? 28 : 22);
             detailHeight = dp(enlarged ? 34 : 26);
             gap = dp(12);
             mapHeight = dp(enlarged ? 64 : 54);
             int stackedSpan = mapHeight * 2 + dp(8);
-            if (enlarged) {
-                // Preserve the useful map descriptions before decorative copy at large text.
-                int stackedHeight = headerHeight + strapHeight + gap * 3
-                        + detailHeight + dp(96) + stackedSpan;
-                if (stackedHeight > available) strapHeight = 0;
-                stackedHeight = headerHeight + strapHeight + gap * 3
-                        + detailHeight + dp(96) + stackedSpan;
-                if (stackedHeight > available) detailHeight = 0;
-                stackedHeight = headerHeight + strapHeight + gap * 3
-                        + detailHeight + dp(96) + stackedSpan;
-                if (stackedHeight > available) gap = dp(8);
-                stackedHeight = headerHeight + strapHeight + gap * 3
-                        + detailHeight + dp(96) + stackedSpan;
-                if (stackedHeight > available) headerHeight = 0;
-            }
-            int other = headerHeight + strapHeight + gap * 3 + detailHeight + dp(96);
-            verticalMaps = available >= other + stackedSpan;
-            mapSpan = verticalMaps ? stackedSpan : mapHeight;
+            int other = headerHeight + gap * 3 + detailHeight + dp(144);
+            verticalMaps = !botMatch && available >= other + stackedSpan;
+            mapSpan = botMatch ? dp(48) : verticalMaps ? stackedSpan : mapHeight;
             contentHeight = other + mapSpan;
             if (contentHeight > available) {
-                // The decorative strapline yields first on very short/enlarged screens.
-                strapHeight = 0;
-                contentHeight = headerHeight + gap * 3 + detailHeight + mapSpan + dp(96);
-            }
-            if (contentHeight > available) {
                 detailHeight = 0;
-                contentHeight = headerHeight + strapHeight + gap * 3 + mapSpan + dp(96);
+                contentHeight = headerHeight + gap * 3 + mapSpan + dp(144);
             }
             if (contentHeight > available) {
                 // The shared artwork still carries the game title on very short screens.
                 headerHeight = 0;
                 gap = dp(8);
-                contentHeight = strapHeight + gap * 3 + mapSpan + dp(96);
+                contentHeight = gap * 3 + mapSpan + dp(144);
             }
             boolean compactCards = contentHeight > available;
             if (compactCards) {
-                // Keep the map names and all three action rows usable at 240dp height.
+                // Four actionable rows retain 48dp targets, including mode and
+                // weapon/map choices. Decorative text yields before controls.
                 verticalMaps = false;
                 mapHeight = dp(48);
                 mapSpan = mapHeight;
                 gap = 0;
-                contentHeight = dp(144);
+                contentHeight = dp(192);
             }
             mapOne.setCompact(compactCards);
             mapTwo.setCompact(compactCards);
@@ -405,7 +466,8 @@ final class GraphicsSetupView extends FrameLayout {
             top = outer + Math.max(0, (available - contentHeight) / 2);
             exact(base, panelWidth, contentHeight + inset * 2);
             exact(heading, innerWidth, headerHeight);
-            exact(strapline, innerWidth, strapHeight);
+            exact(matchChoices, innerWidth, dp(48));
+            exact(weaponChoices, innerWidth, botMatch ? dp(48) : 0);
             exact(mapOne, verticalMaps ? innerWidth : (innerWidth - dp(8)) / 2, mapHeight);
             exact(mapTwo, verticalMaps ? innerWidth : (innerWidth - dp(8)) / 2, mapHeight);
             exact(detail, innerWidth, detailHeight);
@@ -413,7 +475,9 @@ final class GraphicsSetupView extends FrameLayout {
             exact(options, innerWidth, dp(48));
             exact(message, Math.min(w - outer * 2, dp(880)), dp(52));
             exact(progress, Math.min(w - outer * 2, dp(880)) - dp(20), dp(4));
-            setMeasuredDimension(w, h);
+            // A short screen with a download/status row scrolls rather than
+            // clipping actionable controls or shrinking their touch targets.
+            setMeasuredDimension(w, Math.max(h, contentHeight + outer * 2 + messageHeight));
         }
 
         @Override protected void onLayout(boolean changed, int l, int t, int r, int b) {
@@ -422,13 +486,20 @@ final class GraphicsSetupView extends FrameLayout {
                     top + contentHeight + dp(16));
             heading.layout(x, y, x + innerWidth, y + headerHeight);
             y += headerHeight;
-            strapline.layout(x, y, x + innerWidth, y + strapHeight);
-            y += strapHeight + gap;
+            matchChoices.layout(x, y, x + innerWidth, y + dp(48));
+            y += dp(48) + gap;
             int cardWidth = mapOne.getMeasuredWidth();
-            mapOne.layout(x, y, x + cardWidth, y + mapHeight);
-            int secondX = verticalMaps ? x : x + cardWidth + dp(8);
-            int secondY = verticalMaps ? y + mapHeight + dp(8) : y;
-            mapTwo.layout(secondX, secondY, secondX + cardWidth, secondY + mapHeight);
+            if ("duel".equals(matchMode)) {
+                weaponChoices.layout(x, y, x + innerWidth, y + dp(48));
+                mapOne.layout(0, 0, 0, 0);
+                mapTwo.layout(0, 0, 0, 0);
+            } else {
+                weaponChoices.layout(0, 0, 0, 0);
+                mapOne.layout(x, y, x + cardWidth, y + mapHeight);
+                int secondX = verticalMaps ? x : x + cardWidth + dp(8);
+                int secondY = verticalMaps ? y + mapHeight + dp(8) : y;
+                mapTwo.layout(secondX, secondY, secondX + cardWidth, secondY + mapHeight);
+            }
             y += mapSpan + gap;
             detail.layout(x, y, x + innerWidth, y + detailHeight);
             y += detailHeight;

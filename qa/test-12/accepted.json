@@ -1,0 +1,83 @@
+{
+  "reviewed": true,
+  "candidateAPK_SHA256": "7a5f59363844eec86489f54b04ad776077d120631422ab1ebc59426544685673",
+  "screenshots": [
+    {
+      "path": "qa/test-12/comparisons/research-controls.png",
+      "accepted": true,
+      "notes": "Approved Research 1 beside actual current-only native five-lab sidebar; state differences are illustrative."
+    },
+    {
+      "path": "qa/test-12/comparisons/production-controls.png",
+      "accepted": true,
+      "notes": "Approved Production 1 beside actual family tabs/current unit and real component artwork."
+    },
+    {
+      "path": "qa/test-12/final-five/lab-12-five-research-active-only.png",
+      "accepted": true,
+      "notes": "Five actual labs, fifth lab active, no waiting topic or numeric percentage in sidebar."
+    },
+    {
+      "path": "qa/test-12/final-five/lab-12-fifth-vehicle-current-production.png",
+      "accepted": true,
+      "notes": "Fifth vehicle factory's actual current unit and producing status."
+    },
+    {
+      "path": "qa/test-12/final-five/lab-12-fifth-cyborg-current-production.png",
+      "accepted": true,
+      "notes": "Fifth cyborg factory's actual current unit and producing status."
+    },
+    {
+      "path": "qa/test-12/final-five/lab-12-compact-research.png",
+      "accepted": true,
+      "notes": "Five native labs fit at compact 854x480; footer and Close remain accessible."
+    },
+    {
+      "path": "qa/test-12/final-five/lab-12-compact-production-vehicle.png",
+      "accepted": true,
+      "notes": "Five vehicle rows and native family tabs fit compact viewport."
+    },
+    {
+      "path": "qa/test-12/final-five/lab-12-compact-production-cyborg.png",
+      "accepted": true,
+      "notes": "Five cyborg rows and footer remain accessible at compact size."
+    },
+    {
+      "path": "qa/test-12/final-status/lab-12-ordinary-current-production.png",
+      "accepted": true,
+      "notes": "Ordinary real production with a nonempty waiting queue; footer displays only the current unit."
+    },
+    {
+      "path": "qa/test-12/final-status-recovered/lab-12-research-keeps-real-build-orders.png",
+      "accepted": true,
+      "notes": "Opening footer Research while real native construction orders remain assigned."
+    },
+    {
+      "path": "qa/test-12/final-world/lab-dustfall-research-160127.png",
+      "accepted": true,
+      "notes": "Actual world tap opens full Towers TECH with Lab 2 native ID selected."
+    },
+    {
+      "path": "qa/test-12/final-world/lab-dustfall-factory-160123.png",
+      "accepted": true,
+      "notes": "Actual world tap opens full Towers Factory with Factory 2 native ID selected."
+    },
+    {
+      "path": "qa/test-12/final-back-recovered/dialog-fresh-battle-cancel.png",
+      "accepted": true,
+      "notes": "Actual SystemUI Back opens the retained compact black/white native Return confirmation."
+    }
+  ],
+  "observations": [
+    "Both selected option-1 layouts are implemented as current-work-only footer sidebars. Top TECH and FACTORY keep their complete normal pages.",
+    "Native-ID-keyed rows, real artwork/established silhouettes, thin separators, progress/activity indicators and reachable footer/close controls follow the approved structure. Generated sample counts and unrelated research artwork are replaced by the actual native state and component catalogue.",
+    "No material clipping or overlap remained in normal/compact native five-lab and five-plus-five-factory screenshots. The battlefield iframe remains unchanged in dimensions.",
+    "Seven actual world taps select the intended native facilities on both maps; no synthetic native left press is forwarded. Dustfall Lab 2/Factory 2 full pages visibly select the correct facility.",
+    "Independent review of both combined comparisons, all three compact status screens and both second-facility full pages found no blocking visual mismatch."
+  ],
+  "limitations": [
+    "The software emulator shows its existing black-terrain limitation. These captures verify actual UI and scoped native gameplay; physical handset GPU/FPS/audio and a complete30-wave run are not newly verified.",
+    "The original ordinary construction setup reached an unchanged automatic truck-isolation timeout among mixed combat units at the crowded factory exit. Construction proof is an explicit continuation using a valid constructor group on the other authored platform. Subsequent out-of-view-site and already-busy-worker fixture failures are retained as diagnostics. The accepted native towers, worker orders and source proof are recorded, without claiming the automatic picker was repaired.",
+    "The Back readiness observer exceeded its budget after confirmed Return and a fresh battle launch. The same fresh session was subsequently observed running; its continuation revalidated native save bytes and phone designs, then completed the final actual SystemUI Back/Cancel and input-clock checks."
+  ]
+}

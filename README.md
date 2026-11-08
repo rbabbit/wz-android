@@ -1,17 +1,18 @@
 # Warzone Towers
 
-**This branch contains Warzone Towers 0.11 (11)** with the approved compact
-Towers interface across Build, Research, Factory, Design, saved blueprints,
-activity queues and Help. See the [0.11 release notes](docs/releases/0.11-towers-ui.md)
-and [exact-APK verification report](qa/test-11/REPORT.md).
+**This branch contains Warzone Towers 0.12 (12)** with the approved footer
+Research and Production status sidebars. World lab and factory taps open the
+full Towers page for the selected native facility. Top TECH and FACTORY retain
+their normal full pages. See the [0.12 release notes](docs/releases/0.12-towers-status.md)
+and [exact-APK verification report](qa/test-12/REPORT.md).
 
 The deferred 1v1 mode is retained with its existing interface and unchanged
 gameplay package. GitHub `main` and `v0.9-benchmark` remain the frozen
 [Towers benchmark](https://github.com/rbabbit/wz-android/releases/tag/v0.9-benchmark).
-The complete 0.10 APK/source fallback and older versions remain preserved.
+The complete 0.11 APK/source fallback and older versions remain preserved.
 
 The application ID remains `com.rbabbit.warzonetowers.lab`, so 0.11 updates
-the 0.10/test-line app while retaining its private saves and phone designs.
+the 0.11/test-line app while retaining its private saves and phone designs.
 The in-game interface is HTML/CSS over the existing WebAssembly engine;
 the launcher and return confirmation use Android views. v6.4 remains a
 separate fallback app and project.

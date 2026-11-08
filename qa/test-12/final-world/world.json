@@ -1,0 +1,285 @@
+{
+  "passed": true,
+  "identity": {
+    "packageId": "com.rbabbit.warzonetowers.lab",
+    "device": "emulator-5556",
+    "candidateAPK_SHA256": "7a5f59363844eec86489f54b04ad776077d120631422ab1ebc59426544685673",
+    "installedPath": "/data/app/~~aJlDUUXi0z-CXRqkg3oOXQ==/com.rbabbit.warzonetowers.lab-DzOpYrMLCjfPMO7cTZcrng==/base.apk"
+  },
+  "started": "2026-11-08T13:34:59.211Z",
+  "checks": {
+    "worldFacilityOpeningBothMaps": true,
+    "nativeFacilityIdentity": true,
+    "worldInputModesPreserved": true
+  },
+  "worldCases": [
+    {
+      "map": "ironvalley",
+      "kind": "research",
+      "nativeId": 160169,
+      "report": {
+        "path": "qa/test-12/r1-smoke/ironvalley-research.json",
+        "sha256": "e07a8c724d93a2c2f3642527913b7b9a44d054b3bb827da5ef40f31e8996e5d7"
+      }
+    },
+    {
+      "map": "ironvalley",
+      "kind": "factory",
+      "nativeId": 160157,
+      "report": {
+        "path": "qa/test-12/r1-smoke/ironvalley-factory.json",
+        "sha256": "e4a7200f5c5517bf4941091457bc52e51c9cc1b7b31912e581bde55f5c769cc4"
+      }
+    },
+    {
+      "map": "ironvalley",
+      "kind": "cyborg",
+      "nativeId": 161183,
+      "report": {
+        "path": "qa/test-12/final-five/ironvalley-cyborg.json",
+        "sha256": "c69a4e29c070e3500ba1474a612254c93d32b36728f7328eaec4300c636bbe22"
+      }
+    },
+    {
+      "map": "dustfall",
+      "kind": "research",
+      "nativeId": 160125,
+      "report": {
+        "path": "qa/test-12/final-world/dustfall-research-160125.json",
+        "sha256": "6750b3051d4c6c23929699eaa17652e3c128c3be76f11083aa1f60fb6ae501f9"
+      }
+    },
+    {
+      "map": "dustfall",
+      "kind": "research",
+      "nativeId": 160127,
+      "report": {
+        "path": "qa/test-12/final-world/dustfall-research-160127.json",
+        "sha256": "0da4fd62bfb26785d392f48244b2352fe8d2610bf9e950d40a5574b1d3977b2a"
+      }
+    },
+    {
+      "map": "dustfall",
+      "kind": "factory",
+      "nativeId": 160121,
+      "report": {
+        "path": "qa/test-12/final-world/dustfall-factory-160121.json",
+        "sha256": "03ae463e80e796786000490a31fdc37ad1364a35e24d34c7436f97ded585b7fc"
+      }
+    },
+    {
+      "map": "dustfall",
+      "kind": "factory",
+      "nativeId": 160123,
+      "report": {
+        "path": "qa/test-12/final-world/dustfall-factory-160123.json",
+        "sha256": "a6d5af6ba9cf22d6a27af49919927d0e35f7e0b946337a21ac0148452ddad726"
+      }
+    }
+  ],
+  "nativeMap": {
+    "width": 63,
+    "height": 79
+  },
+  "selection": {
+    "camera": {
+      "centre": {
+        "x": 53,
+        "y": 33,
+        "worldX": 6785.656410203157,
+        "worldY": 4298.215500542663,
+        "height": 260.5867059650678
+      },
+      "trucks": [
+        {
+          "id": 160007,
+          "x": 54,
+          "y": 39,
+          "z": 3,
+          "selected": false,
+          "order": 0,
+          "action": 0,
+          "rate": 9,
+          "building": false,
+          "queued": 0,
+          "point": {
+            "x": 613.4809382528963,
+            "y": 401.63436562166464
+          },
+          "field": true,
+          "viewport": [
+            1077,
+            542
+          ]
+        }
+      ]
+    },
+    "proof": {
+      "ms": 155060.0449999869,
+      "clock": 82502,
+      "frames": 650,
+      "selected": [
+        {
+          "id": 160007,
+          "x": 54,
+          "y": 39,
+          "z": 3,
+          "order": 0,
+          "constructor": true
+        }
+      ],
+      "trucks": [
+        {
+          "id": 160007,
+          "x": 54,
+          "y": 39,
+          "z": 3,
+          "selected": true,
+          "order": 0,
+          "action": 0,
+          "rate": 9,
+          "building": false,
+          "queued": 0
+        },
+        {
+          "id": 160005,
+          "x": 27,
+          "y": 21,
+          "z": 2,
+          "selected": false,
+          "order": 0,
+          "action": 0,
+          "rate": 9,
+          "building": false,
+          "queued": 0
+        },
+        {
+          "id": 160003,
+          "x": 6,
+          "y": 73,
+          "z": 3,
+          "selected": false,
+          "order": 0,
+          "action": 0,
+          "rate": 9,
+          "building": false,
+          "queued": 0
+        },
+        {
+          "id": 160001,
+          "x": 6,
+          "y": 71,
+          "z": 3,
+          "selected": false,
+          "order": 0,
+          "action": 0,
+          "rate": 9,
+          "building": false,
+          "queued": 0
+        }
+      ],
+      "group": [
+        160007
+      ],
+      "placement": "",
+      "buildOpen": false,
+      "selecting": false,
+      "exiting": false,
+      "acks": 75,
+      "writes": 83,
+      "covered": false,
+      "viewport": [
+        1077,
+        598,
+        1077,
+        542
+      ],
+      "frame": [
+        1077,
+        542
+      ],
+      "canvas": [
+        1616,
+        813
+      ],
+      "zoom": [
+        0,
+        1
+      ],
+      "terrain": {
+        "ready": true,
+        "active": true,
+        "revision": 1,
+        "observations": 372,
+        "observedAt": 155054.47999998927,
+        "reads": 1,
+        "picks": 263,
+        "lastPickMs": 1.344999998807907,
+        "maxPickMs": 46.58000001311302,
+        "heightIndexBuilds": 1,
+        "heightCells": 357,
+        "heightWideTriangles": 0,
+        "heightQueries": 9,
+        "lastHeightCandidates": 120,
+        "maxHeightCandidates": 120,
+        "heightTriangleTests": 354,
+        "gpuBufferReads": 2,
+        "cpuBufferReads": 0,
+        "cpuCopies": 2,
+        "cpuBytes": 423216,
+        "mirroredUploads": 0,
+        "cpuInvalidations": 0,
+        "lastMeshReadMs": 103.43500000238419,
+        "maxMeshReadMs": 103.43500000238419,
+        "lastHeightIndexMs": 61.90999999642372,
+        "maxHeightIndexMs": 61.90999999642372,
+        "lastHeightMs": 0.050000011920928955,
+        "maxHeightMs": 62.32499998807907,
+        "error": ""
+      },
+      "ended": false
+    }
+  },
+  "movement": {
+    "destination": {
+      "x": 57,
+      "y": 39,
+      "point": {
+        "x": 764.1541150898817,
+        "y": 402.8709258237804
+      }
+    },
+    "before": [
+      {
+        "id": 160007,
+        "x": 54,
+        "y": 39,
+        "z": 3,
+        "selected": true,
+        "order": 0,
+        "action": 0,
+        "rate": 9,
+        "building": false,
+        "queued": 0
+      }
+    ],
+    "after": [
+      {
+        "id": 160007,
+        "x": 56,
+        "y": 39,
+        "z": 3,
+        "selected": true,
+        "order": 2,
+        "action": 1,
+        "rate": 9,
+        "building": false,
+        "queued": 0
+      }
+    ],
+    "screen": "C:\\timerApp\\wz-towers-lab\\qa\\test-12\\final-world\\lab-12-dustfall-trucks-moved.png"
+  },
+  "errors": [],
+  "pausedAt": 94502,
+  "finished": "2026-11-08T13:37:59.559Z"
+}

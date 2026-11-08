@@ -4,6 +4,16 @@
   if (window.TowersLab) return;
   const frame = () => document.getElementById('warzone-game-frame');
   const game = () => frame()?.contentWindow;
+  const isTowers = () => window.__warzoneDuelConfig?.mode !== 'duel' && game()?.__warzoneDuelConfig?.mode !== 'duel';
+  let statusReady = Promise.resolve();
+  if (isTowers()) {
+    const theme = document.createElement('link');
+    theme.rel = 'stylesheet'; theme.href = '/warzone/ui/towers-status.css'; document.head.appendChild(theme);
+    statusReady = new Promise(resolve => {
+      const script = document.createElement('script'); script.src = '/warzone/ui/towers-status.js';
+      script.onload = resolve; script.onerror = resolve; document.head.appendChild(script);
+    });
+  }
   const state = {collapsed:false, updates:0, error:'', labs:0, researching:0, factories:0, producing:0, waiting:0};
   try { state.collapsed = localStorage.getItem('lab-ops-collapsed') === 'true'; } catch (_) {}
   const dock = document.createElement('aside');
@@ -15,6 +25,7 @@
   const toggle = dock.querySelector('#lab-ops-toggle');
   function collapse(value) {
     state.collapsed = Boolean(value);
+    if (state.collapsed) window.TowersStatus?.close();
     dock.dataset.collapsed = String(state.collapsed);
     toggle.textContent = state.collapsed ? 'SHOW' : '−';
     toggle.setAttribute('aria-expanded', String(!state.collapsed));
@@ -27,6 +38,10 @@
     if (!target) return;
     const w = game();
     if (w?.__towersHtml?.isEnded?.()) return;
+    if (isTowers()) {
+      statusReady.then(() => window.TowersStatus?.toggle(target.dataset.labPanel));
+      return;
+    }
     if (target.dataset.labPanel === 'research') w?.__blockNightResearch?.open();
     else w?.__warzoneCommands?.open('factory');
   });
@@ -41,17 +56,18 @@
     try {
       const w = game(), commands = w?.__warzoneCommands?.report(), touch = w?.__kalaWarzoneTouch?.report();
       const research = w?.__blockNightResearch?.report();
+      window.TowersStatus?.update({commands,research,touch,ended:w?.__towersHtml?.isEnded?.()});
       const help = document.getElementById('warzone-towers-help-overlay');
       dock.hidden = w?.__towersHtml?.isEnded?.() || !touch?.hudVisible || !commands?.snapshot || Boolean(commands.page || commands.buildOpen || commands.placement || commands.nativeMenu || research?.open || research?.opening || (help && !help.hidden));
       if (!commands?.snapshot) return;
       const labs = research?.labs || [], factories = commands.snapshot.factories.filter(f => f.ready);
       state.labs = labs.length;
-      state.researching = labs.filter(lab => Boolean(lab.topicId)).length;
+      state.researching = labs.filter(lab => Boolean(lab.topicId) || (isTowers() && lab.idle === false)).length;
       state.factories = factories.length;
-      state.producing = factories.filter(f => Boolean(f.active) || !f.idle).length;
+      state.producing = factories.filter(f => Boolean(f.active) || (isTowers() && Boolean(f.currentProduction)) || !f.idle).length;
       state.waiting = factories.reduce((n, f) => n + f.queue.length, 0);
-      label('#lab-ops-research', state.researching, state.labs, (research?.queues || []).reduce((n, q) => n + q.length, 0));
-      label('#lab-ops-production', state.producing, state.factories, state.waiting);
+      label('#lab-ops-research', state.researching, state.labs, isTowers() ? 0 : (research?.queues || []).reduce((n, q) => n + q.length, 0));
+      label('#lab-ops-production', state.producing, state.factories, isTowers() ? 0 : state.waiting);
       state.updates++;
     } catch (error) { state.error = String(error.message || error); dock.hidden = true; }
   }

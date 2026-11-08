@@ -1,4 +1,53 @@
-# Warzone Towers 0.11 — approved compact interface
+# Warzone Towers 0.12 — approved footer status sidebars
+
+Final result: passed.
+
+Reviewed the actual installed APK with SHA-256
+`7a5f59363844eec86489f54b04ad776077d120631422ab1ebc59426544685673`.
+This current visual acceptance supersedes historical sections below.
+
+The user selected Research option 1 and Production option 1. Their original
+images are preserved in [docs/ui-0.12](docs/ui-0.12/). Both are narrow, flat,
+Build-style gameplay overlays above the original footer. Research displays
+native lab IDs/current topics and unnumbered estimated progress bars; Production
+displays current units and real component art with a live activity indicator.
+Vehicle and cyborg tabs each accommodate five factories. Neither footer panel
+shows waiting queue items or timers, and production invents no completion bar.
+
+The approved references and actual native screenshots are presented together in
+the [Research](qa/test-12/comparisons/research-controls.png) and
+[Production](qa/test-12/comparisons/production-controls.png) comparison images.
+The diagnostic script records explicit crops and preserves aspect ratios.
+Actual idle/active counts and assignments differ from illustrative mock values.
+The generated production mock contains generic research artwork in component
+slots; the implementation uses the existing real component catalogue and its
+established labelled silhouettes instead. Its header uses the original factory
+artwork. The generated mock's selected BUILD highlight is not carried over:
+only the active footer control is selected while these sidebars are open.
+
+Actual 1080×600 and compact 854×480 screens were inspected, including the
+five-lab/current-and-waiting research case and current production at the fifth
+factory of both families. Five rows fit, names and original pictures remain
+readable, tabs/close/footer are exposed, and the existing collapse control stays
+available. Compact checks include the Android font/control settings 1.3/1.4.
+The sidebar leaves the engine iframe dimensions unchanged. It does not dim,
+resize or zoom the battlefield. Existing controls return when the panel closes.
+Research progress changes patch native-ID-keyed rows without replacing controls.
+
+World taps on both Dustfall labs and factories visibly open the full Towers
+page for the intended native ID. The second lab/factory selection, top-level
+pages and current-only footer are distinct and unclipped. An independent review
+of both comparisons, all compact status screens and the second-facility full
+pages found no material clipping, overlap or approved-layout mismatch. No
+unresolved P0/P1/P2 visual issue remains in this reviewed scope.
+
+The normal interface remains HTML/CSS over the unchanged compiled engine.
+The software emulator's existing black terrain limits ground appearance review;
+handset GPU/FPS and audio are not newly certified. Gameplay evidence, the
+disclosed maximum-facility setup and the unchanged crowded automatic-truck-picker
+limitation are recorded in the [delivery report](qa/test-12/REPORT.md).
+
+# Historical Warzone Towers 0.11 — approved compact interface
 
 Final result: passed.
 

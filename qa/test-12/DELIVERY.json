@@ -1,0 +1,117 @@
+{
+  "passed": true,
+  "candidateAPK_SHA256": "7a5f59363844eec86489f54b04ad776077d120631422ab1ebc59426544685673",
+  "version": "0.12",
+  "package": "com.rbabbit.warzonetowers.lab",
+  "emulatorTesting": true,
+  "gameplayTesting": true,
+  "visualReview": true,
+  "recordedUTC": "2026-11-08T13:53:56.728513Z",
+  "reports": [
+    {
+      "path": "qa/test-12/package-verification.json",
+      "sha256": "d9c859be3c352854e688232a70f6f5aba810f923126c862f3de378df0541efeb"
+    },
+    {
+      "path": "qa/test-12/code-checks.json",
+      "sha256": "b027eeb250aba9a6d5fee099695fa44994e93e9c52c1b9b7d93828107ffe5cac"
+    },
+    {
+      "path": "qa/test-12/emulator-verification.json",
+      "sha256": "60fd5eddce01fee67537f66bb6cb58209ca0cad2fa91b2e08f152af528631619"
+    },
+    {
+      "path": "qa/test-12/visual-review.json",
+      "sha256": "d7b5730343bdfad3fd9d8786784645d8ddab843485ef7a39b8b417a9e9d92121"
+    }
+  ],
+  "supportingReports": [
+    {
+      "path": "qa/test-12/cleanup/restored.json",
+      "sha256": "4e77bbea29b20f2e58ecd71e04d6995fcb25cef5965b3ae443521adfc0ae3900"
+    },
+    {
+      "path": "qa/test-12/final-back/dialog-before-return-native-save.json",
+      "sha256": "b49a38d9c10e40fdd60dbbc0a4946d1f85f2b344df7656432ba96b21ecd8a448"
+    },
+    {
+      "path": "qa/test-12/final-back/dialog.json",
+      "sha256": "a87ac43ae330a5fff877baa6048ba81f978e608a6b45180560ad6774df625f78"
+    },
+    {
+      "path": "qa/test-12/final-five/11-before-five-facility-load.json",
+      "sha256": "a67cd4051083cf333882d0dba2888ee48b83946b5c2f4e3b68c6b2298bee1a6c"
+    },
+    {
+      "path": "qa/test-12/final-five/11-five-facility-native-ready.json",
+      "sha256": "cf2ff2d8c0325a918bdaa14a5d9ced08d6bfbc4781188a5aeca2f9d1ce702f88"
+    },
+    {
+      "path": "qa/test-12/final-five/12-fifth-factories-native-completed.json",
+      "sha256": "5213d8dcae81b999a6e44e4f8238fd0ae9443d450e17d1a9d4eda38b267f6770"
+    },
+    {
+      "path": "qa/test-12/final-five/12-five-before-native-roundtrip.json",
+      "sha256": "0d88db931ab7d73049740c9e13f0290611dc801b500fe8f79d370726c9bc22d1"
+    },
+    {
+      "path": "qa/test-12/final-five/five-facilities.json",
+      "sha256": "83fe1fb8290181176edf85e36500b708592d5f87eef11e5a05f9703dcb582110"
+    },
+    {
+      "path": "qa/test-12/final-status/before-td2-normal-early.json",
+      "sha256": "42c2e93b21699f5b645e386fab4e423451058dedbb3cd8c1e850b2b610455ad8"
+    },
+    {
+      "path": "qa/test-12/final-status/production-native-completed.json",
+      "sha256": "6802432480338eb4fab766cf0f27c369f6430a4384d106cdc65b128b92c7a6a4"
+    },
+    {
+      "path": "qa/test-12/final-status/status.json",
+      "sha256": "4918f2dce8459d4d5865f9b4def6302074b6465baf27b3d0063e3cff38ee6ed5"
+    },
+    {
+      "path": "qa/test-12/final-status-recovered/12-ordinary-native-completion.json",
+      "sha256": "0fa8c14c88974527dc7eb3636ecf2057791a184bf356d793a29f9da6ac3f5037"
+    },
+    {
+      "path": "qa/test-12/final-status-recovered/construction-attempt.json",
+      "sha256": "f402df6a357827353dcb22592e63112614ab06b4e15a3d449097c65432847abe"
+    },
+    {
+      "path": "qa/test-12/final-status-recovered/construction-busy-attempt.json",
+      "sha256": "d396d685b8305c3129aa1314caa0a5d69e0e9b2ba5f4c749d5c432b7f0f0a4f3"
+    },
+    {
+      "path": "qa/test-12/preflight/audit.json",
+      "sha256": "5355f8373c861bfd9904ab7aa85237cca63a126275f989f03b50acec66abfc13"
+    },
+    {
+      "path": "qa/test-12/r1-smoke/smoke.json",
+      "sha256": "3c9f40ab688ad6f9577214fde4b4ec852c002f70e1d5e11ed025eed6b434b799"
+    }
+  ],
+  "reportMarkdown": {
+    "path": "qa/test-12/REPORT.md",
+    "sha256": "28b12a38462fb64601d309f6e477787f52784f266b9b38a156726a7454f4759e"
+  },
+  "limitations": [
+    "Checks ran on the exact delivery APK in the owned Android emulator; physical-handset GPU/FPS and audio were not newly verified.",
+    "The existing software-emulator black-terrain limitation remains. The compiled engine, official/accepted data prefix, map/rule contents and complete Duel package are preserved; only the indexed read-only Towers facility/production observer changes.",
+    "The five-lab/five-vehicle/five-cyborg setup is a disclosed complete native save with added completed facilities. Real native IDs, queues, status pages and input are checked; this does not claim ordinary construction of all added facilities.",
+    "Ordinary production, construction/queues and save/input restoration use a separate unmodified native setup. No complete 30-wave victory or new Duel balancing campaign was rerun for this status/interface change.",
+    "Factory status uses observed native activity/current items and queue data. No production ETA or percentage is invented.",
+    "The initial ordinary production/current-status checks passed. Automatic rectangle-based truck isolation then reached its bounded timeout among combat units at the congested factory exit. This continuation uses a real manual single-truck selection at the other authored platform; it does not rerun or claim to repair the unchanged automatic picker.",
+    "The original real Back/Cancel/Return checks reached the custom main menu and started a fresh battle, but its readiness observer exceeded its budget. The same fresh battle subsequently became ready and was observed running. This continues that session, revalidates save/design bytes, and performs the final actual SystemUI Back/Cancel/input check without repeating the earlier actions.",
+    "The software emulator shows its existing black-terrain limitation. These captures verify actual UI and scoped native gameplay; physical handset GPU/FPS/audio and a complete30-wave run are not newly verified.",
+    "The original ordinary construction setup reached an unchanged automatic truck-isolation timeout among mixed combat units at the crowded factory exit. Construction proof is an explicit continuation using a valid constructor group on the other authored platform. Subsequent out-of-view-site and already-busy-worker fixture failures are retained as diagnostics. The accepted native towers, worker orders and source proof are recorded, without claiming the automatic picker was repaired.",
+    "The Back readiness observer exceeded its budget after confirmed Return and a fresh battle launch. The same fresh session was subsequently observed running; its continuation revalidated native save bytes and phone designs, then completed the final actual SystemUI Back/Cancel and input-clock checks."
+  ],
+  "fixtureDisclosures": [
+    {
+      "path": "qa/test-12/final-five/five.json",
+      "seeded": true,
+      "disclosure": "A separate complete genuine Iron Valley save is used as a QA fixture. Completed facilities are copied from genuine native records to validated free, reachable native sites until there are5labs,5vehiclefactories and5cyborgfactories. Only struct.json and the object allocator in gam.json are seeded; game.map, terrain, research, components, power, native limits, rules and queues are retained. Subsequent research/production are real UI actions using ordinary costs/times. This does not claim the extra facilities were constructed normally. This 0.12 run reuses that exact already-prepared complete fixture; it does not regenerate facilities."
+    }
+  ]
+}

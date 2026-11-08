@@ -1,5 +1,15 @@
 # Warzone Towers maintenance rules
 
+- 2026-11-08: implement approved footer Research option 1 and Production option 1
+  as 0.12 on `codex/towers-status-0.12`. Preserve complete 0.11 APK/source in
+  `C:/timerApp/fallbacks/towers-before-status-0.12-20261108/` and all older versions.
+  Footer Research is a live lab/current-topic sidebar with estimated bars only;
+  footer Production is a current-unit sidebar with vehicle/cyborg family tabs,
+  original component art and live activity, without queues or invented progress.
+  Top TECH/FACTORY remain full pages. Owned completed world labs/factories open
+  the corresponding full Towers page for that native ID before stock input.
+  Keep 1v1 unchanged. Native/scenario additions are read-only observations only.
+
 - 2026-11-08: the user approved all three compact Towers mock screens and their
   shared visual language for Build, Research, Factory, Design, Saved and Queue.
   Develop this as 0.11 on `codex/towers-ui-0.11`, preserving the complete 0.10

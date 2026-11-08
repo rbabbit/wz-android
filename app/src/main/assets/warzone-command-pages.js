@@ -67,6 +67,7 @@
       if(before&&reply.result.gameTime<before.gameTime){state.siteNumbers.clear();state.truckSelectionCache?.clear();state.modulePending?.clear();state.buildSelectionView='';window.WarzoneBuildDisplay?.reset();cancelPlacement();state.nativeToolReady=false;state.nativeItem='';renderSidebar();}
       const changed=before&&(before.buildings.map(b=>b.id).join()!==reply.result.buildings.map(b=>b.id).join()||before.parts.join()!==reply.result.parts.join()||JSON.stringify(before.factories.map(f=>[f.id,f.ready,f.modules,f.templates]))!==JSON.stringify(reply.result.factories.map(f=>[f.id,f.ready,f.modules,f.templates]))||JSON.stringify(before.templates)!==JSON.stringify(reply.result.templates));
       state.snapshot=reply.result;reconcileModuleRequests();window.__blockNightResearch?.acceptQueues?.(reply.result.researchQueues,reply.result.gameTime,Boolean(before&&reply.result.gameTime<before.gameTime));if(before&&before.parts.join()!==reply.result.parts.join())syncDesignParts();updateHUD();refreshLive();if(changed&&['build','saved','factory'].includes(state.page))render();if(changed&&state.buildOpen)renderSidebar();}
+    if(reply.action==='state'&&reply.ok&&polishedTowers)window.WarzoneBuildDisplay?.setFacilityTargets?.(reply.result.facilityTargets||[],reply.result.facilityBlockers||[],state.catalog);
     if(!reply.ok)state.rejects++;
     pending.resolve(reply);flush(true);
   }
@@ -143,7 +144,13 @@
       const observer=new host.ResizeObserver(schedule),watch=()=>{for(const id of ['blocknight-combat-hud','warzone-towers-wave-hud']){const e=element(id);if(e&&!observed.has(e)){observed.add(e);observer.observe(e);}}schedule();};
       new host.MutationObserver(watch).observe(strip,{childList:true});watch();host.addEventListener('resize',schedule);doc.fonts?.ready.then(schedule);doc.fonts?.addEventListener('loadingdone',schedule);}
   }
+  function openFactory(id){
+    const factory=state.snapshot?.factories.find(f=>f.id===Number(id)&&f.ready);
+    if(!polishedTowers||!factory)return false;
+    state.factory=factory.id;open('factory');return true;
+  }
   function open(page='build'){
+    if(polishedTowers)host.TowersStatus?.close?.();
     if(page==='build'){openSidebar();return;}
     const previousContent=element('wt-page-content');rememberPanelScroll(previousContent);if(previousContent)delete previousContent.dataset.labScrollKey;
     state.buildOpen=false;if(element('wt-build-sidebar'))element('wt-build-sidebar').hidden=true;
@@ -180,6 +187,7 @@
     return Promise.resolve();
   }
   async function openSidebar(){
+    if(polishedTowers)host.TowersStatus?.close?.();
     if(window.__towersHtml?.isEnded?.())return;
     install();if(state.buildingOpening||state.sidebarOpening)return;
     state.sidebarOpening=true;const navigation=++state.navigationSerial;
@@ -951,7 +959,8 @@
   window.addEventListener('warzone-battle-ended',endBattle);
   window.addEventListener('warzone-build-display-ready',()=>{updateSidebarQueue();if(state.placement&&state.previewPoint)window.WarzoneBuildDisplay.preview(state.placement,state.previewPoint);});
   loadSaved();resetDraft();
-  window.__warzoneCommands={tower:true,setSize:applySize,open,close,closeNative,beginPlacement,cancelPlacement,placeAt,previewAt,send,accept,
+  window.__warzoneCommands={tower:true,setSize:applySize,open,openFactory,close,closeNative,beginPlacement,cancelPlacement,placeAt,previewAt,send,accept,
+    navigationRevision:()=>state.navigationSerial,
     hidePreview:()=>{window.WarzoneBuildDisplay?.clearPreview();state.previewPoint=null;const ghost=document.getElementById('wt-build-ghost');if(ghost)ghost.setAttribute('hidden','');},
     endBattle,isOpen:()=>Boolean(state.page),isPlacement:()=>Boolean(state.placement),nativeMenuOpen:()=>Boolean(state.nativeMenu&&state.nativeMenu!=='build'),nativeClosing:()=>Boolean(state.nativeClosePromise),nativeBuildOpen:()=>Boolean(state.placement)||state.nativeMenu==='build',nativeBuildMenuOpen:()=>state.nativeMenu==='build'&&!state.nativeToolReady,nativeHudHidden:()=>state.nativeHudHidden,nativeBuildTap,nativeBuildMenuTap,queueNativeSite,selectMode,afterBuildExit,selectNearbyTrucks,openBuild,
     report:()=>({version:64,moduleTargets:moduleTargets(),modulePending:Array.from(state.modulePending.values()),truckSelection:state.truckSelection,selectingTrucks:Boolean(state.selectionPromise),page:state.page,buildOpen:state.buildOpen,nativeHudHidden:state.nativeHudHidden,pendingItem:state.pendingItem,siteChecks:state.siteChecks,pending:state.pending.size,writes:state.writes,acks:state.acks,timeouts:state.timeouts,

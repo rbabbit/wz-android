@@ -1,0 +1,93 @@
+{
+  "passed": true,
+  "candidateAPK_SHA256": "7a5f59363844eec86489f54b04ad776077d120631422ab1ebc59426544685673",
+  "installedAPK_SHA256": "7a5f59363844eec86489f54b04ad776077d120631422ab1ebc59426544685673",
+  "version": "0.12",
+  "package": "com.rbabbit.warzonetowers.lab",
+  "emulatorTesting": true,
+  "gameplayTesting": true,
+  "recordedUTC": "2026-11-08T13:53:56.728513Z",
+  "checks": {
+    "compactStatusLayout": true,
+    "fiveLabs": true,
+    "savesAndInputRestored": true,
+    "duelPreserved": true,
+    "tenFactories": true,
+    "androidBackAndMenus": true,
+    "ordinaryProduction": true,
+    "nativeFacilityIdentity": true,
+    "constructionQueuePreserved": true,
+    "footerStatus": true,
+    "worldFacilityOpeningBothMaps": true
+  },
+  "sourceReports": [
+    {
+      "path": "qa/test-12/final-status-recovered/status.json",
+      "sha256": "7a1c139246e390b4d8d400222ebb6067364c5f2c2ce0dbccc63d0abb1060dada"
+    },
+    {
+      "path": "qa/test-12/final-five/five.json",
+      "sha256": "ef1f1af2c4932dd57c8aa42a2db6849f830556ecc49d9e39a38e1744145feec8"
+    },
+    {
+      "path": "qa/test-12/final-world/world.json",
+      "sha256": "d91ea95aaa9af91676803240282e73f593c17cb40c7126b6d29c296111a160d6"
+    },
+    {
+      "path": "qa/test-12/final-back-recovered/dialog.json",
+      "sha256": "34e0b01e10011f51fe7175df08db51b76827e3300ddf9840bcbcf045a68e54ab"
+    },
+    {
+      "path": "qa/test-12/final-duel/smoke.json",
+      "sha256": "11eeea9315a2bf323617af7f11342b5cb88cea4e58ba96440378b326682be732"
+    },
+    {
+      "path": "qa/test-12/r1-smoke/ironvalley-research.json",
+      "sha256": "e07a8c724d93a2c2f3642527913b7b9a44d054b3bb827da5ef40f31e8996e5d7"
+    },
+    {
+      "path": "qa/test-12/r1-smoke/ironvalley-factory.json",
+      "sha256": "e4a7200f5c5517bf4941091457bc52e51c9cc1b7b31912e581bde55f5c769cc4"
+    },
+    {
+      "path": "qa/test-12/final-five/ironvalley-cyborg.json",
+      "sha256": "c69a4e29c070e3500ba1474a612254c93d32b36728f7328eaec4300c636bbe22"
+    },
+    {
+      "path": "qa/test-12/final-world/dustfall-research-160125.json",
+      "sha256": "6750b3051d4c6c23929699eaa17652e3c128c3be76f11083aa1f60fb6ae501f9"
+    },
+    {
+      "path": "qa/test-12/final-world/dustfall-research-160127.json",
+      "sha256": "0da4fd62bfb26785d392f48244b2352fe8d2610bf9e950d40a5574b1d3977b2a"
+    },
+    {
+      "path": "qa/test-12/final-world/dustfall-factory-160121.json",
+      "sha256": "03ae463e80e796786000490a31fdc37ad1364a35e24d34c7436f97ded585b7fc"
+    },
+    {
+      "path": "qa/test-12/final-world/dustfall-factory-160123.json",
+      "sha256": "a6d5af6ba9cf22d6a27af49919927d0e35f7e0b946337a21ac0148452ddad726"
+    }
+  ],
+  "fixtureDisclosures": [
+    {
+      "path": "qa/test-12/final-five/five.json",
+      "seeded": true,
+      "disclosure": "A separate complete genuine Iron Valley save is used as a QA fixture. Completed facilities are copied from genuine native records to validated free, reachable native sites until there are5labs,5vehiclefactories and5cyborgfactories. Only struct.json and the object allocator in gam.json are seeded; game.map, terrain, research, components, power, native limits, rules and queues are retained. Subsequent research/production are real UI actions using ordinary costs/times. This does not claim the extra facilities were constructed normally. This 0.12 run reuses that exact already-prepared complete fixture; it does not regenerate facilities."
+    }
+  ],
+  "limitations": [
+    "Checks ran on the exact delivery APK in the owned Android emulator; physical-handset GPU/FPS and audio were not newly verified.",
+    "The existing software-emulator black-terrain limitation remains. The compiled engine, official/accepted data prefix, map/rule contents and complete Duel package are preserved; only the indexed read-only Towers facility/production observer changes.",
+    "The five-lab/five-vehicle/five-cyborg setup is a disclosed complete native save with added completed facilities. Real native IDs, queues, status pages and input are checked; this does not claim ordinary construction of all added facilities.",
+    "Ordinary production, construction/queues and save/input restoration use a separate unmodified native setup. No complete 30-wave victory or new Duel balancing campaign was rerun for this status/interface change.",
+    "Factory status uses observed native activity/current items and queue data. No production ETA or percentage is invented.",
+    "The initial ordinary production/current-status checks passed. Automatic rectangle-based truck isolation then reached its bounded timeout among combat units at the congested factory exit. This continuation uses a real manual single-truck selection at the other authored platform; it does not rerun or claim to repair the unchanged automatic picker.",
+    "The original real Back/Cancel/Return checks reached the custom main menu and started a fresh battle, but its readiness observer exceeded its budget. The same fresh battle subsequently became ready and was observed running. This continues that session, revalidates save/design bytes, and performs the final actual SystemUI Back/Cancel/input check without repeating the earlier actions.",
+    "The software emulator shows its existing black-terrain limitation. These captures verify actual UI and scoped native gameplay; physical handset GPU/FPS/audio and a complete30-wave run are not newly verified.",
+    "The original ordinary construction setup reached an unchanged automatic truck-isolation timeout among mixed combat units at the crowded factory exit. Construction proof is an explicit continuation using a valid constructor group on the other authored platform. Subsequent out-of-view-site and already-busy-worker fixture failures are retained as diagnostics. The accepted native towers, worker orders and source proof are recorded, without claiming the automatic picker was repaired.",
+    "The Back readiness observer exceeded its budget after confirmed Return and a fresh battle launch. The same fresh session was subsequently observed running; its continuation revalidated native save bytes and phone designs, then completed the final actual SystemUI Back/Cancel and input-clock checks."
+  ],
+  "method": "Exact-installed-APK ordinary/footer, disclosed max-facility, real native-mesh taps on both maps, actual Android Back and retained Duel reports. Source checks alone are not gameplay evidence."
+}

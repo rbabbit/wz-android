@@ -14,7 +14,7 @@
 
   const state = {
     opening: false, open: false, assigning: false,
-    activeLab: 0, activeCategory: "ALL", baseWidth: 0, baseHeight: 0,
+    activeLab: 0, requestedLabId: null, activeCategory: "ALL", baseWidth: 0, baseHeight: 0,
     savedCanvasStyle: null, savedHudVisibility: "", savedWaveVisibility: "", savedWavePriority: "", catalog: [], engineLabs: [],
     lastSnapshotGameTime: null, playerPower: 0, pendingCommand: null, topicHistory: {},
     labQueues: {}, syncedQueues: {}, dirtyLabs: {}, runner: null, statusTimer: null,
@@ -128,7 +128,7 @@
   function resetOnLoad(){
     {
       clearRunnerTimers(state.runner);state.runner=null;state.pendingCommand=null;state.assigning=false;state.syncBlocked=false;
-      state.labQueues={};state.syncedQueues={};state.dirtyLabs={};state.queueStateTime=-1;
+      state.labQueues={};state.syncedQueues={};state.dirtyLabs={};state.queueStateTime=-1;state.requestedLabId=null;
     }
   }
   function pruneLabs(){
@@ -252,7 +252,10 @@
         estimatedProgress: Number(lab.estimatedProgress || 0), waitingPower: Boolean(lab.waitingPower)
       })).sort((a,b)=>a.id-b.id).map((lab,nativeIndex)=>({...lab,nativeIndex})) : [];
       pruneLabs();
-      const selectedLab = state.engineLabs.findIndex(l=>l.id===selectedLabId);if(selectedLab>=0)state.activeLab=selectedLab;
+      const requestedLab=state.engineLabs.findIndex(l=>l.id===state.requestedLabId);
+      const selectedLab = state.engineLabs.findIndex(l=>l.id===selectedLabId);
+      if(requestedLab>=0){state.activeLab=requestedLab;state.requestedLabId=null;}
+      else if(selectedLab>=0)state.activeLab=selectedLab;
       if (state.activeLab >= state.engineLabs.length) state.activeLab = Math.max(0, state.engineLabs.length - 1);
       state.playerPower = Number(snapshot.power || 0);
       state.lastSnapshotGameTime = Number(snapshot.gameTime || 0);
@@ -516,11 +519,21 @@
     state.opening = false; state.open = true; state.pendingClose = false;
     window.parent?.WarzoneHost?.setResearchOpen(true);
     state.assigning = Boolean(state.runner); state.opens += 1; state.activeCategory = "ALL";
-    selectLab(isTowersResearchShell(shell) ? Math.min(previousLab, Math.max(0, state.engineLabs.length - 1)) : 0, false);
+    const requested=state.engineLabs.findIndex(l=>l.id===state.requestedLabId);
+    selectLab(requested>=0?requested:isTowersResearchShell(shell) ? Math.min(previousLab, Math.max(0, state.engineLabs.length - 1)) : 0, false);
+    if(requested>=0)state.requestedLabId=null;
     renderAll(); vibrate(12); return true;
   }
 
+  function openForLabId(id) {
+    if(window.__warzoneDuelConfig?.mode==='duel'||!Number.isFinite(Number(id)))return false;
+    state.requestedLabId=Number(id);
+    const index=state.engineLabs.findIndex(l=>l.id===state.requestedLabId);
+    if(state.open&&index>=0){selectLab(index);state.requestedLabId=null;return true;}
+    return open();
+  }
   function open() {
+    if(window.__warzoneDuelConfig?.mode!=='duel')window.parent?.TowersStatus?.close?.();
     if (window.__towersHtml?.isEnded?.()) return false;
     if (state.open || state.opening) return true;
     window.__warzoneCommands?.close?.();
@@ -533,6 +546,7 @@
 
   function finishClose(synced = false) {
     if (!state.open && !state.opening) return false;
+    state.requestedLabId=null;
     state.opening = false; state.open = false; state.pendingClose = false; state.closes += 1;
     document.getElementById("blocknight-research-shell")?.remove();
     document.getElementById("blocknight-research-style")?.remove(); restoreCanvasStyle();
@@ -942,6 +956,6 @@
     hideQueueStatus(); finishClose(false);
   });
   window.addEventListener("pagehide", () => { if (state.open || state.opening) finishClose(false); });
-  window.__blockNightResearch = { version: VERSION, open, close, selectLab, setCategory, selectTopic, assignSelectedTopic, chooseTopic, removeQueuedTopic, processQueues, afterNativeTap, runSyntheticSuite, report, pollOutput: pollResearchLogs, acceptQueues };
+  window.__blockNightResearch = { version: VERSION, open, openForLabId, close, selectLab, setCategory, selectTopic, assignSelectedTopic, chooseTopic, removeQueuedTopic, processQueues, afterNativeTap, runSyntheticSuite, report, pollOutput: pollResearchLogs, acceptQueues };
   return "blocknight-warzone-mobile-research-v32-atomic-queues-ready";
 })();

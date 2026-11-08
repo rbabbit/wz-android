@@ -62,6 +62,8 @@
   }
   async function back() {
     if (phase === 'ended') return;
+    window.__kalaWarzoneTouch?.cancelFacilityNavigation?.();
+    if(!duel&&window.parent?.TowersStatus?.handleBack?.())return;
     const commands = window.__warzoneCommands, tech = window.__blockNightResearch;
     if (tech?.report().open || tech?.report().opening) { tech.close(); return; }
     const help = window.parent.document.getElementById('warzone-towers-help-overlay');

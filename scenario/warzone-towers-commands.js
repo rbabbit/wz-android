@@ -291,6 +291,41 @@ function wtcmd_nativeBuildOptions()
     });
 }
 
+// Read-only observations for facility taps and the current-work footer rail.
+// No selections, orders, research assignments or game rules are changed here.
+function wtcmd_facilityTargets()
+{
+    return enumStruct(selectedPlayer).filter(function(s) {
+        return s.status === BUILT && [RESEARCH_LAB, FACTORY, CYBORG_FACTORY, VTOL_FACTORY].indexOf(s.stattype) >= 0;
+    }).map(function(s) {
+        const kind = s.stattype === RESEARCH_LAB ? 'research' : s.stattype === CYBORG_FACTORY ? 'cyborg' : s.stattype === VTOL_FACTORY ? 'vtol' : 'factory';
+        const itemId = kind === 'research' ? 'A0ResearchFacility' : kind === 'cyborg' ? 'A0CyborgFactory' : kind === 'vtol' ? 'A0VTolFactory1' : 'A0LightFactory';
+        const item = wtcmd_buildings[itemId];
+        return {id:s.id, kind:kind, itemId:itemId, x:s.x, y:s.y, z:s.z, modules:s.modules || 0,
+            moduleId:kind === 'research' ? 'A0ResearchModule1' : kind === 'cyborg' ? '' : 'A0FacMod1',
+            width:item ? item.width : 1, breadth:item ? item.breadth : 1, ready:true, nativeStatus:s.status};
+    }).sort(function(a,b) { return a.id-b.id; });
+}
+
+function wtcmd_facilityBlockers(targets)
+{
+    if (!targets.length || typeof enumRange !== 'function') return [];
+    return enumRange(Math.floor(mapWidth/2), Math.floor(mapHeight/2), Math.max(mapWidth,mapHeight), ALL_PLAYERS, true)
+        .filter(function(d) { return d.type === DROID && targets.some(function(t) { return Math.abs(d.x-t.x) <= 5 && Math.abs(d.y-t.y) <= 5; }); })
+        .map(function(d) { return {id:d.id, x:d.x, y:d.y, z:d.z, bodySize:d.bodySize || 1}; });
+}
+
+function wtcmd_currentProduction(factory)
+{
+    if (typeof getDroidProduction !== 'function' || factory.status !== BUILT) return null;
+    const current = getDroidProduction(factory);
+    if (!current) return null;
+    const source = {name:current.name, body:current.body, propulsion:current.propulsion, droidType:current.droidType,
+        weapons:(current.weapons || []).map(function(w) { return typeof w === 'string' ? w : w.id || w.name; })};
+    ['construct','repair','brain','ecm','sensor'].forEach(function(key) { source[key] = current[key]; });
+    return wtcmd_templateParts(source);
+}
+
 function wtcmd_snapshot()
 {
     const construction = wtcmd_constructionState();
@@ -316,10 +351,13 @@ function wtcmd_snapshot()
             templates: templates.filter(function (t) { return wtcmd_factoryAllows(wtcmd_templateParts(t), s); }).map(wtcmd_templateKey),
             modules: s.modules || 0, ready: s.status === BUILT, idle: structureIdle(s),
             active: wtcmd_factoryActive[String(s.id)] || null,
+            currentProduction: wtcmd_currentProduction(s),
             waitingReason: wtcmd_capacityWait((wtcmd_factoryActive[String(s.id)] || (wtcmd_production[String(s.id)] || [])[0])?.design),
             queue: wtcmd_production[String(s.id)] || [] };
     });
+    const facilityTargets = wtcmd_facilityTargets();
     return { version: 1, gameTime: gameTime, player: selectedPlayer, power: playerPower(selectedPlayer),
+        facilityTargets:facilityTargets, facilityBlockers:wtcmd_facilityBlockers(facilityTargets),
         mapWidth: mapWidth, mapHeight: mapHeight, alwaysQueue: true,
         researchQueues: enumStruct(selectedPlayer, RESEARCH_LAB).map(function(lab) {
             return {labId: lab.id, topicIds: (typeof blockNightV28Queues === "object" && blockNightV28Queues[String(lab.id)] || []).slice()};

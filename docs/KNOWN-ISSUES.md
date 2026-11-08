@@ -1,5 +1,29 @@
 # Known issues and verification limits
 
+## Warzone Towers 0.12 — footer status and world facility taps
+
+The [0.12 report](../qa/test-12/REPORT.md) records exact-APK native facility IDs,
+current-only status, production, construction, save/load, compact layouts and
+navigation checks. The crowded five-lab/five-vehicle/five-cyborg case reuses a
+disclosed complete native fixture; ordinary production and building use normal
+unmodified game states separately. Production has no completion percentage or
+ETA because the public native observer does not expose reliable progress.
+
+The unchanged automatic truck picker reached its bounded isolation timeout in
+an ordinary test's congested factory exit among combat units. This update does
+not claim to repair that existing picker limitation. The retained failed report
+is followed by an explicit continuation on the other authored platform using a
+real constructor selection and validated visible building sites. Subsequent
+fixture failures from an off-screen site and already-busy workers are also
+retained; none is counted as an uninterrupted successful journey.
+
+The normal in-game interface remains HTML/CSS over the original engine.
+Physical-handset GPU/FPS, audio, a complete 30-wave victory and exact native
+VTOL world input are not newly certified. Existing software-emulator black
+terrain remains. The compiled program, maps/rules, Android icon/launcher and
+complete deferred 1v1 package are preserved. Complete 0.11 and older fallbacks
+remain available.
+
 ## Warzone Towers 0.11 — compact Towers interface
 
 The [0.11 report](../qa/test-11/REPORT.md) records exact-APK layout, native

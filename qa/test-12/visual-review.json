@@ -1,0 +1,113 @@
+{
+  "passed": true,
+  "candidateAPK_SHA256": "7a5f59363844eec86489f54b04ad776077d120631422ab1ebc59426544685673",
+  "reviewed": true,
+  "recordedUTC": "2026-11-08T13:53:56.728513Z",
+  "reviewInput": {
+    "path": "qa/test-12/accepted.json",
+    "sha256": "6db2f7a1ceed6902842bb7df0ff2e1f9305119c0e18c00d327b74106a2e3f8e5"
+  },
+  "designQA": {
+    "path": "design-qa.md",
+    "sha256": "b80334538d978810d4583d465c0459b07db200ebb3e9fa1f5629087bafd6d178"
+  },
+  "screenshots": [
+    {
+      "path": "qa/test-12/comparisons/research-controls.png",
+      "sha256": "fda47d0338ec6843b2083803d701d60bd37b6ac4966ede0fa25714d682a97f7c",
+      "accepted": true,
+      "notes": "Approved Research 1 beside actual current-only native five-lab sidebar; state differences are illustrative."
+    },
+    {
+      "path": "qa/test-12/comparisons/production-controls.png",
+      "sha256": "71ae33cb3e2eb2ebbd12d8867181fd7449233e02202b19aced7009287d2fcbdf",
+      "accepted": true,
+      "notes": "Approved Production 1 beside actual family tabs/current unit and real component artwork."
+    },
+    {
+      "path": "qa/test-12/final-five/lab-12-five-research-active-only.png",
+      "sha256": "dae24c2c1c1087f4c30abf796131e6941753f96c4a7a1095c2f604205661a105",
+      "accepted": true,
+      "notes": "Five actual labs, fifth lab active, no waiting topic or numeric percentage in sidebar."
+    },
+    {
+      "path": "qa/test-12/final-five/lab-12-fifth-vehicle-current-production.png",
+      "sha256": "b0a7a4b7dfe486df7b49b480898c99610733d5027491796014a858e58cf83ff8",
+      "accepted": true,
+      "notes": "Fifth vehicle factory's actual current unit and producing status."
+    },
+    {
+      "path": "qa/test-12/final-five/lab-12-fifth-cyborg-current-production.png",
+      "sha256": "34270c920f33753e0da582e4a63dad68af996327ffd26dd3a2f5b9cac8f68e93",
+      "accepted": true,
+      "notes": "Fifth cyborg factory's actual current unit and producing status."
+    },
+    {
+      "path": "qa/test-12/final-five/lab-12-compact-research.png",
+      "sha256": "c91033216df9521bb42248c799efb50c0198663f592148557dd41dc242209800",
+      "accepted": true,
+      "notes": "Five native labs fit at compact 854x480; footer and Close remain accessible."
+    },
+    {
+      "path": "qa/test-12/final-five/lab-12-compact-production-vehicle.png",
+      "sha256": "9ff586ba35040bef5a8c2f2d8ca07a23fd5710ffe6dbf7b74fc2a61ac08ebb2e",
+      "accepted": true,
+      "notes": "Five vehicle rows and native family tabs fit compact viewport."
+    },
+    {
+      "path": "qa/test-12/final-five/lab-12-compact-production-cyborg.png",
+      "sha256": "e7ddaa1c41ff96f4a23262f0be0cf5eaf40422f80900c34a5cda298ec04ab277",
+      "accepted": true,
+      "notes": "Five cyborg rows and footer remain accessible at compact size."
+    },
+    {
+      "path": "qa/test-12/final-status/lab-12-ordinary-current-production.png",
+      "sha256": "b8bc7c1d2c113985d3ec6a9bfd5071998657ca69662300566aa6a5906f9c4059",
+      "accepted": true,
+      "notes": "Ordinary real production with a nonempty waiting queue; footer displays only the current unit."
+    },
+    {
+      "path": "qa/test-12/final-status-recovered/lab-12-research-keeps-real-build-orders.png",
+      "sha256": "55cbfa1300006ba88f2d43519db2240e4f1d058f832cc7419d4b9a8a6cb6c0a4",
+      "accepted": true,
+      "notes": "Opening footer Research while real native construction orders remain assigned."
+    },
+    {
+      "path": "qa/test-12/final-world/lab-dustfall-research-160127.png",
+      "sha256": "5ac2c04da65ecfd292ad19c32c0eabec33dee0f72531be4db931820050c940fc",
+      "accepted": true,
+      "notes": "Actual world tap opens full Towers TECH with Lab 2 native ID selected."
+    },
+    {
+      "path": "qa/test-12/final-world/lab-dustfall-factory-160123.png",
+      "sha256": "b030dadf2d7939d7e19c9fe1322e8cb07501390467af4fb183477efe5a286b67",
+      "accepted": true,
+      "notes": "Actual world tap opens full Towers Factory with Factory 2 native ID selected."
+    },
+    {
+      "path": "qa/test-12/final-back-recovered/dialog-fresh-battle-cancel.png",
+      "sha256": "730845e4938cebc91d0e7f5cde97facbff1d5b30afa62ad98c3859f8a5dfb737",
+      "accepted": true,
+      "notes": "Actual SystemUI Back opens the retained compact black/white native Return confirmation."
+    }
+  ],
+  "observations": [
+    "Both selected option-1 layouts are implemented as current-work-only footer sidebars. Top TECH and FACTORY keep their complete normal pages.",
+    "Native-ID-keyed rows, real artwork/established silhouettes, thin separators, progress/activity indicators and reachable footer/close controls follow the approved structure. Generated sample counts and unrelated research artwork are replaced by the actual native state and component catalogue.",
+    "No material clipping or overlap remained in normal/compact native five-lab and five-plus-five-factory screenshots. The battlefield iframe remains unchanged in dimensions.",
+    "Seven actual world taps select the intended native facilities on both maps; no synthetic native left press is forwarded. Dustfall Lab 2/Factory 2 full pages visibly select the correct facility.",
+    "Independent review of both combined comparisons, all three compact status screens and both second-facility full pages found no blocking visual mismatch."
+  ],
+  "limitations": [
+    "Checks ran on the exact delivery APK in the owned Android emulator; physical-handset GPU/FPS and audio were not newly verified.",
+    "The existing software-emulator black-terrain limitation remains. The compiled engine, official/accepted data prefix, map/rule contents and complete Duel package are preserved; only the indexed read-only Towers facility/production observer changes.",
+    "The five-lab/five-vehicle/five-cyborg setup is a disclosed complete native save with added completed facilities. Real native IDs, queues, status pages and input are checked; this does not claim ordinary construction of all added facilities.",
+    "Ordinary production, construction/queues and save/input restoration use a separate unmodified native setup. No complete 30-wave victory or new Duel balancing campaign was rerun for this status/interface change.",
+    "Factory status uses observed native activity/current items and queue data. No production ETA or percentage is invented.",
+    "The initial ordinary production/current-status checks passed. Automatic rectangle-based truck isolation then reached its bounded timeout among combat units at the congested factory exit. This continuation uses a real manual single-truck selection at the other authored platform; it does not rerun or claim to repair the unchanged automatic picker.",
+    "The original real Back/Cancel/Return checks reached the custom main menu and started a fresh battle, but its readiness observer exceeded its budget. The same fresh battle subsequently became ready and was observed running. This continues that session, revalidates save/design bytes, and performs the final actual SystemUI Back/Cancel/input check without repeating the earlier actions.",
+    "The software emulator shows its existing black-terrain limitation. These captures verify actual UI and scoped native gameplay; physical handset GPU/FPS/audio and a complete30-wave run are not newly verified.",
+    "The original ordinary construction setup reached an unchanged automatic truck-isolation timeout among mixed combat units at the crowded factory exit. Construction proof is an explicit continuation using a valid constructor group on the other authored platform. Subsequent out-of-view-site and already-busy-worker fixture failures are retained as diagnostics. The accepted native towers, worker orders and source proof are recorded, without claiming the automatic picker was repaired.",
+    "The Back readiness observer exceeded its budget after confirmed Return and a fresh battle launch. The same fresh session was subsequently observed running; its continuation revalidated native save bytes and phone designs, then completed the final actual SystemUI Back/Cancel and input-clock checks."
+  ]
+}

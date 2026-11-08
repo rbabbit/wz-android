@@ -93,6 +93,7 @@
     maxPanDispatchMs: 0,
     boxSelections: 0,
     manualSelectionRevision: 0,
+    facilityNavigationSerial: 0, facilityOpens: 0, lastFacility: null, facilityError: '',
     pinchSteps: 0,
     tiltMoves: 0,
     tiltKey: null,
@@ -1684,7 +1685,27 @@
     }
   }
 
+  function cancelFacilityNavigation() { state.facilityNavigationSerial += 1; }
+  function openFacilityAt(x,y) {
+    const commands=window.__warzoneCommands, report=commands?.report?.();
+    if(window.__warzoneDuelConfig?.mode==='duel'||!state.battleActive||state.combatLock||state.queueMode||state.boxMode||state.stopNonce||report?.buildOpen||report?.placement||report?.page||report?.nativeMenu)return false;
+    const target=window.WarzoneBuildDisplay?.pickFacilityTarget?.(x,y);
+    if(!target)return false;
+    const serial=++state.facilityNavigationSerial, navigation=commands.navigationRevision?.(), started=performance.now();
+    // Consume the tap before SDL sees a left press. Fresh native identity and
+    // a final hit check prevent stale/dead targets or a later gesture opening UI.
+    commands.send('state',{}, {fresh:true}).then(reply=>{
+      if(!reply.ok||serial!==state.facilityNavigationSerial||performance.now()-started>1500||navigation!==commands.navigationRevision?.()||!state.battleActive||window.__towersHtml?.isEnded?.())return;
+      const current=commands.report(), live=reply.result.facilityTargets?.find(t=>t.id===target.id&&t.ready&&t.nativeStatus===1);
+      if(!live||current.page||current.buildOpen||current.placement||current.nativeMenu||state.queueMode||state.combatLock||state.boxMode||window.WarzoneBuildDisplay.pickFacilityTarget(x,y)?.id!==target.id)return;
+      const opened=live.kind==='research'?window.__blockNightResearch?.openForLabId?.(live.id):commands.openFactory?.(live.id);
+      if(opened){state.facilityOpens++;state.lastFacility={id:live.id,kind:live.kind};}
+    }).catch(error=>{state.facilityError=String(error.message||error);});
+    return true;
+  }
+  commandDocument().addEventListener('pointerdown',cancelFacilityNavigation,{capture:true,passive:true});
   function handlePointer(event) {
+    if(event.type==='pointerdown')cancelFacilityNavigation();
     if (!state.battleActive) { if (event.target === canvas()) own(event); return; }
     if (forwardedPointers.has(event)) return;
     const desktopPlacement = (window.__warzoneCommands?.isPlacement()||window.__warzoneCommands?.nativeBuildOpen?.())
@@ -1896,7 +1917,7 @@
         vibrate(8);
         state.taps += 1;
       } else {
-        if (isBattlefieldPoint(gesture.x, gesture.y)) {state.manualSelectionRevision += 1;click(0, gesture.x, gesture.y);}
+        if (isBattlefieldPoint(gesture.x, gesture.y)) {if(!openFacilityAt(gesture.x,gesture.y)){state.manualSelectionRevision += 1;click(0, gesture.x, gesture.y);}}
         else nativeUiClick(gesture.x, gesture.y);
         if (isBattlefieldPoint(gesture.x, gesture.y)) {
           feedback(gesture.x, gesture.y, "tap");
@@ -1912,6 +1933,7 @@
   }
 
   function releaseAll(clearModes = false, cancelTool = true) {
+    cancelFacilityNavigation();
     const cancelledTool = cancelCombatInput(cancelTool);
     clearMultiMove();
     clearLongPress();
@@ -2086,6 +2108,7 @@
   }, 500);
   setTimeout(() => clearInterval(canvasTimer), 20000);
   window.__kalaWarzoneTouch = {
+    cancelFacilityNavigation,
     version: 54,
     ready: true,
     key,
@@ -2133,6 +2156,7 @@
       maxPanDispatchMs: state.maxPanDispatchMs,
       boxSelections: state.boxSelections,boxCadenceWaits:state.boxCadenceWaits,boxPressGaps:state.boxPressGaps,lastNativeLeftDownAt:state.lastNativeLeftDownAt,
       manualSelectionRevision: state.manualSelectionRevision,
+      facilityOpens:state.facilityOpens, lastFacility:state.lastFacility, facilityError:state.facilityError,
       pinchSteps: state.pinchSteps,
       tiltMoves: state.tiltMoves,
       tiltHeld: state.tiltKey?.code || null,

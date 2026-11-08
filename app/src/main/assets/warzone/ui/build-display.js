@@ -3,7 +3,8 @@
   'use strict';
   if(window.WarzoneBuildDisplay)return;
   const state={models:{},sites:[],preview:null,heights:new Map(),terrainRevision:null,drawn:[],frames:0,paintMs:0,maxPaintMs:0,error:'',dirty:true,key:'',owned:false,
-    catalog:new Map(),activeModule:null,moduleTargets:[],parents:new Map(),geometry:new Map(),moduleDrawn:[],targetSignature:''};
+    catalog:new Map(),activeModule:null,moduleTargets:[],parents:new Map(),geometry:new Map(),moduleDrawn:[],targetSignature:'',
+    facilityTargets:[],facilityBlockers:[]};
   const canvas=document.createElement('canvas');canvas.id='wt-build-models';canvas.setAttribute('aria-hidden','true');
   Object.assign(canvas.style,{position:'fixed',inset:'0',width:'100%',height:'100%',zIndex:'2147483599',pointerEvents:'none'});
   document.body.appendChild(canvas);const ctx=canvas.getContext('2d');
@@ -143,6 +144,70 @@
     if(surface&&surface.w+1e-4<found.hit.depth&&found.hit.source!=='label')return null;
     return {...found.entry.target,hit:found.hit};
   }
+  function facilitiesEnabled(){return window.__warzoneDuelConfig?.mode!=='duel'&&document.body.classList?.contains?.('wt-towers-polished')===true;}
+  function facilityMasks(view){
+    const masks=blockedRects(view),d=window.parent?.document,frame=d?.getElementById('warzone-game-frame')?.getBoundingClientRect()||{left:0,top:0};
+    for(const id of ['wt-status-panel','wt-field-centre','wt-field-toggle','lab-ops','wt-native-back']){
+      const e=d?.getElementById(id);if(!e||e.hidden||e.closest?.('[inert]'))continue;
+      const css=window.parent?.getComputedStyle?.(e),b=e.getBoundingClientRect();
+      if(css&&(css.display==='none'||css.visibility==='hidden'||css.pointerEvents==='none')||!b.width||!b.height)continue;
+      masks.push({x:b.left-frame.left,y:b.top-frame.top,width:b.width,height:b.height});
+    }
+    return masks;
+  }
+  function facilityPoint(view,masks,x,y){
+    if(!fieldPoint(view,masks,x,y))return false;
+    // Host overlays live outside the engine document. Respect actual hit
+    // testing as well as the measured radar/panel masks above.
+    const d=window.parent?.document,frame=d?.getElementById('warzone-game-frame')?.getBoundingClientRect();
+    if(frame&&typeof d.elementFromPoint==='function'){
+      const hit=d.elementFromPoint(x+frame.left,y+frame.top);
+      if(!hit||!hit.closest?.('#warzone-game-frame'))return false;
+    }
+    return true;
+  }
+  function facilityDroidHit(view,x,y){
+    // Native mouseTarget prioritises every visible droid before structures.
+    // Script positions are whole tiles, so cover the complete possible body
+    // volume, not a guessed sub-tile centre. This deliberately favours unit
+    // interaction in an ambiguous overlap. Blockers are native visible-only.
+    for(const d of state.facilityBlockers){
+      const size=Math.max(0,Math.min(3,Number(d.bodySize)||0)),pad=64+size*32,points=[];
+      for(const wx of [d.x*128-pad,(d.x+1)*128+pad])for(const wy of [d.y*128-pad,(d.y+1)*128+pad])for(const wz of [d.z*128-32,(d.z+1)*128+96+size*48]){
+        const p=project(view,wx,wy,wz);if(p)points.push(p);
+      }
+      if(points.length!==8)continue;
+      if(x>=Math.min(...points.map(p=>p.x))-4&&x<=Math.max(...points.map(p=>p.x))+4
+        &&y>=Math.min(...points.map(p=>p.y))-4&&y<=Math.max(...points.map(p=>p.y))+4)return true;
+    }
+    return false;
+  }
+  function facilityEntries(view,masks){
+    return state.facilityTargets.map(target=>{
+      const g=targetGeometry(view,target),visible=!!g&&g.bounds.right>=view.left&&g.bounds.left<=view.left+view.width&&g.bounds.bottom>=view.top&&g.bounds.top<=view.top+view.height
+        &&(g.outline.some(p=>unmaskedPoint(view,masks,p.x,p.y))||g.faces.some(f=>unmaskedPoint(view,masks,(f.points[0].x+f.points[1].x+f.points[2].x)/3,(f.points[0].y+f.points[1].y+f.points[2].y)/3)));
+      return {target,geometry:g,visible,labelRect:null};
+    });
+  }
+  function facilityTerrainOccluded(view,hit,x,y){
+    const terrain=window.WarzoneTerrain,groundHit=terrain?.pick?.(x,y),surface=groundHit&&project(view,groundHit.worldX,groundHit.worldY,groundHit.height);
+    return !!surface&&surface.w+1e-4<hit.depth;
+  }
+  function pickFacilityTarget(x,y){
+    const view=window.WarzoneTerrain?.view();if(!facilitiesEnabled()||!view||hidden()||!state.facilityTargets.length)return null;
+    const masks=facilityMasks(view);if(!facilityPoint(view,masks,x,y)||facilityDroidHit(view,x,y))return null;
+    const hits=facilityEntries(view,masks).map(entry=>({entry,hit:hitEntry(entry,x,y)})).filter(v=>v.hit);
+    hits.sort((a,b)=>(a.hit.distance>0)-(b.hit.distance>0)||a.hit.depth-b.hit.depth||a.hit.distance-b.hit.distance);
+    const found=hits[0];if(!found||facilityTerrainOccluded(view,found.hit,x,y))return null;
+    return {...found.entry.target,hit:found.hit};
+  }
+  function facilityReport(withGeometry){
+    if(!withGeometry)return state.facilityTargets.map(t=>({...t}));
+    const view=window.WarzoneTerrain?.view();if(!facilitiesEnabled()||!view||hidden())return state.facilityTargets.map(t=>({...t,visible:false,hitPoints:[]}));
+    const masks=facilityMasks(view);
+    return facilityEntries(view,masks).map(({target,geometry:g,visible})=>({...target,visible,bounds:g?.bounds||null,footprint:g?.foot||[],outline:g?.outline||[],
+      hitPoints:visible?hitPoints(view,masks,g).filter(p=>facilityPoint(view,masks,p.x,p.y)&&!facilityDroidHit(view,p.x,p.y)&&!facilityTerrainOccluded(view,{depth:p.depth},p.x,p.y)):[]}));
+  }
   function hitPoints(view,masks,g){
     const points=g.faces.map(face=>{const p=face.points;return {x:(p[0].x+p[1].x+p[2].x)/3,y:(p[0].y+p[1].y+p[2].y)/3,depth:3/(1/p[0].w+1/p[1].w+1/p[2].w),source:'mesh',face:face.index,area:Math.abs((p[1].x-p[0].x)*(p[2].y-p[0].y)-(p[2].x-p[0].x)*(p[1].y-p[0].y))};}).filter(p=>p.area>4&&fieldPoint(view,masks,p.x,p.y)).sort((a,b)=>b.area-a.area||a.depth-b.depth),result=[];
     for(const p of points){if(result.every(q=>Math.hypot(p.x-q.x,p.y-q.y)>=8)){const {area,...point}=p;result.push(point);if(result.length>=10)break;}}
@@ -176,8 +241,11 @@
     requestAnimationFrame(frame);
     syncTerrain();
     const terrain=window.WarzoneTerrain,needed=!!state.preview||state.sites.length>0||state.moduleTargets.length>0;
-    if(needed&&terrain&&!terrain.report().active){terrain.active(true);state.owned=true}
-    if(!needed&&state.owned&&!window.__warzoneCommands?.nativeBuildOpen?.()){terrain?.active(false);state.owned=false}
+    // Facilities retain only the lightweight current-camera observation. They
+    // are never painted or projected in this frame loop; picking is on demand.
+    const observing=needed||(state.facilityTargets.length>0&&facilitiesEnabled()&&!hidden());
+    if(observing&&terrain&&!terrain.report().active){terrain.active(true);state.owned=true}
+    if(!observing&&state.owned&&!window.__warzoneCommands?.nativeBuildOpen?.()){terrain?.active(false);state.owned=false}
     const view=needed&&terrain?.view(),concealed=hidden(),now=performance.now(),pulse=state.preview?.parentId&&state.parents.get(state.preview.parentId)?.eligible&&!state.preview.rejected?Math.floor(now/80):0;
     const masks=view&&!concealed?blockedRects(view):[];
     const key=(!concealed&&view?viewKey(view):'hidden')+':'+innerWidth+','+innerHeight+':'+JSON.stringify(masks)+':'+pulse;
@@ -204,6 +272,16 @@
       if(!state.activeModule){state.moduleDrawn=[];if(state.preview?.item.category==='MODULES'){state.preview=null;state.dirty=true;}}
     },
     pickModuleTarget,
+    setFacilityTargets(targets,blockers,catalog){
+      if(!facilitiesEnabled()){state.facilityTargets=[];state.facilityBlockers=[];return;}
+      for(const item of catalog?.buildings||[])state.catalog.set(item.id,item);
+      state.facilityTargets=(targets||[]).filter(t=>Number.isFinite(t.id)&&t.id>0&&Number.isFinite(t.x)&&Number.isFinite(t.y)&&Number.isFinite(t.z)
+        &&t.ready===true&&t.nativeStatus===1&&['research','factory','cyborg','vtol'].includes(t.kind)&&state.catalog.has(t.itemId)).map(t=>{
+          const item=state.catalog.get(t.itemId);return {...t,width:Number(t.width||item.width||1),breadth:Number(t.breadth||item.breadth||1),modules:Number(t.modules)||0};
+        });
+      state.facilityBlockers=(blockers||[]).filter(d=>Number.isFinite(d.id)&&[d.x,d.y,d.z].every(Number.isFinite)).map(d=>({...d}));
+    },
+    pickFacilityTarget,
     preview(item,point){
       if(item.category==='MODULES'){
         const parentId=Number(point.parentId||point.target?.id),target=state.parents.get(parentId)||point.target;
@@ -213,9 +291,10 @@
     },
     clearPreview(){if(state.preview){state.preview=null;state.dirty=true}},
     reject(item,x,y,parentId){if(state.preview?.item.id===item&&(parentId?state.preview.parentId===parentId:state.preview.x===x&&state.preview.y===y)){state.preview.rejected=true;state.preview.validation='invalid';state.dirty=true}},
-    reset(){state.heights.clear();state.terrainRevision=null;state.sites=[];state.preview=null;state.moduleTargets=[];state.activeModule=null;state.parents.clear();state.geometry.clear();state.moduleDrawn=[];state.drawn=[];state.targetSignature='';ctx.clearRect(0,0,innerWidth,innerHeight);state.dirty=true},
-    report(){const view=window.WarzoneTerrain?.view(),masks=view?blockedRects(view):[],entries=view&&!hidden()?targetEntries(view,masks):state.moduleTargets.map(target=>({target,geometry:null,visible:false,label:targetLabel(target),labelRect:null}));return {models:Object.keys(state.models).length,acceptedSites:state.sites.map(s=>({id:s.id,number:s.number,itemId:s.item.id,parentId:s.parentId||0,x:s.x,y:s.y,status:s.status})),drawn:state.drawn,preview:state.preview?.item.id||'',previewParentId:state.preview?.parentId||0,previewPoint:state.preview?{x:state.preview.x,y:state.preview.y,parentId:state.preview.parentId||0}:null,moduleItem:state.activeModule?.id||'',
+    reset(){state.heights.clear();state.terrainRevision=null;state.sites=[];state.preview=null;state.moduleTargets=[];state.activeModule=null;state.parents.clear();state.geometry.clear();state.moduleDrawn=[];state.drawn=[];state.targetSignature='';state.facilityTargets=[];state.facilityBlockers=[];ctx.clearRect(0,0,innerWidth,innerHeight);state.dirty=true},
+    report(options={}){const view=window.WarzoneTerrain?.view(),masks=view?blockedRects(view):[],entries=view&&!hidden()?targetEntries(view,masks):state.moduleTargets.map(target=>({target,geometry:null,visible:false,label:targetLabel(target),labelRect:null}));return {models:Object.keys(state.models).length,acceptedSites:state.sites.map(s=>({id:s.id,number:s.number,itemId:s.item.id,parentId:s.parentId||0,x:s.x,y:s.y,status:s.status})),drawn:state.drawn,preview:state.preview?.item.id||'',previewParentId:state.preview?.parentId||0,previewPoint:state.preview?{x:state.preview.x,y:state.preview.y,parentId:state.preview.parentId||0}:null,moduleItem:state.activeModule?.id||'',
       moduleTargets:entries.map(({target,geometry:g,visible,label,labelRect:box})=>({...target,label,visible,bounds:g?.bounds||null,footprint:g?.foot||[],outline:g?.outline||[],labelRect:box,hitPoints:visible?hitPoints(view,masks,g):[]})),moduleDrawn:state.moduleDrawn,
+      facilityTargets:facilityReport(options.facilityGeometry===true),facilityBlockerCount:state.facilityBlockers.length,
       frames:state.frames,terrainRevision:state.terrainRevision,previewValidation:state.preview?state.preview.rejected?'invalid':state.preview.validation||'pending':'',paintMs:state.paintMs,maxPaintMs:state.maxPaintMs,error:state.error}}
   };
   window.addEventListener('warzone-command-reply',event=>{

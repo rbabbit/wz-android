@@ -1,0 +1,103 @@
+{
+  "passed": false,
+  "seeded": true,
+  "checks": {},
+  "phase": "native-fixture-load",
+  "started": "2026-11-08T14:46:57.543Z",
+  "screenshots": [],
+  "fixtureDisclosure": "A separate complete genuine Iron Valley save is used as a QA fixture. Completed facilities are copied from genuine native records to validated free, reachable native sites until there are5labs,5vehiclefactories and5cyborgfactories. Only struct.json and the object allocator in gam.json are seeded; game.map, terrain, research, components, power, native limits, rules and queues are retained. Subsequent research/production are real UI actions using ordinary costs/times. This does not claim the extra facilities were constructed normally.",
+  "beforeLoadClock": 21502,
+  "loadReadiness": {
+    "source": "native wave clock after load; no stale command snapshot",
+    "before": {
+      "running": true,
+      "clock": 34502,
+      "rewinds": 0,
+      "samples": [
+        {
+          "ms": 1794149281383,
+          "clock": 33002
+        },
+        {
+          "ms": 1794149281742,
+          "clock": 34002
+        },
+        {
+          "ms": 1794149282049,
+          "clock": 34002
+        },
+        {
+          "ms": 1794149282382,
+          "clock": 34502
+        }
+      ]
+    }
+  },
+  "nativeFacilityCounts": {
+    "labs": 5,
+    "vehicleFactories": 5,
+    "cyborgFactories": 5
+  },
+  "nativeReady": {
+    "clock": 35002,
+    "labIds": [
+      160169,
+      160171,
+      160173,
+      160175,
+      161175
+    ],
+    "factoryIds": [
+      {
+        "id": 160157,
+        "kind": "Factory",
+        "ready": true
+      },
+      {
+        "id": 160167,
+        "kind": "Factory",
+        "ready": true
+      },
+      {
+        "id": 161176,
+        "kind": "Factory",
+        "ready": true
+      },
+      {
+        "id": 161177,
+        "kind": "Factory",
+        "ready": true
+      },
+      {
+        "id": 161178,
+        "kind": "Factory",
+        "ready": true
+      },
+      {
+        "id": 161179,
+        "kind": "Cyborg factory",
+        "ready": true
+      },
+      {
+        "id": 161180,
+        "kind": "Cyborg factory",
+        "ready": true
+      },
+      {
+        "id": 161181,
+        "kind": "Cyborg factory",
+        "ready": true
+      },
+      {
+        "id": 161182,
+        "kind": "Cyborg factory",
+        "ready": true
+      },
+      {
+        "id": 161183,
+        "kind": "Cyborg factory",
+        "ready": true
+      }
+    ]
+  }
+}

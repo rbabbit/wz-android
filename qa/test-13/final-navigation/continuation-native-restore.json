@@ -1,0 +1,140 @@
+{
+  "passed": true,
+  "seeded": false,
+  "identity": {
+    "packageId": "com.rbabbit.warzonetowers.lab",
+    "device": "emulator-5556",
+    "candidateAPK_SHA256": "73c0b220e0c457e0b9a8e71dc9c2b3061cfb6731d3203e28970fbcc09a039cdb",
+    "installedPath": "/data/app/~~Quuebepl4W_wgY5Eb1w-ug==/com.rbabbit.warzonetowers.lab-FSxXBpiRTyLmlrXR-hAhXQ==/base.apk"
+  },
+  "started": "2026-11-08T15:36:08.292Z",
+  "disclosure": "Genuine ordinary early native save restored before remaining world and menu checks; no grants or seeded facilities.",
+  "nativeLoadReadiness": [
+    {
+      "source": "native wave clock after load; no stale command snapshot",
+      "before": {
+        "running": true,
+        "clock": 27002,
+        "rewinds": 0,
+        "samples": [
+          {
+            "ms": 1794152216565,
+            "clock": 26302
+          },
+          {
+            "ms": 1794152217039,
+            "clock": 26502
+          },
+          {
+            "ms": 1794152217424,
+            "clock": 27002
+          }
+        ]
+      }
+    }
+  ],
+  "restores": [
+    {
+      "fixture": "qa/v6.1-compact/final/checkpoints/td2-normal-early.json",
+      "source": "complete native QuickSave from ordinary gameplay",
+      "seeded": false,
+      "fileCount": 24,
+      "completeSaveSHA256": "5d7f10ece8452ee278eed71431a149d91b5999fdb13020f8bf6755fe71c2d7c3",
+      "targetTime": 26302,
+      "observedTime": 28102,
+      "trucks": [
+        {
+          "id": 160001,
+          "x": 59,
+          "y": 8
+        },
+        {
+          "id": 160003,
+          "x": 7,
+          "y": 37
+        },
+        {
+          "id": 160005,
+          "x": 7,
+          "y": 38
+        },
+        {
+          "id": 160007,
+          "x": 59,
+          "y": 7
+        },
+        {
+          "id": 160009,
+          "x": 59,
+          "y": 9
+        },
+        {
+          "id": 160011,
+          "x": 7,
+          "y": 36
+        }
+      ],
+      "researchQueues": [
+        {
+          "labId": 160169,
+          "topicIds": []
+        },
+        {
+          "labId": 160171,
+          "topicIds": []
+        },
+        {
+          "labId": 160173,
+          "topicIds": []
+        },
+        {
+          "labId": 160175,
+          "topicIds": []
+        }
+      ],
+      "finishedUnitRecords": [
+        [
+          160191,
+          160157,
+          19802,
+          "Design 2",
+          "Body1REC",
+          "wheeled01"
+        ],
+        [
+          160193,
+          160167,
+          23202,
+          "Design 2",
+          "Body1REC",
+          "wheeled01"
+        ]
+      ]
+    }
+  ],
+  "ready": {
+    "gameTime": 28102,
+    "mapWidth": 64,
+    "mapHeight": 64,
+    "factoryIds": [
+      160157,
+      160167
+    ],
+    "truckIds": [
+      160001,
+      160003,
+      160005,
+      160007,
+      160009,
+      160011
+    ],
+    "labs": [
+      160169,
+      160171,
+      160173,
+      160175
+    ]
+  },
+  "pausedAt": 32002,
+  "finished": "2026-11-08T15:37:04.024Z"
+}

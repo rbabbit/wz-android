@@ -70,6 +70,7 @@
     if (help && !help.hidden) { help.querySelector('.wt-help-back')?.click(); return; }
     const state = commands?.report();
     if (state?.buildOpen || state?.nativeMenu === 'build') { await commands.selectMode(); return; }
+    if (!duel && commands?.handlePanelBack?.()) return;
     if (commands?.isOpen()) { await commands.close(); return; }
     if (state?.nativeMenu) { await commands.closeNative(); return; }
     const cancelledTool = window.__kalaWarzoneTouch?.releaseAll?.(true);

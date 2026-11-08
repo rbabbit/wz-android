@@ -1,5 +1,15 @@
 # Warzone Towers maintenance rules
 
+- 2026-11-08: user corrected the full Factory selection to OPTION 3, then resumed
+  work with go. Implement on `codex/towers-factory-0.13`: slim family/factory
+  roster, one deduplicated recipe list, quantities and row Produce, compact
+  current/waiting strip with expandable ordered queue and secondary phone menu.
+  Preserve every saved phone alias, native factory ID, FIFO job, cost and timing.
+  Remove NEAR/BATTLE/MAP buttons from Towers, retain BASE. Add locally grounded
+  HOW TO PLAY in Help using only this project's actual game, without web lookup.
+  Keep 1v1 and both footer sidebars unchanged. Preserve complete 0.12 fallback in
+  `C:/timerApp/fallbacks/towers-before-factory-0.13-20261108/` and older versions.
+
 - 2026-11-08: implement approved footer Research option 1 and Production option 1
   as 0.12 on `codex/towers-status-0.12`. Preserve complete 0.11 APK/source in
   `C:/timerApp/fallbacks/towers-before-status-0.12-20261108/` and all older versions.

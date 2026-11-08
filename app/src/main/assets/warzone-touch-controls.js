@@ -1302,18 +1302,24 @@
         "Stop currently selected units", async()=>{if(window.__warzoneCommands?.afterBuildExit)await window.__warzoneCommands.afterBuildExit(stopSelected,true);else stopSelected();});
       const base = makeButton("blocknight-base", "BASE",
         "Center camera on HQ", jumpToBase);
-      const zoomControl = document.createElement("div");
-      zoomControl.id = "blocknight-zoom-control";
-      zoomControl.setAttribute("role", "group");
-      zoomControl.setAttribute("aria-label", "Camera distance");
-      const zoomButtons = Object.entries(ZOOM_PRESETS).map(([preset, spec]) => {
-        const button = makeButton(`blocknight-zoom-${preset}`, spec.label,
-          `${spec.label.toLowerCase()} camera view`, () => applyZoomPreset(preset));
-        button.className = "zoom";
-        button.setAttribute("aria-pressed", "false");
-        return button;
-      });
-      zoomControl.append(...zoomButtons);
+      let zoomGroup = null;
+      if (window.__warzoneDuelConfig?.mode === 'duel') {
+        const zoomControl = document.createElement("div");
+        zoomControl.id = "blocknight-zoom-control";
+        zoomControl.setAttribute("role", "group");
+        zoomControl.setAttribute("aria-label", "Camera distance");
+        const zoomButtons = Object.entries(ZOOM_PRESETS).map(([preset, spec]) => {
+          const button = makeButton(`blocknight-zoom-${preset}`, spec.label,
+            `${spec.label.toLowerCase()} camera view`, () => applyZoomPreset(preset));
+          button.className = "zoom";
+          button.setAttribute("aria-pressed", "false");
+          return button;
+        });
+        zoomControl.append(...zoomButtons);
+        zoomGroup = document.createElement("div");
+        zoomGroup.className = "bn-command-group";
+        zoomGroup.append(zoomControl);
+      }
       const tech = makeButton("blocknight-tech", "TECH",
         "Open the tactical research queue", () => {
           if(window.__warzoneCommands?.afterBuildExit)window.__warzoneCommands.afterBuildExit(()=>window.__blockNightResearch?.open?.());
@@ -1323,9 +1329,6 @@
       const orderGroup = document.createElement("div");
       orderGroup.className = "bn-command-group";
       orderGroup.append(all, auto, box, queue, stop, base);
-      const zoomGroup = document.createElement("div");
-      zoomGroup.className = "bn-command-group";
-      zoomGroup.append(zoomControl);
       const techGroup = document.createElement("div");
       techGroup.className = "bn-command-group";
       techGroup.append(tech, help);
@@ -1364,7 +1367,9 @@
         window.addEventListener('warzone-build-sidebar-open',()=>{if(compact.matches){expanded=false;update();}});
         hudDocument.body.appendChild(toggle);update();
       }
-      hud.append(orderGroup, zoomGroup, techGroup);
+      hud.append(orderGroup);
+      if (zoomGroup) hud.append(zoomGroup);
+      hud.append(techGroup);
       (hudDocument.getElementById("warzone-command-strip") || hudDocument.body).appendChild(hud);
     }
     hud.hidden = false;
@@ -1401,11 +1406,7 @@
       help.setAttribute("aria-modal", "true");
       help.setAttribute("aria-labelledby", "wt-help-title");
       help.tabIndex = -1;
-      help.innerHTML = `
-        <header><div><span class="wt-help-eyebrow">${duel?'WARZONE 1V1':'WARZONE TOWERS'}</span>
-          <h1 id="wt-help-title">FIELD GUIDE</h1></div>
-          <button type="button" class="wt-help-close" aria-label="Close help">CLOSE</button></header>
-        <div class="wt-help-content">
+      const guideContent = duel ? `
           <section class="wt-help-queue"><h2>BUILD · QUEUE YOUR DEFENCES</h2>
             <ol><li><b>Open BUILD.</b> Scroll the sidebar and choose a structure.</li>
               <li><b>Tap each valid location.</b> Queued sites appear as Warzone’s green building blueprints.</li>
@@ -1413,14 +1414,10 @@
               <li><b>SELECT / MOVE</b> leaves placement and keeps queued work. Placement also ends when your group finishes.</li></ol>
             <p>Invalid taps keep your chosen structure active. STOP cancels selected trucks’ orders,
               and clears their remaining native queued sites.</p></section>
-          ${duel?`<section><h2>DESTROY THE ENEMY COMMAND CENTRE</h2>
+          <section><h2>DESTROY THE ENEMY COMMAND CENTRE</h2>
             <p>Your weapon branch is <b>${humanBranch}</b>. The opponent uses <b>${botBranch}</b>.
               Research your weapons and shared body, propulsion, armour and economy upgrades. Each laboratory follows your chosen queue.</p>
-            <p>Build and command your ground forces with normal power and production time. Destroy the enemy Command Centre to win; protect your own to stay in the battle. Aircraft are unavailable.</p></section>`:`<section><h2>PROTECT YOUR COMMAND CENTRE</h2>
-            <p>You have <b>3 minutes to prepare</b>. Wave 1 starts automatically, even if you have not built anything.
-              If your command centre is destroyed, you have failed.</p>
-            <p>The mod schedules <b>30 rounds</b>. Later rounds arrive on their own timer; surviving enemies stay.
-              <b>SKIP WAVE</b> calls the next round early. Destroying enemies awards power.</p></section>`}
+            <p>Build and command your ground forces with normal power and production time. Destroy the enemy Command Centre to win; protect your own to stay in the battle. Aircraft are unavailable.</p></section>
           <section><h2>MOVE &amp; LOOK</h2>
             <p><b>Tap</b> to select, move or attack. <b>Swipe</b> to pan. <b>Pinch</b> to zoom.
               <b>Slide two fingers together up/down</b> to tilt the camera. Map edges limit panning.
@@ -1434,10 +1431,61 @@
             <p><b>DESIGN</b> creates blueprints from researched parts. SAVE DESIGN keeps them on this device.
               <b>FACTORY</b> produces saved or existing designs with normal power and build time.
               </p></section>
-          <section><h2>MUSIC</h2><p>Choose your tracks on the start screen before starting a battle. Download Music once, select your playlist, then press <b>START GAME</b>. Your choices are saved for the next game.</p></section>
-        </div>
+          <section><h2>MUSIC</h2><p>Choose your tracks on the start screen before starting a battle. Download Music once, select your playlist, then press <b>START GAME</b>. Your choices are saved for the next game.</p></section>` : `
+          <section><h2>DEFEND &amp; SURVIVE</h2>
+            <p>Protect your <b>Command Centre</b>; losing it ends the battle. You have <b>3 minutes to prepare</b> before Wave 1 starts automatically. Survive <b>30 rounds</b> and clear the final enemies to win.</p>
+            <p>Waves follow their own timer, even while enemies remain. During a countdown, <b>SKIP WAVE</b> calls the next wave early; it does not clear enemies. Destroying enemies earns power.</p></section>
+          <section><h2>BUILD WITH YOUR TRUCKS</h2>
+            <p><b>BUILD</b> selects construction trucks visible in your view. Choose a structure, then tap valid locations to queue sites. Green blueprints mark accepted orders. Your manually selected truck group is kept when choosing structures.</p>
+            <p>For another area, move the view and use <b>TRUCKS</b> to select its visible trucks. <b>EXIT · KEEP ORDERS</b> or <b>SELECT / MOVE</b> leaves placement while trucks continue. <b>STOP</b> cancels selected trucks’ work and remaining sites.</p></section>
+          <section><h2>UPGRADE WITH MODULES</h2>
+            <p>In <b>BUILD → MODULES</b>, choose an upgrade and tap a highlighted, completed matching building: Research Module → research lab; Power Module → power generator; Factory Module → vehicle or VTOL factory.</p>
+            <p>Labs and power generators each take one module; vehicle and VTOL factories take two. Highlights show ready, upgrading or full buildings. Finish the matching structure or research the module first if none is ready.</p></section>
+          <section><h2>CHOOSE YOUR RESEARCH</h2>
+            <p>Top <b>TECH</b> opens the full page. Choose a lab, browse available topics, then tap <b>ADD TO LAB … QUEUE</b>. You choose every topic; each lab follows its own order. Use <b>×</b> to remove a waiting topic and <b>BACK TO BATTLE</b> to apply your queues.</p>
+            <p>Tap one of your completed labs on the battlefield to open that lab’s full research page.</p></section>
+          <section><h2>CHECK CURRENT ACTIVITY</h2>
+            <p>Bottom-left <b>RESEARCH</b> and <b>PRODUCTION</b> open narrow status panels while you watch the battlefield. Research shows each lab’s current topic and estimated progress; Production shows current units, with vehicle and cyborg tabs.</p>
+            <p>These panels show current work only. Use top <b>TECH</b> or <b>FACTORY</b> to change queues. Tap the selected footer button again or <b>×</b> to close the panel.</p></section>
+          <section><h2>MAKE UNITS IN A FACTORY</h2>
+            <p>Open top <b>FACTORY</b>, or tap one of your completed factories on the battlefield. Select the intended factory, choose <b>QUANTITY</b> (1, 5, 10 or 20), then <b>PRODUCE</b> a compatible design. Orders belong to the selected factory.</p>
+            <p>Production uses normal power and build time. Research, factory type, modules and unit limits still apply. The full page shows current work and waiting units; <b>QUEUE</b> shows wider activity.</p></section>
+          <section><h2>KEEP YOUR BLUEPRINTS</h2>
+            <p>In <b>DESIGN</b>, choose a researched body, propulsion and weapon or system; name it and <b>SAVE BLUEPRINT</b>. Edit with <b>SAVE CHANGES</b>, or keep another version with <b>SAVE AS NEW</b>.</p>
+            <p>In Factory’s <b>•••</b> menu, <b>SAVE DESIGN TO PHONE</b> keeps the selected factory design. <b>BLUEPRINT LIBRARY</b> stores blueprints on this phone between games and app restarts. Saving a blueprint does not unlock its parts: research them again in the current battle before production.</p></section>
+          <section><h2>MOVE, LOOK &amp; RETURN</h2>
+            <p><b>Tap</b> to select or give an order; <b>swipe</b> to pan; <b>pinch</b> to zoom. Move two fingers together up/down to tilt. Tap the minimap to move the view; <b>BASE</b> returns to your Command Centre.</p>
+            <p>The bottom-left units icon opens <b>SELECT / MOVE</b>, <b>ALL UNITS</b>, <b>PATROL</b>, <b>BOX</b>, <b>STOP</b> and <b>TRUCKS</b>. ALL UNITS selects combat units; BOX then drag selects a group. Android <b>Back</b> closes the current panel first; from the battlefield it asks <b>Return to Main Menu</b>.</p>
+            <p>Set control size above. Choose optional music and save your playlist on the start screen before a battle.</p></section>`;
+      help.innerHTML = `
+        <header><div><span class="wt-help-eyebrow">${duel?'WARZONE 1V1':'WARZONE TOWERS'}</span>
+          <h1 id="wt-help-title">${duel?'FIELD GUIDE':'HOW TO PLAY'}</h1></div>
+          <button type="button" class="wt-help-close" aria-label="Close help">CLOSE</button></header>
+        <div class="wt-help-content"${duel?'':' tabindex="0" aria-label="How to play; scroll for more"'}>${guideContent}</div>
         <footer><span>The battle continues while this guide is open.</span>
           <button type="button" class="wt-help-back">BACK TO BATTLE</button></footer>`;
+      if (!duel) {
+        help.classList.add('wt-towers-guide');
+        if (!hudDocument.getElementById('wt-towers-guide-style')) {
+          const guideStyle = hudDocument.createElement('style');
+          guideStyle.id = 'wt-towers-guide-style';
+          guideStyle.textContent = `
+            #warzone-towers-help.wt-towers-guide { display:flex; flex-direction:column; width:min(660px,calc(100vw - 24px)); max-height:calc(100dvh - 24px); overflow:hidden; font-size:12px; line-height:1.5; }
+            #warzone-towers-help.wt-towers-guide header { position:static; flex:0 0 auto; padding:12px 16px; gap:12px; }
+            #warzone-towers-help.wt-towers-guide h1 { font-size:23px; }
+            #warzone-towers-help.wt-towers-guide .wt-help-settings { flex:0 0 auto; padding:8px 16px; gap:6px; }
+            #warzone-towers-help.wt-towers-guide .wt-help-content { min-height:0; overflow:auto; overscroll-behavior:contain; touch-action:pan-y; padding:14px 16px; gap:18px 22px; grid-template-columns:repeat(2,minmax(0,1fr)); }
+            #warzone-towers-help.wt-towers-guide .wt-help-content section { min-width:0; }
+            #warzone-towers-help.wt-towers-guide h2 { margin-bottom:6px; font-size:15px; color:var(--towers-accent,#9ad9d8); }
+            #warzone-towers-help.wt-towers-guide footer { flex:0 0 auto; padding:9px 16px; gap:12px; }
+            #warzone-towers-help.wt-towers-guide button { min-height:34px; padding:8px 11px; font-size:12px; }
+            #warzone-towers-help.wt-towers-guide .wt-help-content:focus-visible { outline:1px solid #9ad9d8; outline-offset:-2px; }
+            @media(max-width:560px) { #warzone-towers-help.wt-towers-guide .wt-help-content { grid-template-columns:1fr; } }
+            @media(max-height:360px) { #warzone-towers-help.wt-towers-guide header { padding:6px 12px; } #warzone-towers-help.wt-towers-guide h1 { margin-top:2px; font-size:20px; } #warzone-towers-help.wt-towers-guide .wt-help-settings { padding:5px 12px; } #warzone-towers-help.wt-towers-guide footer { padding:6px 12px; } }
+          `;
+          hudDocument.head.appendChild(guideStyle);
+        }
+      }
       const settings=hudDocument.createElement('div');settings.className='wt-help-settings';
       settings.innerHTML='<span>CONTROL SIZE</span>'+[1,1.2,1.4].map((n,i)=>`<button type="button" data-ui-size="${n}">${['STANDARD','LARGE','EXTRA LARGE'][i]}</button>`).join('')+'<button type="button" data-commanders>COMMANDERS</button>';
       settings.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.uiSize){window.__warzoneCommands.setSize(b.dataset.uiSize);}else if(b.hasAttribute('data-commanders')){restoreBattle();window.__warzoneCommands.open('commanders');}});
@@ -1485,6 +1533,7 @@
     overlay.hidden = false;
     for (const item of overlay._blockedRegions) item.element.inert = true;
     help.scrollTop = 0;
+    if (!duel) help.querySelector('.wt-help-content').scrollTop = 0;
     help.focus({ preventScroll: true });
     return true;
   }

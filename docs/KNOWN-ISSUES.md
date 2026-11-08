@@ -1,5 +1,31 @@
 # Known issues and verification limits
 
+## Warzone Towers 0.13 — Factory and personal how-to guide
+
+This revision changes the full Towers Factory page, removes the three camera
+preset buttons while retaining BASE, and replaces HELP with a guide to the
+local app's controls and game flow. Verification is scoped to actual factory
+IDs, hardware-design deduplication, quantities, private library preservation,
+normal native production/FIFO/clear-waiting behaviour, nested Back, guide
+scrolling/returns, compact layouts and retained status/world input. Consult the
+[0.13 report](../qa/test-13/REPORT.md) for final evidence and delivery status;
+source/package checks alone do not establish screen or gameplay results.
+
+The maximum-facility check reuses the disclosed complete native save containing
+five labs, five vehicle factories and five cyborg factories. It does not claim
+ordinary construction of those added facilities. Normal-cost production uses
+a separate unmodified native setup. Native factory progress still has no
+reliable completion percentage or ETA, so the interface does not invent one.
+
+All Towers/Duel program, WASM, data, maps/scenarios, Android code/icon and
+Research/status assets are frozen to 0.12. The 0.12 crowded automatic truck
+isolation timeout remains outside this revision's repair scope. Known baseline
+source-harness failures for native build navigation and placement preview are
+excluded from passing evidence; they are not presented as newly fixed game
+defects. Physical-handset GPU/FPS, audio, full 30-wave victory and new Duel
+balancing remain unverified. Software-emulator black terrain remains visible.
+The complete 0.12 fallback and older versions, including v6.4, are preserved.
+
 ## Warzone Towers 0.12 — footer status and world facility taps
 
 The [0.12 report](../qa/test-12/REPORT.md) records exact-APK native facility IDs,

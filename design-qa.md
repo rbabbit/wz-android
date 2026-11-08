@@ -1,4 +1,51 @@
-# Warzone Towers 0.12 — approved footer status sidebars
+# Warzone Towers 0.13 — Factory option 3 and personal guide
+
+Final result: passed.
+
+This is visual acceptance of the installed APK with SHA-256
+`73c0b220e0c457e0b9a8e71dc9c2b3061cfb6731d3203e28970fbcc09a039cdb`.
+Gameplay and fixture provenance are recorded separately in the
+[0.13 verification report](qa/test-13/REPORT.md).
+
+The user corrected the selected Factory mock to option 3. The exact reference
+is retained in [docs/ui-0.13](docs/ui-0.13/approved-factory.png). The
+[full comparison](qa/test-13/comparisons/factory-full.png) places that reference
+beside an actual 2400×1080 capture, scaling both uniformly without cropping.
+Illustrative unit availability, names and queue contents differ from real
+native state. Existing component pictures and labelled silhouettes are used;
+saved names such as Design 2 remain intact. The implementation keeps the slim
+family/facility rail, broad unified design list, quantities, row Produce action
+and compact current/waiting strip. The complete waiting queue is optional.
+
+Actual normal 1080×600, compact 854×480 and wide 2400×1080 screenshots were
+reviewed. The compact profile includes system font 1.3 and command size 1.4.
+Five vehicle and five cyborg factory selectors remain reachable, with clear
+selected native IDs and family labels. Catalogue scrolling stays inside the
+design area; the header and current-work strip remain fixed and exposed.
+Quantity labels, real costs, active work, grouped consecutive waiting units,
+Clear Waiting and the overflow menu are legible and do not overlap. Screens
+before and after clearing five real waiting jobs show the active Truck retained.
+There is no invented production percentage, ETA or rendered unit preview.
+
+The Towers header omits NEAR, BATTLE and MAP, retaining BASE. HOW TO PLAY has a
+bounded two-column body, separate settings and pinned Close/Back controls.
+Normal, compact and restored-normal top/bottom captures were reviewed. Real
+finger swipes reach the final section and its final paragraph; the complete
+blueprint and movement/return instructions are visible above the footer.
+The guide describes this app's actual controls and rules from local sources.
+No web guide was used. An independent visual review of the Factory reference,
+normal/compact/wide screens, queue, overflow and guide found no material
+clipping, overlap or approved-layout mismatch. No unresolved P0/P1/P2 visual
+issue remains in this reviewed scope.
+
+The in-game interface remains HTML/CSS over the existing engine. The software
+emulator's black terrain limits ground appearance review; physical handset
+GPU/FPS and audio are not newly certified. Failed test-setup attempts, gesture
+evidence, camera corrections and any continuation are retained in the delivery
+report rather than represented as successful gameplay checks. The 0.12 fallback,
+older versions and v6.4 remain preserved; the deferred Duel interface is retained.
+
+# Historical Warzone Towers 0.12 — approved footer status sidebars
 
 Final result: passed.
 

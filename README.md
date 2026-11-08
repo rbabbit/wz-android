@@ -1,18 +1,20 @@
 # Warzone Towers
 
-**This branch contains Warzone Towers 0.12 (12)** with the approved footer
-Research and Production status sidebars. World lab and factory taps open the
-full Towers page for the selected native facility. Top TECH and FACTORY retain
-their normal full pages. See the [0.12 release notes](docs/releases/0.12-towers-status.md)
-and [exact-APK verification report](qa/test-12/REPORT.md).
+**This branch contains Warzone Towers 0.13 (13)** with the selected Option 3
+Factory layout, vehicle/cyborg facility rail, one row per hardware design,
+quantity controls and current/waiting production. Towers keeps BASE and removes
+NEAR, BATTLE and MAP. HELP is a personal how-to guide based on this app's local
+game and code. The 0.12 current-work sidebars and native-ID world facility
+opening remain. See the [0.13 release notes](docs/releases/0.13-factory-guide.md)
+and [verification report](qa/test-13/REPORT.md) for delivery status and evidence.
 
 The deferred 1v1 mode is retained with its existing interface and unchanged
 gameplay package. GitHub `main` and `v0.9-benchmark` remain the frozen
 [Towers benchmark](https://github.com/rbabbit/wz-android/releases/tag/v0.9-benchmark).
-The complete 0.11 APK/source fallback and older versions remain preserved.
+The complete 0.12 APK/source fallback and older versions remain preserved.
 
-The application ID remains `com.rbabbit.warzonetowers.lab`, so 0.11 updates
-the 0.11/test-line app while retaining its private saves and phone designs.
+The application ID remains `com.rbabbit.warzonetowers.lab`, so 0.13 updates
+the 0.12/test-line app while retaining its private saves and phone designs.
 The in-game interface is HTML/CSS over the existing WebAssembly engine;
 the launcher and return confirmation use Android views. v6.4 remains a
 separate fallback app and project.
@@ -86,13 +88,15 @@ Delivery names are `Warzone-Towers-0.5.apk`,
 
 ## Data and preserved fallbacks
 
-Install the new APK as an update to the existing 0.10/test-line app; do not
+Install the new APK as an update to the existing 0.12/test-line app; do not
 uninstall first if you want to retain its saves and templates. Its private
-library is separate from stable v6.4. Use Factory **SAVE TO PHONE** or Design
-**SAVE BLUEPRINT**, then the blueprint library; normal research and compatible
-factories are still required.
+library is separate from stable v6.4. Use Factory's options menu and **SAVE
+DESIGN TO PHONE**, or Design **SAVE BLUEPRINT**, then the blueprint library;
+normal research and compatible factories are still required.
 
-The complete 0.10 fallback is frozen with checksums in
+The complete 0.12 APK/source fallback is frozen with checksums in
+`C:/timerApp/fallbacks/towers-before-factory-0.13-20261108`. The complete 0.10
+fallback remains frozen with checksums in
 `C:/timerApp/fallbacks/towers-before-ui-0.11-20261108`. The 0.5 fallback APK and
 complete source ZIP are frozen with checksums in
 `C:/timerApp/fallbacks/towers-before-truck-back-fix-20261107`. The older 0.4

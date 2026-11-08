@@ -8,6 +8,10 @@
 
   if (window.__blockNightResearch?.version >= VERSION) return "already-installed";
 
+  // Load the isolated Towers theme before the first research tap. It is never
+  // attached to the Duel document, which retains its established stylesheet.
+  installTowersResearchTheme();
+
   const state = {
     opening: false, open: false, assigning: false,
     activeLab: 0, activeCategory: "ALL", baseWidth: 0, baseHeight: 0,
@@ -380,6 +384,7 @@
     `;
     document.head.appendChild(style);
 
+    configureTowersResearchShell(shell);
     ensureLabButtons(shell);
     const categories = shell.querySelector(".bn-tech-categories");
     CATEGORIES.forEach(category => {
@@ -403,7 +408,14 @@
       if (!button) return;
       event.preventDefault(); event.stopPropagation();
       if (button.classList.contains("bn-tech-done")) close(false);
-      else if (button.dataset.lab !== undefined) selectLab(Number(button.dataset.lab));
+      else if (button.dataset.lab !== undefined) {
+        // The polished strip identifies its real laboratory, so a fresh
+        // native ordering cannot redirect a selection to another lab.
+        const index = isTowersResearchShell(shell) && button.dataset.labId
+          ? state.engineLabs.findIndex(lab => lab.id === Number(button.dataset.labId))
+          : Number(button.dataset.lab);
+        if (index >= 0) selectLab(index);
+      }
       else if (button.dataset.category !== undefined) setCategory(button.dataset.category);
       else if (button.dataset.topicId !== undefined) {
         const topic = state.catalog.find(value => value.id === button.dataset.topicId);
@@ -413,6 +425,42 @@
       else if (button.classList.contains("bn-tech-assign")) assignSelectedTopic(button);
     });
     return shell;
+  }
+
+  function isTowersResearchShell(shell) {
+    return shell?.classList?.contains?.("wt-towers-research") === true;
+  }
+
+  function installTowersResearchTheme() {
+    if (window.__warzoneDuelConfig?.mode === "duel"
+      || !document.body?.classList?.contains?.("wt-towers-polished")) return false;
+    if (document.getElementById("wt-towers-research-theme")) return true;
+    const link = document.createElement("link");
+    link.id = "wt-towers-research-theme";
+    link.rel = "stylesheet";
+    link.href = "/warzone/ui/towers-research.css";
+    document.head.appendChild(link);
+    return true;
+  }
+
+  function configureTowersResearchShell(shell) {
+    if (window.__warzoneDuelConfig?.mode === "duel"
+      || !document.body.classList.contains("wt-towers-polished")) return false;
+    installTowersResearchTheme();
+    shell.classList.add("wt-towers-research");
+    const main = shell.querySelector(".bn-tech-main");
+    const browser = shell.querySelector(".bn-tech-browser");
+    const categories = shell.querySelector(".bn-tech-categories");
+    const detail = shell.querySelector(".bn-tech-detail");
+    const preview = shell.querySelector(".bn-tech-preview");
+    // Reuse the actual selection/queue elements and handlers; this changes
+    // their layout, not the native research or manual assignment paths.
+    main.insertBefore(categories, browser);
+    detail.insertBefore(preview, detail.firstChild);
+    shell.querySelector(".bn-tech-brand strong").textContent = "RESEARCH";
+    shell.querySelector(".bn-tech-brand small").textContent = "TECHNOLOGY";
+    shell.querySelector(".bn-tech-labs").setAttribute("aria-label", "Research laboratories");
+    return true;
   }
 
   function ensureLabButtons(shell = document.getElementById("blocknight-research-shell")) {
@@ -462,11 +510,14 @@
     if (window.__towersHtml?.isEnded?.()) return false;
     if (!canvas() || !state.opening) return false;
     hideQueueStatus();
-    saveCanvasStyle(); document.body.appendChild(createShell());
+    const previousLab = state.activeLab;
+    saveCanvasStyle();
+    const shell = createShell(); document.body.appendChild(shell);
     state.opening = false; state.open = true; state.pendingClose = false;
     window.parent?.WarzoneHost?.setResearchOpen(true);
     state.assigning = Boolean(state.runner); state.opens += 1; state.activeCategory = "ALL";
-    selectLab(0, false); renderAll(); vibrate(12); return true;
+    selectLab(isTowersResearchShell(shell) ? Math.min(previousLab, Math.max(0, state.engineLabs.length - 1)) : 0, false);
+    renderAll(); vibrate(12); return true;
   }
 
   function open() {
@@ -516,7 +567,10 @@
     if (!state.open || index < 0 || index >= labCount) return false;
     state.activeLab = index; if (count) state.labSelections += 1;
     state.assignmentError = "";
-    renderAll(); vibrate(8); return true;
+    renderAll();
+    const shell = document.getElementById("blocknight-research-shell");
+    if (isTowersResearchShell(shell)) shell.querySelector(`[data-lab="${index}"]`)?.scrollIntoView?.({ block: "nearest", inline: "nearest" });
+    vibrate(8); return true;
   }
 
   function setCategory(category) {
@@ -731,6 +785,11 @@
         return;
       }
       button.disabled = false;
+      if (isTowersResearchShell(shell)) {
+        button.dataset.labId = String(lab.id);
+        button.setAttribute("aria-pressed", String(index === state.activeLab));
+        button.title = `Lab ${index + 1}${lab.topicName ? ` · ${lab.topicName}` : " · Ready"}`;
+      }
       const queued = queueForLab(lab.id).length;
       const suffix = queued ? ` · +${queued} QUEUED` : "";
       const syncing = Boolean(state.runner?.labIds.includes(lab.id));
@@ -813,8 +872,12 @@
     if (queueList.dataset.signature !== queueSignature) {
     queueList.dataset.signature = queueSignature;
     queueList.innerHTML = labQueue.length ? labQueue.map((queued, index) => {
-      return `<li class="bn-tech-queue-item"><b>${index + 1}</b><span>${escapeHtml(queued.name)}</span><button class="bn-tech-queue-remove" type="button" data-queue-lab="${lab.id}" data-queue-index="${index}" aria-label="Remove ${escapeHtml(queued.name)}" ${state.pendingClose || state.runner?.labIds.includes(lab.id) ? "disabled" : ""}>×</button></li>`;
+      const picture = isTowersResearchShell(shell) ? `<img class="bn-tech-queue-image" src="${topicImage(queued)}" alt="">` : "";
+      return `<li class="bn-tech-queue-item"><b>${index + 1}</b>${picture}<span>${escapeHtml(queued.name)}</span><button class="bn-tech-queue-remove" type="button" data-queue-lab="${lab.id}" data-queue-index="${index}" aria-label="Remove ${escapeHtml(queued.name)}" ${state.pendingClose || state.runner?.labIds.includes(lab.id) ? "disabled" : ""}>×</button></li>`;
     }).join("") : `<li class="bn-tech-queue-empty">No waiting technologies.</li>`;
+    if (isTowersResearchShell(shell)) queueList.querySelectorAll(".bn-tech-queue-image").forEach(image => {
+      image.onerror = () => { image.onerror = null; image.src = "research-icons/Research%20Module.gif"; };
+    });
     }
     const assign = shell.querySelector(".bn-tech-assign");
     assign.textContent = queuedLab ? `ALREADY QUEUED · LAB ${queuedLab.nativeIndex + 1}` : active ? `RESEARCHING · LAB ${active.nativeIndex + 1}` : `ADD TO LAB ${state.activeLab + 1} QUEUE`;

@@ -1,0 +1,67 @@
+{
+  "passed": true,
+  "candidateAPK_SHA256": "09440e33070aabf0dacd22e8b495f6d696735bb45f9084bd2fca5e25d9b10471",
+  "installedAPK_SHA256": "09440e33070aabf0dacd22e8b495f6d696735bb45f9084bd2fca5e25d9b10471",
+  "version": "0.11",
+  "package": "com.rbabbit.warzonetowers.lab",
+  "emulatorTesting": true,
+  "gameplayTesting": true,
+  "recordedUTC": "2026-11-08T03:48:07.054661Z",
+  "checks": {
+    "manualResearchQueues": true,
+    "buildModulesSelectionFIFO": true,
+    "approvedLayouts": true,
+    "keyboardAndMenuReturns": true,
+    "duelPreserved": true,
+    "ordinaryProduction": true,
+    "tenFactories": true,
+    "designPhonePersistence": true,
+    "nativeSaveLoad": true,
+    "fiveLabs": true
+  },
+  "sourceReports": [
+    {
+      "path": "qa/test-11/final-layouts/layouts.json",
+      "sha256": "23275960b6793bc25a49ca5fd812586957a11a338947f3956869077f766299db"
+    },
+    {
+      "path": "qa/test-11/final-five/five-facilities.json",
+      "sha256": "1de1643722a5b8fae5461519436a229f4e38ba7c51846bbe89330e1fee324d6d"
+    },
+    {
+      "path": "qa/test-11/final-ordinary/ordinary.json",
+      "sha256": "116deac7b236020e12544b570a6b57af2a808682fd6a27ecb58d9bc82ce57612"
+    },
+    {
+      "path": "qa/test-11/final-modules-recovered/module-journey-dustfall.json",
+      "sha256": "e3095460adee72b1d2265faa5d47c79a0070c639ab49a580c6f288fc121c4f1e"
+    },
+    {
+      "path": "qa/test-11/final-back/dialog.json",
+      "sha256": "5c0e93153bcd3661d8614ec31102a5d8ec7997d618ce573b04ed46d1d41ae8e9"
+    },
+    {
+      "path": "qa/test-11/final-duel/smoke.json",
+      "sha256": "25c55bcf900a6ba5afe009fbda46fbfd4815f63c054b2c68b645cc7a7fabbf96"
+    }
+  ],
+  "fixtureDisclosures": [
+    {
+      "path": "qa/test-11/final-five/five-facilities.json",
+      "seeded": true,
+      "disclosure": "A separate complete genuine Iron Valley save is used as a QA fixture. Completed facilities are copied from genuine native records to validated free, reachable native sites until there are5labs,5vehiclefactories and5cyborgfactories. Only struct.json and the object allocator in gam.json are seeded; game.map, terrain, research, components, power, native limits, rules and queues are retained. Subsequent research/production are real UI actions using ordinary costs/times. This does not claim the extra facilities were constructed normally."
+    }
+  ],
+  "limitations": [
+    "Actual checks ran in the owned Android emulator. Physical-handset GPU/FPS, audio and optional HQ downloads were not newly verified.",
+    "The software-emulator black-terrain limitation remains; the native game program, terrain/map data and both gameplay packages are byte-identical to the accepted 0.10 fallback.",
+    "The five-lab/five-vehicle/five-cyborg case uses a disclosed complete-native-save facility setup. It verifies real native facility counts, actual UI selection/queues and normal-cost unit completions, not ordinary construction of all nine added facilities.",
+    "Ordinary production/design/keyboard and Dustfall module/ordinary FIFO/save-load checks are separate unmodified native gameplay journeys.",
+    "Duel remains available and its legacy UI/mode received a scoped preservation smoke check. Its unchanged bot scenario was not newly balanced or subjected to another full combat campaign.",
+    "No complete 30-wave Towers victory was rerun for this UI-only update. Engine, maps, rules, costs, research availability and opponent data remain frozen.",
+    "The acknowledged pre-existing placement-preview source harness failure is excluded from passing source evidence. Actual scoped construction/module/native completion checks are recorded separately.",
+    "The Dustfall module journey is an explicit continuation: its first run completed two Research Modules, then an obsolete test assumed remote trucks would stay in BUILD's visible-worker group after a camera move. The failed raw report is retained. The passed continuation replays the same complete unmodified Research checkpoint, revalidates both modules, moves the same trucks by actual UI into the Power area, and completes module/tower FIFO plus genuine save/load.",
+    "Reference and actual wide comparison sheets use uniform aspect-preserving scaling. The fixed-width Build rail is deliberately compact rather than a pixel-identical proportion of the raster mock."
+  ],
+  "method": "Derived from passed exact-installed-APK raw screen/layout, native5/5/5 setup, ordinary gameplay, Dustfall module/FIFO/save-load, actualSystemUIBack and retained Duel mode reports. Source checks and generated mocks alone are not gameplay evidence."
+}

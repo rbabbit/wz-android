@@ -1245,6 +1245,21 @@
         hudDocument.head.appendChild(hostTheme);
       }
 
+      // Towers' approved layout is isolated from the retained 1v1 interface.
+      // These styles leave the native battlefield dimensions and input alone.
+      if (window.__warzoneDuelConfig?.mode !== 'duel') {
+        for (const surface of new Set([document, hudDocument])) {
+          surface.body.classList.add('wt-towers-polished');
+          if (!surface.getElementById('wt-towers-shell-style')) {
+            const polishedTheme = surface.createElement('link');
+            polishedTheme.id = 'wt-towers-shell-style';
+            polishedTheme.rel = 'stylesheet';
+            polishedTheme.href = '/warzone/ui/towers-shell.css';
+            surface.head.appendChild(polishedTheme);
+          }
+        }
+      }
+
       hud = document.createElement("div");
       hud.id = "blocknight-combat-hud";
       hud.setAttribute("role", "toolbar");

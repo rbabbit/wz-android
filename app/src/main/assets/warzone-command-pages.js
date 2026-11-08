@@ -4,6 +4,7 @@
   if (window.__warzoneCommands) return;
   const host = window.parent?.WarzoneHost ? window.parent : window;
   const doc = host.document;
+  const polishedTowers = window.__warzoneDuelConfig?.mode !== 'duel';
   const PATH = '/data/mp/multiplay/script/rules/warzone-towers-command.json';
   const state = {page:'',catalog:null,snapshot:null,pending:new Map(),serial:0,writes:0,acks:0,
     timeouts:0,lastWrite:0,lastPoll:0,nativeMenu:'',history:[],placement:null,session:'',category:'DEFENCES',search:'',buildChoice:'',buildOpen:false,siteChecks:0,cancelSerial:0,nativeHudHidden:false,pendingItem:'',designStep:'body',designSearch:'',nativeItem:'',
@@ -99,10 +100,14 @@
     for(const name of ['lab-shell','lab-commands']){const theme=doc.createElement('link');theme.rel='stylesheet';theme.href=`/warzone/ui/${name}.css`;doc.head.appendChild(theme);}
     const researchTheme=document.createElement('link');researchTheme.rel='stylesheet';researchTheme.href='/warzone/ui/lab-research.css';document.head.appendChild(researchTheme);
     const labScript=doc.createElement('script');labScript.src='/warzone/ui/lab-ui.js';doc.head.appendChild(labScript);
+    if(polishedTowers){
+      doc.documentElement.classList.add('wt-towers-polished');document.documentElement.classList.add('wt-towers-polished');
+      const towersTheme=doc.createElement('link');towersTheme.rel='stylesheet';towersTheme.href='/warzone/ui/towers-commands.css';doc.head.appendChild(towersTheme);
+    }
     const panel=doc.createElement('section');panel.id='wt-command-pages';panel.hidden=true;
     panel.setAttribute('aria-label','Tower command centre');
     panel.innerHTML=`<header class="wt-command-title"><div><span class="wt-eyebrow">WARZONE TOWERS / COMMAND CENTRE</span><h1 id="wt-page-title">BUILD</h1><span id="wt-command-resources"></span></div>
-      <nav id="wt-command-tabs" aria-label="Command pages">${['build','design','saved','factory','queue'].map(p=>button(p==='saved'?'BLUEPRINTS':p.toUpperCase(),`data-page="${p}"`)).join('')}</nav>${button('BATTLE ↗','data-action="back"','wt-primary')}</header>
+      <nav id="wt-command-tabs" aria-label="Command pages">${['build','design','saved','factory','queue'].map(p=>button(p==='saved'?'BLUEPRINTS':p.toUpperCase(),`data-page="${p}"`)).join('')}</nav>${button(polishedTowers?'BACK TO BATTLE':'BATTLE ↗','data-action="back"','wt-primary')}</header>
       <div id="wt-command-notice" role="status" aria-live="polite"></div><div id="wt-page-content"></div>`;
     doc.body.appendChild(panel);const busy=doc.createElement('canvas');busy.id='wt-build-busy';busy.hidden=true;busy.setAttribute('aria-hidden','true');doc.body.appendChild(busy);
     panel.addEventListener('click',onClick);panel.addEventListener('input',onInput);panel.addEventListener('change',onChange);
@@ -111,7 +116,7 @@
     hud.innerHTML=`<span id="wt-power">POWER —</span>${button('SELECTION','data-action="select-mode" id="wt-field-status"')}<span id="wt-placement-label"></span><span id="wt-builder-summary"></span>${button('CHANGE','data-page="build"')}${button('DONE','data-action="cancel-placement"')}`;
     hud.addEventListener('click',onClick);doc.body.appendChild(hud);
     const sidebar=doc.createElement('section');sidebar.id='wt-build-sidebar';sidebar.hidden=true;sidebar.setAttribute('aria-label','Construction');
-    sidebar.innerHTML=`<header><span id="wt-sidebar-power"></span><span id="wt-sidebar-builders"></span><span class="wt-sidebar-spinner" aria-hidden="true"></span></header><nav aria-label="Structure category">${[['DEFENCES','DEFENCE'],['STRUCTURES','BASE'],['MODULES','MODULES'],['ALL','ALL']].map(([id,label])=>button(label,`data-category="${id}"`)).join('')}</nav><div id="wt-module-guidance" role="status" aria-live="polite" hidden></div><div id="wt-sidebar-notice" role="status" hidden></div><div id="wt-catalogue-wrap"><div id="wt-sidebar-catalogue" tabindex="0" aria-label="Available structures; scroll for more"></div><span id="wt-catalogue-track" aria-hidden="true"><i></i></span></div><section id="wt-sidebar-queue" aria-label="Live construction queue"></section>${button('EXIT · KEEP ORDERS','data-action="select-mode"','wt-sidebar-exit')}`;
+    sidebar.innerHTML=`<header><span id="wt-sidebar-power"></span><span id="wt-sidebar-builders"></span><span class="wt-sidebar-spinner" aria-hidden="true"></span>${polishedTowers?button('<img src="/warzone/ui/icons/x.svg" alt="">','data-action="select-mode" aria-label="Close Build panel and keep orders"','wt-sidebar-collapse'):''}</header><nav aria-label="Structure category">${[['DEFENCES','DEFENCE'],['STRUCTURES','BASE'],['MODULES','MODULES'],['ALL','ALL']].map(([id,label])=>button(label,`data-category="${id}"`)).join('')}</nav><div id="wt-module-guidance" role="status" aria-live="polite" hidden></div><div id="wt-sidebar-notice" role="status" hidden></div><div id="wt-catalogue-wrap"><div id="wt-sidebar-catalogue" tabindex="0" aria-label="Available structures; scroll for more"></div><span id="wt-catalogue-track" aria-hidden="true"><i></i></span></div><section id="wt-sidebar-queue" aria-label="Live construction queue"></section>${button('EXIT · KEEP ORDERS','data-action="select-mode"','wt-sidebar-exit')}`;
     sidebar.addEventListener('click',onClick);doc.body.appendChild(sidebar);
     element('wt-sidebar-catalogue').addEventListener('scroll',updateCatalogueScroll,{passive:true});
     if(host.ResizeObserver)new host.ResizeObserver(()=>{fitCatalogueRows();updateCatalogueScroll();}).observe(element('wt-catalogue-wrap'));
@@ -149,7 +154,7 @@
     if(page==='stats'||page==='commanders'){openNative(page);return;}
     if(state.page)state.scroll[state.page]=element('wt-page-content')?.scrollTop||0;
     if(state.page!==page){state.notice='';state.deletePending='';}
-    state.page=page;state.opens++;element('wt-command-pages').hidden=false;
+    state.page=page;if(polishedTowers&&page==='factory')state.revealFactory=true;state.opens++;element('wt-command-pages').hidden=false;
     doc.body.dataset.commandPage=page;const toast=element('wt-command-toast');if(toast){clearTimeout(toast._timer);toast.hidden=true;}
     window.__warzoneCommands?.hidePreview?.();
     const frame=element('warzone-game-frame');if(frame)frame.inert=true;
@@ -230,6 +235,11 @@
     const css=host.getComputedStyle(grid),gap=parseFloat(css.rowGap)||5,padding=parseFloat(css.paddingTop)+parseFloat(css.paddingBottom);
     const title=Math.max(23,...Array.from(grid.querySelectorAll('strong')).map(e=>e.scrollHeight));
     const available=wrap.getBoundingClientRect().height;
+    if(polishedTowers){
+      const height=wrap.clientHeight,minimum=Math.max(50*state.size,title+12,42*state.size+10),count=Math.max(1,Math.floor((height-padding+gap)/(minimum+gap)));
+      const row=Math.min(minimum+8,Math.floor((height-padding-gap*(count-1))/count*100)/100);
+      grid.style.setProperty('--wt-catalogue-row',Math.max(minimum,row)+'px');grid.style.setProperty('--wt-build-art',Math.min(44*state.size,Math.max(32,row-10))+'px');return;
+    }
     const count=Math.max(1,Math.floor((available-padding+gap)/(title+50+gap)));
     const row=Math.floor((available-padding-gap*(count-1))/count*100)/100;
     grid.style.setProperty('--wt-catalogue-row',row+'px');grid.style.setProperty('--wt-build-art',Math.min(47,Math.max(24,row-title-12))+'px');
@@ -306,6 +316,7 @@
   function rememberPanelScroll(content){
     const key=content?.dataset.labScrollKey;if(!key)return;
     state.scroll['panels:'+key]=Array.from(content.querySelectorAll(panelScrollers),e=>e.scrollTop);
+    if(polishedTowers)for(const strip of content.querySelectorAll('[data-factory-strip]'))state.scroll['factory-strip:'+strip.dataset.factoryStrip]=strip.scrollLeft;
   }
   function render(){
     if(!state.page)return;
@@ -319,6 +330,10 @@
     content.dataset.labScrollKey=scrollKey;
     const offsets=state.scroll['panels:'+scrollKey]||[];
     Array.from(content.querySelectorAll(panelScrollers)).forEach((e,i)=>{e.scrollTop=offsets[i]||0;});
+    if(polishedTowers&&state.page==='factory'){
+      for(const strip of content.querySelectorAll('[data-factory-strip]'))strip.scrollLeft=state.scroll['factory-strip:'+strip.dataset.factoryStrip]||0;
+      if(state.revealFactory){const selected=content.querySelector('[data-factory="'+state.factory+'"]'),strip=selected?.closest('[data-factory-strip]');if(strip){const item=selected.getBoundingClientRect(),view=strip.getBoundingClientRect();if(item.left<view.left)strip.scrollLeft-=view.left-item.left;else if(item.right>view.right)strip.scrollLeft+=item.right-view.right;}state.revealFactory=false;}
+    }
     element('wt-command-notice').textContent=state.notice;
   }
   function renderBuild(){
@@ -362,7 +377,25 @@
   function renderFactory(){
     const factories=state.snapshot.factories.filter(f=>f.ready);if(!factories.some(f=>f.id===state.factory))state.factory=factories[0]?.id||0;
     const factory=factories.find(f=>f.id===state.factory),designs=state.saved.filter(availableDesign),chosen=designs.find(d=>d.id===state.selected);
+    if(polishedTowers)return renderTowersFactory(factories,factory,designs,chosen);
     return `<div class="wt-workspace"><aside class="wt-rail"><h2>PRODUCTION FACILITIES</h2>${factories.map(f=>button(`${esc(f.kind)} ${f.number}<small>${f.modules} MODULE${f.modules===1?'':'S'} · ${f.active?'PRODUCING':f.idle?'IDLE':'ACTIVE'}</small>`,`data-factory="${f.id}"`,f.id===state.factory?'active':'')).join('')}<input hidden id="wt-factory-select" value="${state.factory}"><div class="wt-rail-note">Units use normal power and production time.</div>${button('BUILD A FACTORY','data-page="build"')}</aside><section class="wt-work-list"><div class="wt-list-heading"><h2>UNIT DESIGNS</h2><div class="wt-quantity"><span>QUANTITY</span>${[1,5,10,20].map(n=>button(String(n),`data-count="${n}"`,n===state.productionCount?'active':'')).join('')}<input type="hidden" id="wt-produce-count" value="${state.productionCount}"></div></div>${factory?`${chosen?`<h2 class="wt-section-title">SELECTED DESIGN — ${esc(chosen.name)}</h2><div class="wt-card-grid">${productionCard(chosen,false)}</div>`:''}<h2 class="wt-section-title">EXISTING UNIT DESIGNS</h2><div class="wt-card-grid">${state.snapshot.templates.filter(d=>(!factory.templates||factory.templates.includes(d.id))&&(!String(d.id).startsWith('native:')||!designs.some(s=>templateParts(s)===templateParts(d)))).map(d=>productionCard(d,true)).join('')||'<p class="wt-empty">No compatible designs for this factory.</p>'}</div><h2 class="wt-section-title">SAVED DESIGNS</h2><div class="wt-card-grid">${designs.filter(d=>d!==chosen).map(d=>productionCard(d,false)).join('')||'<p class="wt-empty">Create a blueprint in DESIGN.</p>'}</div>`:'<p class="wt-empty">No completed factory. Open BUILD to construct one.</p>'}</section><aside class="wt-detail"><span class="wt-eyebrow">${factory?`${esc(factory.kind)} ${factory.number}`:'PRODUCTION'}</span><h2>FACTORY QUEUE</h2><div id="wt-factory-progress">${factory?factoryProgress(factory):'<p>No factory available.</p>'}</div>${button('ALL ACTIVITY','data-page="queue"')}${factory?button('MORE CONTROLS','data-action="native-factory"','wt-subtle'):''}</aside></div>`;
+  }
+
+  function factoryFamily(f){return /cyborg/i.test(f.kind)?'cyborg':/vtol/i.test(f.kind)?'vtol':'vehicle';}
+  function factoryDisplayNumber(f){const group=state.snapshot.factories.filter(v=>v.ready&&factoryFamily(v)===factoryFamily(f)).sort((a,b)=>a.id-b.id),index=group.findIndex(v=>v.id===f.id);return index<0?f.number:index+1;}
+  function factoryStatus(f){const activity=f.active?'PRODUCING':f.idle?'IDLE':'ACTIVE';return factoryFamily(f)==='cyborg'?activity:`${activity} · ${f.modules} MODULE${f.modules===1?'':'S'}`;}
+  function renderFactoryStrip(factories){
+    return ['vehicle','cyborg','vtol'].map(key=>{const group=factories.filter(f=>factoryFamily(f)===key);if(!group.length)return '';const label=key==='cyborg'?'CYBORG FACTORIES':key==='vtol'?'VTOL FACTORIES':'VEHICLE FACTORIES';
+      return `<section class="wt-factory-family"><h2>${label}<small>${group.length} AVAILABLE</small></h2><div class="wt-factory-strip" data-factory-strip="${key}" tabindex="0" aria-label="${label}; swipe for more">${group.map(f=>button(`<span class="wt-factory-number">${factoryDisplayNumber(f)}</span><span class="wt-factory-label">${esc(f.kind)} ${factoryDisplayNumber(f)}<small>${factoryStatus(f)}</small></span>`,`data-factory="${f.id}" aria-pressed="${f.id===state.factory}"`,f.id===state.factory?'active':'')).join('')}</div></section>`;
+    }).join('');
+  }
+  function renderTowersFactory(factories,factory,designs,chosen){
+    const native=factory?state.snapshot.templates.filter(d=>(!factory.templates||factory.templates.includes(d.id))&&(!String(d.id).startsWith('native:')||!designs.some(s=>templateParts(s)===templateParts(d)))):[];
+    return `<div class="wt-towers-factory-screen"><section class="wt-factory-selector wt-rail" aria-label="Production facilities">${renderFactoryStrip(factories)||'<p class="wt-empty">No completed factory. Build a factory to start production.</p>'}<input hidden id="wt-factory-select" value="${state.factory}"></section><div class="wt-workspace wt-factory-workspace"><section class="wt-work-list"><div class="wt-list-heading"><h2>UNIT DESIGNS</h2><div class="wt-quantity"><span>QUANTITY</span>${[1,5,10,20].map(n=>button(String(n),`data-count="${n}"`,n===state.productionCount?'active':'')).join('')}<input type="hidden" id="wt-produce-count" value="${state.productionCount}"></div></div>${factory?`${chosen?`<h2 class="wt-section-title">SELECTED DESIGN — ${esc(chosen.name)}</h2><div class="wt-card-grid">${productionCard(chosen,false)}</div>`:''}<h2 class="wt-section-title">EXISTING UNIT DESIGNS</h2><div class="wt-card-grid">${native.map(d=>productionCard(d,true)).join('')||'<p class="wt-empty">No compatible designs for this factory.</p>'}</div><h2 class="wt-section-title">SAVED DESIGNS</h2><div class="wt-card-grid">${state.saved.filter(d=>d!==chosen).map(d=>productionCard(d,false)).join('')||'<p class="wt-empty">Create a blueprint in DESIGN.</p>'}</div>`:'<p class="wt-empty">No completed factory. Open BUILD to construct one.</p>'}${button('BLUEPRINT LIBRARY','data-page="saved"','wt-subtle')}</section><aside class="wt-detail"><h2>${factory?`${esc(factory.kind)} ${factoryDisplayNumber(factory)} QUEUE`:'PRODUCTION'}</h2><div id="wt-factory-progress">${factory?factoryProgress(factory):'<p>No factory available.</p>'}</div><div class="wt-factory-actions">${button('ALL ACTIVITY','data-page="queue"')}${button('BUILD A FACTORY','data-page="build"','wt-subtle')}${factory?button('MORE CONTROLS','data-action="native-factory"','wt-subtle'):''}</div></aside></div></div>`;
+  }
+  function towersFactoryProgress(f){
+    const active=f.active?`<div class="wt-active-production">${unitParts(f.active.design)}<div><strong>${esc(f.active.design.name)}</strong><small><span class="wt-live-dot"></span>PRODUCING</small></div></div>`:f.idle?'<p class="wt-factory-idle">FACTORY READY</p>':'<p>PRODUCING FROM FACTORY CONTROLS</p>';
+    return `${active}<h3 class="wt-waiting-heading">WAITING · ${f.queue.length} UNIT${f.queue.length===1?'':'S'}</h3><ol class="wt-production-list">${f.queue.map(j=>`<li>${unitParts(j.design)}<div><b>${esc(j.design.name)}</b><span>${esc(j.status)}</span></div></li>`).join('')}</ol>${!f.queue.length?'<p class="wt-empty-queue">No waiting units.</p>':''}${f.waitingReason?`<p>WAITING: ${esc(f.waitingReason.kind.toUpperCase())} LIMIT ${f.waitingReason.current} / ${f.waitingReason.limit}</p><p>Recycle an existing unit of this type to make room, or clear the waiting queue.</p>`:''}${f.queue[0]?.status==='blocked'?`<p>${esc(reason(f.queue[0].reason))} ${button('RETRY',`data-retry-production="${f.id}"`)}</p>`:''}${f.queue.length?button('CLEAR WAITING QUEUE',`data-clear-production="${f.id}"`):''}`;
   }
 
   function designFitsFactory(d,f){
@@ -373,10 +406,13 @@
     const size=['LIGHT','MEDIUM','HEAVY','SUPER HEAVY'].indexOf(findPart(d.body)?.size);
     return /vtol/i.test(f.kind)||size<0||size<=Number(f.modules||0);
   }
-  function productionCard(d,native){const compatible=native||designFitsFactory(d,state.snapshot.factories.find(f=>f.id===state.factory));return `<article class="wt-command-card" data-selected-design="${!native&&d.id===state.selected}">${unitParts(d)}<div><h2>${esc(native?String(d.fullname||d.name).replace(/\s*\u00b7\s*F\d+$/,''):d.fullname||d.name)}</h2><p>⚡ ${d.cost}${compatible?'':' · Check factory type / modules'}</p></div><div class="wt-card-actions">${button('PRODUCE',(native?`data-produce-template="${esc(d.id)}"`:`data-produce="${esc(d.id)}"`)+(compatible?'':' disabled'),'wt-primary')}${native?button('SAVE TO PHONE',`data-save-template="${esc(d.id)}"`,'wt-subtle'):''}${!native&&d.factoryTemplate?'<small>Saved on this phone</small>':''}</div></article>`;}
-  function factoryProgress(f){return `${f.active?`<div class="wt-active-production"><span class="wt-live-dot"></span> ${esc(f.active.design.name)}</div>`:''}<ol class="wt-production-list">${f.queue.map(j=>`<li><b>${esc(j.design.name)}</b><span>${esc(j.status)}</span></li>`).join('')}</ol><p>${f.waitingReason?`WAITING: ${esc(f.waitingReason.kind.toUpperCase())} LIMIT ${f.waitingReason.current} / ${f.waitingReason.limit}`:f.active?`PRODUCING: ${esc(f.active.design.name)}`:f.idle?'IDLE':'PRODUCING FROM FACTORY CONTROLS'} · ${f.queue.length} queued</p>${f.waitingReason?'<p>Recycle an existing unit of this type to make room, or clear the waiting queue.</p>':''}${f.queue[0]?.status==='blocked'?`<p>${esc(reason(f.queue[0].reason))} ${button('RETRY',`data-retry-production="${f.id}"`)}</p>`:''}${f.queue.length?button('CLEAR WAITING QUEUE',`data-clear-production="${f.id}"`):''}`;}
+  function productionCard(d,native){
+    const researched=native||!polishedTowers||availableDesign(d),compatible=(native||designFitsFactory(d,state.snapshot.factories.find(f=>f.id===state.factory)))&&researched;
+    return `<article class="wt-command-card" data-selected-design="${!native&&d.id===state.selected}">${unitParts(d)}<div><h2>${esc(native?String(d.fullname||d.name).replace(/\s*\u00b7\s*F\d+$/,''):d.fullname||d.name)}</h2>${!researched?'<p class="wt-design-unavailable">Research required this game</p>':`<p>⚡ ${d.cost}${compatible?'':' · Check factory type / modules'}</p>`}</div><div class="wt-card-actions">${button('PRODUCE',(native?`data-produce-template="${esc(d.id)}"`:`data-produce="${esc(d.id)}"`)+(compatible?'':' disabled'),'wt-primary')}${native?button('SAVE TO PHONE',`data-save-template="${esc(d.id)}"`,'wt-subtle'):''}${!native&&d.factoryTemplate?'<small>Saved on this phone</small>':''}</div></article>`;
+  }
+  function factoryProgress(f){if(polishedTowers)return towersFactoryProgress(f);return `${f.active?`<div class="wt-active-production"><span class="wt-live-dot"></span> ${esc(f.active.design.name)}</div>`:''}<ol class="wt-production-list">${f.queue.map(j=>`<li><b>${esc(j.design.name)}</b><span>${esc(j.status)}</span></li>`).join('')}</ol><p>${f.waitingReason?`WAITING: ${esc(f.waitingReason.kind.toUpperCase())} LIMIT ${f.waitingReason.current} / ${f.waitingReason.limit}`:f.active?`PRODUCING: ${esc(f.active.design.name)}`:f.idle?'IDLE':'PRODUCING FROM FACTORY CONTROLS'} · ${f.queue.length} queued</p>${f.waitingReason?'<p>Recycle an existing unit of this type to make room, or clear the waiting queue.</p>':''}${f.queue[0]?.status==='blocked'?`<p>${esc(reason(f.queue[0].reason))} ${button('RETRY',`data-retry-production="${f.id}"`)}</p>`:''}${f.queue.length?button('CLEAR WAITING QUEUE',`data-clear-production="${f.id}"`):''}`;}
   function renderQueue(){return `<div class="wt-page-intro"><p>Live factory queues and construction activity. Construction times follow live truck activity. Remaining times are approximate; green blueprints mark native queued sites.</p>${button('VIEW BUILD SITES','data-action="back"','wt-primary')}</div><div id="wt-live-queue">${liveQueueRows()}</div>`;}
-  function liveQueueRows(){const s=state.snapshot,rows=[];for(const f of s.factories){if(f.active)rows.push(`<article class="wt-queue-row"><div><h2>${esc(f.kind)} ${f.number} — PRODUCING</h2><p>${esc(f.active.design.name)}</p></div></article>`);for(const [i,j]of f.queue.entries())rows.push(`<article class="wt-queue-row"><b>${i+1}</b><div><h2>${esc(j.design.name)}</h2><p>${esc(f.kind)} ${f.number} · ${esc(j.status.toUpperCase())}${j.reason?' · '+esc(reason(j.reason)):''}</p></div></article>`);}rows.push(...constructionRows().map(constructionRow));return rows.join('')||'<p class="wt-empty">No active construction or factory jobs. Further native site orders are shown on the battlefield.</p>';}
+  function liveQueueRows(){const s=state.snapshot,rows=[];for(const f of s.factories){if(f.active)rows.push(`<article class="wt-queue-row"><div><h2>${esc(f.kind)} ${polishedTowers?factoryDisplayNumber(f):f.number} — PRODUCING</h2><p>${esc(f.active.design.name)}</p></div></article>`);for(const [i,j]of f.queue.entries())rows.push(`<article class="wt-queue-row"><b>${i+1}</b><div><h2>${esc(j.design.name)}</h2><p>${esc(f.kind)} ${polishedTowers?factoryDisplayNumber(f):f.number} · ${esc(j.status.toUpperCase())}${j.reason?' · '+esc(reason(j.reason)):''}</p></div></article>`);}rows.push(...constructionRows().map(constructionRow));return rows.join('')||'<p class="wt-empty">No active construction or factory jobs. Further native site orders are shown on the battlefield.</p>';}
   function legacyRenderQueue(){return `<div class="wt-page-intro"><p>Orders run in order for each truck. A blocked site keeps its place until you retry or remove it.</p><span class="wt-tag">${state.snapshot.jobs.length} JOBS</span></div>
     <div id="wt-queue-list">${queueRows()}</div>`;}
   function queueRows(){return state.snapshot.jobs.map((j,i)=>`<article class="wt-queue-row"><b>${i+1}</b><div><h2>${esc(state.catalog.buildings.find(b=>b.id===j.itemId)?.name||j.itemId)}</h2><p>Tile ${j.x}, ${j.y} · ${j.automatic?'Auto truck':`${j.workers.length} selected truck${j.workers.length===1?'':'s'}`} · ${j.status.toUpperCase()}</p>${j.reason?`<p>${esc(reason(j.reason))}</p>`:''}</div>${j.status==='blocked'?button('RETRY',`data-retry-job="${esc(j.id)}"`):''}${button('REMOVE',`data-cancel-job="${esc(j.id)}"`)}</article>`).join('')||'<p class="wt-empty">The construction queue is clear.</p>';}
@@ -388,7 +424,7 @@
     if(state.page==='queue'&&element('wt-live-queue'))element('wt-live-queue').innerHTML=liveQueueRows();
     if(element('wt-build-mode'))element('wt-build-mode').textContent=builderMode();
     if(state.page==='queue'&&element('wt-queue-list'))element('wt-queue-list').innerHTML=queueRows();
-    else if(state.page==='factory'&&element('wt-factory-progress')){const f=state.snapshot.factories.find(f=>f.id===state.factory);if(f){element('wt-factory-progress').innerHTML=factoryProgress(f);for(const b of element('wt-page-content').querySelectorAll('[data-factory]')){const live=state.snapshot.factories.find(f=>f.id===Number(b.dataset.factory));if(live)b.querySelector('small').textContent=`${live.modules} MODULE${live.modules===1?'':'S'} · ${live.active?'PRODUCING':live.idle?'IDLE':'ACTIVE'}`;}}else render();}
+    else if(state.page==='factory'&&element('wt-factory-progress')){const f=state.snapshot.factories.find(f=>f.id===state.factory);if(f){element('wt-factory-progress').innerHTML=factoryProgress(f);for(const b of element('wt-page-content').querySelectorAll('[data-factory]')){const live=state.snapshot.factories.find(f=>f.id===Number(b.dataset.factory));if(live)b.querySelector('small').textContent=polishedTowers?factoryStatus(live):`${live.modules} MODULE${live.modules===1?'':'S'} · ${live.active?'PRODUCING':live.idle?'IDLE':'ACTIVE'}`;}}else render();}
     else if(state.page&&element('wt-page-content')?.querySelector('.wt-empty')?.textContent.includes('Connecting'))render();
   }
   function updateHUD(){

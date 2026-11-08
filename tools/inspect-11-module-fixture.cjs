@@ -1,0 +1,5 @@
+'use strict';
+const fs=require('fs'),path=require('path'),l=require('./native-live.cjs'),j=require('./lab-journey.cjs');
+(async()=>{const c=await l.connect();try{
+ const fixture=await c.evaluate(`(()=>{const f=LaunchedModule.FS,p=LaunchedModule.WZVAL_configDirPath+'/savegames/skirmish/QuickSave',files={};for(const n of f.readdir(p))if(!['.','..'].includes(n))files[n]=Array.from(f.readFile(p+'/'+n));return{seeded:false,configDir:LaunchedModule.WZVAL_configDirPath,files}})()`);fs.writeFileSync(path.join(l.out,'research-complete-checkpoint.json'),JSON.stringify(fixture));const gam=JSON.parse(Buffer.from(fixture.files['gam.json']).toString());await j.resume(c);const state=await j.commandState(c);const preview=await c.evaluate('__warzoneCommands.send("preview-build",{itemId:"A0PowMod1",x:6,y:57,parentId:160119,workerIds:[160001,160003],session:"qa11-readonly-reach"})');const p={checkpointTime:gam.gameTime,clock:state.gameTime,trucks:state.trucks,preview};fs.writeFileSync(path.join(l.out,'fixture-inspection.json'),JSON.stringify(p,null,2));console.log(p);await j.pause(c);
+ }finally{c.close()}})().catch(e=>{console.error(e);process.exitCode=1});

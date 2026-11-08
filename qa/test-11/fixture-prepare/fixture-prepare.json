@@ -1,0 +1,337 @@
+{
+  "passed": true,
+  "seeded": true,
+  "checks": {
+    "nativeFixturePrepared": true
+  },
+  "phase": "passed",
+  "started": "2026-11-08T03:01:12.770Z",
+  "screenshots": [],
+  "fixtureDisclosure": "A separate complete genuine Iron Valley save is used as a QA fixture. Completed facilities are copied from genuine native records to validated free, reachable native sites until there are5labs,5vehiclefactories and5cyborgfactories. Only struct.json and the object allocator in gam.json are seeded; game.map, terrain, research, components, power, native limits, rules and queues are retained. Subsequent research/production are real UI actions using ordinary costs/times. This does not claim the extra facilities were constructed normally.",
+  "identity": {
+    "packageId": "com.rbabbit.warzonetowers.lab",
+    "device": "emulator-5556",
+    "candidateAPK_SHA256": "d29a3e6e2e6da13a8eac6b2d6540b5c4070b39f0115de1dc44025822237a31b3",
+    "installedPath": "/data/app/~~hrIC72Mj0sqgxclujOXyng==/com.rbabbit.warzonetowers.lab-gUeCEetU4SwpsB0NuOYHfg==/base.apk"
+  },
+  "candidateAPK_SHA256": "d29a3e6e2e6da13a8eac6b2d6540b5c4070b39f0115de1dc44025822237a31b3",
+  "phoneLibrary": "{\"version\":1,\"designs\":[{\"id\":\"design-1794008136667-113\",\"name\":\"Design 2\",\"body\":\"Body1REC\",\"propulsion\":\"wheeled01\",\"turrets\":[\"MG1Mk1\"],\"cost\":55,\"points\":275,\"droidType\":0,\"factoryTemplate\":true},{\"id\":\"design-1794008147588-129\",\"name\":\"Lab Scout 54626\",\"body\":\"Body1REC\",\"propulsion\":\"wheeled01\",\"turrets\":[\"MG1Mk1\"],\"cost\":55,\"points\":275,\"droidType\":0},{\"id\":\"design-1794036575885-223\",\"name\":\"Truck Viper Wheels\",\"body\":\"Body1REC\",\"propulsion\":\"wheeled01\",\"turrets\":[\"Spade1Mk1\"],\"cost\":62,\"points\":310,\"droidType\":3,\"factoryTemplate\":true},{\"id\":\"design-1794036589502-235\",\"name\":\"Scout 97609\",\"body\":\"Body1REC\",\"propulsion\":\"wheeled01\",\"turrets\":[\"MG1Mk1\"],\"cost\":55,\"points\":275,\"droidType\":0},{\"id\":\"design-1794040213295-227\",\"name\":\"Scout 21399\",\"body\":\"Body1REC\",\"propulsion\":\"wheeled01\",\"turrets\":[\"MG1Mk1\"],\"cost\":55,\"points\":275,\"droidType\":0}]}",
+  "previewQueries": [
+    {
+      "itemId": "A0ResearchFacility",
+      "x": 56,
+      "y": 9,
+      "ok": true,
+      "reason": ""
+    },
+    {
+      "itemId": "A0LightFactory",
+      "x": 13,
+      "y": 39,
+      "ok": true,
+      "reason": ""
+    },
+    {
+      "itemId": "A0LightFactory",
+      "x": 11,
+      "y": 31,
+      "ok": true,
+      "reason": ""
+    },
+    {
+      "itemId": "A0LightFactory",
+      "x": 51,
+      "y": 8,
+      "ok": true,
+      "reason": ""
+    },
+    {
+      "itemId": "A0CyborgFactory",
+      "x": 8,
+      "y": 42,
+      "ok": true,
+      "reason": ""
+    },
+    {
+      "itemId": "A0CyborgFactory",
+      "x": 57,
+      "y": 13,
+      "ok": true,
+      "reason": ""
+    },
+    {
+      "itemId": "A0CyborgFactory",
+      "x": 3,
+      "y": 34,
+      "ok": true,
+      "reason": ""
+    },
+    {
+      "itemId": "A0CyborgFactory",
+      "x": 7,
+      "y": 30,
+      "ok": true,
+      "reason": ""
+    },
+    {
+      "itemId": "A0CyborgFactory",
+      "x": 4,
+      "y": 30,
+      "ok": true,
+      "reason": ""
+    }
+  ],
+  "prepared": {
+    "path": "qa/test-11/five-facilities-fixture.json",
+    "sourceCounts": {
+      "labs": 4,
+      "vehicleFactories": 2,
+      "cyborgFactories": 0
+    },
+    "added": [
+      {
+        "key": "structure_0000000010",
+        "id": 161175,
+        "itemId": "A0ResearchFacility",
+        "site": {
+          "x": 56,
+          "y": 9,
+          "z": 256
+        },
+        "position": [
+          7168,
+          1152,
+          256
+        ]
+      },
+      {
+        "key": "structure_0000000011",
+        "id": 161176,
+        "itemId": "A0LightFactory",
+        "site": {
+          "x": 13,
+          "y": 39,
+          "z": 128
+        },
+        "position": [
+          1728,
+          5056,
+          128
+        ]
+      },
+      {
+        "key": "structure_0000000012",
+        "id": 161177,
+        "itemId": "A0LightFactory",
+        "site": {
+          "x": 11,
+          "y": 31,
+          "z": 128
+        },
+        "position": [
+          1472,
+          4032,
+          128
+        ]
+      },
+      {
+        "key": "structure_0000000013",
+        "id": 161178,
+        "itemId": "A0LightFactory",
+        "site": {
+          "x": 51,
+          "y": 8,
+          "z": 256
+        },
+        "position": [
+          6592,
+          1088,
+          256
+        ]
+      },
+      {
+        "key": "structure_0000000014",
+        "id": 161179,
+        "itemId": "A0CyborgFactory",
+        "site": {
+          "x": 8,
+          "y": 42,
+          "z": 256
+        },
+        "position": [
+          1088,
+          5376,
+          256
+        ]
+      },
+      {
+        "key": "structure_0000000015",
+        "id": 161180,
+        "itemId": "A0CyborgFactory",
+        "site": {
+          "x": 57,
+          "y": 13,
+          "z": 256
+        },
+        "position": [
+          7360,
+          1664,
+          256
+        ]
+      },
+      {
+        "key": "structure_0000000016",
+        "id": 161181,
+        "itemId": "A0CyborgFactory",
+        "site": {
+          "x": 3,
+          "y": 34,
+          "z": 256
+        },
+        "position": [
+          448,
+          4352,
+          256
+        ]
+      },
+      {
+        "key": "structure_0000000017",
+        "id": 161182,
+        "itemId": "A0CyborgFactory",
+        "site": {
+          "x": 7,
+          "y": 30,
+          "z": 128
+        },
+        "position": [
+          960,
+          3840,
+          128
+        ]
+      },
+      {
+        "key": "structure_0000000018",
+        "id": 161183,
+        "itemId": "A0CyborgFactory",
+        "site": {
+          "x": 4,
+          "y": 30,
+          "z": 256
+        },
+        "position": [
+          576,
+          3840,
+          256
+        ]
+      }
+    ],
+    "queries": 9,
+    "sha256": "9740c0699172b38d6cdc3cede1bf8590a806c0842c0e67139550199f0c109c5d"
+  },
+  "fixture": {
+    "path": "qa/test-11/five-facilities-fixture.json",
+    "sha256": "7a565704eb377194de4bf9143f6e7300b9e98856106d0b5168f92dd4f1dfbf8e",
+    "seeded": true
+  },
+  "beforeLoadClock": 40002,
+  "loadReadiness": {
+    "source": "native wave clock after load; no stale command snapshot",
+    "before": {
+      "running": true,
+      "clock": 34502,
+      "rewinds": 0,
+      "samples": [
+        {
+          "ms": 1794106905739,
+          "clock": 32802
+        },
+        {
+          "ms": 1794106906077,
+          "clock": 33502
+        },
+        {
+          "ms": 1794106906444,
+          "clock": 33502
+        },
+        {
+          "ms": 1794106906780,
+          "clock": 33502
+        },
+        {
+          "ms": 1794106907151,
+          "clock": 34502
+        }
+      ]
+    }
+  },
+  "nativeFacilityCounts": {
+    "labs": 5,
+    "vehicleFactories": 5,
+    "cyborgFactories": 5
+  },
+  "nativeReady": {
+    "clock": 34802,
+    "labIds": [
+      160169,
+      160171,
+      160173,
+      160175,
+      161175
+    ],
+    "factoryIds": [
+      {
+        "id": 160157,
+        "kind": "Factory",
+        "ready": true
+      },
+      {
+        "id": 160167,
+        "kind": "Factory",
+        "ready": true
+      },
+      {
+        "id": 161176,
+        "kind": "Factory",
+        "ready": true
+      },
+      {
+        "id": 161177,
+        "kind": "Factory",
+        "ready": true
+      },
+      {
+        "id": 161178,
+        "kind": "Factory",
+        "ready": true
+      },
+      {
+        "id": 161179,
+        "kind": "Cyborg factory",
+        "ready": true
+      },
+      {
+        "id": 161180,
+        "kind": "Cyborg factory",
+        "ready": true
+      },
+      {
+        "id": 161181,
+        "kind": "Cyborg factory",
+        "ready": true
+      },
+      {
+        "id": 161182,
+        "kind": "Cyborg factory",
+        "ready": true
+      },
+      {
+        "id": 161183,
+        "kind": "Cyborg factory",
+        "ready": true
+      }
+    ]
+  },
+  "pausedAt": 35002,
+  "errors": [],
+  "finished": "2026-11-08T03:01:51.102Z"
+}

@@ -1,0 +1,107 @@
+{
+  "reviewed": true,
+  "candidateAPK_SHA256": "09440e33070aabf0dacd22e8b495f6d696735bb45f9084bd2fca5e25d9b10471",
+  "screenshots": [
+    {
+      "path": "qa/test-11/comparisons/build-full.png",
+      "accepted": true,
+      "notes": "Approved reference and actual wide Build: flat illustrated rows, full-height pinned queue/Exit; state differences are native."
+    },
+    {
+      "path": "qa/test-11/comparisons/research-full.png",
+      "accepted": true,
+      "notes": "Approved reference and actual wide Research: separate lab/category rows, two content columns."
+    },
+    {
+      "path": "qa/test-11/comparisons/factory-full.png",
+      "accepted": true,
+      "notes": "Approved reference and actual wide Factory: family selectors, designs and actual queue."
+    },
+    {
+      "path": "qa/test-11/final-layouts/lab-11-normal-design.png",
+      "accepted": true,
+      "notes": "Compact horizontal design steps and retained native component workflow."
+    },
+    {
+      "path": "qa/test-11/final-layouts/lab-11-normal-saved.png",
+      "accepted": true,
+      "notes": "Saved phone blueprint rows and actions remain visible and scroll normally."
+    },
+    {
+      "path": "qa/test-11/final-layouts/lab-11-normal-help.png",
+      "accepted": true,
+      "notes": "Field Guide fits inside viewport and scrolls."
+    },
+    {
+      "path": "qa/test-11/final-layouts/lab-11-compact-large-research.png",
+      "accepted": true,
+      "notes": "Compact enlarged profile retains topic art, separate selectors and usable two-column research."
+    },
+    {
+      "path": "qa/test-11/final-layouts/lab-11-compact-large-build.png",
+      "accepted": true,
+      "notes": "Compact enlarged Build has pinned Exit and an unobscured header; no field-controls overlap."
+    },
+    {
+      "path": "qa/test-11/final-layouts/lab-11-compact-large-queue.png",
+      "accepted": true,
+      "notes": "Compact activity page and Back/View Build Sites actions fit."
+    },
+    {
+      "path": "qa/test-11/final-five/lab-11-fifth-lab-real-active-and-waiting.png",
+      "accepted": true,
+      "notes": "All five native lab selectors; Lab 5 active and waiting research with a disabled duplicate queue action."
+    },
+    {
+      "path": "qa/test-11/final-five/lab-11-compact-five-vehicle-five-cyborg.png",
+      "accepted": true,
+      "notes": "Both native five-factory strips with Cyborg Factory 5 selected on the compact viewport."
+    },
+    {
+      "path": "qa/test-11/final-ordinary/lab-factory-real-active-and-waiting.png",
+      "accepted": true,
+      "notes": "Normal production shows the genuine active unit and five waiting units; queue actions scroll."
+    },
+    {
+      "path": "qa/test-11/final-ordinary/lab-11-ordinary-design-native-valid.png",
+      "accepted": true,
+      "notes": "Actual Viper/Wheels/Machinegun design with native cost/build points and Save Blueprint."
+    },
+    {
+      "path": "qa/test-11/final-modules-recovered/11-power-real-roof-accepted.png",
+      "accepted": true,
+      "notes": "Visible real trucks upgrade the Power parent, highlighted with genuine module job."
+    },
+    {
+      "path": "qa/test-11/final-modules-recovered/11-power-tower-real-queued.png",
+      "accepted": true,
+      "notes": "Power Module followed by ordinary tower FIFO, real worker selection and pinned construction list."
+    },
+    {
+      "path": "qa/test-11/final-back/dialog-confirmed-return.png",
+      "accepted": true,
+      "notes": "Actual Android Back opens compact black/white native Return confirmation."
+    },
+    {
+      "path": "qa/test-11/final-duel/lab-11-duel-existing-factory.png",
+      "accepted": true,
+      "notes": "Retained Duel legacy Factory UI; Towers-only redesigned markup does not apply."
+    },
+    {
+      "path": "qa/test-11/final-duel/lab-11-duel-existing-research.png",
+      "accepted": true,
+      "notes": "Retained Duel legacy Research UI and branch filtering; no new Towers stylesheet."
+    }
+  ],
+  "observations": [
+    "Reviewed actual APK screenshots against all three approved mock images, including normal and compact active native states. No material overlap or blocking clipping remains in the scoped Towers pages.",
+    "First-candidate short Build panel, field-control overlap and toast/header overlap were corrected and recaptured on the delivery candidate.",
+    "Wide mock/sample jobs and actual idle jobs differ intentionally. The UI uses real native status and counts, real pictures and original game fonts. No factory ETA, percentage or assembled 3D preview is invented.",
+    "Five native labs and five factories of each family remain individually selectable on normal and compact profiles. Scroll positions and native ID selection survive Back and polling.",
+    "1v1 retains its existing UI and gameplay package for later work; its screenshots establish preservation, not a redesign acceptance."
+  ],
+  "limitations": [
+    "The Dustfall module journey is an explicit continuation: its first run completed two Research Modules, then an obsolete test assumed remote trucks would stay in BUILD's visible-worker group after a camera move. The failed raw report is retained. The passed continuation replays the same complete unmodified Research checkpoint, revalidates both modules, moves the same trucks by actual UI into the Power area, and completes module/tower FIFO plus genuine save/load.",
+    "Reference and actual wide comparison sheets use uniform aspect-preserving scaling. The fixed-width Build rail is deliberately compact rather than a pixel-identical proportion of the raster mock."
+  ]
+}

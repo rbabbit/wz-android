@@ -1,4 +1,63 @@
-# Current Towers Lab 01
+# Warzone Towers 0.11 — approved compact interface
+
+Final result: passed.
+
+Reviewed the actual installed delivery APK with SHA-256
+`09440e33070aabf0dacd22e8b495f6d696735bb45f9084bd2fca5e25d9b10471`.
+This section supersedes the historical visual acceptance statements below.
+The in-game interface is HTML/CSS over the unchanged game engine; this update
+does not convert it into Android views.
+
+The three approved reference images are retained in [docs/ui-0.11](docs/ui-0.11/).
+Reference and actual screens are shown together in the full and focused
+[Build](qa/test-11/comparisons/build-full.png),
+[Research](qa/test-11/comparisons/research-full.png) and
+[Factory](qa/test-11/comparisons/factory-full.png) comparison sheets.
+Both full-screen sources use the same 20:9 landscape aspect ratio; the actual
+2400×1080 captures and 1870×841 references are scaled uniformly for comparison.
+Focused crops preserve their aspect ratios and expose their source coordinates
+in the comparison script. They are diagnostic evidence, not replacement assets.
+
+Build follows the approved flat illustrated rows, restrained selected accent,
+separate construction queue and pinned Exit. Research separates lab selection
+from categories, gives the topic list larger real game pictures, and combines
+the selected topic, active research and waiting queue in one side panel.
+Factory separates the vehicle and cyborg facility strips, retains actual
+component icons, and places real active/waiting production beside designs.
+Design, saved phone blueprints, activity and Help use the same charcoal/teal
+palette, bundled Oswald headings, spacing and flat rows. The header and Android
+return confirmation retain their established controls and original game art.
+
+The wide, normal and compact/enlarged [layout captures](qa/test-11/final-layouts/layouts.json)
+cover all seven relevant screens at 2400×1080, 1080×600 and 854×480. The compact
+profile includes enlarged text and controls. Actual native five-lab and both
+five-factory groups were also reviewed at normal and compact sizes, including
+Lab 5 active plus waiting research and Cyborg Factory 5 selection. Independent
+review found no material overlap or blocking clipping. Horizontal facility
+strips intentionally pan when they cannot fit, keeping selection by native ID.
+
+The first candidate exposed an inherited short Build panel with the field
+controls occupying its lower area, and a toast covering the catalogue header.
+The delivery candidate pins Build to the viewport bottom, restores field
+controls on Exit, and places the toast beside the rail. These corrections were
+checked again in all three real screen profiles. No unresolved P0/P1/P2 visual
+issue remains in the reviewed scope. Long production queues scroll normally;
+their Clear Waiting Queue action was exercised with actual waiting units.
+
+The reference images contain illustrative active jobs, counts and descriptions;
+the implemented pages show the current native state. Idle comparison captures
+are supplemented by actual active/waiting research and production screenshots.
+The implementation deliberately avoids invented factory percentages, ETAs or an
+unavailable assembled 3D tank preview. Build keeps a compact fixed-width rail
+on wide screens to preserve battlefield space. This is a responsive
+implementation of the approved layout, not a claim of pixel-identical artwork.
+
+Software-emulator terrain is black as in the accepted fallback. The original
+engine, maps and both gameplay payloads remain byte-identical; physical-handset
+rendering, GPU frame rate and audio are not newly certified. See the current
+[delivery report](qa/test-11/REPORT.md) for gameplay evidence and fixture limits.
+
+# Historical Towers Lab 01
 
 The compact slate/teal HTML/CSS interface and distinct Android start screen
 were inspected in the actual emulator on the exact delivery APK. The current

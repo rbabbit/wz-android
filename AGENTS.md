@@ -1,5 +1,14 @@
 # Warzone Towers maintenance rules
 
+- 2026-11-08: the user approved all three compact Towers mock screens and their
+  shared visual language for Build, Research, Factory, Design, Saved and Queue.
+  Develop this as 0.11 on `codex/towers-ui-0.11`, preserving the complete 0.10
+  APK/source fallback. Support dynamic five labs plus five vehicle and five
+  cyborg factories with reachable selectors and stable selected native IDs.
+  Preserve the 1v1 feature and its current UI/rules for later; scope new markup
+  and styles to Towers. Keep the engine, scenarios, maps, saves and phone design
+  library intact. Never invent production ETA/progress or a 3D design preview.
+
 - The user saved Towers 0.9 as the immutable benchmark before adding an offline
   human-versus-bot mode. GitHub `main` and `v0.9-benchmark` point to
   `28fe51dc5725d5262b0302de10776ae1a37eb994`; preserve its APK, complete source,

@@ -1,5 +1,20 @@
 # Known issues and verification limits
 
+## Warzone Towers 0.11 — compact Towers interface
+
+The [0.11 report](../qa/test-11/REPORT.md) records exact-APK layout, native
+facility, production, blueprint, keyboard, construction and menu checks.
+The five-lab/five-vehicle/five-cyborg case uses a disclosed completed-facility
+save copy. Ordinary production and construction are separate unmodified-game
+checks. The module journey's old remote-worker assumption is retained as a
+diagnostic; its continuation moves the actual trucks into the work area before
+using BUILD's visible-worker selection.
+
+The engine and both mode payloads are unchanged. 1v1 is retained for later work;
+its interface uses the previous layout. Black terrain on the software emulator,
+physical-handset GPU/FPS, audio and full 30-wave-run verification remain limited
+as documented in the current report. The complete 0.10 fallback is preserved.
+
 ## Warzone Towers 0.10 — offline 1v1
 
 The app includes the preserved Towers benchmark and an offline Cannon/Rockets

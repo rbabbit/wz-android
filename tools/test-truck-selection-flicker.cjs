@@ -1,0 +1,33 @@
+'use strict';
+const assert=require('node:assert/strict'),{fixture}=require('./box-selection-fixture.cjs');
+const ids=values=>Array.from(values,t=>t.id).sort((a,b)=>a-b),expected=[160001,160003];
+const world=f=>f.units.map(u=>[u.id,u.order,u.action,u.queued,...u.position]);
+(async()=>{
+ const f=fixture();f.units.splice(2);const before=world(f);
+ assert.deepEqual(ids(await f.context.selectVisibleTrucks()),expected);
+ assert.equal(f.boxes.length,1,'neighbouring constructor tile volumes merge into one localized native gesture');
+ const b=f.boxes[0];assert.ok((b.right-b.left)*(b.bottom-b.top)<1000*576*.12,'the discovery rectangle cannot flash across the whole battlefield');
+ const count=f.boxes.length;assert.deepEqual(ids(await f.context.selectVisibleTrucks()),expected);
+ assert.equal(f.boxes.length,count,'already selected verified stationary workers need no drag, pulse or highlight reset');
+ f.camera.panMoves=1;assert.deepEqual(ids(await f.context.selectVisibleTrucks()),expected);assert.ok(f.boxes.length>count,'camera intent invalidates the retained group');
+ const moved=f.boxes.length;f.moveScreen(160001,700,270);f.units[0].order=2;f.units[0].action=1;const moving=world(f);
+ assert.deepEqual(ids(await f.context.selectVisibleTrucks()),expected);assert.ok(f.boxes.length>moved,'moving trucks are always freshly verified through native IDs');assert.deepEqual(world(f),moving,'selection cannot replace native movement or queued work');
+ f.units[0].order=0;f.units[0].action=0;f.moveScreen(160001,591,302);assert.deepEqual(world(f),before);
+ const ui=fixture();ui.units.splice(2);ui.nodes.get('wt-build-sidebar').hidden=true;
+ const centre=ui.nodes.get('wt-field-centre');centre.getBoundingClientRect=()=>({left:6,top:350,right:250,bottom:480,width:244,height:130});
+ let dockTop=386;
+ ui.nodes.set('lab-ops',{hidden:false,closest:()=>null,css:{display:'block',visibility:'visible'},getBoundingClientRect:()=>({left:500,top:dockTop,right:650,bottom:430,width:150,height:430-dockTop})});
+ assert.deepEqual(ids(await ui.context.selectVisibleTrucks()),expected);const firstCuts=JSON.stringify(ui.state.truckSelection.regions);
+ centre.hidden=true;dockTop=386.667;
+ assert.deepEqual(ids(await ui.context.selectVisibleTrucks()),expected);assert.notEqual(JSON.stringify(ui.state.truckSelection.regions),firstCuts,'real HTML occlusion collapse changes rectangle subdivision');
+ assert.equal(ui.state.truckSelection.boxes,0,'equivalent native-pixel constructor coverage survives distant menu collapse and fractional dock layout');
+ centre.hidden=false;centre.getBoundingClientRect=()=>({left:570,top:340,right:615,bottom:390,width:45,height:50});
+ assert.deepEqual(ids(await ui.context.selectVisibleTrucks()),[160003],'a panel actually covering a constructor invalidates retention and excludes that truck');assert.ok(ui.state.truckSelection.boxes>0);
+ const giant=fixture();giant.units.splice(2);giant.context.window.WarzoneTerrain.project=(x,y,z)=>({x:x/128*500-4000,y:y/128*250-1500-z/128*5});
+ const regions=giant.context.truckSelectionRegions(giant.snapshot(),giant.context.buildSelectionRegions());
+ for(const r of regions){const w=r.right-r.left,h=r.bottom-r.top;assert.ok(w<=350&&h<=576*.45&&w*h<=1000*576*.12,'even a nearby enlarged volume is partitioned into bounded native rectangles');}
+ const unready=fixture();unready.context.window.WarzoneTerrain.refresh=async()=>false;
+ assert.deepEqual(Array.from(await unready.context.selectVisibleTrucks()),[]);assert.equal(unready.boxes.length,0,'an unavailable fresh camera cannot fall back to guessed selection input');
+ assert.deepEqual(f.unsafeMoves,[]);
+ console.log('PASS: localized merged tile-volume selection, zero-gesture verified repeat, fresh camera/movement invalidation, bounded large volumes, no GPU mesh read and native order preservation');
+})().catch(error=>{console.error(error);process.exitCode=1;});

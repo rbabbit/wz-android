@@ -485,13 +485,66 @@
       blocks.push({left:b.left-frame.left-2,top:b.top-frame.top-2,right:b.right-frame.left+2,bottom:b.bottom-frame.top+2});
     }
     for(const block of blocks)regions=regions.flatMap(r=>subtractSelectionRect(r,block));
-    return regions.filter(r=>r.right-r.left>=8&&r.bottom-r.top>=8).sort((a,b)=>(b.right-b.left)*(b.bottom-b.top)-(a.right-a.left)*(a.bottom-a.top));
+    // SDL selection uses integer pixels. Round into the usable area so tiny
+    // CSS layout fractions cannot put input across a panel edge.
+    return regions.map(r=>({left:Math.ceil(r.left),top:Math.ceil(r.top),right:Math.floor(r.right),bottom:Math.floor(r.bottom)})).filter(r=>r.right-r.left>=8&&r.bottom-r.top>=8).sort((a,b)=>(b.right-b.left)*(b.bottom-b.top)-(a.right-a.left)*(a.bottom-a.top));
   }
   function splitSelectionRect(rect){
     const w=rect.right-rect.left,h=rect.bottom-rect.top;
     if(w>=h&&w>=16||h<16&&w>=16){const x=Math.floor((rect.left+rect.right)/2);return [{...rect,right:x},{...rect,left:x}];}
     if(h>=16){const y=Math.floor((rect.top+rect.bottom)/2);return [{...rect,bottom:y},{...rect,top:y}];}
     return [];
+  }
+  function truckSelectionSignature(snapshot){
+    return JSON.stringify((snapshot.trucks||[]).map(t=>[t.id,t.x,t.y,t.z,t.order,t.action,t.queued]).sort((a,b)=>a[0]-b[0]));
+  }
+  function selectionCoverage(rects){
+    // Rect subtraction can partition the same visible area differently when
+    // a distant field control closes. Compare the covered union, not its cuts.
+    const ys=Array.from(new Set(rects.flatMap(r=>[r.top,r.bottom]))).sort((a,b)=>a-b),bands=[];
+    for(let i=1;i<ys.length;i++){
+      const top=ys[i-1],bottom=ys[i],intervals=rects.filter(r=>r.top<=top&&r.bottom>=bottom).map(r=>[r.left,r.right]).sort((a,b)=>a[0]-b[0]),merged=[];
+      for(const interval of intervals){const last=merged[merged.length-1];if(last&&interval[0]<=last[1])last[1]=Math.max(last[1],interval[1]);else merged.push(interval.slice());}
+      if(!merged.length)continue;
+      const key=JSON.stringify(merged),last=bands[bands.length-1];
+      if(last&&last.bottom===top&&last.key===key)last.bottom=bottom;else bands.push({top,bottom,key});
+    }
+    return JSON.stringify(bands);
+  }
+  function truckSelectionRegions(snapshot,field){
+    const terrain=window.WarzoneTerrain,rects=[],seen=new Set(),bounds=window.__kalaWarzoneTouch.nativeSelectionBounds();
+    const width=bounds.right-bounds.left,height=bounds.bottom-bounds.top,maxWidth=Math.max(96,width*.35),maxHeight=Math.max(96,height*.45),maxArea=width*height*.12;
+    // Script positions are whole tiles. Cover the complete tile volume plus
+    // the body's raised/tilted selection centre; never click a guessed centre.
+    for(const truck of snapshot.trucks||[]){
+      if(![truck.x,truck.y,truck.z].every(Number.isFinite))continue;
+      const points=[];
+      for(const x of [truck.x*128-64,(truck.x+1)*128+64])for(const y of [truck.y*128-64,(truck.y+1)*128+64])for(const z of [truck.z*128-96,(truck.z+1)*128+128]){
+        const p=terrain.project(x,y,z);if(p&&Number.isFinite(p.x)&&Number.isFinite(p.y))points.push(p);
+      }
+      if(points.length!==8)continue;
+      const projected={left:Math.floor(Math.min(...points.map(p=>p.x)))-3,top:Math.floor(Math.min(...points.map(p=>p.y)))-3,right:Math.ceil(Math.max(...points.map(p=>p.x)))+3,bottom:Math.ceil(Math.max(...points.map(p=>p.y)))+3};
+      for(const r of field){
+        const hit={left:Math.max(projected.left,r.left),top:Math.max(projected.top,r.top),right:Math.min(projected.right,r.right),bottom:Math.min(projected.bottom,r.bottom)};
+        if(hit.right-hit.left<8||hit.bottom-hit.top<8)continue;
+        const pending=[hit];
+        while(pending.length){
+          const candidate=pending.pop(),w=candidate.right-candidate.left,h=candidate.bottom-candidate.top;
+          if(w>maxWidth||h>maxHeight||w*h>maxArea){pending.push(...splitSelectionRect(candidate));continue;}
+          const key=JSON.stringify(candidate);if(!seen.has(key)){seen.add(key);rects.push({...candidate,field:r});}
+        }
+      }
+    }
+    // Nearby workers share one short gesture. A cluster may never grow into
+    // the old whole-field strobing rectangle, or cross an HTML/radar occlusion.
+    let changed=true;
+    while(changed){changed=false;for(let i=0;i<rects.length&&!changed;i++)for(let j=i+1;j<rects.length;j++){
+      const a=rects[i],b=rects[j];if(a.field!==b.field||a.right+12<b.left||b.right+12<a.left||a.bottom+12<b.top||b.bottom+12<a.top)continue;
+      const joined={left:Math.min(a.left,b.left),top:Math.min(a.top,b.top),right:Math.max(a.right,b.right),bottom:Math.max(a.bottom,b.bottom),field:a.field},w=joined.right-joined.left,h=joined.bottom-joined.top;
+      if(w>maxWidth||h>maxHeight||w*h>maxArea)continue;
+      rects[i]=joined;rects.splice(j,1);changed=true;break;
+    }}
+    return rects.map(({field,...rect})=>rect);
   }
   async function awaitNativeClose(closing=state.nativeClosePromise){
     if(!closing)return {ok:true};
@@ -522,7 +575,7 @@
     state.autoSelectionIntent=window.__kalaWarzoneTouch?.report?.().manualSelectionRevision||0;
     const active=()=>serial===state.selectionSerial&&view===buildSelectionView()&&!window.__towersHtml?.isEnded?.();
     const trace={phase:'closing-menu',view,boxes:0,queries:0,regions:[],wanted:[],selected:[],recent:[],cacheHit:false,cacheRejected:false};state.truckSelection=trace;
-    let regions=[],last=null,empty=null,cacheKey='',verifiedRects=null;const cache=state.truckSelectionCache||=new Map();
+    let regions=[],field=[],last=null,empty=null,cacheKey='',verifiedRects=null,signature='';const cache=state.truckSelectionCache||=new Map();
     const box=async(rect,add=false,cleanup=false)=>{
       if(!active())return false;
       if(trace.boxes>=(cleanup?72:64)||!cleanup&&Date.now()-started>12000)throw Error('Truck selection took too long. Tap TRUCKS to try again.');
@@ -540,7 +593,7 @@
       // A verified empty native rectangle clears selection without a ground
       // click, a guessed body hit, a camera move or a unit order.
       if(last?.selectedUnits?.length===0)return;
-      const candidates=empty?[empty]:regions.flatMap(r=>[{left:r.left,top:r.top,right:r.left+8,bottom:r.top+8},{left:r.right-8,top:r.top,right:r.right,bottom:r.top+8}]);
+      const candidates=empty?[empty]:field.flatMap(r=>[{left:r.left,top:r.top,right:r.left+8,bottom:r.top+8},{left:r.right-8,top:r.top,right:r.right,bottom:r.top+8}]);
       for(const r of candidates){const units=await query(r,true);if(!active()||units&&units.length===0)return;}
       throw Error('Selection could not be cleared safely. Move the view, then tap TRUCKS.');
     };
@@ -549,12 +602,22 @@
       window.__kalaWarzoneTouch?.releaseAll?.(true);
       const initial=await selectionState();if(!active())return [];if(!initial.ok)throw Error('Resume the game, then tap TRUCKS to select your trucks.');
       trace.beforeOrders=initial.result.trucks.map(t=>({id:t.id,order:t.order,queued:t.queued}));
-      regions=buildSelectionRegions();trace.regions=regions;state.nativeBuildGroup=[];
-      cacheKey=JSON.stringify([initial.result.player,initial.result.mapWidth,initial.result.mapHeight,regions.map(r=>[r.left,r.top,r.right,r.bottom])]);
-      if(!regions.length)throw Error('The battlefield is covered. Close the open panel, then tap TRUCKS.');
+      field=buildSelectionRegions();state.nativeBuildGroup=[];last=initial.result;
+      if(!field.length)throw Error('The battlefield is covered. Close the open panel, then tap TRUCKS.');
+      trace.phase='camera';
+      if(!await window.WarzoneTerrain?.refresh(1500,true)||!active())throw Error('The battlefield is not ready. Tap TRUCKS to try again.');
+      regions=truckSelectionRegions(initial.result,field);trace.regions=regions;
+      if(!regions.length){await clear();if(active()){state.snapshot=last;state.buildSelectionView=view;trace.phase='empty';updateHUD();notify('No construction trucks are visible. Move the view to your trucks.');}return [];}
+      cacheKey=JSON.stringify([initial.result.player,initial.result.mapWidth,initial.result.mapHeight,view,selectionCoverage(regions)]);
+      signature=truckSelectionSignature(initial.result);const remembered=cache.get(cacheKey),current=initial.result.selectedUnits||[];
+      // Retaining an already verified stationary group requires no native
+      // gesture at all. Moving/working trucks always get fresh ID verification.
+      if(remembered?.signature===signature&&(initial.result.trucks||[]).every(t=>!t.order&&!t.action)&&current.length===remembered.ids.length&&current.every(t=>t.constructor&&remembered.ids.includes(t.id))){
+        state.nativeBuildGroup=current.map(t=>t.id);state.buildSelectionView=view;state.snapshot=last;trace.phase='selected';trace.cacheHit=true;trace.retained=true;trace.wanted=remembered.ids.slice();trace.selected=state.nativeBuildGroup.slice();trace.afterOrders=trace.beforeOrders;updateHUD();return selectedBuildGroup(last);
+      }
       trace.phase='scan';
-      // Batch the usable-field union before one fresh reply. Empty strips do
-      // not need their own polling round trip in the common constructor-only case.
+      // The native engine remains the visibility/selection oracle. Discovery
+      // is confined to constructor tile volumes, never the whole battlefield.
       for(let i=0;i<regions.length;i++){if(!await box(regions[i],i>0)||!active())return [];}
       let reply=await selectionState();if(!active())return [];if(!reply.ok)throw Error('Resume the game, then tap TRUCKS to select your trucks.');
       last=reply.result;trace.queries++;let units=last.selectedUnits||[];
@@ -596,7 +659,7 @@
       }
       if(units.length!==wanted.size||units.some(u=>!u.constructor||!wanted.has(u.id))){await clear();throw Error('Truck positions changed during selection. Tap TRUCKS to select again.');}
       const selected=selectedBuildGroup(last);state.nativeBuildGroup=selected.map(t=>t.id);state.buildSelectionView=view;state.snapshot=last;
-      if(verifiedRects){cache.delete(cacheKey);cache.set(cacheKey,{ids:Array.from(wanted),rects:verifiedRects.map(r=>({...r}))});while(cache.size>4)cache.delete(cache.keys().next().value);}
+      cache.delete(cacheKey);cache.set(cacheKey,{signature:truckSelectionSignature(last),ids:Array.from(wanted),rects:(verifiedRects||regions).map(r=>({...r}))});while(cache.size>4)cache.delete(cache.keys().next().value);
       state.notice='';const toast=element('wt-command-toast');if(toast)toast.hidden=true;trace.phase='selected';trace.selected=state.nativeBuildGroup.slice();trace.wanted=Array.from(wanted);trace.afterOrders=last.trucks.map(t=>({id:t.id,order:t.order,queued:t.queued}));updateHUD();return selected;
     })().catch(async error=>{if(active()){state.nativeBuildGroup=[];trace.phase='stopped';trace.reason=error.message;try{if(regions.length&&last?.selectedUnits?.length)await clear();}catch(_){}if(active()){if(last)state.snapshot=last;notify(error.message||'Truck selection could not complete. Tap TRUCKS to retry.');}}return [];});
     state.selectionPromise=task;

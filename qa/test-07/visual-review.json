@@ -1,0 +1,72 @@
+{
+  "passed": true,
+  "reviewed": true,
+  "candidateAPK_SHA256": "ba46094e485677985842c202d931c5109a29903c75c376389928676d3a918a40",
+  "screenshots": [
+    {
+      "path": "qa/test-07/trucks/flicker-after-contact.png",
+      "sha256": "9088b4fe4d4507a9333a0b7f69926d70b76b0194019b3b9352d4bb6358d56828",
+      "accepted": true
+    },
+    {
+      "path": "qa/test-07/trucks/trucks-after-0.png",
+      "sha256": "c6146895858b562c02098a68e228d6b419fd34265ad49c092051572802fce2bd",
+      "accepted": true
+    },
+    {
+      "path": "qa/test-07/two-groups/group-b-same-item-order.png",
+      "sha256": "f4cc4006fd877ea69f0dadddf6aaf72cb882d83d6ba9175c2d261332e6c13455",
+      "accepted": true
+    },
+    {
+      "path": "qa/test-07/mixed/mixed-02-constructor-only-highlights.png",
+      "sha256": "3dce069cb5fd1919308aa407420bfc57d11ed960f9d754bc694b89fb742745e5",
+      "accepted": true
+    },
+    {
+      "path": "qa/test-07/back/system-back-visible-1.png",
+      "sha256": "df6bf0ca618dd3fc1c2edc7c304f813e2e0962b3e62f4f073af27795512d28f9",
+      "accepted": true
+    },
+    {
+      "path": "qa/test-07/back/keyboard-dismiss-keeps-design.png",
+      "sha256": "8f32ca9717e918300ae5bfc56079415c5b924a04a603244903d403663473f376",
+      "accepted": true
+    },
+    {
+      "path": "qa/test-07/back/system-back-confirmation-1.png",
+      "sha256": "d6b2e961ccf13c1f2219342cb3db263577886e8f0e263b4497cb3ee8668a8068",
+      "accepted": true
+    },
+    {
+      "path": "qa/test-07/back/real-key-111-confirmation.png",
+      "sha256": "bf309b00b74a1dd97feb73de3220a9c9c78357f67777b564efb4c875c19c4599",
+      "accepted": true
+    },
+    {
+      "path": "qa/test-07/back/direct-main-menu.png",
+      "sha256": "ecc3c1486244d55d9dd78d80a771eb3ef8b5e58c966b1bb6c408b47e8e64a5c5",
+      "accepted": true
+    },
+    {
+      "path": "qa/test-07/back/fresh-battle-cancel-restored.png",
+      "sha256": "19a407d489cbccd4bff3989f92beb8ed99db0a8269fcab45cd5977074b7b8390",
+      "accepted": true
+    }
+  ],
+  "recordings": [
+    "qa/test-07/reproduction/trucks-before.mp4",
+    "qa/test-07/trucks/trucks-after.mp4"
+  ],
+  "observations": [
+    "Old recording has a broad native selection flash. Final recording has localized feedback and no broad field flash; two stationary repeats produce zero native boxes.",
+    "Native selected constructor highlights are visible beside unselected tanks. Compact layout remains unchanged.",
+    "Actual SystemUI triangle is visible in the observed navigation screenshot. Back displays Return to main menu? with Cancel and Return; direct custom main menu and fresh battle restore correctly.",
+    "Closing the real keyboard leaves Design open, and subsequent Back closes the page."
+  ],
+  "limitations": [
+    "Android API36 emulator only; the user physical handset and other Android/OEM versions were not available. Actual SystemUI three-button Back, real Escape111 and modern-dispatched Back4 were exercised; the extracted Java regression covers the legacy Back4 sequence.",
+    "Black terrain is an existing emulator rendering limitation in baseline0.6 and candidate0.7. No engine or terrain rendering change is part of this delivery.",
+    "Fresh truck verification retains small localized native selection feedback. Verified stationary repeat selection uses no drag gesture."
+  ]
+}

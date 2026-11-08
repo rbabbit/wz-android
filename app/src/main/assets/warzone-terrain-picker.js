@@ -201,20 +201,20 @@
     }finally{state.lastPickMs=performance.now()-started;state.maxPickMs=Math.max(state.maxPickMs,state.lastPickMs);}
   }
   window.WarzoneTerrain={
-    active(value){state.active=Boolean(value);if(value){install(window.LaunchedModule?.ctx);
+    active(value,warm=true){state.active=Boolean(value);if(value){install(window.LaunchedModule?.ctx);
       // Warm the cached projection between choosing a structure and tapping the
       // battlefield, rather than paying the first mesh read in the tap handler.
-      setTimeout(()=>{if(state.active&&state.matrix&&readMesh()){const b=canvas()?.getBoundingClientRect();if(b)projectedMesh(b);}},100);
+      if(warm)setTimeout(()=>{if(state.active&&state.matrix&&readMesh()){const b=canvas()?.getBoundingClientRect();if(b)projectedMesh(b);}},100);
     }},
-    async refresh(timeout=1500){
-      const before=state.observations,started=performance.now();this.active(true);
+    async refresh(timeout=1500,cameraOnly=false){
+      const before=state.observations,started=performance.now();this.active(true,!cameraOnly);
       // A retained matrix is not evidence for the current camera. Wait for an
       // actual perspective terrain draw, including after a pan while inactive.
       while(state.observations<=before){
         if(performance.now()-started>=timeout)return false;
         await new Promise(resolve=>setTimeout(resolve,16));
       }
-      return Boolean(state.matrix&&readMesh());
+      return Boolean(state.matrix&&(cameraOnly||readMesh()));
     },
     pick,
     // Display-only access to the already observed camera and static ground.

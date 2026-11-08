@@ -10,8 +10,8 @@ android {
         applicationId = "com.rbabbit.warzonetowers.lab"
         minSdk = 26
         targetSdk = 36
-        versionCode = 6
-        versionName = "0.6"
+        versionCode = 9
+        versionName = "0.9"
     }
 
     compileOptions {

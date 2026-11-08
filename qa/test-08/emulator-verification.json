@@ -1,0 +1,36 @@
+{
+  "passed": true,
+  "candidateAPK_SHA256": "751c90f6bb2ec1c1ec2286fabe1e499bc95234e2a2ce8198f763e1876098a3e0",
+  "installedAPK_SHA256": "751c90f6bb2ec1c1ec2286fabe1e499bc95234e2a2ce8198f763e1876098a3e0",
+  "emulatorTesting": true,
+  "gameplayTesting": true,
+  "device": "emulator-5556",
+  "api": 36,
+  "checks": {
+    "researchLayout": true,
+    "researchQueueControls": true,
+    "researchPanelReturns": true,
+    "nativeMonochromeDialog": true,
+    "actualNavigationBack": true,
+    "cancelAndConfirmReturns": true
+  },
+  "sourceReports": [
+    {
+      "path": "qa/test-08/research/research.json",
+      "sha256": "f0ac38b4f125182099db34de1622a60690de490d06c25a863f771e8c761a1bd7"
+    },
+    {
+      "path": "qa/test-08/dialog/dialog.json",
+      "sha256": "9cb60972a37a9ea1ee31784d62f037d51fc7ccea0ee7ae5dfd562b7655a26af3"
+    }
+  ],
+  "fixtures": "Fresh authored Iron Valley; no native world edits or granted units/labs. UI width stress uses existing genuine lab buttons. Native research completion, queue advance and native F7 target confirmed.",
+  "nativeResearchTarget": "R-Vehicle-Engine03",
+  "navigationEvidence": "Six actual SystemUI Back triangle taps, each gated on live screenshot Back/Home pixel readiness. Native black surface, white title/actions and48dp x88dp buttons observed.",
+  "limitations": [
+    "Exact APK tested on Android API36 emulator. The physical user handset and other Android/OEM versions were not available; no tablet-wide compatibility claim.",
+    "Existing software-emulator black terrain rendering remains. Native engine, graphics payload, maps, truck controls and all other UI assets are byte-identical to0.7. Physical GPU/FPS/audio/HQ pack and a complete30-wave victory were outside this scoped UI change.",
+    "Gameplay used four authored Iron Valley laboratories with their original modules. Horizontal overflow stress narrowed the existing four real UI lab buttons to140px temporarily; it did not add native laboratories or claim15-lab gameplay.",
+    "Two fixture corrections preserved earlier passing observations on the same exact APK: the wide override initially made a portrait letterbox, and fake DOM lab nodes were reconciled back to the actual native count. The corrected wide landscape profile and four-real-button width stress passed; no runtime changes were made to recover the tests."
+  ]
+}

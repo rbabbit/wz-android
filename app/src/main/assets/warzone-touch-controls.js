@@ -1317,7 +1317,7 @@
         hud.classList.add("wt-modern");
         const commands = document.createElement("div");
         commands.className = "bn-command-group";
-        for (const page of ["build", "design", "factory", "queue", "stats"]) {
+        for (const page of ["build", "design", "factory", "queue"]) {
           const b = document.createElement("button");
           b.id = `wt-open-${page}`; b.type = "button"; b.textContent = page.toUpperCase();
           b.title = `Open ${page}`;
@@ -1412,7 +1412,7 @@
               Each lab completes your choices in order. Use <b>BACK TO BATTLE</b> to return.</p>
             <p><b>DESIGN</b> creates blueprints from researched parts. SAVE DESIGN keeps them on this device.
               <b>FACTORY</b> produces saved or existing designs with normal power and build time.
-              <b>STATS</b> opens player and kill statistics.</p></section>
+              </p></section>
           <section><h2>MUSIC</h2><p>Choose your tracks on the start screen before starting a battle. Download Music once, select your playlist, then press <b>START GAME</b>. Your choices are saved for the next game.</p></section>
         </div>
         <footer><span>The battle continues while this guide is open.</span>

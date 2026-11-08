@@ -1,0 +1,32 @@
+{
+  "passed": true,
+  "candidateAPK_SHA256": "f05b5b9b617efa620f0f7ec6165d84e4c243457928c23e4547c7ca932148e8b4",
+  "installedAPK_SHA256": "f05b5b9b617efa620f0f7ec6165d84e4c243457928c23e4547c7ca932148e8b4",
+  "emulatorTesting": true,
+  "gameplayTesting": true,
+  "checks": {
+    "statsRemoved": true,
+    "compactHeaderAndOverlayInput": true,
+    "researchAndBuildReturns": true,
+    "polishedNativeDialog": true,
+    "actualNavigationBack": true,
+    "cancelAndConfirmReturns": true
+  },
+  "sourceReports": [
+    {
+      "path": "qa/test-09/header/header.json",
+      "sha256": "35787265cab6447d405cafaa9a107fe610192d27333a1c886ac837e0446c8138"
+    },
+    {
+      "path": "qa/test-09/dialog/dialog.json",
+      "sha256": "a91e7875078217601ce72561f0d5715d315d0d31850832d27043a0d79a5debe0"
+    }
+  ],
+  "device": "emulator-5556",
+  "api": 36,
+  "limitations": [
+    "Exact APK tested on AndroidAPI36 emulator; the physical user handset was not connected.",
+    "Existing software-emulator black terrain remains; native JS/WASM/data, maps/scenario, research layout and other assets are unchanged from0.8. No new GPU/FPS/audio/HQ or30-wave claim.",
+    "One header test fixture initially looked at the HQ without visible constructors; its empty BUILD selection was expected. The fixture moved to the validated authored truck group and all scoped checks passed without runtime changes."
+  ]
+}

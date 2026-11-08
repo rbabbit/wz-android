@@ -5,16 +5,24 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageInfo;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.Point;
+import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.RippleDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowInsets;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.webkit.ConsoleMessage;
 import android.webkit.JavascriptInterface;
 import android.webkit.ValueCallback;
@@ -24,6 +32,7 @@ import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -64,6 +73,7 @@ public final class MainActivity extends Activity {
   private String battleOutcome = "";
   private AlertDialog mainMenuDialog;
   private boolean mainMenuReturnPending;
+  private int pendingBackKey = KeyEvent.KEYCODE_UNKNOWN;
   private FrameLayout loadingOverlay;
   private TextView loading;
   private ProgressBar loadingSpinner;
@@ -90,7 +100,9 @@ public final class MainActivity extends Activity {
     if (Build.VERSION.SDK_INT >= 33) {
       getOnBackInvokedDispatcher()
           .registerOnBackInvokedCallback(
-              OnBackInvokedDispatcher.PRIORITY_DEFAULT, this::onBackPressed);
+              // Own app navigation before a focused WebView/OEM callback.
+              // onBackPressed still gives an open IME first dismissal.
+              OnBackInvokedDispatcher.PRIORITY_OVERLAY, this::onBackPressed);
     }
     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
     touchTestMode = getIntent().getBooleanExtra("touch_test", false);
@@ -855,9 +867,17 @@ public final class MainActivity extends Activity {
         || !battleSession.equals(session) || battleSession.isEmpty()
         || !battleOutcome.isEmpty() || graphicsSetup != null || loadingOverlay != null
         || replayPanel != null || mainMenuReturnPending || mainMenuDialog != null) return;
+    Typeface dialogFace = Typeface.createFromAsset(getAssets(), "warzone/ui/Oswald.ttf");
+    TextView title = new TextView(this);
+    title.setText("Return to main menu?");
+    title.setTextColor(Color.WHITE);
+    title.setTextSize(18);
+    title.setTypeface(dialogFace);
+    title.setPadding(dp(20), dp(18), dp(20), dp(14));
     AlertDialog dialog =
         new AlertDialog.Builder(this)
             .setTitle("Return to main menu?")
+            .setCustomTitle(title)
             .setNegativeButton("Cancel", (ignored, which) -> cancelMainMenuReturn(session))
             .setPositiveButton("Return", (ignored, which) -> {
               if (webView == null || !battleSession.equals(session)) return;
@@ -883,6 +903,44 @@ public final class MainActivity extends Activity {
       }
     });
     dialog.show();
+    // Keep the treatment local to this confirmation; other native screens keep
+    // their existing theme and all navigation listeners above remain native.
+    GradientDrawable surface = new GradientDrawable();
+    surface.setColor(Color.BLACK);
+    surface.setCornerRadius(dp(6));
+    surface.setStroke(dp(1), 0xFF252B2F);
+    if (dialog.getWindow() != null) {
+      dialog.getWindow().setBackgroundDrawable(surface);
+      dialog.getWindow().setLayout(
+          Math.min(dp(320), getResources().getDisplayMetrics().widthPixels - dp(32)),
+          ViewGroup.LayoutParams.WRAP_CONTENT);
+      WindowManager.LayoutParams attributes = dialog.getWindow().getAttributes();
+      attributes.dimAmount = 0.42f;
+      dialog.getWindow().setAttributes(attributes);
+    }
+    for (int which : new int[] {AlertDialog.BUTTON_NEGATIVE, AlertDialog.BUTTON_POSITIVE}) {
+      Button button = dialog.getButton(which);
+      button.setTextColor(Color.WHITE);
+      button.setTextSize(14);
+      button.setTypeface(dialogFace);
+      button.setAllCaps(false);
+      button.setMinHeight(dp(48));
+      button.setMinimumHeight(dp(48));
+      button.setMinWidth(dp(88));
+      button.setMinimumWidth(dp(88));
+      button.setPadding(dp(16), 0, dp(16), 0);
+      GradientDrawable buttonSurface = new GradientDrawable();
+      buttonSurface.setColor(which == AlertDialog.BUTTON_POSITIVE ? 0xFF202426 : Color.TRANSPARENT);
+      buttonSurface.setCornerRadius(dp(4));
+      button.setBackgroundTintList(null);
+      button.setBackground(
+          new RippleDrawable(ColorStateList.valueOf(0x1AFFFFFF), buttonSurface, null));
+      ViewGroup.LayoutParams params = button.getLayoutParams();
+      if (params instanceof ViewGroup.MarginLayoutParams) {
+        ((ViewGroup.MarginLayoutParams) params).setMarginStart(dp(8));
+        button.setLayoutParams(params);
+      }
+    }
   }
 
   private void returnToMainMenu() {
@@ -1215,9 +1273,23 @@ public final class MainActivity extends Activity {
   }
 
   /** Keep existing bridge scripts in the engine frame's own JS realm. */
-  private static final class EngineWebView extends WebView {
+  private final class EngineWebView extends WebView {
     EngineWebView(Context context) {
       super(context);
+    }
+
+    @Override
+    public boolean onKeyPreIme(int keyCode, KeyEvent event) {
+      if (isGameBackKey(keyCode) && gameBackWindow()) {
+        // Do not let Chromium turn legacy Back into an engine Escape. When
+        // the keyboard is open, forward directly to the IME input stage.
+        if (isKeyboardVisible()) {
+          pendingBackKey = KeyEvent.KEYCODE_UNKNOWN;
+          return false;
+        }
+        return routeGameBackKey(event);
+      }
+      return super.onKeyPreIme(keyCode, event);
     }
 
     // The game is a fixed viewport. Android's focus reveal can scroll the
@@ -1294,6 +1366,68 @@ public final class MainActivity extends Activity {
     super.onDestroy();
   }
 
+  private static boolean isGameBackKey(int keyCode) {
+    return keyCode == KeyEvent.KEYCODE_BACK || keyCode == KeyEvent.KEYCODE_ESCAPE;
+  }
+
+  private boolean gameBackWindow() {
+    return webView != null && graphicsSetup == null && loadingOverlay == null
+        && replayPanel == null && musicSetup == null;
+  }
+
+  private boolean isKeyboardVisible() {
+    View decor = getWindow().getDecorView();
+    if (Build.VERSION.SDK_INT >= 30) {
+      WindowInsets insets = decor.getRootWindowInsets();
+      if (insets != null) return insets.isVisible(WindowInsets.Type.ime());
+    }
+    // API 26-29 has no IME visibility insets. Compare with the real screen,
+    // because adjustResize can shrink the decor itself above the keyboard.
+    Rect visible = new Rect();
+    Point screen = new Point();
+    decor.getWindowVisibleDisplayFrame(visible);
+    getWindowManager().getDefaultDisplay().getRealSize(screen);
+    int threshold = Math.max(Math.round(100 * getResources().getDisplayMetrics().density), screen.y / 5);
+    return screen.y - visible.bottom > threshold;
+  }
+
+  private void hideKeyboard() {
+    InputMethodManager keyboard = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+    if (keyboard != null) keyboard.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
+  }
+
+  private boolean routeGameBackKey(KeyEvent event) {
+    int keyCode = event.getKeyCode();
+    if (!isGameBackKey(keyCode) || !gameBackWindow()) return false;
+    if (isKeyboardVisible()) {
+      pendingBackKey = KeyEvent.KEYCODE_UNKNOWN;
+      if (event.getAction() == KeyEvent.ACTION_UP && !event.isCanceled()) hideKeyboard();
+      return true;
+    }
+    if (event.getAction() == KeyEvent.ACTION_DOWN) {
+      if (event.getRepeatCount() == 0) pendingBackKey = keyCode;
+      return true;
+    }
+    if (event.getAction() == KeyEvent.ACTION_UP) {
+      boolean route = pendingBackKey == keyCode && !event.isCanceled();
+      pendingBackKey = KeyEvent.KEYCODE_UNKNOWN;
+      if (route) {
+        Log.i(TAG, "Back routed before WebView: " + keyCode);
+        onBackPressed();
+      }
+      return true;
+    }
+    return true;
+  }
+
+  @Override
+  public boolean dispatchKeyEvent(KeyEvent event) {
+    // This is the post-IME fallback for legacy button/key delivery. Modern
+    // predictive Back continues through OnBackInvokedDispatcher above.
+    if (routeGameBackKey(event)) return true;
+    return super.dispatchKeyEvent(event);
+  }
+
   @Override
   public void onBackPressed() {
     if (mainMenuDialog != null) {
@@ -1301,6 +1435,10 @@ public final class MainActivity extends Activity {
       return;
     }
     if (mainMenuReturnPending) return;
+    if (gameBackWindow() && isKeyboardVisible()) {
+      hideKeyboard();
+      return;
+    }
     if (musicSetup != null) {
       closeMusicSetup();
       return;

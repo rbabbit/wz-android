@@ -1,0 +1,143 @@
+{
+  "passed": false,
+  "identity": {
+    "packageId": "com.rbabbit.warzonetowers.lab",
+    "device": "emulator-5556",
+    "candidateAPK_SHA256": "f05b5b9b617efa620f0f7ec6165d84e4c243457928c23e4547c7ca932148e8b4",
+    "installedPath": "/data/app/~~gofpfuVmY3VOhYd1G4Y3eQ==/com.rbabbit.warzonetowers.lab-RGFSXGDjzLkRBn4w1V_8gw==/base.apk"
+  },
+  "checks": {},
+  "returns": [
+    "factory",
+    "design",
+    "queue"
+  ],
+  "started": "2026-11-08T00:02:52.839Z",
+  "phoneDesigns": "{\"version\":1,\"designs\":[{\"id\":\"design-1794008136667-113\",\"name\":\"Design 2\",\"body\":\"Body1REC\",\"propulsion\":\"wheeled01\",\"turrets\":[\"MG1Mk1\"],\"cost\":55,\"points\":275,\"droidType\":0,\"factoryTemplate\":true},{\"id\":\"design-1794008147588-129\",\"name\":\"Lab Scout 54626\",\"body\":\"Body1REC\",\"propulsion\":\"wheeled01\",\"turrets\":[\"MG1Mk1\"],\"cost\":55,\"points\":275,\"droidType\":0},{\"id\":\"design-1794036575885-223\",\"name\":\"Truck Viper Wheels\",\"body\":\"Body1REC\",\"propulsion\":\"wheeled01\",\"turrets\":[\"Spade1Mk1\"],\"cost\":62,\"points\":310,\"droidType\":3,\"factoryTemplate\":true},{\"id\":\"design-1794036589502-235\",\"name\":\"Scout 97609\",\"body\":\"Body1REC\",\"propulsion\":\"wheeled01\",\"turrets\":[\"MG1Mk1\"],\"cost\":55,\"points\":275,\"droidType\":0},{\"id\":\"design-1794040213295-227\",\"name\":\"Scout 21399\",\"body\":\"Body1REC\",\"propulsion\":\"wheeled01\",\"turrets\":[\"MG1Mk1\"],\"cost\":55,\"points\":275,\"droidType\":0}]}",
+  "normal": {
+    "viewport": [
+      1077,
+      598
+    ],
+    "stats": false,
+    "box": {
+      "x": 0,
+      "y": 0,
+      "width": 1076.666748046875,
+      "height": 56,
+      "top": 0,
+      "right": 1076.666748046875,
+      "bottom": 56,
+      "left": 0
+    },
+    "buttons": [
+      {
+        "id": "warzone-towers-next-wave",
+        "text": "SKIP WAVE",
+        "x": 1010.4375,
+        "y": 7,
+        "w": 57.22916793823242,
+        "h": 30,
+        "hit": true
+      },
+      {
+        "id": "wt-open-build",
+        "text": "BUILD",
+        "x": 10,
+        "y": 10,
+        "w": 46.270835876464844,
+        "h": 36,
+        "hit": true
+      },
+      {
+        "id": "wt-open-design",
+        "text": "DESIGN",
+        "x": 57.270835876464844,
+        "y": 10,
+        "w": 52.395835876464844,
+        "h": 36,
+        "hit": true
+      },
+      {
+        "id": "wt-open-factory",
+        "text": "FACTORY",
+        "x": 110.66667175292969,
+        "y": 10,
+        "w": 59.82291793823242,
+        "h": 36,
+        "hit": true
+      },
+      {
+        "id": "wt-open-queue",
+        "text": "QUEUE",
+        "x": 171.48959350585938,
+        "y": 10,
+        "w": 48.375,
+        "h": 36,
+        "hit": true
+      },
+      {
+        "id": "blocknight-base",
+        "text": "BASE",
+        "x": 228.53125,
+        "y": 10,
+        "w": 61.333335876464844,
+        "h": 36,
+        "hit": true
+      },
+      {
+        "id": "blocknight-zoom-close",
+        "text": "NEAR",
+        "x": 298.53125,
+        "y": 10,
+        "w": 62.07291793823242,
+        "h": 36,
+        "hit": true
+      },
+      {
+        "id": "blocknight-zoom-battle",
+        "text": "BATTLE",
+        "x": 360.60418701171875,
+        "y": 10,
+        "w": 71.02083587646484,
+        "h": 36,
+        "hit": true
+      },
+      {
+        "id": "blocknight-zoom-map",
+        "text": "MAP",
+        "x": 431.625,
+        "y": 10,
+        "w": 57.84375,
+        "h": 36,
+        "hit": true
+      },
+      {
+        "id": "blocknight-tech",
+        "text": "TECH",
+        "x": 498.13543701171875,
+        "y": 10,
+        "w": 61.208335876464844,
+        "h": 36,
+        "hit": true
+      },
+      {
+        "id": "blocknight-help",
+        "text": "HELP",
+        "x": 560.34375,
+        "y": 10,
+        "w": 60.94791793823242,
+        "h": 36,
+        "hit": true
+      }
+    ]
+  },
+  "build": {
+    "group": [],
+    "selected": []
+  },
+  "failure": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert.ok(r.build.group.length&&r.build.selected.every(u=>u.constructor))\n\n    at C:\\timerApp\\wz-towers-lab\\tools\\test-09-header.cjs:14:389",
+  "failureScreen": "C:\\timerApp\\wz-towers-lab\\qa\\test-09\\header\\09-header-failure.png",
+  "pausedAt": 32502,
+  "finished": "2026-11-08T00:03:28.009Z"
+}

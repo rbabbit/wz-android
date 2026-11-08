@@ -1,0 +1,50 @@
+{
+  "passed": true,
+  "emulatorTesting": true,
+  "gameplayTesting": true,
+  "visualReview": true,
+  "version": "0.7",
+  "package": "com.rbabbit.warzonetowers.lab",
+  "candidateAPK_SHA256": "ba46094e485677985842c202d931c5109a29903c75c376389928676d3a918a40",
+  "reports": [
+    {
+      "path": "qa/test-07/package-verification.json",
+      "sha256": "fcc50a50eebd50b91776dc88bbe40b1e6ceba8a29cc8846c64cc01fe41efe459"
+    },
+    {
+      "path": "qa/test-07/code-checks.json",
+      "sha256": "7e4fdf01ffdda30b37c32d57422ac54c5e198b1a71e7be1322e7761ccda3f738"
+    },
+    {
+      "path": "qa/test-07/emulator-verification.json",
+      "sha256": "050b64bbf9d330fde61a1e7999b62d67e2f6ef9df1125f657754e934afbee2fb"
+    },
+    {
+      "path": "qa/test-07/visual-review.json",
+      "sha256": "89a6447fa35e25fbc5c767c823ef4e784a537f382e87b4999d537665024918d4"
+    }
+  ],
+  "supportingReports": [
+    {
+      "path": "qa/test-07/trucks-r1-cache-diagnostic/trucks.json",
+      "sha256": "e461685b368bd1296c7b696e9924cbdfa9e0159ab358ffd605b59005aa10aa39"
+    },
+    {
+      "path": "qa/test-07/diagnostics/systemui-active-app-tree-diagnostic.json",
+      "sha256": "1f73057cea9d8592be75552922d94e05ee3364d6f4c029d6611cebe238fbb49a"
+    },
+    {
+      "path": "qa/test-07/diagnostics/systemui-animation-tap-diagnostic.json",
+      "sha256": "45307c080ea1a34b5fa2c2b859a4b1748fc3300cbd33a9b2da815cb569460827"
+    },
+    {
+      "path": "qa/test-07/diagnostics/r2-recording-listener-diagnostic.json",
+      "sha256": "471c0d1f207d99cebbf8a6f5f4553e97eb982484f18ef3e5974f957f77e61ed2"
+    }
+  ],
+  "limitations": [
+    "Android API36 emulator only; the user physical handset and other Android/OEM versions were not available. Actual SystemUI three-button Back, real Escape111 and modern-dispatched Back4 were exercised; the extracted Java regression covers the legacy Back4 sequence.",
+    "Black terrain is an existing emulator rendering limitation in baseline0.6 and candidate0.7. No engine or terrain rendering change is part of this delivery.",
+    "Fresh truck verification retains small localized native selection feedback. Verified stationary repeat selection uses no drag gesture."
+  ]
+}

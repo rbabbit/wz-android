@@ -1,0 +1,123 @@
+{
+  "passed": true,
+  "candidateAPK_SHA256": "751c90f6bb2ec1c1ec2286fabe1e499bc95234e2a2ce8198f763e1876098a3e0",
+  "recordedUTC": "2026-11-07T22:59:35.434772Z",
+  "scope": "Focused current runtime source regressions: extracted Java Back routing, HTML/page/lifecycle returns, actual scenario research queues, input modes and current research JS syntax. Archived legacy sidebar tests are excluded. These checks do not establish visual layout or emulator behaviour; those require separate exact-installed-APK evidence.",
+  "tests": [
+    {
+      "name": "test-android-back-routing.cjs",
+      "passed": true,
+      "exitCode": 0,
+      "elapsedMs": 1042,
+      "output": "PASS: actual Java legacy/pre-IME Back and Escape routing, repeat/cancel/orphan guards, IME priority and non-game fallback"
+    },
+    {
+      "name": "test-html-return.cjs",
+      "passed": true,
+      "exitCode": 0,
+      "elapsedMs": 111,
+      "output": "PASS: consumed transport, exact in-flight/loaded/dead-lab queues, phone template persistence/rollback, research gating, preserved draft, results and Back navigation (code checks only)"
+    },
+    {
+      "name": "test-html-page-return.cjs",
+      "passed": true,
+      "exitCode": 0,
+      "elapsedMs": 69,
+      "output": "PASS: paused HTML page return restores iframe input/focus without a native acknowledgement; tracked native close stays ordered and independent"
+    },
+    {
+      "name": "test-test-lifecycle.cjs",
+      "passed": true,
+      "exitCode": 0,
+      "elapsedMs": 75,
+      "output": "PASS: authoritative lifecycle, save flush, guarded restore and session-scoped Cancel/Return confirmation without native Escape (code checks only)"
+    },
+    {
+      "name": "test-research-queue-bridge.cjs",
+      "passed": true,
+      "exitCode": 0,
+      "elapsedMs": 70,
+      "output": "PASS: actual Towers bridge validates atomic ordered queues, game-time estimates, module rates and waiting power"
+    },
+    {
+      "name": "test-html-input-modes.cjs",
+      "passed": true,
+      "exitCode": 0,
+      "elapsedMs": 74,
+      "output": "PASS: Patrol/Queue cancellation, one-Escape Back and ended-battle native input isolation (code checks only)"
+    },
+    {
+      "name": "syntax-current-research-js",
+      "passed": true,
+      "exitCode": 0,
+      "elapsedMs": 85,
+      "output": ""
+    }
+  ],
+  "sourceFiles": [
+    {
+      "path": "app/build.gradle.kts",
+      "sha256": "789690d78c1d009972cc746a253139fa60434f7eab6287f36134997219ba1ca8"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MainActivity.java",
+      "sha256": "5d327988673841f22a9586aa1bc92159aaf7f5a5a7553cb24d773ad0b6263231"
+    },
+    {
+      "path": "app/src/main/assets/warzone-mobile-research.js",
+      "sha256": "7e1bc11c8356985eccece46b79b3765b5fa26f3dcab0e2e71899d02ca12b9bfa"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/lab-research.css",
+      "sha256": "0b8a5b1b221dc68eaabb6289e559e3d93ee95a8158fc0ba2b6d39a43d85c6398"
+    },
+    {
+      "path": "app/src/main/assets/warzone-command-pages.js",
+      "sha256": "2dd5064677cd8e54550a936c17301ad68b141a15e4ab27546be9be60352deae0"
+    },
+    {
+      "path": "app/src/main/assets/warzone-touch-controls.js",
+      "sha256": "b3df4b0849340c1cc2c4f5811cfde1fd21b0b36f38769f05b422c197b97e06e6"
+    },
+    {
+      "path": "app/src/main/assets/warzone-html-session.js",
+      "sha256": "f5038286e96a68b9e73b0273bec27c665f2b2db99a10fa9fdbc664c492a0181a"
+    },
+    {
+      "path": "app/src/main/assets/warzone/mobile.html",
+      "sha256": "a04071930c9e06e7283a198a37d28c56da124f42005b34732a1deff9ee33fbf6"
+    },
+    {
+      "path": "scenario/warzone-towers-commands.js",
+      "sha256": "7b1f6b226327e9f8c2f265fac42b890b468ddc61bacc5e59d95739b15e661b82"
+    },
+    {
+      "path": "scenario/warzone-towers-bridge.js",
+      "sha256": "223d303dee24b15625116cf2ee711a0ad7796efea42d6d7e55bae36e055ca2aa"
+    },
+    {
+      "path": "tools/test-android-back-routing.cjs",
+      "sha256": "2d0213d3f8cd99f4087778d805f9c5f099e2a4c20aae9d1b87d3bd27c303312d"
+    },
+    {
+      "path": "tools/test-html-return.cjs",
+      "sha256": "c021c4cced156ac271dec6f31827b9b5a54cd6b6a14c96490d4fa897f9f64d05"
+    },
+    {
+      "path": "tools/test-html-page-return.cjs",
+      "sha256": "b594b18174a7d79409a60c968404398dcbdd3ecb3bfb2a6c93ef4c86008dda19"
+    },
+    {
+      "path": "tools/test-test-lifecycle.cjs",
+      "sha256": "045a55b9f31a5b50af2a841b4611f6fd45e2d8f46a5fc56d0c764f00e76dc597"
+    },
+    {
+      "path": "tools/test-research-queue-bridge.cjs",
+      "sha256": "175b2def7ba3911e992141caa95422e5a199e10bfd14e059cd54f6d132be05f3"
+    },
+    {
+      "path": "tools/test-html-input-modes.cjs",
+      "sha256": "ad578cbaecc5cdeff491ca2b29dbc7618a787055d231d6a5a85ff474e76855db"
+    }
+  ]
+}

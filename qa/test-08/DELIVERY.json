@@ -1,0 +1,43 @@
+{
+  "passed": true,
+  "emulatorTesting": true,
+  "gameplayTesting": true,
+  "visualReview": true,
+  "version": "0.8",
+  "package": "com.rbabbit.warzonetowers.lab",
+  "candidateAPK_SHA256": "751c90f6bb2ec1c1ec2286fabe1e499bc95234e2a2ce8198f763e1876098a3e0",
+  "reports": [
+    {
+      "path": "qa/test-08/package-verification.json",
+      "sha256": "1a3abfd7334c83263a32f06e6f8c52d401ab2161ca4f38c849e29009b2ee01a7"
+    },
+    {
+      "path": "qa/test-08/code-checks.json",
+      "sha256": "d6f16ca0ba93319eb52ca85a09f58f47ac773bd15ed953da662cae43c7e60c78"
+    },
+    {
+      "path": "qa/test-08/emulator-verification.json",
+      "sha256": "32101d5db3721a67bf8edb99f8aed8b59f1b3f329994f34ef674a13bec2390e1"
+    },
+    {
+      "path": "qa/test-08/visual-review.json",
+      "sha256": "cbdc430e5f05c7f7e63c4a98e22c30e33c890608f9b661cf16e7c760106130bd"
+    }
+  ],
+  "supportingReports": [
+    {
+      "path": "qa/test-08/research/research-wide-fixture-diagnostic.json",
+      "sha256": "b75f85602b211e92f803433402f3d6a190dffa209f40e03d94940e770781f37b"
+    },
+    {
+      "path": "qa/test-08/research/research-ui-reconcile-fixture-diagnostic.json",
+      "sha256": "b0078805892166ece72c721d27b582247f2e4390ff7760510ab8768d249c5275"
+    }
+  ],
+  "limitations": [
+    "Exact APK tested on Android API36 emulator. The physical user handset and other Android/OEM versions were not available; no tablet-wide compatibility claim.",
+    "Existing software-emulator black terrain rendering remains. Native engine, graphics payload, maps, truck controls and all other UI assets are byte-identical to0.7. Physical GPU/FPS/audio/HQ pack and a complete30-wave victory were outside this scoped UI change.",
+    "Gameplay used four authored Iron Valley laboratories with their original modules. Horizontal overflow stress narrowed the existing four real UI lab buttons to140px temporarily; it did not add native laboratories or claim15-lab gameplay.",
+    "Two fixture corrections preserved earlier passing observations on the same exact APK: the wide override initially made a portrait letterbox, and fake DOM lab nodes were reconciled back to the actual native count. The corrected wide landscape profile and four-real-button width stress passed; no runtime changes were made to recover the tests."
+  ]
+}

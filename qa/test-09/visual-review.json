@@ -1,0 +1,52 @@
+{
+  "passed": true,
+  "candidateAPK_SHA256": "f05b5b9b617efa620f0f7ec6165d84e4c243457928c23e4547c7ca932148e8b4",
+  "reviewed": true,
+  "screenshots": [
+    {
+      "path": "qa/test-09/header/lab-09-header-no-stats.png",
+      "sha256": "0112e643bb9e5e01762bee4fdfa6847bdb4a6fc718ee7eb78415e14fb3cc5c03",
+      "accepted": true
+    },
+    {
+      "path": "qa/test-09/header/lab-09-header-compact.png",
+      "sha256": "84987619ab0e8d5fcaa680d7889ecd15f4c67321914d062138b9805c523094ae",
+      "accepted": true
+    },
+    {
+      "path": "qa/test-09/header/lab-09-research-unchanged.png",
+      "sha256": "9bd174fc03ec91b18d8bea25e147d008fe4a1db9468c84e643bf91a16c357c9f",
+      "accepted": true
+    },
+    {
+      "path": "qa/test-09/header/lab-09-build-native-highlights.png",
+      "sha256": "9a7a15e5672288e7182025a4e94d48e57c91427b3159be1d01834358aea667fe",
+      "accepted": true
+    },
+    {
+      "path": "qa/test-09/dialog/dialog-cancel-1.png",
+      "sha256": "5f992c37b24dd5d53bad610c2fc9be5c9cb48971d422771f294b336abb0cbf7c",
+      "accepted": true
+    },
+    {
+      "path": "qa/test-09/dialog/dialog-direct-main-menu.png",
+      "sha256": "ecc3c1486244d55d9dd78d80a771eb3ef8b5e58c966b1bb6c408b47e8e64a5c5",
+      "accepted": true
+    },
+    {
+      "path": "qa/test-09/dialog/dialog-fresh-battle-cancel.png",
+      "sha256": "ac66c8977c0552e19ed68a72c04639c6b7aa3d084cacbe06b1e68dd52f4a7010",
+      "accepted": true
+    }
+  ],
+  "observations": [
+    "STATS removed from normal/compact top bar and Help; remaining controls visible, reachable and working.",
+    "Accepted research layout3 remains unchanged. BUILD immediately accepts first item and genuine visible constructors carry native highlights.",
+    "Native return prompt uses existing game Oswald, compact black surface/faint edge, flat Cancel and subtle charcoal Return; no bright white outlined boxes. Five confirmations and six actual SystemUI Back taps passed."
+  ],
+  "limitations": [
+    "Exact APK tested on AndroidAPI36 emulator; the physical user handset was not connected.",
+    "Existing software-emulator black terrain remains; native JS/WASM/data, maps/scenario, research layout and other assets are unchanged from0.8. No new GPU/FPS/audio/HQ or30-wave claim.",
+    "One header test fixture initially looked at the HQ without visible constructors; its empty BUILD selection was expected. The fixture moved to the validated authored truck group and all scoped checks passed without runtime changes."
+  ]
+}

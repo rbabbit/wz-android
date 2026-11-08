@@ -2,7 +2,7 @@
 (() => {
   "use strict";
 
-  const VERSION = 37;
+  const VERSION = 38;
   const QUEUE_COMMAND_PATH = "/data/mp/multiplay/script/rules/blocknight-queue-command.json";
   const CATEGORIES = ["ALL", "WEAPONS", "DEFENCE", "VEHICLES", "CYBORG", "SYSTEMS", "STRUCTURES"];
 
@@ -337,12 +337,12 @@
         <section class="bn-tech-browser">
           <div class="bn-tech-browser-head"><h2 class="bn-tech-browser-title">ALL TECHNOLOGIES</h2><span><b class="bn-tech-available-count">0</b> AVAILABLE NOW</span></div>
           <div class="bn-tech-list" role="list"></div>
-          <section class="bn-tech-preview" aria-label="Catalogue selection">
+        </section>
+        <section class="bn-tech-preview" aria-label="Catalogue selection">
             <img class="bn-tech-detail-image" src="research-icons/Research%20Module.gif" alt="">
             <div class="bn-tech-preview-copy"><small class="bn-tech-preview-label">SELECTED RESEARCH</small><strong class="bn-tech-detail-name">SELECT A TECHNOLOGY</strong><div class="bn-tech-preview-metrics"><span class="bn-tech-detail-category"></span><span>PTS <b class="bn-tech-detail-points">—</b></span><span>POWER <b class="bn-tech-detail-cost">—</b></span></div><b class="bn-tech-detail-status">WAITING</b></div>
             <button class="bn-tech-assign" type="button">ADD TO LAB 1 QUEUE</button>
             <p class="bn-tech-error" role="status"></p>
-          </section>
         </section>
         <aside class="bn-tech-detail" aria-label="Selected laboratory research">
           <h2><span><b class="bn-tech-selected-lab">LAB 1</b> RESEARCH</span><small class="bn-tech-lab-total">0 ITEMS</small></h2>

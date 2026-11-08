@@ -1,0 +1,38 @@
+{
+  "passed": true,
+  "candidateAPK_SHA256": "f05b5b9b617efa620f0f7ec6165d84e4c243457928c23e4547c7ca932148e8b4",
+  "version": "0.9",
+  "package": "com.rbabbit.warzonetowers.lab",
+  "emulatorTesting": true,
+  "gameplayTesting": true,
+  "visualReview": true,
+  "reports": [
+    {
+      "path": "qa/test-09/package-verification.json",
+      "sha256": "13a07a0c27a0ff7fef60cf496dd73bece6be569f3df0a8e21c6e264d7ee74110"
+    },
+    {
+      "path": "qa/test-09/code-checks.json",
+      "sha256": "5df0605d0aaf377e70edb9a5bab127f325348c7d1824ea4772372adf217ca07c"
+    },
+    {
+      "path": "qa/test-09/emulator-verification.json",
+      "sha256": "81db5d2db51305d2ec2342886d7d31c6a57ef04effb19012395cd13577e7f78d"
+    },
+    {
+      "path": "qa/test-09/visual-review.json",
+      "sha256": "a8cc06d6258cc2ecdef10bfaec80b9536f6539ae90de7072dd3b7bfe6a68ff79"
+    }
+  ],
+  "supportingReports": [
+    {
+      "path": "qa/test-09/header/header-no-visible-trucks-fixture-diagnostic.json",
+      "sha256": "85ac7d7ec1740d4c28603f68529cc37d71e9a9a46937f9d367b2e2b856d3ea4b"
+    }
+  ],
+  "limitations": [
+    "Exact APK tested on AndroidAPI36 emulator; the physical user handset was not connected.",
+    "Existing software-emulator black terrain remains; native JS/WASM/data, maps/scenario, research layout and other assets are unchanged from0.8. No new GPU/FPS/audio/HQ or30-wave claim.",
+    "One header test fixture initially looked at the HQ without visible constructors; its empty BUILD selection was expected. The fixture moved to the validated authored truck group and all scoped checks passed without runtime changes."
+  ]
+}

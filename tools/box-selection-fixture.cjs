@@ -1,6 +1,6 @@
 'use strict';
-// Test-only native renderer oracle: screen centres are independent of the
-// integer script tiles, exactly as for workers which have finished moving.
+// Test-only native renderer oracle: centres are off-centre within whole script
+// tiles. The same physical camera projects full volumes, never guessed clicks.
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
 const source=fs.readFileSync('app/src/main/assets/warzone-command-pages.js','utf8');
 function fixture(options={}){
@@ -16,7 +16,8 @@ function fixture(options={}){
  if(options.mixed)units.push({id:201,x:8,y:70,z:3,sx:605,sy:301,constructor:false},{id:202,x:7,y:70,z:3,sx:552,sy:340,constructor:false});
  if(options.overlap)units.push({id:203,x:8,y:70,z:3,sx:591,sy:302,constructor:false});
  if(options.empty)for(const u of units.slice(0,2))u.sx=-50;
- for(const u of units){u.order=0;u.queued=u.constructor?2:0;u.position=[u.x*128+19,u.y*128+126,384];}
+ function place(u,x=u.sx,y=u.sy){u.sx=x;u.sy=y;u.position=[(x-200)/37*128,(y-100+6.75)/25*128,384];u.x=Math.floor(u.position[0]/128);u.y=Math.floor(u.position[1]/128);u.z=3;}
+ for(const u of units){u.order=0;u.action=0;u.queued=u.constructor?2:0;place(u);}
  let selected=[3],ended=false,player=0,context,held=null,holdNext=Boolean(options.hold),background=false;
  const boxes=[],requests=[],handled=new Set(),notices=[],unsafeMoves=[];
  const state={pending:new Map(),serial:0,selectionSerial:0,selectionEventSerial:0,autoSelectionRevision:0,nativeBuildGroup:[],selectionPromise:null,
@@ -51,7 +52,7 @@ function fixture(options={}){
  context=vm.createContext({state,Date,Promise,Map,Set,Number,Math,flush,innerWidth:1000,innerHeight:600,
   setTimeout:(fn,ms)=>ms===4500?0:setTimeout(fn,ms),clearTimeout,setInterval,clearInterval,element:id=>nodes.get(id)||null,
   host:{innerWidth:1000,innerHeight:660,getComputedStyle:e=>e.css},doc:{body:{dataset:{}}},
-  window:{__towersHtml:{isEnded:()=>ended},__kalaWarzoneTouch:touch,WarzoneTerrain:{active(){},project(){throw Error('No quantized position projection is allowed');}},WarzoneBuildDisplay:{clearPreview(){},reject(){}}},
+  window:{__towersHtml:{isEnded:()=>ended},__kalaWarzoneTouch:touch,WarzoneTerrain:{active(){},async refresh(timeout,cameraOnly){assert.equal(cameraOnly,true,'truck selection observes the camera without reading terrain geometry');return true;},project(x,y,z){return{x:x/128*37+200,y:y/128*25+100-z/128*2};}},WarzoneBuildDisplay:{clearPreview(){},reject(){}}},
   document:{getElementById:()=>({setAttribute(){},querySelector(){return null;}})},
   availableBuildings:()=>[{id:'PillBox1'},{id:'GuardTower1'}],renderSidebar(){},updateHUD(){},updateSidebarQueue(){},reconcileModuleRequests(){},requestState(){},previewAt:(x,y)=>({x,y}),reason:x=>x,send});
  vm.runInContext(source.slice(source.indexOf('  function notify('),source.indexOf('  function image(')),context);
@@ -60,7 +61,7 @@ function fixture(options={}){
  vm.runInContext(source.slice(source.indexOf('  function selectedBuildGroup('),source.indexOf('  async function openBuild(')),context);
  vm.runInContext(source.slice(source.indexOf('  function beginPlacement('),source.indexOf('  function nativeBuildTap(')),context);
  vm.runInContext(source.slice(source.indexOf('  function placeAt('),source.indexOf('  let validationTimer;')),context);
- return{context,state,units,boxes,requests,notices,nodes,bounds,camera,unsafeMoves,snapshot,setPlayer:value=>player=value,selected:()=>selected,
+ return{context,state,units,boxes,requests,notices,nodes,bounds,camera,unsafeMoves,snapshot,moveScreen:(id,x,y)=>place(units.find(u=>u.id===id),x,y),setPlayer:value=>player=value,selected:()=>selected,
   release:()=>{assert.ok(held,'a native rectangle is held');held(true);},
   manual:ids=>{selected=ids;state.snapshot=snapshot();state.selectionEventSerial++;camera.manualSelectionRevision++;},
   cancel:()=>{state.selectionSerial++;touch.releaseAll(true);},end:()=>{ended=true;state.selectionSerial++;touch.releaseAll(true);}};

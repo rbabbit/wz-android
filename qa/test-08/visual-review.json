@@ -1,0 +1,58 @@
+{
+  "passed": true,
+  "reviewed": true,
+  "candidateAPK_SHA256": "751c90f6bb2ec1c1ec2286fabe1e499bc95234e2a2ce8198f763e1876098a3e0",
+  "screenshots": [
+    {
+      "path": "qa/test-08/research/lab-08-research-selected-layout.png",
+      "sha256": "ec271abf44a97f354fb5cf884463d3e02a4d03136c935a2e8cdbfb62ea3a42a3",
+      "accepted": true
+    },
+    {
+      "path": "qa/test-08/research/lab-08-research-active-and-two-queued.png",
+      "sha256": "0bc3e8581501738a94aa7a9fc9dcf34abd86cac1b3e32b5041dc6220bb5e27ee",
+      "accepted": true
+    },
+    {
+      "path": "qa/test-08/research/lab-08-research-compact-enlarged.png",
+      "sha256": "ca5fdec92d67b80814eec9ef8d61d5a80f62da4f861684e55192ac9feafbbb5e",
+      "accepted": true
+    },
+    {
+      "path": "qa/test-08/research/lab-08-research-wide-phone.png",
+      "sha256": "dde2635d5049a04531f2796487e8afdbfce2e0e11190b9bcbb0749695f0efc4a",
+      "accepted": true
+    },
+    {
+      "path": "qa/test-08/research/lab-08-research-native-completed-and-advanced.png",
+      "sha256": "0cdbbedce9153e0ba0c0841d05e862d91c2bbe571c417540446d93684adbc41f",
+      "accepted": true
+    },
+    {
+      "path": "qa/test-08/dialog/dialog-cancel-1.png",
+      "sha256": "0414f80ea7e9f1f20ec761f691fe46cee0255063e6fb1fd5c7c619a5634fdf23",
+      "accepted": true
+    },
+    {
+      "path": "qa/test-08/dialog/dialog-direct-main-menu.png",
+      "sha256": "ecc3c1486244d55d9dd78d80a771eb3ef8b5e58c966b1bb6c408b47e8e64a5c5",
+      "accepted": true
+    },
+    {
+      "path": "qa/test-08/dialog/dialog-fresh-battle-cancel.png",
+      "sha256": "3a7a6fb193dc7d513635fb753ce8adc922d1bdcd4ba766fbe8e3aad2c968d360",
+      "accepted": true
+    }
+  ],
+  "observations": [
+    "Normal layout matches selected mock3: larger real research thumbnails left, narrow selected-research middle, active lab/queue right and horizontal lab/filter controls above.",
+    "Actual active topic and two waiting items were visible. Compact854x480 with font1.3/control1.4 and wide2400x1080 layouts fit; the middle action remained reachable.",
+    "Native confirmation uses black surface and white title, action text and outlines. Actual measured buttons are88x48dp; confirmed Return opens the custom main menu and a fresh battle shows its own confirmation."
+  ],
+  "limitations": [
+    "Exact APK tested on Android API36 emulator. The physical user handset and other Android/OEM versions were not available; no tablet-wide compatibility claim.",
+    "Existing software-emulator black terrain rendering remains. Native engine, graphics payload, maps, truck controls and all other UI assets are byte-identical to0.7. Physical GPU/FPS/audio/HQ pack and a complete30-wave victory were outside this scoped UI change.",
+    "Gameplay used four authored Iron Valley laboratories with their original modules. Horizontal overflow stress narrowed the existing four real UI lab buttons to140px temporarily; it did not add native laboratories or claim15-lab gameplay.",
+    "Two fixture corrections preserved earlier passing observations on the same exact APK: the wide override initially made a portrait letterbox, and fake DOM lab nodes were reconciled back to the actual native count. The corrected wide landscape profile and four-real-button width stress passed; no runtime changes were made to recover the tests."
+  ]
+}

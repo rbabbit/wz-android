@@ -43,5 +43,11 @@ console.log('PASS: perspective terrain picking, projection, native GL delegation
  matrix=Float32Array.from(matrix);matrix[12]+=.2;gl.useProgram(optimizedProgram);gl.drawElements(0,6,11,0);
  assert.ok(picker.report().observations>previous);waiting.shift()();assert.equal(await refresh,true);
  assert.ok(picker.project(64,64,0).x>optimizedPoint.x,'selection receives the newly rendered camera after an inactive pan');
+ const reads=picker.report().reads,gpuReads=picker.report().gpuBufferReads;let warms=0;
+ gl.bindBuffer(20,vb);gl.bufferSubData(20,0,vertices);
+ c.setTimeout=(fn,ms)=>{if(ms===16)waiting.push(fn);else if(ms===100)warms++;};
+ const cameraOnly=picker.refresh(1500,true);
+ gl.useProgram(optimizedProgram);gl.drawElements(0,6,11,0);waiting.shift()();
+ assert.equal(await cameraOnly,true);assert.equal(picker.report().reads,reads,'camera-only selection does not refresh the terrain mesh');assert.equal(picker.report().gpuBufferReads,gpuReads,'camera-only selection never reads GPU buffers');assert.equal(warms,0,'camera-only selection does not schedule a later mesh warm-up');
  console.log('PASS: fresh camera observation waits for a new native terrain draw instead of a stale retained matrix');
 })().catch(error=>{console.error(error);process.exitCode=1;});

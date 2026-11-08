@@ -246,6 +246,7 @@ public final class MainActivity extends Activity {
                 startWithGraphics(mode);
               }
             });
+    musicSetup.setCompactTowers(!"duel".equals(graphicsSetup != null ? graphicsSetup.selectedMatchMode() : matchMode));
     musicSetup.setCached(musicCached, musicEnabled);
     root.addView(musicSetup, new FrameLayout.LayoutParams(-1, -1));
   }
@@ -943,7 +944,7 @@ public final class MainActivity extends Activity {
     GradientDrawable surface = new GradientDrawable();
     surface.setColor(Color.BLACK);
     surface.setCornerRadius(dp(6));
-    surface.setStroke(dp(1), 0xFF252B2F);
+    if (isDuelBattle()) surface.setStroke(dp(1), 0xFF252B2F);
     if (dialog.getWindow() != null) {
       dialog.getWindow().setBackgroundDrawable(surface);
       dialog.getWindow().setLayout(

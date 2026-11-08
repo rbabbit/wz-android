@@ -1,0 +1,64 @@
+{
+  "passed": true,
+  "verification": "QA harness/input-method provenance only; no journey, native order, completion or visual acceptance is established by this report.",
+  "candidateAPK_SHA256": "81e08ca7fb3cc511c03be5177fa1656261f9bf510275fd174f7a22cbecf65237",
+  "recordedUTC": "2026-11-08T21:58:54.383977Z",
+  "declaredRootInvocation": {
+    "environment": {
+      "WZ_QA_UI_INPUT": "trusted-cdp"
+    },
+    "declaredBy": "Root agent actual invocation, explicitly confirmed in release coordination",
+    "scope": "R5 HTML-control journeys use standard trusted dispatchTouchEvent. Retained older cases keep their original recorded APK identity and input method."
+  },
+  "htmlControls": {
+    "method": "Input.dispatchTouchEvent",
+    "durationMs": 60,
+    "tapCount": 1,
+    "gestureSourceType": "touch",
+    "isTrustedObserved": true,
+    "programmaticDOMClick": false,
+    "guards": [
+      "Expected app is foreground",
+      "Real element enabled with nonzero bounds",
+      "Real centre belongs to target under elementFromPoint",
+      "scrollIntoView and paint before measuring touch position"
+    ],
+    "timing": "Ordered touchStart and touchEnd with explicit start+0.06 timestamps; end scheduled after60ms without waiting for the start acknowledgement.",
+    "experimentalCompositorGesture": false
+  },
+  "osInputRetained": [
+    "World selection, movement and building-placement ctl.touch",
+    "Native Android UI nativeTap",
+    "System Android Back and IME typing",
+    "Research-grid, Help-body and Factory-roster real ADB swipes"
+  ],
+  "trustedTouchProof": {
+    "path": "qa/test-14/standard-touch-proof/trusted-touch.json",
+    "sha256": "3f7750d7d91f7913e285a1f058ea31ce939190b932baa58c15ce1f4c9f548602",
+    "candidateAPK_SHA256": "81e08ca7fb3cc511c03be5177fa1656261f9bf510275fd174f7a22cbecf65237"
+  },
+  "nativeLiveHelper": {
+    "path": "tools/native-live.cjs",
+    "sha256": "e3a4bdf48bc170ec5a16d073150bea370b731885d8112d1de1ff314edc54be3b"
+  },
+  "limitation": "Standard trusted CDP Input.dispatchTouchEvent touchStart/touchEnd use explicit 60 ms timestamps against the actual installed emulator WebView and normal UI handlers. No current experimental compositor gesture API or DOM click is used; physical-handset dispatch latency is not certified.",
+  "diagnosticScope": "This new actual standard-touch proof belongs to R5. Earlier compositor diagnosis and the pre-R5 native WebView SIGTRAP remain separate historical QA/platform diagnostics; no application crash repair is claimed.",
+  "observedTrustedDurationsMs": [
+    60,
+    60.025000005960464
+  ],
+  "historicalDiagnostics": [
+    {
+      "path": "qa/test-14/subnav-diagnosis-trusted/compositor-tap.json",
+      "sha256": "66cb7e1a26f1af70b21ea747307992519d5e7fa940bf505528cb3b02dc30f267"
+    },
+    {
+      "path": "qa/test-14/diagnostics/webview-crash/exit-info.txt",
+      "sha256": "ab5dd73e60d75c6a814fcbba918da8204034bf9201fd66757a4f529da9c6e47a"
+    },
+    {
+      "path": "qa/test-14/diagnostics/webview-crash/native-stack.txt",
+      "sha256": "69e522b262acd00ca11b6488417389a445995f63c1b0fd1fafce107dc8e72400"
+    }
+  ]
+}

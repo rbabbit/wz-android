@@ -1,0 +1,38 @@
+{
+  "reviewed": false,
+  "purpose": "Full actual screenshot beside approved reference; isotropic resizing/letterboxing only, no cropped or fabricated content. Root manual review remains required.",
+  "inputs": [
+    {
+      "role": "reference",
+      "path": "docs/ui-0.14/approved-design.png",
+      "sha256": "818838158bf62f47c849b5286aa44009eb1387edeb31bbc347756a0442360cb0",
+      "originalSize": [
+        1920,
+        819
+      ],
+      "displaySize": [
+        1000,
+        427
+      ],
+      "scale": 0.5208333333333334
+    },
+    {
+      "role": "actual",
+      "path": "qa/test-14/final-commands-r5/lab-14-compact-design-lower-picker-confirm.png",
+      "sha256": "c63427241ec07082a98b19b864e7f3680729854abd2d99207e8684009370ed5e",
+      "originalSize": [
+        854,
+        480
+      ],
+      "displaySize": [
+        1000,
+        562
+      ],
+      "scale": 1.17096018735363
+    }
+  ],
+  "output": {
+    "path": "qa/test-14/comparisons/design-compact-full.png",
+    "sha256": "2c845394ae63fb334df2787c959146d7bd7bc9ace368eb3c4fd46b6f9964d810"
+  }
+}

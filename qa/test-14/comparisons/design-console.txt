@@ -1,0 +1,38 @@
+{
+  "reviewed": false,
+  "purpose": "Full actual screenshot beside approved reference; isotropic resizing/letterboxing only, no cropped or fabricated content. Root manual review remains required.",
+  "inputs": [
+    {
+      "role": "reference",
+      "path": "docs/ui-0.14/approved-design.png",
+      "sha256": "818838158bf62f47c849b5286aa44009eb1387edeb31bbc347756a0442360cb0",
+      "originalSize": [
+        1920,
+        819
+      ],
+      "displaySize": [
+        1000,
+        427
+      ],
+      "scale": 0.5208333333333334
+    },
+    {
+      "role": "actual",
+      "path": "qa/test-14/final-commands-r5/lab-14-normal-current-assets-smoke-design.png",
+      "sha256": "bb16b10822f3a1a2c60d95ceb6e523051fa2775516e698d2c04db841df89f50a",
+      "originalSize": [
+        1080,
+        600
+      ],
+      "displaySize": [
+        1000,
+        556
+      ],
+      "scale": 0.9259259259259259
+    }
+  ],
+  "output": {
+    "path": "qa/test-14/comparisons/design-full.png",
+    "sha256": "564516c3993cd8a854b35fc00834d1eacd7225c8058816b543ea29982ce42e13"
+  }
+}

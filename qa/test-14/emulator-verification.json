@@ -1,0 +1,236 @@
+{
+  "passed": true,
+  "candidateAPK_SHA256": "81e08ca7fb3cc511c03be5177fa1656261f9bf510275fd174f7a22cbecf65237",
+  "installedAPK_SHA256": "81e08ca7fb3cc511c03be5177fa1656261f9bf510275fd174f7a22cbecf65237",
+  "version": "0.14",
+  "package": "com.rbabbit.warzonetowers.lab",
+  "emulatorTesting": true,
+  "gameplayTesting": true,
+  "recordedUTC": "2026-11-08T22:31:16.915022Z",
+  "checks": {
+    "duelPreserved": true,
+    "footerAndStatusPreserved": true,
+    "tenFactories": true,
+    "compactNormalLayouts": true,
+    "manualResearchAndQueues": true,
+    "currentCandidateNativeProduction": true,
+    "buildMovementAndGestures": true,
+    "phoneSaveAndKeyboard": true,
+    "menuAndInputReturns": true,
+    "nativeProductionAndQueues": true,
+    "fiveLabs": true,
+    "pageInventoryCovered": true
+  },
+  "sourceReports": [
+    {
+      "path": "qa/test-14/final-commands-r5/commands.json",
+      "sha256": "808c2cb7007157e281ba86142850de16475f03fa80d9de5f47d94a559df48250"
+    },
+    {
+      "path": "qa/test-14/final-build-r5/build.json",
+      "sha256": "a3dc1f8aaec655d088664a2fa79b920c325ad728927404bb3940fc120f3e3c2c"
+    },
+    {
+      "path": "qa/test-14/final-max-r5/max.json",
+      "sha256": "e7f6c2a807666cc4dbd2c9ca1fee7ee00fef2f8cfc145f777720947dfcfdf737"
+    },
+    {
+      "path": "qa/test-14/final-research-normal-r5/research.json",
+      "sha256": "96bee89cb67fad594cb8f556a0b08efc1b80809210458fc46b901473b9a8de50"
+    },
+    {
+      "path": "qa/test-14/final-research-compact-r5/research-layout.json",
+      "sha256": "8ad275d8207d156fb28557cac4f0a618d77979e97913781e0c0cf34f0239721d"
+    },
+    {
+      "path": "qa/test-14/final-navigation-r5/navigation.json",
+      "sha256": "3e831aa5d91f65f9a87a50145f40b9653d52118df1fa036bf4a21b29114fa097"
+    },
+    {
+      "path": "qa/test-14/final-native-r5/native.json",
+      "sha256": "137bc3a21df38f1314324fd8decccce3d9776bfe0deba0d36f5201fc8c7a9bed"
+    },
+    {
+      "path": "qa/test-14/final-wide-r5/wide.json",
+      "sha256": "b1b6c2d1721a5b90415b67bfa3801b68c7ee33af6244b28233b02dc8abbccd2d"
+    },
+    {
+      "path": "qa/test-14/final-duel-r5/smoke.json",
+      "sha256": "c7c6986abfdbcfa4c689e6a6e77f4d877b513ad4b256885593b2d1a16bc84b38"
+    }
+  ],
+  "inputMethods": {
+    "path": "qa/test-14/input-methods.json",
+    "sha256": "63073294342e0cdf71ffddd1046ae7e3abdeec29731cbf8f649f53e56f651230"
+  },
+  "finalAPKIdentity": {
+    "path": "qa/test-14/final-apk-identity.json",
+    "sha256": "6b151ef11f53599bf2acf64e2ca5c966217fc1ea3b695d00a3e4a4a17f117955"
+  },
+  "pageProfileCoverage": [
+    {
+      "page": "build",
+      "profile": "normal",
+      "report": "qa/test-14/final-build-r5/build.json"
+    },
+    {
+      "page": "build",
+      "profile": "compact",
+      "report": "qa/test-14/final-build-r5/build.json"
+    },
+    {
+      "page": "factory",
+      "profile": "normal",
+      "report": "qa/test-14/final-max-r5/max.json"
+    },
+    {
+      "page": "factory",
+      "profile": "compact",
+      "report": "qa/test-14/final-max-r5/max.json"
+    },
+    {
+      "page": "design",
+      "profile": "normal",
+      "report": "qa/test-14/final-commands-r5/commands.json"
+    },
+    {
+      "page": "design",
+      "profile": "compact",
+      "report": "qa/test-14/final-commands-r5/commands.json"
+    },
+    {
+      "page": "blueprints",
+      "profile": "normal",
+      "report": "qa/test-14/final-commands-r5/commands.json"
+    },
+    {
+      "page": "blueprints",
+      "profile": "compact",
+      "report": "qa/test-14/final-commands-r5/commands.json"
+    },
+    {
+      "page": "queue",
+      "profile": "normal",
+      "report": "qa/test-14/final-build-r5/build.json"
+    },
+    {
+      "page": "queue",
+      "profile": "compact",
+      "report": "qa/test-14/final-build-r5/build.json"
+    },
+    {
+      "page": "research",
+      "profile": "normal",
+      "report": "qa/test-14/final-research-normal-r5/research.json"
+    },
+    {
+      "page": "research",
+      "profile": "compact",
+      "report": "qa/test-14/final-research-compact-r5/research-layout.json"
+    },
+    {
+      "page": "help",
+      "profile": "normal",
+      "report": "qa/test-14/final-navigation-r5/navigation.json"
+    },
+    {
+      "page": "help",
+      "profile": "compact",
+      "report": "qa/test-14/final-navigation-r5/navigation.json"
+    },
+    {
+      "page": "hudAndFieldControls",
+      "profile": "normal",
+      "report": "qa/test-14/final-navigation-r5/navigation.json"
+    },
+    {
+      "page": "hudAndFieldControls",
+      "profile": "compact",
+      "report": "qa/test-14/final-navigation-r5/navigation.json"
+    },
+    {
+      "page": "footerAndStatus",
+      "profile": "normal",
+      "report": "qa/test-14/final-navigation-r5/navigation.json"
+    },
+    {
+      "page": "footerAndStatus",
+      "profile": "compact",
+      "report": "qa/test-14/final-navigation-r5/navigation.json"
+    },
+    {
+      "page": "nativeStart",
+      "profile": "normal",
+      "report": "qa/test-14/final-native-r5/native.json"
+    },
+    {
+      "page": "nativeStart",
+      "profile": "compact",
+      "report": "qa/test-14/final-native-r5/native.json"
+    },
+    {
+      "page": "nativeGraphics",
+      "profile": "normal",
+      "report": "qa/test-14/final-native-r5/native.json"
+    },
+    {
+      "page": "nativeGraphics",
+      "profile": "compact",
+      "report": "qa/test-14/final-native-r5/native.json"
+    },
+    {
+      "page": "nativeMusic",
+      "profile": "normal",
+      "report": "qa/test-14/final-native-r5/native.json"
+    },
+    {
+      "page": "nativeMusic",
+      "profile": "compact",
+      "report": "qa/test-14/final-native-r5/native.json"
+    },
+    {
+      "page": "nativeReturn",
+      "profile": "normal",
+      "report": "qa/test-14/final-navigation-r5/navigation.json"
+    },
+    {
+      "page": "nativeReturn",
+      "profile": "compact",
+      "report": "qa/test-14/final-navigation-r5/navigation.json"
+    }
+  ],
+  "fixtureDisclosures": [
+    {
+      "path": "qa/test-14/final-max-r5/max.json",
+      "seeded": true,
+      "disclosure": "A separate complete genuine Iron Valley save is used as a QA fixture. Completed facilities are copied from genuine native records to validated free, reachable native sites until there are5labs,5vehiclefactories and5cyborgfactories. Only struct.json and the object allocator in gam.json are seeded; game.map, terrain, research, components, power, native limits, rules and queues are retained. Subsequent research/production are real UI actions using ordinary costs/times. This does not claim the extra facilities were constructed normally. The exact complete existing native save is restored before each14profile; no facilities are regenerated. Actual first-profile ordinary unit orders are saved before resetting."
+    },
+    {
+      "path": "qa/test-14/final-research-normal-r5/research.json",
+      "seeded": true,
+      "disclosure": "Existing complete five-facility native fixture; ordinary research costs and time"
+    },
+    {
+      "path": "qa/test-14/final-research-compact-r5/research-layout.json",
+      "seeded": true,
+      "disclosure": "Existing five-facility fixture; current legitimate research queues reused"
+    }
+  ],
+  "limitations": [
+    "Fresh delivery-APK page smoke, remaining UI actions, keyboard returns and native gameplay are distinguished from retained ordinary FIFO/production and initial phone-save records. Retained records keep their original identities and require the specific reviewed APK-member parity links. Physical-handset GPU/FPS and audio are not newly certified.",
+    "The native maximum 5/5/5 case reuses a disclosed complete save with added completed facilities; it does not certify ordinary construction of every added facility or an uninterrupted campaign.",
+    "Ordinary production/research, phone saving/keyboard and building/movement cases are separately identified. Rare exceptional UI states classified as source-only in the ledger are not claimed as native emulator fixtures.",
+    "The existing software-emulator black-terrain limitation remains. No full 30-wave victory, Duel balancing campaign or unrelated automatic truck-picker repair is newly certified.",
+    "Footer/current-work source and original hide/restore behaviour remain protected; no native factory ETA or percentage is invented.",
+    "Current HTML controls use standard trusted CDP Input.dispatchTouchEvent touchStart/touchEnd with explicit 60 ms timestamps in the actual emulator WebView, without an experimental compositor API. Retained earlier cases keep their original methods. World/gameplay input, native Android controls, system Back, IME typing and real scrolling use OS/ADB input. No DOM button click or physical-handset latency certification is claimed.",
+    "A pre-R5 emulator WebView native SIGTRAP is retained with its exit/stack diagnostics. Later QA uses the separately proven standard touch API; no application crash repair or definitive causal claim is made from that diagnostic.",
+    "Only original full native FIFO/order evidence is retained as labeled support. All R4 UI/keyboard/save/scroll cases and the short actual R4 production case are fresh; old page/confirmation captures are not reused.",
+    "The initial predecessor phone-save record retains its original cold-start scope; subsequent launcher/continuation stages are separately identified. Independent retained-Duel cold-start smoke checks the original phone library after this temporary QA record is removed.",
+    "Native launcher, graphics selection, Music list/toggle/return only; no pack download, installation or audio playback tested.",
+    "This preserved failed journey contains passed native production and real keyboard/phone-save evidence. Its recorded failure is retained separately; this continuation reruns only unfinished UI/edit/discard/delete checks. Earlier page/native evidence retains its original APK identity. The declared native launcher-style-only build has byte-identical HTML/CSS/game assets; fresh current-APK page smoke and unfinished actions run here. The retained and resumed native epochs are distinguished; this is not claimed as an uninterrupted journey.",
+    "This preserved failed journey contains passed native production and real keyboard/phone-save evidence. Its recorded failure is retained separately; this continuation reruns only unfinished UI/edit/discard/delete checks. The same-candidate active/waiting/Clear/native-completion and verified supporting parity links are retained verbatim, without repeating production. The retained and resumed native epochs are distinguished; this is not claimed as an uninterrupted journey.",
+    "Known baseline software-emulator black terrain: objects, minimap and native gameplay orders remain observable; this review does not certify physical-handset graphics or frame rate.",
+    "Five-facility test uses disclosed prepared completed native facilities; ordinary production/research costs and time are retained.",
+    "No full thirty-wave campaign, Duel balance, music download or audio playback certification."
+  ]
+}

@@ -1,0 +1,250 @@
+{
+  "passed": false,
+  "identity": {
+    "packageId": "com.rbabbit.warzonetowers.lab",
+    "device": "emulator-5556",
+    "candidateAPK_SHA256": "4f32c53107ebab719146961118ff0333af9b4b33bc66a2312c0724821a2e03ff",
+    "installedPath": "/data/app/~~ZrGjxaG_JUHz53TOqF4t3Q==/com.rbabbit.warzonetowers.lab-oVt2gA8_HG0_WTtkwqcY8Q==/base.apk"
+  },
+  "cases": [
+    {
+      "profile": "normal",
+      "page": "design",
+      "actual": "design",
+      "events": [
+        {
+          "type": "pointerdown",
+          "trusted": true,
+          "target": "",
+          "button": "",
+          "data": {
+            "page": "design"
+          },
+          "text": "Design",
+          "xy": [
+            141.52670288085938,
+            119.60026550292969
+          ],
+          "view": [
+            1077,
+            598
+          ],
+          "at": 1254722.3600000143
+        },
+        {
+          "type": "pointerup",
+          "trusted": true,
+          "target": "",
+          "button": "",
+          "data": {
+            "page": "design"
+          },
+          "text": "Design",
+          "xy": [
+            141.52670288085938,
+            119.60026550292969
+          ],
+          "view": [
+            1077,
+            598
+          ],
+          "at": 1255015.474999994
+        },
+        {
+          "type": "click",
+          "trusted": true,
+          "target": "",
+          "button": "",
+          "data": {
+            "page": "design"
+          },
+          "text": "Design",
+          "xy": [
+            141,
+            119
+          ],
+          "view": [
+            1077,
+            598
+          ],
+          "at": 1255201.7450000048
+        }
+      ]
+    },
+    {
+      "profile": "normal",
+      "page": "saved",
+      "actual": "saved",
+      "events": [
+        {
+          "type": "pointerdown",
+          "trusted": true,
+          "target": "",
+          "button": "",
+          "data": {
+            "page": "saved"
+          },
+          "text": "Blueprints",
+          "xy": [
+            226.24349975585938,
+            119.60026550292969
+          ],
+          "view": [
+            1077,
+            598
+          ],
+          "at": 1260038.625
+        },
+        {
+          "type": "pointerup",
+          "trusted": true,
+          "target": "",
+          "button": "",
+          "data": {
+            "page": "saved"
+          },
+          "text": "Blueprints",
+          "xy": [
+            226.24349975585938,
+            119.60026550292969
+          ],
+          "view": [
+            1077,
+            598
+          ],
+          "at": 1260047.8799999952
+        },
+        {
+          "type": "click",
+          "trusted": true,
+          "target": "",
+          "button": "",
+          "data": {
+            "page": "saved"
+          },
+          "text": "Blueprints",
+          "xy": [
+            226,
+            119
+          ],
+          "view": [
+            1077,
+            598
+          ],
+          "at": 1260211.0399999917
+        }
+      ]
+    },
+    {
+      "profile": "normal",
+      "page": "factory",
+      "actual": "factory",
+      "events": [
+        {
+          "type": "pointerdown",
+          "trusted": true,
+          "target": "",
+          "button": "",
+          "data": {
+            "page": "factory"
+          },
+          "text": "Units",
+          "xy": [
+            60.796875,
+            119.60026550292969
+          ],
+          "view": [
+            1077,
+            598
+          ],
+          "at": 1264382.5300000012
+        },
+        {
+          "type": "pointerup",
+          "trusted": true,
+          "target": "",
+          "button": "",
+          "data": {
+            "page": "factory"
+          },
+          "text": "Units",
+          "xy": [
+            60.796875,
+            119.60026550292969
+          ],
+          "view": [
+            1077,
+            598
+          ],
+          "at": 1264541.7849999964
+        },
+        {
+          "type": "click",
+          "trusted": true,
+          "target": "",
+          "button": "",
+          "data": {
+            "page": "factory"
+          },
+          "text": "Units",
+          "xy": [
+            60,
+            119
+          ],
+          "view": [
+            1077,
+            598
+          ],
+          "at": 1265288.0200000107
+        }
+      ]
+    },
+    {
+      "profile": "normal",
+      "page": "saved",
+      "actual": "factory",
+      "events": [
+        {
+          "type": "pointerdown",
+          "trusted": true,
+          "target": "",
+          "button": "",
+          "data": {
+            "page": "saved"
+          },
+          "text": "Blueprints",
+          "xy": [
+            226.24349975585938,
+            119.60026550292969
+          ],
+          "view": [
+            1077,
+            598
+          ],
+          "at": 1270828.525000006
+        },
+        {
+          "type": "pointerup",
+          "trusted": true,
+          "target": "",
+          "button": "",
+          "data": {
+            "page": "saved"
+          },
+          "text": "Blueprints",
+          "xy": [
+            226.24349975585938,
+            119.60026550292969
+          ],
+          "view": [
+            1077,
+            598
+          ],
+          "at": 1271596.925000012
+        }
+      ]
+    }
+  ],
+  "failure": "AssertionError [ERR_ASSERTION]: real measured tap acknowledged\n\n'factory' !== 'saved'\n\n    at C:\\timerApp\\wz-towers-lab\\tools\\trace-14-subnav.cjs:9:510",
+  "screen": "C:\\timerApp\\wz-towers-lab\\qa\\test-14\\subnav-diagnosis\\14-subnav-trace-failure.png"
+}

@@ -1,0 +1,43 @@
+{
+  "passed": true,
+  "verification": "QA harness/input-method provenance only; no journey, native order, completion or visual acceptance is established by this report.",
+  "candidateAPK_SHA256": "4f32c53107ebab719146961118ff0333af9b4b33bc66a2312c0724821a2e03ff",
+  "recordedUTC": "2026-11-08T20:42:45.518147Z",
+  "declaredRootInvocation": {
+    "environment": {
+      "WZ_QA_UI_INPUT": "trusted-cdp"
+    },
+    "declaredBy": "Root agent actual invocation, explicitly confirmed in release coordination",
+    "scope": "Remaining R3 Commands continuation, Build, maximum facilities, Research and navigation HTML-control c.tap journeys. Retained earlier R2/R3 cases keep their original recorded input methods and APK identities."
+  },
+  "htmlControls": {
+    "method": "Input.synthesizeTapGesture",
+    "durationMs": 60,
+    "tapCount": 1,
+    "gestureSourceType": "touch",
+    "isTrustedObserved": true,
+    "programmaticDOMClick": false,
+    "guards": [
+      "Expected app is foreground",
+      "Real element enabled with nonzero bounds",
+      "Real centre belongs to target under elementFromPoint",
+      "scrollIntoView and paint before measuring touch position"
+    ]
+  },
+  "osInputRetained": [
+    "World selection, movement and building-placement ctl.touch",
+    "Native Android UI nativeTap",
+    "System Android Back and IME typing",
+    "Research-grid, Help-body and Factory-roster real ADB swipes"
+  ],
+  "trustedTouchProof": {
+    "path": "qa/test-14/subnav-diagnosis-trusted/compositor-tap.json",
+    "sha256": "66cb7e1a26f1af70b21ea747307992519d5e7fa940bf505528cb3b02dc30f267"
+  },
+  "nativeLiveHelper": {
+    "path": "tools/native-live.cjs",
+    "sha256": "09e77884f6d46067d2d2dbd03136d36e00714f037f0556a1e4ace24459ba49b7"
+  },
+  "observedTrustedDurationMs": 60.0,
+  "limitation": "Compositor touch events run against the actual installed emulator WebView and normal UI handlers; physical-handset dispatch latency is not certified."
+}

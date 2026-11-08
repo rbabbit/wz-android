@@ -166,19 +166,26 @@
     }
     return true;
   }
-  function facilityDroidHit(view,x,y){
+  function facilityDroidHit(view,x,y,facilityDepth){
     // Native mouseTarget prioritises every visible droid before structures.
     // Script positions are whole tiles, so cover the complete possible body
-    // volume, not a guessed sub-tile centre. This deliberately favours unit
-    // interaction in an ambiguous overlap. Blockers are native visible-only.
+    // volume, not a guessed sub-tile centre. Compare its projected faces with
+    // the building depth: a truck behind a visible roof must not block it.
+    // Blockers are native visible-only.
     for(const d of state.facilityBlockers){
       const size=Math.max(0,Math.min(3,Number(d.bodySize)||0)),pad=64+size*32,points=[];
       for(const wx of [d.x*128-pad,(d.x+1)*128+pad])for(const wy of [d.y*128-pad,(d.y+1)*128+pad])for(const wz of [d.z*128-32,(d.z+1)*128+96+size*48]){
         const p=project(view,wx,wy,wz);if(p)points.push(p);
       }
       if(points.length!==8)continue;
-      if(x>=Math.min(...points.map(p=>p.x))-4&&x<=Math.max(...points.map(p=>p.x))+4
-        &&y>=Math.min(...points.map(p=>p.y))-4&&y<=Math.max(...points.map(p=>p.y))+4)return true;
+      if(x<Math.min(...points.map(p=>p.x))||x>Math.max(...points.map(p=>p.x))
+        ||y<Math.min(...points.map(p=>p.y))||y>Math.max(...points.map(p=>p.y)))continue;
+      for(const [a,b,c,e]of [[0,1,3,2],[4,6,7,5],[0,4,5,1],[2,3,7,6],[0,2,6,4],[1,5,7,3]]){
+        for(const face of [[points[a],points[b],points[c]],[points[a],points[c],points[e]]]){
+          const hit=triangleHit(face,x,y,0);
+          if(hit&&hit.depth<=facilityDepth+1e-4)return true;
+        }
+      }
     }
     return false;
   }
@@ -195,10 +202,10 @@
   }
   function pickFacilityTarget(x,y){
     const view=window.WarzoneTerrain?.view();if(!facilitiesEnabled()||!view||hidden()||!state.facilityTargets.length)return null;
-    const masks=facilityMasks(view);if(!facilityPoint(view,masks,x,y)||facilityDroidHit(view,x,y))return null;
+    const masks=facilityMasks(view);if(!facilityPoint(view,masks,x,y))return null;
     const hits=facilityEntries(view,masks).map(entry=>({entry,hit:hitEntry(entry,x,y)})).filter(v=>v.hit);
     hits.sort((a,b)=>(a.hit.distance>0)-(b.hit.distance>0)||a.hit.depth-b.hit.depth||a.hit.distance-b.hit.distance);
-    const found=hits[0];if(!found||facilityTerrainOccluded(view,found.hit,x,y))return null;
+    const found=hits[0];if(!found||facilityTerrainOccluded(view,found.hit,x,y)||facilityDroidHit(view,x,y,found.hit.depth))return null;
     return {...found.entry.target,hit:found.hit};
   }
   function facilityReport(withGeometry){
@@ -206,7 +213,7 @@
     const view=window.WarzoneTerrain?.view();if(!facilitiesEnabled()||!view||hidden())return state.facilityTargets.map(t=>({...t,visible:false,hitPoints:[]}));
     const masks=facilityMasks(view);
     return facilityEntries(view,masks).map(({target,geometry:g,visible})=>({...target,visible,bounds:g?.bounds||null,footprint:g?.foot||[],outline:g?.outline||[],
-      hitPoints:visible?hitPoints(view,masks,g).filter(p=>facilityPoint(view,masks,p.x,p.y)&&!facilityDroidHit(view,p.x,p.y)&&!facilityTerrainOccluded(view,{depth:p.depth},p.x,p.y)):[]}));
+      hitPoints:visible?hitPoints(view,masks,g).filter(p=>facilityPoint(view,masks,p.x,p.y)&&!facilityDroidHit(view,p.x,p.y,p.depth)&&!facilityTerrainOccluded(view,{depth:p.depth},p.x,p.y)):[]}));
   }
   function hitPoints(view,masks,g){
     const points=g.faces.map(face=>{const p=face.points;return {x:(p[0].x+p[1].x+p[2].x)/3,y:(p[0].y+p[1].y+p[2].y)/3,depth:3/(1/p[0].w+1/p[1].w+1/p[2].w),source:'mesh',face:face.index,area:Math.abs((p[1].x-p[0].x)*(p[2].y-p[0].y)-(p[2].x-p[0].x)*(p[1].y-p[0].y))};}).filter(p=>p.area>4&&fieldPoint(view,masks,p.x,p.y)).sort((a,b)=>b.area-a.area||a.depth-b.depth),result=[];

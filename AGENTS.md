@@ -1,5 +1,26 @@
 # Warzone Towers maintenance rules
 
+- 2026-11-08: user accepted existing 0.17 as the new current benchmark on GitHub
+  `main`, tagged `v0.17-benchmark`. Promote the existing delivered APK/source
+  unchanged; no rebuild, tests or emulator checks were requested for promotion.
+  The 0.17 release has source audit/review and build evidence only, with no
+  runtime verification. Preserve `v0.9-benchmark`, every older tag/artifact and
+  the separate v6.4 fallback. See docs/benchmarks/v0.17.md for delivery hashes.
+
+- 2026-11-08: user approved the three border-free compact game-window mocks in
+  docs/ui-0.14 and requested all Towers pages/subpages be reviewed. Work on
+  codex/towers-compact-0.14. The complete 0.13 APK/source/checksums are frozen in
+  C:/timerApp/fallbacks/towers-before-compact-0.14-20261108; baseline85ef078.
+  Rename the top Factory label to Production, move Design into its direct
+  Units/Design/Blueprints navigation. Apply content-fit controls, larger real
+  artwork and no decorative separators to command, research, Build, Help and
+  settings surfaces. Keep existing footer/status bytes AND visibility behavior.
+  Preserve Duel output, native payloads, game rules, saves, native IDs and queues.
+  Native launcher/music/confirmation changes are visual-only and Towers-scoped.
+  Never invent assembled unit renders or production percentages/ETAs. Audit rare
+  states and legacy unexposed routes explicitly; do not present seeded or
+  source-only state checks as ordinary observed gameplay. Root owns emulator5556.
+
 - 2026-11-08: user corrected the full Factory selection to OPTION 3, then resumed
   work with go. Implement on `codex/towers-factory-0.13`: slim family/factory
   roster, one deduplicated recipe list, quantities and row Produce, compact
@@ -29,11 +50,12 @@
   and styles to Towers. Keep the engine, scenarios, maps, saves and phone design
   library intact. Never invent production ETA/progress or a 3D design preview.
 
-- The user saved Towers 0.9 as the immutable benchmark before adding an offline
-  human-versus-bot mode. GitHub `main` and `v0.9-benchmark` point to
+- The user saved Towers 0.9 as the immutable historical benchmark before adding
+  an offline human-versus-bot mode. The preserved `v0.9-benchmark` tag points to
   `28fe51dc5725d5262b0302de10776ae1a37eb994`; preserve its APK, complete source,
-  checksums and older fallbacks. Combined-mode development belongs on
-  `codex/offline-duel-0.10` until separately accepted.
+  checksums and older fallbacks. Its former `main` status was superseded by the
+  user's 0.17 benchmark acceptance above. Combined-mode development originally
+  used `codex/offline-duel-0.10`; retain the deferred Duel implementation.
 - The new Duel mode is offline: human chooses Cannon or Rockets; the bot uses
   the opposite branch, with shared core upgrades and a Command Centre objective.
   Keep Towers rules, map/mod, original runtime/index/mobile/data paths unchanged.

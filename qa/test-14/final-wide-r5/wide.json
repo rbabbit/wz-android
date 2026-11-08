@@ -1,0 +1,2785 @@
+{
+  "passed": true,
+  "seeded": false,
+  "started": "2026-11-08T22:22:44.308Z",
+  "scope": "Live ordinary 1200x540 phone-aspect UI smoke; no orders, names, queues, saved-library writes, restart or restore",
+  "profile": {
+    "device": [
+      1200,
+      540
+    ],
+    "wm": "540x1200",
+    "fontScale": 1,
+    "commandScale": 1,
+    "actual": {
+      "device": [
+        1200,
+        540
+      ],
+      "host": {
+        "width": 1231,
+        "height": 554,
+        "frame": {
+          "x": 0,
+          "y": 56,
+          "width": 1231.3333740234375,
+          "height": 498,
+          "top": 56,
+          "right": 1231.3333740234375,
+          "bottom": 554,
+          "left": 0
+        }
+      }
+    }
+  },
+  "checks": {
+    "widePhoneViewport": true,
+    "allEightSurfacesReachable": true,
+    "naturalPanelsAndNativeArt": true,
+    "backExitAndFramePreserved": true,
+    "noOrdersOrLibraryWrites": true
+  },
+  "cases": [
+    {
+      "id": "factory",
+      "profile": "wide-phone",
+      "passed": true,
+      "identity": {
+        "packageId": "com.rbabbit.warzonetowers.lab",
+        "device": "emulator-5556",
+        "candidateAPK_SHA256": "81e08ca7fb3cc511c03be5177fa1656261f9bf510275fd174f7a22cbecf65237",
+        "installedPath": "/data/app/~~QfZPV0A2ACdFJZu70gADwg==/com.rbabbit.warzonetowers.lab-UuKGlU5KPqtmdahvqLLHog==/base.apk",
+        "htmlControlInput": {
+          "method": "CDP Input.dispatchTouchEvent touchStart/touchEnd",
+          "durationMs": 60,
+          "gestureSourceType": "touch",
+          "timing": "Ordered WebSocket start/end with explicit60ms timestamps; end scheduled after60ms without awaiting the start response",
+          "disclosure": "Measured, hit-tested standard trusted WebView touch events for HTML controls; Android/ADB world touches, Back, keyboard and native UI remain unchanged. No DOM click or experimental compositor gesture API."
+        }
+      },
+      "clock": 124502,
+      "observations": {
+        "geometry": {
+          "page": "factory",
+          "viewport": [
+            1231,
+            554
+          ],
+          "panel": {
+            "x": 10,
+            "y": 66,
+            "width": 740,
+            "height": 384,
+            "top": 66,
+            "right": 750,
+            "bottom": 450,
+            "left": 10
+          },
+          "frame": {
+            "x": 0,
+            "y": 56,
+            "width": 1231.3333740234375,
+            "height": 498,
+            "top": 56,
+            "right": 1231.3333740234375,
+            "bottom": 554,
+            "left": 0
+          },
+          "border": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "shadow": "none",
+          "title": "PRODUCTION",
+          "subnav": [
+            {
+              "page": "factory",
+              "label": "Units",
+              "visible": true,
+              "hit": true
+            },
+            {
+              "page": "design",
+              "label": "Design",
+              "visible": true,
+              "hit": true
+            },
+            {
+              "page": "saved",
+              "label": "Blueprints",
+              "visible": true,
+              "hit": true
+            }
+          ],
+          "backHit": true,
+          "images": [
+            {
+              "src": "/warzone/build-icons/A0LightFactory.png",
+              "complete": true,
+              "natural": [
+                108,
+                81
+              ],
+              "box": {
+                "x": 29,
+                "y": 186,
+                "width": 31,
+                "height": 26,
+                "top": 186,
+                "right": 60,
+                "bottom": 212,
+                "left": 29
+              }
+            },
+            {
+              "src": "/warzone/build-icons/A0LightFactory.png",
+              "complete": true,
+              "natural": [
+                108,
+                81
+              ],
+              "box": {
+                "x": 130.33334350585938,
+                "y": 186,
+                "width": 31,
+                "height": 26,
+                "top": 186,
+                "right": 161.33334350585938,
+                "bottom": 212,
+                "left": 130.33334350585938
+              }
+            },
+            {
+              "src": "/warzone/research-icons/Engineering.gif",
+              "complete": true,
+              "natural": [
+                60,
+                46
+              ],
+              "box": {
+                "x": 35,
+                "y": 236,
+                "width": 84,
+                "height": 64,
+                "top": 236,
+                "right": 119,
+                "bottom": 300,
+                "left": 35
+              }
+            },
+            {
+              "src": "/warzone/research-icons/Machinegun.gif",
+              "complete": true,
+              "natural": [
+                60,
+                46
+              ],
+              "box": {
+                "x": 35,
+                "y": 326,
+                "width": 84,
+                "height": 64,
+                "top": 326,
+                "right": 119,
+                "bottom": 390,
+                "left": 35
+              }
+            }
+          ],
+          "slots": [],
+          "parts": 0,
+          "library": [],
+          "orders": [],
+          "sites": [],
+          "completed": null,
+          "bodyScroll": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "overflow": {
+          "panel": {
+            "x": 10,
+            "y": 66,
+            "width": 740,
+            "height": 384,
+            "top": 66,
+            "right": 750,
+            "bottom": 450,
+            "left": 10
+          },
+          "overflow": [
+            740,
+            740
+          ],
+          "host": [
+            1231,
+            1231,
+            1231,
+            1231
+          ],
+          "content": [
+            {
+              "className": "",
+              "id": "wt-page-content",
+              "overflow": [
+                740,
+                740
+              ],
+              "box": {
+                "x": 10,
+                "y": 138,
+                "width": 740,
+                "height": 312,
+                "top": 138,
+                "right": 750,
+                "bottom": 450,
+                "left": 10
+              }
+            },
+            {
+              "className": "wt-factory-design-list",
+              "id": "",
+              "overflow": [
+                720,
+                720
+              ],
+              "box": {
+                "x": 20,
+                "y": 223,
+                "width": 720,
+                "height": 180,
+                "top": 223,
+                "right": 740,
+                "bottom": 403,
+                "left": 20
+              }
+            }
+          ]
+        }
+      },
+      "screenshots": [
+        "qa/test-14/final-wide-r5/lab-14-wide-factory.png"
+      ]
+    },
+    {
+      "id": "design",
+      "profile": "wide-phone",
+      "passed": true,
+      "identity": {
+        "packageId": "com.rbabbit.warzonetowers.lab",
+        "device": "emulator-5556",
+        "candidateAPK_SHA256": "81e08ca7fb3cc511c03be5177fa1656261f9bf510275fd174f7a22cbecf65237",
+        "installedPath": "/data/app/~~QfZPV0A2ACdFJZu70gADwg==/com.rbabbit.warzonetowers.lab-UuKGlU5KPqtmdahvqLLHog==/base.apk",
+        "htmlControlInput": {
+          "method": "CDP Input.dispatchTouchEvent touchStart/touchEnd",
+          "durationMs": 60,
+          "gestureSourceType": "touch",
+          "timing": "Ordered WebSocket start/end with explicit60ms timestamps; end scheduled after60ms without awaiting the start response",
+          "disclosure": "Measured, hit-tested standard trusted WebView touch events for HTML controls; Android/ADB world touches, Back, keyboard and native UI remain unchanged. No DOM click or experimental compositor gesture API."
+        }
+      },
+      "clock": 134502,
+      "observations": {
+        "geometry": {
+          "page": "design",
+          "viewport": [
+            1231,
+            554
+          ],
+          "panel": {
+            "x": 10,
+            "y": 66,
+            "width": 740,
+            "height": 342.54168701171875,
+            "top": 66,
+            "right": 750,
+            "bottom": 408.54168701171875,
+            "left": 10
+          },
+          "frame": {
+            "x": 0,
+            "y": 56,
+            "width": 1231.3333740234375,
+            "height": 498,
+            "top": 56,
+            "right": 1231.3333740234375,
+            "bottom": 554,
+            "left": 0
+          },
+          "border": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "shadow": "none",
+          "title": "PRODUCTION",
+          "subnav": [
+            {
+              "page": "factory",
+              "label": "Units",
+              "visible": true,
+              "hit": true
+            },
+            {
+              "page": "design",
+              "label": "Design",
+              "visible": true,
+              "hit": true
+            },
+            {
+              "page": "saved",
+              "label": "Blueprints",
+              "visible": true,
+              "hit": true
+            }
+          ],
+          "backHit": true,
+          "images": [],
+          "slots": [
+            {
+              "step": "body",
+              "label": "BODYChoose component⌄",
+              "box": {
+                "x": 20,
+                "y": 148,
+                "width": 190.14584350585938,
+                "height": 49,
+                "top": 148,
+                "right": 210.14584350585938,
+                "bottom": 197,
+                "left": 20
+              }
+            },
+            {
+              "step": "propulsion",
+              "label": "PROPULSIONChoose component⌄",
+              "box": {
+                "x": 218.14584350585938,
+                "y": 148,
+                "width": 190.14584350585938,
+                "height": 49,
+                "top": 148,
+                "right": 408.29168701171875,
+                "bottom": 197,
+                "left": 218.14584350585938
+              }
+            },
+            {
+              "step": "0",
+              "label": "WEAPON / SYSTEMChoose component⌄",
+              "box": {
+                "x": 416.29168701171875,
+                "y": 148,
+                "width": 190.14584350585938,
+                "height": 49,
+                "top": 148,
+                "right": 606.4375305175781,
+                "bottom": 197,
+                "left": 416.29168701171875
+              }
+            }
+          ],
+          "parts": 1,
+          "designName": "Design 1",
+          "saveDisabled": true,
+          "library": [],
+          "orders": [],
+          "sites": [],
+          "completed": null,
+          "bodyScroll": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "overflow": {
+          "panel": {
+            "x": 10,
+            "y": 66,
+            "width": 740,
+            "height": 342.54168701171875,
+            "top": 66,
+            "right": 750,
+            "bottom": 408.54168701171875,
+            "left": 10
+          },
+          "overflow": [
+            740,
+            740
+          ],
+          "host": [
+            1231,
+            1231,
+            1231,
+            1231
+          ],
+          "content": [
+            {
+              "className": "",
+              "id": "wt-page-content",
+              "overflow": [
+                740,
+                740
+              ],
+              "box": {
+                "x": 10,
+                "y": 138,
+                "width": 740,
+                "height": 270.54168701171875,
+                "top": 138,
+                "right": 750,
+                "bottom": 408.54168701171875,
+                "left": 10
+              }
+            },
+            {
+              "className": "wt-parts-grid",
+              "id": "",
+              "overflow": [
+                720,
+                720
+              ],
+              "box": {
+                "x": 20,
+                "y": 228.1979217529297,
+                "width": 720,
+                "height": 112.59375,
+                "top": 228.1979217529297,
+                "right": 740,
+                "bottom": 340.7916717529297,
+                "left": 20
+              }
+            }
+          ]
+        }
+      },
+      "screenshots": [
+        "qa/test-14/final-wide-r5/lab-14-wide-design.png"
+      ]
+    },
+    {
+      "id": "saved",
+      "profile": "wide-phone",
+      "passed": true,
+      "identity": {
+        "packageId": "com.rbabbit.warzonetowers.lab",
+        "device": "emulator-5556",
+        "candidateAPK_SHA256": "81e08ca7fb3cc511c03be5177fa1656261f9bf510275fd174f7a22cbecf65237",
+        "installedPath": "/data/app/~~QfZPV0A2ACdFJZu70gADwg==/com.rbabbit.warzonetowers.lab-UuKGlU5KPqtmdahvqLLHog==/base.apk",
+        "htmlControlInput": {
+          "method": "CDP Input.dispatchTouchEvent touchStart/touchEnd",
+          "durationMs": 60,
+          "gestureSourceType": "touch",
+          "timing": "Ordered WebSocket start/end with explicit60ms timestamps; end scheduled after60ms without awaiting the start response",
+          "disclosure": "Measured, hit-tested standard trusted WebView touch events for HTML controls; Android/ADB world touches, Back, keyboard and native UI remain unchanged. No DOM click or experimental compositor gesture API."
+        }
+      },
+      "clock": 144002,
+      "observations": {
+        "geometry": {
+          "page": "saved",
+          "viewport": [
+            1231,
+            554
+          ],
+          "panel": {
+            "x": 10,
+            "y": 66,
+            "width": 740,
+            "height": 414,
+            "top": 66,
+            "right": 750,
+            "bottom": 480,
+            "left": 10
+          },
+          "frame": {
+            "x": 0,
+            "y": 56,
+            "width": 1231.3333740234375,
+            "height": 498,
+            "top": 56,
+            "right": 1231.3333740234375,
+            "bottom": 554,
+            "left": 0
+          },
+          "border": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "shadow": "none",
+          "title": "PRODUCTION",
+          "subnav": [
+            {
+              "page": "factory",
+              "label": "Units",
+              "visible": true,
+              "hit": true
+            },
+            {
+              "page": "design",
+              "label": "Design",
+              "visible": true,
+              "hit": true
+            },
+            {
+              "page": "saved",
+              "label": "Blueprints",
+              "visible": true,
+              "hit": true
+            }
+          ],
+          "backHit": true,
+          "images": [
+            {
+              "src": "/warzone/research-icons/Machinegun.gif",
+              "complete": true,
+              "natural": [
+                60,
+                46
+              ],
+              "box": {
+                "x": 23,
+                "y": 113,
+                "width": 84,
+                "height": 64,
+                "top": 113,
+                "right": 107,
+                "bottom": 177,
+                "left": 23
+              }
+            },
+            {
+              "src": "/warzone/research-icons/Machinegun.gif",
+              "complete": true,
+              "natural": [
+                60,
+                46
+              ],
+              "box": {
+                "x": 23,
+                "y": 196,
+                "width": 84,
+                "height": 64,
+                "top": 196,
+                "right": 107,
+                "bottom": 260,
+                "left": 23
+              }
+            },
+            {
+              "src": "/warzone/research-icons/Engineering.gif",
+              "complete": true,
+              "natural": [
+                60,
+                46
+              ],
+              "box": {
+                "x": 23,
+                "y": 279,
+                "width": 84,
+                "height": 64,
+                "top": 279,
+                "right": 107,
+                "bottom": 343,
+                "left": 23
+              }
+            },
+            {
+              "src": "/warzone/research-icons/Machinegun.gif",
+              "complete": true,
+              "natural": [
+                60,
+                46
+              ],
+              "box": {
+                "x": 23,
+                "y": 362,
+                "width": 84,
+                "height": 64,
+                "top": 362,
+                "right": 107,
+                "bottom": 426,
+                "left": 23
+              }
+            },
+            {
+              "src": "/warzone/research-icons/Machinegun.gif",
+              "complete": true,
+              "natural": [
+                60,
+                46
+              ],
+              "box": {
+                "x": 23,
+                "y": 445,
+                "width": 84,
+                "height": 64,
+                "top": 445,
+                "right": 107,
+                "bottom": 509,
+                "left": 23
+              }
+            }
+          ],
+          "slots": [],
+          "parts": 0,
+          "library": [
+            {
+              "id": "design-1794008136667-113",
+              "text": "Design 2\n\nViper · Wheels\n\n⚡ 55\nEDIT\nUSE\nDELETE",
+              "box": {
+                "x": 20,
+                "y": 108,
+                "width": 720,
+                "height": 74,
+                "top": 108,
+                "right": 740,
+                "bottom": 182,
+                "left": 20
+              },
+              "actions": [
+                {
+                  "edit": "design-1794008136667-113",
+                  "label": "EDIT"
+                },
+                {
+                  "produceDesign": "design-1794008136667-113",
+                  "label": "USE"
+                },
+                {
+                  "delete": "design-1794008136667-113",
+                  "label": "DELETE"
+                }
+              ]
+            },
+            {
+              "id": "design-1794008147588-129",
+              "text": "Lab Scout 54626\n\nViper · Wheels\n\n⚡ 55\nEDIT\nUSE\nDELETE",
+              "box": {
+                "x": 20,
+                "y": 191,
+                "width": 720,
+                "height": 74,
+                "top": 191,
+                "right": 740,
+                "bottom": 265,
+                "left": 20
+              },
+              "actions": [
+                {
+                  "edit": "design-1794008147588-129",
+                  "label": "EDIT"
+                },
+                {
+                  "produceDesign": "design-1794008147588-129",
+                  "label": "USE"
+                },
+                {
+                  "delete": "design-1794008147588-129",
+                  "label": "DELETE"
+                }
+              ]
+            },
+            {
+              "id": "design-1794036575885-223",
+              "text": "Truck Viper Wheels\n\nEngineering\n\n⚡ 62\nEDIT\nUSE\nDELETE",
+              "box": {
+                "x": 20,
+                "y": 274,
+                "width": 720,
+                "height": 74,
+                "top": 274,
+                "right": 740,
+                "bottom": 348,
+                "left": 20
+              },
+              "actions": [
+                {
+                  "edit": "design-1794036575885-223",
+                  "label": "EDIT"
+                },
+                {
+                  "produceDesign": "design-1794036575885-223",
+                  "label": "USE"
+                },
+                {
+                  "delete": "design-1794036575885-223",
+                  "label": "DELETE"
+                }
+              ]
+            },
+            {
+              "id": "design-1794036589502-235",
+              "text": "Scout 97609\n\nViper · Wheels\n\n⚡ 55\nEDIT\nUSE\nDELETE",
+              "box": {
+                "x": 20,
+                "y": 357,
+                "width": 720,
+                "height": 74,
+                "top": 357,
+                "right": 740,
+                "bottom": 431,
+                "left": 20
+              },
+              "actions": [
+                {
+                  "edit": "design-1794036589502-235",
+                  "label": "EDIT"
+                },
+                {
+                  "produceDesign": "design-1794036589502-235",
+                  "label": "USE"
+                },
+                {
+                  "delete": "design-1794036589502-235",
+                  "label": "DELETE"
+                }
+              ]
+            },
+            {
+              "id": "design-1794040213295-227",
+              "text": "Scout 21399\n\nViper · Wheels\n\n⚡ 55\nEDIT\nUSE\nDELETE",
+              "box": {
+                "x": 20,
+                "y": 440,
+                "width": 720,
+                "height": 74,
+                "top": 440,
+                "right": 740,
+                "bottom": 514,
+                "left": 20
+              },
+              "actions": [
+                {
+                  "edit": "design-1794040213295-227",
+                  "label": "EDIT"
+                },
+                {
+                  "produceDesign": "design-1794040213295-227",
+                  "label": "USE"
+                },
+                {
+                  "delete": "design-1794040213295-227",
+                  "label": "DELETE"
+                }
+              ]
+            }
+          ],
+          "orders": [],
+          "sites": [],
+          "completed": null,
+          "bodyScroll": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "overflow": {
+          "panel": {
+            "x": 10,
+            "y": 66,
+            "width": 740,
+            "height": 414,
+            "top": 66,
+            "right": 750,
+            "bottom": 480,
+            "left": 10
+          },
+          "overflow": [
+            740,
+            740
+          ],
+          "host": [
+            1231,
+            1231,
+            1231,
+            1231
+          ],
+          "content": [
+            {
+              "className": "",
+              "id": "wt-page-content",
+              "overflow": [
+                740,
+                740
+              ],
+              "box": {
+                "x": 10,
+                "y": 138,
+                "width": 740,
+                "height": 342,
+                "top": 138,
+                "right": 750,
+                "bottom": 480,
+                "left": 10
+              }
+            },
+            {
+              "className": "wt-compact-library",
+              "id": "",
+              "overflow": [
+                720,
+                720
+              ],
+              "box": {
+                "x": 20,
+                "y": 148,
+                "width": 720,
+                "height": 322,
+                "top": 148,
+                "right": 740,
+                "bottom": 470,
+                "left": 20
+              }
+            }
+          ]
+        }
+      },
+      "screenshots": [
+        "qa/test-14/final-wide-r5/lab-14-wide-saved.png"
+      ]
+    },
+    {
+      "id": "queue",
+      "profile": "wide-phone",
+      "passed": true,
+      "identity": {
+        "packageId": "com.rbabbit.warzonetowers.lab",
+        "device": "emulator-5556",
+        "candidateAPK_SHA256": "81e08ca7fb3cc511c03be5177fa1656261f9bf510275fd174f7a22cbecf65237",
+        "installedPath": "/data/app/~~QfZPV0A2ACdFJZu70gADwg==/com.rbabbit.warzonetowers.lab-UuKGlU5KPqtmdahvqLLHog==/base.apk",
+        "htmlControlInput": {
+          "method": "CDP Input.dispatchTouchEvent touchStart/touchEnd",
+          "durationMs": 60,
+          "gestureSourceType": "touch",
+          "timing": "Ordered WebSocket start/end with explicit60ms timestamps; end scheduled after60ms without awaiting the start response",
+          "disclosure": "Measured, hit-tested standard trusted WebView touch events for HTML controls; Android/ADB world touches, Back, keyboard and native UI remain unchanged. No DOM click or experimental compositor gesture API."
+        }
+      },
+      "clock": 151502,
+      "observations": {
+        "geometry": {
+          "page": "queue",
+          "viewport": [
+            1231,
+            554
+          ],
+          "panel": {
+            "x": 10,
+            "y": 66,
+            "width": 740,
+            "height": 100.79167175292969,
+            "top": 66,
+            "right": 750,
+            "bottom": 166.7916717529297,
+            "left": 10
+          },
+          "frame": {
+            "x": 0,
+            "y": 56,
+            "width": 1231.3333740234375,
+            "height": 498,
+            "top": 56,
+            "right": 1231.3333740234375,
+            "bottom": 554,
+            "left": 0
+          },
+          "border": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "shadow": "none",
+          "title": "ORDERS",
+          "subnav": [
+            {
+              "page": "factory",
+              "label": "Units",
+              "visible": false,
+              "hit": false
+            },
+            {
+              "page": "design",
+              "label": "Design",
+              "visible": false,
+              "hit": false
+            },
+            {
+              "page": "saved",
+              "label": "Blueprints",
+              "visible": false,
+              "hit": false
+            }
+          ],
+          "backHit": true,
+          "images": [],
+          "slots": [],
+          "parts": 0,
+          "library": [],
+          "orders": [],
+          "sites": [],
+          "completed": null,
+          "bodyScroll": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "overflow": {
+          "panel": {
+            "x": 10,
+            "y": 66,
+            "width": 740,
+            "height": 100.79167175292969,
+            "top": 66,
+            "right": 750,
+            "bottom": 166.7916717529297,
+            "left": 10
+          },
+          "overflow": [
+            740,
+            740
+          ],
+          "host": [
+            1231,
+            1231,
+            1231,
+            1231
+          ],
+          "content": [
+            {
+              "className": "",
+              "id": "wt-page-content",
+              "overflow": [
+                740,
+                740
+              ],
+              "box": {
+                "x": 10,
+                "y": 106,
+                "width": 740,
+                "height": 60.79166793823242,
+                "top": 106,
+                "right": 750,
+                "bottom": 166.79166793823242,
+                "left": 10
+              }
+            },
+            {
+              "className": "",
+              "id": "wt-live-queue",
+              "overflow": [
+                720,
+                720
+              ],
+              "box": {
+                "x": 20,
+                "y": 116,
+                "width": 720,
+                "height": 40.79166793823242,
+                "top": 116,
+                "right": 740,
+                "bottom": 156.79166793823242,
+                "left": 20
+              }
+            }
+          ]
+        }
+      },
+      "screenshots": [
+        "qa/test-14/final-wide-r5/lab-14-wide-queue.png"
+      ]
+    },
+    {
+      "id": "research",
+      "profile": "wide-phone",
+      "passed": true,
+      "identity": {
+        "packageId": "com.rbabbit.warzonetowers.lab",
+        "device": "emulator-5556",
+        "candidateAPK_SHA256": "81e08ca7fb3cc511c03be5177fa1656261f9bf510275fd174f7a22cbecf65237",
+        "installedPath": "/data/app/~~QfZPV0A2ACdFJZu70gADwg==/com.rbabbit.warzonetowers.lab-UuKGlU5KPqtmdahvqLLHog==/base.apk",
+        "htmlControlInput": {
+          "method": "CDP Input.dispatchTouchEvent touchStart/touchEnd",
+          "durationMs": 60,
+          "gestureSourceType": "touch",
+          "timing": "Ordered WebSocket start/end with explicit60ms timestamps; end scheduled after60ms without awaiting the start response",
+          "disclosure": "Measured, hit-tested standard trusted WebView touch events for HTML controls; Android/ADB world touches, Back, keyboard and native UI remain unchanged. No DOM click or experimental compositor gesture API."
+        }
+      },
+      "clock": 159002,
+      "observations": {
+        "geometry": {
+          "viewport": [
+            1231,
+            498
+          ],
+          "shell": {
+            "x": 10,
+            "y": 10,
+            "width": 740,
+            "height": 414,
+            "top": 10,
+            "right": 750,
+            "bottom": 424,
+            "left": 10
+          },
+          "header": {
+            "x": 10,
+            "y": 10,
+            "width": 740,
+            "height": 46,
+            "top": 10,
+            "right": 750,
+            "bottom": 56,
+            "left": 10
+          },
+          "main": {
+            "x": 10,
+            "y": 56,
+            "width": 740,
+            "height": 368,
+            "top": 56,
+            "right": 750,
+            "bottom": 424,
+            "left": 10
+          },
+          "catalogue": {
+            "box": {
+              "x": 22,
+              "y": 144,
+              "width": 716,
+              "height": 159,
+              "top": 144,
+              "right": 738,
+              "bottom": 303,
+              "left": 22
+            },
+            "scroll": [
+              0,
+              778,
+              159,
+              716,
+              716
+            ],
+            "hit": true
+          },
+          "selection": {
+            "box": {
+              "x": 22,
+              "y": 310,
+              "width": 716,
+              "height": 34,
+              "top": 310,
+              "right": 738,
+              "bottom": 344,
+              "left": 22
+            },
+            "scroll": [
+              0,
+              34,
+              34,
+              716,
+              716
+            ],
+            "hit": true
+          },
+          "detail": {
+            "box": {
+              "x": 22,
+              "y": 351,
+              "width": 716,
+              "height": 62,
+              "top": 351,
+              "right": 738,
+              "bottom": 413,
+              "left": 22
+            },
+            "scroll": [
+              0,
+              62,
+              62,
+              716,
+              716
+            ],
+            "hit": true
+          },
+          "doneHit": true,
+          "assignHit": true,
+          "labs": [
+            {
+              "index": 0,
+              "id": 160169,
+              "box": {
+                "x": 22,
+                "y": 58,
+                "width": 90.30208587646484,
+                "height": 38,
+                "top": 58,
+                "right": 112.30208587646484,
+                "bottom": 96,
+                "left": 22
+              },
+              "hit": true,
+              "selected": "false"
+            },
+            {
+              "index": 1,
+              "id": 160171,
+              "box": {
+                "x": 117.30208587646484,
+                "y": 58,
+                "width": 91.79167175292969,
+                "height": 38,
+                "top": 58,
+                "right": 209.09375762939453,
+                "bottom": 96,
+                "left": 117.30208587646484
+              },
+              "hit": true,
+              "selected": "false"
+            },
+            {
+              "index": 2,
+              "id": 160173,
+              "box": {
+                "x": 214.09375,
+                "y": 58,
+                "width": 91.78125,
+                "height": 38,
+                "top": 58,
+                "right": 305.875,
+                "bottom": 96,
+                "left": 214.09375
+              },
+              "hit": true,
+              "selected": "true"
+            },
+            {
+              "index": 3,
+              "id": 160175,
+              "box": {
+                "x": 310.875,
+                "y": 58,
+                "width": 91.88542175292969,
+                "height": 38,
+                "top": 58,
+                "right": 402.7604217529297,
+                "bottom": 96,
+                "left": 310.875
+              },
+              "hit": true,
+              "selected": "false"
+            }
+          ],
+          "categories": [
+            {
+              "category": "ALL",
+              "box": {
+                "x": 22,
+                "y": 106,
+                "width": 34.614585876464844,
+                "height": 30,
+                "top": 106,
+                "right": 56.614585876464844,
+                "bottom": 136,
+                "left": 22
+              },
+              "hit": true
+            },
+            {
+              "category": "WEAPONS",
+              "box": {
+                "x": 61.614585876464844,
+                "y": 106,
+                "width": 63.21875,
+                "height": 30,
+                "top": 106,
+                "right": 124.83333587646484,
+                "bottom": 136,
+                "left": 61.614585876464844
+              },
+              "hit": true
+            },
+            {
+              "category": "DEFENCE",
+              "box": {
+                "x": 129.83334350585938,
+                "y": 106,
+                "width": 59.94791793823242,
+                "height": 30,
+                "top": 106,
+                "right": 189.7812614440918,
+                "bottom": 136,
+                "left": 129.83334350585938
+              },
+              "hit": true
+            },
+            {
+              "category": "VEHICLES",
+              "box": {
+                "x": 194.78125,
+                "y": 106,
+                "width": 61.07291793823242,
+                "height": 30,
+                "top": 106,
+                "right": 255.85416793823242,
+                "bottom": 136,
+                "left": 194.78125
+              },
+              "hit": true
+            },
+            {
+              "category": "CYBORG",
+              "box": {
+                "x": 260.85418701171875,
+                "y": 106,
+                "width": 55.13541793823242,
+                "height": 30,
+                "top": 106,
+                "right": 315.9896049499512,
+                "bottom": 136,
+                "left": 260.85418701171875
+              },
+              "hit": true
+            },
+            {
+              "category": "SYSTEMS",
+              "box": {
+                "x": 320.9895935058594,
+                "y": 106,
+                "width": 61.208335876464844,
+                "height": 30,
+                "top": 106,
+                "right": 382.1979293823242,
+                "bottom": 136,
+                "left": 320.9895935058594
+              },
+              "hit": true
+            },
+            {
+              "category": "STRUCTURES",
+              "box": {
+                "x": 387.19793701171875,
+                "y": 106,
+                "width": 72.08333587646484,
+                "height": 30,
+                "top": 106,
+                "right": 459.2812728881836,
+                "bottom": 136,
+                "left": 387.19793701171875
+              },
+              "hit": true
+            }
+          ],
+          "cards": [
+            {
+              "id": "R-Vehicle-Body05",
+              "name": "Medium Body - Cobra",
+              "metadata": "VEHICLES · 1,200 RESEARCH PTS",
+              "status": "READY",
+              "power": "POWER 37",
+              "box": {
+                "x": 22,
+                "y": 144,
+                "width": 354,
+                "height": 82,
+                "top": 144,
+                "right": 376,
+                "bottom": 226,
+                "left": 22
+              }
+            },
+            {
+              "id": "R-Vehicle-Engine03",
+              "name": "Fuel Injection Engine Mk3",
+              "metadata": "VEHICLES · 4,800 RESEARCH PTS",
+              "status": "READY",
+              "power": "POWER 150",
+              "box": {
+                "x": 384,
+                "y": 144,
+                "width": 354,
+                "height": 82,
+                "top": 144,
+                "right": 738,
+                "bottom": 226,
+                "left": 384
+              }
+            },
+            {
+              "id": "R-Vehicle-Metals01",
+              "name": "Composite Alloys",
+              "metadata": "VEHICLES · 1,800 RESEARCH PTS",
+              "status": "READY",
+              "power": "POWER 56",
+              "box": {
+                "x": 22,
+                "y": 231,
+                "width": 354,
+                "height": 82,
+                "top": 231,
+                "right": 376,
+                "bottom": 313,
+                "left": 22
+              }
+            },
+            {
+              "id": "R-Vehicle-Prop-Hover",
+              "name": "Hover Propulsion",
+              "metadata": "VEHICLES · 3,600 RESEARCH PTS",
+              "status": "READY",
+              "power": "POWER 112",
+              "box": {
+                "x": 384,
+                "y": 231,
+                "width": 354,
+                "height": 82,
+                "top": 231,
+                "right": 738,
+                "bottom": 313,
+                "left": 384
+              }
+            },
+            {
+              "id": "R-Wpn-Cannon-Damage02",
+              "name": "HEAT Cannon Shells Mk2",
+              "metadata": "WEAPONS · 2,450 RESEARCH PTS",
+              "status": "READY",
+              "power": "POWER 76",
+              "box": {
+                "x": 22,
+                "y": 318,
+                "width": 354,
+                "height": 82,
+                "top": 318,
+                "right": 376,
+                "bottom": 400,
+                "left": 22
+              }
+            },
+            {
+              "id": "R-Wpn-Cannon2Mk1",
+              "name": "Medium Cannon",
+              "metadata": "WEAPONS · 3,600 RESEARCH PTS",
+              "status": "READY",
+              "power": "POWER 112",
+              "box": {
+                "x": 384,
+                "y": 318,
+                "width": 354,
+                "height": 82,
+                "top": 318,
+                "right": 738,
+                "bottom": 400,
+                "left": 384
+              }
+            },
+            {
+              "id": "R-Wpn-Flamer-Damage03",
+              "name": "High Temperature Flamer Gel Mk3",
+              "metadata": "WEAPONS · 2,500 RESEARCH PTS",
+              "status": "READY",
+              "power": "POWER 75",
+              "box": {
+                "x": 22,
+                "y": 405,
+                "width": 354,
+                "height": 82,
+                "top": 405,
+                "right": 376,
+                "bottom": 487,
+                "left": 22
+              }
+            },
+            {
+              "id": "R-Wpn-MG-Damage04",
+              "name": "APDSB MG Bullets Mk3",
+              "metadata": "WEAPONS · 6,000 RESEARCH PTS",
+              "status": "READY",
+              "power": "POWER 225",
+              "box": {
+                "x": 384,
+                "y": 405,
+                "width": 354,
+                "height": 82,
+                "top": 405,
+                "right": 738,
+                "bottom": 487,
+                "left": 384
+              }
+            },
+            {
+              "id": "R-Wpn-MG3Mk1",
+              "name": "Heavy Machinegun",
+              "metadata": "WEAPONS · 1,200 RESEARCH PTS",
+              "status": "READY",
+              "power": "POWER 37",
+              "box": {
+                "x": 22,
+                "y": 492,
+                "width": 354,
+                "height": 82,
+                "top": 492,
+                "right": 376,
+                "bottom": 574,
+                "left": 22
+              }
+            },
+            {
+              "id": "R-Wpn-Mortar-Damage01",
+              "name": "HE Mortar Shells",
+              "metadata": "WEAPONS · 1,800 RESEARCH PTS",
+              "status": "READY",
+              "power": "POWER 56",
+              "box": {
+                "x": 384,
+                "y": 492,
+                "width": 354,
+                "height": 82,
+                "top": 492,
+                "right": 738,
+                "bottom": 574,
+                "left": 384
+              }
+            },
+            {
+              "id": "R-Wpn-Rocket-Damage02",
+              "name": "HE Rockets Mk2",
+              "metadata": "WEAPONS · 2,400 RESEARCH PTS",
+              "status": "READY",
+              "power": "POWER 75",
+              "box": {
+                "x": 22,
+                "y": 579,
+                "width": 354,
+                "height": 82,
+                "top": 579,
+                "right": 376,
+                "bottom": 661,
+                "left": 22
+              }
+            },
+            {
+              "id": "R-Struc-Research-Upgrade02",
+              "name": "Synaptic Link Data Analysis Mk2",
+              "metadata": "STRUCTURES · 2,400 RESEARCH PTS",
+              "status": "READY",
+              "power": "POWER 75",
+              "box": {
+                "x": 384,
+                "y": 579,
+                "width": 354,
+                "height": 82,
+                "top": 579,
+                "right": 738,
+                "bottom": 661,
+                "left": 384
+              }
+            },
+            {
+              "id": "R-Sys-MobileRepairTurretHvy",
+              "name": "Heavy Repair Turret",
+              "metadata": "SYSTEMS · 2,400 RESEARCH PTS",
+              "status": "READY",
+              "power": "POWER 75",
+              "box": {
+                "x": 22,
+                "y": 666,
+                "width": 354,
+                "height": 82,
+                "top": 666,
+                "right": 376,
+                "bottom": 748,
+                "left": 22
+              }
+            },
+            {
+              "id": "R-Struc-Factory-Upgrade01",
+              "name": "Automated Manufacturing",
+              "metadata": "STRUCTURES · 2,400 RESEARCH PTS",
+              "status": "READY",
+              "power": "POWER 75",
+              "box": {
+                "x": 384,
+                "y": 666,
+                "width": 354,
+                "height": 82,
+                "top": 666,
+                "right": 738,
+                "bottom": 748,
+                "left": 384
+              }
+            },
+            {
+              "id": "R-Struc-RepairFacility",
+              "name": "Repair Facility",
+              "metadata": "STRUCTURES · 2,400 RESEARCH PTS",
+              "status": "READY",
+              "power": "POWER 75",
+              "box": {
+                "x": 22,
+                "y": 753,
+                "width": 354,
+                "height": 82,
+                "top": 753,
+                "right": 376,
+                "bottom": 835,
+                "left": 22
+              }
+            },
+            {
+              "id": "R-Cyborg-Metals01",
+              "name": "Cyborg Composite Alloys",
+              "metadata": "CYBORG · 1,200 RESEARCH PTS",
+              "status": "READY",
+              "power": "POWER 37",
+              "box": {
+                "x": 384,
+                "y": 753,
+                "width": 354,
+                "height": 82,
+                "top": 753,
+                "right": 738,
+                "bottom": 835,
+                "left": 384
+              }
+            },
+            {
+              "id": "R-Defense-MortarPit",
+              "name": "Mortar Pit",
+              "metadata": "WEAPONS · 600 RESEARCH PTS",
+              "status": "READY",
+              "power": "POWER 18",
+              "box": {
+                "x": 22,
+                "y": 840,
+                "width": 354,
+                "height": 82,
+                "top": 840,
+                "right": 376,
+                "bottom": 922,
+                "left": 22
+              }
+            },
+            {
+              "id": "R-Defense-WallUpgrade03",
+              "name": "Improved Hardcrete Mk3",
+              "metadata": "DEFENCE · 3,600 RESEARCH PTS",
+              "status": "READY",
+              "power": "POWER 112",
+              "box": {
+                "x": 384,
+                "y": 840,
+                "width": 354,
+                "height": 82,
+                "top": 840,
+                "right": 738,
+                "bottom": 922,
+                "left": 384
+              }
+            }
+          ],
+          "images": [
+            {
+              "src": "build-icons/A0ResearchFacility.png",
+              "complete": true,
+              "width": 109
+            },
+            {
+              "src": "build-icons/A0ResearchFacility.png",
+              "complete": true,
+              "width": 109
+            },
+            {
+              "src": "build-icons/A0ResearchFacility.png",
+              "complete": true,
+              "width": 109
+            },
+            {
+              "src": "build-icons/A0ResearchFacility.png",
+              "complete": true,
+              "width": 109
+            },
+            {
+              "src": "research-icons/Medium%20Body%20-%20Cobra.gif",
+              "complete": true,
+              "width": 60
+            },
+            {
+              "src": "research-icons/Fuel%20Injection%20Engine%20Mk3.gif",
+              "complete": true,
+              "width": 60
+            },
+            {
+              "src": "research-icons/Composite%20Alloys.gif",
+              "complete": true,
+              "width": 60
+            },
+            {
+              "src": "research-icons/Hover%20Propulsion.gif",
+              "complete": true,
+              "width": 60
+            },
+            {
+              "src": "research-icons/HEAT%20Cannon%20Shells%20Mk2.gif",
+              "complete": true,
+              "width": 60
+            },
+            {
+              "src": "research-icons/Medium%20Cannon.gif",
+              "complete": true,
+              "width": 60
+            },
+            {
+              "src": "research-icons/High%20Temperature%20Flamer%20Gel%20Mk3.gif",
+              "complete": true,
+              "width": 60
+            },
+            {
+              "src": "research-icons/APDSB%20MG%20Bullets%20Mk3.gif",
+              "complete": true,
+              "width": 60
+            },
+            {
+              "src": "research-icons/Heavy%20Machinegun.gif",
+              "complete": true,
+              "width": 60
+            },
+            {
+              "src": "research-icons/HE%20Mortar%20Shells.gif",
+              "complete": true,
+              "width": 60
+            },
+            {
+              "src": "research-icons/HE%20Rockets%20Mk2.gif",
+              "complete": true,
+              "width": 60
+            },
+            {
+              "src": "research-icons/Synaptic%20Link%20Data%20Analysis%20Mk2.gif",
+              "complete": true,
+              "width": 60
+            },
+            {
+              "src": "research-icons/Heavy%20Repair%20Turret.gif",
+              "complete": true,
+              "width": 60
+            },
+            {
+              "src": "research-icons/Automated%20Manufacturing.gif",
+              "complete": true,
+              "width": 60
+            },
+            {
+              "src": "research-icons/Repair%20Facility.gif",
+              "complete": true,
+              "width": 60
+            },
+            {
+              "src": "research-icons/Cyborg%20Composite%20Alloys.gif",
+              "complete": true,
+              "width": 60
+            },
+            {
+              "src": "research-icons/Mortar%20Pit.gif",
+              "complete": true,
+              "width": 60
+            },
+            {
+              "src": "research-icons/Improved%20Hardcrete%20Mk3.gif",
+              "complete": true,
+              "width": 60
+            },
+            {
+              "src": "research-icons/Research%20Module.gif",
+              "complete": true,
+              "width": 60
+            }
+          ],
+          "frame": {
+            "x": 0,
+            "y": 56,
+            "width": 1231.3333740234375,
+            "height": 498,
+            "top": 56,
+            "right": 1231.3333740234375,
+            "bottom": 554,
+            "left": 0
+          },
+          "canvas": {
+            "box": {
+              "x": 0,
+              "y": 0,
+              "width": 1231,
+              "height": 498,
+              "top": 0,
+              "right": 1231,
+              "bottom": 498,
+              "left": 0
+            },
+            "width": 1847,
+            "height": 747,
+            "filter": ""
+          },
+          "research": {
+            "active": true,
+            "version": 38,
+            "open": true,
+            "opening": false,
+            "opens": 7,
+            "closes": 6,
+            "topicSelections": 1,
+            "labSelections": 2,
+            "categoryChanges": 1,
+            "activeLab": 2,
+            "activeCategory": "ALL",
+            "catalogCount": 18,
+            "catalogSample": [
+              "Medium Body - Cobra",
+              "Fuel Injection Engine Mk3",
+              "Composite Alloys",
+              "Hover Propulsion"
+            ],
+            "labCount": 4,
+            "readyLabs": 4,
+            "labIds": [
+              160169,
+              160171,
+              160173,
+              160175
+            ],
+            "playerPower": 2542,
+            "labs": [
+              {
+                "id": 160169,
+                "nativeIndex": 0,
+                "idle": true,
+                "modules": 1,
+                "health": 100,
+                "topicId": "",
+                "topicName": "",
+                "remainingSeconds": null,
+                "estimatedProgress": 0,
+                "waitingPower": false
+              },
+              {
+                "id": 160171,
+                "nativeIndex": 1,
+                "idle": true,
+                "modules": 1,
+                "health": 100,
+                "topicId": "",
+                "topicName": "",
+                "remainingSeconds": null,
+                "estimatedProgress": 0,
+                "waitingPower": false
+              },
+              {
+                "id": 160173,
+                "nativeIndex": 2,
+                "idle": true,
+                "modules": 1,
+                "health": 100,
+                "topicId": "",
+                "topicName": "",
+                "remainingSeconds": null,
+                "estimatedProgress": 0,
+                "waitingPower": false
+              },
+              {
+                "id": 160175,
+                "nativeIndex": 3,
+                "idle": true,
+                "modules": 1,
+                "health": 100,
+                "topicId": "",
+                "topicName": "",
+                "remainingSeconds": null,
+                "estimatedProgress": 0,
+                "waitingPower": false
+              }
+            ],
+            "bridgeSyncs": 982,
+            "bridgeErrors": 0,
+            "commandAcks": 4,
+            "commandRejects": 0,
+            "commandTimeouts": 0,
+            "queueAdds": 3,
+            "queueRemovals": 1,
+            "directAssignments": 1,
+            "directFailures": 0,
+            "queueSyncs": 4,
+            "queueStateEvents": 941,
+            "queueCommandWrites": 4,
+            "queueCommandErrors": 0,
+            "backgroundSyncs": 0,
+            "lastSyncDurationMs": 175,
+            "queues": [
+              [],
+              [],
+              [],
+              []
+            ],
+            "dirtyLabIds": [],
+            "pendingClose": false,
+            "syncBlocked": false,
+            "runner": null,
+            "pendingCommand": null,
+            "fsPolls": 6970,
+            "fsErrors": 9,
+            "fsLogFiles": [
+              "Scavengers.1.log",
+              "Scavengers.2.log",
+              "Scavengers.3.log",
+              "init.0.log"
+            ],
+            "completedEvents": 222,
+            "lastTopic": "Mortar Pit",
+            "lastCompleted": "Improved Hardcrete",
+            "canvasRestored": false
+          },
+          "progress": {
+            "hidden": true,
+            "value": null
+          },
+          "text": "RESEARCH\n2,542\nBACK TO BATTLE\nLab1\nLab2\nLab3\nLab4\nAll\nWeapons\nDefence\nVehicles\nCyborg\nSystems\nStructures\nMedium Body - Cobra\nVEHICLES · 1,200 RESEARCH PTS\nREADY\nPOWER 37\nFuel Injection Engine Mk3\nVEHICLES · 4,800 RESEARCH PTS\nREADY\nPOWER 150\nComposite Alloys\nVEHICLES · 1,800 RESEARCH PTS\nREADY\nPOWER 56\nHover Propulsion\nVEHICLES · 3,600 RESEARCH PTS\nREADY\nPOWER 112\nHEAT Cannon Shells Mk2\nWEAPONS · 2,450 RESEARCH PTS\nREADY\nPOWER 76\nMedium Cannon\nWEAPONS · 3,600 RESEARCH PTS\nREADY\nPOWER 112\nHigh Temperature Flamer Gel Mk3\nWEAPONS · 2,500 RESEARCH PTS\nREADY\nPOWER 75\nAPDSB MG Bullets Mk3\nWEAPONS · 6,000 RESEARCH PTS\nREADY\nPOWER 225\nHeavy Machinegun\nWEAPONS · 1,200 RESEARCH PTS\nREADY\nPOWER 37\nHE Mortar Shells\nWEAPONS · 1,800 RESEARCH PTS\nREADY\nPOWER 56\nHE Rockets Mk2\nWEAPONS · 2,400 RESEARCH PTS\nREADY\nPOWER 75\nSynaptic Link Data Analysis Mk2\nSTRUCTURES · 2,400 RESEARCH PTS\nREADY\nPOWER 75\nHeavy Repair Turret\nSYSTEMS · 2,400 RESEARCH PTS\nREADY\nPOWER 75\nAutomated Manufacturing\nSTRUCTURES · 2,400 RESEARCH PTS\nREADY\nPOWER 75\nRepair Facility\nSTRUCTURES · 2,400 RESEARCH PTS\nREADY\nPOWER 75\nCyborg Composite Alloys\nCYBORG · 1,200 RESEARCH PTS\nREADY\nPOWER 37\nMortar Pit\nWEAPONS · 600 RESEARCH PTS\nREADY\nPOWER 18\nImproved Hardcrete Mk3\nDEFENCE · 3,600 RESEARCH PTS\nREADY\nPOWER 112\nFuel Injection Engine Mk3\nADD TO LAB 3 QUEUE\nLAB3 · READY\nNo active research\nUP NEXT · LAB 3\nEMPTY\nNo waiting technologies."
+        },
+        "overflow": {
+          "panel": {
+            "x": 10,
+            "y": 10,
+            "width": 740,
+            "height": 414,
+            "top": 10,
+            "right": 750,
+            "bottom": 424,
+            "left": 10
+          },
+          "overflow": [
+            740,
+            740
+          ],
+          "host": [
+            1231,
+            1231,
+            1231,
+            1231
+          ],
+          "content": [
+            {
+              "className": "bn-tech-list",
+              "id": "",
+              "overflow": [
+                716,
+                716
+              ],
+              "box": {
+                "x": 22,
+                "y": 144,
+                "width": 716,
+                "height": 159,
+                "top": 144,
+                "right": 738,
+                "bottom": 303,
+                "left": 22
+              }
+            }
+          ]
+        }
+      },
+      "screenshots": [
+        "qa/test-14/final-wide-r5/lab-14-wide-research.png"
+      ]
+    },
+    {
+      "id": "build",
+      "profile": "wide-phone",
+      "passed": true,
+      "identity": {
+        "packageId": "com.rbabbit.warzonetowers.lab",
+        "device": "emulator-5556",
+        "candidateAPK_SHA256": "81e08ca7fb3cc511c03be5177fa1656261f9bf510275fd174f7a22cbecf65237",
+        "installedPath": "/data/app/~~QfZPV0A2ACdFJZu70gADwg==/com.rbabbit.warzonetowers.lab-UuKGlU5KPqtmdahvqLLHog==/base.apk",
+        "htmlControlInput": {
+          "method": "CDP Input.dispatchTouchEvent touchStart/touchEnd",
+          "durationMs": 60,
+          "gestureSourceType": "touch",
+          "timing": "Ordered WebSocket start/end with explicit60ms timestamps; end scheduled after60ms without awaiting the start response",
+          "disclosure": "Measured, hit-tested standard trusted WebView touch events for HTML controls; Android/ADB world touches, Back, keyboard and native UI remain unchanged. No DOM click or experimental compositor gesture API."
+        }
+      },
+      "clock": 167002,
+      "observations": {
+        "geometry": {
+          "viewport": [
+            1231,
+            554
+          ],
+          "sidebar": {
+            "x": 6,
+            "y": 56,
+            "width": 242,
+            "height": 486,
+            "top": 56,
+            "right": 248,
+            "bottom": 542,
+            "left": 6
+          },
+          "list": {
+            "x": 6,
+            "y": 132,
+            "width": 242,
+            "height": 318.6145935058594,
+            "top": 132,
+            "right": 248,
+            "bottom": 450.6145935058594,
+            "left": 6
+          },
+          "scroll": [
+            0,
+            877,
+            319,
+            242,
+            242
+          ],
+          "hint": {
+            "text": "Upgrade existing buildingsChoose a module, then tap a matching building.",
+            "hidden": true,
+            "box": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0,
+              "top": 0,
+              "right": 0,
+              "bottom": 0,
+              "left": 0
+            }
+          },
+          "exit": {
+            "box": {
+              "x": 13,
+              "y": 501,
+              "width": 228,
+              "height": 34,
+              "top": 501,
+              "right": 241,
+              "bottom": 535,
+              "left": 13
+            },
+            "hit": true
+          },
+          "queue": {
+            "box": {
+              "x": 6,
+              "y": 450.6145935058594,
+              "width": 242,
+              "height": 45.38541793823242,
+              "top": 450.6145935058594,
+              "right": 248,
+              "bottom": 496.0000114440918,
+              "left": 6
+            },
+            "heading": {
+              "x": 14,
+              "y": 456.6145935058594,
+              "width": 226,
+              "height": 13.791666984558105,
+              "top": 456.6145935058594,
+              "right": 240,
+              "bottom": 470.4062604904175,
+              "left": 14
+            },
+            "text": "CONSTRUCTION\n0 PENDING",
+            "rows": [],
+            "all": null
+          },
+          "cards": [
+            {
+              "id": "A0HardcreteMk1Gate",
+              "box": {
+                "x": 12,
+                "y": 132,
+                "width": 227,
+                "height": 79.75,
+                "top": 132,
+                "right": 239,
+                "bottom": 211.75,
+                "left": 12
+              },
+              "hit": true,
+              "selected": "false"
+            },
+            {
+              "id": "A0HardcreteMk1Wall",
+              "box": {
+                "x": 12,
+                "y": 211.75,
+                "width": 227,
+                "height": 79.75,
+                "top": 211.75,
+                "right": 239,
+                "bottom": 291.5,
+                "left": 12
+              },
+              "hit": true,
+              "selected": "false"
+            },
+            {
+              "id": "A0TankTrap",
+              "box": {
+                "x": 12,
+                "y": 291.5,
+                "width": 227,
+                "height": 79.75,
+                "top": 291.5,
+                "right": 239,
+                "bottom": 371.25,
+                "left": 12
+              },
+              "hit": true,
+              "selected": "false"
+            },
+            {
+              "id": "GuardTower1",
+              "box": {
+                "x": 12,
+                "y": 371.25,
+                "width": 227,
+                "height": 79.75,
+                "top": 371.25,
+                "right": 239,
+                "bottom": 451,
+                "left": 12
+              },
+              "hit": true,
+              "selected": "false"
+            },
+            {
+              "id": "GuardTower6",
+              "box": {
+                "x": 12,
+                "y": 451,
+                "width": 227,
+                "height": 79.75,
+                "top": 451,
+                "right": 239,
+                "bottom": 530.75,
+                "left": 12
+              },
+              "hit": false,
+              "selected": "false"
+            },
+            {
+              "id": "PillBox1",
+              "box": {
+                "x": 12,
+                "y": 530.75,
+                "width": 227,
+                "height": 79.75,
+                "top": 530.75,
+                "right": 239,
+                "bottom": 610.5,
+                "left": 12
+              },
+              "hit": false,
+              "selected": "false"
+            },
+            {
+              "id": "PillBox4",
+              "box": {
+                "x": 12,
+                "y": 610.5,
+                "width": 227,
+                "height": 79.75,
+                "top": 610.5,
+                "right": 239,
+                "bottom": 690.25,
+                "left": 12
+              },
+              "hit": false,
+              "selected": "false"
+            },
+            {
+              "id": "PillBox5",
+              "box": {
+                "x": 12,
+                "y": 690.25,
+                "width": 227,
+                "height": 79.75,
+                "top": 690.25,
+                "right": 239,
+                "bottom": 770,
+                "left": 12
+              },
+              "hit": false,
+              "selected": "false"
+            },
+            {
+              "id": "Sys-SensoTower01",
+              "box": {
+                "x": 12,
+                "y": 770,
+                "width": 227,
+                "height": 79.75,
+                "top": 770,
+                "right": 239,
+                "bottom": 849.75,
+                "left": 12
+              },
+              "hit": false,
+              "selected": "false"
+            },
+            {
+              "id": "Sys-SensoTower02",
+              "box": {
+                "x": 12,
+                "y": 849.75,
+                "width": 227,
+                "height": 79.75,
+                "top": 849.75,
+                "right": 239,
+                "bottom": 929.5,
+                "left": 12
+              },
+              "hit": false,
+              "selected": "false"
+            },
+            {
+              "id": "WallTower02",
+              "box": {
+                "x": 12,
+                "y": 929.5,
+                "width": 227,
+                "height": 79.75,
+                "top": 929.5,
+                "right": 239,
+                "bottom": 1009.25,
+                "left": 12
+              },
+              "hit": false,
+              "selected": "false"
+            }
+          ],
+          "images": [
+            {
+              "src": "/warzone/ui/icons/x.svg",
+              "complete": true,
+              "width": 150
+            },
+            {
+              "src": "/warzone/research-icons/Hardcrete%20Gate.gif",
+              "complete": true,
+              "width": 60
+            },
+            {
+              "src": "/warzone/research-icons/Improved%20Hardcrete.gif",
+              "complete": true,
+              "width": 60
+            },
+            {
+              "src": "/warzone/research-icons/Tank%20Traps.gif",
+              "complete": true,
+              "width": 60
+            },
+            {
+              "src": "/warzone/research-icons/Machinegun%20Guard%20Tower.gif",
+              "complete": true,
+              "width": 60
+            },
+            {
+              "src": "/warzone/research-icons/Mini-Rocket%20Tower.gif",
+              "complete": true,
+              "width": 60
+            },
+            {
+              "src": "/warzone/research-icons/Machinegun%20Bunker.gif",
+              "complete": true,
+              "width": 60
+            },
+            {
+              "src": "/warzone/research-icons/Light%20Cannon%20Bunker.gif",
+              "complete": true,
+              "width": 60
+            },
+            {
+              "src": "/warzone/research-icons/Flamer%20Bunker.gif",
+              "complete": true,
+              "width": 60
+            },
+            {
+              "src": "/warzone/research-icons/Sensor%20Tower.gif",
+              "complete": true,
+              "width": 60
+            },
+            {
+              "src": "/warzone/research-icons/Hardened%20Sensor%20Tower.gif",
+              "complete": true,
+              "width": 60
+            },
+            {
+              "src": "/warzone/research-icons/Light%20Cannon%20Hardpoint.gif",
+              "complete": true,
+              "width": 60
+            }
+          ],
+          "bodyScroll": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "overflow": {
+          "panel": {
+            "x": 6,
+            "y": 56,
+            "width": 242,
+            "height": 486,
+            "top": 56,
+            "right": 248,
+            "bottom": 542,
+            "left": 6
+          },
+          "overflow": [
+            242,
+            242
+          ],
+          "host": [
+            1231,
+            1231,
+            1231,
+            1231
+          ],
+          "content": []
+        }
+      },
+      "screenshots": [
+        "qa/test-14/final-wide-r5/lab-14-wide-build.png"
+      ]
+    },
+    {
+      "id": "modules",
+      "profile": "wide-phone",
+      "passed": true,
+      "identity": {
+        "packageId": "com.rbabbit.warzonetowers.lab",
+        "device": "emulator-5556",
+        "candidateAPK_SHA256": "81e08ca7fb3cc511c03be5177fa1656261f9bf510275fd174f7a22cbecf65237",
+        "installedPath": "/data/app/~~QfZPV0A2ACdFJZu70gADwg==/com.rbabbit.warzonetowers.lab-UuKGlU5KPqtmdahvqLLHog==/base.apk",
+        "htmlControlInput": {
+          "method": "CDP Input.dispatchTouchEvent touchStart/touchEnd",
+          "durationMs": 60,
+          "gestureSourceType": "touch",
+          "timing": "Ordered WebSocket start/end with explicit60ms timestamps; end scheduled after60ms without awaiting the start response",
+          "disclosure": "Measured, hit-tested standard trusted WebView touch events for HTML controls; Android/ADB world touches, Back, keyboard and native UI remain unchanged. No DOM click or experimental compositor gesture API."
+        }
+      },
+      "clock": 172002,
+      "observations": {
+        "geometry": {
+          "viewport": [
+            1231,
+            554
+          ],
+          "sidebar": {
+            "x": 6,
+            "y": 56,
+            "width": 242,
+            "height": 402.38543701171875,
+            "top": 56,
+            "right": 248,
+            "bottom": 458.38543701171875,
+            "left": 6
+          },
+          "list": {
+            "x": 6,
+            "y": 169,
+            "width": 242,
+            "height": 198,
+            "top": 169,
+            "right": 248,
+            "bottom": 367,
+            "left": 6
+          },
+          "scroll": [
+            0,
+            198,
+            198,
+            242,
+            242
+          ],
+          "hint": {
+            "text": "Upgrade existing buildings\nChoose a module, then tap a matching building.",
+            "hidden": false,
+            "box": {
+              "x": 6,
+              "y": 132,
+              "width": 242,
+              "height": 37,
+              "top": 132,
+              "right": 248,
+              "bottom": 169,
+              "left": 6
+            }
+          },
+          "exit": {
+            "box": {
+              "x": 13,
+              "y": 417.38543701171875,
+              "width": 228,
+              "height": 34,
+              "top": 417.38543701171875,
+              "right": 241,
+              "bottom": 451.38543701171875,
+              "left": 13
+            },
+            "hit": true
+          },
+          "queue": {
+            "box": {
+              "x": 6,
+              "y": 367,
+              "width": 242,
+              "height": 45.38541793823242,
+              "top": 367,
+              "right": 248,
+              "bottom": 412.3854179382324,
+              "left": 6
+            },
+            "heading": {
+              "x": 14,
+              "y": 373,
+              "width": 226,
+              "height": 13.791666984558105,
+              "top": 373,
+              "right": 240,
+              "bottom": 386.7916669845581,
+              "left": 14
+            },
+            "text": "CONSTRUCTION\n0 PENDING",
+            "rows": [],
+            "all": null
+          },
+          "cards": [
+            {
+              "id": "A0FacMod1",
+              "box": {
+                "x": 12,
+                "y": 169,
+                "width": 227,
+                "height": 66,
+                "top": 169,
+                "right": 239,
+                "bottom": 235,
+                "left": 12
+              },
+              "hit": true,
+              "selected": "false"
+            },
+            {
+              "id": "A0PowMod1",
+              "box": {
+                "x": 12,
+                "y": 235,
+                "width": 227,
+                "height": 66,
+                "top": 235,
+                "right": 239,
+                "bottom": 301,
+                "left": 12
+              },
+              "hit": true,
+              "selected": "false"
+            },
+            {
+              "id": "A0ResearchModule1",
+              "box": {
+                "x": 12,
+                "y": 301,
+                "width": 227,
+                "height": 66,
+                "top": 301,
+                "right": 239,
+                "bottom": 367,
+                "left": 12
+              },
+              "hit": true,
+              "selected": "false"
+            }
+          ],
+          "images": [
+            {
+              "src": "/warzone/ui/icons/x.svg",
+              "complete": true,
+              "width": 150
+            },
+            {
+              "src": "/warzone/research-icons/Factory%20Module.gif",
+              "complete": true,
+              "width": 60
+            },
+            {
+              "src": "/warzone/research-icons/Power%20Module.gif",
+              "complete": true,
+              "width": 60
+            },
+            {
+              "src": "/warzone/research-icons/Research%20Module.gif",
+              "complete": true,
+              "width": 60
+            }
+          ],
+          "bodyScroll": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "overflow": {
+          "panel": {
+            "x": 6,
+            "y": 56,
+            "width": 242,
+            "height": 402.38543701171875,
+            "top": 56,
+            "right": 248,
+            "bottom": 458.38543701171875,
+            "left": 6
+          },
+          "overflow": [
+            242,
+            242
+          ],
+          "host": [
+            1231,
+            1231,
+            1231,
+            1231
+          ],
+          "content": []
+        }
+      },
+      "screenshots": [
+        "qa/test-14/final-wide-r5/lab-14-wide-modules.png"
+      ]
+    },
+    {
+      "id": "help",
+      "profile": "wide-phone",
+      "passed": true,
+      "identity": {
+        "packageId": "com.rbabbit.warzonetowers.lab",
+        "device": "emulator-5556",
+        "candidateAPK_SHA256": "81e08ca7fb3cc511c03be5177fa1656261f9bf510275fd174f7a22cbecf65237",
+        "installedPath": "/data/app/~~QfZPV0A2ACdFJZu70gADwg==/com.rbabbit.warzonetowers.lab-UuKGlU5KPqtmdahvqLLHog==/base.apk",
+        "htmlControlInput": {
+          "method": "CDP Input.dispatchTouchEvent touchStart/touchEnd",
+          "durationMs": 60,
+          "gestureSourceType": "touch",
+          "timing": "Ordered WebSocket start/end with explicit60ms timestamps; end scheduled after60ms without awaiting the start response",
+          "disclosure": "Measured, hit-tested standard trusted WebView touch events for HTML controls; Android/ADB world touches, Back, keyboard and native UI remain unchanged. No DOM click or experimental compositor gesture API."
+        }
+      },
+      "clock": 179002,
+      "observations": {
+        "viewport": [
+          1231,
+          554
+        ],
+        "panel": {
+          "x": 10,
+          "y": 66,
+          "width": 740,
+          "height": 414,
+          "top": 66,
+          "right": 750,
+          "bottom": 480,
+          "left": 10
+        },
+        "header": {
+          "x": 10,
+          "y": 66,
+          "width": 740,
+          "height": 72.29167175292969,
+          "top": 66,
+          "right": 750,
+          "bottom": 138.2916717529297,
+          "left": 10
+        },
+        "content": {
+          "x": 10,
+          "y": 178.2916717529297,
+          "width": 740,
+          "height": 245.70834350585938,
+          "top": 178.2916717529297,
+          "right": 750,
+          "bottom": 424.00001525878906,
+          "left": 10
+        },
+        "footer": {
+          "x": 10,
+          "y": 424,
+          "width": 740,
+          "height": 56,
+          "top": 424,
+          "right": 750,
+          "bottom": 480,
+          "left": 10
+        },
+        "closeHit": true,
+        "backHit": true,
+        "overflow": [
+          740,
+          740
+        ]
+      },
+      "screenshots": [
+        "qa/test-14/final-wide-r5/lab-14-wide-help.png"
+      ]
+    }
+  ],
+  "screenshots": [
+    "qa/test-14/final-wide-r5/lab-14-wide-factory.png",
+    "qa/test-14/final-wide-r5/lab-14-wide-design.png",
+    "qa/test-14/final-wide-r5/lab-14-wide-saved.png",
+    "qa/test-14/final-wide-r5/lab-14-wide-queue.png",
+    "qa/test-14/final-wide-r5/lab-14-wide-research.png",
+    "qa/test-14/final-wide-r5/lab-14-wide-build.png",
+    "qa/test-14/final-wide-r5/lab-14-wide-modules.png",
+    "qa/test-14/final-wide-r5/lab-14-wide-help.png"
+  ],
+  "identity": {
+    "packageId": "com.rbabbit.warzonetowers.lab",
+    "device": "emulator-5556",
+    "candidateAPK_SHA256": "81e08ca7fb3cc511c03be5177fa1656261f9bf510275fd174f7a22cbecf65237",
+    "installedPath": "/data/app/~~QfZPV0A2ACdFJZu70gADwg==/com.rbabbit.warzonetowers.lab-UuKGlU5KPqtmdahvqLLHog==/base.apk",
+    "htmlControlInput": {
+      "method": "CDP Input.dispatchTouchEvent touchStart/touchEnd",
+      "durationMs": 60,
+      "gestureSourceType": "touch",
+      "timing": "Ordered WebSocket start/end with explicit60ms timestamps; end scheduled after60ms without awaiting the start response",
+      "disclosure": "Measured, hit-tested standard trusted WebView touch events for HTML controls; Android/ADB world touches, Back, keyboard and native UI remain unchanged. No DOM click or experimental compositor gesture API."
+    }
+  },
+  "beforeClock": 114502,
+  "initialAdvancingClock": 115502,
+  "libraryBefore": "{\"version\":1,\"designs\":[{\"id\":\"design-1794008136667-113\",\"name\":\"Design 2\",\"body\":\"Body1REC\",\"propulsion\":\"wheeled01\",\"turrets\":[\"MG1Mk1\"],\"cost\":55,\"points\":275,\"droidType\":0,\"factoryTemplate\":true},{\"id\":\"design-1794008147588-129\",\"name\":\"Lab Scout 54626\",\"body\":\"Body1REC\",\"propulsion\":\"wheeled01\",\"turrets\":[\"MG1Mk1\"],\"cost\":55,\"points\":275,\"droidType\":0},{\"id\":\"design-1794036575885-223\",\"name\":\"Truck Viper Wheels\",\"body\":\"Body1REC\",\"propulsion\":\"wheeled01\",\"turrets\":[\"Spade1Mk1\"],\"cost\":62,\"points\":310,\"droidType\":3,\"factoryTemplate\":true},{\"id\":\"design-1794036589502-235\",\"name\":\"Scout 97609\",\"body\":\"Body1REC\",\"propulsion\":\"wheeled01\",\"turrets\":[\"MG1Mk1\"],\"cost\":55,\"points\":275,\"droidType\":0},{\"id\":\"design-1794040213295-227\",\"name\":\"Scout 21399\",\"body\":\"Body1REC\",\"propulsion\":\"wheeled01\",\"turrets\":[\"MG1Mk1\"],\"cost\":55,\"points\":275,\"droidType\":0}]}",
+  "before": {
+    "session": "2d10e2bf-1e1a-4ac4-bdfd-6625aec82014",
+    "research": {
+      "adds": 3,
+      "removals": 1,
+      "writes": 4
+    },
+    "history": [
+      {
+        "nonce": "cmd-1794174720884-116",
+        "action": "save-design"
+      },
+      {
+        "nonce": "cmd-1794175061032-252",
+        "action": "queue-build"
+      },
+      {
+        "nonce": "cmd-1794175067181-257",
+        "action": "queue-build"
+      },
+      {
+        "nonce": "cmd-1794175251117-431",
+        "action": "queue-build"
+      },
+      {
+        "nonce": "cmd-1794175469121-486",
+        "action": "queue-production"
+      },
+      {
+        "nonce": "cmd-1794175477422-493",
+        "action": "queue-production"
+      }
+    ]
+  },
+  "liveResizeClock": 119502,
+  "frame": {
+    "x": 0,
+    "y": 56,
+    "width": 1231.3333740234375,
+    "height": 498,
+    "top": 56,
+    "right": 1231.3333740234375,
+    "bottom": 554,
+    "left": 0
+  },
+  "libraryAfter": "{\"version\":1,\"designs\":[{\"id\":\"design-1794008136667-113\",\"name\":\"Design 2\",\"body\":\"Body1REC\",\"propulsion\":\"wheeled01\",\"turrets\":[\"MG1Mk1\"],\"cost\":55,\"points\":275,\"droidType\":0,\"factoryTemplate\":true},{\"id\":\"design-1794008147588-129\",\"name\":\"Lab Scout 54626\",\"body\":\"Body1REC\",\"propulsion\":\"wheeled01\",\"turrets\":[\"MG1Mk1\"],\"cost\":55,\"points\":275,\"droidType\":0},{\"id\":\"design-1794036575885-223\",\"name\":\"Truck Viper Wheels\",\"body\":\"Body1REC\",\"propulsion\":\"wheeled01\",\"turrets\":[\"Spade1Mk1\"],\"cost\":62,\"points\":310,\"droidType\":3,\"factoryTemplate\":true},{\"id\":\"design-1794036589502-235\",\"name\":\"Scout 97609\",\"body\":\"Body1REC\",\"propulsion\":\"wheeled01\",\"turrets\":[\"MG1Mk1\"],\"cost\":55,\"points\":275,\"droidType\":0},{\"id\":\"design-1794040213295-227\",\"name\":\"Scout 21399\",\"body\":\"Body1REC\",\"propulsion\":\"wheeled01\",\"turrets\":[\"MG1Mk1\"],\"cost\":55,\"points\":275,\"droidType\":0}]}",
+  "after": {
+    "research": {
+      "adds": 3,
+      "removals": 1,
+      "writes": 4
+    },
+    "history": [
+      {
+        "nonce": "cmd-1794174720884-116",
+        "action": "save-design"
+      },
+      {
+        "nonce": "cmd-1794175061032-252",
+        "action": "queue-build"
+      },
+      {
+        "nonce": "cmd-1794175067181-257",
+        "action": "queue-build"
+      },
+      {
+        "nonce": "cmd-1794175251117-431",
+        "action": "queue-build"
+      },
+      {
+        "nonce": "cmd-1794175469121-486",
+        "action": "queue-production"
+      },
+      {
+        "nonce": "cmd-1794175477422-493",
+        "action": "queue-production"
+      }
+    ],
+    "touch": {
+      "active": true,
+      "version": 54,
+      "intercepted": 59,
+      "mouseEvents": 174,
+      "taps": 12,
+      "orders": 0,
+      "pans": 3,
+      "panMoves": 32,
+      "lastPanStartLatencyMs": 37.13499999046326,
+      "lastPanDispatchMs": 0.12999999523162842,
+      "maxPanDispatchMs": 25.009999990463257,
+      "boxSelections": 10,
+      "boxCadenceWaits": 0,
+      "boxPressGaps": [
+        2859.7699999809265,
+        644.4399999976158,
+        64635.49000000954,
+        820.0850000083447,
+        65288.814999997616,
+        60217.94499999285,
+        956.7349999845028,
+        1267.75,
+        82122.06999999285,
+        993.005000025034
+      ],
+      "lastNativeLeftDownAt": 2159902.819999993,
+      "manualSelectionRevision": 7,
+      "facilityOpens": 2,
+      "lastFacility": {
+        "id": 160167,
+        "kind": "factory"
+      },
+      "facilityError": "",
+      "pinchSteps": 0,
+      "tiltMoves": 0,
+      "tiltHeld": null,
+      "saveNames": 0,
+      "radarTaps": 9,
+      "radarDrags": 0,
+      "radarMoves": 0,
+      "cameraFacings": 1,
+      "cameraFacingPending": false,
+      "cameraHeading": "south",
+      "cameraFacingError": "",
+      "lastRadarPoint": {
+        "x": 0.8319436359316968,
+        "y": 0.812436374790994
+      },
+      "combatLock": false,
+      "autoFight": false,
+      "boxMode": false,
+      "queueMode": false,
+      "queueModifierHeld": false,
+      "stickyBuildActivations": 0,
+      "nativeStatsOpen": false,
+      "nativeObjectsOpen": false,
+      "pendingClicks": 0,
+      "nativeRenderFrames": 12916,
+      "queuedPointerEvents": 0,
+      "selectAlls": 0,
+      "manualSelectAlls": 0,
+      "combatOrders": 0,
+      "patrolOrders": 0,
+      "queuedOrders": 0,
+      "stopOrders": 0,
+      "stopPending": false,
+      "stopAcks": 0,
+      "stoppedUnitIds": [],
+      "baseJumps": 2,
+      "feedbacks": 12,
+      "doubleTaps": 0,
+      "coalescedSamples": 27,
+      "pointerCaptures": 24,
+      "zoomPreset": null,
+      "zoomPresetSelections": 0,
+      "zoomWheelEvents": 0,
+      "zoomCommandWrites": 2,
+      "zoomCommandErrors": 0,
+      "zoomAcks": 0,
+      "zoomPending": false,
+      "lastZoomDistance": null,
+      "gestureActive": false,
+      "hudVisible": true,
+      "battleActive": true,
+      "heldKeys": []
+    }
+  },
+  "afterIdentity": {
+    "packageId": "com.rbabbit.warzonetowers.lab",
+    "device": "emulator-5556",
+    "candidateAPK_SHA256": "81e08ca7fb3cc511c03be5177fa1656261f9bf510275fd174f7a22cbecf65237",
+    "installedPath": "/data/app/~~QfZPV0A2ACdFJZu70gADwg==/com.rbabbit.warzonetowers.lab-UuKGlU5KPqtmdahvqLLHog==/base.apk",
+    "htmlControlInput": {
+      "method": "CDP Input.dispatchTouchEvent touchStart/touchEnd",
+      "durationMs": 60,
+      "gestureSourceType": "touch",
+      "timing": "Ordered WebSocket start/end with explicit60ms timestamps; end scheduled after60ms without awaiting the start response",
+      "disclosure": "Measured, hit-tested standard trusted WebView touch events for HTML controls; Android/ADB world touches, Back, keyboard and native UI remain unchanged. No DOM click or experimental compositor gesture API."
+    }
+  },
+  "errors": [],
+  "restoredViewport": {
+    "device": [
+      1080,
+      600
+    ],
+    "host": {
+      "width": 1077,
+      "height": 598,
+      "frame": {
+        "x": 0,
+        "y": 56,
+        "width": 1076.666748046875,
+        "height": 542,
+        "top": 56,
+        "right": 1076.666748046875,
+        "bottom": 598,
+        "left": 0
+      }
+    }
+  },
+  "restoredLiveClock": 187002,
+  "cleanupPause": 191502,
+  "finished": "2026-11-08T22:24:36.428Z"
+}

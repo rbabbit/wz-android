@@ -1275,7 +1275,7 @@
           "blocknight-stop": "hand-palm", "blocknight-base": "house",
           "blocknight-zoom-close": "x", "blocknight-zoom-battle": "crosshair",
           "blocknight-zoom-map": "map-pin", "blocknight-tech": "flask",
-          "blocknight-help": "question", "wt-select-move": "crosshair", "wt-select-trucks": "stack"
+          "blocknight-help": "question", "wt-select-move": "crosshair", "wt-select-trucks": "stack", "wt-deselect-units": "deselect"
         };
         const icon = document.createElement("img");
         icon.src = `/warzone/ui/icons/${iconNames[id]}.svg`;
@@ -1336,10 +1336,11 @@
         hud.classList.add("wt-modern");
         const commands = document.createElement("div");
         commands.className = "bn-command-group";
-        for (const page of ["build", "design", "factory", "queue"]) {
+        const duelNavigation = window.__warzoneDuelConfig?.mode === 'duel';
+        for (const page of (duelNavigation ? ["build", "design", "factory", "queue"] : ["build", "factory", "queue"])) {
           const b = document.createElement("button");
-          b.id = `wt-open-${page}`; b.type = "button"; b.textContent = page.toUpperCase();
-          b.title = `Open ${page}`;
+          b.id = `wt-open-${page}`; b.type = "button"; b.textContent = !duelNavigation && page === 'factory' ? 'PRODUCTION' : page.toUpperCase();
+          b.title = `Open ${!duelNavigation && page === 'factory' ? 'production' : page}`;
           bindTouchCommand(b, () => window.__warzoneCommands.open(page));
           commands.appendChild(b);
         }
@@ -1351,7 +1352,13 @@
         const trucks=makeButton('wt-select-trucks','TRUCKS','Select construction trucks visible in the battlefield',()=>window.__warzoneCommands.selectNearbyTrucks());
         all.querySelector?.('span')&&(all.querySelector('span').textContent='ALL UNITS');
         auto.querySelector?.('span')&&(auto.querySelector('span').textContent='PATROL');
-        centre.append(select,all,auto,box,stop,trucks);hudDocument.body.appendChild(centre);
+        if(window.__warzoneDuelConfig?.mode==='duel')centre.append(select,all,auto,box,stop,trucks);
+        else {
+          auto.remove();box.remove();
+          const deselect=makeButton('wt-deselect-units','DESELECT','Clear all unit selection; existing orders continue',()=>window.__warzoneCommands.deselectUnits());
+          centre.append(select,all,deselect,stop,trucks);
+        }
+        hudDocument.body.appendChild(centre);
         const toggle=hudDocument.createElement('button');toggle.id='wt-field-toggle';toggle.type='button';
         toggle.setAttribute('aria-controls','wt-field-centre');toggle.setAttribute('aria-label','Unit controls');toggle.title='Unit controls';
         toggle.innerHTML='<img src="/warzone/ui/icons/stack.svg" alt=""><span id="wt-field-toggle-count"></span>';
@@ -1396,6 +1403,15 @@
     const duel=window.__warzoneDuelConfig?.mode==='duel'&&Object.isFrozen(window.__warzoneDuelConfig);
     const humanBranch=window.__warzoneDuelConfig?.humanBranch==='rockets'?'Rockets':'Cannon',botBranch=window.__warzoneDuelConfig?.botBranch==='rockets'?'Rockets':'Cannon';
     let help = hudDocument.getElementById("warzone-towers-help");
+    const syncHelpSize = () => {
+      if (duel) return;
+      const size = Number(hudDocument.documentElement.style.getPropertyValue('--wt-command-scale')) || 1;
+      for (const button of help.querySelectorAll('[data-ui-size]')) {
+        const selected = Math.abs(Number(button.dataset.uiSize) - size) < 0.01;
+        button.classList.toggle('active', selected);
+        button.setAttribute('aria-pressed', String(selected));
+      }
+    };
     if (!help) {
       const overlay = hudDocument.createElement("div");
       overlay.id = "warzone-towers-help-overlay";
@@ -1442,20 +1458,20 @@
             <p>In <b>BUILD → MODULES</b>, choose an upgrade and tap a highlighted, completed matching building: Research Module → research lab; Power Module → power generator; Factory Module → vehicle or VTOL factory.</p>
             <p>Labs and power generators each take one module; vehicle and VTOL factories take two. Highlights show ready, upgrading or full buildings. Finish the matching structure or research the module first if none is ready.</p></section>
           <section><h2>CHOOSE YOUR RESEARCH</h2>
-            <p>Top <b>TECH</b> opens the full page. Choose a lab, browse available topics, then tap <b>ADD TO LAB … QUEUE</b>. You choose every topic; each lab follows its own order. Use <b>×</b> to remove a waiting topic and <b>BACK TO BATTLE</b> to apply your queues.</p>
+            <p>Top <b>TECH</b> opens the full page. Choose a lab and tap one or more available topics. Numbers show your selection order; tap a selected topic again to deselect it. <b>ADD TO LAB … QUEUE</b> adds the selection in that order. Each lab follows its own queue. Use <b>×</b> to remove a waiting topic.</p>
             <p>Tap one of your completed labs on the battlefield to open that lab’s full research page.</p></section>
           <section><h2>CHECK CURRENT ACTIVITY</h2>
             <p>Bottom-left <b>RESEARCH</b> and <b>PRODUCTION</b> open narrow status panels while you watch the battlefield. Research shows each lab’s current topic and estimated progress; Production shows current units, with vehicle and cyborg tabs.</p>
-            <p>These panels show current work only. Use top <b>TECH</b> or <b>FACTORY</b> to change queues. Tap the selected footer button again or <b>×</b> to close the panel.</p></section>
+            <p>These panels show current work only. Use top <b>TECH</b> or <b>PRODUCTION</b> to change queues. Tap the selected footer button again or <b>×</b> to close the panel.</p></section>
           <section><h2>MAKE UNITS IN A FACTORY</h2>
-            <p>Open top <b>FACTORY</b>, or tap one of your completed factories on the battlefield. Select the intended factory, choose <b>QUANTITY</b> (1, 5, 10 or 20), then <b>PRODUCE</b> a compatible design. Orders belong to the selected factory.</p>
+            <p>Open top <b>PRODUCTION</b>, or tap one of your completed factories on the battlefield. Select the intended factory, choose <b>QUANTITY</b> (1, 5, 10 or 20), then <b>PRODUCE</b> a compatible design. Orders belong to the selected factory. Use <b>UNITS</b>, <b>DESIGN</b> and <b>BLUEPRINTS</b> inside Production to switch tasks.</p>
             <p>Production uses normal power and build time. Research, factory type, modules and unit limits still apply. The full page shows current work and waiting units; <b>QUEUE</b> shows wider activity.</p></section>
           <section><h2>KEEP YOUR BLUEPRINTS</h2>
-            <p>In <b>DESIGN</b>, choose a researched body, propulsion and weapon or system; name it and <b>SAVE BLUEPRINT</b>. Edit with <b>SAVE CHANGES</b>, or keep another version with <b>SAVE AS NEW</b>.</p>
-            <p>In Factory’s <b>•••</b> menu, <b>SAVE DESIGN TO PHONE</b> keeps the selected factory design. <b>BLUEPRINT LIBRARY</b> stores blueprints on this phone between games and app restarts. Saving a blueprint does not unlock its parts: research them again in the current battle before production.</p></section>
+            <p>In <b>PRODUCTION → DESIGN</b>, choose a researched body, propulsion and weapon or system; name it and <b>SAVE BLUEPRINT</b>. Edit with <b>SAVE CHANGES</b>, or keep another version with <b>SAVE AS NEW</b>.</p>
+            <p>In Production’s <b>•••</b> menu, <b>SAVE DESIGN TO PHONE</b> keeps the selected factory design. <b>BLUEPRINTS</b> stores blueprints on this phone between games and app restarts. Saving a blueprint does not unlock its parts: research them again in the current battle before production.</p></section>
           <section><h2>MOVE, LOOK &amp; RETURN</h2>
             <p><b>Tap</b> to select or give an order; <b>swipe</b> to pan; <b>pinch</b> to zoom. Move two fingers together up/down to tilt. Tap the minimap to move the view; <b>BASE</b> returns to your Command Centre.</p>
-            <p>The bottom-left units icon opens <b>SELECT / MOVE</b>, <b>ALL UNITS</b>, <b>PATROL</b>, <b>BOX</b>, <b>STOP</b> and <b>TRUCKS</b>. ALL UNITS selects combat units; BOX then drag selects a group. Android <b>Back</b> closes the current panel first; from the battlefield it asks <b>Return to Main Menu</b>.</p>
+            <p>The bottom-left units icon opens <b>SELECT / MOVE</b>, <b>ALL UNITS</b>, <b>DESELECT</b>, <b>STOP</b> and <b>TRUCKS</b>. ALL UNITS selects combat units. DESELECT clears selection while units continue their existing orders. Android <b>Back</b> closes the current panel first; from the battlefield it asks <b>Return to Main Menu</b>.</p>
             <p>Set control size above. Choose optional music and save your playlist on the start screen before a battle.</p></section>`;
       help.innerHTML = `
         <header><div><span class="wt-help-eyebrow">${duel?'WARZONE 1V1':'WARZONE TOWERS'}</span>
@@ -1470,25 +1486,32 @@
           const guideStyle = hudDocument.createElement('style');
           guideStyle.id = 'wt-towers-guide-style';
           guideStyle.textContent = `
-            #warzone-towers-help.wt-towers-guide { display:flex; flex-direction:column; width:min(660px,calc(100vw - 24px)); max-height:calc(100dvh - 24px); overflow:hidden; font-size:12px; line-height:1.5; }
-            #warzone-towers-help.wt-towers-guide header { position:static; flex:0 0 auto; padding:12px 16px; gap:12px; }
-            #warzone-towers-help.wt-towers-guide h1 { font-size:23px; }
-            #warzone-towers-help.wt-towers-guide .wt-help-settings { flex:0 0 auto; padding:8px 16px; gap:6px; }
-            #warzone-towers-help.wt-towers-guide .wt-help-content { min-height:0; overflow:auto; overscroll-behavior:contain; touch-action:pan-y; padding:14px 16px; gap:18px 22px; grid-template-columns:repeat(2,minmax(0,1fr)); }
+            #warzone-towers-help.wt-towers-guide { display:flex; flex-direction:column; width:min(660px,calc(100vw - 24px)); max-height:calc(100dvh - 24px); overflow:hidden; font-size:calc(12px * var(--wt-command-scale,1)); line-height:1.5; }
+            #warzone-towers-help.wt-towers-guide header { position:static; flex:0 0 auto; padding:12px 16px; gap:12px; flex-wrap:wrap; }
+            #warzone-towers-help.wt-towers-guide header>div { min-width:0; }
+            #warzone-towers-help.wt-towers-guide .wt-help-eyebrow { font-size:calc(11px * var(--wt-command-scale,1)); }
+            #warzone-towers-help.wt-towers-guide h1 { font-size:calc(23px * var(--wt-command-scale,1)); overflow-wrap:anywhere; }
+            #warzone-towers-help.wt-towers-guide .wt-help-close { margin-left:auto; }
+            #warzone-towers-help.wt-towers-guide .wt-help-settings { flex:0 0 auto; padding:8px 16px; gap:6px; font-size:calc(9px * var(--wt-command-scale,1)); }
+            #warzone-towers-help.wt-towers-guide .wt-help-settings button { font-size:calc(11px * var(--wt-command-scale,1))!important; }
+            #warzone-towers-help.wt-towers-guide .wt-help-settings [aria-pressed=true] { background:#28574e; color:#effaf7; box-shadow:inset 0 -2px #9ad9d8; }
+            #warzone-towers-help.wt-towers-guide .wt-help-content { flex:1 1 auto; min-height:0; overflow:auto; overscroll-behavior:contain; touch-action:pan-y; padding:14px 16px; gap:18px 22px; grid-template-columns:repeat(auto-fit,minmax(min(100%,max(calc((100% - 22px) / 2),calc(220px * var(--wt-command-scale,1)))),1fr)); overflow-wrap:anywhere; }
             #warzone-towers-help.wt-towers-guide .wt-help-content section { min-width:0; }
-            #warzone-towers-help.wt-towers-guide h2 { margin-bottom:6px; font-size:15px; color:var(--towers-accent,#9ad9d8); }
-            #warzone-towers-help.wt-towers-guide footer { flex:0 0 auto; padding:9px 16px; gap:12px; }
-            #warzone-towers-help.wt-towers-guide button { min-height:34px; padding:8px 11px; font-size:12px; }
+            #warzone-towers-help.wt-towers-guide h2 { margin-bottom:6px; font-size:calc(15px * var(--wt-command-scale,1)); color:var(--towers-accent,#9ad9d8); }
+            #warzone-towers-help.wt-towers-guide footer { flex:0 0 auto; flex-wrap:wrap; padding:9px 16px; gap:8px 12px; }
+            #warzone-towers-help.wt-towers-guide footer span { flex:1 1 150px; min-width:0; font-size:calc(12px * var(--wt-command-scale,1)); }
+            #warzone-towers-help.wt-towers-guide button { max-width:100%; min-height:34px; padding:8px 11px; font-size:calc(12px * var(--wt-command-scale,1)); line-height:1.2; white-space:normal; overflow-wrap:anywhere; }
+            #warzone-towers-help.wt-towers-guide .wt-help-back { margin-left:auto; flex:0 1 auto; }
             #warzone-towers-help.wt-towers-guide .wt-help-content:focus-visible { outline:1px solid #9ad9d8; outline-offset:-2px; }
             @media(max-width:560px) { #warzone-towers-help.wt-towers-guide .wt-help-content { grid-template-columns:1fr; } }
-            @media(max-height:360px) { #warzone-towers-help.wt-towers-guide header { padding:6px 12px; } #warzone-towers-help.wt-towers-guide h1 { margin-top:2px; font-size:20px; } #warzone-towers-help.wt-towers-guide .wt-help-settings { padding:5px 12px; } #warzone-towers-help.wt-towers-guide footer { padding:6px 12px; } }
+            @media(max-height:360px) { #warzone-towers-help.wt-towers-guide header { padding:6px 12px; } #warzone-towers-help.wt-towers-guide h1 { margin-top:2px; font-size:calc(20px * var(--wt-command-scale,1)); } #warzone-towers-help.wt-towers-guide .wt-help-settings { padding:5px 12px; } #warzone-towers-help.wt-towers-guide footer { padding:6px 12px; } }
           `;
           hudDocument.head.appendChild(guideStyle);
         }
       }
       const settings=hudDocument.createElement('div');settings.className='wt-help-settings';
-      settings.innerHTML='<span>CONTROL SIZE</span>'+[1,1.2,1.4].map((n,i)=>`<button type="button" data-ui-size="${n}">${['STANDARD','LARGE','EXTRA LARGE'][i]}</button>`).join('')+'<button type="button" data-commanders>COMMANDERS</button>';
-      settings.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.uiSize){window.__warzoneCommands.setSize(b.dataset.uiSize);}else if(b.hasAttribute('data-commanders')){restoreBattle();window.__warzoneCommands.open('commanders');}});
+      settings.innerHTML='<span>CONTROL SIZE</span>'+[1,1.2,1.4].map((n,i)=>`<button type="button" data-ui-size="${n}">${['STANDARD','LARGE','EXTRA LARGE'][i]}</button>`).join('')+(duel?'<button type="button" data-commanders>COMMANDERS</button>':'');
+      settings.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.uiSize){window.__warzoneCommands.setSize(b.dataset.uiSize);syncHelpSize();}else if(b.hasAttribute('data-commanders')){restoreBattle();window.__warzoneCommands.open('commanders');}});
       help.querySelector('header').after(settings);
       overlay.appendChild(help);
       hudDocument.body.appendChild(overlay);
@@ -1526,6 +1549,7 @@
       });
     }
     const overlay = hudDocument.getElementById("warzone-towers-help-overlay");
+    syncHelpSize();
     if (!overlay.hidden) return true;
     releaseAll();
     overlay._blockedRegions = ["warzone-command-strip", "warzone-game-frame"].map(id => hudDocument.getElementById(id))
@@ -1573,6 +1597,9 @@
       // Classify taps first: tiny finger drift must not become a native drag.
       return;
     }
+    // Resume camera observation at touch-down after closing an HTML page.
+    // This is non-blocking; the ordinary touch-up uses the current projection.
+    if(window.__warzoneDuelConfig?.mode!=='duel'&&isBattlefieldPoint(event.clientX,event.clientY))window.WarzoneTerrain?.active?.(true,false);
     if (window.__warzoneCommands?.isPlacement()) window.__warzoneCommands.previewAt(event.clientX, event.clientY);
     mouseMove(event.clientX, event.clientY, 0);
     if (boxOneShot) {
@@ -1737,19 +1764,18 @@
   function cancelFacilityNavigation() { state.facilityNavigationSerial += 1; }
   function openFacilityAt(x,y) {
     const commands=window.__warzoneCommands, report=commands?.report?.();
-    if(window.__warzoneDuelConfig?.mode==='duel'||!state.battleActive||state.combatLock||state.queueMode||state.boxMode||state.stopNonce||report?.buildOpen||report?.placement||report?.page||report?.nativeMenu)return false;
+    if(window.__warzoneDuelConfig?.mode==='duel'||!state.battleActive||state.queueMode||state.boxMode||state.stopNonce||report?.buildOpen||report?.placement||report?.page||report?.nativeMenu||window.__towersHtml?.isEnded?.())return false;
     const target=window.WarzoneBuildDisplay?.pickFacilityTarget?.(x,y);
     if(!target)return false;
-    const serial=++state.facilityNavigationSerial, navigation=commands.navigationRevision?.(), started=performance.now();
-    // Consume the tap before SDL sees a left press. Fresh native identity and
-    // a final hit check prevent stale/dead targets or a later gesture opening UI.
-    commands.send('state',{}, {fresh:true}).then(reply=>{
-      if(!reply.ok||serial!==state.facilityNavigationSerial||performance.now()-started>1500||navigation!==commands.navigationRevision?.()||!state.battleActive||window.__towersHtml?.isEnded?.())return;
-      const current=commands.report(), live=reply.result.facilityTargets?.find(t=>t.id===target.id&&t.ready&&t.nativeStatus===1);
-      if(!live||current.page||current.buildOpen||current.placement||current.nativeMenu||state.queueMode||state.combatLock||state.boxMode||window.WarzoneBuildDisplay.pickFacilityTarget(x,y)?.id!==target.id)return;
-      const opened=live.kind==='research'?window.__blockNightResearch?.openForLabId?.(live.id):commands.openFactory?.(live.id);
-      if(opened){state.facilityOpens++;state.lastFacility={id:live.id,kind:live.kind};}
-    }).catch(error=>{state.facilityError=String(error.message||error);});
+    const live=report.snapshot?.facilityTargets?.find(t=>t.id===target.id&&t.ready&&t.nativeStatus===1);
+    if(!live)return false;
+    // The live native snapshot already identifies this owned, completed
+    // building. Open its page before SDL receives a stock structure click.
+    // A fresh reply must not gate navigation or silently swallow a slow tap.
+    const opened=live.kind==='research'?window.__blockNightResearch?.openForLabId?.(live.id):commands.openFactory?.(live.id);
+    if(!opened)return false;
+    state.facilityOpens++;state.lastFacility={id:live.id,kind:live.kind};state.facilityError='';
+    commands.send('state').catch(error=>{state.facilityError=String(error.message||error);});
     return true;
   }
   commandDocument().addEventListener('pointerdown',cancelFacilityNavigation,{capture:true,passive:true});
@@ -1946,6 +1972,12 @@
       }
     } else if (gesture.panning) {
       releaseMouse(gesture.x, gesture.y);
+    } else if (!canceled && !gesture.moved && isBattlefieldPoint(gesture.x,gesture.y)
+        && openFacilityAt(gesture.x,gesture.y)) {
+      // A stationary touch on an owned lab/factory opens its Towers page,
+      // including slower finger taps and while combat units are selected.
+      feedback(gesture.x,gesture.y,"tap");
+      state.taps += 1;
     } else if (!canceled && gesture.longPressArmed
         && (Number.isFinite(event.timeStamp) ? event.timeStamp : performance.now()) - gesture.downInputTime >= LONG_PRESS_MS) {
       click(2, gesture.x, gesture.y);
@@ -1966,7 +1998,7 @@
         vibrate(8);
         state.taps += 1;
       } else {
-        if (isBattlefieldPoint(gesture.x, gesture.y)) {if(!openFacilityAt(gesture.x,gesture.y)){state.manualSelectionRevision += 1;click(0, gesture.x, gesture.y);}}
+        if (isBattlefieldPoint(gesture.x, gesture.y)) {state.manualSelectionRevision += 1;click(0, gesture.x, gesture.y);}
         else nativeUiClick(gesture.x, gesture.y);
         if (isBattlefieldPoint(gesture.x, gesture.y)) {
           feedback(gesture.x, gesture.y, "tap");

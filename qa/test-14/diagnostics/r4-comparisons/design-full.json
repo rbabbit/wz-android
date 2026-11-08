@@ -1,0 +1,38 @@
+{
+  "reviewed": false,
+  "purpose": "Full actual screenshot beside approved reference; isotropic resizing/letterboxing only, no cropped or fabricated content. Root manual review remains required.",
+  "inputs": [
+    {
+      "role": "reference",
+      "path": "docs/ui-0.14/approved-design.png",
+      "sha256": "818838158bf62f47c849b5286aa44009eb1387edeb31bbc347756a0442360cb0",
+      "originalSize": [
+        1920,
+        819
+      ],
+      "displaySize": [
+        1000,
+        427
+      ],
+      "scale": 0.5208333333333334
+    },
+    {
+      "role": "actual",
+      "path": "qa/test-14/final-commands-r4-ready/lab-14-normal-design-edit.png",
+      "sha256": "b4ea1760868124680b5444fc88b5ec37182cebc0c86f02bbae60dcba5826103c",
+      "originalSize": [
+        1080,
+        600
+      ],
+      "displaySize": [
+        1000,
+        556
+      ],
+      "scale": 0.9259259259259259
+    }
+  ],
+  "output": {
+    "path": "qa/test-14/comparisons/design-full.png",
+    "sha256": "89defabbd20b9771ba734a084b308fdd49309dcf1ec91b76897381048792b240"
+  }
+}

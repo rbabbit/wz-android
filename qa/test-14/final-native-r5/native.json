@@ -1,0 +1,3444 @@
+{
+  "passed": true,
+  "seeded": false,
+  "started": "2026-11-08T21:41:00.375Z",
+  "checks": {
+    "nativeLauncherNormalCompact": true,
+    "nativeMapsTowers": true,
+    "graphicsBackHQNormalNoDownload": true,
+    "musicActualPageAlbumScrollCheckboxReturn": true,
+    "libraryMusicPreferencesPreserved": true
+  },
+  "cases": [
+    {
+      "id": "start",
+      "profile": "normal",
+      "group": "launcher",
+      "pixelProfile": {
+        "device": [
+          1080,
+          600
+        ],
+        "fontScale": "1",
+        "density": "Physical density: 480\r\nOverride density: 240"
+      },
+      "screen": "qa/test-14/final-native-r5/14-native-normal-start.png",
+      "tree": "qa/test-14/final-native-r5/14-native-normal-start.xml",
+      "controls": [
+        {
+          "label": "",
+          "text": "",
+          "bounds": [
+            0,
+            0,
+            1080,
+            600
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.webkit.WebView"
+        },
+        {
+          "label": "",
+          "text": "",
+          "bounds": [
+            0,
+            0,
+            1080,
+            600
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.FrameLayout"
+        },
+        {
+          "label": "Game mode, Towers, selected",
+          "text": "Towers",
+          "bounds": [
+            48,
+            91,
+            257,
+            163
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Game mode, 1v1 vs Bot, not selected",
+          "text": "1v1 vs Bot",
+          "bounds": [
+            266,
+            91,
+            475,
+            163
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Dustfall map, not selected",
+          "text": "",
+          "bounds": [
+            48,
+            181,
+            475,
+            262
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.FrameLayout"
+        },
+        {
+          "label": "Iron Valley map, selected",
+          "text": "",
+          "bounds": [
+            48,
+            274,
+            475,
+            355
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.FrameLayout"
+        },
+        {
+          "label": "Start game, Iron Valley",
+          "text": "PLAY IRON VALLEY",
+          "bounds": [
+            48,
+            412,
+            475,
+            484
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Graphics options, Normal",
+          "text": "GRAPHICS&#10;NORMAL",
+          "bounds": [
+            48,
+            502,
+            184,
+            574
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Music settings",
+          "text": "MUSIC&#10;CHOOSE",
+          "bounds": [
+            193,
+            502,
+            329,
+            574
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Download High Quality graphics",
+          "text": "HQ PACK&#10;95 MiB",
+          "bounds": [
+            338,
+            502,
+            475,
+            574
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        }
+      ]
+    },
+    {
+      "id": "dustfall",
+      "profile": "normal",
+      "group": "launcher",
+      "pixelProfile": {
+        "device": [
+          1080,
+          600
+        ],
+        "fontScale": "1",
+        "density": "Physical density: 480\r\nOverride density: 240"
+      },
+      "screen": "qa/test-14/final-native-r5/14-native-normal-dustfall.png",
+      "tree": "qa/test-14/final-native-r5/14-native-normal-dustfall.xml",
+      "controls": [
+        {
+          "label": "",
+          "text": "",
+          "bounds": [
+            0,
+            0,
+            1080,
+            600
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.webkit.WebView"
+        },
+        {
+          "label": "",
+          "text": "",
+          "bounds": [
+            0,
+            0,
+            1080,
+            600
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.FrameLayout"
+        },
+        {
+          "label": "Game mode, Towers, selected",
+          "text": "Towers",
+          "bounds": [
+            48,
+            91,
+            257,
+            163
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Game mode, 1v1 vs Bot, not selected",
+          "text": "1v1 vs Bot",
+          "bounds": [
+            266,
+            91,
+            475,
+            163
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Dustfall map, selected",
+          "text": "",
+          "bounds": [
+            48,
+            181,
+            475,
+            262
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.FrameLayout"
+        },
+        {
+          "label": "Iron Valley map, not selected",
+          "text": "",
+          "bounds": [
+            48,
+            274,
+            475,
+            355
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.FrameLayout"
+        },
+        {
+          "label": "Start game, Dustfall",
+          "text": "PLAY DUSTFALL",
+          "bounds": [
+            48,
+            412,
+            475,
+            484
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Graphics options, Normal",
+          "text": "GRAPHICS&#10;NORMAL",
+          "bounds": [
+            48,
+            502,
+            184,
+            574
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Music settings",
+          "text": "MUSIC&#10;CHOOSE",
+          "bounds": [
+            193,
+            502,
+            329,
+            574
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Download High Quality graphics",
+          "text": "HQ PACK&#10;95 MiB",
+          "bounds": [
+            338,
+            502,
+            475,
+            574
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        }
+      ]
+    },
+    {
+      "id": "ironvalley",
+      "profile": "normal",
+      "group": "launcher",
+      "pixelProfile": {
+        "device": [
+          1080,
+          600
+        ],
+        "fontScale": "1",
+        "density": "Physical density: 480\r\nOverride density: 240"
+      },
+      "screen": "qa/test-14/final-native-r5/14-native-normal-ironvalley.png",
+      "tree": "qa/test-14/final-native-r5/14-native-normal-ironvalley.xml",
+      "controls": [
+        {
+          "label": "",
+          "text": "",
+          "bounds": [
+            0,
+            0,
+            1080,
+            600
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.webkit.WebView"
+        },
+        {
+          "label": "",
+          "text": "",
+          "bounds": [
+            0,
+            0,
+            1080,
+            600
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.FrameLayout"
+        },
+        {
+          "label": "Game mode, Towers, selected",
+          "text": "Towers",
+          "bounds": [
+            48,
+            91,
+            257,
+            163
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Game mode, 1v1 vs Bot, not selected",
+          "text": "1v1 vs Bot",
+          "bounds": [
+            266,
+            91,
+            475,
+            163
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Dustfall map, not selected",
+          "text": "",
+          "bounds": [
+            48,
+            181,
+            475,
+            262
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.FrameLayout"
+        },
+        {
+          "label": "Iron Valley map, selected",
+          "text": "",
+          "bounds": [
+            48,
+            274,
+            475,
+            355
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.FrameLayout"
+        },
+        {
+          "label": "Start game, Iron Valley",
+          "text": "PLAY IRON VALLEY",
+          "bounds": [
+            48,
+            412,
+            475,
+            484
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Graphics options, Normal",
+          "text": "GRAPHICS&#10;NORMAL",
+          "bounds": [
+            48,
+            502,
+            184,
+            574
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Music settings",
+          "text": "MUSIC&#10;CHOOSE",
+          "bounds": [
+            193,
+            502,
+            329,
+            574
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Download High Quality graphics",
+          "text": "HQ PACK&#10;95 MiB",
+          "bounds": [
+            338,
+            502,
+            475,
+            574
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        }
+      ]
+    },
+    {
+      "id": "graphics-popup",
+      "profile": "normal",
+      "group": "graphics",
+      "pixelProfile": {
+        "device": [
+          1080,
+          600
+        ],
+        "fontScale": "1",
+        "density": "Physical density: 480\r\nOverride density: 240"
+      },
+      "screen": "qa/test-14/final-native-r5/14-native-normal-graphics-popup.png",
+      "tree": "qa/test-14/final-native-r5/14-native-normal-graphics-popup.xml",
+      "controls": []
+    },
+    {
+      "id": "graphics-back",
+      "profile": "normal",
+      "group": "graphics",
+      "pixelProfile": {
+        "device": [
+          1080,
+          600
+        ],
+        "fontScale": "1",
+        "density": "Physical density: 480\r\nOverride density: 240"
+      },
+      "screen": "qa/test-14/final-native-r5/14-native-normal-graphics-back.png",
+      "tree": "qa/test-14/final-native-r5/14-native-normal-graphics-back.xml",
+      "controls": [
+        {
+          "label": "",
+          "text": "",
+          "bounds": [
+            0,
+            0,
+            1080,
+            600
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.webkit.WebView"
+        },
+        {
+          "label": "",
+          "text": "",
+          "bounds": [
+            0,
+            0,
+            1080,
+            600
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.FrameLayout"
+        },
+        {
+          "label": "Game mode, Towers, selected",
+          "text": "Towers",
+          "bounds": [
+            48,
+            91,
+            257,
+            163
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Game mode, 1v1 vs Bot, not selected",
+          "text": "1v1 vs Bot",
+          "bounds": [
+            266,
+            91,
+            475,
+            163
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Dustfall map, not selected",
+          "text": "",
+          "bounds": [
+            48,
+            181,
+            475,
+            262
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.FrameLayout"
+        },
+        {
+          "label": "Iron Valley map, selected",
+          "text": "",
+          "bounds": [
+            48,
+            274,
+            475,
+            355
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.FrameLayout"
+        },
+        {
+          "label": "Start game, Iron Valley",
+          "text": "PLAY IRON VALLEY",
+          "bounds": [
+            48,
+            412,
+            475,
+            484
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Graphics options, Normal",
+          "text": "GRAPHICS&#10;NORMAL",
+          "bounds": [
+            48,
+            502,
+            184,
+            574
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Music settings",
+          "text": "MUSIC&#10;CHOOSE",
+          "bounds": [
+            193,
+            502,
+            329,
+            574
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Download High Quality graphics",
+          "text": "HQ PACK&#10;95 MiB",
+          "bounds": [
+            338,
+            502,
+            475,
+            574
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        }
+      ]
+    },
+    {
+      "id": "graphics-hq-selected",
+      "profile": "normal",
+      "group": "graphics",
+      "pixelProfile": {
+        "device": [
+          1080,
+          600
+        ],
+        "fontScale": "1",
+        "density": "Physical density: 480\r\nOverride density: 240"
+      },
+      "screen": "qa/test-14/final-native-r5/14-native-normal-graphics-hq-selected.png",
+      "tree": "qa/test-14/final-native-r5/14-native-normal-graphics-hq-selected.xml",
+      "controls": [
+        {
+          "label": "",
+          "text": "",
+          "bounds": [
+            0,
+            0,
+            1080,
+            600
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.webkit.WebView"
+        },
+        {
+          "label": "",
+          "text": "",
+          "bounds": [
+            0,
+            0,
+            1080,
+            600
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.FrameLayout"
+        },
+        {
+          "label": "Game mode, Towers, selected",
+          "text": "Towers",
+          "bounds": [
+            48,
+            91,
+            257,
+            163
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Game mode, 1v1 vs Bot, not selected",
+          "text": "1v1 vs Bot",
+          "bounds": [
+            266,
+            91,
+            475,
+            163
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Dustfall map, not selected",
+          "text": "",
+          "bounds": [
+            48,
+            181,
+            475,
+            262
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.FrameLayout"
+        },
+        {
+          "label": "Iron Valley map, selected",
+          "text": "",
+          "bounds": [
+            48,
+            274,
+            475,
+            355
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.FrameLayout"
+        },
+        {
+          "label": "Start game, Iron Valley",
+          "text": "PLAY IRON VALLEY",
+          "bounds": [
+            48,
+            412,
+            475,
+            484
+          ],
+          "enabled": false,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Graphics options, High Quality",
+          "text": "GRAPHICS&#10;HQ",
+          "bounds": [
+            48,
+            502,
+            184,
+            574
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Music settings",
+          "text": "MUSIC&#10;CHOOSE",
+          "bounds": [
+            193,
+            502,
+            329,
+            574
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Download High Quality graphics",
+          "text": "HQ PACK&#10;95 MiB",
+          "bounds": [
+            338,
+            502,
+            475,
+            574
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        }
+      ],
+      "downloadStarted": false
+    },
+    {
+      "id": "music-track-visibility",
+      "profile": "normal",
+      "group": "music",
+      "pixelProfile": {
+        "device": [
+          1080,
+          600
+        ],
+        "fontScale": "1",
+        "density": "Physical density: 480\r\nOverride density: 240"
+      },
+      "screen": "qa/test-14/final-native-r5/14-native-normal-music-track-visibility.png",
+      "tree": "qa/test-14/final-native-r5/14-native-normal-music-track-visibility.xml",
+      "controls": [
+        {
+          "label": "",
+          "text": "",
+          "bounds": [
+            0,
+            0,
+            1080,
+            600
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.webkit.WebView"
+        },
+        {
+          "label": "",
+          "text": "",
+          "bounds": [
+            0,
+            0,
+            1080,
+            600
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.FrameLayout"
+        },
+        {
+          "label": "Start game",
+          "text": "START GAME",
+          "bounds": [
+            585,
+            33,
+            774,
+            99
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Music on",
+          "text": "Music on",
+          "bounds": [
+            42,
+            128,
+            176,
+            194
+          ],
+          "enabled": false,
+          "checked": "false",
+          "class": "android.widget.CheckBox"
+        },
+        {
+          "label": "Select all music tracks",
+          "text": "ALL",
+          "bounds": [
+            337,
+            128,
+            409,
+            194
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Clear music track selection",
+          "text": "CLEAR",
+          "bounds": [
+            421,
+            128,
+            500,
+            194
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Music track: Aftermath Soundtrack / Menu Theme - Enhanced",
+          "text": "Menu Theme - Enhanced",
+          "bounds": [
+            42,
+            283,
+            774,
+            349
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.CheckBox"
+        },
+        {
+          "label": "Music track: Aftermath Soundtrack / Track 3 - Enhanced",
+          "text": "Track 3 - Enhanced",
+          "bounds": [
+            42,
+            349,
+            774,
+            415
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.CheckBox"
+        },
+        {
+          "label": "Music track: Aftermath Soundtrack / Nuclear Heartbeat",
+          "text": "Nuclear Heartbeat",
+          "bounds": [
+            42,
+            415,
+            774,
+            457
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.CheckBox"
+        },
+        {
+          "label": "BACK",
+          "text": "BACK",
+          "bounds": [
+            42,
+            501,
+            174,
+            567
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "DOWNLOAD MUSIC",
+          "text": "DOWNLOAD MUSIC",
+          "bounds": [
+            189,
+            501,
+            429,
+            567
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        }
+      ],
+      "scrollView": [
+        42,
+        99,
+        774,
+        457
+      ],
+      "fullyVisibleTrackRows": [
+        {
+          "label": "Music track: Aftermath Soundtrack / Menu Theme - Enhanced",
+          "bounds": [
+            42,
+            283,
+            774,
+            349
+          ]
+        },
+        {
+          "label": "Music track: Aftermath Soundtrack / Track 3 - Enhanced",
+          "bounds": [
+            42,
+            349,
+            774,
+            415
+          ]
+        }
+      ]
+    },
+    {
+      "id": "music-top",
+      "profile": "normal",
+      "group": "music",
+      "pixelProfile": {
+        "device": [
+          1080,
+          600
+        ],
+        "fontScale": "1",
+        "density": "Physical density: 480\r\nOverride density: 240"
+      },
+      "screen": "qa/test-14/final-native-r5/14-native-normal-music-top.png",
+      "tree": "qa/test-14/final-native-r5/14-native-normal-music-top.xml",
+      "controls": [
+        {
+          "label": "",
+          "text": "",
+          "bounds": [
+            0,
+            0,
+            1080,
+            600
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.webkit.WebView"
+        },
+        {
+          "label": "",
+          "text": "",
+          "bounds": [
+            0,
+            0,
+            1080,
+            600
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.FrameLayout"
+        },
+        {
+          "label": "Start game",
+          "text": "START GAME",
+          "bounds": [
+            585,
+            33,
+            774,
+            99
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Music on",
+          "text": "Music on",
+          "bounds": [
+            42,
+            128,
+            176,
+            194
+          ],
+          "enabled": false,
+          "checked": "false",
+          "class": "android.widget.CheckBox"
+        },
+        {
+          "label": "Select all music tracks",
+          "text": "ALL",
+          "bounds": [
+            337,
+            128,
+            409,
+            194
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Clear music track selection",
+          "text": "CLEAR",
+          "bounds": [
+            421,
+            128,
+            500,
+            194
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Music track: Aftermath Soundtrack / Menu Theme - Enhanced",
+          "text": "Menu Theme - Enhanced",
+          "bounds": [
+            42,
+            283,
+            774,
+            349
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.CheckBox"
+        },
+        {
+          "label": "Music track: Aftermath Soundtrack / Track 3 - Enhanced",
+          "text": "Track 3 - Enhanced",
+          "bounds": [
+            42,
+            349,
+            774,
+            415
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.CheckBox"
+        },
+        {
+          "label": "Music track: Aftermath Soundtrack / Nuclear Heartbeat",
+          "text": "Nuclear Heartbeat",
+          "bounds": [
+            42,
+            415,
+            774,
+            457
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.CheckBox"
+        },
+        {
+          "label": "BACK",
+          "text": "BACK",
+          "bounds": [
+            42,
+            501,
+            174,
+            567
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "DOWNLOAD MUSIC",
+          "text": "DOWNLOAD MUSIC",
+          "bounds": [
+            189,
+            501,
+            429,
+            567
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        }
+      ]
+    },
+    {
+      "id": "music-one-selected",
+      "profile": "normal",
+      "group": "music",
+      "pixelProfile": {
+        "device": [
+          1080,
+          600
+        ],
+        "fontScale": "1",
+        "density": "Physical density: 480\r\nOverride density: 240"
+      },
+      "screen": "qa/test-14/final-native-r5/14-native-normal-music-one-selected.png",
+      "tree": "qa/test-14/final-native-r5/14-native-normal-music-one-selected.xml",
+      "controls": [
+        {
+          "label": "",
+          "text": "",
+          "bounds": [
+            0,
+            0,
+            1080,
+            600
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.webkit.WebView"
+        },
+        {
+          "label": "",
+          "text": "",
+          "bounds": [
+            0,
+            0,
+            1080,
+            600
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.FrameLayout"
+        },
+        {
+          "label": "Start game",
+          "text": "START GAME",
+          "bounds": [
+            585,
+            33,
+            774,
+            99
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Music on",
+          "text": "Music on",
+          "bounds": [
+            42,
+            128,
+            176,
+            194
+          ],
+          "enabled": false,
+          "checked": "false",
+          "class": "android.widget.CheckBox"
+        },
+        {
+          "label": "Select all music tracks",
+          "text": "ALL",
+          "bounds": [
+            337,
+            128,
+            409,
+            194
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Clear music track selection",
+          "text": "CLEAR",
+          "bounds": [
+            421,
+            128,
+            500,
+            194
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Music track: Aftermath Soundtrack / Menu Theme - Enhanced",
+          "text": "Menu Theme - Enhanced",
+          "bounds": [
+            42,
+            283,
+            774,
+            349
+          ],
+          "enabled": true,
+          "checked": "true",
+          "class": "android.widget.CheckBox"
+        },
+        {
+          "label": "Music track: Aftermath Soundtrack / Track 3 - Enhanced",
+          "text": "Track 3 - Enhanced",
+          "bounds": [
+            42,
+            349,
+            774,
+            415
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.CheckBox"
+        },
+        {
+          "label": "Music track: Aftermath Soundtrack / Nuclear Heartbeat",
+          "text": "Nuclear Heartbeat",
+          "bounds": [
+            42,
+            415,
+            774,
+            457
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.CheckBox"
+        },
+        {
+          "label": "BACK",
+          "text": "BACK",
+          "bounds": [
+            42,
+            501,
+            174,
+            567
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "DOWNLOAD MUSIC",
+          "text": "DOWNLOAD MUSIC",
+          "bounds": [
+            189,
+            501,
+            429,
+            567
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        }
+      ],
+      "trackLabel": "Music track: Aftermath Soundtrack / Menu Theme - Enhanced"
+    },
+    {
+      "id": "music-album-scrolled",
+      "profile": "normal",
+      "group": "music",
+      "pixelProfile": {
+        "device": [
+          1080,
+          600
+        ],
+        "fontScale": "1",
+        "density": "Physical density: 480\r\nOverride density: 240"
+      },
+      "screen": "qa/test-14/final-native-r5/14-native-normal-music-album-scrolled.png",
+      "tree": "qa/test-14/final-native-r5/14-native-normal-music-album-scrolled.xml",
+      "controls": [
+        {
+          "label": "",
+          "text": "",
+          "bounds": [
+            0,
+            0,
+            1080,
+            600
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.webkit.WebView"
+        },
+        {
+          "label": "",
+          "text": "",
+          "bounds": [
+            0,
+            0,
+            1080,
+            600
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.FrameLayout"
+        },
+        {
+          "label": "Start game",
+          "text": "START GAME",
+          "bounds": [
+            585,
+            33,
+            774,
+            99
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Music track: Aftermath Soundtrack / Rainout",
+          "text": "Rainout",
+          "bounds": [
+            42,
+            99,
+            774,
+            130
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.CheckBox"
+        },
+        {
+          "label": "Music track: Aftermath Soundtrack / Just Rewards",
+          "text": "Just Rewards",
+          "bounds": [
+            42,
+            130,
+            774,
+            196
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.CheckBox"
+        },
+        {
+          "label": "Music track: Aftermath Soundtrack / Launch Codes",
+          "text": "Launch Codes",
+          "bounds": [
+            42,
+            196,
+            774,
+            262
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.CheckBox"
+        },
+        {
+          "label": "Music track: Legacy Soundtrack / Uncertain Future",
+          "text": "Uncertain Future",
+          "bounds": [
+            42,
+            351,
+            774,
+            417
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.CheckBox"
+        },
+        {
+          "label": "Music track: Legacy Soundtrack / Recovery Ops",
+          "text": "Recovery Ops",
+          "bounds": [
+            42,
+            417,
+            774,
+            457
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.CheckBox"
+        },
+        {
+          "label": "BACK",
+          "text": "BACK",
+          "bounds": [
+            42,
+            501,
+            174,
+            567
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "DOWNLOAD MUSIC",
+          "text": "DOWNLOAD MUSIC",
+          "bounds": [
+            189,
+            501,
+            429,
+            567
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        }
+      ],
+      "attempts": [
+        {
+          "view": [
+            42,
+            99,
+            774,
+            457
+          ],
+          "tracks": [
+            "Music track: Aftermath Soundtrack / Menu Theme - Enhanced",
+            "Music track: Aftermath Soundtrack / Track 3 - Enhanced",
+            "Music track: Aftermath Soundtrack / Nuclear Heartbeat",
+            "Music track: Aftermath Soundtrack / Moonlight Tactics",
+            "Music track: Aftermath Soundtrack / Undisclosed Location",
+            "Music track: Aftermath Soundtrack / Shifting Realities",
+            "Music track: Aftermath Soundtrack / The Collapse"
+          ],
+          "headings": []
+        },
+        {
+          "view": [
+            42,
+            99,
+            774,
+            457
+          ],
+          "tracks": [
+            "Music track: Aftermath Soundtrack / Moonlight Tactics",
+            "Music track: Aftermath Soundtrack / Undisclosed Location",
+            "Music track: Aftermath Soundtrack / Shifting Realities",
+            "Music track: Aftermath Soundtrack / The Collapse",
+            "Music track: Aftermath Soundtrack / Aftershocks",
+            "Music track: Aftermath Soundtrack / Blast Zone",
+            "Music track: Aftermath Soundtrack / Reclamation"
+          ],
+          "headings": []
+        },
+        {
+          "view": [
+            42,
+            99,
+            774,
+            457
+          ],
+          "tracks": [
+            "Music track: Aftermath Soundtrack / Aftershocks",
+            "Music track: Aftermath Soundtrack / Blast Zone",
+            "Music track: Aftermath Soundtrack / Reclamation",
+            "Music track: Aftermath Soundtrack / Rainout",
+            "Music track: Aftermath Soundtrack / Just Rewards",
+            "Music track: Aftermath Soundtrack / Launch Codes"
+          ],
+          "headings": []
+        },
+        {
+          "view": [
+            42,
+            99,
+            774,
+            457
+          ],
+          "tracks": [
+            "Music track: Aftermath Soundtrack / Rainout",
+            "Music track: Aftermath Soundtrack / Just Rewards",
+            "Music track: Aftermath Soundtrack / Launch Codes",
+            "Music track: Legacy Soundtrack / Uncertain Future",
+            "Music track: Legacy Soundtrack / Recovery Ops"
+          ],
+          "headings": [
+            "Legacy Soundtrack"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "music-back",
+      "profile": "normal",
+      "group": "music",
+      "pixelProfile": {
+        "device": [
+          1080,
+          600
+        ],
+        "fontScale": "1",
+        "density": "Physical density: 480\r\nOverride density: 240"
+      },
+      "screen": "qa/test-14/final-native-r5/14-native-normal-music-back.png",
+      "tree": "qa/test-14/final-native-r5/14-native-normal-music-back.xml",
+      "controls": [
+        {
+          "label": "",
+          "text": "",
+          "bounds": [
+            0,
+            0,
+            1080,
+            600
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.webkit.WebView"
+        },
+        {
+          "label": "",
+          "text": "",
+          "bounds": [
+            0,
+            0,
+            1080,
+            600
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.FrameLayout"
+        },
+        {
+          "label": "Game mode, Towers, selected",
+          "text": "Towers",
+          "bounds": [
+            48,
+            91,
+            257,
+            163
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Game mode, 1v1 vs Bot, not selected",
+          "text": "1v1 vs Bot",
+          "bounds": [
+            266,
+            91,
+            475,
+            163
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Dustfall map, not selected",
+          "text": "",
+          "bounds": [
+            48,
+            181,
+            475,
+            262
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.FrameLayout"
+        },
+        {
+          "label": "Iron Valley map, selected",
+          "text": "",
+          "bounds": [
+            48,
+            274,
+            475,
+            355
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.FrameLayout"
+        },
+        {
+          "label": "Start game, Iron Valley",
+          "text": "PLAY IRON VALLEY",
+          "bounds": [
+            48,
+            412,
+            475,
+            484
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Graphics options, Normal",
+          "text": "GRAPHICS&#10;NORMAL",
+          "bounds": [
+            48,
+            502,
+            184,
+            574
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Music settings",
+          "text": "MUSIC&#10;CHOOSE",
+          "bounds": [
+            193,
+            502,
+            329,
+            574
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Download High Quality graphics",
+          "text": "HQ PACK&#10;95 MiB",
+          "bounds": [
+            338,
+            502,
+            475,
+            574
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        }
+      ],
+      "restoredCount": 0,
+      "realAlbumScroll": true,
+      "scroll": [
+        {
+          "view": [
+            42,
+            99,
+            774,
+            457
+          ],
+          "tracks": [
+            "Music track: Aftermath Soundtrack / Menu Theme - Enhanced",
+            "Music track: Aftermath Soundtrack / Track 3 - Enhanced",
+            "Music track: Aftermath Soundtrack / Nuclear Heartbeat",
+            "Music track: Aftermath Soundtrack / Moonlight Tactics",
+            "Music track: Aftermath Soundtrack / Undisclosed Location",
+            "Music track: Aftermath Soundtrack / Shifting Realities",
+            "Music track: Aftermath Soundtrack / The Collapse"
+          ],
+          "headings": []
+        },
+        {
+          "view": [
+            42,
+            99,
+            774,
+            457
+          ],
+          "tracks": [
+            "Music track: Aftermath Soundtrack / Moonlight Tactics",
+            "Music track: Aftermath Soundtrack / Undisclosed Location",
+            "Music track: Aftermath Soundtrack / Shifting Realities",
+            "Music track: Aftermath Soundtrack / The Collapse",
+            "Music track: Aftermath Soundtrack / Aftershocks",
+            "Music track: Aftermath Soundtrack / Blast Zone",
+            "Music track: Aftermath Soundtrack / Reclamation"
+          ],
+          "headings": []
+        },
+        {
+          "view": [
+            42,
+            99,
+            774,
+            457
+          ],
+          "tracks": [
+            "Music track: Aftermath Soundtrack / Aftershocks",
+            "Music track: Aftermath Soundtrack / Blast Zone",
+            "Music track: Aftermath Soundtrack / Reclamation",
+            "Music track: Aftermath Soundtrack / Rainout",
+            "Music track: Aftermath Soundtrack / Just Rewards",
+            "Music track: Aftermath Soundtrack / Launch Codes"
+          ],
+          "headings": []
+        },
+        {
+          "view": [
+            42,
+            99,
+            774,
+            457
+          ],
+          "tracks": [
+            "Music track: Aftermath Soundtrack / Rainout",
+            "Music track: Aftermath Soundtrack / Just Rewards",
+            "Music track: Aftermath Soundtrack / Launch Codes",
+            "Music track: Legacy Soundtrack / Uncertain Future",
+            "Music track: Legacy Soundtrack / Recovery Ops"
+          ],
+          "headings": [
+            "Legacy Soundtrack"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "start",
+      "profile": "compact",
+      "group": "launcher",
+      "pixelProfile": {
+        "device": [
+          854,
+          480
+        ],
+        "fontScale": "1.3",
+        "density": "Physical density: 480\r\nOverride density: 240"
+      },
+      "screen": "qa/test-14/final-native-r5/14-native-compact-start.png",
+      "tree": "qa/test-14/final-native-r5/14-native-compact-start.xml",
+      "controls": [
+        {
+          "label": "",
+          "text": "",
+          "bounds": [
+            0,
+            0,
+            854,
+            480
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.webkit.WebView"
+        },
+        {
+          "label": "",
+          "text": "",
+          "bounds": [
+            0,
+            0,
+            854,
+            480
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.FrameLayout"
+        },
+        {
+          "label": "Game mode, Towers, selected",
+          "text": "Towers",
+          "bounds": [
+            48,
+            66,
+            229,
+            138
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Game mode, 1v1 vs Bot, not selected",
+          "text": "1v1 vs Bot",
+          "bounds": [
+            238,
+            66,
+            420,
+            138
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Dustfall map, not selected",
+          "text": "",
+          "bounds": [
+            48,
+            150,
+            228,
+            246
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.FrameLayout"
+        },
+        {
+          "label": "Iron Valley map, selected",
+          "text": "",
+          "bounds": [
+            240,
+            150,
+            420,
+            246
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.FrameLayout"
+        },
+        {
+          "label": "Start game, Iron Valley",
+          "text": "PLAY IRON VALLEY",
+          "bounds": [
+            48,
+            258,
+            420,
+            330
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Graphics options, Normal",
+          "text": "GRAPHICS&#10;NORMAL",
+          "bounds": [
+            48,
+            342,
+            166,
+            414
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Music settings",
+          "text": "MUSIC&#10;CHOOSE",
+          "bounds": [
+            175,
+            342,
+            293,
+            414
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Download High Quality graphics",
+          "text": "HQ PACK&#10;95 MiB",
+          "bounds": [
+            302,
+            342,
+            420,
+            414
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        }
+      ]
+    },
+    {
+      "id": "dustfall",
+      "profile": "compact",
+      "group": "launcher",
+      "pixelProfile": {
+        "device": [
+          854,
+          480
+        ],
+        "fontScale": "1.3",
+        "density": "Physical density: 480\r\nOverride density: 240"
+      },
+      "screen": "qa/test-14/final-native-r5/14-native-compact-dustfall.png",
+      "tree": "qa/test-14/final-native-r5/14-native-compact-dustfall.xml",
+      "controls": [
+        {
+          "label": "",
+          "text": "",
+          "bounds": [
+            0,
+            0,
+            854,
+            480
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.webkit.WebView"
+        },
+        {
+          "label": "",
+          "text": "",
+          "bounds": [
+            0,
+            0,
+            854,
+            480
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.FrameLayout"
+        },
+        {
+          "label": "Game mode, Towers, selected",
+          "text": "Towers",
+          "bounds": [
+            48,
+            66,
+            229,
+            138
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Game mode, 1v1 vs Bot, not selected",
+          "text": "1v1 vs Bot",
+          "bounds": [
+            238,
+            66,
+            420,
+            138
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Dustfall map, selected",
+          "text": "",
+          "bounds": [
+            48,
+            150,
+            228,
+            246
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.FrameLayout"
+        },
+        {
+          "label": "Iron Valley map, not selected",
+          "text": "",
+          "bounds": [
+            240,
+            150,
+            420,
+            246
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.FrameLayout"
+        },
+        {
+          "label": "Start game, Dustfall",
+          "text": "PLAY DUSTFALL",
+          "bounds": [
+            48,
+            258,
+            420,
+            330
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Graphics options, Normal",
+          "text": "GRAPHICS&#10;NORMAL",
+          "bounds": [
+            48,
+            342,
+            166,
+            414
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Music settings",
+          "text": "MUSIC&#10;CHOOSE",
+          "bounds": [
+            175,
+            342,
+            293,
+            414
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Download High Quality graphics",
+          "text": "HQ PACK&#10;95 MiB",
+          "bounds": [
+            302,
+            342,
+            420,
+            414
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        }
+      ]
+    },
+    {
+      "id": "ironvalley",
+      "profile": "compact",
+      "group": "launcher",
+      "pixelProfile": {
+        "device": [
+          854,
+          480
+        ],
+        "fontScale": "1.3",
+        "density": "Physical density: 480\r\nOverride density: 240"
+      },
+      "screen": "qa/test-14/final-native-r5/14-native-compact-ironvalley.png",
+      "tree": "qa/test-14/final-native-r5/14-native-compact-ironvalley.xml",
+      "controls": [
+        {
+          "label": "",
+          "text": "",
+          "bounds": [
+            0,
+            0,
+            854,
+            480
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.webkit.WebView"
+        },
+        {
+          "label": "",
+          "text": "",
+          "bounds": [
+            0,
+            0,
+            854,
+            480
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.FrameLayout"
+        },
+        {
+          "label": "Game mode, Towers, selected",
+          "text": "Towers",
+          "bounds": [
+            48,
+            66,
+            229,
+            138
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Game mode, 1v1 vs Bot, not selected",
+          "text": "1v1 vs Bot",
+          "bounds": [
+            238,
+            66,
+            420,
+            138
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Dustfall map, not selected",
+          "text": "",
+          "bounds": [
+            48,
+            150,
+            228,
+            246
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.FrameLayout"
+        },
+        {
+          "label": "Iron Valley map, selected",
+          "text": "",
+          "bounds": [
+            240,
+            150,
+            420,
+            246
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.FrameLayout"
+        },
+        {
+          "label": "Start game, Iron Valley",
+          "text": "PLAY IRON VALLEY",
+          "bounds": [
+            48,
+            258,
+            420,
+            330
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Graphics options, Normal",
+          "text": "GRAPHICS&#10;NORMAL",
+          "bounds": [
+            48,
+            342,
+            166,
+            414
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Music settings",
+          "text": "MUSIC&#10;CHOOSE",
+          "bounds": [
+            175,
+            342,
+            293,
+            414
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Download High Quality graphics",
+          "text": "HQ PACK&#10;95 MiB",
+          "bounds": [
+            302,
+            342,
+            420,
+            414
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        }
+      ]
+    },
+    {
+      "id": "graphics-popup",
+      "profile": "compact",
+      "group": "graphics",
+      "pixelProfile": {
+        "device": [
+          854,
+          480
+        ],
+        "fontScale": "1.3",
+        "density": "Physical density: 480\r\nOverride density: 240"
+      },
+      "screen": "qa/test-14/final-native-r5/14-native-compact-graphics-popup.png",
+      "tree": "qa/test-14/final-native-r5/14-native-compact-graphics-popup.xml",
+      "controls": []
+    },
+    {
+      "id": "graphics-back",
+      "profile": "compact",
+      "group": "graphics",
+      "pixelProfile": {
+        "device": [
+          854,
+          480
+        ],
+        "fontScale": "1.3",
+        "density": "Physical density: 480\r\nOverride density: 240"
+      },
+      "screen": "qa/test-14/final-native-r5/14-native-compact-graphics-back.png",
+      "tree": "qa/test-14/final-native-r5/14-native-compact-graphics-back.xml",
+      "controls": [
+        {
+          "label": "",
+          "text": "",
+          "bounds": [
+            0,
+            0,
+            854,
+            480
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.webkit.WebView"
+        },
+        {
+          "label": "",
+          "text": "",
+          "bounds": [
+            0,
+            0,
+            854,
+            480
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.FrameLayout"
+        },
+        {
+          "label": "Game mode, Towers, selected",
+          "text": "Towers",
+          "bounds": [
+            48,
+            66,
+            229,
+            138
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Game mode, 1v1 vs Bot, not selected",
+          "text": "1v1 vs Bot",
+          "bounds": [
+            238,
+            66,
+            420,
+            138
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Dustfall map, not selected",
+          "text": "",
+          "bounds": [
+            48,
+            150,
+            228,
+            246
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.FrameLayout"
+        },
+        {
+          "label": "Iron Valley map, selected",
+          "text": "",
+          "bounds": [
+            240,
+            150,
+            420,
+            246
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.FrameLayout"
+        },
+        {
+          "label": "Start game, Iron Valley",
+          "text": "PLAY IRON VALLEY",
+          "bounds": [
+            48,
+            258,
+            420,
+            330
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Graphics options, Normal",
+          "text": "GRAPHICS&#10;NORMAL",
+          "bounds": [
+            48,
+            342,
+            166,
+            414
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Music settings",
+          "text": "MUSIC&#10;CHOOSE",
+          "bounds": [
+            175,
+            342,
+            293,
+            414
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Download High Quality graphics",
+          "text": "HQ PACK&#10;95 MiB",
+          "bounds": [
+            302,
+            342,
+            420,
+            414
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        }
+      ]
+    },
+    {
+      "id": "graphics-hq-selected",
+      "profile": "compact",
+      "group": "graphics",
+      "pixelProfile": {
+        "device": [
+          854,
+          480
+        ],
+        "fontScale": "1.3",
+        "density": "Physical density: 480\r\nOverride density: 240"
+      },
+      "screen": "qa/test-14/final-native-r5/14-native-compact-graphics-hq-selected.png",
+      "tree": "qa/test-14/final-native-r5/14-native-compact-graphics-hq-selected.xml",
+      "controls": [
+        {
+          "label": "",
+          "text": "",
+          "bounds": [
+            0,
+            0,
+            854,
+            480
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.webkit.WebView"
+        },
+        {
+          "label": "",
+          "text": "",
+          "bounds": [
+            0,
+            0,
+            854,
+            480
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.FrameLayout"
+        },
+        {
+          "label": "Game mode, Towers, selected",
+          "text": "Towers",
+          "bounds": [
+            48,
+            66,
+            229,
+            138
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Game mode, 1v1 vs Bot, not selected",
+          "text": "1v1 vs Bot",
+          "bounds": [
+            238,
+            66,
+            420,
+            138
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Dustfall map, not selected",
+          "text": "",
+          "bounds": [
+            48,
+            150,
+            228,
+            246
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.FrameLayout"
+        },
+        {
+          "label": "Iron Valley map, selected",
+          "text": "",
+          "bounds": [
+            240,
+            150,
+            420,
+            246
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.FrameLayout"
+        },
+        {
+          "label": "Start game, Iron Valley",
+          "text": "PLAY IRON VALLEY",
+          "bounds": [
+            48,
+            258,
+            420,
+            330
+          ],
+          "enabled": false,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Graphics options, High Quality",
+          "text": "GRAPHICS&#10;HQ",
+          "bounds": [
+            48,
+            342,
+            166,
+            414
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Music settings",
+          "text": "MUSIC&#10;CHOOSE",
+          "bounds": [
+            175,
+            342,
+            293,
+            414
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Download High Quality graphics",
+          "text": "HQ PACK&#10;95 MiB",
+          "bounds": [
+            302,
+            342,
+            420,
+            414
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        }
+      ],
+      "downloadStarted": false
+    },
+    {
+      "id": "music-track-visibility",
+      "profile": "compact",
+      "group": "music",
+      "pixelProfile": {
+        "device": [
+          854,
+          480
+        ],
+        "fontScale": "1.3",
+        "density": "Physical density: 480\r\nOverride density: 240"
+      },
+      "screen": "qa/test-14/final-native-r5/14-native-compact-music-track-visibility.png",
+      "tree": "qa/test-14/final-native-r5/14-native-compact-music-track-visibility.xml",
+      "controls": [
+        {
+          "label": "",
+          "text": "",
+          "bounds": [
+            0,
+            0,
+            854,
+            480
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.webkit.WebView"
+        },
+        {
+          "label": "",
+          "text": "",
+          "bounds": [
+            0,
+            0,
+            854,
+            480
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.FrameLayout"
+        },
+        {
+          "label": "Music on",
+          "text": "Music on",
+          "bounds": [
+            42,
+            82,
+            192,
+            148
+          ],
+          "enabled": false,
+          "checked": "false",
+          "class": "android.widget.CheckBox"
+        },
+        {
+          "label": "Select all music tracks",
+          "text": "ALL",
+          "bounds": [
+            378,
+            82,
+            450,
+            148
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Clear music track selection",
+          "text": "CLEAR",
+          "bounds": [
+            462,
+            82,
+            545,
+            148
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Music track: Aftermath Soundtrack / Menu Theme - Enhanced",
+          "text": "Menu Theme - Enhanced",
+          "bounds": [
+            42,
+            228,
+            774,
+            282
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.CheckBox"
+        },
+        {
+          "label": "Music track: Aftermath Soundtrack / Track 3 - Enhanced",
+          "text": "Track 3 - Enhanced",
+          "bounds": [
+            42,
+            282,
+            774,
+            336
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.CheckBox"
+        },
+        {
+          "label": "Music track: Aftermath Soundtrack / Nuclear Heartbeat",
+          "text": "Nuclear Heartbeat",
+          "bounds": [
+            42,
+            336,
+            774,
+            349
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.CheckBox"
+        },
+        {
+          "label": "BACK",
+          "text": "BACK",
+          "bounds": [
+            42,
+            384,
+            174,
+            450
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "DOWNLOAD MUSIC",
+          "text": "DOWNLOAD MUSIC",
+          "bounds": [
+            189,
+            384,
+            573,
+            450
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Start game",
+          "text": "START GAME",
+          "bounds": [
+            585,
+            384,
+            774,
+            450
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        }
+      ],
+      "scrollView": [
+        42,
+        82,
+        774,
+        349
+      ],
+      "fullyVisibleTrackRows": [
+        {
+          "label": "Music track: Aftermath Soundtrack / Menu Theme - Enhanced",
+          "bounds": [
+            42,
+            228,
+            774,
+            282
+          ]
+        },
+        {
+          "label": "Music track: Aftermath Soundtrack / Track 3 - Enhanced",
+          "bounds": [
+            42,
+            282,
+            774,
+            336
+          ]
+        }
+      ]
+    },
+    {
+      "id": "music-top",
+      "profile": "compact",
+      "group": "music",
+      "pixelProfile": {
+        "device": [
+          854,
+          480
+        ],
+        "fontScale": "1.3",
+        "density": "Physical density: 480\r\nOverride density: 240"
+      },
+      "screen": "qa/test-14/final-native-r5/14-native-compact-music-top.png",
+      "tree": "qa/test-14/final-native-r5/14-native-compact-music-top.xml",
+      "controls": [
+        {
+          "label": "",
+          "text": "",
+          "bounds": [
+            0,
+            0,
+            854,
+            480
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.webkit.WebView"
+        },
+        {
+          "label": "",
+          "text": "",
+          "bounds": [
+            0,
+            0,
+            854,
+            480
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.FrameLayout"
+        },
+        {
+          "label": "Music on",
+          "text": "Music on",
+          "bounds": [
+            42,
+            82,
+            192,
+            148
+          ],
+          "enabled": false,
+          "checked": "false",
+          "class": "android.widget.CheckBox"
+        },
+        {
+          "label": "Select all music tracks",
+          "text": "ALL",
+          "bounds": [
+            378,
+            82,
+            450,
+            148
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Clear music track selection",
+          "text": "CLEAR",
+          "bounds": [
+            462,
+            82,
+            545,
+            148
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Music track: Aftermath Soundtrack / Menu Theme - Enhanced",
+          "text": "Menu Theme - Enhanced",
+          "bounds": [
+            42,
+            228,
+            774,
+            282
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.CheckBox"
+        },
+        {
+          "label": "Music track: Aftermath Soundtrack / Track 3 - Enhanced",
+          "text": "Track 3 - Enhanced",
+          "bounds": [
+            42,
+            282,
+            774,
+            336
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.CheckBox"
+        },
+        {
+          "label": "Music track: Aftermath Soundtrack / Nuclear Heartbeat",
+          "text": "Nuclear Heartbeat",
+          "bounds": [
+            42,
+            336,
+            774,
+            349
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.CheckBox"
+        },
+        {
+          "label": "BACK",
+          "text": "BACK",
+          "bounds": [
+            42,
+            384,
+            174,
+            450
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "DOWNLOAD MUSIC",
+          "text": "DOWNLOAD MUSIC",
+          "bounds": [
+            189,
+            384,
+            573,
+            450
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Start game",
+          "text": "START GAME",
+          "bounds": [
+            585,
+            384,
+            774,
+            450
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        }
+      ]
+    },
+    {
+      "id": "music-one-selected",
+      "profile": "compact",
+      "group": "music",
+      "pixelProfile": {
+        "device": [
+          854,
+          480
+        ],
+        "fontScale": "1.3",
+        "density": "Physical density: 480\r\nOverride density: 240"
+      },
+      "screen": "qa/test-14/final-native-r5/14-native-compact-music-one-selected.png",
+      "tree": "qa/test-14/final-native-r5/14-native-compact-music-one-selected.xml",
+      "controls": [
+        {
+          "label": "",
+          "text": "",
+          "bounds": [
+            0,
+            0,
+            854,
+            480
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.webkit.WebView"
+        },
+        {
+          "label": "",
+          "text": "",
+          "bounds": [
+            0,
+            0,
+            854,
+            480
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.FrameLayout"
+        },
+        {
+          "label": "Music on",
+          "text": "Music on",
+          "bounds": [
+            42,
+            82,
+            192,
+            148
+          ],
+          "enabled": false,
+          "checked": "false",
+          "class": "android.widget.CheckBox"
+        },
+        {
+          "label": "Select all music tracks",
+          "text": "ALL",
+          "bounds": [
+            378,
+            82,
+            450,
+            148
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Clear music track selection",
+          "text": "CLEAR",
+          "bounds": [
+            462,
+            82,
+            545,
+            148
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Music track: Aftermath Soundtrack / Menu Theme - Enhanced",
+          "text": "Menu Theme - Enhanced",
+          "bounds": [
+            42,
+            228,
+            774,
+            282
+          ],
+          "enabled": true,
+          "checked": "true",
+          "class": "android.widget.CheckBox"
+        },
+        {
+          "label": "Music track: Aftermath Soundtrack / Track 3 - Enhanced",
+          "text": "Track 3 - Enhanced",
+          "bounds": [
+            42,
+            282,
+            774,
+            336
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.CheckBox"
+        },
+        {
+          "label": "Music track: Aftermath Soundtrack / Nuclear Heartbeat",
+          "text": "Nuclear Heartbeat",
+          "bounds": [
+            42,
+            336,
+            774,
+            349
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.CheckBox"
+        },
+        {
+          "label": "BACK",
+          "text": "BACK",
+          "bounds": [
+            42,
+            384,
+            174,
+            450
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "DOWNLOAD MUSIC",
+          "text": "DOWNLOAD MUSIC",
+          "bounds": [
+            189,
+            384,
+            573,
+            450
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Start game",
+          "text": "START GAME",
+          "bounds": [
+            585,
+            384,
+            774,
+            450
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        }
+      ],
+      "trackLabel": "Music track: Aftermath Soundtrack / Menu Theme - Enhanced"
+    },
+    {
+      "id": "music-album-scrolled",
+      "profile": "compact",
+      "group": "music",
+      "pixelProfile": {
+        "device": [
+          854,
+          480
+        ],
+        "fontScale": "1.3",
+        "density": "Physical density: 480\r\nOverride density: 240"
+      },
+      "screen": "qa/test-14/final-native-r5/14-native-compact-music-album-scrolled.png",
+      "tree": "qa/test-14/final-native-r5/14-native-compact-music-album-scrolled.xml",
+      "controls": [
+        {
+          "label": "",
+          "text": "",
+          "bounds": [
+            0,
+            0,
+            854,
+            480
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.webkit.WebView"
+        },
+        {
+          "label": "",
+          "text": "",
+          "bounds": [
+            0,
+            0,
+            854,
+            480
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.FrameLayout"
+        },
+        {
+          "label": "Music track: Aftermath Soundtrack / Reclamation",
+          "text": "Reclamation",
+          "bounds": [
+            42,
+            82,
+            774,
+            112
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.CheckBox"
+        },
+        {
+          "label": "Music track: Aftermath Soundtrack / Rainout",
+          "text": "Rainout",
+          "bounds": [
+            42,
+            112,
+            774,
+            166
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.CheckBox"
+        },
+        {
+          "label": "Music track: Aftermath Soundtrack / Just Rewards",
+          "text": "Just Rewards",
+          "bounds": [
+            42,
+            166,
+            774,
+            220
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.CheckBox"
+        },
+        {
+          "label": "Music track: Aftermath Soundtrack / Launch Codes",
+          "text": "Launch Codes",
+          "bounds": [
+            42,
+            220,
+            774,
+            274
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.CheckBox"
+        },
+        {
+          "label": "BACK",
+          "text": "BACK",
+          "bounds": [
+            42,
+            384,
+            174,
+            450
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "DOWNLOAD MUSIC",
+          "text": "DOWNLOAD MUSIC",
+          "bounds": [
+            189,
+            384,
+            573,
+            450
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Start game",
+          "text": "START GAME",
+          "bounds": [
+            585,
+            384,
+            774,
+            450
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        }
+      ],
+      "attempts": [
+        {
+          "view": [
+            42,
+            82,
+            774,
+            349
+          ],
+          "tracks": [
+            "Music track: Aftermath Soundtrack / Menu Theme - Enhanced",
+            "Music track: Aftermath Soundtrack / Track 3 - Enhanced",
+            "Music track: Aftermath Soundtrack / Nuclear Heartbeat",
+            "Music track: Aftermath Soundtrack / Moonlight Tactics",
+            "Music track: Aftermath Soundtrack / Undisclosed Location",
+            "Music track: Aftermath Soundtrack / Shifting Realities"
+          ],
+          "headings": []
+        },
+        {
+          "view": [
+            42,
+            82,
+            774,
+            349
+          ],
+          "tracks": [
+            "Music track: Aftermath Soundtrack / Moonlight Tactics",
+            "Music track: Aftermath Soundtrack / Undisclosed Location",
+            "Music track: Aftermath Soundtrack / Shifting Realities",
+            "Music track: Aftermath Soundtrack / The Collapse",
+            "Music track: Aftermath Soundtrack / Aftershocks",
+            "Music track: Aftermath Soundtrack / Blast Zone"
+          ],
+          "headings": []
+        },
+        {
+          "view": [
+            42,
+            82,
+            774,
+            349
+          ],
+          "tracks": [
+            "Music track: Aftermath Soundtrack / The Collapse",
+            "Music track: Aftermath Soundtrack / Aftershocks",
+            "Music track: Aftermath Soundtrack / Blast Zone",
+            "Music track: Aftermath Soundtrack / Reclamation",
+            "Music track: Aftermath Soundtrack / Rainout",
+            "Music track: Aftermath Soundtrack / Just Rewards"
+          ],
+          "headings": []
+        },
+        {
+          "view": [
+            42,
+            82,
+            774,
+            349
+          ],
+          "tracks": [
+            "Music track: Aftermath Soundtrack / Reclamation",
+            "Music track: Aftermath Soundtrack / Rainout",
+            "Music track: Aftermath Soundtrack / Just Rewards",
+            "Music track: Aftermath Soundtrack / Launch Codes"
+          ],
+          "headings": [
+            "Legacy Soundtrack"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "music-back",
+      "profile": "compact",
+      "group": "music",
+      "pixelProfile": {
+        "device": [
+          854,
+          480
+        ],
+        "fontScale": "1.3",
+        "density": "Physical density: 480\r\nOverride density: 240"
+      },
+      "screen": "qa/test-14/final-native-r5/14-native-compact-music-back.png",
+      "tree": "qa/test-14/final-native-r5/14-native-compact-music-back.xml",
+      "controls": [
+        {
+          "label": "",
+          "text": "",
+          "bounds": [
+            0,
+            0,
+            854,
+            480
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.webkit.WebView"
+        },
+        {
+          "label": "",
+          "text": "",
+          "bounds": [
+            0,
+            0,
+            854,
+            480
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.FrameLayout"
+        },
+        {
+          "label": "Game mode, Towers, selected",
+          "text": "Towers",
+          "bounds": [
+            48,
+            66,
+            229,
+            138
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Game mode, 1v1 vs Bot, not selected",
+          "text": "1v1 vs Bot",
+          "bounds": [
+            238,
+            66,
+            420,
+            138
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Dustfall map, not selected",
+          "text": "",
+          "bounds": [
+            48,
+            150,
+            228,
+            246
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.FrameLayout"
+        },
+        {
+          "label": "Iron Valley map, selected",
+          "text": "",
+          "bounds": [
+            240,
+            150,
+            420,
+            246
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.FrameLayout"
+        },
+        {
+          "label": "Start game, Iron Valley",
+          "text": "PLAY IRON VALLEY",
+          "bounds": [
+            48,
+            258,
+            420,
+            330
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Graphics options, Normal",
+          "text": "GRAPHICS&#10;NORMAL",
+          "bounds": [
+            48,
+            342,
+            166,
+            414
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Music settings",
+          "text": "MUSIC&#10;CHOOSE",
+          "bounds": [
+            175,
+            342,
+            293,
+            414
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        },
+        {
+          "label": "Download High Quality graphics",
+          "text": "HQ PACK&#10;95 MiB",
+          "bounds": [
+            302,
+            342,
+            420,
+            414
+          ],
+          "enabled": true,
+          "checked": "false",
+          "class": "android.widget.Button"
+        }
+      ],
+      "restoredCount": 0,
+      "realAlbumScroll": true,
+      "scroll": [
+        {
+          "view": [
+            42,
+            82,
+            774,
+            349
+          ],
+          "tracks": [
+            "Music track: Aftermath Soundtrack / Menu Theme - Enhanced",
+            "Music track: Aftermath Soundtrack / Track 3 - Enhanced",
+            "Music track: Aftermath Soundtrack / Nuclear Heartbeat",
+            "Music track: Aftermath Soundtrack / Moonlight Tactics",
+            "Music track: Aftermath Soundtrack / Undisclosed Location",
+            "Music track: Aftermath Soundtrack / Shifting Realities"
+          ],
+          "headings": []
+        },
+        {
+          "view": [
+            42,
+            82,
+            774,
+            349
+          ],
+          "tracks": [
+            "Music track: Aftermath Soundtrack / Moonlight Tactics",
+            "Music track: Aftermath Soundtrack / Undisclosed Location",
+            "Music track: Aftermath Soundtrack / Shifting Realities",
+            "Music track: Aftermath Soundtrack / The Collapse",
+            "Music track: Aftermath Soundtrack / Aftershocks",
+            "Music track: Aftermath Soundtrack / Blast Zone"
+          ],
+          "headings": []
+        },
+        {
+          "view": [
+            42,
+            82,
+            774,
+            349
+          ],
+          "tracks": [
+            "Music track: Aftermath Soundtrack / The Collapse",
+            "Music track: Aftermath Soundtrack / Aftershocks",
+            "Music track: Aftermath Soundtrack / Blast Zone",
+            "Music track: Aftermath Soundtrack / Reclamation",
+            "Music track: Aftermath Soundtrack / Rainout",
+            "Music track: Aftermath Soundtrack / Just Rewards"
+          ],
+          "headings": []
+        },
+        {
+          "view": [
+            42,
+            82,
+            774,
+            349
+          ],
+          "tracks": [
+            "Music track: Aftermath Soundtrack / Reclamation",
+            "Music track: Aftermath Soundtrack / Rainout",
+            "Music track: Aftermath Soundtrack / Just Rewards",
+            "Music track: Aftermath Soundtrack / Launch Codes"
+          ],
+          "headings": [
+            "Legacy Soundtrack"
+          ]
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Native launcher, graphics selection, Music list/toggle/return only; no pack download, installation or audio playback tested."
+  ],
+  "identity": {
+    "packageId": "com.rbabbit.warzonetowers.lab",
+    "device": "emulator-5556",
+    "candidateAPK_SHA256": "81e08ca7fb3cc511c03be5177fa1656261f9bf510275fd174f7a22cbecf65237",
+    "installedPath": "/data/app/~~QfZPV0A2ACdFJZu70gADwg==/com.rbabbit.warzonetowers.lab-UuKGlU5KPqtmdahvqLLHog==/base.apk"
+  },
+  "preferencesBefore": {
+    "tracks": [],
+    "musicEnabled": "absent",
+    "librarySHA256": "8ea1ee21d1adfd4f13dce313ee38252096e11c106677b2141c9f1600bd7f9b61",
+    "preferenceFiles": [
+      "AwOriginVisitLoggerPrefs.xml",
+      "WebViewChromiumPrefs.xml",
+      "com.rbabbit.blocknight.warzone.MainActivity.xml"
+    ]
+  },
+  "explicitLauncherHandoff": true,
+  "preferencesAfter": {
+    "tracks": [],
+    "musicEnabled": "absent",
+    "librarySHA256": "8ea1ee21d1adfd4f13dce313ee38252096e11c106677b2141c9f1600bd7f9b61",
+    "preferenceFiles": [
+      "AwOriginVisitLoggerPrefs.xml",
+      "WebViewChromiumPrefs.xml",
+      "com.rbabbit.blocknight.warzone.MainActivity.xml"
+    ]
+  },
+  "afterIdentity": {
+    "packageId": "com.rbabbit.warzonetowers.lab",
+    "device": "emulator-5556",
+    "candidateAPK_SHA256": "81e08ca7fb3cc511c03be5177fa1656261f9bf510275fd174f7a22cbecf65237",
+    "installedPath": "/data/app/~~QfZPV0A2ACdFJZu70gADwg==/com.rbabbit.warzonetowers.lab-UuKGlU5KPqtmdahvqLLHog==/base.apk"
+  },
+  "cleanupPreferences": {
+    "tracks": [],
+    "musicEnabled": "absent",
+    "librarySHA256": "8ea1ee21d1adfd4f13dce313ee38252096e11c106677b2141c9f1600bd7f9b61",
+    "preferenceFiles": [
+      "AwOriginVisitLoggerPrefs.xml",
+      "WebViewChromiumPrefs.xml",
+      "com.rbabbit.blocknight.warzone.MainActivity.xml"
+    ]
+  },
+  "finished": "2026-11-08T21:46:14.705Z"
+}

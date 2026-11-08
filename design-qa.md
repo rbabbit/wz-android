@@ -1,4 +1,62 @@
-# Warzone Towers 0.13 — Factory option 3 and personal guide
+# Warzone Towers 0.14 — compact Towers pages
+
+Final result: passed.
+
+This current review concerns the installed R5 APK with SHA-256
+`81e08ca7fb3cc511c03be5177fa1656261f9bf510275fd174f7a22cbecf65237`.
+This is visual acceptance of all thirteen reviewed active/protected page groups
+at normal and compact profiles. The supplemental 1200×540 eight-surface smoke
+and retained-Duel cold-start smoke also passed and their screenshots were
+reviewed. Final source/package integrity is a separate delivery gate.
+Historical passes below do not establish acceptance of this candidate.
+
+Root and the independent reviewer accepted the current normal 1080×600 and
+compact 854×480 native Start/Graphics/Music and command-page captures. The compact
+profile uses font scale 1.3 and command size 1.4. Music now exposes two complete
+initial native track rows at both profiles; compact rows measure 54 pixels.
+Build's catalogue/modules, both visible construction rows above Exit and the
+completed Orders section were also inspected at both profiles. The actual
+compact Library confirmation and selected lower component remain inside their
+real scroll owners, including Keep Editing and deletion of only the QA addition.
+
+The approved references remain in [docs/ui-0.14](docs/ui-0.14/). Root accepted the
+current [Production](qa/test-14/comparisons/production-full.png),
+[Design](qa/test-14/comparisons/design-full.png) and
+[compact Design](qa/test-14/comparisons/design-compact-full.png) comparisons.
+They preserve full actual screenshots and aspect ratios. Native part availability,
+facility counts and selected state differ from the illustrative references.
+Existing Viper/Wheels silhouettes, known software-emulator black terrain and the
+protected footer's original hide behaviour are understood differences. The
+Research comparison and actual normal/compact five-lab captures are also accepted.
+Normal native execution completed Mortar Pit and started the manually queued
+Cobra topic on the same lab; compact layout checks used that existing native
+queue without assigning topics and recorded a real 600 ms grid swipe.
+
+The [review input](qa/test-14/reviewed-input.json) records the accepted PNGs and
+reviewers. The [page inventory](qa/test-14/page-inventory.json) records all 26
+actual current-R5 normal/compact pairs; visual coverage preflight passes without
+duplicate review paths. Delivery assembly binds those observations to the
+source/package, signature and gameplay evidence.
+Help top/bottom, field controls, both idle footer sidebars and Return/Cancel
+screens were accepted at both profiles. Actual swipes reached the guide's last
+section; native world lab/factory IDs and restored input were checked separately.
+No new active footer-progress observation is claimed. Older R4 action/native
+evidence retains its own identity under the
+verified unchanged-asset link to R5. Fresh R5 page smoke and remaining actions
+are identified separately; no R4 screenshot is relabeled R5. Ordinary native
+FIFO/initial saving, maximum-facility fixtures and continuation epochs remain
+separate records, without an uninterrupted-run claim.
+
+Current HTML-control tests use standard trusted CDP Input.dispatchTouchEvent
+touchStart/touchEnd with explicit 60 ms timestamps in the actual WebView.
+World input, native Android controls, Back, typing and real swipes use OS/ADB
+input. No experimental compositor API or DOM click is used for current HTML
+controls. Earlier platform/input diagnostics remain historical evidence. The
+interface remains HTML/CSS over the existing engine, with Android launcher,
+settings and Return views. Physical-handset GPU/FPS, music download/audio and a
+full thirty-wave campaign are not newly certified.
+
+# Historical Warzone Towers 0.13 — Factory option 3 and personal guide
 
 Final result: passed.
 

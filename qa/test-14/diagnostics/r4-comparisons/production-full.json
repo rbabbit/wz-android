@@ -1,0 +1,38 @@
+{
+  "reviewed": false,
+  "purpose": "Full actual screenshot beside approved reference; isotropic resizing/letterboxing only, no cropped or fabricated content. Root manual review remains required.",
+  "inputs": [
+    {
+      "role": "reference",
+      "path": "docs/ui-0.14/approved-production.png",
+      "sha256": "8d1af8d5a5839b63cbea541303b56817d1fdef1a4c2847a4ae5fc4415e2eebb1",
+      "originalSize": [
+        1920,
+        819
+      ],
+      "displaySize": [
+        1000,
+        427
+      ],
+      "scale": 0.5208333333333334
+    },
+    {
+      "role": "actual",
+      "path": "qa/test-14/final-commands-r4-ready/lab-14-normal-current-apk-active-and-waiting.png",
+      "sha256": "3eecda8aaaaf85ca3e2b996c56af95a2d6143442bfae659d2140782af60fa708",
+      "originalSize": [
+        1080,
+        600
+      ],
+      "displaySize": [
+        1000,
+        556
+      ],
+      "scale": 0.9259259259259259
+    }
+  ],
+  "output": {
+    "path": "qa/test-14/comparisons/production-full.png",
+    "sha256": "629d138b28b81341ba2ad745a8d3401e83c2ca7f47ce707ee75a3883664fb271"
+  }
+}

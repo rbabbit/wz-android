@@ -31,6 +31,9 @@ final class MusicSetupView extends FrameLayout {
     private final Button download, back, start, all, clear;
     private final Map<String,CheckBox> tracks=new LinkedHashMap<>();
     private boolean cached, busy, updating;
+    private boolean compactTowers;
+    private LinearLayout compactPanel;
+    private Boolean compactShortLayout;
     private static final int INK=0xFFF0E8D3, CYAN=0xFF83CDD1, MUTED=0xFFB4C4C3;
 
     MusicSetupView(Context context, MusicTrackCatalog catalog, Set<String> selected, Actions actions) {
@@ -42,6 +45,7 @@ final class MusicSetupView extends FrameLayout {
         shade.setBackground(new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM,
                 new int[]{0xEB081315,0xE8071012,0xF5050B0C}));addView(shade,new LayoutParams(-1,-1));
         LinearLayout panel=new LinearLayout(context);panel.setOrientation(LinearLayout.VERTICAL);
+        compactPanel=panel;
         panel.setPadding(dp(20),dp(12),dp(20),dp(12));addView(panel,new LayoutParams(-1,-1,Gravity.CENTER));
         LinearLayout header=new LinearLayout(context);header.setGravity(Gravity.CENTER_VERTICAL);
         TextView title=text("MUSIC",25,INK);title.setTypeface(face);
@@ -89,10 +93,101 @@ final class MusicSetupView extends FrameLayout {
         download=button("DOWNLOAD MUSIC",true);download.setOnClickListener(v->{if(cached)actions.close();else actions.download();});
         buttons.addView(download,new LinearLayout.LayoutParams(0,dp(44),2));panel.addView(buttons);
         addOnLayoutChangeListener((v,l,t,r,b,ol,ot,or,ob)->{
+            if(compactTowers){fitCompactTowersPanel();return;}
             LayoutParams p=(LayoutParams)panel.getLayoutParams();int width=Math.min(getWidth(),dp(900));
             if(p.width!=width){p.width=width;panel.setLayoutParams(p);}
         });
         setCached(false,false);
+    }
+
+    /** Visual-only Towers settings; the default Duel view keeps its old layout. */
+    void setCompactTowers(boolean compact) {
+        if(!compact)return;
+        compactTowers=true;
+        compactPanel.setPadding(dp(16),dp(10),dp(16),dp(10));
+        compactPanel.setBackgroundColor(0xFA08191F);
+        getChildAt(1).setAlpha(.65f);
+        for(Button b:new Button[]{start,download,back,all,clear}){
+            boolean primary=b==start||b==download;
+            GradientDrawable surface=new GradientDrawable();
+            surface.setColor(primary?0xFF8BD3CC:android.graphics.Color.TRANSPARENT);
+            surface.setCornerRadius(dp(4));
+            b.setBackground(new android.graphics.drawable.RippleDrawable(ColorStateList.valueOf(0x228BD3CC),surface,null));b.setTextColor(primary?0xFF102629:INK);
+            b.setMinWidth(dp(b==download?160:b==back?88:48));
+            b.setMinimumWidth(dp(b==download?160:b==back?88:48));
+            if(b!=start){
+                LinearLayout.LayoutParams p=(LinearLayout.LayoutParams)b.getLayoutParams();
+                p.width=LinearLayout.LayoutParams.WRAP_CONTENT;p.height=dp(44);p.weight=0;
+                b.setLayoutParams(p);
+            }
+        }
+        LinearLayout.LayoutParams countParams=(LinearLayout.LayoutParams)count.getLayoutParams();
+        countParams.width=LinearLayout.LayoutParams.WRAP_CONTENT;countParams.weight=0;countParams.rightMargin=dp(10);
+        count.setLayoutParams(countParams);count.setGravity(Gravity.CENTER_VERTICAL);
+        LinearLayout content=(LinearLayout)((ScrollView)compactPanel.getChildAt(1)).getChildAt(0);
+        content.getChildAt(0).setVisibility(GONE);
+        ((TextView)content.getChildAt(1)).setText("39 original tracks · Four albums · 110 MiB offline music");
+        content.removeView(enabled);
+        LinearLayout selectionBar=(LinearLayout)count.getParent();
+        LinearLayout.LayoutParams enabledParams=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,dp(44));
+        enabledParams.rightMargin=dp(12);enabled.setMinHeight(dp(44));
+        selectionBar.addView(enabled,0,enabledParams);
+        for(int i=0;i<content.getChildCount();i++){
+            android.view.View child=content.getChildAt(i);
+            if(child instanceof CheckBox)((CheckBox)child).setMinHeight(dp(44));
+            LinearLayout.LayoutParams p=(LinearLayout.LayoutParams)child.getLayoutParams();
+            p.topMargin=Math.min(p.topMargin,dp(8));p.bottomMargin=Math.min(p.bottomMargin,dp(5));
+            child.setLayoutParams(p);
+        }
+        requestLayout();
+    }
+
+    private void fitCompactTowersPanel() {
+        if(getWidth()<=0||getHeight()<=0)return;
+        int width=Math.min(Math.max(0,getWidth()-dp(24)),dp(520));
+        int height=Math.max(0,getHeight()-dp(24));
+        LayoutParams p=(LayoutParams)compactPanel.getLayoutParams();
+        int gravity=Gravity.TOP|Gravity.START,inset=dp(12);
+        if(p.width!=width||p.height!=height||p.gravity!=gravity||p.leftMargin!=inset||p.topMargin!=inset){
+            p.width=width;p.height=height;p.gravity=gravity;p.leftMargin=inset;p.topMargin=inset;
+            compactPanel.setLayoutParams(p);
+        }
+        fitCompactTowersContent(getHeight()<dp(360));
+    }
+    private void fitCompactTowersContent(boolean shortLayout) {
+        if(Boolean.valueOf(shortLayout).equals(compactShortLayout))return;
+        compactShortLayout=shortLayout;
+        compactPanel.setPadding(dp(16),dp(shortLayout?8:10),dp(16),dp(shortLayout?8:10));
+        LinearLayout header=(LinearLayout)compactPanel.getChildAt(0);
+        LinearLayout buttons=(LinearLayout)back.getParent();
+        ((android.view.ViewGroup)start.getParent()).removeView(start);
+        LinearLayout.LayoutParams startParams=new LinearLayout.LayoutParams(dp(126),dp(44));
+        if(shortLayout){startParams.leftMargin=dp(8);buttons.addView(start,startParams);}
+        else header.addView(start,startParams);
+        TextView title=(TextView)header.getChildAt(0);
+        title.setTextSize(shortLayout?20:25);
+        LinearLayout.LayoutParams titleParams=(LinearLayout.LayoutParams)title.getLayoutParams();
+        titleParams.height=shortLayout?LinearLayout.LayoutParams.WRAP_CONTENT:dp(44);title.setLayoutParams(titleParams);
+        for(Button button:new Button[]{start,download,back,all,clear})button.setTextSize(shortLayout?12:14);
+        LinearLayout.LayoutParams backParams=(LinearLayout.LayoutParams)back.getLayoutParams();
+        backParams.width=shortLayout?dp(88):LinearLayout.LayoutParams.WRAP_CONTENT;back.setLayoutParams(backParams);
+        LinearLayout.LayoutParams downloadParams=(LinearLayout.LayoutParams)download.getLayoutParams();
+        downloadParams.width=shortLayout?0:LinearLayout.LayoutParams.WRAP_CONTENT;downloadParams.weight=shortLayout?1:0;download.setLayoutParams(downloadParams);
+        enabled.setTextSize(shortLayout?13:14);count.setTextSize(shortLayout?12:13);
+        LinearLayout content=(LinearLayout)((ScrollView)compactPanel.getChildAt(1)).getChildAt(0);
+        content.getChildAt(1).setVisibility(shortLayout?GONE:VISIBLE);
+        for(int i=3;i<content.getChildCount();i++){
+            android.view.View child=content.getChildAt(i);
+            if(child instanceof CheckBox){((CheckBox)child).setMinHeight(dp(shortLayout?36:44));continue;}
+            if(!(child instanceof TextView))continue;
+            TextView text=(TextView)child;boolean heading=face.equals(text.getTypeface());
+            text.setTextSize(shortLayout?(heading?16:10):(heading?19:12));
+            LinearLayout.LayoutParams margins=(LinearLayout.LayoutParams)text.getLayoutParams();
+            margins.topMargin=dp(heading?(shortLayout?4:8):0);margins.bottomMargin=dp(shortLayout?2:heading?4:5);text.setLayoutParams(margins);
+        }
+        status.setTextSize(shortLayout?10:12);
+        LinearLayout.LayoutParams statusParams=(LinearLayout.LayoutParams)status.getLayoutParams();
+        statusParams.topMargin=dp(shortLayout?4:8);statusParams.bottomMargin=dp(shortLayout?4:7);status.setLayoutParams(statusParams);
     }
     private void tryStart(){if(!busy&&(!enabled.isChecked()||!selection().isEmpty()))actions.start();}
     private Set<String> selection(){Set<String> ids=new HashSet<>();for(Map.Entry<String,CheckBox> e:tracks.entrySet())if(e.getValue().isChecked())ids.add(e.getKey());return ids;}

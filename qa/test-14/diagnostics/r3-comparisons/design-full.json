@@ -1,0 +1,48 @@
+{
+  "reviewed": true,
+  "purpose": "Full actual screenshot beside approved reference; isotropic resizing/letterboxing only, no cropped or fabricated content. Root manual review recorded separately below.",
+  "inputs": [
+    {
+      "role": "reference",
+      "path": "docs/ui-0.14/approved-design.png",
+      "sha256": "818838158bf62f47c849b5286aa44009eb1387edeb31bbc347756a0442360cb0",
+      "originalSize": [
+        1920,
+        819
+      ],
+      "displaySize": [
+        1000,
+        427
+      ],
+      "scale": 0.5208333333333334
+    },
+    {
+      "role": "actual",
+      "path": "qa/test-14/final-commands-verified/lab-14-normal-design-edit.png",
+      "sha256": "1e20098efc7fd1efc35c9fe1ef8373db5a1a38fe7106711512e318743b1b333c",
+      "originalSize": [
+        1080,
+        600
+      ],
+      "displaySize": [
+        1000,
+        556
+      ],
+      "scale": 0.9259259259259259
+    }
+  ],
+  "output": {
+    "path": "qa/test-14/comparisons/design-full.png",
+    "sha256": "faffa6586d41a55d8e1cb0d45dc216e3843050d7731b9184e91b4b084ce0406b"
+  },
+  "review": {
+    "reviewer": "Root agent manual visual review",
+    "recordedUTC": "2026-11-08T20:22:52.585124Z",
+    "result": "Accepted visual fidelity for the linked real R3 surface.",
+    "notes": [
+      "Root viewed this comparison and its underlying actual R3 capture.",
+      "Functional copy, real native art and responsive fit were accepted.",
+      "Reference game state, available technology, background and protected footer visibility are illustrative differences; no screenshot content was fabricated."
+    ]
+  }
+}

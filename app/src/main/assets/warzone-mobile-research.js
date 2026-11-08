@@ -2,7 +2,7 @@
 (() => {
   "use strict";
 
-  const VERSION = 38;
+  const VERSION = 39;
   const QUEUE_COMMAND_PATH = "/data/mp/multiplay/script/rules/blocknight-queue-command.json";
   const CATEGORIES = ["ALL", "WEAPONS", "DEFENCE", "VEHICLES", "CYBORG", "SYSTEMS", "STRUCTURES"];
 
@@ -18,7 +18,7 @@
     savedCanvasStyle: null, savedHudVisibility: "", savedWaveVisibility: "", savedWavePriority: "", catalog: [], engineLabs: [],
     lastSnapshotGameTime: null, playerPower: 0, pendingCommand: null, topicHistory: {},
     labQueues: {}, syncedQueues: {}, dirtyLabs: {}, runner: null, statusTimer: null,
-    assignmentError: "", selectedTopicIndex: null, pendingClose: false, syncBlocked: false,
+    assignmentError: "", selectedTopicIndex: null, selectedTopicIds: [], pendingClose: false, syncBlocked: false,
     opens: 0, closes: 0, topicSelections: 0, labSelections: 0,
     categoryChanges: 0,
     bridgeSyncs: 0, bridgeErrors: 0, completedEvents: 0,
@@ -128,7 +128,7 @@
   function resetOnLoad(){
     {
       clearRunnerTimers(state.runner);state.runner=null;state.pendingCommand=null;state.assigning=false;state.syncBlocked=false;
-      state.labQueues={};state.syncedQueues={};state.dirtyLabs={};state.queueStateTime=-1;state.requestedLabId=null;
+      state.labQueues={};state.syncedQueues={};state.dirtyLabs={};state.queueStateTime=-1;state.requestedLabId=null;state.selectedTopicIds=[];
     }
   }
   function pruneLabs(){
@@ -393,7 +393,8 @@
     CATEGORIES.forEach(category => {
       const button = document.createElement("button");
       button.type = "button"; button.className = "bn-tech-category";
-      button.dataset.category = category; button.textContent = category;
+      button.dataset.category = category;
+      button.textContent = isTowersResearchShell(shell) ? category[0] + category.slice(1).toLowerCase() : category;
       categories.appendChild(button);
     });
     shell.addEventListener("pointerdown", event => {
@@ -459,7 +460,7 @@
     // Reuse the actual selection/queue elements and handlers; this changes
     // their layout, not the native research or manual assignment paths.
     main.insertBefore(categories, browser);
-    detail.insertBefore(preview, detail.firstChild);
+    main.insertBefore(preview, detail);
     shell.querySelector(".bn-tech-brand strong").textContent = "RESEARCH";
     shell.querySelector(".bn-tech-brand small").textContent = "TECHNOLOGY";
     shell.querySelector(".bn-tech-labs").setAttribute("aria-label", "Research laboratories");
@@ -485,10 +486,14 @@
     state.savedCanvasStyle = { transform: target.style.transform, transformOrigin: target.style.transformOrigin, transition: target.style.transition, willChange: target.style.willChange, filter: target.style.filter };
     const hud = document.getElementById("blocknight-combat-hud");
     state.savedHudVisibility = hud?.style.visibility || "";
-    if (hud) hud.style.visibility = "hidden";
     const waveHud = document.getElementById("warzone-towers-wave-hud");
     state.savedWaveVisibility = waveHud?.style.visibility || "";
     state.savedWavePriority = waveHud?.style.getPropertyPriority("visibility") || "";
+    // Compact Towers TECH leaves the existing battlefield visible at its
+    // original dimensions. Its transparent shield retains menu input coverage.
+    if (window.__warzoneDuelConfig?.mode !== 'duel'
+      && document.body.classList.contains('wt-towers-polished')) return;
+    if (hud) hud.style.visibility = "hidden";
     if (waveHud) waveHud.style.setProperty("visibility", "hidden", "important");
     target.style.transition = "filter 120ms ease"; target.style.filter = "brightness(.32) saturate(.55)";
   }
@@ -601,11 +606,47 @@
     const topic = state.catalog.find(value => value.nativeIndex === nativeIndex);
     if (!topic) return false;
     state.selectedTopicIndex = nativeIndex;
+    if (isTowersResearchShell(document.getElementById("blocknight-research-shell"))) {
+      selectedResearchTopics();
+      const index = state.selectedTopicIds.indexOf(topic.id);
+      if (index >= 0) state.selectedTopicIds.splice(index, 1);
+      else if (!topic.done && !topic.started && !activeLabForTopic(topic.id) && queuedLocation(topic.id) === null) state.selectedTopicIds.push(topic.id);
+    }
     state.assignmentError = "";
     renderCatalog(); renderSummary(); vibrate(7); return true;
   }
 
+  function selectedResearchTopics() {
+    // Store native IDs in tap order, not volatile catalogue indexes. Polling,
+    // category changes and another lab starting work must not redirect a batch.
+    const selected = state.selectedTopicIds.map(id => state.catalog.find(topic => topic.id === id))
+      .filter(topic => topic && !topic.done && !topic.started && !activeLabForTopic(topic.id) && queuedLocation(topic.id) === null);
+    state.selectedTopicIds = selected.map(topic => topic.id);
+    return selected;
+  }
+
   function assignSelectedTopic(button = null) {
+    if (isTowersResearchShell(document.getElementById("blocknight-research-shell"))) {
+      if (!state.open || state.pendingClose || window.__towersHtml?.isEnded?.()) return false;
+      const topics = selectedResearchTopics(), lab = state.engineLabs[state.activeLab];
+      if (!topics.length || !lab) {
+        state.assignmentError = lab ? "Select one or more technologies first." : "That laboratory is no longer available.";
+        renderAll(); return false;
+      }
+      if (queueForLab(lab.id).length + topics.length > 64) {
+        state.assignmentError = `Lab ${lab.nativeIndex + 1} can queue 64 technologies. Deselect some topics or remove waiting items first.`;
+        renderSummary(); return false;
+      }
+      // Append the whole ordered selection before invoking the existing atomic
+      // queue transport once. One selected topic follows the same path.
+      queueForLab(lab.id).push(...topics.map(topic => ({ ...topic })));
+      updateDirtyLab(lab.id);
+      state.selectedTopicIds = [];
+      state.syncBlocked = false;
+      state.queueAdds += topics.length;
+      state.assignmentError = `${topics.length === 1 ? topics[0].name : `${topics.length} technologies`} added to Lab ${lab.nativeIndex + 1}.`;
+      renderAll(); processQueues(); vibrate(12); return true;
+    }
     if (!Number.isFinite(Number(state.selectedTopicIndex))) {
       state.assignmentError = "Select a technology before assigning it.";
       renderSummary(); return false;
@@ -808,7 +849,10 @@
       const suffix = queued ? ` · +${queued} QUEUED` : "";
       const syncing = Boolean(state.runner?.labIds.includes(lab.id));
       const status = lab.idle ? `${syncing ? "SYNCING" : "READY"}${queued ? ` · ${queued} QUEUED` : ""}` : lab.topicName ? `RUNNING · ${escapeHtml(lab.topicName)}${suffix}` : `ACTIVE${suffix}`;
-      button.innerHTML = `<b>LAB ${index + 1}</b><small>${status}</small>`;
+      if (isTowersResearchShell(shell)) {
+        button.innerHTML = `<img src="build-icons/A0ResearchFacility.png" alt=""><b>Lab${index + 1}</b><i aria-hidden="true"></i><small>${status}</small>`;
+        button.setAttribute('aria-label', `Lab ${index + 1} · ${lab.idle ? syncing ? 'Syncing' : 'Ready' : lab.topicName || 'Researching'}${queued ? ` · ${queued} queued` : ''}`);
+      } else button.innerHTML = `<b>LAB ${index + 1}</b><small>${status}</small>`;
     });
   }
 
@@ -829,12 +873,14 @@
     if (!state.bridgeSyncs) { list.innerHTML = `<div class="bn-tech-empty"><div><b>Syncing the live Warzone tree…</b><small>Preparing real names, costs and availability.</small></div></div>`; return; }
     if (!topics.length) { list.innerHTML = `<div class="bn-tech-empty"><div><b>No ${escapeHtml(state.activeCategory.toLowerCase())} research is ready.</b><small>Complete another technology to unlock more.</small></div></div>`; return; }
     if (!topics.some(topic => topic.nativeIndex === state.selectedTopicIndex)) state.selectedTopicIndex = topics[0].nativeIndex;
+    const towers = isTowersResearchShell(shell), selected = towers ? selectedResearchTopics() : [];
     list.innerHTML = topics.map(topic => {
       const active = activeLabForTopic(topic.id);
       const queuedLabId = queuedLocation(topic.id);
       const queuedLab = state.engineLabs.find(lab => lab.id === queuedLabId);
       const status = active ? `LAB ${active.nativeIndex + 1} ACTIVE` : queuedLab ? `LAB ${queuedLab.nativeIndex + 1} QUEUED` : "READY";
-      return `<button class="bn-tech-card${topic.nativeIndex === state.selectedTopicIndex ? " selected" : ""}" type="button" role="listitem" data-topic-id="${escapeHtml(topic.id)}" data-topic-index="${topic.nativeIndex}"><span class="bn-tech-icon"><img src="${topicImage(topic)}" alt=""></span><span class="bn-tech-copy"><strong>${escapeHtml(topic.name)}</strong><small>${topic.category} · ${topic.points.toLocaleString()} RESEARCH PTS</small></span><span class="bn-tech-ready"><b>${status}</b><small>POWER ${topic.power.toLocaleString()}</small></span></button>`;
+      const order = selected.findIndex(value => value.id === topic.id), chosen = towers ? order >= 0 : topic.nativeIndex === state.selectedTopicIndex;
+      return `<button class="bn-tech-card${chosen ? " selected" : ""}" type="button" role="listitem" data-topic-id="${escapeHtml(topic.id)}" data-topic-index="${topic.nativeIndex}"${towers ? ` aria-pressed="${chosen}" data-selection-order="${chosen ? order + 1 : ''}"` : ''}><span class="bn-tech-icon"><img src="${topicImage(topic)}" alt=""></span><span class="bn-tech-copy"><strong>${escapeHtml(topic.name)}</strong><small>${topic.category} · ${topic.points.toLocaleString()} RESEARCH PTS</small></span><span class="bn-tech-ready"><b>${status}</b><small>POWER ${topic.power.toLocaleString()}</small></span></button>`;
     }).join("");
     list.querySelectorAll("img").forEach(image => image.addEventListener("error", () => {
       if (image.dataset.fallback) return;
@@ -855,7 +901,9 @@
     const total = labQueue.length + (researching ? 1 : 0);
     shell.querySelector('.bn-tech-lab-total').textContent = `${total} ITEM${total === 1 ? '' : 'S'}`;
     shell.querySelector('.bn-tech-active').classList.toggle('idle', !researching);
-    shell.querySelector('.bn-tech-current-status').textContent = researching ? 'NOW RESEARCHING' : !lab ? 'SYNCING LABORATORIES' : labQueue.length ? 'WAITING TO START' : 'LAB READY';
+    shell.querySelector('.bn-tech-current-status').textContent = isTowersResearchShell(shell)
+      ? !lab ? 'SYNCING LABORATORIES' : `LAB${state.activeLab + 1} · ${lab.waitingPower && researching ? 'WAITING FOR POWER' : researching ? 'RESEARCHING' : labQueue.length ? 'WAITING TO START' : 'READY'}`
+      : researching ? 'NOW RESEARCHING' : !lab ? 'SYNCING LABORATORIES' : labQueue.length ? 'WAITING TO START' : 'LAB READY';
     shell.querySelector('.bn-tech-active-name').textContent = current?.name || 'No active research';
     const currentImage = shell.querySelector('.bn-tech-current-image');
     const currentSource = current ? topicImage(current) : 'research-icons/Research%20Module.gif';
@@ -865,9 +913,20 @@
     const remaining = lab?.remainingSeconds;
     const time = lab?.waitingPower ? 'Waiting for power · timer paused' : remaining === null || remaining === undefined ? 'Linking live research status…' : remaining > 0 ? `~${Math.floor(remaining / 60)}:${String(Math.ceil(remaining % 60)).padStart(2, '0')} left · estimated` : 'Finishing · waiting for engine confirmation';
     shell.querySelector('.bn-tech-time').textContent = lab && !lab.idle ? time : 'Add a technology to start immediately.';
-    shell.querySelector('.bn-tech-progress i').style.width = `${lab && !lab.idle ? Math.min(99, Math.max(0, lab.estimatedProgress * 100)) : 0}%`;
+    const progress = shell.querySelector('.bn-tech-progress');
+    if (isTowersResearchShell(shell)) {
+      const value = lab?.estimatedProgress;
+      const known = researching && typeof value === 'number' && Number.isFinite(value);
+      progress.hidden = !known;
+      progress.setAttribute('role', 'progressbar'); progress.setAttribute('aria-label', `Lab ${state.activeLab + 1} research progress, estimated`);
+      progress.setAttribute('aria-valuemin', '0'); progress.setAttribute('aria-valuemax', '100');
+      if (known) progress.setAttribute('aria-valuenow', String(Math.floor(Math.min(99, Math.max(0, value * 100)))));
+      else progress.removeAttribute('aria-valuenow');
+      progress.querySelector('i').style.width = `${known ? Math.min(99, Math.max(0, value * 100)) : 0}%`;
+    } else shell.querySelector('.bn-tech-progress i').style.width = `${lab && !lab.idle ? Math.min(99, Math.max(0, lab.estimatedProgress * 100)) : 0}%`;
     shell.querySelector(".bn-tech-error").textContent = state.assignmentError;
-    shell.querySelector(".bn-tech-detail-name").textContent = topic?.name || "SELECT A TECHNOLOGY";
+    const towers = isTowersResearchShell(shell), selected = towers ? selectedResearchTopics() : [];
+    shell.querySelector(".bn-tech-detail-name").textContent = towers ? selected.length ? selected.map(value => value.name).join(" → ") : "None — tap technologies" : topic?.name || "SELECT A TECHNOLOGY";
     shell.querySelector(".bn-tech-detail-category").textContent = topic?.category || "";
     const active = topic ? activeLabForTopic(topic.id) : null;
     const queuedLabId = topic ? queuedLocation(topic.id) : null;
@@ -894,8 +953,8 @@
     });
     }
     const assign = shell.querySelector(".bn-tech-assign");
-    assign.textContent = queuedLab ? `ALREADY QUEUED · LAB ${queuedLab.nativeIndex + 1}` : active ? `RESEARCHING · LAB ${active.nativeIndex + 1}` : `ADD TO LAB ${state.activeLab + 1} QUEUE`;
-    assign.disabled = state.pendingClose || !topic || !lab || Boolean(queuedLab || active);
+    assign.textContent = towers ? selected.length ? `${selected.length > 1 ? `ADD ${selected.length}` : 'ADD'} TO LAB ${state.activeLab + 1} QUEUE` : 'SELECT RESEARCH' : queuedLab ? `ALREADY QUEUED · LAB ${queuedLab.nativeIndex + 1}` : active ? `RESEARCHING · LAB ${active.nativeIndex + 1}` : `ADD TO LAB ${state.activeLab + 1} QUEUE`;
+    assign.disabled = towers ? state.pendingClose || !selected.length || !lab : state.pendingClose || !topic || !lab || Boolean(queuedLab || active);
     const done = shell.querySelector(".bn-tech-done");
     done.textContent = state.pendingClose ? "SYNCING QUEUES…" : "BACK TO BATTLE";
     done.disabled = state.pendingClose;
@@ -919,6 +978,7 @@
       opens: state.opens, closes: state.closes, topicSelections: state.topicSelections,
       labSelections: state.labSelections, categoryChanges: state.categoryChanges,
       activeLab: state.activeLab, activeCategory: state.activeCategory,
+      ...(window.__warzoneDuelConfig?.mode !== 'duel' ? { selectedTopicIds: state.selectedTopicIds.slice() } : {}),
       catalogCount: state.catalog.length, catalogSample: state.catalog.slice(0, 4).map(topic => topic.name),
       labCount: state.engineLabs.length, readyLabs: state.engineLabs.filter(lab => lab.idle).length,
       labIds: state.engineLabs.map(lab => lab.id), playerPower: state.playerPower,

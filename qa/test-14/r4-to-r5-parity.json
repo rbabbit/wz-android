@@ -1,0 +1,78 @@
+{
+  "passed": true,
+  "baselineAPK_SHA256": "cb37793fd6908ecc3daa0bcf96f217a597e3614944c7d11c4d725ea1b80a3485",
+  "candidateAPK_SHA256": "81e08ca7fb3cc511c03be5177fa1656261f9bf510275fd174f7a22cbecf65237",
+  "baselineAPK": {
+    "path": "C:\\timerApp\\fallbacks\\towers-0.14-r4-diagnostic-before-music-20261108\\Warzone-Towers-0.14-R4.apk",
+    "sha256": "cb37793fd6908ecc3daa0bcf96f217a597e3614944c7d11c4d725ea1b80a3485"
+  },
+  "candidateAPK": {
+    "path": "C:\\timerApp\\wz-towers-lab\\app\\build\\outputs\\apk\\debug\\app-debug.apk",
+    "sha256": "81e08ca7fb3cc511c03be5177fa1656261f9bf510275fd174f7a22cbecf65237"
+  },
+  "assetsIdentical": true,
+  "htmlGameAssetsIdentical": true,
+  "assetCount": 473,
+  "changedAssets": [],
+  "changedAPKEntries": [
+    "classes3.dex"
+  ],
+  "onlyNativeTowersMusicStyleChanged": true,
+  "changedAppSourceFiles": [
+    "app/src/main/java/com/rbabbit/blocknight/warzone/MusicSetupView.java"
+  ],
+  "nativeStyleVerification": {
+    "passed": true,
+    "styleOnlyJavaFiles": [
+      {
+        "path": "app/src/main/java/com/rbabbit/blocknight/warzone/GraphicsSetupView.java",
+        "normalizedOriginalSHA256": "8fb791026f599d659b802157b9209f85f10e41dd1082f05571e5c030e678aaeb",
+        "currentSHA256": "d81812b7a4d6c17493e63daa89bb927025b68b4f62e1f6e832d17821d93f59c6",
+        "residualMatchesAcceptedSource": true
+      },
+      {
+        "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MusicSetupView.java",
+        "normalizedOriginalSHA256": "d50de8ba0d243a6467a731eeffc7e76c2368e42f4509b90b8140cb523f5a748b",
+        "currentSHA256": "5af7636123f0a9004f9a9260e9fbb6eb0eec44721540168da94e71261185493c",
+        "residualMatchesAcceptedSource": true
+      },
+      {
+        "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MainActivity.java",
+        "normalizedOriginalSHA256": "04d2216cd54ef0a23128ca9544bc302feb04e623e4ddd83fe0c722afaa131f5a",
+        "currentSHA256": "5a4d448ae74a8ffd9c83791afe952a393a30cb242c4f6aa7c7cf81b7c5b6fb38",
+        "residualMatchesAcceptedSource": true
+      }
+    ],
+    "reviewedHelpers": [
+      {
+        "path": "app/src/main/java/com/rbabbit/blocknight/warzone/GraphicsSetupView.java",
+        "signature": "private void applyCompactTowersStyle() {",
+        "sha256": "76c0b9148fae18e73900c97c7022052f1c28d827ecafdbe64b3f7caea4fee0d8"
+      },
+      {
+        "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MusicSetupView.java",
+        "signature": "void setCompactTowers(boolean compact) {",
+        "sha256": "d3f0966766120b81c3d4ee675d397f3655adf17576dd5b8133a2c3fe971bfa3d"
+      },
+      {
+        "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MusicSetupView.java",
+        "signature": "private void fitCompactTowersPanel() {",
+        "sha256": "e27eac07e134ed9af9665ae58e7f7e4e1769ce350a2d4532e91aaf10f9ce64d1"
+      },
+      {
+        "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MusicSetupView.java",
+        "signature": "private void fitCompactTowersContent(boolean shortLayout) {",
+        "sha256": "6ac35197e15b06128f3e12fc0738c515cfa3b09fdeba253f3754ee6d2af16bc5"
+      }
+    ],
+    "allOtherJavaLogicIdentical": true,
+    "duelDefaultStylePreserved": true,
+    "scope": "Named reviewed visual helpers, their mode-guarded call sites and Towers-only confirmation border; all remaining Java source is exact to 0.13 after whitespace normalization."
+  },
+  "baselineSourceVerification": {
+    "path": "qa/test-14/diagnostics/r4-verification/package-verification.json",
+    "sha256": "bd70a1eb07ba7be4b457141421e747b98f5b8a1ca0d556bdb80fe00361d1919e"
+  },
+  "scope": "All473 HTML/game/program/data assets and all non-DEX APK members except signing are exact R4. Only the reviewed Towers short-height Music visual helper/Boolean differ in app source; normalized Java action/input/Back/preferences/download code and default Duel remain exact0.13.",
+  "evidencePolicy": "Retained R4 command UI/native-production records keep their original identities. Require fresh R5 normal/compact page smoke and outstanding actions, current R5 native production/completion, and fresh native Music at both profiles."
+}

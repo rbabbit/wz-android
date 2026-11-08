@@ -2,6 +2,7 @@ package com.rbabbit.blocknight.warzone;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.RippleDrawable;
@@ -248,7 +249,34 @@ final class GraphicsSetupView extends FrameLayout {
         start.setContentDescription("Start game, " + (botMatch ? "1v1 vs Bot" : mapName()));
         start.setEnabled(!downloading && musicChecked && (!"high".equals(mode) || cached));
         start.setAlpha(start.isEnabled() ? 1f : .45f);
+        applyCompactTowersStyle();
         if (panel != null) panel.requestLayout();
+    }
+
+    /** Keep the native launcher controls in the same flat visual family. */
+    private void applyCompactTowersStyle() {
+        boolean compact = !"duel".equals(matchMode);
+        if (panel != null) panel.base.setBackground(shape(0xEF0B151B, compact ? 0 : 0xFF203640, 12));
+        message.setBackground(shape(0xFF101F26, compact ? 0 : 0xFF29414A, 7));
+        for (Button b : new Button[] {towers, duel, cannon, rockets}) {
+            boolean selected = b.isSelected();
+            int fill = compact ? (selected ? 0xFF28574E : Color.TRANSPARENT)
+                    : (selected ? 0xFF18343B : 0xFF101F26);
+            b.setBackground(new RippleDrawable(ColorStateList.valueOf(0x228BD3CC),
+                    shape(fill, compact ? 0 : selected ? TEAL : 0xFF29414A, 6), null));
+        }
+        for (Button b : new Button[] {start, graphics, music, download, cancel}) {
+            boolean primary = b == start;
+            b.setBackground(new RippleDrawable(ColorStateList.valueOf(0x338BD3CC),
+                    shape(primary ? TEAL : 0xFF14252D,
+                            compact ? 0 : primary ? TEAL : 0xFF29414A, 6), null));
+        }
+        for (MapCard card : new MapCard[] {mapOne, mapTwo}) {
+            boolean selected = card.isSelected();
+            card.setBackground(shape(selected ? (compact ? 0xFF28574E : 0xFF18343B) : 0xFF101F26,
+                    compact ? 0 : selected ? TEAL : 0xFF29414A, 7));
+            card.mark.setVisibility(!compact && selected ? VISIBLE : INVISIBLE);
+        }
     }
 
     String selectedMode() { return mode; }

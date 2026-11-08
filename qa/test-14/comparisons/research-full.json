@@ -1,0 +1,50 @@
+{
+  "reviewed": true,
+  "purpose": "Full actual screenshot beside approved reference, isotropic resizing/letterboxing only. Root manual review recorded below.",
+  "inputs": [
+    {
+      "role": "reference",
+      "path": "docs/ui-0.14/approved-research.png",
+      "sha256": "a34a0e6d8a84c85b3e0067b5baee1b53fe97ad102a784599b36611966e5c1766",
+      "originalSize": [
+        1920,
+        819
+      ],
+      "displaySize": [
+        1000,
+        427
+      ],
+      "scale": 0.5208333333333334
+    },
+    {
+      "role": "actual",
+      "path": "qa/test-14/final-research-normal-r5/lab-14-research-manual-active-and-waiting.png",
+      "sha256": "ae160e10dc08124641fab62e4e4bcea6580439e399f3c1f3eedc4613fa4ccf93",
+      "originalSize": [
+        1080,
+        600
+      ],
+      "displaySize": [
+        1000,
+        556
+      ],
+      "scale": 0.9259259259259259
+    }
+  ],
+  "output": {
+    "path": "qa/test-14/comparisons/research-full.png",
+    "sha256": "e41708e63c02c70f71053f8d6420c82d36c42af5dee93168bbe4ae664d0b0150"
+  },
+  "actualProfile": "normal",
+  "actualState": "Five native labs; manual current and waiting topics",
+  "review": {
+    "reviewer": "Root agent manual visual review",
+    "recordedUTC": "2026-11-08T22:15:17.340275Z",
+    "result": "Accepted current R5 Research visual fidelity",
+    "notes": [
+      "Root viewed and accepted this approved-reference/current-R5 comparison.",
+      "Actual capture is normal1080x600 with five native labs and manual current/waiting topics; legacy capture names do not define profile.",
+      "Illustrative technology/selected state and protected footer hide behaviour differ; native artwork and manual queues are actual."
+    ]
+  }
+}

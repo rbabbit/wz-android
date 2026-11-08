@@ -1,0 +1,24 @@
+{
+  "passed": true,
+  "baselineAPK_SHA256": "a89c36044df2a22dbc63c24c482eaf6fac1d4a570977f4f5c1104bccbbb102f0",
+  "candidateAPK_SHA256": "4f32c53107ebab719146961118ff0333af9b4b33bc66a2312c0724821a2e03ff",
+  "baselineAPK": {
+    "path": "C:\\timerApp\\fallbacks\\towers-0.14-r2-diagnostic-before-build-queue-20261108\\Warzone-Towers-0.14-R2.apk",
+    "sha256": "a89c36044df2a22dbc63c24c482eaf6fac1d4a570977f4f5c1104bccbbb102f0"
+  },
+  "candidateAPK": {
+    "path": "C:\\timerApp\\wz-towers-lab\\app\\build\\outputs\\apk\\debug\\app-debug.apk",
+    "sha256": "4f32c53107ebab719146961118ff0333af9b4b33bc66a2312c0724821a2e03ff"
+  },
+  "changedAssets": [
+    "assets/warzone/ui/towers-commands.css"
+  ],
+  "changedAPKEntries": [
+    "assets/warzone/ui/towers-commands.css"
+  ],
+  "allOtherAPKMembersIdentical": true,
+  "singleBuildQueueFlexChange": true,
+  "CSSDiff": "--- R2/towers-commands.css\n+++ R3/towers-commands.css\n@@ -165,7 +165,7 @@\n .wt-towers-polished #wt-sidebar-catalogue .wt-native-art-label{display:grid;align-content:center;font-size:13px}\n .wt-towers-polished #wt-sidebar-catalogue .wt-native-art-label small{font-size:7px}\n .wt-towers-polished #wt-module-guidance{border:0;background:transparent}\n-.wt-towers-polished #wt-sidebar-queue{height:auto;flex:0 1 auto;min-height:0;max-height:calc(140px * var(--wt-command-scale,1));overflow:auto;padding:6px 8px 3px;background:transparent;border:0;scrollbar-width:thin}\n+.wt-towers-polished #wt-sidebar-queue{height:auto;flex:0 0 auto;min-height:0;max-height:calc(140px * var(--wt-command-scale,1));overflow:auto;padding:6px 8px 3px;background:transparent;border:0;scrollbar-width:thin}\n .wt-towers-polished #wt-sidebar-queue .wt-site-list{display:block}\n .wt-towers-polished #wt-sidebar-queue h2{font:500 calc(12px * var(--wt-command-scale,1))/1.15 Towers,sans-serif;color:#a1d9ce;letter-spacing:.3px}\n .wt-towers-polished #wt-sidebar-queue h2 span{font:calc(8px * var(--wt-command-scale,1))/1.2 system-ui,sans-serif;color:#a6bdb9}\n",
+  "scope": "Only Towers Build queue flex changes from 0 1 auto to 0 0 auto, plus APK signing metadata. Android manifest/resources/DEX, all JS/WASM/data, all other assets and native styling are exact.",
+  "evidencePolicy": "Retained R2 native FIFO/IME/save records keep their R2 identity. R3 requires new real production/queue/completion and all remaining relevant R3 journeys before delivery."
+}

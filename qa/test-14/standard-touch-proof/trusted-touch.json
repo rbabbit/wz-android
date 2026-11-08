@@ -1,0 +1,69 @@
+{
+  "passed": true,
+  "identity": {
+    "packageId": "com.rbabbit.warzonetowers.lab",
+    "device": "emulator-5556",
+    "candidateAPK_SHA256": "81e08ca7fb3cc511c03be5177fa1656261f9bf510275fd174f7a22cbecf65237",
+    "installedPath": "/data/app/~~QfZPV0A2ACdFJZu70gADwg==/com.rbabbit.warzonetowers.lab-UuKGlU5KPqtmdahvqLLHog==/base.apk",
+    "htmlControlInput": {
+      "method": "CDP Input.dispatchTouchEvent touchStart/touchEnd",
+      "durationMs": 60,
+      "gestureSourceType": "touch",
+      "timing": "Ordered WebSocket start/end with explicit60ms timestamps; end scheduled after60ms without awaiting the start response",
+      "disclosure": "Measured, hit-tested standard trusted WebView touch events for HTML controls; Android/ADB world touches, Back, keyboard and native UI remain unchanged. No DOM click or experimental compositor gesture API."
+    }
+  },
+  "mode": "Standard CDP dispatchTouchEvent on actual emulator WebView; ordered 60ms raw touch, not JS click or experimental synthetic gesture",
+  "events": [
+    {
+      "type": "pointerdown",
+      "trusted": true,
+      "stamp": 76764.65500000119,
+      "at": 73454.30000001192,
+      "target": "wt-open-factory"
+    },
+    {
+      "type": "pointerup",
+      "trusted": true,
+      "stamp": 76824.65500000119,
+      "at": 73455.27500000596,
+      "target": "wt-open-factory"
+    },
+    {
+      "type": "click",
+      "trusted": true,
+      "stamp": 76824.65500000119,
+      "at": 73610.93000000715,
+      "target": "wt-open-factory"
+    },
+    {
+      "type": "pointerdown",
+      "trusted": true,
+      "stamp": 79288.6400000155,
+      "at": 75610.41500002146,
+      "page": "saved",
+      "target": ""
+    },
+    {
+      "type": "pointerup",
+      "trusted": true,
+      "stamp": 79348.66500002146,
+      "at": 75760.79000002146,
+      "page": "saved",
+      "target": ""
+    },
+    {
+      "type": "click",
+      "trusted": true,
+      "stamp": 79348.66500002146,
+      "at": 75971.02000001073,
+      "page": "saved",
+      "target": ""
+    }
+  ],
+  "screen": "C:\\timerApp\\wz-towers-lab\\qa\\test-14\\standard-touch-proof\\14-trusted-touch-blueprints.png",
+  "durations": [
+    60,
+    60.025000005960464
+  ]
+}

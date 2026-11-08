@@ -1,0 +1,49 @@
+{
+  "reviewed": true,
+  "purpose": "Full actual screenshot beside approved reference, isotropic resizing/letterboxing only. Root manual review recorded below.",
+  "inputs": [
+    {
+      "role": "reference",
+      "path": "docs/ui-0.14/approved-production.png",
+      "sha256": "8d1af8d5a5839b63cbea541303b56817d1fdef1a4c2847a4ae5fc4415e2eebb1",
+      "originalSize": [
+        1920,
+        819
+      ],
+      "displaySize": [
+        1000,
+        427
+      ],
+      "scale": 0.5208333333333334
+    },
+    {
+      "role": "actual",
+      "path": "qa/test-14/final-commands-r5/lab-14-normal-current-assets-smoke-factory.png",
+      "sha256": "604aab255994d0a58f45b6d452996159919998420b8017c685ee663d93dc9955",
+      "originalSize": [
+        1080,
+        600
+      ],
+      "displaySize": [
+        1000,
+        556
+      ],
+      "scale": 0.9259259259259259
+    }
+  ],
+  "output": {
+    "path": "qa/test-14/comparisons/production-full.png",
+    "sha256": "713ada01ed8c769ab4e05dd0e98e9b57c60fc2faebbc0d0e14f1cad7ce897252"
+  },
+  "review": {
+    "reviewer": "Root agent manual visual review",
+    "recordedUTC": "2026-11-08T22:06:13.290607Z",
+    "result": "Accepted current R5 visual fidelity",
+    "notes": [
+      "Root viewed and accepted this actual R5 comparison.",
+      "Native part availability, facility counts and selected state differ from the illustrative reference.",
+      "Existing Viper/Wheels silhouettes, known software-emulator black terrain and the protected footer hide behaviour are understood differences.",
+      "No actual screenshot content was fabricated or aspect-distorted."
+    ]
+  }
+}

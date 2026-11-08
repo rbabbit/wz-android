@@ -1,0 +1,48 @@
+{
+  "reviewed": true,
+  "purpose": "Full actual screenshot beside approved reference; isotropic resizing/letterboxing only, no cropped or fabricated content. Root manual review recorded separately below.",
+  "inputs": [
+    {
+      "role": "reference",
+      "path": "docs/ui-0.14/approved-production.png",
+      "sha256": "8d1af8d5a5839b63cbea541303b56817d1fdef1a4c2847a4ae5fc4415e2eebb1",
+      "originalSize": [
+        1920,
+        819
+      ],
+      "displaySize": [
+        1000,
+        427
+      ],
+      "scale": 0.5208333333333334
+    },
+    {
+      "role": "actual",
+      "path": "qa/test-14/final-commands-complete/lab-14-normal-current-apk-active-and-waiting.png",
+      "sha256": "b36c94a3252efe74bd2e28839a1e3371b726e7e05f331d183e75a32e41d7200b",
+      "originalSize": [
+        1080,
+        600
+      ],
+      "displaySize": [
+        1000,
+        556
+      ],
+      "scale": 0.9259259259259259
+    }
+  ],
+  "output": {
+    "path": "qa/test-14/comparisons/production-full.png",
+    "sha256": "94c0e7766a320f08816aee8db4e07c62d94c4c84ba941a47d3829d4820cdecc0"
+  },
+  "review": {
+    "reviewer": "Root agent manual visual review",
+    "recordedUTC": "2026-11-08T20:22:52.577110Z",
+    "result": "Accepted visual fidelity for the linked real R3 surface.",
+    "notes": [
+      "Root viewed this comparison and its underlying actual R3 capture.",
+      "Functional copy, real native art and responsive fit were accepted.",
+      "Reference game state, available technology, background and protected footer visibility are illustrative differences; no screenshot content was fabricated."
+    ]
+  }
+}

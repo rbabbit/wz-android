@@ -1,0 +1,156 @@
+{
+  "passed": true,
+  "identity": {
+    "packageId": "com.rbabbit.warzonetowers.lab",
+    "device": "emulator-5556",
+    "candidateAPK_SHA256": "81e08ca7fb3cc511c03be5177fa1656261f9bf510275fd174f7a22cbecf65237",
+    "installedPath": "/data/app/~~QfZPV0A2ACdFJZu70gADwg==/com.rbabbit.warzonetowers.lab-UuKGlU5KPqtmdahvqLLHog==/base.apk",
+    "htmlControlInput": {
+      "method": "CDP Input.dispatchTouchEvent touchStart/touchEnd",
+      "durationMs": 60,
+      "gestureSourceType": "touch",
+      "timing": "Ordered WebSocket start/end with explicit60ms timestamps; end scheduled after60ms without awaiting the start response",
+      "disclosure": "Measured, hit-tested standard trusted WebView touch events for HTML controls; Android/ADB world touches, Back, keyboard and native UI remain unchanged. No DOM click or experimental compositor gesture API."
+    }
+  },
+  "checks": {
+    "duelPreserved": true
+  },
+  "started": "2026-11-08T22:24:57.248Z",
+  "mode": {
+    "version": 1,
+    "active": true,
+    "snapshot": {
+      "version": 1,
+      "mode": "duel",
+      "phase": "active",
+      "gameTime": 1802,
+      "player": 0,
+      "enemyPlayer": 1,
+      "humanBranch": "cannon",
+      "botBranch": "rockets",
+      "humanHQ": {
+        "alive": true,
+        "health": 100,
+        "x": 22,
+        "y": 16
+      },
+      "enemyHQ": {
+        "alive": true,
+        "health": 100,
+        "x": 15,
+        "y": 59
+      },
+      "mapWidth": 37,
+      "mapHeight": 75,
+      "diagnostics": {
+        "players": [
+          {
+            "player": 0,
+            "branch": "cannon",
+            "power": 2532,
+            "units": [
+              {
+                "id": 160015,
+                "x": 23,
+                "y": 15,
+                "order": 0,
+                "health": 100,
+                "weapons": []
+              },
+              {
+                "id": 160011,
+                "x": 24,
+                "y": 15,
+                "order": 0,
+                "health": 100,
+                "weapons": []
+              },
+              {
+                "id": 160009,
+                "x": 24,
+                "y": 14,
+                "order": 0,
+                "health": 100,
+                "weapons": []
+              },
+              {
+                "id": 160007,
+                "x": 23,
+                "y": 14,
+                "order": 0,
+                "health": 100,
+                "weapons": []
+              }
+            ],
+            "laboratories": 5,
+            "factories": 5
+          },
+          {
+            "player": 1,
+            "branch": "rockets",
+            "power": 2532,
+            "units": [
+              {
+                "id": 160013,
+                "x": 12,
+                "y": 59,
+                "order": 2,
+                "health": 100,
+                "weapons": []
+              },
+              {
+                "id": 160005,
+                "x": 11,
+                "y": 60,
+                "order": 2,
+                "health": 100,
+                "weapons": []
+              },
+              {
+                "id": 160003,
+                "x": 12,
+                "y": 60,
+                "order": 2,
+                "health": 100,
+                "weapons": []
+              },
+              {
+                "id": 160001,
+                "x": 13,
+                "y": 59,
+                "order": 2,
+                "health": 100,
+                "weapons": []
+              }
+            ],
+            "laboratories": 5,
+            "factories": 5
+          }
+        ]
+      }
+    },
+    "updates": 3,
+    "polls": 27,
+    "errors": 22,
+    "readBytes": 38944,
+    "humanBranch": "cannon",
+    "botBranch": "rockets",
+    "cameraRequested": true,
+    "cameraReady": true
+  },
+  "phone": "{\"version\":1,\"designs\":[{\"id\":\"design-1794008136667-113\",\"name\":\"Design 2\",\"body\":\"Body1REC\",\"propulsion\":\"wheeled01\",\"turrets\":[\"MG1Mk1\"],\"cost\":55,\"points\":275,\"droidType\":0,\"factoryTemplate\":true},{\"id\":\"design-1794008147588-129\",\"name\":\"Lab Scout 54626\",\"body\":\"Body1REC\",\"propulsion\":\"wheeled01\",\"turrets\":[\"MG1Mk1\"],\"cost\":55,\"points\":275,\"droidType\":0},{\"id\":\"design-1794036575885-223\",\"name\":\"Truck Viper Wheels\",\"body\":\"Body1REC\",\"propulsion\":\"wheeled01\",\"turrets\":[\"Spade1Mk1\"],\"cost\":62,\"points\":310,\"droidType\":3,\"factoryTemplate\":true},{\"id\":\"design-1794036589502-235\",\"name\":\"Scout 97609\",\"body\":\"Body1REC\",\"propulsion\":\"wheeled01\",\"turrets\":[\"MG1Mk1\"],\"cost\":55,\"points\":275,\"droidType\":0},{\"id\":\"design-1794040213295-227\",\"name\":\"Scout 21399\",\"body\":\"Body1REC\",\"propulsion\":\"wheeled01\",\"turrets\":[\"MG1Mk1\"],\"cost\":55,\"points\":275,\"droidType\":0}]}",
+  "factoryScreen": "C:\\timerApp\\wz-towers-lab\\qa\\test-14\\final-duel-r5\\lab-11-duel-existing-factory.png",
+  "research": {
+    "classes": "",
+    "columns": "606.667px 183px 255px",
+    "links": [
+      "https://appassets.androidplatform.net/warzone/vendor/bootstrap.min.css",
+      "https://appassets.androidplatform.net/warzone/ui/lab-research.css",
+      "https://appassets.androidplatform.net/warzone/ui/towers-v4.css"
+    ]
+  },
+  "researchScreen": "C:\\timerApp\\wz-towers-lab\\qa\\test-14\\final-duel-r5\\lab-11-duel-existing-research.png",
+  "menuScreen": "C:\\timerApp\\wz-towers-lab\\qa\\test-14\\final-duel-r5\\11-duel-return-towers-menu.png",
+  "finished": "2026-11-08T22:26:50.416Z"
+}

@@ -1,5 +1,31 @@
 # Known issues and verification limits
 
+## Warzone Towers 0.14 — compact active pages
+
+This revision applies the approved flat, compact Production, Design and
+Research references across active Towers pages and native Towers view styling.
+The [page inventory](../qa/test-14/page-inventory.json) separates normal/compact
+screen coverage, protected footer/status pages, rare source-only states and
+the legacy unexposed More route. Consult the
+[0.14 report](../qa/test-14/REPORT.md) for actual candidate evidence; planned
+ledger entries and source checks alone do not establish gameplay or layout.
+
+The maximum-facility case reuses a disclosed completed native save containing
+five labs, five vehicle factories and five cyborg factories. This does not
+certify ordinary construction of all added facilities or an uninterrupted
+campaign. Normal production/research, phone saving/keyboard, building/movement
+and panel/menu returns are separately identified. Native factory progress
+still lacks a reliable public percentage or ETA; neither is invented.
+
+All Towers/Duel program, WASM, data, entry, map and scenario files remain exact
+to 0.13. The footer/status/lab-ops source and original hide/restore behaviour
+remain protected. Native Android styling is scoped to Towers, while input,
+Back, preference and download logic and Duel defaults retain their behaviour.
+The earlier crowded automatic truck-isolation timeout is outside this
+revision's repair scope. Software-emulator black terrain, physical-handset
+GPU/FPS, audio, full 30-wave victory and new Duel balancing remain limited.
+The complete 0.13 APK/source and older fallbacks, including v6.4, are preserved.
+
 ## Warzone Towers 0.13 — Factory and personal how-to guide
 
 This revision changes the full Towers Factory page, removes the three camera

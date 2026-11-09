@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "baselineSHA256": "e7a7930a65dd053e19b5711421efe23adc6d7e7dabe68f751fbd97f95bf1714c",
+  "candidateAPK_SHA256": "af42705865e83cd80b0fa1f631f5e90753869d35e2ec8f6e334f40d603658f44",
+  "changedAPKAssets": [
+    "assets/warzone/music-loader.js"
+  ],
+  "newAPKAssets": [],
+  "enginePayloadUnchanged": true,
+  "mapsAndRulesUnchanged": true,
+  "duelPayloadUnchanged": true,
+  "emulatorUsed": true,
+  "runtimeVerified": true,
+  "gameplayVerified": false,
+  "mapTrackAssignmentFile": "app/src/main/assets/warzone/map-music.json",
+  "outputs": [
+    {
+      "path": "app/src/main/assets/warzone/music-loader.js",
+      "bytes": 22644,
+      "sha256": "9a643ff34ed7671af21b86edcdfffc869414fee8aac4d36b9f894d3c76f6fdd2"
+    }
+  ],
+  "sourceCheckReports": [
+    {
+      "path": "archive/music-0.23-player-checks.json",
+      "sha256": "2d376183284476f7735848191eaaead99131e4048880a20bd23797807294285e"
+    }
+  ],
+  "scope": "Focused exact-APK music emulator verification and source regression checks. Actual advancing media and nonzero decoded PCM observed; speaker output not monitored. No complete gameplay verification."
+}

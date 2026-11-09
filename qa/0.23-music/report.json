@@ -1,0 +1,155 @@
+{
+  "candidateAPK_SHA256": "af42705865e83cd80b0fa1f631f5e90753869d35e2ec8f6e334f40d603658f44",
+  "emulatorUsed": true,
+  "musicPlaybackObserved": true,
+  "gameplayVerified": false,
+  "cacheFixture": "Canonical optional pack copied to app-private cache and hash-verified by the real app; download flow not tested.",
+  "instrumentation": "Audio constructor observer returns the original native browser element unchanged; play/fetch/decoder are not replaced.",
+  "observations": {
+    "initialState": {
+      "mode": "map",
+      "cached": true,
+      "enabled": true,
+      "mapId": "beginner",
+      "trackId": "original_soundtrack/track1.opus",
+      "title": "Track 1",
+      "author": "Martin Severn",
+      "url": "https://appassets.androidplatform.net/warzone/optional/map-music/original_soundtrack/track1.opus",
+      "battleActive": true,
+      "suspended": false,
+      "playing": true,
+      "loading": false,
+      "loadedBytes": 2418624,
+      "error": "",
+      "disposed": false,
+      "transport": "track-blob",
+      "nativeMusicEnabled": false,
+      "selectedTracks": [
+        "original_soundtrack/track1.opus"
+      ]
+    },
+    "mediaBefore": [
+      {
+        "time": 0.07909,
+        "paused": false,
+        "ready": 4,
+        "network": 1,
+        "src": "blob:https://appassets.androidplatform.net/2a0f3d9c-6141-414f-8529-1eeafa258e82",
+        "error": null,
+        "capture": "function"
+      }
+    ],
+    "mediaAfter": [
+      {
+        "time": 1.882702,
+        "paused": false,
+        "ready": 4,
+        "network": 1,
+        "src": "blob:https://appassets.androidplatform.net/2a0f3d9c-6141-414f-8529-1eeafa258e82",
+        "error": null,
+        "capture": "function"
+      }
+    ],
+    "capture": {
+      "available": true,
+      "tracks": [
+        {
+          "ready": "live",
+          "enabled": true
+        }
+      ],
+      "context": "running"
+    },
+    "pcm": {
+      "rms": 0.06067919053099358,
+      "peak": 0.19861605763435364,
+      "context": "running"
+    },
+    "offState": {
+      "mode": "map",
+      "cached": true,
+      "enabled": false,
+      "mapId": "beginner",
+      "trackId": "original_soundtrack/track1.opus",
+      "title": "Track 1",
+      "author": "Martin Severn",
+      "url": "https://appassets.androidplatform.net/warzone/optional/map-music/original_soundtrack/track1.opus",
+      "battleActive": true,
+      "suspended": false,
+      "playing": false,
+      "loading": false,
+      "loadedBytes": 0,
+      "error": "",
+      "disposed": false,
+      "transport": "track-blob",
+      "nativeMusicEnabled": false,
+      "selectedTracks": [
+        "original_soundtrack/track1.opus"
+      ]
+    },
+    "offMedia": [
+      {
+        "time": 0,
+        "paused": true,
+        "ready": 0,
+        "network": 0,
+        "src": "blob:https://appassets.androidplatform.net/2a0f3d9c-6141-414f-8529-1eeafa258e82",
+        "error": null,
+        "capture": "function"
+      }
+    ],
+    "onState": {
+      "mode": "map",
+      "cached": true,
+      "enabled": true,
+      "mapId": "beginner",
+      "trackId": "original_soundtrack/track1.opus",
+      "title": "Track 1",
+      "author": "Martin Severn",
+      "url": "https://appassets.androidplatform.net/warzone/optional/map-music/original_soundtrack/track1.opus",
+      "battleActive": true,
+      "suspended": false,
+      "playing": true,
+      "loading": false,
+      "loadedBytes": 2418624,
+      "error": "",
+      "disposed": false,
+      "transport": "track-blob",
+      "nativeMusicEnabled": false,
+      "selectedTracks": [
+        "original_soundtrack/track1.opus"
+      ]
+    },
+    "map": "Greenhaven, the first Easy map"
+  },
+  "playbackEvidence": {
+    "mediaTimeAdvanced": true,
+    "decodedPCMNonZero": true,
+    "audioOutputObserved": false,
+    "hostAudioSinkAvailable": null
+  },
+  "audioOutputLimitation": "Audible speaker output was not monitored, so host speaker availability is unknown. The earlier emulator session logged audio HAL errors; after recovery actual media progress and nonzero decoded PCM were verified.",
+  "audibleOutputVerified": false,
+  "evidenceFiles": [
+    {
+      "path": "qa/0.23-music/playback-observed.json",
+      "sha256": "ec34aa31b8621604aff08f1e028ba5593cb0ed524f87ab5021cd5d050f435489"
+    },
+    {
+      "path": "qa/0.23-music/delivery23-playing.png",
+      "sha256": "6421d1d8d4a1ca20f9fc3d9ca3e99802c7fb83a60e90f61084e7ceea7e5e7d27"
+    },
+    {
+      "path": "qa/0.23-music/delivered22-observed.json",
+      "sha256": "a84180b109cf6815e9d6a983f919222f832c93b105902be7d9869657815e0ff3"
+    },
+    {
+      "path": "qa/0.23-music/delivered22-music.png",
+      "sha256": "c5e9d0e02d186db7ac7ca310314e98ab496fd74a761138757927321667876894"
+    }
+  ],
+  "sourceChecks": {
+    "path": "archive/music-0.23-player-checks.json",
+    "sha256": "2d376183284476f7735848191eaaead99131e4048880a20bd23797807294285e"
+  }
+}

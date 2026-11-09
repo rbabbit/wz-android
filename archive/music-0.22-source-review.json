@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "scope": "Independent source review and readback of focused host-JDK/Node fixture reports. No actual Android WebView/media decoder, emulator, phone playback or gameplay was run.",
+  "sourceReviewPassed": true,
+  "emulatorUsed": false,
+  "runtimeVerified": false,
+  "playbackVerified": false,
+  "observations": [
+    "Native route positions only once at the assigned track start and bounds the complete track. Range requests are rejected; fetch explicitly requests a complete200response withoutRange.",
+    "Player validates immutable cataloglength/status before constructing an audioBlobURL. Subsequent media seek/loop operates inside the Blob, not the intercepted pack stream.",
+    "Fetch,play and buffering deadlines remain bounded; repeatedwaiting cannot extend one deadline. ExplicitOn replaces a loading/pending attempt and leaves healthyplay alone.",
+    "Off,hidden/background,newtrack and disposal abort pending IO,clear deadlines,detach media and revoke anyBlobURL. Generation/allowed guards prevent late completion from restoring abandoned playback.",
+    "Native music flag, soundeffects controls, assignments, downloadpack metadata and retained Duel loader suffix are unchanged."
+  ],
+  "retainedDuelLoaderSuffixByteExact": true,
+  "sources": [
+    {
+      "path": "app/src/main/assets/warzone/music-loader.js",
+      "sha256": "0c3fa70398432f64bad494ef4ce3aa0f72984e49c6ced1069b656788bdf5b53a"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MusicTrackResponse.java",
+      "sha256": "42a84e3b0ca28a7ef9e02cdd35eea4b4cf137af74f9566f84a4950a62f445259"
+    },
+    {
+      "path": "tools/check-map-music-022.cjs",
+      "sha256": "8d4a43880b33b06af0fc0159974a2e1bdd69afdf54edb9be0cd966edecfbdec2"
+    },
+    {
+      "path": "tools/check-music-track-stream-022.py",
+      "sha256": "4ff2fcc3fc5c867c9967a7ebd15f1a0dfc5a78e0548a0eb13f06d6024bc39387"
+    },
+    {
+      "path": "tools/check-music-track-stream-022.java",
+      "sha256": "6ed4ab97ff77b3a66ad325b79e44b6ed11145b71bd2bb2a375aec7fd841a8e2e"
+    },
+    {
+      "path": "tools/package-22-build-only.py",
+      "sha256": "536e08c86c74ba1aa4a29046127b511994801412d8de2a429a68438c490d00ff"
+    }
+  ],
+  "sourceCheckReports": [
+    {
+      "path": "archive/music-0.22-player-checks.json",
+      "sha256": "edc1706bf3df925484553d0061238434c17cc94d5492858e96a68a5d6103fd0c"
+    },
+    {
+      "path": "archive/music-stream-0.22-checks.json",
+      "sha256": "448702cafeddc85fb319a71bbef03f095d822231b0842a97c42121feebf3e252"
+    }
+  ],
+  "recordedUTC": "2026-11-09T09:56:28.194962+00:00"
+}

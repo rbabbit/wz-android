@@ -28,6 +28,7 @@ Add-PackageFile '/data/mp/tests/warzone-towers-wave-command.json' (Join-Path $sc
 Add-PackageFile '/data/mp/tests/warzone-towers-bridge.js' (Join-Path $scenarioRoot 'warzone-towers-bridge.js')
 Add-PackageFile '/data/mp/tests/warzone-towers-control-command.json' (Join-Path $scenarioRoot 'warzone-towers-control-command.json')
 Add-PackageFile '/data/mp/tests/warzone-towers-commands.js' (Join-Path $scenarioRoot 'warzone-towers-commands.js')
+Add-PackageFile '/data/mp/tests/warzone-towers-rewards.js' (Join-Path $scenarioRoot 'warzone-towers-rewards.js')
 Add-PackageFile '/data/mp/tests/warzone-towers-command.json' (Join-Path $scenarioRoot 'warzone-towers-command.json')
 Add-PackageFile '/data/mp/tests/warzone-towers-catalog.json' (Join-Path $scenarioRoot 'warzone-towers-catalog.json')
 foreach ($name in @('warzone-towers-command.json', 'warzone-towers-wave-command.json', 'warzone-towers-control-command.json', 'warzone-towers-catalog.json', 'blocknight-queue-command.json', 'blocknight-zoom-command.json')) {

@@ -1,0 +1,29 @@
+{
+  "sourceStreamChecksPassed": true,
+  "canonicalTrackHashesMatched": 39,
+  "legacyDoubleRangeFailureReproduced": true,
+  "wholeTrackHeaderAndEOFSafety": true,
+  "boundedSkipChecked": true,
+  "headAndRejectedRangeChecked": true,
+  "outOfPackAndPrematureEOFRejected": true,
+  "scope": "Host JDK source-unit checks with response/metadata stand-ins only; no Android VM, WebView, media decoding, emulator or gameplay run.",
+  "legacyReproductionMechanism": "Executes the actual v0.21 Java response and models Chromium rejecting the original range against its already-shortened available length; Chromium itself is not executed.",
+  "emulatorUsed": false,
+  "androidPlaybackVerified": false,
+  "canonicalPackSHA256": "602ea6c69f4073a9617676a39f8397232953637a9b7a36e7cc28e93dd15184cd",
+  "sources": [
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MusicTrackResponse.java",
+      "sha256": "42a84e3b0ca28a7ef9e02cdd35eea4b4cf137af74f9566f84a4950a62f445259"
+    },
+    {
+      "path": "tools/check-music-track-stream-022.py",
+      "sha256": "4ff2fcc3fc5c867c9967a7ebd15f1a0dfc5a78e0548a0eb13f06d6024bc39387"
+    },
+    {
+      "path": "tools/check-music-track-stream-022.java",
+      "sha256": "6ed4ab97ff77b3a66ad325b79e44b6ed11145b71bd2bb2a375aec7fd841a8e2e"
+    }
+  ],
+  "legacyReaderSHA256": "919a94479f95e1b5fd0f4171153e5435be8d9ad5ca434e578d1883181f8c7712"
+}

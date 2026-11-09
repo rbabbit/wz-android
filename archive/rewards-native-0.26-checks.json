@@ -1,0 +1,169 @@
+{
+  "scope": "Native API source fixtures only; no emulator, actual native construction/combat or device save/load verified.",
+  "emulatorUsed": false,
+  "gameplayVerified": false,
+  "sources": [
+    {
+      "path": "scenario/warzone-towers-catalog.json",
+      "bytes": 50233,
+      "sha256": "d70d5672fa1865411b8e574e67e770dc3b13956a6e5710f37e69396f4ff3453e"
+    },
+    {
+      "path": "scenario/warzone-towers-commands.js",
+      "bytes": 52650,
+      "sha256": "ef11b357847a969862666fb0e5081d6690e052a9f8f8f1f847629e46c545f2fb"
+    },
+    {
+      "path": "scenario/warzone-towers-objective.js",
+      "bytes": 702,
+      "sha256": "209975c81361852a5ef81716eeeb5350cf29f8fe4ff6b23ff16b3f76c58f7495"
+    },
+    {
+      "path": "scenario/warzone-towers-rewards.js",
+      "bytes": 15294,
+      "sha256": "c7527a4d7c883c56558c1a5fe9691403339e002500b797e3cfa11af1bc32dc44"
+    },
+    {
+      "path": "scenario/warzone-towers-rules.js",
+      "bytes": 372,
+      "sha256": "ca1a21cc6fe094a1cbb2c12c689bb20c489843724485ed231d0d053f32413793"
+    },
+    {
+      "path": "scenario/warzone-towers-waves.js",
+      "bytes": 7517,
+      "sha256": "977faf58473c139c205fc3c36be368e852e7dd283900b20372caa77f18f25630"
+    },
+    {
+      "path": "tools/check-rewards-native-026.cjs",
+      "bytes": 20145,
+      "sha256": "1599201be975ee44e473f62d109206ef7b2fe5742a457161148f2d2a63df5a65"
+    },
+    {
+      "path": "tools/embed-rewards-026.py",
+      "bytes": 10532,
+      "sha256": "55fc5e15c4421579330b4a0b603487baa422f8be072a394ceba1e726eb9298f1"
+    },
+    {
+      "path": "tools/embed-warzone-towers.ps1",
+      "bytes": 7864,
+      "sha256": "4abd371cf48f60040be69ea1b42940258f2ac614642e664c44403eaad8892f28"
+    },
+    {
+      "path": "tools/test-command-bridge.cjs",
+      "bytes": 17366,
+      "sha256": "b9fbd8f391b79d7d8476a9328fc0685fa7e5bc3d4d6c61dabfccacae11859b5d"
+    },
+    {
+      "path": "vendor/tower-defense/mod/multiplay/script/mods/Spawner.js",
+      "bytes": 2033,
+      "sha256": "e3e9599bde2a795230958429c6a9992e7d1ac84533aefd6e7f45c7dbb9a501d0"
+    },
+    {
+      "path": "vendor/tower-defense/mod/multiplay/script/mods/configReader.js",
+      "bytes": 1070,
+      "sha256": "8b611f4c0bd687420f30b4e2f52f9d7c6ca9e5684199e886769259985abae59c"
+    }
+  ],
+  "nativeRewardFixtures": {
+    "emulatorUsed": false,
+    "gameplayVerified": false,
+    "passed": 19,
+    "checks": [
+      "No purchased items preserve ordinary native availability, rates, power and commands",
+      "All17 reviewed item types map to actual catalog structures and only purchased types unlock",
+      "Three mixed fortresses are allowed; fourth, excess LasSat, unknown and invalid stock fail closed",
+      "Bulk artillery reserves the paid quantity, cancellation releases unplaced stock, duplicate apply does not refill",
+      "Each foundation consumes one item permanently; unused stock remains transferable after destruction and load",
+      "Destroying a just-created foundation before a timer sample consumes it; duplicate callbacks do not double-spend",
+      "Naturally researched structures preserve ordinary allowance and unused paid stock",
+      "Research and supply retain once-only, natural-upgrade and native-load semantics with expanded stock",
+      "Old0.25 native state migrates without renewing a consumed fortress or duplicating supply",
+      "Session and changed inventory conflicts cannot apply a second set of bonuses",
+      "LasSat requires an owned completed selected command post and an actual visible enemy target",
+      "LasSat uses the native damaged-structure doubled fire pause",
+      "A wave pays only after all authored spawn batches are issued, queued enemies spawned and every own unit killed",
+      "Overlapping waves retain separate queued templates and native unitIDs; a later clear cannot clear its survivors",
+      "Starting/skipping rounds and removing units without destruction callbacks never manufacture completed waves",
+      "HQ loss prevents post-loss clears and preserves only waves actually cleared beforehand",
+      "Terminal wave packet includes actual completed IDs and fresh native remaining inventory",
+      "Native save-state retains wave/unit associations and tagged pending spawn entries without awarding twice",
+      "Legacy0.25 native saves and failed native spawns do not receive guessed wave credits"
+    ],
+    "types": {
+      "fortress": {
+        "id": "X-Super-Cannon",
+        "research": "R-Defense-Super-Cannon",
+        "fortress": true
+      },
+      "missile_fortress": {
+        "id": "X-Super-Missile",
+        "research": "R-Defense-Super-Missile",
+        "fortress": true
+      },
+      "mass_driver_fortress": {
+        "id": "X-Super-MassDriver",
+        "research": "R-Defense-MassDriver",
+        "fortress": true
+      },
+      "rocket_bastion": {
+        "id": "X-Super-Rocket",
+        "research": "R-Defense-Super-Rocket",
+        "fortress": true
+      },
+      "gauss_hardpoint": {
+        "id": "WallTower-Rail3",
+        "research": "R-Defense-WallTower-Rail3"
+      },
+      "gauss_emplacement": {
+        "id": "Emplacement-Rail3",
+        "research": "R-Defense-Rail3"
+      },
+      "scourge_hardpoint": {
+        "id": "WallTower-Atmiss",
+        "research": "R-Defense-WallTower-A-Tmiss"
+      },
+      "pulse_hardpoint": {
+        "id": "WallTower-PulseLas",
+        "research": "R-Defense-WallTower-PulseLas"
+      },
+      "heavy_laser": {
+        "id": "Emplacement-HeavyLaser",
+        "research": "R-Defense-HeavyLas"
+      },
+      "emp_hardpoint": {
+        "id": "WallTower-EMP",
+        "research": "R-Defense-EMPCannon"
+      },
+      "emp_mortar": {
+        "id": "Emplacement-MortarEMP",
+        "research": "R-Defense-EMPMortar"
+      },
+      "archangel": {
+        "id": "Emplacement-HvART-pit",
+        "research": "R-Defense-HvyArtMissile"
+      },
+      "ripple": {
+        "id": "Emplacement-Rocket06-IDF",
+        "research": "R-Defense-IDFRocket"
+      },
+      "hellstorm": {
+        "id": "Emplacement-RotHow",
+        "research": "R-Defense-RotHow"
+      },
+      "ground_shaker": {
+        "id": "Emplacement-Howitzer150",
+        "research": "R-Defense-HvyHowitzer"
+      },
+      "wide_sensor": {
+        "id": "Sys-SensoTowerWS",
+        "research": "R-Sys-Sensor-WSTower"
+      },
+      "laser_sat": {
+        "id": "A0LasSatCommand",
+        "research": "R-Wpn-LasSat"
+      }
+    }
+  },
+  "existingCommandBridgePassed": true,
+  "existingCommandBridgeOutput": "PASS: FIFO builds, manual/automatic workers, sticky sessions, STOP, deduplication, validation, factory queues and bounded 100-job polling\nPASS: construction ETA follows actual worker actions/upgrades, pauses and power; modules use observed work; journal never replaces native orders\nPASS: a snapped 2x2 foundation binds to its own queue entry without matching older adjacent buildings\nPASS: native queue handoff preserves progress/completion; sustained cancellation still interrupts"
+}

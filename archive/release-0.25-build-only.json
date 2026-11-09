@@ -1,0 +1,90 @@
+{
+  "version": "0.25",
+  "versionCode": 25,
+  "candidateAPK_SHA256": "ccd65b6eb79394f2923334be553134259118851430a01de01ca3ec0ad75fc6fa",
+  "scope": "Persistent crystal rewards, optional match-only boosts and result/Home flow.",
+  "emulatorUsed": false,
+  "screensVerified": false,
+  "gameplayVerified": false,
+  "verification": "Source review, focused synthetic fixtures, Android compilation and exact source/APK integrity only.",
+  "changedAPKAssets": [
+    "assets/warzone-command-pages.js",
+    "assets/warzone-html-session.js",
+    "assets/warzone-touch-controls.js",
+    "assets/warzone/warzone2100.data",
+    "assets/warzone/warzone2100.js"
+  ],
+  "newAPKAssets": [
+    "assets/warzone/rewards.js",
+    "assets/warzone/ui/icons/crystal.svg"
+  ],
+  "changedAPKMembers": [
+    "classes2.dex",
+    "assets/warzone-command-pages.js",
+    "assets/warzone-html-session.js",
+    "assets/warzone-touch-controls.js",
+    "assets/warzone/rewards.js",
+    "assets/warzone/ui/icons/crystal.svg",
+    "assets/warzone/warzone2100.data",
+    "assets/warzone/warzone2100.js",
+    "AndroidManifest.xml",
+    "res/drawable/ic_launcher_foreground.xml",
+    "res/drawable/reward_crystal.xml",
+    "res/drawable/warzone_splash.xml",
+    "resources.arsc",
+    "classes3.dex"
+  ],
+  "removedAPKMembers": [],
+  "equivalentResourceIDRemappedXML": [
+    "res/drawable/ic_launcher_foreground.xml",
+    "res/drawable/warzone_splash.xml"
+  ],
+  "nativePreservation": {
+    "normalizedEngineBodySHA256": "260138aa32773884988b162469dbe59f885d6f6a225c4a3be8d3e5d8220a037d",
+    "originalDataBytes": 77486317,
+    "dataPrefixPreserved": true,
+    "compiledEngineBodyUnchanged": true,
+    "wasmUnchanged": true,
+    "changedVFSFiles": [
+      "/data/mp/multiplay/script/rules/init.js",
+      "/data/mp/tests/warzone-towers-commands.js",
+      "/data/mp/tests/warzone-towers-rules.js"
+    ],
+    "addedVFSFiles": [
+      "/data/mp/tests/warzone-towers-rewards.js"
+    ],
+    "unchangedResolvedVFSFiles": 4288
+  },
+  "mapAndMusicAndDuelPayloadUnchanged": true,
+  "preservedOriginalSourceFiles": 1227,
+  "preservedAPKAssets": 517,
+  "payloadProof": {
+    "path": "archive/rewards-0.25-payload.json",
+    "sha256": "74d8d62d38117da208cc4e002b5da2d625eee96f6e15db6e8e9a5594b2e2806d"
+  },
+  "sourceCheckReports": [
+    {
+      "path": "archive/rewards-native-0.25-checks.json",
+      "sha256": "9c53112784114438cfbee6846f2ef9f922ce8be0913e203af7e6aa9b23658680"
+    },
+    {
+      "path": "archive/reward-ledger-0.25-checks.json",
+      "sha256": "5fe5f6c30088478251de9d3046a85453612eb92000630799eaf9d670ddc18798"
+    },
+    {
+      "path": "archive/rewards-web-0.25-checks.json",
+      "sha256": "24b0aa530666b9dfb79cce13e24a621daefe007e2900935335193e1fd843054f"
+    },
+    {
+      "path": "qa/0.25-rewards/source-review.json",
+      "sha256": "db0ad68fc139dfd80e9fd41c802c0248b548bc0d24e56f04137cf698d159a0b4"
+    }
+  ],
+  "fallbackRecord": {
+    "path": "archive/fallback-0.25.json",
+    "sha256": "c110e9bff39c324c42c761b5e8ef23eb83fd78b0fc75d98fba4e02bc0da4fee6"
+  },
+  "sourceInventory": "git ls-files --cached --others --exclude-standard; filtered caches/private/transient files",
+  "gitMetadataIncluded": false,
+  "recordedUTC": "2026-11-09T12:07:07.450913Z"
+}

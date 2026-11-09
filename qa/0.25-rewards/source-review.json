@@ -1,0 +1,52 @@
+{
+  "version": "0.25",
+  "emulatorUsed": false,
+  "screensVerified": false,
+  "gameplayVerified": false,
+  "androidPersistenceExecuted": false,
+  "candidateAPK_SHA256": "ccd65b6eb79394f2923334be553134259118851430a01de01ca3ec0ad75fc6fa",
+  "build": "clean assembleDebug followed by focused assembleDebug after startup-session guard; successful",
+  "signature": "APKSignatureSchemev2 verified with apksigner",
+  "sourceReview": [
+    "Native wallet drawer and receipts use actual native buttons,48dp targets and scroll owners",
+    "Home returns to battleLaunch.mapId then derives difficulty and pager selection from existing MapLevelCatalog",
+    "Credit transaction occurs before Home/receipt; duplicate and outgoing sessions cannot award",
+    "Both outcomes unload ended engine before showing receipt; no old stock failurepage destination",
+    "Rewardapply nativeack and synchronous durablephoneack gate initialcamera/input reveal",
+    "Startup camera/lobby callbacks are bound to their outgoing match session",
+    "Read-only in-game Rewards opens after leaving build input; Android Back closes native reward overlays first",
+    "No trucks added; three boosts only; paidfortress placement is singlequeue-build and no line-drag",
+    "Nativedata adds rewardmodule via append/reindex; maps/music/Duel/nativecompiledbody protected separately"
+  ],
+  "visualLimitation": "No rendered0.25 screenshot or actual Android/gameplay verification; user explicitly forbids emulator. Victoryreceipt is centered over restoredHome rather than over endednativebattlefield.",
+  "sources": [
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MainActivity.java",
+      "sha256": "0826a1f6637cd137e0cc29a903006fae176bc7f7fd9ea4fe852cc5632f2c5464"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/GraphicsSetupView.java",
+      "sha256": "508390b98a87f7d292f72840d9f4bd30405bbc3482ba07626c599cab2e8ae30a"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/RewardsView.java",
+      "sha256": "f138034eb23d14a1b8b2adb3ad1e99da0b4ffeaacea29bf98956c919f8b1f09a"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/RewardReceiptView.java",
+      "sha256": "d840fdf443c71a367eb57be0134e6e74e368051962bcbc1f3549ec6ec38f1d1f"
+    },
+    {
+      "path": "app/src/main/res/drawable/reward_crystal.xml",
+      "sha256": "31fff87acfa7e03a96d58a991ce9a63ea73632e3f743a356f32fc507fee1ba55"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/icons/crystal.svg",
+      "sha256": "c07b046c7ab7ec29a57555dad58943606475dd47dcafaa1a14c8f186ec30f66e"
+    },
+    {
+      "path": "app/build.gradle.kts",
+      "sha256": "f677c5277df9966dc62f54703605aeef864463d3f6653e466c5235f59557e588"
+    }
+  ]
+}

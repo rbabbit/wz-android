@@ -1,0 +1,83 @@
+{
+  "version": "0.25",
+  "emulatorUsed": false,
+  "androidPersistenceExecuted": false,
+  "scope": "Focused JVM checks execute the actual Android-independent RewardLedger. RewardStore serialization/rollback is source-reviewed only, not an Android persistence test.",
+  "checksPassed": 52,
+  "checks": [
+    "starter balance is350",
+    "two purchases deduct exact180",
+    "purchases remain bound to selected map",
+    "duplicate owned boost rejected",
+    "third boost rejected",
+    "rejected duplicate and third purchase do not mutate wallet",
+    "queued snapshot cannot be mutated externally",
+    "begin consumes selected map purchases once",
+    "duplicate begin reuses run without charging",
+    "session cannot switch map",
+    "run boost snapshot cannot be mutated externally",
+    "progress is monotonic",
+    "progress clamps to map wave count",
+    "three-boost bundle rejected atomically",
+    "unknown boost rejected",
+    "empty selection rejected",
+    "rejected bundles leave starter wallet unchanged",
+    "insufficient funds rejected",
+    "insufficient purchase has no partial mutations",
+    "first hard win grants100 plus50 once",
+    "duplicate win finish grants nothing again",
+    "later loss callback cannot replace settled win",
+    "replay hard win grants base only",
+    "first medium win grants80 plus50",
+    "first easy win grants60 plus50",
+    "loss wave9 rewards only newlyreached10-wave milestones",
+    "duplicate loss0 cannot grant again",
+    "loss wave10 rewards only newlyreached10-wave milestones",
+    "duplicate loss1 cannot grant again",
+    "loss wave19 rewards only newlyreached10-wave milestones",
+    "duplicate loss2 cannot grant again",
+    "loss wave20 rewards only newlyreached10-wave milestones",
+    "duplicate loss3 cannot grant again",
+    "loss wave25 rewards only newlyreached10-wave milestones",
+    "duplicate loss4 cannot grant again",
+    "repeated loss milestones cannot farm crystals",
+    "milestone history belongs to each map",
+    "interrupted pre-apply run restores purchased boosts",
+    "interrupted applied run does not restore used boosts",
+    "recovery does not award or charge crystals",
+    "repeated recovery is idempotent",
+    "quit or abandoned run cannot earn reward",
+    "settled session rejects application",
+    "settled session cannot be begun again",
+    "unknown finish session cannot create award",
+    "unknown application session rejected",
+    "unknown progress session rejected",
+    "stale unknown callbacks do not mutate wallet",
+    "buying for unsettled same-map run is rejected before recovery can overflow boost count",
+    "active-map purchase rejection is atomic",
+    "active-map guard does not alter another map's queued purchase",
+    "after interruption restored boost can be combined with one new boost safely"
+  ],
+  "storeSourceReview": [
+    "Missing record receives350 only when initial ledger is first committed; later loads restore serializedbalance without addingstartergift",
+    "Balance/pending/runs/receipts/completed/milestones are encoded in one privateSharedPreferences record",
+    "Transactions snapshot state and rollback in-memory plus preferences record on mutation or savefailure",
+    "A rollback writefailure makes store unreadable to prevent continued purchases against uncertain durablestate",
+    "Decode rejects unknownboosts, boostsetsabove2, negativebalance, invalidmilestones and version mismatches",
+    "Startup recovers interrupted unappliedruns only; appliedruns are settled without restoringconsumedboosts"
+  ],
+  "sources": [
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/RewardLedger.java",
+      "sha256": "1c37c728029068b466bab6a630bf6d10a49560307ff059f09a89b786b26ec3b6"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/RewardStore.java",
+      "sha256": "7f05e2198c38a1bb7961319ac60154f42add2e01d8e54cd694f8b44bafd2d18d"
+    },
+    {
+      "path": "tools/check-reward-ledger-025.java",
+      "sha256": "97000464a3c2c0aa14d36ebef742010e9e25488398775f5cde7f239665716f34"
+    }
+  ]
+}

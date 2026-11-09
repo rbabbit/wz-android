@@ -1,0 +1,78 @@
+{
+  "version": "0.26",
+  "versionCode": 26,
+  "candidateAPK_SHA256": "ab464a5e280e0936b4d486c5a20219bc20e0a9860dab9c014c2ab2dd8f1e0cac",
+  "scope": "Portable expanded inventory, bulk purchases, match-only loadout and five coins per actually cleared wave.",
+  "emulatorUsed": false,
+  "screensVerified": false,
+  "gameplayVerified": false,
+  "verification": "Source review, focused synthetic fixtures, Android compilation and exact source/APK integrity only.",
+  "changedAPKAssets": [
+    "assets/warzone-command-pages.js",
+    "assets/warzone-html-session.js",
+    "assets/warzone-touch-controls.js",
+    "assets/warzone/rewards.js",
+    "assets/warzone/warzone2100.data",
+    "assets/warzone/warzone2100.js"
+  ],
+  "newAPKAssets": [],
+  "changedAPKMembers": [
+    "assets/warzone-command-pages.js",
+    "assets/warzone-html-session.js",
+    "assets/warzone-touch-controls.js",
+    "assets/warzone/warzone2100.data",
+    "assets/warzone/warzone2100.js",
+    "AndroidManifest.xml",
+    "classes3.dex",
+    "assets/warzone/rewards.js"
+  ],
+  "removedAPKMembers": [],
+  "equivalentResourceIDRemappedXML": [],
+  "nativePreservation": {
+    "normalizedEngineBodySHA256": "260138aa32773884988b162469dbe59f885d6f6a225c4a3be8d3e5d8220a037d",
+    "originalDataBytes": 77549143,
+    "dataPrefixPreserved": true,
+    "compiledEngineBodyUnchanged": true,
+    "wasmUnchanged": true,
+    "changedVFSFiles": [
+      "/data/mp/tests/warzone-towers-commands.js",
+      "/data/mp/tests/warzone-towers-objective.js",
+      "/data/mp/tests/warzone-towers-rewards.js",
+      "/data/mp/tests/warzone-towers-waves.js"
+    ],
+    "addedVFSFiles": [],
+    "unchangedResolvedVFSFiles": 4288
+  },
+  "mapAndMusicAndDuelPayloadUnchanged": true,
+  "preservedOriginalSourceFiles": 1230,
+  "preservedAPKAssets": 518,
+  "payloadProof": {
+    "path": "archive/rewards-0.26-payload.json",
+    "sha256": "17f7f662d6e4943ec76035a40b390f2ab1247c2f4f2f3be5abdd846f30cef5e8"
+  },
+  "sourceCheckReports": [
+    {
+      "path": "archive/rewards-native-0.26-checks.json",
+      "sha256": "1e98138f7a8bccb3bd1f54967d67bb7dc26f2bb9641339d72573db82877c8fcd"
+    },
+    {
+      "path": "archive/reward-ledger-0.26-checks.json",
+      "sha256": "b0d2414fb9ba23e62f235d93c404bff8f4b45e175e0d4aaa1d483c9f328da1e6"
+    },
+    {
+      "path": "archive/rewards-web-0.26-checks.json",
+      "sha256": "d43529d4ae9d7fa86d1b447983559078627289913b7d271a9085e793adc5219a"
+    },
+    {
+      "path": "qa/0.26-rewards/source-review.json",
+      "sha256": "4ba3e408186d2e90460c3c334c3bc19bf9860d2cafef77bda2200314e86fc88a"
+    }
+  ],
+  "fallbackRecord": {
+    "path": "archive/fallback-0.26.json",
+    "sha256": "032ee18c3963cc78b4c64f5e0650a9e7236938b3fddba31d665216c9ebfa55f3"
+  },
+  "sourceInventory": "git ls-files --cached --others --exclude-standard; filtered caches/private/transient files",
+  "gitMetadataIncluded": false,
+  "recordedUTC": "2026-11-09T12:58:49.323811Z"
+}

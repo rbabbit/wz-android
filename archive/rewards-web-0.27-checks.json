@@ -1,0 +1,94 @@
+{
+  "version": "0.27",
+  "emulatorUsed": false,
+  "screensVerified": false,
+  "gameplayVerified": false,
+  "androidPersistenceExecuted": false,
+  "passed": 12,
+  "checks": [
+    {
+      "name": "Fresh document identity remains distinct from the saved logical reward run in native and Android calls",
+      "passed": true
+    },
+    {
+      "name": "Live purchase sends one stable transaction, prevents concurrent sends and awaits durable journal confirmation",
+      "passed": true
+    },
+    {
+      "name": "Timeout keeps the same reserved transaction pending and never manufactures clean-rejection refund proof",
+      "passed": true
+    },
+    {
+      "name": "Pending retry reconciles committed journal entries first and resends only the original uncommitted ID",
+      "passed": true
+    },
+    {
+      "name": "Native clean rejection is forwarded unchanged; stale logical requests and saving/busy state cannot buy",
+      "passed": true
+    },
+    {
+      "name": "Pending startup transactions keep readiness closed until native and phone reconciliation complete",
+      "passed": true
+    },
+    {
+      "name": "Actual saved-game helper hydrates all native files before persistence dependency release and verifies resumed logical run before readiness",
+      "passed": true
+    },
+    {
+      "name": "Unhydrated saves and failed resumed-state persistence keep both startup readiness gates closed",
+      "passed": true
+    },
+    {
+      "name": "Actual saved-game busy getter blocks a live purchase while its save operation is draining input",
+      "passed": true
+    },
+    {
+      "name": "Tiny +5 notice stays inside the Rewards header, reuses one small node and preserves its main span caption",
+      "passed": true
+    },
+    {
+      "name": "Exit inventories use the logical native session while phone callbacks remain document-bound; outgoing purchase results are ignored",
+      "passed": true
+    },
+    {
+      "name": "Dormant Duel loads no rewards, saved-game wrapper or pollers",
+      "passed": true
+    }
+  ],
+  "sources": [
+    {
+      "path": "app/src/main/assets/warzone/rewards.js",
+      "sha256": "b5634644de7e11412eaba2ec3db6e02fe5bc8ca5f8d80bfb07b0fe528257d189"
+    },
+    {
+      "path": "app/src/main/assets/warzone/saved-games.js",
+      "sha256": "f25854c39c5b42647783d9ca656a0d10c36c731ef56e5080f93244a432654858"
+    },
+    {
+      "path": "app/src/main/assets/warzone-html-session.js",
+      "sha256": "82717cc3923f16386e4b77b193ed265fc9b34a395825a70fde0edc8086921e52"
+    },
+    {
+      "path": "app/src/main/assets/warzone-touch-controls.js",
+      "sha256": "a4b90e04e5fa70f60285f286e8f0f9ff6bcc89a09f450555ac16bcce49c12047"
+    },
+    {
+      "path": "app/src/main/assets/warzone-command-pages.js",
+      "sha256": "5f3afb70c1b775adce19bfa40966415793ecb51740a2c66fd6a563203a16e301"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MainActivity.java",
+      "sha256": "cf0b3bd9a4607c6c967f5d4c70c3a00cad5ddb1cc7eb4d94b4ecc9416880cf43"
+    },
+    {
+      "path": "tools/check-rewards-web-027.cjs",
+      "sha256": "63403cbd9b27c023be51fd819d8f584a9d2966feb90840661943ec401729781e"
+    }
+  ],
+  "scope": "Bounded VM fixtures execute actual reward/saved-game source with mocked command/Android replies and an in-memory native FS. No browser layout, real QuickSave/load, native purchase effect, Android storage or gameplay verified.",
+  "sourceAuditOnly": [
+    "SAVE header routes to WarzoneSavedGames.save",
+    "Android rewards bridge guards document session and uses the separate logical rewardRunId",
+    "Phone completeLive receives the native quote"
+  ]
+}

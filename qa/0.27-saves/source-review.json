@@ -1,0 +1,152 @@
+{
+  "version": "0.27",
+  "emulatorUsed": false,
+  "screensVerified": false,
+  "gameplayVerified": false,
+  "androidPersistenceExecuted": false,
+  "candidateAPK_SHA256": "5014b70184f120f0f237f33aef730981793b4dc982f255658290e4505370ad51",
+  "scope": "Current source and compiled-package audit only. Actual focused emulator observations and fixture provenance are bound in a separate report.",
+  "build": "Root reported successful Android build; current exact APK hash checked independently.",
+  "signature": "APK Signature Scheme v2 verified independently with Android SDK apksigner.",
+  "sourceReview": [
+    "Current WebView document identity is separate from the persisted native reward run identity.",
+    "Native live purchases retain a stable transaction ID; unknown outcomes retain the reservation until journal reconciliation.",
+    "Saved Games hydrates every native file before releasing the persistent-config dependency, then verifies resumed native quote/time/map/session.",
+    "SaveGameStore validates complete ZIP contents, manifest bytes/SHA, native gam metadata and UTF-8 native level length below20 on save and load.",
+    "Tiny wave notice is a small child of the Rewards header; original span caption and SAVE header entry remain.",
+    "Real save failure root cause was the overlong Greenhaven internal native level name; only its alias/catalog/challenge/registration metadata changes.",
+    "Native modifiers are released before F7 as a separate input cleanup guard; actual QuickSave completion remains an emulator check.",
+    "Maps terrain/art/objects/waves, music, prices, compiled engine/WASM and deferred Duel stay frozen outside the declared alias and reward additions."
+  ],
+  "nativeMapSaveNameException": {
+    "Greenhaven-Beginner-T1": "Greenhaven-T1",
+    "maximumUtf8Bytes": 19,
+    "catalogLevelsChecked": 46,
+    "displayedNameAndMapContentUnchanged": true
+  },
+  "sourceCheckReports": [
+    {
+      "path": "archive/reward-ledger-0.27-checks.json",
+      "sha256": "7b331ba88cd55fb87eb0a1b51a2e296812ebaf0dcbc8ee01e4aa68569cd3078a"
+    },
+    {
+      "path": "archive/save-store-0.27-checks.json",
+      "sha256": "cf29f45637a3240832f51236d766702291dbbb82fb2f6cbbe5671d7d463cab9e"
+    },
+    {
+      "path": "archive/saved-games-web-0.27-checks.json",
+      "sha256": "172067e56160448f9868d512c56c3f6c4bedbe005b88129075a6d4dc2da753b7"
+    },
+    {
+      "path": "archive/rewards-web-0.27-checks.json",
+      "sha256": "2919ecee62f27e6f58197e3a4b6bcda3d2e7e6492107c6f02478261f4e0fbbc7"
+    },
+    {
+      "path": "archive/rewards-native-0.27-checks.json",
+      "sha256": "665c8ccd74f1a272370b70ab849795cd76a08decef2d73f7ab1a683b2fdd7ab5"
+    }
+  ],
+  "sourceOnlyCheckCounts": {
+    "walletJVM": 174,
+    "saveStoreJVM": 138,
+    "savedGameWebGroups": 12,
+    "rewardsWebGroups": 12,
+    "nativeAPIFixtures": 33,
+    "catalogNames": 46
+  },
+  "payloadProof": {
+    "path": "archive/rewards-0.27-payload.json",
+    "sha256": "c10e9b040098e7701e95e1fb99a3e6bf3aefa6abbc75633a116a57d8798471cd"
+  },
+  "sources": [
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MainActivity.java",
+      "sha256": "cf0b3bd9a4607c6c967f5d4c70c3a00cad5ddb1cc7eb4d94b4ecc9416880cf43"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/GraphicsSetupView.java",
+      "sha256": "d3633ba617b85c9d0d8b853f44483bb702570ac2e42e555e6e5ef0cb839583a1"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/RewardsView.java",
+      "sha256": "b4b2b2560353e5f91040ecf7979a6726ec67cdb1028daa33373fcb4982551a7b"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/RewardLedger.java",
+      "sha256": "282bdf43eee39d0c2e7e36019c68c790bcb39132f01f8c954a901d69a97950a8"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/RewardStore.java",
+      "sha256": "43a46ec8edddcec4829358f4d575fb63c7ceb40e5b8fdee23db2e6f13d0e12b7"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/SaveGameStore.java",
+      "sha256": "aa6ca25b70d87260195c313e31417a28fa38937ce1e0c7009ddf3b0f5008fb0b"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/SavedGamesView.java",
+      "sha256": "5a870c547581862cdf0a46d0927d6f1325ccd854b47110814d1083cb80660487"
+    },
+    {
+      "path": "app/build.gradle.kts",
+      "sha256": "cf1927527e7502ca1039d709844ea75f33eb6e64468180e6452a5cdea2dbf265"
+    },
+    {
+      "path": "app/src/main/assets/warzone-touch-controls.js",
+      "sha256": "a4b90e04e5fa70f60285f286e8f0f9ff6bcc89a09f450555ac16bcce49c12047"
+    },
+    {
+      "path": "app/src/main/assets/warzone/rewards.js",
+      "sha256": "b5634644de7e11412eaba2ec3db6e02fe5bc8ca5f8d80bfb07b0fe528257d189"
+    },
+    {
+      "path": "app/src/main/assets/warzone/saved-games.js",
+      "sha256": "f25854c39c5b42647783d9ca656a0d10c36c731ef56e5080f93244a432654858"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/icons/save.svg",
+      "sha256": "fa0cd5f676e782b599a2595ebfc9656793301505424832218f34cffed3cc4c6e"
+    },
+    {
+      "path": "app/src/main/assets/warzone/levels/catalog.json",
+      "sha256": "29ba1fc05fd98fa1c8984f2cd6c9fdc5da478e664aee452813278bf960743452"
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100.js",
+      "sha256": "bd59230991cf29d548be7ddb4336cf05dabe3ca4427cb62b4a8bce0821d93d24"
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100.data",
+      "sha256": "f2200f13b2197d0162a12737898c12be2545482a78529a6d7c83c54d8a34e16b"
+    },
+    {
+      "path": "scenario/warzone-towers-commands.js",
+      "sha256": "0449fe0f15290dbdf6e03d7c1b61d4af5257677fb7b4f7c0803eb4baec2ab0b2"
+    },
+    {
+      "path": "scenario/warzone-towers-rewards.js",
+      "sha256": "6f4c40bd6aa6a73451931b5ff8a14c116f794154d6ff661a63c00004ef8f7032"
+    },
+    {
+      "path": "map/greenhaven-beginner/level.lev",
+      "sha256": "febbbecac680146e14927ebc0cd69f33f5b2cee3e1e0337ddd15034e56ff36d0"
+    },
+    {
+      "path": "scenario/beginner/config-router.js",
+      "sha256": "c4979a5cb9e135a8fc7255919f088885a39ad162d9f0c048132e2cd176d2fa93"
+    },
+    {
+      "path": "scenario/warzonetowers-beginner.json",
+      "sha256": "b1d172cfb25046cc289442014913257d054900cb1d9fa9ce52ecde6a0b8ba14d"
+    }
+  ],
+  "verificationLimit": "Source/JVM/VM fixtures use disclosed mock boundaries and synthetic data; they do not establish actual Android persistence or gameplay. See the separately hash-bound exact-APK focused emulator report.",
+  "recordedUTC": "2026-11-09T14:29:06.596829Z",
+  "separateFocusedEmulatorReport": {
+    "path": "qa/0.27-saves/focused-emulator-proof.json",
+    "sha256": "e1948326ee78a2841bb1c5fa1e596d688e0c905e7c17b0a93e3ed289382f278f",
+    "checks": 8,
+    "executedByRoot": true,
+    "sourceReviewItselfUsesEmulator": false
+  }
+}

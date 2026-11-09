@@ -1,0 +1,44 @@
+{
+  "version": "0.24",
+  "versionCode": 24,
+  "candidateAPK_SHA256": "8d4a3c8baee15fc4cdee352e6b5364013f59290b996e5eeff9058ec4f413ad44",
+  "scope": "Option 1 native home layout and removal of optional HQ graphics from the app; VPS unchanged.",
+  "emulatorUsed": false,
+  "screensVerified": false,
+  "gameplayVerified": false,
+  "musicPlaybackVerified": false,
+  "verification": "Source review, Android compilation and exact source/APK archive integrity only. No emulator was used for this revision.",
+  "changedAPKAssets": [
+    "assets/warzone/index-duel.html",
+    "assets/warzone/index.html"
+  ],
+  "removedAPKAssets": [
+    "assets/warzone/graphics-loader.js"
+  ],
+  "changedAPKMembers": [
+    "classes3.dex",
+    "assets/warzone/index-duel.html",
+    "assets/warzone/index.html",
+    "AndroidManifest.xml"
+  ],
+  "removedAPKMembers": [
+    "assets/warzone/graphics-loader.js"
+  ],
+  "engineAndMapAndMusicPayloadUnchanged": true,
+  "duelGameplayPayloadUnchanged": true,
+  "preservedOriginalSourceFiles": 1232,
+  "preservedAPKAssets": 520,
+  "sourceCheckReports": [
+    {
+      "path": "qa/0.24-home/source-review.json",
+      "sha256": "5d335761242a61362eccf557015b081462c473ab297d172df8e1b6595dd7aa71"
+    }
+  ],
+  "fallbackRecord": {
+    "path": "archive/fallback-0.24.json",
+    "sha256": "da7a419aa460e3c92a27fdbccbae6bb4c39c13f02ce2866da57eb1cb7b59933d"
+  },
+  "sourceInventory": "git ls-files --cached --others --exclude-standard; filtered caches/private/transient files",
+  "gitMetadataIncluded": false,
+  "recordedUTC": "2026-11-09T11:12:47.659471Z"
+}

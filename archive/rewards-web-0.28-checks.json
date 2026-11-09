@@ -1,0 +1,111 @@
+{
+  "version": "0.28",
+  "emulatorUsed": false,
+  "screensVerified": false,
+  "gameplayVerified": false,
+  "androidPersistenceExecuted": false,
+  "passed": 16,
+  "checks": [
+    {
+      "name": "Fresh document identity remains distinct from the saved logical reward run in native and Android calls",
+      "passed": true
+    },
+    {
+      "name": "Live purchase sends one stable transaction, prevents concurrent sends and awaits durable journal confirmation",
+      "passed": true
+    },
+    {
+      "name": "Timeout keeps the same reserved transaction pending and never manufactures clean-rejection refund proof",
+      "passed": true
+    },
+    {
+      "name": "Pending retry reconciles committed journal entries first and resends only the original uncommitted ID",
+      "passed": true
+    },
+    {
+      "name": "Native clean rejection is forwarded unchanged; stale logical requests and saving/busy state cannot buy",
+      "passed": true
+    },
+    {
+      "name": "Pending startup transactions keep readiness closed until native and phone reconciliation complete",
+      "passed": true
+    },
+    {
+      "name": "Actual saved-game helper hydrates all native files before persistence dependency release and verifies resumed logical run before readiness",
+      "passed": true
+    },
+    {
+      "name": "Unhydrated saves and failed resumed-state persistence keep both startup readiness gates closed",
+      "passed": true
+    },
+    {
+      "name": "Actual saved-game busy getter blocks a live purchase while its save operation is draining input",
+      "passed": true
+    },
+    {
+      "name": "A genuinely unresolved native purchase releases UI busy at the bounded acknowledgement deadline without refund proof",
+      "passed": true
+    },
+    {
+      "name": "A late native committed journal settles the original reservation after the acknowledgement deadline",
+      "passed": true
+    },
+    {
+      "name": "Retry after an unresolved acknowledgement reuses the original business transaction and releases busy after verified proof",
+      "passed": true
+    },
+    {
+      "name": "An outgoing document ignores a native journal arriving after the purchase deadline",
+      "passed": true
+    },
+    {
+      "name": "Tiny +5 notice stays inside the Rewards header, reuses one small node and preserves its main span caption",
+      "passed": true
+    },
+    {
+      "name": "Exit inventories use the logical native session while phone callbacks remain document-bound; outgoing purchase results are ignored",
+      "passed": true
+    },
+    {
+      "name": "Dormant Duel loads no rewards, saved-game wrapper or pollers",
+      "passed": true
+    }
+  ],
+  "sources": [
+    {
+      "path": "app/src/main/assets/warzone/rewards.js",
+      "sha256": "d0bf5f789ebbadc5ffa7c9e600bb34400e0d645c999f63da69fbb3530fe7b62d"
+    },
+    {
+      "path": "app/src/main/assets/warzone/saved-games.js",
+      "sha256": "f25854c39c5b42647783d9ca656a0d10c36c731ef56e5080f93244a432654858"
+    },
+    {
+      "path": "app/src/main/assets/warzone-html-session.js",
+      "sha256": "82717cc3923f16386e4b77b193ed265fc9b34a395825a70fde0edc8086921e52"
+    },
+    {
+      "path": "app/src/main/assets/warzone-touch-controls.js",
+      "sha256": "fdaf27990c0a25ab9f4f11be3acd1f0e1ea1d071f1aa1b4c13fcfdc5245865e6"
+    },
+    {
+      "path": "app/src/main/assets/warzone-command-pages.js",
+      "sha256": "5f3afb70c1b775adce19bfa40966415793ecb51740a2c66fd6a563203a16e301"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MainActivity.java",
+      "sha256": "7c4321ab6464cabc9fbd67a10945814d69a286a43ca243f210a894b0d7b90442"
+    },
+    {
+      "path": "tools/check-rewards-web-028.cjs",
+      "sha256": "07c0bb699a991fcc8f017a87d22bd4c784142c1900d78c22fc00f1f67e40ce34"
+    }
+  ],
+  "scope": "Bounded VM fixtures execute actual reward/saved-game source with mocked command/Android replies and an in-memory native FS. No browser layout, real QuickSave/load, native purchase effect, Android storage or gameplay verified.",
+  "sourceAuditOnly": [
+    "SAVE header routes to WarzoneSavedGames.save",
+    "Android rewards bridge guards document session and uses the separate logical rewardRunId",
+    "Phone completeLive receives the native quote",
+    "The validated native resume quote must commit to RewardStore before the saved-game payload/readiness is released"
+  ]
+}

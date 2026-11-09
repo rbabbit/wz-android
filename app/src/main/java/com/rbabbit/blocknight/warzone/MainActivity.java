@@ -55,6 +55,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import org.json.JSONObject;
+import org.json.JSONArray;
 
 /** Android shell for the official Warzone 2100 4.7 WebAssembly engine. */
 public final class MainActivity extends Activity {
@@ -85,9 +86,7 @@ public final class MainActivity extends Activity {
   private boolean isolationAllowlistAvailable;
   private boolean startupAutomationStarted;
   private String webViewVersion = "unknown";
-  private GraphicsPackStore graphicsStore;
   private GraphicsSetupView graphicsSetup;
-  private String graphicsMode = "normal";
   private String mapId = "td2";
   private String matchMode = "towers";
   private String duelWeapon = "cannon";
@@ -95,7 +94,26 @@ public final class MainActivity extends Activity {
   private MusicPackStore musicStore;
   private MusicSetupView musicSetup;
   private MusicTrackCatalog musicCatalog;
-  private boolean musicEnabled, musicCached;
+  private MapMusicIndex mapMusicIndex;
+  private volatile boolean musicEnabled, musicCached;
+  private volatile String musicSession = "", musicMapId = "td2";
+  private volatile boolean musicSuspended = true;
+  private final Object musicPreferenceLock = new Object();
+  private boolean musicDownloadActive;
+  private RewardStore rewards;
+  private RewardsView rewardsView;
+  private RewardsView livePurchaseView;
+  private String livePurchaseTransaction = "", livePurchaseDocument = "";
+  private RewardReceiptView rewardReceipt;
+  private volatile String rewardSession = "";
+  private volatile String rewardRunId = "";
+  private SaveGameStore saveGames;
+  private SavedGamesView savedGamesView;
+  private volatile JSONObject loadingSave;
+  private volatile String loadingSaveId = "";
+  private boolean restoringGame;
+  private boolean rewardSetupFailed;
+  private volatile String rewardTerminalFreshSession = "", rewardInventoryFreshSession = "";
 
   @Override
   protected void onCreate(Bundle state) {
@@ -119,30 +137,36 @@ public final class MainActivity extends Activity {
     setContentView(root);
 
     createWebView();
-    graphicsStore = new GraphicsPackStore(this);
     musicStore = new MusicPackStore(this);
     musicCatalog = new MusicTrackCatalog(this);
+    mapMusicIndex = new MapMusicIndex(this, musicCatalog);
+    rewards = new RewardStore(this);
+    saveGames = new SaveGameStore(this);
+    String savedWalletError = null;
+    JSONArray pinnedRuns = rewards.pinnedRuns();
+    for (int i = 0; i < pinnedRuns.length(); i++) {
+      String run = pinnedRuns.optString(i);
+      try { if (!saveGames.hasRun(run)) rewards.unpinRun(run); }
+      catch (RuntimeException error) { savedWalletError = "Saved-game stock could not be reconciled. Restart to retry."; }
+    }
     musicEnabled = getPreferences(MODE_PRIVATE).getBoolean("music_enabled", false);
-    graphicsMode = getPreferences(MODE_PRIVATE).getString("graphics_mode", "normal");
     String requestedMap = getIntent().getStringExtra("map");
     mapId =
-        "td1"
-                .equals(
-                    requestedMap != null
-                        ? requestedMap
-                        : getPreferences(MODE_PRIVATE).getString("map_id", "td2"))
-            ? "td1"
-            : "td2";
+        BattleLaunchSpec.mapId(
+            requestedMap != null
+                ? requestedMap
+                : getPreferences(MODE_PRIVATE).getString("map_id", "td2"));
     matchMode = BattleLaunchSpec.matchMode(getIntent().getStringExtra("match_mode"));
     duelWeapon = BattleLaunchSpec.duelWeapon(getIntent().getStringExtra("duel_weapon"));
     showGraphicsSetup();
+    if (savedWalletError != null) graphicsSetup.showError(savedWalletError);
   }
 
   private void showGraphicsSetup() {
     graphicsSetup =
         new GraphicsSetupView(
             this,
-            graphicsMode,
+            "normal",
             mapId,
             matchMode,
             duelWeapon,
@@ -152,22 +176,20 @@ public final class MainActivity extends Activity {
                 mapId = map;
                 matchMode = BattleLaunchSpec.matchMode(selectedMatch);
                 duelWeapon = BattleLaunchSpec.duelWeapon(selectedWeapon);
-                startWithGraphics(mode);
+                startGame();
               }
 
               @Override
               public void cancel() {
-                graphicsStore.cancel();
+                if (musicDownloadActive) {
+                  musicStore.cancel();
+                  musicDownloadActive = false;
+                }
               }
 
               @Override
               public void music() {
-                showMusicSetup();
-              }
-
-              @Override
-              public void download() {
-                downloadGraphics();
+                downloadMusic();
               }
 
               @Override
@@ -175,21 +197,26 @@ public final class MainActivity extends Activity {
                 mapId = id;
                 getPreferences(MODE_PRIVATE).edit().putString("map_id", id).apply();
               }
+
+              @Override
+              public void rewards() { showRewards(false); }
+              @Override
+              public void savedGames() { showSavedGames(); }
             });
+    graphicsSetup.setRewardBalance(rewards.balance());
     root.addView(graphicsSetup, new FrameLayout.LayoutParams(-1, -1));
-    graphicsStore.inspect(cached -> {
-      if (graphicsSetup != null && !isFinishing()) graphicsSetup.setCached(cached);
-    });
     inspectMusic();
   }
 
   private void inspectMusic() {
     musicStore.inspect(cached -> {
       musicCached = cached;
-      if (!cached) musicEnabled = false;
       if (graphicsSetup != null && !isFinishing())
         graphicsSetup.setMusicState(cached, musicEnabled);
       if (musicSetup != null && !isFinishing()) musicSetup.setCached(cached, musicEnabled);
+      // A quick Play can precede checksum inspection. Refresh the active
+      // player when readiness changes instead of waiting for a menu or resume.
+      if (!musicSession.isEmpty()) mapMusicLifecycle(musicSuspended ? "suspend" : "resume");
     });
   }
 
@@ -236,14 +263,13 @@ public final class MainActivity extends Activity {
 
               @Override
               public void start() {
-                String mode = graphicsSetup != null ? graphicsSetup.selectedMode() : graphicsMode;
                 if (graphicsSetup != null) {
                   mapId = graphicsSetup.selectedMap();
                   matchMode = graphicsSetup.selectedMatchMode();
                   duelWeapon = graphicsSetup.selectedDuelWeapon();
                 }
                 closeMusicSetup();
-                startWithGraphics(mode);
+                startGame();
               }
             });
     musicSetup.setCompactTowers(!"duel".equals(graphicsSetup != null ? graphicsSetup.selectedMatchMode() : matchMode));
@@ -252,25 +278,39 @@ public final class MainActivity extends Activity {
   }
 
   private void downloadMusic() {
+    if (musicDownloadActive || musicCached) return;
+    musicDownloadActive = true;
+    if (graphicsSetup != null) graphicsSetup.musicDownloadProgress(0, false);
     if (musicSetup != null) musicSetup.progress(0, false);
     musicStore.download(
         new OptionalPackStore.Listener() {
           @Override
           public void progress(long bytes, boolean verifying) {
+            if (graphicsSetup != null) graphicsSetup.musicDownloadProgress(bytes, verifying);
             if (musicSetup != null) musicSetup.progress(bytes, verifying);
           }
 
           @Override
           public void ready() {
+            musicDownloadActive = false;
             musicCached = true;
-            musicEnabled = musicEnabled && !selectedMusicTracks().isEmpty();
+            // First opt-in download starts enabled. An explicit saved Off is
+            // retained, including when the pack has had to be downloaded again.
+            musicEnabled = getPreferences(MODE_PRIVATE).contains("music_enabled")
+                ? getPreferences(MODE_PRIVATE).getBoolean("music_enabled", false) : true;
             getPreferences(MODE_PRIVATE).edit().putBoolean("music_enabled", musicEnabled).apply();
             if (musicSetup != null) musicSetup.ready(musicEnabled);
-            if (graphicsSetup != null) graphicsSetup.setMusicState(true, musicEnabled);
+            if (graphicsSetup != null) {
+              graphicsSetup.setDownloading(false);
+              graphicsSetup.setMusicState(true, musicEnabled);
+              graphicsSetup.showStatus("Music ready. Use MUSIC in-game to turn it on or off.", false);
+            }
           }
 
           @Override
           public void failed(String message) {
+            musicDownloadActive = false;
+            if (graphicsSetup != null) graphicsSetup.showError(message);
             if (musicSetup != null) musicSetup.failed(message);
           }
         });
@@ -278,6 +318,7 @@ public final class MainActivity extends Activity {
 
   private void closeMusicSetup() {
     musicStore.cancel();
+    musicDownloadActive = false;
     if (musicSetup != null) {
       root.removeView(musicSetup);
       musicSetup = null;
@@ -286,52 +327,26 @@ public final class MainActivity extends Activity {
     inspectMusic();
   }
 
-  private void startWithGraphics(String mode) {
-    if (musicEnabled && musicCached && selectedMusicTracks().isEmpty()) {
-      showMusicSetup();
-      return;
+  private void startGame() {
+    if (graphicsSetup == null || loadingOverlay != null || mainMenuReturnPending) return;
+    if (musicDownloadActive) {
+      musicStore.cancel();
+      musicDownloadActive = false;
     }
-    graphicsMode = "high".equals(mode) ? "high" : "normal";
-    if ("normal".equals(graphicsMode) || graphicsStore.readyFile() != null) {
-      graphicsStore.cancel();
-      launchGame();
-      return;
-    }
-    if (graphicsSetup != null)
-      graphicsSetup.showError("Download the HQ pack, or choose Normal to play offline.");
-  }
-
-  private void downloadGraphics() {
-    if (graphicsSetup != null) graphicsSetup.downloadProgress(0, false);
-    graphicsStore.download(
-        new GraphicsPackStore.Listener() {
-          @Override
-          public void progress(long bytes, boolean verifying) {
-            if (graphicsSetup != null) graphicsSetup.downloadProgress(bytes, verifying);
-          }
-
-          @Override
-          public void ready() {
-            if (graphicsSetup != null) {
-              graphicsSetup.setDownloading(false);
-              graphicsSetup.setCached(true);
-              graphicsSetup.showStatus("HQ ready offline. Choose your graphics and play.", false);
-            }
-          }
-
-          @Override
-          public void failed(String message) {
-            if (graphicsSetup != null) graphicsSetup.showError(message);
-          }
-        });
+    launchGame();
   }
 
   private void launchGame() {
+    closeRewards();
+    closeSavedGames();
+    dismissRewardReceipt();
+    loadingSave = null;
+    loadingSaveId = "";
+    restoringGame = false;
     battleLaunch = new BattleLaunchSpec(
-        matchMode, duelWeapon, mapId, graphicsMode, musicEnabled && musicCached);
+        matchMode, duelWeapon, mapId, musicEnabled && musicCached);
     getPreferences(MODE_PRIVATE)
         .edit()
-        .putString("graphics_mode", graphicsMode)
         .putString("map_id", mapId)
         .apply();
     if (graphicsSetup != null) {
@@ -339,7 +354,164 @@ public final class MainActivity extends Activity {
       graphicsSetup = null;
     }
     createLoadingPanel();
+    rewardRunId = isDuelBattle() ? "" : battleSession;
+    if (!isDuelBattle()) {
+      try { rewards.begin(rewardRunId, battleLaunch.mapId); }
+      catch (RuntimeException error) {
+        returnToMainMenu();
+        graphicsSetup.showError(error.getMessage());
+        return;
+      }
+    }
     webView.loadUrl(gameUrl());
+  }
+
+  private void showRewards(boolean inGame) {
+    if (rewardsView != null || rewardReceipt != null || rewards == null) return;
+    if (inGame && (isDuelBattle() || battleSession.isEmpty() || !battleOutcome.isEmpty()
+        || loadingOverlay != null || graphicsSetup != null)) return;
+    if (!inGame && graphicsSetup == null) return;
+    final String selectedMap = inGame ? battleLaunch.mapId : graphicsSetup.selectedMap();
+    MapLevelCatalog.Level level = MapLevelCatalog.get(this).level(selectedMap);
+    rewardsView = new RewardsView(this, selectedMap, level.name, rewards.balance(), rewards.inventory(),
+        inGame ? rewards.active(rewardRunId) : rewards.loadout(), inGame,
+        new RewardsView.Actions() {
+          @Override public void buy(String id, int quantity) {
+            if (rewardsView == null) return;
+            try {
+              if (inGame) {
+                if (rewardSession.isEmpty() || !rewardSession.equals(battleSession)) return;
+                String request = rewards.reserveLive(rewardRunId, id, quantity);
+                livePurchaseView = rewardsView;
+                livePurchaseDocument = rewardSession;
+                try { livePurchaseTransaction = new JSONObject(request).getString("transactionId"); }
+                catch (org.json.JSONException error) { throw new IllegalStateException("The purchase could not be prepared.", error); }
+                webView.evaluateJavascript("window.WarzoneRewards?.purchase(" + request + ")", null);
+                return;
+              }
+              if (graphicsSetup == null) return;
+              rewards.buy(id, quantity);
+              graphicsSetup.setRewardBalance(rewards.balance());
+              rewardsView.completeMutation(rewards.balance(), rewards.inventory(), rewards.loadout());
+            } catch (RuntimeException error) { rewardsView.showError(error.getMessage()); }
+          }
+          @Override public void equip(String id, int quantity) {
+            if (inGame || graphicsSetup == null || rewardsView == null) return;
+            try {
+              rewards.equip(id, quantity);
+              rewardsView.completeMutation(rewards.balance(), rewards.inventory(), rewards.loadout());
+            } catch (RuntimeException error) { rewardsView.showError(error.getMessage()); }
+          }
+          @Override public void close() { closeRewards(); }
+        });
+    root.addView(rewardsView, new FrameLayout.LayoutParams(-1, -1));
+  }
+
+  private void closeRewards() {
+    livePurchaseView = null;
+    livePurchaseTransaction = "";
+    livePurchaseDocument = "";
+    if (rewardsView != null) { root.removeView(rewardsView); rewardsView = null; }
+    if (webView != null && graphicsSetup == null) webView.requestFocus();
+    immersive();
+  }
+
+  private void showSavedGames() {
+    if (graphicsSetup == null || savedGamesView != null || rewardsView != null) return;
+    savedGamesView = new SavedGamesView(this, saveGames.list(), new SavedGamesView.Actions() {
+      @Override public void load(String id) { loadSavedGame(id); }
+      @Override public void delete(String id) {
+        String failure = null;
+        try {
+          String run = saveGames.delete(id);
+          if (!saveGames.hasRun(run)) rewards.unpinRun(run);
+        } catch (Exception error) { failure = error.getMessage() == null ? "Saved-game deletion could not finish. Restart to retry." : error.getMessage(); }
+        finally {
+          if (savedGamesView != null) {
+            savedGamesView.refresh(saveGames.list());
+            if (failure != null) savedGamesView.showError(failure);
+          }
+          if (graphicsSetup != null) graphicsSetup.setRewardBalance(rewards.balance());
+        }
+      }
+      @Override public void close() { closeSavedGames(); }
+    });
+    root.addView(savedGamesView, new FrameLayout.LayoutParams(-1, -1));
+  }
+
+  private void closeSavedGames() {
+    if (savedGamesView != null) { root.removeView(savedGamesView); savedGamesView = null; }
+  }
+
+  private void loadSavedGame(String id) {
+    if (graphicsSetup == null || savedGamesView == null || loadingOverlay != null) return;
+    try {
+      JSONObject payload = saveGames.load(id), metadata = payload.getJSONObject("metadata");
+      String savedMap = metadata.getString("mapId"), run = metadata.getString("session");
+      MapLevelCatalog.get(this).level(savedMap);
+      rewards.resumeRun(run, savedMap);
+      rewardRunId = run;
+      rewardSession = run; // Cleanup can suspend the correct run if setup fails before a new document exists.
+      closeSavedGames();
+      if (musicDownloadActive) { musicStore.cancel(); musicDownloadActive = false; }
+      mapId = savedMap;
+      matchMode = "towers";
+      battleLaunch = new BattleLaunchSpec("towers", duelWeapon, mapId, musicEnabled && musicCached);
+      getPreferences(MODE_PRIVATE).edit().putString("map_id", mapId).apply();
+      root.removeView(graphicsSetup);
+      graphicsSetup = null;
+      loadingSave = payload;
+      loadingSaveId = id;
+      restoringGame = true;
+      createLoadingPanel();
+      rewardRunId = run;
+      webView.loadUrl(gameUrl());
+    } catch (Exception error) {
+      if (savedGamesView != null) savedGamesView.showError(error.getMessage());
+      else { returnToMainMenu(); graphicsSetup.showError(error.getMessage()); }
+    }
+  }
+
+  private boolean completeRewardQuote(String session, JSONObject quote) {
+    try {
+      if (!session.equals(rewardSession) || quote == null || !rewardRunId.equals(quote.optString("session")) || !quote.optBoolean("applied")) return false;
+      JSONObject remaining = quote.getJSONObject("remaining");
+      JSONObject expected = rewards.resumeCaps(rewardRunId).getJSONObject("items");
+      for (java.util.Iterator<String> it = expected.keys(); it.hasNext();) if (!remaining.has(it.next())) return false;
+      return true;
+    } catch (Exception error) { return false; }
+  }
+
+  private void dismissRewardReceipt() {
+    if (rewardReceipt != null) { root.removeView(rewardReceipt); rewardReceipt = null; }
+  }
+
+  private void finishTowersRewards(boolean won) {
+    if (isDuelBattle()) { showReplayPanel(won); return; }
+    if (battleSession.isEmpty() || !battleOutcome.isEmpty() || battleLaunch == null) return;
+    final String playedMap = battleLaunch.mapId;
+    MapLevelCatalog.Level level = MapLevelCatalog.get(this).level(playedMap);
+    RewardLedger.Receipt receipt;
+    try { receipt = rewards.finish(rewardRunId, won, level.difficulty, level.rounds,
+        battleSession.equals(rewardTerminalFreshSession)); }
+    catch (RuntimeException error) {
+      // Never display an invented credit when storage fails.
+      Toast.makeText(this, error.getMessage(), Toast.LENGTH_LONG).show();
+      mapId = playedMap;
+      returnToMainMenu();
+      return;
+    }
+    if (receipt == null) return;
+    battleOutcome = won ? "victory" : "defeated";
+    mapId = playedMap;
+    getPreferences(MODE_PRIVATE).edit().putString("map_id", mapId).apply();
+    // Unload the ended engine before showing Home. The stock loss/frontend
+    // screen never becomes a destination, and the played map remains selected.
+    returnToMainMenu();
+    rewardReceipt = new RewardReceiptView(this, won, level.name, level.difficulty,
+        receipt.wave, receipt.total, receipt.earned, receipt.balance, receipt.reason,
+        this::dismissRewardReceipt);
+    root.addView(rewardReceipt, new FrameLayout.LayoutParams(-1, -1));
   }
 
   private Set<String> selectedMusicTracks() {
@@ -362,11 +534,8 @@ public final class MainActivity extends Activity {
             + battleSession
             + "&map="
             + launch.mapId
-            + "&graphics="
-            + launch.graphicsMode
             + "&music="
             + (launch.musicEnabled ? "1" : "0");
-    if (getIntent().getBooleanExtra("graphics_probe", false)) url += "&graphics_probe=1";
     if ((getApplicationInfo().flags & android.content.pm.ApplicationInfo.FLAG_DEBUGGABLE) != 0
         || getIntent().getBooleanExtra("music_probe", false)) url += "&music_probe=1";
     return url;
@@ -417,6 +586,13 @@ public final class MainActivity extends Activity {
           @Override
           public WebResourceResponse shouldInterceptRequest(
               WebView view, WebResourceRequest request) {
+            Uri uri = request.getUrl();
+            String musicPath = "/warzone/optional/map-music/";
+            if ("https".equalsIgnoreCase(uri.getScheme())
+                && "appassets.androidplatform.net".equalsIgnoreCase(uri.getHost())
+                && uri.getPath() != null && uri.getPath().startsWith(musicPath)) {
+              return mapMusicResponse(request, uri.getPath().substring(musicPath.length()));
+            }
             return assetLoader.shouldInterceptRequest(request.getUrl());
           }
 
@@ -529,10 +705,19 @@ public final class MainActivity extends Activity {
   }
 
   private void createLoadingPanel() {
+    mapMusicLifecycle("dispose");
     dismissMainMenuDialog();
     mainMenuReturnPending = false;
     if (webView != null) webView.setVisibility(View.VISIBLE);
     battleSession = java.util.UUID.randomUUID().toString();
+    rewardSetupFailed = false;
+    rewardTerminalFreshSession = "";
+    rewardInventoryFreshSession = "";
+    rewardSession = isDuelBattle() ? "" : battleSession;
+    synchronized (musicPreferenceLock) {
+      musicMapId = battleLaunch != null ? battleLaunch.mapId : mapId;
+      musicSession = isDuelBattle() ? "" : battleSession;
+    }
     if (replayPanel != null) {
       root.removeView(replayPanel);
       replayPanel = null;
@@ -718,6 +903,8 @@ public final class MainActivity extends Activity {
       "warzone-html-session.js",
       "warzone-terrain-picker.js",
       "warzone-command-pages.js",
+      "warzone/rewards.js",
+      "warzone/saved-games.js",
       "warzone-touch-controls.js",
       "warzone-mobile-research.js",
       isDuelBattle() ? "warzone-duel-ui.js" : "warzone-towers-wave-hud.js"
@@ -749,6 +936,161 @@ public final class MainActivity extends Activity {
   }
 
   public final class EngineBridge {
+    @JavascriptInterface
+    public String appVersion() { return GraphicsSetupView.appVersion(MainActivity.this); }
+
+    @JavascriptInterface
+    public String rewardConfig(String session) {
+      if (session == null || session.isEmpty() || !session.equals(rewardSession) || rewards == null) return "{}";
+      return rewards.config(rewardRunId);
+    }
+
+    @JavascriptInterface
+    public boolean rewardApplied(String session) {
+      if (session == null || !session.equals(rewardSession) || rewards == null) return false;
+      try { rewards.applied(rewardRunId); return true; }
+      catch (RuntimeException error) { rewardFailed(session, error.getMessage()); return false; }
+    }
+
+    @JavascriptInterface
+    public void rewardFailed(String session, String detail) {
+      runOnUiThread(() -> {
+        if (session == null || !session.equals(rewardSession)) return;
+        rewardSetupFailed = true;
+        showEngineFailure(detail);
+        if (loading != null) {
+          loading.append("\n\nTAP TO RETURN HOME");
+          loading.setOnClickListener(v -> returnToMainMenu());
+        }
+      });
+    }
+
+    @JavascriptInterface
+    public int rewardProgress(String session, String packet) {
+      if (session == null || !session.equals(rewardSession) || rewards == null || battleLaunch == null
+          || packet == null || packet.length() > 262144) return 0;
+      try {
+        int credited = rewards.progress(rewardRunId, packet, MapLevelCatalog.get(MainActivity.this).level(battleLaunch.mapId).rounds);
+        JSONObject data = new JSONObject(packet);
+        if (("victory".equals(data.optString("phase")) || "defeated".equals(data.optString("phase")))
+            && completeRewardQuote(session, data.optJSONObject("rewards"))) rewardTerminalFreshSession = session;
+        runOnUiThread(() -> {
+          if (session.equals(rewardSession) && rewardsView != null && graphicsSetup == null)
+            rewardsView.refresh(rewards.balance(), rewards.inventory(), rewards.active(rewardRunId));
+        });
+        return credited;
+      } catch (RuntimeException | org.json.JSONException error) {
+        Log.w(TAG, "Reward progress could not save", error); return 0;
+      }
+    }
+
+    @JavascriptInterface
+    public boolean rewardInventorySnapshot(String session, String packet) {
+      if (session == null || !session.equals(rewardSession) || packet == null || packet.length() > 262144) return false;
+      try {
+        JSONObject quote = new JSONObject(packet);
+        if (!completeRewardQuote(session, quote)) return false;
+        JSONObject progress = new JSONObject().put("wave", 0)
+            .put("completedWaves", quote.optJSONArray("completedWaves")) .put("rewards", quote);
+        int credited = rewards.progress(rewardRunId, progress.toString(), MapLevelCatalog.get(MainActivity.this).level(battleLaunch.mapId).rounds);
+        rewardInventoryFreshSession = session;
+        if (credited > 0) runOnUiThread(() -> {
+          if (session.equals(rewardSession))
+            webView.evaluateJavascript("window.WarzoneRewards?.waveCredited(" + credited + ")", null);
+        });
+        return true;
+      } catch (Exception error) { Log.w(TAG, "Reward inventory could not save", error); return false; }
+    }
+
+    @JavascriptInterface
+    public void showRewards(String session) {
+      runOnUiThread(() -> {
+        if (session != null && session.equals(rewardSession) && session.equals(battleSession))
+          MainActivity.this.showRewards(true);
+      });
+    }
+
+    @JavascriptInterface
+    public boolean rewardPurchaseResult(String session, String transactionId, String packet) {
+      if (session == null || !session.equals(rewardSession) || packet == null || packet.length() > 262144) return false;
+      boolean applied = false;
+      String message = "Purchase pending. Reopen Rewards and retry the same item to check it without another charge.";
+      try {
+        applied = rewards.completeLive(rewardRunId, transactionId, packet);
+        JSONObject quote = new JSONObject(packet);
+        if (quote.optBoolean("rejected") && !quote.optBoolean("transactionApplied") && !quote.optBoolean("transactionPending"))
+          message = "The game rejected this purchase. Your crystals were returned.";
+      } catch (Exception error) { message = error.getMessage(); }
+      final boolean completed = applied;
+      final String detail = message;
+      runOnUiThread(() -> {
+        if (!session.equals(rewardSession) || rewardsView == null) return;
+        if (livePurchaseView != rewardsView || !transactionId.equals(livePurchaseTransaction)
+            || !session.equals(livePurchaseDocument)) {
+          rewardsView.refresh(rewards.balance(), rewards.inventory(), rewards.active(rewardRunId));
+          return;
+        }
+        if (completed) rewardsView.completeMutation(rewards.balance(), rewards.inventory(), rewards.active(rewardRunId));
+        else rewardsView.showError(detail);
+      });
+      return applied;
+    }
+
+    @JavascriptInterface
+    public String savedGamePayload(String session) {
+      JSONObject payload = loadingSave;
+      return session != null && session.equals(rewardSession) && payload != null ? payload.toString() : "{}";
+    }
+
+    @JavascriptInterface
+    public String rewardResumeCaps(String session) {
+      if (session == null || !session.equals(rewardSession)) return "{}";
+      try { return rewards.resumeCaps(rewardRunId).toString(); }
+      catch (RuntimeException error) { return "{}"; }
+    }
+
+    @JavascriptInterface
+    public String storeSavedGame(String session, String metadataJSON, String filesJSON) {
+      boolean pinned = false;
+      final String run = rewardRunId;
+      try {
+        if (session == null || !session.equals(rewardSession) || metadataJSON == null || metadataJSON.length() > 65536
+            || filesJSON == null || filesJSON.length() > 48 * 1024 * 1024) throw new IOException("This save is no longer active.");
+        JSONObject metadata = new JSONObject(metadataJSON);
+        if (!run.equals(metadata.getString("session")) || battleLaunch == null
+            || !battleLaunch.mapId.equals(metadata.getString("mapId"))) throw new IOException("The saved match identity did not match.");
+        MapLevelCatalog.Level level = MapLevelCatalog.get(MainActivity.this).level(battleLaunch.mapId);
+        metadata.put("mapName", level.name).put("difficulty", level.difficulty).put("totalWaves", level.rounds);
+        rewards.pinRun(run);
+        pinned = true;
+        String id = saveGames.save(metadata, new JSONObject(filesJSON));
+        return new JSONObject().put("ok", true).put("id", id).toString();
+      } catch (Exception error) {
+        if (pinned && !saveGames.hasRun(run)) {
+          try { rewards.unpinRun(run); } catch (RuntimeException ignored) { }
+        }
+        try { return new JSONObject().put("ok", false).put("error", String.valueOf(error.getMessage())).toString(); }
+        catch (Exception ignored) { return "{\"ok\":false}"; }
+      }
+    }
+
+    @JavascriptInterface
+    public boolean savedGameRestored(String session, String id, String stateJSON) {
+      try {
+        JSONObject payload = loadingSave;
+        if (session == null || !session.equals(rewardSession) || !id.equals(loadingSaveId) || payload == null) return false;
+        JSONObject metadata = payload.getJSONObject("metadata"), state = new JSONObject(stateJSON);
+        if (!state.optBoolean("ok") || !rewardRunId.equals(state.optString("session"))
+            || !battleLaunch.mapId.equals(state.optString("mapId"))
+            || !metadata.getString("nativeLevel").equals(state.optString("nativeLevel"))
+            || state.optLong("gameTime", -1) < metadata.getLong("gameTime")
+            || !completeRewardQuote(session, state.optJSONObject("rewards"))) return false;
+        if (!rewards.confirmResumeInventory(rewardRunId, state.getJSONObject("rewards").toString())) return false;
+        loadingSave = null;
+        return true;
+      } catch (Exception error) { Log.w(TAG, "Saved game restoration could not verify", error); return false; }
+    }
+
     @JavascriptInterface
     public String loadDesigns() {
       return getPreferences(MODE_PRIVATE)
@@ -790,6 +1132,23 @@ public final class MainActivity extends Activity {
     }
 
     @JavascriptInterface
+    public String musicState() {
+      return mapMusicState();
+    }
+
+    @JavascriptInterface
+    public String setMusicEnabled(boolean on, String session) {
+      // A delayed event from an outgoing iframe must not alter a new battle.
+      synchronized (musicPreferenceLock) {
+        if (session != null && session.equals(musicSession) && !session.isEmpty()) {
+          getPreferences(MODE_PRIVATE).edit().putBoolean("music_enabled", on).apply();
+          musicEnabled = on;
+        }
+      }
+      return mapMusicState();
+    }
+
+    @JavascriptInterface
     public void musicFailed(String detail) {
       runOnUiThread(() -> {
         showEngineFailure("Music could not load. " + detail);
@@ -809,26 +1168,13 @@ public final class MainActivity extends Activity {
     }
 
     @JavascriptInterface
-    public void graphicsFailed(String detail) {
-      runOnUiThread(() -> {
-        showEngineFailure("High Quality graphics could not load. " + detail);
-        if (loading != null) {
-          loading.append("\n\nTAP HERE TO CHOOSE NORMAL GRAPHICS");
-          loading.setOnClickListener(v -> {
-            getPreferences(MODE_PRIVATE).edit().putString("graphics_mode", "normal").apply();
-            recreate();
-          });
-        }
-      });
-    }
-
-    @JavascriptInterface
     public void engineReady() {
       runOnUiThread(() -> {
         if (getIntent().getBooleanExtra("engine_debug", false)) hideLoadingPanel();
         updateLoadingStatus(isDuelBattle() ? "PREPARING YOUR MATCH…" : "PREPARING YOUR DEFENCES…");
         webView.requestFocus();
-        beginStartupAutomation();
+        if (restoringGame) { startupAutomationStarted = true; awaitBattlefieldReady(0); }
+        else beginStartupAutomation();
         if (touchTestMode) {
           webView.postDelayed(MainActivity.this::selectAllUnitsForTouchTest, 30000);
           webView.postDelayed(MainActivity.this::issueTouchTestOrder, 32000);
@@ -859,14 +1205,14 @@ public final class MainActivity extends Activity {
     @JavascriptInterface
     public void battleFinished(String session) {
       runOnUiThread(() -> {
-        if (battleSession.equals(session)) showReplayPanel(false);
+        if (battleSession.equals(session)) finishTowersRewards(false);
       });
     }
 
     @JavascriptInterface
     public void battleWon(String session) {
       runOnUiThread(() -> {
-        if (battleSession.equals(session)) showReplayPanel(true);
+        if (battleSession.equals(session)) finishTowersRewards(true);
       });
     }
 
@@ -918,6 +1264,7 @@ public final class MainActivity extends Activity {
             .setPositiveButton("Return", (ignored, which) -> {
               if (webView == null || !battleSession.equals(session)) return;
               mainMenuReturnPending = true;
+              rewardInventoryFreshSession = "";
               webView.evaluateJavascript(
                   "window.__towersHtml?.returnToMainMenu(" + JSONObject.quote(session) + ")",
                   result -> {
@@ -980,6 +1327,21 @@ public final class MainActivity extends Activity {
   }
 
   private void returnToMainMenu() {
+    closeRewards();
+    closeSavedGames();
+    dismissRewardReceipt();
+    if (rewards != null && !rewardSession.isEmpty()) {
+      try { rewards.abandon(rewardRunId, rewardSession.equals(rewardInventoryFreshSession)); }
+      catch (RuntimeException error) { Toast.makeText(this, error.getMessage(), Toast.LENGTH_LONG).show(); }
+    }
+    rewardSession = "";
+    rewardRunId = "";
+    loadingSave = null;
+    loadingSaveId = "";
+    restoringGame = false;
+    rewardTerminalFreshSession = "";
+    rewardInventoryFreshSession = "";
+    mapMusicLifecycle("dispose");
     dismissMainMenuDialog();
     mainMenuReturnPending = false;
     battleSession = "";
@@ -996,9 +1358,11 @@ public final class MainActivity extends Activity {
   }
 
   private void showBattleExitPanel() {
+    if (!isDuelBattle()) { returnToMainMenu(); return; }
     if (root == null || isFinishing() || isDestroyed() || !battleOutcome.isEmpty()) return;
     dismissMainMenuDialog();
     battleOutcome = "exited";
+    mapMusicLifecycle("dispose");
     hideLoadingPanel();
     TextView exit = new TextView(this);
     replayPanel = exit;
@@ -1026,6 +1390,7 @@ public final class MainActivity extends Activity {
     if ("victory".equals(battleOutcome) && !won) return;
     dismissMainMenuDialog();
     battleOutcome = won ? "victory" : "defeated";
+    mapMusicLifecycle("dispose");
     if (replayPanel != null) {
       if (won && !replayWon) {
         replayWon = true;
@@ -1059,7 +1424,9 @@ public final class MainActivity extends Activity {
         ? "WARZONE 1v1\n\nVICTORY\n\nEnemy command centre destroyed\n\nTap to play again"
         : "WARZONE 1v1\n\nDEFEAT\n\nYour command centre was destroyed\n\nTap to try again";
     return won
-        ? "WARZONE TOWERS\n\nVICTORY\n\nAll 30 rounds cleared\n\nTap to play again"
+        ? "WARZONE TOWERS\n\nVICTORY\n\nAll "
+            + MapLevelCatalog.get(this).level(battleLaunch != null ? battleLaunch.mapId : mapId).rounds
+            + " rounds cleared\n\nTap to play again"
         : "WARZONE TOWERS\n\nYOU HAVE FAILED\n\nCommand centre destroyed\n\nTap to try again";
   }
 
@@ -1078,10 +1445,12 @@ public final class MainActivity extends Activity {
   private void beginStartupAutomation() {
     if (startupAutomationStarted || webView == null || isFinishing()) return;
     startupAutomationStarted = true;
+    final String startupSession = battleSession;
     updateLoadingStatus("OPENING THE BATTLEFIELD…");
     webView.postDelayed(
-        () ->
-            evaluateTouchTapThen(
+        () -> {
+          if (!startupSession.equals(battleSession) || graphicsSetup != null) return;
+          evaluateTouchTapThen(
                 170,
                 392,
                 "Start Hosting",
@@ -1095,7 +1464,8 @@ public final class MainActivity extends Activity {
                         () -> {
                           updateLoadingStatus("PREPARING YOUR COMMAND CENTRE…");
                           decreaseVtolLimit(6);
-                        })),
+                        }));
+        },
         1200);
   }
 
@@ -1110,7 +1480,8 @@ public final class MainActivity extends Activity {
           () ->
               evaluateTouchTapThen(
                   585,
-                  isDuelBattle() || "td1".equals(battleLaunch.mapId) ? 30 : 70,
+                  isDuelBattle() ? 30 : 30
+                      + 40 * MapLevelCatalog.get(this).level(battleLaunch.mapId).humanPosition,
                   "Ready",
                   1500,
                   this::finishStartupAutomation));
@@ -1125,7 +1496,11 @@ public final class MainActivity extends Activity {
   }
 
   private void awaitBattlefieldReady(int attempt) {
-    if (webView == null || isFinishing()) return;
+    awaitBattlefieldReady(attempt, battleSession);
+  }
+
+  private void awaitBattlefieldReady(int attempt, String expectedSession) {
+    if (webView == null || isFinishing() || !expectedSession.equals(battleSession) || graphicsSetup != null) return;
     String script =
         "(() => {const r=window."
             + (isDuelBattle() ? "__warzoneDuel" : "__warzoneTowersWaves") + "?.report?.();"
@@ -1134,6 +1509,7 @@ public final class MainActivity extends Activity {
     webView.evaluateJavascript(
         script,
         result -> {
+          if (!expectedSession.equals(battleSession) || graphicsSetup != null) return;
           if ("true".equals(result)) {
             revealBattlefield();
             return;
@@ -1146,7 +1522,7 @@ public final class MainActivity extends Activity {
           }
           if (attempt == 40) updateLoadingStatus("ASSEMBLING THE BATTLEFIELD…");
           if (attempt == 120) updateLoadingStatus("FINALISING BATTLEFIELD…");
-          webView.postDelayed(() -> awaitBattlefieldReady(attempt + 1), 500);
+          webView.postDelayed(() -> awaitBattlefieldReady(attempt + 1, expectedSession), 500);
         });
   }
 
@@ -1154,26 +1530,33 @@ public final class MainActivity extends Activity {
     if (webView == null || isFinishing()) return;
     // Establish this map's battlefield-facing view while the splash still covers
     // the canvas. Waves and BASE must never change the camera direction.
-    faceOpponent();
+    if (!restoringGame) faceOpponent();
     showCombatHud();
     awaitInitialCamera(0);
   }
 
   private void awaitInitialCamera(int attempt) {
-    if (webView == null || isFinishing() || !battleOutcome.isEmpty()) return;
+    awaitInitialCamera(attempt, battleSession);
+  }
+
+  private void awaitInitialCamera(int attempt, String expectedSession) {
+    if (webView == null || isFinishing() || !battleOutcome.isEmpty() || graphicsSetup != null
+        || expectedSession.isEmpty() || !expectedSession.equals(battleSession) || rewardSetupFailed) return;
     webView.evaluateJavascript(
         "Boolean(window.__kalaWarzoneTouch?.report?.().cameraFacingPending===false"
             + (isDuelBattle()
                 ? "&&window.__warzoneDuel?.report?.().cameraRequested&&window.__warzoneDuel?.report?.().cameraReady"
-                : "") + ")",
+                : "&&window.WarzoneRewards?.ready===true") + ")",
         result -> {
+          if (!expectedSession.equals(battleSession) || graphicsSetup != null || rewardSetupFailed) return;
           if ("true".equals(result)) {
             hideLoadingPanel();
             webView.requestFocus();
           } else if (attempt < 60) {
-            webView.postDelayed(() -> awaitInitialCamera(attempt + 1), 250);
+            webView.postDelayed(() -> awaitInitialCamera(attempt + 1, expectedSession), 250);
           } else {
-            showEngineFailure("The starting camera did not become ready. Please start the battle again.");
+            showEngineFailure("The battlefield or match bonuses did not become ready. Tap to return Home.");
+            if (loading != null) loading.setOnClickListener(v -> returnToMainMenu());
           }
         });
   }
@@ -1239,6 +1622,7 @@ public final class MainActivity extends Activity {
 
   private void evaluateTouchTapThen(double x, double y, String label, long delayMs, Runnable next) {
     if (webView == null || isFinishing()) return;
+    final String expectedSession = battleSession;
     boolean lobby =
         "Start Hosting".equals(label) || "Limits".equals(label) || "Ready".equals(label);
     String script =
@@ -1246,11 +1630,71 @@ public final class MainActivity extends Activity {
     webView.evaluateJavascript(
         script,
         result -> {
+          if (!expectedSession.equals(battleSession) || graphicsSetup != null) return;
           Log.i(TAG, "Automatic Warzone " + label + " tap: " + result);
           if (next != null && webView != null && !isFinishing()) {
-            webView.postDelayed(next, delayMs);
+            webView.postDelayed(() -> {
+              if (expectedSession.equals(battleSession) && graphicsSetup == null) next.run();
+            }, delayMs);
           }
         });
+  }
+
+  private String mapMusicState() {
+    try {
+      String id = musicMapId;
+      id = MapLevelCatalog.normalizeId(id);
+      String trackId = mapMusicIndex.track(id);
+      MusicTrackCatalog.Track track = musicCatalog.find(trackId);
+      boolean cached = musicStore != null && musicStore.readyFile() != null;
+      JSONObject value = new JSONObject();
+      value.put("cached", cached);
+      value.put("enabled", cached && getPreferences(MODE_PRIVATE).getBoolean("music_enabled", false));
+      value.put("suspended", musicSuspended);
+      value.put("mapId", id);
+      value.put("trackId", trackId);
+      value.put("title", track.title);
+      value.put("author", track.author);
+      value.put("url", ORIGIN + "/warzone/optional/map-music/" + Uri.encode(trackId, "/"));
+      return value.toString();
+    } catch (Exception error) {
+      Log.w(TAG, "Map music metadata unavailable", error);
+      return "{\"cached\":false,\"enabled\":false,\"suspended\":true,\"mapId\":\"td2\",\"trackId\":\"\","
+          + "\"title\":\"Music unavailable\",\"author\":\"\",\"url\":\"\"}";
+    }
+  }
+
+  private WebResourceResponse mapMusicResponse(WebResourceRequest request, String id) {
+    MapMusicIndex.Slice track = mapMusicIndex == null ? null : mapMusicIndex.slice(id);
+    File archive = musicStore == null ? null : musicStore.readyFile();
+    if (track != null && archive != null) {
+      String range = null;
+      for (Map.Entry<String, String> header : request.getRequestHeaders().entrySet())
+        if ("Range".equalsIgnoreCase(header.getKey())) range = header.getValue();
+      try {
+        return MusicTrackResponse.open(archive, track, request.getMethod(), range, isolationHeaders());
+      } catch (IOException error) {
+        Log.w(TAG, "Optional music track unavailable", error);
+      }
+    }
+    Map<String, String> headers = isolationHeaders();
+    headers.put("Content-Length", "0");
+    return new WebResourceResponse("audio/ogg", null, 404, "Not Found", headers,
+        new ByteArrayInputStream(new byte[0]));
+  }
+
+  private void mapMusicLifecycle(String action) {
+    String session;
+    synchronized (musicPreferenceLock) {
+      session = musicSession;
+      if ("dispose".equals(action)) musicSession = "";
+    }
+    if (webView == null || session.isEmpty()) return;
+    String call = "dispose".equals(action) ? "window.WarzoneMusic?.dispose?.();"
+        : "window.WarzoneMusic?.setSuspended?.(" + ("suspend".equals(action) ? "true" : "false") + ");";
+    webView.evaluateJavascript(
+        "if(new URLSearchParams(location.search).get('battle_session')==="
+            + JSONObject.quote(session) + "){" + call + "}true", null);
   }
 
   private final class WarzoneAssetHandler implements WebViewAssetLoader.PathHandler {
@@ -1264,9 +1708,8 @@ public final class MainActivity extends Activity {
         return response404(path);
       }
       try {
-        if ("optional/high-v3.wz".equals(path) || "optional/music-v1.data".equals(path)) {
-          OptionalPackStore store = path.endsWith(".wz") ? graphicsStore : musicStore;
-          File archive = store == null ? null : store.readyFile();
+        if ("optional/music-v1.data".equals(path)) {
+          File archive = musicStore == null ? null : musicStore.readyFile();
           if (archive == null) return response404(path);
           return new WebResourceResponse(
               "application/octet-stream",
@@ -1400,9 +1843,23 @@ public final class MainActivity extends Activity {
   }
 
   @Override
+  protected void onPause() {
+    musicSuspended = true;
+    mapMusicLifecycle("suspend");
+    super.onPause();
+  }
+
+  @Override
+  protected void onResume() {
+    super.onResume();
+    musicSuspended = false;
+    mapMusicLifecycle("resume");
+  }
+
+  @Override
   protected void onDestroy() {
+    mapMusicLifecycle("dispose");
     dismissMainMenuDialog();
-    if (graphicsStore != null) graphicsStore.close();
     if (musicStore != null) musicStore.close();
     if (root != null && viewportListener != null) {
       root.removeOnLayoutChangeListener(viewportListener);
@@ -1481,6 +1938,9 @@ public final class MainActivity extends Activity {
 
   @Override
   public void onBackPressed() {
+    if (savedGamesView != null) { closeSavedGames(); return; }
+    if (rewardsView != null) { closeRewards(); return; }
+    if (rewardReceipt != null) { dismissRewardReceipt(); return; }
     if (mainMenuDialog != null) {
       mainMenuDialog.cancel();
       return;
@@ -1495,7 +1955,7 @@ public final class MainActivity extends Activity {
       return;
     }
     if (webView != null && graphicsSetup == null && loadingOverlay == null && replayPanel == null) {
-      webView.evaluateJavascript("window.__towersHtml?.back();true", null);
+      webView.evaluateJavascript("if(!window.WarzoneMusic?.closeMenu?.()) window.__towersHtml?.back();true", null);
       return;
     }
     super.onBackPressed();

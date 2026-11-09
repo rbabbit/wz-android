@@ -1,0 +1,120 @@
+{
+  "candidateAPK_SHA256": "5014b70184f120f0f237f33aef730981793b4dc982f255658290e4505370ad51",
+  "emulatorUsed": true,
+  "gameplayVerified": false,
+  "device": "emulator-5556",
+  "viewport": [
+    1080,
+    600
+  ],
+  "identity": {
+    "packageId": "com.rbabbit.warzonetowers.lab",
+    "device": "emulator-5556",
+    "candidateAPK_SHA256": "5014b70184f120f0f237f33aef730981793b4dc982f255658290e4505370ad51",
+    "installedPath": "/data/app/~~T3ysLfJGaj12cIiSDyISSg==/com.rbabbit.warzonetowers.lab-3ThjhpD_iC56dWO9K9CVaQ==/base.apk"
+  },
+  "checks": [
+    {
+      "name": "Installed APK SHA256 matches the exact delivery candidate",
+      "passed": true
+    },
+    {
+      "name": "Compact SAVE icon/header and Home Saved Games list visually inspected",
+      "passed": true
+    },
+    {
+      "name": "Real in-game Archangel and Ripple purchases deduct crystals and native Ripple build availability is enabled",
+      "passed": true
+    },
+    {
+      "name": "Greenhaven native QuickSave succeeds with the corrected internal level ID, native persistence completes and the private phone slot is created",
+      "passed": true
+    },
+    {
+      "name": "Home Load restores the original economic run into a fresh document with four native stationary truck IDs/positions and both purchase journals/allowances retained",
+      "passed": true
+    },
+    {
+      "name": "A genuine first wave completion pays exactly five crystals and shows a tiny notice inside the Rewards header",
+      "passed": true
+    },
+    {
+      "name": "After Home, force-stop and restart, the older wave-zero save loads with the earned balance of 300 retained and no repeated charge or starter gift",
+      "passed": true
+    },
+    {
+      "name": "Repeated Return-to-main-menu navigation and Saved Games Load restore input without the stock pause menu",
+      "passed": true
+    }
+  ],
+  "evidenceFiles": [
+    {
+      "path": "qa/0.27-saves/final-01-home.png",
+      "sha256": "d7e628f69848472e85fa44c87da9b7b89b7d327c2974acc6538237fa7594c3b0"
+    },
+    {
+      "path": "qa/0.27-saves/final-03c-ripple-selected.png",
+      "sha256": "b11c3f473bda0f0f5cfc8dd8818f220eda267aefaa55da6e91c4c3ffea594076"
+    },
+    {
+      "path": "qa/0.27-saves/final-04-ripple-bought.png",
+      "sha256": "f8666350e93cc675f00a3769ba9efbc434a8f484a5016eb614bf43f82c08b880"
+    },
+    {
+      "path": "qa/0.27-saves/final-06-saved-games.png",
+      "sha256": "c8aed350ae6ed184dbb85f582eed89f81a63fc16dd679444a6d033171a74d9e6"
+    },
+    {
+      "path": "qa/0.27-saves/final-08-wave-crystals.png",
+      "sha256": "23d90a69bf35e4acde1cfd4372acd687e7cdf251baed0127df97e418cd29e7ba"
+    },
+    {
+      "path": "qa/0.27-saves/final-09-restarted-saves.png",
+      "sha256": "4f18ef529f36815bc802fcc0cc310c1bb2618b261a40386d16a209d2865d897c"
+    },
+    {
+      "path": "qa/0.27-saves/final-10-restart-restored.png",
+      "sha256": "a849254b672def600f2e83dc7f2b31c7a4da2666dcdac282de5eb65fbad723db"
+    },
+    {
+      "path": "qa/0.27-saves/final-11-verified-restored.png",
+      "sha256": "b991cadeca7da813ea80384d33d18931ca5b50e5daadb34ca5c2efaf41a65b0d"
+    },
+    {
+      "path": "qa/0.27-saves/final-save-result.json",
+      "sha256": "8ca7faf6d2bdb7a258b04b39f26d28cfcfa6fea8e0569b889b4acdf5eeaa6e62"
+    },
+    {
+      "path": "qa/0.27-saves/final-native-save.json",
+      "sha256": "1cb9cb9c92ae0da686c1377fd43d593852fa6ed402f17e86444f4b24f6d93688"
+    },
+    {
+      "path": "qa/0.27-saves/final-live-purchase.json",
+      "sha256": "2f7e03e9caddcbf8f8c573fe69c9ab644d91f58b25e56ea87d9f8586eadbbed3"
+    },
+    {
+      "path": "qa/0.27-saves/final-restored.json",
+      "sha256": "7a7d683073d738320dc07417f5b86c35f13d37e37d65ab1e134929f8fafe6bef"
+    },
+    {
+      "path": "qa/0.27-saves/final-restart-restored.json",
+      "sha256": "26ed04f9fe4d2534380737ac4b1837e981edff9a2559cc951cc7dba7de976336"
+    },
+    {
+      "path": "qa/0.27-saves/final-wave-credit.json",
+      "sha256": "0ec6c0f40644ccc1ff86cb8e7f590a2f23375c3fcf4152324efbb39cc5271673"
+    },
+    {
+      "path": "qa/0.27-saves/final-durable-observation.json",
+      "sha256": "c59a232a63461326ad40587974511e5e4e48a0348cda1cdb2370ab2a3fdfafe1"
+    }
+  ],
+  "fixtureProvenance": "Ordinary installed Greenhaven with its supplied starting units. Real Android/ADB touches and native F7 saves; no world/save seeding, free units, debug boosts or fabricated wave packets. An earlier coordinate fixture selected Archangel before Ripple; both became genuine purchases and were retained in the round trip.",
+  "limits": [
+    "Focused save/reward journey only; no complete campaign or all-map gameplay pass.",
+    "All 46 native map-name lengths were checked in source; only Greenhaven and Iron Valley save/load were observed in the emulator, with Greenhaven rechecked on this exact APK.",
+    "Existing emulator black terrain remains as documented in prior QA; physical-device graphics and speaker output were not certified.",
+    "No building, research, production or long combat regression suite was requested or run."
+  ],
+  "priorInvestigation": "Initial Greenhaven QuickSave failure was traced to the native writeGameFile assertion for its 22-byte level name. Only that internal identifier was shortened. Defensive modifier cleanup is separate from the confirmed cause."
+}

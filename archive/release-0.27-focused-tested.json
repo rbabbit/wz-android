@@ -1,0 +1,194 @@
+{
+  "version": "0.27",
+  "versionCode": 27,
+  "candidateAPK_SHA256": "5014b70184f120f0f237f33aef730981793b4dc982f255658290e4505370ad51",
+  "scope": "Saved games, active-match Rewards and compact cleared-wave notice; focused exact-APK emulator checks.",
+  "emulatorUsed": true,
+  "gameplayVerified": false,
+  "verification": "Source/JVM fixtures, Android compilation, exact archive integrity and only the focused observations in the bound emulator report.",
+  "emulatorProof": {
+    "path": "qa/0.27-saves/focused-emulator-proof.json",
+    "sha256": "e1948326ee78a2841bb1c5fa1e596d688e0c905e7c17b0a93e3ed289382f278f"
+  },
+  "focusedEmulatorChecks": [
+    {
+      "name": "Installed APK SHA256 matches the exact delivery candidate",
+      "passed": true
+    },
+    {
+      "name": "Compact SAVE icon/header and Home Saved Games list visually inspected",
+      "passed": true
+    },
+    {
+      "name": "Real in-game Archangel and Ripple purchases deduct crystals and native Ripple build availability is enabled",
+      "passed": true
+    },
+    {
+      "name": "Greenhaven native QuickSave succeeds with the corrected internal level ID, native persistence completes and the private phone slot is created",
+      "passed": true
+    },
+    {
+      "name": "Home Load restores the original economic run into a fresh document with four native stationary truck IDs/positions and both purchase journals/allowances retained",
+      "passed": true
+    },
+    {
+      "name": "A genuine first wave completion pays exactly five crystals and shows a tiny notice inside the Rewards header",
+      "passed": true
+    },
+    {
+      "name": "After Home, force-stop and restart, the older wave-zero save loads with the earned balance of 300 retained and no repeated charge or starter gift",
+      "passed": true
+    },
+    {
+      "name": "Repeated Return-to-main-menu navigation and Saved Games Load restore input without the stock pause menu",
+      "passed": true
+    }
+  ],
+  "emulatorEvidenceFiles": [
+    {
+      "path": "qa/0.27-saves/final-01-home.png",
+      "sha256": "d7e628f69848472e85fa44c87da9b7b89b7d327c2974acc6538237fa7594c3b0"
+    },
+    {
+      "path": "qa/0.27-saves/final-03c-ripple-selected.png",
+      "sha256": "b11c3f473bda0f0f5cfc8dd8818f220eda267aefaa55da6e91c4c3ffea594076"
+    },
+    {
+      "path": "qa/0.27-saves/final-04-ripple-bought.png",
+      "sha256": "f8666350e93cc675f00a3769ba9efbc434a8f484a5016eb614bf43f82c08b880"
+    },
+    {
+      "path": "qa/0.27-saves/final-06-saved-games.png",
+      "sha256": "c8aed350ae6ed184dbb85f582eed89f81a63fc16dd679444a6d033171a74d9e6"
+    },
+    {
+      "path": "qa/0.27-saves/final-08-wave-crystals.png",
+      "sha256": "23d90a69bf35e4acde1cfd4372acd687e7cdf251baed0127df97e418cd29e7ba"
+    },
+    {
+      "path": "qa/0.27-saves/final-09-restarted-saves.png",
+      "sha256": "4f18ef529f36815bc802fcc0cc310c1bb2618b261a40386d16a209d2865d897c"
+    },
+    {
+      "path": "qa/0.27-saves/final-10-restart-restored.png",
+      "sha256": "a849254b672def600f2e83dc7f2b31c7a4da2666dcdac282de5eb65fbad723db"
+    },
+    {
+      "path": "qa/0.27-saves/final-11-verified-restored.png",
+      "sha256": "b991cadeca7da813ea80384d33d18931ca5b50e5daadb34ca5c2efaf41a65b0d"
+    },
+    {
+      "path": "qa/0.27-saves/final-save-result.json",
+      "sha256": "8ca7faf6d2bdb7a258b04b39f26d28cfcfa6fea8e0569b889b4acdf5eeaa6e62"
+    },
+    {
+      "path": "qa/0.27-saves/final-native-save.json",
+      "sha256": "1cb9cb9c92ae0da686c1377fd43d593852fa6ed402f17e86444f4b24f6d93688"
+    },
+    {
+      "path": "qa/0.27-saves/final-live-purchase.json",
+      "sha256": "2f7e03e9caddcbf8f8c573fe69c9ab644d91f58b25e56ea87d9f8586eadbbed3"
+    },
+    {
+      "path": "qa/0.27-saves/final-restored.json",
+      "sha256": "7a7d683073d738320dc07417f5b86c35f13d37e37d65ab1e134929f8fafe6bef"
+    },
+    {
+      "path": "qa/0.27-saves/final-restart-restored.json",
+      "sha256": "26ed04f9fe4d2534380737ac4b1837e981edff9a2559cc951cc7dba7de976336"
+    },
+    {
+      "path": "qa/0.27-saves/final-wave-credit.json",
+      "sha256": "0ec6c0f40644ccc1ff86cb8e7f590a2f23375c3fcf4152324efbb39cc5271673"
+    },
+    {
+      "path": "qa/0.27-saves/final-durable-observation.json",
+      "sha256": "c59a232a63461326ad40587974511e5e4e48a0348cda1cdb2370ab2a3fdfafe1"
+    }
+  ],
+  "changedAPKAssets": [
+    "assets/warzone-touch-controls.js",
+    "assets/warzone/levels/catalog.json",
+    "assets/warzone/rewards.js",
+    "assets/warzone/warzone2100.data",
+    "assets/warzone/warzone2100.js"
+  ],
+  "newAPKAssets": [
+    "assets/warzone/saved-games.js",
+    "assets/warzone/ui/icons/save.svg"
+  ],
+  "changedAPKMembers": [
+    "AndroidManifest.xml",
+    "assets/warzone-touch-controls.js",
+    "assets/warzone/rewards.js",
+    "assets/warzone/ui/icons/save.svg",
+    "classes3.dex",
+    "assets/warzone/levels/catalog.json",
+    "assets/warzone/saved-games.js",
+    "assets/warzone/warzone2100.data",
+    "assets/warzone/warzone2100.js"
+  ],
+  "removedAPKMembers": [],
+  "equivalentResourceIDRemappedXML": [],
+  "nativePreservation": {
+    "normalizedEngineBodySHA256": "260138aa32773884988b162469dbe59f885d6f6a225c4a3be8d3e5d8220a037d",
+    "originalDataBytes": 77625306,
+    "dataPrefixPreserved": true,
+    "compiledEngineBodyUnchanged": true,
+    "wasmUnchanged": true,
+    "changedVFSFiles": [
+      "/data/mp/addon.lev",
+      "/data/mp/tests/towers-config-router-018.js",
+      "/data/mp/tests/warzone-towers-commands.js",
+      "/data/mp/tests/warzone-towers-rewards.js",
+      "/data/mp/tests/warzonetowers-beginner.json"
+    ],
+    "addedVFSFiles": [],
+    "unchangedResolvedVFSFiles": 4287,
+    "internalSaveNameCorrection": {
+      "Greenhaven-Beginner-T1": "Greenhaven-T1"
+    },
+    "mapCatalogOtherwiseUnchanged": true,
+    "all46NativeNamesFitSavedGameHeader": true
+  },
+  "mapContentMusicAndDuelPayloadUnchanged": true,
+  "preservedOriginalSourceFiles": 1230,
+  "preservedAPKAssets": 519,
+  "payloadProof": {
+    "path": "archive/rewards-0.27-payload.json",
+    "sha256": "c10e9b040098e7701e95e1fb99a3e6bf3aefa6abbc75633a116a57d8798471cd"
+  },
+  "sourceCheckReports": [
+    {
+      "path": "archive/rewards-native-0.27-checks.json",
+      "sha256": "665c8ccd74f1a272370b70ab849795cd76a08decef2d73f7ab1a683b2fdd7ab5"
+    },
+    {
+      "path": "archive/reward-ledger-0.27-checks.json",
+      "sha256": "7b331ba88cd55fb87eb0a1b51a2e296812ebaf0dcbc8ee01e4aa68569cd3078a"
+    },
+    {
+      "path": "archive/save-store-0.27-checks.json",
+      "sha256": "cf29f45637a3240832f51236d766702291dbbb82fb2f6cbbe5671d7d463cab9e"
+    },
+    {
+      "path": "archive/saved-games-web-0.27-checks.json",
+      "sha256": "172067e56160448f9868d512c56c3f6c4bedbe005b88129075a6d4dc2da753b7"
+    },
+    {
+      "path": "archive/rewards-web-0.27-checks.json",
+      "sha256": "2919ecee62f27e6f58197e3a4b6bcda3d2e7e6492107c6f02478261f4e0fbbc7"
+    },
+    {
+      "path": "qa/0.27-saves/source-review.json",
+      "sha256": "4a791ebb8875d701735aae5b5734dd4cce133c0fceea3d68ca973865873816ea"
+    }
+  ],
+  "fallbackRecord": {
+    "path": "archive/fallback-0.27.json",
+    "sha256": "60327ce1662e83a80277143c0fc9e5a92ab04860301fa8132f3e22d75bb39f4d"
+  },
+  "sourceInventory": "git ls-files --cached --others --exclude-standard; filtered caches/private/transient files",
+  "gitMetadataIncluded": false,
+  "recordedUTC": "2026-11-09T14:34:15.731990Z"
+}

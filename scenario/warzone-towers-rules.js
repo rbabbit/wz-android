@@ -5,3 +5,4 @@ include("tests/warzone-towers-waves.js");
 include("tests/warzone-towers-objective.js");
 include("tests/warzone-towers-bridge.js");
 include("tests/warzone-towers-commands.js");
+include("tests/warzone-towers-rewards.js");

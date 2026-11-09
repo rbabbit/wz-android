@@ -285,7 +285,6 @@
       }
       }
     </style>
-    <script src="graphics-loader.js"></script>
     <script src="native-notification-prefs.js"></script>
     <script src="music-catalog.js"></script>
     <script src="music-loader.js"></script>
@@ -1309,9 +1308,7 @@ function prepareDuelModule(module, config) {
               + 'groupmenu=0\n'
               + 'optionsButtonVisibility=0\n'
               + 'cameraAccel=0\n';
-            const graphicsConfig = window.WarzoneGraphics?.high
-              ? 'terrainMode=2\nterrainShadingQuality=1024\ntextureSize=2048\n'
-              : 'terrainMode=1\nterrainShadingQuality=512\ntextureSize=2048\n';
+            const graphicsConfig = 'terrainMode=1\nterrainShadingQuality=512\ntextureSize=2048\n';
             let previousConfig = '';
             try { previousConfig = Module.FS.readFile(configPath, { encoding: 'utf8' }); } catch (_) {}
             const audioLevels = ['cdvol', 'fxvol', 'voicevol'].map(key => {
@@ -1336,7 +1333,6 @@ function prepareDuelModule(module, config) {
       }
   
       Module['preRun'].push(blockNightPrepareCustomMapDirectory);
-      Module['preRun'].push(module => window.WarzoneGraphics.prepare(module));
       Module['preRun'].push(module => window.WarzoneMusic.prepare(module));
       Module['preRun'].push(wz_pre_run_fixup_canvas);
       Module['postRun'].push(wz_handle_post_run);

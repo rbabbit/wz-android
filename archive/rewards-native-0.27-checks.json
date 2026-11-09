@@ -1,0 +1,604 @@
+{
+  "scope": "Native API source fixtures only; no emulator, actual native construction/combat or device save/load verified.",
+  "emulatorUsed": false,
+  "gameplayVerified": false,
+  "sources": [
+    {
+      "path": "app/src/main/assets/warzone/levels/catalog.json",
+      "bytes": 50629,
+      "sha256": "29ba1fc05fd98fa1c8984f2cd6c9fdc5da478e664aee452813278bf960743452"
+    },
+    {
+      "path": "map/greenhaven-beginner/level.lev",
+      "bytes": 160,
+      "sha256": "febbbecac680146e14927ebc0cd69f33f5b2cee3e1e0337ddd15034e56ff36d0"
+    },
+    {
+      "path": "scenario/beginner/config-router.js",
+      "bytes": 413,
+      "sha256": "c4979a5cb9e135a8fc7255919f088885a39ad162d9f0c048132e2cd176d2fa93"
+    },
+    {
+      "path": "scenario/warzone-towers-catalog.json",
+      "bytes": 50233,
+      "sha256": "d70d5672fa1865411b8e574e67e770dc3b13956a6e5710f37e69396f4ff3453e"
+    },
+    {
+      "path": "scenario/warzone-towers-commands.js",
+      "bytes": 53223,
+      "sha256": "0449fe0f15290dbdf6e03d7c1b61d4af5257677fb7b4f7c0803eb4baec2ab0b2"
+    },
+    {
+      "path": "scenario/warzone-towers-objective.js",
+      "bytes": 702,
+      "sha256": "209975c81361852a5ef81716eeeb5350cf29f8fe4ff6b23ff16b3f76c58f7495"
+    },
+    {
+      "path": "scenario/warzone-towers-rewards.js",
+      "bytes": 25089,
+      "sha256": "6f4c40bd6aa6a73451931b5ff8a14c116f794154d6ff661a63c00004ef8f7032"
+    },
+    {
+      "path": "scenario/warzone-towers-rules.js",
+      "bytes": 372,
+      "sha256": "ca1a21cc6fe094a1cbb2c12c689bb20c489843724485ed231d0d053f32413793"
+    },
+    {
+      "path": "scenario/warzone-towers-waves.js",
+      "bytes": 7517,
+      "sha256": "977faf58473c139c205fc3c36be368e852e7dd283900b20372caa77f18f25630"
+    },
+    {
+      "path": "scenario/warzonetowers-beginner.json",
+      "bytes": 754,
+      "sha256": "b1d172cfb25046cc289442014913257d054900cb1d9fa9ce52ecde6a0b8ba14d"
+    },
+    {
+      "path": "tools/build-greenhaven.py",
+      "bytes": 13919,
+      "sha256": "77ac752d2dfadbe87a5c29f3dc229e7e38a5d9f77f85a9ef69a8f49b68276ec9"
+    },
+    {
+      "path": "tools/build-levels-019.py",
+      "bytes": 18794,
+      "sha256": "a5da14d0603681d1bed57d6106cb1f5dd335f530202ae093468229b0e12006cd"
+    },
+    {
+      "path": "tools/check-map-save-027.py",
+      "bytes": 4523,
+      "sha256": "bbca4f11bd779a50124412a8ef23543f14865ca27e7d2571a2abdc8e98bacab5"
+    },
+    {
+      "path": "tools/check-rewards-native-027.cjs",
+      "bytes": 29213,
+      "sha256": "442d2c98d0d14d5d4dffdb4f5fa8811c29d259c1bd806f3e6ff9627f8536c44a"
+    },
+    {
+      "path": "tools/embed-rewards-027.py",
+      "bytes": 13384,
+      "sha256": "a6345d7efba05988c851adbc92547c34941f48e95874059e7e34600b4ce0801d"
+    },
+    {
+      "path": "tools/embed-warzone-towers.ps1",
+      "bytes": 7864,
+      "sha256": "4abd371cf48f60040be69ea1b42940258f2ac614642e664c44403eaad8892f28"
+    },
+    {
+      "path": "tools/test-command-bridge.cjs",
+      "bytes": 17366,
+      "sha256": "b9fbd8f391b79d7d8476a9328fc0685fa7e5bc3d4d6c61dabfccacae11859b5d"
+    },
+    {
+      "path": "vendor/tower-defense/mod/multiplay/script/mods/Spawner.js",
+      "bytes": 2033,
+      "sha256": "e3e9599bde2a795230958429c6a9992e7d1ac84533aefd6e7f45c7dbb9a501d0"
+    },
+    {
+      "path": "vendor/tower-defense/mod/multiplay/script/mods/configReader.js",
+      "bytes": 1070,
+      "sha256": "8b611f4c0bd687420f30b4e2f52f9d7c6ca9e5684199e886769259985abae59c"
+    }
+  ],
+  "nativeMapSaveNames": {
+    "passed": true,
+    "emulatorUsed": false,
+    "gameplayVerified": false,
+    "scope": "Source names and native 20-byte save buffer contract; no real native save/load execution.",
+    "nativeMaxLevelSize": 20,
+    "maximumAllowedUtf8Bytes": 19,
+    "levelCount": 46,
+    "changedInternalLevelNames": {
+      "Greenhaven-Beginner-T1": "Greenhaven-T1"
+    },
+    "uiCatalogOtherwiseUnchanged": true,
+    "challengeOtherwiseUnchanged": true,
+    "routerOnlyNameMatchChanged": true,
+    "addonRegistrationOnlyNameChanged": true,
+    "allLevels": [
+      {
+        "id": "beginner",
+        "nativeLevel": "Greenhaven-T1",
+        "utf8Bytes": 13,
+        "saveNameFits": true,
+        "challenge": "scenario/warzonetowers-beginner.json",
+        "challengeSHA256": "b1d172cfb25046cc289442014913257d054900cb1d9fa9ce52ecde6a0b8ba14d"
+      },
+      {
+        "id": "td1",
+        "nativeLevel": "td1_v3-T1",
+        "utf8Bytes": 9,
+        "saveNameFits": true,
+        "challenge": "scenario/warzonetowers-td1.json",
+        "challengeSHA256": "b3234839d7e87975109c438669edbcbd2c414823d34aa53ca98cd346e33b284d"
+      },
+      {
+        "id": "td2",
+        "nativeLevel": "TowerDefense2_m-T1",
+        "utf8Bytes": 18,
+        "saveNameFits": true,
+        "challenge": "scenario/warzonetowers.json",
+        "challengeSHA256": "984cdae57c5b1947b30905467c6fa939a6e14c5e758a740d63d6858f3183a83e"
+      },
+      {
+        "id": "easy01",
+        "nativeLevel": "WT-E01-T1",
+        "utf8Bytes": 9,
+        "saveNameFits": true,
+        "challenge": "scenario/levels/easy01.json",
+        "challengeSHA256": "d916d3805882aa3101f15f39658832c0f2a2609bbf18834dee4c5033b430c226"
+      },
+      {
+        "id": "easy02",
+        "nativeLevel": "WT-E02-T1",
+        "utf8Bytes": 9,
+        "saveNameFits": true,
+        "challenge": "scenario/levels/easy02.json",
+        "challengeSHA256": "d8b6c5cd7948718b054c8e4dba2a86a9d1765fd1ae6c80c45263fb4698208f4b"
+      },
+      {
+        "id": "easy03",
+        "nativeLevel": "WT-E03-T1",
+        "utf8Bytes": 9,
+        "saveNameFits": true,
+        "challenge": "scenario/levels/easy03.json",
+        "challengeSHA256": "689d64fe740562f048ded4e981c67af8aecd7a5b831f22b351e068023943565e"
+      },
+      {
+        "id": "easy04",
+        "nativeLevel": "WT-E04-T1",
+        "utf8Bytes": 9,
+        "saveNameFits": true,
+        "challenge": "scenario/levels/easy04.json",
+        "challengeSHA256": "7a69ce23263822175cebe51f057fd4ba75030a280a2ee5cbe18bce83fef2e9c5"
+      },
+      {
+        "id": "easy05",
+        "nativeLevel": "WT-E05-T1",
+        "utf8Bytes": 9,
+        "saveNameFits": true,
+        "challenge": "scenario/levels/easy05.json",
+        "challengeSHA256": "39b1ca05ad9afbc029b6e3a1784686da25d06e5405f1e5cb594110d402eac900"
+      },
+      {
+        "id": "easy06",
+        "nativeLevel": "WT-E06-T1",
+        "utf8Bytes": 9,
+        "saveNameFits": true,
+        "challenge": "scenario/levels/easy06.json",
+        "challengeSHA256": "81f35d9d9cc685646da98b2c92e16da5f954aa8802740a529a4e23da879e22a2"
+      },
+      {
+        "id": "easy07",
+        "nativeLevel": "WT-E07-T1",
+        "utf8Bytes": 9,
+        "saveNameFits": true,
+        "challenge": "scenario/levels/easy07.json",
+        "challengeSHA256": "08236eb2f07fc32b5355c3ef98579ddf3bd36b17493bb2b2a65f141170bd0840"
+      },
+      {
+        "id": "easy08",
+        "nativeLevel": "WT-E08-T1",
+        "utf8Bytes": 9,
+        "saveNameFits": true,
+        "challenge": "scenario/levels/easy08.json",
+        "challengeSHA256": "ad41a5c955fd81e0e8a73bd454c1fe71e87106d4765cd885a8985444ae740302"
+      },
+      {
+        "id": "easy09",
+        "nativeLevel": "WT-E09-T1",
+        "utf8Bytes": 9,
+        "saveNameFits": true,
+        "challenge": "scenario/levels/easy09.json",
+        "challengeSHA256": "e16d89df3d2d8317ce72d23d032967f1b086d8cfa942fc6efb6400b28a183186"
+      },
+      {
+        "id": "easy10",
+        "nativeLevel": "WT-E10-T1",
+        "utf8Bytes": 9,
+        "saveNameFits": true,
+        "challenge": "scenario/levels/easy10.json",
+        "challengeSHA256": "76ccf44c8e2ab634d10b40f754eb1e201622d2d694b44ad1fc06a9397bf669c4"
+      },
+      {
+        "id": "easy11",
+        "nativeLevel": "WT-E11-T1",
+        "utf8Bytes": 9,
+        "saveNameFits": true,
+        "challenge": "scenario/levels/easy11.json",
+        "challengeSHA256": "cc2d12100c06f9ec1d3c58a9370b8dbedc440de6fc26f5eeae10d867f0f93ec3"
+      },
+      {
+        "id": "easy12",
+        "nativeLevel": "WT-E12-T1",
+        "utf8Bytes": 9,
+        "saveNameFits": true,
+        "challenge": "scenario/levels/easy12.json",
+        "challengeSHA256": "0c9bba9f4c191006ec9f6ab81e6bdfd8e9da342fbc3cab630f6c4aa70d32556a"
+      },
+      {
+        "id": "easy13",
+        "nativeLevel": "WT-E13-T1",
+        "utf8Bytes": 9,
+        "saveNameFits": true,
+        "challenge": "scenario/levels/easy13.json",
+        "challengeSHA256": "2d06d751e95ab92a59c534736460442670196bbdb34f8e3a22b02fd47c2fe1d4"
+      },
+      {
+        "id": "easy14",
+        "nativeLevel": "WT-E14-T1",
+        "utf8Bytes": 9,
+        "saveNameFits": true,
+        "challenge": "scenario/levels/easy14.json",
+        "challengeSHA256": "1576ecceaacb6a9a39b737fbf44f43d50b362112f4a66f914af6b8166e7b5765"
+      },
+      {
+        "id": "easy15",
+        "nativeLevel": "WT-E15-T1",
+        "utf8Bytes": 9,
+        "saveNameFits": true,
+        "challenge": "scenario/levels/easy15.json",
+        "challengeSHA256": "b440f99a90411922aefd2c6e38fb27d229fe326437894d15820990a96abff200"
+      },
+      {
+        "id": "medium01",
+        "nativeLevel": "WT-M01-T1",
+        "utf8Bytes": 9,
+        "saveNameFits": true,
+        "challenge": "scenario/levels/medium01.json",
+        "challengeSHA256": "d990eefed999c48cf5328c624d712d3875ca5fc037101bf52bd1fa14eb4faf7d"
+      },
+      {
+        "id": "medium02",
+        "nativeLevel": "WT-M02-T1",
+        "utf8Bytes": 9,
+        "saveNameFits": true,
+        "challenge": "scenario/levels/medium02.json",
+        "challengeSHA256": "40b2c5c6719800b4a072156aae0ec620695e21858e1813b04062b411f4fc5984"
+      },
+      {
+        "id": "medium03",
+        "nativeLevel": "WT-M03-T1",
+        "utf8Bytes": 9,
+        "saveNameFits": true,
+        "challenge": "scenario/levels/medium03.json",
+        "challengeSHA256": "a5e7f5a6549cdab07709185f84f9959856000072606acc8f58a5587b1a397985"
+      },
+      {
+        "id": "medium04",
+        "nativeLevel": "WT-M04-T1",
+        "utf8Bytes": 9,
+        "saveNameFits": true,
+        "challenge": "scenario/levels/medium04.json",
+        "challengeSHA256": "0fa9405e4f7e93482ef1ea21ae8603dfac500ce76af37f433f784cbc7b15faf2"
+      },
+      {
+        "id": "medium05",
+        "nativeLevel": "WT-M05-T1",
+        "utf8Bytes": 9,
+        "saveNameFits": true,
+        "challenge": "scenario/levels/medium05.json",
+        "challengeSHA256": "d9c739a7a1c8df3a6a71a888bf78cff9aa03387621fdd2533e039b1d3e038552"
+      },
+      {
+        "id": "medium06",
+        "nativeLevel": "WT-M06-T1",
+        "utf8Bytes": 9,
+        "saveNameFits": true,
+        "challenge": "scenario/levels/medium06.json",
+        "challengeSHA256": "f7bddb9195b538896621f1833cc49ac4b988a04708236349487ef703dcd0b031"
+      },
+      {
+        "id": "medium07",
+        "nativeLevel": "WT-M07-T1",
+        "utf8Bytes": 9,
+        "saveNameFits": true,
+        "challenge": "scenario/levels/medium07.json",
+        "challengeSHA256": "b669e2cb1574c0218055b94d267723d0bab61ffd7f1fd94a1721c2c133544352"
+      },
+      {
+        "id": "medium08",
+        "nativeLevel": "WT-M08-T1",
+        "utf8Bytes": 9,
+        "saveNameFits": true,
+        "challenge": "scenario/levels/medium08.json",
+        "challengeSHA256": "4458a3c978bf604310cad185e372c21efc83c58c31d5470e3ef4d288d3d315aa"
+      },
+      {
+        "id": "medium09",
+        "nativeLevel": "WT-M09-T1",
+        "utf8Bytes": 9,
+        "saveNameFits": true,
+        "challenge": "scenario/levels/medium09.json",
+        "challengeSHA256": "affdc814e0d484599eb6a5753a0a1a7e79be8ffbafb7a6994a92438c0a961685"
+      },
+      {
+        "id": "medium10",
+        "nativeLevel": "WT-M10-T1",
+        "utf8Bytes": 9,
+        "saveNameFits": true,
+        "challenge": "scenario/levels/medium10.json",
+        "challengeSHA256": "ab40f7e35e5f83ca2e16d8327e1b7c13e62032305be2b424f567f7a3c5135a3e"
+      },
+      {
+        "id": "medium11",
+        "nativeLevel": "WT-M11-T1",
+        "utf8Bytes": 9,
+        "saveNameFits": true,
+        "challenge": "scenario/levels/medium11.json",
+        "challengeSHA256": "d1108266227c7f276ffaf8699da67b268ce5eb988d9e862f5e0aef387df4a12a"
+      },
+      {
+        "id": "medium12",
+        "nativeLevel": "WT-M12-T1",
+        "utf8Bytes": 9,
+        "saveNameFits": true,
+        "challenge": "scenario/levels/medium12.json",
+        "challengeSHA256": "6a5f9c906505f2a76c58137e815242cf38709bc90b706b8fd873809a1463816b"
+      },
+      {
+        "id": "medium13",
+        "nativeLevel": "WT-M13-T1",
+        "utf8Bytes": 9,
+        "saveNameFits": true,
+        "challenge": "scenario/levels/medium13.json",
+        "challengeSHA256": "4d9962890550c83e846cbe9c2dd4e851a3b5373f4a781f8c90bdc84e8982f549"
+      },
+      {
+        "id": "medium14",
+        "nativeLevel": "WT-M14-T1",
+        "utf8Bytes": 9,
+        "saveNameFits": true,
+        "challenge": "scenario/levels/medium14.json",
+        "challengeSHA256": "69096d74a79c16bd6444903c14e5d421fe33ab32ebe68862fad53ec97ef11d45"
+      },
+      {
+        "id": "medium15",
+        "nativeLevel": "WT-M15-T1",
+        "utf8Bytes": 9,
+        "saveNameFits": true,
+        "challenge": "scenario/levels/medium15.json",
+        "challengeSHA256": "ae67c255bf676154f2211bc7c348deb46ed4c7275c402a5b401b4e1860d92a6e"
+      },
+      {
+        "id": "hard01",
+        "nativeLevel": "WT-H01-T1",
+        "utf8Bytes": 9,
+        "saveNameFits": true,
+        "challenge": "scenario/levels/hard01.json",
+        "challengeSHA256": "d86e6c2c861229902f8bc636eff642745b6f196231d8f0b8a7e66f96289b5359"
+      },
+      {
+        "id": "hard02",
+        "nativeLevel": "WT-H02-T1",
+        "utf8Bytes": 9,
+        "saveNameFits": true,
+        "challenge": "scenario/levels/hard02.json",
+        "challengeSHA256": "e6cff9c64afdb2de234343811b66967e8965eb6e65d3f19ceabe8a56c2e25ae2"
+      },
+      {
+        "id": "hard03",
+        "nativeLevel": "WT-H03-T1",
+        "utf8Bytes": 9,
+        "saveNameFits": true,
+        "challenge": "scenario/levels/hard03.json",
+        "challengeSHA256": "68d7b162ed3fde70f98a67bb586305024883c9e33e316b7b83d635da22be49e9"
+      },
+      {
+        "id": "hard04",
+        "nativeLevel": "WT-H04-T1",
+        "utf8Bytes": 9,
+        "saveNameFits": true,
+        "challenge": "scenario/levels/hard04.json",
+        "challengeSHA256": "26e01c18513f2345a2653c02b3ba3eca6491759ddefc31264aa13bc85e528d72"
+      },
+      {
+        "id": "hard05",
+        "nativeLevel": "WT-H05-T1",
+        "utf8Bytes": 9,
+        "saveNameFits": true,
+        "challenge": "scenario/levels/hard05.json",
+        "challengeSHA256": "969767fcfe05ee8e504305d8a9e87e3e7692dac7afdf1f7b2b1e3609242cab00"
+      },
+      {
+        "id": "hard06",
+        "nativeLevel": "WT-H06-T1",
+        "utf8Bytes": 9,
+        "saveNameFits": true,
+        "challenge": "scenario/levels/hard06.json",
+        "challengeSHA256": "8bb7209f8e4151e193e68449bf2607e3e03a84c7a31827f256dd489c180c50d8"
+      },
+      {
+        "id": "hard07",
+        "nativeLevel": "WT-H07-T1",
+        "utf8Bytes": 9,
+        "saveNameFits": true,
+        "challenge": "scenario/levels/hard07.json",
+        "challengeSHA256": "087bdfa1eec2f1cd07d022858303d69355f02e804a7ee65ea5ad577ec74e910a"
+      },
+      {
+        "id": "hard08",
+        "nativeLevel": "WT-H08-T1",
+        "utf8Bytes": 9,
+        "saveNameFits": true,
+        "challenge": "scenario/levels/hard08.json",
+        "challengeSHA256": "2dc3d07ce7d661b15510064408971f8f225d6ffcd705d20c0052e20064b69184"
+      },
+      {
+        "id": "hard09",
+        "nativeLevel": "WT-H09-T1",
+        "utf8Bytes": 9,
+        "saveNameFits": true,
+        "challenge": "scenario/levels/hard09.json",
+        "challengeSHA256": "83680a328c68d2828a610312e9d7665d256ebf90bcb270efd49a21f020d9c73b"
+      },
+      {
+        "id": "hard10",
+        "nativeLevel": "WT-H10-T1",
+        "utf8Bytes": 9,
+        "saveNameFits": true,
+        "challenge": "scenario/levels/hard10.json",
+        "challengeSHA256": "c1ecd9bbb4aa7b3e55bd13ad790f415fceca8ebfe5431bbc6381874530dbbdfe"
+      },
+      {
+        "id": "hard11",
+        "nativeLevel": "WT-H11-T1",
+        "utf8Bytes": 9,
+        "saveNameFits": true,
+        "challenge": "scenario/levels/hard11.json",
+        "challengeSHA256": "758be979186b0b4939a34e05853e9f1d164ac7e355c1bb5393c98b9954d55976"
+      },
+      {
+        "id": "hard12",
+        "nativeLevel": "WT-H12-T1",
+        "utf8Bytes": 9,
+        "saveNameFits": true,
+        "challenge": "scenario/levels/hard12.json",
+        "challengeSHA256": "b50b83a5c14a08a92e32693ad71c9a3438cc0abb9ac43a3bb968b755e256b0e8"
+      },
+      {
+        "id": "hard13",
+        "nativeLevel": "WT-H13-T1",
+        "utf8Bytes": 9,
+        "saveNameFits": true,
+        "challenge": "scenario/levels/hard13.json",
+        "challengeSHA256": "cb3a067440c9a4f94863ad56e9955ee220a7be2de194fe5233aff5a24ac2bac6"
+      }
+    ]
+  },
+  "nativeRewardFixtures": {
+    "emulatorUsed": false,
+    "gameplayVerified": false,
+    "passed": 33,
+    "checks": [
+      "No purchased items preserve ordinary native availability, rates, power and commands",
+      "All17 reviewed item types map to actual catalog structures and only purchased types unlock",
+      "Three mixed fortresses are allowed; fourth, excess LasSat, unknown and invalid stock fail closed",
+      "Bulk artillery reserves the paid quantity, cancellation releases unplaced stock, duplicate apply does not refill",
+      "Each foundation consumes one item permanently; unused stock remains transferable after destruction and load",
+      "Destroying a just-created foundation before a timer sample consumes it; duplicate callbacks do not double-spend",
+      "Naturally researched structures preserve ordinary allowance and unused paid stock",
+      "Research and supply retain once-only, natural-upgrade and native-load semantics with expanded stock",
+      "Old0.25 native state migrates without renewing a consumed fortress or duplicating supply",
+      "Session and changed inventory conflicts cannot apply a second set of bonuses",
+      "LasSat requires an owned completed selected command post and an actual visible enemy target",
+      "LasSat uses the native damaged-structure doubled fire pause",
+      "A wave pays only after all authored spawn batches are issued, queued enemies spawned and every own unit killed",
+      "Overlapping waves retain separate queued templates and native unitIDs; a later clear cannot clear its survivors",
+      "Starting/skipping rounds and removing units without destruction callbacks never manufacture completed waves",
+      "HQ loss prevents post-loss clears and preserves only waves actually cleared beforehand",
+      "Terminal wave packet includes actual completed IDs and fresh native remaining inventory",
+      "Native save-state retains wave/unit associations and tagged pending spawn entries without awarding twice",
+      "Legacy0.25 native saves and failed native spawns do not receive guessed wave credits",
+      "Midgame stock and supply commit once per transaction, including duplicate acknowledgements",
+      "Adding stock preserves spent foundation IDs and adds only the paid difference",
+      "The three-fortress limit counts all purchased copies even after they are destroyed",
+      "Midgame research is applied once and active research or supply cannot be repurchased",
+      "Session and transaction/config conflicts fail closed without applying more items",
+      "Saved transaction journals prevent regranting midgame purchases after native load",
+      "Partial native application remains pending and retry resumes without duplicating its already-added stock",
+      "Cumulative ordinary stock and LasSat limits reject cleanly without resetting existing usage",
+      "Only clean matching transaction rejection produces a refund proof; committed or pending effects never do",
+      "Restoring older quota is capped by the phone allowance and never renews spent tokens",
+      "Unused same-type purchases after a save survive restore without regranting older spent quantities",
+      "A type bought after saving receives only its phone-funded unused stock",
+      "Resume can restore a funded research flag once but never adds another supply payment to saved world power",
+      "Invalid resume UUID, quantities and allowance caps fail before changing native entitlements"
+    ],
+    "types": {
+      "fortress": {
+        "id": "X-Super-Cannon",
+        "research": "R-Defense-Super-Cannon",
+        "fortress": true
+      },
+      "missile_fortress": {
+        "id": "X-Super-Missile",
+        "research": "R-Defense-Super-Missile",
+        "fortress": true
+      },
+      "mass_driver_fortress": {
+        "id": "X-Super-MassDriver",
+        "research": "R-Defense-MassDriver",
+        "fortress": true
+      },
+      "rocket_bastion": {
+        "id": "X-Super-Rocket",
+        "research": "R-Defense-Super-Rocket",
+        "fortress": true
+      },
+      "gauss_hardpoint": {
+        "id": "WallTower-Rail3",
+        "research": "R-Defense-WallTower-Rail3"
+      },
+      "gauss_emplacement": {
+        "id": "Emplacement-Rail3",
+        "research": "R-Defense-Rail3"
+      },
+      "scourge_hardpoint": {
+        "id": "WallTower-Atmiss",
+        "research": "R-Defense-WallTower-A-Tmiss"
+      },
+      "pulse_hardpoint": {
+        "id": "WallTower-PulseLas",
+        "research": "R-Defense-WallTower-PulseLas"
+      },
+      "heavy_laser": {
+        "id": "Emplacement-HeavyLaser",
+        "research": "R-Defense-HeavyLas"
+      },
+      "emp_hardpoint": {
+        "id": "WallTower-EMP",
+        "research": "R-Defense-EMPCannon"
+      },
+      "emp_mortar": {
+        "id": "Emplacement-MortarEMP",
+        "research": "R-Defense-EMPMortar"
+      },
+      "archangel": {
+        "id": "Emplacement-HvART-pit",
+        "research": "R-Defense-HvyArtMissile"
+      },
+      "ripple": {
+        "id": "Emplacement-Rocket06-IDF",
+        "research": "R-Defense-IDFRocket"
+      },
+      "hellstorm": {
+        "id": "Emplacement-RotHow",
+        "research": "R-Defense-RotHow"
+      },
+      "ground_shaker": {
+        "id": "Emplacement-Howitzer150",
+        "research": "R-Defense-HvyHowitzer"
+      },
+      "wide_sensor": {
+        "id": "Sys-SensoTowerWS",
+        "research": "R-Sys-Sensor-WSTower"
+      },
+      "laser_sat": {
+        "id": "A0LasSatCommand",
+        "research": "R-Wpn-LasSat"
+      }
+    }
+  },
+  "existingCommandBridgePassed": true,
+  "existingCommandBridgeOutput": "PASS: FIFO builds, manual/automatic workers, sticky sessions, STOP, deduplication, validation, factory queues and bounded 100-job polling\nPASS: construction ETA follows actual worker actions/upgrades, pauses and power; modules use observed work; journal never replaces native orders\nPASS: a snapped 2x2 foundation binds to its own queue entry without matching older adjacent buildings\nPASS: native queue handoff preserves progress/completion; sustained cancellation still interrupts"
+}

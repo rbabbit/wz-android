@@ -1,0 +1,104 @@
+{
+  "scope": "Portable inventory, actual cleared-wave tracking and native LasSat targeting via scenario scripts; metadata append/reindex only.",
+  "baselineAPK": "C:\\timerApp\\Warzone-Towers-0.25.apk",
+  "baselineSHA256": "ccd65b6eb79394f2923334be553134259118851430a01de01ca3ec0ad75fc6fa",
+  "emulatorUsed": false,
+  "gameplayVerified": false,
+  "dataPrefixPreserved": true,
+  "originalDataBytes": 77549143,
+  "originalDataSHA256": "ee728bdd6b018f3a7bee9a943c30a4929d668b22375f37ba77fdd39e2733b1bd",
+  "normalizedEngineBodyUnchanged": true,
+  "normalizedEngineBodySHA256": "260138aa32773884988b162469dbe59f885d6f6a225c4a3be8d3e5d8220a037d",
+  "wasmUnchanged": true,
+  "wasmSHA256": "d909a4ecb7475643107fa6f489279562c00deae1e0a0f531ddd1328457d78f1e",
+  "duelPayloadUnchanged": true,
+  "changedVFSFiles": [
+    "/data/mp/tests/warzone-towers-commands.js",
+    "/data/mp/tests/warzone-towers-objective.js",
+    "/data/mp/tests/warzone-towers-rewards.js",
+    "/data/mp/tests/warzone-towers-waves.js"
+  ],
+  "addedVFSFiles": [],
+  "removedVFSFiles": [],
+  "unchangedResolvedVFSFiles": 4288,
+  "sources": [
+    {
+      "path": "scenario/warzone-towers-catalog.json",
+      "bytes": 50233,
+      "sha256": "d70d5672fa1865411b8e574e67e770dc3b13956a6e5710f37e69396f4ff3453e"
+    },
+    {
+      "path": "scenario/warzone-towers-commands.js",
+      "bytes": 52650,
+      "sha256": "ef11b357847a969862666fb0e5081d6690e052a9f8f8f1f847629e46c545f2fb"
+    },
+    {
+      "path": "scenario/warzone-towers-objective.js",
+      "bytes": 702,
+      "sha256": "209975c81361852a5ef81716eeeb5350cf29f8fe4ff6b23ff16b3f76c58f7495"
+    },
+    {
+      "path": "scenario/warzone-towers-rewards.js",
+      "bytes": 15294,
+      "sha256": "c7527a4d7c883c56558c1a5fe9691403339e002500b797e3cfa11af1bc32dc44"
+    },
+    {
+      "path": "scenario/warzone-towers-rules.js",
+      "bytes": 372,
+      "sha256": "ca1a21cc6fe094a1cbb2c12c689bb20c489843724485ed231d0d053f32413793"
+    },
+    {
+      "path": "scenario/warzone-towers-waves.js",
+      "bytes": 7517,
+      "sha256": "977faf58473c139c205fc3c36be368e852e7dd283900b20372caa77f18f25630"
+    },
+    {
+      "path": "tools/check-rewards-native-026.cjs",
+      "bytes": 20145,
+      "sha256": "1599201be975ee44e473f62d109206ef7b2fe5742a457161148f2d2a63df5a65"
+    },
+    {
+      "path": "tools/embed-rewards-026.py",
+      "bytes": 10532,
+      "sha256": "55fc5e15c4421579330b4a0b603487baa422f8be072a394ceba1e726eb9298f1"
+    },
+    {
+      "path": "tools/embed-warzone-towers.ps1",
+      "bytes": 7864,
+      "sha256": "4abd371cf48f60040be69ea1b42940258f2ac614642e664c44403eaad8892f28"
+    },
+    {
+      "path": "tools/test-command-bridge.cjs",
+      "bytes": 17366,
+      "sha256": "b9fbd8f391b79d7d8476a9328fc0685fa7e5bc3d4d6c61dabfccacae11859b5d"
+    },
+    {
+      "path": "vendor/tower-defense/mod/multiplay/script/mods/Spawner.js",
+      "bytes": 2033,
+      "sha256": "e3e9599bde2a795230958429c6a9992e7d1ac84533aefd6e7f45c7dbb9a501d0"
+    },
+    {
+      "path": "vendor/tower-defense/mod/multiplay/script/mods/configReader.js",
+      "bytes": 1070,
+      "sha256": "8b611f4c0bd687420f30b4e2f52f9d7c6ca9e5684199e886769259985abae59c"
+    }
+  ],
+  "sourceCheckReports": [
+    {
+      "path": "archive/rewards-native-0.26-checks.json",
+      "sha256": "1e98138f7a8bccb3bd1f54967d67bb7dc26f2bb9641339d72573db82877c8fcd"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "app/src/main/assets/warzone/warzone2100.js",
+      "bytes": 793330,
+      "sha256": "8c70d617e51cfbd2038724200916dafca1be37620e2ea2b6cded955140808892"
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100.data",
+      "bytes": 77625306,
+      "sha256": "4e2b88d27da80704cc1c812390324c219891796954bf49d079e00ff4fcd3cd3b"
+    }
+  ]
+}

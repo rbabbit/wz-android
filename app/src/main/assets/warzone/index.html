@@ -285,7 +285,7 @@
       }
       }
     </style>
-    <script src="graphics-loader.js"></script>
+    <script src="levels/runtime.js"></script>
     <script src="native-notification-prefs.js"></script>
     <script src="music-catalog.js"></script>
     <script src="music-loader.js"></script>
@@ -1253,6 +1253,54 @@
         Module.FS_createPath('/data/mp/multiplay/maps', '2c-blocknight20', true, true);
         Module.FS_createPath('/data/mp/multiplay/maps', '2c-TowerDefense2_m', true, true);
         Module.FS_createPath('/data/mp/multiplay/maps', 'td1_v3', true, true);
+        Module.FS_createPath('/data/mp/multiplay/maps', 'greenhaven-beginner', true, true);
+        // BEGIN TOWERS 0.19 LEVEL DIRECTORIES
+        Module.FS_createPath('/data/mp/multiplay/maps', 'wt-e01', true, true);
+        Module.FS_createPath('/data/mp/multiplay/maps', 'wt-e02', true, true);
+        Module.FS_createPath('/data/mp/multiplay/maps', 'wt-e03', true, true);
+        Module.FS_createPath('/data/mp/multiplay/maps', 'wt-e04', true, true);
+        Module.FS_createPath('/data/mp/multiplay/maps', 'wt-e05', true, true);
+        Module.FS_createPath('/data/mp/multiplay/maps', 'wt-e06', true, true);
+        Module.FS_createPath('/data/mp/multiplay/maps', 'wt-e07', true, true);
+        Module.FS_createPath('/data/mp/multiplay/maps', 'wt-e08', true, true);
+        Module.FS_createPath('/data/mp/multiplay/maps', 'wt-e09', true, true);
+        Module.FS_createPath('/data/mp/multiplay/maps', 'wt-e10', true, true);
+        Module.FS_createPath('/data/mp/multiplay/maps', 'wt-e11', true, true);
+        Module.FS_createPath('/data/mp/multiplay/maps', 'wt-e12', true, true);
+        Module.FS_createPath('/data/mp/multiplay/maps', 'wt-e13', true, true);
+        Module.FS_createPath('/data/mp/multiplay/maps', 'wt-e14', true, true);
+        Module.FS_createPath('/data/mp/multiplay/maps', 'wt-e15', true, true);
+        Module.FS_createPath('/data/mp/multiplay/maps', 'wt-m01', true, true);
+        Module.FS_createPath('/data/mp/multiplay/maps', 'wt-m02', true, true);
+        Module.FS_createPath('/data/mp/multiplay/maps', 'wt-m03', true, true);
+        Module.FS_createPath('/data/mp/multiplay/maps', 'wt-m04', true, true);
+        Module.FS_createPath('/data/mp/multiplay/maps', 'wt-m05', true, true);
+        Module.FS_createPath('/data/mp/multiplay/maps', 'wt-m06', true, true);
+        Module.FS_createPath('/data/mp/multiplay/maps', 'wt-m07', true, true);
+        Module.FS_createPath('/data/mp/multiplay/maps', 'wt-m08', true, true);
+        Module.FS_createPath('/data/mp/multiplay/maps', 'wt-m09', true, true);
+        Module.FS_createPath('/data/mp/multiplay/maps', 'wt-m10', true, true);
+        Module.FS_createPath('/data/mp/multiplay/maps', 'wt-m11', true, true);
+        Module.FS_createPath('/data/mp/multiplay/maps', 'wt-m12', true, true);
+        Module.FS_createPath('/data/mp/multiplay/maps', 'wt-m13', true, true);
+        Module.FS_createPath('/data/mp/multiplay/maps', 'wt-m14', true, true);
+        Module.FS_createPath('/data/mp/multiplay/maps', 'wt-m15', true, true);
+        Module.FS_createPath('/data/mp/multiplay/maps', 'wt-h01', true, true);
+        Module.FS_createPath('/data/mp/multiplay/maps', 'wt-h02', true, true);
+        Module.FS_createPath('/data/mp/multiplay/maps', 'wt-h03', true, true);
+        Module.FS_createPath('/data/mp/multiplay/maps', 'wt-h04', true, true);
+        Module.FS_createPath('/data/mp/multiplay/maps', 'wt-h05', true, true);
+        Module.FS_createPath('/data/mp/multiplay/maps', 'wt-h06', true, true);
+        Module.FS_createPath('/data/mp/multiplay/maps', 'wt-h07', true, true);
+        Module.FS_createPath('/data/mp/multiplay/maps', 'wt-h08', true, true);
+        Module.FS_createPath('/data/mp/multiplay/maps', 'wt-h09', true, true);
+        Module.FS_createPath('/data/mp/multiplay/maps', 'wt-h10', true, true);
+        Module.FS_createPath('/data/mp/multiplay/maps', 'wt-h11', true, true);
+        Module.FS_createPath('/data/mp/multiplay/maps', 'wt-h12', true, true);
+        Module.FS_createPath('/data/mp/multiplay/maps', 'wt-h13', true, true);
+        Module.FS_createPath('/data/mp', 'tests', true, true);
+        Module.FS_createPath('/data/mp/tests', 'levels', true, true);
+        // END TOWERS 0.19 LEVEL DIRECTORIES
         Module.FS_createPath('/data/mp', 'SurvivalMod', true, true);
         Module.FS_createPath('/data/mp', 'diffs', true, true);
         Module.FS_createPath('/data/mp/diffs', 'x1_5_WZmodBig', true, true);
@@ -1280,9 +1328,7 @@
               + 'groupmenu=0\n'
               + 'optionsButtonVisibility=0\n'
               + 'cameraAccel=0\n';
-            const graphicsConfig = window.WarzoneGraphics?.high
-              ? 'terrainMode=2\nterrainShadingQuality=1024\ntextureSize=2048\n'
-              : 'terrainMode=1\nterrainShadingQuality=512\ntextureSize=2048\n';
+            const graphicsConfig = 'terrainMode=1\nterrainShadingQuality=512\ntextureSize=2048\n';
             let previousConfig = '';
             try { previousConfig = Module.FS.readFile(configPath, { encoding: 'utf8' }); } catch (_) {}
             const audioLevels = ['cdvol', 'fxvol', 'voicevol'].map(key => {
@@ -1307,7 +1353,6 @@
       }
   
       Module['preRun'].push(blockNightPrepareCustomMapDirectory);
-      Module['preRun'].push(module => window.WarzoneGraphics.prepare(module));
       Module['preRun'].push(module => window.WarzoneMusic.prepare(module));
       Module['preRun'].push(wz_pre_run_fixup_canvas);
       Module['postRun'].push(wz_handle_post_run);
@@ -1320,6 +1365,11 @@
       }
       const towerMap = new URLSearchParams(location.search).get('map');
       Module.arguments.push(towerMap === 'td1' ? '--skirmish=warzonetowers-td1.json' : '--skirmish=warzonetowers.json');
+      if (towerMap === 'beginner' && !window.__warzoneDuelConfig) Module.arguments[Module.arguments.length - 1] = '--skirmish=warzonetowers-beginner.json';
+      // BEGIN TOWERS 0.19 LEVEL ARGUMENT
+      const newTowerLevels = ["easy01","easy02","easy03","easy04","easy05","easy06","easy07","easy08","easy09","easy10","easy11","easy12","easy13","easy14","easy15","medium01","medium02","medium03","medium04","medium05","medium06","medium07","medium08","medium09","medium10","medium11","medium12","medium13","medium14","medium15","hard01","hard02","hard03","hard04","hard05","hard06","hard07","hard08","hard09","hard10","hard11","hard12","hard13"];
+      if (!window.__warzoneDuelConfig && newTowerLevels.includes(towerMap)) Module.arguments[Module.arguments.length - 1] = '--skirmish=towers-' + towerMap + '.json';
+      // END TOWERS 0.19 LEVEL ARGUMENT
     
       Module['locateFile'] = function(path, prefix) {
         // Custom handling for .data files

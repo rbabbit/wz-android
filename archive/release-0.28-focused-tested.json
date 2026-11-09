@@ -1,0 +1,202 @@
+{
+  "version": "0.28",
+  "versionCode": 28,
+  "candidateAPK_SHA256": "fa1d41a8287937c3edf2f1f36b1bcddfce95e31dd1f06ad26dc500c4a8d9e52f",
+  "scope": "Option1 native illustrated Rewards on Home/in-game, version clarity and focused save/purchase verification.",
+  "emulatorUsed": true,
+  "gameplayVerified": false,
+  "verification": "Source checks, Android build/signature/archive integrity and only the observations in the hash-bound emulator report.",
+  "emulatorProof": {
+    "path": "qa/0.28-rewards/focused-emulator-proof.json",
+    "sha256": "0301d34383a720fbd9904714691ae6d43b5899c416f7681d2c8f1f4bd7e0c4a1"
+  },
+  "focusedEmulatorChecks": [
+    {
+      "name": "Installed delivery APK SHA256 matches; version 0.28 is visible on Home and in Help",
+      "passed": true
+    },
+    {
+      "name": "Approved option 1 native Rewards drawer works on Home and in-game with original item thumbnails, direct category tabs, inline quantities and bulk choices",
+      "passed": true
+    },
+    {
+      "name": "Actual Home purchase deducts 10 crystals and carries one Ripple into a fresh match",
+      "passed": true
+    },
+    {
+      "name": "Actual in-game bulk purchase deducts 50 crystals, raises native and phone Ripple allowances from one to six, and remains six across later native snapshots",
+      "passed": true
+    },
+    {
+      "name": "A normal paid native construction order completes one Ripple and both allowances become five",
+      "passed": true
+    },
+    {
+      "name": "Header SAVE writes complete native pre-purchase and post-purchase archives under the valid Greenhaven internal identifier",
+      "passed": true
+    },
+    {
+      "name": "Home Saved Games loads the post-purchase save with the original economic run, a fresh document, five remaining and no repeated charge",
+      "passed": true
+    },
+    {
+      "name": "Loading the older pre-purchase save still preserves five unused allowances after native resume reconciliation",
+      "passed": true
+    },
+    {
+      "name": "Force-stop/restart and reloading the saved match retain wallet 50 and five remaining",
+      "passed": true
+    },
+    {
+      "name": "Repeated normal Back/Return/Home/Saved Games navigation completes without the stock pause menu",
+      "passed": true
+    }
+  ],
+  "emulatorEvidenceFiles": [
+    {
+      "path": "qa/0.28-rewards/delivery-01-home.png",
+      "sha256": "9475aaec9b65c98b89ecc485abe3d07bca2c27f578909e2964a03b68f0caa145"
+    },
+    {
+      "path": "qa/0.28-rewards/delivery-02-home-fortresses.png",
+      "sha256": "fd8fb1ff912d7bf9872cf35f3f5ca7d8b2018031bca30bc05ee7ad02586ab139"
+    },
+    {
+      "path": "qa/0.28-rewards/delivery-03-home-next-match.png",
+      "sha256": "71f7abf1571b56fadf3ed9f0e2d6a05855a60e4e5545f034f6447cef10e72bb8"
+    },
+    {
+      "path": "qa/0.28-rewards/delivery-04-help-version.png",
+      "sha256": "526d953a6ae70db1a47c3fa764b60adef8f4b3b1f17c053903bfa28ea8bfff42"
+    },
+    {
+      "path": "qa/0.28-rewards/delivery-05-ingame-fortresses.png",
+      "sha256": "b335dae5f01430a1e2e73334ef5595c86e731482be4c753c0746a095432ab2a8"
+    },
+    {
+      "path": "qa/0.28-rewards/delivery-06-bulk-purchased.png",
+      "sha256": "9536ae05cd8a1907a65015b044d2a20156a00c008b9ebe1c7cbb19758b156fc2"
+    },
+    {
+      "path": "qa/0.28-rewards/delivery-07-this-match.png",
+      "sha256": "528cd92bc1bec31ddccd008e99d31760019f86614709640bf0457c97aa45413b"
+    },
+    {
+      "path": "qa/0.28-rewards/delivery-before-purchase.png",
+      "sha256": "f986b1b275860a68af902aca998fdeee9d916067557029c553d2cc242558ac0b"
+    },
+    {
+      "path": "qa/0.28-rewards/delivery-after-purchase.png",
+      "sha256": "933cf659cd0bd7d267012cdb5f9fd904dccf1e4e2fdc8ffb2c375023c0647e97"
+    },
+    {
+      "path": "qa/0.28-rewards/delivery-loaded-post.png",
+      "sha256": "51ed4437879e0b18439230d35feb74db6f4fcc0f797a8f0ed2d0bf5735bc8be2"
+    },
+    {
+      "path": "qa/0.28-rewards/delivery-loaded-pre.png",
+      "sha256": "987e61530dd014f87adfa33b66c809913ba969a04311d5ba0be2700cb8044ea2"
+    },
+    {
+      "path": "qa/0.28-rewards/delivery-loaded-restart.png",
+      "sha256": "a6b9e2971a0532787e5699a228ddbfba102cb7757684857d686fd4761499c7b4"
+    },
+    {
+      "path": "qa/0.28-rewards/delivery-home.json",
+      "sha256": "14adcb870b69bf9939cd790720926d63d50fe389dd6a70aad7c1d70067dd5a34"
+    },
+    {
+      "path": "qa/0.28-rewards/delivery-purchase.json",
+      "sha256": "4aece2209dbb90ecf5974276cea2be6dc1582edd4d7082995a054d31209855a7"
+    },
+    {
+      "path": "qa/0.28-rewards/delivery-before-purchase.json",
+      "sha256": "dcfb0f8b153d9a1f86c1de59106c6c3ff9f4447c8f282162af80daf4788cf131"
+    },
+    {
+      "path": "qa/0.28-rewards/delivery-after-purchase.json",
+      "sha256": "7f2d6ae323500385d5bc86ea9624da3e664acb75fd39f8226c86841c82aaeba0"
+    },
+    {
+      "path": "qa/0.28-rewards/delivery-build-order.json",
+      "sha256": "fc0e30ddc286d27fb0e6f18a4bc780f21a19896e69492e6ee7bb31b0b3ea28ca"
+    },
+    {
+      "path": "qa/0.28-rewards/delivery-consumed.json",
+      "sha256": "b73f20afd73d21aa4ead04d05440dad7371740f848573518647990905e181723"
+    },
+    {
+      "path": "qa/0.28-rewards/delivery-loaded-post.json",
+      "sha256": "80f46d2b1b3bb515c9973c80258b8d314101f183f132e122213001e0494d51e4"
+    },
+    {
+      "path": "qa/0.28-rewards/delivery-loaded-pre.json",
+      "sha256": "a925a77f5a0bd222c355e445ff5fccd9476ff3feb4236eab235881830f89ed40"
+    },
+    {
+      "path": "qa/0.28-rewards/delivery-loaded-restart.json",
+      "sha256": "4bb54bc6ef77f3dd652ae913c72f6e0cf3d6d70f959bc20b223b45ef94c28e2e"
+    },
+    {
+      "path": "qa/0.28-rewards/delivery-durable-observation.json",
+      "sha256": "613540f440dca0c89fe7ba7beb09520bac323e82fc7b387b7f2db22f881dc544"
+    }
+  ],
+  "supportingObservations": [
+    {
+      "path": "qa/0.28-rewards/native-automatic-save-observation.json",
+      "sha256": "5ea081c8bf20baea5c5977e91a83b1b20f68b0fe6ef4f9207966d962002f5296",
+      "scope": "A prior 0.28 candidate (851e70...) with the identical frozen native payload reached the ordinary ten-game-minute automatic-save timer at supported 2x speed. Its complete native automatic save, game.map/scriptstate and valid Greenhaven-T1 identifier persisted and were inspected after reloading. This is supplemental writer evidence, not a claim that the final wallet build repeated the ten-minute timer."
+    }
+  ],
+  "changedAPKAssets": [
+    "assets/warzone-touch-controls.js",
+    "assets/warzone/rewards.js"
+  ],
+  "newAPKAssets": [],
+  "changedAPKMembers": [
+    "assets/warzone-touch-controls.js",
+    "assets/warzone/rewards.js",
+    "AndroidManifest.xml",
+    "classes3.dex"
+  ],
+  "removedAPKMembers": [],
+  "nativePreservation": {
+    "entireNativeAssetsByteIdentical": true,
+    "nativeAssetSHA256": {
+      "assets/warzone/warzone2100.js": "bd59230991cf29d548be7ddb4336cf05dabe3ca4427cb62b4a8bce0821d93d24",
+      "assets/warzone/warzone2100.data": "f2200f13b2197d0162a12737898c12be2545482a78529a6d7c83c54d8a34e16b",
+      "assets/warzone/warzone2100.wasm": "d909a4ecb7475643107fa6f489279562c00deae1e0a0f531ddd1328457d78f1e"
+    },
+    "nativeVirtualFilesUnchanged": 4292,
+    "all46SaveNamesWithinNativeLimit": true
+  },
+  "mapsMusicDuelNativeByteIdentical": true,
+  "preservedOriginalSourceFiles": 1243,
+  "preservedAPKAssets": 524,
+  "sourceCheckReports": [
+    {
+      "path": "qa/0.28-rewards/source-review.json",
+      "sha256": "c7c727b9690558e80cd78a3ec5710f23fb007fc3a9f74623ed4ef83664b0bbbf"
+    },
+    {
+      "path": "archive/reward-ledger-0.28-checks.json",
+      "sha256": "4a005057897147764965715c86a3a1d755be68380a039f52dffb5a78244a3c29"
+    },
+    {
+      "path": "archive/rewards-web-0.28-checks.json",
+      "sha256": "2a1be925aac21c67aaf14d4d77fc23df91a26f6ae5c8b77128fef3e4f55fefe8"
+    },
+    {
+      "path": "archive/save-version-0.28-audit.json",
+      "sha256": "7c9f0189d13dd6a1308669533b302980a19543514bb64a0cbb1e7d43419d13f3"
+    }
+  ],
+  "fallbackRecord": {
+    "path": "archive/fallback-0.28.json",
+    "sha256": "cc19e07dc8bb42da0775d1cfb93939b578083a2d8ca09e4ff59c95bfaf89e3b4"
+  },
+  "sourceInventory": "git ls-files --cached --others --exclude-standard; filtered caches/private/transient files",
+  "gitMetadataIncluded": false,
+  "recordedUTC": "2026-11-09T15:47:27.064400Z"
+}

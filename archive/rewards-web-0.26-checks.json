@@ -1,0 +1,113 @@
+{
+  "scope": "Bounded Node VM fixtures execute actual reward/session source and extracted actual placement helpers using mocked native/Android replies. No native firing, construction, wallet storage, real wave clearing, browser, emulator or gameplay verified. Java guards and touch routing are source-inspected only.",
+  "emulatorUsed": false,
+  "screensVerified": false,
+  "gameplayVerified": false,
+  "androidPersistenceExecuted": false,
+  "passed": 18,
+  "checks": [
+    {
+      "name": "Bulk native item quantities pass unchanged; native and durable phone acknowledgements gate readiness",
+      "passed": true
+    },
+    {
+      "name": "Malformed quantities, stale sessions, native rejection and failed durable acknowledgement fail closed",
+      "passed": true
+    },
+    {
+      "name": "Rewards stays read-only in-game and opens only after Build exit",
+      "passed": true
+    },
+    {
+      "name": "Exit quote is fetched once and synchronously forwarded to durable phone inventory before resolving",
+      "passed": true
+    },
+    {
+      "name": "Inventory stale/error/timeout/phone-save failure returns false and never forwards an invalid snapshot",
+      "passed": true
+    },
+    {
+      "name": "Dispose ignores late apply/inventory results and clears polling/notification state",
+      "passed": true
+    },
+    {
+      "name": "Actual cleared-wave IDs and remaining quote are forwarded before terminal settlement, without inferring clears from wave number",
+      "passed": true
+    },
+    {
+      "name": "Confirmed Home return waits for the inventory quote and accepts one return request",
+      "passed": true
+    },
+    {
+      "name": "Back cancels satellite targeting before opening another menu",
+      "passed": true
+    },
+    {
+      "name": "Satellite arms only from the selected ready native-post quote and fires only after a terrain target",
+      "passed": true
+    },
+    {
+      "name": "Satellite arming requires successful Build exit and a fresh successful state reply",
+      "passed": true
+    },
+    {
+      "name": "Newer navigation supersedes a pending fresh satellite query and its late acknowledgement cannot arm",
+      "passed": true
+    },
+    {
+      "name": "Back cancels pending satellite arming and ignores the late fresh state acknowledgement",
+      "passed": true
+    },
+    {
+      "name": "Back also cancels satellite arming while Build exit is pending; late close never requests or arms targeting",
+      "passed": true
+    },
+    {
+      "name": "Native satellite rejection is reported and targeting ends; no stock click is required",
+      "passed": true
+    },
+    {
+      "name": "Purchased fortress lines are disabled, while ordinary, naturally unlocked and purchased non-fortress defence lines remain",
+      "passed": true
+    },
+    {
+      "name": "Purchased building taps reserve native quotas through queue-build; natural/unpaid paths preserve native Ctrl-click ownership",
+      "passed": true
+    },
+    {
+      "name": "Dormant Duel has no portable reward module or reward-progress forwarding",
+      "passed": true
+    }
+  ],
+  "sources": [
+    {
+      "path": "app/src/main/assets/warzone/rewards.js",
+      "sha256": "4703049f3977a191e092666cd5d6fa37a993d8f06144e032067c4875717423b9"
+    },
+    {
+      "path": "app/src/main/assets/warzone-html-session.js",
+      "sha256": "82717cc3923f16386e4b77b193ed265fc9b34a395825a70fde0edc8086921e52"
+    },
+    {
+      "path": "app/src/main/assets/warzone-command-pages.js",
+      "sha256": "5f3afb70c1b775adce19bfa40966415793ecb51740a2c66fd6a563203a16e301"
+    },
+    {
+      "path": "app/src/main/assets/warzone-touch-controls.js",
+      "sha256": "20f0ac23c1d1d79f3cbe9854dbe74290c6e4fcd01e5b14c81f81043c12a4a107"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MainActivity.java",
+      "sha256": "c3a533b51e223a5940042f652017df3b258039b8ed4503eb8e8df27ebaab1ea4"
+    },
+    {
+      "path": "tools/check-rewards-web-026.cjs",
+      "sha256": "9f87cea99e76d66db7d268914f7fe2c69ab0d4188e84730efd60ae7ee355d5ef"
+    }
+  ],
+  "sourceAuditOnly": [
+    "Java in-game buy/equip are read-only",
+    "Inventory quote completeness gates return",
+    "Touch target precedes ordinary world/facility taps and is limited to stationary battlefield touch"
+  ]
+}

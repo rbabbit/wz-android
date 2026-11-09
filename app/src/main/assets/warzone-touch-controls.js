@@ -495,10 +495,10 @@
     // The preparation dialog stays suppressed until its release is processed.
     showCombatHud();
 
-    // Dustfall's human HQ is at the south of its authored map. Look north
+    // The new levels, Dustfall and Greenhaven put the HQ at the south. Look north
     // into the battlefield; Iron Valley retains its established south view.
     // Rotate the real engine camera, so radar and world picking agree.
-    const north = mapId === "td1";
+    const north = window.WarzoneLevelInfo?.[mapId]?.northFacing ?? (mapId === "td1" || mapId === "beginner");
     const direction = north ? "ArrowUp" : "ArrowDown";
     const directionCode = north ? 38 : 40;
     state.cameraHeading = north ? "north" : "south";
@@ -716,6 +716,7 @@
     if (state.stopNonce) return true;
     const fs = zoomModule()?.FS;
     if (!fs?.writeFile || !fs?.rename) return false;
+    window.__warzoneCommands?.cancelLinePlacement?.(null,true);
     releaseAll(); state.autoFight = false;
     const nonce = `${Date.now().toString(36)}-stop-${state.stopOrders + 1}`;
     const path = '/data/mp/multiplay/script/rules/warzone-towers-control-command.json';
@@ -1275,10 +1276,11 @@
           "blocknight-stop": "hand-palm", "blocknight-base": "house",
           "blocknight-zoom-close": "x", "blocknight-zoom-battle": "crosshair",
           "blocknight-zoom-map": "map-pin", "blocknight-tech": "flask",
-          "blocknight-help": "question", "wt-select-move": "crosshair", "wt-select-trucks": "stack", "wt-deselect-units": "deselect"
+          "blocknight-help": "question", "blocknight-music": "music-notes", "blocknight-save": "save", "blocknight-rewards": "crystal", "blocknight-lassat": "crosshair", "wt-select-move": "crosshair", "wt-select-trucks": "stack", "wt-deselect-units": "deselect"
         };
         const icon = document.createElement("img");
         icon.src = `/warzone/ui/icons/${iconNames[id]}.svg`;
+        if (id === 'blocknight-rewards') icon.style.filter = 'none';
         icon.alt = "";
         icon.setAttribute("aria-hidden", "true");
         const caption = document.createElement("span");
@@ -1287,7 +1289,10 @@
         button.title = title;
         // Keep touch commands from stealing focus (and held native queue keys)
         // from the engine frame when the command row lives in its parent.
-        bindTouchCommand(button, action);
+        bindTouchCommand(button, () => {
+          if (id !== 'blocknight-lassat') window.WarzoneRewards?.cancelTarget?.();
+          action();
+        });
         return button;
       };
       const all = makeButton("blocknight-select-all", "ALL",
@@ -1331,7 +1336,27 @@
       orderGroup.append(all, auto, box, queue, stop, base);
       const techGroup = document.createElement("div");
       techGroup.className = "bn-command-group";
-      techGroup.append(tech, help);
+      techGroup.append(tech);
+      if (window.__warzoneDuelConfig?.mode !== 'duel') {
+        const music = makeButton("blocknight-music", "MUSIC", "Map soundtrack: turn music on or off",
+          () => window.WarzoneMusic?.showMenu?.(music, hudDocument, bindTouchCommand));
+        music.setAttribute('aria-haspopup', 'dialog');
+        music.setAttribute('aria-controls', 'wt-map-music-menu');
+        music.setAttribute('aria-expanded', 'false');
+        techGroup.append(music);
+        const rewards = makeButton('blocknight-rewards', 'REWARDS',
+          'Crystal wallet and active match boosts', () => window.WarzoneRewards?.open?.());
+        techGroup.append(rewards);
+        const save = makeButton('blocknight-save', 'SAVE',
+          'Save this game on your phone', () => window.WarzoneSavedGames?.save?.());
+        techGroup.append(save);
+        const laser = makeButton('blocknight-lassat', 'SELECT SAT',
+          'Select your Laser Satellite Command Post, then target an enemy', () => window.WarzoneRewards?.armLaser?.());
+        laser.style.display = 'none';
+        techGroup.append(laser);
+      }
+      techGroup.append(help);
+      window.WarzoneRewards?.updateBalance?.();
       if (window.__warzoneCommands?.tower) {
         hud.classList.add("wt-modern");
         const commands = document.createElement("div");
@@ -1383,6 +1408,7 @@
     state.hudVisible = true;
     showBattlefieldViewport();
     updateCombatHud();
+    window.WarzoneMusic?.setBattleActive?.(true);
     return true;
   }
 
@@ -1396,11 +1422,16 @@
 
   function showHelp() {
     if (!state.battleActive) return false;
+    window.WarzoneMusic?.closeMenu?.(false);
     if(window.__warzoneCommands?.nativeBuildOpen?.()){window.__warzoneCommands.afterBuildExit(showHelp);return true;}
     window.__warzoneCommands?.close?.();
     window.__warzoneCommands?.closeNative?.();
     const hudDocument = commandDocument();
     const duel=window.__warzoneDuelConfig?.mode==='duel'&&Object.isFrozen(window.__warzoneDuelConfig);
+    const helpMap = new URLSearchParams(window.location.search).get("map");
+    const helpLevel = window.WarzoneLevelInfo?.[helpMap];
+    const towersRounds = helpLevel?.rounds ?? (helpMap === "beginner" ? 15 : 30);
+    const preparationMinutes = (helpLevel?.preparationSeconds ?? (helpMap === "beginner" ? 240 : 180)) / 60;
     const humanBranch=window.__warzoneDuelConfig?.humanBranch==='rockets'?'Rockets':'Cannon',botBranch=window.__warzoneDuelConfig?.botBranch==='rockets'?'Rockets':'Cannon';
     let help = hudDocument.getElementById("warzone-towers-help");
     const syncHelpSize = () => {
@@ -1449,10 +1480,17 @@
               </p></section>
           <section><h2>MUSIC</h2><p>Choose your tracks on the start screen before starting a battle. Download Music once, select your playlist, then press <b>START GAME</b>. Your choices are saved for the next game.</p></section>` : `
           <section><h2>DEFEND &amp; SURVIVE</h2>
-            <p>Protect your <b>Command Centre</b>; losing it ends the battle. You have <b>3 minutes to prepare</b> before Wave 1 starts automatically. Survive <b>30 rounds</b> and clear the final enemies to win.</p>
+            <p>Protect your <b>Command Centre</b>; losing it ends the battle. You have <b>${preparationMinutes} minutes to prepare</b> before Wave 1 starts automatically. Survive <b>${towersRounds} rounds</b> and clear the final enemies to win.</p>
             <p>Waves follow their own timer, even while enemies remain. During a countdown, <b>SKIP WAVE</b> calls the next wave early; it does not clear enemies. Destroying enemies earns power.</p></section>
+          <section><h2>CRYSTALS &amp; MATCH BOOSTS</h2>
+            <p><b>REWARDS</b> on Home shows your saved phone wallet and portable inventory. A new wallet starts with <b>350 crystals</b>. Each actually completed wave earns <b>5 crystals</b>, saved once even if you later lose. Waves can overlap; starting or skipping a wave earns nothing. A win also pays <b>60 / 80 / 100</b> on Easy / Medium / Hard, plus <b>50</b> for that map's first completion. The final receipt includes crystals already earned during play.</p>
+            <p>On Home use <b>Shop</b> to buy stock and <b>Next match</b> to choose how many to take. In-game <b>REWARDS</b> buys boosts for the current match immediately. Purchases work on <b>any map</b>. Bulk quantities include <b>5, 10, 15, 20 and +5</b>. You can take up to <b>three fortresses combined</b>. Every purchased structure still uses its normal in-game power cost.</p>
+            <p><b>SAVE</b> keeps the current native game on your phone. Open <b>Saved Games</b> on Home to load or delete it. Saved matches retain their wave credits, purchases and used allowances; reloading pays no crystals twice. Unused stock in a saved match stays reserved until its last save is deleted.</p>
+            <p>A building purchase is used when its foundation appears, including if it is later destroyed. Unused building stock returns after the match or a confirmed return Home. Research accelerator adds <b>25%</b> speed while you choose topics; Supply reserve adds <b>1,000</b> starting power. These two boosts are used when the match starts.</p></section>
+          <section><h2>LASER SATELLITE</h2>
+            <p>The <b>Laser Satellite Command Post</b> is a weapon, separate from your Satellite Uplink. Build and complete the post, tap it on the battlefield to select it, then press <b>FIRE SAT</b> and tap a visible enemy unit or building. Its native recharge time is shown in the header. Press <b>CANCEL SAT</b> or Back to cancel targeting.</p></section>
           <section><h2>BUILD WITH YOUR TRUCKS</h2>
-            <p><b>BUILD</b> selects construction trucks visible in your view. Choose a structure, then tap valid locations to queue sites. Green blueprints mark accepted orders. Your manually selected truck group is kept when choosing structures.</p>
+            <p><b>BUILD</b> selects construction trucks visible in your view. Choose a structure, then tap valid locations to queue sites. For walls, gates, towers and hardpoints, drag a straight line and release to queue the clear sites shown in the preview. Factories, labs, power generators and modules stay single placements. Green blueprints mark accepted orders. Your manually selected truck group is kept when choosing structures.</p>
             <p>For another area, move the view and use <b>TRUCKS</b> to select its visible trucks. <b>EXIT · KEEP ORDERS</b> or <b>SELECT / MOVE</b> leaves placement while trucks continue. <b>STOP</b> cancels selected trucks’ work and remaining sites.</p></section>
           <section><h2>UPGRADE WITH MODULES</h2>
             <p>In <b>BUILD → MODULES</b>, choose an upgrade and tap a highlighted, completed matching building: Research Module → research lab; Power Module → power generator; Factory Module → vehicle or VTOL factory.</p>
@@ -1472,7 +1510,7 @@
           <section><h2>MOVE, LOOK &amp; RETURN</h2>
             <p><b>Tap</b> to select or give an order; <b>swipe</b> to pan; <b>pinch</b> to zoom. Move two fingers together up/down to tilt. Tap the minimap to move the view; <b>BASE</b> returns to your Command Centre.</p>
             <p>The bottom-left units icon opens <b>SELECT / MOVE</b>, <b>ALL UNITS</b>, <b>DESELECT</b>, <b>STOP</b> and <b>TRUCKS</b>. ALL UNITS selects combat units. DESELECT clears selection while units continue their existing orders. Android <b>Back</b> closes the current panel first; from the battlefield it asks <b>Return to Main Menu</b>.</p>
-            <p>Set control size above. Choose optional music and save your playlist on the start screen before a battle.</p></section>`;
+            <p>Set control size above. Download optional music on the start screen once. Each map has an assigned soundtrack; top <b>MUSIC</b> shows its title and lets you turn music <b>ON</b> or <b>OFF</b>. Your choice stays saved on this phone and does not change sound effects.</p></section>`;
       help.innerHTML = `
         <header><div><span class="wt-help-eyebrow">${duel?'WARZONE 1V1':'WARZONE TOWERS'}</span>
           <h1 id="wt-help-title">${duel?'FIELD GUIDE':'HOW TO PLAY'}</h1></div>
@@ -1482,6 +1520,8 @@
           <button type="button" class="wt-help-back">BACK TO BATTLE</button></footer>`;
       if (!duel) {
         help.classList.add('wt-towers-guide');
+        const version = window.BlockNightAndroid?.appVersion?.();
+        if (version) help.querySelector('.wt-help-eyebrow').textContent = 'WARZONE TOWERS · v' + version;
         if (!hudDocument.getElementById('wt-towers-guide-style')) {
           const guideStyle = hudDocument.createElement('style');
           guideStyle.id = 'wt-towers-guide-style';
@@ -1601,6 +1641,7 @@
     // This is non-blocking; the ordinary touch-up uses the current projection.
     if(window.__warzoneDuelConfig?.mode!=='duel'&&isBattlefieldPoint(event.clientX,event.clientY))window.WarzoneTerrain?.active?.(true,false);
     if (window.__warzoneCommands?.isPlacement()) window.__warzoneCommands.previewAt(event.clientX, event.clientY);
+    if(!boxOneShot&&isBattlefieldPoint(event.clientX,event.clientY))state.single.linePlacement=window.__warzoneCommands?.beginLinePlacement?.(event.clientX,event.clientY)||null;
     mouseMove(event.clientX, event.clientY, 0);
     if (boxOneShot) {
       beginBoxSelection(state.single);
@@ -1897,6 +1938,16 @@
         return;
       }
 
+      if(gesture.linePlacement){
+        // Defensive drag placement owns one finger from down to up. It never
+        // starts native mouse dragging or camera movement beneath the preview.
+        if(distance>=(gesture.slop||TAP_SLOP)){
+          clearLongPress();gesture.moved=true;gesture.lineDragging=true;
+          if(isBattlefieldPoint(gesture.x,gesture.y)&&radarPoint(gesture.x,gesture.y)===null)window.__warzoneCommands?.updateLinePlacement?.(gesture.linePlacement,gesture.x,gesture.y);
+        }
+        return;
+      }
+
       const inputElapsed = (Number.isFinite(event.timeStamp) ? event.timeStamp : performance.now()) - gesture.downInputTime;
       if(inputElapsed>=LONG_PRESS_MS&&!gesture.moved&&!gesture.panning&&!state.queueMode&&!window.__warzoneCommands?.isPlacement()&&isBattlefieldPoint(gesture.startX,gesture.startY))gesture.longPressArmed=true;
       if (gesture.longPressArmed && inputElapsed >= LONG_PRESS_MS) {
@@ -1951,6 +2002,17 @@
     gesture.y = event.clientY;
     clearLongPress();
     const heldFor=(Number.isFinite(event.timeStamp)?event.timeStamp:performance.now())-gesture.downInputTime;
+    if(gesture.linePlacement){
+      const commands=window.__warzoneCommands;
+      if(canceled||gesture.lineDragging){
+        if(!canceled&&isBattlefieldPoint(gesture.x,gesture.y)&&radarPoint(gesture.x,gesture.y)===null&&commands?.endLinePlacement?.(gesture.linePlacement,gesture.x,gesture.y)){
+          feedback(gesture.x,gesture.y,'tap');vibrate(8);
+        }else commands?.cancelLinePlacement?.(gesture.linePlacement);
+        state.primaryId=null;state.single=null;return;
+      }
+      // A stationary defence tap retains the original one-site placeAt path.
+      commands?.cancelLinePlacement?.(gesture.linePlacement);gesture.linePlacement=null;
+    }
     if(!canceled&&!gesture.moved&&!gesture.panning&&heldFor>=LONG_PRESS_MS&&!state.queueMode&&!window.__warzoneCommands?.isPlacement()&&isBattlefieldPoint(gesture.startX,gesture.startY))gesture.longPressArmed=true;
 
     if (gesture.radar) {
@@ -1972,6 +2034,9 @@
       }
     } else if (gesture.panning) {
       releaseMouse(gesture.x, gesture.y);
+    } else if (!canceled && !gesture.moved && isBattlefieldPoint(gesture.x,gesture.y)
+        && window.WarzoneRewards?.handleTap?.(gesture.x,gesture.y)) {
+      feedback(gesture.x,gesture.y,'order');state.taps += 1;
     } else if (!canceled && !gesture.moved && isBattlefieldPoint(gesture.x,gesture.y)
         && openFacilityAt(gesture.x,gesture.y)) {
       // A stationary touch on an owned lab/factory opens its Towers page,
@@ -2015,6 +2080,7 @@
 
   function releaseAll(clearModes = false, cancelTool = true) {
     cancelFacilityNavigation();
+    window.__warzoneCommands?.cancelLinePlacement?.();
     const cancelledTool = cancelCombatInput(cancelTool);
     clearMultiMove();
     clearLongPress();
@@ -2048,11 +2114,12 @@
   }
 
   function setBattleActive(active) {
-    if (active) { state.battleActive = true; if (canvas()) canvas().inert = false; return; }
+    if (active) { state.battleActive = true; if (canvas()) canvas().inert = false; window.WarzoneMusic?.setBattleActive?.(true); return; }
     // Release held buttons before disabling dispatch. A transition out of the
     // battle must never send Escape into the next native screen.
     releaseAll(true, false);
     state.battleActive = false;
+    window.WarzoneMusic?.setBattleActive?.(false);
     state.hudVisible = false;
     if (canvas()) canvas().inert = true;
     const doc = commandDocument();
@@ -2166,13 +2233,14 @@
     if (event.target !== window && event.target !== canvas()) return;
     const host = commandDocument();
     const help = host.getElementById("warzone-towers-help-overlay");
+    const music = host.getElementById("wt-map-music-menu");
     const tech = window.__blockNightResearch?.report?.();
     const commands=window.__warzoneCommands,commandState=commands?.report?.();
     // These controls share this WebView. Moving focus from the canvas to a
     // catalogue card must not cancel an in-flight native rectangle selection.
     // Actual app/window focus loss still reaches SDL and releases all input.
     const commandFocus=commands?.isOpen?.()||commandState?.buildOpen||commandState?.selectingTrucks;
-    if (host.hasFocus?.() && ((help && !help.hidden) || tech?.open || tech?.opening || commandFocus)) {
+    if (host.hasFocus?.() && ((help && !help.hidden) || (music && !music.hidden) || tech?.open || tech?.opening || commandFocus)) {
       event.stopImmediatePropagation();
       return;
     }

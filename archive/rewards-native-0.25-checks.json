@@ -1,0 +1,65 @@
+{
+  "scope": "Native API source fixtures only; no emulator, actual native construction/combat or device save/load verified.",
+  "emulatorUsed": false,
+  "gameplayVerified": false,
+  "sources": [
+    {
+      "path": "scenario/warzone-towers-catalog.json",
+      "bytes": 50233,
+      "sha256": "d70d5672fa1865411b8e574e67e770dc3b13956a6e5710f37e69396f4ff3453e"
+    },
+    {
+      "path": "scenario/warzone-towers-commands.js",
+      "bytes": 51837,
+      "sha256": "1ae6f94a66d4e8d4dedbda5775a243a52560ca5339a2d2f3aabc646a11c15129"
+    },
+    {
+      "path": "scenario/warzone-towers-rewards.js",
+      "bytes": 10245,
+      "sha256": "8db2c1756af26cef82cf7f86140091c64356803d928e60bd8e8e45cc2b9b8f64"
+    },
+    {
+      "path": "scenario/warzone-towers-rules.js",
+      "bytes": 372,
+      "sha256": "ca1a21cc6fe094a1cbb2c12c689bb20c489843724485ed231d0d053f32413793"
+    },
+    {
+      "path": "tools/check-rewards-native-025.cjs",
+      "bytes": 12102,
+      "sha256": "d76ed61c566a2f4529cc03728c17197f25568ad1ddbd45711ae719ee3bba3266"
+    },
+    {
+      "path": "tools/embed-rewards-025.py",
+      "bytes": 9485,
+      "sha256": "8810793ba064d86b366281b677dcb7fe8e685169567fc08e2a909049400ddfaf"
+    },
+    {
+      "path": "tools/embed-warzone-towers.ps1",
+      "bytes": 7864,
+      "sha256": "4abd371cf48f60040be69ea1b42940258f2ac614642e664c44403eaad8892f28"
+    },
+    {
+      "path": "tools/test-command-bridge.cjs",
+      "bytes": 17366,
+      "sha256": "b9fbd8f391b79d7d8476a9328fc0685fa7e5bc3d4d6c61dabfccacae11859b5d"
+    }
+  ],
+  "nativeRewardFixtures": {
+    "emulatorUsed": false,
+    "gameplayVerified": false,
+    "passed": 9,
+    "checks": [
+      "No selected bonuses leave native rules and rates unchanged",
+      "Supply applies once across repeat commands, state polls and native save-state restore",
+      "Changed session, changed choices, invalid values and excess choices fail closed",
+      "Research increases both lab and module rates for only the human without compounding",
+      "Purchased fortress exposes only its own native structure, with a one-foundation limit",
+      "Accepted FIFO reserves the fortress; cancellation before a foundation releases the slot",
+      "A foundation spends the token even if cancelled or destroyed; no rebuild after destruction",
+      "Destruction before the first timer sample still spends the fortress; enemy destruction does not",
+      "Normal researched fortress availability and later normal completion retain original limits"
+    ]
+  },
+  "existingCommandBridgePassed": true,
+  "existingCommandBridgeOutput": "PASS: FIFO builds, manual/automatic workers, sticky sessions, STOP, deduplication, validation, factory queues and bounded 100-job polling\nPASS: construction ETA follows actual worker actions/upgrades, pauses and power; modules use observed work; journal never replaces native orders\nPASS: a snapped 2x2 foundation binds to its own queue entry without matching older adjacent buildings\nPASS: native queue handoff preserves progress/completion; sustained cancellation still interrupts"
+}

@@ -1,0 +1,82 @@
+{
+  "version": "0.27",
+  "emulatorUsed": false,
+  "scope": "Source fixtures only; no real engine, Android or gameplay execution.",
+  "passed": true,
+  "checks": [
+    {
+      "name": "Fresh games preserve ordinary startup arguments and readiness",
+      "passed": true,
+      "kind": "source fixture with native and Android stubs"
+    },
+    {
+      "name": "Restore uses loadskirmish, hydrates every native byte after IDBFS, preserves config wrapper, no .gam needed",
+      "passed": true,
+      "kind": "source fixture with native and Android stubs"
+    },
+    {
+      "name": "Invalid slot IDs and traversal files stop native loading",
+      "passed": true,
+      "kind": "source fixture with native and Android stubs"
+    },
+    {
+      "name": "Restore reconciles pending purchases before fresh caps and requires actual native quote and Android acknowledgement",
+      "passed": true,
+      "kind": "source fixture with native and Android stubs"
+    },
+    {
+      "name": "Stale document and rejected restored-world acknowledgement never become ready",
+      "passed": true,
+      "kind": "source fixture with native and Android stubs"
+    },
+    {
+      "name": "Save uses one genuine F7, original native persistence, resumed clock and successful explicit sync before byte-exact phone archive",
+      "passed": true,
+      "kind": "source fixture with native and Android stubs"
+    },
+    {
+      "name": "Native persistence failure, paused clock and missing fresh save never claim or archive success",
+      "passed": true,
+      "kind": "source fixture with native and Android stubs"
+    },
+    {
+      "name": "New native save errors fail immediately and specifically; old errors never poison a later successful save",
+      "passed": true,
+      "kind": "source fixture with native and Android stubs"
+    },
+    {
+      "name": "Timed-out delayed menu exit cannot later send F7 or archive stale callbacks",
+      "passed": true,
+      "kind": "source fixture with native and Android stubs"
+    },
+    {
+      "name": "Battle disposal cancels pending save before native input",
+      "passed": true,
+      "kind": "source fixture with native and Android stubs"
+    },
+    {
+      "name": "Synchronous retirement consumes an already-rejected Build exit promise without an unhandled rejection",
+      "passed": true,
+      "kind": "source fixture with native and Android stubs"
+    },
+    {
+      "name": "Duel mode remains untouched",
+      "passed": true,
+      "kind": "source fixture with native and Android stubs"
+    }
+  ],
+  "sources": [
+    {
+      "path": "app/src/main/assets/warzone/saved-games.js",
+      "sha256": "f25854c39c5b42647783d9ca656a0d10c36c731ef56e5080f93244a432654858"
+    },
+    {
+      "path": "tools/check-saved-games-027.cjs",
+      "sha256": "f2c2620ffde41ee52c534e001a92948abf79a2025515022d4595f19d0d4b9709"
+    },
+    {
+      "path": "app/src/main/assets/warzone/index.html",
+      "sha256": "db759acab4068d03611afbe20cf3786743abd2ab62e94ce88c1b113a892cd072"
+    }
+  ]
+}

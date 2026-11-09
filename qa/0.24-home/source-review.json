@@ -1,0 +1,78 @@
+{
+  "version": "0.24",
+  "emulatorUsed": false,
+  "screensVerified": false,
+  "gameplayVerified": false,
+  "scope": "Source review only; native home option 1 and optional HD feature removal. No device, emulator or VPS actions.",
+  "selectedReference": "docs/ui-0.24/approved-home.png",
+  "reviewedPaths": [
+    "Difficulty/tab remembered selection and pager/Play settlement retained",
+    "Play/music share one48dp touch row; compact32dp visible fills",
+    "Duplicate home title and fullwidth settings rows removed",
+    "Download checking, ready, progress, cancellation and error paths retained",
+    "Enlarged font uses one music label line; measurements update only when widths change",
+    "Short viewports scroll instead of reducing touch targets",
+    "HD preferences ignored, no store/download/load/serve path; both native launchers force prior Normal graphics",
+    "Music loader/track response, map catalog/previews and native payload frozen by package comparison"
+  ],
+  "referenceLayoutDP": {
+    "viewport": [
+      720,
+      400
+    ],
+    "difficulty": [
+      34,
+      58,
+      360,
+      48
+    ],
+    "mapCard": [
+      34,
+      112,
+      360,
+      176
+    ],
+    "actionRow": [
+      34,
+      294,
+      360,
+      48
+    ],
+    "playTouchWidth": 112,
+    "visualControlHeight": 32
+  },
+  "sources": [
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/GraphicsSetupView.java",
+      "sha256": "2322764d1d082ff9358f2c49e9bbe5c7c50324f9ee45e58e137555dbcbafdf62"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MainActivity.java",
+      "sha256": "bee5969d3ac9ba8a7c387136db651cc2c6e0aa35bb29430ce1636a457fb9a887"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/BattleLaunchSpec.java",
+      "sha256": "7686c6824412ab538ef550e8c6b24c8d12fb2df7e14cd65d9bdadbb0210a7040"
+    },
+    {
+      "path": "app/src/main/assets/warzone/index.html",
+      "sha256": "db759acab4068d03611afbe20cf3786743abd2ab62e94ce88c1b113a892cd072"
+    },
+    {
+      "path": "app/src/main/assets/warzone/index-duel.html",
+      "sha256": "eceab8d7c32a22ad29bd8379a235da2669e89e1ea539ab97abe6b944151b4876"
+    },
+    {
+      "path": "app/src/main/assets/warzone/music-loader.js",
+      "sha256": "9a643ff34ed7671af21b86edcdfffc869414fee8aac4d36b9f894d3c76f6fdd2"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MusicTrackResponse.java",
+      "sha256": "d2a7526b8a5b5993761d5bea6941e065d54cc1db3bb35de8a449bbaeb81bc722"
+    },
+    {
+      "path": "app/build.gradle.kts",
+      "sha256": "eae703bf0683eef1a4d7cc3f78c712f551dd4ba3338061f6d0ea3370c93bcf0e"
+    }
+  ]
+}

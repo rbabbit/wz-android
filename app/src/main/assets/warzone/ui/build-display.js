@@ -2,7 +2,7 @@
 (() => {
   'use strict';
   if(window.WarzoneBuildDisplay)return;
-  const state={models:{},sites:[],preview:null,heights:new Map(),terrainRevision:null,drawn:[],frames:0,paintMs:0,maxPaintMs:0,error:'',dirty:true,key:'',owned:false,
+  const state={models:{},sites:[],preview:null,linePreview:[],heights:new Map(),terrainRevision:null,drawn:[],frames:0,paintMs:0,maxPaintMs:0,error:'',dirty:true,key:'',owned:false,
     catalog:new Map(),activeModule:null,moduleTargets:[],parents:new Map(),geometry:new Map(),moduleDrawn:[],targetSignature:'',
     facilityTargets:[],facilityBlockers:[]};
   const canvas=document.createElement('canvas');canvas.id='wt-build-models';canvas.setAttribute('aria-hidden','true');
@@ -247,7 +247,7 @@
   function frame(){
     requestAnimationFrame(frame);
     syncTerrain();
-    const terrain=window.WarzoneTerrain,needed=!!state.preview||state.sites.length>0||state.moduleTargets.length>0;
+    const terrain=window.WarzoneTerrain,needed=!!state.preview||state.linePreview.length>0||state.sites.length>0||state.moduleTargets.length>0;
     // Facilities retain only the lightweight current-camera observation. They
     // are never painted or projected in this frame loop; picking is on demand.
     const observing=needed||(state.facilityTargets.length>0&&facilitiesEnabled()&&!hidden());
@@ -264,7 +264,7 @@
     // Keep native minimap pixels and navigation unobstructed.
     ctx.save();ctx.beginPath();ctx.rect(view.left,view.top,view.width,view.height);ctx.clip();
     for(const mask of masks){ctx.beginPath();ctx.rect(view.left,view.top,view.width,view.height);ctx.rect(mask.x,mask.y,mask.width,mask.height);ctx.clip('evenodd');}
-    try{for(const site of state.sites)paintSite(view,site,false);for(const entry of targetEntries(view,masks))paintModuleTarget(entry,now);if(state.preview&&state.preview.item.category!=='MODULES')paintSite(view,state.preview,true);state.frames++}catch(e){state.error=String(e.message||e)}finally{ctx.restore();ctx.globalAlpha=1;state.paintMs=performance.now()-started;state.maxPaintMs=Math.max(state.maxPaintMs,state.paintMs)}
+    try{for(const site of state.sites)paintSite(view,site,false);for(const entry of targetEntries(view,masks))paintModuleTarget(entry,now);if(state.preview&&state.preview.item.category!=='MODULES')paintSite(view,state.preview,true);for(const site of state.linePreview)paintSite(view,site,true);state.frames++}catch(e){state.error=String(e.message||e)}finally{ctx.restore();ctx.globalAlpha=1;state.paintMs=performance.now()-started;state.maxPaintMs=Math.max(state.maxPaintMs,state.paintMs)}
   }
   window.WarzoneBuildDisplay={
     update(rows,catalog){const byId=new Map((catalog?.buildings||[]).map(b=>[b.id,b]));state.sites=rows.filter(r=>!['done','interrupted','cancelled'].includes(r.status)&&byId.has(r.itemId)).map(r=>({...r,item:byId.get(r.itemId)}));state.dirty=true},
@@ -289,19 +289,24 @@
       state.facilityBlockers=(blockers||[]).filter(d=>Number.isFinite(d.id)&&[d.x,d.y,d.z].every(Number.isFinite)).map(d=>({...d}));
     },
     pickFacilityTarget,
+    previewLine(item,points){
+      if(window.__warzoneDuelConfig?.mode==='duel'||item?.category!=='DEFENCES')return false;
+      state.preview=null;state.linePreview=(points||[]).filter(p=>Number.isInteger(p.x)&&Number.isInteger(p.y)).slice(0,64).map((point,index)=>({item,id:'line-preview-'+index,x:point.x,y:point.y,validation:['valid','invalid'].includes(point.validation)?point.validation:'pending'}));state.dirty=true;return true;
+    },
     preview(item,point){
+      state.linePreview=[];
       if(item.category==='MODULES'){
         const parentId=Number(point.parentId||point.target?.id),target=state.parents.get(parentId)||point.target;
         if(!target||target.moduleId!==item.id){window.WarzoneBuildDisplay.clearPreview();return false;}
         state.preview={item,x:target.x,y:target.y,parentId:target.id,rejected:!target.eligible};
       }else state.preview={item,x:point.x,y:point.y,validation:['valid','invalid'].includes(point.validation)?point.validation:'pending'};state.dirty=true;return true;
     },
-    clearPreview(){if(state.preview){state.preview=null;state.dirty=true}},
+    clearPreview(){if(state.preview||state.linePreview.length){state.preview=null;state.linePreview=[];state.dirty=true}},
     reject(item,x,y,parentId){if(state.preview?.item.id===item&&(parentId?state.preview.parentId===parentId:state.preview.x===x&&state.preview.y===y)){state.preview.rejected=true;state.preview.validation='invalid';state.dirty=true}},
-    reset(){state.heights.clear();state.terrainRevision=null;state.sites=[];state.preview=null;state.moduleTargets=[];state.activeModule=null;state.parents.clear();state.geometry.clear();state.moduleDrawn=[];state.drawn=[];state.targetSignature='';state.facilityTargets=[];state.facilityBlockers=[];ctx.clearRect(0,0,innerWidth,innerHeight);state.dirty=true},
+    reset(){state.heights.clear();state.terrainRevision=null;state.sites=[];state.preview=null;state.linePreview=[];state.moduleTargets=[];state.activeModule=null;state.parents.clear();state.geometry.clear();state.moduleDrawn=[];state.drawn=[];state.targetSignature='';state.facilityTargets=[];state.facilityBlockers=[];ctx.clearRect(0,0,innerWidth,innerHeight);state.dirty=true},
     report(options={}){const view=window.WarzoneTerrain?.view(),masks=view?blockedRects(view):[],entries=view&&!hidden()?targetEntries(view,masks):state.moduleTargets.map(target=>({target,geometry:null,visible:false,label:targetLabel(target),labelRect:null}));return {models:Object.keys(state.models).length,acceptedSites:state.sites.map(s=>({id:s.id,number:s.number,itemId:s.item.id,parentId:s.parentId||0,x:s.x,y:s.y,status:s.status})),drawn:state.drawn,preview:state.preview?.item.id||'',previewParentId:state.preview?.parentId||0,previewPoint:state.preview?{x:state.preview.x,y:state.preview.y,parentId:state.preview.parentId||0}:null,moduleItem:state.activeModule?.id||'',
       moduleTargets:entries.map(({target,geometry:g,visible,label,labelRect:box})=>({...target,label,visible,bounds:g?.bounds||null,footprint:g?.foot||[],outline:g?.outline||[],labelRect:box,hitPoints:visible?hitPoints(view,masks,g):[]})),moduleDrawn:state.moduleDrawn,
-      facilityTargets:facilityReport(options.facilityGeometry===true),facilityBlockerCount:state.facilityBlockers.length,
+      facilityTargets:facilityReport(options.facilityGeometry===true),facilityBlockerCount:state.facilityBlockers.length,linePreview:state.linePreview.map(p=>({itemId:p.item.id,x:p.x,y:p.y,validation:p.validation})),
       frames:state.frames,terrainRevision:state.terrainRevision,previewValidation:state.preview?state.preview.rejected?'invalid':state.preview.validation||'pending':'',paintMs:state.paintMs,maxPaintMs:state.maxPaintMs,error:state.error}}
   };
   window.addEventListener('warzone-command-reply',event=>{

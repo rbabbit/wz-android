@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "baselineSHA256": "b909a2344428fcda1e33d0c590bb8ec02599ea380ebadaeb23c61b9c411b1788",
+  "candidateAPK_SHA256": "16012cf201efea3faaf391872fcef0acf86117ebba0c9dd19e2b3494cb2a9ae2",
+  "changedAPKAssets": [
+    "assets/warzone-touch-controls.js",
+    "assets/warzone/music-loader.js"
+  ],
+  "newAPKAssets": [
+    "assets/warzone/map-music.json"
+  ],
+  "enginePayloadUnchanged": true,
+  "mapsAndRulesUnchanged": true,
+  "duelPayloadUnchanged": true,
+  "emulatorUsed": false,
+  "runtimeVerified": false,
+  "playbackVerified": false,
+  "mapTrackAssignmentFile": "app/src/main/assets/warzone/map-music.json",
+  "outputs": [
+    {
+      "path": "app/src/main/assets/warzone-touch-controls.js",
+      "bytes": 110983,
+      "sha256": "c20791e8e6083ba4f5c54d8ee3f911e5b930d2a513a6158acc522f7893aa8400"
+    },
+    {
+      "path": "app/src/main/assets/warzone/map-music.json",
+      "bytes": 2556,
+      "sha256": "595fb014ceed6023230443fc013131407e1530b245b6061ad749c810d6a074e9"
+    },
+    {
+      "path": "app/src/main/assets/warzone/music-loader.js",
+      "bytes": 18916,
+      "sha256": "0c6de12992e4014a0e2871aafe65cabee37bda23ae0b961fbe000a6f60037800"
+    }
+  ],
+  "scope": "Source review, JavaScript syntax, Android compilation and byte-preservation checks only; no emulator or playback/UI/gameplay run.",
+  "recordedUTC": "2026-11-09T09:21:06.115368+00:00"
+}

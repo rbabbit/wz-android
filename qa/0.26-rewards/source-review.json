@@ -1,0 +1,65 @@
+{
+  "version": "0.26",
+  "emulatorUsed": false,
+  "screensVerified": false,
+  "gameplayVerified": false,
+  "androidPersistenceExecuted": false,
+  "candidateAPK_SHA256": "ab464a5e280e0936b4d486c5a20219bc20e0a9860dab9c014c2ab2dd8f1e0cac",
+  "build": "clean assembleDebug; focusedrebuild afterLasSatcancellation andreceiptcopy;successful",
+  "signature": "APKSignatureSchemev2 verified",
+  "sourceReview": [
+    "19catalogentries:4fortresses,6defences,5artillery,4support;noAA/repair/trucks",
+    "Shopquantities1/5/10/15/20/+5; portableglobalstock; separateNextmatchquantities;threecombinedfortresses",
+    "v1phonewallet/boughtpendingstock migrateswithoutstartergiftortruncatinglegacyhelditems",
+    "ActualnativeclearedwaveIDsforwardedbeforeterminalcallback;5coinscreditedonceperID notroundstart/skip",
+    "ReceiptlabelsTotalearnedthismatch andincludespreviouslysavedwavecoins withoutdoublecredit",
+    "Normalcompletion60/80/100andfirst50retained;oldtenwavepayoutremoved",
+    "Freshauthoritativeremainingquotarequiredbeforeunusedstockreturn;crashcannotrefundstaleappliedstock",
+    "DefeatandvictoryreturnHomewithsame map/difficulty selectionbeforecreditedreceipt",
+    "NativeLasSatselect/visibleenemytarget/cooldown usesoriginalnativeAPI;noengineweaponrewrite",
+    "PendingLasSattargetingcancellablebyBack/newnavigationthroughBuildexitandfreshquery",
+    "Noemulator/browser/nativefiringobservation;focusedJVM/Nodefixturesareboundarysimulationsonly"
+  ],
+  "limitations": [
+    "Actual0.26screens/gameplay/nativefiringunverifiedbyexplicitnoemulatorinstruction.",
+    "Onunconfirmedapplied-runcrash,unusedstockisconservativelynotrefundedfromstalesnapshots."
+  ],
+  "sources": [
+    {
+      "path": "app/build.gradle.kts",
+      "sha256": "7d7c5596b992e4fc1750561c0cc5b8ca56b155f762dc5f544ab2a867aa1db248"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MainActivity.java",
+      "sha256": "c3a533b51e223a5940042f652017df3b258039b8ed4503eb8e8df27ebaab1ea4"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/RewardCatalog.java",
+      "sha256": "eecdf521ab4fc1690e4b182cf32c7325874eed34b6c362394309702f164a19b1"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/RewardsView.java",
+      "sha256": "f6730acc5b952f685a80646a739881bbaeddff0c8cb8c6df09605d252ad44bc5"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/RewardReceiptView.java",
+      "sha256": "fbb32e0905793f176770f0054bc2089ef6f35bb258b0c07993a399d413fd78e3"
+    },
+    {
+      "path": "app/src/main/assets/warzone/rewards.js",
+      "sha256": "4703049f3977a191e092666cd5d6fa37a993d8f06144e032067c4875717423b9"
+    },
+    {
+      "path": "app/src/main/assets/warzone-html-session.js",
+      "sha256": "82717cc3923f16386e4b77b193ed265fc9b34a395825a70fde0edc8086921e52"
+    },
+    {
+      "path": "app/src/main/assets/warzone-touch-controls.js",
+      "sha256": "20f0ac23c1d1d79f3cbe9854dbe74290c6e4fcd01e5b14c81f81043c12a4a107"
+    },
+    {
+      "path": "app/src/main/assets/warzone-command-pages.js",
+      "sha256": "5f3afb70c1b775adce19bfa40966415793ecb51740a2c66fd6a563203a16e301"
+    }
+  ]
+}

@@ -1,5 +1,175 @@
 # Warzone Towers maintenance rules
 
+- 2026-11-09: user accepted the delivered 0.28 as the new GitHub benchmark and
+  authorized committing it to `main`, tagging `v0.28-benchmark`, and publishing
+  a release with the existing verified APK, complete source ZIP and checksums.
+  Preserve those delivery files unchanged; promotion documentation may postdate
+  the frozen source ZIP. Keep every older benchmark tag, release and fallback
+  artifact, including 0.27 and the separate v6.4 project. This authorization
+  supersedes the preceding restrictions on GitHub promotion for this version.
+  No further emulator testing is authorized or needed for the promotion;
+  publish the existing evidence with its original scope, without a new build
+  or source-archive repack. Repository/release verification is read-only.
+
+- 2026-11-09: user authorized 0.28 option1 Rewards for Home and in-game:
+  compact native illustrated rows, direct category tabs, familiar styling and
+  small controls. Preserve complete 0.27 APK/source/checksums by hash in
+  archive/fallback-0.28.json before app edits. Investigate the screenshot's
+  missing SAVE control and autosave error without assuming the phone's
+  installed version; verify the exact new APK's visible version, saving and
+  live purchasing through small real emulator checks owned by root. Keep all
+  existing prices, wallet/economic identity, item/fortress limits and saved
+  native state. Preserve native JS/data/WASM, all 46 maps, music, Duel and
+  unrelated app paths. Source checks support rather than replace actual
+  observations. Package complete source after focused delivery checks pass;
+  leave old artifacts, v6.4, GitHub benchmarks and VPS untouched.
+
+- 2026-11-09: user authorized 0.27 Save Game, a Home Saved Games list, in-game
+  Rewards purchases and a tiny five-coin wave notice in the header. Preserve
+  complete 0.26 APK/source/checksums in archive/fallback-0.27.json. Native save
+  files must retain reward run/session identity; reloading may not regrant
+  cleared-wave coins, starter gifts or consumed purchase quantities. Existing
+  catalog prices/wallet and three-fortress limits remain. Native purchases
+  use idempotent transactions and normal structure power costs. The latest
+  user authorization permits brief actual emulator checks of these affected
+  flows and supersedes the preceding no-emulator restriction for 0.27 only.
+  Root owns the device. Bind observations and fixture provenance to the exact
+  delivery APK; do not claim full gameplay or all-map verification. JVM/source
+  fixtures are separate supporting evidence. The reproduced Greenhaven save
+  failure requires shortening only its internal level alias to fit native
+  MAX_LEVEL_SIZE: UTF-8 length must be below 20 bytes. Permit exact catalog,
+  challenge and registration metadata overrides and source-builder updates
+  for that alias, preserving displayed names, terrain, objects and waves.
+  Check all 46 native names and enforce the boundary in phone save validation.
+  Preserve map content, vendor, music,
+  deferred Duel, compiled engine/WASM, original data prefix and unrelated VFS
+  bytes. Leave VPS, GitHub benchmarks, older artifacts and v6.4 untouched.
+
+- 2026-11-09: user authorized 0.26 portable expanded Rewards inventory, bulk
+  purchases and a per-match loadout, with at most three fortresses across all
+  fortress types and normal power costs for reward structures. Do not sell
+  AA, repair structures or trucks. Preserve existing wallet balances; migrate
+  unspent map-bound purchases into shared inventory without another starter
+  gift. Credit five coins once per actually cleared wave in a run, remove the
+  old ten-wave milestone payout and retain victory/first-completion bonuses.
+  Track real spawned-wave enemies without changing authored wave timing or
+  enemy rosters. Unused building items return to inventory; research/supply
+  boosts are consumed on match start. Preserve complete 0.25 artifacts in
+  archive/fallback-0.26.json. Only supported native append/reindex hooks may
+  change; compiled engine/WASM, original data prefix, maps, music, deferred
+  Duel and unrelated virtual files stay frozen. No emulator is authorized;
+  source fixtures, Android compilation and package integrity do not establish
+  actual gameplay, persistence or visual acceptance. Leave VPS, GitHub main/
+  v0.17-benchmark, older artifacts and v6.4 untouched.
+
+- 2026-11-09: user authorized 0.25 crystal rewards, a persistent local wallet,
+  optional match-only boosts and a result receipt with a same-map Home return
+  after defeat. Preserve the complete 0.24 APK/source/checksums by hash in
+  archive/fallback-0.25.json. Native reward hooks may be appended/reindexed
+  through the supported builder, preserving the compiled engine body/WASM,
+  original data prefix, all maps and unrelated virtual files. Preserve the
+  existing compact home, music, game controls, designs, authored waves and
+  deferred Duel payloads outside the explicit reward additions. No emulator
+  testing is authorized. Review source, run focused source-only fixtures,
+  compile Android and verify package/source integrity; do not present synthetic
+  checks as actual gameplay or visual verification. Leave VPS files, GitHub
+  main/v0.17-benchmark, older artifacts and v6.4 untouched.
+
+- 2026-11-09: user selected home mock option 1 and authorized 0.24 with changes
+  restricted to the home layout and removal of optional HD/HQ graphics from
+  the app. Keep the existing map preview, map selection, difficulty groups,
+  artwork, music, gameplay, saves and deferred Duel implementation. Remove HQ
+  controls, store/download/serving paths, loader and launch configuration;
+  do not alter or delete VPS files. Preserve complete 0.23 APK/source/checksums
+  by hash in archive/fallback-0.24.json. The user's final instruction explicitly
+  prohibits emulator testing and supersedes the earlier quick-emulator request
+  for this revision. Source review, Android compilation and package integrity
+  are the verification scope; do not claim runtime screens/gameplay verified.
+  Leave GitHub main/v0.17-benchmark, older artifacts and v6.4 untouched.
+
+- 2026-11-09: user reported that 0.22 music still does not play and explicitly
+  authorized a focused emulator reproduction, fix and delivery as 0.23. This
+  supersedes the prior no-emulator restriction for the affected music flow.
+  Root owns emulator-5556 and must verify the exact delivery APK with actual
+  media progress and audio output evidence, plus the relevant On/Off and
+  lifecycle returns. Keep the test bounded to music; do not rerun unrelated
+  gameplay suites. Preserve the complete 0.22 APK/source/checksums as fallback,
+  and keep all maps, waves, controls, saved templates, native program/data/WASM
+  and dormant Duel payloads unchanged. Source fixtures are supporting evidence,
+  not substitutes for the requested emulator observation. Leave GitHub
+  main/v0.17-benchmark, older artifacts and v6.4 untouched.
+
+- 2026-11-09: user reported downloaded music stuck on Starting music in the
+  first Easy map, authorized the audited music fixes as 0.22, and explicitly
+  prohibited emulator tests. Scope is the music loader and native single-track
+  response only: ordinary full-track fetch to an audio Blob URL, no double seek,
+  bounded startup/buffering wait, genuine On retry, and abort/resource cleanup.
+  Preserve track assignments and downloaded bytes, all other UI/gameplay/maps,
+  native engine/data/WASM and dormant Duel code. Retain complete 0.21 artifacts
+  by hash in archive/fallback-0.22.json. Meaningful source-only byte/control-flow
+  fixtures, source review, compilation and archive integrity checks are allowed;
+  never represent them as actual Android playback or gameplay observations.
+  Leave GitHub main/v0.17-benchmark, older artifacts and v6.4 untouched.
+
+- 2026-11-09: user authorized 0.21 assigned map music with a compact top-header
+  MUSIC On/Off panel and saved phone preference; replace the long chooser in
+  the active flow with an optional start-screen download, then Music ready.
+  Hide 1v1 vs Bot only from the start screen; retain its implementation and
+  old chooser code. Preserve all maps, names/IDs, waves, rules, controls,
+  templates, saves, native program/data/WASM and old Duel payloads. The same
+  verified optional music pack is streamed by track without replacing sound
+  effects or mounting the full pack into the Towers native heap. Preserve
+  complete 0.20 artifacts by hash in archive/fallback-0.21.json. Source review,
+  syntax/Android compilation and packaging integrity only: no emulator,
+  playback or gameplay tests. Do not claim runtime operation verified.
+  Leave GitHub main/v0.17-benchmark, older artifacts and v6.4 untouched.
+
+- 2026-11-09: user accepted the 0.19 home screen, requested a visible swipe
+  chevron and authorized remaking only the 43 generated maps as distinct,
+  attractive native landscapes informed by Dustfall and Iron Valley. Work is
+  0.20 on `codex/towers-map-art-0.20`. Preserve names/IDs, difficulty groups,
+  wave schedules, queues, saves, Duel, the three original maps and the frozen
+  engine body/WASM. Native map bytes, their existing registration stanzas,
+  preview/catalog art metadata and the native map-card chevron are the scope.
+  Keep every human uplink safely inside the rear base, with valid footprints,
+  routes and clear surroundings. The previous generated maps are frozen in
+  `C:/timerApp/old_maps-0.19.zip` (528 entries, 879410 bytes, SHA256
+  `b48e089c99ec5e60f2aa5ccc9896dfd38fc7dc0b030c276e4c38e95aa429ac3d`).
+  Complete 0.19 delivery and map-backup hashes are in
+  `archive/fallback-0.20.json`. Source/art review, static authoring constraints
+  and Android build only: **no emulator testing**, including the home screen.
+  Source previews are actual native-map/asset-data renders, not evidence of
+  in-engine appearance or gameplay. Leave GitHub `main`, `v0.17-benchmark`,
+  older tags/artifacts and v6.4 untouched.
+
+- 2026-11-09: user authorized 0.19 with 43 new maps (15 Easy, 15 Medium,
+  13 Hard), a native swipeable map browser, Greenhaven's satellite uplink and
+  defence line previews capped at 64 candidate sites, subject to native
+  validation. Preserve all three
+  existing maps and their schedules: Greenhaven is Easy, Dustfall/Iron Valley
+  are Hard, making 46 maps total with counts 16/15/15. Catalog IDs are
+  `easy01`–`easy15`, `medium01`–`medium15`, `hard01`–`hard13`, plus `beginner`,
+  `td1`, `td2`; preserve the default `td2` and separate Duel route/choices.
+  Preserve original artwork, native IDs/orders/queues and the frozen engine
+  body/WASM; custom asset append/reindex and the Greenhaven structure addition
+  are authorized. Preserve the complete 0.18 APK/source/checksums by hash
+  reference in archive/fallback-0.19.json. Source audit/review, Android build
+  and only a brief native home-screen emulator check are authorized; root owns
+  that check. No gameplay, pathfinding, balance or drag testing is authorized.
+  Do not claim those behaviours verified. Leave GitHub `main`,
+  `v0.17-benchmark`, older tags/artifacts and v6.4 untouched.
+
+- 2026-11-08: user authorized Greenhaven as a third Beginner map for 0.18 on
+  `codex/beginner-map-0.18`, map ID `beginner`, with 15 proposed gentle waves
+  and a connected southern starting base. Preserve both existing maps, their
+  wave schedule and the supplied mod. New map/scenario data and supported
+  append/reindex metadata are authorized; the compiled engine program body and
+  WASM remain frozen. Preserve the complete 0.17 APK/source/checksums by hash
+  reference in archive/fallback-0.18.json without duplicating its 1.87 GB source.
+  Source audit/review and Android build only: no tests, emulator or runtime
+  checks were requested. Do not claim verified difficulty or playability.
+  Leave GitHub `main`, `v0.17-benchmark`, older tags/artifacts and v6.4 untouched.
+
 - 2026-11-08: user accepted existing 0.17 as the new current benchmark on GitHub
   `main`, tagged `v0.17-benchmark`. Promote the existing delivered APK/source
   unchanged; no rebuild, tests or emulator checks were requested for promotion.
@@ -131,7 +301,7 @@
   mistake a stale cached snapshot for a working bridge or repeat a failed load.
 - Archive upload checksums are in `archive/`; after intentional edits regenerate
   the repository file manifest with `python tools/verify-project.py --refresh`.
-- Both selectable maps use the unchanged supplied Towers mod. TD1 is the exact
+- Both original maps use the unchanged supplied Towers mod. TD1 is the exact
   NoQ td1_v3 archive (four starts; human position 0, native Ready y=30). Existing
   TD2 uses human position 1 (Ready y=70). Do not assume one lobby row for both.
 - TD1's construction trucks live on raised platforms disconnected from the HQ

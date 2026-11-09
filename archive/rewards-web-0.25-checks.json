@@ -1,0 +1,83 @@
+{
+  "scope": "Bounded Node VM fixtures execute actual web source and extracted actual placement functions. Java bridge guards are source-inspected only. No emulator, browser, native UI, gameplay or device persistence verified.",
+  "emulatorUsed": false,
+  "screensVerified": false,
+  "gameplayVerified": false,
+  "passed": 10,
+  "checks": [
+    {
+      "name": "One native apply request survives repeated timer polls while pending and becomes ready only after durable acknowledgement",
+      "passed": true
+    },
+    {
+      "name": "Rewards opens a read-only native view only after Build exit completes",
+      "passed": true
+    },
+    {
+      "name": "Native rejection and persistence failure keep the startup gate closed",
+      "passed": true
+    },
+    {
+      "name": "Ending a match before an apply acknowledgement prevents persistence and use of its late result",
+      "passed": true
+    },
+    {
+      "name": "Stale saved configuration and acknowledgements from another session fail closed",
+      "passed": true
+    },
+    {
+      "name": "Dormant Duel receives no rewards module, timer, bridge call or reward progress callback",
+      "passed": true
+    },
+    {
+      "name": "Actual native wave progress is forwarded before terminal settlement and duplicated output settles once",
+      "passed": true
+    },
+    {
+      "name": "Unrelated mode packets do not establish a Towers battle or report reward progress",
+      "passed": true
+    },
+    {
+      "name": "Actual fortress line policy forbids purchased lines and preserves normal researched and ordinary defence lines",
+      "passed": true
+    },
+    {
+      "name": "Legacy paid fortress taps use native queue reservation instead of Ctrl-click; ordinary paths stay intact",
+      "passed": true
+    }
+  ],
+  "sources": [
+    {
+      "path": "app/src/main/assets/warzone/rewards.js",
+      "sha256": "1f01d28b0b5265ea64981ca49207309b3838c1a672c70d69d70bdd838598e12f"
+    },
+    {
+      "path": "app/src/main/assets/warzone-html-session.js",
+      "sha256": "c7b5fc19f6dee9a7d7c23fdc21b8a85dab0f334dacbbd3d804c580eec4a75163"
+    },
+    {
+      "path": "app/src/main/assets/warzone-command-pages.js",
+      "sha256": "f379f9595c82fbdca6599d22a656ea22b76e879f9bfd152e4a29baf692a6437a"
+    },
+    {
+      "path": "app/src/main/assets/warzone-touch-controls.js",
+      "sha256": "90592e7ce624334d39b428686f8e36c28d5add937d8e486a839d7eabd5b2cd86"
+    },
+    {
+      "path": "app/src/main/assets/warzone/index.html",
+      "sha256": "db759acab4068d03611afbe20cf3786743abd2ab62e94ce88c1b113a892cd072"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MainActivity.java",
+      "sha256": "0826a1f6637cd137e0cc29a903006fae176bc7f7fd9ea4fe852cc5632f2c5464"
+    },
+    {
+      "path": "tools/check-rewards-web-025.cjs",
+      "sha256": "b3a323e07afe0ca6f04e785c5f37ed7ab4f05ea06f992ff532dc5a81e5accaab"
+    }
+  ],
+  "javaSourceAuditOnly": [
+    "In-game reward view blocks Duel, ended/loading/home states",
+    "In-game reward purchase callback returns without buying"
+  ]
+}

@@ -1,4 +1,126 @@
-# Warzone Towers 0.14 — compact Towers pages
+# Warzone Towers 0.28 — compact illustrated Rewards
+
+Native design result: passed. No P0/P1/P2 visual issues remain in the affected
+surfaces reviewed by root on the final 1600×720 emulator candidate, SHA256
+`fa1d41a8287937c3edf2f1f36b1bcddfce95e31dd1f06ad26dc500c4a8d9e52f`.
+
+The accepted target is displayed mock1 preserved in
+`docs/ui-0.28/1-rewards-drawer.png` and `docs/ui-0.28/mockup.json`. Root compared
+the actual native Home/in-game captures with this image rather than treating
+an image-generation reference as evidence of a working app.
+
+The five fidelity surfaces passed:
+
+- Drawer and frame: compact right-aligned native Rewards panel on Home and
+  in-game, with the underlying screen retained and no webpage-style nested boxes.
+- Header and modes: condensed title, crystal wallet, close control, and compact
+  SHOP / NEXT MATCH on Home or SHOP / THIS MATCH during play.
+- Categories: four direct Fortresses / Defences / Artillery / Support controls,
+  with visible active state and no stock category popup.
+- Item rows: original bundled game thumbnails, short names/counts, aligned prices
+  and one selected row, without repeated paragraphs or divider lines. The
+  initial P2 tint-obscured selection mark was fixed before the final captures;
+  the native checkmark is now legible.
+- Purchase controls: compact inline quantity adjustment and bulk quantities,
+  current total price, a modest BUY/TAKE action and short stock/limit copy.
+
+The implementation intentionally uses Android font metrics and concise actual
+stock counts. Its maximum-three-fortresses copy replaces the mock's illustrative
+lifetime-style counter. These differences preserve real behavior rather than
+inventing a new counter or economy.
+
+Final visual evidence includes `delivery-02-home-fortresses.png`,
+`delivery-03-home-next-match.png`, `delivery-05-ingame-fortresses.png`,
+`delivery-06-bulk-purchased.png` and `delivery-07-this-match.png` under
+`qa/0.28-rewards/`. The visible Home/Help version and SAVE control identify 0.28;
+the supplied phone screenshot's installed version remains unconfirmed.
+
+Root also observed real live purchasing, a normal paid Ripple build, manual
+native saves and loads on the final APK. The older pre-purchase and newer
+post-purchase save each retained the latest five remaining items without a
+second charge. After an app restart, loading retained balance50 and five
+remaining items, with a fresh document and original economic run. All ten
+final core checks are recorded in
+`qa/0.28-rewards/focused-emulator-proof.json`; its separate supplemental
+automatic-save observation identifies the earlier candidate and identical
+native payload explicitly. Functional quantities and fixture provenance do not
+follow from visual similarity or synthetic source tests.
+
+The known emulator black-terrain limitation remains. This is a bounded native
+Rewards/save/purchase pass, not a full campaign, all-map, unrelated gameplay or
+physical-device graphics/performance verification. Historical reviews below
+retain their original identities.
+
+# Historical Warzone Towers 0.27 — saved games and in-game Rewards
+
+final result: passed
+
+This pass is limited to the eight focused observations in
+[the emulator proof](qa/0.27-saves/focused-emulator-proof.json), on the installed
+1080×600 APK with SHA256
+`5014b70184f120f0f237f33aef730981793b4dc982f255658290e4505370ad51`.
+It accepts the compact SAVE/header control, Home Saved Games list, in-game
+purchase flow and tiny +5 notice inside Rewards. The current
+[saved-list capture](qa/0.27-saves/final-06-saved-games.png) and
+[wave-notice capture](qa/0.27-saves/final-08-wave-crystals.png) were inspected;
+root reviewed the complete final screenshot set bound in the proof.
+
+Actual Greenhaven native QuickSave/private phone archive and Home Load retained
+four stationary truck IDs/positions, the original economic run and both genuine
+purchase journals/allowances. A genuine first wave paid 295→300 on this exact
+APK. Home, force-stop/restart and loading the older wave-zero slot retained
+balance 300 without a new charge or starter gift. Repeated menu returns restored
+input. The proof identifies these real observations separately from synthetic
+source/JVM fixtures; no world/save seeding or debug wave packets were used.
+
+The known emulator black-terrain rendering limitation remains and is outside
+this overlay/save-flow acceptance. This is not a full campaign, all-map,
+physical-device graphics/performance or unrelated gameplay regression pass.
+Historical reviews below retain their original version identities.
+
+# Historical Warzone Towers 0.26 — portable rewards and wave coins
+
+final result: blocked
+
+No current runtime visual comparison was performed: emulator testing remains
+explicitly prohibited for this revision. The existing native Rewards/receipt
+layout is extended for global inventory, quantity controls, a selected match
+loadout and wave/bonus receipt rows. Source-only fixtures and compilation do
+not establish rendered fit, touch behaviour, Android persistence or gameplay.
+The accepted 0.25 references remain design grounding, not current screenshots.
+Historical reviews below retain their original versions and evidence.
+
+# Historical Warzone Towers 0.25 — rewards and result receipt
+
+final result: blocked
+
+Visual runtime comparison was intentionally not performed: emulator testing is
+explicitly prohibited for this revision. These are Android-native rewards and
+result views over the existing game; browser substitutes would not verify their
+rendered layout or native input. Source review, focused fixtures and compilation
+do not establish current visual or gameplay operation. Historical reviews below
+remain attached to their original versions and are not current acceptance.
+The three approved mockups are preserved in `docs/ui-0.25/` as design references,
+not as proof of compiled screens.
+
+# Historical Warzone Towers 0.24 — option 1 home
+
+final result: blocked
+
+Visual runtime comparison was intentionally not performed: the user's latest
+instruction explicitly prohibits emulator testing. This is an Android-native
+screen; a browser recreation would not verify the actual layout. The selected
+reference is [option 1](docs/ui-0.24/approved-home.png). HD controls shown in that
+reference are intentionally omitted at the user's request.
+
+Source review and Android compilation cover the compact difficulty tabs, the
+unchanged map pager, one 48dp Play/music touch row, the original artwork, music
+download/progress/cancel paths and removal of all optional HD loading paths.
+They do not establish rendered appearance or input behaviour. No current visual
+pass or emulator/gameplay verification is claimed. Historical results below
+apply only to their identified older APKs.
+
+# Historical Warzone Towers 0.14 — compact Towers pages
 
 Final result: passed.
 

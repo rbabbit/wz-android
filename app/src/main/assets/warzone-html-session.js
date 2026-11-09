@@ -11,6 +11,11 @@
     // Pausing stops scenario ticks; absence of a packet is never an exit.
     if (phase === 'ended' || !wave || wave.mode !== mode) return false;
     if(duel&&(!['active','victory','defeated'].includes(wave.phase)||wave.humanBranch!==config.humanBranch||wave.botBranch!==config.botBranch))return false;
+    if (!duel) {
+      const credited = window.BlockNightAndroid?.rewardProgress?.(session, JSON.stringify({
+        wave:wave.wave, phase:wave.phase, completedWaves:wave.completedWaves || [], rewards:wave.rewards || null}));
+      if (Number(credited) > 0) window.WarzoneRewards?.waveCredited?.(Number(credited));
+    }
     if (phase === 'playing') return true;
     phase = 'playing';
     window.__kalaWarzoneTouch?.setBattleActive?.(true);
@@ -62,6 +67,7 @@
   }
   async function back() {
     if (phase === 'ended') return;
+    if (window.WarzoneRewards?.cancelTarget?.()) return;
     window.__kalaWarzoneTouch?.cancelFacilityNavigation?.();
     if(!duel&&window.parent?.TowersStatus?.handleBack?.())return;
     const commands = window.__warzoneCommands, tech = window.__blockNightResearch;
@@ -96,7 +102,10 @@
     menuRequested = false;
     // Retire input immediately, then flush saves before the confirmed WebView
     // unload. Never reveal or send keys into the engine's stock frontend.
-    exit('main-menu');
+    const leave = () => { if (phase !== 'ended') exit('main-menu'); };
+    if (!duel && window.WarzoneRewards?.prepareExit)
+      Promise.resolve(window.WarzoneRewards.prepareExit()).then(leave, leave);
+    else leave();
     return true;
   }
   function observeNativeOutput(text) {

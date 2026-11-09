@@ -357,6 +357,7 @@ function wtcmd_snapshot()
     });
     const facilityTargets = wtcmd_facilityTargets();
     return { version: 1, gameTime: gameTime, player: selectedPlayer, power: playerPower(selectedPlayer),
+        rewards:typeof wtreward_state === "function" ? wtreward_state() : null,
         facilityTargets:facilityTargets, facilityBlockers:wtcmd_facilityBlockers(facilityTargets),
         mapWidth: mapWidth, mapHeight: mapHeight, alwaysQueue: true,
         researchQueues: enumStruct(selectedPlayer, RESEARCH_LAB).map(function(lab) {
@@ -447,6 +448,10 @@ function wtcmd_planBuild(command)
         x = parent.x; y = parent.y;
     }
     if (!Number.isInteger(x) || !Number.isInteger(y) || x < 0 || y < 0 || x >= mapWidth || y >= mapHeight) return { error: "invalid" };
+    if (typeof wtreward_canBuild === "function") {
+        const rewardError = wtreward_canBuild(item.id);
+        if (rewardError) return { error: rewardError };
+    }
     if (!isStructureAvailable(item.id, selectedPlayer)) return { error: "unavailable" };
     if (wtcmd_openJobs().length >= 256) return { error: "queue-full" };
     const choice = wtcmd_chooseWorkers(command, x, y);
@@ -740,6 +745,30 @@ function wtcmd_poll()
         if (wtcmd_replies[command.nonce]) { dump("WTCMD:" + JSON.stringify(wtcmd_replies[command.nonce])); return; }
         try {
             if (command.action === "state") wtcmd_answer(command, true, "", wtcmd_snapshot());
+            else if (command.action === "apply-rewards") {
+                const result = typeof wtreward_apply === "function" ? wtreward_apply(command.rewards) : {ok:false,error:"rewards-unavailable"};
+                wtcmd_answer(command, result.ok, result.error, result);
+            }
+            else if (command.action === "add-rewards") {
+                const result=typeof wtreward_add === "function" ? wtreward_add(command.rewards) : {ok:false,error:"rewards-unavailable"};
+                wtcmd_answer(command,result.ok,result.error,result);
+            }
+            else if (command.action === "resume-rewards") {
+                const result=typeof wtreward_resume === "function" ? wtreward_resume(command.rewards) : {ok:false,error:"rewards-unavailable"};
+                wtcmd_answer(command,result.ok,result.error,result);
+            }
+            else if (command.action === "reward-inventory") {
+                const result=typeof wtreward_state === "function" ? wtreward_state() : {ok:false,error:"rewards-unavailable"};
+                if (typeof warzoneTowersWaves_refreshClears === "function") {
+                    warzoneTowersWaves_refreshClears();
+                    result.completedWaves=warzoneTowersWaves_state.completedWaves.slice();
+                }
+                wtcmd_answer(command,result.ok,result.error,result);
+            }
+            else if (command.action === "reward-lassat") {
+                const result=typeof wtreward_fireLasSat === "function" ? wtreward_fireLasSat(command) : {ok:false,error:"rewards-unavailable"};
+                wtcmd_answer(command,result.ok,result.error,result);
+            }
             else if (command.action === "track-site") wtcmd_trackSite(command);
             else if (command.action === "queue-build") wtcmd_queueBuild(command);
             else if (command.action === "preview-build") {

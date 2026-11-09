@@ -1,0 +1,132 @@
+{
+  "candidateAPK_SHA256": "af42705865e83cd80b0fa1f631f5e90753869d35e2ec8f6e334f40d603658f44",
+  "emulatorUsed": true,
+  "musicPlaybackObserved": true,
+  "gameplayVerified": false,
+  "cacheFixture": "Canonical optional pack copied to app-private cache and hash-verified by the real app; download flow not tested.",
+  "instrumentation": "Audio constructor observer returns the original native browser element unchanged; play/fetch/decoder are not replaced.",
+  "observations": {
+    "initialState": {
+      "mode": "map",
+      "cached": true,
+      "enabled": true,
+      "mapId": "beginner",
+      "trackId": "original_soundtrack/track1.opus",
+      "title": "Track 1",
+      "author": "Martin Severn",
+      "url": "https://appassets.androidplatform.net/warzone/optional/map-music/original_soundtrack/track1.opus",
+      "battleActive": true,
+      "suspended": false,
+      "playing": true,
+      "loading": false,
+      "loadedBytes": 2418624,
+      "error": "",
+      "disposed": false,
+      "transport": "track-blob",
+      "nativeMusicEnabled": false,
+      "selectedTracks": [
+        "original_soundtrack/track1.opus"
+      ]
+    },
+    "mediaBefore": [
+      {
+        "time": 0.07909,
+        "paused": false,
+        "ready": 4,
+        "network": 1,
+        "src": "blob:https://appassets.androidplatform.net/2a0f3d9c-6141-414f-8529-1eeafa258e82",
+        "error": null,
+        "capture": "function"
+      }
+    ],
+    "mediaAfter": [
+      {
+        "time": 1.882702,
+        "paused": false,
+        "ready": 4,
+        "network": 1,
+        "src": "blob:https://appassets.androidplatform.net/2a0f3d9c-6141-414f-8529-1eeafa258e82",
+        "error": null,
+        "capture": "function"
+      }
+    ],
+    "capture": {
+      "available": true,
+      "tracks": [
+        {
+          "ready": "live",
+          "enabled": true
+        }
+      ],
+      "context": "running"
+    },
+    "pcm": {
+      "rms": 0.06067919053099358,
+      "peak": 0.19861605763435364,
+      "context": "running"
+    },
+    "offState": {
+      "mode": "map",
+      "cached": true,
+      "enabled": false,
+      "mapId": "beginner",
+      "trackId": "original_soundtrack/track1.opus",
+      "title": "Track 1",
+      "author": "Martin Severn",
+      "url": "https://appassets.androidplatform.net/warzone/optional/map-music/original_soundtrack/track1.opus",
+      "battleActive": true,
+      "suspended": false,
+      "playing": false,
+      "loading": false,
+      "loadedBytes": 0,
+      "error": "",
+      "disposed": false,
+      "transport": "track-blob",
+      "nativeMusicEnabled": false,
+      "selectedTracks": [
+        "original_soundtrack/track1.opus"
+      ]
+    },
+    "offMedia": [
+      {
+        "time": 0,
+        "paused": true,
+        "ready": 0,
+        "network": 0,
+        "src": "blob:https://appassets.androidplatform.net/2a0f3d9c-6141-414f-8529-1eeafa258e82",
+        "error": null,
+        "capture": "function"
+      }
+    ],
+    "onState": {
+      "mode": "map",
+      "cached": true,
+      "enabled": true,
+      "mapId": "beginner",
+      "trackId": "original_soundtrack/track1.opus",
+      "title": "Track 1",
+      "author": "Martin Severn",
+      "url": "https://appassets.androidplatform.net/warzone/optional/map-music/original_soundtrack/track1.opus",
+      "battleActive": true,
+      "suspended": false,
+      "playing": true,
+      "loading": false,
+      "loadedBytes": 2418624,
+      "error": "",
+      "disposed": false,
+      "transport": "track-blob",
+      "nativeMusicEnabled": false,
+      "selectedTracks": [
+        "original_soundtrack/track1.opus"
+      ]
+    }
+  },
+  "playbackEvidence": {
+    "mediaTimeAdvanced": true,
+    "decodedPCMNonZero": true,
+    "audioOutputObserved": false,
+    "hostAudioSinkAvailable": null
+  },
+  "audioOutputLimitation": "Audible speaker output was not monitored, so host speaker availability is unknown. The earlier emulator session logged audio HAL errors; after recovery actual media progress and nonzero decoded PCM were verified.",
+  "audibleOutputVerified": false
+}

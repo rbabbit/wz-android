@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "scope": "Deterministic Node VM checks of actual loader with synthetic fetch/media and clock. No browser decoder, audible playback, Android UI, emulator or gameplay execution.",
+  "source": "app/src/main/assets/warzone/music-loader.js",
+  "sourceSHA256": "0c3fa70398432f64bad494ef4ce3aa0f72984e49c6ced1069b656788bdf5b53a",
+  "sources": [
+    {
+      "path": "app/src/main/assets/warzone/music-loader.js",
+      "sha256": "0c3fa70398432f64bad494ef4ce3aa0f72984e49c6ced1069b656788bdf5b53a"
+    },
+    {
+      "path": "tools/check-map-music-022.cjs",
+      "sha256": "8d4a43880b33b06af0fc0159974a2e1bdd69afdf54edb9be0cd966edecfbdec2"
+    }
+  ],
+  "emulatorUsed": false,
+  "playbackVerified": false,
+  "runtimeVerified": false,
+  "simulatedSourceChecks": true,
+  "checks": [
+    {
+      "name": "Complete assigned track becomes Blob media; native engine music stays disabled",
+      "passed": true
+    },
+    {
+      "name": "Hung single-track fetch ends with retry message and aborted request",
+      "passed": true
+    },
+    {
+      "name": "On restarts an unresolved fetch immediately, before timeout or error",
+      "passed": true
+    },
+    {
+      "name": "A response whose body never finishes is also bounded and explicitly retryable",
+      "passed": true
+    },
+    {
+      "name": "Never-settling play promise times out and a later On restarts it",
+      "passed": true
+    },
+    {
+      "name": "On also restarts a pending play promise before an error exists",
+      "passed": true
+    },
+    {
+      "name": "Resolved play promise without playing event cannot leave startup unbounded",
+      "passed": true
+    },
+    {
+      "name": "Decoder/play rejection is nonfatal and only explicit On retries",
+      "passed": true
+    },
+    {
+      "name": "Repeated stalled events cannot perpetually extend buffering deadline",
+      "passed": true
+    },
+    {
+      "name": "Playback recovery clears a buffering deadline",
+      "passed": true
+    },
+    {
+      "name": "Off aborts pending IO; ignored late fetch completion cannot create audio",
+      "passed": true
+    },
+    {
+      "name": "Background aborts fetch; resume uses fresh current metadata",
+      "passed": true
+    },
+    {
+      "name": "Off, hidden document and disposal each release Blob/player without changing native audio",
+      "passed": true
+    },
+    {
+      "name": "Disposed player ignores late play promise and media events",
+      "passed": true
+    },
+    {
+      "name": "Truncated track and partial HTTP response fail without exposing media Blob",
+      "passed": true
+    },
+    {
+      "name": "Retained Duel initialization still uses its native playlist path",
+      "passed": true
+    }
+  ]
+}

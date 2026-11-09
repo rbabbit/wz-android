@@ -1,0 +1,84 @@
+{
+  "version": "0.28",
+  "emulatorUsed": false,
+  "gameplayVerified": false,
+  "androidPersistenceExecuted": false,
+  "candidateAPK_SHA256": "fa1d41a8287937c3edf2f1f36b1bcddfce95e31dd1f06ad26dc500c4a8d9e52f",
+  "scope": "Final current source and compiled-package review only. Root owns the separate exact-APK emulator proof and visual observations. No phone-installed-version claim.",
+  "sourceReview": [
+    "The native RewardsView uses direct categories and the original game art; stock category/quantity PopupMenus are removed.",
+    "Home SHOP/NEXT MATCH and in-game SHOP/THIS MATCH retain one backend catalog and existing limits/prices.",
+    "Unchanged balance/inventory refreshes do not rebuild reward rows; transaction busy state survives ordinary progress updates.",
+    "Live transaction waits are bounded, unknown outcomes retain the same reservation and a retry reuses its transaction identity.",
+    "Persisted applied-transaction journal floors prevent stale native packets from reducing quantities granted by a newer purchase.",
+    "Loading a saved run gates remaining-inventory updates until the native resume handshake confirms the reconciled state.",
+    "Visible package version and SAVE control identify the current build; the screenshot alone does not identify the physical phone package.",
+    "Entire native JS/data/WASM and all maps/music/Duel remain identical to0.27. Its Greenhaven native save alias correction remains intact."
+  ],
+  "sourceCheckReports": [
+    {
+      "path": "archive/reward-ledger-0.28-checks.json",
+      "sha256": "4a005057897147764965715c86a3a1d755be68380a039f52dffb5a78244a3c29"
+    },
+    {
+      "path": "archive/rewards-web-0.28-checks.json",
+      "sha256": "2a1be925aac21c67aaf14d4d77fc23df91a26f6ae5c8b77128fef3e4f55fefe8"
+    },
+    {
+      "path": "archive/save-version-0.28-audit.json",
+      "sha256": "7c9f0189d13dd6a1308669533b302980a19543514bb64a0cbb1e7d43419d13f3"
+    }
+  ],
+  "nativeAssetSHA256": {
+    "js": "bd59230991cf29d548be7ddb4336cf05dabe3ca4427cb62b4a8bce0821d93d24",
+    "data": "f2200f13b2197d0162a12737898c12be2545482a78529a6d7c83c54d8a34e16b",
+    "wasm": "d909a4ecb7475643107fa6f489279562c00deae1e0a0f531ddd1328457d78f1e"
+  },
+  "sources": [
+    {
+      "path": "app/build.gradle.kts",
+      "bytes": 696,
+      "sha256": "8809131b0cbaf381e2b5558b794fd5843e14c7c1e1b6b4723ec970475be42dbf"
+    },
+    {
+      "path": "app/src/main/assets/warzone-touch-controls.js",
+      "bytes": 114340,
+      "sha256": "fdaf27990c0a25ab9f4f11be3acd1f0e1ea1d071f1aa1b4c13fcfdc5245865e6"
+    },
+    {
+      "path": "app/src/main/assets/warzone/rewards.js",
+      "bytes": 12009,
+      "sha256": "d0bf5f789ebbadc5ffa7c9e600bb34400e0d645c999f63da69fbb3530fe7b62d"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/GraphicsSetupView.java",
+      "bytes": 23810,
+      "sha256": "be1bb8581e5efe0efef1baad8adfae02bd3fe4ce81e1b06fb979141db7e89748"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MainActivity.java",
+      "bytes": 82890,
+      "sha256": "7c4321ab6464cabc9fbd67a10945814d69a286a43ca243f210a894b0d7b90442"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/RewardLedger.java",
+      "bytes": 17903,
+      "sha256": "9a73809e429e9ad044321e0a06e932a436844be5e9aaa054f46fc8956dbaee83"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/RewardStore.java",
+      "bytes": 26220,
+      "sha256": "8bd286c409a961620b24271acaf2045f679030f4375d049a6e3acc7728d14b55"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/RewardsView.java",
+      "bytes": 27679,
+      "sha256": "e5c8e91a83bcf7378f9f79809c128997d675a7b8e5154672d942f3b63c5e6d55"
+    }
+  ],
+  "limits": [
+    "Source/VM/JVM fixtures are separate from Android persistence or gameplay observations.",
+    "Exact final emulator results and screenshot provenance are recorded in the independently hash-bound delivery proof.",
+    "The physical phone installation and all-map/campaign behavior were not observed in this source audit."
+  ]
+}

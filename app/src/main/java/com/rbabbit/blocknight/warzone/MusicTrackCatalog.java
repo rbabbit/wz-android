@@ -23,8 +23,11 @@ final class MusicTrackCatalog {
         }
     }
     static final class Track {
-        final String id, title;
-        Track(JSONObject value) throws Exception { id=value.getString("id"); title=value.getString("title"); }
+        final String id, title, author;
+        Track(JSONObject value) throws Exception {
+            id=value.getString("id"); title=value.getString("title");
+            author=value.optString("author", "");
+        }
     }
     final List<Album> albums = new ArrayList<>();
     MusicTrackCatalog(Context context) {
@@ -39,6 +42,10 @@ final class MusicTrackCatalog {
         Set<String> result=new HashSet<>();
         for(Album album:albums) for(Track track:album.tracks) result.add(track.id);
         return result;
+    }
+    Track find(String id) {
+        for(Album album:albums) for(Track track:album.tracks) if(track.id.equals(id)) return track;
+        return null;
     }
     String selectionJson(Set<String> selected) {
         JSONArray value=new JSONArray();

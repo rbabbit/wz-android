@@ -1,0 +1,156 @@
+// Three Rivers: isolated native Towers wave profile.
+// Authored difficulty; not gameplay/balance verified.
+people = [
+    "*BaBa MG* *BaBa Body* BaBaLegs",
+]
+scavs = [
+    "*BusCannon* *School Bus Body* BaBaProp",
+    "*Flamer* *School Bus Body* BaBaProp",
+    "*BusCannon* *Fire Engine Body* BaBaProp",
+    "*Flamer* *Fire Engine Body* BaBaProp",
+    "*Jeep MG* *Jeep Body* BaBaProp",
+    "*BabaRocket* *Rocket Jeep Body* BaBaProp",
+    "*Buggy MG* *Buggy Body* BaBaProp",
+    "*BabaRocket* *Rocket Buggy Body* BaBaProp",
+    "*Trike MG* *Trike Body* BaBaProp",
+]
+wheels = [
+    "Machinegun Viper Wheels",
+    "Flamer Viper Wheels",
+    "Light Cannon Viper Wheels",
+]
+vipers = [
+    "Flamer Viper Half-tracks",
+    "Twin Machinegun Viper Half-tracks",
+    "Light Cannon Viper Half-tracks",
+    "Mini-Rocket Pod Viper Half-tracks",
+]
+cobras = [
+    "Heavy Machinegun Cobra Half-tracks",
+    "Light Cannon Cobra Half-tracks",
+    "Mini-Rocket Pod Cobra Half-tracks",
+    "Medium Cannon Cobra Wheels",
+]
+mra = [
+    "Mini-Rocket Array Scorpion Wheels",
+    "Mini-Rocket Array Cobra Wheels",
+]
+bugs = [
+    "Flamer Bug Hover",
+    "Light Cannon Bug Hover",
+]
+scorps = [
+    "Inferno Scorpion Hover",
+    "Medium Cannon Scorpion Hover",
+]
+mantis = [
+    "Plasmite Flamer Mantis Hover",
+    "Heavy Cannon Mantis Hover",
+]
+pythons = [
+    "Mini-Rocket Pod Python Half-tracks",
+    "Medium Cannon Python Half-tracks",
+    "Lancer Python Half-tracks",
+    "Assault Gun Python Half-tracks",
+    "Inferno Python Half-tracks",
+]
+panthers = [
+    "Lancer Panther Half-tracks",
+    "Assault Gun Panther Half-tracks",
+    "Inferno Panther Half-tracks",
+    "Assault Cannon Panther Half-tracks",
+    "Tank Killer Panther Half-tracks",
+]
+hra = [
+    "Heavy Rocket Array Panther Wheels",
+]
+tigers = [
+    "Needle Gun Tiger Half-tracks",
+    "Flashlight Tiger Half-tracks",
+    "Scourge Missile Tiger Half-tracks",
+]
+nexus = [
+    "Pulse Laser Retribution Half-tracks",
+    "Rail Gun Retribution Half-tracks",
+    "Scourge Missile Retribution Half-tracks",
+]
+seraph = [
+    "Seraph Missile Array Retaliation Wheels",
+    "Seraph Missile Array Retribution Wheels",
+]
+cybsT0 = [
+    "Machinegunner Cyborg Light Body Cyborg Propulsion",
+    "Cyborg Flamer Cyborg Light Body Cyborg Propulsion",
+    "Heavy Gunner Cyborg Light Body Cyborg Propulsion",
+]
+cybsT1 = [
+    "Cyborg Lancer Cyborg Light Body Cyborg Propulsion",
+    "*Cyborg Thermite Weapon* Cyborg Light Body Cyborg Propulsion",
+    "*CyborgRotMG* Cyborg Light Body Cyborg Propulsion",
+]
+cybsT2 = [
+    "Super Heavy-Gunner Cyborg Heavy Body Cyborg Propulsion",
+    "Super HVC Cyborg Cyborg Heavy Body Cyborg Propulsion",
+    "Super Auto-Cannon Cyborg Cyborg Heavy Body Cyborg Propulsion",
+    "Super Tank-Killer Cyborg Cyborg Heavy Body Cyborg Propulsion",
+]
+cybsT3 = [
+    "*Cyb-Wpn-Rail1* Cyborg Light Body Cyborg Propulsion",
+    "*Cyb-Wpn-Laser* Cyborg Light Body Cyborg Propulsion",
+    "*Cyb-Wpn-Atmiss* Cyborg Light Body Cyborg Propulsion",
+]
+cybsT4 = [
+    "Super Scourge Cyborg Cyborg Heavy Body Cyborg Propulsion",
+    "Super Pulse Laser Cyborg Cyborg Heavy Body Cyborg Propulsion",
+    "Super Rail-Gunner Cyborg Heavy Body Cyborg Propulsion",
+]
+vengeanceH = [
+    "Hyper Velocity Cannon Vengeance Hover",
+]
+vengeanceT = [
+    "Hyper Velocity Cannon Vengeance Tracks",
+]
+wyvernH = [
+    "Twin Assault Cannon Wyvern Hover",
+]
+wyvernT = [
+    "Twin Assault Cannon Wyvern Tracks",
+]
+dragonH = [
+    "Seraph Missile Array Seraph Missile Array Dragon Hover",
+    "Gauss Cannon Gauss Cannon Dragon Hover",
+]
+dragonT = [
+    "Seraph Missile Array Seraph Missile Array Dragon Tracks",
+    "Gauss Cannon Gauss Cannon Dragon Tracks",
+]
+
+
+setResearchDelay(360);
+const wtBaseReward=defaultPowerRewardFunction();
+setPowerRewardFunction(power => wtBaseReward(power)*1);
+wait(150), round(1), spawn(12, vipers), spawn(11, scavs), spawn(11, wheels);
+wait(134), round(2), spawn(12, vipers), spawn(12, scavs), spawn(12, wheels);
+wait(133), round(3), spawn(14, vipers), spawn(13, scavs), spawn(13, wheels);
+wait(131), round(4), spawn(15, vipers), spawn(15, scavs), spawn(14, wheels);
+wait(130), round(5), spawn(17, vipers), spawn(16, scavs), spawn(16, wheels);
+wait(129), round(6), spawn(18, cybsT1), spawn(18, vipers), spawn(18, cobras);
+wait(127), round(7), spawn(19, cybsT1), spawn(19, vipers), spawn(19, cobras);
+wait(126), round(8), spawn(21, cybsT1), spawn(21, vipers), spawn(20, cobras);
+wait(125), round(9), spawn(23, cybsT1), spawn(22, vipers), spawn(22, cobras);
+wait(124), round(10), spawn(24, cybsT1), spawn(24, vipers), spawn(24, cobras);
+wait(123), round(11), spawn(20, pythons), spawn(20, scorps), spawn(19, cybsT2), spawn(19, cobras);
+wait(121), round(12), spawn(21, pythons), spawn(21, scorps), spawn(20, cybsT2), spawn(20, cobras);
+wait(120), round(13), spawn(22, pythons), spawn(22, scorps), spawn(22, cybsT2), spawn(21, cobras);
+wait(119), round(14), spawn(24, pythons), spawn(23, scorps), spawn(23, cybsT2), spawn(23, cobras);
+wait(117), round(15), spawn(25, pythons), spawn(25, scorps), spawn(24, cybsT2), spawn(24, cobras);
+wait(116), round(16), spawn(26, panthers), spawn(26, tigers), spawn(26, cybsT3), spawn(25, pythons);
+wait(115), round(17), spawn(27, panthers), spawn(27, tigers), spawn(27, cybsT3), spawn(27, pythons);
+wait(114), round(18), spawn(29, panthers), spawn(29, tigers), spawn(28, cybsT3), spawn(28, pythons);
+wait(113), round(19), spawn(30, panthers), spawn(30, tigers), spawn(30, cybsT3), spawn(30, pythons);
+wait(111), round(20), spawn(32, panthers), spawn(31, tigers), spawn(31, cybsT3), spawn(31, pythons);
+wait(110), round(21), spawn(26, nexus), spawn(26, seraph), spawn(26, wyvernH), spawn(26, dragonT), spawn(26, cybsT4);
+wait(109), round(22), spawn(28, nexus), spawn(27, seraph), spawn(27, wyvernH), spawn(27, dragonT), spawn(27, cybsT4);
+wait(107), round(23), spawn(29, nexus), spawn(29, seraph), spawn(28, wyvernH), spawn(28, dragonT), spawn(28, cybsT4);
+wait(106), round(24), spawn(30, nexus), spawn(30, seraph), spawn(29, wyvernH), spawn(29, dragonT), spawn(29, cybsT4);
+wait(105), round(25), spawn(31, nexus), spawn(31, seraph), spawn(31, wyvernH), spawn(30, dragonT), spawn(30, cybsT4);

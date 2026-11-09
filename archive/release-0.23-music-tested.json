@@ -1,0 +1,73 @@
+{
+  "version": "0.23",
+  "versionCode": 23,
+  "candidateAPK_SHA256": "af42705865e83cd80b0fa1f631f5e90753869d35e2ec8f6e334f40d603658f44",
+  "scope": "Focused music transport/decoder progression and controls observed on exact delivery APK in emulator; no complete gameplay verification.",
+  "emulatorUsed": true,
+  "gameplayVerified": false,
+  "musicPlaybackObserved": true,
+  "allAssignedTracksPlaybackVerified": false,
+  "audibleOutputVerified": false,
+  "decodedPCMObserved": true,
+  "hostAudioSinkAvailable": null,
+  "audioOutputLimitation": "Audible speaker output was not monitored, so host speaker availability is unknown. The earlier emulator session logged audio HAL errors; after recovery actual media progress and nonzero decoded PCM were verified.",
+  "emulatorProof": {
+    "path": "qa/0.23-music/report.json",
+    "sha256": "d879296ea7e5d73ea5163043e2c3990a6b1047eb3adac9248475ddbd526721d3"
+  },
+  "emulatorEvidenceFiles": [
+    {
+      "path": "qa/0.23-music/playback-observed.json",
+      "sha256": "ec34aa31b8621604aff08f1e028ba5593cb0ed524f87ab5021cd5d050f435489"
+    },
+    {
+      "path": "qa/0.23-music/delivery23-playing.png",
+      "sha256": "6421d1d8d4a1ca20f9fc3d9ca3e99802c7fb83a60e90f61084e7ceea7e5e7d27"
+    },
+    {
+      "path": "qa/0.23-music/delivered22-observed.json",
+      "sha256": "a84180b109cf6815e9d6a983f919222f832c93b105902be7d9869657815e0ff3"
+    },
+    {
+      "path": "qa/0.23-music/delivered22-music.png",
+      "sha256": "c5e9d0e02d186db7ac7ca310314e98ab496fd74a761138757927321667876894"
+    }
+  ],
+  "musicAssignments": {
+    "maps": 46,
+    "availableTracks": 39,
+    "assignedDistinctTracks": 39,
+    "repeatedAssignments": 7,
+    "musicBytesUnchanged": true,
+    "allAssignedTracksPlaybackVerified": false
+  },
+  "changedAPKAssets": [
+    "assets/warzone/music-loader.js"
+  ],
+  "newAPKAssets": [],
+  "changedAPKMembers": [
+    "classes3.dex",
+    "assets/warzone/music-loader.js",
+    "AndroidManifest.xml"
+  ],
+  "unchangedGameplayAndMapAndDuelAPKAssets": true,
+  "preservedOriginalSourceFiles": 701,
+  "preservedAPKAssets": 522,
+  "preservationProof": {
+    "path": "archive/music-0.23-package.json",
+    "sha256": "c3aa85858b2263319e08600f3b9a4355c3e6c0845d93b79af3dcfe3a1e9beed3"
+  },
+  "sourceCheckReports": [
+    {
+      "path": "archive/music-0.23-player-checks.json",
+      "sha256": "2d376183284476f7735848191eaaead99131e4048880a20bd23797807294285e"
+    }
+  ],
+  "fallbackRecord": {
+    "path": "archive/fallback-0.23.json",
+    "sha256": "4e1208b1248d3f93601eee6842f3fcacc61572908a1a313ca9ca13857c8507dd"
+  },
+  "sourceInventory": "git ls-files --cached --others --exclude-standard; filtered caches/private/transient files",
+  "gitMetadataIncluded": false,
+  "recordedUTC": "2026-11-09T10:35:04.015373Z"
+}

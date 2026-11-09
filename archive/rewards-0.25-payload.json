@@ -1,0 +1,85 @@
+{
+  "scope": "Purchased match bonuses via native scenario scripts only; generated metadata append/reindex, no compiled engine change.",
+  "baselineAPK": "C:\\timerApp\\Warzone-Towers-0.24.apk",
+  "baselineSHA256": "8d4a3c8baee15fc4cdee352e6b5364013f59290b996e5eeff9058ec4f413ad44",
+  "emulatorUsed": false,
+  "gameplayVerified": false,
+  "dataPrefixPreserved": true,
+  "originalDataBytes": 77486317,
+  "originalDataSHA256": "329a873bddc42b17b48b71beb1f339bfa999ba0df97ebfd13f53ed9d5ba254dc",
+  "normalizedEngineBodyUnchanged": true,
+  "normalizedEngineBodySHA256": "260138aa32773884988b162469dbe59f885d6f6a225c4a3be8d3e5d8220a037d",
+  "wasmUnchanged": true,
+  "wasmSHA256": "d909a4ecb7475643107fa6f489279562c00deae1e0a0f531ddd1328457d78f1e",
+  "duelPayloadUnchanged": true,
+  "changedVFSFiles": [
+    "/data/mp/multiplay/script/rules/init.js",
+    "/data/mp/tests/warzone-towers-commands.js",
+    "/data/mp/tests/warzone-towers-rules.js"
+  ],
+  "addedVFSFiles": [
+    "/data/mp/tests/warzone-towers-rewards.js"
+  ],
+  "removedVFSFiles": [],
+  "unchangedResolvedVFSFiles": 4288,
+  "sources": [
+    {
+      "path": "scenario/warzone-towers-catalog.json",
+      "bytes": 50233,
+      "sha256": "d70d5672fa1865411b8e574e67e770dc3b13956a6e5710f37e69396f4ff3453e"
+    },
+    {
+      "path": "scenario/warzone-towers-commands.js",
+      "bytes": 51837,
+      "sha256": "1ae6f94a66d4e8d4dedbda5775a243a52560ca5339a2d2f3aabc646a11c15129"
+    },
+    {
+      "path": "scenario/warzone-towers-rewards.js",
+      "bytes": 10245,
+      "sha256": "8db2c1756af26cef82cf7f86140091c64356803d928e60bd8e8e45cc2b9b8f64"
+    },
+    {
+      "path": "scenario/warzone-towers-rules.js",
+      "bytes": 372,
+      "sha256": "ca1a21cc6fe094a1cbb2c12c689bb20c489843724485ed231d0d053f32413793"
+    },
+    {
+      "path": "tools/check-rewards-native-025.cjs",
+      "bytes": 12102,
+      "sha256": "d76ed61c566a2f4529cc03728c17197f25568ad1ddbd45711ae719ee3bba3266"
+    },
+    {
+      "path": "tools/embed-rewards-025.py",
+      "bytes": 9485,
+      "sha256": "8810793ba064d86b366281b677dcb7fe8e685169567fc08e2a909049400ddfaf"
+    },
+    {
+      "path": "tools/embed-warzone-towers.ps1",
+      "bytes": 7864,
+      "sha256": "4abd371cf48f60040be69ea1b42940258f2ac614642e664c44403eaad8892f28"
+    },
+    {
+      "path": "tools/test-command-bridge.cjs",
+      "bytes": 17366,
+      "sha256": "b9fbd8f391b79d7d8476a9328fc0685fa7e5bc3d4d6c61dabfccacae11859b5d"
+    }
+  ],
+  "sourceCheckReports": [
+    {
+      "path": "archive/rewards-native-0.25-checks.json",
+      "sha256": "9c53112784114438cfbee6846f2ef9f922ce8be0913e203af7e6aa9b23658680"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "app/src/main/assets/warzone/warzone2100.js",
+      "bytes": 793330,
+      "sha256": "12aea20404a6be3c600a0afa6fc2b113231f2ff2d9ba4b6bb2232f3f8640220b"
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100.data",
+      "bytes": 77549143,
+      "sha256": "ee728bdd6b018f3a7bee9a943c30a4929d668b22375f37ba77fdd39e2733b1bd"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "version": "0.31",
+  "emulatorUsed": false,
+  "actualNavigationFunctionsExecuted": true,
+  "checksPassed": 12,
+  "checks": [
+    "Towers header renames TECH to RESEARCH and links its real pane",
+    "Research header opens once and second tap calls the queue-preserving close API",
+    "Build Production and Queue header use toggle without changing programmatic open APIs",
+    "Opening Help leaves header usable and blocks only the battlefield frame",
+    "Towers Help has no duplicate Close or Back to Battle controls",
+    "Help header toggles closed repeatedly and restores native input/focus",
+    "Switching Help to Research closes Help before opening Research",
+    "Research queue-sync failure keeps Research visible instead of opening another menu",
+    "Music and Rewards header switches close other JS and native Rewards panels through APIs",
+    "Header state aliases preserve the real DOM button IDs",
+    "Dormant Duel retains TECH label and separate guide close controls",
+    "Closing Research while queues are dirty continues existing native synchronization in background"
+  ],
+  "sources": [
+    {
+      "path": "app/src/main/assets/warzone-touch-controls.js",
+      "sha256": "9d4a103e043cc58c6116c1418c507e38623ada0d0f8c5e2a42f659c39beff3c3"
+    },
+    {
+      "path": "app/src/main/assets/warzone-mobile-research.js",
+      "sha256": "507e0e7feda9e7fe3a9042703cf8cb74e0c07a6661858e07f6c00595d18ec6f1"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/towers-shell.css",
+      "sha256": "8a6dfd27cfb66c5008c8ec975b3d5bcb41d559cf0aa858482935ae07582c919b"
+    },
+    {
+      "path": "tools/check-navigation-031.cjs",
+      "sha256": "0e12c5d82fa649a1d913b8c9bdde131d5bbde3647d899ad6eca696942ffbba45"
+    },
+    {
+      "path": "tools/test-13-help.cjs",
+      "sha256": "63ee535d62ed870c42cad9c258acd7e44d66bfd98776bfd40df87f0fd9b74239"
+    }
+  ]
+}

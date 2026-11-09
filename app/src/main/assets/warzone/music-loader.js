@@ -204,6 +204,7 @@
     function closeMenu(restoreFocus=true){
       if(!menu||menu.hidden)return false;
       menu.hidden=true;anchor?.setAttribute('aria-expanded','false');
+      window.__kalaWarzoneTouch?.setHeaderMenuState?.('music',false);
       if(restoreFocus&&state.battleActive&&!state.suspended){
         try{document.querySelector('canvas')?.focus({preventScroll:true});}catch(_){}
       }
@@ -265,7 +266,9 @@
         }
         host.defaultView.addEventListener('resize',resizeListener);host.body.appendChild(menu);
       }
-      menu.hidden=false;anchor?.setAttribute('aria-expanded','true');refresh();positionMenu();return true;
+      menu.hidden=false;anchor?.setAttribute('aria-expanded','true');
+      window.__kalaWarzoneTouch?.setHeaderMenuState?.('music',true);
+      refresh();positionMenu();return true;
     }
     function setBattleActive(active){
       if(state.disposed)return;

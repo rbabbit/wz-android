@@ -1,0 +1,201 @@
+{
+  "version": "0.30",
+  "candidateAPK_SHA256": "d76b6e37d9839c45dd9659994ee1cb998c8f0c5cbac29e93c77301f20214f28d",
+  "emulatorUsed": true,
+  "device": "emulator-5556",
+  "testAdsOnly": true,
+  "liveAdsTested": false,
+  "gameplayVerified": false,
+  "publisherConsentMessageVerified": false,
+  "createdAt": "2026-11-09T20:24:13.950Z",
+  "checks": [
+    {
+      "name": "Delivery APK retains the existing identity and 145-crystal wallet through the update",
+      "passed": true
+    },
+    {
+      "name": "Quiet launch and opening Rewards show no consent/ad overlay and no rewarded SDK request",
+      "passed": true
+    },
+    {
+      "name": "Optional test-ad action is the subdued bottom row below normal shop controls",
+      "passed": true
+    },
+    {
+      "name": "Test-only migration replaces old sample consent identity without touching the wallet",
+      "passed": true
+    },
+    {
+      "name": "Actual Google sample ad on Home earns exactly ten once and clears the durable attempt",
+      "passed": true
+    },
+    {
+      "name": "Reward confirmation fades and returns the optional row to its quiet state",
+      "passed": true
+    },
+    {
+      "name": "Leaving Rewards during loading returns Home with no late ad or extra reward",
+      "passed": true
+    },
+    {
+      "name": "Ordinary Greenhaven gameplay opens the same compact Rewards action",
+      "passed": true
+    },
+    {
+      "name": "Native clock and map music are paused during the actual sample ad",
+      "passed": true
+    },
+    {
+      "name": "Actual in-game Google sample ad earns exactly ten once",
+      "passed": true
+    },
+    {
+      "name": "Ad dismissal restores the same native document and an advancing clock",
+      "passed": true
+    },
+    {
+      "name": "Map music and input are restored after the ad",
+      "passed": true
+    },
+    {
+      "name": "Header Save persists a game without error after ad return",
+      "passed": true
+    },
+    {
+      "name": "Build and Tech open and close normally after ad return",
+      "passed": true
+    },
+    {
+      "name": "Return to main menu and process restart preserve the 165-crystal balance with no automatic ad",
+      "passed": true
+    }
+  ],
+  "evidenceFiles": [
+    {
+      "path": "qa/0.30-ads/home-before.json",
+      "sha256": "564e738a45383fdcdd872e313fb35f620a7cc98fc113e4eb43425d34856b27b5"
+    },
+    {
+      "path": "qa/0.30-ads/home-earned.json",
+      "sha256": "bfe1cf1c8b0edddf08f57c8dc9f417c8da5df4a1c4eaf70ecc959509784bec63"
+    },
+    {
+      "path": "qa/0.30-ads/home-after.json",
+      "sha256": "67c10fca8aa0bc1ef03c60704efe81c4efd04e41953a72e5a540e1bfbb38f4e6"
+    },
+    {
+      "path": "qa/0.30-ads/quiet-after-reward.json",
+      "sha256": "e337d138c5ce45f208abc82f1795b6f67a6d7d44bec5c8c848ef097696213d41"
+    },
+    {
+      "path": "qa/0.30-ads/cancel-confirmed.json",
+      "sha256": "9026d290992915641eb3b50af39be311314d32833b2e3107707ee2cafea9ad94"
+    },
+    {
+      "path": "qa/0.30-ads/game-before.json",
+      "sha256": "e5743bfb5f8b8ae6da01767d2a6c8fab1cf59a5ae87e834217120c070e0519ee"
+    },
+    {
+      "path": "qa/0.30-ads/game-held.json",
+      "sha256": "ab555fc19e192d976a18e4702397c735c7506e13219e18a745a10bc84f841632"
+    },
+    {
+      "path": "qa/0.30-ads/game-earned.json",
+      "sha256": "35ad3257e3c0f1c6ab68069be41ddc451339db48ae937050a1bff56eed9704fd"
+    },
+    {
+      "path": "qa/0.30-ads/game-restored.json",
+      "sha256": "3aebd6058cf08a60944dd430262bfbd08fd6c3dca5f56290f7fa6053107619f0"
+    },
+    {
+      "path": "qa/0.30-ads/post-ad-input-save.json",
+      "sha256": "2220a987f398cd6dda3fbc9574a2bc634ae9dc3be3003cfff9e5989f5d560f26"
+    },
+    {
+      "path": "qa/0.30-ads/restarted.json",
+      "sha256": "51eba042dd5f9aee18770c66b7c2201a3956871a5e4a623be033fa3a7c696b47"
+    },
+    {
+      "path": "qa/0.30-ads/home-before.png",
+      "sha256": "dc71e841fe0fb46c6a6ef896289e8a70b1ba35ddb889c70fa01344a7d7344511"
+    },
+    {
+      "path": "qa/0.30-ads/home-earned.png",
+      "sha256": "d0526b623fd5debb8c35932a3ba7782ec69bd8740aa996885e0970ef04c30c51"
+    },
+    {
+      "path": "qa/0.30-ads/home-after.png",
+      "sha256": "69538c269d10c6cca2aeb97d58978784279e88366c078bdda64ac170cd49c1b6"
+    },
+    {
+      "path": "qa/0.30-ads/quiet-after-reward.png",
+      "sha256": "909adaacb00114524c91df120ed1b58be7c34bf99f2f029b2911a52900833765"
+    },
+    {
+      "path": "qa/0.30-ads/cancel-confirmed.png",
+      "sha256": "2d7dd8e57ad9d5d079da45919428cf928caf8e77912febb2722c6d7ce2da1e7d"
+    },
+    {
+      "path": "qa/0.30-ads/game-rewards.png",
+      "sha256": "89b0b6008aaf866443423d5c969f11b20cf2247aa78d3a27d6c42e6d7d8f1b0a"
+    },
+    {
+      "path": "qa/0.30-ads/game-sample-ad.png",
+      "sha256": "0404e32bd1eea3c823a7d83a060c14bac2714ff2baf6b2cc10878910be03bd7c"
+    },
+    {
+      "path": "qa/0.30-ads/game-earned.png",
+      "sha256": "0932ebbc91cf49dac024fc5c5b6db7f93e4e3d04644af67553165b47aabd5121"
+    },
+    {
+      "path": "qa/0.30-ads/game-restored.png",
+      "sha256": "d873b93c6cf5ac3d846c1769c901718e5955ee485764b3e44d266e54ded523ac"
+    },
+    {
+      "path": "qa/0.30-ads/post-ad-build.png",
+      "sha256": "42c18c22b85e2f375b94f1031ee7b5bde1f3b728be17d0a12df21eec45b0b2b4"
+    },
+    {
+      "path": "qa/0.30-ads/post-ad-tech.png",
+      "sha256": "cca076879d6ff636c9d38d5fa2f8b167d3a365fffb17e9e38210333030e89451"
+    },
+    {
+      "path": "qa/0.30-ads/post-ad-input-save.png",
+      "sha256": "6f285def167f531a20f3ea5655e4123b5f0b14355efc76c905ed39a075d1bfbe"
+    },
+    {
+      "path": "qa/0.30-ads/return-home.png",
+      "sha256": "8427626801e2a828bd2ad0c3b103d76552e6637b5b6021397581ea6d5fb2656f"
+    },
+    {
+      "path": "qa/0.30-ads/restarted.png",
+      "sha256": "201d76831542ceee412d79eb238dcc78a73faa767cbc9d718b890a4e8554a60e"
+    },
+    {
+      "path": "qa/0.30-ads/idle-log.txt",
+      "sha256": "d287542334ab8804bfd40525cce57559fdd615d41c908e18e3695c957331e07b"
+    },
+    {
+      "path": "qa/0.30-ads/consent-identity.txt",
+      "sha256": "635ced5897cdcc309ee0a993e21944a43bfbc74b6102b4e3c9d35a9eb7684b44"
+    },
+    {
+      "path": "qa/0.30-ads/fresh-consent.txt",
+      "sha256": "563995cfce9dc9a59a883e1d85931e40139d0a4bebd2bab2fcae985e0e9ca022"
+    }
+  ],
+  "supportingObservations": [
+    {
+      "path": "qa/0.30-ads/baseline-rewards.png",
+      "sha256": "4fdc0eb7c2e57fd9998f3c961b539fc5fb2a67506bf7c8e87b6807aa8d6b6eb5",
+      "scope": "Pre-change0.29 drawer only; not a delivery APK check."
+    }
+  ],
+  "provenance": "Exact delivery APK installed on the existing emulator. Real Google sample rewarded units and SDK earned callbacks; private wallet reads, ordinary Home/new Greenhaven match and native/ADB taps. Inspected WebView rectangles scaled to screenshot pixels for actual Android input; no DOM click, synthetic ad credit, seeded currency or spawned units. Old demo UMP preferences were restored as a disclosed migration fixture; the app public reset migrated them. No wallet/save preference seeding.",
+  "limitations": [
+    "Google reported consent and privacy forms NOT_REQUIRED for this fresh network/geography. The European styled form was not visually verified; publisher app-ID binding and required-form/controller lifecycles are separate package/host-fixture checks.",
+    "Google sample creatives do not follow publisher ad-pod/interactive-unit filters. Real ad fill, revenue and physical-phone behavior were not tested.",
+    "The existing emulator showed black terrain before this change; this focused native order/clock/input check is not a graphics, full campaign or all-map acceptance pass. All527 game assets are separately frozen.",
+    "Installation space was recovered with cache trimming and a same-signature data-retaining emulator reinstall; wallet, saves and existing data were preserved and backed up. An ADB service timeout and an earlier WebView coordinate fixture mismatch were diagnosed separately from product bugs."
+  ]
+}

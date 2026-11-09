@@ -30,6 +30,25 @@ final class RewardStore {
   }
 
   synchronized int balance() { return ledger.balance; }
+  synchronized String pendingAdReward() { return ledger.pendingAdReward; }
+  /** Called by the native ad controller before a single SDK presentation. */
+  synchronized String prepareAdReward() {
+    return transaction(() -> {
+      String token = "ad-" + java.util.UUID.randomUUID();
+      ledger.prepareAdReward(token);
+      return token;
+    });
+  }
+  /** Only the native SDK earned callback is allowed to use this entry point. */
+  synchronized int creditAdReward(String token) {
+    if (token == null || token.isEmpty() || !ledger.pendingAdReward.equals(token)) return 0;
+    return transaction(() -> ledger.creditAdReward(token));
+  }
+  /** Dismissal, failed show, or an unproven old-process attempt never pays. */
+  synchronized void cancelAdReward(String token) {
+    if (token == null || token.isEmpty() || !ledger.pendingAdReward.equals(token)) return;
+    transaction(() -> { ledger.cancelAdReward(token); return null; });
+  }
   synchronized Map<String, Integer> inventory() { return RewardLedger.copy(ledger.inventory); }
   synchronized Map<String, Integer> loadout() { return RewardLedger.copy(ledger.loadout); }
   synchronized Map<String, Integer> active(String session) {
@@ -275,6 +294,7 @@ final class RewardStore {
   private static String encode(RewardLedger value) {
     try {
       JSONObject root = new JSONObject().put("version", 3).put("balance", value.balance)
+          .put("pendingAdReward", value.pendingAdReward)
           .put("inventory", new JSONObject(value.inventory)).put("loadout", new JSONObject(value.loadout))
           .put("completed", new JSONArray(value.completed));
       JSONArray runs = new JSONArray();
@@ -330,6 +350,12 @@ final class RewardStore {
       RewardLedger value = new RewardLedger();
       value.balance = root.getInt("balance");
       if (value.balance < 0) throw new IllegalArgumentException("Invalid wallet balance.");
+      // Optional in v3: installing the ad build does not reset older wallets.
+      Object pendingAd = root.opt("pendingAdReward");
+      if (pendingAd != null && !(pendingAd instanceof String)) throw new IllegalArgumentException("Invalid saved ad reward identity.");
+      value.pendingAdReward = pendingAd == null ? "" : (String) pendingAd;
+      if (!value.pendingAdReward.isEmpty() && !RewardLedger.validAdRewardToken(value.pendingAdReward))
+        throw new IllegalArgumentException("Invalid saved ad reward identity.");
       JSONArray completed = root.getJSONArray("completed");
       for (int i = 0; i < completed.length(); i++) value.completed.add(completed.getString(i));
       if (version == 1) {

@@ -2,7 +2,7 @@
 (() => {
   "use strict";
 
-  const VERSION = 39;
+  const VERSION = 40;
   const QUEUE_COMMAND_PATH = "/data/mp/multiplay/script/rules/blocknight-queue-command.json";
   const CATEGORIES = ["ALL", "WEAPONS", "DEFENCE", "VEHICLES", "CYBORG", "SYSTEMS", "STRUCTURES"];
 
@@ -332,7 +332,7 @@
       <header class="bn-tech-header">
         <div class="bn-tech-brand"><span class="bn-tech-mark"><img src="research-icons/Research%20Module.gif" alt=""></span><div><strong>RESEARCH QUEUE</strong><small>RESEARCH</small></div></div>
         <div class="bn-tech-live"><i></i><b>RESEARCH STATUS</b><span class="bn-tech-count">LOADING</span><em>POWER</em><strong class="bn-tech-power">0</strong></div>
-        <button class="bn-tech-done" type="button">BACK TO BATTLE</button>
+        ${window.__warzoneDuelConfig?.mode === 'duel' ? '<button class="bn-tech-done" type="button">BACK TO BATTLE</button>' : ''}
       </header>
       <div class="bn-tech-main">
         <aside class="bn-tech-rail">
@@ -522,6 +522,7 @@
     saveCanvasStyle();
     const shell = createShell(); document.body.appendChild(shell);
     state.opening = false; state.open = true; state.pendingClose = false;
+    window.__kalaWarzoneTouch?.setHeaderMenuState?.('blocknight-tech', true);
     window.parent?.WarzoneHost?.setResearchOpen(true);
     state.assigning = Boolean(state.runner); state.opens += 1; state.activeCategory = "ALL";
     const requested=state.engineLabs.findIndex(l=>l.id===state.requestedLabId);
@@ -541,11 +542,14 @@
     if(window.__warzoneDuelConfig?.mode!=='duel')window.parent?.TowersStatus?.close?.();
     if (window.__towersHtml?.isEnded?.()) return false;
     if (state.open || state.opening) return true;
+    window.__kalaWarzoneTouch?.closeHelp?.();
+    window.WarzoneMusic?.closeMenu?.(false);
     window.__warzoneCommands?.close?.();
     window.__warzoneCommands?.closeNative?.();
     const target = canvas(); if (!target) return false;
     const bounds = target.getBoundingClientRect();
     state.baseWidth = bounds.width; state.baseHeight = bounds.height; state.opening = true;
+    window.__kalaWarzoneTouch?.setHeaderMenuState?.('blocknight-tech', true);
     setTimeout(activate, 40); return true;
   }
 
@@ -553,6 +557,7 @@
     if (!state.open && !state.opening) return false;
     state.requestedLabId=null;
     state.opening = false; state.open = false; state.pendingClose = false; state.closes += 1;
+    window.__kalaWarzoneTouch?.setHeaderMenuState?.('blocknight-tech', false);
     document.getElementById("blocknight-research-shell")?.remove();
     document.getElementById("blocknight-research-style")?.remove(); restoreCanvasStyle();
     window.parent?.WarzoneHost?.setResearchOpen(false);
@@ -731,8 +736,8 @@
     state.directFailures += 1;
     if (timedOut) state.commandTimeouts += 1;
     else state.commandRejects += 1;
-    state.assignmentError = `${message} Your selections are still saved—open Tech and tap Back to Battle to retry.`;
-    if (background) showQueueStatus("RESEARCH QUEUE SYNC FAILED — OPEN TECH TO RETRY", "error", 6500);
+    state.assignmentError = `${message} Your selections are still saved—open Research and tap Research again to retry.`;
+    if (background) showQueueStatus("RESEARCH QUEUE SYNC FAILED — OPEN RESEARCH TO RETRY", "error", 6500);
     else renderAll();
   }
 
@@ -956,8 +961,10 @@
     assign.textContent = towers ? selected.length ? `${selected.length > 1 ? `ADD ${selected.length}` : 'ADD'} TO LAB ${state.activeLab + 1} QUEUE` : 'SELECT RESEARCH' : queuedLab ? `ALREADY QUEUED · LAB ${queuedLab.nativeIndex + 1}` : active ? `RESEARCHING · LAB ${active.nativeIndex + 1}` : `ADD TO LAB ${state.activeLab + 1} QUEUE`;
     assign.disabled = towers ? state.pendingClose || !selected.length || !lab : state.pendingClose || !topic || !lab || Boolean(queuedLab || active);
     const done = shell.querySelector(".bn-tech-done");
-    done.textContent = state.pendingClose ? "SYNCING QUEUES…" : "BACK TO BATTLE";
-    done.disabled = state.pendingClose;
+    if (done) {
+      done.textContent = state.pendingClose ? "SYNCING QUEUES…" : "BACK TO BATTLE";
+      done.disabled = state.pendingClose;
+    }
   }
 
   const chooseTopic = index => assignTopic(index);

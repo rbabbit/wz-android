@@ -103,6 +103,13 @@ public final class MainActivity extends Activity {
   private RewardStore rewards;
   private RewardsView rewardsView;
   private RewardsView livePurchaseView;
+  private RewardedAdsController rewardedAds;
+  private FrameLayout adCover;
+  private String adGateToken = "", adGateDocument = "";
+  private Runnable adGateShow, adGateCancel;
+  private boolean activityResumed, adReleasePending, adCreditNotice;
+  private int rewardsHeaderBottomCss, rewardsViewportWidthCss;
+  private String staleAdReward = "";
   private String livePurchaseTransaction = "", livePurchaseDocument = "";
   private RewardReceiptView rewardReceipt;
   private volatile String rewardSession = "";
@@ -141,6 +148,29 @@ public final class MainActivity extends Activity {
     musicCatalog = new MusicTrackCatalog(this);
     mapMusicIndex = new MapMusicIndex(this, musicCatalog);
     rewards = new RewardStore(this);
+    staleAdReward = rewards.pendingAdReward();
+    try { rewards.cancelAdReward(staleAdReward); staleAdReward = ""; }
+    catch (RuntimeException error) { Log.w(TAG, "Old ad attempt cleanup will retry before watching."); }
+    rewardedAds = new RewardedAdsController(this, new RewardedAdsController.Host() {
+      @Override public void onAdsChanged() { refreshAdState(); }
+      @Override public void acquireFullScreen(Runnable show, Runnable cancel) { acquireAdScreen(show, cancel); }
+      @Override public void releaseFullScreen() { releaseAdScreen(); }
+      @Override public String prepareReward() {
+        if (!staleAdReward.isEmpty()) { rewards.cancelAdReward(staleAdReward); staleAdReward = ""; }
+        return rewards.prepareAdReward();
+      }
+      @Override public boolean creditReward(String token) {
+        final int credited = rewards.creditAdReward(token);
+        if (credited == 0 && !rewards.pendingAdReward().isEmpty()) return false;
+        // The wallet commit is the acknowledgement, independently of view refresh.
+        try {
+          if (credited > 0) adCreditNotice = true;
+          refreshRewardBalance();
+        } catch (RuntimeException error) { Log.w(TAG, "Reward display will refresh on return."); }
+        return true;
+      }
+      @Override public void cancelReward(String token) { rewards.cancelAdReward(token); }
+    });
     saveGames = new SaveGameStore(this);
     String savedWalletError = null;
     JSONArray pinnedRuns = rewards.pinnedRuns();
@@ -160,6 +190,7 @@ public final class MainActivity extends Activity {
     duelWeapon = BattleLaunchSpec.duelWeapon(getIntent().getStringExtra("duel_weapon"));
     showGraphicsSetup();
     if (savedWalletError != null) graphicsSetup.showError(savedWalletError);
+    rewardedAds.start();
   }
 
   private void showGraphicsSetup() {
@@ -403,15 +434,101 @@ public final class MainActivity extends Activity {
             } catch (RuntimeException error) { rewardsView.showError(error.getMessage()); }
           }
           @Override public void close() { closeRewards(); }
+          @Override public void watchAd() {
+            if (rewardsView != null && adCover == null && rewardedAds != null) rewardedAds.watch();
+          }
+          @Override public void adPrivacy() {
+            if (rewardsView != null && adCover == null && rewardedAds != null) rewardedAds.showPrivacyOptions();
+          }
         });
-    root.addView(rewardsView, new FrameLayout.LayoutParams(-1, -1));
+    FrameLayout.LayoutParams rewardLayout = new FrameLayout.LayoutParams(-1, -1);
+    if (inGame) {
+      int width = webView == null ? 0 : webView.getWidth();
+      int inset = rewardsViewportWidthCss > 0
+          ? Math.round(rewardsHeaderBottomCss * width * webView.getScaleX() / rewardsViewportWidthCss) : dp(40);
+      rewardLayout.topMargin = Math.max(0, Math.min(root.getHeight() / 3, inset));
+    }
+    root.addView(rewardsView, rewardLayout);
+    if (inGame && webView != null)
+      webView.evaluateJavascript("window.WarzoneRewards?.drawerChanged(true);true", null);
+    refreshAdState();
+  }
+
+  private void refreshAdState() {
+    if (rewardedAds != null && rewardsView != null)
+      rewardsView.setAdState(rewardedAds.canWatch(), rewardedAds.isBusy() || adCover != null,
+          rewardedAds.privacyRequired(), rewardedAds.status(), rewardedAds.usingTestAds());
+  }
+
+  private void refreshRewardBalance() {
+    if (graphicsSetup != null) graphicsSetup.setRewardBalance(rewards.balance());
+    if (rewardsView != null) rewardsView.refresh(rewards.balance(), rewards.inventory(),
+        graphicsSetup != null ? rewards.loadout() : rewards.active(rewardRunId));
+    if (webView != null && graphicsSetup == null && !battleSession.isEmpty())
+      webView.evaluateJavascript("window.WarzoneRewards?.updateBalance?.();true", null);
+  }
+
+  private void acquireAdScreen(Runnable show, Runnable cancel) {
+    if (!activityResumed || rewardsView == null || adCover != null || isFinishing() || isDestroyed()
+        || mainMenuDialog != null || loadingOverlay != null || rewardReceipt != null) { cancel.run(); return; }
+    adGateToken = java.util.UUID.randomUUID().toString();
+    adGateDocument = graphicsSetup == null ? battleSession : "";
+    adGateShow = show; adGateCancel = cancel; adReleasePending = false;
+    adCover = new FrameLayout(this);
+    adCover.setBackgroundColor(Color.BLACK);
+    adCover.setClickable(true);
+    adCover.setFocusableInTouchMode(true);
+    TextView message = new TextView(this);
+    message.setText("Please wait…"); message.setTextColor(Color.WHITE);
+    message.setTextSize(16); message.setGravity(Gravity.CENTER);
+    adCover.addView(message, new FrameLayout.LayoutParams(-1, -1));
+    root.addView(adCover, new FrameLayout.LayoutParams(-1, -1));
+    adCover.requestFocus();
+    musicSuspended = true;
+    mapMusicLifecycle("suspend");
+    refreshAdState();
+    if (adGateDocument.isEmpty()) { adGateShow = null; adGateCancel = null; show.run(); }
+    else webView.evaluateJavascript("window.WarzoneRewardedAds?.acquire(" + JSONObject.quote(adGateToken) + ");true", null);
+  }
+
+  private void releaseAdScreen() {
+    if (adCover == null) {
+      if (rewardedAds != null) rewardedAds.onFullScreenReleased();
+      return;
+    }
+    adGateShow = null; adGateCancel = null;
+    adReleasePending = true;
+    if (!activityResumed || isDestroyed()) return;
+    if (adGateDocument.isEmpty() || !adGateDocument.equals(battleSession) || graphicsSetup != null || webView == null) {
+      finishAdScreen(); return;
+    }
+    webView.evaluateJavascript("window.WarzoneRewardedAds?.release(" + JSONObject.quote(adGateToken) + ");true", null);
+  }
+
+  private void finishAdScreen() {
+    if (adCover != null) root.removeView(adCover);
+    adCover = null; adGateToken = ""; adGateDocument = "";
+    adGateShow = null; adGateCancel = null; adReleasePending = false;
+    musicSuspended = !activityResumed;
+    mapMusicLifecycle(musicSuspended ? "suspend" : "resume");
+    refreshRewardBalance(); refreshAdState(); immersive();
+    if (graphicsSetup == null && webView != null) webView.requestFocus();
+    if (adCreditNotice) {
+      adCreditNotice = false;
+      if (rewardsView == null) Toast.makeText(this, "+10 crystals added", Toast.LENGTH_SHORT).show();
+    }
+    if (rewardedAds != null) rewardedAds.onFullScreenReleased();
   }
 
   private void closeRewards() {
+    if (rewardedAds != null) rewardedAds.cancelWatch();
     livePurchaseView = null;
     livePurchaseTransaction = "";
     livePurchaseDocument = "";
     if (rewardsView != null) { root.removeView(rewardsView); rewardsView = null; }
+    if (webView != null && graphicsSetup == null && !battleSession.isEmpty())
+      webView.evaluateJavascript("window.WarzoneRewards?.drawerChanged(false);true", null);
+    rewardsHeaderBottomCss = 0; rewardsViewportWidthCss = 0;
     if (webView != null && graphicsSetup == null) webView.requestFocus();
     immersive();
   }
@@ -905,6 +1022,7 @@ public final class MainActivity extends Activity {
       "warzone-command-pages.js",
       "warzone/rewards.js",
       "warzone/saved-games.js",
+      "warzone/rewarded-ads.js",
       "warzone-touch-controls.js",
       "warzone-mobile-research.js",
       isDuelBattle() ? "warzone-duel-ui.js" : "warzone-towers-wave-hud.js"
@@ -936,6 +1054,37 @@ public final class MainActivity extends Activity {
   }
 
   public final class EngineBridge {
+    @JavascriptInterface
+    public void adScreenReady(String session, String token, boolean ready) {
+      runOnUiThread(() -> {
+        if (adCover == null || !adGateToken.equals(token) || !adGateDocument.equals(session)
+            || !battleSession.equals(session) || adReleasePending) return;
+        Runnable action = ready ? adGateShow : adGateCancel;
+        adGateShow = null; adGateCancel = null;
+        if (action != null) action.run();
+      });
+    }
+
+    @JavascriptInterface
+    public void adScreenRestored(String session, String token, boolean restored) {
+      runOnUiThread(() -> {
+        if (adCover == null || !adGateToken.equals(token) || !adGateDocument.equals(session)
+            || !battleSession.equals(session) || !adReleasePending) return;
+        if (restored) { finishAdScreen(); return; }
+        adCover.removeAllViews();
+        LinearLayout retry = new LinearLayout(MainActivity.this);
+        retry.setOrientation(LinearLayout.VERTICAL); retry.setGravity(Gravity.CENTER);
+        TextView message = new TextView(MainActivity.this);
+        message.setText("The game is still resuming."); message.setTextColor(Color.WHITE); message.setTextSize(15);
+        retry.addView(message, new LinearLayout.LayoutParams(-2, -2));
+        Button resume = new Button(MainActivity.this);
+        resume.setText("Resume game"); resume.setAllCaps(false);
+        resume.setOnClickListener(v -> releaseAdScreen());
+        retry.addView(resume, new LinearLayout.LayoutParams(-2, dp(48)));
+        adCover.addView(retry, new FrameLayout.LayoutParams(-1, -1));
+      });
+    }
+
     @JavascriptInterface
     public String appVersion() { return GraphicsSetupView.appVersion(MainActivity.this); }
 
@@ -1007,6 +1156,27 @@ public final class MainActivity extends Activity {
       runOnUiThread(() -> {
         if (session != null && session.equals(rewardSession) && session.equals(battleSession))
           MainActivity.this.showRewards(true);
+      });
+    }
+
+    @JavascriptInterface
+    public void toggleHeaderRewards(String session, int headerBottomCss, int viewportWidthCss) {
+      runOnUiThread(() -> {
+        if (session == null || !session.equals(rewardSession) || !session.equals(battleSession)
+            || adCover != null || graphicsSetup != null) return;
+        if (rewardsView != null) { closeRewards(); return; }
+        if (headerBottomCss < 0 || viewportWidthCss < 1 || viewportWidthCss > 16384) return;
+        rewardsHeaderBottomCss = headerBottomCss;
+        rewardsViewportWidthCss = viewportWidthCss;
+        MainActivity.this.showRewards(true);
+      });
+    }
+
+    @JavascriptInterface
+    public void closeHeaderRewards(String session) {
+      runOnUiThread(() -> {
+        if (session != null && session.equals(rewardSession) && session.equals(battleSession)
+            && graphicsSetup == null && adCover == null) closeRewards();
       });
     }
 
@@ -1844,6 +2014,8 @@ public final class MainActivity extends Activity {
 
   @Override
   protected void onPause() {
+    activityResumed = false;
+    if (rewardedAds != null) rewardedAds.onPause();
     musicSuspended = true;
     mapMusicLifecycle("suspend");
     super.onPause();
@@ -1852,12 +2024,16 @@ public final class MainActivity extends Activity {
   @Override
   protected void onResume() {
     super.onResume();
-    musicSuspended = false;
-    mapMusicLifecycle("resume");
+    activityResumed = true;
+    musicSuspended = adCover != null;
+    mapMusicLifecycle(musicSuspended ? "suspend" : "resume");
+    if (rewardedAds != null) rewardedAds.onResume();
+    if (adReleasePending) releaseAdScreen();
   }
 
   @Override
   protected void onDestroy() {
+    if (rewardedAds != null) rewardedAds.destroy();
     mapMusicLifecycle("dispose");
     dismissMainMenuDialog();
     if (musicStore != null) musicStore.close();
@@ -1938,6 +2114,7 @@ public final class MainActivity extends Activity {
 
   @Override
   public void onBackPressed() {
+    if (adCover != null) return;
     if (savedGamesView != null) { closeSavedGames(); return; }
     if (rewardsView != null) { closeRewards(); return; }
     if (rewardReceipt != null) { dismissRewardReceipt(); return; }

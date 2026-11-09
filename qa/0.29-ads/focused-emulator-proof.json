@@ -1,0 +1,177 @@
+{
+  "version": "0.29",
+  "candidateAPK_SHA256": "fbd35815d25b9a31a2dda9708c42b6af5e951d892a65f661f7d32737184728d3",
+  "emulatorUsed": true,
+  "device": "emulator-5556",
+  "testAdsOnly": true,
+  "liveAdsTested": false,
+  "gameplayVerified": false,
+  "createdAt": "2026-11-09T17:43:18.287Z",
+  "checks": [
+    {
+      "name": "0.29 installed with the existing app identity and preserved 55-crystal wallet",
+      "passed": true
+    },
+    {
+      "name": "Home exposes the compact optional ten-crystal ad action",
+      "passed": true
+    },
+    {
+      "name": "Opening the ad alone does not award crystals",
+      "passed": true
+    },
+    {
+      "name": "Real Google test ad earned exactly ten on Home and cleared its durable attempt",
+      "passed": true
+    },
+    {
+      "name": "In-game Rewards exposes the same optional ad action",
+      "passed": true
+    },
+    {
+      "name": "Native battle clock remained stopped during the owned ad pause",
+      "passed": true
+    },
+    {
+      "name": "Real in-game Google test ad earned exactly ten without a second grant",
+      "passed": true
+    },
+    {
+      "name": "Ad return resumed the same native document with an advancing clock",
+      "passed": true
+    },
+    {
+      "name": "Repeated ad completion and return kept the same native document and cleared its hold",
+      "passed": true
+    },
+    {
+      "name": "Map music was playing again after repeated ad returns",
+      "passed": true
+    },
+    {
+      "name": "Header SAVE completed after the ad with no save error",
+      "passed": true
+    },
+    {
+      "name": "Build and Tech opened and closed through ordinary controls after the ad",
+      "passed": true
+    },
+    {
+      "name": "Return-to-main-menu and process restart preserved the complete 85-crystal balance",
+      "passed": true
+    },
+    {
+      "name": "Restarted Rewards screen returned normally with no automatic ad",
+      "passed": true
+    }
+  ],
+  "evidenceFiles": [
+    {
+      "path": "qa/0.29-ads/delivery-home-before.json",
+      "sha256": "d9bd042eb2cb379ef02267749cd0ab2cac0d929147f6b7d4fa7afb55832ae016"
+    },
+    {
+      "path": "qa/0.29-ads/delivery-home-ad-open.json",
+      "sha256": "2abd631b147a9acc03805c8c8af32888c84a79561742c911d1e99ac63cec8ce7"
+    },
+    {
+      "path": "qa/0.29-ads/delivery-home-earned.json",
+      "sha256": "055b4953068c984d4737c4e3a30721df19784092ea9c1de810b7078962c8b753"
+    },
+    {
+      "path": "qa/0.29-ads/delivery-game-before.json",
+      "sha256": "0d54adde441c89f18e6b268b7ff47c0aeb64003d3e2835e4f8d4ed775cc1c0f3"
+    },
+    {
+      "path": "qa/0.29-ads/delivery-game-held.json",
+      "sha256": "e9158def6db4d3afb54cf684811237e17323478b61951b17b5ab6bed0dfa51e0"
+    },
+    {
+      "path": "qa/0.29-ads/delivery-game-earned.json",
+      "sha256": "9e916dfcead5a5c51d7221c551fc6345ee250af72a1cbf80e6faea8666a5c73d"
+    },
+    {
+      "path": "qa/0.29-ads/delivery-game-first-resumed.json",
+      "sha256": "5fadc1e7ad8eac48aba6c955f252cc6937717cfbe5f8d07b56af5a5517b9be7d"
+    },
+    {
+      "path": "qa/0.29-ads/delivery-game-resumed.json",
+      "sha256": "da38e51358a1125e5df68d3876743a9377d411882582ee3a13cc870cf2770bfe"
+    },
+    {
+      "path": "qa/0.29-ads/delivery-post-ad-input-save.json",
+      "sha256": "6557e150c7783dc268e33deb1348f09f8e3703f86c42c5af5566a6c7ecab34a7"
+    },
+    {
+      "path": "qa/0.29-ads/delivery-restarted.json",
+      "sha256": "1a98e382facbb7c87b1bbf741e7ca10b8c3ec4334925fd30a6cdbe6c8fc151f1"
+    },
+    {
+      "path": "qa/0.29-ads/delivery-home-ready.png",
+      "sha256": "d58da24012273c75729a55287277d27ceb31e97ca1b418b1339395448a84a30e"
+    },
+    {
+      "path": "qa/0.29-ads/delivery-home-earned-ad.png",
+      "sha256": "7f7566206fabc8113dceb9f2e84dbdec11677609ed9928960e8bbe1ca179bee0"
+    },
+    {
+      "path": "qa/0.29-ads/delivery-game-ready.png",
+      "sha256": "a320a07ff8ec36f8cf285a9b9f54fd8609498afeef77f94102909c871c29d7f3"
+    },
+    {
+      "path": "qa/0.29-ads/delivery-game-google-ad.png",
+      "sha256": "21935bb6b0e6df4beb57eeb20c814f6cc1855f84a814fb9dcf5d63aa020fec84"
+    },
+    {
+      "path": "qa/0.29-ads/delivery-game-earned-ad.png",
+      "sha256": "3981bf82f70abf10804100ff8eb84a0a9a0e000e7ee651603fdb95a0126a359b"
+    },
+    {
+      "path": "qa/0.29-ads/delivery-game-resumed.png",
+      "sha256": "d567e3f2afdc6d98580e9ed80eeb69173ae5d69ffe7114e3ca5a691d66809bf0"
+    },
+    {
+      "path": "qa/0.29-ads/delivery-post-ad-build.png",
+      "sha256": "9013d3ce736f94aef6bc9164810bb270f48fcd11e52a121908cec84d7137e604"
+    },
+    {
+      "path": "qa/0.29-ads/delivery-post-ad-tech.png",
+      "sha256": "257b466cb4ea929336d656927879e04e8f736a100bf1c9e43db20830c58360de"
+    },
+    {
+      "path": "qa/0.29-ads/delivery-post-ad-input-save.png",
+      "sha256": "afc4e8967512444acc0a631d56aa740ddb97ef080677b535c3fb644cceee368f"
+    },
+    {
+      "path": "qa/0.29-ads/delivery-return-home.png",
+      "sha256": "156a089d372fc5c307e46f18fd886d99285550fd9cdaf17244d33c5a4ec40bf8"
+    },
+    {
+      "path": "qa/0.29-ads/delivery-restarted-rewards.png",
+      "sha256": "1c91b32df9e1c0b5cc76545c2ac5fc66b829b743718218efececa990c5d58b3f"
+    },
+    {
+      "path": "qa/0.29-ads/google-sdk-observations.txt",
+      "sha256": "da54ce172e1bb0395eda5ff9dc1e3c05fb735d060b051eeae5bb0a1c4199dd7a"
+    }
+  ],
+  "supportingObservations": [
+    {
+      "path": "qa/0.29-ads/baseline-game.png",
+      "sha256": "d7a856048b2ada14e4270b9bb0d1085dd1288bcce65843fa82c8260f335bb92b",
+      "scope": "Pre-change v0.28 baseline only; not a delivery-APK check."
+    },
+    {
+      "path": "qa/0.29-ads/native-pause-control.json",
+      "sha256": "51ed4f818d4a0e9e41695a14fe9ed6c2c16bd17d97b5c10763a56bcac65c2ee6",
+      "scope": "Pre-change v0.28 baseline only; not a delivery-APK check."
+    }
+  ],
+  "provenance": "Ordinary Home/new Greenhaven match. Real Google sample rewarded units on the Android emulator; actual native SDK earned callbacks and private phone-wallet reads. No synthetic ad grants, seeded currency, spawned structures or reward callback injection.",
+  "limitations": [
+    "Production account/store approval and live ad fill are external and unverified.",
+    "Google UMP reports no publisher privacy forms configured for the supplied app ID; actual required-form display remains unverified. Consent gating/form lifecycles are covered by the actual-controller host fixtures.",
+    "An early Android Back attempt during a third sample ad did not cancel it; that ad finished and earned normally. No genuine early-close device check is claimed; unearned dismissal and failure semantics are covered by the callback fixtures.",
+    "The v0.28 pre-change emulator baseline already showed missing terrain rendering. Ads did not change native assets or that baseline; this is not a graphics or full campaign acceptance pass."
+  ]
+}

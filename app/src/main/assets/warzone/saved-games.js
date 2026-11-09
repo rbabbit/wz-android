@@ -188,7 +188,7 @@
     window.__blockNightResearch?.close?.(); owner.TowersStatus?.close?.();
     window.WarzoneMusic?.closeMenu?.(false);
     const help = owner.document.getElementById('warzone-towers-help-overlay');
-    if (help && !help.hidden) (help.querySelector('.wt-help-back') || help.querySelector('.wt-help-close'))?.click();
+    if (help && !help.hidden) window.__kalaWarzoneTouch?.closeHelp?.();
     const closed = await bounded(commands.afterBuildExit(() => { active(token); return true; }), deadline, token, 'The game is still finishing accepted input.');
     if (closed !== true) throw Error('Finish the current action before saving.');
     await until(() => !window.__kalaWarzoneTouch?.report?.().pendingClicks && !commands.report?.().pending,

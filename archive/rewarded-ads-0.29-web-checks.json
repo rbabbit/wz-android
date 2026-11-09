@@ -1,0 +1,30 @@
+{
+  "version": "0.29",
+  "emulatorUsed": false,
+  "actualNativeEngineExecuted": false,
+  "actualPauseBridgeExecuted": true,
+  "checksPassed": 16,
+  "checks": [
+    "native build and compact page paths close before ad pause",
+    "running match pauses once and acknowledges owned hold",
+    "held model clock stays stopped through simulated ad",
+    "owned release resumes once and waits for clock advancement",
+    "duplicate completed release never toggles native pause",
+    "pre-existing paused clock is preserved without Escape",
+    "releasing another owner pause leaves native simulation stopped",
+    "cancelled acquisition ignores late baseline observation and never shows ad",
+    "native save busy refuses before holding or sending input",
+    "native purchase busy refuses the ad pause gate",
+    "inactive document release never sends resume into another match",
+    "failed resume retains hold and records its single native resume attempt",
+    "resume retry observes recovery without toggling Escape twice",
+    "second acquisition cannot replace the active native hold identity",
+    "ignored pause failure never sends a blind second Escape that pauses live gameplay",
+    "clock becoming unavailable refuses acquisition without native Escape"
+  ],
+  "source": {
+    "path": "app/src/main/assets/warzone/rewarded-ads.js",
+    "sha256": "92508cba727137ad7e05244fc5f484ef9ea6b5e43d21bfb4b8d689a97528ed51"
+  },
+  "scope": "Real rewarded-ads.js in Node vm with deterministic model native clock, input and bridge. Not Google SDK, Android, native engine or gameplay verification."
+}

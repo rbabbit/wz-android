@@ -1,0 +1,399 @@
+{
+  "version": "0.29",
+  "versionCode": 29,
+  "candidateAPK_SHA256": "fbd35815d25b9a31a2dda9708c42b6af5e951d892a65f661f7d32737184728d3",
+  "scope": "Optional Home/in-game rewarded ads, fixed ten-crystal wallet grants and consent/privacy handling.",
+  "emulatorUsed": true,
+  "gameplayVerified": false,
+  "testAdsOnly": true,
+  "liveAdsTested": false,
+  "verification": "Only hash-bound focused emulator observations plus source fixtures, APK signing/archive and frozen payload checks.",
+  "emulatorProof": {
+    "path": "qa/0.29-ads/focused-emulator-proof.json",
+    "sha256": "2753156cc17f6fda2b141fe911e55030dea5beeafe1db96db653df1290acb1f3"
+  },
+  "focusedEmulatorChecks": [
+    {
+      "name": "0.29 installed with the existing app identity and preserved 55-crystal wallet",
+      "passed": true
+    },
+    {
+      "name": "Home exposes the compact optional ten-crystal ad action",
+      "passed": true
+    },
+    {
+      "name": "Opening the ad alone does not award crystals",
+      "passed": true
+    },
+    {
+      "name": "Real Google test ad earned exactly ten on Home and cleared its durable attempt",
+      "passed": true
+    },
+    {
+      "name": "In-game Rewards exposes the same optional ad action",
+      "passed": true
+    },
+    {
+      "name": "Native battle clock remained stopped during the owned ad pause",
+      "passed": true
+    },
+    {
+      "name": "Real in-game Google test ad earned exactly ten without a second grant",
+      "passed": true
+    },
+    {
+      "name": "Ad return resumed the same native document with an advancing clock",
+      "passed": true
+    },
+    {
+      "name": "Repeated ad completion and return kept the same native document and cleared its hold",
+      "passed": true
+    },
+    {
+      "name": "Map music was playing again after repeated ad returns",
+      "passed": true
+    },
+    {
+      "name": "Header SAVE completed after the ad with no save error",
+      "passed": true
+    },
+    {
+      "name": "Build and Tech opened and closed through ordinary controls after the ad",
+      "passed": true
+    },
+    {
+      "name": "Return-to-main-menu and process restart preserved the complete 85-crystal balance",
+      "passed": true
+    },
+    {
+      "name": "Restarted Rewards screen returned normally with no automatic ad",
+      "passed": true
+    }
+  ],
+  "emulatorEvidenceFiles": [
+    {
+      "path": "qa/0.29-ads/delivery-home-before.json",
+      "sha256": "d9bd042eb2cb379ef02267749cd0ab2cac0d929147f6b7d4fa7afb55832ae016"
+    },
+    {
+      "path": "qa/0.29-ads/delivery-home-ad-open.json",
+      "sha256": "2abd631b147a9acc03805c8c8af32888c84a79561742c911d1e99ac63cec8ce7"
+    },
+    {
+      "path": "qa/0.29-ads/delivery-home-earned.json",
+      "sha256": "055b4953068c984d4737c4e3a30721df19784092ea9c1de810b7078962c8b753"
+    },
+    {
+      "path": "qa/0.29-ads/delivery-game-before.json",
+      "sha256": "0d54adde441c89f18e6b268b7ff47c0aeb64003d3e2835e4f8d4ed775cc1c0f3"
+    },
+    {
+      "path": "qa/0.29-ads/delivery-game-held.json",
+      "sha256": "e9158def6db4d3afb54cf684811237e17323478b61951b17b5ab6bed0dfa51e0"
+    },
+    {
+      "path": "qa/0.29-ads/delivery-game-earned.json",
+      "sha256": "9e916dfcead5a5c51d7221c551fc6345ee250af72a1cbf80e6faea8666a5c73d"
+    },
+    {
+      "path": "qa/0.29-ads/delivery-game-first-resumed.json",
+      "sha256": "5fadc1e7ad8eac48aba6c955f252cc6937717cfbe5f8d07b56af5a5517b9be7d"
+    },
+    {
+      "path": "qa/0.29-ads/delivery-game-resumed.json",
+      "sha256": "da38e51358a1125e5df68d3876743a9377d411882582ee3a13cc870cf2770bfe"
+    },
+    {
+      "path": "qa/0.29-ads/delivery-post-ad-input-save.json",
+      "sha256": "6557e150c7783dc268e33deb1348f09f8e3703f86c42c5af5566a6c7ecab34a7"
+    },
+    {
+      "path": "qa/0.29-ads/delivery-restarted.json",
+      "sha256": "1a98e382facbb7c87b1bbf741e7ca10b8c3ec4334925fd30a6cdbe6c8fc151f1"
+    },
+    {
+      "path": "qa/0.29-ads/delivery-home-ready.png",
+      "sha256": "d58da24012273c75729a55287277d27ceb31e97ca1b418b1339395448a84a30e"
+    },
+    {
+      "path": "qa/0.29-ads/delivery-home-earned-ad.png",
+      "sha256": "7f7566206fabc8113dceb9f2e84dbdec11677609ed9928960e8bbe1ca179bee0"
+    },
+    {
+      "path": "qa/0.29-ads/delivery-game-ready.png",
+      "sha256": "a320a07ff8ec36f8cf285a9b9f54fd8609498afeef77f94102909c871c29d7f3"
+    },
+    {
+      "path": "qa/0.29-ads/delivery-game-google-ad.png",
+      "sha256": "21935bb6b0e6df4beb57eeb20c814f6cc1855f84a814fb9dcf5d63aa020fec84"
+    },
+    {
+      "path": "qa/0.29-ads/delivery-game-earned-ad.png",
+      "sha256": "3981bf82f70abf10804100ff8eb84a0a9a0e000e7ee651603fdb95a0126a359b"
+    },
+    {
+      "path": "qa/0.29-ads/delivery-game-resumed.png",
+      "sha256": "d567e3f2afdc6d98580e9ed80eeb69173ae5d69ffe7114e3ca5a691d66809bf0"
+    },
+    {
+      "path": "qa/0.29-ads/delivery-post-ad-build.png",
+      "sha256": "9013d3ce736f94aef6bc9164810bb270f48fcd11e52a121908cec84d7137e604"
+    },
+    {
+      "path": "qa/0.29-ads/delivery-post-ad-tech.png",
+      "sha256": "257b466cb4ea929336d656927879e04e8f736a100bf1c9e43db20830c58360de"
+    },
+    {
+      "path": "qa/0.29-ads/delivery-post-ad-input-save.png",
+      "sha256": "afc4e8967512444acc0a631d56aa740ddb97ef080677b535c3fb644cceee368f"
+    },
+    {
+      "path": "qa/0.29-ads/delivery-return-home.png",
+      "sha256": "156a089d372fc5c307e46f18fd886d99285550fd9cdaf17244d33c5a4ec40bf8"
+    },
+    {
+      "path": "qa/0.29-ads/delivery-restarted-rewards.png",
+      "sha256": "1c91b32df9e1c0b5cc76545c2ac5fc66b829b743718218efececa990c5d58b3f"
+    },
+    {
+      "path": "qa/0.29-ads/google-sdk-observations.txt",
+      "sha256": "da54ce172e1bb0395eda5ff9dc1e3c05fb735d060b051eeae5bb0a1c4199dd7a"
+    }
+  ],
+  "supportingObservations": [
+    {
+      "path": "qa/0.29-ads/baseline-game.png",
+      "sha256": "d7a856048b2ada14e4270b9bb0d1085dd1288bcce65843fa82c8260f335bb92b",
+      "scope": "Pre-change v0.28 baseline only; not a delivery-APK check."
+    },
+    {
+      "path": "qa/0.29-ads/native-pause-control.json",
+      "sha256": "51ed4f818d4a0e9e41695a14fe9ed6c2c16bd17d97b5c10763a56bcac65c2ee6",
+      "scope": "Pre-change v0.28 baseline only; not a delivery-APK check."
+    }
+  ],
+  "changedAPKAssets": [],
+  "newAPKAssets": [
+    "assets/warzone/rewarded-ads.js"
+  ],
+  "changedAPKMembers": [
+    "classes.dex",
+    "classes2.dex",
+    "classes5.dex",
+    "AndroidManifest.xml",
+    "res/color/common_google_signin_btn_text_dark.xml",
+    "res/color/common_google_signin_btn_text_light.xml",
+    "res/color/common_google_signin_btn_tint.xml",
+    "res/drawable-anydpi-v21/ic_call_answer.xml",
+    "res/drawable-anydpi-v21/ic_call_answer_low.xml",
+    "res/drawable-anydpi-v21/ic_call_answer_video.xml",
+    "res/drawable-anydpi-v21/ic_call_answer_video_low.xml",
+    "res/drawable-anydpi-v21/ic_call_decline.xml",
+    "res/drawable-anydpi-v21/ic_call_decline_low.xml",
+    "res/drawable-hdpi-v4/common_full_open_on_phone.png",
+    "res/drawable-hdpi-v4/common_google_signin_btn_icon_dark_normal_background.9.png",
+    "res/drawable-hdpi-v4/common_google_signin_btn_icon_light_normal_background.9.png",
+    "res/drawable-hdpi-v4/common_google_signin_btn_text_dark_normal_background.9.png",
+    "res/drawable-hdpi-v4/common_google_signin_btn_text_light_normal_background.9.png",
+    "res/drawable-hdpi-v4/googleg_disabled_color_18.png",
+    "res/drawable-hdpi-v4/googleg_standard_color_18.png",
+    "res/drawable-hdpi-v4/ic_call_answer.png",
+    "res/drawable-hdpi-v4/ic_call_answer_low.png",
+    "res/drawable-hdpi-v4/ic_call_answer_video.png",
+    "res/drawable-hdpi-v4/ic_call_answer_video_low.png",
+    "res/drawable-hdpi-v4/ic_call_decline.png",
+    "res/drawable-hdpi-v4/ic_call_decline_low.png",
+    "res/drawable-ldpi-v4/ic_call_answer.png",
+    "res/drawable-ldpi-v4/ic_call_answer_low.png",
+    "res/drawable-ldpi-v4/ic_call_answer_video.png",
+    "res/drawable-ldpi-v4/ic_call_answer_video_low.png",
+    "res/drawable-ldpi-v4/ic_call_decline.png",
+    "res/drawable-ldpi-v4/ic_call_decline_low.png",
+    "res/drawable-mdpi-v4/common_google_signin_btn_icon_dark_normal_background.9.png",
+    "res/drawable-mdpi-v4/common_google_signin_btn_icon_light_normal_background.9.png",
+    "res/drawable-mdpi-v4/common_google_signin_btn_text_dark_normal_background.9.png",
+    "res/drawable-mdpi-v4/common_google_signin_btn_text_light_normal_background.9.png",
+    "res/drawable-mdpi-v4/googleg_disabled_color_18.png",
+    "res/drawable-mdpi-v4/googleg_standard_color_18.png",
+    "res/drawable-mdpi-v4/ic_call_answer.png",
+    "res/drawable-mdpi-v4/ic_call_answer_low.png",
+    "res/drawable-mdpi-v4/ic_call_answer_video.png",
+    "res/drawable-mdpi-v4/ic_call_answer_video_low.png",
+    "res/drawable-mdpi-v4/ic_call_decline.png",
+    "res/drawable-mdpi-v4/ic_call_decline_low.png",
+    "res/drawable-v21/notification_action_background.xml",
+    "res/drawable-xhdpi-v4/common_full_open_on_phone.png",
+    "res/drawable-xhdpi-v4/common_google_signin_btn_icon_dark_normal_background.9.png",
+    "res/drawable-xhdpi-v4/common_google_signin_btn_icon_light_normal_background.9.png",
+    "res/drawable-xhdpi-v4/common_google_signin_btn_text_dark_normal_background.9.png",
+    "res/drawable-xhdpi-v4/common_google_signin_btn_text_light_normal_background.9.png",
+    "res/drawable-xhdpi-v4/googleg_disabled_color_18.png",
+    "res/drawable-xhdpi-v4/googleg_standard_color_18.png",
+    "res/drawable-xhdpi-v4/ic_call_answer.png",
+    "res/drawable-xhdpi-v4/ic_call_answer_low.png",
+    "res/drawable-xhdpi-v4/ic_call_answer_video.png",
+    "res/drawable-xhdpi-v4/ic_call_answer_video_low.png",
+    "res/drawable-xhdpi-v4/ic_call_decline.png",
+    "res/drawable-xhdpi-v4/ic_call_decline_low.png",
+    "res/drawable-xxhdpi-v4/common_google_signin_btn_icon_dark_normal_background.9.png",
+    "res/drawable-xxhdpi-v4/common_google_signin_btn_icon_light_normal_background.9.png",
+    "res/drawable-xxhdpi-v4/common_google_signin_btn_text_dark_normal_background.9.png",
+    "res/drawable-xxhdpi-v4/common_google_signin_btn_text_light_normal_background.9.png",
+    "res/drawable-xxhdpi-v4/googleg_disabled_color_18.png",
+    "res/drawable-xxhdpi-v4/googleg_standard_color_18.png",
+    "res/drawable-xxhdpi-v4/ic_call_answer.png",
+    "res/drawable-xxhdpi-v4/ic_call_answer_low.png",
+    "res/drawable-xxhdpi-v4/ic_call_answer_video.png",
+    "res/drawable-xxhdpi-v4/ic_call_answer_video_low.png",
+    "res/drawable-xxhdpi-v4/ic_call_decline.png",
+    "res/drawable-xxhdpi-v4/ic_call_decline_low.png",
+    "res/drawable-xxxhdpi-v4/ic_call_answer.png",
+    "res/drawable-xxxhdpi-v4/ic_call_answer_low.png",
+    "res/drawable-xxxhdpi-v4/ic_call_answer_video.png",
+    "res/drawable-xxxhdpi-v4/ic_call_answer_video_low.png",
+    "res/drawable-xxxhdpi-v4/ic_call_decline.png",
+    "res/drawable-xxxhdpi-v4/ic_call_decline_low.png",
+    "res/drawable/abc_vector_test.xml",
+    "res/drawable/admob_close_button_black_circle_white_cross.xml",
+    "res/drawable/admob_close_button_white_circle_black_cross.xml",
+    "res/drawable/admob_close_button_white_cross.xml",
+    "res/drawable/common_google_signin_btn_icon_dark.xml",
+    "res/drawable/common_google_signin_btn_icon_dark_focused.xml",
+    "res/drawable/common_google_signin_btn_icon_dark_normal.xml",
+    "res/drawable/common_google_signin_btn_icon_disabled.xml",
+    "res/drawable/common_google_signin_btn_icon_light.xml",
+    "res/drawable/common_google_signin_btn_icon_light_focused.xml",
+    "res/drawable/common_google_signin_btn_icon_light_normal.xml",
+    "res/drawable/common_google_signin_btn_text_dark.xml",
+    "res/drawable/common_google_signin_btn_text_dark_focused.xml",
+    "res/drawable/common_google_signin_btn_text_dark_normal.xml",
+    "res/drawable/common_google_signin_btn_text_disabled.xml",
+    "res/drawable/common_google_signin_btn_text_light.xml",
+    "res/drawable/common_google_signin_btn_text_light_focused.xml",
+    "res/drawable/common_google_signin_btn_text_light_normal.xml",
+    "res/drawable/ic_launcher_foreground.xml",
+    "res/drawable/logo_play_prism_24dp.xml",
+    "res/drawable/notification_bg.xml",
+    "res/drawable/notification_bg_low.xml",
+    "res/drawable/notification_icon_background.xml",
+    "res/drawable/notification_tile_bg.xml",
+    "res/drawable/offline_dialog_background.xml",
+    "res/drawable/offline_dialog_default_icon_42dp.xml",
+    "res/drawable/warzone_splash.xml",
+    "res/layout-v21/notification_action.xml",
+    "res/layout-v21/notification_action_tombstone.xml",
+    "res/layout-v21/notification_template_custom_big.xml",
+    "res/layout-v21/notification_template_icon_group.xml",
+    "res/layout/admob_empty_layout.xml",
+    "res/layout/browser_actions_context_menu_page.xml",
+    "res/layout/browser_actions_context_menu_row.xml",
+    "res/layout/custom_dialog.xml",
+    "res/layout/hsdp_service_prism_with_loading_indicator.xml",
+    "res/layout/hsdp_shim_activity.xml",
+    "res/layout/notification_template_part_chronometer.xml",
+    "res/layout/notification_template_part_time.xml",
+    "res/layout/offline_ads_dialog.xml",
+    "res/layout/sdk_loading_panel.xml",
+    "res/mipmap-anydpi-v26/ic_launcher.xml",
+    "res/mipmap-anydpi-v26/ic_launcher_round.xml",
+    "res/xml/image_share_filepaths.xml",
+    "resources.arsc",
+    "DebugProbesKt.bin",
+    "META-INF/androidx.activity_activity.version",
+    "META-INF/androidx.annotation_annotation-experimental.version",
+    "META-INF/androidx.appcompat_appcompat-resources.version",
+    "META-INF/androidx.arch.core_core-runtime.version",
+    "META-INF/androidx.browser_browser.version",
+    "META-INF/androidx.core_core-ktx.version",
+    "META-INF/androidx.core_core.version",
+    "META-INF/androidx.customview_customview.version",
+    "META-INF/androidx.datastore_datastore.version",
+    "META-INF/androidx.fragment_fragment.version",
+    "META-INF/androidx.interpolator_interpolator.version",
+    "META-INF/androidx.lifecycle_lifecycle-livedata-core.version",
+    "META-INF/androidx.lifecycle_lifecycle-livedata.version",
+    "META-INF/androidx.lifecycle_lifecycle-runtime.version",
+    "META-INF/androidx.lifecycle_lifecycle-service.version",
+    "META-INF/androidx.lifecycle_lifecycle-viewmodel.version",
+    "META-INF/androidx.loader_loader.version",
+    "META-INF/androidx.privacysandbox.ads_ads-adservices-java.version",
+    "META-INF/androidx.privacysandbox.ads_ads-adservices.version",
+    "META-INF/androidx.room_room-runtime.version",
+    "META-INF/androidx.savedstate_savedstate.version",
+    "META-INF/androidx.sqlite_sqlite-framework.version",
+    "META-INF/androidx.sqlite_sqlite.version",
+    "META-INF/androidx.startup_startup-runtime.version",
+    "META-INF/androidx.tracing_tracing.version",
+    "META-INF/androidx.vectordrawable_vectordrawable-animated.version",
+    "META-INF/androidx.vectordrawable_vectordrawable.version",
+    "META-INF/androidx.versionedparcelable_versionedparcelable.version",
+    "META-INF/androidx.viewpager_viewpager.version",
+    "META-INF/androidx.work_work-runtime.version",
+    "META-INF/kotlinx_coroutines_android.version",
+    "META-INF/kotlinx_coroutines_core.version",
+    "META-INF/services/kotlinx.coroutines.CoroutineExceptionHandler",
+    "META-INF/services/kotlinx.coroutines.internal.MainDispatcherFactory",
+    "hsdp.properties",
+    "play-services-ads-api.properties",
+    "play-services-ads-identifier.properties",
+    "play-services-ads.properties",
+    "play-services-appset.properties",
+    "play-services-base.properties",
+    "play-services-basement.properties",
+    "play-services-measurement-base.properties",
+    "play-services-measurement-sdk-api.properties",
+    "play-services-tasks.properties",
+    "user-messaging-platform.properties",
+    "assets/warzone/rewarded-ads.js",
+    "classes3.dex"
+  ],
+  "removedAPKMembers": [],
+  "nativePreservation": {
+    "entireNativeAssetsByteIdentical": true,
+    "nativeAssetSHA256": {
+      "assets/warzone/warzone2100.js": "bd59230991cf29d548be7ddb4336cf05dabe3ca4427cb62b4a8bce0821d93d24",
+      "assets/warzone/warzone2100.data": "f2200f13b2197d0162a12737898c12be2545482a78529a6d7c83c54d8a34e16b",
+      "assets/warzone/warzone2100.wasm": "d909a4ecb7475643107fa6f489279562c00deae1e0a0f531ddd1328457d78f1e"
+    },
+    "nativeVirtualFilesUnchanged": 4292,
+    "all46SaveNamesWithinNativeLimit": true
+  },
+  "mapsMusicDuelNativeByteIdentical": true,
+  "preservedOriginalSourceFiles": 1242,
+  "preservedAPKAssets": 526,
+  "deliveryAds": {
+    "appId": "ca-app-pub-3430279660625393~3119801475",
+    "rewardedAdUnitId": "ca-app-pub-3430279660625393/5338770704",
+    "crystalsPerEarnedAd": 10,
+    "emulatorTraffic": "The controller routes Android emulators to Google's official sample rewarded unit.",
+    "liveServingVerified": false,
+    "accountAndStoreApproval": "External AdMob setup remains required."
+  },
+  "signing": {
+    "debugSignedForExistingAppUpdates": true,
+    "sameCertificateAs028": true,
+    "certificateSHA256": "4499efe00477c7c724c06a1dd96f935864548665c13ab5e2bd0a9c0f83f7cb15"
+  },
+  "sourceCheckReports": [
+    {
+      "path": "archive/reward-ledger-0.29-checks.json",
+      "sha256": "4259672bf0eecdbb30b9950ec0f6b1660061d8309aacd01330ca3e5b07039435"
+    },
+    {
+      "path": "archive/rewarded-ads-0.29-controller-checks.json",
+      "sha256": "0b1af19aceb055051e2f15d39a1a5f911d80bdca1be959071f822cf3db128ea9"
+    },
+    {
+      "path": "archive/rewarded-ads-0.29-web-checks.json",
+      "sha256": "d070ed3df6d4779bfd975b35a245cea3ae08ee6e70eca3680b994c2814eee89d"
+    }
+  ],
+  "fallbackRecord": {
+    "path": "archive/fallback-0.29.json",
+    "sha256": "8a073d71d0c336bfd9a8db07455512aaa856c187acfdf7ee81700e663051b345"
+  },
+  "sourceInventory": "git ls-files --cached --others --exclude-standard; caches/private/transient files excluded",
+  "gitMetadataIncluded": false,
+  "vpsChanged": false,
+  "recordedUTC": "2026-11-09T17:48:11.569700Z"
+}

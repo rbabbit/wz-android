@@ -10,7 +10,11 @@ import java.util.Set;
 /** Portable phone inventory and exactly-once crystal accounting; no Android APIs. */
 final class RewardLedger {
   static final int STARTER_CRYSTALS = 350;
+  static final int AD_REWARD_CRYSTALS = 10;
   int balance = STARTER_CRYSTALS;
+  // One native SDK presentation at a time. Clearing the token and crediting
+  // the wallet share a durable store transaction, so a callback cannot pay twice.
+  String pendingAdReward = "";
   final Map<String, Integer> inventory = new LinkedHashMap<>();
   final Map<String, Integer> loadout = new LinkedHashMap<>();
   final Set<String> completed = new HashSet<>();
@@ -56,6 +60,23 @@ final class RewardLedger {
   }
 
   static int price(String id) { return RewardCatalog.get(id).price; }
+  static boolean validAdRewardToken(String token) {
+    return token != null && token.matches("ad-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}");
+  }
+  void prepareAdReward(String token) {
+    if (!pendingAdReward.isEmpty()) throw new IllegalStateException("Your previous ad reward is still being saved. Please try again.");
+    if (!validAdRewardToken(token)) throw new IllegalArgumentException("Invalid ad reward identity.");
+    pendingAdReward = token;
+  }
+  int creditAdReward(String token) {
+    if (token == null || token.isEmpty() || !pendingAdReward.equals(token)) return 0;
+    balance = Math.addExact(balance, AD_REWARD_CRYSTALS);
+    pendingAdReward = "";
+    return AD_REWARD_CRYSTALS;
+  }
+  void cancelAdReward(String token) {
+    if (token != null && !token.isEmpty() && pendingAdReward.equals(token)) pendingAdReward = "";
+  }
   static int count(Map<String, Integer> values, String id) { return values.getOrDefault(id, 0); }
   static Map<String, Integer> copy(Map<String, Integer> values) {
     return Collections.unmodifiableMap(new LinkedHashMap<>(values));

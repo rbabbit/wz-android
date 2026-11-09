@@ -1,0 +1,58 @@
+{
+  "version": "0.29",
+  "emulatorUsed": false,
+  "actualAdsExecuted": false,
+  "googleSDKExecuted": false,
+  "actualControllerExecutedOnJVM": true,
+  "checksPassed": 33,
+  "checks": [
+    "preloading and consent never automatically show an ad",
+    "development builds request the official rewarded sample unit",
+    "one durable presentation identity before show",
+    "double watch is ignored during presentation",
+    "duplicate earned callbacks credit exactly ten once",
+    "duplicate dismissal releases once and never cancels earned reward",
+    "delivery build on emulator requests official sample without live publisher traffic",
+    "physical delivery devices retain the configured publisher rewarded unit",
+    "failed cancellation retains the unpaid identity and exposes a retry",
+    "cancellation retry cannot prepare another ad while prior wallet write fails",
+    "cancellation retry clears durable identity without awarding or auto-showing",
+    "a fresh optional ad can be watched after cancellation storage recovers",
+    "early close cancels unpaid identity and permits another attempt",
+    "queued earned after dismissal settles without losing reward",
+    "show failure restores hold and gives no crystals",
+    "failed gameplay pause never opens ad or prepares wallet attempt",
+    "expired fullscreen gate ignores late show and restores interaction",
+    "ad loading timeout is bounded and retryable",
+    "late ad response is ignored and retry starts a fresh load",
+    "consent timeout does not initialize or request ads without UMP permission",
+    "late consent update cannot open a surprise form",
+    "explicit consent retry can recover and present gated choices",
+    "form loading timeout ignores late form without pausing gameplay",
+    "background startup defers consent presentation",
+    "foreground consent holds gameplay before showing and blocks ads until chosen",
+    "consent dismissal releases hold and only preloads ads",
+    "failed earned write retains same proof for an explicit retry",
+    "failed credit retry cannot start another ad or replace earned proof",
+    "successful credit retry pays once and never silently shows next ad",
+    "disposal preserves an already persisted reward",
+    "disposal never cancels earned proof or acts on stale SDK callbacks",
+    "privacy choices acquire the same full-screen hold",
+    "privacy change discards old ad and restores interaction without automatic show"
+  ],
+  "scope": "Actual RewardedAdsController executes with deterministic fake Google/Android callbacks and a fake Host wallet. Covers duplicates, cancellation, consent, timeouts, late callbacks, background, retry and disposal. This is not device/network/SDK consent or gameplay evidence.",
+  "sources": [
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/RewardedAdsController.java",
+      "sha256": "5ff8abbb17aa9ba48685b6858bfd5c8758b50cbca1c67f73c0bef5036561d563"
+    },
+    {
+      "path": "tools/check-rewarded-ads-029.java",
+      "sha256": "ca31f81557d9932fb66799771dbfaf088c389884b58b1d2cd860cefbd3aa9a0b"
+    },
+    {
+      "path": "tools/check-rewarded-ads-029.py",
+      "sha256": "0e8521d9411575c5562ce1134bf39760671fdfc721e34415026673101c150190"
+    }
+  ]
+}

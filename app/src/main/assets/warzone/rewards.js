@@ -4,7 +4,7 @@
   if (window.__warzoneDuelConfig?.mode === 'duel' || window.WarzoneRewards) return;
   const session = window.__towersHtml?.session || window.__towersHtmlSession || '';
   const owner = window.parent?.WarzoneHost ? window.parent.document : document;
-  const state = {ready:false, applying:false, ended:false, error:'', config:null, purchasing:false, laserTarget:false, laserArming:false, laserSerial:0, exitPromise:null};
+  const state = {ready:false, applying:false, ended:false, error:'', config:null, purchasing:false, laserTarget:false, laserArming:false, laserSerial:0, exitPromise:null, nativeDrawerOpen:false};
   const bridge = () => window.BlockNightAndroid;
   const nativeState = () => window.__warzoneCommands?.report?.().snapshot?.rewards;
   const notice = message => bridge()?.showNotice?.(message);
@@ -63,7 +63,19 @@
   }
   function open() {
     if (!state.ready || state.ended || window.WarzoneSavedGames?.busy) return;
-    window.__warzoneCommands?.afterBuildExit?.(() => bridge()?.showRewards?.(session));
+    const toggle = () => {
+      const bounds = owner.getElementById('warzone-command-strip')?.getBoundingClientRect();
+      bridge()?.toggleHeaderRewards?.(session, Math.ceil(bounds?.bottom || 0), owner.defaultView.innerWidth);
+    };
+    if (state.nativeDrawerOpen) { toggle(); return; }
+    window.__warzoneCommands?.afterBuildExit?.(toggle);
+  }
+  function drawerChanged(open) {
+    state.nativeDrawerOpen = Boolean(open) && !state.ended;
+    window.__kalaWarzoneTouch?.setHeaderMenuState?.('rewards', state.nativeDrawerOpen);
+  }
+  function closeDrawer() {
+    if (state.nativeDrawerOpen) bridge()?.closeHeaderRewards?.(session);
   }
   async function submitPurchase(commands, request) {
     const value = config();
@@ -195,7 +207,7 @@
     state.ended = true; state.laserTarget = false; clearInterval(timer);
     const note=owner.getElementById('wt-wave-crystals'); if(note)note.remove();
   });
-  window.WarzoneRewards = {get ready() { return state.ready; },open,updateBalance,waveCredited,
+  window.WarzoneRewards = {get ready() { return state.ready; },open,closeDrawer,drawerChanged,updateBalance,waveCredited,
     get busy() { return state.purchasing; }, purchase,reconcilePending,
     prepareExit,armLaser,handleTap,cancelTarget,report:() => ({...state,session,nativeSession:config()?.session})};
 })();

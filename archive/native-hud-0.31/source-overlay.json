@@ -1,0 +1,15 @@
+{
+  "version": "0.31",
+  "guardPassed": true,
+  "nativeBuildPerformed": false,
+  "baselineSourceBundle": "archive/native-blueprint-4.7.0-source.tar.gz",
+  "baselineSourceEntry": "source/src/display3d.cpp",
+  "baselineSourceSHA256": "bcd73267db5cdceaae0b5ca609f549dec872a90f8393f976b0132aff95dd38cb",
+  "baselineWasmSHA256": "d909a4ecb7475643107fa6f489279562c00deae1e0a0f531ddd1328457d78f1e",
+  "baselineRawJSSHA256": "a210b24220efc30a3e5e9bf87f50d61fd4564b0c5b56e1ce9e964e7eaf18d179",
+  "changedSource": "archive/native-hud-0.31/display3d.cpp",
+  "changedSourceSHA256": "3b5c1a41144011805819d15e9bfac6f1289d726da276433bfeb237904c0fa15f",
+  "patch": "archive/native-hud-0.31/native-hud.patch",
+  "patchSHA256": "6ad571f05607d19b2a1320d0b5a3c0b9c85cf7b0351f35eb8dccdeb3fcc4a44c",
+  "scope": "Only suppress txtLevelName.render and txtCurrentTime.render. Clock calculation/state, debug-status rendering, minimap, widgets, input, orders and blueprint alignment stay unchanged."
+}

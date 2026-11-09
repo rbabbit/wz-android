@@ -15,7 +15,6 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -31,6 +30,8 @@ final class RewardsView extends FrameLayout {
     interface Actions {
         void buy(String id, int quantity);
         void equip(String id, int quantity);
+        void watchAd();
+        void adPrivacy();
         void close();
     }
 
@@ -43,6 +44,10 @@ final class RewardsView extends FrameLayout {
     private final ScrollView scroll;
     private final TextView wallet, selectedLabel, quantityLabel, hint, error;
     private final Button shop, next, minus, plus, confirm;
+    private final Button watchAd, adPrivacy;
+    private final TextView adStatus;
+    private boolean adEnabled, adBusy;
+    private int adStatusGeneration;
     private final Map<String, Button> categories = new LinkedHashMap<>();
     private final Map<String, Bitmap> artwork = new LinkedHashMap<>();
     private final Map<String, Integer> inventory = new LinkedHashMap<>(), loadout = new LinkedHashMap<>();
@@ -58,7 +63,9 @@ final class RewardsView extends FrameLayout {
         face = Typeface.createFromAsset(context.getAssets(), "warzone/ui/Oswald.ttf");
         setBackgroundColor(0x44000000);
         setClickable(true);
-        setFocusableInTouchMode(true);
+        // A focusable scrim consumes its first tap to take focus. Outside taps
+        // must close immediately now that the header is the normal toggle.
+        setFocusableInTouchMode(false);
         setOnClickListener(v -> actions.close());
         drawer = new LinearLayout(context);
         drawer.setOrientation(LinearLayout.VERTICAL);
@@ -83,15 +90,37 @@ final class RewardsView extends FrameLayout {
         LinearLayout.LayoutParams walletParams = new LinearLayout.LayoutParams(-2, -2);
         walletParams.leftMargin = dp(5);
         header.addView(wallet, walletParams);
-        ImageButton close = new ImageButton(context);
-        close.setImageResource(android.R.drawable.ic_menu_close_clear_cancel);
-        close.setImageTintList(ColorStateList.valueOf(TEAL));
-        close.setBackground(new RippleDrawable(ColorStateList.valueOf(0x338BD3CC), null, null));
-        close.setPadding(dp(9), dp(9), dp(9), dp(9));
-        close.setContentDescription("Close rewards");
-        close.setOnClickListener(v -> actions.close());
-        header.addView(close, new LinearLayout.LayoutParams(dp(40), dp(40)));
         drawer.addView(header, new LinearLayout.LayoutParams(-1, dp(40)));
+
+        LinearLayout adRow = new LinearLayout(context);
+        adRow.setGravity(Gravity.CENTER_VERTICAL);
+        watchAd = compactAction("Gain 10 Crystals", false, 13);
+        watchAd.setGravity(Gravity.CENTER);
+        watchAd.setTextColor(INK);
+        watchAd.setBackground(new RippleDrawable(ColorStateList.valueOf(0x448BD3CC), surface(context, 0xFF225752, 5), null));
+        android.graphics.drawable.Drawable play = context.getDrawable(android.R.drawable.ic_media_play).mutate();
+        play.setTint(TEAL); play.setBounds(0, 0, dp(12), dp(12));
+        watchAd.setCompoundDrawables(play, null, null, null);
+        watchAd.setCompoundDrawablePadding(dp(5));
+        watchAd.setContentDescription("Watch an optional ad to earn 10 crystals");
+        watchAd.setOnClickListener(v -> { if (!busy && !adBusy) actions.watchAd(); });
+        adRow.addView(watchAd, new LinearLayout.LayoutParams(dp(150), dp(36)));
+        TextView adDescription = copy("Watch an ad", 10, MUTED);
+        adDescription.setPadding(dp(8), 0, dp(2), 0);
+        adRow.addView(adDescription, new LinearLayout.LayoutParams(0, -2, 1));
+        adPrivacy = compactAction("Privacy", false, 11);
+        adPrivacy.setTextColor(MUTED);
+        adPrivacy.setBackground(new RippleDrawable(ColorStateList.valueOf(0x228BD3CC), null, null));
+        adPrivacy.setContentDescription("Change ad privacy choices");
+        adPrivacy.setOnClickListener(v -> actions.adPrivacy());
+        LinearLayout.LayoutParams privacyParams = new LinearLayout.LayoutParams(-2, dp(40));
+        privacyParams.leftMargin = dp(5);
+        adRow.addView(adPrivacy, privacyParams);
+        adStatus = copy("", 10, MUTED);
+        adStatus.setMaxLines(2);
+        adStatus.setEllipsize(TextUtils.TruncateAt.END);
+        adStatus.setAccessibilityLiveRegion(ACCESSIBILITY_LIVE_REGION_POLITE);
+        adStatus.setVisibility(GONE);
 
         LinearLayout modes = new LinearLayout(context);
         shop = compactAction("SHOP", false, 12);
@@ -162,6 +191,9 @@ final class RewardsView extends FrameLayout {
         error.setAccessibilityLiveRegion(ACCESSIBILITY_LIVE_REGION_POLITE);
         footer.addView(error, new LinearLayout.LayoutParams(-1, -2));
         drawer.addView(footer, new LinearLayout.LayoutParams(-1, -2));
+        // Keep the optional ad secondary to the shop's normal controls.
+        drawer.addView(adRow, new LinearLayout.LayoutParams(-1, dp(40)));
+        drawer.addView(adStatus, new LinearLayout.LayoutParams(-1, -2));
         refresh(balance, inventory, loadout);
     }
 
@@ -195,6 +227,34 @@ final class RewardsView extends FrameLayout {
         error.setText(message);
         error.setVisibility(VISIBLE);
         render();
+    }
+
+    void setAdState(boolean enabled, boolean busy, boolean privacyRequired, String status, boolean testAds) {
+        boolean wasBusy = adBusy;
+        adEnabled = enabled;
+        adBusy = busy;
+        watchAd.setText(adBusy ? "Please wait…" : "Gain 10 Crystals");
+        boolean quiet = status == null || status.isEmpty() || "Optional ad · 10 crystals".equals(status)
+                || "Ads are optional.".equals(status)
+                || status.startsWith("Ready ·") || "Checking ad privacy settings…".equals(status) && !busy;
+        String shown = quiet ? "" : status;
+        if (!shown.contentEquals(adStatus.getText())
+                || wasBusy && !adBusy && shown.startsWith("+10 crystals")) {
+            int generation = ++adStatusGeneration;
+            adStatus.setText(shown);
+            adStatus.setVisibility(shown.isEmpty() ? GONE : VISIBLE);
+            if (!adBusy && shown.startsWith("+10 crystals")) postDelayed(() -> {
+                if (generation == adStatusGeneration && !adBusy) adStatus.setVisibility(GONE);
+            }, 3000);
+        }
+        adPrivacy.setVisibility(privacyRequired ? VISIBLE : GONE);
+        updateAdControls();
+    }
+
+    private void updateAdControls() {
+        watchAd.setEnabled(adEnabled && !busy && !adBusy);
+        watchAd.setAlpha(watchAd.isEnabled() ? 1f : .55f);
+        adPrivacy.setEnabled(!busy && !adBusy);
     }
 
     private void setMode(boolean value) {
@@ -280,6 +340,7 @@ final class RewardsView extends FrameLayout {
     }
 
     private void render() {
+        updateAdControls();
         wallet.setText(Integer.toString(balance));
         wallet.setContentDescription(balance + " crystals");
         styleTab(shop, !nextMatch); styleTab(next, nextMatch);

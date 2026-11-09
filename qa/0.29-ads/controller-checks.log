@@ -1,0 +1,32 @@
+PASS preloading and consent never automatically show an ad
+PASS one durable presentation identity before show
+PASS double watch is ignored during presentation
+PASS duplicate earned callbacks credit exactly ten once
+PASS duplicate dismissal releases once and never cancels earned reward
+PASS failed cancellation retains the unpaid identity and exposes a retry
+PASS cancellation retry cannot prepare another ad while prior wallet write fails
+PASS cancellation retry clears durable identity without awarding or auto-showing
+PASS a fresh optional ad can be watched after cancellation storage recovers
+PASS early close cancels unpaid identity and permits another attempt
+PASS queued earned after dismissal settles without losing reward
+PASS show failure restores hold and gives no crystals
+PASS failed gameplay pause never opens ad or prepares wallet attempt
+PASS expired fullscreen gate ignores late show and restores interaction
+PASS ad loading timeout is bounded and retryable
+PASS late ad response is ignored and retry starts a fresh load
+PASS consent timeout does not initialize or request ads without UMP permission
+PASS late consent update cannot open a surprise form
+PASS explicit consent retry can recover and present gated choices
+PASS form loading timeout ignores late form without pausing gameplay
+PASS background startup defers consent presentation
+PASS foreground consent holds gameplay before showing and blocks ads until chosen
+PASS consent dismissal releases hold and only preloads ads
+PASS failed earned write retains same proof for an explicit retry
+PASS failed credit retry cannot start another ad or replace earned proof
+PASS successful credit retry pays once and never silently shows next ad
+PASS disposal preserves an already persisted reward
+PASS disposal never cancels earned proof or acts on stale SDK callbacks
+PASS privacy choices acquire the same full-screen hold
+PASS privacy change discards old ad and restores interaction without automatic show
+Actual controller fake-SDK checks passed: 30
+Controller fixture checks: 30

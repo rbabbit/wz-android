@@ -20,7 +20,7 @@
 (() => {
   "use strict";
 
-  if (window.__kalaWarzoneTouch?.version >= 54) return "already-installed";
+  if (window.__kalaWarzoneTouch?.version >= 55) return "already-installed";
 
   // Android's touch-slop model: tolerate a small finger wobble, then commit
   // immediately to a movement gesture. Scale gently for high-density panels.
@@ -1291,6 +1291,8 @@
         // from the engine frame when the command row lives in its parent.
         bindTouchCommand(button, () => {
           if (id !== 'blocknight-lassat') window.WarzoneRewards?.cancelTarget?.();
+          if (['blocknight-tech','blocknight-help','blocknight-music','blocknight-rewards'].includes(id)
+              && !prepareHeaderMenu(id)) return;
           action();
         });
         return button;
@@ -1325,12 +1327,20 @@
         zoomGroup.className = "bn-command-group";
         zoomGroup.append(zoomControl);
       }
-      const tech = makeButton("blocknight-tech", "TECH",
-        "Open the tactical research queue", () => {
+      const tech = makeButton("blocknight-tech", window.__warzoneDuelConfig?.mode === 'duel' ? "TECH" : "RESEARCH",
+        "Open or close research", () => {
+          if (window.__warzoneDuelConfig?.mode !== 'duel'
+              && (window.__blockNightResearch?.report?.().open || window.__blockNightResearch?.report?.().opening)) {
+            window.__blockNightResearch.close(); return;
+          }
           if(window.__warzoneCommands?.afterBuildExit)window.__warzoneCommands.afterBuildExit(()=>window.__blockNightResearch?.open?.());
           else window.__blockNightResearch?.open?.();
         });
-      const help = makeButton("blocknight-help", "HELP", "How to play and use +Q", showHelp);
+      tech.setAttribute('aria-controls','blocknight-research-shell');
+      tech.setAttribute('aria-expanded','false');
+      const help = makeButton("blocknight-help", "HELP", "Open or close how to play", toggleHelp);
+      help.setAttribute('aria-controls','warzone-towers-help-overlay');
+      help.setAttribute('aria-expanded','false');
       const orderGroup = document.createElement("div");
       orderGroup.className = "bn-command-group";
       orderGroup.append(all, auto, box, queue, stop, base);
@@ -1346,6 +1356,7 @@
         techGroup.append(music);
         const rewards = makeButton('blocknight-rewards', 'REWARDS',
           'Crystal wallet and active match boosts', () => window.WarzoneRewards?.open?.());
+        rewards.setAttribute('aria-expanded','false');
         techGroup.append(rewards);
         const save = makeButton('blocknight-save', 'SAVE',
           'Save this game on your phone', () => window.WarzoneSavedGames?.save?.());
@@ -1366,7 +1377,13 @@
           const b = document.createElement("button");
           b.id = `wt-open-${page}`; b.type = "button"; b.textContent = !duelNavigation && page === 'factory' ? 'PRODUCTION' : page.toUpperCase();
           b.title = `Open ${!duelNavigation && page === 'factory' ? 'production' : page}`;
-          bindTouchCommand(b, () => window.__warzoneCommands.open(page));
+          b.setAttribute('aria-controls', page === 'build' ? 'wt-build-sidebar' : 'wt-command-pages');
+          b.setAttribute('aria-expanded','false');
+          bindTouchCommand(b, () => {
+            if (!prepareHeaderMenu('commands')) return;
+            if (!duelNavigation && window.__warzoneCommands.toggle) window.__warzoneCommands.toggle(page);
+            else window.__warzoneCommands.open(page);
+          });
           commands.appendChild(b);
         }
         hud.appendChild(commands);
@@ -1420,8 +1437,46 @@
     window.parent?.WarzoneHost?.setPlaying();
   }
 
+  function setHeaderMenuState(id, open) {
+    const aliases = {research:'blocknight-tech',tech:'blocknight-tech',help:'blocknight-help',music:'blocknight-music',rewards:'blocknight-rewards',build:'wt-open-build',factory:'wt-open-factory',production:'wt-open-factory',queue:'wt-open-queue'};
+    const button = commandDocument().getElementById(aliases[id] || id);
+    if (!button) return;
+    button.setAttribute('aria-expanded', String(Boolean(open)));
+    button.setAttribute('aria-pressed', String(Boolean(open)));
+    button.classList.toggle('active', Boolean(open));
+  }
+
+  function closeHelp() {
+    const overlay = commandDocument().getElementById('warzone-towers-help-overlay');
+    if (!overlay || overlay.hidden) return false;
+    overlay._restoreBattle?.();
+    return true;
+  }
+
+  function prepareHeaderMenu(id) {
+    if (window.__warzoneDuelConfig?.mode === 'duel') return true;
+    if (id !== 'blocknight-rewards') window.WarzoneRewards?.closeDrawer?.();
+    if (id !== 'blocknight-help') closeHelp();
+    if (id !== 'blocknight-music') window.WarzoneMusic?.closeMenu?.(false);
+    if (id !== 'blocknight-tech') {
+      const research = window.__blockNightResearch;
+      if (research?.report?.().open || research?.report?.().opening) {
+        research.close();
+        // A failed queue sync keeps the Research page and its error visible.
+        if (research.report().open || research.report().opening) return false;
+      }
+    }
+    return true;
+  }
+
+  function toggleHelp() {
+    if (window.__warzoneDuelConfig?.mode !== 'duel' && closeHelp()) return true;
+    return showHelp();
+  }
+
   function showHelp() {
     if (!state.battleActive) return false;
+    if (!prepareHeaderMenu('blocknight-help')) return false;
     window.WarzoneMusic?.closeMenu?.(false);
     if(window.__warzoneCommands?.nativeBuildOpen?.()){window.__warzoneCommands.afterBuildExit(showHelp);return true;}
     window.__warzoneCommands?.close?.();
@@ -1450,7 +1505,7 @@
       help = hudDocument.createElement("section");
       help.id = "warzone-towers-help";
       help.setAttribute("role", "dialog");
-      help.setAttribute("aria-modal", "true");
+      help.setAttribute("aria-modal", duel ? "true" : "false");
       help.setAttribute("aria-labelledby", "wt-help-title");
       help.tabIndex = -1;
       const guideContent = duel ? `
@@ -1496,11 +1551,11 @@
             <p>In <b>BUILD → MODULES</b>, choose an upgrade and tap a highlighted, completed matching building: Research Module → research lab; Power Module → power generator; Factory Module → vehicle or VTOL factory.</p>
             <p>Labs and power generators each take one module; vehicle and VTOL factories take two. Highlights show ready, upgrading or full buildings. Finish the matching structure or research the module first if none is ready.</p></section>
           <section><h2>CHOOSE YOUR RESEARCH</h2>
-            <p>Top <b>TECH</b> opens the full page. Choose a lab and tap one or more available topics. Numbers show your selection order; tap a selected topic again to deselect it. <b>ADD TO LAB … QUEUE</b> adds the selection in that order. Each lab follows its own queue. Use <b>×</b> to remove a waiting topic.</p>
+            <p>Top <b>RESEARCH</b> opens the full page. Choose a lab and tap one or more available topics. Numbers show your selection order; tap a selected topic again to deselect it. <b>ADD TO LAB … QUEUE</b> adds the selection in that order. Each lab follows its own queue. Use <b>×</b> to remove a waiting topic.</p>
             <p>Tap one of your completed labs on the battlefield to open that lab’s full research page.</p></section>
           <section><h2>CHECK CURRENT ACTIVITY</h2>
             <p>Bottom-left <b>RESEARCH</b> and <b>PRODUCTION</b> open narrow status panels while you watch the battlefield. Research shows each lab’s current topic and estimated progress; Production shows current units, with vehicle and cyborg tabs.</p>
-            <p>These panels show current work only. Use top <b>TECH</b> or <b>PRODUCTION</b> to change queues. Tap the selected footer button again or <b>×</b> to close the panel.</p></section>
+            <p>These panels show current work only. Use top <b>RESEARCH</b> or <b>PRODUCTION</b> to change queues. Tap the selected footer button again or <b>×</b> to close the panel.</p></section>
           <section><h2>MAKE UNITS IN A FACTORY</h2>
             <p>Open top <b>PRODUCTION</b>, or tap one of your completed factories on the battlefield. Select the intended factory, choose <b>QUANTITY</b> (1, 5, 10 or 20), then <b>PRODUCE</b> a compatible design. Orders belong to the selected factory. Use <b>UNITS</b>, <b>DESIGN</b> and <b>BLUEPRINTS</b> inside Production to switch tasks.</p>
             <p>Production uses normal power and build time. Research, factory type, modules and unit limits still apply. The full page shows current work and waiting units; <b>QUEUE</b> shows wider activity.</p></section>
@@ -1510,14 +1565,14 @@
           <section><h2>MOVE, LOOK &amp; RETURN</h2>
             <p><b>Tap</b> to select or give an order; <b>swipe</b> to pan; <b>pinch</b> to zoom. Move two fingers together up/down to tilt. Tap the minimap to move the view; <b>BASE</b> returns to your Command Centre.</p>
             <p>The bottom-left units icon opens <b>SELECT / MOVE</b>, <b>ALL UNITS</b>, <b>DESELECT</b>, <b>STOP</b> and <b>TRUCKS</b>. ALL UNITS selects combat units. DESELECT clears selection while units continue their existing orders. Android <b>Back</b> closes the current panel first; from the battlefield it asks <b>Return to Main Menu</b>.</p>
-            <p>Set control size above. Download optional music on the start screen once. Each map has an assigned soundtrack; top <b>MUSIC</b> shows its title and lets you turn music <b>ON</b> or <b>OFF</b>. Your choice stays saved on this phone and does not change sound effects.</p></section>`;
+            <p>Tap a top menu button again to close its menu. Set control size above. Download optional music on the start screen once. Each map has an assigned soundtrack; top <b>MUSIC</b> shows its title and lets you turn music <b>ON</b> or <b>OFF</b>. Your choice stays saved on this phone and does not change sound effects.</p></section>`;
       help.innerHTML = `
         <header><div><span class="wt-help-eyebrow">${duel?'WARZONE 1V1':'WARZONE TOWERS'}</span>
           <h1 id="wt-help-title">${duel?'FIELD GUIDE':'HOW TO PLAY'}</h1></div>
-          <button type="button" class="wt-help-close" aria-label="Close help">CLOSE</button></header>
+          ${duel ? '<button type="button" class="wt-help-close" aria-label="Close help">CLOSE</button>' : ''}</header>
         <div class="wt-help-content"${duel?'':' tabindex="0" aria-label="How to play; scroll for more"'}>${guideContent}</div>
         <footer><span>The battle continues while this guide is open.</span>
-          <button type="button" class="wt-help-back">BACK TO BATTLE</button></footer>`;
+          ${duel ? '<button type="button" class="wt-help-back">BACK TO BATTLE</button>' : ''}</footer>`;
       if (!duel) {
         help.classList.add('wt-towers-guide');
         const version = window.BlockNightAndroid?.appVersion?.();
@@ -1558,6 +1613,7 @@
       const restoreBattle = () => {
         if (overlay.hidden) return;
         overlay.hidden = true;
+        setHeaderMenuState('blocknight-help', false);
         for (const item of overlay._blockedRegions || []) item.element.inert = item.wasInert;
         overlay._blockedRegions = [];
         releaseAll();
@@ -1569,6 +1625,7 @@
           if (overlay.hidden) focusCanvas();
         });
       };
+      overlay._restoreBattle = restoreBattle;
       for (const button of help.querySelectorAll(".wt-help-close, .wt-help-back")) {
         bindTouchCommand(button, restoreBattle);
       }
@@ -1577,7 +1634,7 @@
           event.preventDefault();
           event.stopPropagation();
           restoreBattle();
-        } else if (event.key === "Tab") {
+        } else if (duel && event.key === "Tab") {
           const buttons = [...help.querySelectorAll("button:not([disabled])")];
           const first = buttons[0], last = buttons[buttons.length - 1];
           if (event.shiftKey && (hudDocument.activeElement === first || hudDocument.activeElement === help)) {
@@ -1592,9 +1649,10 @@
     syncHelpSize();
     if (!overlay.hidden) return true;
     releaseAll();
-    overlay._blockedRegions = ["warzone-command-strip", "warzone-game-frame"].map(id => hudDocument.getElementById(id))
+    overlay._blockedRegions = (duel ? ["warzone-command-strip", "warzone-game-frame"] : ["warzone-game-frame"]).map(id => hudDocument.getElementById(id))
       .filter(Boolean).map(element => ({ element, wasInert: element.inert }));
     overlay.hidden = false;
+    setHeaderMenuState('blocknight-help', true);
     for (const item of overlay._blockedRegions) item.element.inert = true;
     help.scrollTop = 0;
     if (!duel) help.querySelector('.wt-help-content').scrollTop = 0;
@@ -2258,7 +2316,12 @@
   setTimeout(() => clearInterval(canvasTimer), 20000);
   window.__kalaWarzoneTouch = {
     cancelFacilityNavigation,
-    version: 54,
+    setHeaderMenuState,
+    prepareHeaderMenu,
+    closeHelp,
+    showHelp,
+    toggleHelp,
+    version: 55,
     ready: true,
     key,
     zoom,
@@ -2293,7 +2356,7 @@
     isGestureActive: () => state.pointers.size > 0 || state.mouseButton !== null || state.heldKeys.size > 0 || state.tiltKey !== null,
     report: () => ({
       active: true,
-      version: 54,
+      version: 55,
       intercepted: state.intercepted,
       mouseEvents: state.mouseEvents,
       taps: state.taps,

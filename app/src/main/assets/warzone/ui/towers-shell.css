@@ -22,12 +22,18 @@ body.wt-towers-polished #warzone-command-strip #blocknight-combat-hud button:foc
   outline:2px solid var(--towers-accent);
   outline-offset:-2px;
 }
-body.wt-towers-polished #warzone-command-strip #blocknight-tech {color:var(--towers-power)}
+body.wt-towers-polished #warzone-command-strip #blocknight-combat-hud #blocknight-tech {
+  background:#fff!important;
+  color:#0a1114!important;
+}
+body.wt-towers-polished #warzone-command-strip #blocknight-combat-hud #blocknight-tech img {filter:none!important}
+body.wt-towers-polished #warzone-command-strip #blocknight-combat-hud #blocknight-tech[aria-expanded=true] {
+  box-shadow:inset 0 -3px #111!important;
+}
 body.wt-towers-polished[data-command-page=design] #wt-open-factory,
 body.wt-towers-polished[data-command-page=saved] #wt-open-factory,
 body.wt-towers-polished[data-command-page=factory] #wt-open-factory,
 body.wt-towers-polished[data-command-page=queue] #wt-open-queue,
-body.wt-towers-polished[data-research=true] #blocknight-tech,
 body.wt-towers-polished[data-build-sidebar=true] #wt-open-build {
   background:#25413f!important;
   color:#effaf7!important;
@@ -118,9 +124,12 @@ body.wt-towers-polished #wt-field-centre button {border:0!important;box-shadow:n
 body.wt-towers-polished #wt-build-status,
 body.wt-towers-polished #wt-command-toast,
 body.wt-towers-polished #wt-native-back {border:0!important;box-shadow:none!important}
-body.wt-towers-polished #warzone-towers-help-overlay {background:transparent;padding:0;place-items:start}
+body.wt-towers-polished #warzone-towers-help-overlay {
+  inset:var(--wt-command-top,56px) 0 0;
+  background:transparent;padding:0;place-items:start;
+}
 body.wt-towers-polished #warzone-towers-help.wt-towers-guide {
-  position:absolute;left:10px;top:calc(var(--wt-command-top,56px) + 10px);margin:0;
+  position:absolute;left:10px;top:10px;margin:0;
   width:var(--wt-compact-window-width,min(740px,66vw));max-width:calc(100vw - 20px);
   max-height:calc(100dvh - var(--wt-command-top,56px) - 84px);
   border:0;background:#08191ff5;box-shadow:none;border-radius:5px;
@@ -132,9 +141,34 @@ body.wt-towers-polished #warzone-towers-help.wt-towers-guide .wt-help-back {back
 body.wt-towers-polished #warzone-towers-help.wt-towers-guide .wt-help-settings {flex-wrap:wrap;border:0;padding:5px 16px}
 body.wt-towers-polished #warzone-towers-help.wt-towers-guide .wt-help-settings button {font-size:calc(11px * var(--wt-command-scale,1))!important;padding:6px 8px!important;min-height:30px}
 body.wt-towers-polished #warzone-towers-help.wt-towers-guide .wt-help-settings [aria-pressed=true] {background:#28574e;color:#effaf7;box-shadow:inset 0 -2px var(--towers-accent)}
+
+/* Production accepts a tap immediately; the native acknowledgement owns success. */
+body.wt-towers-polished #wt-command-pages .wt-factory-produce {
+  min-height:38px;min-width:100px;padding:8px 14px;
+  color:#092025;background:#8bd3cc;
+  font:500 15px/1.2 Towers,sans-serif!important;
+  border:0;border-radius:5px;touch-action:manipulation;
+  transition:background-color 90ms ease,transform 90ms ease;
+}
+body.wt-towers-polished #wt-command-pages .wt-factory-produce:active {
+  background:#c3eee8;transform:translateY(1px);filter:none;
+}
+body.wt-towers-polished #wt-command-pages .wt-factory-produce.pending {background:#b1e3dc}
+body.wt-towers-polished #wt-command-pages .wt-factory-produce:disabled {opacity:.45;transform:none}
+body.wt-towers-polished #wt-command-pages .wt-production-feedback {
+  min-height:18px;margin:6px 0 0;color:#b3c8cb;
+  font:500 12px/18px Towers,sans-serif;overflow-wrap:anywhere;
+}
+body.wt-towers-polished #wt-command-pages .wt-production-feedback[data-tone=done] {color:#9fdab0}
+body.wt-towers-polished #wt-command-pages .wt-production-feedback[data-tone=error] {color:#f2bf94}
+@media(prefers-reduced-motion:reduce) {
+  body.wt-towers-polished #wt-command-pages .wt-factory-produce {transition:none}
+}
 @media(max-width:1000px) {
   body.wt-towers-polished #warzone-towers-help.wt-towers-guide {width:min(740px,calc(100vw - 170px))}
 }
 @media(max-width:680px) {
   body.wt-towers-polished #warzone-towers-help.wt-towers-guide {width:calc(100vw - 110px)}
 }
+/* Programmatic dialog focus needs no frame; its buttons keep visible focus rings. */
+body.wt-towers-polished #warzone-towers-help:focus {outline:none}

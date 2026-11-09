@@ -73,7 +73,7 @@
     const commands = window.__warzoneCommands, tech = window.__blockNightResearch;
     if (tech?.report().open || tech?.report().opening) { tech.close(); return; }
     const help = window.parent.document.getElementById('warzone-towers-help-overlay');
-    if (help && !help.hidden) { help.querySelector('.wt-help-back')?.click(); return; }
+    if (help && !help.hidden) { window.__kalaWarzoneTouch?.closeHelp?.(); return; }
     const state = commands?.report();
     if (state?.buildOpen || state?.nativeMenu === 'build') { await commands.selectMode(); return; }
     if (!duel && commands?.handlePanelBack?.()) return;

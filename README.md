@@ -1,25 +1,33 @@
 # Warzone Towers
 
-**Current benchmark: Warzone Towers 0.28 (28)** was accepted by the user on
-9 November 2026 for GitHub `main` and the `v0.28-benchmark` tag.
+**Current benchmark: Warzone Towers 0.31 (31)** was accepted by the user on
+9 November 2026 for GitHub `main` and the `v0.31-benchmark` tag.
 
-[Release](https://github.com/rbabbit/wz-android/releases/tag/v0.28-benchmark) ·
-[APK](https://github.com/rbabbit/wz-android/releases/download/v0.28-benchmark/Warzone-Towers-0.28.apk) ·
-[Complete source ZIP](https://github.com/rbabbit/wz-android/releases/download/v0.28-benchmark/warzone-towers-0.28-source.zip) ·
-[SHA-256 checksums](https://github.com/rbabbit/wz-android/releases/download/v0.28-benchmark/Warzone-Towers-0.28-SHA256.txt)
+[Release](https://github.com/rbabbit/wz-android/releases/tag/v0.31-benchmark) ·
+[APK](https://github.com/rbabbit/wz-android/releases/download/v0.31-benchmark/Warzone-Towers-0.31-Test-Ads.apk) ·
+[Complete source ZIP](https://github.com/rbabbit/wz-android/releases/download/v0.31-benchmark/warzone-towers-0.31-source.zip) ·
+[SHA-256 checksums](https://github.com/rbabbit/wz-android/releases/download/v0.31-benchmark/Warzone-Towers-0.31-Test-Ads-SHA256.txt)
 
-The benchmark includes the selected compact native Rewards drawer on Home and
-in-game, with direct category controls and real game artwork, plus the saving
-and live-purchase fixes. The exact delivered APK already passed ten focused
-emulator checks; supporting checks include 200 JVM wallet checks and 16 web
-fixture groups. No additional emulator testing is requested or performed for
-this promotion. No full campaign or all-map gameplay pass is claimed.
+The benchmark makes Research prominent, adds consistent header menu toggles,
+removes the listed duplicate close controls and blue footer label/time, and
+improves Produce feedback and the compact Gain 10 Crystals action. Test ads
+remain enabled. The exact delivered APK already passed 27 focused emulator
+checks; supporting host fixtures cover 19 command and 12 navigation checks.
+No additional emulator testing is requested or performed for this promotion.
+No full campaign, all-map graphics, physical-phone or live-ad pass is claimed.
 
-The verified APK and complete source ZIP are promoted unchanged. The complete
-0.27 fallback and all older benchmark tags, releases and artifacts remain
-preserved. See the [benchmark record](docs/benchmarks/v0.28.md) and
-[0.28 release notes](docs/releases/0.28-rewards.md) for hashes, evidence and
-verification limits. Promotion documentation may postdate the frozen source ZIP.
+The verified APK and complete source ZIP are promoted unchanged. The source
+includes the full native base plus the exact guarded two-call render overlay,
+patch and reproduction recipe. The complete v0.30 fallback and all older tags,
+releases and artifacts remain preserved. See the
+[benchmark record](docs/benchmarks/v0.31.md) and
+[v0.31 release notes](docs/releases/0.31-ui.md) for hashes, evidence and limits.
+Promotion documentation may postdate the frozen source ZIP.
+
+**Previous benchmark: Warzone Towers 0.28 (28)** remains available through its
+[release](https://github.com/rbabbit/wz-android/releases/tag/v0.28-benchmark) and
+[benchmark record](docs/benchmarks/v0.28.md). Its APK, complete source and
+checksums are unchanged. The v0.17 benchmark and every older fallback remain.
 
 **Previous development release: Warzone Towers 0.27 (27)** adds phone save games, a
 Saved Games list on Home, in-game Rewards purchases and a smaller cleared-wave
@@ -171,7 +179,7 @@ scoped to Towers; Duel retains its existing appearance. See the
 The deferred 1v1 mode is retained with its existing interface and unchanged
 gameplay package. The frozen `v0.9-benchmark` tag and its
 [historical benchmark artifacts](https://github.com/rbabbit/wz-android/releases/tag/v0.9-benchmark)
-remain preserved as an older fallback; `main` uses the accepted 0.28 benchmark.
+remain preserved as an older fallback; `main` uses the accepted 0.31 benchmark.
 The complete 0.13 APK/source fallback and older versions remain preserved.
 
 The application ID remains `com.rbabbit.warzonetowers.lab`, so 0.14 updates

@@ -1,5 +1,55 @@
 # Warzone Towers maintenance rules
 
+- 2026-11-09: user accepted the delivered 0.31 as the new GitHub benchmark and
+  authorized committing it to main, tagging v0.31-benchmark, and publishing a
+  release containing the existing verified APK, complete source ZIP and checksums.
+  Preserve those artifacts unchanged; promotion documentation may postdate the
+  frozen source ZIP. Keep all older benchmark tags/releases and local fallbacks,
+  including 0.30, 0.28 and the separate v6.4 project. This authorization supersedes
+  earlier GitHub promotion restrictions for this version. No additional emulator
+  testing, rebuild or source repack is requested or permitted for this promotion.
+
+- 2026-11-09: user authorized 0.31 agreed UI fixes: remove the native blue
+  map-name/time text behind the activity footer; improve actual production tap
+  acknowledgement; compact filled Gain 10 Crystals button; rename header TECH
+  to RESEARCH with white background/black text; make all header menu buttons
+  toggle their own panels and remove the agreed duplicate close controls.
+  Preserve complete 0.30 by hash in fallback-0.31.json. Keep construction orders,
+  research queues, production, wallet/save rules, maps/music and deferred Duel.
+  The exact cached native engine/source matched shipping; only two text render
+  calls are removed by archive/native-hud-0.31 overlay, with a bounded incremental
+  native build. Engine JS/data/VFS remain unchanged; package the full base source
+  plus exact changed source, patch and guarded reproduction recipe. Root owns
+  focused actual emulator checks on the exact delivery APK; source fixtures are
+  supporting evidence. Preserve test ad serving, published consent configuration,
+  all older fallbacks, v6.4, GitHub benchmarks, public privacy page and VPS.
+
+- 2026-11-09: user authorized quieter rewarded ads as 0.30 after styling their
+  AdMob consent message and disabling ad pods/interactive types in their own ad
+  unit. Preserve complete 0.29 plus phone-test APK by hash in fallback-0.30.json.
+  Use the publisher app ID for its own consent message, while this delivery keeps
+  Google sample rewarded ads on physical phones. Quietly refresh UMP at launch;
+  no visible consent or ad initialization/preload until a deliberate Watch tap.
+  Keep one modest ad row at the bottom of Rewards, cancel abandoned requests,
+  preserve ten-crystal atomic grants, and wait for full native restoration before
+  a consent-to-ad transition. Test only sample ads on the exact new APK. Preserve
+  all game assets, maps, music, wallet/saves/designs and unrelated app behavior.
+  Keep private GitHub benchmarks, public privacy repository and VPS untouched.
+  Dashboard format filters do not apply to Google's sample ad-unit creatives.
+  The demo-to-publisher UMP identity migration is test-only and runs once using
+  the public SDK reset API and a persisted marker; never reset live consent.
+
+- 2026-11-09: user authorized optional AdMob rewarded ads as 0.29, with ten
+  crystals credited once per earned native SDK event in Home/in-game Rewards.
+  Preserve the complete 0.28 benchmark delivery by hash in fallback-0.29.json;
+  keep v6.4, GitHub benchmark, native JS/data/WASM, all maps/music and unrelated
+  gameplay unchanged. Add UMP consent/privacy choices and a scoped hidden native
+  pause with same-document restoration. Default builds use Google sample IDs;
+  delivery uses -PadmobLiveAds=true with supplied production IDs. Focused exact
+  APK emulator checks must use Google's automatic emulator test-device traffic,
+  never live ads. Report SDK/network/account-approval limitations accurately.
+  No VPS or AdMob-account changes were requested for this implementation.
+
 - 2026-11-09: user accepted the delivered 0.28 as the new GitHub benchmark and
   authorized committing it to `main`, tagging `v0.28-benchmark`, and publishing
   a release with the existing verified APK, complete source ZIP and checksums.

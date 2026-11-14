@@ -1,5 +1,15 @@
 # Known issues and verification limits
 
+## Warzone Towers 0.78 — Research and name editor
+
+Research now separates available topics from selected-lab current/queued work.
+Design name entry uses a compact editor near the top, rather than an editable
+field underneath the keyboard. Focused host/browser checks use synthetic native
+responses and simulated keyboard viewports. The user requested no emulator
+tests: actual Android keyboard presentation, touch, WebView layout and native
+gameplay remain unverified for this revision. See the
+[0.78 notes](releases/0.78-research-assignment.md) and retained proof files.
+
 ## Warzone Towers 0.14 — compact active pages
 
 This revision applies the approved flat, compact Production, Design and

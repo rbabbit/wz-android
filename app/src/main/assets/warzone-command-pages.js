@@ -19,7 +19,7 @@
   Object.assign(state,{productionCancellations:new Map()});
   Object.assign(state,{productionRepeatDrafts:new Map(),productionRepeatRequests:new Map(),manufacturingEpoch:0});
   Object.assign(state,{constructionResuming:null});
-  Object.assign(state,{designContextSerial:0});
+  Object.assign(state,{designContextSerial:0,designRename:null});
   const esc = value => String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const element = id => doc.getElementById(id);
   const module = () => window.LaunchedModule?.FS ? window.LaunchedModule : window.Module;
@@ -147,6 +147,26 @@
     panel.addEventListener('click',onClick);panel.addEventListener('input',onInput);panel.addEventListener('change',onChange);
     if(polishedTowers)panel.addEventListener('pointerdown',event=>{if(state.factoryMenuOpen&&!event.target.closest('#wt-factory-menu,#wt-factory-menu-toggle'))closeFactoryMenu();});
     panel.addEventListener('submit',event=>event.preventDefault());
+    if(polishedTowers){
+      const rename=doc.createElement('div');rename.id='wt-design-rename';rename.hidden=true;
+      rename.innerHTML=`<form id="wt-design-rename-form" role="dialog" aria-modal="true" aria-labelledby="wt-design-rename-label"><label id="wt-design-rename-label" for="wt-design-rename-input">Unit name</label><div class="wt-design-rename-row"><input id="wt-design-rename-input" type="text" maxlength="48" autocomplete="off" autocapitalize="words" spellcheck="false" enterkeyhint="done"><button type="submit" class="wt-primary">Save</button><button type="button" data-action="cancel-design-rename">Cancel</button></div><p id="wt-design-rename-error" role="status" hidden></p></form>`;
+      doc.body.appendChild(rename);
+      rename.addEventListener('click',event=>{event.stopPropagation();if(event.target.closest('[data-action="cancel-design-rename"]'))finishDesignRename(false);});
+      rename.addEventListener('submit',event=>{event.preventDefault();if(!state.designRename?.composing)finishDesignRename(true);});
+      rename.addEventListener('compositionstart',()=>{if(state.designRename)state.designRename.composing=true;});
+      rename.addEventListener('compositionend',()=>{if(state.designRename)state.designRename.composing=false;});
+      rename.addEventListener('input',()=>{element('wt-design-rename-input').removeAttribute('aria-invalid');element('wt-design-rename-error').hidden=true;});
+      rename.addEventListener('keydown',event=>{
+        if(event.key==='Escape'){event.preventDefault();event.stopPropagation();finishDesignRename(false);}
+        else if(event.key==='Enter'&&event.target.id==='wt-design-rename-input'&&!event.isComposing&&event.keyCode!==229&&!state.designRename?.composing){event.preventDefault();finishDesignRename(true);}
+        else if(event.key==='Tab'){
+          const controls=Array.from(rename.querySelectorAll('input,button')).filter(node=>!node.disabled);
+          const index=controls.indexOf(doc.activeElement),next=(index+(event.shiftKey?-1:1)+controls.length)%controls.length;
+          event.preventDefault();controls[next]?.focus({preventScroll:true});
+        }
+      });
+      host.addEventListener('pagehide',()=>finishDesignRename(false,false));
+    }
     const hud=doc.createElement('div');hud.id='wt-build-status';hud.hidden=true;
     hud.innerHTML=`<span id="wt-power">POWER —</span>${button('SELECTION','data-action="select-mode" id="wt-field-status"')}<span id="wt-placement-label"></span><span id="wt-builder-summary"></span>${button('CHANGE','data-page="build"')}${button('DONE','data-action="cancel-placement"')}`;
     hud.addEventListener('click',onClick);doc.body.appendChild(hud);
@@ -163,7 +183,7 @@
     ghost.innerHTML='<polygon fill="#a7cf5b44" stroke="#b5e56d" stroke-width="2"/><text fill="#fff" stroke="#000" stroke-width=".4" font-size="13"/>';
     ghost.setAttribute('hidden','');document.body.appendChild(ghost);
     const back=doc.createElement('button');back.id='wt-native-back';back.hidden=true;back.textContent='BACK TO BATTLE';back.addEventListener('click',()=>closeNative());doc.body.appendChild(back);
-    doc.addEventListener('keydown',e=>{if(e.key==='Escape'){if(state.page)close();else if(state.placement)cancelPlacement();else if(state.nativeMenu)closeNative();}});
+    doc.addEventListener('keydown',e=>{if(e.key==='Escape'){if(state.designRename){e.preventDefault();finishDesignRename(false);}else if(state.page)close();else if(state.placement)cancelPlacement();else if(state.nativeMenu)closeNative();}});
     document.addEventListener('keydown',e=>{if(state.nativeHudHidden&&e.isTrusted&&(e.key==='Escape'||e.key==='Tab')){e.preventDefault();e.stopImmediatePropagation();selectMode();}},true);
     applySize(state.size);
     const strip=element('warzone-command-strip');
@@ -203,6 +223,7 @@
   }
   function toggleBuild(){return toggle('build');}
   function open(page='build'){
+    finishDesignRename(false,false);
     if(campaign&&window.__warzoneCampaign?.nativeUiActive?.()){window.__warzoneCampaign.revealNativeUi();return false;}
     cancelDemolish();
     if(polishedTowers)host.TowersStatus?.close?.();
@@ -226,6 +247,7 @@
     if(page==='factory'&&state.selected){const content=element('wt-page-content'),card=content.querySelector('[data-selected-design="true"]');if(card){const scroller=card.closest('.wt-work-list')||content,r=card.getBoundingClientRect(),v=scroller.getBoundingClientRect();if(r.top<v.top)scroller.scrollTop+=r.top-v.top;else if(r.bottom>v.bottom)scroller.scrollTop+=r.bottom-v.bottom;}}
   }
   function close(){
+    finishDesignRename(false,false);
     if(!state.page)return Promise.resolve();
     const previousContent=element('wt-page-content');rememberPanelScroll(previousContent);if(previousContent)delete previousContent.dataset.labScrollKey;
     state.scroll[state.page]=element('wt-page-content')?.scrollTop||0;
@@ -243,6 +265,7 @@
     return Promise.resolve();
   }
   async function openSidebar(){
+    finishDesignRename(false,false);
     if(campaign&&window.__warzoneCampaign?.nativeUiActive?.()){window.__warzoneCampaign.revealNativeUi();return false;}
     cancelDemolish();
     if(polishedTowers)host.TowersStatus?.close?.();
@@ -521,7 +544,7 @@
 
   function renderCompactDesign(d,steps,parts,active,slots,editing,busy){
     const status=state.validation?.ok?`POWER ${state.validation.result.cost} · BUILD POINTS ${state.validation.result.points}`:!state.snapshot.hasHQ?'Complete a Command Centre to save designs.':state.validation?reason(state.validation.reason):'Choose a body, propulsion and weapon.';
-    return `${state.confirmNew?`<div class="wt-draft-confirm"><span>Discard unsaved changes and start a new design?</span>${button('DISCARD CHANGES','data-action="discard-draft"')}${button('KEEP EDITING','data-action="keep-draft"','wt-primary')}</div>`:''}<div class="wt-compact-design"><nav class="wt-design-slots" aria-label="Design components">${steps.map(([key,n,label,id])=>button(`${image(findPart(id)||{group:key==='body'?'Body':key==='propulsion'?'Propulsion':'Weapon'})}<span><small>${label}</small><strong>${esc(findPart(id)?.name||'Choose component')}</strong></span><span class="wt-slot-chevron" aria-hidden="true">⌄</span>`,`data-step="${key}" aria-pressed="${active===key}"`,active===key?'wt-step active':'wt-step')).join('')}</nav><section class="wt-design-picker"><h2>Choose ${active==='body'?'body':active==='propulsion'?'propulsion':Number(active)>0?'extra weapon':'weapon / system'}</h2><div class="wt-parts-grid">${Number(active)>0?button('EMPTY SLOT',`data-part="" data-slot="${active}"`,'wt-part'):''}${parts.map(p=>button(`${image(p)}<strong>${esc(p.name)}</strong><small>${esc(p.group==='Body'?p.size||'BODY':p.group==='Propulsion'?p.propulsionType||'PROPULSION':p.group)}</small>`,`data-part="${esc(p.id)}" data-slot="${active}"`,(active==='body'?d.body:active==='propulsion'?d.propulsion:d.turrets[Number(active)])===p.id?'wt-part active':'wt-part')).join('')||'<p class="wt-empty">Research components in TECH to unlock more choices.</p>'}</div></section><div class="wt-design-summary wt-compact-save"><p id="wt-design-valid" role="status" aria-live="polite">${esc(status)}</p><form id="wt-design-form"><label for="wt-design-name">Unit name</label><input id="wt-design-name" maxlength="48" value="${esc(d.name)}" placeholder="Name your unit"><select id="wt-design-body" hidden tabindex="-1">${selectOptions('Body',d.body,'Choose body')}</select><select id="wt-design-propulsion" hidden tabindex="-1">${selectOptions('Propulsion',d.propulsion,'Choose propulsion')}</select>${Array.from({length:slots},(_,i)=>`<select hidden tabindex="-1" data-turret="${i}">${turretOptions(d.turrets[i]||'')}</select>`).join('')}</form><span id="wt-blueprint-name" hidden>${esc(d.name||'New design')}</span>${button(busy?'SAVING…':editing?'SAVE CHANGES':'SAVE BLUEPRINT','data-action="save-design" id="wt-save-design"'+(!state.validation?.ok||busy?' disabled':''),'wt-primary')}${editing?button('SAVE AS NEW','data-action="save-as-new" id="wt-save-as-new"'+(!state.validation?.ok||busy?' disabled':''),'wt-subtle'):''}${button('New design','data-action="new-design"','wt-subtle')}</div></div>`;
+    return `${state.confirmNew?`<div class="wt-draft-confirm"><span>Discard unsaved changes and start a new design?</span>${button('DISCARD CHANGES','data-action="discard-draft"')}${button('KEEP EDITING','data-action="keep-draft"','wt-primary')}</div>`:''}<div class="wt-compact-design"><nav class="wt-design-slots" aria-label="Design components">${steps.map(([key,n,label,id])=>button(`${image(findPart(id)||{group:key==='body'?'Body':key==='propulsion'?'Propulsion':'Weapon'})}<span><small>${label}</small><strong>${esc(findPart(id)?.name||'Choose component')}</strong></span><span class="wt-slot-chevron" aria-hidden="true">⌄</span>`,`data-step="${key}" aria-pressed="${active===key}"`,active===key?'wt-step active':'wt-step')).join('')}</nav><section class="wt-design-picker"><h2>Choose ${active==='body'?'body':active==='propulsion'?'propulsion':Number(active)>0?'extra weapon':'weapon / system'}</h2><div class="wt-parts-grid">${Number(active)>0?button('EMPTY SLOT',`data-part="" data-slot="${active}"`,'wt-part'):''}${parts.map(p=>button(`${image(p)}<strong>${esc(p.name)}</strong><small>${esc(p.group==='Body'?p.size||'BODY':p.group==='Propulsion'?p.propulsionType||'PROPULSION':p.group)}</small>`,`data-part="${esc(p.id)}" data-slot="${active}"`,(active==='body'?d.body:active==='propulsion'?d.propulsion:d.turrets[Number(active)])===p.id?'wt-part active':'wt-part')).join('')||'<p class="wt-empty">Research components in TECH to unlock more choices.</p>'}</div></section><div class="wt-design-summary wt-compact-save"><p id="wt-design-valid" role="status" aria-live="polite">${esc(status)}</p><form id="wt-design-form"><label for="wt-design-name-button">Unit name</label><button type="button" id="wt-design-name-button" data-action="rename-design" aria-haspopup="dialog"${busy?' disabled':''}>${esc(d.name||'Name your unit')}</button><input id="wt-design-name" type="hidden" value="${esc(d.name)}"><select id="wt-design-body" hidden tabindex="-1">${selectOptions('Body',d.body,'Choose body')}</select><select id="wt-design-propulsion" hidden tabindex="-1">${selectOptions('Propulsion',d.propulsion,'Choose propulsion')}</select>${Array.from({length:slots},(_,i)=>`<select hidden tabindex="-1" data-turret="${i}">${turretOptions(d.turrets[i]||'')}</select>`).join('')}</form><span id="wt-blueprint-name" hidden>${esc(d.name||'New design')}</span>${button(busy?'SAVING…':editing?'SAVE CHANGES':'SAVE BLUEPRINT','data-action="save-design" id="wt-save-design"'+(!state.validation?.ok||busy?' disabled':''),'wt-primary')}${editing?button('SAVE AS NEW','data-action="save-as-new" id="wt-save-as-new"'+(!state.validation?.ok||busy?' disabled':''),'wt-subtle'):''}${button('New design','data-action="new-design"','wt-subtle')}</div></div>`;
   }
   function renderCompactSaved(){
     return `<div class="wt-compact-library"><p class="wt-library-note">Saved on this phone. Research components again in each battle.</p><div class="wt-card-grid">${state.saved.map(d=>`<article class="wt-command-card wt-library-row" data-library-id="${esc(d.id)}">${recipeArtwork(d)}<div class="wt-library-copy"><h2>${esc(d.name)}</h2><p>${esc(recipeDescription(d))}</p><small>${availableDesign(d)?`${powerSymbol} ${d.cost}`:'Research required this game'}</small></div><div class="wt-card-actions">${state.deletePending===d.id?`<span>Delete this design?</span>${button('DELETE',`data-confirm-delete="${esc(d.id)}"`)}${button('CANCEL',`data-cancel-delete="${esc(d.id)}"`,'wt-subtle')}`:`${!d.factoryTemplate||[d.body,d.propulsion,...d.turrets].every(id=>findPart(id))?button('EDIT',`data-edit="${esc(d.id)}"`,'wt-subtle'):''}${button('USE',`data-produce-design="${esc(d.id)}"`+(availableDesign(d)?'':' disabled'),'wt-primary')}${button('DELETE',`data-delete="${esc(d.id)}"`,'wt-subtle')}`}</div></article>`).join('')||'<p class="wt-empty">No saved blueprints yet. Open Design to create one.</p>'}</div></div>`;
@@ -737,6 +760,7 @@
     target.innerHTML=html;target._html=html;const list=target.querySelector('.wt-factory-queue-list');if(list)list.scrollTop=top;
   }
   function handlePanelBack(){
+    if(state.designRename){finishDesignRename(false);return true;}
     if(state.demolition||state.demolitionOpening){cancelDemolish();return true;}
     if(!polishedTowers||state.page!=='factory')return false;
     if(state.factoryMenuOpen){closeFactoryMenu();return true;}
@@ -1575,8 +1599,52 @@
       if(!r.ok&&r.reason!=='cancelled')notify(reason(r.reason));requestState();updateSidebarQueue();
     }).catch(error=>{if(moduleRequest)state.modulePending.delete(moduleRequest.key);if(!window.__towersHtml?.isEnded?.())notify(error.message||'The site could not be queued. Choose the site again.');}).finally(()=>{state.siteChecks--;if(moduleRequest)updateSidebarQueue();});if(polishedTowers)state.buildOrder=submission;return true;
   }
+  // The engine WebView keeps a virtual minimum height. Android keyboards can
+  // cover the bottom without resizing that layout, so naming uses a separate
+  // top-anchored editor, not focus scrolling on the bottom Design strip.
+  function positionDesignRename(){
+    if(!state.designRename)return;
+    const overlay=element('wt-design-rename'),view=host.visualViewport;
+    const width=Math.max(1,Math.min(host.innerWidth||doc.documentElement.clientWidth,view?.width||Infinity));
+    const height=Math.max(1,Math.min(host.innerHeight||doc.documentElement.clientHeight,view?.height||Infinity));
+    overlay.style.setProperty('--wt-rename-left',Math.max(0,Number(view?.offsetLeft)||0)+'px');
+    overlay.style.setProperty('--wt-rename-top',Math.max(0,Number(view?.offsetTop)||0)+'px');
+    overlay.style.setProperty('--wt-rename-width',width+'px');overlay.style.setProperty('--wt-rename-height',height+'px');
+  }
+  function openDesignRename(){
+    if(!polishedTowers||state.page!=='design'||state.saving.has(state.draft.id))return;
+    if(state.designRename){element('wt-design-rename-input')?.focus({preventScroll:true});return;}
+    readDraft();
+    const overlay=element('wt-design-rename'),input=element('wt-design-rename-input'),panel=element('wt-command-pages');
+    if(!overlay||!input)return;
+    state.designRename={id:state.draft.id,context:state.designContextSerial,composing:false};
+    input.value=state.draft.name;input.removeAttribute('aria-invalid');element('wt-design-rename-error').hidden=true;
+    panel.inert=true;panel.classList.add('wt-design-renaming');overlay.hidden=false;
+    host.addEventListener('resize',positionDesignRename);host.visualViewport?.addEventListener('resize',positionDesignRename);host.visualViewport?.addEventListener('scroll',positionDesignRename);
+    positionDesignRename();window.__kalaWarzoneTouch?.releaseAll?.(true);
+    // Synchronous focus from the actual name-button gesture opens Android's IME.
+    input.focus({preventScroll:true});input.setSelectionRange(0,input.value.length);
+  }
+  function finishDesignRename(commit=false,restore=true){
+    const edit=state.designRename;if(!edit)return false;
+    const overlay=element('wt-design-rename'),input=element('wt-design-rename-input');
+    const same=state.page==='design'&&edit.id===state.draft.id&&edit.context===state.designContextSerial;
+    if(commit&&same&&!String(input?.value||'').trim()){
+      input.setAttribute('aria-invalid','true');const error=element('wt-design-rename-error');error.textContent='Enter a unit name.';error.hidden=false;
+      input.focus({preventScroll:true});return false;
+    }
+    if(commit&&same){state.draft.name=input.value;const field=element('wt-design-name');if(field)field.value=input.value;}
+    state.designRename=null;
+    host.removeEventListener('resize',positionDesignRename);host.visualViewport?.removeEventListener('resize',positionDesignRename);host.visualViewport?.removeEventListener('scroll',positionDesignRename);
+    input?.blur();if(overlay)overlay.hidden=true;
+    const panel=element('wt-command-pages');if(panel){panel.inert=false;panel.classList.remove('wt-design-renaming');}
+    if(commit&&same)validateDraft();
+    if(restore&&same){render();element('wt-design-name-button')?.focus({preventScroll:true});}
+    return true;
+  }
   let validationTimer;
   function resetDraft(saved){
+    finishDesignRename(false,false);
     if(polishedTowers){state.designResetScroll=true;state.designRevealPart=true;}
     state.designStep='body';clearTimeout(validationTimer);++state.validationSerial;state.validation=null;
     let n=1;while(state.saved.some(d=>d.name===`Design ${n}`))n++;
@@ -1597,7 +1665,7 @@
       select.value=value;
     }
     // The visible component choices can gain newly researched parts as well.
-    const focused=element('wt-design-name')===doc.activeElement;
+    const focused=Boolean(state.designRename)||element('wt-design-name')===doc.activeElement;
     if(!focused)render();
     else{
       const active=state.designStep,flying=/vtol|v-tol/i.test(d.propulsion)||findPart(d.propulsion)?.propulsionType==='Lift';
@@ -1667,7 +1735,8 @@
     const b=event.target.closest('button');if(!b||b.disabled)return;
     const d=b.dataset;
     if(polishedTowers&&state.factoryMenuOpen&&d.action!=='factory-menu')closeFactoryMenu();
-    if(d.page)open(d.page);
+    if(polishedTowers&&d.action==='rename-design')openDesignRename();
+    else if(d.page)open(d.page);
     else if(d.buildChoice){state.buildChoice=d.buildChoice;render();}
     else if(d.step){readDraft();state.designStep=d.step;if(polishedTowers)state.designRevealPart=true;render();}
     else if(Object.prototype.hasOwnProperty.call(d,'part')){readDraft();if(d.slot==='body'){state.draft.body=d.part;state.draft.turrets=state.draft.turrets.slice(0,Math.min(3,findPart(d.part)?.slots||1));}else if(d.slot==='propulsion')state.draft.propulsion=d.part;else state.draft.turrets[Number(d.slot)]=d.part;state.validation=null;if(polishedTowers)state.designRevealPart=true;render();validateDraft();}
@@ -1712,6 +1781,7 @@
     else if(d.action==='commanders')openNative('commanders');
   }
   function endBattle(){
+    finishDesignRename(false,false);
     cancelDemolish();
     ++state.selectionSerial;++state.navigationSerial;++state.cancelSerial;++state.menuRevision;
     state.selectionPromise=null;state.truckSelectionCache?.clear();state.modulePending?.clear();state.constructionResuming=null;state.snapshot=null;state.buildOpen=false;state.page='';
@@ -1726,6 +1796,7 @@
     state.headerRequest=null;state.productionRequests.clear();state.productionFeedback.clear();state.productionCancellations.clear();state.productionRepeatDrafts.clear();state.productionRepeatRequests.clear();state.manufacturingEpoch++;updateHeaderMenus();
   }
   function revealNativePause(){
+    finishDesignRename(false,false);
     if(!campaign)return;
     ++state.navigationSerial;++state.cancelSerial;++state.selectionSerial;
     state.page='';state.buildOpen=false;state.nativeHudHidden=false;state.nativeMenu='';state.nativeMenuPending=false;

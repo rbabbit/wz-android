@@ -1,0 +1,218 @@
+{
+  "version": "0.78",
+  "versionCode": 78,
+  "candidateAPK_SHA256": "6bfe0885730aee099f7499c5e5127d7de9dab0400b07b93cc5b7b415c40033f5",
+  "scope": "Split Research catalogue and selected-laboratory current/queued assignment presentation, plus compact blueprint-name editing visible above the keyboard in Towers, Campaign, FFA and Multiplayer. User requested no emulator testing. Every Java source, backend, native program/VFS and unrelated asset frozen.",
+  "exactAPKVerification": {
+    "evidence": {
+      "path": "qa/research-assignment-078/verification.json",
+      "bytes": 150829,
+      "sha256": "b76acfe22f091d71ba8f34032df413cfbbb2cde2c0ba3311c2363064a643300d"
+    },
+    "buildLog": {
+      "path": "qa/research-assignment-078/build.log",
+      "bytes": 2477,
+      "sha256": "4612b66856a056f8ea90ceb5f72994ac1079399cbc958cb3f7d020840684830f"
+    },
+    "emulatorUsed": false,
+    "emulatorOmittedAtUserRequest": true,
+    "androidGameplayVerified": false,
+    "actualAndroidViewsExecuted": false,
+    "offlineHostChecksPassed": true,
+    "buildChecksPassed": true,
+    "offlineFixtureEvidence": [
+      {
+        "path": "qa/research-assignment-078/rename-browser.json",
+        "bytes": 33418,
+        "sha256": "84f54c49b126d6cb35ac9adfe3faf2a434f95875d2629651b61d5dbd2fce8543"
+      },
+      {
+        "path": "qa/research-assignment-078/research-browser.json",
+        "bytes": 85364,
+        "sha256": "fe0533dbf31a7c15c4bc72ea5959ddea7f3eddf224e83bc77a1eac91143c5ebf"
+      },
+      {
+        "path": "qa/research-assignment-078/research.json",
+        "bytes": 4965,
+        "sha256": "1f5893673697454e62e6347b7834e33fbe7b5030185ae56c700822ff3c1833a1"
+      }
+    ],
+    "checks": {
+      "researchAssignmentHostChecks": true,
+      "researchBrowserChecks": true,
+      "renameBrowserChecks": true,
+      "successfulBuild": true
+    },
+    "verificationScope": "Actual split Research assignment renderer/function fixtures and compact blueprint-name editor in host Chromium for Towers, Campaign, FFA and Multiplayer, using synthetic native replies and keyboard/visual-viewport fixtures; successful exact-APK build.",
+    "limitations": [
+      "No emulator tests were run, as requested.",
+      "Host browser/function and keyboard-viewport simulations do not verify actual Android IME/keyboard behavior, WebView rendering, physical touch, native research timing/unlocks, multiplayer runtime behavior or gameplay."
+    ],
+    "pinnedCheckedSourceFiles": 711,
+    "assertionCounts": {
+      "researchHost": 37,
+      "research-browser": 20,
+      "rename-browser": 16
+    }
+  },
+  "fallback": {
+    "path": "qa/research-assignment-078/fallback-0.78.json",
+    "bytes": 409,
+    "sha256": "7d5c1a0b26642e819b75169821e3d13dbe461b45fed23bd2911543a9a6ca3913"
+  },
+  "sourcePreservation": {
+    "changedBaselineSources": [
+      {
+        "path": "AGENTS.md",
+        "beforeSHA256": "6f64d68f23ae8d389c1916964422580f785a5809afdd3bd270a8c8ed786548d1",
+        "sha256": "80014f5c9b0d8bbbc844cedac56e35c4c778ad9ae5904ccc4fe29416d8f4bf99"
+      },
+      {
+        "path": "README.md",
+        "beforeSHA256": "e8a375d66e58b5ae4cc5da67f762f0f8744ff925af2d9294a03b74b7492b82a8",
+        "sha256": "9d3002396d7779839ddf7939d91eab1949428fcd43d0834147e39a5c84152c5d"
+      },
+      {
+        "path": "app/build.gradle.kts",
+        "beforeSHA256": "f79403ca52867266bef234d084d117ca5870bb523f464a4b3a27f9459a842bc3",
+        "sha256": "36d4849d349fa1014f733ea5d33852e89f88e010cf4a9d5c9fe9e8793bbce437"
+      },
+      {
+        "path": "app/src/main/assets/warzone-command-pages.js",
+        "beforeSHA256": "b83b8dfe580c00495bce68ffd1375f1563022b253aa427d576df0b413d9a5756",
+        "sha256": "85faeaa8dd9428b7c98fc7f555563d7b861453474508c82be0a5c85933ecf7f4"
+      },
+      {
+        "path": "app/src/main/assets/warzone-mobile-research.js",
+        "beforeSHA256": "108f7d45234a8ee2b4dc1da49aa357e19d608aff0b8f9c03979cb969866db23d",
+        "sha256": "45c1af89f12a62c4912073bff1ce2ff8ebba7ba4850662e78b90df24ee7f999f"
+      },
+      {
+        "path": "app/src/main/assets/warzone/ui/towers-commands.css",
+        "beforeSHA256": "07fbbd39193111ad9f8fd56e4d124d938b66a3d3dd7f1fd950af6894a1fe9e36",
+        "sha256": "5c5ce4a6bbef73cc1c4f336f05dc81bc9ae750a164ba3acbef24ecabc5fba1de"
+      },
+      {
+        "path": "app/src/main/assets/warzone/ui/towers-research.css",
+        "beforeSHA256": "f042a331b5db840db2454443a13ac19f7343c408c6e7c89292d75443167afcf1",
+        "sha256": "af5c90612945473a7b210d7979f4ce32f3ae84e9fad87bbfc208cf6322ea5735"
+      },
+      {
+        "path": "design-qa.md",
+        "beforeSHA256": "8cc3bd45205e7b2c79da5329b6711c0305817e4576fc8649c7875056a000efd2",
+        "sha256": "ba4bd92e471c4fdc36d53a7395dcbb4e752dc77975205241bc359ed7b093cc54"
+      },
+      {
+        "path": "docs/KNOWN-ISSUES.md",
+        "beforeSHA256": "e37722b1144f352516f83c47d1859df636f797a380238d072d2c22b9d4a42e8f",
+        "sha256": "0130434ff7e1ae806589f0e69ec484d287e00726debef2f55b327cc42d84a840"
+      }
+    ],
+    "addedSources": [
+      "archive/release-0.78-research-assignment.json",
+      "docs/releases/0.78-research-assignment.md",
+      "qa/research-assignment-078/audit.md",
+      "qa/research-assignment-078/build.log",
+      "qa/research-assignment-078/fallback-0.78.json",
+      "qa/research-assignment-078/rename-browser.json",
+      "qa/research-assignment-078/rename-multiplayer-1200x540-overlay.png",
+      "qa/research-assignment-078/rename-multiplayer-1200x540-shrink.png",
+      "qa/research-assignment-078/rename-multiplayer-640x320-overlay.png",
+      "qa/research-assignment-078/rename-multiplayer-640x320-shrink.png",
+      "qa/research-assignment-078/rename-towers-1200x540-overlay.png",
+      "qa/research-assignment-078/rename-towers-1200x540-shrink.png",
+      "qa/research-assignment-078/rename-towers-640x320-overlay.png",
+      "qa/research-assignment-078/rename-towers-640x320-shrink.png",
+      "qa/research-assignment-078/research-browser.json",
+      "qa/research-assignment-078/research-campaign-compact-640x320.png",
+      "qa/research-assignment-078/research-campaign-idle-640x320.png",
+      "qa/research-assignment-078/research-campaign-long-queue-640x320.png",
+      "qa/research-assignment-078/research-campaign-normal-1200x540.png",
+      "qa/research-assignment-078/research-campaign-queue-failed-640x320.png",
+      "qa/research-assignment-078/research-ffa-compact-640x320.png",
+      "qa/research-assignment-078/research-ffa-idle-640x320.png",
+      "qa/research-assignment-078/research-ffa-long-queue-640x320.png",
+      "qa/research-assignment-078/research-ffa-normal-1200x540.png",
+      "qa/research-assignment-078/research-ffa-queue-failed-640x320.png",
+      "qa/research-assignment-078/research-multiplayer-compact-640x320.png",
+      "qa/research-assignment-078/research-multiplayer-idle-640x320.png",
+      "qa/research-assignment-078/research-multiplayer-long-queue-640x320.png",
+      "qa/research-assignment-078/research-multiplayer-normal-1200x540.png",
+      "qa/research-assignment-078/research-multiplayer-queue-failed-640x320.png",
+      "qa/research-assignment-078/research-towers-compact-640x320.png",
+      "qa/research-assignment-078/research-towers-idle-640x320.png",
+      "qa/research-assignment-078/research-towers-long-queue-640x320.png",
+      "qa/research-assignment-078/research-towers-normal-1200x540.png",
+      "qa/research-assignment-078/research-towers-queue-failed-640x320.png",
+      "qa/research-assignment-078/research.json",
+      "qa/research-assignment-078/verification.json",
+      "tools/package-research-assignment-078.py",
+      "tools/record-research-assignment-078.py",
+      "tools/test-design-rename-browser-078.cjs",
+      "tools/test-research-assignment-078.cjs",
+      "tools/test-research-assignment-browser-078.cjs"
+    ],
+    "baselineSourceEntries": 12624,
+    "everyBaselineSourceEntryRetained": true,
+    "onlyApprovedResearchAndRenameAssetsChanged": true,
+    "allJavaBackendNativeAndOtherAssetsFrozen": true,
+    "upstreamCommit": "7d3d8e51a61ceee89e6bf672a41337e1a9cd7392",
+    "protocol": [
+      16384,
+      104
+    ],
+    "nativeBuildPerformed": false,
+    "nativeCompiledClientReusedFromVersion": "0.71",
+    "sourceOverlayManifest": {
+      "path": "vendor/multiplayer/native-071/source-overlays.json",
+      "bytes": 1077,
+      "sha256": "e1489603363481f81c58bb04e4d34a84dbc9145543c4425c66b9688bfe32f598"
+    },
+    "completePatch": {
+      "path": "vendor/multiplayer/native-071/native-ui.patch",
+      "bytes": 46141,
+      "sha256": "b6c3c38267e1eb75e844ac412252ce11a7176f2fef8bc7f0f5146afb1f2148c1"
+    },
+    "nativeBuild": {
+      "path": "qa/multiplayer-071/native-build.json",
+      "bytes": 5069,
+      "sha256": "881e8100681511907c59f73ddccdf0c13207abeace0f7491f9d9415d908755d5"
+    },
+    "integration": {
+      "path": "vendor/multiplayer/native-071/runtime-integration.json",
+      "bytes": 1064,
+      "sha256": "5082fc268cc1c1840218461eb4005e94e00d055787adddd4c25a6d4783bcd525"
+    },
+    "portableNativeSourcesAndRawPairVerified": true,
+    "officialMPDataFrozen": true,
+    "wasmBinaryUnmodifiedAfterCompiler": true
+  },
+  "certificateSHA256": "4499efe00477c7c724c06a1dd96f935864548665c13ab5e2bd0a9c0f83f7cb15",
+  "changedAPKMembers": [
+    "AndroidManifest.xml",
+    "assets/warzone-command-pages.js",
+    "assets/warzone-mobile-research.js",
+    "assets/warzone/ui/towers-commands.css",
+    "assets/warzone/ui/towers-research.css",
+    "classes3.dex"
+  ],
+  "everyBaselineAPKMemberRetained": true,
+  "allAPKAssetsMatchSource": true,
+  "allOtherAssetsResourcesAndNativeLibrariesFrozen": true,
+  "bundledMusicFrozen": true,
+  "compiledMultiplayerClientByteIdenticalTo077": true,
+  "livePhoneAdsAndEmulatorFallbackRetained": true,
+  "maximumAPKZipGapBytes": 4096,
+  "generatedBuildConfigSHA256": "42d05e4211cc50b1b2ee245322e3d60ba40478945b508a7e397b1adef088a15d",
+  "nativeBuildPerformed": false,
+  "emulatorUsed": false,
+  "androidGameplayVerified": false,
+  "actualAndroidViewsExecuted": false,
+  "offlineHostChecksPassed": true,
+  "buildChecksPassed": true,
+  "packageChecksPassed": true,
+  "liveAdsTested": false,
+  "githubPublished": false,
+  "vpsChanged": false,
+  "recordedUTC": "2026-11-14T20:33:02.028447+00:00"
+}

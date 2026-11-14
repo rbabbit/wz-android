@@ -1,3 +1,14 @@
+# v0.78 Research and name-editor host checks
+
+The actual shared renderer/styles are checked in host Chromium with controlled
+native replies. Research covers four modes at normal and compact sizes, available
+topics, selected-lab current artwork/progress, ordered queues, retry and scrolling.
+Design name editing is checked with shrinking and overlay keyboard viewport
+simulations. These are host layout checks, not observed Android keyboard or
+gameplay results. No emulator tests were run at the user's request.
+
+Proofs and screenshots: `qa/research-assignment-078/`. v0.77 remains the fallback.
+
 # v0.60 FFA visual verification
 
 Visual result: passed for the inspected Home, setup, match, Build and Intelligence surfaces.

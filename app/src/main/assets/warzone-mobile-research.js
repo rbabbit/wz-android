@@ -2,7 +2,7 @@
 (() => {
   "use strict";
 
-  const VERSION = 42;
+  const VERSION = 43;
   const campaign = window.__warzoneCampaignMode === true || (typeof location !== 'undefined' && typeof URLSearchParams === 'function' && new URLSearchParams(location.search).get('mode') === 'campaign');
   const QUEUE_COMMAND_PATH = (campaign ? '/data/base/script/campaign/mobile/' : '/data/mp/multiplay/script/rules/') + 'blocknight-queue-command.json';
   const CATEGORIES = ["ALL", "WEAPONS", "DEFENCE", "VEHICLES", "CYBORG", "SYSTEMS", "STRUCTURES"];
@@ -112,6 +112,27 @@
   function inspectedResearchTopic() {
     return researchStatusEnabled() ? visibleResearchTopics().find(topic => topic.id === state.selectedTopicId) || null
       : state.catalog.find(topic => topic.nativeIndex === state.selectedTopicIndex) || null;
+  }
+
+  function unassignedResearchTopics() {
+    return visibleResearchTopics().filter(topic => researchTopicState(topic).kind === 'ready');
+  }
+
+  function selectedLabResearchQueue(lab) {
+    if (!lab) return [];
+    const local = queueForLab(lab.id), confirmed = state.syncedQueues[String(lab.id)] || [], rows = [], seen = new Set();
+    const add = (id, accepted) => {
+      const topic = researchTopicMetadata(id);
+      if (seen.has(id) || topic.done || state.completedTopicIds[id] || !lab.idle && lab.topicId === id) return;
+      seen.add(id);
+      const index = local.findIndex(value => value.id === id), removing = accepted && index < 0;
+      rows.push({ topic, index, confirmed:accepted,
+        status:accepted ? removing ? state.syncBlocked ? 'QUEUED · REMOVE NOT SYNCED' : 'QUEUED · REMOVING' : 'QUEUED'
+          : state.syncBlocked ? 'NOT SYNCED' : 'SYNCING' });
+    };
+    confirmed.forEach(id => add(id, true));
+    local.forEach(topic => add(topic.id, confirmed.includes(topic.id)));
+    return rows;
   }
 
   function researchProgress(status) {
@@ -292,7 +313,8 @@
           const topic = knownTopic(String(assignment.topicId));
           const key = String(assignment.labId);
           state.labQueues[key] = queueForLab(assignment.labId).filter(value => value.id !== assignment.topicId);
-          if (lab) Object.assign(lab, { idle: false, topicId: assignment.topicId, topicName: topic?.name || assignment.topicId });
+          if (lab) Object.assign(lab, { idle: false, topicId: assignment.topicId, topicName: topic?.name || assignment.topicId,
+            ...(researchStatusEnabled() ? { estimatedProgress:null, remainingSeconds:null, waitingPower:false } : {}) });
           updateDirtyLab(assignment.labId);
         }
         state.directAssignments += started.length;
@@ -326,10 +348,13 @@
       if (!text.includes("BNTECH:")) return;
       const snapshot = parsePayload(text, "BNTECH:");
       if (!snapshot || !Array.isArray(snapshot.topics)) return;
+      let assignmentReset = false;
       if (researchStatusEnabled()) {
         const player = researchPlayer(snapshot);
         if (state.catalogPlayer !== null && state.catalogPlayer !== player
-          || state.lastSnapshotGameTime !== null && Number.isFinite(snapshot.gameTime) && snapshot.gameTime < state.lastSnapshotGameTime) resetOnLoad();
+          || state.lastSnapshotGameTime !== null && Number.isFinite(snapshot.gameTime) && snapshot.gameTime < state.lastSnapshotGameTime) {
+          resetOnLoad(); assignmentReset = true;
+        }
         state.catalogPlayer = player;
       }
       const previousCatalog = JSON.stringify(state.catalog);
@@ -366,7 +391,7 @@
       state.lastSnapshotGameTime = Number(snapshot.gameTime || 0);
       state.bridgeSyncs += 1;
       // A countdown tick must not replace a technology button under a finger.
-      if (previousCatalog !== JSON.stringify(state.catalog) || previousAssignments !== JSON.stringify(state.engineLabs.map(lab => [lab.id, lab.idle, lab.topicId]))) renderAll();
+      if (assignmentReset || previousCatalog !== JSON.stringify(state.catalog) || previousAssignments !== JSON.stringify(state.engineLabs.map(lab => [lab.id, lab.idle, lab.topicId]))) renderAll();
       else { renderLabs(); renderSummary(); updateCatalogProgress(); }
     } catch (_) { state.bridgeErrors += 1; }
   }
@@ -459,7 +484,7 @@
         <aside class="bn-tech-detail" aria-label="Selected laboratory research">
           <h2><span><b class="bn-tech-selected-lab">LAB 1</b> RESEARCH</span><small class="bn-tech-lab-total">0 ITEMS</small></h2>
           <section class="bn-tech-active" aria-live="polite"><div class="bn-tech-current"><img class="bn-tech-current-image" src="research-icons/Research%20Module.gif" alt=""><div class="bn-tech-current-copy"><small class="bn-tech-current-status">LAB READY</small><strong class="bn-tech-active-name">No active research</strong></div></div><div class="bn-tech-progress"><i></i></div><small class="bn-tech-time">Choose a technology to start.</small></section>
-          <section class="bn-tech-queue-panel"><header><b class="bn-tech-queue-title">UP NEXT · LAB 1</b><span class="bn-tech-queue-count">EMPTY</span></header><ol class="bn-tech-queue-list"></ol></section>
+          <section class="bn-tech-queue-panel"><header><b class="bn-tech-queue-title">UP NEXT · LAB 1</b><span class="bn-tech-queue-count">EMPTY</span>${researchStatusEnabled() ? '<button class="bn-tech-retry" type="button" hidden>RETRY</button>' : ''}</header><ol class="bn-tech-queue-list"></ol></section>
         </aside>
       </div>
     `;
@@ -531,6 +556,7 @@
         if (topic) selectTopic(researchStatusEnabled() ? topic.id : topic.nativeIndex);
       }
       else if (button.dataset.queueLab !== undefined) removeQueuedTopic(Number(button.dataset.queueLab), Number(button.dataset.queueIndex));
+      else if (button.classList.contains("bn-tech-retry")) retrySelectedLabQueue();
       else if (button.classList.contains("bn-tech-assign")) assignSelectedTopic(button);
     });
     return shell;
@@ -708,7 +734,7 @@
     // reachable even if an old caller requests a previously selected filter.
     state.activeCategory = isTowersResearchShell(document.getElementById("blocknight-research-shell"))
       ? "ALL" : CATEGORIES.includes(category) ? category : "ALL";
-    const catalog = researchStatusEnabled() ? visibleResearchTopics() : state.catalog;
+    const catalog = isTowersResearchShell(document.getElementById("blocknight-research-shell")) ? unassignedResearchTopics() : researchStatusEnabled() ? visibleResearchTopics() : state.catalog;
     const visible = state.activeCategory === "ALL" ? catalog : catalog.filter(topic => topic.category === state.activeCategory);
     if (researchStatusEnabled()) {
       if (!visible.some(topic => topic.id === state.selectedTopicId)) state.selectedTopicId = visible[0]?.id ?? null;
@@ -854,7 +880,7 @@
     state.directFailures += 1;
     if (timedOut) state.commandTimeouts += 1;
     else state.commandRejects += 1;
-    state.assignmentError = `${message} Your selections are still saved—open Research and tap Research again to retry.`;
+    state.assignmentError = researchStatusEnabled() ? `${message} Your queue is kept. Tap RETRY beside QUEUED to try again.` : `${message} Your selections are still saved—open Research and tap Research again to retry.`;
     if (background) showQueueStatus("RESEARCH QUEUE SYNC FAILED — OPEN RESEARCH TO RETRY", "error", 6500);
     else renderAll();
   }
@@ -869,8 +895,10 @@
     labIds.forEach(labId => {
       const topicIds = [];
       queueForLab(labId).forEach(queued => {
-        const live = state.catalog.find(topic => topic.id === queued.id);
-        if (!live || activeLabForTopic(live.id)) return;
+        // Retain exact already-assigned intent when availability snapshots omit
+        // it. The native queue handler still validates every requested topic.
+        const live = state.catalog.find(topic => topic.id === queued.id) || (researchStatusEnabled() ? knownTopic(queued.id) : null);
+        if (!live || activeLabForTopic(live.id) || researchStatusEnabled() && (live.done || state.completedTopicIds[live.id])) return;
         topicIds.push(live.id);
         topics.push({ ...live });
       });
@@ -902,6 +930,13 @@
     if (window.__towersHtml?.isEnded?.()) return false;
     if (state.runner || state.syncBlocked || !state.engineLabs.length) return false;
     return startQueueSync();
+  }
+
+  function retrySelectedLabQueue() {
+    const lab = state.engineLabs[state.activeLab];
+    if (!researchStatusEnabled() || !state.open || !state.syncBlocked || state.runner || !lab || !state.dirtyLabs[String(lab.id)]) return false;
+    state.syncBlocked = false; state.assignmentError = "";
+    return processQueues();
   }
 
   function assignTopic(nativeIndex) {
@@ -996,12 +1031,12 @@
     shell.querySelector(".bn-tech-power").textContent = state.playerPower.toLocaleString();
     shell.querySelector(".bn-tech-browser-title").textContent = state.activeCategory === "ALL" ? "ALL TECHNOLOGIES" : state.activeCategory;
     const list = shell.querySelector(".bn-tech-list");
-    const catalog = researchStatusEnabled() ? visibleResearchTopics() : state.catalog;
+    const catalog = isTowersResearchShell(shell) ? unassignedResearchTopics() : researchStatusEnabled() ? visibleResearchTopics() : state.catalog;
     const topics = state.activeCategory === "ALL" ? catalog : catalog.filter(topic => topic.category === state.activeCategory);
     shell.querySelector(".bn-tech-available-count").textContent = String(topics.length);
     if (researchStatusEnabled() && (!state.bridgeSyncs || !topics.length)) delete list.dataset.statusSignature;
     if (!state.bridgeSyncs) { list.innerHTML = `<div class="bn-tech-empty"><div><b>Syncing the live Warzone tree…</b><small>Preparing real names, costs and availability.</small></div></div>`; return; }
-    if (!topics.length) { list.innerHTML = campaign ? '<div class="bn-tech-empty"><div><b>No research is available yet.</b><small>Recover artefacts and follow mission objectives to unlock campaign research. A completed laboratory is required.</small></div></div>' : `<div class="bn-tech-empty"><div><b>No ${escapeHtml(state.activeCategory.toLowerCase())} research is ready.</b><small>Complete another technology to unlock more.</small></div></div>`; return; }
+    if (!topics.length) { list.innerHTML = isTowersResearchShell(shell) ? '<div class="bn-tech-empty"><div><b>No unassigned research is available.</b><small>Select a lab to check its current research and queue.</small></div></div>' : campaign ? '<div class="bn-tech-empty"><div><b>No research is available yet.</b><small>Recover artefacts and follow mission objectives to unlock campaign research. A completed laboratory is required.</small></div></div>' : `<div class="bn-tech-empty"><div><b>No ${escapeHtml(state.activeCategory.toLowerCase())} research is ready.</b><small>Complete another technology to unlock more.</small></div></div>`; return; }
     if (researchStatusEnabled()) {
       if (!topics.some(topic => topic.id === state.selectedTopicId)) state.selectedTopicId = topics[0].id;
       state.selectedTopicIndex = topics.find(topic => topic.id === state.selectedTopicId)?.nativeIndex ?? null;
@@ -1048,14 +1083,15 @@
     const topic = inspectedResearchTopic();
     shell.querySelector(".bn-tech-selected-lab").textContent = `LAB ${state.activeLab + 1}`;
     const labQueue = lab ? queueForLab(lab.id) : [];
-    const researching = Boolean(lab && !lab.idle);
+    const assignedQueue = isTowersResearchShell(shell) ? selectedLabResearchQueue(lab) : null;
+    const researching = Boolean(lab && !lab.idle && (!isTowersResearchShell(shell) || lab.topicId && !state.completedTopicIds[lab.topicId]));
     const current = researching ? { ...knownTopic(lab.topicId), id: lab.topicId,
       name: lab.topicName || knownTopic(lab.topicId)?.name || 'Starting research…' } : null;
-    const total = labQueue.length + (researching ? 1 : 0);
+    const total = (assignedQueue || labQueue).length + (researching ? 1 : 0);
     shell.querySelector('.bn-tech-lab-total').textContent = `${total} ITEM${total === 1 ? '' : 'S'}`;
     shell.querySelector('.bn-tech-active').classList.toggle('idle', !researching);
     shell.querySelector('.bn-tech-current-status').textContent = isTowersResearchShell(shell)
-      ? !lab ? 'SYNCING LABORATORIES' : `LAB${state.activeLab + 1} · ${lab.waitingPower && researching ? 'WAITING FOR POWER' : researching ? 'RESEARCHING' : labQueue.length ? 'WAITING TO START' : 'READY'}`
+      ? !lab ? 'SYNCING LABORATORIES' : researching ? `CURRENT · LAB ${state.activeLab + 1}${lab.waitingPower ? ' · WAITING FOR POWER' : ''}` : `LAB ${state.activeLab + 1} · READY`
       : researching ? 'NOW RESEARCHING' : !lab ? 'SYNCING LABORATORIES' : labQueue.length ? 'WAITING TO START' : 'LAB READY';
     shell.querySelector('.bn-tech-active-name').textContent = current?.name || 'No active research';
     const currentImage = shell.querySelector('.bn-tech-current-image');
@@ -1073,19 +1109,18 @@
     shell.querySelector('.bn-tech-time').textContent = lab && !lab.idle ? time : 'Add a technology to start immediately.';
     const progress = shell.querySelector('.bn-tech-progress');
     if (isTowersResearchShell(shell)) {
-      const value = lab?.estimatedProgress;
-      const known = researching && typeof value === 'number' && Number.isFinite(value);
-      progress.hidden = !known;
+      const value = researching ? researchProgress({ kind:'researching', lab }) : null;
+      progress.hidden = value === null;
       progress.setAttribute('role', 'progressbar'); progress.setAttribute('aria-label', `Lab ${state.activeLab + 1} research progress, estimated`);
       progress.setAttribute('aria-valuemin', '0'); progress.setAttribute('aria-valuemax', '100');
-      if (known) progress.setAttribute('aria-valuenow', String(Math.floor(Math.min(99, Math.max(0, value * 100)))));
+      if (value !== null) progress.setAttribute('aria-valuenow', String(Math.floor(value)));
       else progress.removeAttribute('aria-valuenow');
-      progress.querySelector('i').style.width = `${known ? Math.min(99, Math.max(0, value * 100)) : 0}%`;
+      progress.querySelector('i').style.width = `${value ?? 0}%`;
     } else shell.querySelector('.bn-tech-progress i').style.width = `${lab && !lab.idle ? Math.min(99, Math.max(0, lab.estimatedProgress * 100)) : 0}%`;
     shell.querySelector(".bn-tech-error").textContent = state.assignmentError;
     const towers = isTowersResearchShell(shell), selected = towers ? selectedResearchTopics() : [];
     shell.querySelector(".bn-tech-detail-name").textContent = towers ? selected.length ? selected.map(value => value.name).join(" → ")
-      : researchStatusEnabled() && topic && researchTopicState(topic).kind !== 'ready' ? topic.name : "None — tap technologies" : topic?.name || "SELECT A TECHNOLOGY";
+      : "None — tap technologies" : topic?.name || "SELECT A TECHNOLOGY";
     shell.querySelector(".bn-tech-detail-category").textContent = topic?.category || "";
     const active = topic ? activeLabForTopic(topic.id) : null;
     const queuedLabId = topic ? queuedLocation(topic.id) : null;
@@ -1095,19 +1130,29 @@
     shell.querySelector(".bn-tech-detail-cost").textContent = topic && (Number.isFinite(topic.power) || !researchStatusEnabled()) ? topic.power.toLocaleString() : "—";
     const detailImage = shell.querySelector(".bn-tech-detail-image");
     applyTopicImage(detailImage, topic);
-    shell.querySelector(".bn-tech-queue-title").textContent = `UP NEXT · LAB ${state.activeLab + 1}`;
-    shell.querySelector(".bn-tech-queue-count").textContent = labQueue.length ? `${labQueue.length} WAITING` : "EMPTY";
+    shell.querySelector(".bn-tech-queue-title").textContent = `${isTowersResearchShell(shell) ? 'QUEUED' : 'UP NEXT'} · LAB ${state.activeLab + 1}`;
+    shell.querySelector(".bn-tech-queue-count").textContent = assignedQueue ? assignedQueue.length ? String(assignedQueue.length) : "EMPTY" : labQueue.length ? `${labQueue.length} WAITING` : "EMPTY";
+    const retry = shell.querySelector('.bn-tech-retry');
+    if (retry) {
+      retry.hidden = !isTowersResearchShell(shell) || !state.syncBlocked || !lab || !state.dirtyLabs[String(lab.id)];
+      retry.disabled = Boolean(state.runner || state.pendingClose);
+      retry.setAttribute('aria-label', `Retry Lab ${state.activeLab + 1} research queue`);
+    }
     const queueList = shell.querySelector('.bn-tech-queue-list');
-    const queueSignature = JSON.stringify([lab?.id, labQueue.map(value => value.id), state.pendingClose, Boolean(state.runner?.labIds.includes(lab?.id))]);
+    const queueSignature = JSON.stringify([lab?.id, assignedQueue ? assignedQueue.map(row => [row.topic.id,row.topic.name,row.index,row.status]) : labQueue.map(value => value.id), state.pendingClose, Boolean(state.runner?.labIds.includes(lab?.id))]);
     if (queueList.dataset.signature !== queueSignature) {
     queueList.dataset.signature = queueSignature;
-    queueList.innerHTML = labQueue.length ? labQueue.map((queued, index) => {
+    const queueTop = queueList.scrollTop;
+    queueList.innerHTML = assignedQueue ? assignedQueue.length ? assignedQueue.map((row, index) =>
+      `<li class="bn-tech-queue-item" data-queued-topic-id="${escapeHtml(row.topic.id)}" data-queue-state="${row.confirmed ? 'queued' : 'syncing'}"><b>${index + 1}</b><img class="bn-tech-queue-image" src="${topicImage(row.topic)}" alt=""><span>${escapeHtml(row.topic.name)}<small>${row.status}</small></span><button class="bn-tech-queue-remove" type="button" data-queue-lab="${lab.id}" data-queue-index="${row.index}" aria-label="Remove ${escapeHtml(row.topic.name)}" ${row.index < 0 || state.pendingClose || state.runner?.labIds.includes(lab.id) ? 'disabled' : ''}>×</button></li>`
+    ).join('') : '<li class="bn-tech-queue-empty">No queued research.</li>' : labQueue.length ? labQueue.map((queued, index) => {
       const picture = isTowersResearchShell(shell) ? `<img class="bn-tech-queue-image" src="${topicImage(queued)}" alt="">` : "";
       return `<li class="bn-tech-queue-item"><b>${index + 1}</b>${picture}<span>${escapeHtml(queued.name)}</span><button class="bn-tech-queue-remove" type="button" data-queue-lab="${lab.id}" data-queue-index="${index}" aria-label="Remove ${escapeHtml(queued.name)}" ${state.pendingClose || state.runner?.labIds.includes(lab.id) ? "disabled" : ""}>×</button></li>`;
     }).join("") : `<li class="bn-tech-queue-empty">No waiting technologies.</li>`;
     if (isTowersResearchShell(shell)) queueList.querySelectorAll(".bn-tech-queue-image").forEach((image, index) => {
-      applyTopicImage(image, labQueue[index]);
+      applyTopicImage(image, assignedQueue ? assignedQueue[index].topic : labQueue[index]);
     });
+    queueList.scrollTop = queueTop;
     }
     const assign = shell.querySelector(".bn-tech-assign");
     assign.textContent = towers ? selected.length ? `${selected.length > 1 ? `ADD ${selected.length}` : 'ADD'} TO LAB ${state.activeLab + 1} QUEUE` : 'SELECT RESEARCH' : queuedLab ? `ALREADY QUEUED · LAB ${queuedLab.nativeIndex + 1}` : active ? `RESEARCHING · LAB ${active.nativeIndex + 1}` : `ADD TO LAB ${state.activeLab + 1} QUEUE`;

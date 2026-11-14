@@ -1,5 +1,11 @@
 # Warzone Towers
 
+**Development release: 0.78 (78)** separates available Research choices from
+the selected laboratory's current topic and ordered queue. Design name editing
+uses a compact panel near the top of the screen. The v0.77 APK and complete
+source remain the fallback. No emulator tests were requested; see the
+[0.78 notes](docs/releases/0.78-research-assignment.md).
+
 **Development release: 0.77 (77)** applies the approved compact Manufacturing
 and Queue screens across the four modes. It adds continuous manufacturing and
 one STOP action per factory, while retaining native production limits and real

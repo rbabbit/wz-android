@@ -1,0 +1,1356 @@
+{
+  "version": "0.78",
+  "passed": true,
+  "emulatorUsed": false,
+  "engineExecuted": false,
+  "actualAndroidKeyboardVerified": false,
+  "fixture": "Actual shipped shared command renderer/styles/art in isolated host Chromium. Filesystem replies and Android keyboard viewport/overlay are simulated. Real Android IME, native design execution and touch not tested.",
+  "modeViewports": 16,
+  "results": [
+    {
+      "mode": "towers",
+      "viewport": [
+        1200,
+        540
+      ],
+      "keyboardSimulation": "overlay",
+      "passed": true,
+      "actualSharedRenderer": true,
+      "nativeRepliesSynthetic": true,
+      "checks": [
+        "top anchored input and Save/Cancel above keyboard",
+        "unchanged bottom draft until Save",
+        "composition-safe Done",
+        "blank name validation",
+        "state refresh preserves focused node",
+        "pointer fencing",
+        "explicit native Save Changes keeps alias",
+        "Cancel/Escape/shared Back and keyboard-activated Cancel",
+        "menu/page/session cleanup"
+      ],
+      "geometry": {
+        "inner": [
+          1200,
+          540
+        ],
+        "visual": {
+          "width": 1200,
+          "height": 540,
+          "offsetTop": 0
+        },
+        "open": true,
+        "panelHidden": true,
+        "panelInert": true,
+        "frameInert": true,
+        "form": {
+          "left": 12,
+          "top": 8,
+          "right": 552,
+          "bottom": 92.1875,
+          "width": 540,
+          "height": 84.1875
+        },
+        "input": {
+          "left": 25,
+          "top": 43.1875,
+          "right": 400.8125,
+          "bottom": 81.1875,
+          "width": 375.8125,
+          "height": 38
+        },
+        "controls": [
+          {
+            "text": "Save",
+            "box": {
+              "left": 408.8125,
+              "top": 43.1875,
+              "right": 468.8125,
+              "bottom": 81.1875,
+              "width": 60,
+              "height": 38
+            }
+          },
+          {
+            "text": "Cancel",
+            "box": {
+              "left": 476.8125,
+              "top": 43.1875,
+              "right": 539,
+              "bottom": 81.1875,
+              "width": 62.1875,
+              "height": 38
+            }
+          }
+        ],
+        "focused": "wt-design-rename-input",
+        "scroll": [
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "mode": "towers",
+      "viewport": [
+        1200,
+        540
+      ],
+      "keyboardSimulation": "shrink",
+      "passed": true,
+      "actualSharedRenderer": true,
+      "nativeRepliesSynthetic": true,
+      "checks": [
+        "top anchored input and Save/Cancel above keyboard",
+        "unchanged bottom draft until Save",
+        "composition-safe Done",
+        "blank name validation",
+        "state refresh preserves focused node",
+        "pointer fencing",
+        "explicit native Save Changes keeps alias",
+        "Cancel/Escape/shared Back and keyboard-activated Cancel",
+        "menu/page/session cleanup"
+      ],
+      "geometry": {
+        "inner": [
+          1200,
+          170
+        ],
+        "visual": {
+          "width": 1200,
+          "height": 170,
+          "offsetTop": 0
+        },
+        "open": true,
+        "panelHidden": true,
+        "panelInert": true,
+        "frameInert": true,
+        "form": {
+          "left": 12,
+          "top": 8,
+          "right": 552,
+          "bottom": 92.1875,
+          "width": 540,
+          "height": 84.1875
+        },
+        "input": {
+          "left": 25,
+          "top": 43.1875,
+          "right": 400.8125,
+          "bottom": 81.1875,
+          "width": 375.8125,
+          "height": 38
+        },
+        "controls": [
+          {
+            "text": "Save",
+            "box": {
+              "left": 408.8125,
+              "top": 43.1875,
+              "right": 468.8125,
+              "bottom": 81.1875,
+              "width": 60,
+              "height": 38
+            }
+          },
+          {
+            "text": "Cancel",
+            "box": {
+              "left": 476.8125,
+              "top": 43.1875,
+              "right": 539,
+              "bottom": 81.1875,
+              "width": 62.1875,
+              "height": 38
+            }
+          }
+        ],
+        "focused": "wt-design-rename-input",
+        "scroll": [
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "mode": "towers",
+      "viewport": [
+        640,
+        320
+      ],
+      "keyboardSimulation": "overlay",
+      "passed": true,
+      "actualSharedRenderer": true,
+      "nativeRepliesSynthetic": true,
+      "checks": [
+        "top anchored input and Save/Cancel above keyboard",
+        "unchanged bottom draft until Save",
+        "composition-safe Done",
+        "blank name validation",
+        "state refresh preserves focused node",
+        "pointer fencing",
+        "explicit native Save Changes keeps alias",
+        "Cancel/Escape/shared Back and keyboard-activated Cancel",
+        "menu/page/session cleanup"
+      ],
+      "geometry": {
+        "inner": [
+          640,
+          320
+        ],
+        "visual": {
+          "width": 640,
+          "height": 320,
+          "offsetTop": 0
+        },
+        "open": true,
+        "panelHidden": true,
+        "panelInert": true,
+        "frameInert": true,
+        "form": {
+          "left": 12,
+          "top": 8,
+          "right": 552,
+          "bottom": 92.1875,
+          "width": 540,
+          "height": 84.1875
+        },
+        "input": {
+          "left": 25,
+          "top": 43.1875,
+          "right": 400.8125,
+          "bottom": 81.1875,
+          "width": 375.8125,
+          "height": 38
+        },
+        "controls": [
+          {
+            "text": "Save",
+            "box": {
+              "left": 408.8125,
+              "top": 43.1875,
+              "right": 468.8125,
+              "bottom": 81.1875,
+              "width": 60,
+              "height": 38
+            }
+          },
+          {
+            "text": "Cancel",
+            "box": {
+              "left": 476.8125,
+              "top": 43.1875,
+              "right": 539,
+              "bottom": 81.1875,
+              "width": 62.1875,
+              "height": 38
+            }
+          }
+        ],
+        "focused": "wt-design-rename-input",
+        "scroll": [
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "mode": "towers",
+      "viewport": [
+        640,
+        320
+      ],
+      "keyboardSimulation": "shrink",
+      "passed": true,
+      "actualSharedRenderer": true,
+      "nativeRepliesSynthetic": true,
+      "checks": [
+        "top anchored input and Save/Cancel above keyboard",
+        "unchanged bottom draft until Save",
+        "composition-safe Done",
+        "blank name validation",
+        "state refresh preserves focused node",
+        "pointer fencing",
+        "explicit native Save Changes keeps alias",
+        "Cancel/Escape/shared Back and keyboard-activated Cancel",
+        "menu/page/session cleanup"
+      ],
+      "geometry": {
+        "inner": [
+          640,
+          160
+        ],
+        "visual": {
+          "width": 640,
+          "height": 160,
+          "offsetTop": 0
+        },
+        "open": true,
+        "panelHidden": true,
+        "panelInert": true,
+        "frameInert": true,
+        "form": {
+          "left": 12,
+          "top": 8,
+          "right": 552,
+          "bottom": 92.1875,
+          "width": 540,
+          "height": 84.1875
+        },
+        "input": {
+          "left": 25,
+          "top": 43.1875,
+          "right": 400.8125,
+          "bottom": 81.1875,
+          "width": 375.8125,
+          "height": 38
+        },
+        "controls": [
+          {
+            "text": "Save",
+            "box": {
+              "left": 408.8125,
+              "top": 43.1875,
+              "right": 468.8125,
+              "bottom": 81.1875,
+              "width": 60,
+              "height": 38
+            }
+          },
+          {
+            "text": "Cancel",
+            "box": {
+              "left": 476.8125,
+              "top": 43.1875,
+              "right": 539,
+              "bottom": 81.1875,
+              "width": 62.1875,
+              "height": 38
+            }
+          }
+        ],
+        "focused": "wt-design-rename-input",
+        "scroll": [
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "mode": "campaign",
+      "viewport": [
+        1200,
+        540
+      ],
+      "keyboardSimulation": "overlay",
+      "passed": true,
+      "actualSharedRenderer": true,
+      "nativeRepliesSynthetic": true,
+      "checks": [
+        "top anchored input and Save/Cancel above keyboard",
+        "unchanged bottom draft until Save",
+        "composition-safe Done",
+        "blank name validation",
+        "state refresh preserves focused node",
+        "pointer fencing",
+        "explicit native Save Changes keeps alias",
+        "Cancel/Escape/shared Back and keyboard-activated Cancel",
+        "menu/page/session cleanup"
+      ],
+      "geometry": {
+        "inner": [
+          1200,
+          540
+        ],
+        "visual": {
+          "width": 1200,
+          "height": 540,
+          "offsetTop": 0
+        },
+        "open": true,
+        "panelHidden": true,
+        "panelInert": true,
+        "frameInert": true,
+        "form": {
+          "left": 12,
+          "top": 8,
+          "right": 552,
+          "bottom": 92.1875,
+          "width": 540,
+          "height": 84.1875
+        },
+        "input": {
+          "left": 25,
+          "top": 43.1875,
+          "right": 400.8125,
+          "bottom": 81.1875,
+          "width": 375.8125,
+          "height": 38
+        },
+        "controls": [
+          {
+            "text": "Save",
+            "box": {
+              "left": 408.8125,
+              "top": 43.1875,
+              "right": 468.8125,
+              "bottom": 81.1875,
+              "width": 60,
+              "height": 38
+            }
+          },
+          {
+            "text": "Cancel",
+            "box": {
+              "left": 476.8125,
+              "top": 43.1875,
+              "right": 539,
+              "bottom": 81.1875,
+              "width": 62.1875,
+              "height": 38
+            }
+          }
+        ],
+        "focused": "wt-design-rename-input",
+        "scroll": [
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "mode": "campaign",
+      "viewport": [
+        1200,
+        540
+      ],
+      "keyboardSimulation": "shrink",
+      "passed": true,
+      "actualSharedRenderer": true,
+      "nativeRepliesSynthetic": true,
+      "checks": [
+        "top anchored input and Save/Cancel above keyboard",
+        "unchanged bottom draft until Save",
+        "composition-safe Done",
+        "blank name validation",
+        "state refresh preserves focused node",
+        "pointer fencing",
+        "explicit native Save Changes keeps alias",
+        "Cancel/Escape/shared Back and keyboard-activated Cancel",
+        "menu/page/session cleanup"
+      ],
+      "geometry": {
+        "inner": [
+          1200,
+          170
+        ],
+        "visual": {
+          "width": 1200,
+          "height": 170,
+          "offsetTop": 0
+        },
+        "open": true,
+        "panelHidden": true,
+        "panelInert": true,
+        "frameInert": true,
+        "form": {
+          "left": 12,
+          "top": 8,
+          "right": 552,
+          "bottom": 92.1875,
+          "width": 540,
+          "height": 84.1875
+        },
+        "input": {
+          "left": 25,
+          "top": 43.1875,
+          "right": 400.8125,
+          "bottom": 81.1875,
+          "width": 375.8125,
+          "height": 38
+        },
+        "controls": [
+          {
+            "text": "Save",
+            "box": {
+              "left": 408.8125,
+              "top": 43.1875,
+              "right": 468.8125,
+              "bottom": 81.1875,
+              "width": 60,
+              "height": 38
+            }
+          },
+          {
+            "text": "Cancel",
+            "box": {
+              "left": 476.8125,
+              "top": 43.1875,
+              "right": 539,
+              "bottom": 81.1875,
+              "width": 62.1875,
+              "height": 38
+            }
+          }
+        ],
+        "focused": "wt-design-rename-input",
+        "scroll": [
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "mode": "campaign",
+      "viewport": [
+        640,
+        320
+      ],
+      "keyboardSimulation": "overlay",
+      "passed": true,
+      "actualSharedRenderer": true,
+      "nativeRepliesSynthetic": true,
+      "checks": [
+        "top anchored input and Save/Cancel above keyboard",
+        "unchanged bottom draft until Save",
+        "composition-safe Done",
+        "blank name validation",
+        "state refresh preserves focused node",
+        "pointer fencing",
+        "explicit native Save Changes keeps alias",
+        "Cancel/Escape/shared Back and keyboard-activated Cancel",
+        "menu/page/session cleanup"
+      ],
+      "geometry": {
+        "inner": [
+          640,
+          320
+        ],
+        "visual": {
+          "width": 640,
+          "height": 320,
+          "offsetTop": 0
+        },
+        "open": true,
+        "panelHidden": true,
+        "panelInert": true,
+        "frameInert": true,
+        "form": {
+          "left": 12,
+          "top": 8,
+          "right": 552,
+          "bottom": 92.1875,
+          "width": 540,
+          "height": 84.1875
+        },
+        "input": {
+          "left": 25,
+          "top": 43.1875,
+          "right": 400.8125,
+          "bottom": 81.1875,
+          "width": 375.8125,
+          "height": 38
+        },
+        "controls": [
+          {
+            "text": "Save",
+            "box": {
+              "left": 408.8125,
+              "top": 43.1875,
+              "right": 468.8125,
+              "bottom": 81.1875,
+              "width": 60,
+              "height": 38
+            }
+          },
+          {
+            "text": "Cancel",
+            "box": {
+              "left": 476.8125,
+              "top": 43.1875,
+              "right": 539,
+              "bottom": 81.1875,
+              "width": 62.1875,
+              "height": 38
+            }
+          }
+        ],
+        "focused": "wt-design-rename-input",
+        "scroll": [
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "mode": "campaign",
+      "viewport": [
+        640,
+        320
+      ],
+      "keyboardSimulation": "shrink",
+      "passed": true,
+      "actualSharedRenderer": true,
+      "nativeRepliesSynthetic": true,
+      "checks": [
+        "top anchored input and Save/Cancel above keyboard",
+        "unchanged bottom draft until Save",
+        "composition-safe Done",
+        "blank name validation",
+        "state refresh preserves focused node",
+        "pointer fencing",
+        "explicit native Save Changes keeps alias",
+        "Cancel/Escape/shared Back and keyboard-activated Cancel",
+        "menu/page/session cleanup"
+      ],
+      "geometry": {
+        "inner": [
+          640,
+          160
+        ],
+        "visual": {
+          "width": 640,
+          "height": 160,
+          "offsetTop": 0
+        },
+        "open": true,
+        "panelHidden": true,
+        "panelInert": true,
+        "frameInert": true,
+        "form": {
+          "left": 12,
+          "top": 8,
+          "right": 552,
+          "bottom": 92.1875,
+          "width": 540,
+          "height": 84.1875
+        },
+        "input": {
+          "left": 25,
+          "top": 43.1875,
+          "right": 400.8125,
+          "bottom": 81.1875,
+          "width": 375.8125,
+          "height": 38
+        },
+        "controls": [
+          {
+            "text": "Save",
+            "box": {
+              "left": 408.8125,
+              "top": 43.1875,
+              "right": 468.8125,
+              "bottom": 81.1875,
+              "width": 60,
+              "height": 38
+            }
+          },
+          {
+            "text": "Cancel",
+            "box": {
+              "left": 476.8125,
+              "top": 43.1875,
+              "right": 539,
+              "bottom": 81.1875,
+              "width": 62.1875,
+              "height": 38
+            }
+          }
+        ],
+        "focused": "wt-design-rename-input",
+        "scroll": [
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "mode": "ffa",
+      "viewport": [
+        1200,
+        540
+      ],
+      "keyboardSimulation": "overlay",
+      "passed": true,
+      "actualSharedRenderer": true,
+      "nativeRepliesSynthetic": true,
+      "checks": [
+        "top anchored input and Save/Cancel above keyboard",
+        "unchanged bottom draft until Save",
+        "composition-safe Done",
+        "blank name validation",
+        "state refresh preserves focused node",
+        "pointer fencing",
+        "explicit native Save Changes keeps alias",
+        "Cancel/Escape/shared Back and keyboard-activated Cancel",
+        "menu/page/session cleanup"
+      ],
+      "geometry": {
+        "inner": [
+          1200,
+          540
+        ],
+        "visual": {
+          "width": 1200,
+          "height": 540,
+          "offsetTop": 0
+        },
+        "open": true,
+        "panelHidden": true,
+        "panelInert": true,
+        "frameInert": true,
+        "form": {
+          "left": 12,
+          "top": 8,
+          "right": 552,
+          "bottom": 92.1875,
+          "width": 540,
+          "height": 84.1875
+        },
+        "input": {
+          "left": 25,
+          "top": 43.1875,
+          "right": 400.8125,
+          "bottom": 81.1875,
+          "width": 375.8125,
+          "height": 38
+        },
+        "controls": [
+          {
+            "text": "Save",
+            "box": {
+              "left": 408.8125,
+              "top": 43.1875,
+              "right": 468.8125,
+              "bottom": 81.1875,
+              "width": 60,
+              "height": 38
+            }
+          },
+          {
+            "text": "Cancel",
+            "box": {
+              "left": 476.8125,
+              "top": 43.1875,
+              "right": 539,
+              "bottom": 81.1875,
+              "width": 62.1875,
+              "height": 38
+            }
+          }
+        ],
+        "focused": "wt-design-rename-input",
+        "scroll": [
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "mode": "ffa",
+      "viewport": [
+        1200,
+        540
+      ],
+      "keyboardSimulation": "shrink",
+      "passed": true,
+      "actualSharedRenderer": true,
+      "nativeRepliesSynthetic": true,
+      "checks": [
+        "top anchored input and Save/Cancel above keyboard",
+        "unchanged bottom draft until Save",
+        "composition-safe Done",
+        "blank name validation",
+        "state refresh preserves focused node",
+        "pointer fencing",
+        "explicit native Save Changes keeps alias",
+        "Cancel/Escape/shared Back and keyboard-activated Cancel",
+        "menu/page/session cleanup"
+      ],
+      "geometry": {
+        "inner": [
+          1200,
+          170
+        ],
+        "visual": {
+          "width": 1200,
+          "height": 170,
+          "offsetTop": 0
+        },
+        "open": true,
+        "panelHidden": true,
+        "panelInert": true,
+        "frameInert": true,
+        "form": {
+          "left": 12,
+          "top": 8,
+          "right": 552,
+          "bottom": 92.1875,
+          "width": 540,
+          "height": 84.1875
+        },
+        "input": {
+          "left": 25,
+          "top": 43.1875,
+          "right": 400.8125,
+          "bottom": 81.1875,
+          "width": 375.8125,
+          "height": 38
+        },
+        "controls": [
+          {
+            "text": "Save",
+            "box": {
+              "left": 408.8125,
+              "top": 43.1875,
+              "right": 468.8125,
+              "bottom": 81.1875,
+              "width": 60,
+              "height": 38
+            }
+          },
+          {
+            "text": "Cancel",
+            "box": {
+              "left": 476.8125,
+              "top": 43.1875,
+              "right": 539,
+              "bottom": 81.1875,
+              "width": 62.1875,
+              "height": 38
+            }
+          }
+        ],
+        "focused": "wt-design-rename-input",
+        "scroll": [
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "mode": "ffa",
+      "viewport": [
+        640,
+        320
+      ],
+      "keyboardSimulation": "overlay",
+      "passed": true,
+      "actualSharedRenderer": true,
+      "nativeRepliesSynthetic": true,
+      "checks": [
+        "top anchored input and Save/Cancel above keyboard",
+        "unchanged bottom draft until Save",
+        "composition-safe Done",
+        "blank name validation",
+        "state refresh preserves focused node",
+        "pointer fencing",
+        "explicit native Save Changes keeps alias",
+        "Cancel/Escape/shared Back and keyboard-activated Cancel",
+        "menu/page/session cleanup"
+      ],
+      "geometry": {
+        "inner": [
+          640,
+          320
+        ],
+        "visual": {
+          "width": 640,
+          "height": 320,
+          "offsetTop": 0
+        },
+        "open": true,
+        "panelHidden": true,
+        "panelInert": true,
+        "frameInert": true,
+        "form": {
+          "left": 12,
+          "top": 8,
+          "right": 552,
+          "bottom": 92.1875,
+          "width": 540,
+          "height": 84.1875
+        },
+        "input": {
+          "left": 25,
+          "top": 43.1875,
+          "right": 400.8125,
+          "bottom": 81.1875,
+          "width": 375.8125,
+          "height": 38
+        },
+        "controls": [
+          {
+            "text": "Save",
+            "box": {
+              "left": 408.8125,
+              "top": 43.1875,
+              "right": 468.8125,
+              "bottom": 81.1875,
+              "width": 60,
+              "height": 38
+            }
+          },
+          {
+            "text": "Cancel",
+            "box": {
+              "left": 476.8125,
+              "top": 43.1875,
+              "right": 539,
+              "bottom": 81.1875,
+              "width": 62.1875,
+              "height": 38
+            }
+          }
+        ],
+        "focused": "wt-design-rename-input",
+        "scroll": [
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "mode": "ffa",
+      "viewport": [
+        640,
+        320
+      ],
+      "keyboardSimulation": "shrink",
+      "passed": true,
+      "actualSharedRenderer": true,
+      "nativeRepliesSynthetic": true,
+      "checks": [
+        "top anchored input and Save/Cancel above keyboard",
+        "unchanged bottom draft until Save",
+        "composition-safe Done",
+        "blank name validation",
+        "state refresh preserves focused node",
+        "pointer fencing",
+        "explicit native Save Changes keeps alias",
+        "Cancel/Escape/shared Back and keyboard-activated Cancel",
+        "menu/page/session cleanup"
+      ],
+      "geometry": {
+        "inner": [
+          640,
+          160
+        ],
+        "visual": {
+          "width": 640,
+          "height": 160,
+          "offsetTop": 0
+        },
+        "open": true,
+        "panelHidden": true,
+        "panelInert": true,
+        "frameInert": true,
+        "form": {
+          "left": 12,
+          "top": 8,
+          "right": 552,
+          "bottom": 92.1875,
+          "width": 540,
+          "height": 84.1875
+        },
+        "input": {
+          "left": 25,
+          "top": 43.1875,
+          "right": 400.8125,
+          "bottom": 81.1875,
+          "width": 375.8125,
+          "height": 38
+        },
+        "controls": [
+          {
+            "text": "Save",
+            "box": {
+              "left": 408.8125,
+              "top": 43.1875,
+              "right": 468.8125,
+              "bottom": 81.1875,
+              "width": 60,
+              "height": 38
+            }
+          },
+          {
+            "text": "Cancel",
+            "box": {
+              "left": 476.8125,
+              "top": 43.1875,
+              "right": 539,
+              "bottom": 81.1875,
+              "width": 62.1875,
+              "height": 38
+            }
+          }
+        ],
+        "focused": "wt-design-rename-input",
+        "scroll": [
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "mode": "multiplayer",
+      "viewport": [
+        1200,
+        540
+      ],
+      "keyboardSimulation": "overlay",
+      "passed": true,
+      "actualSharedRenderer": true,
+      "nativeRepliesSynthetic": true,
+      "checks": [
+        "top anchored input and Save/Cancel above keyboard",
+        "unchanged bottom draft until Save",
+        "composition-safe Done",
+        "blank name validation",
+        "state refresh preserves focused node",
+        "pointer fencing",
+        "explicit native Save Changes keeps alias",
+        "Cancel/Escape/shared Back and keyboard-activated Cancel",
+        "menu/page/session cleanup"
+      ],
+      "geometry": {
+        "inner": [
+          1200,
+          540
+        ],
+        "visual": {
+          "width": 1200,
+          "height": 540,
+          "offsetTop": 0
+        },
+        "open": true,
+        "panelHidden": true,
+        "panelInert": true,
+        "frameInert": true,
+        "form": {
+          "left": 12,
+          "top": 8,
+          "right": 552,
+          "bottom": 92.1875,
+          "width": 540,
+          "height": 84.1875
+        },
+        "input": {
+          "left": 25,
+          "top": 43.1875,
+          "right": 400.8125,
+          "bottom": 81.1875,
+          "width": 375.8125,
+          "height": 38
+        },
+        "controls": [
+          {
+            "text": "Save",
+            "box": {
+              "left": 408.8125,
+              "top": 43.1875,
+              "right": 468.8125,
+              "bottom": 81.1875,
+              "width": 60,
+              "height": 38
+            }
+          },
+          {
+            "text": "Cancel",
+            "box": {
+              "left": 476.8125,
+              "top": 43.1875,
+              "right": 539,
+              "bottom": 81.1875,
+              "width": 62.1875,
+              "height": 38
+            }
+          }
+        ],
+        "focused": "wt-design-rename-input",
+        "scroll": [
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "mode": "multiplayer",
+      "viewport": [
+        1200,
+        540
+      ],
+      "keyboardSimulation": "shrink",
+      "passed": true,
+      "actualSharedRenderer": true,
+      "nativeRepliesSynthetic": true,
+      "checks": [
+        "top anchored input and Save/Cancel above keyboard",
+        "unchanged bottom draft until Save",
+        "composition-safe Done",
+        "blank name validation",
+        "state refresh preserves focused node",
+        "pointer fencing",
+        "explicit native Save Changes keeps alias",
+        "Cancel/Escape/shared Back and keyboard-activated Cancel",
+        "menu/page/session cleanup"
+      ],
+      "geometry": {
+        "inner": [
+          1200,
+          170
+        ],
+        "visual": {
+          "width": 1200,
+          "height": 170,
+          "offsetTop": 0
+        },
+        "open": true,
+        "panelHidden": true,
+        "panelInert": true,
+        "frameInert": true,
+        "form": {
+          "left": 12,
+          "top": 8,
+          "right": 552,
+          "bottom": 92.1875,
+          "width": 540,
+          "height": 84.1875
+        },
+        "input": {
+          "left": 25,
+          "top": 43.1875,
+          "right": 400.8125,
+          "bottom": 81.1875,
+          "width": 375.8125,
+          "height": 38
+        },
+        "controls": [
+          {
+            "text": "Save",
+            "box": {
+              "left": 408.8125,
+              "top": 43.1875,
+              "right": 468.8125,
+              "bottom": 81.1875,
+              "width": 60,
+              "height": 38
+            }
+          },
+          {
+            "text": "Cancel",
+            "box": {
+              "left": 476.8125,
+              "top": 43.1875,
+              "right": 539,
+              "bottom": 81.1875,
+              "width": 62.1875,
+              "height": 38
+            }
+          }
+        ],
+        "focused": "wt-design-rename-input",
+        "scroll": [
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "mode": "multiplayer",
+      "viewport": [
+        640,
+        320
+      ],
+      "keyboardSimulation": "overlay",
+      "passed": true,
+      "actualSharedRenderer": true,
+      "nativeRepliesSynthetic": true,
+      "checks": [
+        "top anchored input and Save/Cancel above keyboard",
+        "unchanged bottom draft until Save",
+        "composition-safe Done",
+        "blank name validation",
+        "state refresh preserves focused node",
+        "pointer fencing",
+        "explicit native Save Changes keeps alias",
+        "Cancel/Escape/shared Back and keyboard-activated Cancel",
+        "menu/page/session cleanup"
+      ],
+      "geometry": {
+        "inner": [
+          640,
+          320
+        ],
+        "visual": {
+          "width": 640,
+          "height": 320,
+          "offsetTop": 0
+        },
+        "open": true,
+        "panelHidden": true,
+        "panelInert": true,
+        "frameInert": true,
+        "form": {
+          "left": 12,
+          "top": 8,
+          "right": 552,
+          "bottom": 92.1875,
+          "width": 540,
+          "height": 84.1875
+        },
+        "input": {
+          "left": 25,
+          "top": 43.1875,
+          "right": 400.8125,
+          "bottom": 81.1875,
+          "width": 375.8125,
+          "height": 38
+        },
+        "controls": [
+          {
+            "text": "Save",
+            "box": {
+              "left": 408.8125,
+              "top": 43.1875,
+              "right": 468.8125,
+              "bottom": 81.1875,
+              "width": 60,
+              "height": 38
+            }
+          },
+          {
+            "text": "Cancel",
+            "box": {
+              "left": 476.8125,
+              "top": 43.1875,
+              "right": 539,
+              "bottom": 81.1875,
+              "width": 62.1875,
+              "height": 38
+            }
+          }
+        ],
+        "focused": "wt-design-rename-input",
+        "scroll": [
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "mode": "multiplayer",
+      "viewport": [
+        640,
+        320
+      ],
+      "keyboardSimulation": "shrink",
+      "passed": true,
+      "actualSharedRenderer": true,
+      "nativeRepliesSynthetic": true,
+      "checks": [
+        "top anchored input and Save/Cancel above keyboard",
+        "unchanged bottom draft until Save",
+        "composition-safe Done",
+        "blank name validation",
+        "state refresh preserves focused node",
+        "pointer fencing",
+        "explicit native Save Changes keeps alias",
+        "Cancel/Escape/shared Back and keyboard-activated Cancel",
+        "menu/page/session cleanup"
+      ],
+      "geometry": {
+        "inner": [
+          640,
+          160
+        ],
+        "visual": {
+          "width": 640,
+          "height": 160,
+          "offsetTop": 0
+        },
+        "open": true,
+        "panelHidden": true,
+        "panelInert": true,
+        "frameInert": true,
+        "form": {
+          "left": 12,
+          "top": 8,
+          "right": 552,
+          "bottom": 92.1875,
+          "width": 540,
+          "height": 84.1875
+        },
+        "input": {
+          "left": 25,
+          "top": 43.1875,
+          "right": 400.8125,
+          "bottom": 81.1875,
+          "width": 375.8125,
+          "height": 38
+        },
+        "controls": [
+          {
+            "text": "Save",
+            "box": {
+              "left": 408.8125,
+              "top": 43.1875,
+              "right": 468.8125,
+              "bottom": 81.1875,
+              "width": 60,
+              "height": 38
+            }
+          },
+          {
+            "text": "Cancel",
+            "box": {
+              "left": 476.8125,
+              "top": 43.1875,
+              "right": 539,
+              "bottom": 81.1875,
+              "width": 62.1875,
+              "height": 38
+            }
+          }
+        ],
+        "focused": "wt-design-rename-input",
+        "scroll": [
+          0,
+          0
+        ]
+      }
+    }
+  ],
+  "focusedChecks": [
+    "stale old-name validation fenced",
+    "visualViewport offset/resize/scroll placement",
+    "viewport listeners removed on close",
+    "Duel unchanged"
+  ],
+  "screenshots": [
+    "rename-towers-1200x540-overlay.png",
+    "rename-towers-1200x540-shrink.png",
+    "rename-towers-640x320-overlay.png",
+    "rename-towers-640x320-shrink.png",
+    "rename-multiplayer-1200x540-overlay.png",
+    "rename-multiplayer-1200x540-shrink.png",
+    "rename-multiplayer-640x320-overlay.png",
+    "rename-multiplayer-640x320-shrink.png"
+  ],
+  "exceptions": [],
+  "badRequests": [],
+  "fatal": null,
+  "sources": [
+    {
+      "path": "app/src/main/assets/warzone-command-pages.js",
+      "sha256": "85faeaa8dd9428b7c98fc7f555563d7b861453474508c82be0a5c85933ecf7f4"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/towers-commands.css",
+      "sha256": "5c5ce4a6bbef73cc1c4f336f05dc81bc9ae750a164ba3acbef24ecabc5fba1de"
+    },
+    {
+      "path": "tools/test-design-rename-browser-078.cjs",
+      "sha256": "ed884c80ba9a39919de614744c53c70c7a1fed4e82da1c9c1bf0863bcbde7c86"
+    }
+  ]
+}

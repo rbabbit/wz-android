@@ -121,8 +121,7 @@
    catalogue and its existing batch assignment controls in this window. The
    hidden elements remain in the renderer for queue/state bookkeeping. */
 #blocknight-research-shell.wt-towers-research .bn-tech-header,
-#blocknight-research-shell.wt-towers-research .bn-tech-categories,
-#blocknight-research-shell.wt-towers-research .bn-tech-detail{display:none}
+#blocknight-research-shell.wt-towers-research .bn-tech-categories{display:none}
 /* Selected cards use the shared white surface and dark ink. Artwork retains its colour. */
 #blocknight-research-shell.wt-towers-research .bn-tech-card.selected .bn-tech-copy strong,
 #blocknight-research-shell.wt-towers-research .bn-tech-card.selected .bn-tech-copy small,
@@ -149,3 +148,52 @@
 #blocknight-research-shell.wt-towers-research .bn-tech-card:is([data-research-state="researching"],[data-research-state="queued"],[data-research-state="syncing"]).selected .bn-tech-copy strong,
 #blocknight-research-shell.wt-towers-research .bn-tech-card:is([data-research-state="researching"],[data-research-state="queued"],[data-research-state="syncing"]).selected .bn-tech-ready small {color:var(--towers-text,#f4f4f4)}
 #blocknight-research-shell.wt-towers-research .bn-tech-card:is([data-research-state="researching"],[data-research-state="queued"],[data-research-state="syncing"]).selected .bn-tech-copy small {color:var(--towers-muted,#bcbcbc)}
+
+/* Available topics stay on the left. Only the selected laboratory owns the
+   current/queued panel, whose work remains visible while the catalogue scrolls. */
+#blocknight-research-shell.wt-towers-research{width:min(940px,calc(100vw - 20px));max-width:calc(100vw - 20px)}
+#blocknight-research-shell.wt-towers-research .bn-tech-main{display:grid;grid-template-columns:minmax(0,1fr) minmax(208px,31%);grid-template-rows:auto minmax(0,1fr) auto;gap:9px 14px}
+#blocknight-research-shell.wt-towers-research .bn-tech-rail{grid-column:1/-1;grid-row:1}
+#blocknight-research-shell.wt-towers-research .bn-tech-browser{grid-column:1;grid-row:2}
+#blocknight-research-shell.wt-towers-research .bn-tech-preview{grid-column:1;grid-row:3;min-height:34px}
+#blocknight-research-shell.wt-towers-research .bn-tech-detail{grid-column:2;grid-row:2/4;display:flex;flex-direction:column;align-items:stretch;gap:13px;min-height:0;max-height:none;height:100%;padding:0;overflow:hidden}
+#blocknight-research-shell.wt-towers-research .bn-tech-detail>h2{display:none}
+#blocknight-research-shell.wt-towers-research .bn-tech-active{flex:0 0 auto;max-height:112px;overflow-y:auto;overflow-x:hidden}
+#blocknight-research-shell.wt-towers-research .bn-tech-current{gap:8px;align-items:center}
+#blocknight-research-shell.wt-towers-research .bn-tech-current-image{width:64px;height:49px}
+#blocknight-research-shell.wt-towers-research .bn-tech-current-status{display:block;font:500 12px/16px TowersResearch,sans-serif;color:var(--towers-muted,#bcbcbc)}
+#blocknight-research-shell.wt-towers-research .bn-tech-active-name{font:500 15px/19px TowersResearch,sans-serif;line-height:19px;margin-top:3px}
+#blocknight-research-shell.wt-towers-research .bn-tech-progress{height:4px;margin:7px 0 0 72px}
+#blocknight-research-shell.wt-towers-research .bn-tech-queue-panel{flex:1 1 0;display:flex;flex-direction:column;min-height:0;overflow:hidden}
+#blocknight-research-shell.wt-towers-research .bn-tech-queue-panel header{flex:none;min-height:24px;gap:5px}
+#blocknight-research-shell.wt-towers-research .bn-tech-queue-title{font:500 12px/16px TowersResearch,sans-serif;color:var(--towers-text,#f4f4f4)}
+#blocknight-research-shell.wt-towers-research .bn-tech-queue-count{font-size:10px;line-height:14px}
+#blocknight-research-shell.wt-towers-research .bn-tech-retry{flex:none;width:auto;min-height:28px;height:28px;padding:3px 7px;border:0;border-radius:4px;background:var(--towers-control,#252525);color:var(--towers-text,#f4f4f4);font:500 11px/16px TowersResearch,sans-serif}
+#blocknight-research-shell.wt-towers-research .bn-tech-retry[hidden]{display:none!important}
+#blocknight-research-shell.wt-towers-research .bn-tech-queue-list{flex:1 1 auto;min-height:0;max-height:none;height:auto;scroll-padding:4px}
+#blocknight-research-shell.wt-towers-research .bn-tech-queue-item{grid-template-columns:13px 45px minmax(0,1fr) 28px;gap:5px;min-height:52px;padding:3px 0;align-items:center}
+#blocknight-research-shell.wt-towers-research .bn-tech-queue-image{display:block;width:45px;height:35px;object-fit:contain}
+#blocknight-research-shell.wt-towers-research .bn-tech-queue-item>span{font:500 13px/17px TowersResearch,sans-serif}
+#blocknight-research-shell.wt-towers-research .bn-tech-queue-item>span>small{display:block;font:400 9px/12px system-ui,sans-serif;color:var(--towers-muted,#bcbcbc);margin-top:2px;white-space:normal}
+#blocknight-research-shell.wt-towers-research .bn-tech-queue-item[data-queue-state="syncing"]{opacity:.82}
+#blocknight-research-shell.wt-towers-research .bn-tech-queue-remove{min-height:32px;height:32px!important}
+@media(max-width:800px){
+ #blocknight-research-shell.wt-towers-research .bn-tech-main{grid-template-columns:minmax(0,1fr) minmax(190px,33%);gap:7px 10px;padding:8px}
+ #blocknight-research-shell.wt-towers-research .bn-tech-list{grid-template-columns:minmax(0,1fr)}
+ #blocknight-research-shell.wt-towers-research .bn-tech-current-image{width:48px;height:37px}
+ #blocknight-research-shell.wt-towers-research .bn-tech-active-name{font-size:14px;line-height:18px}
+ #blocknight-research-shell.wt-towers-research .bn-tech-progress{margin-left:56px}
+ #blocknight-research-shell.wt-towers-research .bn-tech-queue-item{grid-template-columns:10px 36px minmax(0,1fr) 28px;gap:4px}
+ #blocknight-research-shell.wt-towers-research .bn-tech-queue-image{width:36px;height:28px}
+}
+@media(max-height:380px){
+ #blocknight-research-shell.wt-towers-research .bn-tech-main{gap:5px 10px;padding-top:6px;padding-bottom:6px}
+ #blocknight-research-shell.wt-towers-research .bn-tech-detail{gap:7px}
+ #blocknight-research-shell.wt-towers-research .bn-tech-active{min-height:0;max-height:88px}
+ #blocknight-research-shell.wt-towers-research .bn-tech-current-image{width:42px;height:32px}
+ #blocknight-research-shell.wt-towers-research .bn-tech-current-status{font-size:11px;line-height:14px}
+ #blocknight-research-shell.wt-towers-research .bn-tech-active-name{font-size:13px;line-height:17px}
+ #blocknight-research-shell.wt-towers-research .bn-tech-progress{margin-left:50px;margin-top:5px}
+ #blocknight-research-shell.wt-towers-research .bn-tech-queue-panel header{min-height:20px}
+ #blocknight-research-shell.wt-towers-research .bn-tech-queue-item{min-height:46px}
+}

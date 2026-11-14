@@ -1,5 +1,17 @@
 # Warzone Towers maintenance rules
 
+- 2026-11-14: v0.78 separates main Research into newly available technologies
+  on the left and the selected lab's actual current topic plus ordered queue
+  on the right, across Towers, Campaign, FFA and Multiplayer. Keep numeric lab
+  tabs, batch assignment and native acknowledgement semantics; distinguish
+  pending sync from confirmed work. Replace the bottom Design name input with
+  a compact name editor above the keyboard, preserving drafts and input returns.
+  Preserve v0.77 APK/full source first. Scope shared Research and command JS/CSS,
+  version, documentation and focused host/browser checks. Native engines,
+  gameplay, VFS, maps, saves and all unrelated features remain frozen. User
+  requests NO emulator tests; disclose real Android keyboard/touch unverified.
+  Preserve older fallbacks; no GitHub or VPS changes are requested.
+
 - 2026-11-14: v0.77 implements the approved header-free Manufacturing/Queue
   mocks across Towers, FFA, Campaign and Multiplayer. Preserve v0.76 APK/full
   source first. Remove inner titles/power totals, Units and FACTORIES labels,

@@ -1,0 +1,61 @@
+{
+  "version": "0.78",
+  "passed": true,
+  "emulatorUsed": false,
+  "actualNativeEngineExecuted": false,
+  "scope": "Actual shared Research functions/markup and bounded synthetic DOM/native-mailbox fixtures across four modes; Duel isolation. Native gameplay is not executed.",
+  "checksPassed": 37,
+  "checks": [
+    "towers: only available unassigned topics appear on the left across all laboratories",
+    "towers: selecting one or multiple topics keeps them available until actual assignment intent is submitted",
+    "towers: rejected/pending additions are explicitly not confirmed; accepted starts move to current with fresh unknown progress",
+    "towers: confirmed queue removal stays visible until native ACK, using real local indexes for surviving entries",
+    "towers: explicit retry resends exact retained intent without adding duplicates or falsely confirming pending work",
+    "towers: rejected removal retry preserves the still-confirmed remainder omitted from native availability",
+    "towers: current artwork/progress update in place while catalogue and right queue scroll remain stable",
+    "towers: idle/missing labs never show an unrelated current technology or fake zero progress",
+    "towers: completion/load/player changes clear stale assignments and cancellation readmits available topics",
+    "ffa: only available unassigned topics appear on the left across all laboratories",
+    "ffa: selecting one or multiple topics keeps them available until actual assignment intent is submitted",
+    "ffa: rejected/pending additions are explicitly not confirmed; accepted starts move to current with fresh unknown progress",
+    "ffa: confirmed queue removal stays visible until native ACK, using real local indexes for surviving entries",
+    "ffa: explicit retry resends exact retained intent without adding duplicates or falsely confirming pending work",
+    "ffa: rejected removal retry preserves the still-confirmed remainder omitted from native availability",
+    "ffa: current artwork/progress update in place while catalogue and right queue scroll remain stable",
+    "ffa: idle/missing labs never show an unrelated current technology or fake zero progress",
+    "ffa: completion/load/player changes clear stale assignments and cancellation readmits available topics",
+    "campaign: only available unassigned topics appear on the left across all laboratories",
+    "campaign: selecting one or multiple topics keeps them available until actual assignment intent is submitted",
+    "campaign: rejected/pending additions are explicitly not confirmed; accepted starts move to current with fresh unknown progress",
+    "campaign: confirmed queue removal stays visible until native ACK, using real local indexes for surviving entries",
+    "campaign: explicit retry resends exact retained intent without adding duplicates or falsely confirming pending work",
+    "campaign: rejected removal retry preserves the still-confirmed remainder omitted from native availability",
+    "campaign: current artwork/progress update in place while catalogue and right queue scroll remain stable",
+    "campaign: idle/missing labs never show an unrelated current technology or fake zero progress",
+    "campaign: completion/load/player changes clear stale assignments and cancellation readmits available topics",
+    "multiplayer: only available unassigned topics appear on the left across all laboratories",
+    "multiplayer: selecting one or multiple topics keeps them available until actual assignment intent is submitted",
+    "multiplayer: rejected/pending additions are explicitly not confirmed; accepted starts move to current with fresh unknown progress",
+    "multiplayer: confirmed queue removal stays visible until native ACK, using real local indexes for surviving entries",
+    "multiplayer: explicit retry resends exact retained intent without adding duplicates or falsely confirming pending work",
+    "multiplayer: rejected removal retry preserves the still-confirmed remainder omitted from native availability",
+    "multiplayer: current artwork/progress update in place while catalogue and right queue scroll remain stable",
+    "multiplayer: idle/missing labs never show an unrelated current technology or fake zero progress",
+    "multiplayer: completion/load/player changes clear stale assignments and cancellation readmits available topics",
+    "Duel retains available-only native-index catalogue and original current/queue labels"
+  ],
+  "sources": [
+    {
+      "path": "app/src/main/assets/warzone-mobile-research.js",
+      "sha256": "45c1af89f12a62c4912073bff1ce2ff8ebba7ba4850662e78b90df24ee7f999f"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/towers-research.css",
+      "sha256": "af5c90612945473a7b210d7979f4ce32f3ae84e9fad87bbfc208cf6322ea5735"
+    },
+    {
+      "path": "tools/test-research-assignment-078.cjs",
+      "sha256": "c384b5cc17e47489b3568f2e2f2631c49682325f7b03a5335de233c46d6fad60"
+    }
+  ]
+}

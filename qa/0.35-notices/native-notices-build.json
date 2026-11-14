@@ -1,0 +1,42 @@
+{
+  "version": "0.35",
+  "passed": true,
+  "emulatorUsed": false,
+  "nativeBuildPerformed": true,
+  "nativeFullFreshBuildPerformed": false,
+  "compiledObjects": [
+    "src/CMakeFiles/warzone2100.dir/keybind.cpp.o"
+  ],
+  "relinkedNativeEngine": true,
+  "method": "Verified v0.34 source cache; one keybind.cpp compile and one matched native link",
+  "cachePath": "/home/punkech/wz-blueprint-20261107",
+  "command": [
+    "bash",
+    "-c",
+    "source \"$1/emsdk/emsdk_env.sh\" && cmake --build \"$1/build\" --target warzone2100 --parallel 4",
+    "native-notices-035",
+    "/home/punkech/wz-blueprint-20261107"
+  ],
+  "originalBuildRecipeSHA256": "6f3835c7eb8441c216f7e0b056affe22b34eb60e2985341029c866ca75e9bc26",
+  "sourceOverlay": "archive/native-notices-0.35/source-overlay.json",
+  "sourceOverlaySHA256": "a6f4bb1b9fe97c57826856956779a4ad3be09735fa3ed988a522db16e8dc6d65",
+  "sourceOverlays": {
+    "display3d.cpp": "3b5c1a41144011805819d15e9bfac6f1289d726da276433bfeb237904c0fa15f",
+    "research.cpp": "06b8999191bb0160e6b73c268f8ddd69347102133ecc221aee23504973dc918a",
+    "keybind.cpp": "5730cf9a2b791a6a437f4e0da040e9dbb75e8befb48dc02caefb1a8e824355ed"
+  },
+  "logSHA256": "8b757cd6df6f9c849e225ff99e5bd75af243e4a36dca7cbbc1aa11eea371834b",
+  "recordedUTC": "2026-11-10T09:27:43.672643+00:00",
+  "raw": [
+    {
+      "file": "warzone2100.js",
+      "sha256": "8a6a88e7d302722ce1095d3c2d194a5f1212fd947e36ded4c3a8679d4145e0c2",
+      "bytes": 725174
+    },
+    {
+      "file": "warzone2100.wasm",
+      "sha256": "120457e5db655d819436f3c5315991cb013f771e01ace7a872469e0844796380",
+      "bytes": 13460778
+    }
+  ]
+}

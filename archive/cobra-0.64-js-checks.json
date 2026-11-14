@@ -1,0 +1,79 @@
+{
+  "version": "0.64",
+  "passed": true,
+  "checksPassed": 12,
+  "checks": [
+    {
+      "name": "Genuine metadata-less NullBot archive restores byte-for-byte with actual bot proof and without rewriting old metadata",
+      "passed": true
+    },
+    {
+      "name": "Cobra Easy/Medium/Hard native F7 archives actual bot identity after persistence, resumed clock and sync",
+      "passed": true
+    },
+    {
+      "name": "New saves from restored NullBot worlds explicitly remain NullBot",
+      "passed": true
+    },
+    {
+      "name": "Cobra and explicit NullBot restores require native live identity before readiness",
+      "passed": true
+    },
+    {
+      "name": "Legacy metadata cannot relabel Cobra native files; explicit mismatches, unknown and mixed bot metadata fail startup",
+      "passed": true
+    },
+    {
+      "name": "Archive GAM, main and script contexts must all agree, including mixed or duplicate player contexts",
+      "passed": true
+    },
+    {
+      "name": "A mismatched restore wrapper cannot silently change the saved bot type",
+      "passed": true
+    },
+    {
+      "name": "Mixed, unknown and wrongly scripted live bots cannot become restored-ready or create an archive",
+      "passed": true
+    },
+    {
+      "name": "Saved native files cannot disagree with the live Cobra packet at archive time",
+      "passed": true
+    },
+    {
+      "name": "Unexpected actual bot families cannot archive under a different requested launch",
+      "passed": true
+    },
+    {
+      "name": "HUD labels actual Cobra/NullBot and refuses mixed, unknown or mismatched player identities",
+      "passed": true
+    },
+    {
+      "name": "Existing Campaign restore and Towers reward save paths retain their original behavior",
+      "passed": true
+    }
+  ],
+  "emulatorUsed": false,
+  "actualNativeEngineExecuted": false,
+  "genuineLegacyArchive": "scenario/ffa/test-fixtures/legacy-nullbot-hard.zip",
+  "legacySHA256": "9566e31a9d7a08e79d4cb341a082058a073e5f5c203a22b91e8c94a908ff08a4",
+  "syntheticCobraIdentityFixture": true,
+  "sources": [
+    {
+      "path": "app/src/main/assets/warzone/saved-games.js",
+      "sha256": "cd0c5b957f1bcd9bec89559c5ac13e300aca5f7ec1096eef2e2250e1c85e0b39"
+    },
+    {
+      "path": "app/src/main/assets/warzone-ffa-hud.js",
+      "sha256": "1e4af6d118b2f890d8a2a524a2591fa7748d2e8dc49c30ea1f33ccc2942aa494"
+    },
+    {
+      "path": "tools/check-cobra-save-064.cjs",
+      "sha256": "0b61d3ca299a406cbfd9d1944b1038d3175364021161a5bd4135b11a68e64f78"
+    },
+    {
+      "path": "scenario/ffa/test-fixtures/legacy-nullbot-hard.zip",
+      "sha256": "9566e31a9d7a08e79d4cb341a082058a073e5f5c203a22b91e8c94a908ff08a4"
+    }
+  ],
+  "recordedUTC": "2026-11-12T15:37:01.535Z"
+}

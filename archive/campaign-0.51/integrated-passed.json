@@ -1,0 +1,1474 @@
+{
+  "passed": true,
+  "candidateAPK_SHA256": "9f52adb6738eee5596129f68f3bce2e235e9b793bd3d75a6c6829b879e687d26",
+  "resumedPreparedWorld": true,
+  "fixtureCorrections": [
+    "Await the original Alpha guide before battlefield checks",
+    "Wait for observed native return after one Back press; never automatically press it twice against a cached paused packet",
+    "Wait separately for native save hydration and the command bridge first snapshot"
+  ],
+  "results": [
+    {
+      "name": "Opening movie from private offline route",
+      "data": {
+        "native": {
+          "gameTime": 2,
+          "intelligenceOpen": false,
+          "mode": "campaign",
+          "nativeLevel": "main",
+          "nativeMenuOpen": false,
+          "nativeMode": 0,
+          "paused": true,
+          "playing": false,
+          "radar": {
+            "centerX": 1256,
+            "centerY": 552,
+            "height": 0,
+            "inverseCos": 1,
+            "inverseSin": 0,
+            "rotation": 0,
+            "viewportHeight": 576,
+            "viewportWidth": 1280,
+            "visible": false,
+            "width": 0
+          },
+          "realTime": 2207,
+          "transportOpen": false,
+          "video": true,
+          "worldSafe": false
+        },
+        "resources": [
+          "https://appassets.androidplatform.net/warzone/sequences/cam1/c001.ogg"
+        ]
+      }
+    },
+    {
+      "name": "Alpha mission and original guide return",
+      "data": {
+        "campaign": {
+          "snapshot": {
+            "mode": "campaign",
+            "mission": "cam1a",
+            "session": "cam1a-1794409259066",
+            "gameTime": 3002,
+            "missionTime": -1,
+            "missionType": 2,
+            "nativeLevel": "CAM_1A",
+            "paused": false,
+            "video": false,
+            "ui": {
+              "gameTime": 2702,
+              "intelligenceOpen": false,
+              "mode": "campaign",
+              "nativeLevel": "CAM_1A",
+              "nativeMenuOpen": false,
+              "nativeMode": 0,
+              "paused": false,
+              "playing": true,
+              "radar": {
+                "centerX": 1160,
+                "centerY": 397,
+                "height": 192,
+                "inverseCos": 1,
+                "inverseSin": 0,
+                "rotation": 0,
+                "viewportHeight": 517,
+                "viewportWidth": 1280,
+                "visible": false,
+                "width": 159
+              },
+              "realTime": 9728,
+              "transportOpen": false,
+              "video": false,
+              "worldSafe": true
+            },
+            "ended": false
+          },
+          "frame": {
+            "gameTime": 3002,
+            "intelligenceOpen": false,
+            "mode": "campaign",
+            "nativeLevel": "CAM_1A",
+            "nativeMenuOpen": false,
+            "nativeMode": 0,
+            "paused": false,
+            "playing": true,
+            "radar": {
+              "centerX": 1160,
+              "centerY": 397,
+              "height": 192,
+              "inverseCos": 1,
+              "inverseSin": 0,
+              "rotation": 0,
+              "viewportHeight": 517,
+              "viewportWidth": 1280,
+              "visible": false,
+              "width": 159
+            },
+            "realTime": 11211,
+            "transportOpen": false,
+            "video": false,
+            "worldSafe": true
+          },
+          "nativeState": {
+            "gameTime": 3002,
+            "intelligenceOpen": false,
+            "mode": "campaign",
+            "nativeLevel": "CAM_1A",
+            "nativeMenuOpen": false,
+            "nativeMode": 0,
+            "paused": false,
+            "playing": true,
+            "radar": {
+              "centerX": 1160,
+              "centerY": 397,
+              "height": 192,
+              "inverseCos": 1,
+              "inverseSin": 0,
+              "rotation": 0,
+              "viewportHeight": 517,
+              "viewportWidth": 1280,
+              "visible": false,
+              "width": 159
+            },
+            "realTime": 11211,
+            "transportOpen": false,
+            "video": false,
+            "worldSafe": true
+          },
+          "allCombat": false,
+          "suspended": true,
+          "selectedCount": 0,
+          "selectionPending": false,
+          "selectionRequests": 0,
+          "lastError": "",
+          "intent": "campaign-ui-1794409263188-15",
+          "physicalPointerCount": 0,
+          "inputSettling": true
+        },
+        "trucks": [
+          {
+            "id": 160005,
+            "x": 9,
+            "y": 50,
+            "z": 0,
+            "selected": false,
+            "order": 0,
+            "action": 0,
+            "rate": 10,
+            "building": false,
+            "queued": 0
+          },
+          {
+            "id": 160003,
+            "x": 9,
+            "y": 53,
+            "z": 0,
+            "selected": false,
+            "order": 0,
+            "action": 0,
+            "rate": 10,
+            "building": false,
+            "queued": 0
+          },
+          {
+            "id": 160001,
+            "x": 9,
+            "y": 52,
+            "z": 0,
+            "selected": false,
+            "order": 0,
+            "action": 0,
+            "rate": 10,
+            "building": false,
+            "queued": 0
+          }
+        ]
+      }
+    },
+    {
+      "name": "ALL COMBAT selects and moves four combat units, excluding trucks",
+      "data": {
+        "before": [
+          {
+            "id": 160091,
+            "x": 14,
+            "y": 51,
+            "z": 0,
+            "order": 25,
+            "constructor": false
+          },
+          {
+            "id": 160089,
+            "x": 13,
+            "y": 51,
+            "z": 0,
+            "order": 25,
+            "constructor": false
+          },
+          {
+            "id": 160087,
+            "x": 13,
+            "y": 50,
+            "z": 0,
+            "order": 25,
+            "constructor": false
+          },
+          {
+            "id": 160025,
+            "x": 14,
+            "y": 50,
+            "z": 0,
+            "order": 25,
+            "constructor": false
+          }
+        ],
+        "after": [
+          {
+            "id": 160091,
+            "x": 15,
+            "y": 51,
+            "z": 0,
+            "order": 2,
+            "constructor": false
+          },
+          {
+            "id": 160089,
+            "x": 15,
+            "y": 50,
+            "z": 0,
+            "order": 2,
+            "constructor": false
+          },
+          {
+            "id": 160087,
+            "x": 15,
+            "y": 49,
+            "z": 0,
+            "order": 2,
+            "constructor": false
+          },
+          {
+            "id": 160025,
+            "x": 15,
+            "y": 49,
+            "z": 0,
+            "order": 2,
+            "constructor": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "Native construction A0CommandCentre",
+      "data": {
+        "preview": {
+          "nonce": "cmd-1794409277840-44",
+          "action": "preview-build",
+          "ok": true,
+          "reason": "",
+          "result": {
+            "id": "cmd-1794409277840-44",
+            "itemId": "A0CommandCentre",
+            "x": 16,
+            "y": 54,
+            "workers": [
+              160003,
+              160001,
+              160005
+            ],
+            "automatic": false,
+            "status": "queued",
+            "created": 17802,
+            "attempts": {},
+            "issued": {},
+            "parentId": 0,
+            "targetModules": 0,
+            "reason": ""
+          },
+          "gameTime": 17802
+        },
+        "site": {
+          "id": "cmd-1794409278565-46",
+          "itemId": "A0CommandCentre",
+          "x": 16,
+          "y": 54,
+          "workers": [
+            160003,
+            160001,
+            160005
+          ],
+          "automatic": false,
+          "status": "travelling",
+          "created": 18402,
+          "attempts": {
+            "160001": 1,
+            "160003": 1,
+            "160005": 1
+          },
+          "issued": {
+            "160001": 18402,
+            "160003": 18402,
+            "160005": 18402
+          },
+          "parentId": 0,
+          "targetModules": 0,
+          "reason": "",
+          "knownStructures": [],
+          "idleAt": null,
+          "remaining": null
+        },
+        "final": {
+          "hq": true,
+          "factories": []
+        }
+      }
+    },
+    {
+      "name": "Native construction A0LightFactory",
+      "data": {
+        "preview": {
+          "nonce": "cmd-1794409303262-129",
+          "action": "preview-build",
+          "ok": true,
+          "reason": "",
+          "result": {
+            "id": "cmd-1794409303262-129",
+            "itemId": "A0LightFactory",
+            "x": 12,
+            "y": 48,
+            "workers": [
+              160005,
+              160001,
+              160003
+            ],
+            "automatic": false,
+            "status": "queued",
+            "created": 42402,
+            "attempts": {},
+            "issued": {},
+            "parentId": 0,
+            "targetModules": 0,
+            "reason": ""
+          },
+          "gameTime": 42402
+        },
+        "site": {
+          "id": "cmd-1794409303963-132",
+          "itemId": "A0LightFactory",
+          "x": 12,
+          "y": 48,
+          "workers": [
+            160005,
+            160001,
+            160003
+          ],
+          "automatic": false,
+          "status": "travelling",
+          "created": 43202,
+          "attempts": {
+            "160001": 1,
+            "160003": 1,
+            "160005": 1
+          },
+          "issued": {
+            "160001": 43202,
+            "160003": 43202,
+            "160005": 43202
+          },
+          "parentId": 0,
+          "targetModules": 0,
+          "reason": "",
+          "knownStructures": [],
+          "idleAt": null,
+          "remaining": null
+        },
+        "final": {
+          "hq": true,
+          "factories": [
+            {
+              "id": 160285,
+              "number": 1,
+              "x": 12,
+              "y": 48,
+              "type": 1,
+              "kind": "Factory",
+              "templates": [
+                "ConstructionDroid"
+              ],
+              "modules": 0,
+              "ready": true,
+              "idle": true,
+              "active": null,
+              "currentProduction": null,
+              "progress": {
+                "available": false,
+                "currentId": "",
+                "currentName": "",
+                "templateId": null,
+                "completedBuildPoints": null,
+                "totalBuildPoints": null,
+                "ratio": null,
+                "state": "idle"
+              },
+              "queueKnown": true,
+              "waitingReason": null,
+              "queue": []
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Native production progress and queued quantity",
+      "data": {
+        "id": 160285,
+        "number": 1,
+        "x": 12,
+        "y": 48,
+        "type": 1,
+        "kind": "Factory",
+        "templates": [
+          "ConstructionDroid"
+        ],
+        "modules": 0,
+        "ready": true,
+        "idle": false,
+        "active": {
+          "id": "cmd-1794409328281-184-0",
+          "design": {
+            "name": "Truck Viper Wheels",
+            "body": "Body1REC",
+            "propulsion": "wheeled01",
+            "turrets": [
+              "Spade1Mk1"
+            ],
+            "cost": 54,
+            "points": 272,
+            "droidType": 3
+          },
+          "status": "producing",
+          "reason": "",
+          "started": 66202
+        },
+        "currentProduction": {
+          "name": "Truck Viper Wheels",
+          "body": "Body1REC",
+          "propulsion": "wheeled01",
+          "turrets": [
+            "Spade1Mk1"
+          ],
+          "cost": 54,
+          "points": 272,
+          "droidType": 3,
+          "construct": "Spade1Mk1",
+          "repair": "ZNULLREPAIR",
+          "brain": "ZNULLBRAIN",
+          "ecm": "ZNULLECM",
+          "sensor": "ZNULLSENSOR",
+          "weapons": [],
+          "nativeTemplateId": 223696
+        },
+        "progress": {
+          "available": true,
+          "currentId": "160285:223696:66502",
+          "currentName": "Truck Viper Wheels",
+          "templateId": 223696,
+          "completedBuildPoints": 9,
+          "totalBuildPoints": 272,
+          "ratio": 0.03308823529411765,
+          "state": "building",
+          "remainingSeconds": 27
+        },
+        "queueKnown": true,
+        "waitingReason": null,
+        "queue": [
+          {
+            "id": "cmd-1794409329178-187-0",
+            "design": {
+              "name": "Truck Viper Wheels",
+              "body": "Body1REC",
+              "propulsion": "wheeled01",
+              "turrets": [
+                "Spade1Mk1"
+              ],
+              "cost": 54,
+              "points": 272,
+              "droidType": 3
+            },
+            "status": "queued",
+            "reason": ""
+          }
+        ]
+      }
+    },
+    {
+      "name": "Queue cancellation and one actual completed truck",
+      "data": {
+        "factories": [
+          {
+            "id": 160285,
+            "number": 1,
+            "x": 12,
+            "y": 48,
+            "type": 1,
+            "kind": "Factory",
+            "templates": [
+              "ConstructionDroid"
+            ],
+            "modules": 0,
+            "ready": true,
+            "idle": true,
+            "active": null,
+            "currentProduction": null,
+            "progress": {
+              "available": false,
+              "currentId": "",
+              "currentName": "",
+              "templateId": null,
+              "completedBuildPoints": null,
+              "totalBuildPoints": null,
+              "ratio": null,
+              "state": "idle"
+            },
+            "queueKnown": true,
+            "waitingReason": null,
+            "queue": []
+          }
+        ],
+        "trucks": [
+          {
+            "id": 160287,
+            "x": 11,
+            "y": 50,
+            "z": 0,
+            "selected": false,
+            "order": 0,
+            "action": 0,
+            "rate": 10,
+            "building": false,
+            "queued": 0
+          },
+          {
+            "id": 160005,
+            "x": 13,
+            "y": 50,
+            "z": 0,
+            "selected": false,
+            "order": 0,
+            "action": 0,
+            "rate": 10,
+            "building": false,
+            "queued": 0
+          },
+          {
+            "id": 160003,
+            "x": 12,
+            "y": 50,
+            "z": 0,
+            "selected": false,
+            "order": 0,
+            "action": 0,
+            "rate": 10,
+            "building": false,
+            "queued": 0
+          },
+          {
+            "id": 160001,
+            "x": 13,
+            "y": 50,
+            "z": 0,
+            "selected": false,
+            "order": 0,
+            "action": 0,
+            "rate": 10,
+            "building": false,
+            "queued": 0
+          }
+        ]
+      }
+    },
+    {
+      "name": "Research, Manufacturing, Queue, Help and native Intelligence returns",
+      "data": {
+        "snapshot": {
+          "mode": "campaign",
+          "mission": "cam1a",
+          "session": "cam1a-1794409259066",
+          "gameTime": 187802,
+          "missionTime": -1,
+          "missionType": 2,
+          "nativeLevel": "CAM_1A",
+          "paused": false,
+          "video": false,
+          "ui": {
+            "gameTime": 187702,
+            "intelligenceOpen": false,
+            "mode": "campaign",
+            "nativeLevel": "CAM_1A",
+            "nativeMenuOpen": false,
+            "nativeMode": 0,
+            "paused": false,
+            "playing": true,
+            "radar": {
+              "centerX": 1160,
+              "centerY": 397,
+              "height": 192,
+              "inverseCos": 1,
+              "inverseSin": 0,
+              "rotation": 0,
+              "viewportHeight": 517,
+              "viewportWidth": 1280,
+              "visible": true,
+              "width": 159
+            },
+            "realTime": 200598,
+            "transportOpen": false,
+            "video": false,
+            "worldSafe": true
+          },
+          "ended": false
+        },
+        "frame": {
+          "gameTime": 187802,
+          "intelligenceOpen": false,
+          "mode": "campaign",
+          "nativeLevel": "CAM_1A",
+          "nativeMenuOpen": false,
+          "nativeMode": 0,
+          "paused": false,
+          "playing": true,
+          "radar": {
+            "centerX": 1160,
+            "centerY": 397,
+            "height": 192,
+            "inverseCos": 1,
+            "inverseSin": 0,
+            "rotation": 0,
+            "viewportHeight": 517,
+            "viewportWidth": 1280,
+            "visible": true,
+            "width": 159
+          },
+          "realTime": 202762,
+          "transportOpen": false,
+          "video": false,
+          "worldSafe": true
+        },
+        "nativeState": {
+          "gameTime": 187802,
+          "intelligenceOpen": false,
+          "mode": "campaign",
+          "nativeLevel": "CAM_1A",
+          "nativeMenuOpen": false,
+          "nativeMode": 0,
+          "paused": false,
+          "playing": true,
+          "radar": {
+            "centerX": 1160,
+            "centerY": 397,
+            "height": 192,
+            "inverseCos": 1,
+            "inverseSin": 0,
+            "rotation": 0,
+            "viewportHeight": 517,
+            "viewportWidth": 1280,
+            "visible": true,
+            "width": 159
+          },
+          "realTime": 202762,
+          "transportOpen": false,
+          "video": false,
+          "worldSafe": true
+        },
+        "allCombat": true,
+        "suspended": true,
+        "selectedCount": 4,
+        "selectionPending": false,
+        "selectionRequests": 213,
+        "lastError": "",
+        "intent": "campaign-ui-1794409454651-455",
+        "physicalPointerCount": 0,
+        "inputSettling": true
+      }
+    },
+    {
+      "name": "Actual mission minimap drag uses native geometry",
+      "data": {
+        "radar": {
+          "centerX": 1160,
+          "centerY": 397,
+          "height": 192,
+          "inverseCos": 1,
+          "inverseSin": 0,
+          "rotation": 0,
+          "viewportHeight": 517,
+          "viewportWidth": 1280,
+          "visible": true,
+          "width": 159,
+          "hostX": 1160.0001106262207,
+          "hostY": 455.7678954974826,
+          "w": 1280,
+          "h": 576
+        },
+        "touch": {
+          "active": true,
+          "version": 57,
+          "intercepted": 27,
+          "mouseEvents": 53,
+          "taps": 5,
+          "orders": 0,
+          "pans": 0,
+          "panMoves": 0,
+          "lastPanStartLatencyMs": null,
+          "lastPanDispatchMs": null,
+          "maxPanDispatchMs": 0,
+          "panPhase": "idle",
+          "panQueuedPointers": 0,
+          "panRearms": 0,
+          "panUnobservedRearms": 0,
+          "panHeldTimeouts": 0,
+          "panContextResets": 0,
+          "panQueueOverflows": 0,
+          "boxSelections": 6,
+          "boxCadenceWaits": 4,
+          "boxPressGaps": [
+            3699.429999999702,
+            316.3849999997765,
+            24995.485000001267,
+            316.9850000012666,
+            331.8950000014156,
+            317.34999999962747
+          ],
+          "lastNativeLeftDownAt": 53631.66000000015,
+          "manualSelectionRevision": 3,
+          "facilityOpens": 0,
+          "lastFacility": null,
+          "facilityError": "",
+          "pinchSteps": 0,
+          "tiltMoves": 0,
+          "tiltHeld": null,
+          "saveNames": 0,
+          "radarTaps": 0,
+          "radarDrags": 1,
+          "radarMoves": 7,
+          "cameraFacings": 0,
+          "cameraFacingPending": false,
+          "cameraHeading": null,
+          "cameraFacingError": "",
+          "lastRadarPoint": {
+            "x": 0.9138069235032155,
+            "y": 0.7875504927201704
+          },
+          "combatLock": false,
+          "autoFight": false,
+          "boxMode": false,
+          "queueMode": false,
+          "queueModifierHeld": false,
+          "stickyBuildActivations": 0,
+          "nativeStatsOpen": false,
+          "nativeObjectsOpen": false,
+          "pendingClicks": 0,
+          "nativeRenderFrames": 11655,
+          "queuedPointerEvents": 0,
+          "selectAlls": 0,
+          "manualSelectAlls": 0,
+          "combatOrders": 0,
+          "patrolOrders": 0,
+          "queuedOrders": 0,
+          "stopOrders": 0,
+          "stopPending": false,
+          "stopAcks": 0,
+          "stoppedUnitIds": [],
+          "baseJumps": 0,
+          "feedbacks": 5,
+          "doubleTaps": 0,
+          "coalescedSamples": 0,
+          "pointerCaptures": 7,
+          "zoomPreset": null,
+          "zoomPresetSelections": 0,
+          "zoomWheelEvents": 0,
+          "zoomCommandWrites": 0,
+          "zoomCommandErrors": 0,
+          "zoomAcks": 0,
+          "zoomPending": false,
+          "lastZoomDistance": null,
+          "gestureActive": false,
+          "hudVisible": true,
+          "battleActive": true,
+          "heldKeys": []
+        }
+      }
+    },
+    {
+      "name": "Finger pan releases cleanly with native camera movement",
+      "data": {
+        "before": {
+          "x": -724.2580703840242,
+          "y": 1917.6804711080945,
+          "hostY": 1975.6804749227917,
+          "hostX": -724.2580703840242,
+          "w": 1280,
+          "h": 576,
+          "pick": null
+        },
+        "after": {
+          "x": -858.1327988862095,
+          "y": 1519.7577141464994,
+          "hostY": 1577.7577179611967,
+          "hostX": -858.1327988862095,
+          "w": 1280,
+          "h": 576,
+          "pick": null
+        },
+        "touch": {
+          "active": true,
+          "version": 57,
+          "intercepted": 43,
+          "mouseEvents": 72,
+          "taps": 5,
+          "orders": 0,
+          "pans": 1,
+          "panMoves": 15,
+          "lastPanStartLatencyMs": 23.219999998807907,
+          "lastPanDispatchMs": 0.17000000178813934,
+          "maxPanDispatchMs": 0.33500000089406967,
+          "panPhase": "idle",
+          "panQueuedPointers": 0,
+          "panRearms": 1,
+          "panUnobservedRearms": 0,
+          "panHeldTimeouts": 0,
+          "panContextResets": 0,
+          "panQueueOverflows": 0,
+          "boxSelections": 6,
+          "boxCadenceWaits": 4,
+          "boxPressGaps": [
+            3699.429999999702,
+            316.3849999997765,
+            24995.485000001267,
+            316.9850000012666,
+            331.8950000014156,
+            317.34999999962747
+          ],
+          "lastNativeLeftDownAt": 53631.66000000015,
+          "manualSelectionRevision": 3,
+          "facilityOpens": 0,
+          "lastFacility": null,
+          "facilityError": "",
+          "pinchSteps": 0,
+          "tiltMoves": 0,
+          "tiltHeld": null,
+          "saveNames": 0,
+          "radarTaps": 0,
+          "radarDrags": 1,
+          "radarMoves": 7,
+          "cameraFacings": 0,
+          "cameraFacingPending": false,
+          "cameraHeading": null,
+          "cameraFacingError": "",
+          "lastRadarPoint": {
+            "x": 0.9138069235032155,
+            "y": 0.7875504927201704
+          },
+          "combatLock": false,
+          "autoFight": false,
+          "boxMode": false,
+          "queueMode": false,
+          "queueModifierHeld": false,
+          "stickyBuildActivations": 0,
+          "nativeStatsOpen": false,
+          "nativeObjectsOpen": false,
+          "pendingClicks": 0,
+          "nativeRenderFrames": 11691,
+          "queuedPointerEvents": 0,
+          "selectAlls": 0,
+          "manualSelectAlls": 0,
+          "combatOrders": 0,
+          "patrolOrders": 0,
+          "queuedOrders": 0,
+          "stopOrders": 0,
+          "stopPending": false,
+          "stopAcks": 0,
+          "stoppedUnitIds": [],
+          "baseJumps": 0,
+          "feedbacks": 5,
+          "doubleTaps": 0,
+          "coalescedSamples": 0,
+          "pointerCaptures": 8,
+          "zoomPreset": null,
+          "zoomPresetSelections": 0,
+          "zoomWheelEvents": 0,
+          "zoomCommandWrites": 0,
+          "zoomCommandErrors": 0,
+          "zoomAcks": 0,
+          "zoomPending": false,
+          "lastZoomDistance": null,
+          "gestureActive": false,
+          "hudVisible": true,
+          "battleActive": true,
+          "heldKeys": []
+        }
+      }
+    },
+    {
+      "name": "Campaign phone save",
+      "data": {
+        "loading": false,
+        "ready": true,
+        "busy": false,
+        "ended": false,
+        "hydrated": false,
+        "error": "",
+        "phase": "saved",
+        "status": "Game saved",
+        "statusAt": 1794409457908,
+        "savedId": "wt_f19c48857035494b86564ed4d35304b5",
+        "mode": "campaign",
+        "docSession": "439e703c-9987-4d9a-bd06-c064b45c997e",
+        "slotId": "",
+        "persistenceStarted": 1,
+        "persistenceCompleted": 1
+      }
+    },
+    {
+      "name": "Android Back Cancel and Return",
+      "data": true
+    },
+    {
+      "name": "Continue restores actual campaign world",
+      "data": {
+        "save": {
+          "loading": true,
+          "ready": true,
+          "busy": false,
+          "ended": false,
+          "hydrated": true,
+          "error": "",
+          "phase": "idle",
+          "status": "",
+          "statusAt": 0,
+          "savedId": "",
+          "mode": "campaign",
+          "docSession": "f248522c-498b-4d8b-b4f1-ac667a9e0300",
+          "slotId": "wt_f19c48857035494b86564ed4d35304b5",
+          "persistenceStarted": 0,
+          "persistenceCompleted": 0
+        },
+        "campaign": {
+          "snapshot": {
+            "mode": "campaign",
+            "mission": "cam1a",
+            "session": "cam1a-1794409478301",
+            "gameTime": 251802,
+            "missionTime": -1,
+            "missionType": 2,
+            "nativeLevel": "CAM_1A",
+            "paused": false,
+            "video": false,
+            "ui": {
+              "gameTime": 251802,
+              "intelligenceOpen": false,
+              "mode": "campaign",
+              "nativeLevel": "CAM_1A",
+              "nativeMenuOpen": false,
+              "nativeMode": 0,
+              "paused": false,
+              "playing": true,
+              "radar": {
+                "centerX": 1160,
+                "centerY": 397,
+                "height": 192,
+                "inverseCos": 1,
+                "inverseSin": 0,
+                "rotation": 0,
+                "viewportHeight": 517,
+                "viewportWidth": 1280,
+                "visible": true,
+                "width": 159
+              },
+              "realTime": 67889,
+              "transportOpen": false,
+              "video": false,
+              "worldSafe": true
+            },
+            "ended": false
+          },
+          "frame": {
+            "gameTime": 251802,
+            "intelligenceOpen": false,
+            "mode": "campaign",
+            "nativeLevel": "CAM_1A",
+            "nativeMenuOpen": false,
+            "nativeMode": 0,
+            "paused": false,
+            "playing": true,
+            "radar": {
+              "centerX": 1160,
+              "centerY": 397,
+              "height": 192,
+              "inverseCos": 1,
+              "inverseSin": 0,
+              "rotation": 0,
+              "viewportHeight": 517,
+              "viewportWidth": 1280,
+              "visible": true,
+              "width": 159
+            },
+            "realTime": 67940,
+            "transportOpen": false,
+            "video": false,
+            "worldSafe": true
+          },
+          "nativeState": {
+            "gameTime": 251802,
+            "intelligenceOpen": false,
+            "mode": "campaign",
+            "nativeLevel": "CAM_1A",
+            "nativeMenuOpen": false,
+            "nativeMode": 0,
+            "paused": false,
+            "playing": true,
+            "radar": {
+              "centerX": 1160,
+              "centerY": 397,
+              "height": 192,
+              "inverseCos": 1,
+              "inverseSin": 0,
+              "rotation": 0,
+              "viewportHeight": 517,
+              "viewportWidth": 1280,
+              "visible": true,
+              "width": 159
+            },
+            "realTime": 67940,
+            "transportOpen": false,
+            "video": false,
+            "worldSafe": true
+          },
+          "allCombat": false,
+          "suspended": false,
+          "selectedCount": 0,
+          "selectionPending": false,
+          "selectionRequests": 0,
+          "lastError": "",
+          "intent": "campaign-ui-1794409540095-125",
+          "physicalPointerCount": 0,
+          "inputSettling": false
+        },
+        "snapshot": {
+          "version": 1,
+          "gameTime": 251302,
+          "player": 0,
+          "power": 1046,
+          "rewards": null,
+          "facilityTargets": [
+            {
+              "id": 160285,
+              "kind": "factory",
+              "itemId": "A0LightFactory",
+              "x": 12,
+              "y": 48,
+              "z": 0,
+              "modules": 0,
+              "moduleId": "A0FacMod1",
+              "width": 3,
+              "breadth": 3,
+              "ready": true,
+              "nativeStatus": 1
+            }
+          ],
+          "facilityBlockers": [
+            {
+              "id": 160003,
+              "x": 12,
+              "y": 50,
+              "z": 0,
+              "bodySize": 1
+            },
+            {
+              "id": 160001,
+              "x": 13,
+              "y": 50,
+              "z": 0,
+              "bodySize": 1
+            },
+            {
+              "id": 160005,
+              "x": 13,
+              "y": 50,
+              "z": 0,
+              "bodySize": 1
+            },
+            {
+              "id": 160287,
+              "x": 14,
+              "y": 50,
+              "z": 0,
+              "bodySize": 1
+            },
+            {
+              "id": 160087,
+              "x": 16,
+              "y": 50,
+              "z": 0,
+              "bodySize": 1
+            },
+            {
+              "id": 160089,
+              "x": 16,
+              "y": 50,
+              "z": 0,
+              "bodySize": 1
+            },
+            {
+              "id": 160025,
+              "x": 16,
+              "y": 50,
+              "z": 0,
+              "bodySize": 1
+            },
+            {
+              "id": 160091,
+              "x": 16,
+              "y": 51,
+              "z": 0,
+              "bodySize": 1
+            }
+          ],
+          "mapWidth": 128,
+          "mapHeight": 128,
+          "alwaysQueue": true,
+          "researchQueues": [],
+          "hasHQ": true,
+          "selectedUnits": [
+            {
+              "id": 160025,
+              "x": 16,
+              "y": 50,
+              "z": 0,
+              "order": 25,
+              "constructor": false
+            },
+            {
+              "id": 160087,
+              "x": 16,
+              "y": 50,
+              "z": 0,
+              "order": 25,
+              "constructor": false
+            },
+            {
+              "id": 160089,
+              "x": 16,
+              "y": 50,
+              "z": 0,
+              "order": 25,
+              "constructor": false
+            },
+            {
+              "id": 160091,
+              "x": 16,
+              "y": 51,
+              "z": 0,
+              "order": 25,
+              "constructor": false
+            }
+          ],
+          "construction": [],
+          "constructionSites": [],
+          "nativeBuildOptions": [
+            "A0ADemolishStructure",
+            "A0LightFactory",
+            "A0PowerGenerator",
+            "A0ResearchFacility",
+            "A0ResourceExtractor"
+          ],
+          "moduleTargets": [
+            {
+              "id": 160285,
+              "itemId": "A0LightFactory",
+              "name": "Factory",
+              "kind": "FACTORY",
+              "moduleId": "A0FacMod1",
+              "x": 12,
+              "y": 48,
+              "z": 0,
+              "width": 3,
+              "breadth": 3,
+              "modules": 0,
+              "maximum": 2,
+              "reserved": 0,
+              "nativeStatus": 1,
+              "status": "unavailable",
+              "eligible": false,
+              "statusReason": "unavailable"
+            }
+          ],
+          "buildings": [
+            {
+              "id": "A0LightFactory",
+              "power": 100
+            },
+            {
+              "id": "A0PowerGenerator",
+              "power": 50
+            },
+            {
+              "id": "A0ResearchFacility",
+              "power": 100
+            },
+            {
+              "id": "A0ResourceExtractor",
+              "power": 0
+            }
+          ],
+          "parts": [
+            "Body1REC",
+            "MG1Mk1",
+            "Spade1Mk1",
+            "wheeled01"
+          ],
+          "trucks": [
+            {
+              "id": 160001,
+              "x": 13,
+              "y": 50,
+              "z": 0,
+              "selected": false,
+              "order": 0,
+              "action": 0,
+              "rate": 10,
+              "building": false,
+              "queued": 0
+            },
+            {
+              "id": 160003,
+              "x": 12,
+              "y": 50,
+              "z": 0,
+              "selected": false,
+              "order": 0,
+              "action": 0,
+              "rate": 10,
+              "building": false,
+              "queued": 0
+            },
+            {
+              "id": 160005,
+              "x": 13,
+              "y": 50,
+              "z": 0,
+              "selected": false,
+              "order": 0,
+              "action": 0,
+              "rate": 10,
+              "building": false,
+              "queued": 0
+            },
+            {
+              "id": 160287,
+              "x": 14,
+              "y": 50,
+              "z": 0,
+              "selected": false,
+              "order": 0,
+              "action": 0,
+              "rate": 10,
+              "building": false,
+              "queued": 0
+            }
+          ],
+          "jobs": [],
+          "factories": [
+            {
+              "id": 160285,
+              "number": 1,
+              "x": 12,
+              "y": 48,
+              "type": 1,
+              "kind": "Factory",
+              "templates": [
+                "native:[\"Truck Viper Wheels\",\"Body1REC\",\"wheeled01\",[],\"Spade1Mk1\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]"
+              ],
+              "modules": 0,
+              "ready": true,
+              "idle": true,
+              "active": null,
+              "currentProduction": null,
+              "progress": {
+                "available": false,
+                "currentId": "",
+                "currentName": "",
+                "templateId": null,
+                "completedBuildPoints": null,
+                "totalBuildPoints": null,
+                "ratio": null,
+                "state": "idle"
+              },
+              "queueKnown": true,
+              "waitingReason": null,
+              "queue": []
+            }
+          ],
+          "nativeMenu": "",
+          "templates": [
+            {
+              "fullname": "Truck Viper Wheels",
+              "name": "",
+              "id": "native:[\"Truck Viper Wheels\",\"Body1REC\",\"wheeled01\",[],\"Spade1Mk1\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+              "points": 272,
+              "power": 54,
+              "cost": 54,
+              "droidType": 3,
+              "body": "Body1REC",
+              "propulsion": "wheeled01",
+              "brain": "ZNULLBRAIN",
+              "repair": "ZNULLREPAIR",
+              "ecm": "ZNULLECM",
+              "sensor": "ZNULLSENSOR",
+              "construct": "Spade1Mk1",
+              "weapons": []
+            }
+          ],
+          "finishedUnits": [
+            {
+              "body": "Body1REC",
+              "factoryId": 160285,
+              "gameTime": 93602,
+              "id": 160287,
+              "name": "Truck Viper Wheels",
+              "propulsion": "wheeled01"
+            }
+          ],
+          "finishedBuilds": [
+            {
+              "gameTime": 39802,
+              "id": "cmd-1794409278565-46",
+              "itemId": "A0CommandCentre",
+              "workers": [
+                160003,
+                160001,
+                160005
+              ],
+              "x": 16,
+              "y": 54
+            },
+            {
+              "gameTime": 63802,
+              "id": "cmd-1794409303963-132",
+              "itemId": "A0LightFactory",
+              "workers": [
+                160005,
+                160001,
+                160003
+              ],
+              "x": 12,
+              "y": 48
+            }
+          ]
+        },
+        "errors": [],
+        "baseReturn": {
+          "point": {
+            "x": 662.3871672111396,
+            "y": 393.6920455809597
+          },
+          "touch": {
+            "active": true,
+            "version": 57,
+            "intercepted": 0,
+            "mouseEvents": 0,
+            "taps": 0,
+            "orders": 0,
+            "pans": 0,
+            "panMoves": 0,
+            "lastPanStartLatencyMs": null,
+            "lastPanDispatchMs": null,
+            "maxPanDispatchMs": 0,
+            "panPhase": "idle",
+            "panQueuedPointers": 0,
+            "panRearms": 0,
+            "panUnobservedRearms": 0,
+            "panHeldTimeouts": 0,
+            "panContextResets": 0,
+            "panQueueOverflows": 0,
+            "boxSelections": 0,
+            "boxCadenceWaits": 0,
+            "boxPressGaps": [],
+            "lastNativeLeftDownAt": null,
+            "manualSelectionRevision": 0,
+            "facilityOpens": 0,
+            "lastFacility": null,
+            "facilityError": "",
+            "pinchSteps": 0,
+            "tiltMoves": 0,
+            "tiltHeld": null,
+            "saveNames": 0,
+            "radarTaps": 0,
+            "radarDrags": 0,
+            "radarMoves": 0,
+            "cameraFacings": 0,
+            "cameraFacingPending": false,
+            "cameraHeading": null,
+            "cameraFacingError": "",
+            "lastRadarPoint": null,
+            "combatLock": false,
+            "autoFight": false,
+            "boxMode": false,
+            "queueMode": false,
+            "queueModifierHeld": false,
+            "stickyBuildActivations": 0,
+            "nativeStatsOpen": false,
+            "nativeObjectsOpen": false,
+            "pendingClicks": 0,
+            "nativeRenderFrames": 0,
+            "queuedPointerEvents": 0,
+            "selectAlls": 0,
+            "manualSelectAlls": 0,
+            "combatOrders": 0,
+            "patrolOrders": 0,
+            "queuedOrders": 0,
+            "stopOrders": 0,
+            "stopPending": false,
+            "stopAcks": 0,
+            "stoppedUnitIds": [],
+            "baseJumps": 1,
+            "feedbacks": 0,
+            "doubleTaps": 0,
+            "coalescedSamples": 0,
+            "pointerCaptures": 0,
+            "zoomPreset": null,
+            "zoomPresetSelections": 0,
+            "zoomWheelEvents": 0,
+            "zoomCommandWrites": 1,
+            "zoomCommandErrors": 0,
+            "zoomAcks": 0,
+            "zoomPending": false,
+            "lastZoomDistance": null,
+            "gestureActive": false,
+            "hudVisible": true,
+            "battleActive": true,
+            "heldKeys": []
+          },
+          "save": {
+            "loading": true,
+            "ready": true,
+            "busy": false,
+            "ended": false,
+            "hydrated": true,
+            "error": "",
+            "phase": "idle",
+            "status": "",
+            "statusAt": 0,
+            "savedId": "",
+            "mode": "campaign",
+            "docSession": "b876bab8-a97e-4944-b22a-a175eed42d95",
+            "slotId": "wt_f19c48857035494b86564ed4d35304b5",
+            "persistenceStarted": 0,
+            "persistenceCompleted": 0
+          }
+        }
+      }
+    }
+  ]
+}

@@ -31,6 +31,43 @@ function warzoneTowersWaves_refreshClears()
     state.completedWaves.sort(function(a,b) {return a-b;});
 }
 
+function warzoneTowersWaves_templateName(template)
+{
+    // Use the native selections, never sample an authored random pool again.
+    if (typeof template.body === "string" && typeof template.propulsion === "string" && Array.isArray(template.turrets)) {
+        return template.turrets.join(" ") + " " + template.body + " " + template.propulsion;
+    }
+    return typeof template.name === "string" ? template.name : "";
+}
+
+function warzoneTowersWaves_incoming()
+{
+    const state=warzoneTowersWaves_tracking(),row=state.waveRows[String(state.wave)];
+    // Older saves have no historical composition. Do not reconstruct it from
+    // the surviving units, which would omit casualties and already-issued units.
+    if (!row || !row.roster || row.rosterKnown !== true) return null;
+    const units=Object.keys(row.roster).sort().map(function(name) {
+        const item=row.roster[name];
+        return {name:name,count:item.count,spawned:item.spawned};
+    }).filter(function(item) {return item.count>0;});
+    return {wave:row.wave,total:units.reduce(function(total,item) {return total+item.count;},0),
+        spawned:row.spawned,complete:row.batches>=row.expectedBatches,units:units};
+}
+
+function warzoneTowersWaves_upcoming()
+{
+    const state=warzoneTowersWaves_state,wave=state.wave+1;
+    if (!state.waiting || wave>totalRounds) return null;
+    let round=0,total=0;
+    actions.forEach(function(action) {
+        if (action.type === "round") round=action.round;
+        else if (action.type === "spawn" && round===wave) total+=action.count;
+    });
+    // Only the total is predetermined. Per-type counts are selected by the
+    // supplied processSpawn when the wave begins, using its existing RNG calls.
+    return {wave:wave,total:total};
+}
+
 const warzoneTowersOriginalSpawnTemplate=Template.spawn;
 Template.spawn=function(template,player,x,y) {
     const droid=warzoneTowersOriginalSpawnTemplate.call(Template,template,player,x,y);
@@ -38,6 +75,12 @@ Template.spawn=function(template,player,x,y) {
     if (player===scavAI && row) {
         if (droid) {row.spawned++;row.units[String(droid.id)]=true;state.unitWaves[String(droid.id)]=row.wave;}
         else row.failed=true;
+        if (row.roster && row.rosterKnown === true) {
+            const item=row.roster[warzoneTowersWaves_templateName(template)];
+            if (!item) row.rosterKnown=false;
+            else if (droid) item.spawned++;
+            else item.count=Math.max(0,item.count-1);
+        }
     }
     return droid;
 };
@@ -48,7 +91,18 @@ processSpawn=function(action) {
     if (row) {
         row.batches++;
         if (action.count>0 && Spawner.queue.length-before!==action.count) row.failed=true;
-        for (let i=before;i<Spawner.queue.length;i++) Spawner.queue[i].__towersWave=row.wave;
+        for (let i=before;i<Spawner.queue.length;i++) {
+            const template=Spawner.queue[i];
+            template.__towersWave=row.wave;
+            if (row.roster && row.rosterKnown === true) {
+                const name=warzoneTowersWaves_templateName(template);
+                if (!name) row.rosterKnown=false;
+                else {
+                    if (!Object.prototype.hasOwnProperty.call(row.roster,name)) row.roster[name]={count:0,spawned:0};
+                    row.roster[name].count++;
+                }
+            }
+        }
     }
     return result;
 };
@@ -65,7 +119,8 @@ processRound = function (action) {
     warzoneTowersWaves_state.deadline = 0;
     const state=warzoneTowersWaves_tracking();let round=0,expected=0;
     actions.forEach(function(entry) {if (entry.type==="round") round=entry.round;else if (entry.type==="spawn" && round===action.round) expected++;});
-    state.waveRows[String(action.round)]={wave:action.round,expectedBatches:expected,batches:0,spawned:0,units:{},failed:false,cleared:false};
+    state.waveRows[String(action.round)]={wave:action.round,expectedBatches:expected,batches:0,spawned:0,units:{},failed:false,cleared:false,
+        roster:{},rosterKnown:true};
     warzoneTowersOriginalRound(action);
     warzoneTowersWaves_emit(true);
 };
@@ -133,7 +188,7 @@ function warzoneTowersWaves_emit(force) {
     warzoneTowersWaves_refreshClears();
     const state = warzoneTowersWaves_state;
     const enemies = enumDroid(scavAI, DROID_ANY);
-    const payload = { version:3, mode:"tower-defense", gameTime:gameTime,
+    const payload = { version:4, mode:"tower-defense", gameTime:gameTime,
         lastCommand:state.lastCommand, phase:state.phase, wave:state.wave, totalRounds:totalRounds,
         nextWave:Math.min(totalRounds, state.wave + 1),
         nextWaveIn:state.waiting ? Math.max(0, Math.ceil((state.deadline-gameTime)/1000)) : null,
@@ -143,6 +198,7 @@ function warzoneTowersWaves_emit(force) {
         power:playerPower(selectedPlayer), rewardCount:state.rewardCount,
         rewardPower:state.rewardPower, lastReward:state.lastReward,
         completedWaves:state.completedWaves.slice(),
+        incoming:warzoneTowersWaves_incoming(),upcoming:warzoneTowersWaves_upcoming(),
         rewards:typeof wtreward_state==="function" ? wtreward_state() : null };
     const signature = JSON.stringify(payload);
     if (force || signature !== warzoneTowersWaves_lastSignature) {

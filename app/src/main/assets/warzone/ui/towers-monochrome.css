@@ -1,0 +1,258 @@
+/* Shared monochrome theme for Towers chrome. Keep the accepted layout, world canvas and item art intact.
+ * Loaded after towers-shell in both host and game documents; the scoped body
+ * selectors also win over later legacy component styles without a global reset.
+ */
+body.wt-towers-polished {
+  --towers-bg:#0c0c0c;
+  --towers-panel:#111111;
+  --towers-control:#252525;
+  --towers-selected:#f4f4f4;
+  --towers-pressed:#151515;
+  --towers-text:#f4f4f4;
+  --towers-muted:#bcbcbc;
+  --towers-disabled:#888888;
+  /* Legacy accent tokens also appear in labels: keep them as readable light text.
+   * Selected/primary surfaces always use --towers-selected explicitly. */
+  --towers-accent:var(--towers-text);
+  --towers-ink:#101010;
+  --towers-line:transparent;
+  --towers-power:var(--towers-text);
+  --wt-hud-safe-right:max(16px,env(safe-area-inset-right,0px));
+  --wt-wave-width:174px;
+  --lab-bg:var(--towers-bg);
+  --lab-panel:var(--towers-panel);
+  --lab-line:transparent;
+  --lab-ink:var(--towers-text);
+  --lab-muted:var(--towers-muted);
+  --lab-teal:var(--towers-text);
+  --lab-amber:var(--towers-text);
+  --wt-ink:var(--towers-text);
+  --wt-surface:var(--towers-panel);
+  color-scheme:dark;
+  background:var(--towers-bg)!important;
+  color:var(--towers-text);
+}
+
+/* Header and field controls retain the current scroll/touch dimensions. */
+body.wt-towers-polished #warzone-command-strip {background:var(--towers-bg)}
+body.wt-towers-polished #warzone-command-strip #blocknight-combat-hud.wt-modern {background:transparent}
+body.wt-towers-polished #warzone-command-strip #blocknight-combat-hud button {
+  color:var(--towers-text);
+}
+body.wt-towers-polished #warzone-command-strip #blocknight-combat-hud button.active,
+body.wt-towers-polished #warzone-command-strip #blocknight-combat-hud button[aria-expanded=true] {
+  background:var(--towers-selected);color:var(--towers-text);box-shadow:none;
+}
+body.wt-towers-polished #warzone-command-strip #blocknight-combat-hud button img {
+  filter:none;opacity:1;
+}
+/* The crystal is existing artwork, not a line icon. */
+body.wt-towers-polished #warzone-command-strip #blocknight-combat-hud #blocknight-rewards img {filter:none}
+body.wt-towers-polished #warzone-command-strip #blocknight-combat-hud #blocknight-music[aria-expanded=false] {
+  background:transparent;box-shadow:none;
+}
+body.wt-towers-polished #warzone-towers-wave-hud strong {color:var(--towers-text)}
+body.wt-towers-polished #warzone-towers-wave-hud .wt-wave-detail {color:var(--towers-muted)}
+/* Keep Wave/Skip inward from the curved edge and reserve its real width, so
+ * the horizontal command row cannot slide underneath the wave controls. */
+body.wt-towers-polished #warzone-command-strip #warzone-towers-wave-hud {
+  right:var(--wt-hud-safe-right);width:var(--wt-wave-width);
+}
+body.wt-towers-polished #warzone-command-strip #blocknight-combat-hud {
+  right:calc(var(--wt-wave-width) + var(--wt-hud-safe-right) + 5px);
+}
+body.wt-towers-polished #wt-wave-incoming {
+  right:var(--wt-hud-safe-right);max-width:calc(100vw - var(--wt-hud-safe-right) - 8px);
+}
+@media(max-width:900px){body.wt-towers-polished{--wt-wave-width:164px}}
+@media(max-width:620px){body.wt-towers-polished{--wt-wave-width:144px}}
+body.wt-towers-polished #warzone-towers-wave-hud #warzone-towers-next-wave {
+  background:var(--towers-control);color:var(--towers-text);border:0;
+}
+body.wt-towers-polished #lab-ops,
+body.wt-towers-polished #wt-field-centre {background:var(--towers-panel)}
+body.wt-towers-polished #lab-ops button {border:0;background:transparent;color:var(--towers-text)}
+body.wt-towers-polished #lab-ops b {color:var(--towers-text)}
+body.wt-towers-polished #lab-ops small,
+body.wt-towers-polished #lab-ops .lab-running small {color:var(--towers-muted)}
+body.wt-towers-polished #lab-ops .wt-status-selected b,
+body.wt-towers-polished #lab-ops .wt-status-selected small {color:var(--towers-ink)}
+body.wt-towers-polished #lab-ops-toggle {color:var(--towers-muted)!important}
+body.wt-towers-polished #lab-ops button:hover,
+body.wt-towers-polished #lab-ops button:focus-visible {background:var(--towers-control);outline-color:var(--towers-text)}
+/* Touch can leave hover/focus active after opening a sidebar. Keep the selected
+ * surface paired with the dark labels through each of those states. */
+body.wt-towers-polished #lab-ops button.wt-status-selected,
+body.wt-towers-polished #lab-ops button.wt-status-selected:hover,
+body.wt-towers-polished #lab-ops button.wt-status-selected:focus-visible {
+  background:var(--towers-selected);color:var(--towers-ink);
+}
+body.wt-towers-polished #wt-field-centre button {
+  background:var(--towers-control);color:var(--towers-text);
+}
+body.wt-towers-polished #wt-field-centre button.active,
+body.wt-towers-polished #wt-field-centre #wt-demolish.active {
+  background:var(--towers-selected);color:var(--towers-ink);border-color:transparent;
+}
+body.wt-towers-polished #wt-field-centre button img {filter:none}
+body.wt-towers-polished #wt-field-toggle,
+body.wt-towers-polished #wt-placement-map {
+  border:0;background:var(--towers-control);color:var(--towers-text);box-shadow:none;
+}
+body.wt-towers-polished #wt-field-toggle img,
+body.wt-towers-polished #wt-placement-map img {filter:none}
+body.wt-towers-polished #wt-field-toggle[aria-expanded=true] {background:var(--towers-selected)}
+body.wt-towers-polished #wt-field-toggle[aria-expanded=true] img {filter:none}
+body.wt-towers-polished #wt-field-toggle-count {background:var(--towers-control);color:var(--towers-text)}
+body.wt-towers-polished #wt-demolish-bar {
+  border:0;background:var(--towers-bg);color:var(--towers-text);box-shadow:none;
+}
+body.wt-towers-polished #wt-demolish-bar strong {color:var(--towers-text)}
+body.wt-towers-polished #wt-demolish-bar button {background:var(--towers-control);color:var(--towers-text)}
+
+/* Build uses the same dark surfaces and white selected controls.
+ * No world placement/validity, blueprint or native model selectors are themed.
+ */
+body.wt-towers-polished #wt-build-sidebar {
+  border:0;background:var(--towers-panel);color:var(--towers-text);box-shadow:none;
+}
+body.wt-towers-polished #wt-build-sidebar header,
+body.wt-towers-polished #wt-build-sidebar nav,
+body.wt-towers-polished #wt-sidebar-queue {background:transparent;border:0}
+body.wt-towers-polished #wt-sidebar-power {color:var(--towers-text)}
+body.wt-towers-polished #wt-sidebar-builders {color:var(--towers-muted)}
+body.wt-towers-polished #wt-build-sidebar button {border:0;color:var(--towers-text);box-shadow:none}
+body.wt-towers-polished #wt-build-sidebar nav button {background:transparent;color:var(--towers-muted)}
+body.wt-towers-polished #wt-build-sidebar nav button.active {
+  background:var(--towers-selected);color:var(--towers-ink);
+}
+body.wt-towers-polished #wt-sidebar-catalogue>button {background:var(--towers-control);color:var(--towers-text)}
+body.wt-towers-polished #wt-sidebar-catalogue>button.active {
+  background:var(--towers-selected);color:var(--towers-ink);box-shadow:none;
+}
+body.wt-towers-polished #wt-sidebar-catalogue>button.active>strong {color:var(--towers-ink)}
+body.wt-towers-polished #wt-sidebar-catalogue img {filter:none}
+body.wt-towers-polished #wt-sidebar-catalogue>button>small {
+  background:var(--towers-bg);color:var(--towers-text);
+}
+body.wt-towers-polished #wt-sidebar-catalogue .wt-native-art-label {color:var(--towers-muted)}
+body.wt-towers-polished #wt-sidebar-catalogue>button.active .wt-native-art-label {color:var(--towers-ink)}
+body.wt-towers-polished #wt-sidebar-catalogue button.loading:before,
+body.wt-towers-polished .wt-sidebar-spinner {border-color:var(--towers-control);border-top-color:var(--towers-text)}
+body.wt-towers-polished #wt-catalogue-track {background:var(--towers-control)}
+body.wt-towers-polished #wt-catalogue-track i {background:var(--towers-muted)}
+body.wt-towers-polished #wt-sidebar-queue h2,
+body.wt-towers-polished #wt-sidebar-queue .wt-site-number,
+body.wt-towers-polished #wt-sidebar-queue .wt-site-row strong {color:var(--towers-text)}
+body.wt-towers-polished #wt-sidebar-queue h2 span,
+body.wt-towers-polished #wt-sidebar-queue .wt-site-row small,
+body.wt-towers-polished #wt-sidebar-queue p {color:var(--towers-muted)}
+body.wt-towers-polished #wt-sidebar-queue .wt-site-row {border:0}
+body.wt-towers-polished #wt-sidebar-queue progress {accent-color:var(--towers-text);background:var(--towers-control)}
+body.wt-towers-polished #wt-sidebar-queue progress::-webkit-progress-bar {background:var(--towers-control)}
+body.wt-towers-polished #wt-sidebar-queue progress::-webkit-progress-value {background:var(--towers-text)}
+body.wt-towers-polished #wt-build-sidebar .wt-all-sites {background:transparent;color:var(--towers-text)}
+body.wt-towers-polished #wt-build-sidebar .wt-sidebar-exit {background:var(--towers-control);color:var(--towers-text)}
+body.wt-towers-polished #wt-module-guidance {background:transparent;border:0;color:var(--towers-text)}
+body.wt-towers-polished #wt-module-guidance small {color:var(--towers-muted)}
+body.wt-towers-polished #wt-sidebar-notice {border:0;background:var(--towers-control);color:var(--towers-text)}
+body.wt-towers-polished #wt-command-pages .wt-live-dot {background:var(--towers-text);box-shadow:none}
+
+/* Help, Music and non-blocking feedback share the same small, flat surfaces. */
+body.wt-towers-polished #wt-build-status,
+body.wt-towers-polished #wt-command-toast,
+body.wt-towers-polished #wt-native-back,
+body.wt-towers-polished #wt-game-notice {
+  background:var(--towers-bg);color:var(--towers-text);border:0;box-shadow:none;
+}
+body.wt-towers-polished #wt-game-notice strong {color:var(--towers-text)}
+body.wt-towers-polished #wt-game-notice span {color:var(--towers-muted)}
+body.wt-towers-polished #warzone-towers-help.wt-towers-guide {background:var(--towers-panel);color:var(--towers-text)}
+body.wt-towers-polished #warzone-towers-help.wt-towers-guide h1,
+body.wt-towers-polished #warzone-towers-help.wt-towers-guide h2,
+body.wt-towers-polished #warzone-towers-help.wt-towers-guide b {color:var(--towers-text)}
+body.wt-towers-polished #warzone-towers-help.wt-towers-guide .wt-help-eyebrow,
+body.wt-towers-polished #warzone-towers-help.wt-towers-guide footer span {color:var(--towers-muted)}
+body.wt-towers-polished #warzone-towers-help.wt-towers-guide button {background:var(--towers-control);color:var(--towers-text)}
+body.wt-towers-polished #warzone-towers-help.wt-towers-guide .wt-help-settings [aria-pressed=true] {
+  background:var(--towers-selected);color:var(--towers-ink);box-shadow:none;
+}
+body.wt-towers-polished #warzone-towers-help.wt-towers-guide .wt-help-queue {border:0}
+body.wt-towers-polished #wt-map-music-menu {background:var(--towers-panel);color:var(--towers-text);box-shadow:none}
+body.wt-towers-polished #wt-map-music-menu strong {color:var(--towers-text)}
+body.wt-towers-polished #wt-map-music-menu button {background:var(--towers-control);color:var(--towers-text)}
+body.wt-towers-polished #wt-map-music-menu [data-music-close] {background:transparent}
+body.wt-towers-polished #wt-map-music-menu [aria-pressed=true] {background:var(--towers-selected);color:var(--towers-ink)}
+body.wt-towers-polished #wt-map-music-menu [data-music-author],
+body.wt-towers-polished #wt-map-music-menu [data-music-status] {color:var(--towers-muted)}
+body.wt-towers-polished #wt-wave-crystals {color:var(--towers-text)!important}
+body.wt-towers-polished #wt-wave-incoming {color:var(--towers-text)}
+body.wt-towers-polished #wt-wave-incoming>button,
+body.wt-towers-polished #wt-wave-incoming .wt-incoming-panel {
+  background:var(--towers-panel);color:var(--towers-text);box-shadow:none;
+}
+body.wt-towers-polished #wt-wave-incoming>button[aria-expanded=true] {background:var(--towers-selected)}
+body.wt-towers-polished #wt-wave-incoming>button:focus-visible {outline-color:var(--towers-text)}
+body.wt-towers-polished #wt-wave-incoming .wt-incoming-note {color:var(--towers-muted)}
+/* This pre-existing background-sync notice sets its palette inline. Override
+ * only its three chrome colors; its native status text and lifetime remain. */
+body.wt-towers-polished #bn-tech-queue-status {
+  background:var(--towers-bg)!important;color:var(--towers-text)!important;border-color:transparent!important;
+}
+
+/* Residual legacy sub-page elements use the same palette. Geometry, native
+ * model aperture and battlefield/placement colours are intentionally untouched.
+ */
+body.wt-towers-polished #wt-build-busy,
+body.wt-towers-polished #wt-native-build-mask {background:var(--towers-panel);color:var(--towers-text)}
+body.wt-towers-polished #warzone-towers-preparation {
+  background:var(--towers-panel);color:var(--towers-text);border:0;box-shadow:none;
+}
+body.wt-towers-polished #warzone-towers-preparation h1 {color:var(--towers-text)}
+body.wt-towers-polished #warzone-towers-preparation button {
+  background:var(--towers-selected);color:var(--towers-text);border:0;
+}
+body.wt-towers-polished #warzone-towers-preparation::backdrop {background:#11111199}
+body.wt-towers-polished #wt-build-status button {
+  background:var(--towers-control);color:var(--towers-text);border:0;
+}
+body.wt-towers-polished #wt-placement-label,
+body.wt-towers-polished #wt-build-status #wt-builder-summary {color:var(--towers-text)}
+body.wt-towers-polished #wt-command-pages .wt-configuration b,
+body.wt-towers-polished #wt-command-pages .wt-production-list,
+body.wt-towers-polished #wt-command-pages .wt-production-list b,
+body.wt-towers-polished #wt-command-pages .wt-queue-row b,
+body.wt-towers-polished #wt-command-pages .wt-queue-row h2,
+body.wt-towers-polished #wt-command-pages .wt-detail h2,
+body.wt-towers-polished #wt-command-pages .wt-detail dd,
+body.wt-towers-polished #wt-command-pages .wt-step-number {color:var(--towers-text)}
+body.wt-towers-polished #wt-command-pages .wt-production-list span,
+body.wt-towers-polished #wt-command-pages .wt-queue-row p,
+body.wt-towers-polished #wt-command-pages .wt-detail p,
+body.wt-towers-polished #wt-command-pages .wt-detail dt,
+body.wt-towers-polished #wt-command-pages .wt-rail-note,
+body.wt-towers-polished #wt-command-pages .wt-rail-note b,
+body.wt-towers-polished #wt-command-pages .wt-section-title {color:var(--towers-muted)}
+body.wt-towers-polished #wt-command-pages .wt-tag,
+body.wt-towers-polished #wt-command-pages .wt-queue-row,
+body.wt-towers-polished #wt-command-pages .wt-active-production {
+  background:transparent;color:var(--towers-text);border:0;box-shadow:none;
+}
+body.wt-towers-polished #wt-command-pages .wt-detail>img,
+body.wt-towers-polished #wt-command-pages .wt-unit-parts>span {
+  background:transparent;border-color:transparent;
+}
+body.wt-towers-polished #wt-command-pages input,
+body.wt-towers-polished #wt-command-pages select,
+body.wt-towers-polished #wt-command-pages option {
+  background:var(--towers-control);color:var(--towers-text);accent-color:var(--towers-ink);
+}
+
+body.wt-towers-polished #wt-build-sidebar button:focus-visible,
+body.wt-towers-polished #wt-field-centre button:focus-visible,
+body.wt-towers-polished #wt-field-toggle:focus-visible,
+body.wt-towers-polished #wt-placement-map:focus-visible,
+body.wt-towers-polished #wt-map-music-menu button:focus-visible,
+body.wt-towers-polished #warzone-towers-help.wt-towers-guide button:focus-visible,
+body.wt-towers-polished #warzone-towers-help.wt-towers-guide .wt-help-content:focus-visible,
+body.wt-towers-polished #wt-game-notice:focus-visible {outline:2px solid var(--towers-text);outline-offset:-2px}

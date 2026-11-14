@@ -1,0 +1,13 @@
+{
+  "candidateAPK_SHA256": "a699ad22cd103a06a8853d33e2b8ae85cf97242e93cfd612edbc1a287da5275d",
+  "kind": "product",
+  "originatingCase": "ffa-controls-save-load",
+  "observedDuring": "closing the restored world before the next screen case",
+  "nativeRuntimeError": {
+    "case": "ffa-phone-layouts",
+    "source": "native-log",
+    "value": "info    |03:28:08: [addTimerNode:243] Assert in Warzone: /home/punkech/wz-blueprint-20261107/source/src/qtscript.cpp:243 (timerIDMap.count(node->timerID) == 0), last script event: ''"
+  },
+  "visibleRestorationSucceeded": true,
+  "resolution": "V32 bridge timer registration moved from top-level script evaluation into the native start/load lifecycle after save hydration. Legitimate saved timers remain unchanged."
+}

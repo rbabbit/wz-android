@@ -1,0 +1,328 @@
+{
+  "version": "0.33",
+  "versionCode": 33,
+  "candidateAPK_SHA256": "9988786994ef4ee9b3c426bd4af690a9e6f382a94bbeed0dfc351546c51cf0f7",
+  "scope": "Compact single-tap Rewards, top Gain action, Save response and scoped privacy access.",
+  "emulatorUsed": true,
+  "gameplayVerified": false,
+  "testAdsOnly": true,
+  "liveAdsTested": false,
+  "emulatorProof": {
+    "path": "qa/0.33-rewards-save/focused-emulator-proof.json",
+    "sha256": "6f0b4c72e26b47d42e6d8825f764cc586a516c80972f9623d2cf97d5ad92c3bb"
+  },
+  "focusedEmulatorChecks": [
+    {
+      "name": "One normal Home Cannon row tap spends 120 crystals and adds exactly one stored fortress (195→75)",
+      "passed": true
+    },
+    {
+      "name": "Two normal Pulse row taps add two items; Selected2→1 changes allocation without charge or stock loss",
+      "passed": true
+    },
+    {
+      "name": "Unaffordable Home item tap leaves the wallet, inventory and allocation unchanged with inline feedback",
+      "passed": true
+    },
+    {
+      "name": "One live Ripple row tap spends 10 crystals (45→35) and acknowledges exactly one native remaining item",
+      "passed": true
+    },
+    {
+      "name": "SAVE acknowledges its first normal ADB header tap synchronously with SAVING and remains disabled while busy",
+      "passed": true
+    },
+    {
+      "name": "A concurrent second public save() call retains the same operation serial and cannot create a duplicate request",
+      "passed": true
+    },
+    {
+      "name": "SAVE displays SAVED only after the native persistence callback and phone archive acknowledge completion",
+      "passed": true
+    },
+    {
+      "name": "Saving again after menu return succeeds; Home Saved Games reloads that exact second slot and preserves native fortress/Ripple allowances",
+      "passed": true
+    },
+    {
+      "name": "Top Gain action opens a real Google sample rewarded ad; earned callback credits 10 crystals once (35→45→45)",
+      "passed": true
+    },
+    {
+      "name": "Top Privacy action opens the real Google consent form; normal Do not consent returns to Home Rewards without a second ad grant",
+      "passed": true
+    },
+    {
+      "name": "Current small-screen Home and in-game Rewards show compact item rows, top Gain/category controls and no purchase footer or giant Rewards heading",
+      "passed": true
+    },
+    {
+      "name": "Final 2400x1080 phone Home and in-game Rewards show the same compact direct-tap rows, top Gain/Privacy and four fortress entries without a heading, purchase controls or footer",
+      "passed": true
+    },
+    {
+      "name": "On the phone viewport SAVE also shows disabled SAVING immediately and acknowledged SAVED after a fresh archive; the loaded native Ripple allowance remains1",
+      "passed": true
+    },
+    {
+      "name": "All97 original app-private files, wallet195, saved games, designs and consent preferences are restored byte-for-byte before relaunch",
+      "passed": true
+    },
+    {
+      "name": "Original display override600x1080, density240, font1, airplane disabled, WiFi/mobile1 and null installer-reserve setting are restored",
+      "passed": true
+    }
+  ],
+  "focusedObservations": {
+    "singleTapPurchaseVerified": true,
+    "saveFeedbackAndPersistenceVerified": true,
+    "homeAndGameLayoutsVerified": true,
+    "privacyAccessVerified": true
+  },
+  "emulatorEvidenceFiles": [
+    {
+      "path": "qa/0.33-rewards-save/selected-mock-source.png",
+      "sha256": "35f3b27973e24f9dbaafc9d2c87c257d8ea39040931e66149c58497f52ba391f"
+    },
+    {
+      "path": "qa/0.33-rewards-save/home-rewards-first.png",
+      "sha256": "caff2e9aa0e37509061325f5347acc5cc7b3ae9eab27269d2672668d8c388549"
+    },
+    {
+      "path": "qa/0.33-rewards-save/home-one-cannon.png",
+      "sha256": "d945846496e2767cf90ae57ed4dfa36e02616ab68708e9ccb229dfdb416819dc"
+    },
+    {
+      "path": "qa/0.33-rewards-save/home-owned-chooser.png",
+      "sha256": "5070df0b6868be7568c97d59f2609bfb7b25fb5963937eb78dee3eb17fc0efb8"
+    },
+    {
+      "path": "qa/0.33-rewards-save/home-partial-owned.png",
+      "sha256": "22781273c7959eb5362fc891f04c45986458a7b4ff02bc08ae9370da02493671"
+    },
+    {
+      "path": "qa/0.33-rewards-save/home-insufficient.png",
+      "sha256": "85f0820d99bc37e60fc04158d4610466a151c9ee5867f0b94fc003e65db29ee1"
+    },
+    {
+      "path": "qa/0.33-rewards-save/game-rewards-compact.png",
+      "sha256": "c1373e251ac07b6e3e46d31c133250b80a837b9ed5a27fc61270ccc754ee3a74"
+    },
+    {
+      "path": "qa/0.33-rewards-save/game-one-ripple.png",
+      "sha256": "7f15f14622999fd4372a033008d3671bfb82f119deab58b9eebf02e53db0c93e"
+    },
+    {
+      "path": "qa/0.33-rewards-save/save-immediate-feedback.png",
+      "sha256": "05a1c0e85d961f53b7713b6e6144bf8a0d28c43d506d3a3184f949b2bcf0fdc4"
+    },
+    {
+      "path": "qa/0.33-rewards-save/save-acknowledged.png",
+      "sha256": "f47c6805a8313cfaa22eb72ee6adb4f3f2c6004bfbaf359db697063779e831b9"
+    },
+    {
+      "path": "qa/0.33-rewards-save/saved-game-list.png",
+      "sha256": "89162d6a790894623f3f08aea12f2c3f766c5092116279b3edbe60832a80a920"
+    },
+    {
+      "path": "qa/0.33-rewards-save/saved-game-reloaded.png",
+      "sha256": "def5ab915a16f0267c36841d2235eab482239036e03195d474338b1776aff666"
+    },
+    {
+      "path": "qa/0.33-rewards-save/delivery-home-user-phone.png",
+      "sha256": "88f9b74682f4d9dee946591ab804aa017440514ad9987f0aff40794a44ae309e"
+    },
+    {
+      "path": "qa/0.33-rewards-save/delivery-gain-requested.png",
+      "sha256": "32d16baea619be021f5d0864b2958741d4f7c685f02295b5d8e930d6016f3307"
+    },
+    {
+      "path": "qa/0.33-rewards-save/delivery-google-test-ad.png",
+      "sha256": "a4c869fe2b29c16523be05e636c62837e05bbb02a9283cead22e950413b5c63c"
+    },
+    {
+      "path": "qa/0.33-rewards-save/delivery-privacy-form.png",
+      "sha256": "31d07ae0529f924f6ab19b63c35e385419b00e8b8b2728c91d381299aede622f"
+    },
+    {
+      "path": "qa/0.33-rewards-save/delivery-privacy-returned.png",
+      "sha256": "391028fe231d9fcb9473e48d60f507190b7685253d48de3dc203a9e85ee67f3c"
+    },
+    {
+      "path": "qa/0.33-rewards-save/delivery-game-user-phone.png",
+      "sha256": "76584208c322b17993c26d778ccd0a8b805ff93ebed50acf8e96e7d95c71ac4b"
+    },
+    {
+      "path": "qa/0.33-rewards-save/delivery-phone-saving.png",
+      "sha256": "b4df0148bc534800f87ec0b41af9bad0a5dc8570ea01ccffdf8b597c177917ac"
+    },
+    {
+      "path": "qa/0.33-rewards-save/delivery-phone-saved.png",
+      "sha256": "c6c89ebf1ab2f6013ba559ba108476d3dfff9db5de0116d78ee0ab226d19c648"
+    }
+  ],
+  "supportingObservations": [
+    {
+      "path": "qa/0.33-rewards-save/home-purchases.json",
+      "sha256": "aeb112ce50539b32509c1ce012faf8f108110d94b056d0da041891bc717dc93f"
+    },
+    {
+      "path": "qa/0.33-rewards-save/game-save-purchase.json",
+      "sha256": "678b6bb9169c3e951123ae8e3fb39042f20b3888d9f7ff12c0a6fde864899b13"
+    },
+    {
+      "path": "qa/0.33-rewards-save/save-repeated-menu-return.json",
+      "sha256": "2005b1bb5be6d02be58beb46cb296ed686a40efdaddce350a136dcbe1985346b"
+    },
+    {
+      "path": "qa/0.33-rewards-save/saved-game-reloaded.json",
+      "sha256": "f868e770e1575008cf485624ea0cb284205e82e7048ebb21ff73cac2a6584c12"
+    },
+    {
+      "path": "qa/0.33-rewards-save/delivery-ad-before.json",
+      "sha256": "63f83a924596803328cb5f8dab3f40dac100e1ece4effacc462c41add5ebc7db"
+    },
+    {
+      "path": "qa/0.33-rewards-save/delivery-ad-privacy.json",
+      "sha256": "3b4be5420cb0a8bc8d800cfd3aa1cdac11fffca8544518b5e33ca80692c0bf6a"
+    },
+    {
+      "path": "qa/0.33-rewards-save/delivery-phone-game.json",
+      "sha256": "ce471f6b1704ad82495950da4636ced30c334e2d8c3302be0ab6203782004528"
+    },
+    {
+      "path": "qa/0.33-rewards-save/original-data-restored.json",
+      "sha256": "93197d1a7df4ceab334ebbf2e8000f15ae8c28ded3be424278402f1c4d30d097"
+    },
+    {
+      "path": "qa/0.33-rewards-save/environment-restored.json",
+      "sha256": "370ab877d46346279084b95d8c8161e47dc7aa51993fde445233213a9bc84dfb"
+    },
+    {
+      "path": "qa/0.33-rewards-save/design-qa.md",
+      "sha256": "e6a73e002f200948fbdad836096b3893c7ef4100554269259e4eaf0ceed696fa"
+    },
+    {
+      "path": "archive/save-hud-0.33-source-checks.json",
+      "sha256": "c3a6e038f9aea0403e886fc62d11abd213d6b4b6600adc9d8fbffe998d4a97ce"
+    },
+    {
+      "path": "archive/save-feedback-0.33-source-checks.json",
+      "sha256": "1ca04a269511e1b02a1c1a071a50c7d87fb492c3ac362faf73383a66186feeeb"
+    },
+    {
+      "path": "archive/rewards-save-0.33-source-checks.json",
+      "sha256": "bff61ca69e60b7b7419eb0b293b59c2756025881efd1c825b4633b4634bcccfd"
+    }
+  ],
+  "smallPhoneConfigurations": [
+    {
+      "physicalWidth": 800,
+      "physicalHeight": 480,
+      "densityDpi": 240,
+      "fontScale": 1.3
+    },
+    {
+      "physicalWidth": 2400,
+      "physicalHeight": 1080,
+      "densityDpi": 420,
+      "fontScale": 1
+    }
+  ],
+  "sourceCheckReports": [
+    {
+      "path": "archive/rewards-save-0.33-source-checks.json",
+      "sha256": "bff61ca69e60b7b7419eb0b293b59c2756025881efd1c825b4633b4634bcccfd"
+    }
+  ],
+  "changedAPKAssets": [
+    "assets/warzone-touch-controls.js",
+    "assets/warzone/saved-games.js",
+    "assets/warzone/ui/towers-shell.css"
+  ],
+  "changedAPKMembers": [
+    "assets/warzone/saved-games.js",
+    "assets/warzone/ui/towers-shell.css",
+    "AndroidManifest.xml",
+    "classes3.dex",
+    "assets/warzone-touch-controls.js"
+  ],
+  "removedAPKMembers": [],
+  "sourcePreservation": {
+    "changedAppSources": [
+      {
+        "path": "app/src/main/assets/warzone-touch-controls.js",
+        "beforeSHA256": "adefabdf70569e2abef920ce1a0848bac7d9ceb7f05e52ec7e1f5e600e9dd108",
+        "sha256": "14299c9b819ed32863be5672278647f57d5c5896d840006c944c2cfd22aca4ef"
+      },
+      {
+        "path": "app/src/main/assets/warzone/saved-games.js",
+        "beforeSHA256": "96789ff828ea1ceba97443a971cd32714ba0e662e3f746f6bf0efc0abedde3cb",
+        "sha256": "2a5b09cd223622f0a8882a41f6e86b19f9c384089bca60c0b00ded85b437666e"
+      },
+      {
+        "path": "app/src/main/assets/warzone/ui/towers-shell.css",
+        "beforeSHA256": "8a6dfd27cfb66c5008c8ec975b3d5bcb41d559cf0aa858482935ae07582c919b",
+        "sha256": "85bdc22e13d94fcbeb4e428742a5364200540a99df2d4b8accb1c61725b1ddf6"
+      },
+      {
+        "path": "app/src/main/java/com/rbabbit/blocknight/warzone/RewardsView.java",
+        "beforeSHA256": "3490072628c02cc5530877258964f377400f87b4b1d75acda997dbc7008cbdcd",
+        "sha256": "070ad4790bcbe42e69cecd98d6ba1a4632ee9e0b0cf7f80c6ba344e9fc1c3469"
+      }
+    ],
+    "preservedOriginalSourceFiles": 1262,
+    "sources": [
+      {
+        "path": "app/build.gradle.kts",
+        "sha256": "34dc5c9eedc6155d08a2840311b5da0310991818328d595dc76cb9de4f7e0f41"
+      },
+      {
+        "path": "app/src/main/assets/warzone-touch-controls.js",
+        "sha256": "14299c9b819ed32863be5672278647f57d5c5896d840006c944c2cfd22aca4ef"
+      },
+      {
+        "path": "app/src/main/assets/warzone/saved-games.js",
+        "sha256": "2a5b09cd223622f0a8882a41f6e86b19f9c384089bca60c0b00ded85b437666e"
+      },
+      {
+        "path": "app/src/main/assets/warzone/ui/towers-shell.css",
+        "sha256": "85bdc22e13d94fcbeb4e428742a5364200540a99df2d4b8accb1c61725b1ddf6"
+      },
+      {
+        "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MainActivity.java",
+        "sha256": "c9c2721059bd71dfb1721c58c25e8d78b8d3d63ea2b9384762432606de8fa434"
+      },
+      {
+        "path": "app/src/main/java/com/rbabbit/blocknight/warzone/RewardsView.java",
+        "sha256": "070ad4790bcbe42e69cecd98d6ba1a4632ee9e0b0cf7f80c6ba344e9fc1c3469"
+      }
+    ],
+    "baselineManifestEntries": 9216,
+    "sourceZIPBaselineSHA256": "4c8fd21d1aa0db8e14deb81c50f087475c9972b0185abf98882805be5cf15c34",
+    "nativeAndMapSourcesFrozen": true,
+    "walletSaveCodecAndAdControllerFrozen": true
+  },
+  "nativeAssetSHA256": {
+    "assets/warzone/warzone2100.js": "bd59230991cf29d548be7ddb4336cf05dabe3ca4427cb62b4a8bce0821d93d24",
+    "assets/warzone/warzone2100.data": "f2200f13b2197d0162a12737898c12be2545482a78529a6d7c83c54d8a34e16b",
+    "assets/warzone/warzone2100.wasm": "c69a9d1a3873aa23e774524b67db0cb1257a8326904ed06eddca7b45691eba78"
+  },
+  "nativeEngineAndDataByteIdenticalTo032": true,
+  "bundledMusicByteIdenticalTo032": true,
+  "mapsDuelScenarioCatalogsUnchanged": true,
+  "walletSaveCodecAndAdsControllerUnchanged": true,
+  "signing": {
+    "sameCertificateAs032": true,
+    "certificateSHA256": "4499efe00477c7c724c06a1dd96f935864548665c13ab5e2bd0a9c0f83f7cb15"
+  },
+  "fallbackRecord": {
+    "path": "archive/fallback-0.33.json",
+    "sha256": "e7c6dafb50a2b6ace7e3495be389e216a700e107bd7b90691fd32383725913f1"
+  },
+  "sourceInventory": "git ls-files --cached --others --exclude-standard; caches/private/transient files excluded",
+  "gitMetadataIncluded": false,
+  "vpsChanged": false,
+  "githubPublished": false,
+  "recordedUTC": "2026-11-10T00:42:28.464510Z"
+}

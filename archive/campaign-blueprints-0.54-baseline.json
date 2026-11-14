@@ -1,0 +1,225 @@
+{
+  "version": "0.54",
+  "baseline": "0.53",
+  "reproduced": true,
+  "scope": "Actual renderer and exact Emscripten soft-fullscreen sibling-hiding function in DOM/VM fixture, plus parent-recorded installed-APK evidence. VM does not establish device rendering.",
+  "defect": "Campaign build canvas remains inline display:none after native soft-fullscreen while accepted blueprints continue painting offscreen.",
+  "fixture": {
+    "inlineDisplay": "none",
+    "drawn": [
+      {
+        "id": "first",
+        "number": 1,
+        "itemId": "A0ResearchFacility",
+        "parentId": 0,
+        "x": 7,
+        "y": 6,
+        "height": 64,
+        "screenX": 516.7719298245614,
+        "screenY": 362.1684210526316,
+        "colour": "#72e6c0",
+        "validation": "accepted",
+        "model": true,
+        "triangles": 40
+      },
+      {
+        "id": "second",
+        "number": 2,
+        "itemId": "A0PowerGenerator",
+        "parentId": 0,
+        "x": 9,
+        "y": 7,
+        "height": 64,
+        "screenX": 583.7948717948718,
+        "screenY": 375.0461538461538,
+        "colour": "#72e6c0",
+        "validation": "accepted",
+        "model": true,
+        "triangles": 82
+      }
+    ]
+  },
+  "emulatorEvidence": [
+    {
+      "path": "qa/campaign-054/baseline-first-build.json",
+      "sha256": "4348adc50c7e7c7cbfdc9f529f72c3f044a84f06d9b34a11e17559095d92209b",
+      "installedAPK_SHA256": "addecad6d7229b921f9f311ea08fe35890e9dec5b64ad1d21342f33e3079e7d1",
+      "accepted": [
+        {
+          "id": "cmd-1794426491692-313",
+          "number": 3,
+          "itemId": "A0ResearchFacility",
+          "parentId": 0,
+          "x": 18,
+          "y": 50,
+          "status": "travelling"
+        }
+      ],
+      "drawn": [
+        {
+          "id": "cmd-1794426491692-313",
+          "number": 3,
+          "itemId": "A0ResearchFacility",
+          "parentId": 0,
+          "x": 18,
+          "y": 50,
+          "height": 12,
+          "screenX": 720.0015224580194,
+          "screenY": 217.9405928647526,
+          "colour": "#72e6c0",
+          "validation": "accepted",
+          "model": true,
+          "triangles": 40
+        }
+      ],
+      "rendererError": "",
+      "screenshot": {
+        "path": "qa/campaign-054/baseline-first-build.png",
+        "sha256": "1968732db4cc9d54546c744c201529afe428437d46838f5d7ac5b50d8d367307"
+      }
+    },
+    {
+      "path": "qa/campaign-054/baseline-switched-queued-build.json",
+      "sha256": "aa4d0c53ae9d5dd108872ff3eebffe54030cb6b01ac76e4ce11758b8b5d4dfc8",
+      "installedAPK_SHA256": "addecad6d7229b921f9f311ea08fe35890e9dec5b64ad1d21342f33e3079e7d1",
+      "accepted": [
+        {
+          "id": "cmd-1794426491692-313",
+          "number": 3,
+          "itemId": "A0ResearchFacility",
+          "parentId": 0,
+          "x": 18,
+          "y": 50,
+          "status": "travelling"
+        },
+        {
+          "id": "cmd-1794426495074-326",
+          "number": 4,
+          "itemId": "A0PowerGenerator",
+          "parentId": 0,
+          "x": 20,
+          "y": 52,
+          "status": "travelling"
+        }
+      ],
+      "drawn": [
+        {
+          "id": "cmd-1794426491692-313",
+          "number": 3,
+          "itemId": "A0ResearchFacility",
+          "parentId": 0,
+          "x": 18,
+          "y": 50,
+          "height": 12,
+          "screenX": 720.0015224580194,
+          "screenY": 217.9405928647526,
+          "colour": "#72e6c0",
+          "validation": "accepted",
+          "model": true,
+          "triangles": 40
+        },
+        {
+          "id": "cmd-1794426495074-326",
+          "number": 4,
+          "itemId": "A0PowerGenerator",
+          "parentId": 0,
+          "x": 20,
+          "y": 52,
+          "height": 24,
+          "screenX": 811.0050049249498,
+          "screenY": 271.6155152243916,
+          "colour": "#72e6c0",
+          "validation": "accepted",
+          "model": true,
+          "triangles": 82
+        }
+      ],
+      "rendererError": "",
+      "screenshot": {
+        "path": "qa/campaign-054/baseline-switched-queued-build.png",
+        "sha256": "0b40f91e7b7d154a3c3aa3bf1237354b6c097a67b4ce476e02c708db5529414a"
+      }
+    },
+    {
+      "path": "qa/campaign-054/baseline-closed-build-queue.json",
+      "sha256": "7396f48349516047131cd8689ade30d18bf381198a4999f00950c0942e88ba08",
+      "installedAPK_SHA256": "addecad6d7229b921f9f311ea08fe35890e9dec5b64ad1d21342f33e3079e7d1",
+      "accepted": [
+        {
+          "id": "cmd-1794426491692-313",
+          "number": 3,
+          "itemId": "A0ResearchFacility",
+          "parentId": 0,
+          "x": 18,
+          "y": 50,
+          "status": "travelling"
+        },
+        {
+          "id": "cmd-1794426495074-326",
+          "number": 4,
+          "itemId": "A0PowerGenerator",
+          "parentId": 0,
+          "x": 20,
+          "y": 52,
+          "status": "travelling"
+        }
+      ],
+      "drawn": [
+        {
+          "id": "cmd-1794426491692-313",
+          "number": 3,
+          "itemId": "A0ResearchFacility",
+          "parentId": 0,
+          "x": 18,
+          "y": 50,
+          "height": 12,
+          "screenX": 720.0015224580194,
+          "screenY": 217.9405928647526,
+          "colour": "#72e6c0",
+          "validation": "accepted",
+          "model": true,
+          "triangles": 40
+        },
+        {
+          "id": "cmd-1794426495074-326",
+          "number": 4,
+          "itemId": "A0PowerGenerator",
+          "parentId": 0,
+          "x": 20,
+          "y": 52,
+          "height": 24,
+          "screenX": 811.0050049249498,
+          "screenY": 271.6155152243916,
+          "colour": "#72e6c0",
+          "validation": "accepted",
+          "model": true,
+          "triangles": 82
+        }
+      ],
+      "rendererError": "",
+      "screenshot": {
+        "path": "qa/campaign-054/baseline-closed-build-queue.png",
+        "sha256": "965fb4e4cc111cfa51f4343b881bed618485605ec783c163581acc9dec5c1126"
+      }
+    }
+  ],
+  "sources": [
+    {
+      "path": "app/src/main/assets/warzone/ui/build-display.js",
+      "sha256": "d62b5daa7578c4ef4a2fad93fea43e1b1d74f661417a11602ee5d3f44237d6aa"
+    },
+    {
+      "path": "app/src/main/assets/warzone-command-pages.js",
+      "sha256": "529de343e4a734870b6b8346eb21034389e5aba679157aa4e43fb75638459d36"
+    },
+    {
+      "path": "app/src/main/assets/warzone-campaign-hud.js",
+      "sha256": "8980d11e9fbf18dbe9b5d5e1846e43d0b11dde0a34d5017ace780a2c658da586"
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100-campaign.js",
+      "sha256": "c9fa270163f5b9c485f70aed7832f8d041cb40de2ad10f9a7e1a6a59ac645679"
+    }
+  ],
+  "recordedUTC": "2026-11-11T19:56:21.840Z"
+}

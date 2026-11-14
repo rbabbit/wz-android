@@ -2,7 +2,7 @@
 (() => {
   "use strict";
 
-  const VERSION = 7;
+  const VERSION = 8;
   if (window.__warzoneTowersWaves?.version >= VERSION) return;
 
   const state = {
@@ -16,7 +16,10 @@
     commandSentAt: 0,
     commandWrites: 0,
     failureShown: false,
-    preparationShown: false
+    preparationShown: false,
+    incomingExpanded: false,
+    incomingWave: 0,
+    incomingRowsSignature: ""
   };
 
   function hudDocument() {
@@ -60,6 +63,110 @@
     return hud;
   }
 
+  function ensureIncoming() {
+    const owner = hudDocument();
+    let box = owner.getElementById("wt-wave-incoming");
+    if (box) return box;
+    const style = owner.createElement("style");
+    style.id = "wt-wave-incoming-style";
+    style.textContent = `
+      #wt-wave-incoming{position:fixed;right:8px;z-index:2147483643;max-width:calc(100vw - 16px);color:#fff;font:11px/1.35 system-ui,sans-serif;text-align:left;pointer-events:auto}
+      #wt-wave-incoming[hidden],#wt-wave-incoming [hidden]{display:none!important}
+      #wt-wave-incoming>button{display:flex;align-items:center;gap:10px;min-height:28px;margin-left:auto;padding:6px 10px;border:0;border-radius:5px;background:#000;color:#fff;box-shadow:0 2px 8px #0006;font:500 11px/1.2 Towers,system-ui,sans-serif;letter-spacing:.25px;touch-action:manipulation;cursor:pointer}
+      #wt-wave-incoming>button:disabled{opacity:1;cursor:default}
+      #wt-wave-incoming>button:focus-visible{outline:2px solid #fff;outline-offset:2px}
+      #wt-wave-incoming .wt-incoming-arrow{font:14px/1 system-ui,sans-serif;transform:rotate(0deg)}
+      #wt-wave-incoming>button[aria-expanded=true] .wt-incoming-arrow{transform:rotate(180deg)}
+      #wt-wave-incoming .wt-incoming-panel{width:264px;max-width:calc(100vw - 16px);box-sizing:border-box;margin-top:4px;padding:8px 10px;border-radius:5px;background:#000;box-shadow:0 3px 12px #0008;max-height:min(240px,calc(100dvh - 132px));overflow:auto;overscroll-behavior:contain;touch-action:pan-y}
+      #wt-wave-incoming .wt-incoming-note{margin:0 0 6px;color:#ccc;font-size:10px}
+      #wt-wave-incoming ul{display:grid;gap:7px;margin:0;padding:0;list-style:none}
+      #wt-wave-incoming li{display:flex;align-items:flex-start;gap:12px;margin:0;padding:0}
+      #wt-wave-incoming li span{flex:1;min-width:0;overflow-wrap:anywhere}
+      #wt-wave-incoming li b{font-weight:600;font-variant-numeric:tabular-nums}
+      @media(max-width:620px){#wt-wave-incoming{right:6px}#wt-wave-incoming .wt-incoming-panel{width:234px;max-height:min(190px,calc(100dvh - 120px))}}
+    `;
+    (owner.head || owner.body).appendChild(style);
+    box = owner.createElement("aside");
+    box.id = "wt-wave-incoming";
+    box.hidden = true;
+    box.setAttribute("aria-label", "Wave enemy units");
+    box.innerHTML = `<button type="button" aria-expanded="false" aria-controls="wt-wave-incoming-list"><span class="wt-incoming-title"></span><span class="wt-incoming-arrow" aria-hidden="true">⌄</span></button>
+      <div id="wt-wave-incoming-list" class="wt-incoming-panel" hidden><p class="wt-incoming-note"></p><ul></ul></div>`;
+    box.querySelector("button").addEventListener("click", event => {
+      event.preventDefault();
+      event.stopPropagation();
+      if (!state.snapshot?.incoming?.units?.length) return;
+      state.incomingExpanded = !state.incomingExpanded;
+      renderIncoming(state.snapshot);
+    });
+    owner.body.appendChild(box);
+    const view = owner.defaultView || window.parent || window;
+    view.addEventListener("resize", () => { if (state.snapshot) renderIncoming(state.snapshot); });
+    return box;
+  }
+
+  function incomingName(name) {
+    const aliases = {
+      "*BaBa MG* *BaBa Body* BaBaLegs": "Machinegun scavenger",
+      "*BusCannon* *School Bus Body* BaBaProp": "Cannon bus",
+      "*Flamer* *School Bus Body* BaBaProp": "Flamer bus",
+      "*BusCannon* *Fire Engine Body* BaBaProp": "Cannon fire engine",
+      "*Flamer* *Fire Engine Body* BaBaProp": "Flamer fire engine",
+      "*Jeep MG* *Jeep Body* BaBaProp": "Machinegun jeep",
+      "*BabaRocket* *Rocket Jeep Body* BaBaProp": "Rocket jeep",
+      "*Buggy MG* *Buggy Body* BaBaProp": "Machinegun buggy",
+      "*BabaRocket* *Rocket Buggy Body* BaBaProp": "Rocket buggy",
+      "*Trike MG* *Trike Body* BaBaProp": "Machinegun trike",
+      "*Cyborg Thermite Weapon* Cyborg Light Body Cyborg Propulsion": "Thermite cyborg",
+      "*CyborgRotMG* Cyborg Light Body Cyborg Propulsion": "Assault gun cyborg",
+      "*Cyb-Wpn-Rail1* Cyborg Light Body Cyborg Propulsion": "Needle gun cyborg",
+      "*Cyb-Wpn-Laser* Cyborg Light Body Cyborg Propulsion": "Flashlight cyborg",
+      "*Cyb-Wpn-Atmiss* Cyborg Light Body Cyborg Propulsion": "Scourge missile cyborg"
+    };
+    return aliases[name] || String(name).replace(/\*/g, "").replace(/ Cyborg (?:Light|Heavy) Body Cyborg Propulsion$/, "");
+  }
+
+  function renderIncoming(wave) {
+    const box = ensureIncoming();
+    if (window.__towersHtml?.isEnded?.() || !wave || ["defeated", "victory"].includes(wave.phase)) { box.hidden = true; return; }
+    const incoming = wave.incoming;
+    const units = Array.isArray(incoming?.units) ? incoming.units.filter(unit => unit.count > 0 && unit.name) : [];
+    const actual = units.length > 0;
+    const upcoming = wave.upcoming;
+    if (!actual && !(upcoming?.total > 0)) { box.hidden = true; return; }
+    const number = Number(actual ? incoming.wave : upcoming.wave) || 0;
+    if (state.incomingWave !== number) { state.incomingExpanded = false; state.incomingWave = number; }
+    const count = Number(actual ? incoming.total : upcoming.total) || 0;
+    const header = hudDocument().getElementById("warzone-command-strip");
+    box.style.top = `${Math.max(0, header?.getBoundingClientRect().bottom || 44) + 6}px`;
+    box.hidden = false;
+    const button = box.querySelector("button");
+    button.disabled = !actual;
+    button.setAttribute("aria-expanded", String(actual && state.incomingExpanded));
+    button.setAttribute("aria-label", actual ? `Wave ${number}: ${count} enemy units. ${state.incomingExpanded ? "Hide" : "Show"} unit types` : `Wave ${number}: ${count} incoming enemy units`);
+    box.querySelector(".wt-incoming-title").textContent = `WAVE ${number} · ${count} ${actual ? "UNITS" : "INCOMING"}`;
+    box.querySelector(".wt-incoming-arrow").hidden = !actual;
+    const panel = box.querySelector(".wt-incoming-panel");
+    panel.hidden = !actual || !state.incomingExpanded;
+    if (!panel.hidden) {
+      const note = box.querySelector(".wt-incoming-note");
+      note.textContent = incoming.complete ? "Selected enemy units" : "Enemy units selected so far";
+      if (upcoming?.total > 0 && upcoming.wave !== number) note.textContent += ` · Next: ${upcoming.total}`;
+      const signature = JSON.stringify(units);
+      if (signature !== state.incomingRowsSignature) {
+        const list = box.querySelector("ul"), scrollTop = panel.scrollTop;
+        list.replaceChildren(...units.map(unit => {
+          const row = hudDocument().createElement("li");
+          const name = hudDocument().createElement("span"), count = hudDocument().createElement("b");
+          name.textContent = incomingName(unit.name); count.textContent = String(unit.count);
+          row.append(name, count); return row;
+        }));
+        state.incomingRowsSignature = signature;
+        panel.scrollTop = scrollTop;
+      }
+    }
+  }
+
   function showPreparation() {
     // The live wave HUD and Help carry preparation instructions. Keep the
     // battlefield available immediately instead of opening a routine modal.
@@ -87,7 +194,7 @@
 
   function render() {
     const hud = ensureHud();
-    if (window.__towersHtml?.isEnded?.()) { hud.classList.remove('visible'); return; }
+    if (window.__towersHtml?.isEnded?.()) { hud.classList.remove('visible'); ensureIncoming().hidden = true; return; }
     const wave = state.snapshot;
     if (!wave) return;
     window.__towersHtml?.activate?.(wave);
@@ -102,6 +209,7 @@
       window.__kalaWarzoneTouch?.releaseAll?.();
       window.__towersHtml?.finish(wave.phase === "victory");
       hud.classList.remove('visible');
+      ensureIncoming().hidden = true;
       return;
     }
     if (state.pendingCommand && (wave.lastCommand === state.pendingCommand
@@ -132,6 +240,7 @@
     const button = hud.querySelector("button");
     button.disabled = Boolean(state.pendingCommand) || wave.canSkip === false || !["countdown", "active"].includes(wave.phase);
     button.textContent = state.pendingCommand ? "CALLING…" : "SKIP WAVE";
+    renderIncoming(wave);
   }
 
   function consumeLine(line) {
@@ -197,7 +306,9 @@
   window.addEventListener('warzone-battle-ended', () => {
     state.snapshot = null;
     state.pendingCommand = '';
+    state.incomingExpanded = false;
     ensureHud().classList.remove('visible');
+    ensureIncoming().hidden = true;
   });
   setTimeout(pollLogs, 250);
   setInterval(pollLogs, 500);

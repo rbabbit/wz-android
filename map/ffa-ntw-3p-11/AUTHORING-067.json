@@ -1,0 +1,444 @@
+{
+  "id": "ntw-3p-11",
+  "descriptor": "// Original rbabbit NTW-style map, CC0-1.0; see DESIGN-067.json.\nlevel FFA-NTW3-11-T1\nplayers 3\ntype 14\ndataset MULTI_CAM_3\ngame \"multiplay/maps/ffa-ntw-3p-11.gam\"\n",
+  "mappings": [
+    {
+      "host": "map/ffa-ntw-3p-11/level.json",
+      "virtual": "/data/mp/multiplay/maps/ffa-ntw-3p-11/level.json",
+      "sha256": "7389437c811199f14ba2bb71e39d46ce86021cf1e0cdc6cc69d4aa2da5a7695a"
+    },
+    {
+      "host": "map/ffa-ntw-3p-11/gam.json",
+      "virtual": "/data/mp/multiplay/maps/ffa-ntw-3p-11/gam.json",
+      "sha256": "2c550207ed28af457cf3a007db504a36f3f8bf91b87b2031fbe915c829f9a603"
+    },
+    {
+      "host": "map/ffa-ntw-3p-11/game.map",
+      "virtual": "/data/mp/multiplay/maps/ffa-ntw-3p-11/game.map",
+      "sha256": "bf87e4da0e745c01c67d57c184b9e795b99f104c8a70facdc819216733615176"
+    },
+    {
+      "host": "map/ffa-ntw-3p-11/ttypes.ttp",
+      "virtual": "/data/mp/multiplay/maps/ffa-ntw-3p-11/ttypes.ttp",
+      "sha256": "4b677d7224f7bc25cba772be687f99b288ae70eb19799807236f3134e871afd6"
+    },
+    {
+      "host": "map/ffa-ntw-3p-11/struct.json",
+      "virtual": "/data/mp/multiplay/maps/ffa-ntw-3p-11/struct.json",
+      "sha256": "1a5527a84bae66a526c0591da1e985b1695e7dab09570ff10d83c8e8799441a2"
+    },
+    {
+      "host": "map/ffa-ntw-3p-11/droid.json",
+      "virtual": "/data/mp/multiplay/maps/ffa-ntw-3p-11/droid.json",
+      "sha256": "b513ddc94ef43e3f3538ce95c92363e04acbad63c72f3319ce64b391fe442ad1"
+    },
+    {
+      "host": "map/ffa-ntw-3p-11/feature.json",
+      "virtual": "/data/mp/multiplay/maps/ffa-ntw-3p-11/feature.json",
+      "sha256": "717db1b2eb0a694961a3fc34b40ce68cc1332534a106c7fb9783e9c5153d91c7"
+    },
+    {
+      "host": "map/ffa-ntw-3p-11/gam.json",
+      "virtual": "/data/mp/multiplay/maps/ffa-ntw-3p-11.gam",
+      "sha256": "2c550207ed28af457cf3a007db504a36f3f8bf91b87b2031fbe915c829f9a603"
+    }
+  ],
+  "requiredInitialStructureLimits": {},
+  "sourceDesign": {
+    "path": "map/ffa-ntw-3p-11/DESIGN-067.json",
+    "sha256": "57544159d3684bf955ba839e5786f2081e695e0add6872fe520f4975341c1749"
+  },
+  "sourceSHA256": "57544159d3684bf955ba839e5786f2081e695e0add6872fe520f4975341c1749",
+  "sourceSHA256Meaning": "Exact deterministic DESIGN-067.json authoring input bytes, not an external archive.",
+  "dataset": "MULTI_CAM_3",
+  "family": "crater-gates",
+  "bearing": 35,
+  "playerBases": [
+    {
+      "player": 0,
+      "centre": [
+        152,
+        137
+      ],
+      "rotation": 16384,
+      "structures": {
+        "A0CommandCentre": 1,
+        "A0LightFactory": 1,
+        "A0CyborgFactory": 1,
+        "A0Sat-linkCentre": 1,
+        "A0ResearchFacility": 5,
+        "A0PowerGenerator": 6,
+        "A0PowMod1": 6,
+        "A0ResourceExtractor": 24
+      },
+      "truckTiles": [
+        [
+          139,
+          131
+        ],
+        [
+          139,
+          135
+        ],
+        [
+          139,
+          139
+        ],
+        [
+          139,
+          143
+        ]
+      ],
+      "ownedOil": 24
+    },
+    {
+      "player": 1,
+      "centre": [
+        47,
+        128
+      ],
+      "rotation": 49152,
+      "structures": {
+        "A0CommandCentre": 1,
+        "A0LightFactory": 1,
+        "A0CyborgFactory": 1,
+        "A0Sat-linkCentre": 1,
+        "A0ResearchFacility": 5,
+        "A0PowerGenerator": 6,
+        "A0PowMod1": 6,
+        "A0ResourceExtractor": 24
+      },
+      "truckTiles": [
+        [
+          60,
+          134
+        ],
+        [
+          60,
+          130
+        ],
+        [
+          60,
+          126
+        ],
+        [
+          60,
+          122
+        ]
+      ],
+      "ownedOil": 24
+    },
+    {
+      "player": 2,
+      "centre": [
+        107,
+        41
+      ],
+      "rotation": 0,
+      "structures": {
+        "A0CommandCentre": 1,
+        "A0LightFactory": 1,
+        "A0CyborgFactory": 1,
+        "A0Sat-linkCentre": 1,
+        "A0ResearchFacility": 5,
+        "A0PowerGenerator": 6,
+        "A0PowMod1": 6,
+        "A0ResourceExtractor": 24
+      },
+      "truckTiles": [
+        [
+          101,
+          54
+        ],
+        [
+          105,
+          54
+        ],
+        [
+          109,
+          54
+        ],
+        [
+          113,
+          54
+        ]
+      ],
+      "ownedOil": 24
+    }
+  ],
+  "baseCounts": {
+    "0": {
+      "A0CommandCentre": 1,
+      "A0LightFactory": 1,
+      "A0CyborgFactory": 1,
+      "A0Sat-linkCentre": 1,
+      "A0ResearchFacility": 5,
+      "A0PowerGenerator": 6,
+      "A0PowMod1": 6,
+      "A0ResourceExtractor": 24
+    },
+    "1": {
+      "A0CommandCentre": 1,
+      "A0LightFactory": 1,
+      "A0CyborgFactory": 1,
+      "A0Sat-linkCentre": 1,
+      "A0ResearchFacility": 5,
+      "A0PowerGenerator": 6,
+      "A0PowMod1": 6,
+      "A0ResourceExtractor": 24
+    },
+    "2": {
+      "A0CommandCentre": 1,
+      "A0LightFactory": 1,
+      "A0CyborgFactory": 1,
+      "A0Sat-linkCentre": 1,
+      "A0ResearchFacility": 5,
+      "A0PowerGenerator": 6,
+      "A0PowMod1": 6,
+      "A0ResourceExtractor": 24
+    }
+  },
+  "expansionOil": {
+    "0": [
+      [
+        130,
+        110
+      ],
+      [
+        134,
+        110
+      ],
+      [
+        130,
+        114
+      ],
+      [
+        134,
+        114
+      ],
+      [
+        120,
+        125
+      ],
+      [
+        124,
+        125
+      ],
+      [
+        120,
+        129
+      ],
+      [
+        124,
+        129
+      ]
+    ],
+    "1": [
+      [
+        76,
+        121
+      ],
+      [
+        80,
+        121
+      ],
+      [
+        76,
+        125
+      ],
+      [
+        80,
+        125
+      ],
+      [
+        69,
+        105
+      ],
+      [
+        73,
+        105
+      ],
+      [
+        69,
+        109
+      ],
+      [
+        73,
+        109
+      ]
+    ],
+    "2": [
+      [
+        94,
+        69
+      ],
+      [
+        98,
+        69
+      ],
+      [
+        94,
+        73
+      ],
+      [
+        98,
+        73
+      ],
+      [
+        111,
+        70
+      ],
+      [
+        115,
+        70
+      ],
+      [
+        111,
+        74
+      ],
+      [
+        115,
+        74
+      ]
+    ]
+  },
+  "starts": [
+    {
+      "player": 0,
+      "x": 145,
+      "y": 137
+    },
+    {
+      "player": 1,
+      "x": 54,
+      "y": 128
+    },
+    {
+      "player": 2,
+      "x": 107,
+      "y": 48
+    }
+  ],
+  "mapVersion": 40,
+  "width": 204,
+  "height": 204,
+  "geometryD4SHA256": "1329d029430f34579aa2d6e7c89652396ed2c85db81cee56e43546f4a66c3b8c",
+  "nativeMapSHA256": "bf87e4da0e745c01c67d57c184b9e795b99f104c8a70facdc819216733615176",
+  "preview": {
+    "path": "app/src/main/assets/ffa-previews/ntw-3p-11.png",
+    "sha256": "fc8d16cdead30fcad63cf5361dfd409188c36708b06cca268cfa6b7757beeda3",
+    "width": 640,
+    "height": 640,
+    "method": "Written native V40 textures/terrain/heights, decoded bundled ground material pixels, exact native object positions; data overview, not gameplay screenshot."
+  },
+  "rasterTipsConvertedToCliff": 0,
+  "authoredCrossingWidth": 15,
+  "minimumGuaranteedGroundCorridorTiles": 9,
+  "checks": {
+    "mapVersion": 40,
+    "width": 204,
+    "height": 204,
+    "nativeBytes": 166488,
+    "nativeTerrainCounts": {
+      "8": 11674,
+      "10": 1378,
+      "11": 821,
+      "0": 20591,
+      "6": 6806,
+      "2": 149,
+      "7": 127,
+      "1": 70
+    },
+    "flatReachableGround": true,
+    "groundTiles": 29815,
+    "waterTiles": 127,
+    "cliffTiles": 11674,
+    "occupiedTiles": 273,
+    "freeReachableTiles": 29554,
+    "nativePlayerCounts": [
+      {
+        "A0CommandCentre": 1,
+        "A0LightFactory": 1,
+        "A0CyborgFactory": 1,
+        "A0Sat-linkCentre": 1,
+        "A0ResearchFacility": 5,
+        "A0PowerGenerator": 6,
+        "A0PowMod1": 6,
+        "A0ResourceExtractor": 24
+      },
+      {
+        "A0CommandCentre": 1,
+        "A0LightFactory": 1,
+        "A0CyborgFactory": 1,
+        "A0Sat-linkCentre": 1,
+        "A0ResearchFacility": 5,
+        "A0PowerGenerator": 6,
+        "A0PowMod1": 6,
+        "A0ResourceExtractor": 24
+      },
+      {
+        "A0CommandCentre": 1,
+        "A0LightFactory": 1,
+        "A0CyborgFactory": 1,
+        "A0Sat-linkCentre": 1,
+        "A0ResearchFacility": 5,
+        "A0PowerGenerator": 6,
+        "A0PowMod1": 6,
+        "A0ResourceExtractor": 24
+      }
+    ],
+    "constructorCount": 12,
+    "oilLocations": 96,
+    "ownedOilPerPlayer": 24,
+    "neutralOilTotal": 24,
+    "allModuleOwnersUnique": true,
+    "starts": [
+      {
+        "player": 0,
+        "x": 145,
+        "y": 137
+      },
+      {
+        "player": 1,
+        "x": 54,
+        "y": 128
+      },
+      {
+        "player": 2,
+        "x": 107,
+        "y": 48
+      }
+    ],
+    "openingDistanceMatrix": [
+      [
+        0,
+        79.41,
+        87.66
+      ],
+      [
+        79.41,
+        0,
+        84.81
+      ],
+      [
+        87.66,
+        84.81,
+        0
+      ]
+    ],
+    "nearestOpponentDistanceSpread": 5.4,
+    "openingDistanceMethod": "Offline eight-neighbour octile graph, no diagonal corner cutting; native pathfinder not executed.",
+    "allStructurePerimetersReachable": true,
+    "allConstructorSpawnsConnected": true,
+    "allNeutralOilReachable": true,
+    "originalSourceOnly": true,
+    "expectedStartingInfrastructureVerified": true,
+    "expansionUsesTwoAdditionalGeneratorsWithinStockCap": true,
+    "emulatorUsed": false,
+    "nativeEngineExecuted": false,
+    "nativePathfindingExecuted": false,
+    "gameplayBalancedOrPlaytested": false
+  },
+  "generator": "tools/generate-ntw-maps-067.py",
+  "originalMapFilesModified": false
+}

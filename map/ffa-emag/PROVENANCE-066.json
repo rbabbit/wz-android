@@ -1,0 +1,138 @@
+{
+  "id": "emag",
+  "source": "vendor/ffa-map/original/EMAG_FFA.wz",
+  "sourceSHA256": "b3181ca918ecac7ab4ceb38565b6e3c425f96bea735e550ea6cbb53c150a9c87",
+  "author": {
+    "name": "arc"
+  },
+  "license": "CC0-1.0",
+  "nativeFilesByteIdentical": true,
+  "mapVersion": 40,
+  "width": 128,
+  "height": 128,
+  "starts": [
+    {
+      "player": 0,
+      "x": 15.0,
+      "y": 16.0,
+      "trucks": 4
+    },
+    {
+      "player": 1,
+      "x": 113.0,
+      "y": 16.0,
+      "trucks": 4
+    },
+    {
+      "player": 2,
+      "x": 15.0,
+      "y": 112.0,
+      "trucks": 4
+    },
+    {
+      "player": 3,
+      "x": 113.0,
+      "y": 112.0,
+      "trucks": 4
+    }
+  ],
+  "baseCounts": {
+    "0": {
+      "A0ResourceExtractor": 40,
+      "A0PowerGenerator": 10,
+      "A0ResearchFacility": 5,
+      "A0CommandCentre": 1,
+      "A0Sat-linkCentre": 1,
+      "A0ResearchModule1": 5,
+      "A0PowMod1": 10
+    },
+    "1": {
+      "A0ResourceExtractor": 40,
+      "A0ResearchFacility": 5,
+      "A0PowerGenerator": 10,
+      "A0CommandCentre": 1,
+      "A0Sat-linkCentre": 1,
+      "A0ResearchModule1": 5,
+      "A0PowMod1": 10
+    },
+    "2": {
+      "A0PowerGenerator": 10,
+      "A0ResourceExtractor": 40,
+      "A0Sat-linkCentre": 1,
+      "A0ResearchFacility": 5,
+      "A0CommandCentre": 1,
+      "A0ResearchModule1": 5,
+      "A0PowMod1": 10
+    },
+    "3": {
+      "A0PowerGenerator": 10,
+      "A0ResourceExtractor": 40,
+      "A0ResearchFacility": 5,
+      "A0CommandCentre": 1,
+      "A0Sat-linkCentre": 1,
+      "A0PowMod1": 10,
+      "A0ResearchModule1": 5
+    }
+  },
+  "oilLocations": 160,
+  "terrainCounts": {
+    "8": 3124,
+    "6": 13260
+  },
+  "heightRange": [
+    0,
+    347
+  ],
+  "mappings": [
+    {
+      "original": "level.json",
+      "host": "map/ffa-emag/level.json",
+      "virtual": "/data/mp/multiplay/maps/ffa-emag/level.json",
+      "sha256": "89b186afe7c8b28b3382c3c975c0bc1c9d3ae0d739d4011bb331c697c28044d3"
+    },
+    {
+      "original": "droid.json",
+      "host": "map/ffa-emag/droid.json",
+      "virtual": "/data/mp/multiplay/maps/ffa-emag/droid.json",
+      "sha256": "ac450c42cb2ba4de9b100b6f1ba7ea50aa84b5944e94fad2ebf43778111a09a6"
+    },
+    {
+      "original": "feature.json",
+      "host": "map/ffa-emag/feature.json",
+      "virtual": "/data/mp/multiplay/maps/ffa-emag/feature.json",
+      "sha256": "ed484260c062841d835fb3dedc6e82d7f53c10d6ba5b69d88d9bd7765d120c35"
+    },
+    {
+      "original": "gam.json",
+      "host": "map/ffa-emag/gam.json",
+      "virtual": "/data/mp/multiplay/maps/ffa-emag.gam",
+      "sha256": "3f16f850bcab49b20a898ced2d4fc01dbf534e9e2ada55aae91f0a73d4d95184"
+    },
+    {
+      "original": "gam.json",
+      "host": "map/ffa-emag/gam.json",
+      "virtual": "/data/mp/multiplay/maps/ffa-emag/gam.json",
+      "sha256": "3f16f850bcab49b20a898ced2d4fc01dbf534e9e2ada55aae91f0a73d4d95184"
+    },
+    {
+      "original": "game.map",
+      "host": "map/ffa-emag/game.map",
+      "virtual": "/data/mp/multiplay/maps/ffa-emag/game.map",
+      "sha256": "53033221c849548edbd69cd8d9a9f092dd487b56a8c5fcbb3f2dd9cdeca29d74"
+    },
+    {
+      "original": "struct.json",
+      "host": "map/ffa-emag/struct.json",
+      "virtual": "/data/mp/multiplay/maps/ffa-emag/struct.json",
+      "sha256": "17a5fd0eec46b0d083779dce035f3beb5a43ed8feb56c86b41ee40db6de3173e"
+    },
+    {
+      "original": "ttypes.ttp",
+      "host": "map/ffa-emag/ttypes.ttp",
+      "virtual": "/data/mp/multiplay/maps/ffa-emag/ttypes.ttp",
+      "sha256": "158ab8c01fcb3724ffaa378e716b1c1fdea007b5c2acd2ae45e44a377df148e1"
+    }
+  ],
+  "descriptor": "// Exact EMAG_FFA by arc; CC0-1.0. No map modifications.\nlevel FFA-EMAG-T1\nplayers 4\ntype 14\ndataset MULTI_CAM_1\ngame \"multiplay/maps/ffa-emag.gam\"\n",
+  "neutralStructureCounts": {}
+}

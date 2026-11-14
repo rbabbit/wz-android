@@ -1,0 +1,59 @@
+{
+  "version": "0.43",
+  "passed": true,
+  "emulatorUsed": false,
+  "androidRuntimeExecuted": false,
+  "gameplayVerified": false,
+  "nativeBuildPerformed": true,
+  "nativeFullFreshBuildPerformed": false,
+  "relinkedNativeEngine": true,
+  "compiledObjects": [
+    "src/CMakeFiles/warzone2100.dir/quickjs_backend.cpp.o"
+  ],
+  "elapsedSeconds": 27.921,
+  "command": [
+    "bash",
+    "-c",
+    "source \"$1/emsdk/emsdk_env.sh\" && cmake --build \"$1/build\" --target warzone2100 --parallel 4",
+    "native-queue-043",
+    "/home/punkech/wz-blueprint-20261107"
+  ],
+  "cachePath": "/home/punkech/wz-blueprint-20261107",
+  "previousNativeBuild": "archive/native-theme-0.42/native-build.json",
+  "previousNativeBuildSHA256": "004766d158656bbc766d2fd41b49fc4a13407a4579a54f51c61005daa6b92f8f",
+  "sourceOverlay": "archive/native-queue-0.43/source-overlay.json",
+  "sourceOverlaySHA256": "76b79677dc5ab00ebf295ae499eb2a61bafe95aadec7e3ae67ff6033ed0b767a",
+  "preservedSourceOverlays": {
+    "display3d.cpp": "3b5c1a41144011805819d15e9bfac6f1289d726da276433bfeb237904c0fa15f",
+    "research.cpp": "06b8999191bb0160e6b73c268f8ddd69347102133ecc221aee23504973dc918a",
+    "keybind.cpp": "5730cf9a2b791a6a437f4e0da040e9dbb75e8befb48dc02caefb1a8e824355ed",
+    "hci.cpp": "9db6bef46703c3975d920a23cc071ea46ab938a3972204ca5325440e8e66e842",
+    "quickjs_backend.cpp": "a3096beab0f866dd53176fe4d705ed1eee9da50da2e322608efcec2b57f80072",
+    "console.cpp": "72bfd88aa0535a6adcf098f6f4b0fcb035ecca43f1927430d1e511893f51f570",
+    "intdisplay.cpp": "c3e78b002a00be9b6d0843120f63c63fcccca1aa5e1a0fb39043a6bc4541e673"
+  },
+  "sourceOverlays": {
+    "display3d.cpp": "3b5c1a41144011805819d15e9bfac6f1289d726da276433bfeb237904c0fa15f",
+    "research.cpp": "06b8999191bb0160e6b73c268f8ddd69347102133ecc221aee23504973dc918a",
+    "keybind.cpp": "5730cf9a2b791a6a437f4e0da040e9dbb75e8befb48dc02caefb1a8e824355ed",
+    "hci.cpp": "9db6bef46703c3975d920a23cc071ea46ab938a3972204ca5325440e8e66e842",
+    "quickjs_backend.cpp": "cc8d75756e00cb2bb96068a103e2c3323da9fb41cb89bc3b05449e8b62c7543f",
+    "console.cpp": "72bfd88aa0535a6adcf098f6f4b0fcb035ecca43f1927430d1e511893f51f570",
+    "intdisplay.cpp": "c3e78b002a00be9b6d0843120f63c63fcccca1aa5e1a0fb39043a6bc4541e673"
+  },
+  "log": "archive/native-queue-0.43/native-build.log",
+  "logSHA256": "edb872193101f9badc7ad5917db3deddb253c47922d816b83652e4bc81fe3196",
+  "recordedUTC": "2026-11-10T22:16:11.760650+00:00",
+  "raw": [
+    {
+      "file": "warzone2100.js",
+      "bytes": 725723,
+      "sha256": "8f2f978063a89db09e953994d34d1b7aafa1feac68877b0f7fde92823496ab13"
+    },
+    {
+      "file": "warzone2100.wasm",
+      "bytes": 13497022,
+      "sha256": "9c067c6f3a84448033880deff5fea488b2c65fd880a3605f44e67ab8d65c4a1b"
+    }
+  ]
+}

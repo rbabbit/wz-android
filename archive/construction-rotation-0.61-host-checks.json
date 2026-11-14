@@ -1,0 +1,65 @@
+{
+  "version": "0.61",
+  "passed": true,
+  "emulatorUsed": false,
+  "actualNativeEngineExecuted": false,
+  "scope": "Actual JavaScript under bounded native API/DOM/SDL fixtures; not device gameplay.",
+  "checks": [
+    {
+      "command": [
+        "node",
+        "tools/check-construction-sites-061.cjs"
+      ],
+      "passed": true,
+      "output": "{\n  \"passed\": true,\n  \"emulatorUsed\": false,\n  \"actualNativeEngineExecuted\": false,\n  \"checksPassed\": 16,\n  \"checks\": [\n    \"towers: pending factories reserve native spacing before any foundation exists\",\n    \"towers: original native queue journals reserve footprints and clearance too\",\n    \"towers: native packability retains contiguous defences and odd/even footprints\",\n    \"towers: cancelled observer reservations release their original site\",\n    \"towers: old close plans keep the earlier head valid and visibly block the later plan\",\n    \"towers: old reservations block only later jobs, with a stable reason\",\n    \"towers: explicit retry retains same-group FIFO and never borrows remote workers\",\n    \"towers: native site changes after acceptance block dispatch without deleting plans\",\n    \"campaign: pending factories reserve native spacing before any foundation exists\",\n    \"campaign: original native queue journals reserve footprints and clearance too\",\n    \"campaign: native packability retains contiguous defences and odd/even footprints\",\n    \"campaign: cancelled observer reservations release their original site\",\n    \"campaign: old close plans keep the earlier head valid and visibly block the later plan\",\n    \"campaign: old reservations block only later jobs, with a stable reason\",\n    \"campaign: explicit retry retains same-group FIFO and never borrows remote workers\",\n    \"campaign: native site changes after acceptance block dispatch without deleting plans\"\n  ]\n}\n"
+    },
+    {
+      "command": [
+        "node",
+        "tools/check-construction-recovery-052.cjs",
+        "--behavior-only"
+      ],
+      "passed": true,
+      "output": "{\"passed\":true,\"checks\":16,\"behaviorOnly\":true,\"emulatorUsed\":false,\"historicalReleasePreservationChecked\":false}\n"
+    },
+    {
+      "command": [
+        "node",
+        "tools/check-construction-ui-061.cjs"
+      ],
+      "passed": true,
+      "output": "PASS: Delivered0.60 reproduces a blocked native job hidden behind a stale QUEUED journal in all modes\nPASS: A blocked job overrides stale journal QUEUED with a visible obstruction and Retry in all three modes without mutating snapshots\nPASS: Only one current item renders, completion advances it, and completed-only history releases the entire summary\nPASS: Builder-loss groups retain Waiting for trucks and grouped Resume in Towers/FFA; Campaign exposes Retry only\nPASS: Retry fetches a fresh native selection, sends only selected constructors with current clock/context, and consumes backend jobIds in every mode\nPASS: Empty/combat-only native selection and a rejected fresh state never recruit cached or remote trucks\nPASS: Actual Campaign retry click uses the shared fresh-selection path instead of an unvalidated direct job command\nPASS: Repeated Retry taps share one pending operation and cannot race two native assignments\nPASS: Stopped, replaced, retired or changed-document fresh replies cannot issue a retry\nPASS: A late rejected fresh state after Stop or document change does not post an error into the current world\nPASS: A late retry success after Stop or document change cannot announce work assigned to the current world\nPASS: Native retry rejection preserves the failed job and reports its cause without a success announcement\nPASS: Recovery groups and native-only foundations send the same fresh explicit workers through their specific backend actions\nPASS: Rotation invalidates the visible-truck selection view while identical observations stay stable\n{\"passed\":true,\"checksPassed\":14,\"emulatorUsed\":false,\"actualNativeEngineExecuted\":false}\n"
+    },
+    {
+      "command": [
+        "node",
+        "tools/check-touch-rotation-061.cjs"
+      ],
+      "passed": true,
+      "output": "PASS: Accepted one-finger pan functions remain byte-for-byte identical to delivered0.60\nPASS: Opposing fingers through180deg lock yaw only in Towers, Campaign and FFA, with both native directions and location3\nPASS: Signed twist crosses plus/minuspi and accumulates beyond180deg without reversal or span/centre contamination\nPASS: Reversing a twist releases the old direction immediately; collapsed finger spacing cancels unstable angle input\nPASS: Short angular jitter stays unclassified; radial pinch and parallel vertical tilt preserve their separate gestures\nPASS: Gesture lock prevents a twist from becoming pinch/tilt; one lifted finger never starts a pan or tap\nPASS: A third finger cancels the original pair and cannot rebind remaining fingers before all lift\nPASS: Native UI fences survive follow-on pointer moves, and a newly opened menu cancels held rotation\nPASS: Without animation frames the timer fallback remains bounded and lift discards its queued rotation\nPASS: Cancel, blur, releaseAll and battle retirement release yaw and discard callbacks/budget under both frame orders\nPASS: Ordinary and rapid one-finger pans retain native frame release/rearm without yaw, pitch or zoom\n{\"passed\":true,\"checksPassed\":11,\"emulatorUsed\":false,\"actualNativeEngineExecuted\":false}\n"
+    }
+  ],
+  "sources": [
+    {
+      "path": "scenario/warzone-towers-commands.js",
+      "sha256": "590be36a3157dd383006e06d4fb54daaffe98bb517405b7876588a022eacd17c"
+    },
+    {
+      "path": "campaign/commands.js",
+      "sha256": "f66f070ee6578d5bb0754a06d27386acbc03d5a17c5aba3b1298f4240d0d68d4"
+    },
+    {
+      "path": "scenario/ffa/commands.js",
+      "sha256": "9a567bc95f92b2b6bbf9769e2d4fdf5cedce9f45ce81e3d5d6dfd3ff69a93ae3"
+    },
+    {
+      "path": "app/src/main/assets/warzone-command-pages.js",
+      "sha256": "17b2eb2dfa95c1fd67d018ef8eba9c2a61cc88a20bfdc98e6c5a410812d8069e"
+    },
+    {
+      "path": "app/src/main/assets/warzone-touch-controls.js",
+      "sha256": "8480732fbe714443426c60c0c4df12684d6586659e9bc9ca961f12a8694a5d22"
+    }
+  ],
+  "recordedUTC": "2026-11-12T05:10:20.021486+00:00"
+}

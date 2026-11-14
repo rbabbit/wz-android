@@ -1,0 +1,24 @@
+{
+  "failures": [
+    {
+      "stage": "Towers prepared-save preflight",
+      "candidateAPK_SHA256": "6e3c763c641893a045c5b804036ed26d60221728839432ae8fcc9b492ee60902",
+      "observedNativeUI": "This saved match's wallet record is no longer available.",
+      "diagnostic": "AssertionError [ERR_ASSERTION]: Game WebView unavailable\n    at connect (C:\\timerApp\\wz-towers-lab\\tools\\rotation-live-062.cjs:9:132)\n    at async Object.load (C:\\timerApp\\wz-towers-lab\\tools\\rotation-live-062.cjs:10:437)\n    at async geometry (C:\\timerApp\\wz-towers-lab\\tools\\verify-rotation-062.cjs:8:65)\n    at async main (C:\\timerApp\\wz-towers-lab\\tools\\verify-rotation-062.cjs:23:469) {\n  generatedMessage: false,\n  code: 'ERR_ASSERTION',\n  actual: null,\n  expected: true,\n  operator: '==',\n  diff: 'simple'\n}\n",
+      "cause": "The latest 0.61 QA-created saved run referenced a wallet record removed by the required original-wallet restoration. The saved-game protection refused it before a game WebView opened.",
+      "resolution": "Used an ordinary fresh Greenhaven start with its normal four constructors and a 240-second preparation period. No units, resources or wallet state were granted."
+    },
+    {
+      "stage": "Compact visible-selection preflight",
+      "observed": "Native HQ and all six Hard-checkpoint constructors were alive, but none lay inside the recentered close-zoom viewport; the native wanted/selected groups were correctly empty.",
+      "diagnosticEvidence": "qa/rotation-062/compact-selection-diagnostic.json",
+      "resolution": "Retained the already-passed Hard full-turn packets. Used the original Easy checkpoint for only an uninterrupted pivot/lift, a real pinch-out, visible constructor selection and Return/Home."
+    },
+    {
+      "stage": "Compact Hard-state recovery lifetime",
+      "observed": "The Android Return dialog did not stop native bot time. The six Hard constructors were killed while the viewport issue was investigated; the next readiness check stopped before injecting any new gesture into that empty fixture.",
+      "resolution": "Force-stopped that match and used the existing ordinary Easy checkpoint. No production, grants or world-state edits."
+    }
+  ],
+  "samplingAdjustment": "Baseline 90-degree finger-stage sampling can alias multiple native camera turns. Exact 0.62 verification uses 30-degree finger stages and requires every observed native increment below 170 degrees with consistent direction. Uninterrupted ordinary gestures are measured separately."
+}

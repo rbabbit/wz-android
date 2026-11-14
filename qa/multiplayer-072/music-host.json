@@ -1,0 +1,46 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "Actual MP copy aliases the existing player API and stays silent outside a battle",
+      "passed": true
+    },
+    {
+      "name": "Actual player shuffles all39 bundled songs and avoids an immediate cycle repeat",
+      "passed": true
+    },
+    {
+      "name": "OFF/ON persists through the private bridge without skipping the selected song",
+      "passed": true
+    },
+    {
+      "name": "Activity and document background pause retain and resume one decoded song",
+      "passed": true
+    },
+    {
+      "name": "Game exit aborts pending media and stale fetch/end callbacks cannot restart playback",
+      "passed": true
+    },
+    {
+      "name": "Invalid playlist families, remote tracks and incomplete pools fail closed",
+      "passed": true
+    },
+    {
+      "name": "Media failure is nonfatal and only explicit ON retries",
+      "passed": true
+    },
+    {
+      "name": "MP copy cannot access the main bridge or fetch/extract the complete115MB archive",
+      "passed": true
+    },
+    {
+      "name": "MP native config disables duplicate stock music while retaining effects and voice volumes",
+      "passed": true
+    }
+  ],
+  "emulatorUsed": false,
+  "syntheticMedia": true,
+  "actualPlaybackVerified": false,
+  "sourceSHA256": "6cac414f0437a1b22d72df1469af36e3283af72147642541ff55d326a64edfa7",
+  "scope": "Actual generated MP player with deterministic fetch/Audio/settings fixtures. Actual decoder is a separate optional browser check."
+}

@@ -1,0 +1,44 @@
+--- a/src/quickjs_backend.cpp
++++ b/src/quickjs_backend.cpp
+@@ -895,6 +895,32 @@
+     const auto value = campaignMobileNativeStateJSON();
+     return JS_ParseJSON(ctx,value.c_str(),value.size(),"campaign-mobile-state");
+ }
++
++// Preserve a standing combat selection without deselecting/reselecting it on
++// every maintenance tick. Match native selCombat and isSelectable predicates;
++// emit one normal selection refresh only when the actual set changes.
++static unsigned campaignReconcileCombatSelection()
++{
++    unsigned count = 0;
++    bool changed = false;
++    for (DROID *droid : apsDroidLists[selectedPlayer])
++    {
++        const bool eligible = droid->asWeaps[0].nStat > 0 && !droid->isTransporter() && isSelectable(droid);
++        if (eligible) ++count;
++        if (droid->selected != eligible)
++        {
++            droid->selected = eligible;
++            changed = true;
++        }
++    }
++    if (changed)
++    {
++        intRefreshScreen();
++        triggerEventSelected();
++    }
++    return count;
++}
++
+ static JSValue campaignSelectCombatJS(JSContext *ctx, JSValueConst, int, JSValueConst *)
+ {
+     if (!campaignMobileScriptEnabled() || game.type != LEVEL_TYPE::CAMPAIGN
+@@ -908,7 +934,7 @@
+     char buffer[4097]; const size_t length = fread(buffer,1,4096,file); fclose(file);
+     const auto control = nlohmann::json::parse(buffer,buffer+length,nullptr,false);
+     if (!control.is_object() || !control.value("enabled",false) || control.value("suspended",true)) return JS_FALSE;
+-    const unsigned count = selDroidSelection(selectedPlayer,DS_BY_TYPE,DST_ALL_COMBAT,false);
++    const unsigned count = campaignReconcileCombatSelection();
+     JSValue result = JS_NewObject(ctx), ids = JS_NewArray(ctx); uint32_t index=0;
+     for (const DROID *droid : apsDroidLists[selectedPlayer])
+         if (droid->selected) JS_SetPropertyUint32(ctx,ids,index++,JS_NewUint32(ctx,droid->id));

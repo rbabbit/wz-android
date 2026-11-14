@@ -1,0 +1,9 @@
+const q=require('./mp-live-070.cjs'),fs=require('fs'),path=require('path'),assert=require('node:assert/strict');
+(async()=>{const c=await q.connect(),proof={};try{await c.wait('PcMultiplayerSession.phase==="game"','small world',25000);await c.wait('document.querySelector("#warzone-game-frame").contentWindow.__warzoneCommands?.report().snapshot','commands');await c.wait('document.querySelector("#warzone-game-frame").contentWindow.__blockNightResearch?.report().catalogCount>1','research metadata ready',10000);await c.save('small-world');
+ for(const id of ['#blocknight-tech','#wt-open-factory','#wt-open-queue','#blocknight-help']){await c.tap(id);await c.wait(`document.querySelector(${JSON.stringify(id)}).getAttribute('aria-expanded')==='true'`,'menu is open');await q.delay(200);proof[id]=await c.evaluate(`(()=>{const e=document.querySelector(${JSON.stringify(id)}),b=e.getBoundingClientRect();return {expanded:e.getAttribute('aria-expanded'),bounds:b.toJSON(),viewport:[innerWidth,innerHeight],scroll:[scrollX,scrollY]};})()`);await c.save('small-'+id.slice(1));await c.tap(id);}
+ await c.wait("(()=>{const b=document.querySelector('#wt-open-build')?.getBoundingClientRect();return b&&b.width>0;})()",'footer visible');await c.tap('#wt-open-build');await c.wait('document.querySelector("#warzone-game-frame").contentWindow.__warzoneCommands.report().buildOpen','Build');await c.save('small-build');await c.tap('#wt-open-build');
+ await c.tap('#blocknight-base');
+ const targets=await c.child('WarzoneBuildDisplay.report({facilityGeometry:true}).facilityTargets');proof.targets=targets;
+ console.log(JSON.stringify({targets:targets?.map(t=>({id:t.id,kind:t.kind,visible:t.visible,hitPoints:t.hitPoints}))}));
+ proof.passed=true;
+}catch(e){proof.error=String(e);await c.save('small-failure');throw e;}finally{fs.writeFileSync(path.join(q.out,'small-proof.json'),JSON.stringify(proof,null,2));c.close();}})().catch(e=>{console.error(e);process.exitCode=1});

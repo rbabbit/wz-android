@@ -1,0 +1,464 @@
+{
+  "version": "0.50",
+  "passed": true,
+  "mode": "corrected-source-with-native-state-oracle",
+  "regressionReproductions": {
+    "mode": "regression-audit",
+    "adapterFixed": false,
+    "checksPassed": 8,
+    "checks": [
+      {
+        "name": "Native oracle retains RELEASED through mainLoop, then reaches UP; tracker eases and latches at DRAG",
+        "passed": true,
+        "detail": {
+          "drag": {
+            "frame": 1,
+            "time": 32,
+            "mouseState": "DRAG",
+            "mouse": {
+              "x": 400,
+              "y": 260
+            },
+            "anchor": {
+              "x": 300,
+              "y": 220
+            },
+            "panActive": true,
+            "before": {
+              "x": 0,
+              "y": 0
+            },
+            "view": {
+              "x": 16,
+              "y": 6
+            },
+            "target": {
+              "x": 100,
+              "y": 40
+            }
+          },
+          "released": {
+            "frame": 2,
+            "time": 48,
+            "mouseState": "RELEASED",
+            "mouse": {
+              "x": 410,
+              "y": 265
+            },
+            "anchor": {
+              "x": 300,
+              "y": 220
+            },
+            "panActive": true,
+            "before": {
+              "x": 16,
+              "y": 6
+            },
+            "view": {
+              "x": 31,
+              "y": 12
+            },
+            "target": {
+              "x": 110,
+              "y": 45
+            }
+          },
+          "up": {
+            "frame": 3,
+            "time": 64,
+            "mouseState": "UP",
+            "mouse": {
+              "x": 410,
+              "y": 265
+            },
+            "anchor": {
+              "x": 300,
+              "y": 220
+            },
+            "panActive": false,
+            "before": {
+              "x": 31,
+              "y": 12
+            },
+            "view": {
+              "x": 31,
+              "y": 12
+            },
+            "target": null
+          }
+        }
+      },
+      {
+        "name": "Native oracle detects centre parking changing a live RELEASED-frame pan target",
+        "passed": true,
+        "detail": {
+          "frame": 1,
+          "time": 32,
+          "mouseState": "RELEASED",
+          "mouse": {
+            "x": 500,
+            "y": 300
+          },
+          "anchor": {
+            "x": 300,
+            "y": 220
+          },
+          "panActive": true,
+          "before": {
+            "x": 16,
+            "y": 6
+          },
+          "view": {
+            "x": 45,
+            "y": 18
+          },
+          "target": {
+            "x": 200,
+            "y": 80
+          }
+        }
+      },
+      {
+        "name": "Native oracle detects stale pan anchor when release and fresh press share a native poll cycle",
+        "passed": true,
+        "detail": {
+          "frame": 1,
+          "time": 300,
+          "mouseState": "DRAG",
+          "mouse": {
+            "x": 640,
+            "y": 320
+          },
+          "anchor": {
+            "x": 300,
+            "y": 220
+          },
+          "panActive": true,
+          "before": {
+            "x": 16,
+            "y": 6
+          },
+          "view": {
+            "x": 67,
+            "y": 21
+          },
+          "target": {
+            "x": 340,
+            "y": 100
+          }
+        }
+      },
+      {
+        "name": "Native oracle reproduces unmodified SDL MMB double-click preventing a rapid second drag",
+        "passed": true,
+        "detail": {
+          "frame": 3,
+          "time": 64,
+          "mouseState": "DOUBLECLICK",
+          "mouse": {
+            "x": 450,
+            "y": 220
+          },
+          "anchor": {
+            "x": 300,
+            "y": 220
+          },
+          "panActive": false,
+          "before": {
+            "x": 14,
+            "y": 0
+          },
+          "view": {
+            "x": 14,
+            "y": 0
+          },
+          "target": null
+        }
+      },
+      {
+        "name": "Preserved v0.49 actual adapter reproduces release-centre jump under both native/adapter RAF orders",
+        "passed": true,
+        "detail": {
+          "sourceSha256": "95a9f2c2662154b448931c45efb6c1ab6343cb0d253ccbb6555d08ab41717015",
+          "observations": [
+            {
+              "nativeFirst": false,
+              "jump": {
+                "frame": 5,
+                "time": 96,
+                "mouseState": "RELEASED",
+                "mouse": {
+                  "x": 500,
+                  "y": 300
+                },
+                "anchor": {
+                  "x": 300,
+                  "y": 220
+                },
+                "panActive": true,
+                "before": {
+                  "x": 49,
+                  "y": 19
+                },
+                "view": {
+                  "x": 73,
+                  "y": 28
+                },
+                "target": {
+                  "x": 200,
+                  "y": 80
+                }
+              }
+            },
+            {
+              "nativeFirst": true,
+              "jump": {
+                "frame": 5,
+                "time": 96,
+                "mouseState": "RELEASED",
+                "mouse": {
+                  "x": 500,
+                  "y": 300
+                },
+                "anchor": {
+                  "x": 300,
+                  "y": 220
+                },
+                "panActive": true,
+                "before": {
+                  "x": 43,
+                  "y": 16
+                },
+                "view": {
+                  "x": 68,
+                  "y": 26
+                },
+                "target": {
+                  "x": 200,
+                  "y": 80
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": "Preserved v0.49 deferred first move adds an unpanned native frame when the native RAF runs first",
+        "passed": true,
+        "detail": [
+          {
+            "frame": 0,
+            "time": 16,
+            "mouseState": "PRESSED",
+            "mouse": {
+              "x": 300,
+              "y": 220
+            },
+            "anchor": {
+              "x": null,
+              "y": null
+            },
+            "panActive": false,
+            "before": {
+              "x": 0,
+              "y": 0
+            },
+            "view": {
+              "x": 0,
+              "y": 0
+            },
+            "target": null
+          },
+          {
+            "frame": 1,
+            "time": 32,
+            "mouseState": "DRAG",
+            "mouse": {
+              "x": 380,
+              "y": 250
+            },
+            "anchor": {
+              "x": 300,
+              "y": 220
+            },
+            "panActive": true,
+            "before": {
+              "x": 0,
+              "y": 0
+            },
+            "view": {
+              "x": 12,
+              "y": 4
+            },
+            "target": {
+              "x": 80,
+              "y": 30
+            }
+          }
+        ]
+      },
+      {
+        "name": "Preserved v0.49 actual adapter can restart before the old native pan has reached an inactive frame",
+        "passed": true,
+        "detail": {
+          "frame": 4,
+          "time": 80,
+          "mouseState": "DOUBLECLICK",
+          "mouse": {
+            "x": 640,
+            "y": 320
+          },
+          "anchor": {
+            "x": 300,
+            "y": 220
+          },
+          "panActive": true,
+          "before": {
+            "x": 40,
+            "y": 15
+          },
+          "view": {
+            "x": 88,
+            "y": 28
+          },
+          "target": {
+            "x": 340,
+            "y": 100
+          }
+        }
+      },
+      {
+        "name": "Preserved v0.48 active native pan already consumes pointer-up endpoint; the earlier boolean oracle was wrong",
+        "passed": true,
+        "detail": {
+          "sourceSha256": "0069cd51c93e879360c8a4a413eaf13fbf8db799140f7e54d9f69824c1f79e17",
+          "released": {
+            "frame": 1,
+            "time": 32,
+            "mouseState": "RELEASED",
+            "mouse": {
+              "x": 375,
+              "y": 265
+            },
+            "anchor": {
+              "x": 300,
+              "y": 220
+            },
+            "panActive": true,
+            "before": {
+              "x": 6,
+              "y": 3
+            },
+            "view": {
+              "x": 17,
+              "y": 9
+            },
+            "target": {
+              "x": 75,
+              "y": 45
+            }
+          }
+        }
+      }
+    ],
+    "limits": "Focused native input/camera equations in JavaScript; no real SDL/native runtime, camera limits, radar overlap, game UI gating, or rendered visual verification.",
+    "sourceReferences": [
+      "lib/sdl/main_sdl.cpp:1370 inputNewFrame",
+      "lib/sdl/main_sdl.cpp:1499 mouseDown",
+      "lib/sdl/main_sdl.cpp:1734 inputHandleMouseButtonEvent",
+      "lib/sdl/main_sdl.cpp:1799 inputHandleMouseMotionEvent",
+      "lib/sdl/main_sdl.cpp:3682 SDL_PollEvent/mainLoop/inputNewFrame",
+      "src/loop.cpp:334 processMouseClickInput/displayWorld",
+      "src/display.cpp:738 pan tracker latch",
+      "src/display.cpp:1222 displayWorld pan",
+      "src/animation.cpp:67 ValueTracker::update"
+    ],
+    "baselineSourceSha256": "95a9f2c2662154b448931c45efb6c1ab6343cb0d253ccbb6555d08ab41717015",
+    "currentSourceSha256": "0dea5eeef45404354aa549da01f0514418722c012667467a14fde29f5a61493a",
+    "fixtureSha256": "3737d82c01db33f2bf77d2c812a25c420be9ddd893c8d5e4ae50bd9ad2a927e1",
+    "emulatorUsed": false,
+    "actualNativeEngineExecuted": false
+  },
+  "checksPassed": 12,
+  "checks": [
+    {
+      "name": "Corrected Towers MMB normalization assumption matches the built native source and guarded one-object proof",
+      "passed": true,
+      "detail": {
+        "sourceSha256": "123ada4e7d0931e39ff192ac71b5960cda487d066a9e45f7f1c9d831dbdb8f6b",
+        "nativeBuildSha256": "b36b0c05d4f851d295a514206cc6d5c066bb39c717a36ce95e10e91bb8b444b6"
+      }
+    },
+    {
+      "name": "First held motion reaches the first native frame and release stays at the true endpoint under either RAF order",
+      "passed": true
+    },
+    {
+      "name": "Subsequent high-rate samples coalesce once per RAF and preserve the latest absolute target without zoom or heading input",
+      "passed": true
+    },
+    {
+      "name": "Rapid consecutive touch lifecycles wait for a genuine inactive native frame and acquire separate correct anchors",
+      "passed": true
+    },
+    {
+      "name": "Quick flicks and repeat swipes remain correctly ordered at 5fps; no 150ms timer bypasses native frames",
+      "passed": true
+    },
+    {
+      "name": "Renderer stalls release a held button on timeout but retain rearm; UI cancellation drops deferred input",
+      "passed": true,
+      "detail": {
+        "heldTimeouts": 1
+      }
+    },
+    {
+      "name": "Cancel, blur, pagehide and leaving battle release immediately at the endpoint with no later ghost motion",
+      "passed": true
+    },
+    {
+      "name": "One-finger pan handoff to two-finger pan or pinch resets its native anchor; multi-pan cancellation releases immediately",
+      "passed": true
+    },
+    {
+      "name": "Offset canvas and captured out-of-bounds motion stay inside the safe native range",
+      "passed": true
+    },
+    {
+      "name": "Missing GL context uses explicitly reported fallback cycles; context replacement clears an obsolete rearm",
+      "passed": true
+    },
+    {
+      "name": "Deferred pan input coalesces movement, bounds total events and serializes a native click after rearm",
+      "passed": true
+    },
+    {
+      "name": "Tap, deliberate box selection, single-site/line construction, minimap and Duel keep their existing actions",
+      "passed": true
+    }
+  ],
+  "limits": "Focused native input/camera equations in JavaScript; no real SDL/native runtime, camera limits, radar overlap, game UI gating, or rendered visual verification.",
+  "emulatorUsed": false,
+  "actualNativeEngineExecuted": false,
+  "gameplayVerified": false,
+  "screensVerified": false,
+  "sources": [
+    {
+      "path": "app/src/main/assets/warzone-touch-controls.js",
+      "sha256": "0dea5eeef45404354aa549da01f0514418722c012667467a14fde29f5a61493a"
+    },
+    {
+      "path": "tools/check-touch-pan-050.cjs",
+      "sha256": "3737d82c01db33f2bf77d2c812a25c420be9ddd893c8d5e4ae50bd9ad2a927e1"
+    },
+    {
+      "path": "archive/native-touch-0.50/main_sdl.cpp",
+      "sha256": "123ada4e7d0931e39ff192ac71b5960cda487d066a9e45f7f1c9d831dbdb8f6b"
+    },
+    {
+      "path": "archive/native-touch-0.50/native-build.json",
+      "sha256": "b36b0c05d4f851d295a514206cc6d5c066bb39c717a36ce95e10e91bb8b444b6"
+    }
+  ],
+  "recordedUTC": "2026-11-11T12:18:54.321Z"
+}

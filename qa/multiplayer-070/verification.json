@@ -1,0 +1,2954 @@
+{
+  "version": "0.70",
+  "candidateAPK_SHA256": "6abfade38111f79d75dc578037106ff4baec3b6e771c8973a654e63b7a9ac553",
+  "installedAPK_SHA256": "6abfade38111f79d75dc578037106ff4baec3b6e771c8973a654e63b7a9ac553",
+  "emulatorUsed": true,
+  "passed": true,
+  "recordedUTC": "2026-11-14T02:21:04.637228+00:00",
+  "verificationScope": "Exact installed delivery APK; live public 1 vs AI Bots Battle room, both Ready stages and transfer, custom menus/orders, real queues and completed tower, saved native component design, facility taps, native movement/stop/deselect, pan/full rotation/pinch/tilt, Intelligence, repeated Android Back/Stay/Return/rejoin, real keyboard/name persistence, small and normal landscape viewports. Existing Campaign/FFA/Towers native setup navigation checked on this clean APK. Towers live Research was additionally checked before clean packaging; its game assets and native libraries are byte-identical; no seeded units or fake gameplay responses.",
+  "limitations": [
+    "Emulator ground textures render black in unchanged Towers and Multiplayer; screenshots still verify HUD/models and actual native orders/positions/completion. Terrain appearance on a physical phone was not verified in this run.",
+    "Public host controls maps, names/aliases, difficulty and room timing. Compatibility was exercised with the live 4.7.0 bot host, not every public server.",
+    "Unchanged Campaign and FFA gameplay were not replayed; their native setup/navigation and unchanged APK asset/library hashes were checked."
+  ],
+  "checks": {
+    "exactDeliveryAPK": true,
+    "loadingLobbyAndTransfers": true,
+    "savedPlayerName": true,
+    "compactLayouts": true,
+    "customMenusAndOrders": true,
+    "selectionAndCamera": true,
+    "leaveAndRejoin": true,
+    "existingModeNavigation": true
+  },
+  "buildLog": {
+    "path": "qa/multiplayer-070/build.log",
+    "sha256": "8b62ba14a3d10f67073e40fc070efe387c27b21cfdc362f9ea7b66daf3caeec9"
+  },
+  "sources": [
+    {
+      "path": "app/build.gradle.kts",
+      "sha256": "e9ac6ea914eb36ea3b9e4f444959cd81214c2b94c12f77c44720d2e9d118dcc0"
+    },
+    {
+      "path": "app/src/main/AndroidManifest.xml",
+      "sha256": "ef810355c2d57d911773e137d2eeccd97816db9060d20afb2d2ca1511f7cae4b"
+    },
+    {
+      "path": "app/src/main/assets/ffa-maps.json",
+      "sha256": "c65ecce91fffe671dc645989f73d07a3e5b4ac74a08b07e7471038c69c6ca7e4"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/contact.png",
+      "sha256": "7def522abf8484076640514014f42da0f149a9e956d3d80a9e4485934cf0437a"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/emag.png",
+      "sha256": "ab5eda0c083b98f37adcfce6ef1d12ee2e00952ede774f0409a830dc6cece361"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/emaj-6p.png",
+      "sha256": "656ae9bd70cf85bc305506917df58f3e3174f02352b11f9cb9a1f073bcfa783a"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-2p-01.png",
+      "sha256": "006d8d65cce974d7a3b52f0809fdcd1676803eea09a47e943e637e31c2fb5f63"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-2p-02.png",
+      "sha256": "b4967c072e26cc3f62881e773ce2d1ef5a14402a4f52e1603b37bed919a48e75"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-2p-03.png",
+      "sha256": "ca7171af196c5b6429905189b2e6ed52fb99e3d1fbf01bd1b85db9a3c5681c93"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-2p-04.png",
+      "sha256": "ef49114202877a0ff40e2edd18be555a5ff270a84460ebdba4e273ee14f9974a"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-2p-05.png",
+      "sha256": "8da9fe0ff0a7ca3235583fac4a4a6c9713e83c7acba445d5b3648b8dc1be4497"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-2p-06.png",
+      "sha256": "39bf168945205dc08d0a46796faac98710883e4cdcc0e7804edc580dcf057680"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-2p-07.png",
+      "sha256": "468f00a4f635e3551f3be730f5935d887f8813be8a741ee279b6fdac4b3a7a95"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-2p-08.png",
+      "sha256": "5765c0d1a65ad8118c401d07dd39fbfb636d6d6673b52b125c1403769658bec5"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-2p-09.png",
+      "sha256": "c92336335450820f078650558c22818a0c11508910040aa84740a111e62609e4"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-2p-10.png",
+      "sha256": "fb3fb1eaea44ee6f085041289b41d32163f88b64c718ded99596cbc29078421b"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-2p-11.png",
+      "sha256": "c74d441b669b4581aeb9585b9655ad10f7c60ccffa52f8926dcbdced7ca97651"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-2p-12.png",
+      "sha256": "ee2e90f4928063faa8fb37d2b105704447dbc5bf3bb77222f792cdba29fac8cc"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-2p-13.png",
+      "sha256": "94033e910dbb6a12a525b757b88efd68424778dc196fac41f46e41f54d4cbb2a"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-2p-14.png",
+      "sha256": "fe8c8f9c2c60519e1a3c7926308d4cb06e9bb1f59721b94d3ec5cdbc569265be"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-2p-15.png",
+      "sha256": "f3c69a557534132fb7dc295acbac91116ab016d0311916b645d37233c2b4e7a3"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-3p-01.png",
+      "sha256": "182ea1f238b57014ae7b67ffe4b00953961d08e4b459613e4c897acbf9c8ab31"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-3p-02.png",
+      "sha256": "3df6f86dad28df25da463d733d359eb57e6fee3ccefd65143e0c5602fedb0dbe"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-3p-03.png",
+      "sha256": "88c951b19c8e78762327fd75916007d46fc5d018ce5966c30ace5074bf65061b"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-3p-04.png",
+      "sha256": "cf1a005fe320c0a4cf0453b6caa7b6d6858c75a7f98c0f6fe094a54ae8316a6f"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-3p-05.png",
+      "sha256": "23eaa8ec3c782e958d62430cca92b2baa903496d4a0fa6c3a9bdcd3ff67fbe89"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-3p-06.png",
+      "sha256": "8060b6a7fed33fe7b5d08af79245d3ad1cc951a6fc4afe53e9c4aeab6784b299"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-3p-07.png",
+      "sha256": "96c336574df306da4d5275032f1b5f5b58047ab59767e7c68722737db27c819b"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-3p-08.png",
+      "sha256": "ae398089760c432f1e9d9e256120dfde70cce3b18065ef2bec723622f3e215ec"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-3p-09.png",
+      "sha256": "963b613a44c2a18a13441b2e579fb0f86e03d28327664ef543089be2c1cd194b"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-3p-10.png",
+      "sha256": "ac666cb818727ad109a5d70b4f685bc6ed6a32e6dbbfd8d88687de3f3583432e"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-3p-11.png",
+      "sha256": "c90c4fe92d4b9bf63313a000753ca5b562261cc4dfb3298ffb149b40337186b0"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-3p-12.png",
+      "sha256": "8748df99c323875549fae6a661bb25e37ccb8517ce3c0453d97058bceefa2c3f"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-3p-13.png",
+      "sha256": "b24eb66e11be217145d8bc56c4d0fae8fe9e64d92243e14547b0540bc9fe4dfd"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-3p-14.png",
+      "sha256": "f72b2e5b10a9a827170328fafc2a22c6984ab43998fcd7a10762062da4e06d7c"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-3p-15.png",
+      "sha256": "e710cf1525d209263c811ef32b00aa896b575df1ed37756aac34b1864582a057"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-4p-01.png",
+      "sha256": "526a822fdff6f9a54918c081e83b1792798aa93857d600999c15765d4f3c7919"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-4p-02.png",
+      "sha256": "b1ac3286a228e9a9de148ca9798baf1af88c7c828c5bad409e89ffbf0d4f45df"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-4p-03.png",
+      "sha256": "d4e06fc37e2cf7d00cb6906c1794aff77f2000fe35990a6843efb2630f1a3b0f"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-4p-04.png",
+      "sha256": "2bfc9b1454d56e36c3cdc564221f6224d61b60f4d2fd2bcf218b4405110c1590"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-4p-05.png",
+      "sha256": "1a82a76d1442b3b7b9f711b494a2ab185805baf0b868477bee9ea02d2b628249"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-4p-06.png",
+      "sha256": "77928000b81001a5d5b13b2152108c5cd6789d897a90bfd4e048c53169858c7c"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-4p-07.png",
+      "sha256": "6bda58ffe3590b92c8adf95b4579cbae6d4baf0e1217212f215b28a78e70ecb1"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-4p-08.png",
+      "sha256": "4f1d0570c4264d47823b78cba4fe0af4e945bc842eb41b273d0c85271dc27ecf"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-4p-09.png",
+      "sha256": "3876672d05ea83a0e6c4cc82ebca0cf6ba84cc4dedfc27c27aa25e213a13faf6"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-4p-10.png",
+      "sha256": "4d9d0f85e23dfa663335d1235c08ab9db8205c40b743e698922e85741b324f18"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-4p-11.png",
+      "sha256": "bba7d27412c5d877318216b3d4c03ddfb846a08b6f0b27647cc3eb9eafcf380b"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-4p-12.png",
+      "sha256": "07c5c2c67c1081f0b600f02993b8d3d89e72aafb3ae4a017471ef62c8540b1f6"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-4p-13.png",
+      "sha256": "0953746f29ae3eb1131b949e560d1ed476ac26a075993dad3a0c4129acdd789b"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-4p-14.png",
+      "sha256": "1370d8a358c34cb1dec4b0d68d4613ddc931574b9cbae38b267a9d573077fe54"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-4p-15.png",
+      "sha256": "8592639f3768e9c5a3d7767e479b4a7a912e9d4e9b51a3c8071d34787277d4a4"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/rb-simple.png",
+      "sha256": "e82d29ca3d28e92e57ae2a3ef3608b69ec788221c1bfd00a48d4cec48cc31cd7"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/rb-usefull.png",
+      "sha256": "90af5c46d47d7b5f42039612bbe7275c1bf7bc235274430ad325a15771fdf1e5"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/templar-ffa.png",
+      "sha256": "acef4fba0d9a5a69f0f24ec055c2b91dab4b9db39e6ad924e6d8fe02516465cd"
+    },
+    {
+      "path": "app/src/main/assets/guide/guide.css",
+      "sha256": "278907557e4632c64fe00a5e1954de0ff8cb66c69e5dd0a540a7cde5ec6ada99"
+    },
+    {
+      "path": "app/src/main/assets/guide/guide.js",
+      "sha256": "029c010bb6f3c6d2db664eb6682b99cdbef4ea9bd803af709096e4be5fbedd2d"
+    },
+    {
+      "path": "app/src/main/assets/guide/index.html",
+      "sha256": "686d530b03b42cfceb6a64e124eb6c4303088e5291068433772c05613c28e2e9"
+    },
+    {
+      "path": "app/src/main/assets/guide/practical-data.js",
+      "sha256": "90be44f30bb0f93ade0e6b824a529673986253ed37c6afc17cb7e67293d73947"
+    },
+    {
+      "path": "app/src/main/assets/guide/research-data.js",
+      "sha256": "645015fb029351e0567df84539da65d9051218545025c6a0dd36d9639e8d2cb6"
+    },
+    {
+      "path": "app/src/main/assets/guide/screenshots/build-modules.png",
+      "sha256": "8628b3d562c1891610a6839177e257a1bb9097a60e4e042a6ffba512562ed910"
+    },
+    {
+      "path": "app/src/main/assets/guide/screenshots/build-sites.png",
+      "sha256": "78409db0c96d7ad986998ffac6f1d8100412c7211ba02b4d2ab2c781b36f94c7"
+    },
+    {
+      "path": "app/src/main/assets/guide/screenshots/campaign-briefing.png",
+      "sha256": "40567cccb0294785f7a0098283a1b3b41bc238e8fe147f47189e20de1698c4f5"
+    },
+    {
+      "path": "app/src/main/assets/guide/screenshots/controls-drawer.png",
+      "sha256": "98922f4e8d8127db13a2ebd8281ef76aa11c6da06f4f121191133ca544084d34"
+    },
+    {
+      "path": "app/src/main/assets/guide/screenshots/controls-world.png",
+      "sha256": "62cc114f4e80101272647c135091ccaa0865377cc5e7c157dbfbd7665d1e50b9"
+    },
+    {
+      "path": "app/src/main/assets/guide/screenshots/design-blueprint.png",
+      "sha256": "bf774d720764defff872368825262f0e21bdbc0538c9cfa871fc0fc242b397f6"
+    },
+    {
+      "path": "app/src/main/assets/guide/screenshots/factory-queue.png",
+      "sha256": "b1e4542f831bb08bea8c810dd07ab0ddd3f983580e9cade9f47c6f056a39a7b5"
+    },
+    {
+      "path": "app/src/main/assets/guide/screenshots/factory-units.png",
+      "sha256": "ab8bcaee618b09acfb7134f9f5d609045e13f86b086e6fbb177885b08d6b9d6b"
+    },
+    {
+      "path": "app/src/main/assets/guide/screenshots/ffa-setup-066.png",
+      "sha256": "8ddab557308c0dd41c05ef9f7e3725186ebe056802bbac65d19795f9d9af0b40"
+    },
+    {
+      "path": "app/src/main/assets/guide/screenshots/ffa-setup.png",
+      "sha256": "241ef72d6247965cd80bdd3a78b55ef3fa2ba250a62902360bb75ff9e772458b"
+    },
+    {
+      "path": "app/src/main/assets/guide/screenshots/intelligence-report.png",
+      "sha256": "c99ecc2d9b65f77a6ce5777d654fd9be30251a8692d5d060915dbf342f6a1909"
+    },
+    {
+      "path": "app/src/main/assets/guide/screenshots/phone-saves.png",
+      "sha256": "2a788de0e64cbc7c3f8f9b85bfcaef1b356a1ddcd2727b2619656db6c02809d5"
+    },
+    {
+      "path": "app/src/main/assets/guide/screenshots/research-queue.png",
+      "sha256": "e01f4a73b388a133adbf9baa574b0f2cd743c08eaf6f710cdd8e6b823cb0cdb8"
+    },
+    {
+      "path": "app/src/main/assets/guide/screenshots/towers-map.png",
+      "sha256": "c3d1d83a397f1aeab61a34925203a43fc41509a41ad9510edc49ecaac08047cf"
+    },
+    {
+      "path": "app/src/main/assets/guide/screenshots/towers-wave.png",
+      "sha256": "9980e5d4973608d5d195d5d9d009c4d1d84bf53db78e80453483650d098e31a4"
+    },
+    {
+      "path": "app/src/main/assets/guide/screenshots-data.js",
+      "sha256": "e43f27e2208057548d5aa499f3f295c9ff863c5d992a02380726cbfb713f4f6d"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/engine.html",
+      "sha256": "d65ec625611c626a9ad911f67cb98db5766884adc6196d9c4f3b554ae35efe06"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/index.html",
+      "sha256": "be200ee5b6981d992fd64573b91fa8362d8ef65d0279711c81d775b4e540128b"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/intelligence.js",
+      "sha256": "b627c7163bb478bb08e88844b4bce145d834bdb42e94bdcafb0231f0e3a80526"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/lobby-config.js",
+      "sha256": "96b15c9ace72ea087791384e9a406e98356181e277cfd51102777f42bcb4ef01"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/lobby-http.js",
+      "sha256": "6b9099c2260f7ba3e8d1178db10adc8ea0155e8d5ad0bd9492ac9d6b30e76b58"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/lobby-ui.js",
+      "sha256": "3927bba708b029cef65d3bb6553f8186e5ffc5a50d89b27a14c6bbc4fdf90f50"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/mobile-controls.js",
+      "sha256": "08dc9c7ea78563b2f36e79aa4a2b475bcda19cee9d3e1403589bf5c821e6412c"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/mobile-ui-runtime.js",
+      "sha256": "1412e48843d2ccbac32852869ec81c2c8abecdaea046232082bdc8b61a2627b2"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/multiplayer.css",
+      "sha256": "c54e9dcb4fa1a465b6dbb394f3d7110874f72aeae303753f0b2b81848f19f684"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/native-ui-adapter.js",
+      "sha256": "0b2c9e7e09b2a415670953c309d717cc5d73f14de2fc89e68512e806b662fa31"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/Oswald.ttf",
+      "sha256": "5b38c246e255a12f5712d640d56bcced0472466fc68983d2d0410ec0457c2817"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/session.js",
+      "sha256": "94279cbee9d4fab974dbc99bca7d943c3f9aea159f080682838d581e5d2abbbc"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/socket-bridge.js",
+      "sha256": "708c01e7489c1d46c6afd5082cfbdeeefed1ee27317a8282359a010e942a1995"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/terrain.js",
+      "sha256": "01d8e8dabe9f959f000338d0273a8ae74929896e776b87b55340010a13a0df7f"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/warzone2100.data",
+      "sha256": "9e89d11c8b67b5f68ddc0be43290233c28cd43b3d2a96fea1a7b4beaf83b8424"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/warzone2100.js",
+      "sha256": "6a46eaee3a7745d41444a31957448d67f1849dbcbb539986643be9a6654f64d8"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/warzone2100.wasm",
+      "sha256": "7f066f805909a085862832c2eaf762eb8304f2fac0cbe98c68afea0dca36a173"
+    },
+    {
+      "path": "app/src/main/assets/warzone/assets/android-chrome-192x192.png",
+      "sha256": "e4ab588956e98cc2dbe02e29826dd82965eaae4ef401f85ef477f57a02630ccd"
+    },
+    {
+      "path": "app/src/main/assets/warzone/assets/apple-touch-icon.png",
+      "sha256": "c9ad817abf3ed0922a14e6326fdf780a27fb0180a806eacd2a28868961036d5b"
+    },
+    {
+      "path": "app/src/main/assets/warzone/assets/favicon-16x16.png",
+      "sha256": "417bd4a3447fa3c36170ea2622c642e9d6bdc568b1715e88d0dd05591f47c323"
+    },
+    {
+      "path": "app/src/main/assets/warzone/assets/favicon-32x32.png",
+      "sha256": "6f5eb8e15be4786c9697a6db936c2f149ca5d354f40f104ee62c3e93f7f28ee8"
+    },
+    {
+      "path": "app/src/main/assets/warzone/blocknight-scenario.js",
+      "sha256": "d849fbedcffdbc6ccfcf66872980fca6c47d92d61feb81a6aca7180df839bb70"
+    },
+    {
+      "path": "app/src/main/assets/warzone/briefing.js",
+      "sha256": "ef2a65592a3913e3ba0bd0a58ef677c6022eff35a15e34b0440d76dfff71844e"
+    },
+    {
+      "path": "app/src/main/assets/warzone/build-ghost-models.json",
+      "sha256": "0781ec8305550c8fc8b718c72280a87c182e2538983dc397aa40c5ae5fe2da4f"
+    },
+    {
+      "path": "app/src/main/assets/warzone/build-icons/A0CyborgFactory.png",
+      "sha256": "9950278d8cf0b662b49c01bce5b12f7ecef38eed61071eae02137472a78fbde1"
+    },
+    {
+      "path": "app/src/main/assets/warzone/build-icons/A0LightFactory.png",
+      "sha256": "70f7e46a496f2ae0d9c69545fe93c29fde4e80377c70d06ab9b73d6467180445"
+    },
+    {
+      "path": "app/src/main/assets/warzone/build-icons/A0PowerGenerator.png",
+      "sha256": "84353cf6dca17e854c7d44f95a8a2de0f6c6a846ddc3d50cdec5cc904b9a0564"
+    },
+    {
+      "path": "app/src/main/assets/warzone/build-icons/A0ResearchFacility.png",
+      "sha256": "e802fc16659adfeb889a59be8bdc27fe8051960af90fa4282ec94fc5c7f22bd9"
+    },
+    {
+      "path": "app/src/main/assets/warzone/build-icons/A0ResourceExtractor.png",
+      "sha256": "966bfb0cc5c85b637e8702a6ad1d4c2e70152b0ede6083c99d0043339342b24f"
+    },
+    {
+      "path": "app/src/main/assets/warzone/build-icons/SOURCES.json",
+      "sha256": "488f3c23fd383d3157026a3221daec2ee1fe30728f3a5a38cb66038df2f89364"
+    },
+    {
+      "path": "app/src/main/assets/warzone/command-catalog.json",
+      "sha256": "d70d5672fa1865411b8e574e67e770dc3b13956a6e5710f37e69396f4ff3453e"
+    },
+    {
+      "path": "app/src/main/assets/warzone/favicon.ico",
+      "sha256": "6f5eb8e15be4786c9697a6db936c2f149ca5d354f40f104ee62c3e93f7f28ee8"
+    },
+    {
+      "path": "app/src/main/assets/warzone/index-campaign.html",
+      "sha256": "9125109386919832f10fce7e41f8c613c5c799c5751bc1c9ad620b2848f62c67"
+    },
+    {
+      "path": "app/src/main/assets/warzone/index-duel.html",
+      "sha256": "eceab8d7c32a22ad29bd8379a235da2669e89e1ea539ab97abe6b944151b4876"
+    },
+    {
+      "path": "app/src/main/assets/warzone/index-ffa.html",
+      "sha256": "8803882047be5de76dd49f129a60b334c1cf842a6a64e199bb42106597145a1e"
+    },
+    {
+      "path": "app/src/main/assets/warzone/index.html",
+      "sha256": "009c5c7563727f8002f31212b53e22f81ce3cf2b55682feb598558a6f1249e6b"
+    },
+    {
+      "path": "app/src/main/assets/warzone/levels/catalog.json",
+      "sha256": "29ba1fc05fd98fa1c8984f2cd6c9fdc5da478e664aee452813278bf960743452"
+    },
+    {
+      "path": "app/src/main/assets/warzone/levels/previews/beginner.png",
+      "sha256": "050b08847b7ea9ab0d622cad92113036383395c8241750c5c03adec54810db1c"
+    },
+    {
+      "path": "app/src/main/assets/warzone/levels/previews/easy01.png",
+      "sha256": "2532b57dc26bf2e6ec34e6da59ef0a64384e9e60282c54fdd86c93bae5ff36d5"
+    },
+    {
+      "path": "app/src/main/assets/warzone/levels/previews/easy02.png",
+      "sha256": "d6e5580a96b971e4c6ef73a1e7170cb4e1573dd2deaea838f4a07a0576048dc2"
+    },
+    {
+      "path": "app/src/main/assets/warzone/levels/previews/easy03.png",
+      "sha256": "7fa550e39e6039b4f5eb05a1fa957a6a03235c1543739f1c52a5c62254739214"
+    },
+    {
+      "path": "app/src/main/assets/warzone/levels/previews/easy04.png",
+      "sha256": "421faba5e26d0c02242d0c87a916ab1b74b4013a74e2245dd235e178680b6ab9"
+    },
+    {
+      "path": "app/src/main/assets/warzone/levels/previews/easy05.png",
+      "sha256": "da4fad07af4efeb568060dc134557d836b2ae477ac900cdc76cf6d9cb5929d88"
+    },
+    {
+      "path": "app/src/main/assets/warzone/levels/previews/easy06.png",
+      "sha256": "f588a0e4a6a105f1bf5726b5831f03e706e08fe3942d539c6c77d9cfa3ab5804"
+    },
+    {
+      "path": "app/src/main/assets/warzone/levels/previews/easy07.png",
+      "sha256": "e827b7d10dd22e8d97320f6414450d97e0ef419fa438ead69a4666202cb932b4"
+    },
+    {
+      "path": "app/src/main/assets/warzone/levels/previews/easy08.png",
+      "sha256": "f6633ef99451d5da213c00e6fe92425b449bf065daf2c89ed5293b9533df3ab8"
+    },
+    {
+      "path": "app/src/main/assets/warzone/levels/previews/easy09.png",
+      "sha256": "5049094513c61b391e0a18dfa7fe634395ac4cbffb856490f091fdfa074e51e9"
+    },
+    {
+      "path": "app/src/main/assets/warzone/levels/previews/easy10.png",
+      "sha256": "bd51d96aae0a0990675350ed9f0cbc085b92ed33011ce391016f0b137e55fbe5"
+    },
+    {
+      "path": "app/src/main/assets/warzone/levels/previews/easy11.png",
+      "sha256": "3200ccdda7aa0c1ee29b20ad0ce35b43d2ca410d9157fbe0c532731601b70c83"
+    },
+    {
+      "path": "app/src/main/assets/warzone/levels/previews/easy12.png",
+      "sha256": "c491be806ea70cfb80e2bc30ade963a6bd3c60e1b529bde9c2daafc01480799a"
+    },
+    {
+      "path": "app/src/main/assets/warzone/levels/previews/easy13.png",
+      "sha256": "19b42f62e1211e920c1b0c58706e5fce74f06dd9b1b17e05dd2e6c718777d60e"
+    },
+    {
+      "path": "app/src/main/assets/warzone/levels/previews/easy14.png",
+      "sha256": "3ecffafd1885e6c89b9cb229923d8a02504751e11c68ab376038b304a67e837c"
+    },
+    {
+      "path": "app/src/main/assets/warzone/levels/previews/easy15.png",
+      "sha256": "633a940e563d2f9f6940196b19d98b1e348ee15912cab11381bae48a31d0e521"
+    },
+    {
+      "path": "app/src/main/assets/warzone/levels/previews/hard01.png",
+      "sha256": "16e92343c55b8a01df58aebb5ea2d239a521aa32ac67075f8d190f0595222849"
+    },
+    {
+      "path": "app/src/main/assets/warzone/levels/previews/hard02.png",
+      "sha256": "d78c4b2f1ae85bf0cad98e64a4ce588d8161c5803d9952a11a3effb6c6a4f908"
+    },
+    {
+      "path": "app/src/main/assets/warzone/levels/previews/hard03.png",
+      "sha256": "ef80684a2cb9655579642aabc36fec92c61c58d2475adbf29bfc31c9d86e290e"
+    },
+    {
+      "path": "app/src/main/assets/warzone/levels/previews/hard04.png",
+      "sha256": "d4ff83d01aafef2144d022ca17e62a698a3ecdffb564379d8f9ecbbb203c21d9"
+    },
+    {
+      "path": "app/src/main/assets/warzone/levels/previews/hard05.png",
+      "sha256": "282bd5182d74f71848396c2d72aa710479033bd8ab4db989e295565a83e7739b"
+    },
+    {
+      "path": "app/src/main/assets/warzone/levels/previews/hard06.png",
+      "sha256": "ae2f20eabb84488aff7e469892354889fee9536613cad269f104d44b26f901eb"
+    },
+    {
+      "path": "app/src/main/assets/warzone/levels/previews/hard07.png",
+      "sha256": "ee835fcc92c2a801b201dcb9f9210a552636c62132305b792b1863092e44e4fa"
+    },
+    {
+      "path": "app/src/main/assets/warzone/levels/previews/hard08.png",
+      "sha256": "aab5fe83aa40160d12b807f44c5eca71865ed3b3254dda829b682476ed941db6"
+    },
+    {
+      "path": "app/src/main/assets/warzone/levels/previews/hard09.png",
+      "sha256": "fde6eec3e74df3fcfd58f0ff799c1a6c1f97d2cbbb856d6caa0a7ee450590949"
+    },
+    {
+      "path": "app/src/main/assets/warzone/levels/previews/hard10.png",
+      "sha256": "d11e0d377339bb136eb149c3233f99dae380e80fe8e42178818140a08d1e75f3"
+    },
+    {
+      "path": "app/src/main/assets/warzone/levels/previews/hard11.png",
+      "sha256": "3d816ccc7ce9ed38ac38e22f1fc16e3a904000eb5cb5700915a19dcaf1963187"
+    },
+    {
+      "path": "app/src/main/assets/warzone/levels/previews/hard12.png",
+      "sha256": "63fcea814fb39b1b2f4283d4830c9f82a13efd611c9e634747c4f19581e921d9"
+    },
+    {
+      "path": "app/src/main/assets/warzone/levels/previews/hard13.png",
+      "sha256": "8c10fc06d132557f80a57f5d2246fbeb8546bb143e2326ab247616c7e08dfa3f"
+    },
+    {
+      "path": "app/src/main/assets/warzone/levels/previews/medium01.png",
+      "sha256": "fb45286252c9c5e7fbe4dc59f82dbfaf823c2c025845cd410d9781089018a4ed"
+    },
+    {
+      "path": "app/src/main/assets/warzone/levels/previews/medium02.png",
+      "sha256": "664261f856e1c019bdb96a8cb4e0770544d0fe668a4b3a957feb037d640c8ba1"
+    },
+    {
+      "path": "app/src/main/assets/warzone/levels/previews/medium03.png",
+      "sha256": "9c4b6ea70be2789193d2da9d6ba4f012d53768a14a8b3c7c1f738442739fafc6"
+    },
+    {
+      "path": "app/src/main/assets/warzone/levels/previews/medium04.png",
+      "sha256": "f540bc7926cd289013497b4fa7f8a7c23e9aaa412bfd4f07642422b54f5d9059"
+    },
+    {
+      "path": "app/src/main/assets/warzone/levels/previews/medium05.png",
+      "sha256": "e9b1f201eb043955f362cef8a1b38a7345a88b243c80922fd85876497df8b639"
+    },
+    {
+      "path": "app/src/main/assets/warzone/levels/previews/medium06.png",
+      "sha256": "7ecaad0ea3ade99ad2a4da8d211321aef3359e8c1b72d5c5bf855889219b174b"
+    },
+    {
+      "path": "app/src/main/assets/warzone/levels/previews/medium07.png",
+      "sha256": "e2d297f2407b715d1290f63a5b7aeaad5f73931412a87b2f18b2d50fc9049860"
+    },
+    {
+      "path": "app/src/main/assets/warzone/levels/previews/medium08.png",
+      "sha256": "476586200f8392ea5c1d422464abf8e66c7a36aa282c105eeb859bdbb333b79b"
+    },
+    {
+      "path": "app/src/main/assets/warzone/levels/previews/medium09.png",
+      "sha256": "fbe44061bd24312eebdbee1f77d787a2f5d42c8ce8371e87284e08994e26d16d"
+    },
+    {
+      "path": "app/src/main/assets/warzone/levels/previews/medium10.png",
+      "sha256": "2d6d11fe28e4726b26717ed8aeba0ce3a7373ca33b72099700a6d0d2643668cc"
+    },
+    {
+      "path": "app/src/main/assets/warzone/levels/previews/medium11.png",
+      "sha256": "c8174a992996cea79d413a04384c6aa308fdea225520321df8c775522bde5926"
+    },
+    {
+      "path": "app/src/main/assets/warzone/levels/previews/medium12.png",
+      "sha256": "b478c07871096188b8fd05301393891fd243a6f85787aa583947639846011ea2"
+    },
+    {
+      "path": "app/src/main/assets/warzone/levels/previews/medium13.png",
+      "sha256": "4b89941ed188451815e0ae1974db1a318981f50cc83c89c41e7c7514d1e18c23"
+    },
+    {
+      "path": "app/src/main/assets/warzone/levels/previews/medium14.png",
+      "sha256": "d0fe8de0afe8916b70d015eabf747312289fa76c586b980f393386f8f6ea8ca2"
+    },
+    {
+      "path": "app/src/main/assets/warzone/levels/previews/medium15.png",
+      "sha256": "71daf2277542ba4d5aeff29bbe57c1c7c725e3c7c2cfd5de2545c43293d4d070"
+    },
+    {
+      "path": "app/src/main/assets/warzone/levels/previews/td1.png",
+      "sha256": "b98afcf60180ece606dce7a8c47f47d3dc71f6a5e94ab3e961cf256039c34183"
+    },
+    {
+      "path": "app/src/main/assets/warzone/levels/previews/td2.png",
+      "sha256": "25714cb84dbfe6c3ee85d3f51a90dfbd7d6f14dde095fc77046b522f5151902e"
+    },
+    {
+      "path": "app/src/main/assets/warzone/levels/runtime.js",
+      "sha256": "66922bc7207ad566af6ac7867cce87bd861172712108697416756cd99acbb534"
+    },
+    {
+      "path": "app/src/main/assets/warzone/manifest.json",
+      "sha256": "3842a16b6069ac832bddffa18b6954fcf94156826847a1cfa5fe09cb4e291544"
+    },
+    {
+      "path": "app/src/main/assets/warzone/map-music.json",
+      "sha256": "595fb014ceed6023230443fc013131407e1530b245b6061ad749c810d6a074e9"
+    },
+    {
+      "path": "app/src/main/assets/warzone/mobile-campaign.html",
+      "sha256": "c9b387397b71ef43a5e1fcac6ab7487622186db086ddb066804654600af884c8"
+    },
+    {
+      "path": "app/src/main/assets/warzone/mobile-duel.html",
+      "sha256": "78da4acbe2edcceffcb161a16aef230548a9fa83508e80e6f23c77a189d8d86a"
+    },
+    {
+      "path": "app/src/main/assets/warzone/mobile-ffa.html",
+      "sha256": "98a16b5f825ac8e7e5f2d78658e064f96fb47de41e3c7455cd3690efac3ed794"
+    },
+    {
+      "path": "app/src/main/assets/warzone/mobile.html",
+      "sha256": "a04071930c9e06e7283a198a37d28c56da124f42005b34732a1deff9ee33fbf6"
+    },
+    {
+      "path": "app/src/main/assets/warzone/music/COPYING",
+      "sha256": "8177f97513213526df2cf6184d8ff986c675afb514d4e68a404010521b880643"
+    },
+    {
+      "path": "app/src/main/assets/warzone/music/COPYING.NONGPL",
+      "sha256": "c488fa6d5a8c88be7667960834fd727bf9257745634ef8dd80d84158b2d37e67"
+    },
+    {
+      "path": "app/src/main/assets/warzone/music/COPYING.README",
+      "sha256": "3f0ff94d5e06172b571e77fda97a263eb8ba62f186333f60d8cacd50106cb5c0"
+    },
+    {
+      "path": "app/src/main/assets/warzone/music/music.data",
+      "sha256": "602ea6c69f4073a9617676a39f8397232953637a9b7a36e7cc28e93dd15184cd"
+    },
+    {
+      "path": "app/src/main/assets/warzone/music/NOTICE.txt",
+      "sha256": "f4caafd832015d65520f79af120d8da7d8c6cc2e15ec132264d8f423d821d0ce"
+    },
+    {
+      "path": "app/src/main/assets/warzone/music/README.md",
+      "sha256": "a969ee5ea8bfc3ee3e0eaceb0278accd215e00d8d8127280347bb971716d875b"
+    },
+    {
+      "path": "app/src/main/assets/warzone/music-catalog.js",
+      "sha256": "e0d05a3033067c675cc5dfa37b2796a53e84b87a566519b4cae0d8256de5de5a"
+    },
+    {
+      "path": "app/src/main/assets/warzone/music-loader.js",
+      "sha256": "f53e6bf3d898e546045937456e3c5bf1eafdc981573c1d6c670d9762fa03cc07"
+    },
+    {
+      "path": "app/src/main/assets/warzone/music-tracks.json",
+      "sha256": "e17fa70903ae9c5c8c065d434d1b5c29ab0ee1d2e07b091339c9a72478a4f601"
+    },
+    {
+      "path": "app/src/main/assets/warzone/native-notification-prefs.js",
+      "sha256": "4f0c3a11f15684507795fdb2fde894ff81359c0f38b6e093a2d86c16e48dc9bb"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/AA Ammunition Hopper Mk2.gif",
+      "sha256": "164cd4ff779489d857e97c05db258d3f7894846e481724d60240481455229ddc"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/AA Ammunition Hopper Mk3.gif",
+      "sha256": "40b26cecd94072315d2149eeca6a9a8e96514dd2370932c5bf4194483a1fc0ff"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/AA Ammunition Hopper.gif",
+      "sha256": "e0ffe5579bd5fec3cfbb66743030eab2a1ac241c807a3f878fa2590a9f42cc2f"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/AA Chainfeed Loader Mk2.gif",
+      "sha256": "e2446fb7f2b3658f9952b9bc925cc2e05b97968a3cd76f7da675b2a674b75324"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/AA Chainfeed Loader Mk3.gif",
+      "sha256": "3e8bcf329d51d3867d83b93274331885172aef12626edd4349dda78a4e57c3af"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/AA Chainfeed Loader.gif",
+      "sha256": "3164281460c081a9715c36faa956ff93a21c630f8d959c5cd1afb412586b00bc"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/AA Flak Cannon Emplacement.gif",
+      "sha256": "bf04c4ca82becc5bcd9d8d47fc4805b08541e65adad465facbbbcc8c3f4e0c19"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/AA Flak Cannon Hardpoint.gif",
+      "sha256": "7a027148a6e9204b23aa2c240fc4f30bb6ef49efb84b9829e00788adf922df2b"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/AA Flak Cannon.gif",
+      "sha256": "b8d31de5ea96524e51595eef51d0f7cdd87a276973d95c190818b34b6d71edc7"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/AA HE Flak Mk2.gif",
+      "sha256": "8db43d57714829818b2006322697ddf54a2b9120b63f0842bd6ee436612b2d64"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/AA HE Flak Mk3.gif",
+      "sha256": "9300bfc816b6dc6d492a5d75a1937f2093ad93c4966a946428fda808490ef349"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/AA HE Flak.gif",
+      "sha256": "c58c04206d4b835b0d1b4fbad5adf8182b634efa6b0acd0991a286ee8ce7f566"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/AA HEAP Flak Mk2.gif",
+      "sha256": "214220a7a5d4bcce0daf7769a6b1852d30148f343de4abb704709cf551450e8a"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/AA HEAP Flak Mk3.gif",
+      "sha256": "3a61a610f9854dba5aeb7d9e8ce06f4b02a6f183c87449ae4b3e07da0da3e6e9"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/AA HEAP Flak.gif",
+      "sha256": "1622657a20498b57998803f0e7d82848909921d0abef0f6807e903814a0e84e1"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/AA Target Acquisition Shells.gif",
+      "sha256": "71bfc52916edb544631d9f94ffa4f3431843cf6dd1883b025bfe6d06f5c569dd"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/AA Target Prediction Computer.gif",
+      "sha256": "c2290b782e401bdfcbe934bdef67d25c017484611343317aaa14dfe8607cd234"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/AA Thermal Imaging Sensor.gif",
+      "sha256": "92d29f581f0a85044ff65827e7d4ad6dce11dd19597562ba1edaba1817ba7ac7"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Advanced Base Structure Materials Mk2.gif",
+      "sha256": "5e49ec93e11b4ada5d8225445732208ee603cd72edc90ac04b675f4ec4adb055"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Advanced Base Structure Materials Mk3.gif",
+      "sha256": "3d53c96ee8058e3d3e23114bb41f0ff36d28cb7dee1d79f9ec6621bb3d3959b5"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Advanced Base Structure Materials.gif",
+      "sha256": "9670e893b1224e8929197691c8b1f1a1bd2ee34a3180dca51ac25ee2b2c092db"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Advanced Bomb Warhead.gif",
+      "sha256": "9a72007c993b495245a1224b50a33636ca91906dcc67956cf2f7053e20cc0249"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Advanced Engineering.gif",
+      "sha256": "e3fae7b847eefd20170eb3a41eed9e2350ed87f214fb74102236f3ab9e6dd81c"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Advanced Manufacturing.gif",
+      "sha256": "cc7c53c2451ba0a595a9c616b3bd11e2acf536f41ed38c9252312b6ff5716a34"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Advanced Missile Allocation System Mk2.gif",
+      "sha256": "bdc37ab9243258a82998899e538124d5d803491e46476f73e294958b61675d08"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Advanced Missile Allocation System Mk3.gif",
+      "sha256": "bdc37ab9243258a82998899e538124d5d803491e46476f73e294958b61675d08"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Advanced Missile Allocation System.gif",
+      "sha256": "86a182a52909bbb3e210b50c2a9c673c3cbac733340135dcffe0ace59d0077e5"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Advanced Missile Warhead Mk2.gif",
+      "sha256": "6d3c94ca37ddc4e62fdc03eb2edbca3a3daf9d8062b24074d64721a36c3734d7"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Advanced Missile Warhead Mk3.gif",
+      "sha256": "6d3c94ca37ddc4e62fdc03eb2edbca3a3daf9d8062b24074d64721a36c3734d7"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Advanced Missile Warhead.gif",
+      "sha256": "b516d651e3f333f1fb84703458e89b76c854e95e5fe6f4d952423ac7a75b53f3"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Advanced Repair Facility .gif",
+      "sha256": "e2ae583a245a9d71b4a0a802e4ad7fa823b5f7bd57c15d7dd12e2fa862a7b4d8"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/APDSB MG Bullets Mk2.gif",
+      "sha256": "f7737a468d0e86fcb4420e91cd295b08c1d72f1edc2254ca7d0dc21dc46773e5"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/APDSB MG Bullets Mk3.gif",
+      "sha256": "c76f1004d55eb48cbe90c1008ed61692fc03e2bb620f65cd9fac9494fa4f1410"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/APDSB MG Bullets.gif",
+      "sha256": "f3949c3b544c989488bb73a080cd48c6b182f34d9e381147faf32e69c3e9249c"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/APFSDS Cannon Rounds Mk2.gif",
+      "sha256": "17105f8a0d2affe8164586134f9e8ee586999f45e75159773f5d35e9db211cc6"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/APFSDS Cannon Rounds Mk3.gif",
+      "sha256": "d1cc5d3c173bea1c44f8586fc9e4bc2a9335dc20dd9001a44a19f79da5b4dc8c"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/APFSDS Cannon Rounds.gif",
+      "sha256": "af6a13290eca9764f406328462d0c45c995552fa0d5b5d555780f29c3e9ae27c"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Archangel Missile Battery.gif",
+      "sha256": "9ee21adb3a8dbb38990582da650bfa97a391abfa3823b381043a8b81352069bd"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Archangel Missile.gif",
+      "sha256": "73fece43d1982b4312898399e4b0e8f5cdc0793dd2797960fc33ccc8f959d3cb"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Assault Cannon Hardpoint.gif",
+      "sha256": "60ada68cd09fe3539a98bb1080c83dd9ed1d0661a68ba7625b92220dca63454a"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Assault Cannon.gif",
+      "sha256": "0610755a8e2d56969adf9ddd6dabf867cac462b206f85b467f4f2bf793269586"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Assault Gun Hardpoint.gif",
+      "sha256": "91688987fe0b27b15b29bbc67b66d28f1c9f56926b39fe184639f66dab56b3ee"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Assault Gun Tower.gif",
+      "sha256": "d6ad781d80e3e54b48a5da7ea51d1ec0986281d8ad4630a42e61fbe3b58fbee3"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Assault Gun.gif",
+      "sha256": "4868bf93bd6e4e4e98719f9a3a101dddf8d3915066d4f5d4d0612888ca582f0d"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Auto-Repair.gif",
+      "sha256": "85fb9e7a464af2321b22720fb8bc460d115e0e675b9f2bb8eae37b593e537019"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Automated Manufacturing.gif",
+      "sha256": "6f1fd958b02a46fa38e3716f841577bbbe5e3cd82a5f9a8efd4f77ed5f6568ff"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Automated Repair Facility.gif",
+      "sha256": "de61d86c8ade6f5c949643eec7afa79a19e089d98970dffd3e7e27c47447674b"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Automated VTOL Rearming Mk2.gif",
+      "sha256": "cf035f7060381deed1170e7b7c45f545e3bd9112e801055c6dc8a85c5fb714b2"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Automated VTOL Rearming Mk3.gif",
+      "sha256": "f6bcbe99b7886d66d536fa4da27efc84f563521f407f7e7966e2b1190baa25a6"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Automated VTOL Rearming.gif",
+      "sha256": "0df3f9fed02afdfd73eeb26cbf62ecac9031c8d2e9fa7ced7629bd8a5bc9470b"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Avenger Hardpoint.gif",
+      "sha256": "be0f2d4709ff66cad4bc33928efc3ac36b560a62b2630d275ded55431e611edb"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Avenger SAM Site.gif",
+      "sha256": "b00e3aa7811719b6cb5ab538aa0034766c17caf0f7730f2c644040e2d0bf5554"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Avenger SAM.gif",
+      "sha256": "6404b72f7bdb0c34db8a2026fbfdee993caa368b3a3eeb679480be2d4d233b4f"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Avenger SAM.png",
+      "sha256": "4db3d104c71f821a5f7b1212a2232d3447384eb901e0759c2b43bd2a31969145"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Bombard Pit.gif",
+      "sha256": "d4af4aee678d6f61c09a80be2d32a71c0a161ebe35f3d322090ed83464b97ba8"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Bunker Buster Rocket.gif",
+      "sha256": "920808d3e6092f651c6688945cdfc6ce5c05e1faeeaab825e42a6d5596655e3c"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Cannon Autoloader Mk2.gif",
+      "sha256": "73d2fe44e944791102faa3f0e98ebacb6f6955fcfe57ab7079249dde20c9c0bf"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Cannon Autoloader Mk3.gif",
+      "sha256": "3529b6d2e1e2b8e23cf9c071a6e1c46947a1cac0c8092e93df45ca7f68b7d447"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Cannon Autoloader.gif",
+      "sha256": "d45569ec20498dc1ec69ec0ef48baf48d6a28b2e71d62baf1192b81ff08a9467"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Cannon Fortress.gif",
+      "sha256": "00614060a19591a0aa90aae5e3705ff73da996a41584c94f219f445708582295"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Cannon Laser Designator.gif",
+      "sha256": "70d2650987da747793a0be27d02cc9fccaeef72f02b1d75be17fc27e67cc52c2"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Cannon Laser Rangefinder.gif",
+      "sha256": "bf3c81e8227700ad30caa4d0593def8c1ef3118adc5283b3dc2c711533461bdc"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Cannon Rapid Loader Mk2.gif",
+      "sha256": "e3cbce60499223992d90da78451c6be3de8e5a3cdcb6be3d0cb8da69a66a2fef"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Cannon Rapid Loader Mk3.gif",
+      "sha256": "2a75c86d4c5ab537186e0a50631901fb319ec4ab8c3c8cf9ee69a8cc2c52d698"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Cannon Rapid Loader.gif",
+      "sha256": "7d3aefb56477bb7acbd87287f12c3d13833c73282dfd41e37ce6de419102b367"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/CB Tower.gif",
+      "sha256": "887eff7f1f03876929e4f131976ea9b413acceba5de7778639b5cf0923165e0d"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/CB Turret.gif",
+      "sha256": "a0bcc15a38f6a169d78a76b34f28dfd585aa0e17561940995870b912eaa1f5ce"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Chaingun Upgrade.gif",
+      "sha256": "1abc3ec6733292c585aafa20c9b8127da48dae61c794a9ad06b7b3964bccfbe8"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Cluster Bomb Bay.gif",
+      "sha256": "6dd3bd651bc0777df6c30a3e4fd7b6df6fa666c114840a567a84bc1a9d077e4e"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Command Relay Post.gif",
+      "sha256": "743a0dfc1b0f59af32136c533b64d9c2ba7528c98e77043f6dfb1d63c4ab8d74"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Command Turret II.gif",
+      "sha256": "1632b9fac2454ac9cc51de275e68e73ca39ac7f2d69f22e77ca2b40e5352fe86"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Command Turret III.gif",
+      "sha256": "dbad3fea04034a4a628c6d8b5ecf33e7720c4f32dce6d4064742b19933e47527"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Command Turret IV.gif",
+      "sha256": "ca436213e6a4296414e266f868c2b833965af4e8d41690dad45a0579941c6922"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Command Turret.gif",
+      "sha256": "d00d4fb1f6b90d637f7ba7a1574a160b463b5a7edb8649c14f0ef152d208b0ae"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Composite Alloys Mk2.gif",
+      "sha256": "b47f3e30792c32634f72f0e0157fecf90f0afe55da2ef829d3c19b0ea2d8103f"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Composite Alloys Mk3.gif",
+      "sha256": "360ad62a0ad75774420f4ae5dbf1a53772a24c42a1ae9b8e36c5487ea1a9fb70"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Composite Alloys.gif",
+      "sha256": "e48bbb8d0daf0a08ce91cd051a3c8866888a1c6ad4cd7a7fdaeeec6ba1f4cd79"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Cyborg Composite Alloys Mk2.gif",
+      "sha256": "74a47123c124b4a15be31a6c81ecf8fd39b7c34125d971d27cc6e5d40494af98"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Cyborg Composite Alloys Mk3.gif",
+      "sha256": "21ceb45ed7df8bd0b760631ed7c361a6ed0c93e85464bfd50a4cfbc32a76891f"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Cyborg Composite Alloys.gif",
+      "sha256": "0aa20118cf0da688da152a3896287396f62ac049f35c4439fec392e045ced025"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Cyborg Dense Composite Alloys Mk2.gif",
+      "sha256": "d713ea81f2827d4b3c91d2770134db34829606d869ea7cbd97759c981ed75165"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Cyborg Dense Composite Alloys Mk3.gif",
+      "sha256": "04f737717804973952a5b01ba80d42805c2e3fb841f8b44f085b633366ac60af"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Cyborg Dense Composite Alloys.gif",
+      "sha256": "bc701f0f352d990c3565096455552c9a1e0fb1be70d593788b95deb1d2b5b23b"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Cyborg Factory.gif",
+      "sha256": "6acad9a8c4096d83e11503edeec5765ef79c05415a98fc98e4680343c2f56bb4"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Cyborg Heavy-Gunner.gif",
+      "sha256": "3cd804fd979a5cfd953e897acb32d34aeac75a9be0df80db35ba9c6a1401a7e8"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Cyborg High Intensity Thermal Armor Mk2.gif",
+      "sha256": "d1635a504a1c1b5b17ad54a6367f20d76b3b8e1fab8519a9dc57efc56d62acff"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Cyborg High Intensity Thermal Armor Mk3.gif",
+      "sha256": "7c42893624cf5d41d0f3a1b82f8e58dd8e1da21f9ac63bb1c3cf8faa6c528e0d"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Cyborg High Intensity Thermal Armor.gif",
+      "sha256": "41d6998edcc5cad9819494d39bf0614b5646fe38a9ac2f3981d49e4ddb77a92f"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Cyborg Superdense Composite Alloys Mk2.gif",
+      "sha256": "106a04b406b770bf477d9d3a93d78da2d150524b5f02965330337f9b20040e44"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Cyborg Superdense Composite Alloys Mk3.gif",
+      "sha256": "18d7ce5579872c18496461b6cfdf0c5810783dfac6a5224e162034838a17e783"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Cyborg Superdense Composite Alloys.gif",
+      "sha256": "7f9620ce8e2218f3d2fed66acb2e352e3eb91b9be9af971954b37375cd20df91"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Cyborg Superdense Thermal Armor Mk2.gif",
+      "sha256": "d18ab16f7c852dd50c40ebb6265c958e82290ddea577b6188a2be452712e5302"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Cyborg Superdense Thermal Armor Mk3.gif",
+      "sha256": "d18ab16f7c852dd50c40ebb6265c958e82290ddea577b6188a2be452712e5302"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Cyborg Superdense Thermal Armor.gif",
+      "sha256": "ed8d37b68ad393868fe420c4565f588bb61e8a3a495295e79f6e6ba414715c0e"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Cyborg Thermal Armor Mk2.gif",
+      "sha256": "69e2e456a64317e9f0f0856a1f450a8d7a96ca237f787d3dcb21466c6413d0de"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Cyborg Thermal Armor Mk3.gif",
+      "sha256": "f5dfedd4e3a8f44516627a701af4b1c7097b94d556a3e0449a135d79908a155f"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Cyborg Thermal Armor.gif",
+      "sha256": "a119a8903656b4be4fcedd717f3efc68227d6336bd18ff841f3556dfcf6770bc"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Cyborg Transport.gif",
+      "sha256": "b1637499e33d344851e92007b7292f3fc23b72e3100474cae31ac8cc991b758b"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Dedicated Synaptic Link Data Analysis Mk2.gif",
+      "sha256": "13a63d3e2ed3f9c08916b6d9e9333ad823e61d05312a42421efc797a9f66a06f"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Dedicated Synaptic Link Data Analysis Mk3.gif",
+      "sha256": "a8741d36f9634220b03a585180e95f673202b1ffcb1aa7fe8b9081f664208c2e"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Dedicated Synaptic Link Data Analysis.gif",
+      "sha256": "5a56efbefea485b772ff7d5e764d368d9bba08bfe7161b52b927919708244031"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Dense Composite Alloys Mk2.gif",
+      "sha256": "991c3592d2652da273b7f56e968277ac108daee2838213d6b038a6b83c93bc7a"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Dense Composite Alloys Mk3.gif",
+      "sha256": "42c74a7ed3f6d9a1f58607565ea367cf17882a6f114f4942bbcdcfeafa8ed360"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Dense Composite Alloys.gif",
+      "sha256": "a498bcdaceaa40166823bf3b50dee254bac74d78dafe994db1add176f67f5015"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Depleted Uranium MG Bullets.gif",
+      "sha256": "d71c3ef8dfb0ba56b4aa4dd97bd9440ec83dff02fcc6d9b56be3b43437e410cc"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/EMP Cannon Tower.gif",
+      "sha256": "9b51027f8c108a5767f2edf8c7fede588c333dfb250627222d726d9df6519970"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/EMP Cannon.gif",
+      "sha256": "d37d27c9389d820893c07baa5b47cde0a4d3e5dec65a1918ee5eb3d062652a2b"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/EMP Missile Launcher.gif",
+      "sha256": "9f0ba2b90c2c4495d5fd87323e67e477c836442cadf10228727f890dab3489b6"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/EMP Mortar Pit.gif",
+      "sha256": "2b708a87413aec1cfa89f87e9276ce79485a3e71600a61451031ec3ee7ac9755"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/EMP Mortar.gif",
+      "sha256": "4f4b515019020153b9627ec71e98b060ed22445139b371661550293415f20c1b"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Engineering.gif",
+      "sha256": "8acc89ba7041c3734c46cb22d16d1b8c792d657c2ef321c86af285fe5e4af160"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Factory Module.gif",
+      "sha256": "c469643b5ad74ae62733b8c5a87bb712c5b171d62a2a8c7779752ad587eb5ef9"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Flamer Autoloader Mk2.gif",
+      "sha256": "dea82c1109d3678a7ddd6682f8428bcef559fd397aa3d8f2c0516048da1de0ec"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Flamer Autoloader Mk3.gif",
+      "sha256": "727101c28192370a0c090126fbc2ee06c010e65bad34a0feb497b7e546a0ea9d"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Flamer Autoloader.gif",
+      "sha256": "a4d699bfc9a32e7543c3e798999a2867de979309ad869fc56783869d264fe52d"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Flamer Bunker.gif",
+      "sha256": "4222ee8ea0abee5440740e665d773ef32b135bb04e99eee5afd1ca56cd0ea2f3"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Flamer.gif",
+      "sha256": "8009c0e0c2eba399a01bc1dc9717e3ff74fd394b11098fe5bcc0fe05f8fe4743"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Flashlight Emplacement.gif",
+      "sha256": "0efd3335589e5a09a1dcd33ce1241c5d7390e810d9f71c4f3df88825b0d64179"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Fuel Injection Engine Mk2.gif",
+      "sha256": "bfc21cc362d8c66ae8e413967862ce07cb59243583f451406a2ba76ab71bf8ff"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Fuel Injection Engine Mk3.gif",
+      "sha256": "c231608752d65f330413dabb3a11462a7fcea8ae3b2cc81af22ca918943bafdf"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Fuel Injection Engine.gif",
+      "sha256": "23f04fcee71ed6e9e5b676abdcacdf912eef4461634246fc004ee8ced8dd97a6"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Gas Turbine Engine Mk2.gif",
+      "sha256": "a7a8b26f8844c3e35c6c05456cd2fdc7a966ce1e5b1c76e920bf44c32bdcd065"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Gas Turbine Engine Mk3.gif",
+      "sha256": "a7a8b26f8844c3e35c6c05456cd2fdc7a966ce1e5b1c76e920bf44c32bdcd065"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Gas Turbine Engine.gif",
+      "sha256": "f1cf4b75b11ccd84d57923aefb8bb9541ca59cf510d78fb24b68cb81c079ea4c"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Gas Turbine Generator Mk2.gif",
+      "sha256": "d13b75c1ffdb679463a882726caf4e4ea63c7cec0e2eb7902a19290c9214d364"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Gas Turbine Generator Mk3.gif",
+      "sha256": "587acf08d7878720939741ddcf732f65cfb9f3a65bc28f185a281eaedda104b8"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Gas Turbine Generator.gif",
+      "sha256": "c9b5b410c7c5481f08d3b1d4d9992ac6d9a6faa7b4c276b00204893eeacf9926"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Gauss Cannon Emplacement.gif",
+      "sha256": "2783adecdc617c5c7a5b0107a35b29e17f3cda3072dd242455dfa67989274e35"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Gauss Cannon Hardpoint.gif",
+      "sha256": "8ca6b56c3fc87dbd01bff7f76837cf95bca06913e0088e0b0b5a378cad281ca5"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Gauss Cannon.gif",
+      "sha256": "14f1d9d9b3532da99a276aebd1418c69d07e32edba4c959e6a993605c863fce6"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Ground Shaker Emplacement.gif",
+      "sha256": "a2b3f39559594695cb5bde13710f02eb4c5a411d5a2d7227935fd468ede9e826"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Half-tracked Propulsion.gif",
+      "sha256": "4baf79d320efa53406138abddb9d2b6b110fd0ed53b6d3371df56ad0f63ee55b"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Hardcrete Gate.gif",
+      "sha256": "5d0e32847976ff07f46096cbb52b1b74c680f67b6ce134bb08da5e67db0b8125"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Hardcrete.gif",
+      "sha256": "45d1e4474b0542a4e395faad41b91dd023b96e48640644ea1bad190428dd9edd"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Hardened Base Structure Materials Mk2.gif",
+      "sha256": "92ed6f798876172bb53c7925b0fae90fa7c55b7c423c3f0e4237286d56481eb7"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Hardened Base Structure Materials Mk3.gif",
+      "sha256": "55a623b025022a410aed475bee900da1c215db77cf334be75e3d511c597536da"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Hardened Base Structure Materials.gif",
+      "sha256": "be635f0e384364b42d1c2ecc6f8eac2f4ddbc14f410a88a0209b7290e1c49397"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Hardened MG Bullets.gif",
+      "sha256": "6570cdb2c6d8c126f33ed62c44561aa2bad34c6cbb866549f9f51f8ebc4d40bd"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Hardened Rail Dart Mk2.gif",
+      "sha256": "df9b5541f4a859938f1841fab8044fc5d96ecc1d04544069d5488da76154e46d"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Hardened Rail Dart Mk3.gif",
+      "sha256": "df9b5541f4a859938f1841fab8044fc5d96ecc1d04544069d5488da76154e46d"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Hardened Rail Dart.gif",
+      "sha256": "cae1661884aa59ac709999f3c98a472f0a5344b6b1622ac6bfa0601a09dd81a9"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Hardened Sensor Tower.gif",
+      "sha256": "92ed1b2c8448eacf4f496c0f2201d00b499279c0485a942e6b5a364cef88055b"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/HE Bomb Shells.gif",
+      "sha256": "3aeb5de4fdfcdabae9c2693f9973ead00f085324d173ccb38fa756ee34eeb6ca"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/HE Howitzer Shells Mk2.gif",
+      "sha256": "96dde0a682836675b640eca7f9aa8ce4fa60f50a3cb4f237b3958cab708740e5"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/HE Howitzer Shells Mk3.gif",
+      "sha256": "8c7abd97902b33ee6b02f3efba2a38f5b3c94019478926888f6d8fa53f3ac259"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/HE Howitzer Shells.gif",
+      "sha256": "bbe01ab8be039d80e7181412a080b67dcd8b694c59c2ab9d1554a980031718fd"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/HE Mortar Shells Mk2.gif",
+      "sha256": "bf19a6944a61773560796768b8b4a35a82417c87adffe62cc6098790dd933bba"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/HE Mortar Shells Mk3.gif",
+      "sha256": "dfe0c702703eac16853231a77d113d50a32175e764ea9e10694162db521eadc6"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/HE Mortar Shells.gif",
+      "sha256": "acf89174eff0313d326bda5278b66d66db327aba21e4475b98dee92182ce20db"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/HE Rockets Mk2.gif",
+      "sha256": "8a4a1976a7d8f4fb3d5eccb8a88220420d19ec7eb90fb0d56e2ef842f9491593"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/HE Rockets Mk3.gif",
+      "sha256": "44e93f2cc8e485e84c9d403dfca77f4ce857ca2ea394b3be70506b6e5c0ed1bd"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/HE Rockets.gif",
+      "sha256": "22dafc21f3eebd37cdfa71f6b90397ca82cc9387ad34c4cb08c4fadf55528bad"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/HEAP Bomb Bay.gif",
+      "sha256": "a38bbebabd3b3815eb70117a172b3e32386481c2ff6cdbc8c14c2542c48888ca"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/HEAP Howitzer Shells Mk2.gif",
+      "sha256": "1d8ba6e3e6a959ff6151ac7336931717e86765cfd2b3060c11a09bc4ed88b675"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/HEAP Howitzer Shells Mk3.gif",
+      "sha256": "a3ad939eef136bf7eb170781a7e299cfdbfc3ba743346f50c393a63737a7db82"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/HEAP Howitzer Shells.gif",
+      "sha256": "8c7abd97902b33ee6b02f3efba2a38f5b3c94019478926888f6d8fa53f3ac259"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/HEAP Mortar Shells Mk2.gif",
+      "sha256": "55b1fb8097537f5cab9c102792cfcfbb0dc2e15b3b25f536c221739b7bad178a"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/HEAP Mortar Shells Mk3.gif",
+      "sha256": "25c8a43f9d4cc9eeadb49f661d45b3d7c491b368664ab61cd37be6827934e210"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/HEAP Mortar Shells.gif",
+      "sha256": "5d366b989edac8061b5551fbd19ddc80e442e2d9b9edab0b8ca31046c57bc409"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/HEAT Cannon Shells Mk2.gif",
+      "sha256": "2f80329e93fbc7536b724c940c96e0c057ab52c9477a62c4bb225c3e4be37702"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/HEAT Cannon Shells Mk3.gif",
+      "sha256": "261a616049e049e4f9ccfa2591d1ff8726d61bcb473235bf6205d03ef2943094"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/HEAT Cannon Shells.gif",
+      "sha256": "319c35d4ce52e383c951fb9d857b5131edc6ba79c3cdc12b83fe443142744475"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/HEAT Rocket Warhead Mk2.gif",
+      "sha256": "877137fa009a2fa13ea30ffec3d501ffaf4fcc7ddf9e835608ba9d624dc4174c"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/HEAT Rocket Warhead Mk3.gif",
+      "sha256": "a5f772a6f6ac1b6926211017720f08e5b72cf2c4e6e536c5d384d55b004761d6"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/HEAT Rocket Warhead.gif",
+      "sha256": "01b5dcdb78ee46822e726156fe764abeb67c2ba5f402308c668a036f9cda79b3"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Heavy Body - Mantis.gif",
+      "sha256": "07302511411613a2a4444f31d70c67ba255dc9094fbe5a5f578d26e0595478d1"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Heavy Body - Python.gif",
+      "sha256": "e41572b5e2d8de9c3c38890d0989ddef841b9625a302958a23f82a76d2303ef7"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Heavy Body - Tiger.gif",
+      "sha256": "4368a57448a0c9eb8c81907deb4cde959ce18ba2517c19da423db0ccfb36a863"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Heavy Body - Vengeance.gif",
+      "sha256": "c65ddf241d802567c1ba124850a9bc56fb43922f7bc6c5efaede81042fed7520"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Heavy Body - Wyvern.gif",
+      "sha256": "c06816b1451599fd6084216e81cece48402b0fdcbf4e1907b5e5b2ba6236a8d4"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Heavy Cannon Hardpoint.gif",
+      "sha256": "419ec3e5eb7ec2a36bcee4d12f418c2ad8ed21894169a396e4e34984c6ec916e"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Heavy Cannon.gif",
+      "sha256": "8c369d48d21c06abc22843d4385985a9e22310c61a890f63532187212d793d2e"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Heavy Flamer - Inferno.gif",
+      "sha256": "8f81e0a1a2457cfe8e1dcce4022d7bc772250a7720c7026c3d9361fdfd691483"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Heavy Howitzer - Ground Shaker.gif",
+      "sha256": "6156bad5cc31d65faef12044bd563a690ad06d83032638e323d6b1c97878b0b7"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Heavy Laser Emplacement.gif",
+      "sha256": "dbc8ce71d0c2b83233854963830be087b88ae31d6af09ac0761abbf66cdd8727"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Heavy Laser.gif",
+      "sha256": "0c5e64aafa925619e858adcc3376afdb02234289abd6d7c9d0ee011998a874d6"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Heavy Machinegun Hardpoint.gif",
+      "sha256": "e3066af2701f96af7818e88db45301e4f233301b1c80a3d7ae1811adaf69f8b4"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Heavy Machinegun.gif",
+      "sha256": "f58230e7ef91654167a062794c4104034e1d533ff599f590150e2896fd8a24cc"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Heavy Mortar - Bombard.gif",
+      "sha256": "98a1520ce81a50a4804eeae5f0317e1b383992e45cd846ea13ad382d717de796"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Heavy Repair Turret.gif",
+      "sha256": "3ee3661fbd755672748f22ac30cfa81a641c153e803f4303444e87d744cdca22"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Heavy Rocket Bastion.gif",
+      "sha256": "2da6814ca0b851a96c314bf6efe1816babc3b66faac13693456bd2b6a12fab20"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Hellstorm Emplacement.gif",
+      "sha256": "7729ed7b6deedee7e3634f72b507f1d909248ebce29f4c536aa3c785f5649e2b"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/HESH Rocket Warhead Mk2.gif",
+      "sha256": "a5e83df5f6bb96cd386c845bc59fca43445ff2bb91f9b5788fc95173bbc7d47e"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/HESH Rocket Warhead Mk3.gif",
+      "sha256": "2a002b52a109a2f518f9a08c6e477044ae87e31e16b6103d0cbfef2c3c707dcc"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/HESH Rocket Warhead.gif",
+      "sha256": "1b6000ffc5edae322f2e276d58242babf3ccc4d8ba63e853af76e182d278d619"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Hi-Energy Laser Emitter Mk2.gif",
+      "sha256": "938ef0bb4d189928f89ffb206ef80d18ec12ebc7d5434c9208484728acf2143c"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Hi-Energy Laser Emitter Mk3.gif",
+      "sha256": "938ef0bb4d189928f89ffb206ef80d18ec12ebc7d5434c9208484728acf2143c"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Hi-Energy Laser Emitter.gif",
+      "sha256": "66f77a28d7787c3218562035f2c77eb135a8414ed0afc9c21154a007215c76d6"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/High Intensity Thermal Armor Mk2.gif",
+      "sha256": "9a7bcd0ec061d703a789da50b05aca99898da36d39fd9add171256a9dcb2ea9e"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/High Intensity Thermal Armor Mk3.gif",
+      "sha256": "107ccde25f668d6829915e2fb9e0171771838064c8d1914104590debcfa21747"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/High Intensity Thermal Armor.gif",
+      "sha256": "d47c40280c7912b899ae75129b28fa9cd7ef8c9a34bd196f348c57aa7604ace5"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/High Temperature Flamer Gel Mk2.gif",
+      "sha256": "db4aedd27de70a2378e71a3c83107992a6830cc0bfb974e5dfa3e808f05fd760"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/High Temperature Flamer Gel Mk3.gif",
+      "sha256": "fda0f4459c3b1d481a26c2c1e31e78be9b0e4e4df8fc82219a6d48be9f0b2f66"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/High Temperature Flamer Gel.gif",
+      "sha256": "ecbb4bf457c743691833f91e5dbfd5ae367dbd648aeb587e9dfe7c122ab10dfb"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Hover Propulsion.gif",
+      "sha256": "8894b63633387a4a5d22e1be86aeace54db65832a43376dcd42b7c97ebbe0a06"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Howitzer Autoloader Mk2.gif",
+      "sha256": "6028f7f4126b9ba95244621293f294cd7fa4f83147209add6a1d8d6d3c359fb8"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Howitzer Autoloader Mk3.gif",
+      "sha256": "b4706ad982fb60c76a37964ab11a613f83340cfc375b9c21ce58afa3e53bb6cc"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Howitzer Autoloader.gif",
+      "sha256": "ca44e52f2331488f9a065fbca099f176a48c8f20c410abac567a8be5a222c4aa"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Howitzer Emplacement.gif",
+      "sha256": "9f85d6d2e767dab8f3359ef551ce5d215d039aa4aed4a7c62b05c8145be1a43d"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Howitzer Fast Loader.gif",
+      "sha256": "e18297587a06d20ff1e7f5e0398b8e6ea8962535b2452c505f5652bf331b9242"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Howitzer.gif",
+      "sha256": "81fab04f52546ed70e4d657f32c0052d5108cacab449139bf547f3577a768488"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Hurricane AA Site.gif",
+      "sha256": "0c4918d6d942411702158fbc4e8ed7b46a7252e3d3e806b43045850641180ecf"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Hurricane AA Turret.gif",
+      "sha256": "bcd37476c77bf0956cb57e82348e42576f4410222cb5db46adc579ea046cabc6"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/HVAPFSDS Cannon Rounds Mk2.gif",
+      "sha256": "11d122b08f47bd49065bacff2e8b10b1fa0cc1f3feaa7826ff73a4ccecb54cca"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/HVAPFSDS Cannon Rounds Mk3.gif",
+      "sha256": "bdba18f72131ff2e1c29d23be1dde1b8c93e7dca9c0e6cfea4a0b61a649b60da"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/HVAPFSDS Cannon Rounds.gif",
+      "sha256": "855fb08680afcff593d4a26dc5968bbb8341e978565fe733fe6177883249b848"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Hyper Fire Chaingun Upgrade.gif",
+      "sha256": "a2ca53173f52bf59061a785146daeaeebe8f3cc1311069eb6e7044f39171b2da"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Hyper Velocity Cannon Emplacement.gif",
+      "sha256": "4866e4c3993ac292ed9b200f73bd080eb2fa6bf63d77aee52c56743772fc37ad"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Hyper Velocity Cannon Hardpoint.gif",
+      "sha256": "8dbf131b895d71afd86b566af064248b6745c604c4cf4a64dc49ca9a77db9047"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Hyper Velocity Cannon.gif",
+      "sha256": "e9b2735191e27bb57012d05cada2acb5117ed815011d2df8e390f8bd72cc42a3"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Improved Bomb Warhead.gif",
+      "sha256": "fcbfc49dd82e34d3800ef9034f5f5badaffbe6e633bde4598691f42898c1205a"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Improved Engineering.gif",
+      "sha256": "60072bd8a009453db935bfdcf3fd446c0419a5f318121ff94e55d3533278d6aa"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Improved Hardcrete Mk2.gif",
+      "sha256": "e001fa360a314b684e52ec12fc260ab702fc20c2cf4a6c2769844e0d14773a5d"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Improved Hardcrete Mk3.gif",
+      "sha256": "14b2219b48aa4f8ef7fb0d4ff4daa9460e456a3e89533b85e238383f65279f25"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Improved Hardcrete.gif",
+      "sha256": "bc171beeea28e728934be99735ce4bf5dc7e23466baaf1a23f8c335d2bc9ea51"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Improved Laser Focusing.gif",
+      "sha256": "f38a436e303386c647bc120e2d157f54e46b4c353b851809a1fea99b4c7650a4"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Improved Rocket Wire Guidance.gif",
+      "sha256": "958a52600ba6055d0c035e68f7db992ad48121f843ba78a750028d3ae4d1bc9d"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Incendiary Howitzer Emplacement.gif",
+      "sha256": "4bc69c1be3d584392560bd1c472d6f466fbcb0f30c971b997de44f31cd0af517"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Incendiary Howitzer.gif",
+      "sha256": "fb34f624e4c817ee310390a0f5fdb4739de9429de98ed970168bcc9e6bf7ab4e"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Incendiary Mortar Pit.gif",
+      "sha256": "92e601ed458d8513771a8a9c7c8e4e9b4387af6585cf7b36742885342dbf09c6"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Incendiary Mortar.gif",
+      "sha256": "6fa19fdd313ffdc77f8147daf20c14ca8d6ee11d78b37ef38abd503156bfe465"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Inferno Bunker.gif",
+      "sha256": "350cb99752e297b9fa1d2c2258d75d673791d0833fd1f31a355f00743712d91e"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Lancer AT Rocket.gif",
+      "sha256": "26ff6e642f7936d105bde582733ba83d6437346215026487d5a9b0dfa958c5a3"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Lancer Bunker.gif",
+      "sha256": "620ee08fd7bd0d9c4960081dee61ea1bcf5bbfb6348a63a8b496d4a64fdeca84"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Lancer Hardpoint.gif",
+      "sha256": "e22a561d8a3559e59980e54024faefa5efcc04a0d1b4a20869b910ee6c372f47"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Lancer Tower.gif",
+      "sha256": "d8eff14c922f1c35c1c47e1b8280751dd6b64a525559825ed51440a35d0756a8"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Laser - Flashlight.gif",
+      "sha256": "fa1e4a953fd864288c336a065a0ed7373a9f535d1335dac062325d1fb45a84bb"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Laser Satellite Command Post.gif",
+      "sha256": "208363dcee582f6a8e6929ff62fb3293bea443dbff94870a1c7d5ec0207bb155"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Light Body - Bug.gif",
+      "sha256": "ed90bf9d6c611c818300ad72d54f8604ffe8f832010fbdc1d1ec2f01ec136bfb"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Light Body - Leopard.gif",
+      "sha256": "7647815879fbca0af74af9db9949748706ead0110753002611e31734467758c3"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Light Body - Retaliation.gif",
+      "sha256": "077607f0a7a77fe958cdbe9ed26b136646fa6f638adb332c285cce41a0adc860"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Light Cannon Bunker.gif",
+      "sha256": "281e8c49b36b62c02295f9484ad6081d27bd829541e3c33343f495b9002cbbef"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Light Cannon Hardpoint.gif",
+      "sha256": "8352dc76ff0822339cea45539db9e33056e389ddd5331f71aeb9ff9365036f14"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Light Cannon.gif",
+      "sha256": "027514f254057245090adec6c23a235d5a601b2eff651fa64d4f8dcfb9168141"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Machinegun Bunker.gif",
+      "sha256": "d0d88c167877b594fa29de154043f0ea654b6b051c22b57ecf27d3ae58d4d590"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Machinegun Guard Tower.gif",
+      "sha256": "5cb007b9c2f5f2d57f7a82e13d71a63aec2d52d2a30ff2289add28840a2dc387"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Machinegun.gif",
+      "sha256": "978808260cdbf4a2d79342aef4c414524ed8cebad7f572dabd55c872e3fbd0a2"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Mass Driver Fortress.gif",
+      "sha256": "6db620397367bb461583b32e218c5ca8fcef834d6d2cb5fa207f8377cca8185e"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Medium Body - Cobra.gif",
+      "sha256": "0d40a6959cbce37bf1ae4008932456a6b9114bbfca94c686c96941bedc626470"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Medium Body - Panther.gif",
+      "sha256": "2c0592cca7ab66ad49da7a556efe37646b70a6f28dfb07a56b22eb5edee80b04"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Medium Body - Retribution.gif",
+      "sha256": "803df8f41dce9766fea02de01d3890b52f474e9995d646be7dafbbe687e70960"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Medium Body - Scorpion.gif",
+      "sha256": "03f36c9a8367393bfd97bfe5923b96baeb10dc3beb491d3c2cb5e0f03c541c6e"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Medium Cannon Hardpoint.gif",
+      "sha256": "d246f8bd406f899684db616a8bbdaf44a38fdca5ae1ebaf491e2ee76ea71e264"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Medium Cannon.gif",
+      "sha256": "c61011290aa0a81ae35c83d7d47847337d9bfa12cfa1cf512dfbe8aa5ff43a5f"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Mini-Rocket Array.gif",
+      "sha256": "8c9a1c84673bddf9660d1bc635d4ed2ddd6365e8f1a01a2023552938269ee044"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Mini-Rocket Battery.gif",
+      "sha256": "aac2054f1cc1e0d4e2431a7624d768dcdc26e0f95e74ce4443455faa7a0e5969"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Mini-Rocket Pod.gif",
+      "sha256": "1ddc72075b55b419e3dc3eb244d71b2e2e404b6a4cfc123519fb56a196806fdf"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Mini-Rocket Tower.gif",
+      "sha256": "29736387a25ecbfa9621e5f2f83d37071a38a6539f769d632636bbadfaf585db"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Missile Fortress.gif",
+      "sha256": "be09b7320fa9a6b6cf8bb33e6b57faa500322babc331a71b1884728434e6e6cb"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Missile Targeting Codes.gif",
+      "sha256": "04b4b358ba9bb9b17dd58d3053f533a58aeb1e99eed00dcafcaaf5c9ab6e2505"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Mobile Repair Turret.gif",
+      "sha256": "8cad7178b31d7dae6600308340b84eb4a02a94d409986f0c3b2a7e20a3685bf0"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Mortar Autoloader Mk2.gif",
+      "sha256": "ff5ebf8d098e6c319f85a673e9eaa11942c7f1046bd2eef5b1b480265117a135"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Mortar Autoloader Mk3.gif",
+      "sha256": "ed6812d97479768e867bd5c7fc66b9bc61197dfed28e724a9697cc331f9722ba"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Mortar Autoloader.gif",
+      "sha256": "fb6af1174194767160707ce65ee83b0f1992fd210eb4b83fa1f879ad9f8eb91f"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Mortar Fast Loader.gif",
+      "sha256": "91040c16351d687484b40d48ae13cc563497c501aa83df20dd3b4189d0fd5eac"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Mortar Pit.gif",
+      "sha256": "bea7ae8848cc16f865b2a251f367969aadd73f6778efa4e73eb12a2ba5e23ca3"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Mortar Targeting Computer.gif",
+      "sha256": "70acf418147705c3ee7471d4e10256f374c670c3a32f1d7c4bf6b5bea98a7a7c"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Mortar.gif",
+      "sha256": "4fb3541cf597438c6120ea6acfcd8c5dc232aad83c707fc9913fc59675caa0ca"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Multi Turret Body - Dragon.gif",
+      "sha256": "8fae25c9b416a5d7f6be51e2bc40104daddada7a66495be9e46a1e0bd76d3887"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Needle Gun Tower.gif",
+      "sha256": "1c9d9560cd576ab21eccb0c9e96d81d95f8ab4be693a34a6d3e162f0d6a3b891"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Needle Gun.gif",
+      "sha256": "8bdbbb242d9c21ee9fe33f48f31f44976719aff32b4ca03adff748b93b9e4e51"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Neural Synapse Research Brain Mk2.gif",
+      "sha256": "56d696378f3044ca0d234c4a1a76c28335caca04f158b7e716b095d0646e1d12"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Neural Synapse Research Brain Mk3.gif",
+      "sha256": "ac519391fb159e0897d6292b42af66df67e479a82cbe249ae39e17aa95cdea67"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Neural Synapse Research Brain.gif",
+      "sha256": "eb157f8d3561640a4e169b6179f1d80ff86240608ad03f18e6ce408bec26de53"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/NEXUS Intruder Program.gif",
+      "sha256": "3857ed06c641b19b990ed1d09a008337660696e13835a241b4c6bc0691142b19"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Nexus Link Tower.gif",
+      "sha256": "8837717f230680bdbdbcb3b87be2184f248f95968f239504efc5aa4c07f3c945"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Nexus Link Turret.gif",
+      "sha256": "0682421afc5373c7073e937a3bde5254902452a32e72997d43bf6cb478e34038"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Nexus Resistance Circuits.gif",
+      "sha256": "3857ed06c641b19b990ed1d09a008337660696e13835a241b4c6bc0691142b19"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Pepperpot Pit.gif",
+      "sha256": "8e4d21a3d9b63bade54a90a6bc5a6b2130b387422657a33a6dad96c4d88ff420"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Phosphor Bomb Bay.gif",
+      "sha256": "ba2c3b170005098dc1ff4a118932626c96a0eb9d4a0646fb14ecdb17db303257"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Plascrete Mk2.gif",
+      "sha256": "d3d6664a9f8243031c762316b442dd869b76ac399dfc6df570a83b7eba500480"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Plascrete Mk3.gif",
+      "sha256": "2699307d1583db891b1fc2c8b0d4a67f1e69324e07096c8c78feb6690b53ef41"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Plascrete.gif",
+      "sha256": "d766131d44d18dd948553fcf12099f53a4adf5813f30ec15138ea9857c255f9f"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Plasma Cannon Emplacement.gif",
+      "sha256": "02cb2b0b12bae9a2dbaaf4119cbbea103108a09e7c6dbb1f099c251e4d750436"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Plasma Cannon.gif",
+      "sha256": "2d25fcd1dc86b3924fe4ad5cb0edf810fe004cf441e26ee7c4d0d855ace7c873"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Plasmite Bomb.gif",
+      "sha256": "cfe8c71d89fcd2c4ac5d1ba7cc759795236380a229db8bbe5b3209f030e75ad4"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Plasmite Flamer Bunker.gif",
+      "sha256": "9f1cfcfbb2a596936d100346b26874ae6295e0308d7b06aad562fbde8a528720"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Plasmite Flamer.gif",
+      "sha256": "880d6b6985136d98222586922dfb4624426ab9394dedd281e52ea92bb2169ec8"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Plasteel Mk2.gif",
+      "sha256": "5a5fd5e6205d1c111a9ff1493b0b508f03a397741c0d050ccae1fccdee57466b"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Plasteel Mk3.gif",
+      "sha256": "5a5fd5e6205d1c111a9ff1493b0b508f03a397741c0d050ccae1fccdee57466b"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Plasteel.gif",
+      "sha256": "b37148412c368bc78e7ec5ce0d1ede53ed8747997f68c42cfbb3eab732c411d1"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Power Module.gif",
+      "sha256": "2ffc11d60ee6f10838130661a453918db961eac7bf2c93ea929b634fb2eb5b6e"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Pulse Laser Emplacement.gif",
+      "sha256": "fd4400b56cbb21d6cfc64227e9b8ad075a2ac1f227a2ff3ad529275d04265e46"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Pulse Laser Hardpoint.gif",
+      "sha256": "f2640304d42b47e5e71370d2d3fceb5183d6cbeeb45aa1c440a05b0dd0d43dc8"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Pulse Laser Tower.gif",
+      "sha256": "434e88a2b2b142dca551234b424be592ce59d9e70abd549ee52c38bc50cf98a5"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Pulse Laser.gif",
+      "sha256": "405129b96c655ea60983d0f906e3fe5544594cce04ec20ca73b0ea5075118448"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Radar Detector.gif",
+      "sha256": "11c4850f152408dd4e4e28a401bddd88a7a875bd8fb58b43a969073fc6b3152f"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Rail Gun Emplacement.gif",
+      "sha256": "bd634fd2483ec01a1757d540f0c68be7fc8cfd5204c07741bb03804a609fcdd4"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Rail Gun Hardpoint.gif",
+      "sha256": "f1c7a42184fe341f666484179f3bd99c120f73db40ba8e56df41aa1a7ab2bc47"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Rail Gun ROF Mk2.gif",
+      "sha256": "809bd29e8382c9324d68a8b147d2770bb71f72cf637ad87d4a472bb56aad6c14"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Rail Gun ROF Mk3.gif",
+      "sha256": "ce6b632f4bb69e2b04a492e33d938ec77273e354468d4cc5a1f27af10bbc3af5"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Rail Gun ROF.gif",
+      "sha256": "ce6b632f4bb69e2b04a492e33d938ec77273e354468d4cc5a1f27af10bbc3af5"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Rail Gun.gif",
+      "sha256": "0e26eee0045a3f876e149f4ddb30b6aad05725834c6f266795e0b73ab2765819"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Rail Target Prediction Computer.gif",
+      "sha256": "82901d06f4e9aa1ba44bf2ac6b623775381fdafb9d5cd356be31edeebbd466a4"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Rapid Fire Chaingun.gif",
+      "sha256": "dcf8d076f0d29fafa04d41b79640685cf51a590663f24c9a4bd9d15fbad40ba8"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Reinforced Base Structure Materials Mk2.gif",
+      "sha256": "3748a8d8411998fd223555848e389dad593c94b11420ee12b1b9779a49f3a58e"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Reinforced Base Structure Materials Mk3.gif",
+      "sha256": "712a43dcc11b34cc3a2bb770aeacca00e620d87cd0b587638c154f75a107c1d4"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Reinforced Base Structure Materials.gif",
+      "sha256": "b6c90676b5ae41a1615ca65114ea25549706548e5dea878147eeac1099c5caa0"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Repair Facility.gif",
+      "sha256": "e00860a2839e2c6d9bfc57d9f1f7221719784a1b8f3c662d87cd1bfe95bee3ba"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Research Module.gif",
+      "sha256": "6e0f7a880c72b578bf26cdb9d9bfeef2168f17e3b9960ba2693025ac37a67b02"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Ripple Rocket Battery.gif",
+      "sha256": "374b54b082812ed43722b2b5dab8528cde966bf22d6bcda4fae5fb2a9af5f566"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Ripple Rockets.gif",
+      "sha256": "bdcae5555e358d33431a47eaae82b37e80c2c85792eca681ac14820dda681431"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Robotic Manufacturing.gif",
+      "sha256": "975e5ba277fa2bb0e1f5705e98be4e299d38163455af0fd0ecb82c91972186e4"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Robotic Repair Facility.gif",
+      "sha256": "336f8f376f2e9eaa3aebcaa840ed431f23f09c98b288d662d8503ab28212cd81"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Robotic VTOL Rearming Mk2.gif",
+      "sha256": "256a7ffe17db9d05af262eba64ac5b431a122994cc2fceaac4bb98dccade7b8b"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Robotic VTOL Rearming Mk3.gif",
+      "sha256": "e24940d5a064a2e87c116ba9eb65a286fad77ef8ec7ffcf20e6f80bb7eb44da1"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Robotic VTOL Rearming.gif",
+      "sha256": "fcc5ef3f90b4ab598b760d51ed873e7e8df25aee5f733b7e76f4b7a8df9c7b2e"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Rocket Autoloader Mk2.gif",
+      "sha256": "63a4a5be17daf1fb73b906a9103426bfe901e3e0c326c9493afe23f960f379a7"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Rocket Autoloader Mk3.gif",
+      "sha256": "00e49532b00d078ca101a18f1f9f0e6b6358ad7173631b0d5fc65d5ddc1ebb64"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Rocket Autoloader.gif",
+      "sha256": "5724e3405b22823bc8a8a95826f3ba0063149c19d36ba6b741ac7149909ba116"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Rocket Laser Designator.gif",
+      "sha256": "9d19ccb6ebb9f064b45f9e9bc45f6dcf79e58f2de08558cfcc2ffc2caea25e01"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Rotary Howitzer - Hellstorm.gif",
+      "sha256": "eeb9cb8dd1c6dde914cbaf00d0bb671831fb77217aeb70a0f8894df8490df6fc"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Rotary MG Bunker.gif",
+      "sha256": "34b77b271ac2eb77e0503ce9d6924ad187bdd55a68da5b8e0d1f916e303c85bd"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Rotary Mortar - Pepperpot.gif",
+      "sha256": "90c9706b58c1d7e413342378d61271ad083d336fec62b08fe4a9adb891c24494"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Satellite Uplink Centre.gif",
+      "sha256": "0d315d21ceedbdb24a925b47c137e84b4e2462de159e58fb062a24561169c199"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Scourge Missile Hardpoint.gif",
+      "sha256": "d6008b4df198de69b4941e19b24d017e89d7a4680c930d75d2f90bd013c4d992"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Scourge Missile Tower.gif",
+      "sha256": "c7cdb992e5bc27e88fa2cd39516d5f355489052b6fb0ef4cdf88f09a289f91b6"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Scourge Missile.gif",
+      "sha256": "1e02dab1ad9752bdf7b3e2d28a7e8675853ac35672f54e86206215e83576e08c"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Search & Destroy Missiles.gif",
+      "sha256": "e034cce9e30393347a188d5a7f07c56bb81810372d76b2e77b01a595c07935be"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Self-Replicating Manufacturing.gif",
+      "sha256": "41624149767ffe1ad71337394ef14c36f8a817a12832974e4a60275b1047d4b8"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Sensor Tower.gif",
+      "sha256": "7e08e7eb3a0861130344a0005b37ba1547090e27d01cd6c1492ace2fab4471ca"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Sensor Turret.gif",
+      "sha256": "94d74f1822f6f270d73be8bb882108a3e3dd8ebed64d55e4c3806b7a9bc7606f"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Sensor Upgrade Mk2.gif",
+      "sha256": "01bce715c371f7bb1799dbe38468f5094a48977bda49e404e2533d453362d2ac"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Sensor Upgrade Mk3.gif",
+      "sha256": "eb32da2cd8465ba2989378f2dcfa16b409af187174a7f0fb56b3fb763d3288ad"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Sensor Upgrade.gif",
+      "sha256": "a2e2a5ee3a13ecfc6bbf0798cd52b07df65be6288db6f77395f90a712b595402"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Seraph Missile Array.gif",
+      "sha256": "400bf4bb2683cfbd3efda83c514041447ccb08ad5081574b16975010ecdf28e2"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Seraph Missile Battery.gif",
+      "sha256": "645d3416649d78c6b21be757cfd0d700d95efb64d3afe2f1531850f320a861cc"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/SOURCE.txt",
+      "sha256": "cd78e6f7f36f105219191dd17fbd48b5267c51085cb8fdbeef61f74ae7e14479"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Stabilized Rockets.gif",
+      "sha256": "ced2b78d824588a4bfbb09dad4422c2409330badafcc5d0a2c03beec8dfcc970"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Stormbringer AA Laser.gif",
+      "sha256": "916b77504e30a90b18a9bb613b403e4a20fdaf5dfdd98ad34f5a3fe1cddfd16a"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Stormbringer Emplacement.gif",
+      "sha256": "8409a98bd1697d3ed50028fca295ca9e2ca992c26c99694e3f729bb79fc1c428"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Sunburst AA Rocket Array.gif",
+      "sha256": "ed0f0b96b8952bd0aeb1d36e855d3d29d9afd49cdcefe0cefe36becf2719ce2c"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Sunburst AA Site.gif",
+      "sha256": "da1a74f432cbda012df37f9008a0fbe1fe0cde7dab017f16b5f71aef7eaab50b"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Super Auto-Cannon Cyborg.gif",
+      "sha256": "abcc63e6cc6c7358a70071cbc7bfd22ae63ba5aef0547f2903e57839116112eb"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Super HPV Cyborg.gif",
+      "sha256": "3cc195f1858a0dfb2cb0b8e6b5a3756359a2f076a9b94f2232d9e60c35417561"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Super Pulse Laser Cyborg.gif",
+      "sha256": "d2100091fe42b2e4f97e35a2f40a8c00c015a17165a9cd148bcea8f6dbe074bc"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Super Rail-Gunner.gif",
+      "sha256": "560f871a938bf4fda643762129827b4e0c2b287c13bdce2aa4589c387e95ca7a"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Super Scourge Cyborg.gif",
+      "sha256": "30de9d1fbfd11b9935b57ab94bb38e3f79269cf2905310c90cc9e172093a795e"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Super Tank-Killer Cyborg.gif",
+      "sha256": "0abd82723af061b85d9f6b774146f0038b7c3fc3578fd5b7082cc4a05159f333"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Super Transport.gif",
+      "sha256": "78ee1f2a371c38b2bfa76e8482c2fd09ecbd4a6d04a5abd203243f673aa600e2"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Supercrete Mk2.gif",
+      "sha256": "c7d7ce8176b509ac7604a2d3afbaa24a986a40826b50b697b441fd284612fd2d"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Supercrete Mk3.gif",
+      "sha256": "15e22e8423c900e121239d6dd6494f8f940e6bc34ae330fd41715444357d459f"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Supercrete.gif",
+      "sha256": "89635f67a5f9048d56e739833f8f30b4af8ff0826d37bf597367cedf48431e97"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Superdense Composite Alloys Mk2.gif",
+      "sha256": "7cbd9ab0133777b8a2fa8051f11b49438a4a643d79ad07e99c06ae982b375d8d"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Superdense Composite Alloys Mk3.gif",
+      "sha256": "7cbd9ab0133777b8a2fa8051f11b49438a4a643d79ad07e99c06ae982b375d8d"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Superdense Composite Alloys.gif",
+      "sha256": "92312db4f6ef4058b471bb9204f4f49c4910fceb13157d73c49dee29aa5e737d"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Superhot Flamer Gel Mk2.gif",
+      "sha256": "d8f1bf3fe3633fbdd7cc80638b1f1aa915ee530466ead621fd628f657703da33"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Superhot Flamer Gel Mk3.gif",
+      "sha256": "9e1728fbbf2d3ccf3304eff27c718777aae6254c8fb47f9d3975c0bc66626964"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Superhot Flamer Gel.gif",
+      "sha256": "8e346ff5025b88dcef4e29d978bd55c3d90f8739f82d71c4ed7d1cdf8b89bd02"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Superhot Plasmite Gel Mk2.gif",
+      "sha256": "61be29c2d7c6d6c88f3ec83fe737c7a22c3f8055c9bc31268d9187e0a12fbad2"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Superhot Plasmite Gel Mk3.gif",
+      "sha256": "61be29c2d7c6d6c88f3ec83fe737c7a22c3f8055c9bc31268d9187e0a12fbad2"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Superhot Plasmite Gel.gif",
+      "sha256": "84e1021bd007a4aad0534c36c0764a63f45ffca0576be67e2a28be510d869296"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Synaptic Link Data Analysis Mk2.gif",
+      "sha256": "8762ad2578ef219ed922d3caf3cde8854c2c56e567d5fe1b166baaa2453e620b"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Synaptic Link Data Analysis Mk3.gif",
+      "sha256": "559e468a8596ff749ca17279ebba21730be1934c34d8e257cb8d96ea03465583"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Synaptic Link Data Analysis.gif",
+      "sha256": "dd1ae00e187502b72b1630e998da9f87afdc0e7f41d0776f733d37015ebf6f0d"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Synaptic Link.gif",
+      "sha256": "0840b1b0c4624f9c5711afef0ede9aca78695293a27ad02877a0215ad37d0894"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Tank Killer Emplacement.gif",
+      "sha256": "6e0847aeb28b5665881a9632fbd63115ce3f7f415eb94acefbc0416a32335aba"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Tank Killer Hardpoint.gif",
+      "sha256": "576282c1a55908468deada1bdeb9a65b1304a36b6363e07267e27dd02ec25dd1"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Tank Killer Rocket.gif",
+      "sha256": "302d992daa230f1b943f7fc6b69394dd2738276039247cc0567fa03fd9751364"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Tank Traps.gif",
+      "sha256": "8e7474f63544bd795fa84b3fb0f8fd43e3037040474bfae341493daf3022aef3"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Target Acquisition Artillery Shells Mk2.gif",
+      "sha256": "44d9c855d4ae8bf334ce4ac624fc0da5ba9f2981771621f6813353990dac6bae"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Target Acquisition Artillery Shells.gif",
+      "sha256": "211e4e81bf6645552b4f0eddff4fa21aea506fe1dc6b379be82515a990356f61"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Target Acquisition Mortar Shells.gif",
+      "sha256": "e92018b0d480d30b0373d2efbf4ce91bb420e61ca4a21f9f15ffbc11fbeda89e"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Target Prediction Artillery Shells.gif",
+      "sha256": "72e016664bfd5e1c2c9b9f5bc0ef98a279ea06dea3d567bd698aee1bb918b554"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Target Prediction Missiles.gif",
+      "sha256": "e034cce9e30393347a188d5a7f07c56bb81810372d76b2e77b01a595c07935be"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Thermal Armor Mk2.gif",
+      "sha256": "b653a16002c4767e11b6b8df067eab15ebb6718d31e2e851820f433270db1ce0"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Thermal Armor Mk3.gif",
+      "sha256": "1b90b1f5968ee7500d85c0fdf9f3344d1b19f4f81a6754703753ddfe4544a804"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Thermal Armor.gif",
+      "sha256": "0add7c3f2f6332e42ef55d53b20676f83f11e60af27d26757e2645faba992bdc"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Thermal Imaging Mortar Shells.gif",
+      "sha256": "1e4bdf1d20a459a48ebe3f42228738c3cc4e744bae4c018b4fe074cf6e8880ee"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Thermal Imaging Rockets.gif",
+      "sha256": "13630bb3b57c516954a0ddd9a4b45bf3109fbc8db8e8cd15ba5f1ce2975a154c"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Thermite Bomb Bay.gif",
+      "sha256": "f7bdd0e52c038ffb24cf033343f980d1830ab937e3ee08d5c592856d2bcc4637"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Thermopole Energiser Mk2.gif",
+      "sha256": "bbd487a12de84ba9fd55023013b5e527d79ac7a91059d70b5ac2b5435f70494c"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Thermopole Energiser Mk3.gif",
+      "sha256": "9916f9b0d45ab71f5bed89b69c3b70dfe5ce4c4b162a03f662d60bea6dcdc9bf"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Thermopole Energiser.gif",
+      "sha256": "bbd487a12de84ba9fd55023013b5e527d79ac7a91059d70b5ac2b5435f70494c"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Tracked Propulsion.gif",
+      "sha256": "17bfd4da8dee973fedc76c3d071e5a144bb836336faa017a0f80c725d5e10f96"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Tungsten-Tipped MG Bullets Mk2.gif",
+      "sha256": "73e22a397430e9c7c818772b38fb34b47c633c1d06f7242868080d5dd86e79c3"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Tungsten-Tipped MG Bullets Mk3.gif",
+      "sha256": "1db795bf38f54c39bf2a8cf100460c4d90f23245349e7c42f831de7caff57af6"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Tungsten-Tipped MG Bullets.gif",
+      "sha256": "024f401c2308bed6af517c6f2537bc5806333df7a6db384e6cdb7db55c95e859"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Turbo-Charged Engine Mk2.gif",
+      "sha256": "2622aae3553650aa697e30bba8b58c8886b6feb8798168d574d687d33c411feb"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Turbo-Charged Engine Mk3.gif",
+      "sha256": "c47cf65feed33e3e45c8d7d27a084d010f11526b53c16a3cd167256ceab3724a"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Turbo-Charged Engine.gif",
+      "sha256": "9360c22b30e24cf02ad08bfbda32068c0592985c2665dc6588755143e833af7e"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Twin Assault Cannon Bunker.gif",
+      "sha256": "47334a6ba5eeddbd6bac53f47570c47eaf9585376b39dbf118a9562de44665d0"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Twin Assault Cannon.gif",
+      "sha256": "6e8d692ad803c153ffdf8e903f83eeec4dea50b518f2a148ce838f7f081a487c"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Twin Assault Gun Hardpoint.gif",
+      "sha256": "62ab3606dfd67655b62e3b9f3caa988dd50c51340a8962e7e5ced32d1cd694d4"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Twin Assault Gun.gif",
+      "sha256": "53d135121ff805e9acea5124ea7257b82d1410b36dda62c72ea1791699b6b3d9"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Twin Machinegun.gif",
+      "sha256": "f6773df1f1c186e99c9f836fcb893bfb4b39cfd9e9f72ef6af08251743d010d8"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Vapor Turbine Generator Mk2.gif",
+      "sha256": "1da1acbb4211d88cbecc6ebd6f8d08f795fd6d9f5756390b92782eb679d5e9d2"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Vapor Turbine Generator Mk3.gif",
+      "sha256": "4144238ac4451a95c1f0068d69740d0a75efd3c8cf0e3df5ba664acf36aef96a"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Vapor Turbine Generator.gif",
+      "sha256": "078bd199a5b711d796e0ed9418d9d2ae218a9a2ce7c13cb67eb2ef51aae44d5e"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Vehicle Superdense Thermal Armor Mk2.gif",
+      "sha256": "107ccde25f668d6829915e2fb9e0171771838064c8d1914104590debcfa21747"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Vehicle Superdense Thermal Armor Mk3.gif",
+      "sha256": "80064d0879410cbc2819292b2d98c24f7664f475df88a2e820ac70d2c8066e8e"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Vehicle Superdense Thermal Armor.gif",
+      "sha256": "107ccde25f668d6829915e2fb9e0171771838064c8d1914104590debcfa21747"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Vindicator Hardpoint.gif",
+      "sha256": "5bd849fecebc2119ea0cf2ff847c7b67510031807c7b9b98fe3469abd3077ac5"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Vindicator SAM Site.gif",
+      "sha256": "37b657be9bc1ce9e333d15be7e971fab79b6d5acdf7003edf10b461e3b67a908"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Vindicator SAM.gif",
+      "sha256": "3d95447d5190a11cf7827b587ede5b24c2297436fed7161f63d3cd2a9ef005b0"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/VTOL CB Tower.gif",
+      "sha256": "13615a295668a6b83266ab95e4035311477483ac98fa4e938a25c9de648c2ca3"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/VTOL CB Turret.gif",
+      "sha256": "95fbe7f62a623b22397dfecf3d029a32cda60cf762a51e3994942e171d8d2a8b"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/VTOL Factory.gif",
+      "sha256": "e7239d84ba3946d41782a0c82c8988f93085844000cee846e854e879cdc47c8a"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/VTOL Propulsion.gif",
+      "sha256": "002627f69aa0312efb948093cebbb193532f08fc4c3cca75189091f92d2973c7"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/VTOL Rearming Pad.gif",
+      "sha256": "38b85a3bfe8bfd10416d03869f914f473e277ad9bc3d09166bba5ec542385f07"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/VTOL Strike Tower.gif",
+      "sha256": "7fcca837794dd709ddd03bca5b469448b49aee083d4e23d664e3499f1451886a"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/VTOL Strike Turret.gif",
+      "sha256": "6aafcd7ebe53893aaafd9e2cde4068195bc2a04fdd6192c2387c381de95f97d9"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Whirlwind AA Site.gif",
+      "sha256": "3020b1061bd54fb3c83c6295c196a40b0bbd789ec37db3a6380c2c076f77fbd9"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Whirlwind AA Turret.gif",
+      "sha256": "726bf0a1ef71e4feb845efe8d280bac65471a55a8c1f3c0ca05564fa707bc218"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Whirlwind Hardpoint.gif",
+      "sha256": "e64cdab0bc6eb2f2015efc83cae8a6727896cc5362501252795444645cf712d2"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Wide Spectrum Sensor Tower.gif",
+      "sha256": "4a30a1f47d758ba52b81170d9e7376b26fe830220cf39cc504fc7c53b1cd1ba7"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Wide Spectrum Sensor.gif",
+      "sha256": "d62e3cf58a67986e38d5a8b8cbedfe22c5bf600f493977e54c9f7079f4876470"
+    },
+    {
+      "path": "app/src/main/assets/warzone/rewarded-ads.js",
+      "sha256": "92508cba727137ad7e05244fc5f484ef9ea6b5e43d21bfb4b8d689a97528ed51"
+    },
+    {
+      "path": "app/src/main/assets/warzone/rewards.js",
+      "sha256": "c1ecf0cd8caae6f1639d6476141e99aae8ab41dd753707fb61ef9ba3984b1226"
+    },
+    {
+      "path": "app/src/main/assets/warzone/saved-games.js",
+      "sha256": "b447db433205420fe357f3c92a02f6232b8fd9af08d6e41aa23f0fe7b8303879"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/briefing-defeat.png",
+      "sha256": "9b5d72cc56277fded0120fa13f1ec6a452d8d8cafbccd8697f6f30478002bfc2"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/briefing-start.png",
+      "sha256": "cc5dcff8e4fccce6a30d35af96e8991e9377d4c03aa8f4fdfb4b1d8158289f29"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/build-display.js",
+      "sha256": "3f32d1991e2aa4ac364fd1b345cee4b894607ef687ad95fdbb257f7177eadccb"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/command-pages.css",
+      "sha256": "9036d9c8582b8ebb581ed2adaebf21f0e4465cf298ad38f16e4ee147327edf5c"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/game-controls/button-plate.png",
+      "sha256": "c6714adbbd6fb08324fe91aff907c36dfde9323478823fa192cd7c1edadd6910"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/game-controls/button-selected.png",
+      "sha256": "a98e7d4db68fe14f1af99b3226ca02690435df643a63fcc363c9fa74d757fe6d"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/game-controls/click.ogg",
+      "sha256": "345d636d2a73d95a1cf0136748f7bf90badcea2003b2fbe3654a8ce657c5b613"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/icons/arrows-clockwise.svg",
+      "sha256": "f79592c23ce2e13807dcf27ed5de18aa1484beb9a976b0c0bfd81ee280198b55"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/icons/crosshair.svg",
+      "sha256": "cb8556097f1484cbd969a2184cdd053ba797e6bfab1d26af4a45c80c2a3d4736"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/icons/crystal.svg",
+      "sha256": "c07b046c7ab7ec29a57555dad58943606475dd47dcafaa1a14c8f186ec30f66e"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/icons/deselect.svg",
+      "sha256": "51d7bf48d66d722ac192a6c3aaedf0f2a2c559cac094158cd5378d7aa3e485c3"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/icons/flask.svg",
+      "sha256": "bd2e50bcab8c9b897bf7603254a96a327eee9594471dc530866cd95d1910dcbb"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/icons/hand-palm.svg",
+      "sha256": "aa8a79f768533362a20e9adceb40d968385809c1c28f8bcf28cf5c6c6df0af4b"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/icons/house.svg",
+      "sha256": "25f4b1504212c7c064054bd1d02ddaaf0a4e16ed49c6b08b23c3dc1f74e1d446"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/icons/LICENSE.txt",
+      "sha256": "b5b1f1da112d18ea2147decfd48ddc1bf2b5aeb6c265381579340e95b15a2bb2"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/icons/map-pin.svg",
+      "sha256": "07bb9883e9e324d0043309d8f7e41a1b2a8db80acb8371be8294edd9135f3b69"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/icons/music-notes.svg",
+      "sha256": "9b46fd28e1d67ed654730c11c1c928366d581eaa337dea44ba33c0a97eb21620"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/icons/question.svg",
+      "sha256": "605254a6f6dc50f1a34bf7d8995d01902e064c2e459fbe8108b8f7890de7c259"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/icons/save.svg",
+      "sha256": "fa0cd5f676e782b599a2595ebfc9656793301505424832218f34cffed3cc4c6e"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/icons/selection.svg",
+      "sha256": "bca7ab4688ca03ed591ba3cfba90bda277b25596b649898388c51aebc7742fb3"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/icons/skip-forward.svg",
+      "sha256": "c026db317873f9de39d620b20e97d9d9d11293bbc319b0ea90db03db9c706be2"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/icons/stack-plus.svg",
+      "sha256": "ee84334c5500adbfde5789559054c015114b01154b9ffc4ae600e45abb830a43"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/icons/stack.svg",
+      "sha256": "37b696df1b465b89a6a6da07d85011f52c59afd0d07e4e4d02d360f135e52099"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/icons/x.svg",
+      "sha256": "d540487912a267d83c495954b24ca07981002fda05ee2ea0b492d8fc188d1c3e"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/lab-commands.css",
+      "sha256": "9cc89795a6d02767d0bed940cce3216d418994bf8a400b7edf1a54dacf043a68"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/lab-research.css",
+      "sha256": "0b8a5b1b221dc68eaabb6289e559e3d93ee95a8158fc0ba2b6d39a43d85c6398"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/lab-shell.css",
+      "sha256": "099a72464e470ebd387d035705a316d5ec3cdd9da11b63077754c03049b381c0"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/lab-ui.js",
+      "sha256": "23cc9d6117596c9fa2378b44ac0a6b247d81bb1c5318610dcf74b85521639811"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/Oswald-OFL.txt",
+      "sha256": "0fd731a904b729a4e02eaf5e8ebd06783edd9abe400e8882760160230675b652"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/Oswald.ttf",
+      "sha256": "5b38c246e255a12f5712d640d56bcced0472466fc68983d2d0410ec0457c2817"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/research-art.js",
+      "sha256": "62ee49d74d187347f5f024fd9b71b92c73095876d7b38b46c42a942cce44de95"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/towers-commands.css",
+      "sha256": "6b1fa9cb3b5a5f65ce12d2e4118caa0c2b572e88e0263ae247f651c6710d80e8"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/towers-feedback.js",
+      "sha256": "9ea5dc582ed1742fab4866c4d5e253ce77ee67ea409a9cddb63f503a195782cb"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/towers-game-controls.css",
+      "sha256": "a07401b9b120bd6e12e34b3b173cfc14ae354eb5dfab2a4dd24608d1fae9e7d0"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/towers-intelligence.css",
+      "sha256": "0edd8b26365a03e572fb8215c4ba013940598a2e7312db63d55bc8e639b0723f"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/towers-monochrome.css",
+      "sha256": "8ec896652f3000395f45dbbd0bc11fa70e84f36b7cebef17cf6d6b2ce3effc46"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/towers-research.css",
+      "sha256": "8f67b82d2d101bf07d609065ee61cdcd4258778b00f539aa248229d5023ca2c2"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/towers-shell.css",
+      "sha256": "51ae516037180e254cbe125fa548f4e9fd40458d30f9021648a43715a992bf9e"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/towers-status.css",
+      "sha256": "6948f451263f3659e3574c838a2c553223997d6809e7e08102a3080008e7461e"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/towers-status.js",
+      "sha256": "b5e6f21b39f24ca8fb9e6c1dcced7d22e5ea7a1b0e10574c8ba65a542632d017"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/towers-v4.css",
+      "sha256": "9a0a3af3190b0b9aa61537d19b997d9c1733217a4686b7f3c0ff6482239dd821"
+    },
+    {
+      "path": "app/src/main/assets/warzone/vendor/bootstrap.bundle.min.js",
+      "sha256": "82f64f62bb03c1bc1824b0f9c9e05f70dba33e146818e63cdf5c306c8cf3dedd"
+    },
+    {
+      "path": "app/src/main/assets/warzone/vendor/bootstrap.min.css",
+      "sha256": "3017df4a76db5f01c2b99b603d88b03106df13bcfe18e67b7c13c2341d3a67df"
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100-campaign.data",
+      "sha256": "70d333a1b58870b34e9922e83f6c077cc2fc085219d00e7161ba98db6ae1c2e3"
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100-campaign.js",
+      "sha256": "5b3fff50542fa5913fda7ccbc0182a8a731d93e4e3fc986c7d104faedfaea226"
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100-duel.data",
+      "sha256": "584a8be5958871b7d1f133bb4d3ef514737d8cf17b959be05f6659a828ceac47"
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100-duel.js",
+      "sha256": "6ef65429d1f496bfe5c52e2d8d770b28eaf319d77cb0d61675abd5d78d5420b5"
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100-ffa.data",
+      "sha256": "73137514fb621df5ca978c93a32743c01b44de01201e4846cb351a6d438d6278"
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100-ffa.js",
+      "sha256": "50a0bb51ab06e2d6805766681ae36c3e7e29d3b13ada02dbc2a96620f7701611"
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100-towers-052.js",
+      "sha256": "6d17a3b9f3e935b2748cbbcfc4916e6badb81be31ef22ba3c932e3987ec089b9"
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100-towers-052.wasm",
+      "sha256": "2924f46aa75d9b27b92494f01d56239856ad06b2164cd7131144a3a5faeb87db"
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100.data",
+      "sha256": "244e70d357ff02ddc8cfd43d1bf7c531a3a777593bb5d8fdf84e05c2d9976da7"
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100.js",
+      "sha256": "fdf0c4807323b15a00cbe92947db2fb6b2da771384af9f3fba08fc5be03c5949"
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100.wasm",
+      "sha256": "497c65308d3e85f0b5370ec0ff0eb48e6a0876e735ad45e3b280829c7f3c2a06"
+    },
+    {
+      "path": "app/src/main/assets/warzone-campaign-hud.js",
+      "sha256": "8980d11e9fbf18dbe9b5d5e1846e43d0b11dde0a34d5017ace780a2c658da586"
+    },
+    {
+      "path": "app/src/main/assets/warzone-command-pages.js",
+      "sha256": "17b2eb2dfa95c1fd67d018ef8eba9c2a61cc88a20bfdc98e6c5a410812d8069e"
+    },
+    {
+      "path": "app/src/main/assets/warzone-duel-ui.js",
+      "sha256": "6ef03286038d15c452c2c40efbb11fc9ea08befa91cd49095be8f834c5b522ff"
+    },
+    {
+      "path": "app/src/main/assets/warzone-ffa-hud.js",
+      "sha256": "c3cf12351e3b1155035092e4646bfb1ab95dcf3782859615524937f73dbba496"
+    },
+    {
+      "path": "app/src/main/assets/warzone-html-session.js",
+      "sha256": "94533a957e6a85baebb63b56050e0399e07d40864c340d84856c83ffd890c87e"
+    },
+    {
+      "path": "app/src/main/assets/warzone-intelligence.js",
+      "sha256": "dac05483a1ae70bc823e7722003dae39aeee16978200db4101c478666acdd9d8"
+    },
+    {
+      "path": "app/src/main/assets/warzone-mobile-research.js",
+      "sha256": "d2b91258096bcde795964d4dfb659f8941f8312419fa60ca15e3c421d5cddd7e"
+    },
+    {
+      "path": "app/src/main/assets/warzone-terrain-picker.js",
+      "sha256": "0b8e08038a7426d3158089b16430bcd751fff36ef49007ed96798b583c31343d"
+    },
+    {
+      "path": "app/src/main/assets/warzone-touch-controls.js",
+      "sha256": "ab600b66e42a65e0802d14d08cf7748efe2ba40f93faf1a1ab14b7c83dc34eb9"
+    },
+    {
+      "path": "app/src/main/assets/warzone-towers-notices.js",
+      "sha256": "3f309f1396892a310e11916d9d03ef849e3f7fc14c22d3ec34e2473f161c111e"
+    },
+    {
+      "path": "app/src/main/assets/warzone-towers-wave-hud.js",
+      "sha256": "a048284e6d0eb339eaa77fa70184538d3cb98c66040d3c10689b6ef830fb3619"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/BattleBriefingView.java",
+      "sha256": "e4e2da5a2a2c675c91889d3993ef779717127ed4b0839b6a6ce58e7da1b28a3c"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/BattleLaunchSpec.java",
+      "sha256": "c6db704ac3f8ace393c5cee6428320a499dfa16686f2fd0e5c17113dc9a6651d"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/CampaignSetupView.java",
+      "sha256": "eae73a6b58beff68bee88870b9514ed15b5c6d9c7f002ee71e1fd4aba2e15911"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/CampaignVideoStore.java",
+      "sha256": "b0dc47a3795dd55d8347a657c236da4af63f02bc0d96267fed8a977504a3fabe"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/FfaMapBrowserState.java",
+      "sha256": "999f902040c2dcf879fc2bf1f5585fe8c3347ed5eb22b0b851a85063011d20b4"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/FfaMapCatalog.java",
+      "sha256": "180dcb4f96d1f157144e2edb04a610b26703822f1eeb52ee1d1833bbe026f253"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/FfaSetupView.java",
+      "sha256": "e202fc71e5041eb55f2106e87caebd6a199bc2fb4340d6f29175522cd6648b1b"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/GraphicsSetupView.java",
+      "sha256": "dd799540c2611a6597b438c5c6b6b3f1f0b2d4401fa72afeadfd911ed5d1bdea"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/GuideView.java",
+      "sha256": "f13c63de056b1962b13c0cba3d9eca27af6e17a2c70ef608387ab26962f2e4a5"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/HomeModesView.java",
+      "sha256": "52a34f18f332b09cba05fe32699b07dab31605951dd878c37c90d6add3f11bd8"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MainActivity.java",
+      "sha256": "331eb2ce08bc148e8c4def24ceab78acaf0396eff00198a1cff4cd71f2680546"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MapLevelCatalog.java",
+      "sha256": "b2a32bc8925ca27d5b996f68bacbe69a2ff89c0a82a7da65108a2d153489fec9"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MapMusicIndex.java",
+      "sha256": "2424b00002c81897d1f3cbe4019e0ec747731655f707a493f20b863cd21175d7"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MapPreviewPager.java",
+      "sha256": "d57589777cb10e66d07f4dbfe302c9c2e7eb27d6bd608ea21cc7858c11e06590"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MultiplayerActivity.java",
+      "sha256": "d3f2851104de921ce2952b7853911023f701eaf132e01ea649fd1efa26289976"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MusicPackStore.java",
+      "sha256": "35f720acc2dcb20b06ab69b95fb4a45a6a86afa58f2b8f1319c2f14a8ca928f4"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MusicSetupView.java",
+      "sha256": "5af7636123f0a9004f9a9260e9fbb6eb0eec44721540168da94e71261185493c"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MusicTrackCatalog.java",
+      "sha256": "2def7ab9f82c4714f1d4ba233b05f43db2bc575f55e085e825782bca54e920b0"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MusicTrackResponse.java",
+      "sha256": "bc2a41144b24cd017b6b3219759c1f790b07310a7cb297e86960c7a38dcffe1e"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/OptionalPackStore.java",
+      "sha256": "5b10b943d5f2e447b9e85173ecb1fe30795f89f4c84047acbcbf6da1113c9293"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/RewardCatalog.java",
+      "sha256": "eecdf521ab4fc1690e4b182cf32c7325874eed34b6c362394309702f164a19b1"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/RewardedAdsController.java",
+      "sha256": "856cb7fc0872cfac02dee578d81d8f3de909124885708b83671f2cc1a7c871eb"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/RewardLedger.java",
+      "sha256": "a582a51e8a41cef67ee0070c5778f370030a493a46a17b80ca3d59a5f81c8272"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/RewardReceiptView.java",
+      "sha256": "f22cf4ce22d3a20d4bc3c88d676740d82f140577d9ce6d9418531364630a8e2a"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/RewardStore.java",
+      "sha256": "0e3b730ade91ca51834181fb96e348996d7b85b69c3e1c9ef04b2a6d78ca945a"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/RewardsView.java",
+      "sha256": "a8af6f467cf6973e66fee9480f1901ceb6de0ae063d0a140ed6e21ad4323b90b"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/SavedGamesView.java",
+      "sha256": "ecafd37ca164c705bf9e2f6330030da506beffc2eefe6270f4d2f70d1ce313dd"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/SaveGameStore.java",
+      "sha256": "a8e8ef6ecbde9f345030450d2210bc725921839022f7890004870ce103daad16"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/TowersControlDrawable.java",
+      "sha256": "6dc04d22247a8c19956e87be504d0476470cd2a1a1f7661501f5e713ddea33b0"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/TowersTheme.java",
+      "sha256": "766ba8980c429341b31388c7c779a681332a2a47ca10e569c9c10acf87080761"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/WarzoneSplashView.java",
+      "sha256": "a5843fd1a67e24ad58d7743b08e6353ac440b5b864ed10ee33e440a742ee2044"
+    },
+    {
+      "path": "app/src/main/res/drawable/ic_launcher_foreground.xml",
+      "sha256": "f86d6c052b21919d50fe053b1ad085e91a26315805eddc8efa0388a487a5d0c9"
+    },
+    {
+      "path": "app/src/main/res/drawable/reward_crystal.xml",
+      "sha256": "31fff87acfa7e03a96d58a991ce9a63ea73632e3f743a356f32fc507fee1ba55"
+    },
+    {
+      "path": "app/src/main/res/drawable/warzone_splash.xml",
+      "sha256": "769cb4b0840359dd50a5fc92edc7ed068fa0cd919f41b56fd391b20a0bf6a553"
+    },
+    {
+      "path": "app/src/main/res/drawable-land-nodpi/warzone_splash.png",
+      "sha256": "b8028ce1affe2dea2e5c2801086ffee6c7e62476cffb6f6732a0d15636f97c9f"
+    },
+    {
+      "path": "app/src/main/res/drawable-nodpi/towers_home_grey_tank.png",
+      "sha256": "869d7322a485bcc556f90bedff52fc10c9bbbae51f9e80f750bd6405b5625d57"
+    },
+    {
+      "path": "app/src/main/res/drawable-nodpi/warzone_branding.png",
+      "sha256": "44c3ea0942a7c31a49c5a5c9510414191ff06137c0b67089364593c66319d8c2"
+    },
+    {
+      "path": "app/src/main/res/drawable-nodpi/warzone_launcher_icon.png",
+      "sha256": "e4ab588956e98cc2dbe02e29826dd82965eaae4ef401f85ef477f57a02630ccd"
+    },
+    {
+      "path": "app/src/main/res/drawable-nodpi/warzone_official_backdrop.png",
+      "sha256": "805f6ccf9cbbef180527e39781ff112ed245683d1339703332cb476c52a28e6b"
+    },
+    {
+      "path": "app/src/main/res/drawable-nodpi/warzone_official_logo.png",
+      "sha256": "3a7400692c872071e1b46d61a94691abe27433533ccb40bceb5003d9fd070cf9"
+    },
+    {
+      "path": "app/src/main/res/mipmap-anydpi/ic_launcher.xml",
+      "sha256": "bf42aabbeb76c78659d085c4219c4f2ed03b1463b44cd6ffb64c98acedc54247"
+    },
+    {
+      "path": "app/src/main/res/mipmap-anydpi/ic_launcher_round.xml",
+      "sha256": "bf42aabbeb76c78659d085c4219c4f2ed03b1463b44cd6ffb64c98acedc54247"
+    },
+    {
+      "path": "app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml",
+      "sha256": "6334cd13cad54fe074892bdb19c92b25ead2f0d9fa10f7075f90d60c8fd49405"
+    },
+    {
+      "path": "app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml",
+      "sha256": "6334cd13cad54fe074892bdb19c92b25ead2f0d9fa10f7075f90d60c8fd49405"
+    },
+    {
+      "path": "app/src/main/res/values/colors.xml",
+      "sha256": "ef6edece3c3a26509b71669417f555659967a4fe0fdb91613fa1044651aea36d"
+    },
+    {
+      "path": "app/src/main/res/values/styles.xml",
+      "sha256": "31519c4289d47231bac7bca5cda8ab243064bbd593c00285ed17c6dd884b114d"
+    },
+    {
+      "path": "app/src/main/res/values-v31/styles.xml",
+      "sha256": "b39ca7ff338f32585761b40a166222682476e5e9d05d7be97a41aab971543efa"
+    },
+    {
+      "path": "tools/build-multiplayer-native-070.py",
+      "sha256": "b90504a80d2e0efb3c5fdf6229a8801cff0d50c2b411da92a7ca6c7e77e25316"
+    },
+    {
+      "path": "tools/check-multiplayer-activity-070.py",
+      "sha256": "f77fff75cacd78eb5db559245d413e07d7eb01dc0d00bce112c3ed8588bb7087"
+    },
+    {
+      "path": "tools/check-multiplayer-back-070.py",
+      "sha256": "0523a2a9665b01c9f500a12e3c4fce918dded4254ad93fc09958b3cf8fa5f30e"
+    },
+    {
+      "path": "tools/check-multiplayer-controls-config-069.cjs",
+      "sha256": "23091cf8e789005223e6802dc912328f65fbfed98486139b1d3b0e035e29fffa"
+    },
+    {
+      "path": "tools/check-multiplayer-native-events-070.cjs",
+      "sha256": "d708bd583ccf0a340b64ac5abe05890cfd95123922b382c1b773115b4e518870"
+    },
+    {
+      "path": "tools/check-multiplayer-terrain-070.cjs",
+      "sha256": "dee278cee04467bc0716f9e30241a8a26bd1b1bc6400ea55817cf7c1fbdada58"
+    },
+    {
+      "path": "tools/compose-multiplayer-ui-070.cjs",
+      "sha256": "9db56e4f0941cd4dfaf2e0870e0b3f19e426c0fc1d8397155ba3ac8ba2d228c0"
+    },
+    {
+      "path": "tools/integrate-multiplayer-native-070.py",
+      "sha256": "a3c3e17c5046733105d4afe3b72b5eec5f4769dc7f16f8ff1956433bbc51b23e"
+    },
+    {
+      "path": "tools/mp-actions-live-070.cjs",
+      "sha256": "f87c2ba728ddc0a41ecedcd3a06cfdd142cdab21fdf0ac6bf749005436c94952"
+    },
+    {
+      "path": "tools/mp-camera-live-070.cjs",
+      "sha256": "f9b7aee17cc4944060bd085c5673839f1d3baeb2e1e402ff08e0523be45e8d8a"
+    },
+    {
+      "path": "tools/mp-existing-inspect-070.cjs",
+      "sha256": "a08dec06fcbe2c8b7689a51c2448258840bf5e3544ff3fa4d929fa18633c641e"
+    },
+    {
+      "path": "tools/mp-existing-live-070.cjs",
+      "sha256": "418553fe9e426ab72e7c1df2ed13d13310011df943fd022431469ad025d79c87"
+    },
+    {
+      "path": "tools/mp-existing-resume-070.cjs",
+      "sha256": "b267acb521a55d0ec47d9f2c8b86cae7091f5db7bca75e137e6f201e5cc9b723"
+    },
+    {
+      "path": "tools/mp-facility-inspect-070.cjs",
+      "sha256": "b87770ebea446b6bc731e8d49b2115b63d6b66cfcef41f994d459bc8ce78fa2f"
+    },
+    {
+      "path": "tools/mp-facility-move-live-070.cjs",
+      "sha256": "cc217673589cbaa0f87b26093566091a3e1a7e0af355c972420ac08c9ec49945"
+    },
+    {
+      "path": "tools/mp-final-native-smoke-070.cjs",
+      "sha256": "fca2ff865ff3d250852b7abe2046fdc6ebb3715998ab60d7452e61f03d7f6662"
+    },
+    {
+      "path": "tools/mp-inspect-live-070.cjs",
+      "sha256": "6f5c7699bfb741a1c6d54466eb3118dd75f43f8a9bc8e392086faf63ebb5c580"
+    },
+    {
+      "path": "tools/mp-journey-070.cjs",
+      "sha256": "a0fa182f86c72b02795720c99f1c29869b5fa20cce8c73b63e9844a89ea97eb3"
+    },
+    {
+      "path": "tools/mp-live-070.cjs",
+      "sha256": "3b8c0a579cd66de62e6a1b41685f3125c37e8487adde91cccd308f59745a4322"
+    },
+    {
+      "path": "tools/mp-move-resume-070.cjs",
+      "sha256": "6cfa40c16b6058ceb8906951a67b330ec61a1a4f9df403aaa293fc18e31ac059"
+    },
+    {
+      "path": "tools/mp-phase-070.cjs",
+      "sha256": "65e6f453a6f890a49fd58eafd5675c016136614e4eff1141606f825b67399a87"
+    },
+    {
+      "path": "tools/mp-ready-inspect-070.cjs",
+      "sha256": "4e3dde40efd9f73a6178c1582a639f438c3d48e68fdbee605c076b808266ae31"
+    },
+    {
+      "path": "tools/mp-return-live-070.cjs",
+      "sha256": "a57ffdbe3645859ccf2dd96cd80e36f2d4a8f9152574ed8ad2c990dace3e4ece"
+    },
+    {
+      "path": "tools/mp-small-join-070.cjs",
+      "sha256": "455dbbf6071d53304509d25a5588d29f45cfbb781ce9f125748686dc6b7bf168"
+    },
+    {
+      "path": "tools/mp-small-live-070.cjs",
+      "sha256": "34477371faf50f04b6b4f8785b1f37da02b17bf6393a050ff521e1591b2c15f6"
+    },
+    {
+      "path": "tools/mp-tabs-070.cjs",
+      "sha256": "3e17dd1d7106eef53024f78766c0b7567ff2d600ac079f726d455f4f43536123"
+    },
+    {
+      "path": "tools/package-multiplayer-070.py",
+      "sha256": "1ad55de2a5f3529f235fc8ef4c5bf8a5c3e85dfd49429c19a9ac62e79ea9fee6"
+    },
+    {
+      "path": "tools/prepare-multiplayer-native-070.py",
+      "sha256": "8373953e2f52b65a2a7d7019f59afb21093728ebaf05812bee15590ce4902915"
+    },
+    {
+      "path": "tools/test-multiplayer-input-070.cjs",
+      "sha256": "88fead413ffc537eed9b59366c996cf404d1562fc8440cec708a6191322a2820"
+    },
+    {
+      "path": "tools/test-multiplayer-intelligence-070.cjs",
+      "sha256": "205ddc04fc3154c12182804a7d14f846ccca2a12e8d85b933d32e9171aa60598"
+    },
+    {
+      "path": "tools/test-multiplayer-shell-070.cjs",
+      "sha256": "352249ea430aad8bd93252ec28edbac8c903cd006db2fcabd44ca01a60836006"
+    }
+  ],
+  "cleanPayloadComparison": {
+    "assetsNativeLibrariesManifestResourcesAndOtherDexIdentical": true,
+    "changedPayloadEntries": [
+      "classes3.dex"
+    ],
+    "note": "Clean compilation regenerated classes3.dex; exact clean APK is retested in emulator.",
+    "comparedEntries": 813,
+    "excluded": "META-INF signing/build metadata only",
+    "testedIncrementalAPK_SHA256": "b0efbc7b3dc714fc9f5126c240ff82cccc93e5773981f0853a3f0d323de79f85",
+    "deliveryAPK_SHA256": "6abfade38111f79d75dc578037106ff4baec3b6e771c8973a654e63b7a9ac553",
+    "removedUnusedZipBytes": 13511373
+  }
+}

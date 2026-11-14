@@ -1,0 +1,96 @@
+{
+  "version": "0.77",
+  "passed": true,
+  "emulatorUsed": false,
+  "actualNativeEngineExecuted": false,
+  "scope": "Actual four-mode command/policy functions and synthetic native API lifecycle, limits, save-state, cancellation and FIFO fixtures; no Android/WASM/network gameplay execution.",
+  "checksPassed": 44,
+  "checks": [
+    "towers: finite manufacturing preserves batch/FIFO validation and starts only explicitly requested units",
+    "towers: repeat schedules one native continuation after each completion without an unbounded waiting queue",
+    "towers: power/constructor/capacity waits and native rejection do not bypass ordinary engine authority",
+    "towers: repeat OFF retains the current unit and explicit FIFO but removes automatic unstarted continuations",
+    "towers: live repeat toggles require an actual matching plan; idle toggles cannot create a unit",
+    "towers: one STOP atomically cancels native current, clears all waiting/repeat and leaves other factories unchanged",
+    "towers: STOP failures preserve queue/policy and cannot acknowledge a false native cancellation",
+    "towers: repeat identity survives script save/load but clears on new level, destruction, ownership or player change",
+    "towers: duplicate command nonces never restart manufacture or repeat a completed STOP",
+    "towers: ownership, factory compatibility, invalid repeat values and 64-job cap stay enforced",
+    "ffa: finite manufacturing preserves batch/FIFO validation and starts only explicitly requested units",
+    "ffa: repeat schedules one native continuation after each completion without an unbounded waiting queue",
+    "ffa: power/constructor/capacity waits and native rejection do not bypass ordinary engine authority",
+    "ffa: repeat OFF retains the current unit and explicit FIFO but removes automatic unstarted continuations",
+    "ffa: live repeat toggles require an actual matching plan; idle toggles cannot create a unit",
+    "ffa: one STOP atomically cancels native current, clears all waiting/repeat and leaves other factories unchanged",
+    "ffa: STOP failures preserve queue/policy and cannot acknowledge a false native cancellation",
+    "ffa: repeat identity survives script save/load but clears on new level, destruction, ownership or player change",
+    "ffa: duplicate command nonces never restart manufacture or repeat a completed STOP",
+    "ffa: ownership, factory compatibility, invalid repeat values and 64-job cap stay enforced",
+    "campaign: finite manufacturing preserves batch/FIFO validation and starts only explicitly requested units",
+    "campaign: repeat schedules one native continuation after each completion without an unbounded waiting queue",
+    "campaign: power/constructor/capacity waits and native rejection do not bypass ordinary engine authority",
+    "campaign: repeat OFF retains the current unit and explicit FIFO but removes automatic unstarted continuations",
+    "campaign: live repeat toggles require an actual matching plan; idle toggles cannot create a unit",
+    "campaign: one STOP atomically cancels native current, clears all waiting/repeat and leaves other factories unchanged",
+    "campaign: STOP failures preserve queue/policy and cannot acknowledge a false native cancellation",
+    "campaign: repeat identity survives script save/load but clears on new level, destruction, ownership or player change",
+    "campaign: duplicate command nonces never restart manufacture or repeat a completed STOP",
+    "campaign: ownership, factory compatibility, invalid repeat values and 64-job cap stay enforced",
+    "multiplayer: finite manufacturing preserves batch/FIFO validation and starts only explicitly requested units",
+    "multiplayer: repeat schedules one native continuation after each completion without an unbounded waiting queue",
+    "multiplayer: power/constructor/capacity waits and native rejection do not bypass ordinary engine authority",
+    "multiplayer: repeat OFF retains the current unit and explicit FIFO but removes automatic unstarted continuations",
+    "multiplayer: live repeat toggles require an actual matching plan; idle toggles cannot create a unit",
+    "multiplayer: one STOP atomically cancels native current, clears all waiting/repeat and leaves other factories unchanged",
+    "multiplayer: STOP failures preserve queue/policy and cannot acknowledge a false native cancellation",
+    "multiplayer: repeat identity survives script save/load but clears on new level, destruction, ownership or player change",
+    "multiplayer: duplicate command nonces never restart manufacture or repeat a completed STOP",
+    "multiplayer: ownership, factory compatibility, invalid repeat values and 64-job cap stay enforced",
+    "all four mode snapshots expose authoritative per-factory repeat alongside native subject/progress",
+    "Multiplayer native completion observation continues repeat even without a synchronized script event callback",
+    "one STOP also clears an idle capacity-blocked continuation without issuing a native refund/cancel",
+    "Towers/Campaign production implementations match and FFA keeps its original no-air/end-of-match policy"
+  ],
+  "sources": [
+    {
+      "path": "scenario/warzone-towers-commands.js",
+      "sha256": "ca130ab86f6afdfd7c403591a73d543b7d5341108475eaa9c13584d4b84e0fbf"
+    },
+    {
+      "path": "scenario/ffa/commands.js",
+      "sha256": "af3fdb67bd9b469394c32b9cb3d11fa19be1f4cfaeb8d6adbf7c5ad8ea524f1e"
+    },
+    {
+      "path": "campaign/commands.js",
+      "sha256": "78947e16c9f9c9e292639dede164a4f78d270f31dfefe15099b9065a4147bbc0"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/mobile-ui-runtime.js",
+      "sha256": "21cf63c58d29ee9064a7caf05c498610439ca33b2d59049d84b53394dc22fb01"
+    },
+    {
+      "path": "scenario/ffa/command-policy.js",
+      "sha256": "44416a2ec9b7f47676429bacb6d156383aaca64a93a00bcc90d878ff6e0410ec"
+    },
+    {
+      "path": "campaign/mobile-events.js",
+      "sha256": "3f1f8754b781dfc690e72cb114372872a73ae4a2f7e84424e1745d827f5b1a91"
+    },
+    {
+      "path": "campaign/research-bridge.js",
+      "sha256": "c812aa9b26d2cb758a1b078fc7a3824a0d1a5bc6dd34596ce6836253aa9ae8cb"
+    },
+    {
+      "path": "tools/compose-manufacturing-077.cjs",
+      "sha256": "6ce081662423a35daa937291134ace9aad19331e33397fdfcff49617660b19e4"
+    },
+    {
+      "path": "tools/compose-multiplayer-ui-077.cjs",
+      "sha256": "ec9c2a9b11a424ed5ad6cd304d207360dbc8059a0129f2f96e51a68a17d717c0"
+    },
+    {
+      "path": "tools/test-manufacturing-native-077.cjs",
+      "sha256": "92aa3b0ad5e7de22e916521e245f68ceddb1a06039f79e0f1d30af2e3968d301"
+    }
+  ]
+}

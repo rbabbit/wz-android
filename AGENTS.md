@@ -1,5 +1,625 @@
 # Warzone Towers maintenance rules
 
+- 2026-11-14: v0.77 implements the approved header-free Manufacturing/Queue
+  mocks across Towers, FFA, Campaign and Multiplayer. Preserve v0.76 APK/full
+  source first. Remove inner titles/power totals, Units and FACTORIES labels,
+  quantity presets and redundant factory status/footer readouts. Use one
+  compact family/factory/Design/Blueprints/options toolbar, inline real current
+  unit status/progress, a repeat toggle and MANUFACTURE. Queue has one atomic
+  STOP per factory: cancel native current, clear waiting and disable repeat.
+  Repeat is authoritative per factory, saveable and bounded to one future job;
+  respect native ownership, research, factory and power/unit limits. Preserve
+  finite FIFO, other factories, construction, designs and all other interfaces.
+  Scope is shared command UI/CSS, three command scripts, composed MP runtime and
+  command-only VFS appends to existing data. No compiled client/WASM rebuild or
+  map/research/Java changes. User explicitly requests NO emulator testing;
+  focused actual-function/browser/payload/build/package checks only, with native
+  gameplay and Android touch/rendering limits disclosed. No GitHub/VPS edits.
+
+- 2026-11-14: v0.76 applies the approved compact main Research layout across
+  Towers, FFA, Campaign and Multiplayer. Preserve delivered v0.75 APK/full source
+  first. Remove the duplicate inner heading/power total, category controls and
+  bottom current-lab/detail block; use lab icons with numeric faces. Keep all
+  topics reachable when filters are hidden, preserve batch assignment, actual
+  native queues and v0.73 active/queued status/progress. Scope is the shared
+  Research JS/CSS plus version, documentation and focused host/browser checks.
+  Footer Analysis, Manufacturing, Intelligence, Hub, Java, native engines and
+  all unrelated content remain frozen. User explicitly requests NO emulator
+  testing. Disclose host/browser checks do not verify Android gameplay/touch.
+  Preserve historical source/proofs; no GitHub or VPS changes.
+
+- 2026-11-14: v0.75 adds the approved Home HUB button and a separate compact
+  monochrome results/rankings/player reader for Retropaganda's public data.
+  Preserve v0.74 APK/full source first. Fetch/cache in a worker, calculate ratings
+  only from a complete synced history, keep player identities and source method
+  accurate, and display attribution. The Hub has no game bridge or Join action.
+  Keep all working lobby, simulation, maps, music, ads, saves and other UI frozen.
+  Scope: Home/Hub navigation, local Hub assets and focused offline/live-data checks.
+  Continue the user's no-emulator preference; explicitly disclose host/browser
+  checks do not establish Android rendering/touch or gameplay. No VPS/GitHub edits.
+
+- 2026-11-14: v0.74 implements approved Home 3 and FFA 1 launcher layouts,
+  with smaller FFA button faces and normal touch targets. Keep the Home mode
+  buttons on one row where space permits; FFA preview stays uncropped and Start
+  remains visible beside compact settings. Preserve v0.73 APK/full source first.
+  Scope is the two native launcher views and their pure geometry helpers only,
+  plus version, documentation and focused host checks. User explicitly requests
+  NO emulator tests. Disclose host geometry/build checks cannot establish Android
+  rendering or gameplay. Freeze gameplay, all assets, saves, ads and other UI.
+
+- 2026-11-14: v0.73 applies the selected shaded Research rows across Towers,
+  FFA, Campaign and Multiplayer. Keep researching and queued topics visible,
+  show clear status/lab labels separately from batch selection, and preserve
+  actual queue commands and game rules. Retain v0.72 APK/full source first.
+  Scope is shared Research JS/CSS plus version and focused checks. User asks
+  for NO emulator tests; use offline state/DOM/layout, build and package checks
+  and disclose that Android gameplay was not tested. Freeze all native clients,
+  maps, music, saves, ads and other UI. Preserve every earlier source/fallback.
+
+- 2026-11-14: v0.72 fixes Multiplayer oil placement and adds its compact Music
+  on/off menu. Preserve v0.71 APK/full source first. Exempt oil extractors from
+  the app's extra spacing buffer while retaining overlap, deposit, native
+  placement and reachability checks. Reuse bundled music with MP-only settings
+  and lifecycle; freeze other modes and the compiled PC-compatible native client.
+  User explicitly requests NO emulator testing for this release. Run focused
+  offline code, media, build and package checks; state that Android gameplay and
+  Android audio playback were not tested. Keep all earlier fallbacks/source.
+
+- 2026-11-13: v0.69 adds Multiplayer to the main Home, importing the working
+  separate test's original PC-compatible 4.7.0 engine (netcode 16384/104) and
+  corrected official /lobby API. Keep its assets/activity/storage isolated from
+  Towers/Campaign/FFA. Reuse mobile movement, selection and camera controls via
+  stock native input; never use the modified protocol-1 engine for public play.
+  Preserve delivered v0.68 APK/full source first. Test actual "1 vs Al Bots Battle"
+  Ready/errors, gameplay input and Leave -> app lobby on the exact delivery APK,
+  plus Home and existing-mode navigation. No public chat, GitHub or VPS changes.
+  Keep native simulation unchanged and disclose any remaining limits.
+
+- 2026-11-13: v0.68 edits terrain on the existing 45 authored FFA maps only.
+  User rejected replacement compact mock layouts: preserve names/IDs, sizes,
+  base locations, objects, economy and each map's existing identity. Add clear
+  connected paths, rock banks and defined approaches to reduce excessive open
+  combat ground. Protect base construction yards, real footprint foundations,
+  factory exits, all oil access and useful flank links. Preserve the six original
+  FFA maps, Towers/Campaign/Duel, compiled engines, AI, controls, music, saves,
+  UI and rewards. Verify delivered v0.67 APK/full source as fallback first.
+  User explicitly requests no emulator testing: offline binary/geometry,
+  preservation, native-package/preload and build checks only, with limits stated.
+  Keep all historical release proofs and source entries; create new 0.68 edit
+  inputs/proofs and overview sheets. No GitHub, VPS or device operations.
+
+- 2026-11-13: v0.67 adds 45 authored NTW-style FFA maps: fifteen each for two,
+  three and four players, alongside the six existing maps. Preserve delivered
+  v0.66 APK/full source through fallback-0.67.json first. Vary terrain topology,
+  base positions and approaches; use spacious equal starting economies and
+  reachable ground routes. Native two/three/four-player starts use one human
+  and the remaining independent stock Cobra bots, Easy/Medium/Hard, VTOL off.
+  Add compact player-count browsing and preserve map-aware/legacy saves.
+  User explicitly requested NO emulator testing for this release; this overrides
+  the usual exact-APK emulator workflow. Run offline geometry/binary/package,
+  Java/runtime/save and UI checks, build and package APK/full source, and state
+  that native gameplay/pathfinding/balance were not verified in the emulator.
+  Preserve original maps, compiled engines, stock AI, music, gestures, other
+  modes and older versions. No GitHub/VPS changes or device operations.
+
+- 2026-11-12: v0.66 adds five user-supplied FFA maps beside EMAG, real swipe
+  previews and map-aware starts/saves. Preserve delivered v0.65 APK/full source
+  through fallback-0.66.json first. Keep every original .wz byte and its licence;
+  preserve authored bases, units, terrain and oil. One human and independent
+  stock Cobra occupy all remaining slots (three opponents on four-player maps,
+  five on EMAJ-6P), with existing Easy/Medium/Hard and no VTOL. Keep legacy EMAG
+  Cobra/NullBot saves readable; validate actual map, level, slots and native AI
+  contexts. Add MUSIC to FFA and Campaign: FFA shuffles all 39 bundled songs;
+  Campaign follows the native three-track in-game playlist, mission-start
+  randomisation, ordered advance and video/results suspension. Preserve Towers
+  assigned-track behavior, audio bytes, gestures, other gameplay and v6.4.
+  Verify all six native map starts, legacy and six-player save/load, real media
+  decoding/lifecycle, compact setup/music controls and input restoration on the
+  exact APK. Reuse one prepared emulator; bound fixture recovery and disclose
+  synthetic identity fixtures and absent physical-speaker verification. Package
+  the checked APK and complete retained source; no GitHub or VPS changes.
+
+- 2026-11-12: v0.65 adds a compact Home Guide and an offline reader shared by
+  in-game Help. Preserve delivered v0.64 APK/full source first. Use actual app
+  controls, real unmodified screenshots with runtime numbered annotations, and
+  exact bundled research graphs (390 MP/Towers, 390 FFA with 24 air topics
+  explicitly unavailable, separate 413 Campaign). All prerequisites are AND;
+  mission artefacts remain conditional. Cover the ten requested practical
+  chapters, research branches, source attribution and mode differences. Freeze
+  gameplay, native payloads, gestures, maps, saves, rewards, music and ads.
+  Check the guide offline, search/links/back, screenshot enlargement, compact
+  screens and Home/Help return input on the exact delivery APK. Reuse prepared
+  states; do not repeat combat/AI/long gesture suites for this reading feature.
+  Preserve source/image provenance and package exact APK + complete source.
+
+- 2026-11-12: v0.64 switches all NEW FFA matches to the exact bundled stock
+  Cobra AI at native Easy/Medium/Hard, retaining three independent enemies,
+  the original EMAG map and VTOL restrictions. Preserve delivered v0.63 APK
+  and complete source through fallback-0.64.json first. Reuse the matched
+  generic engine/WASM and isolated FFA payload; no native compilation. Keep
+  stock Cobra and dependencies unchanged, including native timer hydration.
+  Preserve the exact legacy NullBot files/AI name for existing saved matches.
+  Add botType from actual native script identities, not launch labels; verify
+  save metadata, native AI names/contexts/difficulty and restore proof agree.
+  Missing legacy botType means NullBot; new starts explicitly Cobra, with no
+  new bot picker. Label setup and saved/live matches accurately. Freeze the
+  touch controls, other modes, maps, music, ads and rewards. Check real Cobra
+  progress at all difficulties, hostility/no-air, save/load with continuing AI,
+  legacy NullBot compatibility, compact labels and relevant existing routes
+  on the exact APK. Reuse ordinary prepared states, bound fixtures and restore
+  wallet/profile afterward. Package exact APK/full source; no GitHub or VPS.
+
+- 2026-11-12: v0.63 improves inconsistent rotation recognition. Preserve
+  delivered v0.62 APK/full source through fallback-0.63.json first. Actual
+  native repros: a 40px-span 20-degree pivot does nothing, and a small initial
+  spacing change permanently locks zoom without emitting any zoom, ignoring
+  the subsequent full turn. Use realistic short, mixed and uneven strokes;
+  reduce excessive close-finger slop and allow clear, sustained angular intent
+  to take over from provisional/earlier gestures with hysteresis. Filter signed
+  angular noise and asynchronous pointer updates. Rebase on handoff rather
+  than replay old motion; wait for native mouse release/rearm before pan-to-yaw
+  and guard delayed work against changed fingers, menu or session. Preserve
+  pure pinch/tilt/pan, full turns, one-finger lifecycle and release cleanup.
+  Product scope is shared touch controls plus version only; all native data,
+  gameplay, construction, saves and other UI stay frozen to v0.62. Focused host
+  and exact-APK native natural-stroke checks across modes and compact screens,
+  then package APK/full source. Do not repeat long full-circle staged fixtures.
+
+- 2026-11-12: v0.62 corrects two-finger gesture classification for full-circle
+  rotation in Towers, Campaign and FFA. Preserve delivered v0.61 APK/full
+  source through fallback-0.62.json first. Reproduce anchored/adjacent-finger
+  arcs on native camera state: v0.61 misclassified these as pitch tilt despite
+  native yaw already allowing unlimited turns. Recognize angular movement with
+  one finger stationary or unequal/opposed movement; reserve pan/tilt for
+  coherent parallel travel. Preserve pinch, accepted one-finger pan, input
+  fences, lift/cancel/menu cleanup and rotation selection-cache invalidation.
+  Keep the pending-pulse budget bounded without imposing a yaw angle limit.
+  Product changes are shared touch controls and version only. Freeze all
+  native payloads, construction, saves, other UI and gameplay. Focused host
+  transitions and exact-delivery native quarter-turn/full-circle observations
+  in all three modes, then package APK/full source. No unrelated changes.
+
+- 2026-11-12: v0.61 fixes crowded construction queues and adds two-finger
+  twist rotation in Towers, Campaign and FFA. Preserve delivered v0.60 APK
+  and complete source through fallback-0.61.json first. Validate queued
+  footprint spacing against native placement, include both app jobs and
+  observer journals, and revalidate before dispatch. Keep invalid accepted
+  plans visible with a reason and explicit selected-truck retry/cancel;
+  never borrow remote trucks or silently discard/reorder construction.
+  Preserve modules, cancellation, per-worker queues and saved orders.
+  Add twist yaw including 180-degree reversal while preserving parallel
+  two-finger tilt, pinch zoom and accepted one-finger pan lifecycle. Honor
+  input fences and release on lift/cancel/menu; invalidate visible-truck
+  selection when the camera rotates. Reuse prepared emulator native states,
+  run focused checks and relevant exact-delivery APK journeys in all modes,
+  then package APK and full source. No unrelated UI, maps, ads, GitHub or VPS.
+
+- 2026-11-12: v0.60 adds a separate FFA (Free for All) section alongside
+  Campaign/Towers, using the user's exact four-start EMAG_FFA archive. Preserve
+  delivered v0.59 APK/full source through fallback-0.60.json first. Human0 plus
+  three independent native NullBots, native Easy/Medium/Hard, no alliances and
+  no VTOL aircraft/factories/pads. Keep the authored map/base objects; factories
+  are built during play. Reuse the matched generic native program with isolated
+  FFA data/config and stock ground AI/endconditions; do not rebuild or overwrite
+  Campaign/Towers/hidden Duel runtimes. Apply narrow FFA-only air policy while
+  preserving reachable ground tech, costs and effects. Separate FFA phone saves
+  and native identities; never enter Towers crystal/reward accounting. Reuse
+  the existing mobile command menus, footer, touch controls and monochrome theme.
+  Test actual four-player state, bot progress, air restrictions, real construction,
+  research/manufacturing/cancel, saves/load and repeated menu/input returns on
+  the exact delivery APK. Review compact screens and smoke-test existing modes.
+  Disclose ordinary versus prepared fixtures and full-match/balance limits.
+  Keep every old release/source entry; no GitHub, VPS, live ads or GIF changes.
+
+- 2026-11-12: v0.59 changes only the Android launcher icon to the authentic
+  bundled WZ2100 steel shield. Preserve delivered v0.58 APK/full source through
+  fallback-0.59.json first. Copy android-chrome-192x192.png unchanged into a
+  dedicated drawable; update standard/round legacy wrappers and adaptive
+  foreground with mask-safe padding. Preserve the splash, shared branding art,
+  all Java/gameplay/assets, music, saves and rewards. Version bump only beyond
+  launcher resources. User explicitly requested NO emulator testing; perform
+  build/resource/package checks and deliver APK/full source without claiming
+  runtime launcher verification. No GIF work, GitHub or VPS changes.
+
+- 2026-11-11: v0.58 authorized Back utility face matching and small per-map
+  star/Complete markers for native Towers victories. Reuse existing completed
+  map history; persist one-time +1000 crystals per all actual catalogue maps
+  won in each Easy16/Medium15/Hard15 group. Credit balance, completion and claim
+  flags together in the existing atomic phone wallet; preserve wave/map/ad and
+  saved-run anti-duplication accounting, legacy saves and previous win history.
+  Reconcile already-completed legacy groups once on Home. No new splash design.
+  Preserve v0.57 APK/full source first via fallback-0.58.json; freeze all game
+  web/native runtimes, maps, scenarios, Campaign, music and ad code. Focused
+  host wallet failure/migration/replay/category tests and exact-APK real emulator
+  UI/native-terminal checks; disclose any seeded boundary fixture and restore
+  original emulator wallet afterward. Package APK/full source after relevant
+  checks pass. No GitHub/VPS changes or live-ad testing.
+
+- 2026-11-11: user selected FIRST mock from the final minimal two-mode set.
+  v0.57 Home is only official logo, compact CAMPAIGN/TOWERS controls, grey tank,
+  and rbabbit version. Campaign opens its existing setup (New/Continue inside);
+  Towers opens its existing map browser (Rewards/Saves inside). No descriptions,
+  preview, utility tiles, huge headings, cards or scrolling on the splash.
+  Preserve delivered v0.56 APK/full source via fallback-0.57.json first.
+  Product changes are HomeModesView.java and version only; MainActivity,
+  GraphicsSetupView, all assets/native runtimes/gameplay/save/media stay frozen.
+  Size from width AND height, with 48dp touch bounds and slimmer visible faces.
+  Reproduce/test exact 800x360dp user landscape (density480,2400x1080), compact
+  640x360dp, normal1280x576dp and larger text. Check actual native controls,
+  Campaign/Towers entry/Back/save/return on exact APK, compare approved visual
+  against real screenshots, then package APK/full source. No GitHub/VPS/ads.
+
+- 2026-11-11: user selected home mock option2 and authorized v0.56 native
+  launcher implementation. Remove CHOOSE YOUR MODE and WARZONE TOWERS text;
+  retain official logo, black/white rounded controls, real grey tank and map
+  thumbnail. Two cards expose Campaign Continue/New and Towers Choose Map, with
+  compact existing Saves/Rewards. Preserve v0.55 APK/fullsource first via
+  fallback-0.56.json; all game JS/WASM/data, Campaign/scenarios, assets, maps,
+  music, rewards and save formats remain frozen. Keep native video readiness
+  gates, separate Campaign/Towers saves, map selection/default and return-map
+  behavior. No new chapters/progress/rewards features or dormant 1v1 exposure.
+  Reuse emulator5558 for normal/compact home, real card navigation and Back,
+  save/load/game return and exact-APK route verification. Compare selected image
+  against actual screenshots; fix visual/layout/interaction failures before
+  packaging APK/fullsource. No GitHub/VPS writes or live ad tests.
+
+- 2026-11-11: user authorized v0.55 Campaign cancellation journal cleanup.
+  Exact delivered v0.54 APK/full source are pinned first in fallback-0.55.json.
+  Reproduce with the prepared raw native checkpoint in emulator5558; remove
+  only the matching cancelled app-job preview record immediately on confirmed
+  cancellation. Preserve physical foundations, other jobs/worker FIFO and native
+  Stop/current-order behavior. Freeze all Towers/Duel gameplay, UI, input, maps,
+  rewards, ads and music. Append only the assembled Campaign mobile bridge to
+  the frozen Campaign VFS; no WASM/native compilation or mission logic changes.
+  Verify immediate ghost cleanup while builders remain busy, retained work,
+  active cancellation/foundation, save/load and a focused Towers regression on
+  the exact delivery APK; package APK/full source after checks pass. No GitHub
+  or VPS actions.
+
+- 2026-11-11: user authorized all three audited v0.54 issues: Campaign-only
+  accepted/queued construction ghosts must remain visible when switching builds;
+  remove the small minus/collapse control from both Campaign and Towers while
+  retaining Analysis/Manufacturing/Build and their actions; Campaign Intelligence
+  must open the existing research reader over the battlefield. Preserve exact
+  delivered v0.53 APK/full source in fallback-0.54.json first. Retain explicit
+  access to mission briefings/replayable videos, original automatic story flow,
+  Guide suppression, ALL COMBAT suspension, Back and toolbar/input restoration.
+  Existing native Campaign research preview is already enabled; no native build
+  or broader Towers marker is needed. Preserve all native pairs, scenario rules,
+  Campaign mission bodies/grants and earlier fallbacks. Reuse emulator5558 and
+  native checkpoints; inspect actual canvas CSS/paint plus screenshots rather
+  than trusting drawn counters. Check first/changed/queued ghosts, completion
+  cleanup, both footer modes/old collapsed preferences, research models/reader
+  lifecycle, briefings and save/continue on exact APK. No GitHub/VPS/ad actions.
+
+- 2026-11-11: user authorized Campaign v0.53 fixes from two screenshots:
+  align Campaign header/footer with accepted Towers controls, prevent BUILD
+  clipping, repair Campaign Design validation across Command Centre changes,
+  and suppress unsolicited stock Guide popups that pause gameplay. Preserve
+  exact delivered v0.52 APK/full source in fallback-0.53.json before edits.
+  Keep ALL COMBAT, original HQ/technology rules, native unit creation/costs,
+  mission bodies/objectives/videos/briefings/Intelligence/transports and saves.
+  Scope shared changes to Campaign; preserve Towers native pair/data/scenario,
+  maps/rewards/ads/music/input and earlier fallbacks. Reuse emulator5558 and
+  prepared Campaign saves, validate real header/footer bounds, pre/post-HQ
+  Design plus actual unit manufacture, new/load Guide suppression, menu/input
+  returns and phone saves on the exact delivery APK. No GitHub or VPS writes.
+
+- 2026-11-11: user authorized v0.52 Towers fixes while testing Campaign:
+  route actual truck/unit-loss notices away from the clipped stock right-edge
+  strip; reconcile construction after assigned builders die; show waiting jobs
+  clearly and resume only with an explicitly selected replacement group.
+  Preserve delivered v0.51 APK/full source first via fallback-0.52.json. Keep
+  Campaign entry/data/scripts, original mission logic and v0.51 behavior intact.
+  Native loss routing must be Towers-only and preserve death, score and audio.
+  Never borrow unrelated/remote trucks as a retry fallback. Preserve foundations,
+  progress, costs, per-worker FIFO, module ordering, Stop/manual overrides and
+  cancel/save/load paths. Reuse emulator5558/prepared states, disclose any seeded
+  casualty fixture, and verify actual loss notices, surviving/lost builders,
+  explicit replacement orders/completion and navigation on the exact APK.
+  Keep prior releases, GitHub and VPS unchanged; no ad controls during checks.
+
+- 2026-11-11: user authorized Campaign alongside accepted v0.50 after a
+  read-only feasibility audit. Work on codex/campaign-0.51. Immutable delivered
+  v0.50 APK/full-source hashes are pinned in archive/fallback-0.51.json. Reuse
+  original Alpha/Beta/Gamma missions with additive namespaced mobile hooks;
+  retain Towers rules/maps/saves/rewards and the accepted pan lifecycle.
+  Campaign has separate launch/continue/save/Intel/objective paths, a persistent
+  ALL COMBAT header toggle excluding constructors, and original mission outcomes.
+  Download the existing owner VPS pack, verify its SHA, extract only sequences/
+  to private storage and serve offline. Never install its older engine files.
+  Narrow source-built native Campaign marker gates may share input/observer APIs
+  without enabling Towers' forced-autosave suppression. Keep original mission
+  bodies and native progression intact; verify actual cinematics, opening mission,
+  control/menu returns and saves on the exact APK before delivery. Disclose
+  untested later missions/off-world paths. No live ad tests or VPS/GitHub writes.
+
+- 2026-11-11: user reports v0.49 regressed normal finger panning and requests
+  a thorough audit/fix, not a quick patch. Preserve delivered v0.49 APK/source
+  using fallback-0.50.json; retain v0.48 too. Follow the persistent workflow:
+  reproduce on the installed APK, validate the real touch fixture and inspect
+  native SDL/camera states before edits. The old boolean-mouse VM oracle was
+  inaccurate: KEY_RELEASED still pans for one native frame, so immediate cursor
+  centring caused a real release jump. Repair release/rearm and repeat-touch
+  lifecycle, restore synchronous initial drag, preserve bounded coordinates and
+  native camera interpolation. Narrow Towers/Emscripten MMB double-click down
+  normalization in main_sdl.cpp is authorized, with matching one-object native
+  compilation and frozen earlier overlays/data/VFS. Keep all other input, game
+  rules, menus and v6.4 intact. Verify both battlefield and minimap separately,
+  rapid/short/reversing/edge drags, touch transitions, placement/selection and
+  menu returns on the exact delivery APK in the real emulator. Fix fixture
+  failures separately; do not claim smoothness from counters/VM tests alone.
+  Keep GitHub/VPS/older artifacts untouched; package APK/full source only after
+  focused checks and the integrated device journey.
+
+- 2026-11-11: user authorized auditing and fixing jittery finger map panning
+  as v0.49. Complete delivered v0.48 APK/source/checksums are pinned first by
+  archive/fallback-0.49.json. Audit reproduced raw input bursts and loss of the
+  last held drag position before a native frame. Bound only Towers one-finger
+  pan coordinates to the canvas, coalesce to the latest absolute position per
+  frame, and let the final held point render before release. Cancel pending
+  work on cancellation, navigation or new input; park the synthetic cursor to
+  avoid desktop edge scrolling. Preserve camera gain away from extreme bounds,
+  native camera interpolation, two-finger/pinch/tilt, minimap, Duel, selection,
+  construction and other menus. No native engine/data changes or extra easing.
+  Continue source/VM, compilation and package checks without emulator/browser
+  testing. Phone smoothness/gameplay remain unverified. Preserve older versions,
+  v6.4, GitHub benchmarks, privacy site and VPS.
+
+- 2026-11-11: user authorized v0.48 to fix Intelligence immediately closing.
+  Complete v0.47 APK/source/checksums are preserved first in fallback-0.48.json.
+  Audit reproduced the mixed-clock regression: a fresh native open timestamp
+  was compared with an older wave-HUD snapshot on the first 600ms heartbeat.
+  Compare only valid nonnegative numeric native-response timestamps; ignore
+  absent/malformed values and preserve genuine native rewind/load/not-open
+  protection. Guard both late heartbeat success and failure by the open-session
+  generation. Keep report eligibility, icons, refresh, models/audio, Build,
+  Home arrow, native engine/data, all other layouts and policies unchanged.
+  Extend the focused fixture with independent native/HUD clocks and realistic
+  native timestamps; preserve historical v0.47 tests/proofs. No emulator/browser/
+  ad request: source/VM checks, compilation and exact APK/full-source checks
+  only. Do not claim device/gameplay verification. Keep old versions, v6.4,
+  GitHub benchmarks, privacy site and VPS untouched.
+
+- 2026-11-11: user authorized all audited Intelligence, compact Build-summary
+  and Home arrow issues as v0.47. Preserve complete delivered v0.46 APK/source
+  first via archive/fallback-0.47.json. Intelligence must expose only completed
+  research with a real engine-issued report, excluding initial grants. Remove
+  its All completed tab and completion-notice bypass, reconcile stale details,
+  and refresh without relying on one event. Do not invent reports for minor
+  upgrades. Use stable research-ID mappings to existing correct artwork; replace
+  misleading lab-image fallbacks, including the idle lab icon. Build shows one
+  compact current unfinished site, advances on completion, hides when idle,
+  and drops EXIT KEEP ORDERS and its expanded history controls from the compact
+  sidebar. Keep footer Build close/keep-orders, jobs, selections and construction
+  rules intact. Home map arrow ink follows its actual normal/selected/pressed/
+  disabled face. Keep the selected rounded monochrome theme, current other
+  layouts, engine JS/WASM/data/VFS, real art/maps/music, wallet/saves/ads and Duel
+  unchanged. No emulator/browser/ad requests; use focused VM/source, compiler
+  and exact APK/full-source integrity checks. Runtime visuals/gameplay remain
+  unverified. Preserve all older versions, v6.4, GitHub and VPS.
+
+- 2026-11-11: user selected the second isolated button sample (gently rounded
+  rectangle), and authorized that control style throughout the existing app,
+  together with the return to a black-and-white UI. The exact selected reference
+  is exec-2f619526-416c-49ad-aed3-f2ddb7b0ac7a.png, not either earlier full-page
+  mock set or the clipped-corner plates from v0.45. Preserve v0.45 first using
+  archive/fallback-0.46.json; the complete delivered source/APK are immutable.
+  Keep current layouts, IDs, callbacks, controls, sounds and real game artwork.
+  Use black panels, charcoal normal buttons/white text, white selected buttons/
+  black text, darker pressed buttons, and readable disabled/busy/focus states.
+  Remove redundant shared header/footer backing around individual controls;
+  keep content panels readable. Cover web and Android menus and sub-pages,
+  loading/briefings/notices and a Towers-only colour rollback in console.cpp/
+  intdisplay.cpp. The native gauge formula and autosave guards, all prior native
+  overlays, JS/data/VFS, maps/music, wallet/save/ads policies and dormant Duel
+  remain frozen. Use the matching incremental native cache and preserve source,
+  patch/build/integration proofs. No emulator/browser/device/ad requests; only
+  focused source checks, compilation and exact package/source validation. Do
+  not claim screen, game-feel, sound or gameplay verification. Keep v6.4, older
+  versions, GitHub benchmarks, privacy website and VPS untouched.
+
+- 2026-11-10: user authorized option 1's game-control artwork/interaction pass
+  as v0.45 and explicitly requested fallback FIRST. Complete delivered v0.44
+  APK/source/checksums are pinned in archive/fallback-0.45.json. Keep the existing
+  HTML/engine architecture and existing native Home/Rewards views; no Android
+  UI port, new screens or gameplay rewrite. Add actual raster normal/selected
+  control faces, immediate press/release feedback, disabled/busy/focus states
+  and restrained original Warzone click audio respecting native mute settings.
+  Preserve Intelligence's own sounds and avoid duplicate compatibility-click,
+  drag or synthetic-event feedback. Move Build entirely out of Towers' top nav
+  into footer Analysis -> Manufacturing -> Build, retaining the existing ID,
+  guarded toggle, current truck selection, placement and keep-orders paths.
+  Footer stays reachable in Build, and neighbouring status tabs exit Build via
+  its normal keep-orders transition. Artwork moves under a press, not the real
+  button bounds. Apply matching raster faces to existing native action/tab
+  button factories without changing layout, labels, callbacks, services or Duel.
+  Preserve current sage/black palette, grey Home tank, version prefix, Easy-first
+  cold launch, manual saves, disabled autosave, power display, production Cancel,
+  live rewarded ads and emulator sample fallback. No emulator/browser/ad requests;
+  only focused source/VM checks, Java compilation and package/source integrity.
+  Native engine JS/WASM/data, scenarios, maps/music and original artwork stay
+  frozen. No subjective game-feel, sound playback, visual or gameplay pass is
+  claimed without a device check. Preserve older versions, v6.4, GitHub and VPS.
+
+- 2026-11-10: user authorized all accumulated v0.44 changes and real rewarded
+  ads. Preserve complete delivered v0.43 through archive/fallback-0.44.json.
+  Group top actions Research -> Manufacturing -> Build; rename visible Towers
+  Production to Manufacturing and only footer Research to Analysis. Keep the
+  Research emphasis, highlight Music only while its menu is open, and align
+  footer tabs with readable intrinsic widths and keyboard focus retained.
+  User explicitly clarified Wave/Skip moves LEFT/inward for curved-edge safety.
+  Fix the native power-gauge display saturation without changing actual power,
+  costs or the economy. Disable the native automatic-save feature (config plus
+  Towers-only trigger/write guards), keeping manual Save/Saved Games and all
+  wallet/blueprint persistence. Hide/restore Home tank around result receipts,
+  keep Home version visible and modal focus isolated. Default normal cold launch
+  to the first Easy map, but retain the played map on defeat/manual Home returns
+  and existing saved-game routing. The supplied publisher ad unit is authorized
+  for real phones; retain consent, opt-in flow, atomic ten-crystal grants and
+  emulator sample fallback. Use -PadmobLiveAds=false for development/ad testing.
+  No emulator/browser/live-ad requests for this revision. Native changes are
+  bounded to intdisplay.cpp/loadsave.cpp with matching source/patch/build proofs;
+  preserve every earlier overlay and all authored VFS/data/maps/music/art.
+  Package source/APK after compilation and focused source/package checks;
+  actual screens, gameplay, manual-save operation and live ad serving remain
+  unverified. Keep v6.4, older artifacts, GitHub benchmarks, privacy site and VPS.
+
+- 2026-11-10: user selected Home mock 2's grey cannon tank and authorized it
+  as v0.43, plus a bottom-right Home/splash-only `rbabbit v<current version>`
+  label and real production cancellation in Queue. Preserve complete delivered
+  v0.42 APK/source/checksums through archive/fallback-0.43.json. Retain current
+  controls/layout, original logo, prior artwork and dormant Duel. Fit the new
+  transparent tank beside the map card, below the logo and above the version.
+  Production cancellation must target exact waiting IDs or the observed current
+  native subject, preserve other factories/queues and reject stale active-unit
+  identities. Use ordinary native cancellation/refunds; never just remove the
+  displayed active row. A bounded Towers-only QuickJS cancellation entry point,
+  one-object matching native build/link and commands-only VFS update are
+  authorized. Archive exact source, patch, recipe and provenance; preserve all
+  v0.42 renderer and earlier native fixes. No emulator testing, consistent with
+  the requested phone-check workflow; compiler/package and focused source checks
+  are not runtime/gameplay verification. Leave maps/music/rewards/saves/ad policy,
+  v6.4, GitHub benchmarks, privacy site, VPS and older artifacts untouched.
+
+- 2026-11-10: user selected sage mock 1 and authorized its light green / black
+  theme throughout the whole app as v0.42. Preserve the complete delivered
+  v0.41 APK/source/checksums through archive/fallback-0.42.json. Keep current
+  layouts, actions, item artwork and all previous gameplay fixes. Theme native
+  Home/Rewards/saves/dialogs/briefings/loading/notices and all Towers web menus,
+  sub-pages, footer sidebars, selections and progress consistently. Separate
+  primary/selected fills from text tokens to retain dark text on green controls.
+  Towers-gated native console and power-meter rendering may change colour only;
+  retain their calculations, geometry, lifetimes and all previous source overlays.
+  Use the prepared matching cache for the two rendering objects and one link,
+  preserve complete source/patch/provenance, and leave data/scenario/art/music
+  and all orders/save/wallet/ads policies untouched. User requests NO emulator
+  testing and wants to check the APK personally. Build/source/package integrity
+  is not gameplay or screen verification. Keep older artifacts, v6.4, GitHub
+  benchmarks, privacy website and VPS unchanged.
+
+- 2026-11-10: user authorized v0.41 to replace Production footer component
+  placeholders with the real current-unit thumbnail used by the main recipe
+  list, correct missing constructor/system equipment in live unit metadata,
+  and remove App waiting/Total unknown wording from both Production views.
+  Preserve complete v0.40 through archive/fallback-0.41.json. NO emulator testing;
+  use focused source/desktop checks and compile/package verification. Extend
+  only the existing Towers-gated read-only native factory observer to expose
+  the authoritative subject template, validate its identity in the snapshot,
+  and retain actual progress/remaining-time semantics. Do not guess missing
+  parts from names or fabricate total counts for unverified native queues;
+  omit unsupported summaries instead of presenting implementation diagnostics.
+  Preserve all native gameplay/order/cost/timer/save behavior and prior fixes.
+  Freeze v0.40 source proofs; archive the exact additive native delta, matching
+  source build/loader/VFS lineage and recipe separately. Java/resources, actual
+  artwork, maps/music, ads/wallet/save policy, dormant Duel, older versions,
+  v6.4, GitHub benchmarks, privacy site and VPS stay unchanged.
+
+- 2026-11-10: user authorized v0.40 to fix the audited footer/Build/header
+  contrast defects and add real production progress, especially in the footer
+  status sidebar, with clearer current/waiting/remaining unit counts. Preserve
+  complete v0.39 via archive/fallback-0.40.json. Minimal focused checks only;
+  continue without emulator testing. An additive read-only Towers-gated native
+  structure observation and matching incremental JS/WASM rebuild are permitted
+  to expose actual factory build work and blocked states. Preserve all prior
+  native fixes, production rules/orders/timing and save identity; never create
+  a guessed countdown from wall time or queue-start bookkeeping. Record the
+  matching source patch, guarded build recipe and provenance. Only the commands
+  VFS override may change for the observed snapshot. All maps/music, artwork,
+  Java/resources, wallet/save/ads services, dormant Duel and other VFS files
+  remain frozen. Package APK/full source after focused source/desktop and build
+  checks; do not imply emulator/gameplay verification. Older versions, v6.4,
+  GitHub benchmarks, public privacy site and VPS remain untouched.
+
+- 2026-11-10: user authorized v0.39's whole-app monochrome theme and selected
+  Production mock 2: Units/Design/Blueprints first, then category and numbered
+  native factory chips on one row, with quantity beside each Produce action.
+  Preserve complete v0.38 via archive/fallback-0.39.json. Apply matching neutral
+  presentation across native Home/Rewards/Saved Games/receipts/briefings/dialogs
+  and Towers web pages, sub-pages, field controls and notices. Keep actual item
+  artwork, battlefield/minimap and player/placement colours, native engine/data,
+  maps/music, actions/IDs/queues, wallet/save/ad policy and dormant Duel intact.
+  NO emulator testing: focused source/desktop-fixture rendering, compilation and
+  exact package/source checks only. Do not claim Android gameplay/screens tested.
+  Preserve older artifacts, v6.4, GitHub benchmarks, privacy site and VPS.
+
+- 2026-11-10: user authorized v0.38 to fix construction overlays leaking into
+  Intelligence. Explicitly NO emulator testing for this task; use focused
+  source/Canvas regressions and a build, then deliver the APK for phone checking.
+  Preserve complete v0.37 via archive/fallback-0.38.json. Conceal battlefield
+  overlays throughout Intelligence open/close transitions, preserving their
+  orders/state and restoring their display afterward. Keep native engine,
+  weather, controls, maps/music, saves/rewards/ads and unrelated UI unchanged.
+
+- 2026-11-10: user selected square-controls mock 3 for v0.37. Change only the
+  Towers field panel styling: three columns, two rows, square touch targets,
+  original panel widths, and the unchanged Research/Production footer below.
+  Preserve original icons/actions and all native/gameplay code. Keep v0.36 APK,
+  complete source and checksums frozen by archive/fallback-0.37.json. Check six
+  real actions, footer returns, small/enlarged-text and relevant layout spacing
+  on the exact APK, restore emulator data/settings, then package full source.
+
+- 2026-11-10: user authorized v0.36 after the supplied Intelligence recording.
+  Preserve v0.35 using archive/fallback-0.36.json. Replace Select/Move with compact
+  Demolish and Intelligence controls. Demolish uses the exact selected builders,
+  protects the Command Centre, retains native refunds and cancels stale targeting
+  on navigation/load. Intelligence uses real completed topics, authored reports,
+  rotating native models and original report/UI audio. Completion notices open
+  their matching report. Preserve gameplay rules, existing saves/rewards/ads,
+  maps/music and older versions. Check the exact delivery APK in the existing
+  emulator, restore original data, then package complete source and APK.
+
+- 2026-11-10: user authorized v0.35 with selected start mock1 and defeat mock3.
+  Preserve complete v0.34 by fallback-0.35.json. Add a brief native healthy-HQ
+  Protect Your Command Centre opening and destroyed-HQ defeat cover on same-map
+  Home, retaining reward receipts. Start only after real battlefield readiness,
+  own/acknowledge a bounded native pause and restore input before uncovering.
+  Replace remaining stock round/start/camera messages with the approved compact
+  black/white presentation; native camera actions, sounds, callbacks and warnings
+  remain intact. Keep maps/music/rewards/saves/ads and dormant Duel unchanged.
+  Root owns focused exact-APK transition, menu, small-phone and save checks,
+  restores the emulator and packages full source/APK. GitHub/VPS and fallbacks
+  stay untouched.
+
+- 2026-11-10: user authorized v0.34: suppress the stock Towers terminal screen,
+  present research and successful saves as compact black/white notices (save
+  says only Game saved), show actual incoming wave units at top right, and remove
+  the Research/Production activity sidebar X controls. Preserve complete v0.33
+  by fallback-0.34.json. Keep same-map Home return, rewards, research/production
+  queues and save identity. Scoped native overlay suppresses exactly research
+  completion and QuickSave success console messages only when the Towers-only
+  transient MEMFS marker is present; failures and Duel remain unchanged. Root
+  owns focused exact-APK emulator checks, then complete source/APK packaging.
+  Preserve all maps/music/ads, v6.4, older fallbacks, GitHub benchmarks and VPS.
+
+- 2026-11-09: user authorized 0.33 from revised Rewards mock 1: whole item rows
+  buy one, with no purchase steppers, BUY footer, large Rewards title or tap hint.
+  Put compact Gain 10 Crystals in the top row, retain conditional privacy access
+  there, and leave no Rewards footer. Preserve stored/selected quantities and
+  native acknowledgement, prices, caps and wallet rules. Fix the reproduced
+  SAVE feedback issue with immediate Saving/busy and acknowledged Saved/Retry;
+  keep real native save, persistence and identity barriers unchanged. Preserve
+  complete v0.32 artifacts by hash in archive/fallback-0.33.json. Root owns the
+  existing emulator and backed-up prepared saves, with focused actual Home/game,
+  single-tap transaction, large-text, Save/load and return checks on the exact
+  delivery APK. Freeze all engine/maps/music/ad SDKs and unrelated gameplay;
+  keep GitHub v0.31 benchmark, earlier fallbacks, v6.4 and VPS untouched.
+
+- 2026-11-09: user authorized 0.32 with the essential soundtrack bundled directly
+  in the APK, no Home music download/setup control, no visible Swipe maps text,
+  and no NEXT MATCH tab in Rewards. Keep owned-item selection usable inline;
+  buying does not automatically consume stock. Preserve complete v0.31 APK,
+  source and checksums by hash in archive/fallback-0.32.json. Keep map arrows,
+  swiping, all 46 levels, core engine/data, wallet/save rules, ads/consent and
+  existing explicit music-Off settings; new installs default to music On.
+  User explicitly requests actual small-phone emulator checks after the fixes,
+  including scrolling/large text and offline first-use music with no legacy
+  downloaded pack. Root owns the one resized emulator and restores its display,
+  density, font/network settings afterward. A second profile is unnecessary
+  unless the existing device cannot validate the requested conditions. Apply
+  only concrete responsive fixes, package exact checked APK plus full source,
+  and leave v0.31 GitHub benchmark, older fallbacks, privacy site and VPS intact.
+
 - 2026-11-09: user accepted the delivered 0.31 as the new GitHub benchmark and
   authorized committing it to main, tagging v0.31-benchmark, and publishing a
   release containing the existing verified APK, complete source ZIP and checksums.

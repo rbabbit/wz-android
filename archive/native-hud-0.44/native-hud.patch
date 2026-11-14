@@ -1,0 +1,83 @@
+--- a/src/intdisplay.cpp
++++ b/src/intdisplay.cpp
+@@ -203,6 +203,8 @@
+ 	SDWORD		BarWidth, textWidth = 0;
+ 	SDWORD		iX, iY;
+ 
++	const bool sage = towersSageTheme();
++	const UDWORD previewPower = ManuPower;
+ 	double desiredPower = getPowerMinusQueued(selectedPlayer);
+ 	static double displayPower;
+ 	static unsigned lastRealTime;
+@@ -221,6 +223,18 @@
+ 	textWidth = cache.wzText.width();
+ 	BarWidth -= textWidth;
+ 
++	if (sage)
++	{
++		// This is a display scale, not a power-storage limit. The original
++		// fixed pixels-per-power scale was already full around 2500 power.
++		double displayRange = 5000.;
++		while (std::max(displayPower, static_cast<double>(previewPower)) > displayRange)
++			displayRange *= 2.;
++		ManPow = static_cast<SDWORD>(previewPower * static_cast<double>(BarWidth) / displayRange);
++		Avail = static_cast<SDWORD>(displayPower * BarWidth / displayRange);
++		if (displayPower < 0 && Avail == 0) Avail = -1;
++	}
++
+ 	if (ManPow > Avail)
+ 	{
+ 		Empty = BarWidth - ManPow;
+@@ -258,8 +272,7 @@
+ 	x0 += iV_GetImageWidth(IntImages, IMAGE_PBAR_TOP);
+ 
+ 	BatchedImageDrawRequests imageDrawBatch(true); // defer drawing
+-	const bool sage = towersSageTheme();
+-	// Keep the exact original segment positions and work values; only pixels differ.
++	// Actual resource values stay native; the Towers scale leaves visible headroom.
+ 	auto drawPowerImage = [&](unsigned image, int px, int py, int width)
+ 	{
+ 		PIELIGHT colour = image == IMAGE_PBAR_AVAIL ? towersSageColour(16,23,12)
+--- a/src/loadsave.cpp
++++ b/src/loadsave.cpp
+@@ -29,6 +29,7 @@
+ #include "lib/framework/file.h"
+ #include "lib/framework/physfs_ext.h"
+ #include <ctime>
++#include <cstdio>
+ 
+ #include "lib/framework/frame.h"
+ #include "lib/framework/input.h"
+@@ -1131,8 +1132,24 @@
+ 	deleteSaveGame_classic(savefile);
+ }
+ 
++
++// The phone Towers host owns explicit Save; never schedule native autosaves.
++static bool towersDisablesAutoSave()
++{
++#ifdef __EMSCRIPTEN__
++	FILE *marker = fopen("/tmp/warzone-towers-ui-v34", "rb");
++	if (!marker) return false;
++	const bool enabled = fgetc(marker) == '1';
++	fclose(marker);
++	return enabled;
++#else
++	return false;
++#endif
++}
++
+ static bool doAutoSave()
+ {
++	if (towersDisablesAutoSave()) return false;
+ 	const char *dir = bMultiPlayer ? SAVEGAME_SKI_AUTO : SAVEGAME_CAM_AUTO;
+ 	// Backward compatibility: remove later
+ 	if (!freeAutoSaveSlot_old(dir))
+@@ -1163,6 +1180,7 @@
+ 
+ bool autoSave(bool force)
+ {
++	if (towersDisablesAutoSave()) return false;
+ 	// Bail out if we're running a _true_ multiplayer game or are playing a tutorial/debug/cheating/autogames
+ 	const DebugInputManager& dbgInputManager = gInputManager.debugManager();
+ 	if (!autosaveEnabled || runningMultiplayer() || bInTutorial || dbgInputManager.debugMappingsAllowed() || Cheated || autogame_enabled())

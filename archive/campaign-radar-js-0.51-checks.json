@@ -1,0 +1,81 @@
+{
+  "version": "0.51",
+  "passed": true,
+  "checksPassed": 11,
+  "checks": [
+    {
+      "name": "Native observation schema and source hashes match the successful guarded native radar build",
+      "passed": true
+    },
+    {
+      "name": "Invisible campaign radar leaves all bottom-right battlefield input available and excludes no selection area",
+      "passed": true
+    },
+    {
+      "name": "Alpha scroll-aspect radar uses the observed 159×192 rectangle, independently of full 128×128 terrain dimensions",
+      "passed": true
+    },
+    {
+      "name": "Native inverse rotation coefficients reject corners of the radar bounding box while retaining real rotated hits",
+      "passed": true
+    },
+    {
+      "name": "Unrotated radar dimensions and centre are observed rather than forced to the normalized 192-pixel side",
+      "passed": true
+    },
+    {
+      "name": "Native rectangle uses the same inclusive-left/top and exclusive-right/bottom boundaries as CoordInRadar",
+      "passed": true
+    },
+    {
+      "name": "Subpixel CSS positions truncate to the same integer logical mouse coordinates as native SDL before the hit test",
+      "passed": true
+    },
+    {
+      "name": "Off-world/asymmetric radar resize and visibility changes are read live without a cached full-map aspect",
+      "passed": true
+    },
+    {
+      "name": "Offset/resized CSS canvas scales native logical viewport coordinates consistently for hit tests and selection bounds",
+      "passed": true
+    },
+    {
+      "name": "Unavailable or malformed radar observations never invent a map-shaped control region",
+      "passed": true
+    },
+    {
+      "name": "Towers retains its existing radar rectangle, right-click path and selection exclusion",
+      "passed": true
+    }
+  ],
+  "emulatorUsed": false,
+  "actualNativeEngineExecuted": false,
+  "scope": "Actual shared touch adapter with native-observer geometry fixtures. Real native drawing and Android minimap behavior are checked separately in the delivery journey.",
+  "sources": [
+    {
+      "path": "app/src/main/assets/warzone-touch-controls.js",
+      "sha256": "a0e3180dfe8120fba1d92f92332719e3df7ef92408a07954c345bfbc340b193a"
+    },
+    {
+      "path": "tools/check-campaign-radar-051.cjs",
+      "sha256": "6a9e053112d942332139dd357d04d6a2228d827d85ddd72fdf71c6a1c1173b5f"
+    },
+    {
+      "path": "archive/native-campaign-0.51/radar-radar.cpp",
+      "sha256": "e92fcfb9151aa18adf36208ea53835ca7f7ee0e3347da6968628ba8747866f0d"
+    },
+    {
+      "path": "archive/native-campaign-0.51/radar-hci.cpp",
+      "sha256": "7c24e40d5678aba5d983435d9f567395974afaba0e5f65e24dd66c1c8f7a1954"
+    },
+    {
+      "path": "archive/native-campaign-0.51/radar-source-overlay.json",
+      "sha256": "79088cae99e4acb3ec75ed01a26df5140c4886775d80495ef1d7687f07eef264"
+    },
+    {
+      "path": "archive/native-campaign-0.51/radar-native-build.json",
+      "sha256": "751252ff4bcf208b967d1415ae8f572dbd695f26fcdc857cd1a4670fb1db30aa"
+    }
+  ],
+  "recordedUTC": "2026-11-11T14:06:52.932Z"
+}

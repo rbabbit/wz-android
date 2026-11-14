@@ -1,0 +1,82 @@
+{
+  "version": "0.36",
+  "passed": true,
+  "recordedUTC": "2026-11-10T12:12:50.012Z",
+  "scope": "Actual Intelligence/notices modules in bounded DOM/native-transport fixtures; no Android/native gameplay, visual or emulator verification",
+  "checks": [
+    {
+      "name": "actual model layout sends selected native topic ID with measured viewport rectangle",
+      "passed": true
+    },
+    {
+      "name": "report image retry requests the same native topic and its report audio",
+      "passed": true
+    },
+    {
+      "name": "missing-cache deep link refreshes completed history then selects the exact newly finished topic",
+      "passed": true
+    },
+    {
+      "name": "report filters and empty deep links preserve native history IDs without treating starting tech as reports",
+      "passed": true
+    },
+    {
+      "name": "cancelling a delayed native open cannot reopen the panel or send a stale selection",
+      "passed": true
+    },
+    {
+      "name": "normal close keeps an opaque cover until native acknowledgement and paint complete",
+      "passed": true
+    },
+    {
+      "name": "native close failure stays covered and reports failure; an explicit retry can finish",
+      "passed": true
+    },
+    {
+      "name": "late layout response after close cannot restore the native model hole",
+      "passed": true
+    },
+    {
+      "name": "clicking a completed-research notice opens its exact native Intelligence report",
+      "passed": true
+    },
+    {
+      "name": "Enter and Space activate exact-ID completion notices with keyboard semantics",
+      "passed": true
+    },
+    {
+      "name": "ordinary save/round/camera notices remove research interactivity and never open a report",
+      "passed": true
+    },
+    {
+      "name": "duplicate engine/channel/log packets do not show twice or extend the notice lifetime",
+      "passed": true
+    },
+    {
+      "name": "stale, foreign, malformed and pre-load packets retain original rejection rules",
+      "passed": true
+    },
+    {
+      "name": "log fallback still skips existing history, buffers partial lines and handles truncation",
+      "passed": true
+    },
+    {
+      "name": "battle end prevents late notices/model reopening and Duel creates neither feature",
+      "passed": true
+    }
+  ],
+  "sources": [
+    {
+      "path": "app/src/main/assets/warzone-intelligence.js",
+      "sha256": "2029ceb92c364bf483e399c6669f87bc243286a6f1c1fb7c20f108af0a90eb8b"
+    },
+    {
+      "path": "app/src/main/assets/warzone-towers-notices.js",
+      "sha256": "864c6c500c81ed9ea26b8df808bfce649f914077940c7a27bcde50db3808d097"
+    },
+    {
+      "path": "tools/check-intelligence-ui-036.cjs",
+      "sha256": "352c8c3399ea9f7b85ee18fda5b6e6c7c9802a067149d39c89ffa44f144bde4a"
+    }
+  ]
+}

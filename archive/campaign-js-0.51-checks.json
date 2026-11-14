@@ -1,0 +1,89 @@
+{
+  "version": "0.51",
+  "passed": true,
+  "checksPassed": 11,
+  "checks": [
+    {
+      "name": "All changed JavaScript parses; accepted v0.50 pan functions remain exactly unchanged",
+      "passed": true
+    },
+    {
+      "name": "Towers actual adapter keeps ordinary and rapid native pan lifecycle under both RAF orders",
+      "passed": true
+    },
+    {
+      "name": "Campaign native panel touches stay UI clicks and cannot pan or zoom",
+      "passed": true
+    },
+    {
+      "name": "Campaign world input uses the same accepted pan while native overlays are absent",
+      "passed": true
+    },
+    {
+      "name": "Campaign session accepts mission packets without rewards, preserves transitions and consumes campaign command paths",
+      "passed": true
+    },
+    {
+      "name": "Delayed native preload never creates or overwrites its campaign control file before calledRun and a native frame",
+      "passed": true
+    },
+    {
+      "name": "ALL COMBAT intent persists and refreshes new combat selection, with immediate native control suspension and off state",
+      "passed": true
+    },
+    {
+      "name": "Owned native Build remains placeable while ALL selection stays suspended; native tutorial/Intel still owns input",
+      "passed": true
+    },
+    {
+      "name": "Native playing/video enables input before first timed mission snapshot; mission changes reset obsolete UI queues",
+      "passed": true
+    },
+    {
+      "name": "Campaign restore uses campaign storage/CLI and remains restoring until actual native level and clock verify",
+      "passed": true
+    },
+    {
+      "name": "Campaign restore rejects a Towers archive and malformed save identity without accepting reward globals",
+      "passed": true
+    }
+  ],
+  "emulatorUsed": false,
+  "actualNativeEngineExecuted": false,
+  "scope": "Actual JS input and controller VM checks; actual campaign gameplay, native media and save creation are verified separately by the delivery emulator journey.",
+  "sources": [
+    {
+      "path": "app/src/main/assets/warzone-html-session.js",
+      "sha256": "3e7db7ef6941cb463421b3a0fee9aa1130d9106d2316c23ff1c26c0f2792e2e3"
+    },
+    {
+      "path": "app/src/main/assets/warzone-touch-controls.js",
+      "sha256": "a0e3180dfe8120fba1d92f92332719e3df7ef92408a07954c345bfbc340b193a"
+    },
+    {
+      "path": "app/src/main/assets/warzone-command-pages.js",
+      "sha256": "7b55ae99f5043150f05f88e62c6f7a36d90808586da4a5c997b73a6417c23240"
+    },
+    {
+      "path": "app/src/main/assets/warzone-mobile-research.js",
+      "sha256": "d2b91258096bcde795964d4dfb659f8941f8312419fa60ca15e3c421d5cddd7e"
+    },
+    {
+      "path": "app/src/main/assets/warzone-intelligence.js",
+      "sha256": "6267324a3d244e939fa443b5547c4ac8df3a0f2beab40b29912636c4be56feaf"
+    },
+    {
+      "path": "app/src/main/assets/warzone-campaign-hud.js",
+      "sha256": "9e93f14a2ef8bc2f5763a723cca94867d088e52a883cc41aca326eafe6c63c65"
+    },
+    {
+      "path": "app/src/main/assets/warzone/saved-games.js",
+      "sha256": "fbeee5cedd1ec69d5bf813b7491d660b74a6fed26070516b2aa23291f9b752db"
+    },
+    {
+      "path": "tools/check-campaign-js-051.cjs",
+      "sha256": "ed40ce3caa91bdc94bf30b8e9a1e54c7f00ccea6383636d948c62f14f4f29bff"
+    }
+  ],
+  "recordedUTC": "2026-11-11T14:59:24.746Z"
+}

@@ -1,0 +1,27 @@
+{
+  "version": "0.44",
+  "guardPassed": true,
+  "scope": "Towers-only power-gauge headroom/contrast; actual power accounting untouched; disable native automatic-save trigger and queued write only",
+  "originalSources": {
+    "intdisplay.cpp": "c3e78b002a00be9b6d0843120f63c63fcccca1aa5e1a0fb39043a6bc4541e673",
+    "loadsave.cpp": "fe62f8484ec76549b4ef113afafd12ddc6cb21c76346bf5be1fd8e39829227e6"
+  },
+  "sourceOverlays": {
+    "intdisplay.cpp": "5cdf6dab907eb44c95dbb59b8c41d3db8545dd9fb021bf15ab27172550282e87",
+    "loadsave.cpp": "b58f01a03b551cbc589ef468f6a0572bd49978f9ba88db503eb761a3518b3341"
+  },
+  "patch": "archive/native-hud-0.44/native-hud.patch",
+  "patchSHA256": "aa916e79d2ec33c46163ea930ec7999212f5f6aa8e011cc99685934581f2affb",
+  "previousNativeBuild": "archive/native-queue-0.43/native-build.json",
+  "previousNativeBuildSHA256": "31d825ff518eb4dcc07729d0233629a529323806019c32e95ee58daefb26f889",
+  "preservedSourceOverlays": {
+    "display3d.cpp": "3b5c1a41144011805819d15e9bfac6f1289d726da276433bfeb237904c0fa15f",
+    "research.cpp": "06b8999191bb0160e6b73c268f8ddd69347102133ecc221aee23504973dc918a",
+    "keybind.cpp": "5730cf9a2b791a6a437f4e0da040e9dbb75e8befb48dc02caefb1a8e824355ed",
+    "hci.cpp": "9db6bef46703c3975d920a23cc071ea46ab938a3972204ca5325440e8e66e842",
+    "quickjs_backend.cpp": "cc8d75756e00cb2bb96068a103e2c3323da9fb41cb89bc3b05449e8b62c7543f",
+    "console.cpp": "72bfd88aa0535a6adcf098f6f4b0fcb035ecca43f1927430d1e511893f51f570",
+    "intdisplay.cpp": "c3e78b002a00be9b6d0843120f63c63fcccca1aa5e1a0fb39043a6bc4541e673"
+  },
+  "originalBuildRecipeSHA256": "6f3835c7eb8441c216f7e0b056affe22b34eb60e2985341029c866ca75e9bc26"
+}

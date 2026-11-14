@@ -1,0 +1,53 @@
+{
+  "version": "0.54",
+  "passed": true,
+  "checksPassed": 6,
+  "checks": [
+    {
+      "name": "Campaign and Towers remove the actual collapse node and ignore old collapsed=true without changing Duel preference",
+      "passed": true
+    },
+    {
+      "name": "Always-visible footer Build retains its toggle, pressed state and close caption in both modes",
+      "passed": true
+    },
+    {
+      "name": "Analysis and Manufacturing still open activity panels, and switching from Build uses the existing keep-orders exit",
+      "passed": true
+    },
+    {
+      "name": "Duel keeps its real SHOW/minus control, old collapsed preference, persistence and two activity buttons",
+      "passed": true
+    },
+    {
+      "name": "Non-Duel mode remains expanded even when local storage is unavailable",
+      "passed": true
+    },
+    {
+      "name": "Existing click/update/label paths are byte-identical to v0.53; no empty CSS column or new fixed footer width is introduced",
+      "passed": true
+    }
+  ],
+  "emulatorUsed": false,
+  "actualNativeEngineExecuted": false,
+  "scope": "Actual activity-dock controller in controlled DOM/VM fixtures, persisted collapsed users, activity/Build handler preservation and Duel behavior. Real small-screen bounds and native interactions require the exact-APK emulator checks.",
+  "sources": [
+    {
+      "path": "app/src/main/assets/warzone/ui/lab-ui.js",
+      "sha256": "23cc9d6117596c9fa2378b44ac0a6b247d81bb1c5318610dcf74b85521639811"
+    },
+    {
+      "path": "tools/check-footer-collapse-054.cjs",
+      "sha256": "58b36096f5032556833fc3f4186e79577a82729967bd356c20aec875fae0a156"
+    },
+    {
+      "path": "tools/check-campaign-layout-053.cjs",
+      "sha256": "30aef0891aaa794cf7d811e3cc2ed06831934aaf4cd1ba64e09f76f470c081bb"
+    },
+    {
+      "path": "tools/check-campaign-js-051.cjs",
+      "sha256": "ed40ce3caa91bdc94bf30b8e9a1e54c7f00ccea6383636d948c62f14f4f29bff"
+    }
+  ],
+  "recordedUTC": "2026-11-12T03:12:37.516Z"
+}

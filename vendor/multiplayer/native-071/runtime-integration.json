@@ -1,0 +1,36 @@
+{
+  "version": "0.71",
+  "protocol": [
+    16384,
+    104
+  ],
+  "noWasmBinaryPatching": true,
+  "nativeSourcePatch": "vendor/multiplayer/native-071/native-ui.patch",
+  "frozenDataSHA256": "9e89d11c8b67b5f68ddc0be43290233c28cd43b3d2a96fea1a7b4beaf83b8424",
+  "frozenVirtualFileCount": 3789,
+  "addedStockDirectoryDeclarations": 86,
+  "integrations": [
+    "official frozen package index",
+    "official directory declarations",
+    "existing Android worker transport import",
+    "existing AI_ADDRCONFIG DNS gate",
+    "runtime-ready callback"
+  ],
+  "outputs": [
+    {
+      "name": "warzone2100.js",
+      "bytes": 726083,
+      "sha256": "d93c92cf396a01f63c7bde4ee4e806860729cfed4af3ca4281df6dbc1c9cc28c"
+    },
+    {
+      "name": "warzone2100.wasm",
+      "bytes": 13543612,
+      "sha256": "d32bd4fe8b1bee120926ad88ec3672009166d7a18db7641a7c321556c05f7ba4"
+    },
+    {
+      "name": "warzone2100.data",
+      "bytes": 64424618,
+      "sha256": "9e89d11c8b67b5f68ddc0be43290233c28cd43b3d2a96fea1a7b4beaf83b8424"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "failures": [
+    {
+      "stage": "Towers single-finger control fixture",
+      "observed": "The first run passed all natural/mixed strokes and pure tilt/pinch. Its later serialized tiny-step drag incremented native boxSelections, with BOX mode false and no pan increment, taking the preserved long-press path.",
+      "inference": "Waiting for each renderer acknowledgement before sending tiny first movements can stretch the intended drag into a hold; no original input-event timestamps were retained, so this timing cause is an inference.",
+      "resolution": "Retained all six original native packets unchanged. A second ordinary Greenhaven start repeated only a short pivot, a promptly queued timestamped drag with a decisive15px first movement, menu/help, native selection and Return. The native camera panned, the box count did not rise and all follow-up checks passed.",
+      "provenance": "Both runs used the same exact delivery APK and four ordinary starting constructors; no world grants, production or gameplay edits."
+    }
+  ]
+}

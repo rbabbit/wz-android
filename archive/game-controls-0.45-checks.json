@@ -1,0 +1,34 @@
+{
+  "version": "0.45",
+  "passed": true,
+  "emulatorUsed": false,
+  "browserUsed": false,
+  "androidRuntimeExecuted": false,
+  "actualNativeEngineExecuted": false,
+  "gameplayVerified": false,
+  "scope": "Focused actual-JavaScript source/VM controls checks only. No browser, Android/native gameplay, audible sound or touch-screen execution.",
+  "checks": [
+    "All three changed controllers parse; Towers top navigation omits Build and footer retains its established ID after both activity tabs",
+    "Actual footer activation executes only the existing guarded Build toggle; inactive, stopped, ended, Duel and blocked menu states issue no action",
+    "Neighbouring footer activity tabs leave Build through the existing keep-orders transition; the footer stays reachable during Build",
+    "Actual feedback controller depresses immediately, releases/cancels on drag, pointercancel, blur, visibility and disabled mutation, without preventing any event",
+    "Control feedback sound is emitted once per release, ignores compatibility clicks and disabled/dragged presses, respects native mute and optional volume defaults",
+    "Cancelled long drags remain quiet through delayed compatibility clicks; Intelligence/report controls retain visual feedback without duplicating their native sound; synthetic events stay quiet"
+  ],
+  "checksPassed": 6,
+  "sources": [
+    {
+      "path": "app/src/main/assets/warzone-touch-controls.js",
+      "sha256": "0069cd51c93e879360c8a4a413eaf13fbf8db799140f7e54d9f69824c1f79e17"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/lab-ui.js",
+      "sha256": "d1b9465074342de21c28e7a14eebd4b30920a30cddbe21c1ae63863f0775fa98"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/towers-feedback.js",
+      "sha256": "9ea5dc582ed1742fab4866c4d5e253ce77ee67ea409a9cddb63f503a195782cb"
+    }
+  ],
+  "recordedUTC": "2026-11-10T23:50:44.987Z"
+}

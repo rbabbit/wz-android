@@ -1,0 +1,686 @@
+{
+  "version": "0.68",
+  "versionCode": 68,
+  "candidateAPK_SHA256": "606ebcf7a86527a619c93572a749625bf5b081ad45028c9905c5be8135332a9b",
+  "scope": "Terrain-only pathway and bank edits to existing45 authored FFA maps. Names, IDs, dimensions, base positions, objects, economy, runtime, UI, originalsix maps and other modes preserved.",
+  "emulatorUsed": false,
+  "androidRuntimeExecuted": false,
+  "actualNativeEngineExecuted": false,
+  "gameplayVerified": false,
+  "verification": "Offline terrain/binary/connectivity/openness/preservation/preload and build/package checks only, per user request. No emulator, native pathfinding, live bot/vision/rendering or gameplay balance verification.",
+  "fallback": {
+    "path": "archive/fallback-0.68.json",
+    "sha256": "b526c76a98143a7480d3ca88b7cd229f6c946953cf24b4048d13a0d029d32706"
+  },
+  "sourcePreservation": {
+    "changedBaselineSources": [
+      {
+        "path": "AGENTS.md",
+        "beforeSHA256": "e05c81420d6c67324ec916382ff416e64576e1f91481236070839ec20d883393",
+        "sha256": "fb034b140109cea42aa630901d59d6db37c4a472317b71046c290e853b38a58e"
+      },
+      {
+        "path": "README.md",
+        "beforeSHA256": "e5184bc76c63068701a9f62ed2cf4283ce33fe4ddac08ea27914a6f019977727",
+        "sha256": "169c4fa419b9c75bcdf522b0e31731fd850ce8494da4f26aced7d58e67e92e8d"
+      },
+      {
+        "path": "app/build.gradle.kts",
+        "beforeSHA256": "21c4ee01439f14e880d853cce3ab652f2f754a81870171fd9d44adad4df9a442",
+        "sha256": "d0e9d77cb10ba4b0824952601d8a850548f1e95b7442dbe5df5a1cbe0f894945"
+      },
+      {
+        "path": "app/src/main/assets/ffa-maps.json",
+        "beforeSHA256": "8bd04644135ebe47186d50fbd55bbb72d9a199465ae1caee9cdd2d764a474a79",
+        "sha256": "c65ecce91fffe671dc645989f73d07a3e5b4ac74a08b07e7471038c69c6ca7e4"
+      },
+      {
+        "path": "app/src/main/assets/ffa-previews/ntw-2p-01.png",
+        "beforeSHA256": "0dcae706251aa5377fabe4f36dc3357fc93b64f65e44f42cf4195b3ada8d563f",
+        "sha256": "006d8d65cce974d7a3b52f0809fdcd1676803eea09a47e943e637e31c2fb5f63"
+      },
+      {
+        "path": "app/src/main/assets/ffa-previews/ntw-2p-02.png",
+        "beforeSHA256": "82170483f9ce49ccb0ddb80cca8bd036c2e0be607ed50be50fcd0051a863f48f",
+        "sha256": "b4967c072e26cc3f62881e773ce2d1ef5a14402a4f52e1603b37bed919a48e75"
+      },
+      {
+        "path": "app/src/main/assets/ffa-previews/ntw-2p-03.png",
+        "beforeSHA256": "2dc7efca4615dafbb6993230cb3754396b0d8edfa88bbc306b7685cb0c9a8d41",
+        "sha256": "ca7171af196c5b6429905189b2e6ed52fb99e3d1fbf01bd1b85db9a3c5681c93"
+      },
+      {
+        "path": "app/src/main/assets/ffa-previews/ntw-2p-04.png",
+        "beforeSHA256": "5749540dd353a0f048d2736f9f43fe906dbb1e6528fc306d26359eee950c0582",
+        "sha256": "ef49114202877a0ff40e2edd18be555a5ff270a84460ebdba4e273ee14f9974a"
+      },
+      {
+        "path": "app/src/main/assets/ffa-previews/ntw-2p-05.png",
+        "beforeSHA256": "79bda1534a610c33a0470ddd8d72257c10fde3d3abadb9e4718ac8e8a309844e",
+        "sha256": "8da9fe0ff0a7ca3235583fac4a4a6c9713e83c7acba445d5b3648b8dc1be4497"
+      },
+      {
+        "path": "app/src/main/assets/ffa-previews/ntw-2p-06.png",
+        "beforeSHA256": "6510d32b4083cbc6c44767976de8dc91dc11aba9a7675fafaf3ba61d59a34029",
+        "sha256": "39bf168945205dc08d0a46796faac98710883e4cdcc0e7804edc580dcf057680"
+      },
+      {
+        "path": "app/src/main/assets/ffa-previews/ntw-2p-07.png",
+        "beforeSHA256": "868559e65e80f50163c136543ead8d858239c4100735d4102452d51db300f8b7",
+        "sha256": "468f00a4f635e3551f3be730f5935d887f8813be8a741ee279b6fdac4b3a7a95"
+      },
+      {
+        "path": "app/src/main/assets/ffa-previews/ntw-2p-08.png",
+        "beforeSHA256": "62253f30a515d50f8ab444055207d63a4ad4adf78e30381d9c6e633ea35bd747",
+        "sha256": "5765c0d1a65ad8118c401d07dd39fbfb636d6d6673b52b125c1403769658bec5"
+      },
+      {
+        "path": "app/src/main/assets/ffa-previews/ntw-2p-09.png",
+        "beforeSHA256": "4f85e6f74bdc2249ec63889b76518f60538ec9960cad3452abb2b282f4af8252",
+        "sha256": "c92336335450820f078650558c22818a0c11508910040aa84740a111e62609e4"
+      },
+      {
+        "path": "app/src/main/assets/ffa-previews/ntw-2p-10.png",
+        "beforeSHA256": "01dce97b10bc99d708af44edb1334eb290d452283533c7a4ec60452b81ae50b6",
+        "sha256": "fb3fb1eaea44ee6f085041289b41d32163f88b64c718ded99596cbc29078421b"
+      },
+      {
+        "path": "app/src/main/assets/ffa-previews/ntw-2p-11.png",
+        "beforeSHA256": "a11990d8c084e0565c3873ca98050ac0ccf4a9e70faddc5c78e4b1085df8d048",
+        "sha256": "c74d441b669b4581aeb9585b9655ad10f7c60ccffa52f8926dcbdced7ca97651"
+      },
+      {
+        "path": "app/src/main/assets/ffa-previews/ntw-2p-12.png",
+        "beforeSHA256": "34ae456bdfbc27e9c31528b24a3bf0be444769bdc8624756e61e55b01dbea32d",
+        "sha256": "ee2e90f4928063faa8fb37d2b105704447dbc5bf3bb77222f792cdba29fac8cc"
+      },
+      {
+        "path": "app/src/main/assets/ffa-previews/ntw-2p-13.png",
+        "beforeSHA256": "5adf6a0c13f2902365f558e912c9434e8188e252ce306755832b57206ceb6162",
+        "sha256": "94033e910dbb6a12a525b757b88efd68424778dc196fac41f46e41f54d4cbb2a"
+      },
+      {
+        "path": "app/src/main/assets/ffa-previews/ntw-2p-14.png",
+        "beforeSHA256": "ee4e263f540297e91db3833781c689e263efe1ebcf80eab6a8b8d971d4a9b843",
+        "sha256": "fe8c8f9c2c60519e1a3c7926308d4cb06e9bb1f59721b94d3ec5cdbc569265be"
+      },
+      {
+        "path": "app/src/main/assets/ffa-previews/ntw-2p-15.png",
+        "beforeSHA256": "286393a2ff8bc765ae152b7d7a0a55f47a127693e228d027f04c101733465a9d",
+        "sha256": "f3c69a557534132fb7dc295acbac91116ab016d0311916b645d37233c2b4e7a3"
+      },
+      {
+        "path": "app/src/main/assets/ffa-previews/ntw-3p-01.png",
+        "beforeSHA256": "a9311d6d2829b466f893433fdc3848d4331ab2d3bf3fee7f8049a6f1da29c2a0",
+        "sha256": "182ea1f238b57014ae7b67ffe4b00953961d08e4b459613e4c897acbf9c8ab31"
+      },
+      {
+        "path": "app/src/main/assets/ffa-previews/ntw-3p-02.png",
+        "beforeSHA256": "4f5c00bc7e36c8d45d67b87bdee9d1f18585d6d924abee0fd5a4b4641e147263",
+        "sha256": "3df6f86dad28df25da463d733d359eb57e6fee3ccefd65143e0c5602fedb0dbe"
+      },
+      {
+        "path": "app/src/main/assets/ffa-previews/ntw-3p-03.png",
+        "beforeSHA256": "ee6114924b5551175e63dea4b0c4aef84299fe30cf61df34bddbf466e2cefdc1",
+        "sha256": "88c951b19c8e78762327fd75916007d46fc5d018ce5966c30ace5074bf65061b"
+      },
+      {
+        "path": "app/src/main/assets/ffa-previews/ntw-3p-04.png",
+        "beforeSHA256": "4c4a36704c7ee391097bd2a2670923d15e328e1ac6721d89e563945d1dcc066a",
+        "sha256": "cf1a005fe320c0a4cf0453b6caa7b6d6858c75a7f98c0f6fe094a54ae8316a6f"
+      },
+      {
+        "path": "app/src/main/assets/ffa-previews/ntw-3p-05.png",
+        "beforeSHA256": "47f65666a7f9f22325715adf6d1a4c5e4be0b04cc513be3cb7d8814a608e238b",
+        "sha256": "23eaa8ec3c782e958d62430cca92b2baa903496d4a0fa6c3a9bdcd3ff67fbe89"
+      },
+      {
+        "path": "app/src/main/assets/ffa-previews/ntw-3p-06.png",
+        "beforeSHA256": "6f2751e65fe469f0e300110aeaa79d23b93e72abac15c83ca14700c548cb4bc2",
+        "sha256": "8060b6a7fed33fe7b5d08af79245d3ad1cc951a6fc4afe53e9c4aeab6784b299"
+      },
+      {
+        "path": "app/src/main/assets/ffa-previews/ntw-3p-07.png",
+        "beforeSHA256": "883eaf78dfabc97285f1a30ddbf44cbe938a95b5f861babeb9b150ff43ea5f21",
+        "sha256": "96c336574df306da4d5275032f1b5f5b58047ab59767e7c68722737db27c819b"
+      },
+      {
+        "path": "app/src/main/assets/ffa-previews/ntw-3p-08.png",
+        "beforeSHA256": "9ce49491d4eb1b405b9fa46cf0871093fc6da3c6c7e4829c0a6dc097fc394f76",
+        "sha256": "ae398089760c432f1e9d9e256120dfde70cce3b18065ef2bec723622f3e215ec"
+      },
+      {
+        "path": "app/src/main/assets/ffa-previews/ntw-3p-09.png",
+        "beforeSHA256": "c7033e3d1b78168c4a0f571380ef25eac138d2d3466f2b0e61a6257919934841",
+        "sha256": "963b613a44c2a18a13441b2e579fb0f86e03d28327664ef543089be2c1cd194b"
+      },
+      {
+        "path": "app/src/main/assets/ffa-previews/ntw-3p-10.png",
+        "beforeSHA256": "869ad596c8088c29549e38303c441cfd3979f1a02b5e0e1b020cac0f9466d0df",
+        "sha256": "ac666cb818727ad109a5d70b4f685bc6ed6a32e6dbbfd8d88687de3f3583432e"
+      },
+      {
+        "path": "app/src/main/assets/ffa-previews/ntw-3p-11.png",
+        "beforeSHA256": "fc8d16cdead30fcad63cf5361dfd409188c36708b06cca268cfa6b7757beeda3",
+        "sha256": "c90c4fe92d4b9bf63313a000753ca5b562261cc4dfb3298ffb149b40337186b0"
+      },
+      {
+        "path": "app/src/main/assets/ffa-previews/ntw-3p-12.png",
+        "beforeSHA256": "914a320d714bebf8c59ed41f28966e8e950b958fe57baee0236849da6f9c1610",
+        "sha256": "8748df99c323875549fae6a661bb25e37ccb8517ce3c0453d97058bceefa2c3f"
+      },
+      {
+        "path": "app/src/main/assets/ffa-previews/ntw-3p-13.png",
+        "beforeSHA256": "1d6fe37b613706ddf43fa36b3c1fae2a70e32424796f17c014b90c17a4083465",
+        "sha256": "b24eb66e11be217145d8bc56c4d0fae8fe9e64d92243e14547b0540bc9fe4dfd"
+      },
+      {
+        "path": "app/src/main/assets/ffa-previews/ntw-3p-14.png",
+        "beforeSHA256": "bce07b59378d1250171e38814b989d00b22fea5403fa518ba958e57683b147bd",
+        "sha256": "f72b2e5b10a9a827170328fafc2a22c6984ab43998fcd7a10762062da4e06d7c"
+      },
+      {
+        "path": "app/src/main/assets/ffa-previews/ntw-3p-15.png",
+        "beforeSHA256": "58d7a2fe751649d6defddc454fc758bd133cdf07176302d8a232e59aa3b939f2",
+        "sha256": "e710cf1525d209263c811ef32b00aa896b575df1ed37756aac34b1864582a057"
+      },
+      {
+        "path": "app/src/main/assets/ffa-previews/ntw-4p-01.png",
+        "beforeSHA256": "3fed0fdedf3a0a227522fce3006e9c5efcdcf9485a4286e54d50961466718b12",
+        "sha256": "526a822fdff6f9a54918c081e83b1792798aa93857d600999c15765d4f3c7919"
+      },
+      {
+        "path": "app/src/main/assets/ffa-previews/ntw-4p-02.png",
+        "beforeSHA256": "1870838a33fb4ea335de5c5a6a605ae85a9af9ec220a0afe3db235612743035b",
+        "sha256": "b1ac3286a228e9a9de148ca9798baf1af88c7c828c5bad409e89ffbf0d4f45df"
+      },
+      {
+        "path": "app/src/main/assets/ffa-previews/ntw-4p-03.png",
+        "beforeSHA256": "efbbc165aab07af1ffc59532aebdebe6d5e579af6086919beb7933fa974fc6a7",
+        "sha256": "d4e06fc37e2cf7d00cb6906c1794aff77f2000fe35990a6843efb2630f1a3b0f"
+      },
+      {
+        "path": "app/src/main/assets/ffa-previews/ntw-4p-04.png",
+        "beforeSHA256": "cbd1438239251d6cdb8b89e3afc699a38e073a702a85ce7c81f21ed2580782e9",
+        "sha256": "2bfc9b1454d56e36c3cdc564221f6224d61b60f4d2fd2bcf218b4405110c1590"
+      },
+      {
+        "path": "app/src/main/assets/ffa-previews/ntw-4p-05.png",
+        "beforeSHA256": "7a8b1523614498888854db0781bd114c9a58c905cbb4fa2a037bc6658c6f71dd",
+        "sha256": "1a82a76d1442b3b7b9f711b494a2ab185805baf0b868477bee9ea02d2b628249"
+      },
+      {
+        "path": "app/src/main/assets/ffa-previews/ntw-4p-06.png",
+        "beforeSHA256": "295f27c392d4d43fac760db0c050c9b6a43066fafdcbac94dcfef4d86ca431a3",
+        "sha256": "77928000b81001a5d5b13b2152108c5cd6789d897a90bfd4e048c53169858c7c"
+      },
+      {
+        "path": "app/src/main/assets/ffa-previews/ntw-4p-07.png",
+        "beforeSHA256": "c337930191626e250a79483b2d70a2a9bafb766ba43441a88d101a351871eb14",
+        "sha256": "6bda58ffe3590b92c8adf95b4579cbae6d4baf0e1217212f215b28a78e70ecb1"
+      },
+      {
+        "path": "app/src/main/assets/ffa-previews/ntw-4p-08.png",
+        "beforeSHA256": "d33ab0d14d25785befa03a7f20c05b920574443e80158ed44f669e06c9895f74",
+        "sha256": "4f1d0570c4264d47823b78cba4fe0af4e945bc842eb41b273d0c85271dc27ecf"
+      },
+      {
+        "path": "app/src/main/assets/ffa-previews/ntw-4p-09.png",
+        "beforeSHA256": "cdd2c6f990c3c17c3cb18dd2e019592ce72965486dd58cb1f9809c473aaa4267",
+        "sha256": "3876672d05ea83a0e6c4cc82ebca0cf6ba84cc4dedfc27c27aa25e213a13faf6"
+      },
+      {
+        "path": "app/src/main/assets/ffa-previews/ntw-4p-10.png",
+        "beforeSHA256": "b51820643b49027b9f0dbb55522145b5eb5bb056c28902d53af78cbe9c7b0f1c",
+        "sha256": "4d9d0f85e23dfa663335d1235c08ab9db8205c40b743e698922e85741b324f18"
+      },
+      {
+        "path": "app/src/main/assets/ffa-previews/ntw-4p-11.png",
+        "beforeSHA256": "1fd137b0030cf3d27dd95323ff0ce7a5ffbd347454af1ca162a7ccd18d0cd624",
+        "sha256": "bba7d27412c5d877318216b3d4c03ddfb846a08b6f0b27647cc3eb9eafcf380b"
+      },
+      {
+        "path": "app/src/main/assets/ffa-previews/ntw-4p-12.png",
+        "beforeSHA256": "365de0fc2aa9e4e3728fe0735d9f5384d40b47ab43dda66d7ea6209923a9781f",
+        "sha256": "07c5c2c67c1081f0b600f02993b8d3d89e72aafb3ae4a017471ef62c8540b1f6"
+      },
+      {
+        "path": "app/src/main/assets/ffa-previews/ntw-4p-13.png",
+        "beforeSHA256": "21165482e66e8fd708e6483dd95bf57ef5c6ebfb09ecf9b6aee00ac07f989178",
+        "sha256": "0953746f29ae3eb1131b949e560d1ed476ac26a075993dad3a0c4129acdd789b"
+      },
+      {
+        "path": "app/src/main/assets/ffa-previews/ntw-4p-14.png",
+        "beforeSHA256": "1de93c1f724f89dd9fb1fab6cf15cee64bfc4d52ccf0b6045eb21af8181e45c7",
+        "sha256": "1370d8a358c34cb1dec4b0d68d4613ddc931574b9cbae38b267a9d573077fe54"
+      },
+      {
+        "path": "app/src/main/assets/ffa-previews/ntw-4p-15.png",
+        "beforeSHA256": "77eab28dfbe045a32f84d12c704cdd3ac5ed2db9a015c42f6c4007899c225e7c",
+        "sha256": "8592639f3768e9c5a3d7767e479b4a7a912e9d4e9b51a3c8071d34787277d4a4"
+      },
+      {
+        "path": "app/src/main/assets/warzone/index-ffa.html",
+        "beforeSHA256": "719183b6f3f6ee254c206c8c2494a2462cc300c29a8b653fa676298c3a650753",
+        "sha256": "8803882047be5de76dd49f129a60b334c1cf842a6a64e199bb42106597145a1e"
+      },
+      {
+        "path": "app/src/main/assets/warzone/mobile-ffa.html",
+        "beforeSHA256": "cd0b588ab39f76fbe8a1320c191a3a8e275be9bae1071264a4cf4f7d0d7488f1",
+        "sha256": "98a16b5f825ac8e7e5f2d78658e064f96fb47de41e3c7455cd3690efac3ed794"
+      },
+      {
+        "path": "app/src/main/assets/warzone/warzone2100-ffa.data",
+        "beforeSHA256": "af2fd13ba1cae74c59f6af00b31525dc681229cf2e4a0412edc3e79fef447d0d",
+        "sha256": "73137514fb621df5ca978c93a32743c01b44de01201e4846cb351a6d438d6278"
+      },
+      {
+        "path": "app/src/main/assets/warzone/warzone2100-ffa.js",
+        "beforeSHA256": "559b0daa3c0755825ca9194cff930aec8f646b0d975fb9bdd02db1c7dbcd0801",
+        "sha256": "50a0bb51ab06e2d6805766681ae36c3e7e29d3b13ada02dbc2a96620f7701611"
+      },
+      {
+        "path": "map/ffa-ntw-2p-01/game.map",
+        "beforeSHA256": "43a64555aa22a4e178ee5b3b703ccea6baf963d41e5ddf7eb2cc74cccc89eb0c",
+        "sha256": "fc5610aafcdacff6b7da5506bf5e4efca05fee2c8a01a3dd5c0b7724d04e0c8d"
+      },
+      {
+        "path": "map/ffa-ntw-2p-02/game.map",
+        "beforeSHA256": "701e226597a7a51f75390536dd6e7c18a852e3165a756f0d552f29cd83e6c875",
+        "sha256": "0874665c2b5eb73f561df810f422d4da0f8b5886e5f49c79188a269405cf1489"
+      },
+      {
+        "path": "map/ffa-ntw-2p-03/game.map",
+        "beforeSHA256": "d4552ca2278b0bdb775f498f0a8c0924b9f5758ee46a5e99e70c90818640473c",
+        "sha256": "b6feeccd4c11306bd7426b24e76954ff2c666e91f4e7b59e61b7e2ffde407d0f"
+      },
+      {
+        "path": "map/ffa-ntw-2p-04/game.map",
+        "beforeSHA256": "9efd782ba9dacc7b1130ff77bba5a3abaf8a5f0a929457a657b566733ef4e157",
+        "sha256": "254228a39fce21894b9382f49fb2a4a8905886b1a93d4a917fb653ef6de3715b"
+      },
+      {
+        "path": "map/ffa-ntw-2p-05/game.map",
+        "beforeSHA256": "7f958f61a27b74dd7c6aabdf20846cb05b2572f83b8a3b974a4528e31253d20e",
+        "sha256": "693498ce89728e7602a8f7195c3dcf42e321d5e5eb7fcc3390cb8f85fb72b83e"
+      },
+      {
+        "path": "map/ffa-ntw-2p-06/game.map",
+        "beforeSHA256": "562f2d05877f62b648d39fb5e12fd63046f9de33ea6414ad1c6f48243d57bec0",
+        "sha256": "5079e4ff5bddd11547ba754e7895dc7f0336b3000039fcf883cc50fa33c91c0e"
+      },
+      {
+        "path": "map/ffa-ntw-2p-07/game.map",
+        "beforeSHA256": "69c84062fe7e632888774fe6db6dd0504790dab30e332b8b2e53c62ac925a216",
+        "sha256": "3fb46236e97d1904d695bd33bfd820fcb2fa479a98f5c7b1be1c451bcd042d54"
+      },
+      {
+        "path": "map/ffa-ntw-2p-08/game.map",
+        "beforeSHA256": "aedbe191b46d4fc89bc767f1183ab14ee771024e39779367e979cc2047470482",
+        "sha256": "e203ce1847e2a6bb60ef2302399b010dfbbc24414ee01625443a0e381ef157a0"
+      },
+      {
+        "path": "map/ffa-ntw-2p-09/game.map",
+        "beforeSHA256": "44506c54dc748878e3ec5eea645b383443a2cba15a7074cca3de58b33b15f954",
+        "sha256": "0e576479986c8eec0491c91c4cabe93f458bf2bf3b33759daf94460323feb734"
+      },
+      {
+        "path": "map/ffa-ntw-2p-10/game.map",
+        "beforeSHA256": "c40280b026708090d6c7131899f2265eaee20a82d3315af7de248c419cf5857e",
+        "sha256": "4827704145e179ef62565fefc481539e9edd542bb892ba2a912beafe6f6153d2"
+      },
+      {
+        "path": "map/ffa-ntw-2p-11/game.map",
+        "beforeSHA256": "08b9df7421445b6957823818bdcc904ef8a668b72190846ae251045c7f5bbc11",
+        "sha256": "331c2d808714df3c9ae16a3834c65d0a544988bb19070b463e0eb33535939762"
+      },
+      {
+        "path": "map/ffa-ntw-2p-12/game.map",
+        "beforeSHA256": "fa48fc5b1e96aea2fded9bf0a54736c3389e1820d6d6f75f71975f0dc24bdee3",
+        "sha256": "e133e50c63c04228f907f961256ef95c42121c2e83046addc88845a8949a473a"
+      },
+      {
+        "path": "map/ffa-ntw-2p-13/game.map",
+        "beforeSHA256": "ac24ded6a99e76c23df5cd488f24e44fcce19bbc2db2a44c7ab33a2be43aba54",
+        "sha256": "2d3a36ab22e66b524e36bdf30d959b813baaf4098cbda8b2a2f529a4f6a7c8db"
+      },
+      {
+        "path": "map/ffa-ntw-2p-14/game.map",
+        "beforeSHA256": "ebca79e1c1e0e6ef890468ddd0c5753fb67e9dae43f064c123592c929eb4b124",
+        "sha256": "5cfa446f419b72b861afdefd071ad34dc13ada35c1015bc675b9d8de0a94b0af"
+      },
+      {
+        "path": "map/ffa-ntw-2p-15/game.map",
+        "beforeSHA256": "75526e7565d9de6245e531672e5e0555395f512c04bab44fe973b07ce1d8ead9",
+        "sha256": "92caa887ba58a2039ebddbd3a5b5e10e554f57e2526feb4903821e14a6334afc"
+      },
+      {
+        "path": "map/ffa-ntw-3p-01/game.map",
+        "beforeSHA256": "4c2190c9d214f0db0b7622c1fe076193d78165a2ed2c4bcf9294d83116022c5b",
+        "sha256": "1bf701d6c3dfbb4ea1bb9244da85ac2374a52578b63c45d80b104bea1be757cf"
+      },
+      {
+        "path": "map/ffa-ntw-3p-02/game.map",
+        "beforeSHA256": "33ac135e167084e6bdbd1c55bfcb3515e1b3441fecbf3f86173396d66acb6f8b",
+        "sha256": "d2439405443d206f8770575642e87d0a2cfe54179d8c56f59a109600588f7b97"
+      },
+      {
+        "path": "map/ffa-ntw-3p-03/game.map",
+        "beforeSHA256": "d7e8404891d88fb4d105ae7093c5e6ec8361bc19f5cfc88df4c6f8d4d354202d",
+        "sha256": "3fa4ca40f09f3026462e3d4919d40ee74de849654f04ab03c07742054c6db206"
+      },
+      {
+        "path": "map/ffa-ntw-3p-04/game.map",
+        "beforeSHA256": "bb80f11b236c981971f7c672ae9d5618ff62b9a17499e765b69a605d7594a725",
+        "sha256": "8997b62b6dec9e21cfc69992c62c731a813bad41aa61da143fc7ad9132d63eab"
+      },
+      {
+        "path": "map/ffa-ntw-3p-05/game.map",
+        "beforeSHA256": "749162d094aa9cf1302731de484a39590a3ad135366cf5c47301747263009dff",
+        "sha256": "e0f3f8053aaf7814f93a8bcc6598349bc4d9f39b2502636816a3d037573c41d6"
+      },
+      {
+        "path": "map/ffa-ntw-3p-06/game.map",
+        "beforeSHA256": "f115b9589fed0bb8d7a765f26dff5ee731b21df2727219584cf89678aef22285",
+        "sha256": "577787fcf338f47e3e603cd67df08546536fc5179aafdf3ba49d93482de72bbe"
+      },
+      {
+        "path": "map/ffa-ntw-3p-07/game.map",
+        "beforeSHA256": "ea4dd7bb28c4970e8afd46b2587b37dcbfd36087720a182ace181d8927c8df9e",
+        "sha256": "44ab945e7bf27d75494ef6811220f0c93bcb02b7590850ff9e06746ef7587019"
+      },
+      {
+        "path": "map/ffa-ntw-3p-08/game.map",
+        "beforeSHA256": "a953a9b49baae21247c32edd3beda122bba22c53cae7d8cc2066285bfe35806d",
+        "sha256": "0e4dbc27d6f951ae393e01d2f59238abb62e3badd4f11ddc7d770766d146f815"
+      },
+      {
+        "path": "map/ffa-ntw-3p-09/game.map",
+        "beforeSHA256": "7447eb6d8615ecc3445a32eeaf257eaa80e49f9206dc32a91b738e8e5bc9e710",
+        "sha256": "4fde15c1d85496951de9ffbdc74c319d57a32c700ad9113b63b6551cff06a571"
+      },
+      {
+        "path": "map/ffa-ntw-3p-10/game.map",
+        "beforeSHA256": "24bbde669fc039da701d70a4d182165f6a85bcac9fadc74d5d0be3dfa0bc9623",
+        "sha256": "c3e732cc99b2af74ad2a6cbcb8a2d991e6abcea17c194643eaee801ce77661ce"
+      },
+      {
+        "path": "map/ffa-ntw-3p-11/game.map",
+        "beforeSHA256": "bf87e4da0e745c01c67d57c184b9e795b99f104c8a70facdc819216733615176",
+        "sha256": "00218637bf900055052b55308b3a8196e90f6679f19651d48dfc20089f00aa55"
+      },
+      {
+        "path": "map/ffa-ntw-3p-12/game.map",
+        "beforeSHA256": "3a4ab806a9065a75eeadb906af093dcecbdc468d7049008e644dc665df6b2695",
+        "sha256": "235a8db1292e6352548c2871b034e50ae0faab5462f0e96e5906f3f2c47a289f"
+      },
+      {
+        "path": "map/ffa-ntw-3p-13/game.map",
+        "beforeSHA256": "0502c81ae34a3445fa046d1d3d1a08bb072ff29802ee0a54eca88d3414cab6fa",
+        "sha256": "5d557e620f8a2803271c019c663e96e8732372f0393449a206b87b7eba931045"
+      },
+      {
+        "path": "map/ffa-ntw-3p-14/game.map",
+        "beforeSHA256": "321d3a0295c30dd24a0b24cfbf83f1a432dade09c1ae7cf763e227f02f9a7377",
+        "sha256": "068e91a7f4f6996dbb569f5996ff2b2639475d176ddb55a62c578996409d164e"
+      },
+      {
+        "path": "map/ffa-ntw-3p-15/game.map",
+        "beforeSHA256": "9b0181e55021e1bd8fd8fd89cb22372a7bd2f9e014bb7c9fe1213f6f24a73f99",
+        "sha256": "3547254f2efdbdea29a9eefc3928e64845e3d252f662097ff8a5b17669631080"
+      },
+      {
+        "path": "map/ffa-ntw-4p-01/game.map",
+        "beforeSHA256": "abbb8e6d013e5ae1a2e5916114de99419b33fbe980ab971c44adc5822de284d2",
+        "sha256": "e5000e9b8fb265ec8ab5e7e73a50e248e4e9ca0b7ed9a3c8ffca032be7b563de"
+      },
+      {
+        "path": "map/ffa-ntw-4p-02/game.map",
+        "beforeSHA256": "ce93d9b221487b85b0edfe4a4008dce5d5feaebfe15bc1549b5c3abddfff7aa5",
+        "sha256": "b11bd1f611675259aec0a2362a5eeffbb7f4865c1a9af9322d8d10db0d6f6bce"
+      },
+      {
+        "path": "map/ffa-ntw-4p-03/game.map",
+        "beforeSHA256": "3d603e32fa1865ec4214ef6c34474ad914ebccbd353b269831995b2c10d04d33",
+        "sha256": "978ffc1439c84cb563039d43cafc586201401c682caae175fa0a912403c19a99"
+      },
+      {
+        "path": "map/ffa-ntw-4p-04/game.map",
+        "beforeSHA256": "7c67b947ea64a6b316bcab244f104517e4128b35e44fd6441142b3f2fce0ba52",
+        "sha256": "f502307a8caa5bb67a7bc0d71c682cc3cbd1a60dcc208c3fba942197cac3bdd5"
+      },
+      {
+        "path": "map/ffa-ntw-4p-05/game.map",
+        "beforeSHA256": "4e87bcdd34c0cf66076c7cabf0e12e2261627a535b73008a519c78547113d1bf",
+        "sha256": "7e290bbce209a5844e371c3dea1a8adc793ce9d38d271e96cd53ee21faba2c9a"
+      },
+      {
+        "path": "map/ffa-ntw-4p-06/game.map",
+        "beforeSHA256": "c753ebb9c8918c4e01f62d20d1c7c395d72544f176e47c492361be3c159927ae",
+        "sha256": "bc646be502dc62adf695730d0c73fb336462116f1cfee43e4cef7df2739d46eb"
+      },
+      {
+        "path": "map/ffa-ntw-4p-07/game.map",
+        "beforeSHA256": "35ed7071e71aa7ec01ec52b773dc38648eddcb03aae766e3019f3aa2a99250c8",
+        "sha256": "3008aeda16d396381ceb758ee9ef658bb808f71a028adf36539e392d368c734b"
+      },
+      {
+        "path": "map/ffa-ntw-4p-08/game.map",
+        "beforeSHA256": "24f19cc700949159e471dfe4052df9f34161b6f3cafde1a68fec01246c010088",
+        "sha256": "482136d5d5cf70beadddd2bb62340417da5a02e0b53c2df1c5441f19d696ca20"
+      },
+      {
+        "path": "map/ffa-ntw-4p-09/game.map",
+        "beforeSHA256": "cb577e1e3dfda71ff243ab7b5599bae5eb190bdc450bbe4784876f55a848c79b",
+        "sha256": "76613577b4870ac1468afa2c14d4d60905e669775a8c2551f7cca04e5d401400"
+      },
+      {
+        "path": "map/ffa-ntw-4p-10/game.map",
+        "beforeSHA256": "05b64d0ba62cc0c682c5ffcb3672798191b73137ea229b773a48a6ca1a6326a8",
+        "sha256": "8a20ab8519dd6b8c11c3741a4cbc909d7dc044afe164702867b938c2dcb962ff"
+      },
+      {
+        "path": "map/ffa-ntw-4p-11/game.map",
+        "beforeSHA256": "b1c49543da30592a47153a1db38a40383baaa6f583c2ec4ea574f36bf5af42f8",
+        "sha256": "742f1e4be47694a16c2394f33991ed5c51a0620c4e89db6f2259d8a18cf888c5"
+      },
+      {
+        "path": "map/ffa-ntw-4p-12/game.map",
+        "beforeSHA256": "d850be3db46039b9b88964c0ab3c4a7c47082b800127952c35b904e9f1730ef6",
+        "sha256": "70d3f4e69ad10998bf18c8494613f08937d59d011e94d4ae0140e7dbdc438fb8"
+      },
+      {
+        "path": "map/ffa-ntw-4p-13/game.map",
+        "beforeSHA256": "b7abedbdbd5dbd10456c35dd31a07f4b40de63db41b0c1f05c6ca10cdad447e1",
+        "sha256": "0a0be26785ab4c29f0c10befdcc7d8495a1b21df6241305771d23bb746154a99"
+      },
+      {
+        "path": "map/ffa-ntw-4p-14/game.map",
+        "beforeSHA256": "85a50dc3d2c5801214d82175ba5e959ecb015647810e730d0a27832077f8277a",
+        "sha256": "7159386bd0920f5e2d2cd309cb90184ff026636fc5a5f7498dde6e898edb0cef"
+      },
+      {
+        "path": "map/ffa-ntw-4p-15/game.map",
+        "beforeSHA256": "84b4cc3643e25bee47dcea970958dcf161a29a239fe441cc0cb019e3f420a175",
+        "sha256": "8a8b372dbca7e2df78462d88959f6d8c267ec6e8dc556b3cfc36e18ae8b48123"
+      },
+      {
+        "path": "scenario/ffa/PACKAGE.json",
+        "beforeSHA256": "2b09b3131d2b3b0049b56b33204f4f259602213684eebe26f1c9c1be810e205f",
+        "sha256": "b59b4c196ec1bcc46db51241ef5122b986216ce026e366877e348b381dc6dea1"
+      },
+      {
+        "path": "scenario/ffa/generated-maps-067.json",
+        "beforeSHA256": "35ce6f2b69c1732d6a1dbc438384790fb218ad0163a34a8b5b686902348d76e0",
+        "sha256": "77a04d5c1a857408fa02d69155b329d718399715a4fc85061ebbe60823f8527d"
+      }
+    ],
+    "addedSources": [
+      "archive/fallback-0.68.json",
+      "archive/ffa-pathways-0.68-map-checks.json",
+      "archive/ffa-pathways-0.68-payload-checks.json",
+      "archive/ffa-pathways-0.68-preload-checks.json",
+      "archive/ffa-pathways-clean-apk-0.68.json",
+      "archive/ffa-pathways-clean-build-0.68.log",
+      "archive/release-0.68-ffa-pathways.json",
+      "docs/ffa-pathways-0.68-save-terrain.md",
+      "docs/releases/0.68-ffa-pathways.md",
+      "map/FFA-PATHWAYS-2P-OVERVIEW-068.png",
+      "map/FFA-PATHWAYS-3P-OVERVIEW-068.png",
+      "map/FFA-PATHWAYS-4P-OVERVIEW-068.png",
+      "map/FFA-PATHWAYS-BEFORE-AFTER-068.png",
+      "map/ffa-ntw-2p-01/PATHWAYS-068.json",
+      "map/ffa-ntw-2p-02/PATHWAYS-068.json",
+      "map/ffa-ntw-2p-03/PATHWAYS-068.json",
+      "map/ffa-ntw-2p-04/PATHWAYS-068.json",
+      "map/ffa-ntw-2p-05/PATHWAYS-068.json",
+      "map/ffa-ntw-2p-06/PATHWAYS-068.json",
+      "map/ffa-ntw-2p-07/PATHWAYS-068.json",
+      "map/ffa-ntw-2p-08/PATHWAYS-068.json",
+      "map/ffa-ntw-2p-09/PATHWAYS-068.json",
+      "map/ffa-ntw-2p-10/PATHWAYS-068.json",
+      "map/ffa-ntw-2p-11/PATHWAYS-068.json",
+      "map/ffa-ntw-2p-12/PATHWAYS-068.json",
+      "map/ffa-ntw-2p-13/PATHWAYS-068.json",
+      "map/ffa-ntw-2p-14/PATHWAYS-068.json",
+      "map/ffa-ntw-2p-15/PATHWAYS-068.json",
+      "map/ffa-ntw-3p-01/PATHWAYS-068.json",
+      "map/ffa-ntw-3p-02/PATHWAYS-068.json",
+      "map/ffa-ntw-3p-03/PATHWAYS-068.json",
+      "map/ffa-ntw-3p-04/PATHWAYS-068.json",
+      "map/ffa-ntw-3p-05/PATHWAYS-068.json",
+      "map/ffa-ntw-3p-06/PATHWAYS-068.json",
+      "map/ffa-ntw-3p-07/PATHWAYS-068.json",
+      "map/ffa-ntw-3p-08/PATHWAYS-068.json",
+      "map/ffa-ntw-3p-09/PATHWAYS-068.json",
+      "map/ffa-ntw-3p-10/PATHWAYS-068.json",
+      "map/ffa-ntw-3p-11/PATHWAYS-068.json",
+      "map/ffa-ntw-3p-12/PATHWAYS-068.json",
+      "map/ffa-ntw-3p-13/PATHWAYS-068.json",
+      "map/ffa-ntw-3p-14/PATHWAYS-068.json",
+      "map/ffa-ntw-3p-15/PATHWAYS-068.json",
+      "map/ffa-ntw-4p-01/PATHWAYS-068.json",
+      "map/ffa-ntw-4p-02/PATHWAYS-068.json",
+      "map/ffa-ntw-4p-03/PATHWAYS-068.json",
+      "map/ffa-ntw-4p-04/PATHWAYS-068.json",
+      "map/ffa-ntw-4p-05/PATHWAYS-068.json",
+      "map/ffa-ntw-4p-06/PATHWAYS-068.json",
+      "map/ffa-ntw-4p-07/PATHWAYS-068.json",
+      "map/ffa-ntw-4p-08/PATHWAYS-068.json",
+      "map/ffa-ntw-4p-09/PATHWAYS-068.json",
+      "map/ffa-ntw-4p-10/PATHWAYS-068.json",
+      "map/ffa-ntw-4p-11/PATHWAYS-068.json",
+      "map/ffa-ntw-4p-12/PATHWAYS-068.json",
+      "map/ffa-ntw-4p-13/PATHWAYS-068.json",
+      "map/ffa-ntw-4p-14/PATHWAYS-068.json",
+      "map/ffa-ntw-4p-15/PATHWAYS-068.json",
+      "tools/check-ffa-pathways-native-068.py",
+      "tools/check-ffa-pathways-preload-068.cjs",
+      "tools/edit-ffa-pathways-068.py",
+      "tools/package-ffa-pathways-068.py",
+      "tools/record-clean-ffa-pathways-068.py"
+    ],
+    "baselineSourceEntries": 12113,
+    "everyBaselineSourceEntryRetained": true,
+    "unrelatedScenarioSourcesPreserved": true,
+    "onlyApprovedFFAPathwaySourcesChanged": true
+  },
+  "cleanBuild": {
+    "path": "archive/ffa-pathways-clean-apk-0.68.json",
+    "sha256": "c1e37c400c1d07ee31484d95196f7a4e5a2979285758f3bfd4ddcf3aaee196c8",
+    "bytes": 523612271
+  },
+  "focusedHostChecks": [
+    {
+      "path": "archive/ffa-pathways-0.68-map-checks.json",
+      "sha256": "2e7d2fbde2836450adcb6637d22e572f137dec95c07ec0b6344ff51cb2b23014",
+      "sourceFiles": 578
+    },
+    {
+      "path": "archive/ffa-pathways-0.68-payload-checks.json",
+      "sha256": "98442d3955b626c12e8e206e255a45a47eb64b959d67ecb03cb3362dd1867e00",
+      "sourceFiles": 374
+    },
+    {
+      "path": "archive/ffa-pathways-0.68-preload-checks.json",
+      "sha256": "e1755630b8467ffd4d2b1dc9111c0903f9e897ba33c7e6be7b1c405df260a0f7",
+      "sourceFiles": 7
+    }
+  ],
+  "certificateSHA256": "4499efe00477c7c724c06a1dd96f935864548665c13ab5e2bd0a9c0f83f7cb15",
+  "changedAPKMembers": [
+    "AndroidManifest.xml",
+    "assets/ffa-maps.json",
+    "assets/ffa-previews/ntw-2p-01.png",
+    "assets/ffa-previews/ntw-2p-02.png",
+    "assets/ffa-previews/ntw-2p-03.png",
+    "assets/ffa-previews/ntw-2p-04.png",
+    "assets/ffa-previews/ntw-2p-05.png",
+    "assets/ffa-previews/ntw-2p-06.png",
+    "assets/ffa-previews/ntw-2p-07.png",
+    "assets/ffa-previews/ntw-2p-08.png",
+    "assets/ffa-previews/ntw-2p-09.png",
+    "assets/ffa-previews/ntw-2p-10.png",
+    "assets/ffa-previews/ntw-2p-11.png",
+    "assets/ffa-previews/ntw-2p-12.png",
+    "assets/ffa-previews/ntw-2p-13.png",
+    "assets/ffa-previews/ntw-2p-14.png",
+    "assets/ffa-previews/ntw-2p-15.png",
+    "assets/ffa-previews/ntw-3p-01.png",
+    "assets/ffa-previews/ntw-3p-02.png",
+    "assets/ffa-previews/ntw-3p-03.png",
+    "assets/ffa-previews/ntw-3p-04.png",
+    "assets/ffa-previews/ntw-3p-05.png",
+    "assets/ffa-previews/ntw-3p-06.png",
+    "assets/ffa-previews/ntw-3p-07.png",
+    "assets/ffa-previews/ntw-3p-08.png",
+    "assets/ffa-previews/ntw-3p-09.png",
+    "assets/ffa-previews/ntw-3p-10.png",
+    "assets/ffa-previews/ntw-3p-11.png",
+    "assets/ffa-previews/ntw-3p-12.png",
+    "assets/ffa-previews/ntw-3p-13.png",
+    "assets/ffa-previews/ntw-3p-14.png",
+    "assets/ffa-previews/ntw-3p-15.png",
+    "assets/ffa-previews/ntw-4p-01.png",
+    "assets/ffa-previews/ntw-4p-02.png",
+    "assets/ffa-previews/ntw-4p-03.png",
+    "assets/ffa-previews/ntw-4p-04.png",
+    "assets/ffa-previews/ntw-4p-05.png",
+    "assets/ffa-previews/ntw-4p-06.png",
+    "assets/ffa-previews/ntw-4p-07.png",
+    "assets/ffa-previews/ntw-4p-08.png",
+    "assets/ffa-previews/ntw-4p-09.png",
+    "assets/ffa-previews/ntw-4p-10.png",
+    "assets/ffa-previews/ntw-4p-11.png",
+    "assets/ffa-previews/ntw-4p-12.png",
+    "assets/ffa-previews/ntw-4p-13.png",
+    "assets/ffa-previews/ntw-4p-14.png",
+    "assets/ffa-previews/ntw-4p-15.png",
+    "assets/warzone/index-ffa.html",
+    "assets/warzone/mobile-ffa.html",
+    "assets/warzone/warzone2100-ffa.data",
+    "assets/warzone/warzone2100-ffa.js",
+    "classes3.dex"
+  ],
+  "everyBaselineAPKMemberRetained": true,
+  "allAPKAssetsMatchSource": true,
+  "frozenExistingNativeAssets": [
+    "assets/warzone/warzone2100-campaign.data",
+    "assets/warzone/warzone2100-campaign.js",
+    "assets/warzone/warzone2100-duel.data",
+    "assets/warzone/warzone2100-duel.js",
+    "assets/warzone/warzone2100-towers-052.js",
+    "assets/warzone/warzone2100-towers-052.wasm",
+    "assets/warzone/warzone2100.data",
+    "assets/warzone/warzone2100.js",
+    "assets/warzone/warzone2100.wasm"
+  ],
+  "compiledNativeProgramsPreserved": true,
+  "unrelatedNativeAssetsFrozen": true,
+  "bundledMusicFrozen": true,
+  "livePhoneAdsAndEmulatorFallbackRetained": true,
+  "liveAdsTested": false,
+  "githubPublished": false,
+  "vpsChanged": false,
+  "recordedUTC": "2026-11-13T10:45:35.580197+00:00"
+}

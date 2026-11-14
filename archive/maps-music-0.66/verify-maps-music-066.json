@@ -1,0 +1,186 @@
+{
+  "version": "0.66",
+  "passed": true,
+  "candidateAPK_SHA256": "e231ce3589687edf77f5c5962b55fcf171267162e499b2a7326c3a70306f1ffa",
+  "device": "emulator-5558",
+  "emulatorUsed": true,
+  "actualNativeEngineExecuted": true,
+  "runtimeErrors": [],
+  "checks": [
+    {
+      "name": "map-emag",
+      "passed": true,
+      "evidence": "qa/maps-music-066/e231ce35-map-emag.json",
+      "sha256": "fad5f8a70f8df02fa69d7505396d9778a52b351ec404477bdc3189d4ade043be"
+    },
+    {
+      "name": "map-contact",
+      "passed": true,
+      "evidence": "qa/maps-music-066/e231ce35-map-contact.json",
+      "sha256": "1471c76235f6dfa59e7b4f903f4b85726f3c665603c76b000e00f6a47d5c4726"
+    },
+    {
+      "name": "map-templar-ffa",
+      "passed": true,
+      "evidence": "qa/maps-music-066/e231ce35-map-templar-ffa.json",
+      "sha256": "82c46412ee9d14130ba54af1e780e15f21c86e7e06b740646e35113656f95dbf"
+    },
+    {
+      "name": "map-rb-simple",
+      "passed": true,
+      "evidence": "qa/maps-music-066/e231ce35-map-rb-simple.json",
+      "sha256": "aa8b4582326ab54fc3f4819fe717060fff560ccc6617957ccbc9295f70ce2546"
+    },
+    {
+      "name": "map-rb-usefull",
+      "passed": true,
+      "evidence": "qa/maps-music-066/e231ce35-map-rb-usefull.json",
+      "sha256": "88e7a31c082b7858af75f16c75168426501fba1208657a8faf40e0900fe18c2d"
+    },
+    {
+      "name": "map-emaj-6p",
+      "passed": true,
+      "evidence": "qa/maps-music-066/e231ce35-map-emaj-6p.json",
+      "sha256": "76d31f0db98a07948a8f58165772a70cd735a8addb769256462d6f4c0d3a360c"
+    },
+    {
+      "name": "music-towers",
+      "passed": true,
+      "evidence": "qa/maps-music-066/e231ce35-music-towers.json",
+      "sha256": "bd1c169f8c8b4cb8e4814e115e7d97cebf4f51260bc8b9cca8caf6b4a79c28c7"
+    },
+    {
+      "name": "music-campaign",
+      "passed": true,
+      "evidence": "qa/maps-music-066/e231ce35-music-campaign.json",
+      "sha256": "ead860601844ae0b6bd5b2598f04663ec8ea75f7b5d3e5af3bdb22d2e8102223"
+    },
+    {
+      "name": "music-ffa",
+      "passed": true,
+      "evidence": "qa/maps-music-066/e231ce35-music-ffa.json",
+      "sha256": "43be8295a1d3035835883eb74f7e29c7787c09f38146934ddd9e51b9536813bb"
+    },
+    {
+      "name": "legacy-saves",
+      "passed": true,
+      "evidence": "qa/maps-music-066/e231ce35-legacy-saves.json",
+      "sha256": "139c4ea67a068dbce5ac7bafced6a7ed2b7d3ce74b694fdd6d7c1b8598abd499"
+    },
+    {
+      "name": "compact-ui",
+      "passed": true,
+      "evidence": "qa/maps-music-066/e231ce35-compact-ui.json",
+      "sha256": "083207dc246a0bb48bd3d5ab7af62db99522ec499f36f76a8157248c98e3baf9"
+    },
+    {
+      "name": "restoration",
+      "passed": true,
+      "evidence": "qa/maps-music-066/e231ce35-restoration.json",
+      "sha256": "7adf199f50e3be79d61e539b70b4d9d86e1bebee78d132eab497c481b656aec2"
+    }
+  ],
+  "scope": "Six authored native maps and independent bots, six-player and neutral-map phone saves, legacy saves, ordinary manufacturing/research, bundled music decoder and lifecycle, compact new Guide image/header/input, original wallet/profile/saves restoration.",
+  "speakerOutputMonitored": false,
+  "mediaFixtureDisclosure": "Near-end HTMLMediaElement seeks shorten actual trusted media completions; no ended events or decoded samples are synthesized.",
+  "fixtureFailuresPreserved": [
+    "3535 FFA preloader missing directories",
+    "Derived EM_PRELOAD_CACHE hybrid after failed preloader; only cache removed",
+    "3535/512b natural media pause-before-ended bug",
+    "512b Contact native generator cap dropped authored objects",
+    "Host emulator exit after successful Contact Return; same AVD restarted"
+  ],
+  "earlierEvidence": [
+    {
+      "path": "qa/maps-music-066/3535489f-campaign-native-logcat.json",
+      "sha256": "97da7d0b4c7533ddd51ff6936299b10160d97d4f07b457e5738dc3437fe8307c",
+      "bytes": 522246
+    },
+    {
+      "path": "qa/maps-music-066/3535489f-map-templar-ffa-failed-1794527166150.json",
+      "sha256": "278ac6c789fe97bb132bf53f034a0658f49f9cd97ee62bea1b4099a1380b0322",
+      "bytes": 12500
+    },
+    {
+      "path": "qa/maps-music-066/3535489f-music-campaign-failed-1794527599455.json",
+      "sha256": "aaaa0a1a43bf54b3dcf39af32d4ddb9001e6a8ce5bebbff2b93be95be7946d5c",
+      "bytes": 11701
+    },
+    {
+      "path": "qa/maps-music-066/3535489f-music-campaign-failed-1794528281916.json",
+      "sha256": "2f7ae50130714186153258cdd8ba0b461ffaa372da7c35049501c3ef6f9e3cfe",
+      "bytes": 32349
+    },
+    {
+      "path": "qa/maps-music-066/3535489f-preload-cache-before.json",
+      "sha256": "15d741cf0aba441f935d5c873816be99846d3e5fd74250e3de426544c9a7e2d2",
+      "bytes": 3076
+    },
+    {
+      "path": "qa/maps-music-066/3535489f-preload-cache-recovery.json",
+      "sha256": "17bf1316e890886e0b13f80a61530837aecdbc73376e6dc2bcfeed438f443d5e",
+      "bytes": 3516
+    },
+    {
+      "path": "qa/maps-music-066/3535489f-templar-native-logcat.json",
+      "sha256": "b0338a050dfff891fad2af1f732abe2399d4a4d85654690d66bf9b0b29b070eb",
+      "bytes": 331883
+    },
+    {
+      "path": "qa/maps-music-066/512b3036-contact-native-logcat.json",
+      "sha256": "c1a8903ba60b7b8985c62282c487a385e00dc1ec980eefeca081fbc315fd5204",
+      "bytes": 10350
+    },
+    {
+      "path": "qa/maps-music-066/512b3036-map-contact-failed-1794528912436.json",
+      "sha256": "3e7f9a8933551a3d3cd2d0c215f66b02421873750f9efc2ec5b7105865193ce0",
+      "bytes": 9635
+    },
+    {
+      "path": "qa/maps-music-066/512b3036-music-campaign-failed-1794529238132.json",
+      "sha256": "2067b5636e8e3f716d199572f527d41f7355980d12201ecff74899e975610651",
+      "bytes": 35034
+    },
+    {
+      "path": "qa/maps-music-066/512b3036-music-campaign-failed-1794529295046.json",
+      "sha256": "48c68756d80f62f9186aa9a6559b77ea6fb1668bff586bc02c1a6e25abdf7c55",
+      "bytes": 33345
+    },
+    {
+      "path": "qa/maps-music-066/e231ce35-compact-ui-failed-1794531838318.json",
+      "sha256": "a1917afe147108c25f2c00d078380fd534e0f57996fe77657e2013f4110cc44c",
+      "bytes": 3978
+    },
+    {
+      "path": "qa/maps-music-066/e231ce35-compact-ui-failed-1794532020435.json",
+      "sha256": "36e0acdedd7a208ff1162302c1d2e83ce5c864e5121f59d80bc1f3bb820f7e7c",
+      "bytes": 6321
+    },
+    {
+      "path": "qa/maps-music-066/e231ce35-emulator-host-exit.json",
+      "sha256": "5c285f3c41f56f39e84316fc8130ea1cabf8cd6563ef94443c90218741af77f3",
+      "bytes": 7342
+    },
+    {
+      "path": "qa/maps-music-066/e231ce35-emulator-host-recovery.json",
+      "sha256": "d24ddc353cbb6a97932c2e9beb415582cfa1257f70ba20f7082b08d072de052d",
+      "bytes": 1675
+    },
+    {
+      "path": "qa/maps-music-066/e231ce35-map-contact-failed-1794530241900.json",
+      "sha256": "4078d9a595975df0bf6e693e1622fd45ef8a91eb22c30dfb95c6f230f5d71931",
+      "bytes": 2993
+    },
+    {
+      "path": "qa/maps-music-066/e231ce35-music-campaign-failed-1794531276654.json",
+      "sha256": "7ed211e8e3a0b5dbb99187db5de98b11f8aa8b9513c939f7fe19fa83e629c434",
+      "bytes": 37295
+    },
+    {
+      "path": "qa/maps-music-066/guide-ffa-setup-066-provenance.json",
+      "sha256": "0c10919203c62906e05b49a0c0c61f84a94bceda756221d5e583d3e81f6b78a3",
+      "bytes": 5838
+    }
+  ],
+  "finishedAt": "2026-11-13T01:13:01.070085+00:00"
+}

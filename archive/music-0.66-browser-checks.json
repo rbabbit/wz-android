@@ -1,0 +1,2526 @@
+{
+  "version": "0.66",
+  "passed": true,
+  "checksPassed": 6,
+  "checks": [
+    {
+      "name": "All 39 FFA tracks decode and naturally advance through one shuffle plus boundary without immediate repeats",
+      "passed": true,
+      "detail": {
+        "decodedDistinctTracks": 39,
+        "naturalCompletions": 39,
+        "selectionCount": 40
+      }
+    },
+    {
+      "name": "OFF stops playback and ON restarts the selected song without consuming the shuffle",
+      "passed": true
+    },
+    {
+      "name": "Synthetic global bridge preference is respected across mode changes and Campaign uses its three original tracks in ordered wrap",
+      "passed": true,
+      "detail": {
+        "decodedOriginalTracks": 3,
+        "naturalCompletions": 4,
+        "syntheticPreferenceBridge": true
+      }
+    },
+    {
+      "name": "Campaign video exit with nested HUD activation retains the same real Audio and media position",
+      "passed": true
+    },
+    {
+      "name": "Background and native mission-results pause resume retain the decoder and position",
+      "passed": true
+    },
+    {
+      "name": "Original Opus slices match their catalogue hashes and browser playback has no resource or script errors",
+      "passed": true
+    }
+  ],
+  "fatal": null,
+  "actualChromiumHTMLAudio": true,
+  "actualOriginalOpusBytes": true,
+  "syntheticJavaMetadataBridge": true,
+  "syntheticNativeSessionVideoFlags": true,
+  "engineExecuted": false,
+  "emulatorUsed": false,
+  "speakerOutputVerified": false,
+  "mutedHostOutput": true,
+  "autoplayPermission": "headless fixture flag",
+  "seekedNearEnd": true,
+  "wholeTracksListenedInRealTime": false,
+  "observations": [
+    {
+      "label": "FFA shuffle",
+      "selectedTracks": [
+        "reclamation_soundtrack/LM_Reclamation_03.opus",
+        "aftermath_soundtrack/track25.opus",
+        "legacy_soundtrack/track6.opus",
+        "legacy_soundtrack/track12.opus",
+        "reclamation_soundtrack/LM_Reclamation_04.opus",
+        "aftermath_soundtrack/track23.opus",
+        "aftermath_soundtrack/track20.opus",
+        "aftermath_soundtrack/track18.opus",
+        "aftermath_soundtrack/track27.opus",
+        "aftermath_soundtrack/track17.opus",
+        "legacy_soundtrack/track10.opus",
+        "reclamation_soundtrack/LM_Reclamation_05.opus",
+        "original_soundtrack/track1.opus",
+        "aftermath_soundtrack/track22.opus",
+        "legacy_soundtrack/track9.opus",
+        "reclamation_soundtrack/LM_Reclamation_09.opus",
+        "legacy_soundtrack/track5.opus",
+        "reclamation_soundtrack/LM_Reclamation_08.opus",
+        "legacy_soundtrack/track14.opus",
+        "reclamation_soundtrack/LM_Reclamation_10.opus",
+        "reclamation_soundtrack/LM_Reclamation_02.opus",
+        "legacy_soundtrack/track4.opus",
+        "legacy_soundtrack/track7.opus",
+        "legacy_soundtrack/track11.opus",
+        "legacy_soundtrack/track16.opus",
+        "original_soundtrack/track2.opus",
+        "reclamation_soundtrack/LM_Reclamation_01.opus",
+        "aftermath_soundtrack/track26.opus",
+        "original_soundtrack/track3.opus",
+        "legacy_soundtrack/track8.opus",
+        "aftermath_soundtrack/track3_enhanced.opus",
+        "reclamation_soundtrack/LM_Reclamation_06.opus",
+        "legacy_soundtrack/track13.opus",
+        "aftermath_soundtrack/menu_enhanced.opus",
+        "aftermath_soundtrack/track24.opus",
+        "aftermath_soundtrack/track21.opus",
+        "aftermath_soundtrack/track19.opus",
+        "legacy_soundtrack/track15.opus",
+        "reclamation_soundtrack/LM_Reclamation_07.opus",
+        "aftermath_soundtrack/track21.opus"
+      ],
+      "nativeAudio": true
+    },
+    {
+      "label": "OFF/ON",
+      "track": "aftermath_soundtrack/track21.opus",
+      "oldAudio": 40,
+      "newAudio": 41
+    },
+    {
+      "label": "Campaign ordered cycle",
+      "selectedTracks": [
+        "original_soundtrack/track2.opus",
+        "original_soundtrack/track3.opus",
+        "original_soundtrack/track1.opus",
+        "original_soundtrack/track2.opus",
+        "original_soundtrack/track3.opus"
+      ],
+      "nativeAudio": true
+    },
+    {
+      "label": "Campaign video",
+      "audio": 5,
+      "pausedTime": 12.00605,
+      "resumedTime": 12.009338,
+      "sameRealAudio": true
+    },
+    {
+      "label": "Background",
+      "audio": 5,
+      "pausedTime": 12.007882,
+      "resumedTime": 12.010991,
+      "sameRealAudio": true
+    },
+    {
+      "label": "Native results",
+      "audio": 5,
+      "pausedTime": 12.011328,
+      "resumedTime": 12.014333,
+      "sameRealAudio": true
+    }
+  ],
+  "nativeEndOrders": [
+    {
+      "label": "FFA 1",
+      "from": "reclamation_soundtrack/LM_Reclamation_03.opus",
+      "to": "aftermath_soundtrack/track25.opus",
+      "audio": 1,
+      "order": [
+        {
+          "type": "loadedmetadata",
+          "ended": false,
+          "time": 950.8350000083447,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 1006.0999999940395,
+          "trusted": true
+        },
+        {
+          "type": "seeked",
+          "ended": false,
+          "time": 1221.2450000047684,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 1221.2700000107288,
+          "trusted": true
+        },
+        {
+          "type": "pause",
+          "ended": true,
+          "time": 1339.4000000059605,
+          "trusted": true
+        },
+        {
+          "type": "ended",
+          "ended": true,
+          "time": 1339.469999998808,
+          "trusted": true
+        }
+      ]
+    },
+    {
+      "label": "FFA 2",
+      "from": "aftermath_soundtrack/track25.opus",
+      "to": "legacy_soundtrack/track6.opus",
+      "audio": 2,
+      "order": [
+        {
+          "type": "loadedmetadata",
+          "ended": false,
+          "time": 1368.1399999856949,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 1377.699999988079,
+          "trusted": true
+        },
+        {
+          "type": "seeked",
+          "ended": false,
+          "time": 1402.4449999928474,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 1402.469999998808,
+          "trusted": true
+        },
+        {
+          "type": "pause",
+          "ended": true,
+          "time": 1509.4900000095367,
+          "trusted": true
+        },
+        {
+          "type": "ended",
+          "ended": true,
+          "time": 1509.5149999856949,
+          "trusted": true
+        }
+      ]
+    },
+    {
+      "label": "FFA 3",
+      "from": "legacy_soundtrack/track6.opus",
+      "to": "legacy_soundtrack/track12.opus",
+      "audio": 3,
+      "order": [
+        {
+          "type": "loadedmetadata",
+          "ended": false,
+          "time": 1529.8100000023842,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 1536.9849999845028,
+          "trusted": true
+        },
+        {
+          "type": "seeked",
+          "ended": false,
+          "time": 1559.4650000035763,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 1559.4749999940395,
+          "trusted": true
+        },
+        {
+          "type": "pause",
+          "ended": true,
+          "time": 1669.5149999856949,
+          "trusted": true
+        },
+        {
+          "type": "ended",
+          "ended": true,
+          "time": 1669.5550000071526,
+          "trusted": true
+        }
+      ]
+    },
+    {
+      "label": "FFA 4",
+      "from": "legacy_soundtrack/track12.opus",
+      "to": "reclamation_soundtrack/LM_Reclamation_04.opus",
+      "audio": 4,
+      "order": [
+        {
+          "type": "loadedmetadata",
+          "ended": false,
+          "time": 1696.2599999904633,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 1704.6899999976158,
+          "trusted": true
+        },
+        {
+          "type": "seeked",
+          "ended": false,
+          "time": 1744.2450000047684,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 1744.2549999952316,
+          "trusted": true
+        },
+        {
+          "type": "pause",
+          "ended": true,
+          "time": 1859.3400000035763,
+          "trusted": true
+        },
+        {
+          "type": "ended",
+          "ended": true,
+          "time": 1859.3549999892712,
+          "trusted": true
+        }
+      ]
+    },
+    {
+      "label": "FFA 5",
+      "from": "reclamation_soundtrack/LM_Reclamation_04.opus",
+      "to": "aftermath_soundtrack/track23.opus",
+      "audio": 5,
+      "order": [
+        {
+          "type": "loadedmetadata",
+          "ended": false,
+          "time": 1882.9149999916553,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 1895.074999988079,
+          "trusted": true
+        },
+        {
+          "type": "seeked",
+          "ended": false,
+          "time": 1930.3899999856949,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 1930.4099999964237,
+          "trusted": true
+        },
+        {
+          "type": "pause",
+          "ended": true,
+          "time": 2049.4749999940395,
+          "trusted": true
+        },
+        {
+          "type": "ended",
+          "ended": true,
+          "time": 2049.5,
+          "trusted": true
+        }
+      ]
+    },
+    {
+      "label": "FFA 6",
+      "from": "aftermath_soundtrack/track23.opus",
+      "to": "aftermath_soundtrack/track20.opus",
+      "audio": 6,
+      "order": [
+        {
+          "type": "loadedmetadata",
+          "ended": false,
+          "time": 2088.889999985695,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 2100.699999988079,
+          "trusted": true
+        },
+        {
+          "type": "seeked",
+          "ended": false,
+          "time": 2116.6649999916553,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 2116.669999986887,
+          "trusted": true
+        },
+        {
+          "type": "pause",
+          "ended": true,
+          "time": 2219.4950000047684,
+          "trusted": true
+        },
+        {
+          "type": "ended",
+          "ended": true,
+          "time": 2219.5099999904633,
+          "trusted": true
+        }
+      ]
+    },
+    {
+      "label": "FFA 7",
+      "from": "aftermath_soundtrack/track20.opus",
+      "to": "aftermath_soundtrack/track18.opus",
+      "audio": 7,
+      "order": [
+        {
+          "type": "loadedmetadata",
+          "ended": false,
+          "time": 2248.6150000095367,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 2257.0550000071526,
+          "trusted": true
+        },
+        {
+          "type": "seeked",
+          "ended": false,
+          "time": 2291.0399999916553,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 2291.050000011921,
+          "trusted": true
+        },
+        {
+          "type": "pause",
+          "ended": true,
+          "time": 2409.419999986887,
+          "trusted": true
+        },
+        {
+          "type": "ended",
+          "ended": true,
+          "time": 2409.435000002384,
+          "trusted": true
+        }
+      ]
+    },
+    {
+      "label": "FFA 8",
+      "from": "aftermath_soundtrack/track18.opus",
+      "to": "aftermath_soundtrack/track27.opus",
+      "audio": 8,
+      "order": [
+        {
+          "type": "loadedmetadata",
+          "ended": false,
+          "time": 2438.564999997616,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 2446.780000001192,
+          "trusted": true
+        },
+        {
+          "type": "seeked",
+          "ended": false,
+          "time": 2478.685000002384,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 2478.689999997616,
+          "trusted": true
+        },
+        {
+          "type": "pause",
+          "ended": true,
+          "time": 2579.314999997616,
+          "trusted": true
+        },
+        {
+          "type": "ended",
+          "ended": true,
+          "time": 2579.3350000083447,
+          "trusted": true
+        }
+      ]
+    },
+    {
+      "label": "FFA 9",
+      "from": "aftermath_soundtrack/track27.opus",
+      "to": "aftermath_soundtrack/track17.opus",
+      "audio": 9,
+      "order": [
+        {
+          "type": "loadedmetadata",
+          "ended": false,
+          "time": 2605.4650000035763,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 2613.405000001192,
+          "trusted": true
+        },
+        {
+          "type": "seeked",
+          "ended": false,
+          "time": 2648.3849999904633,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 2648.395000010729,
+          "trusted": true
+        },
+        {
+          "type": "pause",
+          "ended": true,
+          "time": 2759.4099999964237,
+          "trusted": true
+        },
+        {
+          "type": "ended",
+          "ended": true,
+          "time": 2759.4300000071526,
+          "trusted": true
+        }
+      ]
+    },
+    {
+      "label": "FFA 10",
+      "from": "aftermath_soundtrack/track17.opus",
+      "to": "legacy_soundtrack/track10.opus",
+      "audio": 10,
+      "order": [
+        {
+          "type": "loadedmetadata",
+          "ended": false,
+          "time": 2786.4099999964237,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 2794.234999984503,
+          "trusted": true
+        },
+        {
+          "type": "seeked",
+          "ended": false,
+          "time": 2819.8499999940395,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 2819.859999984503,
+          "trusted": true
+        },
+        {
+          "type": "pause",
+          "ended": true,
+          "time": 2929.4950000047684,
+          "trusted": true
+        },
+        {
+          "type": "ended",
+          "ended": true,
+          "time": 2929.520000010729,
+          "trusted": true
+        }
+      ]
+    },
+    {
+      "label": "FFA 11",
+      "from": "legacy_soundtrack/track10.opus",
+      "to": "reclamation_soundtrack/LM_Reclamation_05.opus",
+      "audio": 11,
+      "order": [
+        {
+          "type": "loadedmetadata",
+          "ended": false,
+          "time": 2964.2750000059605,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 2973.574999988079,
+          "trusted": true
+        },
+        {
+          "type": "seeked",
+          "ended": false,
+          "time": 2992.1299999952316,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 2992.1349999904633,
+          "trusted": true
+        },
+        {
+          "type": "pause",
+          "ended": true,
+          "time": 3109.514999985695,
+          "trusted": true
+        },
+        {
+          "type": "ended",
+          "ended": true,
+          "time": 3109.530000001192,
+          "trusted": true
+        }
+      ]
+    },
+    {
+      "label": "FFA 12",
+      "from": "reclamation_soundtrack/LM_Reclamation_05.opus",
+      "to": "original_soundtrack/track1.opus",
+      "audio": 12,
+      "order": [
+        {
+          "type": "loadedmetadata",
+          "ended": false,
+          "time": 3140.5399999916553,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 3150.7249999940395,
+          "trusted": true
+        },
+        {
+          "type": "seeked",
+          "ended": false,
+          "time": 3181.359999984503,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 3181.375,
+          "trusted": true
+        },
+        {
+          "type": "pause",
+          "ended": true,
+          "time": 3299.354999989271,
+          "trusted": true
+        },
+        {
+          "type": "ended",
+          "ended": true,
+          "time": 3299.3700000047684,
+          "trusted": true
+        }
+      ]
+    },
+    {
+      "label": "FFA 13",
+      "from": "original_soundtrack/track1.opus",
+      "to": "aftermath_soundtrack/track22.opus",
+      "audio": 13,
+      "order": [
+        {
+          "type": "loadedmetadata",
+          "ended": false,
+          "time": 3326.9300000071526,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 3337.675000011921,
+          "trusted": true
+        },
+        {
+          "type": "seeked",
+          "ended": false,
+          "time": 3370.344999998808,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 3370.3499999940395,
+          "trusted": true
+        },
+        {
+          "type": "pause",
+          "ended": true,
+          "time": 3489.8400000035763,
+          "trusted": true
+        },
+        {
+          "type": "ended",
+          "ended": true,
+          "time": 3489.8650000095367,
+          "trusted": true
+        }
+      ]
+    },
+    {
+      "label": "FFA 14",
+      "from": "aftermath_soundtrack/track22.opus",
+      "to": "legacy_soundtrack/track9.opus",
+      "audio": 14,
+      "order": [
+        {
+          "type": "loadedmetadata",
+          "ended": false,
+          "time": 3523.8400000035763,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 3534.2249999940395,
+          "trusted": true
+        },
+        {
+          "type": "seeked",
+          "ended": false,
+          "time": 3559.719999998808,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 3559.734999984503,
+          "trusted": true
+        },
+        {
+          "type": "pause",
+          "ended": true,
+          "time": 3669.5250000059605,
+          "trusted": true
+        },
+        {
+          "type": "ended",
+          "ended": true,
+          "time": 3669.550000011921,
+          "trusted": true
+        }
+      ]
+    },
+    {
+      "label": "FFA 15",
+      "from": "legacy_soundtrack/track9.opus",
+      "to": "reclamation_soundtrack/LM_Reclamation_09.opus",
+      "audio": 15,
+      "order": [
+        {
+          "type": "loadedmetadata",
+          "ended": false,
+          "time": 3698.7450000047684,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 3708.4749999940395,
+          "trusted": true
+        },
+        {
+          "type": "seeked",
+          "ended": false,
+          "time": 3742.6500000059605,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 3742.655000001192,
+          "trusted": true
+        },
+        {
+          "type": "pause",
+          "ended": true,
+          "time": 3859.6599999964237,
+          "trusted": true
+        },
+        {
+          "type": "ended",
+          "ended": true,
+          "time": 3859.675000011921,
+          "trusted": true
+        }
+      ]
+    },
+    {
+      "label": "FFA 16",
+      "from": "reclamation_soundtrack/LM_Reclamation_09.opus",
+      "to": "legacy_soundtrack/track5.opus",
+      "audio": 16,
+      "order": [
+        {
+          "type": "loadedmetadata",
+          "ended": false,
+          "time": 3885.8050000071526,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 3894.074999988079,
+          "trusted": true
+        },
+        {
+          "type": "seeked",
+          "ended": false,
+          "time": 3928.939999997616,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 3928.949999988079,
+          "trusted": true
+        },
+        {
+          "type": "pause",
+          "ended": true,
+          "time": 4029.4600000083447,
+          "trusted": true
+        },
+        {
+          "type": "ended",
+          "ended": true,
+          "time": 4029.469999998808,
+          "trusted": true
+        }
+      ]
+    },
+    {
+      "label": "FFA 17",
+      "from": "legacy_soundtrack/track5.opus",
+      "to": "reclamation_soundtrack/LM_Reclamation_08.opus",
+      "audio": 17,
+      "order": [
+        {
+          "type": "loadedmetadata",
+          "ended": false,
+          "time": 4054.9300000071526,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 4063.3650000095367,
+          "trusted": true
+        },
+        {
+          "type": "seeked",
+          "ended": false,
+          "time": 4098.240000009537,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 4098.240000009537,
+          "trusted": true
+        },
+        {
+          "type": "pause",
+          "ended": true,
+          "time": 4209.550000011921,
+          "trusted": true
+        },
+        {
+          "type": "ended",
+          "ended": true,
+          "time": 4209.564999997616,
+          "trusted": true
+        }
+      ]
+    },
+    {
+      "label": "FFA 18",
+      "from": "reclamation_soundtrack/LM_Reclamation_08.opus",
+      "to": "legacy_soundtrack/track14.opus",
+      "audio": 18,
+      "order": [
+        {
+          "type": "loadedmetadata",
+          "ended": false,
+          "time": 4239.935000002384,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 4247.995000004768,
+          "trusted": true
+        },
+        {
+          "type": "seeked",
+          "ended": false,
+          "time": 4285.030000001192,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 4285.044999986887,
+          "trusted": true
+        },
+        {
+          "type": "pause",
+          "ended": true,
+          "time": 4399.430000007153,
+          "trusted": true
+        },
+        {
+          "type": "ended",
+          "ended": true,
+          "time": 4399.444999992847,
+          "trusted": true
+        }
+      ]
+    },
+    {
+      "label": "FFA 19",
+      "from": "legacy_soundtrack/track14.opus",
+      "to": "reclamation_soundtrack/LM_Reclamation_10.opus",
+      "audio": 19,
+      "order": [
+        {
+          "type": "loadedmetadata",
+          "ended": false,
+          "time": 4423.639999985695,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 4433.419999986887,
+          "trusted": true
+        },
+        {
+          "type": "seeked",
+          "ended": false,
+          "time": 4475.495000004768,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 4475.504999995232,
+          "trusted": true
+        },
+        {
+          "type": "pause",
+          "ended": true,
+          "time": 4589.729999989271,
+          "trusted": true
+        },
+        {
+          "type": "ended",
+          "ended": true,
+          "time": 4589.75,
+          "trusted": true
+        }
+      ]
+    },
+    {
+      "label": "FFA 20",
+      "from": "reclamation_soundtrack/LM_Reclamation_10.opus",
+      "to": "reclamation_soundtrack/LM_Reclamation_02.opus",
+      "audio": 20,
+      "order": [
+        {
+          "type": "loadedmetadata",
+          "ended": false,
+          "time": 4625.609999984503,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 4636.949999988079,
+          "trusted": true
+        },
+        {
+          "type": "seeked",
+          "ended": false,
+          "time": 4664.789999991655,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 4664.800000011921,
+          "trusted": true
+        },
+        {
+          "type": "pause",
+          "ended": true,
+          "time": 4769.615000009537,
+          "trusted": true
+        },
+        {
+          "type": "ended",
+          "ended": true,
+          "time": 4769.639999985695,
+          "trusted": true
+        }
+      ]
+    },
+    {
+      "label": "FFA 21",
+      "from": "reclamation_soundtrack/LM_Reclamation_02.opus",
+      "to": "legacy_soundtrack/track4.opus",
+      "audio": 21,
+      "order": [
+        {
+          "type": "loadedmetadata",
+          "ended": false,
+          "time": 4801.4749999940395,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 4815.069999992847,
+          "trusted": true
+        },
+        {
+          "type": "seeked",
+          "ended": false,
+          "time": 4837.064999997616,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 4837.069999992847,
+          "trusted": true
+        },
+        {
+          "type": "pause",
+          "ended": true,
+          "time": 4949.5999999940395,
+          "trusted": true
+        },
+        {
+          "type": "ended",
+          "ended": true,
+          "time": 4949.634999990463,
+          "trusted": true
+        }
+      ]
+    },
+    {
+      "label": "FFA 22",
+      "from": "legacy_soundtrack/track4.opus",
+      "to": "legacy_soundtrack/track7.opus",
+      "audio": 22,
+      "order": [
+        {
+          "type": "loadedmetadata",
+          "ended": false,
+          "time": 4982.800000011921,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 4992.085000008345,
+          "trusted": true
+        },
+        {
+          "type": "seeked",
+          "ended": false,
+          "time": 5021.1500000059605,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 5021.164999991655,
+          "trusted": true
+        },
+        {
+          "type": "pause",
+          "ended": true,
+          "time": 5139.305000007153,
+          "trusted": true
+        },
+        {
+          "type": "ended",
+          "ended": true,
+          "time": 5139.324999988079,
+          "trusted": true
+        }
+      ]
+    },
+    {
+      "label": "FFA 23",
+      "from": "legacy_soundtrack/track7.opus",
+      "to": "legacy_soundtrack/track11.opus",
+      "audio": 23,
+      "order": [
+        {
+          "type": "loadedmetadata",
+          "ended": false,
+          "time": 5167.2750000059605,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 5176.359999984503,
+          "trusted": true
+        },
+        {
+          "type": "seeked",
+          "ended": false,
+          "time": 5209.990000009537,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 5210.004999995232,
+          "trusted": true
+        },
+        {
+          "type": "pause",
+          "ended": true,
+          "time": 5329.465000003576,
+          "trusted": true
+        },
+        {
+          "type": "ended",
+          "ended": true,
+          "time": 5329.479999989271,
+          "trusted": true
+        }
+      ]
+    },
+    {
+      "label": "FFA 24",
+      "from": "legacy_soundtrack/track11.opus",
+      "to": "legacy_soundtrack/track16.opus",
+      "audio": 24,
+      "order": [
+        {
+          "type": "loadedmetadata",
+          "ended": false,
+          "time": 5354.0999999940395,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 5360.810000002384,
+          "trusted": true
+        },
+        {
+          "type": "seeked",
+          "ended": false,
+          "time": 5395.659999996424,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 5395.675000011921,
+          "trusted": true
+        },
+        {
+          "type": "pause",
+          "ended": true,
+          "time": 5509.425000011921,
+          "trusted": true
+        },
+        {
+          "type": "ended",
+          "ended": true,
+          "time": 5509.444999992847,
+          "trusted": true
+        }
+      ]
+    },
+    {
+      "label": "FFA 25",
+      "from": "legacy_soundtrack/track16.opus",
+      "to": "original_soundtrack/track2.opus",
+      "audio": 25,
+      "order": [
+        {
+          "type": "loadedmetadata",
+          "ended": false,
+          "time": 5535.930000007153,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 5545.375,
+          "trusted": true
+        },
+        {
+          "type": "seeked",
+          "ended": false,
+          "time": 5582.175000011921,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 5582.185000002384,
+          "trusted": true
+        },
+        {
+          "type": "pause",
+          "ended": true,
+          "time": 5700.194999992847,
+          "trusted": true
+        },
+        {
+          "type": "ended",
+          "ended": true,
+          "time": 5700.229999989271,
+          "trusted": true
+        }
+      ]
+    },
+    {
+      "label": "FFA 26",
+      "from": "original_soundtrack/track2.opus",
+      "to": "reclamation_soundtrack/LM_Reclamation_01.opus",
+      "audio": 26,
+      "order": [
+        {
+          "type": "loadedmetadata",
+          "ended": false,
+          "time": 5726.405000001192,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 5734.454999983311,
+          "trusted": true
+        },
+        {
+          "type": "seeked",
+          "ended": false,
+          "time": 5767.810000002384,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 5767.819999992847,
+          "trusted": true
+        },
+        {
+          "type": "pause",
+          "ended": true,
+          "time": 5869.490000009537,
+          "trusted": true
+        },
+        {
+          "type": "ended",
+          "ended": true,
+          "time": 5869.5,
+          "trusted": true
+        }
+      ]
+    },
+    {
+      "label": "FFA 27",
+      "from": "reclamation_soundtrack/LM_Reclamation_01.opus",
+      "to": "aftermath_soundtrack/track26.opus",
+      "audio": 27,
+      "order": [
+        {
+          "type": "loadedmetadata",
+          "ended": false,
+          "time": 5891.204999983311,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 5897.254999995232,
+          "trusted": true
+        },
+        {
+          "type": "seeked",
+          "ended": false,
+          "time": 5938.925000011921,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 5938.935000002384,
+          "trusted": true
+        },
+        {
+          "type": "pause",
+          "ended": true,
+          "time": 6049.189999997616,
+          "trusted": true
+        },
+        {
+          "type": "ended",
+          "ended": true,
+          "time": 6049.204999983311,
+          "trusted": true
+        }
+      ]
+    },
+    {
+      "label": "FFA 28",
+      "from": "aftermath_soundtrack/track26.opus",
+      "to": "original_soundtrack/track3.opus",
+      "audio": 28,
+      "order": [
+        {
+          "type": "loadedmetadata",
+          "ended": false,
+          "time": 6083,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 6091.4749999940395,
+          "trusted": true
+        },
+        {
+          "type": "seeked",
+          "ended": false,
+          "time": 6128.310000002384,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 6128.319999992847,
+          "trusted": true
+        },
+        {
+          "type": "pause",
+          "ended": true,
+          "time": 6239.335000008345,
+          "trusted": true
+        },
+        {
+          "type": "ended",
+          "ended": true,
+          "time": 6239.354999989271,
+          "trusted": true
+        }
+      ]
+    },
+    {
+      "label": "FFA 29",
+      "from": "original_soundtrack/track3.opus",
+      "to": "legacy_soundtrack/track8.opus",
+      "audio": 29,
+      "order": [
+        {
+          "type": "loadedmetadata",
+          "ended": false,
+          "time": 6257.469999998808,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 6266.310000002384,
+          "trusted": true
+        },
+        {
+          "type": "seeked",
+          "ended": false,
+          "time": 6312.504999995232,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 6312.509999990463,
+          "trusted": true
+        },
+        {
+          "type": "pause",
+          "ended": true,
+          "time": 6419.389999985695,
+          "trusted": true
+        },
+        {
+          "type": "ended",
+          "ended": true,
+          "time": 6419.405000001192,
+          "trusted": true
+        }
+      ]
+    },
+    {
+      "label": "FFA 30",
+      "from": "legacy_soundtrack/track8.opus",
+      "to": "aftermath_soundtrack/track3_enhanced.opus",
+      "audio": 30,
+      "order": [
+        {
+          "type": "loadedmetadata",
+          "ended": false,
+          "time": 6443.949999988079,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 6452.9000000059605,
+          "trusted": true
+        },
+        {
+          "type": "seeked",
+          "ended": false,
+          "time": 6495.3499999940395,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 6495.359999984503,
+          "trusted": true
+        },
+        {
+          "type": "pause",
+          "ended": true,
+          "time": 6609.550000011921,
+          "trusted": true
+        },
+        {
+          "type": "ended",
+          "ended": true,
+          "time": 6609.564999997616,
+          "trusted": true
+        }
+      ]
+    },
+    {
+      "label": "FFA 31",
+      "from": "aftermath_soundtrack/track3_enhanced.opus",
+      "to": "reclamation_soundtrack/LM_Reclamation_06.opus",
+      "audio": 31,
+      "order": [
+        {
+          "type": "loadedmetadata",
+          "ended": false,
+          "time": 6627.164999991655,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 6634.954999983311,
+          "trusted": true
+        },
+        {
+          "type": "seeked",
+          "ended": false,
+          "time": 6679.550000011921,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 6679.564999997616,
+          "trusted": true
+        },
+        {
+          "type": "pause",
+          "ended": true,
+          "time": 6789.240000009537,
+          "trusted": true
+        },
+        {
+          "type": "ended",
+          "ended": true,
+          "time": 6789.259999990463,
+          "trusted": true
+        }
+      ]
+    },
+    {
+      "label": "FFA 32",
+      "from": "reclamation_soundtrack/LM_Reclamation_06.opus",
+      "to": "legacy_soundtrack/track13.opus",
+      "audio": 32,
+      "order": [
+        {
+          "type": "loadedmetadata",
+          "ended": false,
+          "time": 6809.590000003576,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 6817.780000001192,
+          "trusted": true
+        },
+        {
+          "type": "seeked",
+          "ended": false,
+          "time": 6863.875,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 6863.884999990463,
+          "trusted": true
+        },
+        {
+          "type": "pause",
+          "ended": true,
+          "time": 6969.365000009537,
+          "trusted": true
+        },
+        {
+          "type": "ended",
+          "ended": true,
+          "time": 6969.384999990463,
+          "trusted": true
+        }
+      ]
+    },
+    {
+      "label": "FFA 33",
+      "from": "legacy_soundtrack/track13.opus",
+      "to": "aftermath_soundtrack/menu_enhanced.opus",
+      "audio": 33,
+      "order": [
+        {
+          "type": "loadedmetadata",
+          "ended": false,
+          "time": 6995.620000004768,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 7004.215000003576,
+          "trusted": true
+        },
+        {
+          "type": "seeked",
+          "ended": false,
+          "time": 7035.139999985695,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 7035.1500000059605,
+          "trusted": true
+        },
+        {
+          "type": "pause",
+          "ended": true,
+          "time": 7139.439999997616,
+          "trusted": true
+        },
+        {
+          "type": "ended",
+          "ended": true,
+          "time": 7139.465000003576,
+          "trusted": true
+        }
+      ]
+    },
+    {
+      "label": "FFA 34",
+      "from": "aftermath_soundtrack/menu_enhanced.opus",
+      "to": "aftermath_soundtrack/track24.opus",
+      "audio": 34,
+      "order": [
+        {
+          "type": "loadedmetadata",
+          "ended": false,
+          "time": 7173.590000003576,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 7181.824999988079,
+          "trusted": true
+        },
+        {
+          "type": "seeked",
+          "ended": false,
+          "time": 7205.819999992847,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 7205.829999983311,
+          "trusted": true
+        },
+        {
+          "type": "pause",
+          "ended": true,
+          "time": 7309.354999989271,
+          "trusted": true
+        },
+        {
+          "type": "ended",
+          "ended": true,
+          "time": 7309.384999990463,
+          "trusted": true
+        }
+      ]
+    },
+    {
+      "label": "FFA 35",
+      "from": "aftermath_soundtrack/track24.opus",
+      "to": "aftermath_soundtrack/track21.opus",
+      "audio": 35,
+      "order": [
+        {
+          "type": "loadedmetadata",
+          "ended": false,
+          "time": 7337.879999995232,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 7346.044999986887,
+          "trusted": true
+        },
+        {
+          "type": "seeked",
+          "ended": false,
+          "time": 7376.800000011921,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 7376.805000007153,
+          "trusted": true
+        },
+        {
+          "type": "pause",
+          "ended": true,
+          "time": 7479.289999991655,
+          "trusted": true
+        },
+        {
+          "type": "ended",
+          "ended": true,
+          "time": 7479.310000002384,
+          "trusted": true
+        }
+      ]
+    },
+    {
+      "label": "FFA 36",
+      "from": "aftermath_soundtrack/track21.opus",
+      "to": "aftermath_soundtrack/track19.opus",
+      "audio": 36,
+      "order": [
+        {
+          "type": "loadedmetadata",
+          "ended": false,
+          "time": 7510.914999991655,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 7519.219999998808,
+          "trusted": true
+        },
+        {
+          "type": "seeked",
+          "ended": false,
+          "time": 7546.810000002384,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 7546.824999988079,
+          "trusted": true
+        },
+        {
+          "type": "pause",
+          "ended": true,
+          "time": 7649.240000009537,
+          "trusted": true
+        },
+        {
+          "type": "ended",
+          "ended": true,
+          "time": 7649.264999985695,
+          "trusted": true
+        }
+      ]
+    },
+    {
+      "label": "FFA 37",
+      "from": "aftermath_soundtrack/track19.opus",
+      "to": "legacy_soundtrack/track15.opus",
+      "audio": 37,
+      "order": [
+        {
+          "type": "loadedmetadata",
+          "ended": false,
+          "time": 7671.425000011921,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 7679.379999995232,
+          "trusted": true
+        },
+        {
+          "type": "seeked",
+          "ended": false,
+          "time": 7720.289999991655,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 7720.294999986887,
+          "trusted": true
+        },
+        {
+          "type": "pause",
+          "ended": true,
+          "time": 7829.289999991655,
+          "trusted": true
+        },
+        {
+          "type": "ended",
+          "ended": true,
+          "time": 7829.305000007153,
+          "trusted": true
+        }
+      ]
+    },
+    {
+      "label": "FFA 38",
+      "from": "legacy_soundtrack/track15.opus",
+      "to": "reclamation_soundtrack/LM_Reclamation_07.opus",
+      "audio": 38,
+      "order": [
+        {
+          "type": "loadedmetadata",
+          "ended": false,
+          "time": 7853.185000002384,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 7862.539999991655,
+          "trusted": true
+        },
+        {
+          "type": "seeked",
+          "ended": false,
+          "time": 7909.530000001192,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 7909.539999991655,
+          "trusted": true
+        },
+        {
+          "type": "pause",
+          "ended": true,
+          "time": 8009.329999983311,
+          "trusted": true
+        },
+        {
+          "type": "ended",
+          "ended": true,
+          "time": 8009.344999998808,
+          "trusted": true
+        }
+      ]
+    },
+    {
+      "label": "FFA 39",
+      "from": "reclamation_soundtrack/LM_Reclamation_07.opus",
+      "to": "aftermath_soundtrack/track21.opus",
+      "audio": 39,
+      "order": [
+        {
+          "type": "loadedmetadata",
+          "ended": false,
+          "time": 8041.854999989271,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 8052.090000003576,
+          "trusted": true
+        },
+        {
+          "type": "seeked",
+          "ended": false,
+          "time": 8116.534999996424,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 8116.550000011921,
+          "trusted": true
+        },
+        {
+          "type": "pause",
+          "ended": true,
+          "time": 8229.430000007153,
+          "trusted": true
+        },
+        {
+          "type": "ended",
+          "ended": true,
+          "time": 8229.45499998331,
+          "trusted": true
+        }
+      ]
+    },
+    {
+      "label": "Campaign 1",
+      "from": "original_soundtrack/track2.opus",
+      "to": "original_soundtrack/track3.opus",
+      "audio": 1,
+      "order": [
+        {
+          "type": "loadedmetadata",
+          "ended": false,
+          "time": 79.0499999821186,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 89.9699999988079,
+          "trusted": true
+        },
+        {
+          "type": "seeked",
+          "ended": false,
+          "time": 112.9699999988079,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 112.98499998450279,
+          "trusted": true
+        },
+        {
+          "type": "pause",
+          "ended": true,
+          "time": 226.59999999403954,
+          "trusted": true
+        },
+        {
+          "type": "ended",
+          "ended": true,
+          "time": 226.6449999809265,
+          "trusted": true
+        }
+      ]
+    },
+    {
+      "label": "Campaign 2",
+      "from": "original_soundtrack/track3.opus",
+      "to": "original_soundtrack/track1.opus",
+      "audio": 2,
+      "order": [
+        {
+          "type": "loadedmetadata",
+          "ended": false,
+          "time": 247.23999997973442,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 256.78999999165535,
+          "trusted": true
+        },
+        {
+          "type": "seeked",
+          "ended": false,
+          "time": 299.96499997377396,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 300,
+          "trusted": true
+        },
+        {
+          "type": "pause",
+          "ended": true,
+          "time": 406.5049999952316,
+          "trusted": true
+        },
+        {
+          "type": "ended",
+          "ended": true,
+          "time": 406.5349999964237,
+          "trusted": true
+        }
+      ]
+    },
+    {
+      "label": "Campaign 3",
+      "from": "original_soundtrack/track1.opus",
+      "to": "original_soundtrack/track2.opus",
+      "audio": 3,
+      "order": [
+        {
+          "type": "loadedmetadata",
+          "ended": false,
+          "time": 432.625,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 442.32499998807907,
+          "trusted": true
+        },
+        {
+          "type": "seeked",
+          "ended": false,
+          "time": 470.375,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 470.3799999952316,
+          "trusted": true
+        },
+        {
+          "type": "pause",
+          "ended": true,
+          "time": 576.4799999892712,
+          "trusted": true
+        },
+        {
+          "type": "ended",
+          "ended": true,
+          "time": 576.494999974966,
+          "trusted": true
+        }
+      ]
+    },
+    {
+      "label": "Campaign 4",
+      "from": "original_soundtrack/track2.opus",
+      "to": "original_soundtrack/track3.opus",
+      "audio": 4,
+      "order": [
+        {
+          "type": "loadedmetadata",
+          "ended": false,
+          "time": 604.119999974966,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 633.3199999928474,
+          "trusted": true
+        },
+        {
+          "type": "seeked",
+          "ended": false,
+          "time": 645.6349999904633,
+          "trusted": true
+        },
+        {
+          "type": "playing",
+          "ended": false,
+          "time": 645.6499999761581,
+          "trusted": true
+        },
+        {
+          "type": "pause",
+          "ended": true,
+          "time": 746.4799999892712,
+          "trusted": true
+        },
+        {
+          "type": "ended",
+          "ended": true,
+          "time": 746.5,
+          "trusted": true
+        }
+      ]
+    }
+  ],
+  "streams": [
+    {
+      "id": "reclamation_soundtrack/LM_Reclamation_03.opus",
+      "start": 91052835,
+      "end": 93195366,
+      "expectedSHA256": "7559f24722e64b5789b4cfca69df92c4806dbf44f4b80fb605bc4a588bd68672",
+      "bytes": 2142531,
+      "complete": true,
+      "rangeRequested": false,
+      "sha256": "7559f24722e64b5789b4cfca69df92c4806dbf44f4b80fb605bc4a588bd68672"
+    },
+    {
+      "id": "aftermath_soundtrack/track25.opus",
+      "start": 30940122,
+      "end": 34406237,
+      "expectedSHA256": "c451881f63c1ef57f3d7961894b5ab44089a8d3d41c298923454f30fc4b4d6f9",
+      "bytes": 3466115,
+      "complete": true,
+      "rangeRequested": false,
+      "sha256": "c451881f63c1ef57f3d7961894b5ab44089a8d3d41c298923454f30fc4b4d6f9"
+    },
+    {
+      "id": "legacy_soundtrack/track6.opus",
+      "start": 69028957,
+      "end": 70927329,
+      "expectedSHA256": "cff41a827be0b00d16466811b1252c4cee464a8b07ad77fae44dea788d86495b",
+      "bytes": 1898372,
+      "complete": true,
+      "rangeRequested": false,
+      "sha256": "cff41a827be0b00d16466811b1252c4cee464a8b07ad77fae44dea788d86495b"
+    },
+    {
+      "id": "legacy_soundtrack/track12.opus",
+      "start": 50488072,
+      "end": 52862058,
+      "expectedSHA256": "776d3c0ee0bb0f4ff648aec099a7571aad359574971f4a8568155f024873ea4e",
+      "bytes": 2373986,
+      "complete": true,
+      "rangeRequested": false,
+      "sha256": "776d3c0ee0bb0f4ff648aec099a7571aad359574971f4a8568155f024873ea4e"
+    },
+    {
+      "id": "reclamation_soundtrack/LM_Reclamation_04.opus",
+      "start": 93195366,
+      "end": 95875968,
+      "expectedSHA256": "d091e4b529fe42f9b52bf2da7506e7ad1540909a0e7f5c7702d7785415581f9b",
+      "bytes": 2680602,
+      "complete": true,
+      "rangeRequested": false,
+      "sha256": "d091e4b529fe42f9b52bf2da7506e7ad1540909a0e7f5c7702d7785415581f9b"
+    },
+    {
+      "id": "aftermath_soundtrack/track23.opus",
+      "start": 23359856,
+      "end": 27728679,
+      "expectedSHA256": "3275e1a81b01e968f84992ed00d637ec6b98e21a6f6aa7c662fde5c0e00100a2",
+      "bytes": 4368823,
+      "complete": true,
+      "rangeRequested": false,
+      "sha256": "3275e1a81b01e968f84992ed00d637ec6b98e21a6f6aa7c662fde5c0e00100a2"
+    },
+    {
+      "id": "aftermath_soundtrack/track20.opus",
+      "start": 12553399,
+      "end": 16064281,
+      "expectedSHA256": "14022d68a5805033ec8a36f733d86defed4e03b3c649c85132c66c848f9ea34b",
+      "bytes": 3510882,
+      "complete": true,
+      "rangeRequested": false,
+      "sha256": "14022d68a5805033ec8a36f733d86defed4e03b3c649c85132c66c848f9ea34b"
+    },
+    {
+      "id": "aftermath_soundtrack/track18.opus",
+      "start": 6724968,
+      "end": 10443105,
+      "expectedSHA256": "9c4d6ab6294e050d10f4a04bc9ba596c652b5b0f03eb9e83db0a27f8c83ef44d",
+      "bytes": 3718137,
+      "complete": true,
+      "rangeRequested": false,
+      "sha256": "9c4d6ab6294e050d10f4a04bc9ba596c652b5b0f03eb9e83db0a27f8c83ef44d"
+    },
+    {
+      "id": "aftermath_soundtrack/track27.opus",
+      "start": 39396926,
+      "end": 41919670,
+      "expectedSHA256": "27dcc84dd541d1c64c6322e26ea6d6a39c715cd307da1d8a59bebd6b61f78b8a",
+      "bytes": 2522744,
+      "complete": true,
+      "rangeRequested": false,
+      "sha256": "27dcc84dd541d1c64c6322e26ea6d6a39c715cd307da1d8a59bebd6b61f78b8a"
+    },
+    {
+      "id": "aftermath_soundtrack/track17.opus",
+      "start": 3864410,
+      "end": 6724968,
+      "expectedSHA256": "878f44ac1bcce05862b53f597fd9da7e45ff15daf8664affefcc99a56d023166",
+      "bytes": 2860558,
+      "complete": true,
+      "rangeRequested": false,
+      "sha256": "878f44ac1bcce05862b53f597fd9da7e45ff15daf8664affefcc99a56d023166"
+    },
+    {
+      "id": "legacy_soundtrack/track10.opus",
+      "start": 43757564,
+      "end": 48189095,
+      "expectedSHA256": "0bc55937502b6d8933985de8883649833ad8a83350f126b9d7dc782c8895e807",
+      "bytes": 4431531,
+      "complete": true,
+      "rangeRequested": false,
+      "sha256": "0bc55937502b6d8933985de8883649833ad8a83350f126b9d7dc782c8895e807"
+    },
+    {
+      "id": "reclamation_soundtrack/LM_Reclamation_05.opus",
+      "start": 95875968,
+      "end": 98794787,
+      "expectedSHA256": "a56082431ecd6831d59c3dfb4fab889d145c36515bb5d3cbed6ef78e781a56ee",
+      "bytes": 2918819,
+      "complete": true,
+      "rangeRequested": false,
+      "sha256": "a56082431ecd6831d59c3dfb4fab889d145c36515bb5d3cbed6ef78e781a56ee"
+    },
+    {
+      "id": "original_soundtrack/track1.opus",
+      "start": 79193400,
+      "end": 81612024,
+      "expectedSHA256": "8d5ad61a36a7cc2fde1815fb8b4b589e067df7ce8a1a100876c1286ff12718ca",
+      "bytes": 2418624,
+      "complete": true,
+      "rangeRequested": false,
+      "sha256": "8d5ad61a36a7cc2fde1815fb8b4b589e067df7ce8a1a100876c1286ff12718ca"
+    },
+    {
+      "id": "aftermath_soundtrack/track22.opus",
+      "start": 19829618,
+      "end": 23359856,
+      "expectedSHA256": "084c5266bf80ce8ae43d6bbd40bc3b3efd5b50a692249433ebb2ca5a440754a6",
+      "bytes": 3530238,
+      "complete": true,
+      "rangeRequested": false,
+      "sha256": "084c5266bf80ce8ae43d6bbd40bc3b3efd5b50a692249433ebb2ca5a440754a6"
+    },
+    {
+      "id": "legacy_soundtrack/track9.opus",
+      "start": 76178115,
+      "end": 79128860,
+      "expectedSHA256": "d4e80979f131556dd52af80157c9f9e90758193e4a63aed9ca8f81a367ee241e",
+      "bytes": 2950745,
+      "complete": true,
+      "rangeRequested": false,
+      "sha256": "d4e80979f131556dd52af80157c9f9e90758193e4a63aed9ca8f81a367ee241e"
+    },
+    {
+      "id": "reclamation_soundtrack/LM_Reclamation_09.opus",
+      "start": 107573551,
+      "end": 110252588,
+      "expectedSHA256": "96808827976115dd77f299767f10cf29781ce4b3cb36cd0a12a40612cca3ae9a",
+      "bytes": 2679037,
+      "complete": true,
+      "rangeRequested": false,
+      "sha256": "96808827976115dd77f299767f10cf29781ce4b3cb36cd0a12a40612cca3ae9a"
+    },
+    {
+      "id": "legacy_soundtrack/track5.opus",
+      "start": 66572482,
+      "end": 69028957,
+      "expectedSHA256": "67637923ba732c86163d3549c4c10d7be6f8b89a31ee6b1a911c2971a2a19836",
+      "bytes": 2456475,
+      "complete": true,
+      "rangeRequested": false,
+      "sha256": "67637923ba732c86163d3549c4c10d7be6f8b89a31ee6b1a911c2971a2a19836"
+    },
+    {
+      "id": "reclamation_soundtrack/LM_Reclamation_08.opus",
+      "start": 104644748,
+      "end": 107573551,
+      "expectedSHA256": "07799f9a86676e72127338557aa69af9ce89f2d8af637287e3e777162691dc90",
+      "bytes": 2928803,
+      "complete": true,
+      "rangeRequested": false,
+      "sha256": "07799f9a86676e72127338557aa69af9ce89f2d8af637287e3e777162691dc90"
+    },
+    {
+      "id": "legacy_soundtrack/track14.opus",
+      "start": 55427540,
+      "end": 57589116,
+      "expectedSHA256": "61ffe9d2e1ff8bc06406dcabff1679d033d16cf30c5cef9676612efabd8c959d",
+      "bytes": 2161576,
+      "complete": true,
+      "rangeRequested": false,
+      "sha256": "61ffe9d2e1ff8bc06406dcabff1679d033d16cf30c5cef9676612efabd8c959d"
+    },
+    {
+      "id": "reclamation_soundtrack/LM_Reclamation_10.opus",
+      "start": 110252588,
+      "end": 113451431,
+      "expectedSHA256": "3f5a6b6c3ab7817735680a89dba5f50143cd7f00c9f7281ff48a7d3fea83d777",
+      "bytes": 3198843,
+      "complete": true,
+      "rangeRequested": false,
+      "sha256": "3f5a6b6c3ab7817735680a89dba5f50143cd7f00c9f7281ff48a7d3fea83d777"
+    },
+    {
+      "id": "reclamation_soundtrack/LM_Reclamation_02.opus",
+      "start": 88502611,
+      "end": 91052835,
+      "expectedSHA256": "5ff11d87c24ef6740d9a3c5ecbab551bb1a6b534c92c6138ad2d76b45f7753f0",
+      "bytes": 2550224,
+      "complete": true,
+      "rangeRequested": false,
+      "sha256": "5ff11d87c24ef6740d9a3c5ecbab551bb1a6b534c92c6138ad2d76b45f7753f0"
+    },
+    {
+      "id": "legacy_soundtrack/track4.opus",
+      "start": 62703320,
+      "end": 66572482,
+      "expectedSHA256": "0ad2dbd5c0bfbff001f15fc1d614d7d42b92e1370788aa5c516d6513561ba35c",
+      "bytes": 3869162,
+      "complete": true,
+      "rangeRequested": false,
+      "sha256": "0ad2dbd5c0bfbff001f15fc1d614d7d42b92e1370788aa5c516d6513561ba35c"
+    },
+    {
+      "id": "legacy_soundtrack/track7.opus",
+      "start": 70927329,
+      "end": 73769658,
+      "expectedSHA256": "95d8ba6409cfb8d97e714da43a8ce9fe69fdf1edbd550be9efc57cf82e169b1e",
+      "bytes": 2842329,
+      "complete": true,
+      "rangeRequested": false,
+      "sha256": "95d8ba6409cfb8d97e714da43a8ce9fe69fdf1edbd550be9efc57cf82e169b1e"
+    },
+    {
+      "id": "legacy_soundtrack/track11.opus",
+      "start": 48189095,
+      "end": 50488072,
+      "expectedSHA256": "93ff9b979ce023b43d4442427a1828782bcf35b529eb3d9493ee13fa6af809ae",
+      "bytes": 2298977,
+      "complete": true,
+      "rangeRequested": false,
+      "sha256": "93ff9b979ce023b43d4442427a1828782bcf35b529eb3d9493ee13fa6af809ae"
+    },
+    {
+      "id": "legacy_soundtrack/track16.opus",
+      "start": 59738373,
+      "end": 62703320,
+      "expectedSHA256": "eb14c9e9da334680fcba1e2fc40170ec3da8da6a89e4753e40c92e9977d9adcc",
+      "bytes": 2964947,
+      "complete": true,
+      "rangeRequested": false,
+      "sha256": "eb14c9e9da334680fcba1e2fc40170ec3da8da6a89e4753e40c92e9977d9adcc"
+    },
+    {
+      "id": "original_soundtrack/track2.opus",
+      "start": 81612024,
+      "end": 84517358,
+      "expectedSHA256": "512ac3c83ed53a66e82ed69e4856cde203be35ae9daf0bdc08b21e9dd2a6850d",
+      "bytes": 2905334,
+      "complete": true,
+      "rangeRequested": false,
+      "sha256": "512ac3c83ed53a66e82ed69e4856cde203be35ae9daf0bdc08b21e9dd2a6850d"
+    },
+    {
+      "id": "reclamation_soundtrack/LM_Reclamation_01.opus",
+      "start": 86264647,
+      "end": 88502611,
+      "expectedSHA256": "b011e4ee1a034a589c93b0d372ce77ae7f8ed8b2b83cf2c2418f95641f50989d",
+      "bytes": 2237964,
+      "complete": true,
+      "rangeRequested": false,
+      "sha256": "b011e4ee1a034a589c93b0d372ce77ae7f8ed8b2b83cf2c2418f95641f50989d"
+    },
+    {
+      "id": "aftermath_soundtrack/track26.opus",
+      "start": 34406237,
+      "end": 39396926,
+      "expectedSHA256": "1c2a5b3c29e293a0456d296e4e7f6600ae1832daecd932c3db5dbf4feafccb38",
+      "bytes": 4990689,
+      "complete": true,
+      "rangeRequested": false,
+      "sha256": "1c2a5b3c29e293a0456d296e4e7f6600ae1832daecd932c3db5dbf4feafccb38"
+    },
+    {
+      "id": "original_soundtrack/track3.opus",
+      "start": 84517358,
+      "end": 86264647,
+      "expectedSHA256": "54d3c08027c06e947712725c8ad3bbebaf79d696f50d9bc97c87e83f2bcb30d7",
+      "bytes": 1747289,
+      "complete": true,
+      "rangeRequested": false,
+      "sha256": "54d3c08027c06e947712725c8ad3bbebaf79d696f50d9bc97c87e83f2bcb30d7"
+    },
+    {
+      "id": "legacy_soundtrack/track8.opus",
+      "start": 73769658,
+      "end": 76178115,
+      "expectedSHA256": "2faff0ef1f4c937b3cec42e843eeafc1188c7a19dae9bc16facbb356e95a48e7",
+      "bytes": 2408457,
+      "complete": true,
+      "rangeRequested": false,
+      "sha256": "2faff0ef1f4c937b3cec42e843eeafc1188c7a19dae9bc16facbb356e95a48e7"
+    },
+    {
+      "id": "aftermath_soundtrack/track3_enhanced.opus",
+      "start": 41919670,
+      "end": 43668276,
+      "expectedSHA256": "a8837fe39a36cc1f8649061a59664e6d006d5e4f025259287b8d4f31d79030ad",
+      "bytes": 1748606,
+      "complete": true,
+      "rangeRequested": false,
+      "sha256": "a8837fe39a36cc1f8649061a59664e6d006d5e4f025259287b8d4f31d79030ad"
+    },
+    {
+      "id": "reclamation_soundtrack/LM_Reclamation_06.opus",
+      "start": 98794787,
+      "end": 101035261,
+      "expectedSHA256": "7e9c68712339afaeaf7c3bfada631eda53bfac56317c52578054c73ee17deadd",
+      "bytes": 2240474,
+      "complete": true,
+      "rangeRequested": false,
+      "sha256": "7e9c68712339afaeaf7c3bfada631eda53bfac56317c52578054c73ee17deadd"
+    },
+    {
+      "id": "legacy_soundtrack/track13.opus",
+      "start": 52862058,
+      "end": 55427540,
+      "expectedSHA256": "b65dd40908de8aa17e64894f491507d65213a97e669905154f805fdbfc8bb6d0",
+      "bytes": 2565482,
+      "complete": true,
+      "rangeRequested": false,
+      "sha256": "b65dd40908de8aa17e64894f491507d65213a97e669905154f805fdbfc8bb6d0"
+    },
+    {
+      "id": "aftermath_soundtrack/menu_enhanced.opus",
+      "start": 106904,
+      "end": 3864410,
+      "expectedSHA256": "a9d5cb75073ec1e3efaeb233990cd5872b5106cc4032e4c21f1e102e9c97b92c",
+      "bytes": 3757506,
+      "complete": true,
+      "rangeRequested": false,
+      "sha256": "a9d5cb75073ec1e3efaeb233990cd5872b5106cc4032e4c21f1e102e9c97b92c"
+    },
+    {
+      "id": "aftermath_soundtrack/track24.opus",
+      "start": 27728679,
+      "end": 30940122,
+      "expectedSHA256": "aa00d6ea7799b61f18c8fbda13bc5053b50f5c804bb91df65d0d49cc908d88fe",
+      "bytes": 3211443,
+      "complete": true,
+      "rangeRequested": false,
+      "sha256": "aa00d6ea7799b61f18c8fbda13bc5053b50f5c804bb91df65d0d49cc908d88fe"
+    },
+    {
+      "id": "aftermath_soundtrack/track21.opus",
+      "start": 16064281,
+      "end": 19829618,
+      "expectedSHA256": "30c7066e4031a594ec2ed726442c15dded46fc605d4e07eaac0e363918541762",
+      "bytes": 3765337,
+      "complete": true,
+      "rangeRequested": false,
+      "sha256": "30c7066e4031a594ec2ed726442c15dded46fc605d4e07eaac0e363918541762"
+    },
+    {
+      "id": "aftermath_soundtrack/track19.opus",
+      "start": 10443105,
+      "end": 12553399,
+      "expectedSHA256": "cf7e609fc7d21cc12f7f8f4d8851c059b079f4ab068b687cd1e5989c2278dbde",
+      "bytes": 2110294,
+      "complete": true,
+      "rangeRequested": false,
+      "sha256": "cf7e609fc7d21cc12f7f8f4d8851c059b079f4ab068b687cd1e5989c2278dbde"
+    },
+    {
+      "id": "legacy_soundtrack/track15.opus",
+      "start": 57589116,
+      "end": 59738373,
+      "expectedSHA256": "a13c23162a7b5426494eb264b82e30ce85d7fa792a73f778b80aa1fad781f865",
+      "bytes": 2149257,
+      "complete": true,
+      "rangeRequested": false,
+      "sha256": "a13c23162a7b5426494eb264b82e30ce85d7fa792a73f778b80aa1fad781f865"
+    },
+    {
+      "id": "reclamation_soundtrack/LM_Reclamation_07.opus",
+      "start": 101035261,
+      "end": 104644748,
+      "expectedSHA256": "2f1c8d6055b553800f0b9844d15c35335db7fa0e48258664e10067c9987d1d28",
+      "bytes": 3609487,
+      "complete": true,
+      "rangeRequested": false,
+      "sha256": "2f1c8d6055b553800f0b9844d15c35335db7fa0e48258664e10067c9987d1d28"
+    },
+    {
+      "id": "aftermath_soundtrack/track21.opus",
+      "start": 16064281,
+      "end": 19829618,
+      "expectedSHA256": "30c7066e4031a594ec2ed726442c15dded46fc605d4e07eaac0e363918541762",
+      "bytes": 3765337,
+      "complete": true,
+      "rangeRequested": false,
+      "sha256": "30c7066e4031a594ec2ed726442c15dded46fc605d4e07eaac0e363918541762"
+    },
+    {
+      "id": "aftermath_soundtrack/track21.opus",
+      "start": 16064281,
+      "end": 19829618,
+      "expectedSHA256": "30c7066e4031a594ec2ed726442c15dded46fc605d4e07eaac0e363918541762",
+      "bytes": 3765337,
+      "complete": true,
+      "rangeRequested": false,
+      "sha256": "30c7066e4031a594ec2ed726442c15dded46fc605d4e07eaac0e363918541762"
+    },
+    {
+      "id": "original_soundtrack/track2.opus",
+      "start": 81612024,
+      "end": 84517358,
+      "expectedSHA256": "512ac3c83ed53a66e82ed69e4856cde203be35ae9daf0bdc08b21e9dd2a6850d",
+      "bytes": 2905334,
+      "complete": true,
+      "rangeRequested": false,
+      "sha256": "512ac3c83ed53a66e82ed69e4856cde203be35ae9daf0bdc08b21e9dd2a6850d"
+    },
+    {
+      "id": "original_soundtrack/track3.opus",
+      "start": 84517358,
+      "end": 86264647,
+      "expectedSHA256": "54d3c08027c06e947712725c8ad3bbebaf79d696f50d9bc97c87e83f2bcb30d7",
+      "bytes": 1747289,
+      "complete": true,
+      "rangeRequested": false,
+      "sha256": "54d3c08027c06e947712725c8ad3bbebaf79d696f50d9bc97c87e83f2bcb30d7"
+    },
+    {
+      "id": "original_soundtrack/track1.opus",
+      "start": 79193400,
+      "end": 81612024,
+      "expectedSHA256": "8d5ad61a36a7cc2fde1815fb8b4b589e067df7ce8a1a100876c1286ff12718ca",
+      "bytes": 2418624,
+      "complete": true,
+      "rangeRequested": false,
+      "sha256": "8d5ad61a36a7cc2fde1815fb8b4b589e067df7ce8a1a100876c1286ff12718ca"
+    },
+    {
+      "id": "original_soundtrack/track2.opus",
+      "start": 81612024,
+      "end": 84517358,
+      "expectedSHA256": "512ac3c83ed53a66e82ed69e4856cde203be35ae9daf0bdc08b21e9dd2a6850d",
+      "bytes": 2905334,
+      "complete": true,
+      "rangeRequested": false,
+      "sha256": "512ac3c83ed53a66e82ed69e4856cde203be35ae9daf0bdc08b21e9dd2a6850d"
+    },
+    {
+      "id": "original_soundtrack/track3.opus",
+      "start": 84517358,
+      "end": 86264647,
+      "expectedSHA256": "54d3c08027c06e947712725c8ad3bbebaf79d696f50d9bc97c87e83f2bcb30d7",
+      "bytes": 1747289,
+      "complete": true,
+      "rangeRequested": false,
+      "sha256": "54d3c08027c06e947712725c8ad3bbebaf79d696f50d9bc97c87e83f2bcb30d7"
+    }
+  ],
+  "exceptions": [],
+  "badResponses": [],
+  "externalRequests": [],
+  "elapsedSeconds": 10.107,
+  "sources": [
+    {
+      "path": "tools/check-music-browser-066.cjs",
+      "sha256": "e41f201a1879181d54a9b9f46dfa0482dfd7093dcca7dc1ed74c0676f4d17e43"
+    },
+    {
+      "path": "tools/check-guide-browser-066.cjs",
+      "sha256": "25ae83b565db417e44b7cce543ea8bb58e33b2df92ddb7986bca669540ffab29"
+    },
+    {
+      "path": "app/src/main/assets/warzone/music-loader.js",
+      "sha256": "f53e6bf3d898e546045937456e3c5bf1eafdc981573c1d6c670d9762fa03cc07"
+    },
+    {
+      "path": "app/src/main/assets/warzone/music-catalog.js",
+      "sha256": "e0d05a3033067c675cc5dfa37b2796a53e84b87a566519b4cae0d8256de5de5a"
+    },
+    {
+      "path": "app/src/main/assets/warzone/music-tracks.json",
+      "sha256": "e17fa70903ae9c5c8c065d434d1b5c29ab0ee1d2e07b091339c9a72478a4f601"
+    },
+    {
+      "path": "app/src/main/assets/warzone/music/music.data",
+      "sha256": "602ea6c69f4073a9617676a39f8397232953637a9b7a36e7cc28e93dd15184cd"
+    }
+  ],
+  "recordedUTC": "2026-11-13T00:15:42.219Z"
+}

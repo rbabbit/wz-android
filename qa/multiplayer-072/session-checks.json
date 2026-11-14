@@ -1,0 +1,62 @@
+{
+  "version": "0.72",
+  "passed": true,
+  "emulatorUsed": false,
+  "actualNativeEngineExecuted": false,
+  "scope": "Actual session/config JavaScript in bounded DOM and music-controller fixtures",
+  "checksPassed": 30,
+  "checks": [
+    "joining is opaque before engine creation and ordinary socket/acceptance do not reveal it",
+    "room requires both actual readiness and a rendered frame",
+    "loading invalidates previous room/game readiness, including mode transition gap",
+    "autohost redirect re-covers and socket-open cannot hide joining cover",
+    "profile is saved before native start and invalid names cannot start an engine",
+    "Java Back cache is updated synchronously before native start and teardown, then cleared on pagehide",
+    "terminal error keeps full reason and app return tears down the engine",
+    "native leaving covers before teardown and never reveals stock frontend",
+    "repeated leaving frames cannot postpone return forever",
+    "pre-acceptance endpoint close leaves time for native fallback",
+    "native kick after socket close retains terminal multiline reason",
+    "power HUD uses actual native integers and updates spending, income and queued reservations",
+    "power HUD hides missing/fractional state and avoids footer/radar overlap",
+    "header shows only actual visible native timer and connection text and clears stale status",
+    "native status mount precedes Lobby and has bounded shrinking text without resizing the button",
+    "config seeds stock HUD settings and saved name without losing unrelated options",
+    "removed Home and Help nodes have no session lookup or command wiring",
+    "header Combat toggles persistent lock exactly once and leaves All Units as its own action",
+    "Combat highlight follows confirmed native state, including suspension and phase resets",
+    "command/page/build transitions and periodic chrome synchronization refresh Combat lock",
+    "native activation precedes music-token read and iframe URL, with a distinct token for the next join",
+    "invalid player names do not mint/read a music token or create an engine",
+    "Music commands are available only after an actual rendered game",
+    "soundtrack battle-active follows rendered game readiness and suspends in loading/room",
+    "Music opens the compact shared menu in the parent document and the second header press closes it",
+    "every non-music command closes the soundtrack menu without using native hotkeys",
+    "return and pagehide dispose soundtrack players and revoke native session before another game",
+    "native leaving and terminal join errors stop music before the delayed teardown",
+    "unavailable music controller stays recoverable and cannot change Combat or All Units",
+    "Music header/scripts and stock music-disable setting are isolated to Multiplayer"
+  ],
+  "sources": [
+    {
+      "path": "app/src/main/assets/multiplayer/session.js",
+      "sha256": "bdc9b954add00e987621338c45a6b68f70e0b9eba54b487dfa28a7fb1ffed7b2"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/index.html",
+      "sha256": "6958af01a81d340d34c967557a7a369cac38ac2fbcf48d20eec7d94139e2bc12"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/engine.html",
+      "sha256": "a76c316e90795b8fa27039e19b3547044927c043d516d4df9c622d401114f386"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/lobby-config.js",
+      "sha256": "56fd17126e5b8ed2d76718f3b3f04dc5e0b5e2a51d0f74422e91e393f8e6064e"
+    },
+    {
+      "path": "tools/test-multiplayer-session-072.cjs",
+      "sha256": "d082d155fce4a027216336c6e9574e68ffebd0ee9b653c856bf879de0fb09b84"
+    }
+  ]
+}

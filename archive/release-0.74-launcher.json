@@ -1,0 +1,151 @@
+{
+  "version": "0.74",
+  "versionCode": 74,
+  "candidateAPK_SHA256": "dbbd13e63a1281d17723e7c47881fde22d608701fb43942a0466c7e3ef1f269e",
+  "scope": "Approved compact native Home and FFA setup layout only, including retained mode destinations and map controls. User requested no emulator testing. All assets, other Java, game code and native clients frozen.",
+  "exactAPKVerification": {
+    "evidence": {
+      "path": "qa/launcher-074/verification.json",
+      "bytes": 143589,
+      "sha256": "271f2f72dafa616058d942c27dd39cb098a77ecdf3562cae34244d2ff4a95939"
+    },
+    "buildLog": {
+      "path": "qa/launcher-074/build.log",
+      "bytes": 2477,
+      "sha256": "7c2d7d96b8a658bdb165f838d09d92f529d9bd9943b59c1682d280a259ce2c52"
+    },
+    "emulatorUsed": false,
+    "emulatorOmittedAtUserRequest": true,
+    "androidGameplayVerified": false,
+    "actualAndroidViewsExecuted": false,
+    "offlineHostChecksPassed": true,
+    "buildChecksPassed": true,
+    "offlineFixtureEvidence": [
+      {
+        "path": "qa/launcher-074/layout-checks.json",
+        "bytes": 12463,
+        "sha256": "2366a97a53dd8bb2b1025d91334babd409f04a4ebd33d579be3840fd69002ce8"
+      }
+    ],
+    "checks": {
+      "homeLayout": true,
+      "homeDestinations": true,
+      "ffaLayout": true,
+      "ffaMapControls": true,
+      "compactFitAndTargets": true,
+      "successfulBuild": true
+    },
+    "verificationScope": "Actual pure Java Home/FFA layout helpers and host text/geometry/control fixtures, current native view source checks, and the exact successful APK build. No browser stand-in is treated as an Android screen.",
+    "limitations": [
+      "No emulator tests were run, as requested.",
+      "Host Java geometry and text fixtures do not verify actual Android view rendering, system insets, font rasterisation, physical touch, navigation or gameplay on a device."
+    ],
+    "pinnedCheckedSourceFiles": 706,
+    "layoutAssertions": 14
+  },
+  "fallback": {
+    "path": "qa/launcher-074/fallback-0.74.json",
+    "bytes": 409,
+    "sha256": "dce2957c2fb5e84036fab706c85c16001809fcfe4eb10f3c632bbb00d060d9c9"
+  },
+  "sourcePreservation": {
+    "changedBaselineSources": [
+      {
+        "path": "AGENTS.md",
+        "beforeSHA256": "7f0b58ba54c7eb5102e02fb36d57ce5cecb67b40245716805935a9f6f4513b9f",
+        "sha256": "3587aaeb99d48513e96dd4aa521e98afa5db6e02543956e4eed0ad55a5dfec51"
+      },
+      {
+        "path": "app/build.gradle.kts",
+        "beforeSHA256": "b4f109fb803946d4161318b7ba77d3ec573f5413e05ceecf359b6ebe700c8d39",
+        "sha256": "12e7902fbaa5dbfc943ec68de4974e94a22bc8a369c540bedc962a8078fd06ba"
+      },
+      {
+        "path": "app/src/main/java/com/rbabbit/blocknight/warzone/FfaSetupView.java",
+        "beforeSHA256": "e202fc71e5041eb55f2106e87caebd6a199bc2fb4340d6f29175522cd6648b1b",
+        "sha256": "dfa6d449df672dbab0e2dc062d08e2eb9ec95b9e16eb827b57c80769a4a3b898"
+      },
+      {
+        "path": "app/src/main/java/com/rbabbit/blocknight/warzone/HomeModesView.java",
+        "beforeSHA256": "52a34f18f332b09cba05fe32699b07dab31605951dd878c37c90d6add3f11bd8",
+        "sha256": "de5f280930b9bf587da8909e3962f9a643d6c6d7ba6b58ba8a5584a9fc81f204"
+      }
+    ],
+    "addedSources": [
+      "app/src/main/java/com/rbabbit/blocknight/warzone/FfaSetupLayout.java",
+      "app/src/main/java/com/rbabbit/blocknight/warzone/HomeMenuLayout.java",
+      "archive/release-0.74-launcher.json",
+      "qa/launcher-074/audit.md",
+      "qa/launcher-074/build.log",
+      "qa/launcher-074/fallback-0.74.json",
+      "qa/launcher-074/ffa-layout-checks.json",
+      "qa/launcher-074/home-layout.json",
+      "qa/launcher-074/layout-checks.json",
+      "qa/launcher-074/verification.json",
+      "tools/package-launcher-074.py",
+      "tools/record-launcher-074.py",
+      "tools/test-ffa-layout-074.cjs",
+      "tools/test-ffa-layout-074.java",
+      "tools/test-home-layout-074.java",
+      "tools/test-home-layout-074.py"
+    ],
+    "baselineSourceEntries": 12462,
+    "everyBaselineSourceEntryRetained": true,
+    "onlyNativeLauncherViewsChanged": true,
+    "everyAssetAndOtherJavaSourceFrozen": true,
+    "upstreamCommit": "7d3d8e51a61ceee89e6bf672a41337e1a9cd7392",
+    "protocol": [
+      16384,
+      104
+    ],
+    "nativeBuildPerformed": false,
+    "nativeCompiledClientReusedFromVersion": "0.71",
+    "sourceOverlayManifest": {
+      "path": "vendor/multiplayer/native-071/source-overlays.json",
+      "bytes": 1077,
+      "sha256": "e1489603363481f81c58bb04e4d34a84dbc9145543c4425c66b9688bfe32f598"
+    },
+    "completePatch": {
+      "path": "vendor/multiplayer/native-071/native-ui.patch",
+      "bytes": 46141,
+      "sha256": "b6c3c38267e1eb75e844ac412252ce11a7176f2fef8bc7f0f5146afb1f2148c1"
+    },
+    "nativeBuild": {
+      "path": "qa/multiplayer-071/native-build.json",
+      "bytes": 5069,
+      "sha256": "881e8100681511907c59f73ddccdf0c13207abeace0f7491f9d9415d908755d5"
+    },
+    "integration": {
+      "path": "vendor/multiplayer/native-071/runtime-integration.json",
+      "bytes": 1064,
+      "sha256": "5082fc268cc1c1840218461eb4005e94e00d055787adddd4c25a6d4783bcd525"
+    },
+    "portableNativeSourcesAndRawPairVerified": true,
+    "officialMPDataFrozen": true,
+    "wasmBinaryUnmodifiedAfterCompiler": true
+  },
+  "certificateSHA256": "4499efe00477c7c724c06a1dd96f935864548665c13ab5e2bd0a9c0f83f7cb15",
+  "changedAPKMembers": [
+    "AndroidManifest.xml",
+    "classes3.dex"
+  ],
+  "everyBaselineAPKMemberRetained": true,
+  "allAPKAssetsMatchSource": true,
+  "allAssetsResourcesAndNativeLibrariesFrozen": true,
+  "bundledMusicFrozen": true,
+  "compiledMultiplayerClientByteIdenticalTo073": true,
+  "livePhoneAdsAndEmulatorFallbackRetained": true,
+  "maximumAPKZipGapBytes": 4096,
+  "generatedBuildConfigSHA256": "a2f8c1f8824f58bb0704a6e873aa0aa9c7b5be9c216d3f9cf78971b186b0c4aa",
+  "nativeBuildPerformed": false,
+  "emulatorUsed": false,
+  "androidGameplayVerified": false,
+  "actualAndroidViewsExecuted": false,
+  "offlineHostChecksPassed": true,
+  "buildChecksPassed": true,
+  "packageChecksPassed": true,
+  "liveAdsTested": false,
+  "githubPublished": false,
+  "vpsChanged": false,
+  "recordedUTC": "2026-11-14T13:47:18.727712+00:00"
+}

@@ -1,0 +1,191 @@
+{
+  "version": "0.65",
+  "readOnly": true,
+  "actualHeadlessBrowser": true,
+  "emulatorUsed": false,
+  "parentHeaders": {
+    "Cross-Origin-Opener-Policy": "same-origin",
+    "Cross-Origin-Embedder-Policy": "require-corp",
+    "Cross-Origin-Resource-Policy": "same-origin",
+    "Document-Isolation-Policy": "isolate-and-require-corp"
+  },
+  "currentChildHeaders": {},
+  "controlChildHeaders": {
+    "Cross-Origin-Embedder-Policy": "require-corp"
+  },
+  "cases": [
+    {
+      "which": "current",
+      "parentIsolated": true,
+      "parentURL": "http://127.0.0.1:59232/parent-coep-current.html",
+      "iframeSource": "http://127.0.0.1:59232/assets/guide/index.html?embedded=1&mode=ffa",
+      "child": {
+        "accessible": false,
+        "error": "SecurityError: Failed to read a named property 'href' from 'Location': Blocked a frame with origin \"http://127.0.0.1:59232\" from accessing a cross-origin frame."
+      },
+      "blocked": [
+        {
+          "requestId": "8C05A393F128C2FF94590C8AAD579C3C",
+          "timestamp": 130258.546448,
+          "type": "Document",
+          "errorText": "net::ERR_BLOCKED_BY_RESPONSE",
+          "canceled": false,
+          "blockedReason": "coep-frame-resource-needs-coep-header"
+        }
+      ],
+      "frameTree": {
+        "frameTree": {
+          "frame": {
+            "id": "F059953330925AE87480B3B0443DD062",
+            "loaderId": "9E288ACA0BC77B553FB3A30F2FDF1E8C",
+            "url": "http://127.0.0.1:59232/parent-coep-current.html",
+            "domainAndRegistry": "",
+            "securityOrigin": "http://127.0.0.1:59232",
+            "securityOriginDetails": {
+              "isLocalhost": true
+            },
+            "mimeType": "text/html",
+            "adFrameStatus": {
+              "adFrameType": "none"
+            },
+            "secureContextType": "SecureLocalhost",
+            "crossOriginIsolatedContextType": "Isolated",
+            "gatedAPIFeatures": [
+              "SharedArrayBuffers",
+              "SharedArrayBuffersTransferAllowed"
+            ]
+          }
+        }
+      },
+      "targets": [
+        {
+          "targetId": "F692E6CD32C357C8472E0C093DAEBD3D",
+          "type": "iframe",
+          "title": "http://127.0.0.1:59232/assets/guide/index.html?embedded=1&mode=ffa",
+          "url": "http://127.0.0.1:59232/assets/guide/index.html?embedded=1&mode=ffa",
+          "attached": false,
+          "parentId": "F059953330925AE87480B3B0443DD062",
+          "canAccessOpener": false,
+          "parentFrameId": "F059953330925AE87480B3B0443DD062",
+          "browserContextId": "E7C3FE3D6B10CBA41612ED1A3D364954",
+          "pid": 0
+        }
+      ],
+      "childRuntime": {
+        "url": "chrome-error://chromewebdata/",
+        "title": "127.0.0.1",
+        "guide": false,
+        "heading": "\n            127.0.0.1 is blocked\n          ",
+        "isolated": false
+      },
+      "observationError": null
+    },
+    {
+      "which": "compatible",
+      "parentIsolated": true,
+      "parentURL": "http://127.0.0.1:59232/parent-coep-compatible.html",
+      "iframeSource": "http://127.0.0.1:59232/assets/guide/index.html?embedded=1&mode=ffa&coep-control=1",
+      "child": {
+        "accessible": false,
+        "error": "SecurityError: Failed to read a named property 'href' from 'Location': Blocked a frame with origin \"http://127.0.0.1:59232\" from accessing a cross-origin frame."
+      },
+      "blocked": [],
+      "frameTree": {
+        "frameTree": {
+          "frame": {
+            "id": "F059953330925AE87480B3B0443DD062",
+            "loaderId": "D2C649C2874F33753EB7FCAB09FFB954",
+            "url": "http://127.0.0.1:59232/parent-coep-compatible.html",
+            "domainAndRegistry": "",
+            "securityOrigin": "http://127.0.0.1:59232",
+            "securityOriginDetails": {
+              "isLocalhost": true
+            },
+            "mimeType": "text/html",
+            "adFrameStatus": {
+              "adFrameType": "none"
+            },
+            "secureContextType": "SecureLocalhost",
+            "crossOriginIsolatedContextType": "Isolated",
+            "gatedAPIFeatures": [
+              "SharedArrayBuffers",
+              "SharedArrayBuffersTransferAllowed"
+            ]
+          }
+        }
+      },
+      "targets": [
+        {
+          "targetId": "A8C9E0069B6BAAA7549F75536BBFE2ED",
+          "type": "iframe",
+          "title": "http://127.0.0.1:59232/assets/guide/index.html?embedded=1&mode=ffa&coep-control=1",
+          "url": "http://127.0.0.1:59232/assets/guide/index.html?embedded=1&mode=ffa&coep-control=1",
+          "attached": false,
+          "parentId": "F059953330925AE87480B3B0443DD062",
+          "canAccessOpener": false,
+          "parentFrameId": "F059953330925AE87480B3B0443DD062",
+          "browserContextId": "E7C3FE3D6B10CBA41612ED1A3D364954",
+          "pid": 0
+        }
+      ],
+      "childRuntime": {
+        "url": "http://127.0.0.1:59232/assets/guide/index.html?embedded=1&mode=ffa&coep-control=1",
+        "title": "Warzone field guide",
+        "guide": true,
+        "counts": {
+          "chapters": 10,
+          "pages": 44,
+          "topics": 390
+        },
+        "heading": "Research paths",
+        "isolated": true
+      },
+      "observationError": "Timed out: child Guide activation or observed response block"
+    }
+  ],
+  "logs": [],
+  "exceptions": [],
+  "badResponses": [],
+  "screenshots": [
+    {
+      "path": "qa/guide-065/headless-browser/guide-coep-current-child.png",
+      "sha256": "1737e550d0f183709d1cf6e1c3c26d39626b8b86a75731415b0a480f85bd3ff7"
+    },
+    {
+      "path": "qa/guide-065/headless-browser/guide-coep-compatible-child.png",
+      "sha256": "4db9887f7d78006af0ce058ccf80c2c48b295e178908731bf134d9f852eb571c"
+    }
+  ],
+  "fatal": null,
+  "sources": [
+    {
+      "path": "qa/guide-065/check-coep-embed.cjs",
+      "sha256": "093e78d93fc5057e0346a8702d7561bbc4c653a41cb43860481ccaaf73e08018"
+    },
+    {
+      "path": "tools/check-guide-browser-065.cjs",
+      "sha256": "af796f58a36e798889ceee9dcccf3104dc619cbe7b73642b3f1bb6229e58c8b6"
+    },
+    {
+      "path": "app/src/main/assets/guide/index.html",
+      "sha256": "686d530b03b42cfceb6a64e124eb6c4303088e5291068433772c05613c28e2e9"
+    },
+    {
+      "path": "app/src/main/assets/guide/guide.js",
+      "sha256": "fc615a7ad4815f1e2d602e7285db07a909a804ab73ea081073d9fa0460a11d10"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MainActivity.java",
+      "sha256": "8134895ac324f97dc2f0d1e02e2f90b2e6267a8ef109c2fa92d744e1ad5d7d65"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/GuideView.java",
+      "sha256": "c92169060ff2e4c26203730e50ef6e34e17c43ff867427ff9b1e4d2e439fa1f0"
+    },
+    {
+      "path": "app/src/main/assets/warzone-touch-controls.js",
+      "sha256": "41b29ca83611f482c699682b5d4495939080f604344ca835318574796854a8c3"
+    }
+  ],
+  "recordedUTC": "2026-11-12T21:35:03.708Z"
+}

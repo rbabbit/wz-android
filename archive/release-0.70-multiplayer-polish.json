@@ -1,0 +1,273 @@
+{
+  "version": "0.70",
+  "versionCode": 70,
+  "candidateAPK_SHA256": "6abfade38111f79d75dc578037106ff4baec3b6e771c8973a654e63b7a9ac553",
+  "scope": "Repair isolated public Multiplayer mobile menus, viewport, loading/return lifecycle, input and saved player identity; preserve existing modes.",
+  "exactAPKVerification": {
+    "evidence": {
+      "path": "qa/multiplayer-070/verification.json",
+      "bytes": 132015,
+      "sha256": "c4af91b9d7de590b418f5bea7c488d8c03b1e1a404e7e5573c7535a3dda6ed09"
+    },
+    "buildLog": {
+      "path": "qa/multiplayer-070/build.log",
+      "bytes": 2477,
+      "sha256": "8b62ba14a3d10f67073e40fc070efe387c27b21cfdc362f9ea7b66daf3caeec9"
+    },
+    "emulatorUsed": true,
+    "checks": {
+      "exactDeliveryAPK": true,
+      "loadingLobbyAndTransfers": true,
+      "savedPlayerName": true,
+      "compactLayouts": true,
+      "customMenusAndOrders": true,
+      "selectionAndCamera": true,
+      "leaveAndRejoin": true,
+      "existingModeNavigation": true
+    },
+    "verificationScope": "Exact installed delivery APK; live public 1 vs AI Bots Battle room, both Ready stages and transfer, custom menus/orders, real queues and completed tower, saved native component design, facility taps, native movement/stop/deselect, pan/full rotation/pinch/tilt, Intelligence, repeated Android Back/Stay/Return/rejoin, real keyboard/name persistence, small and normal landscape viewports. Existing Campaign/FFA/Towers native setup navigation checked on this clean APK. Towers live Research was additionally checked before clean packaging; its game assets and native libraries are byte-identical; no seeded units or fake gameplay responses.",
+    "limitations": [
+      "Emulator ground textures render black in unchanged Towers and Multiplayer; screenshots still verify HUD/models and actual native orders/positions/completion. Terrain appearance on a physical phone was not verified in this run.",
+      "Public host controls maps, names/aliases, difficulty and room timing. Compatibility was exercised with the live 4.7.0 bot host, not every public server.",
+      "Unchanged Campaign and FFA gameplay were not replayed; their native setup/navigation and unchanged APK asset/library hashes were checked."
+    ],
+    "pinnedTestedSourceFiles": 728
+  },
+  "fallback": {
+    "path": "qa/multiplayer-070/fallback-0.70.json",
+    "bytes": 503,
+    "sha256": "c0c797b9cccb853a66ddb8e84a9fd4b754951f601eca9a2d1a1f36b3ebbb1161"
+  },
+  "sourcePreservation": {
+    "changedBaselineSources": [
+      {
+        "path": "app/build.gradle.kts",
+        "beforeSHA256": "23e75b1af26a8d1905c1c608fed31f7918749b3ef5f73f211440f14df89c363a",
+        "sha256": "e9ac6ea914eb36ea3b9e4f444959cd81214c2b94c12f77c44720d2e9d118dcc0"
+      },
+      {
+        "path": "app/src/main/assets/multiplayer/engine.html",
+        "beforeSHA256": "e0ad374cddb5db5b29ab538bb7816edcf665297bfa5de369ccbae14e472617e9",
+        "sha256": "d65ec625611c626a9ad911f67cb98db5766884adc6196d9c4f3b554ae35efe06"
+      },
+      {
+        "path": "app/src/main/assets/multiplayer/index.html",
+        "beforeSHA256": "15d3b79fb8437d3f343fc2d131c818790e1517613b9c9eb9e4cf2826e33c0b9a",
+        "sha256": "be200ee5b6981d992fd64573b91fa8362d8ef65d0279711c81d775b4e540128b"
+      },
+      {
+        "path": "app/src/main/assets/multiplayer/lobby-config.js",
+        "beforeSHA256": "d51b798340ac057aea87d7e2b906e1a32044058912e9e8981cd3eca5447dac70",
+        "sha256": "96b15c9ace72ea087791384e9a406e98356181e277cfd51102777f42bcb4ef01"
+      },
+      {
+        "path": "app/src/main/assets/multiplayer/lobby-ui.js",
+        "beforeSHA256": "5ad0851263b04a3abff46e7d60a1b93f3ca15446170b83b33c7f6de15f165f45",
+        "sha256": "3927bba708b029cef65d3bb6553f8186e5ffc5a50d89b27a14c6bbc4fdf90f50"
+      },
+      {
+        "path": "app/src/main/assets/multiplayer/mobile-controls.js",
+        "beforeSHA256": "a72cbfeae5aac7e0c0173de371502f0cf0c193cd522010f2dc47c339d7fa4be3",
+        "sha256": "08dc9c7ea78563b2f36e79aa4a2b475bcda19cee9d3e1403589bf5c821e6412c"
+      },
+      {
+        "path": "app/src/main/assets/multiplayer/multiplayer.css",
+        "beforeSHA256": "a279342e696c56800a9a345dfd9296cee7e78ccb7cc27c3cb2a7b9171a45daf6",
+        "sha256": "c54e9dcb4fa1a465b6dbb394f3d7110874f72aeae303753f0b2b81848f19f684"
+      },
+      {
+        "path": "app/src/main/assets/multiplayer/session.js",
+        "beforeSHA256": "ed9826de84fb1c94bdc05f0f9174fc2f210e8048c5ee91f80eb58b8dd20e12c7",
+        "sha256": "94279cbee9d4fab974dbc99bca7d943c3f9aea159f080682838d581e5d2abbbc"
+      },
+      {
+        "path": "app/src/main/assets/multiplayer/warzone2100.js",
+        "beforeSHA256": "82209a164840bce40a570bfc3e039161f72bc997c2251a88e02cc682d1f053cb",
+        "sha256": "6a46eaee3a7745d41444a31957448d67f1849dbcbb539986643be9a6654f64d8"
+      },
+      {
+        "path": "app/src/main/assets/multiplayer/warzone2100.wasm",
+        "beforeSHA256": "5cfd676db13c96899a876fbd77197b7092b924ed265feed8594a2356f0b2492d",
+        "sha256": "7f066f805909a085862832c2eaf762eb8304f2fac0cbe98c68afea0dca36a173"
+      },
+      {
+        "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MultiplayerActivity.java",
+        "beforeSHA256": "a0ee59422e7c211d05a3d99a357ab10b84839c8d55635e8db360eabeaa12f566",
+        "sha256": "d3f2851104de921ce2952b7853911023f701eaf132e01ea649fd1efa26289976"
+      },
+      {
+        "path": "vendor/multiplayer/README.md",
+        "beforeSHA256": "6f9d4353f0f21db61137074365db580704311badb0d7d447fc69e6a91f378080",
+        "sha256": "5ada5f4caeea46aa0904c4e1be105dd19d8991d15963bf633012f4f1efc2ebeb"
+      }
+    ],
+    "addedSources": [
+      "app/src/main/assets/multiplayer/intelligence.js",
+      "app/src/main/assets/multiplayer/mobile-ui-runtime.js",
+      "app/src/main/assets/multiplayer/native-ui-adapter.js",
+      "app/src/main/assets/multiplayer/terrain.js",
+      "archive/release-0.70-multiplayer-polish.json",
+      "qa/multiplayer-070/VERIFICATION.md",
+      "qa/multiplayer-070/build.log",
+      "qa/multiplayer-070/clean-payload-equivalence.json",
+      "qa/multiplayer-070/device-restoration.json",
+      "qa/multiplayer-070/fallback-0.70.json",
+      "qa/multiplayer-070/final-actions-proof.json",
+      "qa/multiplayer-070/final-build-complete.png",
+      "qa/multiplayer-070/final-building.png",
+      "qa/multiplayer-070/final-camera-proof.json",
+      "qa/multiplayer-070/final-design-saved.png",
+      "qa/multiplayer-070/final-existing-campaign.png",
+      "qa/multiplayer-070/final-existing-ffa.png",
+      "qa/multiplayer-070/final-existing-mode-proof.json",
+      "qa/multiplayer-070/final-existing-towers.png",
+      "qa/multiplayer-070/final-facility-factory.png",
+      "qa/multiplayer-070/final-facility-movement-proof.json",
+      "qa/multiplayer-070/final-facility-research.png",
+      "qa/multiplayer-070/final-intelligence.png",
+      "qa/multiplayer-070/final-movement.png",
+      "qa/multiplayer-070/final-name-cold-launch.json",
+      "qa/multiplayer-070/final-profile-keyboard.png",
+      "qa/multiplayer-070/final-return-dialog.png",
+      "qa/multiplayer-070/final-return-lobby.json",
+      "qa/multiplayer-070/final-return-lobby.png",
+      "qa/multiplayer-070/final-return-profile-proof.json",
+      "qa/multiplayer-070/journey-build-selection.json",
+      "qa/multiplayer-070/journey-build-selection.png",
+      "qa/multiplayer-070/journey-joining.json",
+      "qa/multiplayer-070/journey-joining.png",
+      "qa/multiplayer-070/journey-match-room.json",
+      "qa/multiplayer-070/journey-match-room.png",
+      "qa/multiplayer-070/journey-production-cancelled.json",
+      "qa/multiplayer-070/journey-production-cancelled.png",
+      "qa/multiplayer-070/journey-research-queued.json",
+      "qa/multiplayer-070/journey-research-queued.png",
+      "qa/multiplayer-070/journey-world.json",
+      "qa/multiplayer-070/journey-world.png",
+      "qa/multiplayer-070/mobile-ui-runtime-contract.json",
+      "qa/multiplayer-070/native-build.json",
+      "qa/multiplayer-070/native-focused-build.log",
+      "qa/multiplayer-070/native-prepare.json",
+      "qa/multiplayer-070/small-blocknight-help.png",
+      "qa/multiplayer-070/small-blocknight-tech.png",
+      "qa/multiplayer-070/small-build.png",
+      "qa/multiplayer-070/small-proof.json",
+      "qa/multiplayer-070/small-world.json",
+      "qa/multiplayer-070/small-world.png",
+      "qa/multiplayer-070/small-wt-open-factory.png",
+      "qa/multiplayer-070/small-wt-open-queue.png",
+      "qa/multiplayer-070/verification.json",
+      "tools/build-multiplayer-native-070.py",
+      "tools/check-multiplayer-activity-070.py",
+      "tools/check-multiplayer-back-070.py",
+      "tools/check-multiplayer-native-events-070.cjs",
+      "tools/check-multiplayer-terrain-070.cjs",
+      "tools/compose-multiplayer-ui-070.cjs",
+      "tools/integrate-multiplayer-native-070.py",
+      "tools/mp-actions-live-070.cjs",
+      "tools/mp-camera-live-070.cjs",
+      "tools/mp-existing-inspect-070.cjs",
+      "tools/mp-existing-live-070.cjs",
+      "tools/mp-existing-resume-070.cjs",
+      "tools/mp-facility-inspect-070.cjs",
+      "tools/mp-facility-move-live-070.cjs",
+      "tools/mp-final-native-smoke-070.cjs",
+      "tools/mp-inspect-live-070.cjs",
+      "tools/mp-journey-070.cjs",
+      "tools/mp-live-070.cjs",
+      "tools/mp-move-resume-070.cjs",
+      "tools/mp-phase-070.cjs",
+      "tools/mp-ready-inspect-070.cjs",
+      "tools/mp-return-live-070.cjs",
+      "tools/mp-small-join-070.cjs",
+      "tools/mp-small-live-070.cjs",
+      "tools/mp-tabs-070.cjs",
+      "tools/package-multiplayer-070.py",
+      "tools/prepare-multiplayer-native-070.py",
+      "tools/test-multiplayer-input-070.cjs",
+      "tools/test-multiplayer-intelligence-070.cjs",
+      "tools/test-multiplayer-shell-070.cjs",
+      "vendor/multiplayer/native-070/README.md",
+      "vendor/multiplayer/native-070/autorevision.cache",
+      "vendor/multiplayer/native-070/display3d.cpp",
+      "vendor/multiplayer/native-070/hci.cpp",
+      "vendor/multiplayer/native-070/main_sdl.cpp",
+      "vendor/multiplayer/native-070/mobile-ui-bootstrap.js",
+      "vendor/multiplayer/native-070/mobile-ui-native.cpp.inc",
+      "vendor/multiplayer/native-070/multiint.cpp",
+      "vendor/multiplayer/native-070/native-ui.patch",
+      "vendor/multiplayer/native-070/netplay_config.h",
+      "vendor/multiplayer/native-070/quickjs_backend.cpp",
+      "vendor/multiplayer/native-070/raw-warzone2100.js",
+      "vendor/multiplayer/native-070/raw-warzone2100.wasm",
+      "vendor/multiplayer/native-070/runtime-integration.json",
+      "vendor/multiplayer/native-070/source-overlays.json",
+      "vendor/multiplayer/native-070/tooling/ACORN-LICENSE",
+      "vendor/multiplayer/native-070/tooling/acorn.cjs",
+      "vendor/multiplayer/native-070/upstream-tags.txt",
+      "vendor/multiplayer/native-070/wrappers.cpp"
+    ],
+    "baselineSourceEntries": 12257,
+    "everyBaselineSourceEntryRetained": true,
+    "existingTowersCampaignFFAAssetsFrozen": true,
+    "upstreamCommit": "7d3d8e51a61ceee89e6bf672a41337e1a9cd7392",
+    "protocol": [
+      16384,
+      104
+    ],
+    "nativeBuildPerformed": true,
+    "sourceOverlayManifest": {
+      "path": "vendor/multiplayer/native-070/source-overlays.json",
+      "bytes": 1077,
+      "sha256": "039b6d34e211ee4953b59418a2b50480036ceca3a973e2cff26d8da7da66c9ac"
+    },
+    "completePatch": {
+      "path": "vendor/multiplayer/native-070/native-ui.patch",
+      "bytes": 39729,
+      "sha256": "657683b79ef924a7a40ef0d2fd05660296e9111c3bd25918baa1663b15fb76cc"
+    },
+    "nativeBuild": {
+      "path": "qa/multiplayer-070/native-build.json",
+      "bytes": 5009,
+      "sha256": "eeeaa3f4e7dc62b07237a4bc6cc27c35d07da472d5314dd605498b77e11d06bf"
+    },
+    "integration": {
+      "path": "vendor/multiplayer/native-070/runtime-integration.json",
+      "bytes": 1064,
+      "sha256": "2b8a478077b8deaa29460794dc39159ed570aed39e1ce9a606dbf2f2e88bd912"
+    },
+    "portableNativeSourcesAndRawPairVerified": true,
+    "officialMPDataFrozen": true,
+    "wasmBinaryUnmodifiedAfterCompiler": true
+  },
+  "certificateSHA256": "4499efe00477c7c724c06a1dd96f935864548665c13ab5e2bd0a9c0f83f7cb15",
+  "changedAPKMembers": [
+    "AndroidManifest.xml",
+    "assets/multiplayer/engine.html",
+    "assets/multiplayer/index.html",
+    "assets/multiplayer/intelligence.js",
+    "assets/multiplayer/lobby-config.js",
+    "assets/multiplayer/lobby-ui.js",
+    "assets/multiplayer/mobile-controls.js",
+    "assets/multiplayer/mobile-ui-runtime.js",
+    "assets/multiplayer/multiplayer.css",
+    "assets/multiplayer/native-ui-adapter.js",
+    "assets/multiplayer/session.js",
+    "assets/multiplayer/terrain.js",
+    "assets/multiplayer/warzone2100.js",
+    "assets/multiplayer/warzone2100.wasm",
+    "classes3.dex"
+  ],
+  "everyBaselineAPKMemberRetained": true,
+  "allAPKAssetsMatchSource": true,
+  "existingModeAssetsAndNativeLibrariesFrozen": true,
+  "bundledMusicFrozen": true,
+  "livePhoneAdsAndEmulatorFallbackRetained": true,
+  "maximumAPKZipGapBytes": 4096,
+  "generatedBuildConfigSHA256": "e55b832aac5b61a8372e3f60b580ad5730d029286c9e50111c94eaf13a2cc312",
+  "nativeBuildPerformed": true,
+  "liveAdsTested": false,
+  "githubPublished": false,
+  "vpsChanged": false,
+  "recordedUTC": "2026-11-14T02:23:45.184094+00:00"
+}

@@ -1,0 +1,37 @@
+{
+  "source": "Read-only timer list from actual native FFA Hard phone checkpoint; qa/ffa-060/hard-phone-native-checkpoint.zip, scriptstate.json",
+  "disclosure": "Only native timer IDs/names/owners and saved FFA timer flags are retained for restore-order regression; no save, native engine or gameplay state is edited.",
+  "ffaTimers": {
+    "blockNightEmitResearchSnapshotV23": true,
+    "blockNightV32PollBridgeCommands": true,
+    "ffaTick": true,
+    "wtcmd_tick": true
+  },
+  "timers": [
+    {"id": 1, "name": "blockNightV32PollBridgeCommands", "script": "init", "player": 0},
+    {"id": 2, "name": "checkEndConditions", "script": "init", "player": 0},
+    {"id": 10, "name": "autoSave", "script": "init", "player": 0},
+    {"id": 17, "name": "spendMoney", "script": "ffa-nullbot", "player": 1},
+    {"id": 18, "name": "checkConstruction", "script": "ffa-nullbot", "player": 1},
+    {"id": 19, "name": "checkAttack", "script": "ffa-nullbot", "player": 1},
+    {"id": 20, "name": "adaptCycle", "script": "ffa-nullbot", "player": 1},
+    {"id": 21, "name": "rebalanceGroups", "script": "ffa-nullbot", "player": 1},
+    {"id": 22, "name": "wtcmd_tick", "script": "init", "player": 0},
+    {"id": 23, "name": "blockNightEmitResearchSnapshotV23", "script": "init", "player": 0},
+    {"id": 24, "name": "ffaTick", "script": "init", "player": 0},
+    {"id": 25, "name": "spendMoney", "script": "ffa-nullbot", "player": 2},
+    {"id": 26, "name": "checkConstruction", "script": "ffa-nullbot", "player": 2},
+    {"id": 27, "name": "checkAttack", "script": "ffa-nullbot", "player": 2},
+    {"id": 28, "name": "adaptCycle", "script": "ffa-nullbot", "player": 2},
+    {"id": 29, "name": "rebalanceGroups", "script": "ffa-nullbot", "player": 2},
+    {"id": 30, "name": "spendMoney", "script": "ffa-nullbot", "player": 3},
+    {"id": 31, "name": "checkConstruction", "script": "ffa-nullbot", "player": 3},
+    {"id": 32, "name": "checkAttack", "script": "ffa-nullbot", "player": 3},
+    {"id": 33, "name": "adaptCycle", "script": "ffa-nullbot", "player": 3},
+    {"id": 34, "name": "rebalanceGroups", "script": "ffa-nullbot", "player": 3},
+    {"id": 975, "name": "placeOilDrum", "script": "init", "player": 0},
+    {"id": 1021, "name": "checkConstruction", "script": "ffa-nullbot", "player": 1},
+    {"id": 1023, "name": "checkConstruction", "script": "ffa-nullbot", "player": 2},
+    {"id": 1024, "name": "checkConstruction", "script": "ffa-nullbot", "player": 1}
+  ]
+}

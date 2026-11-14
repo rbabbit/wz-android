@@ -1,0 +1,53 @@
+{
+  "version": "0.57",
+  "candidateAPK_SHA256": "34e5c91a0565423745f0d6b001574629449610c400a6dbe91ef58cdd6e4a181d",
+  "device": "emulator-5558",
+  "checks": [
+    {
+      "name": "splash-user-phone-800x360",
+      "passed": true,
+      "evidence": "qa/splash-057/splash-user-phone-800x360.json",
+      "sha256": "ab445fffd4492783b1bbc72e51a1adb4bc966bab9005d25ad3b49cd5c7c9a64a"
+    },
+    {
+      "name": "splash-compact-and-large-text",
+      "passed": true,
+      "evidence": "qa/splash-057/splash-compact-and-large-text.json",
+      "sha256": "2ddb2c946f5e994cd6bc56dd4efbba2330cf52063584b22daef9f54df62e7203"
+    },
+    {
+      "name": "towers-map-routes-and-utilities",
+      "passed": true,
+      "evidence": "qa/splash-057/towers-map-routes-and-utilities.json",
+      "sha256": "e0258c05a302cbe007bfd2ff4ee28fb50b55ac1c0e0450439225cb6a39b666a8"
+    },
+    {
+      "name": "campaign-setup-save-and-original-start",
+      "passed": true,
+      "evidence": "qa/splash-057/campaign-setup-save-and-original-start.json",
+      "sha256": "7eb3470f3a5d3599457e27bc67f5212f329d5407d1a789b4a9b16b8edd8662d4"
+    },
+    {
+      "name": "towers-native-play-and-return",
+      "passed": true,
+      "evidence": "qa/splash-057/towers-native-play-and-return.json",
+      "sha256": "b7cff67b9cdddfeff43eb68625c4628ee63580762bdd539ff21182c7d2cfff03"
+    }
+  ],
+  "runtimeErrors": [],
+  "preparedCampaignSaveUsed": true,
+  "seededUnits": false,
+  "startedAt": "2026-11-11T22:55:31.340Z",
+  "fixtureDisclosure": {
+    "campaign": "Existing native HQ checkpoint; no seeded units, debug orders or research grants.",
+    "graphics": "Known emulator terrain/shader limitations remain separate from native splash/navigation checks. Native readiness and original video resources are observed."
+  },
+  "current": {
+    "case": "towers-native-play-and-return",
+    "phase": "passed"
+  },
+  "passed": true,
+  "emulatorUsed": true,
+  "actualNativeEngineExecuted": true,
+  "finishedAt": "2026-11-11T23:00:06.312Z"
+}

@@ -1,0 +1,549 @@
+{
+  "version": "0.36",
+  "versionCode": 36,
+  "candidateAPK_SHA256": "9d4debdeb7b023ba347b3dd52bdaab735e546f93c74fb61c7a87c83d096acdb6",
+  "scope": "Selected-truck Demolish and completed-research Intelligence with native preview/audio.",
+  "emulatorUsed": true,
+  "gameplayVerified": false,
+  "testAdsOnly": true,
+  "liveAdsTested": false,
+  "emulatorProof": {
+    "path": "qa/0.36-intelligence/emulator-focused-proof.json",
+    "sha256": "bfbddbd55cac117d0551d8b390415a4777f4da405ae6c77661c63de9d7c8795e"
+  },
+  "focusedEmulatorChecks": [
+    {
+      "name": "One selected native demolition truck removes structure; other group and HQ remain protected",
+      "passed": true,
+      "observation": "qa/0.36-demolish/delivery-demolish.json"
+    },
+    {
+      "name": "Real paid foundation remains protected from an unselected builder group then is demolished by explicitly selected workers",
+      "passed": true,
+      "observation": "qa/0.36-demolish/delivery-foundation.json"
+    },
+    {
+      "name": "Native F8 cancels armed targeting, rejects stale intent and retains completed research history",
+      "passed": true,
+      "observation": "qa/0.36-demolish/delivery-load-cancel.json"
+    },
+    {
+      "name": "Actual rotating native model advances; Back/Research/Production/Help clear it; original audio dispatch is scoped",
+      "passed": true,
+      "observation": "qa/0.36-intelligence/delivery-intelligence.json"
+    },
+    {
+      "name": "Natural Cobra and Composite research completes; Composite notice opens its matching authored report and native save succeeds",
+      "passed": true,
+      "observation": "qa/0.36-intelligence/delivery-research.json"
+    },
+    {
+      "name": "Cold-restarted exact APK completes native phone save archive",
+      "passed": true,
+      "observation": "qa/0.36-intelligence/delivery-save.json"
+    },
+    {
+      "name": "Small enlarged-text profile supports history scrolling, bounded report layout, keyboard Back, closure and saving",
+      "passed": true,
+      "observation": "qa/0.36-intelligence/delivery-small.json"
+    }
+  ],
+  "focusedObservations": {
+    "demolishNativeOrdersVerified": true,
+    "demolishCancellationAndLoadVerified": true,
+    "intelligenceCompletedHistoryVerified": true,
+    "intelligencePreviewAndOriginalAudioDispatchVerified": true,
+    "intelligenceNavigationAndInputVerified": true
+  },
+  "emulatorEvidenceFiles": [
+    {
+      "path": "qa/0.36-demolish/delivery-demolish-completed.png",
+      "sha256": "285ec19fad290afa750384df2273af2708358cedca9eab0ffe62d4fcf2165787"
+    },
+    {
+      "path": "qa/0.36-demolish/delivery-demolish-ordered.png",
+      "sha256": "6119d51209b24f6b0782b9869b6ee42e024c540419c54deaed0d76f8482ae73b"
+    },
+    {
+      "path": "qa/0.36-demolish/delivery-foundation-other-group-protected.png",
+      "sha256": "e5f4b3ea4dc9a4de26eb0e3cea2bdb5f791ee63b38dba5460596bdba37ec8542"
+    },
+    {
+      "path": "qa/0.36-demolish/delivery-foundation-removed.png",
+      "sha256": "3b2a5d5ba601eaa4490fb1bc52fedf6b02502464f04eaf20f4ce23c35b50f5f1"
+    },
+    {
+      "path": "qa/0.36-demolish/delivery-load-targeting-cancelled.png",
+      "sha256": "4234f2206bd979c670774ac6a6277147f18912168eb049068152da4aa2d7d2eb"
+    },
+    {
+      "path": "qa/0.36-intelligence/delivery-alloys-report.png",
+      "sha256": "d3f5b8e02defb9dae144639d0bce27241beb5a53cb21d7b5517118a05b0ad3a9"
+    },
+    {
+      "path": "qa/0.36-intelligence/delivery-cobra-report.png",
+      "sha256": "8bf04adb80fe1b34a828a369f0da859d76a70f540de82fc4e04b0258578c2ad3"
+    },
+    {
+      "path": "qa/0.36-intelligence/delivery-model-closed.png",
+      "sha256": "43b02b836ec0c7fb65e289ae2edbf6f8b6a79733ed2b071dae4bca2c9215f96a"
+    },
+    {
+      "path": "qa/0.36-intelligence/delivery-native-model-a.png",
+      "sha256": "2e2d5a82cb26b72a5ae83145dd3d6d800ab79faafaab20d4e64d49b59c32984b"
+    },
+    {
+      "path": "qa/0.36-intelligence/delivery-native-model-b.png",
+      "sha256": "8fc93329e2e95522d030584f6ae35d64fa7befc79155d5d643c09222147f1e60"
+    },
+    {
+      "path": "qa/0.36-intelligence/delivery-research-completed.png",
+      "sha256": "19e48434212985c4f099d95e88a11991d8e463b4a6a7e05cf0ef09468d9c729a"
+    },
+    {
+      "path": "qa/0.36-intelligence/delivery-save.png",
+      "sha256": "18270b58e0dc2ec1a05cb661aa2cbf9f07771f1ef27af81ad03437ccb9689346"
+    },
+    {
+      "path": "qa/0.36-intelligence/delivery-small-all-research.png",
+      "sha256": "7f8861d51bbbac846cf26686fd4e23663e05e604e683cb6ea538d01d3d087979"
+    },
+    {
+      "path": "qa/0.36-intelligence/delivery-small-cobra-model.png",
+      "sha256": "cb76814046974b6735c5663fd3707d96fb890bc13fd9e10020e15594f6c6869a"
+    },
+    {
+      "path": "qa/0.36-intelligence/delivery-small-field-controls.png",
+      "sha256": "4e653bfa5c037335a0e47d38032461fa587f5c45c4b33ce1f625e21c725dc3d3"
+    },
+    {
+      "path": "qa/0.36-intelligence/delivery-small-gameplay-restored.png",
+      "sha256": "d4f2b9ec281f2a60bb1bded082ba3f2ddc946419ed695e286b1ea320bf4c1135"
+    },
+    {
+      "path": "qa/0.36-intelligence/delivery-small-history-scrolled.png",
+      "sha256": "6fa4b0d82681a32342a888c427f839da1dc5cca8144830235c38c6e9fa3f8ca5"
+    },
+    {
+      "path": "qa/0.36-intelligence/delivery-small-keyboard-return.png",
+      "sha256": "10b7145fadfa7011cb09366db4d2748a1f5b96d8a150ed8a743f21e29a95c3fa"
+    }
+  ],
+  "supportingObservations": [
+    {
+      "path": "qa/0.36-demolish/delivery-demolish.json",
+      "sha256": "f65b2f2b86114aeea5cf0a3e43179063c0bfb7f18faa8ca555c709c1205b3440"
+    },
+    {
+      "path": "qa/0.36-demolish/delivery-foundation.json",
+      "sha256": "2b09102560a568ca6ee221a448f57b2a7e3b72cd36aef518d3ef66ce6f3f0091"
+    },
+    {
+      "path": "qa/0.36-demolish/delivery-load-cancel.json",
+      "sha256": "8359e724f0dc1178664975bf4cfe92d819f64588914e797098f60b088ecf7972"
+    },
+    {
+      "path": "qa/0.36-intelligence/delivery-intelligence.json",
+      "sha256": "137d09072df72aec21d1894de6aa8876dd15d5586915c41fcab20ff663d40684"
+    },
+    {
+      "path": "qa/0.36-intelligence/delivery-research.json",
+      "sha256": "35381c94e70a7b290c77471032e45a2806a90fc53b9e3b377fe1e696028c485f"
+    },
+    {
+      "path": "qa/0.36-intelligence/delivery-save.json",
+      "sha256": "3716a0437fa1e4663345673ae7a98b29c23bb42a3ddb7349a2c52ef09c5e55b0"
+    },
+    {
+      "path": "qa/0.36-intelligence/delivery-small.json",
+      "sha256": "038d9ceec708984eeff1ff392749ad20a23fb20c3ab7f5ae463f06ab602a7fc6"
+    },
+    {
+      "path": "qa/0.36-intelligence/emulator-restoration.json",
+      "sha256": "a049687db8376072b8918ecd426033ed036fbc72909355450fd49d8121d632f5"
+    },
+    {
+      "path": "tools/qa-intelligence-demolish-036.cjs",
+      "sha256": "0eab7bdab6e5ab5804547d7c773484d4eeec2f77d71fa560fb6d02d8503c5780"
+    },
+    {
+      "path": "tools/qa-restore-036.cjs",
+      "sha256": "251ea487fd6a457b58e7154e94e48270a5fe7a32016b678a48424287550bfff1"
+    },
+    {
+      "path": "tools/record-focused-intelligence-036.py",
+      "sha256": "dc9679c84c3cbc80be093fd55cb8ba84beec1bdf4dbd47702e9130a6103ef9cc"
+    },
+    {
+      "path": "qa/0.36-intelligence/restored-original-home.png",
+      "sha256": "a0f869c52cb88d5ce2ed200a0e2cbb608a89512cc1a15d050a0b100ca4344d4f"
+    },
+    {
+      "path": "qa/0.36-demolish/fixture-missing-worker.json",
+      "sha256": "9a05ee8cf4ea99576fba515eff507e61de17eea4042b77fbf045b82e316d9df2"
+    },
+    {
+      "path": "qa/0.36-intelligence/fixture-expired-notice.json",
+      "sha256": "6f32b643b616351205fc53c15db57795e641a7da19436a7aa860e64d7ec0b028"
+    },
+    {
+      "path": "qa/0.36-intelligence/fixture-resume-readiness.json",
+      "sha256": "aa0b8f2b1adfc5eeadbb0c668330a6482c120dbc8e2c882dd364a00bf0cc0697"
+    },
+    {
+      "path": "qa/0.36-intelligence/save-error.png",
+      "sha256": "d492e681a519d47c3a70ff754faf4f5419f82463a3297dfff566ac003fb0bcf8"
+    }
+  ],
+  "smallPhoneConfigurations": [
+    {
+      "physicalWidth": 800,
+      "physicalHeight": 480,
+      "densityDpi": 240,
+      "fontScale": 1.3
+    }
+  ],
+  "sourceCheckReports": [
+    {
+      "path": "archive/intelligence-0.36-source-checks.json",
+      "sha256": "df8fd08d126f9cd6268e78b083e83abc6055bcbb43d87e90864563a95515dee1"
+    },
+    {
+      "path": "qa/0.36-demolish/source-checks.json",
+      "sha256": "9c1f04841df3dbc76bac5b800069593a1eb34149c2a8b45740bc7e1c7800db3b"
+    },
+    {
+      "path": "qa/0.36-intelligence/ui-source-checks.json",
+      "sha256": "2fc6c1bc64339e0365e7e64f6e946f5bc049eb8c15e4fd01ec0f6a7ea8555846"
+    }
+  ],
+  "changedAPKAssets": [
+    "assets/warzone-command-pages.js",
+    "assets/warzone-html-session.js",
+    "assets/warzone-intelligence.js",
+    "assets/warzone-touch-controls.js",
+    "assets/warzone-towers-notices.js",
+    "assets/warzone/index.html",
+    "assets/warzone/ui/build-display.js",
+    "assets/warzone/ui/towers-intelligence.css",
+    "assets/warzone/ui/towers-shell.css",
+    "assets/warzone/warzone2100.data",
+    "assets/warzone/warzone2100.js",
+    "assets/warzone/warzone2100.wasm"
+  ],
+  "changedAPKMembers": [
+    "classes3.dex",
+    "assets/warzone-command-pages.js",
+    "assets/warzone-html-session.js",
+    "assets/warzone-touch-controls.js",
+    "assets/warzone-towers-notices.js",
+    "assets/warzone/ui/build-display.js",
+    "assets/warzone/ui/towers-intelligence.css",
+    "assets/warzone/ui/towers-shell.css",
+    "assets/warzone/warzone2100.data",
+    "assets/warzone/warzone2100.js",
+    "assets/warzone/warzone2100.wasm",
+    "AndroidManifest.xml",
+    "assets/warzone-intelligence.js",
+    "assets/warzone/index.html"
+  ],
+  "removedAPKMembers": [],
+  "sourcePreservation": {
+    "changedAppSources": [
+      {
+        "path": "app/src/main/assets/warzone-command-pages.js",
+        "beforeSHA256": "f7cd1502f72a5824308f1e498124f0acf4f31515300acb049f6425a3e3567052",
+        "sha256": "8e84fb414f2eccc5fcc6e061a68cc0a0b65da4198dc6839c785c8a95e1dd52f1"
+      },
+      {
+        "path": "app/src/main/assets/warzone-html-session.js",
+        "beforeSHA256": "ab96ad7d96d1f9a7fabacfe645bff3226738f3243415e3053ec575a21bfa2547",
+        "sha256": "cc2c809239d0f8bd6078893922f32dc858d486121887fba4c5124676f2a0da94"
+      },
+      {
+        "path": "app/src/main/assets/warzone-touch-controls.js",
+        "beforeSHA256": "14299c9b819ed32863be5672278647f57d5c5896d840006c944c2cfd22aca4ef",
+        "sha256": "8d1f87dd2bdcb8409e10cbabf5206a077fdf9228058a57056f2cc929ea897170"
+      },
+      {
+        "path": "app/src/main/assets/warzone-towers-notices.js",
+        "beforeSHA256": "eacc2a3534b79e85b266c05fb56082a3aa6ccdf179040eae9e67ace3ebb119da",
+        "sha256": "864c6c500c81ed9ea26b8df808bfce649f914077940c7a27bcde50db3808d097"
+      },
+      {
+        "path": "app/src/main/assets/warzone/index.html",
+        "beforeSHA256": "8e3ca9eecac4e07773b2481423a2aabad9c4e41c133ee7beaa7313e5d5a4f85a",
+        "sha256": "cd4f046ca1d4d4c058cdd03a8def014dd84d4e211c16719829aed947a9fb5005"
+      },
+      {
+        "path": "app/src/main/assets/warzone/ui/build-display.js",
+        "beforeSHA256": "ee9f13968cd9b94ccffb9e0803d8c44b20eeeb8b18f18a8642f50c88db60228b",
+        "sha256": "e14439af827ff1d64471249d490dea05229ca5015bb7383945db45a64330a815"
+      },
+      {
+        "path": "app/src/main/assets/warzone/ui/towers-shell.css",
+        "beforeSHA256": "85bdc22e13d94fcbeb4e428742a5364200540a99df2d4b8accb1c61725b1ddf6",
+        "sha256": "5d42697fd496f36e5120316ebf6662efe09bda475c997c5ced67265d6695a11d"
+      },
+      {
+        "path": "app/src/main/assets/warzone/warzone2100.data",
+        "beforeSHA256": "a92471614e4319895dfc4d7d739f973e68c4cb5d0ab88dfb22d8977b240dee7e",
+        "sha256": "71d46ece57f11714b751ae51e4735bdcbb4fb090f77355a2466d053a4f43ad66"
+      },
+      {
+        "path": "app/src/main/assets/warzone/warzone2100.js",
+        "beforeSHA256": "1b615d78cb3188a6de1e9009e11f6e9d2b2df9450fa74d3e8b4485c8c6094926",
+        "sha256": "deb206659ceab33ad3df856cde74343ebda5ca3fe6aa173996bcf250312f0bc0"
+      },
+      {
+        "path": "app/src/main/assets/warzone/warzone2100.wasm",
+        "beforeSHA256": "120457e5db655d819436f3c5315991cb013f771e01ace7a872469e0844796380",
+        "sha256": "b7d117295d901abf96cafdf8a4c780a56007b4e2310267897395419d455a3503"
+      },
+      {
+        "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MainActivity.java",
+        "beforeSHA256": "30db7eeacea0ea4ca14d7369389f9e989fafef214ecc1b238736838bd7fc2c38",
+        "sha256": "ed6b65b15ca1beea7f9287b81aecb379493423c1b3063ae19c7cc05f293494b3"
+      },
+      {
+        "path": "scenario/warzone-towers-commands.js",
+        "beforeSHA256": "0449fe0f15290dbdf6e03d7c1b61d4af5257677fb7b4f7c0803eb4baec2ab0b2",
+        "sha256": "4b25e1c241a33889bfd6c99ba9e4313f5d959a2ea7ae672d6df0e2cc96cd70ba"
+      }
+    ],
+    "addedAppSources": [
+      "app/src/main/assets/warzone-intelligence.js",
+      "app/src/main/assets/warzone/ui/towers-intelligence.css"
+    ],
+    "preservedOriginalSourceFiles": 1291,
+    "sources": [
+      {
+        "path": "app/build.gradle.kts",
+        "sha256": "60c00019111ab85a04353226d3348989156b34c28d1776dbf4fd03132ad9182f"
+      },
+      {
+        "path": "app/src/main/assets/warzone-command-pages.js",
+        "sha256": "8e84fb414f2eccc5fcc6e061a68cc0a0b65da4198dc6839c785c8a95e1dd52f1"
+      },
+      {
+        "path": "app/src/main/assets/warzone-html-session.js",
+        "sha256": "cc2c809239d0f8bd6078893922f32dc858d486121887fba4c5124676f2a0da94"
+      },
+      {
+        "path": "app/src/main/assets/warzone-intelligence.js",
+        "sha256": "2029ceb92c364bf483e399c6669f87bc243286a6f1c1fb7c20f108af0a90eb8b"
+      },
+      {
+        "path": "app/src/main/assets/warzone-touch-controls.js",
+        "sha256": "8d1f87dd2bdcb8409e10cbabf5206a077fdf9228058a57056f2cc929ea897170"
+      },
+      {
+        "path": "app/src/main/assets/warzone-towers-notices.js",
+        "sha256": "864c6c500c81ed9ea26b8df808bfce649f914077940c7a27bcde50db3808d097"
+      },
+      {
+        "path": "app/src/main/assets/warzone/index.html",
+        "sha256": "cd4f046ca1d4d4c058cdd03a8def014dd84d4e211c16719829aed947a9fb5005"
+      },
+      {
+        "path": "app/src/main/assets/warzone/ui/build-display.js",
+        "sha256": "e14439af827ff1d64471249d490dea05229ca5015bb7383945db45a64330a815"
+      },
+      {
+        "path": "app/src/main/assets/warzone/ui/towers-intelligence.css",
+        "sha256": "a3c4f2a2420d4e1a8a2c462cde6f1f78ac765d47ca5748f3bab71099f9574e42"
+      },
+      {
+        "path": "app/src/main/assets/warzone/ui/towers-shell.css",
+        "sha256": "5d42697fd496f36e5120316ebf6662efe09bda475c997c5ced67265d6695a11d"
+      },
+      {
+        "path": "app/src/main/assets/warzone/warzone2100.data",
+        "sha256": "71d46ece57f11714b751ae51e4735bdcbb4fb090f77355a2466d053a4f43ad66"
+      },
+      {
+        "path": "app/src/main/assets/warzone/warzone2100.js",
+        "sha256": "deb206659ceab33ad3df856cde74343ebda5ca3fe6aa173996bcf250312f0bc0"
+      },
+      {
+        "path": "app/src/main/assets/warzone/warzone2100.wasm",
+        "sha256": "b7d117295d901abf96cafdf8a4c780a56007b4e2310267897395419d455a3503"
+      },
+      {
+        "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MainActivity.java",
+        "sha256": "ed6b65b15ca1beea7f9287b81aecb379493423c1b3063ae19c7cc05f293494b3"
+      },
+      {
+        "path": "archive/native-intelligence-0.36/README.md",
+        "sha256": "c05aceee82cef6f0f67e0a7164cdc2f1b3c8041e3126c699cc9752c490e02614"
+      },
+      {
+        "path": "archive/native-intelligence-0.36/hci.cpp",
+        "sha256": "9db6bef46703c3975d920a23cc071ea46ab938a3972204ca5325440e8e66e842"
+      },
+      {
+        "path": "archive/native-intelligence-0.36/intelligence-helper.inc",
+        "sha256": "fb4892f7c5ab499637ee83ff37e054621aada3850b3a9725c5a9f884007e735c"
+      },
+      {
+        "path": "archive/native-intelligence-0.36/native-intelligence.patch",
+        "sha256": "601c4d877b0c26418bbe916023d6158bce2ffba1362b459a2b7d5f8ab09475c6"
+      },
+      {
+        "path": "archive/native-intelligence-0.36/source-overlay.json",
+        "sha256": "deef27da4497e0d3ace3ee41a514ac5433f429d867006be727a1d1442cfbe378"
+      },
+      {
+        "path": "qa/0.36-demolish/native-payload.json",
+        "sha256": "0b2b79eedeab4c6c0c9a5a8af75aa7f600a4f97e1bc1846df8e8a929e7919dfb"
+      },
+      {
+        "path": "qa/0.36-demolish/source-checks.json",
+        "sha256": "9c1f04841df3dbc76bac5b800069593a1eb34149c2a8b45740bc7e1c7800db3b"
+      },
+      {
+        "path": "qa/0.36-intelligence/native-intelligence-build.json",
+        "sha256": "2d65a76e88eaa96f63160bce618c35f4f341e1bf9072724d9bdb27d688e1e34c"
+      },
+      {
+        "path": "qa/0.36-intelligence/native-intelligence-first-compile-missing-header.log",
+        "sha256": "11492891e59b90dea3de380cd033a43e0b149346a2919c5368a73f67aa332cbe"
+      },
+      {
+        "path": "qa/0.36-intelligence/native-intelligence-incremental-build.log",
+        "sha256": "715023ec36a8357d59ad1511b1529643a5693db0444407c4bb72501b2ad179a4"
+      },
+      {
+        "path": "qa/0.36-intelligence/native-runtime-integration.json",
+        "sha256": "4cd035d37ac24b7bac84bf1cab0a635d94fc58bb6d8bcd9adc09fdd32750fe59"
+      },
+      {
+        "path": "qa/0.36-intelligence/ui-source-checks.json",
+        "sha256": "2fc6c1bc64339e0365e7e64f6e946f5bc049eb8c15e4fd01ec0f6a7ea8555846"
+      },
+      {
+        "path": "scenario/warzone-towers-commands.js",
+        "sha256": "4b25e1c241a33889bfd6c99ba9e4313f5d959a2ea7ae672d6df0e2cc96cd70ba"
+      },
+      {
+        "path": "tools/build-native-intelligence-036.py",
+        "sha256": "2006336d74e417c7659b9fb4b2dd7250fb13db04b3d2c1ca25097fed9cd3ff6b"
+      },
+      {
+        "path": "tools/check-demolish-036.cjs",
+        "sha256": "f08de33d264a394c3f5ca6f6a8abdc4d59dccec6b2968e9755f5047d34ef3baf"
+      },
+      {
+        "path": "tools/check-intelligence-ui-036.cjs",
+        "sha256": "352c8c3399ea9f7b85ee18fda5b6e6c7c9802a067149d39c89ffa44f144bde4a"
+      },
+      {
+        "path": "tools/embed-demolish-036.py",
+        "sha256": "c8c53bef8d12c984dd8dda0091e94e41925c2f0ed485ba4c052ffb90576caefa"
+      },
+      {
+        "path": "tools/integrate-native-intelligence-036.py",
+        "sha256": "b22258c3dfe744176fde9ce91c3486abce952d04ec6fe0cc373e277755f00113"
+      },
+      {
+        "path": "tools/prepare-native-intelligence-036.py",
+        "sha256": "b27775ae6da8932c54f70b64a445af72783c79198469c0da163dd55797eb26c5"
+      },
+      {
+        "path": "tools/qa-intelligence-demolish-036.cjs",
+        "sha256": "0eab7bdab6e5ab5804547d7c773484d4eeec2f77d71fa560fb6d02d8503c5780"
+      },
+      {
+        "path": "tools/qa-restore-036.cjs",
+        "sha256": "251ea487fd6a457b58e7154e94e48270a5fe7a32016b678a48424287550bfff1"
+      },
+      {
+        "path": "tools/record-focused-intelligence-036.py",
+        "sha256": "dc9679c84c3cbc80be093fd55cb8ba84beec1bdf4dbd47702e9130a6103ef9cc"
+      }
+    ],
+    "baselineManifestEntries": 9957,
+    "sourceZIPBaselineSHA256": "d1dfce3a5ae6926517e07d13be3709c7e63d73345ec514ea7cad7a581af85524",
+    "mapsAndUnrelatedScenariosFrozen": true,
+    "nativeSourceOverlay": {
+      "overlayPath": "archive/native-intelligence-0.36/source-overlay.json",
+      "overlaySHA256": "deef27da4497e0d3ace3ee41a514ac5433f429d867006be727a1d1442cfbe378",
+      "changedCPPFiles": [
+        "hci.cpp"
+      ],
+      "priorSourceOverlay": {
+        "overlayPath": "archive/native-notices-0.35/source-overlay.json",
+        "overlaySHA256": "a6f4bb1b9fe97c57826856956779a4ad3be09735fa3ed988a522db16e8dc6d65",
+        "changedCPPFiles": [
+          "keybind.cpp"
+        ],
+        "priorSourceOverlay": {
+          "overlayPath": "archive/native-notices-0.34/source-overlay.json",
+          "overlaySHA256": "79e7b77d5f59b35fc2d9495f0fefe77ab1ddf657e92fcf061dd87413925ac142",
+          "changedCPPFiles": [
+            "keybind.cpp",
+            "research.cpp"
+          ],
+          "priorHUDOverlayPreserved": true,
+          "completeNativeBaseSourcePreserved": true,
+          "nativeBuildPerformed": true,
+          "nativeFullFreshBuildPerformed": false
+        },
+        "nativeBuildPerformed": true,
+        "nativeFullFreshBuildPerformed": false
+      },
+      "nativeBuildPerformed": true,
+      "nativeFullFreshBuildPerformed": false,
+      "priorFailedCompileDisclosed": true
+    },
+    "walletSaveCodecAndAdControllerFrozen": true
+  },
+  "nativeAssetSHA256": {
+    "assets/warzone/warzone2100.data": "71d46ece57f11714b751ae51e4735bdcbb4fb090f77355a2466d053a4f43ad66",
+    "assets/warzone/warzone2100.js": "deb206659ceab33ad3df856cde74343ebda5ca3fe6aa173996bcf250312f0bc0",
+    "assets/warzone/warzone2100.wasm": "b7d117295d901abf96cafdf8a4c780a56007b4e2310267897395419d455a3503"
+  },
+  "nativePreservation": {
+    "sourceBuiltMatchedRuntimeVerified": true,
+    "nativeBuildPerformed": true,
+    "nativeFullFreshBuildPerformed": false,
+    "originalDataPrefixUnchanged": true,
+    "workerHookUnchanged": true,
+    "changedVFSFiles": [
+      "/data/mp/tests/warzone-towers-commands.js"
+    ],
+    "unchangedResolvedVFSFiles": 4291,
+    "allModelsAudioMapsAndUnrelatedVFSBytesFrozen": true,
+    "normalizedNativeBodySHA256": "c1f6e1b47d9790a46dd131ca5d7a3cb7514712ce2834846d79e7bcfa78e11c00",
+    "proofs": [
+      {
+        "path": "qa/0.36-demolish/native-payload.json",
+        "sha256": "0b2b79eedeab4c6c0c9a5a8af75aa7f600a4f97e1bc1846df8e8a929e7919dfb"
+      },
+      {
+        "path": "qa/0.36-intelligence/native-intelligence-build.json",
+        "sha256": "2d65a76e88eaa96f63160bce618c35f4f341e1bf9072724d9bdb27d688e1e34c"
+      },
+      {
+        "path": "qa/0.36-intelligence/native-runtime-integration.json",
+        "sha256": "4cd035d37ac24b7bac84bf1cab0a635d94fc58bb6d8bcd9adc09fdd32750fe59"
+      }
+    ]
+  },
+  "bundledMusicByteIdenticalTo035": true,
+  "mapsDuelAndScenarioCatalogsUnchanged": true,
+  "walletSaveCodecAndAdsControllerUnchanged": true,
+  "signing": {
+    "sameCertificateAs035": true,
+    "certificateSHA256": "4499efe00477c7c724c06a1dd96f935864548665c13ab5e2bd0a9c0f83f7cb15"
+  },
+  "fallbackRecord": {
+    "path": "archive/fallback-0.36.json",
+    "sha256": "6587fbe457c65d33971efbb5924f18dd3af59eaff166d28e420f3ec88dd4119a"
+  },
+  "sourceInventory": "git ls-files --cached --others --exclude-standard; caches/private/transient files excluded",
+  "gitMetadataIncluded": false,
+  "vpsChanged": false,
+  "githubPublished": false,
+  "recordedUTC": "2026-11-10T12:42:13.747423Z"
+}

@@ -1,0 +1,161 @@
+{
+  "version": "0.75",
+  "passed": true,
+  "emulatorUsed": false,
+  "actualAndroidViewsExecuted": false,
+  "checks": [
+    "Hub has no native/game JavaScript interface",
+    "Only local Hub document starts the reader",
+    "File/content access denied; mixed content denied",
+    "Local CSP denies remote code and frames",
+    "Only public subresource GETs can pass interception while active",
+    "Lifecycle visibility reaches background request interception",
+    "External source requires a user gesture and stays in external browser",
+    "Native Back shares reserved HTML header slot with full48dp hit/compact inset face",
+    "IME and cutout/system insets handled locally",
+    "Lifecycle custom events, hard WebView cleanup, no global timer pause",
+    "Home action retained once: actions.campaign()",
+    "Home action retained once: chooseMap.run()",
+    "Home action retained once: actions.ffa()",
+    "Home action retained once: actions.multiplayer()",
+    "Home action retained once: actions.guide()",
+    "Home action retained once: actions.hub()",
+    "Home uses measured native scaled text without shrinking",
+    "MainActivity original game/navigation/music/save flows unchanged from preserved074 source",
+    "GraphicsSetupView unchanged except new Hub callback",
+    "Production Hub URL policies passed hostile URL/method/destination matrix",
+    "Production Back/lifecycle methods passed inert-platform callback/cancellation cases",
+    "Production six-action geometry passed retained-font measured labels/insets/nonoverlap",
+    "SSE handles fragmented Unicode, CRLF boundaries, comments, multiline data, event types and persistent IDs",
+    "All three own rating models match retained reference outputs for48 actual public game records",
+    "Incomplete history never publishes a rank/rating, while actual result rows remain queryable",
+    "Search is literal text, pagination bounded, aliases searchable and player/match details retain native identities",
+    "Synthetic short/cheated/unequal-team/early-quit cases preserve the documented rating exclusions",
+    "Worker explicitly requests SSE, publishes complete only at synced and serves real paged data",
+    "A complete IndexedDB snapshot supports offline Results and honest cached rankings after network failure",
+    "A saved incomplete checkpoint resumes with its cursor and server reset replaces the prefix without duplicates",
+    "An unsynced/truncated history stays incomplete and cannot expose global rankings",
+    "Cancellation aborts the active request and a stale completion cannot publish ready",
+    "Initial loading uses isolated Hub worker and compact page",
+    "Load error and retry recover through actual controls",
+    "Paged results keep bounded rows and correct next/previous totals",
+    "Match/player drilldown and native Back restore previous content; unsafe replay rejected",
+    "Debounced search queries actual worker contract",
+    "Rankings categories, missing rating and untrusted player names render safely",
+    "Incomplete history never presents calculated rankings",
+    "Offline cached results and empty searches have clear, separate states",
+    "Query errors show recovery without stale result claims",
+    "Native pause/resume and disposal cancel/terminate worker; fresh worker always loads saved cache",
+    "Actual shipped page scrolls without horizontal clipping at five sizes/font settings",
+    "Bounded48 actual public records render results/match/player details during incomplete sync without invented ratings",
+    "Actual Worker/fetch/SSE/full-history rankings/details/IndexedDB cache/offline reload pass under native CSP",
+    "Complete public snapshot global ratings and account totals match the source method",
+    "Complete public snapshot 1v1 ratings and account totals match the source method",
+    "Complete public snapshot ffa ratings and account totals match the source method"
+  ],
+  "checksPassed": 48,
+  "coverage": {
+    "homeHubNavigation": true,
+    "dataAndRatings": true,
+    "completeHistoryGate": true,
+    "cacheAndLifecycle": true,
+    "browserHubUi": true
+  },
+  "scope": "Actual production worker/data/UI in host Chromium with full public stream and IndexedDB offline cache, source-method rating parity, host Java geometry/policy/lifecycle and native wiring. No emulator or Android execution.",
+  "evidence": [
+    {
+      "path": "qa/hub-075/native.json",
+      "sha256": "383331bf4917e5ebba5d221c48b3dc57df1f00682834deaef1ad7bdcf9796bea"
+    },
+    {
+      "path": "qa/hub-075/data-checks.json",
+      "sha256": "9a9d2306f4da5831bd4dfc61475257d41bd9cf76c4cdcfa1431f356c5ca419a8"
+    },
+    {
+      "path": "qa/hub-075/ui-checks.json",
+      "sha256": "06837bc65e954ca04a401be03e48a9df4cf2c1858f9bae98cf09603876481c1d"
+    },
+    {
+      "path": "qa/hub-075/ui-live-checks.json",
+      "sha256": "f1cd89ab45a112a89cd67b9c521e2bb7a8abee884b502551262954faa99bc53c"
+    },
+    {
+      "path": "qa/hub-075/live-parity.json",
+      "sha256": "fae9f87a769c6b2dffb26c26862feda32d059757c9feb5f438c1e0324ba9aa4d"
+    }
+  ],
+  "sources": [
+    {
+      "path": "app/src/main/assets/hub/hub-data.js",
+      "sha256": "82307703b0131f750e3daa0bc62196aac91af94ccba344fa247e1bb94a7f9b09"
+    },
+    {
+      "path": "app/src/main/assets/hub/hub-worker.js",
+      "sha256": "cacf1c1c5bc8b085a8fd46bc1da2ffc38279a44d126af8cfa4b06b5212645492"
+    },
+    {
+      "path": "app/src/main/assets/hub/hub.css",
+      "sha256": "4a58b535c32c9f9a2776fe0ed43663052548617f7e7990221aac39df82a91e27"
+    },
+    {
+      "path": "app/src/main/assets/hub/hub.js",
+      "sha256": "dc71f0f2dbf648ce2b68206c6dde092e5af1d0433208bbaf6cd63a0581defab9"
+    },
+    {
+      "path": "app/src/main/assets/hub/index.html",
+      "sha256": "e5a32c443fdff9ea9ccc9fce0f21baf0cfa3a5aa0b5d6162dc329dad6ec0248a"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/Oswald.ttf",
+      "sha256": "5b38c246e255a12f5712d640d56bcced0472466fc68983d2d0410ec0457c2817"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/GraphicsSetupView.java",
+      "sha256": "3ab6dd587f5d3f5755d9b551a4bf502f97028f06a35e999be181af75562a1b5c"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/HomeMenuLayout.java",
+      "sha256": "f0bbd4f49bdd6403f83596988160ab642fc9334415584264b7e8b6e3115b8c0b"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/HomeModesView.java",
+      "sha256": "29186a01666698f761531d4a7a217d2db0fb770f4e4d6006ee5a64288290b9bc"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/HubView.java",
+      "sha256": "9ee3de8e5dbbda3bbd0d646728b71e4214bd6d9da24bd792c19806eaaea0ed0e"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MainActivity.java",
+      "sha256": "3dcacc14ade3c349ef691992ad77879ffe24ae151ea788cd8d83db31e19d3999"
+    },
+    {
+      "path": "tools/fixtures/hub-075/public-sample.json",
+      "sha256": "e77cfca5bd20ca28061db867f054778386c3a928e8263271143e28a4e6f2336d"
+    },
+    {
+      "path": "tools/fixtures/hub-075/reference-expected.json",
+      "sha256": "aab0634f046ded9cde866d742c81d8e7a401cdf98cf4e1f0cbf00a82303c441c"
+    },
+    {
+      "path": "tools/test-hub-data-075.cjs",
+      "sha256": "ab9d795569e1feacd7a6dae143cc5fad555a259ee556f940f3d6ffc603ea10e2"
+    },
+    {
+      "path": "tools/test-hub-native-075.java",
+      "sha256": "0ec047238b57cf211bd8cf089835ec768f3fe817d542f4488c9b61399522dc9a"
+    },
+    {
+      "path": "tools/test-hub-native-075.py",
+      "sha256": "93152b54f4c88517bdc3fd42aa3d4a07a2b4656da17b6cb06b8d599a18327c75"
+    },
+    {
+      "path": "tools/test-hub-native-home-075.java",
+      "sha256": "a1fcc2992f71b269aaf66a415a7949b2d17849ca87a598eaf1057e3ae7ada585"
+    },
+    {
+      "path": "tools/test-hub-ui-075.cjs",
+      "sha256": "56bbd1206f1e36335ffe3c9ad2fa4ff8e097ae13281bf07a9b7427645ca22133"
+    }
+  ]
+}

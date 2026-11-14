@@ -1,0 +1,90 @@
+{
+  "version": "0.35",
+  "phase": "integrated-source",
+  "passed": true,
+  "emulatorUsed": false,
+  "androidRuntimeExecuted": false,
+  "actualNativeEngineExecuted": false,
+  "sourceCheckGroupsPassed": 14,
+  "checks": [
+    {
+      "name": "Round notice replaces only the banner while rank, sound and continuation stay identical",
+      "passed": true
+    },
+    {
+      "name": "Wait timing, template choices, RNG calls and spawn continuation retain vendor behavior",
+      "passed": true
+    },
+    {
+      "name": "Startup banner is gone while all original IS_HACK save/load warnings remain",
+      "passed": true
+    },
+    {
+      "name": "Native source differs from v034 only by the camera notice helper and four success calls",
+      "passed": true
+    },
+    {
+      "name": "Round packets from the authored callback reach one black/white non-blocking notice box",
+      "passed": true
+    },
+    {
+      "name": "Camera notices use actual scoped native packets and share the same box without overlap",
+      "passed": true
+    },
+    {
+      "name": "Engine, BroadcastChannel and log duplicates are consumed once without extending visibility",
+      "passed": true
+    },
+    {
+      "name": "Log fallback waits for whole lines, skips startup history and survives truncation",
+      "passed": true
+    },
+    {
+      "name": "Invalid, foreign-player, stale and pre-load packets cannot claim a current notice",
+      "passed": true
+    },
+    {
+      "name": "Research completion and Game saved keep their exact text and cannot reappear after battle end",
+      "passed": true
+    },
+    {
+      "name": "Duel receives no Towers notices, channel or polling work",
+      "passed": true
+    },
+    {
+      "name": "Packaged VFS contains the exact reviewed reader and settings source bytes",
+      "passed": true
+    },
+    {
+      "name": "Private worker hook changes only by the explicit BNNOTICE route",
+      "passed": true
+    },
+    {
+      "name": "Actual worker hook forwards scoped notices and retains research, queue and every ordinary error",
+      "passed": true
+    }
+  ],
+  "sources": [
+    {
+      "path": "scenario/warzone-towers-config-reader.js",
+      "sha256": "cab5ccad87e693829f0ffed2d4d74ce6651a3aaa514d7fad5d8e26bcadde9913"
+    },
+    {
+      "path": "scenario/warzone-towers-printsettings.js",
+      "sha256": "a104623756dd5d5135535f9119178fd4d6fb8118f25862334b54a0e6d2ca2095"
+    },
+    {
+      "path": "archive/native-notices-0.35/keybind.cpp",
+      "sha256": "5730cf9a2b791a6a437f4e0da040e9dbb75e8befb48dc02caefb1a8e824355ed"
+    },
+    {
+      "path": "app/src/main/assets/warzone-towers-notices.js",
+      "sha256": "eacc2a3534b79e85b266c05fb56082a3aa6ccdf179040eae9e67ace3ebb119da"
+    },
+    {
+      "path": "tools/check-notices-035.cjs",
+      "sha256": "9e3bc93f95575d0b5c31358a3900c97df5c1b098556f6682c275770735d5bf3b"
+    }
+  ],
+  "scope": "Actual native/scenario sources and browser API fixtures; no emulator, native gameplay, visual acceptance or performance claim."
+}

@@ -1,0 +1,123 @@
+{
+  "version": "0.69",
+  "candidateAPK_SHA256": "6f6c095699183a3b74dbafc6bccb4ab736fe03915e86f950ad2474c843c7ea22",
+  "installedAPK_SHA256": "6f6c095699183a3b74dbafc6bccb4ab736fe03915e86f950ad2474c843c7ea22",
+  "emulatorUsed": true,
+  "passed": true,
+  "device": "Existing Pixel_10_Pro emulator-5558, Android 36.1",
+  "viewport": {
+    "physical": [
+      2400,
+      1080
+    ],
+    "webCss": [
+      1280,
+      576
+    ]
+  },
+  "verificationScope": [
+    "Main home Multiplayer entry and live official lobby room listing; repeated entry and refresh.",
+    "Actual public 1 vs AI Bots Battle join, waiting-room Ready, automatic room transfer, downloaded Path map and second Ready; actual connected game started on PC protocol 16384/104.",
+    "Four real construction trucks selected using mobile Trucks button with visible highlights. Ground tap created synchronized human DORDER_MOVE for droids160073,160019,160009,160007 to1689,524; before/after screenshots show unit movement. No seeded or debug-created units.",
+    "Finger drag panned actual camera; two-finger rotation, pinch zoom and tilt changed actual camera; no held keys, pointers or queued input left after gestures.",
+    "Research, Manufacturing and Build toolbar shortcuts opened the native PC engine menus. Base returned camera to Command Centre.",
+    "Native gear > Quit > Confirm returned to our live lobby list, followed by another real room join.",
+    "Android Back > Stay retained active room; Android Back > Return returned to live lobby list. Home returned to main mode selector.",
+    "Existing Towers, FFA and Campaign home/selection screens opened and returned; their engines, gameplay assets and simulation code verified unchanged against v0.68.",
+    "Original emulator main-app userdata restored from verified pre-test backup; installed APK hash remains the exact tested artifact."
+  ],
+  "limitations": [
+    "Multiplayer uses the stock PC research/manufacturing/build screens with our mobile toolbar and touch gestures. The custom Towers menus have not been ported to Multiplayer.",
+    "Verified official PC 4.7.0 TCP/IPv4 joining. GNS/UDP transport and hosting are unavailable in this engine.",
+    "Tested one public bot-match gameplay session for about 5 minutes 44 seconds; a full win/loss, every server, password room and long-session stability were not exhaustively tested.",
+    "No new full gameplay regression of the unchanged Towers/Campaign/FFA modes; their launch/navigation screens and exact asset preservation were checked.",
+    "No live advertisements watched, no public chat sent, no VPS or GitHub changes."
+  ],
+  "sources": [
+    {
+      "path": "app/build.gradle.kts",
+      "sha256": "23e75b1af26a8d1905c1c608fed31f7918749b3ef5f73f211440f14df89c363a"
+    },
+    {
+      "path": "app/src/main/AndroidManifest.xml",
+      "sha256": "ef810355c2d57d911773e137d2eeccd97816db9060d20afb2d2ca1511f7cae4b"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MainActivity.java",
+      "sha256": "331eb2ce08bc148e8c4def24ceab78acaf0396eff00198a1cff4cd71f2680546"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/HomeModesView.java",
+      "sha256": "52a34f18f332b09cba05fe32699b07dab31605951dd878c37c90d6add3f11bd8"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/GraphicsSetupView.java",
+      "sha256": "dd799540c2611a6597b438c5c6b6b3f1f0b2d4401fa72afeadfd911ed5d1bdea"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MultiplayerActivity.java",
+      "sha256": "a0ee59422e7c211d05a3d99a357ab10b84839c8d55635e8db360eabeaa12f566"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/engine.html",
+      "sha256": "e0ad374cddb5db5b29ab538bb7816edcf665297bfa5de369ccbae14e472617e9"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/index.html",
+      "sha256": "15d3b79fb8437d3f343fc2d131c818790e1517613b9c9eb9e4cf2826e33c0b9a"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/lobby-config.js",
+      "sha256": "d51b798340ac057aea87d7e2b906e1a32044058912e9e8981cd3eca5447dac70"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/lobby-http.js",
+      "sha256": "6b9099c2260f7ba3e8d1178db10adc8ea0155e8d5ad0bd9492ac9d6b30e76b58"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/lobby-ui.js",
+      "sha256": "5ad0851263b04a3abff46e7d60a1b93f3ca15446170b83b33c7f6de15f165f45"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/mobile-controls.js",
+      "sha256": "a72cbfeae5aac7e0c0173de371502f0cf0c193cd522010f2dc47c339d7fa4be3"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/multiplayer.css",
+      "sha256": "a279342e696c56800a9a345dfd9296cee7e78ccb7cc27c3cb2a7b9171a45daf6"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/Oswald.ttf",
+      "sha256": "5b38c246e255a12f5712d640d56bcced0472466fc68983d2d0410ec0457c2817"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/session.js",
+      "sha256": "ed9826de84fb1c94bdc05f0f9174fc2f210e8048c5ee91f80eb58b8dd20e12c7"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/socket-bridge.js",
+      "sha256": "708c01e7489c1d46c6afd5082cfbdeeefed1ee27317a8282359a010e942a1995"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/warzone2100.data",
+      "sha256": "9e89d11c8b67b5f68ddc0be43290233c28cd43b3d2a96fea1a7b4beaf83b8424"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/warzone2100.js",
+      "sha256": "82209a164840bce40a570bfc3e039161f72bc997c2251a88e02cc682d1f053cb"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/warzone2100.wasm",
+      "sha256": "5cfd676db13c96899a876fbd77197b7092b924ed265feed8594a2356f0b2492d"
+    }
+  ],
+  "buildLog": {
+    "path": "qa/lab/mp069/build-delivery.log",
+    "sha256": "3597c6d4568b13af998e7c9277400559f129746a3c0d2f57504c04a6d2af3036"
+  },
+  "nativeEvidence": {
+    "replay": "qa/lab/mp069/20261113_171535_multiplay_p0.wzrp",
+    "parsed": "qa/lab/mp069/delivery2-native-movement.json"
+  },
+  "userdataBackupRestoration": "qa/lab/mp069/userdata-restored.json"
+}

@@ -1,0 +1,69 @@
+{
+  "version": "0.46",
+  "passed": true,
+  "emulatorUsed": false,
+  "browserUsed": false,
+  "androidRuntimeExecuted": false,
+  "actualNativeEngineExecuted": false,
+  "gameplayVerified": false,
+  "screensVerified": false,
+  "scope": "Static source palette contrast, state coverage and preservation checks only; no CSS engine or screen capture.",
+  "checks": [
+    "Shared normal/selected/pressed/secondary/disabled colour pairs exceed 4.5:1 by source calculation",
+    "Final button skin uses the selected modest rounded rectangle and no clipped raster face",
+    "Selected and pressed surfaces pair their state ink; disabled/busy/focus preserve actual hit rectangles",
+    "Icon inversion is limited to original monochrome UI icons; crystal and item art retain colour",
+    "Research emphasis and the closed Music normal state remain explicit",
+    "Header/footer wrappers are transparent and the existing reachable Build dock/clearance rules remain",
+    "All seven active Towers sheets contain no old sage palette literals",
+    "Standalone native-menu recovery button receives the same normal/selected/pressed/disabled/focus shape family",
+    "Flat Build, research-topic and Intelligence rows pair dark pressed fill with white nested labels without frames",
+    "Loader and Bootstrap theme use the same dark startup surface",
+    "Every inline game loader/action script is byte-identical to the complete fallback",
+    "All handwritten asset JavaScript controllers retain their fallback SHA256"
+  ],
+  "checksPassed": 12,
+  "sourceContrastRatios": {
+    "normal": 13.94,
+    "selected": 17.3,
+    "pressed": 16.6,
+    "secondary": 9.94,
+    "disabled": 4.81
+  },
+  "preservedHandwrittenJavaScriptFiles": 26,
+  "sources": [
+    {
+      "path": "app/src/main/assets/warzone/ui/towers-shell.css",
+      "sha256": "51ae516037180e254cbe125fa548f4e9fd40458d30f9021648a43715a992bf9e"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/towers-monochrome.css",
+      "sha256": "8ec896652f3000395f45dbbd0bc11fa70e84f36b7cebef17cf6d6b2ce3effc46"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/towers-commands.css",
+      "sha256": "09b190388615d1b5c1bbfb9f55ab592ae388d14cff57386298e1d8dacc61d1a3"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/towers-research.css",
+      "sha256": "8f67b82d2d101bf07d609065ee61cdcd4258778b00f539aa248229d5023ca2c2"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/towers-status.css",
+      "sha256": "6948f451263f3659e3574c838a2c553223997d6809e7e08102a3080008e7461e"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/towers-intelligence.css",
+      "sha256": "0edd8b26365a03e572fb8215c4ba013940598a2e7312db63d55bc8e639b0723f"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/towers-game-controls.css",
+      "sha256": "a07401b9b120bd6e12e34b3b173cfc14ae354eb5dfab2a4dd24608d1fae9e7d0"
+    },
+    {
+      "path": "app/src/main/assets/warzone/index.html",
+      "sha256": "aa67dd71a485099c84d5dfb285fc34f54c95d08c5eead6a8e47ecb5e5beda5bb"
+    }
+  ],
+  "recordedUTC": "2026-11-11T08:35:10.527589+00:00"
+}

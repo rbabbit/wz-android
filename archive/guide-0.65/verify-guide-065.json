@@ -1,0 +1,74 @@
+{
+  "version": "0.65",
+  "passed": true,
+  "candidateAPK_SHA256": "ef18e0df365b5dc8bc50128aaf5bb93466138082fc16e233e9e223fa616c02fe",
+  "device": "emulator-5558",
+  "emulatorUsed": true,
+  "actualNativeEngineExecuted": true,
+  "checks": [
+    {
+      "name": "guide-home-800",
+      "passed": true,
+      "evidence": "qa/guide-065/ef18e0df-guide-home-800.json",
+      "sha256": "24f13e9b1b62ffb695ba57aeb7c9b6f6dc4113e0a0a4fbaa6624dd5271ae2d5f"
+    },
+    {
+      "name": "guide-compact-640",
+      "passed": true,
+      "evidence": "qa/guide-065/ef18e0df-guide-compact-640.json",
+      "sha256": "f6cf3235be8614bf714ae2f864e9e49e7acecc430ee2b248d3ed995a1198fbbe"
+    },
+    {
+      "name": "guide-ffa-help",
+      "passed": true,
+      "evidence": "qa/guide-065/ef18e0df-guide-ffa-help.json",
+      "sha256": "4754332cdf7ceee8633c02f4630642efdfbc9bd31441f5087396acf5b40a5668"
+    },
+    {
+      "name": "guide-towers-help",
+      "passed": true,
+      "evidence": "qa/guide-065/ef18e0df-guide-towers-help.json",
+      "sha256": "2a5c242b1f1721d80110662f3bbc78ec809b2f4891c7db54be14e9e15b0e35e0"
+    },
+    {
+      "name": "guide-campaign-help",
+      "passed": true,
+      "evidence": "qa/guide-065/ef18e0df-guide-campaign-help.json",
+      "sha256": "8e0a8eb7dc85117f077ca6a673235a80deab3c4e49855b297e0c00d895fd91b1"
+    },
+    {
+      "name": "wallet-profile-connectivity-24-archives-and-home-restored",
+      "passed": true,
+      "evidence": "qa/guide-065/ef18e0df-restoration.json",
+      "sha256": "154437906d87cfddca1d0d8cf0284edaf21341db10689a59705414b650a27b10"
+    }
+  ],
+  "runtimeErrors": [],
+  "finishedAt": "2026-11-12T22:24:24.954Z",
+  "installation": {
+    "path": "qa/guide-065/ef18e0df-installation.json",
+    "sha256": "d0c3afc3445f753f9034a45ce7a124528541bfac99a7ea2b5e22b2eea4a5e865",
+    "bytes": 359
+  },
+  "fixtureDisclosure": {
+    "worlds": "Ordinary prepared Cobra Easy phone checkpoint, safe Campaign Continue checkpoint, fresh Greenhaven preparation. No grants, rewards, purchases or unrelated long gameplay tests.",
+    "input": "Physical native navigation and trusted real Guide controls. Embedded Guide is inspected in its separate child renderer; parent cross-origin isolation access is intentionally unavailable.",
+    "screenshots": "14 unchanged real PNGs and16 manifest IDs. Menus captured on0.64 whose labels match0.65; world camera example is an actual phone image with unknown appversion explicitly identified in its caption."
+  },
+  "fixtureFailures": [
+    {
+      "name": "emulator-exited-during-profile-transition",
+      "disposition": "Emulator/qemu exited while moving to compactprofile. Same AVD/hostrenderer restarted in33s; exactinstalledAPK, wallet andpreparedEasy archive verified. Remainingcases share one640/font1.3profile beforeone finalrestore.",
+      "evidence": "qa/guide-065/ef18e0df-emulator-restart-inventory.json"
+    },
+    {
+      "name": "uiautomator-overlapping-inventory",
+      "disposition": "One separate read-only inventory overlapped the recorder dump and crashed the UiAutomator CLI registration. Subsequent device work was strictly sequential; product had no Java exception."
+    }
+  ],
+  "limitations": [
+    "Emulator terrain stays dark on host and SwiftShader renderers; a bounded Classic-mode trial did not resolve it. Menu screenshots focus on current controls; proper terrain world illustration uses the explicitly captioned actual phone capture. No generated or altered pixels.",
+    "Initial367f candidate lacked child COEP and keyboard Back handling. Required integration fixes are present in the exactdelivery candidate and verified by native Home keyboard retention plus all3 embedded Help groups on the delivery candidate.",
+    "No ads, full mission, balance, AI or production suite was repeated for this reader-only change. Native gameplay/data/maps/music remain byte-frozen to0.64."
+  ]
+}

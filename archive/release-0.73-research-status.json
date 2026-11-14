@@ -1,0 +1,162 @@
+{
+  "version": "0.73",
+  "versionCode": 73,
+  "candidateAPK_SHA256": "90eabc8eb9a31d8e0d7beeae213ad4e1b91d18266f68e4c8a7079966212c2a74",
+  "scope": "Shared Research item-state presentation in Towers, Campaign, FFA and Multiplayer; active/queued catalogue inclusion and independent ready selection. User requested no emulator testing. All other assets and native clients frozen.",
+  "exactAPKVerification": {
+    "evidence": {
+      "path": "qa/research-status-073/verification.json",
+      "bytes": 143111,
+      "sha256": "e8bd8f41d98d3dca7826f94aba06d894109811c94230c803ff87d01ed489666e"
+    },
+    "buildLog": {
+      "path": "qa/research-status-073/build.log",
+      "bytes": 2477,
+      "sha256": "5ae63c41c6fcadc987bb9bbe81bebf58e13c5b0584f39689b209ed1f40871f8e"
+    },
+    "emulatorUsed": false,
+    "emulatorOmittedAtUserRequest": true,
+    "androidGameplayVerified": false,
+    "offlineHostChecksPassed": true,
+    "buildChecksPassed": true,
+    "offlineFixtureEvidence": [
+      {
+        "path": "qa/research-073/browser.json",
+        "bytes": 143707,
+        "sha256": "a12f8d6fd7659baafa9dd5c74eee9330c289437b588746775e5d66add93daecb"
+      },
+      {
+        "path": "qa/research-status-073/checks.json",
+        "bytes": 4101,
+        "sha256": "34c3b7693be99e7af65566285263bae6e9793dabd3de9124bd620398dca43c44"
+      }
+    ],
+    "checks": {
+      "sharedResearchStates": true,
+      "activeQueuedCatalogMerge": true,
+      "multiLabQueueOwnership": true,
+      "readySelectionIndependent": true,
+      "crossModeResearchIncludes": true,
+      "layoutAndArtworkPreserved": true,
+      "successfulBuild": true
+    },
+    "verificationScope": "Actual shared Research renderer/function checks and host Chromium CSS/art/DOM checks in Towers, Campaign, FFA and Multiplayer; synthetic BNTECH/BNQUEUE native inputs; successful exact-APK build.",
+    "limitations": [
+      "No emulator or Android gameplay tests were run, as requested.",
+      "Native engine behavior, real research timing/unlocks, Android touch handling and multiplayer runtime behavior were not verified by these synthetic host fixtures."
+    ],
+    "pinnedCheckedSourceFiles": 702
+  },
+  "fallback": {
+    "path": "qa/research-status-073/fallback-0.73.json",
+    "bytes": 486,
+    "sha256": "b744bbca64a4d19bd807ec487bc1376c3b05d03e4fe6a1cad6952b031335f46e"
+  },
+  "sourcePreservation": {
+    "changedBaselineSources": [
+      {
+        "path": "AGENTS.md",
+        "beforeSHA256": "eb6980f576181a63c6d6c312ab8ed3930e39419e90666181bc736f6079d610f0",
+        "sha256": "7f0b58ba54c7eb5102e02fb36d57ce5cecb67b40245716805935a9f6f4513b9f"
+      },
+      {
+        "path": "app/build.gradle.kts",
+        "beforeSHA256": "ecdae59a6b2ed673a9c64e35d9ca2dae290971d35f111254700b89606bfd5706",
+        "sha256": "b4f109fb803946d4161318b7ba77d3ec573f5413e05ceecf359b6ebe700c8d39"
+      },
+      {
+        "path": "app/src/main/assets/warzone-mobile-research.js",
+        "beforeSHA256": "d2b91258096bcde795964d4dfb659f8941f8312419fa60ca15e3c421d5cddd7e",
+        "sha256": "8c347668b9608eea6cbd610346a2fddb50f3397ecb4503a6b32c2ccef5905377"
+      },
+      {
+        "path": "app/src/main/assets/warzone/ui/towers-research.css",
+        "beforeSHA256": "8f67b82d2d101bf07d609065ee61cdcd4258778b00f539aa248229d5023ca2c2",
+        "sha256": "89f45c254c8b3ba5099e8632fe8b2c65ee842d128c37d5c34c12030713f72c64"
+      }
+    ],
+    "addedSources": [
+      "archive/release-0.73-research-status.json",
+      "qa/research-073/browser.json",
+      "qa/research-073/research-campaign-1164x554.png",
+      "qa/research-073/research-campaign-640x320.png",
+      "qa/research-073/research-campaign-800x360.png",
+      "qa/research-073/research-ffa-1164x554.png",
+      "qa/research-073/research-ffa-640x320.png",
+      "qa/research-073/research-ffa-800x360.png",
+      "qa/research-073/research-multiplayer-1164x554.png",
+      "qa/research-073/research-multiplayer-640x320.png",
+      "qa/research-073/research-multiplayer-800x360.png",
+      "qa/research-073/research-towers-1164x554.png",
+      "qa/research-073/research-towers-640x320.png",
+      "qa/research-073/research-towers-800x360.png",
+      "qa/research-status-073/build.log",
+      "qa/research-status-073/checks.json",
+      "qa/research-status-073/fallback-0.73.json",
+      "qa/research-status-073/verification.json",
+      "tools/package-research-status-073.py",
+      "tools/record-research-status-073.py",
+      "tools/test-research-browser-073.cjs",
+      "tools/test-research-status-073.cjs"
+    ],
+    "baselineSourceEntries": 12440,
+    "everyBaselineSourceEntryRetained": true,
+    "onlySharedResearchAssetsChanged": true,
+    "multiplayerAndOtherAssetsFrozen": true,
+    "upstreamCommit": "7d3d8e51a61ceee89e6bf672a41337e1a9cd7392",
+    "protocol": [
+      16384,
+      104
+    ],
+    "nativeBuildPerformed": false,
+    "nativeCompiledClientReusedFromVersion": "0.71",
+    "sourceOverlayManifest": {
+      "path": "vendor/multiplayer/native-071/source-overlays.json",
+      "bytes": 1077,
+      "sha256": "e1489603363481f81c58bb04e4d34a84dbc9145543c4425c66b9688bfe32f598"
+    },
+    "completePatch": {
+      "path": "vendor/multiplayer/native-071/native-ui.patch",
+      "bytes": 46141,
+      "sha256": "b6c3c38267e1eb75e844ac412252ce11a7176f2fef8bc7f0f5146afb1f2148c1"
+    },
+    "nativeBuild": {
+      "path": "qa/multiplayer-071/native-build.json",
+      "bytes": 5069,
+      "sha256": "881e8100681511907c59f73ddccdf0c13207abeace0f7491f9d9415d908755d5"
+    },
+    "integration": {
+      "path": "vendor/multiplayer/native-071/runtime-integration.json",
+      "bytes": 1064,
+      "sha256": "5082fc268cc1c1840218461eb4005e94e00d055787adddd4c25a6d4783bcd525"
+    },
+    "portableNativeSourcesAndRawPairVerified": true,
+    "officialMPDataFrozen": true,
+    "wasmBinaryUnmodifiedAfterCompiler": true
+  },
+  "certificateSHA256": "4499efe00477c7c724c06a1dd96f935864548665c13ab5e2bd0a9c0f83f7cb15",
+  "changedAPKMembers": [
+    "AndroidManifest.xml",
+    "assets/warzone-mobile-research.js",
+    "assets/warzone/ui/towers-research.css",
+    "classes3.dex"
+  ],
+  "everyBaselineAPKMemberRetained": true,
+  "allAPKAssetsMatchSource": true,
+  "allOtherAssetsAndNativeLibrariesFrozen": true,
+  "bundledMusicFrozen": true,
+  "compiledMultiplayerClientByteIdenticalTo072": true,
+  "livePhoneAdsAndEmulatorFallbackRetained": true,
+  "maximumAPKZipGapBytes": 4096,
+  "generatedBuildConfigSHA256": "76b0bece3cbc98477fda40d4e128d8d7400543f5ecf0be662e92bb2c3a05ff35",
+  "nativeBuildPerformed": false,
+  "emulatorUsed": false,
+  "androidGameplayVerified": false,
+  "offlineHostChecksPassed": true,
+  "buildChecksPassed": true,
+  "packageChecksPassed": true,
+  "liveAdsTested": false,
+  "githubPublished": false,
+  "vpsChanged": false,
+  "recordedUTC": "2026-11-14T12:51:51.110156+00:00"
+}

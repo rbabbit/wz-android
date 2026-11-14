@@ -1,0 +1,4435 @@
+{
+  "passed": true,
+  "version": 2,
+  "mode": "ffa",
+  "map": "emag",
+  "players": 4,
+  "botType": "cobra",
+  "maps": [
+    {
+      "id": "emag",
+      "name": "EMAG FFA",
+      "players": 4,
+      "level": "FFA-EMAG-T1",
+      "mapDirectory": "ffa-emag",
+      "description": "128 × 128. Four trucks, five laboratories and forty oil derricks per player. Build your own factories.",
+      "tileset": "arizona",
+      "sourceSHA256": "b3181ca918ecac7ab4ceb38565b6e3c425f96bea735e550ea6cbb53c150a9c87",
+      "bots": 3,
+      "preview": "ffa-previews/emag.png",
+      "width": 128,
+      "height": 128
+    },
+    {
+      "id": "contact",
+      "name": "Contact",
+      "players": 4,
+      "level": "FFA-CONTACT-T1",
+      "mapDirectory": "ffa-contact",
+      "description": "128 × 107. Sixteen trucks per player and an established oil economy. No starting laboratories or factories; authored oil holdings differ slightly.",
+      "tileset": "urban",
+      "sourceSHA256": "623bae6862c98577d819f4bed3cd1ce729c9527fc3814abe0136d7f0eb51d596",
+      "bots": 3,
+      "preview": "ffa-previews/contact.png",
+      "width": 128,
+      "height": 107
+    },
+    {
+      "id": "templar-ffa",
+      "name": "Ng-TemplarFFA",
+      "players": 4,
+      "level": "FFA-TEMPLAR-T1",
+      "mapDirectory": "ffa-templar-ffa",
+      "description": "120 × 120. Four trucks and five laboratories per player. Water and cliffs divide the terrain; the original map also contains neutral oil holdings.",
+      "tileset": "urban",
+      "sourceSHA256": "8ac205dea33d618821ce9c302ecee58f431b980c61be8e648aaa1577013eb05e",
+      "bots": 3,
+      "preview": "ffa-previews/templar-ffa.png",
+      "width": 120,
+      "height": 120
+    },
+    {
+      "id": "rb-simple",
+      "name": "RB-Simple",
+      "players": 4,
+      "level": "FFA-RBSIMPLE-T1",
+      "mapDirectory": "ffa-rb-simple",
+      "description": "100 × 100. Four trucks, five laboratories and forty oil derricks per player. The authored map includes neutral fortifications.",
+      "tileset": "arizona",
+      "sourceSHA256": "e97d30e2a7557479db93e34b249777338e50ed9fcfe010e5b6f89ebc9968820a",
+      "bots": 3,
+      "preview": "ffa-previews/rb-simple.png",
+      "width": 100,
+      "height": 100
+    },
+    {
+      "id": "rb-usefull",
+      "name": "RB_Usefull",
+      "players": 4,
+      "level": "FFA-RBUSEFULL-T1",
+      "mapDirectory": "ffa-rb-usefull",
+      "description": "100 × 140. Four trucks, five upgraded vehicle factories and five laboratories per player. Includes the original neutral fortifications.",
+      "tileset": "arizona",
+      "sourceSHA256": "befe25baf1328d6535645e407def7035cb0e624233fb93ead34a588d49d220ca",
+      "bots": 3,
+      "preview": "ffa-previews/rb-usefull.png",
+      "width": 100,
+      "height": 140
+    },
+    {
+      "id": "emaj-6p",
+      "name": "EMAJ-6P",
+      "players": 6,
+      "level": "FFA-EMAJ6-T1",
+      "mapDirectory": "ffa-emaj-6p",
+      "description": "176 × 176. Six players: you and five independent Cobra opponents. Each authored base has four trucks, five vehicle factories, five cyborg factories and five laboratories.",
+      "tileset": "arizona",
+      "sourceSHA256": "f55cf48f11bc5d2d7b38cc460ea80c231ba3eeeb5e980dc7545129e8961798f0",
+      "bots": 5,
+      "preview": "ffa-previews/emaj-6p.png",
+      "width": 176,
+      "height": 176
+    },
+    {
+      "id": "ntw-2p-01",
+      "name": "Sunbreak Divide",
+      "players": 2,
+      "level": "FFA-NTW2-01-T1",
+      "mapDirectory": "ffa-ntw-2p-01",
+      "tileset": "arizona",
+      "sourceSHA256": "1f33ce86d5ac6ae8b603b691beee2b9a0462b2e11adcbc33a424f90f64e2935d",
+      "bots": 1,
+      "preview": "ffa-previews/ntw-2p-01.png",
+      "width": 176,
+      "height": 144,
+      "description": "Open field with low rock ribs and broad lateral flanks. Equal high-oil bases: four trucks, five labs, vehicle and cyborg factories; 24 working oils each plus eight expansion oils. Defined ground lanes and rock banks break up the open approaches."
+    },
+    {
+      "id": "ntw-2p-02",
+      "name": "Copper Twin Lakes",
+      "players": 2,
+      "level": "FFA-NTW2-02-T1",
+      "mapDirectory": "ffa-ntw-2p-02",
+      "tileset": "urban",
+      "sourceSHA256": "a8ce5cdd03e9094de868c32f7450ab042fee0a488a249ad5c4be4b47e2f541e9",
+      "bots": 1,
+      "preview": "ffa-previews/ntw-2p-02.png",
+      "width": 192,
+      "height": 160,
+      "description": "Paired lakes divide a direct front from wide outer flanks. Equal high-oil bases: four trucks, five labs, vehicle and cyborg factories; 24 working oils each plus eight expansion oils. Defined ground lanes and rock banks break up the open approaches."
+    },
+    {
+      "id": "ntw-2p-03",
+      "name": "Slatewater Ring",
+      "players": 2,
+      "level": "FFA-NTW2-03-T1",
+      "mapDirectory": "ffa-ntw-2p-03",
+      "tileset": "rockies",
+      "sourceSHA256": "119c8f6d36c853366800264b41010e14ec967afb281277fad9124e4a4d6cb375",
+      "bots": 1,
+      "preview": "ffa-previews/ntw-2p-03.png",
+      "width": 168,
+      "height": 168,
+      "description": "A central lake creates a broad encircling battlefield. Equal high-oil bases: four trucks, five labs, vehicle and cyborg factories; 24 working oils each plus eight expansion oils. Defined ground lanes and rock banks break up the open approaches."
+    },
+    {
+      "id": "ntw-2p-04",
+      "name": "Redstone Elbow",
+      "players": 2,
+      "level": "FFA-NTW2-04-T1",
+      "mapDirectory": "ffa-ntw-2p-04",
+      "tileset": "arizona",
+      "sourceSHA256": "66486afed1946f8c3b0af96e0696d259252e038c0ec1039129b974977ff5ade1",
+      "bots": 1,
+      "preview": "ffa-previews/ntw-2p-04.png",
+      "width": 184,
+      "height": 152,
+      "description": "Stone spokes split the centre into linked fighting courts. Equal high-oil bases: four trucks, five labs, vehicle and cyborg factories; 24 working oils each plus eight expansion oils. Defined ground lanes and rock banks break up the open approaches."
+    },
+    {
+      "id": "ntw-2p-05",
+      "name": "Canal Exchange",
+      "players": 2,
+      "level": "FFA-NTW2-05-T1",
+      "mapDirectory": "ffa-ntw-2p-05",
+      "tileset": "urban",
+      "sourceSHA256": "e4a63fd6a7ec5eff774ec6fcdb65e71fc4b317431a4781fde37019a17bed14d9",
+      "bots": 1,
+      "preview": "ffa-previews/ntw-2p-05.png",
+      "width": 176,
+      "height": 176,
+      "description": "Radial canals have inner and outer ground crossings. Equal high-oil bases: four trucks, five labs, vehicle and cyborg factories; 24 working oils each plus eight expansion oils. Defined ground lanes and rock banks break up the open approaches."
+    },
+    {
+      "id": "ntw-2p-06",
+      "name": "Ash Court",
+      "players": 2,
+      "level": "FFA-NTW2-06-T1",
+      "mapDirectory": "ffa-ntw-2p-06",
+      "tileset": "rockies",
+      "sourceSHA256": "d4f9fc001b3ab8628aef54cc086c91584ef6b1460145e9a77e7156ca18304448",
+      "bots": 1,
+      "preview": "ffa-previews/ntw-2p-06.png",
+      "width": 160,
+      "height": 184,
+      "description": "A stone court anchors several broad approaches. Equal high-oil bases: four trucks, five labs, vehicle and cyborg factories; 24 working oils each plus eight expansion oils. Defined ground lanes and rock banks break up the open approaches."
+    },
+    {
+      "id": "ntw-2p-07",
+      "name": "Willow Braid",
+      "players": 2,
+      "level": "FFA-NTW2-07-T1",
+      "mapDirectory": "ffa-ntw-2p-07",
+      "tileset": "arizona",
+      "sourceSHA256": "4860693aaaeb25eeaead3678de8f8e8fd6390fdc8b801cf6f0d7be58f7773b8f",
+      "bots": 1,
+      "preview": "ffa-previews/ntw-2p-07.png",
+      "width": 200,
+      "height": 160,
+      "description": "Alternating pools create a loose network of open lanes. Equal high-oil bases: four trucks, five labs, vehicle and cyborg factories; 24 working oils each plus eight expansion oils. Defined ground lanes and rock banks break up the open approaches."
+    },
+    {
+      "id": "ntw-2p-08",
+      "name": "Granite Loop",
+      "players": 2,
+      "level": "FFA-NTW2-08-T1",
+      "mapDirectory": "ffa-ntw-2p-08",
+      "tileset": "urban",
+      "sourceSHA256": "7bcfe5a0f9b0d4c59816a592b4c21e3fb13a905c2ff03065d8f325216152f39d",
+      "bots": 1,
+      "preview": "ffa-previews/ntw-2p-08.png",
+      "width": 176,
+      "height": 160,
+      "description": "A central mesa has a wide ring and longer outer flanks. Equal high-oil bases: four trucks, five labs, vehicle and cyborg factories; 24 working oils each plus eight expansion oils. Defined ground lanes and rock banks break up the open approaches."
+    },
+    {
+      "id": "ntw-2p-09",
+      "name": "Longshore Duel",
+      "players": 2,
+      "level": "FFA-NTW2-09-T1",
+      "mapDirectory": "ffa-ntw-2p-09",
+      "tileset": "rockies",
+      "sourceSHA256": "d8a186090a7408d82b542b8b43974613a670cba39c3f55e861e53c37791f3cb5",
+      "bots": 1,
+      "preview": "ffa-previews/ntw-2p-09.png",
+      "width": 192,
+      "height": 176,
+      "description": "Deep perimeter bays leave a connected inland front. Equal high-oil bases: four trucks, five labs, vehicle and cyborg factories; 24 working oils each plus eight expansion oils. Defined ground lanes and rock banks break up the open approaches."
+    },
+    {
+      "id": "ntw-2p-10",
+      "name": "Twin Rail Front",
+      "players": 2,
+      "level": "FFA-NTW2-10-T1",
+      "mapDirectory": "ffa-ntw-2p-10",
+      "tileset": "arizona",
+      "sourceSHA256": "f05f8fb48da56c8f3abc9e1d1a02577f9a05ce6051007566a9f8e0eca814f7bd",
+      "bots": 1,
+      "preview": "ffa-previews/ntw-2p-10.png",
+      "width": 184,
+      "height": 160,
+      "description": "Broken rock bars create parallel fronts and cross routes. Equal high-oil bases: four trucks, five labs, vehicle and cyborg factories; 24 working oils each plus eight expansion oils. Defined ground lanes and rock banks break up the open approaches."
+    },
+    {
+      "id": "ntw-2p-11",
+      "name": "Amber Crater",
+      "players": 2,
+      "level": "FFA-NTW2-11-T1",
+      "mapDirectory": "ffa-ntw-2p-11",
+      "tileset": "urban",
+      "sourceSHA256": "08402441e9b129cb601cad8dc3adf22e21a2be73af769a3c7e83195ab4b9c545",
+      "bots": 1,
+      "preview": "ffa-previews/ntw-2p-11.png",
+      "width": 176,
+      "height": 192,
+      "description": "A broken crater lake surrounds a connected central court. Equal high-oil bases: four trucks, five labs, vehicle and cyborg factories; 24 working oils each plus eight expansion oils. Defined ground lanes and rock banks break up the open approaches."
+    },
+    {
+      "id": "ntw-2p-12",
+      "name": "Cedar Courts",
+      "players": 2,
+      "level": "FFA-NTW2-12-T1",
+      "mapDirectory": "ffa-ntw-2p-12",
+      "tileset": "rockies",
+      "sourceSHA256": "6cf2010cd0e2c87370000756f9315c475f61027ded3228503fb4040b648e099d",
+      "bots": 1,
+      "preview": "ffa-previews/ntw-2p-12.png",
+      "width": 168,
+      "height": 184,
+      "description": "Broad forward building courts share direct and flanking approaches. Equal high-oil bases: four trucks, five labs, vehicle and cyborg factories; 24 working oils each plus eight expansion oils. Defined ground lanes and rock banks break up the open approaches."
+    },
+    {
+      "id": "ntw-2p-13",
+      "name": "Broadwater Crossing",
+      "players": 2,
+      "level": "FFA-NTW2-13-T1",
+      "mapDirectory": "ffa-ntw-2p-13",
+      "tileset": "arizona",
+      "sourceSHA256": "8440e8b0e73ab3160765e1c1afdbe48e1d6cf36c85a3971b5c39fd913c3dc008",
+      "bots": 1,
+      "preview": "ffa-previews/ntw-2p-13.png",
+      "width": 192,
+      "height": 192,
+      "description": "Large water basins are joined by broad ground causeways. Equal high-oil bases: four trucks, five labs, vehicle and cyborg factories; 24 working oils each plus eight expansion oils. Defined ground lanes and rock banks break up the open approaches."
+    },
+    {
+      "id": "ntw-2p-14",
+      "name": "Shatterstone",
+      "players": 2,
+      "level": "FFA-NTW2-14-T1",
+      "mapDirectory": "ffa-ntw-2p-14",
+      "tileset": "urban",
+      "sourceSHA256": "0a4b2b357cfc69e4ccf6a91649c81838a39e1a1011402ff5abfc800034698a1b",
+      "bots": 1,
+      "preview": "ffa-previews/ntw-2p-14.png",
+      "width": 200,
+      "height": 176,
+      "description": "Offset rock shards frame a clear central fighting basin. Equal high-oil bases: four trucks, five labs, vehicle and cyborg factories; 24 working oils each plus eight expansion oils. Defined ground lanes and rock banks break up the open approaches."
+    },
+    {
+      "id": "ntw-2p-15",
+      "name": "Crownwater",
+      "players": 2,
+      "level": "FFA-NTW2-15-T1",
+      "mapDirectory": "ffa-ntw-2p-15",
+      "tileset": "rockies",
+      "sourceSHA256": "c42a57a1765acc6635959b458011d43eee082a282b35e1d211979bdf7c2d444c",
+      "bots": 1,
+      "preview": "ffa-previews/ntw-2p-15.png",
+      "width": 184,
+      "height": 184,
+      "description": "A crown of lakes leaves several direct and flanking routes. Equal high-oil bases: four trucks, five labs, vehicle and cyborg factories; 24 working oils each plus eight expansion oils. Defined ground lanes and rock banks break up the open approaches."
+    },
+    {
+      "id": "ntw-3p-01",
+      "name": "Triad Plain",
+      "players": 3,
+      "level": "FFA-NTW3-01-T1",
+      "mapDirectory": "ffa-ntw-3p-01",
+      "tileset": "urban",
+      "sourceSHA256": "32226f5508c37ca219ad5b171475e80f3280b8d6082d433c0831d4625d204a03",
+      "bots": 2,
+      "preview": "ffa-previews/ntw-3p-01.png",
+      "width": 184,
+      "height": 184,
+      "description": "Open field with low rock ribs and broad lateral flanks. Equal high-oil bases: four trucks, five labs, vehicle and cyborg factories; 24 working oils each plus eight expansion oils. Defined ground lanes and rock banks break up the open approaches."
+    },
+    {
+      "id": "ntw-3p-02",
+      "name": "Three Rivers",
+      "players": 3,
+      "level": "FFA-NTW3-02-T1",
+      "mapDirectory": "ffa-ntw-3p-02",
+      "tileset": "rockies",
+      "sourceSHA256": "48b42989b1665b55a4c35d1384df2a8fba564607f750f23bf69b4e3a8a7414fc",
+      "bots": 2,
+      "preview": "ffa-previews/ntw-3p-02.png",
+      "width": 192,
+      "height": 192,
+      "description": "Paired lakes divide a direct front from wide outer flanks. Equal high-oil bases: four trucks, five labs, vehicle and cyborg factories; 24 working oils each plus eight expansion oils. Defined ground lanes and rock banks break up the open approaches."
+    },
+    {
+      "id": "ntw-3p-03",
+      "name": "Trinity Reservoir",
+      "players": 3,
+      "level": "FFA-NTW3-03-T1",
+      "mapDirectory": "ffa-ntw-3p-03",
+      "tileset": "arizona",
+      "sourceSHA256": "740e7dce50de3f59af7f5a49c6a66b1c46709bd06ec7b3d65e5f3d11b4189841",
+      "bots": 2,
+      "preview": "ffa-previews/ntw-3p-03.png",
+      "width": 200,
+      "height": 200,
+      "description": "A central lake creates a broad encircling battlefield. Equal high-oil bases: four trucks, five labs, vehicle and cyborg factories; 24 working oils each plus eight expansion oils. Defined ground lanes and rock banks break up the open approaches."
+    },
+    {
+      "id": "ntw-3p-04",
+      "name": "Meridian Spokes",
+      "players": 3,
+      "level": "FFA-NTW3-04-T1",
+      "mapDirectory": "ffa-ntw-3p-04",
+      "tileset": "urban",
+      "sourceSHA256": "e43f4c7826d286138ba676fd8d9763d9748354d2573339f4f7d53d1f0a7822fc",
+      "bots": 2,
+      "preview": "ffa-previews/ntw-3p-04.png",
+      "width": 188,
+      "height": 188,
+      "description": "Stone spokes split the centre into linked fighting courts. Equal high-oil bases: four trucks, five labs, vehicle and cyborg factories; 24 working oils each plus eight expansion oils. Defined ground lanes and rock banks break up the open approaches."
+    },
+    {
+      "id": "ntw-3p-05",
+      "name": "Triple Lock",
+      "players": 3,
+      "level": "FFA-NTW3-05-T1",
+      "mapDirectory": "ffa-ntw-3p-05",
+      "tileset": "rockies",
+      "sourceSHA256": "c2df5ea9da3684ea148800a8453d345c215d6c43893af54f1f6a3341aeaa97f5",
+      "bots": 2,
+      "preview": "ffa-previews/ntw-3p-05.png",
+      "width": 204,
+      "height": 204,
+      "description": "Radial canals have inner and outer ground crossings. Equal high-oil bases: four trucks, five labs, vehicle and cyborg factories; 24 working oils each plus eight expansion oils. Defined ground lanes and rock banks break up the open approaches."
+    },
+    {
+      "id": "ntw-3p-06",
+      "name": "Civic Triangle",
+      "players": 3,
+      "level": "FFA-NTW3-06-T1",
+      "mapDirectory": "ffa-ntw-3p-06",
+      "tileset": "arizona",
+      "sourceSHA256": "76823dc01b11789fbfb68f3fcd22dbd1f8e09ed4386a619de5749d665d58213e",
+      "bots": 2,
+      "preview": "ffa-previews/ntw-3p-06.png",
+      "width": 192,
+      "height": 192,
+      "description": "A stone court anchors several broad approaches. Equal high-oil bases: four trucks, five labs, vehicle and cyborg factories; 24 working oils each plus eight expansion oils. Defined ground lanes and rock banks break up the open approaches."
+    },
+    {
+      "id": "ntw-3p-07",
+      "name": "Reedwater Weave",
+      "players": 3,
+      "level": "FFA-NTW3-07-T1",
+      "mapDirectory": "ffa-ntw-3p-07",
+      "tileset": "urban",
+      "sourceSHA256": "cdfa50d05fe2782156a298862ee3133cbd23b9f0998a2d21fb5ab4f419a97c25",
+      "bots": 2,
+      "preview": "ffa-previews/ntw-3p-07.png",
+      "width": 208,
+      "height": 208,
+      "description": "Alternating pools create a loose network of open lanes. Equal high-oil bases: four trucks, five labs, vehicle and cyborg factories; 24 working oils each plus eight expansion oils. Defined ground lanes and rock banks break up the open approaches."
+    },
+    {
+      "id": "ntw-3p-08",
+      "name": "Three Mesa Loop",
+      "players": 3,
+      "level": "FFA-NTW3-08-T1",
+      "mapDirectory": "ffa-ntw-3p-08",
+      "tileset": "rockies",
+      "sourceSHA256": "9c37c871c9ed4f32f632e91d3f4ed0fdf75c66f18170a4afcc7b76f0ca38c507",
+      "bots": 2,
+      "preview": "ffa-previews/ntw-3p-08.png",
+      "width": 196,
+      "height": 196,
+      "description": "A central mesa has a wide ring and longer outer flanks. Equal high-oil bases: four trucks, five labs, vehicle and cyborg factories; 24 working oils each plus eight expansion oils. Defined ground lanes and rock banks break up the open approaches."
+    },
+    {
+      "id": "ntw-3p-09",
+      "name": "Three Harbours",
+      "players": 3,
+      "level": "FFA-NTW3-09-T1",
+      "mapDirectory": "ffa-ntw-3p-09",
+      "tileset": "arizona",
+      "sourceSHA256": "044bb314f010aa31a5b7c93dfb343d05d73ad9b24c2e7f48cde6c3c1860835a9",
+      "bots": 2,
+      "preview": "ffa-previews/ntw-3p-09.png",
+      "width": 212,
+      "height": 212,
+      "description": "Deep perimeter bays leave a connected inland front. Equal high-oil bases: four trucks, five labs, vehicle and cyborg factories; 24 working oils each plus eight expansion oils. Defined ground lanes and rock banks break up the open approaches."
+    },
+    {
+      "id": "ntw-3p-10",
+      "name": "Broken Triskelion",
+      "players": 3,
+      "level": "FFA-NTW3-10-T1",
+      "mapDirectory": "ffa-ntw-3p-10",
+      "tileset": "urban",
+      "sourceSHA256": "7bf50f2806d9323f4790586c2b9e45f4c88123b18bf1eb89cccd9588990815fc",
+      "bots": 2,
+      "preview": "ffa-previews/ntw-3p-10.png",
+      "width": 200,
+      "height": 200,
+      "description": "Broken rock bars create parallel fronts and cross routes. Equal high-oil bases: four trucks, five labs, vehicle and cyborg factories; 24 working oils each plus eight expansion oils. Defined ground lanes and rock banks break up the open approaches."
+    },
+    {
+      "id": "ntw-3p-11",
+      "name": "Caldera Three",
+      "players": 3,
+      "level": "FFA-NTW3-11-T1",
+      "mapDirectory": "ffa-ntw-3p-11",
+      "tileset": "rockies",
+      "sourceSHA256": "adbc528fb153c01dce46367d66ec5f81c1e56f10334992e041176e9c05fea9c2",
+      "bots": 2,
+      "preview": "ffa-previews/ntw-3p-11.png",
+      "width": 204,
+      "height": 204,
+      "description": "A broken crater lake surrounds a connected central court. Equal high-oil bases: four trucks, five labs, vehicle and cyborg factories; 24 working oils each plus eight expansion oils. Defined ground lanes and rock banks break up the open approaches."
+    },
+    {
+      "id": "ntw-3p-12",
+      "name": "Juniper Courts",
+      "players": 3,
+      "level": "FFA-NTW3-12-T1",
+      "mapDirectory": "ffa-ntw-3p-12",
+      "tileset": "arizona",
+      "sourceSHA256": "679220564158dd493f42787440926495ed1806b7db18d3e6a6007e58ac8a02e4",
+      "bots": 2,
+      "preview": "ffa-previews/ntw-3p-12.png",
+      "width": 188,
+      "height": 188,
+      "description": "Broad forward building courts share direct and flanking approaches. Equal high-oil bases: four trucks, five labs, vehicle and cyborg factories; 24 working oils each plus eight expansion oils. Defined ground lanes and rock banks break up the open approaches."
+    },
+    {
+      "id": "ntw-3p-13",
+      "name": "Trident Causeways",
+      "players": 3,
+      "level": "FFA-NTW3-13-T1",
+      "mapDirectory": "ffa-ntw-3p-13",
+      "tileset": "urban",
+      "sourceSHA256": "530b7d60fbc2e64a322e6fdf784858e53b1b60c3789659aa3680665ea2df5a6d",
+      "bots": 2,
+      "preview": "ffa-previews/ntw-3p-13.png",
+      "width": 216,
+      "height": 216,
+      "description": "Large water basins are joined by broad ground causeways. Equal high-oil bases: four trucks, five labs, vehicle and cyborg factories; 24 working oils each plus eight expansion oils. Defined ground lanes and rock banks break up the open approaches."
+    },
+    {
+      "id": "ntw-3p-14",
+      "name": "Triune Shards",
+      "players": 3,
+      "level": "FFA-NTW3-14-T1",
+      "mapDirectory": "ffa-ntw-3p-14",
+      "tileset": "rockies",
+      "sourceSHA256": "02f9337e7a2525dc673814ef2a2dc2ca07010f96421cde4537dfbb9a062323eb",
+      "bots": 2,
+      "preview": "ffa-previews/ntw-3p-14.png",
+      "width": 208,
+      "height": 208,
+      "description": "Offset rock shards frame a clear central fighting basin. Equal high-oil bases: four trucks, five labs, vehicle and cyborg factories; 24 working oils each plus eight expansion oils. Defined ground lanes and rock banks break up the open approaches."
+    },
+    {
+      "id": "ntw-3p-15",
+      "name": "Three Crowns",
+      "players": 3,
+      "level": "FFA-NTW3-15-T1",
+      "mapDirectory": "ffa-ntw-3p-15",
+      "tileset": "arizona",
+      "sourceSHA256": "4b26924a7f142f31d6114d92a132fd7c5fba526fd3d60a536bbf5257fa1e758b",
+      "bots": 2,
+      "preview": "ffa-previews/ntw-3p-15.png",
+      "width": 212,
+      "height": 212,
+      "description": "A crown of lakes leaves several direct and flanking routes. Equal high-oil bases: four trucks, five labs, vehicle and cyborg factories; 24 working oils each plus eight expansion oils. Defined ground lanes and rock banks break up the open approaches."
+    },
+    {
+      "id": "ntw-4p-01",
+      "name": "Compass Plain",
+      "players": 4,
+      "level": "FFA-NTW4-01-T1",
+      "mapDirectory": "ffa-ntw-4p-01",
+      "tileset": "rockies",
+      "sourceSHA256": "cf6e5f40b75bbbb715e90e7d6b278851e23315166849619a89f21a22ce57676b",
+      "bots": 3,
+      "preview": "ffa-previews/ntw-4p-01.png",
+      "width": 200,
+      "height": 200,
+      "description": "Open field with low rock ribs and broad lateral flanks. Equal high-oil bases: four trucks, five labs, vehicle and cyborg factories; 24 working oils each plus eight expansion oils. Defined ground lanes and rock banks break up the open approaches."
+    },
+    {
+      "id": "ntw-4p-02",
+      "name": "Four Basins",
+      "players": 4,
+      "level": "FFA-NTW4-02-T1",
+      "mapDirectory": "ffa-ntw-4p-02",
+      "tileset": "arizona",
+      "sourceSHA256": "b0eda9d414ad0955be102d3b14b626d83db01647b174825c46ea8784cc3b24b0",
+      "bots": 3,
+      "preview": "ffa-previews/ntw-4p-02.png",
+      "width": 208,
+      "height": 208,
+      "description": "Paired lakes divide a direct front from wide outer flanks. Equal high-oil bases: four trucks, five labs, vehicle and cyborg factories; 24 working oils each plus eight expansion oils. Defined ground lanes and rock banks break up the open approaches."
+    },
+    {
+      "id": "ntw-4p-03",
+      "name": "Citadel Lake",
+      "players": 4,
+      "level": "FFA-NTW4-03-T1",
+      "mapDirectory": "ffa-ntw-4p-03",
+      "tileset": "urban",
+      "sourceSHA256": "dea84d144a820f3c9a1e6b3eb0075d5d02c4e417e65b1fb95e41a7742f333333",
+      "bots": 3,
+      "preview": "ffa-previews/ntw-4p-03.png",
+      "width": 216,
+      "height": 216,
+      "description": "A central lake creates a broad encircling battlefield. Equal high-oil bases: four trucks, five labs, vehicle and cyborg factories; 24 working oils each plus eight expansion oils. Defined ground lanes and rock banks break up the open approaches."
+    },
+    {
+      "id": "ntw-4p-04",
+      "name": "Cardinal Stone",
+      "players": 4,
+      "level": "FFA-NTW4-04-T1",
+      "mapDirectory": "ffa-ntw-4p-04",
+      "tileset": "rockies",
+      "sourceSHA256": "8d0202dac07af308fc6c4da6b5f95dde0c32659e1b6716b74cc6c64e0b83a8e3",
+      "bots": 3,
+      "preview": "ffa-previews/ntw-4p-04.png",
+      "width": 204,
+      "height": 204,
+      "description": "Stone spokes split the centre into linked fighting courts. Equal high-oil bases: four trucks, five labs, vehicle and cyborg factories; 24 working oils each plus eight expansion oils. Defined ground lanes and rock banks break up the open approaches."
+    },
+    {
+      "id": "ntw-4p-05",
+      "name": "Four Canal Gates",
+      "players": 4,
+      "level": "FFA-NTW4-05-T1",
+      "mapDirectory": "ffa-ntw-4p-05",
+      "tileset": "arizona",
+      "sourceSHA256": "19a4151420755b6c3447501c5a480619bb2b4889d8fe1fd56fe2069fd3139fd2",
+      "bots": 3,
+      "preview": "ffa-previews/ntw-4p-05.png",
+      "width": 220,
+      "height": 220,
+      "description": "Radial canals have inner and outer ground crossings. Equal high-oil bases: four trucks, five labs, vehicle and cyborg factories; 24 working oils each plus eight expansion oils. Defined ground lanes and rock banks break up the open approaches."
+    },
+    {
+      "id": "ntw-4p-06",
+      "name": "Civic Square",
+      "players": 4,
+      "level": "FFA-NTW4-06-T1",
+      "mapDirectory": "ffa-ntw-4p-06",
+      "tileset": "urban",
+      "sourceSHA256": "83c93eb1757797960fe6659d40fe9733ee16dfe8d63cba85372b6a1e334509d3",
+      "bots": 3,
+      "preview": "ffa-previews/ntw-4p-06.png",
+      "width": 208,
+      "height": 208,
+      "description": "A stone court anchors several broad approaches. Equal high-oil bases: four trucks, five labs, vehicle and cyborg factories; 24 working oils each plus eight expansion oils. Defined ground lanes and rock banks break up the open approaches."
+    },
+    {
+      "id": "ntw-4p-07",
+      "name": "Crosswind Wetlands",
+      "players": 4,
+      "level": "FFA-NTW4-07-T1",
+      "mapDirectory": "ffa-ntw-4p-07",
+      "tileset": "rockies",
+      "sourceSHA256": "655b9b37e511e7f0adf6a116ed14cb4648ee744f7e754f280e9fe6fb21782696",
+      "bots": 3,
+      "preview": "ffa-previews/ntw-4p-07.png",
+      "width": 224,
+      "height": 224,
+      "description": "Alternating pools create a loose network of open lanes. Equal high-oil bases: four trucks, five labs, vehicle and cyborg factories; 24 working oils each plus eight expansion oils. Defined ground lanes and rock banks break up the open approaches."
+    },
+    {
+      "id": "ntw-4p-08",
+      "name": "Four Mesa Loop",
+      "players": 4,
+      "level": "FFA-NTW4-08-T1",
+      "mapDirectory": "ffa-ntw-4p-08",
+      "tileset": "arizona",
+      "sourceSHA256": "df4ad0562474870272e4f982de03980e61386c0789b33bc0bcd2cc9de7093aab",
+      "bots": 3,
+      "preview": "ffa-previews/ntw-4p-08.png",
+      "width": 212,
+      "height": 212,
+      "description": "A central mesa has a wide ring and longer outer flanks. Equal high-oil bases: four trucks, five labs, vehicle and cyborg factories; 24 working oils each plus eight expansion oils. Defined ground lanes and rock banks break up the open approaches."
+    },
+    {
+      "id": "ntw-4p-09",
+      "name": "Quarter Harbours",
+      "players": 4,
+      "level": "FFA-NTW4-09-T1",
+      "mapDirectory": "ffa-ntw-4p-09",
+      "tileset": "urban",
+      "sourceSHA256": "49621ff71f357c7a3dcea81ce47da9efb552fbeadb3a8b2f04025a715473e5dd",
+      "bots": 3,
+      "preview": "ffa-previews/ntw-4p-09.png",
+      "width": 228,
+      "height": 228,
+      "description": "Deep perimeter bays leave a connected inland front. Equal high-oil bases: four trucks, five labs, vehicle and cyborg factories; 24 working oils each plus eight expansion oils. Defined ground lanes and rock banks break up the open approaches."
+    },
+    {
+      "id": "ntw-4p-10",
+      "name": "Railway Crossfront",
+      "players": 4,
+      "level": "FFA-NTW4-10-T1",
+      "mapDirectory": "ffa-ntw-4p-10",
+      "tileset": "rockies",
+      "sourceSHA256": "6b1177a7d2e17c6b729f515afda087038a1c245d85ce862d9884f48f0a8d7060",
+      "bots": 3,
+      "preview": "ffa-previews/ntw-4p-10.png",
+      "width": 216,
+      "height": 216,
+      "description": "Broken rock bars create parallel fronts and cross routes. Equal high-oil bases: four trucks, five labs, vehicle and cyborg factories; 24 working oils each plus eight expansion oils. Defined ground lanes and rock banks break up the open approaches."
+    },
+    {
+      "id": "ntw-4p-11",
+      "name": "Caldera Cross",
+      "players": 4,
+      "level": "FFA-NTW4-11-T1",
+      "mapDirectory": "ffa-ntw-4p-11",
+      "tileset": "arizona",
+      "sourceSHA256": "26458c03ddcc89e6be5c5cde5769abbacd481fd35e841869b31facd7aa364dcf",
+      "bots": 3,
+      "preview": "ffa-previews/ntw-4p-11.png",
+      "width": 220,
+      "height": 220,
+      "description": "A broken crater lake surrounds a connected central court. Equal high-oil bases: four trucks, five labs, vehicle and cyborg factories; 24 working oils each plus eight expansion oils. Defined ground lanes and rock banks break up the open approaches."
+    },
+    {
+      "id": "ntw-4p-12",
+      "name": "Pine Quadrants",
+      "players": 4,
+      "level": "FFA-NTW4-12-T1",
+      "mapDirectory": "ffa-ntw-4p-12",
+      "tileset": "urban",
+      "sourceSHA256": "65ab3b1e1933e819f5b4041c9a008baf35e6140b09293f2dbcc26d18cb831adb",
+      "bots": 3,
+      "preview": "ffa-previews/ntw-4p-12.png",
+      "width": 204,
+      "height": 204,
+      "description": "Broad forward building courts share direct and flanking approaches. Equal high-oil bases: four trucks, five labs, vehicle and cyborg factories; 24 working oils each plus eight expansion oils. Defined ground lanes and rock banks break up the open approaches."
+    },
+    {
+      "id": "ntw-4p-13",
+      "name": "Four Causeways",
+      "players": 4,
+      "level": "FFA-NTW4-13-T1",
+      "mapDirectory": "ffa-ntw-4p-13",
+      "tileset": "rockies",
+      "sourceSHA256": "6ad0011601f2ee0c28a6eba14939d10c4ec43d2a7c0a9947d45c258872f70b10",
+      "bots": 3,
+      "preview": "ffa-previews/ntw-4p-13.png",
+      "width": 232,
+      "height": 232,
+      "description": "Large water basins are joined by broad ground causeways. Equal high-oil bases: four trucks, five labs, vehicle and cyborg factories; 24 working oils each plus eight expansion oils. Defined ground lanes and rock banks break up the open approaches."
+    },
+    {
+      "id": "ntw-4p-14",
+      "name": "Shattered Compass",
+      "players": 4,
+      "level": "FFA-NTW4-14-T1",
+      "mapDirectory": "ffa-ntw-4p-14",
+      "tileset": "arizona",
+      "sourceSHA256": "ab2c9eaacd2fe3e8e56560c440af278713868387c0e2ab8d890143c882a23800",
+      "bots": 3,
+      "preview": "ffa-previews/ntw-4p-14.png",
+      "width": 224,
+      "height": 224,
+      "description": "Offset rock shards frame a clear central fighting basin. Equal high-oil bases: four trucks, five labs, vehicle and cyborg factories; 24 working oils each plus eight expansion oils. Defined ground lanes and rock banks break up the open approaches."
+    },
+    {
+      "id": "ntw-4p-15",
+      "name": "Crown Junction",
+      "players": 4,
+      "level": "FFA-NTW4-15-T1",
+      "mapDirectory": "ffa-ntw-4p-15",
+      "tileset": "urban",
+      "sourceSHA256": "a4456c34113e46042371ea5f49f456f4170d253bfd259e2a8757996e64165d21",
+      "bots": 3,
+      "preview": "ffa-previews/ntw-4p-15.png",
+      "width": 228,
+      "height": 228,
+      "description": "A crown of lakes leaves several direct and flanking routes. Equal high-oil bases: four trucks, five labs, vehicle and cyborg factories; 24 working oils each plus eight expansion oils. Defined ground lanes and rock banks break up the open approaches."
+    }
+  ],
+  "nativePreloadDirectories": [
+    "/data/base",
+    "/data/base/audio",
+    "/data/base/audio/coltive",
+    "/data/base/audio/countdown",
+    "/data/base/audio/extra",
+    "/data/base/audio/memressp/artbat",
+    "/data/base/audio/memressp/cmndrasi",
+    "/data/base/audio/memressp/cmndrvoc",
+    "/data/base/audio/memressp/combat",
+    "/data/base/audio/memressp/console",
+    "/data/base/audio/memressp/desnseq",
+    "/data/base/audio/memressp/detect",
+    "/data/base/audio/memressp/missmesg",
+    "/data/base/audio/memressp/power",
+    "/data/base/audio/memressp/productn",
+    "/data/base/audio/memressp/repair",
+    "/data/base/audio/memressp/research",
+    "/data/base/audio/memressp/routing",
+    "/data/base/audio/memressp/status",
+    "/data/base/audio/memressp/struct",
+    "/data/base/audio/memressp/trnsport",
+    "/data/base/audio/memressp/tutorial",
+    "/data/base/audio/memressp/vtols",
+    "/data/base/audio/multi",
+    "/data/base/audio/nexus",
+    "/data/base/audio/proxmessages",
+    "/data/base/audio/radclick",
+    "/data/base/audio/sfx/building",
+    "/data/base/audio/sfx/explons",
+    "/data/base/audio/sfx/interfce",
+    "/data/base/audio/sfx/misc",
+    "/data/base/audio/sfx/vehicle",
+    "/data/base/audio/sfx/weapons",
+    "/data/base/audio/taunts/taunt1",
+    "/data/base/audio/taunts/taunt2",
+    "/data/base/audio/taunts/taunt3",
+    "/data/base/audio/trnsppil",
+    "/data/base/audio/tutorial",
+    "/data/base/audio/vtoltalk",
+    "/data/base/campaigns",
+    "/data/base/components/bodies",
+    "/data/base/components/prop",
+    "/data/base/components/weapons",
+    "/data/base/effects",
+    "/data/base/features",
+    "/data/base/guidetopics/wz2100/general",
+    "/data/base/guidetopics/wz2100/structures",
+    "/data/base/guidetopics/wz2100/unitorders",
+    "/data/base/guidetopics/wz2100/units",
+    "/data/base/guidetopics/wz2100/units/commanders",
+    "/data/base/guidetopics/wz2100/units/propulsions",
+    "/data/base/guidetopics/wz2100/units/propulsions/vtols",
+    "/data/base/guidetopics/wz2100/units/sensors",
+    "/data/base/guidetopics/wz2100/weapons",
+    "/data/base/guidetopics/wz2100/weapons/bombs",
+    "/data/base/images",
+    "/data/base/images/flags",
+    "/data/base/images/frontend",
+    "/data/base/images/intfac",
+    "/data/base/images/notifications",
+    "/data/base/images/replay",
+    "/data/base/messages",
+    "/data/base/messages/strings",
+    "/data/base/misc",
+    "/data/base/misc/micnum",
+    "/data/base/misc/minum",
+    "/data/base/misc/mivnum",
+    "/data/base/misc/researchimds",
+    "/data/base/script",
+    "/data/base/script/campaign",
+    "/data/base/script/campaign/libcampaign_includes",
+    "/data/base/script/fastplay",
+    "/data/base/sequenceaudio",
+    "/data/base/sequenceaudio/cam1",
+    "/data/base/sequenceaudio/cam2",
+    "/data/base/sequenceaudio/cam3",
+    "/data/base/shaders",
+    "/data/base/shaders/vk",
+    "/data/base/stats",
+    "/data/base/structs",
+    "/data/base/texpages",
+    "/data/base/texpages/bdrops",
+    "/data/base/texpages/tertilesc1hw-128",
+    "/data/base/texpages/tertilesc2hw-128",
+    "/data/base/texpages/tertilesc3hw-128",
+    "/data/base/tileset",
+    "/data/base/wrf",
+    "/data/base/wrf/cam1",
+    "/data/base/wrf/cam1/cam1a",
+    "/data/base/wrf/cam1/cam1b",
+    "/data/base/wrf/cam1/cam1c",
+    "/data/base/wrf/cam1/cam1ca",
+    "/data/base/wrf/cam1/sub1-1",
+    "/data/base/wrf/cam1/sub1-2",
+    "/data/base/wrf/cam1/sub1-3",
+    "/data/base/wrf/cam1/sub1-4",
+    "/data/base/wrf/cam1/sub1-5",
+    "/data/base/wrf/cam1/sub1-7",
+    "/data/base/wrf/cam1/sub1-d",
+    "/data/base/wrf/cam2",
+    "/data/base/wrf/cam2/cam2b",
+    "/data/base/wrf/cam2/cam2c",
+    "/data/base/wrf/cam2/cam2start",
+    "/data/base/wrf/cam2/sub2-1",
+    "/data/base/wrf/cam2/sub2-2",
+    "/data/base/wrf/cam2/sub2-5",
+    "/data/base/wrf/cam2/sub2-6",
+    "/data/base/wrf/cam2/sub2-7",
+    "/data/base/wrf/cam2/sub2-8",
+    "/data/base/wrf/cam2/sub2-d",
+    "/data/base/wrf/cam3",
+    "/data/base/wrf/cam3/cam3-4",
+    "/data/base/wrf/cam3/cam3a",
+    "/data/base/wrf/cam3/cam3a-b",
+    "/data/base/wrf/cam3/cam3ad",
+    "/data/base/wrf/cam3/cam3b",
+    "/data/base/wrf/cam3/cam3c",
+    "/data/base/wrf/cam3/cam3d",
+    "/data/base/wrf/cam3/sub3-1",
+    "/data/base/wrf/cam3/sub3-2",
+    "/data/base/wrf/cam3/sub3-3",
+    "/data/base/wrf/fastplay",
+    "/data/base/wrf/fastplay/fastdemo",
+    "/data/base/wrf/tutorial",
+    "/data/base/wrf/tutorial/newtut",
+    "/data/fonts",
+    "/data/mods/campaign",
+    "/data/mp",
+    "/data/mp/anims",
+    "/data/mp/challenges",
+    "/data/mp/components/bodies",
+    "/data/mp/components/prop",
+    "/data/mp/components/weapons",
+    "/data/mp/effects",
+    "/data/mp/messages",
+    "/data/mp/messages/strings",
+    "/data/mp/multiplay/maps",
+    "/data/mp/multiplay/maps/10c-Emergence",
+    "/data/mp/multiplay/maps/10c-WaterLoop",
+    "/data/mp/multiplay/maps/2c-DustyMaze",
+    "/data/mp/multiplay/maps/2c-Roughness",
+    "/data/mp/multiplay/maps/2c-Vision",
+    "/data/mp/multiplay/maps/2c-highground",
+    "/data/mp/multiplay/maps/2c-startup",
+    "/data/mp/multiplay/maps/2c-urbanchasm",
+    "/data/mp/multiplay/maps/3c-Gamma",
+    "/data/mp/multiplay/maps/3c-Monocot_i",
+    "/data/mp/multiplay/maps/4c-DustyMaze-2v2",
+    "/data/mp/multiplay/maps/4c-DustyMaze-FFA",
+    "/data/mp/multiplay/maps/4c-basingstoke",
+    "/data/mp/multiplay/maps/4c-cockpit",
+    "/data/mp/multiplay/maps/4c-fishnet",
+    "/data/mp/multiplay/maps/4c-greatrift",
+    "/data/mp/multiplay/maps/4c-littleegypt",
+    "/data/mp/multiplay/maps/4c-mountain",
+    "/data/mp/multiplay/maps/4c-pyramidal",
+    "/data/mp/multiplay/maps/4c-rollinghills",
+    "/data/mp/multiplay/maps/4c-rush",
+    "/data/mp/multiplay/maps/4c-rush2",
+    "/data/mp/multiplay/maps/4c-urban-chaos",
+    "/data/mp/multiplay/maps/4c-urbanduel",
+    "/data/mp/multiplay/maps/4c-valleyofdeath",
+    "/data/mp/multiplay/maps/5c-bloat",
+    "/data/mp/multiplay/maps/6c-Entropy",
+    "/data/mp/multiplay/maps/6c-Melting",
+    "/data/mp/multiplay/maps/7c-Thales",
+    "/data/mp/multiplay/maps/8c-bananas",
+    "/data/mp/multiplay/maps/8c-beggarskanyon",
+    "/data/mp/multiplay/maps/8c-clover",
+    "/data/mp/multiplay/maps/8c-cockate",
+    "/data/mp/multiplay/maps/8c-concreteplayground",
+    "/data/mp/multiplay/maps/8c-gridlock",
+    "/data/mp/multiplay/maps/8c-hidensneak",
+    "/data/mp/multiplay/maps/8c-manhattan",
+    "/data/mp/multiplay/maps/8c-mizamaze",
+    "/data/mp/multiplay/maps/8c-sandcastles",
+    "/data/mp/multiplay/maps/8c-thepit",
+    "/data/mp/multiplay/maps/8c-wheeloffortune",
+    "/data/mp/multiplay/maps/8c-yinyang",
+    "/data/mp/multiplay/maps/8c-ziggurat",
+    "/data/mp/multiplay/maps/9c-WindFury",
+    "/data/mp/multiplay/maps/ffa-contact",
+    "/data/mp/multiplay/maps/ffa-emag",
+    "/data/mp/multiplay/maps/ffa-emaj-6p",
+    "/data/mp/multiplay/maps/ffa-ntw-2p-01",
+    "/data/mp/multiplay/maps/ffa-ntw-2p-02",
+    "/data/mp/multiplay/maps/ffa-ntw-2p-03",
+    "/data/mp/multiplay/maps/ffa-ntw-2p-04",
+    "/data/mp/multiplay/maps/ffa-ntw-2p-05",
+    "/data/mp/multiplay/maps/ffa-ntw-2p-06",
+    "/data/mp/multiplay/maps/ffa-ntw-2p-07",
+    "/data/mp/multiplay/maps/ffa-ntw-2p-08",
+    "/data/mp/multiplay/maps/ffa-ntw-2p-09",
+    "/data/mp/multiplay/maps/ffa-ntw-2p-10",
+    "/data/mp/multiplay/maps/ffa-ntw-2p-11",
+    "/data/mp/multiplay/maps/ffa-ntw-2p-12",
+    "/data/mp/multiplay/maps/ffa-ntw-2p-13",
+    "/data/mp/multiplay/maps/ffa-ntw-2p-14",
+    "/data/mp/multiplay/maps/ffa-ntw-2p-15",
+    "/data/mp/multiplay/maps/ffa-ntw-3p-01",
+    "/data/mp/multiplay/maps/ffa-ntw-3p-02",
+    "/data/mp/multiplay/maps/ffa-ntw-3p-03",
+    "/data/mp/multiplay/maps/ffa-ntw-3p-04",
+    "/data/mp/multiplay/maps/ffa-ntw-3p-05",
+    "/data/mp/multiplay/maps/ffa-ntw-3p-06",
+    "/data/mp/multiplay/maps/ffa-ntw-3p-07",
+    "/data/mp/multiplay/maps/ffa-ntw-3p-08",
+    "/data/mp/multiplay/maps/ffa-ntw-3p-09",
+    "/data/mp/multiplay/maps/ffa-ntw-3p-10",
+    "/data/mp/multiplay/maps/ffa-ntw-3p-11",
+    "/data/mp/multiplay/maps/ffa-ntw-3p-12",
+    "/data/mp/multiplay/maps/ffa-ntw-3p-13",
+    "/data/mp/multiplay/maps/ffa-ntw-3p-14",
+    "/data/mp/multiplay/maps/ffa-ntw-3p-15",
+    "/data/mp/multiplay/maps/ffa-ntw-4p-01",
+    "/data/mp/multiplay/maps/ffa-ntw-4p-02",
+    "/data/mp/multiplay/maps/ffa-ntw-4p-03",
+    "/data/mp/multiplay/maps/ffa-ntw-4p-04",
+    "/data/mp/multiplay/maps/ffa-ntw-4p-05",
+    "/data/mp/multiplay/maps/ffa-ntw-4p-06",
+    "/data/mp/multiplay/maps/ffa-ntw-4p-07",
+    "/data/mp/multiplay/maps/ffa-ntw-4p-08",
+    "/data/mp/multiplay/maps/ffa-ntw-4p-09",
+    "/data/mp/multiplay/maps/ffa-ntw-4p-10",
+    "/data/mp/multiplay/maps/ffa-ntw-4p-11",
+    "/data/mp/multiplay/maps/ffa-ntw-4p-12",
+    "/data/mp/multiplay/maps/ffa-ntw-4p-13",
+    "/data/mp/multiplay/maps/ffa-ntw-4p-14",
+    "/data/mp/multiplay/maps/ffa-ntw-4p-15",
+    "/data/mp/multiplay/maps/ffa-rb-simple",
+    "/data/mp/multiplay/maps/ffa-rb-usefull",
+    "/data/mp/multiplay/maps/ffa-templar-ffa",
+    "/data/mp/multiplay/script",
+    "/data/mp/multiplay/script/functions",
+    "/data/mp/multiplay/script/mods",
+    "/data/mp/multiplay/script/rules",
+    "/data/mp/multiplay/script/rules/events",
+    "/data/mp/multiplay/script/rules/setup",
+    "/data/mp/multiplay/script/scavengers",
+    "/data/mp/multiplay/skirmish",
+    "/data/mp/multiplay/skirmish/bonecrusher",
+    "/data/mp/multiplay/skirmish/cobra_includes",
+    "/data/mp/multiplay/skirmish/cobra_rulesets",
+    "/data/mp/multiplay/skirmish/nb_common",
+    "/data/mp/multiplay/skirmish/nb_includes",
+    "/data/mp/multiplay/skirmish/nb_rulesets",
+    "/data/mp/multiplay/skirmish/nexus_includes",
+    "/data/mp/multiplay/skirmish/nexus_standards",
+    "/data/mp/multiplay/skirmish/semperfi_includes",
+    "/data/mp/stats",
+    "/data/mp/structs",
+    "/data/mp/tests",
+    "/data/mp/wrf",
+    "/share/locale/ar_SA/LC_MESSAGES",
+    "/share/locale/bg_BG/LC_MESSAGES",
+    "/share/locale/ca_ES/LC_MESSAGES",
+    "/share/locale/cs/LC_MESSAGES",
+    "/share/locale/da/LC_MESSAGES",
+    "/share/locale/de/LC_MESSAGES",
+    "/share/locale/el/LC_MESSAGES",
+    "/share/locale/en_GB/LC_MESSAGES",
+    "/share/locale/eo/LC_MESSAGES",
+    "/share/locale/es/LC_MESSAGES",
+    "/share/locale/et_EE/LC_MESSAGES",
+    "/share/locale/fa_IR/LC_MESSAGES",
+    "/share/locale/fi/LC_MESSAGES",
+    "/share/locale/fr/LC_MESSAGES",
+    "/share/locale/fy/LC_MESSAGES",
+    "/share/locale/ga/LC_MESSAGES",
+    "/share/locale/he_IL/LC_MESSAGES",
+    "/share/locale/hr/LC_MESSAGES",
+    "/share/locale/hu/LC_MESSAGES",
+    "/share/locale/id/LC_MESSAGES",
+    "/share/locale/it/LC_MESSAGES",
+    "/share/locale/ja_JP/LC_MESSAGES",
+    "/share/locale/ko/LC_MESSAGES",
+    "/share/locale/la/LC_MESSAGES",
+    "/share/locale/lt/LC_MESSAGES",
+    "/share/locale/my_MM/LC_MESSAGES",
+    "/share/locale/nb/LC_MESSAGES",
+    "/share/locale/nl/LC_MESSAGES",
+    "/share/locale/pl/LC_MESSAGES",
+    "/share/locale/pt/LC_MESSAGES",
+    "/share/locale/pt_BR/LC_MESSAGES",
+    "/share/locale/ro/LC_MESSAGES",
+    "/share/locale/ru/LC_MESSAGES",
+    "/share/locale/sk/LC_MESSAGES",
+    "/share/locale/sl/LC_MESSAGES",
+    "/share/locale/sr_RS/LC_MESSAGES",
+    "/share/locale/tr/LC_MESSAGES",
+    "/share/locale/tt_RU/LC_MESSAGES",
+    "/share/locale/uk_UA/LC_MESSAGES",
+    "/share/locale/zh_CN/LC_MESSAGES",
+    "/share/locale/zh_TW/LC_MESSAGES"
+  ],
+  "authoredStructureLimits": {
+    "emag": {},
+    "contact": {
+      "A0PowerGenerator": 14
+    },
+    "templar-ffa": {},
+    "rb-simple": {},
+    "rb-usefull": {},
+    "emaj-6p": {},
+    "ntw-2p-01": {},
+    "ntw-2p-02": {},
+    "ntw-2p-03": {},
+    "ntw-2p-04": {},
+    "ntw-2p-05": {},
+    "ntw-2p-06": {},
+    "ntw-2p-07": {},
+    "ntw-2p-08": {},
+    "ntw-2p-09": {},
+    "ntw-2p-10": {},
+    "ntw-2p-11": {},
+    "ntw-2p-12": {},
+    "ntw-2p-13": {},
+    "ntw-2p-14": {},
+    "ntw-2p-15": {},
+    "ntw-3p-01": {},
+    "ntw-3p-02": {},
+    "ntw-3p-03": {},
+    "ntw-3p-04": {},
+    "ntw-3p-05": {},
+    "ntw-3p-06": {},
+    "ntw-3p-07": {},
+    "ntw-3p-08": {},
+    "ntw-3p-09": {},
+    "ntw-3p-10": {},
+    "ntw-3p-11": {},
+    "ntw-3p-12": {},
+    "ntw-3p-13": {},
+    "ntw-3p-14": {},
+    "ntw-3p-15": {},
+    "ntw-4p-01": {},
+    "ntw-4p-02": {},
+    "ntw-4p-03": {},
+    "ntw-4p-04": {},
+    "ntw-4p-05": {},
+    "ntw-4p-06": {},
+    "ntw-4p-07": {},
+    "ntw-4p-08": {},
+    "ntw-4p-09": {},
+    "ntw-4p-10": {},
+    "ntw-4p-11": {},
+    "ntw-4p-12": {},
+    "ntw-4p-13": {},
+    "ntw-4p-14": {},
+    "ntw-4p-15": {}
+  },
+  "method": "Separate stock VFS; existing matching generic JS/WASM program with only literal package/data/output adapters",
+  "noNativeBuild": true,
+  "compiledProgramNormalizedIdentical": true,
+  "sharedWASM": "warzone2100.wasm",
+  "stockPrefixBytes": 64424618,
+  "stockPrefixSHA256": "9e89d11c8b67b5f68ddc0be43290233c28cd43b3d2a96fea1a7b4beaf83b8424",
+  "stockRecords": 3789,
+  "ffaRecords": 4377,
+  "launchArguments": [
+    "--skirmish=ffa-emag-easy.json",
+    "--skirmish=ffa-emag-medium.json",
+    "--skirmish=ffa-emag-hard.json",
+    "--skirmish=ffa-contact-easy.json",
+    "--skirmish=ffa-contact-medium.json",
+    "--skirmish=ffa-contact-hard.json",
+    "--skirmish=ffa-templar-ffa-easy.json",
+    "--skirmish=ffa-templar-ffa-medium.json",
+    "--skirmish=ffa-templar-ffa-hard.json",
+    "--skirmish=ffa-rb-simple-easy.json",
+    "--skirmish=ffa-rb-simple-medium.json",
+    "--skirmish=ffa-rb-simple-hard.json",
+    "--skirmish=ffa-rb-usefull-easy.json",
+    "--skirmish=ffa-rb-usefull-medium.json",
+    "--skirmish=ffa-rb-usefull-hard.json",
+    "--skirmish=ffa-emaj-6p-easy.json",
+    "--skirmish=ffa-emaj-6p-medium.json",
+    "--skirmish=ffa-emaj-6p-hard.json",
+    "--skirmish=ffa-ntw-2p-01-easy.json",
+    "--skirmish=ffa-ntw-2p-01-medium.json",
+    "--skirmish=ffa-ntw-2p-01-hard.json",
+    "--skirmish=ffa-ntw-2p-02-easy.json",
+    "--skirmish=ffa-ntw-2p-02-medium.json",
+    "--skirmish=ffa-ntw-2p-02-hard.json",
+    "--skirmish=ffa-ntw-2p-03-easy.json",
+    "--skirmish=ffa-ntw-2p-03-medium.json",
+    "--skirmish=ffa-ntw-2p-03-hard.json",
+    "--skirmish=ffa-ntw-2p-04-easy.json",
+    "--skirmish=ffa-ntw-2p-04-medium.json",
+    "--skirmish=ffa-ntw-2p-04-hard.json",
+    "--skirmish=ffa-ntw-2p-05-easy.json",
+    "--skirmish=ffa-ntw-2p-05-medium.json",
+    "--skirmish=ffa-ntw-2p-05-hard.json",
+    "--skirmish=ffa-ntw-2p-06-easy.json",
+    "--skirmish=ffa-ntw-2p-06-medium.json",
+    "--skirmish=ffa-ntw-2p-06-hard.json",
+    "--skirmish=ffa-ntw-2p-07-easy.json",
+    "--skirmish=ffa-ntw-2p-07-medium.json",
+    "--skirmish=ffa-ntw-2p-07-hard.json",
+    "--skirmish=ffa-ntw-2p-08-easy.json",
+    "--skirmish=ffa-ntw-2p-08-medium.json",
+    "--skirmish=ffa-ntw-2p-08-hard.json",
+    "--skirmish=ffa-ntw-2p-09-easy.json",
+    "--skirmish=ffa-ntw-2p-09-medium.json",
+    "--skirmish=ffa-ntw-2p-09-hard.json",
+    "--skirmish=ffa-ntw-2p-10-easy.json",
+    "--skirmish=ffa-ntw-2p-10-medium.json",
+    "--skirmish=ffa-ntw-2p-10-hard.json",
+    "--skirmish=ffa-ntw-2p-11-easy.json",
+    "--skirmish=ffa-ntw-2p-11-medium.json",
+    "--skirmish=ffa-ntw-2p-11-hard.json",
+    "--skirmish=ffa-ntw-2p-12-easy.json",
+    "--skirmish=ffa-ntw-2p-12-medium.json",
+    "--skirmish=ffa-ntw-2p-12-hard.json",
+    "--skirmish=ffa-ntw-2p-13-easy.json",
+    "--skirmish=ffa-ntw-2p-13-medium.json",
+    "--skirmish=ffa-ntw-2p-13-hard.json",
+    "--skirmish=ffa-ntw-2p-14-easy.json",
+    "--skirmish=ffa-ntw-2p-14-medium.json",
+    "--skirmish=ffa-ntw-2p-14-hard.json",
+    "--skirmish=ffa-ntw-2p-15-easy.json",
+    "--skirmish=ffa-ntw-2p-15-medium.json",
+    "--skirmish=ffa-ntw-2p-15-hard.json",
+    "--skirmish=ffa-ntw-3p-01-easy.json",
+    "--skirmish=ffa-ntw-3p-01-medium.json",
+    "--skirmish=ffa-ntw-3p-01-hard.json",
+    "--skirmish=ffa-ntw-3p-02-easy.json",
+    "--skirmish=ffa-ntw-3p-02-medium.json",
+    "--skirmish=ffa-ntw-3p-02-hard.json",
+    "--skirmish=ffa-ntw-3p-03-easy.json",
+    "--skirmish=ffa-ntw-3p-03-medium.json",
+    "--skirmish=ffa-ntw-3p-03-hard.json",
+    "--skirmish=ffa-ntw-3p-04-easy.json",
+    "--skirmish=ffa-ntw-3p-04-medium.json",
+    "--skirmish=ffa-ntw-3p-04-hard.json",
+    "--skirmish=ffa-ntw-3p-05-easy.json",
+    "--skirmish=ffa-ntw-3p-05-medium.json",
+    "--skirmish=ffa-ntw-3p-05-hard.json",
+    "--skirmish=ffa-ntw-3p-06-easy.json",
+    "--skirmish=ffa-ntw-3p-06-medium.json",
+    "--skirmish=ffa-ntw-3p-06-hard.json",
+    "--skirmish=ffa-ntw-3p-07-easy.json",
+    "--skirmish=ffa-ntw-3p-07-medium.json",
+    "--skirmish=ffa-ntw-3p-07-hard.json",
+    "--skirmish=ffa-ntw-3p-08-easy.json",
+    "--skirmish=ffa-ntw-3p-08-medium.json",
+    "--skirmish=ffa-ntw-3p-08-hard.json",
+    "--skirmish=ffa-ntw-3p-09-easy.json",
+    "--skirmish=ffa-ntw-3p-09-medium.json",
+    "--skirmish=ffa-ntw-3p-09-hard.json",
+    "--skirmish=ffa-ntw-3p-10-easy.json",
+    "--skirmish=ffa-ntw-3p-10-medium.json",
+    "--skirmish=ffa-ntw-3p-10-hard.json",
+    "--skirmish=ffa-ntw-3p-11-easy.json",
+    "--skirmish=ffa-ntw-3p-11-medium.json",
+    "--skirmish=ffa-ntw-3p-11-hard.json",
+    "--skirmish=ffa-ntw-3p-12-easy.json",
+    "--skirmish=ffa-ntw-3p-12-medium.json",
+    "--skirmish=ffa-ntw-3p-12-hard.json",
+    "--skirmish=ffa-ntw-3p-13-easy.json",
+    "--skirmish=ffa-ntw-3p-13-medium.json",
+    "--skirmish=ffa-ntw-3p-13-hard.json",
+    "--skirmish=ffa-ntw-3p-14-easy.json",
+    "--skirmish=ffa-ntw-3p-14-medium.json",
+    "--skirmish=ffa-ntw-3p-14-hard.json",
+    "--skirmish=ffa-ntw-3p-15-easy.json",
+    "--skirmish=ffa-ntw-3p-15-medium.json",
+    "--skirmish=ffa-ntw-3p-15-hard.json",
+    "--skirmish=ffa-ntw-4p-01-easy.json",
+    "--skirmish=ffa-ntw-4p-01-medium.json",
+    "--skirmish=ffa-ntw-4p-01-hard.json",
+    "--skirmish=ffa-ntw-4p-02-easy.json",
+    "--skirmish=ffa-ntw-4p-02-medium.json",
+    "--skirmish=ffa-ntw-4p-02-hard.json",
+    "--skirmish=ffa-ntw-4p-03-easy.json",
+    "--skirmish=ffa-ntw-4p-03-medium.json",
+    "--skirmish=ffa-ntw-4p-03-hard.json",
+    "--skirmish=ffa-ntw-4p-04-easy.json",
+    "--skirmish=ffa-ntw-4p-04-medium.json",
+    "--skirmish=ffa-ntw-4p-04-hard.json",
+    "--skirmish=ffa-ntw-4p-05-easy.json",
+    "--skirmish=ffa-ntw-4p-05-medium.json",
+    "--skirmish=ffa-ntw-4p-05-hard.json",
+    "--skirmish=ffa-ntw-4p-06-easy.json",
+    "--skirmish=ffa-ntw-4p-06-medium.json",
+    "--skirmish=ffa-ntw-4p-06-hard.json",
+    "--skirmish=ffa-ntw-4p-07-easy.json",
+    "--skirmish=ffa-ntw-4p-07-medium.json",
+    "--skirmish=ffa-ntw-4p-07-hard.json",
+    "--skirmish=ffa-ntw-4p-08-easy.json",
+    "--skirmish=ffa-ntw-4p-08-medium.json",
+    "--skirmish=ffa-ntw-4p-08-hard.json",
+    "--skirmish=ffa-ntw-4p-09-easy.json",
+    "--skirmish=ffa-ntw-4p-09-medium.json",
+    "--skirmish=ffa-ntw-4p-09-hard.json",
+    "--skirmish=ffa-ntw-4p-10-easy.json",
+    "--skirmish=ffa-ntw-4p-10-medium.json",
+    "--skirmish=ffa-ntw-4p-10-hard.json",
+    "--skirmish=ffa-ntw-4p-11-easy.json",
+    "--skirmish=ffa-ntw-4p-11-medium.json",
+    "--skirmish=ffa-ntw-4p-11-hard.json",
+    "--skirmish=ffa-ntw-4p-12-easy.json",
+    "--skirmish=ffa-ntw-4p-12-medium.json",
+    "--skirmish=ffa-ntw-4p-12-hard.json",
+    "--skirmish=ffa-ntw-4p-13-easy.json",
+    "--skirmish=ffa-ntw-4p-13-medium.json",
+    "--skirmish=ffa-ntw-4p-13-hard.json",
+    "--skirmish=ffa-ntw-4p-14-easy.json",
+    "--skirmish=ffa-ntw-4p-14-medium.json",
+    "--skirmish=ffa-ntw-4p-14-hard.json",
+    "--skirmish=ffa-ntw-4p-15-easy.json",
+    "--skirmish=ffa-ntw-4p-15-medium.json",
+    "--skirmish=ffa-ntw-4p-15-hard.json"
+  ],
+  "configDirectoryPattern": "/warzone2100-ffa-{optionalNonEmagMapId-}{difficulty}{existingSuffix}",
+  "nativeMobileMarker": "/tmp/warzone-campaign-mobile-v51",
+  "nativeVictoryRules": "Stock multiplayer endconditions; selected-player result observer only",
+  "nativeAI": "Byte-identical bundled stock Cobra; legacy ground NullBot retained only for old saved native matches",
+  "cobraProof": {
+    "path": "scenario/ffa/COBRA.json",
+    "sha256": "e6d650fe2ba624c45ee54df4564ead258aaeb849731666e892bc13f6f0790751"
+  },
+  "originalMap": {
+    "source": "vendor/ffa-map/original/EMAG_FFA.wz",
+    "sha256": "b3181ca918ecac7ab4ceb38565b6e3c425f96bea735e550ea6cbb53c150a9c87",
+    "license": "CC0-1.0",
+    "author": {
+      "name": "arc"
+    },
+    "dimensions": [
+      128,
+      128
+    ],
+    "players": 4,
+    "mapFilesByteIdentical": true,
+    "addedFactories": 0,
+    "counts": {
+      "0": {
+        "A0CommandCentre": 1,
+        "A0PowMod1": 10,
+        "A0PowerGenerator": 10,
+        "A0ResearchFacility": 5,
+        "A0ResearchModule1": 5,
+        "A0ResourceExtractor": 40,
+        "A0Sat-linkCentre": 1
+      },
+      "1": {
+        "A0CommandCentre": 1,
+        "A0PowMod1": 10,
+        "A0PowerGenerator": 10,
+        "A0ResearchFacility": 5,
+        "A0ResearchModule1": 5,
+        "A0ResourceExtractor": 40,
+        "A0Sat-linkCentre": 1
+      },
+      "2": {
+        "A0CommandCentre": 1,
+        "A0PowMod1": 10,
+        "A0PowerGenerator": 10,
+        "A0ResearchFacility": 5,
+        "A0ResearchModule1": 5,
+        "A0ResourceExtractor": 40,
+        "A0Sat-linkCentre": 1
+      },
+      "3": {
+        "A0CommandCentre": 1,
+        "A0PowMod1": 10,
+        "A0PowerGenerator": 10,
+        "A0ResearchFacility": 5,
+        "A0ResearchModule1": 5,
+        "A0ResourceExtractor": 40,
+        "A0Sat-linkCentre": 1
+      }
+    },
+    "constructorStarts": {
+      "0": [
+        {
+          "id": 931,
+          "x": 16.5,
+          "y": 15.5
+        },
+        {
+          "id": 838,
+          "x": 16.5,
+          "y": 16.5
+        },
+        {
+          "id": 875,
+          "x": 13.5,
+          "y": 15.5
+        },
+        {
+          "id": 860,
+          "x": 13.5,
+          "y": 16.5
+        }
+      ],
+      "1": [
+        {
+          "id": 787,
+          "x": 114.5,
+          "y": 16.5
+        },
+        {
+          "id": 726,
+          "x": 111.5,
+          "y": 15.5
+        },
+        {
+          "id": 775,
+          "x": 114.5,
+          "y": 15.5
+        },
+        {
+          "id": 711,
+          "x": 111.5,
+          "y": 16.5
+        }
+      ],
+      "2": [
+        {
+          "id": 78,
+          "x": 13.5,
+          "y": 112.5
+        },
+        {
+          "id": 98,
+          "x": 16.5,
+          "y": 111.5
+        },
+        {
+          "id": 85,
+          "x": 16.5,
+          "y": 112.5
+        },
+        {
+          "id": 77,
+          "x": 13.5,
+          "y": 111.5
+        }
+      ],
+      "3": [
+        {
+          "id": 639,
+          "x": 111.5,
+          "y": 112.5
+        },
+        {
+          "id": 590,
+          "x": 114.5,
+          "y": 112.5
+        },
+        {
+          "id": 651,
+          "x": 111.5,
+          "y": 111.5
+        },
+        {
+          "id": 575,
+          "x": 114.5,
+          "y": 111.5
+        }
+      ]
+    },
+    "files": [
+      {
+        "path": "droid.json",
+        "sha256": "ac450c42cb2ba4de9b100b6f1ba7ea50aa84b5944e94fad2ebf43778111a09a6"
+      },
+      {
+        "path": "feature.json",
+        "sha256": "ed484260c062841d835fb3dedc6e82d7f53c10d6ba5b69d88d9bd7765d120c35"
+      },
+      {
+        "path": "gam.json",
+        "sha256": "3f16f850bcab49b20a898ced2d4fc01dbf534e9e2ada55aae91f0a73d4d95184"
+      },
+      {
+        "path": "game.map",
+        "sha256": "53033221c849548edbd69cd8d9a9f092dd487b56a8c5fcbb3f2dd9cdeca29d74"
+      },
+      {
+        "path": "level.json",
+        "sha256": "89b186afe7c8b28b3382c3c975c0bc1c9d3ae0d739d4011bb331c697c28044d3"
+      },
+      {
+        "path": "struct.json",
+        "sha256": "17a5fd0eec46b0d083779dce035f3beb5a43ed8feb56c86b41ee40db6de3173e"
+      },
+      {
+        "path": "ttypes.ttp",
+        "sha256": "158ab8c01fcb3724ffaa378e716b1c1fdea007b5c2acd2ae45e44a377df148e1"
+      }
+    ]
+  },
+  "preservedExistingFiles": {
+    "app/src/main/assets/warzone/index-campaign.html": "9125109386919832f10fce7e41f8c613c5c799c5751bc1c9ad620b2848f62c67",
+    "app/src/main/assets/warzone/index-duel.html": "eceab8d7c32a22ad29bd8379a235da2669e89e1ea539ab97abe6b944151b4876",
+    "app/src/main/assets/warzone/index.html": "009c5c7563727f8002f31212b53e22f81ce3cf2b55682feb598558a6f1249e6b",
+    "app/src/main/assets/warzone/mobile-campaign.html": "c9b387397b71ef43a5e1fcac6ab7487622186db086ddb066804654600af884c8",
+    "app/src/main/assets/warzone/mobile-duel.html": "78da4acbe2edcceffcb161a16aef230548a9fa83508e80e6f23c77a189d8d86a",
+    "app/src/main/assets/warzone/mobile.html": "a04071930c9e06e7283a198a37d28c56da124f42005b34732a1deff9ee33fbf6",
+    "app/src/main/assets/warzone/warzone2100-campaign.data": "70d333a1b58870b34e9922e83f6c077cc2fc085219d00e7161ba98db6ae1c2e3",
+    "app/src/main/assets/warzone/warzone2100-campaign.js": "5b3fff50542fa5913fda7ccbc0182a8a731d93e4e3fc986c7d104faedfaea226",
+    "app/src/main/assets/warzone/warzone2100-duel.data": "584a8be5958871b7d1f133bb4d3ef514737d8cf17b959be05f6659a828ceac47",
+    "app/src/main/assets/warzone/warzone2100-duel.js": "6ef65429d1f496bfe5c52e2d8d770b28eaf319d77cb0d61675abd5d78d5420b5",
+    "app/src/main/assets/warzone/warzone2100-towers-052.js": "6d17a3b9f3e935b2748cbbcfc4916e6badb81be31ef22ba3c932e3987ec089b9",
+    "app/src/main/assets/warzone/warzone2100-towers-052.wasm": "2924f46aa75d9b27b92494f01d56239856ad06b2164cd7131144a3a5faeb87db",
+    "app/src/main/assets/warzone/warzone2100.data": "244e70d357ff02ddc8cfd43d1bf7c531a3a777593bb5d8fdf84e05c2d9976da7",
+    "app/src/main/assets/warzone/warzone2100.js": "fdf0c4807323b15a00cbe92947db2fb6b2da771384af9f3fba08fc5be03c5949",
+    "app/src/main/assets/warzone/warzone2100.wasm": "497c65308d3e85f0b5370ec0ff0eb48e6a0876e735ad45e3b280829c7f3c2a06"
+  },
+  "virtualOverrides": [
+    {
+      "path": "/data/mp/addon.lev",
+      "sha256": "c4789e2bf080612356ceef68cbeafa3b728aba22ba2faacef959887e85f7eb25",
+      "bytes": 15664
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-emag/level.json",
+      "sha256": "89b186afe7c8b28b3382c3c975c0bc1c9d3ae0d739d4011bb331c697c28044d3",
+      "bytes": 377
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-emag/droid.json",
+      "sha256": "ac450c42cb2ba4de9b100b6f1ba7ea50aa84b5944e94fad2ebf43778111a09a6",
+      "bytes": 1524
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-emag/feature.json",
+      "sha256": "ed484260c062841d835fb3dedc6e82d7f53c10d6ba5b69d88d9bd7765d120c35",
+      "bytes": 11320
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-emag.gam",
+      "sha256": "3f16f850bcab49b20a898ced2d4fc01dbf534e9e2ada55aae91f0a73d4d95184",
+      "bytes": 167
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-emag/gam.json",
+      "sha256": "3f16f850bcab49b20a898ced2d4fc01dbf534e9e2ada55aae91f0a73d4d95184",
+      "bytes": 167
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-emag/game.map",
+      "sha256": "53033221c849548edbd69cd8d9a9f092dd487b56a8c5fcbb3f2dd9cdeca29d74",
+      "bytes": 65560
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-emag/struct.json",
+      "sha256": "17a5fd0eec46b0d083779dce035f3beb5a43ed8feb56c86b41ee40db6de3173e",
+      "bytes": 64695
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-emag/ttypes.ttp",
+      "sha256": "158ab8c01fcb3724ffaa378e716b1c1fdea007b5c2acd2ae45e44a377df148e1",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-contact/level.json",
+      "sha256": "6f1422368638927c345a0246ca591d8957eef706ebbb8b32063827c839de8aa0",
+      "bytes": 300
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-contact/droid.json",
+      "sha256": "3b4afc3ee546456fa12a31e55089a09241c31186e854e6f02c2c4bd280fdf2a0",
+      "bytes": 5912
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-contact/feature.json",
+      "sha256": "0b0d1c3b2299a2195bf3db2ce5c9668f5cbc9c1661d43adf079fed6ab465e5aa",
+      "bytes": 34242
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-contact.gam",
+      "sha256": "dc06630d016bfda8facf322363cb49814091dd9c4027aaeee3ade5888daf112e",
+      "bytes": 167
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-contact/gam.json",
+      "sha256": "dc06630d016bfda8facf322363cb49814091dd9c4027aaeee3ade5888daf112e",
+      "bytes": 167
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-contact/game.map",
+      "sha256": "bef5235db5a79bba2bd6c2e9cdd1833ade12b4fa53beb0eb08dde8f8b3fad69e",
+      "bytes": 54808
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-contact/struct.json",
+      "sha256": "64fe63db5cf877853b3b483d0e29485ed3f395515ab6833cde69b243f14a2190",
+      "bytes": 28101
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-contact/ttypes.ttp",
+      "sha256": "8a6c53739607374cb9d576fe74d3ddd9165da12d549a74782d648de23b6d70fd",
+      "bytes": 192
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-templar-ffa.gam",
+      "sha256": "6c271a8f6e6e94ebeb1fd12cb4867d17be7e90d612f2eb0a40bd08ceca736933",
+      "bytes": 52
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-templar-ffa/game.gam",
+      "sha256": "6c271a8f6e6e94ebeb1fd12cb4867d17be7e90d612f2eb0a40bd08ceca736933",
+      "bytes": 52
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-templar-ffa/dinit.bjo",
+      "sha256": "0ac0fc478d64350e3e45d5dd1e85efa30fe85f8f80c554815a813f9805b7b10e",
+      "bytes": 1228
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-templar-ffa/droid.ini",
+      "sha256": "c6367e019200779f4ee1309c50ae61c4bf5f917f620e74104bb2c533328c639a",
+      "bytes": 1744
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-templar-ffa/feat.bjo",
+      "sha256": "39b8b086b4d2236bea583fb28301d4bef78ad69adf57e72f38a383c4ccbaa555",
+      "bytes": 13692
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-templar-ffa/feature.ini",
+      "sha256": "37ef9bfc521852af8f9a27c17f796a9f3a6f11d04736fbbbe4b700c6a025a559",
+      "bytes": 15676
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-templar-ffa/game.map",
+      "sha256": "5217279dec23aa885b0d639c9f65af58b04576352c33e91cd68dd64b51e604b2",
+      "bytes": 43224
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-templar-ffa/struct.bjo",
+      "sha256": "bf75bef8a16cb1f5848671e576da13ad1f38d030283a23b5a33d742683bca38d",
+      "bytes": 57132
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-templar-ffa/struct.ini",
+      "sha256": "67256e2ff2e05bbd38d461a94630616c78e54767ca8bad0e3d8da2fa13a04ba1",
+      "bytes": 51872
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-templar-ffa/ttypes.ttp",
+      "sha256": "c00c484e8d7f2c4a804294a19d2ab65d89a84177f9df649946daebf4d50f56ed",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-rb-simple/level.json",
+      "sha256": "e5cfe33515fbee23df8a3e7675fcfcc648e5e5644c6e2fde5b97801e808502b9",
+      "bytes": 305
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-rb-simple/droid.json",
+      "sha256": "1c53913b99c8354dff807aad5ae5ec9fb0eaa891513622321c8023fce6b93724",
+      "bytes": 1490
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-rb-simple/feature.json",
+      "sha256": "192c851b27007f4e99c8280b6834bda02025eeb520ccc9a40649a43d707fadfd",
+      "bytes": 27
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-rb-simple.gam",
+      "sha256": "3009e32b7664520281fb991d693a560635a347232b45fdf4e7bd15c8bf8f40da",
+      "bytes": 167
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-rb-simple/gam.json",
+      "sha256": "3009e32b7664520281fb991d693a560635a347232b45fdf4e7bd15c8bf8f40da",
+      "bytes": 167
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-rb-simple/game.map",
+      "sha256": "79dbd875ed2c65f7adce793efe66c37b6e0dc2910268cd162f1739e67b6f93a4",
+      "bytes": 40024
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-rb-simple/struct.json",
+      "sha256": "06fbb37121fb2f5ee4d6fff2cd2ba6e27148cff7dee889598973cb4801d659d2",
+      "bytes": 31499
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-rb-simple/ttypes.ttp",
+      "sha256": "5b10aa98775b2c9a9daa611335a32c191279c3503fb9c0f3d06f97932cdda915",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-rb-usefull/level.json",
+      "sha256": "cb000713e4f1d3cf8a926b6102deaf91bbd6f4eae6885e3798ee9acf9f7a7b32",
+      "bytes": 306
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-rb-usefull/droid.json",
+      "sha256": "c139639f704db0d85df82b699c39d261fb80d6e9dc15f65c3430e67f96756819",
+      "bytes": 1492
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-rb-usefull/feature.json",
+      "sha256": "c5d7e6b1407b6dc7ea5d990f92ec4996fcd17df34a596a234512175199a39455",
+      "bytes": 11016
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-rb-usefull.gam",
+      "sha256": "df555aa6f6e01695bfd709e91ecbb83bfa11b7ebabdf4a23b172194f6ada0ea1",
+      "bytes": 167
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-rb-usefull/gam.json",
+      "sha256": "df555aa6f6e01695bfd709e91ecbb83bfa11b7ebabdf4a23b172194f6ada0ea1",
+      "bytes": 167
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-rb-usefull/game.map",
+      "sha256": "7967f1254062e928dc87b16b6cbb7ae6872ed498454248f290eafdf0cf77f59e",
+      "bytes": 56024
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-rb-usefull/struct.json",
+      "sha256": "b9c6494f48235bd13033fde0b6299bab8066415ae32f6d1894f166517b320a43",
+      "bytes": 40682
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-rb-usefull/ttypes.ttp",
+      "sha256": "5b10aa98775b2c9a9daa611335a32c191279c3503fb9c0f3d06f97932cdda915",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-emaj-6p/level.json",
+      "sha256": "51e7f0df8f9df312fef5b12d2ae4bab142d86a6898607f1ccb8b822b4f054957",
+      "bytes": 344
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-emaj-6p.gam",
+      "sha256": "530ff90b349257c40008eb124784987dbe54104c09e8caad5a34c527aeddca37",
+      "bytes": 151
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-emaj-6p/gam.json",
+      "sha256": "530ff90b349257c40008eb124784987dbe54104c09e8caad5a34c527aeddca37",
+      "bytes": 151
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-emaj-6p/game.map",
+      "sha256": "efd587bc9347b2d57e60b13429fe2946569e2a7859f1d91717a8675b2bbd87ec",
+      "bytes": 123928
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-emaj-6p/ttypes.ttp",
+      "sha256": "158ab8c01fcb3724ffaa378e716b1c1fdea007b5c2acd2ae45e44a377df148e1",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-emaj-6p/struct.json",
+      "sha256": "bb826cf0d8284096675e2533d8a415575ee0ec4752230f7a71395f6d588c9447",
+      "bytes": 50390
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-emaj-6p/droid.json",
+      "sha256": "66f1856f9fd09fafa387aa2b9d14e9906d530e44888125f0c4266f712f767857",
+      "bytes": 2340
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-emaj-6p/feature.json",
+      "sha256": "bbc4e8b26b667951ac64f957179882ddde1ea7eee5b80632a07d688ad8f3d937",
+      "bytes": 17656
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-01/level.json",
+      "sha256": "5634d8c2b5e2b45e4ebceca9c817f0219ddadbc414a245afc411e1196a6bf9cd",
+      "bytes": 216
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-01/gam.json",
+      "sha256": "5e937dd6cd6a6e21aaa3d7ecb60a18349f0c821171d5c77ca25a9fa17b12fcde",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-01/game.map",
+      "sha256": "fc5610aafcdacff6b7da5506bf5e4efca05fee2c8a01a3dd5c0b7724d04e0c8d",
+      "bytes": 101400
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-01/ttypes.ttp",
+      "sha256": "5b10aa98775b2c9a9daa611335a32c191279c3503fb9c0f3d06f97932cdda915",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-01/struct.json",
+      "sha256": "db79d5509f73161daae0f5a0222702e11269c775cc82b23c5fca5dd8d1a4114a",
+      "bytes": 15130
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-01/droid.json",
+      "sha256": "4cb5635361187f3829dc4cb4df56e12c06af127c3a7fe781008fcd967f4d23bf",
+      "bytes": 1411
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-01/feature.json",
+      "sha256": "775632d7a63a0e3383cf58c74cc6bf93083e45a7918e54ed6642ea9ce2a5f39d",
+      "bytes": 8795
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-01.gam",
+      "sha256": "5e937dd6cd6a6e21aaa3d7ecb60a18349f0c821171d5c77ca25a9fa17b12fcde",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-02/level.json",
+      "sha256": "a928ef46580102371bd8260401197fe1ab71874b6a4134bbcbd2acc6bf3d2728",
+      "bytes": 216
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-02/gam.json",
+      "sha256": "419c908c18298215b8d97334d12fb47194e5ac035cc028c8ef7721f2f27e8c82",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-02/game.map",
+      "sha256": "0874665c2b5eb73f561df810f422d4da0f8b5886e5f49c79188a269405cf1489",
+      "bytes": 122904
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-02/ttypes.ttp",
+      "sha256": "8195c0b7981ab0c2b7cf964eb05bd90fdb09f60785b02af142682214e002eb51",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-02/struct.json",
+      "sha256": "a5d1ae53ed41e318db8576d149bfe3f38bab1df5be3a58eb38d14ce04dc57751",
+      "bytes": 15143
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-02/droid.json",
+      "sha256": "052fd5c1eeb67896444f5100e9a5376662acfac5b592b1f5db23c546e6ee4b35",
+      "bytes": 1413
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-02/feature.json",
+      "sha256": "62fed8fda2ccde09260f6f408d61fe717f1dcaa8ebf866bfef038b75bd29303d",
+      "bytes": 8811
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-02.gam",
+      "sha256": "419c908c18298215b8d97334d12fb47194e5ac035cc028c8ef7721f2f27e8c82",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-03/level.json",
+      "sha256": "7289bd480a5aedd10a82b293f324906be653ca67d561013be2b06e93ac6b1dc1",
+      "bytes": 216
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-03/gam.json",
+      "sha256": "2b51310b3cceac7899cc61dcb9c2500f016ae1476114d09ede95c0540f3c0e85",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-03/game.map",
+      "sha256": "b6feeccd4c11306bd7426b24e76954ff2c666e91f4e7b59e61b7e2ffde407d0f",
+      "bytes": 112920
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-03/ttypes.ttp",
+      "sha256": "4b677d7224f7bc25cba772be687f99b288ae70eb19799807236f3134e871afd6",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-03/struct.json",
+      "sha256": "0f6c0908e18b7f45d5c42dd7e5eeb635b0d5f26b2d9ef2fce99850c236ffcfcd",
+      "bytes": 14963
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-03/droid.json",
+      "sha256": "6e1733b1f1c25f9636ed4ea73a83cb4d6e9d6218a5202f3489661e3c41519735",
+      "bytes": 1397
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-03/feature.json",
+      "sha256": "450a44e63d6f1df09712d0e4ee5723a778185cf154e4edd036253dd669078492",
+      "bytes": 8807
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-03.gam",
+      "sha256": "2b51310b3cceac7899cc61dcb9c2500f016ae1476114d09ede95c0540f3c0e85",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-04/level.json",
+      "sha256": "3617c70065b67520d2263be9fb8239c051eb0d5fe925b0d16ab3068b36baadc5",
+      "bytes": 215
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-04/gam.json",
+      "sha256": "3ae1cf269b5c74a8ace6f44b12ae4e3ddf5965b1629f69234a721fe500cef986",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-04/game.map",
+      "sha256": "254228a39fce21894b9382f49fb2a4a8905886b1a93d4a917fb653ef6de3715b",
+      "bytes": 111896
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-04/ttypes.ttp",
+      "sha256": "5b10aa98775b2c9a9daa611335a32c191279c3503fb9c0f3d06f97932cdda915",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-04/struct.json",
+      "sha256": "5113b61f8a147d84b99ab3bb60665ef62f80d9e247300326fd7706962fa432d8",
+      "bytes": 15138
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-04/droid.json",
+      "sha256": "50d5da59b10880c007ab68f6778aa03fb1a29a0e78215c7de1e9b292e1fe8921",
+      "bytes": 1413
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-04/feature.json",
+      "sha256": "c6e7aa9882e9b1f7e409d0e02d561958c72f43579eef510f408c508b0a306a61",
+      "bytes": 8807
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-04.gam",
+      "sha256": "3ae1cf269b5c74a8ace6f44b12ae4e3ddf5965b1629f69234a721fe500cef986",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-05/level.json",
+      "sha256": "71d7264ef120c21bb5817907765b302796de09ff8aa8cfba6b1cefb127e27228",
+      "bytes": 213
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-05/gam.json",
+      "sha256": "18ee4cc3e49567b86c274bddda8a05828834d49c5d0f2beed27ff144945ed24d",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-05/game.map",
+      "sha256": "693498ce89728e7602a8f7195c3dcf42e321d5e5eb7fcc3390cb8f85fb72b83e",
+      "bytes": 123928
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-05/ttypes.ttp",
+      "sha256": "8195c0b7981ab0c2b7cf964eb05bd90fdb09f60785b02af142682214e002eb51",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-05/struct.json",
+      "sha256": "644043d3f03fe03f075f87b5813329fb3fff8492900163271c81b4e1c01d7c3e",
+      "bytes": 14990
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-05/droid.json",
+      "sha256": "639449c0553d9884cce39ed1e3619e1f068defaf6d56dd17c7e0c317bdfe5233",
+      "bytes": 1401
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-05/feature.json",
+      "sha256": "c26ce8bf1ec789ca53e1f21c0d901b059cf73fa7ce2350adbf77dc0a81e4ab61",
+      "bytes": 8831
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-05.gam",
+      "sha256": "18ee4cc3e49567b86c274bddda8a05828834d49c5d0f2beed27ff144945ed24d",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-06/level.json",
+      "sha256": "d77fbed4e2980c39b8e7793db7990b6a83e43199bca8e78c976fadc710a63b2f",
+      "bytes": 210
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-06/gam.json",
+      "sha256": "8b6d5bdf3203a426f67db46d111950b51791e7247a297fddd414c21b2b953d48",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-06/game.map",
+      "sha256": "5079e4ff5bddd11547ba754e7895dc7f0336b3000039fcf883cc50fa33c91c0e",
+      "bytes": 117784
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-06/ttypes.ttp",
+      "sha256": "4b677d7224f7bc25cba772be687f99b288ae70eb19799807236f3134e871afd6",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-06/struct.json",
+      "sha256": "2e3e45a00bcc09c98ef3f1fa49efe86fdf6dacd189dbc97fef8c17ecc6b30b09",
+      "bytes": 15159
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-06/droid.json",
+      "sha256": "d48c192a1aa3ea995eec6326e5340066c7fad7bff4860ec238b4e7dc646e7a71",
+      "bytes": 1414
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-06/feature.json",
+      "sha256": "2821057faa98cfd113fd75c0cb3f94d692e8b37455be26e201bd3137840fb0cb",
+      "bytes": 8821
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-06.gam",
+      "sha256": "8b6d5bdf3203a426f67db46d111950b51791e7247a297fddd414c21b2b953d48",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-07/level.json",
+      "sha256": "d9cd496a39e9905b81a44343b415b3b638887876bc15c844463a6fd22c2b3f1c",
+      "bytes": 213
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-07/gam.json",
+      "sha256": "6ae22987390a42d908e580f67f746a8a44bbea6ae21c7c77a8aa928b65a73dab",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-07/game.map",
+      "sha256": "3fb46236e97d1904d695bd33bfd820fcb2fa479a98f5c7b1be1c451bcd042d54",
+      "bytes": 128024
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-07/ttypes.ttp",
+      "sha256": "5b10aa98775b2c9a9daa611335a32c191279c3503fb9c0f3d06f97932cdda915",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-07/struct.json",
+      "sha256": "2d201254a62258a4f602f399d3fd3a8dd71660ffdbae3a6ac451ae421e8d9fc4",
+      "bytes": 14984
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-07/droid.json",
+      "sha256": "c4e7cccf4c9970f1ba3ab6fce6f07d6e18f02b0446c9aaf4884aaa2544a8a20a",
+      "bytes": 1399
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-07/feature.json",
+      "sha256": "5d31f285a9e57a1b30ec77fae98c23a31830e946b9d81bb4949154dfdeb0c2cb",
+      "bytes": 8827
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-07.gam",
+      "sha256": "6ae22987390a42d908e580f67f746a8a44bbea6ae21c7c77a8aa928b65a73dab",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-08/level.json",
+      "sha256": "7787c3f8604adf2696e50f902da33d2b6d3c873ddd7d617878187c56821f704d",
+      "bytes": 211
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-08/gam.json",
+      "sha256": "1f4f077050c9e6eb17bba84bb4b0780a96ff6c27c026e8c6970faac6a32e2fe0",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-08/game.map",
+      "sha256": "e203ce1847e2a6bb60ef2302399b010dfbbc24414ee01625443a0e381ef157a0",
+      "bytes": 112664
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-08/ttypes.ttp",
+      "sha256": "8195c0b7981ab0c2b7cf964eb05bd90fdb09f60785b02af142682214e002eb51",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-08/struct.json",
+      "sha256": "6b8706eb17398fe7b63d3e100651c81e3e2fa0f0518ee7b88a8cd3056db37d36",
+      "bytes": 15146
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-08/droid.json",
+      "sha256": "21ec9550c1dbaa5c45125052c11a6660291d9a104afeeaecc6cc7c5e3fa29ef5",
+      "bytes": 1415
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-08/feature.json",
+      "sha256": "3ad0cfab41516ab1212e6fc779edc49883d19aaf38bf4cbd0d6244912c4253aa",
+      "bytes": 8807
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-08.gam",
+      "sha256": "1f4f077050c9e6eb17bba84bb4b0780a96ff6c27c026e8c6970faac6a32e2fe0",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-09/level.json",
+      "sha256": "39b8e4b7ed1125f4db8bd4ce60b31bb89b61c0561fed7392acd2a25604f28b95",
+      "bytes": 215
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-09/gam.json",
+      "sha256": "f98f48b586c6543e95acc328b2cea207fccfa1eff2181ff157b002a431924ac8",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-09/game.map",
+      "sha256": "0e576479986c8eec0491c91c4cabe93f458bf2bf3b33759daf94460323feb734",
+      "bytes": 135192
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-09/ttypes.ttp",
+      "sha256": "4b677d7224f7bc25cba772be687f99b288ae70eb19799807236f3134e871afd6",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-09/struct.json",
+      "sha256": "8513496bea0285414defe0af7ba34c96be5d9033a5f1a770c29b0d1942b55a8a",
+      "bytes": 14987
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-09/droid.json",
+      "sha256": "a13cacd0929ef76447f6e752f914a5321b1d20bec044b8366220bd6f12bb3970",
+      "bytes": 1399
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-09/feature.json",
+      "sha256": "c6011c05ad86efbe832f97834f72de2cd464f66344e5b4dd91705b8e430034ca",
+      "bytes": 8827
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-09.gam",
+      "sha256": "f98f48b586c6543e95acc328b2cea207fccfa1eff2181ff157b002a431924ac8",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-10/level.json",
+      "sha256": "3a08b4e49ae7dc92d160941d812c434fde40674703b05f31b153cb8a9fe4fe3b",
+      "bytes": 216
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-10/gam.json",
+      "sha256": "d0ed6adf2cdd5e15475071454f32a56b17793423365eb00990c4de259b2a9a48",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-10/game.map",
+      "sha256": "4827704145e179ef62565fefc481539e9edd542bb892ba2a912beafe6f6153d2",
+      "bytes": 117784
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-10/ttypes.ttp",
+      "sha256": "5b10aa98775b2c9a9daa611335a32c191279c3503fb9c0f3d06f97932cdda915",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-10/struct.json",
+      "sha256": "9b06f88ad434aebbd730f7aec304cdc7237c18527c54f6a2a472e05a8bdc0b38",
+      "bytes": 15143
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-10/droid.json",
+      "sha256": "80fe6deb61b89404668c24c9f5373883d88d8678c74a9ef331e30de173f63ea6",
+      "bytes": 1413
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-10/feature.json",
+      "sha256": "61d46b0be1fc1411a37ac97a83758c42dddf70dbb382b18c11b1ed878db9f331",
+      "bytes": 8809
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-10.gam",
+      "sha256": "d0ed6adf2cdd5e15475071454f32a56b17793423365eb00990c4de259b2a9a48",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-11/level.json",
+      "sha256": "39f047035bda1476ff122218187273952823220151ce07679c6462e52b77a0a0",
+      "bytes": 211
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-11/gam.json",
+      "sha256": "889dac0ffb94b4a0d008b89e5abf11fb91033a3a7416b0496bf4a792c93097a5",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-11/game.map",
+      "sha256": "331c2d808714df3c9ae16a3834c65d0a544988bb19070b463e0eb33535939762",
+      "bytes": 135192
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-11/ttypes.ttp",
+      "sha256": "8195c0b7981ab0c2b7cf964eb05bd90fdb09f60785b02af142682214e002eb51",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-11/struct.json",
+      "sha256": "31883b8d5e636707c2b07e190976a30997b5a4149df0e336cf3d456f6de5df78",
+      "bytes": 15151
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-11/droid.json",
+      "sha256": "64d8bd95d1dc9a9d512afe39bea26d40ffcd98c921d3e9bef3b6ee46573656cd",
+      "bytes": 1413
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-11/feature.json",
+      "sha256": "5d11776eb945474c56359adb027a18dd1b62d5596fd1819946784d46711834ab",
+      "bytes": 8817
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-11.gam",
+      "sha256": "889dac0ffb94b4a0d008b89e5abf11fb91033a3a7416b0496bf4a792c93097a5",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-12/level.json",
+      "sha256": "7959706198d996d46e87698bced8f5b1f9655d3fea05c84710de1a17309a6f98",
+      "bytes": 213
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-12/gam.json",
+      "sha256": "4f49f97d578f07543b97eb051f86e7070b289e77613e35ed662604a69a9400ea",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-12/game.map",
+      "sha256": "e133e50c63c04228f907f961256ef95c42121c2e83046addc88845a8949a473a",
+      "bytes": 123672
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-12/ttypes.ttp",
+      "sha256": "4b677d7224f7bc25cba772be687f99b288ae70eb19799807236f3134e871afd6",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-12/struct.json",
+      "sha256": "4c5d51f8d7a26d4ce5fa35a74abd5a4da424296a4289236963b4324ddda3d27e",
+      "bytes": 14971
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-12/droid.json",
+      "sha256": "8d6cf7b480e7c93933b952e0d0da62f76383e4f331c9a854c744349bf33cb489",
+      "bytes": 1397
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-12/feature.json",
+      "sha256": "a385ff6db7d1c8e4216b1f770a67e579c59a184da17d2ecc942ee542375b1143",
+      "bytes": 8815
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-12.gam",
+      "sha256": "4f49f97d578f07543b97eb051f86e7070b289e77613e35ed662604a69a9400ea",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-13/level.json",
+      "sha256": "722e67069fc9b3940f1a33b7adefa9f59c28b195f1b8a4ff9272b89a9ded5c4e",
+      "bytes": 220
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-13/gam.json",
+      "sha256": "c7075a778437294949758055f464b939723329d29d7dea58020fea2cae6e115f",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-13/game.map",
+      "sha256": "2d3a36ab22e66b524e36bdf30d959b813baaf4098cbda8b2a2f529a4f6a7c8db",
+      "bytes": 147480
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-13/ttypes.ttp",
+      "sha256": "5b10aa98775b2c9a9daa611335a32c191279c3503fb9c0f3d06f97932cdda915",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-13/struct.json",
+      "sha256": "2c531a6d6176e59b46c032a99e070c66189ccbd349fe5e32736fc57c3ac5205c",
+      "bytes": 15171
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-13/droid.json",
+      "sha256": "5d72d30cf0473f76e98c41dc24ea0226b5bb70dded38ed4628a94886670fa8be",
+      "bytes": 1416
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-13/feature.json",
+      "sha256": "d52d02c323839d1d639cbc082acf05642aa60eb0b6b5cdee79159dd9553f4759",
+      "bytes": 8831
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-13.gam",
+      "sha256": "c7075a778437294949758055f464b939723329d29d7dea58020fea2cae6e115f",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-14/level.json",
+      "sha256": "2928b7af3c3adb61d1fbac679218105b62ea5592991e69516e7625065c0c679c",
+      "bytes": 211
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-14/gam.json",
+      "sha256": "31d6c01e0b2eb20fb98f38d6d55afce9c9e2306ce15cbcdb7a102442807dfd7a",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-14/game.map",
+      "sha256": "5cfa446f419b72b861afdefd071ad34dc13ada35c1015bc675b9d8de0a94b0af",
+      "bytes": 140824
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-14/ttypes.ttp",
+      "sha256": "8195c0b7981ab0c2b7cf964eb05bd90fdb09f60785b02af142682214e002eb51",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-14/struct.json",
+      "sha256": "022b0a6b58c94b163e33a3503e43d47d4eb6b272cbca94bfb39b48d241b8305c",
+      "bytes": 14967
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-14/droid.json",
+      "sha256": "07b2a4ad221669c660ea2d92bceb415ac882850b8dba5ef9ddb722274ca3eae0",
+      "bytes": 1397
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-14/feature.json",
+      "sha256": "5bb649313852f19030a7686224038db3910315a2d1aa809187be3d31f4592d7d",
+      "bytes": 8819
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-14.gam",
+      "sha256": "31d6c01e0b2eb20fb98f38d6d55afce9c9e2306ce15cbcdb7a102442807dfd7a",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-15/level.json",
+      "sha256": "7db48ab5803ac693d67939ce4b4341755c13b04620efb708a4c9fe2a86e66240",
+      "bytes": 211
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-15/gam.json",
+      "sha256": "8f70b88c9d2ce6accf8737afc97899197aa3e2abd955fa49e42e5552c023a176",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-15/game.map",
+      "sha256": "92caa887ba58a2039ebddbd3a5b5e10e554f57e2526feb4903821e14a6334afc",
+      "bytes": 135448
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-15/ttypes.ttp",
+      "sha256": "4b677d7224f7bc25cba772be687f99b288ae70eb19799807236f3134e871afd6",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-15/struct.json",
+      "sha256": "40dcd1041d28ee061a8990931728b45f49ab3cae91dac988c930c8edeb78bb54",
+      "bytes": 14967
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-15/droid.json",
+      "sha256": "540bd47f17d29117b5b03a8834dada28de08ff8f629307e7208b3a6dfc6980d8",
+      "bytes": 1397
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-15/feature.json",
+      "sha256": "8ec9b3b49a319db6eaca48b6a601cd14712ad4054a56d303aa83a0e0e1e5ea77",
+      "bytes": 8815
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-2p-15.gam",
+      "sha256": "8f70b88c9d2ce6accf8737afc97899197aa3e2abd955fa49e42e5552c023a176",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-01/level.json",
+      "sha256": "74430a4e510d95300b71db4c9ab74502eb15668927c9087795e6563e7410c663",
+      "bytes": 210
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-01/gam.json",
+      "sha256": "8f70b88c9d2ce6accf8737afc97899197aa3e2abd955fa49e42e5552c023a176",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-01/game.map",
+      "sha256": "1bf701d6c3dfbb4ea1bb9244da85ac2374a52578b63c45d80b104bea1be757cf",
+      "bytes": 135448
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-01/ttypes.ttp",
+      "sha256": "8195c0b7981ab0c2b7cf964eb05bd90fdb09f60785b02af142682214e002eb51",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-01/struct.json",
+      "sha256": "afcb5b931128d78dbc41f80517708386cbffbb8a29737f14957a4d503ba2a2fb",
+      "bytes": 22702
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-01/droid.json",
+      "sha256": "5c40be926ddd09f9dd736bc3deb8804cf7f38ed6d3a02289f06403c5a07c859c",
+      "bytes": 2101
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-01/feature.json",
+      "sha256": "29c3732eba868377a7e6bdd10fed6a2585d9561a9c49545cc459c6047b5b8d31",
+      "bytes": 13207
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-01.gam",
+      "sha256": "8f70b88c9d2ce6accf8737afc97899197aa3e2abd955fa49e42e5552c023a176",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-02/level.json",
+      "sha256": "ecdb21908c1cca7c0f6c221c555eb0e9bbaa101cd3858eb20ee4ea2477cb21ef",
+      "bytes": 213
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-02/gam.json",
+      "sha256": "c7075a778437294949758055f464b939723329d29d7dea58020fea2cae6e115f",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-02/game.map",
+      "sha256": "d2439405443d206f8770575642e87d0a2cfe54179d8c56f59a109600588f7b97",
+      "bytes": 147480
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-02/ttypes.ttp",
+      "sha256": "4b677d7224f7bc25cba772be687f99b288ae70eb19799807236f3134e871afd6",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-02/struct.json",
+      "sha256": "1feb808aaca54ceb8f2b5cc63cefa98f1adc15ccfe25d5bf2183534996e8d596",
+      "bytes": 22559
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-02/droid.json",
+      "sha256": "081562341bc1c1eb6332fe3015e0c4768518adcbc95297e47a7510a35d6bc51b",
+      "bytes": 2089
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-02/feature.json",
+      "sha256": "1093775ad445a695885c9c4623f9e42f7a69f53575d5c9689a4b8d12ae855909",
+      "bytes": 13223
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-02.gam",
+      "sha256": "c7075a778437294949758055f464b939723329d29d7dea58020fea2cae6e115f",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-03/level.json",
+      "sha256": "e89954468b0332a6c94ed5de1b022aca8a0e164f35c8384ce203d7c58b672d10",
+      "bytes": 218
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-03/gam.json",
+      "sha256": "7d2a7bcab23b355deef9723bf86744d04ee5e1f389dcef3e4ab0710dc364f60b",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-03/game.map",
+      "sha256": "3fa4ca40f09f3026462e3d4919d40ee74de849654f04ab03c07742054c6db206",
+      "bytes": 160024
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-03/ttypes.ttp",
+      "sha256": "5b10aa98775b2c9a9daa611335a32c191279c3503fb9c0f3d06f97932cdda915",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-03/struct.json",
+      "sha256": "4ccee1ae7353c18a6fb7ba02897853a60e8ccf252ee3c6055f004cb90c2f837b",
+      "bytes": 22559
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-03/droid.json",
+      "sha256": "1f178b67b2f7bf30906990c6427b02f440a68b65d22d0b2d3dadbaea025e839e",
+      "bytes": 2089
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-03/feature.json",
+      "sha256": "9d7f6ad093b7504fd18d009a956185f4e55dce3c2136f7f91aa384361c48c056",
+      "bytes": 13227
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-03.gam",
+      "sha256": "7d2a7bcab23b355deef9723bf86744d04ee5e1f389dcef3e4ab0710dc364f60b",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-04/level.json",
+      "sha256": "1e18c2b6f8cd384b635535829c1913d942bdb70390dc77df521dc8db8edf9fa6",
+      "bytes": 214
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-04/gam.json",
+      "sha256": "af4c6ad070a5baa9c2235bf08907263fdb0aade10ea6c572debfd7d367eafdf3",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-04/game.map",
+      "sha256": "8997b62b6dec9e21cfc69992c62c731a813bad41aa61da143fc7ad9132d63eab",
+      "bytes": 141400
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-04/ttypes.ttp",
+      "sha256": "8195c0b7981ab0c2b7cf964eb05bd90fdb09f60785b02af142682214e002eb51",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-04/struct.json",
+      "sha256": "309fc97d61d2dca5cede05000adc179b9b50890bd060354be244727e52bd52aa",
+      "bytes": 22517
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-04/droid.json",
+      "sha256": "1042b42e6a58625eb4b8635cf338b3f95be18f9bd14d1cd2cac7ef1fac400d83",
+      "bytes": 2085
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-04/feature.json",
+      "sha256": "bf24645b893adc6699dab93644c56b9fcb2cdcc79237c0bd9be0b248fa31b36f",
+      "bytes": 13203
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-04.gam",
+      "sha256": "af4c6ad070a5baa9c2235bf08907263fdb0aade10ea6c572debfd7d367eafdf3",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-05/level.json",
+      "sha256": "07b4c21dbf19619caf213d1410dbdecd89fdc8a4cbc2dd3d8028b496d5812adc",
+      "bytes": 212
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-05/gam.json",
+      "sha256": "2c550207ed28af457cf3a007db504a36f3f8bf91b87b2031fbe915c829f9a603",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-05/game.map",
+      "sha256": "e0f3f8053aaf7814f93a8bcc6598349bc4d9f39b2502636816a3d037573c41d6",
+      "bytes": 166488
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-05/ttypes.ttp",
+      "sha256": "4b677d7224f7bc25cba772be687f99b288ae70eb19799807236f3134e871afd6",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-05/struct.json",
+      "sha256": "c522b322ea93e9ea82d92c24ca6aecfac00327510854da3cec54f2abc653adf3",
+      "bytes": 22559
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-05/droid.json",
+      "sha256": "d0d6c641d6c12ac1b8a1ca5429d39419665045d7507c7e8478cf2a664edfc8c4",
+      "bytes": 2089
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-05/feature.json",
+      "sha256": "b4c43402c4532accc4467978f844a42e3a3db705831c8dc13a3d64546f8a9a8c",
+      "bytes": 13225
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-05.gam",
+      "sha256": "2c550207ed28af457cf3a007db504a36f3f8bf91b87b2031fbe915c829f9a603",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-06/level.json",
+      "sha256": "73097c46e73dd3a72e3a5c70df367a9046c0eb5866c6fcdf84ac070685a1a68e",
+      "bytes": 215
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-06/gam.json",
+      "sha256": "c7075a778437294949758055f464b939723329d29d7dea58020fea2cae6e115f",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-06/game.map",
+      "sha256": "577787fcf338f47e3e603cd67df08546536fc5179aafdf3ba49d93482de72bbe",
+      "bytes": 147480
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-06/ttypes.ttp",
+      "sha256": "5b10aa98775b2c9a9daa611335a32c191279c3503fb9c0f3d06f97932cdda915",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-06/struct.json",
+      "sha256": "2726133505699dfb2e7d8b590afc0fc0f474f1a6b23a1e5ed4ba956561720d92",
+      "bytes": 22559
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-06/droid.json",
+      "sha256": "36e97072c331d8464c9b4ea6ca9166c144765c05eee59de990b662d2e2733564",
+      "bytes": 2089
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-06/feature.json",
+      "sha256": "03acba2d52425ff954eb3409b2d88650daf6a5955edc5eb8df1d266579445db6",
+      "bytes": 13223
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-06.gam",
+      "sha256": "c7075a778437294949758055f464b939723329d29d7dea58020fea2cae6e115f",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-07/level.json",
+      "sha256": "9d0196c69a8c951d11682c184672561d2fc88543bc75db58fb21c3e6e39c3271",
+      "bytes": 214
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-07/gam.json",
+      "sha256": "5914b84d16cc5e01455baaa64408b5a367a5666938ea418bf947696f02b9afc2",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-07/game.map",
+      "sha256": "44ab945e7bf27d75494ef6811220f0c93bcb02b7590850ff9e06746ef7587019",
+      "bytes": 173080
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-07/ttypes.ttp",
+      "sha256": "8195c0b7981ab0c2b7cf964eb05bd90fdb09f60785b02af142682214e002eb51",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-07/struct.json",
+      "sha256": "ef535ee6b8934d1cc9283b74f4a5c138d823fee9ed51653b22a8ce71713b3861",
+      "bytes": 22543
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-07/droid.json",
+      "sha256": "1aeccbf19ebc4b40dc3712d5381a4b7f470d341c76b2fefe1a629e727617e820",
+      "bytes": 2087
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-07/feature.json",
+      "sha256": "bee8d0dc0644d44e7b7c33eda796178dafb387880349794e2f13d3eeb2c4ecf4",
+      "bytes": 13225
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-07.gam",
+      "sha256": "5914b84d16cc5e01455baaa64408b5a367a5666938ea418bf947696f02b9afc2",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-08/level.json",
+      "sha256": "072240f6846d9f8260b87365fda996895756b07fdd9b1f21edc9b0de877750bf",
+      "bytes": 216
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-08/gam.json",
+      "sha256": "4f0d34696149d001f1bb2d5c93e9c096513af96f21ea84e186963907a11118c5",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-08/game.map",
+      "sha256": "0e4dbc27d6f951ae393e01d2f59238abb62e3badd4f11ddc7d770766d146f815",
+      "bytes": 153688
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-08/ttypes.ttp",
+      "sha256": "4b677d7224f7bc25cba772be687f99b288ae70eb19799807236f3134e871afd6",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-08/struct.json",
+      "sha256": "34149b9ebd95e9b51c9bf8291597b80192fe2e1292dfa70806e095db0bb7d5bf",
+      "bytes": 22535
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-08/droid.json",
+      "sha256": "e3ddb9b321b22c9d7c7254bfd4c06ce032c63f3f67052016f53db744a3dad2c1",
+      "bytes": 2087
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-08/feature.json",
+      "sha256": "c9c1ccd76089e30b5ffa4ca0a919ae61bfbb09ae8bb35c023c78601bcea86912",
+      "bytes": 13215
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-08.gam",
+      "sha256": "4f0d34696149d001f1bb2d5c93e9c096513af96f21ea84e186963907a11118c5",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-09/level.json",
+      "sha256": "2ff543c0edf37039756f4e0701b737ae8902d28e7d0a5e8ab8a2b2559bc15792",
+      "bytes": 215
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-09/gam.json",
+      "sha256": "d764e2285de55d4e03cdf5081f9897d32ca8751b917c430e2812611643e3e21d",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-09/game.map",
+      "sha256": "4fde15c1d85496951de9ffbdc74c319d57a32c700ad9113b63b6551cff06a571",
+      "bytes": 179800
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-09/ttypes.ttp",
+      "sha256": "5b10aa98775b2c9a9daa611335a32c191279c3503fb9c0f3d06f97932cdda915",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-09/struct.json",
+      "sha256": "0abf6519248ede38a10b331eea2de6ed815041e392fbe259bb5707605d355faa",
+      "bytes": 22727
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-09/droid.json",
+      "sha256": "60fc1c54aba6e2879745b44eeaf47c8ecac905703a4788e1be8f8f496119f5af",
+      "bytes": 2105
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-09/feature.json",
+      "sha256": "823021811c9786e7019d83e6de0b216b316dce5de0f984367f5ee9431df7ebd8",
+      "bytes": 13227
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-09.gam",
+      "sha256": "d764e2285de55d4e03cdf5081f9897d32ca8751b917c430e2812611643e3e21d",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-10/level.json",
+      "sha256": "2937879fe5e92a6a58109d0da52e2dfab4bdd2a15962d77b4d4776ba4ad638dc",
+      "bytes": 216
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-10/gam.json",
+      "sha256": "7d2a7bcab23b355deef9723bf86744d04ee5e1f389dcef3e4ab0710dc364f60b",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-10/game.map",
+      "sha256": "c3e732cc99b2af74ad2a6cbcb8a2d991e6abcea17c194643eaee801ce77661ce",
+      "bytes": 160024
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-10/ttypes.ttp",
+      "sha256": "8195c0b7981ab0c2b7cf964eb05bd90fdb09f60785b02af142682214e002eb51",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-10/struct.json",
+      "sha256": "2e8fbebbb657ee8130ef59edd6f64ff2462e200427b152648c78eb0a6013ac30",
+      "bytes": 22559
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-10/droid.json",
+      "sha256": "960a8d2a7079523b93bf9885814424bd4f573637da4e682a73b999d9da23f6ad",
+      "bytes": 2089
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-10/feature.json",
+      "sha256": "3d37c8777f6270a34fc2403928b6cd88b466d94bea19f5428b8f2e71eefc9b72",
+      "bytes": 13225
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-10.gam",
+      "sha256": "7d2a7bcab23b355deef9723bf86744d04ee5e1f389dcef3e4ab0710dc364f60b",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-11/level.json",
+      "sha256": "7389437c811199f14ba2bb71e39d46ce86021cf1e0cdc6cc69d4aa2da5a7695a",
+      "bytes": 214
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-11/gam.json",
+      "sha256": "2c550207ed28af457cf3a007db504a36f3f8bf91b87b2031fbe915c829f9a603",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-11/game.map",
+      "sha256": "00218637bf900055052b55308b3a8196e90f6679f19651d48dfc20089f00aa55",
+      "bytes": 166488
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-11/ttypes.ttp",
+      "sha256": "4b677d7224f7bc25cba772be687f99b288ae70eb19799807236f3134e871afd6",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-11/struct.json",
+      "sha256": "1a5527a84bae66a526c0591da1e985b1695e7dab09570ff10d83c8e8799441a2",
+      "bytes": 22559
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-11/droid.json",
+      "sha256": "b513ddc94ef43e3f3538ce95c92363e04acbad63c72f3319ce64b391fe442ad1",
+      "bytes": 2089
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-11/feature.json",
+      "sha256": "717db1b2eb0a694961a3fc34b40ce68cc1332534a106c7fb9783e9c5153d91c7",
+      "bytes": 13225
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-11.gam",
+      "sha256": "2c550207ed28af457cf3a007db504a36f3f8bf91b87b2031fbe915c829f9a603",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-12/level.json",
+      "sha256": "b10918d505080742000cc60ac0638a9efd151389d7f208d729612c0c0c3a129e",
+      "bytes": 215
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-12/gam.json",
+      "sha256": "af4c6ad070a5baa9c2235bf08907263fdb0aade10ea6c572debfd7d367eafdf3",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-12/game.map",
+      "sha256": "235a8db1292e6352548c2871b034e50ae0faab5462f0e96e5906f3f2c47a289f",
+      "bytes": 141400
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-12/ttypes.ttp",
+      "sha256": "5b10aa98775b2c9a9daa611335a32c191279c3503fb9c0f3d06f97932cdda915",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-12/struct.json",
+      "sha256": "f56238ad233d5c66eea70c9323b59d6828fc7471f4042f2152a7bf8fd698f071",
+      "bytes": 22520
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-12/droid.json",
+      "sha256": "0fee035f7df2b2ceab023bcf301d37ef9430490de1084da3782e498bf393405f",
+      "bytes": 2085
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-12/feature.json",
+      "sha256": "c594096e2f2af8df18435295cfee2f1c15550a271dbf00479a32eb3ed50ee35c",
+      "bytes": 13205
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-12.gam",
+      "sha256": "af4c6ad070a5baa9c2235bf08907263fdb0aade10ea6c572debfd7d367eafdf3",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-13/level.json",
+      "sha256": "ad7ea417de92ac1799cc1ee0cdb2f6a66978aba21781c4179c0bf5571de298a5",
+      "bytes": 216
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-13/gam.json",
+      "sha256": "a9b6eaa9fe5628ff531ef9f0b894f656a5eba54b4e6c06faae755677ddc9ffb4",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-13/game.map",
+      "sha256": "5d557e620f8a2803271c019c663e96e8732372f0393449a206b87b7eba931045",
+      "bytes": 186648
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-13/ttypes.ttp",
+      "sha256": "8195c0b7981ab0c2b7cf964eb05bd90fdb09f60785b02af142682214e002eb51",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-13/struct.json",
+      "sha256": "296e54dde50ad9b5f0c3021a2d91953d3b57dc6e2181539ab19426589cfd5642",
+      "bytes": 22559
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-13/droid.json",
+      "sha256": "a7eb20897f9b9258cf64936804c971e41e3d51a5260fbfcae194a46e74e123c2",
+      "bytes": 2089
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-13/feature.json",
+      "sha256": "f4ed8364d5b9349a279201205966c12142bd178de5e04f7a9e8f5178af98fd67",
+      "bytes": 13229
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-13.gam",
+      "sha256": "a9b6eaa9fe5628ff531ef9f0b894f656a5eba54b4e6c06faae755677ddc9ffb4",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-14/level.json",
+      "sha256": "35ded95ce1c09aad22c2f17a6c3456be8821b0703596694cf604463448aeaad8",
+      "bytes": 214
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-14/gam.json",
+      "sha256": "5914b84d16cc5e01455baaa64408b5a367a5666938ea418bf947696f02b9afc2",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-14/game.map",
+      "sha256": "068e91a7f4f6996dbb569f5996ff2b2639475d176ddb55a62c578996409d164e",
+      "bytes": 173080
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-14/ttypes.ttp",
+      "sha256": "4b677d7224f7bc25cba772be687f99b288ae70eb19799807236f3134e871afd6",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-14/struct.json",
+      "sha256": "aec1ee8068fbfc3bcd28e1a78d2150e2029bf1b6fd3a0df8d7494ce03dffad1c",
+      "bytes": 22559
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-14/droid.json",
+      "sha256": "879f3f19604eba9eb6c36515336d5edcc18001e3fe673993cf4033c839f20559",
+      "bytes": 2089
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-14/feature.json",
+      "sha256": "e39a3832ca6aa13b41cb5bb83813fc47d5802a565c71065241c86b5730bc59c0",
+      "bytes": 13227
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-14.gam",
+      "sha256": "5914b84d16cc5e01455baaa64408b5a367a5666938ea418bf947696f02b9afc2",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-15/level.json",
+      "sha256": "efef0a4324d5ba4f5f9cb1a8c56b4ee918f0e8e1affdce89fea2d8def3e17602",
+      "bytes": 213
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-15/gam.json",
+      "sha256": "d764e2285de55d4e03cdf5081f9897d32ca8751b917c430e2812611643e3e21d",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-15/game.map",
+      "sha256": "3547254f2efdbdea29a9eefc3928e64845e3d252f662097ff8a5b17669631080",
+      "bytes": 179800
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-15/ttypes.ttp",
+      "sha256": "5b10aa98775b2c9a9daa611335a32c191279c3503fb9c0f3d06f97932cdda915",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-15/struct.json",
+      "sha256": "a49938ae83f2a3b61b5ab9f219b576c37ec9b18dd3aa6fe46ea45549e0f6291f",
+      "bytes": 22551
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-15/droid.json",
+      "sha256": "99c08fcfaf482dbb2e3ee5e6dd21b6ed6ab6d076b4bb6bcb3bad8402f6ae692f",
+      "bytes": 2089
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-15/feature.json",
+      "sha256": "6643034e81044cc98671d086a0eb16f50da85a1667bab7bfa4cbd326aa326178",
+      "bytes": 13227
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-3p-15.gam",
+      "sha256": "d764e2285de55d4e03cdf5081f9897d32ca8751b917c430e2812611643e3e21d",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-01/level.json",
+      "sha256": "7de949bc9fd775243274aa2207ced305f7158fc04932e8e97afaaf80fddf66b6",
+      "bytes": 214
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-01/gam.json",
+      "sha256": "7d2a7bcab23b355deef9723bf86744d04ee5e1f389dcef3e4ab0710dc364f60b",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-01/game.map",
+      "sha256": "e5000e9b8fb265ec8ab5e7e73a50e248e4e9ca0b7ed9a3c8ffca032be7b563de",
+      "bytes": 160024
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-01/ttypes.ttp",
+      "sha256": "4b677d7224f7bc25cba772be687f99b288ae70eb19799807236f3134e871afd6",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-01/struct.json",
+      "sha256": "18ad1943cc1e7128812c38ecc0c867fc4b0419ec026f8a051c605795490ac476",
+      "bytes": 29885
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-01/droid.json",
+      "sha256": "14f1f7b0facb4e4983c76e6f0104e62de89bc27f1f9077bdbec7b2c189e7d872",
+      "bytes": 2757
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-01/feature.json",
+      "sha256": "2aeecdd5f9cfba6a87a9e4290e15c448a3bb0e9896f799e497f5c6804d3f2a7b",
+      "bytes": 17591
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-01.gam",
+      "sha256": "7d2a7bcab23b355deef9723bf86744d04ee5e1f389dcef3e4ab0710dc364f60b",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-02/level.json",
+      "sha256": "a04539adda92ee0e9eee392aff68137e6d1762b07ebdcb1f5c43628ae56a3124",
+      "bytes": 212
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-02/gam.json",
+      "sha256": "5914b84d16cc5e01455baaa64408b5a367a5666938ea418bf947696f02b9afc2",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-02/game.map",
+      "sha256": "b11bd1f611675259aec0a2362a5eeffbb7f4865c1a9af9322d8d10db0d6f6bce",
+      "bytes": 173080
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-02/ttypes.ttp",
+      "sha256": "5b10aa98775b2c9a9daa611335a32c191279c3503fb9c0f3d06f97932cdda915",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-02/struct.json",
+      "sha256": "d0105ea7de9db696a95f6000ba7e27356f67e9a52b13af573c8ac51d35edb429",
+      "bytes": 30155
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-02/droid.json",
+      "sha256": "74a101d2d9e501d27dc941816198858b881c55672eac092bec61f65d45577538",
+      "bytes": 2781
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-02/feature.json",
+      "sha256": "5cdce39ba70fc9b683d580910747511ad1111c2f3b71c0ed3591464561fd56bc",
+      "bytes": 17639
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-02.gam",
+      "sha256": "5914b84d16cc5e01455baaa64408b5a367a5666938ea418bf947696f02b9afc2",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-03/level.json",
+      "sha256": "6844ea04ea1099416e227cd057d966d324e7404c51b7f8d74eefe76c71204840",
+      "bytes": 211
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-03/gam.json",
+      "sha256": "a9b6eaa9fe5628ff531ef9f0b894f656a5eba54b4e6c06faae755677ddc9ffb4",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-03/game.map",
+      "sha256": "978ffc1439c84cb563039d43cafc586201401c682caae175fa0a912403c19a99",
+      "bytes": 186648
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-03/ttypes.ttp",
+      "sha256": "8195c0b7981ab0c2b7cf964eb05bd90fdb09f60785b02af142682214e002eb51",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-03/struct.json",
+      "sha256": "253eb87d9ea0e21454fea994dc82bf40c8c1896bdca4d93427d4f3d92a17f6c2",
+      "bytes": 30097
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-03/droid.json",
+      "sha256": "cc7daf0dfd82bede2f89eaecefed023c1b3967d74bcd3be9715c868a22568d65",
+      "bytes": 2775
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-03/feature.json",
+      "sha256": "1de73a2810f4930fe5898ffdb97d2a9892db9ac4aff74cbcc00950ef752841f9",
+      "bytes": 17615
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-03.gam",
+      "sha256": "a9b6eaa9fe5628ff531ef9f0b894f656a5eba54b4e6c06faae755677ddc9ffb4",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-04/level.json",
+      "sha256": "073e31b1f2761bd4ba745c1c90a0ddf0642638042031e9101c038f5e72e73624",
+      "bytes": 215
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-04/gam.json",
+      "sha256": "2c550207ed28af457cf3a007db504a36f3f8bf91b87b2031fbe915c829f9a603",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-04/game.map",
+      "sha256": "f502307a8caa5bb67a7bc0d71c682cc3cbd1a60dcc208c3fba942197cac3bdd5",
+      "bytes": 166488
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-04/ttypes.ttp",
+      "sha256": "4b677d7224f7bc25cba772be687f99b288ae70eb19799807236f3134e871afd6",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-04/struct.json",
+      "sha256": "7a489587eeaed4d2fc686ca3d4f9aa9de11df0668a5f5abd991e2558370d46f2",
+      "bytes": 30091
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-04/droid.json",
+      "sha256": "c8d3a4aec04bc83b96fd315ac54254396234cd7f4aceb7cefc527c39e12d7b25",
+      "bytes": 2773
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-04/feature.json",
+      "sha256": "7d90b6fea0213ffe8670d702b44d55b167f963fc9404190fef63c31266f6399a",
+      "bytes": 17607
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-04.gam",
+      "sha256": "2c550207ed28af457cf3a007db504a36f3f8bf91b87b2031fbe915c829f9a603",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-05/level.json",
+      "sha256": "c3bd3247d93d545e769ae7eff9a1d3d0f3f14567c9cc6b48936b5c04bc254e12",
+      "bytes": 217
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-05/gam.json",
+      "sha256": "76f9d54d7d75c1a944e3bc74d02bb7c33356ae87185c44bb3159cbe98cf41721",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-05/game.map",
+      "sha256": "7e290bbce209a5844e371c3dea1a8adc793ce9d38d271e96cd53ee21faba2c9a",
+      "bytes": 193624
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-05/ttypes.ttp",
+      "sha256": "5b10aa98775b2c9a9daa611335a32c191279c3503fb9c0f3d06f97932cdda915",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-05/struct.json",
+      "sha256": "0d853e5c34fa86716aeadf6e0f785a751c77537588fa46da420caea98b62a1fe",
+      "bytes": 30155
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-05/droid.json",
+      "sha256": "06c2fa68479e24b86d866e063501934f5f0d3b1b67e6825d42c0bcaa1c78da64",
+      "bytes": 2781
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-05/feature.json",
+      "sha256": "78edbfdec4c17f532e5b55c78cbbf5ac51c7ac93d6aa8c25e7b40bfeb88238d4",
+      "bytes": 17643
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-05.gam",
+      "sha256": "76f9d54d7d75c1a944e3bc74d02bb7c33356ae87185c44bb3159cbe98cf41721",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-06/level.json",
+      "sha256": "f3814e592d1edfe3254228b5bec2c23363b93522a082f9df5901093404efe8a0",
+      "bytes": 211
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-06/gam.json",
+      "sha256": "5914b84d16cc5e01455baaa64408b5a367a5666938ea418bf947696f02b9afc2",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-06/game.map",
+      "sha256": "bc646be502dc62adf695730d0c73fb336462116f1cfee43e4cef7df2739d46eb",
+      "bytes": 173080
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-06/ttypes.ttp",
+      "sha256": "8195c0b7981ab0c2b7cf964eb05bd90fdb09f60785b02af142682214e002eb51",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-06/struct.json",
+      "sha256": "ad569999466590699266a7e76a59522ff1cb745e137568fe8916ad434a346ffd",
+      "bytes": 29885
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-06/droid.json",
+      "sha256": "78f74619dfb233394d5c6073a0321458961dfa74c7f4fce43b23ca0ea0bca30a",
+      "bytes": 2757
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-06/feature.json",
+      "sha256": "fcfb791f5d1587109bb6d2f0e9d738e0e4a29f2ceb847766e799c9f61738c4cd",
+      "bytes": 17591
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-06.gam",
+      "sha256": "5914b84d16cc5e01455baaa64408b5a367a5666938ea418bf947696f02b9afc2",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-07/level.json",
+      "sha256": "c4de3f7bdce7c08f3d3f08691b842659bf3dbd543aa7ff76f8665c27f0daeb6d",
+      "bytes": 219
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-07/gam.json",
+      "sha256": "6b822b1fafd050511f4cbd898ab1bb7106d1a8018ccea6730665ebb3af607d49",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-07/game.map",
+      "sha256": "3008aeda16d396381ceb758ee9ef658bb808f71a028adf36539e392d368c734b",
+      "bytes": 200728
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-07/ttypes.ttp",
+      "sha256": "4b677d7224f7bc25cba772be687f99b288ae70eb19799807236f3134e871afd6",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-07/struct.json",
+      "sha256": "18a14b5b56f269409444f22934c9984761b4b6a572ec32ff5b8098cb4ca02bed",
+      "bytes": 30155
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-07/droid.json",
+      "sha256": "19cf69c83d8ba230abe9bfac4c8ea5ff0a6deab670fdb6d4725f1a32d6c7bc2b",
+      "bytes": 2781
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-07/feature.json",
+      "sha256": "4679b2b611badac645c1e613d474327720bc3e4aea86318da22a288c1a67fa3f",
+      "bytes": 17647
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-07.gam",
+      "sha256": "6b822b1fafd050511f4cbd898ab1bb7106d1a8018ccea6730665ebb3af607d49",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-08/level.json",
+      "sha256": "a1c60b77e330fcc9473f917d738e23f2f14c82f411f05466948207897d54b378",
+      "bytes": 215
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-08/gam.json",
+      "sha256": "d764e2285de55d4e03cdf5081f9897d32ca8751b917c430e2812611643e3e21d",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-08/game.map",
+      "sha256": "482136d5d5cf70beadddd2bb62340417da5a02e0b53c2df1c5441f19d696ca20",
+      "bytes": 179800
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-08/ttypes.ttp",
+      "sha256": "5b10aa98775b2c9a9daa611335a32c191279c3503fb9c0f3d06f97932cdda915",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-08/struct.json",
+      "sha256": "662ab9c1267c611a18133c042f56e23bf0d6d0ef13fe89f238c56edbb387babd",
+      "bytes": 30155
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-08/droid.json",
+      "sha256": "17711d37980ebf376ea6b29879964f7d2226351e50c358d35b9a5b443dd95742",
+      "bytes": 2781
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-08/feature.json",
+      "sha256": "33a95f91490d64d5e67cb1f7ac89566aaf0c14e4f5d1e8928fa7c50ddb7126bf",
+      "bytes": 17639
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-08.gam",
+      "sha256": "d764e2285de55d4e03cdf5081f9897d32ca8751b917c430e2812611643e3e21d",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-09/level.json",
+      "sha256": "6846da26e9cc872275b9db5cb183447ddf9babc61f03fc54d7e4bb8328c9b067",
+      "bytes": 215
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-09/gam.json",
+      "sha256": "9f81285c2d1216796efa18bf268ac683d026f9132ff0d3ad52d8f3711d5725ce",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-09/game.map",
+      "sha256": "76613577b4870ac1468afa2c14d4d60905e669775a8c2551f7cca04e5d401400",
+      "bytes": 207960
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-09/ttypes.ttp",
+      "sha256": "8195c0b7981ab0c2b7cf964eb05bd90fdb09f60785b02af142682214e002eb51",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-09/struct.json",
+      "sha256": "1b850cff61f7ac5311589d92987784019bb6d2a28e594a7a73420deeb78cb24e",
+      "bytes": 30107
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-09/droid.json",
+      "sha256": "c800e15bedd4a88808198fd52d2529d00115c5207bffc44c7a278466e65cf070",
+      "bytes": 2777
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-09/feature.json",
+      "sha256": "cb42ef79656518b72f1a88908d4003868f96b5bd7ce720ec26820b2ca80be8cb",
+      "bytes": 17627
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-09.gam",
+      "sha256": "9f81285c2d1216796efa18bf268ac683d026f9132ff0d3ad52d8f3711d5725ce",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-10/level.json",
+      "sha256": "769bbaf1a3db29c2c2f6813114646ef96820dab42edb870145e0958e31f7170a",
+      "bytes": 219
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-10/gam.json",
+      "sha256": "a9b6eaa9fe5628ff531ef9f0b894f656a5eba54b4e6c06faae755677ddc9ffb4",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-10/game.map",
+      "sha256": "8a20ab8519dd6b8c11c3741a4cbc909d7dc044afe164702867b938c2dcb962ff",
+      "bytes": 186648
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-10/ttypes.ttp",
+      "sha256": "4b677d7224f7bc25cba772be687f99b288ae70eb19799807236f3134e871afd6",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-10/struct.json",
+      "sha256": "ffd6f1f77ea66f7887771c66356a761602f90c8c122dd2cf7a744db2ef96b1f8",
+      "bytes": 30097
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-10/droid.json",
+      "sha256": "1cd74cb445fe103eeee0a592871e1d8d0e6f1e4eb16bad59e27d2a3c5ab34ef5",
+      "bytes": 2775
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-10/feature.json",
+      "sha256": "dc14380ca806771c31c643523cc839fd34b9a7c7447853206ace19c49bcf987d",
+      "bytes": 17615
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-10.gam",
+      "sha256": "a9b6eaa9fe5628ff531ef9f0b894f656a5eba54b4e6c06faae755677ddc9ffb4",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-11/level.json",
+      "sha256": "5f391b18e9c6c83470b98b3ee5b21b5e9bd7a3be2d3cbce2e97b32b50e45c29e",
+      "bytes": 214
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-11/gam.json",
+      "sha256": "76f9d54d7d75c1a944e3bc74d02bb7c33356ae87185c44bb3159cbe98cf41721",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-11/game.map",
+      "sha256": "742f1e4be47694a16c2394f33991ed5c51a0620c4e89db6f2259d8a18cf888c5",
+      "bytes": 193624
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-11/ttypes.ttp",
+      "sha256": "5b10aa98775b2c9a9daa611335a32c191279c3503fb9c0f3d06f97932cdda915",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-11/struct.json",
+      "sha256": "0d853e5c34fa86716aeadf6e0f785a751c77537588fa46da420caea98b62a1fe",
+      "bytes": 30155
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-11/droid.json",
+      "sha256": "06c2fa68479e24b86d866e063501934f5f0d3b1b67e6825d42c0bcaa1c78da64",
+      "bytes": 2781
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-11/feature.json",
+      "sha256": "2907b09153008e7d1c69c48e83dd653e6fb4b3e130754e0a5ea0cfc9ce70ed93",
+      "bytes": 17643
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-11.gam",
+      "sha256": "76f9d54d7d75c1a944e3bc74d02bb7c33356ae87185c44bb3159cbe98cf41721",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-12/level.json",
+      "sha256": "8d2ed26721acfd0fe22a7c68a8367249b08cc0645b37d5f853226b7f21602063",
+      "bytes": 213
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-12/gam.json",
+      "sha256": "2c550207ed28af457cf3a007db504a36f3f8bf91b87b2031fbe915c829f9a603",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-12/game.map",
+      "sha256": "70d3f4e69ad10998bf18c8494613f08937d59d011e94d4ae0140e7dbdc438fb8",
+      "bytes": 166488
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-12/ttypes.ttp",
+      "sha256": "8195c0b7981ab0c2b7cf964eb05bd90fdb09f60785b02af142682214e002eb51",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-12/struct.json",
+      "sha256": "a366dab889718fd7a66206db191ea72d2914fac61a7931432053ea146f124f2d",
+      "bytes": 29885
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-12/droid.json",
+      "sha256": "b4b8d4f3beb5a8e506becdd1e7525fbe85569f2c4e6f10746dc73971a87ca09a",
+      "bytes": 2757
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-12/feature.json",
+      "sha256": "a548672b81c20833ffc485a97dd304f8c207b40eac279c91a9af380f3b2a2b9e",
+      "bytes": 17592
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-12.gam",
+      "sha256": "2c550207ed28af457cf3a007db504a36f3f8bf91b87b2031fbe915c829f9a603",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-13/level.json",
+      "sha256": "9f4eb2be812b08c1253e3015c88d3b9682284f64f033880aa9d3a3adedca5bc1",
+      "bytes": 215
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-13/gam.json",
+      "sha256": "e28d9475a2c8d0abcebdcc6ffbc01b7622a29c3a719c95850740961e5a021158",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-13/game.map",
+      "sha256": "0a0be26785ab4c29f0c10befdcc7d8495a1b21df6241305771d23bb746154a99",
+      "bytes": 215320
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-13/ttypes.ttp",
+      "sha256": "4b677d7224f7bc25cba772be687f99b288ae70eb19799807236f3134e871afd6",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-13/struct.json",
+      "sha256": "27028147df6c59d1dbc604c685a0b069ac5c7d99604a84c4789996e32651d6a0",
+      "bytes": 30155
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-13/droid.json",
+      "sha256": "1e7a803de75fd58a8338a2f51eb2991270ebc69dc251508772908e019d66bf01",
+      "bytes": 2781
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-13/feature.json",
+      "sha256": "5c940e6f43c87c8514d9c1a5f35cabe9c35bfde137093867e5bbca5718d51b27",
+      "bytes": 17650
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-13.gam",
+      "sha256": "e28d9475a2c8d0abcebdcc6ffbc01b7622a29c3a719c95850740961e5a021158",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-14/level.json",
+      "sha256": "61412e9247573c4271c6e98cb81ff4bc10d1fc7189daea5d501631ed8f76f4b1",
+      "bytes": 218
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-14/gam.json",
+      "sha256": "6b822b1fafd050511f4cbd898ab1bb7106d1a8018ccea6730665ebb3af607d49",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-14/game.map",
+      "sha256": "7159386bd0920f5e2d2cd309cb90184ff026636fc5a5f7498dde6e898edb0cef",
+      "bytes": 200728
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-14/ttypes.ttp",
+      "sha256": "5b10aa98775b2c9a9daa611335a32c191279c3503fb9c0f3d06f97932cdda915",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-14/struct.json",
+      "sha256": "050535d8e4abf2136c174da3db01d86674db239f039cde3d3aef387f98849ad9",
+      "bytes": 30155
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-14/droid.json",
+      "sha256": "44ba050fcde9095027c250baf2c63f4a5449b4c88dac6d5c047a942bb97ed350",
+      "bytes": 2781
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-14/feature.json",
+      "sha256": "f44f7782d7478687d9b40c5e4f977000d1718b2b8c0b983940fb1af7d0ff9eea",
+      "bytes": 17647
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-14.gam",
+      "sha256": "6b822b1fafd050511f4cbd898ab1bb7106d1a8018ccea6730665ebb3af607d49",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-15/level.json",
+      "sha256": "55a72e1d6fc538733b76f4a2ea4e5ff9fe9a25e5d3930c996460b80f4d2e190f",
+      "bytes": 213
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-15/gam.json",
+      "sha256": "9f81285c2d1216796efa18bf268ac683d026f9132ff0d3ad52d8f3711d5725ce",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-15/game.map",
+      "sha256": "8a8b372dbca7e2df78462d88959f6d8c267ec6e8dc556b3cfc36e18ae8b48123",
+      "bytes": 207960
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-15/ttypes.ttp",
+      "sha256": "8195c0b7981ab0c2b7cf964eb05bd90fdb09f60785b02af142682214e002eb51",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-15/struct.json",
+      "sha256": "1b850cff61f7ac5311589d92987784019bb6d2a28e594a7a73420deeb78cb24e",
+      "bytes": 30107
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-15/droid.json",
+      "sha256": "c800e15bedd4a88808198fd52d2529d00115c5207bffc44c7a278466e65cf070",
+      "bytes": 2777
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-15/feature.json",
+      "sha256": "cb42ef79656518b72f1a88908d4003868f96b5bd7ce720ec26820b2ca80be8cb",
+      "bytes": 17627
+    },
+    {
+      "path": "/data/mp/multiplay/maps/ffa-ntw-4p-15.gam",
+      "sha256": "9f81285c2d1216796efa18bf268ac683d026f9132ff0d3ad52d8f3711d5725ce",
+      "bytes": 152
+    },
+    {
+      "path": "/data/mp/tests/ffa-emag-easy.json",
+      "sha256": "64743acc806078cb5a2b6b510248486d1f1a049e168f47527c442b6bc887c30c",
+      "bytes": 1043
+    },
+    {
+      "path": "/data/mp/tests/ffa-emag-medium.json",
+      "sha256": "a5a48be362c81b87681a17d05d8dcb0dc972ca56396ac2f71685ea4619b7d9a1",
+      "bytes": 1051
+    },
+    {
+      "path": "/data/mp/tests/ffa-emag-hard.json",
+      "sha256": "79ff96d13b97b62ad524b72ba7153f648c78e55f9990fb950c0f32ba880d0adf",
+      "bytes": 1043
+    },
+    {
+      "path": "/data/mp/tests/ffa-contact-easy.json",
+      "sha256": "9cdc2ab559ddee590100fcf281bbc8a7920b63ac7a991c683f36167a535174f6",
+      "bytes": 1052
+    },
+    {
+      "path": "/data/mp/tests/ffa-contact-medium.json",
+      "sha256": "0ad9f6401da8e1550255cb2a07592a0892dac25d9db23f2a58d6161d6b340c61",
+      "bytes": 1060
+    },
+    {
+      "path": "/data/mp/tests/ffa-contact-hard.json",
+      "sha256": "a96b0e04b8e14ad1e5aba7f5f4a49bd8512773d05b18bf262b5231ba8063a5ba",
+      "bytes": 1052
+    },
+    {
+      "path": "/data/mp/tests/ffa-templar-ffa-easy.json",
+      "sha256": "dcda10948cac64d952b2d1a39164b2a5144e5aa77d3c1eaba1a39c47cd2a9003",
+      "bytes": 1058
+    },
+    {
+      "path": "/data/mp/tests/ffa-templar-ffa-medium.json",
+      "sha256": "4181d31cdba0a1f80a7cd7d799cccde03bb9502ddc89979c135421dec68cf51b",
+      "bytes": 1066
+    },
+    {
+      "path": "/data/mp/tests/ffa-templar-ffa-hard.json",
+      "sha256": "2c64b6807a4efe36de6cb9340aec1a13f949b9bdf6dee3ba98399b7b708da2e9",
+      "bytes": 1058
+    },
+    {
+      "path": "/data/mp/tests/ffa-rb-simple-easy.json",
+      "sha256": "bc99d5c53b4425025167c1337039aa2a7c59cb41a6d6cf34f8c09f20492eb69b",
+      "bytes": 1055
+    },
+    {
+      "path": "/data/mp/tests/ffa-rb-simple-medium.json",
+      "sha256": "f12cfd1197ecff3b323507824466e407f76c251113a1978d96f4a7592b3eee87",
+      "bytes": 1063
+    },
+    {
+      "path": "/data/mp/tests/ffa-rb-simple-hard.json",
+      "sha256": "42303586e3d18fff3f7b745efea4308c685e4079a33854eb55d41c95f96791ed",
+      "bytes": 1055
+    },
+    {
+      "path": "/data/mp/tests/ffa-rb-usefull-easy.json",
+      "sha256": "b7a74dfb96330fe4de61638f5df95365bedb0e473725c3ee793adb1da474888a",
+      "bytes": 1057
+    },
+    {
+      "path": "/data/mp/tests/ffa-rb-usefull-medium.json",
+      "sha256": "654aef044d0a061f70f491c4536ec41c135472ebeba5c455d4e96ea19c7af09b",
+      "bytes": 1065
+    },
+    {
+      "path": "/data/mp/tests/ffa-rb-usefull-hard.json",
+      "sha256": "2e363f318541b41c423d6c57b7c12ea6bedc2460c0028bae342922e2fc36c5c8",
+      "bytes": 1057
+    },
+    {
+      "path": "/data/mp/tests/ffa-emaj-6p-easy.json",
+      "sha256": "3365430e6a9639727e83ac15f6e3df58bc1d9f8153edd6a3c40161534b9f402c",
+      "bytes": 1338
+    },
+    {
+      "path": "/data/mp/tests/ffa-emaj-6p-medium.json",
+      "sha256": "174e63a972c8b15833f1388fef5ea0484eb78943830d2b0da1cc6e8bbeeefedb",
+      "bytes": 1350
+    },
+    {
+      "path": "/data/mp/tests/ffa-emaj-6p-hard.json",
+      "sha256": "d9a00e2b9f7a090713aa97abe355efe1b78034d56aa88e4f6b3ac78342dec17b",
+      "bytes": 1338
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-2p-01-easy.json",
+      "sha256": "ed0f554f7d1e858f5de824991a852ad1dc77bd5fcf1ab02443f129d0efb1567d",
+      "bytes": 772
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-2p-01-medium.json",
+      "sha256": "0ede635f06cfc33e2085a683e065cb16e1023fb3c9bc97ebe06740104f8aa72d",
+      "bytes": 776
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-2p-01-hard.json",
+      "sha256": "ce43c0517b4f1b3e54ccce93019736b4dbc2efd6f72098a23af6605b6198c9c8",
+      "bytes": 772
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-2p-02-easy.json",
+      "sha256": "a6e1b0f1e62a8568073f30c9f1b894ad26457a484468079f2e45d6ce49a7b88f",
+      "bytes": 774
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-2p-02-medium.json",
+      "sha256": "e3a2ddd368ff1b4c459283a2424e681ffbb8d2283edc9762ef8ca56ff20ca08d",
+      "bytes": 778
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-2p-02-hard.json",
+      "sha256": "1b356adcb3765f3471631c695138a342a5f01ea6d2bc683f211740bed4e87fda",
+      "bytes": 774
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-2p-03-easy.json",
+      "sha256": "04bfe4fc31d5a4b7f53e81128b94cb4b2366d07593e6457b326edd1b3af8df21",
+      "bytes": 772
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-2p-03-medium.json",
+      "sha256": "5fd02e9a33e06f34d316f7e090395e94a706fac0b567523effe0ad256751ea60",
+      "bytes": 776
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-2p-03-hard.json",
+      "sha256": "be4a9236d2e82946825183b14b0d9d0dbba101e70307e883e019a319093031e2",
+      "bytes": 772
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-2p-04-easy.json",
+      "sha256": "bd5230959c449e4eaf617f81ee9292edf22cb805e3189c7283fb735654a2ae9b",
+      "bytes": 771
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-2p-04-medium.json",
+      "sha256": "d5fbb00868655b7624237bbe51362ffcabfcce0656f076fba9aa626ce537271a",
+      "bytes": 775
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-2p-04-hard.json",
+      "sha256": "8b5a4b3929ee4e741240c90744da39a62f344ea2f65cf5c004989beb449e2ab3",
+      "bytes": 771
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-2p-05-easy.json",
+      "sha256": "1807c6ca160bd641097c767bf5039c737674b459b51d1688b7673c6fe34fda6e",
+      "bytes": 771
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-2p-05-medium.json",
+      "sha256": "3940809561b61964d865f510b65cc47eed4ccc73d619773bea093071ac4411b6",
+      "bytes": 775
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-2p-05-hard.json",
+      "sha256": "2969a8333ced96b9f0c280fe955d17c0fc9c697c39b18776ceb2b683be27708b",
+      "bytes": 771
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-2p-06-easy.json",
+      "sha256": "80fdc0efdd1ca7e771599f104d711237b88bc3a9d07347b1b84e282f2330621d",
+      "bytes": 766
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-2p-06-medium.json",
+      "sha256": "0d8bad0f476d6aeb89cab3b15b55fc917541867c0d573ebe1f86fd2933d44843",
+      "bytes": 770
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-2p-06-hard.json",
+      "sha256": "73b25ae8932ee647b4362850d70ce437457ab4d323c7c207eb32919463ceeee4",
+      "bytes": 766
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-2p-07-easy.json",
+      "sha256": "f7e862b3d50a57ce1ec8f7d9e7ef2d1f8bc6dc4f079f79932e36450f4b84f075",
+      "bytes": 769
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-2p-07-medium.json",
+      "sha256": "74d03c93bfcc521ef5cec77d2ec199b66d35a1b6d054841b174c2cc80d30235b",
+      "bytes": 773
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-2p-07-hard.json",
+      "sha256": "b08a000064b771ca5dcc414add4986547f0582345fe616fcb557f7e213ebb2d0",
+      "bytes": 769
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-2p-08-easy.json",
+      "sha256": "c46e8c9825baa2872a9db25319a15f8cc0312997d78e8634bdba37725e2ace40",
+      "bytes": 769
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-2p-08-medium.json",
+      "sha256": "93d3150c4789f0e9b1dc1411bd034335cee76a8ddfdc574b51b2c649473e59eb",
+      "bytes": 773
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-2p-08-hard.json",
+      "sha256": "72dd7bdb06716602b3809b1afee2ea9810c71892af674e5730f0a53ccd4220e3",
+      "bytes": 769
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-2p-09-easy.json",
+      "sha256": "cc0761268b8d49162d3a2258ce1eda06039e302bc210527dc4a9368b42218d03",
+      "bytes": 771
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-2p-09-medium.json",
+      "sha256": "9870ed98b75d57fa5debc0a85e8e20ff92415fde52295e8155c27251b4701266",
+      "bytes": 775
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-2p-09-hard.json",
+      "sha256": "2bec8eb9a23cce86864ff196796411898a3c7671333ae942c42ba1a020ddcb19",
+      "bytes": 771
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-2p-10-easy.json",
+      "sha256": "bc9e1995e2b82f33fe9164f1ad8720767f7774c81092e7bea432e7f6cee595f7",
+      "bytes": 772
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-2p-10-medium.json",
+      "sha256": "9010772a37b3ee1a27e3461e2de8d49546b6f71f828d78946a483a4ec5a729e7",
+      "bytes": 776
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-2p-10-hard.json",
+      "sha256": "29bada246b47ade6faf2cab60500daa5efabe96db626f9f77541ca35e4cea596",
+      "bytes": 772
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-2p-11-easy.json",
+      "sha256": "884a61ac8b90384f82fd0fbaf786d680c316b1c53b500e0f997768e921ec65da",
+      "bytes": 769
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-2p-11-medium.json",
+      "sha256": "9e8623064cade77319d773caa604861eab79f5ffd0d30e7a03a323765f3a812a",
+      "bytes": 773
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-2p-11-hard.json",
+      "sha256": "07553a1d70e81f3a98463bab0db1c3a1d7df60091601aa09cfe747d8fd78482c",
+      "bytes": 769
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-2p-12-easy.json",
+      "sha256": "801f1f1734771a1610135b654b5f517948ee64875d5db1d1503d21862dd5d9e1",
+      "bytes": 769
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-2p-12-medium.json",
+      "sha256": "e66322a184c73fff1b0e9ec8525df170b942dab09192f0f4abeae3378c14eb8d",
+      "bytes": 773
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-2p-12-hard.json",
+      "sha256": "aca79e86f6f1b168d145e6b5a067a8ae1bf570457b89ca50388bb1a9aadb4f90",
+      "bytes": 769
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-2p-13-easy.json",
+      "sha256": "63706787097009705f6747b6fb0c42563e777630560d016d76ea2f1fddb26a36",
+      "bytes": 776
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-2p-13-medium.json",
+      "sha256": "f5b7bbc48abec6719f73de2f1f9f7fa0f9e7dc9912bb69bee705a3b356bed8dd",
+      "bytes": 780
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-2p-13-hard.json",
+      "sha256": "d4405ff43cf793266654948ae97fe15277ace5941750b89cd985348652863d76",
+      "bytes": 776
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-2p-14-easy.json",
+      "sha256": "0194c70ce5660324934ebe051d70c26bcaa0f573eade6eebbc60d26aa27d4bc6",
+      "bytes": 769
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-2p-14-medium.json",
+      "sha256": "6dca134d1b1d7cea219064a4578857d5e5b1f2cb787c6df768a1008e2cc436a5",
+      "bytes": 773
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-2p-14-hard.json",
+      "sha256": "4147b11c22028048f7fe4d6e5aa8cd97030ca8e9b4a3e6e45cc2e36230783b22",
+      "bytes": 769
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-2p-15-easy.json",
+      "sha256": "f4d8936e312821eb89c164e5d4848d261ca043c5236a8576000be1cf4db1905b",
+      "bytes": 767
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-2p-15-medium.json",
+      "sha256": "947e5c52631fcbddcd43110c713b42bde00a54715bbcbc49746869479d24a993",
+      "bytes": 771
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-2p-15-hard.json",
+      "sha256": "560c747a5c9908b65743244af55b76129ba240e369a984c6fed7596f32016797",
+      "bytes": 767
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-3p-01-easy.json",
+      "sha256": "4473b9a635faaf9486b3ef1075b6221e0b68352f84b193df035680d42aab6212",
+      "bytes": 912
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-3p-01-medium.json",
+      "sha256": "41bbc3d4ac3dba1171ffd6c47e5f436422991860b92f4b2165551ba06a07a255",
+      "bytes": 918
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-3p-01-hard.json",
+      "sha256": "b3565035f9c5611240b271a04a8dc0622ebad31d43bee05da1817bf46e646faf",
+      "bytes": 912
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-3p-02-easy.json",
+      "sha256": "da047037711afbcf12887bedab591ba129969b41442c2ada281a4a021e63eb6d",
+      "bytes": 913
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-3p-02-medium.json",
+      "sha256": "dd66d5e449aba4b36e8b8c78fd2f5a71bdda818d975bec464710be50e40e3bc7",
+      "bytes": 919
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-3p-02-hard.json",
+      "sha256": "6b2cbfafe7e9cfb76441d76abecd4300946265df489d9cdee0918412e26b5d0b",
+      "bytes": 913
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-3p-03-easy.json",
+      "sha256": "325596aff99ee41ac9c68d77d39a2605091f22d03cdf8eed90d7dcc697633973",
+      "bytes": 918
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-3p-03-medium.json",
+      "sha256": "53f21eb38fd0dde1397aa87f8ad7e5cc8f4d1a4616ba10fcaa7d35d9a077e2f7",
+      "bytes": 924
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-3p-03-hard.json",
+      "sha256": "c0eb1b2f33e09a58f78bd03c3e22ac041e35f8132346087e5a9bf84e1af2842a",
+      "bytes": 918
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-3p-04-easy.json",
+      "sha256": "55d732c5227ea838cb06f62f8714a0110a32515c3acd8a3fdd7f7388f15c26a8",
+      "bytes": 916
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-3p-04-medium.json",
+      "sha256": "42d19a0d94ee98859800234aca8ab5d6efc379a75d8fd2a8873dbef3ecfc4678",
+      "bytes": 922
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-3p-04-hard.json",
+      "sha256": "4eba0fd949d8c307b8f3aa388f3e2b8ecdf13827a16d7180b4f5bfc3fc75637b",
+      "bytes": 916
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-3p-05-easy.json",
+      "sha256": "4b5640895fd69f4506a25231320e7c5f8fa1b5043dc8ad25e32f6c092fb06b80",
+      "bytes": 912
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-3p-05-medium.json",
+      "sha256": "2dc1545e3c65bb2528a74a9738d51a1dd85a42a9fc77206c718625d99a3231e1",
+      "bytes": 918
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-3p-05-hard.json",
+      "sha256": "8879fdf36d6a9e3c7b28ba425caadc72acefb4a3f29f4b33208a187f501a64a1",
+      "bytes": 912
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-3p-06-easy.json",
+      "sha256": "97b3a4490b58dfae3c1985e02017b75ccb2d735e2ceaea6813bddf58fdc71552",
+      "bytes": 915
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-3p-06-medium.json",
+      "sha256": "7a143559406f355c72dca0b8136833463d6b41eff3ca713d420bd358930d001c",
+      "bytes": 921
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-3p-06-hard.json",
+      "sha256": "9a91f27132782ff5a63accb442cce0198c2aaf022120f8cdac01f534a93e0c7e",
+      "bytes": 915
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-3p-07-easy.json",
+      "sha256": "755049f34b236aa4842a50b1c2506b3b5da998e5cf6e74f0aedc5ac952473b0a",
+      "bytes": 916
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-3p-07-medium.json",
+      "sha256": "16652edf880855edd4880ef758790044e40c26bad85cd0372b3a7b67904040f3",
+      "bytes": 922
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-3p-07-hard.json",
+      "sha256": "c963844e96fb2a2a31e4d0167da18206688398f3e8b44a0676ff685cea81fedb",
+      "bytes": 916
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-3p-08-easy.json",
+      "sha256": "8b4f826cd8153480fe3c8c3ca7adc3cbb3992d3e83bfd4f34f0ed719f9746840",
+      "bytes": 916
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-3p-08-medium.json",
+      "sha256": "995cce9092fea6469236bc9d7036c5b0b7dcd0ffd0226ae81474b76a3b461488",
+      "bytes": 922
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-3p-08-hard.json",
+      "sha256": "bac9cc25f2f9ce29be5fb6276521e6f2c9915cf477832c9f7e87de22a6466559",
+      "bytes": 916
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-3p-09-easy.json",
+      "sha256": "24cfb7ea072632f01b1f71d3d2279d42e605540f5a6726b28749680fce96f963",
+      "bytes": 915
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-3p-09-medium.json",
+      "sha256": "9447c926d42d8f343a49d1ec1695f566667205337ed2eba029309ba46aa194cb",
+      "bytes": 921
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-3p-09-hard.json",
+      "sha256": "8dd1940dd1006d2c42c09bd29572572f3b7efee2c4fdf1dbf0f97ba2d1b990ac",
+      "bytes": 915
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-3p-10-easy.json",
+      "sha256": "d97ffe4d7d8aa64a37af4a303c3ef4386b687fb462f83f4a4d88dfd5cdb60ffa",
+      "bytes": 918
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-3p-10-medium.json",
+      "sha256": "ebb67ef3ecdb7ac89e0e6c169cf64b17c0a110d42cdc5250057731d3eca71c33",
+      "bytes": 924
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-3p-10-hard.json",
+      "sha256": "96a3fefc0d05435eb6cf004a38ed142840fd3f4f1d1a4000bb1e828bd6bb77a6",
+      "bytes": 918
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-3p-11-easy.json",
+      "sha256": "401c8874445c590d3290a87f5803b7d249b641a0de33bacea5f2ce1f8ae1b197",
+      "bytes": 914
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-3p-11-medium.json",
+      "sha256": "b0289def19d432a630604b85304bb64cab25e490238b6f08d5892e4d28dc8625",
+      "bytes": 920
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-3p-11-hard.json",
+      "sha256": "6418b870c5586d6198c9ae414d328fef8e7d9c1d11427a7e42b749192a18d478",
+      "bytes": 914
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-3p-12-easy.json",
+      "sha256": "2357db37849b17f91aecd50bcb06d23c69c6552f61245b6a9e8633ca1d3ec802",
+      "bytes": 915
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-3p-12-medium.json",
+      "sha256": "e6cc95e46e532991b1cbc2f420cfea640eb609d3719f9a1861632968813bd7b3",
+      "bytes": 921
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-3p-12-hard.json",
+      "sha256": "f8b1c44449773ed511add0d79a0a5eac416bf9c1d98c53057a7bc392a7c4432c",
+      "bytes": 915
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-3p-13-easy.json",
+      "sha256": "1904dcff05fc22bf55a6cda8467482bde7b517ae7569e6546bfed1c542f11c28",
+      "bytes": 918
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-3p-13-medium.json",
+      "sha256": "ca5d9ac093f9ca8f703204328e1829cd17c966053fd3a4dcb86bc5948bff69de",
+      "bytes": 924
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-3p-13-hard.json",
+      "sha256": "7ac00a1917397f5fbfc5d7634139e17bcf46d234cc55301b0a0bbacf5107ef89",
+      "bytes": 918
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-3p-14-easy.json",
+      "sha256": "5ce936db4824cc79d3ff8ece8457b666e2b39606330daaa9cece4e3f08d1e06a",
+      "bytes": 914
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-3p-14-medium.json",
+      "sha256": "4654d187ecd1350b77c6e9649468341604f9ad381d9e9762fe19f59733160c57",
+      "bytes": 920
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-3p-14-hard.json",
+      "sha256": "034d4a53e6309c380a41eae85884545841ad9c58c804697956997bb95234b3b8",
+      "bytes": 914
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-3p-15-easy.json",
+      "sha256": "014540d0e5240917a95dfa979756e021b7df206b483e81080d01db26082571c7",
+      "bytes": 913
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-3p-15-medium.json",
+      "sha256": "65f413fd8e34c799b5d1205f8f6cb677febec0666fbe770ee3f0819453d7f20d",
+      "bytes": 919
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-3p-15-hard.json",
+      "sha256": "c2770095aff8c485cbc12a6903245e808699ce63a624ccf3fcdd560ef90d45de",
+      "bytes": 913
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-4p-01-easy.json",
+      "sha256": "abbd638f8b7f1109369a48aeac1ec2a98f5092318c958872311630303b1a95ad",
+      "bytes": 1058
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-4p-01-medium.json",
+      "sha256": "5029d20a377bb930914e037ede1d3068461e926adfef1df56776db668047a4ab",
+      "bytes": 1066
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-4p-01-hard.json",
+      "sha256": "68c6ee8652f97a5607381057ce462dbe7ab58a47ddce52926836cb5ab10e5859",
+      "bytes": 1058
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-4p-02-easy.json",
+      "sha256": "dc2ace2fe56d2d051f59fb3ebcf88ba531bc3591a7ed4932cf670ffa9e4e239e",
+      "bytes": 1056
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-4p-02-medium.json",
+      "sha256": "b54d01c82ae6a44ea5f75916547ec65f528e56795510ac0ed5dd3dd6a52daffa",
+      "bytes": 1064
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-4p-02-hard.json",
+      "sha256": "0c6f7086681ffff301601124e083aae549bef2a8da7445ae36a9ee4277931da8",
+      "bytes": 1056
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-4p-03-easy.json",
+      "sha256": "ba04481d9c3f2cf498350c1badc2c966e60a70816348deab67509bd080837f82",
+      "bytes": 1057
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-4p-03-medium.json",
+      "sha256": "ba104b28687d651e3fad5f4a5d2c36011c5bb586d89017959330e08e95111fe8",
+      "bytes": 1065
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-4p-03-hard.json",
+      "sha256": "a5192b94deaafc26aa26dd89a1cf7d1f44db83e583a9feada45f58c35eadc9e7",
+      "bytes": 1057
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-4p-04-easy.json",
+      "sha256": "132080db4e954b87912ae8e30343c71ec97d936b7d9e61f47a46cfb97a640e8d",
+      "bytes": 1059
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-4p-04-medium.json",
+      "sha256": "390c853d9839dc934cd45df171aa286511ef80ed7af0faaa734a714174babdb3",
+      "bytes": 1067
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-4p-04-hard.json",
+      "sha256": "e66c0c8ac581916d4e34b53ada928baf8faca0e251ff6491ee677adf67ed4ceb",
+      "bytes": 1059
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-4p-05-easy.json",
+      "sha256": "1c670f8314a188ee924aa591952b201e0be583e1d13c363a217657129959b5c1",
+      "bytes": 1061
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-4p-05-medium.json",
+      "sha256": "314cc781eb14d18587c9a57aaecfb27490f5a00210ece553b90b9ea48ce6c0e8",
+      "bytes": 1069
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-4p-05-hard.json",
+      "sha256": "34ecaf1fb170c0b6c9a2f169042334f6de6a4c2259cf1bd75956389c6440c723",
+      "bytes": 1061
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-4p-06-easy.json",
+      "sha256": "5de7f90def52225e7c49293d0388e5f118d2f13f0c86ed9cf76bd08d5ae34762",
+      "bytes": 1057
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-4p-06-medium.json",
+      "sha256": "148b9287ec8f0c5ccc30127cc204e7202b300f76d06959d9724580998377a031",
+      "bytes": 1065
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-4p-06-hard.json",
+      "sha256": "026eb461be5b057847a5f52c2a7e9af15570442bc73c013dd0e420d8367cc035",
+      "bytes": 1057
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-4p-07-easy.json",
+      "sha256": "d6ee58b3e39e47acbd649b8439af72416e0d5478fe7be25687f896ab8c85f5f9",
+      "bytes": 1063
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-4p-07-medium.json",
+      "sha256": "da8c4044a34d21258200a75075244b8dbfd142d7ddbc7fbc73e69678ab9aa5ec",
+      "bytes": 1071
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-4p-07-hard.json",
+      "sha256": "75fb59d329fad6389393a6d2acc8f738bfcad53007c959a51ca3792ee1731af5",
+      "bytes": 1063
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-4p-08-easy.json",
+      "sha256": "e429b72a7662deea2fc003c97a25e9572ea32a55351fb56e7c1d509170ee65e2",
+      "bytes": 1059
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-4p-08-medium.json",
+      "sha256": "26f3394f4f57393a0fdfc5b1c3fcfaec03a15363be3204f7a9c15f70ae1dd2ed",
+      "bytes": 1067
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-4p-08-hard.json",
+      "sha256": "592e5a27704ee6cba43481d84cd2c173a1190f629196cab628e109483572eb5c",
+      "bytes": 1059
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-4p-09-easy.json",
+      "sha256": "049bb9bb3cac523a82f02aefc0f3c8929cdc2aa1a94e253b1aeafb61a903cfe3",
+      "bytes": 1061
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-4p-09-medium.json",
+      "sha256": "1fe810534f01d6bd074b9cf90b6788c06be15a9c2f01a0cc989274ebf6a7ba50",
+      "bytes": 1069
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-4p-09-hard.json",
+      "sha256": "510b24a5347387fb9e6eac10dea3d610ee87084c054346699299deff574fb444",
+      "bytes": 1061
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-4p-10-easy.json",
+      "sha256": "9d53da8613bec062d99570ce840665ba6031e52fd5801e6d7c752e8dd94f21dd",
+      "bytes": 1063
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-4p-10-medium.json",
+      "sha256": "5d1637ea276fb30d39f9fd32b527e2d532ddeea3478c39f3a6059f602df33c96",
+      "bytes": 1071
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-4p-10-hard.json",
+      "sha256": "fb856143b78571d6f1b57ba164c7dc9f0183976b51ad8e4e88869da15f61d0b8",
+      "bytes": 1063
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-4p-11-easy.json",
+      "sha256": "2a33cca4693dcdc267da8f38aece7ce215f134da63eb9e3e62f7058714242fbe",
+      "bytes": 1058
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-4p-11-medium.json",
+      "sha256": "0ec85ed46080df25a9cfbadba40e9a86b5d0c66cadcfc9bf5c383def8e6293cb",
+      "bytes": 1066
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-4p-11-hard.json",
+      "sha256": "c1b375710581918c78f775c0f293811f6e6a7fab080b8f0014f3660f544e569c",
+      "bytes": 1058
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-4p-12-easy.json",
+      "sha256": "32081e89739bd3a00569569f7a1d3a203292d6d4e519f40afdde5d78a00d2bbe",
+      "bytes": 1059
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-4p-12-medium.json",
+      "sha256": "194d5aff35b14414761328e3053844fbb9d28a9916c7355dcb75de761bdab62f",
+      "bytes": 1067
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-4p-12-hard.json",
+      "sha256": "4ba16a580624172eadf5d1a19a983840539916a93954f379f5fe6d5f868f8cdc",
+      "bytes": 1059
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-4p-13-easy.json",
+      "sha256": "e89fff3ff9e98e40562adbc33b288a46c4e8bb5b64d1d815dfd88a28010bc2db",
+      "bytes": 1059
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-4p-13-medium.json",
+      "sha256": "cbe500db4f3ef806e019955aa7b827aff4fe4173d79461a00cdb37c116591023",
+      "bytes": 1067
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-4p-13-hard.json",
+      "sha256": "f16a6ffeba9b123a7d771e6aef54cf1879c183e39f12b142ad05c2d0c9d8b836",
+      "bytes": 1059
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-4p-14-easy.json",
+      "sha256": "cc31fb0743c969e25317c94b743509b2e6921e414abbc7ecb15d8cea13531ce0",
+      "bytes": 1062
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-4p-14-medium.json",
+      "sha256": "022c2d26742d64e550f12dd276adf94193cf6861d69b25ca1d93694bc4f33743",
+      "bytes": 1070
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-4p-14-hard.json",
+      "sha256": "679bdec54af023af0bec9f46c260a596c1d4d8e26faac68a224d9b9b6a92db8c",
+      "bytes": 1062
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-4p-15-easy.json",
+      "sha256": "988c60f7546936e740229391cab781b7fab32cd85667a6c2be7d36907d4a0e4d",
+      "bytes": 1059
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-4p-15-medium.json",
+      "sha256": "21243deaccfa93d2e58af5755eb62722fd678007aed3bfae94f20954e0e6200e",
+      "bytes": 1067
+    },
+    {
+      "path": "/data/mp/tests/ffa-ntw-4p-15-hard.json",
+      "sha256": "22d1161dd0b6ecf2e848b95ba009d6109e3e4be2e53e58af97970d209424e12a",
+      "bytes": 1059
+    },
+    {
+      "path": "/data/mp/tests/ffa-policy.js",
+      "sha256": "e267d30aae7823063136d821a5dd2b47efdd696b15c7af929538e087667c9c5b",
+      "bytes": 1260
+    },
+    {
+      "path": "/data/mp/tests/ffa-rules.js",
+      "sha256": "48ca2014ac3d6a5864b82a47fefd452cac350f1a495660334090d59ef9f8d55f",
+      "bytes": 7828
+    },
+    {
+      "path": "/data/mp/tests/ffa-research-bridge.js",
+      "sha256": "596c1da36d1440877241496ca8f44fe46f673123de1fde506e6886595992f148",
+      "bytes": 15153
+    },
+    {
+      "path": "/data/mp/tests/ffa-commands.js",
+      "sha256": "9a567bc95f92b2b6bbf9769e2d4fdf5cedce9f45ce81e3d5d6dfd3ff69a93ae3",
+      "bytes": 87739
+    },
+    {
+      "path": "/data/mp/multiplay/script/rules/init.js",
+      "sha256": "48ca2014ac3d6a5864b82a47fefd452cac350f1a495660334090d59ef9f8d55f",
+      "bytes": 7828
+    },
+    {
+      "path": "/data/mp/multiplay/script/rules/endconditions.js",
+      "sha256": "c1ea6755ac0d9013eb21ead7d8f65423790cfcd9b4627af15f7def3bfe23180b",
+      "bytes": 11068
+    },
+    {
+      "path": "/data/mp/multiplay/script/functions/camTechEnabler.js",
+      "sha256": "1886ebfe4b1a70a55b86f68f041ac949ff282d4f5a3ede266d876b421ee60f14",
+      "bytes": 12184
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/ffa-nullbot.js",
+      "sha256": "45c8c7f3f0b23d212ae9b54ac41120c7b5109a344179f8427434f34cb150ea41",
+      "bytes": 5329
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/ffa-nullbot.json",
+      "sha256": "69b1a37a53f9fa1d9c73223b03318de07c53b6ecc75aa1e090d51fd1c063bf06",
+      "bytes": 138
+    },
+    {
+      "path": "/data/mp/stats/research.json",
+      "sha256": "71b749aef56a40286e45faed49f26da8d803be515322ed10cf61c5cc48c41834",
+      "bytes": 230193
+    },
+    {
+      "path": "/data/mp/stats/templates.json",
+      "sha256": "da8743bd9cf074cbadbde4f761b339b9fbebae05ae389d7a568d67013c2a953b",
+      "bytes": 54058
+    },
+    {
+      "path": "/data/mp/multiplay/script/ffa-policy.json",
+      "sha256": "65407cb75afe15b071c2b91a4629de048415e0a3f8f57888944207fc25f4bfb2",
+      "bytes": 22843
+    },
+    {
+      "path": "/data/mp/multiplay/script/rules/ffa-policy.json",
+      "sha256": "65407cb75afe15b071c2b91a4629de048415e0a3f8f57888944207fc25f4bfb2",
+      "bytes": 22843
+    },
+    {
+      "path": "/data/mp/multiplay/script/ffa-config.json",
+      "sha256": "fcbe1d4ab33e72fdf1523f0efa10f885278e73682cf0566124c548acc04f482c",
+      "bytes": 157
+    },
+    {
+      "path": "/data/mp/multiplay/script/ffa-maps.json",
+      "sha256": "2b27d0c9f3ae9cdc6c283d404971f56183931def7aff561342363cb20dca253a",
+      "bytes": 28373
+    },
+    {
+      "path": "/data/mp/multiplay/script/rules/ffa-config.json",
+      "sha256": "fcbe1d4ab33e72fdf1523f0efa10f885278e73682cf0566124c548acc04f482c",
+      "bytes": 157
+    },
+    {
+      "path": "/data/mp/multiplay/script/rules/ffa-maps.json",
+      "sha256": "2b27d0c9f3ae9cdc6c283d404971f56183931def7aff561342363cb20dca253a",
+      "bytes": 28373
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/ffa-config.json",
+      "sha256": "fcbe1d4ab33e72fdf1523f0efa10f885278e73682cf0566124c548acc04f482c",
+      "bytes": 157
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/ffa-maps.json",
+      "sha256": "2b27d0c9f3ae9cdc6c283d404971f56183931def7aff561342363cb20dca253a",
+      "bytes": 28373
+    },
+    {
+      "path": "/data/mp/tests/warzone-towers-catalog.json",
+      "sha256": "d70d5672fa1865411b8e574e67e770dc3b13956a6e5710f37e69396f4ff3453e",
+      "bytes": 50233
+    },
+    {
+      "path": "/data/mp/multiplay/script/rules/warzone-towers-catalog.json",
+      "sha256": "d70d5672fa1865411b8e574e67e770dc3b13956a6e5710f37e69396f4ff3453e",
+      "bytes": 50233
+    },
+    {
+      "path": "/data/mp/tests/warzone-towers-command.json",
+      "sha256": "df1e324fde90935439fb53fd2b4e630cd44bef94521b08577196f684f2081a65",
+      "bytes": 30
+    },
+    {
+      "path": "/data/mp/multiplay/script/rules/warzone-towers-command.json",
+      "sha256": "df1e324fde90935439fb53fd2b4e630cd44bef94521b08577196f684f2081a65",
+      "bytes": 30
+    },
+    {
+      "path": "/data/mp/tests/warzone-towers-control-command.json",
+      "sha256": "99cbb1c61cd9c00eb89e7f8b9b6fc8fbdfc8ba4546d074495c308e3bd39ac59a",
+      "bytes": 37
+    },
+    {
+      "path": "/data/mp/multiplay/script/rules/warzone-towers-control-command.json",
+      "sha256": "99cbb1c61cd9c00eb89e7f8b9b6fc8fbdfc8ba4546d074495c308e3bd39ac59a",
+      "bytes": 37
+    },
+    {
+      "path": "/data/mp/tests/blocknight-queue-command.json",
+      "sha256": "53dd57002898f6f166540e6d7aa63789601354abc7340c558d71981fb7df721c",
+      "bytes": 36
+    },
+    {
+      "path": "/data/mp/multiplay/script/rules/blocknight-queue-command.json",
+      "sha256": "53dd57002898f6f166540e6d7aa63789601354abc7340c558d71981fb7df721c",
+      "bytes": 36
+    },
+    {
+      "path": "/data/mp/tests/blocknight-zoom-command.json",
+      "sha256": "bdd487b46d532a234f7a1293b54fa86d79c807d0e0fea8e455442c819374a081",
+      "bytes": 60
+    },
+    {
+      "path": "/data/mp/multiplay/script/rules/blocknight-zoom-command.json",
+      "sha256": "bdd487b46d532a234f7a1293b54fa86d79c807d0e0fea8e455442c819374a081",
+      "bytes": 60
+    },
+    {
+      "path": "/data/mp/multiplay/script/rules/warzone-towers-demolition-intent.json",
+      "sha256": "17bdf67ae7a9152e81e8908a6c37808e703761c4a272f2af2d45a7d430d0bb1b",
+      "bytes": 28
+    }
+  ],
+  "airPolicy": {
+    "blockedResearch": 24,
+    "airComponents": 33,
+    "removedTemplates": 37
+  },
+  "outputs": [
+    {
+      "path": "app/src/main/assets/warzone/warzone2100-ffa.js",
+      "sha256": "50a0bb51ab06e2d6805766681ae36c3e7e29d3b13ada02dbc2a96620f7701611",
+      "bytes": 804459
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100-ffa.data",
+      "sha256": "73137514fb621df5ca978c93a32743c01b44de01201e4846cb351a6d438d6278",
+      "bytes": 74909635
+    },
+    {
+      "path": "app/src/main/assets/warzone/index-ffa.html",
+      "sha256": "8803882047be5de76dd49f129a60b334c1cf842a6a64e199bb42106597145a1e",
+      "bytes": 141293
+    },
+    {
+      "path": "app/src/main/assets/warzone/mobile-ffa.html",
+      "sha256": "98a16b5f825ac8e7e5f2d78658e064f96fb47de41e3c7455cd3690efac3ed794",
+      "bytes": 33058
+    }
+  ]
+}

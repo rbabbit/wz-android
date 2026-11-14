@@ -1,0 +1,236 @@
+{
+  "version": "0.56",
+  "candidateAPK_SHA256": "5e5c8cd15a95680e18a98a5474c0f70c14b0343eedf17c3040ad7657e543ff0e",
+  "device": "emulator-5558",
+  "checks": [
+    {
+      "name": "home-native-layout-normal",
+      "passed": true,
+      "evidence": "qa/home-056/home-native-layout-normal.json",
+      "sha256": "6782f1b6af7f181b8a2cbd602a35c1d5af0fbb414f09036454b047303eb6f9d5"
+    },
+    {
+      "name": "home-rewards-return",
+      "passed": true,
+      "evidence": "qa/home-056/home-rewards-return.json",
+      "sha256": "df4dbddc465231d257c50a24f5fe7919e84bca9c9679ccdbf2c8f86d93aa8f0c"
+    },
+    {
+      "name": "home-towers-saves-return",
+      "passed": true,
+      "evidence": "qa/home-056/home-towers-saves-return.json",
+      "sha256": "e63448966dd551a77f556d10c28e0aee459393eaa8e40fd5b94c20b388fd4867"
+    },
+    {
+      "name": "towers-map-browser-back-and-selection",
+      "passed": true,
+      "evidence": "qa/home-056/towers-map-browser-back-and-selection.json",
+      "sha256": "42780b4a2dbb2f933a356b1a2f7862d366ee13a276bc5c1b7bb5215d2fe0b8c5"
+    },
+    {
+      "name": "towers-launch-native-and-return-to-same-map",
+      "passed": true,
+      "evidence": "qa/home-056/towers-launch-native-and-return-to-same-map.json",
+      "sha256": "f0ea9b48da885e48342cb2574329158f5de2a7df4d2879b58e36e759645d0a8e"
+    },
+    {
+      "name": "campaign-continue-saves-native-and-return",
+      "passed": true,
+      "evidence": "qa/home-056/campaign-continue-saves-native-and-return.json",
+      "sha256": "ebca40bcbf8fe7b003a308317c4b96dcb3323a2752fa21b99f3dd1dec2bc5fe2"
+    },
+    {
+      "name": "campaign-new-movie-native-and-return",
+      "passed": true,
+      "evidence": "qa/home-056/campaign-new-movie-native-and-return.json",
+      "sha256": "276cdda1cde78a33b231c989472bc33efd59bddc736eeccf4b406cd5ee288810"
+    },
+    {
+      "name": "compact-home-scroll-and-map-return",
+      "passed": true,
+      "evidence": "qa/home-056/compact-home-scroll-and-map-return.json",
+      "sha256": "a928ab27cd04e628dbf473f08ab50e2985868cd554a0a0fe1c70f2649dd9b60a"
+    },
+    {
+      "name": "large-text-home-actions-accessible",
+      "passed": true,
+      "evidence": "qa/home-056/large-text-home-actions-accessible.json",
+      "sha256": "79ce1ab1e95876ebeff6b87121ec61c66e104adca2a4c0e95c1a435d48dc389a"
+    },
+    {
+      "name": "normal-home-restored",
+      "passed": true,
+      "evidence": "qa/home-056/normal-home-restored.json",
+      "sha256": "0a81c7b4794bf3f304ce6bbd02ea4092f5b02717aec5b00acb9d674a5e8fc234"
+    }
+  ],
+  "runtimeErrors": [],
+  "startedAt": "2026-11-11T21:35:35.628Z",
+  "preparedCampaignSaveUsed": true,
+  "seededUnits": false,
+  "fixtureDisclosure": {
+    "preparedSave": "Existing phone Campaign checkpoint with native HQ; no unit grants or debug orders are created.",
+    "graphics": "Prior emulator terrain/shader limitations remain a fixture limitation. These checks establish native navigation/readiness and captured layouts, not graphics parity with a physical phone."
+  },
+  "current": {
+    "case": "normal-home-restored",
+    "phase": "passed"
+  },
+  "passed": true,
+  "fixtureFailures": [
+    {
+      "identity": "35088db9acce3d609bf2b580c4e7d190c16d3c61ac353dca552e01fe3616f737",
+      "case": "towers-map-browser-back-and-selection",
+      "error": "Error: Lab native control not ready: Previous map, or swipe right\n    at Object.nativeTap (C:\\timerApp\\wz-towers-lab\\tools\\campaign-live-051.cjs:29:8)\n    at async greenhaven (C:\\timerApp\\wz-towers-lab\\tools\\verify-home-056.cjs:64:157)\n    at async C:\\timerApp\\wz-towers-lab\\tools\\verify-home-056.cjs:92:790\n    at async caseRun (C:\\timerApp\\wz-towers-lab\\tools\\verify-home-056.cjs:77:210)\n    at async main (C:\\timerApp\\wz-towers-lab\\tools\\verify-home-056.cjs:92:3)",
+      "phase": {
+        "case": "towers-map-browser-back-and-selection",
+        "phase": "restore-wm-density",
+        "detail": {},
+        "at": "2026-11-11T21:37:02.516Z"
+      },
+      "recordedAt": "2026-11-11T21:42:04.997Z",
+      "capture": {
+        "screenshot": {
+          "path": "qa/home-056/fixture-failure-01.png",
+          "sha256": "52ccbdcaf3e802af6a5663418190e61cc5d339f3589f011fda16ad850ea1436f",
+          "bytes": 1253884
+        },
+        "native": [
+          {
+            "text": "",
+            "label": "Warzone 2100",
+            "class": "android.widget.ImageView",
+            "bounds": "[2002,30][2351,191]",
+            "enabled": "true",
+            "clickable": "false"
+          },
+          {
+            "text": "",
+            "label": "Map selection and Play; scroll vertically when needed",
+            "class": "android.widget.ScrollView",
+            "bounds": "[0,90][2400,1080]",
+            "enabled": "true",
+            "clickable": "false"
+          },
+          {
+            "text": "Easy · 16",
+            "label": "Easy maps, 16, selected",
+            "class": "android.widget.Button",
+            "bounds": "[113,266][405,356]",
+            "enabled": "true",
+            "clickable": "true"
+          },
+          {
+            "text": "Medium · 15",
+            "label": "Medium maps, 15, not selected",
+            "class": "android.widget.Button",
+            "bounds": "[416,266][709,356]",
+            "enabled": "true",
+            "clickable": "true"
+          },
+          {
+            "text": "Hard · 15",
+            "label": "Hard maps, 15, not selected",
+            "class": "android.widget.Button",
+            "bounds": "[720,266][1013,356]",
+            "enabled": "true",
+            "clickable": "true"
+          },
+          {
+            "text": "",
+            "label": "Map selection, 2 of 16",
+            "class": "android.widget.HorizontalScrollView",
+            "bounds": "[113,367][1013,803]",
+            "enabled": "true",
+            "clickable": "false"
+          },
+          {
+            "text": "FERNPASS",
+            "label": "Fernpass, selected map",
+            "class": "android.widget.TextView",
+            "bounds": "[514,472][900,536]",
+            "enabled": "true",
+            "clickable": "false"
+          },
+          {
+            "text": "15 rounds  ·  240s prep",
+            "label": "",
+            "class": "android.widget.TextView",
+            "bounds": "[514,536][900,572]",
+            "enabled": "true",
+            "clickable": "false"
+          },
+          {
+            "text": "Pine tarn valley. 1 northern approach to a protected rear base.",
+            "label": "",
+            "class": "android.widget.TextView",
+            "bounds": "[514,580][900,655]",
+            "enabled": "true",
+            "clickable": "false"
+          },
+          {
+            "text": "",
+            "label": "Next map, or swipe left",
+            "class": "android.widget.Button",
+            "bounds": "[915,540][1005,630]",
+            "enabled": "true",
+            "clickable": "true"
+          },
+          {
+            "text": "2 / 16",
+            "label": "",
+            "class": "android.widget.TextView",
+            "bounds": "[514,663][900,699]",
+            "enabled": "true",
+            "clickable": "false"
+          },
+          {
+            "text": "PLAY",
+            "label": "Start game, Fernpass",
+            "class": "android.widget.Button",
+            "bounds": "[113,814][323,904]",
+            "enabled": "true",
+            "clickable": "true"
+          },
+          {
+            "text": "BACK",
+            "label": "Back to Campaign and Towers",
+            "class": "android.widget.Button",
+            "bounds": "[113,15][184,105]",
+            "enabled": "true",
+            "clickable": "true"
+          },
+          {
+            "text": "REWARDS 380",
+            "label": "Rewards, 380 crystals",
+            "class": "android.widget.Button",
+            "bounds": "[199,15][415,105]",
+            "enabled": "true",
+            "clickable": "true"
+          },
+          {
+            "text": "SAVED GAMES",
+            "label": "Open saved games on this phone",
+            "class": "android.widget.Button",
+            "bounds": "[430,15][597,105]",
+            "enabled": "true",
+            "clickable": "true"
+          },
+          {
+            "text": "rbabbit v0.56",
+            "label": "rbabbit, Warzone Towers version 0.56",
+            "class": "android.widget.TextView",
+            "bounds": "[2258,1041][2374,1065]",
+            "enabled": "true",
+            "clickable": "false"
+          }
+        ],
+        "physical": {
+          "width": 2400,
+          "height": 1080
+        }
+      }
+    }
+  ],
+  "finishedAt": "2026-11-11T21:46:06.689Z"
+}

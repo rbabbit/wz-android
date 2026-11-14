@@ -1,0 +1,87 @@
+{
+  "version": "0.75",
+  "passed": true,
+  "emulatorUsed": false,
+  "actualAndroidViewsExecuted": false,
+  "actualNativeEngineExecuted": false,
+  "hostBrowserRendered": true,
+  "syntheticFixturesExecuted": false,
+  "fixture": "Actual shipped Hub HTML/CSS/JS; deterministic synthetic worker messages/records plus48 retained real public summary records transformed by actual hub-data.js with complete:false. Optional live pass uses actual Worker/fetch/SSE/IndexedDB under matching native CSP. Android navigation/rendering are not verified.",
+  "liveSample": {
+    "source": "https://warzone2100.retropaganda.info/results.json?id=",
+    "scope": "First48 actual public summary records; bounded algorithm fixture, not a complete ranking dataset",
+    "records": 48,
+    "completeHistory": false,
+    "ratingsCalculated": false
+  },
+  "liveBrowser": {
+    "passed": true,
+    "actualWorker": true,
+    "actualRemoteFetch": true,
+    "actualIndexedDB": true,
+    "matchingNativeCSP": "default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; worker-src 'self'; connect-src https://warzone2100.retropaganda.info; img-src 'self' data:; base-uri 'none'; form-action 'none'; object-src 'none'; frame-src 'none'",
+    "fullHistoryGames": 7702,
+    "topPlayer": "Lace",
+    "topRating": "2,452",
+    "offlineCacheRestored": true,
+    "offlineRankingsPreserved": true,
+    "remoteOnlyBlocked": true,
+    "blockedDedicatedWorkerTargets": 2,
+    "preparedCacheReused": true,
+    "detailBackPassed": true,
+    "androidWebViewExecuted": false
+  },
+  "checksPassed": 1,
+  "checks": [
+    "Actual Worker/fetch/SSE/full-history rankings/details/IndexedDB cache/offline reload pass under native CSP"
+  ],
+  "viewports": [],
+  "screenshots": [
+    "ui-actual-results-600x300.png",
+    "ui-actual-rankings-600x300.png",
+    "ui-actual-player-600x300.png",
+    "ui-actual-match-600x300.png",
+    "ui-actual-offline-rankings-600x300.png"
+  ],
+  "exceptions": [],
+  "badRequests": [],
+  "fatal": null,
+  "sources": [
+    {
+      "path": "app/src/main/assets/hub/index.html",
+      "sha256": "e5a32c443fdff9ea9ccc9fce0f21baf0cfa3a5aa0b5d6162dc329dad6ec0248a"
+    },
+    {
+      "path": "app/src/main/assets/hub/hub.css",
+      "sha256": "4a58b535c32c9f9a2776fe0ed43663052548617f7e7990221aac39df82a91e27"
+    },
+    {
+      "path": "app/src/main/assets/hub/hub.js",
+      "sha256": "dc71f0f2dbf648ce2b68206c6dde092e5af1d0433208bbaf6cd63a0581defab9"
+    },
+    {
+      "path": "app/src/main/assets/hub/hub-data.js",
+      "sha256": "82307703b0131f750e3daa0bc62196aac91af94ccba344fa247e1bb94a7f9b09"
+    },
+    {
+      "path": "app/src/main/assets/hub/hub-worker.js",
+      "sha256": "cacf1c1c5bc8b085a8fd46bc1da2ffc38279a44d126af8cfa4b06b5212645492"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/Oswald.ttf",
+      "sha256": "5b38c246e255a12f5712d640d56bcced0472466fc68983d2d0410ec0457c2817"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/HubView.java",
+      "sha256": "9ee3de8e5dbbda3bbd0d646728b71e4214bd6d9da24bd792c19806eaaea0ed0e"
+    },
+    {
+      "path": "tools/test-hub-ui-075.cjs",
+      "sha256": "56bbd1206f1e36335ffe3c9ad2fa4ff8e097ae13281bf07a9b7427645ca22133"
+    },
+    {
+      "path": "tools/fixtures/hub-075/public-sample.json",
+      "sha256": "e77cfca5bd20ca28061db867f054778386c3a928e8263271143e28a4e6f2336d"
+    }
+  ]
+}

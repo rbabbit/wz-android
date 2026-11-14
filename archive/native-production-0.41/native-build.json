@@ -1,0 +1,48 @@
+{
+  "version": "0.41",
+  "passed": true,
+  "emulatorUsed": false,
+  "androidRuntimeExecuted": false,
+  "nativeBuildPerformed": true,
+  "nativeFullFreshBuildPerformed": false,
+  "compiledObjects": [
+    "src/CMakeFiles/warzone2100.dir/quickjs_backend.cpp.o"
+  ],
+  "relinkedNativeEngine": true,
+  "method": "Verified matching v0.40 source cache; one quickjs_backend.cpp object compile and one matched JS/WASM link",
+  "cachePath": "/home/punkech/wz-blueprint-20261107",
+  "command": [
+    "bash",
+    "-c",
+    "source \"$1/emsdk/emsdk_env.sh\" && cmake --build \"$1/build\" --target warzone2100 --parallel 4",
+    "native-production-041",
+    "/home/punkech/wz-blueprint-20261107"
+  ],
+  "originalBuildRecipeSHA256": "6f3835c7eb8441c216f7e0b056affe22b34eb60e2985341029c866ca75e9bc26",
+  "previousNativeBuild": "archive/native-production-0.40/native-build.json",
+  "previousNativeBuildSHA256": "79529f4812617a59572c6775ed5bd54e18307c9eab4c835622a9fc0c07dafe2e",
+  "sourceOverlay": "archive/native-production-0.41/source-overlay.json",
+  "sourceOverlaySHA256": "7f2ac3eacd2c0f6b323c432aecb0efe289c4e47c9ca73db8732e5a9f243583cb",
+  "sourceOverlays": {
+    "display3d.cpp": "3b5c1a41144011805819d15e9bfac6f1289d726da276433bfeb237904c0fa15f",
+    "research.cpp": "06b8999191bb0160e6b73c268f8ddd69347102133ecc221aee23504973dc918a",
+    "keybind.cpp": "5730cf9a2b791a6a437f4e0da040e9dbb75e8befb48dc02caefb1a8e824355ed",
+    "hci.cpp": "9db6bef46703c3975d920a23cc071ea46ab938a3972204ca5325440e8e66e842",
+    "quickjs_backend.cpp": "a3096beab0f866dd53176fe4d705ed1eee9da50da2e322608efcec2b57f80072"
+  },
+  "log": "archive/native-production-0.41/native-build.log",
+  "logSHA256": "8510e5c76f0ed59601c29e1718d63d8d0bb60f685700d896e0c72dea85efe13d",
+  "recordedUTC": "2026-11-10T19:15:54.905802+00:00",
+  "raw": [
+    {
+      "file": "warzone2100.js",
+      "sha256": "c50755eadf14c5fbb2ce560cd378181270234e4ad038e64f56bda3b22fe4c746",
+      "bytes": 725723
+    },
+    {
+      "file": "warzone2100.wasm",
+      "sha256": "6a48119cffd51ce5ed8393186e9d0bdc4689d0d5097dd8e0c6eb42ce847fed20",
+      "bytes": 13494117
+    }
+  ]
+}

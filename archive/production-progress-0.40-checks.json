@@ -1,0 +1,66 @@
+{
+  "version": "0.40",
+  "passed": true,
+  "emulatorUsed": false,
+  "androidRuntimeExecuted": false,
+  "gameplayVerified": false,
+  "scope": "Source and mocked native-field snapshot normalization only; no actual native execution, production, save/load or rendered UI acceptance.",
+  "checksPassed": 9,
+  "checks": [
+    {
+      "name": "Native point sample yields exact ratio and rate-based simulation estimate, independent of active.started",
+      "passed": true
+    },
+    {
+      "name": "Paused, power and capacity samples retain real work but never publish a countdown",
+      "passed": true
+    },
+    {
+      "name": "Fresh no-subject confirmation clears completed-unit progress despite lingering app active bookkeeping",
+      "passed": true
+    },
+    {
+      "name": "Missing or inconsistent native state remains unavailable and never claims an authoritative total",
+      "passed": true
+    },
+    {
+      "name": "Replacement subject and loaded native start identity are sampled freshly, without cached carryover",
+      "passed": true
+    },
+    {
+      "name": "External/native future orders keep queue total unknown; custom known queue requires matching current design",
+      "passed": true
+    },
+    {
+      "name": "Finished work and zero-rate samples do not invent a completion countdown",
+      "passed": true
+    },
+    {
+      "name": "Factory snapshot includes fresh observer state and explicit queue completeness",
+      "passed": true
+    },
+    {
+      "name": "Native observer reads existing counters and is Towers-gated without calling mutating production functions",
+      "passed": true
+    }
+  ],
+  "sources": [
+    {
+      "path": "scenario/warzone-towers-commands.js",
+      "sha256": "ed0fa5dee97ea706413563113b8832893505eade57606a0da0c7a380db1882a4"
+    },
+    {
+      "path": "archive/native-production-0.40/production-helper.inc",
+      "sha256": "a796751a6688a42db08b1d95c353f0187d0692fb1be05266b2cf4b1f4428d84e"
+    },
+    {
+      "path": "archive/native-production-0.40/quickjs_backend.cpp",
+      "sha256": "6f3033eb6ea18da2e2f640f521e40483c5f5af8ab63a22b567d26c4f6997217e"
+    },
+    {
+      "path": "tools/check-production-progress-040.cjs",
+      "sha256": "ad4f6c41b3eecbe56deb2dae31421747623d5acc182407ad5443e02d87d341bf"
+    }
+  ],
+  "recordedUTC": "2026-11-10T18:41:59.377Z"
+}

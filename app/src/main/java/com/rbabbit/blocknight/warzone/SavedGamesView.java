@@ -28,7 +28,7 @@ final class SavedGamesView extends FrameLayout {
         void close();
     }
 
-    private static final int INK = 0xFFF0F3ED, MUTED = 0xFFA6B9BE, TEAL = 0xFF8BD3CC;
+    private static final int INK = TowersTheme.TEXT, MUTED = TowersTheme.SECONDARY;
     private final Actions actions;
     private final Typeface face;
     private final LinearLayout panel, rows;
@@ -38,6 +38,14 @@ final class SavedGamesView extends FrameLayout {
     private String confirming = "", busyId = "";
 
     SavedGamesView(Context context, JSONArray saves, Actions actions) {
+        this(context, saves, actions, false);
+    }
+
+    SavedGamesView(Context context, JSONArray saves, Actions actions, boolean campaign) {
+        this(context, saves, actions, campaign ? "campaign" : "towers");
+    }
+
+    SavedGamesView(Context context, JSONArray saves, Actions actions, String mode) {
         super(context);
         this.actions = actions;
         face = Typeface.createFromAsset(context.getAssets(), "warzone/ui/Oswald.ttf");
@@ -48,22 +56,24 @@ final class SavedGamesView extends FrameLayout {
         panel = new LinearLayout(context);
         panel.setOrientation(LinearLayout.VERTICAL);
         panel.setPadding(dp(16), dp(8), dp(16), dp(12));
-        panel.setBackground(RewardsView.surface(context, 0xFF0C1E26, 8));
+        panel.setBackground(RewardsView.surface(context, TowersTheme.PANEL, 8));
         panel.setClickable(true);
         panel.setOnClickListener(v -> { });
         addView(panel, new LayoutParams(dp(520), dp(360), Gravity.CENTER));
 
         LinearLayout header = new LinearLayout(context);
         header.setGravity(Gravity.CENTER_VERTICAL);
-        TextView title = copy("SAVED GAMES", 20, INK);
+        TextView title = copy("ffa".equals(mode) ? "FFA SAVES" : "campaign".equals(mode) ? "CAMPAIGN SAVES" : "SAVED GAMES", 20, INK);
         title.setTypeface(face);
         title.setSingleLine(true);
         title.setEllipsize(TextUtils.TruncateAt.END);
         header.addView(title, new LinearLayout.LayoutParams(0, -2, 1));
         ImageButton close = new ImageButton(context);
         close.setImageResource(android.R.drawable.ic_menu_close_clear_cancel);
-        close.setImageTintList(ColorStateList.valueOf(TEAL));
-        close.setBackground(new RippleDrawable(ColorStateList.valueOf(0x338BD3CC), null, null));
+        close.setImageTintList(ColorStateList.valueOf(INK));
+        close.setBackgroundTintList(null);
+        close.setBackground(new RippleDrawable(ColorStateList.valueOf(TowersTheme.RIPPLE),
+                TowersTheme.control(context, TowersTheme.CONTROL, 5), null));
         close.setPadding(dp(12), dp(12), dp(12), dp(12));
         close.setContentDescription("Close saved games");
         close.setOnClickListener(v -> actions.close());
@@ -100,7 +110,7 @@ final class SavedGamesView extends FrameLayout {
 
     void showError(String message) {
         busyId = "";
-        status.setTextColor(0xFFFFB6A5);
+        status.setTextColor(INK);
         status.setText(message == null ? "The saved game could not be opened." : message);
         render();
     }
@@ -114,6 +124,8 @@ final class SavedGamesView extends FrameLayout {
             if (save == null || save.optString("id", "").isEmpty()) continue;
             valid++;
             String id = save.optString("id"), name = save.optString("mapName", "Saved match");
+            if ("campaign".equals(save.optString("mode")))
+                name = BattleLaunchSpec.campaignChapter(save.optString("nativeLevel"));
             String difficulty = save.optString("difficulty", "");
             int wave = Math.max(0, save.optInt("wave", 0));
             int total = Math.max(0, save.optInt("totalWaves", 0));
@@ -123,15 +135,20 @@ final class SavedGamesView extends FrameLayout {
             row.setGravity(Gravity.CENTER_VERTICAL);
             row.setPadding(dp(4), dp(10), dp(4), dp(10));
             row.setMinimumHeight(dp(72));
-            row.setBackground(RewardsView.surface(getContext(), ask ? 0xFF213438 : 0x00000000, 6));
+            row.setBackground(RewardsView.surface(getContext(), ask ? TowersTheme.CONTROL : 0x00000000, 6));
             LinearLayout labels = new LinearLayout(getContext());
             labels.setOrientation(LinearLayout.VERTICAL);
             TextView map = copy(name, 16, INK);
             map.setTypeface(face);
             labels.addView(map, new LinearLayout.LayoutParams(-1, -2));
+            int bots = save.optInt("bots", FfaMapCatalog.playerCount(save.optString("mapId")) - 1);
             String detail = difficulty.isEmpty() ? "" : difficulty.toUpperCase(Locale.ROOT) + " · ";
-            detail += "Wave " + wave + (total > 0 ? " / " + total : "");
-            TextView progress = copy(detail, 12, TEAL);
+            detail += "campaign".equals(save.optString("mode"))
+                    ? "Campaign checkpoint"
+                    : "ffa".equals(save.optString("mode")) ? bots + " "
+                        + BattleLaunchSpec.ffaBotName(save.optString("botType")) + (bots == 1 ? " bot" : " bots") + " · Free for all"
+                    : "Wave " + wave + (total > 0 ? " / " + total : "");
+            TextView progress = copy(detail, 12, INK);
             progress.setPadding(0, dp(3), 0, 0);
             labels.addView(progress, new LinearLayout.LayoutParams(-1, -2));
             if (savedAt > 0) {
@@ -141,7 +158,7 @@ final class SavedGamesView extends FrameLayout {
                 labels.addView(date, new LinearLayout.LayoutParams(-1, -2));
             }
             if (ask) {
-                TextView question = copy("Delete this saved match?", 12, 0xFFFFB6A5);
+                TextView question = copy("Delete this saved match?", 12, INK);
                 question.setPadding(0, dp(5), 0, 0);
                 labels.addView(question, new LinearLayout.LayoutParams(-1, -2));
             }
@@ -162,9 +179,8 @@ final class SavedGamesView extends FrameLayout {
             LinearLayout.LayoutParams loadParams = new LinearLayout.LayoutParams(dp(64), dp(48));
             loadParams.leftMargin = dp(10);
             row.addView(load, loadParams);
-            Button delete = RewardsView.action(getContext(), face, "DELETE", false);
+            Button delete = RewardsView.action(getContext(), face, "DELETE", ask);
             delete.setTextSize(12);
-            delete.setTextColor(0xFFFFB6A5);
             delete.setEnabled(!busy);
             delete.setContentDescription((ask ? "Confirm deletion of " : "Delete ") + name + " saved match");
             delete.setOnClickListener(v -> {

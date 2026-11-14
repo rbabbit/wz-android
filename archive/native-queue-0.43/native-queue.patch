@@ -1,0 +1,62 @@
+--- a/src/quickjs_backend.cpp
++++ b/src/quickjs_backend.cpp
+@@ -947,6 +947,51 @@
+ 	QuickJS_DefinePropertyValue(ctx, value, "buildPointsPerSecond", JS_NewInt32(ctx, rate), JS_PROP_ENUMERABLE);
+ 	QuickJS_DefinePropertyValue(ctx, value, "state", JS_NewString(ctx, state), JS_PROP_ENUMERABLE);
+ 	return value;
++}
++
++
++// A deliberate Towers command may cancel only the exact observed current unit.
++// Keep refunds and power requests in the original native cancellation routine.
++static JSValue towersCancelProductionJS(JSContext *ctx, JSValueConst, int argc, JSValueConst *argv)
++{
++#ifdef __EMSCRIPTEN__
++	if (argc != 3 || engineToInstanceMap.at(ctx)->player() != selectedPlayer) return JS_FALSE;
++	FILE *marker = fopen("/tmp/warzone-towers-ui-v34", "rb");
++	if (!marker) return JS_FALSE;
++	const bool enabled = fgetc(marker) == '1';
++	fclose(marker);
++	if (!enabled) return JS_FALSE;
++	uint32_t identity[3];
++	for (int i = 0; i < 3; ++i)
++	{
++		double value;
++		if (!JS_IsNumber(argv[i]) || JS_ToFloat64(ctx, &value, argv[i]) < 0
++			|| !(value >= 0 && value <= std::numeric_limits<uint32_t>::max())
++			|| value != static_cast<uint32_t>(value)) return JS_FALSE;
++		identity[i] = static_cast<uint32_t>(value);
++	}
++	STRUCTURE *structure = IdToStruct(identity[0], selectedPlayer);
++	if (!structure || structure->player != selectedPlayer || structure->status != SS_BUILT
++		|| !structure->isFactory() || !structure->pFunctionality) return JS_FALSE;
++	FACTORY &factory = structure->pFunctionality->factory;
++	if (!factory.psSubject || factory.psSubject->multiPlayerID != identity[1]
++		|| factory.timeStarted != identity[2] || factory.pendingCount != 0
++		|| factory.productionLoops != 0 || productionPlayer != selectedPlayer
++		|| !factory.psAssemblyPoint || factory.psAssemblyPoint->factoryType >= NUM_FACTORY_TYPES) return JS_FALSE;
++	// App FIFO entries live in the scenario. Never clear or rewrite a stock run.
++	const auto &runs = asProductionRun[factory.psAssemblyPoint->factoryType];
++	if (factory.psAssemblyPoint->factoryInc < runs.size())
++	{
++		for (const auto &entry : runs[factory.psAssemblyPoint->factoryInc])
++		{
++			if (entry.numRemaining() > 0) return JS_FALSE;
++		}
++	}
++	cancelProduction(structure, ModeImmediate, false);
++	return JS_NewBool(ctx, factory.psSubject == nullptr);
++#else
++	return JS_FALSE;
++#endif
+ }
+ 
+ JSValue convStructure(const STRUCTURE *psStruct, JSContext *ctx)
+@@ -3709,6 +3754,7 @@
+ 	JS_REGISTER_FUNC2(addBeacon, 3, 4); // WZAPI
+ 	JS_REGISTER_FUNC(removeBeacon, 1); // WZAPI
+ 	JS_REGISTER_FUNC(getDroidProduction, 1); // WZAPI
++	JS_REGISTER_FUNC_NAME(towersCancelProduction, 3, towersCancelProductionJS); // Towers exact-current cancellation
+ 	JS_REGISTER_FUNC2(getDroidLimit, 0, 2); // WZAPI
+ 	JS_REGISTER_FUNC(getExperienceModifier, 1); // WZAPI
+ 	JS_REGISTER_FUNC2(setDroidLimit, 2, 3); // WZAPI

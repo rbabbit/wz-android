@@ -1,0 +1,382 @@
+{
+  "version": "0.32",
+  "versionCode": 32,
+  "candidateAPK_SHA256": "2b046890a09cdadaba9610bd1a5fdcf1ebb1d8551786081a4b732bac852b4090",
+  "scope": "Bundled original soundtrack, simplified Home/Rewards controls and verified small-phone overflow layouts.",
+  "emulatorUsed": true,
+  "gameplayVerified": false,
+  "testAdsOnly": true,
+  "liveAdsTested": false,
+  "verification": "Hash-bound actual offline playback and small-screen observations plus source/stream/package guards.",
+  "emulatorProof": {
+    "path": "qa/0.32-offline-small/focused-emulator-proof.json",
+    "sha256": "4bd61ede003a38d4b92011aafc157b7a828d90af2e39db6274cb9c6a8c4aee22"
+  },
+  "focusedEmulatorChecks": [
+    {
+      "name": "Full music pack starts offline without a legacy downloaded cache; actual media clock advances",
+      "passed": true
+    },
+    {
+      "name": "Native browser decodes nonzero soundtrack PCM; Music Off and On both act on real playback",
+      "passed": true
+    },
+    {
+      "name": "Explicit Music Off survives app restart and saved-game loading; On resumes bundled playback",
+      "passed": true
+    },
+    {
+      "name": "Home has no download controls or visible Swipe maps text; actual swipe advances Greenhaven to Fernpass",
+      "passed": true
+    },
+    {
+      "name": "Rewards NEXT MATCH tab absent on Home and in game; categories and BUY remain accessible",
+      "passed": true
+    },
+    {
+      "name": "Use owned minus and plus preserve stored quantity and change selection; choice persists across map difficulty selection",
+      "passed": true
+    },
+    {
+      "name": "Small 800x480 Home and Rewards work at standard and 130 percent Android font size",
+      "passed": true
+    },
+    {
+      "name": "At 160 percent font size Home scrolls to a full Play button; controls remain reachable",
+      "passed": true
+    },
+    {
+      "name": "Actual ADB swipes scroll Research, Build and enlarged Help content; scroll offsets increase",
+      "passed": true
+    },
+    {
+      "name": "Research, Production, Queue, Help, Build and Rewards open and close with their header toggles",
+      "passed": true
+    },
+    {
+      "name": "SAVE creates a real phone save; Saved Games loads the same native run successfully",
+      "passed": true
+    },
+    {
+      "name": "Android Back shows Return to main menu confirmation and confirmed return reaches Home",
+      "passed": true
+    },
+    {
+      "name": "In-game Rewards scroll exposes quantity, BUY and Gain 10 Crystals buttons at 800x480",
+      "passed": true
+    },
+    {
+      "name": "Eight existing saved games remain accessible and their list scrolls on the small phone",
+      "passed": true
+    },
+    {
+      "name": "Original emulator app files restored byte-for-byte, including wallet195 and eight saves; display density font and network settings restored",
+      "passed": true
+    }
+  ],
+  "emulatorEvidenceFiles": [
+    {
+      "path": "qa/0.32-offline-small/rewards-owned-selected.png",
+      "sha256": "fa88a58a7c5185f7d89342c6bf2c91cdfbff5f5e3fa3d592cceb54f4e3b0d547"
+    },
+    {
+      "path": "qa/0.32-offline-small/rewards-other-map.png",
+      "sha256": "3428318dbf0741648d12a1ee24f2ad77e569b04df80049cd0341f4d4a544b950"
+    },
+    {
+      "path": "qa/0.32-offline-small/offline-first-play.png",
+      "sha256": "c30fb453b87a229b7061e49a3ccd5d84aa15ed1ee4bc29d500e5e3b51e841f5e"
+    },
+    {
+      "path": "qa/0.32-offline-small/game-standard-research.png",
+      "sha256": "30fb54845597750ab018b9897932548b5baea1b7fb70ab33cf245cf09e70e52b"
+    },
+    {
+      "path": "qa/0.32-offline-small/game-standard-production.png",
+      "sha256": "14c4b188202bf04a00198a7aa0288614ef829ca931589cc2f7f6d327ff349bcf"
+    },
+    {
+      "path": "qa/0.32-offline-small/game-standard-queue.png",
+      "sha256": "d7600c1873b5b8c56bc9010be3186d62f6c1c4c63223d586609e4a4d0b4c5d98"
+    },
+    {
+      "path": "qa/0.32-offline-small/game-standard-help.png",
+      "sha256": "858b4235d5db6e91ddd2b7ef00930c4990a8793373cbd80de5fc467e5506d0e0"
+    },
+    {
+      "path": "qa/0.32-offline-small/game-standard-build.png",
+      "sha256": "25940c702533cfa45191bc34aa8abf2bd7964ea0808882d3b986f860b0828724"
+    },
+    {
+      "path": "qa/0.32-offline-small/game-standard-rewards.png",
+      "sha256": "3b0153444049c0f0fbfcddc4253e6b08dae36fc99a9c3815f82ff8f110435022"
+    },
+    {
+      "path": "qa/0.32-offline-small/game-xl-help-scroll.png",
+      "sha256": "007f45f7e8ab68fe3859840627cf062dd9acf35abed587f0eec10a02c454d037"
+    },
+    {
+      "path": "qa/0.32-offline-small/game-xl-research-scroll.png",
+      "sha256": "8bc29ec1e78643720c0eb66d347c61cb1a1658d44a7ad07319834265f74a6e01"
+    },
+    {
+      "path": "qa/0.32-offline-small/game-xl-build-scroll.png",
+      "sha256": "c22387e7b3accab715943794793d66c28d901545d8de5eceacafd0d050a28883"
+    },
+    {
+      "path": "qa/0.32-offline-small/game-xl-production.png",
+      "sha256": "3f8c40add78102e236de2fa8cf43e1a41ced55a4ac01b6109a3c522b8ae8db8b"
+    },
+    {
+      "path": "qa/0.32-offline-small/back-confirmation-small.png",
+      "sha256": "e685cc76f6f965e184d1fb4c7d7d64ecaa172971ad98380b93706f104c451ff2"
+    },
+    {
+      "path": "qa/0.32-offline-small/saved-games-small.png",
+      "sha256": "09be475f66bfe9b7333b28117ceac9bdf74e0f080d09d95b5f9e6b0670c77c3c"
+    },
+    {
+      "path": "qa/0.32-offline-small/home-large-text-play.png",
+      "sha256": "8938047643eeba84f4c0c3b13ac8449a1adefa7cb01c9d7eb5df064306c36c41"
+    },
+    {
+      "path": "qa/0.32-offline-small/rewards-large-text-top.png",
+      "sha256": "b091c6905178133e920fb53982267bc84440710a6e8887b1eabc2a36d1ae1f02"
+    },
+    {
+      "path": "qa/0.32-offline-small/rewards-large-text-bottom.png",
+      "sha256": "447d083c7b7a9a385a9f4e6e91d941ee6f009d3908d2f5a59df0535ef762399d"
+    },
+    {
+      "path": "qa/0.32-offline-small/home-xl-text-top.png",
+      "sha256": "aa8bd673e6b8f6098dfab7d1ba87ea0b3e04d2dcd13fdbc9091a8984dadc4d20"
+    },
+    {
+      "path": "qa/0.32-offline-small/home-xl-text-bottom.png",
+      "sha256": "b852aaf57a2d80534899d9bdd2f8ad05bdf7272018d3450784645f43b8164cdb"
+    },
+    {
+      "path": "qa/0.32-offline-small/map-swipe-before.png",
+      "sha256": "f7cbde5e26ad1deddf966a1699a83f1dc00e63e9d0e0b706b481b61a9f167609"
+    },
+    {
+      "path": "qa/0.32-offline-small/map-swipe-after.png",
+      "sha256": "d5199e85d906765870e4045e543aa5336032be073110a4ae980203d9e52327aa"
+    },
+    {
+      "path": "qa/0.32-offline-small/saved-game-resumed.png",
+      "sha256": "b1506bf66f2856425e7739481e05d15f7a8594ba33d48063a5e15d72d99a8503"
+    },
+    {
+      "path": "qa/0.32-offline-small/saved-list-restored-top.png",
+      "sha256": "f5b2938c8ebaf084f21bc0d2407d3822a437fbf0a87ffbb606918b8670a81e9b"
+    },
+    {
+      "path": "qa/0.32-offline-small/saved-list-restored-scrolled.png",
+      "sha256": "e7aec9ca70622bc408300f2320df0f1f1c002e74318ed349cce879f93d44b107"
+    },
+    {
+      "path": "qa/0.32-offline-small/game-small-rewards-bottom.png",
+      "sha256": "d051b6d15e7a84f310731a22224ef346bd4aa3b71938f36d198d1ef090c43fc4"
+    },
+    {
+      "path": "qa/0.32-offline-small/home-normal-final.png",
+      "sha256": "8ed6ecf061535049bffa01ee0858783da8233edc7b6eaeb68881f730ca789226"
+    },
+    {
+      "path": "qa/0.32-offline-small/rewards-restored-normal.png",
+      "sha256": "53984ab17e4f4a20d5bc479a203fa44da06a5c480c73814d743982ca6e2695a1"
+    }
+  ],
+  "supportingObservations": [
+    {
+      "path": "qa/0.32-offline-small/owned-standard.json",
+      "sha256": "3a1c7dd12f592212e437068264feb81bbf8ad037f9625a31c312c66de03091b9"
+    },
+    {
+      "path": "qa/0.32-offline-small/owned-other-map.json",
+      "sha256": "b86ba002b85894541b23680ddf79c2a4136222c4050b9b1747d38f521c4483e0"
+    },
+    {
+      "path": "qa/0.32-offline-small/offline-first-play.json",
+      "sha256": "63876db4db907b79cdf8d5990c765c78fb4a3edea6b415b9f85fec9f51952954"
+    },
+    {
+      "path": "qa/0.32-offline-small/game-standard-screens.json",
+      "sha256": "538eae1ff7ed80e34d37b31a01f65ba3614d5aa2873e9591296b4d278f69aef0"
+    },
+    {
+      "path": "qa/0.32-offline-small/game-xl-scroll.json",
+      "sha256": "e03db51727978dbe39dcb3dd61b40d21c5460d3eac32b06437d0f9800888b964"
+    },
+    {
+      "path": "qa/0.32-offline-small/music-controls-pcm.json",
+      "sha256": "5b12e52ae61db1633042eaccadd5440b42d850fe99b2f4737295d82e40246682"
+    },
+    {
+      "path": "qa/0.32-offline-small/save-and-return-before.json",
+      "sha256": "74a258adfe2db6e4e208c62da825ce694adc5fadd1ee204fea71a39f5c59de27"
+    },
+    {
+      "path": "qa/0.32-offline-small/saved-games-small.json",
+      "sha256": "b3e077d2fddf2efb365722af25c58ca9708993370ccb56d94265415882bcb56f"
+    },
+    {
+      "path": "qa/0.32-offline-small/native-large-text.json",
+      "sha256": "60597c4efb34e95d4b6c9a3d3f511296426d3c13c1e98c1d106ae65170bf7d3f"
+    },
+    {
+      "path": "qa/0.32-offline-small/native-xl-text.json",
+      "sha256": "a5f871b1d2a1301af3810c3f6e5516d5a216024d1733c32f59c19ecfa236b555"
+    },
+    {
+      "path": "qa/0.32-offline-small/native-map-swipe.json",
+      "sha256": "fa6f8a39a750caeafd01f9c04f4f79e949f4eca4426790c5331e64fbdf6bd97c"
+    },
+    {
+      "path": "qa/0.32-offline-small/saved-game-music-off-resume.json",
+      "sha256": "f6f0f9d8857161dddda634201bc0d34757235dc272fd1349b4ff838269267364"
+    },
+    {
+      "path": "qa/0.32-offline-small/game-small-rewards-bottom.json",
+      "sha256": "c0cd5a215e54c3f5d5a2ff3f8b4d924f68155af26f1340b0ebb967dd546f0a59"
+    },
+    {
+      "path": "qa/0.32-offline-small/restored-normal-configuration.json",
+      "sha256": "1fcaf0a36d92d180a1a8804221586e35a2e4437dcc1337a7077306fc818bac2b"
+    },
+    {
+      "path": "qa/0.32-offline-small/original-data-restored.json",
+      "sha256": "28a688fb115d7831eaafb9ece0343cd8c6380e7ffa180b26230a8db8af6e84cb"
+    },
+    {
+      "path": "qa/0.32-offline-small/saved-list-restored-scroll.json",
+      "sha256": "cbd5bcbf50aa8c91512a480feb664e596bb06f9763c0f55fb7e93cda40605625"
+    }
+  ],
+  "smallPhoneConfigurations": [
+    {
+      "physicalWidth": 800,
+      "physicalHeight": 480,
+      "densityDpi": 240,
+      "fontScale": 1
+    },
+    {
+      "physicalWidth": 800,
+      "physicalHeight": 480,
+      "densityDpi": 240,
+      "fontScale": 1.3
+    },
+    {
+      "physicalWidth": 800,
+      "physicalHeight": 480,
+      "densityDpi": 240,
+      "fontScale": 1.6
+    },
+    {
+      "physicalWidth": 1080,
+      "physicalHeight": 600,
+      "densityDpi": 240,
+      "fontScale": 1
+    }
+  ],
+  "offlineMusic": {
+    "networkDisabled": true,
+    "legacyCacheAbsent": true,
+    "playing": true,
+    "transport": "track-blob",
+    "timeBefore": 47.089082,
+    "timeAfter": 48.259027,
+    "trackId": "original_soundtrack/track1.opus",
+    "decodedPCMNonZero": true,
+    "decodedPCMRMS": 0.05281886741993884,
+    "speakerOutputMonitored": false
+  },
+  "changedAPKAssets": [
+    "assets/warzone-touch-controls.js",
+    "assets/warzone/music-loader.js"
+  ],
+  "newAPKAssets": [
+    "assets/warzone/music/COPYING",
+    "assets/warzone/music/COPYING.NONGPL",
+    "assets/warzone/music/COPYING.README",
+    "assets/warzone/music/NOTICE.txt",
+    "assets/warzone/music/README.md",
+    "assets/warzone/music/music.data"
+  ],
+  "changedAPKMembers": [
+    "classes3.dex",
+    "assets/warzone/music-loader.js",
+    "assets/warzone/music/COPYING.NONGPL",
+    "assets/warzone/music/COPYING.README",
+    "assets/warzone/music/COPYING",
+    "assets/warzone/music/NOTICE.txt",
+    "assets/warzone/music/README.md",
+    "assets/warzone/music/music.data",
+    "AndroidManifest.xml",
+    "assets/warzone-touch-controls.js"
+  ],
+  "removedAPKMembers": [],
+  "bundledMusic": {
+    "archiveAsset": "assets/warzone/music/music.data",
+    "archiveBytes": 114721578,
+    "archiveSHA256": "602ea6c69f4073a9617676a39f8397232953637a9b7a36e7cc28e93dd15184cd",
+    "originalFilesByteIdentical": 55,
+    "originalOpusFilesByteIdentical": 40,
+    "mapAssignmentsUnchanged": 46,
+    "nativeExtractionRequired": false,
+    "legacyDownloadedCacheRequired": false,
+    "networkDownloadRequired": false,
+    "packStoredUncompressed": true,
+    "report": {
+      "path": "archive/bundled-music-0.32.json",
+      "sha256": "995f832f867ee946bd2167aed26ac4424ff0ff091329c1c541956305970475a4"
+    }
+  },
+  "nativeAssetSHA256": {
+    "assets/warzone/warzone2100.js": "bd59230991cf29d548be7ddb4336cf05dabe3ca4427cb62b4a8bce0821d93d24",
+    "assets/warzone/warzone2100.data": "f2200f13b2197d0162a12737898c12be2545482a78529a6d7c83c54d8a34e16b",
+    "assets/warzone/warzone2100.wasm": "c69a9d1a3873aa23e774524b67db0cb1257a8326904ed06eddca7b45691eba78"
+  },
+  "nativeEngineAndDataByteIdenticalTo031": true,
+  "mapsDuelScenarioCatalogsUnchanged": true,
+  "walletSaveAndAdsControllerUnchanged": true,
+  "preservedOriginalSourceFiles": 1250,
+  "preservedAPKAssets": 525,
+  "deliveryAds": {
+    "appId": "ca-app-pub-3430279660625393~3119801475",
+    "rewardedAdUnitId": "ca-app-pub-3940256099942544/5224354917",
+    "crystalsPerEarnedAd": 10,
+    "sampleAdsOnPhysicalPhones": true,
+    "publisherLiveAdUnitAbsentFromDEX": true,
+    "liveServingVerified": false
+  },
+  "signing": {
+    "debugSignedForExistingAppUpdates": true,
+    "sameCertificateAs031": true,
+    "certificateSHA256": "4499efe00477c7c724c06a1dd96f935864548665c13ab5e2bd0a9c0f83f7cb15"
+  },
+  "sourceCheckReports": [
+    {
+      "path": "archive/home-0.32-source-checks.json",
+      "sha256": "d70705101a6c6849079b22eb8905427fdd1cececf2d13078f6d80e6c99800f38"
+    },
+    {
+      "path": "archive/bundled-music-0.32-stream-checks.json",
+      "sha256": "e84d09b50541418ede35c5e954d793de9ba38f979d6f7e06cd72043ec2ca0e0c"
+    },
+    {
+      "path": "archive/bundled-music-0.32.json",
+      "sha256": "995f832f867ee946bd2167aed26ac4424ff0ff091329c1c541956305970475a4"
+    }
+  ],
+  "fallbackRecord": {
+    "path": "archive/fallback-0.32.json",
+    "sha256": "c7a90bd4257fccc14504a2244fb831c714023ceefcb6f00b6c3fda1ef73310b4"
+  },
+  "sourceInventory": "git ls-files --cached --others --exclude-standard; caches/private/transient files excluded",
+  "gitMetadataIncluded": false,
+  "vpsChanged": false,
+  "githubPublished": false,
+  "recordedUTC": "2026-11-09T23:01:19.047053Z"
+}

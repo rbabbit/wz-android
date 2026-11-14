@@ -1,0 +1,174 @@
+{
+  "version": "0.35",
+  "candidateAPK_SHA256": "438d8f708da975270973cfee65c67ce71739132d9d979cbf8d462bb2176c2e06",
+  "emulatorUsed": true,
+  "gameplayVerified": false,
+  "testAdsOnly": true,
+  "liveAdsTested": false,
+  "smallPhoneConfigurations": [
+    {
+      "physicalWidth": 1080,
+      "physicalHeight": 486,
+      "densityDpi": 240,
+      "fontScale": 1.0
+    }
+  ],
+  "focusedObservations": {
+    "startBriefingVerified": true,
+    "defeatBriefingVerified": true,
+    "roundNoticeVerified": true,
+    "startupInstructionsVerified": true,
+    "cameraAlignmentNoticeVerified": true
+  },
+  "checks": [
+    {
+      "name": "Selected start artwork and native caption with acknowledged native clock pause/resume",
+      "passed": true,
+      "observation": "delivery-start.json"
+    },
+    {
+      "name": "Round and actual camera alignment shown in one compact black/white notice, no overlap",
+      "passed": true,
+      "observation": "delivery-messages.json"
+    },
+    {
+      "name": "Real save archive succeeds after intro with short Game saved acknowledgement",
+      "passed": true,
+      "observation": "delivery-messages.json"
+    },
+    {
+      "name": "Repeated Build, Research and Production toggles restore input",
+      "passed": true,
+      "observation": "delivery-menu-checks.json"
+    },
+    {
+      "name": "Real native HQ-loss fixture shows selected destroyed-HQ screen and returns to same map Home",
+      "passed": true,
+      "observation": "delivery-defeat.json"
+    },
+    {
+      "name": "Genuine archived match resumes with no opening replay, then saves successfully",
+      "passed": true,
+      "observation": "resumed-save.json"
+    },
+    {
+      "name": "Resumed battle has an idle opening controller and ready native game",
+      "passed": true,
+      "observation": "resumed-briefing-state.json"
+    }
+  ],
+  "evidenceFiles": [
+    {
+      "path": "qa/0.35-briefings/delivery-start-briefing.png",
+      "sha256": "be786d7c309db48f2b5a71a3d3162d9402fed1330c1a51579a2c584bf0546723"
+    },
+    {
+      "path": "qa/0.35-briefings/delivery-after-start.png",
+      "sha256": "8b0fbf817b126b6c4b69b5880135e24860bdb309e2468fc2e41073404e8aa226"
+    },
+    {
+      "path": "qa/0.35-briefings/delivery-camera-notice.png",
+      "sha256": "2124943ca6ed07a3c79d98b1bd99a6e3f230fa1194adcb77e9b3e7a432329504"
+    },
+    {
+      "path": "qa/0.35-briefings/delivery-round-notice.png",
+      "sha256": "891f1c4df76041f3bddfae81753ff80ef74aeac5181d22991f7e6ca43b5be72f"
+    },
+    {
+      "path": "qa/0.35-briefings/delivery-game-saved.png",
+      "sha256": "0ec6fd81f4727179360c41007c174e66606a472bbbee9f048b2a870849718d98"
+    },
+    {
+      "path": "qa/0.35-briefings/delivery-defeat-briefing.png",
+      "sha256": "01a5f0bdc92181022bf9bee4e43f5c608ecb1f0b834d28dd2c8a437f4ebb2e86"
+    },
+    {
+      "path": "qa/0.35-briefings/delivery-after-defeat.png",
+      "sha256": "2737510d058b9ff0c2ee3a5841d3ff4d7dffa058fd465921147299922a97d9a3"
+    },
+    {
+      "path": "qa/0.35-briefings/delivery-return-home.png",
+      "sha256": "c13c7035597ff7575258015f2bbbac19971b94dc80e0c5cb437c5e78dc0e734f"
+    },
+    {
+      "path": "qa/0.35-briefings/resumed-game-saved.png",
+      "sha256": "71b11cabcf83287de06ffd33fc1dfa94596d7e229f5e74d44458b9aaab05019c"
+    },
+    {
+      "path": "qa/0.35-briefings/start-source-vs-delivery.png",
+      "sha256": "5bdac2694ebace932e029c40bc984a1ccfd2e7e086ecb8bc845f69d0ea31e9a2"
+    },
+    {
+      "path": "qa/0.35-briefings/defeat-source-vs-delivery.png",
+      "sha256": "498dcdb7e4ac983216e03ac088fb838d23a76c18d5ebeb059610a11960c525bf"
+    },
+    {
+      "path": "qa/0.35-briefings/start-caption-comparison.png",
+      "sha256": "ee43925567f1f1f2f6ef3ac037f024d2c8e4bc61f5eca5e3996f73f373d47f19"
+    },
+    {
+      "path": "qa/0.35-briefings/defeat-caption-comparison.png",
+      "sha256": "f3b26cdf1a92d9959fb792d02cfa1ddd8e2f44317d2b42ad5f52a63f6fead377"
+    }
+  ],
+  "supportingObservations": [
+    {
+      "path": "qa/0.35-briefings/delivery-start.json",
+      "sha256": "287d40dfb4a0aa220eb472b54341c9aa0272e814fc999fee0a0c044afcf9138c"
+    },
+    {
+      "path": "qa/0.35-briefings/delivery-messages.json",
+      "sha256": "304622a34fd480246841162728b6284223f39108063b8602091b1bf819df13ad"
+    },
+    {
+      "path": "qa/0.35-briefings/delivery-menu-checks.json",
+      "sha256": "fb4e32fc939ea2494d3d5c1f84a3adb6e7e08de86a00a3934a78c0b0b8337717"
+    },
+    {
+      "path": "qa/0.35-briefings/delivery-defeat.json",
+      "sha256": "84275f28905ecb9d7a38b48aa3c5aefb2036430c6388ed3f88e483103e5ba85d"
+    },
+    {
+      "path": "qa/0.35-briefings/resumed-save.json",
+      "sha256": "cb0b297d5e198ab273727116714ae4d21e4506176b802a54510d43ffe1c27165"
+    },
+    {
+      "path": "qa/0.35-briefings/resumed-briefing-state.json",
+      "sha256": "ac2de7addbbaab5aa6f2b952eb28770dab9b31ff7f3c0dae1bb5e2aecf76319f"
+    },
+    {
+      "path": "qa/0.35-briefings/emulator-restoration.json",
+      "sha256": "9df302900d0358bcff56becd9ef32e9e2e15e909df14c87da3d2223d5f3141b9"
+    },
+    {
+      "path": "qa/0.35-briefings/transition-frame-review.json",
+      "sha256": "90dd3e221713736e3f0c7d4a6090bf1655e926ecfb203bdc79209596da4b5834"
+    },
+    {
+      "path": "qa/0.35-briefings/design-comparison-inputs.json",
+      "sha256": "1d6b50eca98f185e55cfe12a8597537143ddcd11884a185b9e0be62557f024f4"
+    },
+    {
+      "path": "qa/0.35-briefings/pause-source-checks.json",
+      "sha256": "9e363d2475a0ce96ce83e00c885ecd4e1c0ebda15179d575016d931e1c8889a8"
+    },
+    {
+      "path": "design-qa.md",
+      "sha256": "7919d606b573529d0d5c834c3363b708acb5bc138f9f3818686a3f137607577d"
+    }
+  ],
+  "fixtureDisclosure": "Complete genuine native save copied; only the human Command Centre entry removed from struct.json, then native F8. Tests authoritative HQ detection, not a naturally lost match.",
+  "observedVisibleSecondsIncludingTransitions": {
+    "startApprox": 2.2,
+    "defeatApprox": 3.3
+  },
+  "emulatorRestored": true,
+  "limitations": [
+    "Focused affected-flow checks, not every map or a full match.",
+    "The native HQ-loss fixture removes one HQ from a copied genuine save; it is not a naturally lost match.",
+    "Opening covers wait for acknowledged native resume; observed about2.2seconds including fade on this emulator. Defeat cover about3.3seconds including fade.",
+    "The existing emulator renders terrain black during gameplay; artwork/units/menus/native state render normally. This predatesv0.35.",
+    "Native system-condensed captions differ slightly from generated lettering, accepted as a minor visual adaptation.",
+    "Video/frame caches and binary emulator backups are retained outside the source tree; representative screenshots and hash-bound records are included."
+  ]
+}

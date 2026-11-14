@@ -1,0 +1,80 @@
+{
+  "version": "0.41",
+  "emulatorUsed": false,
+  "actualNativeEngineExecuted": false,
+  "sourceFunctionsExecuted": true,
+  "desktopBrowserRendered": true,
+  "fixture": "Complete constructor/weapon/system current-production snapshots and real bundled thumbnail files; actual source helper/footer DOM renderer",
+  "checks": [
+    "Actual equipment selects the same verified truck/weapon/system artwork as main Production; unmapped equipment produces no invented thumbnail",
+    "Known queues retain current/waiting/remaining; unverified native queue totals are omitted without internal wording",
+    "Actual footer DOM shows one real loaded unit thumbnail, ordinary counts and unchanged progress/time, with no placeholder strip or internal uncertainty labels",
+    "Main Production shares the real truck thumbnail and known counts while omitting unsupported queue totals/labels",
+    "Switching truck to weapon replaces the single thumbnail and clears stale progress; confirmed idle removes both image and bar",
+    "Unmapped native artwork stays hidden without hiding real progress; small viewport text/counts remain inside non-overlapping scroll rows"
+  ],
+  "screenshots": [
+    "qa/0.41-production-thumbnail/footer-thumbnail-standard.png",
+    "qa/0.41-production-thumbnail/footer-thumbnail-small.png"
+  ],
+  "passed": true,
+  "checksPassed": 6,
+  "sources": [
+    {
+      "path": "app/src/main/assets/warzone-command-pages.js",
+      "sha256": "e341081439b1ad508d454622f7944748a6a4d818d0b715ef53142841e12c545c"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/towers-status.js",
+      "sha256": "10abda9cae9a98e96e7ab55be65d20d445911ed6f53865a0489219622665ae02"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/command-pages.css",
+      "sha256": "9036d9c8582b8ebb581ed2adaebf21f0e4465cf298ad38f16e4ee147327edf5c"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/lab-shell.css",
+      "sha256": "099a72464e470ebd387d035705a316d5ec3cdd9da11b63077754c03049b381c0"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/lab-commands.css",
+      "sha256": "9cc89795a6d02767d0bed940cce3216d418994bf8a400b7edf1a54dacf043a68"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/towers-commands.css",
+      "sha256": "f8cb75ab5f95dce25d3ae042fea3d5d4a6a22eaa808736d87cab017dfbf19e03"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/towers-shell.css",
+      "sha256": "1ea114b759d94de72e24b8a826c8c96aeec60ea0b77d13ca7055b360385bab42"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/towers-monochrome.css",
+      "sha256": "e3866b7aba8c2bc4fdf3dfe33b0a06c392ae6efea8909d3443cffe5048f830c7"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/towers-status.css",
+      "sha256": "da671b950964c36496960b14bdabd682c32c0ee2aa95bb27225a74ec254ed9c0"
+    },
+    {
+      "path": "app/src/main/assets/warzone/command-catalog.json",
+      "sha256": "d70d5672fa1865411b8e574e67e770dc3b13956a6e5710f37e69396f4ff3453e"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Engineering.gif",
+      "sha256": "8acc89ba7041c3734c46cb22d16d1b8c792d657c2ef321c86af285fe5e4af160"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Light Cannon.gif",
+      "sha256": "027514f254057245090adec6c23a235d5a601b2eff651fa64d4f8dcfb9168141"
+    },
+    {
+      "path": "app/src/main/assets/warzone/research-icons/Wide Spectrum Sensor.gif",
+      "sha256": "d62e3cf58a67986e38d5a8b8cbedfe22c5bf600f493977e54c9f7079f4876470"
+    },
+    {
+      "path": "tools/check-production-thumbnail-041.cjs",
+      "sha256": "6ccd4e0a30bf96a204e137675fab43aa1469f8d7a15f3a78b9918d50cf02cc19"
+    }
+  ]
+}

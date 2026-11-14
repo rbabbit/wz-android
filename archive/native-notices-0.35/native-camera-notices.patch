@@ -1,0 +1,60 @@
+--- a/src/keybind.cpp
++++ b/src/keybind.cpp
+@@ -112,6 +112,21 @@
+ #endif
+ }
+ 
++// Emit only after the existing native camera action has completed. The
++// original camera mutations and non-Towers console behavior are unchanged.
++static void towersCameraAlignmentNotice(const char *direction, const char *stockMessage)
++{
++	if (!towersOwnsRoutineNotices())
++	{
++		CONPRINTF("%s", stockMessage);
++		return;
++	}
++#ifdef __EMSCRIPTEN__
++	fprintf(stderr, "BNNOTICE:{\"kind\":\"camera\",\"direction\":\"%s\",\"gameTime\":%u}\n",
++	        direction, static_cast<unsigned int>(gameTime));
++#endif
++}
++
+ extern char	ScreenDumpPath[];
+ 
+ bool	bMovePause = false;
+@@ -369,7 +384,7 @@
+ 	{
+ 		camToggleStatus();
+ 	}
+-	CONPRINTF("%s", _("View Aligned to South"));
++	towersCameraAlignmentNotice("south", _("View Aligned to South"));
+ }
+ // --------------------------------------------------------------------------
+ void	kf_FaceEast()
+@@ -379,7 +394,7 @@
+ 	{
+ 		camToggleStatus();
+ 	}
+-	CONPRINTF("%s", _("View Aligned to East"));
++	towersCameraAlignmentNotice("east", _("View Aligned to East"));
+ }
+ // --------------------------------------------------------------------------
+ void	kf_FaceWest()
+@@ -389,7 +404,7 @@
+ 	{
+ 		camToggleStatus();
+ 	}
+-	CONPRINTF("%s", _("View Aligned to West"));
++	towersCameraAlignmentNotice("west", _("View Aligned to West"));
+ }
+ // --------------------------------------------------------------------------
+ 
+@@ -1377,7 +1392,7 @@
+ 	{
+ 		camToggleStatus();
+ 	}
+-	CONPRINTF("%s", _("View Aligned to North"));
++	towersCameraAlignmentNotice("north", _("View Aligned to North"));
+ }
+ 
+ MappableFunction kf_ScrollCamera(const int horizontal, const int vertical)

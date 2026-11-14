@@ -1,0 +1,53 @@
+{
+  "version": "0.52",
+  "passed": true,
+  "checksPassed": 8,
+  "checks": [
+    {
+      "name": "Actual local constructor and combat deaths use the existing compact black/white left notice with their real names",
+      "passed": true
+    },
+    {
+      "name": "Engine, BroadcastChannel and log copies of one death appear once and do not extend its notice timeout",
+      "passed": true
+    },
+    {
+      "name": "Different death IDs at the same time and the same ID at a different time remain distinct events",
+      "passed": true
+    },
+    {
+      "name": "Malformed, foreign-player, non-finite, stale and future loss packets cannot display a notice",
+      "passed": true
+    },
+    {
+      "name": "Loss names are plain text and cannot retain a research report action from an earlier notice",
+      "passed": true
+    },
+    {
+      "name": "Native round/camera notices, research completion and Game saved preserve their established text and common route",
+      "passed": true
+    },
+    {
+      "name": "Incremental log fallback skips startup history and waits for complete death packets",
+      "passed": true
+    },
+    {
+      "name": "Battle end rejects late losses and Duel continues to install no Towers notice listeners or polling",
+      "passed": true
+    }
+  ],
+  "emulatorUsed": false,
+  "actualNativeEngineExecuted": false,
+  "scope": "Real Towers notice controller in VM with structured fatal-loss packets and all existing output transports. Native score/audio/destruction and visible APK behavior are verified separately.",
+  "sources": [
+    {
+      "path": "app/src/main/assets/warzone-towers-notices.js",
+      "sha256": "3f309f1396892a310e11916d9d03ef849e3f7fc14c22d3ec34e2473f161c111e"
+    },
+    {
+      "path": "tools/check-unit-loss-notice-052.cjs",
+      "sha256": "fa2677da03a7937826f8351dcbd5ba718e4273c71abc740e86ad17f2d0423017"
+    }
+  ],
+  "recordedUTC": "2026-11-11T16:01:05.527Z"
+}

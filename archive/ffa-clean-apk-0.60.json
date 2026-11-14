@@ -1,0 +1,26 @@
+{
+  "version": "0.60",
+  "passed": true,
+  "cleanBuild": true,
+  "candidateAPK_SHA256": "ddd4ff09b1c4e7943dfc10df49a88fca152798c3b2f1472a823d335c83cd269f",
+  "candidateBytes": 475145093,
+  "previousCandidateSHA256": "a699ad22cd103a06a8853d33e2b8ae85cf97242e93cfd612edbc1a287da5275d",
+  "previousCandidateBytes": 475145025,
+  "zipMembers": 759,
+  "identicalUncompressedMembers": 757,
+  "changedMembers": [
+    "assets/warzone/warzone2100-ffa.data",
+    "assets/warzone/warzone2100-ffa.js"
+  ],
+  "approvedFfaPayloadChanges": [
+    "assets/warzone/warzone2100-ffa.data",
+    "assets/warzone/warzone2100-ffa.js"
+  ],
+  "exception": "Any DEX difference is limited to D8 class-checksum metadata; complete dexdump class/method/instruction output and all other DEX strings match. Explicit FFA loader/VFS changes, if listed, contain the isolated timer fix.",
+  "dexClassMethodInstructionsIdentical": true,
+  "allOtherDexStringsIdentical": true,
+  "everyNonFfaAssetResourceAndOtherDexSHA256Identical": true,
+  "emulatorUsed": false,
+  "ffaPayloadProofSHA256": "49c4d50ca101f0cf36e2c276eb1b596953cf708b6c2ccaa28fe09a6a76cb2a0f",
+  "buildCommand": "gradlew.bat clean assembleDebug -PadmobLiveAds=true"
+}

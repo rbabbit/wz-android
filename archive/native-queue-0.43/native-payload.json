@@ -1,0 +1,47 @@
+{
+  "version": "0.43",
+  "passed": true,
+  "emulatorUsed": false,
+  "androidRuntimeExecuted": false,
+  "gameplayVerified": false,
+  "scope": "Matched one-object native cancellation build plus one commands VFS replacement; no other authored data or worker hook change",
+  "nativeBuildProof": "archive/native-queue-0.43/native-build.json",
+  "nativeBuildProofSHA256": "31d825ff518eb4dcc07729d0233629a529323806019c32e95ee58daefb26f889",
+  "nativeRuntimeProof": "archive/native-queue-0.43/native-runtime-integration.json",
+  "nativeRuntimeProofSHA256": "24664c9dfbd637bc57889db31f340f378af01568d3377925828bc2581b1db24d",
+  "baselineAPK": "C:\\timerApp\\Warzone-Towers-0.42-Test-Ads.apk",
+  "baselineSHA256": "1a2dd68d7e334f75789d6460af92e468cfc6ae24214c012678bb0271e3cbf81e",
+  "changedVFSFiles": [
+    "/data/mp/tests/warzone-towers-commands.js"
+  ],
+  "addedVFSFiles": [],
+  "removedVFSFiles": [],
+  "unchangedVirtualFiles": 4291,
+  "frozenDataPrefixUnchanged": true,
+  "nativeProgramUnchangedOutsidePackageIndex": true,
+  "matchedWASMUnchanged": true,
+  "workerHookChanged": false,
+  "source": {
+    "path": "scenario/warzone-towers-commands.js",
+    "bytes": 69972,
+    "sha256": "35a33be65b2e7863af38ef79991834344ea6a8f36719c8d519bfd12cedadb1a8"
+  },
+  "outputs": [
+    {
+      "file": "warzone2100.js",
+      "bytes": 793911,
+      "sha256": "70eaa0af7030a0d3d9604669fd48b5d6bc20ade556d934bb61986a243b2d29b8"
+    },
+    {
+      "file": "warzone2100.wasm",
+      "bytes": 13497022,
+      "sha256": "9c067c6f3a84448033880deff5fea488b2c65fd880a3605f44e67ab8d65c4a1b"
+    },
+    {
+      "file": "warzone2100.data",
+      "bytes": 77999074,
+      "sha256": "f22e7956aa68102affe615e8a8794d9ea16ed4ba49d2e18ad380955967c9f599"
+    }
+  ],
+  "recordedUTC": "2026-11-10T22:22:14.485336+00:00"
+}

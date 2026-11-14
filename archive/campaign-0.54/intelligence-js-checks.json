@@ -1,0 +1,60 @@
+{
+  "version": "0.54",
+  "passed": true,
+  "checks": [
+    {
+      "name": "Campaign startup injects reader before HUD; Towers/Duel opt-in behaviour preserved",
+      "passed": true
+    },
+    {
+      "name": "Default Campaign Intelligence uses native research reader over world and suspends ALL",
+      "passed": true
+    },
+    {
+      "name": "Mission briefings waits for preview retirement, then hands F5 to original native UI",
+      "passed": true
+    },
+    {
+      "name": "Research, Build and Save handoffs wait for close and preserve their destination focus",
+      "passed": true
+    },
+    {
+      "name": "Actual pointerup control binder reproduces the previous duplicate toggle, and every Campaign handoff now activates once",
+      "passed": true
+    },
+    {
+      "name": "Cancelled reader-to-toolbar touch does not activate; mission reset cancels a pending handoff",
+      "passed": true
+    },
+    {
+      "name": "Mission/load reset rejects pending old report replies without leaking old model or history",
+      "passed": true
+    },
+    {
+      "name": "Automatic native videos and transport panels retire reader without injecting Escape/F5",
+      "passed": true
+    }
+  ],
+  "checksPassed": 8,
+  "emulatorUsed": false,
+  "nativeEngineExecuted": false,
+  "scope": "Actual Campaign HUD/reader JavaScript with bounded DOM and native-response stubs; model rendering, audio and native briefing playback remain emulator checks.",
+  "sources": [
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MainActivity.java",
+      "sha256": "279098b98c7b291f67bf24039d1dba764bfaeedabd00c16704cda4eeadb36220"
+    },
+    {
+      "path": "app/src/main/assets/warzone-intelligence.js",
+      "sha256": "dac05483a1ae70bc823e7722003dae39aeee16978200db4101c478666acdd9d8"
+    },
+    {
+      "path": "app/src/main/assets/warzone-campaign-hud.js",
+      "sha256": "8980d11e9fbf18dbe9b5d5e1846e43d0b11dde0a34d5017ace780a2c658da586"
+    },
+    {
+      "path": "tools/check-campaign-intelligence-054.cjs",
+      "sha256": "c411a2ce7a2ed81ab8935461fdcd29d9779049f854eee69e511dce4303fe98c8"
+    }
+  ]
+}

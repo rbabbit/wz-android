@@ -1,0 +1,49 @@
+{
+  "version": "0.32",
+  "emulatorUsed": false,
+  "androidRuntimeExecuted": false,
+  "checksPassed": 28,
+  "checks": [
+    "Home has no music/download/cancel controls or download progress state",
+    "Home actions retain Play, Rewards, Saved Games and map updates",
+    "Play still settles the actual carousel and launches the selected map/mode/weapon",
+    "Home keeps an actual vertical ScrollView with a wrap-content panel",
+    "Home advertises vertical overflow through a fading scroll indicator",
+    "Panel reports its full minimum content height instead of clipping it to the viewport",
+    "Normal Play control keeps its existing bounded width and 48dp row",
+    "Visible swipe instruction is removed while counters remain",
+    "Map behavior preserved: void showLevels(",
+    "Map behavior preserved: void setInteractionEnabled(",
+    "Map behavior preserved: void settleSelection(",
+    "Map behavior preserved: private void decorate()",
+    "Map behavior preserved: private void snapToPage(",
+    "Map behavior preserved: @Override public void fling(",
+    "Map behavior preserved: @Override protected void onLayout(",
+    "Map behavior preserved: @Override protected void onScrollChanged(",
+    "Map behavior preserved: @Override public boolean onInterceptTouchEvent(",
+    "Map behavior preserved: @Override public boolean onTouchEvent(",
+    "Map behavior preserved: @Override public void onInitializeAccessibilityNodeInfo(",
+    "Map behavior preserved: @Override public boolean performAccessibilityAction(",
+    "Map behavior preserved: @Override protected void onDetachedFromWindow()",
+    "Accessible next/previous map arrows remain available",
+    "Launcher selection contract preserved: String selectedMap()",
+    "Launcher selection contract preserved: String selectedMatchMode()",
+    "Launcher selection contract preserved: String selectedDuelWeapon()",
+    "Launcher selection contract preserved: private void rememberMap()",
+    "Map previews still load the authored preview asset with no substituted image",
+    "Launch/wallet errors retain their visible message path"
+  ],
+  "scope": "Home source removal and unchanged map/Play behavior contracts only.",
+  "limitation": "This does not establish rendered layout, real small-phone scrolling or touch acceptance.",
+  "baselineSourceZIP": "C:\\timerApp\\warzone-towers-0.31-source.zip",
+  "sources": [
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/GraphicsSetupView.java",
+      "sha256": "1715e760aef7a6d3470393979f8bf20771bd62f13635738f47217fb81cd2a8f9"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MapPreviewPager.java",
+      "sha256": "9c7899c83c01f6386b16a9050f2d2cf8b794e94e48089293f465c3b78b4d7217"
+    }
+  ]
+}

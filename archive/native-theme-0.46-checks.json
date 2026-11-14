@@ -1,0 +1,48 @@
+{
+  "version": "0.46",
+  "passed": true,
+  "colourLiteralsOnly": true,
+  "emulatorUsed": false,
+  "browserUsed": false,
+  "androidRuntimeExecuted": false,
+  "actualNativeEngineExecuted": false,
+  "gameplayVerified": false,
+  "screensVerified": false,
+  "scope": "Native source/build/payload integrity only; no gameplay or device verification",
+  "checks": [
+    "Exactly two renderer overlays differ only in whitelisted Towers RGB colour literals",
+    "Native console pairs near-black panels with white text; power uses white fill and distinct neutral preview/track colours",
+    "Current live resource accounting, actual power text and v0.44 headroom scaling remain intact",
+    "Autosave opt-out, cancellation, production observer and all earlier native gameplay overlays stay frozen",
+    "The matching prepared cache compiled exactly console.cpp/intdisplay.cpp and linked once",
+    "Installed JS/WASM matches the colour build; all 4292 authored VFS entries, complete data, exports and worker hook retained"
+  ],
+  "checksPassed": 6,
+  "sources": [
+    {
+      "path": "tools/build-native-theme-046.py",
+      "sha256": "403e3c0e187472cd70b88cb58747e96d84f47a811fc16227f551f1562a3767a2"
+    },
+    {
+      "path": "tools/integrate-native-theme-046.py",
+      "sha256": "a2c1a74e32193787d65b9c2540baebd5621290d633fb91778d4fb4e65638d9f9"
+    },
+    {
+      "path": "archive/native-theme-0.46/console.cpp",
+      "sha256": "282b50dd3bbdf8f5b8703ab74fd6875057d3a848a8ced36434260f6b221f5176"
+    },
+    {
+      "path": "archive/native-theme-0.46/intdisplay.cpp",
+      "sha256": "99645ec2555ba7dca7c41ebe75f955df46c3890e07b4606e0b8488df7613bb27"
+    },
+    {
+      "path": "archive/native-theme-0.46/native-build.json",
+      "sha256": "f6c49efb47fb6867f950e03ec0497b0de117cd15cf100a87c805f6a618897bf7"
+    },
+    {
+      "path": "archive/native-theme-0.46/native-payload.json",
+      "sha256": "235a79831cc424298b7bb98c14c0b1080a6d58f83c1022f5b92f2d465a1c553a"
+    }
+  ],
+  "recordedUTC": "2026-11-11T08:25:16.334449+00:00"
+}

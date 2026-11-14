@@ -1,0 +1,90 @@
+{
+  "version": "0.49",
+  "passed": true,
+  "checks": [
+    {
+      "name": "Preserved v0.48 source reproduces the unrendered dispatch burst and missing final held endpoint",
+      "passed": true
+    },
+    {
+      "name": "High-rate coalesced finger samples publish the latest absolute target once per display frame, without keyboard/zoom commands",
+      "passed": true
+    },
+    {
+      "name": "The final pointer-up position is consumed while middle pan remains held, then releases without losing distance",
+      "passed": true
+    },
+    {
+      "name": "Pointer cancellation and real blur discard queued pan work and release immediately, with no later ghost movement",
+      "passed": true
+    },
+    {
+      "name": "Different native frame cadences and many raw samples retain identical full drag distance",
+      "passed": true
+    },
+    {
+      "name": "Slow display frames batch once, and missing GL context or a stopped native renderer release within the bounded deadline",
+      "passed": true
+    },
+    {
+      "name": "Capture excursions stay within an offset canvas without wrapping, and ordinary interior motion retains its full distance",
+      "passed": true
+    },
+    {
+      "name": "A rapid new touch and pagehide cancel pending final release without releasing or moving a later gesture",
+      "passed": true
+    },
+    {
+      "name": "A normal stationary tap remains one contextual left click and a deliberate long drag remains a left-button box selection",
+      "passed": true
+    },
+    {
+      "name": "Single-site placement and line-placement keep their own input and never leak orders or camera pans",
+      "passed": true
+    },
+    {
+      "name": "Pinch remains zoom-only, horizontal two-finger motion pans without zoom, and dropping one finger does not restart a gesture",
+      "passed": true
+    },
+    {
+      "name": "Minimap drags retain the native right-button path and do not invoke battlefield middle pan",
+      "passed": true
+    },
+    {
+      "name": "Duel retains its existing immediate one-finger pan; native tap, build, radar, multi-touch, camera and order helpers are unchanged",
+      "passed": true
+    }
+  ],
+  "checksPassed": 13,
+  "emulatorUsed": false,
+  "browserUsed": false,
+  "androidRuntimeExecuted": false,
+  "actualNativeEngineExecuted": false,
+  "gameplayVerified": false,
+  "screensVerified": false,
+  "scope": "Actual current touch adapter in a virtual DOM/RAF plus absolute-mouse native-frame input oracle; no real native camera render or touch-screen verification.",
+  "baselineReproduction": {
+    "version": "0.48",
+    "sourceSha256": "0069cd51c93e879360c8a4a413eaf13fbf8db799140f7e54d9f69824c1f79e17",
+    "dispatchesWithoutRender": 40,
+    "retainedDelta": {
+      "x": 40,
+      "y": 20
+    },
+    "intendedDelta": {
+      "x": 75,
+      "y": 45
+    }
+  },
+  "sources": [
+    {
+      "path": "app/src/main/assets/warzone-touch-controls.js",
+      "sha256": "95a9f2c2662154b448931c45efb6c1ab6343cb0d253ccbb6555d08ab41717015"
+    },
+    {
+      "path": "tools/check-touch-pan-049.cjs",
+      "sha256": "70eb1acb430ed5c5048e81903bdfca998b6a6e4ba8ad9ad9c98560f8a70d989e"
+    }
+  ],
+  "recordedUTC": "2026-11-11T11:45:31.453Z"
+}

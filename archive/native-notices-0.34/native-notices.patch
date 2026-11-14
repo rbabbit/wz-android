@@ -1,0 +1,93 @@
+--- a/src/research.cpp
++++ b/src/research.cpp
+@@ -25,6 +25,8 @@
+  */
+ #include <string.h>
+ #include <map>
++
++#include <stdio.h>
+ 
+ #include "lib/framework/frame.h"
+ #include "lib/netplay/sync_debug.h"
+@@ -47,6 +49,24 @@
+ #include "qtscript.h"
+ #include "stats.h"
+ #include "wzapi.h"
++
++// Only the Towers HTML host opts in. This transient libc/MEMFS marker is
++// never stored with saves/preferences; other modes retain their stock notices.
++static bool towersOwnsRoutineNotices()
++{
++#ifdef __EMSCRIPTEN__
++	FILE *marker = fopen("/tmp/warzone-towers-ui-v34", "rb");
++	if (!marker)
++	{
++		return false;
++	}
++	const bool enabled = fgetc(marker) == '1';
++	fclose(marker);
++	return enabled;
++#else
++	return false;
++#endif
++}
+ 
+ // The stores for the research stats
+ std::vector<RESEARCH> asResearch;
+@@ -1268,7 +1288,7 @@
+ 		audio_QueueTrack(ID_SOUND_RESEARCH_COMPLETED);
+ 	}
+ 
+-	if (player == selectedPlayer && bDisplay)
++	if (player == selectedPlayer && bDisplay && !towersOwnsRoutineNotices())
+ 	{
+ 		//add console text message
+ 		snprintf(consoleMsg, MAX_RESEARCH_MSG_SIZE, _("Research completed: %s"), getLocalizedStatsName(pResearch));
+--- a/src/keybind.cpp
++++ b/src/keybind.cpp
+@@ -19,6 +19,8 @@
+ */
+ #include <cstring>
+ #include <nonstd/optional.hpp>
++
++#include <stdio.h>
+ 
+ #include "lib/framework/frame.h"
+ #include "lib/framework/wzapp.h"
+@@ -92,6 +94,24 @@
+ 	Alex McLean, Pumpkin Studios, EIDOS Interactive.
+ */
+ 
++// Only the Towers HTML host opts in. This transient libc/MEMFS marker is
++// never stored with saves/preferences; other modes retain their stock notices.
++static bool towersOwnsRoutineNotices()
++{
++#ifdef __EMSCRIPTEN__
++	FILE *marker = fopen("/tmp/warzone-towers-ui-v34", "rb");
++	if (!marker)
++	{
++		return false;
++	}
++	const bool enabled = fgetc(marker) == '1';
++	fclose(marker);
++	return enabled;
++#else
++	return false;
++#endif
++}
++
+ extern char	ScreenDumpPath[];
+ 
+ bool	bMovePause = false;
+@@ -2625,7 +2645,10 @@
+ 	}
+ 	if (saveGame(filename, GTYPE_SAVE_MIDMISSION)) // still expects a .gam filename... TODO: FIX
+ 	{
+-		console(_("QuickSave"));
++		if (!towersOwnsRoutineNotices())
++		{
++			console(_("QuickSave"));
++		}
+ 	}
+ 	else
+ 	{

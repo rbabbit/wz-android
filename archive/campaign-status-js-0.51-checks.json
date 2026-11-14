@@ -1,0 +1,37 @@
+{
+  "version": "0.51",
+  "passed": true,
+  "checksPassed": 4,
+  "checks": [
+    {
+      "name": "Campaign status is absolute, content-fit and fully within the observed 58px header",
+      "passed": true
+    },
+    {
+      "name": "Mission status uses friendly chapter labels and preserves mission timer text",
+      "passed": true
+    },
+    {
+      "name": "At1064CSS width the status stays visible when clear and hides itself rather than overlapping enlarged buttons",
+      "passed": true
+    },
+    {
+      "name": "All foreign native UI hides campaign status and allows the native Back control to own the header",
+      "passed": true
+    }
+  ],
+  "emulatorUsed": false,
+  "actualNativeEngineExecuted": false,
+  "scope": "Actual campaign HUD controller with observed1064CSS/58px-header geometry fixtures and CSS source constraints; actual screen verified by the final emulator pass.",
+  "sources": [
+    {
+      "path": "app/src/main/assets/warzone-campaign-hud.js",
+      "sha256": "9e93f14a2ef8bc2f5763a723cca94867d088e52a883cc41aca326eafe6c63c65"
+    },
+    {
+      "path": "tools/check-campaign-status-051.cjs",
+      "sha256": "b728843444b98ddcdcb36011f99610c437a9bdc5c8c56b94e96f47c4d442d51e"
+    }
+  ],
+  "recordedUTC": "2026-11-11T14:59:24.504Z"
+}

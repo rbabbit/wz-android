@@ -1,0 +1,97 @@
+{
+  "version": "0.47",
+  "passed": true,
+  "checks": [
+    {
+      "name": "Only completed topics with actual native messages appear; grants, authored-only and minor topics stay excluded",
+      "passed": true
+    },
+    {
+      "name": "Direct deep links and public selection cannot bypass report eligibility or expose starting technologies",
+      "passed": true
+    },
+    {
+      "name": "Valid report selection retains exact native ID, model geometry, normal opening silence and deliberate replay audio",
+      "passed": true
+    },
+    {
+      "name": "A missed completion event is recovered by a bounded live refresh without resetting query, scroll, model or audio",
+      "passed": true
+    },
+    {
+      "name": "Burst completion events and concurrent refresh callers coalesce into one native list request",
+      "passed": true
+    },
+    {
+      "name": "Fresh deep links query native report membership before selecting newly completed IDs",
+      "passed": true
+    },
+    {
+      "name": "Immediate list errors retain current valid details and keep periodic retries bounded",
+      "passed": true
+    },
+    {
+      "name": "A withdrawn selected report is covered and cleared before the native preview reset acknowledges",
+      "passed": true
+    },
+    {
+      "name": "A stale native selection response cannot display a topic lacking its report message",
+      "passed": true
+    },
+    {
+      "name": "A report withdrawn during native model layout never opens its transparent aperture",
+      "passed": true
+    },
+    {
+      "name": "Closing or ending while a refresh is pending rejects late history and never reopens the preview aperture",
+      "passed": true
+    },
+    {
+      "name": "Game-time rewind closes stale history; opening a lower-clock loaded save establishes a fresh baseline",
+      "passed": true
+    },
+    {
+      "name": "Normal close retains the opaque cover until acknowledgement, and late layout cannot reopen a closed report",
+      "passed": true
+    },
+    {
+      "name": "Major report notices preserve click/keyboard deep links; minor completion notices remain noninteractive",
+      "passed": true
+    },
+    {
+      "name": "An authored definition without a current engine message cannot open through its completion notice",
+      "passed": true
+    },
+    {
+      "name": "Generic notices and hidden/expired report notices cannot trigger report navigation",
+      "passed": true
+    },
+    {
+      "name": "Missing artwork helper leaves the genuine report visible without substituting a lab icon",
+      "passed": true
+    },
+    {
+      "name": "F5/Escape, menu preparation gates and dormant Duel retain their existing navigation boundaries",
+      "passed": true
+    }
+  ],
+  "checksPassed": 18,
+  "emulatorUsed": false,
+  "browserUsed": false,
+  "androidRuntimeExecuted": false,
+  "actualNativeEngineExecuted": false,
+  "screensVerified": false,
+  "gameplayVerified": false,
+  "scope": "Actual Intelligence/notices JavaScript in a bounded DOM and native-response fixture; native report eligibility remains authoritative. No browser, native engine, Android, model rendering or audio playback executed.",
+  "sources": [
+    {
+      "path": "app/src/main/assets/warzone-intelligence.js",
+      "sha256": "106a17549553c6b162ce6c85be82ac1e597c453e30c52ad19b03e4bc0f588f16"
+    },
+    {
+      "path": "app/src/main/assets/warzone-towers-notices.js",
+      "sha256": "192ceb3356ab677349afb3baaad136386c42884e071f99bdc9a0530900b7e6de"
+    }
+  ],
+  "recordedUTC": "2026-11-11T09:39:11.755Z"
+}

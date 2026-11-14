@@ -1,0 +1,71 @@
+--- a/src/console.cpp
++++ b/src/console.cpp
+@@ -69,7 +69,7 @@
+ 
+ static void towersConsoleBoxFill(int x1, int y1, int x2, int y2)
+ {
+-	if (towersSageTheme()) pie_UniTransBoxFill(x1, y1, x2, y2, towersSageColour(220,232,207));
++	if (towersSageTheme()) pie_UniTransBoxFill(x1, y1, x2, y2, towersSageColour(17,17,17));
+ 	else iV_TransBoxFill(x1, y1, x2, y2);
+ }
+ 
+@@ -370,7 +370,7 @@
+ /** Sets console text color depending on message type */
+ PIELIGHT getConsoleTextColor(int player)
+ {
+-	if (towersSageTheme()) return towersSageColour(16,23,12);
++	if (towersSageTheme()) return towersSageColour(244,244,244);
+ 	// System messages
+ 	if (player == SYSTEM_MESSAGE)
+ 	{
+@@ -486,7 +486,7 @@
+ 		}
+ 		for (int i = startpos; i < count; ++i)
+ 		{
+-			PIELIGHT colour = towersSageTheme() ? towersSageColour(16,23,12) : mode ? WZCOL_CONS_TEXT_USER_ALLY : getConsoleTextColor((*WhichMessages)[i].player);
++			PIELIGHT colour = towersSageTheme() ? towersSageColour(244,244,244) : mode ? WZCOL_CONS_TEXT_USER_ALLY : getConsoleTextColor((*WhichMessages)[i].player);
+ 			console_drawtext((*WhichMessages)[i].display, colour, historyConsole.topX + nudgeright, TextYpos, (*WhichMessages)[i].JustifyType, historyConsole.width);
+ 			TextYpos += (*WhichMessages)[i].display.lineSize();
+ 		}
+@@ -519,7 +519,7 @@
+ 	{
+ 		auto i = InfoMessages.end() - 1;		// we can only show the last one...
+ 		int tmp = pie_GetVideoBufferWidth();
+-		if (towersSageTheme()) pie_UniTransBoxFill(0, 0, tmp, 18, towersSageColour(220,232,207));
++		if (towersSageTheme()) pie_UniTransBoxFill(0, 0, tmp, 18, towersSageColour(17,17,17));
+ 		else drawBlueBox(0, 0,tmp, 18);
+ 		tmp -= i->display.width();
+ 		console_drawtext(i->display, getConsoleTextColor(i->player), tmp - 6, linePitch - 2, i->JustifyType, i->display.width());
+--- a/src/intdisplay.cpp
++++ b/src/intdisplay.cpp
+@@ -275,10 +275,10 @@
+ 	// Actual resource values stay native; the Towers scale leaves visible headroom.
+ 	auto drawPowerImage = [&](unsigned image, int px, int py, int width)
+ 	{
+-		PIELIGHT colour = image == IMAGE_PBAR_AVAIL ? towersSageColour(16,23,12)
+-		    : image == IMAGE_PBAR_USED ? towersSageColour(52,65,46)
+-		    : image == IMAGE_PBAR_REQUIRED ? towersSageColour(182,201,158)
+-		    : towersSageColour(203,220,186);
++		PIELIGHT colour = image == IMAGE_PBAR_AVAIL ? towersSageColour(244,244,244)
++		    : image == IMAGE_PBAR_USED ? towersSageColour(188,188,188)
++		    : image == IMAGE_PBAR_REQUIRED ? towersSageColour(112,112,112)
++		    : towersSageColour(37,37,37);
+ 		pie_UniTransBoxFill(px, py, px + width, py + iV_GetImageHeight(IntImages, image), colour);
+ 	};
+ 
+@@ -352,12 +352,12 @@
+ 	{
+ 		auto needTextWidth = cache.wzNeedText.width();
+ 		auto textX = iX + (this->width() - needTextWidth) / 2;
+-		pie_UniTransBoxFill(textX - 3, y0 + 1, textX + needTextWidth + 3, y0 + this->height() - 1, sage ? towersSageColour(220,232,207) : WZCOL_TRANSPARENT_BOX);
+-		cache.wzNeedText.render(textX, iY - 1, sage ? towersSageColour(16,23,12) : (realTime / 1250) % 5 ? WZCOL_WHITE: WZCOL_RED);
++		pie_UniTransBoxFill(textX - 3, y0 + 1, textX + needTextWidth + 3, y0 + this->height() - 1, sage ? towersSageColour(17,17,17) : WZCOL_TRANSPARENT_BOX);
++		cache.wzNeedText.render(textX, iY - 1, sage ? towersSageColour(244,244,244) : (realTime / 1250) % 5 ? WZCOL_WHITE: WZCOL_RED);
+ 	}
+ 
+ 	// draw text value
+-	cache.wzText.render(iX, iY, sage ? towersSageColour(16,23,12) : Avail < 0 ? WZCOL_RED : WZCOL_TEXT_BRIGHT);
++	cache.wzText.render(iX, iY, sage ? towersSageColour(244,244,244) : Avail < 0 ? WZCOL_RED : WZCOL_TEXT_BRIGHT);
+ }
+ 
+ IntFancyButton::IntFancyButton()

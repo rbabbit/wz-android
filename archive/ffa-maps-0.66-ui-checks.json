@@ -1,0 +1,147 @@
+{
+  "version": "0.66",
+  "passed": true,
+  "checksPassed": 4,
+  "checks": [
+    {
+      "name": "All six authored setup previews match native map aspect and contain no blank overview frame",
+      "passed": true
+    },
+    {
+      "name": "FFA instructions name the six actual maps, varied authored starts and actual opponent counts",
+      "passed": true
+    },
+    {
+      "name": "MUSIC instructions agree with the actual bundled playlist policies and menu",
+      "passed": true
+    },
+    {
+      "name": "All 44 concise Guide pages retain valid links and real screenshot references",
+      "passed": true
+    }
+  ],
+  "maps": 6,
+  "practicalPages": 44,
+  "emulatorUsed": false,
+  "actualNativeEngineExecuted": false,
+  "limitation": "Checks setup assets and Guide facts only. Actual Android scrolling, swipe selection, controls, launches and audio are verified separately on the delivery APK.",
+  "sources": [
+    {
+      "path": "app/src/main/assets/ffa-maps.json",
+      "sha256": "d6c626637d573349d5ec02ef377624b54442ec96c52967789d61163c525bf098"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/contact.png",
+      "sha256": "7def522abf8484076640514014f42da0f149a9e956d3d80a9e4485934cf0437a"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/emag.png",
+      "sha256": "ab5eda0c083b98f37adcfce6ef1d12ee2e00952ede774f0409a830dc6cece361"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/emaj-6p.png",
+      "sha256": "656ae9bd70cf85bc305506917df58f3e3174f02352b11f9cb9a1f073bcfa783a"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/rb-simple.png",
+      "sha256": "e82d29ca3d28e92e57ae2a3ef3608b69ec788221c1bfd00a48d4cec48cc31cd7"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/rb-usefull.png",
+      "sha256": "90af5c46d47d7b5f42039612bbe7275c1bf7bc235274430ad325a15771fdf1e5"
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/templar-ffa.png",
+      "sha256": "acef4fba0d9a5a69f0f24ec055c2b91dab4b9db39e6ad924e6d8fe02516465cd"
+    },
+    {
+      "path": "app/src/main/assets/guide/practical-data.js",
+      "sha256": "980b693c1c1558f79ee8ded87cdd567c7d24d48161687b809f6219b10f8ffdd0"
+    },
+    {
+      "path": "app/src/main/assets/guide/research-data.js",
+      "sha256": "645015fb029351e0567df84539da65d9051218545025c6a0dd36d9639e8d2cb6"
+    },
+    {
+      "path": "app/src/main/assets/guide/screenshots-data.js",
+      "sha256": "f9ad2bcba4018b15f5686693f9aed825f9d953d208fbb0f9754899fc846b9dbc"
+    },
+    {
+      "path": "app/src/main/assets/guide/screenshots/build-modules.png",
+      "sha256": "8628b3d562c1891610a6839177e257a1bb9097a60e4e042a6ffba512562ed910"
+    },
+    {
+      "path": "app/src/main/assets/guide/screenshots/build-sites.png",
+      "sha256": "78409db0c96d7ad986998ffac6f1d8100412c7211ba02b4d2ab2c781b36f94c7"
+    },
+    {
+      "path": "app/src/main/assets/guide/screenshots/campaign-briefing.png",
+      "sha256": "40567cccb0294785f7a0098283a1b3b41bc238e8fe147f47189e20de1698c4f5"
+    },
+    {
+      "path": "app/src/main/assets/guide/screenshots/controls-drawer.png",
+      "sha256": "98922f4e8d8127db13a2ebd8281ef76aa11c6da06f4f121191133ca544084d34"
+    },
+    {
+      "path": "app/src/main/assets/guide/screenshots/controls-world.png",
+      "sha256": "62cc114f4e80101272647c135091ccaa0865377cc5e7c157dbfbd7665d1e50b9"
+    },
+    {
+      "path": "app/src/main/assets/guide/screenshots/design-blueprint.png",
+      "sha256": "bf774d720764defff872368825262f0e21bdbc0538c9cfa871fc0fc242b397f6"
+    },
+    {
+      "path": "app/src/main/assets/guide/screenshots/factory-queue.png",
+      "sha256": "b1e4542f831bb08bea8c810dd07ab0ddd3f983580e9cade9f47c6f056a39a7b5"
+    },
+    {
+      "path": "app/src/main/assets/guide/screenshots/factory-units.png",
+      "sha256": "ab8bcaee618b09acfb7134f9f5d609045e13f86b086e6fbb177885b08d6b9d6b"
+    },
+    {
+      "path": "app/src/main/assets/guide/screenshots/ffa-setup-066.png",
+      "sha256": "8ddab557308c0dd41c05ef9f7e3725186ebe056802bbac65d19795f9d9af0b40"
+    },
+    {
+      "path": "app/src/main/assets/guide/screenshots/intelligence-report.png",
+      "sha256": "c99ecc2d9b65f77a6ce5777d654fd9be30251a8692d5d060915dbf342f6a1909"
+    },
+    {
+      "path": "app/src/main/assets/guide/screenshots/phone-saves.png",
+      "sha256": "2a788de0e64cbc7c3f8f9b85bfcaef1b356a1ddcd2727b2619656db6c02809d5"
+    },
+    {
+      "path": "app/src/main/assets/guide/screenshots/research-queue.png",
+      "sha256": "e01f4a73b388a133adbf9baa574b0f2cd743c08eaf6f710cdd8e6b823cb0cdb8"
+    },
+    {
+      "path": "app/src/main/assets/guide/screenshots/towers-map.png",
+      "sha256": "c3d1d83a397f1aeab61a34925203a43fc41509a41ad9510edc49ecaac08047cf"
+    },
+    {
+      "path": "app/src/main/assets/guide/screenshots/towers-wave.png",
+      "sha256": "9980e5d4973608d5d195d5d9d009c4d1d84bf53db78e80453483650d098e31a4"
+    },
+    {
+      "path": "app/src/main/assets/warzone/music-catalog.js",
+      "sha256": "e0d05a3033067c675cc5dfa37b2796a53e84b87a566519b4cae0d8256de5de5a"
+    },
+    {
+      "path": "app/src/main/assets/warzone/music-loader.js",
+      "sha256": "f53e6bf3d898e546045937456e3c5bf1eafdc981573c1d6c670d9762fa03cc07"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/FfaMapCatalog.java",
+      "sha256": "006bc999ffb6ce7f3283b730c9dce118b21c0fdbb85606f82b3e3ffccc2f7143"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/FfaSetupView.java",
+      "sha256": "cf54b4cf2bc92176b39d5d86c082d5b1c7b8654b98b92b83e5354ed1bdd08f9d"
+    },
+    {
+      "path": "tools/check-ffa-setup-066.cjs",
+      "sha256": "57bfddd9dd83a288a0ae4821428613913095823c3eb6f6e1276e49d9ab815663"
+    }
+  ],
+  "recordedUTC": "2026-11-13T00:12:14.474Z"
+}

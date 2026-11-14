@@ -11,6 +11,7 @@
  *   stationary long-press       native right click / unit orders menu
  *   pinch                       zoom (gesture-locked; never pans as well)
  *   two fingers together up/down native camera tilt, without changing heading
+ *   twist two fingers            native camera rotation
  *   BOX then drag               immediate one-shot rectangle selection
  *   +Q then build               sticky native construction queue
  *
@@ -20,7 +21,7 @@
 (() => {
   "use strict";
 
-  if (window.__kalaWarzoneTouch?.version >= 55) return "already-installed";
+  if (window.__kalaWarzoneTouch?.version >= 57) return "already-installed";
 
   // Android's touch-slop model: tolerate a small finger wobble, then commit
   // immediately to a movement gesture. Scale gently for high-density panels.
@@ -33,10 +34,17 @@
   const PINCH_START = 11;
   const PINCH_STEP = 14;
   const TILT_STEP = 32;
+  const ROTATE_START = Math.PI / 24;
+  const ROTATE_STEP = Math.PI / 60;
+  const ROTATE_HANDOFF = Math.PI / 12;
+  const ROTATE_TRAVEL = 4;
+  const ROTATE_SETTLE_MS = 48;
   const CLICK_HOLD_MS = 8;
   const DOUBLE_TAP_MS = 290;
   const DOUBLE_TAP_SLOP = 28;
-  const ZOOM_COMMAND_PATH = "/data/mp/multiplay/script/rules/blocknight-zoom-command.json";
+  const campaign = window.__warzoneCampaignMode === true || (typeof location !== 'undefined' && typeof URLSearchParams === 'function' && new URLSearchParams(location.search).get('mode') === 'campaign');
+  const ffa = window.__warzoneFfaConfig?.mode === 'ffa';
+  const ZOOM_COMMAND_PATH = (campaign ? '/data/base/script/campaign/mobile/' : '/data/mp/multiplay/script/rules/') + 'blocknight-zoom-command.json';
   const ZOOM_PRESETS = Object.freeze({
     close: Object.freeze({ label: "NEAR", distance: 1600 }),
     battle: Object.freeze({ label: "BATTLE", distance: 2600 }),
@@ -58,6 +66,21 @@
     multi: null,
     multiMoveFrame: null,
     multiMoveTimer: null,
+    rotationIntentTimer: null,
+    zoomIntentTimer: null,
+    panMoveFrame: null,
+    panMoveTimer: null,
+    panMoveGesture: null,
+    panRelease: null,
+    panReleaseFrame: null,
+    panReleaseTimer: null,
+    panDeferredPointers: [],
+    panDrainingPointers: false,
+    panRearms: 0,
+    panUnobservedRearms: 0,
+    panHeldTimeouts: 0,
+    panContextResets: 0,
+    panQueueOverflows: 0,
     ignoreUntilAllUp: false,
     heldKeys: new Set(),
     longTimer: null,
@@ -100,6 +123,12 @@
     tiltReleaseTimer: null,
     tiltReleaseFrame: null,
     tiltBudget: 0,
+    rotationMoves: 0,
+    rotationSteps: 0,
+    rotationKey: null,
+    rotationReleaseTimer: null,
+    rotationReleaseFrame: null,
+    rotationBudget: 0,
     saveNames: 0,
     radarTaps: 0,
     radarDrags: 0,
@@ -289,11 +318,12 @@
     return Boolean(commands?.nativeClosing?.()&&commands.report?.().buildOpen);
   }
   function pendingTruckSelection(){return Boolean(window.__warzoneCommands?.report?.().selectingTrucks);}
-  function pendingNativeInput(){return Boolean(state.clickJob||state.clickQueue.length||state.clickFrame!==null||state.clickTimer!==null||state.pointerQueue.length||window.__warzoneCommands?.report?.()?.nativePendingSites||pendingBuildPanelClose()||pendingTruckSelection());}
+  function pendingNativeInput(){return Boolean(state.panRelease||state.panDeferredPointers.length||state.clickJob||state.clickQueue.length||state.clickFrame!==null||state.clickTimer!==null||state.pointerQueue.length||window.__warzoneCommands?.report?.()?.nativePendingSites||pendingBuildPanelClose()||pendingTruckSelection());}
   function afterNativeInput(callback){if(!pendingNativeInput())return false;state.afterInput.push(callback);return true;}
   function flushAfterInput(){if(!pendingNativeInput())state.afterInput.splice(0).forEach(callback=>callback());}
   function pumpPointerQueue(){
-    if(state.clickJob||state.clickQueue.length||state.clickFrame!==null||state.clickTimer!==null||window.__warzoneCommands?.report?.()?.nativePendingSites||pendingBuildPanelClose()||pendingTruckSelection())return;
+    if(state.panDeferredPointers.length&&!state.pointerQueue.length){pumpPanPointerQueue();if(state.panRelease||state.panDeferredPointers.length)return;}
+    if(state.panRelease||state.clickJob||state.clickQueue.length||state.clickFrame!==null||state.clickTimer!==null||window.__warzoneCommands?.report?.()?.nativePendingSites||pendingBuildPanelClose()||pendingTruckSelection())return;
     const event=state.pointerQueue.shift();
     if(!event){flushAfterInput();return;}
     state.replayingPointers=true;try{processPointer(event,true);}finally{state.replayingPointers=false;}
@@ -336,7 +366,7 @@
 
   function pumpClicks() {
     if (!state.battleActive) { cancelClicks(); return; }
-    if (state.clickJob || state.clickFrame !== null || state.clickTimer !== null) return;
+    if (state.panRelease || state.clickJob || state.clickFrame !== null || state.clickTimer !== null) return;
     if(!state.clickQueue.length){pumpPointerQueue();return;}
     const job = state.clickJob = state.clickQueue.shift();
     focusCanvas(); releaseMouse(); setQueueModifier(job.ctrl, job.ctrl);
@@ -407,8 +437,29 @@
       ||left<b.left||top<b.top||right>b.right||bottom>b.bottom)return Promise.resolve(false);
     return new Promise(resolve=>{state.clickQueue.push({box:true,button:0,x:left,y:top,right,bottom,ctrl:add,resolve});pumpClicks();});
   }
+  function campaignRadarGeometry(){
+    const bounds=canvas()?.getBoundingClientRect(),radar=window.__warzoneCampaign?.report?.().nativeState?.radar;
+    if(!bounds||bounds.width<=0||bounds.height<=0||radar?.visible!==true||window.__warzoneCommands?.nativeHudHidden?.())return null;
+    const numbers=['centerX','centerY','width','height','inverseCos','inverseSin','viewportWidth','viewportHeight'];
+    if(numbers.some(name=>typeof radar[name]!=='number'||!Number.isFinite(radar[name]))
+        ||radar.width<=0||radar.height<=0||radar.viewportWidth<=0||radar.viewportHeight<=0)return null;
+    const c=radar.inverseCos,s=radar.inverseSin,det=c*c+s*s;
+    if(det<0.5||det>1.5)return null;
+    const scaleX=bounds.width/radar.viewportWidth,scaleY=bounds.height/radar.viewportHeight;
+    const corners=[];
+    for(const[u,v]of[[-radar.width/2,-radar.height/2],[radar.width/2,-radar.height/2],[radar.width/2,radar.height/2],[-radar.width/2,radar.height/2]]){
+      // Invert the exact fixed-point-derived coefficients used by native
+      // CoordInRadar. The displayed map may rotate and change scroll limits.
+      corners.push({x:bounds.left+(radar.centerX+(c*u+s*v)/det)*scaleX,
+        y:bounds.top+(radar.centerY+(-s*u+c*v)/det)*scaleY});
+    }
+    return {bounds,radar,scaleX,scaleY,c,s,
+      box:{left:Math.min(...corners.map(point=>point.x))-3,top:Math.min(...corners.map(point=>point.y))-3,
+        right:Math.max(...corners.map(point=>point.x))+3,bottom:Math.max(...corners.map(point=>point.y))+3}};
+  }
   function nativeSelectionBounds(){
     const b=canvas()?.getBoundingClientRect();if(!b||b.width<=0||b.height<=24)return null;
+    if(campaign)return {left:b.left,top:b.top,right:b.right,bottom:b.bottom-24,radar:campaignRadarGeometry()?.box||null};
     // Reuse the same native radar configuration as real touch picking.
     radarPoint(b.left,b.top);
     const side=state.radarSide||192,s=window.__warzoneCommands?.report?.().snapshot;
@@ -611,13 +662,15 @@
     const auto = hudDocument.getElementById("blocknight-auto-fight");
     const box = hudDocument.getElementById("blocknight-box-select");
     const queue = hudDocument.getElementById("blocknight-queue-orders");
-    if (all) all.classList.toggle("active", state.combatLock);
+    if (all) all.classList.toggle("active", campaign ? window.__warzoneCampaign?.report?.().allCombat === true : state.combatLock);
     if (auto) auto.classList.toggle("active", state.autoFight);
     if (box) box.classList.toggle("active", state.boxMode);
     if (queue) queue.classList.toggle("active", state.queueMode);
     if (queue) queue.setAttribute("aria-pressed", String(state.queueMode));
-    for (const button of hudDocument.querySelectorAll?.('#blocknight-combat-hud button,#wt-field-centre button') || []) {
-      button.disabled = Boolean(state.stopNonce);
+    const saving = window.WarzoneSavedGames?.report?.();
+    for (const button of hudDocument.querySelectorAll?.('#blocknight-combat-hud button,#wt-field-centre button,#lab-ops #wt-open-build') || []) {
+      button.disabled = Boolean(state.stopNonce)
+        || (button.id === 'blocknight-save' && (saving?.busy === true || saving?.ended === true));
     }
     for (const preset of Object.keys(ZOOM_PRESETS)) {
       const button = hudDocument.getElementById(`blocknight-zoom-${preset}`);
@@ -631,6 +684,7 @@
   }
 
   function toggleCombatLock(force) {
+    if (campaign) return window.__warzoneCampaign?.toggleAllCombat?.(force) || false;
     cancelCombatInput();
     state.combatLock = typeof force === "boolean" ? force : !state.combatLock;
     if (!state.combatLock) state.autoFight = false;
@@ -719,7 +773,7 @@
     window.__warzoneCommands?.cancelLinePlacement?.(null,true);
     releaseAll(); state.autoFight = false;
     const nonce = `${Date.now().toString(36)}-stop-${state.stopOrders + 1}`;
-    const path = '/data/mp/multiplay/script/rules/warzone-towers-control-command.json';
+    const path = (campaign ? '/data/base/script/campaign/mobile/' : '/data/mp/multiplay/script/rules/') + 'warzone-towers-control-command.json';
     try {
       fs.writeFile(path + '.tmp', JSON.stringify({ version: 1, nonce, action: 'stop-selected' }), { encoding: 'utf8' });
       fs.rename(path + '.tmp', path);
@@ -1019,6 +1073,164 @@
     state.maxPanDispatchMs = Math.max(state.maxPanDispatchMs, dispatchMs);
   }
 
+  function panPoint(x, y) {
+    const bounds = canvas()?.getBoundingClientRect();
+    if (!bounds || bounds.width <= 0 || bounds.height <= 0) return null;
+    // Captured touches can leave the canvas. SDL stores unsigned coordinates;
+    // keep only synthetic one-finger pan input inside the native edge bands.
+    const insetX = Math.min(8, bounds.width / 4), insetY = Math.min(8, bounds.height / 4);
+    return {
+      x: Math.max(bounds.left + insetX, Math.min(bounds.right - insetX,
+          Number.isFinite(x) ? x : bounds.left + bounds.width / 2)),
+      y: Math.max(bounds.top + insetY, Math.min(bounds.bottom - insetY,
+          Number.isFinite(y) ? y : bounds.top + bounds.height / 2))
+    };
+  }
+
+  function clearPanMove() {
+    if (state.panMoveFrame !== null && typeof cancelAnimationFrame === 'function') cancelAnimationFrame(state.panMoveFrame);
+    clearTimeout(state.panMoveTimer);
+    state.panMoveFrame = null; state.panMoveTimer = null; state.panMoveGesture = null;
+  }
+
+  function flushPanMove() {
+    const gesture = state.panMoveGesture;
+    clearPanMove();
+    if (!state.battleActive || !gesture || gesture !== state.single || !gesture.panning || state.mouseButton !== 1) return;
+    const point = panPoint(gesture.x, gesture.y);
+    if (point) advancePan(gesture, point.x, point.y);
+  }
+
+  function schedulePanMove(gesture) {
+    state.panMoveGesture = gesture;
+    if (state.panMoveFrame !== null || state.panMoveTimer !== null) return;
+    // SDL consumes the latest absolute position once per render. Replaying
+    // every historical/coalesced sample only blocks the next camera frame.
+    if (typeof requestAnimationFrame === 'function') state.panMoveFrame = requestAnimationFrame(flushPanMove);
+    else state.panMoveTimer = setTimeout(flushPanMove, 16);
+  }
+
+  function clearPanReleaseCallbacks() {
+    if (state.panReleaseFrame !== null && typeof cancelAnimationFrame === 'function') cancelAnimationFrame(state.panReleaseFrame);
+    clearTimeout(state.panReleaseTimer);
+    state.panReleaseFrame = null; state.panReleaseTimer = null;
+  }
+
+  function panPhase(marker, phase) {
+    marker.phase = phase;
+    marker.frame = state.nativeFrames;
+    marker.started = performance.now();
+    marker.displayFrames = 0;
+  }
+
+  function releasePanEndpoint(marker) {
+    // SDL still reports mouseDown during KEY_RELEASED. Leave the endpoint
+    // untouched through that frame; moving the hover cursor now moves the map.
+    if (state.mouseButton === 1) releaseMouse(marker.x, marker.y);
+    panPhase(marker, 'rearm');
+  }
+
+  function schedulePanRelease() {
+    if (!state.panRelease || state.panReleaseFrame !== null || state.panReleaseTimer !== null) return;
+    if (typeof requestAnimationFrame === 'function') state.panReleaseFrame = requestAnimationFrame(() => advancePanRelease(true));
+    state.panReleaseTimer = setTimeout(() => advancePanRelease(false), typeof requestAnimationFrame === 'function' ? 50 : 16);
+  }
+
+  function advancePanRelease(displayFrame = false) {
+    const marker = state.panRelease;
+    if (!marker) return;
+    clearPanReleaseCallbacks();
+    if (displayFrame) marker.displayFrames += 1;
+    observeNativeFrames();
+    if (marker.canvas !== canvas() || marker.clock && marker.clock !== state.nativeFrameContext) {
+      if (state.mouseButton === 1) releaseMouse(marker.x, marker.y);
+      state.panRelease = null; state.panContextResets += 1;
+      pumpPanPointerQueue(); pumpClicks(); return;
+    }
+    if (!marker.clock && state.nativeFrameContext) {
+      marker.clock = state.nativeFrameContext;
+      panPhase(marker, marker.phase);
+    }
+    const elapsed = performance.now() - marker.started;
+    const observed = Boolean(marker.clock);
+    const frames = marker.phase === 'held' ? 1 : 2;
+    const ready = observed ? state.nativeFrames - marker.frame >= frames
+        : (typeof requestAnimationFrame !== 'function' || marker.displayFrames >= 3)
+          && elapsed >= (marker.phase === 'held' ? 32 : 48);
+    if (marker.phase === 'held' && !ready && elapsed >= 1000) {
+      // A stalled renderer must not leave a mouse button held. Keep the rearm
+      // guard: a wall-clock timeout cannot prove native panActive has cleared.
+      releasePanEndpoint(marker); state.panHeldTimeouts += 1;
+    } else if (ready && marker.phase === 'held') {
+      releasePanEndpoint(marker);
+    } else if (ready) {
+      state.panRelease = null; state.panRearms += 1;
+      if (!observed) state.panUnobservedRearms += 1;
+      pumpPanPointerQueue(); pumpClicks(); return;
+    }
+    schedulePanRelease();
+  }
+
+  function finishFramePan(gesture, canceled) {
+    clearPanMove();
+    const point = panPoint(gesture.x, gesture.y);
+    if (!canceled && point) advancePan(gesture, point.x, point.y);
+    observeNativeFrames();
+    const marker = state.panRelease = {x: gesture.panX, y: gesture.panY,
+      canvas: canvas(), clock: state.nativeFrameContext};
+    panPhase(marker, 'held');
+    const heldFrame = gesture.panClock && gesture.panClock === state.nativeFrameContext
+        && state.nativeFrames > gesture.panHeldFrame;
+    if (canceled || heldFrame) releasePanEndpoint(marker);
+    schedulePanRelease();
+  }
+
+  function cancelFramePan() {
+    clearPanMove();
+    if (state.panRelease) {
+      if (state.panRelease.phase === 'held') releasePanEndpoint(state.panRelease);
+      schedulePanRelease(); return;
+    }
+    const gesture = state.single?.framePan && state.single.panning ? state.single
+        : window.__warzoneDuelConfig?.mode !== 'duel' && state.multi?.gesture === 'pan'
+          ? {...state.multi, x: state.multi.center.x, y: state.multi.center.y} : null;
+    if (gesture) finishFramePan(gesture, true);
+  }
+
+  function deferPanPointer(event, target) {
+    own(event); forwardedPointers.add(event);
+    if (event.type === 'pointerdown') capturePointer(target, event.pointerId);
+    if (event.type === 'pointerup' || event.type === 'pointercancel') releasePointer(target, event.pointerId);
+    if (event.type === 'pointermove') {
+      const moves = [];
+      for (let i = state.panDeferredPointers.length - 1; i >= 0; i--) {
+        const previous = state.panDeferredPointers[i];
+        if (previous.pointerId !== event.pointerId) continue;
+        if (previous.type !== 'pointermove') break;
+        moves.push(i);
+      }
+      if (moves.length >= 2) state.panDeferredPointers.splice(moves[0], 1);
+    }
+    if (state.panDeferredPointers.length >= 128) { state.panQueueOverflows += 1; releaseAll(false, false); return; }
+    state.panDeferredPointers.push(event);
+  }
+
+  function pumpPanPointerQueue() {
+    if (state.panDrainingPointers || state.panRelease || state.clickJob || state.clickQueue.length
+        || state.clickFrame !== null || state.clickTimer !== null || state.pointerQueue.length
+        || window.__warzoneCommands?.report?.()?.nativePendingSites || pendingBuildPanelClose() || pendingTruckSelection()) return;
+    state.panDrainingPointers = true;
+    const replaying = state.replayingPointers;
+    state.replayingPointers = true;
+    try {
+      while (state.panDeferredPointers.length && !state.panRelease && !state.clickJob
+          && state.clickFrame === null && state.clickTimer === null) {
+        processPointer(state.panDeferredPointers.shift(), true);
+      }
+    } finally { state.replayingPointers = replaying; state.panDrainingPointers = false; }
+    flushAfterInput();
+  }
+
   function releaseTilt(clearBudget = true) {
     clearTimeout(state.tiltReleaseTimer);
     state.tiltReleaseTimer = null;
@@ -1054,13 +1266,189 @@
   }
 
   function advanceTilt(dy) {
-    if (Math.abs(dy) < 1) return;
+    if (!Number.isFinite(dy) || Math.abs(dy) < 1e-6) return;
     state.tiltBudget += dy;
     pumpTilt();
     state.tiltMoves += 1;
   }
 
+  function rotationAllowed() {
+    if (!state.battleActive || window.__towersHtml?.isEnded?.()
+        || window.__towersHtml?.report?.().menuRequested) return false;
+    if (campaign && (!window.__warzoneCampaign || window.__warzoneCampaign.nativeUiActive())) return false;
+    if (ffa && (!window.__warzoneFfa || window.__warzoneFfa.nativeUiActive())) return false;
+    if (window.__warzoneCommands?.nativeMenuOpen?.()
+        || window.__blockNightResearch?.report?.().open
+        || window.__warzoneIntelligence?.report?.().open) return false;
+    return true;
+  }
+
+  function releaseRotation(clearBudget = true) {
+    clearTimeout(state.rotationReleaseTimer);
+    state.rotationReleaseTimer = null;
+    if (state.rotationReleaseFrame !== null && typeof cancelAnimationFrame === 'function')
+      cancelAnimationFrame(state.rotationReleaseFrame);
+    state.rotationReleaseFrame = null;
+    if (clearBudget) state.rotationBudget = 0;
+    if (state.rotationKey) {
+      const key = state.rotationKey; state.rotationKey = null;
+      dispatchKey(key.value, key.code, key.number, false, false, false, 3);
+    }
+  }
+
+  function pumpRotation() {
+    if (state.rotationKey || Math.abs(state.rotationBudget) + 1e-9 < ROTATE_STEP
+        || state.multi?.gesture !== 'rotate' || state.panRelease) return;
+    if (!rotationAllowed()) {
+      releaseRotation(); state.ignoreUntilAllUp = true; return;
+    }
+    const direction = Math.sign(state.rotationBudget);
+    state.rotationBudget -= direction * ROTATE_STEP;
+    const next = direction > 0 ? {value:'6',code:'Numpad6',number:102}
+        : {value:'4',code:'Numpad4',number:100};
+    state.rotationKey = next; state.rotationSteps += 1;
+    dispatchKey(next.value, next.code, next.number, true, false, false, 3);
+    const finish = () => {
+      if (state.rotationKey !== next) return;
+      releaseRotation(false); pumpRotation();
+    };
+    // Match the existing native pitch pulses: consume a rendered frame, with a
+    // bounded fallback. Lift/cancel/navigation releases the key immediately.
+    if (typeof requestAnimationFrame === 'function') {
+      state.rotationReleaseFrame = requestAnimationFrame(() => {
+        state.rotationReleaseFrame = requestAnimationFrame(finish);
+      });
+      state.rotationReleaseTimer = setTimeout(finish, 100);
+    } else state.rotationReleaseTimer = setTimeout(finish, 32);
+  }
+
+  function advanceRotation(angle) {
+    if (!Number.isFinite(angle) || Math.abs(angle) < 1e-6) return;
+    if (state.rotationBudget * angle < 0 || state.rotationKey
+        && (state.rotationKey.code === 'Numpad6' ? 1 : -1) !== Math.sign(angle)) releaseRotation();
+    // Never leave an unbounded queue of camera movement after a fast twist.
+    state.rotationBudget = Math.max(-Math.PI, Math.min(Math.PI, state.rotationBudget + angle));
+    state.rotationMoves += 1;
+    pumpRotation();
+  }
+
+  function clearRotationIntentTimer() {
+    clearTimeout(state.rotationIntentTimer); state.rotationIntentTimer = null;
+  }
+
+  function clearZoomIntentTimer() {
+    clearTimeout(state.zoomIntentTimer); state.zoomIntentTimer = null;
+  }
+
+  function sameMultiGesture(gesture) {
+    const ids = [...state.pointers.keys()];
+    return state.multi === gesture && state.pointers.size === 2 && !state.ignoreUntilAllUp
+        && canvas() === gesture.canvas && gesture.session === (window.__towersHtml?.session || '')
+        && ids.every((id, index) => id === gesture.pointerIds[index]);
+  }
+
+  function rotationIntentReady(gesture, distance, delta) {
+    if (distance < 24 || gesture.startDistance < 24) {
+      gesture.rotationIntent = null; clearRotationIntentTimer(); return false;
+    }
+    if (Math.abs(delta) > 1e-6) {
+      const direction = Math.sign(delta), previous = gesture.rotationIntent;
+      gesture.rotationIntent = previous?.direction === direction
+          ? {...previous, samples:previous.samples + 1}
+          : {direction, origin:gesture.angleTravel - delta, samples:1, since:performance.now()};
+    }
+    const intent = gesture.rotationIntent, offset = gesture.angleTravel - gesture.rotationBaseAngle;
+    if (!intent || Math.sign(offset) !== intent.direction) { clearRotationIntentTimer(); return false; }
+    const travel = Math.min(Math.abs(offset), intent.direction * (gesture.angleTravel - intent.origin));
+    const threshold = gesture.gesture === null ? ROTATE_START : ROTATE_HANDOFF;
+    const deliberate = gesture.rotationWorld && travel >= threshold
+        && travel * Math.min(distance, gesture.startDistance) / 2 >= ROTATE_TRAVEL;
+    if (!deliberate) { clearRotationIntentTimer(); return false; }
+    if (intent.samples >= 2 || performance.now() - intent.since >= ROTATE_SETTLE_MS) {
+      clearRotationIntentTimer(); return true;
+    }
+    if (state.rotationIntentTimer === null) {
+      state.rotationIntentTimer = setTimeout(() => {
+        state.rotationIntentTimer = null;
+        if (sameMultiGesture(gesture)) {
+          if (rotationAllowed()) handleMultiMove(); else cancelMulti();
+        }
+      }, Math.max(1, ROTATE_SETTLE_MS - (performance.now() - intent.since)));
+    }
+    return false;
+  }
+
+  function retainZoomOwnership(gesture, distance, distanceDelta, angleDelta) {
+    const motion = gesture.zoomMotion;
+    motion.push({distance, angle:gesture.angleTravel});
+    if (motion.length > 6) motion.shift();
+    if (gesture.gesture !== 'zoom' || !gesture.zoomOutput) return false;
+    const previous = motion[motion.length - 2] || motion[0], recent = motion[0];
+    const radial = Math.abs(distance - recent.distance);
+    const angular = Math.abs(gesture.angleTravel - recent.angle) * Math.min(distance, recent.distance);
+    const currentAngular = Math.abs(angleDelta) * Math.min(distance, previous.distance);
+    if (Math.abs(distanceDelta) > 1e-6 && Math.abs(distanceDelta) > currentAngular * 1.2
+        && radial > angular * 1.2) {
+      // Ongoing emitted pinch owns its radial movement. Discard incidental
+      // angular drift so stopping the pinch cannot replay that old drift as yaw.
+      gesture.rotationBaseAngle = gesture.angleTravel; gesture.rotationIntent = null;
+      clearRotationIntentTimer(); return true;
+    }
+    return false;
+  }
+
+  function zoomIntentReady(gesture, distance, delta) {
+    if (Math.abs(delta) > 1e-6) {
+      const direction = Math.sign(delta), previous = gesture.zoomIntent;
+      gesture.zoomIntent = previous?.direction === direction
+          ? {...previous, samples:previous.samples + 1}
+          : {direction, samples:1, since:performance.now()};
+    }
+    const intent = gesture.zoomIntent, offset = distance - gesture.startDistance;
+    if (!intent || Math.sign(offset) !== intent.direction || Math.abs(offset) < PINCH_START) {
+      clearZoomIntentTimer(); return false;
+    }
+    if (intent.samples >= 2 || performance.now() - intent.since >= ROTATE_SETTLE_MS) {
+      clearZoomIntentTimer(); return true;
+    }
+    if (state.zoomIntentTimer === null) state.zoomIntentTimer = setTimeout(() => {
+      state.zoomIntentTimer = null;
+      if (sameMultiGesture(gesture)) {
+        if (rotationAllowed()) handleMultiMove(); else cancelMulti();
+      }
+    }, Math.max(1, ROTATE_SETTLE_MS - (performance.now() - intent.since)));
+    return false;
+  }
+
+  function beginMultiRotation(gesture, delta) {
+    const previous = gesture.gesture, offset = gesture.angleTravel - gesture.rotationBaseAngle;
+    clearRotationIntentTimer(); clearZoomIntentTimer(); releaseTilt(); releaseRotation(); releaseCameraKeys();
+    if (previous === 'pan' && window.__warzoneDuelConfig?.mode !== 'duel')
+      finishFramePan({...gesture, x:gesture.center.x, y:gesture.center.y}, true);
+    else releaseMouse();
+    setQueueModifier(false);
+    gesture.gesture = 'rotate';
+    // A handoff accepts the present angular intent, not the old pan/span/tilt
+    // history. Start with one small yaw step and rebase subsequent travel.
+    const accepted = previous === null ? offset
+        : Math.sign(offset) * Math.min(Math.abs(delta) || ROTATE_STEP, ROTATE_STEP);
+    gesture.rotationAngle = gesture.angleTravel;
+    advanceRotation(accepted);
+    if (state.panRelease) state.afterInput.push(() => {
+      if (sameMultiGesture(gesture) && rotationAllowed()) pumpRotation();
+    });
+  }
+
   function radarPoint(x, y) {
+    if(campaign&&(!window.__warzoneCampaign||window.__warzoneCampaign.nativeUiActive()))return null;
+    if(campaign){
+      const geometry=campaignRadarGeometry();if(!geometry)return null;
+      const {bounds,radar,scaleX,scaleY,c,s}=geometry;
+      const dx=Math.trunc((x-bounds.left)/scaleX)-radar.centerX,dy=Math.trunc((y-bounds.top)/scaleY)-radar.centerY;
+      const localX=dx*c-dy*s,localY=dx*s+dy*c;
+      if(localX < -radar.width/2||localX >= radar.width/2||localY < -radar.height/2||localY >= radar.height/2)return null;
+      return {x:(x-bounds.left)/bounds.width,y:(y-bounds.top)/bounds.height};
+    }
     if(window.__warzoneCommands?.nativeHudHidden?.())return null;
     const target = canvas();
     if (!target) return null;
@@ -1092,6 +1480,7 @@
   }
 
   function isBattlefieldPoint(x, y) {
+    if(campaign&&(!window.__warzoneCampaign||window.__warzoneCampaign.nativeUiActive()))return false;
     const target = canvas();
     if (!target || radarPoint(x, y) !== null) return false;
     const bounds = target.getBoundingClientRect();
@@ -1259,6 +1648,26 @@
             polishedTheme.href = '/warzone/ui/towers-shell.css';
             surface.head.appendChild(polishedTheme);
           }
+          if (!surface.getElementById('wt-towers-monochrome-style')) {
+            const monochromeTheme = surface.createElement('link');
+            monochromeTheme.id = 'wt-towers-monochrome-style';
+            monochromeTheme.rel = 'stylesheet';
+            monochromeTheme.href = '/warzone/ui/towers-monochrome.css';
+            surface.head.appendChild(monochromeTheme);
+          }
+          if (!surface.getElementById('wt-towers-game-controls-style')) {
+            const gameControls = surface.createElement('link');
+            gameControls.id = 'wt-towers-game-controls-style';
+            gameControls.rel = 'stylesheet';
+            gameControls.href = '/warzone/ui/towers-game-controls.css';
+            surface.head.appendChild(gameControls);
+          }
+          if (!surface.getElementById('wt-towers-feedback-script')) {
+            const feedback = surface.createElement('script');
+            feedback.id = 'wt-towers-feedback-script';
+            feedback.src = '/warzone/ui/towers-feedback.js';
+            surface.head.appendChild(feedback);
+          }
         }
       }
 
@@ -1276,7 +1685,7 @@
           "blocknight-stop": "hand-palm", "blocknight-base": "house",
           "blocknight-zoom-close": "x", "blocknight-zoom-battle": "crosshair",
           "blocknight-zoom-map": "map-pin", "blocknight-tech": "flask",
-          "blocknight-help": "question", "blocknight-music": "music-notes", "blocknight-save": "save", "blocknight-rewards": "crystal", "blocknight-lassat": "crosshair", "wt-select-move": "crosshair", "wt-select-trucks": "stack", "wt-deselect-units": "deselect"
+          "blocknight-help": "question", "blocknight-music": "music-notes", "blocknight-save": "save", "blocknight-rewards": "crystal", "blocknight-lassat": "crosshair", "wt-select-move": "crosshair", "wt-select-trucks": "stack", "wt-deselect-units": "deselect", "wt-demolish": "x", "wt-intelligence": "crosshair"
         };
         const icon = document.createElement("img");
         icon.src = `/warzone/ui/icons/${iconNames[id]}.svg`;
@@ -1358,8 +1767,27 @@
           'Crystal wallet and active match boosts', () => window.WarzoneRewards?.open?.());
         rewards.setAttribute('aria-expanded','false');
         techGroup.append(rewards);
+        if(campaign||ffa)rewards.remove();
         const save = makeButton('blocknight-save', 'SAVE',
           'Save this game on your phone', () => window.WarzoneSavedGames?.save?.());
+        save.setAttribute('aria-live', 'polite');
+        let saveFeedbackTimer = 0;
+        const syncSaveButton = () => {
+          clearTimeout(saveFeedbackTimer);
+          const snapshot = window.WarzoneSavedGames?.report?.() || {};
+          const busy = snapshot.busy === true;
+          const savedFor = Date.now() - Number(snapshot.statusAt || 0);
+          const saved = snapshot.phase === 'saved' && savedFor < 4000;
+          const failed = snapshot.phase === 'error';
+          save.querySelector('span').textContent = busy ? 'SAVING…' : saved ? 'SAVED' : failed ? 'RETRY' : 'SAVE';
+          save.disabled = Boolean(state.stopNonce) || busy || snapshot.ended === true;
+          save.setAttribute('aria-busy', String(busy));
+          save.dataset.saveState = busy ? 'saving' : saved ? 'saved' : failed ? 'error' : 'idle';
+          save.title = (busy || saved || failed) && snapshot.status ? snapshot.status : 'Save this game on your phone';
+          if (saved) saveFeedbackTimer = setTimeout(syncSaveButton, Math.max(1, 4000 - savedFor));
+        };
+        window.addEventListener('warzone-save-state', syncSaveButton);
+        syncSaveButton();
         techGroup.append(save);
         const laser = makeButton('blocknight-lassat', 'SELECT SAT',
           'Select your Laser Satellite Command Post, then target an enemy', () => window.WarzoneRewards?.armLaser?.());
@@ -1373,10 +1801,13 @@
         const commands = document.createElement("div");
         commands.className = "bn-command-group";
         const duelNavigation = window.__warzoneDuelConfig?.mode === 'duel';
-        for (const page of (duelNavigation ? ["build", "design", "factory", "queue"] : ["build", "factory", "queue"])) {
+        // Actual DOM order also defines keyboard and accessibility navigation.
+        // Moving the existing Research button keeps its toggle/input handlers.
+        if (!duelNavigation) commands.appendChild(tech);
+        for (const page of (duelNavigation ? ["build", "design", "factory", "queue"] : ["factory", "queue"])) {
           const b = document.createElement("button");
-          b.id = `wt-open-${page}`; b.type = "button"; b.textContent = !duelNavigation && page === 'factory' ? 'PRODUCTION' : page.toUpperCase();
-          b.title = `Open ${!duelNavigation && page === 'factory' ? 'production' : page}`;
+          b.id = `wt-open-${page}`; b.type = "button"; b.textContent = !duelNavigation && page === 'factory' ? 'MANUFACTURING' : page.toUpperCase();
+          b.title = `Open ${!duelNavigation && page === 'factory' ? 'manufacturing' : page}`;
           b.setAttribute('aria-controls', page === 'build' ? 'wt-build-sidebar' : 'wt-command-pages');
           b.setAttribute('aria-expanded','false');
           bindTouchCommand(b, () => {
@@ -1397,8 +1828,11 @@
         if(window.__warzoneDuelConfig?.mode==='duel')centre.append(select,all,auto,box,stop,trucks);
         else {
           auto.remove();box.remove();
+          const demolish=makeButton('wt-demolish','DEMOLISH','Use selected construction trucks to demolish one of your structures',()=>window.__warzoneCommands.toggleDemolish());
+          demolish.setAttribute('aria-pressed','false');
+      const intelligence=makeButton('wt-intelligence','INTELLIGENCE','Show intelligence for the current battle',()=>campaign?window.__warzoneCampaign?.openIntel?.():window.__warzoneIntelligence?.toggle());
           const deselect=makeButton('wt-deselect-units','DESELECT','Clear all unit selection; existing orders continue',()=>window.__warzoneCommands.deselectUnits());
-          centre.append(select,all,deselect,stop,trucks);
+          centre.append(demolish,intelligence,all,deselect,stop,trucks);
         }
         hudDocument.body.appendChild(centre);
         const toggle=hudDocument.createElement('button');toggle.id='wt-field-toggle';toggle.type='button';
@@ -1467,6 +1901,15 @@
       }
     }
     return true;
+  }
+
+  function activateFooterBuild() {
+    if (window.__warzoneDuelConfig?.mode === 'duel' || !state.battleActive || state.stopNonce
+        || window.__towersHtml?.isEnded?.() || !prepareHeaderMenu('commands')) return false;
+    window.WarzoneRewards?.cancelTarget?.();
+    // The existing toggle owns truck selection, queued work and input restoration.
+    // Moving the control must not create another construction implementation.
+    return window.__warzoneCommands?.toggle?.('build');
   }
 
   function toggleHelp() {
@@ -1539,14 +1982,15 @@
             <p>Waves follow their own timer, even while enemies remain. During a countdown, <b>SKIP WAVE</b> calls the next wave early; it does not clear enemies. Destroying enemies earns power.</p></section>
           <section><h2>CRYSTALS &amp; MATCH BOOSTS</h2>
             <p><b>REWARDS</b> on Home shows your saved phone wallet and portable inventory. A new wallet starts with <b>350 crystals</b>. Each actually completed wave earns <b>5 crystals</b>, saved once even if you later lose. Waves can overlap; starting or skipping a wave earns nothing. A win also pays <b>60 / 80 / 100</b> on Easy / Medium / Hard, plus <b>50</b> for that map's first completion. The final receipt includes crystals already earned during play.</p>
-            <p>On Home use <b>Shop</b> to buy stock and <b>Next match</b> to choose how many to take. In-game <b>REWARDS</b> buys boosts for the current match immediately. Purchases work on <b>any map</b>. Bulk quantities include <b>5, 10, 15, 20 and +5</b>. You can take up to <b>three fortresses combined</b>. Every purchased structure still uses its normal in-game power cost.</p>
-            <p><b>SAVE</b> keeps the current native game on your phone. Open <b>Saved Games</b> on Home to load or delete it. Saved matches retain their wave credits, purchases and used allowances; reloading pays no crystals twice. Unused stock in a saved match stays reserved until its last save is deleted.</p>
+            <p>Tap a reward’s <b>picture or item row</b> to buy one at its crystal price. On Home, bought stock is selected for Play within the match limits. Tap its <b>Selected</b> count to choose how much to use; <b>0</b> leaves it stored. In-game <b>REWARDS</b> adds the item to the current match after the game accepts it. Purchases work on <b>any map</b>. You can use up to <b>three fortresses combined</b>. Every purchased structure still uses its normal in-game power cost. <b>Gain 10 Crystals</b> opens an optional rewarded ad. Ad privacy choices remain in the compact top row when available.</p>
+            <p><b>SAVE</b> shows <b>SAVING…</b> while the game is written to your phone and <b>SAVED</b> only after it is verified. If saving fails, the button shows <b>RETRY</b> and explains the problem. Open <b>Saved Games</b> on Home to load or delete a match. Saved matches retain their wave credits, purchases and used allowances; reloading pays no crystals twice. Unused stock in a saved match stays reserved until its last save is deleted.</p>
             <p>A building purchase is used when its foundation appears, including if it is later destroyed. Unused building stock returns after the match or a confirmed return Home. Research accelerator adds <b>25%</b> speed while you choose topics; Supply reserve adds <b>1,000</b> starting power. These two boosts are used when the match starts.</p></section>
           <section><h2>LASER SATELLITE</h2>
             <p>The <b>Laser Satellite Command Post</b> is a weapon, separate from your Satellite Uplink. Build and complete the post, tap it on the battlefield to select it, then press <b>FIRE SAT</b> and tap a visible enemy unit or building. Its native recharge time is shown in the header. Press <b>CANCEL SAT</b> or Back to cancel targeting.</p></section>
           <section><h2>BUILD WITH YOUR TRUCKS</h2>
-            <p><b>BUILD</b> selects construction trucks visible in your view. Choose a structure, then tap valid locations to queue sites. For walls, gates, towers and hardpoints, drag a straight line and release to queue the clear sites shown in the preview. Factories, labs, power generators and modules stay single placements. Green blueprints mark accepted orders. Your manually selected truck group is kept when choosing structures.</p>
-            <p>For another area, move the view and use <b>TRUCKS</b> to select its visible trucks. <b>EXIT · KEEP ORDERS</b> or <b>SELECT / MOVE</b> leaves placement while trucks continue. <b>STOP</b> cancels selected trucks’ work and remaining sites.</p></section>
+            <p><b>BUILD</b> in the bottom-left bar selects construction trucks visible in your view. Choose a structure, then tap valid locations to queue sites. For walls, gates, towers and hardpoints, drag a straight line and release to queue the clear sites shown in the preview. Factories, labs, power generators and modules stay single placements. Green blueprints mark accepted orders. Your manually selected truck group is kept when choosing structures.</p>
+            <p>For another area, move the view and use <b>TRUCKS</b> to select its visible trucks. <b>EXIT · KEEP ORDERS</b> leaves placement while trucks continue. <b>STOP</b> cancels selected trucks’ work and remaining sites.</p>
+            <p>To remove a structure, select construction trucks and choose <b>DEMOLISH</b>, then tap your structure or unfinished foundation. Your Command Centre is protected. If other trucks are building that foundation, stop them first. <b>CANCEL</b> leaves targeting; <b>STOP</b> stops selected trucks after an order. <b>REMOVE</b> in QUEUE only cancels the waiting order.</p></section>
           <section><h2>UPGRADE WITH MODULES</h2>
             <p>In <b>BUILD → MODULES</b>, choose an upgrade and tap a highlighted, completed matching building: Research Module → research lab; Power Module → power generator; Factory Module → vehicle or VTOL factory.</p>
             <p>Labs and power generators each take one module; vehicle and VTOL factories take two. Highlights show ready, upgrading or full buildings. Finish the matching structure or research the module first if none is ready.</p></section>
@@ -1554,18 +1998,18 @@
             <p>Top <b>RESEARCH</b> opens the full page. Choose a lab and tap one or more available topics. Numbers show your selection order; tap a selected topic again to deselect it. <b>ADD TO LAB … QUEUE</b> adds the selection in that order. Each lab follows its own queue. Use <b>×</b> to remove a waiting topic.</p>
             <p>Tap one of your completed labs on the battlefield to open that lab’s full research page.</p></section>
           <section><h2>CHECK CURRENT ACTIVITY</h2>
-            <p>Bottom-left <b>RESEARCH</b> and <b>PRODUCTION</b> open narrow status panels while you watch the battlefield. Research shows each lab’s current topic and estimated progress; Production shows current units, with vehicle and cyborg tabs.</p>
-            <p>These panels show current work only. Use top <b>RESEARCH</b> or <b>PRODUCTION</b> to change queues. Tap the selected footer button again or <b>×</b> to close the panel.</p></section>
+            <p>Bottom-left <b>ANALYSIS</b> and <b>MANUFACTURING</b> open narrow status panels while you watch the battlefield. Analysis shows each lab’s current topic and estimated progress; Manufacturing shows current units, with vehicle and cyborg tabs.</p>
+            <p>These panels show current work only. Use top <b>RESEARCH</b> or <b>MANUFACTURING</b> to change queues. Tap the selected footer button again to close the panel.</p></section>
           <section><h2>MAKE UNITS IN A FACTORY</h2>
-            <p>Open top <b>PRODUCTION</b>, or tap one of your completed factories on the battlefield. Select the intended factory, choose <b>QUANTITY</b> (1, 5, 10 or 20), then <b>PRODUCE</b> a compatible design. Orders belong to the selected factory. Use <b>UNITS</b>, <b>DESIGN</b> and <b>BLUEPRINTS</b> inside Production to switch tasks.</p>
-            <p>Production uses normal power and build time. Research, factory type, modules and unit limits still apply. The full page shows current work and waiting units; <b>QUEUE</b> shows wider activity.</p></section>
+            <p>Open top <b>MANUFACTURING</b>, or tap one of your completed factories on the battlefield. Select the intended factory, choose <b>QUANTITY</b> (1, 5, 10 or 20), then <b>PRODUCE</b> a compatible design. Orders belong to the selected factory. Use <b>UNITS</b>, <b>DESIGN</b> and <b>BLUEPRINTS</b> inside Manufacturing to switch tasks.</p>
+            <p>Manufacturing uses normal power and build time. Research, factory type, modules and unit limits still apply. The full page shows current work and waiting units; <b>QUEUE</b> shows wider activity.</p></section>
           <section><h2>KEEP YOUR BLUEPRINTS</h2>
-            <p>In <b>PRODUCTION → DESIGN</b>, choose a researched body, propulsion and weapon or system; name it and <b>SAVE BLUEPRINT</b>. Edit with <b>SAVE CHANGES</b>, or keep another version with <b>SAVE AS NEW</b>.</p>
-            <p>In Production’s <b>•••</b> menu, <b>SAVE DESIGN TO PHONE</b> keeps the selected factory design. <b>BLUEPRINTS</b> stores blueprints on this phone between games and app restarts. Saving a blueprint does not unlock its parts: research them again in the current battle before production.</p></section>
+            <p>In <b>MANUFACTURING → DESIGN</b>, choose a researched body, propulsion and weapon or system; name it and <b>SAVE BLUEPRINT</b>. Edit with <b>SAVE CHANGES</b>, or keep another version with <b>SAVE AS NEW</b>.</p>
+            <p>In Manufacturing’s <b>•••</b> menu, <b>SAVE DESIGN TO PHONE</b> keeps the selected factory design. <b>BLUEPRINTS</b> stores blueprints on this phone between games and app restarts. Saving a blueprint does not unlock its parts: research them again in the current battle before production.</p></section>
           <section><h2>MOVE, LOOK &amp; RETURN</h2>
             <p><b>Tap</b> to select or give an order; <b>swipe</b> to pan; <b>pinch</b> to zoom. Move two fingers together up/down to tilt. Tap the minimap to move the view; <b>BASE</b> returns to your Command Centre.</p>
-            <p>The bottom-left units icon opens <b>SELECT / MOVE</b>, <b>ALL UNITS</b>, <b>DESELECT</b>, <b>STOP</b> and <b>TRUCKS</b>. ALL UNITS selects combat units. DESELECT clears selection while units continue their existing orders. Android <b>Back</b> closes the current panel first; from the battlefield it asks <b>Return to Main Menu</b>.</p>
-            <p>Tap a top menu button again to close its menu. Set control size above. Download optional music on the start screen once. Each map has an assigned soundtrack; top <b>MUSIC</b> shows its title and lets you turn music <b>ON</b> or <b>OFF</b>. Your choice stays saved on this phone and does not change sound effects.</p></section>`;
+            <p>The bottom-left units icon opens <b>DEMOLISH</b>, <b>INTELLIGENCE</b>, <b>ALL UNITS</b>, <b>DESELECT</b>, <b>STOP</b> and <b>TRUCKS</b>. ALL UNITS selects combat units. DESELECT clears selection while units continue their existing orders. Android <b>Back</b> closes the current panel first; from the battlefield it asks <b>Return to Main Menu</b>.</p>
+            <p>Tap a top menu button again to close its menu. Set control size above. Music is included in the app and available offline. Each map has an assigned soundtrack; top <b>MUSIC</b> shows its title and lets you turn music <b>ON</b> or <b>OFF</b>. Your choice stays saved on this phone and does not change sound effects.</p></section>`;
       help.innerHTML = `
         <header><div><span class="wt-help-eyebrow">${duel?'WARZONE 1V1':'WARZONE TOWERS'}</span>
           <h1 id="wt-help-title">${duel?'FIELD GUIDE':'HOW TO PLAY'}</h1></div>
@@ -1573,10 +2017,32 @@
         <div class="wt-help-content"${duel?'':' tabindex="0" aria-label="How to play; scroll for more"'}>${guideContent}</div>
         <footer><span>The battle continues while this guide is open.</span>
           ${duel ? '<button type="button" class="wt-help-back">BACK TO BATTLE</button>' : ''}</footer>`;
+      if(campaign){
+        help.querySelector('.wt-help-eyebrow').textContent='WARZONE CAMPAIGN';
+        help.querySelector('.wt-help-content').innerHTML='<section><h2>FOLLOW THE CAMPAIGN</h2><p>Read the original mission briefings in <b>INTELLIGENCE</b>. Recover artefacts to unlock research. Original enemies, mission timers and objectives apply.</p></section><section><h2>COMMAND YOUR UNITS</h2><p><b>ALL COMBAT</b> in the header keeps combat units selected, including new units. Constructors, repair units, sensors and transports are excluded. Turn it off to select units individually. Selection pauses while building, using native mission panels or reading a briefing.</p></section><section><h2>BUILD, RESEARCH &amp; MANUFACTURE</h2><p>Use the existing Build, Research and Manufacturing controls. Only parts and structures unlocked in the current campaign are available. Native transport loading and mission instructions remain part of the original game.</p></section><section><h2>SAVE &amp; RETURN</h2><p><b>SAVE</b> stores the complete campaign checkpoint on this phone. Campaign saves are separate from Towers. Android Back closes a mission panel first, then offers Return to Main Menu.</p></section>';
+      }
+      if(ffa){
+        help.querySelector('.wt-help-eyebrow').textContent='FREE FOR ALL';
+        help.querySelector('.wt-help-content').innerHTML='<section><h2>EMAG FREE FOR ALL</h2><p>You and three independent bots fight on the supplied EMAG map. Every player is an opponent. VTOL aircraft, factories and pads are disabled. Your chosen Easy, Medium or Hard difficulty applies to all three bots.</p></section><section><h2>BUILD YOUR ARMY</h2><p>Each authored base has trucks, research labs and a working economy. Build vehicle and cyborg factories, research ground technology, design units and manufacture your army. Use <b>BUILD</b>, <b>RESEARCH</b> and <b>MANUFACTURING</b>; tap a lab or factory to open its menu.</p></section><section><h2>COMMAND &amp; SURVIVE</h2><p>Tap to select or order, swipe to pan, pinch to zoom and use <b>BASE</b> to return home. The bottom-left drawer offers combat-unit selection, trucks, deselect, stop, demolish and Intelligence. The original skirmish rules decide victory when opposing players are eliminated; there are no Towers waves or crystal purchases in FFA.</p></section><section><h2>SAVE &amp; RETURN</h2><p><b>SAVE</b> stores this complete FFA match on your phone. Open <b>FFA SAVES</b> in the FFA setup to continue. FFA, Campaign and Towers saves are separate. Android Back closes the current menu, then offers Return to Main Menu.</p></section>';
+      }
       if (!duel) {
+        // The offline field guide shares the Home content and current mode data.
+        // Keep the existing Help/input lifecycle; the reader never calls the game bridge.
+        const reader = hudDocument.createElement('iframe');
+        reader.title = 'Field guide: research paths and how to play';
+        reader.src = '/assets/guide/index.html?embedded=1&mode=' + (campaign ? 'campaign' : ffa ? 'ffa' : 'towers');
+        reader.className = 'wt-field-guide-reader';
+        const content = help.querySelector('.wt-help-content');
+        content.replaceChildren(reader);
+        content.style.cssText = 'display:block;padding:0;flex:1 1 auto;min-height:0;overflow:hidden';
+        help.style.cssText = 'width:calc(100vw - 24px);height:calc(100dvh - 88px);max-height:calc(100dvh - 88px)';
+        reader.style.cssText = 'display:block;width:100%;height:100%;border:0;background:#0b0b0b';
+        help.querySelector('h1').textContent = 'FIELD GUIDE';
+        help.querySelector('header').style.display = 'none';
+        help.querySelector('footer').style.display = 'none';
         help.classList.add('wt-towers-guide');
         const version = window.BlockNightAndroid?.appVersion?.();
-        if (version) help.querySelector('.wt-help-eyebrow').textContent = 'WARZONE TOWERS · v' + version;
+        if (version) help.querySelector('.wt-help-eyebrow').textContent = (campaign?'CAMPAIGN':ffa?'FREE FOR ALL':'WARZONE TOWERS') + ' · v' + version;
         if (!hudDocument.getElementById('wt-towers-guide-style')) {
           const guideStyle = hudDocument.createElement('style');
           guideStyle.id = 'wt-towers-guide-style';
@@ -1689,7 +2155,9 @@
       boxOneShot
     };
     state.single.slop = (window.__warzoneCommands?.isPlacement()||window.__warzoneCommands?.nativeBuildOpen?.()) ? Math.max(TAP_SLOP, 14) : TAP_SLOP;
+    state.single.nativeOnly=campaign&&(!window.__warzoneCampaign||window.__warzoneCampaign.nativeUiActive());
     focusCanvas();
+    if(state.single.nativeOnly){mouseMove(event.clientX,event.clientY,0);return;}
     if (radar !== null) {
       state.lastRadarPoint = radar;
       // Classify taps first: tiny finger drift must not become a native drag.
@@ -1698,6 +2166,11 @@
     // Resume camera observation at touch-down after closing an HTML page.
     // This is non-blocking; the ordinary touch-up uses the current projection.
     if(window.__warzoneDuelConfig?.mode!=='duel'&&isBattlefieldPoint(event.clientX,event.clientY))window.WarzoneTerrain?.active?.(true,false);
+    if(window.__warzoneCommands?.isDemolishing?.()){
+      state.single.demolition=true;
+      window.__warzoneCommands.previewDemolish(event.clientX,event.clientY);
+      mouseMove(event.clientX,event.clientY,0);return;
+    }
     if (window.__warzoneCommands?.isPlacement()) window.__warzoneCommands.previewAt(event.clientX, event.clientY);
     if(!boxOneShot&&isBattlefieldPoint(event.clientX,event.clientY))state.single.linePlacement=window.__warzoneCommands?.beginLinePlacement?.(event.clientX,event.clientY)||null;
     mouseMove(event.clientX, event.clientY, 0);
@@ -1738,8 +2211,19 @@
     gesture.panning = true;
     state.pans += 1;
     state.lastPanStartLatencyMs = performance.now() - gesture.downAt;
-    pressMouse(1, gesture.startX, gesture.startY);
-    advancePan(gesture, gesture.x, gesture.y);
+    if (window.__warzoneDuelConfig?.mode === 'duel') {
+      pressMouse(1, gesture.startX, gesture.startY);
+      advancePan(gesture, gesture.x, gesture.y);
+    } else {
+      const point = panPoint(gesture.startX, gesture.startY);
+      if (!point) { gesture.panning = false; return; }
+      gesture.framePan = true;
+      gesture.panX = point.x; gesture.panY = point.y;
+      observeNativeFrames(); gesture.panClock = state.nativeFrameContext; gesture.panHeldFrame = state.nativeFrames;
+      pressMouse(1, point.x, point.y);
+      const first = panPoint(gesture.x, gesture.y);
+      if (first) advancePan(gesture, first.x, first.y);
+    }
   }
 
   function beginMulti() {
@@ -1747,6 +2231,7 @@
     clearMultiMove();
     clearLongPress();
     releaseTilt();
+    releaseRotation();
     releaseMouse();
     releaseCameraKeys();
     if (state.single?.boxOneShot) {
@@ -1763,7 +2248,11 @@
     };
     state.multi = {
       gesture: null,
+      canvas: canvas(),
+      session: window.__towersHtml?.session || '',
+      pointerIds: [...state.pointers.keys()].slice(0, 2),
       startCenter: center,
+      startPoints: points.slice(0, 2).map(point => ({x:point.x, y:point.y})),
       center,
       panX: center.x,
       panY: center.y,
@@ -1774,9 +2263,21 @@
       stepDistance: 0
     };
     state.multi.stepDistance = state.multi.startDistance;
+    state.multi.distance = state.multi.startDistance;
+    state.multi.zoomIntent = null;
+    state.multi.zoomOutput = 0;
+    state.multi.zoomMotion = [{distance:state.multi.startDistance, angle:0}];
+    state.multi.angle = Math.atan2(points[1].y - points[0].y, points[1].x - points[0].x);
+    state.multi.angleTravel = 0;
+    state.multi.rotationAngle = 0;
+    state.multi.rotationBaseAngle = 0;
+    state.multi.rotationIntent = null;
+    state.multi.rotationWorld = points.slice(0, 2).every(point => isBattlefieldPoint(point.x, point.y));
   }
 
   function clearMultiMove() {
+    clearRotationIntentTimer();
+    clearZoomIntentTimer();
     if (state.multiMoveFrame !== null && typeof cancelAnimationFrame === 'function') cancelAnimationFrame(state.multiMoveFrame);
     clearTimeout(state.multiMoveTimer);
     state.multiMoveFrame = null; state.multiMoveTimer = null;
@@ -1799,37 +2300,72 @@
   function handleMultiMove() {
     const points = [...state.pointers.values()];
     if (points.length < 2 || !state.multi) return;
+    if (!sameMultiGesture(state.multi) || !rotationAllowed()) { cancelMulti(); return; }
     const center = {
       x: (points[0].x + points[1].x) / 2,
       y: (points[0].y + points[1].y) / 2
     };
     const distance = Math.hypot(points[0].x - points[1].x,
         points[0].y - points[1].y);
+    const distanceDelta = distance - state.multi.distance;
+    state.multi.distance = distance;
+    const angle = Math.atan2(points[1].y - points[0].y, points[1].x - points[0].x);
+    // Accumulate adjacent signed angles, including a crossing of -pi/+pi.
+    // Measuring only the angle from touchdown reverses a twist beyond 180deg.
+    const delta = Math.atan2(Math.sin(angle - state.multi.angle), Math.cos(angle - state.multi.angle));
+    state.multi.angle = angle;
+    if (distance >= 24 && state.multi.startDistance >= 24) state.multi.angleTravel += delta;
     const centerDx = center.x - state.multi.startCenter.x;
     const centerDy = center.y - state.multi.startCenter.y;
     const centerTravel = Math.hypot(centerDx, centerDy);
     const distanceTravel = Math.abs(distance - state.multi.startDistance);
     const pinchScore = distanceTravel / PINCH_START;
-    const panScore = centerTravel / MULTI_PAN_START;
-
-    // Lock to one gesture after a deliberate threshold. A pinch cannot also
-    // accidentally pan the battlefield, and a two-finger pan cannot zoom.
+    const movements = points.slice(0, 2).map((point, index) => ({
+      x:point.x - state.multi.startPoints[index].x,
+      y:point.y - state.multi.startPoints[index].y
+    }));
+    const lengths = movements.map(point => Math.hypot(point.x, point.y));
+    const sharedDirection = lengths[0] > 0 && lengths[1] > 0
+        ? (movements[0].x * movements[1].x + movements[0].y * movements[1].y) / (lengths[0] * lengths[1]) : 0;
+    // A finger circling a stationary partner also moves the midpoint. That
+    // translation is part of the twist, not a parallel two-finger tilt/pan.
+    // Require useful movement from both fingers in roughly the same direction.
+    const parallel = Math.min(...lengths) >= PAN_START
+        && Math.min(...lengths) >= Math.max(...lengths) * .25 && sharedDirection >= .75;
+    const panScore = parallel ? centerTravel / MULTI_PAN_START : 0;
+    // Signed angular progression disambiguates separately delivered pointer
+    // updates. A deliberate twist can take over an earlier provisional gesture.
+    const zoomOwned = state.multi.gesture !== 'rotate' && retainZoomOwnership(state.multi, distance, distanceDelta, delta);
+    if (state.multi.gesture !== 'rotate' && !zoomOwned && rotationIntentReady(state.multi, distance, delta))
+      beginMultiRotation(state.multi, delta);
     if (state.multi.gesture === null) {
-      if (pinchScore >= 1 && pinchScore > panScore * 1.1) {
+      const zoomReady = zoomIntentReady(state.multi, distance, distanceDelta);
+      if (pinchScore >= 1 && pinchScore > panScore * 1.1 && zoomReady) {
         state.multi.gesture = "zoom";
+        state.multi.rotationBaseAngle = state.multi.angleTravel;
+        clearRotationIntentTimer();
+        clearZoomIntentTimer();
         releaseCameraKeys();
       } else if (panScore >= 1 && panScore >= pinchScore) {
+        state.multi.rotationBaseAngle = state.multi.angleTravel;
+        clearRotationIntentTimer();
+        clearZoomIntentTimer();
         if (Math.abs(centerDy) > Math.abs(centerDx) * 1.35) {
           state.multi.gesture = "tilt";
         } else {
           state.multi.gesture = "pan";
           state.pans += 1;
+          if(window.__warzoneDuelConfig?.mode!=='duel'){observeNativeFrames();state.multi.panClock=state.nativeFrameContext;state.multi.panHeldFrame=state.nativeFrames;}
           pressMouse(1, state.multi.startCenter.x, state.multi.startCenter.y);
         }
       }
     }
 
-    if (state.multi.gesture === "pan") {
+    if (state.multi.gesture === 'rotate') {
+      if (distance < 24) { cancelMulti(); return; }
+      advanceRotation(state.multi.angleTravel - state.multi.rotationAngle);
+      state.multi.rotationAngle = state.multi.angleTravel;
+    } else if (state.multi.gesture === "pan") {
       advancePan(state.multi, center.x, center.y);
     } else if (state.multi.gesture === "tilt") {
       advanceTilt(center.y - state.multi.center.y);
@@ -1838,7 +2374,7 @@
       let emitted = 0;
       while (Math.abs(step) >= PINCH_STEP && emitted < 6) {
         const direction = step > 0 ? -1 : 1;
-        zoom(direction, center.x, center.y);
+        if (zoom(direction, center.x, center.y)) state.multi.zoomOutput += 1;
         state.pinchSteps += 1;
         state.multi.stepDistance += step > 0 ? PINCH_STEP : -PINCH_STEP;
         step = distance - state.multi.stepDistance;
@@ -1853,17 +2389,29 @@
     if (state.multi !== null) {
       const gesture = state.multi;
       releaseTilt();
+      releaseRotation();
       releaseCameraKeys();
-      releaseMouse(gesture.center.x, gesture.center.y);
+      if(gesture.gesture==='pan'&&window.__warzoneDuelConfig?.mode!=='duel')finishFramePan({...gesture,x:gesture.center.x,y:gesture.center.y},false);
+      else releaseMouse(gesture.center.x, gesture.center.y);
       state.multi = null;
       state.ignoreUntilAllUp = state.pointers.size > 0;
     }
   }
 
+  function cancelMulti() {
+    clearMultiMove(); releaseTilt(); releaseRotation(); releaseCameraKeys();
+    const gesture = state.multi;
+    if (gesture?.gesture === 'pan' && window.__warzoneDuelConfig?.mode !== 'duel')
+      finishFramePan({...gesture, x:gesture.center.x, y:gesture.center.y}, true);
+    else releaseMouse();
+    state.multi = null; state.single = null; state.primaryId = null;
+    state.ignoreUntilAllUp = true;
+  }
+
   function cancelFacilityNavigation() { state.facilityNavigationSerial += 1; }
   function openFacilityAt(x,y) {
     const commands=window.__warzoneCommands, report=commands?.report?.();
-    if(window.__warzoneDuelConfig?.mode==='duel'||!state.battleActive||state.queueMode||state.boxMode||state.stopNonce||report?.buildOpen||report?.placement||report?.page||report?.nativeMenu||window.__towersHtml?.isEnded?.())return false;
+    if(window.__warzoneDuelConfig?.mode==='duel'||!state.battleActive||state.queueMode||state.boxMode||state.stopNonce||report?.buildOpen||report?.placement||report?.page||report?.nativeMenu||report?.demolition||window.__warzoneIntelligence?.report?.().open||window.__towersHtml?.isEnded?.())return false;
     const target=window.WarzoneBuildDisplay?.pickFacilityTarget?.(x,y);
     if(!target)return false;
     const live=report.snapshot?.facilityTargets?.find(t=>t.id===target.id&&t.ready&&t.nativeStatus===1);
@@ -1882,7 +2430,7 @@
     if(event.type==='pointerdown')cancelFacilityNavigation();
     if (!state.battleActive) { if (event.target === canvas()) own(event); return; }
     if (forwardedPointers.has(event)) return;
-    const desktopPlacement = (window.__warzoneCommands?.isPlacement()||window.__warzoneCommands?.nativeBuildOpen?.())
+    const desktopPlacement = (window.__warzoneCommands?.isPlacement()||window.__warzoneCommands?.nativeBuildOpen?.()||window.__warzoneCommands?.isDemolishing?.())
         && (event.pointerType === "mouse" || event.pointerType === "pen");
     if (event.pointerType !== "touch" && !desktopPlacement && !state.physicalPointers.has(event.pointerId)){if(event.type==='pointerdown'&&event.button===0&&event.target===canvas())state.lastNativeLeftDownAt=performance.now();return;}
     const target = canvas();
@@ -1891,7 +2439,10 @@
     if(window.__warzoneCommands?.report?.()?.exitingBuild&&!state.physicalPointers.has(event.pointerId)&&event.target===target){own(event);return;}
     if (desktopPlacement && event.target === target) {
       if (event.type === "pointermove" && !state.pointers.has(event.pointerId) && !event.buttons) {
-        if (radarPoint(event.clientX, event.clientY) === null) window.__warzoneCommands.previewAt(event.clientX, event.clientY);
+        if (radarPoint(event.clientX, event.clientY) === null) {
+          if(window.__warzoneCommands.isDemolishing?.())window.__warzoneCommands.previewDemolish(event.clientX,event.clientY);
+          else window.__warzoneCommands.previewAt(event.clientX, event.clientY);
+        }
         return;
       }
       if (event.type === "pointerdown" && event.button !== 0) {
@@ -1903,6 +2454,14 @@
     if(event.type==='pointerdown'){if(event.target!==target)return;state.physicalPointers.add(event.pointerId);}
     if(!physical)return;
     if(event.type==='pointerup'||event.type==='pointercancel')state.physicalPointers.delete(event.pointerId);
+    if(event.type==='pointercancel'&&(state.panRelease||state.single?.framePan&&state.single.panning
+        ||window.__warzoneDuelConfig?.mode!=='duel'&&state.multi?.gesture==='pan')){
+      own(event);releaseAll(false,false);return;
+    }
+    if(event.type==='pointerdown'&&state.single?.framePan&&state.single.panning&&state.pointers.size===1){
+      const gesture=state.single;finishFramePan(gesture,false);gesture.panning=false;
+    }
+    if(state.panRelease||state.panDeferredPointers.length){deferPanPointer(event,target);pumpPanPointerQueue();return;}
     if(pendingNativeInput()){
       own(event);forwardedPointers.add(event);
       if(event.type==='pointerdown')capturePointer(target,event.pointerId);
@@ -1925,8 +2484,13 @@
       state.pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
       if (state.pointers.size === 1 && !state.ignoreUntilAllUp) {
         beginSingle(event);
+      } else if (state.ignoreUntilAllUp) {
+        return;
       } else if (state.pointers.size === 2) {
-        beginMulti();
+        if(!rotationAllowed()){clearLongPress();state.single=null;state.primaryId=null;state.ignoreUntilAllUp=true;}
+        else beginMulti();
+      } else if (state.pointers.size > 2) {
+        cancelMulti();
       }
       return;
     }
@@ -1945,6 +2509,7 @@
     point.y = event.clientY;
 
     if (event.type === "pointermove") {
+      if (state.ignoreUntilAllUp) return;
       if (state.multi || state.pointers.size >= 2) {
         if (!state.multi) beginMulti();
         scheduleMultiMove();
@@ -1963,6 +2528,7 @@
       gesture.previousY = gesture.y;
       gesture.x = event.clientX;
       gesture.y = event.clientY;
+      if(gesture.nativeOnly){if(distance>TAP_SLOP)gesture.moved=true;return;}
 
       if (gesture.radar) {
         if (distance > TAP_SLOP) gesture.radarMoved = true;
@@ -2007,7 +2573,8 @@
       }
 
       const inputElapsed = (Number.isFinite(event.timeStamp) ? event.timeStamp : performance.now()) - gesture.downInputTime;
-      if(inputElapsed>=LONG_PRESS_MS&&!gesture.moved&&!gesture.panning&&!state.queueMode&&!window.__warzoneCommands?.isPlacement()&&isBattlefieldPoint(gesture.startX,gesture.startY))gesture.longPressArmed=true;
+      if(gesture.demolition&&!gesture.panning)window.__warzoneCommands?.previewDemolish?.(gesture.x,gesture.y);
+      if(inputElapsed>=LONG_PRESS_MS&&!gesture.demolition&&!gesture.moved&&!gesture.panning&&!state.queueMode&&!window.__warzoneCommands?.isPlacement()&&isBattlefieldPoint(gesture.startX,gesture.startY))gesture.longPressArmed=true;
       if (gesture.longPressArmed && inputElapsed >= LONG_PRESS_MS) {
         if (!gesture.selecting && distance >= BOX_SELECT_START) {
           beginBoxSelection(gesture);
@@ -2030,9 +2597,8 @@
       const wasPanning = gesture.panning;
       if (!gesture.panning && distance >= Math.max(PAN_START, slop)) beginPan(gesture);
       if (wasPanning && gesture.panning) {
-        for (const sample of samples) {
-          advancePan(gesture, sample.clientX, sample.clientY);
-        }
+        if (gesture.framePan) schedulePanMove(gesture);
+        else for (const sample of samples) advancePan(gesture, sample.clientX, sample.clientY);
       }
       return;
     }
@@ -2060,6 +2626,7 @@
     gesture.y = event.clientY;
     clearLongPress();
     const heldFor=(Number.isFinite(event.timeStamp)?event.timeStamp:performance.now())-gesture.downInputTime;
+    if(gesture.nativeOnly){if(!canceled&&!gesture.moved)nativeUiClick(gesture.x,gesture.y);state.primaryId=null;state.single=null;return;}
     if(gesture.linePlacement){
       const commands=window.__warzoneCommands;
       if(canceled||gesture.lineDragging){
@@ -2071,7 +2638,7 @@
       // A stationary defence tap retains the original one-site placeAt path.
       commands?.cancelLinePlacement?.(gesture.linePlacement);gesture.linePlacement=null;
     }
-    if(!canceled&&!gesture.moved&&!gesture.panning&&heldFor>=LONG_PRESS_MS&&!state.queueMode&&!window.__warzoneCommands?.isPlacement()&&isBattlefieldPoint(gesture.startX,gesture.startY))gesture.longPressArmed=true;
+    if(!canceled&&!gesture.demolition&&!gesture.moved&&!gesture.panning&&heldFor>=LONG_PRESS_MS&&!state.queueMode&&!window.__warzoneCommands?.isPlacement()&&isBattlefieldPoint(gesture.startX,gesture.startY))gesture.longPressArmed=true;
 
     if (gesture.radar) {
       if (gesture.radarDragging && !canceled) {
@@ -2091,7 +2658,14 @@
         updateCombatHud();
       }
     } else if (gesture.panning) {
-      releaseMouse(gesture.x, gesture.y);
+      if (gesture.framePan) finishFramePan(gesture, canceled);
+      else releaseMouse(gesture.x, gesture.y);
+    } else if (gesture.demolition) {
+      // This touch belongs to targeting even if a menu cancelled the mode
+      // during the gesture. Never leak it into selection or a movement order.
+      if(!canceled&&!gesture.moved&&isBattlefieldPoint(gesture.x,gesture.y)){
+        if(window.__warzoneCommands?.demolishAt?.(gesture.x,gesture.y))feedback(gesture.x,gesture.y,'order');
+      }
     } else if (!canceled && !gesture.moved && isBattlefieldPoint(gesture.x,gesture.y)
         && window.WarzoneRewards?.handleTap?.(gesture.x,gesture.y)) {
       feedback(gesture.x,gesture.y,'order');state.taps += 1;
@@ -2138,14 +2712,16 @@
 
   function releaseAll(clearModes = false, cancelTool = true) {
     cancelFacilityNavigation();
+    cancelFramePan();
     window.__warzoneCommands?.cancelLinePlacement?.();
     const cancelledTool = cancelCombatInput(cancelTool);
     clearMultiMove();
     clearLongPress();
     releaseTilt();
+    releaseRotation();
     releaseCameraKeys();
     cancelClicks();
-    state.pointerQueue.length=0;state.afterInput.length=0;
+    state.pointerQueue.length=0;state.panDeferredPointers.length=0;state.afterInput.length=0;
     for(const pointerId of state.physicalPointers)releasePointer(canvas(),pointerId);
     state.physicalPointers.clear();
     for (const pointerId of state.pointers.keys()) releasePointer(canvas(), pointerId);
@@ -2318,10 +2894,11 @@
     cancelFacilityNavigation,
     setHeaderMenuState,
     prepareHeaderMenu,
+    activateFooterBuild,
     closeHelp,
     showHelp,
     toggleHelp,
-    version: 55,
+    version: 57,
     ready: true,
     key,
     zoom,
@@ -2353,10 +2930,10 @@
     setBattleActive,
     saveName,
     releaseAll,
-    isGestureActive: () => state.pointers.size > 0 || state.mouseButton !== null || state.heldKeys.size > 0 || state.tiltKey !== null,
+    isGestureActive: () => state.pointers.size > 0 || state.mouseButton !== null || state.heldKeys.size > 0 || state.tiltKey !== null || state.rotationKey !== null,
     report: () => ({
       active: true,
-      version: 55,
+      version: 57,
       intercepted: state.intercepted,
       mouseEvents: state.mouseEvents,
       taps: state.taps,
@@ -2366,12 +2943,19 @@
       lastPanStartLatencyMs: state.lastPanStartLatencyMs,
       lastPanDispatchMs: state.lastPanDispatchMs,
       maxPanDispatchMs: state.maxPanDispatchMs,
+      panPhase:state.panRelease?.phase||(state.single?.framePan&&state.single.panning?'drag':'idle'),
+      panQueuedPointers:state.panDeferredPointers.length,panRearms:state.panRearms,
+      panUnobservedRearms:state.panUnobservedRearms,panHeldTimeouts:state.panHeldTimeouts,panContextResets:state.panContextResets,
+      panQueueOverflows:state.panQueueOverflows,
       boxSelections: state.boxSelections,boxCadenceWaits:state.boxCadenceWaits,boxPressGaps:state.boxPressGaps,lastNativeLeftDownAt:state.lastNativeLeftDownAt,
       manualSelectionRevision: state.manualSelectionRevision,
       facilityOpens:state.facilityOpens, lastFacility:state.lastFacility, facilityError:state.facilityError,
       pinchSteps: state.pinchSteps,
       tiltMoves: state.tiltMoves,
       tiltHeld: state.tiltKey?.code || null,
+      rotationMoves: state.rotationMoves,
+      rotationSteps: state.rotationSteps,
+      rotationHeld: state.rotationKey?.code || null,
       saveNames: state.saveNames,
       radarTaps: state.radarTaps,
       radarDrags: state.radarDrags,
@@ -2414,7 +2998,7 @@
       zoomAcks: state.zoomAcks,
       zoomPending: state.zoomPendingNonce !== null,
       lastZoomDistance: state.lastZoomDistance,
-      gestureActive: state.pointers.size > 0 || state.mouseButton !== null || state.heldKeys.size > 0 || state.tiltKey !== null,
+      gestureActive: state.pointers.size > 0 || state.mouseButton !== null || state.heldKeys.size > 0 || state.tiltKey !== null || state.rotationKey !== null,
       hudVisible: state.hudVisible,
       battleActive: state.battleActive,
       heldKeys: [...state.heldKeys]

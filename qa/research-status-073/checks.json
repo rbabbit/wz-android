@@ -1,0 +1,53 @@
+{
+  "version": "0.73",
+  "passed": true,
+  "emulatorUsed": false,
+  "actualNativeEngineExecuted": false,
+  "scope": "Actual shared research renderer/functions and synthetic DOM/native-mailbox fixtures across Towers, FFA, Campaign, Multiplayer; Duel guard",
+  "checksPassed": 33,
+  "checks": [
+    "towers: active/queued topics remain visible after native availability removes them, without history ghosts",
+    "towers: inspecting active/confirmed queued rows cannot add duplicate batch selections",
+    "towers: pending additions show SYNCING until confirmed, rejection shows NOT SYNCED, no false queued state",
+    "towers: native IDs preserve selection through list reorder/reindex and category filtering",
+    "towers: progress/countdown updates retain the actual card node and hide unknown placeholder progress",
+    "towers: completion/removal clears assigned rows; cancellation makes an available topic ready again",
+    "towers: save rewind and player replacement discard stale display identities and pending selections",
+    "ffa: active/queued topics remain visible after native availability removes them, without history ghosts",
+    "ffa: inspecting active/confirmed queued rows cannot add duplicate batch selections",
+    "ffa: pending additions show SYNCING until confirmed, rejection shows NOT SYNCED, no false queued state",
+    "ffa: native IDs preserve selection through list reorder/reindex and category filtering",
+    "ffa: progress/countdown updates retain the actual card node and hide unknown placeholder progress",
+    "ffa: completion/removal clears assigned rows; cancellation makes an available topic ready again",
+    "ffa: save rewind and player replacement discard stale display identities and pending selections",
+    "campaign: active/queued topics remain visible after native availability removes them, without history ghosts",
+    "campaign: inspecting active/confirmed queued rows cannot add duplicate batch selections",
+    "campaign: pending additions show SYNCING until confirmed, rejection shows NOT SYNCED, no false queued state",
+    "campaign: native IDs preserve selection through list reorder/reindex and category filtering",
+    "campaign: progress/countdown updates retain the actual card node and hide unknown placeholder progress",
+    "campaign: completion/removal clears assigned rows; cancellation makes an available topic ready again",
+    "campaign: save rewind and player replacement discard stale display identities and pending selections",
+    "multiplayer: active/queued topics remain visible after native availability removes them, without history ghosts",
+    "multiplayer: inspecting active/confirmed queued rows cannot add duplicate batch selections",
+    "multiplayer: pending additions show SYNCING until confirmed, rejection shows NOT SYNCED, no false queued state",
+    "multiplayer: native IDs preserve selection through list reorder/reindex and category filtering",
+    "multiplayer: progress/countdown updates retain the actual card node and hide unknown placeholder progress",
+    "multiplayer: completion/removal clears assigned rows; cancellation makes an available topic ready again",
+    "multiplayer: save rewind and player replacement discard stale display identities and pending selections",
+    "active precedence overrides confirmed/pending queue duplicates and real zero costs remain zero",
+    "confirmed queued status persists during an unacknowledged removal and prevents re-adding it",
+    "a Multiplayer completion event for another native player cannot remove the local active topic",
+    "Duel keeps its legacy available-only rows, native-index selection and original status wording",
+    "all four mode entrypoints reuse this renderer; no per-mode research screen is substituted"
+  ],
+  "sources": [
+    {
+      "path": "app/src/main/assets/warzone-mobile-research.js",
+      "sha256": "8c347668b9608eea6cbd610346a2fddb50f3397ecb4503a6b32c2ccef5905377"
+    },
+    {
+      "path": "tools/test-research-status-073.cjs",
+      "sha256": "1b3fc94c008be2d90fe23731bbb42559c96a54faf1474da55579978067b4fc6f"
+    }
+  ]
+}

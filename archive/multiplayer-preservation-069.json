@@ -1,0 +1,544 @@
+{
+  "version": "0.69",
+  "recordedUTC": "2026-11-13T16:12:40.011115+00:00",
+  "method": "SHA256 comparison of every original source ZIP member against the immutable baseline manifest; manifest entry compared directly to ZIP bytes. Baseline ZIP SHA256 independently verified.",
+  "baselineSource": "C:\\timerApp\\warzone-towers-0.68-source.zip",
+  "baselineSourceSHA256": "65d27bb7ca2ec9ab428a16b6e3c3373537f2c1edf397562185ad2816654976ff",
+  "baselineEntries": 12176,
+  "baselineManifestEntries": 12175,
+  "unchangedEntries": 12170,
+  "missingEntries": [],
+  "changedEntries": [
+    {
+      "path": "AGENTS.md",
+      "bytes": 67532,
+      "sha256": "58e6e058decfb94bbfdd3496120932b6a464df3bb9ef86fa9184467e88ba0d83",
+      "baselineSHA256": "fb034b140109cea42aa630901d59d6db37c4a472317b71046c290e853b38a58e"
+    },
+    {
+      "path": "app/build.gradle.kts",
+      "bytes": 1517,
+      "sha256": "23e75b1af26a8d1905c1c608fed31f7918749b3ef5f73f211440f14df89c363a",
+      "baselineSHA256": "d0e9d77cb10ba4b0824952601d8a850548f1e95b7442dbe5df5a1cbe0f894945"
+    },
+    {
+      "path": "app/src/main/AndroidManifest.xml",
+      "bytes": 1577,
+      "sha256": "ef810355c2d57d911773e137d2eeccd97816db9060d20afb2d2ca1511f7cae4b",
+      "baselineSHA256": "7ed3fa9e1ae060c83593d4d935372fd18d0074795d8467cb32b36a1c0d800bd8"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/GraphicsSetupView.java",
+      "bytes": 25420,
+      "sha256": "dd799540c2611a6597b438c5c6b6b3f1f0b2d4401fa72afeadfd911ed5d1bdea",
+      "baselineSHA256": "f7ac0da149740de4159b4efbfc70b8ba49f2f82c2dec17ee931988db0370a79b"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/HomeModesView.java",
+      "bytes": 11420,
+      "sha256": "52a34f18f332b09cba05fe32699b07dab31605951dd878c37c90d6add3f11bd8",
+      "baselineSHA256": "e443c3c1942ceb16473d2ae058047789f1371d6f59bc7157a2022611c7472f05"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MainActivity.java",
+      "bytes": 116917,
+      "sha256": "331eb2ce08bc148e8c4def24ceab78acaf0396eff00198a1cff4cd71f2680546",
+      "baselineSHA256": "cc8ca05c1311ead10ff29f3d5cb7dc8b799ac0ab56b454a6a305ac6902dabc6f"
+    }
+  ],
+  "unexpectedChangedEntries": [],
+  "newSourcePathsAtSnapshot": [
+    "app/src/main/assets/multiplayer/Oswald.ttf",
+    "app/src/main/assets/multiplayer/engine.html",
+    "app/src/main/assets/multiplayer/index.html",
+    "app/src/main/assets/multiplayer/lobby-config.js",
+    "app/src/main/assets/multiplayer/lobby-http.js",
+    "app/src/main/assets/multiplayer/lobby-ui.js",
+    "app/src/main/assets/multiplayer/mobile-controls.js",
+    "app/src/main/assets/multiplayer/multiplayer.css",
+    "app/src/main/assets/multiplayer/session.js",
+    "app/src/main/assets/multiplayer/socket-bridge.js",
+    "app/src/main/assets/multiplayer/warzone2100.data",
+    "app/src/main/assets/multiplayer/warzone2100.js",
+    "app/src/main/assets/multiplayer/warzone2100.wasm",
+    "app/src/main/java/com/rbabbit/blocknight/warzone/MultiplayerActivity.java",
+    "archive/fallback-0.69.json",
+    "tools/import-multiplayer-069.py",
+    "tools/mp-live-069.cjs",
+    "tools/verify-multiplayer-state-probe-069.py",
+    "vendor/multiplayer/COPYING",
+    "vendor/multiplayer/COPYING.NONGPL",
+    "vendor/multiplayer/COPYING.README",
+    "vendor/multiplayer/import-0.69.json"
+  ],
+  "criticalExistingAssets": [
+    {
+      "path": "app/src/main/assets/ffa-maps.json",
+      "bytes": 33419,
+      "sha256": "c65ecce91fffe671dc645989f73d07a3e5b4ac74a08b07e7471038c69c6ca7e4",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/contact.png",
+      "bytes": 4805,
+      "sha256": "7def522abf8484076640514014f42da0f149a9e956d3d80a9e4485934cf0437a",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/emag.png",
+      "bytes": 11837,
+      "sha256": "ab5eda0c083b98f37adcfce6ef1d12ee2e00952ede774f0409a830dc6cece361",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/emaj-6p.png",
+      "bytes": 13125,
+      "sha256": "656ae9bd70cf85bc305506917df58f3e3174f02352b11f9cb9a1f073bcfa783a",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-2p-01.png",
+      "bytes": 404629,
+      "sha256": "006d8d65cce974d7a3b52f0809fdcd1676803eea09a47e943e637e31c2fb5f63",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-2p-02.png",
+      "bytes": 185628,
+      "sha256": "b4967c072e26cc3f62881e773ce2d1ef5a14402a4f52e1603b37bed919a48e75",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-2p-03.png",
+      "bytes": 758537,
+      "sha256": "ca7171af196c5b6429905189b2e6ed52fb99e3d1fbf01bd1b85db9a3c5681c93",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-2p-04.png",
+      "bytes": 610797,
+      "sha256": "ef49114202877a0ff40e2edd18be555a5ff270a84460ebdba4e273ee14f9974a",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-2p-05.png",
+      "bytes": 512815,
+      "sha256": "8da9fe0ff0a7ca3235583fac4a4a6c9713e83c7acba445d5b3648b8dc1be4497",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-2p-06.png",
+      "bytes": 641754,
+      "sha256": "39bf168945205dc08d0a46796faac98710883e4cdcc0e7804edc580dcf057680",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-2p-07.png",
+      "bytes": 253690,
+      "sha256": "468f00a4f635e3551f3be730f5935d887f8813be8a741ee279b6fdac4b3a7a95",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-2p-08.png",
+      "bytes": 349116,
+      "sha256": "5765c0d1a65ad8118c401d07dd39fbfb636d6d6673b52b125c1403769658bec5",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-2p-09.png",
+      "bytes": 295884,
+      "sha256": "c92336335450820f078650558c22818a0c11508910040aa84740a111e62609e4",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-2p-10.png",
+      "bytes": 650895,
+      "sha256": "fb3fb1eaea44ee6f085041289b41d32163f88b64c718ded99596cbc29078421b",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-2p-11.png",
+      "bytes": 654402,
+      "sha256": "c74d441b669b4581aeb9585b9655ad10f7c60ccffa52f8926dcbdced7ca97651",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-2p-12.png",
+      "bytes": 674037,
+      "sha256": "ee2e90f4928063faa8fb37d2b105704447dbc5bf3bb77222f792cdba29fac8cc",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-2p-13.png",
+      "bytes": 304131,
+      "sha256": "94033e910dbb6a12a525b757b88efd68424778dc196fac41f46e41f54d4cbb2a",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-2p-14.png",
+      "bytes": 101852,
+      "sha256": "fe8c8f9c2c60519e1a3c7926308d4cb06e9bb1f59721b94d3ec5cdbc569265be",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-2p-15.png",
+      "bytes": 784191,
+      "sha256": "f3c69a557534132fb7dc295acbac91116ab016d0311916b645d37233c2b4e7a3",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-3p-01.png",
+      "bytes": 540725,
+      "sha256": "182ea1f238b57014ae7b67ffe4b00953961d08e4b459613e4c897acbf9c8ab31",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-3p-02.png",
+      "bytes": 284939,
+      "sha256": "3df6f86dad28df25da463d733d359eb57e6fee3ccefd65143e0c5602fedb0dbe",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-3p-03.png",
+      "bytes": 327546,
+      "sha256": "88c951b19c8e78762327fd75916007d46fc5d018ce5966c30ace5074bf65061b",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-3p-04.png",
+      "bytes": 656706,
+      "sha256": "cf1a005fe320c0a4cf0453b6caa7b6d6858c75a7f98c0f6fe094a54ae8316a6f",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-3p-05.png",
+      "bytes": 758077,
+      "sha256": "23eaa8ec3c782e958d62430cca92b2baa903496d4a0fa6c3a9bdcd3ff67fbe89",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-3p-06.png",
+      "bytes": 308416,
+      "sha256": "8060b6a7fed33fe7b5d08af79245d3ad1cc951a6fc4afe53e9c4aeab6784b299",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-3p-07.png",
+      "bytes": 492477,
+      "sha256": "96c336574df306da4d5275032f1b5f5b58047ab59767e7c68722737db27c819b",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-3p-08.png",
+      "bytes": 716556,
+      "sha256": "ae398089760c432f1e9d9e256120dfde70cce3b18065ef2bec723622f3e215ec",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-3p-09.png",
+      "bytes": 829854,
+      "sha256": "963b613a44c2a18a13441b2e579fb0f86e03d28327664ef543089be2c1cd194b",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-3p-10.png",
+      "bytes": 96333,
+      "sha256": "ac666cb818727ad109a5d70b4f685bc6ed6a32e6dbbfd8d88687de3f3583432e",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-3p-11.png",
+      "bytes": 745156,
+      "sha256": "c90c4fe92d4b9bf63313a000753ca5b562261cc4dfb3298ffb149b40337186b0",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-3p-12.png",
+      "bytes": 817608,
+      "sha256": "8748df99c323875549fae6a661bb25e37ccb8517ce3c0453d97058bceefa2c3f",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-3p-13.png",
+      "bytes": 596265,
+      "sha256": "b24eb66e11be217145d8bc56c4d0fae8fe9e64d92243e14547b0540bc9fe4dfd",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-3p-14.png",
+      "bytes": 635525,
+      "sha256": "f72b2e5b10a9a827170328fafc2a22c6984ab43998fcd7a10762062da4e06d7c",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-3p-15.png",
+      "bytes": 834781,
+      "sha256": "e710cf1525d209263c811ef32b00aa896b575df1ed37756aac34b1864582a057",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-4p-01.png",
+      "bytes": 364520,
+      "sha256": "526a822fdff6f9a54918c081e83b1792798aa93857d600999c15765d4f3c7919",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-4p-02.png",
+      "bytes": 274854,
+      "sha256": "b1ac3286a228e9a9de148ca9798baf1af88c7c828c5bad409e89ffbf0d4f45df",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-4p-03.png",
+      "bytes": 636802,
+      "sha256": "d4e06fc37e2cf7d00cb6906c1794aff77f2000fe35990a6843efb2630f1a3b0f",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-4p-04.png",
+      "bytes": 735268,
+      "sha256": "2bfc9b1454d56e36c3cdc564221f6224d61b60f4d2fd2bcf218b4405110c1590",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-4p-05.png",
+      "bytes": 581827,
+      "sha256": "1a82a76d1442b3b7b9f711b494a2ab185805baf0b868477bee9ea02d2b628249",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-4p-06.png",
+      "bytes": 513385,
+      "sha256": "77928000b81001a5d5b13b2152108c5cd6789d897a90bfd4e048c53169858c7c",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-4p-07.png",
+      "bytes": 507725,
+      "sha256": "6bda58ffe3590b92c8adf95b4579cbae6d4baf0e1217212f215b28a78e70ecb1",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-4p-08.png",
+      "bytes": 818443,
+      "sha256": "4f1d0570c4264d47823b78cba4fe0af4e945bc842eb41b273d0c85271dc27ecf",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-4p-09.png",
+      "bytes": 659314,
+      "sha256": "3876672d05ea83a0e6c4cc82ebca0cf6ba84cc4dedfc27c27aa25e213a13faf6",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-4p-10.png",
+      "bytes": 744629,
+      "sha256": "4d9d0f85e23dfa663335d1235c08ab9db8205c40b743e698922e85741b324f18",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-4p-11.png",
+      "bytes": 601037,
+      "sha256": "bba7d27412c5d877318216b3d4c03ddfb846a08b6f0b27647cc3eb9eafcf380b",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-4p-12.png",
+      "bytes": 700767,
+      "sha256": "07c5c2c67c1081f0b600f02993b8d3d89e72aafb3ae4a017471ef62c8540b1f6",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-4p-13.png",
+      "bytes": 725539,
+      "sha256": "0953746f29ae3eb1131b949e560d1ed476ac26a075993dad3a0c4129acdd789b",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-4p-14.png",
+      "bytes": 412253,
+      "sha256": "1370d8a358c34cb1dec4b0d68d4613ddc931574b9cbae38b267a9d573077fe54",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-4p-15.png",
+      "bytes": 655477,
+      "sha256": "8592639f3768e9c5a3d7767e479b4a7a912e9d4e9b51a3c8071d34787277d4a4",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/rb-simple.png",
+      "bytes": 4057,
+      "sha256": "e82d29ca3d28e92e57ae2a3ef3608b69ec788221c1bfd00a48d4cec48cc31cd7",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/rb-usefull.png",
+      "bytes": 4465,
+      "sha256": "90af5c46d47d7b5f42039612bbe7275c1bf7bc235274430ad325a15771fdf1e5",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/templar-ffa.png",
+      "bytes": 6246,
+      "sha256": "acef4fba0d9a5a69f0f24ec055c2b91dab4b9db39e6ad924e6d8fe02516465cd",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/warzone-touch-controls.js",
+      "bytes": 150466,
+      "sha256": "ab600b66e42a65e0802d14d08cf7748efe2ba40f93faf1a1ab14b7c83dc34eb9",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/warzone/map-music.json",
+      "bytes": 2556,
+      "sha256": "595fb014ceed6023230443fc013131407e1530b245b6061ad749c810d6a074e9",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/warzone/music-catalog.js",
+      "bytes": 13515,
+      "sha256": "e0d05a3033067c675cc5dfa37b2796a53e84b87a566519b4cae0d8256de5de5a",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/warzone/music-loader.js",
+      "bytes": 29604,
+      "sha256": "f53e6bf3d898e546045937456e3c5bf1eafdc981573c1d6c670d9762fa03cc07",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/warzone/music-tracks.json",
+      "bytes": 6674,
+      "sha256": "e17fa70903ae9c5c8c065d434d1b5c29ab0ee1d2e07b091339c9a72478a4f601",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/warzone/music/COPYING",
+      "bytes": 18092,
+      "sha256": "8177f97513213526df2cf6184d8ff986c675afb514d4e68a404010521b880643",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/warzone/music/COPYING.NONGPL",
+      "bytes": 62,
+      "sha256": "c488fa6d5a8c88be7667960834fd727bf9257745634ef8dd80d84158b2d37e67",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/warzone/music/COPYING.README",
+      "bytes": 3681,
+      "sha256": "3f0ff94d5e06172b571e77fda97a263eb8ba62f186333f60d8cacd50106cb5c0",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/warzone/music/NOTICE.txt",
+      "bytes": 788,
+      "sha256": "f4caafd832015d65520f79af120d8da7d8c6cc2e15ec132264d8f423d821d0ce",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/warzone/music/README.md",
+      "bytes": 230,
+      "sha256": "a969ee5ea8bfc3ee3e0eaceb0278accd215e00d8d8127280347bb971716d875b",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/warzone/music/music.data",
+      "bytes": 114721578,
+      "sha256": "602ea6c69f4073a9617676a39f8397232953637a9b7a36e7cc28e93dd15184cd",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/warzone/rewards.js",
+      "bytes": 12607,
+      "sha256": "c1ecf0cd8caae6f1639d6476141e99aae8ab41dd753707fb61ef9ba3984b1226",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/warzone/saved-games.js",
+      "bytes": 40340,
+      "sha256": "b447db433205420fe357f3c92a02f6232b8fd9af08d6e41aa23f0fe7b8303879",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/icons/music-notes.svg",
+      "bytes": 375,
+      "sha256": "9b46fd28e1d67ed654730c11c1c928366d581eaa337dea44ba33c0a97eb21620",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100-campaign.data",
+      "bytes": 78797477,
+      "sha256": "70d333a1b58870b34e9922e83f6c077cc2fc085219d00e7161ba98db6ae1c2e3",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100-campaign.js",
+      "bytes": 794872,
+      "sha256": "5b3fff50542fa5913fda7ccbc0182a8a731d93e4e3fc986c7d104faedfaea226",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100-duel.data",
+      "bytes": 65093279,
+      "sha256": "584a8be5958871b7d1f133bb4d3ef514737d8cf17b959be05f6659a828ceac47",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100-duel.js",
+      "bytes": 752099,
+      "sha256": "6ef65429d1f496bfe5c52e2d8d770b28eaf319d77cb0d61675abd5d78d5420b5",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100-ffa.data",
+      "bytes": 74909635,
+      "sha256": "73137514fb621df5ca978c93a32743c01b44de01201e4846cb351a6d438d6278",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100-ffa.js",
+      "bytes": 804459,
+      "sha256": "50a0bb51ab06e2d6805766681ae36c3e7e29d3b13ada02dbc2a96620f7701611",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100-towers-052.js",
+      "bytes": 793906,
+      "sha256": "6d17a3b9f3e935b2748cbbcfc4916e6badb81be31ef22ba3c932e3987ec089b9",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100-towers-052.wasm",
+      "bytes": 13510741,
+      "sha256": "2924f46aa75d9b27b92494f01d56239856ad06b2164cd7131144a3a5faeb87db",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100.data",
+      "bytes": 78171043,
+      "sha256": "244e70d357ff02ddc8cfd43d1bf7c531a3a777593bb5d8fdf84e05c2d9976da7",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100.js",
+      "bytes": 793911,
+      "sha256": "fdf0c4807323b15a00cbe92947db2fb6b2da771384af9f3fba08fc5be03c5949",
+      "unchanged": true
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100.wasm",
+      "bytes": 13508430,
+      "sha256": "497c65308d3e85f0b5370ec0ff0eb48e6a0876e735ad45e3b280829c7f3c2a06",
+      "unchanged": true
+    }
+  ],
+  "allCriticalExistingAssetsByteIdentical": true,
+  "allBaselineSourceEntriesRetained": true,
+  "expectedExistingSourceChangesOnly": true,
+  "snapshotOnly": true,
+  "deviceUsed": false,
+  "packagingReference": "tools/package-ffa-pathways-068.py -> source_inventory(required), validate_source(), helpers H[write_source_zip]. Must adapt version/scope, preserve all 12,176 baseline source members including historical archive/vendor/QA members; no private local settings or transient build files."
+}

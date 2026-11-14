@@ -14,14 +14,17 @@ import java.util.Locale;
 
 /** An already-credited reward receipt; it never performs a wallet transaction. */
 final class RewardReceiptView extends FrameLayout {
-    private static final int INK = 0xFFF0F3ED, MUTED = 0xFFA6B9BE, TEAL = 0xFF8BD3CC;
+    private static final int INK = TowersTheme.TEXT, MUTED = TowersTheme.SECONDARY;
     private final ScrollView sheet;
     private final boolean won;
+    private final int bottomClearance;
 
     RewardReceiptView(Context context, boolean won, String mapName, String difficulty,
-            int reachedWave, int totalWaves, int earned, int balance, String reason, Runnable close) {
+            int reachedWave, int totalWaves, int earned, int balance, String reason,
+            int bottomClearance, Runnable close) {
         super(context);
         this.won = won;
+        this.bottomClearance = Math.max(0, bottomClearance);
         Typeface face = Typeface.createFromAsset(context.getAssets(), "warzone/ui/Oswald.ttf");
         setBackgroundColor(won ? 0x66000000 : 0x00000000);
         setClickable(true);
@@ -29,8 +32,9 @@ final class RewardReceiptView extends FrameLayout {
         setOnClickListener(v -> close.run());
         sheet = new ScrollView(context);
         sheet.setOverScrollMode(OVER_SCROLL_NEVER);
-        sheet.setVerticalScrollBarEnabled(false);
-        sheet.setBackground(RewardsView.surface(context, 0xFF0C1E26, 8));
+        sheet.setVerticalScrollBarEnabled(true);
+        sheet.setScrollbarFadingEnabled(true);
+        sheet.setBackground(RewardsView.surface(context, TowersTheme.PANEL, 8));
         sheet.setClickable(true);
         sheet.setOnClickListener(v -> { });
         LinearLayout body = new LinearLayout(context);
@@ -62,7 +66,7 @@ final class RewardReceiptView extends FrameLayout {
         crystal.setImageResource(R.drawable.reward_crystal);
         crystal.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
         reward.addView(crystal, new LinearLayout.LayoutParams(dp(won ? 30 : 23), dp(won ? 30 : 23)));
-        TextView amount = copy("+" + Math.max(0, earned) + " crystals", won ? 25 : 20, TEAL);
+        TextView amount = copy("+" + Math.max(0, earned) + " crystals", won ? 25 : 20, INK);
         amount.setTypeface(face);
         LinearLayout.LayoutParams amountParams = new LinearLayout.LayoutParams(-2, -2);
         amountParams.leftMargin = dp(8);
@@ -111,13 +115,15 @@ final class RewardReceiptView extends FrameLayout {
         int margin = dp(12);
         int sheetWidth = Math.max(0, Math.min(dp(won ? 350 : 296), w - margin * 2));
         sheet.measure(MeasureSpec.makeMeasureSpec(sheetWidth, MeasureSpec.EXACTLY),
-                MeasureSpec.makeMeasureSpec(Math.max(0, h - margin * 2), MeasureSpec.AT_MOST));
+                MeasureSpec.makeMeasureSpec(Math.max(0, h - margin * 2 - bottomClearance), MeasureSpec.AT_MOST));
         setMeasuredDimension(w, h);
     }
 
     @Override protected void onLayout(boolean changed, int l, int t, int r, int b) {
         int x = won ? (getWidth() - sheet.getMeasuredWidth()) / 2 : getWidth() - dp(12) - sheet.getMeasuredWidth();
-        int y = won ? (getHeight() - sheet.getMeasuredHeight()) / 2 : getHeight() - dp(12) - sheet.getMeasuredHeight();
+        int availableHeight = Math.max(0, getHeight() - bottomClearance);
+        int y = won ? (availableHeight - sheet.getMeasuredHeight()) / 2
+                : availableHeight - dp(12) - sheet.getMeasuredHeight();
         sheet.layout(x, y, x + sheet.getMeasuredWidth(), y + sheet.getMeasuredHeight());
     }
 

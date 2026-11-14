@@ -1,0 +1,4 @@
+'use strict';
+const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict'),{execFileSync}=require('node:child_process'),b=require('./guide-live-065.cjs');
+const expected=process.argv[2],apk=path.join(b.q.root,'app/build/outputs/apk/debug/app-debug.apk');assert(/^[a-f0-9]{64}$/.test(expected));assert.equal(b.sha(fs.readFileSync(apk)),expected);b.q.adb('shell','am','force-stop',b.q.packageId);
+const output=execFileSync(require('./android-sdk.cjs').adb,['-s',b.q.device,'install','-r',apk],{timeout:120000,maxBuffer:1024*1024}).toString();assert(output.includes('Success'));assert.equal(b.installed(),expected);console.log(JSON.stringify(b.put(expected.slice(0,8)+'-installation',{passed:true,candidateAPK_SHA256:expected,installedAPK_SHA256:b.installed(),bytes:fs.statSync(apk).size,installationOnly:true,output,recordedAt:new Date().toISOString()})));

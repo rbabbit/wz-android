@@ -1,0 +1,48 @@
+{
+  "version": "0.72",
+  "passed": true,
+  "emulatorUsed": false,
+  "actualNativeEngineExecuted": false,
+  "gameplayVerified": false,
+  "scope": "Actual generated Multiplayer queue functions with synthetic native APIs; no native gameplay claim",
+  "checksPassed": 14,
+  "checks": [
+    "Only the MP tooClose function changes relative to the retained 070 compositor",
+    "The previous real queue predicate reproduces adjacent-oil rejection",
+    "Sixteen dense adjacent oil jobs retain FIFO, distinct reservations and ordinary native dispatch",
+    "Adjacent oil respects both app queued/working jobs and native-only queued/building journals",
+    "Built and unfinished adjacent derricks defer to native placement; same unfinished derrick receives HELPBUILD",
+    "Same-tile duplicates and overlapping different footprints remain rejected before native dispatch",
+    "Ordinary factory/lab spacing is unchanged; the oil exception is directional",
+    "Earlier-only reservation validation preserves the original first job and later dense oil jobs",
+    "Cancelled/done/interrupted native journals release oil reservations",
+    "No oil, native invalid result and relocated native result all remain invalid-site",
+    "Unreachable, water/cliff and out-of-map sites still cannot issue construction orders",
+    "A native site change after acceptance blocks dispatch without deleting/reordering the oil FIFO",
+    "Ordinary native order rejection is retained as engine-rejected",
+    "Shared scenario, historical 070/071 tools/proofs and matching native JS/WASM/data remain byte-identical"
+  ],
+  "sources": [
+    {
+      "path": "app/src/main/assets/multiplayer/mobile-ui-runtime.js",
+      "sha256": "563c291f632b986f77e914b441bcf5017848912c3c3e39b33cfdb32cf988e399"
+    },
+    {
+      "path": "tools/compose-multiplayer-ui-072.cjs",
+      "sha256": "c43de873af240b749f8d416df57165a865b971bd2498702dcffa91416607b4d8"
+    },
+    {
+      "path": "tools/test-multiplayer-oil-spacing-072.cjs",
+      "sha256": "2b906263729bf0dfbd21a20ef87ee988b084d4346d212dfdd03f06bbc8c1a673"
+    },
+    {
+      "path": "scenario/warzone-towers-commands.js",
+      "sha256": "590be36a3157dd383006e06d4fb54daaffe98bb517405b7876588a022eacd17c"
+    },
+    {
+      "path": "app/src/main/assets/warzone/command-catalog.json",
+      "sha256": "d70d5672fa1865411b8e574e67e770dc3b13956a6e5710f37e69396f4ff3453e"
+    }
+  ],
+  "preservedFiles": 376
+}

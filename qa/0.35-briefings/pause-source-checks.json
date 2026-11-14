@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "emulatorUsed": false,
+  "gameplayVerified": false,
+  "groups": 7,
+  "checks": [
+    "Actual helper owns one pause and holds its simulated native clock",
+    "Duplicate acquisition and wrong-session release cannot toggle input",
+    "Owned release waits for native clock advance and cannot double-toggle",
+    "A native pause failure is bounded and never claims readiness",
+    "A native resume failure is bounded and never uncovers paused gameplay",
+    "Terminal invalidation blocks late acquire/release callbacks",
+    "Conflicting save/ad operations reject a briefing without native input"
+  ],
+  "sourceSHA256": "ef2a65592a3913e3ba0bd0a58ef677c6022eff35a15e34b0440d76dfff71844e"
+}

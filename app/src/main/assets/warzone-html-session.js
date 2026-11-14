@@ -2,16 +2,18 @@
 (() => {
   'use strict';
   if (window.__towersHtml) return;
+  const campaign = window.__warzoneCampaignMode === true || new URLSearchParams(location.search).get('mode') === 'campaign';
+  const ffa = window.__warzoneFfaConfig?.mode === 'ffa' && Object.isFrozen(window.__warzoneFfaConfig);
   const session = new URLSearchParams(location.search).get('battle_session') || window.__towersHtmlSession || '';
   const config=window.__warzoneDuelConfig;
-  const duel=config?.mode==='duel'&&Object.isFrozen(config),mode=duel?'duel':'tower-defense';
+  const duel=config?.mode==='duel'&&Object.isFrozen(config),mode=ffa?'ffa':campaign?'campaign':duel?'duel':'tower-defense';
   let result = '', phase = 'loading', exitReason = '', menuRequested = false;
   function activate(wave) {
     // Only a packet emitted by the running scenario establishes a battle.
     // Pausing stops scenario ticks; absence of a packet is never an exit.
     if (phase === 'ended' || !wave || wave.mode !== mode) return false;
     if(duel&&(!['active','victory','defeated'].includes(wave.phase)||wave.humanBranch!==config.humanBranch||wave.botBranch!==config.botBranch))return false;
-    if (!duel) {
+    if (!duel && !campaign && !ffa) {
       const credited = window.BlockNightAndroid?.rewardProgress?.(session, JSON.stringify({
         wave:wave.wave, phase:wave.phase, completedWaves:wave.completedWaves || [], rewards:wave.rewards || null}));
       if (Number(credited) > 0) window.WarzoneRewards?.waveCredited?.(Number(credited));
@@ -48,7 +50,7 @@
   function consume(name, nonce, revision) {
     const fs = (window.LaunchedModule || window.Module)?.FS;
     if (!fs?.readFile || !fs?.writeFile || !fs?.rename || !nonce && !revision) return;
-    const path = '/data/mp/multiplay/script/rules/' + name;
+    const path = (campaign ? '/data/base/script/campaign/mobile/' : '/data/mp/multiplay/script/rules/') + name;
     try {
       const current = JSON.parse(fs.readFile(path, {encoding:'utf8'}));
       if (revision ? current.revision !== revision : current.nonce !== nonce) return;
@@ -58,7 +60,7 @@
     } catch (_) { /* Never clear a newer request or remove a polled file. */ }
   }
   function finish(won) {
-    if(duel&&result)return;
+    if((duel||ffa)&&result)return;
     if (result === 'exited' || result === 'victory' || result === 'defeated' && !won) return;
     result = won ? 'victory' : 'defeated';
     retire(result);
@@ -68,6 +70,8 @@
   async function back() {
     if (phase === 'ended') return;
     if (window.WarzoneRewards?.cancelTarget?.()) return;
+    if (campaign && window.__warzoneCampaign?.handleBack?.()) return;
+    if (!duel && !campaign && window.__warzoneIntelligence?.handleBack?.()) return;
     window.__kalaWarzoneTouch?.cancelFacilityNavigation?.();
     if(!duel&&window.parent?.TowersStatus?.handleBack?.())return;
     const commands = window.__warzoneCommands, tech = window.__blockNightResearch;
@@ -103,18 +107,18 @@
     // Retire input immediately, then flush saves before the confirmed WebView
     // unload. Never reveal or send keys into the engine's stock frontend.
     const leave = () => { if (phase !== 'ended') exit('main-menu'); };
-    if (!duel && window.WarzoneRewards?.prepareExit)
+    if (!duel && !campaign && !ffa && window.WarzoneRewards?.prepareExit)
       Promise.resolve(window.WarzoneRewards.prepareExit()).then(leave, leave);
     else leave();
     return true;
   }
   function observeNativeOutput(text) {
-    const prefix=duel?'BNDUEL:':'BNWAVE:',marker = text.indexOf(prefix);
+    const prefix=ffa?'BNFFA:':campaign?'BNCAMPAIGN:':duel?'BNDUEL:':'BNWAVE:',marker = text.indexOf(prefix);
     if (marker >= 0) {
       try {
         const wave = JSON.parse(text.slice(marker + prefix.length));
         if(!activate(wave))return;
-        if (['defeated','victory'].includes(wave.phase)) finish(wave.phase === 'victory');
+        if (!campaign && ['defeated','victory'].includes(wave.phase)) finish(wave.phase === 'victory');
       } catch (_) {}
       return;
     }
@@ -132,7 +136,7 @@
     const original = console[method];
     console[method] = function (...args) {
       const text = args.map(String).join(' ');
-      if (/BNWAVE:|BNDUEL:|\bGAMECODE_QUITGAME\b|Trying to load Game .* failed!|(?:Exiting|Restarting) main menu/i.test(text)) observeNativeOutput(text);
+      if (/BNWAVE:|BNDUEL:|BNCAMPAIGN:|BNFFA:|\bGAMECODE_QUITGAME\b|Trying to load Game .* failed!|(?:Exiting|Restarting) main menu/i.test(text)) observeNativeOutput(text);
       return original.apply(this, args);
     };
   }

@@ -1,0 +1,85 @@
+{
+  "version": "0.52",
+  "baseline": "0.51",
+  "reproduced": true,
+  "emulatorUsed": false,
+  "scope": "Actual bridge/UI functions with synthetic native API only",
+  "foundation": {
+    "job": {
+      "id": "old",
+      "itemId": "Tower",
+      "x": 4,
+      "y": 4,
+      "workers": [],
+      "status": "blocked",
+      "created": 0,
+      "attempts": {},
+      "issued": {},
+      "reason": "builder-lost"
+    },
+    "journal": {
+      "id": "old",
+      "itemId": "Tower",
+      "x": 4,
+      "y": 4,
+      "workers": [
+        10
+      ],
+      "status": "waiting-trucks",
+      "created": 0,
+      "attempts": {},
+      "issued": {},
+      "structureId": 50,
+      "idleAt": null,
+      "observed": true,
+      "progress": 0.4444444444444444,
+      "remaining": null,
+      "workersActive": 0
+    }
+  },
+  "retryImplicitRemoteWorkers": [
+    {
+      "id": 31,
+      "x": 70,
+      "y": 70,
+      "order": 10
+    },
+    {
+      "id": 32,
+      "x": 72,
+      "y": 70,
+      "order": 10
+    }
+  ],
+  "unstartedJournal": {
+    "id": "old",
+    "itemId": "Tower",
+    "x": 4,
+    "y": 4,
+    "workers": [
+      10
+    ],
+    "status": "interrupted",
+    "created": 0,
+    "attempts": {},
+    "issued": {},
+    "idleAt": 5000,
+    "remaining": null
+  },
+  "compactSummary": null,
+  "sources": [
+    {
+      "path": "scenario/warzone-towers-commands.js",
+      "sha256": "35a33be65b2e7863af38ef79991834344ea6a8f36719c8d519bfd12cedadb1a8"
+    },
+    {
+      "path": "app/src/main/assets/warzone-command-pages.js",
+      "sha256": "7b55ae99f5043150f05f88e62c6f7a36d90808586da4a5c997b73a6417c23240"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/build-display.js",
+      "sha256": "c4164c3a91df86e4235f0ecb9f24968446f09f8feb7b52a18aa3407b4547553b"
+    }
+  ],
+  "recordedUTC": "2026-11-11T15:25:01.341Z"
+}

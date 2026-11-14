@@ -1,0 +1,199 @@
+{
+  "version": "0.72",
+  "versionCode": 72,
+  "candidateAPK_SHA256": "ba6c6327699855de6442c84c3d41c965c790e68b853030fe9709d4a4f1a489c1",
+  "scope": "Multiplayer-only oil/derrick footprint policy and bundled MUSIC on/off; existing modes and compiled native client frozen. User requested no emulator testing.",
+  "exactAPKVerification": {
+    "evidence": {
+      "path": "qa/multiplayer-072/offline-verification.json",
+      "bytes": 145740,
+      "sha256": "10c8b5c7750b41307a959c5364ec64c284f480178189ef71dfff7665854d32c5"
+    },
+    "buildLog": {
+      "path": "qa/multiplayer-072/build.log",
+      "bytes": 2477,
+      "sha256": "b4e18f32585b57c06aa28c8883af76620f8c7420c841bc2d42fd807ea8fbab92"
+    },
+    "emulatorUsed": false,
+    "emulatorOmittedAtUserRequest": true,
+    "androidGameplayVerified": false,
+    "androidMusicPlaybackVerified": false,
+    "offlineHostChecksPassed": true,
+    "buildChecksPassed": true,
+    "offlineFixtureEvidence": [
+      {
+        "path": "qa/multiplayer-072/music-compose.json",
+        "bytes": 377,
+        "sha256": "c590dd733f667176751b7b4a5c3303929b4f58818aa2d40d8d3ca381f0b8333d"
+      },
+      {
+        "path": "qa/multiplayer-072/music-host.json",
+        "bytes": 1512,
+        "sha256": "39ecb44196d01893bebde8d4f3b73e025a618ebe087c2a823f51c5e45949b6fd"
+      },
+      {
+        "path": "qa/multiplayer-072/music-java.json",
+        "bytes": 373,
+        "sha256": "7fe379152154a75031091721845c8c94754b91c92c7ccf5c00e9c87a1fe367a7"
+      },
+      {
+        "path": "qa/multiplayer-072/oil-spacing-checks.json",
+        "bytes": 2419,
+        "sha256": "bcdd2d9ef4551a1024221133cb65aa16b2b88b4ec2db47caee9938f59e8c1f9c"
+      }
+    ],
+    "checks": {
+      "oilFootprintAndDerrickPolicy": true,
+      "constructionSpacingHostChecks": true,
+      "multiplayerMusicToggleAndLifecycle": true,
+      "musicSettingsRoutingAndBundledMedia": true,
+      "composeChecks": true,
+      "hostRegressions": true,
+      "successfulBuild": true
+    },
+    "verificationScope": "Confirmed prior generated Multiplayer queue rejects adjacent oil reservations before native validation. Tested actual queue functions with dense oil FIFO, overlap/duplicates, native placement and reachability stand-ins; only requested oil spacing exemption differs. Tested actual MP music player/settings/routes, all39 original track hashes, local range requests, unique session tokens, menu/lifecycle, background and exit cleanup, plus original Opus decoding and media clock in desktop Chromium. Session, lobby, persistent combat, input and Back code regressions pass. Clean Android Gradle build succeeded. No emulator, Android device, public room or VPS operations.",
+    "limitations": [
+      "Multiplayer oil construction was not exercised in the Android engine for this version.",
+      "Music playback, Android audio focus and menu/input behavior were not tested on an Android device or emulator.",
+      "Desktop browser decoder checks used muted output; physical speaker output was not checked."
+    ],
+    "pinnedCheckedSourceFiles": 709
+  },
+  "fallback": {
+    "path": "qa/multiplayer-072/fallback-0.72.json",
+    "bytes": 486,
+    "sha256": "dcb6aef88fc736ffa278fef47a08bae4ddf4d26f823d7d00e275b67180b64799"
+  },
+  "sourcePreservation": {
+    "changedBaselineSources": [
+      {
+        "path": "AGENTS.md",
+        "beforeSHA256": "58e6e058decfb94bbfdd3496120932b6a464df3bb9ef86fa9184467e88ba0d83",
+        "sha256": "eb6980f576181a63c6d6c312ab8ed3930e39419e90666181bc736f6079d610f0"
+      },
+      {
+        "path": "app/build.gradle.kts",
+        "beforeSHA256": "7688343679beb63b082d07d0e94fffbe63c7e148d9b6b59ea4f6bdf91ee602b8",
+        "sha256": "ecdae59a6b2ed673a9c64e35d9ca2dae290971d35f111254700b89606bfd5706"
+      },
+      {
+        "path": "app/src/main/assets/multiplayer/engine.html",
+        "beforeSHA256": "d65ec625611c626a9ad911f67cb98db5766884adc6196d9c4f3b554ae35efe06",
+        "sha256": "a76c316e90795b8fa27039e19b3547044927c043d516d4df9c622d401114f386"
+      },
+      {
+        "path": "app/src/main/assets/multiplayer/index.html",
+        "beforeSHA256": "6b497dd828f1584e28e97ae4c79ee5afbd174684b847e48654a6d8f683973561",
+        "sha256": "6958af01a81d340d34c967557a7a369cac38ac2fbcf48d20eec7d94139e2bc12"
+      },
+      {
+        "path": "app/src/main/assets/multiplayer/lobby-config.js",
+        "beforeSHA256": "96b15c9ace72ea087791384e9a406e98356181e277cfd51102777f42bcb4ef01",
+        "sha256": "56fd17126e5b8ed2d76718f3b3f04dc5e0b5e2a51d0f74422e91e393f8e6064e"
+      },
+      {
+        "path": "app/src/main/assets/multiplayer/mobile-ui-runtime.js",
+        "beforeSHA256": "1412e48843d2ccbac32852869ec81c2c8abecdaea046232082bdc8b61a2627b2",
+        "sha256": "563c291f632b986f77e914b441bcf5017848912c3c3e39b33cfdb32cf988e399"
+      },
+      {
+        "path": "app/src/main/assets/multiplayer/session.js",
+        "beforeSHA256": "8e3d4d630cd28d04b96b5d34b463cfdc25eeae24a73b8a477d9f1b986032063c",
+        "sha256": "bdc9b954add00e987621338c45a6b68f70e0b9eba54b487dfa28a7fb1ffed7b2"
+      },
+      {
+        "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MultiplayerActivity.java",
+        "beforeSHA256": "d3f2851104de921ce2952b7853911023f701eaf132e01ea649fd1efa26289976",
+        "sha256": "14e12fceca777e691ccb07a5367bcd19f08cfbfe20758e3e13f050788de30be7"
+      }
+    ],
+    "addedSources": [
+      "app/src/main/assets/multiplayer/music.js",
+      "archive/release-0.72-multiplayer-oil-music.json",
+      "qa/multiplayer-072/back-host.json",
+      "qa/multiplayer-072/build.log",
+      "qa/multiplayer-072/fallback-0.72.json",
+      "qa/multiplayer-072/music-browser.json",
+      "qa/multiplayer-072/music-compose.json",
+      "qa/multiplayer-072/music-host.json",
+      "qa/multiplayer-072/music-java.json",
+      "qa/multiplayer-072/music-menu-640x320.png",
+      "qa/multiplayer-072/offline-verification.json",
+      "qa/multiplayer-072/oil-preservation-baseline.json",
+      "qa/multiplayer-072/oil-spacing-checks.json",
+      "qa/multiplayer-072/session-checks.json",
+      "tools/check-multiplayer-back-072.py",
+      "tools/check-multiplayer-music-072.py",
+      "tools/compose-multiplayer-music-072.cjs",
+      "tools/compose-multiplayer-ui-072.cjs",
+      "tools/package-multiplayer-072.py",
+      "tools/record-multiplayer-072.py",
+      "tools/test-multiplayer-music-072.cjs",
+      "tools/test-multiplayer-oil-spacing-072.cjs",
+      "tools/test-multiplayer-session-072.cjs"
+    ],
+    "baselineSourceEntries": 12417,
+    "everyBaselineSourceEntryRetained": true,
+    "existingTowersCampaignFFAAssetsFrozen": true,
+    "upstreamCommit": "7d3d8e51a61ceee89e6bf672a41337e1a9cd7392",
+    "protocol": [
+      16384,
+      104
+    ],
+    "nativeBuildPerformed": false,
+    "nativeCompiledClientReusedFromVersion": "0.71",
+    "sourceOverlayManifest": {
+      "path": "vendor/multiplayer/native-071/source-overlays.json",
+      "bytes": 1077,
+      "sha256": "e1489603363481f81c58bb04e4d34a84dbc9145543c4425c66b9688bfe32f598"
+    },
+    "completePatch": {
+      "path": "vendor/multiplayer/native-071/native-ui.patch",
+      "bytes": 46141,
+      "sha256": "b6c3c38267e1eb75e844ac412252ce11a7176f2fef8bc7f0f5146afb1f2148c1"
+    },
+    "nativeBuild": {
+      "path": "qa/multiplayer-071/native-build.json",
+      "bytes": 5069,
+      "sha256": "881e8100681511907c59f73ddccdf0c13207abeace0f7491f9d9415d908755d5"
+    },
+    "integration": {
+      "path": "vendor/multiplayer/native-071/runtime-integration.json",
+      "bytes": 1064,
+      "sha256": "5082fc268cc1c1840218461eb4005e94e00d055787adddd4c25a6d4783bcd525"
+    },
+    "portableNativeSourcesAndRawPairVerified": true,
+    "officialMPDataFrozen": true,
+    "wasmBinaryUnmodifiedAfterCompiler": true
+  },
+  "certificateSHA256": "4499efe00477c7c724c06a1dd96f935864548665c13ab5e2bd0a9c0f83f7cb15",
+  "changedAPKMembers": [
+    "AndroidManifest.xml",
+    "assets/multiplayer/engine.html",
+    "assets/multiplayer/index.html",
+    "assets/multiplayer/lobby-config.js",
+    "assets/multiplayer/mobile-ui-runtime.js",
+    "assets/multiplayer/music.js",
+    "assets/multiplayer/session.js",
+    "classes3.dex"
+  ],
+  "everyBaselineAPKMemberRetained": true,
+  "allAPKAssetsMatchSource": true,
+  "existingModeAssetsAndNativeLibrariesFrozen": true,
+  "bundledMusicFrozen": true,
+  "compiledMultiplayerClientByteIdenticalTo071": true,
+  "livePhoneAdsAndEmulatorFallbackRetained": true,
+  "maximumAPKZipGapBytes": 4096,
+  "generatedBuildConfigSHA256": "69b609a5fffbebfa6b5dd4c290297639618b8fd245f62a337a2c3ea8bc2db447",
+  "nativeBuildPerformed": false,
+  "emulatorUsed": false,
+  "androidGameplayVerified": false,
+  "androidMusicPlaybackVerified": false,
+  "offlineHostChecksPassed": true,
+  "buildChecksPassed": true,
+  "packageChecksPassed": true,
+  "liveAdsTested": false,
+  "githubPublished": false,
+  "vpsChanged": false,
+  "recordedUTC": "2026-11-14T11:24:38.958568+00:00"
+}

@@ -1,0 +1,39 @@
+{
+  "version": "0.53",
+  "passed": true,
+  "checksPassed": 13,
+  "checks": [
+    "Campaign pre-HQ drafts keep the actual Command Centre requirement visible and cannot be saved",
+    "Completing HQ while Design remains open invalidates the cached failure and obtains a fresh native validation",
+    "HQ completion while Design is closed clears old failure; reopening actually revalidates the complete draft",
+    "Reopening Campaign Design always refreshes a cached HQ failure even when the previous state transition was not observed",
+    "HQ loss invalidates cached success immediately, disables save, and remains clear after close/reopen",
+    "New authored component grants refresh available choices and validate the unchanged draft without inventing research",
+    "A native validation arriving after HQ loss cannot restore a stale successful save button",
+    "An older validation reply cannot overwrite the fresh result after HQ completion or a part change",
+    "Mission/load context invalidation cancels pending timers and ignores validation acknowledgments from the old world",
+    "Old-context save replies neither persist stale designs nor clear the new context save-busy state",
+    "A successfully native-validated Campaign design persists and reaches the normal Manufacturing command with exact components and factory",
+    "Native rejection remains authoritative and failed phone persistence does not add a blueprint",
+    "Towers and Duel retain their earlier cached validation, HQ-transition and draft/save command behavior"
+  ],
+  "emulatorUsed": false,
+  "actualNativeEngineExecuted": false,
+  "gameplayVerified": false,
+  "scope": "Actual UI function execution with synthetic HQ/part snapshots and asynchronous command replies; native makeTemplate, real storage and gameplay require exact-APK runtime checks",
+  "baselineProof": "archive/campaign-design-0.53-baseline.json",
+  "backendModified": false,
+  "authoredResearchModified": false,
+  "HQRequirementPreserved": true,
+  "sources": [
+    {
+      "path": "app/src/main/assets/warzone-command-pages.js",
+      "sha256": "529de343e4a734870b6b8346eb21034389e5aba679157aa4e43fb75638459d36"
+    },
+    {
+      "path": "tools/check-campaign-design-053.cjs",
+      "sha256": "492927f5e44e231e8f6f2128eb62ded4a9de934fba7771a8ca64d6a069f2f739"
+    }
+  ],
+  "recordedUTC": "2026-11-11T16:46:35.733Z"
+}

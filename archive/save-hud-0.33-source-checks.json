@@ -1,0 +1,52 @@
+{
+  "version": "0.33",
+  "passed": true,
+  "emulatorUsed": false,
+  "androidRuntimeExecuted": false,
+  "scope": "Actual extracted HUD functions executed together against small DOM/window/clock stubs; no browser paint, native game or emulator execution.",
+  "sourceCheckGroupsPassed": 8,
+  "checks": [
+    {
+      "name": "Saving event followed by repeated combat HUD refreshes keeps SAVE disabled",
+      "passed": true
+    },
+    {
+      "name": "Combat HUD reads current saving state even before its feedback event is delivered",
+      "passed": true
+    },
+    {
+      "name": "Acknowledged completion reenables SAVE and retains success feedback through HUD refresh",
+      "passed": true
+    },
+    {
+      "name": "A pending STOP locks SAVE during completion until STOP is actually acknowledged",
+      "passed": true
+    },
+    {
+      "name": "Failure permits RETRY only when STOP is no longer pending",
+      "passed": true
+    },
+    {
+      "name": "Retired battles keep SAVE disabled across feedback and combat HUD updates",
+      "passed": true
+    },
+    {
+      "name": "An old success timer cannot clear a newer save lock",
+      "passed": true
+    },
+    {
+      "name": "Save-only locking preserves other command enablement and existing combat/zoom states",
+      "passed": true
+    }
+  ],
+  "sources": [
+    {
+      "path": "app/src/main/assets/warzone-touch-controls.js",
+      "sha256": "14299c9b819ed32863be5672278647f57d5c5896d840006c944c2cfd22aca4ef"
+    },
+    {
+      "path": "tools/check-save-hud-033.cjs",
+      "sha256": "171127961c8e82da4e8f44fffe8061cacdbe686df47e6c49ee82408f0d1fd9ab"
+    }
+  ]
+}

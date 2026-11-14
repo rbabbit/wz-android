@@ -1,0 +1,45 @@
+{
+  "version": "0.51",
+  "passed": true,
+  "checksPassed": 6,
+  "checks": [
+    {
+      "name": "Physical input fence is registered on iframe window capture before document touch interception",
+      "passed": true
+    },
+    {
+      "name": "A complete quick tap between HUD polls immediately suspends native ALL intent and keeps it fenced through release settling",
+      "passed": true
+    },
+    {
+      "name": "Pending native click acknowledgement extends suspension beyond the250ms physical release fence",
+      "passed": true
+    },
+    {
+      "name": "Multiple pointers remain fenced until every physical pointer is released or cancelled",
+      "passed": true
+    },
+    {
+      "name": "Adapter-forwarded mouse events cannot create or release physical touch fences",
+      "passed": true
+    },
+    {
+      "name": "Blur, mission reset, battle end and pagehide clear stale physical IDs without leaving native ALL enabled on exit",
+      "passed": true
+    }
+  ],
+  "emulatorUsed": false,
+  "actualNativeEngineExecuted": false,
+  "scope": "Actual campaign controller event/intent VM checks. Native idempotent-selection behavior and world orders are verified by native checks and the delivery emulator journey.",
+  "sources": [
+    {
+      "path": "app/src/main/assets/warzone-campaign-hud.js",
+      "sha256": "9e93f14a2ef8bc2f5763a723cca94867d088e52a883cc41aca326eafe6c63c65"
+    },
+    {
+      "path": "tools/check-campaign-input-fence-051.cjs",
+      "sha256": "a3b79c21dda1f0858e12a601b707b6b9359ceb54b10e3cc2fb575337df028ca9"
+    }
+  ],
+  "recordedUTC": "2026-11-11T14:59:24.514Z"
+}

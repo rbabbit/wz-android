@@ -1,0 +1,121 @@
+{
+  "version": "0.63",
+  "passed": true,
+  "checksPassed": 25,
+  "checks": [
+    {
+      "name": "0.62 baseline: adjacent40px20deg short twist emits no rotation",
+      "passed": true
+    },
+    {
+      "name": "0.62 baseline:12px opening consumes the stroke as zoom without any wheel, discarding the following full circle",
+      "passed": true
+    },
+    {
+      "name": "0.62 baseline:14px parallel setup permanently captures the later full circle as tilt",
+      "passed": true
+    },
+    {
+      "name": "Short20deg adjacent twists at30/40/60px reliably capture yaw in all modes and directions",
+      "passed": true
+    },
+    {
+      "name": "Short twists tolerate different initial pair angles and either anchored finger",
+      "passed": true
+    },
+    {
+      "name": "Provisional12px zoom hands off to full-circle yaw without replaying span or old angular history",
+      "passed": true
+    },
+    {
+      "name": "A real radial pinch can deliberately hand off to yaw while retaining its already emitted zoom only",
+      "passed": true
+    },
+    {
+      "name": "Provisional14px tilt hands off and discards its unused pitch budget",
+      "passed": true
+    },
+    {
+      "name": "A committed tilt hands off cleanly without replaying pitch after yaw starts",
+      "passed": true
+    },
+    {
+      "name": "Pan-to-yaw waits for native MMB release/rearm under both frame orders",
+      "passed": true
+    },
+    {
+      "name": "Committed pan-to-yaw keeps bounded endpoints and stale deferred lift/session callbacks cannot begin yaw",
+      "passed": true
+    },
+    {
+      "name": "A rotating asymmetric pair with common centroid drift wins over its provisional translation",
+      "passed": true
+    },
+    {
+      "name": "Noncircular opposed diagonal finger strokes retain angular intent despite changing span",
+      "passed": true
+    },
+    {
+      "name": "Unequal opposing strokes and a lightly wandering pivot capture rotation",
+      "passed": true
+    },
+    {
+      "name": "Separately rendered parallel vertical updates with jitter remain tilt without yaw",
+      "passed": true
+    },
+    {
+      "name": "Separately rendered parallel horizontal updates do not become transient zoom or yaw",
+      "passed": true
+    },
+    {
+      "name": "Separately rendered radial pinch with small angular jitter remains zoom in both directions",
+      "passed": true
+    },
+    {
+      "name": "Paired parallel tilt with slight unequal motion and angular wobble stays predictable",
+      "passed": true
+    },
+    {
+      "name": "Start-and-reverse angular jitter cannot accumulate false confidence or emit yaw",
+      "passed": true
+    },
+    {
+      "name": "Staggered touchdown preserves an initial one-finger pan and then accepts the two-finger twist",
+      "passed": true
+    },
+    {
+      "name": "One stopped20deg sample has one bounded settle confirmation and no perpetual timer activity",
+      "passed": true
+    },
+    {
+      "name": "Settle candidates die on lift, third finger, native menu or document retirement",
+      "passed": true
+    },
+    {
+      "name": "Continuous imperfect720deg strokes and reversal retain unlimited yaw with the same pair",
+      "passed": true
+    },
+    {
+      "name": "Menu returns and world fences require fresh valid pointers before accepting another gesture",
+      "passed": true
+    },
+    {
+      "name": "Accepted one-finger pan bodies stay byte-identical to0.62 and rapid native release/rearm remains intact",
+      "passed": true
+    }
+  ],
+  "emulatorUsed": false,
+  "actualNativeEngineExecuted": false,
+  "scope": "Actual touch adapter with prepared DOM/SDL input fixtures. Native camera behavior and visual acceptance remain exact-APK emulator checks.",
+  "sources": [
+    {
+      "path": "app/src/main/assets/warzone-touch-controls.js",
+      "sha256": "a4bd3ad258908460875c4cf9189d43a4bc5753543b48a6b25eb065919747973c"
+    },
+    {
+      "path": "tools/check-touch-rotation-063.cjs",
+      "sha256": "5a1b0758752874190468021e0870b899b60cee70f2040051c78c39ce11f44bfa"
+    }
+  ],
+  "recordedUTC": "2026-11-12T13:07:50.796Z"
+}

@@ -1,0 +1,53 @@
+--- a/src/radar.cpp
++++ b/src/radar.cpp
+@@ -19,6 +19,7 @@
+ */
+ #include <string.h>
+ #include <cstdlib>
++#include <nlohmann/json.hpp>
+ 
+ #include "lib/framework/frame.h"
+ #include "lib/framework/fixedpoint.h"
+@@ -798,6 +799,22 @@
+ }
+ 
+ /** Does a screen coordinate lie within the radar area? */
++
++// Observation only: the separate Campaign host needs the actual scroll-area
++// radar, not a rectangle inferred from the full map or widget diagonal.
++std::string campaignMobileRadarStateJSON()
++{
++    const uint16_t inverseAngle = static_cast<uint16_t>(rotateRadar ? -playerPos.r.y : 0);
++    const bool visible = !loop_GetVideoStatus() && !gameUpdatePaused()
++        && pRadarWidget && pRadarWidget->visible() && radarVisible()
++        && radarWidth > 0 && radarHeight > 0;
++    return nlohmann::json{{"visible",visible},{"centerX",radarCenterX},{"centerY",radarCenterY},
++        {"width",radarWidth},{"height",radarHeight},
++        {"rotation",rotateRadar ? playerPos.r.y * (M_PI / 32768.0) : 0.0},
++        {"inverseCos",iCos(inverseAngle)/65536.0},{"inverseSin",iSin(inverseAngle)/65536.0},
++        {"viewportWidth",pie_GetVideoBufferWidth()},{"viewportHeight",pie_GetVideoBufferHeight()}}.dump();
++}
++
+ bool CoordInRadar(int x, int y)
+ {
+ 	Vector2f pos;
+--- a/src/hci.cpp
++++ b/src/hci.cpp
+@@ -2417,6 +2417,7 @@
+ #endif
+ }
+ 
++extern std::string campaignMobileRadarStateJSON();
+ std::string campaignMobileNativeStateJSON()
+ {
+     const bool video = loop_GetVideoStatus();
+@@ -2428,7 +2429,8 @@
+         {"realTime",realTime},{"video",video},{"paused",paused},{"nativeMode",intMode},
+         {"playing",playing},{"transportOpen",intMode == INT_TRANSPORTER},
+         {"intelligenceOpen",intMode == INT_INTELMAP},{"nativeMenuOpen",menu},
+-        {"worldSafe",playing && !video && !paused && !menu}}.dump();
++        {"worldSafe",playing && !video && !paused && !menu},
++        {"radar",nlohmann::json::parse(campaignMobileRadarStateJSON())}}.dump();
+ }
+ 
+ void campaignMobileFrame()

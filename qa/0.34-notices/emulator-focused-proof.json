@@ -1,0 +1,166 @@
+{
+  "version": "0.34",
+  "candidateAPK_SHA256": "4c5c5b6937ea756aea0f46697b0ea6c4f0192d918d88e4caa663a00a149fda7a",
+  "emulatorUsed": true,
+  "gameplayVerified": false,
+  "liveAdsTested": false,
+  "testAdsOnly": true,
+  "smallPhoneConfigurations": [
+    {
+      "physicalWidth": 1080,
+      "physicalHeight": 600,
+      "densityDpi": 240,
+      "fontScale": 1.0
+    },
+    {
+      "physicalWidth": 960,
+      "physicalHeight": 540,
+      "densityDpi": 240,
+      "fontScale": 1.3
+    }
+  ],
+  "focusedObservations": {
+    "defeatTransitionVerified": true,
+    "researchNoticeVerified": true,
+    "saveConfirmationVerified": true,
+    "waveIncomingVerified": true,
+    "closeButtonsRemovedVerified": true
+  },
+  "checks": [
+    {
+      "name": "Actual native research completed with named black/white notice and no purple stock duplicate",
+      "passed": true,
+      "observation": "delivery-research.json"
+    },
+    {
+      "name": "Real native save archived before exact Game saved acknowledgement",
+      "passed": true,
+      "observation": "delivery-save.json"
+    },
+    {
+      "name": "Research and Production sidebar X removed; footer/header repeated toggles restore input",
+      "passed": true,
+      "observation": "delivery-menu-checks.json"
+    },
+    {
+      "name": "Native selected wave roster and correct counts, compact panel below header; Skip remains usable",
+      "passed": true,
+      "observation": "delivery-wave-check.json"
+    },
+    {
+      "name": "Authoritative native HQ-loss fixture returned to same-map Home without stock results flash",
+      "passed": true,
+      "observation": "delivery-defeat.json"
+    },
+    {
+      "name": "Genuine phone archive resumed with original logical session then saved again",
+      "passed": true,
+      "observation": "resumed-save.json"
+    },
+    {
+      "name": "Repeated save after resume succeeded at larger text on 960x540 screen",
+      "passed": true,
+      "observation": "repeated-save.json"
+    }
+  ],
+  "evidenceFiles": [
+    {
+      "path": "qa/0.34-notices/delivery-research-completion.png",
+      "sha256": "b5c766bcc92408ebbd5f6d89b1f40b964e833403cc8c7d6550f15c63e2e2f85d"
+    },
+    {
+      "path": "qa/0.34-notices/delivery-game-saved.png",
+      "sha256": "8a72589460cdd5c0c433537a8219b5660cb2a14374991ea1feee89b15f01560b"
+    },
+    {
+      "path": "qa/0.34-notices/delivery-research-sidebar.png",
+      "sha256": "f0e815c7c79940a9100e75fe561b90e75ac47ac4f1ba0bc8db20a40828527ae6"
+    },
+    {
+      "path": "qa/0.34-notices/delivery-factory-sidebar.png",
+      "sha256": "d8e49845eb2cddd7f6a15d5711e71bad15f04c6dd68cd693acaf735aa146b900"
+    },
+    {
+      "path": "qa/0.34-notices/delivery-wave-incoming.png",
+      "sha256": "d247edaa85be628be68af4b8d9da677103a1b518201d260e4de93c733d7036a0"
+    },
+    {
+      "path": "qa/0.34-notices/delivery-small-production.png",
+      "sha256": "3a2363785eb0de46cffe3473528ff4d96c25594d374a72bbde893518a9789ba3"
+    },
+    {
+      "path": "qa/0.34-notices/delivery-small-resumed-save.png",
+      "sha256": "4a869cfc63b2d83f15b9d64306f71d7e34d84707081cf7e2e3ca364a30c334d5"
+    },
+    {
+      "path": "qa/0.34-notices/delivery-defeat-home.png",
+      "sha256": "5bc13a1fee2dde8b92267c070155da424028765990934ac32e4d887b555cda6d"
+    },
+    {
+      "path": "qa/0.34-notices/delivery-small-home.png",
+      "sha256": "845ae7449f1f30fb96746ee7b223336504afbe9380fd8ef161432bdeedf873fd"
+    },
+    {
+      "path": "qa/0.34-notices/defeat-transition-350.png",
+      "sha256": "7e7595d9da4212c4e78d7d30eb532f6d4e740c908aaa80610d33b5cdd8fa9dcc"
+    },
+    {
+      "path": "qa/0.34-notices/defeat-transition-355.png",
+      "sha256": "3ca4e410f2c1b2ae544d1c7dadfb47d18311e9a76e581c8fef5d082e1e348788"
+    },
+    {
+      "path": "qa/0.34-notices/defeat-transition-360.png",
+      "sha256": "cf0bc193ea11f518b4c29706fd7580fcb5bffe36afd432153a0472823f9374c2"
+    }
+  ],
+  "supportingObservations": [
+    {
+      "path": "qa/0.34-notices/delivery-research.json",
+      "sha256": "32d8fed1fe6ccc311f687709ff20639a2e91972d8d48ff7252c21aaaac1fd01b"
+    },
+    {
+      "path": "qa/0.34-notices/delivery-save.json",
+      "sha256": "18aa9e85e4e1e325671694c52b3638bdf5b3a25da58abfd07f6788dabb6fce58"
+    },
+    {
+      "path": "qa/0.34-notices/delivery-menu-checks.json",
+      "sha256": "4d967c0b1cf22095bf63ae451774239c50045f902aceddc4148e728c8d7ddf5e"
+    },
+    {
+      "path": "qa/0.34-notices/delivery-wave-check.json",
+      "sha256": "da9d68133e7cc0805bd287eb5c0072fd1f445eee46454fcbeb435817babc2ea6"
+    },
+    {
+      "path": "qa/0.34-notices/delivery-defeat.json",
+      "sha256": "ea1398eedf98b1906bcea8efde402a7b586b8f569bfbae1027eb905ad62e21ea"
+    },
+    {
+      "path": "qa/0.34-notices/resumed-save.json",
+      "sha256": "74244119eb1c77e44a8800a2d374f65a0d87b09df54835082816f765ace44c30"
+    },
+    {
+      "path": "qa/0.34-notices/repeated-save.json",
+      "sha256": "681abee0bb184a33a199b31b01d880a634bd19b407be1dddad3f226242ebd20d"
+    },
+    {
+      "path": "qa/0.34-notices/emulator-restoration.json",
+      "sha256": "9027e26af0bebcec72b15affa221b9849e84cd4726e87ce4e0aba758d9f689f5"
+    }
+  ],
+  "fixtureDisclosure": "Complete genuine native save copied; removed only human Command Centre from struct.json, then native F8. This verifies native HQ detection, not a naturally lost match.",
+  "videoReview": {
+    "path": "C:/timerApp/_release-records/towers034-delivery-defeat.mp4",
+    "sha256": "ac452c6a4c2ca3e713efe5d0177546739061707e651022d1c7e005b3073126fc",
+    "framesReviewed": 385,
+    "samplingHz": 10,
+    "stockResultsSeen": false
+  },
+  "limitations": [
+    "Focused affected-flow checks, not every map or a full match.",
+    "The existing emulator renders terrain black; units, controls, menus and authoritative native state remain available. This predates v0.34.",
+    "The first 25-second baseline defeat fixture ended before native loading finished; the delivery run waited for observable Home and reviewed transition frames.",
+    "One save after live display/font configuration changes returned a native persistence error. A genuine archive reload and three following saves succeeded; no save writer or storage logic was changed.",
+    "loading in the existing saved-game report denotes a resumed battle, not an unfinished load; ready and advancing native clock establish readiness."
+  ],
+  "emulatorRestored": true
+}

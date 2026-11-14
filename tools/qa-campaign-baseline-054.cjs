@@ -1,0 +1,22 @@
+'use strict';
+const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict'),q=require('./campaign-live-051.cjs');
+async function ready(){const end=Date.now()+45000;while(Date.now()<end){try{return await q.connect()}catch(e){if(!/not ready/.test(String(e)))throw e;await q.delay(150)}}throw Error('Campaign WebView not ready')}
+(async()=>{const c=await ready();try{
+ await c.wait('window.WarzoneSavedGames?.ready&&window.__warzoneCommands?.report().snapshot?.hasHQ',30000);
+ const installed=q.adb('shell','pm','path',q.packageId).toString().trim().replace(/^package:/,'');const sha=q.adb('shell','sha256sum',installed).toString().split(/\s/)[0];assert.equal(sha,'addecad6d7229b921f9f311ea08fe35890e9dec5b64ad1d21342f33e3079e7d1');
+ async function capture(name){const v=await c.evaluate('({commands:__warzoneCommands.report(),display:WarzoneBuildDisplay.report(),terrain:WarzoneTerrain.report(),campaign:__warzoneCampaign.report(),footer:parent.document.getElementById("lab-ops").innerText})');fs.writeFileSync(path.join(q.out,name+'.json'),JSON.stringify({installedAPK_SHA256:sha,...v},null,2));q.screen(name);return v}
+ await c.tap('#blocknight-base');await c.wait('!__kalaWarzoneTouch.report().zoomPending',10000);
+ if(!await c.evaluate('__warzoneCommands.report().buildOpen'))await c.tap('#wt-open-build');await c.tap('[data-category="STRUCTURES"]');
+ for(const[item,x,y,name]of[['A0ResearchFacility',18,50,'baseline-first-build'],['A0PowerGenerator',20,52,'baseline-switched-queued-build']]){
+  await c.tap(`[data-build="${item}"]`);await c.wait(`__warzoneCommands.report().nativeToolReady&&__warzoneCommands.report().placement===${JSON.stringify(item)}&&__warzoneCommands.report().nativeBuildGroup.length>0`,15000);
+  const preview=await c.evaluate(`__warzoneCommands.send('preview-build',{itemId:${JSON.stringify(item)},x:${x},y:${y},workerIds:__warzoneCommands.report().nativeBuildGroup})`);assert(preview.ok,JSON.stringify(preview));assert(await c.evaluate('WarzoneTerrain.refresh()'));
+  const p=await c.evaluate(`(()=>{const p=WarzoneTerrain.project(${x}*128+64,${y}*128+64,0),f=parent.document.getElementById('warzone-game-frame').getBoundingClientRect();return{x:p.x+f.x,y:p.y+f.y,w:parent.innerWidth,h:parent.innerHeight,pick:WarzoneTerrain.pick(p.x,p.y)}})()`);assert.equal(p.pick?.x,x);assert.equal(p.pick?.y,y);
+  const png=q.adb('exec-out','screencap','-p');q.adb('shell','input','tap',String(Math.round(p.x*png.readUInt32BE(16)/p.w)),String(Math.round(p.y*png.readUInt32BE(20)/p.h)));
+  await c.wait(`__warzoneCommands.report().snapshot?.constructionSites.some(s=>s.itemId===${JSON.stringify(item)}&&s.x===${x}&&s.y===${y})`,10000);const v=await capture(name);console.log(JSON.stringify({name,sites:v.display.acceptedSites,drawn:v.display.drawn,error:v.display.error}));
+ }
+ await c.tap('#wt-open-build');await c.wait('!__warzoneCommands.report().nativeClosing',10000);await capture('baseline-closed-build-queue');
+ await c.host("(()=>{const f=document.getElementById('warzone-game-frame');f.focus({preventScroll:true});f.contentDocument.getElementById('canvas').focus({preventScroll:true});return true})()");
+ const p=await c.evaluate("LaunchedModule.WZVAL_configDirPath+'/savegames/campaign/QuickSave'");const stamp=await c.evaluate(`(()=>{try{return LaunchedModule.FS.stat(${JSON.stringify(p)}+'/droid.json').mtime.getTime()}catch(_){return 0}})()`);await c.evaluate('__kalaWarzoneTouch.nativePressKey("F7","F7",118);true');await c.wait(`LaunchedModule.FS.stat(${JSON.stringify(p)}+'/droid.json').mtime.getTime()>${stamp}`,15000);
+ const checkpoint=await c.evaluate(`(()=>{const f=LaunchedModule.FS,p=${JSON.stringify(p)},files={};for(const n of f.readdir(p))if(n!=='.'&&n!=='..'&&!f.isDir(f.stat(p+'/'+n).mode))files[n]=Array.from(f.readFile(p+'/'+n));return{path:p,files,state:__warzoneCommands.report().snapshot}})()`);fs.mkdirSync('C:/timerApp/_release-records/campaign054',{recursive:true});fs.writeFileSync('C:/timerApp/_release-records/campaign054/pending-builds.json',JSON.stringify(checkpoint));console.log('Captured native pending-build checkpoint');
+ await c.tap('#wt-field-toggle');await c.tap('#wt-intelligence');await c.wait('__warzoneCampaign.report().nativeState.intelligenceOpen',10000);await capture('baseline-intelligence-fullscreen');await c.tap('#wt-campaign-native-back');await c.wait('__warzoneCampaign.report().nativeState.worldSafe',10000);
+}finally{c.close()}})().catch(e=>{console.error(e);process.exitCode=1});

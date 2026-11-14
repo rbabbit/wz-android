@@ -1,0 +1,3911 @@
+{
+  "version": "0.47",
+  "nativeResearchVFS": "/data/mp/stats/research.json",
+  "nativeResearchSHA256": "40815905e0ce63468d6fd607fd9b8e318146693d1a797f3d612c1eb3f8fc1ba7",
+  "frozenEngineDataSHA256": "f22e7956aa68102affe615e8a8794d9ea16ed4ba49d2e18ad380955967c9f599",
+  "topics": [
+    {
+      "id": "R-Comp-CommandTurret01",
+      "name": "Command Turret",
+      "statId": "CommandBrain01",
+      "iconId": "IMAGE_RES_COMPUTERTECH",
+      "url": "/warzone/research-icons/Command%20Turret.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_C_CT1"
+    },
+    {
+      "id": "R-Comp-CommandTurret02",
+      "name": "Command Turret Upgrade",
+      "statId": "CommandBrain01",
+      "iconId": "IMAGE_RES_COMPUTERTECH",
+      "url": "/warzone/research-icons/Command%20Turret%20II.gif",
+      "resolution": "explicit-alias",
+      "reportDefinition": true,
+      "message": "RES_C_CT2"
+    },
+    {
+      "id": "R-Cyborg-Armor-Heat01",
+      "name": "Cyborg Thermal Armor",
+      "statId": null,
+      "iconId": "IMAGE_RES_CYBORGTECH",
+      "url": "/warzone/research-icons/Cyborg%20Thermal%20Armor.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_CY_AH1"
+    },
+    {
+      "id": "R-Cyborg-Armor-Heat02",
+      "name": "Cyborg Thermal Armor Mk2",
+      "statId": null,
+      "iconId": "IMAGE_RES_CYBORGTECH",
+      "url": "/warzone/research-icons/Cyborg%20Thermal%20Armor%20Mk2.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Cyborg-Armor-Heat03",
+      "name": "Cyborg Thermal Armor Mk3",
+      "statId": null,
+      "iconId": "IMAGE_RES_CYBORGTECH",
+      "url": "/warzone/research-icons/Cyborg%20Thermal%20Armor%20Mk3.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Cyborg-Armor-Heat04",
+      "name": "Cyborg High Intensity Thermal Armor",
+      "statId": null,
+      "iconId": "IMAGE_RES_CYBORGTECH",
+      "url": "/warzone/research-icons/Cyborg%20High%20Intensity%20Thermal%20Armor.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_CY_AH4"
+    },
+    {
+      "id": "R-Cyborg-Armor-Heat05",
+      "name": "Cyborg High Intensity Thermal Armor Mk2",
+      "statId": null,
+      "iconId": "IMAGE_RES_CYBORGTECH",
+      "url": "/warzone/research-icons/Cyborg%20High%20Intensity%20Thermal%20Armor%20Mk2.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Cyborg-Armor-Heat06",
+      "name": "Cyborg High Intensity Thermal Armor Mk3",
+      "statId": null,
+      "iconId": "IMAGE_RES_CYBORGTECH",
+      "url": "/warzone/research-icons/Cyborg%20High%20Intensity%20Thermal%20Armor%20Mk3.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Cyborg-Armor-Heat07",
+      "name": "Cyborg Superdense Thermal Armor",
+      "statId": null,
+      "iconId": "IMAGE_RES_CYBORGTECH",
+      "url": "/warzone/research-icons/Cyborg%20Superdense%20Thermal%20Armor.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Cyborg-Armor-Heat08",
+      "name": "Cyborg Superdense Thermal Armor Mk2",
+      "statId": null,
+      "iconId": "IMAGE_RES_CYBORGTECH",
+      "url": "/warzone/research-icons/Cyborg%20Superdense%20Thermal%20Armor%20Mk2.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Cyborg-Armor-Heat09",
+      "name": "Cyborg Superdense Thermal Armor Mk3",
+      "statId": null,
+      "iconId": "IMAGE_RES_CYBORGTECH",
+      "url": "/warzone/research-icons/Cyborg%20Superdense%20Thermal%20Armor%20Mk3.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Cyborg-Hvywpn-A-T",
+      "name": "Super Scourge Cyborg",
+      "statId": "Missile-A-T",
+      "iconId": "IMAGE_RES_CYBORGTECH",
+      "url": "/warzone/research-icons/Super%20Scourge%20Cyborg.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_CYW_H_AT"
+    },
+    {
+      "id": "R-Cyborg-Hvywpn-Acannon",
+      "name": "Super Auto-Cannon Cyborg",
+      "statId": "Cannon5VulcanMk1",
+      "iconId": "IMAGE_RES_CYBORGTECH",
+      "url": "/warzone/research-icons/Super%20Auto-Cannon%20Cyborg.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_CYW_H_AC"
+    },
+    {
+      "id": "R-Cyborg-Hvywpn-HPV",
+      "name": "Super HVC Cyborg",
+      "statId": "Cannon4AUTOMk1",
+      "iconId": "IMAGE_RES_CYBORGTECH",
+      "url": "/warzone/research-icons/Super%20HPV%20Cyborg.gif",
+      "resolution": "explicit-alias",
+      "reportDefinition": true,
+      "message": "RES_CYW_H_HPV"
+    },
+    {
+      "id": "R-Cyborg-Hvywpn-Mcannon",
+      "name": "Super Heavy-Gunner",
+      "statId": "Cannon2A-TMk1",
+      "iconId": "IMAGE_RES_CYBORGTECH",
+      "url": "/warzone/ui/icons/question.svg",
+      "resolution": "generic",
+      "reportDefinition": true,
+      "message": "RES_CYW_H_MC"
+    },
+    {
+      "id": "R-Cyborg-Hvywpn-PulseLsr",
+      "name": "Super Pulse Laser Cyborg",
+      "statId": "Laser2PULSEMk1",
+      "iconId": "IMAGE_RES_CYBORGTECH",
+      "url": "/warzone/research-icons/Super%20Pulse%20Laser%20Cyborg.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_CYW_H_PLAS"
+    },
+    {
+      "id": "R-Cyborg-Hvywpn-RailGunner",
+      "name": "Super Rail-Gunner",
+      "statId": "RailGun2Mk1",
+      "iconId": "IMAGE_RES_CYBORGTECH",
+      "url": "/warzone/research-icons/Super%20Rail-Gunner.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_CYW_H_RG"
+    },
+    {
+      "id": "R-Cyborg-Hvywpn-TK",
+      "name": "Super Tank-Killer Cyborg",
+      "statId": "Rocket-VTOL-HvyA-T",
+      "iconId": "IMAGE_RES_CYBORGTECH",
+      "url": "/warzone/research-icons/Super%20Tank-Killer%20Cyborg.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_CYW_H_TK"
+    },
+    {
+      "id": "R-Cyborg-Metals01",
+      "name": "Cyborg Composite Alloys",
+      "statId": null,
+      "iconId": "IMAGE_RES_CYBORGTECH",
+      "url": "/warzone/research-icons/Cyborg%20Composite%20Alloys.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_CYMET1"
+    },
+    {
+      "id": "R-Cyborg-Metals02",
+      "name": "Cyborg Composite Alloys Mk2",
+      "statId": null,
+      "iconId": "IMAGE_RES_CYBORGTECH",
+      "url": "/warzone/research-icons/Cyborg%20Composite%20Alloys%20Mk2.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Cyborg-Metals03",
+      "name": "Cyborg Composite Alloys Mk3",
+      "statId": null,
+      "iconId": "IMAGE_RES_CYBORGTECH",
+      "url": "/warzone/research-icons/Cyborg%20Composite%20Alloys%20Mk3.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Cyborg-Metals04",
+      "name": "Cyborg Dense Composite Alloys",
+      "statId": null,
+      "iconId": "IMAGE_RES_CYBORGTECH",
+      "url": "/warzone/research-icons/Cyborg%20Dense%20Composite%20Alloys.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_CYMET4"
+    },
+    {
+      "id": "R-Cyborg-Metals05",
+      "name": "Cyborg Dense Composite Alloys Mk2",
+      "statId": null,
+      "iconId": "IMAGE_RES_CYBORGTECH",
+      "url": "/warzone/research-icons/Cyborg%20Dense%20Composite%20Alloys%20Mk2.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Cyborg-Metals06",
+      "name": "Cyborg Dense Composite Alloys Mk3",
+      "statId": null,
+      "iconId": "IMAGE_RES_CYBORGTECH",
+      "url": "/warzone/research-icons/Cyborg%20Dense%20Composite%20Alloys%20Mk3.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Cyborg-Metals07",
+      "name": "Cyborg Superdense Composite Alloys",
+      "statId": null,
+      "iconId": "IMAGE_RES_CYBORGTECH",
+      "url": "/warzone/research-icons/Cyborg%20Superdense%20Composite%20Alloys.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_CYMET7"
+    },
+    {
+      "id": "R-Cyborg-Metals08",
+      "name": "Cyborg Superdense Composite Alloys Mk2",
+      "statId": null,
+      "iconId": "IMAGE_RES_CYBORGTECH",
+      "url": "/warzone/research-icons/Cyborg%20Superdense%20Composite%20Alloys%20Mk2.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Cyborg-Metals09",
+      "name": "Cyborg Superdense Composite Alloys Mk3",
+      "statId": null,
+      "iconId": "IMAGE_RES_CYBORGTECH",
+      "url": "/warzone/research-icons/Cyborg%20Superdense%20Composite%20Alloys%20Mk3.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Cyborg-Transport",
+      "name": "Cyborg Transport",
+      "statId": "TransporterBody",
+      "iconId": "IMAGE_RES_CYBORGTECH",
+      "url": "/warzone/research-icons/Cyborg%20Transport.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_CYTRANS"
+    },
+    {
+      "id": "R-Defense-AA-Laser",
+      "name": "Stormbringer Emplacement",
+      "statId": "P0-AASite-Laser",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Stormbringer%20Emplacement.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_DEF_AALAS"
+    },
+    {
+      "id": "R-Defense-AASite-QuadBof",
+      "name": "AA Cyclone Flak Cannon Emplacement",
+      "statId": "AASite-QuadBof",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/AA%20Flak%20Cannon%20Emplacement.gif",
+      "resolution": "explicit-alias",
+      "reportDefinition": true,
+      "message": "RES_EMP_AA1"
+    },
+    {
+      "id": "R-Defense-AASite-QuadBof02",
+      "name": "AA Tornado Flak Cannon Emplacement",
+      "statId": "AASite-QuadBof02",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/ui/icons/question.svg",
+      "resolution": "generic",
+      "reportDefinition": true,
+      "message": "RES_EMP_AA4"
+    },
+    {
+      "id": "R-Defense-AASite-QuadMg1",
+      "name": "Hurricane AA Site",
+      "statId": "AASite-QuadMg1",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Hurricane%20AA%20Site.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_EMP_AA2"
+    },
+    {
+      "id": "R-Defense-AASite-QuadRotMg",
+      "name": "Whirlwind AA Site",
+      "statId": "AASite-QuadRotMg",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Whirlwind%20AA%20Site.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_EMP_AA3"
+    },
+    {
+      "id": "R-Defense-Cannon6",
+      "name": "Twin Assault Cannon Bunker",
+      "statId": "PillBox-Cannon6",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Twin%20Assault%20Cannon%20Bunker.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_DEF_RotMG"
+    },
+    {
+      "id": "R-Defense-EMPCannon",
+      "name": "EMP Cannon Hardpoint",
+      "statId": "WallTower-EMP",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/EMP%20Cannon%20Tower.gif",
+      "resolution": "explicit-alias",
+      "reportDefinition": true,
+      "message": "RES_DEF_EMP"
+    },
+    {
+      "id": "R-Defense-EMPMortar",
+      "name": "EMP Mortar Pit",
+      "statId": "Emplacement-MortarEMP",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/EMP%20Mortar%20Pit.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_DEF_EMPM"
+    },
+    {
+      "id": "R-Defense-Emplacement-HPVcannon",
+      "name": "Hyper Velocity Cannon Emplacement",
+      "statId": "Emplacement-HPVcannon",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Hyper%20Velocity%20Cannon%20Emplacement.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_EMP_HPV"
+    },
+    {
+      "id": "R-Defense-GuardTower-ATMiss",
+      "name": "Scourge Missile Tower",
+      "statId": "GuardTower-ATMiss",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Scourge%20Missile%20Tower.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_EMP_ATMTOW"
+    },
+    {
+      "id": "R-Defense-GuardTower-Rail1",
+      "name": "Needle Gun Tower",
+      "statId": "GuardTower-Rail1",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Needle%20Gun%20Tower.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_EMP_RL1TOW"
+    },
+    {
+      "id": "R-Defense-HardcreteGate",
+      "name": "Hardcrete Gate",
+      "statId": "A0HardcreteMk1Gate",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Hardcrete%20Gate.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_DF_HCW2"
+    },
+    {
+      "id": "R-Defense-HardcreteWall",
+      "name": "Hardcrete",
+      "statId": "A0HardcreteMk1Wall",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Hardcrete.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_DF_HCW1"
+    },
+    {
+      "id": "R-Defense-HeavyLas",
+      "name": "Heavy Laser Emplacement",
+      "statId": "Emplacement-HeavyLaser",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Heavy%20Laser%20Emplacement.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_EMP_HEAVYLAS"
+    },
+    {
+      "id": "R-Defense-ParticleGun",
+      "name": "Particle Gun Emplacement",
+      "statId": "Emplacement-ParticleGun",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/ui/icons/question.svg",
+      "resolution": "generic",
+      "reportDefinition": true,
+      "message": "RES_EMP_PG"
+    },
+    {
+      "id": "R-Defense-HeavyPlasmaLauncher",
+      "name": "Heavy Plasma Launcher Emplacement",
+      "statId": "Emplacement-HeavyPlasmaLauncher",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/ui/icons/question.svg",
+      "resolution": "generic",
+      "reportDefinition": true,
+      "message": "RES_EMP_PLASLAUNCH"
+    },
+    {
+      "id": "R-Defense-Howitzer",
+      "name": "Howitzer Emplacement",
+      "statId": "Emplacement-Howitzer105",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Howitzer%20Emplacement.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_EMP_HOW"
+    },
+    {
+      "id": "R-Defense-Howitzer-Incendiary",
+      "name": "Incendiary Howitzer Emplacement",
+      "statId": "Emplacement-Howitzer-Incendiary",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Incendiary%20Howitzer%20Emplacement.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_EMP_INH"
+    },
+    {
+      "id": "R-Defense-HvyA-Trocket",
+      "name": "Tank Killer Emplacement",
+      "statId": "Emplacement-HvyATrocket",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Tank%20Killer%20Emplacement.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_EMP_HVATR"
+    },
+    {
+      "id": "R-Defense-HvyArtMissile",
+      "name": "Archangel Missile Battery",
+      "statId": "Emplacement-HvART-pit",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Archangel%20Missile%20Battery.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_EMP_HvAM"
+    },
+    {
+      "id": "R-Defense-HvyFlamer",
+      "name": "Inferno Bunker",
+      "statId": "Tower-Projector",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Inferno%20Bunker.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_EMP_HVFL"
+    },
+    {
+      "id": "R-Defense-HvyHowitzer",
+      "name": "Ground Shaker Emplacement",
+      "statId": "Emplacement-Howitzer150",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Ground%20Shaker%20Emplacement.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_EMP_HvHOW"
+    },
+    {
+      "id": "R-Defense-HvyMor",
+      "name": "Bombard Pit",
+      "statId": "Emplacement-MortarPit02",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Bombard%20Pit.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_EMP_HvyMor"
+    },
+    {
+      "id": "R-Defense-IDFRocket",
+      "name": "Ripple Rocket Battery",
+      "statId": "Emplacement-Rocket06-IDF",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Ripple%20Rocket%20Battery.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_EMP_IDFR"
+    },
+    {
+      "id": "R-Defense-MRL",
+      "name": "Mini-Rocket Battery",
+      "statId": "Emplacement-MRL-pit",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Mini-Rocket%20Battery.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_EMP_MRL"
+    },
+    {
+      "id": "R-Defense-MRLHvy",
+      "name": "Heavy Rocket Battery",
+      "statId": "Emplacement-MRLHvy-pit",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/ui/icons/question.svg",
+      "resolution": "generic",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Defense-MassDriver",
+      "name": "Mass Driver Fortress",
+      "statId": "X-Super-MassDriver",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Mass%20Driver%20Fortress.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_EMP_MD"
+    },
+    {
+      "id": "R-Defense-MdArtMissile",
+      "name": "Seraph Missile Battery",
+      "statId": "Emplacement-MdART-pit",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Seraph%20Missile%20Battery.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_EMP_MdAM"
+    },
+    {
+      "id": "R-Defense-MortarPit",
+      "name": "Mortar Pit",
+      "statId": "Emplacement-MortarPit01",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Mortar%20Pit.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_EMP_Mpit"
+    },
+    {
+      "id": "R-Defense-MortarPit-Incendiary",
+      "name": "Incendiary Mortar Pit",
+      "statId": "Emplacement-MortarPit-Incendiary",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Incendiary%20Mortar%20Pit.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_EMP_IMP"
+    },
+    {
+      "id": "R-Defense-Pillbox01",
+      "name": "Heavy Machinegun Bunker",
+      "statId": "PillBox1",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Machinegun%20Bunker.gif",
+      "resolution": "explicit-alias",
+      "reportDefinition": true,
+      "message": "RES_DF_P1"
+    },
+    {
+      "id": "R-Defense-Pillbox04",
+      "name": "Light Cannon Bunker",
+      "statId": "PillBox4",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Light%20Cannon%20Bunker.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_PB_LC"
+    },
+    {
+      "id": "R-Defense-Pillbox05",
+      "name": "Flamer Bunker",
+      "statId": "PillBox5",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Flamer%20Bunker.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_PB_FL"
+    },
+    {
+      "id": "R-Defense-Pillbox06",
+      "name": "Lancer Tower",
+      "statId": "GuardTower5",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Lancer%20Tower.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_PB_ATR"
+    },
+    {
+      "id": "R-Defense-PlasmaCannon",
+      "name": "Plasma Cannon Emplacement",
+      "statId": "Emplacement-PlasmaCannon",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Plasma%20Cannon%20Emplacement.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_EMP_PLASCAN"
+    },
+    {
+      "id": "R-Defense-PlasmiteFlamer",
+      "name": "Plasmite Flamer Bunker",
+      "statId": "Plasmite-flamer-bunker",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Plasmite%20Flamer%20Bunker.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_EMP_PFL"
+    },
+    {
+      "id": "R-Defense-PrisLas",
+      "name": "Flashlight Emplacement",
+      "statId": "Emplacement-PrisLas",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Flashlight%20Emplacement.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_EMP_PrisLas"
+    },
+    {
+      "id": "R-Defense-PulseLas",
+      "name": "Pulse Laser Tower",
+      "statId": "GuardTower-BeamLas",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Pulse%20Laser%20Tower.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_EMP_PulseLas"
+    },
+    {
+      "id": "R-Defense-Rail2",
+      "name": "Rail Gun Emplacement",
+      "statId": "Emplacement-Rail2",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Rail%20Gun%20Emplacement.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_EMP_Rail2"
+    },
+    {
+      "id": "R-Defense-Rail3",
+      "name": "Gauss Cannon Emplacement",
+      "statId": "Emplacement-Rail3",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Gauss%20Cannon%20Emplacement.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_EMP_Rail3"
+    },
+    {
+      "id": "R-Defense-RotHow",
+      "name": "Hellstorm Emplacement",
+      "statId": "Emplacement-RotHow",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Hellstorm%20Emplacement.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_EMP_RotHOW"
+    },
+    {
+      "id": "R-Defense-RotMG",
+      "name": "Rotary MG Bunker",
+      "statId": "Pillbox-RotMG",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Rotary%20MG%20Bunker.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_DEF_RotMG"
+    },
+    {
+      "id": "R-Defense-RotMor",
+      "name": "Pepperpot Pit",
+      "statId": "Emplacement-RotMor",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Pepperpot%20Pit.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_EMP_RotMor"
+    },
+    {
+      "id": "R-Defense-SamSite1",
+      "name": "Avenger SAM Site",
+      "statId": "P0-AASite-SAM1",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Avenger%20SAM%20Site.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_EMP_SAM1"
+    },
+    {
+      "id": "R-Defense-SamSite2",
+      "name": "Vindicator SAM Site",
+      "statId": "P0-AASite-SAM2",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Vindicator%20SAM%20Site.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_EMP_SAM2"
+    },
+    {
+      "id": "R-Defense-Sunburst",
+      "name": "Sunburst AA Site",
+      "statId": "P0-AASite-Sunburst",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Sunburst%20AA%20Site.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Defense-Super-Cannon",
+      "name": "Cannon Fortress",
+      "statId": "X-Super-Cannon",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Cannon%20Fortress.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_EMP_CAN"
+    },
+    {
+      "id": "R-Defense-Super-Missile",
+      "name": "Missile Fortress",
+      "statId": "X-Super-Missile",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Missile%20Fortress.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_EMP_MSL"
+    },
+    {
+      "id": "R-Defense-Super-Rocket",
+      "name": "Heavy Rocket Bastion",
+      "statId": "X-Super-Rocket",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Heavy%20Rocket%20Bastion.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_EMP_RKT"
+    },
+    {
+      "id": "R-Defense-TankTrap01",
+      "name": "Tank Traps",
+      "statId": "A0TankTrap",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Tank%20Traps.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_TTRAP1"
+    },
+    {
+      "id": "R-Defense-Tower01",
+      "name": "Heavy Machinegun Guard Tower",
+      "statId": "GuardTower1",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Machinegun%20Guard%20Tower.gif",
+      "resolution": "explicit-alias",
+      "reportDefinition": true,
+      "message": "RES_TOWER1"
+    },
+    {
+      "id": "R-Defense-Tower06",
+      "name": "Mini-Rocket Tower",
+      "statId": "GuardTower6",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Mini-Rocket%20Tower.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_EMP_PODTOW"
+    },
+    {
+      "id": "R-Defense-Wall-RotMg",
+      "name": "Assault Gun Hardpoint",
+      "statId": "Wall-RotMg",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Assault%20Gun%20Hardpoint.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_WT7_RMG"
+    },
+    {
+      "id": "R-Defense-Wall-VulcanCan",
+      "name": "Assault Cannon Hardpoint",
+      "statId": "Wall-VulcanCan",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Assault%20Cannon%20Hardpoint.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_WT8_RC"
+    },
+    {
+      "id": "R-Defense-WallTower-A-Tmiss",
+      "name": "Scourge Missile Hardpoint",
+      "statId": "WallTower-Atmiss",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Scourge%20Missile%20Hardpoint.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_WT9_ATM"
+    },
+    {
+      "id": "R-Defense-WallTower-DoubleAAgun",
+      "name": "AA Cyclone Flak Cannon Hardpoint",
+      "statId": "WallTower-DoubleAAGun",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/AA%20Flak%20Cannon%20Hardpoint.gif",
+      "resolution": "explicit-alias",
+      "reportDefinition": true,
+      "message": "RES_WT_DOUBLEAA"
+    },
+    {
+      "id": "R-Defense-WallTower-DoubleAAgun02",
+      "name": "AA Tornado Flak Cannon Hardpoint",
+      "statId": "WallTower-DoubleAAGun02",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/ui/icons/question.svg",
+      "resolution": "generic",
+      "reportDefinition": true,
+      "message": "RES_WT_DOUBLEAA2"
+    },
+    {
+      "id": "R-Defense-WallTower-HPVcannon",
+      "name": "Hyper Velocity Cannon Hardpoint",
+      "statId": "WallTower-HPVcannon",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Hyper%20Velocity%20Cannon%20Hardpoint.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_WT13_HPV"
+    },
+    {
+      "id": "R-Defense-WallTower-HvyA-Trocket",
+      "name": "Tank Killer Hardpoint",
+      "statId": "WallTower-HvATrocket",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Tank%20Killer%20Hardpoint.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_WT12_HAT"
+    },
+    {
+      "id": "R-Defense-WallTower-PulseLas",
+      "name": "Pulse Laser Hardpoint",
+      "statId": "WallTower-PulseLas",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Pulse%20Laser%20Hardpoint.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_WT14_PLS"
+    },
+    {
+      "id": "R-Defense-WallTower-QuadRotAA",
+      "name": "Whirlwind Hardpoint",
+      "statId": "WallTower-QuadRotAAGun",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Whirlwind%20Hardpoint.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_WT_QUADAA"
+    },
+    {
+      "id": "R-Defense-WallTower-Rail2",
+      "name": "Rail Gun Hardpoint",
+      "statId": "WallTower-Rail2",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Rail%20Gun%20Hardpoint.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_WT15_RL2"
+    },
+    {
+      "id": "R-Defense-WallTower-Rail3",
+      "name": "Gauss Cannon Hardpoint",
+      "statId": "WallTower-Rail3",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Gauss%20Cannon%20Hardpoint.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_WT15_RL3"
+    },
+    {
+      "id": "R-Defense-WallTower-SamHvy",
+      "name": "Vindicator Hardpoint",
+      "statId": "WallTower-SamHvy",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Vindicator%20Hardpoint.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_MS_SAM2WT"
+    },
+    {
+      "id": "R-Defense-WallTower-SamSite",
+      "name": "Avenger Hardpoint",
+      "statId": "WallTower-SamSite",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Avenger%20Hardpoint.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_MS_SAM1WT"
+    },
+    {
+      "id": "R-Defense-WallTower-TwinAGun",
+      "name": "Twin Assault Gun Hardpoint",
+      "statId": "WallTower-TwinAssaultGun",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Twin%20Assault%20Gun%20Hardpoint.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_WT_TWINAGHP"
+    },
+    {
+      "id": "R-Defense-WallTower01",
+      "name": "Heavy Machinegun Hardpoint",
+      "statId": "WallTower01",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Heavy%20Machinegun%20Hardpoint.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_DF_WT1"
+    },
+    {
+      "id": "R-Defense-WallTower02",
+      "name": "Light Cannon Hardpoint",
+      "statId": "WallTower02",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Light%20Cannon%20Hardpoint.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_WT2_LC"
+    },
+    {
+      "id": "R-Defense-WallTower03",
+      "name": "Medium Cannon Hardpoint",
+      "statId": "WallTower03",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Medium%20Cannon%20Hardpoint.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_WT3_MC"
+    },
+    {
+      "id": "R-Defense-WallTower04",
+      "name": "Heavy Cannon Hardpoint",
+      "statId": "WallTower04",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Heavy%20Cannon%20Hardpoint.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_WT4_HC"
+    },
+    {
+      "id": "R-Defense-WallTower06",
+      "name": "Lancer Hardpoint",
+      "statId": "WallTower06",
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Lancer%20Hardpoint.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_WT6_ATR"
+    },
+    {
+      "id": "R-Defense-WallUpgrade01",
+      "name": "Improved Hardcrete",
+      "statId": null,
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Improved%20Hardcrete.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_DF_WU1"
+    },
+    {
+      "id": "R-Defense-WallUpgrade02",
+      "name": "Improved Hardcrete Mk2",
+      "statId": null,
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Improved%20Hardcrete%20Mk2.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Defense-WallUpgrade03",
+      "name": "Improved Hardcrete Mk3",
+      "statId": null,
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Improved%20Hardcrete%20Mk3.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Defense-WallUpgrade04",
+      "name": "Supercrete",
+      "statId": null,
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Supercrete.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_DF_WU4"
+    },
+    {
+      "id": "R-Defense-WallUpgrade05",
+      "name": "Supercrete Mk2",
+      "statId": null,
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Supercrete%20Mk2.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Defense-WallUpgrade06",
+      "name": "Supercrete Mk3",
+      "statId": null,
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Supercrete%20Mk3.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Defense-WallUpgrade07",
+      "name": "Plascrete",
+      "statId": null,
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Plascrete.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_DF_WU7"
+    },
+    {
+      "id": "R-Defense-WallUpgrade08",
+      "name": "Plascrete Mk2",
+      "statId": null,
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Plascrete%20Mk2.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Defense-WallUpgrade09",
+      "name": "Plascrete Mk3",
+      "statId": null,
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Plascrete%20Mk3.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Defense-WallUpgrade10",
+      "name": "Plasteel",
+      "statId": null,
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Plasteel.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Defense-WallUpgrade11",
+      "name": "Plasteel Mk2",
+      "statId": null,
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Plasteel%20Mk2.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Defense-WallUpgrade12",
+      "name": "Plasteel Mk3",
+      "statId": null,
+      "iconId": "IMAGE_RES_DEFENCE",
+      "url": "/warzone/research-icons/Plasteel%20Mk3.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Struc-CommandRelay",
+      "name": "Command Relay Post",
+      "statId": "A0ComDroidControl",
+      "iconId": "IMAGE_RES_STRUCTURETECH",
+      "url": "/warzone/research-icons/Command%20Relay%20Post.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_ST_CR1"
+    },
+    {
+      "id": "R-Struc-Factory-Cyborg",
+      "name": "Cyborg Factory",
+      "statId": "A0CyborgFactory",
+      "iconId": "IMAGE_RES_STRUCTURETECH",
+      "url": "/warzone/research-icons/Cyborg%20Factory.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_ST_FCY1"
+    },
+    {
+      "id": "R-Struc-Factory-Module",
+      "name": "Factory Module",
+      "statId": "A0FacMod1",
+      "iconId": "IMAGE_RES_STRUCTURETECH",
+      "url": "/warzone/research-icons/Factory%20Module.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_ST_FM1"
+    },
+    {
+      "id": "R-Struc-Factory-Upgrade01",
+      "name": "Automated Manufacturing",
+      "statId": null,
+      "iconId": "IMAGE_RES_STRUCTURETECH",
+      "url": "/warzone/research-icons/Automated%20Manufacturing.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_ST_FU1"
+    },
+    {
+      "id": "R-Struc-Factory-Upgrade04",
+      "name": "Robotic Manufacturing",
+      "statId": null,
+      "iconId": "IMAGE_RES_STRUCTURETECH",
+      "url": "/warzone/research-icons/Robotic%20Manufacturing.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_ST_FU4"
+    },
+    {
+      "id": "R-Struc-Factory-Upgrade07",
+      "name": "Advanced Manufacturing",
+      "statId": null,
+      "iconId": "IMAGE_RES_STRUCTURETECH",
+      "url": "/warzone/research-icons/Advanced%20Manufacturing.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_ST_FU7"
+    },
+    {
+      "id": "R-Struc-Factory-Upgrade09",
+      "name": "Self-Replicating Manufacturing",
+      "statId": null,
+      "iconId": "IMAGE_RES_STRUCTURETECH",
+      "url": "/warzone/research-icons/Self-Replicating%20Manufacturing.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Struc-Materials01",
+      "name": "Reinforced Base Structure Materials",
+      "statId": null,
+      "iconId": "IMAGE_RES_STRUCTURETECH",
+      "url": "/warzone/research-icons/Reinforced%20Base%20Structure%20Materials.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_ST_MAT1"
+    },
+    {
+      "id": "R-Struc-Materials02",
+      "name": "Hardened Base Structure Materials",
+      "statId": null,
+      "iconId": "IMAGE_RES_STRUCTURETECH",
+      "url": "/warzone/research-icons/Hardened%20Base%20Structure%20Materials.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_ST_MAT4"
+    },
+    {
+      "id": "R-Struc-Materials03",
+      "name": "Advanced Base Structure Materials",
+      "statId": null,
+      "iconId": "IMAGE_RES_STRUCTURETECH",
+      "url": "/warzone/research-icons/Advanced%20Base%20Structure%20Materials.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_ST_MAT7"
+    },
+    {
+      "id": "R-Struc-Power-Upgrade01",
+      "name": "Gas Turbine Generator",
+      "statId": null,
+      "iconId": "IMAGE_RES_POWERTECH",
+      "url": "/warzone/research-icons/Gas%20Turbine%20Generator.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_POWU1"
+    },
+    {
+      "id": "R-Struc-Power-Upgrade01b",
+      "name": "Gas Turbine Generator Mk2",
+      "statId": null,
+      "iconId": "IMAGE_RES_POWERTECH",
+      "url": "/warzone/research-icons/Gas%20Turbine%20Generator%20Mk2.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Struc-Power-Upgrade01c",
+      "name": "Gas Turbine Generator Mk3",
+      "statId": null,
+      "iconId": "IMAGE_RES_POWERTECH",
+      "url": "/warzone/research-icons/Gas%20Turbine%20Generator%20Mk3.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Struc-Power-Upgrade02",
+      "name": "Vapor Turbine Generator",
+      "statId": null,
+      "iconId": "IMAGE_RES_POWERTECH",
+      "url": "/warzone/research-icons/Vapor%20Turbine%20Generator.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_POWU2"
+    },
+    {
+      "id": "R-Struc-Power-Upgrade03",
+      "name": "Vapor Turbine Generator Mk2",
+      "statId": null,
+      "iconId": "IMAGE_RES_POWERTECH",
+      "url": "/warzone/research-icons/Vapor%20Turbine%20Generator%20Mk2.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Struc-Power-Upgrade03a",
+      "name": "Vapor Turbine Generator Mk3",
+      "statId": null,
+      "iconId": "IMAGE_RES_POWERTECH",
+      "url": "/warzone/research-icons/Vapor%20Turbine%20Generator%20Mk3.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Struc-PowerModuleMk1",
+      "name": "Power Module",
+      "statId": "A0PowMod1",
+      "iconId": "IMAGE_RES_POWERTECH",
+      "url": "/warzone/research-icons/Power%20Module.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_POWMD1"
+    },
+    {
+      "id": "R-Struc-RepairFacility",
+      "name": "Repair Facility",
+      "statId": "A0RepairCentre3",
+      "iconId": "IMAGE_RES_STRUCTURETECH",
+      "url": "/warzone/research-icons/Repair%20Facility.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_REPAI1"
+    },
+    {
+      "id": "R-Struc-Research-Module",
+      "name": "Research Module",
+      "statId": "A0ResearchModule1",
+      "iconId": "IMAGE_RES_STRUCTURETECH",
+      "url": "/warzone/research-icons/Research%20Module.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_ST_RM1"
+    },
+    {
+      "id": "R-Struc-Research-Upgrade01",
+      "name": "Synaptic Link Data Analysis",
+      "statId": null,
+      "iconId": "IMAGE_RES_COMPUTERTECH",
+      "url": "/warzone/research-icons/Synaptic%20Link%20Data%20Analysis.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_ST_RU1"
+    },
+    {
+      "id": "R-Struc-Research-Upgrade02",
+      "name": "Synaptic Link Data Analysis Mk2",
+      "statId": null,
+      "iconId": "IMAGE_RES_COMPUTERTECH",
+      "url": "/warzone/research-icons/Synaptic%20Link%20Data%20Analysis%20Mk2.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Struc-Research-Upgrade03",
+      "name": "Synaptic Link Data Analysis Mk3",
+      "statId": null,
+      "iconId": "IMAGE_RES_COMPUTERTECH",
+      "url": "/warzone/research-icons/Synaptic%20Link%20Data%20Analysis%20Mk3.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Struc-Research-Upgrade04",
+      "name": "Dedicated Synaptic Link Data Analysis",
+      "statId": null,
+      "iconId": "IMAGE_RES_COMPUTERTECH",
+      "url": "/warzone/research-icons/Dedicated%20Synaptic%20Link%20Data%20Analysis.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_ST_RU4"
+    },
+    {
+      "id": "R-Struc-Research-Upgrade05",
+      "name": "Dedicated Synaptic Link Data Analysis Mk2",
+      "statId": null,
+      "iconId": "IMAGE_RES_COMPUTERTECH",
+      "url": "/warzone/research-icons/Dedicated%20Synaptic%20Link%20Data%20Analysis%20Mk2.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Struc-Research-Upgrade06",
+      "name": "Dedicated Synaptic Link Data Analysis Mk3",
+      "statId": null,
+      "iconId": "IMAGE_RES_COMPUTERTECH",
+      "url": "/warzone/research-icons/Dedicated%20Synaptic%20Link%20Data%20Analysis%20Mk3.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Struc-Research-Upgrade07",
+      "name": "Neural Synapse Research Brain",
+      "statId": null,
+      "iconId": "IMAGE_RES_COMPUTERTECH",
+      "url": "/warzone/research-icons/Neural%20Synapse%20Research%20Brain.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_ST_RU7"
+    },
+    {
+      "id": "R-Struc-Research-Upgrade08",
+      "name": "Neural Synapse Research Brain Mk2",
+      "statId": null,
+      "iconId": "IMAGE_RES_COMPUTERTECH",
+      "url": "/warzone/research-icons/Neural%20Synapse%20Research%20Brain%20Mk2.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Struc-Research-Upgrade09",
+      "name": "Neural Synapse Research Brain Mk3",
+      "statId": null,
+      "iconId": "IMAGE_RES_COMPUTERTECH",
+      "url": "/warzone/research-icons/Neural%20Synapse%20Research%20Brain%20Mk3.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Struc-RprFac-Upgrade01",
+      "name": "Automated Repair Facility",
+      "statId": "A0RepairCentre3",
+      "iconId": "IMAGE_RES_SYSTEMTECH",
+      "url": "/warzone/research-icons/Automated%20Repair%20Facility.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_ST_RFU1"
+    },
+    {
+      "id": "R-Struc-RprFac-Upgrade04",
+      "name": "Robotic Repair Facility",
+      "statId": "A0RepairCentre3",
+      "iconId": "IMAGE_RES_SYSTEMTECH",
+      "url": "/warzone/research-icons/Robotic%20Repair%20Facility.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_ST_RFU4"
+    },
+    {
+      "id": "R-Struc-RprFac-Upgrade06",
+      "name": "Advanced Repair Facility",
+      "statId": "A0RepairCentre3",
+      "iconId": "IMAGE_RES_SYSTEMTECH",
+      "url": "/warzone/research-icons/Advanced%20Repair%20Facility%20.gif",
+      "resolution": "explicit-alias",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Struc-VTOLFactory",
+      "name": "VTOL Factory",
+      "statId": "A0VTolFactory1",
+      "iconId": "IMAGE_RES_STRUCTURETECH",
+      "url": "/warzone/research-icons/VTOL%20Factory.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_ST_VF"
+    },
+    {
+      "id": "R-Struc-VTOLPad",
+      "name": "VTOL Rearming Pad",
+      "statId": "A0VtolPad",
+      "iconId": "IMAGE_RES_STRUCTURETECH",
+      "url": "/warzone/research-icons/VTOL%20Rearming%20Pad.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_ST_VP"
+    },
+    {
+      "id": "R-Struc-VTOLPad-Upgrade01",
+      "name": "Automated VTOL Rearming",
+      "statId": "A0VtolPad",
+      "iconId": "IMAGE_RES_STRUCTURETECH",
+      "url": "/warzone/research-icons/Automated%20VTOL%20Rearming.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_ST_VPU1"
+    },
+    {
+      "id": "R-Struc-VTOLPad-Upgrade02",
+      "name": "Automated VTOL Rearming Mk2",
+      "statId": "A0VtolPad",
+      "iconId": "IMAGE_RES_STRUCTURETECH",
+      "url": "/warzone/research-icons/Automated%20VTOL%20Rearming%20Mk2.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Struc-VTOLPad-Upgrade03",
+      "name": "Automated VTOL Rearming Mk3",
+      "statId": "A0VtolPad",
+      "iconId": "IMAGE_RES_STRUCTURETECH",
+      "url": "/warzone/research-icons/Automated%20VTOL%20Rearming%20Mk3.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Struc-VTOLPad-Upgrade04",
+      "name": "Robotic VTOL Rearming",
+      "statId": "A0VtolPad",
+      "iconId": "IMAGE_RES_STRUCTURETECH",
+      "url": "/warzone/research-icons/Robotic%20VTOL%20Rearming.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_ST_VPU4"
+    },
+    {
+      "id": "R-Struc-VTOLPad-Upgrade05",
+      "name": "Robotic VTOL Rearming Mk2",
+      "statId": "A0VtolPad",
+      "iconId": "IMAGE_RES_STRUCTURETECH",
+      "url": "/warzone/research-icons/Robotic%20VTOL%20Rearming%20Mk2.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Struc-VTOLPad-Upgrade06",
+      "name": "Robotic VTOL Rearming Mk3",
+      "statId": "A0VtolPad",
+      "iconId": "IMAGE_RES_STRUCTURETECH",
+      "url": "/warzone/research-icons/Robotic%20VTOL%20Rearming%20Mk3.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-SuperTransport",
+      "name": "Super Transport",
+      "statId": "SuperTransportBody",
+      "iconId": "IMAGE_RES_DROIDTECH",
+      "url": "/warzone/research-icons/Super%20Transport.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_SUPERTRANS"
+    },
+    {
+      "id": "R-Sys-Autorepair-General",
+      "name": "Auto-Repair",
+      "statId": null,
+      "iconId": "IMAGE_RES_COMPUTERTECH",
+      "url": "/warzone/research-icons/Auto-Repair.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_SY_AR"
+    },
+    {
+      "id": "R-Sys-CBSensor-Tower01",
+      "name": "CB Tower",
+      "statId": "Sys-CB-Tower01",
+      "iconId": "IMAGE_RES_SYSTEMTECH",
+      "url": "/warzone/research-icons/CB%20Tower.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_SY_CBSTW1"
+    },
+    {
+      "id": "R-Sys-CBSensor-Turret01",
+      "name": "CB Turret",
+      "statId": "Sys-CBTurret01",
+      "iconId": "IMAGE_RES_SYSTEMTECH",
+      "url": "/warzone/research-icons/CB%20Turret.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_SY_CBSTU1"
+    },
+    {
+      "id": "R-Sys-Engineering01",
+      "name": "Engineering",
+      "statId": null,
+      "iconId": "IMAGE_RES_SYSTEMTECH",
+      "url": "/warzone/research-icons/Engineering.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_ENGIN1"
+    },
+    {
+      "id": "R-Sys-Engineering02",
+      "name": "Improved Engineering",
+      "statId": null,
+      "iconId": "IMAGE_RES_SYSTEMTECH",
+      "url": "/warzone/research-icons/Improved%20Engineering.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_ENGIN2"
+    },
+    {
+      "id": "R-Sys-Engineering03",
+      "name": "Advanced Engineering",
+      "statId": null,
+      "iconId": "IMAGE_RES_SYSTEMTECH",
+      "url": "/warzone/research-icons/Advanced%20Engineering.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_ENGIN3"
+    },
+    {
+      "id": "R-Sys-MobileRepairTurret01",
+      "name": "Mobile Repair Turret",
+      "statId": "LightRepair1",
+      "iconId": "IMAGE_RES_SYSTEMTECH",
+      "url": "/warzone/research-icons/Mobile%20Repair%20Turret.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_REPTU1"
+    },
+    {
+      "id": "R-Sys-MobileRepairTurretHvy",
+      "name": "Heavy Repair Turret",
+      "statId": "HeavyRepair",
+      "iconId": "IMAGE_RES_SYSTEMTECH",
+      "url": "/warzone/research-icons/Heavy%20Repair%20Turret.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_REPTUHVY"
+    },
+    {
+      "id": "R-Sys-RadarDetector01",
+      "name": "Radar Detector",
+      "statId": "RadarDetector",
+      "iconId": "IMAGE_RES_SYSTEMTECH",
+      "url": "/warzone/research-icons/Radar%20Detector.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_SY_RDST1"
+    },
+    {
+      "id": "R-Sys-Resistance-Circuits",
+      "name": "Nexus Resistance Circuits",
+      "statId": null,
+      "iconId": "IMAGE_RES_COMPUTERTECH",
+      "url": "/warzone/research-icons/Nexus%20Resistance%20Circuits.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_SY_RC"
+    },
+    {
+      "id": "R-Sys-Sensor-Tower01",
+      "name": "Sensor Tower",
+      "statId": "Sys-SensoTower01",
+      "iconId": "IMAGE_RES_SYSTEMTECH",
+      "url": "/warzone/research-icons/Sensor%20Tower.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_SY_STW1"
+    },
+    {
+      "id": "R-Sys-Sensor-Tower02",
+      "name": "Hardened Sensor Tower",
+      "statId": "Sys-SensoTower02",
+      "iconId": "IMAGE_RES_SYSTEMTECH",
+      "url": "/warzone/research-icons/Hardened%20Sensor%20Tower.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_SY_STW2"
+    },
+    {
+      "id": "R-Sys-Sensor-Turret01",
+      "name": "Sensor Turret",
+      "statId": "SensorTurret1Mk1",
+      "iconId": "IMAGE_RES_SYSTEMTECH",
+      "url": "/warzone/research-icons/Sensor%20Turret.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_SENSO1"
+    },
+    {
+      "id": "R-Sys-Sensor-UpLink",
+      "name": "Satellite Uplink Center",
+      "statId": "A0Sat-linkCentre",
+      "iconId": "IMAGE_RES_SYSTEMTECH",
+      "url": "/warzone/research-icons/Satellite%20Uplink%20Centre.gif",
+      "resolution": "explicit-alias",
+      "reportDefinition": true,
+      "message": "RES_SY_S_UP"
+    },
+    {
+      "id": "R-Sys-Sensor-Upgrade01",
+      "name": "Sensor Upgrade",
+      "statId": null,
+      "iconId": "IMAGE_RES_SYSTEMTECH",
+      "url": "/warzone/research-icons/Sensor%20Upgrade.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_SY_SU1"
+    },
+    {
+      "id": "R-Sys-Sensor-Upgrade02",
+      "name": "Sensor Upgrade Mk2",
+      "statId": null,
+      "iconId": "IMAGE_RES_SYSTEMTECH",
+      "url": "/warzone/research-icons/Sensor%20Upgrade%20Mk2.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_SY_SU2"
+    },
+    {
+      "id": "R-Sys-Sensor-Upgrade03",
+      "name": "Sensor Upgrade Mk3",
+      "statId": null,
+      "iconId": "IMAGE_RES_SYSTEMTECH",
+      "url": "/warzone/research-icons/Sensor%20Upgrade%20Mk3.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_SY_SU3"
+    },
+    {
+      "id": "R-Sys-Sensor-WS",
+      "name": "Wide Spectrum Sensor",
+      "statId": "Sensor-WideSpec",
+      "iconId": "IMAGE_RES_SYSTEMTECH",
+      "url": "/warzone/research-icons/Wide%20Spectrum%20Sensor.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_SY_S_WST"
+    },
+    {
+      "id": "R-Sys-Sensor-WSTower",
+      "name": "Wide Spectrum Sensor Tower",
+      "statId": "Sys-SensoTowerWS",
+      "iconId": "IMAGE_RES_SYSTEMTECH",
+      "url": "/warzone/research-icons/Wide%20Spectrum%20Sensor%20Tower.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_SY_S_WS"
+    },
+    {
+      "id": "R-Sys-Spade1Mk1",
+      "name": "Construction Unit",
+      "statId": "Spade1Mk1",
+      "iconId": "IMAGE_RES_SYSTEMTECH",
+      "url": "/warzone/research-icons/Engineering.gif",
+      "resolution": "explicit-alias",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Sys-SpyTower",
+      "name": "Nexus Link Tower",
+      "statId": "Sys-SpyTower",
+      "iconId": "IMAGE_RES_SYSTEMTECH",
+      "url": "/warzone/research-icons/Nexus%20Link%20Tower.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Sys-SpyTurret",
+      "name": "Nexus Link Turret",
+      "statId": "SpyTurret01",
+      "iconId": "IMAGE_RES_SYSTEMTECH",
+      "url": "/warzone/research-icons/Nexus%20Link%20Turret.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_SY_SPT"
+    },
+    {
+      "id": "R-Sys-VTOLCBS-Tower01",
+      "name": "VTOL CB Tower",
+      "statId": "Sys-VTOL-CB-Tower01",
+      "iconId": "IMAGE_RES_SYSTEMTECH",
+      "url": "/warzone/research-icons/VTOL%20CB%20Tower.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_SY_VCBSTW1"
+    },
+    {
+      "id": "R-Sys-VTOLCBS-Turret01",
+      "name": "VTOL CB Turret",
+      "statId": "Sys-VTOLCBTurret01",
+      "iconId": "IMAGE_RES_SYSTEMTECH",
+      "url": "/warzone/research-icons/VTOL%20CB%20Turret.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_SY_VCBSTU1"
+    },
+    {
+      "id": "R-Sys-VTOLStrike-Tower01",
+      "name": "VTOL Strike Tower",
+      "statId": "Sys-VTOL-RadarTower01",
+      "iconId": "IMAGE_RES_SYSTEMTECH",
+      "url": "/warzone/research-icons/VTOL%20Strike%20Tower.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_SY_VSTW1"
+    },
+    {
+      "id": "R-Sys-VTOLStrike-Turret01",
+      "name": "VTOL Strike Turret",
+      "statId": "Sys-VstrikeTurret01",
+      "iconId": "IMAGE_RES_SYSTEMTECH",
+      "url": "/warzone/research-icons/VTOL%20Strike%20Turret.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_SY_VSTU1"
+    },
+    {
+      "id": "R-Vehicle-Armor-Heat01",
+      "name": "Thermal Armor",
+      "statId": null,
+      "iconId": "IMAGE_RES_DROIDTECH",
+      "url": "/warzone/research-icons/Thermal%20Armor.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_V_AH1"
+    },
+    {
+      "id": "R-Vehicle-Armor-Heat02",
+      "name": "Thermal Armor Mk2",
+      "statId": null,
+      "iconId": "IMAGE_RES_DROIDTECH",
+      "url": "/warzone/research-icons/Thermal%20Armor%20Mk2.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Vehicle-Armor-Heat03",
+      "name": "Thermal Armor Mk3",
+      "statId": null,
+      "iconId": "IMAGE_RES_DROIDTECH",
+      "url": "/warzone/research-icons/Thermal%20Armor%20Mk3.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Vehicle-Armor-Heat04",
+      "name": "High Intensity Thermal Armor",
+      "statId": null,
+      "iconId": "IMAGE_RES_DROIDTECH",
+      "url": "/warzone/research-icons/High%20Intensity%20Thermal%20Armor.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_V_AH4"
+    },
+    {
+      "id": "R-Vehicle-Armor-Heat05",
+      "name": "High Intensity Thermal Armor Mk2",
+      "statId": null,
+      "iconId": "IMAGE_RES_DROIDTECH",
+      "url": "/warzone/research-icons/High%20Intensity%20Thermal%20Armor%20Mk2.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Vehicle-Armor-Heat06",
+      "name": "High Intensity Thermal Armor Mk3",
+      "statId": null,
+      "iconId": "IMAGE_RES_DROIDTECH",
+      "url": "/warzone/research-icons/High%20Intensity%20Thermal%20Armor%20Mk3.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Vehicle-Armor-Heat07",
+      "name": "Vehicle Superdense Thermal Armor",
+      "statId": null,
+      "iconId": "IMAGE_RES_DROIDTECH",
+      "url": "/warzone/research-icons/Vehicle%20Superdense%20Thermal%20Armor.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_V_AH7"
+    },
+    {
+      "id": "R-Vehicle-Armor-Heat08",
+      "name": "Vehicle Superdense Thermal Armor Mk2",
+      "statId": null,
+      "iconId": "IMAGE_RES_DROIDTECH",
+      "url": "/warzone/research-icons/Vehicle%20Superdense%20Thermal%20Armor%20Mk2.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Vehicle-Armor-Heat09",
+      "name": "Vehicle Superdense Thermal Armor Mk3",
+      "statId": null,
+      "iconId": "IMAGE_RES_DROIDTECH",
+      "url": "/warzone/research-icons/Vehicle%20Superdense%20Thermal%20Armor%20Mk3.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Vehicle-Body01",
+      "name": "Light Body - Viper",
+      "statId": "Body1REC",
+      "iconId": "IMAGE_RES_DROIDTECH",
+      "url": "/warzone/ui/icons/question.svg",
+      "resolution": "generic",
+      "reportDefinition": true,
+      "message": "RES_V_B01"
+    },
+    {
+      "id": "R-Vehicle-Body02",
+      "name": "Light Body - Leopard",
+      "statId": "Body2SUP",
+      "iconId": "IMAGE_RES_DROIDTECH",
+      "url": "/warzone/research-icons/Light%20Body%20-%20Leopard.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_V_B02"
+    },
+    {
+      "id": "R-Vehicle-Body03",
+      "name": "Light Body - Retaliation",
+      "statId": "Body3MBT",
+      "iconId": "IMAGE_RES_DROIDTECH",
+      "url": "/warzone/research-icons/Light%20Body%20-%20Retaliation.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_V_B03"
+    },
+    {
+      "id": "R-Vehicle-Body04",
+      "name": "Light Body - Bug",
+      "statId": "Body4ABT",
+      "iconId": "IMAGE_RES_DROIDTECH",
+      "url": "/warzone/research-icons/Light%20Body%20-%20Bug.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_V_B04"
+    },
+    {
+      "id": "R-Vehicle-Body05",
+      "name": "Medium Body - Cobra",
+      "statId": "Body5REC",
+      "iconId": "IMAGE_RES_DROIDTECH",
+      "url": "/warzone/research-icons/Medium%20Body%20-%20Cobra.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_V_B05"
+    },
+    {
+      "id": "R-Vehicle-Body06",
+      "name": "Medium Body - Panther",
+      "statId": "Body6SUPP",
+      "iconId": "IMAGE_RES_DROIDTECH",
+      "url": "/warzone/research-icons/Medium%20Body%20-%20Panther.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_V_B06"
+    },
+    {
+      "id": "R-Vehicle-Body07",
+      "name": "Medium Body - Retribution",
+      "statId": "Body7ABT",
+      "iconId": "IMAGE_RES_DROIDTECH",
+      "url": "/warzone/research-icons/Medium%20Body%20-%20Retribution.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_V_B07"
+    },
+    {
+      "id": "R-Vehicle-Body08",
+      "name": "Medium Body - Scorpion",
+      "statId": "Body8MBT",
+      "iconId": "IMAGE_RES_DROIDTECH",
+      "url": "/warzone/research-icons/Medium%20Body%20-%20Scorpion.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_V_B08"
+    },
+    {
+      "id": "R-Vehicle-Body09",
+      "name": "Heavy Body - Tiger",
+      "statId": "Body9REC",
+      "iconId": "IMAGE_RES_DROIDTECH",
+      "url": "/warzone/research-icons/Heavy%20Body%20-%20Tiger.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_V_B09"
+    },
+    {
+      "id": "R-Vehicle-Body10",
+      "name": "Heavy Body - Vengeance",
+      "statId": "Body10MBT",
+      "iconId": "IMAGE_RES_DROIDTECH",
+      "url": "/warzone/research-icons/Heavy%20Body%20-%20Vengeance.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_V_B10"
+    },
+    {
+      "id": "R-Vehicle-Body11",
+      "name": "Heavy Body - Python",
+      "statId": "Body11ABT",
+      "iconId": "IMAGE_RES_DROIDTECH",
+      "url": "/warzone/research-icons/Heavy%20Body%20-%20Python.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_V_B11"
+    },
+    {
+      "id": "R-Vehicle-Body12",
+      "name": "Heavy Body - Mantis",
+      "statId": "Body12SUP",
+      "iconId": "IMAGE_RES_DROIDTECH",
+      "url": "/warzone/research-icons/Heavy%20Body%20-%20Mantis.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_V_B12"
+    },
+    {
+      "id": "R-Vehicle-Body13",
+      "name": "Heavy Body - Wyvern",
+      "statId": "Body13SUP",
+      "iconId": "IMAGE_RES_DROIDTECH",
+      "url": "/warzone/research-icons/Heavy%20Body%20-%20Wyvern.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_V_B13"
+    },
+    {
+      "id": "R-Vehicle-Body14",
+      "name": "Multi Turret Body - Dragon",
+      "statId": "Body14SUP",
+      "iconId": "IMAGE_RES_DROIDTECH",
+      "url": "/warzone/research-icons/Multi%20Turret%20Body%20-%20Dragon.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_V_B14"
+    },
+    {
+      "id": "R-Vehicle-Engine01",
+      "name": "Fuel Injection Engine",
+      "statId": null,
+      "iconId": "IMAGE_RES_DROIDTECH",
+      "url": "/warzone/research-icons/Fuel%20Injection%20Engine.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_V_EN1"
+    },
+    {
+      "id": "R-Vehicle-Engine02",
+      "name": "Fuel Injection Engine Mk2",
+      "statId": null,
+      "iconId": "IMAGE_RES_DROIDTECH",
+      "url": "/warzone/research-icons/Fuel%20Injection%20Engine%20Mk2.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Vehicle-Engine03",
+      "name": "Fuel Injection Engine Mk3",
+      "statId": null,
+      "iconId": "IMAGE_RES_DROIDTECH",
+      "url": "/warzone/research-icons/Fuel%20Injection%20Engine%20Mk3.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Vehicle-Engine04",
+      "name": "Turbo-Charged Engine",
+      "statId": null,
+      "iconId": "IMAGE_RES_DROIDTECH",
+      "url": "/warzone/research-icons/Turbo-Charged%20Engine.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_V_EN4"
+    },
+    {
+      "id": "R-Vehicle-Engine05",
+      "name": "Turbo-Charged Engine Mk2",
+      "statId": null,
+      "iconId": "IMAGE_RES_DROIDTECH",
+      "url": "/warzone/research-icons/Turbo-Charged%20Engine%20Mk2.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Vehicle-Engine06",
+      "name": "Turbo-Charged Engine Mk3",
+      "statId": null,
+      "iconId": "IMAGE_RES_DROIDTECH",
+      "url": "/warzone/research-icons/Turbo-Charged%20Engine%20Mk3.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Vehicle-Engine07",
+      "name": "Gas Turbine Engine",
+      "statId": null,
+      "iconId": "IMAGE_RES_DROIDTECH",
+      "url": "/warzone/research-icons/Gas%20Turbine%20Engine.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_V_EN7"
+    },
+    {
+      "id": "R-Vehicle-Engine08",
+      "name": "Gas Turbine Engine Mk2",
+      "statId": null,
+      "iconId": "IMAGE_RES_DROIDTECH",
+      "url": "/warzone/research-icons/Gas%20Turbine%20Engine%20Mk2.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Vehicle-Engine09",
+      "name": "Gas Turbine Engine Mk3",
+      "statId": null,
+      "iconId": "IMAGE_RES_DROIDTECH",
+      "url": "/warzone/research-icons/Gas%20Turbine%20Engine%20Mk3.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Vehicle-Metals01",
+      "name": "Composite Alloys",
+      "statId": null,
+      "iconId": "IMAGE_RES_DROIDTECH",
+      "url": "/warzone/research-icons/Composite%20Alloys.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_V_MET1"
+    },
+    {
+      "id": "R-Vehicle-Metals02",
+      "name": "Composite Alloys Mk2",
+      "statId": null,
+      "iconId": "IMAGE_RES_DROIDTECH",
+      "url": "/warzone/research-icons/Composite%20Alloys%20Mk2.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Vehicle-Metals03",
+      "name": "Composite Alloys Mk3",
+      "statId": null,
+      "iconId": "IMAGE_RES_DROIDTECH",
+      "url": "/warzone/research-icons/Composite%20Alloys%20Mk3.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Vehicle-Metals04",
+      "name": "Dense Composite Alloys",
+      "statId": null,
+      "iconId": "IMAGE_RES_DROIDTECH",
+      "url": "/warzone/research-icons/Dense%20Composite%20Alloys.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_V_MET4"
+    },
+    {
+      "id": "R-Vehicle-Metals05",
+      "name": "Dense Composite Alloys Mk2",
+      "statId": null,
+      "iconId": "IMAGE_RES_DROIDTECH",
+      "url": "/warzone/research-icons/Dense%20Composite%20Alloys%20Mk2.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Vehicle-Metals06",
+      "name": "Dense Composite Alloys Mk3",
+      "statId": null,
+      "iconId": "IMAGE_RES_DROIDTECH",
+      "url": "/warzone/research-icons/Dense%20Composite%20Alloys%20Mk3.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Vehicle-Metals07",
+      "name": "Superdense Composite Alloys",
+      "statId": null,
+      "iconId": "IMAGE_RES_DROIDTECH",
+      "url": "/warzone/research-icons/Superdense%20Composite%20Alloys.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_V_MET7"
+    },
+    {
+      "id": "R-Vehicle-Metals08",
+      "name": "Superdense Composite Alloys Mk2",
+      "statId": null,
+      "iconId": "IMAGE_RES_DROIDTECH",
+      "url": "/warzone/research-icons/Superdense%20Composite%20Alloys%20Mk2.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Vehicle-Metals09",
+      "name": "Superdense Composite Alloys Mk3",
+      "statId": null,
+      "iconId": "IMAGE_RES_DROIDTECH",
+      "url": "/warzone/research-icons/Superdense%20Composite%20Alloys%20Mk3.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Vehicle-Prop-Halftracks",
+      "name": "Half-tracked Propulsion",
+      "statId": "HalfTrack",
+      "iconId": "IMAGE_RES_DROIDTECH",
+      "url": "/warzone/research-icons/Half-tracked%20Propulsion.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_HALFT1"
+    },
+    {
+      "id": "R-Vehicle-Prop-Hover",
+      "name": "Hover Propulsion",
+      "statId": "hover01",
+      "iconId": "IMAGE_RES_DROIDTECH",
+      "url": "/warzone/research-icons/Hover%20Propulsion.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_V_P_H1"
+    },
+    {
+      "id": "R-Vehicle-Prop-Tracks",
+      "name": "Tracked Propulsion",
+      "statId": "tracked01",
+      "iconId": "IMAGE_RES_DROIDTECH",
+      "url": "/warzone/research-icons/Tracked%20Propulsion.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_TRACK1"
+    },
+    {
+      "id": "R-Vehicle-Prop-VTOL",
+      "name": "VTOL Propulsion",
+      "statId": null,
+      "iconId": "IMAGE_RES_DROIDTECH",
+      "url": "/warzone/research-icons/VTOL%20Propulsion.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_V_P_V1"
+    },
+    {
+      "id": "R-Vehicle-Prop-Wheels",
+      "name": "Wheeled Propulsion",
+      "statId": "wheeled01",
+      "iconId": "IMAGE_RES_DROIDTECH",
+      "url": "/warzone/ui/icons/question.svg",
+      "resolution": "generic",
+      "reportDefinition": true,
+      "message": "RES_V_P_W1"
+    },
+    {
+      "id": "R-Wpn-AAGun01",
+      "name": "AA Cyclone Flak Cannon",
+      "statId": "AAGun2Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/AA%20Flak%20Cannon.gif",
+      "resolution": "explicit-alias",
+      "reportDefinition": true,
+      "message": "RES_W_AA1"
+    },
+    {
+      "id": "R-Wpn-AAGun02",
+      "name": "AA Tornado Flak Cannon",
+      "statId": "AAGun2Mk1Quad",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/ui/icons/question.svg",
+      "resolution": "generic",
+      "reportDefinition": true,
+      "message": "RES_W_AA2"
+    },
+    {
+      "id": "R-Wpn-AAGun03",
+      "name": "Hurricane AA Turret",
+      "statId": "QuadMg1AAGun",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Hurricane%20AA%20Turret.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_AA3"
+    },
+    {
+      "id": "R-Wpn-AAGun04",
+      "name": "Whirlwind AA Turret",
+      "statId": "QuadRotAAGun",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Whirlwind%20AA%20Turret.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_AA4"
+    },
+    {
+      "id": "R-Wpn-AALaser",
+      "name": "Stormbringer AA Laser",
+      "statId": "AAGunLaser",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Stormbringer%20AA%20Laser.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_AALAS"
+    },
+    {
+      "id": "R-Wpn-Bomb-Damage01",
+      "name": "HE Bomb Shells",
+      "statId": null,
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/HE%20Bomb%20Shells.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_BDMG1"
+    },
+    {
+      "id": "R-Wpn-Bomb-Damage02",
+      "name": "Improved Bomb Warhead",
+      "statId": null,
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Improved%20Bomb%20Warhead.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_BDMG2"
+    },
+    {
+      "id": "R-Wpn-Bomb-Damage03",
+      "name": "Advanced Bomb Warhead",
+      "statId": null,
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Advanced%20Bomb%20Warhead.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_BDMG3"
+    },
+    {
+      "id": "R-Wpn-Bomb01",
+      "name": "Cluster Bomb Bay",
+      "statId": null,
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Cluster%20Bomb%20Bay.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_BMB1"
+    },
+    {
+      "id": "R-Wpn-Bomb02",
+      "name": "HEAP Bomb Bay",
+      "statId": null,
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/HEAP%20Bomb%20Bay.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_BMB2"
+    },
+    {
+      "id": "R-Wpn-Bomb03",
+      "name": "Phosphor Bomb Bay",
+      "statId": null,
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Phosphor%20Bomb%20Bay.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_BMB3"
+    },
+    {
+      "id": "R-Wpn-Bomb04",
+      "name": "Thermite Bomb Bay",
+      "statId": null,
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Thermite%20Bomb%20Bay.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_BMB4"
+    },
+    {
+      "id": "R-Wpn-Bomb05",
+      "name": "Plasmite Bomb",
+      "statId": "Bomb5-VTOL-Plasmite",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Plasmite%20Bomb.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_BMB5"
+    },
+    {
+      "id": "R-Wpn-Bomb06",
+      "name": "EMP Missile Launcher",
+      "statId": "Bomb6-VTOL-EMP",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/EMP%20Missile%20Launcher.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_BMB6"
+    },
+    {
+      "id": "R-Wpn-Cannon-Accuracy01",
+      "name": "Cannon Laser Rangefinder",
+      "statId": "Cannon1Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Cannon%20Laser%20Rangefinder.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_CNAC1"
+    },
+    {
+      "id": "R-Wpn-Cannon-Accuracy02",
+      "name": "Cannon Laser Designator",
+      "statId": "Cannon1Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Cannon%20Laser%20Designator.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_CNAC2"
+    },
+    {
+      "id": "R-Wpn-Cannon-Damage01",
+      "name": "HEAT Cannon Shells",
+      "statId": "Cannon1Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/HEAT%20Cannon%20Shells.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_CN_D1"
+    },
+    {
+      "id": "R-Wpn-Cannon-Damage02",
+      "name": "HEAT Cannon Shells Mk2",
+      "statId": "Cannon1Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/HEAT%20Cannon%20Shells%20Mk2.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-Cannon-Damage03",
+      "name": "HEAT Cannon Shells Mk3",
+      "statId": "Cannon1Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/HEAT%20Cannon%20Shells%20Mk3.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-Cannon-Damage04",
+      "name": "APFSDS Cannon Rounds",
+      "statId": "Cannon1Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/APFSDS%20Cannon%20Rounds.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_CN_D4"
+    },
+    {
+      "id": "R-Wpn-Cannon-Damage05",
+      "name": "APFSDS Cannon Rounds Mk2",
+      "statId": "Cannon1Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/APFSDS%20Cannon%20Rounds%20Mk2.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-Cannon-Damage06",
+      "name": "APFSDS Cannon Rounds Mk3",
+      "statId": "Cannon1Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/APFSDS%20Cannon%20Rounds%20Mk3.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-Cannon-Damage07",
+      "name": "HVAPFSDS Cannon Rounds",
+      "statId": "Cannon1Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/HVAPFSDS%20Cannon%20Rounds.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_CN_D7"
+    },
+    {
+      "id": "R-Wpn-Cannon-Damage08",
+      "name": "HVAPFSDS Cannon Rounds Mk2",
+      "statId": "Cannon1Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/HVAPFSDS%20Cannon%20Rounds%20Mk2.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-Cannon-Damage09",
+      "name": "HVAPFSDS Cannon Rounds Mk3",
+      "statId": "Cannon1Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/HVAPFSDS%20Cannon%20Rounds%20Mk3.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-Cannon-ROF01",
+      "name": "Cannon Autoloader",
+      "statId": "Cannon1Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Cannon%20Autoloader.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_CN_ROF1"
+    },
+    {
+      "id": "R-Wpn-Cannon-ROF02",
+      "name": "Cannon Autoloader Mk2",
+      "statId": "Cannon1Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Cannon%20Autoloader%20Mk2.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-Cannon-ROF03",
+      "name": "Cannon Autoloader Mk3",
+      "statId": "Cannon1Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Cannon%20Autoloader%20Mk3.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-Cannon-ROF04",
+      "name": "Cannon Rapid Loader",
+      "statId": "Cannon1Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Cannon%20Rapid%20Loader.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_CN_ROF4"
+    },
+    {
+      "id": "R-Wpn-Cannon-ROF05",
+      "name": "Cannon Rapid Loader Mk2",
+      "statId": "Cannon1Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Cannon%20Rapid%20Loader%20Mk2.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-Cannon-ROF06",
+      "name": "Cannon Rapid Loader Mk3",
+      "statId": "Cannon1Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Cannon%20Rapid%20Loader%20Mk3.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-Cannon1Mk1",
+      "name": "Light Cannon",
+      "statId": "Cannon1Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Light%20Cannon.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_CN1MK1"
+    },
+    {
+      "id": "R-Wpn-Cannon2Mk1",
+      "name": "Medium Cannon",
+      "statId": "Cannon2A-TMk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Medium%20Cannon.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_CN2MK1"
+    },
+    {
+      "id": "R-Wpn-Cannon3Mk1",
+      "name": "Heavy Cannon",
+      "statId": "Cannon375mmMk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Heavy%20Cannon.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_CN3MK1"
+    },
+    {
+      "id": "R-Wpn-Cannon4AMk1",
+      "name": "Hyper Velocity Cannon",
+      "statId": "Cannon4AUTOMk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Hyper%20Velocity%20Cannon.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_CN_4A"
+    },
+    {
+      "id": "R-Wpn-Cannon5",
+      "name": "Assault Cannon",
+      "statId": "Cannon5VulcanMk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Assault%20Cannon.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_CN5"
+    },
+    {
+      "id": "R-Wpn-Cannon6TwinAslt",
+      "name": "Twin Assault Cannon",
+      "statId": "Cannon6TwinAslt",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Twin%20Assault%20Cannon.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_CN6_T_A"
+    },
+    {
+      "id": "R-Wpn-EMPCannon",
+      "name": "EMP Cannon",
+      "statId": "EMP-Cannon",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/EMP%20Cannon.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_EMP_CANT"
+    },
+    {
+      "id": "R-Wpn-Energy-Accuracy01",
+      "name": "Improved Laser Focusing",
+      "statId": "Laser2PULSEMk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Improved%20Laser%20Focusing.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_LASAC1"
+    },
+    {
+      "id": "R-Wpn-Energy-Damage01",
+      "name": "Hi-Energy Laser Emitter",
+      "statId": "Laser2PULSEMk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Hi-Energy%20Laser%20Emitter.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_LASD1"
+    },
+    {
+      "id": "R-Wpn-Energy-Damage02",
+      "name": "Hi-Energy Laser Emitter Mk2",
+      "statId": "Laser2PULSEMk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Hi-Energy%20Laser%20Emitter%20Mk2.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-Energy-Damage03",
+      "name": "Hi-Energy Laser Emitter Mk3",
+      "statId": "Laser2PULSEMk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Hi-Energy%20Laser%20Emitter%20Mk3.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-Energy-ROF01",
+      "name": "Thermopole Energizer",
+      "statId": "Laser2PULSEMk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Thermopole%20Energiser.gif",
+      "resolution": "explicit-alias",
+      "reportDefinition": true,
+      "message": "RES_LASROF1"
+    },
+    {
+      "id": "R-Wpn-Energy-ROF02",
+      "name": "Thermopole Energizer Mk2",
+      "statId": "Laser2PULSEMk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Thermopole%20Energiser%20Mk2.gif",
+      "resolution": "explicit-alias",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-Energy-ROF03",
+      "name": "Thermopole Energizer Mk3",
+      "statId": "Laser2PULSEMk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Thermopole%20Energiser%20Mk3.gif",
+      "resolution": "explicit-alias",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-Flame2",
+      "name": "Heavy Flamer - Inferno",
+      "statId": "Flame2",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Heavy%20Flamer%20-%20Inferno.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_FLAME2"
+    },
+    {
+      "id": "R-Wpn-Flamer-Damage01",
+      "name": "High Temperature Flamer Gel",
+      "statId": "Flame1Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/High%20Temperature%20Flamer%20Gel.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_FL_D1"
+    },
+    {
+      "id": "R-Wpn-Flamer-Damage02",
+      "name": "High Temperature Flamer Gel Mk2",
+      "statId": "Flame1Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/High%20Temperature%20Flamer%20Gel%20Mk2.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-Flamer-Damage03",
+      "name": "High Temperature Flamer Gel Mk3",
+      "statId": "Flame1Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/High%20Temperature%20Flamer%20Gel%20Mk3.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-Flamer-Damage04",
+      "name": "Superhot Flamer Gel",
+      "statId": "Flame2",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Superhot%20Flamer%20Gel.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_FL_D4"
+    },
+    {
+      "id": "R-Wpn-Flamer-Damage05",
+      "name": "Superhot Flamer Gel Mk2",
+      "statId": "Flame2",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Superhot%20Flamer%20Gel%20Mk2.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-Flamer-Damage06",
+      "name": "Superhot Flamer Gel Mk3",
+      "statId": "Flame2",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Superhot%20Flamer%20Gel%20Mk3.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-Flamer-Damage07",
+      "name": "Superhot Plasmite Gel",
+      "statId": "PlasmiteFlamer",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Superhot%20Plasmite%20Gel.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_FL_D7"
+    },
+    {
+      "id": "R-Wpn-Flamer-Damage08",
+      "name": "Superhot Plasmite Gel Mk2",
+      "statId": "PlasmiteFlamer",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Superhot%20Plasmite%20Gel%20Mk2.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-Flamer-Damage09",
+      "name": "Superhot Plasmite Gel Mk3",
+      "statId": "PlasmiteFlamer",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Superhot%20Plasmite%20Gel%20Mk3.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-Flamer-ROF01",
+      "name": "Flamer Autoloader",
+      "statId": "Flame1Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Flamer%20Autoloader.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_FL_ROF1"
+    },
+    {
+      "id": "R-Wpn-Flamer-ROF02",
+      "name": "Flamer Autoloader Mk2",
+      "statId": "Flame1Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Flamer%20Autoloader%20Mk2.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-Flamer-ROF03",
+      "name": "Flamer Autoloader Mk3",
+      "statId": "Flame1Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Flamer%20Autoloader%20Mk3.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-Flamer01Mk1",
+      "name": "Flamer",
+      "statId": "Flame1Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Flamer.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_FLAME1"
+    },
+    {
+      "id": "R-Wpn-HeavyPlasmaLauncher",
+      "name": "Heavy Plasma Launcher",
+      "statId": "PlasmaHeavy",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/ui/icons/question.svg",
+      "resolution": "generic",
+      "reportDefinition": true,
+      "message": "RES_W_PLASLAUNCH"
+    },
+    {
+      "id": "R-Wpn-Howitzer-Accuracy01",
+      "name": "Target Acquisition Artillery Shells",
+      "statId": "Howitzer105Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Target%20Acquisition%20Artillery%20Shells.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_HOWAC1"
+    },
+    {
+      "id": "R-Wpn-Howitzer-Accuracy02",
+      "name": "Target Acquisition Artillery Shells Mk2",
+      "statId": "Howitzer105Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Target%20Acquisition%20Artillery%20Shells%20Mk2.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-Howitzer-Accuracy03",
+      "name": "Target Prediction Artillery Shells",
+      "statId": "Howitzer105Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Target%20Prediction%20Artillery%20Shells.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_HOWAC3"
+    },
+    {
+      "id": "R-Wpn-Howitzer-Damage01",
+      "name": "HE Howitzer Shells",
+      "statId": "Howitzer105Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/HE%20Howitzer%20Shells.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_HOWD1"
+    },
+    {
+      "id": "R-Wpn-Howitzer-Damage02",
+      "name": "HE Howitzer Shells Mk2",
+      "statId": "Howitzer105Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/HE%20Howitzer%20Shells%20Mk2.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-Howitzer-Damage03",
+      "name": "HE Howitzer Shells Mk3",
+      "statId": "Howitzer105Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/HE%20Howitzer%20Shells%20Mk3.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-Howitzer-Damage04",
+      "name": "HEAP Howitzer Shells",
+      "statId": "Howitzer105Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/HEAP%20Howitzer%20Shells.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_HOWD4"
+    },
+    {
+      "id": "R-Wpn-Howitzer-Damage05",
+      "name": "HEAP Howitzer Shells Mk2",
+      "statId": "Howitzer105Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/HEAP%20Howitzer%20Shells%20Mk2.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-Howitzer-Damage06",
+      "name": "HEAP Howitzer Shells Mk3",
+      "statId": "Howitzer105Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/HEAP%20Howitzer%20Shells%20Mk3.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-Howitzer-Incendiary",
+      "name": "Incendiary Howitzer",
+      "statId": "Howitzer-Incendiary",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Incendiary%20Howitzer.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_INH"
+    },
+    {
+      "id": "R-Wpn-Howitzer-ROF01",
+      "name": "Howitzer Autoloader",
+      "statId": "Howitzer105Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Howitzer%20Autoloader.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_HOWRF1"
+    },
+    {
+      "id": "R-Wpn-Howitzer-ROF02",
+      "name": "Howitzer Autoloader Mk2",
+      "statId": "Howitzer105Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Howitzer%20Autoloader%20Mk2.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-Howitzer-ROF03",
+      "name": "Howitzer Autoloader Mk3",
+      "statId": "Howitzer105Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Howitzer%20Autoloader%20Mk3.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-Howitzer-ROF04",
+      "name": "Howitzer Fast Loader",
+      "statId": "Howitzer105Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Howitzer%20Fast%20Loader.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_HOWRF4"
+    },
+    {
+      "id": "R-Wpn-Howitzer03-Rot",
+      "name": "Rotary Howitzer - Hellstorm",
+      "statId": "Howitzer03-Rot",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Rotary%20Howitzer%20-%20Hellstorm.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_RHOW"
+    },
+    {
+      "id": "R-Wpn-HowitzerMk1",
+      "name": "Howitzer",
+      "statId": "Howitzer105Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Howitzer.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_HMK1"
+    },
+    {
+      "id": "R-Wpn-HvArtMissile",
+      "name": "Archangel Missile",
+      "statId": "Missile-HvyArt",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Archangel%20Missile.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_MS_HART"
+    },
+    {
+      "id": "R-Wpn-HvyHowitzer",
+      "name": "Heavy Howitzer - Ground Shaker",
+      "statId": "Howitzer150Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Heavy%20Howitzer%20-%20Ground%20Shaker.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_HH1"
+    },
+    {
+      "id": "R-Wpn-HvyLaser",
+      "name": "Heavy Laser",
+      "statId": "HeavyLaser",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Heavy%20Laser.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_HLAS"
+    },
+    {
+      "id": "R-Wpn-ParticleGun",
+      "name": "Particle Gun",
+      "statId": "ParticleGun",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/ui/icons/question.svg",
+      "resolution": "generic",
+      "reportDefinition": true,
+      "message": "RES_W_PG"
+    },
+    {
+      "id": "R-Wpn-LasSat",
+      "name": "Laser Satellite Command Post",
+      "statId": "A0LasSatCommand",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Laser%20Satellite%20Command%20Post.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_LASSAT"
+    },
+    {
+      "id": "R-Wpn-Laser01",
+      "name": "Laser - Flashlight",
+      "statId": "Laser3BEAMMk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Laser%20-%20Flashlight.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_LAS1"
+    },
+    {
+      "id": "R-Wpn-Laser02",
+      "name": "Pulse Laser",
+      "statId": "Laser2PULSEMk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Pulse%20Laser.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_LAS2"
+    },
+    {
+      "id": "R-Wpn-MG-Damage01",
+      "name": "Hardened MG Bullets",
+      "statId": "MG1Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Hardened%20MG%20Bullets.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_MG_D1"
+    },
+    {
+      "id": "R-Wpn-MG-Damage02",
+      "name": "APDSB MG Bullets",
+      "statId": "MG1Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/APDSB%20MG%20Bullets.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_MG_D2"
+    },
+    {
+      "id": "R-Wpn-MG-Damage03",
+      "name": "APDSB MG Bullets Mk2",
+      "statId": "MG1Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/APDSB%20MG%20Bullets%20Mk2.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-MG-Damage04",
+      "name": "APDSB MG Bullets Mk3",
+      "statId": "MG1Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/APDSB%20MG%20Bullets%20Mk3.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-MG-Damage05",
+      "name": "Tungsten-Tipped MG Bullets",
+      "statId": "MG1Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Tungsten-Tipped%20MG%20Bullets.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-MG-Damage06",
+      "name": "Tungsten-Tipped MG Bullets Mk2",
+      "statId": "MG1Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Tungsten-Tipped%20MG%20Bullets%20Mk2.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-MG-Damage07",
+      "name": "Tungsten-Tipped MG Bullets Mk3",
+      "statId": "MG1Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Tungsten-Tipped%20MG%20Bullets%20Mk3.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-MG-Damage08",
+      "name": "Depleted Uranium MG Bullets",
+      "statId": "MG1Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Depleted%20Uranium%20MG%20Bullets.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-MG-Damage09",
+      "name": "Depleted Uranium MG Bullets Mk2",
+      "statId": "MG1Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Depleted%20Uranium%20MG%20Bullets.gif",
+      "resolution": "explicit-alias",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-MG-Damage10",
+      "name": "Depleted Uranium MG Bullets Mk3",
+      "statId": "MG1Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Depleted%20Uranium%20MG%20Bullets.gif",
+      "resolution": "explicit-alias",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-MG-ROF01",
+      "name": "Chaingun Upgrade",
+      "statId": "MG1Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Chaingun%20Upgrade.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_MG_ROF1"
+    },
+    {
+      "id": "R-Wpn-MG-ROF02",
+      "name": "Rapid Fire Chaingun",
+      "statId": "MG1Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Rapid%20Fire%20Chaingun.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_MG_ROF2"
+    },
+    {
+      "id": "R-Wpn-MG-ROF03",
+      "name": "Hyper Fire Chaingun Upgrade",
+      "statId": "MG1Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Hyper%20Fire%20Chaingun%20Upgrade.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_MG_ROF3"
+    },
+    {
+      "id": "R-Wpn-MG1Mk1",
+      "name": "Machinegun",
+      "statId": "MG1Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Machinegun.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_MG1MK1"
+    },
+    {
+      "id": "R-Wpn-MG2Mk1",
+      "name": "Twin Machinegun",
+      "statId": "MG2Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Twin%20Machinegun.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_MG2MK1"
+    },
+    {
+      "id": "R-Wpn-MG3Mk1",
+      "name": "Heavy Machinegun",
+      "statId": "MG3Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Heavy%20Machinegun.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_MG3MK1"
+    },
+    {
+      "id": "R-Wpn-MG4",
+      "name": "Assault Gun",
+      "statId": "MG4ROTARYMk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Assault%20Gun.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_MG4"
+    },
+    {
+      "id": "R-Wpn-MG5",
+      "name": "Twin Assault Gun",
+      "statId": "MG5TWINROTARY",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Twin%20Assault%20Gun.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_WT_TWINAGUN"
+    },
+    {
+      "id": "R-Wpn-MdArtMissile",
+      "name": "Seraph Missile Array",
+      "statId": "Missile-MdArt",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Seraph%20Missile%20Array.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_MS_MART"
+    },
+    {
+      "id": "R-Wpn-Missile-Accuracy01",
+      "name": "Target Prediction Missiles",
+      "statId": "Missile-A-T",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Target%20Prediction%20Missiles.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_MS_AC1"
+    },
+    {
+      "id": "R-Wpn-Missile-Accuracy02",
+      "name": "Search & Destroy Missiles",
+      "statId": "Missile-A-T",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Search%20%26%20Destroy%20Missiles.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_MS_AC2"
+    },
+    {
+      "id": "R-Wpn-Missile-Damage01",
+      "name": "Advanced Missile Warhead",
+      "statId": "Missile-A-T",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Advanced%20Missile%20Warhead.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_MS_D1"
+    },
+    {
+      "id": "R-Wpn-Missile-Damage02",
+      "name": "Advanced Missile Warhead Mk2",
+      "statId": "Missile-A-T",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Advanced%20Missile%20Warhead%20Mk2.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-Missile-Damage03",
+      "name": "Advanced Missile Warhead Mk3",
+      "statId": "Missile-A-T",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Advanced%20Missile%20Warhead%20Mk3.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-Missile-HvSAM",
+      "name": "Vindicator SAM",
+      "statId": "Missile-HvySAM",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Vindicator%20SAM.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_MS_HvSAM1"
+    },
+    {
+      "id": "R-Wpn-Missile-LtSAM",
+      "name": "Avenger SAM",
+      "statId": "Missile-LtSAM",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Avenger%20SAM.png",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_MS_LtSAM1"
+    },
+    {
+      "id": "R-Wpn-Missile-ROF01",
+      "name": "Advanced Missile Allocation System",
+      "statId": "Missile-A-T",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Advanced%20Missile%20Allocation%20System.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_MS_ROF1"
+    },
+    {
+      "id": "R-Wpn-Missile-ROF02",
+      "name": "Advanced Missile Allocation System Mk2",
+      "statId": "Missile-A-T",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Advanced%20Missile%20Allocation%20System%20Mk2.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-Missile-ROF03",
+      "name": "Advanced Missile Allocation System Mk3",
+      "statId": "Missile-A-T",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Advanced%20Missile%20Allocation%20System%20Mk3.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-Missile2A-T",
+      "name": "Scourge Missile",
+      "statId": "Missile-A-T",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Scourge%20Missile.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-Mortar-Acc01",
+      "name": "Mortar Targeting Computer",
+      "statId": "Mortar1Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Mortar%20Targeting%20Computer.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_M_AC1"
+    },
+    {
+      "id": "R-Wpn-Mortar-Acc02",
+      "name": "Thermal Imaging Mortar Shells",
+      "statId": "Mortar2Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Thermal%20Imaging%20Mortar%20Shells.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_M_AC2"
+    },
+    {
+      "id": "R-Wpn-Mortar-Acc03",
+      "name": "Target Acquisition Mortar Shells",
+      "statId": "Mortar2Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Target%20Acquisition%20Mortar%20Shells.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_M_AC3"
+    },
+    {
+      "id": "R-Wpn-Mortar-Damage01",
+      "name": "HE Mortar Shells",
+      "statId": "Mortar1Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/HE%20Mortar%20Shells.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_M_D1"
+    },
+    {
+      "id": "R-Wpn-Mortar-Damage02",
+      "name": "HE Mortar Shells Mk2",
+      "statId": "Mortar1Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/HE%20Mortar%20Shells%20Mk2.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-Mortar-Damage03",
+      "name": "HE Mortar Shells Mk3",
+      "statId": "Mortar1Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/HE%20Mortar%20Shells%20Mk3.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-Mortar-Damage04",
+      "name": "HEAP Mortar Shells",
+      "statId": "Mortar1Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/HEAP%20Mortar%20Shells.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_M_D4"
+    },
+    {
+      "id": "R-Wpn-Mortar-Damage05",
+      "name": "HEAP Mortar Shells Mk2",
+      "statId": "Mortar1Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/HEAP%20Mortar%20Shells%20Mk2.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-Mortar-Damage06",
+      "name": "HEAP Mortar Shells Mk3",
+      "statId": "Mortar2Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/HEAP%20Mortar%20Shells%20Mk3.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-Mortar-Incendiary",
+      "name": "Incendiary Mortar",
+      "statId": "Mortar-Incendiary",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Incendiary%20Mortar.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_IMORT"
+    },
+    {
+      "id": "R-Wpn-Mortar-ROF01",
+      "name": "Mortar Autoloader",
+      "statId": "Mortar1Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Mortar%20Autoloader.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_M_ROF1"
+    },
+    {
+      "id": "R-Wpn-Mortar-ROF02",
+      "name": "Mortar Autoloader Mk2",
+      "statId": "Mortar1Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Mortar%20Autoloader%20Mk2.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-Mortar-ROF03",
+      "name": "Mortar Autoloader Mk3",
+      "statId": "Mortar2Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Mortar%20Autoloader%20Mk3.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-Mortar-ROF04",
+      "name": "Mortar Fast Loader",
+      "statId": "Mortar2Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Mortar%20Fast%20Loader.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_M_ROF4"
+    },
+    {
+      "id": "R-Wpn-Mortar01Lt",
+      "name": "Mortar",
+      "statId": "Mortar1Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Mortar.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_MORTA1"
+    },
+    {
+      "id": "R-Wpn-Mortar02Hvy",
+      "name": "Heavy Mortar - Bombard",
+      "statId": "Mortar2Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Heavy%20Mortar%20-%20Bombard.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_M2"
+    },
+    {
+      "id": "R-Wpn-Mortar3",
+      "name": "Rotary Mortar - Pepperpot",
+      "statId": "Mortar3ROTARYMk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Rotary%20Mortar%20-%20Pepperpot.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_M3"
+    },
+    {
+      "id": "R-Wpn-MortarEMP",
+      "name": "EMP Mortar",
+      "statId": "MortarEMP",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/EMP%20Mortar.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_M2"
+    },
+    {
+      "id": "R-Wpn-PlasmaCannon",
+      "name": "Plasma Cannon",
+      "statId": "Laser4-PlasmaCannon",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Plasma%20Cannon.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_PLASCAN"
+    },
+    {
+      "id": "R-Wpn-Plasmite-Flamer",
+      "name": "Plasmite Flamer",
+      "statId": "PlasmiteFlamer",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Plasmite%20Flamer.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_PLFL"
+    },
+    {
+      "id": "R-Wpn-Rail-Accuracy01",
+      "name": "Rail Target Prediction Computer",
+      "statId": "RailGun1Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Rail%20Target%20Prediction%20Computer.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_RAIL_AC1"
+    },
+    {
+      "id": "R-Wpn-Rail-Damage01",
+      "name": "Hardened Rail Dart",
+      "statId": "RailGun1Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Hardened%20Rail%20Dart.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_RAIL_D1"
+    },
+    {
+      "id": "R-Wpn-Rail-Damage02",
+      "name": "Hardened Rail Dart Mk2",
+      "statId": "RailGun1Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Hardened%20Rail%20Dart%20Mk2.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-Rail-Damage03",
+      "name": "Hardened Rail Dart Mk3",
+      "statId": "RailGun1Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Hardened%20Rail%20Dart%20Mk3.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-Rail-ROF01",
+      "name": "Rail Gun ROF",
+      "statId": "RailGun1Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Rail%20Gun%20ROF.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_RAIL_ROF1"
+    },
+    {
+      "id": "R-Wpn-Rail-ROF02",
+      "name": "Rail Gun ROF Mk2",
+      "statId": "RailGun1Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Rail%20Gun%20ROF%20Mk2.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-Rail-ROF03",
+      "name": "Rail Gun ROF Mk3",
+      "statId": "RailGun1Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Rail%20Gun%20ROF%20Mk3.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-RailGun01",
+      "name": "Needle Gun",
+      "statId": "RailGun1Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Needle%20Gun.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_RAIL1"
+    },
+    {
+      "id": "R-Wpn-RailGun02",
+      "name": "Rail Gun",
+      "statId": "RailGun2Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Rail%20Gun.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_RAIL2"
+    },
+    {
+      "id": "R-Wpn-RailGun03",
+      "name": "Gauss Cannon",
+      "statId": "RailGun3Mk1",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Gauss%20Cannon.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_RAIL3"
+    },
+    {
+      "id": "R-Wpn-Rocket-Accuracy01",
+      "name": "Stabilized Rockets",
+      "statId": "Rocket-Pod",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Stabilized%20Rockets.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_RK_AC1"
+    },
+    {
+      "id": "R-Wpn-Rocket-Accuracy02",
+      "name": "Improved Rocket Wire Guidance",
+      "statId": "Rocket-LtA-T",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Improved%20Rocket%20Wire%20Guidance.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-Rocket-Damage01",
+      "name": "HE Rockets",
+      "statId": "Rocket-Pod",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/HE%20Rockets.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_RK_D1"
+    },
+    {
+      "id": "R-Wpn-Rocket-Damage02",
+      "name": "HE Rockets Mk2",
+      "statId": "Rocket-Pod",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/HE%20Rockets%20Mk2.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-Rocket-Damage03",
+      "name": "HE Rockets Mk3",
+      "statId": "Rocket-Pod",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/HE%20Rockets%20Mk3.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-Rocket-Damage04",
+      "name": "HEAT Rocket Warhead",
+      "statId": "Rocket-LtA-T",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/HEAT%20Rocket%20Warhead.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_RK_D4"
+    },
+    {
+      "id": "R-Wpn-Rocket-Damage05",
+      "name": "HEAT Rocket Warhead Mk2",
+      "statId": "Rocket-LtA-T",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/HEAT%20Rocket%20Warhead%20Mk2.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-Rocket-Damage06",
+      "name": "HEAT Rocket Warhead Mk3",
+      "statId": "Rocket-LtA-T",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/HEAT%20Rocket%20Warhead%20Mk3.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-Rocket-Damage07",
+      "name": "HESH Rocket Warhead",
+      "statId": "Rocket-LtA-T",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/HESH%20Rocket%20Warhead.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_RK_D4"
+    },
+    {
+      "id": "R-Wpn-Rocket-Damage08",
+      "name": "HESH Rocket Warhead Mk2",
+      "statId": "Rocket-LtA-T",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/HESH%20Rocket%20Warhead%20Mk2.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-Rocket-Damage09",
+      "name": "HESH Rocket Warhead Mk3",
+      "statId": "Rocket-LtA-T",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/HESH%20Rocket%20Warhead%20Mk3.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-Rocket-ROF01",
+      "name": "Rocket Autoloader",
+      "statId": "Rocket-Pod",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Rocket%20Autoloader.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_RK_ROF1"
+    },
+    {
+      "id": "R-Wpn-Rocket-ROF02",
+      "name": "Rocket Autoloader Mk2",
+      "statId": "Rocket-Pod",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Rocket%20Autoloader%20Mk2.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-Rocket-ROF03",
+      "name": "Rocket Autoloader Mk3",
+      "statId": "Rocket-Pod",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Rocket%20Autoloader%20Mk3.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-Rocket01-LtAT",
+      "name": "Lancer AT Rocket",
+      "statId": "Rocket-LtA-T",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Lancer%20AT%20Rocket.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_RK_LTAT1"
+    },
+    {
+      "id": "R-Wpn-Rocket02-MRL",
+      "name": "Mini-Rocket Array",
+      "statId": "Rocket-MRL",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Mini-Rocket%20Array.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_RK_MRL1"
+    },
+    {
+      "id": "R-Wpn-Rocket02-MRLHvy",
+      "name": "Heavy Rocket Array",
+      "statId": "Rocket-MRL-Hvy",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/ui/icons/question.svg",
+      "resolution": "generic",
+      "reportDefinition": false,
+      "message": null
+    },
+    {
+      "id": "R-Wpn-Rocket03-HvAT",
+      "name": "Bunker Buster Rocket",
+      "statId": "Rocket-BB",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Bunker%20Buster%20Rocket.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_RK_HVAT1"
+    },
+    {
+      "id": "R-Wpn-Rocket05-MiniPod",
+      "name": "Mini-Rocket Pod",
+      "statId": "Rocket-Pod",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Mini-Rocket%20Pod.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_RK_MP1"
+    },
+    {
+      "id": "R-Wpn-Rocket06-IDF",
+      "name": "Ripple Rockets",
+      "statId": "Rocket-IDF",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Ripple%20Rockets.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_RK_IDF"
+    },
+    {
+      "id": "R-Wpn-Rocket07-Tank-Killer",
+      "name": "Tank Killer Rocket",
+      "statId": "Rocket-HvyA-T",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Tank%20Killer%20Rocket.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_RK_HvAT"
+    },
+    {
+      "id": "R-Wpn-RocketSlow-Accuracy01",
+      "name": "Rocket Laser Designator",
+      "statId": "Rocket-LtA-T",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Rocket%20Laser%20Designator.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_SRK_AC1"
+    },
+    {
+      "id": "R-Wpn-RocketSlow-Accuracy02",
+      "name": "Thermal Imaging Rockets",
+      "statId": "Rocket-LtA-T",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Thermal%20Imaging%20Rockets.gif",
+      "resolution": "native-name",
+      "reportDefinition": true,
+      "message": "RES_W_SRK_AC2"
+    },
+    {
+      "id": "R-Wpn-Sunburst",
+      "name": "Sunburst AA Rocket Array",
+      "statId": "Rocket-Sunburst",
+      "iconId": "IMAGE_RES_WEAPONTECH",
+      "url": "/warzone/research-icons/Sunburst%20AA%20Rocket%20Array.gif",
+      "resolution": "native-name",
+      "reportDefinition": false,
+      "message": null
+    }
+  ],
+  "artworkPolicy": "Stable native IDs; exact existing stock name or explicit alias; otherwise honest generic research symbol.",
+  "emulatorUsed": false,
+  "nativeDataChanged": false
+}

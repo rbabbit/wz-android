@@ -1,0 +1,28 @@
+{
+  "version": "0.66",
+  "passed": true,
+  "checks": [
+    "All six known maps select immutable wrapper identity, difficulty and player count",
+    "Native FFA observer covers every active slot, hostility and air caps, including six-player research",
+    "Map-aware native archive restore and F7 save keep every map and all active bot contexts",
+    "Configured slot count, human ownership, hostility and bot5 cannot be forged or omitted",
+    "The actual legacy EMAG NullBot archive stays byte-exact and defaults to four slots",
+    "Campaign restore and Towers reward save still use their original branches"
+  ],
+  "syntheticNativeProtocolFixture": true,
+  "actualNativeEngineExecuted": false,
+  "sources": [
+    {
+      "path": "app/src/main/assets/warzone/saved-games.js",
+      "sha256": "b447db433205420fe357f3c92a02f6232b8fd9af08d6e41aa23f0fe7b8303879"
+    },
+    {
+      "path": "app/src/main/assets/warzone-ffa-hud.js",
+      "sha256": "d201d180ec94b41fa75fd38b8a1e183927debdc9a49c739ffeb7ccc047807e0d"
+    },
+    {
+      "path": "tools/check-ffa-maps-js-066.cjs",
+      "sha256": "2d82615a2828c80f05357302f2c2a9cd145a53bcbef284c1598061b030f66936"
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "version": "0.61",
+  "passed": true,
+  "baseline": "0.60",
+  "fallbackSHA256": "81cc46731f1d8d2a232eb82b83c05d677f178f686053ad5ce2009bc72b15c53f",
+  "noNativeBuild": true,
+  "compiledProgramsUnchanged": true,
+  "originalMissionBodiesPreserved": true,
+  "sourceScope": [
+    {
+      "path": "scenario/warzone-towers-commands.js",
+      "sha256": "590be36a3157dd383006e06d4fb54daaffe98bb517405b7876588a022eacd17c",
+      "changedFunctions": [
+        "wtcmd_recoverySite",
+        "wtcmd_resumeBuilds",
+        "wtcmd_constructionState",
+        "wtcmd_trackSite",
+        "wtcmd_planBuild",
+        "wtcmd_tickBuildsImpl",
+        "wtcmd_poll"
+      ],
+      "addedFunctions": [
+        "wtcmd_assignBuildWorkers",
+        "wtcmd_blockBuild",
+        "wtcmd_buildPackability",
+        "wtcmd_buildReservations",
+        "wtcmd_buildSiteError",
+        "wtcmd_explicitBuildWorkers",
+        "wtcmd_reservationError",
+        "wtcmd_retryBuild",
+        "wtcmd_tooClose"
+      ]
+    },
+    {
+      "path": "campaign/commands.js",
+      "sha256": "f66f070ee6578d5bb0754a06d27386acbc03d5a17c5aba3b1298f4240d0d68d4",
+      "changedFunctions": [
+        "wtcmd_constructionState",
+        "wtcmd_trackSite",
+        "wtcmd_planBuild",
+        "wtcmd_tickBuildsImpl",
+        "wtcmd_poll"
+      ],
+      "addedFunctions": [
+        "wtcmd_assignBuildWorkers",
+        "wtcmd_blockBuild",
+        "wtcmd_buildPackability",
+        "wtcmd_buildReservations",
+        "wtcmd_buildSiteError",
+        "wtcmd_explicitBuildWorkers",
+        "wtcmd_reservationError",
+        "wtcmd_retryBuild",
+        "wtcmd_tooClose"
+      ]
+    }
+  ],
+  "payloads": [
+    {
+      "loader": "warzone2100-towers-052.js",
+      "data": "warzone2100.data",
+      "onlyChangedVirtualFile": "/data/mp/tests/warzone-towers-commands.js",
+      "baselineDataBytes": 78083173,
+      "baselineDataSHA256": "700f590005199c6d75a958ade8db2ff37362ba077f38d7703f76ae842b105d07",
+      "originalDataPrefixUnchanged": true,
+      "unchangedVirtualFiles": 4291,
+      "compiledProgramUnchanged": true,
+      "runtimeBodySHA256": "f5ce76bdb7a1ffda3c6630e25174adcb98e0f6bef156151457558bfbaf0e08dc",
+      "sourceContentSHA256": "590be36a3157dd383006e06d4fb54daaffe98bb517405b7876588a022eacd17c",
+      "loaderSHA256": "6d17a3b9f3e935b2748cbbcfc4916e6badb81be31ef22ba3c932e3987ec089b9",
+      "dataSHA256": "244e70d357ff02ddc8cfd43d1bf7c531a3a777593bb5d8fdf84e05c2d9976da7"
+    },
+    {
+      "loader": "warzone2100-campaign.js",
+      "data": "warzone2100-campaign.data",
+      "onlyChangedVirtualFile": "/data/base/script/campaign/mobile/campaign-bridge.js",
+      "baselineDataBytes": 78704246,
+      "baselineDataSHA256": "be53b74f7f1958b3431b1a0f4ea5129ed14d310a5cc4b73a1dcfce20f62ec6aa",
+      "originalDataPrefixUnchanged": true,
+      "unchangedVirtualFiles": 4299,
+      "compiledProgramUnchanged": true,
+      "runtimeBodySHA256": "5804365816391f247c2eb75a3a26c9bc0ef14b230aa0e53af00385ed910eebca",
+      "sourceContentSHA256": "64a5f01d1e2378647ce46e97fe93f809c9892708fc0f5bf90512dce5b7bbf510",
+      "loaderSHA256": "5b3fff50542fa5913fda7ccbc0182a8a731d93e4e3fc986c7d104faedfaea226",
+      "dataSHA256": "70d333a1b58870b34e9922e83f6c077cc2fc085219d00e7161ba98db6ae1c2e3"
+    }
+  ],
+  "frozenNativeAssets": {
+    "warzone2100-duel.data": "584a8be5958871b7d1f133bb4d3ef514737d8cf17b959be05f6659a828ceac47",
+    "warzone2100-duel.js": "6ef65429d1f496bfe5c52e2d8d770b28eaf319d77cb0d61675abd5d78d5420b5",
+    "warzone2100-towers-052.wasm": "2924f46aa75d9b27b92494f01d56239856ad06b2164cd7131144a3a5faeb87db",
+    "warzone2100.js": "fdf0c4807323b15a00cbe92947db2fb6b2da771384af9f3fba08fc5be03c5949",
+    "warzone2100.wasm": "497c65308d3e85f0b5370ec0ff0eb48e6a0876e735ad45e3b280829c7f3c2a06"
+  },
+  "ffaProof": {
+    "path": "scenario/ffa/PACKAGE.json",
+    "sha256": "45bb1de041d957f42edd7c05bbc9ca4d3ee848b1ba80cc818f99ed20fe0f9982"
+  }
+}

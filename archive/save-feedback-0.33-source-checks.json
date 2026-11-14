@@ -1,0 +1,61 @@
+{
+  "version": "0.33",
+  "emulatorUsed": false,
+  "androidRuntimeExecuted": false,
+  "actualNativeEngineExecuted": false,
+  "scope": "Source protocol fixtures with the existing native/Android stubs; not gameplay or visual acceptance.",
+  "passed": true,
+  "sourceCheckGroupsPassed": 9,
+  "checks": [
+    {
+      "name": "Accepted Save emits busy feedback synchronously, before native preparation or F7",
+      "passed": true
+    },
+    {
+      "name": "Repeated busy taps keep the same operation and create exactly one archive",
+      "passed": true
+    },
+    {
+      "name": "Saved feedback follows real phone archive acknowledgement and exposes its ID",
+      "passed": true
+    },
+    {
+      "name": "Readiness and active-purchase rejections expose errors immediately without saving",
+      "passed": true
+    },
+    {
+      "name": "A rejected phone archive and failed storage sync never show Saved",
+      "passed": true
+    },
+    {
+      "name": "Death at first feedback or native-write stage cannot publish a stale Saved state",
+      "passed": true
+    },
+    {
+      "name": "Save waits for the native Rewards drawer close acknowledgement before F7",
+      "passed": true
+    },
+    {
+      "name": "Missing animation frames stay bounded; an unclosed drawer fails within the original 15-second deadline",
+      "passed": true
+    },
+    {
+      "name": "A broken display observer cannot invalidate an acknowledged save",
+      "passed": true
+    }
+  ],
+  "sources": [
+    {
+      "path": "app/src/main/assets/warzone/saved-games.js",
+      "sha256": "950aed3369227f187ca41be49e7cea24dde44c26c654ac3fdc81413c0661c1ae"
+    },
+    {
+      "path": "tools/check-saved-games-027.cjs",
+      "sha256": "f2c2620ffde41ee52c534e001a92948abf79a2025515022d4595f19d0d4b9709"
+    },
+    {
+      "path": "tools/check-save-feedback-033.cjs",
+      "sha256": "7c99039a2ecdaaab1562ddd2e966f58081c1725424cb2cd817d1d64282e8ebec"
+    }
+  ]
+}

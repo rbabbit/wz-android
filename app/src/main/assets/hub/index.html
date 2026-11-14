@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <title>Game Hub</title>
+  <link rel="stylesheet" href="hub.css">
+  <script src="hub.js" defer></script>
+</head>
+<body>
+  <div id="hub-app">
+    <header class="hub-header">
+      <h1>GAME HUB</h1>
+      <nav class="hub-tabs" aria-label="Game Hub sections">
+        <button id="tab-results" type="button" aria-pressed="true">Results</button>
+        <button id="tab-rankings" type="button" aria-pressed="false">Rankings</button>
+      </nav>
+      <button id="hub-refresh" class="refresh-button" type="button" aria-label="Refresh game information">↻</button>
+    </header>
+    <div class="hub-tools">
+      <label class="search-field"><span class="sr-only">Find players or maps</span><input id="hub-search" type="search" placeholder="Find a player or map" autocomplete="off" spellcheck="false"></label>
+      <div id="hub-boards" class="board-buttons" aria-label="Leaderboard" hidden>
+        <button type="button" data-board="global" aria-pressed="true">Global</button>
+        <button type="button" data-board="1v1" aria-pressed="false">1v1</button>
+        <button type="button" data-board="ffa" aria-pressed="false">FFA</button>
+      </div>
+    </div>
+    <div class="hub-statusline">
+      <span id="hub-status" role="status" aria-live="polite">Loading game information…</span>
+      <a id="hub-source" href="https://warzone2100.retropaganda.info/hub" target="_blank" rel="noopener noreferrer">Retropaganda data ↗</a>
+    </div>
+    <main id="hub-main" tabindex="-1" aria-label="Game information"></main>
+    <footer id="hub-pagination" hidden>
+      <button id="hub-previous" type="button" disabled>Previous</button>
+      <span id="hub-page-count"></span>
+      <button id="hub-next" type="button" disabled>Next</button>
+    </footer>
+  </div>
+</body>
+</html>

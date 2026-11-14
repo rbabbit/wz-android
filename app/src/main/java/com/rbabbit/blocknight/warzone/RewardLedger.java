@@ -11,6 +11,7 @@ import java.util.Set;
 final class RewardLedger {
   static final int STARTER_CRYSTALS = 350;
   static final int AD_REWARD_CRYSTALS = 10;
+  static final int DIFFICULTY_COMPLETION_CRYSTALS = 1000;
   int balance = STARTER_CRYSTALS;
   // One native SDK presentation at a time. Clearing the token and crediting
   // the wallet share a durable store transaction, so a callback cannot pay twice.
@@ -18,6 +19,7 @@ final class RewardLedger {
   final Map<String, Integer> inventory = new LinkedHashMap<>();
   final Map<String, Integer> loadout = new LinkedHashMap<>();
   final Set<String> completed = new HashSet<>();
+  final Set<String> claimedDifficultyBonuses = new LinkedHashSet<>();
   final LinkedHashMap<String, Run> runs = new LinkedHashMap<>();
 
   static final class Run {
@@ -30,7 +32,7 @@ final class RewardLedger {
     final Set<Integer> clearedWaves = new LinkedHashSet<>();
     boolean applied, settled, suspended, pinned, winPaid, returnAllowed, awaitingResumeInventory;
     String inventoryPurchaseFloor = "";
-    int wave, waveCredits, completionCredits;
+    int wave, waveCredits, completionCredits, difficultyCredits;
     Receipt receipt;
     Run(String session, String map, Map<String, Integer> items) {
       this.session = session; this.map = map;
@@ -191,8 +193,52 @@ final class RewardLedger {
 
   /** Only a terminal native inventory snapshot authorizes building returns. */
   Receipt finish(String session, boolean won, String difficulty, int total, boolean authoritativeRemaining) {
+    return finish(session, won, difficulty, total, authoritativeRemaining, null);
+  }
+
+  static boolean validDifficulty(String difficulty) {
+    return "easy".equals(difficulty) || "medium".equals(difficulty) || "hard".equals(difficulty);
+  }
+
+  private static void validateDifficultyMaps(String difficulty, Set<String> required) {
+    if (!validDifficulty(difficulty) || required == null || required.isEmpty())
+      throw new IllegalArgumentException("This map's difficulty catalog is not available.");
+    for (String id : required) if (id == null || !id.matches("[A-Za-z0-9][A-Za-z0-9_-]{0,127}"))
+      throw new IllegalArgumentException("Invalid map identity in the difficulty catalog.");
+  }
+
+  private int claimDifficultyBonus(String difficulty, Set<String> required) {
+    return completed.containsAll(required) && claimedDifficultyBonuses.add(difficulty)
+        ? DIFFICULTY_COMPLETION_CRYSTALS : 0;
+  }
+
+  /** Backfill completed older wallets on Home without requiring another playthrough. */
+  int reconcileDifficultyBonuses(Map<String, Set<String>> actualCatalogGroups) {
+    if (actualCatalogGroups == null || actualCatalogGroups.isEmpty())
+      throw new IllegalArgumentException("Missing difficulty map catalog.");
+    Set<String> known = new HashSet<>();
+    for (Map.Entry<String, Set<String>> group : actualCatalogGroups.entrySet()) {
+      validateDifficultyMaps(group.getKey(), group.getValue());
+      for (String id : group.getValue()) if (!known.add(id))
+        throw new IllegalArgumentException("A map belongs to more than one difficulty.");
+    }
+    int credited = 0;
+    for (Map.Entry<String, Set<String>> group : actualCatalogGroups.entrySet())
+      credited = Math.addExact(credited, claimDifficultyBonus(group.getKey(), group.getValue()));
+    balance = Math.addExact(balance, credited);
+    return credited;
+  }
+
+  /** Catalog membership comes from the caller's actual map catalog, never a name prefix. */
+  Receipt finish(String session, boolean won, String difficulty, int total, boolean authoritativeRemaining,
+      Set<String> requiredDifficultyMapIds) {
     Run run = runs.get(session);
     if (run == null) throw new IllegalArgumentException("Unknown match.");
+    if (requiredDifficultyMapIds != null) {
+      validateDifficultyMaps(difficulty, requiredDifficultyMapIds);
+      if (total < 1 || !requiredDifficultyMapIds.contains(run.map))
+        throw new IllegalArgumentException("This map's difficulty catalog is not available.");
+    }
     if (run.settled) return run.receipt;
     int bonus = 0;
     String reason = run.clearedWaves.size() + " completed waves × 5  +" + run.waveCredits;
@@ -203,6 +249,13 @@ final class RewardLedger {
       bonus = base + (first ? 50 : 0);
       run.winPaid = true; run.completionCredits = bonus;
       reason += "\nMap completed  +" + base + (first ? "\nFirst completion  +50" : "");
+      // Native victories and Home backfill share the same persistent claim.
+      if (requiredDifficultyMapIds != null
+          && (run.difficultyCredits = claimDifficultyBonus(difficulty, requiredDifficultyMapIds)) > 0) {
+        bonus = Math.addExact(bonus, run.difficultyCredits);
+        String label = "easy".equals(difficulty) ? "Easy" : "medium".equals(difficulty) ? "Medium" : "Hard";
+        reason += "\n" + label + " difficulty completed  +" + run.difficultyCredits;
+      }
     } else if (won) reason += "\nCompletion reward already saved";
     else if (run.clearedWaves.isEmpty()) reason = "No completed waves this match";
     balance = Math.addExact(balance, bonus);
@@ -211,7 +264,8 @@ final class RewardLedger {
     else if (!run.pinned) discardUnknownRemaining(run);
     run.settled = true;
     run.suspended = run.pinned;
-    run.receipt = new Receipt(won, run.map, run.wave, total, run.waveCredits + run.completionCredits, balance, reason);
+    run.receipt = new Receipt(won, run.map, run.wave, total,
+        Math.addExact(Math.addExact(run.waveCredits, run.completionCredits), run.difficultyCredits), balance, reason);
     return run.receipt;
   }
 

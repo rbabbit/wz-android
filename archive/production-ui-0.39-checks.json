@@ -1,0 +1,213 @@
+{
+  "version": "0.39",
+  "emulatorUsed": false,
+  "actualNativeEngineExecuted": false,
+  "fixture": "Controlled factories/templates and source functions in desktop Chromium",
+  "checks": [
+    "Only ready native factory IDs render, with compact sequential numbers and exact selected ID",
+    "All five factory chips fit beside categories at Standard width",
+    "Category changes preserve each family’s native selected factory, including optional VTOL",
+    "Local recipe quantity controls retain shared count, saved alias deduplication, exact factory payload and pending acknowledgement",
+    "Narrow/enlarged layout keeps the selector row, scrolls factories and reaches the last native ID",
+    "Actual counts above five remain reachable; destroying the selected factory falls back to an existing ready ID",
+    "Expanded factory queue preserves native job identities and groups matching waiting units",
+    "Short enlarged Design scrolls to the editable name and Save action",
+    "Design, Blueprints and Queue render monochrome chrome with original artwork retained",
+    "No browser runtime errors in exercised command pages"
+  ],
+  "layouts": [
+    {
+      "label": "1280×720 Standard",
+      "panel": {
+        "x": 10,
+        "y": 66,
+        "w": 740,
+        "h": 347,
+        "right": 750,
+        "bottom": 413
+      },
+      "bar": {
+        "x": 22,
+        "y": 145,
+        "w": 716,
+        "h": 34,
+        "right": 738,
+        "bottom": 179
+      },
+      "tabs": {
+        "x": 22,
+        "y": 146,
+        "w": 186.609375,
+        "h": 32,
+        "right": 208.609375,
+        "bottom": 178
+      },
+      "roster": {
+        "x": 271.375,
+        "y": 145,
+        "w": 466.625,
+        "h": 34,
+        "right": 738,
+        "bottom": 179
+      },
+      "rosterWidth": 467,
+      "bodyOverflow": false,
+      "actions": [
+        {
+          "x": 577.75,
+          "y": 193,
+          "w": 153.25,
+          "h": 71,
+          "right": 731,
+          "bottom": 264
+        },
+        {
+          "x": 577.75,
+          "y": 283,
+          "w": 153.25,
+          "h": 71,
+          "right": 731,
+          "bottom": 354
+        }
+      ],
+      "rows": [
+        {
+          "x": 22,
+          "y": 186,
+          "w": 716,
+          "h": 85,
+          "right": 738,
+          "bottom": 271
+        },
+        {
+          "x": 22,
+          "y": 276,
+          "w": 716,
+          "h": 85,
+          "right": 738,
+          "bottom": 361
+        }
+      ],
+      "white": "rgb(244, 244, 244)",
+      "ink": "rgb(8, 8, 8)"
+    },
+    {
+      "label": "640×360 Extra large",
+      "panel": {
+        "x": 10,
+        "y": 66,
+        "w": 470,
+        "h": 220,
+        "right": 480,
+        "bottom": 286
+      },
+      "bar": {
+        "x": 22,
+        "y": 144.203125,
+        "w": 446,
+        "h": 34,
+        "right": 468,
+        "bottom": 178.203125
+      },
+      "tabs": {
+        "x": 22,
+        "y": 145.203125,
+        "w": 196.234375,
+        "h": 32,
+        "right": 218.234375,
+        "bottom": 177.203125
+      },
+      "roster": {
+        "x": 297.71875,
+        "y": 144.203125,
+        "w": 170.28125,
+        "h": 34,
+        "right": 468,
+        "bottom": 178.203125
+      },
+      "rosterWidth": 383,
+      "bodyOverflow": false,
+      "actions": [
+        {
+          "x": 325.890625,
+          "y": 192.4375,
+          "w": 135.109375,
+          "h": 72.3125,
+          "right": 461,
+          "bottom": 264.75
+        },
+        {
+          "x": 325.890625,
+          "y": 297.09375,
+          "w": 135.109375,
+          "h": 72.3125,
+          "right": 461,
+          "bottom": 369.40625
+        }
+      ],
+      "rows": [
+        {
+          "x": 22,
+          "y": 185.203125,
+          "w": 446,
+          "h": 86.78125,
+          "right": 468,
+          "bottom": 271.984375
+        },
+        {
+          "x": 22,
+          "y": 276.984375,
+          "w": 446,
+          "h": 112.546875,
+          "right": 468,
+          "bottom": 389.53125
+        }
+      ],
+      "white": "rgb(244, 244, 244)",
+      "ink": "rgb(8, 8, 8)"
+    }
+  ],
+  "screenshots": [
+    "qa/0.39-theme/production-standard.png",
+    "qa/0.39-theme/production-narrow-enlarged.png",
+    "qa/0.39-theme/design-narrow-enlarged.png",
+    "qa/0.39-theme/saved-narrow-enlarged.png",
+    "qa/0.39-theme/queue-narrow-enlarged.png"
+  ],
+  "passed": true,
+  "checksPassed": 10,
+  "sources": [
+    {
+      "path": "app/src/main/assets/warzone-command-pages.js",
+      "sha256": "bcb1f312715f7007c0e5757b3aa5d11e0eb96e74cd6f855bcf54fcc9fbf8569f"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/command-pages.css",
+      "sha256": "9036d9c8582b8ebb581ed2adaebf21f0e4465cf298ad38f16e4ee147327edf5c"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/lab-shell.css",
+      "sha256": "099a72464e470ebd387d035705a316d5ec3cdd9da11b63077754c03049b381c0"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/lab-commands.css",
+      "sha256": "9cc89795a6d02767d0bed940cce3216d418994bf8a400b7edf1a54dacf043a68"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/towers-commands.css",
+      "sha256": "f8cb75ab5f95dce25d3ae042fea3d5d4a6a22eaa808736d87cab017dfbf19e03"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/towers-shell.css",
+      "sha256": "1ea114b759d94de72e24b8a826c8c96aeec60ea0b77d13ca7055b360385bab42"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/towers-monochrome.css",
+      "sha256": "2d4561dba627e58f85d7220042cadb17b3a14f2bd96434db368a2e348087ca07"
+    },
+    {
+      "path": "tools/check-production-ui-039.cjs",
+      "sha256": "a5693ec1d854e577e1055427828f91a69ba91e8d14260580f385c477bfc9236c"
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "version": "0.52",
+  "passed": true,
+  "emulatorUsed": false,
+  "actualNativeEngineExecuted": false,
+  "gameplayVerified": false,
+  "scope": "Actual bridge/UI functions with bounded synthetic API; no native gameplay assertion",
+  "baselineProof": "archive/construction-recovery-0.52-baseline.json",
+  "checksPassed": 17,
+  "checks": [
+    "Partial builder loss prunes job, journal and dead FIFO keys together without recruiting anyone",
+    "All builders lost retains both foundation and future blueprint as Waiting for trucks with one group Resume",
+    "Explicit replacement resumes exact existing foundation then the original next job, retaining progress and normal build orders",
+    "A living assigned truck en route to an existing foundation shows Trucks en route; later FIFO sites stay Queued, and last-worker loss shows Waiting for trucks",
+    "FIFO status follows actual worker queues even when a recovered foundation was adopted after older queued plans",
+    "A selected group keeps its existing FIFO ahead of resumed work; other original sessions are excluded",
+    "No selection, changed/foreign/non-constructor IDs, duplicates, stale context/time and unreachable groups issue no orders",
+    "A changed exact group, reordered IDs, missing jobs and completed/deleted bound targets cannot be resurrected",
+    "Orphan native foundations recover by exact owned target and ordinary HELPBUILD, without new building costs",
+    "Legacy observer-only plans disappear when their native worker queue dies; a real unfinished legacy foundation remains resumable",
+    "Two factory module levels remain serialized; an unfinished current level receives HELPBUILD before the next module is built",
+    "Native-only interrupted module recovery helps the exact current module instead of purchasing the next level",
+    "STOP/manual movement cancels only affected assigned FIFOs and preserves unrelated orphan plans; cancel remains real native STOP",
+    "A canceled unstarted journal cannot steal the later real foundation or obscure its live progress",
+    "Legacy loaded lost jobs infer identity from the retained journal, retain original plans through JSON save, and revoke stale recovery context",
+    "UI Resume obtains fresh explicit constructor IDs, never a stale build group; pending STOP cancels the unsent action",
+    "Campaign policy and frozen generated Campaign source/data remain untouched"
+  ],
+  "sources": [
+    {
+      "path": "scenario/warzone-towers-commands.js",
+      "sha256": "10c89425903402a01ae365074d665c2bc6e44e1d892a88d06e58b7ac1878e323"
+    },
+    {
+      "path": "app/src/main/assets/warzone-command-pages.js",
+      "sha256": "593499d753cd831418e03225562bcf12fffec75ab70479613a113a88f8882ede"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/build-display.js",
+      "sha256": "d62b5daa7578c4ef4a2fad93fea43e1b1d74f661417a11602ee5d3f44237d6aa"
+    },
+    {
+      "path": "tools/check-construction-recovery-052.cjs",
+      "sha256": "8c58e5307a7209a8fb5eb090b0f7f7c3979048533626387707f563b9f959b5da"
+    }
+  ],
+  "recordedUTC": "2026-11-11T16:05:21.905Z"
+}

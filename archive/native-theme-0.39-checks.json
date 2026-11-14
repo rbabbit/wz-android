@@ -1,0 +1,211 @@
+{
+  "version": "0.39",
+  "passed": true,
+  "emulatorUsed": false,
+  "androidRuntimeExecuted": false,
+  "gameplayVerified": false,
+  "renderedUIVerified": false,
+  "scope": "Native presentation colours, unchanged source contracts, preserved art/services and calculated opaque palette contrast only.",
+  "limitations": "No Android runtime, emulator, device, GPU, real touch, keyboard, scrolling, disabled-state rendering or visual acceptance verification.",
+  "checksPassed": 15,
+  "checks": [
+    "Complete v0.38 source ZIP retains its pinned size and SHA-256",
+    "Pinned ZIP manifest covers every ZIP member except the manifest itself",
+    "All 13 non-presentation Java services, catalogues, codecs and legacy MusicSetupView retain v0.38 bytes",
+    "Original art, icons, 46 map previews, briefing PNGs and unscoped Android resources retain baseline bytes",
+    "94 named reward, save, navigation, music, briefing and control methods retain exact normalized source",
+    "Every native setOn listener callback and onMeasure/onLayout implementation retains exact normalized source",
+    "Main-menu Cancel/Return action callbacks remain unchanged",
+    "Original splash bitmap loading, logo, artwork renderer and existing colour filter retain exact source",
+    "Active standalone native view colour literals are monochrome",
+    "Native shared palette matches the selected background/panel/control/text colours",
+    "White selected buttons/options use black text and dark pressed-state ripple in source",
+    "Native enabled/disabled guards and existing alpha treatments retain exact source lines",
+    "Android window/navigation/splash background and accent use monochrome; launcher icon background is unchanged",
+    "Legacy MusicSetupView remains unreferenced by MainActivity; coloured terminal panels remain Duel-only",
+    "Opaque source palette text combinations exceed 4.5:1 calculated contrast"
+  ],
+  "baselineSourceZIP": "C:\\timerApp\\warzone-towers-0.38-source.zip",
+  "sourceZIPBaselineSHA256": "28407a5782f8126438c13c7aeeba89f4ecdb3dbd2ab5cf56ec01ba4e89b85b7e",
+  "baselineManifest": {
+    "path": "archive/repository-files.json",
+    "sha256": "64d26aad31dfd61290417ace04afa0c072a51de71944e3c387e84a1f290f45f7",
+    "entries": 10095
+  },
+  "fallbackRecord": {
+    "path": "archive/fallback-0.39.json",
+    "sha256": "8e75789eadb70dca69ebffda3652e587642a37c24839b6c50571c45249d50a0e"
+  },
+  "unchangedMethods": [
+    "MainActivity.java::showGraphicsSetup",
+    "MainActivity.java::launchGame",
+    "MainActivity.java::showRewards",
+    "MainActivity.java::refreshAdState",
+    "MainActivity.java::refreshRewardBalance",
+    "MainActivity.java::releaseAdScreen",
+    "MainActivity.java::finishAdScreen",
+    "MainActivity.java::closeRewards",
+    "MainActivity.java::showSavedGames",
+    "MainActivity.java::closeSavedGames",
+    "MainActivity.java::loadSavedGame",
+    "MainActivity.java::completeRewardQuote",
+    "MainActivity.java::dismissRewardReceipt",
+    "MainActivity.java::finishTowersRewards",
+    "MainActivity.java::dismissBriefing",
+    "MainActivity.java::fadeBriefing",
+    "MainActivity.java::prepareStartupBriefing",
+    "MainActivity.java::briefingFailed",
+    "MainActivity.java::selectedMusicTracks",
+    "MainActivity.java::gameUrl",
+    "MainActivity.java::isDuelBattle",
+    "MainActivity.java::installAutoLauncher",
+    "MainActivity.java::installTouchControls",
+    "MainActivity.java::cancelMainMenuReturn",
+    "MainActivity.java::returnToMainMenu",
+    "MainActivity.java::showBattleExitPanel",
+    "MainActivity.java::showReplayPanel",
+    "MainActivity.java::replayText",
+    "MainActivity.java::finishStartupAutomation",
+    "MainActivity.java::revealBattlefield",
+    "MainActivity.java::faceOpponent",
+    "MainActivity.java::showCombatHud",
+    "MainActivity.java::mapMusicState",
+    "MainActivity.java::mapMusicLifecycle",
+    "MainActivity.java::immersive",
+    "MainActivity.java::onWindowFocusChanged",
+    "MainActivity.java::onPause",
+    "MainActivity.java::onResume",
+    "MainActivity.java::onDestroy",
+    "MainActivity.java::isGameBackKey",
+    "MainActivity.java::gameBackWindow",
+    "MainActivity.java::isKeyboardVisible",
+    "MainActivity.java::hideKeyboard",
+    "MainActivity.java::routeGameBackKey",
+    "MainActivity.java::dispatchKeyEvent",
+    "MainActivity.java::onBackPressed",
+    "GraphicsSetupView.java::desiredButtonWidth",
+    "GraphicsSetupView.java::chooseMatch",
+    "GraphicsSetupView.java::chooseWeapon",
+    "GraphicsSetupView.java::chooseDifficulty",
+    "GraphicsSetupView.java::chooseMap",
+    "GraphicsSetupView.java::rememberMap",
+    "GraphicsSetupView.java::refresh",
+    "GraphicsSetupView.java::selectedMap",
+    "GraphicsSetupView.java::selectedMatchMode",
+    "GraphicsSetupView.java::selectedDuelWeapon",
+    "GraphicsSetupView.java::setRewardBalance",
+    "RewardsView.java::refresh",
+    "RewardsView.java::completeMutation",
+    "RewardsView.java::showError",
+    "RewardsView.java::setAdState",
+    "RewardsView.java::updateAdControls",
+    "RewardsView.java::setCategory",
+    "RewardsView.java::commitOne",
+    "RewardsView.java::selectOwned",
+    "RewardsView.java::clearFeedback",
+    "RewardsView.java::showFeedback",
+    "RewardsView.java::maxQuantity",
+    "RewardsView.java::maxOwned",
+    "RewardsView.java::visibleItems",
+    "RewardsView.java::render",
+    "RewardsView.java::itemStatus",
+    "RewardsView.java::dismissOwnedPopup",
+    "RewardsView.java::image",
+    "RewardsView.java::normalized",
+    "RewardsView.java::count",
+    "SavedGamesView.java::refresh",
+    "BattleBriefingView.java::showFor",
+    "BattleBriefingView.java::onMeasure",
+    "BattleBriefingView.java::onLayout",
+    "BattleBriefingView.java::dispatchDraw",
+    "BattleBriefingView.java::cancel",
+    "BattleBriefingView.java::onDetachedFromWindow",
+    "MapPreviewPager.java::showLevels",
+    "MapPreviewPager.java::setInteractionEnabled",
+    "MapPreviewPager.java::settleSelection",
+    "MapPreviewPager.java::decorate",
+    "MapPreviewPager.java::snapToPage",
+    "MapPreviewPager.java::fling",
+    "MapPreviewPager.java::onScrollChanged",
+    "MapPreviewPager.java::onInterceptTouchEvent",
+    "MapPreviewPager.java::onTouchEvent",
+    "MapPreviewPager.java::performAccessibilityAction",
+    "MapPreviewPager.java::onDetachedFromWindow"
+  ],
+  "unchangedMethodCount": 94,
+  "unchangedListenerCallbackCount": 35,
+  "unchangedLayoutMethodCount": 14,
+  "protectedJavaPaths": [
+    "app/src/main/java/com/rbabbit/blocknight/warzone/BattleLaunchSpec.java",
+    "app/src/main/java/com/rbabbit/blocknight/warzone/MapLevelCatalog.java",
+    "app/src/main/java/com/rbabbit/blocknight/warzone/MapMusicIndex.java",
+    "app/src/main/java/com/rbabbit/blocknight/warzone/MusicPackStore.java",
+    "app/src/main/java/com/rbabbit/blocknight/warzone/MusicSetupView.java",
+    "app/src/main/java/com/rbabbit/blocknight/warzone/MusicTrackCatalog.java",
+    "app/src/main/java/com/rbabbit/blocknight/warzone/MusicTrackResponse.java",
+    "app/src/main/java/com/rbabbit/blocknight/warzone/OptionalPackStore.java",
+    "app/src/main/java/com/rbabbit/blocknight/warzone/RewardCatalog.java",
+    "app/src/main/java/com/rbabbit/blocknight/warzone/RewardLedger.java",
+    "app/src/main/java/com/rbabbit/blocknight/warzone/RewardStore.java",
+    "app/src/main/java/com/rbabbit/blocknight/warzone/RewardedAdsController.java",
+    "app/src/main/java/com/rbabbit/blocknight/warzone/SaveGameStore.java"
+  ],
+  "preservedArtworkResourceCount": 467,
+  "paletteContrastRatios": {
+    "selectedTextOnWhite": 18.21,
+    "primaryTextOnPanel": 17.17,
+    "secondaryTextOnPanel": 7.67,
+    "secondaryTextOnControl": 6.61
+  },
+  "sources": [
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/BattleBriefingView.java",
+      "sha256": "eb8e948e522264a3ed7ff8c93853603f53f926f43a4c7599a4bc7e269fa487d6"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/GraphicsSetupView.java",
+      "sha256": "54b16db9fd18d14e7ea76e1cfe6a79c2eb075bd7e442ccebe42268160d14d5b1"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MainActivity.java",
+      "sha256": "77f45e332d38507b02410ca2ea90d7b589c41d343fc8a19c66dadf195a3ad9c1"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MapPreviewPager.java",
+      "sha256": "84d4b1ac9956ea3996544185b3ab3d09f572de26f3e6989f197aedd266035703"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/RewardReceiptView.java",
+      "sha256": "11908473cb4c76a11a6a9dd63eeb956f2c4fcb0d74e18dfa24ff45feaea3ff75"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/RewardsView.java",
+      "sha256": "4231360030f98b60b7aaf130327d641dd55278db9de2e494794138837ca2bf55"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/SavedGamesView.java",
+      "sha256": "c9ca118a65f4845c82e8377df0d88e2ba45a9be5c9a48f6d7d9d1909d79e3a10"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/TowersTheme.java",
+      "sha256": "7fb53564ef93d8083f0563416b9236bd4ec5e485b91312c72ca333aedf551716"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/WarzoneSplashView.java",
+      "sha256": "79f0f95a399a81ba9df37e7bf7a5f518d19f3f14af3924d7079332746fe0aa4f"
+    },
+    {
+      "path": "app/src/main/res/values/colors.xml",
+      "sha256": "8a8241ed128c03bb731eeef817d6725cba5013229efb035befcd28e4e1a88da0"
+    },
+    {
+      "path": "app/src/main/res/values/styles.xml",
+      "sha256": "358ee74eabea0f8b97a28de40b9f15fabfe805767e518cd6ee88a18422961d17"
+    }
+  ],
+  "checker": {
+    "path": "tools/check-native-theme-039.py",
+    "sha256": "05e23d7063f89659191ca0c060bc00cd6149ccd90d8c04294fff9ce6d8ca739b"
+  },
+  "recordedUTC": "2026-11-10T17:46:22.913838Z"
+}

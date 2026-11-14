@@ -1,0 +1,4470 @@
+{
+  "version": "0.66",
+  "name": "music-towers",
+  "passed": true,
+  "candidateAPK_SHA256": "e231ce3589687edf77f5c5962b55fcf171267162e499b2a7326c3a70306f1ffa",
+  "device": "emulator-5558",
+  "emulatorUsed": true,
+  "actualNativeEngineExecuted": true,
+  "musicDecoderExecuted": true,
+  "speakerOutputMonitored": false,
+  "events": [
+    {
+      "phase": "ordinary-native-entry",
+      "at": "2026-11-13T00:52:34.368Z"
+    },
+    {
+      "phase": "real-music-toggle-and-decoder-PCM",
+      "at": "2026-11-13T00:53:19.801Z"
+    },
+    {
+      "phase": "background-and-native-input-return",
+      "at": "2026-11-13T00:53:24.817Z"
+    }
+  ],
+  "preflightOnly": false,
+  "ready": {
+    "commands": {
+      "version": 64,
+      "moduleTargets": [
+        {
+          "id": 160039,
+          "itemId": "A0PowerGenerator",
+          "name": "Power Generator",
+          "kind": "POWER GENERATOR",
+          "moduleId": "A0PowMod1",
+          "x": 15,
+          "y": 61,
+          "z": 1,
+          "width": 2,
+          "breadth": 2,
+          "modules": 0,
+          "maximum": 1,
+          "reserved": 0,
+          "nativeStatus": 1,
+          "status": "eligible",
+          "eligible": true,
+          "statusReason": ""
+        },
+        {
+          "id": 160041,
+          "itemId": "A0ResearchFacility",
+          "name": "Research Facility",
+          "kind": "RESEARCH",
+          "moduleId": "A0ResearchModule1",
+          "x": 23,
+          "y": 66,
+          "z": 1,
+          "width": 2,
+          "breadth": 2,
+          "modules": 0,
+          "maximum": 1,
+          "reserved": 0,
+          "nativeStatus": 1,
+          "status": "eligible",
+          "eligible": true,
+          "statusReason": ""
+        },
+        {
+          "id": 160043,
+          "itemId": "A0ResearchFacility",
+          "name": "Research Facility",
+          "kind": "RESEARCH",
+          "moduleId": "A0ResearchModule1",
+          "x": 23,
+          "y": 70,
+          "z": 1,
+          "width": 2,
+          "breadth": 2,
+          "modules": 0,
+          "maximum": 1,
+          "reserved": 0,
+          "nativeStatus": 1,
+          "status": "eligible",
+          "eligible": true,
+          "statusReason": ""
+        },
+        {
+          "id": 160045,
+          "itemId": "A0LightFactory",
+          "name": "Factory",
+          "kind": "FACTORY",
+          "moduleId": "A0FacMod1",
+          "x": 42,
+          "y": 65,
+          "z": 1,
+          "width": 3,
+          "breadth": 3,
+          "modules": 0,
+          "maximum": 2,
+          "reserved": 0,
+          "nativeStatus": 1,
+          "status": "eligible",
+          "eligible": true,
+          "statusReason": ""
+        },
+        {
+          "id": 160047,
+          "itemId": "A0LightFactory",
+          "name": "Factory",
+          "kind": "FACTORY",
+          "moduleId": "A0FacMod1",
+          "x": 48,
+          "y": 65,
+          "z": 1,
+          "width": 3,
+          "breadth": 3,
+          "modules": 0,
+          "maximum": 2,
+          "reserved": 0,
+          "nativeStatus": 1,
+          "status": "eligible",
+          "eligible": true,
+          "statusReason": ""
+        }
+      ],
+      "modulePending": [],
+      "selectingTrucks": false,
+      "page": "",
+      "buildOpen": false,
+      "nativeHudHidden": false,
+      "pendingItem": "",
+      "siteChecks": 0,
+      "pending": 0,
+      "writes": 12,
+      "acks": 6,
+      "timeouts": 1,
+      "placements": 0,
+      "rejects": 0,
+      "opens": 0,
+      "closes": 0,
+      "placement": "",
+      "linePlacement": null,
+      "lineValidations": 0,
+      "lastLine": null,
+      "factory": 0,
+      "factoryRecipeKey": "",
+      "factoryQueueOpen": false,
+      "factoryMenuOpen": false,
+      "productionPending": [],
+      "productionFeedback": {
+        "message": "",
+        "tone": "done"
+      },
+      "demolition": null,
+      "demolitionOpening": false,
+      "session": "",
+      "nativeMenu": "",
+      "nativeClosing": false,
+      "nativeItem": "",
+      "nativeBuildGroup": [],
+      "buildParticipants": [],
+      "nativeToolReady": false,
+      "nativePendingSites": 0,
+      "exitingBuild": false,
+      "nativeBuildPlaced": false,
+      "nativeBuildSawWork": false,
+      "buildingOpening": false,
+      "saved": [
+        {
+          "id": "design-1794415047593-1",
+          "name": "Design 1",
+          "body": "Body1REC",
+          "propulsion": "wheeled01",
+          "turrets": [
+            "MG1Mk1"
+          ],
+          "cost": 47,
+          "points": 237,
+          "droidType": 0
+        },
+        {
+          "id": "design-1794415812020-1",
+          "name": "Design 2",
+          "body": "Body1REC",
+          "propulsion": "wheeled01",
+          "turrets": [
+            "MG1Mk1"
+          ],
+          "cost": 47,
+          "points": 237,
+          "droidType": 0
+        }
+      ],
+      "history": [
+        {
+          "nonce": "cmd-1794531193944-3",
+          "action": "apply-rewards",
+          "ok": true,
+          "reason": "",
+          "result": {
+            "version": 2,
+            "ok": true,
+            "session": "386f22ba-2a33-4c7c-8b5f-ebf99f054efa",
+            "applied": true,
+            "error": "",
+            "items": {},
+            "remaining": {},
+            "reserved": {},
+            "natural": {},
+            "nativeItems": {},
+            "lasSats": [],
+            "research": false,
+            "supply": false,
+            "researchMultiplier": 1,
+            "baseConfig": {
+              "items": {},
+              "research": false,
+              "supply": false
+            },
+            "transactions": [],
+            "pendingTransactions": [],
+            "supplyPower": 0,
+            "fortress": false,
+            "fortressType": "X-Super-Cannon",
+            "fortressUsed": false,
+            "fortressReserved": false,
+            "fortressNatural": false
+          },
+          "gameTime": 802
+        }
+      ],
+      "snapshot": {
+        "version": 1,
+        "gameTime": 4402,
+        "player": 0,
+        "power": 2511,
+        "rewards": {
+          "version": 2,
+          "ok": true,
+          "session": "386f22ba-2a33-4c7c-8b5f-ebf99f054efa",
+          "applied": true,
+          "error": "",
+          "items": {},
+          "remaining": {},
+          "reserved": {},
+          "natural": {},
+          "nativeItems": {},
+          "lasSats": [],
+          "research": false,
+          "supply": false,
+          "researchMultiplier": 1,
+          "baseConfig": {
+            "items": {},
+            "research": false,
+            "supply": false
+          },
+          "transactions": [],
+          "pendingTransactions": [],
+          "supplyPower": 0,
+          "fortress": false,
+          "fortressType": "X-Super-Cannon",
+          "fortressUsed": false,
+          "fortressReserved": false,
+          "fortressNatural": false
+        },
+        "facilityTargets": [
+          {
+            "id": 160041,
+            "kind": "research",
+            "itemId": "A0ResearchFacility",
+            "x": 23,
+            "y": 66,
+            "z": 1,
+            "modules": 0,
+            "moduleId": "A0ResearchModule1",
+            "width": 2,
+            "breadth": 2,
+            "ready": true,
+            "nativeStatus": 1
+          },
+          {
+            "id": 160043,
+            "kind": "research",
+            "itemId": "A0ResearchFacility",
+            "x": 23,
+            "y": 70,
+            "z": 1,
+            "modules": 0,
+            "moduleId": "A0ResearchModule1",
+            "width": 2,
+            "breadth": 2,
+            "ready": true,
+            "nativeStatus": 1
+          },
+          {
+            "id": 160045,
+            "kind": "factory",
+            "itemId": "A0LightFactory",
+            "x": 42,
+            "y": 65,
+            "z": 1,
+            "modules": 0,
+            "moduleId": "A0FacMod1",
+            "width": 3,
+            "breadth": 3,
+            "ready": true,
+            "nativeStatus": 1
+          },
+          {
+            "id": 160047,
+            "kind": "factory",
+            "itemId": "A0LightFactory",
+            "x": 48,
+            "y": 65,
+            "z": 1,
+            "modules": 0,
+            "moduleId": "A0FacMod1",
+            "width": 3,
+            "breadth": 3,
+            "ready": true,
+            "nativeStatus": 1
+          },
+          {
+            "id": 160049,
+            "kind": "cyborg",
+            "itemId": "A0CyborgFactory",
+            "x": 43,
+            "y": 72,
+            "z": 1,
+            "modules": 0,
+            "moduleId": "",
+            "width": 1,
+            "breadth": 2,
+            "ready": true,
+            "nativeStatus": 1
+          }
+        ],
+        "facilityBlockers": [
+          {
+            "id": 160001,
+            "x": 28,
+            "y": 64,
+            "z": 1,
+            "bodySize": 1
+          }
+        ],
+        "mapWidth": 64,
+        "mapHeight": 80,
+        "alwaysQueue": true,
+        "researchQueues": [
+          {
+            "labId": 160043,
+            "topicIds": []
+          },
+          {
+            "labId": 160041,
+            "topicIds": []
+          }
+        ],
+        "hasHQ": true,
+        "selectedUnits": [],
+        "construction": [],
+        "constructionSites": [],
+        "nativeBuildOptions": [
+          "A0ADemolishStructure",
+          "A0ComDroidControl",
+          "A0CyborgFactory",
+          "A0FacMod1",
+          "A0HardcreteMk1Gate",
+          "A0HardcreteMk1Wall",
+          "A0LightFactory",
+          "A0PowMod1",
+          "A0PowerGenerator",
+          "A0ResearchFacility",
+          "A0ResearchModule1",
+          "A0ResourceExtractor",
+          "A0TankTrap",
+          "GuardTower1",
+          "GuardTower6",
+          "PillBox1",
+          "PillBox4",
+          "PillBox5",
+          "Sys-SensoTower01",
+          "Sys-SensoTower02",
+          "WallTower02"
+        ],
+        "moduleTargets": [
+          {
+            "id": 160039,
+            "itemId": "A0PowerGenerator",
+            "name": "Power Generator",
+            "kind": "POWER GENERATOR",
+            "moduleId": "A0PowMod1",
+            "x": 15,
+            "y": 61,
+            "z": 1,
+            "width": 2,
+            "breadth": 2,
+            "modules": 0,
+            "maximum": 1,
+            "reserved": 0,
+            "nativeStatus": 1,
+            "status": "eligible",
+            "eligible": true,
+            "statusReason": ""
+          },
+          {
+            "id": 160041,
+            "itemId": "A0ResearchFacility",
+            "name": "Research Facility",
+            "kind": "RESEARCH",
+            "moduleId": "A0ResearchModule1",
+            "x": 23,
+            "y": 66,
+            "z": 1,
+            "width": 2,
+            "breadth": 2,
+            "modules": 0,
+            "maximum": 1,
+            "reserved": 0,
+            "nativeStatus": 1,
+            "status": "eligible",
+            "eligible": true,
+            "statusReason": ""
+          },
+          {
+            "id": 160043,
+            "itemId": "A0ResearchFacility",
+            "name": "Research Facility",
+            "kind": "RESEARCH",
+            "moduleId": "A0ResearchModule1",
+            "x": 23,
+            "y": 70,
+            "z": 1,
+            "width": 2,
+            "breadth": 2,
+            "modules": 0,
+            "maximum": 1,
+            "reserved": 0,
+            "nativeStatus": 1,
+            "status": "eligible",
+            "eligible": true,
+            "statusReason": ""
+          },
+          {
+            "id": 160045,
+            "itemId": "A0LightFactory",
+            "name": "Factory",
+            "kind": "FACTORY",
+            "moduleId": "A0FacMod1",
+            "x": 42,
+            "y": 65,
+            "z": 1,
+            "width": 3,
+            "breadth": 3,
+            "modules": 0,
+            "maximum": 2,
+            "reserved": 0,
+            "nativeStatus": 1,
+            "status": "eligible",
+            "eligible": true,
+            "statusReason": ""
+          },
+          {
+            "id": 160047,
+            "itemId": "A0LightFactory",
+            "name": "Factory",
+            "kind": "FACTORY",
+            "moduleId": "A0FacMod1",
+            "x": 48,
+            "y": 65,
+            "z": 1,
+            "width": 3,
+            "breadth": 3,
+            "modules": 0,
+            "maximum": 2,
+            "reserved": 0,
+            "nativeStatus": 1,
+            "status": "eligible",
+            "eligible": true,
+            "statusReason": ""
+          }
+        ],
+        "buildings": [
+          {
+            "id": "A0ComDroidControl",
+            "power": 100
+          },
+          {
+            "id": "A0CyborgFactory",
+            "power": 100
+          },
+          {
+            "id": "A0FacMod1",
+            "power": 100
+          },
+          {
+            "id": "A0HardcreteMk1CWall",
+            "power": 25
+          },
+          {
+            "id": "A0HardcreteMk1Gate",
+            "power": 50
+          },
+          {
+            "id": "A0HardcreteMk1Wall",
+            "power": 25
+          },
+          {
+            "id": "A0LightFactory",
+            "power": 100
+          },
+          {
+            "id": "A0PowMod1",
+            "power": 0
+          },
+          {
+            "id": "A0PowerGenerator",
+            "power": 50
+          },
+          {
+            "id": "A0ResearchFacility",
+            "power": 100
+          },
+          {
+            "id": "A0ResearchModule1",
+            "power": 100
+          },
+          {
+            "id": "A0ResourceExtractor",
+            "power": 0
+          },
+          {
+            "id": "A0TankTrap",
+            "power": 15
+          },
+          {
+            "id": "GuardTower1",
+            "power": 100
+          },
+          {
+            "id": "GuardTower6",
+            "power": 100
+          },
+          {
+            "id": "PillBox1",
+            "power": 100
+          },
+          {
+            "id": "PillBox4",
+            "power": 100
+          },
+          {
+            "id": "PillBox5",
+            "power": 100
+          },
+          {
+            "id": "Sys-SensoTower01",
+            "power": 50
+          },
+          {
+            "id": "Sys-SensoTower02",
+            "power": 100
+          },
+          {
+            "id": "WallTower02",
+            "power": 100
+          }
+        ],
+        "parts": [
+          "Body1REC",
+          "HalfTrack",
+          "wheeled01",
+          "Cannon1-VTOL",
+          "Cannon1Mk1",
+          "Flame1Mk1",
+          "MG1-VTOL",
+          "MG1Mk1",
+          "MG2-VTOL",
+          "MG2Mk1",
+          "Mortar1Mk1",
+          "Rocket-Pod",
+          "Rocket-VTOL-Pod",
+          "SensorTurret1Mk1",
+          "LightRepair1",
+          "Spade1Mk1",
+          "CommandBrain01"
+        ],
+        "trucks": [
+          {
+            "id": 160007,
+            "x": 34,
+            "y": 64,
+            "z": 1,
+            "selected": false,
+            "order": 0,
+            "action": 0,
+            "rate": 9,
+            "building": false,
+            "queued": 0
+          },
+          {
+            "id": 160005,
+            "x": 32,
+            "y": 64,
+            "z": 1,
+            "selected": false,
+            "order": 0,
+            "action": 0,
+            "rate": 9,
+            "building": false,
+            "queued": 0
+          },
+          {
+            "id": 160003,
+            "x": 30,
+            "y": 64,
+            "z": 1,
+            "selected": false,
+            "order": 0,
+            "action": 0,
+            "rate": 9,
+            "building": false,
+            "queued": 0
+          },
+          {
+            "id": 160001,
+            "x": 28,
+            "y": 64,
+            "z": 1,
+            "selected": false,
+            "order": 0,
+            "action": 0,
+            "rate": 9,
+            "building": false,
+            "queued": 0
+          }
+        ],
+        "jobs": [],
+        "factories": [
+          {
+            "id": 160045,
+            "number": 1,
+            "x": 42,
+            "y": 65,
+            "type": 1,
+            "kind": "Factory",
+            "templates": [
+              "ConstructionDroid"
+            ],
+            "modules": 0,
+            "ready": true,
+            "idle": true,
+            "active": null,
+            "currentProduction": null,
+            "progress": {
+              "available": false,
+              "currentId": "",
+              "currentName": "",
+              "templateId": null,
+              "completedBuildPoints": null,
+              "totalBuildPoints": null,
+              "ratio": null,
+              "state": "idle"
+            },
+            "queueKnown": true,
+            "waitingReason": null,
+            "queue": []
+          },
+          {
+            "id": 160047,
+            "number": 2,
+            "x": 48,
+            "y": 65,
+            "type": 1,
+            "kind": "Factory",
+            "templates": [
+              "ConstructionDroid"
+            ],
+            "modules": 0,
+            "ready": true,
+            "idle": true,
+            "active": null,
+            "currentProduction": null,
+            "progress": {
+              "available": false,
+              "currentId": "",
+              "currentName": "",
+              "templateId": null,
+              "completedBuildPoints": null,
+              "totalBuildPoints": null,
+              "ratio": null,
+              "state": "idle"
+            },
+            "queueKnown": true,
+            "waitingReason": null,
+            "queue": []
+          },
+          {
+            "id": 160049,
+            "number": 3,
+            "x": 43,
+            "y": 72,
+            "type": 16,
+            "kind": "Cyborg factory",
+            "templates": [
+              "Cyb-Cannon-GROUND",
+              "Cyb-Chain-GROUND",
+              "Cyb-ComEng",
+              "Cyb-Flamer-GROUND",
+              "Cyb-Gren",
+              "Cyb-Mechanic"
+            ],
+            "modules": 0,
+            "ready": true,
+            "idle": true,
+            "active": null,
+            "currentProduction": null,
+            "progress": {
+              "available": false,
+              "currentId": "",
+              "currentName": "",
+              "templateId": null,
+              "completedBuildPoints": null,
+              "totalBuildPoints": null,
+              "ratio": null,
+              "state": "idle"
+            },
+            "queueKnown": true,
+            "waitingReason": null,
+            "queue": []
+          }
+        ],
+        "nativeMenu": "",
+        "recoveryContext": "2-1794531193173",
+        "templates": [
+          {
+            "fullname": "Truck Viper Wheels",
+            "name": "ConstructionDroid",
+            "id": "ConstructionDroid",
+            "points": 310,
+            "power": 62,
+            "cost": 62,
+            "droidType": 3,
+            "body": "Body1REC",
+            "propulsion": "wheeled01",
+            "brain": "ZNULLBRAIN",
+            "repair": "ZNULLREPAIR",
+            "ecm": "ZNULLECM",
+            "sensor": "ZNULLSENSOR",
+            "construct": "Spade1Mk1",
+            "weapons": []
+          },
+          {
+            "fullname": "Heavy Gunner Cyborg",
+            "name": "Cyb-Cannon-GROUND",
+            "id": "Cyb-Cannon-GROUND",
+            "points": 382,
+            "power": 87,
+            "cost": 87,
+            "droidType": 5,
+            "body": "CyborgLightBody",
+            "propulsion": "CyborgLegs",
+            "brain": "ZNULLBRAIN",
+            "repair": "ZNULLREPAIR",
+            "ecm": "ZNULLECM",
+            "sensor": "ZNULLSENSOR",
+            "construct": "ZNULLCONSTRUCT",
+            "weapons": [
+              "CyborgCannon"
+            ]
+          },
+          {
+            "fullname": "Machinegunner Cyborg",
+            "name": "Cyb-Chain-GROUND",
+            "id": "Cyb-Chain-GROUND",
+            "points": 302,
+            "power": 67,
+            "cost": 67,
+            "droidType": 5,
+            "body": "CyborgLightBody",
+            "propulsion": "CyborgLegs",
+            "brain": "ZNULLBRAIN",
+            "repair": "ZNULLREPAIR",
+            "ecm": "ZNULLECM",
+            "sensor": "ZNULLSENSOR",
+            "construct": "ZNULLCONSTRUCT",
+            "weapons": [
+              "CyborgChaingun"
+            ]
+          },
+          {
+            "fullname": "Combat Engineer Cyborg",
+            "name": "Cyb-ComEng",
+            "id": "Cyb-ComEng",
+            "points": 207,
+            "power": 37,
+            "cost": 37,
+            "droidType": 10,
+            "body": "CyborgLightBody",
+            "propulsion": "CyborgLegs",
+            "brain": "ZNULLBRAIN",
+            "repair": "ZNULLREPAIR",
+            "ecm": "ZNULLECM",
+            "sensor": "ZNULLSENSOR",
+            "construct": "CyborgSpade",
+            "weapons": []
+          },
+          {
+            "fullname": "Flamer Cyborg",
+            "name": "Cyb-Flamer-GROUND",
+            "id": "Cyb-Flamer-GROUND",
+            "points": 342,
+            "power": 82,
+            "cost": 82,
+            "droidType": 5,
+            "body": "CyborgLightBody",
+            "propulsion": "CyborgLegs",
+            "brain": "ZNULLBRAIN",
+            "repair": "ZNULLREPAIR",
+            "ecm": "ZNULLECM",
+            "sensor": "ZNULLSENSOR",
+            "construct": "ZNULLCONSTRUCT",
+            "weapons": [
+              "CyborgFlamer01"
+            ]
+          },
+          {
+            "fullname": "Grenadier Cyborg",
+            "name": "Cyb-Gren",
+            "id": "Cyb-Gren",
+            "points": 462,
+            "power": 107,
+            "cost": 107,
+            "droidType": 5,
+            "body": "CyborgLightBody",
+            "propulsion": "CyborgLegs",
+            "brain": "ZNULLBRAIN",
+            "repair": "ZNULLREPAIR",
+            "ecm": "ZNULLECM",
+            "sensor": "ZNULLSENSOR",
+            "construct": "ZNULLCONSTRUCT",
+            "weapons": [
+              "Cyb-Wpn-Grenade"
+            ]
+          },
+          {
+            "fullname": "Mechanic Cyborg",
+            "name": "Cyb-Mechanic",
+            "id": "Cyb-Mechanic",
+            "points": 242,
+            "power": 62,
+            "cost": 62,
+            "droidType": 11,
+            "body": "CyborgLightBody",
+            "propulsion": "CyborgLegs",
+            "brain": "ZNULLBRAIN",
+            "repair": "CyborgRepair",
+            "ecm": "ZNULLECM",
+            "sensor": "ZNULLSENSOR",
+            "construct": "ZNULLCONSTRUCT",
+            "weapons": []
+          }
+        ],
+        "finishedUnits": [],
+        "finishedBuilds": []
+      },
+      "terrain": {
+        "ready": true,
+        "active": true,
+        "revision": 1,
+        "observations": 284,
+        "observedAt": 27751.109999999986,
+        "reads": 1,
+        "picks": 0,
+        "lastPickMs": 0,
+        "maxPickMs": 0,
+        "heightIndexBuilds": 0,
+        "heightCells": 0,
+        "heightWideTriangles": 0,
+        "heightQueries": 0,
+        "lastHeightCandidates": 0,
+        "maxHeightCandidates": 0,
+        "heightTriangleTests": 0,
+        "gpuBufferReads": 2,
+        "cpuBufferReads": 0,
+        "cpuCopies": 2,
+        "cpuBytes": 430080,
+        "mirroredUploads": 0,
+        "cpuInvalidations": 0,
+        "lastMeshReadMs": 10.01500000001397,
+        "maxMeshReadMs": 10.01500000001397,
+        "lastHeightIndexMs": 0,
+        "maxHeightIndexMs": 0,
+        "lastHeightMs": 0,
+        "maxHeightMs": 0,
+        "error": ""
+      }
+    },
+    "research": {
+      "active": true,
+      "version": 40,
+      "open": false,
+      "opening": false,
+      "opens": 0,
+      "closes": 0,
+      "topicSelections": 0,
+      "labSelections": 0,
+      "categoryChanges": 0,
+      "activeLab": 0,
+      "activeCategory": "ALL",
+      "selectedTopicIds": [],
+      "catalogCount": 18,
+      "catalogSample": [
+        "Medium Body - Cobra",
+        "Fuel Injection Engine Mk3",
+        "Composite Alloys",
+        "Hover Propulsion"
+      ],
+      "labCount": 2,
+      "readyLabs": 2,
+      "labIds": [
+        160041,
+        160043
+      ],
+      "playerPower": 2510,
+      "labs": [
+        {
+          "id": 160041,
+          "nativeIndex": 0,
+          "idle": true,
+          "modules": 0,
+          "health": 100,
+          "topicId": "",
+          "topicName": "",
+          "remainingSeconds": null,
+          "estimatedProgress": 0,
+          "waitingPower": false
+        },
+        {
+          "id": 160043,
+          "nativeIndex": 1,
+          "idle": true,
+          "modules": 0,
+          "health": 100,
+          "topicId": "",
+          "topicName": "",
+          "remainingSeconds": null,
+          "estimatedProgress": 0,
+          "waitingPower": false
+        }
+      ],
+      "bridgeSyncs": 5,
+      "bridgeErrors": 0,
+      "commandAcks": 0,
+      "commandRejects": 0,
+      "commandTimeouts": 0,
+      "queueAdds": 0,
+      "queueRemovals": 0,
+      "directAssignments": 0,
+      "directFailures": 0,
+      "queueSyncs": 0,
+      "queueStateEvents": 5,
+      "queueCommandWrites": 0,
+      "queueCommandErrors": 0,
+      "backgroundSyncs": 0,
+      "lastSyncDurationMs": null,
+      "queues": [
+        [],
+        []
+      ],
+      "dirtyLabIds": [],
+      "pendingClose": false,
+      "syncBlocked": false,
+      "runner": null,
+      "pendingCommand": null,
+      "fsPolls": 85,
+      "fsErrors": 6,
+      "fsLogFiles": [
+        "Scavengers.1.log",
+        "init.0.log"
+      ],
+      "completedEvents": 0,
+      "lastTopic": null,
+      "lastCompleted": null,
+      "canvasRestored": true
+    },
+    "saved": {
+      "loading": false,
+      "ready": true,
+      "busy": false,
+      "ended": false,
+      "error": "",
+      "serial": 0,
+      "savedId": "",
+      "hydrated": false,
+      "phase": "idle",
+      "status": "",
+      "statusAt": 0,
+      "docSession": "386f22ba-2a33-4c7c-8b5f-ebf99f054efa",
+      "logicalSession": "",
+      "slotId": "",
+      "persistenceStarted": 0,
+      "persistenceCompleted": []
+    },
+    "touch": {
+      "active": true,
+      "version": 57,
+      "intercepted": 0,
+      "mouseEvents": 30,
+      "taps": 0,
+      "orders": 0,
+      "pans": 0,
+      "panMoves": 0,
+      "lastPanStartLatencyMs": null,
+      "lastPanDispatchMs": null,
+      "maxPanDispatchMs": 0,
+      "panPhase": "idle",
+      "panQueuedPointers": 0,
+      "panRearms": 0,
+      "panUnobservedRearms": 0,
+      "panHeldTimeouts": 0,
+      "panContextResets": 0,
+      "panQueueOverflows": 0,
+      "boxSelections": 0,
+      "boxCadenceWaits": 0,
+      "boxPressGaps": [],
+      "lastNativeLeftDownAt": 14751.26000000001,
+      "manualSelectionRevision": 0,
+      "facilityOpens": 0,
+      "lastFacility": null,
+      "facilityError": "",
+      "pinchSteps": 0,
+      "tiltMoves": 0,
+      "tiltHeld": null,
+      "rotationMoves": 0,
+      "rotationSteps": 0,
+      "rotationHeld": null,
+      "saveNames": 0,
+      "radarTaps": 0,
+      "radarDrags": 0,
+      "radarMoves": 0,
+      "cameraFacings": 1,
+      "cameraFacingPending": false,
+      "cameraHeading": "north",
+      "cameraFacingError": "",
+      "lastRadarPoint": null,
+      "combatLock": false,
+      "autoFight": false,
+      "boxMode": false,
+      "queueMode": false,
+      "queueModifierHeld": false,
+      "stickyBuildActivations": 0,
+      "nativeStatsOpen": false,
+      "nativeObjectsOpen": false,
+      "pendingClicks": 0,
+      "nativeRenderFrames": 615,
+      "queuedPointerEvents": 0,
+      "selectAlls": 0,
+      "manualSelectAlls": 0,
+      "combatOrders": 0,
+      "patrolOrders": 0,
+      "queuedOrders": 0,
+      "stopOrders": 0,
+      "stopPending": false,
+      "stopAcks": 0,
+      "stoppedUnitIds": [],
+      "baseJumps": 0,
+      "feedbacks": 0,
+      "doubleTaps": 0,
+      "coalescedSamples": 0,
+      "pointerCaptures": 0,
+      "zoomPreset": null,
+      "zoomPresetSelections": 0,
+      "zoomWheelEvents": 0,
+      "zoomCommandWrites": 1,
+      "zoomCommandErrors": 0,
+      "zoomAcks": 0,
+      "zoomPending": false,
+      "lastZoomDistance": null,
+      "gestureActive": false,
+      "hudVisible": true,
+      "battleActive": true,
+      "heldKeys": []
+    },
+    "html": {
+      "phase": "playing",
+      "result": "",
+      "exitReason": "",
+      "session": "386f22ba-2a33-4c7c-8b5f-ebf99f054efa",
+      "menuRequested": false,
+      "mode": "tower-defense"
+    },
+    "music": {
+      "mode": "map",
+      "cached": true,
+      "enabled": true,
+      "mapId": "beginner",
+      "trackId": "original_soundtrack/track1.opus",
+      "title": "Track 1",
+      "author": "Martin Severn",
+      "missionId": "",
+      "campaignSession": "",
+      "video": false,
+      "missionResults": false,
+      "url": "https://appassets.androidplatform.net/warzone/optional/map-music/original_soundtrack/track1.opus",
+      "battleActive": true,
+      "suspended": false,
+      "playing": true,
+      "loading": false,
+      "loadedBytes": 2418624,
+      "error": "",
+      "disposed": false,
+      "transport": "track-blob",
+      "mediaTimeSeconds": 4.98089,
+      "mediaReadyState": 4,
+      "nativeMusicEnabled": false,
+      "selectedTracks": [
+        "original_soundtrack/track1.opus"
+      ],
+      "playlistTrackIds": [],
+      "playlistSelections": [],
+      "playedTracks": [
+        "original_soundtrack/track1.opus"
+      ],
+      "retained": false
+    },
+    "config": "/warzone2100",
+    "viewport": [
+      1231,
+      554,
+      1231,
+      496
+    ]
+  },
+  "off": {
+    "music": {
+      "mode": "map",
+      "cached": true,
+      "enabled": false,
+      "mapId": "beginner",
+      "trackId": "original_soundtrack/track1.opus",
+      "title": "Track 1",
+      "author": "Martin Severn",
+      "missionId": "",
+      "campaignSession": "",
+      "video": false,
+      "missionResults": false,
+      "url": "https://appassets.androidplatform.net/warzone/optional/map-music/original_soundtrack/track1.opus",
+      "battleActive": true,
+      "suspended": false,
+      "playing": false,
+      "loading": false,
+      "loadedBytes": 0,
+      "error": "",
+      "disposed": false,
+      "transport": "track-blob",
+      "mediaTimeSeconds": 0,
+      "mediaReadyState": 0,
+      "nativeMusicEnabled": false,
+      "selectedTracks": [
+        "original_soundtrack/track1.opus"
+      ],
+      "playlistTrackIds": [],
+      "playlistSelections": [],
+      "playedTracks": [
+        "original_soundtrack/track1.opus"
+      ],
+      "retained": false
+    },
+    "events": [],
+    "media": []
+  },
+  "playing": {
+    "music": {
+      "mode": "map",
+      "cached": true,
+      "enabled": true,
+      "mapId": "beginner",
+      "trackId": "original_soundtrack/track1.opus",
+      "title": "Track 1",
+      "author": "Martin Severn",
+      "missionId": "",
+      "campaignSession": "",
+      "video": false,
+      "missionResults": false,
+      "url": "https://appassets.androidplatform.net/warzone/optional/map-music/original_soundtrack/track1.opus",
+      "battleActive": true,
+      "suspended": false,
+      "playing": true,
+      "loading": false,
+      "loadedBytes": 2418624,
+      "error": "",
+      "disposed": false,
+      "transport": "track-blob",
+      "mediaTimeSeconds": 0.070907,
+      "mediaReadyState": 4,
+      "nativeMusicEnabled": false,
+      "selectedTracks": [
+        "original_soundtrack/track1.opus"
+      ],
+      "playlistTrackIds": [],
+      "playlistSelections": [],
+      "playedTracks": [
+        "original_soundtrack/track1.opus",
+        "original_soundtrack/track1.opus"
+      ],
+      "retained": false
+    },
+    "events": [
+      {
+        "id": 0,
+        "event": "waiting",
+        "trusted": true,
+        "at": 28807.474999999977,
+        "time": 0,
+        "paused": false,
+        "ended": false
+      },
+      {
+        "id": 0,
+        "event": "loadedmetadata",
+        "trusted": true,
+        "at": 28861.61499999999,
+        "time": 0,
+        "paused": false,
+        "ended": false
+      },
+      {
+        "id": 0,
+        "event": "playing",
+        "trusted": true,
+        "at": 28893.57500000007,
+        "time": 0.016949,
+        "paused": false,
+        "ended": false
+      }
+    ],
+    "media": [
+      {
+        "id": 0,
+        "src": "blob:https://appassets.androidplatform.net/35f9ac60-87cd-413c-bbbc-6e50e9416fa1",
+        "paused": false,
+        "ended": false,
+        "loop": true,
+        "time": 0.070907,
+        "duration": 420.713167,
+        "ready": 4,
+        "network": 1,
+        "opus": "probably",
+        "error": null
+      }
+    ],
+    "nativeConfig": {
+      "musicEnabled": "false",
+      "audioLevels": [
+        "cdvol=50",
+        "fxvol=100",
+        "voicevol=100"
+      ]
+    }
+  },
+  "panel": {
+    "state": {
+      "commands": {
+        "version": 64,
+        "moduleTargets": [
+          {
+            "id": 160039,
+            "itemId": "A0PowerGenerator",
+            "name": "Power Generator",
+            "kind": "POWER GENERATOR",
+            "moduleId": "A0PowMod1",
+            "x": 15,
+            "y": 61,
+            "z": 1,
+            "width": 2,
+            "breadth": 2,
+            "modules": 0,
+            "maximum": 1,
+            "reserved": 0,
+            "nativeStatus": 1,
+            "status": "eligible",
+            "eligible": true,
+            "statusReason": ""
+          },
+          {
+            "id": 160041,
+            "itemId": "A0ResearchFacility",
+            "name": "Research Facility",
+            "kind": "RESEARCH",
+            "moduleId": "A0ResearchModule1",
+            "x": 23,
+            "y": 66,
+            "z": 1,
+            "width": 2,
+            "breadth": 2,
+            "modules": 0,
+            "maximum": 1,
+            "reserved": 0,
+            "nativeStatus": 1,
+            "status": "eligible",
+            "eligible": true,
+            "statusReason": ""
+          },
+          {
+            "id": 160043,
+            "itemId": "A0ResearchFacility",
+            "name": "Research Facility",
+            "kind": "RESEARCH",
+            "moduleId": "A0ResearchModule1",
+            "x": 23,
+            "y": 70,
+            "z": 1,
+            "width": 2,
+            "breadth": 2,
+            "modules": 0,
+            "maximum": 1,
+            "reserved": 0,
+            "nativeStatus": 1,
+            "status": "eligible",
+            "eligible": true,
+            "statusReason": ""
+          },
+          {
+            "id": 160045,
+            "itemId": "A0LightFactory",
+            "name": "Factory",
+            "kind": "FACTORY",
+            "moduleId": "A0FacMod1",
+            "x": 42,
+            "y": 65,
+            "z": 1,
+            "width": 3,
+            "breadth": 3,
+            "modules": 0,
+            "maximum": 2,
+            "reserved": 0,
+            "nativeStatus": 1,
+            "status": "eligible",
+            "eligible": true,
+            "statusReason": ""
+          },
+          {
+            "id": 160047,
+            "itemId": "A0LightFactory",
+            "name": "Factory",
+            "kind": "FACTORY",
+            "moduleId": "A0FacMod1",
+            "x": 48,
+            "y": 65,
+            "z": 1,
+            "width": 3,
+            "breadth": 3,
+            "modules": 0,
+            "maximum": 2,
+            "reserved": 0,
+            "nativeStatus": 1,
+            "status": "eligible",
+            "eligible": true,
+            "statusReason": ""
+          }
+        ],
+        "modulePending": [],
+        "selectingTrucks": false,
+        "page": "",
+        "buildOpen": false,
+        "nativeHudHidden": false,
+        "pendingItem": "",
+        "siteChecks": 0,
+        "pending": 1,
+        "writes": 14,
+        "acks": 7,
+        "timeouts": 1,
+        "placements": 0,
+        "rejects": 0,
+        "opens": 0,
+        "closes": 0,
+        "placement": "",
+        "linePlacement": null,
+        "lineValidations": 0,
+        "lastLine": null,
+        "factory": 0,
+        "factoryRecipeKey": "",
+        "factoryQueueOpen": false,
+        "factoryMenuOpen": false,
+        "productionPending": [],
+        "productionFeedback": {
+          "message": "",
+          "tone": "done"
+        },
+        "demolition": null,
+        "demolitionOpening": false,
+        "session": "",
+        "nativeMenu": "",
+        "nativeClosing": false,
+        "nativeItem": "",
+        "nativeBuildGroup": [],
+        "buildParticipants": [],
+        "nativeToolReady": false,
+        "nativePendingSites": 0,
+        "exitingBuild": false,
+        "nativeBuildPlaced": false,
+        "nativeBuildSawWork": false,
+        "buildingOpening": false,
+        "saved": [
+          {
+            "id": "design-1794415047593-1",
+            "name": "Design 1",
+            "body": "Body1REC",
+            "propulsion": "wheeled01",
+            "turrets": [
+              "MG1Mk1"
+            ],
+            "cost": 47,
+            "points": 237,
+            "droidType": 0
+          },
+          {
+            "id": "design-1794415812020-1",
+            "name": "Design 2",
+            "body": "Body1REC",
+            "propulsion": "wheeled01",
+            "turrets": [
+              "MG1Mk1"
+            ],
+            "cost": 47,
+            "points": 237,
+            "droidType": 0
+          }
+        ],
+        "history": [
+          {
+            "nonce": "cmd-1794531193944-3",
+            "action": "apply-rewards",
+            "ok": true,
+            "reason": "",
+            "result": {
+              "version": 2,
+              "ok": true,
+              "session": "386f22ba-2a33-4c7c-8b5f-ebf99f054efa",
+              "applied": true,
+              "error": "",
+              "items": {},
+              "remaining": {},
+              "reserved": {},
+              "natural": {},
+              "nativeItems": {},
+              "lasSats": [],
+              "research": false,
+              "supply": false,
+              "researchMultiplier": 1,
+              "baseConfig": {
+                "items": {},
+                "research": false,
+                "supply": false
+              },
+              "transactions": [],
+              "pendingTransactions": [],
+              "supplyPower": 0,
+              "fortress": false,
+              "fortressType": "X-Super-Cannon",
+              "fortressUsed": false,
+              "fortressReserved": false,
+              "fortressNatural": false
+            },
+            "gameTime": 802
+          }
+        ],
+        "snapshot": {
+          "version": 1,
+          "gameTime": 5602,
+          "player": 0,
+          "power": 2515,
+          "rewards": {
+            "version": 2,
+            "ok": true,
+            "session": "386f22ba-2a33-4c7c-8b5f-ebf99f054efa",
+            "applied": true,
+            "error": "",
+            "items": {},
+            "remaining": {},
+            "reserved": {},
+            "natural": {},
+            "nativeItems": {},
+            "lasSats": [],
+            "research": false,
+            "supply": false,
+            "researchMultiplier": 1,
+            "baseConfig": {
+              "items": {},
+              "research": false,
+              "supply": false
+            },
+            "transactions": [],
+            "pendingTransactions": [],
+            "supplyPower": 0,
+            "fortress": false,
+            "fortressType": "X-Super-Cannon",
+            "fortressUsed": false,
+            "fortressReserved": false,
+            "fortressNatural": false
+          },
+          "facilityTargets": [
+            {
+              "id": 160041,
+              "kind": "research",
+              "itemId": "A0ResearchFacility",
+              "x": 23,
+              "y": 66,
+              "z": 1,
+              "modules": 0,
+              "moduleId": "A0ResearchModule1",
+              "width": 2,
+              "breadth": 2,
+              "ready": true,
+              "nativeStatus": 1
+            },
+            {
+              "id": 160043,
+              "kind": "research",
+              "itemId": "A0ResearchFacility",
+              "x": 23,
+              "y": 70,
+              "z": 1,
+              "modules": 0,
+              "moduleId": "A0ResearchModule1",
+              "width": 2,
+              "breadth": 2,
+              "ready": true,
+              "nativeStatus": 1
+            },
+            {
+              "id": 160045,
+              "kind": "factory",
+              "itemId": "A0LightFactory",
+              "x": 42,
+              "y": 65,
+              "z": 1,
+              "modules": 0,
+              "moduleId": "A0FacMod1",
+              "width": 3,
+              "breadth": 3,
+              "ready": true,
+              "nativeStatus": 1
+            },
+            {
+              "id": 160047,
+              "kind": "factory",
+              "itemId": "A0LightFactory",
+              "x": 48,
+              "y": 65,
+              "z": 1,
+              "modules": 0,
+              "moduleId": "A0FacMod1",
+              "width": 3,
+              "breadth": 3,
+              "ready": true,
+              "nativeStatus": 1
+            },
+            {
+              "id": 160049,
+              "kind": "cyborg",
+              "itemId": "A0CyborgFactory",
+              "x": 43,
+              "y": 72,
+              "z": 1,
+              "modules": 0,
+              "moduleId": "",
+              "width": 1,
+              "breadth": 2,
+              "ready": true,
+              "nativeStatus": 1
+            }
+          ],
+          "facilityBlockers": [
+            {
+              "id": 160001,
+              "x": 28,
+              "y": 64,
+              "z": 1,
+              "bodySize": 1
+            }
+          ],
+          "mapWidth": 64,
+          "mapHeight": 80,
+          "alwaysQueue": true,
+          "researchQueues": [
+            {
+              "labId": 160043,
+              "topicIds": []
+            },
+            {
+              "labId": 160041,
+              "topicIds": []
+            }
+          ],
+          "hasHQ": true,
+          "selectedUnits": [],
+          "construction": [],
+          "constructionSites": [],
+          "nativeBuildOptions": [
+            "A0ADemolishStructure",
+            "A0ComDroidControl",
+            "A0CyborgFactory",
+            "A0FacMod1",
+            "A0HardcreteMk1Gate",
+            "A0HardcreteMk1Wall",
+            "A0LightFactory",
+            "A0PowMod1",
+            "A0PowerGenerator",
+            "A0ResearchFacility",
+            "A0ResearchModule1",
+            "A0ResourceExtractor",
+            "A0TankTrap",
+            "GuardTower1",
+            "GuardTower6",
+            "PillBox1",
+            "PillBox4",
+            "PillBox5",
+            "Sys-SensoTower01",
+            "Sys-SensoTower02",
+            "WallTower02"
+          ],
+          "moduleTargets": [
+            {
+              "id": 160039,
+              "itemId": "A0PowerGenerator",
+              "name": "Power Generator",
+              "kind": "POWER GENERATOR",
+              "moduleId": "A0PowMod1",
+              "x": 15,
+              "y": 61,
+              "z": 1,
+              "width": 2,
+              "breadth": 2,
+              "modules": 0,
+              "maximum": 1,
+              "reserved": 0,
+              "nativeStatus": 1,
+              "status": "eligible",
+              "eligible": true,
+              "statusReason": ""
+            },
+            {
+              "id": 160041,
+              "itemId": "A0ResearchFacility",
+              "name": "Research Facility",
+              "kind": "RESEARCH",
+              "moduleId": "A0ResearchModule1",
+              "x": 23,
+              "y": 66,
+              "z": 1,
+              "width": 2,
+              "breadth": 2,
+              "modules": 0,
+              "maximum": 1,
+              "reserved": 0,
+              "nativeStatus": 1,
+              "status": "eligible",
+              "eligible": true,
+              "statusReason": ""
+            },
+            {
+              "id": 160043,
+              "itemId": "A0ResearchFacility",
+              "name": "Research Facility",
+              "kind": "RESEARCH",
+              "moduleId": "A0ResearchModule1",
+              "x": 23,
+              "y": 70,
+              "z": 1,
+              "width": 2,
+              "breadth": 2,
+              "modules": 0,
+              "maximum": 1,
+              "reserved": 0,
+              "nativeStatus": 1,
+              "status": "eligible",
+              "eligible": true,
+              "statusReason": ""
+            },
+            {
+              "id": 160045,
+              "itemId": "A0LightFactory",
+              "name": "Factory",
+              "kind": "FACTORY",
+              "moduleId": "A0FacMod1",
+              "x": 42,
+              "y": 65,
+              "z": 1,
+              "width": 3,
+              "breadth": 3,
+              "modules": 0,
+              "maximum": 2,
+              "reserved": 0,
+              "nativeStatus": 1,
+              "status": "eligible",
+              "eligible": true,
+              "statusReason": ""
+            },
+            {
+              "id": 160047,
+              "itemId": "A0LightFactory",
+              "name": "Factory",
+              "kind": "FACTORY",
+              "moduleId": "A0FacMod1",
+              "x": 48,
+              "y": 65,
+              "z": 1,
+              "width": 3,
+              "breadth": 3,
+              "modules": 0,
+              "maximum": 2,
+              "reserved": 0,
+              "nativeStatus": 1,
+              "status": "eligible",
+              "eligible": true,
+              "statusReason": ""
+            }
+          ],
+          "buildings": [
+            {
+              "id": "A0ComDroidControl",
+              "power": 100
+            },
+            {
+              "id": "A0CyborgFactory",
+              "power": 100
+            },
+            {
+              "id": "A0FacMod1",
+              "power": 100
+            },
+            {
+              "id": "A0HardcreteMk1CWall",
+              "power": 25
+            },
+            {
+              "id": "A0HardcreteMk1Gate",
+              "power": 50
+            },
+            {
+              "id": "A0HardcreteMk1Wall",
+              "power": 25
+            },
+            {
+              "id": "A0LightFactory",
+              "power": 100
+            },
+            {
+              "id": "A0PowMod1",
+              "power": 0
+            },
+            {
+              "id": "A0PowerGenerator",
+              "power": 50
+            },
+            {
+              "id": "A0ResearchFacility",
+              "power": 100
+            },
+            {
+              "id": "A0ResearchModule1",
+              "power": 100
+            },
+            {
+              "id": "A0ResourceExtractor",
+              "power": 0
+            },
+            {
+              "id": "A0TankTrap",
+              "power": 15
+            },
+            {
+              "id": "GuardTower1",
+              "power": 100
+            },
+            {
+              "id": "GuardTower6",
+              "power": 100
+            },
+            {
+              "id": "PillBox1",
+              "power": 100
+            },
+            {
+              "id": "PillBox4",
+              "power": 100
+            },
+            {
+              "id": "PillBox5",
+              "power": 100
+            },
+            {
+              "id": "Sys-SensoTower01",
+              "power": 50
+            },
+            {
+              "id": "Sys-SensoTower02",
+              "power": 100
+            },
+            {
+              "id": "WallTower02",
+              "power": 100
+            }
+          ],
+          "parts": [
+            "Body1REC",
+            "HalfTrack",
+            "wheeled01",
+            "Cannon1-VTOL",
+            "Cannon1Mk1",
+            "Flame1Mk1",
+            "MG1-VTOL",
+            "MG1Mk1",
+            "MG2-VTOL",
+            "MG2Mk1",
+            "Mortar1Mk1",
+            "Rocket-Pod",
+            "Rocket-VTOL-Pod",
+            "SensorTurret1Mk1",
+            "LightRepair1",
+            "Spade1Mk1",
+            "CommandBrain01"
+          ],
+          "trucks": [
+            {
+              "id": 160007,
+              "x": 34,
+              "y": 64,
+              "z": 1,
+              "selected": false,
+              "order": 0,
+              "action": 0,
+              "rate": 9,
+              "building": false,
+              "queued": 0
+            },
+            {
+              "id": 160005,
+              "x": 32,
+              "y": 64,
+              "z": 1,
+              "selected": false,
+              "order": 0,
+              "action": 0,
+              "rate": 9,
+              "building": false,
+              "queued": 0
+            },
+            {
+              "id": 160003,
+              "x": 30,
+              "y": 64,
+              "z": 1,
+              "selected": false,
+              "order": 0,
+              "action": 0,
+              "rate": 9,
+              "building": false,
+              "queued": 0
+            },
+            {
+              "id": 160001,
+              "x": 28,
+              "y": 64,
+              "z": 1,
+              "selected": false,
+              "order": 0,
+              "action": 0,
+              "rate": 9,
+              "building": false,
+              "queued": 0
+            }
+          ],
+          "jobs": [],
+          "factories": [
+            {
+              "id": 160045,
+              "number": 1,
+              "x": 42,
+              "y": 65,
+              "type": 1,
+              "kind": "Factory",
+              "templates": [
+                "ConstructionDroid"
+              ],
+              "modules": 0,
+              "ready": true,
+              "idle": true,
+              "active": null,
+              "currentProduction": null,
+              "progress": {
+                "available": false,
+                "currentId": "",
+                "currentName": "",
+                "templateId": null,
+                "completedBuildPoints": null,
+                "totalBuildPoints": null,
+                "ratio": null,
+                "state": "idle"
+              },
+              "queueKnown": true,
+              "waitingReason": null,
+              "queue": []
+            },
+            {
+              "id": 160047,
+              "number": 2,
+              "x": 48,
+              "y": 65,
+              "type": 1,
+              "kind": "Factory",
+              "templates": [
+                "ConstructionDroid"
+              ],
+              "modules": 0,
+              "ready": true,
+              "idle": true,
+              "active": null,
+              "currentProduction": null,
+              "progress": {
+                "available": false,
+                "currentId": "",
+                "currentName": "",
+                "templateId": null,
+                "completedBuildPoints": null,
+                "totalBuildPoints": null,
+                "ratio": null,
+                "state": "idle"
+              },
+              "queueKnown": true,
+              "waitingReason": null,
+              "queue": []
+            },
+            {
+              "id": 160049,
+              "number": 3,
+              "x": 43,
+              "y": 72,
+              "type": 16,
+              "kind": "Cyborg factory",
+              "templates": [
+                "Cyb-Cannon-GROUND",
+                "Cyb-Chain-GROUND",
+                "Cyb-ComEng",
+                "Cyb-Flamer-GROUND",
+                "Cyb-Gren",
+                "Cyb-Mechanic"
+              ],
+              "modules": 0,
+              "ready": true,
+              "idle": true,
+              "active": null,
+              "currentProduction": null,
+              "progress": {
+                "available": false,
+                "currentId": "",
+                "currentName": "",
+                "templateId": null,
+                "completedBuildPoints": null,
+                "totalBuildPoints": null,
+                "ratio": null,
+                "state": "idle"
+              },
+              "queueKnown": true,
+              "waitingReason": null,
+              "queue": []
+            }
+          ],
+          "nativeMenu": "",
+          "recoveryContext": "2-1794531193173",
+          "templates": [
+            {
+              "fullname": "Truck Viper Wheels",
+              "name": "ConstructionDroid",
+              "id": "ConstructionDroid",
+              "points": 310,
+              "power": 62,
+              "cost": 62,
+              "droidType": 3,
+              "body": "Body1REC",
+              "propulsion": "wheeled01",
+              "brain": "ZNULLBRAIN",
+              "repair": "ZNULLREPAIR",
+              "ecm": "ZNULLECM",
+              "sensor": "ZNULLSENSOR",
+              "construct": "Spade1Mk1",
+              "weapons": []
+            },
+            {
+              "fullname": "Heavy Gunner Cyborg",
+              "name": "Cyb-Cannon-GROUND",
+              "id": "Cyb-Cannon-GROUND",
+              "points": 382,
+              "power": 87,
+              "cost": 87,
+              "droidType": 5,
+              "body": "CyborgLightBody",
+              "propulsion": "CyborgLegs",
+              "brain": "ZNULLBRAIN",
+              "repair": "ZNULLREPAIR",
+              "ecm": "ZNULLECM",
+              "sensor": "ZNULLSENSOR",
+              "construct": "ZNULLCONSTRUCT",
+              "weapons": [
+                "CyborgCannon"
+              ]
+            },
+            {
+              "fullname": "Machinegunner Cyborg",
+              "name": "Cyb-Chain-GROUND",
+              "id": "Cyb-Chain-GROUND",
+              "points": 302,
+              "power": 67,
+              "cost": 67,
+              "droidType": 5,
+              "body": "CyborgLightBody",
+              "propulsion": "CyborgLegs",
+              "brain": "ZNULLBRAIN",
+              "repair": "ZNULLREPAIR",
+              "ecm": "ZNULLECM",
+              "sensor": "ZNULLSENSOR",
+              "construct": "ZNULLCONSTRUCT",
+              "weapons": [
+                "CyborgChaingun"
+              ]
+            },
+            {
+              "fullname": "Combat Engineer Cyborg",
+              "name": "Cyb-ComEng",
+              "id": "Cyb-ComEng",
+              "points": 207,
+              "power": 37,
+              "cost": 37,
+              "droidType": 10,
+              "body": "CyborgLightBody",
+              "propulsion": "CyborgLegs",
+              "brain": "ZNULLBRAIN",
+              "repair": "ZNULLREPAIR",
+              "ecm": "ZNULLECM",
+              "sensor": "ZNULLSENSOR",
+              "construct": "CyborgSpade",
+              "weapons": []
+            },
+            {
+              "fullname": "Flamer Cyborg",
+              "name": "Cyb-Flamer-GROUND",
+              "id": "Cyb-Flamer-GROUND",
+              "points": 342,
+              "power": 82,
+              "cost": 82,
+              "droidType": 5,
+              "body": "CyborgLightBody",
+              "propulsion": "CyborgLegs",
+              "brain": "ZNULLBRAIN",
+              "repair": "ZNULLREPAIR",
+              "ecm": "ZNULLECM",
+              "sensor": "ZNULLSENSOR",
+              "construct": "ZNULLCONSTRUCT",
+              "weapons": [
+                "CyborgFlamer01"
+              ]
+            },
+            {
+              "fullname": "Grenadier Cyborg",
+              "name": "Cyb-Gren",
+              "id": "Cyb-Gren",
+              "points": 462,
+              "power": 107,
+              "cost": 107,
+              "droidType": 5,
+              "body": "CyborgLightBody",
+              "propulsion": "CyborgLegs",
+              "brain": "ZNULLBRAIN",
+              "repair": "ZNULLREPAIR",
+              "ecm": "ZNULLECM",
+              "sensor": "ZNULLSENSOR",
+              "construct": "ZNULLCONSTRUCT",
+              "weapons": [
+                "Cyb-Wpn-Grenade"
+              ]
+            },
+            {
+              "fullname": "Mechanic Cyborg",
+              "name": "Cyb-Mechanic",
+              "id": "Cyb-Mechanic",
+              "points": 242,
+              "power": 62,
+              "cost": 62,
+              "droidType": 11,
+              "body": "CyborgLightBody",
+              "propulsion": "CyborgLegs",
+              "brain": "ZNULLBRAIN",
+              "repair": "CyborgRepair",
+              "ecm": "ZNULLECM",
+              "sensor": "ZNULLSENSOR",
+              "construct": "ZNULLCONSTRUCT",
+              "weapons": []
+            }
+          ],
+          "finishedUnits": [],
+          "finishedBuilds": []
+        },
+        "terrain": {
+          "ready": true,
+          "active": true,
+          "revision": 1,
+          "observations": 415,
+          "observedAt": 30183.349999999977,
+          "reads": 1,
+          "picks": 0,
+          "lastPickMs": 0,
+          "maxPickMs": 0,
+          "heightIndexBuilds": 0,
+          "heightCells": 0,
+          "heightWideTriangles": 0,
+          "heightQueries": 0,
+          "lastHeightCandidates": 0,
+          "maxHeightCandidates": 0,
+          "heightTriangleTests": 0,
+          "gpuBufferReads": 2,
+          "cpuBufferReads": 0,
+          "cpuCopies": 2,
+          "cpuBytes": 430080,
+          "mirroredUploads": 0,
+          "cpuInvalidations": 0,
+          "lastMeshReadMs": 10.01500000001397,
+          "maxMeshReadMs": 10.01500000001397,
+          "lastHeightIndexMs": 0,
+          "maxHeightIndexMs": 0,
+          "lastHeightMs": 0,
+          "maxHeightMs": 0,
+          "error": ""
+        }
+      },
+      "research": {
+        "active": true,
+        "version": 40,
+        "open": false,
+        "opening": false,
+        "opens": 0,
+        "closes": 0,
+        "topicSelections": 0,
+        "labSelections": 0,
+        "categoryChanges": 0,
+        "activeLab": 0,
+        "activeCategory": "ALL",
+        "selectedTopicIds": [],
+        "catalogCount": 18,
+        "catalogSample": [
+          "Medium Body - Cobra",
+          "Fuel Injection Engine Mk3",
+          "Composite Alloys",
+          "Hover Propulsion"
+        ],
+        "labCount": 2,
+        "readyLabs": 2,
+        "labIds": [
+          160041,
+          160043
+        ],
+        "playerPower": 2516,
+        "labs": [
+          {
+            "id": 160041,
+            "nativeIndex": 0,
+            "idle": true,
+            "modules": 0,
+            "health": 100,
+            "topicId": "",
+            "topicName": "",
+            "remainingSeconds": null,
+            "estimatedProgress": 0,
+            "waitingPower": false
+          },
+          {
+            "id": 160043,
+            "nativeIndex": 1,
+            "idle": true,
+            "modules": 0,
+            "health": 100,
+            "topicId": "",
+            "topicName": "",
+            "remainingSeconds": null,
+            "estimatedProgress": 0,
+            "waitingPower": false
+          }
+        ],
+        "bridgeSyncs": 7,
+        "bridgeErrors": 0,
+        "commandAcks": 0,
+        "commandRejects": 0,
+        "commandTimeouts": 0,
+        "queueAdds": 0,
+        "queueRemovals": 0,
+        "directAssignments": 0,
+        "directFailures": 0,
+        "queueSyncs": 0,
+        "queueStateEvents": 6,
+        "queueCommandWrites": 0,
+        "queueCommandErrors": 0,
+        "backgroundSyncs": 0,
+        "lastSyncDurationMs": null,
+        "queues": [
+          [],
+          []
+        ],
+        "dirtyLabIds": [],
+        "pendingClose": false,
+        "syncBlocked": false,
+        "runner": null,
+        "pendingCommand": null,
+        "fsPolls": 91,
+        "fsErrors": 6,
+        "fsLogFiles": [
+          "Scavengers.1.log",
+          "init.0.log"
+        ],
+        "completedEvents": 0,
+        "lastTopic": null,
+        "lastCompleted": null,
+        "canvasRestored": true
+      },
+      "saved": {
+        "loading": false,
+        "ready": true,
+        "busy": false,
+        "ended": false,
+        "error": "",
+        "serial": 0,
+        "savedId": "",
+        "hydrated": false,
+        "phase": "idle",
+        "status": "",
+        "statusAt": 0,
+        "docSession": "386f22ba-2a33-4c7c-8b5f-ebf99f054efa",
+        "logicalSession": "",
+        "slotId": "",
+        "persistenceStarted": 0,
+        "persistenceCompleted": []
+      },
+      "touch": {
+        "active": true,
+        "version": 57,
+        "intercepted": 0,
+        "mouseEvents": 30,
+        "taps": 0,
+        "orders": 0,
+        "pans": 0,
+        "panMoves": 0,
+        "lastPanStartLatencyMs": null,
+        "lastPanDispatchMs": null,
+        "maxPanDispatchMs": 0,
+        "panPhase": "idle",
+        "panQueuedPointers": 0,
+        "panRearms": 0,
+        "panUnobservedRearms": 0,
+        "panHeldTimeouts": 0,
+        "panContextResets": 0,
+        "panQueueOverflows": 0,
+        "boxSelections": 0,
+        "boxCadenceWaits": 0,
+        "boxPressGaps": [],
+        "lastNativeLeftDownAt": 14751.26000000001,
+        "manualSelectionRevision": 0,
+        "facilityOpens": 0,
+        "lastFacility": null,
+        "facilityError": "",
+        "pinchSteps": 0,
+        "tiltMoves": 0,
+        "tiltHeld": null,
+        "rotationMoves": 0,
+        "rotationSteps": 0,
+        "rotationHeld": null,
+        "saveNames": 0,
+        "radarTaps": 0,
+        "radarDrags": 0,
+        "radarMoves": 0,
+        "cameraFacings": 1,
+        "cameraFacingPending": false,
+        "cameraHeading": "north",
+        "cameraFacingError": "",
+        "lastRadarPoint": null,
+        "combatLock": false,
+        "autoFight": false,
+        "boxMode": false,
+        "queueMode": false,
+        "queueModifierHeld": false,
+        "stickyBuildActivations": 0,
+        "nativeStatsOpen": false,
+        "nativeObjectsOpen": false,
+        "pendingClicks": 0,
+        "nativeRenderFrames": 746,
+        "queuedPointerEvents": 0,
+        "selectAlls": 0,
+        "manualSelectAlls": 0,
+        "combatOrders": 0,
+        "patrolOrders": 0,
+        "queuedOrders": 0,
+        "stopOrders": 0,
+        "stopPending": false,
+        "stopAcks": 0,
+        "stoppedUnitIds": [],
+        "baseJumps": 0,
+        "feedbacks": 0,
+        "doubleTaps": 0,
+        "coalescedSamples": 0,
+        "pointerCaptures": 0,
+        "zoomPreset": null,
+        "zoomPresetSelections": 0,
+        "zoomWheelEvents": 0,
+        "zoomCommandWrites": 1,
+        "zoomCommandErrors": 0,
+        "zoomAcks": 0,
+        "zoomPending": false,
+        "lastZoomDistance": null,
+        "gestureActive": false,
+        "hudVisible": true,
+        "battleActive": true,
+        "heldKeys": []
+      },
+      "html": {
+        "phase": "playing",
+        "result": "",
+        "exitReason": "",
+        "session": "386f22ba-2a33-4c7c-8b5f-ebf99f054efa",
+        "menuRequested": false,
+        "mode": "tower-defense"
+      },
+      "music": {
+        "mode": "map",
+        "cached": true,
+        "enabled": true,
+        "mapId": "beginner",
+        "trackId": "original_soundtrack/track1.opus",
+        "title": "Track 1",
+        "author": "Martin Severn",
+        "missionId": "",
+        "campaignSession": "",
+        "video": false,
+        "missionResults": false,
+        "url": "https://appassets.androidplatform.net/warzone/optional/map-music/original_soundtrack/track1.opus",
+        "battleActive": true,
+        "suspended": false,
+        "playing": true,
+        "loading": false,
+        "loadedBytes": 2418624,
+        "error": "",
+        "disposed": false,
+        "transport": "track-blob",
+        "mediaTimeSeconds": 1.239037,
+        "mediaReadyState": 4,
+        "nativeMusicEnabled": false,
+        "selectedTracks": [
+          "original_soundtrack/track1.opus"
+        ],
+        "playlistTrackIds": [],
+        "playlistSelections": [],
+        "playedTracks": [
+          "original_soundtrack/track1.opus",
+          "original_soundtrack/track1.opus"
+        ],
+        "retained": false
+      },
+      "config": "/warzone2100",
+      "viewport": [
+        1231,
+        554,
+        1231,
+        496
+      ]
+    },
+    "media": {
+      "music": {
+        "mode": "map",
+        "cached": true,
+        "enabled": true,
+        "mapId": "beginner",
+        "trackId": "original_soundtrack/track1.opus",
+        "title": "Track 1",
+        "author": "Martin Severn",
+        "missionId": "",
+        "campaignSession": "",
+        "video": false,
+        "missionResults": false,
+        "url": "https://appassets.androidplatform.net/warzone/optional/map-music/original_soundtrack/track1.opus",
+        "battleActive": true,
+        "suspended": false,
+        "playing": true,
+        "loading": false,
+        "loadedBytes": 2418624,
+        "error": "",
+        "disposed": false,
+        "transport": "track-blob",
+        "mediaTimeSeconds": 1.227564,
+        "mediaReadyState": 4,
+        "nativeMusicEnabled": false,
+        "selectedTracks": [
+          "original_soundtrack/track1.opus"
+        ],
+        "playlistTrackIds": [],
+        "playlistSelections": [],
+        "playedTracks": [
+          "original_soundtrack/track1.opus",
+          "original_soundtrack/track1.opus"
+        ],
+        "retained": false
+      },
+      "events": [
+        {
+          "id": 0,
+          "event": "waiting",
+          "trusted": true,
+          "at": 28807.474999999977,
+          "time": 0,
+          "paused": false,
+          "ended": false
+        },
+        {
+          "id": 0,
+          "event": "loadedmetadata",
+          "trusted": true,
+          "at": 28861.61499999999,
+          "time": 0,
+          "paused": false,
+          "ended": false
+        },
+        {
+          "id": 0,
+          "event": "playing",
+          "trusted": true,
+          "at": 28893.57500000007,
+          "time": 0.016949,
+          "paused": false,
+          "ended": false
+        }
+      ],
+      "media": [
+        {
+          "id": 0,
+          "src": "blob:https://appassets.androidplatform.net/35f9ac60-87cd-413c-bbbc-6e50e9416fa1",
+          "paused": false,
+          "ended": false,
+          "loop": true,
+          "time": 1.227564,
+          "duration": 420.713167,
+          "ready": 4,
+          "network": 1,
+          "opus": "probably",
+          "error": null
+        }
+      ]
+    },
+    "pcm": {
+      "decodedPCMNonZero": true,
+      "samples": [
+        {
+          "audioId": 0,
+          "rms": 0.051451023858625426,
+          "peak": 0.14204396307468414,
+          "context": "running",
+          "sampleRate": 48000,
+          "tracks": [
+            {
+              "ready": "live",
+              "enabled": true
+            }
+          ],
+          "sample": [
+            -0.0382990688085556,
+            -0.0394078828394413,
+            -0.04058855026960373,
+            -0.041369326412677765,
+            -0.041370928287506104,
+            -0.040566109120845795,
+            -0.03914697840809822,
+            -0.03738132491707802,
+            -0.035713210701942444,
+            -0.03461375832557678,
+            -0.034073758870363235,
+            -0.03361953794956207,
+            -0.033126261085271835,
+            -0.03318421542644501,
+            -0.034245386719703674,
+            -0.035826582461595535
+          ]
+        },
+        {
+          "audioId": 0,
+          "rms": 0.04293054028495172,
+          "peak": 0.1080608069896698,
+          "context": "running",
+          "sampleRate": 48000,
+          "tracks": [
+            {
+              "ready": "live",
+              "enabled": true
+            }
+          ],
+          "sample": [
+            0.006827597972005606,
+            0.008007608354091644,
+            0.009919294156134129,
+            0.012905013747513294,
+            0.01661907136440277,
+            0.020333731546998024,
+            0.02375837042927742,
+            0.027092019096016884,
+            0.030506089329719543,
+            0.034097518771886826,
+            0.03819373622536659,
+            0.04310110956430435,
+            0.0485079400241375,
+            0.05363321304321289,
+            0.05805746093392372,
+            0.06196821480989456
+          ]
+        },
+        {
+          "audioId": 0,
+          "rms": 0.06925075678088134,
+          "peak": 0.1682744026184082,
+          "context": "running",
+          "sampleRate": 48000,
+          "tracks": [
+            {
+              "ready": "live",
+              "enabled": true
+            }
+          ],
+          "sample": [
+            0.1682744026184082,
+            0.1661173701286316,
+            0.16443964838981628,
+            0.1628226935863495,
+            0.1607065349817276,
+            0.15786248445510864,
+            0.1545117050409317,
+            0.1508367508649826,
+            0.14666004478931427,
+            0.14182732999324799,
+            0.13655781745910645,
+            0.13103090226650238,
+            0.12490366399288177,
+            0.11770457774400711,
+            0.10953567177057266,
+            0.10092690587043762
+          ]
+        }
+      ],
+      "speakerOutputMonitored": false,
+      "method": "Unmodified browser Audio.captureStream through AudioContext analyser. Observer gain is0 to avoid duplicate speaker output; the actual element is untouched."
+    },
+    "screenshot": {
+      "path": "qa/maps-music-066/e231ce35-music-towers-playing.png",
+      "sha256": "f40ab88526ac70dcdc4e3c6ae1d5c2197deeae020691eced5a96b87c777c8c2a",
+      "bytes": 471589
+    },
+    "native": [
+      {
+        "text": "WAVE 1 IN 3:53",
+        "label": "",
+        "bounds": "[0,0][0,0]",
+        "selected": "false"
+      },
+      {
+        "text": "Prepare your defences",
+        "label": "",
+        "bounds": "[0,0][0,0]",
+        "selected": "false"
+      },
+      {
+        "text": "SKIP WAVE",
+        "label": "",
+        "bounds": "[0,0][0,0]",
+        "selected": "false"
+      },
+      {
+        "text": "RESEARCH",
+        "label": "",
+        "bounds": "[30,33][297,141]",
+        "selected": "false"
+      },
+      {
+        "text": "MANUFACTURING",
+        "label": "",
+        "bounds": "[303,33][603,141]",
+        "selected": "false"
+      },
+      {
+        "text": "QUEUE",
+        "label": "",
+        "bounds": "[609,33][756,141]",
+        "selected": "false"
+      },
+      {
+        "text": "BASE",
+        "label": "",
+        "bounds": "[783,33][972,141]",
+        "selected": "false"
+      },
+      {
+        "text": "MUSIC",
+        "label": "",
+        "bounds": "[999,33][1209,141]",
+        "selected": "false"
+      },
+      {
+        "text": "",
+        "label": "Rewards, 380 crystals. Portable inventory and active purchases.",
+        "bounds": "[1215,33][1539,141]",
+        "selected": "false"
+      },
+      {
+        "text": "SAVE",
+        "label": "",
+        "bounds": "[1545,33][1731,141]",
+        "selected": "false"
+      },
+      {
+        "text": "HELP",
+        "label": "",
+        "bounds": "[1737,33][1926,141]",
+        "selected": "false"
+      },
+      {
+        "text": "",
+        "label": "Wave 1: 10 incoming enemy units",
+        "bounds": "[0,0][0,0]",
+        "selected": "false"
+      },
+      {
+        "text": "",
+        "label": "Unit controls",
+        "bounds": "[0,0][0,0]",
+        "selected": "false"
+      },
+      {
+        "text": "ANALYSIS 0/2 active",
+        "label": "",
+        "bounds": "[0,0][0,0]",
+        "selected": "false"
+      },
+      {
+        "text": "MANUFACTURING 0/3 active",
+        "label": "",
+        "bounds": "[0,0][0,0]",
+        "selected": "false"
+      },
+      {
+        "text": "MUSIC",
+        "label": "",
+        "bounds": "[318,228][444,279]",
+        "selected": "false"
+      },
+      {
+        "text": "",
+        "label": "Close music menu",
+        "bounds": "[1032,198][1167,309]",
+        "selected": "false"
+      },
+      {
+        "text": "Track 1",
+        "label": "",
+        "bounds": "[318,324][1167,393]",
+        "selected": "false"
+      },
+      {
+        "text": "Martin Severn",
+        "label": "",
+        "bounds": "[318,399][1167,450]",
+        "selected": "false"
+      },
+      {
+        "text": "ON",
+        "label": "",
+        "bounds": "[318,483][735,618]",
+        "selected": "false"
+      },
+      {
+        "text": "OFF",
+        "label": "",
+        "bounds": "[750,483][1167,618]",
+        "selected": "false"
+      },
+      {
+        "text": "Playing this map’s soundtrack.",
+        "label": "",
+        "bounds": "[318,639][1167,690]",
+        "selected": "false"
+      }
+    ],
+    "physical": {
+      "width": 2400,
+      "height": 1080
+    }
+  },
+  "advance": null,
+  "video": null,
+  "persistentToggleAfter": {
+    "media": {
+      "music": {
+        "mode": "map",
+        "cached": true,
+        "enabled": false,
+        "mapId": "beginner",
+        "trackId": "original_soundtrack/track1.opus",
+        "title": "Track 1",
+        "author": "Martin Severn",
+        "missionId": "",
+        "campaignSession": "",
+        "video": false,
+        "missionResults": false,
+        "url": "https://appassets.androidplatform.net/warzone/optional/map-music/original_soundtrack/track1.opus",
+        "battleActive": true,
+        "suspended": false,
+        "playing": false,
+        "loading": false,
+        "loadedBytes": 0,
+        "error": "",
+        "disposed": false,
+        "transport": "track-blob",
+        "mediaTimeSeconds": 0,
+        "mediaReadyState": 0,
+        "nativeMusicEnabled": false,
+        "selectedTracks": [
+          "original_soundtrack/track1.opus"
+        ],
+        "playlistTrackIds": [],
+        "playlistSelections": [],
+        "playedTracks": [
+          "original_soundtrack/track1.opus",
+          "original_soundtrack/track1.opus",
+          "original_soundtrack/track1.opus"
+        ],
+        "retained": false
+      },
+      "events": [
+        {
+          "id": 0,
+          "event": "waiting",
+          "trusted": true,
+          "at": 28807.474999999977,
+          "time": 0,
+          "paused": false,
+          "ended": false
+        },
+        {
+          "id": 0,
+          "event": "loadedmetadata",
+          "trusted": true,
+          "at": 28861.61499999999,
+          "time": 0,
+          "paused": false,
+          "ended": false
+        },
+        {
+          "id": 0,
+          "event": "playing",
+          "trusted": true,
+          "at": 28893.57500000007,
+          "time": 0.016949,
+          "paused": false,
+          "ended": false
+        },
+        {
+          "id": 1,
+          "event": "waiting",
+          "trusted": true,
+          "at": 34759.744999999995,
+          "time": 0,
+          "paused": false,
+          "ended": false
+        },
+        {
+          "id": 1,
+          "event": "loadedmetadata",
+          "trusted": true,
+          "at": 34885.505000000005,
+          "time": 0,
+          "paused": false,
+          "ended": false
+        },
+        {
+          "id": 1,
+          "event": "playing",
+          "trusted": true,
+          "at": 34962.560000000056,
+          "time": 0,
+          "paused": false,
+          "ended": false
+        }
+      ],
+      "media": [
+        {
+          "id": 0,
+          "src": "blob:https://appassets.androidplatform.net/35f9ac60-87cd-413c-bbbc-6e50e9416fa1",
+          "paused": true,
+          "ended": false,
+          "loop": true,
+          "time": 0,
+          "duration": null,
+          "ready": 0,
+          "network": 0,
+          "opus": "probably",
+          "error": null
+        },
+        {
+          "id": 1,
+          "src": "blob:https://appassets.androidplatform.net/dd23e73e-c708-4fb1-a581-53043eb2aea5",
+          "paused": true,
+          "ended": false,
+          "loop": true,
+          "time": 0,
+          "duration": null,
+          "ready": 0,
+          "network": 0,
+          "opus": "probably",
+          "error": null
+        }
+      ]
+    },
+    "screenshot": {
+      "path": "qa/maps-music-066/e231ce35-music-towers-left-off-for-next-mode.png",
+      "sha256": "4d5ee92636265acf4f1028a1bcd5f63eb17eabc3e85819f04215dc890b447ba5",
+      "bytes": 473652
+    },
+    "native": [
+      {
+        "text": "WAVE 1 IN 3:44",
+        "label": "",
+        "bounds": "[0,0][0,0]",
+        "selected": "false"
+      },
+      {
+        "text": "Prepare your defences",
+        "label": "",
+        "bounds": "[0,0][0,0]",
+        "selected": "false"
+      },
+      {
+        "text": "SKIP WAVE",
+        "label": "",
+        "bounds": "[0,0][0,0]",
+        "selected": "false"
+      },
+      {
+        "text": "RESEARCH",
+        "label": "",
+        "bounds": "[30,33][297,141]",
+        "selected": "false"
+      },
+      {
+        "text": "MANUFACTURING",
+        "label": "",
+        "bounds": "[303,33][603,141]",
+        "selected": "false"
+      },
+      {
+        "text": "QUEUE",
+        "label": "",
+        "bounds": "[609,33][756,141]",
+        "selected": "false"
+      },
+      {
+        "text": "BASE",
+        "label": "",
+        "bounds": "[783,33][972,141]",
+        "selected": "false"
+      },
+      {
+        "text": "MUSIC",
+        "label": "",
+        "bounds": "[999,33][1209,141]",
+        "selected": "false"
+      },
+      {
+        "text": "",
+        "label": "Rewards, 380 crystals. Portable inventory and active purchases.",
+        "bounds": "[1215,33][1539,141]",
+        "selected": "false"
+      },
+      {
+        "text": "SAVE",
+        "label": "",
+        "bounds": "[1545,33][1731,141]",
+        "selected": "false"
+      },
+      {
+        "text": "HELP",
+        "label": "",
+        "bounds": "[1737,33][1926,141]",
+        "selected": "false"
+      },
+      {
+        "text": "",
+        "label": "Wave 1: 10 incoming enemy units",
+        "bounds": "[0,0][0,0]",
+        "selected": "false"
+      },
+      {
+        "text": "",
+        "label": "Unit controls",
+        "bounds": "[0,0][0,0]",
+        "selected": "false"
+      },
+      {
+        "text": "ANALYSIS 0/2 active",
+        "label": "",
+        "bounds": "[0,0][0,0]",
+        "selected": "false"
+      },
+      {
+        "text": "MANUFACTURING 0/3 active",
+        "label": "",
+        "bounds": "[0,0][0,0]",
+        "selected": "false"
+      },
+      {
+        "text": "MUSIC",
+        "label": "",
+        "bounds": "[318,228][444,279]",
+        "selected": "false"
+      },
+      {
+        "text": "",
+        "label": "Close music menu",
+        "bounds": "[1032,198][1167,309]",
+        "selected": "false"
+      },
+      {
+        "text": "Track 1",
+        "label": "",
+        "bounds": "[318,324][1167,393]",
+        "selected": "false"
+      },
+      {
+        "text": "Martin Severn",
+        "label": "",
+        "bounds": "[318,399][1167,450]",
+        "selected": "false"
+      },
+      {
+        "text": "ON",
+        "label": "",
+        "bounds": "[318,483][735,618]",
+        "selected": "false"
+      },
+      {
+        "text": "OFF",
+        "label": "",
+        "bounds": "[750,483][1167,618]",
+        "selected": "false"
+      },
+      {
+        "text": "Music off. Sound effects are unchanged.",
+        "label": "",
+        "bounds": "[318,639][1167,690]",
+        "selected": "false"
+      }
+    ],
+    "physical": {
+      "width": 2400,
+      "height": 1080
+    }
+  },
+  "beforeBackground": {
+    "music": {
+      "mode": "map",
+      "cached": true,
+      "enabled": true,
+      "mapId": "beginner",
+      "trackId": "original_soundtrack/track1.opus",
+      "title": "Track 1",
+      "author": "Martin Severn",
+      "missionId": "",
+      "campaignSession": "",
+      "video": false,
+      "missionResults": false,
+      "url": "https://appassets.androidplatform.net/warzone/optional/map-music/original_soundtrack/track1.opus",
+      "battleActive": true,
+      "suspended": false,
+      "playing": true,
+      "loading": false,
+      "loadedBytes": 2418624,
+      "error": "",
+      "disposed": false,
+      "transport": "track-blob",
+      "mediaTimeSeconds": 4.242047,
+      "mediaReadyState": 4,
+      "nativeMusicEnabled": false,
+      "selectedTracks": [
+        "original_soundtrack/track1.opus"
+      ],
+      "playlistTrackIds": [],
+      "playlistSelections": [],
+      "playedTracks": [
+        "original_soundtrack/track1.opus",
+        "original_soundtrack/track1.opus"
+      ],
+      "retained": false
+    },
+    "events": [
+      {
+        "id": 0,
+        "event": "waiting",
+        "trusted": true,
+        "at": 28807.474999999977,
+        "time": 0,
+        "paused": false,
+        "ended": false
+      },
+      {
+        "id": 0,
+        "event": "loadedmetadata",
+        "trusted": true,
+        "at": 28861.61499999999,
+        "time": 0,
+        "paused": false,
+        "ended": false
+      },
+      {
+        "id": 0,
+        "event": "playing",
+        "trusted": true,
+        "at": 28893.57500000007,
+        "time": 0.016949,
+        "paused": false,
+        "ended": false
+      }
+    ],
+    "media": [
+      {
+        "id": 0,
+        "src": "blob:https://appassets.androidplatform.net/35f9ac60-87cd-413c-bbbc-6e50e9416fa1",
+        "paused": false,
+        "ended": false,
+        "loop": true,
+        "time": 4.242047,
+        "duration": 420.713167,
+        "ready": 4,
+        "network": 1,
+        "opus": "probably",
+        "error": null
+      }
+    ]
+  },
+  "background": {
+    "music": {
+      "mode": "map",
+      "cached": true,
+      "enabled": true,
+      "mapId": "beginner",
+      "trackId": "original_soundtrack/track1.opus",
+      "title": "Track 1",
+      "author": "Martin Severn",
+      "missionId": "",
+      "campaignSession": "",
+      "video": false,
+      "missionResults": false,
+      "url": "https://appassets.androidplatform.net/warzone/optional/map-music/original_soundtrack/track1.opus",
+      "battleActive": true,
+      "suspended": true,
+      "playing": false,
+      "loading": false,
+      "loadedBytes": 0,
+      "error": "",
+      "disposed": false,
+      "transport": "track-blob",
+      "mediaTimeSeconds": 0,
+      "mediaReadyState": 0,
+      "nativeMusicEnabled": false,
+      "selectedTracks": [
+        "original_soundtrack/track1.opus"
+      ],
+      "playlistTrackIds": [],
+      "playlistSelections": [],
+      "playedTracks": [
+        "original_soundtrack/track1.opus",
+        "original_soundtrack/track1.opus"
+      ],
+      "retained": false
+    },
+    "events": [
+      {
+        "id": 0,
+        "event": "waiting",
+        "trusted": true,
+        "at": 28807.474999999977,
+        "time": 0,
+        "paused": false,
+        "ended": false
+      },
+      {
+        "id": 0,
+        "event": "loadedmetadata",
+        "trusted": true,
+        "at": 28861.61499999999,
+        "time": 0,
+        "paused": false,
+        "ended": false
+      },
+      {
+        "id": 0,
+        "event": "playing",
+        "trusted": true,
+        "at": 28893.57500000007,
+        "time": 0.016949,
+        "paused": false,
+        "ended": false
+      }
+    ],
+    "media": [
+      {
+        "id": 0,
+        "src": "blob:https://appassets.androidplatform.net/35f9ac60-87cd-413c-bbbc-6e50e9416fa1",
+        "paused": true,
+        "ended": false,
+        "loop": true,
+        "time": 0,
+        "duration": null,
+        "ready": 0,
+        "network": 0,
+        "opus": "probably",
+        "error": null
+      }
+    ]
+  },
+  "resumed": {
+    "music": {
+      "mode": "map",
+      "cached": true,
+      "enabled": true,
+      "mapId": "beginner",
+      "trackId": "original_soundtrack/track1.opus",
+      "title": "Track 1",
+      "author": "Martin Severn",
+      "missionId": "",
+      "campaignSession": "",
+      "video": false,
+      "missionResults": false,
+      "url": "https://appassets.androidplatform.net/warzone/optional/map-music/original_soundtrack/track1.opus",
+      "battleActive": true,
+      "suspended": false,
+      "playing": true,
+      "loading": false,
+      "loadedBytes": 2418624,
+      "error": "",
+      "disposed": false,
+      "transport": "track-blob",
+      "mediaTimeSeconds": 0.052632,
+      "mediaReadyState": 4,
+      "nativeMusicEnabled": false,
+      "selectedTracks": [
+        "original_soundtrack/track1.opus"
+      ],
+      "playlistTrackIds": [],
+      "playlistSelections": [],
+      "playedTracks": [
+        "original_soundtrack/track1.opus",
+        "original_soundtrack/track1.opus",
+        "original_soundtrack/track1.opus"
+      ],
+      "retained": false
+    },
+    "events": [
+      {
+        "id": 0,
+        "event": "waiting",
+        "trusted": true,
+        "at": 28807.474999999977,
+        "time": 0,
+        "paused": false,
+        "ended": false
+      },
+      {
+        "id": 0,
+        "event": "loadedmetadata",
+        "trusted": true,
+        "at": 28861.61499999999,
+        "time": 0,
+        "paused": false,
+        "ended": false
+      },
+      {
+        "id": 0,
+        "event": "playing",
+        "trusted": true,
+        "at": 28893.57500000007,
+        "time": 0.016949,
+        "paused": false,
+        "ended": false
+      },
+      {
+        "id": 1,
+        "event": "waiting",
+        "trusted": true,
+        "at": 34759.744999999995,
+        "time": 0,
+        "paused": false,
+        "ended": false
+      },
+      {
+        "id": 1,
+        "event": "loadedmetadata",
+        "trusted": true,
+        "at": 34885.505000000005,
+        "time": 0,
+        "paused": false,
+        "ended": false
+      },
+      {
+        "id": 1,
+        "event": "playing",
+        "trusted": true,
+        "at": 34962.560000000056,
+        "time": 0,
+        "paused": false,
+        "ended": false
+      }
+    ],
+    "media": [
+      {
+        "id": 0,
+        "src": "blob:https://appassets.androidplatform.net/35f9ac60-87cd-413c-bbbc-6e50e9416fa1",
+        "paused": true,
+        "ended": false,
+        "loop": true,
+        "time": 0,
+        "duration": null,
+        "ready": 0,
+        "network": 0,
+        "opus": "probably",
+        "error": null
+      },
+      {
+        "id": 1,
+        "src": "blob:https://appassets.androidplatform.net/dd23e73e-c708-4fb1-a581-53043eb2aea5",
+        "paused": false,
+        "ended": false,
+        "loop": true,
+        "time": 0.052632,
+        "duration": 420.713167,
+        "ready": 4,
+        "network": 1,
+        "opus": "probably",
+        "error": null
+      }
+    ]
+  },
+  "returned": {
+    "state": {
+      "commands": {
+        "version": 64,
+        "moduleTargets": [
+          {
+            "id": 160039,
+            "itemId": "A0PowerGenerator",
+            "name": "Power Generator",
+            "kind": "POWER GENERATOR",
+            "moduleId": "A0PowMod1",
+            "x": 15,
+            "y": 61,
+            "z": 1,
+            "width": 2,
+            "breadth": 2,
+            "modules": 0,
+            "maximum": 1,
+            "reserved": 0,
+            "nativeStatus": 1,
+            "status": "eligible",
+            "eligible": true,
+            "statusReason": ""
+          },
+          {
+            "id": 160041,
+            "itemId": "A0ResearchFacility",
+            "name": "Research Facility",
+            "kind": "RESEARCH",
+            "moduleId": "A0ResearchModule1",
+            "x": 23,
+            "y": 66,
+            "z": 1,
+            "width": 2,
+            "breadth": 2,
+            "modules": 0,
+            "maximum": 1,
+            "reserved": 0,
+            "nativeStatus": 1,
+            "status": "eligible",
+            "eligible": true,
+            "statusReason": ""
+          },
+          {
+            "id": 160043,
+            "itemId": "A0ResearchFacility",
+            "name": "Research Facility",
+            "kind": "RESEARCH",
+            "moduleId": "A0ResearchModule1",
+            "x": 23,
+            "y": 70,
+            "z": 1,
+            "width": 2,
+            "breadth": 2,
+            "modules": 0,
+            "maximum": 1,
+            "reserved": 0,
+            "nativeStatus": 1,
+            "status": "eligible",
+            "eligible": true,
+            "statusReason": ""
+          },
+          {
+            "id": 160045,
+            "itemId": "A0LightFactory",
+            "name": "Factory",
+            "kind": "FACTORY",
+            "moduleId": "A0FacMod1",
+            "x": 42,
+            "y": 65,
+            "z": 1,
+            "width": 3,
+            "breadth": 3,
+            "modules": 0,
+            "maximum": 2,
+            "reserved": 0,
+            "nativeStatus": 1,
+            "status": "eligible",
+            "eligible": true,
+            "statusReason": ""
+          },
+          {
+            "id": 160047,
+            "itemId": "A0LightFactory",
+            "name": "Factory",
+            "kind": "FACTORY",
+            "moduleId": "A0FacMod1",
+            "x": 48,
+            "y": 65,
+            "z": 1,
+            "width": 3,
+            "breadth": 3,
+            "modules": 0,
+            "maximum": 2,
+            "reserved": 0,
+            "nativeStatus": 1,
+            "status": "eligible",
+            "eligible": true,
+            "statusReason": ""
+          }
+        ],
+        "modulePending": [],
+        "selectingTrucks": false,
+        "page": "",
+        "buildOpen": false,
+        "nativeHudHidden": false,
+        "pendingItem": "",
+        "siteChecks": 0,
+        "pending": 0,
+        "writes": 18,
+        "acks": 12,
+        "timeouts": 1,
+        "placements": 0,
+        "rejects": 0,
+        "opens": 0,
+        "closes": 0,
+        "placement": "",
+        "linePlacement": null,
+        "lineValidations": 0,
+        "lastLine": null,
+        "factory": 0,
+        "factoryRecipeKey": "",
+        "factoryQueueOpen": false,
+        "factoryMenuOpen": false,
+        "productionPending": [],
+        "productionFeedback": {
+          "message": "",
+          "tone": "done"
+        },
+        "demolition": null,
+        "demolitionOpening": false,
+        "session": "",
+        "nativeMenu": "",
+        "nativeClosing": false,
+        "nativeItem": "",
+        "nativeBuildGroup": [],
+        "buildParticipants": [],
+        "nativeToolReady": false,
+        "nativePendingSites": 0,
+        "exitingBuild": false,
+        "nativeBuildPlaced": false,
+        "nativeBuildSawWork": false,
+        "buildingOpening": false,
+        "saved": [
+          {
+            "id": "design-1794415047593-1",
+            "name": "Design 1",
+            "body": "Body1REC",
+            "propulsion": "wheeled01",
+            "turrets": [
+              "MG1Mk1"
+            ],
+            "cost": 47,
+            "points": 237,
+            "droidType": 0
+          },
+          {
+            "id": "design-1794415812020-1",
+            "name": "Design 2",
+            "body": "Body1REC",
+            "propulsion": "wheeled01",
+            "turrets": [
+              "MG1Mk1"
+            ],
+            "cost": 47,
+            "points": 237,
+            "droidType": 0
+          }
+        ],
+        "history": [
+          {
+            "nonce": "cmd-1794531193944-3",
+            "action": "apply-rewards",
+            "ok": true,
+            "reason": "",
+            "result": {
+              "version": 2,
+              "ok": true,
+              "session": "386f22ba-2a33-4c7c-8b5f-ebf99f054efa",
+              "applied": true,
+              "error": "",
+              "items": {},
+              "remaining": {},
+              "reserved": {},
+              "natural": {},
+              "nativeItems": {},
+              "lasSats": [],
+              "research": false,
+              "supply": false,
+              "researchMultiplier": 1,
+              "baseConfig": {
+                "items": {},
+                "research": false,
+                "supply": false
+              },
+              "transactions": [],
+              "pendingTransactions": [],
+              "supplyPower": 0,
+              "fortress": false,
+              "fortressType": "X-Super-Cannon",
+              "fortressUsed": false,
+              "fortressReserved": false,
+              "fortressNatural": false
+            },
+            "gameTime": 802
+          }
+        ],
+        "snapshot": {
+          "version": 1,
+          "gameTime": 11602,
+          "player": 0,
+          "power": 2531,
+          "rewards": {
+            "version": 2,
+            "ok": true,
+            "session": "386f22ba-2a33-4c7c-8b5f-ebf99f054efa",
+            "applied": true,
+            "error": "",
+            "items": {},
+            "remaining": {},
+            "reserved": {},
+            "natural": {},
+            "nativeItems": {},
+            "lasSats": [],
+            "research": false,
+            "supply": false,
+            "researchMultiplier": 1,
+            "baseConfig": {
+              "items": {},
+              "research": false,
+              "supply": false
+            },
+            "transactions": [],
+            "pendingTransactions": [],
+            "supplyPower": 0,
+            "fortress": false,
+            "fortressType": "X-Super-Cannon",
+            "fortressUsed": false,
+            "fortressReserved": false,
+            "fortressNatural": false
+          },
+          "facilityTargets": [
+            {
+              "id": 160041,
+              "kind": "research",
+              "itemId": "A0ResearchFacility",
+              "x": 23,
+              "y": 66,
+              "z": 1,
+              "modules": 0,
+              "moduleId": "A0ResearchModule1",
+              "width": 2,
+              "breadth": 2,
+              "ready": true,
+              "nativeStatus": 1
+            },
+            {
+              "id": 160043,
+              "kind": "research",
+              "itemId": "A0ResearchFacility",
+              "x": 23,
+              "y": 70,
+              "z": 1,
+              "modules": 0,
+              "moduleId": "A0ResearchModule1",
+              "width": 2,
+              "breadth": 2,
+              "ready": true,
+              "nativeStatus": 1
+            },
+            {
+              "id": 160045,
+              "kind": "factory",
+              "itemId": "A0LightFactory",
+              "x": 42,
+              "y": 65,
+              "z": 1,
+              "modules": 0,
+              "moduleId": "A0FacMod1",
+              "width": 3,
+              "breadth": 3,
+              "ready": true,
+              "nativeStatus": 1
+            },
+            {
+              "id": 160047,
+              "kind": "factory",
+              "itemId": "A0LightFactory",
+              "x": 48,
+              "y": 65,
+              "z": 1,
+              "modules": 0,
+              "moduleId": "A0FacMod1",
+              "width": 3,
+              "breadth": 3,
+              "ready": true,
+              "nativeStatus": 1
+            },
+            {
+              "id": 160049,
+              "kind": "cyborg",
+              "itemId": "A0CyborgFactory",
+              "x": 43,
+              "y": 72,
+              "z": 1,
+              "modules": 0,
+              "moduleId": "",
+              "width": 1,
+              "breadth": 2,
+              "ready": true,
+              "nativeStatus": 1
+            }
+          ],
+          "facilityBlockers": [
+            {
+              "id": 160001,
+              "x": 28,
+              "y": 64,
+              "z": 1,
+              "bodySize": 1
+            }
+          ],
+          "mapWidth": 64,
+          "mapHeight": 80,
+          "alwaysQueue": true,
+          "researchQueues": [
+            {
+              "labId": 160043,
+              "topicIds": []
+            },
+            {
+              "labId": 160041,
+              "topicIds": []
+            }
+          ],
+          "hasHQ": true,
+          "selectedUnits": [],
+          "construction": [],
+          "constructionSites": [],
+          "nativeBuildOptions": [
+            "A0ADemolishStructure",
+            "A0ComDroidControl",
+            "A0CyborgFactory",
+            "A0FacMod1",
+            "A0HardcreteMk1Gate",
+            "A0HardcreteMk1Wall",
+            "A0LightFactory",
+            "A0PowMod1",
+            "A0PowerGenerator",
+            "A0ResearchFacility",
+            "A0ResearchModule1",
+            "A0ResourceExtractor",
+            "A0TankTrap",
+            "GuardTower1",
+            "GuardTower6",
+            "PillBox1",
+            "PillBox4",
+            "PillBox5",
+            "Sys-SensoTower01",
+            "Sys-SensoTower02",
+            "WallTower02"
+          ],
+          "moduleTargets": [
+            {
+              "id": 160039,
+              "itemId": "A0PowerGenerator",
+              "name": "Power Generator",
+              "kind": "POWER GENERATOR",
+              "moduleId": "A0PowMod1",
+              "x": 15,
+              "y": 61,
+              "z": 1,
+              "width": 2,
+              "breadth": 2,
+              "modules": 0,
+              "maximum": 1,
+              "reserved": 0,
+              "nativeStatus": 1,
+              "status": "eligible",
+              "eligible": true,
+              "statusReason": ""
+            },
+            {
+              "id": 160041,
+              "itemId": "A0ResearchFacility",
+              "name": "Research Facility",
+              "kind": "RESEARCH",
+              "moduleId": "A0ResearchModule1",
+              "x": 23,
+              "y": 66,
+              "z": 1,
+              "width": 2,
+              "breadth": 2,
+              "modules": 0,
+              "maximum": 1,
+              "reserved": 0,
+              "nativeStatus": 1,
+              "status": "eligible",
+              "eligible": true,
+              "statusReason": ""
+            },
+            {
+              "id": 160043,
+              "itemId": "A0ResearchFacility",
+              "name": "Research Facility",
+              "kind": "RESEARCH",
+              "moduleId": "A0ResearchModule1",
+              "x": 23,
+              "y": 70,
+              "z": 1,
+              "width": 2,
+              "breadth": 2,
+              "modules": 0,
+              "maximum": 1,
+              "reserved": 0,
+              "nativeStatus": 1,
+              "status": "eligible",
+              "eligible": true,
+              "statusReason": ""
+            },
+            {
+              "id": 160045,
+              "itemId": "A0LightFactory",
+              "name": "Factory",
+              "kind": "FACTORY",
+              "moduleId": "A0FacMod1",
+              "x": 42,
+              "y": 65,
+              "z": 1,
+              "width": 3,
+              "breadth": 3,
+              "modules": 0,
+              "maximum": 2,
+              "reserved": 0,
+              "nativeStatus": 1,
+              "status": "eligible",
+              "eligible": true,
+              "statusReason": ""
+            },
+            {
+              "id": 160047,
+              "itemId": "A0LightFactory",
+              "name": "Factory",
+              "kind": "FACTORY",
+              "moduleId": "A0FacMod1",
+              "x": 48,
+              "y": 65,
+              "z": 1,
+              "width": 3,
+              "breadth": 3,
+              "modules": 0,
+              "maximum": 2,
+              "reserved": 0,
+              "nativeStatus": 1,
+              "status": "eligible",
+              "eligible": true,
+              "statusReason": ""
+            }
+          ],
+          "buildings": [
+            {
+              "id": "A0ComDroidControl",
+              "power": 100
+            },
+            {
+              "id": "A0CyborgFactory",
+              "power": 100
+            },
+            {
+              "id": "A0FacMod1",
+              "power": 100
+            },
+            {
+              "id": "A0HardcreteMk1CWall",
+              "power": 25
+            },
+            {
+              "id": "A0HardcreteMk1Gate",
+              "power": 50
+            },
+            {
+              "id": "A0HardcreteMk1Wall",
+              "power": 25
+            },
+            {
+              "id": "A0LightFactory",
+              "power": 100
+            },
+            {
+              "id": "A0PowMod1",
+              "power": 0
+            },
+            {
+              "id": "A0PowerGenerator",
+              "power": 50
+            },
+            {
+              "id": "A0ResearchFacility",
+              "power": 100
+            },
+            {
+              "id": "A0ResearchModule1",
+              "power": 100
+            },
+            {
+              "id": "A0ResourceExtractor",
+              "power": 0
+            },
+            {
+              "id": "A0TankTrap",
+              "power": 15
+            },
+            {
+              "id": "GuardTower1",
+              "power": 100
+            },
+            {
+              "id": "GuardTower6",
+              "power": 100
+            },
+            {
+              "id": "PillBox1",
+              "power": 100
+            },
+            {
+              "id": "PillBox4",
+              "power": 100
+            },
+            {
+              "id": "PillBox5",
+              "power": 100
+            },
+            {
+              "id": "Sys-SensoTower01",
+              "power": 50
+            },
+            {
+              "id": "Sys-SensoTower02",
+              "power": 100
+            },
+            {
+              "id": "WallTower02",
+              "power": 100
+            }
+          ],
+          "parts": [
+            "Body1REC",
+            "HalfTrack",
+            "wheeled01",
+            "Cannon1-VTOL",
+            "Cannon1Mk1",
+            "Flame1Mk1",
+            "MG1-VTOL",
+            "MG1Mk1",
+            "MG2-VTOL",
+            "MG2Mk1",
+            "Mortar1Mk1",
+            "Rocket-Pod",
+            "Rocket-VTOL-Pod",
+            "SensorTurret1Mk1",
+            "LightRepair1",
+            "Spade1Mk1",
+            "CommandBrain01"
+          ],
+          "trucks": [
+            {
+              "id": 160007,
+              "x": 34,
+              "y": 64,
+              "z": 1,
+              "selected": false,
+              "order": 0,
+              "action": 0,
+              "rate": 9,
+              "building": false,
+              "queued": 0
+            },
+            {
+              "id": 160005,
+              "x": 32,
+              "y": 64,
+              "z": 1,
+              "selected": false,
+              "order": 0,
+              "action": 0,
+              "rate": 9,
+              "building": false,
+              "queued": 0
+            },
+            {
+              "id": 160003,
+              "x": 30,
+              "y": 64,
+              "z": 1,
+              "selected": false,
+              "order": 0,
+              "action": 0,
+              "rate": 9,
+              "building": false,
+              "queued": 0
+            },
+            {
+              "id": 160001,
+              "x": 28,
+              "y": 64,
+              "z": 1,
+              "selected": false,
+              "order": 0,
+              "action": 0,
+              "rate": 9,
+              "building": false,
+              "queued": 0
+            }
+          ],
+          "jobs": [],
+          "factories": [
+            {
+              "id": 160045,
+              "number": 1,
+              "x": 42,
+              "y": 65,
+              "type": 1,
+              "kind": "Factory",
+              "templates": [
+                "ConstructionDroid"
+              ],
+              "modules": 0,
+              "ready": true,
+              "idle": true,
+              "active": null,
+              "currentProduction": null,
+              "progress": {
+                "available": false,
+                "currentId": "",
+                "currentName": "",
+                "templateId": null,
+                "completedBuildPoints": null,
+                "totalBuildPoints": null,
+                "ratio": null,
+                "state": "idle"
+              },
+              "queueKnown": true,
+              "waitingReason": null,
+              "queue": []
+            },
+            {
+              "id": 160047,
+              "number": 2,
+              "x": 48,
+              "y": 65,
+              "type": 1,
+              "kind": "Factory",
+              "templates": [
+                "ConstructionDroid"
+              ],
+              "modules": 0,
+              "ready": true,
+              "idle": true,
+              "active": null,
+              "currentProduction": null,
+              "progress": {
+                "available": false,
+                "currentId": "",
+                "currentName": "",
+                "templateId": null,
+                "completedBuildPoints": null,
+                "totalBuildPoints": null,
+                "ratio": null,
+                "state": "idle"
+              },
+              "queueKnown": true,
+              "waitingReason": null,
+              "queue": []
+            },
+            {
+              "id": 160049,
+              "number": 3,
+              "x": 43,
+              "y": 72,
+              "type": 16,
+              "kind": "Cyborg factory",
+              "templates": [
+                "Cyb-Cannon-GROUND",
+                "Cyb-Chain-GROUND",
+                "Cyb-ComEng",
+                "Cyb-Flamer-GROUND",
+                "Cyb-Gren",
+                "Cyb-Mechanic"
+              ],
+              "modules": 0,
+              "ready": true,
+              "idle": true,
+              "active": null,
+              "currentProduction": null,
+              "progress": {
+                "available": false,
+                "currentId": "",
+                "currentName": "",
+                "templateId": null,
+                "completedBuildPoints": null,
+                "totalBuildPoints": null,
+                "ratio": null,
+                "state": "idle"
+              },
+              "queueKnown": true,
+              "waitingReason": null,
+              "queue": []
+            }
+          ],
+          "nativeMenu": "",
+          "recoveryContext": "2-1794531193173",
+          "templates": [
+            {
+              "fullname": "Truck Viper Wheels",
+              "name": "ConstructionDroid",
+              "id": "ConstructionDroid",
+              "points": 310,
+              "power": 62,
+              "cost": 62,
+              "droidType": 3,
+              "body": "Body1REC",
+              "propulsion": "wheeled01",
+              "brain": "ZNULLBRAIN",
+              "repair": "ZNULLREPAIR",
+              "ecm": "ZNULLECM",
+              "sensor": "ZNULLSENSOR",
+              "construct": "Spade1Mk1",
+              "weapons": []
+            },
+            {
+              "fullname": "Heavy Gunner Cyborg",
+              "name": "Cyb-Cannon-GROUND",
+              "id": "Cyb-Cannon-GROUND",
+              "points": 382,
+              "power": 87,
+              "cost": 87,
+              "droidType": 5,
+              "body": "CyborgLightBody",
+              "propulsion": "CyborgLegs",
+              "brain": "ZNULLBRAIN",
+              "repair": "ZNULLREPAIR",
+              "ecm": "ZNULLECM",
+              "sensor": "ZNULLSENSOR",
+              "construct": "ZNULLCONSTRUCT",
+              "weapons": [
+                "CyborgCannon"
+              ]
+            },
+            {
+              "fullname": "Machinegunner Cyborg",
+              "name": "Cyb-Chain-GROUND",
+              "id": "Cyb-Chain-GROUND",
+              "points": 302,
+              "power": 67,
+              "cost": 67,
+              "droidType": 5,
+              "body": "CyborgLightBody",
+              "propulsion": "CyborgLegs",
+              "brain": "ZNULLBRAIN",
+              "repair": "ZNULLREPAIR",
+              "ecm": "ZNULLECM",
+              "sensor": "ZNULLSENSOR",
+              "construct": "ZNULLCONSTRUCT",
+              "weapons": [
+                "CyborgChaingun"
+              ]
+            },
+            {
+              "fullname": "Combat Engineer Cyborg",
+              "name": "Cyb-ComEng",
+              "id": "Cyb-ComEng",
+              "points": 207,
+              "power": 37,
+              "cost": 37,
+              "droidType": 10,
+              "body": "CyborgLightBody",
+              "propulsion": "CyborgLegs",
+              "brain": "ZNULLBRAIN",
+              "repair": "ZNULLREPAIR",
+              "ecm": "ZNULLECM",
+              "sensor": "ZNULLSENSOR",
+              "construct": "CyborgSpade",
+              "weapons": []
+            },
+            {
+              "fullname": "Flamer Cyborg",
+              "name": "Cyb-Flamer-GROUND",
+              "id": "Cyb-Flamer-GROUND",
+              "points": 342,
+              "power": 82,
+              "cost": 82,
+              "droidType": 5,
+              "body": "CyborgLightBody",
+              "propulsion": "CyborgLegs",
+              "brain": "ZNULLBRAIN",
+              "repair": "ZNULLREPAIR",
+              "ecm": "ZNULLECM",
+              "sensor": "ZNULLSENSOR",
+              "construct": "ZNULLCONSTRUCT",
+              "weapons": [
+                "CyborgFlamer01"
+              ]
+            },
+            {
+              "fullname": "Grenadier Cyborg",
+              "name": "Cyb-Gren",
+              "id": "Cyb-Gren",
+              "points": 462,
+              "power": 107,
+              "cost": 107,
+              "droidType": 5,
+              "body": "CyborgLightBody",
+              "propulsion": "CyborgLegs",
+              "brain": "ZNULLBRAIN",
+              "repair": "ZNULLREPAIR",
+              "ecm": "ZNULLECM",
+              "sensor": "ZNULLSENSOR",
+              "construct": "ZNULLCONSTRUCT",
+              "weapons": [
+                "Cyb-Wpn-Grenade"
+              ]
+            },
+            {
+              "fullname": "Mechanic Cyborg",
+              "name": "Cyb-Mechanic",
+              "id": "Cyb-Mechanic",
+              "points": 242,
+              "power": 62,
+              "cost": 62,
+              "droidType": 11,
+              "body": "CyborgLightBody",
+              "propulsion": "CyborgLegs",
+              "brain": "ZNULLBRAIN",
+              "repair": "CyborgRepair",
+              "ecm": "ZNULLECM",
+              "sensor": "ZNULLSENSOR",
+              "construct": "ZNULLCONSTRUCT",
+              "weapons": []
+            }
+          ],
+          "finishedUnits": [],
+          "finishedBuilds": []
+        },
+        "terrain": {
+          "ready": true,
+          "active": true,
+          "revision": 1,
+          "observations": 638,
+          "observedAt": 35515.03000000003,
+          "reads": 1,
+          "picks": 0,
+          "lastPickMs": 0,
+          "maxPickMs": 0,
+          "heightIndexBuilds": 0,
+          "heightCells": 0,
+          "heightWideTriangles": 0,
+          "heightQueries": 0,
+          "lastHeightCandidates": 0,
+          "maxHeightCandidates": 0,
+          "heightTriangleTests": 0,
+          "gpuBufferReads": 2,
+          "cpuBufferReads": 0,
+          "cpuCopies": 2,
+          "cpuBytes": 430080,
+          "mirroredUploads": 0,
+          "cpuInvalidations": 0,
+          "lastMeshReadMs": 10.01500000001397,
+          "maxMeshReadMs": 10.01500000001397,
+          "lastHeightIndexMs": 0,
+          "maxHeightIndexMs": 0,
+          "lastHeightMs": 0,
+          "maxHeightMs": 0,
+          "error": ""
+        }
+      },
+      "research": {
+        "active": true,
+        "version": 40,
+        "open": false,
+        "opening": false,
+        "opens": 1,
+        "closes": 1,
+        "topicSelections": 0,
+        "labSelections": 0,
+        "categoryChanges": 0,
+        "activeLab": 0,
+        "activeCategory": "ALL",
+        "selectedTopicIds": [],
+        "catalogCount": 18,
+        "catalogSample": [
+          "Medium Body - Cobra",
+          "Fuel Injection Engine Mk3",
+          "Composite Alloys",
+          "Hover Propulsion"
+        ],
+        "labCount": 2,
+        "readyLabs": 2,
+        "labIds": [
+          160041,
+          160043
+        ],
+        "playerPower": 2530,
+        "labs": [
+          {
+            "id": 160041,
+            "nativeIndex": 0,
+            "idle": true,
+            "modules": 0,
+            "health": 100,
+            "topicId": "",
+            "topicName": "",
+            "remainingSeconds": null,
+            "estimatedProgress": 0,
+            "waitingPower": false
+          },
+          {
+            "id": 160043,
+            "nativeIndex": 1,
+            "idle": true,
+            "modules": 0,
+            "health": 100,
+            "topicId": "",
+            "topicName": "",
+            "remainingSeconds": null,
+            "estimatedProgress": 0,
+            "waitingPower": false
+          }
+        ],
+        "bridgeSyncs": 12,
+        "bridgeErrors": 0,
+        "commandAcks": 0,
+        "commandRejects": 0,
+        "commandTimeouts": 0,
+        "queueAdds": 0,
+        "queueRemovals": 0,
+        "directAssignments": 0,
+        "directFailures": 0,
+        "queueSyncs": 0,
+        "queueStateEvents": 11,
+        "queueCommandWrites": 0,
+        "queueCommandErrors": 0,
+        "backgroundSyncs": 0,
+        "lastSyncDurationMs": null,
+        "queues": [
+          [],
+          []
+        ],
+        "dirtyLabIds": [],
+        "pendingClose": false,
+        "syncBlocked": false,
+        "runner": null,
+        "pendingCommand": null,
+        "fsPolls": 110,
+        "fsErrors": 6,
+        "fsLogFiles": [
+          "Scavengers.1.log",
+          "init.0.log"
+        ],
+        "completedEvents": 0,
+        "lastTopic": null,
+        "lastCompleted": null,
+        "canvasRestored": true
+      },
+      "saved": {
+        "loading": false,
+        "ready": true,
+        "busy": false,
+        "ended": false,
+        "error": "",
+        "serial": 0,
+        "savedId": "",
+        "hydrated": false,
+        "phase": "idle",
+        "status": "",
+        "statusAt": 0,
+        "docSession": "386f22ba-2a33-4c7c-8b5f-ebf99f054efa",
+        "logicalSession": "",
+        "slotId": "",
+        "persistenceStarted": 0,
+        "persistenceCompleted": []
+      },
+      "touch": {
+        "active": true,
+        "version": 57,
+        "intercepted": 0,
+        "mouseEvents": 30,
+        "taps": 0,
+        "orders": 0,
+        "pans": 0,
+        "panMoves": 0,
+        "lastPanStartLatencyMs": null,
+        "lastPanDispatchMs": null,
+        "maxPanDispatchMs": 0,
+        "panPhase": "idle",
+        "panQueuedPointers": 0,
+        "panRearms": 0,
+        "panUnobservedRearms": 0,
+        "panHeldTimeouts": 0,
+        "panContextResets": 0,
+        "panQueueOverflows": 0,
+        "boxSelections": 0,
+        "boxCadenceWaits": 0,
+        "boxPressGaps": [],
+        "lastNativeLeftDownAt": 33077.71000000008,
+        "manualSelectionRevision": 0,
+        "facilityOpens": 0,
+        "lastFacility": null,
+        "facilityError": "",
+        "pinchSteps": 0,
+        "tiltMoves": 0,
+        "tiltHeld": null,
+        "rotationMoves": 0,
+        "rotationSteps": 0,
+        "rotationHeld": null,
+        "saveNames": 0,
+        "radarTaps": 0,
+        "radarDrags": 0,
+        "radarMoves": 0,
+        "cameraFacings": 1,
+        "cameraFacingPending": false,
+        "cameraHeading": "north",
+        "cameraFacingError": "",
+        "lastRadarPoint": null,
+        "combatLock": false,
+        "autoFight": false,
+        "boxMode": false,
+        "queueMode": false,
+        "queueModifierHeld": false,
+        "stickyBuildActivations": 0,
+        "nativeStatsOpen": false,
+        "nativeObjectsOpen": false,
+        "pendingClicks": 0,
+        "nativeRenderFrames": 981,
+        "queuedPointerEvents": 0,
+        "selectAlls": 0,
+        "manualSelectAlls": 0,
+        "combatOrders": 0,
+        "patrolOrders": 0,
+        "queuedOrders": 0,
+        "stopOrders": 0,
+        "stopPending": false,
+        "stopAcks": 0,
+        "stoppedUnitIds": [],
+        "baseJumps": 0,
+        "feedbacks": 0,
+        "doubleTaps": 0,
+        "coalescedSamples": 0,
+        "pointerCaptures": 0,
+        "zoomPreset": null,
+        "zoomPresetSelections": 0,
+        "zoomWheelEvents": 0,
+        "zoomCommandWrites": 1,
+        "zoomCommandErrors": 0,
+        "zoomAcks": 0,
+        "zoomPending": false,
+        "lastZoomDistance": null,
+        "gestureActive": false,
+        "hudVisible": true,
+        "battleActive": true,
+        "heldKeys": []
+      },
+      "html": {
+        "phase": "playing",
+        "result": "",
+        "exitReason": "",
+        "session": "386f22ba-2a33-4c7c-8b5f-ebf99f054efa",
+        "menuRequested": false,
+        "mode": "tower-defense"
+      },
+      "music": {
+        "mode": "map",
+        "cached": true,
+        "enabled": true,
+        "mapId": "beginner",
+        "trackId": "original_soundtrack/track1.opus",
+        "title": "Track 1",
+        "author": "Martin Severn",
+        "missionId": "",
+        "campaignSession": "",
+        "video": false,
+        "missionResults": false,
+        "url": "https://appassets.androidplatform.net/warzone/optional/map-music/original_soundtrack/track1.opus",
+        "battleActive": true,
+        "suspended": false,
+        "playing": true,
+        "loading": false,
+        "loadedBytes": 2418624,
+        "error": "",
+        "disposed": false,
+        "transport": "track-blob",
+        "mediaTimeSeconds": 0.59384,
+        "mediaReadyState": 4,
+        "nativeMusicEnabled": false,
+        "selectedTracks": [
+          "original_soundtrack/track1.opus"
+        ],
+        "playlistTrackIds": [],
+        "playlistSelections": [],
+        "playedTracks": [
+          "original_soundtrack/track1.opus",
+          "original_soundtrack/track1.opus",
+          "original_soundtrack/track1.opus"
+        ],
+        "retained": false
+      },
+      "config": "/warzone2100",
+      "viewport": [
+        1231,
+        554,
+        1231,
+        496
+      ]
+    },
+    "screenshot": {
+      "path": "qa/maps-music-066/e231ce35-music-towers-background-return.png",
+      "sha256": "32ef702cd0606d51ee551a747025142a74c5d8be4e1408c250f474c11924252c",
+      "bytes": 453548
+    },
+    "native": [
+      {
+        "text": "WAVE 1 IN 3:47",
+        "label": "",
+        "bounds": "[0,0][0,0]",
+        "selected": "false"
+      },
+      {
+        "text": "Prepare your defences",
+        "label": "",
+        "bounds": "[0,0][0,0]",
+        "selected": "false"
+      },
+      {
+        "text": "SKIP WAVE",
+        "label": "",
+        "bounds": "[0,0][0,0]",
+        "selected": "false"
+      },
+      {
+        "text": "RESEARCH",
+        "label": "",
+        "bounds": "[30,33][297,141]",
+        "selected": "false"
+      },
+      {
+        "text": "MANUFACTURING",
+        "label": "",
+        "bounds": "[303,33][603,141]",
+        "selected": "false"
+      },
+      {
+        "text": "QUEUE",
+        "label": "",
+        "bounds": "[609,33][756,141]",
+        "selected": "false"
+      },
+      {
+        "text": "BASE",
+        "label": "",
+        "bounds": "[783,33][972,141]",
+        "selected": "false"
+      },
+      {
+        "text": "MUSIC",
+        "label": "",
+        "bounds": "[999,33][1209,141]",
+        "selected": "false"
+      },
+      {
+        "text": "",
+        "label": "Rewards, 380 crystals. Portable inventory and active purchases.",
+        "bounds": "[1215,33][1539,141]",
+        "selected": "false"
+      },
+      {
+        "text": "SAVE",
+        "label": "",
+        "bounds": "[1545,33][1731,141]",
+        "selected": "false"
+      },
+      {
+        "text": "HELP",
+        "label": "",
+        "bounds": "[1737,33][1926,141]",
+        "selected": "false"
+      },
+      {
+        "text": "",
+        "label": "Wave 1: 10 incoming enemy units",
+        "bounds": "[0,0][0,0]",
+        "selected": "false"
+      },
+      {
+        "text": "",
+        "label": "Unit controls",
+        "bounds": "[0,0][0,0]",
+        "selected": "false"
+      },
+      {
+        "text": "ANALYSIS 0/2 active",
+        "label": "",
+        "bounds": "[0,0][0,0]",
+        "selected": "false"
+      },
+      {
+        "text": "MANUFACTURING 0/3 active",
+        "label": "",
+        "bounds": "[0,0][0,0]",
+        "selected": "false"
+      }
+    ],
+    "physical": {
+      "width": 2400,
+      "height": 1080
+    }
+  },
+  "runtimeErrors": [],
+  "recordedAt": "2026-11-13T00:53:46.120Z"
+}

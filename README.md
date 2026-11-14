@@ -1,5 +1,246 @@
 # Warzone Towers
 
+**Development release: 0.77 (77)** applies the approved compact Manufacturing
+and Queue screens across the four modes. It adds continuous manufacturing and
+one STOP action per factory, while retaining native production limits and real
+unit progress. v0.76 APK/full source are preserved. The user requested no
+emulator tests; see the [0.77 notes](docs/releases/0.77-manufacturing-clean.md).
+
+**Development release: 0.76 (76)** simplifies the shared Research screen in
+Towers, FFA, Campaign and Multiplayer. Numeric lab tabs and a larger scrolling
+technology list replace duplicate headings, category controls and the bottom
+lab detail block. Existing batch assignment and active/queued markers remain.
+The v0.75 APK and complete source are preserved. No emulator testing was
+requested; see the [0.76 notes](docs/releases/0.76-research-clean.md).
+
+**Development release: 0.68 (68)** refines the existing 45 authored FFA maps
+with defined paths and terrain banks that break up broad open combat ground.
+Map identities, sizes, base positions and starting economies remain unchanged.
+The six original FFA maps and other modes are preserved. v0.67 APK/full source
+remain the fallback. No emulator tests were requested; see the
+[0.68 release notes](docs/releases/0.68-ffa-pathways.md) for offline check scope.
+
+**Development release: 0.67 (67)** adds 45 NTW-style FFA maps, fifteen each for
+two, three and four players, with grouped swipe previews and independent Cobra
+opponents. The six earlier FFA maps remain available under Originals. Delivered
+v0.66 APK/full source remain the fallback. The user requested no emulator tests;
+validation is limited to offline map, runtime, UI and packaging checks. See the
+[0.67 release notes](docs/releases/0.67-ntw-map-pack.md).
+
+**Development release: 0.66 (66)** adds five supplied FFA maps alongside EMAG,
+with swipeable terrain previews and one human against three or five Cobra
+opponents. FFA and Campaign gain the same MUSIC control as Towers. FFA shuffles
+the bundled soundtrack; Campaign uses its original three-track in-game policy.
+Existing EMAG saves and the v0.65 APK/source fallback are preserved. See the
+[0.66 release notes](docs/releases/0.66-ffa-maps-music.md).
+
+**Development release: 0.65 (65)** adds an offline **Guide** to Home and the
+in-game Help reader. Research is organised into fifteen families, with separate
+Towers, FFA and Campaign catalogues, all required prerequisites, unlocks and
+upgrades. Ten practical chapters use real app screenshots with numbered
+annotations. Delivered v0.64 APK/full source remain the fallback. See the
+[0.65 release notes](docs/releases/0.65-field-guide.md).
+
+**Development release: 0.64 (64)** uses **Cobra** for new FFA matches at Easy,
+Medium and Hard. Three independent opponents and VTOL-off rules remain.
+Existing NullBot saves retain their original AI and are labelled accordingly;
+new Cobra saves record and verify the actual native bot identity. Delivered
+v0.63 APK/full source are preserved. See the
+[0.64 release notes](docs/releases/0.64-cobra-ffa.md).
+
+**Development release: 0.63 (63)** makes two-finger rotation more tolerant of
+short twists, close fingers and small spacing changes at the start of a turn.
+Clear angular intent can take over from an accidental early zoom, tilt or pan.
+Delivered v0.62 APK/full source are preserved. See the
+[0.63 release notes](docs/releases/0.63-rotation-consistency.md).
+
+**Development release: 0.62 (62)** corrects two-finger rotation when one finger
+acts as a pivot or the fingers move unevenly. These gestures now turn the view
+through full circles in either direction rather than being misread as tilt.
+Parallel movement still tilts and pinching still zooms. Delivered v0.61 APK/full
+source are preserved. See the [0.62 release notes](docs/releases/0.62-rotation.md).
+
+**Development release: 0.61 (61)** fixes crowded construction queues in
+Towers, Campaign and FFA, and adds two-finger twist rotation. Queued base
+buildings respect native spacing; blocked plans explain the obstruction and
+retry with explicitly selected trucks. Parallel two-finger tilt, pinch zoom
+and one-finger movement remain available. Delivered v0.60 APK/full source are
+preserved. See the [0.61 release notes](docs/releases/0.61-construction-rotation.md).
+
+**Development release: 0.60 (60)** adds a separate **FFA** section: the supplied
+EMAG map, you and three independent native bots, Easy/Medium/Hard difficulty,
+ground-only play and separate phone saves. Campaign, Towers and the hidden Duel
+payloads remain preserved, with v0.59 APK/full source as fallback. See the
+[0.60 release notes](docs/releases/0.60-ffa.md) for scope and verification.
+
+**Development release: 0.59 (59)** restores the original WZ2100 shield as the
+Android app icon. The splash and game are unchanged; complete v0.58 APK/source
+remain the fallback. Build and package checks only, with no emulator testing as
+requested. See the [0.59 release notes](docs/releases/0.59-icon.md).
+
+**Development release: 0.58 (58)** adds per-map Complete markers, matching Back
+button styling and a one-time 1,000-crystal reward for completing every map in
+each difficulty. The complete v0.57 APK/source remain the fallback. Verification
+includes 390 host wallet cases and five exact-APK native/UI cases using a disclosed
+seeded final-wave boundary; the original emulator wallet was restored afterward.
+See the [0.58 release notes](docs/releases/0.58-completion.md) for scope and fixture corrections.
+
+**Development release: 0.57 (57)** replaces the large Home cards with a minimal
+native splash: the official logo and compact Campaign/Towers actions. Existing
+Campaign setup, Towers map selection, saves and rewards remain available through
+their previous screens. The complete v0.56 APK/source remain the fallback. The
+exact installed APK passed five focused native layout/navigation cases, including
+compact and enlarged text, both game routes and return paths. See the
+[0.57 release notes](docs/releases/0.57-splash.md) for scope and fixture disclosure.
+
+**Development release: 0.56 (56)** gives Campaign and Towers separate native
+Home cards, with compact Rewards/Saved Games and direct Campaign New/Continue
+actions. The complete v0.55 APK/source remain the fallback. The exact installed
+APK passed ten focused native Home/navigation cases, including both game routes,
+compact scrolling and enlarged text. See the
+[0.56 release notes](docs/releases/0.56-home.md) for scope and fixture disclosure.
+
+**Development release: 0.55 (55)** fixes Campaign cancellation records that
+could leave queued blueprints visible until builders became idle. The exact
+v0.54 APK and complete source remain the fallback. The exact installed APK passed
+ten focused native checks, including cancelling while other builders work,
+foundation retention, phone Save/Continue and completing the same foundation.
+See the [0.55 release notes](docs/releases/0.55-campaign-cancel.md).
+
+**Development release: 0.54 (54)** brings Campaign research Intelligence into
+the dark report reader, repairs a hidden construction-overlay canvas and removes
+the footer collapse button from Campaign and Towers. The complete v0.53 APK/source
+remain preserved. The exact installed APK passed sixteen focused Campaign and
+Towers checks, including queued models, menu handoffs, compact layout and phone
+Save/Continue. See the
+[0.54 release notes](docs/releases/0.54-campaign-overlays.md) for fixture scope,
+empty report-history coverage and the existing cancellation-journal limitation.
+
+**Development release: 0.53 (53)** polishes the Campaign header/footer,
+refreshes Design validation when a Command Centre or research changes, and keeps
+the original Game Guide available without automatic modal interruptions. The
+complete v0.52 APK/source remain preserved. The exact installed APK passed the
+opening Alpha Design/HQ/manufacturing journey, phone Save/Continue, compact
+layout and a brief Towers regression. See the
+[0.53 release notes](docs/releases/0.53-campaign-polish.md) for scope and test-report recovery provenance.
+
+**Development release: 0.52 (52)** routes Towers unit-loss messages into the
+compact black-and-white notice and adds explicit recovery for construction
+whose assigned trucks were destroyed. The complete v0.51 APK/source remain
+preserved. The exact installed APK passed a seeded native casualty, explicit
+replacement-truck recovery through completion, ordinary production/menu checks,
+normal Towers phone Save/Load and a brief Campaign Continue regression.
+Campaign and Duel content/runtimes are preserved. See the
+[0.52 release notes](docs/releases/0.52-loss-builders.md) for evidence and fixture limits.
+
+**Development release: 0.51 (51)** adds the original Campaign beside Towers,
+with a verified one-time movie download, persistent ALL COMBAT control and
+separate campaign phone saves. The accepted v0.50 APK and complete source remain
+as fallback. See the [0.51 release notes](docs/releases/0.51-campaign.md) and
+the exact-APK verification record for tested scope and remaining limits.
+
+**Previous development release: 0.50 (50)** corrects v0.49's touch-pan regression using
+the native SDL release/idle lifecycle. It removes cursor recentering, restores
+immediate drag activation and safely separates repeated swipes. A Towers-only
+native middle-button change prevents rapid swipes becoming desktop double-clicks.
+The installed APK is checked with actual Android touch input, native camera
+projection, minimap, selection, construction/production, menu returns and saved
+game loading. Native camera smoothing and other game content remain intact.
+Complete v0.49 and v0.48 fallbacks remain. See the
+[0.50 release notes](docs/releases/0.50-touch-camera.md) and current design QA
+for the emulator's terrain-rendering limitation and device evidence.
+
+**Previous development release: 0.49 (49)** fixes Towers finger-pan input cadence and
+release handling. It batches raw motion to the latest absolute position per
+frame, bounds drag coordinates to the canvas, and retains the final held point
+through a native frame before releasing. Cancellation and new input clear old
+callbacks. The native camera interpolation and other gestures stay intact.
+Complete v0.48 APK/source are preserved. Verification is focused source/VM,
+compilation and exact package integrity; no emulator or phone smoothness check.
+See the [0.49 release notes](docs/releases/0.49-touch-pan.md).
+
+**Previous development release: 0.48 (48)** fixes Intelligence closing on its first
+heartbeat when the wave HUD timestamp lags the native engine. Clock comparisons
+now stay within native replies, malformed timestamps are ignored, and late
+heartbeat callbacks cannot affect a reopened panel. All other v0.47 changes
+remain. Complete v0.47 APK/source are preserved. Verification is focused source/
+VM, compilation and exact package integrity only; no emulator or gameplay run.
+See the [0.48 release notes](docs/releases/0.48-intelligence-clock.md).
+
+**Previous development release: 0.47 (47)** fixes Intelligence eligibility/refresh and
+research artwork, reduces Build's construction display to one current unfinished
+item, and corrects the Home map arrow's selected/pressed contrast. Complete
+v0.46 APK/source are preserved first. Engine gameplay, construction orders,
+research rules, saves, rewards, ads and current other layouts remain intact.
+Verification is focused source/VM, compilation and package integrity only;
+no emulator, browser, Android runtime or gameplay run. See the
+[0.47 release notes](docs/releases/0.47-intelligence-build.md).
+
+**Previous development release: 0.46 (46)** applies selected button sample 2's softly
+rounded rectangles and returns the existing app to black-and-white surfaces.
+Normal controls are charcoal/white; selected controls are white/black, with
+separate pressed, disabled and focus states. Existing layouts, interactions,
+original artwork and gameplay remain. Complete v0.45 is preserved first.
+Verification is source/build/package integrity only: no emulator, browser,
+Android runtime, sound playback, gameplay or ad serving check. See the
+[0.46 release notes](docs/releases/0.46-rounded-monochrome.md).
+
+**Previous development release: 0.45 (45)** gives the existing controls actual raster
+faces, distinct press/selection states and restrained original Warzone click
+feedback. Build moves from the top navigation to the footer after Analysis and
+Manufacturing, keeping its original construction/selection logic. Matching
+native action-button artwork retains the current Home/Rewards layout. Complete
+v0.44 APK/source are preserved first. Verification is source/VM, compilation and
+package integrity only; no emulator, browser, audible playback or gameplay run.
+See the [0.45 release notes](docs/releases/0.45-game-controls.md).
+
+**Previous development release: 0.44 (44)** groups Research/Manufacturing/Build, refines
+the footer and Music highlight, moves Wave/Skip inward to the left, adjusts the
+power-gauge scale and disables native autosaving while retaining manual saves.
+It fixes the Home result overlay and starts normal cold launches on Easy's first
+map. The delivery uses the publisher's real rewarded unit on physical phones;
+explicit development builds can retain sample ads. Complete v0.43 is preserved.
+No emulator/browser/live-ad request or gameplay test is performed. See the
+[0.44 release notes](docs/releases/0.44-hud-home.md).
+
+**Previous development release: 0.43 (43)** uses selected Home mock 2's grey cannon tank,
+adds the Home-only `rbabbit v<current version>` label and production cancellation
+in Queue. Complete v0.42 files remain preserved as fallback. No emulator or
+gameplay testing is performed; this APK is supplied for the user's phone check.
+See the [0.43 release notes](docs/releases/0.43-home-queue.md).
+
+**Previous development release: 0.42 (42)** applies the selected light sage green / black
+theme throughout Towers, including native Home, Rewards, saves, dialogs,
+briefings, loading and notices, the web menus and sidebars, and Towers-only
+native console/power-meter rendering. Current layouts, original game artwork,
+gameplay and prior fixes remain. Complete v0.41 files are preserved as fallback.
+This delivery is compiled and packaged for the user's phone check: **no emulator,
+browser or gameplay testing**. See the [0.42 release notes](docs/releases/0.42-sage.md)
+for scope and verification limits.
+
+**Previous development release: 0.41 (41)** replaces Production footer component
+placeholders with the real matching thumbnail, fixes missing live equipment
+metadata, and removes internal queue-uncertainty labels. Complete v0.40 files
+remain preserved as fallback. Focused source/desktop checks, native/Android
+compilation and package integrity only; **no emulator testing**. See the
+[0.41 release notes](docs/releases/0.41-thumbnail.md) for scope and limitations.
+
+**Previous development release: 0.40 (40)** fixes selected footer/Build contrast and
+header theme conflicts, and adds real production activity/progress and clearer
+unit counts. Complete v0.39 artifacts remain frozen as fallback. Verification
+is limited to focused source/desktop fixtures, native/Android compilation and
+package integrity; **no emulator testing**. See the
+[0.40 release notes](docs/releases/0.40-progress.md) for scope and limitations.
+
+**Previous development release: 0.39 (39)** applies the approved monochrome theme across
+Towers and revised Production mock 2 (numbered factory chips beside categories,
+quantity by Produce). Current 0.38 APK/source are preserved as a fallback.
+Verification is source/desktop fixtures, Android compilation and exact package
+integrity only; **no emulator testing**, as requested. Android visuals and
+gameplay for this revision remain unverified. See the
+[0.39 release notes](docs/releases/0.39-theme.md) and
+[bounded design comparison](docs/ui-0.39/design-qa.md).
+
 **Current benchmark: Warzone Towers 0.31 (31)** was accepted by the user on
 9 November 2026 for GitHub `main` and the `v0.31-benchmark` tag.
 

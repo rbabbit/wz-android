@@ -87,19 +87,29 @@ public final class MainActivity extends Activity {
   private boolean startupAutomationStarted;
   private String webViewVersion = "unknown";
   private GraphicsSetupView graphicsSetup;
+  private GuideView guideView;
+  private HubView hubView;
+  private CampaignSetupView campaignSetup;
+  private CampaignVideoStore campaignVideos;
+  private SaveGameStore campaignSaves;
+  private SaveGameStore ffaSaves;
+  private FfaSetupView ffaSetup;
+  private String ffaDifficulty = "easy";
+  private String ffaMapId = "emag";
+  private int campaignHomeGeneration;
+  private boolean campaignHomeBusy;
   private String mapId = "td2";
   private String matchMode = "towers";
   private String duelWeapon = "cannon";
   private BattleLaunchSpec battleLaunch;
   private MusicPackStore musicStore;
-  private MusicSetupView musicSetup;
   private MusicTrackCatalog musicCatalog;
   private MapMusicIndex mapMusicIndex;
   private volatile boolean musicEnabled, musicCached;
   private volatile String musicSession = "", musicMapId = "td2";
+  private volatile String musicMode = "towers", musicMissionId = "";
   private volatile boolean musicSuspended = true;
   private final Object musicPreferenceLock = new Object();
-  private boolean musicDownloadActive;
   private RewardStore rewards;
   private RewardsView rewardsView;
   private RewardsView livePurchaseView;
@@ -112,6 +122,8 @@ public final class MainActivity extends Activity {
   private String staleAdReward = "";
   private String livePurchaseTransaction = "", livePurchaseDocument = "";
   private RewardReceiptView rewardReceipt;
+  private BattleBriefingView battleBriefing;
+  private String startupBriefingSession = "";
   private volatile String rewardSession = "";
   private volatile String rewardRunId = "";
   private SaveGameStore saveGames;
@@ -120,6 +132,8 @@ public final class MainActivity extends Activity {
   private volatile String loadingSaveId = "";
   private boolean restoringGame;
   private boolean rewardSetupFailed;
+  private TextView appNotice;
+  private final Runnable dismissAppNotice = this::clearAppNotice;
   private volatile String rewardTerminalFreshSession = "", rewardInventoryFreshSession = "";
 
   @Override
@@ -140,11 +154,12 @@ public final class MainActivity extends Activity {
     immersive();
 
     root = new FrameLayout(this);
-    root.setBackgroundColor(Color.BLACK);
+    root.setBackgroundColor(TowersTheme.BACKGROUND);
     setContentView(root);
 
     createWebView();
     musicStore = new MusicPackStore(this);
+    musicCached = musicStore.ready();
     musicCatalog = new MusicTrackCatalog(this);
     mapMusicIndex = new MapMusicIndex(this, musicCatalog);
     rewards = new RewardStore(this);
@@ -172,6 +187,9 @@ public final class MainActivity extends Activity {
       @Override public void cancelReward(String token) { rewards.cancelAdReward(token); }
     });
     saveGames = new SaveGameStore(this);
+    campaignSaves = new SaveGameStore(this, true);
+    ffaSaves = new SaveGameStore(this, "ffa");
+    campaignVideos = new CampaignVideoStore(this);
     String savedWalletError = null;
     JSONArray pinnedRuns = rewards.pinnedRuns();
     for (int i = 0; i < pinnedRuns.length(); i++) {
@@ -179,21 +197,23 @@ public final class MainActivity extends Activity {
       try { if (!saveGames.hasRun(run)) rewards.unpinRun(run); }
       catch (RuntimeException error) { savedWalletError = "Saved-game stock could not be reconciled. Restart to retry."; }
     }
-    musicEnabled = getPreferences(MODE_PRIVATE).getBoolean("music_enabled", false);
+    musicEnabled = getPreferences(MODE_PRIVATE).getBoolean("music_enabled", true);
     String requestedMap = getIntent().getStringExtra("map");
-    mapId =
-        BattleLaunchSpec.mapId(
-            requestedMap != null
-                ? requestedMap
-                : getPreferences(MODE_PRIVATE).getString("map_id", "td2"));
+    // A normal app launch starts at the first authored Easy level. Home returns
+    // after a battle/save still use mapId from that run, not this cold-start default.
+    mapId = MapLevelCatalog.isKnownId(requestedMap) ? requestedMap
+        : MapLevelCatalog.get(this).difficulty("easy").get(0).id;
     matchMode = BattleLaunchSpec.matchMode(getIntent().getStringExtra("match_mode"));
     duelWeapon = BattleLaunchSpec.duelWeapon(getIntent().getStringExtra("duel_weapon"));
+    ffaDifficulty = BattleLaunchSpec.ffaDifficulty(getPreferences(MODE_PRIVATE).getString("ffa_difficulty", "easy"));
+    ffaMapId = FfaMapCatalog.normalizeId(getPreferences(MODE_PRIVATE).getString("ffa_map_id", "emag"));
     showGraphicsSetup();
     if (savedWalletError != null) graphicsSetup.showError(savedWalletError);
     rewardedAds.start();
   }
 
   private void showGraphicsSetup() {
+    cancelCampaignHomeCheck();
     graphicsSetup =
         new GraphicsSetupView(
             this,
@@ -204,6 +224,7 @@ public final class MainActivity extends Activity {
             new GraphicsSetupView.Actions() {
               @Override
               public void start(String mode, String map, String selectedMatch, String selectedWeapon) {
+                cancelCampaignHomeCheck();
                 mapId = map;
                 matchMode = BattleLaunchSpec.matchMode(selectedMatch);
                 duelWeapon = BattleLaunchSpec.duelWeapon(selectedWeapon);
@@ -211,20 +232,8 @@ public final class MainActivity extends Activity {
               }
 
               @Override
-              public void cancel() {
-                if (musicDownloadActive) {
-                  musicStore.cancel();
-                  musicDownloadActive = false;
-                }
-              }
-
-              @Override
-              public void music() {
-                downloadMusic();
-              }
-
-              @Override
               public void map(String id) {
+                cancelCampaignHomeCheck();
                 mapId = id;
                 getPreferences(MODE_PRIVATE).edit().putString("map_id", id).apply();
               }
@@ -233,141 +242,275 @@ public final class MainActivity extends Activity {
               public void rewards() { showRewards(false); }
               @Override
               public void savedGames() { showSavedGames(); }
+              @Override
+              public void campaign() { showCampaignSetup(); }
+              @Override
+              public void ffa() { showFfaSetup(); }
+              @Override
+              public void multiplayer() {
+                cancelCampaignHomeCheck();
+                startActivity(new android.content.Intent(MainActivity.this, MultiplayerActivity.class));
+              }
+              @Override
+              public void guide() { showGuide(); }
+              @Override
+              public void hub() { showHub(); }
+              @Override
+              public void campaignContinue() { openCampaignFromHome(true); }
+              @Override
+              public void campaignNew() { openCampaignFromHome(false); }
             });
+    String completionError = null;
+    try { rewards.reconcileDifficultyBonuses(completionMapGroups()); }
+    catch (RuntimeException error) { completionError = error.getMessage(); }
+    graphicsSetup.setCompletedMaps(rewards.completedMaps());
     graphicsSetup.setRewardBalance(rewards.balance());
     root.addView(graphicsSetup, new FrameLayout.LayoutParams(-1, -1));
-    inspectMusic();
+    if (completionError != null) graphicsSetup.showError(completionError);
   }
 
-  private void inspectMusic() {
-    musicStore.inspect(cached -> {
-      musicCached = cached;
-      if (graphicsSetup != null && !isFinishing())
-        graphicsSetup.setMusicState(cached, musicEnabled);
-      if (musicSetup != null && !isFinishing()) musicSetup.setCached(cached, musicEnabled);
-      // A quick Play can precede checksum inspection. Refresh the active
-      // player when readiness changes instead of waiting for a menu or resume.
-      if (!musicSession.isEmpty()) mapMusicLifecycle(musicSuspended ? "suspend" : "resume");
-    });
+  private void showGuide() {
+    if (guideView != null || hubView != null || graphicsSetup == null || campaignHomeBusy) return;
+    guideView = new GuideView(this, this::closeGuide);
+    graphicsSetup.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS);
+    root.addView(guideView, new FrameLayout.LayoutParams(-1, -1));
+    guideView.requestFocus();
   }
 
-  private void showMusicSetup() {
-    if (musicSetup != null) return;
-    if (graphicsSetup != null) graphicsSetup.setVisibility(View.GONE);
-    musicSetup =
-        new MusicSetupView(
-            this,
-            musicCatalog,
-            selectedMusicTracks(),
-            new MusicSetupView.Actions() {
-              @Override
-              public void download() {
-                downloadMusic();
-              }
-
-              @Override
-              public void cancel() {
-                musicStore.cancel();
-              }
-
-              @Override
-              public void enabled(boolean on) {
-                musicEnabled = musicCached && on;
-                getPreferences(MODE_PRIVATE)
-                    .edit()
-                    .putBoolean("music_enabled", musicEnabled)
-                    .apply();
-              }
-
-              @Override
-              public void close() {
-                closeMusicSetup();
-              }
-
-              @Override
-              public void tracks(Set<String> selected) {
-                getPreferences(MODE_PRIVATE)
-                    .edit()
-                    .putStringSet("music_tracks", new HashSet<>(selected))
-                    .apply();
-              }
-
-              @Override
-              public void start() {
-                if (graphicsSetup != null) {
-                  mapId = graphicsSetup.selectedMap();
-                  matchMode = graphicsSetup.selectedMatchMode();
-                  duelWeapon = graphicsSetup.selectedDuelWeapon();
-                }
-                closeMusicSetup();
-                startGame();
-              }
-            });
-    musicSetup.setCompactTowers(!"duel".equals(graphicsSetup != null ? graphicsSetup.selectedMatchMode() : matchMode));
-    musicSetup.setCached(musicCached, musicEnabled);
-    root.addView(musicSetup, new FrameLayout.LayoutParams(-1, -1));
+  private void showHub() {
+    if (hubView != null || guideView != null || graphicsSetup == null || campaignHomeBusy) return;
+    hubView = new HubView(this, this::closeHub);
+    graphicsSetup.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS);
+    root.addView(hubView, new FrameLayout.LayoutParams(-1, -1));
+    hubView.requestFocus();
   }
 
-  private void downloadMusic() {
-    if (musicDownloadActive || musicCached) return;
-    musicDownloadActive = true;
-    if (graphicsSetup != null) graphicsSetup.musicDownloadProgress(0, false);
-    if (musicSetup != null) musicSetup.progress(0, false);
-    musicStore.download(
-        new OptionalPackStore.Listener() {
-          @Override
-          public void progress(long bytes, boolean verifying) {
-            if (graphicsSetup != null) graphicsSetup.musicDownloadProgress(bytes, verifying);
-            if (musicSetup != null) musicSetup.progress(bytes, verifying);
-          }
-
-          @Override
-          public void ready() {
-            musicDownloadActive = false;
-            musicCached = true;
-            // First opt-in download starts enabled. An explicit saved Off is
-            // retained, including when the pack has had to be downloaded again.
-            musicEnabled = getPreferences(MODE_PRIVATE).contains("music_enabled")
-                ? getPreferences(MODE_PRIVATE).getBoolean("music_enabled", false) : true;
-            getPreferences(MODE_PRIVATE).edit().putBoolean("music_enabled", musicEnabled).apply();
-            if (musicSetup != null) musicSetup.ready(musicEnabled);
-            if (graphicsSetup != null) {
-              graphicsSetup.setDownloading(false);
-              graphicsSetup.setMusicState(true, musicEnabled);
-              graphicsSetup.showStatus("Music ready. Use MUSIC in-game to turn it on or off.", false);
-            }
-          }
-
-          @Override
-          public void failed(String message) {
-            musicDownloadActive = false;
-            if (graphicsSetup != null) graphicsSetup.showError(message);
-            if (musicSetup != null) musicSetup.failed(message);
-          }
-        });
-  }
-
-  private void closeMusicSetup() {
-    musicStore.cancel();
-    musicDownloadActive = false;
-    if (musicSetup != null) {
-      root.removeView(musicSetup);
-      musicSetup = null;
+  private void closeHub() {
+    if (hubView == null) return;
+    hideKeyboard();
+    HubView closing = hubView;
+    hubView = null;
+    root.removeView(closing);
+    closing.dispose();
+    if (graphicsSetup != null) {
+      graphicsSetup.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_AUTO);
+      graphicsSetup.requestFocus();
     }
-    if (graphicsSetup != null) graphicsSetup.setVisibility(View.VISIBLE);
-    inspectMusic();
+    immersive();
+  }
+
+  private void closeGuide() {
+    if (guideView == null) return;
+    hideKeyboard();
+    GuideView closing = guideView;
+    guideView = null;
+    root.removeView(closing);
+    closing.dispose();
+    if (graphicsSetup != null) {
+      graphicsSetup.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_AUTO);
+      graphicsSetup.requestFocus();
+    }
+    immersive();
+  }
+
+  /** Use the shipped catalogue, including Greenhaven and both original hard maps. */
+  private java.util.Map<String, java.util.Set<String>> completionMapGroups() {
+    java.util.Map<String, java.util.Set<String>> groups = new java.util.LinkedHashMap<>();
+    for (String difficulty : new String[] {"easy", "medium", "hard"}) {
+      java.util.Set<String> maps = new java.util.LinkedHashSet<>();
+      for (MapLevelCatalog.Level level : MapLevelCatalog.get(this).difficulty(difficulty)) maps.add(level.id);
+      groups.put(difficulty, maps);
+    }
+    return groups;
   }
 
   private void startGame() {
     if (graphicsSetup == null || loadingOverlay != null || mainMenuReturnPending) return;
-    if (musicDownloadActive) {
-      musicStore.cancel();
-      musicDownloadActive = false;
-    }
     launchGame();
   }
 
+  private void cancelCampaignHomeCheck() {
+    campaignHomeGeneration++;
+    campaignHomeBusy = false;
+    if (graphicsSetup != null) graphicsSetup.setCampaignBusy(false);
+  }
+
+  private void openCampaignFromHome(boolean continueSavedGame) {
+    if (graphicsSetup == null || campaignHomeBusy || campaignSetup != null
+        || loadingOverlay != null || savedGamesView != null || rewardsView != null
+        || rewardReceipt != null || mainMenuReturnPending || campaignVideos == null
+        || isFinishing() || isDestroyed()) return;
+    final GraphicsSetupView home = graphicsSetup;
+    final int generation = ++campaignHomeGeneration;
+    campaignHomeBusy = true;
+    home.setCampaignBusy(true);
+    campaignVideos.inspect(ready -> {
+      if (generation != campaignHomeGeneration || !campaignHomeBusy || graphicsSetup != home
+          || campaignSetup != null || loadingOverlay != null || savedGamesView != null
+          || rewardsView != null || rewardReceipt != null || mainMenuReturnPending) return;
+      cancelCampaignHomeCheck();
+      if (!activityResumed || isFinishing() || isDestroyed()) return;
+      if (!ready) { showCampaignSetup(); return; }
+      if (continueSavedGame) showCampaignSaves();
+      else { matchMode = "campaign"; launchGame(); }
+    });
+  }
+
+  private void showCampaignSetup() {
+    if (graphicsSetup == null || campaignSetup != null || loadingOverlay != null) return;
+    cancelCampaignHomeCheck();
+    closeRewards();
+    closeSavedGames();
+    campaignSetup = new CampaignSetupView(this, new CampaignSetupView.Actions() {
+      @Override public void start() {
+        if (campaignVideos.ready()) { matchMode = "campaign"; launchGame(); }
+      }
+      @Override public void saves() { showCampaignSaves(); }
+      @Override public void download() {
+        campaignVideos.download(new OptionalPackStore.Listener() {
+          @Override public void progress(long bytes, boolean verifying) { refreshCampaignSetup(null); }
+          @Override public void ready() { refreshCampaignSetup(null); }
+          @Override public void failed(String message) { refreshCampaignSetup(message); }
+        });
+        refreshCampaignSetup(null);
+      }
+      @Override public void cancel() {
+        campaignVideos.cancel();
+        refreshCampaignSetup("Download paused. Tap Download to resume.");
+      }
+      @Override public void back() { closeCampaignSetup(); }
+    });
+    root.addView(campaignSetup, new FrameLayout.LayoutParams(-1, -1));
+    campaignVideos.inspect(ready -> refreshCampaignSetup(null));
+    refreshCampaignSetup(null);
+  }
+
+  private void showFfaSetup() {
+    if (graphicsSetup == null || ffaSetup != null || loadingOverlay != null) return;
+    cancelCampaignHomeCheck();
+    closeCampaignSetup();
+    closeRewards();
+    closeSavedGames();
+    ffaSetup = new FfaSetupView(this, new FfaSetupView.Actions() {
+      @Override public void start(String selectedMap, String difficulty) {
+        ffaMapId = BattleLaunchSpec.ffaMapId(selectedMap);
+        ffaDifficulty = BattleLaunchSpec.ffaDifficulty(difficulty);
+        getPreferences(MODE_PRIVATE).edit().putString("ffa_difficulty", ffaDifficulty)
+            .putString("ffa_map_id", ffaMapId).apply();
+        matchMode = "ffa";
+        launchGame();
+      }
+      @Override public void map(String id) {
+        ffaMapId = BattleLaunchSpec.ffaMapId(id);
+        getPreferences(MODE_PRIVATE).edit().putString("ffa_map_id", ffaMapId).apply();
+      }
+      @Override public void saves() { showFfaSaves(); }
+      @Override public void back() { closeFfaSetup(); }
+    }, ffaMapId, ffaDifficulty);
+    root.addView(ffaSetup, new FrameLayout.LayoutParams(-1, -1));
+  }
+
+  private void closeFfaSetup() {
+    closeSavedGames();
+    if (ffaSetup != null) {
+      ffaMapId = ffaSetup.selectedMapId();
+      root.removeView(ffaSetup); ffaSetup = null;
+    }
+  }
+
+  private void showFfaSaves() {
+    if (graphicsSetup == null || ffaSetup == null || savedGamesView != null || loadingOverlay != null) return;
+    savedGamesView = new SavedGamesView(this, ffaSaves.list(), new SavedGamesView.Actions() {
+      @Override public void load(String id) { loadFfaSave(id); }
+      @Override public void delete(String id) {
+        try { ffaSaves.delete(id); savedGamesView.refresh(ffaSaves.list()); }
+        catch (Exception error) { savedGamesView.showError(error.getMessage()); }
+      }
+      @Override public void close() { closeSavedGames(); }
+    }, "ffa");
+    root.addView(savedGamesView, new FrameLayout.LayoutParams(-1, -1));
+  }
+
+  private void loadFfaSave(String id) {
+    if (graphicsSetup == null || savedGamesView == null || loadingOverlay != null) return;
+    try {
+      JSONObject payload = ffaSaves.load(id);
+      ffaDifficulty = BattleLaunchSpec.ffaDifficulty(payload.getJSONObject("metadata").getString("difficulty"));
+      ffaMapId = BattleLaunchSpec.ffaMapId(payload.getJSONObject("metadata").getString("mapId"));
+      matchMode = "ffa";
+      battleLaunch = new BattleLaunchSpec("ffa", duelWeapon, ffaMapId, musicEnabled && musicCached, ffaDifficulty,
+          BattleLaunchSpec.ffaBotType(payload.getJSONObject("metadata").optString("botType")));
+      closeFfaSetup();
+      ffaMapId = battleLaunch.mapId;
+      getPreferences(MODE_PRIVATE).edit().putString("ffa_map_id", ffaMapId).putString("ffa_difficulty", ffaDifficulty).apply();
+      root.removeView(graphicsSetup); graphicsSetup = null;
+      loadingSave = payload; loadingSaveId = id; restoringGame = true;
+      createLoadingPanel();
+      webView.loadUrl(gameUrl());
+    } catch (Exception error) {
+      if (savedGamesView != null) savedGamesView.showError(error.getMessage());
+      else { returnToMainMenu(); graphicsSetup.showError(error.getMessage()); }
+    }
+  }
+
+  private void refreshCampaignSetup(String error) {
+    if (campaignSetup != null) campaignSetup.update(campaignVideos.ready(), campaignVideos.downloading(),
+        campaignVideos.downloadedBytes(), campaignVideos.phase(), error);
+  }
+
+  private void closeCampaignSetup() {
+    cancelCampaignHomeCheck();
+    closeSavedGames();
+    if (campaignSetup != null) { root.removeView(campaignSetup); campaignSetup = null; }
+    if (campaignVideos != null) campaignVideos.cancel();
+  }
+
+  private void showCampaignSaves() {
+    if (graphicsSetup == null || savedGamesView != null || loadingOverlay != null
+        || !campaignVideos.ready()) return;
+    cancelCampaignHomeCheck();
+    savedGamesView = new SavedGamesView(this, campaignSaves.list(), new SavedGamesView.Actions() {
+      @Override public void load(String id) {
+        if (!campaignVideos.ready()) {
+          savedGamesView.showError("Download the campaign videos before continuing."); return;
+        }
+        loadCampaignSave(id);
+      }
+      @Override public void delete(String id) {
+        try { campaignSaves.delete(id); savedGamesView.refresh(campaignSaves.list()); }
+        catch (Exception error) { savedGamesView.showError(error.getMessage()); }
+      }
+      @Override public void close() { closeSavedGames(); }
+    }, true);
+    root.addView(savedGamesView, new FrameLayout.LayoutParams(-1, -1));
+  }
+
+  private void loadCampaignSave(String id) {
+    if (graphicsSetup == null || savedGamesView == null || loadingOverlay != null
+        || !campaignVideos.ready()) return;
+    cancelCampaignHomeCheck();
+    try {
+      JSONObject payload = campaignSaves.load(id);
+      matchMode = "campaign";
+      battleLaunch = new BattleLaunchSpec("campaign", duelWeapon, mapId, musicEnabled && musicCached);
+      closeCampaignSetup();
+      root.removeView(graphicsSetup);
+      graphicsSetup = null;
+      loadingSave = payload;
+      loadingSaveId = id;
+      restoringGame = true;
+      createLoadingPanel();
+      webView.loadUrl(gameUrl());
+    } catch (Exception error) {
+      if (savedGamesView != null) savedGamesView.showError(error.getMessage());
+      else { returnToMainMenu(); graphicsSetup.showError(error.getMessage()); }
+    }
+  }
+
   private void launchGame() {
+    cancelCampaignHomeCheck();
+    dismissBriefing();
+    startupBriefingSession = "";
     closeRewards();
     closeSavedGames();
     dismissRewardReceipt();
@@ -375,7 +518,9 @@ public final class MainActivity extends Activity {
     loadingSaveId = "";
     restoringGame = false;
     battleLaunch = new BattleLaunchSpec(
-        matchMode, duelWeapon, mapId, musicEnabled && musicCached);
+        matchMode, duelWeapon, "ffa".equals(matchMode) ? ffaMapId : mapId, musicEnabled && musicCached, ffaDifficulty);
+    closeCampaignSetup();
+    closeFfaSetup();
     getPreferences(MODE_PRIVATE)
         .edit()
         .putString("map_id", mapId)
@@ -385,8 +530,8 @@ public final class MainActivity extends Activity {
       graphicsSetup = null;
     }
     createLoadingPanel();
-    rewardRunId = isDuelBattle() ? "" : battleSession;
-    if (!isDuelBattle()) {
+    rewardRunId = isTowersBattle() ? battleSession : "";
+    if (isTowersBattle()) {
       try { rewards.begin(rewardRunId, battleLaunch.mapId); }
       catch (RuntimeException error) {
         returnToMainMenu();
@@ -399,9 +544,10 @@ public final class MainActivity extends Activity {
 
   private void showRewards(boolean inGame) {
     if (rewardsView != null || rewardReceipt != null || rewards == null) return;
-    if (inGame && (isDuelBattle() || battleSession.isEmpty() || !battleOutcome.isEmpty()
+    if (inGame && (!isTowersBattle() || battleSession.isEmpty() || !battleOutcome.isEmpty()
         || loadingOverlay != null || graphicsSetup != null)) return;
     if (!inGame && graphicsSetup == null) return;
+    if (!inGame) cancelCampaignHomeCheck();
     final String selectedMap = inGame ? battleLaunch.mapId : graphicsSetup.selectedMap();
     MapLevelCatalog.Level level = MapLevelCatalog.get(this).level(selectedMap);
     rewardsView = new RewardsView(this, selectedMap, level.name, rewards.balance(), rewards.inventory(),
@@ -475,11 +621,11 @@ public final class MainActivity extends Activity {
     adGateDocument = graphicsSetup == null ? battleSession : "";
     adGateShow = show; adGateCancel = cancel; adReleasePending = false;
     adCover = new FrameLayout(this);
-    adCover.setBackgroundColor(Color.BLACK);
+    adCover.setBackgroundColor(TowersTheme.BACKGROUND);
     adCover.setClickable(true);
     adCover.setFocusableInTouchMode(true);
     TextView message = new TextView(this);
-    message.setText("Please wait…"); message.setTextColor(Color.WHITE);
+    message.setText("Please wait…"); message.setTextColor(TowersTheme.TEXT);
     message.setTextSize(16); message.setGravity(Gravity.CENTER);
     adCover.addView(message, new FrameLayout.LayoutParams(-1, -1));
     root.addView(adCover, new FrameLayout.LayoutParams(-1, -1));
@@ -515,7 +661,7 @@ public final class MainActivity extends Activity {
     if (graphicsSetup == null && webView != null) webView.requestFocus();
     if (adCreditNotice) {
       adCreditNotice = false;
-      if (rewardsView == null) Toast.makeText(this, "+10 crystals added", Toast.LENGTH_SHORT).show();
+      if (rewardsView == null) showAppNotice("+10 crystals added", false);
     }
     if (rewardedAds != null) rewardedAds.onFullScreenReleased();
   }
@@ -535,6 +681,7 @@ public final class MainActivity extends Activity {
 
   private void showSavedGames() {
     if (graphicsSetup == null || savedGamesView != null || rewardsView != null) return;
+    cancelCampaignHomeCheck();
     savedGamesView = new SavedGamesView(this, saveGames.list(), new SavedGamesView.Actions() {
       @Override public void load(String id) { loadSavedGame(id); }
       @Override public void delete(String id) {
@@ -562,6 +709,7 @@ public final class MainActivity extends Activity {
 
   private void loadSavedGame(String id) {
     if (graphicsSetup == null || savedGamesView == null || loadingOverlay != null) return;
+    cancelCampaignHomeCheck();
     try {
       JSONObject payload = saveGames.load(id), metadata = payload.getJSONObject("metadata");
       String savedMap = metadata.getString("mapId"), run = metadata.getString("session");
@@ -570,7 +718,6 @@ public final class MainActivity extends Activity {
       rewardRunId = run;
       rewardSession = run; // Cleanup can suspend the correct run if setup fails before a new document exists.
       closeSavedGames();
-      if (musicDownloadActive) { musicStore.cancel(); musicDownloadActive = false; }
       mapId = savedMap;
       matchMode = "towers";
       battleLaunch = new BattleLaunchSpec("towers", duelWeapon, mapId, musicEnabled && musicCached);
@@ -601,19 +748,22 @@ public final class MainActivity extends Activity {
 
   private void dismissRewardReceipt() {
     if (rewardReceipt != null) { root.removeView(rewardReceipt); rewardReceipt = null; }
+    if (graphicsSetup != null) graphicsSetup.setResultOverlayVisible(false);
   }
 
   private void finishTowersRewards(boolean won) {
+    if (isCampaignBattle()) return;
+    if (isFfaBattle()) { finishFfa(won); return; }
     if (isDuelBattle()) { showReplayPanel(won); return; }
     if (battleSession.isEmpty() || !battleOutcome.isEmpty() || battleLaunch == null) return;
     final String playedMap = battleLaunch.mapId;
     MapLevelCatalog.Level level = MapLevelCatalog.get(this).level(playedMap);
     RewardLedger.Receipt receipt;
     try { receipt = rewards.finish(rewardRunId, won, level.difficulty, level.rounds,
-        battleSession.equals(rewardTerminalFreshSession)); }
+        battleSession.equals(rewardTerminalFreshSession), completionMapGroups().get(level.difficulty)); }
     catch (RuntimeException error) {
       // Never display an invented credit when storage fails.
-      Toast.makeText(this, error.getMessage(), Toast.LENGTH_LONG).show();
+      showAppNotice(error.getMessage(), true);
       mapId = playedMap;
       returnToMainMenu();
       return;
@@ -625,10 +775,53 @@ public final class MainActivity extends Activity {
     // Unload the ended engine before showing Home. The stock loss/frontend
     // screen never becomes a destination, and the played map remains selected.
     returnToMainMenu();
+    int receiptBottomClearance = graphicsSetup == null ? dp(32)
+        : graphicsSetup.resultOverlayBottomClearance();
+    if (graphicsSetup != null) graphicsSetup.setResultOverlayVisible(true);
     rewardReceipt = new RewardReceiptView(this, won, level.name, level.difficulty,
         receipt.wave, receipt.total, receipt.earned, receipt.balance, receipt.reason,
-        this::dismissRewardReceipt);
+        receiptBottomClearance, this::dismissRewardReceipt);
     root.addView(rewardReceipt, new FrameLayout.LayoutParams(-1, -1));
+    rewardReceipt.requestFocus();
+    if (!won) {
+      BattleBriefingView view = new BattleBriefingView(this, true);
+      battleBriefing = view;
+      root.addView(view, new FrameLayout.LayoutParams(-1, -1));
+      view.showFor(3000, () -> fadeBriefing(view));
+    }
+  }
+
+  private void dismissBriefing() {
+    if (battleBriefing != null) {
+      battleBriefing.cancel();
+      root.removeView(battleBriefing);
+      battleBriefing = null;
+    }
+  }
+
+  private void fadeBriefing(BattleBriefingView expected) {
+    if (battleBriefing != expected) return;
+    expected.animate().alpha(0f).setDuration(180).withEndAction(() -> {
+      if (battleBriefing == expected) dismissBriefing();
+    }).start();
+  }
+
+  private void prepareStartupBriefing(String session) {
+    if (isDuelBattle() || isCampaignBattle() || isFfaBattle() || restoringGame) {
+      hideLoadingPanel(); webView.requestFocus(); return;
+    }
+    if (session.equals(startupBriefingSession)) return;
+    startupBriefingSession = session;
+    webView.evaluateJavascript("Promise.resolve(window.WarzoneBriefing?.prepare(" + JSONObject.quote(session)
+        + ")).then(ok=>BlockNightAndroid.startupBriefingReady(" + JSONObject.quote(session)
+        + ",ok===true)).catch(()=>BlockNightAndroid.startupBriefingReady(" + JSONObject.quote(session)
+        + ",false));true", null);
+  }
+
+  private void briefingFailed() {
+    showEngineFailure("The battlefield could not resume. Tap to return Home.");
+    if (loading != null) loading.setOnClickListener(v -> returnToMainMenu());
+    dismissBriefing();
   }
 
   private Set<String> selectedMusicTracks() {
@@ -643,7 +836,11 @@ public final class MainActivity extends Activity {
   private String gameUrl() {
     BattleLaunchSpec launch = battleLaunch;
     String url =
-        (launch.isDuel()
+        (launch.isCampaign() ? ORIGIN + "/warzone/mobile-campaign.html?blocknight=1&mode=campaign"
+            : launch.isFfa() ? ORIGIN + "/warzone/mobile-ffa.html?blocknight=1&mode=ffa&bnFfaDifficulty=" + launch.ffaDifficulty
+                + "&bnFfaBotType=" + launch.ffaBotType + "&bnFfaMap=" + launch.mapId
+                + (restoringGame ? "&bnFfaRestore=1" : "")
+            : launch.isDuel()
             ? ORIGIN + "/warzone/mobile-duel.html?blocknight=1&match_mode=duel&weapon="
                 + launch.duelWeapon
             : URL)
@@ -662,9 +859,13 @@ public final class MainActivity extends Activity {
     return battleLaunch != null && battleLaunch.isDuel();
   }
 
+  private boolean isCampaignBattle() { return battleLaunch != null && battleLaunch.isCampaign(); }
+  private boolean isFfaBattle() { return battleLaunch != null && battleLaunch.isFfa(); }
+  private boolean isTowersBattle() { return battleLaunch != null && "towers".equals(battleLaunch.matchMode); }
+
   private void createWebView() {
     webView = new EngineWebView(this);
-    webView.setBackgroundColor(Color.BLACK);
+    webView.setBackgroundColor(isDuelBattle() ? Color.BLACK : TowersTheme.BACKGROUND);
     webView.setOverScrollMode(View.OVER_SCROLL_NEVER);
     webView.setHorizontalScrollBarEnabled(false);
     webView.setVerticalScrollBarEnabled(false);
@@ -692,9 +893,17 @@ public final class MainActivity extends Activity {
     settings.setCacheMode(WebSettings.LOAD_NO_CACHE);
 
     webView.addJavascriptInterface(new EngineBridge(), "BlockNightAndroid");
+    WebViewAssetLoader.AssetsPathHandler guideAssets = new WebViewAssetLoader.AssetsPathHandler(this);
     assetLoader =
         new WebViewAssetLoader.Builder()
             .addPathHandler("/warzone/", new WarzoneAssetHandler())
+            .addPathHandler("/assets/", path -> {
+              WebResourceResponse response = guideAssets.handle(path);
+              // Help lives inside the isolated engine document. Its reader
+              // frame must opt into the same embedder policy to load at all.
+              if (response != null) response.setResponseHeaders(isolationHeaders());
+              return response;
+            })
             .build();
     configureIsolationAllowlist();
 
@@ -704,6 +913,15 @@ public final class MainActivity extends Activity {
           public WebResourceResponse shouldInterceptRequest(
               WebView view, WebResourceRequest request) {
             Uri uri = request.getUrl();
+            String videoPath = "/warzone/sequences/";
+            if (campaignVideos != null && "https".equalsIgnoreCase(uri.getScheme())
+                && "appassets.androidplatform.net".equalsIgnoreCase(uri.getHost())
+                && uri.getPath() != null && uri.getPath().startsWith(videoPath)) {
+              String range = null;
+              for (Map.Entry<String, String> header : request.getRequestHeaders().entrySet())
+                if ("Range".equalsIgnoreCase(header.getKey())) range = header.getValue();
+              return campaignVideos.response(uri.getPath().substring(videoPath.length()), request.getMethod(), range, isolationHeaders());
+            }
             String musicPath = "/warzone/optional/map-music/";
             if ("https".equalsIgnoreCase(uri.getScheme())
                 && "appassets.androidplatform.net".equalsIgnoreCase(uri.getHost())
@@ -724,7 +942,9 @@ public final class MainActivity extends Activity {
             Uri page = Uri.parse(url);
             if (!"appassets.androidplatform.net".equals(page.getHost())
                 || !("/warzone/mobile.html".equals(page.getPath())
-                    || "/warzone/mobile-duel.html".equals(page.getPath()))) return;
+                    || "/warzone/mobile-duel.html".equals(page.getPath())
+                    || "/warzone/mobile-ffa.html".equals(page.getPath())
+                    || "/warzone/mobile-campaign.html".equals(page.getPath()))) return;
             verifyEnginePrerequisites();
           }
         });
@@ -733,7 +953,8 @@ public final class MainActivity extends Activity {
           @Override
           public boolean onConsoleMessage(ConsoleMessage message) {
             String engineMessage = message.message();
-            if ((engineMessage.contains("BNWAVE:") || isDuelBattle() && engineMessage.contains("BNDUEL:"))
+            if ((engineMessage.contains("BNWAVE:") || isDuelBattle() && engineMessage.contains("BNDUEL:")
+                    || isFfaBattle() && engineMessage.contains("BNFFA:"))
                 && (engineMessage.contains("\"phase\":\"victory\"")
                     || engineMessage.contains("\"phase\":\"defeated\""))) {
               // Preserve a worker's explicit result before its subsequent quit
@@ -830,9 +1051,12 @@ public final class MainActivity extends Activity {
     rewardSetupFailed = false;
     rewardTerminalFreshSession = "";
     rewardInventoryFreshSession = "";
-    rewardSession = isDuelBattle() ? "" : battleSession;
+    rewardSession = isTowersBattle() ? battleSession : "";
     synchronized (musicPreferenceLock) {
       musicMapId = battleLaunch != null ? battleLaunch.mapId : mapId;
+      musicMode = battleLaunch != null ? battleLaunch.matchMode : "towers";
+      musicMissionId = isCampaignBattle() ? (loadingSave != null
+          ? loadingSave.optJSONObject("metadata").optString("nativeLevel", "CAM_1A") : "CAM_1A") : "";
       musicSession = isDuelBattle() ? "" : battleSession;
     }
     if (replayPanel != null) {
@@ -844,12 +1068,12 @@ public final class MainActivity extends Activity {
     if (loadingOverlay != null) root.removeView(loadingOverlay);
 
     loadingOverlay = new FrameLayout(this);
-    loadingOverlay.setBackgroundColor(0xFF0B151B);
+    loadingOverlay.setBackgroundColor(isDuelBattle() ? 0xFF0B151B : TowersTheme.BACKGROUND);
     // Loading taps must not reach the covered native lobby or battlefield.
     loadingOverlay.setClickable(true);
     loadingOverlay.setFocusable(true);
 
-    WarzoneSplashView artwork = new WarzoneSplashView(this);
+    WarzoneSplashView artwork = new WarzoneSplashView(this, !isDuelBattle());
     loadingOverlay.addView(
         artwork,
         new FrameLayout.LayoutParams(
@@ -860,21 +1084,21 @@ public final class MainActivity extends Activity {
     card.setGravity(Gravity.CENTER_VERTICAL);
     card.setPadding(dp(16), dp(12), dp(16), dp(12));
     GradientDrawable cardBackground = new GradientDrawable();
-    cardBackground.setColor(0xF2101F26);
+    cardBackground.setColor(isDuelBattle() ? 0xF2101F26 : TowersTheme.PANEL);
     cardBackground.setCornerRadius(dp(7));
-    cardBackground.setStroke(dp(1), 0xFF29414A);
+    if (isDuelBattle()) cardBackground.setStroke(dp(1), 0xFF29414A);
     card.setBackground(cardBackground);
 
     loadingSpinner = new ProgressBar(this, null, android.R.attr.progressBarStyleSmall);
     loadingSpinner.setIndeterminate(true);
-    loadingSpinner.getIndeterminateDrawable().setTint(0xFF8BD3CC);
+    loadingSpinner.getIndeterminateDrawable().setTint(isDuelBattle() ? 0xFF8BD3CC : TowersTheme.TEXT);
     LinearLayout.LayoutParams spinnerParams = new LinearLayout.LayoutParams(dp(18), dp(18));
     spinnerParams.rightMargin = dp(12);
     card.addView(loadingSpinner, spinnerParams);
 
     loading = new TextView(this);
     loading.setText("PREPARING THE BATTLEFIELD…");
-    loading.setTextColor(0xFFF0F3ED);
+    loading.setTextColor(isDuelBattle() ? 0xFFF0F3ED : TowersTheme.TEXT);
     loading.setTextSize(12);
     loading.setGravity(Gravity.CENTER_VERTICAL);
     loading.setLetterSpacing(0.04f);
@@ -970,14 +1194,16 @@ public final class MainActivity extends Activity {
     Log.e(TAG, "Warzone engine unavailable: " + detail);
     if (loading == null) return;
     if (loadingSpinner != null) loadingSpinner.setVisibility(View.GONE);
-    loading.setTextColor(0xFFFF8B7B);
+    loading.setTextColor(isDuelBattle() ? 0xFFFF8B7B : TowersTheme.TEXT);
     loading.setText(
         "WARZONE ENGINE CANNOT START\n\n"
-            + detail
-            + "\n\nThe packaged official engine was not modified.");
+            + detail);
   }
 
   private void installAutoLauncher() {
+    if (isCampaignBattle()) webView.evaluateJavascript(
+        "window.addEventListener('error',()=>{if(!window.LaunchedModule?.calledRun)"
+            + "BlockNightAndroid.engineFailed('Campaign could not start. Tap to return Home.');},{once:true});true", null);
     // A narrow official log category exposes authoritative game/frontend
     // transitions. It lets the HTML shell cover the frontend before it paints.
     webView.evaluateJavascript(
@@ -991,7 +1217,7 @@ public final class MainActivity extends Activity {
       webView.evaluateJavascript(
           "(() => {const original=constructWZModuleConfig;"
               + "constructWZModuleConfig=(args)=>{WZ_CONFIG_DIR_SUFFIX='"
-              + (isDuelBattle() ? "-duel-emulator-v22" : "-emulator-v22") + "';"
+              + (isCampaignBattle() ? "-campaign-emulator-v51" : isFfaBattle() ? "-ffa-emulator-v60" : isDuelBattle() ? "-duel-emulator-v22" : "-emulator-v22") + "';"
               + "const m=original(args);m.arguments.push('--debug=all');return m;};})()",
           null);
     }
@@ -1016,8 +1242,18 @@ public final class MainActivity extends Activity {
   }
 
   private void installTouchControls() {
-    String[] scripts = {
+    String[] scripts = isFfaBattle() ? new String[] {
+      "warzone-html-session.js", "warzone/ui/research-art.js", "warzone-terrain-picker.js",
+      "warzone-command-pages.js", "warzone/saved-games.js", "warzone-touch-controls.js",
+      "warzone-mobile-research.js", "warzone-intelligence.js", "warzone-ffa-hud.js"
+    } : isCampaignBattle() ? new String[] {
+      "warzone-html-session.js", "warzone/ui/research-art.js", "warzone-terrain-picker.js",
+      "warzone-command-pages.js", "warzone/saved-games.js", "warzone-touch-controls.js",
+      "warzone-mobile-research.js", "warzone-intelligence.js", "warzone-campaign-hud.js"
+    } : new String[] {
       "warzone-html-session.js",
+      "warzone/ui/research-art.js",
+      "warzone-towers-notices.js",
       "warzone-terrain-picker.js",
       "warzone-command-pages.js",
       "warzone/rewards.js",
@@ -1025,7 +1261,9 @@ public final class MainActivity extends Activity {
       "warzone/rewarded-ads.js",
       "warzone-touch-controls.js",
       "warzone-mobile-research.js",
-      isDuelBattle() ? "warzone-duel-ui.js" : "warzone-towers-wave-hud.js"
+      isDuelBattle() ? "warzone-duel-ui.js" : "warzone-towers-wave-hud.js",
+      "warzone/briefing.js",
+      "warzone-intelligence.js"
     };
     try (ByteArrayOutputStream output = new ByteArrayOutputStream()) {
       byte[] buffer = new byte[8192];
@@ -1039,7 +1277,9 @@ public final class MainActivity extends Activity {
         }
       }
       webView.evaluateJavascript(
-          (isDuelBattle()
+          (isFfaBattle() ? "window.__warzoneFfaMode=true;\n"
+              : isCampaignBattle() ? "window.__warzoneCampaignMode=true;\n"
+              : isDuelBattle()
               ? "window.__warzoneDuelConfig=window.__warzoneDuelConfig||Object.freeze({mode:'duel',humanBranch:'"
                   + battleLaunch.duelWeapon + "',botBranch:'" + battleLaunch.botWeapon() + "'});\n"
               : "")
@@ -1075,10 +1315,10 @@ public final class MainActivity extends Activity {
         LinearLayout retry = new LinearLayout(MainActivity.this);
         retry.setOrientation(LinearLayout.VERTICAL); retry.setGravity(Gravity.CENTER);
         TextView message = new TextView(MainActivity.this);
-        message.setText("The game is still resuming."); message.setTextColor(Color.WHITE); message.setTextSize(15);
+        message.setText("The game is still resuming."); message.setTextColor(TowersTheme.TEXT); message.setTextSize(15);
         retry.addView(message, new LinearLayout.LayoutParams(-2, -2));
-        Button resume = new Button(MainActivity.this);
-        resume.setText("Resume game"); resume.setAllCaps(false);
+        Button resume = RewardsView.action(MainActivity.this,
+            Typeface.createFromAsset(getAssets(), "warzone/ui/Oswald.ttf"), "Resume game", true);
         resume.setOnClickListener(v -> releaseAdScreen());
         retry.addView(resume, new LinearLayout.LayoutParams(-2, dp(48)));
         adCover.addView(retry, new FrameLayout.LayoutParams(-1, -1));
@@ -1209,7 +1449,96 @@ public final class MainActivity extends Activity {
     @JavascriptInterface
     public String savedGamePayload(String session) {
       JSONObject payload = loadingSave;
-      return session != null && session.equals(rewardSession) && payload != null ? payload.toString() : "{}";
+      return session != null && session.equals(isFfaBattle() ? battleSession : rewardSession) && payload != null ? payload.toString() : "{}";
+    }
+
+    @JavascriptInterface
+    public String ffaSave(String session, String metadataJSON, String filesJSON) {
+      try {
+        if (!isFfaBattle() || session == null || !session.equals(battleSession)
+            || graphicsSetup != null || mainMenuReturnPending || !battleOutcome.isEmpty()
+            || metadataJSON == null || metadataJSON.length() > 65536
+            || filesJSON == null || filesJSON.length() > 48 * 1024 * 1024)
+          throw new IOException("This FFA save is no longer active.");
+        JSONObject metadata = new JSONObject(metadataJSON);
+        FfaMapCatalog.MapInfo map = FfaMapCatalog.get(MainActivity.this).map(battleLaunch.mapId);
+        if (!"ffa".equals(metadata.optString("mode")) || !battleLaunch.mapId.equals(metadata.optString("mapId"))
+            || !battleLaunch.ffaDifficulty.equals(metadata.optString("difficulty"))
+            || !metadata.has("botType") || !battleLaunch.ffaBotType.equals(metadata.optString("botType"))
+            || map == null || !map.level.equals(metadata.optString("nativeLevel"))
+            || metadata.optInt("players", "emag".equals(map.id) ? 4 : -1) != map.players
+            || metadata.optInt("bots", "emag".equals(map.id) ? 3 : -1) != map.bots)
+          throw new IOException("The saved FFA match did not match.");
+        metadata.put("mapName", map.name).put("players", map.players).put("bots", map.bots);
+        String id = ffaSaves.save(metadata, new JSONObject(filesJSON));
+        return new JSONObject().put("ok", true).put("id", id).toString();
+      } catch (Exception error) {
+        try { return new JSONObject().put("ok", false).put("error", String.valueOf(error.getMessage())).toString(); }
+        catch (Exception ignored) { return "{\"ok\":false}"; }
+      }
+    }
+
+    @JavascriptInterface
+    public boolean ffaRestored(String session, String id, String stateJSON) {
+      try {
+        JSONObject payload = loadingSave;
+        if (!isFfaBattle() || session == null || !session.equals(battleSession)
+            || !id.equals(loadingSaveId) || payload == null) return false;
+        JSONObject metadata = payload.getJSONObject("metadata"), state = new JSONObject(stateJSON);
+        if (!state.optBoolean("ok") || !metadata.getString("session").equals(state.optString("session"))
+            || !battleLaunch.mapId.equals(state.optString("mapId"))
+            || !battleLaunch.mapId.equals(metadata.optString("mapId"))
+            || state.optInt("players", "emag".equals(battleLaunch.mapId) ? 4 : -1) != FfaMapCatalog.playerCount(battleLaunch.mapId)
+            || state.optInt("bots", "emag".equals(battleLaunch.mapId) ? 3 : -1) != FfaMapCatalog.playerCount(battleLaunch.mapId) - 1
+            || !metadata.getString("difficulty").equals(state.optString("difficulty"))
+            || !battleLaunch.ffaBotType.equals(BattleLaunchSpec.ffaBotType(metadata.optString("botType")))
+            || !state.has("botType") || !battleLaunch.ffaBotType.equals(state.optString("botType"))
+            || !metadata.getString("nativeLevel").equals(state.optString("nativeLevel"))
+            || state.optLong("gameTime", -1) < metadata.getLong("gameTime")) return false;
+        loadingSave = null;
+        return true;
+      } catch (Exception error) { Log.w(TAG, "FFA restoration could not verify", error); return false; }
+    }
+
+    @JavascriptInterface
+    public String campaignSavePayload(String session) {
+      JSONObject payload = loadingSave;
+      return isCampaignBattle() && session != null && session.equals(battleSession) && payload != null
+          ? payload.toString() : "{}";
+    }
+
+    @JavascriptInterface
+    public String storeCampaignSave(String session, String metadataJSON, String filesJSON) {
+      try {
+        if (!isCampaignBattle() || session == null || !session.equals(battleSession)
+            || graphicsSetup != null || mainMenuReturnPending || metadataJSON == null || metadataJSON.length() > 65536
+            || filesJSON == null || filesJSON.length() > 48 * 1024 * 1024)
+          throw new IOException("This campaign save is no longer active.");
+        JSONObject metadata = new JSONObject(metadataJSON);
+        if (!"campaign".equals(metadata.optString("mode"))) throw new IOException("Invalid campaign save.");
+        String level = metadata.getString("nativeLevel");
+        if (!level.matches("[A-Za-z0-9_-]{1,19}")) throw new IOException("Invalid campaign mission.");
+        metadata.put("mapName", BattleLaunchSpec.campaignChapter(level)).put("mapId", level).put("difficulty", "");
+        String id = campaignSaves.save(metadata, new JSONObject(filesJSON));
+        return new JSONObject().put("ok", true).put("id", id).toString();
+      } catch (Exception error) {
+        try { return new JSONObject().put("ok", false).put("error", String.valueOf(error.getMessage())).toString(); }
+        catch (Exception ignored) { return "{\"ok\":false}"; }
+      }
+    }
+
+    @JavascriptInterface
+    public boolean campaignSaveRestored(String session, String id, String stateJSON) {
+      try {
+        JSONObject payload = loadingSave;
+        if (!isCampaignBattle() || session == null || !session.equals(battleSession)
+            || !id.equals(loadingSaveId) || payload == null) return false;
+        JSONObject metadata = payload.getJSONObject("metadata"), state = new JSONObject(stateJSON);
+        if (!state.optBoolean("ok") || !metadata.getString("nativeLevel").equals(state.optString("nativeLevel"))
+            || state.optLong("gameTime", -1) < metadata.getLong("gameTime")) return false;
+        loadingSave = null;
+        return true;
+      } catch (Exception error) { Log.w(TAG, "Campaign restoration could not verify", error); return false; }
     }
 
     @JavascriptInterface
@@ -1334,16 +1663,17 @@ public final class MainActivity extends Activity {
 
     @JavascriptInterface
     public void showNotice(String message) {
-      runOnUiThread(() -> Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show());
+      runOnUiThread(() -> showAppNotice(message, false));
     }
 
     @JavascriptInterface
     public void engineReady() {
       runOnUiThread(() -> {
         if (getIntent().getBooleanExtra("engine_debug", false)) hideLoadingPanel();
-        updateLoadingStatus(isDuelBattle() ? "PREPARING YOUR MATCH…" : "PREPARING YOUR DEFENCES…");
+        updateLoadingStatus(isCampaignBattle() ? "OPENING THE CAMPAIGN…" : isDuelBattle() ? "PREPARING YOUR MATCH…" : "PREPARING YOUR DEFENCES…");
         webView.requestFocus();
-        if (restoringGame) { startupAutomationStarted = true; awaitBattlefieldReady(0); }
+        if (isCampaignBattle()) { startupAutomationStarted = true; awaitCampaignCanvas(0, battleSession); }
+        else if (restoringGame) { startupAutomationStarted = true; awaitBattlefieldReady(0); }
         else beginStartupAutomation();
         if (touchTestMode) {
           webView.postDelayed(MainActivity.this::selectAllUnitsForTouchTest, 30000);
@@ -1364,11 +1694,43 @@ public final class MainActivity extends Activity {
     }
 
     @JavascriptInterface
+    public void startupBriefingReady(String session, boolean ready) {
+      runOnUiThread(() -> {
+        if (session == null || !session.equals(battleSession) || !session.equals(startupBriefingSession)
+            || graphicsSetup != null || loadingOverlay == null || isFinishing() || isDestroyed()) return;
+        if (!ready) { briefingFailed(); return; }
+        if (battleBriefing != null) return;
+        BattleBriefingView view = new BattleBriefingView(MainActivity.this, false);
+        battleBriefing = view;
+        root.addView(view, new FrameLayout.LayoutParams(-1, -1));
+        view.showFor(500, () -> {
+          if (battleBriefing != view || !session.equals(battleSession)) return;
+          webView.evaluateJavascript("Promise.resolve(window.WarzoneBriefing.release(" + JSONObject.quote(session)
+              + ")).then(ok=>BlockNightAndroid.startupBriefingReleased(" + JSONObject.quote(session)
+              + ",ok===true)).catch(()=>BlockNightAndroid.startupBriefingReleased(" + JSONObject.quote(session)
+              + ",false));true", null);
+        });
+      });
+    }
+
+    @JavascriptInterface
+    public void startupBriefingReleased(String session, boolean ready) {
+      runOnUiThread(() -> {
+        if (session == null || !session.equals(battleSession) || !session.equals(startupBriefingSession)
+            || graphicsSetup != null || battleBriefing == null || isFinishing() || isDestroyed()) return;
+        if (!ready) { briefingFailed(); return; }
+        hideLoadingPanel();
+        webView.requestFocus();
+        fadeBriefing(battleBriefing);
+      });
+    }
+
+    @JavascriptInterface
     public void engineFailed(String detail) {
       runOnUiThread(() -> {
         showEngineFailure(detail);
-        Toast.makeText(MainActivity.this, "Warzone engine failed: " + detail, Toast.LENGTH_LONG)
-            .show();
+        if (loading != null) loading.setOnClickListener(v -> returnToMainMenu());
+        showAppNotice("Warzone engine failed: " + detail, true);
       });
     }
 
@@ -1422,7 +1784,7 @@ public final class MainActivity extends Activity {
     Typeface dialogFace = Typeface.createFromAsset(getAssets(), "warzone/ui/Oswald.ttf");
     TextView title = new TextView(this);
     title.setText("Return to main menu?");
-    title.setTextColor(Color.WHITE);
+    title.setTextColor(isDuelBattle() ? Color.WHITE : TowersTheme.TEXT);
     title.setTextSize(18);
     title.setTypeface(dialogFace);
     title.setPadding(dp(20), dp(18), dp(20), dp(14));
@@ -1456,10 +1818,9 @@ public final class MainActivity extends Activity {
       }
     });
     dialog.show();
-    // Keep the treatment local to this confirmation; other native screens keep
-    // their existing theme and all navigation listeners above remain native.
+    // Presentation only: all navigation listeners above remain native.
     GradientDrawable surface = new GradientDrawable();
-    surface.setColor(Color.BLACK);
+    surface.setColor(isDuelBattle() ? Color.BLACK : TowersTheme.PANEL);
     surface.setCornerRadius(dp(6));
     if (isDuelBattle()) surface.setStroke(dp(1), 0xFF252B2F);
     if (dialog.getWindow() != null) {
@@ -1473,7 +1834,9 @@ public final class MainActivity extends Activity {
     }
     for (int which : new int[] {AlertDialog.BUTTON_NEGATIVE, AlertDialog.BUTTON_POSITIVE}) {
       Button button = dialog.getButton(which);
-      button.setTextColor(Color.WHITE);
+      boolean primary = which == AlertDialog.BUTTON_POSITIVE;
+      if (isDuelBattle()) button.setTextColor(Color.WHITE);
+      else button.setTextColor(TowersTheme.buttonText(primary));
       button.setTextSize(14);
       button.setTypeface(dialogFace);
       button.setAllCaps(false);
@@ -1483,11 +1846,14 @@ public final class MainActivity extends Activity {
       button.setMinimumWidth(dp(88));
       button.setPadding(dp(16), 0, dp(16), 0);
       GradientDrawable buttonSurface = new GradientDrawable();
-      buttonSurface.setColor(which == AlertDialog.BUTTON_POSITIVE ? 0xFF202426 : Color.TRANSPARENT);
+      buttonSurface.setColor(isDuelBattle() ? (primary ? 0xFF202426 : Color.TRANSPARENT)
+          : primary ? TowersTheme.PRIMARY : TowersTheme.CONTROL);
       buttonSurface.setCornerRadius(dp(4));
       button.setBackgroundTintList(null);
       button.setBackground(
-          new RippleDrawable(ColorStateList.valueOf(0x1AFFFFFF), buttonSurface, null));
+          new RippleDrawable(ColorStateList.valueOf(isDuelBattle() ? 0x1AFFFFFF
+              : primary ? TowersTheme.PRIMARY_RIPPLE : TowersTheme.RIPPLE), isDuelBattle() ? buttonSurface
+                  : TowersTheme.control(this, primary ? TowersTheme.PRIMARY : TowersTheme.CONTROL, 4), null));
       ViewGroup.LayoutParams params = button.getLayoutParams();
       if (params instanceof ViewGroup.MarginLayoutParams) {
         ((ViewGroup.MarginLayoutParams) params).setMarginStart(dp(8));
@@ -1497,12 +1863,19 @@ public final class MainActivity extends Activity {
   }
 
   private void returnToMainMenu() {
+    final boolean returnToTowersMap = graphicsSetup == null && isTowersBattle();
+    final boolean returnToFfa = graphicsSetup == null && isFfaBattle();
+    cancelCampaignHomeCheck();
+    dismissBriefing();
+    startupBriefingSession = "";
     closeRewards();
     closeSavedGames();
+    closeCampaignSetup();
+    closeFfaSetup();
     dismissRewardReceipt();
     if (rewards != null && !rewardSession.isEmpty()) {
       try { rewards.abandon(rewardRunId, rewardSession.equals(rewardInventoryFreshSession)); }
-      catch (RuntimeException error) { Toast.makeText(this, error.getMessage(), Toast.LENGTH_LONG).show(); }
+      catch (RuntimeException error) { showAppNotice(error.getMessage(), true); }
     }
     rewardSession = "";
     rewardRunId = "";
@@ -1525,6 +1898,15 @@ public final class MainActivity extends Activity {
     webView.stopLoading();
     webView.loadUrl("about:blank");
     if (graphicsSetup == null) showGraphicsSetup();
+    if (returnToTowersMap) graphicsSetup.showTowersMap();
+    if (returnToFfa) showFfaSetup();
+  }
+
+  private void finishFfa(boolean won) {
+    if (battleSession.isEmpty() || !battleOutcome.isEmpty()) return;
+    battleOutcome = won ? "victory" : "defeated";
+    returnToMainMenu();
+    showAppNotice(won ? "Victory — you won the free for all." : "Defeat — your forces were eliminated.", false);
   }
 
   private void showBattleExitPanel() {
@@ -1538,10 +1920,10 @@ public final class MainActivity extends Activity {
     replayPanel = exit;
     exit.setText((isDuelBattle() ? "WARZONE 1v1" : "WARZONE TOWERS")
         + "\n\nBATTLE ENDED\n\nTap to return to the start screen");
-    exit.setTextColor(0xFFE2ECE8);
+    exit.setTextColor(isDuelBattle() ? 0xFFE2ECE8 : TowersTheme.TEXT);
     exit.setTextSize(22);
     exit.setGravity(Gravity.CENTER);
-    exit.setBackgroundColor(0xFF070F13);
+    exit.setBackgroundColor(isDuelBattle() ? 0xFF070F13 : TowersTheme.BACKGROUND);
     exit.setClickable(true);
     exit.setOnClickListener(view -> {
       root.removeView(view);
@@ -1572,10 +1954,10 @@ public final class MainActivity extends Activity {
     TextView replay = new TextView(this);
     replayPanel = replay;
     replay.setText(replayText(won));
-    replay.setTextColor(0xFFF0B43C);
+    replay.setTextColor(isDuelBattle() ? 0xFFF0B43C : TowersTheme.TEXT);
     replay.setTextSize(22);
     replay.setGravity(Gravity.CENTER);
-    replay.setBackgroundColor(0xF7030705);
+    replay.setBackgroundColor(isDuelBattle() ? 0xF7030705 : TowersTheme.BACKGROUND);
     replay.setClickable(true);
     replay.setOnClickListener(view -> {
       root.removeView(view);
@@ -1613,6 +1995,7 @@ public final class MainActivity extends Activity {
    * the Limits/Ready controls on high-resolution devices.
    */
   private void beginStartupAutomation() {
+    if (isCampaignBattle()) { startupAutomationStarted = true; awaitCampaignCanvas(0, battleSession); return; }
     if (startupAutomationStarted || webView == null || isFinishing()) return;
     startupAutomationStarted = true;
     final String startupSession = battleSession;
@@ -1639,6 +2022,21 @@ public final class MainActivity extends Activity {
         1200);
   }
 
+  private void awaitCampaignCanvas(int attempt, String session) {
+    if (webView == null || isFinishing() || !session.equals(battleSession) || graphicsSetup != null) return;
+    webView.evaluateJavascript("(()=>{const n=window.__warzoneCampaign?.report?.().nativeState;"
+        + "return Boolean(window.LaunchedModule?.calledRun && document.getElementById('canvas')?.width>0 "
+        + "&& (n?.video||n?.playing) && !window.WarzoneSavedGames?.restoring);})()", result -> {
+      if (!session.equals(battleSession) || graphicsSetup != null) return;
+      if ("true".equals(result)) { hideLoadingPanel(); webView.requestFocus(); }
+      else if (attempt < 240) webView.postDelayed(() -> awaitCampaignCanvas(attempt + 1, session), 250);
+      else {
+        showEngineFailure("Campaign did not become ready. Tap to return Home.");
+        if (loading != null) loading.setOnClickListener(v -> returnToMainMenu());
+      }
+    });
+  }
+
   private void decreaseVtolLimit(int remaining) {
     if (remaining <= 0) {
       updateLoadingStatus("DEPLOYING TO THE BATTLEFIELD…");
@@ -1650,7 +2048,7 @@ public final class MainActivity extends Activity {
           () ->
               evaluateTouchTapThen(
                   585,
-                  isDuelBattle() ? 30 : 30
+                  isDuelBattle() || isFfaBattle() ? 30 : 30
                       + 40 * MapLevelCatalog.get(this).level(battleLaunch.mapId).humanPosition,
                   "Ready",
                   1500,
@@ -1661,7 +2059,7 @@ public final class MainActivity extends Activity {
   }
 
   private void finishStartupAutomation() {
-    updateLoadingStatus(isDuelBattle() ? "PREPARING THE MATCH…" : "PREPARING THE FIRST WAVE…");
+    updateLoadingStatus(isDuelBattle() || isFfaBattle() ? "PREPARING THE MATCH…" : "PREPARING THE FIRST WAVE…");
     awaitBattlefieldReady(0);
   }
 
@@ -1673,9 +2071,9 @@ public final class MainActivity extends Activity {
     if (webView == null || isFinishing() || !expectedSession.equals(battleSession) || graphicsSetup != null) return;
     String script =
         "(() => {const r=window."
-            + (isDuelBattle() ? "__warzoneDuel" : "__warzoneTowersWaves") + "?.report?.();"
+            + (isFfaBattle() ? "__warzoneFfa" : isDuelBattle() ? "__warzoneDuel" : "__warzoneTowersWaves") + "?.report?.();"
             + "return Boolean(document.getElementById('canvas')"
-            + "&&r?.snapshot?.mode==='" + (isDuelBattle() ? "duel" : "tower-defense") + "');})()";
+            + "&&r?.snapshot?.mode==='" + (isFfaBattle() ? "ffa" : isDuelBattle() ? "duel" : "tower-defense") + "');})()";
     webView.evaluateJavascript(
         script,
         result -> {
@@ -1700,7 +2098,7 @@ public final class MainActivity extends Activity {
     if (webView == null || isFinishing()) return;
     // Establish this map's battlefield-facing view while the splash still covers
     // the canvas. Waves and BASE must never change the camera direction.
-    if (!restoringGame) faceOpponent();
+    if (!restoringGame && !isFfaBattle()) faceOpponent();
     showCombatHud();
     awaitInitialCamera(0);
   }
@@ -1714,14 +2112,13 @@ public final class MainActivity extends Activity {
         || expectedSession.isEmpty() || !expectedSession.equals(battleSession) || rewardSetupFailed) return;
     webView.evaluateJavascript(
         "Boolean(window.__kalaWarzoneTouch?.report?.().cameraFacingPending===false"
-            + (isDuelBattle()
+            + (isFfaBattle() ? "&&window.WarzoneSavedGames?.ready===true" : isDuelBattle()
                 ? "&&window.__warzoneDuel?.report?.().cameraRequested&&window.__warzoneDuel?.report?.().cameraReady"
                 : "&&window.WarzoneRewards?.ready===true") + ")",
         result -> {
           if (!expectedSession.equals(battleSession) || graphicsSetup != null || rewardSetupFailed) return;
           if ("true".equals(result)) {
-            hideLoadingPanel();
-            webView.requestFocus();
+            prepareStartupBriefing(expectedSession);
           } else if (attempt < 60) {
             webView.postDelayed(() -> awaitInitialCamera(attempt + 1, expectedSession), 250);
           } else {
@@ -1812,21 +2209,11 @@ public final class MainActivity extends Activity {
 
   private String mapMusicState() {
     try {
-      String id = musicMapId;
-      id = MapLevelCatalog.normalizeId(id);
-      String trackId = mapMusicIndex.track(id);
-      MusicTrackCatalog.Track track = musicCatalog.find(trackId);
-      boolean cached = musicStore != null && musicStore.readyFile() != null;
-      JSONObject value = new JSONObject();
-      value.put("cached", cached);
-      value.put("enabled", cached && getPreferences(MODE_PRIVATE).getBoolean("music_enabled", false));
-      value.put("suspended", musicSuspended);
-      value.put("mapId", id);
-      value.put("trackId", trackId);
-      value.put("title", track.title);
-      value.put("author", track.author);
-      value.put("url", ORIGIN + "/warzone/optional/map-music/" + Uri.encode(trackId, "/"));
-      return value.toString();
+      boolean cached = musicStore != null && musicStore.ready();
+      synchronized (musicPreferenceLock) {
+        return mapMusicIndex.stateJson(musicMode, musicMapId, musicMissionId, cached,
+            cached && getPreferences(MODE_PRIVATE).getBoolean("music_enabled", true), musicSuspended, ORIGIN);
+      }
     } catch (Exception error) {
       Log.w(TAG, "Map music metadata unavailable", error);
       return "{\"cached\":false,\"enabled\":false,\"suspended\":true,\"mapId\":\"td2\",\"trackId\":\"\","
@@ -1836,15 +2223,14 @@ public final class MainActivity extends Activity {
 
   private WebResourceResponse mapMusicResponse(WebResourceRequest request, String id) {
     MapMusicIndex.Slice track = mapMusicIndex == null ? null : mapMusicIndex.slice(id);
-    File archive = musicStore == null ? null : musicStore.readyFile();
-    if (track != null && archive != null) {
+    if (track != null && musicStore != null && musicStore.ready()) {
       String range = null;
       for (Map.Entry<String, String> header : request.getRequestHeaders().entrySet())
         if ("Range".equalsIgnoreCase(header.getKey())) range = header.getValue();
       try {
-        return MusicTrackResponse.open(archive, track, request.getMethod(), range, isolationHeaders());
+        return MusicTrackResponse.open(musicStore, track, request.getMethod(), range, isolationHeaders());
       } catch (IOException error) {
-        Log.w(TAG, "Optional music track unavailable", error);
+        Log.w(TAG, "Bundled music track unavailable", error);
       }
     }
     Map<String, String> headers = isolationHeaders();
@@ -1879,15 +2265,14 @@ public final class MainActivity extends Activity {
       }
       try {
         if ("optional/music-v1.data".equals(path)) {
-          File archive = musicStore == null ? null : musicStore.readyFile();
-          if (archive == null) return response404(path);
+          if (musicStore == null || !musicStore.ready()) return response404(path);
           return new WebResourceResponse(
               "application/octet-stream",
               null,
               200,
               "OK",
               isolationHeaders(),
-              new FileInputStream(archive));
+              musicStore.openArchive());
         }
         if (path.endsWith(".data")
             || path.endsWith(".wasm")
@@ -1897,7 +2282,9 @@ public final class MainActivity extends Activity {
         InputStream stream = getAssets().open("warzone/" + path);
         Map<String, String> headers = isolationHeaders();
         if ("index.html".equals(path) || "mobile.html".equals(path)
-            || "index-duel.html".equals(path) || "mobile-duel.html".equals(path)) {
+            || "index-duel.html".equals(path) || "mobile-duel.html".equals(path)
+            || "index-ffa.html".equals(path) || "mobile-ffa.html".equals(path)
+            || "index-campaign.html".equals(path) || "mobile-campaign.html".equals(path)) {
           headers.put("Cross-Origin-Opener-Policy", "same-origin");
           headers.put("Document-Isolation-Policy", "isolate-and-require-corp");
         }
@@ -1994,6 +2381,47 @@ public final class MainActivity extends Activity {
     return "application/octet-stream";
   }
 
+  /** App-owned feedback shares the Towers palette and never captures game input. */
+  private void showAppNotice(String message, boolean longer) {
+    if (message == null || message.isEmpty() || isFinishing() || isDestroyed()) return;
+    if (isDuelBattle() || root == null) {
+      Toast.makeText(this, message, longer ? Toast.LENGTH_LONG : Toast.LENGTH_SHORT).show();
+      return;
+    }
+    clearAppNotice();
+    TextView notice = new TextView(this);
+    appNotice = notice;
+    notice.setTextColor(TowersTheme.TEXT);
+    notice.setTextSize(14);
+    notice.setTypeface(Typeface.create("sans-serif-condensed", Typeface.NORMAL));
+    notice.setIncludeFontPadding(false);
+    notice.setPadding(dp(12), dp(8), dp(12), dp(8));
+    notice.setMaxWidth(Math.max(dp(80), getResources().getDisplayMetrics().widthPixels - dp(24)));
+    notice.setClickable(false);
+    notice.setFocusable(false);
+    notice.setAccessibilityLiveRegion(View.ACCESSIBILITY_LIVE_REGION_POLITE);
+    GradientDrawable background = new GradientDrawable();
+    background.setColor(TowersTheme.PANEL);
+    background.setCornerRadius(dp(6));
+    notice.setBackground(background);
+    FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(-2, -2,
+        Gravity.TOP | Gravity.CENTER_HORIZONTAL);
+    params.topMargin = dp(64);
+    params.leftMargin = dp(12);
+    params.rightMargin = dp(12);
+    root.addView(notice, params);
+    notice.setText(message);
+    root.postDelayed(dismissAppNotice, longer ? 3500 : 2000);
+  }
+
+  private void clearAppNotice() {
+    if (root != null) {
+      root.removeCallbacks(dismissAppNotice);
+      if (appNotice != null) root.removeView(appNotice);
+    }
+    appNotice = null;
+  }
+
   private void immersive() {
     getWindow()
         .getDecorView()
@@ -2003,7 +2431,9 @@ public final class MainActivity extends Activity {
                 | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                | (isDuelBattle() ? 0 : View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+                    | View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR));
   }
 
   @Override
@@ -2014,6 +2444,9 @@ public final class MainActivity extends Activity {
 
   @Override
   protected void onPause() {
+    if (hubView != null) hubView.pause();
+    cancelCampaignHomeCheck();
+    clearAppNotice();
     activityResumed = false;
     if (rewardedAds != null) rewardedAds.onPause();
     musicSuspended = true;
@@ -2024,6 +2457,7 @@ public final class MainActivity extends Activity {
   @Override
   protected void onResume() {
     super.onResume();
+    if (hubView != null) hubView.resume();
     activityResumed = true;
     musicSuspended = adCover != null;
     mapMusicLifecycle(musicSuspended ? "suspend" : "resume");
@@ -2033,6 +2467,12 @@ public final class MainActivity extends Activity {
 
   @Override
   protected void onDestroy() {
+    closeHub();
+    closeGuide();
+    cancelCampaignHomeCheck();
+    if (campaignVideos != null) campaignVideos.close();
+    clearAppNotice();
+    dismissBriefing();
     if (rewardedAds != null) rewardedAds.destroy();
     mapMusicLifecycle("dispose");
     dismissMainMenuDialog();
@@ -2056,7 +2496,7 @@ public final class MainActivity extends Activity {
 
   private boolean gameBackWindow() {
     return webView != null && graphicsSetup == null && loadingOverlay == null
-        && replayPanel == null && musicSetup == null;
+        && replayPanel == null;
   }
 
   private boolean isKeyboardVisible() {
@@ -2114,8 +2554,20 @@ public final class MainActivity extends Activity {
 
   @Override
   public void onBackPressed() {
+    if (hubView != null) {
+      hubView.back();
+      return;
+    }
+    if (guideView != null) {
+      guideView.back();
+      return;
+    }
+    if (battleBriefing != null) return;
     if (adCover != null) return;
+    if (campaignHomeBusy) { cancelCampaignHomeCheck(); return; }
     if (savedGamesView != null) { closeSavedGames(); return; }
+    if (campaignSetup != null) { closeCampaignSetup(); return; }
+    if (ffaSetup != null) { closeFfaSetup(); return; }
     if (rewardsView != null) { closeRewards(); return; }
     if (rewardReceipt != null) { dismissRewardReceipt(); return; }
     if (mainMenuDialog != null) {
@@ -2127,8 +2579,8 @@ public final class MainActivity extends Activity {
       hideKeyboard();
       return;
     }
-    if (musicSetup != null) {
-      closeMusicSetup();
+    if (graphicsSetup != null && graphicsSetup.handleHomeBack()) {
+      cancelCampaignHomeCheck();
       return;
     }
     if (webView != null && graphicsSetup == null && loadingOverlay == null && replayPanel == null) {

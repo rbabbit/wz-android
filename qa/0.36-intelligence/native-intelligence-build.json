@@ -1,0 +1,50 @@
+{
+  "version": "0.36",
+  "passed": true,
+  "emulatorUsed": false,
+  "nativeBuildPerformed": true,
+  "nativeFullFreshBuildPerformed": false,
+  "compiledObjects": [
+    "src/CMakeFiles/warzone2100.dir/hci.cpp.o"
+  ],
+  "relinkedNativeEngine": true,
+  "method": "Verified v0.35 source cache; one hci.cpp compile and one matched native link",
+  "cachePath": "/home/punkech/wz-blueprint-20261107",
+  "command": [
+    "bash",
+    "-c",
+    "source \"$1/emsdk/emsdk_env.sh\" && cmake --build \"$1/build\" --target warzone2100 --parallel 4",
+    "native-intelligence-036",
+    "/home/punkech/wz-blueprint-20261107"
+  ],
+  "originalBuildRecipeSHA256": "6f3835c7eb8441c216f7e0b056affe22b34eb60e2985341029c866ca75e9bc26",
+  "sourceOverlay": "archive/native-intelligence-0.36/source-overlay.json",
+  "sourceOverlaySHA256": "deef27da4497e0d3ace3ee41a514ac5433f429d867006be727a1d1442cfbe378",
+  "sourceOverlays": {
+    "display3d.cpp": "3b5c1a41144011805819d15e9bfac6f1289d726da276433bfeb237904c0fa15f",
+    "research.cpp": "06b8999191bb0160e6b73c268f8ddd69347102133ecc221aee23504973dc918a",
+    "keybind.cpp": "5730cf9a2b791a6a437f4e0da040e9dbb75e8befb48dc02caefb1a8e824355ed",
+    "hci.cpp": "9db6bef46703c3975d920a23cc071ea46ab938a3972204ca5325440e8e66e842"
+  },
+  "logSHA256": "715023ec36a8357d59ad1511b1529643a5693db0444407c4bb72501b2ad179a4",
+  "recordedUTC": "2026-11-10T11:24:06.585441+00:00",
+  "raw": [
+    {
+      "file": "warzone2100.js",
+      "sha256": "cfdd813c040f55c759cdc38835f57d6e91325165946267d28ae3efc1f0c2d032",
+      "bytes": 725723
+    },
+    {
+      "file": "warzone2100.wasm",
+      "sha256": "b7d117295d901abf96cafdf8a4c780a56007b4e2310267897395419d455a3503",
+      "bytes": 13492672
+    }
+  ],
+  "priorCompileAttempt": {
+    "successful": false,
+    "nativeRuntimeInstalled": false,
+    "reason": "Missing piemode.h declaration of renderer UI origin; corrected before the successful build",
+    "log": "qa/0.36-intelligence/native-intelligence-first-compile-missing-header.log",
+    "logSHA256": "11492891e59b90dea3de380cd033a43e0b149346a2919c5368a73f67aa332cbe"
+  }
+}

@@ -2,9 +2,9 @@ plugins {
     id("com.android.application")
 }
 
-// Keep the publisher identity for its own consent message. Development builds
-// request Google's sample rewarded unit; live serving remains an explicit opt-in.
-val admobLiveAds = providers.gradleProperty("admobLiveAds").map(String::toBoolean).orElse(false).get()
+// The user authorized publisher rewarded ads for this delivery. For development
+// or device testing, explicitly use -PadmobLiveAds=false for Google's sample unit.
+val admobLiveAds = providers.gradleProperty("admobLiveAds").map(String::toBoolean).orElse(true).get()
 
 android {
     namespace = "com.rbabbit.blocknight.warzone"
@@ -14,8 +14,8 @@ android {
         applicationId = "com.rbabbit.warzonetowers.lab"
         minSdk = 26
         targetSdk = 36
-        versionCode = 31
-        versionName = "0.31"
+        versionCode = 77
+        versionName = "0.77"
         manifestPlaceholders["admobAppId"] = "ca-app-pub-3430279660625393~3119801475"
         buildConfigField("boolean", "ADMOB_TEST_ADS", (!admobLiveAds).toString())
         buildConfigField("String", "ADMOB_REWARDED_AD_UNIT_ID", "\"" + (if (admobLiveAds)

@@ -1,0 +1,50 @@
+{
+  "version": "0.41",
+  "passed": true,
+  "emulatorUsed": false,
+  "androidRuntimeExecuted": false,
+  "gameplayVerified": false,
+  "scope": "Source and mocked native-field normalization only; no native execution, actual queue or rendered-thumbnail verification.",
+  "checksPassed": 5,
+  "checks": [
+    {
+      "name": "Constructor recovers the exact native Spade and restores a matching managed queue count",
+      "passed": true
+    },
+    {
+      "name": "Repair, sensor, ECM, command-brain and cyborg system designs keep native equipment without name guesses",
+      "passed": true
+    },
+    {
+      "name": "Weapon designs retain every actual weapon even when their display name resembles a truck",
+      "passed": true
+    },
+    {
+      "name": "Stale subject identity, mismatched native design and unknown future native orders stay conservative",
+      "passed": true
+    },
+    {
+      "name": "Native delta reuses convTemplate within the existing Towers gate and leaves global convDroid unchanged",
+      "passed": true
+    }
+  ],
+  "sources": [
+    {
+      "path": "scenario/warzone-towers-commands.js",
+      "sha256": "b3cebe1f7f921ebd2daa9034b0ec21402a3c655ec1d4542d3af8ef7bfa4fe358"
+    },
+    {
+      "path": "archive/native-production-0.41/production-helper.inc",
+      "sha256": "6b5639725b47d6965efb78338c68f154e550adedd478ac02b3c9827fe298b1ef"
+    },
+    {
+      "path": "archive/native-production-0.41/quickjs_backend.cpp",
+      "sha256": "a3096beab0f866dd53176fe4d705ed1eee9da50da2e322608efcec2b57f80072"
+    },
+    {
+      "path": "tools/check-production-current-041.cjs",
+      "sha256": "692dd4dfd4f03ea7af40adf73f00d3138c32613ffba03a836409ffc2e3e89040"
+    }
+  ],
+  "recordedUTC": "2026-11-10T19:17:23.491Z"
+}

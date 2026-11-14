@@ -1,59 +1,59 @@
 /* Compact Towers TECH. Duel never loads this theme or receives this class. */
 @font-face{font-family:TowersResearch;src:url("Oswald.ttf") format("truetype");font-display:swap}
-#blocknight-research-shell.wt-towers-research{--bg:#081a20f5;--panel:transparent;--line:transparent;--cyan:#8bd3cc;--green:#a0cdb0;--amber:#efbd58;inset:auto;left:10px;top:10px;width:var(--wt-compact-window-width,min(740px,66vw));height:auto;max-height:calc(100dvh - 84px);display:flex;flex-direction:column;overflow:visible;border:0;border-radius:5px;background:var(--bg);color:#e2edec;font:13px/1.35 system-ui,sans-serif;box-shadow:none;isolation:isolate}
+#blocknight-research-shell.wt-towers-research{--bg:var(--towers-panel,#111111);--panel:transparent;--line:transparent;--cyan:var(--towers-text,#f4f4f4);--green:var(--towers-text,#f4f4f4);--amber:var(--towers-text,#f4f4f4);inset:auto;left:10px;top:10px;width:var(--wt-compact-window-width,min(740px,66vw));height:calc(100dvh - 84px);max-height:calc(100dvh - 84px);display:flex;flex-direction:column;overflow:hidden;border:0;border-radius:5px;background:var(--bg);color:var(--towers-text,#f4f4f4);font:13px/1.35 system-ui,sans-serif;box-shadow:none;isolation:isolate}
 /* Shell-owned transparent shield preserves the former full-page input coverage. */
 #blocknight-research-shell.wt-towers-research:before{content:"";position:fixed;inset:0;z-index:-1;background:transparent;pointer-events:auto}
 #blocknight-research-shell.wt-towers-research .bn-tech-header{flex:none;min-height:44px;gap:12px;padding:7px 14px;background:transparent;border:0}
 #blocknight-research-shell.wt-towers-research .bn-tech-brand{min-width:0;gap:0}
-#blocknight-research-shell.wt-towers-research .bn-tech-brand strong{font:500 20px/1.15 TowersResearch,sans-serif;letter-spacing:.3px;color:#e5efed}
+#blocknight-research-shell.wt-towers-research .bn-tech-brand strong{font:500 20px/1.15 TowersResearch,sans-serif;letter-spacing:.3px;color:var(--towers-text,#f4f4f4)}
 #blocknight-research-shell.wt-towers-research .bn-tech-mark,#blocknight-research-shell.wt-towers-research .bn-tech-brand small,#blocknight-research-shell.wt-towers-research .bn-tech-live i,#blocknight-research-shell.wt-towers-research .bn-tech-live>b,#blocknight-research-shell.wt-towers-research .bn-tech-live .bn-tech-count,#blocknight-research-shell.wt-towers-research .bn-tech-live em{display:none}
 #blocknight-research-shell.wt-towers-research .bn-tech-live{flex:none;margin:0;padding:0;height:auto;border:0;background:transparent;box-shadow:none}
 #blocknight-research-shell.wt-towers-research .bn-tech-power{font:500 17px/1 TowersResearch,sans-serif;color:var(--amber)!important}
-#blocknight-research-shell.wt-towers-research .bn-tech-power:before{content:"⚡ ";font-family:system-ui,sans-serif}
-#blocknight-research-shell.wt-towers-research .bn-tech-done{flex:none;margin-left:auto;min-width:0;width:auto;height:32px;min-height:32px;padding:5px 7px;outline:0;border:0;border-radius:4px!important;background:transparent;color:#9be0d9;font:500 12px/1.2 TowersResearch,sans-serif!important;letter-spacing:.3px}
-#blocknight-research-shell.wt-towers-research .bn-tech-done:disabled{background:transparent;color:#efbd88}
-#blocknight-research-shell.wt-towers-research .bn-tech-main{flex:1 1 auto;min-width:0;min-height:0;display:flex;flex-direction:column;gap:7px;padding:0 12px 11px;overflow-y:auto;overflow-x:hidden;overscroll-behavior-y:contain;touch-action:pan-y;scrollbar-width:thin;scrollbar-color:#49736f transparent}
+#blocknight-research-shell.wt-towers-research .bn-tech-power:before{content:"\26a1\fe0e\20";font-family:system-ui,sans-serif}
+#blocknight-research-shell.wt-towers-research .bn-tech-done{flex:none;margin-left:auto;min-width:0;width:auto;height:32px;min-height:32px;padding:5px 7px;outline:0;border:0;border-radius:4px!important;background:transparent;color:var(--towers-muted,#bcbcbc);font:500 12px/1.2 TowersResearch,sans-serif!important;letter-spacing:.3px}
+#blocknight-research-shell.wt-towers-research .bn-tech-done:disabled{background:transparent;color:var(--towers-text,#f4f4f4)}
+#blocknight-research-shell.wt-towers-research .bn-tech-main{flex:1 1 auto;min-width:0;min-height:0;display:flex;flex-direction:column;gap:8px;padding:10px 12px 11px;overflow:hidden;overscroll-behavior-y:contain;touch-action:pan-y;scrollbar-width:thin;scrollbar-color:var(--towers-muted,#bcbcbc) transparent}
 #blocknight-research-shell.wt-towers-research .bn-tech-rail{flex:none;display:block;min-height:0;padding:0;border:0;border-radius:0;background:transparent;overflow:hidden}
 #blocknight-research-shell.wt-towers-research .bn-tech-rail>h2{display:none}
-#blocknight-research-shell.wt-towers-research .bn-tech-labs{display:flex;flex-direction:row;align-items:center;flex:none;gap:5px;min-width:0;max-width:100%;width:100%;height:42px;min-height:0;max-height:none;padding:0;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;touch-action:pan-x;scrollbar-width:thin;scrollbar-color:#49736f transparent;scroll-padding:3px}
-#blocknight-research-shell.wt-towers-research .bn-tech-lab,#blocknight-research-shell.wt-towers-research .bn-tech-lab.running{position:relative;display:flex;align-items:center;gap:6px;flex:0 0 auto;width:auto;height:38px;min-height:38px;max-width:100%;padding:3px 10px;outline:0;border:0;border-radius:5px!important;background:transparent;color:#e2edec;box-shadow:none;text-align:left}
+#blocknight-research-shell.wt-towers-research .bn-tech-labs{display:flex;flex-direction:row;align-items:center;flex:none;gap:5px;min-width:0;max-width:100%;width:100%;height:auto;min-height:42px;max-height:none;padding:0;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;touch-action:pan-x;scrollbar-width:thin;scrollbar-color:var(--towers-muted,#bcbcbc) transparent;scroll-padding:3px}
+#blocknight-research-shell.wt-towers-research .bn-tech-lab,#blocknight-research-shell.wt-towers-research .bn-tech-lab.running{position:relative;display:flex;align-items:center;gap:6px;flex:0 0 auto;width:auto;height:38px;min-height:38px;max-width:100%;padding:3px 10px;outline:0;border:0;border-radius:5px!important;background:transparent;color:var(--towers-text,#f4f4f4);box-shadow:none;text-align:left}
 #blocknight-research-shell.wt-towers-research .bn-tech-lab:before,#blocknight-research-shell.wt-towers-research .bn-tech-lab:after{display:none}
 #blocknight-research-shell.wt-towers-research .bn-tech-lab>img{flex:none;width:42px;height:32px;object-fit:contain;filter:none}
 #blocknight-research-shell.wt-towers-research .bn-tech-lab b{order:2;font:500 13px/18px TowersResearch,sans-serif;white-space:nowrap;overflow:visible}
 #blocknight-research-shell.wt-towers-research .bn-tech-lab small{display:none}
-#blocknight-research-shell.wt-towers-research .bn-tech-lab i{display:none;flex:none;width:6px;height:6px;border-radius:50%;background:#48d477;order:1}
+#blocknight-research-shell.wt-towers-research .bn-tech-lab i{display:none;flex:none;width:6px;height:6px;border-radius:50%;background:var(--towers-text,#f4f4f4);order:1}
 #blocknight-research-shell.wt-towers-research .bn-tech-lab.running i{display:block}
-#blocknight-research-shell.wt-towers-research .bn-tech-lab.active{background:#28574c;color:#f0f8f1;outline:0;box-shadow:none}
-#blocknight-research-shell.wt-towers-research .bn-tech-categories{flex:none;display:flex;flex-direction:row;align-items:center;gap:5px;min-width:0;min-height:0;height:32px;padding:0;border:0;border-radius:0;background:transparent;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;touch-action:pan-x;scrollbar-width:thin;scrollbar-color:#49736f transparent}
-#blocknight-research-shell.wt-towers-research .bn-tech-category{flex:0 0 auto;min-height:30px;height:30px;padding:3px 11px;outline:0;border:0;border-radius:5px!important;background:transparent;color:#d6e6e6;box-shadow:none;font:500 12px/1.2 TowersResearch,sans-serif!important;letter-spacing:.1px;text-align:center}
-#blocknight-research-shell.wt-towers-research .bn-tech-category.active{background:#28574c;color:#f0f8f1;outline:0;box-shadow:none}
-#blocknight-research-shell.wt-towers-research .bn-tech-browser{flex:1 1 auto;display:flex;flex-direction:column;min-width:0;min-height:78px;max-height:190px;padding:0;border:0;border-radius:0;background:transparent;overflow:hidden}
+#blocknight-research-shell.wt-towers-research .bn-tech-lab.active{background:var(--towers-selected,#f4f4f4);color:var(--towers-ink,#101010);outline:0;box-shadow:none}
+#blocknight-research-shell.wt-towers-research .bn-tech-categories{flex:none;display:flex;flex-direction:row;align-items:center;gap:5px;min-width:0;min-height:0;height:32px;padding:0;border:0;border-radius:0;background:transparent;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;touch-action:pan-x;scrollbar-width:thin;scrollbar-color:var(--towers-muted,#bcbcbc) transparent}
+#blocknight-research-shell.wt-towers-research .bn-tech-category{flex:0 0 auto;min-height:30px;height:30px;padding:3px 11px;outline:0;border:0;border-radius:5px!important;background:transparent;color:var(--towers-text,#f4f4f4);box-shadow:none;font:500 12px/1.2 TowersResearch,sans-serif!important;letter-spacing:.1px;text-align:center}
+#blocknight-research-shell.wt-towers-research .bn-tech-category.active{background:var(--towers-selected,#f4f4f4);color:var(--towers-ink,#101010);outline:0;box-shadow:none}
+#blocknight-research-shell.wt-towers-research .bn-tech-browser{flex:1 1 0;display:flex;flex-direction:column;min-width:0;min-height:0;max-height:none;padding:0;border:0;border-radius:0;background:transparent;overflow:hidden}
 #blocknight-research-shell.wt-towers-research .bn-tech-browser-head{display:none}
-#blocknight-research-shell.wt-towers-research .bn-tech-list{flex:1 1 auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:minmax(82px,auto);align-content:start;min-width:0;min-height:0;gap:5px 8px;padding:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior-y:contain;touch-action:pan-y;scrollbar-width:thin;scrollbar-color:#49736f transparent}
-#blocknight-research-shell.wt-towers-research .bn-tech-card{flex:none;display:grid;grid-template-columns:84px minmax(0,1fr);grid-template-rows:auto auto;align-items:center;align-content:center;gap:2px 9px;min-width:0;min-height:82px;height:auto;padding:5px 8px;outline:0;border:0;border-radius:5px!important;background:transparent;color:#e2edec;box-shadow:none;transform:none;text-align:left}
+#blocknight-research-shell.wt-towers-research .bn-tech-list{flex:1 1 auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:minmax(82px,auto);align-content:start;min-width:0;min-height:0;gap:5px 8px;padding:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior-y:contain;touch-action:pan-y;scrollbar-width:thin;scrollbar-color:var(--towers-muted,#bcbcbc) transparent}
+#blocknight-research-shell.wt-towers-research .bn-tech-card{flex:none;display:grid;grid-template-columns:84px minmax(0,1fr);grid-template-rows:auto auto;align-items:center;align-content:center;gap:2px 9px;min-width:0;min-height:82px;height:auto;padding:5px 8px;outline:0;border:0;border-radius:5px!important;background:transparent;color:var(--towers-text,#f4f4f4);box-shadow:none;transform:none;text-align:left}
 #blocknight-research-shell.wt-towers-research .bn-tech-card:after{display:none}
-#blocknight-research-shell.wt-towers-research .bn-tech-card.selected{background:#28574c;outline:0;box-shadow:none}
-#blocknight-research-shell.wt-towers-research .bn-tech-card.selected:after{content:attr(data-selection-order);position:absolute;right:5px;top:5px;display:grid;place-items:center;width:17px;height:17px;border:0;border-radius:50%;background:#8bd3cc;color:#092328;transform:none;font:500 10px/1 TowersResearch,sans-serif}
+#blocknight-research-shell.wt-towers-research .bn-tech-card.selected{background:var(--towers-selected,#f4f4f4);outline:0;box-shadow:none}
+#blocknight-research-shell.wt-towers-research .bn-tech-card.selected:after{content:attr(data-selection-order);position:absolute;right:5px;top:5px;display:grid;place-items:center;width:17px;height:17px;border:0;border-radius:50%;background:var(--towers-selected,#f4f4f4);color:var(--towers-ink,#101010);transform:none;font:500 10px/1 TowersResearch,sans-serif}
 #blocknight-research-shell.wt-towers-research .bn-tech-card.selected .bn-tech-copy{padding-right:14px}
 #blocknight-research-shell.wt-towers-research .bn-tech-icon{grid-column:1;grid-row:1/3;display:grid;place-items:center;width:84px;height:64px;overflow:hidden;border:0;border-radius:0;background:transparent}
 #blocknight-research-shell.wt-towers-research .bn-tech-icon img{width:84px;height:64px;object-fit:contain;filter:none;border:0;border-radius:0;background:transparent}
 #blocknight-research-shell.wt-towers-research .bn-tech-copy{grid-column:2;min-width:0}
-#blocknight-research-shell.wt-towers-research .bn-tech-copy strong{display:block;overflow:visible;white-space:normal;overflow-wrap:anywhere;color:#edf3f0;font:500 14px/18px TowersResearch,sans-serif}
-#blocknight-research-shell.wt-towers-research .bn-tech-copy small{display:block;overflow:visible;margin-top:3px;white-space:normal;color:#a4c8ce;font-size:9px;line-height:12px;font-weight:400;letter-spacing:0}
+#blocknight-research-shell.wt-towers-research .bn-tech-copy strong{display:block;overflow:visible;white-space:normal;overflow-wrap:anywhere;color:var(--towers-text,#f4f4f4);font:500 14px/18px TowersResearch,sans-serif}
+#blocknight-research-shell.wt-towers-research .bn-tech-copy small{display:block;overflow:visible;margin-top:3px;white-space:normal;color:var(--towers-muted,#bcbcbc);font-size:9px;line-height:12px;font-weight:400;letter-spacing:0}
 #blocknight-research-shell.wt-towers-research .bn-tech-ready{grid-column:2;display:flex;flex-wrap:wrap;align-items:center;gap:2px 5px;text-align:left}
-#blocknight-research-shell.wt-towers-research .bn-tech-ready b{display:block;flex:1 0 100%;color:#aed7b7;font-size:8px;line-height:10px;font-weight:500;letter-spacing:0}
+#blocknight-research-shell.wt-towers-research .bn-tech-ready b{display:block;flex:1 0 100%;color:var(--towers-muted,#bcbcbc);font-size:8px;line-height:10px;font-weight:500;letter-spacing:0}
 #blocknight-research-shell.wt-towers-research .bn-tech-ready small{display:block;margin:0;color:var(--amber);font:500 13px/17px TowersResearch,sans-serif;white-space:nowrap}
-#blocknight-research-shell.wt-towers-research .bn-tech-empty{grid-column:1/-1;min-height:78px;padding:12px;text-align:left;place-items:start;color:#9cb7bd}
-#blocknight-research-shell.wt-towers-research .bn-tech-empty b{font-size:12px;color:#d5e6e6}
+#blocknight-research-shell.wt-towers-research .bn-tech-empty{grid-column:1/-1;min-height:78px;padding:12px;text-align:left;place-items:start;color:var(--towers-muted,#bcbcbc)}
+#blocknight-research-shell.wt-towers-research .bn-tech-empty b{font-size:12px;color:var(--towers-text,#f4f4f4)}
 #blocknight-research-shell.wt-towers-research .bn-tech-empty small{font-size:10px;line-height:15px}
-#blocknight-research-shell.wt-towers-research .bn-tech-preview{flex:none;display:flex;flex-direction:row;justify-content:flex-start;align-items:center;align-content:flex-start;flex-wrap:wrap;text-align:left;gap:5px 10px;min-width:0;min-height:34px;max-height:84px;margin:0;padding:0;border:0;border-radius:0;background:transparent;overflow:auto;overscroll-behavior-y:contain;touch-action:pan-y}
+#blocknight-research-shell.wt-towers-research .bn-tech-preview{flex:none;display:grid;grid-template-columns:minmax(0,max-content) auto;justify-content:start;align-items:center;align-content:start;text-align:left;gap:5px 10px;min-width:0;min-height:34px;max-height:112px;margin:0;padding:0;border:0;border-radius:0;background:transparent;overflow-y:auto;overflow-x:hidden;overscroll-behavior-y:contain;touch-action:pan-y}
 #blocknight-research-shell.wt-towers-research .bn-tech-preview>.bn-tech-detail-image,#blocknight-research-shell.wt-towers-research .bn-tech-preview-label,#blocknight-research-shell.wt-towers-research .bn-tech-preview-metrics,#blocknight-research-shell.wt-towers-research .bn-tech-preview .bn-tech-detail-status{display:none}
-#blocknight-research-shell.wt-towers-research .bn-tech-preview-copy{flex:0 1 auto;min-width:0;max-width:100%;padding:0}
-#blocknight-research-shell.wt-towers-research .bn-tech-preview .bn-tech-detail-name{display:block;margin:0;color:#e2edec;font:500 12px/17px TowersResearch,sans-serif;overflow-wrap:anywhere}
-#blocknight-research-shell.wt-towers-research .bn-tech-preview .bn-tech-detail-name:before{content:"Selected: ";color:#a4d9bd}
-#blocknight-research-shell.wt-towers-research .bn-tech-preview .bn-tech-assign{flex:0 0 auto;width:auto;max-width:100%;min-width:0;min-height:32px;height:auto;margin:0;padding:6px 12px;outline:0;border:0;border-radius:5px!important;background:#8bd3cc;color:#092328;font:500 11px/16px TowersResearch,sans-serif!important;letter-spacing:.1px;white-space:normal;overflow-wrap:anywhere}
-#blocknight-research-shell.wt-towers-research .bn-tech-preview .bn-tech-assign:disabled{background:#29463f;color:#aec7bb;opacity:1}
-#blocknight-research-shell.wt-towers-research .bn-tech-error{flex:1 0 100%;min-height:0;margin:0;color:#efbd88;font-size:10px;line-height:14px;overflow-wrap:anywhere}
+#blocknight-research-shell.wt-towers-research .bn-tech-preview-copy{min-width:0;max-width:100%;padding:0;overflow:hidden}
+#blocknight-research-shell.wt-towers-research .bn-tech-preview .bn-tech-detail-name{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;margin:0;color:var(--towers-text,#f4f4f4);font:500 12px/17px TowersResearch,sans-serif;overflow-wrap:anywhere}
+#blocknight-research-shell.wt-towers-research .bn-tech-preview .bn-tech-detail-name:before{content:"Selected: ";color:var(--towers-muted,#bcbcbc)}
+#blocknight-research-shell.wt-towers-research .bn-tech-preview .bn-tech-assign{flex:0 0 auto;width:auto;max-width:100%;min-width:0;min-height:32px;height:auto;margin:0;padding:6px 12px;outline:0;border:0;border-radius:5px!important;background:var(--towers-selected,#f4f4f4);color:var(--towers-ink,#101010);font:500 11px/16px TowersResearch,sans-serif!important;letter-spacing:.1px;white-space:normal;overflow-wrap:anywhere}
+#blocknight-research-shell.wt-towers-research .bn-tech-preview .bn-tech-assign:disabled{background:var(--towers-control,#252525);color:var(--towers-disabled,#888888);opacity:1}
+#blocknight-research-shell.wt-towers-research .bn-tech-error{grid-column:1/-1;min-width:0;min-height:0;margin:0;color:var(--towers-text,#f4f4f4);font-size:10px;line-height:14px;overflow-wrap:anywhere}
 #blocknight-research-shell.wt-towers-research .bn-tech-error:empty{display:none}
 #blocknight-research-shell.wt-towers-research .bn-tech-detail{flex:none;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);align-items:start;gap:12px;min-width:0;min-height:62px;max-height:120px;padding:0;border:0;border-radius:0;background:transparent;overflow-y:auto;overflow-x:hidden;overscroll-behavior-y:contain;touch-action:pan-y}
 #blocknight-research-shell.wt-towers-research .bn-tech-detail>h2{display:none}
@@ -61,24 +61,24 @@
 #blocknight-research-shell.wt-towers-research .bn-tech-current{display:flex;align-items:center;gap:7px;min-width:0}
 #blocknight-research-shell.wt-towers-research .bn-tech-current-image{flex:none;width:48px;height:37px;object-fit:contain;filter:none;border:0;border-radius:0;background:transparent}
 #blocknight-research-shell.wt-towers-research .bn-tech-current-copy{min-width:0}
-#blocknight-research-shell.wt-towers-research .bn-tech-current-status{color:#8bd3cc;font:500 10px/14px TowersResearch,sans-serif;letter-spacing:.2px}
-#blocknight-research-shell.wt-towers-research .bn-tech-active-name{display:block;margin:2px 0 0;color:#e2edec;font:500 12px/16px TowersResearch,sans-serif;overflow-wrap:anywhere}
-#blocknight-research-shell.wt-towers-research .bn-tech-progress{height:5px;margin:5px 0 0 55px;border:0;border-radius:3px;background:#38424c;overflow:hidden}
+#blocknight-research-shell.wt-towers-research .bn-tech-current-status{color:var(--towers-text,#f4f4f4);font:500 10px/14px TowersResearch,sans-serif;letter-spacing:.2px}
+#blocknight-research-shell.wt-towers-research .bn-tech-active-name{display:block;margin:2px 0 0;color:var(--towers-text,#f4f4f4);font:500 12px/16px TowersResearch,sans-serif;overflow-wrap:anywhere}
+#blocknight-research-shell.wt-towers-research .bn-tech-progress{height:5px;margin:5px 0 0 55px;border:0;border-radius:3px;background:var(--towers-control,#252525);overflow:hidden}
 #blocknight-research-shell.wt-towers-research .bn-tech-progress[hidden]{display:none!important}
-#blocknight-research-shell.wt-towers-research .bn-tech-progress i{display:block;height:100%;background:#e9bf41;transition:none}
+#blocknight-research-shell.wt-towers-research .bn-tech-progress i{display:block;height:100%;background:var(--towers-text,#f4f4f4);transition:none}
 #blocknight-research-shell.wt-towers-research .bn-tech-time{display:none}
 #blocknight-research-shell.wt-towers-research .bn-tech-queue-panel{flex:none;min-width:0;min-height:0;height:auto;margin:0;padding:0;border:0;border-radius:0;background:transparent;overflow:hidden}
 #blocknight-research-shell.wt-towers-research .bn-tech-queue-panel header{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:18px;margin:0;padding:0;border:0;background:transparent}
-#blocknight-research-shell.wt-towers-research .bn-tech-queue-title{color:#a4c8ce;font:500 10px/14px TowersResearch,sans-serif;letter-spacing:.2px}
-#blocknight-research-shell.wt-towers-research .bn-tech-queue-count{color:#a4c8ce;font-size:9px;line-height:14px;font-weight:400}
-#blocknight-research-shell.wt-towers-research .bn-tech-queue-list{display:block;min-height:0;height:auto;max-height:62px;margin:0;padding:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior-y:contain;touch-action:pan-y;scrollbar-width:thin;scrollbar-color:#49736f transparent}
-#blocknight-research-shell.wt-towers-research .bn-tech-queue-item{display:grid;grid-template-columns:14px minmax(0,1fr) 28px;align-items:center;gap:5px;min-height:28px;height:auto;padding:1px 0;border:0;color:#e2edec;font:500 12px/16px TowersResearch,sans-serif}
-#blocknight-research-shell.wt-towers-research .bn-tech-queue-item>b{color:#a4c8ce;font-size:10px;font-weight:400}
+#blocknight-research-shell.wt-towers-research .bn-tech-queue-title{color:var(--towers-muted,#bcbcbc);font:500 10px/14px TowersResearch,sans-serif;letter-spacing:.2px}
+#blocknight-research-shell.wt-towers-research .bn-tech-queue-count{color:var(--towers-muted,#bcbcbc);font-size:9px;line-height:14px;font-weight:400}
+#blocknight-research-shell.wt-towers-research .bn-tech-queue-list{display:block;min-height:0;height:auto;max-height:62px;margin:0;padding:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior-y:contain;touch-action:pan-y;scrollbar-width:thin;scrollbar-color:var(--towers-muted,#bcbcbc) transparent}
+#blocknight-research-shell.wt-towers-research .bn-tech-queue-item{display:grid;grid-template-columns:14px minmax(0,1fr) 28px;align-items:center;gap:5px;min-height:28px;height:auto;padding:1px 0;border:0;color:var(--towers-text,#f4f4f4);font:500 12px/16px TowersResearch,sans-serif}
+#blocknight-research-shell.wt-towers-research .bn-tech-queue-item>b{color:var(--towers-muted,#bcbcbc);font-size:10px;font-weight:400}
 #blocknight-research-shell.wt-towers-research .bn-tech-queue-image{display:none}
 #blocknight-research-shell.wt-towers-research .bn-tech-queue-item>span{overflow:visible;white-space:normal;overflow-wrap:anywhere}
-#blocknight-research-shell.wt-towers-research .bn-tech-queue-remove{width:28px!important;height:28px!important;min-width:28px;min-height:28px;outline:0;border:0;border-radius:4px!important;background:transparent;color:#e2edec;box-shadow:none;font:400 20px/1 system-ui,sans-serif!important}
-#blocknight-research-shell.wt-towers-research .bn-tech-queue-empty{padding:4px 0;text-align:left;color:#9cb7bd;font-size:10px;line-height:15px}
-#blocknight-research-shell.wt-towers-research button:focus-visible{outline:2px solid #8bd3cc;outline-offset:-2px}
+#blocknight-research-shell.wt-towers-research .bn-tech-queue-remove{width:28px!important;height:28px!important;min-width:28px;min-height:28px;outline:0;border:0;border-radius:4px!important;background:transparent;color:var(--towers-text,#f4f4f4);box-shadow:none;font:400 20px/1 system-ui,sans-serif!important}
+#blocknight-research-shell.wt-towers-research .bn-tech-queue-empty{padding:4px 0;text-align:left;color:var(--towers-muted,#bcbcbc);font-size:10px;line-height:15px}
+#blocknight-research-shell.wt-towers-research button:focus-visible{outline:2px solid var(--towers-text,#f4f4f4);outline-offset:-2px}
 @media(max-width:800px){
  #blocknight-research-shell.wt-towers-research{width:var(--wt-compact-window-width,calc(100vw - 170px))}
  #blocknight-research-shell.wt-towers-research .bn-tech-lab,#blocknight-research-shell.wt-towers-research .bn-tech-lab.running{padding:3px 7px;gap:4px}
@@ -89,7 +89,7 @@
 }
 @media(max-width:620px){
  #blocknight-research-shell.wt-towers-research{width:var(--wt-compact-window-width,calc(100vw - 110px))}
- #blocknight-research-shell.wt-towers-research .bn-tech-main{padding:0 8px 9px;gap:5px}
+ #blocknight-research-shell.wt-towers-research .bn-tech-main{padding:8px;gap:5px}
  #blocknight-research-shell.wt-towers-research .bn-tech-header{padding:5px 10px;gap:8px}
  #blocknight-research-shell.wt-towers-research .bn-tech-brand strong{font-size:18px}
  #blocknight-research-shell.wt-towers-research .bn-tech-lab,#blocknight-research-shell.wt-towers-research .bn-tech-lab.running{padding:3px 6px;gap:3px}
@@ -103,17 +103,49 @@
 @media(max-height:460px){
  #blocknight-research-shell.wt-towers-research .bn-tech-header{min-height:36px;padding-top:4px;padding-bottom:4px}
  #blocknight-research-shell.wt-towers-research .bn-tech-main{gap:4px;padding-bottom:8px}
- #blocknight-research-shell.wt-towers-research .bn-tech-labs{height:36px}
+ #blocknight-research-shell.wt-towers-research .bn-tech-labs{height:auto;min-height:36px}
  #blocknight-research-shell.wt-towers-research .bn-tech-lab,#blocknight-research-shell.wt-towers-research .bn-tech-lab.running{height:34px;min-height:34px;padding-top:1px;padding-bottom:1px}
  #blocknight-research-shell.wt-towers-research .bn-tech-categories{height:28px}
  #blocknight-research-shell.wt-towers-research .bn-tech-category{height:28px;min-height:28px}
- #blocknight-research-shell.wt-towers-research .bn-tech-browser{min-height:70px;max-height:164px}
+ #blocknight-research-shell.wt-towers-research .bn-tech-browser{min-height:0;max-height:none}
  #blocknight-research-shell.wt-towers-research .bn-tech-list{grid-auto-rows:minmax(74px,auto)}
  #blocknight-research-shell.wt-towers-research .bn-tech-card{min-height:74px;grid-template-columns:68px minmax(0,1fr);gap:1px 6px}
  #blocknight-research-shell.wt-towers-research .bn-tech-icon,#blocknight-research-shell.wt-towers-research .bn-tech-icon img{width:68px;height:52px}
- #blocknight-research-shell.wt-towers-research .bn-tech-preview{min-height:32px;max-height:68px}
+ #blocknight-research-shell.wt-towers-research .bn-tech-preview{min-height:32px;max-height:96px}
  #blocknight-research-shell.wt-towers-research .bn-tech-detail{min-height:54px;max-height:94px}
  #blocknight-research-shell.wt-towers-research .bn-tech-current-image{width:40px;height:31px}
  #blocknight-research-shell.wt-towers-research .bn-tech-current{gap:5px}
  #blocknight-research-shell.wt-towers-research .bn-tech-progress{margin-left:45px}
 }
+/* The navigation already names Research. Keep only lab selection, the full
+   catalogue and its existing batch assignment controls in this window. The
+   hidden elements remain in the renderer for queue/state bookkeeping. */
+#blocknight-research-shell.wt-towers-research .bn-tech-header,
+#blocknight-research-shell.wt-towers-research .bn-tech-categories,
+#blocknight-research-shell.wt-towers-research .bn-tech-detail{display:none}
+/* Selected cards use the shared white surface and dark ink. Artwork retains its colour. */
+#blocknight-research-shell.wt-towers-research .bn-tech-card.selected .bn-tech-copy strong,
+#blocknight-research-shell.wt-towers-research .bn-tech-card.selected .bn-tech-copy small,
+#blocknight-research-shell.wt-towers-research .bn-tech-card.selected .bn-tech-ready b,
+#blocknight-research-shell.wt-towers-research .bn-tech-card.selected .bn-tech-ready small {color:var(--towers-ink,#101010)}
+#blocknight-research-shell.wt-towers-research .bn-tech-card.selected:after {background:var(--towers-control,#252525);color:var(--towers-text,#f4f4f4)}
+#blocknight-research-shell.wt-towers-research .bn-tech-lab.active i {background:var(--towers-ink,#101010)}
+#blocknight-research-shell.wt-towers-research .bn-tech-preview .bn-tech-assign:active:not(:disabled) {background:var(--towers-pressed,#151515)}
+
+/* Work already assigned to a lab stays readable in the catalogue. White is
+   reserved for READY topics in the user's pending batch selection. */
+#blocknight-research-shell.wt-towers-research .bn-tech-card {height:max-content;align-self:start}
+#blocknight-research-shell.wt-towers-research .bn-tech-card[data-research-state="researching"] {background:#292929}
+#blocknight-research-shell.wt-towers-research .bn-tech-card[data-research-state="queued"] {background:#191919}
+#blocknight-research-shell.wt-towers-research .bn-tech-card[data-research-state="syncing"] {background:#222222}
+#blocknight-research-shell.wt-towers-research .bn-tech-card[data-research-state="researching"] .bn-tech-ready b,
+#blocknight-research-shell.wt-towers-research .bn-tech-card[data-research-state="queued"] .bn-tech-ready b,
+#blocknight-research-shell.wt-towers-research .bn-tech-card[data-research-state="syncing"] .bn-tech-ready b {font:600 10px/13px system-ui,sans-serif;letter-spacing:.1px;color:var(--towers-text,#f4f4f4);white-space:normal;overflow-wrap:anywhere}
+#blocknight-research-shell.wt-towers-research .bn-tech-card[data-research-state="queued"] .bn-tech-ready b {color:#cccccc}
+#blocknight-research-shell.wt-towers-research .bn-tech-card-progress {display:block;grid-column:2;grid-row:3;height:3px;min-width:0;overflow:hidden;border:0;border-radius:2px;background:#444444}
+#blocknight-research-shell.wt-towers-research .bn-tech-card-progress[hidden] {display:none!important}
+#blocknight-research-shell.wt-towers-research .bn-tech-card-progress>i {display:block;height:100%;max-width:100%;background:#eeeeee;transition:none}
+#blocknight-research-shell.wt-towers-research .bn-tech-card:is([data-research-state="researching"],[data-research-state="queued"],[data-research-state="syncing"]).selected:after {display:none}
+#blocknight-research-shell.wt-towers-research .bn-tech-card:is([data-research-state="researching"],[data-research-state="queued"],[data-research-state="syncing"]).selected .bn-tech-copy strong,
+#blocknight-research-shell.wt-towers-research .bn-tech-card:is([data-research-state="researching"],[data-research-state="queued"],[data-research-state="syncing"]).selected .bn-tech-ready small {color:var(--towers-text,#f4f4f4)}
+#blocknight-research-shell.wt-towers-research .bn-tech-card:is([data-research-state="researching"],[data-research-state="queued"],[data-research-state="syncing"]).selected .bn-tech-copy small {color:var(--towers-muted,#bcbcbc)}

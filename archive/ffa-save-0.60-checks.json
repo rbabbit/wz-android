@@ -1,0 +1,46 @@
+{
+  "version": "0.60",
+  "passed": true,
+  "emulatorUsed": false,
+  "syntheticNativeBytes": true,
+  "checks": [
+    {
+      "main": "CheckFfaSave060",
+      "output": "PASS 77 FFA save identity/isolation checks; synthetic native bytes, no emulator\n"
+    },
+    {
+      "main": "CheckCampaignSave051",
+      "output": "PASS 9 campaign save isolation checks\n"
+    },
+    {
+      "main": "SaveStoreCheck027",
+      "output": "PASS save assigns a new slot identity rather than trusting caller ID\nPASS store assigns version and save timestamp\nPASS map, reward session and game-time identities survive roundtrip\nPASS complete binary, JSON and nested native files roundtrip byte-for-byte\nPASS non-text map bytes retain high bits and zero bytes\nPASS reward run identity remains aligned with synthetic script state\nPASS restart lists existing slot and finds its reward run\nPASS restart loads the complete stored file set\nPASS another save never overwrites the previous slot\nPASS saved list sorts newest timestamps first\nPASS saved list sorts newest timestamps first\nPASS delete removes only the selected slot and returns its session\nPASS deleting another slot preserves every byte of the original\nPASS deleted slot cannot be loaded\nPASS failed save leaves no permanent partial slot\nPASS startup ignores and preserves incomplete partial bytes\nPASS leftover partial does not disturb a complete save\nPASS unsafe native path rejected: ../escape.bin\nPASS failed save leaves no permanent partial slot\nPASS unsafe native path rejected: /absolute.bin\nPASS failed save leaves no permanent partial slot\nPASS unsafe native path rejected: folder\\bad.bin\nPASS failed save leaves no permanent partial slot\nPASS unsafe native path rejected: folder//bad.bin\nPASS failed save leaves no permanent partial slot\nPASS unsafe native path rejected: folder/./bad.bin\nPASS failed save leaves no permanent partial slot\nPASS unsafe native path rejected: C:/bad.bin\nPASS failed save leaves no permanent partial slot\nPASS unsafe native path rejected: folder/\nPASS failed save leaves no permanent partial slot\nPASS load rejects traversal slot identity\nPASS delete rejects malformed slot identity\nPASS unsafe reward session rejected\nPASS unsafe map identity rejected\nPASS invalid saves create neither visible slots nor escaped files\nPASS missing required native file rejected: gam.json\nPASS missing required native file rejected: main.json\nPASS missing required native file rejected: gameinfo.json\nPASS missing required native file rejected: scriptstate.json\nPASS missing required native file rejected: game.map\nPASS native gam time must match metadata on save\nPASS native level must match metadata on save when provided\nPASS native gam level name is required on save\nPASS invalid Base64 is rejected\nPASS validation failures never expose a save slot\nPASS failed save leaves no permanent partial slot\nPASS fixture mutation stays inside isolated test directory\nPASS damaged native data is rejected on load\nPASS failed load preserves damaged bytes for native\nPASS fixture mutation stays inside isolated test directory\nPASS damaged bytes data is rejected on load\nPASS failed load preserves damaged bytes for bytes\nPASS fixture mutation stays inside isolated test directory\nPASS damaged negative-bytes data is rejected on load\nPASS failed load preserves damaged bytes for negative-bytes\nPASS fixture mutation stays inside isolated test directory\nPASS damaged oversized-bytes data is rejected on load\nPASS failed load preserves damaged bytes for oversized-bytes\nPASS fixture mutation stays inside isolated test directory\nPASS damaged sha data is rejected on load\nPASS failed load preserves damaged bytes for sha\nPASS fixture mutation stays inside isolated test directory\nPASS damaged unexpected data is rejected on load\nPASS failed load preserves damaged bytes for unexpected\nPASS fixture mutation stays inside isolated test directory\nPASS fixture rewrites both local and central ZIP names to create a duplicate\nPASS duplicate ZIP entry is rejected even with matching native bytes\nPASS more than256 native files rejected\nPASS raw native payload above32MiB rejected\nPASS oversized files do not expose visible slots\nPASS failed save leaves no permanent partial slot\nPASS exactly40 complete slots are supported\nPASS forty-first slot rejected\nPASS deleting a slot frees exactly one save place\nPASS failed save leaves no permanent partial slot\nPASS fixture mutation stays inside isolated test directory\nPASS load rejects changed or unsafe metadata gameTime\nPASS fixture mutation stays inside isolated test directory\nPASS load rejects changed or unsafe metadata nativeLevel\nPASS fixture mutation stays inside isolated test directory\nPASS load rejects changed or unsafe metadata session\nPASS fixture mutation stays inside isolated test directory\nPASS load rejects changed or unsafe metadata mapId\nPASS fixture mutation stays inside isolated test directory\nPASS load rejects a self-consistent manifest missing native scriptstate\nPASS 19-byte native level name saves and loads unchanged\nPASS 20-byte native level name rejected before archiving\nPASS native name bound counts UTF8 bytes rather than Java characters\nPASS fixture mutation stays inside isolated test directory\nPASS load rejects an otherwise consistent archive with unsupported20-byte native level name\nPASS all46 map native identities are audited for save compatibility\nPASS native GAM save name fits19bytes: beginner\nPASS native GAM save name fits19bytes: td1\nPASS native GAM save name fits19bytes: td2\nPASS native GAM save name fits19bytes: easy01\nPASS native GAM save name fits19bytes: easy02\nPASS native GAM save name fits19bytes: easy03\nPASS native GAM save name fits19bytes: easy04\nPASS native GAM save name fits19bytes: easy05\nPASS native GAM save name fits19bytes: easy06\nPASS native GAM save name fits19bytes: easy07\nPASS native GAM save name fits19bytes: easy08\nPASS native GAM save name fits19bytes: easy09\nPASS native GAM save name fits19bytes: easy10\nPASS native GAM save name fits19bytes: easy11\nPASS native GAM save name fits19bytes: easy12\nPASS native GAM save name fits19bytes: easy13\nPASS native GAM save name fits19bytes: easy14\nPASS native GAM save name fits19bytes: easy15\nPASS native GAM save name fits19bytes: medium01\nPASS native GAM save name fits19bytes: medium02\nPASS native GAM save name fits19bytes: medium03\nPASS native GAM save name fits19bytes: medium04\nPASS native GAM save name fits19bytes: medium05\nPASS native GAM save name fits19bytes: medium06\nPASS native GAM save name fits19bytes: medium07\nPASS native GAM save name fits19bytes: medium08\nPASS native GAM save name fits19bytes: medium09\nPASS native GAM save name fits19bytes: medium10\nPASS native GAM save name fits19bytes: medium11\nPASS native GAM save name fits19bytes: medium12\nPASS native GAM save name fits19bytes: medium13\nPASS native GAM save name fits19bytes: medium14\nPASS native GAM save name fits19bytes: medium15\nPASS native GAM save name fits19bytes: hard01\nPASS native GAM save name fits19bytes: hard02\nPASS native GAM save name fits19bytes: hard03\nPASS native GAM save name fits19bytes: hard04\nPASS native GAM save name fits19bytes: hard05\nPASS native GAM save name fits19bytes: hard06\nPASS native GAM save name fits19bytes: hard07\nPASS native GAM save name fits19bytes: hard08\nPASS native GAM save name fits19bytes: hard09\nPASS native GAM save name fits19bytes: hard10\nPASS native GAM save name fits19bytes: hard11\nPASS native GAM save name fits19bytes: hard12\nPASS native GAM save name fits19bytes: hard13\nSUMMARY checks=138 groups=12 failures=0\n"
+    }
+  ],
+  "sources": [
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/SaveGameStore.java",
+      "sha256": "15215f8da1475cacc63e720d5b780eeaf9f759f357e60b8d3280d5518894c62f"
+    },
+    {
+      "path": "tools/save-store-fixture/android/content/Context.java",
+      "sha256": "1bccace134df21db353c7f43cd7076a42b9f0b98085a41217dc3d9f4b80ccc51"
+    },
+    {
+      "path": "tools/check-save-store-027.java",
+      "sha256": "1c7bd0eec3ed3e115b7da08d966e658ce9748cdf9defb4b0a42a5835a00be799"
+    },
+    {
+      "path": "tools/check-campaign-save-051.java",
+      "sha256": "9306f9095cce0ceacb26e16a22ab6f6348c99898ee5ff24481cc54a6ad661fe4"
+    },
+    {
+      "path": "tools/check-ffa-save-060.java",
+      "sha256": "fe897130d45e4886775b40803cdcdef033393d02531d40e21f741f0a77087613"
+    },
+    {
+      "path": "tools/check-ffa-save-060.py",
+      "sha256": "feb7704f05c93fd5358befe58c85e3bb17055a6ab3fb4302ec9e926095cf2138"
+    }
+  ]
+}

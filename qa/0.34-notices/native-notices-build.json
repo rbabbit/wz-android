@@ -1,0 +1,44 @@
+{
+  "version": "0.34",
+  "passed": true,
+  "nativeBuildPerformed": true,
+  "nativeFullFreshBuildPerformed": false,
+  "method": "Verified ready source cache incremental compilation and native link",
+  "cachePath": "/home/punkech/wz-blueprint-20261107",
+  "command": [
+    "bash",
+    "-c",
+    "source \"$1/emsdk/emsdk_env.sh\" && cmake --build \"$1/build\" --target warzone2100 --parallel 4",
+    "native-notices-034",
+    "/home/punkech/wz-blueprint-20261107"
+  ],
+  "sourceOverlays": {
+    "display3d.cpp": "3b5c1a41144011805819d15e9bfac6f1289d726da276433bfeb237904c0fa15f",
+    "research.cpp": "06b8999191bb0160e6b73c268f8ddd69347102133ecc221aee23504973dc918a",
+    "keybind.cpp": "f131e88aef09ddf53f1338b76061863424984e93afb568bde5a3fed722000ce3"
+  },
+  "logSHA256": "f93f228dbe991db252157b73372714ba3ad181ded0c1bf2c03334b3619d1a1fe",
+  "recordedUTC": "2026-11-10T08:03:03.868569+00:00",
+  "raw": [
+    {
+      "file": "warzone2100.js",
+      "sha256": "13db60da65ce9352f3ef1a7fbe379f249f58a8b9f40eee1d5e832a97dd083971",
+      "bytes": 725175
+    },
+    {
+      "file": "warzone2100.wasm",
+      "sha256": "20a3e83127f21d85105c91f43c8eb7144461a09cfc53ef34bbfc1d274fa7368f",
+      "bytes": 13460738
+    }
+  ],
+  "compiledObjects": [
+    "src/CMakeFiles/warzone2100.dir/keybind.cpp.o",
+    "src/CMakeFiles/warzone2100.dir/research.cpp.o"
+  ],
+  "relinkedNativeEngine": true,
+  "emulatorUsed": false,
+  "sourceOverlay": "archive/native-notices-0.34/source-overlay.json",
+  "sourceOverlaySHA256": "79e7b77d5f59b35fc2d9495f0fefe77ab1ddf657e92fcf061dd87413925ac142",
+  "originalBuildRecipeSHA256": "6f3835c7eb8441c216f7e0b056affe22b34eb60e2985341029c866ca75e9bc26",
+  "sourceChanges": "Only the two stock routine-success console callsites gain the transient Towers marker guard. Research sound/upgrades/events, save writer/failures, and previous display3d correction stay in force."
+}

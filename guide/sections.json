@@ -1,0 +1,79 @@
+[
+  {
+    "id":"research-overview","title":"Research foundations","summary":"Read the requirements, then combine a weapon path with the support it needs.",
+    "strategy":["Every link under Requires all is an AND prerequisite. Branches can split and rejoin; later weapons are not a single straight ladder.","Unlocks add components or structures. Upgrades change a class of equipment, often including equipment you already own.","Research points measure work, not seconds. Power, laboratory modules and research upgrades affect the time you actually wait."],
+    "note":"These are bundled, unmodified base values. The Research screen and current mission decide what is available now.","iconTopic":"R-Struc-Research-Module","sourceIds":["official-research","bundled-stats"]
+  },
+  {
+    "id":"machineguns","title":"Machineguns","summary":"An early anti-personnel family, with damage and reload improvements alongside new weapons.",
+    "strategy":["Machineguns are useful against cyborgs and other soft targets. They lose efficiency against heavily armoured vehicles and hard defences.","Keep their upgrade path moving when relying on numbers; combine them with anti-tank weapons instead of asking one family to answer everything."],
+    "iconTopic":"R-Wpn-MG3Mk1","sourceIds":["official-weapons","official-early","bundled-stats"]
+  },
+  {
+    "id":"cannons","title":"Cannons","summary":"Direct-fire weapons for armoured targets, with several distinct branches.",
+    "strategy":["Heavier cannons add weight and can slow a design. Consider body power, propulsion, range and escorts as well as damage.","Medium, heavy, hyper velocity and assault cannons have different prerequisite branches. Damage, accuracy, manufacturing and research upgrades can all be gates."],
+    "iconTopic":"R-Wpn-Cannon3Mk1","sourceIds":["official-early","bundled-stats"]
+  },
+  {
+    "id":"rockets-missiles","title":"Rockets and missiles","summary":"Anti-tank rockets, bunker-busting weapons and indirect rocket artillery have different jobs.",
+    "strategy":["Anti-tank rockets are useful against vehicles; they are not a substitute for anti-personnel or dedicated siege weapons.","Use range and mobility when trading with slower direct-fire units. Protect launchers from close enemies.","The family branches into arrays, indirect fire and later missiles. Sensor and research infrastructure can be prerequisites."],
+    "iconTopic":"R-Wpn-Rocket01-LtAT","sourceIds":["official-early","bundled-stats"]
+  },
+  {
+    "id":"flamers","title":"Flamers","summary":"Short-range thermal weapons that need a safe way to close the distance.",
+    "strategy":["Flamers threaten nearby soft targets, but short reach makes the approach dangerous against ranged weapons.","Choose mobility and escorts to suit the ground. Hard walls and hardpoints are poor targets for the basic anti-personnel role.","Inferno and Plasmite are unlocks; gel and autoloader topics are upgrades. Campaign and multiplayer prerequisites differ."],
+    "iconTopic":"R-Wpn-Flame2","sourceIds":["official-early","bundled-stats"]
+  },
+  {
+    "id":"artillery","title":"Mortars and artillery","summary":"Indirect fire supports siege, defensive fire and attacks beyond a direct-fire front line.",
+    "strategy":["Protect artillery from close attackers and check each weapon's minimum and maximum range.","Sensors help indirect fire find and engage targets. Counter-battery sensors provide a separate response to enemy artillery.","Mortars, howitzers and indirect rockets do not share every upgrade. Follow the actual family and prerequisites."],
+    "iconTopic":"R-Wpn-Howitzer03-Rot","sourceIds":["official-quickstart","official-weapons","bundled-stats"]
+  },
+  {
+    "id":"lasers","title":"Lasers and energy weapons","summary":"Later energy weapons, with thermal damage and separate accuracy or reload upgrades.",
+    "strategy":["Check the particular weapon's damage class, reach and target capability. A ground laser and an AA laser serve different targets.","Their infrastructure requirements matter as much as the weapon unlock. Keep research and power support ready."],
+    "iconTopic":"R-Wpn-Laser01","sourceIds":["official-weapons","bundled-stats"]
+  },
+  {
+    "id":"railguns","title":"Railguns and Gauss","summary":"The Needle Gun, Rail Gun and Gauss family builds on several late prerequisites.",
+    "strategy":["Treat this as a supported late-game branch: cannon research and research infrastructure can both be required.","High damage is not a complete design. Compare weight, range, armour class and the targets your opponent is using."],
+    "iconTopic":"R-Wpn-RailGun03","sourceIds":["official-weapons","bundled-stats"]
+  },
+  {
+    "id":"emp","title":"EMP and electronic warfare","summary":"Disruption and electronic effects supplement a force rather than replacing ordinary damage.",
+    "strategy":["EMP interrupts targets; electronic warfare attacks resistance and can capture susceptible enemies. These are different mechanics.","Bring damaging weapons to exploit disruption and examine resistance research when facing electronic attacks.","Availability is mode-specific. Some Campaign effects and enemy-only technologies are scripted rather than normal player choices."],
+    "iconTopic":"R-Wpn-EMPCannon","sourceIds":["official-quickstart","bundled-stats"]
+  },
+  {
+    "id":"aircraft","title":"Aircraft and anti-air","summary":"VTOL technology, rearming, bombs and dedicated anti-aircraft weapons.",
+    "strategy":["VTOLs need compatible factories and rearm support. Their weapons and ammunition behaviour differ from ordinary ground designs.","Use dedicated AA when a mode and opponent provide air threats. Check target capability before using an AA weapon against ground units."],
+    "note":"FFA disables VTOL aircraft, factories, pads and air upgrades. Some AA research remains native-valid there, but this match has no VTOL threat. Campaign availability follows the mission.",
+    "iconTopic":"R-Vehicle-Prop-VTOL","sourceIds":["official-quickstart","bundled-stats"]
+  },
+  {
+    "id":"vehicles","title":"Bodies, propulsion and armour","summary":"A weapon needs a compatible body, enough power and propulsion suited to the terrain.",
+    "strategy":["Compare body weapon slots, weight, power output, hit points and kinetic or thermal armour. More weapon weight can reduce mobility.","Wheels, half-tracks, tracks and hover trade speed, durability and terrain access. Hover does not make every ground route valid.","Engine, vehicle alloy and thermal armour upgrades are distinct. Vehicle and cyborg protection have separate research."],
+    "iconTopic":"R-Vehicle-Prop-Hover","sourceIds":["official-quickstart","bundled-stats"]
+  },
+  {
+    "id":"cyborgs","title":"Cyborgs","summary":"Cyborg weapons and protection have their own factory and research support.",
+    "strategy":["Use a completed compatible cyborg factory. Some weapon research unlocks a cyborg weapon alongside its vehicle counterpart.","Cyborg armour research is separate from vehicle armour. Choose a weapon for its actual target role and watch for anti-personnel fire."],
+    "iconTopic":"R-Struc-Factory-Cyborg","sourceIds":["official-quickstart","bundled-stats"]
+  },
+  {
+    "id":"economy","title":"Power, laboratories and manufacturing","summary":"Power generation, construction, modules and production research support every weapon branch.",
+    "strategy":["Balance oil extraction and generator capacity with spending. Several simultaneous build, research and manufacturing orders compete for power.","Factory modules support production and larger designs; research modules and research upgrades increase laboratory work rate.","Engineering upgrades improve constructors. Check the topic's effects instead of assuming every infrastructure unlock gives the same bonus."],
+    "note":"Towers research rewards increase laboratory research rate without completing topics. Purchased structures use a separate quota and do not grant the whole natural research path.",
+    "iconTopic":"R-Struc-Power-Upgrade01","sourceIds":["official-quickstart","bundled-stats","mode-rules"]
+  },
+  {
+    "id":"sensors","title":"Sensors, command and repair","summary":"Detection, indirect-fire targeting, commanders, repair and resistance support the fighting units.",
+    "strategy":["Normal sensors, counter-battery sensors and specialist sensors have different detection or targeting roles.","Protect support units and keep artillery within the support arrangement it needs. A sensor is not a direct-fire weapon.","Research can improve detection, construction, repair or command capacity. Read the actual effects and any Campaign mission gate."],
+    "iconTopic":"R-Sys-Sensor-Turret01","sourceIds":["official-quickstart","bundled-stats"]
+  },
+  {
+    "id":"defences","title":"Defences, walls and hardpoints","summary":"Static weapons need suitable fields of fire, room to build and the right supporting research.",
+    "strategy":["Follow both the weapon prerequisite and the structure prerequisite. A weapon unlock alone may not unlock its tower or hardpoint.","Walls, hardpoints and base buildings are not equally resistant. Weapon effects and structure strength affect damage.","Combine direct fire, anti-personnel weapons, sensors and artillery to suit the actual threat rather than making every defence identical."],
+    "iconTopic":"R-Defense-WallTower06","sourceIds":["official-quickstart","bundled-stats"]
+  }
+]

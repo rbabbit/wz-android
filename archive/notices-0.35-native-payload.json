@@ -1,0 +1,53 @@
+{
+  "version": "0.35",
+  "passed": true,
+  "recordedUTC": "2026-11-10T09:30:23.930899+00:00",
+  "scope": "Append-only round/startup native-script payload; no engine execution or emulator QA",
+  "baselineAPK": "C:\\timerApp\\Warzone-Towers-0.34-Test-Ads.apk",
+  "baselineSHA256": "4c5c5b6937ea756aea0f46697b0ea6c4f0192d918d88e4caa663a00a149fda7a",
+  "baselineDataSHA256": "4f1fe71399e58eba80406162602e286207d773ce4636ac3193f13b982f3d4c8c",
+  "nativeRuntimeProof": "qa/0.35-notices/native-runtime-integration.json",
+  "nativeProgramBodySHA256": "35bf2bd67a4ebc0ee6172a10d5b006f20164ea4271d8ffd287c61a7679fa15f0",
+  "matchedWASMSHA256": "120457e5db655d819436f3c5315991cb013f771e01ace7a872469e0844796380",
+  "changedVFSFiles": [
+    "/data/mp/multiplay/script/rules/printsettings.js",
+    "/data/mp/multiplay/script/mods/configReader.js"
+  ],
+  "addedVFSFiles": [],
+  "removedVFSFiles": [],
+  "unchangedVirtualFiles": 4290,
+  "frozenDataPrefixUnchanged": true,
+  "nativeProgramUnchangedOutsidePackageIndex": true,
+  "wasmUnchangedByScenarioIntegration": true,
+  "sources": [
+    {
+      "path": "scenario/warzone-towers-config-reader.js",
+      "vfs": "/data/mp/multiplay/script/mods/configReader.js",
+      "bytes": 1253,
+      "sha256": "cab5ccad87e693829f0ffed2d4d74ce6651a3aaa514d7fad5d8e26bcadde9913"
+    },
+    {
+      "path": "scenario/warzone-towers-printsettings.js",
+      "vfs": "/data/mp/multiplay/script/rules/printsettings.js",
+      "bytes": 366,
+      "sha256": "a104623756dd5d5135535f9119178fd4d6fb8118f25862334b54a0e6d2ca2095"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "app/src/main/assets/warzone/warzone2100.js",
+      "bytes": 793364,
+      "sha256": "1b615d78cb3188a6de1e9009e11f6e9d2b2df9450fa74d3e8b4485c8c6094926"
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100.data",
+      "bytes": 77732901,
+      "sha256": "a92471614e4319895dfc4d7d739f973e68c4cb5d0ab88dfb22d8977b240dee7e"
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100.wasm",
+      "bytes": 13460778,
+      "sha256": "120457e5db655d819436f3c5315991cb013f771e01ace7a872469e0844796380"
+    }
+  ]
+}

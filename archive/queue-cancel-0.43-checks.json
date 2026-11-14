@@ -1,0 +1,38 @@
+{
+  "version": "0.43",
+  "passed": true,
+  "emulatorUsed": false,
+  "browserUsed": false,
+  "androidRuntimeExecuted": false,
+  "actualNativeEngineExecuted": false,
+  "gameplayVerified": false,
+  "scope": "Controlled source/VM production cancellation checks only. Native cancellation/refunds are source-inspected and compiled, not executed; no emulator or native runtime.",
+  "checks": [
+    "Stale job, template, start time and wrong factory identity cannot reach native cancellation",
+    "Unknown native queue or rejected native identity leaves the current job and FIFO intact",
+    "Acknowledged exact cancellation preserves other factories and waiting entries; ordinary FIFO advances and old repeated tap cannot cancel the next unit",
+    "Group cancellation removes only exact still-waiting IDs, retaining a promoted unit and other factories",
+    "Queue exposes compact current, one-waiting and waiting-group controls with busy guard, acknowledgement and fresh snapshot refresh; UI JavaScript parses",
+    "Compiled native hook source gates Towers/player and exact subject, rejects pending/internal runs, and delegates refunds to existing native cancellation"
+  ],
+  "checksPassed": 6,
+  "sources": [
+    {
+      "path": "scenario/warzone-towers-commands.js",
+      "sha256": "35a33be65b2e7863af38ef79991834344ea6a8f36719c8d519bfd12cedadb1a8"
+    },
+    {
+      "path": "app/src/main/assets/warzone-command-pages.js",
+      "sha256": "27cd559136fd68a681da7655c2a4a1105c7f89a6213e601e93a3eb6871ffcc64"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/towers-commands.css",
+      "sha256": "0d6f3868f2a3225932aeb6e5d80c93093954f6918be54e98d199271717f10958"
+    },
+    {
+      "path": "archive/native-queue-0.43/quickjs_backend.cpp",
+      "sha256": "cc8d75756e00cb2bb96068a103e2c3323da9fb41cb89bc3b05449e8b62c7543f"
+    }
+  ],
+  "recordedUTC": "2026-11-10T22:21:37.130Z"
+}

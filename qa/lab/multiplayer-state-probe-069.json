@@ -1,0 +1,75 @@
+{
+  "wasmSha256": "5cfd676db13c96899a876fbd77197b7092b924ed265feed8594a2356f0b2492d",
+  "bytes": 13567057,
+  "nativeCodeModified": false,
+  "probe": {
+    "byteAddress": 7015680,
+    "type": "little-endian u32",
+    "operation": "read only",
+    "values": {
+      "GS_TITLE_SCREEN": 0,
+      "GS_NORMAL": 1,
+      "GS_SAVEGAMELOAD": 2
+    }
+  },
+  "proof": {
+    "functionImports": 534,
+    "mainLoopImport": {
+      "index": 101,
+      "type": 6,
+      "module": "env"
+    },
+    "schedulerFunction": 3822,
+    "callbackTableIndex": 14393,
+    "callbackFunction": 14459,
+    "gameModeGuardBodyOffset": 39,
+    "corroboratingConstantStores": {
+      "0": [
+        {
+          "function": 3815,
+          "bodyOffset": 60352
+        },
+        {
+          "function": 3817,
+          "bodyOffset": 471
+        },
+        {
+          "function": 3818,
+          "bodyOffset": 7427
+        },
+        {
+          "function": 3822,
+          "bodyOffset": 76273
+        }
+      ],
+      "1": [
+        {
+          "function": 3817,
+          "bodyOffset": 12
+        },
+        {
+          "function": 3818,
+          "bodyOffset": 159
+        }
+      ]
+    }
+  },
+  "source": {
+    "tag": "4.7.0",
+    "commit": "7d3d8e51a61ceee89e6bf672a41337e1a9cd7392",
+    "enumFile": "src/main.h",
+    "enum": {
+      "GS_TITLE_SCREEN": 0,
+      "GS_NORMAL": 1,
+      "GS_SAVEGAMELOAD": 2
+    },
+    "getterFile": "src/main.cpp",
+    "getter": "GS_GAMEMODE GetGameMode() { return gameStatus; }",
+    "mainLoopFile": "lib/sdl/main_sdl.cpp",
+    "earlyGuardFile": "src/loop.cpp",
+    "earlyGuard": "wz_emscripten_did_finish_render: if (GetGameMode() != GS_NORMAL) return;",
+    "archiveSha256": "48e67194c40831ffea1a4f309bc955bc868691ecbd92c6f0e6675786322ef77a"
+  },
+  "navigation": "GS_TITLE_SCREEN includes lobby room and frontend. Disambiguate with established TCP lifetime; NETclose is called before native return-to-title on Leave.",
+  "limits": "Only this exact engine hash is supported. No player/order state is read. Runtime observations must still confirm the 0/1 transition on the delivery APK."
+}

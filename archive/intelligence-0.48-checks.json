@@ -1,0 +1,129 @@
+{
+  "version": "0.48",
+  "passed": true,
+  "checks": [
+    {
+      "name": "Only completed topics with actual native messages appear; grants, authored-only and minor topics stay excluded",
+      "passed": true
+    },
+    {
+      "name": "Direct deep links and public selection cannot bypass report eligibility or expose starting technologies",
+      "passed": true
+    },
+    {
+      "name": "Valid report selection retains exact native ID, model geometry, normal opening silence and deliberate replay audio",
+      "passed": true
+    },
+    {
+      "name": "A missed completion event is recovered by a bounded live refresh without resetting query, scroll, model or audio",
+      "passed": true
+    },
+    {
+      "name": "Burst completion events and concurrent refresh callers coalesce into one native list request",
+      "passed": true
+    },
+    {
+      "name": "Fresh deep links query native report membership before selecting newly completed IDs",
+      "passed": true
+    },
+    {
+      "name": "Immediate list errors retain current valid details and keep periodic retries bounded",
+      "passed": true
+    },
+    {
+      "name": "A withdrawn selected report is covered and cleared before the native preview reset acknowledges",
+      "passed": true
+    },
+    {
+      "name": "A stale native selection response cannot display a topic lacking its report message",
+      "passed": true
+    },
+    {
+      "name": "A report withdrawn during native model layout never opens its transparent aperture",
+      "passed": true
+    },
+    {
+      "name": "Closing or ending while a refresh is pending rejects late history and never reopens the preview aperture",
+      "passed": true
+    },
+    {
+      "name": "Genuine native game-time rewind closes stale history; opening a lower-clock loaded save establishes a fresh baseline",
+      "passed": true
+    },
+    {
+      "name": "Normal close retains the opaque cover until acknowledgement, and late layout cannot reopen a closed report",
+      "passed": true
+    },
+    {
+      "name": "Major report notices preserve click/keyboard deep links; minor completion notices remain noninteractive",
+      "passed": true
+    },
+    {
+      "name": "An authored definition without a current engine message cannot open through its completion notice",
+      "passed": true
+    },
+    {
+      "name": "Generic notices and hidden/expired report notices cannot trigger report navigation",
+      "passed": true
+    },
+    {
+      "name": "Missing artwork helper leaves the genuine report visible without substituting a lab icon",
+      "passed": true
+    },
+    {
+      "name": "F5/Escape, menu preparation gates and dormant Duel retain their existing navigation boundaries",
+      "passed": true
+    },
+    {
+      "name": "The preserved v0.47 source reproduces the first-600ms mixed-clock close; fixed source stays open with 100/500/1000ms HUD lag",
+      "passed": true
+    },
+    {
+      "name": "Stale, backwards, missing and malformed wave HUD snapshots cannot be mistaken for a loaded game",
+      "passed": true
+    },
+    {
+      "name": "Native clocks may advance or remain paused, and valid zero is accepted as an opening baseline",
+      "passed": true
+    },
+    {
+      "name": "Missing, null, non-finite, boolean, negative and string native heartbeat timestamps never become a false zero or rewind",
+      "passed": true
+    },
+    {
+      "name": "An absent or invalid native opening timestamp waits for a valid native heartbeat rather than borrowing the HUD clock",
+      "passed": true
+    },
+    {
+      "name": "A real native not-open response still closes the stale panel without leaving a model aperture",
+      "passed": true
+    },
+    {
+      "name": "Late successful and failed native heartbeats cannot alter a panel that was closed and reopened",
+      "passed": true
+    }
+  ],
+  "checksPassed": 25,
+  "emulatorUsed": false,
+  "browserUsed": false,
+  "androidRuntimeExecuted": false,
+  "actualNativeEngineExecuted": false,
+  "screensVerified": false,
+  "gameplayVerified": false,
+  "scope": "Actual Intelligence/notices JavaScript in a bounded DOM/native-response fixture with independent wave/native clocks and native timestamps in every normal reply; native report eligibility remains authoritative. No browser, native engine, Android, model rendering or audio playback executed.",
+  "sources": [
+    {
+      "path": "app/src/main/assets/warzone-intelligence.js",
+      "sha256": "3c2aab15f2ad0314d3963ac18a5fd498cec808a2cdbd233ac7a21bb2350f5507"
+    },
+    {
+      "path": "app/src/main/assets/warzone-towers-notices.js",
+      "sha256": "192ceb3356ab677349afb3baaad136386c42884e071f99bdc9a0530900b7e6de"
+    },
+    {
+      "path": "tools/check-intelligence-048.cjs",
+      "sha256": "dc913a9415d06c4ddee07dc0ffa732a3dc66542d29fe1d8255c77cda375aa84c"
+    }
+  ],
+  "recordedUTC": "2026-11-11T10:39:20.741Z"
+}

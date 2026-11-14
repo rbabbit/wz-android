@@ -1,0 +1,166 @@
+{
+  "version": "0.60",
+  "candidateAPK_SHA256": "ddd4ff09b1c4e7943dfc10df49a88fca152798c3b2f1472a823d335c83cd269f",
+  "device": "emulator-5558",
+  "checks": [
+    {
+      "name": "ffa-compact-game",
+      "passed": true,
+      "evidence": "qa/ffa-060/ddd4ff09-ffa-compact-game.json",
+      "sha256": "3eb9bb4a27942dbd1a6d837e1bb728a8add42255ce4571e6b6305f00e4e8f54b"
+    },
+    {
+      "name": "ffa-easy-native",
+      "passed": true,
+      "evidence": "qa/ffa-060/ddd4ff09-ffa-easy-native.json",
+      "sha256": "e3cde86101d237fbb7a6dac7fd99e419606682fcea0db60af5098359f5829a8a"
+    },
+    {
+      "name": "ffa-medium-native",
+      "passed": true,
+      "evidence": "qa/ffa-060/ddd4ff09-ffa-medium-native.json",
+      "sha256": "3510a109f97926a5f2f7ffc8d0002da236622b833f8ec08aee3715ad7cb0d657"
+    },
+    {
+      "name": "ffa-hard-native",
+      "passed": true,
+      "evidence": "qa/ffa-060/ddd4ff09-ffa-hard-native.json",
+      "sha256": "5d4029770fc858652d2cd2b5a4c2d396803748a4f508a348b89297c132313140"
+    },
+    {
+      "name": "ffa-controls-save-load",
+      "passed": true,
+      "evidence": "qa/ffa-060/ddd4ff09-ffa-controls-save-load.json",
+      "sha256": "6773da5cda59e54ef8c6f1ee8edd556413c57d227071d0bf3914f6a83d5b6463"
+    },
+    {
+      "name": "ffa-phone-layouts",
+      "passed": true,
+      "evidence": "qa/ffa-060/ddd4ff09-ffa-phone-layouts.json",
+      "sha256": "febbf8c0ea2b16e4c1d2fa64d36c87aff9a6cb430994a6f5351646d578f49dce"
+    },
+    {
+      "name": "towers-campaign-regression",
+      "passed": true,
+      "evidence": "qa/ffa-060/ddd4ff09-towers-campaign-regression.json",
+      "sha256": "bc82e81daabba2b255da40ea7c2b8c401828da385334a9b0f521b6361698a666"
+    }
+  ],
+  "runtimeErrors": [],
+  "startedAt": "2026-11-12T03:42:09.102Z",
+  "passed": true,
+  "fixtureDisclosure": {
+    "ffa": "Fresh ordinary EMAG starts verify all three native difficulty settings. The repeated-save/compact case deliberately reuses an ordinary Hard phone checkpoint built through real UI on the earlier development APK, with its legitimately constructed factory and two manufactured trucks. Two new save/reload cycles and restored AI progression were verified on the delivery APK. The final fresh human control case also constructs a factory and manufactures two trucks normally. No units, power, research, alliances or victory are seeded.",
+    "campaign": "Existing ordinary native Campaign phone checkpoint is reused; no mission grants or unit edits.",
+    "graphics": "Known emulator terrain/shader limitations are retained separately from native gameplay and layout evidence.",
+    "wallet": "The initial supplied backup used a nonexistent preference filename and was kept untouched. The actual towers_rewards.xml was captured before any Towers smoke, then restored byte-for-byte while stopped; its complete ledger was verified after restart. FFA and Campaign saves were retained.",
+    "environment": "The same pre-existing emulator was restarted once after host transport/guest/console commands stopped responding during a display-profile transition. No AVD wipe or replacement fixture was used. Completed gameplay evidence was retained; only the affected compact native screens and pending return smoke were completed after recovery."
+  },
+  "limitations": [
+    "No full-match balance, sustained victory/defeat or full Campaign playthrough is claimed."
+  ],
+  "current": {
+    "case": "towers-campaign-regression",
+    "phase": "restore-original-wallet",
+    "at": "2026-11-12T04:08:26.105Z"
+  },
+  "fixtureCorrections": [
+    {
+      "kind": "fixture",
+      "candidateAPK_SHA256": "ddd4ff09b1c4e7943dfc10df49a88fca152798c3b2f1472a823d335c83cd269f",
+      "description": "A late QA assertion compared the restored native clock against the later Saved HUD clock using an arbitrary two-second allowance. The actual serialized F7 checkpoint is the correct reference.",
+      "serializedNativeGameTime": 166402,
+      "initialRestoredNativeTime": 169202,
+      "nativeComparisonPassed": true,
+      "productRuntimeErrors": [],
+      "resolution": "QA now compares the actual gam.json checkpoint time and reuses the already-observed native orders, two manufactured units, research and save rather than repeating production."
+    }
+  ],
+  "walletPreservation": {
+    "verified": true,
+    "originalBackupUntouched": true,
+    "originalSHA256": "63762d0b4956845b1696930720f55ea7cbf1ef621fad946419f36e02a0e9e0b9",
+    "rawRestoredSHA256": "63762d0b4956845b1696930720f55ea7cbf1ef621fad946419f36e02a0e9e0b9",
+    "afterRestartSHA256": "63762d0b4956845b1696930720f55ea7cbf1ef621fad946419f36e02a0e9e0b9",
+    "afterRestartLedgerIdentical": true
+  },
+  "originalWalletBackupWasCorrected": true,
+  "emulatorUsed": true,
+  "actualNativeEngineExecuted": true,
+  "fixtureFailures": [
+    {
+      "kind": "product",
+      "stage": "initial development APK",
+      "description": "FFA startup initially reused a Towers preRun directory callback; it was removed from the isolated FFA entry point. Initial frontend/loading observations are retained only as failure evidence.",
+      "evidence": [
+        "qa/ffa-060/initial-failure.json",
+        "qa/ffa-060/initial-failure.png"
+      ]
+    },
+    {
+      "kind": "product",
+      "stage": "initial development APK",
+      "description": "FFA Ready automation initially used the Towers fallback map row rather than authored human position 0; the FFA row is now explicit.",
+      "evidence": [
+        "qa/ffa-060/diagnostic-webview-frontend.png"
+      ]
+    },
+    {
+      "kind": "product",
+      "candidateAPK_SHA256": "03990c6995a03165364ee4e19732225328c2522c3e719b4510b2b955f49387cb",
+      "description": "Native lobby limits restored the VTOL pad limit to 50 after the first no-air hook. FFA now reapplies both limits after stock limits and on start/load. The FFA save row also initially displayed Towers Wave 0; it now reads Free for all.",
+      "evidence": [
+        "qa/ffa-060/qa-start.json",
+        "qa/ffa-060/qa-ffa-save-list.png"
+      ]
+    },
+    {
+      "kind": "product",
+      "candidateAPK_SHA256": "a699ad22cd103a06a8853d33e2b8ae85cf97242e93cfd612edbc1a287da5275d",
+      "description": "A real native timer ID assertion occurred after ordinary FFA save restoration. It was not treated as a fixture failure or ignored.",
+      "evidence": [
+        "qa/ffa-060/native-save-timer-failure.json",
+        "qa/ffa-060/a699ad22-ffa-loaded.png"
+      ]
+    },
+    {
+      "kind": "fixture",
+      "description": "QA corrected premature undefined-global reads, nonexistent research Done selector, cold-start readiness and the Campaign drawer test using actual expanded state. Android Back/top Research and the visible drawer toggle were used. These required no product changes."
+    },
+    {
+      "kind": "packaging",
+      "description": "An incremental APK retained unused ZIP space. Subsequent delivery candidates were built with clean assembleDebug; exact ZIP content comparisons and the permitted isolated FFA timer changes are recorded in archive/ffa-clean-apk-0.60.json."
+    },
+    {
+      "kind": "fixture",
+      "candidateAPK_SHA256": "ddd4ff09b1c4e7943dfc10df49a88fca152798c3b2f1472a823d335c83cd269f",
+      "description": "A late QA assertion compared the restored native clock against the later Saved HUD clock using an arbitrary two-second allowance. The actual serialized F7 checkpoint is the correct reference.",
+      "serializedNativeGameTime": 166402,
+      "initialRestoredNativeTime": 169202,
+      "nativeComparisonPassed": true,
+      "productRuntimeErrors": [],
+      "resolution": "QA now compares the actual gam.json checkpoint time and reuses the already-observed native orders, two manufactured units, research and save rather than repeating production.",
+      "evidence": [
+        "qa/ffa-060/clock-oracle-fixture-correction.json"
+      ]
+    },
+    {
+      "kind": "environment",
+      "candidateAPK_SHA256": "ddd4ff09b1c4e7943dfc10df49a88fca152798c3b2f1472a823d335c83cd269f",
+      "description": "At compact native Home capture the existing emulator stopped responding to shell echo, pidof, logcat, UIAutomator, raw screencap and emulator console commands, although the host transport listed it. No app native assertion was recorded.",
+      "failedCommand": "Error: spawnSync C:\\Users\\punke\\AppData\\Local\\Android\\Sdk\\platform-tools\\adb.exe ETIMEDOUT\n    at Object.spawnSync (node:internal/child_process:1191:20)\n    at spawnSync (node:child_process:929:24)\n    at execFileSync (node:child_process:972:15)\n    at rawAdb (C:\\timerApp\\wz-towers-lab\\tools\\campaign-live-051.cjs:9:25)\n    at adb (C:\\timerApp\\wz-towers-lab\\tools\\campaign-live-051.cjs:16:10)\n    at Object.tree (C:\\timerApp\\wz-towers-lab\\tools\\campaign-live-051.cjs:20:30)\n    at capture (C:\\timerApp\\wz-towers-lab\\tools\\verify-ffa-060.cjs:30:155)\n    at layouts (C:\\timerApp\\wz-towers-lab\\tools\\verify-ffa-060.cjs:44:528)\n    at async run (C:\\timerApp\\wz-towers-lab\\tools\\verify-ffa-060.cjs:48:262)\n    at async main (C:\\timerApp\\wz-towers-lab\\tools\\verify-ffa-060.cjs:49:378)",
+      "recovery": "Restarted the same Pixel_10_Pro AVD on emulator-5558 with its exact original headless/no-snapshot-load/no-snapshot-save/gpu-host arguments; no wipe or replacement environment. Boot completed in27213ms. Data and saves retained.",
+      "testChange": "Stop the Lab process before changing emulator display overrides; recovered compact native screens and targets were checked, then the normal display/font restored.",
+      "newProductFailureClaimed": false,
+      "recoveryVerified": true,
+      "evidence": [
+        "qa/ffa-060/emulator-recovery-summary.json"
+      ]
+    }
+  ],
+  "finishedAt": "2026-11-12T04:08:32.249Z",
+  "allMapsVerified": false,
+  "fullMatchVictoryOrDefeatVerified": false,
+  "fullCampaignPlaythroughVerified": false,
+  "liveAdsTested": false
+}

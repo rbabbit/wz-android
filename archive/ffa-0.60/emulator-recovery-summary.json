@@ -1,0 +1,10 @@
+{
+  "kind": "environment",
+  "candidateAPK_SHA256": "ddd4ff09b1c4e7943dfc10df49a88fca152798c3b2f1472a823d335c83cd269f",
+  "description": "At compact native Home capture the existing emulator stopped responding to shell echo, pidof, logcat, UIAutomator, raw screencap and emulator console commands, although the host transport listed it. No app native assertion was recorded.",
+  "failedCommand": "Error: spawnSync C:\\Users\\punke\\AppData\\Local\\Android\\Sdk\\platform-tools\\adb.exe ETIMEDOUT\n    at Object.spawnSync (node:internal/child_process:1191:20)\n    at spawnSync (node:child_process:929:24)\n    at execFileSync (node:child_process:972:15)\n    at rawAdb (C:\\timerApp\\wz-towers-lab\\tools\\campaign-live-051.cjs:9:25)\n    at adb (C:\\timerApp\\wz-towers-lab\\tools\\campaign-live-051.cjs:16:10)\n    at Object.tree (C:\\timerApp\\wz-towers-lab\\tools\\campaign-live-051.cjs:20:30)\n    at capture (C:\\timerApp\\wz-towers-lab\\tools\\verify-ffa-060.cjs:30:155)\n    at layouts (C:\\timerApp\\wz-towers-lab\\tools\\verify-ffa-060.cjs:44:528)\n    at async run (C:\\timerApp\\wz-towers-lab\\tools\\verify-ffa-060.cjs:48:262)\n    at async main (C:\\timerApp\\wz-towers-lab\\tools\\verify-ffa-060.cjs:49:378)",
+  "recovery": "Restarted the same Pixel_10_Pro AVD on emulator-5558 with its exact original headless/no-snapshot-load/no-snapshot-save/gpu-host arguments; no wipe or replacement environment. Boot completed in27213ms. Data and saves retained.",
+  "testChange": "Stop the Lab process before changing emulator display overrides; recovered compact native screens and targets were checked, then the normal display/font restored.",
+  "newProductFailureClaimed": false,
+  "recoveryVerified": true
+}

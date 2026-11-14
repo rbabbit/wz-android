@@ -1,0 +1,210 @@
+{
+  "version": "0.55",
+  "baseline": "0.54",
+  "reproduced": true,
+  "scope": "Actual Campaign backend dispatch and construction journal with synthetic native accepted-order state; no emulator actions by this checker.",
+  "issue": "Successful queued-job cancellation leaves its independent journal queued while shared workers build an earlier foundation.",
+  "answer": {
+    "nonce": "test-1",
+    "action": "cancel-job",
+    "ok": true,
+    "reason": "",
+    "result": {
+      "id": "power",
+      "itemId": "Power",
+      "x": 9,
+      "y": 9,
+      "workers": [
+        10
+      ],
+      "automatic": false,
+      "status": "cancelled",
+      "created": 100,
+      "attempts": {},
+      "issued": {},
+      "parentId": 0,
+      "targetModules": 0,
+      "reason": ""
+    },
+    "gameTime": 10000
+  },
+  "gameTime": 22000,
+  "state": {
+    "jobs": [
+      {
+        "id": "lab",
+        "itemId": "Lab",
+        "x": 5,
+        "y": 5,
+        "workers": [
+          10
+        ],
+        "automatic": false,
+        "status": "working",
+        "created": 100,
+        "attempts": {
+          "10": 1
+        },
+        "issued": {
+          "10": 5000
+        },
+        "parentId": 0,
+        "targetModules": 0,
+        "reason": ""
+      },
+      {
+        "id": "power",
+        "itemId": "Power",
+        "x": 9,
+        "y": 9,
+        "workers": [
+          10
+        ],
+        "automatic": false,
+        "status": "cancelled",
+        "created": 100,
+        "attempts": {},
+        "issued": {},
+        "parentId": 0,
+        "targetModules": 0,
+        "reason": ""
+      }
+    ],
+    "sites": [
+      {
+        "id": "lab",
+        "itemId": "Lab",
+        "x": 5,
+        "y": 5,
+        "workers": [
+          10
+        ],
+        "automatic": false,
+        "status": "building",
+        "created": 100,
+        "attempts": {
+          "10": 1
+        },
+        "issued": {
+          "10": 5000
+        },
+        "parentId": 0,
+        "targetModules": 0,
+        "reason": "",
+        "knownStructures": [],
+        "idleAt": null,
+        "remaining": 5,
+        "structureId": 50,
+        "observed": true,
+        "progress": 0.5,
+        "workersActive": 1
+      },
+      {
+        "id": "power",
+        "itemId": "Power",
+        "x": 9,
+        "y": 9,
+        "workers": [
+          10
+        ],
+        "automatic": false,
+        "status": "queued",
+        "created": 100,
+        "attempts": {},
+        "issued": {},
+        "parentId": 0,
+        "targetModules": 0,
+        "reason": "",
+        "knownStructures": [],
+        "idleAt": null,
+        "remaining": null
+      }
+    ],
+    "workers": {
+      "10": [
+        "lab"
+      ]
+    },
+    "sessionWorkers": {},
+    "finishedBuilds": []
+  },
+  "construction": {
+    "active": [
+      {
+        "id": 50,
+        "itemId": "Lab",
+        "name": "Research Facility",
+        "x": 5,
+        "y": 5,
+        "progress": 0.5,
+        "approximate": true,
+        "workers": 1,
+        "rate": 10,
+        "status": "building",
+        "remaining": 5
+      }
+    ],
+    "sites": [
+      {
+        "id": "lab",
+        "itemId": "Lab",
+        "x": 5,
+        "y": 5,
+        "workers": [
+          10
+        ],
+        "automatic": false,
+        "status": "building",
+        "created": 100,
+        "attempts": {
+          "10": 1
+        },
+        "issued": {
+          "10": 5000
+        },
+        "parentId": 0,
+        "targetModules": 0,
+        "reason": "",
+        "knownStructures": [],
+        "idleAt": null,
+        "remaining": 5,
+        "structureId": 50,
+        "observed": true,
+        "progress": 0.5,
+        "workersActive": 1
+      },
+      {
+        "id": "power",
+        "itemId": "Power",
+        "x": 9,
+        "y": 9,
+        "workers": [
+          10
+        ],
+        "automatic": false,
+        "status": "queued",
+        "created": 100,
+        "attempts": {},
+        "issued": {},
+        "parentId": 0,
+        "targetModules": 0,
+        "reason": "",
+        "knownStructures": [],
+        "idleAt": null,
+        "remaining": null
+      }
+    ]
+  },
+  "orders": [],
+  "sources": [
+    {
+      "path": "campaign/commands.js",
+      "sha256": "daee69ffbb33dae8d1cea62bea51de881b824282eb9ee385e36b95e61ef36a27"
+    },
+    {
+      "path": "tools/check-campaign-cancel-055.cjs",
+      "sha256": "488b5d7c715193bb4425dbe9b0550433f2171638fb801b2c5777bc70dca60335"
+    }
+  ],
+  "recordedUTC": "2026-11-11T20:26:18.457Z"
+}

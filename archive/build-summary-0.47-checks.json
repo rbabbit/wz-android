@@ -1,0 +1,35 @@
+{
+  "version": "0.47",
+  "passed": true,
+  "emulatorUsed": false,
+  "browserUsed": false,
+  "androidRuntimeExecuted": false,
+  "actualNativeEngineExecuted": false,
+  "screensVerified": false,
+  "gameplayVerified": false,
+  "scope": "Actual JavaScript function execution with synthetic read-only construction snapshots, source preservation and source-derived compact geometry only.",
+  "checksPassed": 9,
+  "checks": [
+    "Only one actively building site appears, with stable number, name and observed progress; other work and finished history stay untouched",
+    "Completion advances to the next active site and the same site keeps its original number",
+    "Screenshot case with only completed sites clears the summary and releases its entire layout space",
+    "Active priority is building/module upgrade, power wait, truck wait, travel, then queued; cancelled, failed, interrupted and blocked rows are excluded",
+    "Native construction without an app job and module work use the original observed status and display identity",
+    "Rendering clamps only visual progress and escapes item names without modifying engine snapshots",
+    "Towers installation removes only its redundant Exit button; Duel retains it and footer keep-orders toggles remain byte-identical",
+    "Compact CSS has one unclipped text row and progress line, no fixed legacy queue height, and scales with existing text settings",
+    "Every unrelated named command/menu/order function remains identical to the v0.46 complete fallback"
+  ],
+  "unchangedNamedFunctions": 163,
+  "sources": [
+    {
+      "path": "app/src/main/assets/warzone-command-pages.js",
+      "sha256": "b32f9feb0315164745a7dda305f3b8b0f06f046f318577f8f24910657b66caf9"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/towers-commands.css",
+      "sha256": "6b1fa9cb3b5a5f65ce12d2e4118caa0c2b572e88e0263ae247f651c6710d80e8"
+    }
+  ],
+  "recordedUTC": "2026-11-11T09:36:48.646Z"
+}

@@ -1,0 +1,54 @@
+{
+  "version": "0.67",
+  "passed": true,
+  "checksPassed": 7,
+  "emulatorUsed": false,
+  "checks": [
+    "All fifty-one known maps select immutable wrapper identity, difficulty and player count",
+    "Native FFA observer covers every active slot, hostility and air caps, including two/three/four/six-player research",
+    "Actual native policy rejects mismatched map slots while retaining minimal legacy EMAG config",
+    "Map-aware native archive restore and F7 save keep every map and all active bot contexts",
+    "Configured slot count, human ownership, hostility and bot5 cannot be forged or omitted",
+    "The actual legacy EMAG NullBot archive stays byte-exact and defaults to four slots",
+    "Campaign restore and Towers reward save still use their original branches"
+  ],
+  "syntheticNativeProtocolFixture": true,
+  "actualNativeEngineExecuted": false,
+  "sources": [
+    {
+      "path": "app/src/main/assets/warzone/saved-games.js",
+      "bytes": 40340,
+      "sha256": "b447db433205420fe357f3c92a02f6232b8fd9af08d6e41aa23f0fe7b8303879"
+    },
+    {
+      "path": "app/src/main/assets/warzone-ffa-hud.js",
+      "bytes": 5489,
+      "sha256": "c3cf12351e3b1155035092e4646bfb1ab95dcf3782859615524937f73dbba496"
+    },
+    {
+      "path": "app/src/main/assets/warzone/index-ffa.html",
+      "bytes": 138323,
+      "sha256": "719183b6f3f6ee254c206c8c2494a2462cc300c29a8b653fa676298c3a650753"
+    },
+    {
+      "path": "app/src/main/assets/ffa-maps.json",
+      "bytes": 30449,
+      "sha256": "8bd04644135ebe47186d50fbd55bbb72d9a199465ae1caee9cdd2d764a474a79"
+    },
+    {
+      "path": "scenario/ffa/policy.js",
+      "bytes": 1260,
+      "sha256": "e267d30aae7823063136d821a5dd2b47efdd696b15c7af929538e087667c9c5b"
+    },
+    {
+      "path": "scenario/ffa/rules.js",
+      "bytes": 7828,
+      "sha256": "48ca2014ac3d6a5864b82a47fefd452cac350f1a495660334090d59ef9f8d55f"
+    },
+    {
+      "path": "tools/check-ffa-maps-js-067.cjs",
+      "bytes": 15953,
+      "sha256": "a8bad67413a0b3188012504b76b63039a18ee1920d2624f91ce64c8fe35243a3"
+    }
+  ]
+}

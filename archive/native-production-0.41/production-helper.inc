@@ -1,0 +1,79 @@
+// Towers-only read-only native production observation. No orders, power requests,
+// queue mutation, timers, rendering or random state are changed here.
+static JSValue towersProductionState(const STRUCTURE *structure, JSContext *ctx)
+{
+	const auto type = structure->pStructureType->type;
+	if (structure->player != selectedPlayer || !structure->pFunctionality
+		|| (type != REF_FACTORY && type != REF_CYBORG_FACTORY && type != REF_VTOL_FACTORY))
+	{
+		return JS_UNDEFINED;
+	}
+	FILE *marker = fopen("/tmp/warzone-towers-ui-v34", "rb");
+	if (!marker) return JS_UNDEFINED;
+	const bool enabled = fgetc(marker) == '1';
+	fclose(marker);
+	if (!enabled) return JS_UNDEFINED;
+	const FACTORY &factory = structure->pFunctionality->factory;
+	const DROID_TEMPLATE *subject = factory.psSubject;
+	JSValue value = JS_NewObject(ctx);
+	bool nativeQueueEmpty = productionPlayer == structure->player && factory.pendingCount == 0;
+	if (factory.psAssemblyPoint && factory.psAssemblyPoint->factoryType < NUM_FACTORY_TYPES)
+	{
+		const auto &runs = asProductionRun[factory.psAssemblyPoint->factoryType];
+		if (factory.psAssemblyPoint->factoryInc < runs.size())
+		{
+			for (const auto &entry : runs[factory.psAssemblyPoint->factoryInc])
+			{
+				if (entry.numRemaining() > 0) nativeQueueEmpty = false;
+			}
+		}
+	}
+	else nativeQueueEmpty = false;
+	if (factory.productionLoops != 0) nativeQueueEmpty = false;
+	QuickJS_DefinePropertyValue(ctx, value, "nativeQueueEmpty", JS_NewBool(ctx, nativeQueueEmpty), JS_PROP_ENUMERABLE);
+	QuickJS_DefinePropertyValue(ctx, value, "active", JS_NewBool(ctx, subject != nullptr), JS_PROP_ENUMERABLE);
+	if (!subject) return value;
+
+	const int total = std::max(1, static_cast<int>(calcTemplateBuild(subject)));
+	const int remaining = std::max(0, std::min(total, factory.buildPointsRemaining));
+	const int rate = getBuildingProductionPoints(structure);
+	const int player = structure->player;
+	bool capacityLimited = IsPlayerDroidLimitReached(player);
+	switch (droidTemplateType(subject))
+	{
+	case DROID_COMMAND:
+		capacityLimited = capacityLimited || !structureExists(player, REF_COMMAND_CONTROL, true, false)
+			|| getNumCommandDroids(player) >= getMaxCommanders(player);
+		break;
+	case DROID_CONSTRUCT:
+	case DROID_CYBORG_CONSTRUCT:
+		capacityLimited = capacityLimited || getNumConstructorDroids(player) >= getMaxConstructors(player);
+		break;
+	default: break;
+	}
+	// This mirrors only the pure commander-group capacity predicate. The engine's
+	// checkHaltOnMaxUnitsReached also emits notices, so it must never be called here.
+	if (!bMultiPlayer && factory.psCommander && !templateIsIDF(subject)
+		&& subject->getPropulsionStats()->propulsionType != PROPULSION_TYPE_LIFT)
+	{
+		const unsigned members = factory.psCommander->psGroup ? factory.psCommander->psGroup->getNumMembers() : 0;
+		capacityLimited = capacityLimited || members >= cmdDroidMaxGroup(factory.psCommander);
+	}
+	const bool waitingCapacity = capacityLimited && (factory.timeStarted == ACTION_START_TIME || remaining == 0);
+	const bool held = factory.timeStartHold != 0 || gamePaused()
+		|| (bMultiPlayer && structure->resistance < static_cast<int>(structureResistance(structure->pStructureType, player)));
+	const bool waitingPower = remaining == total && checkPowerRequest(structure) >= 0;
+	const char *state = held ? "paused" : waitingCapacity ? "waiting-capacity"
+		: waitingPower ? "waiting-power" : rate > 0 ? "building" : "paused";
+	QuickJS_DefinePropertyValue(ctx, value, "templateId", JS_NewUint32(ctx, subject->multiPlayerID), JS_PROP_ENUMERABLE);
+	QuickJS_DefinePropertyValue(ctx, value, "currentName", JS_NewString(ctx, getStatsName(subject)), JS_PROP_ENUMERABLE);
+	JSValue subjectDesign = convTemplate(subject, ctx);
+	QuickJS_DefinePropertyValue(ctx, subjectDesign, "templateId", JS_NewUint32(ctx, subject->multiPlayerID), JS_PROP_ENUMERABLE);
+	QuickJS_DefinePropertyValue(ctx, value, "subjectDesign", subjectDesign, JS_PROP_ENUMERABLE);
+	QuickJS_DefinePropertyValue(ctx, value, "timeStarted", JS_NewUint32(ctx, factory.timeStarted), JS_PROP_ENUMERABLE);
+	QuickJS_DefinePropertyValue(ctx, value, "totalBuildPoints", JS_NewInt32(ctx, total), JS_PROP_ENUMERABLE);
+	QuickJS_DefinePropertyValue(ctx, value, "remainingBuildPoints", JS_NewInt32(ctx, remaining), JS_PROP_ENUMERABLE);
+	QuickJS_DefinePropertyValue(ctx, value, "buildPointsPerSecond", JS_NewInt32(ctx, rate), JS_PROP_ENUMERABLE);
+	QuickJS_DefinePropertyValue(ctx, value, "state", JS_NewString(ctx, state), JS_PROP_ENUMERABLE);
+	return value;
+}

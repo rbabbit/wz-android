@@ -1,4 +1,4 @@
-/* Assigned Towers music, plus the retained native playlist path for Duel. */
+/* Assigned Towers music and bundled FFA/Campaign playlists; native Duel stays intact. */
 (() => {
   'use strict';
   const parameters=new URLSearchParams(location.search);
@@ -6,10 +6,14 @@
   // filename is available before either engine starts and keeps that path intact.
   if (!/\/index-duel\.html$/.test(location.pathname)) {
     const session=parameters.get('battle_session')||'';
-    const state={mode:'map',cached:false,enabled:false,mapId:'',trackId:'',title:'',author:'',
+    const mode=/\/index-ffa\.html$/.test(location.pathname)?'ffa':/\/index-campaign\.html$/.test(location.pathname)?'campaign':'map';
+    const playlistMode=mode!=='map';
+    const state={mode,cached:false,enabled:false,mapId:'',trackId:'',title:'',author:'',missionId:'',campaignSession:'',video:false,missionResults:false,
       url:'',battleActive:false,suspended:false,playing:false,loading:false,loadedBytes:0,error:'',disposed:false};
     let player=null,playerUrl='',generation=0,pending=0,menu=null,menuDocument=null,anchor=null;
     let loadController=null,blobUrl='',deadline=null;
+    let playlist=[],shuffle=[],playlistKey='',campaignTimer=null,retained=false;
+    const history=[],playedTracks=[],intentionalPause=new WeakSet();let lastPlayingGeneration=-1;
     const FETCH_TIMEOUT=20000,PLAY_TIMEOUT=12000,BUFFER_TIMEOUT=12000;
     let outsideListener=null,keyListener=null,resizeListener=null;
     // Install before SDL initializes. Escape closes this small menu before a
@@ -22,7 +26,7 @@
     window.addEventListener('keydown',earlyKeyListener,true);
 
     const allowed=()=>!state.disposed&&state.battleActive&&!state.suspended&&!document.hidden
-      &&state.cached&&state.enabled&&Boolean(state.url);
+      &&!state.video&&!state.missionResults&&state.cached&&state.enabled&&Boolean(state.url);
     const snapshot=raw=>{
       const value=typeof raw==='string'?JSON.parse(raw):raw;
       if(!value||typeof value!=='object'||Array.isArray(value))throw Error('Music settings are unavailable.');
@@ -33,30 +37,74 @@
           throw Error('The map soundtrack is unavailable.');
         url=local.href;
       }
-      return {cached:value.cached===true,enabled:value.enabled===true,suspended:value.suspended===true,mapId:String(value.mapId||''),
+      const result={cached:value.cached===true,enabled:value.enabled===true,suspended:value.suspended===true,mapId:String(value.mapId||''),
         trackId:String(value.trackId||''),title:String(value.title||''),author:String(value.author||''),url};
+      if(playlistMode){
+        if(value.mode!==mode||!Array.isArray(value.tracks)||value.tracks.length!==(mode==='campaign'?3:39))
+          throw Error('The music playlist is unavailable.');
+        const ids=new Set();
+        result.tracks=value.tracks.map(track=>{
+          const id=String(track?.id||''),local=new URL(String(track?.url||''),location.href);
+          trackLength(id);
+          if(ids.has(id)||local.origin!==location.origin||local.pathname!=='/warzone/optional/map-music/'+id)
+            throw Error('The music playlist is unavailable.');
+          ids.add(id);return{id,title:String(track.title||''),author:String(track.author||''),url:local.href};
+        });
+        const policy=window.WarzoneMusicCatalog?.playlists?.[mode]?.tracks;
+        if(!Array.isArray(policy)||policy.length!==ids.size||policy.some(id=>!ids.has(id)))
+          throw Error('The music playlist differs from the bundled albums.');
+        result.tracks=policy.map(id=>result.tracks.find(track=>track.id===id));
+        result.missionId=String(value.missionId||'');
+      }
+      return result;
     };
+    function nextTrack(initial=false){
+      if(mode==='campaign'){
+        const index=initial?Math.floor(Math.random()*playlist.length):(playlist.findIndex(t=>t.id===state.trackId)+1)%playlist.length;
+        return playlist[index];
+      }
+      if(!shuffle.length){
+        shuffle=playlist.slice();
+        for(let i=shuffle.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[shuffle[i],shuffle[j]]=[shuffle[j],shuffle[i]];}
+        if(shuffle.length>1&&shuffle[shuffle.length-1].id===state.trackId)[shuffle[0],shuffle[shuffle.length-1]]=[shuffle[shuffle.length-1],shuffle[0]];
+      }
+      return shuffle.pop();
+    }
+    function useTrack(track){
+      if(!track)return;
+      pause();Object.assign(state,{trackId:track.id,title:track.title,author:track.author,url:track.url,error:''});
+      history.push(track.id);if(history.length>64)history.shift();
+    }
+    function applySettings(value){
+      if(!playlistMode){if(value.url!==state.url)state.error='';Object.assign(state,value);return;}
+      const key=value.tracks.map(t=>t.id).join('|');
+      Object.assign(state,{cached:value.cached,enabled:value.enabled,suspended:value.suspended,mapId:value.mapId});
+      if(!state.campaignSession)state.missionId=value.missionId;
+      if(key!==playlistKey){playlistKey=key;playlist=value.tracks;shuffle=[];useTrack(nextTrack(true));}
+    }
     function readSettings(){
       if(state.disposed)return false;
       try{
         if(typeof window.BlockNightAndroid?.musicState!=='function')throw Error('Music settings are unavailable.');
         const value=snapshot(window.BlockNightAndroid.musicState());
-        if(value.url!==state.url)state.error='';
-        Object.assign(state,value);
+        applySettings(value);
         return true;
       }catch(error){state.cached=false;state.enabled=false;state.error=String(error.message||error);return false;}
     }
     function refresh(){
       let header=menuDocument?.getElementById('blocknight-music')||document.getElementById('blocknight-music');
       if(!header){try{header=window.parent.document.getElementById('blocknight-music');}catch(_){}}
-      if(header){header.classList.toggle('active',state.enabled&&state.cached);header.setAttribute('aria-expanded',String(Boolean(menu&&!menu.hidden)));}
+      // Playing the soundtrack is not an open navigation panel.
+      if(header){const open=Boolean(menu&&!menu.hidden);header.classList.toggle('active',open);header.setAttribute('aria-expanded',String(open));}
       if(!menu)return;
       menu.querySelector('[data-music-track]').textContent=state.title||'Map soundtrack';
       menu.querySelector('[data-music-author]').textContent=state.author;
       const status=menu.querySelector('[data-music-status]');
-      status.textContent=state.error||(!state.cached?'Download music on the start screen to play it in-game.'
+      status.textContent=state.error||(!state.cached?'The bundled soundtrack is unavailable.'
         :!state.enabled?'Music off. Sound effects are unchanged.'
-        :state.loading?'Starting music…':state.playing?'Playing this map’s soundtrack.'
+        :state.loading?'Starting music…':state.playing?playlistMode?'Playing the '+(mode==='ffa'?'FFA':'Campaign')+' playlist.':'Playing this map’s soundtrack.'
+        :state.video?'Music paused for the Campaign video.'
+        :state.missionResults?'Music paused on the mission results screen.'
         :state.suspended||document.hidden?'Music paused while the game is in the background.'
         :!state.battleActive?'Music will start with the battle.':'Music ready.');
       for(const button of menu.querySelectorAll('[data-music-enabled]')){
@@ -68,7 +116,13 @@
     function clearDeadline(){
       if(deadline!==null){clearTimeout(deadline);deadline=null;}
     }
-    function pause(){
+    function pause(keepTrack=false){
+      if(keepTrack&&player&&player.readyState>0&&!pending){
+        clearDeadline();retained=true;state.loading=false;state.playing=false;
+        if(!player.paused){intentionalPause.add(player);player.pause();}
+        refresh();return;
+      }
+      retained=false;
       generation++;pending=0;clearDeadline();
       const controller=loadController;loadController=null;
       controller?.abort();
@@ -109,7 +163,10 @@
       return message.endsWith('Tap On to try again.')?message:'Music could not start. Tap On to try again.';
     }
     function playback(retry=false){
-      if(!allowed()){pause();return false;}
+      if(!allowed()){
+        pause(playlistMode&&state.battleActive&&state.cached&&state.enabled&&!state.disposed
+          &&(state.suspended||document.hidden||state.video||state.missionResults));return false;
+      }
       // Reopening unrelated game panels must not repeatedly retry a failed
       // media request. The compact menu offers an explicit On retry.
       if(state.error&&!retry){refresh();return false;}
@@ -118,6 +175,14 @@
       if(retry&&(state.error||(!state.playing&&(state.loading||pending))))pause();
       if((player||pending)&&playerUrl!==state.url)pause();
       if(pending||(player&&!player.paused))return true;
+      if(playlistMode&&retained&&player?.ended){useTrack(nextTrack());return playback(retry);}
+      if(playlistMode&&retained&&player&&playerUrl===state.url){
+        retained=false;state.loading=true;const token=generation,audio=player;pending=token;
+        waitDeadline(token,PLAY_TIMEOUT,'Music took too long to resume. Tap On to try again.');
+        Promise.resolve().then(()=>{
+          if(token===generation&&player===audio&&allowed())return audio.play();
+        }).catch(error=>failed(token,retryMessage(error)));refresh();return true;
+      }
       pause();
       const token=++generation,requestedUrl=state.url,controller=new AbortController();
       loadController=controller;playerUrl=requestedUrl;pending=token;
@@ -148,11 +213,12 @@
             loadController=null;clearDeadline();state.loadedBytes=length;
             blobUrl=URL.createObjectURL(new Blob([buffer],{type:'audio/ogg; codecs=opus'}));
             const audio=new Audio();player=audio;
-            audio.preload='auto';audio.loop=true;audio.volume=.55;
+            audio.preload='auto';audio.loop=!playlistMode;audio.volume=.55;
             audio.addEventListener('playing',()=>{
               if(player!==audio||token!==generation)return;
               if(!allowed()){pause();return;}
               pending=0;clearDeadline();state.playing=true;state.loading=false;state.error='';refresh();
+              if(lastPlayingGeneration!==token){lastPlayingGeneration=token;playedTracks.push(state.trackId);if(playedTracks.length>64)playedTracks.shift();}
             });
             const waiting=()=>{
               if(player!==audio||token!==generation||!allowed())return;
@@ -163,8 +229,16 @@
             audio.addEventListener('stalled',waiting);
             audio.addEventListener('error',()=>failed(token,'Music could not play. Tap On to try again.'));
             audio.addEventListener('pause',()=>{
+              if(intentionalPause.delete(audio))return;
+              // Chromium queues pause before ended at natural completion.
+              // Keep this player alive so the playlist's ended handler advances.
+              if(playlistMode&&audio.ended)return;
               if(player===audio&&token===generation&&allowed())
                 failed(token,'Music paused. Tap On to try again.');
+            });
+            if(playlistMode)audio.addEventListener('ended',()=>{
+              if(player!==audio||token!==generation||!allowed())return;
+              useTrack(nextTrack());playback();
             });
             audio.src=blobUrl;
             waitDeadline(token,PLAY_TIMEOUT,'Music took too long to start. Tap On to try again.');
@@ -187,7 +261,7 @@
       if(state.disposed)return false;
       try{
         if(typeof window.BlockNightAndroid?.setMusicEnabled!=='function')throw Error('Music settings are unavailable.');
-        Object.assign(state,snapshot(window.BlockNightAndroid.setMusicEnabled(Boolean(on),session)));
+        applySettings(snapshot(window.BlockNightAndroid.setMusicEnabled(Boolean(on),session)));
         if(!on)state.error='';
         playback(Boolean(on));refresh();return state.enabled===Boolean(on);
       }catch(error){pause();state.error=String(error.message||error);refresh();return false;}
@@ -249,7 +323,7 @@
           `;host.head.appendChild(style);
         }
         menu=host.createElement('section');menu.id='wt-map-music-menu';menu.hidden=true;
-        menu.setAttribute('role','dialog');menu.setAttribute('aria-modal','false');menu.setAttribute('aria-label','Map music');
+        menu.setAttribute('role','dialog');menu.setAttribute('aria-modal','false');menu.setAttribute('aria-label',playlistMode?(mode==='ffa'?'FFA music':'Campaign music'):'Map music');
         menu.innerHTML='<header><strong>MUSIC</strong><button type="button" data-music-close aria-label="Close music menu">×</button></header><div data-music-track></div><div data-music-author></div><div class="wt-music-switch" role="group" aria-label="Music playback"><button type="button" data-music-enabled="true">ON</button><button type="button" data-music-enabled="false">OFF</button></div><div data-music-status role="status" aria-live="polite"></div>';
         const command=typeof bind==='function'?bind:(button,action)=>button.addEventListener('click',action);
         command(menu.querySelector('[data-music-close]'),()=>closeMenu());
@@ -270,34 +344,64 @@
       window.__kalaWarzoneTouch?.setHeaderMenuState?.('music',true);
       refresh();positionMenu();return true;
     }
+    function campaignContext(){
+      if(mode!=='campaign'||state.disposed)return;
+      const report=window.__warzoneCampaign?.report?.();
+      if(!report)return;
+      const frame=report.nativeState||{},snapshot=report.snapshot||{};
+      const nativeSession=String(snapshot.session||'');
+      let changed=false;
+      if(nativeSession&&nativeSession!==state.campaignSession){
+        const replacing=Boolean(state.campaignSession);
+        state.campaignSession=nativeSession;
+        state.missionId=String(frame.nativeLevel||snapshot.nativeLevel||snapshot.mission||'');
+        // stageThreeInitialise starts/randomizes native music for a new level
+        // or loaded game. Repeated observations and video replay keep the song.
+        if(replacing&&playlist.length){useTrack(nextTrack(true));changed=true;}
+      }
+      const video=typeof frame.video==='boolean'?frame.video:Boolean(snapshot.video||snapshot.ui?.video);
+      if(video!==state.video){state.video=video;changed=true;}
+      // Native hci.h INT_MISSIONRES is retained in the frozen frame observer.
+      // The native frontend cue is separate from this in-game album playlist.
+      const results=Number(frame.nativeMode)===window.WarzoneMusicCatalog?.playlists?.campaign?.nativeMissionResultsMode;
+      if(results!==state.missionResults){state.missionResults=results;changed=true;}
+      if(changed)playback();
+    }
+    function watchCampaign(){
+      const active=mode==='campaign'&&state.battleActive&&!state.suspended&&!document.hidden&&!state.disposed;
+      if(active){campaignContext();if(campaignTimer===null)campaignTimer=setInterval(campaignContext,250);}
+      else if(campaignTimer!==null){clearInterval(campaignTimer);campaignTimer=null;}
+    }
     function setBattleActive(active){
       if(state.disposed)return;
       const first=Boolean(active)&&!state.battleActive;state.battleActive=Boolean(active);
       if(first)readSettings();
       if(!active)closeMenu(false);
+      watchCampaign();
       playback();
     }
     function setSuspended(suspended){
       if(state.disposed)return;
       state.suspended=Boolean(suspended);if(!suspended)readSettings();
       if(suspended)closeMenu(false);
+      watchCampaign();
       playback();
     }
     function dispose(){
       if(state.disposed)return;
-      state.disposed=true;state.battleActive=false;pause();detachMenu();
+      state.disposed=true;state.battleActive=false;watchCampaign();pause();detachMenu();
       document.removeEventListener('visibilitychange',visibility);
       window.removeEventListener('keydown',earlyKeyListener,true);
     }
-    const visibility=()=>playback();
+    const visibility=()=>{watchCampaign();playback();};
     document.addEventListener('visibilitychange',visibility);
     window.addEventListener('pagehide',dispose,{once:true});
     window.WarzoneMusic={
       // index.html writes this flag into the *native* engine's config. Native
-      // music stays off; this one-track player never changes effects or voices.
+      // music stays off; the player never changes effects or voices.
       enabled:false,prepare(){},applySelection(){return true;},
       setEnabled,setBattleActive,setSuspended,dispose,showMenu,closeMenu,
-      report(){return {...state,transport:'track-blob',nativeMusicEnabled:false,selectedTracks:state.trackId?[state.trackId]:[]};}
+      report(){return {...state,transport:'track-blob',mediaTimeSeconds:Number(player?.currentTime||0),mediaReadyState:player?.readyState||0,nativeMusicEnabled:false,selectedTracks:state.trackId?[state.trackId]:[],playlistTrackIds:playlist.map(t=>t.id),playlistSelections:history.slice(),playedTracks:playedTracks.slice(),retained};}
     };
     return;
   }
@@ -338,9 +442,9 @@
       if(!enabled)return;
       const dependency='warzone-towers-music';module.addRunDependency(dependency);
       fetch('/warzone/optional/music-v1.data',{cache:'no-store'})
-        .then(response=>{if(!response.ok)throw Error('The downloaded music is unavailable.');return response.arrayBuffer()})
+        .then(response=>{if(!response.ok)throw Error('The bundled music is unavailable.');return response.arrayBuffer()})
         .then(buffer=>{
-          if(buffer.byteLength!==catalog.bytes)throw Error('The music download is incomplete.');
+          if(buffer.byteLength!==catalog.bytes)throw Error('The bundled music is incomplete.');
           // Validate the complete layout before exposing any files to main().
           let end=0;
           for(const entry of catalog.files){

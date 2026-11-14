@@ -1,0 +1,55 @@
+{
+  "passed": true,
+  "checks": [
+    "Original Opus decodes in real HTMLAudioElement and media clock advances",
+    "Compact monochrome menu fits640x320 and outside close immediately clears header active state",
+    "Background pause/resume retains actual decoded Audio and position",
+    "Private bridge OFF/ON stops and resumes the selected song",
+    "Trusted natural ended event advances to another original song"
+  ],
+  "actualChromiumHTMLAudio": true,
+  "originalOpusBytes": true,
+  "engineExecuted": false,
+  "emulatorUsed": false,
+  "androidPlaybackVerified": false,
+  "speakerOutputVerified": false,
+  "hostOutputMuted": true,
+  "seekNearEnd": true,
+  "menu": {
+    "open": true,
+    "active": true,
+    "aria": "true",
+    "left": 10,
+    "right": 320,
+    "top": 67,
+    "bottom": 254.765625,
+    "onHeight": 44,
+    "background": "rgb(17, 17, 17)",
+    "onBackground": "rgb(244, 244, 244)"
+  },
+  "streams": [
+    {
+      "id": "reclamation_soundtrack/LM_Reclamation_10.opus",
+      "bytes": 3198843,
+      "expected": 3198843,
+      "sha256": "3f5a6b6c3ab7817735680a89dba5f50143cd7f00c9f7281ff48a7d3fea83d777",
+      "original": true
+    },
+    {
+      "id": "reclamation_soundtrack/LM_Reclamation_10.opus",
+      "bytes": 3198843,
+      "expected": 3198843,
+      "sha256": "3f5a6b6c3ab7817735680a89dba5f50143cd7f00c9f7281ff48a7d3fea83d777",
+      "original": true
+    },
+    {
+      "id": "legacy_soundtrack/track6.opus",
+      "bytes": 1898372,
+      "expected": 1898372,
+      "sha256": "cff41a827be0b00d16466811b1252c4cee464a8b07ad77fae44dea788d86495b",
+      "original": true
+    }
+  ],
+  "exceptions": [],
+  "sourceSHA256": "6cac414f0437a1b22d72df1469af36e3283af72147642541ff55d326a64edfa7"
+}

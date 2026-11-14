@@ -1,0 +1,196 @@
+--- a/src/console.cpp
++++ b/src/console.cpp
+@@ -44,6 +44,34 @@
+ #include <deque>
+ #include <chrono>
+ #include <set>
++#include <cstdio>
++
++// Towers opts in with the existing transient UI marker; never saved to disk.
++static bool towersSageTheme()
++{
++#ifdef __EMSCRIPTEN__
++	FILE *marker = fopen("/tmp/warzone-towers-ui-v34", "rb");
++	if (!marker) return false;
++	const bool enabled = fgetc(marker) == '1';
++	fclose(marker);
++	return enabled;
++#else
++	return false;
++#endif
++}
++
++static PIELIGHT towersSageColour(uint8_t r, uint8_t g, uint8_t b)
++{
++	PIELIGHT colour;
++	colour.fromRGBA(r, g, b, 255);
++	return colour;
++}
++
++static void towersConsoleBoxFill(int x1, int y1, int x2, int y2)
++{
++	if (towersSageTheme()) pie_UniTransBoxFill(x1, y1, x2, y2, towersSageColour(220,232,207));
++	else iV_TransBoxFill(x1, y1, x2, y2);
++}
+ 
+ // FIXME: When we switch over to full JS, use class version of this file
+ 
+@@ -342,6 +370,7 @@
+ /** Sets console text color depending on message type */
+ PIELIGHT getConsoleTextColor(int player)
+ {
++	if (towersSageTheme()) return towersSageColour(16,23,12);
+ 	// System messages
+ 	if (player == SYSTEM_MESSAGE)
+ 	{
+@@ -452,12 +481,12 @@
+ 		// if user wants to add a bit more contrast to the text
+ 		if (showBackgroundColor)
+ 		{
+-			iV_TransBoxFill(historyConsole.topX + nudgeright - CON_BORDER_WIDTH, historyConsole.topY - historyConsole.textDepth - CON_BORDER_HEIGHT,
++			towersConsoleBoxFill(historyConsole.topX + nudgeright - CON_BORDER_WIDTH, historyConsole.topY - historyConsole.textDepth - CON_BORDER_HEIGHT,
+ 			                historyConsole.topX + historyConsole.width, historyConsole.topY + (NumDisplayLines * linePitch) + CON_BORDER_HEIGHT);
+ 		}
+ 		for (int i = startpos; i < count; ++i)
+ 		{
+-			PIELIGHT colour = mode ? WZCOL_CONS_TEXT_USER_ALLY : getConsoleTextColor((*WhichMessages)[i].player);
++			PIELIGHT colour = towersSageTheme() ? towersSageColour(16,23,12) : mode ? WZCOL_CONS_TEXT_USER_ALLY : getConsoleTextColor((*WhichMessages)[i].player);
+ 			console_drawtext((*WhichMessages)[i].display, colour, historyConsole.topX + nudgeright, TextYpos, (*WhichMessages)[i].JustifyType, historyConsole.width);
+ 			TextYpos += (*WhichMessages)[i].display.lineSize();
+ 		}
+@@ -490,7 +519,8 @@
+ 	{
+ 		auto i = InfoMessages.end() - 1;		// we can only show the last one...
+ 		int tmp = pie_GetVideoBufferWidth();
+-		drawBlueBox(0, 0,tmp, 18);
++		if (towersSageTheme()) pie_UniTransBoxFill(0, 0, tmp, 18, towersSageColour(220,232,207));
++		else drawBlueBox(0, 0,tmp, 18);
+ 		tmp -= i->display.width();
+ 		console_drawtext(i->display, getConsoleTextColor(i->player), tmp - 6, linePitch - 2, i->JustifyType, i->display.width());
+ 	}
+@@ -501,7 +531,7 @@
+ 		// Draw the blue background for the text (only in game, not lobby)
+ 		if (bTextBoxActive && GetGameMode() == GS_NORMAL)
+ 		{
+-			iV_TransBoxFill(mainConsole.topX - CON_BORDER_WIDTH,
++			towersConsoleBoxFill(mainConsole.topX - CON_BORDER_WIDTH,
+ 							mainConsole.topY - mainConsole.textDepth - CON_BORDER_HEIGHT,
+ 							mainConsole.topX + mainConsole.width,
+ 							mainConsole.topY + (getNumberConsoleMessages() * linePitch) + CON_BORDER_HEIGHT - linePitch);
+--- a/src/intdisplay.cpp
++++ b/src/intdisplay.cpp
+@@ -72,6 +72,28 @@
+ 
+ #include "multiplay.h"
+ #include "qtscript.h"
++#include <cstdio>
++
++// Towers opts in with the existing transient UI marker; never saved to disk.
++static bool towersSageTheme()
++{
++#ifdef __EMSCRIPTEN__
++	FILE *marker = fopen("/tmp/warzone-towers-ui-v34", "rb");
++	if (!marker) return false;
++	const bool enabled = fgetc(marker) == '1';
++	fclose(marker);
++	return enabled;
++#else
++	return false;
++#endif
++}
++
++static PIELIGHT towersSageColour(uint8_t r, uint8_t g, uint8_t b)
++{
++	PIELIGHT colour;
++	colour.fromRGBA(r, g, b, 255);
++	return colour;
++}
+ 
+ // Is a button widget highlighted, either because the cursor is over it or it is flashing.
+ //
+@@ -236,45 +258,62 @@
+ 	x0 += iV_GetImageWidth(IntImages, IMAGE_PBAR_TOP);
+ 
+ 	BatchedImageDrawRequests imageDrawBatch(true); // defer drawing
++	const bool sage = towersSageTheme();
++	// Keep the exact original segment positions and work values; only pixels differ.
++	auto drawPowerImage = [&](unsigned image, int px, int py, int width)
++	{
++		PIELIGHT colour = image == IMAGE_PBAR_AVAIL ? towersSageColour(16,23,12)
++		    : image == IMAGE_PBAR_USED ? towersSageColour(52,65,46)
++		    : image == IMAGE_PBAR_REQUIRED ? towersSageColour(182,201,158)
++		    : towersSageColour(203,220,186);
++		pie_UniTransBoxFill(px, py, px + width, py + iV_GetImageHeight(IntImages, image), colour);
++	};
+ 
+ 	//fill in the empty section behind text
+ 	if (textWidth > 0)
+ 	{
+-		iV_DrawImageRepeatX(IntImages, IMAGE_PBAR_EMPTY, x0 - 1, y0, textWidth + 1, defaultProjectionMatrix(), true, &imageDrawBatch); // Overdraw by 1 to reduce seam with left-beginning-piece when scaling
++		if (sage) drawPowerImage(IMAGE_PBAR_EMPTY, x0 - 1, y0, textWidth + 1);
++		else iV_DrawImageRepeatX(IntImages, IMAGE_PBAR_EMPTY, x0 - 1, y0, textWidth + 1, defaultProjectionMatrix(), true, &imageDrawBatch); // Overdraw by 1 to reduce seam with left-beginning-piece when scaling
+ 		x0 += textWidth;
+ 	}
+ 
+ 	//draw the left-most beginning tip
+ 	//to reduce a visible seam when scaling, this must come *after* the empty / text section above
+-	iV_DrawImage(IntImages, IMAGE_PBAR_TOP, top_x0, top_y0, defaultProjectionMatrix(), &imageDrawBatch);
++	if (sage) drawPowerImage(IMAGE_PBAR_TOP, top_x0, top_y0, iV_GetImageWidth(IntImages, IMAGE_PBAR_TOP));
++	else iV_DrawImage(IntImages, IMAGE_PBAR_TOP, top_x0, top_y0, defaultProjectionMatrix(), &imageDrawBatch);
+ 
+ 	//draw required section
+ 	if (ManPow > Avail)
+ 	{
+ 		//draw the required in red
+-		iV_DrawImageRepeatX(IntImages, IMAGE_PBAR_USED, x0, y0, ManPow, defaultProjectionMatrix(), true, &imageDrawBatch);
++		if (sage) drawPowerImage(IMAGE_PBAR_USED, x0, y0, ManPow);
++		else iV_DrawImageRepeatX(IntImages, IMAGE_PBAR_USED, x0, y0, ManPow, defaultProjectionMatrix(), true, &imageDrawBatch);
+ 	}
+ 	else
+ 	{
+-		iV_DrawImageRepeatX(IntImages, IMAGE_PBAR_REQUIRED, x0, y0, ManPow, defaultProjectionMatrix(), true, &imageDrawBatch);
++		if (sage) drawPowerImage(IMAGE_PBAR_REQUIRED, x0, y0, ManPow);
++		else iV_DrawImageRepeatX(IntImages, IMAGE_PBAR_REQUIRED, x0, y0, ManPow, defaultProjectionMatrix(), true, &imageDrawBatch);
+ 	}
+ 	x0 += ManPow;
+ 
+ 	//draw the available section if any!
+ 	if (Avail - ManPow > 0)
+ 	{
+-		iV_DrawImageRepeatX(IntImages, IMAGE_PBAR_AVAIL, x0, y0, Avail - ManPow, defaultProjectionMatrix(), true, &imageDrawBatch);
++		if (sage) drawPowerImage(IMAGE_PBAR_AVAIL, x0, y0, Avail - ManPow);
++		else iV_DrawImageRepeatX(IntImages, IMAGE_PBAR_AVAIL, x0, y0, Avail - ManPow, defaultProjectionMatrix(), true, &imageDrawBatch);
+ 		x0 += Avail - ManPow;
+ 	}
+ 
+ 	//fill in the rest with empty section
+ 	if (Empty > 0)
+ 	{
+-		iV_DrawImageRepeatX(IntImages, IMAGE_PBAR_EMPTY, x0, y0, Empty + 1, defaultProjectionMatrix(), true, &imageDrawBatch); // Overdraw by 1 to reduce seam with right-end-piece when scaling
++		if (sage) drawPowerImage(IMAGE_PBAR_EMPTY, x0, y0, Empty + 1);
++		else iV_DrawImageRepeatX(IntImages, IMAGE_PBAR_EMPTY, x0, y0, Empty + 1, defaultProjectionMatrix(), true, &imageDrawBatch); // Overdraw by 1 to reduce seam with right-end-piece when scaling
+ 		x0 += Empty;
+ 	}
+ 
+-	iV_DrawImage(IntImages, IMAGE_PBAR_BOTTOM, x0, y0, defaultProjectionMatrix(), &imageDrawBatch);
++	if (sage) drawPowerImage(IMAGE_PBAR_BOTTOM, x0, y0, iV_GetImageWidth(IntImages, IMAGE_PBAR_BOTTOM));
++	else iV_DrawImage(IntImages, IMAGE_PBAR_BOTTOM, x0, y0, defaultProjectionMatrix(), &imageDrawBatch);
+ 
+ 	imageDrawBatch.draw(true);
+ 
+@@ -300,12 +339,12 @@
+ 	{
+ 		auto needTextWidth = cache.wzNeedText.width();
+ 		auto textX = iX + (this->width() - needTextWidth) / 2;
+-		pie_UniTransBoxFill(textX - 3, y0 + 1, textX + needTextWidth + 3, y0 + this->height() - 1, WZCOL_TRANSPARENT_BOX);
+-		cache.wzNeedText.render(textX, iY - 1, (realTime / 1250) % 5 ? WZCOL_WHITE: WZCOL_RED);
++		pie_UniTransBoxFill(textX - 3, y0 + 1, textX + needTextWidth + 3, y0 + this->height() - 1, sage ? towersSageColour(220,232,207) : WZCOL_TRANSPARENT_BOX);
++		cache.wzNeedText.render(textX, iY - 1, sage ? towersSageColour(16,23,12) : (realTime / 1250) % 5 ? WZCOL_WHITE: WZCOL_RED);
+ 	}
+ 
+ 	// draw text value
+-	cache.wzText.render(iX, iY, Avail < 0 ? WZCOL_RED : WZCOL_TEXT_BRIGHT);
++	cache.wzText.render(iX, iY, sage ? towersSageColour(16,23,12) : Avail < 0 ? WZCOL_RED : WZCOL_TEXT_BRIGHT);
+ }
+ 
+ IntFancyButton::IntFancyButton()

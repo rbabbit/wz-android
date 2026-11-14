@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "checks": 14,
+  "fixture": "Actual JS with deterministic browser clock and VFS. Native selection/new-unit behavior and APK gameplay are separate checks.",
+  "results": [
+    "Adapter rejects malformed and unready ON without writing",
+    "Adapter is atomic latest-write-only and does not fake native confirmation",
+    "OFF is accepted in unsafe exit, rejected writes retain the last successful intent",
+    "Adapter page exit writes OFF before stopping and rejects every later ON",
+    "Enable waits for native authority and never synthesizes Ctrl+A",
+    "Old OFF acknowledgement cannot cancel a new ON; acknowledged manual OFF is authoritative",
+    "Late unsuspend retains its activation; only a deliberate enable can re-arm native manual OFF",
+    "Build, placement, demolition and research suspend intent then resume without orders",
+    "Automatic visible-truck box queries suspend before native selection and resume after acknowledgement",
+    "Explicit Trucks, All Units and Deselect turn OFF before their native selection path",
+    "Manual box selection clears intent; ordinary battlefield taps and Stop retain it",
+    "Pan keeps intent, queued input suspends it and cancellation leaves no later input",
+    "Hidden pages suspend and phase departure/page exit permanently clear standing intent",
+    "Failed native enable/override cannot fake a toggle or steal explicit selection"
+  ]
+}

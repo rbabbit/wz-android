@@ -1,0 +1,121 @@
+{
+  "passed": true,
+  "version": "0.74",
+  "emulatorUsed": false,
+  "actualAndroidViewsExecuted": false,
+  "scope": "Actual production pure-Java layout helper on host JDK, retained Oswald font measured by host AWT. Native Paint measurement calls/action bindings verified in source. Android drawing/insets dispatch/touch not executed.",
+  "checks": [
+    {
+      "name": "Actual production layout helper executed with retained Oswald TrueType metrics",
+      "passed": true
+    },
+    {
+      "name": "800x360,640x320,600x300,1200x540 at density1/2/3 and fontScale1.0/1.3",
+      "passed": true
+    },
+    {
+      "name": "All five current action bindings retained exactly once",
+      "passed": true
+    },
+    {
+      "name": "Real native Paint measurements bound labels; no adaptive font shrinking",
+      "passed": true
+    },
+    {
+      "name": "At least48dp touch areas and bounded visible faces",
+      "passed": true
+    },
+    {
+      "name": "Display-cutout/system insets, artwork aspects, footer and nonoverlap",
+      "passed": true
+    },
+    {
+      "name": "One horizontal row at requested landscape sizes; readable fallback wrap",
+      "passed": true
+    },
+    {
+      "name": "Error-footer and extra-large narrow-layout stress conditions",
+      "passed": true
+    }
+  ],
+  "checksPassed": 8,
+  "assertions": 2704,
+  "scenarios": [
+    "800x360 density=1.0 font=1.0 cutout=[0, 0, 0, 0] error=false rows=1",
+    "800x360 density=1.0 font=1.0 cutout=[32, 0, 12, 16] error=false rows=1",
+    "800x360 density=1.0 font=1.3 cutout=[0, 0, 0, 0] error=false rows=1",
+    "800x360 density=1.0 font=1.3 cutout=[32, 0, 12, 16] error=false rows=1",
+    "800x360 density=2.0 font=1.0 cutout=[0, 0, 0, 0] error=false rows=1",
+    "800x360 density=2.0 font=1.0 cutout=[32, 0, 12, 16] error=false rows=1",
+    "800x360 density=2.0 font=1.3 cutout=[0, 0, 0, 0] error=false rows=1",
+    "800x360 density=2.0 font=1.3 cutout=[32, 0, 12, 16] error=false rows=1",
+    "800x360 density=3.0 font=1.0 cutout=[0, 0, 0, 0] error=false rows=1",
+    "800x360 density=3.0 font=1.0 cutout=[32, 0, 12, 16] error=false rows=1",
+    "800x360 density=3.0 font=1.3 cutout=[0, 0, 0, 0] error=false rows=1",
+    "800x360 density=3.0 font=1.3 cutout=[32, 0, 12, 16] error=false rows=1",
+    "640x320 density=1.0 font=1.0 cutout=[0, 0, 0, 0] error=false rows=1",
+    "640x320 density=1.0 font=1.0 cutout=[32, 0, 12, 16] error=false rows=1",
+    "640x320 density=1.0 font=1.3 cutout=[0, 0, 0, 0] error=false rows=1",
+    "640x320 density=1.0 font=1.3 cutout=[32, 0, 12, 16] error=false rows=1",
+    "640x320 density=2.0 font=1.0 cutout=[0, 0, 0, 0] error=false rows=1",
+    "640x320 density=2.0 font=1.0 cutout=[32, 0, 12, 16] error=false rows=1",
+    "640x320 density=2.0 font=1.3 cutout=[0, 0, 0, 0] error=false rows=1",
+    "640x320 density=2.0 font=1.3 cutout=[32, 0, 12, 16] error=false rows=1",
+    "640x320 density=3.0 font=1.0 cutout=[0, 0, 0, 0] error=false rows=1",
+    "640x320 density=3.0 font=1.0 cutout=[32, 0, 12, 16] error=false rows=1",
+    "640x320 density=3.0 font=1.3 cutout=[0, 0, 0, 0] error=false rows=1",
+    "640x320 density=3.0 font=1.3 cutout=[32, 0, 12, 16] error=false rows=1",
+    "600x300 density=1.0 font=1.0 cutout=[0, 0, 0, 0] error=false rows=1",
+    "600x300 density=1.0 font=1.0 cutout=[32, 0, 12, 16] error=false rows=1",
+    "600x300 density=1.0 font=1.3 cutout=[0, 0, 0, 0] error=false rows=1",
+    "600x300 density=1.0 font=1.3 cutout=[32, 0, 12, 16] error=false rows=1",
+    "600x300 density=2.0 font=1.0 cutout=[0, 0, 0, 0] error=false rows=1",
+    "600x300 density=2.0 font=1.0 cutout=[32, 0, 12, 16] error=false rows=1",
+    "600x300 density=2.0 font=1.3 cutout=[0, 0, 0, 0] error=false rows=1",
+    "600x300 density=2.0 font=1.3 cutout=[32, 0, 12, 16] error=false rows=1",
+    "600x300 density=3.0 font=1.0 cutout=[0, 0, 0, 0] error=false rows=1",
+    "600x300 density=3.0 font=1.0 cutout=[32, 0, 12, 16] error=false rows=1",
+    "600x300 density=3.0 font=1.3 cutout=[0, 0, 0, 0] error=false rows=1",
+    "600x300 density=3.0 font=1.3 cutout=[32, 0, 12, 16] error=false rows=1",
+    "1200x540 density=1.0 font=1.0 cutout=[0, 0, 0, 0] error=false rows=1",
+    "1200x540 density=1.0 font=1.0 cutout=[32, 0, 12, 16] error=false rows=1",
+    "1200x540 density=1.0 font=1.3 cutout=[0, 0, 0, 0] error=false rows=1",
+    "1200x540 density=1.0 font=1.3 cutout=[32, 0, 12, 16] error=false rows=1",
+    "1200x540 density=2.0 font=1.0 cutout=[0, 0, 0, 0] error=false rows=1",
+    "1200x540 density=2.0 font=1.0 cutout=[32, 0, 12, 16] error=false rows=1",
+    "1200x540 density=2.0 font=1.3 cutout=[0, 0, 0, 0] error=false rows=1",
+    "1200x540 density=2.0 font=1.3 cutout=[32, 0, 12, 16] error=false rows=1",
+    "1200x540 density=3.0 font=1.0 cutout=[0, 0, 0, 0] error=false rows=1",
+    "1200x540 density=3.0 font=1.0 cutout=[32, 0, 12, 16] error=false rows=1",
+    "1200x540 density=3.0 font=1.3 cutout=[0, 0, 0, 0] error=false rows=1",
+    "1200x540 density=3.0 font=1.3 cutout=[32, 0, 12, 16] error=false rows=1",
+    "800x360 density=2.0 font=1.3 cutout=[32, 12, 12, 16] error=true rows=1",
+    "640x320 density=2.0 font=1.3 cutout=[32, 12, 12, 16] error=true rows=1",
+    "600x300 density=2.0 font=1.3 cutout=[32, 12, 12, 16] error=true rows=1",
+    "400x300 density=1.0 font=1.8 cutout=[0, 0, 0, 0] error=false rows=2",
+    "800x360 density=1.0 font=1.0 cutout=[0, 0, 0, 0] error=false rows=1",
+    "800x360 density=1.0 font=1.0 cutout=[0, 0, 0, 0] error=false rows=1"
+  ],
+  "sources": [
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/HomeModesView.java",
+      "sha256": "de5f280930b9bf587da8909e3962f9a643d6c6d7ba6b58ba8a5584a9fc81f204"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/HomeMenuLayout.java",
+      "sha256": "4b08aa28e5c3760c0ec3186836967eb1afb81b1405077c52f6bde36e8e424bc0"
+    },
+    {
+      "path": "tools/test-home-layout-074.py",
+      "sha256": "cc3585a1ce725519acf6fd0ef83b4666f99eabc10992cb5d4c0d74f807c01416"
+    },
+    {
+      "path": "tools/test-home-layout-074.java",
+      "sha256": "c79da7f60c6fd866732778c95baf361d5312044c7bc41ac62be0ed80f472e0f2"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/Oswald.ttf",
+      "sha256": "5b38c246e255a12f5712d640d56bcced0472466fc68983d2d0410ec0457c2817"
+    }
+  ]
+}

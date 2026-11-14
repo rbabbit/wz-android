@@ -1,0 +1,107 @@
+{
+  "version": "0.66",
+  "passed": true,
+  "emulatorUsed": false,
+  "playbackVerified": false,
+  "syntheticMediaOnly": true,
+  "checks": [
+    {
+      "name": "FFA starts one bounded track blob with native music off",
+      "passed": true
+    },
+    {
+      "name": "FFA traverses all39 songs without repeats and changes at cycle boundary",
+      "passed": true
+    },
+    {
+      "name": "Repeated activation, On and resume retain healthy FFA song and shuffle position",
+      "passed": true
+    },
+    {
+      "name": "Campaign random initial song then exact original three-track circular order",
+      "passed": true
+    },
+    {
+      "name": "Actual new native Campaign context randomizes once; repeated packets do not restart",
+      "passed": true
+    },
+    {
+      "name": "Campaign movie pauses and resumes the same decoded song at the same media position",
+      "passed": true
+    },
+    {
+      "name": "Initial Campaign video does not fetch or play background music",
+      "passed": true
+    },
+    {
+      "name": "A native pause without video leaves music playing, matching stock audio control",
+      "passed": true
+    },
+    {
+      "name": "Activity and document suspension keep one decoded FFA song, then resume position",
+      "passed": true
+    },
+    {
+      "name": "Off releases media and On keeps current song without resetting shuffle",
+      "passed": true
+    },
+    {
+      "name": "Off and disposal suppress delayed fetch completion and stale ended events",
+      "passed": true
+    },
+    {
+      "name": "Invalid family, remote URL, duplicate and incomplete pools fail closed",
+      "passed": true
+    },
+    {
+      "name": "Decoder error is nonfatal; only explicit On retries the same track",
+      "passed": true
+    },
+    {
+      "name": "Campaign pool order follows immutable policy even when bridge enumeration is reordered",
+      "passed": true
+    },
+    {
+      "name": "Observable native mission result screen suspends the in-game song without adding a frontend cue",
+      "passed": true
+    },
+    {
+      "name": "A completion queued at video entry advances once on resume, never replays the completed song",
+      "passed": true
+    },
+    {
+      "name": "A hung retained-media resume is bounded and explicit On can recover",
+      "passed": true
+    },
+    {
+      "name": "Campaign HUD repeated activation at video exit resumes once without replacing decoded media",
+      "passed": true
+    },
+    {
+      "name": "Off or retirement before a queued resume microtask never plays the outgoing Audio",
+      "passed": true
+    },
+    {
+      "name": "Natural end pause advances playlists, while an unexpected mid-track pause remains recoverable",
+      "passed": true
+    }
+  ],
+  "sources": [
+    {
+      "path": "app/src/main/assets/warzone/music-loader.js",
+      "sha256": "f53e6bf3d898e546045937456e3c5bf1eafdc981573c1d6c670d9762fa03cc07"
+    },
+    {
+      "path": "app/src/main/assets/warzone/music-catalog.js",
+      "sha256": "e0d05a3033067c675cc5dfa37b2796a53e84b87a566519b4cae0d8256de5de5a"
+    },
+    {
+      "path": "app/src/main/assets/warzone/index-campaign.html",
+      "sha256": "9125109386919832f10fce7e41f8c613c5c799c5751bc1c9ad620b2848f62c67"
+    },
+    {
+      "path": "tools/check-music-playlists-066.cjs",
+      "sha256": "a3c06bda515d1751382800693902efd1a06ce6c7bbcb1e395cf7749e9b44398f"
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "version": "0.38",
+  "passed": true,
+  "emulatorUsed": false,
+  "gameplayVerified": false,
+  "recordedUTC": "2026-11-10T16:55:13.595Z",
+  "scope": "Actual Canvas renderer and Intelligence modules in established DOM/native-transport fixtures; verifies overlay concealment and preserved render inputs only, without gameplay or emulator execution",
+  "checks": [
+    {
+      "name": "preserved v0.37 source reproduces construction #1 leaking through an open Intelligence preview",
+      "passed": true
+    },
+    {
+      "name": "new real renderer clears accepted labels, ghosts, module and demolition marks throughout opening/open/closing and failed close",
+      "passed": true
+    },
+    {
+      "name": "line-placement previews are hidden without being cancelled and redraw after close at the same camera",
+      "passed": true
+    },
+    {
+      "name": "demolition-only targeting outlines stay concealed during Intelligence and remain available afterward",
+      "passed": true
+    },
+    {
+      "name": "actual Intelligence isOpen remains truthful through cancelled asynchronous open and close",
+      "passed": true
+    },
+    {
+      "name": "without Intelligence and in Duel the same accepted-site rendering stays equivalent to v0.37",
+      "passed": true
+    }
+  ],
+  "reproducedBaseline": {
+    "version": "0.37",
+    "sourceZIP": "C:\\timerApp\\warzone-towers-0.37-source.zip",
+    "entry": "app/src/main/assets/warzone/ui/build-display.js",
+    "rendererSHA256": "e14439af827ff1d64471249d490dea05229ca5015bb7383945db45a64330a815",
+    "leakedLabel": "#1"
+  },
+  "sources": [
+    {
+      "path": "app/src/main/assets/warzone/ui/build-display.js",
+      "sha256": "c4164c3a91df86e4235f0ecb9f24968446f09f8feb7b52a18aa3407b4547553b"
+    },
+    {
+      "path": "app/src/main/assets/warzone-intelligence.js",
+      "sha256": "72fe6cbd999b03edffa746d2f45824193796b1bbd8210a5e1d401235b62bfc72"
+    },
+    {
+      "path": "tools/check-overlay-leak-038.cjs",
+      "sha256": "de472107d26c9b7f268ccacb82c96e70292f57976aacfa3296b12c647636bfe9"
+    }
+  ],
+  "reusedFixtures": [
+    "tools/test-module-target-display.cjs",
+    "tools/check-intelligence-ui-036.cjs"
+  ]
+}

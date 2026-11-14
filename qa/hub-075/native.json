@@ -1,0 +1,149 @@
+{
+  "passed": true,
+  "version": "0.75",
+  "emulatorUsed": false,
+  "actualAndroidViewsExecuted": false,
+  "scope": "Production pure-Java Home layout with host AWT retained font, verbatim Hub policy and Back/lifecycle methods with inert platform boundaries, source-level native wiring and074 preservation. Android rendering/IME/network dispatch not executed.",
+  "checks": [
+    {
+      "name": "Hub has no native/game JavaScript interface",
+      "passed": true
+    },
+    {
+      "name": "Only local Hub document starts the reader",
+      "passed": true
+    },
+    {
+      "name": "File/content access denied; mixed content denied",
+      "passed": true
+    },
+    {
+      "name": "Local CSP denies remote code and frames",
+      "passed": true
+    },
+    {
+      "name": "Only public subresource GETs can pass interception while active",
+      "passed": true
+    },
+    {
+      "name": "Lifecycle visibility reaches background request interception",
+      "passed": true
+    },
+    {
+      "name": "External source requires a user gesture and stays in external browser",
+      "passed": true
+    },
+    {
+      "name": "Native Back shares reserved HTML header slot with full48dp hit/compact inset face",
+      "passed": true
+    },
+    {
+      "name": "IME and cutout/system insets handled locally",
+      "passed": true
+    },
+    {
+      "name": "Lifecycle custom events, hard WebView cleanup, no global timer pause",
+      "passed": true
+    },
+    {
+      "name": "Home action retained once: actions.campaign()",
+      "passed": true
+    },
+    {
+      "name": "Home action retained once: chooseMap.run()",
+      "passed": true
+    },
+    {
+      "name": "Home action retained once: actions.ffa()",
+      "passed": true
+    },
+    {
+      "name": "Home action retained once: actions.multiplayer()",
+      "passed": true
+    },
+    {
+      "name": "Home action retained once: actions.guide()",
+      "passed": true
+    },
+    {
+      "name": "Home action retained once: actions.hub()",
+      "passed": true
+    },
+    {
+      "name": "Home uses measured native scaled text without shrinking",
+      "passed": true
+    },
+    {
+      "name": "MainActivity original game/navigation/music/save flows unchanged from preserved074 source",
+      "passed": true
+    },
+    {
+      "name": "GraphicsSetupView unchanged except new Hub callback",
+      "passed": true
+    },
+    {
+      "name": "Production Hub URL policies passed hostile URL/method/destination matrix",
+      "passed": true
+    },
+    {
+      "name": "Production Back/lifecycle methods passed inert-platform callback/cancellation cases",
+      "passed": true
+    },
+    {
+      "name": "Production six-action geometry passed retained-font measured labels/insets/nonoverlap",
+      "passed": true
+    }
+  ],
+  "checksPassed": 22,
+  "results": {
+    "HubNativeCheck075": {
+      "policiesPassed": true,
+      "lifecyclePassed": true,
+      "assertions": 121
+    },
+    "HubHomeCheck075": {
+      "passed": true,
+      "assertions": 2968,
+      "scenarios": 52,
+      "wrappedScenarios": 1
+    }
+  },
+  "sources": [
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/HubView.java",
+      "sha256": "9ee3de8e5dbbda3bbd0d646728b71e4214bd6d9da24bd792c19806eaaea0ed0e"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/HomeModesView.java",
+      "sha256": "29186a01666698f761531d4a7a217d2db0fb770f4e4d6006ee5a64288290b9bc"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/HomeMenuLayout.java",
+      "sha256": "f0bbd4f49bdd6403f83596988160ab642fc9334415584264b7e8b6e3115b8c0b"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MainActivity.java",
+      "sha256": "3dcacc14ade3c349ef691992ad77879ffe24ae151ea788cd8d83db31e19d3999"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/GraphicsSetupView.java",
+      "sha256": "3ab6dd587f5d3f5755d9b551a4bf502f97028f06a35e999be181af75562a1b5c"
+    },
+    {
+      "path": "tools/test-hub-native-075.py",
+      "sha256": "93152b54f4c88517bdc3fd42aa3d4a07a2b4656da17b6cb06b8d599a18327c75"
+    },
+    {
+      "path": "tools/test-hub-native-075.java",
+      "sha256": "0ec047238b57cf211bd8cf089835ec768f3fe817d542f4488c9b61399522dc9a"
+    },
+    {
+      "path": "tools/test-hub-native-home-075.java",
+      "sha256": "a1fcc2992f71b269aaf66a415a7949b2d17849ca87a598eaf1057e3ae7ada585"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/Oswald.ttf",
+      "sha256": "5b38c246e255a12f5712d640d56bcced0472466fc68983d2d0410ec0457c2817"
+    }
+  ]
+}

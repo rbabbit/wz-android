@@ -1,0 +1,1372 @@
+{
+  "installedAPK_SHA256": "c2f65e8c0a043b435e63ef3dd098ee13b97af3cfe4ccbd9c9c76607881a3e26e",
+  "state": {
+    "version": 1,
+    "gameTime": 696402,
+    "player": 0,
+    "power": 953,
+    "rewards": null,
+    "facilityTargets": [
+      {
+        "id": 160285,
+        "kind": "factory",
+        "itemId": "A0LightFactory",
+        "x": 12,
+        "y": 48,
+        "z": 0,
+        "modules": 0,
+        "moduleId": "A0FacMod1",
+        "width": 3,
+        "breadth": 3,
+        "ready": true,
+        "nativeStatus": 1
+      },
+      {
+        "id": 162705,
+        "kind": "research",
+        "itemId": "A0ResearchFacility",
+        "x": 18,
+        "y": 50,
+        "z": 0,
+        "modules": 0,
+        "moduleId": "A0ResearchModule1",
+        "width": 2,
+        "breadth": 2,
+        "ready": true,
+        "nativeStatus": 1
+      }
+    ],
+    "facilityBlockers": [
+      {
+        "id": 160287,
+        "x": 13,
+        "y": 49,
+        "z": 0,
+        "bodySize": 1
+      },
+      {
+        "id": 160001,
+        "x": 13,
+        "y": 50,
+        "z": 0,
+        "bodySize": 1
+      },
+      {
+        "id": 160025,
+        "x": 14,
+        "y": 50,
+        "z": 0,
+        "bodySize": 1
+      },
+      {
+        "id": 160087,
+        "x": 14,
+        "y": 51,
+        "z": 0,
+        "bodySize": 1
+      },
+      {
+        "id": 160089,
+        "x": 14,
+        "y": 51,
+        "z": 0,
+        "bodySize": 1
+      },
+      {
+        "id": 160091,
+        "x": 13,
+        "y": 52,
+        "z": 0,
+        "bodySize": 1
+      },
+      {
+        "id": 160003,
+        "x": 16,
+        "y": 50,
+        "z": 0,
+        "bodySize": 1
+      },
+      {
+        "id": 160005,
+        "x": 17,
+        "y": 51,
+        "z": 0,
+        "bodySize": 1
+      }
+    ],
+    "mapWidth": 128,
+    "mapHeight": 128,
+    "alwaysQueue": true,
+    "researchQueues": [
+      {
+        "labId": 162705,
+        "topicIds": []
+      }
+    ],
+    "hasHQ": true,
+    "selectedUnits": [
+      {
+        "id": 160001,
+        "x": 13,
+        "y": 50,
+        "z": 0,
+        "order": 0,
+        "constructor": true
+      },
+      {
+        "id": 160003,
+        "x": 16,
+        "y": 50,
+        "z": 0,
+        "order": 0,
+        "constructor": true
+      },
+      {
+        "id": 160005,
+        "x": 17,
+        "y": 51,
+        "z": 0,
+        "order": 0,
+        "constructor": true
+      }
+    ],
+    "construction": [],
+    "constructionSites": [
+      {
+        "id": "cmd-1794429286630-36",
+        "itemId": "A0ResearchFacility",
+        "x": 18,
+        "y": 50,
+        "workers": [
+          160005,
+          160003,
+          160001
+        ],
+        "automatic": false,
+        "status": "done",
+        "created": 683402,
+        "attempts": {
+          "160001": 1,
+          "160003": 3,
+          "160005": 3
+        },
+        "issued": {
+          "160001": 683402,
+          "160003": 685902,
+          "160005": 685902
+        },
+        "parentId": 0,
+        "targetModules": 0,
+        "reason": "",
+        "knownStructures": [
+          162705
+        ],
+        "structureId": 162705,
+        "idleAt": null,
+        "observed": true,
+        "progress": 0.9777777777777777,
+        "remaining": 1,
+        "workersActive": 2,
+        "completed": 695002
+      }
+    ],
+    "nativeBuildOptions": [
+      "A0ADemolishStructure",
+      "A0LightFactory",
+      "A0PowerGenerator",
+      "A0ResearchFacility",
+      "A0ResourceExtractor"
+    ],
+    "moduleTargets": [
+      {
+        "id": 160285,
+        "itemId": "A0LightFactory",
+        "name": "Factory",
+        "kind": "FACTORY",
+        "moduleId": "A0FacMod1",
+        "x": 12,
+        "y": 48,
+        "z": 0,
+        "width": 3,
+        "breadth": 3,
+        "modules": 0,
+        "maximum": 2,
+        "reserved": 0,
+        "nativeStatus": 1,
+        "status": "unavailable",
+        "eligible": false,
+        "statusReason": "unavailable"
+      },
+      {
+        "id": 162705,
+        "itemId": "A0ResearchFacility",
+        "name": "Research Facility",
+        "kind": "RESEARCH",
+        "moduleId": "A0ResearchModule1",
+        "x": 18,
+        "y": 50,
+        "z": 0,
+        "width": 2,
+        "breadth": 2,
+        "modules": 0,
+        "maximum": 1,
+        "reserved": 0,
+        "nativeStatus": 1,
+        "status": "unavailable",
+        "eligible": false,
+        "statusReason": "unavailable"
+      }
+    ],
+    "buildings": [
+      {
+        "id": "A0LightFactory",
+        "power": 100
+      },
+      {
+        "id": "A0PowerGenerator",
+        "power": 50
+      },
+      {
+        "id": "A0ResearchFacility",
+        "power": 100
+      },
+      {
+        "id": "A0ResourceExtractor",
+        "power": 0
+      }
+    ],
+    "parts": [
+      "Body1REC",
+      "MG1Mk1",
+      "Spade1Mk1",
+      "wheeled01"
+    ],
+    "trucks": [
+      {
+        "id": 160001,
+        "x": 13,
+        "y": 50,
+        "z": 0,
+        "selected": true,
+        "order": 0,
+        "action": 0,
+        "rate": 10,
+        "building": false,
+        "queued": 0
+      },
+      {
+        "id": 160003,
+        "x": 16,
+        "y": 50,
+        "z": 0,
+        "selected": true,
+        "order": 0,
+        "action": 0,
+        "rate": 10,
+        "building": false,
+        "queued": 0
+      },
+      {
+        "id": 160005,
+        "x": 17,
+        "y": 51,
+        "z": 0,
+        "selected": true,
+        "order": 0,
+        "action": 0,
+        "rate": 10,
+        "building": false,
+        "queued": 0
+      }
+    ],
+    "jobs": [],
+    "factories": [
+      {
+        "id": 160285,
+        "number": 1,
+        "x": 12,
+        "y": 48,
+        "type": 1,
+        "kind": "Factory",
+        "templates": [
+          "native:[\"Truck Viper Wheels\",\"Body1REC\",\"wheeled01\",[],\"Spade1Mk1\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+          "native:[\"Design 2 · F160285\",\"Body1REC\",\"wheeled01\",[\"MG1Mk1\"],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]"
+        ],
+        "modules": 0,
+        "ready": true,
+        "idle": true,
+        "active": null,
+        "currentProduction": null,
+        "progress": {
+          "available": false,
+          "currentId": "",
+          "currentName": "",
+          "templateId": null,
+          "completedBuildPoints": null,
+          "totalBuildPoints": null,
+          "ratio": null,
+          "state": "idle"
+        },
+        "queueKnown": true,
+        "waitingReason": null,
+        "queue": []
+      }
+    ],
+    "nativeMenu": "",
+    "templates": [
+      {
+        "fullname": "Truck Viper Wheels",
+        "name": "",
+        "id": "native:[\"Truck Viper Wheels\",\"Body1REC\",\"wheeled01\",[],\"Spade1Mk1\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+        "points": 272,
+        "power": 54,
+        "cost": 54,
+        "droidType": 3,
+        "body": "Body1REC",
+        "propulsion": "wheeled01",
+        "brain": "ZNULLBRAIN",
+        "repair": "ZNULLREPAIR",
+        "ecm": "ZNULLECM",
+        "sensor": "ZNULLSENSOR",
+        "construct": "Spade1Mk1",
+        "weapons": []
+      },
+      {
+        "fullname": "Design 2 · F160285",
+        "name": "",
+        "id": "native:[\"Design 2 · F160285\",\"Body1REC\",\"wheeled01\",[\"MG1Mk1\"],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+        "points": 237,
+        "power": 47,
+        "cost": 47,
+        "droidType": 0,
+        "body": "Body1REC",
+        "propulsion": "wheeled01",
+        "brain": "ZNULLBRAIN",
+        "repair": "ZNULLREPAIR",
+        "ecm": "ZNULLECM",
+        "sensor": "ZNULLSENSOR",
+        "construct": "ZNULLCONSTRUCT",
+        "weapons": [
+          "MG1Mk1"
+        ]
+      }
+    ],
+    "finishedUnits": [
+      {
+        "body": "Body1REC",
+        "factoryId": 160285,
+        "gameTime": 369502,
+        "id": 160287,
+        "name": "Design 2",
+        "propulsion": "wheeled01"
+      }
+    ],
+    "finishedBuilds": [
+      {
+        "gameTime": 41302,
+        "id": "cmd-1794415843799-29",
+        "itemId": "A0CommandCentre",
+        "workers": [
+          160003,
+          160001,
+          160005
+        ],
+        "x": 16,
+        "y": 54
+      },
+      {
+        "gameTime": 80902,
+        "id": "cmd-1794415875311-133",
+        "itemId": "A0LightFactory",
+        "workers": [
+          160005,
+          160001,
+          160003
+        ],
+        "x": 12,
+        "y": 48
+      },
+      {
+        "id": "cmd-1794429286630-36",
+        "itemId": "A0ResearchFacility",
+        "x": 18,
+        "y": 50,
+        "workers": [
+          160005,
+          160003,
+          160001
+        ],
+        "gameTime": 694902
+      }
+    ]
+  },
+  "commands": {
+    "version": 64,
+    "moduleTargets": [
+      {
+        "id": 160285,
+        "itemId": "A0LightFactory",
+        "name": "Factory",
+        "kind": "FACTORY",
+        "moduleId": "A0FacMod1",
+        "x": 12,
+        "y": 48,
+        "z": 0,
+        "width": 3,
+        "breadth": 3,
+        "modules": 0,
+        "maximum": 2,
+        "reserved": 0,
+        "nativeStatus": 1,
+        "status": "unavailable",
+        "eligible": false,
+        "statusReason": "unavailable"
+      },
+      {
+        "id": 162705,
+        "itemId": "A0ResearchFacility",
+        "name": "Research Facility",
+        "kind": "RESEARCH",
+        "moduleId": "A0ResearchModule1",
+        "x": 18,
+        "y": 50,
+        "z": 0,
+        "width": 2,
+        "breadth": 2,
+        "modules": 0,
+        "maximum": 1,
+        "reserved": 0,
+        "nativeStatus": 1,
+        "status": "unavailable",
+        "eligible": false,
+        "statusReason": "unavailable"
+      }
+    ],
+    "modulePending": [],
+    "truckSelection": {
+      "phase": "selected",
+      "view": "[1280,518,1,0,0,0,0,0,0,0,0,0,0,0,0]",
+      "boxes": 17,
+      "queries": 12,
+      "regions": [
+        {
+          "left": 482,
+          "top": 142,
+          "right": 586,
+          "bottom": 185
+        },
+        {
+          "left": 482,
+          "top": 186,
+          "right": 586,
+          "bottom": 288
+        },
+        {
+          "left": 614,
+          "top": 142,
+          "right": 758,
+          "bottom": 185
+        },
+        {
+          "left": 614,
+          "top": 186,
+          "right": 758,
+          "bottom": 298
+        },
+        {
+          "left": 656,
+          "top": 298,
+          "right": 758,
+          "bottom": 318
+        }
+      ],
+      "wanted": [
+        160001,
+        160003,
+        160005
+      ],
+      "selected": [
+        160001,
+        160003,
+        160005
+      ],
+      "recent": [
+        {
+          "rect": {
+            "left": 482,
+            "top": 142,
+            "right": 586,
+            "bottom": 185
+          },
+          "ids": []
+        },
+        {
+          "rect": {
+            "left": 482,
+            "top": 186,
+            "right": 586,
+            "bottom": 288
+          },
+          "ids": [
+            160001,
+            160025,
+            160087,
+            160091,
+            160287
+          ]
+        },
+        {
+          "rect": {
+            "left": 482,
+            "top": 186,
+            "right": 534,
+            "bottom": 288
+          },
+          "ids": []
+        },
+        {
+          "rect": {
+            "left": 534,
+            "top": 186,
+            "right": 586,
+            "bottom": 288
+          },
+          "ids": [
+            160001,
+            160025,
+            160087,
+            160091,
+            160287
+          ]
+        },
+        {
+          "rect": {
+            "left": 534,
+            "top": 186,
+            "right": 586,
+            "bottom": 237
+          },
+          "ids": [
+            160001,
+            160025,
+            160287
+          ]
+        },
+        {
+          "rect": {
+            "left": 534,
+            "top": 186,
+            "right": 560,
+            "bottom": 237
+          },
+          "ids": [
+            160001,
+            160287
+          ]
+        },
+        {
+          "rect": {
+            "left": 534,
+            "top": 186,
+            "right": 560,
+            "bottom": 211
+          },
+          "ids": [
+            160287
+          ]
+        },
+        {
+          "rect": {
+            "left": 534,
+            "top": 211,
+            "right": 560,
+            "bottom": 237
+          },
+          "ids": [
+            160001
+          ]
+        },
+        {
+          "rect": {
+            "left": 614,
+            "top": 142,
+            "right": 758,
+            "bottom": 185
+          },
+          "ids": []
+        },
+        {
+          "rect": {
+            "left": 614,
+            "top": 186,
+            "right": 758,
+            "bottom": 298
+          },
+          "ids": [
+            160003,
+            160005
+          ]
+        }
+      ],
+      "cacheHit": false,
+      "cacheRejected": false,
+      "beforeOrders": [
+        {
+          "id": 160001,
+          "order": 0,
+          "queued": 0
+        },
+        {
+          "id": 160003,
+          "order": 0,
+          "queued": 0
+        },
+        {
+          "id": 160005,
+          "order": 0,
+          "queued": 0
+        }
+      ],
+      "afterOrders": [
+        {
+          "id": 160001,
+          "order": 0,
+          "queued": 0
+        },
+        {
+          "id": 160003,
+          "order": 0,
+          "queued": 0
+        },
+        {
+          "id": 160005,
+          "order": 0,
+          "queued": 0
+        }
+      ]
+    },
+    "selectingTrucks": false,
+    "page": "",
+    "buildOpen": false,
+    "nativeHudHidden": false,
+    "pendingItem": "",
+    "siteChecks": 0,
+    "pending": 1,
+    "writes": 71,
+    "acks": 57,
+    "timeouts": 0,
+    "placements": 1,
+    "rejects": 0,
+    "opens": 0,
+    "closes": 0,
+    "placement": "",
+    "linePlacement": null,
+    "lineValidations": 0,
+    "lastLine": null,
+    "factory": 0,
+    "factoryRecipeKey": "",
+    "factoryQueueOpen": false,
+    "factoryMenuOpen": false,
+    "productionPending": [],
+    "productionFeedback": {
+      "message": "",
+      "tone": "done"
+    },
+    "demolition": null,
+    "demolitionOpening": false,
+    "session": "build-1794429281844-9",
+    "nativeMenu": "",
+    "nativeClosing": false,
+    "nativeItem": "",
+    "nativeBuildGroup": [
+      160001,
+      160003,
+      160005
+    ],
+    "buildParticipants": [
+      160005,
+      160003,
+      160001
+    ],
+    "nativeToolReady": false,
+    "nativePendingSites": 0,
+    "exitingBuild": false,
+    "nativeBuildPlaced": true,
+    "nativeBuildSawWork": true,
+    "buildingOpening": false,
+    "saved": [
+      {
+        "id": "design-1794415047593-1",
+        "name": "Design 1",
+        "body": "Body1REC",
+        "propulsion": "wheeled01",
+        "turrets": [
+          "MG1Mk1"
+        ],
+        "cost": 47,
+        "points": 237,
+        "droidType": 0
+      },
+      {
+        "id": "design-1794415812020-1",
+        "name": "Design 2",
+        "body": "Body1REC",
+        "propulsion": "wheeled01",
+        "turrets": [
+          "MG1Mk1"
+        ],
+        "cost": 47,
+        "points": 237,
+        "droidType": 0
+      }
+    ],
+    "history": [
+      {
+        "nonce": "cmd-1794429286630-36",
+        "action": "queue-build",
+        "ok": true,
+        "reason": "queued",
+        "result": {
+          "id": "cmd-1794429286630-36",
+          "itemId": "A0ResearchFacility",
+          "x": 18,
+          "y": 50,
+          "workers": [
+            160005,
+            160003,
+            160001
+          ],
+          "automatic": false,
+          "status": "queued",
+          "created": 683402,
+          "attempts": {},
+          "issued": {},
+          "parentId": 0,
+          "targetModules": 0,
+          "reason": ""
+        },
+        "gameTime": 683402
+      }
+    ],
+    "snapshot": {
+      "version": 1,
+      "gameTime": 696402,
+      "player": 0,
+      "power": 953,
+      "rewards": null,
+      "facilityTargets": [
+        {
+          "id": 160285,
+          "kind": "factory",
+          "itemId": "A0LightFactory",
+          "x": 12,
+          "y": 48,
+          "z": 0,
+          "modules": 0,
+          "moduleId": "A0FacMod1",
+          "width": 3,
+          "breadth": 3,
+          "ready": true,
+          "nativeStatus": 1
+        },
+        {
+          "id": 162705,
+          "kind": "research",
+          "itemId": "A0ResearchFacility",
+          "x": 18,
+          "y": 50,
+          "z": 0,
+          "modules": 0,
+          "moduleId": "A0ResearchModule1",
+          "width": 2,
+          "breadth": 2,
+          "ready": true,
+          "nativeStatus": 1
+        }
+      ],
+      "facilityBlockers": [
+        {
+          "id": 160287,
+          "x": 13,
+          "y": 49,
+          "z": 0,
+          "bodySize": 1
+        },
+        {
+          "id": 160001,
+          "x": 13,
+          "y": 50,
+          "z": 0,
+          "bodySize": 1
+        },
+        {
+          "id": 160025,
+          "x": 14,
+          "y": 50,
+          "z": 0,
+          "bodySize": 1
+        },
+        {
+          "id": 160087,
+          "x": 14,
+          "y": 51,
+          "z": 0,
+          "bodySize": 1
+        },
+        {
+          "id": 160089,
+          "x": 14,
+          "y": 51,
+          "z": 0,
+          "bodySize": 1
+        },
+        {
+          "id": 160091,
+          "x": 13,
+          "y": 52,
+          "z": 0,
+          "bodySize": 1
+        },
+        {
+          "id": 160003,
+          "x": 16,
+          "y": 50,
+          "z": 0,
+          "bodySize": 1
+        },
+        {
+          "id": 160005,
+          "x": 17,
+          "y": 51,
+          "z": 0,
+          "bodySize": 1
+        }
+      ],
+      "mapWidth": 128,
+      "mapHeight": 128,
+      "alwaysQueue": true,
+      "researchQueues": [
+        {
+          "labId": 162705,
+          "topicIds": []
+        }
+      ],
+      "hasHQ": true,
+      "selectedUnits": [
+        {
+          "id": 160001,
+          "x": 13,
+          "y": 50,
+          "z": 0,
+          "order": 0,
+          "constructor": true
+        },
+        {
+          "id": 160003,
+          "x": 16,
+          "y": 50,
+          "z": 0,
+          "order": 0,
+          "constructor": true
+        },
+        {
+          "id": 160005,
+          "x": 17,
+          "y": 51,
+          "z": 0,
+          "order": 0,
+          "constructor": true
+        }
+      ],
+      "construction": [],
+      "constructionSites": [
+        {
+          "id": "cmd-1794429286630-36",
+          "itemId": "A0ResearchFacility",
+          "x": 18,
+          "y": 50,
+          "workers": [
+            160005,
+            160003,
+            160001
+          ],
+          "automatic": false,
+          "status": "done",
+          "created": 683402,
+          "attempts": {
+            "160001": 1,
+            "160003": 3,
+            "160005": 3
+          },
+          "issued": {
+            "160001": 683402,
+            "160003": 685902,
+            "160005": 685902
+          },
+          "parentId": 0,
+          "targetModules": 0,
+          "reason": "",
+          "knownStructures": [
+            162705
+          ],
+          "structureId": 162705,
+          "idleAt": null,
+          "observed": true,
+          "progress": 0.9777777777777777,
+          "remaining": 1,
+          "workersActive": 2,
+          "completed": 695002
+        }
+      ],
+      "nativeBuildOptions": [
+        "A0ADemolishStructure",
+        "A0LightFactory",
+        "A0PowerGenerator",
+        "A0ResearchFacility",
+        "A0ResourceExtractor"
+      ],
+      "moduleTargets": [
+        {
+          "id": 160285,
+          "itemId": "A0LightFactory",
+          "name": "Factory",
+          "kind": "FACTORY",
+          "moduleId": "A0FacMod1",
+          "x": 12,
+          "y": 48,
+          "z": 0,
+          "width": 3,
+          "breadth": 3,
+          "modules": 0,
+          "maximum": 2,
+          "reserved": 0,
+          "nativeStatus": 1,
+          "status": "unavailable",
+          "eligible": false,
+          "statusReason": "unavailable"
+        },
+        {
+          "id": 162705,
+          "itemId": "A0ResearchFacility",
+          "name": "Research Facility",
+          "kind": "RESEARCH",
+          "moduleId": "A0ResearchModule1",
+          "x": 18,
+          "y": 50,
+          "z": 0,
+          "width": 2,
+          "breadth": 2,
+          "modules": 0,
+          "maximum": 1,
+          "reserved": 0,
+          "nativeStatus": 1,
+          "status": "unavailable",
+          "eligible": false,
+          "statusReason": "unavailable"
+        }
+      ],
+      "buildings": [
+        {
+          "id": "A0LightFactory",
+          "power": 100
+        },
+        {
+          "id": "A0PowerGenerator",
+          "power": 50
+        },
+        {
+          "id": "A0ResearchFacility",
+          "power": 100
+        },
+        {
+          "id": "A0ResourceExtractor",
+          "power": 0
+        }
+      ],
+      "parts": [
+        "Body1REC",
+        "MG1Mk1",
+        "Spade1Mk1",
+        "wheeled01"
+      ],
+      "trucks": [
+        {
+          "id": 160001,
+          "x": 13,
+          "y": 50,
+          "z": 0,
+          "selected": true,
+          "order": 0,
+          "action": 0,
+          "rate": 10,
+          "building": false,
+          "queued": 0
+        },
+        {
+          "id": 160003,
+          "x": 16,
+          "y": 50,
+          "z": 0,
+          "selected": true,
+          "order": 0,
+          "action": 0,
+          "rate": 10,
+          "building": false,
+          "queued": 0
+        },
+        {
+          "id": 160005,
+          "x": 17,
+          "y": 51,
+          "z": 0,
+          "selected": true,
+          "order": 0,
+          "action": 0,
+          "rate": 10,
+          "building": false,
+          "queued": 0
+        }
+      ],
+      "jobs": [],
+      "factories": [
+        {
+          "id": 160285,
+          "number": 1,
+          "x": 12,
+          "y": 48,
+          "type": 1,
+          "kind": "Factory",
+          "templates": [
+            "native:[\"Truck Viper Wheels\",\"Body1REC\",\"wheeled01\",[],\"Spade1Mk1\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+            "native:[\"Design 2 · F160285\",\"Body1REC\",\"wheeled01\",[\"MG1Mk1\"],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]"
+          ],
+          "modules": 0,
+          "ready": true,
+          "idle": true,
+          "active": null,
+          "currentProduction": null,
+          "progress": {
+            "available": false,
+            "currentId": "",
+            "currentName": "",
+            "templateId": null,
+            "completedBuildPoints": null,
+            "totalBuildPoints": null,
+            "ratio": null,
+            "state": "idle"
+          },
+          "queueKnown": true,
+          "waitingReason": null,
+          "queue": []
+        }
+      ],
+      "nativeMenu": "",
+      "templates": [
+        {
+          "fullname": "Truck Viper Wheels",
+          "name": "",
+          "id": "native:[\"Truck Viper Wheels\",\"Body1REC\",\"wheeled01\",[],\"Spade1Mk1\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+          "points": 272,
+          "power": 54,
+          "cost": 54,
+          "droidType": 3,
+          "body": "Body1REC",
+          "propulsion": "wheeled01",
+          "brain": "ZNULLBRAIN",
+          "repair": "ZNULLREPAIR",
+          "ecm": "ZNULLECM",
+          "sensor": "ZNULLSENSOR",
+          "construct": "Spade1Mk1",
+          "weapons": []
+        },
+        {
+          "fullname": "Design 2 · F160285",
+          "name": "",
+          "id": "native:[\"Design 2 · F160285\",\"Body1REC\",\"wheeled01\",[\"MG1Mk1\"],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+          "points": 237,
+          "power": 47,
+          "cost": 47,
+          "droidType": 0,
+          "body": "Body1REC",
+          "propulsion": "wheeled01",
+          "brain": "ZNULLBRAIN",
+          "repair": "ZNULLREPAIR",
+          "ecm": "ZNULLECM",
+          "sensor": "ZNULLSENSOR",
+          "construct": "ZNULLCONSTRUCT",
+          "weapons": [
+            "MG1Mk1"
+          ]
+        }
+      ],
+      "finishedUnits": [
+        {
+          "body": "Body1REC",
+          "factoryId": 160285,
+          "gameTime": 369502,
+          "id": 160287,
+          "name": "Design 2",
+          "propulsion": "wheeled01"
+        }
+      ],
+      "finishedBuilds": [
+        {
+          "gameTime": 41302,
+          "id": "cmd-1794415843799-29",
+          "itemId": "A0CommandCentre",
+          "workers": [
+            160003,
+            160001,
+            160005
+          ],
+          "x": 16,
+          "y": 54
+        },
+        {
+          "gameTime": 80902,
+          "id": "cmd-1794415875311-133",
+          "itemId": "A0LightFactory",
+          "workers": [
+            160005,
+            160001,
+            160003
+          ],
+          "x": 12,
+          "y": 48
+        },
+        {
+          "id": "cmd-1794429286630-36",
+          "itemId": "A0ResearchFacility",
+          "x": 18,
+          "y": 50,
+          "workers": [
+            160005,
+            160003,
+            160001
+          ],
+          "gameTime": 694902
+        }
+      ]
+    },
+    "terrain": {
+      "ready": true,
+      "active": false,
+      "revision": 1,
+      "observations": 1205,
+      "observedAt": 31947.199999999255,
+      "reads": 1,
+      "picks": 3,
+      "lastPickMs": 12.625,
+      "maxPickMs": 12.625,
+      "heightIndexBuilds": 1,
+      "heightCells": 1156,
+      "heightWideTriangles": 0,
+      "heightQueries": 9,
+      "lastHeightCandidates": 120,
+      "maxHeightCandidates": 120,
+      "heightTriangleTests": 432,
+      "gpuBufferReads": 2,
+      "cpuBufferReads": 0,
+      "cpuCopies": 2,
+      "cpuBytes": 1284096,
+      "mirroredUploads": 0,
+      "cpuInvalidations": 0,
+      "lastMeshReadMs": 10.469999998807907,
+      "maxMeshReadMs": 10.469999998807907,
+      "lastHeightIndexMs": 22.58000000193715,
+      "maxHeightIndexMs": 22.58000000193715,
+      "lastHeightMs": 0.019999999552965164,
+      "maxHeightMs": 34.105000000447035,
+      "error": ""
+    }
+  },
+  "display": {
+    "models": 165,
+    "acceptedSites": [],
+    "drawn": [],
+    "preview": "",
+    "previewParentId": 0,
+    "previewPoint": null,
+    "moduleItem": "",
+    "moduleTargets": [],
+    "moduleDrawn": [],
+    "facilityTargets": [
+      {
+        "id": 160285,
+        "kind": "factory",
+        "itemId": "A0LightFactory",
+        "x": 12,
+        "y": 48,
+        "z": 0,
+        "modules": 0,
+        "moduleId": "A0FacMod1",
+        "width": 3,
+        "breadth": 3,
+        "ready": true,
+        "nativeStatus": 1
+      },
+      {
+        "id": 162705,
+        "kind": "research",
+        "itemId": "A0ResearchFacility",
+        "x": 18,
+        "y": 50,
+        "z": 0,
+        "modules": 0,
+        "moduleId": "A0ResearchModule1",
+        "width": 2,
+        "breadth": 2,
+        "ready": true,
+        "nativeStatus": 1
+      }
+    ],
+    "facilityBlockerCount": 8,
+    "linePreview": [],
+    "frames": 61,
+    "terrainRevision": 1,
+    "previewValidation": "",
+    "paintMs": 0.24500000104308128,
+    "maxPaintMs": 35.600000001490116,
+    "error": ""
+  },
+  "campaign": {
+    "snapshot": {
+      "mode": "campaign",
+      "mission": "cam1a",
+      "session": "cam1a-1794429277177",
+      "gameTime": 697502,
+      "missionTime": -1,
+      "missionType": 2,
+      "nativeLevel": "CAM_1A",
+      "paused": false,
+      "video": false,
+      "ui": {
+        "gameTime": 697202,
+        "intelligenceOpen": false,
+        "mode": "campaign",
+        "nativeLevel": "CAM_1A",
+        "nativeMenuOpen": false,
+        "nativeMode": 0,
+        "paused": false,
+        "playing": true,
+        "radar": {
+          "centerX": 1160,
+          "centerY": 397,
+          "height": 192,
+          "inverseCos": 1,
+          "inverseSin": 0,
+          "rotation": 0,
+          "viewportHeight": 517,
+          "viewportWidth": 1280,
+          "visible": true,
+          "width": 159
+        },
+        "realTime": 28416,
+        "transportOpen": false,
+        "video": false,
+        "worldSafe": true
+      },
+      "ended": false
+    },
+    "frame": {
+      "gameTime": 697502,
+      "intelligenceOpen": false,
+      "mode": "campaign",
+      "nativeLevel": "CAM_1A",
+      "nativeMenuOpen": false,
+      "nativeMode": 0,
+      "paused": false,
+      "playing": true,
+      "radar": {
+        "centerX": 1160,
+        "centerY": 397,
+        "height": 192,
+        "inverseCos": 1,
+        "inverseSin": 0,
+        "rotation": 0,
+        "viewportHeight": 517,
+        "viewportWidth": 1280,
+        "visible": true,
+        "width": 159
+      },
+      "realTime": 28802,
+      "transportOpen": false,
+      "video": false,
+      "worldSafe": true
+    },
+    "nativeState": {
+      "gameTime": 697502,
+      "intelligenceOpen": false,
+      "mode": "campaign",
+      "nativeLevel": "CAM_1A",
+      "nativeMenuOpen": false,
+      "nativeMode": 0,
+      "paused": false,
+      "playing": true,
+      "radar": {
+        "centerX": 1160,
+        "centerY": 397,
+        "height": 192,
+        "inverseCos": 1,
+        "inverseSin": 0,
+        "rotation": 0,
+        "viewportHeight": 517,
+        "viewportWidth": 1280,
+        "visible": true,
+        "width": 159
+      },
+      "realTime": 28802,
+      "transportOpen": false,
+      "video": false,
+      "worldSafe": true
+    },
+    "allCombat": false,
+    "suspended": true,
+    "selectedCount": 0,
+    "selectionPending": false,
+    "selectionRequests": 0,
+    "lastError": "",
+    "intent": "campaign-ui-1794429300823-65",
+    "physicalPointerCount": 0,
+    "inputSettling": true
+  },
+  "intel": {
+    "open": true,
+    "opening": false,
+    "closing": false,
+    "serial": 2,
+    "selection": 1,
+    "pending": 0,
+    "history": [],
+    "selected": null,
+    "selectedId": "",
+    "query": "",
+    "viewport": {
+      "height": 517,
+      "width": 1280
+    },
+    "preview": {
+      "active": false,
+      "frames": 0,
+      "realTime": 28741,
+      "reason": "",
+      "rect": {
+        "height": 0,
+        "width": 0,
+        "x": 0,
+        "y": 0
+      },
+      "rotationPeriodMs": 2000,
+      "topicId": ""
+    },
+    "lastError": "",
+    "requests": 1,
+    "opens": 1,
+    "closes": 0,
+    "lastClock": 697502,
+    "lastRefresh": 32005.620000001043,
+    "rectKey": "",
+    "closingPromise": null,
+    "campaignSession": "cam1a-1794429277177"
+  }
+}

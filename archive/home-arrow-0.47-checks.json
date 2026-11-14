@@ -1,0 +1,41 @@
+{
+  "version": "0.47",
+  "passed": true,
+  "emulatorUsed": false,
+  "browserUsed": false,
+  "androidRuntimeExecuted": false,
+  "actualNativeEngineExecuted": false,
+  "screensVerified": false,
+  "gameplayVerified": false,
+  "checks": [
+    "Map paging, swipe/click/accessibility callbacks, artwork and measurement/layout are identical except the arrow paint state",
+    "Activity lifecycle/navigation/services are unchanged; shared research artwork is installed synchronously before its consumers",
+    "All other Android sources, including theme, drawable and wallet/save/ad policies, remain byte-identical",
+    "Normal/selected/pressed arrow ink and face share the same drawable state with readable source colour pairs; disabled selected ink stays dark"
+  ],
+  "checksPassed": 4,
+  "sourceContrastRatios": {
+    "normal": 13.937,
+    "selected": 17.3,
+    "pressed": 16.603
+  },
+  "sources": [
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MapPreviewPager.java",
+      "sha256": "88fd493780147a56b1dee863983346af78322943c9813b7b35bc9b56b16ade97"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MainActivity.java",
+      "sha256": "8dd76afd73d308dc08cf2fe51414edc4a1b76e105d52931b5b832a8e63541227"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/TowersTheme.java",
+      "sha256": "766ba8980c429341b31388c7c779a681332a2a47ca10e569c9c10acf87080761"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/TowersControlDrawable.java",
+      "sha256": "6dc04d22247a8c19956e87be504d0476470cd2a1a1f7661501f5e713ddea33b0"
+    }
+  ],
+  "recordedUTC": "2026-11-11T09:35:32.733532+00:00"
+}

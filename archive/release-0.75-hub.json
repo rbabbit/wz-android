@@ -1,0 +1,202 @@
+{
+  "version": "0.75",
+  "versionCode": 75,
+  "candidateAPK_SHA256": "88932001a5cb4962ff1fd3e1a4299908907ab7dcac8481666168a88755981df6",
+  "scope": "Home Hub button and isolated local results/rankings/player reader. Worker cached public data, independent source-method ratings and compact monochrome UI. No emulator tests; existing gameplay/assets and multiplayer joining frozen.",
+  "exactAPKVerification": {
+    "evidence": {
+      "path": "qa/hub-075/verification.json",
+      "bytes": 145198,
+      "sha256": "21130cc49fe68f5cbeb440c5bd5f8cd5af61cd38514edca278873d67480fe0d5"
+    },
+    "buildLog": {
+      "path": "qa/hub-075/build.log",
+      "bytes": 2477,
+      "sha256": "a0f1de48fdb022cfd2734773652f0e998dae03a3ccf162817971f3c9443a8ba7"
+    },
+    "emulatorUsed": false,
+    "emulatorOmittedAtUserRequest": true,
+    "androidGameplayVerified": false,
+    "actualAndroidViewsExecuted": false,
+    "offlineHostChecksPassed": true,
+    "buildChecksPassed": true,
+    "offlineFixtureEvidence": [
+      {
+        "path": "qa/hub-075/hub-checks.json",
+        "bytes": 8068,
+        "sha256": "cc43980d0db41b0ef1f7227b4fd33e635edd9b968dba51e1417593ee662720f5"
+      }
+    ],
+    "checks": {
+      "homeHubNavigation": true,
+      "dataAndRatings": true,
+      "completeHistoryGate": true,
+      "cacheAndLifecycle": true,
+      "browserHubUi": true,
+      "successfulBuild": true
+    },
+    "verificationScope": "Actual Hub data/rating/worker fixtures, live public data and host browser UI checks, Home native geometry/source checks, and the exact successful APK build. Host browser is not Android WebView or gameplay verification.",
+    "limitations": [
+      "No emulator tests were run, as requested.",
+      "Host browser/Java fixtures do not verify Android WebView rendering, physical touch or gameplay on a device. Public Hub data availability is controlled by its source service."
+    ],
+    "pinnedCheckedSourceFiles": 715,
+    "hubAssertions": 48
+  },
+  "fallback": {
+    "path": "qa/hub-075/fallback-0.75.json",
+    "bytes": 409,
+    "sha256": "ad39a9806c8e1fe2053f2d295b192b308e6b0450ed5804438b53c2982d43a290"
+  },
+  "sourcePreservation": {
+    "changedBaselineSources": [
+      {
+        "path": "AGENTS.md",
+        "beforeSHA256": "3587aaeb99d48513e96dd4aa521e98afa5db6e02543956e4eed0ad55a5dfec51",
+        "sha256": "a3f6888af91de152ad1886794a1ee3f3c2464d8b9f6c40aafe133ac374bdac5a"
+      },
+      {
+        "path": "app/build.gradle.kts",
+        "beforeSHA256": "12e7902fbaa5dbfc943ec68de4974e94a22bc8a369c540bedc962a8078fd06ba",
+        "sha256": "735a19c422ddd3879cc91ff9de96ab5fd9a562ff0a4f864944586dbacd20989d"
+      },
+      {
+        "path": "app/src/main/java/com/rbabbit/blocknight/warzone/GraphicsSetupView.java",
+        "beforeSHA256": "dd799540c2611a6597b438c5c6b6b3f1f0b2d4401fa72afeadfd911ed5d1bdea",
+        "sha256": "3ab6dd587f5d3f5755d9b551a4bf502f97028f06a35e999be181af75562a1b5c"
+      },
+      {
+        "path": "app/src/main/java/com/rbabbit/blocknight/warzone/HomeMenuLayout.java",
+        "beforeSHA256": "4b08aa28e5c3760c0ec3186836967eb1afb81b1405077c52f6bde36e8e424bc0",
+        "sha256": "f0bbd4f49bdd6403f83596988160ab642fc9334415584264b7e8b6e3115b8c0b"
+      },
+      {
+        "path": "app/src/main/java/com/rbabbit/blocknight/warzone/HomeModesView.java",
+        "beforeSHA256": "de5f280930b9bf587da8909e3962f9a643d6c6d7ba6b58ba8a5584a9fc81f204",
+        "sha256": "29186a01666698f761531d4a7a217d2db0fb770f4e4d6006ee5a64288290b9bc"
+      },
+      {
+        "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MainActivity.java",
+        "beforeSHA256": "331eb2ce08bc148e8c4def24ceab78acaf0396eff00198a1cff4cd71f2680546",
+        "sha256": "3dcacc14ade3c349ef691992ad77879ffe24ae151ea788cd8d83db31e19d3999"
+      }
+    ],
+    "addedSources": [
+      "app/src/main/assets/hub/hub-data.js",
+      "app/src/main/assets/hub/hub-worker.js",
+      "app/src/main/assets/hub/hub.css",
+      "app/src/main/assets/hub/hub.js",
+      "app/src/main/assets/hub/index.html",
+      "app/src/main/java/com/rbabbit/blocknight/warzone/HubView.java",
+      "archive/release-0.75-hub.json",
+      "docs/hub-075-data-sources.md",
+      "qa/hub-075/audit.md",
+      "qa/hub-075/build.log",
+      "qa/hub-075/data-checks.json",
+      "qa/hub-075/fallback-0.75.json",
+      "qa/hub-075/hub-checks.json",
+      "qa/hub-075/live-parity.json",
+      "qa/hub-075/native.json",
+      "qa/hub-075/public-sources.json",
+      "qa/hub-075/ui-actual-match-600x300.png",
+      "qa/hub-075/ui-actual-match-800x360.png",
+      "qa/hub-075/ui-actual-offline-rankings-600x300.png",
+      "qa/hub-075/ui-actual-player-600x300.png",
+      "qa/hub-075/ui-actual-player-800x360.png",
+      "qa/hub-075/ui-actual-rankings-600x300.png",
+      "qa/hub-075/ui-actual-rankings-800x360.png",
+      "qa/hub-075/ui-actual-results-600x300.png",
+      "qa/hub-075/ui-actual-results-800x360.png",
+      "qa/hub-075/ui-checks.json",
+      "qa/hub-075/ui-failure.json",
+      "qa/hub-075/ui-failure.png",
+      "qa/hub-075/ui-live-checks.json",
+      "qa/hub-075/ui-live-match-800x360.png",
+      "qa/hub-075/ui-live-player-800x360.png",
+      "qa/hub-075/ui-live-results-800x360.png",
+      "qa/hub-075/ui-rankings-1164x554-1.png",
+      "qa/hub-075/ui-rankings-360x300-1_3.png",
+      "qa/hub-075/ui-rankings-600x300-1.png",
+      "qa/hub-075/ui-rankings-600x300-1_3.png",
+      "qa/hub-075/ui-rankings-800x360-1.png",
+      "qa/hub-075/ui-results-1164x554-1.png",
+      "qa/hub-075/ui-results-360x300-1_3.png",
+      "qa/hub-075/ui-results-600x300-1.png",
+      "qa/hub-075/ui-results-600x300-1_3.png",
+      "qa/hub-075/ui-results-800x360-1.png",
+      "qa/hub-075/verification.json",
+      "tools/fixtures/hub-075/public-sample.json",
+      "tools/fixtures/hub-075/reference-expected.json",
+      "tools/package-hub-075.py",
+      "tools/record-hub-075.py",
+      "tools/test-hub-data-075.cjs",
+      "tools/test-hub-native-075.java",
+      "tools/test-hub-native-075.py",
+      "tools/test-hub-native-home-075.java",
+      "tools/test-hub-ui-075.cjs"
+    ],
+    "baselineSourceEntries": 12478,
+    "everyBaselineSourceEntryRetained": true,
+    "onlyHomeAndHubChanged": true,
+    "allExistingAssetsAndOtherJavaSourceFrozen": true,
+    "upstreamCommit": "7d3d8e51a61ceee89e6bf672a41337e1a9cd7392",
+    "protocol": [
+      16384,
+      104
+    ],
+    "nativeBuildPerformed": false,
+    "nativeCompiledClientReusedFromVersion": "0.71",
+    "sourceOverlayManifest": {
+      "path": "vendor/multiplayer/native-071/source-overlays.json",
+      "bytes": 1077,
+      "sha256": "e1489603363481f81c58bb04e4d34a84dbc9145543c4425c66b9688bfe32f598"
+    },
+    "completePatch": {
+      "path": "vendor/multiplayer/native-071/native-ui.patch",
+      "bytes": 46141,
+      "sha256": "b6c3c38267e1eb75e844ac412252ce11a7176f2fef8bc7f0f5146afb1f2148c1"
+    },
+    "nativeBuild": {
+      "path": "qa/multiplayer-071/native-build.json",
+      "bytes": 5069,
+      "sha256": "881e8100681511907c59f73ddccdf0c13207abeace0f7491f9d9415d908755d5"
+    },
+    "integration": {
+      "path": "vendor/multiplayer/native-071/runtime-integration.json",
+      "bytes": 1064,
+      "sha256": "5082fc268cc1c1840218461eb4005e94e00d055787adddd4c25a6d4783bcd525"
+    },
+    "portableNativeSourcesAndRawPairVerified": true,
+    "officialMPDataFrozen": true,
+    "wasmBinaryUnmodifiedAfterCompiler": true
+  },
+  "certificateSHA256": "4499efe00477c7c724c06a1dd96f935864548665c13ab5e2bd0a9c0f83f7cb15",
+  "changedAPKMembers": [
+    "AndroidManifest.xml",
+    "assets/hub/hub-data.js",
+    "assets/hub/hub-worker.js",
+    "assets/hub/hub.css",
+    "assets/hub/hub.js",
+    "assets/hub/index.html",
+    "classes3.dex"
+  ],
+  "everyBaselineAPKMemberRetained": true,
+  "allAPKAssetsMatchSource": true,
+  "allExistingAssetsResourcesAndNativeLibrariesFrozen": true,
+  "bundledMusicFrozen": true,
+  "compiledMultiplayerClientByteIdenticalTo074": true,
+  "livePhoneAdsAndEmulatorFallbackRetained": true,
+  "maximumAPKZipGapBytes": 4096,
+  "generatedBuildConfigSHA256": "88d777b7873c09bd18047ba8fe5e3587a61c6731ffb8a3a8f4fe1c8e0e740e9b",
+  "nativeBuildPerformed": false,
+  "emulatorUsed": false,
+  "androidGameplayVerified": false,
+  "actualAndroidViewsExecuted": false,
+  "offlineHostChecksPassed": true,
+  "buildChecksPassed": true,
+  "packageChecksPassed": true,
+  "liveAdsTested": false,
+  "githubPublished": false,
+  "vpsChanged": false,
+  "recordedUTC": "2026-11-14T14:43:03.217297+00:00"
+}

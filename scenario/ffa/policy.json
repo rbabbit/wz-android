@@ -1,0 +1,781 @@
+{
+  "version": 1,
+  "mode": "ffa",
+  "vtol": false,
+  "airComponents": [
+    "Bomb1-VTOL-LtHE",
+    "Bomb2-VTOL-HvHE",
+    "Bomb3-VTOL-LtINC",
+    "Bomb4-VTOL-HvyINC",
+    "Bomb5-VTOL-Plasmite",
+    "Bomb6-VTOL-EMP",
+    "Cannon1-VTOL",
+    "Cannon4AUTO-VTOL",
+    "Cannon5Vulcan-VTOL",
+    "HeavyLaser-VTOL",
+    "Helicopter",
+    "Laser2PULSE-VTOL",
+    "Laser3BEAM-VTOL",
+    "MG1-VTOL",
+    "MG1-VTOL-SCAVS",
+    "MG2-VTOL",
+    "MG3-VTOL",
+    "MG4ROTARY-VTOL",
+    "Missile-VTOL-AT",
+    "ParticleGun-VTOL",
+    "RailGun1-VTOL",
+    "RailGun2-VTOL",
+    "Rocket-VTOL-BB",
+    "Rocket-VTOL-HvyA-T",
+    "Rocket-VTOL-LtA-T",
+    "Rocket-VTOL-Pod",
+    "Rocket-VTOL-Pod-SCAVS",
+    "Rocket-VTOL-Sunburst",
+    "SuperTransportBody",
+    "Sys-VTOLCBTurret01",
+    "Sys-VstrikeTurret01",
+    "TransporterBody",
+    "V-Tol"
+  ],
+  "airStructures": [
+    "A0BaBaVtolFactory",
+    "A0BaBaVtolPad",
+    "A0VTolFactory1",
+    "A0VtolPad",
+    "Sys-NX-VTOL-CB-Tow",
+    "Sys-NX-VTOL-RadTow",
+    "Sys-VTOL-CB-Tower01",
+    "Sys-VTOL-RadarTower01"
+  ],
+  "blockedResearch": [
+    "R-Cyborg-Transport",
+    "R-Struc-VTOLFactory",
+    "R-Struc-VTOLPad",
+    "R-Struc-VTOLPad-Upgrade01",
+    "R-Struc-VTOLPad-Upgrade02",
+    "R-Struc-VTOLPad-Upgrade03",
+    "R-Struc-VTOLPad-Upgrade04",
+    "R-Struc-VTOLPad-Upgrade05",
+    "R-Struc-VTOLPad-Upgrade06",
+    "R-SuperTransport",
+    "R-Sys-VTOLCBS-Tower01",
+    "R-Sys-VTOLCBS-Turret01",
+    "R-Sys-VTOLStrike-Tower01",
+    "R-Sys-VTOLStrike-Turret01",
+    "R-Vehicle-Prop-VTOL",
+    "R-Wpn-Bomb-Damage01",
+    "R-Wpn-Bomb-Damage02",
+    "R-Wpn-Bomb-Damage03",
+    "R-Wpn-Bomb01",
+    "R-Wpn-Bomb02",
+    "R-Wpn-Bomb03",
+    "R-Wpn-Bomb04",
+    "R-Wpn-Bomb05",
+    "R-Wpn-Bomb06"
+  ],
+  "researchCategory": {
+    "R-Comp-CommandTurret01": "",
+    "R-Comp-CommandTurret02": "",
+    "R-Cyborg-Armor-Heat01": "Cyborg Thermal",
+    "R-Cyborg-Armor-Heat02": "Cyborg Thermal",
+    "R-Cyborg-Armor-Heat03": "Cyborg Thermal",
+    "R-Cyborg-Armor-Heat04": "Cyborg Thermal",
+    "R-Cyborg-Armor-Heat05": "Cyborg Thermal",
+    "R-Cyborg-Armor-Heat06": "Cyborg Thermal",
+    "R-Cyborg-Armor-Heat07": "Cyborg Thermal",
+    "R-Cyborg-Armor-Heat08": "Cyborg Thermal",
+    "R-Cyborg-Armor-Heat09": "Cyborg Thermal",
+    "R-Cyborg-Hvywpn-A-T": "",
+    "R-Cyborg-Hvywpn-Acannon": "",
+    "R-Cyborg-Hvywpn-HPV": "",
+    "R-Cyborg-Hvywpn-Mcannon": "",
+    "R-Cyborg-Hvywpn-PulseLsr": "",
+    "R-Cyborg-Hvywpn-RailGunner": "",
+    "R-Cyborg-Hvywpn-TK": "",
+    "R-Cyborg-Metals01": "Cyborg Alloys",
+    "R-Cyborg-Metals02": "Cyborg Alloys",
+    "R-Cyborg-Metals03": "Cyborg Alloys",
+    "R-Cyborg-Metals04": "Cyborg Alloys",
+    "R-Cyborg-Metals05": "Cyborg Alloys",
+    "R-Cyborg-Metals06": "Cyborg Alloys",
+    "R-Cyborg-Metals07": "Cyborg Alloys",
+    "R-Cyborg-Metals08": "Cyborg Alloys",
+    "R-Cyborg-Metals09": "Cyborg Alloys",
+    "R-Cyborg-Transport": "",
+    "R-Defense-AA-Laser": "",
+    "R-Defense-AASite-QuadBof": "",
+    "R-Defense-AASite-QuadBof02": "",
+    "R-Defense-AASite-QuadMg1": "",
+    "R-Defense-AASite-QuadRotMg": "",
+    "R-Defense-Cannon6": "",
+    "R-Defense-EMPCannon": "",
+    "R-Defense-EMPMortar": "",
+    "R-Defense-Emplacement-HPVcannon": "",
+    "R-Defense-GuardTower-ATMiss": "",
+    "R-Defense-GuardTower-Rail1": "",
+    "R-Defense-HardcreteGate": "",
+    "R-Defense-HardcreteWall": "",
+    "R-Defense-HeavyLas": "",
+    "R-Defense-ParticleGun": "",
+    "R-Defense-HeavyPlasmaLauncher": "",
+    "R-Defense-Howitzer": "",
+    "R-Defense-Howitzer-Incendiary": "",
+    "R-Defense-HvyA-Trocket": "",
+    "R-Defense-HvyArtMissile": "",
+    "R-Defense-HvyFlamer": "",
+    "R-Defense-HvyHowitzer": "",
+    "R-Defense-HvyMor": "",
+    "R-Defense-IDFRocket": "",
+    "R-Defense-MRL": "",
+    "R-Defense-MRLHvy": "",
+    "R-Defense-MassDriver": "",
+    "R-Defense-MdArtMissile": "",
+    "R-Defense-MortarPit": "",
+    "R-Defense-MortarPit-Incendiary": "",
+    "R-Defense-Pillbox01": "",
+    "R-Defense-Pillbox04": "",
+    "R-Defense-Pillbox05": "",
+    "R-Defense-Pillbox06": "",
+    "R-Defense-PlasmaCannon": "",
+    "R-Defense-PlasmiteFlamer": "",
+    "R-Defense-PrisLas": "",
+    "R-Defense-PulseLas": "",
+    "R-Defense-Rail2": "",
+    "R-Defense-Rail3": "",
+    "R-Defense-RotHow": "",
+    "R-Defense-RotMG": "",
+    "R-Defense-RotMor": "",
+    "R-Defense-SamSite1": "",
+    "R-Defense-SamSite2": "",
+    "R-Defense-Sunburst": "",
+    "R-Defense-Super-Cannon": "",
+    "R-Defense-Super-Missile": "",
+    "R-Defense-Super-Rocket": "",
+    "R-Defense-TankTrap01": "",
+    "R-Defense-Tower01": "",
+    "R-Defense-Tower06": "",
+    "R-Defense-Wall-RotMg": "",
+    "R-Defense-Wall-VulcanCan": "",
+    "R-Defense-WallTower-A-Tmiss": "",
+    "R-Defense-WallTower-DoubleAAgun": "",
+    "R-Defense-WallTower-DoubleAAgun02": "",
+    "R-Defense-WallTower-HPVcannon": "",
+    "R-Defense-WallTower-HvyA-Trocket": "",
+    "R-Defense-WallTower-PulseLas": "",
+    "R-Defense-WallTower-QuadRotAA": "",
+    "R-Defense-WallTower-Rail2": "",
+    "R-Defense-WallTower-Rail3": "",
+    "R-Defense-WallTower-SamHvy": "",
+    "R-Defense-WallTower-SamSite": "",
+    "R-Defense-WallTower-TwinAGun": "",
+    "R-Defense-WallTower01": "",
+    "R-Defense-WallTower02": "",
+    "R-Defense-WallTower03": "",
+    "R-Defense-WallTower04": "",
+    "R-Defense-WallTower06": "",
+    "R-Defense-WallUpgrade01": "Wall",
+    "R-Defense-WallUpgrade02": "Wall",
+    "R-Defense-WallUpgrade03": "Wall",
+    "R-Defense-WallUpgrade04": "Wall",
+    "R-Defense-WallUpgrade05": "Wall",
+    "R-Defense-WallUpgrade06": "Wall",
+    "R-Defense-WallUpgrade07": "Wall",
+    "R-Defense-WallUpgrade08": "Wall",
+    "R-Defense-WallUpgrade09": "Wall",
+    "R-Defense-WallUpgrade10": "Wall",
+    "R-Defense-WallUpgrade11": "Wall",
+    "R-Defense-WallUpgrade12": "Wall",
+    "R-Struc-CommandRelay": "",
+    "R-Struc-Factory-Cyborg": "",
+    "R-Struc-Factory-Module": "",
+    "R-Struc-Factory-Upgrade01": "Production",
+    "R-Struc-Factory-Upgrade04": "Production",
+    "R-Struc-Factory-Upgrade07": "Production",
+    "R-Struc-Factory-Upgrade09": "Production",
+    "R-Struc-Materials01": "Buildings",
+    "R-Struc-Materials02": "Buildings",
+    "R-Struc-Materials03": "Buildings",
+    "R-Struc-Power-Upgrade01": "Power",
+    "R-Struc-Power-Upgrade01b": "Power",
+    "R-Struc-Power-Upgrade01c": "Power",
+    "R-Struc-Power-Upgrade02": "Power",
+    "R-Struc-Power-Upgrade03": "Power",
+    "R-Struc-Power-Upgrade03a": "Power",
+    "R-Struc-PowerModuleMk1": "",
+    "R-Struc-RepairFacility": "",
+    "R-Struc-Research-Module": "",
+    "R-Struc-Research-Upgrade01": "Research",
+    "R-Struc-Research-Upgrade02": "Research",
+    "R-Struc-Research-Upgrade03": "Research",
+    "R-Struc-Research-Upgrade04": "Research",
+    "R-Struc-Research-Upgrade05": "Research",
+    "R-Struc-Research-Upgrade06": "Research",
+    "R-Struc-Research-Upgrade07": "Research",
+    "R-Struc-Research-Upgrade08": "Research",
+    "R-Struc-Research-Upgrade09": "Research",
+    "R-Struc-RprFac-Upgrade01": "",
+    "R-Struc-RprFac-Upgrade04": "",
+    "R-Struc-RprFac-Upgrade06": "",
+    "R-Struc-VTOLFactory": "",
+    "R-Struc-VTOLPad": "",
+    "R-Struc-VTOLPad-Upgrade01": "",
+    "R-Struc-VTOLPad-Upgrade02": "",
+    "R-Struc-VTOLPad-Upgrade03": "",
+    "R-Struc-VTOLPad-Upgrade04": "",
+    "R-Struc-VTOLPad-Upgrade05": "",
+    "R-Struc-VTOLPad-Upgrade06": "",
+    "R-SuperTransport": "",
+    "R-Sys-Autorepair-General": "",
+    "R-Sys-CBSensor-Tower01": "",
+    "R-Sys-CBSensor-Turret01": "",
+    "R-Sys-Engineering01": "Engineering",
+    "R-Sys-Engineering02": "Engineering",
+    "R-Sys-Engineering03": "Engineering",
+    "R-Sys-MobileRepairTurret01": "",
+    "R-Sys-MobileRepairTurretHvy": "",
+    "R-Sys-RadarDetector01": "",
+    "R-Sys-Resistance-Circuits": "",
+    "R-Sys-Sensor-Tower01": "",
+    "R-Sys-Sensor-Tower02": "",
+    "R-Sys-Sensor-Turret01": "",
+    "R-Sys-Sensor-UpLink": "",
+    "R-Sys-Sensor-Upgrade01": "Sensor",
+    "R-Sys-Sensor-Upgrade02": "Sensor",
+    "R-Sys-Sensor-Upgrade03": "Sensor",
+    "R-Sys-Sensor-WS": "",
+    "R-Sys-Sensor-WSTower": "",
+    "R-Sys-Spade1Mk1": "",
+    "R-Sys-SpyTower": "",
+    "R-Sys-SpyTurret": "",
+    "R-Sys-VTOLCBS-Tower01": "",
+    "R-Sys-VTOLCBS-Turret01": "",
+    "R-Sys-VTOLStrike-Tower01": "",
+    "R-Sys-VTOLStrike-Turret01": "",
+    "R-Vehicle-Armor-Heat01": "Tank Thermal",
+    "R-Vehicle-Armor-Heat02": "Tank Thermal",
+    "R-Vehicle-Armor-Heat03": "Tank Thermal",
+    "R-Vehicle-Armor-Heat04": "Tank Thermal",
+    "R-Vehicle-Armor-Heat05": "Tank Thermal",
+    "R-Vehicle-Armor-Heat06": "Tank Thermal",
+    "R-Vehicle-Armor-Heat07": "Tank Thermal",
+    "R-Vehicle-Armor-Heat08": "Tank Thermal",
+    "R-Vehicle-Armor-Heat09": "Tank Thermal",
+    "R-Vehicle-Body01": "",
+    "R-Vehicle-Body02": "",
+    "R-Vehicle-Body03": "",
+    "R-Vehicle-Body04": "",
+    "R-Vehicle-Body05": "",
+    "R-Vehicle-Body06": "",
+    "R-Vehicle-Body07": "",
+    "R-Vehicle-Body08": "",
+    "R-Vehicle-Body09": "",
+    "R-Vehicle-Body10": "",
+    "R-Vehicle-Body11": "",
+    "R-Vehicle-Body12": "",
+    "R-Vehicle-Body13": "",
+    "R-Vehicle-Body14": "",
+    "R-Vehicle-Engine01": "Engine",
+    "R-Vehicle-Engine02": "Engine",
+    "R-Vehicle-Engine03": "Engine",
+    "R-Vehicle-Engine04": "Engine",
+    "R-Vehicle-Engine05": "Engine",
+    "R-Vehicle-Engine06": "Engine",
+    "R-Vehicle-Engine07": "Engine",
+    "R-Vehicle-Engine08": "Engine",
+    "R-Vehicle-Engine09": "Engine",
+    "R-Vehicle-Metals01": "Tank Alloys",
+    "R-Vehicle-Metals02": "Tank Alloys",
+    "R-Vehicle-Metals03": "Tank Alloys",
+    "R-Vehicle-Metals04": "Tank Alloys",
+    "R-Vehicle-Metals05": "Tank Alloys",
+    "R-Vehicle-Metals06": "Tank Alloys",
+    "R-Vehicle-Metals07": "Tank Alloys",
+    "R-Vehicle-Metals08": "Tank Alloys",
+    "R-Vehicle-Metals09": "Tank Alloys",
+    "R-Vehicle-Prop-Halftracks": "",
+    "R-Vehicle-Prop-Hover": "",
+    "R-Vehicle-Prop-Tracks": "",
+    "R-Vehicle-Prop-VTOL": "",
+    "R-Vehicle-Prop-Wheels": "",
+    "R-Wpn-AAGun01": "",
+    "R-Wpn-AAGun02": "",
+    "R-Wpn-AAGun03": "",
+    "R-Wpn-AAGun04": "",
+    "R-Wpn-AALaser": "",
+    "R-Wpn-Bomb-Damage01": "",
+    "R-Wpn-Bomb-Damage02": "",
+    "R-Wpn-Bomb-Damage03": "",
+    "R-Wpn-Bomb01": "",
+    "R-Wpn-Bomb02": "",
+    "R-Wpn-Bomb03": "",
+    "R-Wpn-Bomb04": "",
+    "R-Wpn-Bomb05": "",
+    "R-Wpn-Bomb06": "",
+    "R-Wpn-Cannon-Accuracy01": "Cannon Accuracy",
+    "R-Wpn-Cannon-Accuracy02": "Cannon Accuracy",
+    "R-Wpn-Cannon-Damage01": "Cannon Damage",
+    "R-Wpn-Cannon-Damage02": "Cannon Damage",
+    "R-Wpn-Cannon-Damage03": "Cannon Damage",
+    "R-Wpn-Cannon-Damage04": "Cannon Damage",
+    "R-Wpn-Cannon-Damage05": "Cannon Damage",
+    "R-Wpn-Cannon-Damage06": "Cannon Damage",
+    "R-Wpn-Cannon-Damage07": "Cannon Damage",
+    "R-Wpn-Cannon-Damage08": "Cannon Damage",
+    "R-Wpn-Cannon-Damage09": "Cannon Damage",
+    "R-Wpn-Cannon-ROF01": "Cannon Reload",
+    "R-Wpn-Cannon-ROF02": "Cannon Reload",
+    "R-Wpn-Cannon-ROF03": "Cannon Reload",
+    "R-Wpn-Cannon-ROF04": "Cannon Reload",
+    "R-Wpn-Cannon-ROF05": "Cannon Reload",
+    "R-Wpn-Cannon-ROF06": "Cannon Reload",
+    "R-Wpn-Cannon1Mk1": "",
+    "R-Wpn-Cannon2Mk1": "",
+    "R-Wpn-Cannon3Mk1": "",
+    "R-Wpn-Cannon4AMk1": "",
+    "R-Wpn-Cannon5": "",
+    "R-Wpn-Cannon6TwinAslt": "",
+    "R-Wpn-EMPCannon": "",
+    "R-Wpn-Energy-Accuracy01": "Laser Accuracy",
+    "R-Wpn-Energy-Damage01": "Laser Damage",
+    "R-Wpn-Energy-Damage02": "Laser Damage",
+    "R-Wpn-Energy-Damage03": "Laser Damage",
+    "R-Wpn-Energy-ROF01": "Laser Reload",
+    "R-Wpn-Energy-ROF02": "Laser Reload",
+    "R-Wpn-Energy-ROF03": "Laser Reload",
+    "R-Wpn-Flame2": "",
+    "R-Wpn-Flamer-Damage01": "Flamer Damage",
+    "R-Wpn-Flamer-Damage02": "Flamer Damage",
+    "R-Wpn-Flamer-Damage03": "Flamer Damage",
+    "R-Wpn-Flamer-Damage04": "Flamer Damage",
+    "R-Wpn-Flamer-Damage05": "Flamer Damage",
+    "R-Wpn-Flamer-Damage06": "Flamer Damage",
+    "R-Wpn-Flamer-Damage07": "Flamer Damage",
+    "R-Wpn-Flamer-Damage08": "Flamer Damage",
+    "R-Wpn-Flamer-Damage09": "Flamer Damage",
+    "R-Wpn-Flamer-ROF01": "Flamer Reload",
+    "R-Wpn-Flamer-ROF02": "Flamer Reload",
+    "R-Wpn-Flamer-ROF03": "Flamer Reload",
+    "R-Wpn-Flamer01Mk1": "",
+    "R-Wpn-HeavyPlasmaLauncher": "",
+    "R-Wpn-Howitzer-Accuracy01": "Howitzers Accuracy",
+    "R-Wpn-Howitzer-Accuracy02": "Howitzers Accuracy",
+    "R-Wpn-Howitzer-Accuracy03": "Howitzers Accuracy",
+    "R-Wpn-Howitzer-Damage01": "Howitzers Damage",
+    "R-Wpn-Howitzer-Damage02": "Howitzers Damage",
+    "R-Wpn-Howitzer-Damage03": "Howitzers Damage",
+    "R-Wpn-Howitzer-Damage04": "Howitzers Damage",
+    "R-Wpn-Howitzer-Damage05": "Howitzers Damage",
+    "R-Wpn-Howitzer-Damage06": "Howitzers Damage",
+    "R-Wpn-Howitzer-Incendiary": "",
+    "R-Wpn-Howitzer-ROF01": "Howitzers Reload",
+    "R-Wpn-Howitzer-ROF02": "Howitzers Reload",
+    "R-Wpn-Howitzer-ROF03": "Howitzers Reload",
+    "R-Wpn-Howitzer-ROF04": "Howitzers Reload",
+    "R-Wpn-Howitzer03-Rot": "",
+    "R-Wpn-HowitzerMk1": "",
+    "R-Wpn-HvArtMissile": "",
+    "R-Wpn-HvyHowitzer": "",
+    "R-Wpn-HvyLaser": "",
+    "R-Wpn-ParticleGun": "",
+    "R-Wpn-LasSat": "",
+    "R-Wpn-Laser01": "",
+    "R-Wpn-Laser02": "",
+    "R-Wpn-MG-Damage01": "MG Damage",
+    "R-Wpn-MG-Damage02": "MG Damage",
+    "R-Wpn-MG-Damage03": "MG Damage",
+    "R-Wpn-MG-Damage04": "MG Damage",
+    "R-Wpn-MG-Damage05": "MG Damage",
+    "R-Wpn-MG-Damage06": "MG Damage",
+    "R-Wpn-MG-Damage07": "MG Damage",
+    "R-Wpn-MG-Damage08": "MG Damage",
+    "R-Wpn-MG-Damage09": "MG Damage",
+    "R-Wpn-MG-Damage10": "MG Damage",
+    "R-Wpn-MG-ROF01": "MG Reload",
+    "R-Wpn-MG-ROF02": "MG Reload",
+    "R-Wpn-MG-ROF03": "MG Reload",
+    "R-Wpn-MG1Mk1": "",
+    "R-Wpn-MG2Mk1": "",
+    "R-Wpn-MG3Mk1": "",
+    "R-Wpn-MG4": "",
+    "R-Wpn-MG5": "",
+    "R-Wpn-MdArtMissile": "",
+    "R-Wpn-Missile-Accuracy01": "Missile Accuracy",
+    "R-Wpn-Missile-Accuracy02": "Missile Accuracy",
+    "R-Wpn-Missile-Damage01": "Missile Damage",
+    "R-Wpn-Missile-Damage02": "Missile Damage",
+    "R-Wpn-Missile-Damage03": "Missile Damage",
+    "R-Wpn-Missile-HvSAM": "",
+    "R-Wpn-Missile-LtSAM": "",
+    "R-Wpn-Missile-ROF01": "Missile Reload",
+    "R-Wpn-Missile-ROF02": "Missile Reload",
+    "R-Wpn-Missile-ROF03": "Missile Reload",
+    "R-Wpn-Missile2A-T": "",
+    "R-Wpn-Mortar-Acc01": "Mortar Accuracy",
+    "R-Wpn-Mortar-Acc02": "Mortar Accuracy",
+    "R-Wpn-Mortar-Acc03": "Mortar Accuracy",
+    "R-Wpn-Mortar-Damage01": "Mortar Damage",
+    "R-Wpn-Mortar-Damage02": "Mortar Damage",
+    "R-Wpn-Mortar-Damage03": "Mortar Damage",
+    "R-Wpn-Mortar-Damage04": "Mortar Damage",
+    "R-Wpn-Mortar-Damage05": "Mortar Damage",
+    "R-Wpn-Mortar-Damage06": "Mortar Damage",
+    "R-Wpn-Mortar-Incendiary": "",
+    "R-Wpn-Mortar-ROF01": "Mortar Reload",
+    "R-Wpn-Mortar-ROF02": "Mortar Reload",
+    "R-Wpn-Mortar-ROF03": "Mortar Reload",
+    "R-Wpn-Mortar-ROF04": "Mortar Reload",
+    "R-Wpn-Mortar01Lt": "",
+    "R-Wpn-Mortar02Hvy": "",
+    "R-Wpn-Mortar3": "",
+    "R-Wpn-MortarEMP": "",
+    "R-Wpn-PlasmaCannon": "",
+    "R-Wpn-Plasmite-Flamer": "",
+    "R-Wpn-Rail-Accuracy01": "Rail Accuracy",
+    "R-Wpn-Rail-Damage01": "Rail Damage",
+    "R-Wpn-Rail-Damage02": "Rail Damage",
+    "R-Wpn-Rail-Damage03": "Rail Damage",
+    "R-Wpn-Rail-ROF01": "Rail Reload",
+    "R-Wpn-Rail-ROF02": "Rail Reload",
+    "R-Wpn-Rail-ROF03": "Rail Reload",
+    "R-Wpn-RailGun01": "",
+    "R-Wpn-RailGun02": "",
+    "R-Wpn-RailGun03": "",
+    "R-Wpn-Rocket-Accuracy01": "Rocket Accuracy",
+    "R-Wpn-Rocket-Accuracy02": "Rocket Accuracy",
+    "R-Wpn-Rocket-Damage01": "Rocket Damage",
+    "R-Wpn-Rocket-Damage02": "Rocket Damage",
+    "R-Wpn-Rocket-Damage03": "Rocket Damage",
+    "R-Wpn-Rocket-Damage04": "Rocket Damage",
+    "R-Wpn-Rocket-Damage05": "Rocket Damage",
+    "R-Wpn-Rocket-Damage06": "Rocket Damage",
+    "R-Wpn-Rocket-Damage07": "Rocket Damage",
+    "R-Wpn-Rocket-Damage08": "Rocket Damage",
+    "R-Wpn-Rocket-Damage09": "Rocket Damage",
+    "R-Wpn-Rocket-ROF01": "Rocket Reload",
+    "R-Wpn-Rocket-ROF02": "Rocket Reload",
+    "R-Wpn-Rocket-ROF03": "Rocket Reload",
+    "R-Wpn-Rocket01-LtAT": "",
+    "R-Wpn-Rocket02-MRL": "",
+    "R-Wpn-Rocket02-MRLHvy": "",
+    "R-Wpn-Rocket03-HvAT": "",
+    "R-Wpn-Rocket05-MiniPod": "",
+    "R-Wpn-Rocket06-IDF": "",
+    "R-Wpn-Rocket07-Tank-Killer": "",
+    "R-Wpn-RocketSlow-Accuracy01": "Rocket Accuracy",
+    "R-Wpn-RocketSlow-Accuracy02": "Rocket Accuracy",
+    "R-Wpn-Sunburst": "",
+    "R-FFA-Air-Locked": ""
+  },
+  "removedAirResults": [
+    {
+      "topic": "R-Cyborg-Transport",
+      "field": "resultComponents",
+      "removed": [
+        "TransporterBody"
+      ]
+    },
+    {
+      "topic": "R-Struc-VTOLFactory",
+      "field": "resultStructures",
+      "removed": [
+        "A0VTolFactory1"
+      ]
+    },
+    {
+      "topic": "R-Struc-VTOLPad",
+      "field": "resultStructures",
+      "removed": [
+        "A0VtolPad"
+      ]
+    },
+    {
+      "topic": "R-SuperTransport",
+      "field": "resultComponents",
+      "removed": [
+        "SuperTransportBody"
+      ]
+    },
+    {
+      "topic": "R-Sys-VTOLCBS-Tower01",
+      "field": "resultStructures",
+      "removed": [
+        "Sys-VTOL-CB-Tower01"
+      ]
+    },
+    {
+      "topic": "R-Sys-VTOLCBS-Turret01",
+      "field": "resultComponents",
+      "removed": [
+        "Sys-VTOLCBTurret01"
+      ]
+    },
+    {
+      "topic": "R-Sys-VTOLStrike-Tower01",
+      "field": "resultStructures",
+      "removed": [
+        "Sys-VTOL-RadarTower01"
+      ]
+    },
+    {
+      "topic": "R-Sys-VTOLStrike-Turret01",
+      "field": "resultComponents",
+      "removed": [
+        "Sys-VstrikeTurret01"
+      ]
+    },
+    {
+      "topic": "R-Vehicle-Prop-VTOL",
+      "field": "resultComponents",
+      "removed": [
+        "V-Tol"
+      ]
+    },
+    {
+      "topic": "R-Wpn-Bomb01",
+      "field": "resultComponents",
+      "removed": [
+        "Bomb1-VTOL-LtHE"
+      ]
+    },
+    {
+      "topic": "R-Wpn-Bomb02",
+      "field": "resultComponents",
+      "removed": [
+        "Bomb2-VTOL-HvHE"
+      ]
+    },
+    {
+      "topic": "R-Wpn-Bomb03",
+      "field": "resultComponents",
+      "removed": [
+        "Bomb3-VTOL-LtINC"
+      ]
+    },
+    {
+      "topic": "R-Wpn-Bomb04",
+      "field": "resultComponents",
+      "removed": [
+        "Bomb4-VTOL-HvyINC"
+      ]
+    },
+    {
+      "topic": "R-Wpn-Bomb05",
+      "field": "resultComponents",
+      "removed": [
+        "Bomb5-VTOL-Plasmite"
+      ]
+    },
+    {
+      "topic": "R-Wpn-Bomb06",
+      "field": "resultComponents",
+      "removed": [
+        "Bomb6-VTOL-EMP"
+      ]
+    },
+    {
+      "topic": "R-Wpn-Cannon1Mk1",
+      "field": "resultComponents",
+      "removed": [
+        "Cannon1-VTOL"
+      ]
+    },
+    {
+      "topic": "R-Wpn-Cannon4AMk1",
+      "field": "resultComponents",
+      "removed": [
+        "Cannon4AUTO-VTOL"
+      ]
+    },
+    {
+      "topic": "R-Wpn-Cannon5",
+      "field": "resultComponents",
+      "removed": [
+        "Cannon5Vulcan-VTOL"
+      ]
+    },
+    {
+      "topic": "R-Wpn-HvyLaser",
+      "field": "resultComponents",
+      "removed": [
+        "HeavyLaser-VTOL"
+      ]
+    },
+    {
+      "topic": "R-Wpn-ParticleGun",
+      "field": "resultComponents",
+      "removed": [
+        "ParticleGun-VTOL"
+      ]
+    },
+    {
+      "topic": "R-Wpn-Laser01",
+      "field": "resultComponents",
+      "removed": [
+        "Laser3BEAM-VTOL"
+      ]
+    },
+    {
+      "topic": "R-Wpn-Laser02",
+      "field": "resultComponents",
+      "removed": [
+        "Laser2PULSE-VTOL"
+      ]
+    },
+    {
+      "topic": "R-Wpn-MG1Mk1",
+      "field": "resultComponents",
+      "removed": [
+        "MG1-VTOL"
+      ]
+    },
+    {
+      "topic": "R-Wpn-MG2Mk1",
+      "field": "resultComponents",
+      "removed": [
+        "MG2-VTOL"
+      ]
+    },
+    {
+      "topic": "R-Wpn-MG3Mk1",
+      "field": "resultComponents",
+      "removed": [
+        "MG3-VTOL"
+      ]
+    },
+    {
+      "topic": "R-Wpn-MG4",
+      "field": "resultComponents",
+      "removed": [
+        "MG4ROTARY-VTOL"
+      ]
+    },
+    {
+      "topic": "R-Wpn-Missile2A-T",
+      "field": "resultComponents",
+      "removed": [
+        "Missile-VTOL-AT"
+      ]
+    },
+    {
+      "topic": "R-Wpn-RailGun01",
+      "field": "resultComponents",
+      "removed": [
+        "RailGun1-VTOL"
+      ]
+    },
+    {
+      "topic": "R-Wpn-RailGun02",
+      "field": "resultComponents",
+      "removed": [
+        "RailGun2-VTOL"
+      ]
+    },
+    {
+      "topic": "R-Wpn-Rocket01-LtAT",
+      "field": "resultComponents",
+      "removed": [
+        "Rocket-VTOL-LtA-T"
+      ]
+    },
+    {
+      "topic": "R-Wpn-Rocket03-HvAT",
+      "field": "resultComponents",
+      "removed": [
+        "Rocket-VTOL-BB"
+      ]
+    },
+    {
+      "topic": "R-Wpn-Rocket05-MiniPod",
+      "field": "resultComponents",
+      "removed": [
+        "Rocket-VTOL-Pod"
+      ]
+    },
+    {
+      "topic": "R-Wpn-Rocket07-Tank-Killer",
+      "field": "resultComponents",
+      "removed": [
+        "Rocket-VTOL-HvyA-T"
+      ]
+    },
+    {
+      "topic": "R-Wpn-Sunburst",
+      "field": "resultComponents",
+      "removed": [
+        "Rocket-VTOL-Sunburst"
+      ]
+    }
+  ],
+  "removedAirTemplates": [
+    "ATESTVTOL",
+    "H-Scorp-VTOL-BB",
+    "H-Scorp-VTOL-Lancer",
+    "P6-L-Bomb1-V",
+    "P6-L-LTAT-V",
+    "SK-Bug-VTOL-BB",
+    "SK-Bug-VTOL-CLBomb",
+    "SK-Leopard-VTOL-BB",
+    "SK-Leopard-VTOL-PhosBomb",
+    "SK-Mantis-VTOL-BB",
+    "SK-Mantis-VTOL-HBB",
+    "SK-Mantis-VTOL-PBB",
+    "SK-Panther-VTOL-BB",
+    "SK-Panther-VTOL-Phosbomb",
+    "SK-Panther-VTOL-TK",
+    "SK-Panther-VTOL-Thermite",
+    "SK-Retal-VTOL-Phosbomb",
+    "SK-Retal-VTOL-Scourge",
+    "SK-Retre-VTOL-HBB",
+    "SK-Retre-VTOL-Plasmite",
+    "SK-Retre-VTOL-PulseLsr",
+    "SK-Retre-VTOL-Scourge",
+    "SK-Retre-VTOL-Thermite",
+    "SK-Scorpion-VTOL-BB",
+    "SK-Scorpion-VTOL-Hbomb",
+    "SuperTransport",
+    "Transporter",
+    "V-Bug-BB",
+    "V-Bug-ClusterBomb",
+    "V-Bug-HPV",
+    "V-Bug-Lancer",
+    "V-Mantis-HPV",
+    "V-Mantis-Lancer",
+    "V-Scor-BB",
+    "V-Scor-ClusterBomb",
+    "V-Scor-HPV",
+    "V-Scor-Lancer"
+  ],
+  "groundPrerequisiteReplacements": [
+    {
+      "topic": "R-Sys-Sensor-WS",
+      "original": [
+        "R-Struc-Research-Upgrade07",
+        "R-Sys-VTOLCBS-Turret01"
+      ],
+      "replacement": [
+        "R-Struc-Research-Upgrade07",
+        "R-Sys-CBSensor-Turret01",
+        "R-Struc-Factory-Upgrade01",
+        "R-Vehicle-Prop-Hover",
+        "R-Vehicle-Engine03",
+        "R-Sys-Sensor-Upgrade01",
+        "R-Sys-Sensor-Upgrade02"
+      ]
+    },
+    {
+      "topic": "R-Vehicle-Engine07",
+      "original": [
+        "R-Vehicle-Engine06",
+        "R-Vehicle-Prop-VTOL",
+        "R-Vehicle-Metals07"
+      ],
+      "replacement": [
+        "R-Vehicle-Engine06",
+        "R-Struc-Factory-Upgrade01",
+        "R-Vehicle-Prop-Hover",
+        "R-Vehicle-Engine03",
+        "R-Vehicle-Metals07"
+      ]
+    }
+  ]
+}

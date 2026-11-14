@@ -1,0 +1,12 @@
+{
+  "version": "0.35",
+  "passed": true,
+  "scope": "Only add BNNOTICE to the existing private output filter; console error output and existing BNTECH/BNQUEUE routes stay unchanged.",
+  "beforeSHA256": "d552fdf229b98791fbaf979928c4a0df1a829e0c4fb52beead2bb89ac73c4c4f",
+  "afterSHA256": "bff9ff538a4835565382defe7bf693cfeadbb7b71fe71a7adda6af70bde97204",
+  "replaceFrom": "text.includes(\"BNQUEUE\")))",
+  "replaceTo": "text.includes(\"BNQUEUE\")||text.includes(\"BNNOTICE\")))",
+  "replacementCount": 1,
+  "beforeFile": "archive/native-notices-0.35/worker-output-before.js",
+  "afterFile": "archive/native-notices-0.35/worker-output-after.js"
+}

@@ -1,0 +1,216 @@
+--- a/lib/sdl/main_sdl.cpp
++++ b/lib/sdl/main_sdl.cpp
+@@ -1714,6 +1714,8 @@
+ {
+ #if defined(__EMSCRIPTEN__)
+ 	FILE *marker = std::fopen("/tmp/warzone-towers-ui-v34", "rb");
++	if (marker) { const bool enabled = std::fgetc(marker) == '1'; std::fclose(marker); if (enabled) return true; }
++	marker = std::fopen("/tmp/warzone-campaign-mobile-v51", "rb");
+ 	if (!marker) return false;
+ 	const bool enabled = std::fgetc(marker) == '1';
+ 	std::fclose(marker);
+--- a/src/hci.cpp
++++ b/src/hci.cpp
+@@ -2033,6 +2033,8 @@
+ static bool towersIntelEnabled()
+ {
+ 	FILE *file = fopen("/tmp/warzone-towers-ui-v34", "rb");
++	if (file) { const bool enabled = fgetc(file) == '1'; fclose(file); if (enabled) return true; }
++	file = fopen("/tmp/warzone-campaign-mobile-v51", "rb");
+ 	if (!file) return false;
+ 	const bool enabled = fgetc(file) == '1';
+ 	fclose(file);
+@@ -2402,6 +2404,43 @@
+ static void towersIntelligenceFrame() {}
+ #endif
+ 
++
++// Campaign opts into touch/native observation without Towers autosave/UI policy.
++static bool campaignMobileEnabled()
++{
++#if defined(__EMSCRIPTEN__)
++    FILE *file = fopen("/tmp/warzone-campaign-mobile-v51", "rb");
++    if (!file) return false;
++    const bool enabled = fgetc(file) == '1'; fclose(file); return enabled;
++#else
++    return false;
++#endif
++}
++
++std::string campaignMobileNativeStateJSON()
++{
++    const bool video = loop_GetVideoStatus();
++    const bool paused = gamePaused() || gameUpdatePaused();
++    const bool help = intHelpOverlayIsUp();
++    const bool menu = InGameOpUp || isInGamePopupUp || bLoadSaveUp || help || intMode != INT_NORMAL;
++    const bool playing = GetGameMode() == GS_NORMAL && game.type == LEVEL_TYPE::CAMPAIGN;
++    return nlohmann::json{{"mode","campaign"},{"gameTime",gameTime},{"nativeLevel",getLevelName()},
++        {"realTime",realTime},{"video",video},{"paused",paused},{"nativeMode",intMode},
++        {"playing",playing},{"transportOpen",intMode == INT_TRANSPORTER},
++        {"intelligenceOpen",intMode == INT_INTELMAP},{"nativeMenuOpen",menu},
++        {"worldSafe",playing && !video && !paused && !menu}}.dump();
++}
++
++void campaignMobileFrame()
++{
++    if (!campaignMobileEnabled()) return;
++    const auto value = campaignMobileNativeStateJSON();
++    FILE *file = fopen("/tmp/warzone-campaign-state-v51.json.tmp", "wb");
++    if (!file) return;
++    fwrite(value.data(),1,value.size(),file); fclose(file);
++    rename("/tmp/warzone-campaign-state-v51.json.tmp","/tmp/warzone-campaign-state-v51.json");
++}
++
+ void intDisplayWidgets()
+ {
+ 	/*draw the background for the design screen and the Intelligence screen*/
+--- a/src/quickjs_backend.cpp
++++ b/src/quickjs_backend.cpp
+@@ -47,6 +47,7 @@
+ #include "display3d.h"
+ #include "intelmap.h"
+ #include "hci.h"
++#include "selection.h"
+ #include "wrappers.h"
+ #include "challenge.h"
+ #include "research.h"
+@@ -869,6 +870,54 @@
+ #include "cmddroid.h"
+ #include "group.h"
+ 
++
++// These campaign APIs are observational or ordinary native selection only.
++extern std::string campaignMobileNativeStateJSON();
++static bool campaignMobileScriptEnabled()
++{
++#if defined(__EMSCRIPTEN__)
++    FILE *file = fopen("/tmp/warzone-campaign-mobile-v51", "rb");
++    if (!file) return false;
++    const bool enabled = fgetc(file) == '1'; fclose(file); return enabled;
++#else
++    return false;
++#endif
++}
++static bool mobileProductionEnabled()
++{
++    FILE *file = fopen("/tmp/warzone-towers-ui-v34", "rb");
++    if (file) { const bool enabled = fgetc(file) == '1'; fclose(file); if (enabled) return true; }
++    return campaignMobileScriptEnabled();
++}
++static JSValue campaignMobileStateJS(JSContext *ctx, JSValueConst, int, JSValueConst *)
++{
++    if (!campaignMobileScriptEnabled()) return JS_UNDEFINED;
++    const auto value = campaignMobileNativeStateJSON();
++    return JS_ParseJSON(ctx,value.c_str(),value.size(),"campaign-mobile-state");
++}
++static JSValue campaignSelectCombatJS(JSContext *ctx, JSValueConst, int, JSValueConst *)
++{
++    if (!campaignMobileScriptEnabled() || game.type != LEVEL_TYPE::CAMPAIGN
++        || engineToInstanceMap.at(ctx)->player() != selectedPlayer) return JS_FALSE;
++    const auto state = nlohmann::json::parse(campaignMobileNativeStateJSON());
++    if (!state.value("worldSafe",false)) return JS_FALSE;
++    // Re-read the latest HTML intent; an in-flight command must not steal a
++    // builder/transport selection after the user opens another control.
++    FILE *file = fopen("/data/base/script/campaign/mobile/campaign-control.json","rb");
++    if (!file) return JS_FALSE;
++    char buffer[4097]; const size_t length = fread(buffer,1,4096,file); fclose(file);
++    const auto control = nlohmann::json::parse(buffer,buffer+length,nullptr,false);
++    if (!control.is_object() || !control.value("enabled",false) || control.value("suspended",true)) return JS_FALSE;
++    const unsigned count = selDroidSelection(selectedPlayer,DS_BY_TYPE,DST_ALL_COMBAT,false);
++    JSValue result = JS_NewObject(ctx), ids = JS_NewArray(ctx); uint32_t index=0;
++    for (const DROID *droid : apsDroidLists[selectedPlayer])
++        if (droid->selected) JS_SetPropertyUint32(ctx,ids,index++,JS_NewUint32(ctx,droid->id));
++    JS_SetPropertyStr(ctx,result,"ok",JS_TRUE);
++    JS_SetPropertyStr(ctx,result,"count",JS_NewUint32(ctx,count));
++    JS_SetPropertyStr(ctx,result,"selectedIds",ids);
++    return result;
++}
++
+ // Towers-only read-only native production observation. No orders, power requests,
+ // queue mutation, timers, rendering or random state are changed here.
+ static JSValue towersProductionState(const STRUCTURE *structure, JSContext *ctx)
+@@ -879,11 +928,7 @@
+ 	{
+ 		return JS_UNDEFINED;
+ 	}
+-	FILE *marker = fopen("/tmp/warzone-towers-ui-v34", "rb");
+-	if (!marker) return JS_UNDEFINED;
+-	const bool enabled = fgetc(marker) == '1';
+-	fclose(marker);
+-	if (!enabled) return JS_UNDEFINED;
++	if (!mobileProductionEnabled()) return JS_UNDEFINED;
+ 	const FACTORY &factory = structure->pFunctionality->factory;
+ 	const DROID_TEMPLATE *subject = factory.psSubject;
+ 	JSValue value = JS_NewObject(ctx);
+@@ -956,11 +1001,7 @@
+ {
+ #ifdef __EMSCRIPTEN__
+ 	if (argc != 3 || engineToInstanceMap.at(ctx)->player() != selectedPlayer) return JS_FALSE;
+-	FILE *marker = fopen("/tmp/warzone-towers-ui-v34", "rb");
+-	if (!marker) return JS_FALSE;
+-	const bool enabled = fgetc(marker) == '1';
+-	fclose(marker);
+-	if (!enabled) return JS_FALSE;
++	if (!mobileProductionEnabled()) return JS_FALSE;
+ 	uint32_t identity[3];
+ 	for (int i = 0; i < 3; ++i)
+ 	{
+@@ -3649,6 +3690,8 @@
+ 	ASSERT_OR_RETURN(false, !JS_IsException(upgrades), "Failure to create upgrades object");
+ 	JS_DefinePropertyValueStr(ctx, global_obj, "Upgrades", upgrades, JS_PROP_WRITABLE | JS_PROP_ENUMERABLE);
+ 
++	JS_SetPropertyStr(ctx,global_obj,"campaignMobileState",JS_NewCFunction(ctx,campaignMobileStateJS,"campaignMobileState",0));
++	JS_SetPropertyStr(ctx,global_obj,"campaignSelectCombat",JS_NewCFunction(ctx,campaignSelectCombatJS,"campaignSelectCombat",0));
+ 	// Register functions to the script engine here
+ 	JS_REGISTER_FUNC_NAME(_, 1, JS_FUNC_IMPL_NAME(translate)); // WZAPI
+ 	JS_REGISTER_FUNC2(dump, 1, MAX_JS_VARARGS);
+--- a/src/main.cpp
++++ b/src/main.cpp
+@@ -1171,6 +1171,20 @@
+  * The mainloop.
+  * Fetches events, executes appropriate code
+  */
++
++// Only the separate Campaign host opts into native intro playback and state.
++extern void campaignMobileFrame();
++static bool campaignMobileStartup()
++{
++#if defined(__EMSCRIPTEN__)
++    FILE *file = fopen("/tmp/warzone-campaign-mobile-v51", "rb");
++    if (!file) return false;
++    const bool enabled = fgetc(file) == '1'; fclose(file); return enabled;
++#else
++    return false;
++#endif
++}
++
+ void mainLoop()
+ {
+ 	frameUpdate(); // General housekeeping
+@@ -1215,6 +1229,7 @@
+ 		autoSave(true);
+ 	}
+ 
++	campaignMobileFrame();
+ 	wzApplyCursor();
+ 	runNotifications();
+ 	wz_command_interface_process_queued_status_output();
+@@ -2099,7 +2114,17 @@
+ 		initSaveGameLoad();
+ 		break;
+ 	case GS_NORMAL:
+-		if (!startGameLoop())
++		if (campaignMobileStartup() && game.type == LEVEL_TYPE::CAMPAIGN && strcmp(aLevelName,"CAM_1A") == 0)
++		{
++			// Reuse the ordinary title-video -> queued STARTGAME path. Loading a
++			// campaign save uses GS_SAVEGAMELOAD and never replays this intro.
++			startTitleLoop(true);
++			SPinit(LEVEL_TYPE::CAMPAIGN); sstrcpy(aLevelName,"CAM_1A");
++			queuedTilecodeChange = TITLECODE_STARTGAME;
++			seq_ClearSeqList(); seq_AddSeqToList("cam1/c001.ogg",nullptr,"cam1/c001.txa",false);
++			seq_StartNextFullScreenVideo();
++		}
++		else if (!startGameLoop())
+ 		{
+ 			// Attempted to load straight into a game from the command-line, but starting the game loop (loading the map, etc) failed
+ 			// Treat this as a failure and queue an exit

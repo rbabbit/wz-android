@@ -1,0 +1,411 @@
+{
+  "version": "0.67",
+  "passed": true,
+  "checksPassed": 4,
+  "checks": [
+    {
+      "name": "51 real map previews and distinct player-count groups are bundled",
+      "passed": true
+    },
+    {
+      "name": "Actual Java selection state preserves all51 identities and rejects retired-group snaps",
+      "passed": true
+    },
+    {
+      "name": "Native pager uses the tested state, bounded current-group views and pending-launch settlement",
+      "passed": true
+    },
+    {
+      "name": "Guide describes15mapspergroup and keeps the historical screenshot honestly labelled",
+      "passed": true
+    }
+  ],
+  "actualJava": {
+    "passed": true,
+    "assertions": 33994,
+    "maps": 51,
+    "transitionSteps": 5000,
+    "emulatorUsed": false,
+    "actualNativeEngineExecuted": false
+  },
+  "maps": 51,
+  "practicalPages": 44,
+  "emulatorUsed": false,
+  "actualNativeEngineExecuted": false,
+  "limitations": [
+    "No Android/native rendering, gesture, playability or save/load execution is claimed. The Java state class is real; transition calls are host inputs. Actual APK gameplay/layout remains unverified as requested."
+  ],
+  "sources": [
+    {
+      "path": "app/src/main/assets/ffa-maps.json",
+      "sha256": "8bd04644135ebe47186d50fbd55bbb72d9a199465ae1caee9cdd2d764a474a79",
+      "bytes": 30449
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/contact.png",
+      "sha256": "7def522abf8484076640514014f42da0f149a9e956d3d80a9e4485934cf0437a",
+      "bytes": 4805
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/emag.png",
+      "sha256": "ab5eda0c083b98f37adcfce6ef1d12ee2e00952ede774f0409a830dc6cece361",
+      "bytes": 11837
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/emaj-6p.png",
+      "sha256": "656ae9bd70cf85bc305506917df58f3e3174f02352b11f9cb9a1f073bcfa783a",
+      "bytes": 13125
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-2p-01.png",
+      "sha256": "0dcae706251aa5377fabe4f36dc3357fc93b64f65e44f42cf4195b3ada8d563f",
+      "bytes": 343246
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-2p-02.png",
+      "sha256": "82170483f9ce49ccb0ddb80cca8bd036c2e0be607ed50be50fcd0051a863f48f",
+      "bytes": 195495
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-2p-03.png",
+      "sha256": "2dc7efca4615dafbb6993230cb3754396b0d8edfa88bbc306b7685cb0c9a8d41",
+      "bytes": 433610
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-2p-04.png",
+      "sha256": "5749540dd353a0f048d2736f9f43fe906dbb1e6528fc306d26359eee950c0582",
+      "bytes": 515108
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-2p-05.png",
+      "sha256": "79bda1534a610c33a0470ddd8d72257c10fde3d3abadb9e4718ac8e8a309844e",
+      "bytes": 505726
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-2p-06.png",
+      "sha256": "6510d32b4083cbc6c44767976de8dc91dc11aba9a7675fafaf3ba61d59a34029",
+      "bytes": 533621
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-2p-07.png",
+      "sha256": "868559e65e80f50163c136543ead8d858239c4100735d4102452d51db300f8b7",
+      "bytes": 205947
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-2p-08.png",
+      "sha256": "62253f30a515d50f8ab444055207d63a4ad4adf78e30381d9c6e633ea35bd747",
+      "bytes": 393673
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-2p-09.png",
+      "sha256": "4f85e6f74bdc2249ec63889b76518f60538ec9960cad3452abb2b282f4af8252",
+      "bytes": 249707
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-2p-10.png",
+      "sha256": "01dce97b10bc99d708af44edb1334eb290d452283533c7a4ec60452b81ae50b6",
+      "bytes": 497001
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-2p-11.png",
+      "sha256": "a11990d8c084e0565c3873ca98050ac0ccf4a9e70faddc5c78e4b1085df8d048",
+      "bytes": 366904
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-2p-12.png",
+      "sha256": "34ae456bdfbc27e9c31528b24a3bf0be444769bdc8624756e61e55b01dbea32d",
+      "bytes": 382495
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-2p-13.png",
+      "sha256": "5adf6a0c13f2902365f558e912c9434e8188e252ce306755832b57206ceb6162",
+      "bytes": 290432
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-2p-14.png",
+      "sha256": "ee4e263f540297e91db3833781c689e263efe1ebcf80eab6a8b8d971d4a9b843",
+      "bytes": 194306
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-2p-15.png",
+      "sha256": "286393a2ff8bc765ae152b7d7a0a55f47a127693e228d027f04c101733465a9d",
+      "bytes": 565757
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-3p-01.png",
+      "sha256": "a9311d6d2829b466f893433fdc3848d4331ab2d3bf3fee7f8049a6f1da29c2a0",
+      "bytes": 588796
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-3p-02.png",
+      "sha256": "4f5c00bc7e36c8d45d67b87bdee9d1f18585d6d924abee0fd5a4b4641e147263",
+      "bytes": 276558
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-3p-03.png",
+      "sha256": "ee6114924b5551175e63dea4b0c4aef84299fe30cf61df34bddbf466e2cefdc1",
+      "bytes": 362963
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-3p-04.png",
+      "sha256": "4c4a36704c7ee391097bd2a2670923d15e328e1ac6721d89e563945d1dcc066a",
+      "bytes": 647070
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-3p-05.png",
+      "sha256": "47f65666a7f9f22325715adf6d1a4c5e4be0b04cc513be3cb7d8814a608e238b",
+      "bytes": 662083
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-3p-06.png",
+      "sha256": "6f2751e65fe469f0e300110aeaa79d23b93e72abac15c83ca14700c548cb4bc2",
+      "bytes": 327116
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-3p-07.png",
+      "sha256": "883eaf78dfabc97285f1a30ddbf44cbe938a95b5f861babeb9b150ff43ea5f21",
+      "bytes": 516076
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-3p-08.png",
+      "sha256": "9ce49491d4eb1b405b9fa46cf0871093fc6da3c6c7e4829c0a6dc097fc394f76",
+      "bytes": 634960
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-3p-09.png",
+      "sha256": "c7033e3d1b78168c4a0f571380ef25eac138d2d3466f2b0e61a6257919934841",
+      "bytes": 734317
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-3p-10.png",
+      "sha256": "869ad596c8088c29549e38303c441cfd3979f1a02b5e0e1b020cac0f9466d0df",
+      "bytes": 166457
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-3p-11.png",
+      "sha256": "fc8d16cdead30fcad63cf5361dfd409188c36708b06cca268cfa6b7757beeda3",
+      "bytes": 548003
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-3p-12.png",
+      "sha256": "914a320d714bebf8c59ed41f28966e8e950b958fe57baee0236849da6f9c1610",
+      "bytes": 763900
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-3p-13.png",
+      "sha256": "1d6fe37b613706ddf43fa36b3c1fae2a70e32424796f17c014b90c17a4083465",
+      "bytes": 510434
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-3p-14.png",
+      "sha256": "bce07b59378d1250171e38814b989d00b22fea5403fa518ba958e57683b147bd",
+      "bytes": 628286
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-3p-15.png",
+      "sha256": "58d7a2fe751649d6defddc454fc758bd133cdf07176302d8a232e59aa3b939f2",
+      "bytes": 718055
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-4p-01.png",
+      "sha256": "3fed0fdedf3a0a227522fce3006e9c5efcdcf9485a4286e54d50961466718b12",
+      "bytes": 251350
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-4p-02.png",
+      "sha256": "1870838a33fb4ea335de5c5a6a605ae85a9af9ec220a0afe3db235612743035b",
+      "bytes": 279046
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-4p-03.png",
+      "sha256": "efbbc165aab07af1ffc59532aebdebe6d5e579af6086919beb7933fa974fc6a7",
+      "bytes": 473108
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-4p-04.png",
+      "sha256": "cbd1438239251d6cdb8b89e3afc699a38e073a702a85ce7c81f21ed2580782e9",
+      "bytes": 581955
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-4p-05.png",
+      "sha256": "7a8b1523614498888854db0781bd114c9a58c905cbb4fa2a037bc6658c6f71dd",
+      "bytes": 466081
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-4p-06.png",
+      "sha256": "295f27c392d4d43fac760db0c050c9b6a43066fafdcbac94dcfef4d86ca431a3",
+      "bytes": 456976
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-4p-07.png",
+      "sha256": "c337930191626e250a79483b2d70a2a9bafb766ba43441a88d101a351871eb14",
+      "bytes": 425866
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-4p-08.png",
+      "sha256": "d33ab0d14d25785befa03a7f20c05b920574443e80158ed44f669e06c9895f74",
+      "bytes": 663976
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-4p-09.png",
+      "sha256": "cdd2c6f990c3c17c3cb18dd2e019592ce72965486dd58cb1f9809c473aaa4267",
+      "bytes": 577816
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-4p-10.png",
+      "sha256": "b51820643b49027b9f0dbb55522145b5eb5bb056c28902d53af78cbe9c7b0f1c",
+      "bytes": 441471
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-4p-11.png",
+      "sha256": "1fd137b0030cf3d27dd95323ff0ce7a5ffbd347454af1ca162a7ccd18d0cd624",
+      "bytes": 392927
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-4p-12.png",
+      "sha256": "365de0fc2aa9e4e3728fe0735d9f5384d40b47ab43dda66d7ea6209923a9781f",
+      "bytes": 558251
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-4p-13.png",
+      "sha256": "21165482e66e8fd708e6483dd95bf57ef5c6ebfb09ecf9b6aee00ac07f989178",
+      "bytes": 635839
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-4p-14.png",
+      "sha256": "1de93c1f724f89dd9fb1fab6cf15cee64bfc4d52ccf0b6045eb21af8181e45c7",
+      "bytes": 409628
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/ntw-4p-15.png",
+      "sha256": "77eab28dfbe045a32f84d12c704cdd3ac5ed2db9a015c42f6c4007899c225e7c",
+      "bytes": 482011
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/rb-simple.png",
+      "sha256": "e82d29ca3d28e92e57ae2a3ef3608b69ec788221c1bfd00a48d4cec48cc31cd7",
+      "bytes": 4057
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/rb-usefull.png",
+      "sha256": "90af5c46d47d7b5f42039612bbe7275c1bf7bc235274430ad325a15771fdf1e5",
+      "bytes": 4465
+    },
+    {
+      "path": "app/src/main/assets/ffa-previews/templar-ffa.png",
+      "sha256": "acef4fba0d9a5a69f0f24ec055c2b91dab4b9db39e6ad924e6d8fe02516465cd",
+      "bytes": 6246
+    },
+    {
+      "path": "app/src/main/assets/guide/practical-data.js",
+      "sha256": "90be44f30bb0f93ade0e6b824a529673986253ed37c6afc17cb7e67293d73947",
+      "bytes": 52322
+    },
+    {
+      "path": "app/src/main/assets/guide/research-data.js",
+      "sha256": "645015fb029351e0567df84539da65d9051218545025c6a0dd36d9639e8d2cb6",
+      "bytes": 1241358
+    },
+    {
+      "path": "app/src/main/assets/guide/screenshots-data.js",
+      "sha256": "e43f27e2208057548d5aa499f3f295c9ff863c5d992a02380726cbfb713f4f6d",
+      "bytes": 18517
+    },
+    {
+      "path": "app/src/main/assets/guide/screenshots/build-modules.png",
+      "sha256": "8628b3d562c1891610a6839177e257a1bb9097a60e4e042a6ffba512562ed910",
+      "bytes": 1377358
+    },
+    {
+      "path": "app/src/main/assets/guide/screenshots/build-sites.png",
+      "sha256": "78409db0c96d7ad986998ffac6f1d8100412c7211ba02b4d2ab2c781b36f94c7",
+      "bytes": 1370688
+    },
+    {
+      "path": "app/src/main/assets/guide/screenshots/campaign-briefing.png",
+      "sha256": "40567cccb0294785f7a0098283a1b3b41bc238e8fe147f47189e20de1698c4f5",
+      "bytes": 876192
+    },
+    {
+      "path": "app/src/main/assets/guide/screenshots/controls-drawer.png",
+      "sha256": "98922f4e8d8127db13a2ebd8281ef76aa11c6da06f4f121191133ca544084d34",
+      "bytes": 1325357
+    },
+    {
+      "path": "app/src/main/assets/guide/screenshots/controls-world.png",
+      "sha256": "62cc114f4e80101272647c135091ccaa0865377cc5e7c157dbfbd7665d1e50b9",
+      "bytes": 2755097
+    },
+    {
+      "path": "app/src/main/assets/guide/screenshots/design-blueprint.png",
+      "sha256": "bf774d720764defff872368825262f0e21bdbc0538c9cfa871fc0fc242b397f6",
+      "bytes": 828946
+    },
+    {
+      "path": "app/src/main/assets/guide/screenshots/factory-queue.png",
+      "sha256": "b1e4542f831bb08bea8c810dd07ab0ddd3f983580e9cade9f47c6f056a39a7b5",
+      "bytes": 1045416
+    },
+    {
+      "path": "app/src/main/assets/guide/screenshots/factory-units.png",
+      "sha256": "ab8bcaee618b09acfb7134f9f5d609045e13f86b086e6fbb177885b08d6b9d6b",
+      "bytes": 849097
+    },
+    {
+      "path": "app/src/main/assets/guide/screenshots/ffa-setup-066.png",
+      "sha256": "8ddab557308c0dd41c05ef9f7e3725186ebe056802bbac65d19795f9d9af0b40",
+      "bytes": 110895
+    },
+    {
+      "path": "app/src/main/assets/guide/screenshots/intelligence-report.png",
+      "sha256": "c99ecc2d9b65f77a6ce5777d654fd9be30251a8692d5d060915dbf342f6a1909",
+      "bytes": 394826
+    },
+    {
+      "path": "app/src/main/assets/guide/screenshots/phone-saves.png",
+      "sha256": "2a788de0e64cbc7c3f8f9b85bfcaef1b356a1ddcd2727b2619656db6c02809d5",
+      "bytes": 77472
+    },
+    {
+      "path": "app/src/main/assets/guide/screenshots/research-queue.png",
+      "sha256": "e01f4a73b388a133adbf9baa574b0f2cd743c08eaf6f710cdd8e6b823cb0cdb8",
+      "bytes": 922679
+    },
+    {
+      "path": "app/src/main/assets/guide/screenshots/towers-map.png",
+      "sha256": "c3d1d83a397f1aeab61a34925203a43fc41509a41ad9510edc49ecaac08047cf",
+      "bytes": 1012952
+    },
+    {
+      "path": "app/src/main/assets/guide/screenshots/towers-wave.png",
+      "sha256": "9980e5d4973608d5d195d5d9d009c4d1d84bf53db78e80453483650d098e31a4",
+      "bytes": 470352
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/FfaMapBrowserState.java",
+      "sha256": "999f902040c2dcf879fc2bf1f5585fe8c3347ed5eb22b0b851a85063011d20b4",
+      "bytes": 3226
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/FfaMapCatalog.java",
+      "sha256": "180dcb4f96d1f157144e2edb04a610b26703822f1eeb52ee1d1833bbe026f253",
+      "bytes": 5002
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/FfaSetupView.java",
+      "sha256": "e202fc71e5041eb55f2106e87caebd6a199bc2fb4340d6f29175522cd6648b1b",
+      "bytes": 26009
+    },
+    {
+      "path": "tools/check-ffa-browser-067.cjs",
+      "sha256": "4b190aec41b38047140f9534509738b226064142bb0c6f1545fd5c1c284ba185",
+      "bytes": 8638
+    },
+    {
+      "path": "tools/check-ffa-browser-067.java",
+      "sha256": "d4c055e20e9478f562b1a1dd6d614a88952c8e4139e6ecd1bc5d7a05c8752e66",
+      "bytes": 5054
+    }
+  ],
+  "recordedUTC": "2026-11-13T02:13:29.765Z"
+}

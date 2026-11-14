@@ -1,0 +1,16 @@
+--- a/src/hci.cpp
++++ b/src/hci.cpp
+@@ -3166,7 +3166,12 @@
+ 	intMode = INT_INTELMAP;
+ 
+ 	//lock the reticule button
+-	widgSetButtonState(psWScreen, IDRET_INTEL_MAP, WBUT_CLICKLOCK);
++	// The Campaign mobile host removes the stock reticule. Intel itself
++	// remains native; only lock its optional button when that button exists.
++	if (!campaignMobileEnabled() || widgGetFromID(psWScreen, IDRET_INTEL_MAP) != nullptr)
++	{
++		widgSetButtonState(psWScreen, IDRET_INTEL_MAP, WBUT_CLICKLOCK);
++	}
+ 
+ 	//add the power bar - for looks!
+ 	intShowPowerBar();

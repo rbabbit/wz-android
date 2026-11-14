@@ -1,0 +1,25 @@
+'use strict';
+const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm'),path=require('node:path');
+const source=fs.readFileSync(path.join(__dirname,'../app/src/main/assets/multiplayer/intelligence.js'),'utf8');
+function fixture(){const sandbox={window:null,document:{getElementById(){return null}},setInterval(){return 1},clearInterval(){},addEventListener(){},PcMultiplayerState:{phase:'loading',worldReady:false}};sandbox.window=sandbox;vm.runInNewContext(source,sandbox);return sandbox.__warzoneIntelligence;}
+const intel=fixture();
+assert.equal(intel.acceptReports({ready:false,reports:[]}),false);
+assert.equal(intel.report().ready,false);
+const report={id:'R-Vehicle-Metals01',name:'Composite Alloys',completed:true,hasMessage:true,initialGrant:false,description:['Vehicle bodies improved'],results:[{parameter:'Armour',value:30}],unlocks:[]};
+assert.equal(intel.acceptReports({ready:true,player:3,gameTime:1000,reports:[report,{...report,id:'not-done',completed:false},{...report,id:'no-message',hasMessage:false},{...report,id:'initial',initialGrant:true},report]}),true);
+assert.equal(intel.report().history.length,1);
+assert.equal(intel.report().history[0].id,report.id);
+assert.equal(intel.report().history[0].description[0],'Vehicle bodies improved');
+assert.equal(intel.select('no-message'),false);
+assert.equal(intel.select(report.id),true);
+assert.equal(intel.report().selected.id,report.id);
+assert.equal(intel.acceptReports({ready:true,player:3,gameTime:1200,reports:[]}),true);
+assert.equal(intel.report().history.length,0);
+assert.equal(intel.report().selectedId,'');
+assert.equal(intel.acceptReports({ready:true,player:4,gameTime:10,reports:[{...report,id:'other-player',initialGrant:null}]}),true);
+assert.equal(intel.report().history.length,1);
+assert.equal(intel.report().history[0].id,'other-player');
+assert.equal(intel.acceptReports('{bad-json'),false);
+assert.equal(intel.report().history[0].id,'other-player');
+assert.equal(intel.filterNativeReports([{...report,description:['<script>bad()</script>'],results:[{parameter:'Armour',value:'invalid'}]}])[0].results.length,0);
+console.log('PASS MP Intelligence filters actual completed/native-message reports, excludes grants/uncompleted/nonreported/duplicates, preserves descriptions, handles live removal/player changes and malformed snapshots.');

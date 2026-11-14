@@ -2,9 +2,10 @@
 (() => {
   'use strict';
   if(window.WarzoneBuildDisplay)return;
+  const campaign=window.__warzoneCampaignMode===true;
   const state={models:{},sites:[],preview:null,linePreview:[],heights:new Map(),terrainRevision:null,drawn:[],frames:0,paintMs:0,maxPaintMs:0,error:'',dirty:true,key:'',owned:false,
     catalog:new Map(),activeModule:null,moduleTargets:[],parents:new Map(),geometry:new Map(),moduleDrawn:[],targetSignature:'',
-    facilityTargets:[],facilityBlockers:[]};
+    facilityTargets:[],facilityBlockers:[],demolition:{active:false,targets:[],blockers:[],hoverId:0}};
   const canvas=document.createElement('canvas');canvas.id='wt-build-models';canvas.setAttribute('aria-hidden','true');
   Object.assign(canvas.style,{position:'fixed',inset:'0',width:'100%',height:'100%',zIndex:'2147483599',pointerEvents:'none'});
   document.body.appendChild(canvas);const ctx=canvas.getContext('2d');
@@ -22,7 +23,7 @@
     return Number.isFinite(h)?h:Number.isFinite(fallback)?fallback:null;
   }
   function siteHeight(site,item,model,x,y){
-    const existing=Boolean(site.structureId)||['building','waiting-power','waiting-trucks'].includes(site.status);
+    const existing=Boolean(site.structureId)||!site.pausedPlan&&['building','demolishing','waiting-power','waiting-trucks'].includes(site.status);
     // The native queued blueprint rests on the highest footprint grid vertex.
     // Once a foundation exists, base buildings have already flattened the mesh;
     // defensive structures instead follow the four corners of their real model.
@@ -45,7 +46,7 @@
     const h=Math.max(...heights);state.heights.set(key,h);return h;
   }
   function viewKey(view){return Array.from(view.matrix).join(',')+':'+view.left+','+view.top+','+view.width+','+view.height;}
-  function hidden(){const d=window.parent?.document;return document.hidden||window.__towersHtml?.isEnded?.()||window.__warzoneCommands?.isOpen?.()||d?.body.dataset.research==='true'||d?.getElementById('warzone-towers-help-overlay')?.hidden===false;}
+  function hidden(){const d=window.parent?.document;return document.hidden||window.__towersHtml?.isEnded?.()||window.__warzoneCommands?.isOpen?.()||window.__warzoneIntelligence?.isOpen?.()||campaign&&window.__warzoneCampaign?.nativeUiActive?.()||d?.body.dataset.research==='true'||d?.getElementById('warzone-towers-help-overlay')?.hidden===false;}
   function blockedRects(view){
     const s=window.__warzoneCommands?.report().snapshot,mw=s?.mapWidth||64,mh=s?.mapHeight||64,span=Math.max(mw,mh),side=192;
     const rw=side*mw/span,rh=side*mh/span,result=[{x:view.left+view.width-120-rw/2,y:view.top+view.height-120-rh/2,width:rw,height:rh},
@@ -77,7 +78,7 @@
     if(h==null)return null;
     // Module resources contain the official upgraded parent mesh. Use it only
     // for hit geometry when it is already present, never as a floating clone.
-    const modelId=target.modules>0&&state.models[target.moduleId]?target.moduleId:target.itemId,model=state.models[modelId];
+    const modelId=target.modules>0&&state.models[target.moduleId]?target.moduleId:target.itemId,model=target.foundation?null:state.models[modelId];
     const key=viewKey(view)+':'+modelId+':'+(model?.p.length||0)+':'+x+','+y+','+h+','+target.width+','+target.breadth,cached=state.geometry.get(target.id);
     if(cached?.key===key)return cached;
     const left=target.x-Math.floor(target.width/2),top=target.y-Math.floor(target.breadth/2);
@@ -147,7 +148,7 @@
   function facilitiesEnabled(){return window.__warzoneDuelConfig?.mode!=='duel'&&document.body.classList?.contains?.('wt-towers-polished')===true;}
   function facilityMasks(view){
     const masks=blockedRects(view),d=window.parent?.document,frame=d?.getElementById('warzone-game-frame')?.getBoundingClientRect()||{left:0,top:0};
-    for(const id of ['wt-status-panel','wt-field-centre','wt-field-toggle','lab-ops','wt-native-back']){
+    for(const id of ['wt-status-panel','wt-field-centre','wt-field-toggle','lab-ops','wt-native-back','wt-demolish-bar']){
       const e=d?.getElementById(id);if(!e||e.hidden||e.closest?.('[inert]'))continue;
       const css=window.parent?.getComputedStyle?.(e),b=e.getBoundingClientRect();
       if(css&&(css.display==='none'||css.visibility==='hidden'||css.pointerEvents==='none')||!b.width||!b.height)continue;
@@ -166,13 +167,13 @@
     }
     return true;
   }
-  function facilityDroidHit(view,x,y,facilityDepth){
+  function facilityDroidHit(view,x,y,facilityDepth,blockers=state.facilityBlockers){
     // Native mouseTarget prioritises every visible droid before structures.
     // Script positions are whole tiles, so cover the complete possible body
     // volume, not a guessed sub-tile centre. Compare its projected faces with
     // the building depth: a truck behind a visible roof must not block it.
     // Blockers are native visible-only.
-    for(const d of state.facilityBlockers){
+    for(const d of blockers){
       const size=Math.max(0,Math.min(3,Number(d.bodySize)||0)),pad=64+size*32,points=[];
       for(const wx of [d.x*128-pad,(d.x+1)*128+pad])for(const wy of [d.y*128-pad,(d.y+1)*128+pad])for(const wz of [d.z*128-32,(d.z+1)*128+96+size*48]){
         const p=project(view,wx,wy,wz);if(p)points.push(p);
@@ -189,8 +190,8 @@
     }
     return false;
   }
-  function facilityEntries(view,masks){
-    return state.facilityTargets.map(target=>{
+  function facilityEntries(view,masks,targets=state.facilityTargets){
+    return targets.map(target=>{
       const g=targetGeometry(view,target),visible=!!g&&g.bounds.right>=view.left&&g.bounds.left<=view.left+view.width&&g.bounds.bottom>=view.top&&g.bounds.top<=view.top+view.height
         &&(g.outline.some(p=>unmaskedPoint(view,masks,p.x,p.y))||g.faces.some(f=>unmaskedPoint(view,masks,(f.points[0].x+f.points[1].x+f.points[2].x)/3,(f.points[0].y+f.points[1].y+f.points[2].y)/3)));
       return {target,geometry:g,visible,labelRect:null};
@@ -208,6 +209,29 @@
     const found=hits[0];if(!found||facilityTerrainOccluded(view,found.hit,x,y)||facilityDroidHit(view,x,y,found.hit.depth))return null;
     return {...found.entry.target,hit:found.hit};
   }
+  function pickDemolitionTarget(x,y){
+    const view=window.WarzoneTerrain?.view(),tool=state.demolition;
+    if(!tool.active||!view||hidden())return null;
+    const masks=facilityMasks(view);if(!facilityPoint(view,masks,x,y))return null;
+    const hits=facilityEntries(view,masks,tool.targets).map(entry=>({entry,hit:hitEntry(entry,x,y)})).filter(v=>v.hit);
+    hits.sort((a,b)=>(a.hit.distance>0)-(b.hit.distance>0)||a.hit.depth-b.hit.depth||a.hit.distance-b.hit.distance);
+    const found=hits[0];
+    if(!found||facilityTerrainOccluded(view,found.hit,x,y)||facilityDroidHit(view,x,y,found.hit.depth,tool.blockers))return null;
+    return {...found.entry.target,hit:found.hit};
+  }
+  function demolitionReport(withGeometry=false){
+    const tool=state.demolition,view=window.WarzoneTerrain?.view();
+    if(!withGeometry||!tool.active||!view||hidden())return {active:tool.active,hoverId:tool.hoverId,targets:tool.targets.map(t=>({...t}))};
+    const masks=facilityMasks(view);
+    return {active:true,hoverId:tool.hoverId,targets:facilityEntries(view,masks,tool.targets).map(({target,geometry:g,visible})=>({...target,visible,bounds:g?.bounds||null,outline:g?.outline||[],footprint:g?.foot||[],
+      hitPoints:visible?hitPoints(view,masks,g).filter(p=>facilityPoint(view,masks,p.x,p.y)&&!facilityDroidHit(view,p.x,p.y,p.depth,tool.blockers)&&!facilityTerrainOccluded(view,{depth:p.depth},p.x,p.y)):[]}))};
+  }
+  function paintDemolition(view,masks){
+    const target=state.demolition.targets.find(t=>t.id===state.demolition.hoverId);if(!state.demolition.active||!target)return;
+    const g=targetGeometry(view,target);if(!g)return;
+    const colour=target.eligible?'#ff9c8b':target.protected?'#a5b5bb':'#e1bd76';
+    ctx.globalAlpha=.95;ctx.strokeStyle=colour;ctx.lineWidth=2;outline(g.outline);outline(g.foot);ctx.globalAlpha=1;
+  }
   function facilityReport(withGeometry){
     if(!withGeometry)return state.facilityTargets.map(t=>({...t}));
     const view=window.WarzoneTerrain?.view();if(!facilitiesEnabled()||!view||hidden())return state.facilityTargets.map(t=>({...t,visible:false,hitPoints:[]}));
@@ -216,7 +240,8 @@
       hitPoints:visible?hitPoints(view,masks,g).filter(p=>facilityPoint(view,masks,p.x,p.y)&&!facilityDroidHit(view,p.x,p.y,p.depth)&&!facilityTerrainOccluded(view,{depth:p.depth},p.x,p.y)):[]}));
   }
   function hitPoints(view,masks,g){
-    const points=g.faces.map(face=>{const p=face.points;return {x:(p[0].x+p[1].x+p[2].x)/3,y:(p[0].y+p[1].y+p[2].y)/3,depth:3/(1/p[0].w+1/p[1].w+1/p[2].w),source:'mesh',face:face.index,area:Math.abs((p[1].x-p[0].x)*(p[2].y-p[0].y)-(p[2].x-p[0].x)*(p[1].y-p[0].y))};}).filter(p=>p.area>4&&fieldPoint(view,masks,p.x,p.y)).sort((a,b)=>b.area-a.area||a.depth-b.depth),result=[];
+    const faces=g.faces.length?g.faces:g.foot.length===4?[{points:[g.foot[0],g.foot[1],g.foot[2]],index:0},{points:[g.foot[0],g.foot[2],g.foot[3]],index:1}]:[];
+    const points=faces.map(face=>{const p=face.points;return {x:(p[0].x+p[1].x+p[2].x)/3,y:(p[0].y+p[1].y+p[2].y)/3,depth:3/(1/p[0].w+1/p[1].w+1/p[2].w),source:g.faces.length?'mesh':'footprint',face:face.index,area:Math.abs((p[1].x-p[0].x)*(p[2].y-p[0].y)-(p[2].x-p[0].x)*(p[1].y-p[0].y))};}).filter(p=>p.area>4&&fieldPoint(view,masks,p.x,p.y)).sort((a,b)=>b.area-a.area||a.depth-b.depth),result=[];
     for(const p of points){if(result.every(q=>Math.hypot(p.x-q.x,p.y-q.y)>=8)){const {area,...point}=p;result.push(point);if(result.length>=10)break;}}
     return result;
   }
@@ -229,7 +254,7 @@
     const left=site.x-Math.floor(footprint.width/2),top=site.y-Math.floor(footprint.breadth/2);
     const foot=parentGeometry?.foot||[[left,top],[left+footprint.width,top],[left+footprint.width,top+footprint.breadth],[left,top+footprint.breadth]].map(([a,b])=>project(view,a*128,b*128,h+1));
     if(foot.every(Boolean)){ctx.beginPath();foot.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));ctx.closePath();ctx.globalAlpha=preview?.15:.07;ctx.fillStyle=colour;ctx.fill();ctx.globalAlpha=preview?.95:.65;ctx.strokeStyle=colour;ctx.lineWidth=preview?1.4:1;ctx.stroke()}
-    const showModel=!moduleWork&&(preview||!site.structureId&&!['building','waiting-power','waiting-trucks'].includes(site.status));
+    const showModel=!moduleWork&&(preview||site.pausedPlan||!site.structureId&&!['building','demolishing','waiting-power','waiting-trucks'].includes(site.status));
     let topY=parentGeometry?.bounds?.top??at.y,triangles=0;
     if(model&&showModel){
       const pts=[];for(let i=0;i<model.p.length;i+=3)pts.push(project(view,x+model.p[i],y-model.p[i+2],h+model.p[i+1]));
@@ -247,13 +272,17 @@
   function frame(){
     requestAnimationFrame(frame);
     syncTerrain();
-    const terrain=window.WarzoneTerrain,needed=!!state.preview||state.linePreview.length>0||state.sites.length>0||state.moduleTargets.length>0;
+    const terrain=window.WarzoneTerrain,needed=!!state.preview||state.linePreview.length>0||state.sites.length>0||state.moduleTargets.length>0||Boolean(state.demolition.active&&state.demolition.hoverId);
     // Facilities retain only the lightweight current-camera observation. They
     // are never painted or projected in this frame loop; picking is on demand.
-    const observing=needed||(state.facilityTargets.length>0&&facilitiesEnabled()&&!hidden());
+    const observing=needed||state.demolition.active||(state.facilityTargets.length>0&&facilitiesEnabled()&&!hidden());
     if(observing&&terrain&&!terrain.report().active){terrain.active(true);state.owned=true}
     if(!observing&&state.owned&&!window.__warzoneCommands?.nativeBuildOpen?.()){terrain?.active(false);state.owned=false}
     const view=needed&&terrain?.view(),concealed=hidden(),now=performance.now(),pulse=state.preview?.parentId&&state.parents.get(state.preview.parentId)?.eligible&&!state.preview.rejected?Math.floor(now/80):0;
+    // Campaign enters native soft-fullscreen after this sibling canvas exists.
+    // Emscripten hides every sibling once; reclaim only our display surface,
+    // while native panels/videos retain exclusive ownership of their screen.
+    if(campaign){const display=view&&!concealed?'block':'none';if(canvas.style.display!==display)canvas.style.display=display;}
     const masks=view&&!concealed?blockedRects(view):[];
     const key=(!concealed&&view?viewKey(view):'hidden')+':'+innerWidth+','+innerHeight+':'+JSON.stringify(masks)+':'+pulse;
     if(!state.dirty&&key===state.key)return;state.key=key;state.dirty=false;
@@ -264,7 +293,7 @@
     // Keep native minimap pixels and navigation unobstructed.
     ctx.save();ctx.beginPath();ctx.rect(view.left,view.top,view.width,view.height);ctx.clip();
     for(const mask of masks){ctx.beginPath();ctx.rect(view.left,view.top,view.width,view.height);ctx.rect(mask.x,mask.y,mask.width,mask.height);ctx.clip('evenodd');}
-    try{for(const site of state.sites)paintSite(view,site,false);for(const entry of targetEntries(view,masks))paintModuleTarget(entry,now);if(state.preview&&state.preview.item.category!=='MODULES')paintSite(view,state.preview,true);for(const site of state.linePreview)paintSite(view,site,true);state.frames++}catch(e){state.error=String(e.message||e)}finally{ctx.restore();ctx.globalAlpha=1;state.paintMs=performance.now()-started;state.maxPaintMs=Math.max(state.maxPaintMs,state.paintMs)}
+    try{for(const site of state.sites)paintSite(view,site,false);for(const entry of targetEntries(view,masks))paintModuleTarget(entry,now);if(state.preview&&state.preview.item.category!=='MODULES')paintSite(view,state.preview,true);for(const site of state.linePreview)paintSite(view,site,true);paintDemolition(view,masks);state.frames++}catch(e){state.error=String(e.message||e)}finally{ctx.restore();ctx.globalAlpha=1;state.paintMs=performance.now()-started;state.maxPaintMs=Math.max(state.maxPaintMs,state.paintMs)}
   }
   window.WarzoneBuildDisplay={
     update(rows,catalog){const byId=new Map((catalog?.buildings||[]).map(b=>[b.id,b]));state.sites=rows.filter(r=>!['done','interrupted','cancelled'].includes(r.status)&&byId.has(r.itemId)).map(r=>({...r,item:byId.get(r.itemId)}));state.dirty=true},
@@ -289,6 +318,17 @@
       state.facilityBlockers=(blockers||[]).filter(d=>Number.isFinite(d.id)&&[d.x,d.y,d.z].every(Number.isFinite)).map(d=>({...d}));
     },
     pickFacilityTarget,
+    setDemolitionTargets(targets,catalog,blockers=[]){
+      for(const item of catalog?.buildings||[])state.catalog.set(item.id,item);
+      state.demolition.active=true;
+      state.demolition.targets=(targets||[]).filter(t=>Number.isFinite(t.id)&&t.id>0&&[t.x,t.y,t.z,t.width,t.breadth].every(Number.isFinite)).map(t=>({...t}));
+      state.demolition.blockers=(blockers||[]).filter(d=>Number.isFinite(d.id)&&[d.x,d.y,d.z].every(Number.isFinite)).map(d=>({...d}));
+      if(!state.demolition.targets.some(t=>t.id===state.demolition.hoverId))state.demolition.hoverId=0;
+      state.dirty=true;
+    },
+    highlightDemolition(id=0){if(state.demolition.hoverId!==id){state.demolition.hoverId=id;state.dirty=true;}},
+    clearDemolition(){state.demolition={active:false,targets:[],blockers:[],hoverId:0};state.dirty=true;},
+    pickDemolitionTarget,demolitionReport,
     previewLine(item,points){
       if(window.__warzoneDuelConfig?.mode==='duel'||item?.category!=='DEFENCES')return false;
       state.preview=null;state.linePreview=(points||[]).filter(p=>Number.isInteger(p.x)&&Number.isInteger(p.y)).slice(0,64).map((point,index)=>({item,id:'line-preview-'+index,x:point.x,y:point.y,validation:['valid','invalid'].includes(point.validation)?point.validation:'pending'}));state.dirty=true;return true;
@@ -303,7 +343,7 @@
     },
     clearPreview(){if(state.preview||state.linePreview.length){state.preview=null;state.linePreview=[];state.dirty=true}},
     reject(item,x,y,parentId){if(state.preview?.item.id===item&&(parentId?state.preview.parentId===parentId:state.preview.x===x&&state.preview.y===y)){state.preview.rejected=true;state.preview.validation='invalid';state.dirty=true}},
-    reset(){state.heights.clear();state.terrainRevision=null;state.sites=[];state.preview=null;state.linePreview=[];state.moduleTargets=[];state.activeModule=null;state.parents.clear();state.geometry.clear();state.moduleDrawn=[];state.drawn=[];state.targetSignature='';state.facilityTargets=[];state.facilityBlockers=[];ctx.clearRect(0,0,innerWidth,innerHeight);state.dirty=true},
+    reset(){state.heights.clear();state.terrainRevision=null;state.sites=[];state.preview=null;state.linePreview=[];state.moduleTargets=[];state.activeModule=null;state.parents.clear();state.geometry.clear();state.moduleDrawn=[];state.drawn=[];state.targetSignature='';state.facilityTargets=[];state.facilityBlockers=[];state.demolition={active:false,targets:[],blockers:[],hoverId:0};ctx.clearRect(0,0,innerWidth,innerHeight);state.dirty=true},
     report(options={}){const view=window.WarzoneTerrain?.view(),masks=view?blockedRects(view):[],entries=view&&!hidden()?targetEntries(view,masks):state.moduleTargets.map(target=>({target,geometry:null,visible:false,label:targetLabel(target),labelRect:null}));return {models:Object.keys(state.models).length,acceptedSites:state.sites.map(s=>({id:s.id,number:s.number,itemId:s.item.id,parentId:s.parentId||0,x:s.x,y:s.y,status:s.status})),drawn:state.drawn,preview:state.preview?.item.id||'',previewParentId:state.preview?.parentId||0,previewPoint:state.preview?{x:state.preview.x,y:state.preview.y,parentId:state.preview.parentId||0}:null,moduleItem:state.activeModule?.id||'',
       moduleTargets:entries.map(({target,geometry:g,visible,label,labelRect:box})=>({...target,label,visible,bounds:g?.bounds||null,footprint:g?.foot||[],outline:g?.outline||[],labelRect:box,hitPoints:visible?hitPoints(view,masks,g):[]})),moduleDrawn:state.moduleDrawn,
       facilityTargets:facilityReport(options.facilityGeometry===true),facilityBlockerCount:state.facilityBlockers.length,linePreview:state.linePreview.map(p=>({itemId:p.item.id,x:p.x,y:p.y,validation:p.validation})),

@@ -1,0 +1,55 @@
+{
+  "version": "0.39",
+  "emulatorUsed": false,
+  "actualNativeEngineExecuted": false,
+  "fixture": "Actual Research shell/render functions plus representative chrome DOM, desktop Chromium only",
+  "checks": [
+    "Research uses the shared dark surface and white/dark selected lab after late legacy style injection",
+    "Two selected research topics and assignment retain readable dark text, numbering and original artwork",
+    "Disabled assignment remains visibly distinct from enabled white action",
+    "Existing Research compact/enlarged fixture has no horizontal document overflow",
+    "Selected footer activity text stays dark even with lab-running state",
+    "Five activity rows, selected Build cards/categories and construction progress use neutral chrome",
+    "Intelligence selected filters use dark ink and native preview aperture remains transparent",
+    "Music and Help palette wins over their later dynamically injected styles",
+    "Background research sync status follows neutral chrome without changing its inline layout",
+    "Header keeps white Research, dark open menu, neutral save acknowledgement and wave text",
+    "No browser runtime errors in the exercised CSS/DOM fixture"
+  ],
+  "screenshots": [
+    "qa/0.39-theme/research-theme-standard.png",
+    "qa/0.39-theme/research-theme-narrow.png"
+  ],
+  "sources": [
+    {
+      "path": "app/src/main/assets/warzone-touch-controls.js",
+      "sha256": "84a15e63cf886f427b275e160e717164b43f2e8fa9b1f2631cb1334d249eac03"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/towers-monochrome.css",
+      "sha256": "2d4561dba627e58f85d7220042cadb17b3a14f2bd96434db368a2e348087ca07"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/towers-shell.css",
+      "sha256": "1ea114b759d94de72e24b8a826c8c96aeec60ea0b77d13ca7055b360385bab42"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/towers-research.css",
+      "sha256": "dbfb9628d0e8248bba5272b39eea3367b701c56ab3c34159af0f0895180b09e7"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/towers-status.css",
+      "sha256": "9ac1ec4783c33f02db4f6b3ab48056a424d926f94f88dc64313e21aaec958e91"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/towers-intelligence.css",
+      "sha256": "508702e0a1ba55be6709c3a51a290a5cf607a1e420e24c20cf5853418b29960e"
+    },
+    {
+      "path": "tools/check-web-theme-039.cjs",
+      "sha256": "945f2adc940fc791eed39768e2aff11ffb38d937e78444575d52afd7ea06e06d"
+    }
+  ],
+  "checksPassed": 11,
+  "passed": true
+}

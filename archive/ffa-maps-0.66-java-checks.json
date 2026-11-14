@@ -1,0 +1,109 @@
+{
+  "version": "0.66",
+  "passed": true,
+  "actualJavaClasses": [
+    "SaveGameStore.java",
+    "BattleLaunchSpec.java",
+    "FfaMapCatalog.java",
+    "MapLevelCatalog.java"
+  ],
+  "actualActivityMethods": {
+    "ffaSave": "33dbc491cb62b745f8a7f3622db45096af499b6138d775a8480a898ce446060b",
+    "ffaRestored": "b4b822e189ea248dca979f0f122e6c9bb5ae0536b70a3b492d1e1ccae4fe4e0e",
+    "gameUrl": "ff17202ec7e0c87fe38612c5e13877b9303cd7ca32c59172c501b201af46203a",
+    "isFfaBattle": "fde06d803afd1e682d851734db3032d2e7133384d8586194abedcff0e0c666b3",
+    "loadFfaSave": "5b5e18d20ff9c1c0231df53426243d448c0b152acda3990a0e810cbfff5118d7"
+  },
+  "platformOnlyContextAssetStubs": true,
+  "mapIdentityStubUsed": false,
+  "genuineNativeArchives": [
+    "archive/cobra-0.64/original-easy-nullbot.zip",
+    "archive/cobra-0.64/cobra-easy-phone-save.zip",
+    "archive/cobra-0.64/legacy-nullbot-resave.zip"
+  ],
+  "genuineArchiveHashesBeforeAndAfter": {
+    "archive/cobra-0.64/original-easy-nullbot.zip": "0e8efd55458b06bbf8ec28d79754f0d8bfde962505a745b510abe8a236b1545d",
+    "archive/cobra-0.64/cobra-easy-phone-save.zip": "472b0ce249fc44efc8482a58a520d83d0b9f4aae0d4667769b8709fc174bcc02",
+    "archive/cobra-0.64/legacy-nullbot-resave.zip": "5ecc10f0d1d349e7408f09af8f8ec3a54e6687eaf80802815e37163131fdfcc4"
+  },
+  "syntheticSixPlayerIdentityFixtures": true,
+  "syntheticFixturesAreMinimalProtocolRecordsNotNativeWorlds": true,
+  "nativeEngineExecuted": false,
+  "emulatorUsed": false,
+  "focusedFfaOnly": true,
+  "checks": [
+    {
+      "main": "CheckFfaStore066",
+      "output": "{\"syntheticSixPlayerWorldNeverExecuted\":true,\"syntheticMapDifficultyIdentityCases\":18,\"passed\":true,\"checksPassed\":185,\"gaps\":[],\"genuineNativeArchives\":3}",
+      "result": {
+        "syntheticSixPlayerWorldNeverExecuted": true,
+        "syntheticMapDifficultyIdentityCases": 18,
+        "passed": true,
+        "checksPassed": 185,
+        "gaps": [],
+        "genuineNativeArchives": 3
+      }
+    },
+    {
+      "main": "FfaBridgeProbe066",
+      "output": "{\"actualActivityBodiesExtracted\":true,\"syntheticMapDifficultyCases\":18,\"passed\":true,\"checksPassed\":704,\"nativeEngineExecuted\":false}",
+      "result": {
+        "actualActivityBodiesExtracted": true,
+        "syntheticMapDifficultyCases": 18,
+        "passed": true,
+        "checksPassed": 704,
+        "nativeEngineExecuted": false
+      }
+    }
+  ],
+  "sources": [
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/SaveGameStore.java",
+      "sha256": "a8e8ef6ecbde9f345030450d2210bc725921839022f7890004870ce103daad16"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/BattleLaunchSpec.java",
+      "sha256": "c6db704ac3f8ace393c5cee6428320a499dfa16686f2fd0e5c17113dc9a6651d"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/FfaMapCatalog.java",
+      "sha256": "006bc999ffb6ce7f3283b730c9dce118b21c0fdbb85606f82b3e3ffccc2f7143"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MapLevelCatalog.java",
+      "sha256": "b2a32bc8925ca27d5b996f68bacbe69a2ff89c0a82a7da65108a2d153489fec9"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MainActivity.java",
+      "sha256": "cc8ca05c1311ead10ff29f3d5cb7dc8b799ac0ab56b454a6a305ac6902dabc6f"
+    },
+    {
+      "path": "tools/check-ffa-store-066.java",
+      "sha256": "8c5b84a8e528b93ca0f1a80def163ed55e179be8886656e5e8b188741668f227"
+    },
+    {
+      "path": "tools/ffa-bridge-probe-066.java.in",
+      "sha256": "53b7a1a1601ae471abff357ff7f3a7c7e5dad5538c5919c4d95978e57f8c7a94"
+    },
+    {
+      "path": "tools/check-ffa-save-066.py",
+      "sha256": "897e2437190f4029a0a3a52d1b5ad13f3a08ad339cbdd9640fb4a7398a37cb98"
+    },
+    {
+      "path": "app/src/main/assets/ffa-maps.json",
+      "sha256": "d6c626637d573349d5ec02ef377624b54442ec96c52967789d61163c525bf098"
+    },
+    {
+      "path": "archive/cobra-0.64/original-easy-nullbot.zip",
+      "sha256": "0e8efd55458b06bbf8ec28d79754f0d8bfde962505a745b510abe8a236b1545d"
+    },
+    {
+      "path": "archive/cobra-0.64/cobra-easy-phone-save.zip",
+      "sha256": "472b0ce249fc44efc8482a58a520d83d0b9f4aae0d4667769b8709fc174bcc02"
+    },
+    {
+      "path": "archive/cobra-0.64/legacy-nullbot-resave.zip",
+      "sha256": "5ecc10f0d1d349e7408f09af8f8ec3a54e6687eaf80802815e37163131fdfcc4"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "version": "0.42",
+  "guardPassed": true,
+  "scope": "Towers-only presentation colours; original message lifetime, power values/geometry, all gameplay and non-Towers rendering retained",
+  "baselineSourceBundle": "archive/native-blueprint-4.7.0-source.tar.gz",
+  "sources": [
+    {
+      "file": "console.cpp",
+      "originalPath": "archive/native-theme-0.42/original-console.cpp",
+      "originalSHA256": "358562db314857c7150b340adb7aec57af7c4bc4de085bbd578dfdace86d7ce8",
+      "path": "archive/native-theme-0.42/console.cpp",
+      "sha256": "72bfd88aa0535a6adcf098f6f4b0fcb035ecca43f1927430d1e511893f51f570"
+    },
+    {
+      "file": "intdisplay.cpp",
+      "originalPath": "archive/native-theme-0.42/original-intdisplay.cpp",
+      "originalSHA256": "6e01e3e4f202a5d326b15775bca6f636c2bd0b8e64f28446d8b76a19ee73e7e0",
+      "path": "archive/native-theme-0.42/intdisplay.cpp",
+      "sha256": "c3e78b002a00be9b6d0843120f63c63fcccca1aa5e1a0fb39043a6bc4541e673"
+    }
+  ],
+  "patch": "archive/native-theme-0.42/native-theme.patch",
+  "patchSHA256": "4293bc3394a77381930d72fa8191276748c1780bbfed91937acc6964c5ccfc47",
+  "previousNativeBuild": "archive/native-production-0.41/native-build.json",
+  "previousNativeBuildSHA256": "6671edb57c02c859e0bfd287b34a7712df5002a08438459be31b99184c42dd35",
+  "preservedSourceOverlays": {
+    "display3d.cpp": "3b5c1a41144011805819d15e9bfac6f1289d726da276433bfeb237904c0fa15f",
+    "research.cpp": "06b8999191bb0160e6b73c268f8ddd69347102133ecc221aee23504973dc918a",
+    "keybind.cpp": "5730cf9a2b791a6a437f4e0da040e9dbb75e8befb48dc02caefb1a8e824355ed",
+    "hci.cpp": "9db6bef46703c3975d920a23cc071ea46ab938a3972204ca5325440e8e66e842",
+    "quickjs_backend.cpp": "a3096beab0f866dd53176fe4d705ed1eee9da50da2e322608efcec2b57f80072"
+  },
+  "originalBuildRecipeSHA256": "6f3835c7eb8441c216f7e0b056affe22b34eb60e2985341029c866ca75e9bc26"
+}

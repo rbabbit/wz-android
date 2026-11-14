@@ -1,0 +1,45 @@
+{
+  "version": "0.44",
+  "passed": true,
+  "emulatorUsed": false,
+  "browserUsed": false,
+  "androidRuntimeExecuted": false,
+  "actualNativeEngineExecuted": false,
+  "gameplayVerified": false,
+  "scope": "Source/build/payload integrity only; no native game, Android runtime or emulator execution",
+  "checks": [
+    "Exactly two guarded native source deltas reconstruct from the frozen original files",
+    "Towers gauge scale changes pixels only; live native power/text/preview accounting remains exact",
+    "Towers guard blocks automatic messages, scheduling and queued writes; manual save functions are outside the delta",
+    "Exactly two source objects compiled and one matching link retained every previous native overlay",
+    "Final matched JS/WASM installed with all 4292 authored virtual files and data unchanged"
+  ],
+  "checksPassed": 5,
+  "sources": [
+    {
+      "path": "tools/build-native-hud-044.py",
+      "sha256": "5082225cd82eac1c602694525e67f7a88149378e75aad770d02657eee6ca9fc6"
+    },
+    {
+      "path": "tools/integrate-native-hud-044.py",
+      "sha256": "1336103c29d4029c49d7944001214552131df6203f40584a46be23f95b7efd19"
+    },
+    {
+      "path": "archive/native-hud-0.44/intdisplay.cpp",
+      "sha256": "5cdf6dab907eb44c95dbb59b8c41d3db8545dd9fb021bf15ab27172550282e87"
+    },
+    {
+      "path": "archive/native-hud-0.44/loadsave.cpp",
+      "sha256": "b58f01a03b551cbc589ef468f6a0572bd49978f9ba88db503eb761a3518b3341"
+    },
+    {
+      "path": "archive/native-hud-0.44/native-build.json",
+      "sha256": "5f3f88f3d00855ef53f8cdfa84831656b26fe0e213e19723b4b962f9e525ea25"
+    },
+    {
+      "path": "archive/native-hud-0.44/native-payload.json",
+      "sha256": "0cf02dfdcf48951990794c83b4c2d886f28f8929a050fa5d2d478473d7487f0f"
+    }
+  ],
+  "recordedUTC": "2026-11-10T23:08:20.019106+00:00"
+}

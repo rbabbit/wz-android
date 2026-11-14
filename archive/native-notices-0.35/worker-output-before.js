@@ -1,0 +1,1 @@
+var out=console.log.bind(console);var blockNightOutputChannel=typeof BroadcastChannel=="function"?new BroadcastChannel("blocknight-engine-output"):null;var err=(...args)=>{console.error(...args);let text=args.join(" ");if(blockNightOutputChannel&&(text.includes("BNTECH")||text.includes("BNQUEUE")))blockNightOutputChannel.postMessage(text)};var wasmBinary;

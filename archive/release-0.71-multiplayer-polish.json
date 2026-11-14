@@ -1,0 +1,207 @@
+{
+  "version": "0.71",
+  "versionCode": 71,
+  "candidateAPK_SHA256": "7bfb6768da35354dcf73dca3eeb32cc925a7c26fa52a0b9dc58ab832d012af7e",
+  "scope": "Selected compact Multiplayer lobby, persistent All Combat selection, MP Help removal and Android Back navigation; preserve existing modes.",
+  "exactAPKVerification": {
+    "evidence": {
+      "path": "qa/multiplayer-071/emulator-verification.json",
+      "bytes": 145452,
+      "sha256": "339fb6e350cd3dabdbf598387c7ce1740fedde64bb2fb1c6517c0693fcbf33e7"
+    },
+    "buildLog": {
+      "path": "qa/multiplayer-071/build.log",
+      "bytes": 2538,
+      "sha256": "26d1ff5796e06c3e0b855dea50480655f1900bd3dac976b6ceae7fe1c18642c4"
+    },
+    "emulatorUsed": true,
+    "checks": {
+      "exactDeliveryAPK": true,
+      "lobbyColumnsCountsFilterScroll": true,
+      "compactLayouts": true,
+      "persistentCombatAndNewborn": true,
+      "manualSelectionAndBuildPause": true,
+      "ordersPreserved": true,
+      "multiplayerHelpRemoved": true,
+      "androidBackHomeAndLobby": true,
+      "existingModeNavigation": true
+    },
+    "verificationScope": "Exact installed APK: real public bot-room join/transfer/Ready on normal and small emulator displays; actual production of two cyborgs and native selected IDs while All Combat remains ON; Research/Queue/Build suspension and resume; All Units, Deselect and Trucks override; existing native orders retained; large live lobby columns/counts/filter/scroll; small lobby layout and filter; repeated native Back Stay/Return and lobby Back Home; existing Towers entry/Back navigation. No debug units or altered game rules.",
+    "limitations": [
+      "Physical phone rendering and a full multiplayer match were not tested.",
+      "Emulator terrain textures are dark as in the preserved build; models, HUD and native state were inspected.",
+      "Current-player counts are shown only when the lobby supplies them. Unknown counts remain Up to N.",
+      "Early fixture retries included host connection loss, an undersized production wait and checks before asynchronous UI commits; these were not counted as passing checks."
+    ],
+    "pinnedTestedSourceFiles": 707
+  },
+  "fallback": {
+    "path": "qa/multiplayer-071/fallback-0.71.json",
+    "bytes": 486,
+    "sha256": "970cc0b21c0224fe7169361bf7e0d82ab21157e4902b128b6bd1a755dff157f1"
+  },
+  "sourcePreservation": {
+    "changedBaselineSources": [
+      {
+        "path": "app/build.gradle.kts",
+        "beforeSHA256": "e9ac6ea914eb36ea3b9e4f444959cd81214c2b94c12f77c44720d2e9d118dcc0",
+        "sha256": "7688343679beb63b082d07d0e94fffbe63c7e148d9b6b59ea4f6bdf91ee602b8"
+      },
+      {
+        "path": "app/src/main/assets/multiplayer/index.html",
+        "beforeSHA256": "be200ee5b6981d992fd64573b91fa8362d8ef65d0279711c81d775b4e540128b",
+        "sha256": "6b497dd828f1584e28e97ae4c79ee5afbd174684b847e48654a6d8f683973561"
+      },
+      {
+        "path": "app/src/main/assets/multiplayer/lobby-ui.js",
+        "beforeSHA256": "3927bba708b029cef65d3bb6553f8186e5ffc5a50d89b27a14c6bbc4fdf90f50",
+        "sha256": "68e89748c2669f5b9b56efe92f761a57f0a8ea6bd17c34c4d4fa37d2048e8d00"
+      },
+      {
+        "path": "app/src/main/assets/multiplayer/mobile-controls.js",
+        "beforeSHA256": "08dc9c7ea78563b2f36e79aa4a2b475bcda19cee9d3e1403589bf5c821e6412c",
+        "sha256": "aa5e075fd4b0ad4e076e68b4ff57cdeaa285d8c785c5c023e6ccda15e25cca7e"
+      },
+      {
+        "path": "app/src/main/assets/multiplayer/multiplayer.css",
+        "beforeSHA256": "c54e9dcb4fa1a465b6dbb394f3d7110874f72aeae303753f0b2b81848f19f684",
+        "sha256": "d5bf3810a1dd68e89d59834234b7e157b319f1aaac2ff5e4b2aa8e8bec4eb5bd"
+      },
+      {
+        "path": "app/src/main/assets/multiplayer/native-ui-adapter.js",
+        "beforeSHA256": "0b2c9e7e09b2a415670953c309d717cc5d73f14de2fc89e68512e806b662fa31",
+        "sha256": "19d44b0f86101b2900a8d72cda3aa086f87408adda96e33cc8a8ed521977a231"
+      },
+      {
+        "path": "app/src/main/assets/multiplayer/session.js",
+        "beforeSHA256": "94279cbee9d4fab974dbc99bca7d943c3f9aea159f080682838d581e5d2abbbc",
+        "sha256": "8e3d4d630cd28d04b96b5d34b463cfdc25eeae24a73b8a477d9f1b986032063c"
+      },
+      {
+        "path": "app/src/main/assets/multiplayer/warzone2100.js",
+        "beforeSHA256": "6a46eaee3a7745d41444a31957448d67f1849dbcbb539986643be9a6654f64d8",
+        "sha256": "d93c92cf396a01f63c7bde4ee4e806860729cfed4af3ca4281df6dbc1c9cc28c"
+      },
+      {
+        "path": "app/src/main/assets/multiplayer/warzone2100.wasm",
+        "beforeSHA256": "7f066f805909a085862832c2eaf762eb8304f2fac0cbe98c68afea0dca36a173",
+        "sha256": "d32bd4fe8b1bee120926ad88ec3672009166d7a18db7641a7c321556c05f7ba4"
+      }
+    ],
+    "addedSources": [
+      "archive/release-0.71-multiplayer-polish.json",
+      "qa/multiplayer-071/back071-small-home.png",
+      "qa/multiplayer-071/build.log",
+      "qa/multiplayer-071/combat-controls-host.json",
+      "qa/multiplayer-071/combat-live-proof.json",
+      "qa/multiplayer-071/combat071-build-suspended.png",
+      "qa/multiplayer-071/combat071-newborns-selected.png",
+      "qa/multiplayer-071/device-restoration.json",
+      "qa/multiplayer-071/emulator-verification.json",
+      "qa/multiplayer-071/exact-installed-apk.json",
+      "qa/multiplayer-071/fallback-0.71.json",
+      "qa/multiplayer-071/final-return-dialog.png",
+      "qa/multiplayer-071/final-return-lobby.png",
+      "qa/multiplayer-071/final-return-proof.json",
+      "qa/multiplayer-071/lobby-live-proof.json",
+      "qa/multiplayer-071/lobby071-rendered.png",
+      "qa/multiplayer-071/lobby071-small.png",
+      "qa/multiplayer-071/native-build.json",
+      "qa/multiplayer-071/native-combat-policy-check.json",
+      "qa/multiplayer-071/native-focused-build.log",
+      "qa/multiplayer-071/small-layout-back-proof.json",
+      "tools/build-multiplayer-native-071.py",
+      "tools/check-multiplayer-combat-native-071.py",
+      "tools/integrate-multiplayer-native-071.py",
+      "tools/mp-back-live-071.cjs",
+      "tools/mp-back-observed-071.cjs",
+      "tools/mp-combat-finish-071.cjs",
+      "tools/mp-combat-live-071.cjs",
+      "tools/mp-journey-071.cjs",
+      "tools/mp-live-071.cjs",
+      "tools/mp-lobby-live-071.cjs",
+      "tools/mp-small-join-071.cjs",
+      "tools/mp-small-live-071.cjs",
+      "tools/package-multiplayer-071.py",
+      "tools/prepare-multiplayer-native-071.py",
+      "tools/record-multiplayer-071.py",
+      "tools/test-multiplayer-combat-controls-071.cjs",
+      "tools/test-multiplayer-lobby-071.cjs",
+      "tools/test-multiplayer-session-071.cjs",
+      "vendor/multiplayer/native-071/README.md",
+      "vendor/multiplayer/native-071/autorevision.cache",
+      "vendor/multiplayer/native-071/display3d.cpp",
+      "vendor/multiplayer/native-071/hci.cpp",
+      "vendor/multiplayer/native-071/main_sdl.cpp",
+      "vendor/multiplayer/native-071/mobile-ui-bootstrap.js",
+      "vendor/multiplayer/native-071/mobile-ui-native.cpp.inc",
+      "vendor/multiplayer/native-071/multiint.cpp",
+      "vendor/multiplayer/native-071/native-ui.patch",
+      "vendor/multiplayer/native-071/netplay_config.h",
+      "vendor/multiplayer/native-071/quickjs_backend.cpp",
+      "vendor/multiplayer/native-071/raw-warzone2100.js",
+      "vendor/multiplayer/native-071/raw-warzone2100.wasm",
+      "vendor/multiplayer/native-071/runtime-integration.json",
+      "vendor/multiplayer/native-071/source-overlays.json",
+      "vendor/multiplayer/native-071/upstream-tags.txt",
+      "vendor/multiplayer/native-071/wrappers.cpp"
+    ],
+    "baselineSourceEntries": 12361,
+    "everyBaselineSourceEntryRetained": true,
+    "existingTowersCampaignFFAAssetsFrozen": true,
+    "upstreamCommit": "7d3d8e51a61ceee89e6bf672a41337e1a9cd7392",
+    "protocol": [
+      16384,
+      104
+    ],
+    "nativeBuildPerformed": true,
+    "sourceOverlayManifest": {
+      "path": "vendor/multiplayer/native-071/source-overlays.json",
+      "bytes": 1077,
+      "sha256": "e1489603363481f81c58bb04e4d34a84dbc9145543c4425c66b9688bfe32f598"
+    },
+    "completePatch": {
+      "path": "vendor/multiplayer/native-071/native-ui.patch",
+      "bytes": 46141,
+      "sha256": "b6c3c38267e1eb75e844ac412252ce11a7176f2fef8bc7f0f5146afb1f2148c1"
+    },
+    "nativeBuild": {
+      "path": "qa/multiplayer-071/native-build.json",
+      "bytes": 5069,
+      "sha256": "881e8100681511907c59f73ddccdf0c13207abeace0f7491f9d9415d908755d5"
+    },
+    "integration": {
+      "path": "vendor/multiplayer/native-071/runtime-integration.json",
+      "bytes": 1064,
+      "sha256": "5082fc268cc1c1840218461eb4005e94e00d055787adddd4c25a6d4783bcd525"
+    },
+    "portableNativeSourcesAndRawPairVerified": true,
+    "officialMPDataFrozen": true,
+    "wasmBinaryUnmodifiedAfterCompiler": true
+  },
+  "certificateSHA256": "4499efe00477c7c724c06a1dd96f935864548665c13ab5e2bd0a9c0f83f7cb15",
+  "changedAPKMembers": [
+    "AndroidManifest.xml",
+    "assets/multiplayer/index.html",
+    "assets/multiplayer/lobby-ui.js",
+    "assets/multiplayer/mobile-controls.js",
+    "assets/multiplayer/multiplayer.css",
+    "assets/multiplayer/native-ui-adapter.js",
+    "assets/multiplayer/session.js",
+    "assets/multiplayer/warzone2100.js",
+    "assets/multiplayer/warzone2100.wasm",
+    "classes3.dex"
+  ],
+  "everyBaselineAPKMemberRetained": true,
+  "allAPKAssetsMatchSource": true,
+  "existingModeAssetsAndNativeLibrariesFrozen": true,
+  "bundledMusicFrozen": true,
+  "livePhoneAdsAndEmulatorFallbackRetained": true,
+  "maximumAPKZipGapBytes": 4096,
+  "generatedBuildConfigSHA256": "a8568f315b2c01561e4c178fad7c869482e309517719479687c504de3da690a4",
+  "nativeBuildPerformed": true,
+  "liveAdsTested": false,
+  "githubPublished": false,
+  "vpsChanged": false,
+  "recordedUTC": "2026-11-14T10:37:44.411814+00:00"
+}

@@ -1,0 +1,43 @@
+--- a/lib/sdl/main_sdl.cpp
++++ b/lib/sdl/main_sdl.cpp
+@@ -62,6 +62,7 @@
+ #include <locale.h>
+ #include <atomic>
+ #include <chrono>
++#include <cstdio>
+ 
+ #if defined(WZ_OS_MAC)
+ #include "cocoa_sdl_helpers.h"
+@@ -1706,6 +1707,22 @@
+ 	}
+ }
+ 
++// The Towers WebView uses middle-button presses only for touch-camera drags.
++// A rapid second swipe must remain a held drag, not the desktop double-click
++// state that inputNewFrame clears even while the finger is still down.
++static bool towersTouchMiddleDrag()
++{
++#if defined(__EMSCRIPTEN__)
++	FILE *marker = std::fopen("/tmp/warzone-towers-ui-v34", "rb");
++	if (!marker) return false;
++	const bool enabled = std::fgetc(marker) == '1';
++	std::fclose(marker);
++	return enabled;
++#else
++	return false;
++#endif
++}
++
+ /*!
+  * Handle mouse button events (We can handle up to 5)
+  */
+@@ -1742,7 +1759,8 @@
+ 		    || aMouseState[mouseKeyCode].state == KEY_PRESSRELEASE)
+ 		{
+ 			// whether double click or not
+-			if (realTime - aMouseState[mouseKeyCode].lastdown < DOUBLE_CLICK_INTERVAL)
++			const bool towersPanPress = mouseKeyCode == MOUSE_MMB && towersTouchMiddleDrag();
++			if (!towersPanPress && realTime - aMouseState[mouseKeyCode].lastdown < DOUBLE_CLICK_INTERVAL)
+ 			{
+ 				aMouseState[mouseKeyCode].state = KEY_DOUBLECLICK;
+ 				aMouseState[mouseKeyCode].lastdown = 0;

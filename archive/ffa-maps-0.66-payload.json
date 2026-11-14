@@ -1,0 +1,380 @@
+{
+  "version": "0.66",
+  "passed": true,
+  "fallbackBaseline": "0.65",
+  "noNativeBuild": true,
+  "compiledFFAProgramUnchanged": true,
+  "stockPrefixSHA256": "9e89d11c8b67b5f68ddc0be43290233c28cd43b3d2a96fea1a7b4beaf83b8424",
+  "frozenOtherNativeAssetsAndTouch": {
+    "app/src/main/assets/warzone/index-duel.html": "eceab8d7c32a22ad29bd8379a235da2669e89e1ea539ab97abe6b944151b4876",
+    "app/src/main/assets/warzone/index.html": "009c5c7563727f8002f31212b53e22f81ce3cf2b55682feb598558a6f1249e6b",
+    "app/src/main/assets/warzone/mobile-campaign.html": "c9b387397b71ef43a5e1fcac6ab7487622186db086ddb066804654600af884c8",
+    "app/src/main/assets/warzone/mobile-duel.html": "78da4acbe2edcceffcb161a16aef230548a9fa83508e80e6f23c77a189d8d86a",
+    "app/src/main/assets/warzone/mobile.html": "a04071930c9e06e7283a198a37d28c56da124f42005b34732a1deff9ee33fbf6",
+    "app/src/main/assets/warzone/warzone2100-campaign.data": "70d333a1b58870b34e9922e83f6c077cc2fc085219d00e7161ba98db6ae1c2e3",
+    "app/src/main/assets/warzone/warzone2100-campaign.js": "5b3fff50542fa5913fda7ccbc0182a8a731d93e4e3fc986c7d104faedfaea226",
+    "app/src/main/assets/warzone/warzone2100-duel.data": "584a8be5958871b7d1f133bb4d3ef514737d8cf17b959be05f6659a828ceac47",
+    "app/src/main/assets/warzone/warzone2100-duel.js": "6ef65429d1f496bfe5c52e2d8d770b28eaf319d77cb0d61675abd5d78d5420b5",
+    "app/src/main/assets/warzone/warzone2100-towers-052.js": "6d17a3b9f3e935b2748cbbcfc4916e6badb81be31ef22ba3c932e3987ec089b9",
+    "app/src/main/assets/warzone/warzone2100-towers-052.wasm": "2924f46aa75d9b27b92494f01d56239856ad06b2164cd7131144a3a5faeb87db",
+    "app/src/main/assets/warzone/warzone2100.data": "244e70d357ff02ddc8cfd43d1bf7c531a3a777593bb5d8fdf84e05c2d9976da7",
+    "app/src/main/assets/warzone/warzone2100.js": "fdf0c4807323b15a00cbe92947db2fb6b2da771384af9f3fba08fc5be03c5949",
+    "app/src/main/assets/warzone/warzone2100.wasm": "497c65308d3e85f0b5370ec0ff0eb48e6a0876e735ad45e3b280829c7f3c2a06"
+  },
+  "changedExistingVirtualFiles": [
+    "/data/mp/addon.lev",
+    "/data/mp/multiplay/script/ffa-config.json",
+    "/data/mp/multiplay/script/rules/ffa-config.json",
+    "/data/mp/multiplay/script/rules/init.js",
+    "/data/mp/multiplay/skirmish/ffa-config.json",
+    "/data/mp/tests/ffa-policy.js",
+    "/data/mp/tests/ffa-rules.js"
+  ],
+  "authorizedRootWrapperChanges": [
+    {
+      "path": "app/src/main/assets/warzone/index-campaign.html",
+      "scope": "Root-owned music loader includes and native music disable only",
+      "sha256": "9125109386919832f10fce7e41f8c613c5c799c5751bc1c9ad620b2848f62c67"
+    },
+    {
+      "path": "app/src/main/assets/warzone-touch-controls.js",
+      "scope": "Root-owned music button visibility only; all gesture/input lines preserved",
+      "sha256": "ab600b66e42a65e0802d14d08cf7748efe2ba40f93faf1a1ab14b7c83dc34eb9"
+    }
+  ],
+  "newVirtualFiles": [
+    "/data/mp/multiplay/maps/ffa-contact.gam",
+    "/data/mp/multiplay/maps/ffa-contact/droid.json",
+    "/data/mp/multiplay/maps/ffa-contact/feature.json",
+    "/data/mp/multiplay/maps/ffa-contact/gam.json",
+    "/data/mp/multiplay/maps/ffa-contact/game.map",
+    "/data/mp/multiplay/maps/ffa-contact/level.json",
+    "/data/mp/multiplay/maps/ffa-contact/struct.json",
+    "/data/mp/multiplay/maps/ffa-contact/ttypes.ttp",
+    "/data/mp/multiplay/maps/ffa-emag/level.json",
+    "/data/mp/multiplay/maps/ffa-emaj-6p.gam",
+    "/data/mp/multiplay/maps/ffa-emaj-6p/droid.json",
+    "/data/mp/multiplay/maps/ffa-emaj-6p/feature.json",
+    "/data/mp/multiplay/maps/ffa-emaj-6p/gam.json",
+    "/data/mp/multiplay/maps/ffa-emaj-6p/game.map",
+    "/data/mp/multiplay/maps/ffa-emaj-6p/level.json",
+    "/data/mp/multiplay/maps/ffa-emaj-6p/struct.json",
+    "/data/mp/multiplay/maps/ffa-emaj-6p/ttypes.ttp",
+    "/data/mp/multiplay/maps/ffa-rb-simple.gam",
+    "/data/mp/multiplay/maps/ffa-rb-simple/droid.json",
+    "/data/mp/multiplay/maps/ffa-rb-simple/feature.json",
+    "/data/mp/multiplay/maps/ffa-rb-simple/gam.json",
+    "/data/mp/multiplay/maps/ffa-rb-simple/game.map",
+    "/data/mp/multiplay/maps/ffa-rb-simple/level.json",
+    "/data/mp/multiplay/maps/ffa-rb-simple/struct.json",
+    "/data/mp/multiplay/maps/ffa-rb-simple/ttypes.ttp",
+    "/data/mp/multiplay/maps/ffa-rb-usefull.gam",
+    "/data/mp/multiplay/maps/ffa-rb-usefull/droid.json",
+    "/data/mp/multiplay/maps/ffa-rb-usefull/feature.json",
+    "/data/mp/multiplay/maps/ffa-rb-usefull/gam.json",
+    "/data/mp/multiplay/maps/ffa-rb-usefull/game.map",
+    "/data/mp/multiplay/maps/ffa-rb-usefull/level.json",
+    "/data/mp/multiplay/maps/ffa-rb-usefull/struct.json",
+    "/data/mp/multiplay/maps/ffa-rb-usefull/ttypes.ttp",
+    "/data/mp/multiplay/maps/ffa-templar-ffa.gam",
+    "/data/mp/multiplay/maps/ffa-templar-ffa/dinit.bjo",
+    "/data/mp/multiplay/maps/ffa-templar-ffa/droid.ini",
+    "/data/mp/multiplay/maps/ffa-templar-ffa/feat.bjo",
+    "/data/mp/multiplay/maps/ffa-templar-ffa/feature.ini",
+    "/data/mp/multiplay/maps/ffa-templar-ffa/game.gam",
+    "/data/mp/multiplay/maps/ffa-templar-ffa/game.map",
+    "/data/mp/multiplay/maps/ffa-templar-ffa/struct.bjo",
+    "/data/mp/multiplay/maps/ffa-templar-ffa/struct.ini",
+    "/data/mp/multiplay/maps/ffa-templar-ffa/ttypes.ttp",
+    "/data/mp/multiplay/script/ffa-maps.json",
+    "/data/mp/multiplay/script/rules/ffa-maps.json",
+    "/data/mp/multiplay/skirmish/ffa-maps.json",
+    "/data/mp/tests/ffa-contact-easy.json",
+    "/data/mp/tests/ffa-contact-hard.json",
+    "/data/mp/tests/ffa-contact-medium.json",
+    "/data/mp/tests/ffa-emaj-6p-easy.json",
+    "/data/mp/tests/ffa-emaj-6p-hard.json",
+    "/data/mp/tests/ffa-emaj-6p-medium.json",
+    "/data/mp/tests/ffa-rb-simple-easy.json",
+    "/data/mp/tests/ffa-rb-simple-hard.json",
+    "/data/mp/tests/ffa-rb-simple-medium.json",
+    "/data/mp/tests/ffa-rb-usefull-easy.json",
+    "/data/mp/tests/ffa-rb-usefull-hard.json",
+    "/data/mp/tests/ffa-rb-usefull-medium.json",
+    "/data/mp/tests/ffa-templar-ffa-easy.json",
+    "/data/mp/tests/ffa-templar-ffa-hard.json",
+    "/data/mp/tests/ffa-templar-ffa-medium.json"
+  ],
+  "mapResults": [
+    {
+      "id": "emag",
+      "players": 4,
+      "sourceSHA256": "b3181ca918ecac7ab4ceb38565b6e3c425f96bea735e550ea6cbb53c150a9c87",
+      "nativeFilesByteIdentical": true,
+      "mapVersion": 40,
+      "starts": [
+        {
+          "player": 0,
+          "x": 15.0,
+          "y": 16.0,
+          "trucks": 4
+        },
+        {
+          "player": 1,
+          "x": 113.0,
+          "y": 16.0,
+          "trucks": 4
+        },
+        {
+          "player": 2,
+          "x": 15.0,
+          "y": 112.0,
+          "trucks": 4
+        },
+        {
+          "player": 3,
+          "x": 113.0,
+          "y": 112.0,
+          "trucks": 4
+        }
+      ],
+      "oilLocations": 160,
+      "previewSHA256": "ab5eda0c083b98f37adcfce6ef1d12ee2e00952ede774f0409a830dc6cece361"
+    },
+    {
+      "id": "contact",
+      "players": 4,
+      "sourceSHA256": "623bae6862c98577d819f4bed3cd1ce729c9527fc3814abe0136d7f0eb51d596",
+      "nativeFilesByteIdentical": true,
+      "mapVersion": 40,
+      "starts": [
+        {
+          "player": 0,
+          "x": 19.0,
+          "y": 19.0,
+          "trucks": 16
+        },
+        {
+          "player": 1,
+          "x": 19.0,
+          "y": 88.0,
+          "trucks": 16
+        },
+        {
+          "player": 2,
+          "x": 109.0,
+          "y": 19.0,
+          "trucks": 16
+        },
+        {
+          "player": 3,
+          "x": 109.0,
+          "y": 88.0,
+          "trucks": 16
+        }
+      ],
+      "oilLocations": 212,
+      "previewSHA256": "7def522abf8484076640514014f42da0f149a9e956d3d80a9e4485934cf0437a"
+    },
+    {
+      "id": "templar-ffa",
+      "players": 4,
+      "sourceSHA256": "8ac205dea33d618821ce9c302ecee58f431b980c61be8e648aaa1577013eb05e",
+      "nativeFilesByteIdentical": true,
+      "mapVersion": 10,
+      "starts": [
+        {
+          "player": 0,
+          "x": 14.0,
+          "y": 106.0,
+          "trucks": 4
+        },
+        {
+          "player": 1,
+          "x": 14.0,
+          "y": 14.0,
+          "trucks": 4
+        },
+        {
+          "player": 2,
+          "x": 106.0,
+          "y": 14.0,
+          "trucks": 4
+        },
+        {
+          "player": 3,
+          "x": 106.0,
+          "y": 106.0,
+          "trucks": 4
+        }
+      ],
+      "oilLocations": 180,
+      "previewSHA256": "acef4fba0d9a5a69f0f24ec055c2b91dab4b9db39e6ad924e6d8fe02516465cd"
+    },
+    {
+      "id": "rb-simple",
+      "players": 4,
+      "sourceSHA256": "e97d30e2a7557479db93e34b249777338e50ed9fcfe010e5b6f89ebc9968820a",
+      "nativeFilesByteIdentical": true,
+      "mapVersion": 40,
+      "starts": [
+        {
+          "player": 0,
+          "x": 5.0,
+          "y": 6.0,
+          "trucks": 4
+        },
+        {
+          "player": 1,
+          "x": 95.0,
+          "y": 6.0,
+          "trucks": 4
+        },
+        {
+          "player": 2,
+          "x": 5.0,
+          "y": 94.0,
+          "trucks": 4
+        },
+        {
+          "player": 3,
+          "x": 95.0,
+          "y": 94.0,
+          "trucks": 4
+        }
+      ],
+      "oilLocations": 160,
+      "previewSHA256": "e82d29ca3d28e92e57ae2a3ef3608b69ec788221c1bfd00a48d4cec48cc31cd7"
+    },
+    {
+      "id": "rb-usefull",
+      "players": 4,
+      "sourceSHA256": "befe25baf1328d6535645e407def7035cb0e624233fb93ead34a588d49d220ca",
+      "nativeFilesByteIdentical": true,
+      "mapVersion": 40,
+      "starts": [
+        {
+          "player": 0,
+          "x": 37.0,
+          "y": 15.0,
+          "trucks": 4
+        },
+        {
+          "player": 1,
+          "x": 63.0,
+          "y": 15.0,
+          "trucks": 4
+        },
+        {
+          "player": 2,
+          "x": 8.0,
+          "y": 126.0,
+          "trucks": 4
+        },
+        {
+          "player": 3,
+          "x": 92.0,
+          "y": 126.0,
+          "trucks": 4
+        }
+      ],
+      "oilLocations": 160,
+      "previewSHA256": "90af5c46d47d7b5f42039612bbe7275c1bf7bc235274430ad325a15771fdf1e5"
+    },
+    {
+      "id": "emaj-6p",
+      "players": 6,
+      "sourceSHA256": "f55cf48f11bc5d2d7b38cc460ea80c231ba3eeeb5e980dc7545129e8961798f0",
+      "nativeFilesByteIdentical": true,
+      "mapVersion": 40,
+      "starts": [
+        {
+          "player": 0,
+          "x": 86.0,
+          "y": 25.0,
+          "trucks": 4
+        },
+        {
+          "player": 1,
+          "x": 142.0,
+          "y": 53.0,
+          "trucks": 4
+        },
+        {
+          "player": 2,
+          "x": 142.0,
+          "y": 119.0,
+          "trucks": 4
+        },
+        {
+          "player": 3,
+          "x": 90.0,
+          "y": 151.0,
+          "trucks": 4
+        },
+        {
+          "player": 4,
+          "x": 34.0,
+          "y": 123.0,
+          "trucks": 4
+        },
+        {
+          "player": 5,
+          "x": 34.0,
+          "y": 57.0,
+          "trucks": 4
+        }
+      ],
+      "oilLocations": 240,
+      "previewSHA256": "656ae9bd70cf85bc305506917df58f3e3174f02352b11f9cb9a1f073bcfa783a"
+    }
+  ],
+  "stockCobraSourcesUnchanged": true,
+  "legacyNullBotUnchanged": true,
+  "unchangedFFASources": [
+    "ai.js",
+    "ai.json",
+    "command-policy.js",
+    "commands.js",
+    "research-bridge.js",
+    "research.json",
+    "templates.json",
+    "policy.json",
+    "endconditions.js",
+    "camTechEnabler.js"
+  ],
+  "changedNativeFunctions": [
+    "ffaApplyAirLimits",
+    "ffaNativeMatchBotType",
+    "ffaPlayerDiagnostic",
+    "ffaEmit",
+    "ffa_eventGameInit",
+    "ffa_eventResearched"
+  ],
+  "nativeTimerOwnershipUnchanged": true,
+  "actualNativeEngineExecuted": false,
+  "deviceQARemainsRequired": true,
+  "nativePreloadDirectoriesDerivedFromEveryVFSParent": true,
+  "outputs": [
+    {
+      "path": "app/src/main/assets/warzone/warzone2100-ffa.js",
+      "sha256": "984629c837e3beec6ac0d9ad72332e7b56ec76b983d91e132d78adb66bd374b8"
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100-ffa.data",
+      "sha256": "262985144567ad01a5f6dfa543db7bde44676275f696e3ec121ea97c66828f21"
+    },
+    {
+      "path": "app/src/main/assets/warzone/index-ffa.html",
+      "sha256": "f4c8dd98b4a31f0199bfa57f3f8082f6239f9f3231401c0cbe064ab536bd1cc4"
+    },
+    {
+      "path": "app/src/main/assets/warzone/mobile-ffa.html",
+      "sha256": "44b2be11b64f05a3586a8e2eea5b3923ed7728e3b06ebb177cf834d49f397e55"
+    },
+    {
+      "path": "app/src/main/assets/ffa-maps.json",
+      "sha256": "d6c626637d573349d5ec02ef377624b54442ec96c52967789d61163c525bf098"
+    }
+  ]
+}

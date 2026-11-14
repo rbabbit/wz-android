@@ -1,0 +1,10 @@
+{
+  "kind": "fixture",
+  "candidateAPK_SHA256": "ddd4ff09b1c4e7943dfc10df49a88fca152798c3b2f1472a823d335c83cd269f",
+  "description": "A late QA assertion compared the restored native clock against the later Saved HUD clock using an arbitrary two-second allowance. The actual serialized F7 checkpoint is the correct reference.",
+  "serializedNativeGameTime": 166402,
+  "initialRestoredNativeTime": 169202,
+  "nativeComparisonPassed": true,
+  "productRuntimeErrors": [],
+  "resolution": "QA now compares the actual gam.json checkpoint time and reuses the already-observed native orders, two manufactured units, research and save rather than repeating production."
+}

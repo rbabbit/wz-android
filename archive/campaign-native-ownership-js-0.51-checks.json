@@ -1,0 +1,45 @@
+{
+  "version": "0.51",
+  "passed": true,
+  "checksPassed": 5,
+  "checks": [
+    {
+      "name": "Generic Campaign cleanup preserves foreign native UI without Escape or a native close command",
+      "passed": true
+    },
+    {
+      "name": "Ordinary Campaign and Towers cleanup retain their existing owned-HUD return path",
+      "passed": true
+    },
+    {
+      "name": "Explicit Campaign Back still dismisses a native panel with Escape",
+      "passed": true
+    },
+    {
+      "name": "Native video hides and disables the complete footer before the first mission snapshot",
+      "passed": true
+    },
+    {
+      "name": "Intel and mission panels retain footer ownership across independent hidden updates and restore it on return",
+      "passed": true
+    }
+  ],
+  "emulatorUsed": false,
+  "actualNativeEngineExecuted": false,
+  "scope": "Actual Campaign native-ownership controller functions in controlled VM fixtures. Native Intel and screen behavior require the delivery emulator check.",
+  "sources": [
+    {
+      "path": "app/src/main/assets/warzone-command-pages.js",
+      "sha256": "7b55ae99f5043150f05f88e62c6f7a36d90808586da4a5c997b73a6417c23240"
+    },
+    {
+      "path": "app/src/main/assets/warzone-campaign-hud.js",
+      "sha256": "9e93f14a2ef8bc2f5763a723cca94867d088e52a883cc41aca326eafe6c63c65"
+    },
+    {
+      "path": "tools/check-campaign-native-ownership-051.cjs",
+      "sha256": "520197c95919ad3a626c3e785d3b72fa5116c3e85f7fd00656a9433aeda40d98"
+    }
+  ],
+  "recordedUTC": "2026-11-11T14:59:04.439Z"
+}

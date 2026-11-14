@@ -1,0 +1,97 @@
+{
+  "version": "0.59",
+  "versionCode": 59,
+  "candidateAPK_SHA256": "395f0d699edc2c9fac2e17ae33f6c274ea36e5251d39c1e7d7c7a367ad54580f",
+  "scope": "Restore the authentic bundled WZ2100 shield as Android launcher/adaptive icon; exact version bump only beyond launcher resources.",
+  "verification": "Build/package integrity only; no emulator, browser, screen, launcher-runtime or gameplay verification.",
+  "emulatorUsed": false,
+  "browserFixturesUsed": false,
+  "androidRuntimeExecuted": false,
+  "actualNativeEngineExecuted": false,
+  "gameplayVerified": false,
+  "launcherRuntimeVerified": false,
+  "nativeBuildPerformed": false,
+  "liveAdsTested": false,
+  "githubPublished": false,
+  "vpsChanged": false,
+  "fallback": {
+    "path": "archive/fallback-0.59.json",
+    "sha256": "7afc6f309c0882188bc18d21a9a63a7e53d66420fab7b85cb779d9fdadba7038"
+  },
+  "sourcePreservation": {
+    "changedBaselineSources": [
+      {
+        "path": "AGENTS.md",
+        "beforeSHA256": "df54a8ff2ded3f37bca5ddb55362ea01422b32b3f286aa548d01a3b87a09cb39",
+        "sha256": "8c6d2b2482b001dab223d2b44bda7b424121b1c0d95086ce9db5ede7010ce2cd"
+      },
+      {
+        "path": "README.md",
+        "beforeSHA256": "180a78cc011df1b7aa8f8d244d484f5058d65f857c92cf6877eea45c294da62e",
+        "sha256": "b35231e19998b6da6a73e6eac85706804c936544b50caa082b08c0e2a08832e8"
+      },
+      {
+        "path": "app/build.gradle.kts",
+        "beforeSHA256": "34bf1840eebc2624656137e7d542e2a194a875aa896d959b703a6756b6fea87a",
+        "sha256": "8f44c7cf2ca7a709fe3f5b35ec846313f5c7aab5d2398a1284262629d3abbaf8"
+      },
+      {
+        "path": "app/src/main/res/drawable/ic_launcher_foreground.xml",
+        "beforeSHA256": "de580c30c9a6e388dcd00d099576a3f6ae06ea42c2a23aab0ef27a95e58da899",
+        "sha256": "f86d6c052b21919d50fe053b1ad085e91a26315805eddc8efa0388a487a5d0c9"
+      },
+      {
+        "path": "app/src/main/res/mipmap-anydpi/ic_launcher.xml",
+        "beforeSHA256": "769cb4b0840359dd50a5fc92edc7ed068fa0cd919f41b56fd391b20a0bf6a553",
+        "sha256": "bf42aabbeb76c78659d085c4219c4f2ed03b1463b44cd6ffb64c98acedc54247"
+      },
+      {
+        "path": "app/src/main/res/mipmap-anydpi/ic_launcher_round.xml",
+        "beforeSHA256": "769cb4b0840359dd50a5fc92edc7ed068fa0cd919f41b56fd391b20a0bf6a553",
+        "sha256": "bf42aabbeb76c78659d085c4219c4f2ed03b1463b44cd6ffb64c98acedc54247"
+      }
+    ],
+    "addedSources": [
+      "app/src/main/res/drawable-nodpi/warzone_launcher_icon.png",
+      "archive/fallback-0.59.json",
+      "archive/release-0.59-icon-only.json",
+      "docs/releases/0.59-icon.md",
+      "tools/package-launcher-059.py"
+    ],
+    "baselineSourceEntries": 10745,
+    "everyBaselineSourceEntryRetained": true,
+    "allOtherAppSourcesFrozen": true,
+    "allJavaAssetsScenariosCampaignFrozen": true,
+    "authenticIcon": {
+      "path": "app/src/main/res/drawable-nodpi/warzone_launcher_icon.png",
+      "original": "app/src/main/assets/warzone/assets/android-chrome-192x192.png",
+      "sha256": "e4ab588956e98cc2dbe02e29826dd82965eaae4ef401f85ef477f57a02630ccd"
+    }
+  },
+  "certificateSHA256": "4499efe00477c7c724c06a1dd96f935864548665c13ab5e2bd0a9c0f83f7cb15",
+  "changedAPKMembers": [
+    "AndroidManifest.xml",
+    "classes2.dex",
+    "classes3.dex",
+    "res/drawable-nodpi-v4/warzone_launcher_icon.png",
+    "res/drawable/ic_launcher_foreground.xml",
+    "resources.arsc"
+  ],
+  "everyBaselineAPKMemberRetained": true,
+  "allAPKAssetsMatchSource": true,
+  "allAPKAssetsAndNativeLibrariesFrozenToBaseline": true,
+  "nativeCampaignTowersAndDuelRuntimeFrozen": true,
+  "phoneLiveAdsConfigured": true,
+  "emulatorSampleFallbackRetained": true,
+  "packagedLauncherPixelsMatchSource": true,
+  "compiledAdaptiveLauncherRoutes": {
+    "mipmap/ic_launcher": "res/mipmap-anydpi-v26/ic_launcher.xml",
+    "mipmap/ic_launcher_round": "res/mipmap-anydpi-v26/ic_launcher_round.xml",
+    "drawable/ic_launcher_foreground": "res/drawable/ic_launcher_foreground.xml",
+    "drawable/warzone_launcher_icon": "res/drawable-nodpi-v4/warzone_launcher_icon.png"
+  },
+  "compiledAdaptiveInsetPercent": 24,
+  "packagedLauncherPNG_SHA256": "e4ab588956e98cc2dbe02e29826dd82965eaae4ef401f85ef477f57a02630ccd",
+  "generatedBuildConfigSHA256": "1b8d6cdb3dfe536bb1084b6a9735101170ecd745de4440af6018eb4cc242674a",
+  "recordedUTC": "2026-11-12T01:57:47.992256+00:00"
+}

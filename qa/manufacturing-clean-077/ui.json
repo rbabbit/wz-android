@@ -1,0 +1,63 @@
+{
+  "version": "0.77",
+  "passed": true,
+  "emulatorUsed": false,
+  "actualNativeEngineExecuted": false,
+  "browserUsed": false,
+  "scope": "Actual shared Manufacturing/Queue functions under bounded synthetic DOM/command-reply fixtures across four modes; no Android/native gameplay. Layout pixels are covered separately by the host-browser fixture.",
+  "checksPassed": 42,
+  "checks": [
+    "towers: compact Manufacturing rail has no FACTORIES/Units strip and keeps Design/Blueprints controls",
+    "towers: unit rows use MANUFACTURE/repeat without quantities or bottom activity; matching hardware alone gets live progress",
+    "towers: idle repeat only arms the selected factory/recipe until one MANUFACTURE command is sent",
+    "towers: finite and saved-design manufacture each send one real request with an explicit repeat Boolean",
+    "towers: matching live repeat ON/OFF sends one set-repeat; rejection rolls back and busy taps cannot race",
+    "towers: one STOP command replaces OPEN/CANCEL controls and clears only its factory draft after acknowledgement",
+    "towers: rejected STOP preserves drafts and pending manufacture/repeat prevents a racing STOP",
+    "towers: a late repeat acknowledgement cannot redraw another selected factory or another page",
+    "towers: save rewind/player change clears draft/in-flight identities and ignores old manufacture/repeat/STOP replies",
+    "towers: destroyed factory drafts are pruned while another live factory remains unchanged",
+    "ffa: compact Manufacturing rail has no FACTORIES/Units strip and keeps Design/Blueprints controls",
+    "ffa: unit rows use MANUFACTURE/repeat without quantities or bottom activity; matching hardware alone gets live progress",
+    "ffa: idle repeat only arms the selected factory/recipe until one MANUFACTURE command is sent",
+    "ffa: finite and saved-design manufacture each send one real request with an explicit repeat Boolean",
+    "ffa: matching live repeat ON/OFF sends one set-repeat; rejection rolls back and busy taps cannot race",
+    "ffa: one STOP command replaces OPEN/CANCEL controls and clears only its factory draft after acknowledgement",
+    "ffa: rejected STOP preserves drafts and pending manufacture/repeat prevents a racing STOP",
+    "ffa: a late repeat acknowledgement cannot redraw another selected factory or another page",
+    "ffa: save rewind/player change clears draft/in-flight identities and ignores old manufacture/repeat/STOP replies",
+    "ffa: destroyed factory drafts are pruned while another live factory remains unchanged",
+    "campaign: compact Manufacturing rail has no FACTORIES/Units strip and keeps Design/Blueprints controls",
+    "campaign: unit rows use MANUFACTURE/repeat without quantities or bottom activity; matching hardware alone gets live progress",
+    "campaign: idle repeat only arms the selected factory/recipe until one MANUFACTURE command is sent",
+    "campaign: finite and saved-design manufacture each send one real request with an explicit repeat Boolean",
+    "campaign: matching live repeat ON/OFF sends one set-repeat; rejection rolls back and busy taps cannot race",
+    "campaign: one STOP command replaces OPEN/CANCEL controls and clears only its factory draft after acknowledgement",
+    "campaign: rejected STOP preserves drafts and pending manufacture/repeat prevents a racing STOP",
+    "campaign: a late repeat acknowledgement cannot redraw another selected factory or another page",
+    "campaign: save rewind/player change clears draft/in-flight identities and ignores old manufacture/repeat/STOP replies",
+    "campaign: destroyed factory drafts are pruned while another live factory remains unchanged",
+    "multiplayer: compact Manufacturing rail has no FACTORIES/Units strip and keeps Design/Blueprints controls",
+    "multiplayer: unit rows use MANUFACTURE/repeat without quantities or bottom activity; matching hardware alone gets live progress",
+    "multiplayer: idle repeat only arms the selected factory/recipe until one MANUFACTURE command is sent",
+    "multiplayer: finite and saved-design manufacture each send one real request with an explicit repeat Boolean",
+    "multiplayer: matching live repeat ON/OFF sends one set-repeat; rejection rolls back and busy taps cannot race",
+    "multiplayer: one STOP command replaces OPEN/CANCEL controls and clears only its factory draft after acknowledgement",
+    "multiplayer: rejected STOP preserves drafts and pending manufacture/repeat prevents a racing STOP",
+    "multiplayer: a late repeat acknowledgement cannot redraw another selected factory or another page",
+    "multiplayer: save rewind/player change clears draft/in-flight identities and ignores old manufacture/repeat/STOP replies",
+    "multiplayer: destroyed factory drafts are pruned while another live factory remains unchanged",
+    "Duel retains its legacy quantity controls/manufacturing and queue rendering branch",
+    "Design/Blueprints shared return arrow and per-page header gates remain connected to existing navigation"
+  ],
+  "sources": [
+    {
+      "path": "app/src/main/assets/warzone-command-pages.js",
+      "sha256": "b83b8dfe580c00495bce68ffd1375f1563022b253aa427d576df0b413d9a5756"
+    },
+    {
+      "path": "tools/test-manufacturing-ui-077.cjs",
+      "sha256": "597b618066417edcb8bf6abdb77ed4b0002c1f1f59c6759650f32c3285954d34"
+    }
+  ]
+}

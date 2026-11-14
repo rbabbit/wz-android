@@ -1,0 +1,53 @@
+{
+  "version": "0.34",
+  "passed": true,
+  "recordedUTC": "2026-11-10T08:05:26.221298+00:00",
+  "scope": "Append-only wave/objective native-script payload; no engine execution or emulator QA",
+  "baselineAPK": "C:\\timerApp\\Warzone-Towers-0.33-Test-Ads.apk",
+  "baselineSHA256": "9988786994ef4ee9b3c426bd4af690a9e6f382a94bbeed0dfc351546c51cf0f7",
+  "baselineDataSHA256": "f2200f13b2197d0162a12737898c12be2545482a78529a6d7c83c54d8a34e16b",
+  "nativeRuntimeProof": "qa/0.34-notices/native-runtime-integration.json",
+  "nativeProgramBodySHA256": "0e3613b6526c54cafaf959346aa4e2cda5ceb5ba70250cfd65a1d83ffacbbddd",
+  "matchedWASMSHA256": "20a3e83127f21d85105c91f43c8eb7144461a09cfc53ef34bbfc1d274fa7368f",
+  "changedVFSFiles": [
+    "/data/mp/tests/warzone-towers-waves.js",
+    "/data/mp/tests/warzone-towers-objective.js"
+  ],
+  "addedVFSFiles": [],
+  "removedVFSFiles": [],
+  "unchangedVirtualFiles": 4290,
+  "frozenDataPrefixUnchanged": true,
+  "nativeProgramUnchangedOutsidePackageIndex": true,
+  "wasmUnchangedByScenarioIntegration": true,
+  "sources": [
+    {
+      "path": "scenario/warzone-towers-objective.js",
+      "vfs": "/data/mp/tests/warzone-towers-objective.js",
+      "bytes": 1120,
+      "sha256": "8c1b2ae12de8e20a3cd1a99ee96f85fa9140826d3015fa48101ee501f0a32261"
+    },
+    {
+      "path": "scenario/warzone-towers-waves.js",
+      "vfs": "/data/mp/tests/warzone-towers-waves.js",
+      "bytes": 10135,
+      "sha256": "9dc72db7d3c638206e4997ab6c66883c5d131069f12d8c9088234b7b4f5d6fe7"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "app/src/main/assets/warzone/warzone2100.js",
+      "bytes": 793338,
+      "sha256": "c31c8c8a9a6fb7b081f607a510dbc24f81fdefeb0e6048df88a769ff0b886718"
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100.data",
+      "bytes": 77731282,
+      "sha256": "4f1fe71399e58eba80406162602e286207d773ce4636ac3193f13b982f3d4c8c"
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100.wasm",
+      "bytes": 13460738,
+      "sha256": "20a3e83127f21d85105c91f43c8eb7144461a09cfc53ef34bbfc1d274fa7368f"
+    }
+  ]
+}

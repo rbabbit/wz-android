@@ -1,0 +1,346 @@
+{
+  "version": "0.77",
+  "versionCode": 77,
+  "candidateAPK_SHA256": "716ea028b62e5ab34f01f9375d9caeb83d1f8437b2446d9e42cf4b27b8fb5179",
+  "scope": "Approved compact Manufacturing/Queue, per-factory repeat and one Stop action in Towers, Campaign, FFA and Multiplayer. Only reviewed command scripts are appended to the three existing VFS payloads; compiled programs, every Java source, Research and other assets stay frozen. User requested no emulator testing.",
+  "exactAPKVerification": {
+    "evidence": {
+      "path": "qa/manufacturing-clean-077/verification.json",
+      "bytes": 158430,
+      "sha256": "c0853f71e709a8f4482f2fbd35d4c44c1b10c4cf5e3e7c64c3e7a53b64cc4c0e"
+    },
+    "buildLog": {
+      "path": "qa/manufacturing-clean-077/build.log",
+      "bytes": 2477,
+      "sha256": "adc90f30e422dbea546ec79057875b243b78a7c394826d2f552e30aaa7299c69"
+    },
+    "emulatorUsed": false,
+    "emulatorOmittedAtUserRequest": true,
+    "androidGameplayVerified": false,
+    "actualAndroidViewsExecuted": false,
+    "offlineHostChecksPassed": true,
+    "buildChecksPassed": true,
+    "offlineFixtureEvidence": [
+      {
+        "path": "qa/manufacturing-clean-077/browser.json",
+        "bytes": 422676,
+        "sha256": "307caa1a593a4dc16031ecdcd35430e6e1734c1cabfc0a6f7d432d3380649723"
+      },
+      {
+        "path": "qa/manufacturing-clean-077/native.json",
+        "bytes": 6648,
+        "sha256": "e70f6db232e227dde5467cb14fd527416b28987b4061cf7bf39967506e8471e5"
+      },
+      {
+        "path": "qa/manufacturing-clean-077/payload.json",
+        "bytes": 6784,
+        "sha256": "b1c1b237dee31f4eb1e7355dc8385529a5fa56604c8386f76799b830ff5407e9"
+      },
+      {
+        "path": "qa/manufacturing-clean-077/ui.json",
+        "bytes": 5359,
+        "sha256": "070f2619d9e1a1507550a8434c6f117e4c04ef99f6163042d6aa5d0c5e02b428"
+      }
+    ],
+    "checks": {
+      "authoritativeCommandChecks": true,
+      "manufacturingUiChecks": true,
+      "crossModeBrowserChecks": true,
+      "appendOnlyCommandPayloads": true,
+      "successfulBuild": true
+    },
+    "verificationScope": "Authoritative Manufacturing/Queue command handlers on host native-API fixtures and actual shared UI in host Chromium for Towers, Campaign, FFA and Multiplayer, using synthetic native events; independent append-only VFS/program preservation checks and successful exact-APK build.",
+    "limitations": [
+      "No emulator tests were run, as requested.",
+      "Host browser/native-API fixtures do not verify Android WebView rendering, physical touch, real production timing/unit creation, multiplayer runtime behavior or gameplay."
+    ],
+    "pinnedCheckedSourceFiles": 720,
+    "assertionCounts": {
+      "native": 44,
+      "ui": 42,
+      "browserModeViewports": 28
+    }
+  },
+  "fallback": {
+    "path": "qa/manufacturing-clean-077/fallback-0.77.json",
+    "bytes": 409,
+    "sha256": "2b8debc11c634e045fe2c8256132ec198243674889cab051ffd8691f9cff7d94"
+  },
+  "sourcePreservation": {
+    "changedBaselineSources": [
+      {
+        "path": "AGENTS.md",
+        "beforeSHA256": "fa99496e982ed6dd9c7b2b237c2ad0d9b1e6038a89bbba5347f3f4aa25ef9e91",
+        "sha256": "6f64d68f23ae8d389c1916964422580f785a5809afdd3bd270a8c8ed786548d1"
+      },
+      {
+        "path": "README.md",
+        "beforeSHA256": "9b29d56ae1024c48cfdd00576f57d8a4129443e65e6736da1342e58a51177330",
+        "sha256": "e8a375d66e58b5ae4cc5da67f762f0f8744ff925af2d9294a03b74b7492b82a8"
+      },
+      {
+        "path": "app/build.gradle.kts",
+        "beforeSHA256": "f854844ca21a1aac75e06e901940b102ea5b0e509e5fa07faba838c8953cb523",
+        "sha256": "f79403ca52867266bef234d084d117ca5870bb523f464a4b3a27f9459a842bc3"
+      },
+      {
+        "path": "app/src/main/assets/multiplayer/mobile-ui-runtime.js",
+        "beforeSHA256": "563c291f632b986f77e914b441bcf5017848912c3c3e39b33cfdb32cf988e399",
+        "sha256": "21cf63c58d29ee9064a7caf05c498610439ca33b2d59049d84b53394dc22fb01"
+      },
+      {
+        "path": "app/src/main/assets/warzone-command-pages.js",
+        "beforeSHA256": "17b2eb2dfa95c1fd67d018ef8eba9c2a61cc88a20bfdc98e6c5a410812d8069e",
+        "sha256": "b83b8dfe580c00495bce68ffd1375f1563022b253aa427d576df0b413d9a5756"
+      },
+      {
+        "path": "app/src/main/assets/warzone/ui/towers-commands.css",
+        "beforeSHA256": "6b1fa9cb3b5a5f65ce12d2e4118caa0c2b572e88e0263ae247f651c6710d80e8",
+        "sha256": "07fbbd39193111ad9f8fd56e4d124d938b66a3d3dd7f1fd950af6894a1fe9e36"
+      },
+      {
+        "path": "app/src/main/assets/warzone/warzone2100-campaign.data",
+        "beforeSHA256": "70d333a1b58870b34e9922e83f6c077cc2fc085219d00e7161ba98db6ae1c2e3",
+        "sha256": "ed7629e455cfee64c4ff0b5f45ddaf595aa0fd72c7e4910833e6d3cc87965700"
+      },
+      {
+        "path": "app/src/main/assets/warzone/warzone2100-campaign.js",
+        "beforeSHA256": "5b3fff50542fa5913fda7ccbc0182a8a731d93e4e3fc986c7d104faedfaea226",
+        "sha256": "44f3ca38a667749d233026e3840bf6c385ade703bc0bc3dc3521666a0d931a8c"
+      },
+      {
+        "path": "app/src/main/assets/warzone/warzone2100-ffa.data",
+        "beforeSHA256": "73137514fb621df5ca978c93a32743c01b44de01201e4846cb351a6d438d6278",
+        "sha256": "fc714bc1181961a238c23f5c0f2e6c23b66e5e58eed80eec1287f06e4408d3c3"
+      },
+      {
+        "path": "app/src/main/assets/warzone/warzone2100-ffa.js",
+        "beforeSHA256": "50a0bb51ab06e2d6805766681ae36c3e7e29d3b13ada02dbc2a96620f7701611",
+        "sha256": "e04e8dc9c7594bf9e7f826059b95f4a2de8db8c01f7b51b25e493542f3bc9d81"
+      },
+      {
+        "path": "app/src/main/assets/warzone/warzone2100-towers-052.js",
+        "beforeSHA256": "6d17a3b9f3e935b2748cbbcfc4916e6badb81be31ef22ba3c932e3987ec089b9",
+        "sha256": "4cdd6887fb42382b49630dd161841f9eafad175c46d54a0d25c8285c9eab5757"
+      },
+      {
+        "path": "app/src/main/assets/warzone/warzone2100.data",
+        "beforeSHA256": "244e70d357ff02ddc8cfd43d1bf7c531a3a777593bb5d8fdf84e05c2d9976da7",
+        "sha256": "89abeb52888e2d3bb79c8112a6296d24a8f2f9470f12fc60b3be6848e418b992"
+      },
+      {
+        "path": "campaign/commands.js",
+        "beforeSHA256": "f66f070ee6578d5bb0754a06d27386acbc03d5a17c5aba3b1298f4240d0d68d4",
+        "sha256": "78947e16c9f9c9e292639dede164a4f78d270f31dfefe15099b9065a4147bbc0"
+      },
+      {
+        "path": "scenario/ffa/commands.js",
+        "beforeSHA256": "9a567bc95f92b2b6bbf9769e2d4fdf5cedce9f45ce81e3d5d6dfd3ff69a93ae3",
+        "sha256": "af3fdb67bd9b469394c32b9cb3d11fa19be1f4cfaeb8d6adbf7c5ad8ea524f1e"
+      },
+      {
+        "path": "scenario/warzone-towers-commands.js",
+        "beforeSHA256": "590be36a3157dd383006e06d4fb54daaffe98bb517405b7876588a022eacd17c",
+        "sha256": "ca130ab86f6afdfd7c403591a73d543b7d5341108475eaa9c13584d4b84e0fbf"
+      }
+    ],
+    "addedSources": [
+      "archive/release-0.77-manufacturing-clean.json",
+      "docs/releases/0.77-manufacturing-clean.md",
+      "qa/manufacturing-clean-077/audit.md",
+      "qa/manufacturing-clean-077/browser.json",
+      "qa/manufacturing-clean-077/build.log",
+      "qa/manufacturing-clean-077/fallback-0.77.json",
+      "qa/manufacturing-clean-077/manufacturing-campaign-blocked-640x320.png",
+      "qa/manufacturing-clean-077/manufacturing-campaign-compact-640x320.png",
+      "qa/manufacturing-clean-077/manufacturing-campaign-empty-640x320.png",
+      "qa/manufacturing-clean-077/manufacturing-campaign-many-factories-640x320.png",
+      "qa/manufacturing-clean-077/manufacturing-campaign-many-units-1200x540.png",
+      "qa/manufacturing-clean-077/manufacturing-campaign-normal-1200x540.png",
+      "qa/manufacturing-clean-077/manufacturing-campaign-repeat-1200x540.png",
+      "qa/manufacturing-clean-077/manufacturing-ffa-blocked-640x320.png",
+      "qa/manufacturing-clean-077/manufacturing-ffa-compact-640x320.png",
+      "qa/manufacturing-clean-077/manufacturing-ffa-empty-640x320.png",
+      "qa/manufacturing-clean-077/manufacturing-ffa-many-factories-640x320.png",
+      "qa/manufacturing-clean-077/manufacturing-ffa-many-units-1200x540.png",
+      "qa/manufacturing-clean-077/manufacturing-ffa-normal-1200x540.png",
+      "qa/manufacturing-clean-077/manufacturing-ffa-repeat-1200x540.png",
+      "qa/manufacturing-clean-077/manufacturing-multiplayer-blocked-640x320.png",
+      "qa/manufacturing-clean-077/manufacturing-multiplayer-compact-640x320.png",
+      "qa/manufacturing-clean-077/manufacturing-multiplayer-empty-640x320.png",
+      "qa/manufacturing-clean-077/manufacturing-multiplayer-many-factories-640x320.png",
+      "qa/manufacturing-clean-077/manufacturing-multiplayer-many-units-1200x540.png",
+      "qa/manufacturing-clean-077/manufacturing-multiplayer-normal-1200x540.png",
+      "qa/manufacturing-clean-077/manufacturing-multiplayer-repeat-1200x540.png",
+      "qa/manufacturing-clean-077/manufacturing-towers-blocked-640x320.png",
+      "qa/manufacturing-clean-077/manufacturing-towers-compact-640x320.png",
+      "qa/manufacturing-clean-077/manufacturing-towers-empty-640x320.png",
+      "qa/manufacturing-clean-077/manufacturing-towers-many-factories-640x320.png",
+      "qa/manufacturing-clean-077/manufacturing-towers-many-units-1200x540.png",
+      "qa/manufacturing-clean-077/manufacturing-towers-normal-1200x540.png",
+      "qa/manufacturing-clean-077/manufacturing-towers-repeat-1200x540.png",
+      "qa/manufacturing-clean-077/native.json",
+      "qa/manufacturing-clean-077/payload.json",
+      "qa/manufacturing-clean-077/queue-campaign-blocked-640x320.png",
+      "qa/manufacturing-clean-077/queue-campaign-compact-640x320.png",
+      "qa/manufacturing-clean-077/queue-campaign-normal-1200x540.png",
+      "qa/manufacturing-clean-077/queue-ffa-blocked-640x320.png",
+      "qa/manufacturing-clean-077/queue-ffa-compact-640x320.png",
+      "qa/manufacturing-clean-077/queue-ffa-normal-1200x540.png",
+      "qa/manufacturing-clean-077/queue-multiplayer-blocked-640x320.png",
+      "qa/manufacturing-clean-077/queue-multiplayer-compact-640x320.png",
+      "qa/manufacturing-clean-077/queue-multiplayer-normal-1200x540.png",
+      "qa/manufacturing-clean-077/queue-towers-blocked-640x320.png",
+      "qa/manufacturing-clean-077/queue-towers-compact-640x320.png",
+      "qa/manufacturing-clean-077/queue-towers-normal-1200x540.png",
+      "qa/manufacturing-clean-077/ui.json",
+      "qa/manufacturing-clean-077/verification.json",
+      "tools/compose-manufacturing-077.cjs",
+      "tools/compose-multiplayer-ui-077.cjs",
+      "tools/embed-manufacturing-077.py",
+      "tools/package-manufacturing-clean-077.py",
+      "tools/record-manufacturing-clean-077.py",
+      "tools/test-manufacturing-clean-browser-077.cjs",
+      "tools/test-manufacturing-native-077.cjs",
+      "tools/test-manufacturing-ui-077.cjs"
+    ],
+    "baselineSourceEntries": 12566,
+    "everyBaselineSourceEntryRetained": true,
+    "onlyReviewedCommandPresentationAndScriptsChanged": true,
+    "allJavaResearchAndOtherAssetsFrozen": true,
+    "upstreamCommit": "7d3d8e51a61ceee89e6bf672a41337e1a9cd7392",
+    "protocol": [
+      16384,
+      104
+    ],
+    "nativeBuildPerformed": false,
+    "nativeCompiledClientReusedFromVersion": "0.71",
+    "sourceOverlayManifest": {
+      "path": "vendor/multiplayer/native-071/source-overlays.json",
+      "bytes": 1077,
+      "sha256": "e1489603363481f81c58bb04e4d34a84dbc9145543c4425c66b9688bfe32f598"
+    },
+    "completePatch": {
+      "path": "vendor/multiplayer/native-071/native-ui.patch",
+      "bytes": 46141,
+      "sha256": "b6c3c38267e1eb75e844ac412252ce11a7176f2fef8bc7f0f5146afb1f2148c1"
+    },
+    "nativeBuild": {
+      "path": "qa/multiplayer-071/native-build.json",
+      "bytes": 5069,
+      "sha256": "881e8100681511907c59f73ddccdf0c13207abeace0f7491f9d9415d908755d5"
+    },
+    "integration": {
+      "path": "vendor/multiplayer/native-071/runtime-integration.json",
+      "bytes": 1064,
+      "sha256": "5082fc268cc1c1840218461eb4005e94e00d055787adddd4c25a6d4783bcd525"
+    },
+    "portableNativeSourcesAndRawPairVerified": true,
+    "officialMPDataFrozen": true,
+    "wasmBinaryUnmodifiedAfterCompiler": true
+  },
+  "commandPayloadPreservation": {
+    "compiledProgramsUnchanged": true,
+    "originalDataPrefixesFrozen": true,
+    "onlyReviewedCommandVirtualFilesChanged": true,
+    "payloadComparisons": [
+      {
+        "loader": "app/src/main/assets/warzone/warzone2100-towers-052.js",
+        "data": "app/src/main/assets/warzone/warzone2100.data",
+        "onlyChangedVirtualFile": "/data/mp/tests/warzone-towers-commands.js",
+        "originalDataPrefixBytes": 78171043,
+        "originalDataPrefixSHA256": "244e70d357ff02ddc8cfd43d1bf7c531a3a777593bb5d8fdf84e05c2d9976da7",
+        "appendedCommandBytes": 95474,
+        "appendedCommandSHA256": "ca130ab86f6afdfd7c403591a73d543b7d5341108475eaa9c13584d4b84e0fbf",
+        "compiledProgramBodySHA256": "f5ce76bdb7a1ffda3c6630e25174adcb98e0f6bef156151457558bfbaf0e08dc",
+        "virtualFilesCompared": 4292,
+        "sources": [
+          {
+            "path": "scenario/warzone-towers-commands.js",
+            "bytes": 95474,
+            "sha256": "ca130ab86f6afdfd7c403591a73d543b7d5341108475eaa9c13584d4b84e0fbf"
+          }
+        ]
+      },
+      {
+        "loader": "app/src/main/assets/warzone/warzone2100-ffa.js",
+        "data": "app/src/main/assets/warzone/warzone2100-ffa.data",
+        "onlyChangedVirtualFile": "/data/mp/tests/ffa-commands.js",
+        "originalDataPrefixBytes": 74909635,
+        "originalDataPrefixSHA256": "73137514fb621df5ca978c93a32743c01b44de01201e4846cb351a6d438d6278",
+        "appendedCommandBytes": 95214,
+        "appendedCommandSHA256": "af3fdb67bd9b469394c32b9cb3d11fa19be1f4cfaeb8d6adbf7c5ad8ea524f1e",
+        "compiledProgramBodySHA256": "bce20bfdeb1bf2b8bbd9a641ff6b56964b57c0bb7ae04b9c46668d1818ec9709",
+        "virtualFilesCompared": 4377,
+        "sources": [
+          {
+            "path": "scenario/ffa/commands.js",
+            "bytes": 95214,
+            "sha256": "af3fdb67bd9b469394c32b9cb3d11fa19be1f4cfaeb8d6adbf7c5ad8ea524f1e"
+          }
+        ]
+      },
+      {
+        "loader": "app/src/main/assets/warzone/warzone2100-campaign.js",
+        "data": "app/src/main/assets/warzone/warzone2100-campaign.data",
+        "onlyChangedVirtualFile": "/data/base/script/campaign/mobile/campaign-bridge.js",
+        "originalDataPrefixBytes": 78797477,
+        "originalDataPrefixSHA256": "70d333a1b58870b34e9922e83f6c077cc2fc085219d00e7161ba98db6ae1c2e3",
+        "appendedCommandBytes": 100644,
+        "appendedCommandSHA256": "86757443fa83551aef883107bab000edd54ff126cb5ba3e30cfcc10b220b350b",
+        "compiledProgramBodySHA256": "5804365816391f247c2eb75a3a26c9bc0ef14b230aa0e53af00385ed910eebca",
+        "virtualFilesCompared": 4300,
+        "sources": [
+          {
+            "path": "campaign/mobile-events.js",
+            "bytes": 4964,
+            "sha256": "3f1f8754b781dfc690e72cb114372872a73ae4a2f7e84424e1745d827f5b1a91"
+          },
+          {
+            "path": "campaign/research-bridge.js",
+            "bytes": 14423,
+            "sha256": "c812aa9b26d2cb758a1b078fc7a3824a0d1a5bc6dd34596ce6836253aa9ae8cb"
+          },
+          {
+            "path": "campaign/commands.js",
+            "bytes": 81442,
+            "sha256": "78947e16c9f9c9e292639dede164a4f78d270f31dfefe15099b9065a4147bbc0"
+          }
+        ]
+      }
+    ]
+  },
+  "certificateSHA256": "4499efe00477c7c724c06a1dd96f935864548665c13ab5e2bd0a9c0f83f7cb15",
+  "changedAPKMembers": [
+    "AndroidManifest.xml",
+    "assets/multiplayer/mobile-ui-runtime.js",
+    "assets/warzone-command-pages.js",
+    "assets/warzone/ui/towers-commands.css",
+    "assets/warzone/warzone2100-campaign.data",
+    "assets/warzone/warzone2100-campaign.js",
+    "assets/warzone/warzone2100-ffa.data",
+    "assets/warzone/warzone2100-ffa.js",
+    "assets/warzone/warzone2100-towers-052.js",
+    "assets/warzone/warzone2100.data",
+    "classes3.dex"
+  ],
+  "everyBaselineAPKMemberRetained": true,
+  "allAPKAssetsMatchSource": true,
+  "allOtherAssetsResourcesAndNativeLibrariesFrozen": true,
+  "bundledMusicFrozen": true,
+  "compiledMultiplayerClientByteIdenticalTo076": true,
+  "livePhoneAdsAndEmulatorFallbackRetained": true,
+  "maximumAPKZipGapBytes": 4096,
+  "generatedBuildConfigSHA256": "da872088904a218047e2e3732407b0818a589bf0151a5ea323b797d95551f836",
+  "nativeBuildPerformed": false,
+  "emulatorUsed": false,
+  "androidGameplayVerified": false,
+  "actualAndroidViewsExecuted": false,
+  "offlineHostChecksPassed": true,
+  "buildChecksPassed": true,
+  "packageChecksPassed": true,
+  "liveAdsTested": false,
+  "githubPublished": false,
+  "vpsChanged": false,
+  "recordedUTC": "2026-11-14T17:29:11.894797+00:00"
+}

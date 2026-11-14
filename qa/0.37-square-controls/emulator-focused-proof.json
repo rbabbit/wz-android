@@ -1,0 +1,248 @@
+{
+  "version": "0.37",
+  "candidateAPK_SHA256": "0b4c71b7f16815fc18f53c44ec60ecb942dbeea8e054f152a477ffba793f0fdf",
+  "emulatorUsed": true,
+  "gameplayVerified": false,
+  "newGameplayBehaviorClaimed": false,
+  "nativeRuntimeChanged": false,
+  "testAdsOnly": true,
+  "liveAdsTested": false,
+  "audibleAudioVerified": false,
+  "smallPhoneConfigurations": [
+    {
+      "mode": "small",
+      "physicalWidth": 800,
+      "physicalHeight": 480,
+      "densityDpi": 240,
+      "fontScale": 1.3
+    },
+    {
+      "mode": "normal",
+      "physicalWidth": 1080,
+      "physicalHeight": 600,
+      "densityDpi": 240,
+      "fontScale": 1.0
+    },
+    {
+      "mode": "wide",
+      "physicalWidth": 1280,
+      "physicalHeight": 800,
+      "densityDpi": 240,
+      "fontScale": 1.0
+    }
+  ],
+  "focusedObservations": {
+    "squareControlsLayoutVerified": true,
+    "outerWidthAndFooterPreservedVerified": true,
+    "sixControlActionsVerified": true,
+    "smallScreenAndTextVerified": true
+  },
+  "checks": [
+    {
+      "name": "Small enlarged-text controls are square, unclipped, and keep the existing footer usable",
+      "passed": true,
+      "observation": "qa/0.37-square-controls/delivery-small.json"
+    },
+    {
+      "name": "Six existing actions and both footer routes remain usable with native acknowledgements",
+      "passed": true,
+      "observation": "qa/0.37-square-controls/delivery-normal.json"
+    },
+    {
+      "name": "Physical-wide compact layout retains square controls, original icons/labels/width and separate footer; noncompact Build branch remains unverified",
+      "passed": true,
+      "observation": "qa/0.37-square-controls/delivery-wide.json"
+    }
+  ],
+  "evidenceFiles": [
+    {
+      "path": "qa/0.37-square-controls/delivery-normal-footer-production.png",
+      "sha256": "5393ff28e4f6487a09bd606406d5c73c64358f70fb60a1e47f4c157ba6a0cfbf"
+    },
+    {
+      "path": "qa/0.37-square-controls/delivery-normal-footer-research.png",
+      "sha256": "4fe3e5ca92ce25dbc7d3326d8c466c6759a6fe9b3d6e7caa9c12e9616c9c7d6f"
+    },
+    {
+      "path": "qa/0.37-square-controls/delivery-normal-restored-controls.png",
+      "sha256": "20ba3e88597e515fd5693f4e7a6ba28a40bbadbcddd2acaa7ac56606a3702a3e"
+    },
+    {
+      "path": "qa/0.37-square-controls/delivery-normal-square-controls.png",
+      "sha256": "287b148f3b75985134b0716fa7c571e7baf8881d25a0b4e97ee3c3e54cea4c20"
+    },
+    {
+      "path": "qa/0.37-square-controls/delivery-small-footer-production.png",
+      "sha256": "f49f11d635b5db3fde2dd35deede51c880272d632eb86b5b0a55968ea6fb0d6d"
+    },
+    {
+      "path": "qa/0.37-square-controls/delivery-small-footer-research.png",
+      "sha256": "0667aab28129f5019e90a9083c3e163741b85467fc028e6ae0f64340401cd84e"
+    },
+    {
+      "path": "qa/0.37-square-controls/delivery-small-restored-controls.png",
+      "sha256": "4d2ac4ad30b2529f9c157cf69747e995de28b7cb3aa671bbee8079682892e95e"
+    },
+    {
+      "path": "qa/0.37-square-controls/delivery-small-square-controls.png",
+      "sha256": "52f1a9d9a54d2b20d2d830b218add2de0065c9f854539259876224b28081601e"
+    },
+    {
+      "path": "qa/0.37-square-controls/delivery-wide-physical-controls.png",
+      "sha256": "0a39125a1035e333b314b12902990aa0c7ab7fc461f4553b8baeaf0b6968b0f8"
+    }
+  ],
+  "supportingObservations": [
+    {
+      "path": "qa/0.37-square-controls/delivery-small.json",
+      "sha256": "4b157aa8d8436a1cfcfccd9e5767d7329276fc0643de4399ee1e0aba1c6df0ea"
+    },
+    {
+      "path": "qa/0.37-square-controls/delivery-normal.json",
+      "sha256": "b5c1ad63cd4428e72485bede4c4c76719a549e0e31fd0be6f3375dda3110b8d6"
+    },
+    {
+      "path": "qa/0.37-square-controls/delivery-wide.json",
+      "sha256": "e35b1e43af8a65f338c8bce2908780ef9b0d9181137219e7af53583bd99a2ffb"
+    },
+    {
+      "path": "qa/0.37-square-controls/emulator-restoration.json",
+      "sha256": "561e0b2d09b4f8418b9c66f2f48626b4c22468d2f667534756bbb564712eb941"
+    },
+    {
+      "path": "tools/qa-square-controls-037.cjs",
+      "sha256": "21125624142f165b951ca0d9708762b88a0d5c9eb6316d918cc505bae0e2c9e2"
+    },
+    {
+      "path": "tools/record-square-controls-037.py",
+      "sha256": "2097194bae8dd3a97f283e00536dde95b79b34b1a0081057e36618a5ed55d4a5"
+    },
+    {
+      "path": "qa/0.37-square-controls/restored-original-home.png",
+      "sha256": "21989246c5b5631515525f49aa21fc05f81ff42c0dec2040fbda30b166b26f8f"
+    },
+    {
+      "path": "qa/0.37-square-controls/restore-startup-timeout.png",
+      "sha256": "0a5500a6fa11bef15ad8bb2413371ff166554fd8985c3a23cb24fc7fd4b43c3c"
+    },
+    {
+      "path": "qa/0.37-square-controls/design-qa-result.json",
+      "sha256": "c25a336fdcb57b7d31974683d0670c365f8d1d5899eef80b7ae3bbfae14c9903"
+    },
+    {
+      "path": "design-qa.md",
+      "sha256": "d9cae50ff21eea58560ff764a4e84cafb9745966f479e3a826b8d80fdf9f3c12"
+    },
+    {
+      "path": "qa/0.37-square-controls/source-vs-delivery-controls.png",
+      "sha256": "364a4c19476d234ba28482dceb0e7a2fb30c39ff8a647312020ce8cf6533603b"
+    },
+    {
+      "path": "qa/0.37-square-controls/design-comparison-inputs.json",
+      "sha256": "517066cebbe0b18439c4c162a1071435c356632e086274177970bffe196f6adc"
+    },
+    {
+      "path": "qa/0.37-square-controls/enlarged-label-before-after.png",
+      "sha256": "51c43606b9e2aa72d739ac53117e57af2ab0d99ccbc6387701b5d643e8ea466b"
+    },
+    {
+      "path": "qa/0.37-square-controls/fixture-auto-collapsed.json",
+      "sha256": "9534e50c28798157e0355a8dbd05cd5ef548cdb7ec12b0f85d6a615de61f9ee5"
+    },
+    {
+      "path": "qa/0.37-square-controls/fixture-combat-selection.json",
+      "sha256": "867f838c062bc3f82c30cd49b9f83844bb43c0fcfc6a00b26e59ff540d5c87bc"
+    },
+    {
+      "path": "qa/0.37-square-controls/fixture-enlarged-gap.json",
+      "sha256": "df52d89eb6d2ea805a92506315eeed4cdb17a89189aa1ebc39042f9fbbdcc215"
+    },
+    {
+      "path": "qa/0.37-square-controls/fixture-final-pause-sample.json",
+      "sha256": "de0c800a23a7cf10d96d73231fa0f1206b918539b429c2354fb8546fdc84ff5c"
+    },
+    {
+      "path": "qa/0.37-square-controls/fixture-toggle-state.json",
+      "sha256": "58b16e6c02b0b76bed409ee26eee069ce92a4a3bb527dc33fe38f8e786ee5dc1"
+    },
+    {
+      "path": "qa/0.37-square-controls/fixture-wide-compact-viewport.json",
+      "sha256": "b770714188b5b46b8ddf409dff22971c5c423fa236b16e0bc914b13dc9ecadef"
+    },
+    {
+      "path": "qa/0.37-square-controls/fixture-wide-viewport-attempt.json",
+      "sha256": "17ecb1f61a5fec9113b271c01f104ca2a985aafbe3f6ab9090ca85eb0dd2dc74"
+    },
+    {
+      "path": "qa/0.37-square-controls/pre-fix-enlarged-label.json",
+      "sha256": "4fcde8d2f3b3b16a8d3d983f5b6e17036f098e3063d0fb85a5dfff9426b2888b"
+    },
+    {
+      "path": "qa/0.37-square-controls/pre-fix-enlarged-label.png",
+      "sha256": "a62aa9d9e3d362b38c449585ccbf53fdf6cdbad8a22e2bebd479430b34578c1e"
+    }
+  ],
+  "productionDisclosure": "One ordinary paid machinegun vehicle is produced through the existing command adapter to exercise ALL UNITS, which selects combat units rather than constructors. No units, power, research or positions are seeded.",
+  "correctedProductIssue": {
+    "path": "qa/0.37-square-controls/pre-fix-enlarged-label.json",
+    "description": "An actual one-pixel Intelligence-label overflow at small enlarged text was fixed by CSS span bounds/wrapping and a narrow text-size adjustment.",
+    "classification": "real related CSS layout defect corrected before final APK"
+  },
+  "correctedFixtureObservations": [
+    {
+      "path": "qa/0.37-square-controls/fixture-auto-collapsed.json",
+      "classification": "corrected fixture expectation/setup",
+      "passed": false
+    },
+    {
+      "path": "qa/0.37-square-controls/fixture-combat-selection.json",
+      "classification": "corrected fixture expectation/setup",
+      "passed": false
+    },
+    {
+      "path": "qa/0.37-square-controls/fixture-enlarged-gap.json",
+      "classification": "corrected fixture expectation/setup",
+      "passed": false
+    },
+    {
+      "path": "qa/0.37-square-controls/fixture-final-pause-sample.json",
+      "classification": "corrected fixture expectation/setup",
+      "passed": false
+    },
+    {
+      "path": "qa/0.37-square-controls/fixture-toggle-state.json",
+      "classification": "corrected fixture expectation/setup",
+      "passed": false
+    },
+    {
+      "path": "qa/0.37-square-controls/fixture-wide-compact-viewport.json",
+      "classification": "corrected fixture expectation/setup",
+      "passed": false
+    },
+    {
+      "path": "qa/0.37-square-controls/fixture-wide-viewport-attempt.json",
+      "classification": "unverified optional noncompact viewport attempt",
+      "passed": false
+    }
+  ],
+  "noncompactBranchVerified": false,
+  "noncompactBranchDisclosure": "Physical1280x800 rendered957x598 CSS and remained compact. A temporary CDP override reached noncompact DOM geometry but Android retained visual scale/cropped it; the optional Build toggle was covered, so that interaction/gap is not accepted. The override was cleared and app stopped.",
+  "emulatorRestored": true,
+  "restoredOriginalPrivateFiles": 98,
+  "restoredOriginalProfile": {
+    "physicalWidth": 1080,
+    "physicalHeight": 600,
+    "densityDpi": 240,
+    "fontScale": 1.0
+  },
+  "limitations": [
+    "CSS layout and existing-control checks only, not a new gameplay or complete-match acceptance pass.",
+    "One ordinary paid machinegun vehicle supported ALL UNITS, which selects combat units rather than construction trucks; no units/research/power/positions were seeded.",
+    "Wrong combat-selection expectations, repeated toggle state, automatic panel collapse, a late dead-worker fixture and a queued-clock pause assertion were corrected in the driver rather than by unrelated app changes.",
+    "The driver force-stopped the test app after each profile; no new pause/timing behavior is claimed.",
+    "Observed emulator cold-start/profile-change FocusEvent startup timeouts recovered with cold restart or the system Wait action, including after restoring the original profile. Startup code was unchanged and was not audited in this CSS task; no CSS cause is asserted.",
+    "The noncompact Build-sidebar interaction/gap was not verified; only the physical-wide compact layout passed.",
+    "No audible audio test or live-ad test; native runtime, music, rules, wallet/saves and ads remain byte-identical to v0.36."
+  ],
+  "recordedUTC": "2026-11-10T16:26:39.802838Z"
+}

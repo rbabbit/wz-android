@@ -1,0 +1,188 @@
+{
+  "version": "0.50",
+  "passed": true,
+  "emulatorUsed": true,
+  "browserUsed": false,
+  "androidWebViewUsed": true,
+  "androidRuntimeExecuted": true,
+  "actualNativeEngineExecuted": true,
+  "candidateAPK_SHA256": "b0e75ce1cbd960594da99531862b65873c3a8a3f27f5daede89d3de2800119c7",
+  "seeded": false,
+  "device": "emulator-5558",
+  "avd": "Pixel_10_Pro",
+  "viewport": {
+    "width": 1280,
+    "height": 576,
+    "frame": {
+      "x": 0,
+      "y": 58.000003814697266,
+      "width": 1280.0001220703125,
+      "height": 518
+    },
+    "sx": 1.875,
+    "sy": 1.875
+  },
+  "input": "Real Android input touchscreen swipes/taps, trusted WebView CDP multi-touch/rapid input, real native Views for Back/Home/Saved Games",
+  "releaseComparison": {
+    "v049": {
+      "dx": 96.72019287172697,
+      "dy": -12.043472533116557,
+      "pixels": 97.46712748306476
+    },
+    "v050": {
+      "dx": -7.021371446067064,
+      "dy": -1.7739066237921435,
+      "pixels": 7.241988794079948
+    }
+  },
+  "rapidSwipeIntervalsMs": [
+    184.11999999999534,
+    183.65000000002328
+  ],
+  "checks": [
+    "Four-direction normal Android finger drags move the native camera and settle without held input",
+    "Rapid repeated short swipes acquire separate native camera movement within the desktop double-click interval",
+    "Captured drag across the game/header boundary stays bounded and the next drag works",
+    "Minimap drag moves the native view separately, then normal battlefield dragging remains available",
+    "One-finger pan hands off to two-finger pan, and pinch zoom restores normal input",
+    "Existing truck selected by real world tap; Build selected four visible native constructors",
+    "Two normal queued GuardTower1 sites completed, with native structure IDs/build points and idle workers",
+    "Two normal factory productions completed; authoritative snapshot contains six trucks and idle factories",
+    "Eight Research/Manufacturing/Queue/Help toggle returns restored input",
+    "Android Back during held drag, Cancel, fresh native pan, Return Home to Greenhaven",
+    "Actual phone Save archive loaded via native Saved Games; native world and fresh camera input restored"
+  ],
+  "nativeBuiltTowers": [
+    {
+      "id": 160119,
+      "position": [
+        4032,
+        8000,
+        128
+      ],
+      "build": 300
+    },
+    {
+      "id": 160117,
+      "position": [
+        3776,
+        8000,
+        128
+      ],
+      "build": 300
+    }
+  ],
+  "producedTruckIDs": [
+    160159,
+    160121,
+    160007,
+    160005,
+    160003,
+    160001
+  ],
+  "gameplayVerifiedScope": "Camera/input and related selection, construction, production, navigation and save/load journey",
+  "terrainVisualCorrectnessVerified": false,
+  "physicalPhoneFramePacingVerified": false,
+  "limitation": "Terrain textures were black in both baseline and candidate under both emulator graphics backends. Visible models/minimap, actual geometry and native projection were inspected. No terrain rendering or graphics code changed.",
+  "testPreferenceRestored": "Original native textureCompression=1; test-only uncompressed attempt did not resolve the existing emulator terrain appearance",
+  "rewardedAdsWatched": false,
+  "adRequestsMadeThroughRewardControls": false,
+  "fixtureCorrections": [
+    "Initial sequential per-event CDP latency triggered long press; ordinary panning uses Android swipe",
+    "Completed construction sites are removed, so verify native structures instead of waiting for retained done rows",
+    "Direct saved loads need not install the touch GL observer until first input; pre-input readiness uses observed terrain draws"
+  ],
+  "sources": [
+    {
+      "path": "app/src/main/assets/warzone-touch-controls.js",
+      "sha256": "0dea5eeef45404354aa549da01f0514418722c012667467a14fde29f5a61493a"
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100.wasm",
+      "sha256": "987a5bcc96ac95ca3ad55ba64b10bf81b58eda182f76b1263d168445b65d9aa1"
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100.js",
+      "sha256": "70eaa0af7030a0d3d9604669fd48b5d6bc20ade556d934bb61986a243b2d29b8"
+    },
+    {
+      "path": "app/build.gradle.kts",
+      "sha256": "8f9c6798a0186e5c8e2d24976488b60e88b2e0b7e1f2b07859bd87510f5eac8a"
+    },
+    {
+      "path": "tools/audit-touch-pan-050.cjs",
+      "sha256": "3254652712968d70dff5278ca597892709dfa0d5379f675de718696dff077a72"
+    },
+    {
+      "path": "tools/verify-touch-camera-050.cjs",
+      "sha256": "161999d8d7706cc07c41d59f35d676ec67dab38f41876a4ddaad8412b7290bb2"
+    },
+    {
+      "path": "tools/record-touch-camera-050.py",
+      "sha256": "4dbb0ca82eea038172f32b0e3994bcbec5ac093a9ce68fac6414b005580ce9a2"
+    },
+    {
+      "path": "archive/native-touch-0.50/native-build.json",
+      "sha256": "b36b0c05d4f851d295a514206cc6d5c066bb39c717a36ce95e10e91bb8b444b6"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "archive/touch-camera-0.50/pan-v049-host-before.json",
+      "sha256": "6799f890b1461a86916d5ce0c9f1102259a6026c83a1d4eec8302b7e2ae2b740"
+    },
+    {
+      "path": "archive/touch-camera-0.50/pan-v050-host-after.json",
+      "sha256": "5ade419932ee5fbc1f03e404f3670c837b4f68dc01bfa27b63a4ea441610f008"
+    },
+    {
+      "path": "archive/touch-camera-0.50/camera-journey-050.json",
+      "sha256": "cfe4a4ded213fec60a2effdecb0f3d73cb043cd07ed7ab084bcf09992ae4aa84"
+    },
+    {
+      "path": "archive/touch-camera-0.50/construction-mid.json",
+      "sha256": "1e099ea2c5387e276f028c81604f63b8f4672f433eeef042ce90563f0f84b47b"
+    },
+    {
+      "path": "archive/touch-camera-0.50/construction-complete.json",
+      "sha256": "720be77f9b9f7989c497a1b2ac81b7de9f6a95226b6ff57419d91e8b627701d7"
+    },
+    {
+      "path": "archive/touch-camera-0.50/production-mid.json",
+      "sha256": "83eeaf072e35bbfb27a64802404eabf78a8d39cf6cc5ee4471cfbde6ef1fd9ff"
+    },
+    {
+      "path": "archive/touch-camera-0.50/menu-queue-checks.json",
+      "sha256": "2a0a286f0a7219d30985c5c774626bfb3852bece2e9317c5a8b76325f5ac8394"
+    },
+    {
+      "path": "archive/touch-camera-0.50/back-interrupt-before.json",
+      "sha256": "7d967f153f68ef3e536adfcfca6503dd75cb8fb05118df8607adddf2a0bb781b"
+    },
+    {
+      "path": "archive/touch-camera-0.50/after-saved-load.json",
+      "sha256": "a914d630ada08f51d6d7cf14ee39417c0660d47dd05b0f83d26083bcbd547d2f"
+    },
+    {
+      "path": "archive/touch-camera-0.50/load-return-final.json",
+      "sha256": "7181c60bba94edd3be6ffb4245da0554136f6e6a935b29af3c54913d9e92142c"
+    },
+    {
+      "path": "archive/touch-camera-0.50/pan-v050-after-back-cancel.json",
+      "sha256": "43c882a8b2430b18d6be8b69605783baabbd2ac5c60cdcdc7838f5f374e9d837"
+    },
+    {
+      "path": "archive/touch-camera-0.50/pan-v050-after-saved-load.json",
+      "sha256": "6f1137f3ea1fbc6bc45fb6135779b6d07d2a39a5782f59bba22039a3f9443a1a"
+    },
+    {
+      "path": "archive/touch-camera-0.50/camera50-final-home.png",
+      "sha256": "3d61a4087b09bfe4e88eb12436038703a1dbbfe9eedde06e43ba4d0f6df6a8ba"
+    },
+    {
+      "path": "archive/touch-camera-0.50/camera50-real-back-dialog.png",
+      "sha256": "f154deb3b143eddb09e5d3ae3709a3775ac38746e8106b13e2ebd13623bc46ec"
+    }
+  ],
+  "recordedUTC": "2026-11-11T12:39:09.148202+00:00"
+}

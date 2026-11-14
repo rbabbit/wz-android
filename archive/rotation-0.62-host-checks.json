@@ -1,0 +1,77 @@
+{
+  "version": "0.62",
+  "passed": true,
+  "checksPassed": 14,
+  "checks": [
+    {
+      "name": "Delivered0.61 reproduces stationary-pivot full-circle tilt instead of yaw in both directions",
+      "passed": true
+    },
+    {
+      "name": "Adjacent40px stationary pivots recognize a complete circle in either direction and with either finger stationary in all three modes",
+      "passed": true
+    },
+    {
+      "name": "Normal and wide stationary pivots keep yaw through full circles without producing pitch, translation or zoom",
+      "passed": true
+    },
+    {
+      "name": "A nearly anchored finger and strongly unequal opposing arcs remain rotation rather than midpoint tilt",
+      "passed": true
+    },
+    {
+      "name": "Adjacent equal and unequal opposing vertical strokes recognize angular intent in both directions",
+      "passed": true
+    },
+    {
+      "name": "Continuous diametric and stationary two-circle strokes accumulate beyond360deg with no angular ceiling",
+      "passed": true
+    },
+    {
+      "name": "A long pivot reverses while the same pointers remain active and releases the previous yaw direction",
+      "passed": true
+    },
+    {
+      "name": "True parallel vertical travel and modest unequal parallel travel retain native tilt, with no yaw or pinch",
+      "passed": true
+    },
+    {
+      "name": "Delivered0.61 loses fractional slow tilt; the current adapter retains that travel until a real pitch step",
+      "passed": true
+    },
+    {
+      "name": "Parallel horizontal two-finger travel remains native pan and never becomes rotation",
+      "passed": true
+    },
+    {
+      "name": "Radial pinch remains zoom with both fingers moving or one fixed, expanding and contracting",
+      "passed": true
+    },
+    {
+      "name": "Lifting the moving pivot finger fences its stationary partner until all up, then a new opposite stroke works",
+      "passed": true
+    },
+    {
+      "name": "Native menu fences block pivot rotation and release an existing pivot without replay after return",
+      "passed": true
+    },
+    {
+      "name": "One-finger pan, yaw pulse timing and release/fence functions retain their exact delivered0.61 bodies",
+      "passed": true
+    }
+  ],
+  "emulatorUsed": false,
+  "actualNativeEngineExecuted": false,
+  "scope": "Actual touch JavaScript and prepared DOM/SDL protocol fixtures. Native camera yaw/pitch and visual feel require the exact-APK emulator journey.",
+  "sources": [
+    {
+      "path": "app/src/main/assets/warzone-touch-controls.js",
+      "sha256": "47cafb2cf20443c922755a243fcac8cff3d38d65c2dea938b91a05a70e2d9092"
+    },
+    {
+      "path": "tools/check-touch-rotation-062.cjs",
+      "sha256": "62f8fc2c76a47a527893e470aec5f8bec03901e70488a3a799859616f62c2979"
+    }
+  ],
+  "recordedUTC": "2026-11-12T12:02:39.148Z"
+}

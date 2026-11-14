@@ -1,0 +1,301 @@
+{
+  "schemaVersion": 1,
+  "version": "0.33",
+  "draft": false,
+  "readyForPackaging": true,
+  "candidateAPK_SHA256": "9988786994ef4ee9b3c426bd4af690a9e6f382a94bbeed0dfc351546c51cf0f7",
+  "emulatorUsed": true,
+  "device": "emulator-5556",
+  "gameplayVerified": false,
+  "liveAdsTested": false,
+  "testAdsOnly": true,
+  "smallPhoneConfigurations": [
+    {
+      "physicalWidth": 800,
+      "physicalHeight": 480,
+      "densityDpi": 240,
+      "fontScale": 1.3
+    },
+    {
+      "physicalWidth": 2400,
+      "physicalHeight": 1080,
+      "densityDpi": 420,
+      "fontScale": 1
+    }
+  ],
+  "focusedObservations": {
+    "singleTapPurchaseVerified": true,
+    "saveFeedbackAndPersistenceVerified": true,
+    "homeAndGameLayoutsVerified": true,
+    "privacyAccessVerified": true
+  },
+  "checks": [
+    {
+      "name": "One normal Home Cannon row tap spends 120 crystals and adds exactly one stored fortress (195\u219275)",
+      "passed": true
+    },
+    {
+      "name": "Two normal Pulse row taps add two items; Selected2\u21921 changes allocation without charge or stock loss",
+      "passed": true
+    },
+    {
+      "name": "Unaffordable Home item tap leaves the wallet, inventory and allocation unchanged with inline feedback",
+      "passed": true
+    },
+    {
+      "name": "One live Ripple row tap spends 10 crystals (45\u219235) and acknowledges exactly one native remaining item",
+      "passed": true
+    },
+    {
+      "name": "SAVE acknowledges its first normal ADB header tap synchronously with SAVING and remains disabled while busy",
+      "passed": true
+    },
+    {
+      "name": "A concurrent second public save() call retains the same operation serial and cannot create a duplicate request",
+      "passed": true
+    },
+    {
+      "name": "SAVE displays SAVED only after the native persistence callback and phone archive acknowledge completion",
+      "passed": true
+    },
+    {
+      "name": "Saving again after menu return succeeds; Home Saved Games reloads that exact second slot and preserves native fortress/Ripple allowances",
+      "passed": true
+    },
+    {
+      "name": "Top Gain action opens a real Google sample rewarded ad; earned callback credits 10 crystals once (35\u219245\u219245)",
+      "passed": true
+    },
+    {
+      "name": "Top Privacy action opens the real Google consent form; normal Do not consent returns to Home Rewards without a second ad grant",
+      "passed": true
+    },
+    {
+      "name": "Current small-screen Home and in-game Rewards show compact item rows, top Gain/category controls and no purchase footer or giant Rewards heading",
+      "passed": true
+    },
+    {
+      "name": "Final 2400x1080 phone Home and in-game Rewards show the same compact direct-tap rows, top Gain/Privacy and four fortress entries without a heading, purchase controls or footer",
+      "passed": true
+    },
+    {
+      "name": "On the phone viewport SAVE also shows disabled SAVING immediately and acknowledged SAVED after a fresh archive; the loaded native Ripple allowance remains1",
+      "passed": true
+    },
+    {
+      "name": "All97 original app-private files, wallet195, saved games, designs and consent preferences are restored byte-for-byte before relaunch",
+      "passed": true
+    },
+    {
+      "name": "Original display override600x1080, density240, font1, airplane disabled, WiFi/mobile1 and null installer-reserve setting are restored",
+      "passed": true
+    }
+  ],
+  "pendingChecks": [],
+  "fixtureProvenance": {
+    "startingWallet": 195,
+    "seededWallet": false,
+    "normalPurchasesOnly": true,
+    "sampleAdsOnly": true,
+    "syntheticRewardCallbacksUsed": false,
+    "duplicateSaveCheck": "Normal ADB header tap starts save. A direct second public save() call while busy tests its concurrency guard; it does not create a separate request.",
+    "temporaryPrivacyChoice": "Google form Do not consent was temporary. Root restored all original97 private files, including consent preferences, before relaunch.",
+    "intermediateAPKReportsExcluded": true
+  },
+  "limitations": [
+    "Focused Rewards/Save/ad/privacy/layout observations only; no full-game, all-map, combat, physical-phone or live-ad acceptance claim.",
+    "Black terrain is present in the emulator baseline and delivery captures; the native engine/map assets remain frozen against v0.32.",
+    "The unchanged native QuickSave console message may appear while saving; new SAVE feedback is the header state.",
+    "The selected mock is 1920x819; actual phone captures are 2400x1080. Compare native drawer proportions, hierarchy and user-approved deviations, not unrelated backdrop pixels.",
+    "Source VM fixtures (8 HUD, 9 save-protocol and existing regressions) are supporting code evidence, not emulator or native-runtime evidence."
+  ],
+  "evidenceFiles": [
+    {
+      "path": "qa/0.33-rewards-save/selected-mock-source.png",
+      "sha256": "35f3b27973e24f9dbaafc9d2c87c257d8ea39040931e66149c58497f52ba391f"
+    },
+    {
+      "path": "qa/0.33-rewards-save/home-rewards-first.png",
+      "sha256": "caff2e9aa0e37509061325f5347acc5cc7b3ae9eab27269d2672668d8c388549"
+    },
+    {
+      "path": "qa/0.33-rewards-save/home-one-cannon.png",
+      "sha256": "d945846496e2767cf90ae57ed4dfa36e02616ab68708e9ccb229dfdb416819dc"
+    },
+    {
+      "path": "qa/0.33-rewards-save/home-owned-chooser.png",
+      "sha256": "5070df0b6868be7568c97d59f2609bfb7b25fb5963937eb78dee3eb17fc0efb8"
+    },
+    {
+      "path": "qa/0.33-rewards-save/home-partial-owned.png",
+      "sha256": "22781273c7959eb5362fc891f04c45986458a7b4ff02bc08ae9370da02493671"
+    },
+    {
+      "path": "qa/0.33-rewards-save/home-insufficient.png",
+      "sha256": "85f0820d99bc37e60fc04158d4610466a151c9ee5867f0b94fc003e65db29ee1"
+    },
+    {
+      "path": "qa/0.33-rewards-save/game-rewards-compact.png",
+      "sha256": "c1373e251ac07b6e3e46d31c133250b80a837b9ed5a27fc61270ccc754ee3a74"
+    },
+    {
+      "path": "qa/0.33-rewards-save/game-one-ripple.png",
+      "sha256": "7f15f14622999fd4372a033008d3671bfb82f119deab58b9eebf02e53db0c93e"
+    },
+    {
+      "path": "qa/0.33-rewards-save/save-immediate-feedback.png",
+      "sha256": "05a1c0e85d961f53b7713b6e6144bf8a0d28c43d506d3a3184f949b2bcf0fdc4"
+    },
+    {
+      "path": "qa/0.33-rewards-save/save-acknowledged.png",
+      "sha256": "f47c6805a8313cfaa22eb72ee6adb4f3f2c6004bfbaf359db697063779e831b9"
+    },
+    {
+      "path": "qa/0.33-rewards-save/saved-game-list.png",
+      "sha256": "89162d6a790894623f3f08aea12f2c3f766c5092116279b3edbe60832a80a920"
+    },
+    {
+      "path": "qa/0.33-rewards-save/saved-game-reloaded.png",
+      "sha256": "def5ab915a16f0267c36841d2235eab482239036e03195d474338b1776aff666"
+    },
+    {
+      "path": "qa/0.33-rewards-save/delivery-home-user-phone.png",
+      "sha256": "88f9b74682f4d9dee946591ab804aa017440514ad9987f0aff40794a44ae309e"
+    },
+    {
+      "path": "qa/0.33-rewards-save/delivery-gain-requested.png",
+      "sha256": "32d16baea619be021f5d0864b2958741d4f7c685f02295b5d8e930d6016f3307"
+    },
+    {
+      "path": "qa/0.33-rewards-save/delivery-google-test-ad.png",
+      "sha256": "a4c869fe2b29c16523be05e636c62837e05bbb02a9283cead22e950413b5c63c"
+    },
+    {
+      "path": "qa/0.33-rewards-save/delivery-privacy-form.png",
+      "sha256": "31d07ae0529f924f6ab19b63c35e385419b00e8b8b2728c91d381299aede622f"
+    },
+    {
+      "path": "qa/0.33-rewards-save/delivery-privacy-returned.png",
+      "sha256": "391028fe231d9fcb9473e48d60f507190b7685253d48de3dc203a9e85ee67f3c"
+    },
+    {
+      "path": "qa/0.33-rewards-save/delivery-game-user-phone.png",
+      "sha256": "76584208c322b17993c26d778ccd0a8b805ff93ebed50acf8e96e7d95c71ac4b"
+    },
+    {
+      "path": "qa/0.33-rewards-save/delivery-phone-saving.png",
+      "sha256": "b4df0148bc534800f87ec0b41af9bad0a5dc8570ea01ccffdf8b597c177917ac"
+    },
+    {
+      "path": "qa/0.33-rewards-save/delivery-phone-saved.png",
+      "sha256": "c6c89ebf1ab2f6013ba559ba108476d3dfff9db5de0116d78ee0ab226d19c648"
+    }
+  ],
+  "supportingObservations": [
+    {
+      "path": "qa/0.33-rewards-save/home-purchases.json",
+      "sha256": "aeb112ce50539b32509c1ce012faf8f108110d94b056d0da041891bc717dc93f"
+    },
+    {
+      "path": "qa/0.33-rewards-save/game-save-purchase.json",
+      "sha256": "678b6bb9169c3e951123ae8e3fb39042f20b3888d9f7ff12c0a6fde864899b13"
+    },
+    {
+      "path": "qa/0.33-rewards-save/save-repeated-menu-return.json",
+      "sha256": "2005b1bb5be6d02be58beb46cb296ed686a40efdaddce350a136dcbe1985346b"
+    },
+    {
+      "path": "qa/0.33-rewards-save/saved-game-reloaded.json",
+      "sha256": "f868e770e1575008cf485624ea0cb284205e82e7048ebb21ff73cac2a6584c12"
+    },
+    {
+      "path": "qa/0.33-rewards-save/delivery-ad-before.json",
+      "sha256": "63f83a924596803328cb5f8dab3f40dac100e1ece4effacc462c41add5ebc7db"
+    },
+    {
+      "path": "qa/0.33-rewards-save/delivery-ad-privacy.json",
+      "sha256": "3b4be5420cb0a8bc8d800cfd3aa1cdac11fffca8544518b5e33ca80692c0bf6a"
+    },
+    {
+      "path": "qa/0.33-rewards-save/delivery-phone-game.json",
+      "sha256": "ce471f6b1704ad82495950da4636ced30c334e2d8c3302be0ab6203782004528"
+    },
+    {
+      "path": "qa/0.33-rewards-save/original-data-restored.json",
+      "sha256": "93197d1a7df4ceab334ebbf2e8000f15ae8c28ded3be424278402f1c4d30d097"
+    },
+    {
+      "path": "qa/0.33-rewards-save/environment-restored.json",
+      "sha256": "370ab877d46346279084b95d8c8161e47dc7aa51993fde445233213a9bc84dfb"
+    },
+    {
+      "path": "qa/0.33-rewards-save/design-qa.md",
+      "sha256": "e6a73e002f200948fbdad836096b3893c7ef4100554269259e4eaf0ceed696fa"
+    },
+    {
+      "path": "archive/save-hud-0.33-source-checks.json",
+      "sha256": "c3a6e038f9aea0403e886fc62d11abd213d6b4b6600adc9d8fbffe998d4a97ce"
+    },
+    {
+      "path": "archive/save-feedback-0.33-source-checks.json",
+      "sha256": "1ca04a269511e1b02a1c1a071a50c7d87fb492c3ac362faf73383a66186feeeb"
+    },
+    {
+      "path": "archive/rewards-save-0.33-source-checks.json",
+      "sha256": "bff61ca69e60b7b7419eb0b293b59c2756025881efd1c825b4633b4634bcccfd"
+    }
+  ],
+  "recordedUTC": "2026-11-10T00:39:54.170934+00:00",
+  "supportingSourceReports": [
+    {
+      "path": "archive/save-hud-0.33-source-checks.json",
+      "sha256": "c3a6e038f9aea0403e886fc62d11abd213d6b4b6600adc9d8fbffe998d4a97ce",
+      "scope": "Actual extracted HUD functions executed together against small DOM/window/clock stubs; no browser paint, native game or emulator execution.",
+      "emulatorUsed": false,
+      "groupsOrChecksPassed": 8
+    },
+    {
+      "path": "archive/save-feedback-0.33-source-checks.json",
+      "sha256": "1ca04a269511e1b02a1c1a071a50c7d87fb492c3ac362faf73383a66186feeeb",
+      "scope": "Source protocol fixtures with the existing native/Android stubs; not gameplay or visual acceptance.",
+      "emulatorUsed": false,
+      "groupsOrChecksPassed": 9
+    },
+    {
+      "path": "archive/rewards-save-0.33-source-checks.json",
+      "sha256": "bff61ca69e60b7b7419eb0b293b59c2756025881efd1c825b4633b4634bcccfd",
+      "scope": "Source preservation and approved file scope; no UI, touch, native save or purchase behavior claim.",
+      "emulatorUsed": false,
+      "groupsOrChecksPassed": 7
+    }
+  ],
+  "restoration": {
+    "allOriginalPrivateFileBytesMatch": true,
+    "fileCount": 97,
+    "restoredBeforeAppLaunch": true,
+    "originalWalletBalance": 195,
+    "originalConsentPreferencesRestored": true,
+    "originalSavedGamesAndDesignsRestored": true,
+    "backupSHA256": "835dcc9b26dcdf0cb30049d9124c7491237d649fdb3e6643654db619d122d2a3",
+    "recordedUTC": "2026-11-10T00:37:31.187052+00:00",
+    "environment": {
+      "display": "Physical size: 1280x2856\r\nOverride size: 600x1080",
+      "density": "Physical density: 480\r\nOverride density: 240",
+      "fontScale": 1,
+      "airplane": "disabled",
+      "wifi": "1",
+      "mobile": "1",
+      "installerReserve": "null"
+    }
+  },
+  "rootFinalEvidenceConfirmed": true,
+  "visualQA": {
+    "path": "qa/0.33-rewards-save/design-qa.md",
+    "sha256": "e6a73e002f200948fbdad836096b3893c7ef4100554269259e4eaf0ceed696fa",
+    "finalResult": "passed",
+    "sourceVisual": {
+      "path": "qa/0.33-rewards-save/selected-mock-source.png",
+      "sha256": "35f3b27973e24f9dbaafc9d2c87c257d8ea39040931e66149c58497f52ba391f"
+    }
+  }
+}

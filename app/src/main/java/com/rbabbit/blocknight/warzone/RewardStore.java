@@ -30,6 +30,18 @@ final class RewardStore {
   }
 
   synchronized int balance() { return ledger.balance; }
+  synchronized Set<String> completedMaps() {
+    return Collections.unmodifiableSet(new LinkedHashSet<>(ledger.completed));
+  }
+  synchronized int reconcileDifficultyBonuses(Map<String, Set<String>> actualCatalogGroups) {
+    if (actualCatalogGroups == null) throw new IllegalArgumentException("Missing difficulty map catalog.");
+    Map<String, Set<String>> groups = new LinkedHashMap<>();
+    for (Map.Entry<String, Set<String>> group : actualCatalogGroups.entrySet()) {
+      if (group.getValue() == null) throw new IllegalArgumentException("Missing difficulty map identities.");
+      groups.put(group.getKey(), Collections.unmodifiableSet(new LinkedHashSet<>(group.getValue())));
+    }
+    return transaction(() -> ledger.reconcileDifficultyBonuses(groups));
+  }
   synchronized String pendingAdReward() { return ledger.pendingAdReward; }
   /** Called by the native ad controller before a single SDK presentation. */
   synchronized String prepareAdReward() {
@@ -116,6 +128,12 @@ final class RewardStore {
   }
   synchronized RewardLedger.Receipt finish(String session, boolean won, String difficulty, int total, boolean authoritativeRemaining) {
     return transaction(() -> ledger.finish(session, won, difficulty, total, authoritativeRemaining));
+  }
+  synchronized RewardLedger.Receipt finish(String session, boolean won, String difficulty, int total,
+      boolean authoritativeRemaining, Set<String> requiredDifficultyMapIds) {
+    if (requiredDifficultyMapIds == null) throw new IllegalArgumentException("Missing difficulty map catalog.");
+    Set<String> required = Collections.unmodifiableSet(new LinkedHashSet<>(requiredDifficultyMapIds));
+    return transaction(() -> ledger.finish(session, won, difficulty, total, authoritativeRemaining, required));
   }
   synchronized void abandon(String session, boolean authoritative) {
     RewardLedger.Run run = ledger.runs.get(session);
@@ -293,10 +311,11 @@ final class RewardStore {
 
   private static String encode(RewardLedger value) {
     try {
-      JSONObject root = new JSONObject().put("version", 3).put("balance", value.balance)
+      JSONObject root = new JSONObject().put("version", 4).put("balance", value.balance)
           .put("pendingAdReward", value.pendingAdReward)
           .put("inventory", new JSONObject(value.inventory)).put("loadout", new JSONObject(value.loadout))
-          .put("completed", new JSONArray(value.completed));
+          .put("completed", new JSONArray(value.completed))
+          .put("claimedDifficultyBonuses", new JSONArray(value.claimedDifficultyBonuses));
       JSONArray runs = new JSONArray();
       for (RewardLedger.Run run : value.runs.values()) {
         JSONObject item = new JSONObject().put("session", run.session).put("map", run.map)
@@ -306,7 +325,8 @@ final class RewardStore {
             .put("applied", run.applied).put("settled", run.settled).put("suspended", run.suspended)
             .put("pinned", run.pinned).put("winPaid", run.winPaid).put("returnAllowed", run.returnAllowed)
             .put("inventoryPurchaseFloor", run.inventoryPurchaseFloor).put("awaitingResumeInventory", run.awaitingResumeInventory)
-            .put("completionCredits", run.completionCredits).put("wave", run.wave);
+            .put("completionCredits", run.completionCredits).put("difficultyCredits", run.difficultyCredits)
+            .put("wave", run.wave);
         JSONArray transactions = new JSONArray();
         for (RewardLedger.LiveTx tx : run.transactions.values()) transactions.put(new JSONObject()
             .put("id", tx.id).put("itemId", tx.itemId).put("quantity", tx.quantity).put("cost", tx.cost).put("status", tx.status));
@@ -346,7 +366,7 @@ final class RewardStore {
     try {
       JSONObject root = new JSONObject(saved);
       int version = root.getInt("version");
-      if (version != 1 && version != 2 && version != 3) throw new IllegalArgumentException("Unsupported wallet version.");
+      if (version != 1 && version != 2 && version != 3 && version != 4) throw new IllegalArgumentException("Unsupported wallet version.");
       RewardLedger value = new RewardLedger();
       value.balance = root.getInt("balance");
       if (value.balance < 0) throw new IllegalArgumentException("Invalid wallet balance.");
@@ -358,6 +378,14 @@ final class RewardStore {
         throw new IllegalArgumentException("Invalid saved ad reward identity.");
       JSONArray completed = root.getJSONArray("completed");
       for (int i = 0; i < completed.length(); i++) value.completed.add(completed.getString(i));
+      if (version >= 4) {
+        JSONArray claimed = root.getJSONArray("claimedDifficultyBonuses");
+        for (int i = 0; i < claimed.length(); i++) {
+          String difficulty = claimed.getString(i);
+          if (!RewardLedger.validDifficulty(difficulty) || !value.claimedDifficultyBonuses.add(difficulty))
+            throw new IllegalArgumentException("Invalid saved difficulty completion history.");
+        }
+      }
       if (version == 1) {
         JSONObject pending = root.getJSONObject("pending");
         for (Iterator<String> it = pending.keys(); it.hasNext();) migrateItems(value, pending.getJSONArray(it.next()));
@@ -414,6 +442,12 @@ final class RewardStore {
           run.completionCredits = item.getInt("completionCredits");
           if (run.completionCredits < 0 || run.completionCredits > 150)
             throw new IllegalArgumentException("Invalid completion reward history.");
+          if (version >= 4) {
+            run.difficultyCredits = item.getInt("difficultyCredits");
+            if (run.difficultyCredits != 0 && run.difficultyCredits != RewardLedger.DIFFICULTY_COMPLETION_CRYSTALS
+                || run.difficultyCredits > 0 && (!run.winPaid || value.claimedDifficultyBonuses.isEmpty()))
+              throw new IllegalArgumentException("Invalid saved difficulty completion reward.");
+          }
           run.refunded.putAll(readCounts(item.getJSONObject("refunded")));
           for (String id : run.refunded.keySet()) if (!run.items.containsKey(id) || run.refunded.get(id) > run.items.get(id))
             throw new IllegalArgumentException("Invalid returned purchase history.");

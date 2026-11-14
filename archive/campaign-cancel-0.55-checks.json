@@ -1,0 +1,46 @@
+{
+  "version": "0.55",
+  "passed": true,
+  "scope": "Actual Campaign backend dispatch, job completion, construction snapshot and reload initializer in native API VM fixtures only. Exact delivery APK gameplay checks are separate.",
+  "checks": [
+    {
+      "name": "Cancelling a future site removes only that journal immediately while the same workers continue the active structure",
+      "passed": true
+    },
+    {
+      "name": "Cancelling active construction keeps its actual unfinished native foundation and existing STOP semantics",
+      "passed": true
+    },
+    {
+      "name": "Cancellation preserves other workers, FIFO positions, unrelated native-only journals and exact job-ID matching",
+      "passed": true
+    },
+    {
+      "name": "Saved cancelled state reloads through the actual GameLoaded initializer without restoring a removed blueprint or issuing its order",
+      "passed": true
+    },
+    {
+      "name": "Cancelled plans cannot capture a later foundation at the same coordinates, while the new job journal binds it",
+      "passed": true
+    },
+    {
+      "name": "Done and blocked jobs retain their existing journals; cancellation is the only changed terminal path",
+      "passed": true
+    },
+    {
+      "name": "Existing Stop override cancellation drops only app journals while preserving all native structures",
+      "passed": true
+    }
+  ],
+  "sources": [
+    {
+      "path": "campaign/commands.js",
+      "sha256": "524554af1ceeb55959d6b4dd4b599a4c138670223a3c540d076fc8bc18e1038d"
+    },
+    {
+      "path": "tools/check-campaign-cancel-055.cjs",
+      "sha256": "488b5d7c715193bb4425dbe9b0550433f2171638fb801b2c5777bc70dca60335"
+    }
+  ],
+  "recordedUTC": "2026-11-11T20:32:53.707Z"
+}

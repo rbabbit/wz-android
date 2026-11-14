@@ -13,8 +13,37 @@ import java.util.Map;
 
 /** Whole-track fetch only; playback seeks inside the browser's local Blob. */
 final class MusicTrackResponse {
+    @FunctionalInterface private interface OpenTrack {
+        InputStream open() throws IOException;
+    }
+
+    static WebResourceResponse open(MusicPackStore archive, MapMusicIndex.Slice track, String method,
+            String range, Map<String, String> isolationHeaders) throws IOException {
+        if (!archive.ready()) throw new IOException("Bundled music is missing or incomplete");
+        return open(track, method, range, isolationHeaders, MusicPackStore.BYTES, () -> {
+            InputStream input = archive.openArchive();
+            try {
+                // AssetInputStream uses native asset seeks. Keep the pack in
+                // the APK rather than extracting 115 MB into app storage.
+                skipFully(input, track.start);
+                return input;
+            } catch (IOException error) { input.close(); throw error; }
+        });
+    }
+
     static WebResourceResponse open(File archive, MapMusicIndex.Slice track, String method,
             String range, Map<String, String> isolationHeaders) throws IOException {
+        return open(track, method, range, isolationHeaders, archive.length(), () -> {
+            FileInputStream input = new FileInputStream(archive);
+            try { input.getChannel().position(track.start); }
+            catch (IOException error) { input.close(); throw error; }
+            return input;
+        });
+    }
+
+    private static WebResourceResponse open(MapMusicIndex.Slice track, String method,
+            String range, Map<String, String> isolationHeaders, long archiveLength,
+            OpenTrack opener) throws IOException {
         Map<String, String> headers = new HashMap<>(isolationHeaders);
         headers.put("Accept-Ranges", "none");
         if (!"GET".equals(method) && !"HEAD".equals(method)) {
@@ -29,20 +58,27 @@ final class MusicTrackResponse {
             headers.put("Content-Range", "bytes */" + track.length);
             return empty(416, "Range Not Satisfiable", headers);
         }
-        if (track.start < 0 || track.length <= 0 || track.length > archive.length() - track.start)
+        if (track.start < 0 || track.length <= 0 || track.length > archiveLength - track.start)
             throw new IOException("Music track lies outside the verified pack");
         // WebView derives GET length from the bounded stream's available().
         // Adding it again makes Fetch expose a comma-joined duplicate header.
         if ("HEAD".equals(method)) headers.put("Content-Length", Long.toString(track.length));
         InputStream stream;
         if ("HEAD".equals(method)) stream = new ByteArrayInputStream(new byte[0]);
-        else {
-            FileInputStream input = new FileInputStream(archive);
-            try { input.getChannel().position(track.start); }
-            catch (IOException error) { input.close(); throw error; }
-            stream = new LimitedInputStream(input, track.length);
-        }
+        else stream = new LimitedInputStream(opener.open(), track.length);
         return new WebResourceResponse("audio/ogg", null, 200, "OK", headers, stream);
+    }
+
+    private static void skipFully(InputStream input, long amount) throws IOException {
+        long remaining = amount;
+        while (remaining > 0) {
+            long skipped = input.skip(remaining);
+            if (skipped > 0) remaining -= skipped;
+            else {
+                if (input.read() < 0) throw new EOFException("Music archive ended before the track");
+                remaining--;
+            }
+        }
     }
 
     private static WebResourceResponse empty(int code, String reason, Map<String, String> headers) {

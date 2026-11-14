@@ -1,0 +1,316 @@
+{
+  "version": "0.40",
+  "emulatorUsed": false,
+  "actualNativeEngineExecuted": false,
+  "fixture": "Real footer dock markup, actual nested Build label, wt-modern header and Production dot in desktop Chromium",
+  "checks": [
+    "Both selected footer controls retain at least 4.5:1 nested label contrast in normal, actual hover and keyboard focus-visible states",
+    "Deselecting restores legible inactive footer text, including the running-lab label",
+    "Actual Build child strong names and cost badges retain contrast on selected and unselected cards",
+    "Real wt-modern HUD is transparent over the black header rather than the inherited navy container",
+    "Production NOW dot follows the neutral palette over late legacy component CSS",
+    "Header override is scoped to Towers and does not alter the retained unscoped legacy interface",
+    "No browser runtime errors in the focused desktop fixture"
+  ],
+  "states": [
+    {
+      "label": "research selected normal b",
+      "text": [
+        8,
+        8,
+        8
+      ],
+      "surface": [
+        244,
+        244,
+        244
+      ],
+      "contrast": 18.21
+    },
+    {
+      "label": "research selected normal small",
+      "text": [
+        8,
+        8,
+        8
+      ],
+      "surface": [
+        244,
+        244,
+        244
+      ],
+      "contrast": 18.21
+    },
+    {
+      "label": "research selected actual hover b",
+      "text": [
+        8,
+        8,
+        8
+      ],
+      "surface": [
+        244,
+        244,
+        244
+      ],
+      "contrast": 18.21
+    },
+    {
+      "label": "research selected actual hover small",
+      "text": [
+        8,
+        8,
+        8
+      ],
+      "surface": [
+        244,
+        244,
+        244
+      ],
+      "contrast": 18.21
+    },
+    {
+      "label": "research selected actual keyboard focus b",
+      "text": [
+        8,
+        8,
+        8
+      ],
+      "surface": [
+        244,
+        244,
+        244
+      ],
+      "contrast": 18.21
+    },
+    {
+      "label": "research selected actual keyboard focus small",
+      "text": [
+        8,
+        8,
+        8
+      ],
+      "surface": [
+        244,
+        244,
+        244
+      ],
+      "contrast": 18.21
+    },
+    {
+      "label": "production selected normal b",
+      "text": [
+        8,
+        8,
+        8
+      ],
+      "surface": [
+        244,
+        244,
+        244
+      ],
+      "contrast": 18.21
+    },
+    {
+      "label": "production selected normal small",
+      "text": [
+        8,
+        8,
+        8
+      ],
+      "surface": [
+        244,
+        244,
+        244
+      ],
+      "contrast": 18.21
+    },
+    {
+      "label": "production selected actual hover b",
+      "text": [
+        8,
+        8,
+        8
+      ],
+      "surface": [
+        244,
+        244,
+        244
+      ],
+      "contrast": 18.21
+    },
+    {
+      "label": "production selected actual hover small",
+      "text": [
+        8,
+        8,
+        8
+      ],
+      "surface": [
+        244,
+        244,
+        244
+      ],
+      "contrast": 18.21
+    },
+    {
+      "label": "production selected actual keyboard focus b",
+      "text": [
+        8,
+        8,
+        8
+      ],
+      "surface": [
+        244,
+        244,
+        244
+      ],
+      "contrast": 18.21
+    },
+    {
+      "label": "production selected actual keyboard focus small",
+      "text": [
+        8,
+        8,
+        8
+      ],
+      "surface": [
+        244,
+        244,
+        244
+      ],
+      "contrast": 18.21
+    },
+    {
+      "label": "inactive footer hover b",
+      "text": [
+        244,
+        244,
+        244
+      ],
+      "surface": [
+        32,
+        32,
+        32
+      ],
+      "contrast": 14.81
+    },
+    {
+      "label": "inactive footer hover small",
+      "text": [
+        165,
+        165,
+        165
+      ],
+      "surface": [
+        32,
+        32,
+        32
+      ],
+      "contrast": 6.61
+    },
+    {
+      "label": "Build nested strong selected",
+      "text": [
+        8,
+        8,
+        8
+      ],
+      "surface": [
+        244,
+        244,
+        244
+      ],
+      "contrast": 18.21
+    },
+    {
+      "label": "Build cost badge selected",
+      "text": [
+        244,
+        244,
+        244
+      ],
+      "surface": [
+        8,
+        8,
+        8
+      ],
+      "contrast": 18.21
+    },
+    {
+      "label": "Build nested strong unselected",
+      "text": [
+        244,
+        244,
+        244
+      ],
+      "surface": [
+        32,
+        32,
+        32
+      ],
+      "contrast": 14.81
+    },
+    {
+      "label": "Build cost badge unselected",
+      "text": [
+        244,
+        244,
+        244
+      ],
+      "surface": [
+        8,
+        8,
+        8
+      ],
+      "contrast": 18.21
+    }
+  ],
+  "screenshots": [
+    "qa/0.40-footer/selected-footer-build.png"
+  ],
+  "sources": [
+    {
+      "path": "app/src/main/assets/warzone/ui/towers-v4.css",
+      "sha256": "9a0a3af3190b0b9aa61537d19b997d9c1733217a4686b7f3c0ff6482239dd821"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/command-pages.css",
+      "sha256": "9036d9c8582b8ebb581ed2adaebf21f0e4465cf298ad38f16e4ee147327edf5c"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/lab-shell.css",
+      "sha256": "099a72464e470ebd387d035705a316d5ec3cdd9da11b63077754c03049b381c0"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/lab-commands.css",
+      "sha256": "9cc89795a6d02767d0bed940cce3216d418994bf8a400b7edf1a54dacf043a68"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/towers-shell.css",
+      "sha256": "1ea114b759d94de72e24b8a826c8c96aeec60ea0b77d13ca7055b360385bab42"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/towers-monochrome.css",
+      "sha256": "e3866b7aba8c2bc4fdf3dfe33b0a06c392ae6efea8909d3443cffe5048f830c7"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/towers-commands.css",
+      "sha256": "f8cb75ab5f95dce25d3ae042fea3d5d4a6a22eaa808736d87cab017dfbf19e03"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/towers-status.css",
+      "sha256": "87cc030401bc04d6ed485761bbd7e7722f5367d1bfff1c9b2df95f634004d957"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/lab-ui.js",
+      "sha256": "4c41da1592a9b5fa7a0ff414d99197a81083514add89f94859bf16c3d2b14ed1"
+    },
+    {
+      "path": "tools/check-footer-contrast-040.cjs",
+      "sha256": "dbfd5050164fa05f6e6c8b296f293ffe7049d54a70b174344cf491f9d4229ad1"
+    }
+  ],
+  "checksPassed": 7,
+  "passed": true
+}

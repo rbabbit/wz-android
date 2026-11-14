@@ -1,0 +1,65 @@
+{
+  "version": "0.34",
+  "passed": true,
+  "emulatorUsed": false,
+  "actualNativeEngineExecuted": false,
+  "scope": "Actual embedded eventResearched source, browser notice helper and existing native/Android save API fixtures; not gameplay or visual acceptance.",
+  "sourceCheckGroupsPassed": 10,
+  "checks": [
+    {
+      "name": "Actual embedded BNTECHDONE preserves fullname, topic ID, laboratory and native gameTime",
+      "passed": true
+    },
+    {
+      "name": "Window/channel/log duplicates show once and do not prolong an existing notice",
+      "passed": true
+    },
+    {
+      "name": "Independent real laboratory completions at the same native tick are not mistaken for duplicates",
+      "passed": true
+    },
+    {
+      "name": "Other players, malformed packets and startup grants do not claim a completion",
+      "passed": true
+    },
+    {
+      "name": "Native clock rewind removes old dedupe state and rejects delayed pre-load or historical events",
+      "passed": true
+    },
+    {
+      "name": "Missing wave snapshot still accepts and deduplicates the real completion payload",
+      "passed": true
+    },
+    {
+      "name": "Game saved has exactly one title, no metadata/detail row, and expires without blocking input",
+      "passed": true
+    },
+    {
+      "name": "A battle end clears current notices and rejects late research or save acknowledgements",
+      "passed": true
+    },
+    {
+      "name": "Duel mode receives no Towers notice UI or API",
+      "passed": true
+    },
+    {
+      "name": "Real save coordinator requests the polished notice only after successful archive acknowledgement",
+      "passed": true
+    }
+  ],
+  "embeddedResearchEventSHA256": "da63aef265824fddc8200f6658f75479abd6ffa93b69a9a5ea1024d57a7b32d8",
+  "sources": [
+    {
+      "path": "app/src/main/assets/warzone-towers-notices.js",
+      "sha256": "bedd64f2731b8b9b368d4963b2ecf81565e9c6e12cda00e4ed91a1e95712ab85"
+    },
+    {
+      "path": "app/src/main/assets/warzone/saved-games.js",
+      "sha256": "950aed3369227f187ca41be49e7cea24dde44c26c654ac3fdc81413c0661c1ae"
+    },
+    {
+      "path": "tools/check-research-notices-034.cjs",
+      "sha256": "e3d637a6bb62b95c0fce7ff30a0475cdaa46fe80e7ec015b763627ce4f85d6bd"
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 package com.rbabbit.blocknight.warzone;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -23,8 +24,10 @@ import android.widget.TextView;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 /** Native horizontally snapping cards, showing the actual map preview PNGs. */
 final class MapPreviewPager extends HorizontalScrollView {
@@ -35,6 +38,7 @@ final class MapPreviewPager extends HorizontalScrollView {
     private final Selection selection;
     private final List<PreviewCard> cards = new ArrayList<>();
     private List<MapLevelCatalog.Level> levels = Collections.emptyList();
+    private Set<String> completedMaps = Collections.emptySet();
     private int selectedIndex, pageWidth;
     private boolean positioning, positionPending, touching, interactionEnabled = true;
     private final Runnable settle = () -> snapToPage(Math.round(getScrollX() / (float) Math.max(1, pageWidth)));
@@ -62,12 +66,22 @@ final class MapPreviewPager extends HorizontalScrollView {
             MapLevelCatalog.Level level = levels.get(i);
             if (level.id.equals(selectedId)) selectedIndex = i;
             PreviewCard card = new PreviewCard(level, i + 1, levels.size());
+            card.setCompleted(completedMaps.contains(level.id));
             cards.add(card);
             pages.addView(card, new LinearLayout.LayoutParams(Math.max(1, pageWidth), -1));
         }
         positionPending = true;
         decorate();
         requestLayout();
+    }
+
+    /** Refresh existing cards without disturbing the current swipe or selection. */
+    void setCompletedMaps(Set<String> values) {
+        Set<String> snapshot = values == null || values.isEmpty() ? Collections.emptySet()
+                : Collections.unmodifiableSet(new HashSet<>(values));
+        if (snapshot.equals(completedMaps)) return;
+        completedMaps = snapshot;
+        for (PreviewCard card : cards) card.setCompleted(completedMaps.contains(card.levelId));
     }
 
     void setInteractionEnabled(boolean enabled) {
@@ -216,45 +230,59 @@ final class MapPreviewPager extends HorizontalScrollView {
     private final class PreviewCard extends FrameLayout {
         private final View image;
         private final BrowseArrow browse;
-        private final TextView title, meta, description, position;
-        private final String normalPosition, compactPosition, accessibleName;
+        private final TextView title, meta, description, position, completion;
+        private final String levelId, normalPosition, compactPosition, accessibleName;
         private int imageSize, copyLeft, copyWidth, titleHeight, metaHeight, descriptionHeight, positionHeight;
-        private boolean compact;
+        private int completionWidth, positionWidth;
+        private boolean compact, completed;
 
         PreviewCard(MapLevelCatalog.Level level, int number, int total) {
             super(MapPreviewPager.this.getContext());
+            levelId = level.id;
             accessibleName = level.name;
             GradientDrawable background = new GradientDrawable();
-            background.setColor(0xF016272D);
+            background.setColor(TowersTheme.PANEL);
             background.setCornerRadius(dp(8));
             setBackground(background);
             image = new MapImage(level.preview);
             addView(image);
-            title = copy(level.name.toUpperCase(Locale.ROOT), 22, 0xFFF0F3ED);
+            title = copy(level.name.toUpperCase(Locale.ROOT), 22, TowersTheme.TEXT);
             title.setTypeface(face);
             title.setSingleLine(true);
             title.setAutoSizeTextTypeUniformWithConfiguration(13, 22, 1, android.util.TypedValue.COMPLEX_UNIT_SP);
             addView(title);
-            meta = copy(level.rounds + " rounds  ·  " + level.preparationSeconds + "s prep", 12, 0xFF8BD3CC);
+            meta = copy(level.rounds + " rounds  ·  " + level.preparationSeconds + "s prep", 12, TowersTheme.TEXT);
             meta.setSingleLine(true);
             addView(meta);
-            description = copy(level.description, 13, 0xFFB6C6C8);
+            description = copy(level.description, 13, TowersTheme.SECONDARY);
             description.setMaxLines(2);
             addView(description);
-            normalPosition = number + " / " + total + "   ·   Swipe maps";
-            compactPosition = level.rounds + " rounds · " + number + " / " + total + " · Swipe maps";
-            position = copy(normalPosition, 12, 0xFFA6B9BE);
+            normalPosition = number + " / " + total;
+            compactPosition = level.rounds + " rounds · " + number + " / " + total;
+            position = copy(normalPosition, 12, TowersTheme.SECONDARY);
             position.setSingleLine(true);
             position.setAutoSizeTextTypeUniformWithConfiguration(9, 12, 1, android.util.TypedValue.COMPLEX_UNIT_SP);
             addView(position);
+            completion = copy("\u2605 Complete", 10, TowersTheme.SECONDARY);
+            completion.setSingleLine(true);
+            completion.setContentDescription(accessibleName + ", Complete");
+            completion.setVisibility(GONE);
+            addView(completion);
             browse = new BrowseArrow(number < total);
             addView(browse);
+        }
+
+        void setCompleted(boolean value) {
+            if (completed == value) return;
+            completed = value;
+            completion.setVisibility(completed ? VISIBLE : GONE);
+            requestLayout();
         }
 
         @Override public void setSelected(boolean selected) {
             super.setSelected(selected);
             if (getBackground() instanceof GradientDrawable)
-                ((GradientDrawable) getBackground()).setColor(selected ? 0xF01B3338 : 0xF016272D);
+                ((GradientDrawable) getBackground()).setColor(selected ? TowersTheme.CARD_SELECTED : TowersTheme.PANEL);
             if (title != null) title.setContentDescription(accessibleName + (selected ? ", selected map" : ", map"));
             if (browse != null) browse.setEnabled(selected && interactionEnabled && levels.size() > 1);
         }
@@ -273,13 +301,15 @@ final class MapPreviewPager extends HorizontalScrollView {
                 description.setMaxLines(compact ? 1 : 2);
             }
             float fontScale = getResources().getConfiguration().fontScale;
-            imageSize = Math.max(0, Math.min(h - dp(16), Math.round(w * .40f)));
+            int minimumCopy = dp(fontScale > 1.2f ? 130 : 110);
+            int imageLimit = Math.max(dp(64), w - dp(82) - minimumCopy);
+            imageSize = Math.max(0, Math.min(imageLimit, Math.min(h - dp(16), Math.round(w * .40f))));
             copyLeft = imageSize + dp(22);
             // Keep the visible direction cue clear of titles and descriptions.
             copyWidth = Math.max(0, w - copyLeft - dp(60));
-            titleHeight = dp(compact ? 26 : 34);
-            metaHeight = compact ? 0 : Math.round(dp(19) * Math.min(1.3f, fontScale));
-            positionHeight = Math.round(dp(19) * Math.min(1.3f, fontScale));
+            titleHeight = Math.max(dp(compact ? 26 : 34), title.getLineHeight());
+            metaHeight = compact ? 0 : Math.max(dp(19), meta.getLineHeight() + dp(2));
+            positionHeight = Math.max(dp(19), position.getLineHeight() + dp(2));
             descriptionHeight = compact ? Math.max(0, h - titleHeight - positionHeight - dp(12))
                     : Math.min(Math.round(dp(40) * fontScale),
                     Math.max(0, h - titleHeight - metaHeight - positionHeight - dp(24)));
@@ -289,7 +319,19 @@ final class MapPreviewPager extends HorizontalScrollView {
             exact(title, copyWidth, titleHeight);
             exact(meta, copyWidth, metaHeight);
             exact(description, copyWidth, descriptionHeight);
-            exact(position, copyWidth, positionHeight);
+            completionWidth = 0;
+            if (completed) {
+                completion.measure(MeasureSpec.makeMeasureSpec(copyWidth, MeasureSpec.AT_MOST),
+                        MeasureSpec.makeMeasureSpec(positionHeight, MeasureSpec.EXACTLY));
+                completionWidth = completion.getMeasuredWidth();
+                int remaining = Math.max(0, copyWidth - completionWidth - dp(8));
+                position.measure(MeasureSpec.makeMeasureSpec(remaining, MeasureSpec.AT_MOST),
+                        MeasureSpec.makeMeasureSpec(positionHeight, MeasureSpec.EXACTLY));
+                positionWidth = position.getMeasuredWidth();
+            } else {
+                positionWidth = copyWidth;
+                exact(position, positionWidth, positionHeight);
+            }
             exact(browse, dp(48), dp(48));
             setMeasuredDimension(w, h);
         }
@@ -305,7 +347,11 @@ final class MapPreviewPager extends HorizontalScrollView {
             y += metaHeight + dp(4);
             description.layout(copyLeft, y, copyLeft + copyWidth, y + descriptionHeight);
             y += descriptionHeight + dp(4);
-            position.layout(copyLeft, y, copyLeft + copyWidth, y + positionHeight);
+            position.layout(copyLeft, y, copyLeft + positionWidth, y + positionHeight);
+            if (completed) {
+                int completionLeft = copyLeft + positionWidth + dp(8);
+                completion.layout(completionLeft, y, completionLeft + completionWidth, y + positionHeight);
+            }
             int arrowX = getWidth() - dp(52), arrowY = (getHeight() - dp(48)) / 2;
             browse.layout(arrowX, arrowY, arrowX + dp(48), arrowY + dp(48));
         }
@@ -314,12 +360,15 @@ final class MapPreviewPager extends HorizontalScrollView {
     /** A visible swipe cue that also works as a normal accessible button. */
     private final class BrowseArrow extends View {
         private final Paint ink = new Paint(Paint.ANTI_ALIAS_FLAG);
+        private final ColorStateList inkColours = TowersTheme.buttonText(false);
         private final Path chevron = new Path();
+        private final android.graphics.drawable.Drawable buttonFace;
         private final boolean forward;
 
         BrowseArrow(boolean forward) {
             super(MapPreviewPager.this.getContext());
             this.forward = forward;
+            buttonFace = TowersTheme.control(getContext(), TowersTheme.CONTROL, 6);
             setClickable(true);
             setFocusable(true);
             setContentDescription(forward ? "Next map, or swipe left" : "Previous map, or swipe right");
@@ -334,10 +383,15 @@ final class MapPreviewPager extends HorizontalScrollView {
         @Override protected void onDraw(Canvas canvas) {
             super.onDraw(canvas);
             float cx = getWidth() / 2f, cy = getHeight() / 2f;
-            ink.setStyle(Paint.Style.FILL);
-            ink.setColor(isPressed() ? 0x448BD3CC : isFocused() ? 0x338BD3CC : 0x168BD3CC);
-            canvas.drawCircle(cx, cy, dp(17), ink);
-            ink.setColor(0xFFB4E4DF);
+            buttonFace.setBounds(Math.round(cx - dp(17)), Math.round(cy - dp(17)),
+                    Math.round(cx + dp(17)), Math.round(cy + dp(17)));
+            final int[] visualState = getDrawableState();
+            buttonFace.setState(visualState);
+            buttonFace.draw(canvas);
+            // The selected map propagates its white face to this child. Pair
+            // the chevron with that same state instead of always painting white.
+            ink.setColor(!isEnabled() && isSelected() ? 0xFF505050
+                    : inkColours.getColorForState(visualState, TowersTheme.TEXT));
             ink.setStrokeWidth(dp(2));
             ink.setStrokeCap(Paint.Cap.ROUND);
             ink.setStrokeJoin(Paint.Join.ROUND);
@@ -385,7 +439,7 @@ final class MapPreviewPager extends HorizontalScrollView {
                     else unavailable = true;
                 } catch (Exception error) { unavailable = true; }
             }
-            paint.setColor(0xFF09161B);
+            paint.setColor(TowersTheme.BACKGROUND);
             canvas.drawRoundRect(0, 0, getWidth(), getHeight(), dp(5), dp(5), paint);
             if (bitmap == null) return;
             float scale = Math.min(getWidth() / (float) bitmap.getWidth(), getHeight() / (float) bitmap.getHeight());

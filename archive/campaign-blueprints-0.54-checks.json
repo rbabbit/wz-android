@@ -1,0 +1,66 @@
+{
+  "version": "0.54",
+  "passed": true,
+  "scope": "Actual JavaScript renderer/controller functions plus exact native soft-fullscreen DOM routine in VM fixtures. Device visual/gameplay verification is performed separately on the delivery APK.",
+  "checks": [
+    {
+      "name": "Campaign restores the real canvas after Emscripten soft-fullscreen hides its body sibling",
+      "passed": true
+    },
+    {
+      "name": "Different queued structures retain their meshes/identities after item switch, accepted-preview clear and Build close",
+      "passed": true
+    },
+    {
+      "name": "Actual Campaign native ownership permits app-owned STAT build mode without recursive reports",
+      "passed": true
+    },
+    {
+      "name": "Native Intelligence, video, transport and pause suppress ghosts even while Build metadata exists; world return restores them",
+      "passed": true
+    },
+    {
+      "name": "Custom Intelligence, Research, command pages, Help and document hide suppress only painting and restore accepted plans",
+      "passed": true
+    },
+    {
+      "name": "Camera pan and fresh loaded sites use current projection and terrain revision without retaining completed or cancelled ghosts",
+      "passed": true
+    },
+    {
+      "name": "Physical foundations retain native model ownership; accepted queued plans still render, no duplicate building mesh",
+      "passed": true
+    },
+    {
+      "name": "No current projection and battle retirement keep the Campaign canvas hidden and clear previous pixels",
+      "passed": true
+    },
+    {
+      "name": "Towers preserves its existing renderer visibility ownership and is unaffected by Campaign-native panel state",
+      "passed": true
+    }
+  ],
+  "sources": [
+    {
+      "path": "app/src/main/assets/warzone/ui/build-display.js",
+      "sha256": "3f32d1991e2aa4ac364fd1b345cee4b894607ef687ad95fdbb257f7177eadccb"
+    },
+    {
+      "path": "app/src/main/assets/warzone-command-pages.js",
+      "sha256": "529de343e4a734870b6b8346eb21034389e5aba679157aa4e43fb75638459d36"
+    },
+    {
+      "path": "app/src/main/assets/warzone-campaign-hud.js",
+      "sha256": "8980d11e9fbf18dbe9b5d5e1846e43d0b11dde0a34d5017ace780a2c658da586"
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100-campaign.js",
+      "sha256": "c9fa270163f5b9c485f70aed7832f8d041cb40de2ad10f9a7e1a6a59ac645679"
+    },
+    {
+      "path": "tools/check-campaign-blueprints-054.cjs",
+      "sha256": "a3723288126535278fb8c31135c7b99a5bdb4ddee531bb2935179da560d1dd25"
+    }
+  ],
+  "recordedUTC": "2026-11-11T20:16:15.995Z"
+}

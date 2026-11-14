@@ -1,0 +1,61 @@
+{
+  "version": "0.53",
+  "passed": true,
+  "checksPassed": 8,
+  "checks": [
+    {
+      "name": "Campaign header preserves primary Research and groups ALL COMBAT with Base; native Intelligence remains in the unit drawer",
+      "passed": true
+    },
+    {
+      "name": "Header ALL COMBAT retains persistent native selection intent, selected state and physical-input fences",
+      "passed": true
+    },
+    {
+      "name": "Current native chapter uses bundled Towers font; absent countdown adds no filler and fractional timers are whole seconds",
+      "passed": true
+    },
+    {
+      "name": "Full-width header measures actual groups: chapter remains visible in free space and yields when controls grow",
+      "passed": true
+    },
+    {
+      "name": "Campaign zero-facility footer uses compact truthful captions while Towers retains accepted captions",
+      "passed": true
+    },
+    {
+      "name": "Campaign footer uses content width capped to viewport; every added selector is Campaign-scoped and no accepted stylesheet changes",
+      "passed": true
+    },
+    {
+      "name": "Native Intel/transport/video retain ownership of complete footer and return controls with no generic header Intel duplicate",
+      "passed": true
+    },
+    {
+      "name": "Towers does not install Campaign class, status, ALL control or header overrides",
+      "passed": true
+    }
+  ],
+  "emulatorUsed": false,
+  "actualNativeEngineExecuted": false,
+  "scope": "Actual Campaign HUD and activity-dock controllers in controlled DOM/VM fixtures; CSS constraints are source checks, not a browser layout claim. Exact-APK header/footer fit and native input require emulator evidence.",
+  "sources": [
+    {
+      "path": "app/src/main/assets/warzone-campaign-hud.js",
+      "sha256": "2618b18468d3aae2089ff6cba88e46f2c3652aadebf8e5754875b2d7017dd858"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/lab-ui.js",
+      "sha256": "6822d0c083fa91808f71ac25a12917ebc285154a8321d1adfcab8d846f486a18"
+    },
+    {
+      "path": "tools/check-campaign-layout-053.cjs",
+      "sha256": "30aef0891aaa794cf7d811e3cc2ed06831934aaf4cd1ba64e09f76f470c081bb"
+    },
+    {
+      "path": "tools/check-campaign-js-051.cjs",
+      "sha256": "ed40ce3caa91bdc94bf30b8e9a1e54c7f00ccea6383636d948c62f14f4f29bff"
+    }
+  ],
+  "recordedUTC": "2026-11-11T16:44:37.537Z"
+}

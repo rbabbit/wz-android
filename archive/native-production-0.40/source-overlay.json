@@ -1,0 +1,24 @@
+{
+  "version": "0.40",
+  "guardPassed": true,
+  "nativeBuildPerformed": false,
+  "baselineSourceBundle": "archive/native-blueprint-4.7.0-source.tar.gz",
+  "baselineSourceEntry": "source/src/quickjs_backend.cpp",
+  "beforeSHA256": "a6ed9d1e08c0c28dee6cceb641380ab60388a72e8e989f32a8ba73080dc00084",
+  "changedSource": "archive/native-production-0.40/quickjs_backend.cpp",
+  "afterSHA256": "6f3033eb6ea18da2e2f640f521e40483c5f5af8ab63a22b567d26c4f6997217e",
+  "helper": "archive/native-production-0.40/production-helper.inc",
+  "helperSHA256": "a796751a6688a42db08b1d95c353f0187d0692fb1be05266b2cf4b1f4428d84e",
+  "patch": "archive/native-production-0.40/native-production.patch",
+  "patchSHA256": "48ee1d87550a5a68f2eefa29ef4d6b64d1fb4afb01deb9566c83ea661831def3",
+  "baselineRawJSSHA256": "cfdd813c040f55c759cdc38835f57d6e91325165946267d28ae3efc1f0c2d032",
+  "baselineWasmSHA256": "b7d117295d901abf96cafdf8a4c780a56007b4e2310267897395419d455a3503",
+  "preservedSourceOverlays": {
+    "display3d.cpp": "3b5c1a41144011805819d15e9bfac6f1289d726da276433bfeb237904c0fa15f",
+    "research.cpp": "06b8999191bb0160e6b73c268f8ddd69347102133ecc221aee23504973dc918a",
+    "keybind.cpp": "5730cf9a2b791a6a437f4e0da040e9dbb75e8befb48dc02caefb1a8e824355ed",
+    "hci.cpp": "9db6bef46703c3975d920a23cc071ea46ab938a3972204ca5325440e8e66e842"
+  },
+  "originalBuildRecipeSHA256": "6f3835c7eb8441c216f7e0b056affe22b34eb60e2985341029c866ca75e9bc26",
+  "scope": "Add one Towers-marker-gated, read-only own-factory QuickJS property; no native gameplay, queue, power, timer, shader, renderer, save or RNG mutation."
+}

@@ -1,0 +1,76 @@
+package com.rbabbit.blocknight.warzone;
+import android.content.Context;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import org.json.JSONObject;
+
+/** Actual extracted Activity bodies; only Android/UI surroundings are stubs. */
+public final class FfaBridgeProbe066 extends Context {
+  static final String ORIGIN="https://game",URL="https://game/warzone/index.html?mode=towers",TAG="host";
+  static final int MODE_PRIVATE=0;
+  static class Log {static void w(String a,String b,Exception c){}}
+  static class Gfx {String error;void showError(String value){error=value;}}
+  static class Saves {String error;void showError(String value){error=value;}}
+  static class Root {void removeView(Object value){}}
+  static class Web {String url;void loadUrl(String value){url=value;}}
+  static class Intent {boolean getBooleanExtra(String key,boolean fallback){return fallback;}}
+  static class Preferences {
+    final java.util.Map<String,String> values=new java.util.HashMap<>();
+    Preferences edit(){return this;}Preferences putString(String key,String value){values.put(key,value);return this;}void apply(){}
+  }
+  final File dir;final Preferences preferences=new Preferences();
+  BattleLaunchSpec battleLaunch=new BattleLaunchSpec("ffa","cannon","emag",false,"easy");
+  String battleSession="document-A",battleOutcome="",loadingSaveId="",ffaMapId="emag",ffaDifficulty="easy",matchMode="ffa",duelWeapon="cannon";
+  JSONObject loadingSave;Gfx graphicsSetup;Saves savedGamesView;Object loadingOverlay;
+  boolean mainMenuReturnPending,restoringGame,musicEnabled=true,musicCached=true;
+  SaveGameStore ffaSaves;Root root=new Root();Web webView=new Web();
+  FfaBridgeProbe066(Path path)throws Exception{Files.createDirectories(path);dir=path.toFile();ffaSaves=new SaveGameStore(this,"ffa");}
+  public File getFilesDir(){return dir;}
+  android.content.pm.ApplicationInfo getApplicationInfo(){return new android.content.pm.ApplicationInfo();}
+  Intent getIntent(){return new Intent();}Preferences getPreferences(int mode){return preferences;}
+  void closeFfaSetup(){}void createLoadingPanel(){loadingOverlay=new Object();}void returnToMainMenu(){graphicsSetup=new Gfx();}
+
+  /* ACTUAL_METHODS */
+
+  static int checks;
+  static void check(boolean value,String message){if(!value)throw new AssertionError(message);checks++;}
+  static FfaBridgeProbe066 probe(Path root)throws Exception{return new FfaBridgeProbe066(root.resolve(java.util.UUID.randomUUID().toString()));}
+  static JSONObject proof(JSONObject meta,String bot){return new JSONObject(meta.toString()).put("botType",bot).put("ok",true).put("gameTime",meta.getLong("gameTime")+1000);}
+  public static void main(String[]args)throws Exception{
+    Path root=Path.of(args[0]);JSONObject cobra=CheckFfaStore066.payload(Path.of(args[1]));
+    FfaMapCatalog catalog=FfaMapCatalog.get(probe(root));
+    for(FfaMapCatalog.MapInfo map:catalog.maps())for(String difficulty:new String[]{"easy","medium","hard"}){
+      FfaBridgeProbe066 p=probe(root);p.battleLaunch=new BattleLaunchSpec("ffa","cannon",map.id,true,difficulty);
+      String url=p.gameUrl();check(url.contains("bnFfaMap="+map.id)&&url.contains("bnFfaDifficulty="+difficulty)&&url.contains("bnFfaBotType=cobra")&&!url.contains("bnFfaRestore"),"Fresh URL carries immutable actual map/difficulty/bot");
+      p.ffaMapId="other-preference";p.ffaDifficulty="hard";check(p.gameUrl().equals(url),"Mutable preferences do not change captured launch/replay identity");
+      JSONObject fixture=CheckFfaStore066.synthetic(cobra,map,difficulty),meta=fixture.getJSONObject("metadata"),files=fixture.getJSONObject("files");
+      JSONObject saved=new JSONObject(p.ffaSave(p.battleSession,meta.toString(),files.toString()));check(saved.optBoolean("ok"),"Actual ffaSave archives valid identity: "+saved);
+      JSONObject loaded=p.ffaSaves.load(saved.getString("id"));check(loaded.getJSONObject("metadata").getString("mapName").equals(map.name),"Actual bridge writes canonical map display name");
+      int count=p.ffaSaves.list().length();
+      for(String mutation:new String[]{"map","level","players","bots","difficulty","botType","missing-bot","session"}){
+        JSONObject bad=new JSONObject(meta.toString());String session=p.battleSession;
+        switch(mutation){case "map":bad.put("mapId","unknown");break;case "level":bad.put("nativeLevel","other");break;case "players":bad.put("players",1);break;case "bots":bad.put("bots",1);break;case "difficulty":bad.put("difficulty",difficulty.equals("hard")?"easy":"hard");break;case "botType":bad.put("botType","nullbot");break;case "missing-bot":bad.remove("botType");break;case "session":session="old-document";break;}
+        check(!new JSONObject(p.ffaSave(session,bad.toString(),files.toString())).optBoolean("ok"),"Actual bridge rejects "+mutation);check(p.ffaSaves.list().length()==count,"Rejected bridge call cannot add archive");
+      }
+      p.graphicsSetup=new Gfx();check(!new JSONObject(p.ffaSave(p.battleSession,meta.toString(),files.toString())).optBoolean("ok"),"Home panel cannot save stale game");p.graphicsSetup=null;
+      p.mainMenuReturnPending=true;check(!new JSONObject(p.ffaSave(p.battleSession,meta.toString(),files.toString())).optBoolean("ok"),"Return-pending cannot save stale game");p.mainMenuReturnPending=false;
+      p.battleOutcome="victory";check(!new JSONObject(p.ffaSave(p.battleSession,meta.toString(),files.toString())).optBoolean("ok"),"Terminal game cannot save as active");p.battleOutcome="";
+      p.graphicsSetup=new Gfx();p.savedGamesView=new Saves();p.loadFfaSave(saved.getString("id"));check(p.savedGamesView.error==null&&p.loadingSave!=null,"Actual loadFfaSave loads validated store archive");
+      check(p.battleLaunch.mapId.equals(map.id)&&p.battleLaunch.ffaDifficulty.equals(difficulty)&&p.webView.url.contains("bnFfaRestore=1")&&p.webView.url.contains("bnFfaMap="+map.id),"Restore URL and immutable launch match saved map");
+      check(p.preferences.values.get("ffa_map_id").equals(map.id),"Actual load updates selected map preference");
+      JSONObject nativeProof=proof(p.loadingSave.getJSONObject("metadata"),"cobra");
+      for(String mutation:new String[]{"map","level","players","bots","difficulty","botType","missing-bot","clock","native-session","document","slot"}){
+        JSONObject bad=new JSONObject(nativeProof.toString());String session=p.battleSession,id=p.loadingSaveId;
+        switch(mutation){case "map":bad.put("mapId","unknown");break;case "level":bad.put("nativeLevel","wrong");break;case "players":bad.put("players",1);break;case "bots":bad.put("bots",1);break;case "difficulty":bad.put("difficulty","wrong");break;case "botType":bad.put("botType","nullbot");break;case "missing-bot":bad.remove("botType");break;case "clock":bad.put("gameTime",0);break;case "native-session":bad.put("session","other-run");break;case "document":session="old-document";break;case "slot":id="wt_"+"0".repeat(32);break;}
+        check(!p.ffaRestored(session,id,bad.toString())&&p.loadingSave!=null,"Rejected restore proof retains loading archive: "+mutation);
+      }
+      check(p.ffaRestored(p.battleSession,p.loadingSaveId,nativeProof.toString())&&p.loadingSave==null,"Actual matching restore proof clears loading state");check(!p.ffaRestored(p.battleSession,p.loadingSaveId,nativeProof.toString()),"Duplicate acknowledgement cannot verify twice");
+    }
+    FfaBridgeProbe066 legacy=probe(root);JSONObject legacyPayload=CheckFfaStore066.payload(Path.of(args[2]));String id=legacyPayload.getJSONObject("metadata").getString("id");Files.copy(Path.of(args[2]),legacy.dir.toPath().resolve("ffa-saved-games/"+id+".zip"));legacy.graphicsSetup=new Gfx();legacy.savedGamesView=new Saves();legacy.loadFfaSave(id);
+    check(legacy.savedGamesView.error==null&&legacy.battleLaunch.mapId.equals("emag")&&legacy.battleLaunch.ffaBotType.equals("nullbot"),"Genuine metadata-less EMAG restores as NullBot");
+    JSONObject legacyProof=proof(legacy.loadingSave.getJSONObject("metadata"),"nullbot");legacyProof.remove("players");legacyProof.remove("bots");check(legacy.ffaRestored(legacy.battleSession,id,legacyProof.toString()),"Actual legacy proof defaults to four slots and three bots");
+    System.out.println(new JSONObject().put("passed",true).put("checksPassed",checks).put("actualActivityBodiesExtracted",true).put("syntheticMapDifficultyCases",18).put("nativeEngineExecuted",false));
+  }
+}

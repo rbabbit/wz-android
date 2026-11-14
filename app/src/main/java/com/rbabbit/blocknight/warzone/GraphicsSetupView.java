@@ -13,38 +13,45 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import java.util.List;
-import java.util.Locale;
+import java.util.Set;
 
-/** Map-first native launcher: compact tabs and one quiet Play/music row. */
+/** Map-first native launcher: compact controls with a scrollable content panel. */
 final class GraphicsSetupView extends FrameLayout {
     interface Actions {
         void start(String graphicsMode, String map, String matchMode, String duelWeapon);
-        void cancel();
-        void music();
         void rewards();
         void savedGames();
+        void campaign();
+        void ffa();
+        void multiplayer();
+        void guide();
+        void hub();
+        void campaignContinue();
+        void campaignNew();
         void map(String id);
     }
 
-    private static final int INK = 0xFFF0F3ED, MUTED = 0xFFA6B9BE, TEAL = 0xFF8BD3CC;
+    private static final int INK = TowersTheme.TEXT, MUTED = TowersTheme.SECONDARY;
     private final Actions actions;
     private final Typeface face;
     private final MapLevelCatalog catalog;
     private final LinearLayout matchChoices, weaponChoices, difficultyChoices, launchActions, message;
     private final TextView detail, status;
     private final Button towers, duel, cannon, rockets, easy, medium, hard;
-    private final Button start, cancel, music, rewards, savedGames;
+    private final Button start, rewards, savedGames, homeBack;
     private final LinearLayout homeActions;
-    private final ProgressBar progress;
     private final MapPreviewPager maps;
+    private final WarzoneSplashView splash;
+    private final TextView version;
     private final LaunchPanel panel;
+    private final ScrollView mapScroll;
+    private final HomeModesView homeModes;
     private String map, matchMode, duelWeapon, difficulty;
     private int viewportHeight;
-    private boolean downloading, musicChecked, musicCached;
+    private boolean towersMapVisible;
 
     GraphicsSetupView(Context context, String selected, String selectedMap,
             String selectedMatch, String selectedWeapon, Actions actions) {
@@ -58,10 +65,12 @@ final class GraphicsSetupView extends FrameLayout {
         difficulty = catalog.level(map).difficulty;
         rememberMap();
         face = Typeface.createFromAsset(context.getAssets(), "warzone/ui/Oswald.ttf");
-        setBackgroundColor(0xFF0B151B);
+        setBackgroundColor(TowersTheme.BACKGROUND);
         setClickable(true);
         setFocusable(true);
-        addView(new WarzoneSplashView(context), new LayoutParams(-1, -1));
+        splash = new WarzoneSplashView(context, !"duel".equals(matchMode));
+        splash.setSubtitleVisible(false);
+        addView(splash, new LayoutParams(-1, -1));
 
         towers = choice("Towers");
         duel = choice("1v1 vs Bot");
@@ -97,52 +106,30 @@ final class GraphicsSetupView extends FrameLayout {
 
         launchActions = new LinearLayout(context);
         launchActions.setGravity(Gravity.CENTER_VERTICAL);
-        music = button("MUSIC\nCHECKING…", false);
-        music.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
-        music.setEnabled(false);
-        music.setOnClickListener(v -> {
-            if (!"duel".equals(matchMode)) maps.settleSelection();
-            actions.music();
-        });
         launchActions.addView(start, new LinearLayout.LayoutParams(dp(112), dp(48)));
-        LinearLayout.LayoutParams musicParams = new LinearLayout.LayoutParams(-2, dp(48));
-        musicParams.leftMargin = dp(14);
-        launchActions.addView(music, musicParams);
 
         status = text("", 12, MUTED);
         status.setMaxLines(2);
         status.setGravity(Gravity.CENTER_VERTICAL);
         status.setAccessibilityLiveRegion(ACCESSIBILITY_LIVE_REGION_POLITE);
-        cancel = button("CANCEL DOWNLOAD", false);
-        cancel.setVisibility(GONE);
-        cancel.setOnClickListener(v -> {
-            actions.cancel();
-            setDownloading(false);
-            showStatus("Download paused. Your progress is saved.", false);
-        });
         message = new LinearLayout(context);
         message.setPadding(dp(12), 0, dp(8), 0);
         message.setGravity(Gravity.CENTER_VERTICAL);
         message.setVisibility(GONE);
-        message.setBackground(shape(0xFF101F26, 0, 7));
+        message.setBackground(shape(TowersTheme.PANEL, 0, 7));
         message.addView(status, new LinearLayout.LayoutParams(0, dp(48), 1));
-        LinearLayout.LayoutParams cancelParams = new LinearLayout.LayoutParams(dp(126), dp(48));
-        cancelParams.leftMargin = dp(8);
-        message.addView(cancel, cancelParams);
-        progress = new ProgressBar(context, null, android.R.attr.progressBarStyleHorizontal);
-        progress.setMax(1000);
-        progress.setProgressTintList(ColorStateList.valueOf(TEAL));
-        progress.setVisibility(GONE);
 
         panel = new LaunchPanel(context);
-        ScrollView scroll = new ScrollView(context);
-        scroll.setFillViewport(true);
-        scroll.setOverScrollMode(OVER_SCROLL_NEVER);
-        scroll.setVerticalScrollBarEnabled(false);
-        scroll.addView(panel, new ScrollView.LayoutParams(-1, -2));
+        mapScroll = new ScrollView(context);
+        mapScroll.setFillViewport(true);
+        mapScroll.setOverScrollMode(OVER_SCROLL_NEVER);
+        mapScroll.setVerticalScrollBarEnabled(true);
+        mapScroll.setScrollbarFadingEnabled(true);
+        mapScroll.setContentDescription("Map selection and Play; scroll vertically when needed");
+        mapScroll.addView(panel, new ScrollView.LayoutParams(-1, -2));
         LayoutParams scrollParams = new LayoutParams(-1, -1);
         scrollParams.topMargin = dp(48);
-        addView(scroll, scrollParams);
+        addView(mapScroll, scrollParams);
         rewards = button("REWARDS 0", false);
         rewards.setTextSize(13);
         rewards.setSingleLine(true);
@@ -150,11 +137,10 @@ final class GraphicsSetupView extends FrameLayout {
         crystal.setBounds(0, 0, dp(20), dp(20));
         rewards.setCompoundDrawables(crystal, null, null, null);
         rewards.setCompoundDrawablePadding(dp(6));
-        rewards.setBackground(new RippleDrawable(ColorStateList.valueOf(0x338BD3CC),
-                new InsetDrawable(shape(0xE91B3338, 0, 7), 0, dp(8), 0, dp(8)), null));
+        rewards.setBackground(new RippleDrawable(ColorStateList.valueOf(TowersTheme.RIPPLE),
+                new InsetDrawable(TowersTheme.control(context, TowersTheme.CONTROL, 7), 0, dp(8), 0, dp(8)), null));
         rewards.setPadding(dp(9), 0, dp(9), 0);
         rewards.setOnClickListener(v -> {
-            if (downloading) return;
             maps.settleSelection();
             actions.rewards();
         });
@@ -162,17 +148,27 @@ final class GraphicsSetupView extends FrameLayout {
         savedGames.setTextSize(13);
         savedGames.setSingleLine(true);
         savedGames.setContentDescription("Open saved games on this phone");
-        savedGames.setBackground(new RippleDrawable(ColorStateList.valueOf(0x338BD3CC),
-                new InsetDrawable(shape(0xB014252D, 0, 7), 0, dp(8), 0, dp(8)), null));
+        savedGames.setBackground(new RippleDrawable(ColorStateList.valueOf(TowersTheme.RIPPLE),
+                new InsetDrawable(TowersTheme.control(context, TowersTheme.CONTROL, 7), 0, dp(8), 0, dp(8)), null));
         savedGames.setPadding(dp(10), 0, dp(10), 0);
         savedGames.setOnClickListener(v -> {
-            if (downloading) return;
             maps.settleSelection();
             actions.savedGames();
         });
         homeActions = new LinearLayout(context);
         homeActions.setGravity(Gravity.CENTER_VERTICAL);
-        homeActions.addView(rewards, new LinearLayout.LayoutParams(-2, dp(48)));
+        homeBack = button("BACK", false);
+        homeBack.setTextSize(13);
+        homeBack.setSingleLine(true);
+        homeBack.setBackground(new RippleDrawable(ColorStateList.valueOf(TowersTheme.RIPPLE),
+                new InsetDrawable(TowersTheme.control(context, TowersTheme.CONTROL, 7), 0, dp(8), 0, dp(8)), null));
+        homeBack.setPadding(dp(10), 0, dp(10), 0);
+        homeBack.setContentDescription("Back to Campaign and Towers");
+        homeBack.setOnClickListener(v -> handleHomeBack());
+        homeActions.addView(homeBack, new LinearLayout.LayoutParams(-2, dp(48)));
+        LinearLayout.LayoutParams rewardsParams = new LinearLayout.LayoutParams(-2, dp(48));
+        rewardsParams.leftMargin = dp(8);
+        homeActions.addView(rewards, rewardsParams);
         LinearLayout.LayoutParams savedParams = new LinearLayout.LayoutParams(-2, dp(48));
         savedParams.leftMargin = dp(8);
         homeActions.addView(savedGames, savedParams);
@@ -180,13 +176,33 @@ final class GraphicsSetupView extends FrameLayout {
         homeParams.leftMargin = dp(18);
         homeParams.topMargin = dp(8);
         addView(homeActions, homeParams);
-        TextView version = text("v" + appVersion(context), 11, MUTED);
-        version.setContentDescription("Warzone Towers version " + appVersion(context));
+        version = text("rbabbit v" + appVersion(context), 11, MUTED);
+        version.setContentDescription("rbabbit, Warzone Towers version " + appVersion(context));
         LayoutParams versionParams = new LayoutParams(-2, -2, Gravity.BOTTOM | Gravity.END);
         versionParams.rightMargin = dp(14);
         versionParams.bottomMargin = dp(8);
         addView(version, versionParams);
+        homeModes = new HomeModesView(context, face, actions, this::showTowersMap, catalog.level(map));
+        addView(homeModes, new LayoutParams(-1, -1));
         refresh();
+        showHomeModes();
+    }
+
+    void setResultOverlayVisible(boolean visible) {
+        splash.setArtworkVisible(!visible);
+        homeModes.setArtworkVisible(!visible);
+        setImportantForAccessibility(visible ? IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS
+                : IMPORTANT_FOR_ACCESSIBILITY_AUTO);
+        setDescendantFocusability(visible ? FOCUS_BLOCK_DESCENDANTS : FOCUS_AFTER_DESCENDANTS);
+    }
+
+    /** Keep the complete Home version label below a result sheet, even before first layout. */
+    int resultOverlayBottomClearance() {
+        LayoutParams params = (LayoutParams) version.getLayoutParams();
+        int textHeight = Math.max(version.getMeasuredHeight(),
+                (int) Math.ceil(version.getPaint().getFontSpacing())
+                        + version.getPaddingTop() + version.getPaddingBottom());
+        return textHeight + params.bottomMargin + dp(8);
     }
 
     static String appVersion(Context context) {
@@ -199,10 +215,27 @@ final class GraphicsSetupView extends FrameLayout {
         LayoutParams params = (LayoutParams) homeActions.getLayoutParams();
         params.leftMargin = Math.max(dp(8), Math.round(MeasureSpec.getSize(width) * .047f));
         params.topMargin = dp(viewportHeight < dp(320) ? 0 : 8);
-        int availableWidth = MeasureSpec.getSize(width);
-        rewards.setMaxWidth(Math.max(dp(80), Math.min(dp(210), Math.round(availableWidth * .34f))));
-        savedGames.setMaxWidth(Math.max(dp(80), Math.min(dp(150), Math.round(availableWidth * .24f))));
+        // Reserve each label's measured text and icon width rather than clipping
+        // it with unrelated percentages when Android's font size is enlarged.
+        int availableWidth = Math.max(0, MeasureSpec.getSize(width) - params.leftMargin - dp(12));
+        Button[] controls = {homeBack, rewards, savedGames};
+        int wanted = 0;
+        for (Button control : controls) wanted += desiredButtonWidth(control);
+        int budget = Math.max(0, availableWidth - dp(16)), remaining = budget;
+        for (int i = 0; i < controls.length; i++) {
+            Button control = controls[i];
+            int desired = desiredButtonWidth(control);
+            int assigned = wanted <= budget ? desired : i == controls.length - 1 ? remaining
+                    : Math.round(budget * desired / (float) Math.max(1, wanted));
+            remaining -= assigned;
+            control.getLayoutParams().width = Math.max(0, assigned);
+        }
         super.onMeasure(width, height);
+    }
+
+    private int desiredButtonWidth(Button button) {
+        return (int) Math.ceil(button.getPaint().measureText(button.getText().toString()))
+                + button.getCompoundPaddingLeft() + button.getCompoundPaddingRight() + dp(2);
     }
 
     private Button choice(String label) {
@@ -225,26 +258,24 @@ final class GraphicsSetupView extends FrameLayout {
 
     private void decorateChoice(Button b, boolean selected, String description) {
         b.setSelected(selected);
-        b.setEnabled(!downloading);
-        b.setAlpha(downloading ? .5f : 1f);
+        b.setEnabled(true);
+        b.setAlpha(1f);
         b.setContentDescription(description + ", " + (selected ? "selected" : "not selected"));
     }
 
     private void chooseMatch(String value) {
-        if (downloading) return;
         if (!"duel".equals(matchMode)) maps.settleSelection();
         matchMode = BattleLaunchSpec.matchMode(value);
         refresh();
     }
 
     private void chooseWeapon(String value) {
-        if (downloading) return;
         duelWeapon = BattleLaunchSpec.duelWeapon(value);
         refresh();
     }
 
     private void chooseDifficulty(String value) {
-        if (downloading || value.equals(difficulty)) return;
+        if (value.equals(difficulty)) return;
         difficulty = value;
         List<MapLevelCatalog.Level> levels = catalog.difficulty(difficulty);
         // Return each tab to its last map, then select that map for Play.
@@ -257,7 +288,6 @@ final class GraphicsSetupView extends FrameLayout {
     }
 
     private void chooseMap(String id) {
-        if (downloading) return;
         map = BattleLaunchSpec.mapId(id);
         rememberMap();
         actions.map(map);
@@ -282,50 +312,48 @@ final class GraphicsSetupView extends FrameLayout {
         weaponChoices.setVisibility(botMatch ? VISIBLE : GONE);
         difficultyChoices.setVisibility(botMatch ? GONE : VISIBLE);
         maps.setVisibility(botMatch ? GONE : VISIBLE);
-        maps.setInteractionEnabled(!downloading);
+        maps.setInteractionEnabled(true);
         detail.setVisibility(botMatch ? VISIBLE : GONE);
         detail.setText("You: " + ("cannon".equals(duelWeapon)
                 ? "Cannon  ·  Bot: Rockets" : "Rockets  ·  Bot: Cannon"));
-        music.setEnabled(!downloading && musicChecked && !musicCached);
-        music.setAlpha(downloading ? .45f : musicCached ? .85f : 1f);
-        boolean largeText = getResources().getConfiguration().fontScale > 1.25f;
-        music.setMaxLines(largeText ? 1 : 2);
-        music.setText(!musicChecked ? "Checking music…"
-                : musicCached ? "Music ready" : largeText ? "Download music"
-                : "Download music\nOptional · play in-game");
-        music.setContentDescription(!musicChecked ? "Checking optional music download"
-                : musicCached ? "Music ready" : "Download music to play in-game, optional");
         String name = catalog.level(map).name;
-        start.setText(downloading ? "WAIT…" : botMatch ? "PLAY 1v1" : "PLAY");
+        start.setText(botMatch ? "PLAY 1v1" : "PLAY");
         start.setContentDescription("Start game, " + (botMatch ? "1v1 vs Bot" : name));
-        start.setEnabled(!downloading);
+        start.setEnabled(true);
         start.setAlpha(start.isEnabled() ? 1f : .45f);
-        rewards.setEnabled(!downloading);
-        rewards.setAlpha(downloading ? .45f : 1f);
-        savedGames.setEnabled(!downloading);
-        savedGames.setAlpha(downloading ? .45f : 1f);
+        rewards.setEnabled(true);
+        savedGames.setEnabled(true);
         applyCompactTowersStyle();
+        if (homeModes != null) homeModes.setSelectedMap(catalog.level(map));
         if (panel != null) panel.requestLayout();
     }
 
     private void applyCompactTowersStyle() {
         boolean compact = !"duel".equals(matchMode);
-        message.setBackground(shape(0xFF101F26, compact ? 0 : 0xFF29414A, 7));
+        message.setBackground(shape(compact ? TowersTheme.PANEL : 0xFF101F26, compact ? 0 : 0xFF29414A, 7));
         for (Button b : new Button[] {towers, duel, cannon, rockets, easy, medium, hard}) {
             boolean selected = b.isSelected();
-            int fill = compact ? (selected ? 0xFF28574E : Color.TRANSPARENT)
+            int fill = compact ? (selected ? TowersTheme.PRIMARY : Color.TRANSPARENT)
                     : (selected ? 0xFF18343B : 0xFF101F26);
-            b.setBackground(new RippleDrawable(ColorStateList.valueOf(0x228BD3CC),
-                    new InsetDrawable(shape(fill, compact ? 0 : selected ? TEAL : 0xFF29414A, 7),
+            if (compact) b.setTextColor(TowersTheme.buttonText(selected));
+            else b.setTextColor(INK);
+            b.setBackground(new RippleDrawable(ColorStateList.valueOf(compact
+                    ? selected ? TowersTheme.PRIMARY_RIPPLE : TowersTheme.RIPPLE : 0x228BD3CC),
+                    new InsetDrawable(compact ? TowersTheme.control(getContext(), fill, 7)
+                            : shape(fill, selected ? 0xFF8BD3CC : 0xFF29414A, 7),
                             dp(4), dp(8), dp(4), dp(8)), null));
             b.setPadding(dp(5), 0, dp(5), 0);
         }
-        for (Button b : new Button[] {start, music, cancel}) {
+        for (Button b : new Button[] {start}) {
             boolean primary = b == start;
-            int fill = primary ? TEAL : b == music ? Color.TRANSPARENT : 0xFF14252D;
-            b.setBackground(new RippleDrawable(ColorStateList.valueOf(0x338BD3CC),
-                    new InsetDrawable(shape(fill, 0, 7), 0, dp(8), 0, dp(8)), null));
-            b.setPadding(dp(b == music ? 8 : 5), 0, dp(5), 0);
+            int fill = primary ? (compact ? TowersTheme.PRIMARY : 0xFF8BD3CC) : TowersTheme.CONTROL;
+            if (compact) b.setTextColor(TowersTheme.buttonText(primary));
+            else b.setTextColor(primary ? TowersTheme.ON_PRIMARY : INK);
+            b.setBackground(new RippleDrawable(ColorStateList.valueOf(compact
+                    ? primary ? TowersTheme.PRIMARY_RIPPLE : TowersTheme.RIPPLE : 0x338BD3CC),
+                    new InsetDrawable(compact ? TowersTheme.control(getContext(), fill, 7)
+                            : shape(fill, 0, 7), 0, dp(8), 0, dp(8)), null));
+            b.setPadding(dp(5), 0, dp(5), 0);
         }
     }
 
@@ -339,37 +367,50 @@ final class GraphicsSetupView extends FrameLayout {
     void setRewardBalance(int balance) {
         rewards.setText("REWARDS " + Math.max(0, balance));
         rewards.setContentDescription("Rewards, " + Math.max(0, balance) + " crystals");
+        homeModes.setRewardBalance(balance);
+        requestLayout();
     }
 
-    void setMusicState(boolean ready, boolean on) {
-        musicChecked = true;
-        musicCached = ready;
-        refresh();
+    void setCompletedMaps(Set<String> completedMaps) { maps.setCompletedMaps(completedMaps); }
+
+    void setCampaignBusy(boolean busy) { homeModes.setCampaignBusy(busy); }
+
+    void showTowersMap() {
+        maps.settleSelection();
+        towersMapVisible = true;
+        homeModes.setVisibility(GONE);
+        mapScroll.setVisibility(VISIBLE);
+        homeActions.setVisibility(VISIBLE);
+        version.setVisibility(VISIBLE);
+        splash.setVisibility(VISIBLE);
+        // Switching modes also invalidates a pending Campaign inspection.
+        actions.map(map);
     }
 
-    void musicDownloadProgress(long bytes, boolean verifying) {
-        setDownloading(true);
-        progress.setIndeterminate(verifying);
-        progress.setProgress((int) (bytes * 1000 / MusicPackStore.BYTES));
-        showStatus(verifying ? "Verifying music download…"
-                : String.format(Locale.ROOT, "Music download · %d%% · %.1f / %.1f MiB",
-                        bytes * 100 / MusicPackStore.BYTES, bytes / 1048576.0,
-                        MusicPackStore.BYTES / 1048576.0), false);
+    boolean handleHomeBack() {
+        if (!towersMapVisible) return false;
+        maps.settleSelection();
+        showHomeModes();
+        return true;
     }
 
-    void setDownloading(boolean value) {
-        downloading = value;
-        cancel.setVisibility(value ? VISIBLE : GONE);
-        progress.setVisibility(value ? VISIBLE : GONE);
-        refresh();
+    private void showHomeModes() {
+        towersMapVisible = false;
+        homeModes.setSelectedMap(catalog.level(map));
+        homeModes.setVisibility(VISIBLE);
+        mapScroll.setVisibility(GONE);
+        homeActions.setVisibility(GONE);
+        version.setVisibility(GONE);
+        splash.setVisibility(GONE);
     }
 
-    void showError(String value) { setDownloading(false); showStatus(value, true); }
+    void showError(String value) { showStatus(value, true); }
 
     void showStatus(String value, boolean error) {
         status.setText(value);
-        status.setTextColor(error ? 0xFFFFB6A5 : MUTED);
+        status.setTextColor(error ? INK : MUTED);
         message.setVisibility(VISIBLE);
+        homeModes.showStatus(value, error);
         panel.requestLayout();
     }
 
@@ -392,8 +433,9 @@ final class GraphicsSetupView extends FrameLayout {
 
     private Button button(String value, boolean primary) {
         Button button = new Button(getContext());
+        button.setBackgroundTintList(null);
         button.setText(value);
-        button.setTextColor(primary ? 0xFF0B151B : INK);
+        button.setTextColor(TowersTheme.buttonText(primary));
         button.setTextSize(primary ? 18 : 13);
         button.setTypeface(face);
         button.setIncludeFontPadding(false);
@@ -407,8 +449,8 @@ final class GraphicsSetupView extends FrameLayout {
         button.setMinHeight(0);
         button.setMinimumHeight(0);
         button.setPadding(dp(5), 0, dp(5), 0);
-        button.setBackground(new RippleDrawable(ColorStateList.valueOf(0x338BD3CC),
-                shape(primary ? TEAL : 0xFF14252D, primary ? TEAL : 0xFF29414A, 6), null));
+        button.setBackground(new RippleDrawable(ColorStateList.valueOf(primary ? TowersTheme.PRIMARY_RIPPLE : TowersTheme.RIPPLE),
+                TowersTheme.control(getContext(), primary ? TowersTheme.PRIMARY : TowersTheme.CONTROL, 6), null));
         return button;
     }
 
@@ -422,7 +464,7 @@ final class GraphicsSetupView extends FrameLayout {
         LaunchPanel(Context context) {
             super(context);
             for (View view : new View[] {matchChoices, weaponChoices, difficultyChoices,
-                    maps, detail, launchActions, message, progress}) addView(view);
+                    maps, detail, launchActions, message}) addView(view);
         }
 
         private void exact(View view, int width, int height) {
@@ -441,8 +483,10 @@ final class GraphicsSetupView extends FrameLayout {
             gap = dp(6);
             detailHeight = botMatch ? dp(getResources().getConfiguration().fontScale > 1.15f ? 36 : 28) : 0;
             int fixed = dp(96) + gap * 2;
+            float fontScale = getResources().getConfiguration().fontScale;
+            int minimumPreview = Math.round(dp(120) * Math.min(1.6f, Math.max(1f, fontScale)));
             int desiredPreview = Math.max(dp(144), Math.min(dp(240), Math.round(h * .44f)));
-            previewHeight = botMatch ? 0 : Math.max(dp(120), Math.min(desiredPreview, available - fixed));
+            previewHeight = botMatch ? 0 : Math.max(minimumPreview, Math.min(desiredPreview, available - fixed));
             contentHeight = fixed + (botMatch ? detailHeight : previewHeight);
             int measuredHeight = Math.max(h, contentHeight + outer * 2 + messageHeight);
             left = Math.max(outer, Math.min(Math.round(w * .047f), w - outer - panelWidth));
@@ -453,22 +497,14 @@ final class GraphicsSetupView extends FrameLayout {
             exact(maps, panelWidth, previewHeight);
             exact(detail, panelWidth, detailHeight);
             // Allow enlarged system text without turning the Play control into a banner.
-            float fontScale = getResources().getConfiguration().fontScale;
             LinearLayout.LayoutParams playParams = (LinearLayout.LayoutParams) start.getLayoutParams();
             int playWidth = Math.min(panelWidth / 2, Math.round(dp(112) * Math.min(1.4f, fontScale)));
             if (playParams.width != playWidth) {
                 playParams.width = playWidth;
                 start.setLayoutParams(playParams);
             }
-            LinearLayout.LayoutParams musicParams = (LinearLayout.LayoutParams) music.getLayoutParams();
-            int musicWidth = Math.max(0, panelWidth - playWidth - musicParams.leftMargin);
-            if (musicParams.width != musicWidth) {
-                musicParams.width = musicWidth;
-                music.setLayoutParams(musicParams);
-            }
             exact(launchActions, panelWidth, dp(48));
             exact(message, Math.min(w - outer * 2, dp(880)), dp(52));
-            exact(progress, Math.max(0, message.getMeasuredWidth() - dp(20)), dp(4));
             setMeasuredDimension(w, measuredHeight);
         }
 
@@ -495,8 +531,6 @@ final class GraphicsSetupView extends FrameLayout {
             int messageX = (getWidth() - messageWidth) / 2;
             int messageY = getHeight() - dp(56);
             message.layout(messageX, messageY, messageX + messageWidth, messageY + dp(52));
-            progress.layout(messageX + dp(10), messageY + dp(48),
-                    messageX + messageWidth - dp(10), messageY + dp(52));
         }
     }
 }

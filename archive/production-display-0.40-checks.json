@@ -1,0 +1,68 @@
+{
+  "version": "0.40",
+  "emulatorUsed": false,
+  "actualNativeEngineExecuted": false,
+  "sourceFunctionsExecuted": true,
+  "desktopBrowserRendered": true,
+  "fixture": "Synthetic native observations and queues; actual shared display helper and footer DOM renderer",
+  "checks": [
+    "Native 0%, partial and completed work preserve one current + five waiting = six remaining without mutating orders",
+    "Paused, power-waiting and capacity-waiting work retains sampled progress and suppresses countdowns",
+    "Unavailable observations and mismatched subjects hide progress; new native identities start from their own sample and external queue totals remain unknown",
+    "Idle/completed removal clears current-unit progress; invalid native points never become an invented zero-percent bar",
+    "Actual footer renderer labels factory totals and shows per-factory progress/counts while hiding unavailable bars",
+    "Footer clears stale bars and accessible values before showing a new native identity at zero",
+    "Research keeps its previous estimated-progress and activity-count behavior",
+    "Short footer scrolls to the final factory without overlapping count/progress rows",
+    "Main Production distinguishes current/waiting/remaining from ADD quantity and submits the unchanged exact count/factory/template order"
+  ],
+  "screenshots": [
+    "qa/0.40-production-display/footer-production-standard.png",
+    "qa/0.40-production-display/footer-production-short.png",
+    "qa/0.40-production-display/main-production-standard.png"
+  ],
+  "passed": true,
+  "checksPassed": 9,
+  "sources": [
+    {
+      "path": "app/src/main/assets/warzone-command-pages.js",
+      "sha256": "ea091c932e2722d3fbc50d69b74745fcfb457143bdd19b628b03cc6ca65a291c"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/towers-status.js",
+      "sha256": "bba388b49697b3b84fb1714c1d2e7aaafa9371f096d5244b60038e039546dc00"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/command-pages.css",
+      "sha256": "9036d9c8582b8ebb581ed2adaebf21f0e4465cf298ad38f16e4ee147327edf5c"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/lab-shell.css",
+      "sha256": "099a72464e470ebd387d035705a316d5ec3cdd9da11b63077754c03049b381c0"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/lab-commands.css",
+      "sha256": "9cc89795a6d02767d0bed940cce3216d418994bf8a400b7edf1a54dacf043a68"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/towers-commands.css",
+      "sha256": "f8cb75ab5f95dce25d3ae042fea3d5d4a6a22eaa808736d87cab017dfbf19e03"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/towers-shell.css",
+      "sha256": "1ea114b759d94de72e24b8a826c8c96aeec60ea0b77d13ca7055b360385bab42"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/towers-monochrome.css",
+      "sha256": "e3866b7aba8c2bc4fdf3dfe33b0a06c392ae6efea8909d3443cffe5048f830c7"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/towers-status.css",
+      "sha256": "87cc030401bc04d6ed485761bbd7e7722f5367d1bfff1c9b2df95f634004d957"
+    },
+    {
+      "path": "tools/check-production-display-040.cjs",
+      "sha256": "a38523333bea573d603319beeedbadd8634337980d3c344f443e0893cbe831d1"
+    }
+  ]
+}

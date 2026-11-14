@@ -1,0 +1,1 @@
+const q=require('./mp-live-070.cjs');(async()=>{const pid=q.adb('shell','pidof','com.rbabbit.warzonetowers.lab').toString().trim();q.adb('forward','tcp:9270','localabstract:webview_devtools_remote_'+pid);console.log((await(await fetch('http://127.0.0.1:9270/json')).json()).map(t=>({id:t.id,url:t.url})));})();

@@ -1,0 +1,43 @@
+{
+  "version": "0.75",
+  "passed": true,
+  "emulatorUsed": false,
+  "actualAndroidViewsExecuted": false,
+  "actualNativeEngineExecuted": false,
+  "scope": "Actual independent Hub data/worker code; retained actual public records and synthetic fetch/IndexedDB transport fixtures",
+  "checksPassed": 10,
+  "checks": [
+    "SSE handles fragmented Unicode, CRLF boundaries, comments, multiline data, event types and persistent IDs",
+    "All three own rating models match retained reference outputs for48 actual public game records",
+    "Incomplete history never publishes a rank/rating, while actual result rows remain queryable",
+    "Search is literal text, pagination bounded, aliases searchable and player/match details retain native identities",
+    "Synthetic short/cheated/unequal-team/early-quit cases preserve the documented rating exclusions",
+    "Worker explicitly requests SSE, publishes complete only at synced and serves real paged data",
+    "A complete IndexedDB snapshot supports offline Results and honest cached rankings after network failure",
+    "A saved incomplete checkpoint resumes with its cursor and server reset replaces the prefix without duplicates",
+    "An unsynced/truncated history stays incomplete and cannot expose global rankings",
+    "Cancellation aborts the active request and a stale completion cannot publish ready"
+  ],
+  "sources": [
+    {
+      "path": "app/src/main/assets/hub/hub-data.js",
+      "sha256": "82307703b0131f750e3daa0bc62196aac91af94ccba344fa247e1bb94a7f9b09"
+    },
+    {
+      "path": "app/src/main/assets/hub/hub-worker.js",
+      "sha256": "cacf1c1c5bc8b085a8fd46bc1da2ffc38279a44d126af8cfa4b06b5212645492"
+    },
+    {
+      "path": "tools/test-hub-data-075.cjs",
+      "sha256": "ab9d795569e1feacd7a6dae143cc5fad555a259ee556f940f3d6ffc603ea10e2"
+    },
+    {
+      "path": "tools/fixtures/hub-075/public-sample.json",
+      "sha256": "e77cfca5bd20ca28061db867f054778386c3a928e8263271143e28a4e6f2336d"
+    },
+    {
+      "path": "tools/fixtures/hub-075/reference-expected.json",
+      "sha256": "aab0634f046ded9cde866d742c81d8e7a401cdf98cf4e1f0cbf00a82303c441c"
+    }
+  ]
+}

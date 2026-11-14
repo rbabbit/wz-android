@@ -1,0 +1,3461 @@
+{
+  "version": "0.65",
+  "passed": true,
+  "checksPassed": 9,
+  "checks": [
+    {
+      "name": "Offline reader loads and reports all native mode catalogues",
+      "passed": true,
+      "detail": {
+        "towers": {
+          "chapters": 10,
+          "pages": 44,
+          "topics": 390
+        },
+        "ffa": {
+          "chapters": 10,
+          "pages": 44,
+          "topics": 390
+        },
+        "campaign": {
+          "chapters": 10,
+          "pages": 44,
+          "topics": 413
+        }
+      }
+    },
+    {
+      "name": "All 44 practical pages render their steps and captured annotations",
+      "passed": true,
+      "detail": {
+        "pages": 44,
+        "annotatedRequiredPages": 42
+      }
+    },
+    {
+      "name": "All 16 screenshot records have separated, bounded badges above targets in thumbnail and full dialog",
+      "passed": true,
+      "detail": {
+        "records": 16,
+        "originalPNGs": 14,
+        "views": 32,
+        "elapsedWithin15Seconds": true
+      }
+    },
+    {
+      "name": "Research links, practical related links, search and in-reader Back navigate correctly",
+      "passed": true
+    },
+    {
+      "name": "Screenshot dialog decodes, zooms, closes with Back and restores focus",
+      "passed": true
+    },
+    {
+      "name": "800: every practical page stays within horizontal bounds; representative screens captured",
+      "passed": true,
+      "detail": {
+        "viewport": [
+          800,
+          360
+        ],
+        "hostBaseTextScale": 1,
+        "readerLargeText": false
+      }
+    },
+    {
+      "name": "640-large: every practical page stays within horizontal bounds; representative screens captured",
+      "passed": true,
+      "detail": {
+        "viewport": [
+          640,
+          360
+        ],
+        "hostBaseTextScale": 1.3,
+        "readerLargeText": true
+      }
+    },
+    {
+      "name": "Keyboard Tab and Enter expose visible, focused controls",
+      "passed": true,
+      "detail": [
+        {
+          "id": "contents",
+          "tag": "BUTTON",
+          "text": "Contents",
+          "x": 8,
+          "y": 4.5,
+          "right": 120.53125,
+          "bottom": 47.5,
+          "outline": "solid"
+        },
+        {
+          "id": "",
+          "tag": "BUTTON",
+          "text": "Research paths",
+          "x": 125.53125,
+          "y": 3,
+          "right": 266.078125,
+          "bottom": 49,
+          "outline": "solid"
+        },
+        {
+          "id": "",
+          "tag": "BUTTON",
+          "text": "How to play",
+          "x": 271.078125,
+          "y": 3,
+          "right": 383.640625,
+          "bottom": 49,
+          "outline": "solid"
+        },
+        {
+          "id": "mode",
+          "tag": "SELECT",
+          "text": "TowersFFACampaign",
+          "x": 468.921875,
+          "y": 5,
+          "right": 576.921875,
+          "bottom": 47,
+          "outline": "solid"
+        },
+        {
+          "id": "type-size",
+          "tag": "BUTTON",
+          "text": "Aa",
+          "x": 581.921875,
+          "y": 4.5,
+          "right": 632,
+          "bottom": 47.5,
+          "outline": "solid"
+        },
+        {
+          "id": "query",
+          "tag": "INPUT",
+          "text": "",
+          "x": 8,
+          "y": 53,
+          "right": 536.390625,
+          "bottom": 96,
+          "outline": "solid"
+        },
+        {
+          "id": "sources",
+          "tag": "BUTTON",
+          "text": "Sources",
+          "x": 544.390625,
+          "y": 54.5,
+          "right": 632,
+          "bottom": 94.5,
+          "outline": "solid"
+        },
+        {
+          "id": "",
+          "tag": "BUTTON",
+          "text": "Research foundations7 topics›",
+          "x": 14,
+          "y": 255.015625,
+          "right": 308,
+          "bottom": 343.921875,
+          "outline": "solid"
+        }
+      ]
+    },
+    {
+      "name": "Reader issues no external requests, missing resources or JavaScript exceptions",
+      "passed": true
+    }
+  ],
+  "fatal": null,
+  "browser": "C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe",
+  "headless": true,
+  "emulatorUsed": false,
+  "actualNativeEngineExecuted": false,
+  "limitation": "Headless HTML reader and host text-stress checks. Android Home/Help integration, font scale and gameplay are verified separately on the exact APK.",
+  "screenshots": [
+    {
+      "path": "qa/guide-065/headless-browser/guide-800-intelligence-thumbnail.png",
+      "sha256": "7f30a6750c9cfe68b6681cd30ba7da064bb683e75d6cdacbd254a0f8f3007225"
+    },
+    {
+      "path": "qa/guide-065/headless-browser/guide-800-intelligence-full-dialog.png",
+      "sha256": "b2650c9f5d42ccdb930320a746fe531068e9b049d5af0c8171ec4e44c0aacc68"
+    },
+    {
+      "path": "qa/guide-065/headless-browser/guide-800-research-root.png",
+      "sha256": "9f12ac7300ce0ae0ef895e17c94b187cf3b15080164911e9de8b069be95e5ab1"
+    },
+    {
+      "path": "qa/guide-065/headless-browser/guide-800-research-topic.png",
+      "sha256": "1e3615005a74a4de46f2d41fd236c7415a1d637a0b1fba237e33a72b4088042a"
+    },
+    {
+      "path": "qa/guide-065/headless-browser/guide-800-practical-page.png",
+      "sha256": "0279eec96435582addae52ffe1175238432de8b1794e012d81fa28895d47cb9c"
+    },
+    {
+      "path": "qa/guide-065/headless-browser/guide-800-build-page.png",
+      "sha256": "78e6842b8cd02972a4055c965f7a6553c5227e5496878a79cd84c9bb205e9a36"
+    },
+    {
+      "path": "qa/guide-065/headless-browser/guide-640-large-research-root.png",
+      "sha256": "9dc7cce112883ae67db6a23ce70b0cbe98a07286bb670afac71e7841b13d03d5"
+    },
+    {
+      "path": "qa/guide-065/headless-browser/guide-640-large-research-topic.png",
+      "sha256": "01f114b46dfbc398ef261175522d7ff4e8d9881f1b9e3076bb30362b09cde6b1"
+    },
+    {
+      "path": "qa/guide-065/headless-browser/guide-640-large-practical-page.png",
+      "sha256": "e3da911c8c3cfc894881c5edebcf6676ab141d79714c40f6aee798f816e454df"
+    },
+    {
+      "path": "qa/guide-065/headless-browser/guide-640-large-build-page.png",
+      "sha256": "d3ba8bfcaf3d5d4af73cf69727430050dfddb9003ee54b0e54489184097fc6f6"
+    },
+    {
+      "path": "qa/guide-065/headless-browser/guide-640-large-image-dialog.png",
+      "sha256": "5fc9bf89ce3eb23d92483ed6efcb552dcc6ef2460d7d1314babd4afbe14f752f"
+    }
+  ],
+  "annotationFigures": [
+    {
+      "id": "controls-drawer",
+      "src": "screenshots/controls-drawer.png",
+      "pageId": "unit-drawer",
+      "mode": "ffa",
+      "expected": 5,
+      "thumbnail": {
+        "frame": {
+          "x": 205,
+          "y": 168.234375,
+          "width": 559,
+          "height": 368.84375,
+          "top": 168.234375,
+          "right": 764,
+          "bottom": 537.078125,
+          "left": 205
+        },
+        "badges": [
+          {
+            "number": "1",
+            "center": [
+              532.6500244140625,
+              188.08563232421875
+            ],
+            "radius": 10.5029296875,
+            "verticalRadius": 10.50286865234375,
+            "rect": {
+              "x": 523.1470947265625,
+              "y": 178.582763671875,
+              "width": 19.005859375,
+              "height": 19.0057373046875,
+              "top": 178.582763671875,
+              "right": 542.1529541015625,
+              "bottom": 197.5885009765625,
+              "left": 523.1470947265625
+            },
+            "stroke": 2
+          },
+          {
+            "number": "2",
+            "center": [
+              217.29794311523438,
+              347.21502685546875
+            ],
+            "radius": 10.502960205078125,
+            "verticalRadius": 10.50286865234375,
+            "rect": {
+              "x": 207.79498291015625,
+              "y": 337.712158203125,
+              "width": 19.00592041015625,
+              "height": 19.0057373046875,
+              "top": 337.712158203125,
+              "right": 226.8009033203125,
+              "bottom": 356.7178955078125,
+              "left": 207.79498291015625
+            },
+            "stroke": 2
+          },
+          {
+            "number": "3",
+            "center": [
+              373.5193786621094,
+              347.21502685546875
+            ],
+            "radius": 10.502960205078125,
+            "verticalRadius": 10.50286865234375,
+            "rect": {
+              "x": 364.01641845703125,
+              "y": 337.712158203125,
+              "width": 19.00592041015625,
+              "height": 19.0057373046875,
+              "top": 337.712158203125,
+              "right": 383.0223388671875,
+              "bottom": 356.7178955078125,
+              "left": 364.01641845703125
+            },
+            "stroke": 2
+          },
+          {
+            "number": "4",
+            "center": [
+              532.6500244140625,
+              347.21502685546875
+            ],
+            "radius": 10.5029296875,
+            "verticalRadius": 10.50286865234375,
+            "rect": {
+              "x": 523.1470947265625,
+              "y": 337.712158203125,
+              "width": 19.005859375,
+              "height": 19.0057373046875,
+              "top": 337.712158203125,
+              "right": 542.1529541015625,
+              "bottom": 356.7178955078125,
+              "left": 523.1470947265625
+            },
+            "stroke": 2
+          },
+          {
+            "number": "5",
+            "center": [
+              373.5193786621094,
+              188.08563232421875
+            ],
+            "radius": 10.502960205078125,
+            "verticalRadius": 10.50286865234375,
+            "rect": {
+              "x": 364.01641845703125,
+              "y": 178.582763671875,
+              "width": 19.00592041015625,
+              "height": 19.0057373046875,
+              "top": 178.582763671875,
+              "right": 383.0223388671875,
+              "bottom": 197.5885009765625,
+              "left": 364.01641845703125
+            },
+            "stroke": 2
+          }
+        ],
+        "labels": 5,
+        "rectangles": 10,
+        "arrows": 10,
+        "paintOrder": true
+      },
+      "dialog": {
+        "frame": {
+          "x": 9,
+          "y": 58,
+          "width": 767,
+          "height": 345.140625,
+          "top": 58,
+          "right": 776,
+          "bottom": 403.140625,
+          "left": 9
+        },
+        "badges": [
+          {
+            "number": "1",
+            "center": [
+              88.95975112915039,
+              259.3991470336914
+            ],
+            "radius": 14.038997650146484,
+            "verticalRadius": 14.038658142089844,
+            "rect": {
+              "x": 75.9207534790039,
+              "y": 246.36048889160156,
+              "width": 26.07799530029297,
+              "height": 26.077316284179688,
+              "top": 246.36048889160156,
+              "right": 101.99874877929688,
+              "bottom": 272.43780517578125,
+              "left": 75.9207534790039
+            },
+            "stroke": 2
+          },
+          {
+            "number": "2",
+            "center": [
+              25.874001502990723,
+              306.136962890625
+            ],
+            "radius": 14.03900146484375,
+            "verticalRadius": 14.03863525390625,
+            "rect": {
+              "x": 12.835000038146973,
+              "y": 293.09832763671875,
+              "width": 26.0780029296875,
+              "height": 26.0772705078125,
+              "top": 293.09832763671875,
+              "right": 38.91300296783447,
+              "bottom": 319.17559814453125,
+              "left": 12.835000038146973
+            },
+            "stroke": 2
+          },
+          {
+            "number": "3",
+            "center": [
+              75.20168685913086,
+              306.136962890625
+            ],
+            "radius": 14.038997650146484,
+            "verticalRadius": 14.03863525390625,
+            "rect": {
+              "x": 62.162689208984375,
+              "y": 293.09832763671875,
+              "width": 26.07799530029297,
+              "height": 26.0772705078125,
+              "top": 293.09832763671875,
+              "right": 88.24068450927734,
+              "bottom": 319.17559814453125,
+              "left": 62.162689208984375
+            },
+            "stroke": 2
+          },
+          {
+            "number": "4",
+            "center": [
+              121.94075012207031,
+              306.136962890625
+            ],
+            "radius": 14.03900146484375,
+            "verticalRadius": 14.03863525390625,
+            "rect": {
+              "x": 108.90174865722656,
+              "y": 293.09832763671875,
+              "width": 26.0780029296875,
+              "height": 26.0772705078125,
+              "top": 293.09832763671875,
+              "right": 134.97975158691406,
+              "bottom": 319.17559814453125,
+              "left": 108.90174865722656
+            },
+            "stroke": 2
+          },
+          {
+            "number": "5",
+            "center": [
+              42.220688819885254,
+              259.3991470336914
+            ],
+            "radius": 14.039000511169434,
+            "verticalRadius": 14.038658142089844,
+            "rect": {
+              "x": 29.18168830871582,
+              "y": 246.36048889160156,
+              "width": 26.078001022338867,
+              "height": 26.077316284179688,
+              "top": 246.36048889160156,
+              "right": 55.25968933105469,
+              "bottom": 272.43780517578125,
+              "left": 29.18168830871582
+            },
+            "stroke": 2
+          }
+        ],
+        "labels": 5,
+        "rectangles": 10,
+        "arrows": 10,
+        "paintOrder": true
+      }
+    },
+    {
+      "id": "research-queue",
+      "src": "screenshots/research-queue.png",
+      "pageId": "research-or-analysis",
+      "mode": "ffa",
+      "expected": 6,
+      "thumbnail": {
+        "frame": {
+          "x": 205,
+          "y": 168.234375,
+          "width": 559,
+          "height": 290.140625,
+          "top": 168.234375,
+          "right": 764,
+          "bottom": 458.375,
+          "left": 205
+        },
+        "badges": [
+          {
+            "number": "1",
+            "center": [
+              217.29783630371094,
+              180.5396499633789
+            ],
+            "radius": 10.50286865234375,
+            "verticalRadius": 10.502540588378906,
+            "rect": {
+              "x": 207.7949676513672,
+              "y": 171.037109375,
+              "width": 19.0057373046875,
+              "height": 19.005081176757812,
+              "top": 171.037109375,
+              "right": 226.8007049560547,
+              "bottom": 190.0421905517578,
+              "left": 207.7949676513672
+            },
+            "stroke": 2
+          },
+          {
+            "number": "2",
+            "center": [
+              217.29783630371094,
+              204.70830535888672
+            ],
+            "radius": 10.50286865234375,
+            "verticalRadius": 10.502540588378906,
+            "rect": {
+              "x": 207.7949676513672,
+              "y": 195.2057647705078,
+              "width": 19.0057373046875,
+              "height": 19.005081176757812,
+              "top": 195.2057647705078,
+              "right": 226.8007049560547,
+              "bottom": 214.21084594726562,
+              "left": 207.7949676513672
+            },
+            "stroke": 2
+          },
+          {
+            "number": "3",
+            "center": [
+              217.29783630371094,
+              233.0198974609375
+            ],
+            "radius": 10.50286865234375,
+            "verticalRadius": 10.502532958984375,
+            "rect": {
+              "x": 207.7949676513672,
+              "y": 223.51736450195312,
+              "width": 19.0057373046875,
+              "height": 19.00506591796875,
+              "top": 223.51736450195312,
+              "right": 226.8007049560547,
+              "bottom": 242.52243041992188,
+              "left": 207.7949676513672
+            },
+            "stroke": 2
+          },
+          {
+            "number": "4",
+            "center": [
+              217.29783630371094,
+              399.1570281982422
+            ],
+            "radius": 10.50286865234375,
+            "verticalRadius": 10.502548217773438,
+            "rect": {
+              "x": 207.7949676513672,
+              "y": 389.65447998046875,
+              "width": 19.0057373046875,
+              "height": 19.005096435546875,
+              "top": 389.65447998046875,
+              "right": 226.8007049560547,
+              "bottom": 408.6595764160156,
+              "left": 207.7949676513672
+            },
+            "stroke": 2
+          },
+          {
+            "number": "5",
+            "center": [
+              476.360595703125,
+              399.1570281982422
+            ],
+            "radius": 10.50286865234375,
+            "verticalRadius": 10.502548217773438,
+            "rect": {
+              "x": 466.85772705078125,
+              "y": 389.65447998046875,
+              "width": 19.0057373046875,
+              "height": 19.005096435546875,
+              "top": 389.65447998046875,
+              "right": 485.86346435546875,
+              "bottom": 408.6595764160156,
+              "left": 466.85772705078125
+            },
+            "stroke": 2
+          },
+          {
+            "number": "6",
+            "center": [
+              331.93006896972656,
+              369.3935241699219
+            ],
+            "radius": 10.502883911132812,
+            "verticalRadius": 10.502532958984375,
+            "rect": {
+              "x": 322.42718505859375,
+              "y": 359.8909912109375,
+              "width": 19.005767822265625,
+              "height": 19.00506591796875,
+              "top": 359.8909912109375,
+              "right": 341.4329528808594,
+              "bottom": 378.89605712890625,
+              "left": 322.42718505859375
+            },
+            "stroke": 2
+          }
+        ],
+        "labels": 6,
+        "rectangles": 12,
+        "arrows": 12,
+        "paintOrder": true
+      },
+      "dialog": {
+        "frame": {
+          "x": 9,
+          "y": 58,
+          "width": 767,
+          "height": 345.140625,
+          "top": 58,
+          "right": 776,
+          "bottom": 403.140625,
+          "left": 9
+        },
+        "badges": [
+          {
+            "number": "1",
+            "center": [
+              25.874001502990723,
+              111.99535751342773
+            ],
+            "radius": 14.03900146484375,
+            "verticalRadius": 14.038646697998047,
+            "rect": {
+              "x": 12.835000038146973,
+              "y": 98.95671081542969,
+              "width": 26.0780029296875,
+              "height": 26.077293395996094,
+              "top": 98.95671081542969,
+              "right": 38.91300296783447,
+              "bottom": 125.03400421142578,
+              "left": 12.835000038146973
+            },
+            "stroke": 2
+          },
+          {
+            "number": "2",
+            "center": [
+              58.85499954223633,
+              141.35625457763672
+            ],
+            "radius": 14.038997650146484,
+            "verticalRadius": 14.038642883300781,
+            "rect": {
+              "x": 45.816001892089844,
+              "y": 128.31761169433594,
+              "width": 26.07799530029297,
+              "height": 26.077285766601562,
+              "top": 128.31761169433594,
+              "right": 71.89399719238281,
+              "bottom": 154.3948974609375,
+              "left": 45.816001892089844
+            },
+            "stroke": 2
+          },
+          {
+            "number": "3",
+            "center": [
+              25.874001502990723,
+              164.7251434326172
+            ],
+            "radius": 14.03900146484375,
+            "verticalRadius": 14.038650512695312,
+            "rect": {
+              "x": 12.835000038146973,
+              "y": 151.68649291992188,
+              "width": 26.0780029296875,
+              "height": 26.077301025390625,
+              "top": 151.68649291992188,
+              "right": 38.91300296783447,
+              "bottom": 177.7637939453125,
+              "left": 12.835000038146973
+            },
+            "stroke": 2
+          },
+          {
+            "number": "4",
+            "center": [
+              25.874001502990723,
+              301.85765075683594
+            ],
+            "radius": 14.03900146484375,
+            "verticalRadius": 14.038650512695312,
+            "rect": {
+              "x": 12.835000038146973,
+              "y": 288.8190002441406,
+              "width": 26.0780029296875,
+              "height": 26.077301025390625,
+              "top": 288.8190002441406,
+              "right": 38.91300296783447,
+              "bottom": 314.89630126953125,
+              "left": 12.835000038146973
+            },
+            "stroke": 2
+          },
+          {
+            "number": "5",
+            "center": [
+              224.73269653320312,
+              301.85765075683594
+            ],
+            "radius": 14.03900146484375,
+            "verticalRadius": 14.038650512695312,
+            "rect": {
+              "x": 211.69369506835938,
+              "y": 288.8190002441406,
+              "width": 26.0780029296875,
+              "height": 26.077301025390625,
+              "top": 288.8190002441406,
+              "right": 237.77169799804688,
+              "bottom": 314.89630126953125,
+              "left": 211.69369506835938
+            },
+            "stroke": 2
+          },
+          {
+            "number": "6",
+            "center": [
+              105.51820373535156,
+              277.29034423828125
+            ],
+            "radius": 14.038993835449219,
+            "verticalRadius": 14.03863525390625,
+            "rect": {
+              "x": 92.47920989990234,
+              "y": 264.251708984375,
+              "width": 26.077987670898438,
+              "height": 26.0772705078125,
+              "top": 264.251708984375,
+              "right": 118.55719757080078,
+              "bottom": 290.3289794921875,
+              "left": 92.47920989990234
+            },
+            "stroke": 2
+          }
+        ],
+        "labels": 6,
+        "rectangles": 12,
+        "arrows": 12,
+        "paintOrder": true
+      }
+    },
+    {
+      "id": "intelligence-report",
+      "src": "screenshots/intelligence-report.png",
+      "pageId": "read-intelligence",
+      "mode": "ffa",
+      "expected": 4,
+      "thumbnail": {
+        "frame": {
+          "x": 205,
+          "y": 168.234375,
+          "width": 559,
+          "height": 230.78125,
+          "top": 168.234375,
+          "right": 764,
+          "bottom": 399.015625,
+          "left": 205
+        },
+        "badges": [
+          {
+            "number": "1",
+            "center": [
+              217.30797576904297,
+              180.53172302246094
+            ],
+            "radius": 10.502922058105469,
+            "verticalRadius": 10.502670288085938,
+            "rect": {
+              "x": 207.8050537109375,
+              "y": 171.029052734375,
+              "width": 19.005844116210938,
+              "height": 19.005340576171875,
+              "top": 171.029052734375,
+              "right": 226.81089782714844,
+              "bottom": 190.03439331054688,
+              "left": 207.8050537109375
+            },
+            "stroke": 2
+          },
+          {
+            "number": "2",
+            "center": [
+              241.34477996826172,
+              180.53172302246094
+            ],
+            "radius": 10.502922058105469,
+            "verticalRadius": 10.502670288085938,
+            "rect": {
+              "x": 231.84185791015625,
+              "y": 171.029052734375,
+              "width": 19.005844116210938,
+              "height": 19.005340576171875,
+              "top": 171.029052734375,
+              "right": 250.8477020263672,
+              "bottom": 190.03439331054688,
+              "left": 231.84185791015625
+            },
+            "stroke": 2
+          },
+          {
+            "number": "3",
+            "center": [
+              452.1947021484375,
+              180.53172302246094
+            ],
+            "radius": 10.5029296875,
+            "verticalRadius": 10.502670288085938,
+            "rect": {
+              "x": 442.6917724609375,
+              "y": 171.029052734375,
+              "width": 19.005859375,
+              "height": 19.005340576171875,
+              "top": 171.029052734375,
+              "right": 461.6976318359375,
+              "bottom": 190.03439331054688,
+              "left": 442.6917724609375
+            },
+            "stroke": 2
+          },
+          {
+            "number": "4",
+            "center": [
+              375.3659362792969,
+              270.5820770263672
+            ],
+            "radius": 10.5029296875,
+            "verticalRadius": 10.502670288085938,
+            "rect": {
+              "x": 365.8630065917969,
+              "y": 261.07940673828125,
+              "width": 19.005859375,
+              "height": 19.005340576171875,
+              "top": 261.07940673828125,
+              "right": 384.8688659667969,
+              "bottom": 280.0847473144531,
+              "left": 365.8630065917969
+            },
+            "stroke": 2
+          }
+        ],
+        "labels": 4,
+        "rectangles": 8,
+        "arrows": 8,
+        "paintOrder": true
+      },
+      "dialog": {
+        "frame": {
+          "x": 9,
+          "y": 58,
+          "width": 767,
+          "height": 345.140625,
+          "top": 58,
+          "right": 776,
+          "bottom": 403.140625,
+          "left": 9
+        },
+        "badges": [
+          {
+            "number": "1",
+            "center": [
+              138.09568786621094,
+              134.5552978515625
+            ],
+            "radius": 14.03900146484375,
+            "verticalRadius": 14.038650512695312,
+            "rect": {
+              "x": 125.05668640136719,
+              "y": 121.51664733886719,
+              "width": 26.0780029296875,
+              "height": 26.077301025390625,
+              "top": 121.51664733886719,
+              "right": 151.1346893310547,
+              "bottom": 147.5939483642578,
+              "left": 125.05668640136719
+            },
+            "stroke": 2
+          },
+          {
+            "number": "2",
+            "center": [
+              171.07669067382812,
+              134.5552978515625
+            ],
+            "radius": 14.03900146484375,
+            "verticalRadius": 14.038650512695312,
+            "rect": {
+              "x": 158.03768920898438,
+              "y": 121.51664733886719,
+              "width": 26.0780029296875,
+              "height": 26.077301025390625,
+              "top": 121.51664733886719,
+              "right": 184.11569213867188,
+              "bottom": 147.5939483642578,
+              "left": 158.03768920898438
+            },
+            "stroke": 2
+          },
+          {
+            "number": "3",
+            "center": [
+              356.2113037109375,
+              132.5779571533203
+            ],
+            "radius": 14.03900146484375,
+            "verticalRadius": 14.038650512695312,
+            "rect": {
+              "x": 343.17230224609375,
+              "y": 119.539306640625,
+              "width": 26.0780029296875,
+              "height": 26.077301025390625,
+              "top": 119.539306640625,
+              "right": 369.25030517578125,
+              "bottom": 145.61660766601562,
+              "left": 343.17230224609375
+            },
+            "stroke": 2
+          },
+          {
+            "number": "4",
+            "center": [
+              286.7019348144531,
+              225.1946792602539
+            ],
+            "radius": 14.03900146484375,
+            "verticalRadius": 14.038642883300781,
+            "rect": {
+              "x": 273.6629333496094,
+              "y": 212.15603637695312,
+              "width": 26.0780029296875,
+              "height": 26.077285766601562,
+              "top": 212.15603637695312,
+              "right": 299.7409362792969,
+              "bottom": 238.2333221435547,
+              "left": 273.6629333496094
+            },
+            "stroke": 2
+          }
+        ],
+        "labels": 4,
+        "rectangles": 8,
+        "arrows": 8,
+        "paintOrder": true
+      }
+    },
+    {
+      "id": "factory-units",
+      "src": "screenshots/factory-units.png",
+      "pageId": "first-research-and-force",
+      "mode": "ffa",
+      "expected": 4,
+      "thumbnail": {
+        "frame": {
+          "x": 205,
+          "y": 168.234375,
+          "width": 559,
+          "height": 222,
+          "top": 168.234375,
+          "right": 764,
+          "bottom": 390.234375,
+          "left": 205
+        },
+        "badges": [
+          {
+            "number": "1",
+            "center": [
+              298.6808624267578,
+              180.54126739501953
+            ],
+            "radius": 10.502883911132812,
+            "verticalRadius": 10.502540588378906,
+            "rect": {
+              "x": 289.177978515625,
+              "y": 171.03872680664062,
+              "width": 19.005767822265625,
+              "height": 19.005081176757812,
+              "top": 171.03872680664062,
+              "right": 308.1837463378906,
+              "bottom": 190.04380798339844,
+              "left": 289.177978515625
+            },
+            "stroke": 2
+          },
+          {
+            "number": "2",
+            "center": [
+              217.29783630371094,
+              206.52476501464844
+            ],
+            "radius": 10.50286865234375,
+            "verticalRadius": 10.502532958984375,
+            "rect": {
+              "x": 207.7949676513672,
+              "y": 197.02223205566406,
+              "width": 19.0057373046875,
+              "height": 19.00506591796875,
+              "top": 197.02223205566406,
+              "right": 226.8007049560547,
+              "bottom": 216.0272979736328,
+              "left": 207.7949676513672
+            },
+            "stroke": 2
+          },
+          {
+            "number": "3",
+            "center": [
+              647.9907836914062,
+              293.27442932128906
+            ],
+            "radius": 10.50286865234375,
+            "verticalRadius": 10.502548217773438,
+            "rect": {
+              "x": 638.4879150390625,
+              "y": 283.7718811035156,
+              "width": 19.0057373046875,
+              "height": 19.005096435546875,
+              "top": 283.7718811035156,
+              "right": 657.49365234375,
+              "bottom": 302.7769775390625,
+              "left": 638.4879150390625
+            },
+            "stroke": 2
+          },
+          {
+            "number": "4",
+            "center": [
+              217.29783630371094,
+              332.47511291503906
+            ],
+            "radius": 10.50286865234375,
+            "verticalRadius": 10.502548217773438,
+            "rect": {
+              "x": 207.7949676513672,
+              "y": 322.9725646972656,
+              "width": 19.0057373046875,
+              "height": 19.005096435546875,
+              "top": 322.9725646972656,
+              "right": 226.8007049560547,
+              "bottom": 341.9776611328125,
+              "left": 207.7949676513672
+            },
+            "stroke": 2
+          }
+        ],
+        "labels": 4,
+        "rectangles": 8,
+        "arrows": 8,
+        "paintOrder": true
+      },
+      "dialog": {
+        "frame": {
+          "x": 9,
+          "y": 58,
+          "width": 767,
+          "height": 345.140625,
+          "top": 58,
+          "right": 776,
+          "bottom": 403.140625,
+          "left": 9
+        },
+        "badges": [
+          {
+            "number": "1",
+            "center": [
+              78.07394409179688,
+              132.9674530029297
+            ],
+            "radius": 14.03900146484375,
+            "verticalRadius": 14.038650512695312,
+            "rect": {
+              "x": 65.03494262695312,
+              "y": 119.92880249023438,
+              "width": 26.0780029296875,
+              "height": 26.077301025390625,
+              "top": 119.92880249023438,
+              "right": 91.11294555664062,
+              "bottom": 146.006103515625,
+              "left": 65.03494262695312
+            },
+            "stroke": 2
+          },
+          {
+            "number": "2",
+            "center": [
+              25.874001502990723,
+              163.82636260986328
+            ],
+            "radius": 14.03900146484375,
+            "verticalRadius": 14.038642883300781,
+            "rect": {
+              "x": 12.835000038146973,
+              "y": 150.7877197265625,
+              "width": 26.0780029296875,
+              "height": 26.077285766601562,
+              "top": 150.7877197265625,
+              "right": 38.91300296783447,
+              "bottom": 176.86500549316406,
+              "left": 12.835000038146973
+            },
+            "stroke": 2
+          },
+          {
+            "number": "3",
+            "center": [
+              366.3980712890625,
+              235.4310531616211
+            ],
+            "radius": 14.03900146484375,
+            "verticalRadius": 14.038642883300781,
+            "rect": {
+              "x": 353.35906982421875,
+              "y": 222.3924102783203,
+              "width": 26.0780029296875,
+              "height": 26.077285766601562,
+              "top": 222.3924102783203,
+              "right": 379.43707275390625,
+              "bottom": 248.46969604492188,
+              "left": 353.35906982421875
+            },
+            "stroke": 2
+          },
+          {
+            "number": "4",
+            "center": [
+              25.874001502990723,
+              267.7879867553711
+            ],
+            "radius": 14.03900146484375,
+            "verticalRadius": 14.038642883300781,
+            "rect": {
+              "x": 12.835000038146973,
+              "y": 254.7493438720703,
+              "width": 26.0780029296875,
+              "height": 26.077285766601562,
+              "top": 254.7493438720703,
+              "right": 38.91300296783447,
+              "bottom": 280.8266296386719,
+              "left": 12.835000038146973
+            },
+            "stroke": 2
+          }
+        ],
+        "labels": 4,
+        "rectangles": 8,
+        "arrows": 8,
+        "paintOrder": true
+      }
+    },
+    {
+      "id": "factory-queue",
+      "src": "screenshots/factory-queue.png",
+      "pageId": "manufacturing-queue",
+      "mode": "ffa",
+      "expected": 3,
+      "thumbnail": {
+        "frame": {
+          "x": 205,
+          "y": 168.234375,
+          "width": 559,
+          "height": 150.46875,
+          "top": 168.234375,
+          "right": 764,
+          "bottom": 318.703125,
+          "left": 205
+        },
+        "badges": [
+          {
+            "number": "1",
+            "center": [
+              682.0447387695312,
+              214.72985076904297
+            ],
+            "radius": 10.50299072265625,
+            "verticalRadius": 10.502769470214844,
+            "rect": {
+              "x": 672.541748046875,
+              "y": 205.22708129882812,
+              "width": 19.0059814453125,
+              "height": 19.005538940429688,
+              "top": 205.22708129882812,
+              "right": 691.5477294921875,
+              "bottom": 224.2326202392578,
+              "left": 672.541748046875
+            },
+            "stroke": 2
+          },
+          {
+            "number": "2",
+            "center": [
+              682.0447387695312,
+              238.78340911865234
+            ],
+            "radius": 10.50299072265625,
+            "verticalRadius": 10.502769470214844,
+            "rect": {
+              "x": 672.541748046875,
+              "y": 229.2806396484375,
+              "width": 19.0059814453125,
+              "height": 19.005538940429688,
+              "top": 229.2806396484375,
+              "right": 691.5477294921875,
+              "bottom": 248.2861785888672,
+              "left": 672.541748046875
+            },
+            "stroke": 2
+          },
+          {
+            "number": "3",
+            "center": [
+              217.29796600341797,
+              180.54456329345703
+            ],
+            "radius": 10.502967834472656,
+            "verticalRadius": 10.502769470214844,
+            "rect": {
+              "x": 207.7949981689453,
+              "y": 171.0417938232422,
+              "width": 19.005935668945312,
+              "height": 19.005538940429688,
+              "top": 171.0417938232422,
+              "right": 226.80093383789062,
+              "bottom": 190.04733276367188,
+              "left": 207.7949981689453
+            },
+            "stroke": 2
+          }
+        ],
+        "labels": 3,
+        "rectangles": 6,
+        "arrows": 6,
+        "paintOrder": true
+      },
+      "dialog": {
+        "frame": {
+          "x": 9,
+          "y": 58,
+          "width": 767,
+          "height": 345.140625,
+          "top": 58,
+          "right": 776,
+          "bottom": 403.140625,
+          "left": 9
+        },
+        "badges": [
+          {
+            "number": "1",
+            "center": [
+              400.83314514160156,
+              143.7530975341797
+            ],
+            "radius": 14.039016723632812,
+            "verticalRadius": 14.038650512695312,
+            "rect": {
+              "x": 387.79412841796875,
+              "y": 130.71444702148438,
+              "width": 26.078033447265625,
+              "height": 26.077301025390625,
+              "top": 130.71444702148438,
+              "right": 413.8721618652344,
+              "bottom": 156.791748046875,
+              "left": 387.79412841796875
+            },
+            "stroke": 2
+          },
+          {
+            "number": "2",
+            "center": [
+              433.8141784667969,
+              163.91624450683594
+            ],
+            "radius": 14.03900146484375,
+            "verticalRadius": 14.038650512695312,
+            "rect": {
+              "x": 420.7751770019531,
+              "y": 150.87759399414062,
+              "width": 26.0780029296875,
+              "height": 26.077301025390625,
+              "top": 150.87759399414062,
+              "right": 446.8531799316406,
+              "bottom": 176.95489501953125,
+              "left": 420.7751770019531
+            },
+            "stroke": 2
+          },
+          {
+            "number": "3",
+            "center": [
+              25.874001502990723,
+              105.40409469604492
+            ],
+            "radius": 14.03900146484375,
+            "verticalRadius": 14.038646697998047,
+            "rect": {
+              "x": 12.835000038146973,
+              "y": 92.36544799804688,
+              "width": 26.0780029296875,
+              "height": 26.077293395996094,
+              "top": 92.36544799804688,
+              "right": 38.91300296783447,
+              "bottom": 118.44274139404297,
+              "left": 12.835000038146973
+            },
+            "stroke": 2
+          }
+        ],
+        "labels": 3,
+        "rectangles": 6,
+        "arrows": 6,
+        "paintOrder": true
+      }
+    },
+    {
+      "id": "design-blueprint",
+      "src": "screenshots/design-blueprint.png",
+      "pageId": "design-a-unit",
+      "mode": "ffa",
+      "expected": 6,
+      "thumbnail": {
+        "frame": {
+          "x": 205,
+          "y": 168.234375,
+          "width": 559,
+          "height": 202.796875,
+          "top": 168.234375,
+          "right": 764,
+          "bottom": 371.03125,
+          "left": 205
+        },
+        "badges": [
+          {
+            "number": "1",
+            "center": [
+              217.29783630371094,
+              180.53780364990234
+            ],
+            "radius": 10.50286865234375,
+            "verticalRadius": 10.502540588378906,
+            "rect": {
+              "x": 207.7949676513672,
+              "y": 171.03526306152344,
+              "width": 19.0057373046875,
+              "height": 19.005081176757812,
+              "top": 171.03526306152344,
+              "right": 226.8007049560547,
+              "bottom": 190.04034423828125,
+              "left": 207.7949676513672
+            },
+            "stroke": 2
+          },
+          {
+            "number": "2",
+            "center": [
+              324.21063232421875,
+              180.53780364990234
+            ],
+            "radius": 10.50286865234375,
+            "verticalRadius": 10.502540588378906,
+            "rect": {
+              "x": 314.707763671875,
+              "y": 171.03526306152344,
+              "width": 19.0057373046875,
+              "height": 19.005081176757812,
+              "top": 171.03526306152344,
+              "right": 333.7135009765625,
+              "bottom": 190.04034423828125,
+              "left": 314.707763671875
+            },
+            "stroke": 2
+          },
+          {
+            "number": "3",
+            "center": [
+              442.54278564453125,
+              180.53780364990234
+            ],
+            "radius": 10.50286865234375,
+            "verticalRadius": 10.502540588378906,
+            "rect": {
+              "x": 433.0399169921875,
+              "y": 171.03526306152344,
+              "width": 19.0057373046875,
+              "height": 19.005081176757812,
+              "top": 171.03526306152344,
+              "right": 452.045654296875,
+              "bottom": 190.04034423828125,
+              "left": 433.0399169921875
+            },
+            "stroke": 2
+          },
+          {
+            "number": "4",
+            "center": [
+              249.2245101928711,
+              327.7893829345703
+            ],
+            "radius": 10.502876281738281,
+            "verticalRadius": 10.502548217773438,
+            "rect": {
+              "x": 239.7216339111328,
+              "y": 318.2868347167969,
+              "width": 19.005752563476562,
+              "height": 19.005096435546875,
+              "top": 318.2868347167969,
+              "right": 258.7273864746094,
+              "bottom": 337.29193115234375,
+              "left": 239.7216339111328
+            },
+            "stroke": 2
+          },
+          {
+            "number": "5",
+            "center": [
+              217.29783630371094,
+              314.1780090332031
+            ],
+            "radius": 10.50286865234375,
+            "verticalRadius": 10.502532958984375,
+            "rect": {
+              "x": 207.7949676513672,
+              "y": 304.67547607421875,
+              "width": 19.0057373046875,
+              "height": 19.00506591796875,
+              "top": 304.67547607421875,
+              "right": 226.8007049560547,
+              "bottom": 323.6805419921875,
+              "left": 207.7949676513672
+            },
+            "stroke": 2
+          },
+          {
+            "number": "6",
+            "center": [
+              429.98968505859375,
+              327.7893829345703
+            ],
+            "radius": 10.50286865234375,
+            "verticalRadius": 10.502548217773438,
+            "rect": {
+              "x": 420.48681640625,
+              "y": 318.2868347167969,
+              "width": 19.0057373046875,
+              "height": 19.005096435546875,
+              "top": 318.2868347167969,
+              "right": 439.4925537109375,
+              "bottom": 337.29193115234375,
+              "left": 420.48681640625
+            },
+            "stroke": 2
+          }
+        ],
+        "labels": 6,
+        "rectangles": 12,
+        "arrows": 12,
+        "paintOrder": true
+      },
+      "dialog": {
+        "frame": {
+          "x": 9,
+          "y": 58,
+          "width": 767,
+          "height": 345.140625,
+          "top": 58,
+          "right": 776,
+          "bottom": 403.140625,
+          "left": 9
+        },
+        "badges": [
+          {
+            "number": "1",
+            "center": [
+              25.874001502990723,
+              128.7730255126953
+            ],
+            "radius": 14.03900146484375,
+            "verticalRadius": 14.038650512695312,
+            "rect": {
+              "x": 12.835000038146973,
+              "y": 115.734375,
+              "width": 26.0780029296875,
+              "height": 26.077301025390625,
+              "top": 115.734375,
+              "right": 38.91300296783447,
+              "bottom": 141.81167602539062,
+              "left": 12.835000038146973
+            },
+            "stroke": 2
+          },
+          {
+            "number": "2",
+            "center": [
+              99.14651489257812,
+              128.7730255126953
+            ],
+            "radius": 14.03900146484375,
+            "verticalRadius": 14.038650512695312,
+            "rect": {
+              "x": 86.10751342773438,
+              "y": 115.734375,
+              "width": 26.0780029296875,
+              "height": 26.077301025390625,
+              "top": 115.734375,
+              "right": 112.18551635742188,
+              "bottom": 141.81167602539062,
+              "left": 86.10751342773438
+            },
+            "stroke": 2
+          },
+          {
+            "number": "3",
+            "center": [
+              196.81912231445312,
+              128.7730255126953
+            ],
+            "radius": 14.03900146484375,
+            "verticalRadius": 14.038650512695312,
+            "rect": {
+              "x": 183.78012084960938,
+              "y": 115.734375,
+              "width": 26.0780029296875,
+              "height": 26.077301025390625,
+              "top": 115.734375,
+              "right": 209.85812377929688,
+              "bottom": 141.81167602539062,
+              "left": 183.78012084960938
+            },
+            "stroke": 2
+          },
+          {
+            "number": "4",
+            "center": [
+              37.252137184143066,
+              259.72874450683594
+            ],
+            "radius": 14.039000511169434,
+            "verticalRadius": 14.038650512695312,
+            "rect": {
+              "x": 24.213136672973633,
+              "y": 246.69009399414062,
+              "width": 26.078001022338867,
+              "height": 26.077301025390625,
+              "top": 246.69009399414062,
+              "right": 50.2911376953125,
+              "bottom": 272.76739501953125,
+              "left": 24.213136672973633
+            },
+            "stroke": 2
+          },
+          {
+            "number": "5",
+            "center": [
+              25.874001502990723,
+              225.17321014404297
+            ],
+            "radius": 14.03900146484375,
+            "verticalRadius": 14.038642883300781,
+            "rect": {
+              "x": 12.835000038146973,
+              "y": 212.1345672607422,
+              "width": 26.0780029296875,
+              "height": 26.077285766601562,
+              "top": 212.1345672607422,
+              "right": 38.91300296783447,
+              "bottom": 238.21185302734375,
+              "left": 12.835000038146973
+            },
+            "stroke": 2
+          },
+          {
+            "number": "6",
+            "center": [
+              186.45764923095703,
+              259.72874450683594
+            ],
+            "radius": 14.038993835449219,
+            "verticalRadius": 14.038650512695312,
+            "rect": {
+              "x": 173.4186553955078,
+              "y": 246.69009399414062,
+              "width": 26.077987670898438,
+              "height": 26.077301025390625,
+              "top": 246.69009399414062,
+              "right": 199.49664306640625,
+              "bottom": 272.76739501953125,
+              "left": 173.4186553955078
+            },
+            "stroke": 2
+          }
+        ],
+        "labels": 6,
+        "rectangles": 12,
+        "arrows": 12,
+        "paintOrder": true
+      }
+    },
+    {
+      "id": "build-sites",
+      "src": "screenshots/build-sites.png",
+      "pageId": "first-economy",
+      "mode": "ffa",
+      "expected": 4,
+      "thumbnail": {
+        "frame": {
+          "x": 205,
+          "y": 168.234375,
+          "width": 559,
+          "height": 598.03125,
+          "top": 168.234375,
+          "right": 764,
+          "bottom": 766.265625,
+          "left": 205
+        },
+        "badges": [
+          {
+            "number": "1",
+            "center": [
+              335.32875061035156,
+              246.3999481201172
+            ],
+            "radius": 10.502944946289062,
+            "verticalRadius": 10.502944946289062,
+            "rect": {
+              "x": 325.8258056640625,
+              "y": 236.89700317382812,
+              "width": 19.005889892578125,
+              "height": 19.005889892578125,
+              "top": 236.89700317382812,
+              "right": 344.8316955566406,
+              "bottom": 255.90289306640625,
+              "left": 325.8258056640625
+            },
+            "stroke": 2
+          },
+          {
+            "number": "2",
+            "center": [
+              455.99806213378906,
+              246.3999481201172
+            ],
+            "radius": 10.502944946289062,
+            "verticalRadius": 10.502944946289062,
+            "rect": {
+              "x": 446.4951171875,
+              "y": 236.89700317382812,
+              "width": 19.005889892578125,
+              "height": 19.005889892578125,
+              "top": 236.89700317382812,
+              "right": 465.5010070800781,
+              "bottom": 255.90289306640625,
+              "left": 446.4951171875
+            },
+            "stroke": 2
+          },
+          {
+            "number": "3",
+            "center": [
+              217.29793548583984,
+              590.8735961914062
+            ],
+            "radius": 10.502952575683594,
+            "verticalRadius": 10.5029296875,
+            "rect": {
+              "x": 207.79498291015625,
+              "y": 581.3706665039062,
+              "width": 19.005905151367188,
+              "height": 19.005859375,
+              "top": 581.3706665039062,
+              "right": 226.80088806152344,
+              "bottom": 600.3765258789062,
+              "left": 207.79498291015625
+            },
+            "stroke": 2
+          },
+          {
+            "number": "4",
+            "center": [
+              561.849853515625,
+              188.38605499267578
+            ],
+            "radius": 10.5029296875,
+            "verticalRadius": 10.502937316894531,
+            "rect": {
+              "x": 552.346923828125,
+              "y": 178.88311767578125,
+              "width": 19.005859375,
+              "height": 19.005874633789062,
+              "top": 178.88311767578125,
+              "right": 571.352783203125,
+              "bottom": 197.8889923095703,
+              "left": 552.346923828125
+            },
+            "stroke": 2
+          }
+        ],
+        "labels": 4,
+        "rectangles": 8,
+        "arrows": 8,
+        "paintOrder": true
+      },
+      "dialog": {
+        "frame": {
+          "x": 9,
+          "y": 58,
+          "width": 767,
+          "height": 345.140625,
+          "top": 58,
+          "right": 776,
+          "bottom": 403.140625,
+          "left": 9
+        },
+        "badges": [
+          {
+            "number": "1",
+            "center": [
+              30.535903930664062,
+              103.60650634765625
+            ],
+            "radius": 14.03900146484375,
+            "verticalRadius": 14.038650512695312,
+            "rect": {
+              "x": 17.496902465820312,
+              "y": 90.56785583496094,
+              "width": 26.0780029296875,
+              "height": 26.077301025390625,
+              "top": 90.56785583496094,
+              "right": 43.57490539550781,
+              "bottom": 116.64515686035156,
+              "left": 17.496902465820312
+            },
+            "stroke": 2
+          },
+          {
+            "number": "2",
+            "center": [
+              65.59025764465332,
+              103.60650634765625
+            ],
+            "radius": 14.038999557495117,
+            "verticalRadius": 14.038650512695312,
+            "rect": {
+              "x": 52.5512580871582,
+              "y": 90.56785583496094,
+              "width": 26.077999114990234,
+              "height": 26.077301025390625,
+              "top": 90.56785583496094,
+              "right": 78.62925720214844,
+              "bottom": 116.64515686035156,
+              "left": 52.5512580871582
+            },
+            "stroke": 2
+          },
+          {
+            "number": "3",
+            "center": [
+              25.874001502990723,
+              203.67330169677734
+            ],
+            "radius": 14.03900146484375,
+            "verticalRadius": 14.038642883300781,
+            "rect": {
+              "x": 12.835000038146973,
+              "y": 190.63465881347656,
+              "width": 26.0780029296875,
+              "height": 26.077285766601562,
+              "top": 190.63465881347656,
+              "right": 38.91300296783447,
+              "bottom": 216.71194458007812,
+              "left": 12.835000038146973
+            },
+            "stroke": 2
+          },
+          {
+            "number": "4",
+            "center": [
+              96.34013366699219,
+              86.75394058227539
+            ],
+            "radius": 14.03900146484375,
+            "verticalRadius": 14.038646697998047,
+            "rect": {
+              "x": 83.30113220214844,
+              "y": 73.71529388427734,
+              "width": 26.0780029296875,
+              "height": 26.077293395996094,
+              "top": 73.71529388427734,
+              "right": 109.37913513183594,
+              "bottom": 99.79258728027344,
+              "left": 83.30113220214844
+            },
+            "stroke": 2
+          }
+        ],
+        "labels": 4,
+        "rectangles": 8,
+        "arrows": 8,
+        "paintOrder": true
+      }
+    },
+    {
+      "id": "build-modules",
+      "src": "screenshots/build-modules.png",
+      "pageId": "building-modules",
+      "mode": "ffa",
+      "expected": 3,
+      "thumbnail": {
+        "frame": {
+          "x": 205,
+          "y": 168.234375,
+          "width": 559,
+          "height": 412.859375,
+          "top": 168.234375,
+          "right": 764,
+          "bottom": 581.09375,
+          "left": 205
+        },
+        "badges": [
+          {
+            "number": "1",
+            "center": [
+              217.2979736328125,
+              411.03553771972656
+            ],
+            "radius": 10.502975463867188,
+            "verticalRadius": 10.502944946289062,
+            "rect": {
+              "x": 207.7949981689453,
+              "y": 401.5325927734375,
+              "width": 19.005950927734375,
+              "height": 19.005889892578125,
+              "top": 401.5325927734375,
+              "right": 226.8009490966797,
+              "bottom": 420.5384826660156,
+              "left": 207.7949981689453
+            },
+            "stroke": 2
+          },
+          {
+            "number": "2",
+            "center": [
+              217.2979736328125,
+              337.1680603027344
+            ],
+            "radius": 10.502975463867188,
+            "verticalRadius": 10.502960205078125,
+            "rect": {
+              "x": 207.7949981689453,
+              "y": 327.66510009765625,
+              "width": 19.005950927734375,
+              "height": 19.00592041015625,
+              "top": 327.66510009765625,
+              "right": 226.8009490966797,
+              "bottom": 346.6710205078125,
+              "left": 207.7949981689453
+            },
+            "stroke": 2
+          },
+          {
+            "number": "3",
+            "center": [
+              217.2979736328125,
+              187.43665313720703
+            ],
+            "radius": 10.502975463867188,
+            "verticalRadius": 10.502952575683594,
+            "rect": {
+              "x": 207.7949981689453,
+              "y": 177.93370056152344,
+              "width": 19.005950927734375,
+              "height": 19.005905151367188,
+              "top": 177.93370056152344,
+              "right": 226.8009490966797,
+              "bottom": 196.93960571289062,
+              "left": 207.7949981689453
+            },
+            "stroke": 2
+          }
+        ],
+        "labels": 3,
+        "rectangles": 6,
+        "arrows": 6,
+        "paintOrder": true
+      },
+      "dialog": {
+        "frame": {
+          "x": 9,
+          "y": 58,
+          "width": 767,
+          "height": 345.140625,
+          "top": 58,
+          "right": 776,
+          "bottom": 403.140625,
+          "left": 9
+        },
+        "badges": [
+          {
+            "number": "1",
+            "center": [
+              25.874001502990723,
+              146.74907684326172
+            ],
+            "radius": 14.03900146484375,
+            "verticalRadius": 14.038642883300781,
+            "rect": {
+              "x": 12.835000038146973,
+              "y": 133.71043395996094,
+              "width": 26.0780029296875,
+              "height": 26.077285766601562,
+              "top": 133.71043395996094,
+              "right": 38.91300296783447,
+              "bottom": 159.7877197265625,
+              "left": 12.835000038146973
+            },
+            "stroke": 2
+          },
+          {
+            "number": "2",
+            "center": [
+              58.85499954223633,
+              124.57859802246094
+            ],
+            "radius": 14.038997650146484,
+            "verticalRadius": 14.038650512695312,
+            "rect": {
+              "x": 45.816001892089844,
+              "y": 111.53994750976562,
+              "width": 26.07799530029297,
+              "height": 26.077301025390625,
+              "top": 111.53994750976562,
+              "right": 71.89399719238281,
+              "bottom": 137.61724853515625,
+              "left": 45.816001892089844
+            },
+            "stroke": 2
+          },
+          {
+            "number": "3",
+            "center": [
+              25.874001502990723,
+              79.6384162902832
+            ],
+            "radius": 14.03900146484375,
+            "verticalRadius": 14.038646697998047,
+            "rect": {
+              "x": 12.835000038146973,
+              "y": 66.59976959228516,
+              "width": 26.0780029296875,
+              "height": 26.077293395996094,
+              "top": 66.59976959228516,
+              "right": 38.91300296783447,
+              "bottom": 92.67706298828125,
+              "left": 12.835000038146973
+            },
+            "stroke": 2
+          }
+        ],
+        "labels": 3,
+        "rectangles": 6,
+        "arrows": 6,
+        "paintOrder": true
+      }
+    },
+    {
+      "id": "controls-world",
+      "src": "screenshots/controls-world.png",
+      "pageId": "first-minute",
+      "mode": "campaign",
+      "expected": 5,
+      "thumbnail": {
+        "frame": {
+          "x": 205,
+          "y": 168.234375,
+          "width": 559,
+          "height": 251.546875,
+          "top": 168.234375,
+          "right": 764,
+          "bottom": 419.78125,
+          "left": 205
+        },
+        "badges": [
+          {
+            "number": "1",
+            "center": [
+              308.46156311035156,
+              180.5322265625
+            ],
+            "radius": 10.503005981445312,
+            "verticalRadius": 10.502883911132812,
+            "rect": {
+              "x": 298.95855712890625,
+              "y": 171.0293426513672,
+              "width": 19.006011962890625,
+              "height": 19.005767822265625,
+              "top": 171.0293426513672,
+              "right": 317.9645690917969,
+              "bottom": 190.0351104736328,
+              "left": 298.95855712890625
+            },
+            "stroke": 2
+          },
+          {
+            "number": "2",
+            "center": [
+              339.2065734863281,
+              180.5322265625
+            ],
+            "radius": 10.503021240234375,
+            "verticalRadius": 10.502883911132812,
+            "rect": {
+              "x": 329.70355224609375,
+              "y": 171.0293426513672,
+              "width": 19.00604248046875,
+              "height": 19.005767822265625,
+              "top": 171.0293426513672,
+              "right": 348.7095947265625,
+              "bottom": 190.0351104736328,
+              "left": 329.70355224609375
+            },
+            "stroke": 2
+          },
+          {
+            "number": "3",
+            "center": [
+              296.3499298095703,
+              385.7665252685547
+            ],
+            "radius": 10.503005981445312,
+            "verticalRadius": 10.502883911132812,
+            "rect": {
+              "x": 286.846923828125,
+              "y": 376.2636413574219,
+              "width": 19.006011962890625,
+              "height": 19.005767822265625,
+              "top": 376.2636413574219,
+              "right": 305.8529357910156,
+              "bottom": 395.2694091796875,
+              "left": 286.846923828125
+            },
+            "stroke": 2
+          },
+          {
+            "number": "4",
+            "center": [
+              654.5757446289062,
+              310.7682647705078
+            ],
+            "radius": 10.50299072265625,
+            "verticalRadius": 10.502883911132812,
+            "rect": {
+              "x": 645.07275390625,
+              "y": 301.265380859375,
+              "width": 19.0059814453125,
+              "height": 19.005767822265625,
+              "top": 301.265380859375,
+              "right": 664.0787353515625,
+              "bottom": 320.2711486816406,
+              "left": 645.07275390625
+            },
+            "stroke": 2
+          },
+          {
+            "number": "5",
+            "center": [
+              529.2665405273438,
+              269.0767364501953
+            ],
+            "radius": 10.50299072265625,
+            "verticalRadius": 10.502883911132812,
+            "rect": {
+              "x": 519.7635498046875,
+              "y": 259.5738525390625,
+              "width": 19.0059814453125,
+              "height": 19.005767822265625,
+              "top": 259.5738525390625,
+              "right": 538.76953125,
+              "bottom": 278.5796203613281,
+              "left": 519.7635498046875
+            },
+            "stroke": 2
+          }
+        ],
+        "labels": 5,
+        "rectangles": 10,
+        "arrows": 10,
+        "paintOrder": true
+      },
+      "dialog": {
+        "frame": {
+          "x": 9,
+          "y": 58,
+          "width": 767,
+          "height": 345.140625,
+          "top": 58,
+          "right": 776,
+          "bottom": 403.140625,
+          "left": 9
+        },
+        "badges": [
+          {
+            "number": "1",
+            "center": [
+              150.95889282226562,
+              74.8735408782959
+            ],
+            "radius": 14.03900146484375,
+            "verticalRadius": 14.038644790649414,
+            "rect": {
+              "x": 137.91989135742188,
+              "y": 61.834896087646484,
+              "width": 26.0780029296875,
+              "height": 26.077289581298828,
+              "top": 61.834896087646484,
+              "right": 163.99789428710938,
+              "bottom": 87.91218566894531,
+              "left": 137.91989135742188
+            },
+            "stroke": 2
+          },
+          {
+            "number": "2",
+            "center": [
+              193.1438980102539,
+              74.8735408782959
+            ],
+            "radius": 14.039009094238281,
+            "verticalRadius": 14.038644790649414,
+            "rect": {
+              "x": 180.10488891601562,
+              "y": 61.834896087646484,
+              "width": 26.078018188476562,
+              "height": 26.077289581298828,
+              "top": 61.834896087646484,
+              "right": 206.1829071044922,
+              "bottom": 87.91218566894531,
+              "left": 180.10488891601562
+            },
+            "stroke": 2
+          },
+          {
+            "number": "3",
+            "center": [
+              134.3406105041504,
+              356.4699401855469
+            ],
+            "radius": 14.038997650146484,
+            "verticalRadius": 14.03863525390625,
+            "rect": {
+              "x": 121.3016128540039,
+              "y": 343.4313049316406,
+              "width": 26.07799530029297,
+              "height": 26.0772705078125,
+              "top": 343.4313049316406,
+              "right": 147.37960815429688,
+              "bottom": 369.5085754394531,
+              "left": 121.3016128540039
+            },
+            "stroke": 2
+          },
+          {
+            "number": "4",
+            "center": [
+              625.8597412109375,
+              253.56688690185547
+            ],
+            "radius": 14.03900146484375,
+            "verticalRadius": 14.038642883300781,
+            "rect": {
+              "x": 612.8207397460938,
+              "y": 240.5282440185547,
+              "width": 26.0780029296875,
+              "height": 26.077285766601562,
+              "top": 240.5282440185547,
+              "right": 638.8987426757812,
+              "bottom": 266.60552978515625,
+              "left": 612.8207397460938
+            },
+            "stroke": 2
+          },
+          {
+            "number": "5",
+            "center": [
+              453.92388916015625,
+              196.36304473876953
+            ],
+            "radius": 14.03900146484375,
+            "verticalRadius": 14.038642883300781,
+            "rect": {
+              "x": 440.8848876953125,
+              "y": 183.32440185546875,
+              "width": 26.0780029296875,
+              "height": 26.077285766601562,
+              "top": 183.32440185546875,
+              "right": 466.962890625,
+              "bottom": 209.4016876220703,
+              "left": 440.8848876953125
+            },
+            "stroke": 2
+          }
+        ],
+        "labels": 5,
+        "rectangles": 10,
+        "arrows": 10,
+        "paintOrder": true
+      }
+    },
+    {
+      "id": "ffa-setup",
+      "src": "screenshots/ffa-setup.png",
+      "pageId": "start-with-a-plan",
+      "mode": "ffa",
+      "expected": 5,
+      "thumbnail": {
+        "frame": {
+          "x": 205,
+          "y": 168.234375,
+          "width": 559,
+          "height": 251.546875,
+          "top": 168.234375,
+          "right": 764,
+          "bottom": 419.78125,
+          "left": 205
+        },
+        "badges": [
+          {
+            "number": "1",
+            "center": [
+              217.2979965209961,
+              236.70172119140625
+            ],
+            "radius": 10.502998352050781,
+            "verticalRadius": 10.502883911132812,
+            "rect": {
+              "x": 207.7949981689453,
+              "y": 227.19883728027344,
+              "width": 19.005996704101562,
+              "height": 19.005767822265625,
+              "top": 227.19883728027344,
+              "right": 226.80099487304688,
+              "bottom": 246.20460510253906,
+              "left": 207.7949981689453
+            },
+            "stroke": 2
+          },
+          {
+            "number": "2",
+            "center": [
+              381.830322265625,
+              236.70172119140625
+            ],
+            "radius": 10.50299072265625,
+            "verticalRadius": 10.502883911132812,
+            "rect": {
+              "x": 372.32733154296875,
+              "y": 227.19883728027344,
+              "width": 19.0059814453125,
+              "height": 19.005767822265625,
+              "top": 227.19883728027344,
+              "right": 391.33331298828125,
+              "bottom": 246.20460510253906,
+              "left": 372.32733154296875
+            },
+            "stroke": 2
+          },
+          {
+            "number": "3",
+            "center": [
+              561.4090881347656,
+              236.70172119140625
+            ],
+            "radius": 10.503021240234375,
+            "verticalRadius": 10.502883911132812,
+            "rect": {
+              "x": 551.9060668945312,
+              "y": 227.19883728027344,
+              "width": 19.00604248046875,
+              "height": 19.005767822265625,
+              "top": 227.19883728027344,
+              "right": 570.912109375,
+              "bottom": 246.20460510253906,
+              "left": 551.9060668945312
+            },
+            "stroke": 2
+          },
+          {
+            "number": "4",
+            "center": [
+              217.2979965209961,
+              263.0209503173828
+            ],
+            "radius": 10.502998352050781,
+            "verticalRadius": 10.502883911132812,
+            "rect": {
+              "x": 207.7949981689453,
+              "y": 253.51806640625,
+              "width": 19.005996704101562,
+              "height": 19.005767822265625,
+              "top": 253.51806640625,
+              "right": 226.80099487304688,
+              "bottom": 272.5238342285156,
+              "left": 207.7949981689453
+            },
+            "stroke": 2
+          },
+          {
+            "number": "5",
+            "center": [
+              471.5032501220703,
+              263.0209503173828
+            ],
+            "radius": 10.503005981445312,
+            "verticalRadius": 10.502883911132812,
+            "rect": {
+              "x": 462.000244140625,
+              "y": 253.51806640625,
+              "width": 19.006011962890625,
+              "height": 19.005767822265625,
+              "top": 253.51806640625,
+              "right": 481.0062561035156,
+              "bottom": 272.5238342285156,
+              "left": 462.000244140625
+            },
+            "stroke": 2
+          }
+        ],
+        "labels": 5,
+        "rectangles": 10,
+        "arrows": 10,
+        "paintOrder": true
+      },
+      "dialog": {
+        "frame": {
+          "x": 9,
+          "y": 58,
+          "width": 767,
+          "height": 345.140625,
+          "top": 58,
+          "right": 776,
+          "bottom": 403.140625,
+          "left": 9
+        },
+        "badges": [
+          {
+            "number": "1",
+            "center": [
+              25.874001502990723,
+              151.9421844482422
+            ],
+            "radius": 14.03900146484375,
+            "verticalRadius": 14.038650512695312,
+            "rect": {
+              "x": 12.835000038146973,
+              "y": 138.90353393554688,
+              "width": 26.0780029296875,
+              "height": 26.077301025390625,
+              "top": 138.90353393554688,
+              "right": 38.91300296783447,
+              "bottom": 164.9808349609375,
+              "left": 12.835000038146973
+            },
+            "stroke": 2
+          },
+          {
+            "number": "2",
+            "center": [
+              251.62765502929688,
+              151.9421844482422
+            ],
+            "radius": 14.03900146484375,
+            "verticalRadius": 14.038650512695312,
+            "rect": {
+              "x": 238.58865356445312,
+              "y": 138.90353393554688,
+              "width": 26.0780029296875,
+              "height": 26.077301025390625,
+              "top": 138.90353393554688,
+              "right": 264.6666564941406,
+              "bottom": 164.9808349609375,
+              "left": 238.58865356445312
+            },
+            "stroke": 2
+          },
+          {
+            "number": "3",
+            "center": [
+              498.0263977050781,
+              151.9421844482422
+            ],
+            "radius": 14.03900146484375,
+            "verticalRadius": 14.038650512695312,
+            "rect": {
+              "x": 484.9873962402344,
+              "y": 138.90353393554688,
+              "width": 26.0780029296875,
+              "height": 26.077301025390625,
+              "top": 138.90353393554688,
+              "right": 511.0653991699219,
+              "bottom": 164.9808349609375,
+              "left": 484.9873962402344
+            },
+            "stroke": 2
+          },
+          {
+            "number": "4",
+            "center": [
+              25.874001502990723,
+              188.05409240722656
+            ],
+            "radius": 14.03900146484375,
+            "verticalRadius": 14.038650512695312,
+            "rect": {
+              "x": 12.835000038146973,
+              "y": 175.01544189453125,
+              "width": 26.0780029296875,
+              "height": 26.077301025390625,
+              "top": 175.01544189453125,
+              "right": 38.91300296783447,
+              "bottom": 201.09274291992188,
+              "left": 12.835000038146973
+            },
+            "stroke": 2
+          },
+          {
+            "number": "5",
+            "center": [
+              374.667236328125,
+              188.05409240722656
+            ],
+            "radius": 14.03900146484375,
+            "verticalRadius": 14.038650512695312,
+            "rect": {
+              "x": 361.62823486328125,
+              "y": 175.01544189453125,
+              "width": 26.0780029296875,
+              "height": 26.077301025390625,
+              "top": 175.01544189453125,
+              "right": 387.70623779296875,
+              "bottom": 201.09274291992188,
+              "left": 361.62823486328125
+            },
+            "stroke": 2
+          }
+        ],
+        "labels": 5,
+        "rectangles": 10,
+        "arrows": 10,
+        "paintOrder": true
+      }
+    },
+    {
+      "id": "phone-saves",
+      "src": "screenshots/phone-saves.png",
+      "pageId": "ffa-no-air-and-legacy",
+      "mode": "ffa",
+      "expected": 3,
+      "thumbnail": {
+        "frame": {
+          "x": 205,
+          "y": 168.234375,
+          "width": 559,
+          "height": 314.4375,
+          "top": 168.234375,
+          "right": 764,
+          "bottom": 482.671875,
+          "left": 205
+        },
+        "badges": [
+          {
+            "number": "1",
+            "center": [
+              536.2249145507812,
+              257.6044921875
+            ],
+            "radius": 10.50299072265625,
+            "verticalRadius": 10.50299072265625,
+            "rect": {
+              "x": 526.721923828125,
+              "y": 248.10150146484375,
+              "width": 19.0059814453125,
+              "height": 19.0059814453125,
+              "top": 248.10150146484375,
+              "right": 545.7279052734375,
+              "bottom": 267.10748291015625,
+              "left": 526.721923828125
+            },
+            "stroke": 2
+          },
+          {
+            "number": "2",
+            "center": [
+              536.2249145507812,
+              337.5240478515625
+            ],
+            "radius": 10.50299072265625,
+            "verticalRadius": 10.50299072265625,
+            "rect": {
+              "x": 526.721923828125,
+              "y": 328.02105712890625,
+              "width": 19.0059814453125,
+              "height": 19.0059814453125,
+              "top": 328.02105712890625,
+              "right": 545.7279052734375,
+              "bottom": 347.02703857421875,
+              "left": 526.721923828125
+            },
+            "stroke": 2
+          },
+          {
+            "number": "3",
+            "center": [
+              614.8342895507812,
+              180.5323715209961
+            ],
+            "radius": 10.50299072265625,
+            "verticalRadius": 10.502998352050781,
+            "rect": {
+              "x": 605.331298828125,
+              "y": 171.0293731689453,
+              "width": 19.0059814453125,
+              "height": 19.005996704101562,
+              "top": 171.0293731689453,
+              "right": 624.3372802734375,
+              "bottom": 190.03536987304688,
+              "left": 605.331298828125
+            },
+            "stroke": 2
+          }
+        ],
+        "labels": 3,
+        "rectangles": 6,
+        "arrows": 6,
+        "paintOrder": true
+      },
+      "dialog": {
+        "frame": {
+          "x": 9,
+          "y": 58,
+          "width": 767,
+          "height": 431.4375,
+          "top": 58,
+          "right": 776,
+          "bottom": 489.4375,
+          "left": 9
+        },
+        "badges": [
+          {
+            "number": "1",
+            "center": [
+              463.471435546875,
+              180.62410736083984
+            ],
+            "radius": 14.03900146484375,
+            "verticalRadius": 14.038993835449219,
+            "rect": {
+              "x": 450.43243408203125,
+              "y": 167.58511352539062,
+              "width": 26.0780029296875,
+              "height": 26.077987670898438,
+              "top": 167.58511352539062,
+              "right": 476.51043701171875,
+              "bottom": 193.66310119628906,
+              "left": 450.43243408203125
+            },
+            "stroke": 2
+          },
+          {
+            "number": "2",
+            "center": [
+              463.471435546875,
+              290.28118896484375
+            ],
+            "radius": 14.03900146484375,
+            "verticalRadius": 14.03900146484375,
+            "rect": {
+              "x": 450.43243408203125,
+              "y": 277.2421875,
+              "width": 26.0780029296875,
+              "height": 26.0780029296875,
+              "top": 277.2421875,
+              "right": 476.51043701171875,
+              "bottom": 303.3201904296875,
+              "left": 450.43243408203125
+            },
+            "stroke": 2
+          },
+          {
+            "number": "3",
+            "center": [
+              571.330810546875,
+              74.87399673461914
+            ],
+            "radius": 14.03900146484375,
+            "verticalRadius": 14.038997650146484,
+            "rect": {
+              "x": 558.2918090820312,
+              "y": 61.834999084472656,
+              "width": 26.0780029296875,
+              "height": 26.07799530029297,
+              "top": 61.834999084472656,
+              "right": 584.3698120117188,
+              "bottom": 87.91299438476562,
+              "left": 558.2918090820312
+            },
+            "stroke": 2
+          }
+        ],
+        "labels": 3,
+        "rectangles": 6,
+        "arrows": 6,
+        "paintOrder": true
+      }
+    },
+    {
+      "id": "towers-map",
+      "src": "screenshots/towers-map.png",
+      "pageId": "towers-map-progress",
+      "mode": "towers",
+      "expected": 5,
+      "thumbnail": {
+        "frame": {
+          "x": 205,
+          "y": 168.234375,
+          "width": 559,
+          "height": 573.78125,
+          "top": 168.234375,
+          "right": 764,
+          "bottom": 742.015625,
+          "left": 205
+        },
+        "badges": [
+          {
+            "number": "1",
+            "center": [
+              226.89437103271484,
+              322.61279296875
+            ],
+            "radius": 10.502967834472656,
+            "verticalRadius": 10.5028076171875,
+            "rect": {
+              "x": 217.3914031982422,
+              "y": 313.1099853515625,
+              "width": 19.005935668945312,
+              "height": 19.005615234375,
+              "top": 313.1099853515625,
+              "right": 236.3973388671875,
+              "bottom": 332.1156005859375,
+              "left": 217.3914031982422
+            },
+            "stroke": 2
+          },
+          {
+            "number": "2",
+            "center": [
+              474.03680419921875,
+              449.57159423828125
+            ],
+            "radius": 10.502960205078125,
+            "verticalRadius": 10.5028076171875,
+            "rect": {
+              "x": 464.5338439941406,
+              "y": 440.06878662109375,
+              "width": 19.00592041015625,
+              "height": 19.005615234375,
+              "top": 440.06878662109375,
+              "right": 483.5397644042969,
+              "bottom": 459.07440185546875,
+              "left": 464.5338439941406
+            },
+            "stroke": 2
+          },
+          {
+            "number": "3",
+            "center": [
+              226.89437103271484,
+              660.347900390625
+            ],
+            "radius": 10.502967834472656,
+            "verticalRadius": 10.5028076171875,
+            "rect": {
+              "x": 217.3914031982422,
+              "y": 650.8450927734375,
+              "width": 19.005935668945312,
+              "height": 19.005615234375,
+              "top": 650.8450927734375,
+              "right": 236.3973388671875,
+              "bottom": 669.8507080078125,
+              "left": 217.3914031982422
+            },
+            "stroke": 2
+          },
+          {
+            "number": "4",
+            "center": [
+              292.22381591796875,
+              180.53211975097656
+            ],
+            "radius": 10.502960205078125,
+            "verticalRadius": 10.5028076171875,
+            "rect": {
+              "x": 282.7208557128906,
+              "y": 171.02931213378906,
+              "width": 19.00592041015625,
+              "height": 19.005615234375,
+              "top": 171.02931213378906,
+              "right": 301.7267761230469,
+              "bottom": 190.03492736816406,
+              "left": 282.7208557128906
+            },
+            "stroke": 2
+          },
+          {
+            "number": "5",
+            "center": [
+              434.59259033203125,
+              180.53211975097656
+            ],
+            "radius": 10.502960205078125,
+            "verticalRadius": 10.5028076171875,
+            "rect": {
+              "x": 425.0896301269531,
+              "y": 171.02931213378906,
+              "width": 19.00592041015625,
+              "height": 19.005615234375,
+              "top": 171.02931213378906,
+              "right": 444.0955505371094,
+              "bottom": 190.03492736816406,
+              "left": 425.0896301269531
+            },
+            "stroke": 2
+          }
+        ],
+        "labels": 5,
+        "rectangles": 10,
+        "arrows": 10,
+        "paintOrder": true
+      },
+      "dialog": {
+        "frame": {
+          "x": 9,
+          "y": 58,
+          "width": 767,
+          "height": 345.140625,
+          "top": 58,
+          "right": 776,
+          "bottom": 403.140625,
+          "left": 9
+        },
+        "badges": [
+          {
+            "number": "1",
+            "center": [
+              25.874001502990723,
+              129.89151763916016
+            ],
+            "radius": 14.03900146484375,
+            "verticalRadius": 14.038642883300781,
+            "rect": {
+              "x": 12.835000038146973,
+              "y": 116.85287475585938,
+              "width": 26.0780029296875,
+              "height": 26.077285766601562,
+              "top": 116.85287475585938,
+              "right": 38.91300296783447,
+              "bottom": 142.93016052246094,
+              "left": 12.835000038146973
+            },
+            "stroke": 2
+          },
+          {
+            "number": "2",
+            "center": [
+              152.5568618774414,
+              195.723876953125
+            ],
+            "radius": 14.038993835449219,
+            "verticalRadius": 14.03863525390625,
+            "rect": {
+              "x": 139.5178680419922,
+              "y": 182.68524169921875,
+              "width": 26.077987670898438,
+              "height": 26.0772705078125,
+              "top": 182.68524169921875,
+              "right": 165.59585571289062,
+              "bottom": 208.76251220703125,
+              "left": 139.5178680419922
+            },
+            "stroke": 2
+          },
+          {
+            "number": "3",
+            "center": [
+              25.874001502990723,
+              305.01841735839844
+            ],
+            "radius": 14.03900146484375,
+            "verticalRadius": 14.038650512695312,
+            "rect": {
+              "x": 12.835000038146973,
+              "y": 291.9797668457031,
+              "width": 26.0780029296875,
+              "height": 26.077301025390625,
+              "top": 291.9797668457031,
+              "right": 38.91300296783447,
+              "bottom": 318.05706787109375,
+              "left": 12.835000038146973
+            },
+            "stroke": 2
+          },
+          {
+            "number": "4",
+            "center": [
+              58.27974891662598,
+              74.8735408782959
+            ],
+            "radius": 14.038999557495117,
+            "verticalRadius": 14.038644790649414,
+            "rect": {
+              "x": 45.24074935913086,
+              "y": 61.834896087646484,
+              "width": 26.077999114990234,
+              "height": 26.077289581298828,
+              "top": 61.834896087646484,
+              "right": 71.3187484741211,
+              "bottom": 87.91218566894531,
+              "left": 45.24074935913086
+            },
+            "stroke": 2
+          },
+          {
+            "number": "5",
+            "center": [
+              132.10350036621094,
+              74.8735408782959
+            ],
+            "radius": 14.03900146484375,
+            "verticalRadius": 14.038644790649414,
+            "rect": {
+              "x": 119.06449890136719,
+              "y": 61.834896087646484,
+              "width": 26.0780029296875,
+              "height": 26.077289581298828,
+              "top": 61.834896087646484,
+              "right": 145.1425018310547,
+              "bottom": 87.91218566894531,
+              "left": 119.06449890136719
+            },
+            "stroke": 2
+          }
+        ],
+        "labels": 5,
+        "rectangles": 10,
+        "arrows": 10,
+        "paintOrder": true
+      }
+    },
+    {
+      "id": "towers-wave",
+      "src": "screenshots/towers-wave.png",
+      "pageId": "towers-wave-flow",
+      "mode": "towers",
+      "expected": 4,
+      "thumbnail": {
+        "frame": {
+          "x": 205,
+          "y": 168.234375,
+          "width": 559,
+          "height": 65.109375,
+          "top": 168.234375,
+          "right": 764,
+          "bottom": 233.34375,
+          "left": 205
+        },
+        "badges": [
+          {
+            "number": "1",
+            "center": [
+              638.9318237304688,
+              175.39698028564453
+            ],
+            "radius": 6.5347900390625,
+            "verticalRadius": 6.534736633300781,
+            "rect": {
+              "x": 633.3970336914062,
+              "y": 169.86224365234375,
+              "width": 11.069580078125,
+              "height": 11.069473266601562,
+              "top": 169.86224365234375,
+              "right": 644.4666137695312,
+              "bottom": 180.9317169189453,
+              "left": 633.3970336914062
+            },
+            "stroke": 2
+          },
+          {
+            "number": "2",
+            "center": [
+              708.7596435546875,
+              175.39698028564453
+            ],
+            "radius": 6.5347900390625,
+            "verticalRadius": 6.534736633300781,
+            "rect": {
+              "x": 703.224853515625,
+              "y": 169.86224365234375,
+              "width": 11.069580078125,
+              "height": 11.069473266601562,
+              "top": 169.86224365234375,
+              "right": 714.29443359375,
+              "bottom": 180.9317169189453,
+              "left": 703.224853515625
+            },
+            "stroke": 2
+          },
+          {
+            "number": "3",
+            "center": [
+              672.4330749511719,
+              201.83374786376953
+            ],
+            "radius": 6.534820556640625,
+            "verticalRadius": 6.534736633300781,
+            "rect": {
+              "x": 666.8982543945312,
+              "y": 196.29901123046875,
+              "width": 11.06964111328125,
+              "height": 11.069473266601562,
+              "top": 196.29901123046875,
+              "right": 677.9678955078125,
+              "bottom": 207.3684844970703,
+              "left": 666.8982543945312
+            },
+            "stroke": 2
+          },
+          {
+            "number": "4",
+            "center": [
+              215.79359436035156,
+              175.39698028564453
+            ],
+            "radius": 6.534820556640625,
+            "verticalRadius": 6.534736633300781,
+            "rect": {
+              "x": 210.25877380371094,
+              "y": 169.86224365234375,
+              "width": 11.06964111328125,
+              "height": 11.069473266601562,
+              "top": 169.86224365234375,
+              "right": 221.3284149169922,
+              "bottom": 180.9317169189453,
+              "left": 210.25877380371094
+            },
+            "stroke": 2
+          }
+        ],
+        "labels": 4,
+        "rectangles": 8,
+        "arrows": 8,
+        "paintOrder": true
+      },
+      "dialog": {
+        "frame": {
+          "x": 9,
+          "y": 58,
+          "width": 767,
+          "height": 345.140625,
+          "top": 58,
+          "right": 776,
+          "bottom": 403.140625,
+          "left": 9
+        },
+        "badges": [
+          {
+            "number": "1",
+            "center": [
+              641.439453125,
+              74.8735408782959
+            ],
+            "radius": 14.03900146484375,
+            "verticalRadius": 14.038644790649414,
+            "rect": {
+              "x": 628.4004516601562,
+              "y": 61.834896087646484,
+              "width": 26.0780029296875,
+              "height": 26.077289581298828,
+              "top": 61.834896087646484,
+              "right": 654.4784545898438,
+              "bottom": 87.91218566894531,
+              "left": 628.4004516601562
+            },
+            "stroke": 2
+          },
+          {
+            "number": "2",
+            "center": [
+              709.8103637695312,
+              74.8735408782959
+            ],
+            "radius": 14.03900146484375,
+            "verticalRadius": 14.038644790649414,
+            "rect": {
+              "x": 696.7713623046875,
+              "y": 61.834896087646484,
+              "width": 26.0780029296875,
+              "height": 26.077289581298828,
+              "top": 61.834896087646484,
+              "right": 722.849365234375,
+              "bottom": 87.91218566894531,
+              "left": 696.7713623046875
+            },
+            "stroke": 2
+          },
+          {
+            "number": "3",
+            "center": [
+              674.2417602539062,
+              83.23360824584961
+            ],
+            "radius": 14.03900146484375,
+            "verticalRadius": 14.038646697998047,
+            "rect": {
+              "x": 661.2027587890625,
+              "y": 70.19496154785156,
+              "width": 26.0780029296875,
+              "height": 26.077293395996094,
+              "top": 70.19496154785156,
+              "right": 687.28076171875,
+              "bottom": 96.27225494384766,
+              "left": 661.2027587890625
+            },
+            "stroke": 2
+          },
+          {
+            "number": "4",
+            "center": [
+              227.12957763671875,
+              74.8735408782959
+            ],
+            "radius": 14.03900146484375,
+            "verticalRadius": 14.038644790649414,
+            "rect": {
+              "x": 214.090576171875,
+              "y": 61.834896087646484,
+              "width": 26.0780029296875,
+              "height": 26.077289581298828,
+              "top": 61.834896087646484,
+              "right": 240.1685791015625,
+              "bottom": 87.91218566894531,
+              "left": 214.090576171875
+            },
+            "stroke": 2
+          }
+        ],
+        "labels": 4,
+        "rectangles": 8,
+        "arrows": 8,
+        "paintOrder": true
+      }
+    },
+    {
+      "id": "campaign-briefing",
+      "src": "screenshots/campaign-briefing.png",
+      "pageId": "campaign-start",
+      "mode": "campaign",
+      "expected": 3,
+      "thumbnail": {
+        "frame": {
+          "x": 205,
+          "y": 168.234375,
+          "width": 559,
+          "height": 251.546875,
+          "top": 168.234375,
+          "right": 764,
+          "bottom": 419.78125,
+          "left": 205
+        },
+        "badges": [
+          {
+            "number": "1",
+            "center": [
+              393.7090606689453,
+              357.5839538574219
+            ],
+            "radius": 10.503005981445312,
+            "verticalRadius": 10.502899169921875,
+            "rect": {
+              "x": 384.2060546875,
+              "y": 348.0810546875,
+              "width": 19.006011962890625,
+              "height": 19.00579833984375,
+              "top": 348.0810546875,
+              "right": 403.2120666503906,
+              "bottom": 367.08685302734375,
+              "left": 384.2060546875
+            },
+            "stroke": 2
+          },
+          {
+            "number": "2",
+            "center": [
+              686.0194702148438,
+              180.5322265625
+            ],
+            "radius": 10.50299072265625,
+            "verticalRadius": 10.502883911132812,
+            "rect": {
+              "x": 676.5164794921875,
+              "y": 171.0293426513672,
+              "width": 19.0059814453125,
+              "height": 19.005767822265625,
+              "top": 171.0293426513672,
+              "right": 695.5224609375,
+              "bottom": 190.0351104736328,
+              "left": 676.5164794921875
+            },
+            "stroke": 2
+          },
+          {
+            "number": "3",
+            "center": [
+              217.2979965209961,
+              188.9543914794922
+            ],
+            "radius": 10.502998352050781,
+            "verticalRadius": 10.502883911132812,
+            "rect": {
+              "x": 207.7949981689453,
+              "y": 179.45150756835938,
+              "width": 19.005996704101562,
+              "height": 19.005767822265625,
+              "top": 179.45150756835938,
+              "right": 226.80099487304688,
+              "bottom": 198.457275390625,
+              "left": 207.7949981689453
+            },
+            "stroke": 2
+          }
+        ],
+        "labels": 3,
+        "rectangles": 6,
+        "arrows": 6,
+        "paintOrder": true
+      },
+      "dialog": {
+        "frame": {
+          "x": 9,
+          "y": 58,
+          "width": 767,
+          "height": 345.140625,
+          "top": 58,
+          "right": 776,
+          "bottom": 403.140625,
+          "left": 9
+        },
+        "badges": [
+          {
+            "number": "1",
+            "center": [
+              267.92639923095703,
+              317.80140686035156
+            ],
+            "radius": 14.038993835449219,
+            "verticalRadius": 14.038650512695312,
+            "rect": {
+              "x": 254.8874053955078,
+              "y": 304.76275634765625,
+              "width": 26.077987670898438,
+              "height": 26.077301025390625,
+              "top": 304.76275634765625,
+              "right": 280.96539306640625,
+              "bottom": 330.8400573730469,
+              "left": 254.8874053955078
+            },
+            "stroke": 2
+          },
+          {
+            "number": "2",
+            "center": [
+              669.0034790039062,
+              74.8735408782959
+            ],
+            "radius": 14.03900146484375,
+            "verticalRadius": 14.038644790649414,
+            "rect": {
+              "x": 655.9644775390625,
+              "y": 61.834896087646484,
+              "width": 26.0780029296875,
+              "height": 26.077289581298828,
+              "top": 61.834896087646484,
+              "right": 682.04248046875,
+              "bottom": 87.91218566894531,
+              "left": 655.9644775390625
+            },
+            "stroke": 2
+          },
+          {
+            "number": "3",
+            "center": [
+              25.874001502990723,
+              86.42937088012695
+            ],
+            "radius": 14.03900146484375,
+            "verticalRadius": 14.038646697998047,
+            "rect": {
+              "x": 12.835000038146973,
+              "y": 73.3907241821289,
+              "width": 26.0780029296875,
+              "height": 26.077293395996094,
+              "top": 73.3907241821289,
+              "right": 38.91300296783447,
+              "bottom": 99.468017578125,
+              "left": 12.835000038146973
+            },
+            "stroke": 2
+          }
+        ],
+        "labels": 3,
+        "rectangles": 6,
+        "arrows": 6,
+        "paintOrder": true
+      }
+    },
+    {
+      "id": "phone-blueprints",
+      "src": "screenshots/design-blueprint.png",
+      "pageId": "phone-blueprints",
+      "mode": "ffa",
+      "expected": 2,
+      "thumbnail": {
+        "frame": {
+          "x": 205,
+          "y": 168.234375,
+          "width": 559,
+          "height": 255.8125,
+          "top": 168.234375,
+          "right": 764,
+          "bottom": 424.046875,
+          "left": 205
+        },
+        "badges": [
+          {
+            "number": "1",
+            "center": [
+              349.3979187011719,
+              186.39527893066406
+            ],
+            "radius": 10.502960205078125,
+            "verticalRadius": 10.502731323242188,
+            "rect": {
+              "x": 339.89495849609375,
+              "y": 176.89254760742188,
+              "width": 19.00592041015625,
+              "height": 19.005462646484375,
+              "top": 176.89254760742188,
+              "right": 358.90087890625,
+              "bottom": 195.89801025390625,
+              "left": 339.89495849609375
+            },
+            "stroke": 2
+          },
+          {
+            "number": "2",
+            "center": [
+              429.96226501464844,
+              377.1767272949219
+            ],
+            "radius": 10.502944946289062,
+            "verticalRadius": 10.502716064453125,
+            "rect": {
+              "x": 420.4593200683594,
+              "y": 367.67401123046875,
+              "width": 19.005889892578125,
+              "height": 19.00543212890625,
+              "top": 367.67401123046875,
+              "right": 439.4652099609375,
+              "bottom": 386.679443359375,
+              "left": 420.4593200683594
+            },
+            "stroke": 2
+          }
+        ],
+        "labels": 2,
+        "rectangles": 4,
+        "arrows": 4,
+        "paintOrder": true
+      },
+      "dialog": {
+        "frame": {
+          "x": 9,
+          "y": 58,
+          "width": 767,
+          "height": 345.140625,
+          "top": 58,
+          "right": 776,
+          "bottom": 403.140625,
+          "left": 9
+        },
+        "badges": [
+          {
+            "number": "1",
+            "center": [
+              121.23766708374023,
+              105.28426361083984
+            ],
+            "radius": 14.039005279541016,
+            "verticalRadius": 14.038642883300781,
+            "rect": {
+              "x": 108.19866180419922,
+              "y": 92.24562072753906,
+              "width": 26.07801055908203,
+              "height": 26.077285766601562,
+              "top": 92.24562072753906,
+              "right": 134.27667236328125,
+              "bottom": 118.32290649414062,
+              "left": 108.19866180419922
+            },
+            "stroke": 2
+          },
+          {
+            "number": "2",
+            "center": [
+              186.45764923095703,
+              259.72874450683594
+            ],
+            "radius": 14.038993835449219,
+            "verticalRadius": 14.038650512695312,
+            "rect": {
+              "x": 173.4186553955078,
+              "y": 246.69009399414062,
+              "width": 26.077987670898438,
+              "height": 26.077301025390625,
+              "top": 246.69009399414062,
+              "right": 199.49664306640625,
+              "bottom": 272.76739501953125,
+              "left": 173.4186553955078
+            },
+            "stroke": 2
+          }
+        ],
+        "labels": 2,
+        "rectangles": 4,
+        "arrows": 4,
+        "paintOrder": true
+      }
+    },
+    {
+      "id": "towers-rewards",
+      "src": "screenshots/towers-map.png",
+      "pageId": "towers-reward-stock",
+      "mode": "towers",
+      "expected": 1,
+      "thumbnail": {
+        "frame": {
+          "x": 205,
+          "y": 168.234375,
+          "width": 559,
+          "height": 573.78125,
+          "top": 168.234375,
+          "right": 764,
+          "bottom": 742.015625,
+          "left": 205
+        },
+        "badges": [
+          {
+            "number": "1",
+            "center": [
+              292.22381591796875,
+              180.53211975097656
+            ],
+            "radius": 10.502960205078125,
+            "verticalRadius": 10.5028076171875,
+            "rect": {
+              "x": 282.7208557128906,
+              "y": 171.02931213378906,
+              "width": 19.00592041015625,
+              "height": 19.005615234375,
+              "top": 171.02931213378906,
+              "right": 301.7267761230469,
+              "bottom": 190.03492736816406,
+              "left": 282.7208557128906
+            },
+            "stroke": 2
+          }
+        ],
+        "labels": 1,
+        "rectangles": 2,
+        "arrows": 2,
+        "paintOrder": true
+      },
+      "dialog": {
+        "frame": {
+          "x": 9,
+          "y": 58,
+          "width": 767,
+          "height": 345.140625,
+          "top": 58,
+          "right": 776,
+          "bottom": 403.140625,
+          "left": 9
+        },
+        "badges": [
+          {
+            "number": "1",
+            "center": [
+              58.27974891662598,
+              74.8735408782959
+            ],
+            "radius": 14.038999557495117,
+            "verticalRadius": 14.038644790649414,
+            "rect": {
+              "x": 45.24074935913086,
+              "y": 61.834896087646484,
+              "width": 26.077999114990234,
+              "height": 26.077289581298828,
+              "top": 61.834896087646484,
+              "right": 71.3187484741211,
+              "bottom": 87.91218566894531,
+              "left": 45.24074935913086
+            },
+            "stroke": 2
+          }
+        ],
+        "labels": 1,
+        "rectangles": 2,
+        "arrows": 2,
+        "paintOrder": true
+      }
+    }
+  ],
+  "sources": [
+    {
+      "path": "tools/check-guide-browser-065.cjs",
+      "sha256": "6368d025d2450eca22b620cece0be0a79662b484f91253e40bead602da377225"
+    },
+    {
+      "path": "app/src/main/assets/guide/index.html",
+      "sha256": "686d530b03b42cfceb6a64e124eb6c4303088e5291068433772c05613c28e2e9"
+    },
+    {
+      "path": "app/src/main/assets/guide/guide.js",
+      "sha256": "029c010bb6f3c6d2db664eb6682b99cdbef4ea9bd803af709096e4be5fbedd2d"
+    },
+    {
+      "path": "app/src/main/assets/guide/guide.css",
+      "sha256": "278907557e4632c64fe00a5e1954de0ff8cb66c69e5dd0a540a7cde5ec6ada99"
+    },
+    {
+      "path": "app/src/main/assets/guide/practical-data.js",
+      "sha256": "b1b79c982b543594358efda157998d0c5138c8dc6ea90b6bcf800fb5a37cbd76"
+    },
+    {
+      "path": "app/src/main/assets/guide/research-data.js",
+      "sha256": "645015fb029351e0567df84539da65d9051218545025c6a0dd36d9639e8d2cb6"
+    },
+    {
+      "path": "app/src/main/assets/guide/screenshots-data.js",
+      "sha256": "388483b065b41fe85e4ffa82940b733b468e6f454a3db9564b7c886e04f15fc3"
+    }
+  ],
+  "recordedUTC": "2026-11-12T22:12:57.376Z"
+}

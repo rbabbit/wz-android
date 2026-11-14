@@ -1,0 +1,63 @@
+{
+  "version": "0.40",
+  "passed": true,
+  "emulatorUsed": false,
+  "androidRuntimeExecuted": false,
+  "nativeBuildPerformed": true,
+  "nativeFullFreshBuildPerformed": false,
+  "compiledObjects": [
+    "src/CMakeFiles/warzone2100.dir/quickjs_backend.cpp.o"
+  ],
+  "relinkedNativeEngine": true,
+  "method": "Verified matching v0.36 source cache; one quickjs_backend.cpp object compile and one matched native link",
+  "cachePath": "/home/punkech/wz-blueprint-20261107",
+  "command": [
+    "bash",
+    "-c",
+    "source \"$1/emsdk/emsdk_env.sh\" && cmake --build \"$1/build\" --target warzone2100 --parallel 4",
+    "native-production-040",
+    "/home/punkech/wz-blueprint-20261107"
+  ],
+  "originalBuildRecipeSHA256": "6f3835c7eb8441c216f7e0b056affe22b34eb60e2985341029c866ca75e9bc26",
+  "sourceOverlay": "archive/native-production-0.40/source-overlay.json",
+  "sourceOverlaySHA256": "a5fe6addc649cbeb66acbc52e7916bee2b4739e0ecba38c7884caad0604ee422",
+  "sourceOverlays": {
+    "display3d.cpp": "3b5c1a41144011805819d15e9bfac6f1289d726da276433bfeb237904c0fa15f",
+    "research.cpp": "06b8999191bb0160e6b73c268f8ddd69347102133ecc221aee23504973dc918a",
+    "keybind.cpp": "5730cf9a2b791a6a437f4e0da040e9dbb75e8befb48dc02caefb1a8e824355ed",
+    "hci.cpp": "9db6bef46703c3975d920a23cc071ea46ab938a3972204ca5325440e8e66e842",
+    "quickjs_backend.cpp": "6f3033eb6ea18da2e2f640f521e40483c5f5af8ab63a22b567d26c4f6997217e"
+  },
+  "log": "archive/native-production-0.40/native-build.log",
+  "logSHA256": "6974be5dd85bf2561fe0655902b41ac7c0f4d9268ccedf911392e9362ca58fec",
+  "recordedUTC": "2026-11-10T18:41:35.782217+00:00",
+  "raw": [
+    {
+      "file": "warzone2100.js",
+      "sha256": "17348f32f1e7fec429c3e927f81e6f30b9ed961279872bcc3e81866edc662eb7",
+      "bytes": 725723
+    },
+    {
+      "file": "warzone2100.wasm",
+      "sha256": "39d04627b1cc269c1a8a6820f29c3d85affc7bac516e22a32923a14edb2d061b",
+      "bytes": 13494007
+    }
+  ],
+  "sourceReviewRebuild": {
+    "reason": "Omit the observer property entirely when the Towers marker is absent",
+    "previousObserverSHA256": "eef86b6ee30b417dc279ca3536b8e91e00404b07bb452edfa2ca8279ed3bcb91",
+    "previousRawOutputs": [
+      {
+        "file": "warzone2100.js",
+        "sha256": "17348f32f1e7fec429c3e927f81e6f30b9ed961279872bcc3e81866edc662eb7",
+        "bytes": 725723
+      },
+      {
+        "file": "warzone2100.wasm",
+        "sha256": "8783f1a3bca0704d344d96dabc6cd4e439f8755abafc7defeb363a08e29a8987",
+        "bytes": 13493997
+      }
+    ],
+    "previousBuildPassed": true
+  }
+}

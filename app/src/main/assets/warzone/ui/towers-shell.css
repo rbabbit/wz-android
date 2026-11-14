@@ -1,43 +1,45 @@
 /* Towers only. Visual grouping never changes the SDL viewport or camera. */
 body.wt-towers-polished {
-  --towers-bg:#081318;
-  --towers-panel:#10242b;
-  --towers-line:#294249;
-  --towers-text:#e2edec;
-  --towers-muted:#9bb1b5;
-  --towers-accent:#8bd3cc;
-  --towers-power:#efbd58;
+  --towers-bg:#0c0c0c;
+  --towers-panel:#111111;
+  --towers-control:#252525;
+  --towers-ink:#101010;
+  --towers-line:transparent;
+  --towers-text:#f4f4f4;
+  --towers-muted:#bcbcbc;
+  --towers-accent:#f4f4f4;
+  --towers-power:#f4f4f4;
 }
 body.wt-towers-polished #warzone-command-strip {
   background:var(--towers-bg);
   border-bottom-color:var(--towers-line);
 }
 body.wt-towers-polished #warzone-command-strip #blocknight-combat-hud button {
-  color:#d5e4e5;
+  color:var(--towers-text);
   border-radius:4px;
   font-weight:500;
   letter-spacing:.25px;
 }
 body.wt-towers-polished #warzone-command-strip #blocknight-combat-hud button:focus-visible {
-  outline:2px solid var(--towers-accent);
+  outline:2px solid var(--towers-text);
   outline-offset:-2px;
 }
 body.wt-towers-polished #warzone-command-strip #blocknight-combat-hud #blocknight-tech {
-  background:#fff!important;
-  color:#0a1114!important;
+  background:var(--towers-selected,#f4f4f4)!important;
+  color:var(--towers-ink)!important;
 }
 body.wt-towers-polished #warzone-command-strip #blocknight-combat-hud #blocknight-tech img {filter:none!important}
 body.wt-towers-polished #warzone-command-strip #blocknight-combat-hud #blocknight-tech[aria-expanded=true] {
-  box-shadow:inset 0 -3px #111!important;
+  box-shadow:none!important;
 }
 body.wt-towers-polished[data-command-page=design] #wt-open-factory,
 body.wt-towers-polished[data-command-page=saved] #wt-open-factory,
 body.wt-towers-polished[data-command-page=factory] #wt-open-factory,
 body.wt-towers-polished[data-command-page=queue] #wt-open-queue,
 body.wt-towers-polished[data-build-sidebar=true] #wt-open-build {
-  background:#25413f!important;
-  color:#effaf7!important;
-  box-shadow:inset 0 -2px var(--towers-accent)!important;
+  background:var(--towers-selected,#f4f4f4)!important;
+  color:var(--towers-text)!important;
+  box-shadow:none!important;
 }
 body.wt-towers-polished #warzone-towers-wave-hud {
   color:var(--towers-text);
@@ -45,7 +47,7 @@ body.wt-towers-polished #warzone-towers-wave-hud {
 }
 body.wt-towers-polished #lab-ops,
 body.wt-towers-polished #wt-field-centre {
-  background:#102129f5;
+  background:var(--towers-panel);
   border-color:var(--towers-line);
   border-radius:4px;
   box-shadow:none;
@@ -56,25 +58,54 @@ body.wt-towers-polished #lab-ops small {color:var(--towers-muted)}
 body.wt-towers-polished #wt-field-centre button {
   border-color:var(--towers-line);
   border-radius:4px;
-  background:#132a32;
+  background:var(--towers-control);
   color:var(--towers-text);
   box-shadow:none;
 }
-body.wt-towers-polished #wt-field-centre {grid-template-columns:repeat(6,minmax(0,1fr))}
-body.wt-towers-polished #wt-field-centre #wt-select-move {grid-column:3/7;grid-row:1}
-body.wt-towers-polished #wt-field-centre #blocknight-select-all {grid-column:1/4;grid-row:2}
-body.wt-towers-polished #wt-field-centre #wt-deselect-units {grid-column:4/7;grid-row:2}
-body.wt-towers-polished #wt-field-centre #blocknight-stop {grid-column:1/4;grid-row:3}
-body.wt-towers-polished #wt-field-centre #wt-select-trucks {grid-column:4/7;grid-row:3}
+/* Three columns keep the same footprint width while making every target square. */
+body.wt-towers-polished #wt-field-centre {
+  --wt-field-width:242px;
+  --wt-field-cell:calc((var(--wt-field-width) - 20px) / 3);
+  width:var(--wt-field-width);
+  height:calc(var(--wt-field-cell) * 2 + 16px);
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  grid-template-rows:repeat(2,var(--wt-field-cell));
+}
+body.wt-towers-polished #wt-field-centre button {
+  box-sizing:border-box;
+  min-height:0;
+  height:100%;
+  gap:6px;
+}
+body.wt-towers-polished #wt-field-centre button img {width:20px;height:20px}
+body.wt-towers-polished #wt-field-centre button span {max-width:100%;text-align:center;overflow-wrap:anywhere}
+body.wt-towers-polished #wt-field-centre #wt-intelligence span {font-size:.88em}
+body.wt-towers-polished #wt-field-centre #wt-demolish {grid-column:1;grid-row:1}
+body.wt-towers-polished #wt-field-centre #wt-intelligence {grid-column:2;grid-row:1}
+body.wt-towers-polished #wt-field-centre #wt-demolish.active {background:var(--towers-selected,#f4f4f4);color:var(--towers-ink);border-color:transparent}
+body.wt-towers-polished #wt-field-centre #blocknight-select-all {grid-column:3;grid-row:1}
+body.wt-towers-polished #wt-field-centre #wt-deselect-units {grid-column:1;grid-row:2}
+body.wt-towers-polished #wt-field-centre #blocknight-stop {grid-column:2;grid-row:2}
+body.wt-towers-polished #wt-field-centre #wt-select-trucks {grid-column:3;grid-row:2}
+body.wt-towers-polished[data-field-compact=false][data-field-expanded=true] #wt-build-sidebar {bottom:242px}
+@media(max-width:800px) {
+  body.wt-towers-polished #wt-field-centre {--wt-field-width:210px}
+}
+body.wt-towers-polished #wt-demolish-bar {position:fixed;z-index:10035;left:10px;bottom:calc(84px * var(--wt-ui-scale,1));display:flex;align-items:center;gap:10px;box-sizing:border-box;max-width:calc(100vw - 20px);padding:7px 8px 7px 12px;border:0;border-radius:5px;background:var(--towers-panel);color:var(--towers-text);box-shadow:none;font-size:14px;line-height:1.25}
+body.wt-towers-polished #wt-demolish-bar[hidden] {display:none}
+body.wt-towers-polished #wt-demolish-bar strong {font-size:13px;color:var(--towers-text);letter-spacing:.04em}
+body.wt-towers-polished #wt-demolish-bar span {max-width:min(260px,40vw);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+body.wt-towers-polished #wt-demolish-bar button {min-height:36px;padding:5px 10px;border:0;border-radius:3px;background:var(--towers-control);color:var(--towers-text);font:inherit;font-size:13px;cursor:pointer}
+body.wt-towers-polished #wt-demolish-bar button:focus-visible {outline:2px solid var(--towers-text);outline-offset:2px}
 body.wt-towers-polished #wt-field-toggle {
   border-radius:4px;
-  border-color:#527576;
+  border-color:transparent;
   box-shadow:none;
 }
 body.wt-towers-polished #wt-build-status,
 body.wt-towers-polished #wt-command-toast,
 body.wt-towers-polished #wt-native-back {
-  background:#10242bf5;
+  background:var(--towers-panel);
   border-color:var(--towers-line);
   color:var(--towers-text);
   box-shadow:none;
@@ -94,7 +125,7 @@ body.wt-towers-polished #warzone-towers-help header {
 body.wt-towers-polished #warzone-towers-help button {
   min-height:38px;
   border-radius:4px;
-  background:#183039;
+  background:var(--towers-control);
   color:var(--towers-text);
   box-shadow:none;
 }
@@ -132,35 +163,35 @@ body.wt-towers-polished #warzone-towers-help.wt-towers-guide {
   position:absolute;left:10px;top:10px;margin:0;
   width:var(--wt-compact-window-width,min(740px,66vw));max-width:calc(100vw - 20px);
   max-height:calc(100dvh - var(--wt-command-top,56px) - 84px);
-  border:0;background:#08191ff5;box-shadow:none;border-radius:5px;
+  border:0;background:var(--towers-panel);box-shadow:none;border-radius:5px;
 }
 body.wt-towers-polished #warzone-towers-help.wt-towers-guide header,
 body.wt-towers-polished #warzone-towers-help.wt-towers-guide footer {border:0;background:transparent}
 body.wt-towers-polished #warzone-towers-help.wt-towers-guide button {border:0;box-shadow:none;background:transparent}
-body.wt-towers-polished #warzone-towers-help.wt-towers-guide .wt-help-back {background:#28574e}
+body.wt-towers-polished #warzone-towers-help.wt-towers-guide .wt-help-back {background:var(--towers-selected,#f4f4f4)}
 body.wt-towers-polished #warzone-towers-help.wt-towers-guide .wt-help-settings {flex-wrap:wrap;border:0;padding:5px 16px}
 body.wt-towers-polished #warzone-towers-help.wt-towers-guide .wt-help-settings button {font-size:calc(11px * var(--wt-command-scale,1))!important;padding:6px 8px!important;min-height:30px}
-body.wt-towers-polished #warzone-towers-help.wt-towers-guide .wt-help-settings [aria-pressed=true] {background:#28574e;color:#effaf7;box-shadow:inset 0 -2px var(--towers-accent)}
+body.wt-towers-polished #warzone-towers-help.wt-towers-guide .wt-help-settings [aria-pressed=true] {background:var(--towers-selected,#f4f4f4);color:var(--towers-ink);box-shadow:none}
 
 /* Production accepts a tap immediately; the native acknowledgement owns success. */
 body.wt-towers-polished #wt-command-pages .wt-factory-produce {
   min-height:38px;min-width:100px;padding:8px 14px;
-  color:#092025;background:#8bd3cc;
+  color:var(--towers-ink);background:var(--towers-selected,#f4f4f4);
   font:500 15px/1.2 Towers,sans-serif!important;
   border:0;border-radius:5px;touch-action:manipulation;
   transition:background-color 90ms ease,transform 90ms ease;
 }
 body.wt-towers-polished #wt-command-pages .wt-factory-produce:active {
-  background:#c3eee8;transform:translateY(1px);filter:none;
+  background:var(--towers-pressed,#151515);transform:translateY(1px);filter:none;
 }
-body.wt-towers-polished #wt-command-pages .wt-factory-produce.pending {background:#b1e3dc}
-body.wt-towers-polished #wt-command-pages .wt-factory-produce:disabled {opacity:.45;transform:none}
+body.wt-towers-polished #wt-command-pages .wt-factory-produce.pending {background:var(--towers-control)}
+body.wt-towers-polished #wt-command-pages .wt-factory-produce:disabled {opacity:1;color:var(--towers-disabled,#888888);background:var(--towers-control);transform:none}
 body.wt-towers-polished #wt-command-pages .wt-production-feedback {
-  min-height:18px;margin:6px 0 0;color:#b3c8cb;
+  min-height:18px;margin:6px 0 0;color:var(--towers-muted);
   font:500 12px/18px Towers,sans-serif;overflow-wrap:anywhere;
 }
-body.wt-towers-polished #wt-command-pages .wt-production-feedback[data-tone=done] {color:#9fdab0}
-body.wt-towers-polished #wt-command-pages .wt-production-feedback[data-tone=error] {color:#f2bf94}
+body.wt-towers-polished #wt-command-pages .wt-production-feedback[data-tone=done] {color:var(--towers-text)}
+body.wt-towers-polished #wt-command-pages .wt-production-feedback[data-tone=error] {color:var(--towers-text)}
 @media(prefers-reduced-motion:reduce) {
   body.wt-towers-polished #wt-command-pages .wt-factory-produce {transition:none}
 }
@@ -172,3 +203,17 @@ body.wt-towers-polished #wt-command-pages .wt-production-feedback[data-tone=erro
 }
 /* Programmatic dialog focus needs no frame; its buttons keep visible focus rings. */
 body.wt-towers-polished #warzone-towers-help:focus {outline:none}
+
+/* Save progress is visible immediately; success follows the real phone archive. */
+body.wt-towers-polished #warzone-command-strip #blocknight-save[data-save-state=saving] {
+  background:var(--towers-selected,#f4f4f4)!important;color:var(--towers-text)!important;opacity:1;
+}
+body.wt-towers-polished #warzone-command-strip #blocknight-save[data-save-state=saved] {
+  background:var(--towers-selected,#f4f4f4)!important;color:var(--towers-ink)!important;opacity:1;
+}
+body.wt-towers-polished #warzone-command-strip #blocknight-save[data-save-state=error] {
+  background:var(--towers-selected,#f4f4f4)!important;color:var(--towers-text)!important;
+}
+body.wt-towers-polished #warzone-command-strip #blocknight-save:active {
+  background:var(--towers-pressed,#151515)!important;color:var(--towers-text)!important;
+}

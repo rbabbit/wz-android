@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/** Titles and IDs read from the verified original albums; no audio is embedded. */
+/** Titles and IDs read from the original albums in the bundled soundtrack. */
 final class MusicTrackCatalog {
     static final class Album {
         final String title, author;

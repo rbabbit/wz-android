@@ -1,0 +1,36 @@
+{
+  "checkedUtc": "2026-11-11T13:30:18.450480+00:00",
+  "scope": "Exact Java source host harness; actual pinned ZIP, loopback HTTP transfer; no emulator or remote media download",
+  "archiveSha256": "23f74895fa7f03cb86a79b857bad6977ce18d20b8a944d51449e68517e80bc47",
+  "javaSha256": "b0dc47a3795dd55d8347a657c236da4af63f02bc0d96267fed8a977504a3fabe",
+  "filesInstalled": 181,
+  "sequenceBytes": 170920623,
+  "checks": [
+    "cancel during extraction, retry and stale callback suppression",
+    "duplicate-tap serialization",
+    "original movies + COPYING + VERSION only; older engine excluded",
+    "offline SHA readiness and same-size corruption rejection",
+    "completion-marker and interrupted-promotion recovery",
+    "real Ogg GET HEAD single/suffix/open ranges and rejection cases",
+    "shared downloader SHA failure, HTTP range resume, active-transfer cancellation and resume"
+  ],
+  "loopbackRequests": [
+    [
+      "/pack",
+      "bytes=16384-"
+    ],
+    [
+      "/slow",
+      null
+    ],
+    [
+      "/slow",
+      "bytes=4096-"
+    ]
+  ],
+  "limitations": [
+    "Android directory fsync binding is stubbed on Windows",
+    "Native cinematic decoding/playback requires exact-APK emulator verification"
+  ],
+  "passed": true
+}

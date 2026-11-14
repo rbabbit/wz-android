@@ -1,0 +1,62 @@
+{
+  "version": "0.76",
+  "passed": true,
+  "emulatorUsed": false,
+  "actualNativeEngineExecuted": false,
+  "scope": "Actual shared research renderer/functions: numeric accessible lab tabs, unfiltered compact catalogue and retained selection/status/queue/progress behavior across Towers, FFA, Campaign, Multiplayer; Duel guard. Synthetic DOM/native-mailbox fixtures only; CSS source is pinned, not rendered by this check.",
+  "checksPassed": 38,
+  "checks": [
+    "towers: active/queued topics remain visible after native availability removes them, without history ghosts",
+    "towers: inspecting active/confirmed queued rows cannot add duplicate batch selections",
+    "towers: pending additions show SYNCING until confirmed, rejection shows NOT SYNCED, no false queued state",
+    "towers: hidden categories always show all topics and preserve native-ID selection through reorder/reindex",
+    "towers: live laboratory tabs use numeric faces, real IDs and full accessible labels through reorder/removal",
+    "towers: progress/countdown updates retain the actual card node and hide unknown placeholder progress",
+    "towers: completion/removal clears assigned rows; cancellation makes an available topic ready again",
+    "towers: save rewind and player replacement discard stale display identities and pending selections",
+    "ffa: active/queued topics remain visible after native availability removes them, without history ghosts",
+    "ffa: inspecting active/confirmed queued rows cannot add duplicate batch selections",
+    "ffa: pending additions show SYNCING until confirmed, rejection shows NOT SYNCED, no false queued state",
+    "ffa: hidden categories always show all topics and preserve native-ID selection through reorder/reindex",
+    "ffa: live laboratory tabs use numeric faces, real IDs and full accessible labels through reorder/removal",
+    "ffa: progress/countdown updates retain the actual card node and hide unknown placeholder progress",
+    "ffa: completion/removal clears assigned rows; cancellation makes an available topic ready again",
+    "ffa: save rewind and player replacement discard stale display identities and pending selections",
+    "campaign: active/queued topics remain visible after native availability removes them, without history ghosts",
+    "campaign: inspecting active/confirmed queued rows cannot add duplicate batch selections",
+    "campaign: pending additions show SYNCING until confirmed, rejection shows NOT SYNCED, no false queued state",
+    "campaign: hidden categories always show all topics and preserve native-ID selection through reorder/reindex",
+    "campaign: live laboratory tabs use numeric faces, real IDs and full accessible labels through reorder/removal",
+    "campaign: progress/countdown updates retain the actual card node and hide unknown placeholder progress",
+    "campaign: completion/removal clears assigned rows; cancellation makes an available topic ready again",
+    "campaign: save rewind and player replacement discard stale display identities and pending selections",
+    "multiplayer: active/queued topics remain visible after native availability removes them, without history ghosts",
+    "multiplayer: inspecting active/confirmed queued rows cannot add duplicate batch selections",
+    "multiplayer: pending additions show SYNCING until confirmed, rejection shows NOT SYNCED, no false queued state",
+    "multiplayer: hidden categories always show all topics and preserve native-ID selection through reorder/reindex",
+    "multiplayer: live laboratory tabs use numeric faces, real IDs and full accessible labels through reorder/removal",
+    "multiplayer: progress/countdown updates retain the actual card node and hide unknown placeholder progress",
+    "multiplayer: completion/removal clears assigned rows; cancellation makes an available topic ready again",
+    "multiplayer: save rewind and player replacement discard stale display identities and pending selections",
+    "active precedence overrides confirmed/pending queue duplicates and real zero costs remain zero",
+    "confirmed queued status persists during an unacknowledged removal and prevents re-adding it",
+    "a Multiplayer completion event for another native player cannot remove the local active topic",
+    "Duel keeps its legacy available-only rows, native-index selection and original status wording",
+    "pre-snapshot polished laboratory placeholders remain numeric and named for assistive technology",
+    "all four mode entrypoints reuse this renderer; no per-mode research screen is substituted"
+  ],
+  "sources": [
+    {
+      "path": "app/src/main/assets/warzone-mobile-research.js",
+      "sha256": "108f7d45234a8ee2b4dc1da49aa357e19d608aff0b8f9c03979cb969866db23d"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/towers-research.css",
+      "sha256": "f042a331b5db840db2454443a13ac19f7343c408c6e7c89292d75443167afcf1"
+    },
+    {
+      "path": "tools/test-research-clean-076.cjs",
+      "sha256": "1ea66ff75b5f001af0ebebcdca799ac003e41f103ac9b39a588c5b1cc6a43a52"
+    }
+  ]
+}

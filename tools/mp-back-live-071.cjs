@@ -1,0 +1,8 @@
+'use strict';const q=require('./mp-live-071.cjs'),fs=require('fs'),path=require('path'),assert=require('node:assert/strict');
+(async()=>{let c=await q.connect();const proof={};try{
+ await c.wait('PcMultiplayerSession.phase==="game"','game');q.adb('shell','input','keyevent','4');await q.delay(300);q.screen('back071-stay-dialog');q.adb('shell','input','tap','1294','597');await c.wait('PcMultiplayerSession.phase==="game"','Stay retains game');
+ await c.tap('#blocknight-tech');await c.wait('document.querySelector("#warzone-game-frame").contentWindow.__blockNightResearch.report().open','input restored');await c.tap('#blocknight-tech');
+ q.adb('shell','input','keyevent','4');await q.delay(300);q.screen('back071-return-dialog');q.adb('shell','input','tap','1460','600');c.close();c=await q.connect();await c.wait('!PcMultiplayerSession.active&&PcMultiplayerSession.phase==="lobby"','return to own lobby',10000);await c.wait('document.querySelectorAll(".room").length>0','live list restored');await c.save('back071-lobby');
+ assert.equal(await c.evaluate('!!document.querySelector("#home")||!!document.querySelector("#warzone-game-frame")'),false);
+ q.adb('shell','input','keyevent','4');await q.delay(300);proof.activity=q.adb('shell','dumpsys','activity','activities').toString().split('\n').filter(l=>/mResumedActivity|topResumedActivity/.test(l));assert.ok(proof.activity.some(l=>l.includes('MainActivity')));q.screen('back071-home');proof.passed=true;fs.writeFileSync(path.join(q.out,'back-live-proof.json'),JSON.stringify(proof,null,2));console.log('PASS Back Stay, input restore, Return lobby and Android Back Home');
+}finally{c.close();}})().catch(e=>{console.error(e);process.exitCode=1});

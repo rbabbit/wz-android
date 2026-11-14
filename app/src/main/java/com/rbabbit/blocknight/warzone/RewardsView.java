@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.GradientDrawable;
@@ -13,10 +14,14 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import java.io.InputStream;
@@ -35,25 +40,28 @@ final class RewardsView extends FrameLayout {
         void close();
     }
 
-    private static final int INK = 0xFFF0F3ED, MUTED = 0xFFA6B9BE, TEAL = 0xFF8BD3CC;
+    private static final int INK = TowersTheme.TEXT, MUTED = TowersTheme.SECONDARY;
     private static final String[] CATEGORIES = {"Fortresses", "Defences", "Artillery", "Support"};
     private final Actions actions;
     private final boolean inGame;
     private final Typeface face;
-    private final LinearLayout drawer, rows, bulk;
+    private final LinearLayout drawer, rows;
     private final ScrollView scroll;
-    private final TextView wallet, selectedLabel, quantityLabel, hint, error;
-    private final Button shop, next, minus, plus, confirm;
+    private final TextView wallet;
     private final Button watchAd, adPrivacy;
-    private final TextView adStatus;
     private boolean adEnabled, adBusy;
     private int adStatusGeneration;
+    private String adMessage = "";
+    private boolean adMessageVisible;
     private final Map<String, Button> categories = new LinkedHashMap<>();
     private final Map<String, Bitmap> artwork = new LinkedHashMap<>();
+    private final Map<String, ItemRow> itemRows = new LinkedHashMap<>();
     private final Map<String, Integer> inventory = new LinkedHashMap<>(), loadout = new LinkedHashMap<>();
     private String category = "Fortresses", selectedId = "fortress";
-    private int balance, quantity = 1;
-    private boolean nextMatch, busy, initialized, resetScroll;
+    private String pendingItemId = "", pendingKind = "", feedbackItemId = "", feedbackText = "";
+    private int balance, feedbackGeneration;
+    private boolean busy, initialized, feedbackError;
+    private PopupWindow ownedPopup;
 
     RewardsView(Context context, String mapId, String mapName, int balance,
             Map<String, Integer> inventory, Map<String, Integer> loadout, boolean inGame, Actions actions) {
@@ -69,69 +77,51 @@ final class RewardsView extends FrameLayout {
         setOnClickListener(v -> actions.close());
         drawer = new LinearLayout(context);
         drawer.setOrientation(LinearLayout.VERTICAL);
-        drawer.setPadding(dp(10), dp(4), dp(10), dp(6));
-        drawer.setBackground(surface(context, 0xFF0C1E26, 0));
+        drawer.setPadding(dp(8), dp(4), dp(8), dp(4));
+        drawer.setBackground(surface(context, TowersTheme.PANEL, 0));
         drawer.setClickable(true);
         drawer.setOnClickListener(v -> { });
         addView(drawer, new LayoutParams(dp(350), -1, Gravity.END));
 
         LinearLayout header = new LinearLayout(context);
         header.setGravity(Gravity.CENTER_VERTICAL);
-        TextView title = copy("REWARDS", 18, INK);
-        title.setTypeface(face);
-        title.setSingleLine(true);
-        header.addView(title, new LinearLayout.LayoutParams(0, -2, 1));
-        header.addView(crystal(), new LinearLayout.LayoutParams(dp(18), dp(18)));
-        wallet = copy("", 17, TEAL);
-        wallet.setTypeface(face);
-        wallet.setSingleLine(true);
-        wallet.setMaxWidth(dp(108));
-        wallet.setEllipsize(TextUtils.TruncateAt.END);
-        LinearLayout.LayoutParams walletParams = new LinearLayout.LayoutParams(-2, -2);
-        walletParams.leftMargin = dp(5);
-        header.addView(wallet, walletParams);
-        drawer.addView(header, new LinearLayout.LayoutParams(-1, dp(40)));
-
-        LinearLayout adRow = new LinearLayout(context);
-        adRow.setGravity(Gravity.CENTER_VERTICAL);
-        watchAd = compactAction("Gain 10 Crystals", false, 13);
+        header.setMinimumHeight(dp(36));
+        watchAd = compactAction("Gain 10 Crystals", false, 12);
         watchAd.setGravity(Gravity.CENTER);
-        watchAd.setTextColor(INK);
-        watchAd.setBackground(new RippleDrawable(ColorStateList.valueOf(0x448BD3CC), surface(context, 0xFF225752, 5), null));
+        watchAd.setSingleLine(false);
+        watchAd.setMaxLines(2);
+        watchAd.setMinHeight(dp(36));
+        watchAd.setTextColor(TowersTheme.buttonText(true));
+        watchAd.setBackgroundTintList(null);
+        watchAd.setBackground(new RippleDrawable(ColorStateList.valueOf(TowersTheme.PRIMARY_RIPPLE), TowersTheme.control(context, TowersTheme.PRIMARY, 5), null));
         android.graphics.drawable.Drawable play = context.getDrawable(android.R.drawable.ic_media_play).mutate();
-        play.setTint(TEAL); play.setBounds(0, 0, dp(12), dp(12));
+        play.setTintList(TowersTheme.buttonText(true)); play.setBounds(0, 0, dp(12), dp(12));
         watchAd.setCompoundDrawables(play, null, null, null);
         watchAd.setCompoundDrawablePadding(dp(5));
         watchAd.setContentDescription("Watch an optional ad to earn 10 crystals");
         watchAd.setOnClickListener(v -> { if (!busy && !adBusy) actions.watchAd(); });
-        adRow.addView(watchAd, new LinearLayout.LayoutParams(dp(150), dp(36)));
-        TextView adDescription = copy("Watch an ad", 10, MUTED);
-        adDescription.setPadding(dp(8), 0, dp(2), 0);
-        adRow.addView(adDescription, new LinearLayout.LayoutParams(0, -2, 1));
-        adPrivacy = compactAction("Privacy", false, 11);
-        adPrivacy.setTextColor(MUTED);
-        adPrivacy.setBackground(new RippleDrawable(ColorStateList.valueOf(0x228BD3CC), null, null));
+        header.addView(watchAd, new LinearLayout.LayoutParams(dp(140), -2));
+        header.addView(new View(context), new LinearLayout.LayoutParams(0, 1, 1));
+        adPrivacy = compactAction("Privacy", false, 10);
+        adPrivacy.setTextColor(TowersTheme.controlText(false, MUTED));
+        adPrivacy.setBackgroundTintList(null);
+        adPrivacy.setBackground(new RippleDrawable(ColorStateList.valueOf(TowersTheme.RIPPLE), TowersTheme.control(context, TowersTheme.CONTROL, 5), null));
         adPrivacy.setContentDescription("Change ad privacy choices");
-        adPrivacy.setOnClickListener(v -> actions.adPrivacy());
-        LinearLayout.LayoutParams privacyParams = new LinearLayout.LayoutParams(-2, dp(40));
-        privacyParams.leftMargin = dp(5);
-        adRow.addView(adPrivacy, privacyParams);
-        adStatus = copy("", 10, MUTED);
-        adStatus.setMaxLines(2);
-        adStatus.setEllipsize(TextUtils.TruncateAt.END);
-        adStatus.setAccessibilityLiveRegion(ACCESSIBILITY_LIVE_REGION_POLITE);
-        adStatus.setVisibility(GONE);
-
-        LinearLayout modes = new LinearLayout(context);
-        shop = compactAction("SHOP", false, 12);
-        next = compactAction(inGame ? "THIS MATCH" : "NEXT MATCH", false, 12);
-        modes.addView(shop, new LinearLayout.LayoutParams(0, dp(36), 1));
-        LinearLayout.LayoutParams nextParams = new LinearLayout.LayoutParams(0, dp(36), 1);
-        nextParams.leftMargin = dp(5);
-        modes.addView(next, nextParams);
-        shop.setOnClickListener(v -> setMode(false));
-        next.setOnClickListener(v -> setMode(true));
-        drawer.addView(modes, new LinearLayout.LayoutParams(-1, dp(36)));
+        adPrivacy.setVisibility(GONE);
+        adPrivacy.setOnClickListener(v -> { if (!busy && !adBusy) actions.adPrivacy(); });
+        header.addView(adPrivacy, new LinearLayout.LayoutParams(dp(46), dp(36)));
+        LinearLayout.LayoutParams crystalParams = new LinearLayout.LayoutParams(dp(15), dp(17));
+        crystalParams.leftMargin = dp(7);
+        header.addView(crystal(), crystalParams);
+        wallet = copy("", 16, INK);
+        wallet.setTypeface(face);
+        wallet.setSingleLine(true);
+        wallet.setMaxWidth(dp(80));
+        wallet.setEllipsize(TextUtils.TruncateAt.END);
+        LinearLayout.LayoutParams walletParams = new LinearLayout.LayoutParams(-2, -2);
+        walletParams.leftMargin = dp(4);
+        header.addView(wallet, walletParams);
+        drawer.addView(header, new LinearLayout.LayoutParams(-1, -2));
 
         LinearLayout tabs = new LinearLayout(context);
         for (String name : CATEGORIES) {
@@ -139,61 +129,18 @@ final class RewardsView extends FrameLayout {
             tab.setContentDescription("Rewards category " + name);
             tab.setOnClickListener(v -> setCategory(name));
             categories.put(name, tab);
-            tabs.addView(tab, new LinearLayout.LayoutParams(0, dp(36), 1));
+            tabs.addView(tab, new LinearLayout.LayoutParams(0, dp(32), 1));
         }
-        drawer.addView(tabs, new LinearLayout.LayoutParams(-1, dp(36)));
+        drawer.addView(tabs, new LinearLayout.LayoutParams(-1, dp(32)));
 
         scroll = new ScrollView(context);
         scroll.setOverScrollMode(OVER_SCROLL_NEVER);
-        scroll.setVerticalScrollBarEnabled(false);
+        scroll.setVerticalScrollBarEnabled(true);
+        scroll.setFillViewport(false);
         rows = new LinearLayout(context);
         rows.setOrientation(LinearLayout.VERTICAL);
         scroll.addView(rows, new ScrollView.LayoutParams(-1, -2));
         drawer.addView(scroll, new LinearLayout.LayoutParams(-1, 0, 1));
-
-        LinearLayout footer = new LinearLayout(context);
-        footer.setOrientation(LinearLayout.VERTICAL);
-        footer.setPadding(0, dp(4), 0, 0);
-        selectedLabel = copy("", 12, INK);
-        selectedLabel.setTypeface(face);
-        selectedLabel.setSingleLine(true);
-        selectedLabel.setEllipsize(TextUtils.TruncateAt.END);
-        footer.addView(selectedLabel, new LinearLayout.LayoutParams(-1, -2));
-        bulk = new LinearLayout(context);
-        footer.addView(bulk, new LinearLayout.LayoutParams(-1, dp(32)));
-
-        LinearLayout controls = new LinearLayout(context);
-        controls.setGravity(Gravity.CENTER_VERTICAL);
-        minus = compactAction("−", false, 19);
-        minus.setContentDescription("Decrease reward quantity by one");
-        minus.setOnClickListener(v -> changeQuantity(quantity - 1));
-        controls.addView(minus, new LinearLayout.LayoutParams(dp(36), dp(40)));
-        quantityLabel = copy("1", 15, INK);
-        quantityLabel.setTypeface(face);
-        quantityLabel.setGravity(Gravity.CENTER);
-        controls.addView(quantityLabel, new LinearLayout.LayoutParams(dp(32), dp(40)));
-        plus = compactAction("+", false, 19);
-        plus.setContentDescription("Increase reward quantity by one");
-        plus.setOnClickListener(v -> changeQuantity(quantity + 1));
-        controls.addView(plus, new LinearLayout.LayoutParams(dp(36), dp(40)));
-        confirm = compactAction("BUY", true, 13);
-        confirm.setOnClickListener(v -> commit());
-        LinearLayout.LayoutParams confirmParams = new LinearLayout.LayoutParams(0, dp(40), 1);
-        confirmParams.leftMargin = dp(8);
-        controls.addView(confirm, confirmParams);
-        footer.addView(controls, new LinearLayout.LayoutParams(-1, dp(40)));
-        hint = copy("", 10, MUTED);
-        hint.setMaxLines(2);
-        footer.addView(hint, new LinearLayout.LayoutParams(-1, -2));
-        error = copy("", 11, 0xFFFFB6A5);
-        error.setMaxLines(3);
-        error.setVisibility(GONE);
-        error.setAccessibilityLiveRegion(ACCESSIBILITY_LIVE_REGION_POLITE);
-        footer.addView(error, new LinearLayout.LayoutParams(-1, -2));
-        drawer.addView(footer, new LinearLayout.LayoutParams(-1, -2));
-        // Keep the optional ad secondary to the shop's normal controls.
-        drawer.addView(adRow, new LinearLayout.LayoutParams(-1, dp(40)));
-        drawer.addView(adStatus, new LinearLayout.LayoutParams(-1, -2));
         refresh(balance, inventory, loadout);
     }
 
@@ -208,43 +155,49 @@ final class RewardsView extends FrameLayout {
         this.inventory.clear(); this.inventory.putAll(newInventory);
         this.loadout.clear(); this.loadout.putAll(newLoadout);
         initialized = true;
-        ensureSelection();
-        quantity = nextMatch ? count(this.loadout, selectedId)
-                : Math.max(1, Math.min(quantity, Math.max(1, maxQuantity(item()))));
         render();
     }
 
     /** Native progress never releases a pending purchase; its callback does. */
     void completeMutation(int balance, Map<String, Integer> inventory, Map<String, Integer> loadout) {
+        String acknowledgedItem = pendingItemId, acknowledgedKind = pendingKind;
         busy = false;
-        error.setVisibility(GONE);
+        pendingItemId = "";
+        pendingKind = "";
         refresh(balance, inventory, loadout);
-        render(); // Also unlocks an acknowledged operation whose counts stayed equal.
+        if (!acknowledgedItem.isEmpty()) {
+            String message = "buy".equals(acknowledgedKind) ? "+1 added"
+                    : "Selected " + count(this.loadout, acknowledgedItem);
+            showFeedback(acknowledgedItem, message, false);
+        } else render(); // Also unlocks an acknowledged operation whose counts stayed equal.
     }
 
     void showError(String message) {
+        String failedItem = pendingItemId.isEmpty() ? selectedId : pendingItemId;
         busy = false;
-        error.setText(message);
-        error.setVisibility(VISIBLE);
-        render();
+        pendingItemId = "";
+        pendingKind = "";
+        showFeedback(failedItem, message == null || message.isEmpty() ? "Could not save. Please retry." : message, true);
     }
 
     void setAdState(boolean enabled, boolean busy, boolean privacyRequired, String status, boolean testAds) {
         boolean wasBusy = adBusy;
         adEnabled = enabled;
         adBusy = busy;
-        watchAd.setText(adBusy ? "Please wait…" : "Gain 10 Crystals");
         boolean quiet = status == null || status.isEmpty() || "Optional ad · 10 crystals".equals(status)
                 || "Ads are optional.".equals(status)
                 || status.startsWith("Ready ·") || "Checking ad privacy settings…".equals(status) && !busy;
         String shown = quiet ? "" : status;
-        if (!shown.contentEquals(adStatus.getText())
+        if (!shown.equals(adMessage)
                 || wasBusy && !adBusy && shown.startsWith("+10 crystals")) {
             int generation = ++adStatusGeneration;
-            adStatus.setText(shown);
-            adStatus.setVisibility(shown.isEmpty() ? GONE : VISIBLE);
-            if (!adBusy && shown.startsWith("+10 crystals")) postDelayed(() -> {
-                if (generation == adStatusGeneration && !adBusy) adStatus.setVisibility(GONE);
+            adMessage = shown;
+            adMessageVisible = !shown.isEmpty();
+            if (!adBusy && (shown.startsWith("+10 crystals") || shown.startsWith("Ad closed."))) postDelayed(() -> {
+                if (generation == adStatusGeneration && !adBusy) {
+                    adMessageVisible = false;
+                    updateAdControls();
+                }
             }, 3000);
         }
         adPrivacy.setVisibility(privacyRequired ? VISIBLE : GONE);
@@ -252,229 +205,365 @@ final class RewardsView extends FrameLayout {
     }
 
     private void updateAdControls() {
+        String label = "Gain 10 Crystals";
+        if (adBusy) label = "Please wait…";
+        else if (adMessageVisible && adMessage.startsWith("+10 crystals")) label = "+10 Crystals";
+        else if (adMessage.contains("earned") && adMessage.contains("sav")) label = "Save 10 Crystals";
+        else if (adMessage.contains("clearing") && adMessage.contains("retry")) label = "Retry ad";
+        else if (adMessageVisible && adMessage.startsWith("Ad closed.")) label = "No reward earned";
+        else if (adMessageVisible && !adEnabled) label = "Ad unavailable";
+        else if (adMessageVisible && (adMessage.contains("could not") || adMessage.contains("No ad available")
+                || adMessage.contains("unavailable") || adMessage.contains("Tap to retry"))) label = "Try ad again";
+        if (!label.contentEquals(watchAd.getText())) watchAd.setText(label);
+        watchAd.setContentDescription("Watch an optional ad to earn 10 crystals"
+                + (adMessage.isEmpty() ? "" : ". " + adMessage));
         watchAd.setEnabled(adEnabled && !busy && !adBusy);
         watchAd.setAlpha(watchAd.isEnabled() ? 1f : .55f);
         adPrivacy.setEnabled(!busy && !adBusy);
     }
 
-    private void setMode(boolean value) {
-        if (busy) return;
-        nextMatch = value;
-        error.setVisibility(GONE);
-        if (nextMatch) choosePopulatedCategory();
-        ensureSelection();
-        quantity = nextMatch ? count(loadout, selectedId) : 1;
-        resetScroll = true;
-        render();
-    }
-
     private void setCategory(String value) {
         if (busy || category.equals(value)) return;
+        dismissOwnedPopup();
         category = value;
         selectedId = "";
-        ensureSelection();
-        quantity = nextMatch ? count(loadout, selectedId) : 1;
-        error.setVisibility(GONE);
-        resetScroll = true;
+        clearFeedback();
+        itemRows.clear();
+        rows.removeAllViews();
+        scroll.scrollTo(0, 0);
         render();
     }
 
-    private void changeQuantity(int value) {
-        if (busy || selectedId.isEmpty() || inGame && nextMatch) return;
-        quantity = Math.max(nextMatch ? 0 : 1, Math.min(value, maxQuantity(item())));
-        error.setVisibility(GONE);
-        render();
-    }
-
-    private void commit() {
-        if (inGame && nextMatch) { actions.close(); return; }
-        if (busy || selectedId.isEmpty() || quantity < 0 || quantity > maxQuantity(item())) return;
-        if (nextMatch && quantity == count(loadout, selectedId)) return;
-        long total = (long) item().price * quantity;
-        if (!nextMatch && (quantity < 1 || total > balance)) return;
+    private void commitOne(RewardCatalog.Item entry) {
+        if (busy) return;
+        dismissOwnedPopup();
+        selectedId = entry.id;
+        if (maxQuantity(entry) < 1) {
+            showFeedback(entry.id, entry.fortress ? "Fortress limit reached" : "Maximum stock reached", true);
+            return;
+        }
+        if (entry.price > balance) {
+            showFeedback(entry.id, "Need " + (entry.price - balance) + " more crystals", true);
+            return;
+        }
+        clearFeedback();
+        pendingItemId = entry.id;
+        pendingKind = "buy";
         busy = true;
-        error.setVisibility(GONE);
         render();
-        if (nextMatch) actions.equip(selectedId, quantity);
-        else actions.buy(selectedId, quantity);
+        actions.buy(entry.id, 1);
     }
 
-    private RewardCatalog.Item item() { return RewardCatalog.get(selectedId.isEmpty() ? "fortress" : selectedId); }
+    private void selectOwned(RewardCatalog.Item entry, int value) {
+        if (inGame || busy) return;
+        dismissOwnedPopup();
+        selectedId = entry.id;
+        if (value < 0 || value > maxOwned(entry)) {
+            showFeedback(entry.id, "Stored amount changed. Choose again.", true);
+            return;
+        }
+        if (value == count(loadout, entry.id)) return;
+        clearFeedback();
+        pendingItemId = entry.id;
+        pendingKind = "equip";
+        busy = true;
+        render();
+        actions.equip(entry.id, value);
+    }
+
+    private void clearFeedback() {
+        ++feedbackGeneration;
+        feedbackItemId = "";
+        feedbackText = "";
+        feedbackError = false;
+    }
+
+    private void showFeedback(String itemId, String message, boolean failed) {
+        clearFeedback();
+        feedbackItemId = itemId;
+        feedbackText = message;
+        feedbackError = failed;
+        int generation = feedbackGeneration;
+        render();
+        postDelayed(() -> {
+            if (generation != feedbackGeneration) return;
+            clearFeedback();
+            render();
+        }, failed ? 3200 : 1800);
+    }
+
     private int maxQuantity(RewardCatalog.Item item) {
-        if (inGame && nextMatch) return count(loadout, item.id);
         if (inGame) {
             if (item.fortress) return 3;
             if ("laser_sat".equals(item.id) || item.nativeId.isEmpty()) return 1;
             return 999;
         }
-        int available = nextMatch ? count(inventory, item.id) : Math.max(0, 999 - count(inventory, item.id));
+        int available = Math.max(0, 999 - count(inventory, item.id));
+        if (item.fortress) {
+            int stored = 0;
+            for (RewardCatalog.Item entry : RewardCatalog.list()) if (entry.fortress) stored += count(inventory, entry.id);
+            available = Math.min(available, Math.max(0, 3 - stored));
+        }
+        if ("laser_sat".equals(item.id)) available = Math.min(available, Math.max(0, 1 - count(inventory, item.id)));
+        return available;
+    }
+
+    private int maxOwned(RewardCatalog.Item item) {
+        int available = Math.min(count(inventory, item.id), item.maxPerMatch);
         if (item.fortress) {
             int other = 0;
-            for (RewardCatalog.Item entry : RewardCatalog.list()) if (entry.fortress
-                    && (!nextMatch || !entry.id.equals(item.id))) other += count(nextMatch ? loadout : inventory, entry.id);
+            for (RewardCatalog.Item entry : RewardCatalog.list()) if (entry.fortress && !entry.id.equals(item.id)) other += count(loadout, entry.id);
             available = Math.min(available, Math.max(0, 3 - other));
         }
-        if ("laser_sat".equals(item.id)) available = Math.min(available, nextMatch ? 1 : Math.max(0, 1 - count(inventory, item.id)));
-        if (nextMatch) available = Math.min(available, item.maxPerMatch);
         return available;
     }
 
     private List<RewardCatalog.Item> visibleItems() {
         List<RewardCatalog.Item> values = new ArrayList<>();
-        for (RewardCatalog.Item item : RewardCatalog.list()) if (category.equals(item.category)
-                && (inGame && nextMatch ? loadout.containsKey(item.id)
-                    : !nextMatch || count(inventory, item.id) > 0 || count(loadout, item.id) > 0)) values.add(item);
+        for (RewardCatalog.Item item : RewardCatalog.list()) if (category.equals(item.category)) values.add(item);
         return values;
-    }
-
-    private void choosePopulatedCategory() {
-        if (!visibleItems().isEmpty()) return;
-        for (String name : CATEGORIES) { category = name; if (!visibleItems().isEmpty()) return; }
-        category = "Fortresses";
-    }
-
-    private void ensureSelection() {
-        List<RewardCatalog.Item> values = visibleItems();
-        for (RewardCatalog.Item entry : values) if (entry.id.equals(selectedId)) return;
-        selectedId = values.isEmpty() ? "" : values.get(0).id;
     }
 
     private void render() {
         updateAdControls();
-        wallet.setText(Integer.toString(balance));
+        String amount = Integer.toString(balance);
+        if (!amount.contentEquals(wallet.getText())) wallet.setText(amount);
         wallet.setContentDescription(balance + " crystals");
-        styleTab(shop, !nextMatch); styleTab(next, nextMatch);
-        shop.setEnabled(!busy); next.setEnabled(!busy);
         for (Map.Entry<String, Button> tab : categories.entrySet()) {
             styleTab(tab.getValue(), category.equals(tab.getKey()));
             tab.getValue().setEnabled(!busy);
         }
-        int oldScroll = resetScroll ? 0 : scroll.getScrollY();
-        resetScroll = false;
-        rows.removeAllViews();
         List<RewardCatalog.Item> visible = visibleItems();
-        for (RewardCatalog.Item entry : visible) addItemRow(entry);
-        if (visible.isEmpty()) {
-            TextView empty = copy(inGame && nextMatch ? "No active rewards in this category."
-                    : "No stored items here. Buy in Shop, then choose what to take.", 12, MUTED);
-            empty.setPadding(dp(6), dp(16), dp(6), dp(16));
-            rows.addView(empty, new LinearLayout.LayoutParams(-1, -2));
+        // Keep touched row instances and their scroll positions while snapshots,
+        // acknowledgements and transient feedback update only their contents.
+        for (RewardCatalog.Item entry : visible) {
+            ItemRow row = itemRows.get(entry.id);
+            if (row == null) {
+                row = new ItemRow(entry);
+                itemRows.put(entry.id, row);
+                rows.addView(row.root, new LinearLayout.LayoutParams(-1, -2));
+            }
+            row.bind();
         }
-        scroll.post(() -> scroll.scrollTo(0, oldScroll));
-
-        boolean selected = !selectedId.isEmpty(), readOnly = inGame && nextMatch;
-        RewardCatalog.Item current = item();
-        selectedLabel.setText(readOnly ? "Active / remaining this match" : selected ? current.name : "Choose an item");
-        for (View view : new View[] {minus, quantityLabel, plus}) view.setVisibility(readOnly ? GONE : VISIBLE);
-        quantityLabel.setText(Integer.toString(quantity));
-        quantityLabel.setContentDescription("Reward quantity " + quantity);
-        minus.setEnabled(selected && !busy && quantity > (nextMatch ? 0 : 1));
-        plus.setEnabled(selected && !busy && quantity < maxQuantity(current));
-        minus.setAlpha(minus.isEnabled() ? 1f : .4f); plus.setAlpha(plus.isEnabled() ? 1f : .4f);
-        renderBulk(current, selected, readOnly);
-        long total = (long) current.price * quantity;
-        boolean can = selected && !busy && quantity >= (nextMatch ? 0 : 1) && quantity <= maxQuantity(current)
-                && (nextMatch ? quantity != count(loadout, selectedId) : total <= balance);
-        confirm.setText(readOnly ? "RETURN TO GAME" : busy ? "SAVING…" : nextMatch
-                ? quantity == 0 ? "LEAVE STORED" : "TAKE " + quantity
-                : "BUY · " + total);
-        confirm.setEnabled(readOnly || can);
-        confirm.setAlpha(confirm.isEnabled() ? 1f : .45f);
-        confirm.setContentDescription(readOnly ? "Close rewards and return to game" : nextMatch
-                ? "Take " + quantity + " " + current.name + " into the next match"
-                : "Buy " + quantity + " " + current.name + " for " + total + " crystals");
-        hint.setText(readOnly ? "Purchases and building allowances for this match."
-                : !selected ? "Choose a category and an item."
-                : selected && maxQuantity(current) == 0 ? current.fortress ? "Maximum 3 fortresses already stored."
-                : "Maximum stock for this item already stored."
-                : total > balance && !nextMatch ? "Not enough crystals. Your stock stays saved."
-                : nextMatch ? "Unused buildings return to storage. Zero leaves this item stored."
-                : current.nativeId.isEmpty() ? current.description
-                : current.fortress ? "Maximum 3 fortresses · Normal building power applies."
-                : inGame ? "Bought for this match · Normal building power applies."
-                : "Stock for any map · Normal building power applies.");
     }
 
-    private void addItemRow(RewardCatalog.Item entry) {
-        boolean chosen = entry.id.equals(selectedId);
-        LinearLayout row = new LinearLayout(getContext());
-        row.setGravity(Gravity.CENTER_VERTICAL);
-        row.setPadding(dp(4), dp(4), dp(4), dp(4));
-        row.setMinimumHeight(dp(52));
-        row.setBackground(new RippleDrawable(ColorStateList.valueOf(0x228BD3CC),
-                surface(getContext(), chosen ? 0xFF183A3F : 0x00000000, 5), null));
-        row.setClickable(true); row.setFocusable(true); row.setEnabled(!busy); row.setSelected(chosen);
-        ImageView check = new ImageView(getContext());
-        check.setImageResource(android.R.drawable.checkbox_on_background);
-        // Preserve the native two-tone checked glyph; a single tint fills its box.
-        check.setVisibility(chosen ? VISIBLE : INVISIBLE);
-        check.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
-        row.addView(check, new LinearLayout.LayoutParams(dp(12), dp(16)));
-        ImageView image = new ImageView(getContext());
-        image.setScaleType(ImageView.ScaleType.FIT_CENTER);
-        image.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
-        Bitmap bitmap = image(entry.id);
-        if (bitmap != null) {
-            BitmapDrawable drawable = new BitmapDrawable(getResources(), bitmap);
-            drawable.setFilterBitmap(false);
-            image.setImageDrawable(drawable);
-        }
-        LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(dp(56), dp(43));
-        imageParams.leftMargin = dp(3); imageParams.rightMargin = dp(8);
-        row.addView(image, imageParams);
-        LinearLayout labels = new LinearLayout(getContext());
-        labels.setOrientation(LinearLayout.VERTICAL);
-        TextView name = copy(entry.name, 14, INK);
-        name.setTypeface(face); name.setMaxLines(2); name.setEllipsize(TextUtils.TruncateAt.END);
-        labels.addView(name, new LinearLayout.LayoutParams(-1, -2));
-        String text = inGame ? entry.nativeId.isEmpty()
-                ? loadout.containsKey(entry.id) ? "Applied this match" : "Not applied"
-                : "This match " + count(loadout, entry.id)
-                : "Stored " + count(inventory, entry.id) + (nextMatch ? " · Take " + count(loadout, entry.id) : "");
-        TextView counts = copy(text, 10, TEAL);
-        counts.setPadding(0, dp(2), 0, 0);
-        labels.addView(counts, new LinearLayout.LayoutParams(-1, -2));
-        row.addView(labels, new LinearLayout.LayoutParams(0, -2, 1));
-        if (!nextMatch) {
+    private String itemStatus(RewardCatalog.Item entry) {
+        if (!inGame) return "Stored " + count(inventory, entry.id);
+        if (entry.nativeId.isEmpty()) return loadout.containsKey(entry.id) ? "Applied this match" : "Not applied";
+        return "This match " + count(loadout, entry.id);
+    }
+
+    private final class ItemRow {
+        final RewardCatalog.Item entry;
+        final LinearLayout root;
+        final TextView name, status, amount;
+        final Button owned;
+        int background = Integer.MIN_VALUE;
+
+        ItemRow(RewardCatalog.Item entry) {
+            this.entry = entry;
+            root = new LinearLayout(getContext());
+            root.setGravity(Gravity.CENTER_VERTICAL);
+            root.setPadding(dp(3), dp(4), dp(3), dp(4));
+            root.setMinimumHeight(dp(48));
+            root.setClickable(true);
+            root.setFocusable(true);
+            root.setOnClickListener(v -> commitOne(entry));
+
+            ImageView icon = new ImageView(getContext());
+            icon.setScaleType(ImageView.ScaleType.FIT_CENTER);
+            icon.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
+            Bitmap bitmap = image(entry.id);
+            if (bitmap != null) {
+                BitmapDrawable drawable = new BitmapDrawable(getResources(), bitmap);
+                drawable.setFilterBitmap(false);
+                icon.setImageDrawable(drawable);
+            }
+            LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(dp(40), dp(32));
+            imageParams.rightMargin = dp(7);
+            root.addView(icon, imageParams);
+
+            LinearLayout labels = new LinearLayout(getContext());
+            labels.setOrientation(LinearLayout.VERTICAL);
+            labels.setDuplicateParentStateEnabled(true);
+            name = copy(entry.name, 13, INK);
+            name.setDuplicateParentStateEnabled(true);
+            name.setTypeface(face);
+            name.setMaxLines(2);
+            name.setEllipsize(TextUtils.TruncateAt.END);
+            labels.addView(name, new LinearLayout.LayoutParams(-1, -2));
+            status = copy("", 10, MUTED);
+            status.setDuplicateParentStateEnabled(true);
+            status.setMaxLines(2);
+            status.setEllipsize(TextUtils.TruncateAt.END);
+            status.setAccessibilityLiveRegion(ACCESSIBILITY_LIVE_REGION_POLITE);
+            labels.addView(status, new LinearLayout.LayoutParams(-1, -2));
+            root.addView(labels, new LinearLayout.LayoutParams(0, -2, 1));
+
+            // This child action consumes its own click: choosing existing stock
+            // never reaches the parent row's purchase action.
+            owned = compactAction("", false, 10);
+            owned.setMaxLines(2);
+            owned.setSingleLine(false);
+            owned.setMinHeight(dp(36));
+            owned.setPadding(dp(5), 0, dp(5), 0);
+            owned.setOnClickListener(v -> showOwnedChooser(entry, owned));
+            LinearLayout.LayoutParams ownedParams = new LinearLayout.LayoutParams(-2, -2);
+            ownedParams.leftMargin = dp(4);
+            root.addView(owned, ownedParams);
+
             LinearLayout price = new LinearLayout(getContext());
+            price.setDuplicateParentStateEnabled(true);
             price.setGravity(Gravity.CENTER_VERTICAL | Gravity.END);
-            price.addView(crystal(), new LinearLayout.LayoutParams(dp(11), dp(13)));
-            TextView amount = copy(Integer.toString(entry.price), 13, TEAL);
+            price.setMinimumWidth(dp(39));
+            price.addView(crystal(), new LinearLayout.LayoutParams(dp(10), dp(12)));
+            amount = copy(Integer.toString(entry.price), 12, INK);
+            amount.setDuplicateParentStateEnabled(true);
             amount.setTypeface(face);
             amount.setPadding(dp(3), 0, 0, 0);
             price.addView(amount, new LinearLayout.LayoutParams(-2, -2));
-            LinearLayout.LayoutParams priceParams = new LinearLayout.LayoutParams(dp(40), -2);
-            priceParams.leftMargin = dp(3);
-            row.addView(price, priceParams);
+            LinearLayout.LayoutParams priceParams = new LinearLayout.LayoutParams(-2, -2);
+            priceParams.leftMargin = dp(5);
+            root.addView(price, priceParams);
         }
-        row.setContentDescription("Select " + entry.name + ", " + (inGame ? "remaining " + count(loadout, entry.id)
-                : "stored " + count(inventory, entry.id)) + (!nextMatch ? ", " + entry.price + " crystals each" : ""));
-        row.setOnClickListener(v -> {
-            if (busy) return;
-            selectedId = entry.id;
-            quantity = nextMatch ? count(loadout, entry.id) : 1;
-            error.setVisibility(GONE);
-            render();
-        });
-        rows.addView(row, new LinearLayout.LayoutParams(-1, -2));
+
+        void bind() {
+            boolean pending = busy && entry.id.equals(pendingItemId);
+            boolean feedback = entry.id.equals(feedbackItemId) && !feedbackText.isEmpty();
+            int fill = feedback || entry.id.equals(selectedId) ? TowersTheme.PRIMARY : 0x00000000;
+            if (fill != background) {
+                background = fill;
+                root.setBackground(new RippleDrawable(ColorStateList.valueOf(TowersTheme.RIPPLE),
+                        TowersTheme.control(getContext(), fill, 3), null));
+            }
+            root.setSelected(entry.id.equals(selectedId));
+            root.setEnabled(!busy);
+            boolean light = fill == TowersTheme.PRIMARY;
+            name.setTextColor(TowersTheme.buttonText(light));
+            amount.setTextColor(TowersTheme.buttonText(light));
+            String text = itemStatus(entry);
+            if (pending) text += " · " + ("buy".equals(pendingKind) ? "Adding…" : "Saving…");
+            else if (feedback) text += " · " + feedbackText;
+            if (!text.contentEquals(status.getText())) status.setText(text);
+            status.setTextColor(TowersTheme.controlText(light, pending || feedback ? INK : MUTED));
+            amount.setAlpha(entry.price <= balance && maxQuantity(entry) > 0 ? 1f : .5f);
+            int stored = count(inventory, entry.id), selected = count(loadout, entry.id);
+            owned.setVisibility(!inGame && stored > 0 ? VISIBLE : GONE);
+            String selection = "Selected " + selected;
+            if (!selection.contentEquals(owned.getText())) owned.setText(selection);
+            owned.setEnabled(!busy);
+            owned.setContentDescription("Choose stored " + entry.name + " quantity, " + selected
+                    + " selected from " + stored + " stored");
+            root.setContentDescription("Buy 1 " + entry.name + " for " + entry.price + " crystals. " + text);
+        }
     }
 
-    private void renderBulk(RewardCatalog.Item current, boolean selected, boolean readOnly) {
-        bulk.removeAllViews();
-        boolean visible = selected && !readOnly && !current.fortress && !"laser_sat".equals(current.id)
-                && !current.nativeId.isEmpty() && (!nextMatch || current.maxPerMatch > 1);
-        bulk.setVisibility(visible ? VISIBLE : GONE);
-        if (!visible) return;
-        for (int value : new int[] {1, 5, 10, 15, 20, -5}) {
-            Button button = compactAction(value == -5 ? "+5" : Integer.toString(value), false, 11);
-            styleTab(button, value == quantity);
-            int target = value == -5 ? quantity + 5 : value;
-            button.setEnabled(!busy && target <= maxQuantity(current));
-            button.setAlpha(button.isEnabled() ? 1f : .4f);
-            button.setContentDescription(value == -5 ? "Add five to reward quantity" : "Set reward quantity to " + value);
-            button.setOnClickListener(v -> changeQuantity(value == -5 ? quantity + 5 : value));
-            bulk.addView(button, new LinearLayout.LayoutParams(0, dp(32), 1));
+    private void showOwnedChooser(RewardCatalog.Item entry, View anchor) {
+        if (inGame || busy || count(inventory, entry.id) < 1) return;
+        dismissOwnedPopup();
+        final int maximum = maxOwned(entry);
+        LinearLayout content = new LinearLayout(getContext());
+        content.setOrientation(LinearLayout.VERTICAL);
+        content.setPadding(dp(4), dp(4), dp(4), dp(4));
+        content.setBackground(surface(getContext(), TowersTheme.PANEL, 5));
+        TextView heading = copy("Use stored " + entry.name, 12, INK);
+        heading.setTypeface(face);
+        heading.setMaxLines(2);
+        heading.setEllipsize(TextUtils.TruncateAt.END);
+        heading.setPadding(dp(8), dp(5), dp(8), dp(7));
+        content.addView(heading, new LinearLayout.LayoutParams(-1, -2));
+        ListView options = new ListView(getContext());
+        options.setDivider(null);
+        options.setBackgroundColor(TowersTheme.PANEL);
+        options.setSelector(surface(getContext(), TowersTheme.RIPPLE, 3));
+        options.setVerticalScrollBarEnabled(true);
+        options.setCacheColorHint(0x00000000);
+        options.setAdapter(new BaseAdapter() {
+            @Override public int getCount() { return maximum + 1; }
+            @Override public Integer getItem(int position) { return position; }
+            @Override public long getItemId(int position) { return position; }
+            @Override public View getView(int position, View recycled, ViewGroup parent) {
+                TextView option = recycled instanceof TextView ? (TextView) recycled : copy("", 14, INK);
+                option.setTypeface(face);
+                option.setGravity(Gravity.CENTER_VERTICAL);
+                option.setMinHeight(dp(40));
+                option.setPadding(dp(10), dp(5), dp(10), dp(5));
+                option.setSingleLine(true);
+                option.setEllipsize(TextUtils.TruncateAt.END);
+                option.setText(position == 0 ? "0 · Leave stored" : position + " selected");
+                boolean chosen = position == count(loadout, entry.id);
+                option.setTextColor(TowersTheme.buttonText(chosen));
+                option.setBackground(TowersTheme.control(getContext(), chosen ? TowersTheme.PRIMARY : TowersTheme.CONTROL, 6));
+                option.setContentDescription("Use " + position + " stored " + entry.name);
+                return option;
+            }
+        });
+        // Window-visible bounds are screen coordinates; showAtLocation uses the
+        // containing window's coordinates. Keep the entire measured menu visible
+        // even when its row is near the bottom, inset, or in a short window.
+        Rect visible = new Rect();
+        anchor.getWindowVisibleDisplayFrame(visible);
+        View windowRoot = anchor.getRootView();
+        int[] rootScreen = new int[2];
+        windowRoot.getLocationOnScreen(rootScreen);
+        Rect rootBounds = new Rect(rootScreen[0], rootScreen[1],
+                rootScreen[0] + windowRoot.getWidth(), rootScreen[1] + windowRoot.getHeight());
+        if (visible.isEmpty()) visible.set(rootBounds);
+        else if (!visible.intersect(rootBounds)) return;
+        int margin = dp(4);
+        if (visible.width() > margin * 2 && visible.height() > margin * 2) visible.inset(margin, margin);
+        if (visible.isEmpty() || anchor.getWindowToken() == null) return;
+
+        int popupWidth = Math.min(visible.width(), Math.min(dp(220), Math.max(dp(160), drawer.getWidth() - dp(16))));
+        int innerWidth = Math.max(1, popupWidth - content.getPaddingLeft() - content.getPaddingRight());
+        int exactInnerWidth = MeasureSpec.makeMeasureSpec(innerWidth, MeasureSpec.EXACTLY);
+        View optionSample = options.getAdapter().getView(0, null, options);
+        optionSample.measure(exactInnerWidth, MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
+        int optionHeight = Math.max(dp(40), optionSample.getMeasuredHeight());
+        int verticalPadding = content.getPaddingTop() + content.getPaddingBottom();
+        heading.setMaxHeight(Math.max(0, visible.height() - verticalPadding - optionHeight));
+        heading.measure(exactInnerWidth, MeasureSpec.makeMeasureSpec(visible.height(), MeasureSpec.AT_MOST));
+        int listHeight = Math.max(1, Math.min(optionHeight * Math.min(maximum + 1, 5),
+                visible.height() - verticalPadding - heading.getMeasuredHeight()));
+        content.addView(options, new LinearLayout.LayoutParams(-1, listHeight));
+        content.measure(MeasureSpec.makeMeasureSpec(popupWidth, MeasureSpec.EXACTLY),
+                MeasureSpec.makeMeasureSpec(visible.height(), MeasureSpec.AT_MOST));
+        int popupHeight = Math.min(visible.height(), content.getMeasuredHeight());
+        int[] anchorScreen = new int[2], anchorWindow = new int[2];
+        anchor.getLocationOnScreen(anchorScreen);
+        anchor.getLocationInWindow(anchorWindow);
+        int x = Math.max(visible.left, Math.min(anchorScreen[0], visible.right - popupWidth));
+        int below = anchorScreen[1] + anchor.getHeight() + margin;
+        int above = anchorScreen[1] - margin - popupHeight;
+        int y = below + popupHeight <= visible.bottom ? below : above;
+        y = Math.max(visible.top, Math.min(y, visible.bottom - popupHeight));
+        int windowOriginX = anchorScreen[0] - anchorWindow[0];
+        int windowOriginY = anchorScreen[1] - anchorWindow[1];
+        PopupWindow popup = new PopupWindow(content, popupWidth, popupHeight, true);
+        popup.setBackgroundDrawable(surface(getContext(), TowersTheme.PANEL, 5));
+        popup.setOutsideTouchable(true);
+        popup.setElevation(dp(6));
+        popup.setClippingEnabled(true);
+        popup.setOnDismissListener(() -> { if (ownedPopup == popup) ownedPopup = null; });
+        options.setOnItemClickListener((parent, view, position, id) -> selectOwned(entry, position));
+        ownedPopup = popup;
+        popup.showAtLocation(anchor, Gravity.TOP | Gravity.LEFT, x - windowOriginX, y - windowOriginY);
+        options.setSelection(Math.max(0, Math.min(maximum, count(loadout, entry.id))));
+    }
+
+    private void dismissOwnedPopup() {
+        if (ownedPopup != null) {
+            PopupWindow popup = ownedPopup;
+            ownedPopup = null;
+            popup.dismiss();
         }
+    }
+
+    @Override protected void onDetachedFromWindow() {
+        dismissOwnedPopup();
+        ++feedbackGeneration;
+        ++adStatusGeneration;
+        super.onDetachedFromWindow();
     }
 
     private Bitmap image(String id) {
@@ -522,18 +611,18 @@ final class RewardsView extends FrameLayout {
         Button button = action(getContext(), face, label, primary);
         button.setTextSize(size);
         button.setPadding(dp(3), 0, dp(3), 0);
-        button.setBackground(compactBackground(primary ? TEAL : 0xFF14252D));
+        button.setBackground(compactBackground(primary ? TowersTheme.PRIMARY : TowersTheme.CONTROL));
         return button;
     }
 
     private RippleDrawable compactBackground(int fill) {
-        return new RippleDrawable(ColorStateList.valueOf(0x338BD3CC),
-                new InsetDrawable(surface(getContext(), fill, 5), 0, dp(3), 0, dp(3)), null);
+        return new RippleDrawable(ColorStateList.valueOf(fill == TowersTheme.PRIMARY ? TowersTheme.PRIMARY_RIPPLE : TowersTheme.RIPPLE),
+                new InsetDrawable(TowersTheme.control(getContext(), fill, 5), 0, dp(3), 0, dp(3)), null);
     }
 
     private void styleTab(Button button, boolean selected) {
-        button.setBackground(compactBackground(selected ? 0xFF28574E : 0x00000000));
-        button.setTextColor(INK);
+        button.setBackground(compactBackground(selected ? TowersTheme.PRIMARY : 0x00000000));
+        button.setTextColor(TowersTheme.buttonText(selected));
         button.setSelected(selected);
     }
 
@@ -549,7 +638,7 @@ final class RewardsView extends FrameLayout {
     @Override protected void onMeasure(int width, int height) {
         int available = MeasureSpec.getSize(width);
         int drawerWidth = Math.max(0, Math.min(available - dp(16),
-                Math.min(dp(420), Math.max(dp(330), Math.round(available * .44f)))));
+                Math.min(dp(420), Math.max(dp(330), Math.round(available * .38f)))));
         LayoutParams params = (LayoutParams) drawer.getLayoutParams();
         if (params.width != drawerWidth) { params.width = drawerWidth; drawer.setLayoutParams(params); }
         super.onMeasure(width, height);
@@ -564,17 +653,18 @@ final class RewardsView extends FrameLayout {
     // Shared helpers retain their existing dimensions for receipt/saved-game views.
     static Button action(Context context, Typeface face, String value, boolean primary) {
         Button button = new Button(context);
-        button.setText(value); button.setTextColor(primary ? 0xFF0B151B : INK); button.setTypeface(face);
+        button.setBackgroundTintList(null);
+        button.setText(value); button.setTextColor(TowersTheme.buttonText(primary)); button.setTypeface(face);
         button.setTextSize(primary ? 16 : 13); button.setAllCaps(false); button.setSingleLine(true);
         button.setEllipsize(TextUtils.TruncateAt.END); button.setIncludeFontPadding(false);
         button.setMinWidth(0); button.setMinimumWidth(0); button.setMinHeight(0); button.setMinimumHeight(0);
-        button.setBackground(buttonBackground(context, primary ? TEAL : 0xFF14252D));
+        button.setBackground(buttonBackground(context, primary ? TowersTheme.PRIMARY : TowersTheme.CONTROL));
         button.setPadding(dip(context, 6), 0, dip(context, 6), 0);
         return button;
     }
     private static RippleDrawable buttonBackground(Context context, int fill) {
-        return new RippleDrawable(ColorStateList.valueOf(0x338BD3CC),
-                new InsetDrawable(surface(context, fill, 6), 0, dip(context, 8), 0, dip(context, 8)), null);
+        return new RippleDrawable(ColorStateList.valueOf(fill == TowersTheme.PRIMARY ? TowersTheme.PRIMARY_RIPPLE : TowersTheme.RIPPLE),
+                new InsetDrawable(TowersTheme.control(context, fill, 6), 0, dip(context, 8), 0, dip(context, 8)), null);
     }
     static GradientDrawable surface(Context context, int fill, int radius) {
         GradientDrawable background = new GradientDrawable();

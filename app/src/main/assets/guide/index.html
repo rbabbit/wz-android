@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Warzone field guide</title>
+  <link rel="stylesheet" href="guide.css">
+  <script defer src="research-data.js"></script>
+  <script defer src="practical-data.js"></script>
+  <script defer src="screenshots-data.js"></script>
+  <script defer src="guide.js"></script>
+</head>
+<body>
+  <header class="tools">
+    <div class="tool-row">
+      <button id="contents" aria-controls="outline" aria-expanded="false">Contents</button>
+      <nav class="tabs" aria-label="Guide sections">
+        <button data-root="research" aria-pressed="true">Research paths</button>
+        <button data-root="play" aria-pressed="false">How to play</button>
+      </nav>
+      <label class="mode-label">Mode
+        <select id="mode" aria-label="Game mode"><option value="towers">Towers</option><option value="ffa">FFA</option><option value="campaign">Campaign</option></select>
+      </label>
+      <button id="type-size" aria-label="Use larger guide text" aria-pressed="false">Aa</button>
+    </div>
+    <div class="search-row">
+      <button id="back" aria-label="Back within guide" hidden>‹ Back</button>
+      <label class="search"><span class="sr-only">Find research or help</span><input id="query" type="search" placeholder="Find a weapon, upgrade or answer…" autocomplete="off" spellcheck="false"></label>
+      <button id="sources">Sources</button>
+    </div>
+  </header>
+  <div class="workspace">
+    <nav id="outline" aria-label="Guide contents"></nav>
+    <main id="main" tabindex="-1"></main>
+  </div>
+  <dialog id="image-viewer" aria-labelledby="image-title">
+    <div class="image-toolbar"><strong id="image-title">Game screenshot</strong><button id="image-out" aria-label="Zoom screenshot out">−</button><button id="image-in" aria-label="Zoom screenshot in">+</button><button id="image-close">Back</button></div>
+    <div class="image-pan" tabindex="0" aria-label="Screenshot: scroll to pan; use plus and minus to zoom"><div id="image-stage"></div></div>
+    <p id="image-caption"></p>
+  </dialog>
+  <noscript>This offline guide needs JavaScript enabled.</noscript>
+</body>
+</html>

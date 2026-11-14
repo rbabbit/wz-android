@@ -1,0 +1,20 @@
+{
+  "version": "0.60",
+  "passed": true,
+  "cleanBuild": true,
+  "candidateAPK_SHA256": "a699ad22cd103a06a8853d33e2b8ae85cf97242e93cfd612edbc1a287da5275d",
+  "candidateBytes": 475145025,
+  "previousCandidateSHA256": "f6399466d91f3ace700b293ceab72d238e347acc3ead4f9da7da06bcece29f14",
+  "previousCandidateBytes": 540339124,
+  "zipMembers": 759,
+  "identicalUncompressedMembers": 758,
+  "changedMembers": [
+    "classes3.dex"
+  ],
+  "exception": "Only D8 class-checksum metadata marker differs; complete dexdump class/method/instruction output and all other DEX strings match.",
+  "dexClassMethodInstructionsIdentical": true,
+  "allOtherDexStringsIdentical": true,
+  "everyAssetResourceAndOtherDexSHA256Identical": true,
+  "emulatorUsed": false,
+  "buildCommand": "gradlew.bat clean assembleDebug -PadmobLiveAds=true"
+}

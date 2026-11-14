@@ -1,0 +1,53 @@
+--- a/src/droid.cpp
++++ b/src/droid.cpp
+@@ -76,6 +76,33 @@
+ #include "qtscript.h"
+ #include "campaigninfo.h"
+ 
++
++#if defined(__EMSCRIPTEN__)
++#include <nlohmann/json.hpp>
++
++// Only the custom Towers UI consumes this notice. Campaign, Duel and ordinary
++// native builds retain their stock console notice, score and loss sound.
++static bool towersUnitLossNoticeEnabled()
++{
++    FILE *file = fopen("/tmp/warzone-towers-ui-v34", "rb");
++    if (!file) return false;
++    const bool enabled = fgetc(file) == '1';
++    fclose(file);
++    return enabled;
++}
++
++static void towersUnitLossNotice(const DROID *droid)
++{
++    const nlohmann::json notice = {
++        {"kind", "unit-lost"}, {"id", droid->id}, {"name", droid->aName},
++        {"constructor", droid->droidType == DROID_CONSTRUCT || droid->droidType == DROID_CYBORG_CONSTRUCT},
++        {"player", droid->player}, {"gameTime", gameTime}
++    };
++    const std::string packet = notice.dump(-1, ' ', false, nlohmann::json::error_handler_t::replace);
++    fprintf(stderr, "BNNOTICE:%s\n", packet.c_str());
++}
++#endif
++
+ #define DEFAULT_RECOIL_TIME	(GAME_TICKS_PER_SEC/4)
+ #define	DROID_DAMAGE_SPREAD	(16 - rand()%32)
+ #define	DROID_REPAIR_SPREAD	(20 - rand()%40)
+@@ -336,8 +363,14 @@
+ 		// Deal with score increase/decrease and messages to the player
+ 		if (psDroid->player == selectedPlayer)
+ 		{
+-			// TRANSLATORS:	Refers to the loss of a single unit, known by its name
+-			CONPRINTF(_("%s Lost!"), objInfo(psDroid));
++#if defined(__EMSCRIPTEN__)
++			if (towersUnitLossNoticeEnabled()) towersUnitLossNotice(psDroid);
++			else
++#endif
++			{
++				// TRANSLATORS: Refers to the loss of a single unit, known by its name
++				CONPRINTF(_("%s Lost!"), objInfo(psDroid));
++			}
+ 			scoreUpdateVar(WD_UNITS_LOST);
+ 			audio_QueueTrackMinDelayPos(ID_SOUND_UNIT_DESTROYED, UNIT_LOST_DELAY,
+ 										psDroid->pos.x, psDroid->pos.y, psDroid->pos.z);

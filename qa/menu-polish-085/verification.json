@@ -1,0 +1,125 @@
+{
+  "version": "0.85",
+  "passed": true,
+  "emulatorUsed": false,
+  "actualAndroidViewsExecuted": false,
+  "candidateAPK_SHA256": "3ac04321ffcd98b928577ac7b14e717fdd04c695170001e1b830df9b95a2735f",
+  "checks": {
+    "homeTagline": true,
+    "guideModeRemoval": true,
+    "campaignHeadingRemoval": true,
+    "lobbyHeader": true,
+    "fullscreenMap": true,
+    "androidBuild": true
+  },
+  "buildLog": {
+    "path": "qa/menu-polish-085/build.log",
+    "bytes": 2765,
+    "sha256": "691d7cdcfe732bc70b62d83a063ce2ad1b269a045912600a4cfad360aac25ade"
+  },
+  "sources": [
+    {
+      "path": "app/build.gradle.kts",
+      "bytes": 1517,
+      "sha256": "a3f25097760c7599db20548588cce4bffcaf95c9ca5a43efd2b1fa1a9adf0828"
+    },
+    {
+      "path": "app/src/main/assets/guide/guide.css",
+      "bytes": 8099,
+      "sha256": "536954456eba35d46bb1e5983e1396a22cd0787de1355a888c4713b660b039c4"
+    },
+    {
+      "path": "app/src/main/assets/guide/guide.js",
+      "bytes": 25829,
+      "sha256": "0d105f92af15d2979eafd5d916d8a3b0d8aa5a419d813adda7c731a4f740fd0d"
+    },
+    {
+      "path": "app/src/main/assets/guide/index.html",
+      "bytes": 2237,
+      "sha256": "c634d8f85ce5f4378449bb8e3f045d3b38d791336ceeac57aef9967d7472a194"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/room-ui.css",
+      "bytes": 11492,
+      "sha256": "8b389a4a956cac2451697217ba85453531a228bc43034cfe3380e28673d6b84e"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/CampaignLandingLayout.java",
+      "bytes": 3865,
+      "sha256": "4e9c33ec077e658051c1f55c1218e061fa5ce725828978969e9d6c0b2a71fbf1"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/CampaignSetupView.java",
+      "bytes": 13225,
+      "sha256": "d3b3002ea0da6fda2ff1bd0aa308ecd07e61c1e0875b15c3f6c4a8b7ffbb376c"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/HomeModesView.java",
+      "bytes": 12668,
+      "sha256": "dcb474c09c7edf98763a8e3bf5110ab85455237268f1da4b9ea7e983e5e8a5cc"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MultiplayerLobbyView.java",
+      "bytes": 12680,
+      "sha256": "754853923e47e34d1aebce933e7f7ee949d5918459110c137060f10dedeb1d31"
+    },
+    {
+      "path": "tools/package-menu-polish-085.py",
+      "bytes": 11217,
+      "sha256": "a94c9cd77dd4b2c6eed224d0c68578a073c2c1fb8008081915637e7722244b2d"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "qa/menu-polish-085/campaign.json",
+      "bytes": 21586,
+      "sha256": "0f19eb658e00394db97841ec2260831f902197d8369655c05b669c700ae6134d"
+    },
+    {
+      "path": "qa/menu-polish-085/guide-source-checks.json",
+      "bytes": 2230,
+      "sha256": "a77bb6a772ecbb414ac342837ee7860e7b4a58ea590e53f1ec5d5269511e96bd"
+    },
+    {
+      "path": "qa/menu-polish-085/mp.json",
+      "bytes": 4139,
+      "sha256": "cd957a815bca78afd5e56a430cdf4bc22b0db1c6094febee6730b462769b5742"
+    },
+    {
+      "path": "qa/menu-polish-085/audit.txt",
+      "bytes": 1156,
+      "sha256": "0d02ee3ced0eebd9a6402446cef5a1ecd169ca9a2216ab104ab8a39a940eadaa"
+    },
+    {
+      "path": "qa/menu-polish-085/fallback.json",
+      "bytes": 469,
+      "sha256": "9e0cb27136d19b527ddc26adef51a703a65ff43632b8f89da2fc6892b12e56f9"
+    },
+    {
+      "path": "qa/menu-polish-085/make-verification.py",
+      "bytes": 2528,
+      "sha256": "02d3b9b27ccf92776db02e2ab849cfc4620f6cd4c83e68f9519aa2fb6551dce9"
+    },
+    {
+      "path": "qa/menu-polish-085/check-guide-source.cjs",
+      "bytes": 5000,
+      "sha256": "4a85ef0f9327a700bcdb7193cdcf178f97e5eed1a0e8e9bfa6172b4a05917f2f"
+    },
+    {
+      "path": "tools/test-campaign-heading-085.py",
+      "bytes": 5728,
+      "sha256": "3764e375e08ab89ef2de30e39aed8027fda8bf978fdce939ef5734fb9768f023"
+    },
+    {
+      "path": "tools/test-menu-polish-085-mp.cjs",
+      "bytes": 8554,
+      "sha256": "3389220d0941310355927a949ca5fb00bb37723a1863fbd823ed898473660e51"
+    }
+  ],
+  "limitations": [
+    "No emulator, device, browser or gameplay run at user request.",
+    "Host geometry/source checks do not verify actual Android rendering, touch, keyboard or fullscreen behavior.",
+    "Existing Guide content checker contains two stale assertions against unchanged historical datasets; focused current-script checks passed."
+  ],
+  "recordedUTC": "2026-11-15T23:06:03.264633+00:00"
+}

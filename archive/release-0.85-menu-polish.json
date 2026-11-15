@@ -1,0 +1,72 @@
+{
+  "version": "0.85",
+  "versionCode": 85,
+  "candidateAPK_SHA256": "3ac04321ffcd98b928577ac7b14e717fdd04c695170001e1b830df9b95a2735f",
+  "emulatorUsed": false,
+  "actualAndroidViewsExecuted": false,
+  "nativeBuildPerformed": false,
+  "scope": "Five requested copy/layout corrections only; user will test Android APK. No GitHub/VPS actions.",
+  "buildAndFocusedCodeChecksPassed": true,
+  "packageIntegrityPassed": true,
+  "verification": {
+    "path": "qa/menu-polish-085/verification.json",
+    "bytes": 4486,
+    "sha256": "3d338b71ef6c40c8e92695ff4c22a113f2de2af90bc778929d39e96d93118c15"
+  },
+  "fallback": {
+    "path": "qa/menu-polish-085/fallback.json",
+    "bytes": 469,
+    "sha256": "9e0cb27136d19b527ddc26adef51a703a65ff43632b8f89da2fc6892b12e56f9"
+  },
+  "limitations": [
+    "No emulator, device, browser or gameplay run at user request.",
+    "Host geometry/source checks do not verify actual Android rendering, touch, keyboard or fullscreen behavior.",
+    "Existing Guide content checker contains two stale assertions against unchanged historical datasets; focused current-script checks passed."
+  ],
+  "sourcePreservation": {
+    "changedBaselineSources": [
+      "AGENTS.md",
+      "README-WARZONE-TOWERS.md",
+      "README.md",
+      "app/build.gradle.kts",
+      "app/src/main/assets/guide/guide.css",
+      "app/src/main/assets/guide/guide.js",
+      "app/src/main/assets/guide/index.html",
+      "app/src/main/assets/multiplayer/room-ui.css",
+      "app/src/main/java/com/rbabbit/blocknight/warzone/CampaignLandingLayout.java",
+      "app/src/main/java/com/rbabbit/blocknight/warzone/CampaignSetupView.java",
+      "app/src/main/java/com/rbabbit/blocknight/warzone/HomeModesView.java",
+      "app/src/main/java/com/rbabbit/blocknight/warzone/MultiplayerLobbyView.java",
+      "docs/KNOWN-ISSUES.md"
+    ],
+    "everyBaselineSourceMemberRetained": true,
+    "addedSources": [
+      "archive/release-0.85-menu-polish.json",
+      "docs/releases/0.85-menu-polish.md",
+      "qa/menu-polish-085/audit.txt",
+      "qa/menu-polish-085/build.log",
+      "qa/menu-polish-085/campaign.json",
+      "qa/menu-polish-085/check-guide-source.cjs",
+      "qa/menu-polish-085/fallback.json",
+      "qa/menu-polish-085/guide-source-checks.json",
+      "qa/menu-polish-085/make-verification.py",
+      "qa/menu-polish-085/mp.json",
+      "qa/menu-polish-085/verification.json",
+      "tools/package-menu-polish-085.py",
+      "tools/test-campaign-heading-085.py",
+      "tools/test-menu-polish-085-mp.cjs"
+    ]
+  },
+  "certificateSHA256": "4499efe00477c7c724c06a1dd96f935864548665c13ab5e2bd0a9c0f83f7cb15",
+  "changedAPKMembers": [
+    "AndroidManifest.xml",
+    "assets/guide/guide.css",
+    "assets/guide/guide.js",
+    "assets/guide/index.html",
+    "assets/multiplayer/room-ui.css",
+    "classes3.dex"
+  ],
+  "unrelatedAssetsResourcesLibrariesFrozen": true,
+  "allSourceAssetsMatchAPK": true,
+  "recordedUTC": "2026-11-15T23:08:00.479281+00:00"
+}

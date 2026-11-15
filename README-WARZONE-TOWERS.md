@@ -1,6 +1,15 @@
 # Warzone Towers for Android
 
-## Current development revision: Warzone Towers 0.84 (version code 84)
+## Current development revision: Warzone Towers 0.85 (version code 85)
+
+Five scoped menu corrections: the requested Home tagline, no Guide Mode control,
+no large Alpha campaign heading or its empty space, native BACK/LOBBY with Refresh
+at the top right, and a fullscreen waiting-room map preview with name and Close.
+The v0.84 APK and complete source remain the fallback. Source/geometry checks and
+Android compilation passed; Android rendering/input was not tested this release
+at the user's request. See [0.85 notes](docs/releases/0.85-menu-polish.md).
+
+## Historical development revision: Warzone Towers 0.84 (version code 84)
 
 **Development revision: 0.84 (84)** restores the original black landscape Home
 and applies the approved compact native Campaign, Towers, FFA and Multiplayer

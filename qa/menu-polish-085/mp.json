@@ -1,0 +1,209 @@
+{
+  "version": "0.85",
+  "passed": true,
+  "emulatorUsed": false,
+  "browserUsed": false,
+  "actualAndroidViewsExecuted": false,
+  "actualNativeEngineExecuted": false,
+  "actualJavaHeaderGeometryExecuted": true,
+  "scope": "Actual extracted Java header arrangement on the host plus shipped CSS/DOM and protected-source checks. Geometry uses measured-control scenarios and CSS contain arithmetic; no Android/browser rendering, touch, keyboard or gameplay claim.",
+  "checks": [
+    "Native BACK and LOBBY wording, flexible text widths and 48dp button targets",
+    "Execute actual Java header geometry across phone/tablet widths, density and enlarged control widths",
+    "Opaque fullscreen map panel has no compact/media inset override; native viewport remains authoritative",
+    "Map canvas fills remaining space and contains native rectangular maps without crop/stretch",
+    "Original profile/Join/filter, real RGB preview guards, Back, downloads and session code are unchanged from fallback"
+  ],
+  "checksPassed": 5,
+  "details": {
+    "nativeHeaderGeometry": {
+      "cases": 63,
+      "assertions": 1326
+    },
+    "mapContainGeometry": [
+      {
+        "viewport": [
+          568,
+          320
+        ],
+        "nativeMap": [
+          128,
+          128
+        ],
+        "contained": [
+          252,
+          252
+        ]
+      },
+      {
+        "viewport": [
+          568,
+          320
+        ],
+        "nativeMap": [
+          128,
+          256
+        ],
+        "contained": [
+          126,
+          252
+        ]
+      },
+      {
+        "viewport": [
+          568,
+          320
+        ],
+        "nativeMap": [
+          256,
+          128
+        ],
+        "contained": [
+          504,
+          252
+        ]
+      },
+      {
+        "viewport": [
+          844,
+          390
+        ],
+        "nativeMap": [
+          128,
+          128
+        ],
+        "contained": [
+          322,
+          322
+        ]
+      },
+      {
+        "viewport": [
+          844,
+          390
+        ],
+        "nativeMap": [
+          128,
+          256
+        ],
+        "contained": [
+          161,
+          322
+        ]
+      },
+      {
+        "viewport": [
+          844,
+          390
+        ],
+        "nativeMap": [
+          256,
+          128
+        ],
+        "contained": [
+          644,
+          322
+        ]
+      },
+      {
+        "viewport": [
+          1280,
+          800
+        ],
+        "nativeMap": [
+          128,
+          128
+        ],
+        "contained": [
+          700,
+          700
+        ]
+      },
+      {
+        "viewport": [
+          1280,
+          800
+        ],
+        "nativeMap": [
+          128,
+          256
+        ],
+        "contained": [
+          350,
+          700
+        ]
+      },
+      {
+        "viewport": [
+          1280,
+          800
+        ],
+        "nativeMap": [
+          256,
+          128
+        ],
+        "contained": [
+          1252,
+          626
+        ]
+      },
+      {
+        "viewport": [
+          640,
+          240
+        ],
+        "nativeMap": [
+          128,
+          128
+        ],
+        "contained": [
+          177,
+          177
+        ]
+      },
+      {
+        "viewport": [
+          640,
+          240
+        ],
+        "nativeMap": [
+          128,
+          256
+        ],
+        "contained": [
+          88.5,
+          177
+        ]
+      },
+      {
+        "viewport": [
+          640,
+          240
+        ],
+        "nativeMap": [
+          256,
+          128
+        ],
+        "contained": [
+          354,
+          177
+        ]
+      }
+    ]
+  },
+  "sources": [
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MultiplayerLobbyView.java",
+      "sha256": "754853923e47e34d1aebce933e7f7ee949d5918459110c137060f10dedeb1d31"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/room-ui.css",
+      "sha256": "8b389a4a956cac2451697217ba85453531a228bc43034cfe3380e28673d6b84e"
+    },
+    {
+      "path": "tools/test-menu-polish-085-mp.cjs",
+      "sha256": "3389220d0941310355927a949ca5fb00bb37723a1863fbd823ed898473660e51"
+    }
+  ],
+  "fatal": null
+}

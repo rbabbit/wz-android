@@ -1,5 +1,17 @@
 # Warzone Towers maintenance rules
 
+- 2026-11-15: v0.85 applies the five phone screenshot corrections only: Home
+  tagline becomes "Research Tech - Build & Deploy Units - Upgrade Structures";
+  remove Field Guide Mode label/dropdown without stranding its chapters or
+  breaking context; remove the large Alpha campaign heading and its space;
+  public MP header uses BACK/LOBBY and Refresh fixed top-right; room MAP opens
+  an opaque fullscreen preview with map name/Close and aspect-preserving fit.
+  Preserve delivered v0.84 APK/full source by hashes first. No emulator tests,
+  device input or live-room activity: user will check the APK. Use focused code,
+  geometry/startup and build/package checks; disclose Android runtime unverified.
+  Preserve engines/protocol/gameplay/maps/music/saves/rewards and prior source.
+  Package the new APK and complete source; no GitHub or VPS changes requested.
+
 - 2026-11-15: v0.84 implements the approved coordinated LANDSCAPE native
   landing menus: restore original black Home/logo/grey tank, compact Campaign,
   preview-left Towers/FFA, and native Multiplayer public-room list. MP map first,

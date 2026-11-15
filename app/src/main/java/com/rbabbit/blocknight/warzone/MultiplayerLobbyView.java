@@ -41,9 +41,9 @@ final class MultiplayerLobbyView extends LinearLayout {
     MultiplayerLobbyView(Context context,Actions actions,String base) {
         super(context);this.actions=actions;face=Typeface.createFromAsset(context.getAssets(),"warzone/ui/Oswald.ttf");
         setOrientation(VERTICAL);setBackgroundColor(0xff090909);setPadding(dp(14),dp(7),dp(14),dp(5));setClickable(true);setFocusableInTouchMode(true);
-        Flow header=new Flow(context);addView(header,new LayoutParams(-1,-2));
-        Button back=button("‹",false);back.setTextSize(34);back.setContentDescription("Back to game modes");back.setOnClickListener(v->actions.back());header.addView(back,new ViewGroup.LayoutParams(dp(48),dp(48)));
-        TextView title=text("MULTIPLAYER",22,TowersTheme.TEXT);title.setPadding(dp(4),0,dp(12),0);header.addView(title,new ViewGroup.LayoutParams(-2,dp(48)));
+        Header header=new Header(context);addView(header,new LayoutParams(-1,-2));
+        Button back=button("BACK",false);back.setTextSize(18);back.setMinimumWidth(dp(72));back.setContentDescription("Back to game modes");back.setOnClickListener(v->actions.back());header.addView(back,new ViewGroup.LayoutParams(-2,dp(48)));
+        TextView title=text("LOBBY",22,TowersTheme.TEXT);title.setPadding(dp(4),0,dp(12),0);header.addView(title,new ViewGroup.LayoutParams(-2,dp(48)));
         LinearLayout profile=new LinearLayout(context);profile.setGravity(Gravity.CENTER_VERTICAL);
         TextView label=text("Player name",17,TowersTheme.TEXT);label.setPadding(0,0,dp(8),0);profile.addView(label,new LayoutParams(-2,dp(48)));
         LinearLayout field=new LinearLayout(context);field.setGravity(Gravity.CENTER_VERTICAL);field.setBackground(TowersTheme.control(context,TowersTheme.CONTROL,5));
@@ -59,7 +59,7 @@ final class MultiplayerLobbyView extends LinearLayout {
         TextView suffix=text("(m)",20,TowersTheme.TEXT);suffix.setPadding(0,0,dp(10),0);suffix.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);field.addView(suffix,new LayoutParams(-2,dp(46)));profile.addView(field,new LayoutParams(-2,dp(46)));
         header.addView(profile,new ViewGroup.LayoutParams(-2,dp(48)));
         hide=new CheckBox(context);hide.setText("Hide empty");hide.setTypeface(face);hide.setTextSize(18);hide.setTextColor(TowersTheme.TEXT);hide.setButtonTintList(ColorStateList.valueOf(TowersTheme.TEXT));hide.setMinHeight(dp(48));hide.setPadding(dp(8),0,dp(7),0);hide.setOnCheckedChangeListener((v,checked)->{if(!settingFilter){adapter.refresh();actions.filter(checked);}});header.addView(hide,new ViewGroup.LayoutParams(-2,dp(48)));
-        refresh=button("REFRESH",false);refresh.setTextSize(18);refresh.setOnClickListener(v->actions.refresh());header.addView(refresh,new ViewGroup.LayoutParams(dp(98),dp(48)));
+        refresh=button("REFRESH",false);refresh.setTextSize(18);refresh.setMinimumWidth(dp(98));refresh.setOnClickListener(v->actions.refresh());header.addView(refresh,new ViewGroup.LayoutParams(-2,dp(48)));
         status=text("Loading rooms…",13,TowersTheme.SECONDARY);status.setPadding(dp(4),0,dp(4),0);status.setAccessibilityLiveRegion(View.ACCESSIBILITY_LIVE_REGION_POLITE);addView(status,new LayoutParams(-1,-2));
         FrameLayout body=new FrameLayout(context);addView(body,new LayoutParams(-1,0,1));
         list=new ListView(context);list.setBackgroundColor(0xff090909);list.setDivider(null);list.setDividerHeight(0);list.setVerticalScrollBarEnabled(true);list.setClipToPadding(false);list.setPadding(0,dp(8),0,0);list.setAdapter(adapter);body.addView(list,new FrameLayout.LayoutParams(-1,-1));
@@ -104,10 +104,22 @@ final class MultiplayerLobbyView extends LinearLayout {
             join.setOnClickListener(v->{if(room==null||!room.joinable()||!ready||loading||busy)return;if(!actions.saveName(draft()))return;name.clearFocus();hideKeyboard();pending(true,"Joining room…");actions.join(room.id);});
         }
     }
-    /** Native children wrap as a unit; no compressed webpage-style header. */
-    private final class Flow extends ViewGroup {
-        Flow(Context c){super(c);}
-        @Override protected void onMeasure(int ws,int hs){int width=MeasureSpec.getSize(ws),x=0,y=0,row=0,gap=dp(7);for(int i=0;i<getChildCount();i++){View v=getChildAt(i);measureChild(v,ws,hs);int w=v.getMeasuredWidth(),h=v.getMeasuredHeight();if(x>0&&x+w>width){y+=row+dp(3);x=0;row=0;}x+=w+gap;row=Math.max(row,h);}setMeasuredDimension(width,y+row+dp(4));}
-        @Override protected void onLayout(boolean changed,int l,int t,int r,int b){int width=r-l,x=0,y=0,row=0,gap=dp(7);for(int i=0;i<getChildCount();i++){View v=getChildAt(i);int w=v.getMeasuredWidth(),h=v.getMeasuredHeight();if(x>0&&x+w>width){y+=row+dp(3);x=0;row=0;}v.layout(x,y,x+w,y+h);x+=w+gap;row=Math.max(row,h);}}
+    /** Keep Refresh at the top-right while the other native controls wrap intact. */
+    private final class Header extends ViewGroup {
+        Header(Context c){super(c);}
+        private int[][] bounds(int width){int n=getChildCount();int[] widths=new int[n],heights=new int[n];for(int i=0;i<n;i++){widths[i]=getChildAt(i).getMeasuredWidth();heights[i]=getChildAt(i).getMeasuredHeight();}return headerBounds(width,widths,heights,dp(7),dp(3));}
+        @Override protected void onMeasure(int ws,int hs){int width=MeasureSpec.getSize(ws);for(int i=0;i<getChildCount();i++)measureChild(getChildAt(i),ws,hs);int height=0;for(int[] box:bounds(width))height=Math.max(height,box[3]);setMeasuredDimension(width,height+dp(4));}
+        @Override protected void onLayout(boolean changed,int l,int t,int r,int b){int[][] boxes=bounds(r-l);for(int i=0;i<boxes.length;i++){int[] box=boxes[i];getChildAt(i).layout(box[0],box[1],box[2],box[3]);}}
+    }
+    private static int[][] headerBounds(int width,int[] widths,int[] heights,int gap,int rowGap){
+        int n=widths.length;int[][] boxes=new int[n][4];if(n==0)return boxes;
+        int pinned=n-1,x=0,y=0,row=heights[pinned];
+        boxes[pinned]=new int[]{Math.max(0,width-widths[pinned]),0,width,heights[pinned]};
+        for(int i=0;i<pinned;i++){
+            int available=y==0?Math.max(0,width-widths[pinned]-gap):width;
+            if(x+widths[i]>available&&(x>0||y==0)){y+=row+rowGap;x=0;row=0;}
+            boxes[i]=new int[]{x,y,x+widths[i],y+heights[i]};x+=widths[i]+gap;row=Math.max(row,heights[i]);
+        }
+        return boxes;
     }
 }

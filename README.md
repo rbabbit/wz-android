@@ -1,5 +1,12 @@
 # Warzone Towers
 
+**Development revision: 0.85 (85)** applies the five requested menu corrections:
+the shorter Home tagline, removal of the Guide Mode control and large Campaign
+heading, native Lobby wording with Refresh at the top right, and a fullscreen
+waiting-room map preview. v0.84 APK and complete source remain the fallback.
+Focused source/geometry checks and Android compilation passed; no emulator or
+device testing was performed, as requested. See the [0.85 notes](docs/releases/0.85-menu-polish.md).
+
 **Development revision: 0.84 (84)** restores the original black landscape Home
 and applies the approved compact native Campaign, Towers, FFA and Multiplayer
 landing pages. Towers/FFA place real map previews beside compact settings and a

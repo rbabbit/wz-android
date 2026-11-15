@@ -14,8 +14,8 @@ android {
         applicationId = "com.rbabbit.warzonetowers.lab"
         minSdk = 26
         targetSdk = 36
-        versionCode = 84
-        versionName = "0.84"
+        versionCode = 85
+        versionName = "0.85"
         manifestPlaceholders["admobAppId"] = "ca-app-pub-3430279660625393~3119801475"
         buildConfigField("boolean", "ADMOB_TEST_ADS", (!admobLiveAds).toString())
         buildConfigField("String", "ADMOB_REWARDED_AD_UNIT_ID", "\"" + (if (admobLiveAds)

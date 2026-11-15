@@ -18,12 +18,12 @@ final class CampaignLandingLayout {
         }
     }
     static final class Body {
-        final Box heading, detail, status, progress, download, start, saves;
+        final Box detail, status, progress, download, start, saves;
         final int height;
         final boolean wrappedActions;
-        Body(Box heading, Box detail, Box status, Box progress, Box download, Box start,
+        Body(Box detail, Box status, Box progress, Box download, Box start,
                 Box saves, int height, boolean wrappedActions) {
-            this.heading = heading; this.detail = detail; this.status = status;
+            this.detail = detail; this.status = status;
             this.progress = progress; this.download = download; this.start = start;
             this.saves = saves; this.height = height; this.wrappedActions = wrappedActions;
         }
@@ -40,12 +40,11 @@ final class CampaignLandingLayout {
         int artLeft = Math.round(width * .27f);
         return new Frame(back, title, body, new Box(artLeft, 0, Math.max(0, width - artLeft), height));
     }
-    static Body body(int width, int viewportHeight, float density, int headingHeight,
+    static Body body(int width, int viewportHeight, float density,
             int detailHeight, int statusHeight, boolean progressVisible, boolean downloadVisible,
             int downloadWidth, int startWidth, int savesWidth, int fontHeight) {
         int hit = Math.max(dp(48, density), fontHeight + dp(20, density)), gap = dp(12, density);
-        Box heading = new Box(0, 0, width, headingHeight);
-        Box detail = new Box(0, heading.bottom() + dp(10, density), width, detailHeight);
+        Box detail = new Box(0, 0, width, detailHeight);
         Box status = new Box(0, detail.bottom() + dp(20, density), width, statusHeight);
         int cursor = status.bottom();
         Box progress = new Box(0, cursor + dp(8, density), width, progressVisible ? dp(4, density) : 0);
@@ -59,7 +58,7 @@ final class CampaignLandingLayout {
         Box start = new Box(0, rowTop, wrap ? width : startWidth, hit);
         Box saves = new Box(wrap ? 0 : startWidth + gap, wrap ? start.bottom() + dp(8, density) : rowTop,
                 wrap ? width : savesWidth, hit);
-        return new Body(heading, detail, status, progress, download, start, saves, height, wrap);
+        return new Body(detail, status, progress, download, start, saves, height, wrap);
     }
     private static int dp(int value, float density) { return Math.round(value * density); }
     private CampaignLandingLayout() { }

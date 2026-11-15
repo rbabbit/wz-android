@@ -30,7 +30,7 @@ final class CampaignSetupView extends FrameLayout {
     }
     private final Typeface face;
     private final CampaignArtwork artwork;
-    private final TextView title, heading, detail, status;
+    private final TextView title, detail, status;
     private final Button back, start, download, saves;
     private final ProgressBar progress;
     private final ScrollView scroll;
@@ -47,7 +47,6 @@ final class CampaignSetupView extends FrameLayout {
         back = RewardsView.action(context, face, "BACK", false);
         back.setOnClickListener(v -> actions.back()); addView(back);
         title = copy("CAMPAIGN", 24, true); addView(title);
-        heading = copy("Alpha campaign", 28, true);
         detail = copy("Recover technology and rebuild.\nFollow the story through Beta and Gamma.", 14, false);
         detail.setTextColor(TowersTheme.SECONDARY);
         status = copy("Checking campaign videos…", 13, false);
@@ -61,7 +60,7 @@ final class CampaignSetupView extends FrameLayout {
         saves = RewardsView.action(context, face, "CONTINUE", false);
         saves.setOnClickListener(v -> actions.saves());
         content = new CampaignContent(context);
-        for (android.view.View child : new android.view.View[]{heading, detail, status, progress, download, start, saves})
+        for (android.view.View child : new android.view.View[]{detail, status, progress, download, start, saves})
             content.addView(child);
         scroll = new ScrollView(context); scroll.setFillViewport(true); scroll.setOverScrollMode(OVER_SCROLL_NEVER);
         scroll.setVerticalScrollBarEnabled(true); scroll.setScrollbarFadingEnabled(true);
@@ -137,17 +136,17 @@ final class CampaignSetupView extends FrameLayout {
         CampaignContent(Context context) { super(context); }
         @Override protected void onMeasure(int widthSpec, int heightSpec) {
             int width = Math.max(1, MeasureSpec.getSize(widthSpec));
-            heading.setTextSize(TypedValue.COMPLEX_UNIT_SP, 28); detail.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            detail.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
             status.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13); download.setTextSize(TypedValue.COMPLEX_UNIT_SP, 13);
             start.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14); saves.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-            for (TextView text : new TextView[]{heading, detail, status}) text.measure(
+            for (TextView text : new TextView[]{detail, status}) text.measure(
                     MeasureSpec.makeMeasureSpec(width, MeasureSpec.EXACTLY), MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
             int startWidth = Math.max(dp(144), (int) Math.ceil(start.getPaint().measureText(start.getText().toString())) + dp(24));
             int savesWidth = Math.max(dp(120), (int) Math.ceil(saves.getPaint().measureText(saves.getText().toString())) + dp(24));
             int downloadWidth = (int) Math.ceil(download.getPaint().measureText(download.getText().toString())) + dp(24);
             int fontHeight = Math.max(start.getPaint().getFontMetricsInt(null), saves.getPaint().getFontMetricsInt(null));
             layout = CampaignLandingLayout.body(width, viewportHeight, getResources().getDisplayMetrics().density,
-                    heading.getMeasuredHeight(), detail.getMeasuredHeight(), status.getMeasuredHeight(),
+                    detail.getMeasuredHeight(), status.getMeasuredHeight(),
                     progress.getVisibility() == VISIBLE, download.getVisibility() == VISIBLE,
                     downloadWidth, startWidth, savesWidth, fontHeight);
             exact(start, layout.start.width, layout.start.height); exact(saves, layout.saves.width, layout.saves.height);
@@ -157,7 +156,7 @@ final class CampaignSetupView extends FrameLayout {
         }
         @Override protected void onLayout(boolean changed, int l, int t, int r, int b) {
             if (layout == null) return;
-            place(heading, layout.heading, 0, 0); place(detail, layout.detail, 0, 0); place(status, layout.status, 0, 0);
+            place(detail, layout.detail, 0, 0); place(status, layout.status, 0, 0);
             place(start, layout.start, 0, 0); place(saves, layout.saves, 0, 0);
             if (progress.getVisibility() == VISIBLE) place(progress, layout.progress, 0, 0);
             if (download.getVisibility() == VISIBLE) place(download, layout.download, 0, 0);

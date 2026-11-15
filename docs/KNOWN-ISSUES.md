@@ -1,5 +1,15 @@
 # Known issues and verification limits
 
+## Warzone Towers 0.85 — Scoped menu corrections
+
+No emulator, device, browser or gameplay run was performed, as explicitly
+requested. The Android build and focused checks of actual extracted Campaign
+and Lobby Java geometry, Guide startup/navigation, and fullscreen map CSS passed.
+These checks do not establish actual Android rendering, touch, keyboard or
+fullscreen behavior; the user will check the delivery APK. Previous game/renderer
+limitations remain unchanged. The v0.84 APK and complete source are preserved.
+See `qa/menu-polish-085/verification.json` and the release notes for evidence.
+
 ## Warzone Towers 0.84 — Native landscape landing menus
 
 The exact APK passed all six landscape Home routes, native Campaign/Towers/FFA

@@ -9,7 +9,7 @@
   const pages = new Map(chapters.flatMap(ch => ch.pages.map(page => [page.id,{...page,chapter:ch}])));
   const sections = Array.isArray(research.sections) ? research.sections : Object.entries(research.sections || {}).map(([id,value]) => ({id,...value}));
   const modes = ['towers','ffa','campaign'];
-  let mode = modes.includes(new URLSearchParams(location.search).get('mode')) ? new URLSearchParams(location.search).get('mode') : 'towers';
+  const mode = modes.includes(new URLSearchParams(location.search).get('mode')) ? new URLSearchParams(location.search).get('mode') : 'towers';
   let route = {kind:'research'}, stack = [], query = '', imageZoom = 1, previousImageFocus = null;
   let queryTimer;
   const node = (tag, text, cls) => {
@@ -22,8 +22,9 @@
     return Array.isArray(raw) ? raw : Array.isArray(raw.topics) ? raw.topics : Object.entries(raw.topics || raw).map(([id,value]) => ({id,...value}));
   }
   const topicById = id => catalogue().find(t => t.id === id);
-  const matchesMode = page => !page.modes?.length || page.modes.includes(mode);
-  const modeName = () => mode === 'ffa' ? 'FFA' : mode === 'campaign' ? 'Campaign' : 'Towers';
+  const nameForMode = value => value === 'ffa' ? 'FFA' : value === 'campaign' ? 'Campaign' : 'Towers';
+  const modeName = () => nameForMode(mode);
+  const scopeLabel = page => page.modes?.length && page.modes.length < modes.length ? page.modes.map(nameForMode).join(' / ') : '';
   function icon(src, fallback) {
     if (!src) return null;
     const img=node('img',null,'icon'); img.alt=''; img.loading='lazy';
@@ -152,15 +153,15 @@
     main.append(node('p','Reference: '+t.id+'. Research points are work required, not a fixed countdown; the active lab, modules, upgrades and power affect completion.','note'));
   }
   function renderPlay(main) {
-    main.append(heading('How to play','Short, practical instructions for this app. Start with your first five minutes, or open a chapter.',modeName()));
+    main.append(heading('How to play','Short, practical instructions for this app. Start with your first five minutes, or open a chapter.'));
     const cards=node('div',null,'cards');chapters.forEach((ch,i)=>addCard(cards,`${i+1}. ${ch.title}`,ch.summary,()=>go({kind:'chapter',id:ch.id})));main.append(cards);
   }
   function renderChapter(main) {
     const ch=chapters.find(ch=>ch.id===route.id);if(!ch){renderMissing(main);return;}
-    main.append(heading(ch.title,ch.summary,modeName()+' · how to play'));
+    const scope=scopeLabel({modes:[...new Set(ch.pages.flatMap(p=>p.modes||modes))]});
+    main.append(heading(ch.title,ch.summary,[scope,'how to play'].filter(Boolean).join(' · ')));
     const list=node('div',null,'chapter-pages');
-    ch.pages.filter(matchesMode).forEach(p=>addCard(list,p.title,p.steps?.[0]?.title,()=>go({kind:'page',id:p.id})));main.append(list);
-    if(!ch.pages.some(matchesMode))main.append(node('p','This chapter applies to a different game mode. Change the mode above to read it.','notice'));
+    ch.pages.forEach(p=>addCard(list,p.title,[scopeLabel(p),p.steps?.[0]?.title].filter(Boolean).join(' · '),()=>go({kind:'page',id:p.id})));main.append(list);
   }
   function screenshotWrap(record, callouts, focusRect) {
     const wrap=node('div',null,'screen-wrap'),img=node('img');img.src=record.src;img.alt=record.caption||'Actual game screen';
@@ -238,13 +239,12 @@
   }
   function renderPage(main) {
     const p=pages.get(route.id);if(!p){renderMissing(main);return;}
-    main.append(heading(p.title,p.summary,modeName()+' · '+p.chapter.title));
-    if(!matchesMode(p))main.append(node('p','This page describes '+p.modes.map(m=>m==='ffa'?'FFA':m[0].toUpperCase()+m.slice(1)).join(' / ')+'. Change mode above for matching research data.','notice'));
+    main.append(heading(p.title,p.summary,[scopeLabel(p),p.chapter.title].filter(Boolean).join(' · ')));
     appendScreenshot(main,p);
     const steps=node('ol',null,'steps');(p.steps||[]).forEach(step=>{const li=node('li');if(step.title)li.append(node('strong',step.title));li.append(node('span',step.text));steps.append(li);});main.append(steps);
     (p.notes||[]).forEach(note=>main.append(node('p',note,'note')));
     if(p.related?.length){main.append(node('h2','Related'));const related=node('div',null,'links');p.related.forEach(id=>related.append(button(pages.get(id)?.title||topicById(id)?.name||sections.find(s=>s.id===id.replace('section:',''))?.title||id,()=>navigateRelated(id))));main.append(related);}
-    const siblings=p.chapter.pages.filter(matchesMode),index=siblings.findIndex(v=>v.id===p.id),flow=node('div',null,'page-flow');
+    const siblings=p.chapter.pages,index=siblings.findIndex(v=>v.id===p.id),flow=node('div',null,'page-flow');
     flow.append(button('‹ '+p.chapter.title,()=>go({kind:'chapter',id:p.chapter.id})));
     if(index>=0&&index<siblings.length-1)flow.append(button('Next: '+siblings[index+1].title+' ›',()=>go({kind:'page',id:siblings[index+1].id})));
     main.append(flow);
@@ -252,10 +252,10 @@
   function renderSearch(main) {
     const needle=query.trim().toLocaleLowerCase();main.append(heading('Find research or help',null,modeName()));
     const topicMatches=catalogue().filter(t=>[t.name,t.id,t.section,...(t.kinds||[])].join(' ').toLocaleLowerCase().includes(needle));
-    const pageMatches=[...pages.values()].filter(matchesMode).filter(p=>[p.title,p.summary,...p.steps.map(s=>s.title+' '+s.text),...(p.notes||[])].join(' ').toLocaleLowerCase().includes(needle));
+    const pageMatches=[...pages.values()].filter(p=>[p.title,p.summary,...p.steps.map(s=>s.title+' '+s.text),...(p.notes||[])].join(' ').toLocaleLowerCase().includes(needle));
     main.append(node('p',`${topicMatches.length} research topics · ${pageMatches.length} help pages`,'search-summary'));
     if(topicMatches.length){main.append(node('h2','Research'));const list=node('div',null,'topic-list');topicMatches.forEach(t=>list.append(topicRow(t)));main.append(list);}
-    if(pageMatches.length){main.append(node('h2','How to play'));const list=node('div',null,'chapter-pages');pageMatches.forEach(p=>addCard(list,p.title,p.chapter.title,()=>go({kind:'page',id:p.id})));main.append(list);}
+    if(pageMatches.length){main.append(node('h2','How to play'));const list=node('div',null,'chapter-pages');pageMatches.forEach(p=>addCard(list,p.title,[scopeLabel(p),p.chapter.title].filter(Boolean).join(' · '),()=>go({kind:'page',id:p.id})));main.append(list);}
     if(!topicMatches.length&&!pageMatches.length)main.append(node('p','No matches. Try cannon, module, power, queue, save or rotate.','empty'));
   }
   function renderSources(main) {
@@ -271,9 +271,9 @@
     main.append(list,node('h2','Screenshots and annotations'),node('p','Pictures are real app or phone captures. Numbered arrows and outlines are drawn over the original image. Captions identify the screen and capture source; some menu captures use an emulator whose terrain is dark. Screenshots illustrate controls, not a universal starting base.'));
     const count=catalogue().length;main.append(node('p',`${modeName()}: ${count} topics in this reference. The guide does not inspect or change your current battle, research, saves or wallet.`,'note'));
   }
-  function renderMissing(main) {main.append(heading('Not available here','This entry is not in the selected mode’s catalogue. Choose another mode or return to the contents.'));}
+  function renderMissing(main) {main.append(heading('Not available here','This entry is not in this research catalogue. Return to the contents to choose another entry.'));}
   function render() {
-    const main=$('main');main.replaceChildren();$('mode').value=mode;
+    const main=$('main');main.replaceChildren();
     const active=['research','section','topic'].includes(route.kind)?'research':'play';
     document.querySelectorAll('[data-root]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.root===active)));
     $('back').hidden=!stack.length;renderOutline();
@@ -294,7 +294,6 @@
   $('contents').addEventListener('click',()=>{const open=$('outline').classList.toggle('open');$('contents').setAttribute('aria-expanded',String(open));});
   $('main').addEventListener('click',()=>closeContents());
   $('back').addEventListener('click',back);$('sources').addEventListener('click',()=>go({kind:'sources'}));
-  $('mode').addEventListener('change',e=>{mode=e.target.value;render();});
   $('type-size').addEventListener('click',()=>{const large=$('type-size').getAttribute('aria-pressed')!=='true';$('type-size').setAttribute('aria-pressed',String(large));$('type-size').setAttribute('aria-label',large?'Use standard guide text':'Use larger guide text');document.documentElement.style.setProperty('--scale',large?'1.2':'1');});
   document.querySelectorAll('[data-root]').forEach(b=>b.addEventListener('click',()=>go({kind:b.dataset.root})));
   $('query').addEventListener('input',e=>{query=e.target.value;clearTimeout(queryTimer);queryTimer=setTimeout(()=>{render();$('main').scrollTop=0;},120);});

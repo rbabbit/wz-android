@@ -32,7 +32,7 @@ final class HomeModesView extends FrameLayout {
 
         tank = artwork(R.drawable.towers_home_grey_tank, null);
         logo = artwork(R.drawable.warzone_official_logo, "Warzone 2100");
-        tagline = text("Advance Research Tech · Build & Deploy Units · Upgrade Structures",
+        tagline = text("Research Tech - Build & Deploy Units - Upgrade Structures",
                 12, TowersTheme.SECONDARY);
         tagline.setGravity(Gravity.CENTER);
         tagline.setLetterSpacing(.02f);

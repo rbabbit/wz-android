@@ -40,7 +40,7 @@ final class MapPreviewPager extends HorizontalScrollView {
     private List<MapLevelCatalog.Level> levels = Collections.emptyList();
     private Set<String> completedMaps = Collections.emptySet();
     private int selectedIndex, pageWidth;
-    private boolean positioning, positionPending, touching, interactionEnabled = true;
+    private boolean positioning, positionPending, touching, interactionEnabled = true, previewOnly;
     private final Runnable settle = () -> snapToPage(Math.round(getScrollX() / (float) Math.max(1, pageWidth)));
 
     MapPreviewPager(Context context, Typeface face, Selection selection) {
@@ -73,6 +73,24 @@ final class MapPreviewPager extends HorizontalScrollView {
         positionPending = true;
         decorate();
         requestLayout();
+    }
+
+    /** The split native picker reuses paging and artwork without the legacy copy card. */
+    void setPreviewOnly(boolean value) {
+        if(previewOnly==value)return;
+        previewOnly=value;
+        for(PreviewCard card:cards)card.applyPreviewMode();
+        requestLayout();
+    }
+
+    int selectedIndex() { return selectedIndex; }
+    int pageCount() { return levels.size(); }
+    boolean isCompleted(String id) { return completedMaps.contains(id); }
+
+    void browseBy(int delta) {
+        if(!interactionEnabled||levels.isEmpty())return;
+        settleSelection();removeCallbacks(settle);touching=false;
+        snapToPage(selectedIndex+delta);
     }
 
     /** Refresh existing cards without disturbing the current swipe or selection. */
@@ -270,12 +288,27 @@ final class MapPreviewPager extends HorizontalScrollView {
             addView(completion);
             browse = new BrowseArrow(number < total);
             addView(browse);
+            applyPreviewMode();
+        }
+
+        void applyPreviewMode() {
+            if(previewOnly)setBackground(null);
+            else {
+                GradientDrawable background=new GradientDrawable();
+                background.setColor(isSelected()?TowersTheme.CARD_SELECTED:TowersTheme.PANEL);
+                background.setCornerRadius(dp(8));setBackground(background);
+            }
+            for(View view:new View[]{title,meta,description,position,browse})view.setVisibility(previewOnly?GONE:VISIBLE);
+            completion.setVisibility(completed&&!previewOnly?VISIBLE:GONE);
+            image.setContentDescription(previewOnly?accessibleName+", actual map preview":null);
+            image.setImportantForAccessibility(previewOnly?IMPORTANT_FOR_ACCESSIBILITY_YES:IMPORTANT_FOR_ACCESSIBILITY_NO);
+            requestLayout();
         }
 
         void setCompleted(boolean value) {
             if (completed == value) return;
             completed = value;
-            completion.setVisibility(completed ? VISIBLE : GONE);
+            completion.setVisibility(completed && !previewOnly ? VISIBLE : GONE);
             requestLayout();
         }
 
@@ -294,6 +327,9 @@ final class MapPreviewPager extends HorizontalScrollView {
 
         @Override protected void onMeasure(int width, int height) {
             int w = MeasureSpec.getSize(width), h = MeasureSpec.getSize(height);
+            if(previewOnly) {
+                exact(image,w,h);setMeasuredDimension(w,h);return;
+            }
             boolean nextCompact = h < dp(136);
             if (nextCompact != compact) {
                 compact = nextCompact;
@@ -337,6 +373,7 @@ final class MapPreviewPager extends HorizontalScrollView {
         }
 
         @Override protected void onLayout(boolean changed, int l, int t, int r, int b) {
+            if(previewOnly) {image.layout(0,0,getWidth(),getHeight());return;}
             int imageY = (getHeight() - imageSize) / 2;
             image.layout(dp(8), imageY, dp(8) + imageSize, imageY + imageSize);
             int copyHeight = titleHeight + metaHeight + descriptionHeight + positionHeight + dp(8);

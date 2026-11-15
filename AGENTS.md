@@ -1,5 +1,77 @@
 # Warzone Towers maintenance rules
 
+- 2026-11-15: v0.84 implements the approved coordinated LANDSCAPE native
+  landing menus: restore original black Home/logo/grey tank, compact Campaign,
+  preview-left Towers/FFA, and native Multiplayer public-room list. MP map first,
+  room name below, counts1|4, native Hide-empty checkbox, Back, fixed saved(m)
+  suffix; remove IP Join/version labels from landing only. Preserve v0.83 APK/full
+  source by verified hashes FIRST. Keep Guide/Hub and actual waiting-room/chat/
+  Ready/game HTML, native engines/protocol, maps/music/saves/rewards untouched.
+  Reuse existing session/HTTP/name bridges; guard transition, refresh, IME, errors
+  and Return so native list never covers room/game. Reuse prepared emulator via
+  ADB/CDP ONLY; no desktop focus/control or visible PC hosts. Verify actual exact
+  APK at normal/compact/enlarged text, all routes, keyboard/name/filter/Join/Back,
+  private-room readiness/match/return and relevant retained gameplay. No broad
+  engine tests or fixture rebuilds. Package exact APK/full source, preserve older
+  releases, then commit/push approved complete app work to GitHub after success.
+  No VPS/public-chat actions. Record inherited emulator terrain limitation.
+
+- 2026-11-15: v0.83 implements the exact SECOND displayed portrait Home mock:
+  blue/slate hero, four image mode tiles and compact Guide/Hub. Preserve the
+  delivered v0.82 APK/full source first. Only the main mode Home is portrait;
+  existing mode setup, readers and gameplay remain landscape. Restore portrait
+  on Home returns without recreating/reloading a running engine. Preserve all
+  existing actions, launch/save/reward paths and all game assets/native clients.
+  Add five separate Home raster assets and retain their generation provenance.
+  Test the exact APK via ADB/CDP only; never focus/control the user's desktop.
+  Compare actual portrait output with the selected reference at equal scale,
+  inspect normal/compact/enlarged-text layouts, all six destinations, Back,
+  gameplay viewport restoration and repeated Home/mode returns. Package the
+  checked APK and complete retained source. No GitHub or VPS changes requested.
+
+- 2026-11-15: v0.82 adds the exact small Home tagline and fixes Multiplayer
+  spectator match entry/control separation. Preserve v0.81 APK/full source first.
+  Spectators keep camera, Music and Lobby access; owned research/production,
+  selection and order APIs must use the authoritative real local player.
+  Preserve protocol, simulation, data, profile/room behavior and all other modes.
+  User requires headless host testing without desktop input/focus. Use the
+  existing emulator through ADB/CDP only, isolated unlisted official hosts,
+  observable native state and exact-APK checks; disclose all fixture limitations.
+  No GitHub or VPS changes requested.
+
+- 2026-11-15: v0.81 fixes only the Multiplayer Lobby/timer collision and
+  mobile-name identification. Move Lobby immediately after Music in the
+  game button group; reserve a separate right-side timer/status slot. Keep
+  at most 12 editable name characters with an uneditable visible `(m)` suffix,
+  persist the name and enforce the suffix in Java, session and native config.
+  Preserve v0.80 APK/full source and all older releases first. Freeze native
+  clients/data, other modes and all unrelated interfaces. Run focused profile
+  and layout checks, then the relevant exact-APK emulator name/keyboard/cold
+  launch/room/game-header/return journey. No GitHub or VPS changes requested.
+
+- 2026-11-15: v0.80 refines only the Multiplayer waiting room after the
+  supplied phone screenshots: stable inline chat while typing, real touch
+  scrolling and reading anchors, full viewport restoration after IME/Back,
+  actual native map preview and the existing game click sound with mute/volume.
+  Preserve delivered v0.79 APK/full source first. Export the engine-generated
+  preview with map/hash/generation/download/blind-room guards; freeze protocol,
+  simulation, data and all other modes. Test real typing, repeated Send/Back,
+  actual touch scroll, real preview, sound and bot-match entry/input on the
+  exact new APK in the existing emulator, using an isolated private host.
+  Preserve all older source/proofs; no GitHub or VPS changes requested.
+
+- 2026-11-14: v0.79 implements approved Multiplayer waiting-room option 1:
+  compact monochrome player roster, chat, native Ready, team and Spectate,
+  match options and Leave. Preserve exact v0.78 APK/full source first. Add a
+  room-only native snapshot/request bridge using official lobby handlers;
+  preserve host authority, locks, downloads, blind-room privacy and protocol.
+  Rebuild only the matched Multiplayer client UI sources; keep MP data and
+  every offline engine/scenario/map/music/shared gameplay interface frozen.
+  Test the exact delivery APK in the existing emulator using a private local
+  host: actual Ready/chat/team/spectator state, keyboard/Back, transitions,
+  leave/rejoin and gameplay input. Preserve historical proofs and fallbacks.
+  Do not send public-room chat. No GitHub or VPS changes are requested.
+
 - 2026-11-14: v0.78 separates main Research into newly available technologies
   on the left and the selected lab's actual current topic plus ordered queue
   on the right, across Towers, Campaign, FFA and Multiplayer. Keep numeric lab

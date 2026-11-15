@@ -1,0 +1,80 @@
+{
+  "version": "0.79",
+  "passed": true,
+  "emulatorUsed": false,
+  "actualNativeEngineExecuted": false,
+  "actualHostCppHelperExecuted": true,
+  "nativeNetworkHandlersStubbed": true,
+  "checks": [
+    "Actual-room lifecycle creates a generation",
+    "Ready snapshot exports actual local slot and position",
+    "Actual roster and native options are exported without client download assertions",
+    "Ordinary player can request ready",
+    "Ready calls official request and does not fake host confirmation",
+    "Ready rejected during local download",
+    "Ready rejected before identity exists",
+    "Ready respects native full-slot/opposing-team checks",
+    "Own team change uses official reset and SendTeamRequest",
+    "Host team lock is enforced",
+    "Team that would leave one opposing team is excluded",
+    "Spectator uses official request without mutating slot",
+    "Spectator requires an available native slot",
+    "Host spectator lock is enforced",
+    "Own host slot cannot be moved to spectator",
+    "UTF8 chat uses official sender and native self echo",
+    "Host-only chat preserves official prefix and private echo policy",
+    "Chat reserves native host-prefix bytes",
+    "Disabled free chat cannot send",
+    "Native spam mute cannot be bypassed",
+    "NUL, overlong, surrogate and out-of-range UTF8 are rejected",
+    "Blank, control and incomplete UTF8 messages are rejected",
+    "Stale generation cannot send",
+    "Unrendered/world transition cannot send",
+    "Game start closes the room action guard",
+    "Repeated same-generation nonce sends chat once",
+    "Accepted ACK is followed by a fresh observed revision",
+    "Blind-simple lobby exposes only local row and native-safe aggregate counts",
+    "Spectator-only own slot retains generation and official auto-ready policy",
+    "Actual native message feed is sequenced and bounded",
+    "Actual player messages carry native display identity",
+    "Room exit clears messages, pending input and dedupe session",
+    "Rejoin gets a distinct generation",
+    "All071 non-room overlays and protocol/autorevision/bootstrap bytes remain identical",
+    "One native message hook and official Ready/team/spectator/chat request call sites are retained"
+  ],
+  "checksPassed": 35,
+  "sources": [
+    {
+      "path": "tools/test-multiplayer-room-native-079.py",
+      "sha256": "ae542b40d634d43cb7013def23f0e4b270075c797c936bf83a8ec0949c87f432"
+    },
+    {
+      "path": "vendor/multiplayer/native-079/mobile-room-native.cpp.inc",
+      "sha256": "a03d65c2a6c95426309e0667695e0e0d4f852afd6e8755567e7ad3d05c172b2b"
+    },
+    {
+      "path": "vendor/multiplayer/native-079/mobile-ui-native.cpp.inc",
+      "sha256": "e69c7a847415f2ef7d02753724d7d9f1862562735b7b794d81b717acf3f0ff98"
+    },
+    {
+      "path": "vendor/multiplayer/native-079/multiint.cpp",
+      "sha256": "8ce7faf9f790ee3c5c6a07646a47fbf1930e32c8ca6fccb7307783133b6c9794"
+    },
+    {
+      "path": "vendor/multiplayer/native-079/quickjs_backend.cpp",
+      "sha256": "6c82732eccddeef3e8c9e9d2ac497777ca7834ad73376b6931b378ba520ff0ed"
+    },
+    {
+      "path": "tools/prepare-multiplayer-native-079.py",
+      "sha256": "e5a35949f18bcfbe5e9c5a450d019abf7afd2bd964ffb7a13ca79006c9d0fa98"
+    },
+    {
+      "path": "tools/build-multiplayer-native-079.py",
+      "sha256": "96bc26b32f0f61dff5f335030c1df007194a33369f0e83d59a5d1ae701784966"
+    },
+    {
+      "path": "tools/integrate-multiplayer-native-079.py",
+      "sha256": "8e529502b8f10a669fc392d985e73b4c1f7ea0ad0dbeda778bd3df15f550b765"
+    }
+  ]
+}

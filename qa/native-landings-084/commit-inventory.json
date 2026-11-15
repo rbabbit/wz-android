@@ -1,0 +1,128 @@
+{
+  "scope": "Read-only curated commit inventory; no Git mutation, packaging or full archive-content hashing. Final084manifest must supersede083baseline once delivery checks pass.",
+  "gitBase": "0131f55",
+  "baselineSource": "C:\\timerApp\\warzone-towers-0.83-source.zip",
+  "baselineMemberCount": 13162,
+  "baselineManifestRows": 13161,
+  "modifiedTracked": [
+    "AGENTS.md",
+    "README-WARZONE-TOWERS.md",
+    "README.md",
+    "app/build.gradle.kts",
+    "app/src/main/assets/multiplayer/index.html",
+    "app/src/main/assets/multiplayer/lobby-config.js",
+    "app/src/main/assets/multiplayer/lobby-ui.js",
+    "app/src/main/assets/multiplayer/mobile-controls.js",
+    "app/src/main/assets/multiplayer/multiplayer.css",
+    "app/src/main/assets/multiplayer/native-ui-adapter.js",
+    "app/src/main/assets/multiplayer/session.js",
+    "app/src/main/assets/multiplayer/warzone2100.js",
+    "app/src/main/assets/multiplayer/warzone2100.wasm",
+    "app/src/main/java/com/rbabbit/blocknight/warzone/CampaignSetupView.java",
+    "app/src/main/java/com/rbabbit/blocknight/warzone/FfaSetupLayout.java",
+    "app/src/main/java/com/rbabbit/blocknight/warzone/FfaSetupView.java",
+    "app/src/main/java/com/rbabbit/blocknight/warzone/GraphicsSetupView.java",
+    "app/src/main/java/com/rbabbit/blocknight/warzone/HomeModesView.java",
+    "app/src/main/java/com/rbabbit/blocknight/warzone/MapPreviewPager.java",
+    "app/src/main/java/com/rbabbit/blocknight/warzone/MultiplayerActivity.java",
+    "archive/repository-files.json",
+    "design-qa.md",
+    "docs/KNOWN-ISSUES.md",
+    "vendor/multiplayer/README.md"
+  ],
+  "untrackedRetained083Count": 496,
+  "untrackedNotRetained083Count": 8142,
+  "retained083ByPrefix": {
+    "qa/portrait-home-083": 120,
+    "qa/multiplayer-room-080": 88,
+    "qa/multiplayer-room-079": 68,
+    "qa/multiplayer-spectator-082": 61,
+    "vendor/multiplayer": 56,
+    "qa/multiplayer-profile-081": 36,
+    "app/src": 9,
+    "docs/releases": 5,
+    "archive/release-0.79-multiplayer-room.json": 1,
+    "archive/release-0.80-multiplayer-room.json": 1,
+    "archive/release-0.81-multiplayer-profile.json": 1,
+    "archive/release-0.82-multiplayer-spectator.json": 1,
+    "archive/release-0.83-portrait-home.json": 1,
+    "tools/build-multiplayer-native-079.py": 1,
+    "tools/build-multiplayer-native-080.py": 1,
+    "tools/build-multiplayer-native-082.py": 1,
+    "tools/check-multiplayer-profile-081.py": 1,
+    "tools/check-multiplayer-room-activity-080.py": 1,
+    "tools/check-multiplayer-room-back-079.py": 1,
+    "tools/home-tagline-live-082.cjs": 1
+  },
+  "notRetained083ByPrefix": {
+    "qa/guide-065": 3771,
+    "qa/maps-music-066": 3027,
+    "qa/multiplayer-070": 152,
+    "qa/ffa-060": 139,
+    "qa/rotation-062": 101,
+    "qa/rotation-063": 92,
+    "qa/construction-061": 85,
+    "qa/cobra-064": 83,
+    "qa/multiplayer-spectator-082": 68,
+    "qa/multiplayer-071": 62,
+    "qa/home-056": 53,
+    "qa/campaign-051": 50,
+    "qa/campaign-054": 44,
+    "qa/touch-pan-050": 43,
+    "qa/completion-058": 39,
+    "qa/audit-multiplayer-069": 35,
+    "qa/multiplayer-room-080": 33,
+    "qa/splash-057": 32,
+    "qa/multiplayer-room-079": 31,
+    "qa/loss-builders-052": 30
+  },
+  "newUnarchivedProduct": [
+    "app/src/main/assets/multiplayer/native-landing.js",
+    "app/src/main/java/com/rbabbit/blocknight/warzone/CampaignLandingLayout.java",
+    "app/src/main/java/com/rbabbit/blocknight/warzone/MultiplayerLobbyModel.java",
+    "app/src/main/java/com/rbabbit/blocknight/warzone/MultiplayerLobbyView.java",
+    "app/src/main/java/com/rbabbit/blocknight/warzone/TowersSetupLayout.java"
+  ],
+  "newUnarchivedToolsDocs": [
+    "tools/test-landing-home-campaign-084.py",
+    "tools/test-map-setup-layout-084.cjs",
+    "tools/test-map-setup-layout-084.java"
+  ],
+  "untrackedOrModifiedFilesAtLeast100MB": [
+    {
+      "path": "qa/multiplayer-spectator-082/installed-base.apk",
+      "bytes": 308543488
+    },
+    {
+      "path": "qa/touch-pan-050/pretest-v37-app-data.tar.gz",
+      "bytes": 163199081
+    }
+  ],
+  "privateExtensionCandidates": [],
+  "targetedSecretScan": {
+    "scannedTextFiles": 446,
+    "flags": [],
+    "publicAdMobIdsNotSecrets": true,
+    "additionalModifiedTextAssignmentFlags": []
+  },
+  "recommendation": [
+    "Wait for final084package manifest and exactAPK proof. Stage only paths in that manifest plus the manifest itself, with literal pathspecs; never git add . or git add qa/.",
+    "Retain083manifest source/release/helper/native provenance and proof pins. Keep unarchived historical/temporary QA, package.log, hostclasses/browsertemp and failed scratch attempts unstaged unless explicitly pinned by final084proof.",
+    "No new app native data/music/maps binaries are authorized; existing two LFS paths remain LFS. APK/sourceZIP stay outside repo and go to release assets.",
+    "Before commit check staged names vs curated manifest, git diff --cached --check, git lfs status/fsck and every >100MB stagedblob LFS pointer."
+  ],
+  "actualGitWritesPerformed": false,
+  "lfs": {
+    "attributes": "* -text; binary asset markers; two explicit LFS rules only",
+    "existingLfsPaths": [
+      "archive/native-blueprint-4.7.0-source.tar.gz",
+      "app/src/main/assets/warzone/music/music.data"
+    ],
+    "newSourceBlobOver100MB": false,
+    "largeLooseArtifactsMustRemainUnstaged": [
+      "qa/multiplayer-spectator-082/installed-base.apk",
+      "qa/touch-pan-050/pretest-v37-app-data.tar.gz"
+    ],
+    "note": "*.zip is binary only, not LFS; do not put release APK/sourceZIP in Git. The current large loose APK/userdata archives are not source and are not in the083retained manifest."
+  }
+}

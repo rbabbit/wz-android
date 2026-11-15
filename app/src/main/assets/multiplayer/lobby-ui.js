@@ -4,8 +4,10 @@
   const endpoint = 'https://wzlobby.wz2100.net/lobby/api/v1/games';
   const expectedNetcode = [16384, 104];
   const filterKey = 'mp.lobby.hide-empty.v1';
-  let loading = false, listedGames = [], listingsAvailable = false, hideEmpty = false;
+  let loading = false, listedGames = [], listingsAvailable = false, hideEmpty = false, listError = '';
   try { hideEmpty = globalThis.localStorage?.getItem(filterKey) === '1'; } catch {}
+  const snapshot=()=>({loading,hideEmpty,games:listedGames,error:listError});
+  const publish=()=>globalThis.PcNativeLobby?.publish?.(snapshot());
 
   function playerCounts(value) {
     if (!value || !Number.isInteger(value.max) || value.max < 0 || value.max > 1024) return null;
@@ -128,6 +130,7 @@
     state.title = visible.length + ' visible of ' + listedGames.length + ' rooms';
     rooms.scrollTop = 0;
     fitRows();
+    publish();
   }
 
   async function refreshPcLobby() {
@@ -137,6 +140,8 @@
     const rooms = document.querySelector('#rooms');
     if (!button || !state || !rooms) return;
     loading = true;
+    listError = '';
+    publish();
     button.disabled = true;
     state.textContent = 'Loading…';
     rooms.replaceChildren();
@@ -161,6 +166,7 @@
       listedGames = [];
       listingsAvailable = false;
       state.textContent = 'PC lobby unavailable';
+      listError = 'Could not retrieve public rooms (' + error.message + '). Refresh to try again.';
       const message = document.createElement('p');
       message.className = 'lobby-empty';
       message.textContent = 'Could not retrieve public rooms (' + error.message
@@ -172,11 +178,12 @@
       clearTimeout(timer);
       loading = false;
       button.disabled = false;
+      publish();
     }
   }
 
   globalThis.refreshPcLobby = refreshPcLobby;
-  globalThis.PcLobbyUi = Object.freeze({ parseListings, selectListings });
+  globalThis.PcLobbyUi = Object.freeze({ parseListings, selectListings, snapshot });
   if (typeof document !== 'undefined') {
     const wire = () => {
       const button = document.querySelector('#lobby'), filter = document.querySelector('#hide-empty'), rooms = document.querySelector('#rooms');
@@ -186,6 +193,7 @@
           hideEmpty = filter.checked;
           try { globalThis.localStorage?.setItem(filterKey, hideEmpty ? '1' : '0'); } catch {}
           if (!loading && listingsAvailable) renderCurrentRooms();
+          else publish();
         });
       }
       if (rooms && globalThis.ResizeObserver) new ResizeObserver(fitRows).observe(rooms);

@@ -45,6 +45,7 @@ import java.net.Socket;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -60,6 +61,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import org.json.JSONObject;
 import org.json.JSONException;
+import org.json.JSONArray;
 
 /** Isolated multiplayer experiment. It shares no storage or bridge with Towers. */
 public final class MultiplayerActivity extends Activity {
@@ -76,7 +78,8 @@ public final class MultiplayerActivity extends Activity {
   private static final float DEFAULT_COMMAND_STRIP_CSS_HEIGHT = 72f;
   private static final String PLAYER_PROFILE = "warzone_multiplayer_profile";
   private static final String PLAYER_NAME = "player_name";
-  private static final String DEFAULT_PLAYER_NAME = "Player";
+  private static final String PLAYER_NAME_SUFFIX = "(m)";
+  private static final String DEFAULT_PLAYER_NAME = "Player" + PLAYER_NAME_SUFFIX;
 
   private final Object connectionsLock = new Object();
   private final Map<Integer, Connection> connections = new ConcurrentHashMap<>();
@@ -88,6 +91,9 @@ public final class MultiplayerActivity extends Activity {
   private final ScheduledExecutorService timeouts =
       Executors.newSingleThreadScheduledExecutor(r -> new Thread(r, "pc-socket-timeouts"));
   private WebView webView;
+  private MultiplayerLobbyView nativeLobby;
+  private String landingGeneration = "";
+  private volatile boolean landingPageReady;
   private FrameLayout root;
   private View.OnLayoutChangeListener viewportListener;
   private SharedPreferences playerPreferences;
@@ -97,6 +103,21 @@ public final class MultiplayerActivity extends Activity {
   private float commandStripCssHeight = DEFAULT_COMMAND_STRIP_CSS_HEIGHT;
   private AlertDialog leaveDialog;
   private volatile boolean sessionActive;
+  private static final class RoomBackState {
+    static final RoomBackState EMPTY = new RoomBackState("", false, false, false);
+    final String generation;
+    final boolean active, optionsOpen, chatFocused;
+    RoomBackState(String generation, boolean active, boolean optionsOpen, boolean chatFocused) {
+      this.generation = generation;
+      this.active = active;
+      this.optionsOpen = optionsOpen;
+      this.chatFocused = chatFocused;
+    }
+  }
+  private volatile RoomBackState roomBackState = RoomBackState.EMPTY;
+  private String lastRoomViewportKey = "";
+  private String lastRoomViewportGeneration = "";
+  private long roomViewportRevision;
   private boolean pendingLobbyNavigation;
   private static final String MUSIC_PROFILE = "warzone_multiplayer_music";
   private final Object musicPreferenceLock = new Object();
@@ -112,8 +133,7 @@ public final class MultiplayerActivity extends Activity {
     getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
     playerPreferences = getSharedPreferences(PLAYER_PROFILE, MODE_PRIVATE);
-    String storedPlayerName = playerPreferences.getString(PLAYER_NAME, DEFAULT_PLAYER_NAME);
-    if (playerNameError(storedPlayerName).isEmpty()) savedPlayerName = storedPlayerName;
+    restorePlayerName();
     musicPreferences = getSharedPreferences(MUSIC_PROFILE, MODE_PRIVATE);
     musicStore = new MusicPackStore(this);
     musicIndex = new MapMusicIndex(this, new MusicTrackCatalog(this));
@@ -166,7 +186,10 @@ public final class MultiplayerActivity extends Activity {
             .addPathHandler("/warzone/", path -> {
               if (!sharedUiAsset(path)) return blockedResponse(403, "Non-UI asset blocked");
               WebResourceResponse response = assets.handle("warzone/" + path);
-              if (response != null) response.setResponseHeaders(isolationHeaders());
+              if (response != null) {
+                response.setResponseHeaders(isolationHeaders());
+                if ("ui/game-controls/click.ogg".equals(path)) response.setMimeType("audio/ogg");
+              }
               return response;
             })
             .addPathHandler("/", path -> {
@@ -229,6 +252,14 @@ public final class MultiplayerActivity extends Activity {
         });
     configureIsolationAllowlist();
     root.addView(webView, new FrameLayout.LayoutParams(-1, -1, Gravity.TOP | Gravity.START));
+    nativeLobby = new MultiplayerLobbyView(this, new MultiplayerLobbyView.Actions() {
+      public void back() { onBackPressed(); }
+      public void refresh() { landingCall("refresh()"); }
+      public void filter(boolean hide) { landingCall("setHideEmpty(" + hide + ")"); }
+      public boolean saveName(String base) { return saveLandingName(base); }
+      public void join(String id) { landingCall("join(" + JSONObject.quote(id) + ")"); }
+    }, playerNameBase(savedPlayerName));
+    root.addView(nativeLobby, new FrameLayout.LayoutParams(-1, -1));
     webView.setPivotX(0f);
     webView.setPivotY(0f);
     viewportListener = (view, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> fitViewport();
@@ -255,6 +286,43 @@ public final class MultiplayerActivity extends Activity {
     Log.i(TAG, "Separate PC multiplayer test shell started");
   }
 
+  private boolean saveLandingName(String base) {
+    try {
+      JSONObject result = new JSONObject(new Navigation().setPlayerName(base));
+      if (result.optBoolean("ok")) { nativeLobby.acceptedName(result.optString("baseName",base));return true; }
+      nativeLobby.profileError(result.optString("error", "Could not save your player name."));
+    } catch (JSONException error) {
+      nativeLobby.profileError("Could not save your player name. Please try again.");
+    }
+    return false;
+  }
+
+  private void landingCall(String method) {
+    if (destroyed.get() || sessionActive || !landingPageReady || webView == null) return;
+    webView.evaluateJavascript("window.PcNativeLobby?." + method, null);
+  }
+
+  private void showNativeLanding() {
+    if (nativeLobby == null || destroyed.get()) return;
+    nativeLobby.setVisibility(View.VISIBLE);
+    nativeLobby.bringToFront();
+  }
+
+  private static List<MultiplayerLobbyModel.Room> landingRooms(JSONArray rows) {
+    List<MultiplayerLobbyModel.Room> rooms = new ArrayList<>();
+    if (rows == null) return rooms;
+    for (int i=0;i<Math.min(1000,rows.length());i++) {
+      JSONObject row=rows.optJSONObject(i);if(row==null)continue;
+      JSONObject players=row.optJSONObject("players");if(players==null)continue;
+      try {
+        Integer current=players.isNull("current")?null:players.getInt("current");
+        rooms.add(new MultiplayerLobbyModel.Room(row.getString("id"),row.optString("map",""),row.optString("name",""),
+            current,players.getInt("max"),row.optBoolean("compatible"),row.optBoolean("ipv4Tcp"),row.optBoolean("private")));
+      } catch (JSONException | IllegalArgumentException invalid) { /* Ignore malformed advertised rows. */ }
+    }
+    return rooms;
+  }
+
   private static boolean isLocal(Uri uri) {
     return "https".equalsIgnoreCase(uri.getScheme())
         && "appassets.androidplatform.net".equalsIgnoreCase(uri.getHost())
@@ -270,6 +338,7 @@ public final class MultiplayerActivity extends Activity {
   private static boolean sharedUiAsset(String path) {
     if (path == null || path.contains("..") || path.contains("\\") || path.contains("%")
         || path.indexOf('\0') >= 0 || path.startsWith("/")) return false;
+    if ("ui/game-controls/click.ogg".equals(path)) return true;
     if ("command-catalog.json".equals(path) || "build-ghost-models.json".equals(path)
         || "music-catalog.js".equals(path)) return true;
     return (path.startsWith("ui/") || path.startsWith("research-icons/") || path.startsWith("build-icons/"))
@@ -285,24 +354,69 @@ public final class MultiplayerActivity extends Activity {
     @JavascriptInterface public void setSessionActive(boolean active) {
       // This bridge call completes before the joining script proceeds. Back
       // must never wait for a JS callback behind a busy native engine frame.
+      boolean wasActive = sessionActive;
       sessionActive = active;
+      if (!active && wasActive) landingPageReady = false;
+      cacheRoomBackState(RoomBackState.EMPTY);
       synchronized (musicPreferenceLock) {
         if (active && musicSession.isEmpty()) musicSession = java.util.UUID.randomUUID().toString();
         if (!active) musicSession = "";
       }
       if (!active) runOnUiThread(() -> {
-        if (!sessionActive) dismissLeaveDialog();
+        if (!sessionActive) { dismissLeaveDialog();showNativeLanding();if(wasActive&&nativeLobby!=null)nativeLobby.pending(true,"Returning to lobby…"); }
       });
+    }
+    @JavascriptInterface public void landingReady(String generation) {
+      if (generation == null || generation.isEmpty() || generation.length()>160) return;
+      runOnUiThread(() -> {
+        if (destroyed.get() || sessionActive) return;
+        landingGeneration=generation;landingPageReady=true;showNativeLanding();
+      });
+    }
+    @JavascriptInterface public void landingState(String generation,String json) {
+      if (json == null || json.length()>MAX_HTTP_BYTES || generation == null) return;
+      final JSONObject state;
+      try { state=new JSONObject(json); } catch(JSONException invalid) { return; }
+      List<MultiplayerLobbyModel.Room> rooms=landingRooms(state.optJSONArray("games"));
+      runOnUiThread(() -> {
+        if(destroyed.get()||sessionActive||!landingPageReady||!generation.equals(landingGeneration))return;
+        nativeLobby.state(true,state.optBoolean("loading"),state.optBoolean("hideEmpty"),rooms,
+            state.optString("error",""),state.optString("notice",""));showNativeLanding();
+      });
+    }
+    @JavascriptInterface public void landingSessionStarted(String generation) {
+      runOnUiThread(() -> {
+        if(destroyed.get()||!sessionActive||generation==null||!generation.equals(landingGeneration))return;
+        nativeLobby.setVisibility(View.GONE);webView.setVisibility(View.VISIBLE);webView.requestFocus();
+      });
+    }
+    @JavascriptInterface public void setRoomBackState(String generation, boolean active,
+        boolean optionsOpen, boolean chatFocused) {
+      String token = generation == null ? "" : generation;
+      if (!active) {
+        RoomBackState current = roomBackState;
+        if (token.isEmpty() || current.generation.equals(token)) cacheRoomBackState(RoomBackState.EMPTY);
+        return;
+      }
+      if (!sessionActive || token.isEmpty() || token.length() > 128
+          || token.codePoints().anyMatch(Character::isISOControl)) return;
+      cacheRoomBackState(new RoomBackState(token, true, optionsOpen, chatFocused));
     }
     @JavascriptInterface public String getPlayerName() {
       synchronized (playerProfileLock) {
         return savedPlayerName;
       }
     }
+    @JavascriptInterface public String getPlayerBaseName() {
+      synchronized (playerProfileLock) {
+        return playerNameBase(savedPlayerName);
+      }
+    }
     @JavascriptInterface public String setPlayerName(String supplied) {
-      String name = supplied == null ? "" : supplied.trim();
+      String baseName = playerNameBase(supplied);
+      String name = baseName + PLAYER_NAME_SUFFIX;
       String error = supplied != null && supplied.codePoints().anyMatch(Character::isISOControl)
-          ? "Use a valid player name without control characters." : playerNameError(name);
+          ? "Use a valid player name without control characters." : playerNameError(baseName);
       boolean ok = error.isEmpty();
       synchronized (playerProfileLock) {
         // The join must not start with a name that has only been queued for saving.
@@ -314,7 +428,7 @@ public final class MultiplayerActivity extends Activity {
           }
         }
         try {
-          return new JSONObject().put("ok", ok).put("name", name).put("error", error).toString();
+          return new JSONObject().put("ok", ok).put("name", name).put("baseName", baseName).put("error", error).toString();
         } catch (JSONException impossible) {
           throw new IllegalStateException(impossible);
         }
@@ -393,7 +507,34 @@ public final class MultiplayerActivity extends Activity {
         + JSONObject.quote(session) + "){" + call + "}})();", null);
   }
 
-  /** The stock editor accepts 15 UTF-8 bytes; never split a Unicode code point. */
+  private void restorePlayerName() {
+    String stored = playerPreferences.getString(PLAYER_NAME, DEFAULT_PLAYER_NAME);
+    String name = migratedPlayerName(stored);
+    synchronized (playerProfileLock) {
+      savedPlayerName = name;
+      if (!name.equals(stored)) playerPreferences.edit().putString(PLAYER_NAME, name).commit();
+    }
+  }
+
+  private static String playerNameBase(String supplied) {
+    String base = supplied == null ? "" : supplied.trim();
+    while (base.length() >= PLAYER_NAME_SUFFIX.length()
+        && base.regionMatches(true, base.length() - PLAYER_NAME_SUFFIX.length(),
+            PLAYER_NAME_SUFFIX, 0, PLAYER_NAME_SUFFIX.length())) {
+      base = base.substring(0, base.length() - PLAYER_NAME_SUFFIX.length()).trim();
+    }
+    return base;
+  }
+
+  private static String migratedPlayerName(String stored) {
+    String base = playerNameBase(stored);
+    int count = base.codePointCount(0, base.length());
+    if (count > 12) base = base.substring(0, base.offsetByCodePoints(0, 12)).trim();
+    if (!playerNameError(base).isEmpty()) return DEFAULT_PLAYER_NAME;
+    return base + PLAYER_NAME_SUFFIX;
+  }
+
+  /** Twelve code points plus the fixed suffix fit native PLAYER.name's 63-byte payload. */
   private static String playerNameError(String name) {
     if (name == null || name.isEmpty()) return "Enter a player name.";
     for (int offset = 0; offset < name.length();) {
@@ -407,6 +548,7 @@ public final class MultiplayerActivity extends Activity {
       int type = Character.getType(point);
       if (Character.isISOControl(point) || type == Character.FORMAT
           || type == Character.LINE_SEPARATOR || type == Character.PARAGRAPH_SEPARATOR
+          || (type == Character.SPACE_SEPARATOR && point != ' ')
           || (point < 128 && !(point >= 'a' && point <= 'z')
               && !(point >= 'A' && point <= 'Z') && !(point >= '0' && point <= '9')
               && point != ' ' && point != '-' && point != '+' && point != '_'
@@ -416,32 +558,82 @@ public final class MultiplayerActivity extends Activity {
       offset += Character.charCount(point);
     }
     if (!name.equals(name.trim()) || name.contains("  ")) return "Use single spaces between words.";
-    if (name.getBytes(StandardCharsets.UTF_8).length > 15) return "That name is too long for Warzone. Try a shorter name.";
+    if (name.codePointCount(0, name.length()) > 12) return "Use a player name up to 12 characters.";
     return "";
   }
 
-  /** Match the established Towers virtual viewport instead of squeezing SDL below its minimum. */
+  private void cacheRoomBackState(RoomBackState next) {
+    RoomBackState before = roomBackState;
+    roomBackState = next;
+    if ((before.active != next.active || !before.generation.equals(next.generation))
+        && root != null && !destroyed.get()) root.post(this::fitViewport);
+  }
+
+  /** Room HTML uses normal density/IME bounds; the game keeps its virtual minimum. */
   private void fitViewport() {
     if (root == null || webView == null || destroyed.get()) return;
     int width = root.getWidth() - root.getPaddingLeft() - root.getPaddingRight();
     int height = root.getHeight() - root.getPaddingTop() - root.getPaddingBottom();
     if (width <= 0 || height <= 0) return;
+    RoomBackState room = roomBackState;
+    boolean keyboardVisible = isKeyboardVisible();
     float density = getResources().getDisplayMetrics().density;
     float reserved = engineViewportActive ? commandStripCssHeight : DEFAULT_COMMAND_STRIP_CSS_HEIGHT;
-    float scale = viewportScale(width, height, density, reserved);
+    float scale = room.active ? 1f : viewportScale(width, height, density, reserved);
+    if (room.active && keyboardVisible) {
+      Rect visible = new Rect();
+      root.getWindowVisibleDisplayFrame(visible);
+      int bottom = visible.bottom;
+      if (Build.VERSION.SDK_INT >= 30 && root.getRootWindowInsets() != null) {
+        int ime = root.getRootWindowInsets().getInsets(android.view.WindowInsets.Type.ime()).bottom;
+        if (ime > 0) bottom = Math.min(bottom,
+            getWindowManager().getCurrentWindowMetrics().getBounds().bottom - ime);
+      }
+      int[] location = new int[2];root.getLocationOnScreen(location);
+      height = roomViewportHeight(root.getHeight(), root.getPaddingTop(), root.getPaddingBottom(),
+          location[1], bottom, true);
+    }
     int virtualWidth = (int) Math.ceil(width / scale);
     int virtualHeight = (int) Math.ceil(height / scale);
     FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) webView.getLayoutParams();
     int gravity = Gravity.TOP | Gravity.START;
-    // Reapplying identical parameters would create a layout loop during loading/play.
     if (params.width != virtualWidth || params.height != virtualHeight || params.gravity != gravity) {
-      params.width = virtualWidth;
-      params.height = virtualHeight;
-      params.gravity = gravity;
+      params.width = virtualWidth;params.height = virtualHeight;params.gravity = gravity;
       webView.setLayoutParams(params);
     }
     if (webView.getScaleX() != scale) webView.setScaleX(scale);
     if (webView.getScaleY() != scale) webView.setScaleY(scale);
+    publishRoomViewport(room, virtualWidth / density, virtualHeight / density, keyboardVisible);
+  }
+
+  private static int roomViewportHeight(int rootHeight, int top, int bottom, int originY,
+      int visibleBottom, boolean keyboardVisible) {
+    int full = Math.max(1, rootHeight - top - bottom);
+    int visible = visibleBottom - originY - top - bottom;
+    return keyboardVisible && visible > 0 ? Math.min(full, visible) : full;
+  }
+
+  private void publishRoomViewport(RoomBackState room, float width, float height, boolean keyboardVisible) {
+    if (!room.active && lastRoomViewportGeneration.isEmpty()) return;
+    String generation = room.active ? room.generation : lastRoomViewportGeneration;
+    String key = generation + ":" + room.active + ":" + width + ":" + height + ":" + keyboardVisible;
+    if (key.equals(lastRoomViewportKey)) return;
+    lastRoomViewportKey = key;
+    if (room.active) lastRoomViewportGeneration = generation;else lastRoomViewportGeneration = "";
+    try {
+      String detail = new JSONObject().put("generation", generation).put("roomActive", room.active)
+          .put("width", width).put("height", height).put("offsetLeft", 0).put("offsetTop", 0)
+          .put("keyboardVisible", keyboardVisible).put("revision", ++roomViewportRevision).toString();
+      webView.post(() -> {
+        if (webView == null || destroyed.get()) return;
+        RoomBackState current = roomBackState;
+        if (room.active ? !current.active || !current.generation.equals(generation) : current.active) return;
+        webView.evaluateJavascript("window.dispatchEvent(new CustomEvent('warzone-multiplayer-viewport',{detail:"
+            + detail + "}))", null);
+      });
+    } catch (JSONException impossible) {
+      Log.w(TAG, "Room viewport could not be published", impossible);
+    }
   }
 
   private static float viewportScale(int width, int height, float density, float reserved) {
@@ -551,6 +743,18 @@ public final class MultiplayerActivity extends Activity {
                 | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
   }
 
+  private boolean handleRoomBack() {
+    RoomBackState room = roomBackState;
+    if (!sessionActive || !room.active || (!room.chatFocused && !room.optionsOpen)) return false;
+    // Decide synchronously from the room's bridge cache. Never queue a JS query
+    // whose delayed answer could open a leave dialog over a later room/game.
+    roomBackState = new RoomBackState(room.generation, true,
+        room.chatFocused && room.optionsOpen, false);
+    webView.evaluateJavascript("window.PcMultiplayerRoomUI?.handleBack("
+        + JSONObject.quote(room.generation) + ")", null);
+    return true;
+  }
+
   @Override
   public void onBackPressed() {
     if (webView == null) { super.onBackPressed(); return; }
@@ -561,7 +765,8 @@ public final class MultiplayerActivity extends Activity {
       if (keyboard != null) keyboard.hideSoftInputFromWindow(webView.getWindowToken(), 0);
       return;
     }
-      if (!sessionActive) { finish(); return; }
+      if (handleRoomBack()) return;
+      if (!sessionActive) { if(nativeLobby!=null&&nativeLobby.getVisibility()==View.VISIBLE)saveLandingName(nativeLobby.draft());finish(); return; }
       Typeface face = Typeface.createFromAsset(getAssets(), "warzone/ui/Oswald.ttf");
       TextView title = new TextView(this);
       title.setText("Return to multiplayer lobby?");
@@ -627,6 +832,10 @@ public final class MultiplayerActivity extends Activity {
     if (webView == null || pendingLobbyNavigation || destroyed.get()) return;
     synchronized (musicPreferenceLock) { musicSession = ""; }
     sessionActive = false;
+    landingPageReady = false;
+    showNativeLanding();
+    if(nativeLobby!=null)nativeLobby.pending(true,"Returning to lobby…");
+    cacheRoomBackState(RoomBackState.EMPTY);
     pendingLobbyNavigation = true;
     // Hide the old surface before closing transport or navigating. Only a
     // committed frame from our own lobby may reveal the WebView again.
@@ -662,6 +871,7 @@ public final class MultiplayerActivity extends Activity {
     multiplayerMusicLifecycle("dispose");
     destroyed.set(true);
     sessionActive = false;
+    cacheRoomBackState(RoomBackState.EMPTY);
     if (leaveDialog != null) {
       leaveDialog.dismiss();
       leaveDialog = null;

@@ -19,8 +19,9 @@ final class HomeModesView extends FrameLayout {
     private final Typeface face;
     private final ImageView logo, tank;
     private final Button campaign, towers, ffa, multiplayer, guide, hub;
-    private final TextView version, status;
+    private final TextView version, status, tagline;
     private HomeMenuLayout.Result menuLayout;
+    private HomeMenuLayout.Box taglineBox;
     private int safeLeft, safeTop, safeRight, safeBottom;
 
     HomeModesView(Context context, Typeface typeface, GraphicsSetupView.Actions actions,
@@ -31,6 +32,12 @@ final class HomeModesView extends FrameLayout {
 
         tank = artwork(R.drawable.towers_home_grey_tank, null);
         logo = artwork(R.drawable.warzone_official_logo, "Warzone 2100");
+        tagline = text("Advance Research Tech · Build & Deploy Units · Upgrade Structures",
+                12, TowersTheme.SECONDARY);
+        tagline.setGravity(Gravity.CENTER);
+        tagline.setLetterSpacing(.02f);
+        tagline.setMaxLines(2);
+        addView(tagline);
         campaign = button("CAMPAIGN", false);
         campaign.setContentDescription("Campaign");
         campaign.setOnClickListener(v -> actions.campaign());
@@ -69,7 +76,7 @@ final class HomeModesView extends FrameLayout {
         setOnApplyWindowInsetsListener((view, insets) -> {
             int left, top, right, bottom;
             if (Build.VERSION.SDK_INT >= 30) {
-                android.graphics.Insets safe = insets.getInsetsIgnoringVisibility(
+                android.graphics.Insets safe = insets.getInsets(
                         android.view.WindowInsets.Type.systemBars() | android.view.WindowInsets.Type.displayCutout());
                 left = safe.left; top = safe.top; right = safe.right; bottom = safe.bottom;
             } else {
@@ -111,6 +118,8 @@ final class HomeModesView extends FrameLayout {
 
     @Override protected void onMeasure(int widthSpec, int heightSpec) {
         int width = MeasureSpec.getSize(widthSpec), height = MeasureSpec.getSize(heightSpec);
+        tagline.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+        status.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
         Button[] modes = {campaign, towers, ffa, multiplayer, guide, hub};
         int[] labelWidths = new int[modes.length]; int fontHeight = 0;
         for (int index = 0; index < modes.length; index++) {
@@ -138,6 +147,14 @@ final class HomeModesView extends FrameLayout {
             exact(modes[index], menuLayout.buttons[index].width, menuLayout.buttons[index].height);
         exact(logo, menuLayout.logo.width, menuLayout.logo.height);
         exact(tank, menuLayout.tank.width, menuLayout.tank.height);
+        tagline.measure(MeasureSpec.makeMeasureSpec(footerWidth, MeasureSpec.EXACTLY),
+                MeasureSpec.makeMeasureSpec(height, MeasureSpec.AT_MOST));
+        taglineBox = taglineBounds(menuLayout, safeTop, density, tagline.getMeasuredHeight());
+        if (taglineBox.width != tagline.getMeasuredWidth()) {
+            tagline.measure(MeasureSpec.makeMeasureSpec(taglineBox.width, MeasureSpec.EXACTLY),
+                    MeasureSpec.makeMeasureSpec(height, MeasureSpec.AT_MOST));
+            taglineBox = taglineBounds(menuLayout, safeTop, density, tagline.getMeasuredHeight());
+        }
         setMeasuredDimension(width, height);
     }
 
@@ -145,6 +162,7 @@ final class HomeModesView extends FrameLayout {
         if (menuLayout == null) return;
         place(tank, menuLayout.tank.left, menuLayout.tank.top);
         place(logo, menuLayout.logo.left, menuLayout.logo.top);
+        if (taglineBox != null) place(tagline, taglineBox.left, taglineBox.top);
         Button[] modes = {campaign, towers, ffa, multiplayer, guide, hub};
         for (int index = 0; index < modes.length; index++)
             place(modes[index], menuLayout.buttons[index].left, menuLayout.buttons[index].top);
@@ -203,6 +221,20 @@ final class HomeModesView extends FrameLayout {
         button.setBackground(new RippleDrawable(ColorStateList.valueOf(primary
                 ? TowersTheme.PRIMARY_RIPPLE : TowersTheme.RIPPLE), face, null));
         return button;
+    }
+
+    private static HomeMenuLayout.Box taglineBounds(HomeMenuLayout.Result layout,
+            int safeTop, float density, int textHeight) {
+        int right = layout.contentRight;
+        int artTop = Math.min(layout.logo.top, layout.tank.top);
+        if (textHeight + Math.round(2 * density) > artTop - safeTop) {
+            right = Math.max(layout.contentLeft, layout.tank.left - Math.round(12 * density));
+            artTop = layout.logo.top;
+        }
+        int top = Math.max(safeTop, Math.min(safeTop + Math.round(24 * density),
+                artTop - textHeight - Math.round(2 * density)));
+        return new HomeMenuLayout.Box(layout.contentLeft, top,
+                right - layout.contentLeft, textHeight);
     }
 
     private static void exact(View view, int width, int height) {

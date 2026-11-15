@@ -1,0 +1,691 @@
+{
+  "version": "0.83",
+  "passed": true,
+  "emulatorUsed": true,
+  "device": "emulator-5558",
+  "candidateAPK_SHA256": "8706aae52cf0cf7d560885fcef041125bdafb3cc44f22a7f6786d3f540285747",
+  "installedAPK_SHA256": "8706aae52cf0cf7d560885fcef041125bdafb3cc44f22a7f6786d3f540285747",
+  "checks": {
+    "exactDeliveryAPK": true,
+    "homePortraitFidelity": true,
+    "allSixDestinationsLandscape": true,
+    "backToPortraitHome": true,
+    "noActivityReload": true,
+    "landscapeGameplayStable": true,
+    "smallPhoneLayout": true,
+    "enlargedTextLayout": true,
+    "resumeRestoration": true
+  },
+  "verificationScope": "Native portrait Home, actual six destination taps and landscape/Back, default/compact/130% text and restoration. Normal Greenhaven engine launch, Research and camera input, same engine document retained after resume, normal Return to map and portrait Home. ADB/CDP only.",
+  "limitations": [
+    "Existing emulator black terrain remains visible in both historical v0.79 and current Towers captures; cause unverified. Gameplay checks cover native state/input/retention, not terrain visual quality.",
+    "No physical phone, complete Campaign, full Towers playthrough, public multiplayer match or live ad test in this Home-only revision."
+  ],
+  "fixtureNotes": [
+    "Initial install exceeded old 30s observer timeout but succeeded; later final APK installation/hash verified directly.",
+    "Activity token observer narrowed to actual Hist records; rotation XML rejected unless freshly dumped with bounds inside current viewport.",
+    "Existing Return dialog is smaller than full screen; observer corrected to accept its observed bounds, then Return/Back passed."
+  ],
+  "buildLog": {
+    "path": "qa/portrait-home-083/build.log",
+    "bytes": 2880,
+    "sha256": "7005eb64a002b1c030ae774fea6c9f591acd57a2680d264c606d21ae772a60bc"
+  },
+  "sources": [
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/HomeModesView.java",
+      "sha256": "de2dd450e20a084f018d975c833aaa8f1eaedc3e2a9f8c1f9eae3d4f04620572"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/PortraitHomeLayout.java",
+      "sha256": "9840a14bc3a0a00d1719cc2f7d9728f99a8e27080af638b475c770c9e59e8c93"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MainActivity.java",
+      "sha256": "7a5306af800852552d7d18adcc09045e8ed0b4d14209b70768fa130ec0bb64e3"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/GraphicsSetupView.java",
+      "sha256": "b185e5b00ddcc6665e1cf3be7d958e54a66e42ad10cbe42af47c434d1443d1d4"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/HomeOrientationPolicy.java",
+      "sha256": "e51b7fa97a18493d030c224ff0048ea90cfa56c97f1e0c3f072c3ee2e3ac5f90"
+    },
+    {
+      "path": "app/src/main/AndroidManifest.xml",
+      "sha256": "b6f6b54a0f20351518cd7b144eb40ec588beeae696ea432fc1e967cb29adabca"
+    },
+    {
+      "path": "app/build.gradle.kts",
+      "sha256": "eb41013a0d5d5824189cd99ca5fddf080b948950ee58d5e0268d0cf0d9c2e64b"
+    },
+    {
+      "path": "tools/package-portrait-home-083.py",
+      "sha256": "ba67392f9bf8074c02118e04954858d60ae7815b9597f9e61eaac9f6ada30fd5"
+    },
+    {
+      "path": "qa/portrait-home-083/art-provenance.json",
+      "sha256": "6d7dec2312c06ed21063e6fa6b7a72d694ee6abe955b33875d531f586091e711"
+    },
+    {
+      "path": "app/src/main/res/drawable-nodpi/home_portrait_hero_083.png",
+      "sha256": "b3e891fedce63ca27189a52ccb72344a6b38159b1d4a69f11917c55cb919d208"
+    },
+    {
+      "path": "app/src/main/res/drawable-nodpi/home_portrait_campaign_083.png",
+      "sha256": "e108a320baed27dd8ab23a26ccf3ba49437edd9b3973f472bdbe9f5d889458ae"
+    },
+    {
+      "path": "app/src/main/res/drawable-nodpi/home_portrait_towers_083.png",
+      "sha256": "fab8fcf24ea29229887b732703c186a6a6e374991bd1665c269df160aa62fafe"
+    },
+    {
+      "path": "app/src/main/res/drawable-nodpi/home_portrait_ffa_083.png",
+      "sha256": "74802c19a115f7bb12007453caec085660a9409eecec6aaacd6b66a5c96f273a"
+    },
+    {
+      "path": "app/src/main/res/drawable-nodpi/home_portrait_multiplayer_083.png",
+      "sha256": "236a9c074d513e410fd1d29d9fdcdb3201b016dbc4b5ca035669f8be65d722bb"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "qa/portrait-home-083/art-provenance.json",
+      "bytes": 13116,
+      "sha256": "6d7dec2312c06ed21063e6fa6b7a72d694ee6abe955b33875d531f586091e711"
+    },
+    {
+      "path": "qa/portrait-home-083/audit.txt",
+      "bytes": 1346,
+      "sha256": "6317465b9f657d1d4a3e82804ef566f7005d24e5a5f1e8bcb53a668db82e7595"
+    },
+    {
+      "path": "qa/portrait-home-083/baseline-home.png",
+      "bytes": 1103181,
+      "sha256": "5060b5f3075597caf0b12249f67ef6c8a178f77b7462fa0ae1b48bd6508c4f02"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-game-before-pan-screen.json",
+      "bytes": 18970,
+      "sha256": "69a5a48b7d140fa335a47859b9327320813968550e6bd202f857898b95b3ef63"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-game-before-pan-screen.png",
+      "bytes": 200612,
+      "sha256": "539d97e871cdcc472b485dd44419c0d74e4df310f2c9d8a006fd4a14daf99b6e"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-game-before-pan-screen.xml",
+      "bytes": 12444,
+      "sha256": "1f692bf711043d273977275dfb438b1fe9fa6691b650f1d42d4c536bc8c634d2"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-game-before-pan.json",
+      "bytes": 25775,
+      "sha256": "80770a5d3f82c069e062e11e92ad9970d889e830ae6842a745768f1806010040"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-game-before-resume-screen.json",
+      "bytes": 18970,
+      "sha256": "7e06fc617850a3c09a92068e70155d341cace20786fd6d0b08fd5da6ba26933f"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-game-before-resume-screen.png",
+      "bytes": 220213,
+      "sha256": "dbf5bd88dd6f5167d4f917faa531e99eb824b8552c329f010319ef9272430bdb"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-game-before-resume-screen.xml",
+      "bytes": 12444,
+      "sha256": "449a2b92e982b822d63538e830ce609a92cd547f02ee7204142c43ad2ccc5f93"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-game-before-resume.json",
+      "bytes": 25804,
+      "sha256": "1cfbc5ba5e0161d82f52f9d34ac16926fc5ab21ca38d88d5fb9bf0b0023fbab9"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-game-home-return.json",
+      "bytes": 13905,
+      "sha256": "efc564d350e077790456c332423b1777bd74a4d684083b62f6bb631ea803dcb7"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-game-home-return.png",
+      "bytes": 2726815,
+      "sha256": "aef966a8d8e364464e72472a0a3f1d271e75eedf270b12bf695388898d480884"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-game-home-return.xml",
+      "bytes": 9124,
+      "sha256": "6ddae116bfdac0b4c6e6589d97259e160d97c6febdb4fbf62d350ea68a6f485c"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-game-home.json",
+      "bytes": 13349,
+      "sha256": "4cd7a7e8595dad90de41245fc5bae17205245c828cb0666b5b170c1e7459bf00"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-game-home.png",
+      "bytes": 1517367,
+      "sha256": "3b0b95f96f8b2d4c091c55010441e5f37503d611a6bca62cb4a27eb2c89991d3"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-game-home.xml",
+      "bytes": 8748,
+      "sha256": "be7d0259bab116f20b43f5a77184e834fe47cfb920ba8303d36a1eba5be98ae2"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-game-map-return.json",
+      "bytes": 18029,
+      "sha256": "56d475e5476673063d79b2b6e787792f64ec14c93c9bdec5549270e6cef14e5d"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-game-map-return.png",
+      "bytes": 1013191,
+      "sha256": "7e2519a1396591d2e5bb1dee61dd1468750d07e56d5489fa9d89162320bf3f39"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-game-map-return.xml",
+      "bytes": 11880,
+      "sha256": "79080c4cf3c3af8ed6a2325dc81ece337426966f2af3c9eba7b6c73ca71e2973"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-game-map.json",
+      "bytes": 17999,
+      "sha256": "f525f66be3e05b769fdd44a5f732aa2d21de536cdb459f3c2d9435ede8366ca3"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-game-map.png",
+      "bytes": 610168,
+      "sha256": "56ec116dcedb359d6565c63e0b27688a559bc299092b78e6d042eec4ca346796"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-game-map.xml",
+      "bytes": 11851,
+      "sha256": "d9c7eb1aff90b961f8733e0c656863b51a68ca39cb8c331c080c43a4f80206b7"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-game-pan-screen.json",
+      "bytes": 18970,
+      "sha256": "c31aa0f76d308ae7338e208f5cde2fcaff7f887d4712cca359fc909b348c4058"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-game-pan-screen.png",
+      "bytes": 220262,
+      "sha256": "b0403bdd5cd312079fc683d3b31c924bf9faca74ab586f30f9897eda8520d808"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-game-pan-screen.xml",
+      "bytes": 12444,
+      "sha256": "32e1f93309dd5f79d47898f1c345a938096741649229d3353d4a0fa14de91624"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-game-pan.json",
+      "bytes": 25813,
+      "sha256": "b360c709cd53b8ccca15af14c22d0fa0eb82bce1cdf83ad7fdd051e56a1f9126"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-game-research-screen.json",
+      "bytes": 78146,
+      "sha256": "13b396881ed16f91c590f82bebbf066d63e8f0bf56d92a2e4cd30839779b7db5"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-game-research-screen.png",
+      "bytes": 368695,
+      "sha256": "b91fad60c0965bafc705a1982b3d8180b6f61ed29ba525a4761d9b8a1bd4cbe3"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-game-research-screen.xml",
+      "bytes": 51186,
+      "sha256": "f95c022dc50d631d3eb851307c0cf564b8dede5b2c3210ecaa50082fbd777ea7"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-game-research.json",
+      "bytes": 25775,
+      "sha256": "32a4bf8b614bb24745e61aac77db22bea7bc729992eac0a8a505fdb5e9a3085c"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-game-resumed-screen.json",
+      "bytes": 18970,
+      "sha256": "a71d4cae41c33acd0808bb4fad2992d85607bc2c13bb6e51e8fdeb9527bd51fe"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-game-resumed-screen.png",
+      "bytes": 219761,
+      "sha256": "22a32d3e3bd5e6981c324636333353d8a72813c9ab9f099ef889b5f55a59ca0a"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-game-resumed-screen.xml",
+      "bytes": 12444,
+      "sha256": "8dc37b09291719a1221245f62c422c4a3f833234cfc4a656f8a21a59b20f7d02"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-game-resumed.json",
+      "bytes": 25813,
+      "sha256": "0fee3c8e7fc78d8a45af32f612a4df1494a586a9bc5fa0c407fceddaf897fcd4"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-game-world.json",
+      "bytes": 25133,
+      "sha256": "6a7cc97aec7b3b553bdbe777b0363832c1c00f8467127bf8bd767b489574c7bf"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-game-world.png",
+      "bytes": 200754,
+      "sha256": "fa1f7509903e164c0973d10f7133b332de0f9f3185a570de6bd5b637d67208ab"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-game-world.xml",
+      "bytes": 16493,
+      "sha256": "e60c9c39ad5408be9a478b53ef7919082ead9ff936c8c0090ac62fa2d390cafe"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-home-compact.json",
+      "bytes": 13345,
+      "sha256": "cd74f24d671a1c6c1ecaa88085139e19c6c27b2ea8dabfd1c6d927e991931efe"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-home-compact.png",
+      "bytes": 1171475,
+      "sha256": "1ba7d91dfef276ecac5279eac8ed4dedd36c92b2b4f79e6a5a174b7ad12faf0b"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-home-compact.xml",
+      "bytes": 8744,
+      "sha256": "99703fced18e135970e9bc3434d5df724642feed0d77cb96d4b18536a8cc047f"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-home-default.json",
+      "bytes": 13402,
+      "sha256": "36db59e29f19710f62976e6573fca5dbc1167713c4447cb9440bbd1928a41f71"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-home-default.png",
+      "bytes": 1568629,
+      "sha256": "f37f5c0eb8484f79187893da71530745d7e074007b74a19aecd106f22e378acf"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-home-default.xml",
+      "bytes": 8751,
+      "sha256": "fec0b79f6a9bb67a78a5dd8c5ae5bcb264053ba1be53d6169fdec29d03953fea"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-home-large-text-bottom.json",
+      "bytes": 10481,
+      "sha256": "b2d5aa90d6877f86254e343bea2bb3f92a86d4b04e24b58ace07ed5fdd2c18cd"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-home-large-text-bottom.png",
+      "bytes": 1137949,
+      "sha256": "66d257e0b3fbc91f93dd07232a5c0492d61005918800b66f5b63caec3b0cca1e"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-home-large-text-bottom.xml",
+      "bytes": 6841,
+      "sha256": "22eb136de064ae36840047c1375fcd458f13b00f7aaf15b7ac077ca8e18d4c9e"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-home-large-text-top.json",
+      "bytes": 9321,
+      "sha256": "7c8082dbf3c4e5e6c9f13a74639b9a104fc866722ef3219c3879e845beec0e56"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-home-large-text-top.png",
+      "bytes": 1377651,
+      "sha256": "72a8ab76465a1c252b32fc991b61f487429d70dd4593b073bc83770c960d15c4"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-home-large-text-top.xml",
+      "bytes": 6068,
+      "sha256": "1c5a91ce3f01d1d41f55bec5745be2909784c565467791e3a44d48d3bfc4e8e8"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-home-reference.json",
+      "bytes": 13349,
+      "sha256": "4cd7a7e8595dad90de41245fc5bae17205245c828cb0666b5b170c1e7459bf00"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-home-reference.png",
+      "bytes": 1517367,
+      "sha256": "3b0b95f96f8b2d4c091c55010441e5f37503d611a6bca62cb4a27eb2c89991d3"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-home-reference.xml",
+      "bytes": 8748,
+      "sha256": "be7d0259bab116f20b43f5a77184e834fe47cfb920ba8303d36a1eba5be98ae2"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-home-restored.json",
+      "bytes": 13905,
+      "sha256": "efc564d350e077790456c332423b1777bd74a4d684083b62f6bb631ea803dcb7"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-home-restored.png",
+      "bytes": 2726815,
+      "sha256": "aef966a8d8e364464e72472a0a3f1d271e75eedf270b12bf695388898d480884"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-home-restored.xml",
+      "bytes": 9124,
+      "sha256": "6ddae116bfdac0b4c6e6589d97259e160d97c6febdb4fbf62d350ea68a6f485c"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-large-text-hub.json",
+      "bytes": 12196,
+      "sha256": "34390428afd23e96ff8d3c5647f0be0e6dcf37871a7031bc3652873d5a4f3009"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-large-text-hub.png",
+      "bytes": 94155,
+      "sha256": "80d0957280e1e9f0e61204b7ca6edb4b7490c61b854a3e93c94c76f8d1c232af"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-large-text-hub.xml",
+      "bytes": 7963,
+      "sha256": "69368fc601e816fb2700ccbbdde85ed6d4c63d5d545a9d93d9f6960b17c5b632"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-large-text-return.json",
+      "bytes": 10481,
+      "sha256": "1cd1cf58c31742f40090cb5f0a03fa79df05f9b193355ebb6f17ff8dd3b8ad75"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-large-text-return.png",
+      "bytes": 1221891,
+      "sha256": "c43020eef22c3690e026251fbaeeca4908b6b6bd72cbd8b5c57af6aaf3a8fba9"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-large-text-return.xml",
+      "bytes": 6841,
+      "sha256": "ed7611efdbef8a8cd6f09e1097c4f2f1dcdf0731f031919074f8ccc9801b768f"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-resume-after.json",
+      "bytes": 13349,
+      "sha256": "4cd7a7e8595dad90de41245fc5bae17205245c828cb0666b5b170c1e7459bf00"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-resume-after.png",
+      "bytes": 1517367,
+      "sha256": "3b0b95f96f8b2d4c091c55010441e5f37503d611a6bca62cb4a27eb2c89991d3"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-resume-after.xml",
+      "bytes": 8748,
+      "sha256": "be7d0259bab116f20b43f5a77184e834fe47cfb920ba8303d36a1eba5be98ae2"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-resume-before.json",
+      "bytes": 13349,
+      "sha256": "4cd7a7e8595dad90de41245fc5bae17205245c828cb0666b5b170c1e7459bf00"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-resume-before.png",
+      "bytes": 1517367,
+      "sha256": "3b0b95f96f8b2d4c091c55010441e5f37503d611a6bca62cb4a27eb2c89991d3"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-resume-before.xml",
+      "bytes": 8748,
+      "sha256": "be7d0259bab116f20b43f5a77184e834fe47cfb920ba8303d36a1eba5be98ae2"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-return-campaign.json",
+      "bytes": 13350,
+      "sha256": "e588ee698f5f906a4b72a3cc4fcd5f72b916f69a1120652e2231775dd7d8f0b1"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-return-campaign.png",
+      "bytes": 1517367,
+      "sha256": "3b0b95f96f8b2d4c091c55010441e5f37503d611a6bca62cb4a27eb2c89991d3"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-return-campaign.xml",
+      "bytes": 8749,
+      "sha256": "60d2607f3a1afc82192a920de39febc922e689bf362b7b0af42931b45343f509"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-return-ffa.json",
+      "bytes": 13350,
+      "sha256": "e588ee698f5f906a4b72a3cc4fcd5f72b916f69a1120652e2231775dd7d8f0b1"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-return-ffa.png",
+      "bytes": 1517367,
+      "sha256": "3b0b95f96f8b2d4c091c55010441e5f37503d611a6bca62cb4a27eb2c89991d3"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-return-ffa.xml",
+      "bytes": 8749,
+      "sha256": "60d2607f3a1afc82192a920de39febc922e689bf362b7b0af42931b45343f509"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-return-guide.json",
+      "bytes": 13349,
+      "sha256": "4cd7a7e8595dad90de41245fc5bae17205245c828cb0666b5b170c1e7459bf00"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-return-guide.png",
+      "bytes": 1517367,
+      "sha256": "3b0b95f96f8b2d4c091c55010441e5f37503d611a6bca62cb4a27eb2c89991d3"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-return-guide.xml",
+      "bytes": 8748,
+      "sha256": "be7d0259bab116f20b43f5a77184e834fe47cfb920ba8303d36a1eba5be98ae2"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-return-hub.json",
+      "bytes": 13349,
+      "sha256": "4cd7a7e8595dad90de41245fc5bae17205245c828cb0666b5b170c1e7459bf00"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-return-hub.png",
+      "bytes": 1517367,
+      "sha256": "3b0b95f96f8b2d4c091c55010441e5f37503d611a6bca62cb4a27eb2c89991d3"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-return-hub.xml",
+      "bytes": 8748,
+      "sha256": "be7d0259bab116f20b43f5a77184e834fe47cfb920ba8303d36a1eba5be98ae2"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-return-multiplayer.json",
+      "bytes": 13350,
+      "sha256": "e588ee698f5f906a4b72a3cc4fcd5f72b916f69a1120652e2231775dd7d8f0b1"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-return-multiplayer.png",
+      "bytes": 1517367,
+      "sha256": "3b0b95f96f8b2d4c091c55010441e5f37503d611a6bca62cb4a27eb2c89991d3"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-return-multiplayer.xml",
+      "bytes": 8749,
+      "sha256": "60d2607f3a1afc82192a920de39febc922e689bf362b7b0af42931b45343f509"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-return-towers.json",
+      "bytes": 13350,
+      "sha256": "e588ee698f5f906a4b72a3cc4fcd5f72b916f69a1120652e2231775dd7d8f0b1"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-return-towers.png",
+      "bytes": 1517367,
+      "sha256": "3b0b95f96f8b2d4c091c55010441e5f37503d611a6bca62cb4a27eb2c89991d3"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-return-towers.xml",
+      "bytes": 8749,
+      "sha256": "60d2607f3a1afc82192a920de39febc922e689bf362b7b0af42931b45343f509"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-route-campaign.json",
+      "bytes": 14622,
+      "sha256": "119a3646d2993a79c29f23dd860d5d793eac399733347172006e39b4b55f610d"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-route-campaign.png",
+      "bytes": 62600,
+      "sha256": "3ea1f97b99ceb572909045404238705e0aede9dd2574fc829e586c00d6687e56"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-route-campaign.xml",
+      "bytes": 9637,
+      "sha256": "2138d10f0f7d0b88612a52f502415380ee81b8309dcc347989d569b7792936f3"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-route-ffa.json",
+      "bytes": 23366,
+      "sha256": "109912881605a52524bc7e8585516957a4bbf38e619babe1164ec4f4e32f29e9"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-route-ffa.png",
+      "bytes": 93338,
+      "sha256": "a2d88c4e40c0fc8577f2c6f6501ece7fdeeb7c1a5edfa5df820b6246533d5a4d"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-route-ffa.xml",
+      "bytes": 15496,
+      "sha256": "2f526966d90f4a47053ef7cb04263b7c9392feeed734f222081fb0161857bc0e"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-route-guide.json",
+      "bytes": 46509,
+      "sha256": "95b645a46b2e57d9513a7a0677f8d59151bc62e67f8b0e224aeb319240628bbc"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-route-guide.png",
+      "bytes": 147597,
+      "sha256": "250b9f5c4acc1578c7b072d09a67d3213a93fa723a59075fde7c5bddbb9a0927"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-route-guide.xml",
+      "bytes": 30679,
+      "sha256": "95f36427b2ed508ab73d3ad92ec169b9158246a639a4c0cb5470b0f27b788e32"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-route-hub.json",
+      "bytes": 30828,
+      "sha256": "88ba2b1502965c7c7a3448e04f98b545c409905c57ccf1fc2b8523409c81fbd6"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-route-hub.png",
+      "bytes": 95289,
+      "sha256": "0066ce4b42f188057e20abdd7394ac73c40629d5dd61923f9d2b30d18e174f4f"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-route-hub.xml",
+      "bytes": 20257,
+      "sha256": "b04e252b73a00732d2989cf32d2e0b4fb061abdc89d01cb6eddb60604b68974d"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-route-multiplayer.json",
+      "bytes": 80853,
+      "sha256": "89b53c59a6d33a26f8d3f8d108eff9d3af774907d9c694e806886bc3d15fc9e9"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-route-multiplayer.png",
+      "bytes": 133890,
+      "sha256": "8f1bb79ba5b5e7d493fa898e45d8488b429e83d89991208ccdcdfc5779dded3f"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-route-multiplayer.xml",
+      "bytes": 52676,
+      "sha256": "7b4a6a14742d635f62fdc13032350e4f307f155fda1643babd29e52e10baad44"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-route-towers.json",
+      "bytes": 18000,
+      "sha256": "dc4bd25937f244ace8b8b4f08facc92f1b3ff3a6d614c0dd186f9d8adce27a89"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-route-towers.png",
+      "bytes": 610168,
+      "sha256": "56ec116dcedb359d6565c63e0b27688a559bc299092b78e6d042eec4ca346796"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-route-towers.xml",
+      "bytes": 11852,
+      "sha256": "845d3e68d16f0b2dd07a74485cddc45eca3b1b4e50b1951f75aa2a74ed872798"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-routes-before.json",
+      "bytes": 13350,
+      "sha256": "e588ee698f5f906a4b72a3cc4fcd5f72b916f69a1120652e2231775dd7d8f0b1"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-routes-before.png",
+      "bytes": 1517367,
+      "sha256": "3b0b95f96f8b2d4c091c55010441e5f37503d611a6bca62cb4a27eb2c89991d3"
+    },
+    {
+      "path": "qa/portrait-home-083/delivery-routes-before.xml",
+      "bytes": 8749,
+      "sha256": "60d2607f3a1afc82192a920de39febc922e689bf362b7b0af42931b45343f509"
+    },
+    {
+      "path": "qa/portrait-home-083/device-before.json",
+      "bytes": 152,
+      "sha256": "5eb7ed665811571a7577293c631429f7525c44b5bf4f7c36b95603cb9420b11b"
+    },
+    {
+      "path": "qa/portrait-home-083/fallback.json",
+      "bytes": 469,
+      "sha256": "21c47199d5d4e7a0e56b1041b51ddf88574b139625bbf54230295609a863e511"
+    },
+    {
+      "path": "qa/portrait-home-083/game-return.json",
+      "bytes": 314,
+      "sha256": "78a95b84b0432fd98f3b920e684615e2ec841f10767dd949f6245877314c8f3d"
+    },
+    {
+      "path": "qa/portrait-home-083/gameplay.json",
+      "bytes": 436,
+      "sha256": "d6534abc80080f4c5abc8ec24c2649e8b1151a9362cedb47ba241026fd87edcf"
+    },
+    {
+      "path": "qa/portrait-home-083/home-layout.json",
+      "bytes": 18334,
+      "sha256": "411c6e7be0e92e6e2322d952eec3281fc29d346a67d9610b8c5254a8b7f7d6af"
+    },
+    {
+      "path": "qa/portrait-home-083/installed-apk.json",
+      "bytes": 494,
+      "sha256": "994e3edfa426099908af26bc58948dc278cf44e9d3541c1060a831a9c5153091"
+    },
+    {
+      "path": "qa/portrait-home-083/orientation.json",
+      "bytes": 3865,
+      "sha256": "b8358f56b912fcd1e2fd13c5ef4abb41995f3eed3e65406d9587421e11bb7fa6"
+    },
+    {
+      "path": "qa/portrait-home-083/reference.png",
+      "bytes": 2329479,
+      "sha256": "4914e11bfcf740dea8dec4bf20b6c5c34bf18b7b42ffc7de68101f7e86127b23"
+    },
+    {
+      "path": "qa/portrait-home-083/routes.json",
+      "bytes": 771,
+      "sha256": "92446f3fec4418a3619cda9b9129118b080e2190ec5ac46152d85d312983f904"
+    },
+    {
+      "path": "qa/portrait-home-083/failure-delivery-game-return-dialog.png",
+      "bytes": 184150,
+      "sha256": "6a52eec1e69f1cd5996ef9a25c1beeed5da2669294edc13798a8a8e61c20132d"
+    },
+    {
+      "path": "qa/portrait-home-083/failure-delivery-game-return-dialog.json",
+      "bytes": 6000,
+      "sha256": "9eda6a8f569d3ee8738c2d7665f3f752701f2f0811870d57d03bb833f351ad71"
+    },
+    {
+      "path": "qa/multiplayer-room-079/delivery-existing-towers-world.png",
+      "bytes": 268272,
+      "sha256": "6e550016d1371327fcfb73dd81cc9b33d0a5e5e8585ec1c5ca78fd71da217770"
+    }
+  ],
+  "recordedUTC": "2026-11-15T13:21:22.291278+00:00",
+  "packagePreservationNote": "Eight existing compiled XMLs differ only by 11 numeric resource-ID reference words; all refer to identical resource names and have identical canonical decoded XML. Existing XML sources and other existing resources/assets/libraries are frozen; package validation checks those semantics independently."
+}

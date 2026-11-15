@@ -1,6 +1,69 @@
 # Warzone Towers for Android
 
-## Current accepted version: Warzone Towers 0.6 (version code 6)
+## Current development revision: Warzone Towers 0.84 (version code 84)
+
+**Development revision: 0.84 (84)** restores the original black landscape Home
+and applies the approved compact native Campaign, Towers, FFA and Multiplayer
+landing pages. Towers/FFA place real map previews beside compact settings and a
+fixed Play/Start action. The native Multiplayer list reuses the existing official
+room parser, refresh and Join paths. Campaign download/readiness behavior,
+Guide/Hub, waiting room, games and engine assets are retained. Delivered v0.83
+APK/full source remain the fallback. Exact-APK checks passed for normal/compact
+menus, native profile/filter/Refresh, private bot Join/Ready/return and retained
+Towers input/resume; see the [0.84 notes](docs/releases/0.84-native-landings.md)
+for the bounded fixture and inherited emulator terrain limitation.
+
+## Historical development revision: Warzone Towers 0.83 (version code 83)
+
+**Development revision: 0.83 (83)** implements the selected blue portrait Home,
+with illustrated Campaign, Towers, FFA and Multiplayer cards, compact Guide/Hub
+buttons and the existing research tagline. Destinations and games stay landscape;
+Back restores portrait Home. The v0.82 APK and complete source remain the fallback.
+Exact-APK ADB checks cover all six routes, small/enlarged-text layouts, retained
+Activity/game state, Research and touch camera input. Existing emulator terrain
+rendering remains limited. See the [0.83 notes](docs/releases/0.83-portrait-home.md).
+
+## Historical development revision: Warzone Towers 0.82 (version code 82)
+
+The mode splash gains the exact small research/build/upgrade tagline above its
+existing art and six buttons. Multiplayer observers retain rendering/camera
+access while player-owned research, manufacturing and orders remain disabled.
+The private native owner VM no longer runs against a reserved spectator slot.
+Official network protocol/data, simulation and other modes are unchanged.
+The v0.81 APK/full source and all older fallbacks are preserved. The exact
+installed APK passed scoped pre-start observer match/frame/camera/read-only and
+return checks, normal-player menus/selection/pan and Home layout checks. See the
+[0.82 notes](docs/releases/0.82-multiplayer-spectator.md).
+
+## Historical development revision: Warzone Towers 0.80 (version code 80)
+
+Multiplayer keeps one roster/chat/Ready room while typing. Chat/roster scrolling
+retains its reading position, native map previews cover built-in and downloaded
+maps when the room permits them, and room buttons reuse the existing Warzone
+click/mute policy. The room's normal-density keyboard bounds are separate from
+the unchanged game viewport. Exact-APK observations are recorded separately from
+host simulations under `qa/multiplayer-room-080/`; see the
+[0.80 notes](docs/releases/0.80-multiplayer-room-polish.md). The v0.79 APK/full
+source and every older fallback remain preserved. The exact installed candidate
+passed private-host inline typing/Send, list scrolling, keyboard restoration,
+built-in/downloaded map previews, click PCM/mute and actual match movement,
+Stop/Deselect, camera and Back/return checks. Physical speaker audition and a
+full public match remain outside this scope.
+
+## Historical development revision: Warzone Towers 0.79 (version code 79)
+
+Multiplayer uses the compact roster/chat/Ready waiting room, with native team
+and spectator permissions and generation-fenced loading/Back behavior. This is
+an isolated Multiplayer change; Towers, Campaign, FFA, shared Research/Design,
+maps, music, saves and the official network protocol/data remain unchanged.
+The exact installed APK passed private-host room layout, chat/Ready, team and
+spectator requests, keyboard/Back, rejoin and match-entry/input checks. These are
+separate from host simulations; consult
+[0.79 notes](docs/releases/0.79-multiplayer-room.md) and the retained
+`qa/multiplayer-room-079/` evidence for scope and untested cases. The complete
+v0.78 APK/source and every older fallback remain preserved.
+
+## Historical accepted version: Warzone Towers 0.6 (version code 6)
 
 The user selected this edition as the current version on 7 November 2026.
 The exact tested APK is retained, including its existing application ID and

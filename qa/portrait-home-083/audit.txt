@@ -1,0 +1,8 @@
+Selected visual: second displayed portrait image, exact reference.png.
+Baseline: installed082 Main Home is landscape; screenshot baseline-home.png.
+1. HomeModesView is a landscape-only measured native FrameLayout with six real action bindings. Replace its Home presentation with a portrait hero/four-tile grid and compact Guide/Hub, retaining actions/status/busy behavior.
+2. Main manifest and onCreate lock sensorLandscape. Add explicit Home visibility notification and a central coalesced orientation policy: only unobscured main MODES portrait; mode setup, readers, saves/rewards and gameplay remain landscape.
+3. Existing configChanges/fitViewport retain the Activity/WebView; rotation must resize without engine reload and Home must restore after Multiplayer Activity or Android Back.
+4. Exact source uses official logo and Oswald. Reuse them, add five separate raster art assets, keep all other theme/game resources frozen.
+5. Verify actual portrait screenshots against selected mock, cutout insets, compact screen/font scale/scroll access, all six destinations and repeated landscape/portrait returns using existing emulator through ADB only.
+6. Preserve exact082 APK/full source first, then focused host checks, exact-APK navigation/game input check and scoped package preservation. No desktop input, public messages, GitHub or VPS work.

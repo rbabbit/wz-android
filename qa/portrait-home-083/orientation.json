@@ -1,0 +1,70 @@
+{
+  "version": "0.83",
+  "passed": true,
+  "emulatorUsed": false,
+  "actualAndroidViewsExecuted": false,
+  "actualNativeEngineExecuted": false,
+  "actualJavaPolicyExecuted": true,
+  "checks": [
+    "Constructor Home callback cannot run half-initialized Activity policy",
+    "Cold mode-selection Home stays portrait idempotently",
+    "Towers map requests landscape immediately",
+    "Repeated Home returns coalesce into one pending portrait update",
+    "Battle return directly to Towers map avoids transient portrait bounce",
+    "Battle return directly to FFA setup cancels intermediate Home portrait",
+    "Back from FFA setup restores mode-selection portrait",
+    "campaignSetup preserves existing landscape surface",
+    "Closing campaignSetup returns only unobscured mode Home to portrait",
+    "guideView preserves existing landscape surface",
+    "Closing guideView returns only unobscured mode Home to portrait",
+    "hubView preserves existing landscape surface",
+    "Closing hubView returns only unobscured mode Home to portrait",
+    "savedGamesView preserves existing landscape surface",
+    "Closing savedGamesView returns only unobscured mode Home to portrait",
+    "rewardsView preserves existing landscape surface",
+    "Closing rewardsView returns only unobscured mode Home to portrait",
+    "rewardReceipt preserves existing landscape surface",
+    "Closing rewardReceipt returns only unobscured mode Home to portrait",
+    "battleBriefing preserves existing landscape surface",
+    "Closing battleBriefing returns only unobscured mode Home to portrait",
+    "adCover preserves existing landscape surface",
+    "Closing adCover returns only unobscured mode Home to portrait",
+    "loadingOverlay preserves existing landscape surface",
+    "Closing loadingOverlay returns only unobscured mode Home to portrait",
+    "replayPanel preserves existing landscape surface",
+    "Closing replayPanel returns only unobscured mode Home to portrait",
+    "Native game loading requests landscape before URL start",
+    "Running game remains landscape without recreating Home",
+    "Main resume after separate Multiplayer Activity restores portrait Home",
+    "Finishing Activity cannot trigger navigation orientation changes",
+    "Pending Home callback cannot mutate destroyed orientation lifecycle",
+    "Manifest starts Main portrait, retains Multiplayer landscape and handles size/orientation changes without Activity recreation",
+    "Actual internal Towers/Home transitions notify Activity only after their visible state changes",
+    "Every actual setup/reader/save/reward/loading/briefing/ad open and close path updates the central policy",
+    "Configuration and resume resize retained views without reloading native game, with pending callback cleanup on destroy",
+    "Actual game launch/load/return, keyboard Back, and viewport algorithms remain identical to delivered082 source"
+  ],
+  "checksPassed": 37,
+  "sources": [
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MainActivity.java",
+      "sha256": "7a5306af800852552d7d18adcc09045e8ed0b4d14209b70768fa130ec0bb64e3"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/GraphicsSetupView.java",
+      "sha256": "b185e5b00ddcc6665e1cf3be7d958e54a66e42ad10cbe42af47c434d1443d1d4"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/HomeOrientationPolicy.java",
+      "sha256": "e51b7fa97a18493d030c224ff0048ea90cfa56c97f1e0c3f072c3ee2e3ac5f90"
+    },
+    {
+      "path": "app/src/main/AndroidManifest.xml",
+      "sha256": "b6f6b54a0f20351518cd7b144eb40ec588beeae696ea432fc1e967cb29adabca"
+    },
+    {
+      "path": "tools/test-home-orientation-083.py",
+      "sha256": "759e606949f61fea0c6719ce8c297246006fc65ad7a7e88de3845ad674374dc4"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "version": "0.80",
+  "passed": true,
+  "emulatorUsed": false,
+  "engineExecuted": false,
+  "actualAndroidKeyboardVerified": false,
+  "scope": "Actual shipped session and adapter functions in local VM with synthetic DOM, FS, timers and native packets. No network, native game or Android execution.",
+  "checks": [
+    "opaque join requires matching complete native room snapshot and rendered identity",
+    "room snapshots reject regressing revisions and wrong phases and recover after loading",
+    "room commands delegate only within current room and never enter world command queue",
+    "room leave rejoin and pagehide clear room identity under cover before transport teardown",
+    "room bridge publishes native state before room and redelivers unchanged packets for cover recovery",
+    "ready requests use one atomic mailbox and wait matching native acknowledgement",
+    "team spectator and literal UTF8 chat preserve native payload types without client state mutation",
+    "unknown or malformed room actions cannot write native mailbox",
+    "old matching ACK cannot survive a phase or generation change consumed by the same poll",
+    "pending room intent cancels on pagehide and bounded timeout rather than retrying into a new session",
+    "atomic mailbox failure is reported and does not permanently block future room commands"
+  ],
+  "checksPassed": 11,
+  "sources": [
+    {
+      "path": "app/src/main/assets/multiplayer/session.js",
+      "sha256": "2e769a3ab1ffaeaf68cf0d0398f77e6675ab49ba451681b7b10eaa86e22e0074"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/native-ui-adapter.js",
+      "sha256": "5e7b0d39c0ea2f8fbf5ede587fcd229fb7d65c842f5d8ad88e12edde4c8489a6"
+    },
+    {
+      "path": "tools/test-multiplayer-room-session-080.cjs",
+      "sha256": "cf4fd1db85c01d37ee84047da40dd38c47609731a4039ea25598f21c98709433"
+    }
+  ],
+  "fatal": null
+}

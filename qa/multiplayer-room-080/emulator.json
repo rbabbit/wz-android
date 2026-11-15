@@ -1,0 +1,354 @@
+{
+  "version": "0.80",
+  "passed": true,
+  "recordedUTC": "2026-11-15T04:36:10.955740+00:00",
+  "emulatorUsed": true,
+  "candidateAPK_SHA256": "5837d90552d9ab2a675b4a7fd645fff89d8ee014f8eba6cbb86d02384cae7a1e",
+  "installedAPK_SHA256": "5837d90552d9ab2a675b4a7fd645fff89d8ee014f8eba6cbb86d02384cae7a1e",
+  "device": "emulator-5558",
+  "checks": {
+    "exactDeliveryAPK": true,
+    "stableRoomTypingAndIME": true,
+    "chatScrollPreserved": true,
+    "playerRosterScroll": true,
+    "realMapPreviewOrAuthoritativeUnavailable": true,
+    "realBuiltinAndCustomMapPreview": true,
+    "clickPlaybackAndMutePolicy": true,
+    "privateRoomChatRoundTrip": true,
+    "keyboardBackAndRestoration": true,
+    "leaveRejoinAndLoadCover": true,
+    "matchGameplayInput": true,
+    "existingModesNavigation": true
+  },
+  "verificationScope": "Exact installed APK in the existing Android emulator. Natural text typed and sent inline in a private unlisted desktop4.7 room, host-generated slash-command replies, actual finger scrolling with reading-anchor preservation during new replies, compact roster scroll, normal and compact keyboard/Back restoration, built-in Sk-Mountain and genuinely downloaded EMAG_FFA native RGB previews compared byte-for-byte with canvas, real decoded click audio plus native mute policy. Ready started private Cobra bot matches. Research/Manufacturing/Queue open/close, selected native trucks moving then Stop/Deselect, real camera pan and Android Back Stay/Return to custom lobby/Home observed. Existing Campaign/FFA setup and Towers picker navigation observed. No public-room messages or seeded game orders.",
+  "limitations": [
+    "No physical-phone run or complete public multiplayer match was performed.",
+    "Click playback was measured from the actual HTML audio element decoded PCM (peak0.03634, rms0.01106); physical speaker output was not auditioned.",
+    "Black terrain remains a pre-existing rendering issue in this emulator, also visible in retained v0.70/v0.71 screenshots. Renderer/game data unchanged; exact GPU cause and physical-device behavior unverified.",
+    "Campaign/FFA/Towers gameplay and unrelated saves, rewards, ads and music were frozen and not comprehensively rerun.",
+    "Software-rendered CDP acknowledgement delays converted the initial nominal65ms terrain tap into a long press. The QA collector was corrected to send trusted down/up back-to-back with explicit timestamps; final movement passed without product changes. Earlier private hosts expired or closed during fixture preparation; final prepared checks completed before explicit return.",
+    "Native blind/loading/unavailable preview paths and duplicate-audio suppression also have focused host/browser coverage; final emulator previews used real ready built-in and custom maps."
+  ],
+  "fixture": {
+    "kind": "private-local-host",
+    "publicMessagesSent": false,
+    "hostVersion": "4.7.0",
+    "maps": [
+      "Sk-Mountain",
+      "EMAG_FFA"
+    ],
+    "bots": 1,
+    "bot": "Cobra.js Easy",
+    "publicListingDisabled": true,
+    "userDesktopConfigUntouched": true,
+    "seededOrders": false,
+    "privateHostStopped": true
+  },
+  "evidence": [
+    {
+      "path": "qa/multiplayer-room-080/candidate-typed.json",
+      "bytes": 4348,
+      "sha256": "0db8cc540479bd3b817453c6738fc014a22c013b648650812c4ff172655fbe5a"
+    },
+    {
+      "path": "qa/multiplayer-room-080/candidate-typed.png",
+      "bytes": 153571,
+      "sha256": "74badfec5c82991649932e4bd68186853c4b58e9ddc3cdf516214a35223f3bdb"
+    },
+    {
+      "path": "qa/multiplayer-room-080/candidate-sent.json",
+      "bytes": 4477,
+      "sha256": "cda5fb45d42162b12592cc892e848fee32f9f483911d78b8e022b490ca36d004"
+    },
+    {
+      "path": "qa/multiplayer-room-080/candidate-sent.png",
+      "bytes": 155135,
+      "sha256": "2724d55e21407f1a99e131356626fae1f66224697e53616ea01f19785af97583"
+    },
+    {
+      "path": "qa/multiplayer-room-080/candidate-history-filled.json",
+      "bytes": 9426,
+      "sha256": "d2ca4e7b20c8e163f74c6aa423d450ad28509db69f59049bb4981b99a343118c"
+    },
+    {
+      "path": "qa/multiplayer-room-080/candidate-history-filled.png",
+      "bytes": 164367,
+      "sha256": "66b53021cb791a348d464fe44a9a4bdd75105e60a540867a0c5bed4aa51cf673"
+    },
+    {
+      "path": "qa/multiplayer-room-080/candidate-before-scroll.json",
+      "bytes": 9426,
+      "sha256": "d2ca4e7b20c8e163f74c6aa423d450ad28509db69f59049bb4981b99a343118c"
+    },
+    {
+      "path": "qa/multiplayer-room-080/candidate-before-scroll.png",
+      "bytes": 164367,
+      "sha256": "66b53021cb791a348d464fe44a9a4bdd75105e60a540867a0c5bed4aa51cf673"
+    },
+    {
+      "path": "qa/multiplayer-room-080/candidate-older-messages.json",
+      "bytes": 9427,
+      "sha256": "025bc3c49ba68480834bff618449d5d06df6d11ff8fbef50f158432576cf6431"
+    },
+    {
+      "path": "qa/multiplayer-room-080/candidate-older-messages.png",
+      "bytes": 160375,
+      "sha256": "17d3049c792ee5b30db1bd7252d33f10c50d83736fdc8281994be115845f1fc1"
+    },
+    {
+      "path": "qa/multiplayer-room-080/candidate-new-message-anchor.json",
+      "bytes": 9562,
+      "sha256": "938e6ddb6c24052d0d9b5ebb2e92e39f3e213f090f7e038dd1881823011f7ff6"
+    },
+    {
+      "path": "qa/multiplayer-room-080/candidate-new-message-anchor.png",
+      "bytes": 160395,
+      "sha256": "4d9981595940d66166a96c224b1071a339027e055d8a8fde3bcdf3dd5b834cf9"
+    },
+    {
+      "path": "qa/multiplayer-room-080/candidate-scrolled-newer.json",
+      "bytes": 9733,
+      "sha256": "c1f9d4679595ffe0448a0be1ac94055a382b1b271e4b81c7078ec6181f12435e"
+    },
+    {
+      "path": "qa/multiplayer-room-080/candidate-scrolled-newer.png",
+      "bytes": 164641,
+      "sha256": "11c5449e895605c237d37084ab44f50b24860264b0696768ac649bc7cded4abc"
+    },
+    {
+      "path": "qa/multiplayer-room-080/candidate-builtin-map-preview.json",
+      "bytes": 10151,
+      "sha256": "b6c8ebf77b02393907ba30a31c44d28f5b2dbb3d0da6cd487abe95179844abbc"
+    },
+    {
+      "path": "qa/multiplayer-room-080/candidate-builtin-map-preview.png",
+      "bytes": 96278,
+      "sha256": "1f9fe9a4dfe7f034ba7e3519bac9cff34d163f0c49d1a1417e59c9486b5b5ee6"
+    },
+    {
+      "path": "qa/multiplayer-room-080/compact-typed.json",
+      "bytes": 9729,
+      "sha256": "6183fbbc6573aac26f65b4488e7eda695e706957eeeb78d365360e80170e4b4f"
+    },
+    {
+      "path": "qa/multiplayer-room-080/compact-typed.png",
+      "bytes": 104419,
+      "sha256": "d790e1e3095fef78efc4d8bc47286ecf2d93e98cd78057c875c625fefa45eca1"
+    },
+    {
+      "path": "qa/multiplayer-room-080/compact-sent.json",
+      "bytes": 9859,
+      "sha256": "0f19638e48db5d6adef396b47d6b2b663e02b7b1685d2ef8087b67496e44da76"
+    },
+    {
+      "path": "qa/multiplayer-room-080/compact-sent.png",
+      "bytes": 101850,
+      "sha256": "c35a513dad900edb02b661ba39c2e0b5a03641a439c49cd70bc41ba56824d4a2"
+    },
+    {
+      "path": "qa/multiplayer-room-080/compact-roster-scroll.json",
+      "bytes": 9770,
+      "sha256": "d596c5ffe29ae2a80532dc344441d37327b755198febf49fba41bada7eb2dcb2"
+    },
+    {
+      "path": "qa/multiplayer-room-080/compact-roster-scroll.png",
+      "bytes": 102257,
+      "sha256": "8712120846b16e4daa4826a36b053ef45cdf2bada1d59e903f692324d0b4e204"
+    },
+    {
+      "path": "qa/multiplayer-room-080/compact-restored-inspect.json",
+      "bytes": 9802,
+      "sha256": "d61e9bf343887c179beccd4dde3c423326e0551ec7bbd77895c63492db82ced8"
+    },
+    {
+      "path": "qa/multiplayer-room-080/compact-restored-inspect.png",
+      "bytes": 97998,
+      "sha256": "1549a13defbfec7fe8d9a88d038a63d7f4cede6a9bad0e70e7afc37ccc2de19a"
+    },
+    {
+      "path": "qa/multiplayer-room-080/normal-restored-inspect.json",
+      "bytes": 9802,
+      "sha256": "e2c2290021e1ed165e8f52588806ca4278a784a59a16f3d9c82184bf509225e1"
+    },
+    {
+      "path": "qa/multiplayer-room-080/normal-restored-inspect.png",
+      "bytes": 156794,
+      "sha256": "e6442a2b81e8feb3bb9f45a7b29026019c1c7079545d3c960cfd9bb31ed2b3cc"
+    },
+    {
+      "path": "qa/multiplayer-room-080/compact-audio.json",
+      "bytes": 11482,
+      "sha256": "3ab54e8dd6dd40f5590dcb6a6ceb3197990c3dc675ecfef0c8ba7d05a57f6d6b"
+    },
+    {
+      "path": "qa/multiplayer-room-080/compact-audio.png",
+      "bytes": 94213,
+      "sha256": "908307c10bcfe0302540a55a57492711025d499287a32dbd14659ef6eda23c1f"
+    },
+    {
+      "path": "qa/multiplayer-room-080/compact-muted.json",
+      "bytes": 9838,
+      "sha256": "36cb26fca0acbac67004b754a91d265d8e298911e13fd46482f253ddb5b327f3"
+    },
+    {
+      "path": "qa/multiplayer-room-080/compact-muted.png",
+      "bytes": 97998,
+      "sha256": "1549a13defbfec7fe8d9a88d038a63d7f4cede6a9bad0e70e7afc37ccc2de19a"
+    },
+    {
+      "path": "qa/multiplayer-room-080/delivery-custom-room.json",
+      "bytes": 17843,
+      "sha256": "49e1fe670860e501a0ee7bea292d87abf433dbd16a2e71f44bf30fd4146e35f6"
+    },
+    {
+      "path": "qa/multiplayer-room-080/delivery-custom-room.png",
+      "bytes": 100311,
+      "sha256": "fbbde685e7e4a7be6671a2bdaa16a5e083eaf91ccbdc9d4f78d55b3c2263c4fd"
+    },
+    {
+      "path": "qa/multiplayer-room-080/delivery-custom-map-preview.json",
+      "bytes": 4762,
+      "sha256": "5c949fa53e71d90dd18c53a21245f9af24a9e3663e9b45d9b50b67fd34c82a3e"
+    },
+    {
+      "path": "qa/multiplayer-room-080/delivery-custom-map-preview.png",
+      "bytes": 79414,
+      "sha256": "5931d4809ad15a18e89fb4cada1c34c9a995d776fb641798585ee2f318d8b50b"
+    },
+    {
+      "path": "qa/multiplayer-room-080/delivery-rejoin-builtin.json",
+      "bytes": 17708,
+      "sha256": "4cd28f5c9c538688279de8f2e64ef7b72c422cc86d2814c9bd4557f2e00e80e7"
+    },
+    {
+      "path": "qa/multiplayer-room-080/delivery-rejoin-builtin.png",
+      "bytes": 100027,
+      "sha256": "5a13c96f9960f3ca55d6738b99cfd5b2a3525ae310dfc68b7e7c5824316a58e6"
+    },
+    {
+      "path": "qa/multiplayer-room-080/delivery-builtin-ready.json",
+      "bytes": 3631,
+      "sha256": "a5371d807c0b2ccbd8940e1ee6fc57fd0605143cde349aeb13673ea169f0e0d2"
+    },
+    {
+      "path": "qa/multiplayer-room-080/delivery-builtin-ready.png",
+      "bytes": 58935,
+      "sha256": "23fa82923795fa15e910226d834ebcab3b77a04bdbfbd827da8bc2efd6783df7"
+    },
+    {
+      "path": "qa/multiplayer-room-080/delivery-world.json",
+      "bytes": 3593,
+      "sha256": "413979438e6aa54ddcb0d47086b135eb034ef8bb3c5a951c74e07a07f3c977eb"
+    },
+    {
+      "path": "qa/multiplayer-room-080/delivery-world.png",
+      "bytes": 51106,
+      "sha256": "8db69ea56873386f2ba04b1a13674e4ba47a3cf65f4c95718b2d439c4eaf795d"
+    },
+    {
+      "path": "qa/multiplayer-room-080/delivery-game-blocknight-tech.json",
+      "bytes": 36063,
+      "sha256": "bc50d967c5c119e98e521d9ba8df7ccd077692e96f92ddc17aa6b56f8ea54c98"
+    },
+    {
+      "path": "qa/multiplayer-room-080/delivery-game-blocknight-tech.png",
+      "bytes": 269955,
+      "sha256": "62845a81f974aaee42525578034a436c2635cf9f4b067f6200e663ba142d149f"
+    },
+    {
+      "path": "qa/multiplayer-room-080/delivery-game-wt-open-factory.json",
+      "bytes": 36133,
+      "sha256": "9910a9a64dac80aa327ec1a9fba7276fb7b6a7e44403e7081178c1c2153597a4"
+    },
+    {
+      "path": "qa/multiplayer-room-080/delivery-game-wt-open-factory.png",
+      "bytes": 806549,
+      "sha256": "0a0a70993d21f194c11e6f6c44f979c0e0ccec9e1314b0a072fd727b19e30169"
+    },
+    {
+      "path": "qa/multiplayer-room-080/delivery-game-wt-open-queue.json",
+      "bytes": 36140,
+      "sha256": "eea1fa0360cb723239f4b723324666f67c79fa6b623c3f2aac3f3f9c71001b04"
+    },
+    {
+      "path": "qa/multiplayer-room-080/delivery-game-wt-open-queue.png",
+      "bytes": 943032,
+      "sha256": "d814ae21114c7c521b389eb7f2a3f6e0820640cd60bd599cf16f4a2c5a72bc7e"
+    },
+    {
+      "path": "qa/multiplayer-room-080/delivery-gameplay-input.json",
+      "bytes": 7098,
+      "sha256": "72785b3d9a6c856d8be85b4c563b49afa497c10afe66e4bf1f5a03eb26f87546"
+    },
+    {
+      "path": "qa/multiplayer-room-080/delivery-gameplay-input.png",
+      "bytes": 818054,
+      "sha256": "f40bc5d130f52c88ba25c2ded98070278b79d383a77bf7fc77f8bb7a2410c2e1"
+    },
+    {
+      "path": "qa/multiplayer-room-080/delivery-game-after-stay.json",
+      "bytes": 3629,
+      "sha256": "070872c5bc9f813b239bb1a40222ce60fd1be08ce30bd01d7f43c3e50c68782c"
+    },
+    {
+      "path": "qa/multiplayer-room-080/delivery-game-after-stay.png",
+      "bytes": 822286,
+      "sha256": "766a9314cda7e8f0606ff1986e39ea8df8e4e02896284fe079da871db6946d00"
+    },
+    {
+      "path": "qa/multiplayer-room-080/delivery-game-return-lobby.json",
+      "bytes": 952,
+      "sha256": "596dd7d79544c8924355512eedc1c7ec491783103e93f5221949abe4daae1140"
+    },
+    {
+      "path": "qa/multiplayer-room-080/delivery-game-return-lobby.png",
+      "bytes": 132747,
+      "sha256": "84eed11d9afa3a44e4ca95fa41d0df408c1eb415cb3f68bf771fcdab229dc2cd"
+    },
+    {
+      "path": "qa/multiplayer-room-080/delivery-joining-cover.json",
+      "bytes": 273,
+      "sha256": "cb802bc6aaa51f2e176fa812698f66e67999e8688c5568a0708fccf0461191d4"
+    },
+    {
+      "path": "qa/multiplayer-room-080/delivery-joining-cover.png",
+      "bytes": 28945,
+      "sha256": "4e4d0e25d074b94b60116003c8f4da6f8feb7faff6d17410c541e1f260b4868a"
+    },
+    {
+      "path": "qa/multiplayer-room-080/delivery-custom-download.json",
+      "bytes": 448,
+      "sha256": "ad26585365f790405af0296b868838a8c25c5d81ea6eb41ef4ed10a40ec8cb61"
+    },
+    {
+      "path": "qa/multiplayer-room-080/installation.json",
+      "bytes": 850,
+      "sha256": "9455227076864134a85e4e27e595ad741f60c5bae4eeb98d2aa9d1e67da22509"
+    },
+    {
+      "path": "qa/multiplayer-room-080/delivery-game-return-dialog.png",
+      "bytes": 821905,
+      "sha256": "952f801fbcc674db49ba072cd8574e06636854d6dd5bc08b537056946b4f6644"
+    },
+    {
+      "path": "qa/multiplayer-room-080/delivery-home-restored.png",
+      "bytes": 1094563,
+      "sha256": "55b931227bc7ceda19521617feceb8e3719a20ba2e64c442fbdd28b0dfba7b5c"
+    },
+    {
+      "path": "qa/multiplayer-room-080/delivery-existing-campaign-setup.png",
+      "bytes": 67371,
+      "sha256": "556f62488f7f370b917eb331527d8f47c616bbd70eb74ca25b83e5d3062b8a88"
+    },
+    {
+      "path": "qa/multiplayer-room-080/delivery-existing-ffa-setup.png",
+      "bytes": 118080,
+      "sha256": "34164c1c89de75ab690e7d98aced20625161b27d40ba5d33f48b4206b2b1f5e5"
+    },
+    {
+      "path": "qa/multiplayer-room-080/delivery-existing-towers-picker.png",
+      "bytes": 1012807,
+      "sha256": "a084d93f6151de8fa6968f6aad10054a7bb484b26139838502c6da434b54c635"
+    }
+  ]
+}

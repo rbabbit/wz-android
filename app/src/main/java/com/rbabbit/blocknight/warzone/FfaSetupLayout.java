@@ -27,35 +27,35 @@ final class FfaSetupLayout {
         if (width <= 0 || height <= 0 || !Float.isFinite(density) || density <= 0)
             throw new IllegalArgumentException("Invalid FFA viewport");
         int left=Math.max(px(16,density),insetLeft), right=width-Math.max(px(16,density),insetRight);
-        int top=Math.max(px(10,density),insetTop), bottom=height-Math.max(px(10,density),insetBottom);
-        int touch=px(44,density), launch=px(48,density), gap=px(6,density);
+        int top=Math.max(px(8,density),insetTop), bottom=height-Math.max(px(12,density),insetBottom);
+        int touch=px(48,density), launch=touch, gap=px(6,density);
         Box header=new Box(left,top,right,top+touch);
         int bodyTop=header.bottom+gap, bodyHeight=Math.max(0,bottom-bodyTop);
         int columnGap=px(width/density >= 760 ? 24 : 16,density), available=right-left;
-        int settingsWidth=Math.min(px(340,density),Math.max(px(260,density),Math.round(available*.35f)));
+        int settingsWidth=Math.max(px(260,density),Math.round(available*.50f));
         settingsWidth=Math.min(settingsWidth,Math.max(px(176,density),available-columnGap-px(100,density)));
         int settingsLeft=right-settingsWidth, previewRight=settingsLeft-columnGap;
         int previewBottom=bottom-touch-gap;
-        Box preview=new Box(left,bodyTop,previewRight,Math.max(bodyTop,previewBottom));
-        int browseWidth=touch*2+px(76,density), browseLeft=left+Math.max(0,(previewRight-left-browseWidth)/2);
+        int previewLeft=left+px(16,density);
+        Box preview=new Box(previewLeft,bodyTop,previewRight,Math.max(bodyTop,previewBottom));
+        int browseWidth=touch*2+px(76,density), browseLeft=previewLeft+Math.max(0,(previewRight-previewLeft-browseWidth)/2);
         int browseTop=bottom-touch;
         Box previous=new Box(browseLeft,browseTop,browseLeft+touch,bottom);
         Box position=new Box(previous.right,browseTop,previous.right+px(76,density),bottom);
         Box next=new Box(position.right,browseTop,position.right+touch,bottom);
-        boolean compact=bodyHeight<px(252,density)
-                || headingHeight>bodyHeight-touch*2-launch-gap*4-px(32,density);
+        boolean compact=headingHeight>bodyHeight-touch*2-launch-gap*4-px(32,density);
         int fixedHeading=compact?0:Math.max(0,headingHeight);
-        Box heading=new Box(settingsLeft,bodyTop,right,bodyTop+fixedHeading);
-        int rowTop=heading.bottom+(compact?0:gap);
-        Box groups=new Box(settingsLeft,rowTop,right,rowTop+touch);
-        Box difficulty=new Box(settingsLeft,groups.bottom+gap,right,groups.bottom+gap+touch);
+        Box groups=new Box(settingsLeft,bodyTop,right,bodyTop+touch);
+        Box heading=new Box(settingsLeft,groups.bottom+gap,right,groups.bottom+gap+fixedHeading);
+        int difficultyTop=compact?groups.bottom+gap:heading.bottom+gap;
+        Box difficulty=new Box(settingsLeft,difficultyTop,right,difficultyTop+touch);
         int startWidth=Math.min(settingsWidth,Math.max(px(128,density),desiredStartWidth));
         Box start=new Box(right-startWidth,bottom-launch,right,bottom);
         Box facts=new Box(settingsLeft,difficulty.bottom+gap,right,Math.max(difficulty.bottom+gap,start.top-gap));
         return new FfaSetupLayout(header,preview,previous,position,next,heading,groups,difficulty,facts,start,compact);
     }
 
-    /** Content-sized chips retain 44dp hit targets, shrinking only to fit a row. */
+    /** Content-sized chips retain minimum hit targets, shrinking only to fit a row. */
     static int[] chipWidths(int available, int gap, int minimum, int[] desired) {
         int[] result=new int[desired.length];
         int room=Math.max(0,available-gap*Math.max(0,desired.length-1)), total=0;

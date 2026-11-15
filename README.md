@@ -1,5 +1,52 @@
 # Warzone Towers
 
+**Development revision: 0.84 (84)** restores the original black landscape Home
+and applies the approved compact native Campaign, Towers, FFA and Multiplayer
+landing pages. Towers/FFA place real map previews beside compact settings and a
+fixed Play/Start action. The native Multiplayer list reuses the existing official
+room parser, refresh and Join paths. Campaign download/readiness behavior,
+Guide/Hub, waiting room, games and engine assets are retained. Delivered v0.83
+APK/full source remain the fallback. Exact-APK checks passed for normal/compact
+menus, native profile/filter/Refresh, private bot Join/Ready/return and retained
+Towers input/resume; see the [0.84 notes](docs/releases/0.84-native-landings.md)
+for the bounded fixture and inherited emulator terrain limitation.
+
+**Historical development revision: 0.83 (83)** implements the selected blue portrait Home,
+with illustrated Campaign, Towers, FFA and Multiplayer cards, compact Guide/Hub
+buttons and the existing research tagline. Destinations and games stay landscape;
+Back restores portrait Home. The v0.82 APK and complete source remain the fallback.
+Exact-APK ADB checks cover all six routes, small/enlarged-text layouts, retained
+Activity/game state, Research and touch camera input. Existing emulator terrain
+rendering remains limited. See the [0.83 notes](docs/releases/0.83-portrait-home.md).
+
+**Development revision: 0.82 (82)** adds the small Home line “Advance Research
+Tech · Build & Deploy Units · Upgrade Structures” and separates Multiplayer
+spectator camera/rendering capability from player-owned commands. The complete
+v0.81 APK/source remain the fallback. The exact installed APK passed the scoped
+pre-start spectator, camera/read-only/return, ordinary-player and Home checks.
+See the
+[0.82 notes](docs/releases/0.82-multiplayer-spectator.md) for scope and limits.
+
+**Development revision: 0.80 (80)** keeps Multiplayer chat inline with the
+room, preserves scroll position through updates and keyboard changes, and adds
+a real native map preview plus the existing Warzone click sound. Room-only
+viewport handling no longer applies the game's minimum scale while typing.
+The complete v0.79 APK/source remain the fallback. See the
+[0.80 notes](docs/releases/0.80-multiplayer-room-polish.md) for scope and the
+separate host/emulator evidence. The exact installed candidate passed the
+private-room typing, scrolling, keyboard, real-map-preview, click/mute and scoped
+match movement/input/return checks. Physical speaker audition and a full public
+match remain outside the verified scope.
+
+**Development revision: 0.79 (79)** replaces Multiplayer's stock waiting-room
+screen with the approved compact player list, chat and Ready controls. Team and
+spectator requests follow the host's native permissions; loading remains covered
+until the matching room or battlefield is ready. The v0.78 APK and complete
+source are preserved. The exact installed APK passed the scoped private-host
+room and match-entry checks. See the
+[0.79 notes](docs/releases/0.79-multiplayer-room.md) for observed scope, separate
+host evidence and limits; physical phones and a full public match were not tested.
+
 **Development release: 0.78 (78)** separates available Research choices from
 the selected laboratory's current topic and ordered queue. Design name editing
 uses a compact panel near the top of the screen. The v0.77 APK and complete

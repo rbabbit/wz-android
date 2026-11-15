@@ -1,0 +1,205 @@
+{
+  "version": "0.83",
+  "passed": true,
+  "emulatorUsed": false,
+  "actualAndroidViewsExecuted": false,
+  "scope": "Actual pure-Java portrait geometry with retained Oswald AWT metrics/image metadata; actual draw/SP-refresh methods executed with inert Paint/TextView stubs. Action/busy/status/inset/decode calls source-checked. Native Android drawing/touch/configuration dispatch require exactAPK observation.",
+  "checks": [
+    "Exact approvedfourmodeimages/labels and six existingActions retained",
+    "Busy/error/accessibility/inset/artvisibility paths retained",
+    "Actual portrait helper/font glyph measurements executed",
+    "390x844 normal2x2 fitswithoutscroll;320x568compact scroll;largefont readablesinglecolumnfallback",
+    "Native caption/touch/version/error bounds nonoverlapping",
+    "Sampleddecode policy/real PNGmetadata and hero edgeblend/ownbounds clipping/visible-insets verified",
+    "Actual background draw method remains opaque across repeated redraws",
+    "Actual SP refresh method restores tagline/version/status/Guide/Hub afterfontchange"
+  ],
+  "checksPassed": 8,
+  "actualMethodVisualChecks": [
+    "repeated-background-opaque",
+    "all-caption-button-fonts-restored"
+  ],
+  "assertions": 4094,
+  "scenarios": [
+    "320x568 d=1.0 font=1.0 insets=[0, 0, 0, 0] error=false columns=2 content=668 viewport=568 captionDp=52.0 heroDp=150.0",
+    "320x568 d=1.0 font=1.0 insets=[8, 28, 8, 24] error=false columns=2 content=676 viewport=516 captionDp=52.0 heroDp=150.0",
+    "320x568 d=1.0 font=1.3 insets=[0, 0, 0, 0] error=false columns=1 content=1380 viewport=568 captionDp=62.0 heroDp=150.0",
+    "320x568 d=1.0 font=1.3 insets=[8, 28, 8, 24] error=false columns=1 content=1339 viewport=516 captionDp=62.0 heroDp=150.0",
+    "320x568 d=1.0 font=1.5 insets=[0, 0, 0, 0] error=false columns=1 content=1423 viewport=568 captionDp=68.0 heroDp=150.0",
+    "320x568 d=1.0 font=1.5 insets=[8, 28, 8, 24] error=false columns=1 content=1382 viewport=516 captionDp=68.0 heroDp=150.0",
+    "320x568 d=2.0 font=1.0 insets=[0, 0, 0, 0] error=false columns=2 content=1329 viewport=1136 captionDp=50.0 heroDp=150.0",
+    "320x568 d=2.0 font=1.0 insets=[8, 28, 8, 24] error=false columns=2 content=1339 viewport=1032 captionDp=50.0 heroDp=150.0",
+    "320x568 d=2.0 font=1.3 insets=[0, 0, 0, 0] error=false columns=1 content=2740 viewport=1136 captionDp=59.5 heroDp=150.0",
+    "320x568 d=2.0 font=1.3 insets=[8, 28, 8, 24] error=false columns=1 content=2655 viewport=1032 captionDp=59.5 heroDp=150.0",
+    "320x568 d=2.0 font=1.5 insets=[0, 0, 0, 0] error=false columns=1 content=2826 viewport=1136 captionDp=65.5 heroDp=150.0",
+    "320x568 d=2.0 font=1.5 insets=[8, 28, 8, 24] error=false columns=1 content=2741 viewport=1032 captionDp=65.5 heroDp=150.0",
+    "320x568 d=3.0 font=1.0 insets=[0, 0, 0, 0] error=false columns=2 content=1990 viewport=1704 captionDp=49.333332 heroDp=150.0",
+    "320x568 d=3.0 font=1.0 insets=[8, 28, 8, 24] error=false columns=2 content=2008 viewport=1548 captionDp=49.333332 heroDp=150.0",
+    "320x568 d=3.0 font=1.3 insets=[0, 0, 0, 0] error=false columns=1 content=4093 viewport=1704 captionDp=58.666668 heroDp=150.0",
+    "320x568 d=3.0 font=1.3 insets=[8, 28, 8, 24] error=false columns=1 content=3971 viewport=1548 captionDp=58.666668 heroDp=150.0",
+    "320x568 d=3.0 font=1.5 insets=[0, 0, 0, 0] error=false columns=1 content=4226 viewport=1704 captionDp=65.0 heroDp=150.0",
+    "320x568 d=3.0 font=1.5 insets=[8, 28, 8, 24] error=false columns=1 content=4104 viewport=1548 captionDp=65.0 heroDp=150.0",
+    "360x640 d=1.0 font=1.0 insets=[0, 0, 0, 0] error=false columns=2 content=703 viewport=640 captionDp=52.0 heroDp=151.0",
+    "360x640 d=1.0 font=1.0 insets=[8, 28, 8, 24] error=false columns=2 content=688 viewport=588 captionDp=52.0 heroDp=150.0",
+    "360x640 d=1.0 font=1.3 insets=[0, 0, 0, 0] error=false columns=1 content=1475 viewport=640 captionDp=62.0 heroDp=151.0",
+    "360x640 d=1.0 font=1.3 insets=[8, 28, 8, 24] error=false columns=1 content=1436 viewport=588 captionDp=62.0 heroDp=150.0",
+    "360x640 d=1.0 font=1.5 insets=[0, 0, 0, 0] error=false columns=1 content=1518 viewport=640 captionDp=68.0 heroDp=151.0",
+    "360x640 d=1.0 font=1.5 insets=[8, 28, 8, 24] error=false columns=1 content=1479 viewport=588 captionDp=68.0 heroDp=150.0",
+    "360x640 d=2.0 font=1.0 insets=[0, 0, 0, 0] error=false columns=2 content=1399 viewport=1280 captionDp=50.0 heroDp=151.0",
+    "360x640 d=2.0 font=1.0 insets=[8, 28, 8, 24] error=false columns=2 content=1367 viewport=1176 captionDp=50.0 heroDp=150.0",
+    "360x640 d=2.0 font=1.3 insets=[0, 0, 0, 0] error=false columns=1 content=2928 viewport=1280 captionDp=59.5 heroDp=151.0",
+    "360x640 d=2.0 font=1.3 insets=[8, 28, 8, 24] error=false columns=1 content=2850 viewport=1176 captionDp=59.5 heroDp=150.0",
+    "360x640 d=2.0 font=1.5 insets=[0, 0, 0, 0] error=false columns=1 content=3014 viewport=1280 captionDp=65.5 heroDp=151.0",
+    "360x640 d=2.0 font=1.5 insets=[8, 28, 8, 24] error=false columns=1 content=2936 viewport=1176 captionDp=65.5 heroDp=150.0",
+    "360x640 d=3.0 font=1.0 insets=[0, 0, 0, 0] error=false columns=2 content=2096 viewport=1920 captionDp=49.333332 heroDp=151.33333",
+    "360x640 d=3.0 font=1.0 insets=[8, 28, 8, 24] error=false columns=2 content=2048 viewport=1764 captionDp=49.333332 heroDp=150.0",
+    "360x640 d=3.0 font=1.3 insets=[0, 0, 0, 0] error=false columns=1 content=4381 viewport=1920 captionDp=58.666668 heroDp=151.33333",
+    "360x640 d=3.0 font=1.3 insets=[8, 28, 8, 24] error=false columns=1 content=4263 viewport=1764 captionDp=58.666668 heroDp=150.0",
+    "360x640 d=3.0 font=1.5 insets=[0, 0, 0, 0] error=false columns=1 content=4514 viewport=1920 captionDp=65.0 heroDp=151.33333",
+    "360x640 d=3.0 font=1.5 insets=[8, 28, 8, 24] error=false columns=1 content=4396 viewport=1764 captionDp=65.0 heroDp=150.0",
+    "390x844 d=1.0 font=1.0 insets=[0, 0, 0, 0] error=false columns=2 content=844 viewport=844 captionDp=52.0 heroDp=260.0",
+    "390x844 d=1.0 font=1.0 insets=[8, 28, 8, 24] error=false columns=2 content=792 viewport=792 captionDp=52.0 heroDp=222.0",
+    "390x844 d=1.0 font=1.3 insets=[0, 0, 0, 0] error=false columns=2 content=844 viewport=844 captionDp=62.0 heroDp=193.0",
+    "390x844 d=1.0 font=1.3 insets=[8, 28, 8, 24] error=false columns=2 content=795 viewport=792 captionDp=62.0 heroDp=157.0",
+    "390x844 d=1.0 font=1.5 insets=[0, 0, 0, 0] error=false columns=1 content=1606 viewport=844 captionDp=68.0 heroDp=164.0",
+    "390x844 d=1.0 font=1.5 insets=[8, 28, 8, 24] error=false columns=1 content=1562 viewport=792 captionDp=68.0 heroDp=157.0",
+    "390x844 d=2.0 font=1.0 insets=[0, 0, 0, 0] error=false columns=2 content=1688 viewport=1688 captionDp=50.0 heroDp=260.0",
+    "390x844 d=2.0 font=1.0 insets=[8, 28, 8, 24] error=false columns=2 content=1584 viewport=1584 captionDp=50.0 heroDp=227.0",
+    "390x844 d=2.0 font=1.3 insets=[0, 0, 0, 0] error=false columns=2 content=1688 viewport=1688 captionDp=59.5 heroDp=199.5",
+    "390x844 d=2.0 font=1.3 insets=[8, 28, 8, 24] error=false columns=2 content=1584 viewport=1584 captionDp=59.5 heroDp=160.5",
+    "390x844 d=2.0 font=1.5 insets=[0, 0, 0, 0] error=false columns=1 content=3191 viewport=1688 captionDp=65.5 heroDp=164.0",
+    "390x844 d=2.0 font=1.5 insets=[8, 28, 8, 24] error=false columns=1 content=3105 viewport=1584 captionDp=65.5 heroDp=157.0",
+    "390x844 d=3.0 font=1.0 insets=[0, 0, 0, 0] error=false columns=2 content=2532 viewport=2532 captionDp=49.333332 heroDp=260.0",
+    "390x844 d=3.0 font=1.0 insets=[8, 28, 8, 24] error=false columns=2 content=2376 viewport=2376 captionDp=49.333332 heroDp=229.0",
+    "390x844 d=3.0 font=1.3 insets=[0, 0, 0, 0] error=false columns=2 content=2532 viewport=2532 captionDp=58.666668 heroDp=201.33333",
+    "390x844 d=3.0 font=1.3 insets=[8, 28, 8, 24] error=false columns=2 content=2376 viewport=2376 captionDp=58.666668 heroDp=164.0",
+    "390x844 d=3.0 font=1.5 insets=[0, 0, 0, 0] error=false columns=1 content=4780 viewport=2532 captionDp=65.0 heroDp=163.66667",
+    "390x844 d=3.0 font=1.5 insets=[8, 28, 8, 24] error=false columns=1 content=4642 viewport=2376 captionDp=65.0 heroDp=157.0",
+    "412x892 d=1.0 font=1.0 insets=[0, 0, 0, 0] error=false columns=2 content=892 viewport=892 captionDp=52.0 heroDp=275.0",
+    "412x892 d=1.0 font=1.0 insets=[8, 28, 8, 24] error=false columns=2 content=840 viewport=840 captionDp=52.0 heroDp=253.0",
+    "412x892 d=1.0 font=1.3 insets=[0, 0, 0, 0] error=false columns=2 content=892 viewport=892 captionDp=62.0 heroDp=250.0",
+    "412x892 d=1.0 font=1.3 insets=[8, 28, 8, 24] error=false columns=2 content=840 viewport=840 captionDp=62.0 heroDp=185.0",
+    "412x892 d=1.0 font=1.5 insets=[0, 0, 0, 0] error=false columns=1 content=1667 viewport=892 captionDp=68.0 heroDp=173.0",
+    "412x892 d=1.0 font=1.5 insets=[8, 28, 8, 24] error=false columns=1 content=1622 viewport=840 captionDp=68.0 heroDp=166.0",
+    "412x892 d=2.0 font=1.0 insets=[0, 0, 0, 0] error=false columns=2 content=1784 viewport=1784 captionDp=50.0 heroDp=274.5",
+    "412x892 d=2.0 font=1.0 insets=[8, 28, 8, 24] error=false columns=2 content=1680 viewport=1680 captionDp=50.0 heroDp=256.5",
+    "412x892 d=2.0 font=1.3 insets=[0, 0, 0, 0] error=false columns=2 content=1784 viewport=1784 captionDp=59.5 heroDp=255.0",
+    "412x892 d=2.0 font=1.3 insets=[8, 28, 8, 24] error=false columns=2 content=1680 viewport=1680 captionDp=59.5 heroDp=190.0",
+    "412x892 d=2.0 font=1.5 insets=[0, 0, 0, 0] error=false columns=1 content=3316 viewport=1784 captionDp=65.5 heroDp=173.0",
+    "412x892 d=2.0 font=1.5 insets=[8, 28, 8, 24] error=false columns=1 content=3227 viewport=1680 captionDp=65.5 heroDp=166.5",
+    "412x892 d=3.0 font=1.0 insets=[0, 0, 0, 0] error=false columns=2 content=2676 viewport=2676 captionDp=49.333332 heroDp=274.66666",
+    "412x892 d=3.0 font=1.0 insets=[8, 28, 8, 24] error=false columns=2 content=2520 viewport=2520 captionDp=49.333332 heroDp=258.0",
+    "412x892 d=3.0 font=1.3 insets=[0, 0, 0, 0] error=false columns=2 content=2676 viewport=2676 captionDp=58.666668 heroDp=257.66666",
+    "412x892 d=3.0 font=1.3 insets=[8, 28, 8, 24] error=false columns=2 content=2520 viewport=2520 captionDp=58.666668 heroDp=193.0",
+    "412x892 d=3.0 font=1.5 insets=[0, 0, 0, 0] error=false columns=1 content=4963 viewport=2676 captionDp=65.0 heroDp=173.0",
+    "412x892 d=3.0 font=1.5 insets=[8, 28, 8, 24] error=false columns=1 content=4829 viewport=2520 captionDp=65.0 heroDp=166.33333",
+    "480x960 d=1.0 font=1.0 insets=[0, 0, 0, 0] error=false columns=2 content=960 viewport=960 captionDp=52.0 heroDp=305.0",
+    "480x960 d=1.0 font=1.0 insets=[8, 28, 8, 24] error=false columns=2 content=908 viewport=908 captionDp=52.0 heroDp=267.0",
+    "480x960 d=1.0 font=1.3 insets=[0, 0, 0, 0] error=false columns=2 content=960 viewport=960 captionDp=62.0 heroDp=264.0",
+    "480x960 d=1.0 font=1.3 insets=[8, 28, 8, 24] error=false columns=2 content=908 viewport=908 captionDp=62.0 heroDp=226.0",
+    "480x960 d=1.0 font=1.5 insets=[0, 0, 0, 0] error=false columns=2 content=960 viewport=960 captionDp=68.0 heroDp=237.0",
+    "480x960 d=1.0 font=1.5 insets=[8, 28, 8, 24] error=false columns=2 content=935 viewport=908 captionDp=68.0 heroDp=195.0",
+    "480x960 d=2.0 font=1.0 insets=[0, 0, 0, 0] error=false columns=2 content=1920 viewport=1920 captionDp=50.0 heroDp=309.5",
+    "480x960 d=2.0 font=1.0 insets=[8, 28, 8, 24] error=false columns=2 content=1816 viewport=1816 captionDp=50.0 heroDp=271.0",
+    "480x960 d=2.0 font=1.3 insets=[0, 0, 0, 0] error=false columns=2 content=1920 viewport=1920 captionDp=59.5 heroDp=270.0",
+    "480x960 d=2.0 font=1.3 insets=[8, 28, 8, 24] error=false columns=2 content=1816 viewport=1816 captionDp=59.5 heroDp=231.5",
+    "480x960 d=2.0 font=1.5 insets=[0, 0, 0, 0] error=false columns=2 content=1920 viewport=1920 captionDp=65.5 heroDp=243.0",
+    "480x960 d=2.0 font=1.5 insets=[8, 28, 8, 24] error=false columns=2 content=1859 viewport=1816 captionDp=65.5 heroDp=195.0",
+    "480x960 d=3.0 font=1.0 insets=[0, 0, 0, 0] error=false columns=2 content=2880 viewport=2880 captionDp=49.333332 heroDp=311.66666",
+    "480x960 d=3.0 font=1.0 insets=[8, 28, 8, 24] error=false columns=2 content=2724 viewport=2724 captionDp=49.333332 heroDp=271.66666",
+    "480x960 d=3.0 font=1.3 insets=[0, 0, 0, 0] error=false columns=2 content=2880 viewport=2880 captionDp=58.666668 heroDp=273.33334",
+    "480x960 d=3.0 font=1.3 insets=[8, 28, 8, 24] error=false columns=2 content=2724 viewport=2724 captionDp=58.666668 heroDp=233.33333",
+    "480x960 d=3.0 font=1.5 insets=[0, 0, 0, 0] error=false columns=2 content=2880 viewport=2880 captionDp=65.0 heroDp=245.66667",
+    "480x960 d=3.0 font=1.5 insets=[8, 28, 8, 24] error=false columns=2 content=2784 viewport=2724 captionDp=65.0 heroDp=195.0",
+    "600x960 d=1.0 font=1.0 insets=[0, 0, 0, 0] error=false columns=2 content=971 viewport=960 captionDp=52.0 heroDp=252.0",
+    "600x960 d=1.0 font=1.0 insets=[8, 28, 8, 24] error=false columns=2 content=954 viewport=908 captionDp=52.0 heroDp=245.0",
+    "600x960 d=1.0 font=1.3 insets=[0, 0, 0, 0] error=false columns=2 content=1012 viewport=960 captionDp=62.0 heroDp=252.0",
+    "600x960 d=1.0 font=1.3 insets=[8, 28, 8, 24] error=false columns=2 content=995 viewport=908 captionDp=62.0 heroDp=245.0",
+    "600x960 d=1.0 font=1.5 insets=[0, 0, 0, 0] error=false columns=2 content=1039 viewport=960 captionDp=68.0 heroDp=252.0",
+    "600x960 d=1.0 font=1.5 insets=[8, 28, 8, 24] error=false columns=2 content=1022 viewport=908 captionDp=68.0 heroDp=245.0",
+    "600x960 d=2.0 font=1.0 insets=[0, 0, 0, 0] error=false columns=2 content=1932 viewport=1920 captionDp=50.0 heroDp=252.0",
+    "600x960 d=2.0 font=1.0 insets=[8, 28, 8, 24] error=false columns=2 content=1903 viewport=1816 captionDp=50.0 heroDp=245.5",
+    "600x960 d=2.0 font=1.3 insets=[0, 0, 0, 0] error=false columns=2 content=2011 viewport=1920 captionDp=59.5 heroDp=252.0",
+    "600x960 d=2.0 font=1.3 insets=[8, 28, 8, 24] error=false columns=2 content=1982 viewport=1816 captionDp=59.5 heroDp=245.5",
+    "600x960 d=2.0 font=1.5 insets=[0, 0, 0, 0] error=false columns=2 content=2065 viewport=1920 captionDp=65.5 heroDp=252.0",
+    "600x960 d=2.0 font=1.5 insets=[8, 28, 8, 24] error=false columns=2 content=2036 viewport=1816 captionDp=65.5 heroDp=245.5",
+    "600x960 d=3.0 font=1.0 insets=[0, 0, 0, 0] error=false columns=2 content=2895 viewport=2880 captionDp=49.333332 heroDp=252.0",
+    "600x960 d=3.0 font=1.0 insets=[8, 28, 8, 24] error=false columns=2 content=2849 viewport=2724 captionDp=49.333332 heroDp=245.33333",
+    "600x960 d=3.0 font=1.3 insets=[0, 0, 0, 0] error=false columns=2 content=3010 viewport=2880 captionDp=58.666668 heroDp=252.0",
+    "600x960 d=3.0 font=1.3 insets=[8, 28, 8, 24] error=false columns=2 content=2964 viewport=2724 captionDp=58.666668 heroDp=245.33333",
+    "600x960 d=3.0 font=1.5 insets=[0, 0, 0, 0] error=false columns=2 content=3093 viewport=2880 captionDp=65.0 heroDp=252.0",
+    "600x960 d=3.0 font=1.5 insets=[8, 28, 8, 24] error=false columns=2 content=3047 viewport=2724 captionDp=65.0 heroDp=245.33333",
+    "390x844 d=3.0 font=1.0 insets=[0, 0, 0, 0] error=true columns=2 content=2532 viewport=2532 captionDp=49.333332 heroDp=217.0",
+    "320x568 d=2.0 font=1.3 insets=[8, 28, 8, 24] error=true columns=1 content=2779 viewport=1032 captionDp=59.5 heroDp=150.0"
+  ],
+  "assets": [
+    {
+      "path": "app/src/main/res/drawable-nodpi/home_portrait_hero_083.png",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "b3e891fedce63ca27189a52ccb72344a6b38159b1d4a69f11917c55cb919d208"
+    },
+    {
+      "path": "app/src/main/res/drawable-nodpi/home_portrait_campaign_083.png",
+      "width": 1691,
+      "height": 930,
+      "sha256": "e108a320baed27dd8ab23a26ccf3ba49437edd9b3973f472bdbe9f5d889458ae"
+    },
+    {
+      "path": "app/src/main/res/drawable-nodpi/home_portrait_towers_083.png",
+      "width": 1691,
+      "height": 930,
+      "sha256": "fab8fcf24ea29229887b732703c186a6a6e374991bd1665c269df160aa62fafe"
+    },
+    {
+      "path": "app/src/main/res/drawable-nodpi/home_portrait_ffa_083.png",
+      "width": 1691,
+      "height": 930,
+      "sha256": "74802c19a115f7bb12007453caec085660a9409eecec6aaacd6b66a5c96f273a"
+    },
+    {
+      "path": "app/src/main/res/drawable-nodpi/home_portrait_multiplayer_083.png",
+      "width": 1691,
+      "height": 930,
+      "sha256": "236a9c074d513e410fd1d29d9fdcdb3201b016dbc4b5ca035669f8be65d722bb"
+    }
+  ],
+  "sources": [
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/HomeModesView.java",
+      "sha256": "de2dd450e20a084f018d975c833aaa8f1eaedc3e2a9f8c1f9eae3d4f04620572"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/PortraitHomeLayout.java",
+      "sha256": "9840a14bc3a0a00d1719cc2f7d9728f99a8e27080af638b475c770c9e59e8c93"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/Oswald.ttf",
+      "sha256": "5b38c246e255a12f5712d640d56bcced0472466fc68983d2d0410ec0457c2817"
+    },
+    {
+      "path": "tools/test-portrait-home-layout-083.py",
+      "sha256": "b11ad65d06a613529d8b061863db5b0e520c295f2b82db9e01848f59b6727ffc"
+    },
+    {
+      "path": "app/src/main/res/drawable-nodpi/home_portrait_hero_083.png",
+      "sha256": "b3e891fedce63ca27189a52ccb72344a6b38159b1d4a69f11917c55cb919d208"
+    },
+    {
+      "path": "app/src/main/res/drawable-nodpi/home_portrait_campaign_083.png",
+      "sha256": "e108a320baed27dd8ab23a26ccf3ba49437edd9b3973f472bdbe9f5d889458ae"
+    },
+    {
+      "path": "app/src/main/res/drawable-nodpi/home_portrait_towers_083.png",
+      "sha256": "fab8fcf24ea29229887b732703c186a6a6e374991bd1665c269df160aa62fafe"
+    },
+    {
+      "path": "app/src/main/res/drawable-nodpi/home_portrait_ffa_083.png",
+      "sha256": "74802c19a115f7bb12007453caec085660a9409eecec6aaacd6b66a5c96f273a"
+    },
+    {
+      "path": "app/src/main/res/drawable-nodpi/home_portrait_multiplayer_083.png",
+      "sha256": "236a9c074d513e410fd1d29d9fdcdb3201b016dbc4b5ca035669f8be65d722bb"
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "version": "0.84",
+  "passed": true,
+  "emulatorUsed": false,
+  "actualAndroidViewsExecuted": false,
+  "actualNativeEngineExecuted": false,
+  "actualJavaModelExecuted": true,
+  "checks": [
+    "Actual pure-Java model preserves real map/counts, hide-empty, ordering, blocked states and codepoint bounds",
+    "Actual existing list parser and HTTP request publish loading and true official rows to native landing",
+    "Native JOIN calls the existing session with the exact advertised ID and current saved base name",
+    "Full/unlisted/malformed rooms cannot bypass existing Join authority",
+    "Native Hide Empty uses the existing checkbox/localStorage preference and retains unknown capacity",
+    "Fetch failure and session-start failure stay on native landing with truthful retry errors",
+    "Native view follows approved map-first rows, CheckBox and suffix with no webpage/IP/version headings",
+    "Actual Java IME Done listener retains error focus/keyboard on failed save and dismisses only after success",
+    "Native player-name field requests inline Done with no extract or fullscreen editor, leaving room IME untouched",
+    "Activity fences stale landing callbacks, keeps opaque overlay until session start and uses IME-first Back",
+    "Original socket/HTTP transport, native profile validation and room/game asset source are frozen versus083"
+  ],
+  "checksPassed": 11,
+  "model": {
+    "passed": true,
+    "assertions": 22
+  },
+  "scope": "Actual Java lobby model and actual JS parser/native landing bridge in local VM with synthetic official responses; native View source/API compilation checked separately. No Android rendering, touch, IME or gameplay claim.",
+  "sources": [
+    {
+      "path": "app/src/main/assets/multiplayer/index.html",
+      "sha256": "a0ae7ee7fa7d4cab2245646304fe2491c0128af17ac9cedc5d2cc885ba4ef0ee"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/lobby-ui.js",
+      "sha256": "252d4cd03923b6705af8aac499d418bf0ba1679c46fed8edebe19bcac8364a07"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/multiplayer.css",
+      "sha256": "fdb122b4b0427bd209ebb2f56285846f4a86dd2b993b1aa1d5383675b433a549"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/native-landing.js",
+      "sha256": "4094de25fa41b27cbd90c10ecfa368e5c391b09428832281efb5ca211680f6c7"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MultiplayerActivity.java",
+      "sha256": "a8af69840c21bc97242c0009a7380fe3db6181dd83e300dd591eed679f42d40d"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MultiplayerLobbyModel.java",
+      "sha256": "64dc95ff14e08f19dd3aa1b99fd40e8c53c8cea128073ff77c32e71ad8b14e97"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MultiplayerLobbyView.java",
+      "sha256": "c58e0a367a8448447231e2ed09ae689143f7939097846bcf0ff2a117b5916c7c"
+    },
+    {
+      "path": "tools/test-multiplayer-native-landing-084.cjs",
+      "sha256": "c7349d5b2ac8b6a0365db5f615768a99b1fd20ad295f59c696ce38ff413ff332"
+    },
+    {
+      "path": "tools/test-multiplayer-native-landing-084.java",
+      "sha256": "8c909ead3a336ac935a6ae3df49d51cb6f1f8eb038e659fd7846fe020d7e393b"
+    }
+  ],
+  "fatal": null
+}

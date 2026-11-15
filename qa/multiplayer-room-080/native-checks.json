@@ -1,0 +1,102 @@
+{
+  "version": "0.80",
+  "passed": true,
+  "emulatorUsed": false,
+  "actualNativeEngineExecuted": false,
+  "actualHostCppHelperExecuted": true,
+  "nativeMapGeneratorAndNetworkHandlersStubbed": true,
+  "checks": [
+    "Actual-room lifecycle creates a generation",
+    "Ready snapshot exports actual local slot and position",
+    "Actual roster and native options are exported without client download assertions",
+    "Ordinary player can request ready",
+    "Ready calls official request and does not fake host confirmation",
+    "Ready rejected during local download",
+    "Ready rejected before identity exists",
+    "Ready respects native full-slot/opposing-team checks",
+    "Own team change uses official reset and SendTeamRequest",
+    "Host team lock is enforced",
+    "Team that would leave one opposing team is excluded",
+    "Spectator uses official request without mutating slot",
+    "Spectator requires an available native slot",
+    "Host spectator lock is enforced",
+    "Own host slot cannot be moved to spectator",
+    "UTF8 chat uses official sender and native self echo",
+    "Host-only chat preserves official prefix and private echo policy",
+    "Chat reserves native host-prefix bytes",
+    "Disabled free chat cannot send",
+    "Native spam mute cannot be bypassed",
+    "NUL, overlong, surrogate and out-of-range UTF8 are rejected",
+    "Blank, control and incomplete UTF8 messages are rejected",
+    "Stale generation cannot send",
+    "Unrendered/world transition cannot send",
+    "Game start closes the room action guard",
+    "Repeated same-generation nonce sends chat once",
+    "Accepted ACK is followed by a fresh observed revision",
+    "Blind-simple lobby exposes only local row and native-safe aggregate counts",
+    "Spectator-only own slot retains generation and official auto-ready policy",
+    "Actual native message feed is sequenced and bounded",
+    "Actual player messages carry native display identity",
+    "Room exit clears messages, pending input and dedupe session",
+    "Rejoin gets a distinct generation",
+    "Actual native RGB dimensions and channels are exported uncropped",
+    "Exported file preserves every actual RGB byte and row order",
+    "Repeated identical native previews reuse one binary revision",
+    "Preview metadata identifies actual room generation and map hash",
+    "Changed hash invalidates a same-named prior map and its RGB file",
+    "Downloaded custom-map pixels are captured without map-name thumbnail lookup",
+    "Changed player colour mapping invalidates stale preview pixels",
+    "Changed start-position mapping invalidates stale preview pixels",
+    "Incomplete custom-map download cannot expose a previous ready image",
+    "Capture during download is rejected",
+    "Blind-simple client rooms fail closed and remove exported pixels",
+    "Hidden native map cannot be exported through capture",
+    "Zero image dimensions are rejected",
+    "Oversized native image is rejected before copying",
+    "Non-RGB native image is rejected",
+    "Incomplete RGB byte count is rejected",
+    "Official empty/question-mark fallback does not become an exported map image",
+    "Actual room exit removes cached RGB and preview file",
+    "All079 non-preview translation units/bootstrap/protocol bytes are unchanged",
+    "Only successful official generator output is captured; getter cannot generate maps or expose placeholder images"
+  ],
+  "checksPassed": 53,
+  "sources": [
+    {
+      "path": "tools/test-multiplayer-room-native-080.py",
+      "sha256": "7abefd0c7721a6fba74935207ba97fc997f9c248357798b9a533277edd0c339f"
+    },
+    {
+      "path": "tools/test-multiplayer-room-native-079.py",
+      "sha256": "ae542b40d634d43cb7013def23f0e4b270075c797c936bf83a8ec0949c87f432"
+    },
+    {
+      "path": "vendor/multiplayer/native-080/mobile-room-map-preview.cpp.inc",
+      "sha256": "e1b785ae5e5d38ebfce173dc739ec388598af980722bacb6880e623d835f6544"
+    },
+    {
+      "path": "vendor/multiplayer/native-080/mobile-room-native.cpp.inc",
+      "sha256": "eb35b040cf1ce8430ae9fb1887f90703f5874707fa0c576546ed1df2e3204a83"
+    },
+    {
+      "path": "vendor/multiplayer/native-080/multiint.cpp",
+      "sha256": "ef576f51f0b1bf9c8a40ade00d68331e278b673ba0cefeefbff72a58b12fdda0"
+    },
+    {
+      "path": "vendor/multiplayer/native-080/quickjs_backend.cpp",
+      "sha256": "6c82732eccddeef3e8c9e9d2ac497777ca7834ad73376b6931b378ba520ff0ed"
+    },
+    {
+      "path": "tools/prepare-multiplayer-native-080.py",
+      "sha256": "8fdbc79927b09e757c745e91f1eba7895e1b091edb250f7db22a68629211a90a"
+    },
+    {
+      "path": "tools/build-multiplayer-native-080.py",
+      "sha256": "40f86ca0efe12ba5828543410c78c5a687dc7811199d6f9377bb41a6015546b4"
+    },
+    {
+      "path": "tools/integrate-multiplayer-native-080.py",
+      "sha256": "f6b09d73d0cba08d961c50945ac2f1defb0fca670b49a9976e2d7d6573d2f983"
+    }
+  ]
+}

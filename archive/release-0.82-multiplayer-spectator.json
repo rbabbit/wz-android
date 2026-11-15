@@ -1,0 +1,299 @@
+{
+  "version": "0.82",
+  "versionCode": 82,
+  "candidateAPK_SHA256": "fecd9bfb968cf0a96f0e8bf978c8616dfdbe5057bf2c83ee3b5971aff82bf702",
+  "scope": "Small exact Home tagline; Multiplayer spectator match entry, advancing rendered frames, camera, read-only capabilities and returns. Official data, protocol, simulation and all other modes/shared UI frozen.",
+  "exactAPKVerification": {
+    "emulatorProof": {
+      "path": "qa/multiplayer-spectator-082/verification.json",
+      "bytes": 13429,
+      "sha256": "b258d3fc4115d02a8443cca4979e58a181a8a99c4221f49e4efda656b4162ee5"
+    },
+    "buildLog": {
+      "path": "qa/multiplayer-spectator-082/build.log",
+      "bytes": 2783,
+      "sha256": "df8d1e8ef8c85d696709e5513f7e638a231eaa0b152793378ab4c8826c54eeba"
+    },
+    "focusedProofs": [
+      {
+        "path": "qa/multiplayer-spectator-082/home-layout.json",
+        "bytes": 8079,
+        "sha256": "155d68bf7851b4769fbbaebb7557c410632f8226f8c8ea120715937a3189a813"
+      },
+      {
+        "path": "qa/multiplayer-spectator-082/ui-host.json",
+        "bytes": 2691,
+        "sha256": "9417ed8538336095536bdc4e7f5785fcae5905ab6983455fe9f96d263745115a"
+      },
+      {
+        "path": "qa/multiplayer-spectator-082/native-checks.json",
+        "bytes": 2882,
+        "sha256": "43da74d2095253dfe42453fdd1d44b2016decf231b710eb2fdb26a04e63e1202"
+      },
+      {
+        "path": "qa/multiplayer-spectator-082/markup-host.json",
+        "bytes": 627,
+        "sha256": "2f63dcab1253b6039898d39c369165cc01a798d38caf657a2986b9d14e94cd88"
+      }
+    ],
+    "focusedAssertionCounts": {
+      "qa/multiplayer-spectator-082/home-layout.json": 5,
+      "qa/multiplayer-spectator-082/ui-host.json": 14,
+      "qa/multiplayer-spectator-082/native-checks.json": 21,
+      "qa/multiplayer-spectator-082/markup-host.json": 1
+    },
+    "device": "emulator-5558",
+    "checks": {
+      "exactDeliveryAPK": true,
+      "homeTagline": true,
+      "spectatorPrestartAndMatch": true,
+      "spectatorFramesAdvance": true,
+      "spectatorCamera": true,
+      "spectatorReadOnly": true,
+      "spectatorMenusAndReturn": true,
+      "ordinaryPlayerPermissions": true
+    },
+    "verificationScope": "Exact installed APK on existing emulator: actual Home normal/compact/restored, official headless private pre-start Spectate and match, advancing frames/time, touch pan/rotate/zoom/tilt/minimap, JS and native order refusal, Music and repeated leave/cancel/return; normal player owned menus, actual truck selection and Android-generated quick pan. Screenshots inspected. No desktop input after headless request.",
+    "limitations": [
+      "Black ground terrain remains in this emulator for both normal and spectator matches, also present in081; underlying graphics cause and physical-phone rendering unverified.",
+      "No physical phone, full public multiplayer match, speaker audition or joining already-running stock matches tested.",
+      "Private observer fixture uses two Cobra bots and official admin /team command after pre-start Spectate; generated profile flushed using existing IDBFS API. No fake Ready, gameplay orders, native player indices or simulation states injected.",
+      "Slow CDP normal-player drags became intentional box-selection; focused Android-generated quick swipe verified actual normal camera movement. Initial parallel600MB APK pull interfered with one fixture connection; exact installed hash was instead read in Android before the successful serial run.",
+      "No broad Towers, Campaign, FFA or full production/build/save regression run; their sources and assets remain frozen."
+    ],
+    "exactInstalledAPKVerified": true,
+    "emulatorUsed": true
+  },
+  "fallback": {
+    "path": "qa/multiplayer-spectator-082/fallback.json",
+    "bytes": 465,
+    "sha256": "d0df72f0b19bbeed92753ee2aecb442346da410e9eb87dd7108aba869ea4500f"
+  },
+  "sourcePreservation": {
+    "changedBaselineSources": [
+      {
+        "path": "AGENTS.md",
+        "beforeSHA256": "d5b50e6fa4e1caab593f0086754544ed636244522e4d6536b18be2363b0ccc7b",
+        "sha256": "b165e68f2796ba154de7ad8dfeed11f96a67ba8c499c37ef8400a1a32e6fcfcf"
+      },
+      {
+        "path": "README-WARZONE-TOWERS.md",
+        "beforeSHA256": "928b7b63a5ae7b8272e80bd4ee4815050f66a0f78f95f347643b26866cb19a45",
+        "sha256": "2aa9f29a2359b857186858b25b9539371b943543c7791af1a582556d7645ef2a"
+      },
+      {
+        "path": "README.md",
+        "beforeSHA256": "f64f9be4304f257926407f3bbf6b4dee18df6b2ff55935260fc152b076cd03b2",
+        "sha256": "ee60b6e761a918f6440b55a0ceb2c1addba6e736df346d37e7dffe7e77aaae12"
+      },
+      {
+        "path": "app/build.gradle.kts",
+        "beforeSHA256": "74688b369aea7a9a93040f2114a6b7ce9750a90e74ddf63e376ef5f2b2377d86",
+        "sha256": "82b88a636c91760dd4e0d932fc039d51097ef1a489176fe4000ce6ce3b40508c"
+      },
+      {
+        "path": "app/src/main/assets/multiplayer/mobile-controls.js",
+        "beforeSHA256": "aa5e075fd4b0ad4e076e68b4ff57cdeaa285d8c785c5c023e6ccda15e25cca7e",
+        "sha256": "299c4e37960a4a25ba3ec1a8acc634e8df8f55011aac58bcf3efba84149cd2d5"
+      },
+      {
+        "path": "app/src/main/assets/multiplayer/multiplayer.css",
+        "beforeSHA256": "bee48cdb57b9761bf7d7ee4dcedd6e290e23ca000d147b9fda9fe179c9a3706a",
+        "sha256": "e8b5adf7f5901c31c661b6e8c3d8bdb4f9bfe0a90d8aed9a3b222006ef3031f3"
+      },
+      {
+        "path": "app/src/main/assets/multiplayer/native-ui-adapter.js",
+        "beforeSHA256": "5e7b0d39c0ea2f8fbf5ede587fcd229fb7d65c842f5d8ad88e12edde4c8489a6",
+        "sha256": "f8f984d1307937ef2adc220951682b53fc25b5d7ad856c9ce29a8d4f8b258d3e"
+      },
+      {
+        "path": "app/src/main/assets/multiplayer/session.js",
+        "beforeSHA256": "f251053b8433c2d99f4ab4ae1a3b223c529b6e8862c41ef1669eb24ce4fbf2f2",
+        "sha256": "8d2ae8d1f94d184fb2f0eb0c4ea9b3253053e3150c5d9d26024a95dcfb33ac4b"
+      },
+      {
+        "path": "app/src/main/assets/multiplayer/warzone2100.js",
+        "beforeSHA256": "ddae0cc92a429989516c0a9a0580069ab3c19146a0686c7482a2d9d06fe2b924",
+        "sha256": "834f87b00f87f32630360bb15bf818ad7d63a91d0ccbb12018a9d3a53bc43a76"
+      },
+      {
+        "path": "app/src/main/assets/multiplayer/warzone2100.wasm",
+        "beforeSHA256": "5fe66b075ce0802c0536abd204f2484a1bd849e028205dcf9118da50934b4fe5",
+        "sha256": "1d050920393ab7be2d7871a8a269e5d5487b567bf9e46457ecb1104553c38d0d"
+      },
+      {
+        "path": "app/src/main/java/com/rbabbit/blocknight/warzone/HomeModesView.java",
+        "beforeSHA256": "29186a01666698f761531d4a7a217d2db0fb770f4e4d6006ee5a64288290b9bc",
+        "sha256": "e8721a43e140513176e2dcaf77946db340b182b0c60e7e03c49cc3303084c112"
+      },
+      {
+        "path": "design-qa.md",
+        "beforeSHA256": "27a9dccd8b00c7fef42a585cc4475a008873e925e368c58931ddf9f60e3eef43",
+        "sha256": "b144541a201e80783d823076bf17a878e86a23cec7b7d3cc3f3069b49032e846"
+      },
+      {
+        "path": "docs/KNOWN-ISSUES.md",
+        "beforeSHA256": "e11217184defb0871c0be008f9ff9c80bf35ae53adaacfe8c24013961325725f",
+        "sha256": "ae26c429b6daf1de783e52b560cf711e43beb9e9ef82fc18be6e4c5eb21efb2b"
+      },
+      {
+        "path": "vendor/multiplayer/README.md",
+        "beforeSHA256": "7bb7e05dc4155b4cbe9a53ab766cacbf90c2dd163ad3a4a6667937f1bc0112aa",
+        "sha256": "68bf222835b2f0377bd49c6113ad6e01c807a27e0bea0b9cbd5e6a1ef8024c53"
+      }
+    ],
+    "addedSources": [
+      "archive/release-0.82-multiplayer-spectator.json",
+      "docs/releases/0.82-multiplayer-spectator.md",
+      "qa/multiplayer-spectator-082/baseline-headless-match.json",
+      "qa/multiplayer-spectator-082/baseline-headless-match.png",
+      "qa/multiplayer-spectator-082/baseline-logcat.txt",
+      "qa/multiplayer-spectator-082/build.log",
+      "qa/multiplayer-spectator-082/compile-quickjs_backend.cpp.log",
+      "qa/multiplayer-spectator-082/delivery-home-compact.json",
+      "qa/multiplayer-spectator-082/delivery-home-compact.png",
+      "qa/multiplayer-spectator-082/delivery-home-restored.json",
+      "qa/multiplayer-spectator-082/delivery-home-restored.png",
+      "qa/multiplayer-spectator-082/delivery-home.json",
+      "qa/multiplayer-spectator-082/delivery-home.png",
+      "qa/multiplayer-spectator-082/delivery-observer-after-music.json",
+      "qa/multiplayer-spectator-082/delivery-observer-after-music.png",
+      "qa/multiplayer-spectator-082/delivery-observer-before.json",
+      "qa/multiplayer-spectator-082/delivery-observer-before.png",
+      "qa/multiplayer-spectator-082/delivery-observer-minimap.json",
+      "qa/multiplayer-spectator-082/delivery-observer-minimap.png",
+      "qa/multiplayer-spectator-082/delivery-observer-music.json",
+      "qa/multiplayer-spectator-082/delivery-observer-music.png",
+      "qa/multiplayer-spectator-082/delivery-observer-pan.json",
+      "qa/multiplayer-spectator-082/delivery-observer-pan.png",
+      "qa/multiplayer-spectator-082/delivery-observer-renderer.json",
+      "qa/multiplayer-spectator-082/delivery-observer-return-cancel.json",
+      "qa/multiplayer-spectator-082/delivery-observer-return-cancel.png",
+      "qa/multiplayer-spectator-082/delivery-observer-returned.json",
+      "qa/multiplayer-spectator-082/delivery-observer-returned.png",
+      "qa/multiplayer-spectator-082/delivery-observer-rotate.json",
+      "qa/multiplayer-spectator-082/delivery-observer-rotate.png",
+      "qa/multiplayer-spectator-082/delivery-observer-selected-retry.json",
+      "qa/multiplayer-spectator-082/delivery-observer-selected-retry.png",
+      "qa/multiplayer-spectator-082/delivery-observer-tilt.json",
+      "qa/multiplayer-spectator-082/delivery-observer-tilt.png",
+      "qa/multiplayer-spectator-082/delivery-observer-world-retry.json",
+      "qa/multiplayer-spectator-082/delivery-observer-world-retry.png",
+      "qa/multiplayer-spectator-082/delivery-observer-zoom.json",
+      "qa/multiplayer-spectator-082/delivery-observer-zoom.png",
+      "qa/multiplayer-spectator-082/delivery-player-before.json",
+      "qa/multiplayer-spectator-082/delivery-player-before.png",
+      "qa/multiplayer-spectator-082/delivery-player-manufacturing.json",
+      "qa/multiplayer-spectator-082/delivery-player-manufacturing.png",
+      "qa/multiplayer-spectator-082/delivery-player-pan-adb.json",
+      "qa/multiplayer-spectator-082/delivery-player-pan-adb.png",
+      "qa/multiplayer-spectator-082/delivery-player-queue.json",
+      "qa/multiplayer-spectator-082/delivery-player-queue.png",
+      "qa/multiplayer-spectator-082/delivery-player-research.json",
+      "qa/multiplayer-spectator-082/delivery-player-research.png",
+      "qa/multiplayer-spectator-082/delivery-player-returned-real.json",
+      "qa/multiplayer-spectator-082/delivery-player-returned-real.png",
+      "qa/multiplayer-spectator-082/delivery-player-trucks.json",
+      "qa/multiplayer-spectator-082/delivery-player-trucks.png",
+      "qa/multiplayer-spectator-082/fallback.json",
+      "qa/multiplayer-spectator-082/home-layout.json",
+      "qa/multiplayer-spectator-082/installed-apk.json",
+      "qa/multiplayer-spectator-082/markup-host.json",
+      "qa/multiplayer-spectator-082/native-build.json",
+      "qa/multiplayer-spectator-082/native-capability-host.cpp",
+      "qa/multiplayer-spectator-082/native-checks.json",
+      "qa/multiplayer-spectator-082/native-focused-build.log",
+      "qa/multiplayer-spectator-082/native-prepare.json",
+      "qa/multiplayer-spectator-082/ui-host.json",
+      "qa/multiplayer-spectator-082/verification.json",
+      "tools/build-multiplayer-native-082.py",
+      "tools/home-tagline-live-082.cjs",
+      "tools/integrate-multiplayer-native-082.py",
+      "tools/mp-delivery-live-082.cjs",
+      "tools/mp-live-082.cjs",
+      "tools/mp-spectator-live-082.cjs",
+      "tools/package-multiplayer-spectator-082.py",
+      "tools/prepare-multiplayer-native-082.py",
+      "tools/record-multiplayer-spectator-082.py",
+      "tools/test-home-tagline-082.py",
+      "tools/test-multiplayer-spectator-native-082.py",
+      "tools/test-multiplayer-spectator-ui-082.cjs",
+      "vendor/multiplayer/native-082/README.md",
+      "vendor/multiplayer/native-082/autorevision.cache",
+      "vendor/multiplayer/native-082/display3d.cpp",
+      "vendor/multiplayer/native-082/hci.cpp",
+      "vendor/multiplayer/native-082/main_sdl.cpp",
+      "vendor/multiplayer/native-082/mobile-room-map-preview.cpp.inc",
+      "vendor/multiplayer/native-082/mobile-room-native.cpp.inc",
+      "vendor/multiplayer/native-082/mobile-ui-bootstrap.js",
+      "vendor/multiplayer/native-082/mobile-ui-native.cpp.inc",
+      "vendor/multiplayer/native-082/multiint.cpp",
+      "vendor/multiplayer/native-082/native-ui.patch",
+      "vendor/multiplayer/native-082/netplay_config.h",
+      "vendor/multiplayer/native-082/quickjs_backend.cpp",
+      "vendor/multiplayer/native-082/raw-warzone2100.js",
+      "vendor/multiplayer/native-082/raw-warzone2100.wasm",
+      "vendor/multiplayer/native-082/runtime-integration.json",
+      "vendor/multiplayer/native-082/source-overlays.json",
+      "vendor/multiplayer/native-082/upstream-tags.txt",
+      "vendor/multiplayer/native-082/wrappers.cpp"
+    ],
+    "baselineSourceEntries": 12934,
+    "everyBaselineSourceEntryRetained": true,
+    "allOtherModesSharedUIAndDataFrozen": true,
+    "onlyApprovedHomeAndSpectatorScopeChanged": true,
+    "nativeBuildPerformed": true,
+    "upstreamCommit": "7d3d8e51a61ceee89e6bf672a41337e1a9cd7392",
+    "protocol": [
+      16384,
+      104
+    ],
+    "officialMPDataFrozen": true,
+    "completeNativePatch": {
+      "path": "vendor/multiplayer/native-082/native-ui.patch",
+      "bytes": 71126,
+      "sha256": "c469a23e5b1c47df5d399e30420dcfe68af4b915b4f1ebb95f8bdfb8ee067c8b"
+    },
+    "nativeBuild": {
+      "path": "qa/multiplayer-spectator-082/native-build.json",
+      "bytes": 5069,
+      "sha256": "ed30a5aa3c5013e6bd909a4298f7d5ca1b3b2d4f463ba953411bb06bf37ee087"
+    },
+    "sourceOverlayManifest": {
+      "path": "vendor/multiplayer/native-082/source-overlays.json",
+      "bytes": 1763,
+      "sha256": "e2ea734f1706d4fa842662100f961e91366244d87f11af0f6e77c7bae17d7407"
+    },
+    "integration": {
+      "path": "vendor/multiplayer/native-082/runtime-integration.json",
+      "bytes": 1064,
+      "sha256": "2cefdafea501cb45dea895cda55caeeea1f1a4faa3a15468410d37b171bff0de"
+    },
+    "portableNativeSourcesAndRawPairVerified": true,
+    "wasmBinaryUnmodifiedAfterCompiler": true
+  },
+  "certificateSHA256": "4499efe00477c7c724c06a1dd96f935864548665c13ab5e2bd0a9c0f83f7cb15",
+  "changedAPKMembers": [
+    "AndroidManifest.xml",
+    "assets/multiplayer/mobile-controls.js",
+    "assets/multiplayer/multiplayer.css",
+    "assets/multiplayer/native-ui-adapter.js",
+    "assets/multiplayer/session.js",
+    "assets/multiplayer/warzone2100.js",
+    "assets/multiplayer/warzone2100.wasm",
+    "classes3.dex"
+  ],
+  "everyBaselineAPKMemberRetained": true,
+  "allAPKAssetsMatchSource": true,
+  "allOtherEnginesDataLibrariesResourcesAndAssetsFrozen": true,
+  "officialMPDataFrozen": true,
+  "maximumAPKZipGapBytes": 4096,
+  "emulatorUsed": true,
+  "actualAndroidViewsExecuted": true,
+  "offlineHostChecksPassed": true,
+  "buildChecksPassed": true,
+  "packageChecksPassed": true,
+  "githubPublished": false,
+  "vpsChanged": false,
+  "recordedUTC": "2026-11-15T11:15:46.338646+00:00"
+}

@@ -8,13 +8,29 @@
   const settings = Object.freeze({lobbyserver:address, RightClickOrders:'0',
     mouseKeyPan:'2', mouseKeyRotate:'3', MiddleClickRotate:'0', groupmenu:'0', optionsButtonVisibility:'0',music_enabled:'0'});
   const videoNotification = 'campaignVideoNotification';
+  function playerBaseName(value) {
+    let base=String(value??'').trim();
+    while (/\(m\)$/iu.test(base)) base=base.slice(0,-3).trim();
+    return base;
+  }
   function validatePlayerName(value) {
-    const name=String(value??'').trim();
-    if(!name||/[\u0000-\u001f\u007f=;#\\/]/u.test(name)||new TextEncoder().encode(name).length>15)throw new Error('Invalid multiplayer player name.');
-    return name;
+    const raw=String(value??''),base=playerBaseName(raw),points=Array.from(base);
+    if(!base||points.length>12||/[\u0000-\u001f\u007f-\u009f\p{Cf}\p{Zl}\p{Zp}]/u.test(raw)||/\p{Zs}/u.test(raw.replace(/ /gu,''))
+      ||/[\ud800-\udfff]/u.test(base)||/[^A-Za-z0-9 +_\[\]-]/u.test(base.replace(/[^\x00-\x7f]/gu,''))||base.includes('  '))
+      throw new Error('Use a valid player name up to 12 characters.');
+    return base+'(m)';
+  }
+  function storedPlayerName(text) {
+    let section='';
+    for(const line of String(text||'').split(/\r?\n/u)){
+      const heading=line.match(/^\s*\[([^\]]+)\]\s*$/u);if(heading){section=heading[1].trim().toLowerCase();continue;}
+      const setting=section==='general'&&line.match(/^\s*playerName\s*=(.*)$/iu);
+      if(setting){try{return validatePlayerName(Array.from(playerBaseName(setting[1])).slice(0,12).join('').trim());}catch{return 'Player(m)';}}
+    }
+    return 'Player(m)';
   }
   function update(text, playerName) {
-    const applied = playerName === undefined ? settings : {...settings,playerName:validatePlayerName(playerName)};
+    const applied = {...settings,playerName:playerName===undefined?storedPlayerName(text):validatePlayerName(playerName)};
     const lines = String(text || '').replace(/\r\n/g, '\n').split('\n');
     const keys = new Map(Object.keys(applied).map(key => [key.toLowerCase(), key]));
     const found = new Set(), result = [];
@@ -67,5 +83,5 @@
     fs.writeFile(dir + '/config', update(readOptional(fs, dir + '/config'),playerName));
     fs.writeFile(dir + '/notifications.json', updateNotifications(readOptional(fs, dir + '/notifications.json')));
   }
-  globalThis.PcLobbyConfig = Object.freeze({address, update, updateNotifications, apply, validatePlayerName});
+  globalThis.PcLobbyConfig = Object.freeze({address, update, updateNotifications, apply, validatePlayerName, playerBaseName});
 })();

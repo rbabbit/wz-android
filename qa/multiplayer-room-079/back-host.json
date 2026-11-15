@@ -1,0 +1,63 @@
+{
+  "version": "0.79",
+  "passed": true,
+  "emulatorUsed": false,
+  "engineExecuted": false,
+  "actualAndroidKeyboardVerified": false,
+  "scope": "Actual current Java Back/cache/navigation methods executed with inert Android API stubs and JavaScript callbacks that never execute; no device, network or native game run.",
+  "checks": [
+    "Own-lobby Back did not leave activity",
+    "Own-lobby Back queried busy JavaScript",
+    "Session cache was not updated before bridge returned",
+    "Busy JS blocked Back prompt 0",
+    "Back queried JS session state",
+    "Stay left a stale dialog reference",
+    "Busy JS blocked Back prompt 1",
+    "Back queried JS session state",
+    "Stay left a stale dialog reference",
+    "Busy JS blocked Back prompt 2",
+    "Back queried JS session state",
+    "Stay left a stale dialog reference",
+    "Busy JS blocked Back prompt 3",
+    "Back queried JS session state",
+    "Stay left a stale dialog reference",
+    "Return did not clear active session immediately",
+    "Return exposed old game pixels",
+    "Return waited for JS before closing sockets",
+    "Return did not natively navigate to own lobby",
+    "Return depends on a queued JS callback",
+    "Back escaped while lobby navigation was covered",
+    "Wrong document revealed old game",
+    "Committed own lobby remained hidden",
+    "Rejoined session Back failed",
+    "Ended session left a late prompt over lobby",
+    "Non-showing stale dialog swallowed Back",
+    "IME dismissal opened leave prompt",
+    "Back after IME dismissal failed",
+    "Room editor Back does not open Leave while JS is busy",
+    "Room Back carries expected generation",
+    "Room Back consumes chat focus before options",
+    "Second room Back consumes options synchronously",
+    "Room root Back still opens native Leave prompt",
+    "Stale room hide cannot clear newer Back state",
+    "Invalid room generation cannot replace cache",
+    "Matching room hide clears native Back cache",
+    "Room IME remains first Back priority",
+    "IME Back does not depend on any JS callback",
+    "After IME closes editor layer is safely dismissed",
+    "Session teardown clears room Back state before returning",
+    "Inactive session cannot publish room Back state",
+    "Native Return clears room Back state under opaque cover"
+  ],
+  "checksPassed": 42,
+  "sources": [
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MultiplayerActivity.java",
+      "sha256": "312d83cdae3542ecf7c1efad558f2dbba085282d6fdfb22f7b913aca9624e2ab"
+    },
+    {
+      "path": "tools/check-multiplayer-room-back-079.py",
+      "sha256": "df776463c686c5026c2b2b78b0544b9a895a5aaef88701542542172bb01434c3"
+    }
+  ]
+}

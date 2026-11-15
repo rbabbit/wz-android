@@ -1,0 +1,321 @@
+{
+  "version": "0.82",
+  "passed": true,
+  "emulatorUsed": true,
+  "device": "emulator-5558",
+  "candidateAPK_SHA256": "fecd9bfb968cf0a96f0e8bf978c8616dfdbe5057bf2c83ee3b5971aff82bf702",
+  "installedAPK_SHA256": "fecd9bfb968cf0a96f0e8bf978c8616dfdbe5057bf2c83ee3b5971aff82bf702",
+  "checks": {
+    "exactDeliveryAPK": true,
+    "homeTagline": true,
+    "spectatorPrestartAndMatch": true,
+    "spectatorFramesAdvance": true,
+    "spectatorCamera": true,
+    "spectatorReadOnly": true,
+    "spectatorMenusAndReturn": true,
+    "ordinaryPlayerPermissions": true
+  },
+  "verificationScope": "Exact installed APK on existing emulator: actual Home normal/compact/restored, official headless private pre-start Spectate and match, advancing frames/time, touch pan/rotate/zoom/tilt/minimap, JS and native order refusal, Music and repeated leave/cancel/return; normal player owned menus, actual truck selection and Android-generated quick pan. Screenshots inspected. No desktop input after headless request.",
+  "limitations": [
+    "Black ground terrain remains in this emulator for both normal and spectator matches, also present in081; underlying graphics cause and physical-phone rendering unverified.",
+    "No physical phone, full public multiplayer match, speaker audition or joining already-running stock matches tested.",
+    "Private observer fixture uses two Cobra bots and official admin /team command after pre-start Spectate; generated profile flushed using existing IDBFS API. No fake Ready, gameplay orders, native player indices or simulation states injected.",
+    "Slow CDP normal-player drags became intentional box-selection; focused Android-generated quick swipe verified actual normal camera movement. Initial parallel600MB APK pull interfered with one fixture connection; exact installed hash was instead read in Android before the successful serial run.",
+    "No broad Towers, Campaign, FFA or full production/build/save regression run; their sources and assets remain frozen."
+  ],
+  "fixture": {
+    "publicMessagesSent": false,
+    "headlessHost": true,
+    "desktopInputUsedAfterHeadlessRequest": false,
+    "seededGameplay": false
+  },
+  "buildLog": {
+    "path": "qa/multiplayer-spectator-082/build.log",
+    "bytes": 2783,
+    "sha256": "df8d1e8ef8c85d696709e5513f7e638a231eaa0b152793378ab4c8826c54eeba"
+  },
+  "sources": [
+    {
+      "path": "app/src/main/assets/multiplayer/index.html",
+      "bytes": 7610,
+      "sha256": "d4983b2d2d568b5c599d97c53f01a6c80638204e68501babb76dafe74d9f9aad"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/multiplayer.css",
+      "bytes": 14941,
+      "sha256": "e8b5adf7f5901c31c661b6e8c3d8bdb4f9bfe0a90d8aed9a3b222006ef3031f3"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/session.js",
+      "bytes": 25935,
+      "sha256": "8d2ae8d1f94d184fb2f0eb0c4ea9b3253053e3150c5d9d26024a95dcfb33ac4b"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/native-ui-adapter.js",
+      "bytes": 14601,
+      "sha256": "f8f984d1307937ef2adc220951682b53fc25b5d7ad856c9ce29a8d4f8b258d3e"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/mobile-controls.js",
+      "bytes": 29331,
+      "sha256": "299c4e37960a4a25ba3ec1a8acc634e8df8f55011aac58bcf3efba84149cd2d5"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/warzone2100.js",
+      "bytes": 726083,
+      "sha256": "834f87b00f87f32630360bb15bf818ad7d63a91d0ccbb12018a9d3a53bc43a76"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/warzone2100.wasm",
+      "bytes": 13610603,
+      "sha256": "1d050920393ab7be2d7871a8a269e5d5487b567bf9e46457ecb1104553c38d0d"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/HomeModesView.java",
+      "bytes": 12325,
+      "sha256": "e8721a43e140513176e2dcaf77946db340b182b0c60e7e03c49cc3303084c112"
+    },
+    {
+      "path": "app/build.gradle.kts",
+      "bytes": 1517,
+      "sha256": "82b88a636c91760dd4e0d932fc039d51097ef1a489176fe4000ce6ce3b40508c"
+    },
+    {
+      "path": "tools/package-multiplayer-spectator-082.py",
+      "bytes": 24245,
+      "sha256": "a3f0e51463d21fe7f7c1c662220ac80f3e1d063d255a31432243de657a570aeb"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "qa/multiplayer-spectator-082/installed-apk.json",
+      "bytes": 221,
+      "sha256": "874bbb970686e00d9e20b8c6b8644bb9e74b268bdd94eb3374171faace8a4a26"
+    },
+    {
+      "path": "qa/multiplayer-spectator-082/delivery-observer-selected-retry.json",
+      "bytes": 27744,
+      "sha256": "85e57f6aa2f25efee4e1ac2250bb167f769a52852218e8346a64bff18bafaabd"
+    },
+    {
+      "path": "qa/multiplayer-spectator-082/delivery-observer-selected-retry.png",
+      "bytes": 125136,
+      "sha256": "9c9c28234971d02f899da75640ae7a4cae34295b1a3867a551d0a6c0a68a8dd8"
+    },
+    {
+      "path": "qa/multiplayer-spectator-082/delivery-observer-world-retry.json",
+      "bytes": 21123,
+      "sha256": "3c78bfaa445095b3b683465c32abf4ce973c14b4a1d17635f94bc67ed27b1131"
+    },
+    {
+      "path": "qa/multiplayer-spectator-082/delivery-observer-world-retry.png",
+      "bytes": 108775,
+      "sha256": "6d53bfd86abeefb0f8cf7a0228f7757599be1a29f533140f087c300be5ae636a"
+    },
+    {
+      "path": "qa/multiplayer-spectator-082/delivery-observer-before.json",
+      "bytes": 23880,
+      "sha256": "fb2808750d3db36c087e06e5a2c38fdb62b783116a645063130d9ffd300b66e0"
+    },
+    {
+      "path": "qa/multiplayer-spectator-082/delivery-observer-before.png",
+      "bytes": 627595,
+      "sha256": "a63a649ac400e2a47c3ab72584c557383eb76129d68c1515c93fe882eebe4f36"
+    },
+    {
+      "path": "qa/multiplayer-spectator-082/delivery-observer-pan.json",
+      "bytes": 24109,
+      "sha256": "00c367a01f3dc72032e28964a081fb1011873c06b226a6cdafb5f107319ceda3"
+    },
+    {
+      "path": "qa/multiplayer-spectator-082/delivery-observer-pan.png",
+      "bytes": 781309,
+      "sha256": "6de5ec23a5202f0adcffe4b497a348293a351e0bad0322e42b6b7a768ee5e324"
+    },
+    {
+      "path": "qa/multiplayer-spectator-082/delivery-observer-rotate.json",
+      "bytes": 24166,
+      "sha256": "d5e6d0b3b6ca9e71b0cfd9c54694163a55a6ad2db5eff6bdf278c93048ebaa69"
+    },
+    {
+      "path": "qa/multiplayer-spectator-082/delivery-observer-rotate.png",
+      "bytes": 959399,
+      "sha256": "bbd80777ba47831b482a2419b18d9d7152a6f067a5fa075d46f3b1b2f49b3437"
+    },
+    {
+      "path": "qa/multiplayer-spectator-082/delivery-observer-zoom.json",
+      "bytes": 24196,
+      "sha256": "8f0c2a70e23ac22aba524e16ae6e7a50fb94b96668a3c131d8bc68e870d8236b"
+    },
+    {
+      "path": "qa/multiplayer-spectator-082/delivery-observer-zoom.png",
+      "bytes": 823353,
+      "sha256": "806bf676c4bf6f6b08287d629b97395c50d2302594200e408240a64bafedd18c"
+    },
+    {
+      "path": "qa/multiplayer-spectator-082/delivery-observer-tilt.json",
+      "bytes": 24207,
+      "sha256": "6325ef9808affcb915d2404fc78a07c6373160f43a05d73f9795d8c6adfcd687"
+    },
+    {
+      "path": "qa/multiplayer-spectator-082/delivery-observer-tilt.png",
+      "bytes": 868634,
+      "sha256": "49cae9290d675b964fc3f7a8fca57da5ce2213c29edaef9907c91206ecbbbd37"
+    },
+    {
+      "path": "qa/multiplayer-spectator-082/delivery-observer-minimap.json",
+      "bytes": 24196,
+      "sha256": "e66d908d7e105d85183bf3bb7d0ead9461b1349b04777169758aaa3fb8f1ce46"
+    },
+    {
+      "path": "qa/multiplayer-spectator-082/delivery-observer-minimap.png",
+      "bytes": 755286,
+      "sha256": "8e530c28b5081c0bfdcedd6a1a34ab4801ae6e2c31bf2ff36d1cf0efab2ee7d3"
+    },
+    {
+      "path": "qa/multiplayer-spectator-082/delivery-observer-music.json",
+      "bytes": 24220,
+      "sha256": "c21c932b727cf4e0c0f71a1868e622ea11d172c9497c92dc78ddf64016acdb36"
+    },
+    {
+      "path": "qa/multiplayer-spectator-082/delivery-observer-music.png",
+      "bytes": 719494,
+      "sha256": "305eb4d85efef7145d8ffa8171e9c74ac32f2ba2df2864a43f5ef7187dcdd60a"
+    },
+    {
+      "path": "qa/multiplayer-spectator-082/delivery-observer-after-music.json",
+      "bytes": 24229,
+      "sha256": "e0470ce28d54438fd1e7a6457ca1d3e9197dda276ff886a7cdb1b8f1f78998ab"
+    },
+    {
+      "path": "qa/multiplayer-spectator-082/delivery-observer-after-music.png",
+      "bytes": 719623,
+      "sha256": "a1ad13f0b5f5d22f3b42efe9014e93f49962852186abda423209769da3ce3dd0"
+    },
+    {
+      "path": "qa/multiplayer-spectator-082/delivery-observer-return-cancel.json",
+      "bytes": 24229,
+      "sha256": "b1fd6467782f0e8f5d741bfd4f4f1e8a00d2afd95647384c852077678c83de3e"
+    },
+    {
+      "path": "qa/multiplayer-spectator-082/delivery-observer-return-cancel.png",
+      "bytes": 587746,
+      "sha256": "b35b644406810170dbe541bc08dbda74e28b08d2ed97339814fe90928b527e7a"
+    },
+    {
+      "path": "qa/multiplayer-spectator-082/delivery-observer-returned.json",
+      "bytes": 811,
+      "sha256": "a5b36cc8c3036654ba693b0d332f8d56ae572a30f83d6a3af59b4f18aa9872f4"
+    },
+    {
+      "path": "qa/multiplayer-spectator-082/delivery-observer-returned.png",
+      "bytes": 138910,
+      "sha256": "5b2dfb87042d1362cd630bfd4dff20eb5eb0c25cff671b5c1647a1ca7652c9d7"
+    },
+    {
+      "path": "qa/multiplayer-spectator-082/delivery-observer-renderer.json",
+      "bytes": 459,
+      "sha256": "bdc2dd2032324e03066f494ab2377506c3585eed763a1237cc2a3d549b9f9a25"
+    },
+    {
+      "path": "qa/multiplayer-spectator-082/delivery-player-before.json",
+      "bytes": 40646,
+      "sha256": "9e8d59e69d477e7893342c5bdfdafcdefac8926490f030eed4db90117ab1a033"
+    },
+    {
+      "path": "qa/multiplayer-spectator-082/delivery-player-before.png",
+      "bytes": 577116,
+      "sha256": "466ac8b13f09cec6b25d32ef42dd41c8671aeb9afc70805aed0767a6be290503"
+    },
+    {
+      "path": "qa/multiplayer-spectator-082/delivery-player-research.json",
+      "bytes": 40638,
+      "sha256": "4b0d4158a78e99c6a4a71f248b355fbc11c1ffd8c08777d7abd23ea2720fb272"
+    },
+    {
+      "path": "qa/multiplayer-spectator-082/delivery-player-research.png",
+      "bytes": 431756,
+      "sha256": "b518ec6c40059d517678a0e6020874ced8ac5ebc43372144eb07213866f13feb"
+    },
+    {
+      "path": "qa/multiplayer-spectator-082/delivery-player-manufacturing.json",
+      "bytes": 40713,
+      "sha256": "b8c39d108326088619a10533e72b0c3abdb5c9764d6cbccb2c245bae9f7251c1"
+    },
+    {
+      "path": "qa/multiplayer-spectator-082/delivery-player-manufacturing.png",
+      "bytes": 851688,
+      "sha256": "a06466f479a2f4ba0f4983f547780c3ee9dd789a776ffd995164e9b397bec189"
+    },
+    {
+      "path": "qa/multiplayer-spectator-082/delivery-player-queue.json",
+      "bytes": 40715,
+      "sha256": "f204e15caeb384d44764c755c51318c0315223cfa8e930d0735bd2788e49eec2"
+    },
+    {
+      "path": "qa/multiplayer-spectator-082/delivery-player-queue.png",
+      "bytes": 940672,
+      "sha256": "34ab067480846e2f6294a6c9b7e80b6c17f723dd4e05752f1747949a9084ad5f"
+    },
+    {
+      "path": "qa/multiplayer-spectator-082/delivery-player-trucks.json",
+      "bytes": 41070,
+      "sha256": "d747b43428b2719b24cdbaf2e369527781004278540386a191f88fa8b84e6181"
+    },
+    {
+      "path": "qa/multiplayer-spectator-082/delivery-player-trucks.png",
+      "bytes": 978004,
+      "sha256": "4e828f553bc9c5303bb3b9ab406d7c8d493e87c56bae404bf2ecc28f066e5894"
+    },
+    {
+      "path": "qa/multiplayer-spectator-082/delivery-player-pan-adb.json",
+      "bytes": 37984,
+      "sha256": "5cefa15613cf80a5ada218466d1ca93d161d72547b933170d608a509cc705116"
+    },
+    {
+      "path": "qa/multiplayer-spectator-082/delivery-player-pan-adb.png",
+      "bytes": 750390,
+      "sha256": "3c36c1e5c0472777dd4f4f5ef4a3e74a87a772b15da958cab3024f85cb90d80d"
+    },
+    {
+      "path": "qa/multiplayer-spectator-082/delivery-player-returned-real.json",
+      "bytes": 811,
+      "sha256": "a5b36cc8c3036654ba693b0d332f8d56ae572a30f83d6a3af59b4f18aa9872f4"
+    },
+    {
+      "path": "qa/multiplayer-spectator-082/delivery-player-returned-real.png",
+      "bytes": 148590,
+      "sha256": "2a84feb7be9a412a420ef9acaed7dcb81ce163c790d8ca3fd0074d1b4bd998c1"
+    },
+    {
+      "path": "qa/multiplayer-spectator-082/delivery-home.json",
+      "bytes": 4861,
+      "sha256": "f07413fe197dc316f58de0a3e26bfe443e724cb02c2be5a59dec38d2a8a4530a"
+    },
+    {
+      "path": "qa/multiplayer-spectator-082/delivery-home.png",
+      "bytes": 1103181,
+      "sha256": "5060b5f3075597caf0b12249f67ef6c8a178f77b7462fa0ae1b48bd6508c4f02"
+    },
+    {
+      "path": "qa/multiplayer-spectator-082/delivery-home-compact.json",
+      "bytes": 4845,
+      "sha256": "5f593fd9207201001b5d907fd43cc676f76334f57abbae0173939b36923b9af6"
+    },
+    {
+      "path": "qa/multiplayer-spectator-082/delivery-home-compact.png",
+      "bytes": 191325,
+      "sha256": "116ca124e3438962ba051146ab5ed5142377bd0313e809a7791a30514ff36ecd"
+    },
+    {
+      "path": "qa/multiplayer-spectator-082/delivery-home-restored.json",
+      "bytes": 4861,
+      "sha256": "f07413fe197dc316f58de0a3e26bfe443e724cb02c2be5a59dec38d2a8a4530a"
+    },
+    {
+      "path": "qa/multiplayer-spectator-082/delivery-home-restored.png",
+      "bytes": 1103181,
+      "sha256": "5060b5f3075597caf0b12249f67ef6c8a178f77b7462fa0ae1b48bd6508c4f02"
+    }
+  ]
+}

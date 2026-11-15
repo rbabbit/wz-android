@@ -1,0 +1,40 @@
+{
+  "version": "0.80",
+  "passed": true,
+  "emulatorUsed": false,
+  "actualNativeEngineExecuted": false,
+  "actualAdapterExecuted": true,
+  "nativeFsPacketsSynthetic": true,
+  "checks": [
+    "Getter returns exact bounded RGB bytes with native dimensions",
+    "Unchanged generation/hash/revision reads and copies binary once",
+    "Returned pixels do not alias mutable native filesystem memory",
+    "New native preview revision reloads actual pixels",
+    "Loading status clears ready pixels and performs no binary read",
+    "Downloaded custom-map hash reloads pixels rather than looking up a name thumbnail",
+    "Metadata for an old same-named map hash is rejected before reading",
+    "Metadata from another room generation cannot reuse pixels",
+    "Mismatched map name cannot expose a prior image",
+    "Blind room fails closed even with a ready-looking binary packet",
+    "Explicit native blind status carries reason without pixel access",
+    "Only the reviewed fixed preview file path may be read",
+    "Oversized dimensions and non-RGB channels are rejected before allocation",
+    "Incomplete RGB byte array cannot be rendered as a valid map",
+    "Missing binary returns honest preparing status and can recover",
+    "Leaving room removes getter access and cached pixels",
+    "Rejoin uses a new generation and loads a fresh binary copy",
+    "Preview getter issues no writes, orders or native command requests",
+    "Page hide invalidates cached room pixels"
+  ],
+  "checksPassed": 19,
+  "sources": [
+    {
+      "path": "app/src/main/assets/multiplayer/native-ui-adapter.js",
+      "sha256": "5e7b0d39c0ea2f8fbf5ede587fcd229fb7d65c842f5d8ad88e12edde4c8489a6"
+    },
+    {
+      "path": "tools/test-multiplayer-room-map-adapter-080.cjs",
+      "sha256": "b67bfc8eebed8af136f81c5d7ab4c4a37c444cbfac5a5efd61b68850250f6ee0"
+    }
+  ]
+}

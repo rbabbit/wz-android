@@ -1,0 +1,273 @@
+{
+  "version": "0.79",
+  "passed": true,
+  "recordedUTC": "2026-11-15T00:31:22.118474+00:00",
+  "emulatorUsed": true,
+  "candidateAPK_SHA256": "a1c425fe98063b144eae2b83165e449279e559b6acfee4e5a2c50672b5e766c0",
+  "installedAPK_SHA256": "a1c425fe98063b144eae2b83165e449279e559b6acfee4e5a2c50672b5e766c0",
+  "device": "emulator-5558",
+  "checks": {
+    "exactDeliveryAPK": true,
+    "roomPlayersAndChatLayout": true,
+    "nativeReadyAcknowledgement": true,
+    "privateRoomChatRoundTrip": true,
+    "teamChangeOrAuthoritativeDenial": true,
+    "spectateChangeOrAuthoritativeDenial": true,
+    "keyboardAndBack": true,
+    "leaveRejoinAndLoadCover": true,
+    "matchGameplayInput": true,
+    "existingModesNavigation": true
+  },
+  "verificationScope": "Actual installed delivery APK in existing Android emulator. Real unlisted desktop4.7 host: waiting-room roster/chat/Ready, native team C and spectator/player slot changes, private /help request with host-generated replies, real Android keyboard and touch Send, Back/Match options, Leave/Stay/Return/rejoin and loading cover. Ready accepted by host and started a real match; custom Research/Manufacturing/Queue pages, native truck positions/orders, Stop/Deselect, two-finger camera pan and app-owned lobby/Home navigation observed. Existing Campaign/FFA setup navigation and Towers world/Research checked. No public-room messages or seeded game orders.",
+  "limitations": [
+    "No physical-phone run or complete public multiplayer match was performed.",
+    "Actual Ready-to-match path was exercised; toggling back to unready was covered by focused native/DOM checks rather than the final private host.",
+    "Black terrain is a pre-existing rendering issue observed in this emulator, also present in retained v0.70/v0.71 Multiplayer and unchanged Towers screenshots. Exact cause and physical-device behavior are unverified; rendering code/data were not changed.",
+    "Campaign/FFA gameplay and unrelated saves, rewards, ads and music were frozen and not comprehensively rerun.",
+    "Windows host stdin command interface was unsupported. Those fixture-only attempts were discarded; real host replies used lobby slash commands. Separate private host starts were used for waiting-room and gameplay checks.",
+    "Two private idle matches ended while preparing input checks. Later prepared input checks completed before explicit return; stale selection snapshots and long-press test input were corrected in the fixture without product changes."
+  ],
+  "fixture": {
+    "kind": "private-local-host",
+    "publicMessagesSent": false,
+    "map": "Sk-Mountain",
+    "hostVersion": "4.7.0",
+    "bots": 1,
+    "endpoint": "10.0.2.2:22179",
+    "manualOrSeededOrders": false,
+    "protocol": [
+      16384,
+      104
+    ]
+  },
+  "observations": {
+    "chat": "Native /help echo followed by host Command list and command descriptions in native room.messages.",
+    "team": "Native local team became2 (C).",
+    "spectator": "Native local spectator false-to-true-to-false, through real host requests.",
+    "ready": "Real Ready request resulted in host-started game/worldReady/worldSafe; UI never asserted readiness solely from request submission.",
+    "movement": "Droids160001/160003 moved from y84 to y85 with native order2 before Stop/Deselect; native camera x10624 to11480.",
+    "back": "Actual Android Back hid IME, then restored room; Match options dismissed first; Stay retained scene; Return reached custom lobby and then Home."
+  },
+  "evidence": [
+    {
+      "path": "qa/multiplayer-room-079/delivery-installation.json",
+      "bytes": 732,
+      "sha256": "970a9b8f3f3c259d72f57e990189ad80558cbc439c7bd1d2315e76d96b2c1a0b"
+    },
+    {
+      "path": "qa/multiplayer-room-079/delivery-room-layout.json",
+      "bytes": 8452,
+      "sha256": "c673b1f1f56784721014c146c8b978c4f2e01d767e643a29631a92166648deb5"
+    },
+    {
+      "path": "qa/multiplayer-room-079/delivery-room-layout.png",
+      "bytes": 98296,
+      "sha256": "ca84b816bbeb756de1ba0ef2743c9f8f10a56d3dfdfad5678fb4a6470bbf6837"
+    },
+    {
+      "path": "qa/multiplayer-room-079/delivery-keyboard-open.json",
+      "bytes": 6409,
+      "sha256": "db572d26878aee22cd752df6f87c94e7ede5549b3227594ab134c53d97d8222d"
+    },
+    {
+      "path": "qa/multiplayer-room-079/delivery-keyboard-open.png",
+      "bytes": 89087,
+      "sha256": "a070283025aa94d908f5d0cd253fd4a8ce4b215d38176c3b283baf9da3c0772c"
+    },
+    {
+      "path": "qa/multiplayer-room-079/delivery-chat-sent.json",
+      "bytes": 6564,
+      "sha256": "9bbfb870e06eaeb3641ed295babf4602e666fd661d5983f50e35c5857ff458d8"
+    },
+    {
+      "path": "qa/multiplayer-room-079/delivery-chat-sent.png",
+      "bytes": 84367,
+      "sha256": "bb8b12e115125577df567ba77a14155b1bfb085d150d468a1d52670391b93f49"
+    },
+    {
+      "path": "qa/multiplayer-room-079/delivery-chat-round-trip.json",
+      "bytes": 7315,
+      "sha256": "62330bd35cfc7254cadbbca8e55c74246a66589c8b8cc109025a2fa424b4b34b"
+    },
+    {
+      "path": "qa/multiplayer-room-079/delivery-chat-round-trip.png",
+      "bytes": 143655,
+      "sha256": "79cea50a5fe46504d8fe165351f03189334b25cfd13fe63564dadf4e9bdbe7c5"
+    },
+    {
+      "path": "qa/multiplayer-room-079/delivery-team-confirmed.json",
+      "bytes": 7099,
+      "sha256": "19f64a9f2b10cd1eba5ec90b17947e4c53e3e0ae7a22034dcec908882e68740e"
+    },
+    {
+      "path": "qa/multiplayer-room-079/delivery-team-confirmed.png",
+      "bytes": 130251,
+      "sha256": "337b1627cf67f5a9f3f6554cfecea2a05892022115897e9e19e7d2f0ab858fc3"
+    },
+    {
+      "path": "qa/multiplayer-room-079/delivery-spectating.json",
+      "bytes": 7646,
+      "sha256": "5d61b0d13de8ed0da5b762bf516a2cfb8d76ca83282c2ce535882e7e026c4a7f"
+    },
+    {
+      "path": "qa/multiplayer-room-079/delivery-spectating.png",
+      "bytes": 140468,
+      "sha256": "d8612e47a2748990c787c66446ee691427f7ced5538d7720c5dfdb3b3339b813"
+    },
+    {
+      "path": "qa/multiplayer-room-079/delivery-play-restored.json",
+      "bytes": 7374,
+      "sha256": "88e477eb1b02a162cd43f3bf30f56eac3fb73d9f36d3296f926c7d161f1ab923"
+    },
+    {
+      "path": "qa/multiplayer-room-079/delivery-play-restored.png",
+      "bytes": 143655,
+      "sha256": "79cea50a5fe46504d8fe165351f03189334b25cfd13fe63564dadf4e9bdbe7c5"
+    },
+    {
+      "path": "qa/multiplayer-room-079/delivery-match-options.json",
+      "bytes": 6401,
+      "sha256": "e0db0579230737d56b562ac99ac1a2495ac9e59f443d9d08f376b53d5d37c4d2"
+    },
+    {
+      "path": "qa/multiplayer-room-079/delivery-match-options.png",
+      "bytes": 135550,
+      "sha256": "fdbc18bb7c673008f093cca2c19b3a139774f4a19fa10e96c40abe97588dc62e"
+    },
+    {
+      "path": "qa/multiplayer-room-079/delivery-back-options-closed.json",
+      "bytes": 6404,
+      "sha256": "51c2c3f3b67b16d6819b164393b52491dd5ae7bb68fb079f2a201dd44c860801"
+    },
+    {
+      "path": "qa/multiplayer-room-079/delivery-back-options-closed.png",
+      "bytes": 97943,
+      "sha256": "ce09698be2095f47a6d20b7e802d95af7f9c4ed0ea1746b406fcf26bd3e37680"
+    },
+    {
+      "path": "qa/multiplayer-room-079/delivery-back-keyboard-hidden.json",
+      "bytes": 7097,
+      "sha256": "fba985497a5ba8237e0430df2ac10efac27839ee8fbd31c8b2eaed5f400384fc"
+    },
+    {
+      "path": "qa/multiplayer-room-079/delivery-back-keyboard-hidden.png",
+      "bytes": 76913,
+      "sha256": "851f9d7057ddb1acc7bda99e1a908570ace931704146dbf379b70e0b2341d74b"
+    },
+    {
+      "path": "qa/multiplayer-room-079/delivery-leave-confirmation.png",
+      "bytes": 102521,
+      "sha256": "b4439a8b49450c8dcd4db86bbdb2e2805406436c2597e7204204b36024da4aa4"
+    },
+    {
+      "path": "qa/multiplayer-room-079/delivery-joining-cover.json",
+      "bytes": 144,
+      "sha256": "c56d165bae11dd2d21cb2872985fe141f4e5cd03049a2fc3ecd2b5770f57f679"
+    },
+    {
+      "path": "qa/multiplayer-room-079/delivery-joining-cover.png",
+      "bytes": 50685,
+      "sha256": "0bf7f3a8629cf599fc5da5e3d436adaaf707791a6e736025f5cfcb3471709c98"
+    },
+    {
+      "path": "qa/multiplayer-room-079/delivery-return-lobby.json",
+      "bytes": 680,
+      "sha256": "041df056f371401caa66771b3a68c21c113218482f75b99cdc821a18504d16f4"
+    },
+    {
+      "path": "qa/multiplayer-room-079/delivery-return-lobby.png",
+      "bytes": 151327,
+      "sha256": "ad7cec3d2399f4213c3f72cb5b5791074d5d87684a6d691d642a88ddcc0e4e56"
+    },
+    {
+      "path": "qa/multiplayer-room-079/delivery-rejoined-room.json",
+      "bytes": 17002,
+      "sha256": "0d0a8288c8297acc3e2da056199d61d735e315f74d8d512711768174258201b5"
+    },
+    {
+      "path": "qa/multiplayer-room-079/delivery-ready-confirmed.json",
+      "bytes": 3502,
+      "sha256": "dcce8bf65166c65acad7544ed4dcb4af77156a68d7f07d968c534aee55299989"
+    },
+    {
+      "path": "qa/multiplayer-room-079/delivery-world.json",
+      "bytes": 3464,
+      "sha256": "40177656df88f87973257077c72cd3bf542a7adf8d5d7c7e34af3c93a449b5a9"
+    },
+    {
+      "path": "qa/multiplayer-room-079/delivery-world.png",
+      "bytes": 50344,
+      "sha256": "d78b3e942843b08cb07a32bc321b2357bdc4593baa980ad1167535858a46c19e"
+    },
+    {
+      "path": "qa/multiplayer-room-079/delivery-game-blocknight-tech.json",
+      "bytes": 35926,
+      "sha256": "765798f56e3cf1b44bc892151a027ca700620f8f76bc769268001ae339f11706"
+    },
+    {
+      "path": "qa/multiplayer-room-079/delivery-game-blocknight-tech.png",
+      "bytes": 255833,
+      "sha256": "eb047cac931c7287063ed9e0c635cbdf98072dc8a266ddc77e8ad7322d5171ac"
+    },
+    {
+      "path": "qa/multiplayer-room-079/delivery-game-wt-open-factory.json",
+      "bytes": 35989,
+      "sha256": "326d84ff3a274bce7df9136bb69eeb0d99df2b5a190e6e89ce36f53aa2cb347b"
+    },
+    {
+      "path": "qa/multiplayer-room-079/delivery-game-wt-open-factory.png",
+      "bytes": 813646,
+      "sha256": "0703fee79d2144ea71e2a8de1924d5111bb2d9506ed2fe1ffcdb68ca69b206ea"
+    },
+    {
+      "path": "qa/multiplayer-room-079/delivery-game-wt-open-queue.json",
+      "bytes": 35996,
+      "sha256": "00981cac3a693d5ac42ca9ef8c970d7aedf8a6ca72b6f984a984ab98122d4a4a"
+    },
+    {
+      "path": "qa/multiplayer-room-079/delivery-game-wt-open-queue.png",
+      "bytes": 936898,
+      "sha256": "f350b89153cb3645e237bab893a6b32615e1fec2b4719e6227731d77547c29e8"
+    },
+    {
+      "path": "qa/multiplayer-room-079/delivery-gameplay-input.json",
+      "bytes": 6982,
+      "sha256": "d117894e65e014e560e69122d153ef846573950f2df343df4b8d8374abf04b29"
+    },
+    {
+      "path": "qa/multiplayer-room-079/delivery-gameplay-input.png",
+      "bytes": 817140,
+      "sha256": "aeb00d8e790fd4207cb9082d9433a555bdee5581a26dffc6a447148a7bb7256c"
+    },
+    {
+      "path": "qa/multiplayer-room-079/delivery-existing-mode-proof.json",
+      "bytes": 23491,
+      "sha256": "57d7ca6ac270fc9c07e5467ed2fcf9ac846684f524c4c284342adb9692d07268"
+    },
+    {
+      "path": "qa/multiplayer-room-079/delivery-existing-towers-research.png",
+      "bytes": 274287,
+      "sha256": "67fcaca5b2390d1a80da7935f754c23d8aa4696640798a27267f18c1a1896db5"
+    },
+    {
+      "path": "qa/multiplayer-room-079/delivery-existing-towers-world.png",
+      "bytes": 268272,
+      "sha256": "6e550016d1371327fcfb73dd81cc9b33d0a5e5e8585ec1c5ca78fd71da217770"
+    },
+    {
+      "path": "qa/multiplayer-room-079/delivery-existing-ffa.png",
+      "bytes": 118080,
+      "sha256": "34164c1c89de75ab690e7d98aced20625161b27d40ba5d33f48b4206b2b1f5e5"
+    },
+    {
+      "path": "qa/multiplayer-room-079/delivery-existing-campaign.png",
+      "bytes": 67371,
+      "sha256": "556f62488f7f370b917eb331527d8f47c616bbd70eb74ca25b83e5d3062b8a88"
+    },
+    {
+      "path": "qa/multiplayer-room-079/delivery-home.png",
+      "bytes": 151327,
+      "sha256": "ad7cec3d2399f4213c3f72cb5b5791074d5d87684a6d691d642a88ddcc0e4e56"
+    }
+  ]
+}

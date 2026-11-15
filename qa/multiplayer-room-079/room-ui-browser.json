@@ -1,0 +1,671 @@
+{
+  "version": "0.79",
+  "passed": true,
+  "emulatorUsed": false,
+  "engineExecuted": false,
+  "actualAndroidKeyboardVerified": false,
+  "scope": "Actual shipped room DOM/CSS in isolated host Chromium; synthetic native room snapshots/ACKs and keyboard viewport/overlay fixtures. No public connection/chat or Android gameplay.",
+  "checks": [
+    "enlarged text on compact screen wraps controls without horizontal clipping",
+    "actual roster, map, ready and native match options use literal snapshots",
+    "Ready is single-flight and only a later actual snapshot confirms it",
+    "team change keeps old selection until authoritative snapshot and clears Ready",
+    "spectator request waits snapshot, denied/no-slot response stays playable",
+    "spectator Play uses native canPlay permission and waits the returned player slot",
+    "native host locks and map download disable mutating controls",
+    "chat stays literal, uses one native send, and does not invent local echoes",
+    "chat UTF8 size and composition reject invalid/premature sends",
+    "new room generation ignores stale responses, revisions and malformed packets",
+    "restricted chat means client to host, while blind rooms expose only safe aggregates",
+    "native text and chat are bounded while both lists stay independently scrollable",
+    "keyboard focus moves composer above unchanged overlay and Back restores room",
+    "hide/reset removes focus, pending intent and options before world/teardown"
+  ],
+  "checksPassed": 14,
+  "results": [
+    {
+      "viewport": [
+        1200,
+        540
+      ],
+      "case": "normal",
+      "passed": true,
+      "geometry": {
+        "report": {
+          "visible": true,
+          "generation": "room-a",
+          "revision": 1,
+          "pending": null,
+          "feedback": "",
+          "messages": 4
+        },
+        "focused": "",
+        "className": "",
+        "disabled": false,
+        "root": {
+          "left": 0,
+          "top": 0,
+          "right": 1200,
+          "bottom": 540,
+          "width": 1200,
+          "height": 540
+        },
+        "scroll": [
+          1200,
+          540
+        ],
+        "buttons": [
+          {
+            "id": "room-leave",
+            "box": {
+              "left": 24,
+              "top": 12,
+              "right": 90.46875,
+              "bottom": 56,
+              "width": 66.46875,
+              "height": 44
+            }
+          },
+          {
+            "id": "mp-room-chat-input",
+            "box": {
+              "left": 395.078125,
+              "top": 424,
+              "right": 1087,
+              "bottom": 464,
+              "width": 691.921875,
+              "height": 40
+            }
+          },
+          {
+            "id": "mp-room-chat-send",
+            "box": {
+              "left": 1096,
+              "top": 422,
+              "right": 1161,
+              "bottom": 466,
+              "width": 65,
+              "height": 44
+            }
+          },
+          {
+            "id": "mp-room-team",
+            "box": {
+              "left": 140,
+              "top": 488,
+              "right": 194,
+              "bottom": 528,
+              "width": 54,
+              "height": 40
+            }
+          },
+          {
+            "id": "mp-room-spectate",
+            "box": {
+              "left": 204,
+              "top": 486,
+              "right": 293.40625,
+              "bottom": 530,
+              "width": 89.40625,
+              "height": 44
+            }
+          },
+          {
+            "id": "mp-room-options-toggle",
+            "box": {
+              "left": 303.40625,
+              "top": 486,
+              "right": 435.046875,
+              "bottom": 530,
+              "width": 131.640625,
+              "height": 44
+            }
+          },
+          {
+            "id": "mp-room-ready",
+            "box": {
+              "left": 1064,
+              "top": 486,
+              "right": 1176,
+              "bottom": 530,
+              "width": 112,
+              "height": 44
+            }
+          }
+        ],
+        "players": {
+          "left": 24,
+          "top": 98,
+          "right": 358.078125,
+          "bottom": 477,
+          "width": 334.078125,
+          "height": 379
+        },
+        "chat": {
+          "left": 395.078125,
+          "top": 109,
+          "right": 1161,
+          "bottom": 417,
+          "width": 765.921875,
+          "height": 308
+        },
+        "composer": {
+          "left": 395.078125,
+          "top": 417,
+          "right": 1161,
+          "bottom": 466,
+          "width": 765.921875,
+          "height": 49
+        },
+        "playerScroll": true,
+        "chatScroll": false
+      }
+    },
+    {
+      "viewport": [
+        800,
+        360
+      ],
+      "case": "normal",
+      "passed": true,
+      "geometry": {
+        "report": {
+          "visible": true,
+          "generation": "room-a",
+          "revision": 1,
+          "pending": null,
+          "feedback": "",
+          "messages": 4
+        },
+        "focused": "",
+        "className": "",
+        "disabled": false,
+        "root": {
+          "left": 0,
+          "top": 0,
+          "right": 800,
+          "bottom": 360,
+          "width": 800,
+          "height": 360
+        },
+        "scroll": [
+          800,
+          360
+        ],
+        "buttons": [
+          {
+            "id": "room-leave",
+            "box": {
+              "left": 14,
+              "top": 12,
+              "right": 74.46875,
+              "bottom": 56,
+              "width": 60.46875,
+              "height": 44
+            }
+          },
+          {
+            "id": "mp-room-chat-input",
+            "box": {
+              "left": 286.03125,
+              "top": 256,
+              "right": 701,
+              "bottom": 292,
+              "width": 414.96875,
+              "height": 36
+            }
+          },
+          {
+            "id": "mp-room-chat-send",
+            "box": {
+              "left": 710,
+              "top": 252,
+              "right": 775,
+              "bottom": 296,
+              "width": 65,
+              "height": 44
+            }
+          },
+          {
+            "id": "mp-room-team",
+            "box": {
+              "left": 127,
+              "top": 308,
+              "right": 181,
+              "bottom": 348,
+              "width": 54,
+              "height": 40
+            }
+          },
+          {
+            "id": "mp-room-spectate",
+            "box": {
+              "left": 188,
+              "top": 306,
+              "right": 267.703125,
+              "bottom": 350,
+              "width": 79.703125,
+              "height": 44
+            }
+          },
+          {
+            "id": "mp-room-options-toggle",
+            "box": {
+              "left": 274.703125,
+              "top": 306,
+              "right": 394,
+              "bottom": 350,
+              "width": 119.296875,
+              "height": 44
+            }
+          },
+          {
+            "id": "mp-room-ready",
+            "box": {
+              "left": 694,
+              "top": 306,
+              "right": 786,
+              "bottom": 350,
+              "width": 92,
+              "height": 44
+            }
+          }
+        ],
+        "players": {
+          "left": 14,
+          "top": 85,
+          "right": 261.03125,
+          "bottom": 302,
+          "width": 247.03125,
+          "height": 217
+        },
+        "chat": {
+          "left": 286.03125,
+          "top": 91,
+          "right": 775,
+          "bottom": 247,
+          "width": 488.96875,
+          "height": 156
+        },
+        "composer": {
+          "left": 286.03125,
+          "top": 247,
+          "right": 775,
+          "bottom": 296,
+          "width": 488.96875,
+          "height": 49
+        },
+        "playerScroll": true,
+        "chatScroll": false
+      }
+    },
+    {
+      "viewport": [
+        600,
+        300
+      ],
+      "case": "normal",
+      "passed": true,
+      "geometry": {
+        "report": {
+          "visible": true,
+          "generation": "room-a",
+          "revision": 1,
+          "pending": null,
+          "feedback": "",
+          "messages": 4
+        },
+        "focused": "",
+        "className": "",
+        "disabled": false,
+        "root": {
+          "left": 0,
+          "top": 0,
+          "right": 600,
+          "bottom": 300,
+          "width": 600,
+          "height": 300
+        },
+        "scroll": [
+          600,
+          300
+        ],
+        "buttons": [
+          {
+            "id": "room-leave",
+            "box": {
+              "left": 14,
+              "top": 6,
+              "right": 72.46875,
+              "bottom": 50,
+              "width": 58.46875,
+              "height": 44
+            }
+          },
+          {
+            "id": "mp-room-chat-input",
+            "box": {
+              "left": 210,
+              "top": 203,
+              "right": 520.625,
+              "bottom": 239,
+              "width": 310.625,
+              "height": 36
+            }
+          },
+          {
+            "id": "mp-room-chat-send",
+            "box": {
+              "left": 525.625,
+              "top": 200,
+              "right": 578,
+              "bottom": 242,
+              "width": 52.375,
+              "height": 42
+            }
+          },
+          {
+            "id": "mp-room-team",
+            "box": {
+              "left": 68.1875,
+              "top": 253,
+              "right": 122.1875,
+              "bottom": 293,
+              "width": 54,
+              "height": 40
+            }
+          },
+          {
+            "id": "mp-room-spectate",
+            "box": {
+              "left": 129.1875,
+              "top": 252,
+              "right": 206.890625,
+              "bottom": 294,
+              "width": 77.703125,
+              "height": 42
+            }
+          },
+          {
+            "id": "mp-room-options-toggle",
+            "box": {
+              "left": 213.890625,
+              "top": 252,
+              "right": 331.1875,
+              "bottom": 294,
+              "width": 117.296875,
+              "height": 42
+            }
+          },
+          {
+            "id": "mp-room-ready",
+            "box": {
+              "left": 500,
+              "top": 252,
+              "right": 586,
+              "bottom": 294,
+              "width": 86,
+              "height": 42
+            }
+          }
+        ],
+        "players": {
+          "left": 14,
+          "top": 77,
+          "right": 192,
+          "bottom": 248,
+          "width": 178,
+          "height": 171
+        },
+        "chat": {
+          "left": 210,
+          "top": 83,
+          "right": 578,
+          "bottom": 195,
+          "width": 368,
+          "height": 112
+        },
+        "composer": {
+          "left": 210,
+          "top": 195,
+          "right": 578,
+          "bottom": 242,
+          "width": 368,
+          "height": 47
+        },
+        "playerScroll": true,
+        "chatScroll": true
+      }
+    },
+    {
+      "viewport": [
+        640,
+        320
+      ],
+      "case": "normal",
+      "passed": true,
+      "geometry": {
+        "report": {
+          "visible": true,
+          "generation": "room-a",
+          "revision": 1,
+          "pending": null,
+          "feedback": "",
+          "messages": 4
+        },
+        "focused": "",
+        "className": "",
+        "disabled": false,
+        "root": {
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 320,
+          "width": 640,
+          "height": 320
+        },
+        "scroll": [
+          640,
+          320
+        ],
+        "buttons": [
+          {
+            "id": "room-leave",
+            "box": {
+              "left": 14,
+              "top": 6,
+              "right": 72.46875,
+              "bottom": 50,
+              "width": 58.46875,
+              "height": 44
+            }
+          },
+          {
+            "id": "mp-room-chat-input",
+            "box": {
+              "left": 210,
+              "top": 223,
+              "right": 560.625,
+              "bottom": 259,
+              "width": 350.625,
+              "height": 36
+            }
+          },
+          {
+            "id": "mp-room-chat-send",
+            "box": {
+              "left": 565.625,
+              "top": 220,
+              "right": 618,
+              "bottom": 262,
+              "width": 52.375,
+              "height": 42
+            }
+          },
+          {
+            "id": "mp-room-team",
+            "box": {
+              "left": 68.1875,
+              "top": 273,
+              "right": 122.1875,
+              "bottom": 313,
+              "width": 54,
+              "height": 40
+            }
+          },
+          {
+            "id": "mp-room-spectate",
+            "box": {
+              "left": 129.1875,
+              "top": 272,
+              "right": 206.890625,
+              "bottom": 314,
+              "width": 77.703125,
+              "height": 42
+            }
+          },
+          {
+            "id": "mp-room-options-toggle",
+            "box": {
+              "left": 213.890625,
+              "top": 272,
+              "right": 331.1875,
+              "bottom": 314,
+              "width": 117.296875,
+              "height": 42
+            }
+          },
+          {
+            "id": "mp-room-ready",
+            "box": {
+              "left": 540,
+              "top": 272,
+              "right": 626,
+              "bottom": 314,
+              "width": 86,
+              "height": 42
+            }
+          }
+        ],
+        "players": {
+          "left": 14,
+          "top": 77,
+          "right": 192,
+          "bottom": 268,
+          "width": 178,
+          "height": 191
+        },
+        "chat": {
+          "left": 210,
+          "top": 83,
+          "right": 618,
+          "bottom": 215,
+          "width": 408,
+          "height": 132
+        },
+        "composer": {
+          "left": 210,
+          "top": 215,
+          "right": 618,
+          "bottom": 262,
+          "width": 408,
+          "height": 47
+        },
+        "playerScroll": true,
+        "chatScroll": false
+      }
+    }
+  ],
+  "screenshots": [
+    "room-normal-1200x540.png",
+    "room-normal-800x360.png",
+    "room-normal-600x300.png",
+    "room-normal-640x320.png",
+    "room-large-text-640x320.png",
+    "room-downloading-640x320.png",
+    "room-long-640x320.png",
+    "room-keyboard-overlay-640x320.png",
+    "room-keyboard-shrink-640x180.png"
+  ],
+  "exceptions": [],
+  "badRequests": [],
+  "fatal": null,
+  "sources": [
+    {
+      "path": "app/src/main/assets/multiplayer/Oswald.ttf",
+      "sha256": "5b38c246e255a12f5712d640d56bcced0472466fc68983d2d0410ec0457c2817"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/index.html",
+      "sha256": "d24eccc8c1433371827cb6a5da1cde3b33ca7865c859c7c2c9d60d091e33c746"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/multiplayer.css",
+      "sha256": "d5bf3810a1dd68e89d59834234b7e157b319f1aaac2ff5e4b2aa8e8bec4eb5bd"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/native-ui-adapter.js",
+      "sha256": "9444c466a040ac4090ae54d6a2f41575b6cf4416c9c74762b630e24c6fa06fe3"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/room-ui.css",
+      "sha256": "d7c1275d93c2dfc3c12b2ca98dfc13a5833e64cbdb0b4aa96b1904b815e94ef3"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/room-ui.js",
+      "sha256": "e15a54c395b4ef1766549af24a1b2338d202e1e444a349885526522387554f89"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/session.js",
+      "sha256": "352d8414e321dd6b25c098c2038f7c9533c42271bedcfbec8380cef7d1803f7a"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/icons/deselect.svg",
+      "sha256": "51d7bf48d66d722ac192a6c3aaedf0f2a2c559cac094158cd5378d7aa3e485c3"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/icons/flask.svg",
+      "sha256": "bd2e50bcab8c9b897bf7603254a96a327eee9594471dc530866cd95d1910dcbb"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/icons/hand-palm.svg",
+      "sha256": "aa8a79f768533362a20e9adceb40d968385809c1c28f8bcf28cf5c6c6df0af4b"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/icons/house.svg",
+      "sha256": "25f4b1504212c7c064054bd1d02ddaaf0a4e16ed49c6b08b23c3dc1f74e1d446"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/icons/music-notes.svg",
+      "sha256": "9b46fd28e1d67ed654730c11c1c928366d581eaa337dea44ba33c0a97eb21620"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/icons/question.svg",
+      "sha256": "605254a6f6dc50f1a34bf7d8995d01902e064c2e459fbe8108b8f7890de7c259"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/icons/stack-plus.svg",
+      "sha256": "ee84334c5500adbfde5789559054c015114b01154b9ffc4ae600e45abb830a43"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/icons/stack.svg",
+      "sha256": "37b696df1b465b89a6a6da07d85011f52c59afd0d07e4e4d02d360f135e52099"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/towers-game-controls.css",
+      "sha256": "a07401b9b120bd6e12e34b3b173cfc14ae354eb5dfab2a4dd24608d1fae9e7d0"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/towers-monochrome.css",
+      "sha256": "8ec896652f3000395f45dbbd0bc11fa70e84f36b7cebef17cf6d6b2ce3effc46"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/towers-shell.css",
+      "sha256": "51ae516037180e254cbe125fa548f4e9fd40458d30f9021648a43715a992bf9e"
+    },
+    {
+      "path": "tools/test-multiplayer-room-ui-079.cjs",
+      "sha256": "7f614ebb4adab8de5584dc476534ad030ea1bae22daad9f5bfd88e97420a5887"
+    }
+  ]
+}

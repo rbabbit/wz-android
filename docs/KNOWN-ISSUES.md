@@ -1,5 +1,99 @@
 # Known issues and verification limits
 
+## Warzone Towers 0.84 — Native landscape landing menus
+
+The exact APK passed all six landscape Home routes, native Campaign/Towers/FFA
+pickers and utility returns, 844x390dp and 640x320dp/130% text layouts, inline
+Android name editing, fixed suffix/name persistence, and the real official
+lobby filter/Refresh. Campaign's compact body scrolls to expose both actions;
+map launch controls stay fixed outside their scrolling facts.
+
+Native Join/Ready/match/Return was verified on an isolated official headless
+host. Only its public-directory entry and game-ID resolution were substituted
+in a temporary transport fixture; advertised fixture occupancy was synthetic.
+TCP, Ready and gameplay were real. No public messages or seeded gameplay were
+used. The exact APK also retained Towers Research, touch camera and engine/page
+state through background/resume. See `qa/native-landings-084/verification.json`.
+
+The inherited black-terrain emulator issue remains visible in gameplay; its
+cause is still unverified and renderer changes are outside this update. Native
+landing visual checks passed, while game checks establish state/input/return
+behavior. Physical phones, full public matches, every campaign mission and all
+97 maps' gameplay were not rerun. Password-protected and host-controlled rooms
+retain the existing engine restrictions; no new password workflow is claimed.
+
+## Warzone Towers 0.83 — Portrait Home
+
+Exact installed APK checks covered Home fidelity, all six landscape destinations
+and portrait Back returns, 360×740dp compact and 130% text scrolling, restored
+original viewport and pause/resume. A normal Greenhaven game also opened Research,
+accepted a real Android finger pan that changed the native projection, retained
+its page/engine through background resume and returned through the existing menu.
+No Activity or game-page reload occurred during the tested transitions.
+
+The historical emulator black-terrain issue is still visible, including in the
+older v0.79 Towers baseline. Its cause remains unverified; Home visual checks
+passed, while these gameplay checks establish state/input/retention rather than
+terrain rendering quality. No physical-phone run, full campaign or public match
+was performed for this Home-only revision. All existing game assets remain frozen.
+
+## Warzone Towers 0.82 — Home tagline and Multiplayer spectators
+
+The exact installed APK passed the scoped pre-start observer journey: match
+entry, frames advancing from 2 to 1614, camera/minimap gestures, read-only
+enforcement and Music/Lobby return paths. Normal player 0 retained menus, truck
+selection and camera pan; normal/compact/restored Home layouts were checked.
+These actual observations are separate from host geometry/capability fixtures.
+
+The audited pre-start observer fixture is separate from joining an already
+running game. Host slot availability, blind-room privacy and official join
+rules remain authoritative. A spectator receives camera access without the
+watched player's unit, facility or research ownership. No public-room chat is
+part of verification. Physical-phone/public-match coverage is not implied.
+
+Black terrain persists for normal players and spectators in baseline and new
+emulator captures. No GL error established its cause. The renderer is outside
+this scoped owner-UI change; the visual issue remains unresolved.
+
+## Warzone Towers 0.80 — Multiplayer room polish
+
+Room map previews are generated from the real native map data. During map
+preparation/download, or when a blind/private room forbids the preview, the UI
+reports the native unavailable state. It does not display a substitute map.
+Room click feedback uses the existing Warzone clip and respects native voice/
+effects mute settings; missing sound configuration fails quietly.
+
+Host geometry, browser audio/keyboard simulations and native-helper tests are
+separate from exact-APK device observations under `qa/multiplayer-room-080/`.
+The installed candidate passed actual inline typing/Send, touch chat/roster
+scrolling, IME restoration, built-in/downloaded map preview and decoded click
+PCM/mute checks. A real private Cobra match also passed native move/position,
+Stop/Deselect, two-finger camera, Back/Stay and Return to the custom lobby/Home
+checks. No public-room chat was sent.
+
+Physical phones, acoustic speaker output, a full public match and host-specific
+extensions remain outside this focused verification. The historical dark/black
+emulator terrain issue is unchanged and its cause remains unverified.
+
+## Warzone Towers 0.79 — Multiplayer waiting room
+
+Host locks, downloads, native slot availability, disabled/muted chat and match
+transition state can prevent Ready/team/spectator/chat requests. The room shows
+the native denial or pending state; it does not override those restrictions.
+Commands are single-flight and fenced to the current native room generation.
+
+The exact installed APK passed the scoped private-host room, `/help` server
+round trip, team/spectator, Android keyboard/Send/Back, rejoin, Ready and match
+entry/input checks. Actual unready was not exercised. Synthetic host/browser
+and native-helper cases are separate from those device observations; see
+`qa/multiplayer-room-079/emulator.json`. No public-room chat was sent.
+Physical phones, a full public multiplayer match and host-specific extensions
+remain outside this focused verification.
+
+Dark/black terrain is visible in preserved v0.70/v0.71 Multiplayer and Towers
+captures as well as this emulator fixture. This room revision does not repair
+terrain rendering; its underlying cause has not been established.
+
 ## Warzone Towers 0.78 — Research and name editor
 
 Research now separates available topics from selected-lab current/queued work.

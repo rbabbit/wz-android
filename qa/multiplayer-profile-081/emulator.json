@@ -1,0 +1,213 @@
+{
+  "version": "0.81",
+  "passed": true,
+  "emulatorUsed": true,
+  "device": "emulator-5558",
+  "recordedUTC": "2026-11-15T08:53:29.963670+00:00",
+  "candidateAPK_SHA256": "f7bd4fc6d03a54f8f3f9995dcdfdec0be69efd02eac95bbd45a7c9a463ee724b",
+  "installedAPK_SHA256": "f7bd4fc6d03a54f8f3f9995dcdfdec0be69efd02eac95bbd45a7c9a463ee724b",
+  "checks": {
+    "exactDeliveryAPK": true,
+    "lobbyBesideMusic": true,
+    "timerSeparate": true,
+    "persistentMobilePlayerName": true,
+    "nameLimitAndSuffix": true,
+    "roomAndMatchNavigation": true
+  },
+  "buildLog": {
+    "path": "qa/multiplayer-profile-081/build.log",
+    "bytes": 2704,
+    "sha256": "2180d43e6de8a1854a9c10eda311d4388c3403f84cc9643bc251d6ef62eca6d0"
+  },
+  "fixture": {
+    "kind": "private-local-host",
+    "publicMessagesSent": false,
+    "hostVersion": "4.7.0",
+    "map": "Sk-Mountain",
+    "bot": "Cobra.js Easy",
+    "userDesktopConfigUntouched": true,
+    "privateHostStopped": true
+  },
+  "verificationScope": "Exact installed delivery APK in the existing emulator. Legacy Player migrated to Player(m); actual editable field deletion and overlong entry retain the fixed suffix and cap the base at12; actual Android keyboard Ctrl-A/Delete and input/Enter confirmed this independently of CDP insertion. NoobCrusher1(m) persisted through cold process restart, appeared in the real private host room and actual native bot-match playerName. Lobby was immediately after Music in the rendered game and its return confirmation reached the custom lobby/Home. Timer layout used a clearly identified presentation-only label because this private stock match has no countdown. Normal and compact actual shipped CSS/status/name layout and native/profile storage methods also passed focused host checks.",
+  "limitations": [
+    "No physical-phone run or complete public multiplayer match was performed.",
+    "The private bot match supplies no native timer. The emulator00:02:17 screenshot uses a temporary visibility/text presentation fixture only; native countdown state/orders were unchanged. Actual CSS timer/status layout, compact wrapping and long statuses also passed the browser fixture.",
+    "The pre-existing black terrain rendering in this emulator remains unchanged; native engines/data/rendering were frozen.",
+    "Unrelated gameplay, offline modes, music, ads, rewards and saves were frozen and were not comprehensively rerun.",
+    "An initial build invocation lacked ANDROID_HOME and was rerun with the existing SDK. Emulator cold-start readiness and native status updates required fixture waits; those were test setup issues, not product changes."
+  ],
+  "sources": [
+    {
+      "path": "app/build.gradle.kts",
+      "bytes": 1517,
+      "sha256": "74688b369aea7a9a93040f2114a6b7ce9750a90e74ddf63e376ef5f2b2377d86"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/index.html",
+      "bytes": 7610,
+      "sha256": "d4983b2d2d568b5c599d97c53f01a6c80638204e68501babb76dafe74d9f9aad"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/lobby-config.js",
+      "bytes": 4600,
+      "sha256": "6d59d87d7ebd65bb5543916b32e16275914bd694549bda7e8cb06016ed2ce607"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/multiplayer.css",
+      "bytes": 14535,
+      "sha256": "bee48cdb57b9761bf7d7ee4dcedd6e290e23ca000d147b9fda9fe179c9a3706a"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/session.js",
+      "bytes": 24488,
+      "sha256": "f251053b8433c2d99f4ab4ae1a3b223c529b6e8862c41ef1669eb24ce4fbf2f2"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MultiplayerActivity.java",
+      "bytes": 51785,
+      "sha256": "397de6cec4f53929885464cfe13f231812b7228161cc6f2b4913c49bc68d75af"
+    },
+    {
+      "path": "tools/mp-profile-live-081.cjs",
+      "bytes": 6278,
+      "sha256": "dc1eb1be2385fc13b7a9916f990e2fe52687e89c6a0bc0f3576ec7f2175aca67"
+    },
+    {
+      "path": "tools/package-multiplayer-profile-081.py",
+      "bytes": 17488,
+      "sha256": "fca626c0ef71c6a8f8b489259885ae9b08b518faba192c39dccfa3f55912cf7b"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "qa/multiplayer-profile-081/delivery-migrated-profile.json",
+      "bytes": 892,
+      "sha256": "c14068df6de6f1fc6ef211784fb0e7d5a35337faa2c91d3abd9080baa7ef1551"
+    },
+    {
+      "path": "qa/multiplayer-profile-081/delivery-migrated-profile.png",
+      "bytes": 154923,
+      "sha256": "74a950671a8d1a58cb33d1c1bda7bd82221e3492a2f8ebc068a20d33355c61d3"
+    },
+    {
+      "path": "qa/multiplayer-profile-081/name-empty-fixed-suffix.json",
+      "bytes": 897,
+      "sha256": "f52dbc2086282fe95f739778c181a3f5b5e85e8af50602a1f940d30b83b3f9e8"
+    },
+    {
+      "path": "qa/multiplayer-profile-081/name-empty-fixed-suffix.png",
+      "bytes": 154295,
+      "sha256": "90e5c0855d6728126866c5e0222f399121f1c48f045a2dadf5cfb9fcfdebb57a"
+    },
+    {
+      "path": "qa/multiplayer-profile-081/name-twelve-with-keyboard.json",
+      "bytes": 909,
+      "sha256": "f034592e2348a0ea6820674cb180144c8e90b54c7d1a80ae7cd0d1ee97b3f7f3"
+    },
+    {
+      "path": "qa/multiplayer-profile-081/name-twelve-with-keyboard.png",
+      "bytes": 158153,
+      "sha256": "e7256f5b8ee1260b4b23c83b7cbc28c225ffc410e1458910d1c491855189e76c"
+    },
+    {
+      "path": "qa/multiplayer-profile-081/name-saved.json",
+      "bytes": 916,
+      "sha256": "b9773ecf29d6efd0f8ce42180270d476f128382cbe89491206b0135727ed6175"
+    },
+    {
+      "path": "qa/multiplayer-profile-081/name-saved.png",
+      "bytes": 47608,
+      "sha256": "b2289bf8feee623f5688b85a25daf21c802429e8c3f9426c7fea6ce04b7cc032"
+    },
+    {
+      "path": "qa/multiplayer-profile-081/name-cold-restored.json",
+      "bytes": 916,
+      "sha256": "b9773ecf29d6efd0f8ce42180270d476f128382cbe89491206b0135727ed6175"
+    },
+    {
+      "path": "qa/multiplayer-profile-081/name-cold-restored.png",
+      "bytes": 47608,
+      "sha256": "b2289bf8feee623f5688b85a25daf21c802429e8c3f9426c7fea6ce04b7cc032"
+    },
+    {
+      "path": "qa/multiplayer-profile-081/delivery-private-room.json",
+      "bytes": 6817,
+      "sha256": "dab04aeb3cc449f1ad7af0783465213000b969be0d0bf940e863c295c09dd2d3"
+    },
+    {
+      "path": "qa/multiplayer-profile-081/delivery-private-room.png",
+      "bytes": 104236,
+      "sha256": "a6c8ea69feb0807ce8f4e00c93420df01a29ad5d2cc8137da154f088764dfabd"
+    },
+    {
+      "path": "qa/multiplayer-profile-081/delivery-game-header.json",
+      "bytes": 6208,
+      "sha256": "d2981c89a23d3297da01788dac089ebf2e151716c4fdda816abad4e6592c7c85"
+    },
+    {
+      "path": "qa/multiplayer-profile-081/delivery-game-header.png",
+      "bytes": 990580,
+      "sha256": "89074cdc9ac8b3ee21a851280683c08c3255d776ada40ef4723dab805903cd52"
+    },
+    {
+      "path": "qa/multiplayer-profile-081/delivery-game-timer-layout.json",
+      "bytes": 6356,
+      "sha256": "a86365cb14d091ea72b99c1c4968d8a7d168348f5b9d015c1f7100194f63020f"
+    },
+    {
+      "path": "qa/multiplayer-profile-081/delivery-game-timer-layout.png",
+      "bytes": 989711,
+      "sha256": "6872e5812fa8df5b5cb52d39f9c16a07a872b9242488a0754487a797f65a60b6"
+    },
+    {
+      "path": "qa/multiplayer-profile-081/delivery-returned-lobby.json",
+      "bytes": 916,
+      "sha256": "b9773ecf29d6efd0f8ce42180270d476f128382cbe89491206b0135727ed6175"
+    },
+    {
+      "path": "qa/multiplayer-profile-081/delivery-returned-lobby.png",
+      "bytes": 134911,
+      "sha256": "96a71f05436d9ad7f9e3aabf294cdfb4bc347bf2ae84e1c09aa9a71b64ddc6a5"
+    },
+    {
+      "path": "qa/multiplayer-profile-081/name-android-keyboard-empty.json",
+      "bytes": 929,
+      "sha256": "b85fc2cec3182393f1f720a6ae9ef84134697a600f0a5204110105e3d6d8523d"
+    },
+    {
+      "path": "qa/multiplayer-profile-081/name-android-keyboard-empty.png",
+      "bytes": 113425,
+      "sha256": "f95b5b1f9ff9c89a386c6eaa9e138948bb9596fc9b1afd011ba1b605f72c0a95"
+    },
+    {
+      "path": "qa/multiplayer-profile-081/name-android-keyboard-twelve.json",
+      "bytes": 941,
+      "sha256": "8be4551b53a82379304a3be307e150165ec5997026e933a848bd44745c8b4b5e"
+    },
+    {
+      "path": "qa/multiplayer-profile-081/name-android-keyboard-twelve.png",
+      "bytes": 132169,
+      "sha256": "056506e687f306ed267a101aaf7bd22cf6a4fd1653aba7fd352b60abbb1f54e3"
+    },
+    {
+      "path": "qa/multiplayer-profile-081/name-after-android-input.json",
+      "bytes": 916,
+      "sha256": "b9773ecf29d6efd0f8ce42180270d476f128382cbe89491206b0135727ed6175"
+    },
+    {
+      "path": "qa/multiplayer-profile-081/name-after-android-input.png",
+      "bytes": 153821,
+      "sha256": "7155d56cae4610ebbc21ed5adee9269a4d9735b6fcb6295d87fd1c61c22e9773"
+    },
+    {
+      "path": "qa/multiplayer-profile-081/installation.json",
+      "bytes": 626,
+      "sha256": "fdd0b9cbc40a550ffcc0687d3518b3b60b859ce56131febb184f925ca0721b4a"
+    },
+    {
+      "path": "qa/multiplayer-profile-081/delivery-home-restored.png",
+      "bytes": 1094625,
+      "sha256": "782e8d3b33e7d6e8f3503c16a975d687211dee99ac827627da31bceb0e8cda3a"
+    }
+  ]
+}

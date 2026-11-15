@@ -1,0 +1,568 @@
+{
+  "version": "0.83",
+  "versionCode": 83,
+  "candidateAPK_SHA256": "8706aae52cf0cf7d560885fcef041125bdafb3cc44f22a7f6786d3f540285747",
+  "scope": "Approved portrait Home artwork/native layout, six landscape destinations and portrait Home return/restoration. All existing game assets, native clients, gameplay and unrelated interfaces frozen.",
+  "exactAPKVerification": {
+    "emulatorProof": {
+      "path": "qa/portrait-home-083/verification.json",
+      "bytes": 27209,
+      "sha256": "d3bbf6996fcef157e2874594f51558913c41462b3cd5c7ea9af4eadf34a182fe"
+    },
+    "buildLog": {
+      "path": "qa/portrait-home-083/build.log",
+      "bytes": 2880,
+      "sha256": "7005eb64a002b1c030ae774fea6c9f591acd57a2680d264c606d21ae772a60bc"
+    },
+    "focusedProofs": [
+      {
+        "path": "qa/portrait-home-083/home-layout.json",
+        "bytes": 18334,
+        "sha256": "411c6e7be0e92e6e2322d952eec3281fc29d346a67d9610b8c5254a8b7f7d6af"
+      },
+      {
+        "path": "qa/portrait-home-083/orientation.json",
+        "bytes": 3865,
+        "sha256": "b8358f56b912fcd1e2fd13c5ef4abb41995f3eed3e65406d9587421e11bb7fa6"
+      }
+    ],
+    "focusedAssertionCounts": {
+      "qa/portrait-home-083/home-layout.json": 8,
+      "qa/portrait-home-083/orientation.json": 37
+    },
+    "device": "emulator-5558",
+    "checks": {
+      "exactDeliveryAPK": true,
+      "homePortraitFidelity": true,
+      "allSixDestinationsLandscape": true,
+      "backToPortraitHome": true,
+      "noActivityReload": true,
+      "landscapeGameplayStable": true,
+      "smallPhoneLayout": true,
+      "enlargedTextLayout": true,
+      "resumeRestoration": true
+    },
+    "verificationScope": "Native portrait Home, actual six destination taps and landscape/Back, default/compact/130% text and restoration. Normal Greenhaven engine launch, Research and camera input, same engine document retained after resume, normal Return to map and portrait Home. ADB/CDP only.",
+    "limitations": [
+      "Existing emulator black terrain remains visible in both historical v0.79 and current Towers captures; cause unverified. Gameplay checks cover native state/input/retention, not terrain visual quality.",
+      "No physical phone, complete Campaign, full Towers playthrough, public multiplayer match or live ad test in this Home-only revision."
+    ],
+    "exactInstalledAPKVerified": true,
+    "emulatorUsed": true
+  },
+  "fallback": {
+    "path": "qa/portrait-home-083/fallback.json",
+    "bytes": 469,
+    "sha256": "21c47199d5d4e7a0e56b1041b51ddf88574b139625bbf54230295609a863e511"
+  },
+  "artwork": {
+    "provenance": {
+      "path": "qa/portrait-home-083/art-provenance.json",
+      "bytes": 13116,
+      "sha256": "6d7dec2312c06ed21063e6fa6b7a72d694ee6abe955b33875d531f586091e711"
+    },
+    "reference": {
+      "path": "qa/portrait-home-083/reference.png",
+      "bytes": 2329479,
+      "sha256": "4914e11bfcf740dea8dec4bf20b6c5c34bf18b7b42ffc7de68101f7e86127b23"
+    },
+    "assets": [
+      {
+        "asset": "hero",
+        "path": "app/src/main/res/drawable-nodpi/home_portrait_hero_083.png",
+        "width": 1536,
+        "height": 1024,
+        "mode": "RGB",
+        "bytes": 2629380,
+        "sha256": "b3e891fedce63ca27189a52ccb72344a6b38159b1d4a69f11917c55cb919d208",
+        "generatedOriginal": "C:\\Users\\punke\\.codex\\generated_images\\01a1d6dd-4985-79a2-b75c-fa0a88b9d824\\exec-93f524d8-de61-4279-a2ea-08831d67130d.png",
+        "copiedWithoutImageModification": true,
+        "transparentBackground": false,
+        "referenceRole": "Style/composition reference, not a complete UI screenshot to embed",
+        "prompt": "Use case: stylized-concept. Asset type: final production raster art for an Android strategy game's portrait home screen. Input image is ONLY a reference for its consistent cinematic game-art style, angular grey armored units, chilly mountain dawn and blue-grey/navy palette; ignore every interface element, logo, word and border. Render a single coherent wide scene, edge to edge. Premium believable 3D videogame key art with worn gunmetal slabs, segmented tank tracks, restrained warm amber base lights and soft blue mountain mist. Serious intelligent military strategy mood. Maintain the reference's grey tracked tank identity and concrete futuristic base architecture. No text of any kind, no logos, letters, numbers, buttons, card borders, interface, phones, screens, collage, montage, watermarks or floating graphic shapes. No neon fantasy weapons or cartoon styling. Keep important subjects wholly inside the image with generous edge clearance for center-crop. Primary request: extract the FEEL and composition of the reference's main scene into a new clean landscape hero asset, approximately 1170x780 pixels (3:2). A large grey angular tracked cannon tank occupies the right foreground in front three-quarter view facing left, its cannon aimed gently toward the left; full tracks and turret visible, recognizable silhouette. On the left midground a commanding concrete base with a large satellite dish. Cold rocky mountain battlefield at dawn, restrained pale peach horizon behind blue-grey ridges. Hero tank is dominant and carefully detailed. The lower 12 percent naturally fades through dark rocky shadow into nearly uniform deep navy #071521 so the actual app can transition below it. There must be no title, topographic overlay, UI or empty fake text panel."
+      },
+      {
+        "asset": "campaign",
+        "path": "app/src/main/res/drawable-nodpi/home_portrait_campaign_083.png",
+        "width": 1691,
+        "height": 930,
+        "mode": "RGB",
+        "bytes": 2839737,
+        "sha256": "e108a320baed27dd8ab23a26ccf3ba49437edd9b3973f472bdbe9f5d889458ae",
+        "generatedOriginal": "C:\\Users\\punke\\.codex\\generated_images\\01a1d6dd-4985-79a2-b75c-fa0a88b9d824\\exec-4721cc1b-ecbf-4333-843a-cab627775f30.png",
+        "copiedWithoutImageModification": true,
+        "transparentBackground": false,
+        "referenceRole": "Style/composition reference, not a complete UI screenshot to embed",
+        "prompt": "Use case: stylized-concept. Asset type: final production raster art for an Android strategy game's portrait home screen. Input image is ONLY a reference for its consistent cinematic game-art style, angular grey armored units, chilly mountain dawn and blue-grey/navy palette; ignore every interface element, logo, word and border. Render a single coherent wide scene, edge to edge. Premium believable 3D videogame key art with worn gunmetal slabs, segmented tank tracks, restrained warm amber base lights and soft blue mountain mist. Serious intelligent military strategy mood. Maintain the reference's grey tracked tank identity and concrete futuristic base architecture. No text of any kind, no logos, letters, numbers, buttons, card borders, interface, phones, screens, collage, montage, watermarks or floating graphic shapes. No neon fantasy weapons or cartoon styling. Keep important subjects wholly inside the image with generous edge clearance for center-crop. Primary request: a clean final landscape thumbnail about 600x330 pixels (20:11). Campaign scene: a substantial concrete command base in a mountain valley with a central command tower, two smaller satellite dishes and two grey angular tracked tanks patrolling the foreground. Wide balanced establishing shot matching the campaign thumbnail in the reference. Architecture readable at small display size, no huge foreground tank hiding the base. Chilly blue-grey dawn, very restrained amber window lights, plain scene filling the image; no dark text area."
+      },
+      {
+        "asset": "towers",
+        "path": "app/src/main/res/drawable-nodpi/home_portrait_towers_083.png",
+        "width": 1691,
+        "height": 930,
+        "mode": "RGB",
+        "bytes": 2550567,
+        "sha256": "fab8fcf24ea29229887b732703c186a6a6e374991bd1665c269df160aa62fafe",
+        "generatedOriginal": "C:\\Users\\punke\\.codex\\generated_images\\01a1d6dd-4985-79a2-b75c-fa0a88b9d824\\exec-5c22c7a7-a024-4779-ace8-7a06f8c62837.png",
+        "copiedWithoutImageModification": true,
+        "transparentBackground": false,
+        "referenceRole": "Style/composition reference, not a complete UI screenshot to embed",
+        "prompt": "Use case: stylized-concept. Asset type: final production raster art for an Android strategy game's portrait home screen. Input image is ONLY a reference for its consistent cinematic game-art style, angular grey armored units, chilly mountain dawn and blue-grey/navy palette; ignore every interface element, logo, word and border. Render a single coherent wide scene, edge to edge. Premium believable 3D videogame key art with worn gunmetal slabs, segmented tank tracks, restrained warm amber base lights and soft blue mountain mist. Serious intelligent military strategy mood. Maintain the reference's grey tracked tank identity and concrete futuristic base architecture. No text of any kind, no logos, letters, numbers, buttons, card borders, interface, phones, screens, collage, montage, watermarks or floating graphic shapes. No neon fantasy weapons or cartoon styling. Keep important subjects wholly inside the image with generous edge clearance for center-crop. Primary request: a clean final landscape thumbnail about 600x330 pixels (20:11). Towers defence scene: one powerful concrete defensive cannon tower on the right center, with an angular armored multi-barrel gun pointing slightly left and upward; gunmetal plates, rugged heavy concrete polygonal base. A lower base wall and distant chilly rugged mountains complete the left background. Match the reference's Towers thumbnail closely, a serious futuristic defence emplacement, readable silhouette, restrained amber lights, no firing explosion, no dark text area."
+      },
+      {
+        "asset": "ffa",
+        "path": "app/src/main/res/drawable-nodpi/home_portrait_ffa_083.png",
+        "width": 1691,
+        "height": 930,
+        "mode": "RGB",
+        "bytes": 2848746,
+        "sha256": "74802c19a115f7bb12007453caec085660a9409eecec6aaacd6b66a5c96f273a",
+        "generatedOriginal": "C:\\Users\\punke\\.codex\\generated_images\\01a1d6dd-4985-79a2-b75c-fa0a88b9d824\\exec-628c2830-b676-409a-95fe-0d690d99523c.png",
+        "copiedWithoutImageModification": true,
+        "transparentBackground": false,
+        "referenceRole": "Style/composition reference, not a complete UI screenshot to embed",
+        "prompt": "Use case: stylized-concept. Asset type: final production raster art for an Android strategy game's portrait home screen. Input image is ONLY a reference for its consistent cinematic game-art style, angular grey armored units, chilly mountain dawn and blue-grey/navy palette; ignore every interface element, logo, word and border. Render a single coherent wide scene, edge to edge. Premium believable 3D videogame key art with worn gunmetal slabs, segmented tank tracks, restrained warm amber base lights and soft blue mountain mist. Serious intelligent military strategy mood. Maintain the reference's grey tracked tank identity and concrete futuristic base architecture. No text of any kind, no logos, letters, numbers, buttons, card borders, interface, phones, screens, collage, montage, watermarks or floating graphic shapes. No neon fantasy weapons or cartoon styling. Keep important subjects wholly inside the image with generous edge clearance for center-crop. Primary request: a clean final landscape thumbnail about 600x330 pixels (20:11). Free for all battle scene: three distinct grey angular tracked cannon tanks crossing a rocky mountain basin, one prominent tank left foreground facing diagonally right and two smaller tanks right/midground, light dust around their tracks. Clear compact military composition with separated recognizable full silhouettes and no clutter. Match the reference's FFA thumbnail. Chilly blue-grey dawn and a faint warm horizon, no base or satellite dish necessary, no dark text area."
+      },
+      {
+        "asset": "multiplayer",
+        "path": "app/src/main/res/drawable-nodpi/home_portrait_multiplayer_083.png",
+        "width": 1691,
+        "height": 930,
+        "mode": "RGB",
+        "bytes": 2790118,
+        "sha256": "236a9c074d513e410fd1d29d9fdcdb3201b016dbc4b5ca035669f8be65d722bb",
+        "generatedOriginal": "C:\\Users\\punke\\.codex\\generated_images\\01a1d6dd-4985-79a2-b75c-fa0a88b9d824\\exec-9a5e1290-5677-4d58-860c-e29b572adcc5.png",
+        "copiedWithoutImageModification": true,
+        "transparentBackground": false,
+        "referenceRole": "Style/composition reference, not a complete UI screenshot to embed",
+        "prompt": "Use case: stylized-concept. Asset type: final production raster art for an Android strategy game's portrait home screen. Input image is ONLY a reference for its consistent cinematic game-art style, angular grey armored units, chilly mountain dawn and blue-grey/navy palette; ignore every interface element, logo, word and border. Render a single coherent wide scene, edge to edge. Premium believable 3D videogame key art with worn gunmetal slabs, segmented tank tracks, restrained warm amber base lights and soft blue mountain mist. Serious intelligent military strategy mood. Maintain the reference's grey tracked tank identity and concrete futuristic base architecture. No text of any kind, no logos, letters, numbers, buttons, card borders, interface, phones, screens, collage, montage, watermarks or floating graphic shapes. No neon fantasy weapons or cartoon styling. Keep important subjects wholly inside the image with generous edge clearance for center-crop. Primary request: a clean final landscape thumbnail about 600x330 pixels (20:11). Multiplayer scene: a concrete satellite command base with a large dish on the right midground and four angular grey tracked tanks deployed across an open rocky foreground, suggesting coordinated armies rather than an explosion spectacle. One tank left foreground, remaining tanks smaller and clearly separated. Chilly mountain dawn, subtle amber base lights, same blue-grey/navy atmosphere as the reference multiplayer thumbnail. No faction flags, no text area."
+      }
+    ]
+  },
+  "sourcePreservation": {
+    "changedBaselineSources": [
+      {
+        "path": "AGENTS.md",
+        "beforeSHA256": "b165e68f2796ba154de7ad8dfeed11f96a67ba8c499c37ef8400a1a32e6fcfcf",
+        "sha256": "2cdd1315778d215bdd9d0fe2e6d4315f448d530b18ab26bafbe24e0e43cf7ace"
+      },
+      {
+        "path": "README-WARZONE-TOWERS.md",
+        "beforeSHA256": "2aa9f29a2359b857186858b25b9539371b943543c7791af1a582556d7645ef2a",
+        "sha256": "0183beddb79b6f60f0730704e9b65ab923a83f27a9719a617473e36effc5caad"
+      },
+      {
+        "path": "README.md",
+        "beforeSHA256": "ee60b6e761a918f6440b55a0ceb2c1addba6e736df346d37e7dffe7e77aaae12",
+        "sha256": "30e1fa0359788c257298eba3bdcb319e7519111db97ec689348f2889aed5ade5"
+      },
+      {
+        "path": "app/build.gradle.kts",
+        "beforeSHA256": "82b88a636c91760dd4e0d932fc039d51097ef1a489176fe4000ce6ce3b40508c",
+        "sha256": "eb41013a0d5d5824189cd99ca5fddf080b948950ee58d5e0268d0cf0d9c2e64b"
+      },
+      {
+        "path": "app/src/main/AndroidManifest.xml",
+        "beforeSHA256": "ef810355c2d57d911773e137d2eeccd97816db9060d20afb2d2ca1511f7cae4b",
+        "sha256": "b6f6b54a0f20351518cd7b144eb40ec588beeae696ea432fc1e967cb29adabca"
+      },
+      {
+        "path": "app/src/main/java/com/rbabbit/blocknight/warzone/GraphicsSetupView.java",
+        "beforeSHA256": "3ab6dd587f5d3f5755d9b551a4bf502f97028f06a35e999be181af75562a1b5c",
+        "sha256": "b185e5b00ddcc6665e1cf3be7d958e54a66e42ad10cbe42af47c434d1443d1d4"
+      },
+      {
+        "path": "app/src/main/java/com/rbabbit/blocknight/warzone/HomeModesView.java",
+        "beforeSHA256": "e8721a43e140513176e2dcaf77946db340b182b0c60e7e03c49cc3303084c112",
+        "sha256": "de2dd450e20a084f018d975c833aaa8f1eaedc3e2a9f8c1f9eae3d4f04620572"
+      },
+      {
+        "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MainActivity.java",
+        "beforeSHA256": "3dcacc14ade3c349ef691992ad77879ffe24ae151ea788cd8d83db31e19d3999",
+        "sha256": "7a5306af800852552d7d18adcc09045e8ed0b4d14209b70768fa130ec0bb64e3"
+      },
+      {
+        "path": "design-qa.md",
+        "beforeSHA256": "b144541a201e80783d823076bf17a878e86a23cec7b7d3cc3f3069b49032e846",
+        "sha256": "3d904d7195bdf064e29af9d948d32485a4546d7d34c0d4ffa00504b109293f15"
+      },
+      {
+        "path": "docs/KNOWN-ISSUES.md",
+        "beforeSHA256": "ae26c429b6daf1de783e52b560cf711e43beb9e9ef82fc18be6e4c5eb21efb2b",
+        "sha256": "ad47f45b7eced7d9690f58aae01ee1b724c9c3b74c22b1305b44383019910424"
+      }
+    ],
+    "addedSources": [
+      "app/src/main/java/com/rbabbit/blocknight/warzone/HomeOrientationPolicy.java",
+      "app/src/main/java/com/rbabbit/blocknight/warzone/PortraitHomeLayout.java",
+      "app/src/main/res/drawable-nodpi/home_portrait_campaign_083.png",
+      "app/src/main/res/drawable-nodpi/home_portrait_ffa_083.png",
+      "app/src/main/res/drawable-nodpi/home_portrait_hero_083.png",
+      "app/src/main/res/drawable-nodpi/home_portrait_multiplayer_083.png",
+      "app/src/main/res/drawable-nodpi/home_portrait_towers_083.png",
+      "archive/release-0.83-portrait-home.json",
+      "docs/releases/0.83-portrait-home.md",
+      "qa/portrait-home-083/art-provenance.json",
+      "qa/portrait-home-083/audit.txt",
+      "qa/portrait-home-083/baseline-home.png",
+      "qa/portrait-home-083/build.log",
+      "qa/portrait-home-083/delivery-game-before-pan-screen.json",
+      "qa/portrait-home-083/delivery-game-before-pan-screen.png",
+      "qa/portrait-home-083/delivery-game-before-pan-screen.xml",
+      "qa/portrait-home-083/delivery-game-before-pan.json",
+      "qa/portrait-home-083/delivery-game-before-resume-screen.json",
+      "qa/portrait-home-083/delivery-game-before-resume-screen.png",
+      "qa/portrait-home-083/delivery-game-before-resume-screen.xml",
+      "qa/portrait-home-083/delivery-game-before-resume.json",
+      "qa/portrait-home-083/delivery-game-home-return.json",
+      "qa/portrait-home-083/delivery-game-home-return.png",
+      "qa/portrait-home-083/delivery-game-home-return.xml",
+      "qa/portrait-home-083/delivery-game-home.json",
+      "qa/portrait-home-083/delivery-game-home.png",
+      "qa/portrait-home-083/delivery-game-home.xml",
+      "qa/portrait-home-083/delivery-game-map-return.json",
+      "qa/portrait-home-083/delivery-game-map-return.png",
+      "qa/portrait-home-083/delivery-game-map-return.xml",
+      "qa/portrait-home-083/delivery-game-map.json",
+      "qa/portrait-home-083/delivery-game-map.png",
+      "qa/portrait-home-083/delivery-game-map.xml",
+      "qa/portrait-home-083/delivery-game-pan-screen.json",
+      "qa/portrait-home-083/delivery-game-pan-screen.png",
+      "qa/portrait-home-083/delivery-game-pan-screen.xml",
+      "qa/portrait-home-083/delivery-game-pan.json",
+      "qa/portrait-home-083/delivery-game-research-screen.json",
+      "qa/portrait-home-083/delivery-game-research-screen.png",
+      "qa/portrait-home-083/delivery-game-research-screen.xml",
+      "qa/portrait-home-083/delivery-game-research.json",
+      "qa/portrait-home-083/delivery-game-resumed-screen.json",
+      "qa/portrait-home-083/delivery-game-resumed-screen.png",
+      "qa/portrait-home-083/delivery-game-resumed-screen.xml",
+      "qa/portrait-home-083/delivery-game-resumed.json",
+      "qa/portrait-home-083/delivery-game-world.json",
+      "qa/portrait-home-083/delivery-game-world.png",
+      "qa/portrait-home-083/delivery-game-world.xml",
+      "qa/portrait-home-083/delivery-home-compact.json",
+      "qa/portrait-home-083/delivery-home-compact.png",
+      "qa/portrait-home-083/delivery-home-compact.xml",
+      "qa/portrait-home-083/delivery-home-default.json",
+      "qa/portrait-home-083/delivery-home-default.png",
+      "qa/portrait-home-083/delivery-home-default.xml",
+      "qa/portrait-home-083/delivery-home-large-text-bottom.json",
+      "qa/portrait-home-083/delivery-home-large-text-bottom.png",
+      "qa/portrait-home-083/delivery-home-large-text-bottom.xml",
+      "qa/portrait-home-083/delivery-home-large-text-top.json",
+      "qa/portrait-home-083/delivery-home-large-text-top.png",
+      "qa/portrait-home-083/delivery-home-large-text-top.xml",
+      "qa/portrait-home-083/delivery-home-reference.json",
+      "qa/portrait-home-083/delivery-home-reference.png",
+      "qa/portrait-home-083/delivery-home-reference.xml",
+      "qa/portrait-home-083/delivery-home-restored.json",
+      "qa/portrait-home-083/delivery-home-restored.png",
+      "qa/portrait-home-083/delivery-home-restored.xml",
+      "qa/portrait-home-083/delivery-large-text-hub.json",
+      "qa/portrait-home-083/delivery-large-text-hub.png",
+      "qa/portrait-home-083/delivery-large-text-hub.xml",
+      "qa/portrait-home-083/delivery-large-text-return.json",
+      "qa/portrait-home-083/delivery-large-text-return.png",
+      "qa/portrait-home-083/delivery-large-text-return.xml",
+      "qa/portrait-home-083/delivery-resume-after.json",
+      "qa/portrait-home-083/delivery-resume-after.png",
+      "qa/portrait-home-083/delivery-resume-after.xml",
+      "qa/portrait-home-083/delivery-resume-before.json",
+      "qa/portrait-home-083/delivery-resume-before.png",
+      "qa/portrait-home-083/delivery-resume-before.xml",
+      "qa/portrait-home-083/delivery-return-campaign.json",
+      "qa/portrait-home-083/delivery-return-campaign.png",
+      "qa/portrait-home-083/delivery-return-campaign.xml",
+      "qa/portrait-home-083/delivery-return-ffa.json",
+      "qa/portrait-home-083/delivery-return-ffa.png",
+      "qa/portrait-home-083/delivery-return-ffa.xml",
+      "qa/portrait-home-083/delivery-return-guide.json",
+      "qa/portrait-home-083/delivery-return-guide.png",
+      "qa/portrait-home-083/delivery-return-guide.xml",
+      "qa/portrait-home-083/delivery-return-hub.json",
+      "qa/portrait-home-083/delivery-return-hub.png",
+      "qa/portrait-home-083/delivery-return-hub.xml",
+      "qa/portrait-home-083/delivery-return-multiplayer.json",
+      "qa/portrait-home-083/delivery-return-multiplayer.png",
+      "qa/portrait-home-083/delivery-return-multiplayer.xml",
+      "qa/portrait-home-083/delivery-return-towers.json",
+      "qa/portrait-home-083/delivery-return-towers.png",
+      "qa/portrait-home-083/delivery-return-towers.xml",
+      "qa/portrait-home-083/delivery-route-campaign.json",
+      "qa/portrait-home-083/delivery-route-campaign.png",
+      "qa/portrait-home-083/delivery-route-campaign.xml",
+      "qa/portrait-home-083/delivery-route-ffa.json",
+      "qa/portrait-home-083/delivery-route-ffa.png",
+      "qa/portrait-home-083/delivery-route-ffa.xml",
+      "qa/portrait-home-083/delivery-route-guide.json",
+      "qa/portrait-home-083/delivery-route-guide.png",
+      "qa/portrait-home-083/delivery-route-guide.xml",
+      "qa/portrait-home-083/delivery-route-hub.json",
+      "qa/portrait-home-083/delivery-route-hub.png",
+      "qa/portrait-home-083/delivery-route-hub.xml",
+      "qa/portrait-home-083/delivery-route-multiplayer.json",
+      "qa/portrait-home-083/delivery-route-multiplayer.png",
+      "qa/portrait-home-083/delivery-route-multiplayer.xml",
+      "qa/portrait-home-083/delivery-route-towers.json",
+      "qa/portrait-home-083/delivery-route-towers.png",
+      "qa/portrait-home-083/delivery-route-towers.xml",
+      "qa/portrait-home-083/delivery-routes-before.json",
+      "qa/portrait-home-083/delivery-routes-before.png",
+      "qa/portrait-home-083/delivery-routes-before.xml",
+      "qa/portrait-home-083/device-before.json",
+      "qa/portrait-home-083/failure-delivery-game-return-dialog.json",
+      "qa/portrait-home-083/failure-delivery-game-return-dialog.png",
+      "qa/portrait-home-083/fallback.json",
+      "qa/portrait-home-083/game-return.json",
+      "qa/portrait-home-083/gameplay.json",
+      "qa/portrait-home-083/home-layout.json",
+      "qa/portrait-home-083/installed-apk.json",
+      "qa/portrait-home-083/orientation.json",
+      "qa/portrait-home-083/reference.png",
+      "qa/portrait-home-083/routes.json",
+      "qa/portrait-home-083/verification.json",
+      "tools/package-portrait-home-083.py",
+      "tools/portrait-home-game-083.cjs",
+      "tools/portrait-home-live-083.cjs",
+      "tools/test-home-orientation-083.py",
+      "tools/test-portrait-home-layout-083.py"
+    ],
+    "baselineSourceEntries": 13028,
+    "everyBaselineSourceEntryRetained": true,
+    "allExistingAssetsNativeLibrariesMapsMusicAndResourceSourcesFrozen": true,
+    "onlyApprovedNativeHomeOrientationAndNewArtworkChanged": true
+  },
+  "certificateSHA256": "4499efe00477c7c724c06a1dd96f935864548665c13ab5e2bd0a9c0f83f7cb15",
+  "changedAPKMembers": [
+    "AndroidManifest.xml",
+    "classes2.dex",
+    "classes3.dex",
+    "res/drawable-nodpi-v4/home_portrait_campaign_083.png",
+    "res/drawable-nodpi-v4/home_portrait_ffa_083.png",
+    "res/drawable-nodpi-v4/home_portrait_hero_083.png",
+    "res/drawable-nodpi-v4/home_portrait_multiplayer_083.png",
+    "res/drawable-nodpi-v4/home_portrait_towers_083.png",
+    "res/drawable/ic_launcher_foreground.xml",
+    "res/drawable/notification_bg.xml",
+    "res/drawable/notification_bg_low.xml",
+    "res/drawable/notification_tile_bg.xml",
+    "res/drawable/warzone_splash.xml",
+    "res/layout/offline_ads_dialog.xml",
+    "res/mipmap-anydpi-v26/ic_launcher.xml",
+    "res/mipmap-anydpi-v26/ic_launcher_round.xml",
+    "resources.arsc"
+  ],
+  "everyBaselineAPKMemberRetained": true,
+  "allAPKAssetsMatchSource": true,
+  "allExistingAssetAndLibraryBytesFrozen": true,
+  "existingNonRelinkedResourceBytesFrozen": true,
+  "compiledXmlResourceReferencesSemanticallyFrozen": true,
+  "compiledXmlResourceRelinks": [
+    {
+      "path": "res/drawable/ic_launcher_foreground.xml",
+      "beforeSHA256": "35decb5d940ea6bf9f4e0420fede4eb60c6c77b0e89bc063c1de75297fdeb15a",
+      "sha256": "4887e54f3a8bead5f4df9ea61dc90a60b3f74432fdba98ada6da51b0f60d2259",
+      "sameLength": true,
+      "onlySameNameResourceIdWordsChanged": true,
+      "changedReferenceWords": [
+        {
+          "offset": 352,
+          "beforeID": "0x7f050032",
+          "afterID": "0x7f050037",
+          "resource": "drawable/warzone_launcher_icon"
+        }
+      ],
+      "canonicalXmlTreesEqual": true,
+      "canonicalXmlTreeSHA256": "adea22ef62f1c02143bc0c138881821ebd32b7a4a5792c368de6be03efde35e3",
+      "canonicalXmlTree": "N: android=http://schemas.android.com/apk/res/android (line=4)\n  E: inset (line=4)\n    A: http://schemas.android.com/apk/res/android:inset(0x010104b5)=0.240000%\n      E: bitmap (line=7)\n        A: http://schemas.android.com/apk/res/android:gravity(0x010100af)=0x00000077\n        A: http://schemas.android.com/apk/res/android:src(0x01010119)=@{drawable/warzone_launcher_icon}\n        A: http://schemas.android.com/apk/res/android:filter(0x0101011b)=true\n"
+    },
+    {
+      "path": "res/drawable/notification_bg.xml",
+      "beforeSHA256": "3db49dd263796f5e4b99c39eabe4f90891acd25d225371210560483000f003e2",
+      "sha256": "f5be8e674dbd6b98007f37e1be083031c08a4578be0efa69b3fa9ae0d09c8c1a",
+      "sameLength": true,
+      "onlySameNameResourceIdWordsChanged": true,
+      "changedReferenceWords": [
+        {
+          "offset": 356,
+          "beforeID": "0x7f050027",
+          "afterID": "0x7f05002c",
+          "resource": "drawable/notification_bg_normal_pressed"
+        },
+        {
+          "offset": 456,
+          "beforeID": "0x7f050026",
+          "afterID": "0x7f05002b",
+          "resource": "drawable/notification_bg_normal"
+        }
+      ],
+      "canonicalXmlTreesEqual": true,
+      "canonicalXmlTreeSHA256": "b1a548bcf47853d88896089fbf850307795baa1db34317a91c3f902009d16063",
+      "canonicalXmlTree": "N: android=http://schemas.android.com/apk/res/android (line=19)\n  E: selector (line=19)\n    A: http://schemas.android.com/apk/res/android:exitFadeDuration(0x0101030d)=@0x010e0001\n      E: item (line=22)\n        A: http://schemas.android.com/apk/res/android:state_pressed(0x010100a7)=true\n        A: http://schemas.android.com/apk/res/android:drawable(0x01010199)=@{drawable/notification_bg_normal_pressed}\n      E: item (line=23)\n        A: http://schemas.android.com/apk/res/android:state_pressed(0x010100a7)=false\n        A: http://schemas.android.com/apk/res/android:drawable(0x01010199)=@{drawable/notification_bg_normal}\n"
+    },
+    {
+      "path": "res/drawable/notification_bg_low.xml",
+      "beforeSHA256": "39e3548c055391c80b07123513bdfeb56e206cedfc6e4e90a52f623f36d527bd",
+      "sha256": "51e5e97c328fde7c993b06644e2deedc39e6747c3e3c11c5329b698cf2ee2bdb",
+      "sameLength": true,
+      "onlySameNameResourceIdWordsChanged": true,
+      "changedReferenceWords": [
+        {
+          "offset": 356,
+          "beforeID": "0x7f050025",
+          "afterID": "0x7f05002a",
+          "resource": "drawable/notification_bg_low_pressed"
+        },
+        {
+          "offset": 456,
+          "beforeID": "0x7f050024",
+          "afterID": "0x7f050029",
+          "resource": "drawable/notification_bg_low_normal"
+        }
+      ],
+      "canonicalXmlTreesEqual": true,
+      "canonicalXmlTreeSHA256": "581e8e6b3be55ae959731d8f6d354e1e20a4ef839867f189e0df6802bec53519",
+      "canonicalXmlTree": "N: android=http://schemas.android.com/apk/res/android (line=19)\n  E: selector (line=19)\n    A: http://schemas.android.com/apk/res/android:exitFadeDuration(0x0101030d)=@0x010e0001\n      E: item (line=21)\n        A: http://schemas.android.com/apk/res/android:state_pressed(0x010100a7)=true\n        A: http://schemas.android.com/apk/res/android:drawable(0x01010199)=@{drawable/notification_bg_low_pressed}\n      E: item (line=22)\n        A: http://schemas.android.com/apk/res/android:state_pressed(0x010100a7)=false\n        A: http://schemas.android.com/apk/res/android:drawable(0x01010199)=@{drawable/notification_bg_low_normal}\n"
+    },
+    {
+      "path": "res/drawable/notification_tile_bg.xml",
+      "beforeSHA256": "dc298ccf05b2db02d8008032392620a6dd449ca2883364c48f0b5575d504b813",
+      "sha256": "f60f7aa10e3a31810df25d87844864e50e6e4656131f09d849e22a71e4268c68",
+      "sameLength": true,
+      "onlySameNameResourceIdWordsChanged": true,
+      "changedReferenceWords": [
+        {
+          "offset": 232,
+          "beforeID": "0x7f05002c",
+          "afterID": "0x7f050031",
+          "resource": "drawable/notify_panel_notification_icon_bg"
+        }
+      ],
+      "canonicalXmlTreesEqual": true,
+      "canonicalXmlTreeSHA256": "3e9d0a1b6894a86e7cd197a816aae1feec23028ac1265870a22dc1dd515cd636",
+      "canonicalXmlTree": "N: android=http://schemas.android.com/apk/res/android (line=22)\n  E: bitmap (line=22)\n    A: http://schemas.android.com/apk/res/android:src(0x01010119)=@{drawable/notify_panel_notification_icon_bg}\n    A: http://schemas.android.com/apk/res/android:tileMode(0x01010201)=1\n"
+    },
+    {
+      "path": "res/drawable/warzone_splash.xml",
+      "beforeSHA256": "702978845583fa7a02113746c50051a9c3d88dd9f987dba688585e2fe9e2e587",
+      "sha256": "4303e207452595b6117a3ac00b7f0a60c0c53ee27ee3418b8ca2a3bebb5e217d",
+      "sameLength": true,
+      "onlySameNameResourceIdWordsChanged": true,
+      "changedReferenceWords": [
+        {
+          "offset": 268,
+          "beforeID": "0x7f050031",
+          "afterID": "0x7f050036",
+          "resource": "drawable/warzone_branding"
+        }
+      ],
+      "canonicalXmlTreesEqual": true,
+      "canonicalXmlTreeSHA256": "bddabc6c654cf5ee0d63395674b40bad129ec9671c794c1192b6580e629b439d",
+      "canonicalXmlTree": "N: android=http://schemas.android.com/apk/res/android (line=5)\n  E: bitmap (line=5)\n    A: http://schemas.android.com/apk/res/android:gravity(0x010100af)=0x00000077\n    A: http://schemas.android.com/apk/res/android:src(0x01010119)=@{drawable/warzone_branding}\n    A: http://schemas.android.com/apk/res/android:filter(0x0101011b)=true\n"
+    },
+    {
+      "path": "res/layout/offline_ads_dialog.xml",
+      "beforeSHA256": "07be7c5c2b62e072bee9eb918adcf834b66b000b881710385b8a7c30715818a6",
+      "sha256": "d26ab78d7f5adc3f45ceba4ec192982ff9ef9de53e151a8aa5f6e6444dda5af0",
+      "sameLength": true,
+      "onlySameNameResourceIdWordsChanged": true,
+      "changedReferenceWords": [
+        {
+          "offset": 636,
+          "beforeID": "0x7f05002d",
+          "afterID": "0x7f050032",
+          "resource": "drawable/offline_dialog_background"
+        },
+        {
+          "offset": 872,
+          "beforeID": "0x7f05002e",
+          "afterID": "0x7f050033",
+          "resource": "drawable/offline_dialog_default_icon_42dp"
+        }
+      ],
+      "canonicalXmlTreesEqual": true,
+      "canonicalXmlTreeSHA256": "a6663e8f589c075cb8b393c909a4945d40112815d019517d63d6d76d2a9bef59",
+      "canonicalXmlTree": "N: android=http://schemas.android.com/apk/res/android (line=9)\n  E: LinearLayout (line=9)\n    A: http://schemas.android.com/apk/res/android:orientation(0x010100c4)=1\n    A: http://schemas.android.com/apk/res/android:background(0x010100d4)=@{drawable/offline_dialog_background}\n    A: http://schemas.android.com/apk/res/android:layout_width(0x010100f4)=-1\n    A: http://schemas.android.com/apk/res/android:layout_height(0x010100f5)=-2\n    A: http://schemas.android.com/apk/res/android:filterTouchesWhenObscured(0x010102c4)=true\n    A: http://schemas.android.com/apk/res/android:paddingHorizontal(0x0101053d)=24.000000dp\n    A: http://schemas.android.com/apk/res/android:paddingVertical(0x0101053e)=40.000000dp\n      E: ImageView (line=17)\n        A: http://schemas.android.com/apk/res/android:layout_gravity(0x010100b3)=0x00000011\n        A: http://schemas.android.com/apk/res/android:id(0x010100d0)=@{id/offline_dialog_image}\n        A: http://schemas.android.com/apk/res/android:layout_width(0x010100f4)=42.000000dp\n        A: http://schemas.android.com/apk/res/android:layout_height(0x010100f5)=42.000000dp\n        A: http://schemas.android.com/apk/res/android:src(0x01010119)=@{drawable/offline_dialog_default_icon_42dp}\n        A: http://schemas.android.com/apk/res/android:scaleType(0x0101011d)=7\n        A: http://schemas.android.com/apk/res/android:contentDescription(0x01010273)=@{string/offline_dialog_image_description}\n      E: LinearLayout (line=22)\n        A: http://schemas.android.com/apk/res/android:orientation(0x010100c4)=1\n        A: http://schemas.android.com/apk/res/android:paddingTop(0x010100d7)=14.000000dp\n        A: http://schemas.android.com/apk/res/android:layout_width(0x010100f4)=-1\n        A: http://schemas.android.com/apk/res/android:layout_height(0x010100f5)=-2\n          E: TextView (line=29)\n            A: http://schemas.android.com/apk/res/android:textColor(0x01010098)=@0x0106000c\n            A: http://schemas.android.com/apk/res/android:gravity(0x010100af)=0x00000011\n            A: http://schemas.android.com/apk/res/android:id(0x010100d0)=@{id/offline_dialog_text}\n            A: http://schemas.android.com/apk/res/android:layout_width(0x010100f4)=-1\n            A: http://schemas.android.com/apk/res/android:layout_height(0x010100f5)=-2\n            A: http://schemas.android.com/apk/res/android:text(0x0101014f)=@{string/offline_dialog_text}\n          E: TextView (line=38)\n            A: http://schemas.android.com/apk/res/android:textColor(0x01010098)=@0x01060000\n            A: http://schemas.android.com/apk/res/android:gravity(0x010100af)=0x00000011\n            A: http://schemas.android.com/apk/res/android:id(0x010100d0)=@{id/offline_dialog_advertiser_name}\n            A: http://schemas.android.com/apk/res/android:paddingTop(0x010100d7)=12.000000dp\n            A: http://schemas.android.com/apk/res/android:visibility(0x010100dc)=2\n            A: http://schemas.android.com/apk/res/android:layout_width(0x010100f4)=-1\n            A: http://schemas.android.com/apk/res/android:layout_height(0x010100f5)=-2\n            A: http://schemas.android.com/apk/res/android:text(0x0101014f)=\"\"\n"
+    },
+    {
+      "path": "res/mipmap-anydpi-v26/ic_launcher.xml",
+      "beforeSHA256": "8bec7e19d8f0aa055ad689de6cfeb9bed01871264a9591c4432924db71ae5150",
+      "sha256": "8689281bbd3a1c3bd49608fab168c9f1f2d7ca976c28e36b8d2826e9f7de90d8",
+      "sameLength": true,
+      "onlySameNameResourceIdWordsChanged": true,
+      "changedReferenceWords": [
+        {
+          "offset": 372,
+          "beforeID": "0x7f05001f",
+          "afterID": "0x7f050024",
+          "resource": "drawable/ic_launcher_foreground"
+        }
+      ],
+      "canonicalXmlTreesEqual": true,
+      "canonicalXmlTreeSHA256": "5e5fac3cb9f488625c90ddddc8c835cd3b76487265d69a2acf53502b05a6b043",
+      "canonicalXmlTree": "N: android=http://schemas.android.com/apk/res/android (line=2)\n  E: adaptive-icon (line=2)\n      E: background (line=3)\n        A: http://schemas.android.com/apk/res/android:drawable(0x01010199)=@{color/warzone_icon_background}\n      E: foreground (line=4)\n        A: http://schemas.android.com/apk/res/android:drawable(0x01010199)=@{drawable/ic_launcher_foreground}\n"
+    },
+    {
+      "path": "res/mipmap-anydpi-v26/ic_launcher_round.xml",
+      "beforeSHA256": "8bec7e19d8f0aa055ad689de6cfeb9bed01871264a9591c4432924db71ae5150",
+      "sha256": "8689281bbd3a1c3bd49608fab168c9f1f2d7ca976c28e36b8d2826e9f7de90d8",
+      "sameLength": true,
+      "onlySameNameResourceIdWordsChanged": true,
+      "changedReferenceWords": [
+        {
+          "offset": 372,
+          "beforeID": "0x7f05001f",
+          "afterID": "0x7f050024",
+          "resource": "drawable/ic_launcher_foreground"
+        }
+      ],
+      "canonicalXmlTreesEqual": true,
+      "canonicalXmlTreeSHA256": "5e5fac3cb9f488625c90ddddc8c835cd3b76487265d69a2acf53502b05a6b043",
+      "canonicalXmlTree": "N: android=http://schemas.android.com/apk/res/android (line=2)\n  E: adaptive-icon (line=2)\n      E: background (line=3)\n        A: http://schemas.android.com/apk/res/android:drawable(0x01010199)=@{color/warzone_icon_background}\n      E: foreground (line=4)\n        A: http://schemas.android.com/apk/res/android:drawable(0x01010199)=@{drawable/ic_launcher_foreground}\n"
+    }
+  ],
+  "newArtworkPixelsMatchSource": true,
+  "newArtwork": [
+    {
+      "source": "app/src/main/res/drawable-nodpi/home_portrait_campaign_083.png",
+      "apkPath": "res/drawable-nodpi-v4/home_portrait_campaign_083.png",
+      "sourceSHA256": "e108a320baed27dd8ab23a26ccf3ba49437edd9b3973f472bdbe9f5d889458ae",
+      "apkSHA256": "e108a320baed27dd8ab23a26ccf3ba49437edd9b3973f472bdbe9f5d889458ae"
+    },
+    {
+      "source": "app/src/main/res/drawable-nodpi/home_portrait_ffa_083.png",
+      "apkPath": "res/drawable-nodpi-v4/home_portrait_ffa_083.png",
+      "sourceSHA256": "74802c19a115f7bb12007453caec085660a9409eecec6aaacd6b66a5c96f273a",
+      "apkSHA256": "74802c19a115f7bb12007453caec085660a9409eecec6aaacd6b66a5c96f273a"
+    },
+    {
+      "source": "app/src/main/res/drawable-nodpi/home_portrait_hero_083.png",
+      "apkPath": "res/drawable-nodpi-v4/home_portrait_hero_083.png",
+      "sourceSHA256": "b3e891fedce63ca27189a52ccb72344a6b38159b1d4a69f11917c55cb919d208",
+      "apkSHA256": "b3e891fedce63ca27189a52ccb72344a6b38159b1d4a69f11917c55cb919d208"
+    },
+    {
+      "source": "app/src/main/res/drawable-nodpi/home_portrait_multiplayer_083.png",
+      "apkPath": "res/drawable-nodpi-v4/home_portrait_multiplayer_083.png",
+      "sourceSHA256": "236a9c074d513e410fd1d29d9fdcdb3201b016dbc4b5ca035669f8be65d722bb",
+      "apkSHA256": "236a9c074d513e410fd1d29d9fdcdb3201b016dbc4b5ca035669f8be65d722bb"
+    },
+    {
+      "source": "app/src/main/res/drawable-nodpi/home_portrait_towers_083.png",
+      "apkPath": "res/drawable-nodpi-v4/home_portrait_towers_083.png",
+      "sourceSHA256": "fab8fcf24ea29229887b732703c186a6a6e374991bd1665c269df160aa62fafe",
+      "apkSHA256": "fab8fcf24ea29229887b732703c186a6a6e374991bd1665c269df160aa62fafe"
+    }
+  ],
+  "maximumAPKZipGapBytes": 255707,
+  "nativeBuildPerformed": false,
+  "emulatorUsed": true,
+  "actualAndroidViewsExecuted": true,
+  "offlineHostChecksPassed": true,
+  "buildChecksPassed": true,
+  "packageChecksPassed": true,
+  "githubPublished": false,
+  "vpsChanged": false,
+  "recordedUTC": "2026-11-15T13:42:33.318024+00:00"
+}

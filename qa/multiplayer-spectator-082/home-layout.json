@@ -1,0 +1,84 @@
+{
+  "version": "0.82",
+  "passed": true,
+  "emulatorUsed": false,
+  "actualAndroidViewsExecuted": false,
+  "scope": "Actual production HomeMenuLayout and extracted taglineBounds executed on host JDK with retained Oswald AWT font metrics; native TextView drawing/insets dispatch/touch require exact-APK observation. Existing six action bindings source-checked.",
+  "checks": [
+    "Exact requested tagline and small retained-typeface style",
+    "All six existing action bindings retained",
+    "Actual label/font metrics and safe geometry",
+    "600x300,640x320,800x360,1200x540; density1/2/3; fontScale1.0/1.3; cutout/system insets",
+    "Readable one-line or compact two-line text above unchanged artwork/buttons/version"
+  ],
+  "checksPassed": 5,
+  "assertions": 1104,
+  "scenarios": [
+    "600x300 d1.0 font1.0 insets[0, 0, 0, 0] width=552 measuredText=308.0 textBottom=33 artTop=43 logoTop=77 tankLeft=307 rows=1",
+    "600x300 d1.0 font1.0 insets[32, 12, 12, 16] width=512 measuredText=308.0 textBottom=37 artTop=39 logoTop=82 tankLeft=316 rows=1",
+    "600x300 d1.0 font1.3 insets[0, 0, 0, 0] width=271 measuredText=400.0 textBottom=68 artTop=30 logoTop=77 tankLeft=307 rows=1",
+    "600x300 d1.0 font1.3 insets[32, 12, 12, 16] width=250 measuredText=400.0 textBottom=80 artTop=26 logoTop=82 tankLeft=316 rows=1",
+    "600x300 d2.0 font1.0 insets[0, 0, 0, 0] width=1104 measuredText=615.0 textBottom=65 artTop=89 logoTop=154 tankLeft=613 rows=1",
+    "600x300 d2.0 font1.0 insets[32, 12, 12, 16] width=1024 measuredText=615.0 textBottom=77 artTop=81 logoTop=164 tankLeft=632 rows=1",
+    "600x300 d2.0 font1.3 insets[0, 0, 0, 0] width=1104 measuredText=799.0 textBottom=59 artTop=63 logoTop=154 tankLeft=613 rows=1",
+    "600x300 d2.0 font1.3 insets[32, 12, 12, 16] width=500 measuredText=799.0 textBottom=160 artTop=55 logoTop=164 tankLeft=632 rows=1",
+    "600x300 d3.0 font1.0 insets[0, 0, 0, 0] width=1656 measuredText=922.0 textBottom=98 artTop=134 logoTop=232 tankLeft=920 rows=1",
+    "600x300 d3.0 font1.0 insets[32, 12, 12, 16] width=1534 measuredText=922.0 textBottom=116 artTop=122 logoTop=246 tankLeft=948 rows=1",
+    "600x300 d3.0 font1.3 insets[0, 0, 0, 0] width=1656 measuredText=1198.0 textBottom=88 artTop=94 logoTop=232 tankLeft=920 rows=1",
+    "600x300 d3.0 font1.3 insets[32, 12, 12, 16] width=749 measuredText=1198.0 textBottom=238 artTop=82 logoTop=246 tankLeft=948 rows=1",
+    "640x320 d1.0 font1.0 insets[0, 0, 0, 0] width=588 measuredText=308.0 textBottom=33 artTop=49 logoTop=82 tankLeft=327 rows=1",
+    "640x320 d1.0 font1.0 insets[32, 12, 12, 16] width=548 measuredText=308.0 textBottom=45 artTop=49 logoTop=87 tankLeft=336 rows=1",
+    "640x320 d1.0 font1.3 insets[0, 0, 0, 0] width=588 measuredText=400.0 textBottom=38 artTop=40 logoTop=82 tankLeft=327 rows=1",
+    "640x320 d1.0 font1.3 insets[32, 12, 12, 16] width=268 measuredText=400.0 textBottom=80 artTop=36 logoTop=87 tankLeft=336 rows=1",
+    "640x320 d2.0 font1.0 insets[0, 0, 0, 0] width=1178 measuredText=615.0 textBottom=65 artTop=97 logoTop=165 tankLeft=654 rows=1",
+    "640x320 d2.0 font1.0 insets[32, 12, 12, 16] width=1096 measuredText=615.0 textBottom=89 artTop=100 logoTop=174 tankLeft=673 rows=1",
+    "640x320 d2.0 font1.3 insets[0, 0, 0, 0] width=1178 measuredText=799.0 textBottom=77 artTop=81 logoTop=165 tankLeft=654 rows=1",
+    "640x320 d2.0 font1.3 insets[32, 12, 12, 16] width=537 measuredText=799.0 textBottom=160 artTop=74 logoTop=174 tankLeft=673 rows=1",
+    "640x320 d3.0 font1.0 insets[0, 0, 0, 0] width=1766 measuredText=922.0 textBottom=98 artTop=146 logoTop=247 tankLeft=981 rows=1",
+    "640x320 d3.0 font1.0 insets[32, 12, 12, 16] width=1644 measuredText=922.0 textBottom=134 artTop=150 logoTop=261 tankLeft=1009 rows=1",
+    "640x320 d3.0 font1.3 insets[0, 0, 0, 0] width=1766 measuredText=1198.0 textBottom=115 artTop=121 logoTop=247 tankLeft=981 rows=1",
+    "640x320 d3.0 font1.3 insets[32, 12, 12, 16] width=805 measuredText=1198.0 textBottom=238 artTop=110 logoTop=261 tankLeft=1009 rows=1",
+    "800x360 d1.0 font1.0 insets[0, 0, 0, 0] width=736 measuredText=308.0 textBottom=33 artTop=49 logoTop=93 tankLeft=409 rows=1",
+    "800x360 d1.0 font1.0 insets[32, 12, 12, 16] width=696 measuredText=308.0 textBottom=44 artTop=46 logoTop=97 tankLeft=418 rows=1",
+    "800x360 d1.0 font1.3 insets[0, 0, 0, 0] width=736 measuredText=400.0 textBottom=34 artTop=36 logoTop=93 tankLeft=409 rows=1",
+    "800x360 d1.0 font1.3 insets[32, 12, 12, 16] width=344 measuredText=400.0 textBottom=80 artTop=33 logoTop=97 tankLeft=418 rows=1",
+    "800x360 d2.0 font1.0 insets[0, 0, 0, 0] width=1472 measuredText=615.0 textBottom=65 artTop=102 logoTop=185 tankLeft=817 rows=1",
+    "800x360 d2.0 font1.0 insets[32, 12, 12, 16] width=1392 measuredText=615.0 textBottom=89 artTop=94 logoTop=195 tankLeft=836 rows=1",
+    "800x360 d2.0 font1.3 insets[0, 0, 0, 0] width=1472 measuredText=799.0 textBottom=72 artTop=76 logoTop=185 tankLeft=817 rows=1",
+    "800x360 d2.0 font1.3 insets[32, 12, 12, 16] width=688 measuredText=799.0 textBottom=160 artTop=68 logoTop=195 tankLeft=836 rows=1",
+    "800x360 d3.0 font1.0 insets[0, 0, 0, 0] width=2208 measuredText=922.0 textBottom=98 artTop=153 logoTop=278 tankLeft=1226 rows=1",
+    "800x360 d3.0 font1.0 insets[32, 12, 12, 16] width=2086 measuredText=922.0 textBottom=134 artTop=143 logoTop=292 tankLeft=1255 rows=1",
+    "800x360 d3.0 font1.3 insets[0, 0, 0, 0] width=2208 measuredText=1198.0 textBottom=107 artTop=113 logoTop=278 tankLeft=1226 rows=1",
+    "800x360 d3.0 font1.3 insets[32, 12, 12, 16] width=1032 measuredText=1198.0 textBottom=238 artTop=103 logoTop=292 tankLeft=1255 rows=1",
+    "1200x540 d1.0 font1.0 insets[0, 0, 0, 0] width=1104 measuredText=308.0 textBottom=33 artTop=82 logoTop=139 tankLeft=613 rows=1",
+    "1200x540 d1.0 font1.0 insets[32, 12, 12, 16] width=1064 measuredText=308.0 textBottom=45 artTop=90 logoTop=144 tankLeft=623 rows=1",
+    "1200x540 d1.0 font1.3 insets[0, 0, 0, 0] width=1104 measuredText=400.0 textBottom=39 artTop=82 logoTop=139 tankLeft=613 rows=1",
+    "1200x540 d1.0 font1.3 insets[32, 12, 12, 16] width=1064 measuredText=400.0 textBottom=51 artTop=90 logoTop=144 tankLeft=623 rows=1",
+    "1200x540 d2.0 font1.0 insets[0, 0, 0, 0] width=2208 measuredText=615.0 textBottom=65 artTop=164 logoTop=278 tankLeft=1226 rows=1",
+    "1200x540 d2.0 font1.0 insets[32, 12, 12, 16] width=2128 measuredText=615.0 textBottom=89 artTop=179 logoTop=288 tankLeft=1245 rows=1",
+    "1200x540 d2.0 font1.3 insets[0, 0, 0, 0] width=2208 measuredText=799.0 textBottom=78 artTop=164 logoTop=278 tankLeft=1226 rows=1",
+    "1200x540 d2.0 font1.3 insets[32, 12, 12, 16] width=2128 measuredText=799.0 textBottom=102 artTop=179 logoTop=288 tankLeft=1245 rows=1",
+    "1200x540 d3.0 font1.0 insets[0, 0, 0, 0] width=3312 measuredText=922.0 textBottom=98 artTop=246 logoTop=417 tankLeft=1839 rows=1",
+    "1200x540 d3.0 font1.0 insets[32, 12, 12, 16] width=3190 measuredText=922.0 textBottom=134 artTop=269 logoTop=431 tankLeft=1868 rows=1",
+    "1200x540 d3.0 font1.3 insets[0, 0, 0, 0] width=3312 measuredText=1198.0 textBottom=116 artTop=246 logoTop=417 tankLeft=1839 rows=1",
+    "1200x540 d3.0 font1.3 insets[32, 12, 12, 16] width=3190 measuredText=1198.0 textBottom=152 artTop=269 logoTop=431 tankLeft=1868 rows=1"
+  ],
+  "sources": [
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/HomeModesView.java",
+      "sha256": "e8721a43e140513176e2dcaf77946db340b182b0c60e7e03c49cc3303084c112"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/HomeMenuLayout.java",
+      "sha256": "f0bbd4f49bdd6403f83596988160ab642fc9334415584264b7e8b6e3115b8c0b"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/Oswald.ttf",
+      "sha256": "5b38c246e255a12f5712d640d56bcced0472466fc68983d2d0410ec0457c2817"
+    },
+    {
+      "path": "tools/test-home-tagline-082.py",
+      "sha256": "ce75dbe90e4e4ccb7e3c3be855f0889b2adc0c5bfd423f9a158de9ba7a31d5e7"
+    }
+  ]
+}

@@ -1,0 +1,174 @@
+{
+  "version": "0.81",
+  "versionCode": 81,
+  "candidateAPK_SHA256": "f7bd4fc6d03a54f8f3f9995dcdfdec0be69efd02eac95bbd45a7c9a463ee724b",
+  "scope": "Multiplayer only: Lobby follows Music with separate timer; editable twelve-character base name plus fixed (m) suffix persists for future joins. Native engines/data, gameplay and other UI frozen.",
+  "exactAPKVerification": {
+    "emulatorProof": {
+      "path": "qa/multiplayer-profile-081/emulator.json",
+      "bytes": 9225,
+      "sha256": "f5cf61df91368b838a87b80d3549d78c5724cb24b01fdfffd99f67df0885e228"
+    },
+    "buildLog": {
+      "path": "qa/multiplayer-profile-081/build.log",
+      "bytes": 2704,
+      "sha256": "2180d43e6de8a1854a9c10eda311d4388c3403f84cc9643bc251d6ef62eca6d0"
+    },
+    "focusedProofs": [
+      {
+        "path": "qa/multiplayer-profile-081/layout-browser.json",
+        "bytes": 17772,
+        "sha256": "4d12b287ca3dd2bc0ceb46799d3eb33a55c1cadcfd7433518724b6129c132d6e"
+      },
+      {
+        "path": "qa/multiplayer-profile-081/profile-java.json",
+        "bytes": 2751,
+        "sha256": "3d27fcd2664d90ff95ede0809f0250bc39927811efe7864057e8e0f18cee075a"
+      },
+      {
+        "path": "qa/multiplayer-profile-081/profile-config.json",
+        "bytes": 2165,
+        "sha256": "bfffc9e1ab100730ab59942424a1ed373a2da4b03d0c824bba5cd421801c33e7"
+      }
+    ],
+    "focusedAssertionCounts": {
+      "qa/multiplayer-profile-081/layout-browser.json": 3,
+      "qa/multiplayer-profile-081/profile-java.json": 48,
+      "qa/multiplayer-profile-081/profile-config.json": 30
+    },
+    "device": "emulator-5558",
+    "checks": {
+      "exactDeliveryAPK": true,
+      "lobbyBesideMusic": true,
+      "timerSeparate": true,
+      "persistentMobilePlayerName": true,
+      "nameLimitAndSuffix": true,
+      "roomAndMatchNavigation": true
+    },
+    "verificationScope": "Exact installed delivery APK in the existing emulator. Legacy Player migrated to Player(m); actual editable field deletion and overlong entry retain the fixed suffix and cap the base at12; actual Android keyboard Ctrl-A/Delete and input/Enter confirmed this independently of CDP insertion. NoobCrusher1(m) persisted through cold process restart, appeared in the real private host room and actual native bot-match playerName. Lobby was immediately after Music in the rendered game and its return confirmation reached the custom lobby/Home. Timer layout used a clearly identified presentation-only label because this private stock match has no countdown. Normal and compact actual shipped CSS/status/name layout and native/profile storage methods also passed focused host checks.",
+    "limitations": [
+      "No physical-phone run or complete public multiplayer match was performed.",
+      "The private bot match supplies no native timer. The emulator00:02:17 screenshot uses a temporary visibility/text presentation fixture only; native countdown state/orders were unchanged. Actual CSS timer/status layout, compact wrapping and long statuses also passed the browser fixture.",
+      "The pre-existing black terrain rendering in this emulator remains unchanged; native engines/data/rendering were frozen.",
+      "Unrelated gameplay, offline modes, music, ads, rewards and saves were frozen and were not comprehensively rerun.",
+      "An initial build invocation lacked ANDROID_HOME and was rerun with the existing SDK. Emulator cold-start readiness and native status updates required fixture waits; those were test setup issues, not product changes."
+    ],
+    "exactInstalledAPKVerified": true,
+    "emulatorUsed": true
+  },
+  "fallback": {
+    "path": "qa/multiplayer-profile-081/fallback.json",
+    "bytes": 465,
+    "sha256": "78f7f9cf97acdf6e92de15324279b3e226efbe4e92d481ff7f6f3bef63392cb1"
+  },
+  "sourcePreservation": {
+    "changedBaselineSources": [
+      {
+        "path": "AGENTS.md",
+        "beforeSHA256": "28567dd17ab0221b7105d89470eb3754754d241467bf6a56a77e134aedbc312d",
+        "sha256": "d5b50e6fa4e1caab593f0086754544ed636244522e4d6536b18be2363b0ccc7b"
+      },
+      {
+        "path": "app/build.gradle.kts",
+        "beforeSHA256": "50876bf790edb8ad2c202ef15b6068d0eb84f2e68498383a7641a4cbee41ade4",
+        "sha256": "74688b369aea7a9a93040f2114a6b7ce9750a90e74ddf63e376ef5f2b2377d86"
+      },
+      {
+        "path": "app/src/main/assets/multiplayer/index.html",
+        "beforeSHA256": "65a9b8d2a5a9753bbf1227b5656cbf6073ebd6a51e94eea262433366de2b8716",
+        "sha256": "d4983b2d2d568b5c599d97c53f01a6c80638204e68501babb76dafe74d9f9aad"
+      },
+      {
+        "path": "app/src/main/assets/multiplayer/lobby-config.js",
+        "beforeSHA256": "56fd17126e5b8ed2d76718f3b3f04dc5e0b5e2a51d0f74422e91e393f8e6064e",
+        "sha256": "6d59d87d7ebd65bb5543916b32e16275914bd694549bda7e8cb06016ed2ce607"
+      },
+      {
+        "path": "app/src/main/assets/multiplayer/multiplayer.css",
+        "beforeSHA256": "d5bf3810a1dd68e89d59834234b7e157b319f1aaac2ff5e4b2aa8e8bec4eb5bd",
+        "sha256": "bee48cdb57b9761bf7d7ee4dcedd6e290e23ca000d147b9fda9fe179c9a3706a"
+      },
+      {
+        "path": "app/src/main/assets/multiplayer/session.js",
+        "beforeSHA256": "2e769a3ab1ffaeaf68cf0d0398f77e6675ab49ba451681b7b10eaa86e22e0074",
+        "sha256": "f251053b8433c2d99f4ab4ae1a3b223c529b6e8862c41ef1669eb24ce4fbf2f2"
+      },
+      {
+        "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MultiplayerActivity.java",
+        "beforeSHA256": "b3fc55113479e4f66abd4007511da3d3569b699fdc39e5edb1703eec9573e3fd",
+        "sha256": "397de6cec4f53929885464cfe13f231812b7228161cc6f2b4913c49bc68d75af"
+      }
+    ],
+    "addedSources": [
+      "archive/release-0.81-multiplayer-profile.json",
+      "docs/releases/0.81-multiplayer-profile.md",
+      "qa/multiplayer-profile-081/audit.txt",
+      "qa/multiplayer-profile-081/build.log",
+      "qa/multiplayer-profile-081/delivery-game-header.json",
+      "qa/multiplayer-profile-081/delivery-game-header.png",
+      "qa/multiplayer-profile-081/delivery-game-timer-layout.json",
+      "qa/multiplayer-profile-081/delivery-game-timer-layout.png",
+      "qa/multiplayer-profile-081/delivery-home-restored.png",
+      "qa/multiplayer-profile-081/delivery-migrated-profile.json",
+      "qa/multiplayer-profile-081/delivery-migrated-profile.png",
+      "qa/multiplayer-profile-081/delivery-private-room.json",
+      "qa/multiplayer-profile-081/delivery-private-room.png",
+      "qa/multiplayer-profile-081/delivery-returned-lobby.json",
+      "qa/multiplayer-profile-081/delivery-returned-lobby.png",
+      "qa/multiplayer-profile-081/emulator.json",
+      "qa/multiplayer-profile-081/fallback.json",
+      "qa/multiplayer-profile-081/installation.json",
+      "qa/multiplayer-profile-081/layout-browser.json",
+      "qa/multiplayer-profile-081/name-after-android-input.json",
+      "qa/multiplayer-profile-081/name-after-android-input.png",
+      "qa/multiplayer-profile-081/name-android-keyboard-empty.json",
+      "qa/multiplayer-profile-081/name-android-keyboard-empty.png",
+      "qa/multiplayer-profile-081/name-android-keyboard-twelve.json",
+      "qa/multiplayer-profile-081/name-android-keyboard-twelve.png",
+      "qa/multiplayer-profile-081/name-cold-restored.json",
+      "qa/multiplayer-profile-081/name-cold-restored.png",
+      "qa/multiplayer-profile-081/name-empty-fixed-suffix.json",
+      "qa/multiplayer-profile-081/name-empty-fixed-suffix.png",
+      "qa/multiplayer-profile-081/name-saved.json",
+      "qa/multiplayer-profile-081/name-saved.png",
+      "qa/multiplayer-profile-081/name-twelve-with-keyboard.json",
+      "qa/multiplayer-profile-081/name-twelve-with-keyboard.png",
+      "qa/multiplayer-profile-081/profile-config.json",
+      "qa/multiplayer-profile-081/profile-game-1200x540.png",
+      "qa/multiplayer-profile-081/profile-game-600x300-long-status.png",
+      "qa/multiplayer-profile-081/profile-java.json",
+      "qa/multiplayer-profile-081/profile-lobby-600x300.png",
+      "tools/check-multiplayer-profile-081.py",
+      "tools/mp-profile-live-081.cjs",
+      "tools/package-multiplayer-profile-081.py",
+      "tools/test-multiplayer-profile-081.cjs",
+      "tools/test-multiplayer-profile-layout-081.cjs"
+    ],
+    "baselineSourceEntries": 12891,
+    "everyBaselineSourceEntryRetained": true,
+    "allNativeAndGameSourcesFrozen": true,
+    "onlyApprovedMultiplayerProfileScopeChanged": true
+  },
+  "certificateSHA256": "4499efe00477c7c724c06a1dd96f935864548665c13ab5e2bd0a9c0f83f7cb15",
+  "changedAPKMembers": [
+    "AndroidManifest.xml",
+    "assets/multiplayer/index.html",
+    "assets/multiplayer/lobby-config.js",
+    "assets/multiplayer/multiplayer.css",
+    "assets/multiplayer/session.js",
+    "classes3.dex"
+  ],
+  "everyBaselineAPKMemberRetained": true,
+  "allAPKAssetsMatchSource": true,
+  "allNativeEnginesDataLibrariesResourcesAndOtherAssetsFrozen": true,
+  "nativeBuildPerformed": false,
+  "maximumAPKZipGapBytes": 4096,
+  "emulatorUsed": true,
+  "actualAndroidViewsExecuted": true,
+  "offlineHostChecksPassed": true,
+  "buildChecksPassed": true,
+  "packageChecksPassed": true,
+  "githubPublished": false,
+  "vpsChanged": false,
+  "recordedUTC": "2026-11-15T08:54:26.529465+00:00"
+}

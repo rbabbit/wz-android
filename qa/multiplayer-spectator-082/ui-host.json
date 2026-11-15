@@ -1,0 +1,52 @@
+{
+  "version": "0.82",
+  "passed": true,
+  "emulatorUsed": false,
+  "engineExecuted": false,
+  "actualAndroidTouchVerified": false,
+  "scope": "Actual Multiplayer session, adapter and touch source in deterministic VM with synthetic capability/native packets; no native engine, Android, network or public-room actions.",
+  "checks": [
+    "rendered spectator world reveals without owned facilities and preserves Music, Lobby and native status",
+    "watching another player never grants their owner menus even with inconsistent allow flag",
+    "player-to-observer transition closes stale owner overlays once and normal owner state restores controls",
+    "adapter denies all owner input and automatic Combat for spectator and watched-player identities",
+    "adapter camera capability is separate from ownership and rejects explicit unsafe camera frames",
+    "same-poll observer transition cannot accept an old owner input acknowledgement",
+    "late facility callback cannot open owner pages after its refresh becomes observer-only",
+    "observer cannot receive stale owned research reports while terrain remains usable",
+    "spectator short and held world taps forward no selection or orders",
+    "spectator delayed swipe pans with middle drag rather than box selection",
+    "spectator pinch and minimap camera remain available even without world-owner safety",
+    "watched-player and unsafe-camera packets cannot bypass facade or queued touch guards",
+    "normal owner taps, truck routing, box selection and legacy packets retain their paths",
+    "observer-only CSS fences dynamically recreated shared panels without affecting room or normal players"
+  ],
+  "checksPassed": 14,
+  "sources": [
+    {
+      "path": "app/src/main/assets/multiplayer/session.js",
+      "sha256": "8d2ae8d1f94d184fb2f0eb0c4ea9b3253053e3150c5d9d26024a95dcfb33ac4b"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/native-ui-adapter.js",
+      "sha256": "f8f984d1307937ef2adc220951682b53fc25b5d7ad856c9ce29a8d4f8b258d3e"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/mobile-controls.js",
+      "sha256": "299c4e37960a4a25ba3ec1a8acc634e8df8f55011aac58bcf3efba84149cd2d5"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/multiplayer.css",
+      "sha256": "e8b5adf7f5901c31c661b6e8c3d8bdb4f9bfe0a90d8aed9a3b222006ef3031f3"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/lobby-config.js",
+      "sha256": "6d59d87d7ebd65bb5543916b32e16275914bd694549bda7e8cb06016ed2ce607"
+    },
+    {
+      "path": "tools/test-multiplayer-spectator-ui-082.cjs",
+      "sha256": "234ae06be439622ee283853bcd39d6fa43851d58bcac7c77239d7fef668b8d80"
+    }
+  ],
+  "fatal": null
+}

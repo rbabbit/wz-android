@@ -1,0 +1,1622 @@
+{
+  "version": "0.84",
+  "passed": true,
+  "emulatorUsed": true,
+  "actualAndroidViewsExecuted": true,
+  "candidateAPK_SHA256": "2dd4b698c8b0a2a98a7fdd1b0d138f081eb366f491026964d35b802ae6442a63",
+  "installedAPK_SHA256": "2dd4b698c8b0a2a98a7fdd1b0d138f081eb366f491026964d35b802ae6442a63",
+  "device": "emulator-5558",
+  "checks": {
+    "exactDeliveryAPK": true,
+    "landscapeHomeFidelity": true,
+    "allSixDestinations": true,
+    "compactCampaign": true,
+    "towersPicker": true,
+    "ffaPicker": true,
+    "nativeMultiplayerList": true,
+    "persistentMobilePlayerName": true,
+    "privateRoomMatchReturn": true,
+    "smallPhoneLayout": true,
+    "enlargedTextLayout": true,
+    "inputRestoration": true
+  },
+  "buildLog": {
+    "path": "qa/native-landings-084/build.log",
+    "bytes": 2886,
+    "sha256": "686bf851795cb452d00daae532dc26d9cd27746a61212ee223b7aa58ec77de8a"
+  },
+  "verificationScope": "Exact installed APK: all six landscape Home routes; native Campaign/Towers/FFA/MP composition and actual utility navigation; 844x390dp and640x320dp with130%text; inline real Android keyboard/name limit/fixed suffix/persistence; real official filter/Refresh; native Join through bounded directory/ID-resolution fixture to real official headless Cobra host, actual Ready/match/frame-time advancement/return; normal Towers Research/pan/background-resume/return. ADB/CDP only; no desktop input.",
+  "limitations": [
+    "Inherited black terrain persists in the emulator; source and visual renderer cause remain unverified and outside the landing update.",
+    "No physical-phone, full public-match, speaker audition, all campaign missions or every map gameplay verification claimed.",
+    "Private test directory and game-ID resolution only were synthetic; advertised private occupancy was not measured. TCP handshake, native Ready, game progression and return were real. No fake gameplay or public messages.",
+    "Compact Campaign details/actions scroll; actual Continue and saved-games access were verified after scrolling. Native MP header wraps on narrow/enlarged text screens.",
+    "Transient automation hierarchy errors and an incorrect initial blank-WebView Home predicate were diagnosed as fixture issues; final routes reran after correcting observation."
+  ],
+  "fixture": {
+    "publicMessagesSent": false,
+    "publicRoomJoined": false,
+    "headlessHost": true,
+    "desktopInputUsed": false,
+    "directoryDataSynthetic": true,
+    "idResolutionSynthetic": true,
+    "readyStateMocked": false,
+    "seededGameplay": false,
+    "ownedHostStopped": true,
+    "originalProfileRestored": true
+  },
+  "sources": [
+    {
+      "path": "app/build.gradle.kts",
+      "bytes": 1517,
+      "sha256": "5f2bf21197dfad9bec198f766b9a4e318588f78539295c8a9630c9d8cec9a331"
+    },
+    {
+      "path": "app/src/main/AndroidManifest.xml",
+      "bytes": 1577,
+      "sha256": "ef810355c2d57d911773e137d2eeccd97816db9060d20afb2d2ca1511f7cae4b"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/index.html",
+      "bytes": 7651,
+      "sha256": "a0ae7ee7fa7d4cab2245646304fe2491c0128af17ac9cedc5d2cc885ba4ef0ee"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/lobby-ui.js",
+      "bytes": 10305,
+      "sha256": "252d4cd03923b6705af8aac499d418bf0ba1679c46fed8edebe19bcac8364a07"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/multiplayer.css",
+      "bytes": 14996,
+      "sha256": "fdb122b4b0427bd209ebb2f56285846f4a86dd2b993b1aa1d5383675b433a549"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/native-landing.js",
+      "bytes": 1982,
+      "sha256": "4094de25fa41b27cbd90c10ecfa368e5c391b09428832281efb5ca211680f6c7"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/session.js",
+      "bytes": 25935,
+      "sha256": "8d2ae8d1f94d184fb2f0eb0c4ea9b3253053e3150c5d9d26024a95dcfb33ac4b"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/CampaignLandingLayout.java",
+      "bytes": 4031,
+      "sha256": "5e501c995074f15f2a72a3ac2549d15e971989eec1fee03ae64064826f928415"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/CampaignSetupView.java",
+      "bytes": 13424,
+      "sha256": "d3125c9e92ad9dfdc6b615e109f158e633412d71e948fcf6f07f8bd7560978f5"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/FfaSetupLayout.java",
+      "bytes": 5193,
+      "sha256": "32f4d7cff87bb334ccc9ab11e3d0eb5e079441193b27d35bb74b633e4fbfac5c"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/FfaSetupView.java",
+      "bytes": 27113,
+      "sha256": "3da0c55ccf1ce425e557eb2023d0dac380191055cd416c7753624aef82323f8b"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/GraphicsSetupView.java",
+      "bytes": 33474,
+      "sha256": "53ee2c4522fec34e60a98678b51142cb0c20ca21826643663cdca01588241c98"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/HomeModesView.java",
+      "bytes": 12678,
+      "sha256": "5273f16c1655d08ef1049d1e5dafeedcdb253e89803809ce695b094699009959"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MainActivity.java",
+      "bytes": 117982,
+      "sha256": "3dcacc14ade3c349ef691992ad77879ffe24ae151ea788cd8d83db31e19d3999"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MapPreviewPager.java",
+      "bytes": 22444,
+      "sha256": "461b62e7fa9b793ae78ebe23e5d94c651a0abbe5d8a6b34b2b7ecceea827ef3e"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MultiplayerActivity.java",
+      "bytes": 56166,
+      "sha256": "a8af69840c21bc97242c0009a7380fe3db6181dd83e300dd591eed679f42d40d"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MultiplayerLobbyModel.java",
+      "bytes": 3066,
+      "sha256": "64dc95ff14e08f19dd3aa1b99fd40e8c53c8cea128073ff77c32e71ad8b14e97"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MultiplayerLobbyView.java",
+      "bytes": 11889,
+      "sha256": "c58e0a367a8448447231e2ed09ae689143f7939097846bcf0ff2a117b5916c7c"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/TowersSetupLayout.java",
+      "bytes": 2875,
+      "sha256": "60ef7cf3971919684dd06b6ae2d1b2e68b1d79c111bed45b88edca479bb36c0f"
+    },
+    {
+      "path": "tools/native-landings-game-084.cjs",
+      "bytes": 4630,
+      "sha256": "51549a7a16245f90c6ad3e7aa912d2eb053a61a49cfbf1a19ec5d4f2087b0e62"
+    },
+    {
+      "path": "tools/native-landings-live-084.cjs",
+      "bytes": 4902,
+      "sha256": "ff942960b164e7ab4fe96db5314c9845f923f5fcb1704d7546e339ebeedc10fb"
+    },
+    {
+      "path": "tools/native-landings-mp-live-084.cjs",
+      "bytes": 3916,
+      "sha256": "0b0ba4fe26bd3d0287c694f42c05316ce3bb57d547b51014abee9d65ef1556c8"
+    },
+    {
+      "path": "tools/native-landings-private-fixture-084.cjs",
+      "bytes": 6607,
+      "sha256": "57242a19c3aa9115d4e1a6f97c1f89f08890ed75a934e911da5f9cabbcbc0991"
+    },
+    {
+      "path": "tools/native-landings-routes-084.cjs",
+      "bytes": 5097,
+      "sha256": "f47434dfb4f7cf6035c4be943f2e5dbe2d0288094e2e5a5ba59bf890f2139ade"
+    },
+    {
+      "path": "tools/package-native-landings-084.py",
+      "bytes": 20047,
+      "sha256": "cb42393144384c12d1695353e3e81cb1272af9b616271555e543b312061ac2a3"
+    },
+    {
+      "path": "tools/record-native-landings-084.py",
+      "bytes": 12615,
+      "sha256": "45fd9e97f3aa94cadd97b6dca3ce97a88137c82f236d8fe4f1fcdae82e5c6d05"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "qa/native-landings-084/audit.txt",
+      "bytes": 1610,
+      "sha256": "d649475d53f4b70034e0e95fc29479b31a1522550ec21de91462e649f323c251"
+    },
+    {
+      "path": "qa/native-landings-084/before-last-native-tap.json",
+      "bytes": 25607,
+      "sha256": "1d61a719307b44ff8a538131da1de35e994f119bac08b8c8573d25b0725c0e84"
+    },
+    {
+      "path": "qa/native-landings-084/before-last-native-tap.png",
+      "bytes": 74791,
+      "sha256": "10deaed629c94f1eccdb5752279d2143ef42a5ba8b30f958032453b119a24473"
+    },
+    {
+      "path": "qa/native-landings-084/build.log",
+      "bytes": 2886,
+      "sha256": "686bf851795cb452d00daae532dc26d9cd27746a61212ee223b7aa58ec77de8a"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-campaign-return.json",
+      "bytes": 16271,
+      "sha256": "e0884518156a8b7cc210604144ad6b348b7ec31c619f8961e41a247ed299a3be"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-campaign-return.png",
+      "bytes": 1406608,
+      "sha256": "a4fe7f2647efa817d5b4898ae527d116a8517def75d75776be6a4b64cf1012ed"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-campaign-saves.json",
+      "bytes": 36293,
+      "sha256": "f19446507a06ae9d1ea5031c40e7f9abf4f24d7c1ea27e71b3fc39e10981b1ec"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-campaign-saves.png",
+      "bytes": 426984,
+      "sha256": "a7cab08b00019d3671a9ed7b6837117e466f18b1dee7fd601ac39cf356a6d0d1"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-campaign.json",
+      "bytes": 16271,
+      "sha256": "e0884518156a8b7cc210604144ad6b348b7ec31c619f8961e41a247ed299a3be"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-campaign.png",
+      "bytes": 1406608,
+      "sha256": "a4fe7f2647efa817d5b4898ae527d116a8517def75d75776be6a4b64cf1012ed"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-ffa-2p-next.json",
+      "bytes": 26977,
+      "sha256": "28fcf438812fefd35aa0cfe187ee098a7e63f5dc2903480677141d3bed17c526"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-ffa-2p-next.png",
+      "bytes": 685602,
+      "sha256": "79f282363e8ce3186cde793dae431a8eeaf3e3f1a4636c7c116e4365306b3b06"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-ffa-2p.json",
+      "bytes": 26969,
+      "sha256": "fedab7af1212331b908b3a9c680a47d2a7c8a7fd406966e7a586effac4136f0a"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-ffa-2p.png",
+      "bytes": 571475,
+      "sha256": "0b275544e1e126bd4e96f754b947fed4ab24278faaf04ff0a81259e5c8a8b2b3"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-ffa-3p.json",
+      "bytes": 26970,
+      "sha256": "7bac4e8107d5f2ea249069f4f8bb02f9361922851aef6951164c59b664bd3ee7"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-ffa-3p.png",
+      "bytes": 649621,
+      "sha256": "f82cba6b4a55e88caca2ec804d2f77d9abae792a7709b3b5ed8c9c55914cb364"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-ffa-4p.json",
+      "bytes": 26976,
+      "sha256": "564fb8f35b8cc9841d6f9a7133b9e3ac239567f95f77c72af1d5c3ea574ec36a"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-ffa-4p.png",
+      "bytes": 641809,
+      "sha256": "c6eb83e8596b079775ae446ff65836da43d5aa458620eaf1de20a1ca91e7e937"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-ffa-originals.json",
+      "bytes": 26805,
+      "sha256": "a807373465b7ef26d04821f67993bb557a9cc599c8e5b05698939a57b5262f26"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-ffa-originals.png",
+      "bytes": 92173,
+      "sha256": "b05b851a753963c7afcdd90df0abb42087c5c48d324e473c898f8388e2735829"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-ffa.json",
+      "bytes": 26805,
+      "sha256": "a807373465b7ef26d04821f67993bb557a9cc599c8e5b05698939a57b5262f26"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-ffa.png",
+      "bytes": 92173,
+      "sha256": "b05b851a753963c7afcdd90df0abb42087c5c48d324e473c898f8388e2735829"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-game-before-pan-screen.json",
+      "bytes": 18972,
+      "sha256": "49e36e250f9e504b2f65d56465be855e8f43956200507a29798b6e2be31e3673"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-game-before-pan-screen.png",
+      "bytes": 192264,
+      "sha256": "eb41136c08f2e64fbf7ba6345b69370853757f8b4df1ed4b1316cb1e60f3dd0d"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-game-before-pan.json",
+      "bytes": 25775,
+      "sha256": "1af82aea6e7692eca3955f9392a598a938d33b6069b36f8a82654d97d490d4bb"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-game-before-resume-screen.json",
+      "bytes": 18972,
+      "sha256": "0d941899878464a6842149e1952b503175bddc85bcf45289ef8b60cc223824b4"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-game-before-resume-screen.png",
+      "bytes": 221655,
+      "sha256": "3f90c16b51ea6d83f1385a64ff6365523137e6ed0dfe3c24eb629967265993b1"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-game-before-resume.json",
+      "bytes": 25820,
+      "sha256": "be12973a8659593d0ad510f75e23f35b5473e87f91c8742bcb6601ced056e1dd"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-game-home-return.json",
+      "bytes": 9993,
+      "sha256": "53eda6f9a907af149b63bb0aece289f93c13bd0c82a6becaf0af31fb8c7c9641"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-game-home-return.png",
+      "bytes": 609818,
+      "sha256": "657abe889f66c0bdbbbc9629223a8a1e14ec8bf969e9055f50d08ab170bd9596"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-game-home.json",
+      "bytes": 9993,
+      "sha256": "53eda6f9a907af149b63bb0aece289f93c13bd0c82a6becaf0af31fb8c7c9641"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-game-home.png",
+      "bytes": 609818,
+      "sha256": "657abe889f66c0bdbbbc9629223a8a1e14ec8bf969e9055f50d08ab170bd9596"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-game-map-return.json",
+      "bytes": 18054,
+      "sha256": "bafc30265dce8a9c0c62d4193edde1ba69c5fcd64d06f1a405e4f352a4d2b12d"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-game-map-return.png",
+      "bytes": 72577,
+      "sha256": "9565c0397c770af9787a22d28a0057c61084608dcbedb575345d3db6640ecfe9"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-game-map.json",
+      "bytes": 18054,
+      "sha256": "bafc30265dce8a9c0c62d4193edde1ba69c5fcd64d06f1a405e4f352a4d2b12d"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-game-map.png",
+      "bytes": 72577,
+      "sha256": "9565c0397c770af9787a22d28a0057c61084608dcbedb575345d3db6640ecfe9"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-game-pan-screen.json",
+      "bytes": 18972,
+      "sha256": "7b0d59436596a8ece531fcbbe6392f86dc68b9fdf49d1c437d06f8bbc9cb75a6"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-game-pan-screen.png",
+      "bytes": 220578,
+      "sha256": "60bfecc20f801409c34315c86fd6862b41010d350612428e4d034fb41c96be66"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-game-pan.json",
+      "bytes": 25820,
+      "sha256": "b66254cb195bbb28873d2fb1ea987742cc15f6f2dc1db0f56885cbe2791b78f8"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-game-research-screen.json",
+      "bytes": 78148,
+      "sha256": "85f94289352c9b776a055af0ce93f2b7b8a9889176febb59feb86077c5c28984"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-game-research-screen.png",
+      "bytes": 334071,
+      "sha256": "7fc37d97cd97b6cdedb5a5219d12d8f5e62dd4302142574992e6b0f58ca3ddf0"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-game-research.json",
+      "bytes": 25775,
+      "sha256": "15ea59230b45cb7c6d480b77d195041e9b2cbfa4b52198d1a59bc65e3a74abec"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-game-resumed-screen.json",
+      "bytes": 18972,
+      "sha256": "a217f22fe317f3631d3799484fdec8a5bc24e79ac8bc00580c573a611098f22e"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-game-resumed-screen.png",
+      "bytes": 221512,
+      "sha256": "bde8e83c5cb3f059a009ca594be588f8135319c7af944e2ed1080f2ab6e47c8c"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-game-resumed.json",
+      "bytes": 25820,
+      "sha256": "cfd33d515b95ef236c398908037313f1e8c6bd9d8a1001ce70b0d4bad6d2e849"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-game-return-dialog.json",
+      "bytes": 6001,
+      "sha256": "f983beccde4a630722dc2628a402766c24dfaf115ae53a677e91810c4b49f9f9"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-game-return-dialog.png",
+      "bytes": 201986,
+      "sha256": "7fc4c82e65306f276fb310174459e6649c021e14a5a66d39dfe198dbeb4180b0"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-game-world-screen.json",
+      "bytes": 24580,
+      "sha256": "832905e5cc31a4b1a7f1321b08061051abe2fa4403e1150ec8475af8de72c039"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-game-world-screen.png",
+      "bytes": 1547196,
+      "sha256": "7c817e1908ca9aa158259d25ecd760c1465114efd962bafed98d9354564da6de"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-game-world.json",
+      "bytes": 25721,
+      "sha256": "8916efbcf196289f3bbd86f10d378fd3c9951f077c5aa3e438f8f708d79b717d"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-home-campaign-return.json",
+      "bytes": 9994,
+      "sha256": "016b0ef46fded619c88c1b85cfeb8d62b8dbd73447abfd956565e1b22adbad21"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-home-campaign-return.png",
+      "bytes": 609725,
+      "sha256": "62f689c1cb6b3f6443e3c4aff089508dcf42aa41df5ec0a4a201c8f4f2581f62"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-home-ffa-return.json",
+      "bytes": 9994,
+      "sha256": "016b0ef46fded619c88c1b85cfeb8d62b8dbd73447abfd956565e1b22adbad21"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-home-ffa-return.png",
+      "bytes": 609725,
+      "sha256": "62f689c1cb6b3f6443e3c4aff089508dcf42aa41df5ec0a4a201c8f4f2581f62"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-home-reference.json",
+      "bytes": 9993,
+      "sha256": "53eda6f9a907af149b63bb0aece289f93c13bd0c82a6becaf0af31fb8c7c9641"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-home-reference.png",
+      "bytes": 609818,
+      "sha256": "657abe889f66c0bdbbbc9629223a8a1e14ec8bf969e9055f50d08ab170bd9596"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-home-restored.json",
+      "bytes": 10540,
+      "sha256": "3aacd4d44a4369e848924de4ab8eea4f5ec8d03154a3faf165b05e53c37436e2"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-home-restored.png",
+      "bytes": 1105261,
+      "sha256": "630e2d8c03cda077b7a72a9b590bc60768434c6222c1a005af8e52985b953ee3"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-home-towers-return.json",
+      "bytes": 9994,
+      "sha256": "016b0ef46fded619c88c1b85cfeb8d62b8dbd73447abfd956565e1b22adbad21"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-home-towers-return.png",
+      "bytes": 609725,
+      "sha256": "62f689c1cb6b3f6443e3c4aff089508dcf42aa41df5ec0a4a201c8f4f2581f62"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-home.json",
+      "bytes": 9994,
+      "sha256": "016b0ef46fded619c88c1b85cfeb8d62b8dbd73447abfd956565e1b22adbad21"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-home.png",
+      "bytes": 609725,
+      "sha256": "62f689c1cb6b3f6443e3c4aff089508dcf42aa41df5ec0a4a201c8f4f2581f62"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-multiplayer.json",
+      "bytes": 25633,
+      "sha256": "722385acded4bb0373dc1c0119fe7b93760aaa7ff0d09e9c7831711de396e062"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-multiplayer.png",
+      "bytes": 82663,
+      "sha256": "345b22043e159544ceb7b800d7978a20afb52e8a056eb3d2360855620eaa7191"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-towers-easy.json",
+      "bytes": 18055,
+      "sha256": "6235cc3bf7ac0834d61784a6359cbfd296dab549d326dad84e95cd809ba04812"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-towers-easy.png",
+      "bytes": 68485,
+      "sha256": "780fc7b12bdb940d2398bb10a435d8cec46880f3b9815f64a58cc4d3a3f32759"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-towers-greenhaven.json",
+      "bytes": 18055,
+      "sha256": "6235cc3bf7ac0834d61784a6359cbfd296dab549d326dad84e95cd809ba04812"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-towers-greenhaven.png",
+      "bytes": 68485,
+      "sha256": "780fc7b12bdb940d2398bb10a435d8cec46880f3b9815f64a58cc4d3a3f32759"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-towers-medium.json",
+      "bytes": 18043,
+      "sha256": "7a13c8a107aba190d43e04547e04b16e03d6a86dd8583bd502609bb8338ccc32"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-towers-medium.png",
+      "bytes": 629563,
+      "sha256": "45a025e0f3cab230f4e2895757aa8e4f3988e169697aec4d460abc367053a503"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-towers-next.json",
+      "bytes": 18029,
+      "sha256": "7745a6ed009387bbf4bc2ec6ba547483beb4a7fee28ec3187a94f11c45500750"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-towers-next.png",
+      "bytes": 550979,
+      "sha256": "8b4d946ac1ade9b9abcce07ff7794939869bf92d44f0c4e04443a1d92ffbcb11"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-towers.json",
+      "bytes": 18055,
+      "sha256": "6235cc3bf7ac0834d61784a6359cbfd296dab549d326dad84e95cd809ba04812"
+    },
+    {
+      "path": "qa/native-landings-084/delivery-towers.png",
+      "bytes": 68206,
+      "sha256": "eba47d69aa235fa063e1fb287f940e57e2ef22312315d31233864da80782e522"
+    },
+    {
+      "path": "qa/native-landings-084/device-before.json",
+      "bytes": 165,
+      "sha256": "12b303bc1f5bef32f4286b5c1e8cb64346855bc97b3c473f53df5ba300f97535"
+    },
+    {
+      "path": "qa/native-landings-084/fallback.json",
+      "bytes": 523,
+      "sha256": "eac29cea3ea72c26777aac5d20c9a47fa147334104b15bf5998c471cb32d3dce"
+    },
+    {
+      "path": "qa/native-landings-084/ffa-controls.json",
+      "bytes": 26805,
+      "sha256": "a807373465b7ef26d04821f67993bb557a9cc599c8e5b05698939a57b5262f26"
+    },
+    {
+      "path": "qa/native-landings-084/ffa-controls.png",
+      "bytes": 92173,
+      "sha256": "b05b851a753963c7afcdd90df0abb42087c5c48d324e473c898f8388e2735829"
+    },
+    {
+      "path": "qa/native-landings-084/final-compact-campaign-return.json",
+      "bytes": 9990,
+      "sha256": "3f349518b0a7b850c526aeb5a6c2da2a1481b5343d6f01e982f751eb0fda2507"
+    },
+    {
+      "path": "qa/native-landings-084/final-compact-campaign-return.png",
+      "bytes": 378457,
+      "sha256": "496e2678bd3c063ba6fce8734d11fb2caf27c3f580948dab041bab8566cd77c2"
+    },
+    {
+      "path": "qa/native-landings-084/final-compact-campaign.json",
+      "bytes": 16266,
+      "sha256": "91c4f59f821fde7ffa4f93dd5d399fc0a347e3d07f45e8adf7a6e47b93d16559"
+    },
+    {
+      "path": "qa/native-landings-084/final-compact-campaign.png",
+      "bytes": 929802,
+      "sha256": "6be62250764c7e5a0dc9127c203ed17a0ac117ea8632c4739a2a4e1357bc16d4"
+    },
+    {
+      "path": "qa/native-landings-084/final-compact-ffa-return.json",
+      "bytes": 9990,
+      "sha256": "3f349518b0a7b850c526aeb5a6c2da2a1481b5343d6f01e982f751eb0fda2507"
+    },
+    {
+      "path": "qa/native-landings-084/final-compact-ffa-return.png",
+      "bytes": 378457,
+      "sha256": "496e2678bd3c063ba6fce8734d11fb2caf27c3f580948dab041bab8566cd77c2"
+    },
+    {
+      "path": "qa/native-landings-084/final-compact-ffa.json",
+      "bytes": 26791,
+      "sha256": "0edceb7d9c173cc05590e11ab6b1488e08299825e054cabc4ba49f5feff5b5d3"
+    },
+    {
+      "path": "qa/native-landings-084/final-compact-ffa.png",
+      "bytes": 61374,
+      "sha256": "a85868d68792e4fcadd8ce3617d4cf7fa393956847ba9bef6e3215f45d7c08a5"
+    },
+    {
+      "path": "qa/native-landings-084/final-compact-home-after.json",
+      "bytes": 9990,
+      "sha256": "3f349518b0a7b850c526aeb5a6c2da2a1481b5343d6f01e982f751eb0fda2507"
+    },
+    {
+      "path": "qa/native-landings-084/final-compact-home-after.png",
+      "bytes": 378457,
+      "sha256": "496e2678bd3c063ba6fce8734d11fb2caf27c3f580948dab041bab8566cd77c2"
+    },
+    {
+      "path": "qa/native-landings-084/final-compact-home-before-Campaign.json",
+      "bytes": 9990,
+      "sha256": "3f349518b0a7b850c526aeb5a6c2da2a1481b5343d6f01e982f751eb0fda2507"
+    },
+    {
+      "path": "qa/native-landings-084/final-compact-home-before-Campaign.png",
+      "bytes": 378457,
+      "sha256": "496e2678bd3c063ba6fce8734d11fb2caf27c3f580948dab041bab8566cd77c2"
+    },
+    {
+      "path": "qa/native-landings-084/final-compact-home-before-Free for all.json",
+      "bytes": 9990,
+      "sha256": "3f349518b0a7b850c526aeb5a6c2da2a1481b5343d6f01e982f751eb0fda2507"
+    },
+    {
+      "path": "qa/native-landings-084/final-compact-home-before-Free for all.png",
+      "bytes": 378457,
+      "sha256": "496e2678bd3c063ba6fce8734d11fb2caf27c3f580948dab041bab8566cd77c2"
+    },
+    {
+      "path": "qa/native-landings-084/final-compact-home-before-Multiplayer.json",
+      "bytes": 9990,
+      "sha256": "3f349518b0a7b850c526aeb5a6c2da2a1481b5343d6f01e982f751eb0fda2507"
+    },
+    {
+      "path": "qa/native-landings-084/final-compact-home-before-Multiplayer.png",
+      "bytes": 378457,
+      "sha256": "496e2678bd3c063ba6fce8734d11fb2caf27c3f580948dab041bab8566cd77c2"
+    },
+    {
+      "path": "qa/native-landings-084/final-compact-home-before-Towers.json",
+      "bytes": 9990,
+      "sha256": "3f349518b0a7b850c526aeb5a6c2da2a1481b5343d6f01e982f751eb0fda2507"
+    },
+    {
+      "path": "qa/native-landings-084/final-compact-home-before-Towers.png",
+      "bytes": 378457,
+      "sha256": "496e2678bd3c063ba6fce8734d11fb2caf27c3f580948dab041bab8566cd77c2"
+    },
+    {
+      "path": "qa/native-landings-084/final-compact-home.json",
+      "bytes": 9990,
+      "sha256": "3f349518b0a7b850c526aeb5a6c2da2a1481b5343d6f01e982f751eb0fda2507"
+    },
+    {
+      "path": "qa/native-landings-084/final-compact-home.png",
+      "bytes": 378457,
+      "sha256": "496e2678bd3c063ba6fce8734d11fb2caf27c3f580948dab041bab8566cd77c2"
+    },
+    {
+      "path": "qa/native-landings-084/final-compact-multiplayer-return.json",
+      "bytes": 9990,
+      "sha256": "3f349518b0a7b850c526aeb5a6c2da2a1481b5343d6f01e982f751eb0fda2507"
+    },
+    {
+      "path": "qa/native-landings-084/final-compact-multiplayer-return.png",
+      "bytes": 378457,
+      "sha256": "496e2678bd3c063ba6fce8734d11fb2caf27c3f580948dab041bab8566cd77c2"
+    },
+    {
+      "path": "qa/native-landings-084/final-compact-multiplayer.json",
+      "bytes": 19994,
+      "sha256": "290e89d63c89f727fe6b87485af55e16366f6876967533b4ef80de29e0f08c02"
+    },
+    {
+      "path": "qa/native-landings-084/final-compact-multiplayer.png",
+      "bytes": 55621,
+      "sha256": "1b61d4ea7be3bf6684c128382108d1b0a9c0c2c2fac3be88cc37331b6f51d97e"
+    },
+    {
+      "path": "qa/native-landings-084/final-compact-towers-return.json",
+      "bytes": 9990,
+      "sha256": "3f349518b0a7b850c526aeb5a6c2da2a1481b5343d6f01e982f751eb0fda2507"
+    },
+    {
+      "path": "qa/native-landings-084/final-compact-towers-return.png",
+      "bytes": 378457,
+      "sha256": "496e2678bd3c063ba6fce8734d11fb2caf27c3f580948dab041bab8566cd77c2"
+    },
+    {
+      "path": "qa/native-landings-084/final-compact-towers.json",
+      "bytes": 18048,
+      "sha256": "15ff5b3d363bf1e68fe3f066daecfe2bd1a4c2c4594cc7bc61c64815050eb54b"
+    },
+    {
+      "path": "qa/native-landings-084/final-compact-towers.png",
+      "bytes": 63305,
+      "sha256": "f1c5728d59a4d7d5f4f43019eb8ecd05fb1025f0465a79cd3e0b065eac94a0d1"
+    },
+    {
+      "path": "qa/native-landings-084/final-home-after-mp-match.json",
+      "bytes": 9993,
+      "sha256": "53eda6f9a907af149b63bb0aece289f93c13bd0c82a6becaf0af31fb8c7c9641"
+    },
+    {
+      "path": "qa/native-landings-084/final-home-after-mp-match.png",
+      "bytes": 609818,
+      "sha256": "657abe889f66c0bdbbbc9629223a8a1e14ec8bf969e9055f50d08ab170bd9596"
+    },
+    {
+      "path": "qa/native-landings-084/final-home-diagnose.json",
+      "bytes": 9994,
+      "sha256": "3150785d869801c43238070a804f06eff072eee7b997c9ac1fce1296a9cd53c7"
+    },
+    {
+      "path": "qa/native-landings-084/final-home-diagnose.png",
+      "bytes": 609818,
+      "sha256": "657abe889f66c0bdbbbc9629223a8a1e14ec8bf969e9055f50d08ab170bd9596"
+    },
+    {
+      "path": "qa/native-landings-084/final-large-campaign-before-scroll.json",
+      "bytes": 15708,
+      "sha256": "d0c1005b0404b03c33cf05d532f3302f2560023d4d9d37e308832d1e2bc6e47c"
+    },
+    {
+      "path": "qa/native-landings-084/final-large-campaign-before-scroll.png",
+      "bytes": 947849,
+      "sha256": "4d5f1dd613aef80760080b0c35ddb39fab0bb42ded22d2e54824a53ab3244e8c"
+    },
+    {
+      "path": "qa/native-landings-084/final-large-campaign-return.json",
+      "bytes": 9990,
+      "sha256": "58fcd1e7d461e8d43a900202ba1b75327355ac21806f30d32894991e4ebd7312"
+    },
+    {
+      "path": "qa/native-landings-084/final-large-campaign-return.png",
+      "bytes": 383266,
+      "sha256": "f1fae7a1e701e4d0c60731c623ab8d92532c4e38d5d8aa5b940973c70b7d34b3"
+    },
+    {
+      "path": "qa/native-landings-084/final-large-campaign-saves.json",
+      "bytes": 28814,
+      "sha256": "59a782934b4ef44765c2bff8b2199f1cae1f92fbf61501c68c76b7b890017a49"
+    },
+    {
+      "path": "qa/native-landings-084/final-large-campaign-saves.png",
+      "bytes": 282736,
+      "sha256": "7834d554e289634e05c6c87d119b10886aab8b6942d0514719f614124597c5fe"
+    },
+    {
+      "path": "qa/native-landings-084/final-large-campaign-scroll-return.json",
+      "bytes": 9990,
+      "sha256": "58fcd1e7d461e8d43a900202ba1b75327355ac21806f30d32894991e4ebd7312"
+    },
+    {
+      "path": "qa/native-landings-084/final-large-campaign-scroll-return.png",
+      "bytes": 383266,
+      "sha256": "f1fae7a1e701e4d0c60731c623ab8d92532c4e38d5d8aa5b940973c70b7d34b3"
+    },
+    {
+      "path": "qa/native-landings-084/final-large-campaign-scrolled.json",
+      "bytes": 15698,
+      "sha256": "c94333ea928f0e60e6199018ff7e5461dc417772f28c05162f11ec40242b7c79"
+    },
+    {
+      "path": "qa/native-landings-084/final-large-campaign-scrolled.png",
+      "bytes": 906287,
+      "sha256": "f8269ee5fdf8674d9640f4db8cac62892be0708b0d407ac3ef1ed6428c834db1"
+    },
+    {
+      "path": "qa/native-landings-084/final-large-campaign.json",
+      "bytes": 15708,
+      "sha256": "d0c1005b0404b03c33cf05d532f3302f2560023d4d9d37e308832d1e2bc6e47c"
+    },
+    {
+      "path": "qa/native-landings-084/final-large-campaign.png",
+      "bytes": 947849,
+      "sha256": "4d5f1dd613aef80760080b0c35ddb39fab0bb42ded22d2e54824a53ab3244e8c"
+    },
+    {
+      "path": "qa/native-landings-084/final-large-ffa-return.json",
+      "bytes": 9990,
+      "sha256": "58fcd1e7d461e8d43a900202ba1b75327355ac21806f30d32894991e4ebd7312"
+    },
+    {
+      "path": "qa/native-landings-084/final-large-ffa-return.png",
+      "bytes": 383266,
+      "sha256": "f1fae7a1e701e4d0c60731c623ab8d92532c4e38d5d8aa5b940973c70b7d34b3"
+    },
+    {
+      "path": "qa/native-landings-084/final-large-ffa.json",
+      "bytes": 26146,
+      "sha256": "0035b550620266678b9e90c9829ec98f7bad35dee2bdf24b4a8ab9783d709ae1"
+    },
+    {
+      "path": "qa/native-landings-084/final-large-ffa.png",
+      "bytes": 67417,
+      "sha256": "7bca4e9796cc42a4ec5c7c1b15ba7b9a048a5c12798357ce7e10ac15b5a42279"
+    },
+    {
+      "path": "qa/native-landings-084/final-large-home-after.json",
+      "bytes": 9990,
+      "sha256": "58fcd1e7d461e8d43a900202ba1b75327355ac21806f30d32894991e4ebd7312"
+    },
+    {
+      "path": "qa/native-landings-084/final-large-home-after.png",
+      "bytes": 383266,
+      "sha256": "f1fae7a1e701e4d0c60731c623ab8d92532c4e38d5d8aa5b940973c70b7d34b3"
+    },
+    {
+      "path": "qa/native-landings-084/final-large-home-before-Campaign.json",
+      "bytes": 9990,
+      "sha256": "58fcd1e7d461e8d43a900202ba1b75327355ac21806f30d32894991e4ebd7312"
+    },
+    {
+      "path": "qa/native-landings-084/final-large-home-before-Campaign.png",
+      "bytes": 383266,
+      "sha256": "f1fae7a1e701e4d0c60731c623ab8d92532c4e38d5d8aa5b940973c70b7d34b3"
+    },
+    {
+      "path": "qa/native-landings-084/final-large-home-before-Free for all.json",
+      "bytes": 9990,
+      "sha256": "58fcd1e7d461e8d43a900202ba1b75327355ac21806f30d32894991e4ebd7312"
+    },
+    {
+      "path": "qa/native-landings-084/final-large-home-before-Free for all.png",
+      "bytes": 383266,
+      "sha256": "f1fae7a1e701e4d0c60731c623ab8d92532c4e38d5d8aa5b940973c70b7d34b3"
+    },
+    {
+      "path": "qa/native-landings-084/final-large-home-before-Multiplayer.json",
+      "bytes": 9990,
+      "sha256": "58fcd1e7d461e8d43a900202ba1b75327355ac21806f30d32894991e4ebd7312"
+    },
+    {
+      "path": "qa/native-landings-084/final-large-home-before-Multiplayer.png",
+      "bytes": 383266,
+      "sha256": "f1fae7a1e701e4d0c60731c623ab8d92532c4e38d5d8aa5b940973c70b7d34b3"
+    },
+    {
+      "path": "qa/native-landings-084/final-large-home-before-Towers.json",
+      "bytes": 9990,
+      "sha256": "58fcd1e7d461e8d43a900202ba1b75327355ac21806f30d32894991e4ebd7312"
+    },
+    {
+      "path": "qa/native-landings-084/final-large-home-before-Towers.png",
+      "bytes": 383266,
+      "sha256": "f1fae7a1e701e4d0c60731c623ab8d92532c4e38d5d8aa5b940973c70b7d34b3"
+    },
+    {
+      "path": "qa/native-landings-084/final-large-home.json",
+      "bytes": 9990,
+      "sha256": "58fcd1e7d461e8d43a900202ba1b75327355ac21806f30d32894991e4ebd7312"
+    },
+    {
+      "path": "qa/native-landings-084/final-large-home.png",
+      "bytes": 383266,
+      "sha256": "f1fae7a1e701e4d0c60731c623ab8d92532c4e38d5d8aa5b940973c70b7d34b3"
+    },
+    {
+      "path": "qa/native-landings-084/final-large-multiplayer-return.json",
+      "bytes": 9990,
+      "sha256": "58fcd1e7d461e8d43a900202ba1b75327355ac21806f30d32894991e4ebd7312"
+    },
+    {
+      "path": "qa/native-landings-084/final-large-multiplayer-return.png",
+      "bytes": 383266,
+      "sha256": "f1fae7a1e701e4d0c60731c623ab8d92532c4e38d5d8aa5b940973c70b7d34b3"
+    },
+    {
+      "path": "qa/native-landings-084/final-large-multiplayer.json",
+      "bytes": 21080,
+      "sha256": "d2f461f06e6b7416e5ada474683ccf43655bc7b32efa924accc6316375e23449"
+    },
+    {
+      "path": "qa/native-landings-084/final-large-multiplayer.png",
+      "bytes": 57710,
+      "sha256": "e017281a90510ed7eee093afcbf3a83138367982ef2476e75386c321dab1bdbe"
+    },
+    {
+      "path": "qa/native-landings-084/final-large-towers-return.json",
+      "bytes": 9990,
+      "sha256": "58fcd1e7d461e8d43a900202ba1b75327355ac21806f30d32894991e4ebd7312"
+    },
+    {
+      "path": "qa/native-landings-084/final-large-towers-return.png",
+      "bytes": 383266,
+      "sha256": "f1fae7a1e701e4d0c60731c623ab8d92532c4e38d5d8aa5b940973c70b7d34b3"
+    },
+    {
+      "path": "qa/native-landings-084/final-large-towers.json",
+      "bytes": 18048,
+      "sha256": "15ff5b3d363bf1e68fe3f066daecfe2bd1a4c2c4594cc7bc61c64815050eb54b"
+    },
+    {
+      "path": "qa/native-landings-084/final-large-towers.png",
+      "bytes": 63305,
+      "sha256": "f1c5728d59a4d7d5f4f43019eb8ecd05fb1025f0465a79cd3e0b065eac94a0d1"
+    },
+    {
+      "path": "qa/native-landings-084/final-mp-filter-before.json",
+      "bytes": 25622,
+      "sha256": "d53ebf5898873ea984e06988bf9a6d7275f58004dea5f08943057bd8a80af70f"
+    },
+    {
+      "path": "qa/native-landings-084/final-mp-filter-before.png",
+      "bytes": 77594,
+      "sha256": "2392a57dc2fdae920d405b345f48072d8deec4c1c3a51068f9b940bf0649d2ee"
+    },
+    {
+      "path": "qa/native-landings-084/final-mp-filter-checked.json",
+      "bytes": 25621,
+      "sha256": "a9f0543fd210486cd7be6546a81758f2ebe9790d405454be8f9b6cd7c7b25379"
+    },
+    {
+      "path": "qa/native-landings-084/final-mp-filter-checked.png",
+      "bytes": 78085,
+      "sha256": "8b317eb94d98fc2631ee323047b1385d85226dd8bcbad93eeb0a6ad81f2a4e6a"
+    },
+    {
+      "path": "qa/native-landings-084/final-mp-ime-state.txt",
+      "bytes": 1164287,
+      "sha256": "b7c0b3f5681d642344550264c233c51474dbe9ed1e674152056daac6aece5388"
+    },
+    {
+      "path": "qa/native-landings-084/final-mp-inline-keyboard.json",
+      "bytes": 25607,
+      "sha256": "bfc283f0d4d26bdad53692481425f8061f26fb5ac386145a0dd96cdd85d2ceef"
+    },
+    {
+      "path": "qa/native-landings-084/final-mp-inline-keyboard.png",
+      "bytes": 83386,
+      "sha256": "e95a6b6f09494fc3fb6991f213d674e7a812fda75ecb7ddfbdc2c6f47201feed"
+    },
+    {
+      "path": "qa/native-landings-084/final-mp-name-home.json",
+      "bytes": 9993,
+      "sha256": "53eda6f9a907af149b63bb0aece289f93c13bd0c82a6becaf0af31fb8c7c9641"
+    },
+    {
+      "path": "qa/native-landings-084/final-mp-name-home.png",
+      "bytes": 609818,
+      "sha256": "657abe889f66c0bdbbbc9629223a8a1e14ec8bf969e9055f50d08ab170bd9596"
+    },
+    {
+      "path": "qa/native-landings-084/final-mp-name-keyboard-dismissed.json",
+      "bytes": 25607,
+      "sha256": "a082c8da008d63460861a039e6404692b0d152314c3a28d33ddb635d8f5a62c1"
+    },
+    {
+      "path": "qa/native-landings-084/final-mp-name-keyboard-dismissed.png",
+      "bytes": 74891,
+      "sha256": "71e8aff2cb2a7baae077f929fddab032f8386ac9f94897dd30ea358170262966"
+    },
+    {
+      "path": "qa/native-landings-084/final-mp-name-keyboard.json",
+      "bytes": 24525,
+      "sha256": "c59145e2ef1bad20f0951b5811af76000150e58ca0edc1c63df24d39395559a4"
+    },
+    {
+      "path": "qa/native-landings-084/final-mp-name-keyboard.png",
+      "bytes": 74791,
+      "sha256": "10deaed629c94f1eccdb5752279d2143ef42a5ba8b30f958032453b119a24473"
+    },
+    {
+      "path": "qa/native-landings-084/final-mp-name-limit.json",
+      "bytes": 25607,
+      "sha256": "79cd8aa6f12c0519c6059a64e323c16409f68d637e8e54f0fced6ed9adb06d78"
+    },
+    {
+      "path": "qa/native-landings-084/final-mp-name-limit.png",
+      "bytes": 78978,
+      "sha256": "f1aa680e1cbd77942c3ef771d71f1297dd44c34c84cac918422d26718bdf1222"
+    },
+    {
+      "path": "qa/native-landings-084/final-mp-name-persisted.json",
+      "bytes": 24540,
+      "sha256": "26c3fc53ea73350fd1997328ded02862147ad971295c5407a4165e71932abc90"
+    },
+    {
+      "path": "qa/native-landings-084/final-mp-name-persisted.png",
+      "bytes": 77594,
+      "sha256": "2392a57dc2fdae920d405b345f48072d8deec4c1c3a51068f9b940bf0649d2ee"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-campaign-return.json",
+      "bytes": 9994,
+      "sha256": "3150785d869801c43238070a804f06eff072eee7b997c9ac1fce1296a9cd53c7"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-campaign-return.png",
+      "bytes": 609818,
+      "sha256": "657abe889f66c0bdbbbc9629223a8a1e14ec8bf969e9055f50d08ab170bd9596"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-campaign-saves-return.json",
+      "bytes": 16271,
+      "sha256": "37bb267633135dcf2efb389d054ab2fc64db2548941c21adfbb72b69efdccb55"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-campaign-saves-return.png",
+      "bytes": 1406603,
+      "sha256": "c24808ce1f910bceb6e9650492ff00f2f4baaf67293acef91629ee687fdc2c3a"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-campaign-saves.json",
+      "bytes": 36293,
+      "sha256": "3b8b8a5a1614c6c9f89615a32e09fd49ebd3994fe0b2a57de5b1a1617325c81f"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-campaign-saves.png",
+      "bytes": 426992,
+      "sha256": "b9cad8e080664285e1a4f2acc86dd336be501aca3f591a1c93af936aa38f169c"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-campaign.json",
+      "bytes": 16271,
+      "sha256": "37bb267633135dcf2efb389d054ab2fc64db2548941c21adfbb72b69efdccb55"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-campaign.png",
+      "bytes": 1406603,
+      "sha256": "c24808ce1f910bceb6e9650492ff00f2f4baaf67293acef91629ee687fdc2c3a"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-ffa-2p.json",
+      "bytes": 26969,
+      "sha256": "7af259d3171b5d2d98440195874ecaca68215203a0477f104025a7ab97f2c368"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-ffa-2p.png",
+      "bytes": 571431,
+      "sha256": "5a247c3ae378cec533869d00763a053c924d98cfcc4c97aa517122cb60b6bbb1"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-ffa-3p.json",
+      "bytes": 26970,
+      "sha256": "e58279c10b0b46a54558bd35f01bf450cecec8cc163761f5c1089f5f96f5335d"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-ffa-3p.png",
+      "bytes": 649577,
+      "sha256": "8db882ef8984e051e591d390aca661f9d3da295b75d341b8bc80a5b04441c9cd"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-ffa-4p.json",
+      "bytes": 26976,
+      "sha256": "b274cd55992103a488f112e7bd5504d951cc3bd3ad08f68462f392310f70c670"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-ffa-4p.png",
+      "bytes": 641745,
+      "sha256": "d16b62e3faae2f1621383907e293854fdaded42111a59949b2309201e4737bca"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-ffa-next.json",
+      "bytes": 26845,
+      "sha256": "0517934971d6dfcf430aa0eb3d067461e2834b6a90e72fa3a188fba3ad28ebb1"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-ffa-next.png",
+      "bytes": 94422,
+      "sha256": "b371d7a53c0fd561d96bd884f1cc2a631ad54fb05cfbd05f3ad2a210fe1e0666"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-ffa-originals.json",
+      "bytes": 26805,
+      "sha256": "1aa3e59e4fd75379ecc821a8acaa70cf7c89e93c0d70994275b5f62089d75be1"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-ffa-originals.png",
+      "bytes": 92073,
+      "sha256": "db51fadc8c175af75ba712bb162bb5f7cc345f68259959ca5d0f487d12429df6"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-ffa-previous.json",
+      "bytes": 26805,
+      "sha256": "1aa3e59e4fd75379ecc821a8acaa70cf7c89e93c0d70994275b5f62089d75be1"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-ffa-previous.png",
+      "bytes": 92073,
+      "sha256": "db51fadc8c175af75ba712bb162bb5f7cc345f68259959ca5d0f487d12429df6"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-ffa-return.json",
+      "bytes": 9994,
+      "sha256": "3150785d869801c43238070a804f06eff072eee7b997c9ac1fce1296a9cd53c7"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-ffa-return.png",
+      "bytes": 609818,
+      "sha256": "657abe889f66c0bdbbbc9629223a8a1e14ec8bf969e9055f50d08ab170bd9596"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-ffa-saves-return.json",
+      "bytes": 26805,
+      "sha256": "1aa3e59e4fd75379ecc821a8acaa70cf7c89e93c0d70994275b5f62089d75be1"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-ffa-saves-return.png",
+      "bytes": 92073,
+      "sha256": "db51fadc8c175af75ba712bb162bb5f7cc345f68259959ca5d0f487d12429df6"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-ffa-saves.json",
+      "bytes": 46874,
+      "sha256": "83c283ab5cfcd9de8b7a85d00b5ea85dedc76086f694304b09ae1c44db8b9833"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-ffa-saves.png",
+      "bytes": 88878,
+      "sha256": "97b79306036055660e6507da5c605c13f314467e06338743f52b2cfdaa92bc4a"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-ffa.json",
+      "bytes": 26805,
+      "sha256": "1aa3e59e4fd75379ecc821a8acaa70cf7c89e93c0d70994275b5f62089d75be1"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-ffa.png",
+      "bytes": 92073,
+      "sha256": "db51fadc8c175af75ba712bb162bb5f7cc345f68259959ca5d0f487d12429df6"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-guide-return.json",
+      "bytes": 9993,
+      "sha256": "53eda6f9a907af149b63bb0aece289f93c13bd0c82a6becaf0af31fb8c7c9641"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-guide-return.png",
+      "bytes": 609818,
+      "sha256": "657abe889f66c0bdbbbc9629223a8a1e14ec8bf969e9055f50d08ab170bd9596"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-guide.json",
+      "bytes": 12817,
+      "sha256": "3733d096d98363c1e0400a76fe16a76afc8d0a045667a046b17244e774d7240d"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-guide.png",
+      "bytes": 147597,
+      "sha256": "250b9f5c4acc1578c7b072d09a67d3213a93fa723a59075fde7c5bddbb9a0927"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-home-after.json",
+      "bytes": 9993,
+      "sha256": "53eda6f9a907af149b63bb0aece289f93c13bd0c82a6becaf0af31fb8c7c9641"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-home-after.png",
+      "bytes": 609818,
+      "sha256": "657abe889f66c0bdbbbc9629223a8a1e14ec8bf969e9055f50d08ab170bd9596"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-home-before-Campaign.json",
+      "bytes": 9994,
+      "sha256": "3150785d869801c43238070a804f06eff072eee7b997c9ac1fce1296a9cd53c7"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-home-before-Campaign.png",
+      "bytes": 609818,
+      "sha256": "657abe889f66c0bdbbbc9629223a8a1e14ec8bf969e9055f50d08ab170bd9596"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-home-before-Free for all.json",
+      "bytes": 9994,
+      "sha256": "3150785d869801c43238070a804f06eff072eee7b997c9ac1fce1296a9cd53c7"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-home-before-Free for all.png",
+      "bytes": 609818,
+      "sha256": "657abe889f66c0bdbbbc9629223a8a1e14ec8bf969e9055f50d08ab170bd9596"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-home-before-Multiplayer.json",
+      "bytes": 9994,
+      "sha256": "3150785d869801c43238070a804f06eff072eee7b997c9ac1fce1296a9cd53c7"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-home-before-Multiplayer.png",
+      "bytes": 609818,
+      "sha256": "657abe889f66c0bdbbbc9629223a8a1e14ec8bf969e9055f50d08ab170bd9596"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-home-before-Towers.json",
+      "bytes": 9994,
+      "sha256": "3150785d869801c43238070a804f06eff072eee7b997c9ac1fce1296a9cd53c7"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-home-before-Towers.png",
+      "bytes": 609818,
+      "sha256": "657abe889f66c0bdbbbc9629223a8a1e14ec8bf969e9055f50d08ab170bd9596"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-home.json",
+      "bytes": 9994,
+      "sha256": "3150785d869801c43238070a804f06eff072eee7b997c9ac1fce1296a9cd53c7"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-home.png",
+      "bytes": 609818,
+      "sha256": "657abe889f66c0bdbbbc9629223a8a1e14ec8bf969e9055f50d08ab170bd9596"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-hub-return.json",
+      "bytes": 9993,
+      "sha256": "53eda6f9a907af149b63bb0aece289f93c13bd0c82a6becaf0af31fb8c7c9641"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-hub-return.png",
+      "bytes": 609818,
+      "sha256": "657abe889f66c0bdbbbc9629223a8a1e14ec8bf969e9055f50d08ab170bd9596"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-hub.json",
+      "bytes": 11707,
+      "sha256": "a048ec174d06e67a5cc1aa49626ec72901e5db394636e22b23d26daa0404e36b"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-hub.png",
+      "bytes": 115232,
+      "sha256": "b599bbd44128ef11ebdca894f01ee2c84d4f6f76c76da446ba5a10fa20fa68a4"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-multiplayer-return.json",
+      "bytes": 9994,
+      "sha256": "3150785d869801c43238070a804f06eff072eee7b997c9ac1fce1296a9cd53c7"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-multiplayer-return.png",
+      "bytes": 609818,
+      "sha256": "657abe889f66c0bdbbbc9629223a8a1e14ec8bf969e9055f50d08ab170bd9596"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-multiplayer.json",
+      "bytes": 25634,
+      "sha256": "ee57a2d06059f98eea3d2723bd29d0b929cd4831b634816b3b67e514227a88b5"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-multiplayer.png",
+      "bytes": 78657,
+      "sha256": "aa3b55e4878319d85ef69e30dcc68d0cb0d9c5dbf1b90024ca4c27ff52c2f4f1"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-towers-easy.json",
+      "bytes": 18055,
+      "sha256": "bf1c8fb55a44940750bf84a3d769aec8af4a3c373472d7d4356bbc5d61da2283"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-towers-easy.png",
+      "bytes": 72577,
+      "sha256": "9565c0397c770af9787a22d28a0057c61084608dcbedb575345d3db6640ecfe9"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-towers-medium.json",
+      "bytes": 18043,
+      "sha256": "ce5127421f15c36d67c4dbd701342672a57f5292e94c8ec3eaab7c9422deb02c"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-towers-medium.png",
+      "bytes": 633156,
+      "sha256": "376f8b5baef53c4a071c35868b3766c1d00f02b2ae6949e5ada0bcf002804cea"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-towers-next.json",
+      "bytes": 18029,
+      "sha256": "e701b5f844578e70c63e21ca8efde6c2bd154a8ff3e451f01f4514af7d5fb011"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-towers-next.png",
+      "bytes": 553853,
+      "sha256": "e6d51b196f2837d27c68d79edfe1242f241e5d47dbea74efc7a470f8880e7023"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-towers-previous.json",
+      "bytes": 18055,
+      "sha256": "bf1c8fb55a44940750bf84a3d769aec8af4a3c373472d7d4356bbc5d61da2283"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-towers-previous.png",
+      "bytes": 72577,
+      "sha256": "9565c0397c770af9787a22d28a0057c61084608dcbedb575345d3db6640ecfe9"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-towers-return.json",
+      "bytes": 9994,
+      "sha256": "3150785d869801c43238070a804f06eff072eee7b997c9ac1fce1296a9cd53c7"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-towers-return.png",
+      "bytes": 609818,
+      "sha256": "657abe889f66c0bdbbbc9629223a8a1e14ec8bf969e9055f50d08ab170bd9596"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-towers-rewards-return.json",
+      "bytes": 18055,
+      "sha256": "bf1c8fb55a44940750bf84a3d769aec8af4a3c373472d7d4356bbc5d61da2283"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-towers-rewards-return.png",
+      "bytes": 72577,
+      "sha256": "9565c0397c770af9787a22d28a0057c61084608dcbedb575345d3db6640ecfe9"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-towers-rewards.json",
+      "bytes": 44743,
+      "sha256": "0b1deaa8a24dc844dd9ebc1a6d3bdb126540053d44ec637fae31dc1135c12de3"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-towers-rewards.png",
+      "bytes": 120189,
+      "sha256": "bd67614eae57416f7ce2cbd82ee9f8a4537c069807f1ec6013f7566b62fb71c0"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-towers-saves-return.json",
+      "bytes": 18055,
+      "sha256": "bf1c8fb55a44940750bf84a3d769aec8af4a3c373472d7d4356bbc5d61da2283"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-towers-saves-return.png",
+      "bytes": 72577,
+      "sha256": "9565c0397c770af9787a22d28a0057c61084608dcbedb575345d3db6640ecfe9"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-towers-saves.json",
+      "bytes": 38026,
+      "sha256": "1080375300edbf747db3b12145281fa21c614c326d174e03ccf9ba352d9223ff"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-towers-saves.png",
+      "bytes": 85338,
+      "sha256": "687313f315c2009a99f1c8e827aa77b25ed95a92f4fbaebb118d0c3cebfee875"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-towers.json",
+      "bytes": 18055,
+      "sha256": "bf1c8fb55a44940750bf84a3d769aec8af4a3c373472d7d4356bbc5d61da2283"
+    },
+    {
+      "path": "qa/native-landings-084/final-normal-towers.png",
+      "bytes": 72577,
+      "sha256": "9565c0397c770af9787a22d28a0057c61084608dcbedb575345d3db6640ecfe9"
+    },
+    {
+      "path": "qa/native-landings-084/final-private-game-live-screen.json",
+      "bytes": 293,
+      "sha256": "d422eaebc6af529ce1f9af7161e5b01a4d443c12a11cdf2c0f8c19bf4ae7f821"
+    },
+    {
+      "path": "qa/native-landings-084/final-private-game-live-screen.png",
+      "bytes": 601265,
+      "sha256": "3b300bb7828bde7657ea71dc38c8983d771a5a2c0c6206c2baa2b5af73c65c58"
+    },
+    {
+      "path": "qa/native-landings-084/final-private-game-live.json",
+      "bytes": 17592,
+      "sha256": "b43b84b5caba296af621ec52ca39b4ce7c27564cb5345dd2e9a0754b3357e664"
+    },
+    {
+      "path": "qa/native-landings-084/final-private-game-screen.json",
+      "bytes": 17796,
+      "sha256": "37696ddeda39d2d6db3e21bb4fdc5f06a359f0178938313987c4289b115212b7"
+    },
+    {
+      "path": "qa/native-landings-084/final-private-game-screen.png",
+      "bytes": 392358,
+      "sha256": "59c2beff9d14c4a420c4c8e477ff2a4a30ce38c04485b3972ecc3a502e80318d"
+    },
+    {
+      "path": "qa/native-landings-084/final-private-game.json",
+      "bytes": 17588,
+      "sha256": "a4ecddfa4686489d18e6543994ec79ee7b3de53859f14386a28f1de24b0e35d8"
+    },
+    {
+      "path": "qa/native-landings-084/final-private-native-list.json",
+      "bytes": 14928,
+      "sha256": "edba1a943daef629241a27630a5eb9181b532e67ea1a9493a41df5c14e9e70b3"
+    },
+    {
+      "path": "qa/native-landings-084/final-private-native-list.png",
+      "bytes": 41395,
+      "sha256": "61eeb092a392c3c51c06c545ab0d4cab03d57abf145faca5122f2d9edd02ea31"
+    },
+    {
+      "path": "qa/native-landings-084/final-private-native-return.json",
+      "bytes": 25647,
+      "sha256": "d8a0c7bd6e2856265285e3b78af7a0731fc913a532069130d973fb87f51a445c"
+    },
+    {
+      "path": "qa/native-landings-084/final-private-native-return.png",
+      "bytes": 86056,
+      "sha256": "b656669714a9977ad6f328b0b39a855714ce0634ee851de28f450f7e51ac3b57"
+    },
+    {
+      "path": "qa/native-landings-084/final-private-return-dialog.json",
+      "bytes": 6014,
+      "sha256": "bde77aad8d52fe961677438d5d4de6c3bfea93b3cf1e954e026bdc09bdbb01e3"
+    },
+    {
+      "path": "qa/native-landings-084/final-private-return-dialog.png",
+      "bytes": 438274,
+      "sha256": "ab423479d78ed6185a06e4d4d92ef72893c951f7680e6baba9e579ab71c357ba"
+    },
+    {
+      "path": "qa/native-landings-084/final-private-room-screen.json",
+      "bytes": 20199,
+      "sha256": "aea754091778220fa39dbc269b0296e0aee070931d4a68d6bc720026c32844d1"
+    },
+    {
+      "path": "qa/native-landings-084/final-private-room-screen.png",
+      "bytes": 99918,
+      "sha256": "c2c696fa6ae548e1a8b85d7018ee2e43ed04e563fe9d134f89d78cb17eae95f3"
+    },
+    {
+      "path": "qa/native-landings-084/final-private-room.json",
+      "bytes": 19626,
+      "sha256": "67500e79d8b55b04b5a217ea074c1ffc43c829461e9879abc07303723a9c3d95"
+    },
+    {
+      "path": "qa/native-landings-084/final-profile-before-restore.json",
+      "bytes": 25643,
+      "sha256": "0703c7270d8e91ebde3a36d7af9b4a689044f77336592f10de546e60cb7b2dc2"
+    },
+    {
+      "path": "qa/native-landings-084/final-profile-before-restore.png",
+      "bytes": 79588,
+      "sha256": "94cec9cd367354daf51c1e5142e01c8e1ae4a40379cdff33465cba4eed045f53"
+    },
+    {
+      "path": "qa/native-landings-084/final-profile-restored-home.json",
+      "bytes": 9993,
+      "sha256": "53eda6f9a907af149b63bb0aece289f93c13bd0c82a6becaf0af31fb8c7c9641"
+    },
+    {
+      "path": "qa/native-landings-084/final-profile-restored-home.png",
+      "bytes": 609818,
+      "sha256": "657abe889f66c0bdbbbc9629223a8a1e14ec8bf969e9055f50d08ab170bd9596"
+    },
+    {
+      "path": "qa/native-landings-084/final-profile-restored-input.json",
+      "bytes": 25643,
+      "sha256": "c46f154b4afd0a44f041afa03dff75052685fd4684138318c28e851192580717"
+    },
+    {
+      "path": "qa/native-landings-084/final-profile-restored-input.png",
+      "bytes": 88375,
+      "sha256": "52ce38672a22d4f98e0da7129635048584a2ebf42f15e0e0d7118b642062e57e"
+    },
+    {
+      "path": "qa/native-landings-084/final-profile-restored.json",
+      "bytes": 12102,
+      "sha256": "f3db67cc75e43cba91f4ba2be72b26e33bd2b958c62ec27fc97a85e9751716a0"
+    },
+    {
+      "path": "qa/native-landings-084/final-profile-restored.png",
+      "bytes": 81553,
+      "sha256": "65e43a115afa0272fe41918201784485ef743f7c1af2be5e195fe550c54e6811"
+    },
+    {
+      "path": "qa/native-landings-084/gameplay.json",
+      "bytes": 439,
+      "sha256": "f6cc26e7c94acad52ff3926eda3495baa604cda612f6691f03d86daff7c040d8"
+    },
+    {
+      "path": "qa/native-landings-084/home-campaign.json",
+      "bytes": 29078,
+      "sha256": "24a0748a0804d77cf4b9cfbb515ecb0917cbb93dd4c13a76445066dcdd914104"
+    },
+    {
+      "path": "qa/native-landings-084/installed-apk.json",
+      "bytes": 260,
+      "sha256": "e00475336831c6b4df0b09387e784ac443c7699cf8ce5f35073760cf57f81ac4"
+    },
+    {
+      "path": "qa/native-landings-084/map-layout.json",
+      "bytes": 19161,
+      "sha256": "fff16999e5ff17a85dbac342645d4ac974c343c02a6aabafc5834e7df84a9ac5"
+    },
+    {
+      "path": "qa/native-landings-084/mp-controls.json",
+      "bytes": 25633,
+      "sha256": "722385acded4bb0373dc1c0119fe7b93760aaa7ff0d09e9c7831711de396e062"
+    },
+    {
+      "path": "qa/native-landings-084/mp-controls.png",
+      "bytes": 82663,
+      "sha256": "345b22043e159544ceb7b800d7978a20afb52e8a056eb3d2360855620eaa7191"
+    },
+    {
+      "path": "qa/native-landings-084/mp-keyboard-reenter.json",
+      "bytes": 25633,
+      "sha256": "b7a10dca9dadad03bc38b9fe606c4aa44f8d1bf56015b63fd13696b1eea6bf04"
+    },
+    {
+      "path": "qa/native-landings-084/mp-keyboard-reenter.png",
+      "bytes": 63063,
+      "sha256": "18b9d6bcbe954c18af27c4a303a9f83570870ddf9df70b7bc2eb364343172ecf"
+    },
+    {
+      "path": "qa/native-landings-084/mp-keyboard-settled.json",
+      "bytes": 25633,
+      "sha256": "b7a10dca9dadad03bc38b9fe606c4aa44f8d1bf56015b63fd13696b1eea6bf04"
+    },
+    {
+      "path": "qa/native-landings-084/mp-keyboard-settled.png",
+      "bytes": 63063,
+      "sha256": "18b9d6bcbe954c18af27c4a303a9f83570870ddf9df70b7bc2eb364343172ecf"
+    },
+    {
+      "path": "qa/native-landings-084/mp-landing.json",
+      "bytes": 3240,
+      "sha256": "df9425b0cd695ae17c92a7268f380a59ae868067e1e855da8bca1a5a01b7dc78"
+    },
+    {
+      "path": "qa/native-landings-084/mp-name-keyboard.json",
+      "bytes": 25633,
+      "sha256": "b7a10dca9dadad03bc38b9fe606c4aa44f8d1bf56015b63fd13696b1eea6bf04"
+    },
+    {
+      "path": "qa/native-landings-084/mp-name-keyboard.png",
+      "bytes": 82621,
+      "sha256": "d6503145d3a2606060954b0b2ecb2ec85e75c9d380c6f001212493e2205e9041"
+    },
+    {
+      "path": "qa/native-landings-084/mp-official-list.json",
+      "bytes": 4388,
+      "sha256": "487eaf676708cb238f9dcabaf15a77ebde7d90d7e69bcdac9223cd2d62886d28"
+    },
+    {
+      "path": "qa/native-landings-084/mp-real-keyboard.json",
+      "bytes": 25633,
+      "sha256": "b7a10dca9dadad03bc38b9fe606c4aa44f8d1bf56015b63fd13696b1eea6bf04"
+    },
+    {
+      "path": "qa/native-landings-084/mp-real-keyboard.png",
+      "bytes": 64322,
+      "sha256": "03d976e22533dc0aeb106db9c415cbca743040a98ba200e94bd1ec1140bce0c0"
+    },
+    {
+      "path": "qa/native-landings-084/private-directory-install.json",
+      "bytes": 713,
+      "sha256": "6538e7a95e6ee37cd32aca3eeae1b23f0d209055302da3659b2984276fce4114"
+    },
+    {
+      "path": "qa/native-landings-084/private-match-progress.json",
+      "bytes": 217,
+      "sha256": "ab1b113f123480dea19f579e7b1b7f33de74b45a604a97551f0791ec6dae850c"
+    },
+    {
+      "path": "qa/native-landings-084/profile-original.json",
+      "bytes": 53,
+      "sha256": "5c49cedd38402d433294411ce4c6d664d60050811f832706a1c534fc4eba7703"
+    },
+    {
+      "path": "qa/native-landings-084/reference-campaign.png",
+      "bytes": 1969046,
+      "sha256": "2aceec408caef678f027b14d46e205778aae0a9ebab45f4813503c2041d6030e"
+    },
+    {
+      "path": "qa/native-landings-084/reference-ffa.png",
+      "bytes": 1285317,
+      "sha256": "e2c884783953800c56f74f6578afdbfaf9fdc4470b2286ad4492580a562e8507"
+    },
+    {
+      "path": "qa/native-landings-084/reference-home.png",
+      "bytes": 1659759,
+      "sha256": "39184363989bf278d2bd8a688e9e28097cb94cc02120ee97239ed024955c58d9"
+    },
+    {
+      "path": "qa/native-landings-084/reference-multiplayer.png",
+      "bytes": 1244374,
+      "sha256": "e5ead9c317c3b016336160413bcd3aca062d1845bcdb8168c37b9c8bda293d94"
+    },
+    {
+      "path": "qa/native-landings-084/reference-towers.png",
+      "bytes": 1268809,
+      "sha256": "546d75751db07f546476d30c96592b5d7b490444af57e78760e1db6c99bbab00"
+    },
+    {
+      "path": "qa/native-landings-084/routes-compact.json",
+      "bytes": 498,
+      "sha256": "35f55652642608ec17fd90c3aaf80e34801720e06fb0944c55515c4f933723a4"
+    },
+    {
+      "path": "qa/native-landings-084/routes-large.json",
+      "bytes": 498,
+      "sha256": "548baeb1d3b58c95eff5916a630fd078de44a2ecacc339bd9c521db5e568f181"
+    },
+    {
+      "path": "qa/native-landings-084/routes-normal.json",
+      "bytes": 623,
+      "sha256": "95acf9bc6ea860b685bd915e733ca11342f9ac389f91252748e6eaaed80c7047"
+    },
+    {
+      "path": "qa/native-landings-084/towers-controls.json",
+      "bytes": 18055,
+      "sha256": "6235cc3bf7ac0834d61784a6359cbfd296dab549d326dad84e95cd809ba04812"
+    },
+    {
+      "path": "qa/native-landings-084/towers-controls.png",
+      "bytes": 68206,
+      "sha256": "eba47d69aa235fa063e1fb287f940e57e2ef22312315d31233864da80782e522"
+    },
+    {
+      "path": "qa/native-landings-084/visual-comparisons.json",
+      "bytes": 3591,
+      "sha256": "1021bd2d647628cf2837f2c88d0108386075764ec7accadc82c135a8f7ee0c3b"
+    }
+  ]
+}

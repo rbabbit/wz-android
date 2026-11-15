@@ -1,4 +1,76 @@
-# Multiplayer mobile integration — v0.70
+# Multiplayer mobile integration — v0.82
+
+Only the private mobile UI portion of `quickjs_backend.cpp` changes from the
+retained v0.80 native client. It exports real/viewed player identity, observer
+state, owner-order capability and camera safety separately. Reserved observer
+slots and watched-player identities cannot initialize/tick a player-owned UI VM
+or issue its selection/research/production commands. Camera/render hooks remain
+independent and unchanged. The matched `.data`, official QJS API prefix, room/
+blind privacy, simulation and network protocol 16384/104 remain frozen.
+
+`native-082/mobile-ui-native.cpp.inc` is the reviewed source helper; its hash and
+exact inlined QJS body are retained with prepare/build/integration provenance.
+Only the QJS translation unit was recompiled. All prior source/patch/raw pairs,
+including the complete v0.81 release, remain preserved. Host helper checks are
+separate from the exact installed-APK observations: reserved-slot observer
+frames/camera/read-only/returns and normal-player menus/selection/pan passed.
+Physical-phone and full-public-match verification are not claimed.
+See [0.82 notes](../../docs/releases/0.82-multiplayer-spectator.md) for scope.
+
+# Historical Multiplayer mobile integration — v0.80
+
+The native client adds a bounded read-only room preview from the actual map
+terrain/start positions. `native-080/mobile-room-map-preview.cpp.inc` is separate
+from the retained room command helper; generation/map identity, blind-room
+permissions and download/readiness gates protect the exported RGB image. The
+adapter caches only the fixed native preview packet and drops it on room/session
+changes. Official protocol/data, room authority and simulation remain unchanged.
+
+The Android room uses normal density and real available IME bounds, publishing
+revision/generation-fenced CSS viewport events. Game/lobby viewport policy stays
+unchanged. Room HTML retains inline chat and reading anchors; button feedback
+reuses the existing `warzone/ui/game-controls/click.ogg`, with its native volume/
+mute policy and an exact read-only asset route. No arbitrary audio bridge exists.
+
+Reproduction and verification records are in `native-080/` and
+`qa/multiplayer-room-080/`, with prepare/build/integrate tools ending in `-080`.
+All `native-079/` and earlier sources/raw pairs remain frozen. See the
+[0.80 notes](../../docs/releases/0.80-multiplayer-room-polish.md) for observed
+scope and verification limits. The exact installed candidate passed real
+private-room keyboard/scroll/Send checks, decoded click PCM/mute, and native
+built-in plus host-downloaded custom preview checks. A real private Cobra
+match passed scoped native movement, Stop/Deselect, camera and Back/return
+checks. Physical speaker audition and a full public match were not verified.
+
+## Historical v0.79 integration
+
+The current waiting-room interface is local HTML/CSS backed by a newly compiled
+native UI helper in `native-079/`. Ready, chat, team and spectator requests call
+the original 4.7.0 room functions, retaining host locks, slot/download limits,
+chat policy and the official protocol `16384/104`. The official `.data` package,
+Android transport and simulation sources remain unchanged.
+
+`mobile-room-native.cpp.inc` exports real roster/options/chat snapshots and
+consumes atomic nonce/generation-scoped requests. A command acknowledgement is
+separate from later authoritative roster/Ready confirmation. The parent room
+is revealed only after its snapshot matches the rendered native room generation;
+stock room screens remain covered during joining/loading/returns.
+
+Reproduction records are `native-079/source-overlays.json`,
+`native-079/native-ui.patch`, `native-079/runtime-integration.json` and
+`qa/multiplayer-room-079/native-build.json`; the new prepare/build/integrate tools
+carry the `-079` suffix. Existing `native-070/` and `native-071/` files and raw
+compiler outputs remain preserved. Ordinary Android builds use the already
+integrated matched JS/WASM, without rebuilding the native engine.
+
+Host/helper proofs are distinct from the exact installed-APK emulator journey.
+The private host verified a real `/help` server reply, team/spectator requests,
+Ready/match entry, keyboard/Send and Back/return behavior. Actual unready, a full
+public match and physical phones were not tested. See
+`qa/multiplayer-room-079/` and the
+[0.79 release notes](../../docs/releases/0.79-multiplayer-room.md).
+
+## Historical v0.70 integration
 
 The current Android app builds from the integrated sources/assets in `app/src`.
 An ordinary Gradle build needs no sibling project or native build cache. The

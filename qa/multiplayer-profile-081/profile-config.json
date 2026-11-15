@@ -1,0 +1,50 @@
+{
+  "version": "0.81",
+  "passed": true,
+  "emulatorUsed": false,
+  "engineExecuted": false,
+  "scope": "Actual shipped PcLobbyConfig validation and INI/FS writer executed offline with inert FS; not a native join or Android test.",
+  "checks": [
+    "Canonical full name \"noobcrusher\"",
+    "Canonical full name \"Player(m)\"",
+    "Canonical full name \"Player(M)(m)\"",
+    "Canonical full name \"123456789012\"",
+    "Canonical full name \"😀😀😀😀😀😀😀😀😀😀😀😀\"",
+    "Canonical full name \"éééééééééééé\"",
+    "Canonical full name \"[Bob]+_Ace-1\"",
+    "Unsafe/overlong input rejected \"\"",
+    "Unsafe/overlong input rejected \"(m)\"",
+    "Unsafe/overlong input rejected \"1234567890123\"",
+    "Unsafe/overlong input rejected \"bad\\nname\"",
+    "Unsafe/overlong input rejected \"\\nBob\"",
+    "Unsafe/overlong input rejected \"bad=name\"",
+    "Unsafe/overlong input rejected \"bad;name\"",
+    "Unsafe/overlong input rejected \"bad#name\"",
+    "Unsafe/overlong input rejected \"bad/name\"",
+    "Unsafe/overlong input rejected \"bad\\\\name\"",
+    "Unsafe/overlong input rejected \"Two  Spaces\"",
+    "Unsafe/overlong input rejected \"bad​name\"",
+    "Unsafe/overlong input rejected \"badname\"",
+    "Unsafe/overlong input rejected \"bad name\"",
+    "Unsafe/overlong input rejected \"\\ud800\"",
+    "Explicit config writer always sends suffix",
+    "Duplicate/stale name keys cannot bypass forced identity",
+    "Missing explicit argument migrates existing full name",
+    "Existing astral name migration preserves code points",
+    "Empty config gets safe forced default",
+    "Malformed stored name cannot enter config",
+    "Other config sections and options preserved",
+    "FS apply writes canonical identity before native starts"
+  ],
+  "checksPassed": 30,
+  "sources": [
+    {
+      "path": "app/src/main/assets/multiplayer/lobby-config.js",
+      "sha256": "6d59d87d7ebd65bb5543916b32e16275914bd694549bda7e8cb06016ed2ce607"
+    },
+    {
+      "path": "tools/test-multiplayer-profile-081.cjs",
+      "sha256": "2f14c8df95c204d0a6c39a01b47208f9db9ef2c68e07707c9f11372d75a06f25"
+    }
+  ]
+}

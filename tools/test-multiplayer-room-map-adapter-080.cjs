@@ -1,0 +1,37 @@
+/* Actual adapter getter with synthetic native FS packets; no game/emulator. */
+const fs=require('fs'),path=require('path'),vm=require('vm'),assert=require('assert'),crypto=require('crypto');
+const root=path.resolve(__dirname,'..'),qa=path.join(root,'qa/multiplayer-room-080');fs.mkdirSync(qa,{recursive:true});
+const sourcePath='app/src/main/assets/multiplayer/native-ui-adapter.js',source=fs.readFileSync(path.join(root,sourcePath),'utf8');
+const checks=[],pass=(name,fn)=>{fn();checks.push(name);},files=new Map(),events=new Map();let reads=0,writes=0;
+const FS={readFile(name,opts){if(!files.has(name))throw Error('ENOENT');if(name==='/tmp/mp-mobile-room-preview.rgb'){reads++;return files.get(name);}return typeof files.get(name)==='string'?files.get(name):JSON.stringify(files.get(name));},writeFile(){writes++;},rename(){},mkdirTree(){},analyzePath(){return{exists:false};}};
+const context={Uint8Array,ArrayBuffer,TextDecoder,TextEncoder,console:{warn(){},error(){}},performance:{now:()=>0},setTimeout(){},clearTimeout(){},setInterval(){},fetch:async()=>({ok:true,text:async()=>''}),parent:{PcMultiplayerSession:{nativeState(){},roomState(){}}},document:{body:{addEventListener(){}},documentElement:{},getElementById(){return null;}},addEventListener:(name,fn)=>events.set(name,fn),dispatchEvent(){},CustomEvent:function(){}};
+context.globalThis=context;vm.createContext(context);vm.runInContext(source,context,{filename:sourcePath});
+const native=context.PcMultiplayerNative;
+let state={phase:'room',roomGeneration:'generation-1'},room={version:79,ready:true,generation:'generation-1',revision:1,mapName:'Actual map',mapHash:'hash-A',blind:false};
+let meta={status:'ready',generation:room.generation,mapName:room.mapName,mapHash:room.mapHash,revision:1,width:3,height:2,channels:3,file:'/tmp/mp-mobile-room-preview.rgb',reason:''};room.mapPreview=meta;
+const original=new Uint8Array([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,255]);files.set(meta.file,original);
+function publish(){files.set('/tmp/mp-mobile-state.json',state);files.set('/tmp/mp-mobile-room.json',room);context.PcMultiplayerNativeUI.attach({FS});}
+publish();
+let value;
+pass('Getter returns exact bounded RGB bytes with native dimensions',()=>{value=native.roomMapPreview();assert.equal(value.status,'ready');assert.equal(value.width,3);assert.equal(value.height,2);assert.deepEqual([...value.pixels],[...original]);assert.equal(reads,1);});
+pass('Unchanged generation/hash/revision reads and copies binary once',()=>{assert.strictEqual(native.roomMapPreview(),value);assert.equal(reads,1);});
+pass('Returned pixels do not alias mutable native filesystem memory',()=>{original[0]=99;assert.equal(value.pixels[0],0);});
+pass('New native preview revision reloads actual pixels',()=>{meta.revision++;publish();value=native.roomMapPreview();assert.equal(reads,2);assert.equal(value.pixels[0],99);});
+pass('Loading status clears ready pixels and performs no binary read',()=>{meta.status='loading';meta.reason='Downloading map / mods';publish();value=native.roomMapPreview();assert.equal(value.status,'loading');assert.equal(value.reason,meta.reason);assert.equal(value.pixels,undefined);assert.equal(reads,2);});
+pass('Downloaded custom-map hash reloads pixels rather than looking up a name thumbnail',()=>{room.mapHash=meta.mapHash='custom-hash-B';meta.status='ready';meta.revision++;publish();assert.equal(native.roomMapPreview().mapHash,'custom-hash-B');assert.equal(reads,3);});
+pass('Metadata for an old same-named map hash is rejected before reading',()=>{meta.mapHash='old-hash';publish();assert.equal(native.roomMapPreview().status,'unavailable');assert.equal(reads,3);meta.mapHash=room.mapHash;});
+pass('Metadata from another room generation cannot reuse pixels',()=>{meta.generation='old-generation';publish();assert.equal(native.roomMapPreview().status,'unavailable');assert.equal(reads,3);meta.generation=room.generation;});
+pass('Mismatched map name cannot expose a prior image',()=>{meta.mapName='Other map';publish();assert.equal(native.roomMapPreview().status,'unavailable');assert.equal(reads,3);meta.mapName=room.mapName;});
+pass('Blind room fails closed even with a ready-looking binary packet',()=>{room.blind=true;publish();assert.equal(native.roomMapPreview().status,'blind');assert.equal(reads,3);room.blind=false;});
+pass('Explicit native blind status carries reason without pixel access',()=>{meta.status='blind';meta.reason='Host has hidden this preview';publish();assert.equal(native.roomMapPreview().status,'blind');assert.equal(native.roomMapPreview().reason,meta.reason);assert.equal(reads,3);meta.status='ready';});
+pass('Only the reviewed fixed preview file path may be read',()=>{meta.file='/tmp/unrelated-file';publish();assert.equal(native.roomMapPreview().status,'unavailable');assert.equal(reads,3);meta.file='/tmp/mp-mobile-room-preview.rgb';});
+pass('Oversized dimensions and non-RGB channels are rejected before allocation',()=>{meta.width=257;publish();assert.equal(native.roomMapPreview().status,'unavailable');meta.width=3;meta.channels=4;publish();assert.equal(native.roomMapPreview().status,'unavailable');assert.equal(reads,3);meta.channels=3;});
+pass('Incomplete RGB byte array cannot be rendered as a valid map',()=>{files.set(meta.file,new Uint8Array(17));meta.revision++;publish();assert.equal(native.roomMapPreview().status,'unavailable');assert.equal(reads,4);files.set(meta.file,original);});
+pass('Missing binary returns honest preparing status and can recover',()=>{files.delete(meta.file);publish();assert.equal(native.roomMapPreview().status,'loading');files.set(meta.file,original);assert.equal(native.roomMapPreview().status,'ready');assert.equal(reads,5);});
+pass('Leaving room removes getter access and cached pixels',()=>{state={phase:'loading',roomGeneration:''};publish();assert.equal(native.roomMapPreview().status,'unavailable');assert.equal(reads,5);});
+pass('Rejoin uses a new generation and loads a fresh binary copy',()=>{state={phase:'room',roomGeneration:'generation-2'};room.generation=meta.generation='generation-2';publish();assert.equal(native.roomMapPreview().generation,'generation-2');assert.equal(reads,6);});
+pass('Preview getter issues no writes, orders or native command requests',()=>{const before=writes;native.roomMapPreview();native.roomMapPreview();assert.equal(writes,before);});
+pass('Page hide invalidates cached room pixels',()=>{events.get('pagehide')();assert.equal(native.roomMapPreview().status,'unavailable');assert.equal(reads,6);});
+const paths=[sourcePath,'tools/test-multiplayer-room-map-adapter-080.cjs'];
+const proof={version:'0.80',passed:true,emulatorUsed:false,actualNativeEngineExecuted:false,actualAdapterExecuted:true,nativeFsPacketsSynthetic:true,checks,checksPassed:checks.length,sources:paths.map(p=>({path:p,sha256:crypto.createHash('sha256').update(fs.readFileSync(path.join(root,p))).digest('hex')}))};
+fs.writeFileSync(path.join(qa,'adapter-map-checks.json'),JSON.stringify(proof,null,2));console.log(JSON.stringify({passed:true,checksPassed:checks.length}));

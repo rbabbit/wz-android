@@ -9,6 +9,8 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
 import android.graphics.Typeface;
+import android.graphics.drawable.InsetDrawable;
+import android.graphics.drawable.RippleDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -46,7 +48,7 @@ final class FfaSetupView extends FrameLayout {
     private final int[] groupKeys = {2, 3, 4, FfaMapBrowserState.ORIGINALS};
     private final CompactRow groups, choices;
     private final LinearLayout heading, compactHeading;
-    private final TextView title, meta, compactTitle, compactMeta, bots, description, position;
+    private final TextView title, meta, compactTitle, compactMeta, bots, description, position, screenTitle;
     private final ScrollView facts;
     private final BrowseArrow previous, next;
     private final FfaPager maps;
@@ -72,6 +74,8 @@ final class FfaSetupView extends FrameLayout {
         back = action("BACK", false);back.setContentDescription("Back to game modes");
         saves = action("FFA SAVES", false);saves.setContentDescription("Open FFA saved games on this phone");
         start = action("START FFA", true);
+        screenTitle=copy("FFA",20,TowersTheme.TEXT);screenTitle.setTypeface(face);
+        screenTitle.setGravity(android.view.Gravity.CENTER_VERTICAL);
         groups = new CompactRow(context);
         for (int i = 0; i < groupKeys.length; i++) {
             final int key = groupKeys[i];
@@ -141,7 +145,7 @@ final class FfaSetupView extends FrameLayout {
     }
     private void selectGroup(int key) {
         maps.settleSelection();if(!browser.selectGroup(key))return;
-        maps.showGroup();chooseMap(catalog.map(browser.selectedId()));decorateGroups();
+        maps.showGroup();chooseMap(catalog.map(browser.selectedId()));updateDetails();decorateGroups();
     }
     private void decorateGroups() {
         for(int i=0;i<groupKeys.length;i++) {
@@ -173,6 +177,8 @@ final class FfaSetupView extends FrameLayout {
     }
     private Button action(String label,boolean primary) {
         Button button=RewardsView.action(getContext(),face,label,primary);
+        button.setBackground(new RippleDrawable(ColorStateList.valueOf(primary?TowersTheme.PRIMARY_RIPPLE:TowersTheme.RIPPLE),
+                new InsetDrawable(TowersTheme.control(getContext(),primary?TowersTheme.PRIMARY:TowersTheme.CONTROL,7),0,dp(4),0,dp(4)),null));
         button.setTextSize(primary?16:13);button.setSingleLine(true);return button;
     }
     private TextView copy(String value,int size,int colour) {
@@ -206,8 +212,8 @@ final class FfaSetupView extends FrameLayout {
         CompactRow(Context context) { super(context); }
         @Override protected void onMeasure(int width,int height) {
             int w=MeasureSpec.getSize(width),h=MeasureSpec.getSize(height),count=getChildCount();
-            int[] desired=new int[count];for(int i=0;i<count;i++)desired[i]=contentWidth((Button)getChildAt(i),44);
-            widths=FfaSetupLayout.chipWidths(w,dp(4),dp(44),desired);
+            int[] desired=new int[count];for(int i=0;i<count;i++)desired[i]=contentWidth((Button)getChildAt(i),48);
+            widths=FfaSetupLayout.chipWidths(w,dp(4),dp(48),desired);
             for(int i=0;i<count;i++)exact(getChildAt(i),widths[i],h);setMeasuredDimension(w,h);
         }
         @Override protected void onLayout(boolean changed,int l,int t,int r,int b) {
@@ -219,7 +225,7 @@ final class FfaSetupView extends FrameLayout {
     private final class LaunchPanel extends FrameLayout {
         private FfaSetupLayout layout;
         LaunchPanel(Context context) {
-            super(context);addView(back);addView(saves);addView(maps);addView(previous);addView(position);addView(next);
+            super(context);addView(back);addView(screenTitle);addView(saves);addView(maps);addView(previous);addView(position);addView(next);
             addView(heading);addView(groups);addView(choices);addView(facts);addView(start);
         }
         @Override protected void onMeasure(int width,int height) {
@@ -229,6 +235,7 @@ final class FfaSetupView extends FrameLayout {
             layout=FfaSetupLayout.calculate(w,h,density,insetLeft,insetTop,insetRight,insetBottom,heading.getMeasuredHeight(),contentWidth(start,128));
             heading.setVisibility(layout.compactHeading?GONE:VISIBLE);compactHeading.setVisibility(layout.compactHeading?VISIBLE:GONE);
             exact(back,contentWidth(back,72),layout.header.height());exact(saves,contentWidth(saves,96),layout.header.height());
+            exact(screenTitle,Math.max(0,layout.header.width()-back.getMeasuredWidth()-saves.getMeasuredWidth()-dp(24)),layout.header.height());
             exact(maps,layout.preview.width(),layout.preview.height());exact(previous,layout.previous.width(),layout.previous.height());
             exact(position,layout.position.width(),layout.position.height());exact(next,layout.next.width(),layout.next.height());
             if(!layout.compactHeading)exact(heading,layout.heading.width(),layout.heading.height());
@@ -238,6 +245,8 @@ final class FfaSetupView extends FrameLayout {
         @Override protected void onLayout(boolean changed,int l,int t,int r,int b) {
             back.layout(layout.header.left,layout.header.top,layout.header.left+back.getMeasuredWidth(),layout.header.bottom);
             saves.layout(layout.header.right-saves.getMeasuredWidth(),layout.header.top,layout.header.right,layout.header.bottom);
+            int titleLeft=layout.header.left+back.getMeasuredWidth()+dp(12);
+            screenTitle.layout(titleLeft,layout.header.top,titleLeft+screenTitle.getMeasuredWidth(),layout.header.bottom);
             place(maps,layout.preview);place(previous,layout.previous);place(position,layout.position);place(next,layout.next);
             if(!layout.compactHeading)place(heading,layout.heading);
             place(groups,layout.groups);place(choices,layout.difficulty);place(facts,layout.facts);place(start,layout.start);
@@ -269,7 +278,7 @@ final class FfaSetupView extends FrameLayout {
         }
         @Override protected void onDraw(Canvas canvas) {
             super.onDraw(canvas);float cx=getWidth()/2f,cy=getHeight()/2f;
-            buttonFace.setBounds(Math.round(cx-dp(17)),Math.round(cy-dp(17)),Math.round(cx+dp(17)),Math.round(cy+dp(17)));
+            buttonFace.setBounds(Math.round(cx-dp(20)),Math.round(cy-dp(20)),Math.round(cx+dp(20)),Math.round(cy+dp(20)));
             buttonFace.setState(getDrawableState());buttonFace.draw(canvas);
             ink.setColor(colours.getColorForState(getDrawableState(),TowersTheme.TEXT));ink.setStrokeWidth(dp(2));
             ink.setStrokeCap(Paint.Cap.ROUND);ink.setStrokeJoin(Paint.Join.ROUND);ink.setStyle(Paint.Style.STROKE);
@@ -416,7 +425,6 @@ final class FfaSetupView extends FrameLayout {
         private final class MapCard extends FrameLayout {
             MapCard(FfaMapCatalog.MapInfo map, int number) {
                 super(FfaSetupView.this.getContext());
-                setBackground(RewardsView.surface(getContext(), TowersTheme.PANEL, 8));
                 setContentDescription(map.name + ", " + map.players + " players, map preview");
                 addView(new MapImage(map.preview), new FrameLayout.LayoutParams(-1, -1));
             }

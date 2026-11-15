@@ -1,0 +1,30 @@
+{
+  "installed": true,
+  "mode": "parent-global-property",
+  "fixtureId": "qa-private-084",
+  "intercepts": [
+    {
+      "method": "GET",
+      "url": "https://wzlobby.wz2100.net/lobby/api/v1/games"
+    },
+    {
+      "method": "POST",
+      "url": "https://wzlobby.wz2100.net/lobby/api/v1/game/qa-private-084/request-join"
+    }
+  ],
+  "host": "10.0.2.2",
+  "port": 22180,
+  "map": "Sk-Mountain",
+  "declaredDirectoryCounts": {
+    "current": 1,
+    "maximum": 4,
+    "liveOccupancyMeasured": false
+  },
+  "directoryDataSynthetic": true,
+  "idResolutionSynthetic": true,
+  "gameplayResponsesMocked": false,
+  "readyStateMocked": false,
+  "publicMessagesSent": false,
+  "delegatedRequests": 0,
+  "requests": []
+}

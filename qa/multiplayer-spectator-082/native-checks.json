@@ -1,0 +1,57 @@
+{
+  "version": "0.82",
+  "passed": true,
+  "emulatorUsed": false,
+  "actualNativeEngineExecuted": false,
+  "actualHostCppHelperExecuted": true,
+  "checks": [
+    "Every actual normal human player retains owned UI capability",
+    "All reserved observer slots including actual fixture14 reject owned context and orders",
+    "Observer watching player2 cannot acquire that player's owned UI",
+    "In-game spectator flag on a playable index rejects commands",
+    "Flagged spectator remains read-only after changing viewed player",
+    "Returning to an actual own non-observer identity restores capability",
+    "Normal human cannot use another viewed player's ownership either",
+    "Missing real native slot fails closed without array access",
+    "Missing viewed native slot fails closed without array access",
+    "Authoritative real-player spectator flag outranks an in-range index",
+    "Uninitialized world cannot create a private owner VM",
+    "Native loading blocks owner requests",
+    "Owner capability waits for actual rendered native view",
+    "Waiting room cannot issue game orders",
+    "All normal world-ready gates preserve existing player capability",
+    "Actual native combat/input/facility/report/VM initializer and tick dispatches use owner capability",
+    "Observer transition disposes stale owner VM/events and cannot continue private queues or combat selection",
+    "Actual camera helper and view/render readiness remain byte-identical and independent of ownership",
+    "Native snapshot exports actual real/view identity, observer state, camera safety and owner capability",
+    "All080 non-owner bridge code, official QJS APIs, room/blind privacy, camera hooks and protocol inputs are frozen",
+    "Generated native QJS body exactly composes reviewed helper and retains frozen multiplayer data bytes"
+  ],
+  "checksPassed": 21,
+  "sources": [
+    {
+      "path": "tools/test-multiplayer-spectator-native-082.py",
+      "sha256": "8143ea3a7dc2d8efdc99fecbd10e90f8afba9cfec3ba658fef03277b75c3a702"
+    },
+    {
+      "path": "tools/prepare-multiplayer-native-082.py",
+      "sha256": "985be83996ed84049eb84d6ff7ce6b4417186177897dbd27eff7945ea085435f"
+    },
+    {
+      "path": "tools/build-multiplayer-native-082.py",
+      "sha256": "243df06f294c8a4f42c11a3a4d23a7d6620703fe67f6b208731ddb7c24476915"
+    },
+    {
+      "path": "tools/integrate-multiplayer-native-082.py",
+      "sha256": "e7ecf6b41df3f5395fc7a596de6d2847642fec15ffbf4511baf194955479d6e6"
+    },
+    {
+      "path": "vendor/multiplayer/native-082/mobile-ui-native.cpp.inc",
+      "sha256": "8337e0427349627d2d435c8745496e75f47244efdb40a726454a14dad17b3ef8"
+    },
+    {
+      "path": "vendor/multiplayer/native-082/quickjs_backend.cpp",
+      "sha256": "4224840b9a7fda8f333e1a009f82bcf455509d519be75312b36c13786fb4611a"
+    }
+  ]
+}

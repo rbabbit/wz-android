@@ -7,18 +7,21 @@ import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.InsetDrawable;
 import android.graphics.drawable.RippleDrawable;
+import android.os.Build;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
+import android.view.WindowInsets;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
-/** Map-first native launcher: compact controls with a scrollable content panel. */
+/** Native Home container and compact, landscape Towers map picker. */
 final class GraphicsSetupView extends FrameLayout {
     interface Actions {
         void start(String graphicsMode, String map, String matchMode, String duelWeapon);
@@ -32,6 +35,7 @@ final class GraphicsSetupView extends FrameLayout {
         void campaignContinue();
         void campaignNew();
         void map(String id);
+        default void homePage(boolean modesVisible) {}
     }
 
     private static final int INK = TowersTheme.TEXT, MUTED = TowersTheme.SECONDARY;
@@ -47,10 +51,13 @@ final class GraphicsSetupView extends FrameLayout {
     private final WarzoneSplashView splash;
     private final TextView version;
     private final LaunchPanel panel;
-    private final ScrollView mapScroll;
+    private final FrameLayout mapScroll;
     private final HomeModesView homeModes;
+    private final TextView screenTitle, mapTitle, mapMeta, mapDescription, mapCompletion, mapPosition;
+    private final ScrollView mapFacts;
+    private final Button previous, next;
     private String map, matchMode, duelWeapon, difficulty;
-    private int viewportHeight;
+    private int viewportHeight, insetLeft, insetTop, insetRight, insetBottom;
     private boolean towersMapVisible;
 
     GraphicsSetupView(Context context, String selected, String selectedMap,
@@ -91,6 +98,7 @@ final class GraphicsSetupView extends FrameLayout {
         medium.setOnClickListener(v -> chooseDifficulty("medium"));
         hard.setOnClickListener(v -> chooseDifficulty("hard"));
         maps = new MapPreviewPager(context, face, level -> chooseMap(level.id));
+        maps.setPreviewOnly(true);
         maps.showLevels(catalog.difficulty(difficulty), map);
 
         detail = text("", 12, MUTED);
@@ -119,16 +127,34 @@ final class GraphicsSetupView extends FrameLayout {
         message.setBackground(shape(TowersTheme.PANEL, 0, 7));
         message.addView(status, new LinearLayout.LayoutParams(0, dp(48), 1));
 
+        mapTitle=text("",26,INK);mapTitle.setTypeface(face);mapTitle.setMaxLines(2);
+        mapTitle.setEllipsize(TextUtils.TruncateAt.END);
+        mapMeta=text("",13,INK);
+        mapDescription=text("",13,MUTED);
+        mapCompletion=text("\u2605 Complete",11,MUTED);
+        LinearLayout factsContent=new LinearLayout(context);factsContent.setOrientation(LinearLayout.VERTICAL);
+        factsContent.addView(mapTitle,new LinearLayout.LayoutParams(-1,-2));
+        LinearLayout.LayoutParams metaParams=new LinearLayout.LayoutParams(-1,-2);metaParams.topMargin=dp(4);
+        factsContent.addView(mapMeta,metaParams);
+        LinearLayout.LayoutParams descriptionParams=new LinearLayout.LayoutParams(-1,-2);descriptionParams.topMargin=dp(12);
+        factsContent.addView(mapDescription,descriptionParams);
+        LinearLayout.LayoutParams completionParams=new LinearLayout.LayoutParams(-1,-2);completionParams.topMargin=dp(8);
+        factsContent.addView(mapCompletion,completionParams);
+        mapFacts=new ScrollView(context);mapFacts.setFillViewport(false);mapFacts.setOverScrollMode(OVER_SCROLL_NEVER);
+        mapFacts.setContentDescription("Selected Towers map details; scroll for more information when needed");
+        mapFacts.addView(factsContent,new ScrollView.LayoutParams(-1,-2));
+        previous=button("\u2039",false);next=button("\u203a",false);
+        previous.setTextSize(28);next.setTextSize(28);
+        previous.setContentDescription("Previous Towers map, or swipe right");
+        next.setContentDescription("Next Towers map, or swipe left");
+        previous.setOnClickListener(v -> maps.browseBy(-1));next.setOnClickListener(v -> maps.browseBy(1));
+        mapPosition=text("",14,MUTED);mapPosition.setTypeface(face);mapPosition.setGravity(Gravity.CENTER);
+        mapPosition.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
+
         panel = new LaunchPanel(context);
-        mapScroll = new ScrollView(context);
-        mapScroll.setFillViewport(true);
-        mapScroll.setOverScrollMode(OVER_SCROLL_NEVER);
-        mapScroll.setVerticalScrollBarEnabled(true);
-        mapScroll.setScrollbarFadingEnabled(true);
-        mapScroll.setContentDescription("Map selection and Play; scroll vertically when needed");
-        mapScroll.addView(panel, new ScrollView.LayoutParams(-1, -2));
+        mapScroll = new FrameLayout(context);
+        mapScroll.addView(panel, new FrameLayout.LayoutParams(-1, -1));
         LayoutParams scrollParams = new LayoutParams(-1, -1);
-        scrollParams.topMargin = dp(48);
         addView(mapScroll, scrollParams);
         rewards = button("REWARDS 0", false);
         rewards.setTextSize(13);
@@ -138,7 +164,7 @@ final class GraphicsSetupView extends FrameLayout {
         rewards.setCompoundDrawables(crystal, null, null, null);
         rewards.setCompoundDrawablePadding(dp(6));
         rewards.setBackground(new RippleDrawable(ColorStateList.valueOf(TowersTheme.RIPPLE),
-                new InsetDrawable(TowersTheme.control(context, TowersTheme.CONTROL, 7), 0, dp(8), 0, dp(8)), null));
+                new InsetDrawable(TowersTheme.control(context, TowersTheme.CONTROL, 7), 0, dp(4), 0, dp(4)), null));
         rewards.setPadding(dp(9), 0, dp(9), 0);
         rewards.setOnClickListener(v -> {
             maps.settleSelection();
@@ -149,30 +175,32 @@ final class GraphicsSetupView extends FrameLayout {
         savedGames.setSingleLine(true);
         savedGames.setContentDescription("Open saved games on this phone");
         savedGames.setBackground(new RippleDrawable(ColorStateList.valueOf(TowersTheme.RIPPLE),
-                new InsetDrawable(TowersTheme.control(context, TowersTheme.CONTROL, 7), 0, dp(8), 0, dp(8)), null));
+                new InsetDrawable(TowersTheme.control(context, TowersTheme.CONTROL, 7), 0, dp(4), 0, dp(4)), null));
         savedGames.setPadding(dp(10), 0, dp(10), 0);
         savedGames.setOnClickListener(v -> {
             maps.settleSelection();
             actions.savedGames();
         });
-        homeActions = new LinearLayout(context);
+        homeActions = new HeaderRow(context);
         homeActions.setGravity(Gravity.CENTER_VERTICAL);
         homeBack = button("BACK", false);
         homeBack.setTextSize(13);
         homeBack.setSingleLine(true);
         homeBack.setBackground(new RippleDrawable(ColorStateList.valueOf(TowersTheme.RIPPLE),
-                new InsetDrawable(TowersTheme.control(context, TowersTheme.CONTROL, 7), 0, dp(8), 0, dp(8)), null));
+                new InsetDrawable(TowersTheme.control(context, TowersTheme.CONTROL, 7), 0, dp(4), 0, dp(4)), null));
         homeBack.setPadding(dp(10), 0, dp(10), 0);
         homeBack.setContentDescription("Back to Campaign and Towers");
         homeBack.setOnClickListener(v -> handleHomeBack());
         homeActions.addView(homeBack, new LinearLayout.LayoutParams(-2, dp(48)));
+        screenTitle=text("TOWERS",20,INK);screenTitle.setTypeface(face);screenTitle.setGravity(Gravity.CENTER_VERTICAL);
+        homeActions.addView(screenTitle,new LinearLayout.LayoutParams(-2,dp(48)));
         LinearLayout.LayoutParams rewardsParams = new LinearLayout.LayoutParams(-2, dp(48));
         rewardsParams.leftMargin = dp(8);
         homeActions.addView(rewards, rewardsParams);
         LinearLayout.LayoutParams savedParams = new LinearLayout.LayoutParams(-2, dp(48));
         savedParams.leftMargin = dp(8);
         homeActions.addView(savedGames, savedParams);
-        LayoutParams homeParams = new LayoutParams(-2, dp(48), Gravity.TOP | Gravity.START);
+        LayoutParams homeParams = new LayoutParams(-1, dp(48), Gravity.TOP | Gravity.START);
         homeParams.leftMargin = dp(18);
         homeParams.topMargin = dp(8);
         addView(homeActions, homeParams);
@@ -186,7 +214,29 @@ final class GraphicsSetupView extends FrameLayout {
         addView(homeModes, new LayoutParams(-1, -1));
         refresh();
         showHomeModes();
+        setOnApplyWindowInsetsListener((view,insets) -> {
+            int left=0,top=0,right=0,bottom=0;
+            if(Build.VERSION.SDK_INT>=30) {
+                android.graphics.Insets safe=insets.getInsets(WindowInsets.Type.systemBars()|WindowInsets.Type.displayCutout());
+                left=safe.left;top=safe.top;right=safe.right;bottom=safe.bottom;
+            } else {
+                left=insets.getSystemWindowInsetLeft();top=insets.getSystemWindowInsetTop();
+                right=insets.getSystemWindowInsetRight();bottom=insets.getSystemWindowInsetBottom();
+                if(Build.VERSION.SDK_INT>=28&&insets.getDisplayCutout()!=null) {
+                    left=Math.max(left,insets.getDisplayCutout().getSafeInsetLeft());
+                    top=Math.max(top,insets.getDisplayCutout().getSafeInsetTop());
+                    right=Math.max(right,insets.getDisplayCutout().getSafeInsetRight());
+                    bottom=Math.max(bottom,insets.getDisplayCutout().getSafeInsetBottom());
+                }
+            }
+            if(left!=insetLeft||top!=insetTop||right!=insetRight||bottom!=insetBottom) {
+                insetLeft=left;insetTop=top;insetRight=right;insetBottom=bottom;requestLayout();
+            }
+            return insets;
+        });
     }
+
+    @Override protected void onAttachedToWindow() {super.onAttachedToWindow();requestApplyInsets();}
 
     void setResultOverlayVisible(boolean visible) {
         splash.setArtworkVisible(!visible);
@@ -211,25 +261,12 @@ final class GraphicsSetupView extends FrameLayout {
     }
 
     @Override protected void onMeasure(int width, int height) {
-        viewportHeight = Math.max(0, MeasureSpec.getSize(height) - dp(48));
+        viewportHeight = Math.max(0, MeasureSpec.getSize(height));
+        TowersSetupLayout layout=TowersSetupLayout.calculate(MeasureSpec.getSize(width),viewportHeight,
+                getResources().getDisplayMetrics().density,insetLeft,insetTop,insetRight,insetBottom,dp(136));
         LayoutParams params = (LayoutParams) homeActions.getLayoutParams();
-        params.leftMargin = Math.max(dp(8), Math.round(MeasureSpec.getSize(width) * .047f));
-        params.topMargin = dp(viewportHeight < dp(320) ? 0 : 8);
-        // Reserve each label's measured text and icon width rather than clipping
-        // it with unrelated percentages when Android's font size is enlarged.
-        int availableWidth = Math.max(0, MeasureSpec.getSize(width) - params.leftMargin - dp(12));
-        Button[] controls = {homeBack, rewards, savedGames};
-        int wanted = 0;
-        for (Button control : controls) wanted += desiredButtonWidth(control);
-        int budget = Math.max(0, availableWidth - dp(16)), remaining = budget;
-        for (int i = 0; i < controls.length; i++) {
-            Button control = controls[i];
-            int desired = desiredButtonWidth(control);
-            int assigned = wanted <= budget ? desired : i == controls.length - 1 ? remaining
-                    : Math.round(budget * desired / (float) Math.max(1, wanted));
-            remaining -= assigned;
-            control.getLayoutParams().width = Math.max(0, assigned);
-        }
+        params.leftMargin=layout.header.left;params.topMargin=layout.header.top;
+        params.width=layout.header.width();params.height=layout.header.height();
         super.onMeasure(width, height);
     }
 
@@ -288,6 +325,7 @@ final class GraphicsSetupView extends FrameLayout {
     }
 
     private void chooseMap(String id) {
+        if(mapFacts!=null&&!map.equals(BattleLaunchSpec.mapId(id)))mapFacts.scrollTo(0,0);
         map = BattleLaunchSpec.mapId(id);
         rememberMap();
         actions.map(map);
@@ -312,7 +350,12 @@ final class GraphicsSetupView extends FrameLayout {
         weaponChoices.setVisibility(botMatch ? VISIBLE : GONE);
         difficultyChoices.setVisibility(botMatch ? GONE : VISIBLE);
         maps.setVisibility(botMatch ? GONE : VISIBLE);
+        maps.setPreviewOnly(!botMatch);
         maps.setInteractionEnabled(true);
+        mapFacts.setVisibility(botMatch?GONE:VISIBLE);
+        previous.setVisibility(botMatch?GONE:VISIBLE);next.setVisibility(botMatch?GONE:VISIBLE);
+        mapPosition.setVisibility(botMatch?GONE:VISIBLE);
+        updateMapDetails();
         detail.setVisibility(botMatch ? VISIBLE : GONE);
         detail.setText("You: " + ("cannon".equals(duelWeapon)
                 ? "Cannon  ·  Bot: Rockets" : "Rockets  ·  Bot: Cannon"));
@@ -328,12 +371,23 @@ final class GraphicsSetupView extends FrameLayout {
         if (panel != null) panel.requestLayout();
     }
 
+    private void updateMapDetails() {
+        MapLevelCatalog.Level level=catalog.level(map);
+        mapTitle.setText(level.name.toUpperCase(Locale.ROOT));
+        mapMeta.setText(level.rounds+" waves · "+level.preparationSeconds+"s prep");
+        mapDescription.setText(level.description);
+        mapCompletion.setVisibility(maps.isCompleted(map)?VISIBLE:GONE);
+        mapCompletion.setContentDescription(level.name+", Complete");
+        mapPosition.setText((maps.selectedIndex()+1)+" / "+maps.pageCount());
+        previous.setEnabled(maps.selectedIndex()>0);next.setEnabled(maps.selectedIndex()<maps.pageCount()-1);
+    }
+
     private void applyCompactTowersStyle() {
         boolean compact = !"duel".equals(matchMode);
         message.setBackground(shape(compact ? TowersTheme.PANEL : 0xFF101F26, compact ? 0 : 0xFF29414A, 7));
         for (Button b : new Button[] {towers, duel, cannon, rockets, easy, medium, hard}) {
             boolean selected = b.isSelected();
-            int fill = compact ? (selected ? TowersTheme.PRIMARY : Color.TRANSPARENT)
+            int fill = compact ? (selected ? TowersTheme.PRIMARY : TowersTheme.CONTROL)
                     : (selected ? 0xFF18343B : 0xFF101F26);
             if (compact) b.setTextColor(TowersTheme.buttonText(selected));
             else b.setTextColor(INK);
@@ -341,7 +395,7 @@ final class GraphicsSetupView extends FrameLayout {
                     ? selected ? TowersTheme.PRIMARY_RIPPLE : TowersTheme.RIPPLE : 0x228BD3CC),
                     new InsetDrawable(compact ? TowersTheme.control(getContext(), fill, 7)
                             : shape(fill, selected ? 0xFF8BD3CC : 0xFF29414A, 7),
-                            dp(4), dp(8), dp(4), dp(8)), null));
+                            compact?0:dp(4), dp(compact?4:8), compact?0:dp(4), dp(compact?4:8)), null));
             b.setPadding(dp(5), 0, dp(5), 0);
         }
         for (Button b : new Button[] {start}) {
@@ -352,7 +406,7 @@ final class GraphicsSetupView extends FrameLayout {
             b.setBackground(new RippleDrawable(ColorStateList.valueOf(compact
                     ? primary ? TowersTheme.PRIMARY_RIPPLE : TowersTheme.RIPPLE : 0x338BD3CC),
                     new InsetDrawable(compact ? TowersTheme.control(getContext(), fill, 7)
-                            : shape(fill, 0, 7), 0, dp(8), 0, dp(8)), null));
+                            : shape(fill, 0, 7), 0, dp(compact?4:8), 0, dp(compact?4:8)), null));
             b.setPadding(dp(5), 0, dp(5), 0);
         }
     }
@@ -371,7 +425,7 @@ final class GraphicsSetupView extends FrameLayout {
         requestLayout();
     }
 
-    void setCompletedMaps(Set<String> completedMaps) { maps.setCompletedMaps(completedMaps); }
+    void setCompletedMaps(Set<String> completedMaps) { maps.setCompletedMaps(completedMaps);updateMapDetails(); }
 
     void setCampaignBusy(boolean busy) { homeModes.setCampaignBusy(busy); }
 
@@ -381,11 +435,14 @@ final class GraphicsSetupView extends FrameLayout {
         homeModes.setVisibility(GONE);
         mapScroll.setVisibility(VISIBLE);
         homeActions.setVisibility(VISIBLE);
-        version.setVisibility(VISIBLE);
-        splash.setVisibility(VISIBLE);
+        version.setVisibility(GONE);
+        splash.setVisibility("duel".equals(matchMode)?VISIBLE:GONE);
         // Switching modes also invalidates a pending Campaign inspection.
         actions.map(map);
+        actions.homePage(false);
     }
+
+    boolean isHomeModesVisible() { return !towersMapVisible; }
 
     boolean handleHomeBack() {
         if (!towersMapVisible) return false;
@@ -402,6 +459,7 @@ final class GraphicsSetupView extends FrameLayout {
         homeActions.setVisibility(GONE);
         version.setVisibility(GONE);
         splash.setVisibility(GONE);
+        actions.homePage(true);
     }
 
     void showError(String value) { showStatus(value, true); }
@@ -456,15 +514,44 @@ final class GraphicsSetupView extends FrameLayout {
 
     private int dp(int value) { return Math.round(value * getResources().getDisplayMetrics().density); }
 
-    /** Compact visible controls keep 48dp touch rows; very short windows can scroll. */
+    /** Content-sized native header, with title left and saved actions right. */
+    private final class HeaderRow extends LinearLayout {
+        private int backWidth,rewardWidth,saveWidth,titleWidth;
+        HeaderRow(Context context) {super(context);}
+        @Override protected void onMeasure(int width,int height) {
+            int w=MeasureSpec.getSize(width),h=MeasureSpec.getSize(height),gap=dp(8);
+            backWidth=Math.max(dp(64),desiredButtonWidth(homeBack));
+            rewardWidth=Math.max(dp(100),desiredButtonWidth(rewards));
+            saveWidth=Math.max(dp(96),desiredButtonWidth(savedGames));
+            int remaining=Math.max(0,w-backWidth-gap*3);
+            if(rewardWidth+saveWidth>remaining) {
+                int total=rewardWidth+saveWidth;
+                rewardWidth=Math.round(remaining*rewardWidth/(float)Math.max(1,total));saveWidth=remaining-rewardWidth;
+            }
+            titleWidth=Math.max(0,w-backWidth-rewardWidth-saveWidth-gap*3);
+            View[] views={homeBack,screenTitle,rewards,savedGames};int[] widths={backWidth,titleWidth,rewardWidth,saveWidth};
+            for(int i=0;i<views.length;i++)views[i].measure(MeasureSpec.makeMeasureSpec(widths[i],MeasureSpec.EXACTLY),MeasureSpec.makeMeasureSpec(h,MeasureSpec.EXACTLY));
+            setMeasuredDimension(w,h);
+        }
+        @Override protected void onLayout(boolean changed,int l,int t,int r,int b) {
+            int w=getWidth(),h=getHeight(),gap=dp(8);
+            homeBack.layout(0,0,backWidth,h);
+            screenTitle.layout(backWidth+gap,0,backWidth+gap+titleWidth,h);
+            savedGames.layout(w-saveWidth,0,w,h);
+            rewards.layout(w-saveWidth-gap-rewardWidth,0,w-saveWidth-gap,h);
+        }
+    }
+
+    /** Fixed split picker. Only the selected map facts scroll; Play stays visible. */
     private final class LaunchPanel extends FrameLayout {
         private int left, top, panelWidth, contentHeight, gap, previewHeight;
         private int messageHeight, detailHeight;
+        private TowersSetupLayout towersLayout;
 
         LaunchPanel(Context context) {
             super(context);
             for (View view : new View[] {matchChoices, weaponChoices, difficultyChoices,
-                    maps, detail, launchActions, message}) addView(view);
+                    maps, detail, launchActions, message,mapFacts,previous,mapPosition,next}) addView(view);
         }
 
         private void exact(View view, int width, int height) {
@@ -475,6 +562,25 @@ final class GraphicsSetupView extends FrameLayout {
         @Override protected void onMeasure(int width, int height) {
             int w = MeasureSpec.getSize(width), h = viewportHeight;
             boolean botMatch = "duel".equals(matchMode);
+            if(!botMatch) {
+                float density=getResources().getDisplayMetrics().density;
+                towersLayout=TowersSetupLayout.calculate(w,h,density,insetLeft,insetTop,insetRight,insetBottom,
+                        Math.max(dp(136),desiredButtonWidth(start)));
+                exact(matchChoices,0,0);exact(weaponChoices,0,0);exact(detail,0,0);
+                exact(difficultyChoices,towersLayout.difficulty.width(),towersLayout.difficulty.height());
+                exact(maps,towersLayout.preview.width(),towersLayout.preview.height());
+                exact(previous,towersLayout.previous.width(),towersLayout.previous.height());
+                exact(mapPosition,towersLayout.position.width(),towersLayout.position.height());
+                exact(next,towersLayout.next.width(),towersLayout.next.height());
+                messageHeight=message.getVisibility()==VISIBLE?dp(48):0;
+                exact(mapFacts,towersLayout.facts.width(),Math.max(0,towersLayout.facts.height()-messageHeight));
+                exact(message,towersLayout.facts.width(),messageHeight);
+                LinearLayout.LayoutParams playParams=(LinearLayout.LayoutParams)start.getLayoutParams();
+                playParams.width=towersLayout.start.width();playParams.height=towersLayout.start.height();
+                exact(launchActions,towersLayout.start.width(),towersLayout.start.height());
+                setMeasuredDimension(w,h);return;
+            }
+            towersLayout=null;
             int outer = dp(h < dp(320) ? 8 : 16);
             messageHeight = message.getVisibility() == VISIBLE ? dp(56) : 0;
             int available = Math.max(0, h - outer * 2 - messageHeight);
@@ -509,6 +615,14 @@ final class GraphicsSetupView extends FrameLayout {
         }
 
         @Override protected void onLayout(boolean changed, int l, int t, int r, int b) {
+            if(towersLayout!=null) {
+                place(maps,towersLayout.preview);place(previous,towersLayout.previous);place(mapPosition,towersLayout.position);place(next,towersLayout.next);
+                place(difficultyChoices,towersLayout.difficulty);place(launchActions,towersLayout.start);
+                FfaSetupLayout.Box facts=towersLayout.facts;
+                mapFacts.layout(facts.left,facts.top,facts.right,facts.bottom-messageHeight);
+                message.layout(facts.left,facts.bottom-messageHeight,facts.right,facts.bottom);
+                return;
+            }
             int x = left, y = top;
             matchChoices.layout(0, 0, 0, 0);
             if ("duel".equals(matchMode)) {
@@ -532,5 +646,7 @@ final class GraphicsSetupView extends FrameLayout {
             int messageY = getHeight() - dp(56);
             message.layout(messageX, messageY, messageX + messageWidth, messageY + dp(52));
         }
+
+        private void place(View view,FfaSetupLayout.Box box) {view.layout(box.left,box.top,box.right,box.bottom);}
     }
 }

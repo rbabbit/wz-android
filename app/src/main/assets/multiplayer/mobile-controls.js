@@ -25,15 +25,17 @@
     const help=window.parent?.WarzoneHost?window.parent.document.getElementById('warzone-towers-help-overlay'):null;
     return Boolean(window.__warzoneCommands?.isOpen?.()||window.__warzoneIntelligence?.isOpen?.()||window.__blockNightResearch?.report?.().open||window.__blockNightResearch?.report?.().opening||help&&!help.hidden);
   };
-  const worldReady=()=>enabled&&phase==='game'&&window.PcMultiplayerState?.worldReady===true&&window.PcMultiplayerState?.worldSafe!==false&&window.PcMultiplayerState?.nativeMenuOpen!==true;
+  const ordersAllowed=()=>{const s=window.PcMultiplayerState;return s?.canIssueOrders!==false&&s?.spectator!==true&&!(Number.isInteger(s?.realPlayer)&&Number.isInteger(s?.player)&&s.realPlayer!==s.player);};
+  const worldReady=()=>{const s=window.PcMultiplayerState;return enabled&&phase==='game'&&s?.worldReady===true&&(typeof s.cameraSafe==='boolean'?s.cameraSafe:s.worldSafe!==false)&&s.nativeMenuOpen!==true;};
   const game=()=>worldReady()&&!modal();
   function combatSuspended(){
     const pages=window.__warzoneCommands?.report?.()||{};
-    return !worldReady()||document.hidden||combatPageHidden||modal()||Boolean(pages.buildOpen||pages.placement||pages.selectingTrucks||pages.nativeMenu||pages.nativeClosing||pages.exitingBuild||pages.buildingOpening||window.__warzoneCommands?.isDemolishing?.())||
+    return !worldReady()||!ordersAllowed()||document.hidden||combatPageHidden||modal()||Boolean(pages.buildOpen||pages.placement||pages.selectingTrucks||pages.nativeMenu||pages.nativeClosing||pages.exitingBuild||pages.buildingOpening||window.__warzoneCommands?.isDemolishing?.())||
       points.size>0||heldMouse!==null||heldKeys.size>0||jobs.length>0||Boolean(activeJob&&!activeJob.finished)||combatQueries>0||performance.now()<combatInteractionUntil;
   }
   function refreshCombatLock(force=false){
     const native=window.PcMultiplayerNative,snapshot=native?.state?.combatLock;
+    if(!ordersAllowed())combatLock=false;
     // Acknowledged native overrides (selection/control groups/session end) are
     // authoritative. An old OFF snapshot cannot cancel a newly requested ON.
     if(!force&&combatLock&&combatIntent?.enabled===true&&combatIntent.nonce&&snapshot?.requestNonce===combatIntent.nonce&&snapshot.enabled===false)combatLock=false;
@@ -46,7 +48,7 @@
     return snapshot?.enabled===true;
   }
   function setCombatLock(value){
-    if(typeof value!=='boolean'||value&&!worldReady())return false;
+    if(typeof value!=='boolean'||value&&(!worldReady()||!ordersAllowed()))return false;
     const previous=combatLock,previousIntent=combatIntent,previousActivation=combatActivation;combatLock=value;
     // A native manual selection blocks this activation, including a late
     // unsuspend written before its snapshot arrives. Only a new user enable
@@ -127,8 +129,9 @@
     single=null;multi=null;points.clear();ignoreUntilUp=false;counts.cancels++;
     combatInteractionUntil=performance.now()+160;refreshCombatLock();
   }
-  function live(job,token){return enabled&&token===generation&&!job.cancelled;}
-  function enqueue(job){if(!enabled)return false;if(jobs.length>=24){counts.dropped++;return false;}jobs.push(job);refreshCombatLock();pump();return true;}
+  const cameraJob=job=>job?.kind==='pan'||job?.kind==='radar'||job?.cameraOnly===true;
+  function live(job,token){return worldReady()&&token===generation&&!job.cancelled&&(ordersAllowed()||cameraJob(job));}
+  function enqueue(job){if(!worldReady()||!ordersAllowed()&&!cameraJob(job))return false;if(jobs.length>=24){counts.dropped++;return false;}jobs.push(job);refreshCombatLock();pump();return true;}
   async function pump(){
     if(pumping)return;pumping=true;
     try{
@@ -172,10 +175,10 @@
   function click(point,button=0){
     if(button===2)counts.rightClicks++;else counts.taps++;
     lastAction=button===2?'secondary-click':'contextual-tap';trackPanel(point);
-    return enqueue({kind:'click',x:point.x,y:point.y,button});
+    return enqueue({kind:'click',x:point.x,y:point.y,button,cameraOnly:point.region==='radar'});
   }
   function beginDrag(gesture,kind){
-    if(kind==='box'){setCombatLock(false);if(combatLock){clearLong();gesture.moved=true;gesture.job={cancelled:true,ended:true};return;}}
+    if(kind==='box'){if(!ordersAllowed())return;setCombatLock(false);if(combatLock){clearLong();gesture.moved=true;gesture.job={cancelled:true,ended:true};return;}}
     clearLong();gesture.kind=kind;gesture.moved=true;
     gesture.job={kind,start:{...gesture.start},x:gesture.x,y:gesture.y,ended:false};
     if(kind==='pan'){counts.pans++;lastAction='pan';}else if(kind==='box'){counts.boxes++;lastAction='box-select';}
@@ -270,8 +273,8 @@
         focus();const point={x:event.clientX,y:event.clientY},region=hit(point.x,point.y);
         single={id:event.pointerId,start:point,...point,downAt:performance.now(),region,kind:null,moved:false,armed:false};
         if(region==='blocked'){ignoreUntilUp=true;return;}
-        if(region==='world'&&!window.__warzoneCommands?.isDemolishing?.())single.linePlacement=window.__warzoneCommands?.beginLinePlacement?.(point.x,point.y)||null;
-        clearLong();longTimer=setTimeout(()=>{if(single?.id===event.pointerId&&!single.moved&&game()&&region==='world')single.armed=true;},HOLD_MS);
+        if(ordersAllowed()&&region==='world'&&!window.__warzoneCommands?.isDemolishing?.())single.linePlacement=window.__warzoneCommands?.beginLinePlacement?.(point.x,point.y)||null;
+        clearLong();if(ordersAllowed())longTimer=setTimeout(()=>{if(single?.id===event.pointerId&&!single.moved&&game()&&ordersAllowed()&&region==='world')single.armed=true;},HOLD_MS);
       }else if(points.size===2)newMulti();
       else{clearLong();cancelJobs();releaseCamera();window.PcMultiplayerNative?.cancelCamera?.();single=null;multi=null;ignoreUntilUp=true;counts.cancels++;}
       return;
@@ -284,14 +287,14 @@
       const s=single;if(!s||s.id!==event.pointerId)return;
       s.x=event.clientX;s.y=event.clientY;const travel=distance(s.start,s);
       if(s.linePlacement){s.moved=travel>=SLOP;window.__warzoneCommands?.updateLinePlacement?.(s.linePlacement,s.x,s.y);return;}
-      if(s.region==='world'&&(window.__warzoneCommands?.isPlacement?.()||window.__warzoneCommands?.isDemolishing?.())){
+      if(ordersAllowed()&&s.region==='world'&&(window.__warzoneCommands?.isPlacement?.()||window.__warzoneCommands?.isDemolishing?.())){
         if(travel>=SLOP){clearLong();s.moved=true;}
         if(window.__warzoneCommands.isDemolishing?.())window.__warzoneCommands.previewDemolish(s.x,s.y);else window.__warzoneCommands.previewAt?.(s.x,s.y);
         return;
       }
       if(s.job){Object.assign(s.job,{x:s.x,y:s.y});if(s.kind==='pan')counts.panMoves++;return;}
       if(game()&&s.region==='world'){
-        if((s.armed||performance.now()-s.downAt>=HOLD_MS)&&travel>=BOX_START)beginDrag(s,'box');
+        if(ordersAllowed()&&(s.armed||performance.now()-s.downAt>=HOLD_MS)&&travel>=BOX_START)beginDrag(s,'box');
         else if(travel>=SLOP)beginDrag(s,'pan');
       }else if(travel>=SLOP)beginDrag(s,s.region==='radar'?'radar':'ui-drag');
       return;
@@ -304,10 +307,10 @@
     }else if(single?.id===event.pointerId){
       const s=single;s.x=event.clientX;s.y=event.clientY;
       if(s.linePlacement){if(!cancelled&&!ignoreUntilUp&&hit(s.x,s.y)==='world')window.__warzoneCommands?.endLinePlacement?.(s.linePlacement,s.x,s.y);else window.__warzoneCommands?.cancelLinePlacement?.(s.linePlacement);}
-      else if(s.region==='world'&&!cancelled&&!ignoreUntilUp&&window.__warzoneCommands?.isDemolishing?.())window.__warzoneCommands.demolishAt(s.x,s.y);
-      else if(s.region==='world'&&!cancelled&&!ignoreUntilUp&&window.__warzoneCommands?.isPlacement?.())window.__warzoneCommands.placeAt(s.x,s.y);
+      else if(ordersAllowed()&&s.region==='world'&&!cancelled&&!ignoreUntilUp&&window.__warzoneCommands?.isDemolishing?.())window.__warzoneCommands.demolishAt(s.x,s.y);
+      else if(ordersAllowed()&&s.region==='world'&&!cancelled&&!ignoreUntilUp&&window.__warzoneCommands?.isPlacement?.())window.__warzoneCommands.placeAt(s.x,s.y);
       else if(s.job){Object.assign(s.job,{x:s.x,y:s.y,ended:true});s.job.cancelled=cancelled;}
-      else if(!cancelled&&!ignoreUntilUp){
+      else if(!cancelled&&!ignoreUntilUp&&(ordersAllowed()||s.region==='radar')){
         const button=s.region==='radar'?2:game()&&s.region==='world'&&performance.now()-s.downAt>=HOLD_MS?2:0;
         if(s.region==='world')manualSelectionRevision++;
         click(s,button);
@@ -329,7 +332,7 @@
     manufacturing:{value:'F1',code:'F1',number:112},research:{value:'F2',code:'F2',number:113},build:{value:'F3',code:'F3',number:114}
   };
   function command(action){
-    if(!game())return false;
+    if(!game()||!ordersAllowed())return false;
     const normalized=String(action).toLowerCase();
     if(['research','manufacturing','build','queue'].includes(normalized))return window.parent?.PcMultiplayerSession?.command(normalized)||false;
     if(normalized==='deselect'){setCombatLock(false);if(combatLock)return false;manualSelectionRevision++;releaseAll();return window.PcMultiplayerNative?.command('deselect',{});}
@@ -355,7 +358,7 @@
   document.addEventListener('visibilitychange',()=>{if(document.hidden)releaseAll();refreshCombatLock();});
   const report=()=>({version:2,enabled,phase,...counts,pointers:points.size,queued:jobs.length,
       activeJob:activeJob?.kind||null,heldMouse,heldKeys:[...heldKeys.keys()],gesture:multi?.mode||single?.kind||null,
-      panelOpen,lastAction,lastError,commands:Object.keys(commands),manualSelectionRevision,hudVisible:enabled&&phase==='game',battleActive:enabled&&phase==='game',
+      panelOpen,lastAction,lastError,commands:Object.keys(commands),manualSelectionRevision,canIssueOrders:ordersAllowed(),cameraSafe:worldReady(),hudVisible:enabled&&phase==='game'&&ordersAllowed(),battleActive:enabled&&phase==='game',
       pendingClicks:jobs.length+(activeJob&&!activeJob.finished?1:0),queuedPointerEvents:0,gestureActive:points.size>0||heldMouse!==null||heldKeys.size>0,
       pinchSteps:counts.pinches,tiltMoves:counts.tilts,rotationMoves:counts.rotations,combatLock:window.PcMultiplayerNative?.state?.combatLock?.enabled===true,
       combatLockRequested:combatLock,combatLockSuspended:combatSuspended(),combatLockState:window.PcMultiplayerNative?.state?.combatLock||null,baseJumps:counts.commandCalls});
@@ -375,23 +378,23 @@
   function nativeSelectionBounds(){const b=bounds();return b?{left:b.left,top:b.top,right:b.right,bottom:b.bottom-24,radar:nativeRegions().radar||null}:null;}
   function nativeBoxSelect(left,top,right,bottom,add=false){
     const b=bounds(),view=window.PcMultiplayerNative?.state?.view;
-    if(!game()||!b||!view||![view.width,view.height,left,top,right,bottom].every(Number.isFinite)||view.width<=0||view.height<=0||right<=left||bottom<=top||left<b.left||top<b.top||right>b.right||bottom>b.bottom)return Promise.resolve(false);
+    if(!game()||!ordersAllowed()||!b||!view||![view.width,view.height,left,top,right,bottom].every(Number.isFinite)||view.width<=0||view.height<=0||right<=left||bottom<=top||left<b.left||top<b.top||right>b.right||bottom>b.bottom)return Promise.resolve(false);
     combatQueries++;refreshCombatLock();
     try{return Promise.resolve(window.PcMultiplayerNative.command('select-box',{left:(left-b.left)*view.width/b.width,top:(top-b.top)*view.height/b.height,right:(right-b.left)*view.width/b.width,bottom:(bottom-b.top)*view.height/b.height,add:Boolean(add)})).then(r=>r?.ok===true).finally(()=>{combatQueries--;refreshCombatLock();});}
     catch(error){combatQueries--;refreshCombatLock();lastError=String(error);return Promise.resolve(false);}
   }
   function nativeWorldClick(x,y,ctrl=false,button=0){
-    const b=bounds();if(!game()||!b||![x,y].every(Number.isFinite)||x<b.left||x>=b.right||y<b.top||y>=b.bottom||hit(x,y)!=='world')return Promise.resolve(false);
+    const b=bounds();if(!game()||!ordersAllowed()||!b||![x,y].every(Number.isFinite)||x<b.left||x>=b.right||y<b.top||y>=b.bottom||hit(x,y)!=='world')return Promise.resolve(false);
     return new Promise(resolve=>{const job={kind:'click',x,y,button,ctrl,resolve,nonce:++facadeSerial};if(!enqueue(job))resolve(false);});
   }
   window.__kalaWarzoneTouch={version:70,ready:true,report,releaseAll,resumeInput:pump,isGestureActive:()=>report().gestureActive,
     nativeSelectionBounds,nativeBoxSelect,nativeWorldClick,nativeMenuClick:(x,y,ctrl=false)=>nativeWorldClick(x,y,ctrl),
     nativeUiClick:(x,y)=>nativeWorldClick(x,y),nativeClick:(x,y,button=0)=>nativeWorldClick(x,y,false,button),
     nativeSelectClick:(x,y,add=false)=>{setCombatLock(false);if(combatLock)return Promise.resolve(false);manualSelectionRevision++;return nativeWorldClick(x,y,add);},
-    queuedClick:(x,y)=>nativeWorldClick(x,y,true),nativeMove:(x,y,buttons=0)=>mouse('pointermove',{x,y},-1,buttons),
+    queuedClick:(x,y)=>nativeWorldClick(x,y,true),nativeMove:(x,y,buttons=0)=>worldReady()&&(ordersAllowed()||buttons===0)&&mouse('pointermove',{x,y},-1,buttons),
     nativePressKey:(value,code,number,shift=false)=>enqueue({kind:'key',value,code,number,shift}),
     isBattlefieldPoint:(x,y)=>hit(x,y)==='world',setHeaderMenuState,prepareHeaderMenu,closeHelp,
-    cancelFacilityNavigation:()=>{},activateFooterBuild:()=>prepareHeaderMenu('commands')&&window.__warzoneCommands?.toggle('build'),
+    cancelFacilityNavigation:()=>{},activateFooterBuild:()=>ordersAllowed()&&prepareHeaderMenu('commands')&&window.__warzoneCommands?.toggle('build'),
     selectAllCombat:()=>command('combat'),selectAllUnits:()=>command('all-units'),selectAllTrucks:()=>command('trucks'),
     stopSelected:()=>command('stop'),jumpToBase:()=>command('base'),
     toggleCombatLock,

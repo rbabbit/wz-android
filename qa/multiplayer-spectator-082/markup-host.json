@@ -1,0 +1,22 @@
+{
+  "version": "0.82",
+  "passed": true,
+  "emulatorUsed": false,
+  "engineExecuted": false,
+  "checks": [
+    "Actual MP header markup is byte-identical to delivered081; Music and Lobby ordering retained"
+  ],
+  "checksPassed": 1,
+  "sources": [
+    {
+      "path": "app/src/main/assets/multiplayer/index.html",
+      "bytes": 7610,
+      "sha256": "d4983b2d2d568b5c599d97c53f01a6c80638204e68501babb76dafe74d9f9aad"
+    },
+    {
+      "path": "tools/record-multiplayer-spectator-082.py",
+      "bytes": 7079,
+      "sha256": "282f0181b5a4008bdfd70664c93ef3924d452df2313f639ce6faf3b0e27b2608"
+    }
+  ]
+}

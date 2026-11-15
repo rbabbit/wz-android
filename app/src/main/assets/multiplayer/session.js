@@ -4,8 +4,9 @@
  const byId=id=>document.getElementById(id), sockets=new Map();
  let frame=null,poll=null,closeTimer=null,generation=0,everReceived=false,roomEstablished=false;
  let nativeLoading=false,terminalJoinFailure=false,lastMessage='',lastReason='',lastReasonKind='',lastMode=null,reasonCapture=null;
- let nativeUi=null,joinName='',returning=false,toastTimer=null,lastPowerLayout=0,lastPowerKey='';
+ let nativeUi=null,roomSnapshot=null,joinName='',returning=false,toastTimer=null,lastPowerLayout=0,lastPowerKey='',ownerUiDenied=false;
  const revealable=s=>Boolean(s?.rendered&&(s.phase==='room'?s.lobbyReady:s.phase==='game'?s.worldReady:false));
+ const ownerAllowed=()=>nativeUi?.canIssueOrders!==false&&nativeUi?.spectator!==true&&!(Number.isInteger(nativeUi?.realPlayer)&&Number.isInteger(nativeUi?.player)&&nativeUi.realPlayer!==nativeUi.player);
  const session=globalThis.PcMultiplayerSession={active:false,phase:'lobby',arguments:[],events:[],errors:[],loading:()=>{},status:()=>{}};
  function nativeSessionActive(active){try{AndroidMultiplayer.setSessionActive(Boolean(active));return true;}catch{return false;}}
  // Back must read Java's cache immediately, even while the WASM thread is busy.
@@ -21,6 +22,7 @@
   try{AndroidMultiplayer.setViewportState?.(session.active,height);}catch{}
  }
  function cover(title='Joining game',detail='Connecting to the room…'){
+  globalThis.PcMultiplayerRoomUI?.hide?.();if(frame)frame.inert=true;
   const overlay=byId('loading-cover');if(overlay)overlay.hidden=false;
   if(byId('loading-title')&&byId('loading-title').textContent!==title)byId('loading-title').textContent=title;
   if(byId('loading-detail')&&byId('loading-detail').textContent!==detail)byId('loading-detail').textContent=detail;
@@ -29,12 +31,26 @@
  function setPhase(phase){
   const changed=session.phase!==phase;session.phase=phase;if(changed)record('phase',phase);else return;
   const playing=phase==='game';document.body.classList.toggle('in-game',playing);
+  if(frame)frame.inert=!playing;
+  if(phase==='room')globalThis.PcMultiplayerRoomUI?.show?.(roomSnapshot);else globalThis.PcMultiplayerRoomUI?.hide?.();
   byId('game-controls').hidden=!playing;byId('unit-controls').hidden=!playing;
   if(byId('warzone-command-strip'))byId('warzone-command-strip').hidden=!playing;
   byId('room-leave').hidden=!session.active||phase!=='room';
   if(!playing){if(byId('wt-field-centre'))byId('wt-field-centre').hidden=true;byId('wt-field-toggle')?.setAttribute?.('aria-expanded','false');}
   const w=child();if(w?.PcMultiplayerState)w.PcMultiplayerState.phase=phase;
-  w?.PcMultiplayerControls?.setPhase(phase);w?.WarzoneMapMusic?.setBattleActive?.(playing);renderStatus();viewport();renderPower();
+  w?.PcMultiplayerControls?.setPhase(phase);w?.WarzoneMapMusic?.setBattleActive?.(playing);renderOwnership();renderStatus();viewport();renderPower();
+ }
+ function renderOwnership(){
+  const denied=session.phase==='game'&&!ownerAllowed(),w=child();
+  document.body.classList.toggle('mp-observer',denied);
+  for(const id of ['blocknight-tech','wt-open-factory','wt-open-queue','blocknight-base','blocknight-combat']){const node=byId(id);if(node)node.hidden=denied;}
+  if(denied){
+   byId('unit-controls').hidden=true;
+   for(const id of ['wt-field-centre','wt-build-sidebar','wt-command-pages']){const node=byId(id);if(node)node.hidden=true;}
+   byId('wt-field-toggle')?.setAttribute?.('aria-expanded','false');
+   if(!ownerUiDenied){w?.__warzoneCommands?.close?.();w?.__blockNightResearch?.close?.();w?.__warzoneIntelligence?.close?.();globalThis.TowersStatus?.close?.();w?.PcMultiplayerControls?.setCombatLock?.(false);w?.PcMultiplayerControls?.releaseAll?.();}
+  }
+  ownerUiDenied=denied;
  }
  function renderStatus(){
   const box=byId('mp-header-status');if(!box)return;
@@ -66,7 +82,7 @@
  function renderPower(){
   const hud=byId('mp-power-hud');if(!hud)return;
   const power=nativeUi?.power,queued=nativeUi?.queuedPower;
-  const valid=session.phase==='game'&&!nativeLoading&&nativeUi?.worldReady===true&&nativeUi?.rendered===true&&Number.isInteger(power);
+  const valid=session.phase==='game'&&ownerAllowed()&&!nativeLoading&&nativeUi?.worldReady===true&&nativeUi?.rendered===true&&Number.isInteger(power);
   hud.hidden=!valid;if(!valid)return;
   const key=String(power)+'/'+String(queued);if(key===lastPowerKey){powerLayout();return;}lastPowerKey=key;
   const queueKnown=Number.isInteger(queued)&&queued>=0,available=queueKnown?power-queued:power;
@@ -110,7 +126,7 @@
   // is set before loading begins. Only the rendered native UI signal may reveal.
   if(nativeLoading||nativeUi?.phase==='loading'){
    setPhase('loading');cover('Loading battlefield',session.statusText||'Preparing the game…');
-  }else if(revealable(nativeUi)){
+  }else if(revealable(nativeUi)&&(nativeUi.phase!=='room'||globalThis.PcMultiplayerRoomUI?.valid?.(roomSnapshot)&&nativeUi.roomGeneration===roomSnapshot.generation)){
    if(nativeUi.phase==='room')markEstablished();
    setPhase(nativeUi.phase);uncover();
   }else{
@@ -122,10 +138,26 @@
   let snapshot=value;try{if(typeof snapshot==='string')snapshot=JSON.parse(snapshot);}catch{return;}
   if(!snapshot||typeof snapshot!=='object')return;
   nativeUi=snapshot;
-  const w=child();if(w?.PcMultiplayerState)Object.assign(w.PcMultiplayerState,{nativeMenuOpen:Boolean(snapshot.nativeMenuOpen),radar:snapshot.radar,worldReady:Boolean(snapshot.worldReady&&snapshot.rendered)});
+  const w=child();if(w?.PcMultiplayerState)Object.assign(w.PcMultiplayerState,{nativeMenuOpen:Boolean(snapshot.nativeMenuOpen),radar:snapshot.radar,worldReady:Boolean(snapshot.worldReady&&snapshot.rendered),worldSafe:snapshot.worldSafe,cameraSafe:snapshot.cameraSafe,canIssueOrders:snapshot.canIssueOrders,spectator:snapshot.spectator,realPlayer:snapshot.realPlayer,player:snapshot.player});
   if(snapshot.phase==='leaving'){child()?.WarzoneMapMusic?.setBattleActive?.(false);renderStatus();if(byId('mp-power-hud'))byId('mp-power-hud').hidden=true;cover('Leaving game','Returning to the multiplayer lobby…');if(!closeTimer)queueReturn(true);return;}
-  updateMode();renderStatus();renderPower();
+  updateMode();renderOwnership();renderStatus();renderPower();
  };
+ session.roomState=value=>{
+  if(!session.active||returning||nativeLoading||nativeUi?.phase!=='room'||nativeUi.roomGeneration!==value?.generation||!globalThis.PcMultiplayerRoomUI?.valid?.(value))return false;
+  if(roomSnapshot?.generation===value.generation&&value.revision<roomSnapshot.revision)return false;
+  roomSnapshot=value;globalThis.PcMultiplayerRoomUI.accept(value);updateMode();return true;
+ };
+ session.roomCommand=(action,data={})=>{
+  const bridge=child()?.PcMultiplayerNative;
+  if(!session.active||returning||session.phase!=='room'||!roomSnapshot||nativeUi?.roomGeneration!==roomSnapshot.generation||typeof bridge?.roomCommand!=='function')return Promise.resolve({ok:false,reason:'The room is not ready.'});
+  return bridge.roomCommand(action,data);
+ };
+ session.roomMapPreview=()=>{
+  if(!session.active||returning||session.phase!=='room'||nativeUi?.roomGeneration!==roomSnapshot?.generation)return null;
+  const preview=child()?.PcMultiplayerNative?.roomMapPreview?.();
+  return preview?.generation===roomSnapshot.generation?preview:null;
+ };
+ session.handleBack=expectedGeneration=>globalThis.PcMultiplayerRoomUI?.handleBack?.(expectedGeneration)||false;
  function captureReason(kind,text){
   const lines=String(text||'').replace(/\r/g,'').trim().split('\n').slice(0,10);
   reasonCapture={kind,lines,at:Date.now()};lastReason=lines.join('\n');lastReasonKind='terminal';
@@ -141,7 +173,7 @@
   // An autohost can cancel its waiting room, restart NET, and connect to the
   // match port. The new native join supersedes that room's pending exit.
   if(/\[updateJoiningStatus:\d+\]\s*Establishing connection with host/i.test(message)){
-   cancelReturn();nativeUi=null;cover('Joining match','Connecting to the match room…');terminalJoinFailure=false;roomEstablished=false;reasonCapture=null;
+   cancelReturn();nativeUi=null;roomSnapshot=null;globalThis.PcMultiplayerRoomUI?.reset?.();cover('Joining match','Connecting to the match room…');terminalJoinFailure=false;roomEstablished=false;reasonCapture=null;
    lastReason='';lastReasonKind='';updateMode();
   }
   if(kick)captureReason('kick',kick[1]);
@@ -167,7 +199,7 @@
   if(/(?:We have stopped joining\.|Canceling game\.\.\.)/i.test(message)){terminalJoinFailure=true;queueReturn(true);}
  };
  session.failed=reason=>{session.message(reason,true);session.returnToLobby(reason);};
- session.loading=on=>{nativeLoading=Boolean(on);if(nativeLoading)nativeUi=null;record('loading',nativeLoading);if(session.active)updateMode();renderPower();};
+ session.loading=on=>{nativeLoading=Boolean(on);if(nativeLoading){nativeUi=null;roomSnapshot=null;globalThis.PcMultiplayerRoomUI?.reset?.();}record('loading',nativeLoading);if(session.active)updateMode();renderPower();};
  session.status=text=>{session.statusText=String(text||'');if(session.active&&byId('loading-cover')&&!byId('loading-cover').hidden&&byId('loading-detail'))byId('loading-detail').textContent=session.statusText||'Connecting to the room…';};
  session.engineReady=()=>{
   record('engine-ready',true);
@@ -179,7 +211,7 @@
  };
  session.returnToLobby=reason=>{
   if(!session.active)return;nativeSessionActive(false);returning=true;cover('Leaving game','Returning to the multiplayer lobby…');
-  generation++;session.active=false;byId('transition').hidden=false;
+  generation++;session.active=false;roomSnapshot=null;globalThis.PcMultiplayerRoomUI?.reset?.();byId('transition').hidden=false;
   clearInterval(poll);clearTimeout(closeTimer);poll=null;closeTimer=null;
   child()?.PcMultiplayerControls?.releaseAll();child()?.WarzoneMapMusic?.dispose?.();
   try{AndroidMultiplayer.closeConnections();}catch{}
@@ -210,7 +242,7 @@
   if(!savePlayerName())return false;
   if(!nativeSessionActive(true)){byId('notice').textContent='Could not start multiplayer. Please reopen Multiplayer.';byId('notice').hidden=false;return false;}
   generation++;session.active=true;session.arguments=Array.from(args);everReceived=false;roomEstablished=false;
-  nativeLoading=false;nativeUi=null;returning=false;terminalJoinFailure=false;lastMessage='';lastReason='';lastReasonKind='';lastMode=null;reasonCapture=null;sockets.clear();cancelReturn();cover('Joining game','Starting Warzone…');
+  nativeLoading=false;nativeUi=null;roomSnapshot=null;globalThis.PcMultiplayerRoomUI?.reset?.();returning=false;terminalJoinFailure=false;lastMessage='';lastReason='';lastReasonKind='';lastMode=null;reasonCapture=null;sockets.clear();cancelReturn();cover('Joining game','Starting Warzone…');
   byId('setup').hidden=true;byId('notice').hidden=true;byId('engine-host').hidden=false;byId('room-leave').hidden=false;
   let musicSession='';try{musicSession=String(JSON.parse(AndroidMultiplayerMusic.musicState()).session||'');}catch{}
   frame=document.createElement('iframe');frame.id='warzone-game-frame';frame.title='Warzone multiplayer game';frame.allow='autoplay; fullscreen';frame.src='engine.html'+(musicSession?'?battle_session='+encodeURIComponent(musicSession):'');byId('engine-host').append(frame);setPhase('connecting');record('join-requested',args[0]);return true;
@@ -223,7 +255,7 @@
   try{return dispatchCommand(action);}finally{child()?.PcMultiplayerControls?.refreshCombatLock?.();syncCombatButton();}
  }
  function dispatchCommand(action){
-  const w=child();if(!w||session.phase!=='game')return false;
+  const w=child();if(!w||session.phase!=='game'||action!=='music'&&!ownerAllowed())return false;
   if(['research','manufacturing','queue','build','demolish','intelligence','music'].includes(action)){byId('wt-field-centre').hidden=true;byId('wt-field-toggle')?.setAttribute?.('aria-expanded','false');}
   const commands=w.__warzoneCommands,research=w.__blockNightResearch;
   if(action!=='music')w.WarzoneMapMusic?.closeMenu?.(false);
@@ -248,7 +280,7 @@
  }
  session.command=command;
  document.querySelectorAll('[data-command]').forEach(button=>button.onclick=()=>command(button.dataset.command));
- byId('wt-field-toggle')?.addEventListener?.('click',()=>{const drawer=byId('wt-field-centre');drawer.hidden=!drawer.hidden;byId('wt-field-toggle').setAttribute('aria-expanded',String(!drawer.hidden));child()?.PcMultiplayerControls?.releaseAll?.();});
+ byId('wt-field-toggle')?.addEventListener?.('click',()=>{if(session.phase!=='game'||!ownerAllowed())return;const drawer=byId('wt-field-centre');drawer.hidden=!drawer.hidden;byId('wt-field-toggle').setAttribute('aria-expanded',String(!drawer.hidden));child()?.PcMultiplayerControls?.releaseAll?.();});
  if(byId('cancel-join'))byId('cancel-join').onclick=()=>session.requestReturn('Joining cancelled.');
  function savePlayerName(){
   const field=byId('player-name');if(!field)return true;
@@ -256,11 +288,12 @@
    const raw=AndroidMultiplayer.setPlayerName(field.value);
    const result=typeof raw==='string'?JSON.parse(raw):raw;
    if(!result?.ok){byId('profile-status').textContent=result?.error||'Could not save your player name.';field.focus?.();return false;}
-   if(!session.active)joinName=String(result.name);field.value=String(result.name);byId('profile-status').textContent='';return true;
+   const full=globalThis.PcLobbyConfig.validatePlayerName(result.name),base=globalThis.PcLobbyConfig.playerBaseName(result.baseName??full);
+   if(!session.active)joinName=full;field.value=base;byId('profile-status').textContent='';return true;
   }catch{byId('profile-status').textContent='Could not save your player name. Try again.';return false;}
  }
  session.playerName=()=>joinName;
- try{const field=byId('player-name');if(field){field.value=AndroidMultiplayer.getPlayerName()||'Player';joinName=field.value;field.addEventListener?.('change',savePlayerName);field.addEventListener?.('keydown',e=>{if(e.key==='Enter'){e.preventDefault();if(savePlayerName())field.blur();}});}}catch{}
+ try{const field=byId('player-name');if(field){const stored=AndroidMultiplayer.getPlayerName()||'Player(m)';joinName=globalThis.PcLobbyConfig.validatePlayerName(stored);field.value=globalThis.PcLobbyConfig.playerBaseName(AndroidMultiplayer.getPlayerBaseName?.()??stored);field.maxLength=24;const clampName=()=>{const points=Array.from(field.value);if(points.length>12)field.value=points.slice(0,12).join('');};field.addEventListener?.('input',e=>{if(!e?.isComposing)clampName();});field.addEventListener?.('compositionend',clampName);field.addEventListener?.('change',savePlayerName);field.addEventListener?.('keydown',e=>{if(e.key==='Enter'){e.preventDefault();if(savePlayerName())field.blur();}});}}catch{}
  try{const notice=globalThis.sessionStorage?.getItem('mp-return-notice');if(notice){byId('notice').textContent=notice;byId('notice').hidden=false;sessionStorage.removeItem('mp-return-notice');}}catch{}
  globalThis.WarzoneHost={
   resetScroll(){globalThis.scrollTo?.(0,0);},
@@ -273,18 +306,18 @@
  globalThis.addEventListener?.('resize',viewport);viewport();
  function syncCombatButton(){
   const button=byId('blocknight-combat');if(!button)return;
-  const state=child()?.PcMultiplayerControls?.report?.(),enabled=session.phase==='game'&&Boolean(state?.combatLock);
+  const state=child()?.PcMultiplayerControls?.report?.(),enabled=session.phase==='game'&&ownerAllowed()&&Boolean(state?.combatLock);
   button.setAttribute('aria-pressed',String(enabled));button.classList.toggle('active',enabled);
   button.dataset.suspended=String(enabled&&Boolean(state?.combatLockSuspended));
  }
  function syncChrome(){
-  syncCombatButton();if(session.phase!=='game')return;
+  syncCombatButton();renderOwnership();if(session.phase!=='game')return;
   const w=child(),page=byId('wt-command-pages'),research=w?.document?.getElementById('blocknight-research-shell');
   const full=Boolean(page&&!page.hidden||research&&!research.hidden||w?.__warzoneIntelligence?.isOpen?.());
-  byId('unit-controls').hidden=full;
+  byId('unit-controls').hidden=full||!ownerAllowed();
   if(full){byId('wt-field-centre').hidden=true;byId('wt-field-toggle')?.setAttribute?.('aria-expanded','false');}
   w?.PcMultiplayerControls?.refreshCombatLock?.();
  }
  setInterval(syncChrome,250);
- session.report=()=>({active:session.active,phase:session.phase,nativeMode:lastMode,nativeUi,loading:nativeLoading,loadingCoverVisible:Boolean(byId('loading-cover')&&!byId('loading-cover').hidden),roomEstablished,everReceived,status:session.statusText,playerName:joinName,sockets:[...sockets].map(([id,v])=>({id,...v})),events:session.events.slice(-40),errors:session.errors.slice(-20),controls:child()?.PcMultiplayerControls?.report()||null});
+ session.report=()=>({active:session.active,phase:session.phase,nativeMode:lastMode,nativeUi,room:globalThis.PcMultiplayerRoomUI?.report?.()||null,loading:nativeLoading,loadingCoverVisible:Boolean(byId('loading-cover')&&!byId('loading-cover').hidden),roomEstablished,everReceived,status:session.statusText,playerName:joinName,sockets:[...sockets].map(([id,v])=>({id,...v})),events:session.events.slice(-40),errors:session.errors.slice(-20),controls:child()?.PcMultiplayerControls?.report()||null});
 })();

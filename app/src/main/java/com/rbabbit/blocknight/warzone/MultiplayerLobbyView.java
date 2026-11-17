@@ -71,7 +71,9 @@ final class MultiplayerLobbyView extends LinearLayout {
     void state(boolean ready,boolean loading,boolean hideEmpty,List<MultiplayerLobbyModel.Room> rooms,String error,String notice) {
         this.ready=ready;this.loading=loading;this.busy=false;this.rooms=rooms;
         settingFilter=true;hide.setChecked(hideEmpty);settingFilter=false;adapter.refresh();
-        String message=loading?"Loading rooms…":!error.isEmpty()?error:notice;
+        // A directory failure appears once. Keep an independent session-return
+        // notice above it, or show the error above cached (possibly stale) rows.
+        String message=adapter.getCount()>0?(loading?"Loading rooms…":!error.isEmpty()?error:notice):notice;
         status.setText(message);status.setVisibility(message.isEmpty()?GONE:VISIBLE);
         empty.setText(loading?"Loading public rooms…":!error.isEmpty()?error:hideEmpty&&!rooms.isEmpty()?"No occupied rooms. Turn off Hide empty to see all rooms.":"No public rooms are currently listed.");updateControls();
     }

@@ -1,0 +1,30 @@
+--- a/src/display3d.cpp
++++ b/src/display3d.cpp
+@@ -3498,7 +3498,7 @@
+ 	return false;
+ }
+ 
+-static void queueDroidPowerBarsRects(DROID *psDroid, bool drawBox, BatchedMultiRectRenderer& batchedMultiRectRenderer, size_t rectGroup)
++static void queueDroidPowerBarsRects(DROID *psDroid, bool /* drawBox */, BatchedMultiRectRenderer& batchedMultiRectRenderer, size_t rectGroup)
+ {
+ 	UDWORD damage = PERCENT(psDroid->body, psDroid->originalBody);
+ 	UDWORD shields = 0;
+@@ -3541,16 +3541,10 @@
+ 
+ 	damage *= 2;
+ 
+-	if (drawBox)
+-	{
+-		batchedMultiRectRenderer.addRect(PIERECT_DrawRequest(psDroid->sDisplay.screenX - psDroid->sDisplay.screenR, psDroid->sDisplay.screenY + psDroid->sDisplay.screenR - 7, psDroid->sDisplay.screenX - psDroid->sDisplay.screenR + 1, psDroid->sDisplay.screenY + psDroid->sDisplay.screenR, WZCOL_WHITE), rectGroup);
+-		batchedMultiRectRenderer.addRect(PIERECT_DrawRequest(psDroid->sDisplay.screenX - psDroid->sDisplay.screenR, psDroid->sDisplay.screenY + psDroid->sDisplay.screenR, psDroid->sDisplay.screenX - psDroid->sDisplay.screenR + 7, psDroid->sDisplay.screenY + psDroid->sDisplay.screenR + 1, WZCOL_WHITE), rectGroup);
+-		batchedMultiRectRenderer.addRect(PIERECT_DrawRequest(psDroid->sDisplay.screenX + psDroid->sDisplay.screenR - 7, psDroid->sDisplay.screenY + psDroid->sDisplay.screenR, psDroid->sDisplay.screenX + psDroid->sDisplay.screenR, psDroid->sDisplay.screenY + psDroid->sDisplay.screenR + 1, WZCOL_WHITE), rectGroup);
+-		batchedMultiRectRenderer.addRect(PIERECT_DrawRequest(psDroid->sDisplay.screenX + psDroid->sDisplay.screenR, psDroid->sDisplay.screenY + psDroid->sDisplay.screenR - 7, psDroid->sDisplay.screenX + psDroid->sDisplay.screenR + 1, psDroid->sDisplay.screenY + psDroid->sDisplay.screenR + 1, WZCOL_WHITE), rectGroup);
+-	}
++	// Test0.90: selected-unit brackets are intentionally not drawn.
+ 
+ 	/* Power bars */
+-	// Normal0.89: retain selection corners and all unrelated status.
++	// Test0.90: selected health/background bars remain suppressed; unrelated status is retained.
+ 	if (!psDroid->selected)
+ 	{
+ 		batchedMultiRectRenderer.addRect(PIERECT_DrawRequest(psDroid->sDisplay.screenX - psDroid->sDisplay.screenR - 1, psDroid->sDisplay.screenY + psDroid->sDisplay.screenR + 2, psDroid->sDisplay.screenX + psDroid->sDisplay.screenR + 1, psDroid->sDisplay.screenY + psDroid->sDisplay.screenR + 6, WZCOL_RELOAD_BACKGROUND), rectGroup);

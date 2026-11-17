@@ -1,0 +1,1149 @@
+{
+  "status": "incomplete",
+  "scope": "Only ON/OFF native deselect, Players toggle and actual user Return. No manufacture or prior journey repeated.",
+  "steps": {
+    "room": {
+      "directory": {
+        "error": "",
+        "games": [
+          {
+            "compatible": true,
+            "connections": [
+              "tcp:ip4"
+            ],
+            "id": "qa-players-092-player-run6",
+            "ipv4Tcp": true,
+            "joinable": true,
+            "map": "Sk-Mountain",
+            "name": "PRIVATE PLAYERS092 RUN6 \u00b7 player",
+            "players": {
+              "current": 1,
+              "max": 4
+            },
+            "private": false,
+            "unavailable": "",
+            "version": "4.7.0"
+          }
+        ],
+        "hideEmpty": false,
+        "loading": false,
+        "stale": false
+      },
+      "fixture": {
+        "blockedOfficialRequests": 0,
+        "declaredDirectoryCounts": {
+          "current": 1,
+          "liveOccupancyMeasured": false,
+          "maximum": 4
+        },
+        "delegatedRequests": 0,
+        "directoryDataSynthetic": true,
+        "fixtureId": "qa-players-092-player-run6",
+        "host": "10.0.2.2",
+        "idResolutionSynthetic": true,
+        "installed": true,
+        "mode": "parent-global-property",
+        "nativeGameplayMocked": false,
+        "pendingSynthetic": 0,
+        "port": 22210,
+        "publicRequestsSentByFixture": false,
+        "readyStateMocked": false,
+        "requests": [
+          {
+            "canceled": false,
+            "delivered": true,
+            "kind": "listing",
+            "method": "GET",
+            "requestId": 196413997
+          },
+          {
+            "canceled": false,
+            "delivered": true,
+            "kind": "id-resolution",
+            "method": "POST",
+            "requestId": 196413998
+          },
+          {
+            "canceled": false,
+            "delivered": true,
+            "kind": "id-resolution",
+            "method": "POST",
+            "requestId": 196413999
+          }
+        ],
+        "role": "player"
+      },
+      "http": {
+        "main": true,
+        "pending": 0,
+        "relayed": 0
+      },
+      "native": {
+        "canIssueOrders": false,
+        "frame": 0,
+        "gameTime": 2,
+        "phase": "room",
+        "player": 1,
+        "realPlayer": 1,
+        "rendered": true,
+        "spectator": false,
+        "worldReady": false,
+        "worldSafe": false
+      },
+      "path": "/multiplayer/index.html",
+      "room": {
+        "blind": false,
+        "generation": "mp-room-1",
+        "hostPlayer": 0,
+        "isHost": false,
+        "local": {
+          "downloading": false,
+          "ready": false,
+          "spectator": false
+        },
+        "localPlayer": 1,
+        "localPosition": 1,
+        "mapHash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "mapName": "Sk-Mountain",
+        "mapPreview": {
+          "channels": 3,
+          "file": "/tmp/mp-mobile-room-preview.rgb",
+          "generation": "mp-room-1",
+          "height": 96,
+          "mapHash": "0000000000000000000000000000000000000000000000000000000000000000",
+          "mapName": "Sk-Mountain",
+          "reason": "",
+          "revision": 4,
+          "status": "ready",
+          "width": 96
+        },
+        "maxPlayers": 4,
+        "messages": [
+          {
+            "kind": "system",
+            "seq": 1,
+            "text": "Lobby slash commands enabled. Type /help to see details."
+          }
+        ],
+        "options": [
+          {
+            "label": "Power",
+            "value": "Medium"
+          },
+          {
+            "label": "Bases",
+            "value": "Advanced bases"
+          },
+          {
+            "label": "Technology",
+            "value": "T1"
+          },
+          {
+            "label": "Alliances",
+            "value": "Locked teams"
+          },
+          {
+            "label": "Scavengers",
+            "value": "Off"
+          },
+          {
+            "label": "VTOL",
+            "value": "Allowed"
+          }
+        ],
+        "permissions": {
+          "allowedTeams": [
+            0,
+            2,
+            3
+          ],
+          "canPlay": false,
+          "canReady": true,
+          "canSpectate": true,
+          "canTeam": true,
+          "chatMaxBytes": 254,
+          "chatMode": "enabled",
+          "readyReason": "",
+          "spectatorReason": ""
+        },
+        "players": [
+          {
+            "ai": false,
+            "allocated": true,
+            "closed": false,
+            "color": 0,
+            "downloading": false,
+            "host": true,
+            "id": 0,
+            "local": false,
+            "name": "Room Host",
+            "ping": 4000,
+            "position": 0,
+            "ready": true,
+            "spectator": false,
+            "team": 1
+          },
+          {
+            "ai": false,
+            "allocated": true,
+            "closed": false,
+            "color": 3,
+            "downloading": false,
+            "host": false,
+            "id": 1,
+            "local": true,
+            "name": "NoobCrusher1(m)",
+            "ping": null,
+            "position": 1,
+            "ready": false,
+            "spectator": false,
+            "team": 0
+          },
+          {
+            "ai": false,
+            "allocated": false,
+            "closed": true,
+            "color": 5,
+            "downloading": false,
+            "host": false,
+            "id": 2,
+            "local": false,
+            "name": "Commander",
+            "ping": null,
+            "position": 2,
+            "ready": false,
+            "spectator": false,
+            "team": 1
+          },
+          {
+            "ai": false,
+            "allocated": false,
+            "closed": true,
+            "color": 4,
+            "downloading": false,
+            "host": false,
+            "id": 3,
+            "local": false,
+            "name": "Commander",
+            "ping": null,
+            "position": 3,
+            "ready": false,
+            "spectator": false,
+            "team": 1
+          }
+        ],
+        "ready": true,
+        "readyPlayers": 1,
+        "revision": 3,
+        "roomName": "Private Players092 player run6",
+        "version": 79,
+        "waitingPlayers": 1
+      },
+      "session": {
+        "active": true,
+        "phase": "room"
+      }
+    },
+    "live": {
+      "first": {
+        "directory": {
+          "error": "",
+          "games": [
+            {
+              "compatible": true,
+              "connections": [
+                "tcp:ip4"
+              ],
+              "id": "qa-players-092-player-run6",
+              "ipv4Tcp": true,
+              "joinable": true,
+              "map": "Sk-Mountain",
+              "name": "PRIVATE PLAYERS092 RUN6 \u00b7 player",
+              "players": {
+                "current": 1,
+                "max": 4
+              },
+              "private": false,
+              "unavailable": "",
+              "version": "4.7.0"
+            }
+          ],
+          "hideEmpty": false,
+          "loading": false,
+          "stale": false
+        },
+        "fixture": {
+          "blockedOfficialRequests": 0,
+          "declaredDirectoryCounts": {
+            "current": 1,
+            "liveOccupancyMeasured": false,
+            "maximum": 4
+          },
+          "delegatedRequests": 0,
+          "directoryDataSynthetic": true,
+          "fixtureId": "qa-players-092-player-run6",
+          "host": "10.0.2.2",
+          "idResolutionSynthetic": true,
+          "installed": true,
+          "mode": "parent-global-property",
+          "nativeGameplayMocked": false,
+          "pendingSynthetic": 0,
+          "port": 22210,
+          "publicRequestsSentByFixture": false,
+          "readyStateMocked": false,
+          "requests": [
+            {
+              "canceled": false,
+              "delivered": true,
+              "kind": "listing",
+              "method": "GET",
+              "requestId": 196413997
+            },
+            {
+              "canceled": false,
+              "delivered": true,
+              "kind": "id-resolution",
+              "method": "POST",
+              "requestId": 196413998
+            },
+            {
+              "canceled": false,
+              "delivered": true,
+              "kind": "id-resolution",
+              "method": "POST",
+              "requestId": 196413999
+            }
+          ],
+          "role": "player"
+        },
+        "http": {
+          "main": true,
+          "pending": 0,
+          "relayed": 0
+        },
+        "native": {
+          "canIssueOrders": true,
+          "frame": 24,
+          "gameTime": 1302,
+          "phase": "game",
+          "player": 1,
+          "realPlayer": 1,
+          "rendered": true,
+          "spectator": false,
+          "worldReady": true,
+          "worldSafe": true
+        },
+        "path": "/multiplayer/index.html",
+        "room": null,
+        "session": {
+          "active": true,
+          "phase": "game"
+        }
+      },
+      "second": {
+        "directory": {
+          "error": "",
+          "games": [
+            {
+              "compatible": true,
+              "connections": [
+                "tcp:ip4"
+              ],
+              "id": "qa-players-092-player-run6",
+              "ipv4Tcp": true,
+              "joinable": true,
+              "map": "Sk-Mountain",
+              "name": "PRIVATE PLAYERS092 RUN6 \u00b7 player",
+              "players": {
+                "current": 1,
+                "max": 4
+              },
+              "private": false,
+              "unavailable": "",
+              "version": "4.7.0"
+            }
+          ],
+          "hideEmpty": false,
+          "loading": false,
+          "stale": false
+        },
+        "fixture": {
+          "blockedOfficialRequests": 0,
+          "declaredDirectoryCounts": {
+            "current": 1,
+            "liveOccupancyMeasured": false,
+            "maximum": 4
+          },
+          "delegatedRequests": 0,
+          "directoryDataSynthetic": true,
+          "fixtureId": "qa-players-092-player-run6",
+          "host": "10.0.2.2",
+          "idResolutionSynthetic": true,
+          "installed": true,
+          "mode": "parent-global-property",
+          "nativeGameplayMocked": false,
+          "pendingSynthetic": 0,
+          "port": 22210,
+          "publicRequestsSentByFixture": false,
+          "readyStateMocked": false,
+          "requests": [
+            {
+              "canceled": false,
+              "delivered": true,
+              "kind": "listing",
+              "method": "GET",
+              "requestId": 196413997
+            },
+            {
+              "canceled": false,
+              "delivered": true,
+              "kind": "id-resolution",
+              "method": "POST",
+              "requestId": 196413998
+            },
+            {
+              "canceled": false,
+              "delivered": true,
+              "kind": "id-resolution",
+              "method": "POST",
+              "requestId": 196413999
+            }
+          ],
+          "role": "player"
+        },
+        "http": {
+          "main": true,
+          "pending": 0,
+          "relayed": 0
+        },
+        "native": {
+          "canIssueOrders": true,
+          "frame": 27,
+          "gameTime": 1602,
+          "phase": "game",
+          "player": 1,
+          "realPlayer": 1,
+          "rendered": true,
+          "spectator": false,
+          "worldReady": true,
+          "worldSafe": true
+        },
+        "path": "/multiplayer/index.html",
+        "room": null,
+        "session": {
+          "active": true,
+          "phase": "game"
+        }
+      },
+      "actualNativeClockAndFrameAdvanced": true,
+      "physicalPaintVerifiedByThisStep": false,
+      "dataCheckMustBeVerifiedSeparately": true
+    },
+    "on": {
+      "commands": {
+        "buildOpen": false,
+        "closes": 0,
+        "exitingBuild": false,
+        "factory": 0,
+        "nativeClosing": false,
+        "nativeMenu": "",
+        "navigationRevision": 1,
+        "opens": 0,
+        "page": "",
+        "pending": 0,
+        "pendingItem": "",
+        "placement": "",
+        "productionFeedback": {
+          "message": "",
+          "tone": "done"
+        },
+        "productionPending": [],
+        "selectingTrucks": false
+      },
+      "native": {
+        "canIssueOrders": true,
+        "combatLock": {
+          "activation": "mp-combat-user-1794942525575-1",
+          "combatIds": [],
+          "context": "native-combat90:37317:1:1",
+          "deselectAppliedNonce": "",
+          "deselectNonce": "",
+          "enabled": true,
+          "pendingDeselect": false,
+          "reason": "on",
+          "requestNonce": "mp-combat-1794942525765-5",
+          "requestedSuspended": false,
+          "revision": 4,
+          "selectedIds": [],
+          "suspended": false
+        },
+        "frame": 57,
+        "gameTime": 4602,
+        "phase": "game",
+        "player": 1,
+        "realPlayer": 1,
+        "rendered": true,
+        "spectator": false,
+        "worldSafe": true
+      },
+      "players": {
+        "availableTabs": [
+          "participants"
+        ],
+        "context": "",
+        "detailTab": "economy",
+        "nativeMenu": null,
+        "open": false,
+        "pending": false,
+        "ready": false,
+        "tab": "participants",
+        "viewRevision": 0,
+        "viewer": null
+      },
+      "room": null,
+      "session": {
+        "active": true,
+        "errors": [
+          "warning |19:08:14: [buildFeature:255] Feature not aligned. position (11392,3328), size (1,1) (**Further warnings of this type are suppressed.)",
+          "warning |19:08:14: [buildFeature:255] Feature not aligned. position (6784,10112), size (1,1) (**Further warnings of this type are suppressed.)",
+          "warning |19:08:14: [buildFeature:255] Feature not aligned. position (10752,8704), size (1,1) (**Further warnings of this type are suppressed.)"
+        ],
+        "phase": "game"
+      },
+      "touch": {
+        "activeJob": null,
+        "combatOverride": "",
+        "heldKeys": [],
+        "heldMouse": null,
+        "pendingClicks": 0,
+        "pointers": 0,
+        "queued": 0
+      }
+    },
+    "off": {
+      "commands": {
+        "buildOpen": false,
+        "closes": 0,
+        "exitingBuild": false,
+        "factory": 0,
+        "nativeClosing": false,
+        "nativeMenu": "",
+        "navigationRevision": 2,
+        "opens": 0,
+        "page": "",
+        "pending": 0,
+        "pendingItem": "",
+        "placement": "",
+        "productionFeedback": {
+          "message": "",
+          "tone": "done"
+        },
+        "productionPending": [],
+        "selectingTrucks": false
+      },
+      "native": {
+        "canIssueOrders": true,
+        "combatLock": {
+          "activation": "mp-combat-user-1794942525575-1",
+          "combatIds": [],
+          "context": "native-combat90:37317:1:1",
+          "deselectAppliedNonce": "mp-combat-1794942536589-7",
+          "deselectNonce": "mp-combat-1794942536589-7",
+          "enabled": false,
+          "pendingDeselect": false,
+          "reason": "off",
+          "requestNonce": "mp-combat-1794942536795-8",
+          "requestedSuspended": false,
+          "revision": 7,
+          "selectedIds": [],
+          "suspended": false
+        },
+        "frame": 79,
+        "gameTime": 6802,
+        "phase": "game",
+        "player": 1,
+        "realPlayer": 1,
+        "rendered": true,
+        "spectator": false,
+        "worldSafe": true
+      },
+      "players": {
+        "availableTabs": [
+          "participants"
+        ],
+        "context": "",
+        "detailTab": "economy",
+        "nativeMenu": null,
+        "open": false,
+        "pending": false,
+        "ready": false,
+        "tab": "participants",
+        "viewRevision": 0,
+        "viewer": null
+      },
+      "room": null,
+      "session": {
+        "active": true,
+        "errors": [
+          "warning |19:08:14: [buildFeature:255] Feature not aligned. position (11392,3328), size (1,1) (**Further warnings of this type are suppressed.)",
+          "warning |19:08:14: [buildFeature:255] Feature not aligned. position (6784,10112), size (1,1) (**Further warnings of this type are suppressed.)",
+          "warning |19:08:14: [buildFeature:255] Feature not aligned. position (10752,8704), size (1,1) (**Further warnings of this type are suppressed.)"
+        ],
+        "phase": "game"
+      },
+      "touch": {
+        "activeJob": null,
+        "combatOverride": "",
+        "heldKeys": [],
+        "heldMouse": null,
+        "pendingClicks": 0,
+        "pointers": 0,
+        "queued": 0
+      }
+    }
+  },
+  "errorType": "RuntimeError",
+  "error": "{'ok': False, 'error': 'java.util.concurrent.TimeoutException: WebView eval callback'}",
+  "asyncRealFingerClickReceipts": [
+    {
+      "target": {
+        "selector": "#mp-room-ready",
+        "target": {
+          "enabled": true,
+          "hit": true,
+          "id": "mp-room-ready",
+          "rect": {
+            "bottom": 350,
+            "height": 44,
+            "left": 650.3333740234375,
+            "right": 742.3333740234375,
+            "top": 306,
+            "width": 92,
+            "x": 650.3333740234375,
+            "y": 306
+          },
+          "text": "READY",
+          "visible": true
+        },
+        "physical": [
+          2221,
+          984
+        ],
+        "geometry": {
+          "activity": "com.rbabbit.blocknight.warzone.MultiplayerActivity",
+          "css": {
+            "dpr": 3,
+            "height": 360,
+            "url": "/multiplayer/index.html",
+            "visual": {
+              "height": 360,
+              "offsetLeft": 0,
+              "offsetTop": 0,
+              "width": 756.3333129882812
+            },
+            "width": 756
+          },
+          "physical": [
+            2400,
+            1080
+          ],
+          "bounds": [
+            131,
+            0,
+            2400,
+            1080
+          ],
+          "source": "Actual dumpsys MultiplayerActivity WebView/nativeLobbyView sibling hierarchy; uniform fitViewport verified",
+          "measuredUTC": "2026-11-17T19:08:01.502967+00:00",
+          "nativeVirtualRect": [
+            131,
+            0,
+            2400,
+            1080
+          ],
+          "nativeAvailableRect": [
+            131,
+            0,
+            2400,
+            1080
+          ],
+          "nativeParentRect": [
+            0,
+            0,
+            2400,
+            1080
+          ],
+          "derivedScaleX": 1.0,
+          "derivedScaleY": 1.0,
+          "derivedUniformScale": 1.0,
+          "virtualCSSDprTolerancePixels": 4.0,
+          "webViewFlags": "VFED..C..",
+          "nativeAvailableViewClass": "com.rbabbit.blocknight.warzone.MultiplayerLobbyView",
+          "nativeLobbyFlags": "GFE...C..",
+          "webViewVisible": true,
+          "uiaFailureType": null,
+          "nativeMethodExplicitlyRequested": true
+        }
+      },
+      "input": "Real Android SOURCE_TOUCHSCREEN async native injection,60ms requested press",
+      "clicks": [
+        {
+          "pointerType": "touch",
+          "target": "<button id=\"mp-room-ready\" type=\"button\" class=\"room-primary\" aria-pressed=\"false\" title=\"\">READY</button>",
+          "trusted": true,
+          "type": "click"
+        }
+      ]
+    },
+    {
+      "target": {
+        "selector": "#blocknight-combat",
+        "target": {
+          "enabled": true,
+          "hit": true,
+          "id": "blocknight-combat",
+          "rect": {
+            "bottom": 48,
+            "height": 36,
+            "left": 349.9583435058594,
+            "right": 445.9166793823242,
+            "top": 12,
+            "width": 95.95833587646484,
+            "x": 349.9583435058594,
+            "y": 12
+          },
+          "text": "ALL COMBAT",
+          "visible": true
+        },
+        "physical": [
+          907,
+          58
+        ],
+        "geometry": {
+          "activity": "com.rbabbit.blocknight.warzone.MultiplayerActivity",
+          "css": {
+            "dpr": 3,
+            "height": 554,
+            "url": "/multiplayer/index.html",
+            "visual": {
+              "height": 360,
+              "offsetLeft": 0,
+              "offsetTop": 0,
+              "width": 1164
+            },
+            "width": 1164
+          },
+          "physical": [
+            2400,
+            1080
+          ],
+          "bounds": [
+            131,
+            0,
+            2400,
+            1080
+          ],
+          "source": "Actual dumpsys MultiplayerActivity WebView/nativeLobbyView sibling hierarchy; uniform fitViewport verified",
+          "measuredUTC": "2026-11-17T19:08:40.094916+00:00",
+          "nativeVirtualRect": [
+            131,
+            0,
+            3623,
+            1662
+          ],
+          "nativeAvailableRect": [
+            131,
+            0,
+            2400,
+            1080
+          ],
+          "nativeParentRect": [
+            0,
+            0,
+            2400,
+            1080
+          ],
+          "derivedScaleX": 0.6497709049255441,
+          "derivedScaleY": 0.6498194945848376,
+          "derivedUniformScale": 0.6497951997551908,
+          "virtualCSSDprTolerancePixels": 4.0,
+          "webViewFlags": "VFED..C..",
+          "nativeAvailableViewClass": "com.rbabbit.blocknight.warzone.MultiplayerLobbyView",
+          "nativeLobbyFlags": "GFE...C..",
+          "webViewVisible": true,
+          "uiaFailureType": null,
+          "nativeMethodExplicitlyRequested": true
+        }
+      },
+      "input": "Real Android SOURCE_TOUCHSCREEN async native injection,60ms requested press",
+      "clicks": [
+        {
+          "pointerType": "touch",
+          "target": "<button id=\"blocknight-combat\" data-command=\"combat\" aria-pressed=\"false\" data-combat-selected=\"false\" data-combat-enabled=\"false\" data-suspended=\"false\"><img src=\"/warzone/ui/icons/stack.svg\" alt=\"\"> ALL COMBAT</button>",
+          "trusted": true,
+          "type": "click"
+        }
+      ]
+    },
+    {
+      "target": {
+        "selector": "#blocknight-combat",
+        "target": {
+          "enabled": true,
+          "hit": true,
+          "id": "blocknight-combat",
+          "rect": {
+            "bottom": 48,
+            "height": 36,
+            "left": 349.9583435058594,
+            "right": 445.9166793823242,
+            "top": 12,
+            "width": 95.95833587646484,
+            "x": 349.9583435058594,
+            "y": 12
+          },
+          "text": "ALL COMBAT",
+          "visible": true
+        },
+        "physical": [
+          907,
+          58
+        ],
+        "geometry": {
+          "activity": "com.rbabbit.blocknight.warzone.MultiplayerActivity",
+          "css": {
+            "dpr": 3,
+            "height": 554,
+            "url": "/multiplayer/index.html",
+            "visual": {
+              "height": 360,
+              "offsetLeft": 0,
+              "offsetTop": 0,
+              "width": 1164
+            },
+            "width": 1164
+          },
+          "physical": [
+            2400,
+            1080
+          ],
+          "bounds": [
+            131,
+            0,
+            2400,
+            1080
+          ],
+          "source": "Actual dumpsys MultiplayerActivity WebView/nativeLobbyView sibling hierarchy; uniform fitViewport verified",
+          "measuredUTC": "2026-11-17T19:08:40.094916+00:00",
+          "nativeVirtualRect": [
+            131,
+            0,
+            3623,
+            1662
+          ],
+          "nativeAvailableRect": [
+            131,
+            0,
+            2400,
+            1080
+          ],
+          "nativeParentRect": [
+            0,
+            0,
+            2400,
+            1080
+          ],
+          "derivedScaleX": 0.6497709049255441,
+          "derivedScaleY": 0.6498194945848376,
+          "derivedUniformScale": 0.6497951997551908,
+          "virtualCSSDprTolerancePixels": 4.0,
+          "webViewFlags": "VFED..C..",
+          "nativeAvailableViewClass": "com.rbabbit.blocknight.warzone.MultiplayerLobbyView",
+          "nativeLobbyFlags": "GFE...C..",
+          "webViewVisible": true,
+          "uiaFailureType": null,
+          "nativeMethodExplicitlyRequested": true
+        }
+      },
+      "input": "Real Android SOURCE_TOUCHSCREEN async native injection,60ms requested press",
+      "clicks": [
+        {
+          "pointerType": "touch",
+          "target": "<button id=\"blocknight-combat\" data-command=\"combat\" aria-pressed=\"true\" data-combat-selected=\"false\" data-combat-enabled=\"true\" data-suspended=\"false\" class=\"active\"><img src=\"/warzone/ui/icons/stack.svg\" alt=\"\"> ALL COMBAT</button>",
+          "trusted": true,
+          "type": "click"
+        }
+      ]
+    },
+    {
+      "target": {
+        "selector": "#wt-open-players",
+        "target": {
+          "enabled": true,
+          "hit": true,
+          "id": "wt-open-players",
+          "rect": {
+            "bottom": 48,
+            "height": 36,
+            "left": 448.91668701171875,
+            "right": 507.4062728881836,
+            "top": 12,
+            "width": 58.489585876464844,
+            "x": 448.91668701171875,
+            "y": 12
+          },
+          "text": "PLAYERS",
+          "visible": true
+        },
+        "physical": [
+          1063,
+          58
+        ],
+        "geometry": {
+          "activity": "com.rbabbit.blocknight.warzone.MultiplayerActivity",
+          "css": {
+            "dpr": 3,
+            "height": 554,
+            "url": "/multiplayer/index.html",
+            "visual": {
+              "height": 360,
+              "offsetLeft": 0,
+              "offsetTop": 0,
+              "width": 1164
+            },
+            "width": 1164
+          },
+          "physical": [
+            2400,
+            1080
+          ],
+          "bounds": [
+            131,
+            0,
+            2400,
+            1080
+          ],
+          "source": "Actual dumpsys MultiplayerActivity WebView/nativeLobbyView sibling hierarchy; uniform fitViewport verified",
+          "measuredUTC": "2026-11-17T19:08:40.094916+00:00",
+          "nativeVirtualRect": [
+            131,
+            0,
+            3623,
+            1662
+          ],
+          "nativeAvailableRect": [
+            131,
+            0,
+            2400,
+            1080
+          ],
+          "nativeParentRect": [
+            0,
+            0,
+            2400,
+            1080
+          ],
+          "derivedScaleX": 0.6497709049255441,
+          "derivedScaleY": 0.6498194945848376,
+          "derivedUniformScale": 0.6497951997551908,
+          "virtualCSSDprTolerancePixels": 4.0,
+          "webViewFlags": "VFED..C..",
+          "nativeAvailableViewClass": "com.rbabbit.blocknight.warzone.MultiplayerLobbyView",
+          "nativeLobbyFlags": "GFE...C..",
+          "webViewVisible": true,
+          "uiaFailureType": null,
+          "nativeMethodExplicitlyRequested": true
+        }
+      },
+      "input": "Real Android SOURCE_TOUCHSCREEN async native injection,60ms requested press",
+      "clicks": [
+        {
+          "pointerType": "touch",
+          "target": "<button id=\"wt-open-players\" data-command=\"players\" aria-expanded=\"false\">PLAYERS</button>",
+          "trusted": true,
+          "type": "click"
+        }
+      ]
+    },
+    {
+      "target": {
+        "selector": "#wt-open-players",
+        "target": {
+          "enabled": true,
+          "hit": true,
+          "id": "wt-open-players",
+          "rect": {
+            "bottom": 48,
+            "height": 36,
+            "left": 448.91668701171875,
+            "right": 507.4062728881836,
+            "top": 12,
+            "width": 58.489585876464844,
+            "x": 448.91668701171875,
+            "y": 12
+          },
+          "text": "PLAYERS",
+          "visible": true
+        },
+        "physical": [
+          1063,
+          58
+        ],
+        "geometry": {
+          "activity": "com.rbabbit.blocknight.warzone.MultiplayerActivity",
+          "css": {
+            "dpr": 3,
+            "height": 554,
+            "url": "/multiplayer/index.html",
+            "visual": {
+              "height": 360,
+              "offsetLeft": 0,
+              "offsetTop": 0,
+              "width": 1164
+            },
+            "width": 1164
+          },
+          "physical": [
+            2400,
+            1080
+          ],
+          "bounds": [
+            131,
+            0,
+            2400,
+            1080
+          ],
+          "source": "Actual dumpsys MultiplayerActivity WebView/nativeLobbyView sibling hierarchy; uniform fitViewport verified",
+          "measuredUTC": "2026-11-17T19:08:40.094916+00:00",
+          "nativeVirtualRect": [
+            131,
+            0,
+            3623,
+            1662
+          ],
+          "nativeAvailableRect": [
+            131,
+            0,
+            2400,
+            1080
+          ],
+          "nativeParentRect": [
+            0,
+            0,
+            2400,
+            1080
+          ],
+          "derivedScaleX": 0.6497709049255441,
+          "derivedScaleY": 0.6498194945848376,
+          "derivedUniformScale": 0.6497951997551908,
+          "virtualCSSDprTolerancePixels": 4.0,
+          "webViewFlags": "VFED..C..",
+          "nativeAvailableViewClass": "com.rbabbit.blocknight.warzone.MultiplayerLobbyView",
+          "nativeLobbyFlags": "GFE...C..",
+          "webViewVisible": true,
+          "uiaFailureType": null,
+          "nativeMethodExplicitlyRequested": true
+        }
+      },
+      "input": "Real Android SOURCE_TOUCHSCREEN async native injection,60ms requested press",
+      "clicks": [
+        {
+          "pointerType": "touch",
+          "target": "<button id=\"wt-open-players\" data-command=\"players\" aria-expanded=\"true\" class=\"active\">PLAYERS</button>",
+          "trusted": true,
+          "type": "click"
+        }
+      ]
+    },
+    {
+      "target": {
+        "selector": "#leave",
+        "target": {
+          "enabled": true,
+          "hit": true,
+          "id": "leave",
+          "rect": {
+            "bottom": 48,
+            "height": 36,
+            "left": 580.5208740234375,
+            "right": 628.4687919616699,
+            "top": 12,
+            "width": 47.94791793823242,
+            "x": 580.5208740234375,
+            "y": 12
+          },
+          "text": "LOBBY",
+          "visible": true
+        },
+        "physical": [
+          1309,
+          58
+        ],
+        "geometry": {
+          "activity": "com.rbabbit.blocknight.warzone.MultiplayerActivity",
+          "css": {
+            "dpr": 3,
+            "height": 554,
+            "url": "/multiplayer/index.html",
+            "visual": {
+              "height": 360,
+              "offsetLeft": 0,
+              "offsetTop": 0,
+              "width": 1164
+            },
+            "width": 1164
+          },
+          "physical": [
+            2400,
+            1080
+          ],
+          "bounds": [
+            131,
+            0,
+            2400,
+            1080
+          ],
+          "source": "Actual dumpsys MultiplayerActivity WebView/nativeLobbyView sibling hierarchy; uniform fitViewport verified",
+          "measuredUTC": "2026-11-17T19:08:40.094916+00:00",
+          "nativeVirtualRect": [
+            131,
+            0,
+            3623,
+            1662
+          ],
+          "nativeAvailableRect": [
+            131,
+            0,
+            2400,
+            1080
+          ],
+          "nativeParentRect": [
+            0,
+            0,
+            2400,
+            1080
+          ],
+          "derivedScaleX": 0.6497709049255441,
+          "derivedScaleY": 0.6498194945848376,
+          "derivedUniformScale": 0.6497951997551908,
+          "virtualCSSDprTolerancePixels": 4.0,
+          "webViewFlags": "VFED..C..",
+          "nativeAvailableViewClass": "com.rbabbit.blocknight.warzone.MultiplayerLobbyView",
+          "nativeLobbyFlags": "GFE...C..",
+          "webViewVisible": true,
+          "uiaFailureType": null,
+          "nativeMethodExplicitlyRequested": true
+        }
+      },
+      "input": "Real Android SOURCE_TOUCHSCREEN async native injection,60ms requested press",
+      "clicks": [
+        {
+          "pointerType": "touch",
+          "target": "<button id=\"leave\" class=\"dark\">LOBBY</button>",
+          "trusted": true,
+          "type": "click"
+        }
+      ]
+    }
+  ]
+}

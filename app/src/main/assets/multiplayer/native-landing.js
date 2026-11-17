@@ -9,6 +9,7 @@
  globalThis.PcNativeLobby=Object.freeze({
   publish,
   refresh(){if(globalThis.PcMultiplayerSession?.active)return false;globalThis.refreshPcLobby?.();return true;},
+  resume(){if(globalThis.PcMultiplayerSession?.active)return false;return globalThis.PcLobbyUi?.resume?.()||false;},
   setHideEmpty(value){if(typeof value!=='boolean'||globalThis.PcMultiplayerSession?.active)return false;const filter=document.getElementById('hide-empty');if(!filter)return false;filter.checked=value;filter.dispatchEvent(new Event('change'));publish(snapshot());return true;},
   join(id){
    if(globalThis.PcMultiplayerSession?.active||typeof id!=='string')return false;

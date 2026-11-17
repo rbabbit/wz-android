@@ -1,0 +1,171 @@
+{
+  "candidateAPK_SHA256": "a19848c0ecfac6a4b20b1510f5889b771fd739de340da7e842916d59cfe020d3",
+  "scope": "Exact normal test APK on connected Armor29Ultra Android16; WiFi off and Three mobile data active.",
+  "cellularDirectoryVerified": true,
+  "signedJoinVerified": true,
+  "controlledMatchVerified": false,
+  "initialDirectory": {
+    "httpStatus": 200,
+    "protocol": "h3",
+    "elapsedMs": 372,
+    "bytes": 6875,
+    "network": "cellular-validated"
+  },
+  "nativeTransportEvents": [
+    {
+      "requestId": 123161531,
+      "category": "list",
+      "result": "complete",
+      "stage": "reading",
+      "httpStatus": 200,
+      "bytes": 7211,
+      "protocol": "h3",
+      "elapsedMs": 358,
+      "network": "cellular-validated"
+    },
+    {
+      "requestId": 123161532,
+      "category": "list",
+      "result": "complete",
+      "stage": "reading",
+      "httpStatus": 200,
+      "bytes": 7537,
+      "protocol": "h3",
+      "elapsedMs": 408,
+      "network": "cellular-validated"
+    },
+    {
+      "requestId": 123161534,
+      "category": "join",
+      "result": "complete",
+      "stage": "reading",
+      "httpStatus": 200,
+      "bytes": 119,
+      "protocol": "h3",
+      "elapsedMs": 225,
+      "network": "cellular-validated"
+    },
+    {
+      "requestId": 123161533,
+      "category": "join",
+      "result": "complete",
+      "stage": "reading",
+      "httpStatus": 200,
+      "bytes": 119,
+      "protocol": "h3",
+      "elapsedMs": 230,
+      "network": "cellular-validated"
+    },
+    {
+      "requestId": 80337944,
+      "category": "list",
+      "result": "complete",
+      "stage": "reading",
+      "httpStatus": 200,
+      "bytes": 7537,
+      "protocol": "h3",
+      "elapsedMs": 124,
+      "network": "cellular-validated"
+    },
+    {
+      "requestId": 80337945,
+      "category": "list",
+      "result": "complete",
+      "stage": "reading",
+      "httpStatus": 200,
+      "bytes": 7190,
+      "protocol": "h3",
+      "elapsedMs": 416,
+      "network": "cellular-validated"
+    },
+    {
+      "requestId": 80337946,
+      "category": "list",
+      "result": "complete",
+      "stage": "reading",
+      "httpStatus": 200,
+      "bytes": 7190,
+      "protocol": "h3",
+      "elapsedMs": 342,
+      "network": "cellular-validated"
+    },
+    {
+      "requestId": 80337947,
+      "category": "list",
+      "result": "complete",
+      "stage": "reading",
+      "httpStatus": 200,
+      "bytes": 7190,
+      "protocol": "h3",
+      "elapsedMs": 373,
+      "network": "cellular-validated"
+    },
+    {
+      "requestId": 80337949,
+      "category": "join",
+      "result": "complete",
+      "stage": "reading",
+      "httpStatus": 200,
+      "bytes": 119,
+      "protocol": "h3",
+      "elapsedMs": 317,
+      "network": "cellular-validated"
+    },
+    {
+      "requestId": 80337948,
+      "category": "join",
+      "result": "complete",
+      "stage": "reading",
+      "httpStatus": 200,
+      "bytes": 119,
+      "protocol": "h3",
+      "elapsedMs": 361,
+      "network": "cellular-validated"
+    },
+    {
+      "requestId": 675683308,
+      "category": "list",
+      "result": "complete",
+      "stage": "reading",
+      "httpStatus": 200,
+      "bytes": 7211,
+      "protocol": "h3",
+      "elapsedMs": 204,
+      "network": "cellular-validated"
+    }
+  ],
+  "realKeyboardReturns": 2,
+  "realHomeAndMultiplayerReturns": 2,
+  "finalFixture": {
+    "map": "Sk-Mountain",
+    "seeded": false,
+    "roles": "Owned idle human PC host and actual phone; no AI, no spectators.",
+    "normalJoin": true,
+    "normalReady": true,
+    "expectedNamedPhoneAccepted": true,
+    "hostStartObserved": true,
+    "nativePhoneDataCheckVerified": false,
+    "phoneBattlefieldRendered": false,
+    "phoneMovementVerified": false
+  },
+  "failedCheck": {
+    "stage": "Phone battlefield rendering after Ready",
+    "error": "TypeError: Cannot read properties of undefined (reading ModelViewProjectionMatrix)",
+    "observedUTC": "2026-11-17T13:42:11Z",
+    "loadingCoverRemained": true,
+    "rootCauseEstablished": false,
+    "previousAPKSameFixtureControlPerformed": false,
+    "gameplayNativeAssetsByteIdenticalTo091": true
+  },
+  "cleanup": {
+    "normalCancel": true,
+    "publicLobbyReturned": true,
+    "originalNameRestored": true,
+    "hostStopped": true,
+    "routerOwnedMappingDeletedAndAbsent": true,
+    "officialOwnRoomRemoved": true,
+    "phoneNetworkSettingsChanged": false
+  },
+  "disclosure": "Network loading and signed joining passed. Full gameplay verification failed at rendering. No inference that the renderer failure predates this APK; no completed match/movement claim.",
+  "sourceLogsOrSecretsPackaged": false
+}

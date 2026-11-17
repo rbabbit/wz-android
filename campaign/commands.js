@@ -1097,6 +1097,8 @@ function wtcmd_setProductionRepeat(command)
         wtcmd_answer(command, false, "factory-missing"); return;
     }
     if (typeof command.enabled !== "boolean") { wtcmd_answer(command, false, "invalid"); return; }
+    if (command.all !== undefined && typeof command.all !== "boolean") { wtcmd_answer(command, false, "invalid"); return; }
+    if (command.all === true) { wtcmd_setAllProductionRepeat(command, factory); return; }
     if (!command.enabled) {
         if ((command.templateId || command.design) && wtcmd_productionRepeatState(factory).enabled) {
             const resolved = wtcmd_resolveProductionDesign(command);
@@ -1118,6 +1120,37 @@ function wtcmd_setProductionRepeat(command)
     if (!wtcmd_factoryAllows(design, factory)) { wtcmd_answer(command, false, "factory-incompatible"); return; }
     wtcmd_setProductionRepeatPlan(factory, design, true);
     wtcmd_answer(command, true, "repeat-updated", wtcmd_productionRepeatState(factory));
+}
+
+function wtcmd_allProductionFactories(factory, design)
+{
+    // Resolve the category from the actual owned factory, never from a UI list.
+    // Only the first completed vehicle/cyborg factory exposes the batch scope.
+    if (factory.stattype !== FACTORY && factory.stattype !== CYBORG_FACTORY) return { error:"factory-incompatible" };
+    const peers = enumStruct(selectedPlayer).filter(function(s) {
+        return s.player === selectedPlayer && s.status === BUILT && s.stattype === factory.stattype;
+    }).sort(function(a,b) { return a.id-b.id; });
+    if (!peers.length || peers[0].id !== factory.id) return { error:"production-changed" };
+    return { factories:peers.filter(function(s) { return wtcmd_factoryAllows(design,s); }) };
+}
+
+function wtcmd_setAllProductionRepeat(command, factory)
+{
+    const resolved = wtcmd_resolveProductionDesign(command);
+    if (resolved.error) { wtcmd_answer(command, false, resolved.error); return; }
+    const design = resolved.design, targets = wtcmd_allProductionFactories(factory, design);
+    if (targets.error) { wtcmd_answer(command, false, targets.error); return; }
+    const designKey = wtcmd_productionDesignKey(design), eligible = targets.factories.filter(function(s) {
+        const key = String(s.id), policy = wtcmd_productionRepeatState(s);
+        if (!command.enabled) return policy.enabled && policy.key === designKey;
+        const candidates = [wtcmd_factoryActive[key]?.design, wtcmd_currentProduction(s)]
+            .concat((wtcmd_production[key] || []).filter(function(job) { return !job.repeat; }).map(function(job) { return job.design; })).filter(Boolean);
+        return candidates.some(function(d) { return wtcmd_productionDesignKey(d) === designKey; });
+    });
+    if (command.enabled && !eligible.length) { wtcmd_answer(command, false, "production-changed"); return; }
+    eligible.forEach(function(s) { wtcmd_setProductionRepeatPlan(s, design, command.enabled); });
+    wtcmd_answer(command, true, "repeat-updated", { all:true, factoryId:factory.id,
+        factories:eligible.map(function(s) { return { factoryId:s.id, repeat:wtcmd_productionRepeatState(s) }; }) });
 }
 
 function wtcmd_stopProduction(command)
@@ -1161,19 +1194,30 @@ function wtcmd_queueProduction(command)
         wtcmd_answer(command, false, "factory-missing"); return;
     }
     if (command.repeat !== undefined && typeof command.repeat !== "boolean") { wtcmd_answer(command, false, "invalid"); return; }
+    if (command.all !== undefined && typeof command.all !== "boolean") { wtcmd_answer(command, false, "invalid"); return; }
     const resolved = wtcmd_resolveProductionDesign(command);
     if (resolved.error) { wtcmd_answer(command, false, resolved.error); return; }
     const design = resolved.design;
     const count = Number(command.count || 1);
     if (!wtcmd_factoryAllows(design, factory)) { wtcmd_answer(command, false, "factory-incompatible"); return; }
     if (!Number.isInteger(count) || count < 1 || count > 20) { wtcmd_answer(command, false, "invalid"); return; }
-    const key = String(factory.id);
-    if (!wtcmd_production[key]) wtcmd_production[key] = [];
-    if (wtcmd_production[key].length + count > 64) { wtcmd_answer(command, false, "queue-full"); return; }
-    if (command.repeat !== undefined) wtcmd_setProductionRepeatPlan(factory, design, command.repeat);
-    for (let i = 0; i < count; i++) wtcmd_production[key].push({
-        id: command.nonce + "-" + i, design: JSON.parse(JSON.stringify(design)), status: "queued", reason: "" });
-    wtcmd_answer(command, true, "queued", { factoryId: factory.id, count: count, repeat:wtcmd_productionRepeatState(factory) });
+    const targets = command.all === true ? wtcmd_allProductionFactories(factory, design) : { factories:[factory] };
+    if (targets.error) { wtcmd_answer(command, false, targets.error); return; }
+    const eligible = targets.factories.filter(function(s) { return (wtcmd_production[String(s.id)] || []).length + count <= 64; });
+    if (!eligible.length) { wtcmd_answer(command, false, "queue-full"); return; }
+    eligible.forEach(function(s) {
+        const key = String(s.id);
+        if (!wtcmd_production[key]) wtcmd_production[key] = [];
+        if (command.repeat !== undefined) wtcmd_setProductionRepeatPlan(s, design, command.repeat);
+        for (let i = 0; i < count; i++) wtcmd_production[key].push({
+            id: command.nonce + (command.all === true ? "-"+s.id : "") + "-" + i,
+            design: JSON.parse(JSON.stringify(design)), status: "queued", reason: "" });
+    });
+    wtcmd_answer(command, true, "queued", command.all === true ? { all:true, factoryId:factory.id,
+        count:count*eligible.length, perFactoryCount:count, factoryIds:eligible.map(function(s) { return s.id; }),
+        skippedFactoryIds:targets.factories.filter(function(s) { return eligible.indexOf(s) < 0; }).map(function(s) { return s.id; }),
+        factories:eligible.map(function(s) { return { factoryId:s.id, repeat:wtcmd_productionRepeatState(s) }; }) }
+        : { factoryId:factory.id, count:count, repeat:wtcmd_productionRepeatState(factory) });
     wtcmd_tickProduction();
 }
 

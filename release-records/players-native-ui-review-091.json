@@ -1,0 +1,65 @@
+{
+  "passed": true,
+  "kind": "Independent read-only native/UI Players contract seam review",
+  "recordedUTC": "2026-11-16T23:16:00.490322+00:00",
+  "actualAndroidRun": false,
+  "appFilesEditedByReviewer": false,
+  "uiSourceReportSHA256": "9497993f1bfd9c927443d2817fe851ce016d913115a2ad4361acc69f8c12ee84",
+  "nativeIntegrationSHA256": "db1d80cc935abe6dbc8135a369f1f63c00c360e7f53ea9e5a612d28422553cd4",
+  "nativeSourceChecksSHA256": "0255040758c872c79a45fb47ebbe552a5e163224520176a4728acc7712666e4c",
+  "sources": [
+    {
+      "path": "warzone-command-pages.js",
+      "sha256": "3d8f6c1104106e87426a45546b4b0cc0e5229147895b1712de021c8c77b289f1"
+    },
+    {
+      "path": "warzone-touch-controls.js",
+      "sha256": "e13496847769b868cc40f00c3dcfa646574dd25ccbd7f0e2f60f74b9e681ff3b"
+    },
+    {
+      "path": "multiplayer/index.html",
+      "sha256": "00bb8ebfb742082d623cb87463fed5f262a82cc56f679a2cafd08ef40e105ace"
+    },
+    {
+      "path": "multiplayer/session.js",
+      "sha256": "0070c120504de76c8bdc6b58a2025870966df21a7f9c9c4f1a6d8d5416b8d469"
+    },
+    {
+      "path": "multiplayer/mobile-controls.js",
+      "sha256": "7bc849baf4eab088b9400b0ef5a83ff7d5782cc4ec55c646b8f2546af45866e2"
+    },
+    {
+      "path": "multiplayer/multiplayer.css",
+      "sha256": "69f8f38349dbeaefa399703d9bac80954a50d868c4fb88cca9119cc691188ba6"
+    },
+    {
+      "path": "warzone/ui/towers-game-controls.css",
+      "sha256": "f56bc55685a9c57d5517319a0118541d1a2d9b1ce2b79c7b0f407579e3d94fe2"
+    }
+  ],
+  "reviewed": [
+    "Independent native snapshot consumed without owned command catalogue or waiting-room cache",
+    "1Hz native publication and two advancing UI samples/3500ms monotonic expiry",
+    "Immediate world/module/session/real-viewed-role loss redaction",
+    "Native blind-safe names and escaped HTML; nullable statistics and exact uint64 strings",
+    "Native full-spectator capability and role both required for rich observer details",
+    "High-slot actual allocated watchers distinct from inactive/closed/AI participants",
+    "Allocated playable participant now spectating retains connected status and separate watcher row",
+    "Scoped context/nonce/action navigation with capability gates and exact actual native-menu ACK",
+    "Pre-open1Hz snapshot cannot erase the acknowledged native return control",
+    "Native open/close separate from arbitrary keys or spectator gameplay commands",
+    "Replay packet explicitly recorded/read-only through MP wrapper",
+    "Build/menu return and in-flight ACK seams covered by actual-controller focused regressions",
+    "R3 close/pagehide clears keyboard guard and removes all5 panel pointer/key listeners"
+  ],
+  "resolvedFindings": [
+    "Replay mode/role previously rejected by MP wrapper; explicit read-only native replay accepted",
+    "Spectating allocated former participant previously risked Disconnected badge; current state/allocated distinctions preserved",
+    "Included native rows always use blind-safe getPlayerName(true), retaining native Commander fallback;22 actual-helper cases in both profiles",
+    "Shared Players icon uses existing stack asset and opaque surface reaches bottom edge;21 UI groups preserve proof",
+    "R3 observer table retains focus/scroll; bounded Space/Enter guards preserve activation while stale/context/role loss redacts immediately"
+  ],
+  "limits": [
+    "Source/host checks do not establish physical Android presentation or actual private live-spectator compatibility; exact APK runtime remains required."
+  ]
+}

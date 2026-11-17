@@ -1,8 +1,11 @@
 package com.rbabbit.blocknight.warzone;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.SharedPreferences;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.graphics.Rect;
@@ -10,8 +13,13 @@ import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.RippleDrawable;
 import android.net.Uri;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -34,23 +42,18 @@ import android.webkit.WebViewClient;
 import androidx.webkit.WebViewAssetLoader;
 import androidx.webkit.WebViewCompat;
 import androidx.webkit.WebViewFeature;
-import java.io.ByteArrayOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
-import java.net.HttpURLConnection;
 import java.net.Socket;
-import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -59,6 +62,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.BooleanSupplier;
 import org.json.JSONObject;
 import org.json.JSONException;
 import org.json.JSONArray;
@@ -80,17 +84,16 @@ public final class MultiplayerActivity extends Activity {
   private static final String PLAYER_NAME = "player_name";
   private static final String PLAYER_NAME_SUFFIX = "(m)";
   private static final String DEFAULT_PLAYER_NAME = "Player" + PLAYER_NAME_SUFFIX;
+  private static final String NOTIFICATION_PERMISSION_REQUESTED = "notification_permission_requested";
+  private static final int NOTIFICATION_PERMISSION_REQUEST = 8701;
 
   private final Object connectionsLock = new Object();
   private final Map<Integer, Connection> connections = new ConcurrentHashMap<>();
   private final AtomicBoolean destroyed = new AtomicBoolean();
-  private final Set<Integer> httpRequestIds = ConcurrentHashMap.newKeySet();
-  private final Set<HttpURLConnection> activeHttp = ConcurrentHashMap.newKeySet();
-  private final ExecutorService httpExecutor =
-      Executors.newFixedThreadPool(4, r -> new Thread(r, "pc-lobby-http"));
+  private CronetLobbyHttp lobbyHttp;
   private final ScheduledExecutorService timeouts =
       Executors.newSingleThreadScheduledExecutor(r -> new Thread(r, "pc-socket-timeouts"));
-  private WebView webView;
+  private MultiplayerWebView webView;
   private MultiplayerLobbyView nativeLobby;
   private String landingGeneration = "";
   private volatile boolean landingPageReady;
@@ -103,6 +106,24 @@ public final class MultiplayerActivity extends Activity {
   private float commandStripCssHeight = DEFAULT_COMMAND_STRIP_CSS_HEIGHT;
   private AlertDialog leaveDialog;
   private volatile boolean sessionActive;
+  private volatile boolean activityResumed;
+  private final Object sessionProtectionLock = new Object();
+  private boolean sessionServiceStarted;
+  private boolean backgroundPulsePending;
+  private final Handler lifecycleHandler = new Handler(Looper.getMainLooper());
+  private ConnectivityManager connectivity;
+  private ConnectivityManager.NetworkCallback networkCallback;
+  private final Runnable backgroundPulse = new Runnable() {
+    @Override public void run() {
+      if (destroyed.get() || !sessionActive || activityResumed || webView == null) return;
+      if (!backgroundPulsePending) {
+        backgroundPulsePending = true;
+        webView.evaluateJavascript("window.PcMultiplayerSession?.backgroundPulse?.()",
+            ignored -> backgroundPulsePending = false);
+      }
+      lifecycleHandler.postDelayed(this, 33);
+    }
+  };
   private static final class RoomBackState {
     static final RoomBackState EMPTY = new RoomBackState("", false, false, false);
     final String generation;
@@ -137,7 +158,7 @@ public final class MultiplayerActivity extends Activity {
     musicPreferences = getSharedPreferences(MUSIC_PROFILE, MODE_PRIVATE);
     musicStore = new MusicPackStore(this);
     musicIndex = new MapMusicIndex(this, new MusicTrackCatalog(this));
-    WebView.setWebContentsDebuggingEnabled(true);
+    WebView.setWebContentsDebuggingEnabled(BuildConfig.DEBUG);
     root = new FrameLayout(this);
     root.setBackgroundColor(0xff000000);
     root.setClipChildren(true);
@@ -162,6 +183,9 @@ public final class MultiplayerActivity extends Activity {
     settings.setCacheMode(WebSettings.LOAD_NO_CACHE);
     settings.setJavaScriptCanOpenWindowsAutomatically(false);
     webView.addJavascriptInterface(new SocketBridge(), "AndroidSocketBridge");
+    lobbyHttp = new CronetLobbyHttp(getApplicationContext(), (id, status, headers, body, error, claim) ->
+        httpCallback(id, status, headers, Base64.encodeToString(body, Base64.NO_WRAP), error, claim),
+        this::lobbyNetworkSummary);
     webView.addJavascriptInterface(new NativeHttp(), "AndroidLobbyHttp");
     webView.addJavascriptInterface(new Navigation(), "AndroidMultiplayer");
     webView.addJavascriptInterface(new MultiplayerMusic(), "AndroidMultiplayerMusic");
@@ -283,6 +307,7 @@ public final class MultiplayerActivity extends Activity {
     root.post(this::fitViewport);
     immersive();
     webView.loadUrl(START_URL);
+    observeDirectoryNetwork();
     Log.i(TAG, "Separate PC multiplayer test shell started");
   }
 
@@ -356,6 +381,10 @@ public final class MultiplayerActivity extends Activity {
       // must never wait for a JS callback behind a busy native engine frame.
       boolean wasActive = sessionActive;
       sessionActive = active;
+      // The Join bridge completes before JS creates the engine. Request Android
+      // protection here, so an immediate Home cannot overtake a posted UI task.
+      if (active) startSessionProtectionFromJoin();
+      runOnUiThread(() -> { syncSessionProtection();publishActivityState(); });
       if (!active && wasActive) landingPageReady = false;
       cacheRoomBackState(RoomBackState.EMPTY);
       synchronized (musicPreferenceLock) {
@@ -665,6 +694,14 @@ public final class MultiplayerActivity extends Activity {
   private final class MultiplayerWebView extends WebView {
     private boolean backStartedWithKeyboard;
     MultiplayerWebView() { super(MultiplayerActivity.this); }
+    @Override protected void onWindowVisibilityChanged(int visibility) {
+      // Chromium normally hides the page here and stops the stock engine's RAF
+      // network pump. Preserve it only while a real user-started session lives.
+      super.onWindowVisibilityChanged(sessionActive && !destroyed.get() ? View.VISIBLE : visibility);
+    }
+    void syncSessionVisibility() {
+      super.onWindowVisibilityChanged(sessionActive && !destroyed.get() ? View.VISIBLE : getWindowVisibility());
+    }
     @Override public void scrollTo(int x, int y) { super.scrollTo(0, 0); }
     @Override protected void onScrollChanged(int x, int y, int oldX, int oldY) {
       super.onScrollChanged(x, y, oldX, oldY);
@@ -832,6 +869,7 @@ public final class MultiplayerActivity extends Activity {
     if (webView == null || pendingLobbyNavigation || destroyed.get()) return;
     synchronized (musicPreferenceLock) { musicSession = ""; }
     sessionActive = false;
+    syncSessionProtection();
     landingPageReady = false;
     showNativeLanding();
     if(nativeLobby!=null)nativeLobby.pending(true,"Returning to lobby…");
@@ -852,8 +890,66 @@ public final class MultiplayerActivity extends Activity {
     return Math.round(value * getResources().getDisplayMetrics().density);
   }
 
+  private void publishActivityState() {
+    if (webView == null || destroyed.get()) return;
+    webView.evaluateJavascript("window.PcMultiplayerSession?.setBackground?.(" + !activityResumed + ")", null);
+  }
+
+  private void syncSessionProtection() {
+    lifecycleHandler.removeCallbacks(backgroundPulse);
+    if (webView != null) webView.syncSessionVisibility();
+    synchronized (sessionProtectionLock) {
+      if (!sessionActive || destroyed.get()) {
+        backgroundPulsePending = false;
+        if (sessionServiceStarted) stopService(new Intent(this, MultiplayerSessionService.class));
+        sessionServiceStarted = false;
+        return;
+      }
+      Intent protection = new Intent(this, MultiplayerSessionService.class)
+          .putExtra(MultiplayerSessionService.BACKGROUND, !activityResumed);
+      try {
+        if (!sessionServiceStarted) {
+          // A restricted start can be retried when the same Activity resumes.
+          if (activityResumed) { startForegroundService(protection);sessionServiceStarted = true; }
+        } else startService(protection);
+      } catch (RuntimeException restricted) {
+        Log.w(TAG, "Android did not allow multiplayer background protection", restricted);
+      }
+    }
+    if (sessionActive && !activityResumed) lifecycleHandler.post(backgroundPulse);
+  }
+
+  private void startSessionProtectionFromJoin() {
+    synchronized (sessionProtectionLock) {
+      if (destroyed.get() || !sessionActive || sessionServiceStarted) return;
+      try {
+        startForegroundService(new Intent(this, MultiplayerSessionService.class)
+            .putExtra(MultiplayerSessionService.BACKGROUND, !activityResumed));
+        sessionServiceStarted = true;
+      } catch (RuntimeException restricted) {
+        Log.w(TAG, "Android did not allow multiplayer protection at Join", restricted);
+      }
+    }
+  }
+
+  private void observeDirectoryNetwork() {
+    connectivity = getSystemService(ConnectivityManager.class);
+    if (connectivity == null) return;
+    networkCallback = new ConnectivityManager.NetworkCallback() {
+      @Override public void onCapabilitiesChanged(Network network, NetworkCapabilities capabilities) {
+        if (capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)) {
+          runOnUiThread(() -> { if (activityResumed && !sessionActive) landingCall("resume()"); });
+        }
+      }
+    };
+    try { connectivity.registerDefaultNetworkCallback(networkCallback); }
+    catch (RuntimeException unavailable) { networkCallback = null;Log.w(TAG, "Network resume observation unavailable", unavailable); }
+  }
+
   @Override
   protected void onPause() {
+    activityResumed = false;
+    syncSessionProtection();publishActivityState();
     musicSuspended = true;
     multiplayerMusicLifecycle("suspend");
     super.onPause();
@@ -862,8 +958,35 @@ public final class MultiplayerActivity extends Activity {
   @Override
   protected void onResume() {
     super.onResume();
+    activityResumed = true;
+    syncSessionProtection();publishActivityState();
     musicSuspended = false;
     multiplayerMusicLifecycle("resume");
+    if (!sessionActive) landingCall("resume()");
+    if (root != null) root.post(this::fitViewport);
+    requestMultiplayerNotificationsIfNeeded();
+  }
+
+  private void requestMultiplayerNotificationsIfNeeded() {
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU
+        || destroyed.get() || isFinishing()
+        || checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED
+        || playerPreferences.getBoolean(NOTIFICATION_PERMISSION_REQUESTED, false)) return;
+    // Ask on the UI thread when Multiplayer opens, before a live Join can be
+    // interrupted. Persist first so denial, dismissal and resume never loop.
+    playerPreferences.edit().putBoolean(NOTIFICATION_PERMISSION_REQUESTED, true).apply();
+    requestPermissions(new String[] {Manifest.permission.POST_NOTIFICATIONS}, NOTIFICATION_PERMISSION_REQUEST);
+  }
+
+  @Override
+  public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    if (requestCode == NOTIFICATION_PERMISSION_REQUEST && grantResults.length > 0
+        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+      // Refresh an already-live session's notification; this does not start a
+      // session or repeat the user's Join action.
+      syncSessionProtection();
+    }
   }
 
   @Override
@@ -871,6 +994,11 @@ public final class MultiplayerActivity extends Activity {
     multiplayerMusicLifecycle("dispose");
     destroyed.set(true);
     sessionActive = false;
+    syncSessionProtection();
+    if (connectivity != null && networkCallback != null) {
+      try { connectivity.unregisterNetworkCallback(networkCallback); } catch (RuntimeException ignored) { }
+      networkCallback = null;
+    }
     cacheRoomBackState(RoomBackState.EMPTY);
     if (leaveDialog != null) {
       leaveDialog.dismiss();
@@ -878,8 +1006,7 @@ public final class MultiplayerActivity extends Activity {
     }
     for (Connection connection : connections.values()) connection.finish(null);
     timeouts.shutdownNow();
-    httpExecutor.shutdownNow();
-    for (HttpURLConnection connection : activeHttp) connection.disconnect();
+    if (lobbyHttp != null) lobbyHttp.close();
     if (root != null && viewportListener != null) root.removeOnLayoutChangeListener(viewportListener);
     if (webView != null) {
       webView.removeJavascriptInterface("AndroidSocketBridge");
@@ -966,142 +1093,33 @@ public final class MultiplayerActivity extends Activity {
     }
   }
 
-  /** The stock engine signs lobby requests. Forward their bytes and custom Origin unchanged. */
+  /** Keep the engine's official URL, signed bytes and custom Origin unchanged. */
   public final class NativeHttp {
     @JavascriptInterface
     public void request(int id, String method, String url, String headersJson, String bodyBase64) {
-      if (destroyed.get()) return;
-      synchronized (httpRequestIds) {
-        if (id < 0 || httpRequestIds.contains(id) || httpRequestIds.size() >= 8) {
-          httpCallback(id, 0, "{}", "", "Invalid or busy lobby HTTP request");
-          return;
-        }
-        httpRequestIds.add(id);
-      }
-      try {
-        httpExecutor.execute(
-            () -> {
-              try {
-                forwardHttp(id, method, url, headersJson, bodyBase64);
-              } finally {
-                httpRequestIds.remove(id);
-              }
-            });
-      } catch (RejectedExecutionException error) {
-        httpRequestIds.remove(id);
-        httpCallback(id, 0, "{}", "", "Lobby HTTP bridge shutting down");
-      }
+      if (!destroyed.get() && lobbyHttp != null) lobbyHttp.request(id, method, url, headersJson, bodyBase64);
     }
+    @JavascriptInterface
+    public void cancel(int id) { if (lobbyHttp != null) lobbyHttp.cancel(id); }
   }
 
-  private static URL allowedLobbyUrl(String value) throws IOException {
-    URL url = new URL(value);
-    if (!"https".equalsIgnoreCase(url.getProtocol())
-        || !"wzlobby.wz2100.net".equalsIgnoreCase(url.getHost())
-        || (url.getPort() != -1 && url.getPort() != 443)
-        || url.getUserInfo() != null) {
-      throw new IOException("Only the official HTTPS lobby is allowed");
-    }
-    return url;
-  }
-
-  private void forwardHttp(
-      int id, String suppliedMethod, String suppliedUrl, String headersJson, String bodyBase64) {
-    HttpURLConnection connection = null;
+  private String lobbyNetworkSummary() {
     try {
-      String method = suppliedMethod == null ? "GET" : suppliedMethod.toUpperCase(Locale.ROOT);
-      if (!method.matches("GET|HEAD|POST|PUT|DELETE|OPTIONS|PATCH")) {
-        throw new IOException("Unsupported HTTP method");
-      }
-      URL url = allowedLobbyUrl(suppliedUrl);
-      if (bodyBase64 != null && bodyBase64.length() > ((MAX_HTTP_BYTES + 2L) / 3L) * 4L) {
-        throw new IOException("Lobby request exceeds size limit");
-      }
-      byte[] body = bodyBase64 == null || bodyBase64.isEmpty()
-          ? new byte[0] : Base64.decode(bodyBase64, Base64.DEFAULT);
-      if (body.length > MAX_HTTP_BYTES) throw new IOException("Lobby request exceeds size limit");
-      JSONObject requestHeaders = new JSONObject(headersJson == null ? "{}" : headersJson);
-      for (int redirects = 0; redirects <= 3; redirects++) {
-        if (destroyed.get()) return;
-        connection = (HttpURLConnection) url.openConnection();
-        activeHttp.add(connection);
-        if (destroyed.get()) return;
-        connection.setInstanceFollowRedirects(false);
-        connection.setConnectTimeout(CONNECT_TIMEOUT_MS);
-        connection.setReadTimeout(CONNECT_TIMEOUT_MS);
-        connection.setUseCaches(false);
-        connection.setRequestMethod(method);
-        connection.setRequestProperty("User-Agent", "Warzone2100/4.7.0 (+https://github.com/Warzone2100/warzone2100)");
-        java.util.Iterator<String> names = requestHeaders.keys();
-        while (names.hasNext()) {
-          String name = names.next();
-          String value = requestHeaders.getString(name);
-          if (!name.matches("[!#$%&'*+.^_`|~0-9A-Za-z-]+")
-              || value.indexOf('\r') >= 0 || value.indexOf('\n') >= 0) {
-            throw new IOException("Invalid HTTP header");
-          }
-          if (!name.equalsIgnoreCase("Host") && !name.equalsIgnoreCase("Content-Length")
-              && !name.equalsIgnoreCase("Connection")) connection.setRequestProperty(name, value);
-        }
-        if (body.length > 0 || method.equals("POST") || method.equals("PUT") || method.equals("PATCH")) {
-          if (method.equals("GET") || method.equals("HEAD")) {
-            throw new IOException("HTTP method does not permit a request body");
-          }
-          connection.setDoOutput(true);
-          connection.setFixedLengthStreamingMode(body.length);
-          try (OutputStream output = connection.getOutputStream()) { output.write(body); }
-        }
-        int status = connection.getResponseCode();
-        if (status == 301 || status == 302 || status == 303 || status == 307 || status == 308) {
-          String location = connection.getHeaderField("Location");
-          if (redirects == 3 || location == null) throw new IOException("Lobby redirect limit reached");
-          URL next = allowedLobbyUrl(new URL(url, location).toString());
-          connection.disconnect();
-          activeHttp.remove(connection);
-          connection = null;
-          url = next;
-          continue;
-        }
-        JSONObject responseHeaders = new JSONObject();
-        for (Map.Entry<String, List<String>> header : connection.getHeaderFields().entrySet()) {
-          if (header.getKey() != null && header.getValue() != null) {
-            responseHeaders.put(header.getKey(), String.join(", ", header.getValue()));
-          }
-        }
-        InputStream response = status >= 400 ? connection.getErrorStream() : connection.getInputStream();
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        if (response != null) {
-          try (InputStream input = response) {
-            byte[] buffer = new byte[16 * 1024];
-            int count;
-            while ((count = input.read(buffer)) != -1) {
-              if (bytes.size() + count > MAX_HTTP_BYTES) throw new IOException("Lobby response exceeds size limit");
-              bytes.write(buffer, 0, count);
-            }
-          }
-        }
-        Log.i(TAG, "Lobby HTTP " + id + " " + method + " " + url.getPath() + " -> " + status
-            + ", bytes=" + bytes.size());
-        httpCallback(id, status, responseHeaders.toString(),
-            Base64.encodeToString(bytes.toByteArray(), Base64.NO_WRAP), "");
-        return;
-      }
-    } catch (IOException | JSONException | RuntimeException error) {
-      Log.i(TAG, "Lobby HTTP " + id + " failed: " + error.getClass().getSimpleName());
-      httpCallback(id, 0, "{}", "", error.getClass().getSimpleName() + ": " + error.getMessage());
-    } finally {
-      if (connection != null) {
-        connection.disconnect();
-        activeHttp.remove(connection);
-      }
-    }
+      ConnectivityManager manager = getSystemService(ConnectivityManager.class);
+      NetworkCapabilities caps = manager == null ? null : manager.getNetworkCapabilities(manager.getActiveNetwork());
+      if (caps == null) return "none";
+      String transport = caps.hasTransport(NetworkCapabilities.TRANSPORT_VPN) ? "vpn"
+          : caps.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) ? "cellular"
+          : caps.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) ? "wifi" : "other";
+      return transport + (caps.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED) ? "-validated" : "-unvalidated");
+    } catch (RuntimeException unavailable) { return "unavailable"; }
   }
 
-  private void httpCallback(int id, int status, String headers, String bodyBase64, String error) {
+  private void httpCallback(int id, int status, String headers, String bodyBase64, String error, BooleanSupplier claim) {
     if (destroyed.get()) return;
     runOnUiThread(
         () -> {
-          if (destroyed.get() || webView == null) return;
+          if (destroyed.get() || webView == null || !claim.getAsBoolean()) return;
           webView.evaluateJavascript(
               "window.PcLobbyHttp&&window.PcLobbyHttp.receive(" + id + "," + status + ","
                   + JSONObject.quote(headers) + "," + JSONObject.quote(bodyBase64) + ","

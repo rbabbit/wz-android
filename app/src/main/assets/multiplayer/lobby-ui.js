@@ -5,9 +5,43 @@
   const expectedNetcode = [16384, 104];
   const filterKey = 'mp.lobby.hide-empty.v1';
   let loading = false, listedGames = [], listingsAvailable = false, hideEmpty = false, listError = '';
+  let lastAttempt = 0, lastSuccess = 0;
+  let resumePending = false, recoveryUsed = false, resumeTimer = null;
+  const active = () => Boolean(globalThis.PcMultiplayerSession?.active);
   try { hideEmpty = globalThis.localStorage?.getItem(filterKey) === '1'; } catch {}
-  const snapshot=()=>({loading,hideEmpty,games:listedGames,error:listError});
-  const publish=()=>globalThis.PcNativeLobby?.publish?.(snapshot());
+  const snapshot=()=>({loading,hideEmpty,games:listedGames,error:listError,stale:Boolean(listError&&listingsAvailable)});
+  const publish=()=>{if(!active())globalThis.PcNativeLobby?.publish?.(snapshot());};
+
+  function directoryError(error) {
+    const detail=String(error?.message||'');
+    if (/UnknownHostException|Unable to resolve host|no address associated|DNS/i.test(detail))
+      return 'Public rooms unavailable: DNS lookup failed. Check your connection, then Refresh.';
+    if (/timed?\s*out|timeout/i.test(detail)) return 'Public rooms timed out. Refresh to try again.';
+    if (/offline|network is unreachable|ENETUNREACH|not connected/i.test(detail))
+      return 'Public rooms unavailable while offline. Check your connection, then Refresh.';
+    return 'Public rooms unavailable. Check your connection, then Refresh.';
+  }
+
+  const needsRefresh = () => !listingsAvailable || Boolean(listError) || Date.now()-lastSuccess>30000;
+  function scheduleResume() {
+    if(!resumePending || loading || resumeTimer!==null)return;
+    if(active()){resumePending=false;return;}
+    if(typeof document!=='undefined'&&document.hidden)return;
+    resumeTimer=setTimeout(()=>{
+      resumeTimer=null;
+      if(active()){resumePending=false;return;}
+      if(typeof document!=='undefined'&&document.hidden)return;
+      if(!needsRefresh()||recoveryUsed){resumePending=false;return;}
+      resumePending=false;recoveryUsed=true;
+      // Recovery belongs only to this idempotent directory GET. Signed joins
+      // and native authorization requests are never replayed by the bridge.
+      refreshPcLobby(true);
+    },Math.max(0,5000-(Date.now()-lastAttempt)));
+  }
+  function resume() {
+    if(active()||recoveryUsed||(!loading&&!needsRefresh()))return false;
+    resumePending=true;scheduleResume();return true;
+  }
 
   function playerCounts(value) {
     if (!value || !Number.isInteger(value.max) || value.max < 0 || value.max > 1024) return null;
@@ -121,6 +155,7 @@
   }
 
   function renderCurrentRooms() {
+    if(active())return;
     const rooms = document.querySelector('#rooms'), state = document.querySelector('#lobby-status');
     if (!rooms || !state) return;
     const visible = selectListings(listedGames, hideEmpty);
@@ -133,57 +168,62 @@
     publish();
   }
 
-  async function refreshPcLobby() {
-    if (loading) return;
+  async function refreshPcLobby(recovery = false) {
+    // The directory is never an authority over an already live room or match.
+    if (loading || active()) return false;
     const button = document.querySelector('#lobby');
     const state = document.querySelector('#lobby-status');
     const rooms = document.querySelector('#rooms');
     if (!button || !state || !rooms) return;
+    if(recovery!==true){recoveryUsed=false;resumePending=false;clearTimeout(resumeTimer);resumeTimer=null;}
     loading = true;
+    lastAttempt = Date.now();
     listError = '';
     publish();
     button.disabled = true;
     state.textContent = 'Loading…';
-    rooms.replaceChildren();
-    let timer;
+    if (!listingsAvailable) rooms.replaceChildren();
+    const controller=new AbortController();
+    const timer=setTimeout(()=>controller.abort(Error('Request timed out')),20000);
     try {
-      const response = await Promise.race([
-        fetch(endpoint, { headers: {
+      const response = await fetch(endpoint, { signal:controller.signal,headers: {
           Accept: 'application/jsonl',
           'User-Agent': 'Warzone2100/4.7.0 (+https://github.com/Warzone2100/warzone2100)',
           Origin: 'wz2100://wz2100.net',
           Referer: 'https://github.com/Warzone2100/warzone2100?wz_internal=list'
-        } }),
-        new Promise((_, reject) => { timer = setTimeout(() => reject(Error('Request timed out')), 20000); })
-      ]);
+        } });
       if (!response.ok) throw Error('HTTP ' + response.status);
       const result = parseListings(await response.text());
+      if(active())return false;
       globalThis.pcLobbyResponse = result;
       listedGames = result.games;
       listingsAvailable = true;
+      lastSuccess = Date.now();
+      resumePending=false;recoveryUsed=false;clearTimeout(resumeTimer);resumeTimer=null;
       renderCurrentRooms();
     } catch (error) {
-      listedGames = [];
-      listingsAvailable = false;
+      if(active())return false;
       state.textContent = 'PC lobby unavailable';
-      listError = 'Could not retrieve public rooms (' + error.message + '). Refresh to try again.';
-      const message = document.createElement('p');
-      message.className = 'lobby-empty';
-      message.textContent = 'Could not retrieve public rooms (' + error.message
-        + '). Use “Join by IP address” below for a direct connection.';
-      rooms.replaceChildren();
-      rooms.append(message);
+      listError = directoryError(error)+(listingsAvailable?' Showing the last room list.':'');
+      if (!listingsAvailable) {
+        const message = document.createElement('p');
+        message.className = 'lobby-empty';
+        message.textContent = listError;
+        rooms.replaceChildren();rooms.append(message);
+      }
       console.warn('PC lobby list unavailable:', error.message);
     } finally {
       clearTimeout(timer);
       loading = false;
-      button.disabled = false;
+      if(!active())button.disabled = false;
       publish();
+      scheduleResume();
     }
   }
 
   globalThis.refreshPcLobby = refreshPcLobby;
-  globalThis.PcLobbyUi = Object.freeze({ parseListings, selectListings, snapshot });
+  globalThis.PcLobbyUi = Object.freeze({ parseListings, selectListings, snapshot, resume,
+    requestState:()=>({resumePending,recoveryUsed,retryScheduled:resumeTimer!==null}) });
   if (typeof document !== 'undefined') {
     const wire = () => {
       const button = document.querySelector('#lobby'), filter = document.querySelector('#hide-empty'), rooms = document.querySelector('#rooms');
@@ -198,6 +238,8 @@
       }
       if (rooms && globalThis.ResizeObserver) new ResizeObserver(fitRows).observe(rooms);
       globalThis.addEventListener?.('resize', fitRows);
+      globalThis.addEventListener?.('online', resume);
+      document.addEventListener?.('visibilitychange', () => { if (!document.hidden) resume(); });
       document.fonts?.ready?.then(fitRows);
       if (button) { button.onclick = refreshPcLobby; refreshPcLobby(); }
     };

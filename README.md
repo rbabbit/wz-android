@@ -1,5 +1,21 @@
 # Warzone Towers
 
+**Current test revision:0.92 (version code92).** Clean Players panels across Campaign, Towers, FFA and multiplayer, with native participant/spectator identities and permission-guarded observer details. The accepted cellular lobby fix and normal updater/signing path are retained. This branch is a test backup, not a stable/main promotion.
+
+[APK and complete source backup](https://github.com/rbabbit/wz-android/releases/tag/v0.92-test) · [Test notes and hashes](archive/v0.92-test/) · [Sealed runtime and62 captures](test-release-092/) · [Approved mockups](docs/mockups/players-clean-v2/)
+
+The Git checkout already contains the restored current source. Run `git lfs pull` after cloning to obtain the two original LFS payloads. Build with `tools/build-normal-apk.py` and your existing private signing key, JDK and Android SDK. The complete release ZIP preserves its historical root and restoration profiles; follow `test-release-092/README.md` after extracting that ZIP.
+
+The exact delivery APK was checked in the owned emulator using prepared saves and private native matches. Terrain remained black in that emulator; foreground models, navigation and Players pixels were inspected. Review the audit for native production/selection/input checks, seeded fixtures and limits. No new physical-phone cellular test is claimed.
+
+GitHub backup publication was explicitly authorized on2026-11-17 after the local test delivery. Historical sealed records retain their original publication:false statements. No VPS/update-feed, Google Play or stable release promotion is part of this backup; no new AAB was built.
+
+**Development revision: 0.86 (86)** adds live Multiplayer background protection,
+concise directory retry errors, manual signed-APK updates from wz2100.uk, and
+first-factory Manufacturing ALL beside the existing cycle control across all
+four modes. v0.85 APK and complete source are preserved. Exact headless Android
+runtime evidence and limits are in [0.86 notes](docs/releases/0.86.md).
+
 **Development revision: 0.85 (85)** applies the five requested menu corrections:
 the shorter Home tagline, removal of the Guide Mode control and large Campaign
 heading, native Lobby wording with Refresh at the top right, and a fullscreen

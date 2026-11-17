@@ -1,0 +1,14 @@
+--- a/src/quickjs_backend.cpp
++++ b/src/quickjs_backend.cpp
+@@ -4393,9 +4393,11 @@
+     mpMobileCombatIntent();
+     if(GetGameMode()==GS_NORMAL&&gameInitialised){intRemoveReticule();mpMobileCamera();}
+ }
++#include "mobile-players-v91.h"
+ void mpMobileFrame()
+ {
+     const bool world=GetGameMode()==GS_NORMAL&&gameInitialised&&!mpMobileLoading&&mpMobileViewReady;
++    mobilePlayersFrameV91(world);
+     const bool room=GetGameMode()==GS_TITLE_SCREEN&&mpMobileLobby&&mpMobileLobbyRendered&&!mpMobileLoading&&selectedPlayer<NetPlay.players.size()&&NetPlay.players[selectedPlayer].allocated;
+     mpMobileRoomFrame(room);
+     const bool nativeMenu=InGameOpUp||isInGamePopupUp||bLoadSaveUp||intMode!=INT_NORMAL;

@@ -1,0 +1,43 @@
+{
+  "recordKind": "Read-only source scope clarification; not a new runtime test",
+  "sourcePath": "C:\\timerApp\\_official_warzone2100_src\\src\\multiplay.cpp",
+  "sourceSHA256": "cddff82021d7cc2d87b62cc7a8639142d45b5df8ddea082627fc7b491deef6f6",
+  "sites": [
+    {
+      "path": "C:\\timerApp\\_official_warzone2100_src\\src\\multiplay.cpp",
+      "startLine": 555,
+      "endLine": 562,
+      "text": "\t\t\tingame.TimeEveryoneIsInGame = gameTime;\n\t\t\tdebug(LOG_NET, \"I have entered the game @ %u\", gameTime);\n\t\t\tif (!NetPlay.isHost)\n\t\t\t{\n\t\t\t\tdebug(LOG_NET, \"=== Sending hash to host ===\");\n\t\t\t\tsendDataCheck();\n\t\t\t}\n\t\t\tingame.lastPlayerDataCheck2 = std::chrono::steady_clock::now();"
+    },
+    {
+      "path": "C:\\timerApp\\_official_warzone2100_src\\src\\multiplay.cpp",
+      "startLine": 1088,
+      "endLine": 1096,
+      "text": "\t\t}\n\t\t// Send a request to all active players\n\t\tconst auto maxWaitSeconds = maxDataCheck2WaitSeconds();\n\t\tfor (uint32_t player = 0; player < std::min<uint32_t>(game.maxPlayers, MAX_PLAYERS); ++player)\n\t\t{\n\t\t\tif (player == NetPlay.hostPlayer || !isHumanPlayer(player) || NetPlay.players[player].isSpectator || !NetPlay.players[player].heartbeat)\n\t\t\t{\n\t\t\t\tcontinue;\n\t\t\t}"
+    },
+    {
+      "path": "C:\\timerApp\\_official_warzone2100_src\\src\\multiplay.cpp",
+      "startLine": 1167,
+      "endLine": 1175,
+      "text": "\tif (!NetPlay.isHost) // the host can send NET_DATA_CHECK2 messages to clients to request a check\n\t{\n\t\tASSERT_OR_RETURN(false, NetPlay.hostPlayer == queue.index, \"Non-host player (%u) is sending NET_DATA_CHECK2 to us??\", queue.index);\n\t\tauto r = NETbeginDecode(queue, NET_DATA_CHECK2);\n\t\tNETuint32_t(r, recvSelectedPlayer);\n\t\tNETend(r);\n\t\tASSERT_OR_RETURN(false, NetPlay.hostPlayer == recvSelectedPlayer, \"Non-host player (selectedPlayer: %u) is sending NET_DATA_CHECK2 to us??\", recvSelectedPlayer);\n\t\tsendDataCheck2();\n\t\treturn true;"
+    }
+  ],
+  "nativeRule": "Each non-host sends initial NET_DATA_CHECK at game entry. Host stage2 loop is restricted to active playable range and skips isSpectator; high-slot spectator13 receives no NET_DATA_CHECK2 request. Client stage2 is a response to host request.",
+  "spectator13Stage2Expected": false,
+  "initialDataCheckStillRequired": true,
+  "currentRecordedReceipt": {
+    "path": "C:\\timerApp\\players-polish-092-20261117\\61-spectator-data-check.json",
+    "sha256": "3e9d9405dfcded8e8d891abf3f281bba8f17d839671e09b861ef87de2e9e78a3",
+    "initialDataCheckReceived": true,
+    "stage2Received": false,
+    "failureMarkers": []
+  },
+  "prior091Receipt": {
+    "sourceLogPath": "C:\\timerApp\\players-091-20261116\\private-host-spectator-final\\configdir\\logs\\WZlog-1116_231353.txt",
+    "sanitizedSingleReceipt": "net     |23:16:39: [recvDataCheck:671] ** Received NET_DATA_CHECK from player 13",
+    "rawLogExported": false
+  },
+  "interpretation": "The helper assumption requiring both stage1 and2 for spectator13 was incorrect. Stage2 absence alone is not a native rejection, app defect or packaging-gate failure. This record does not create or infer a fresh gameplay/physical-screen pass.",
+  "deviceActions": false,
+  "sourceChanges": false
+}

@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "checks": [
+    "Local/remote Python syntax and APK-before-verification-before-feed order",
+    "Exact normal identity, signer, runtime modes and immutable evidence proof gates",
+    "Canonical full HTTP200 stream verifies every byte/hash and rejects truncated/partial/changed responses",
+    "Actual remote protocol completes in an isolated local temporary filesystem",
+    "Actual remote protocol restores private backup after failed APK verification acknowledgement",
+    "Actual remote protocol restores APK and feed after failed feed verification acknowledgement",
+    "Verifier disconnect/EOF restores the old APK without publishing the feed",
+    "Unknown concurrent canonical APK bytes are preserved and rollback is refused before touching either file",
+    "Unknown concurrent canonical feed bytes are preserved and rollback is refused before touching either file",
+    "Registered SIGHUP callback dispatch enters rollback and restores the old artifacts"
+  ],
+  "SSHExecuted": false,
+  "networkExecuted": false,
+  "realDeploymentExecuted": false,
+  "scope": "Host-only AST, guard, HTTP-response mocks and actual transaction code against rewritten temporary fixture paths; Linux flock and SIGHUP dispatch mocked."
+}

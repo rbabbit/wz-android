@@ -1,0 +1,48 @@
+{
+  "passed": true,
+  "nodeVersion": "v24.22.1",
+  "checks": 15,
+  "currentResult": {
+    "sourceRoot": "C:\\timerApp\\candidates\\mobile-network-test-20261117",
+    "passed": true,
+    "checks": 15,
+    "failures": []
+  },
+  "original091RegressionReproduction": {
+    "checks": 15,
+    "failures": 12,
+    "failedContracts": [
+      "fetch AbortSignal cancels native transport and ignores late callback",
+      "already-aborted Request never dispatches",
+      "abort synchronous with bridge dispatch is cleaned up",
+      "XHR before-open handlers/listeners abort once; reuse rejects old reply",
+      "XHR timeout really cancels and cannot emit a later load",
+      "XHR completion clears timeout; abort at headers suppresses load",
+      "worker requests have separate native IDs and cancellation owners",
+      "pagehide releases parent and worker transports without replay",
+      "listing20s deadline cancels native request; late success cannot replace UI",
+      "resume during load coalesces once; failed recovery never loops",
+      "resume inside throttle is retained and a fresh result consumes intent",
+      "cached rooms survive errors; active game blocks delayed directory updates"
+    ]
+  },
+  "sourceFiles": [
+    {
+      "path": "app/src/main/assets/multiplayer/lobby-http.js",
+      "sha256": "9d2a8aff2e8b9fcdc596405844db64a3f3bd2aabdeeffb6071336b8ddbfdc05b"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/lobby-ui.js",
+      "sha256": "b7b57f3bb29f3c90d81132000250cb6bd9becdfcbdbc5290f6c39c95793b5786"
+    },
+    {
+      "path": "tools/check-lobby-network.cjs",
+      "sha256": "249ec4fec0d020acb0b26dd61ad6665a6647be5cbb6c6d99c4304263f53052b9"
+    }
+  ],
+  "scope": "In-memory browser/API/bridge contract fixtures only; no Android/phone/mobile-data success claim",
+  "runtimeVerified": false,
+  "nativeRequestSignatureUnchanged": true,
+  "nativeCancelContract": "AndroidLobbyHttp.cancel(int id), same main-allocated numeric ID as request; callback PcLobbyHttp.receive unchanged",
+  "retryPolicy": "One coalesced GET listing recovery per failed/manual attempt episode; success or explicit manual refresh resets budget; no bridge or signed POST retries"
+}

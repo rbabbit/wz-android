@@ -1,0 +1,534 @@
+{
+  "stage": "background",
+  "tag": "candidate-game",
+  "mode": "home",
+  "before": {
+    "pid": "4774",
+    "phase": "game",
+    "active": true,
+    "hidden": false,
+    "native": {
+      "cameraSafe": true,
+      "canIssueOrders": true,
+      "combatLock": {
+        "activation": "mp-combat-1794790368526-8",
+        "combatIds": [],
+        "enabled": false,
+        "reason": "off",
+        "requestNonce": "mp-combat-1794790368526-8",
+        "requestedSuspended": false,
+        "revision": 7,
+        "selectedIds": [],
+        "suspended": false
+      },
+      "gameTime": 79602,
+      "lobbyReady": false,
+      "nativeMenuOpen": false,
+      "networkName": "NoobCrusher1(m)",
+      "phase": "game",
+      "player": 0,
+      "playerName": "NoobCrusher1(m)",
+      "power": 2808,
+      "protocolMajor": 16384,
+      "protocolMinor": 104,
+      "queuedPower": 0,
+      "radar": {
+        "bottom": 533,
+        "left": 954,
+        "right": 1227,
+        "top": 260,
+        "visible": true
+      },
+      "realPlayer": 0,
+      "rendered": true,
+      "roomGeneration": "",
+      "spectator": false,
+      "uiStatus": {
+        "connectionText": "",
+        "connections": [],
+        "kind": "normal",
+        "timerText": ""
+      },
+      "view": {
+        "camera": {
+          "distance": 2600,
+          "limits": {
+            "distanceMax": 5000,
+            "distanceMin": 0,
+            "pitchMax": 65353,
+            "pitchMin": 49516,
+            "yawPeriod": 65536
+          },
+          "pitch": 58254,
+          "requestNonce": "",
+          "x": 10624,
+          "y": 11392,
+          "yaw": 0
+        },
+        "capturedAt": 163636,
+        "frame": 4790,
+        "height": 516,
+        "left": 0,
+        "matrix": [
+          1.7509092092514038,
+          0,
+          0,
+          0,
+          0,
+          2.9692273139953613,
+          -0.6979635953903198,
+          -0.6878013014793396,
+          0,
+          2.8489158153533936,
+          0.8317624926567078,
+          0.8196520805358887,
+          -18601.658203125,
+          31338.431640625,
+          11867.7548828125,
+          12350.1572265625
+        ],
+        "top": 0,
+        "width": 1210
+      },
+      "worldReady": true,
+      "worldSafe": true
+    },
+    "room": null,
+    "raf": 8105,
+    "driver": {
+      "background": false,
+      "pending": 3,
+      "pulses": 652,
+      "delivered": 21084,
+      "lastFrame": 164575.175,
+      "disposed": false
+    },
+    "events": [
+      {
+        "at": 1794790366908,
+        "type": "native-message",
+        "detail": "net     |00:52:46: [gameInit:599] Player count: 2"
+      },
+      {
+        "at": 1794790367405,
+        "type": "loading",
+        "detail": false
+      },
+      {
+        "at": 1794790367405,
+        "type": "phase",
+        "detail": "connecting"
+      },
+      {
+        "at": 1794790367415,
+        "type": "native-message",
+        "detail": "info    |00:52:47: [NETreplaySaveStart:199] Started writing replay file \"replay/multiplay/20261116_005247_multiplay_p0.wzrp\"."
+      },
+      {
+        "at": 1794790367415,
+        "type": "loading",
+        "detail": false
+      },
+      {
+        "at": 1794790367436,
+        "type": "native-message",
+        "detail": "net     |00:52:47: [NETprocessSystemMessage:2651] Receiving MSG_PLAYER_INFO for player 0 (human)"
+      },
+      {
+        "at": 1794790368025,
+        "type": "phase",
+        "detail": "game"
+      },
+      {
+        "at": 1794790368602,
+        "type": "native-message",
+        "detail": "net     |00:52:48: [multiPlayerLoop:556] I have entered the game @ 2"
+      },
+      {
+        "at": 1794790368602,
+        "type": "native-message",
+        "detail": "net     |00:52:48: [multiPlayerLoop:559] === Sending hash to host ==="
+      },
+      {
+        "at": 1794790368602,
+        "type": "native-message",
+        "detail": "net     |00:52:48: [sendDataCheck:636] sent hash to host"
+      }
+    ],
+    "errors": [
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (6912,9472), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (6144,9728), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (7936,9216), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (8448,8960), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (8320,9216), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (10496,7808), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (3712,4480), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (3072,4992), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (1280,3712), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (1280,3456), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (1152,2944), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (5504,10240), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (4864,9984), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (5376,7936), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (1024,7808), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (5632,512), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (11776,2432), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (11392,3328), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (6784,10112), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (10752,8704), size (1,1) (**Further warnings of this type are suppressed.)"
+    ]
+  },
+  "background": {
+    "pid": "4774",
+    "phase": "game",
+    "active": true,
+    "hidden": false,
+    "native": {
+      "cameraSafe": true,
+      "canIssueOrders": true,
+      "combatLock": {
+        "activation": "mp-combat-1794790451434-10",
+        "combatIds": [],
+        "enabled": false,
+        "reason": "off",
+        "requestNonce": "mp-combat-1794790451434-10",
+        "requestedSuspended": false,
+        "revision": 9,
+        "selectedIds": [],
+        "suspended": false
+      },
+      "gameTime": 89702,
+      "lobbyReady": false,
+      "nativeMenuOpen": false,
+      "networkName": "NoobCrusher1(m)",
+      "phase": "game",
+      "player": 0,
+      "playerName": "NoobCrusher1(m)",
+      "power": 2848,
+      "protocolMajor": 16384,
+      "protocolMinor": 104,
+      "queuedPower": 0,
+      "radar": {
+        "bottom": 533,
+        "left": 954,
+        "right": 1227,
+        "top": 260,
+        "visible": true
+      },
+      "realPlayer": 0,
+      "rendered": true,
+      "roomGeneration": "",
+      "spectator": false,
+      "uiStatus": {
+        "connectionText": "",
+        "connections": [],
+        "kind": "normal",
+        "timerText": ""
+      },
+      "view": {
+        "camera": {
+          "distance": 2600,
+          "limits": {
+            "distanceMax": 5000,
+            "distanceMin": 0,
+            "pitchMax": 65353,
+            "pitchMin": 49516,
+            "yawPeriod": 65536
+          },
+          "pitch": 58254,
+          "requestNonce": "",
+          "x": 10624,
+          "y": 11392,
+          "yaw": 0
+        },
+        "capturedAt": 173750,
+        "frame": 5080,
+        "height": 516,
+        "left": 0,
+        "matrix": [
+          1.7509092092514038,
+          0,
+          0,
+          0,
+          0,
+          2.9692273139953613,
+          -0.6979635953903198,
+          -0.6878013014793396,
+          0,
+          2.8489158153533936,
+          0.8317624926567078,
+          0.8196520805358887,
+          -18601.658203125,
+          31338.431640625,
+          11867.7548828125,
+          12350.1572265625
+        ],
+        "top": 0,
+        "width": 1210
+      },
+      "worldReady": true,
+      "worldSafe": true
+    },
+    "room": null,
+    "raf": 8395,
+    "driver": {
+      "background": true,
+      "pending": 3,
+      "pulses": 886,
+      "delivered": 21954,
+      "lastFrame": 174715.80500000005,
+      "disposed": false
+    },
+    "events": [
+      {
+        "at": 1794790367405,
+        "type": "loading",
+        "detail": false
+      },
+      {
+        "at": 1794790367405,
+        "type": "phase",
+        "detail": "connecting"
+      },
+      {
+        "at": 1794790367415,
+        "type": "native-message",
+        "detail": "info    |00:52:47: [NETreplaySaveStart:199] Started writing replay file \"replay/multiplay/20261116_005247_multiplay_p0.wzrp\"."
+      },
+      {
+        "at": 1794790367415,
+        "type": "loading",
+        "detail": false
+      },
+      {
+        "at": 1794790367436,
+        "type": "native-message",
+        "detail": "net     |00:52:47: [NETprocessSystemMessage:2651] Receiving MSG_PLAYER_INFO for player 0 (human)"
+      },
+      {
+        "at": 1794790368025,
+        "type": "phase",
+        "detail": "game"
+      },
+      {
+        "at": 1794790368602,
+        "type": "native-message",
+        "detail": "net     |00:52:48: [multiPlayerLoop:556] I have entered the game @ 2"
+      },
+      {
+        "at": 1794790368602,
+        "type": "native-message",
+        "detail": "net     |00:52:48: [multiPlayerLoop:559] === Sending hash to host ==="
+      },
+      {
+        "at": 1794790368602,
+        "type": "native-message",
+        "detail": "net     |00:52:48: [sendDataCheck:636] sent hash to host"
+      },
+      {
+        "at": 1794790451254,
+        "type": "background",
+        "detail": true
+      }
+    ],
+    "errors": [
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (6912,9472), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (6144,9728), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (7936,9216), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (8448,8960), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (8320,9216), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (10496,7808), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (3712,4480), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (3072,4992), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (1280,3712), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (1280,3456), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (1152,2944), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (5504,10240), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (4864,9984), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (5376,7936), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (1024,7808), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (5632,512), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (11776,2432), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (11392,3328), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (6784,10112), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (10752,8704), size (1,1) (**Further warnings of this type are suppressed.)"
+    ]
+  },
+  "after": {
+    "pid": "4774",
+    "phase": "game",
+    "active": true,
+    "hidden": false,
+    "native": {
+      "cameraSafe": true,
+      "canIssueOrders": true,
+      "combatLock": {
+        "activation": "mp-combat-1794790451434-10",
+        "combatIds": [],
+        "enabled": false,
+        "reason": "off",
+        "requestNonce": "mp-combat-1794790451434-10",
+        "requestedSuspended": false,
+        "revision": 9,
+        "selectedIds": [],
+        "suspended": false
+      },
+      "gameTime": 93802,
+      "lobbyReady": false,
+      "nativeMenuOpen": false,
+      "networkName": "NoobCrusher1(m)",
+      "phase": "game",
+      "player": 0,
+      "playerName": "NoobCrusher1(m)",
+      "power": 2863,
+      "protocolMajor": 16384,
+      "protocolMinor": 104,
+      "queuedPower": 0,
+      "radar": {
+        "bottom": 533,
+        "left": 954,
+        "right": 1227,
+        "top": 260,
+        "visible": true
+      },
+      "realPlayer": 0,
+      "rendered": true,
+      "roomGeneration": "",
+      "spectator": false,
+      "uiStatus": {
+        "connectionText": "",
+        "connections": [],
+        "kind": "normal",
+        "timerText": ""
+      },
+      "view": {
+        "camera": {
+          "distance": 2600,
+          "limits": {
+            "distanceMax": 5000,
+            "distanceMin": 0,
+            "pitchMax": 65353,
+            "pitchMin": 49516,
+            "yawPeriod": 65536
+          },
+          "pitch": 58254,
+          "requestNonce": "",
+          "x": 10624,
+          "y": 11392,
+          "yaw": 0
+        },
+        "capturedAt": 177933,
+        "frame": 5189,
+        "height": 516,
+        "left": 0,
+        "matrix": [
+          1.7509092092514038,
+          0,
+          0,
+          0,
+          0,
+          2.9692273139953613,
+          -0.6979635953903198,
+          -0.6878013014793396,
+          0,
+          2.8489158153533936,
+          0.8317624926567078,
+          0.8196520805358887,
+          -18601.658203125,
+          31338.431640625,
+          11867.7548828125,
+          12350.1572265625
+        ],
+        "top": 0,
+        "width": 1210
+      },
+      "worldReady": true,
+      "worldSafe": true
+    },
+    "room": null,
+    "raf": 8504,
+    "driver": {
+      "background": false,
+      "pending": 3,
+      "pulses": 990,
+      "delivered": 22281,
+      "lastFrame": 178898.875,
+      "disposed": false
+    },
+    "events": [
+      {
+        "at": 1794790367405,
+        "type": "phase",
+        "detail": "connecting"
+      },
+      {
+        "at": 1794790367415,
+        "type": "native-message",
+        "detail": "info    |00:52:47: [NETreplaySaveStart:199] Started writing replay file \"replay/multiplay/20261116_005247_multiplay_p0.wzrp\"."
+      },
+      {
+        "at": 1794790367415,
+        "type": "loading",
+        "detail": false
+      },
+      {
+        "at": 1794790367436,
+        "type": "native-message",
+        "detail": "net     |00:52:47: [NETprocessSystemMessage:2651] Receiving MSG_PLAYER_INFO for player 0 (human)"
+      },
+      {
+        "at": 1794790368025,
+        "type": "phase",
+        "detail": "game"
+      },
+      {
+        "at": 1794790368602,
+        "type": "native-message",
+        "detail": "net     |00:52:48: [multiPlayerLoop:556] I have entered the game @ 2"
+      },
+      {
+        "at": 1794790368602,
+        "type": "native-message",
+        "detail": "net     |00:52:48: [multiPlayerLoop:559] === Sending hash to host ==="
+      },
+      {
+        "at": 1794790368602,
+        "type": "native-message",
+        "detail": "net     |00:52:48: [sendDataCheck:636] sent hash to host"
+      },
+      {
+        "at": 1794790451254,
+        "type": "background",
+        "detail": true
+      },
+      {
+        "at": 1794790465483,
+        "type": "background",
+        "detail": false
+      }
+    ],
+    "errors": [
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (6912,9472), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (6144,9728), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (7936,9216), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (8448,8960), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (8320,9216), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (10496,7808), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (3712,4480), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (3072,4992), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (1280,3712), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (1280,3456), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (1152,2944), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (5504,10240), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (4864,9984), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (5376,7936), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (1024,7808), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (5632,512), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (11776,2432), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (11392,3328), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (6784,10112), size (1,1) (**Further warnings of this type are suppressed.)",
+      "warning |00:52:42: [buildFeature:255] Feature not aligned. position (10752,8704), size (1,1) (**Further warnings of this type are suppressed.)"
+    ]
+  },
+  "rafAdvance": 290
+}

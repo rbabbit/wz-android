@@ -1,0 +1,34 @@
+[
+  {
+    "cycle": 1,
+    "nativeIMEOpenAssertionPassed": true,
+    "nativeIMEBackAssertionPassed": true,
+    "cancelledDialogHidden": true,
+    "screenshots": [
+      "103-final-mp-ime-1-open.png",
+      "104-final-mp-ime-1-back.png"
+    ],
+    "observerCorrection": "First script incorrectly waited for the retained hidden input to be removed; actual modal was hidden correctly."
+  },
+  {
+    "cycle": 2,
+    "opened": {
+      "mInputShown": true,
+      "matchingLines": [
+        "mInputShown=true"
+      ]
+    },
+    "afterAndroidBack": {
+      "mInputShown": false,
+      "matchingLines": [
+        "mInputShown=false"
+      ]
+    },
+    "cancelWithoutNameChange": true,
+    "modalHidden": true,
+    "viewportRestored": [
+      1164,
+      554
+    ]
+  }
+]

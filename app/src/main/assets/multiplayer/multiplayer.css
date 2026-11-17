@@ -41,5 +41,5 @@ body.mp-shell #warzone-command-strip #blocknight-combat-hud{inset:auto}
 @media(max-width:700px){.lobby-name-control{width:184px}.lobby-name-control #player-name-suffix{font-size:20px}}
 @media(max-width:460px){.lobby-name-control{width:168px}}
 /* Observer camera remains live; shared owner panels must never reappear on a timer. */
-body.mp-shell.mp-observer #lab-ops,body.mp-shell.mp-observer #unit-controls,body.mp-shell.mp-observer #wt-field-centre,body.mp-shell.mp-observer #wt-build-sidebar,body.mp-shell.mp-observer #wt-command-pages,body.mp-shell.mp-observer .wt-status-sidebar,body.mp-shell.mp-observer #mp-power-hud{display:none!important}
+body.mp-shell.mp-observer #lab-ops,body.mp-shell.mp-observer #unit-controls,body.mp-shell.mp-observer #wt-field-centre,body.mp-shell.mp-observer #wt-build-sidebar,body.mp-shell.mp-observer #wt-command-pages:not([data-page="players"]),body.mp-shell.mp-observer .wt-status-sidebar,body.mp-shell.mp-observer #mp-power-hud{display:none!important}
 body.mp-native-landing #setup{display:none!important}

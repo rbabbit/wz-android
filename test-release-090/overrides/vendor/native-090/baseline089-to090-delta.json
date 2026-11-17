@@ -1,0 +1,137 @@
+{
+  "version": "0.90",
+  "baseline": "0.89",
+  "recordedUTC": "2026-11-16T20:45:56.779596+00:00",
+  "baselineAPK_SHA256": "dc1a273437f8393e66ebfbdb8886b06a4ddab82dec419553165bb07611efdf38",
+  "completeBaselineSourceZIP_SHA256": "c3b1154efa2b2b6a65a13c484dd1da19d403027bfe4da2c0264fae60232b3f30",
+  "nativeSourceChanges": [
+    {
+      "family": "offline",
+      "path": "src/display3d.cpp",
+      "beforeSHA256": "2fbb13666fed87b55152be8b5f6f70a13c2ec2e5ae0e51f8e9808ce9e45b2d44",
+      "afterSHA256": "b6d5044cd1bbd3497766ea7aa1afd544182242cd77a3b1a64e86eccd0feb82dd"
+    },
+    {
+      "family": "offline",
+      "path": "src/hci.cpp",
+      "beforeSHA256": "51ff92855e417554a8e1b5785279a9cac77214f141f0fe90655291910dda9e64",
+      "afterSHA256": "75e4dbe058bcd99009ff4a7e45a3247fc04d4c9169faae5e52f6d4a3764bc105"
+    },
+    {
+      "family": "multiplayer",
+      "path": "src/display3d.cpp",
+      "beforeSHA256": "65adaf80b7bf0adffdef769612fac808c21bb0cef057b3934eca61110b8a6d38",
+      "afterSHA256": "f58d042b143d85e7d5a91ac65ed8fb862e82f8410e211f5225c491343e10d8cf"
+    },
+    {
+      "family": "multiplayer",
+      "path": "src/quickjs_backend.cpp",
+      "beforeSHA256": "4224840b9a7fda8f333e1a009f82bcf455509d519be75312b36c13786fb4611a",
+      "afterSHA256": "957d63a68afae9c6fe297f9419bc813388272f5706a485e2d8103d82ad3bf5f2"
+    }
+  ],
+  "sharedPolicyHeader": {
+    "path": "vendor/native-090/source/common/mobile-combat-latch-v90.h",
+    "sha256": "8484adb052e916ffa4c53f87c962eac21b71fc5988c200e03dec5788cc794303"
+  },
+  "generatedNativeAssets": [
+    {
+      "path": "multiplayer/warzone2100.js",
+      "baseline089SHA256": "4cfbd94c7954deb61c84c49e43fcd8dcbd53268c445998d283a3e310f846c89b",
+      "test090SHA256": "c1d2dd319639041486717ec606cd1d05cbf79485d869aacd6329da9c337433ea",
+      "bytes": 726332
+    },
+    {
+      "path": "multiplayer/warzone2100.wasm",
+      "baseline089SHA256": "2f884ca84c3c29bdbeed8102d710c40e73b29320d1e99c1ff64d97269d252fbc",
+      "test090SHA256": "b0586374d4f8d1e017ee88a26bb062dbb7114e2b4517cd7e7f58cc9022344125",
+      "bytes": 13624352
+    },
+    {
+      "path": "warzone/warzone2100-campaign.js",
+      "baseline089SHA256": "d70a3c7495d32fb53fac1b90785d51188bb0e6027919ea1d8d9b485b7d71f408",
+      "test090SHA256": "ef69f6826f099dde9823532609da4bba6fbe2fe5959c094c1b69a88edc5b85fd",
+      "bytes": 795142
+    },
+    {
+      "path": "warzone/warzone2100-duel.js",
+      "baseline089SHA256": "dac4a4453bc36362543bc639f8aed1b31b9c8ef0f63c7b151fbeec4e85addf7c",
+      "test090SHA256": "a7c479363a594385d5ac5a77b5331e6d32f7bd0a7667f123cd09cfa0c89e4fde",
+      "bytes": 752917
+    },
+    {
+      "path": "warzone/warzone2100-ffa.js",
+      "baseline089SHA256": "0bd77ca6d8f1c4bef0dd4acbdcf2a9633ce579c5ce3929c3f63d811f2c16cbb0",
+      "test090SHA256": "28d776ac00994b0960af686be6450b06029d2571687d77ce42b4523968f76aa7",
+      "bytes": 804698
+    },
+    {
+      "path": "warzone/warzone2100-towers-052.js",
+      "baseline089SHA256": "99ea1dcfc0b39713c237c85e8bd6a9f46355fe40f4b2e5dd733a5fce4b1c57b3",
+      "test090SHA256": "cfc9d2d183fdfc7a8f6fe7ba82e984ea7bddd8d2c4a392d87639af1131750289",
+      "bytes": 794176
+    },
+    {
+      "path": "warzone/warzone2100-towers-052.wasm",
+      "baseline089SHA256": "e3cccd033a5874d0451aaa095cdef6c8146dcdb95ec1288f36d9482ab9b6b236",
+      "test090SHA256": "defca4e2532abce2832b22a74e0bcdf87451b4876a045bbe213d934b637a7577",
+      "bytes": 13541374
+    },
+    {
+      "path": "warzone/warzone2100.js",
+      "baseline089SHA256": "31cf341a79f14fb4d8cb2220871df3c3be6c1d618b977285026406d067b871d4",
+      "test090SHA256": "80f54324b5b8861c5e07c14becdd37eccccb502271cc37f622d6b214453ff92c",
+      "bytes": 794181
+    },
+    {
+      "path": "warzone/warzone2100.wasm",
+      "baseline089SHA256": "b1addc472eb09750e3c33dc3979af3c13e9266e439d894cead015616572e7caf",
+      "test090SHA256": "eefcf462ba169877d276cdb92773d8fa16fe8f9a6070222275166fa9ffa6a144",
+      "bytes": 13543534
+    }
+  ],
+  "frozenData": [
+    {
+      "path": "warzone/warzone2100.data",
+      "sha256": "a60f8401c98fe478bd6ed4914ff2a09ca96909e73f76cf9465a1ba3bcb08ce6a",
+      "bytes": 78365356
+    },
+    {
+      "path": "multiplayer/warzone2100.data",
+      "sha256": "9e89d11c8b67b5f68ddc0be43290233c28cd43b3d2a96fea1a7b4beaf83b8424",
+      "bytes": 64424618
+    },
+    {
+      "path": "warzone/warzone2100-campaign.data",
+      "sha256": "e46d5fd97d974316805847a2eb550951120282f81aecbafa9331081c91fcaa03",
+      "bytes": 79002086
+    },
+    {
+      "path": "warzone/warzone2100-ffa.data",
+      "sha256": "7a121336ab3830a585bb962ff2978019f23273f1075c0359fa78fb8da0b7ca98",
+      "bytes": 75103384
+    },
+    {
+      "path": "warzone/warzone2100-duel.data",
+      "sha256": "584a8be5958871b7d1f133bb4d3ef514737d8cf17b959be05f6659a828ceac47",
+      "bytes": 65093279
+    }
+  ],
+  "nativeCacheUnchanged": true,
+  "sourceHostChecksPassed": true,
+  "rawBuildProofSHA256": "22c393d1f688b02d70a245cad8bafe19bfa838bd3acc3e33026f2dd1520f4df3",
+  "integrationProofSHA256": "22424fee023ccbbd77eb86b9848f2b09412efdd81bea937ac93b2ab566f188e5",
+  "allSixLoaderProofSHA256": "ca340e2c85f8d36d3a10d8d2c160991221186e58e9220f98c51413b5fd2c3e67",
+  "runtimeChecked": false,
+  "scope": "Local test only; exact-APK runtime is required separately. No AAB/VPS/GitHub/Play work.",
+  "constructorCorrection": {
+    "nativeAPI": "separate safe one-shot visible constructor selection",
+    "previousRawPairsPreserved": "release-records/native-before-constructor-api",
+    "offlineHCIRecompiled": true,
+    "sharedAndTowersRelinked": true,
+    "multiplayerNativeUnchanged": true,
+    "pairedLoadersReverified": 6,
+    "actualAndroidRetestRequired": true
+  },
+  "constructorProofSHA256": "08bf199155c5fffdcade13813fcd74353b5ff72c4b6ff2e366c70bc841ca6398"
+}

@@ -89,6 +89,7 @@ public final class MainActivity extends Activity {
   private GraphicsSetupView graphicsSetup;
   private GuideView guideView;
   private HubView hubView;
+  private AppUpdateController appUpdates;
   private CampaignSetupView campaignSetup;
   private CampaignVideoStore campaignVideos;
   private SaveGameStore campaignSaves;
@@ -157,6 +158,7 @@ public final class MainActivity extends Activity {
     root.setBackgroundColor(TowersTheme.BACKGROUND);
     setContentView(root);
 
+    if (!BuildConfig.PLAY_STORE_BUILD) appUpdates = new AppUpdateController(this);
     createWebView();
     musicStore = new MusicPackStore(this);
     musicCached = musicStore.ready();
@@ -255,6 +257,11 @@ public final class MainActivity extends Activity {
               public void guide() { showGuide(); }
               @Override
               public void hub() { showHub(); }
+              @Override
+              public void updates() {
+                if (!BuildConfig.PLAY_STORE_BUILD && appUpdates != null
+                    && graphicsSetup != null && guideView == null && hubView == null) appUpdates.show();
+              }
               @Override
               public void campaignContinue() { openCampaignFromHome(true); }
               @Override
@@ -2467,6 +2474,7 @@ public final class MainActivity extends Activity {
 
   @Override
   protected void onDestroy() {
+    if (appUpdates != null) appUpdates.close();
     closeHub();
     closeGuide();
     cancelCampaignHomeCheck();

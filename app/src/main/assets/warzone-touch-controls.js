@@ -481,7 +481,6 @@
   function nativeUiClick(x, y) {
     // Native builder buttons interpret Ctrl as multi-select and do not open
     // their structure list. Queue placements need Ctrl; menu taps do not.
-    state.combatLock = false;
     state.autoFight = false;
     window.__warzoneCommands?.nativeBuildMenuTap?.(x,y);
     trackNativePanelTap(x, y);
@@ -628,6 +627,7 @@
   }
 
   function selectAllCombat() {
+    if (window.__warzoneDuelConfig?.mode !== 'duel') return toggleCombatLock(true);
     const selected = ctrlShortcut("a", "KeyA", 65);
     if (selected) state.selectAlls += 1;
     return selected;
@@ -641,6 +641,7 @@
 
   async function selectAllTrucks() {
     if (!canvas()) return false;
+    holdCombatSelection('constructors');
     releaseAll(true);
     const frames = () => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
     // SDL needs a held modifier key, not only KeyboardEvent.shiftKey on T.
@@ -656,13 +657,174 @@
     return true;
   }
 
+  // Selection is observed independently of the persistent ALL command intent.
+  // Two advancing native frames establish a current world after a session/load.
+  let combatSelectionWatch = null, allCombatSelected = false;
+  let combatWorld = null, combatPacket = null, combatIntent = null, combatActivation = '', combatOverride = '';
+  let combatIntentSerial = 0, combatOrderSerial = 0, combatInteractionUntil = 0, combatOffPending = false, combatError = '';
+  const combatPhysicalPointers = new Set();
+  const combatOffNonces = new Set();
+  function combatNow() { return typeof performance !== 'undefined' && typeof performance.now === 'function' ? performance.now() : Date.now(); }
+  function paintCombatMode() {
+    const doc = commandDocument();
+    for (const id of ['wt-all-combat', 'wt-campaign-all-combat', 'blocknight-select-all']) {
+      const button = doc.getElementById(id);
+      if (button) { button.dataset.combatEnabled = String(state.combatLock); button.classList.toggle('active', state.combatLock); button.setAttribute('aria-pressed', String(state.combatLock)); }
+    }
+  }
+  function combatSuspended() {
+    const commands = window.__warzoneCommands?.report?.() || {}, research = window.__blockNightResearch?.report?.() || {};
+    const doc = commandDocument(), input = doc.activeElement || document.activeElement;
+    const help = doc.getElementById('warzone-towers-help-overlay'), music = doc.getElementById('wt-map-music-menu');
+    return !state.battleActive || !state.hudVisible || !combatPacket?.playing || combatPacket?.worldSafe !== true
+      || document.hidden || Boolean(combatOverride) || combatPhysicalPointers.size > 0 || combatNow() < combatInteractionUntil
+      || pendingNativeInput() || state.pointers.size > 0 || state.mouseButton !== null || state.heldKeys.size > 0
+      || state.panRelease || Boolean(state.single?.panning) || state.multi !== null
+      || Boolean(commands.page || commands.buildOpen || commands.placement || commands.selectingTrucks || commands.nativeMenu
+        || commands.nativeClosing || commands.exitingBuild || commands.buildingOpening || commands.demolition)
+      || research.open || research.opening || window.__warzoneIntelligence?.isOpen?.()
+      || Boolean(help && !help.hidden || music && !music.hidden) || window.WarzoneSavedGames?.busy === true
+      || window.WarzoneSavedGames?.ready === false || Boolean(input && /^(INPUT|TEXTAREA|SELECT)$/.test(input.tagName || '') || input?.isContentEditable);
+  }
+  function bindCombatWorld(value, current) {
+    if (value?.schemaVersion !== 89 || !value.combatLock || typeof value.combatLock.context !== 'string') return;
+    const context = value.combatLock.context, session = window.__towersHtml?.session;
+    if (combatWorld && (combatWorld.module !== current || combatWorld.session !== session || combatWorld.context !== context)) {
+      state.combatLock = false; combatActivation = ''; combatOverride = ''; combatOffPending = false; combatOffNonces.clear(); combatIntent = null; ++combatOrderSerial;
+    }
+    combatWorld = {module:current, session, context};
+  }
+  function refreshCombatLock(value) {
+    if (window.__warzoneDuelConfig?.mode === 'duel') return state.combatLock;
+    const current = window.LaunchedModule || window.Module;
+    if (combatWorld && (combatWorld.module !== current || combatWorld.session !== window.__towersHtml?.session)) {
+      state.combatLock=false;combatActivation='';combatOverride='';combatOffPending=false;combatOffNonces.clear();combatIntent=null;combatWorld=null;++combatOrderSerial;
+    }
+    if (!value) { try { value = JSON.parse(current?.FS?.readFile('/tmp/warzone-combat-selection-v89.json', {encoding:'utf8'})); } catch (_) {} }
+    if (value) { combatPacket = value; bindCombatWorld(value, current); }
+    const context = combatWorld?.context;
+    if (!context || !current?.FS?.writeFile || !current?.FS?.rename || current.calledRun !== true) { paintCombatMode(); return false; }
+    const ack=combatPacket?.combatLock;
+    if(combatOffPending&&ack?.context===context&&ack.activation===combatActivation
+        &&(combatOffNonces.has(ack.deselectNonce)||combatOffNonces.has(ack.deselectAppliedNonce)))combatOffPending=false;
+    const suspended = Boolean(combatSuspended()), key = JSON.stringify([context, state.combatLock, suspended, combatActivation]);
+    if (!combatIntent || combatIntent.key !== key || combatOffPending && combatIntent.deselect !== true) {
+      const request = {nonce:'offline-combat-'+Date.now()+'-'+(++combatIntentSerial), enabled:state.combatLock,
+        suspended, activation:combatActivation, context, deselect:combatOffPending};
+      try {
+        current.FS.writeFile('/tmp/warzone-combat-lock-v90.json.tmp', JSON.stringify(request), {encoding:'utf8'});
+        current.FS.rename('/tmp/warzone-combat-lock-v90.json.tmp', '/tmp/warzone-combat-lock-v90.json');
+        combatIntent = {...request, key}; if(request.deselect)combatOffNonces.add(request.nonce); combatError = '';
+      } catch (error) { combatError = String(error.message || error); }
+    }
+    paintCombatMode(); return true;
+  }
+  function holdCombatSelection(reason = 'constructors') { combatOverride = String(reason); refreshCombatLock(); return true; }
+  function resumeCombatSelection(reason) { if (!reason || combatOverride === reason) combatOverride = ''; refreshCombatLock(); return !combatOverride; }
+  function resetCombatMode() { state.combatLock = false; combatOverride = ''; combatOffPending = false; combatOffNonces.clear(); combatIntent = null; ++combatOrderSerial; refreshCombatLock(); }
+  let constructorSelectionSerial = 0, combatFenceDisposed = false, pendingConstructorSelection = null;
+  function cancelConstructorSelection() {
+    const pending=pendingConstructorSelection;if(!pending)return;
+    pendingConstructorSelection=null;
+    try {
+      const fs=pending.module.FS,path='/tmp/warzone-constructor-selection-v90.json';
+      const current=JSON.parse(fs.readFile(path,{encoding:'utf8'}));
+      if(current.nonce!==pending.request.nonce||current.action!=='select-visible-trucks')return;
+      fs.writeFile(path+'.tmp',JSON.stringify({...pending.request,nonce:pending.request.nonce+'-cancel',action:'cancel'}),{encoding:'utf8'});
+      fs.rename(path+'.tmp',path);
+    } catch (_) {}
+  }
+  async function nativeSelectVisibleTrucks(options = {}) {
+    holdCombatSelection('constructors');
+    const current = window.LaunchedModule || window.Module, session = window.__towersHtml?.session;
+    const context = combatWorld?.context, activation = combatActivation, requested = state.combatLock;
+    const order = combatOrderSerial, manual = state.manualSelectionRevision, started = combatNow();
+    const timeout = Math.min(2500, Math.max(1, Number(options.timeout) || 2500));
+    const active = () => !combatFenceDisposed && options.current?.() !== false && state.battleActive && !document.hidden
+      && current === (window.LaunchedModule || window.Module) && session === window.__towersHtml?.session
+      && context === combatWorld?.context && activation === combatActivation && requested === state.combatLock
+      && order === combatOrderSerial && manual === state.manualSelectionRevision && combatOverride === 'constructors';
+    let request = null;
+    while (combatNow() - started < timeout) {
+      refreshCombatLock();
+      if (!active() || !context) { cancelConstructorSelection(); return {ok:false, reason:'selection-cancelled'}; }
+      const ack = combatPacket?.combatLock;
+      if (!request && combatPacket?.playing === true && combatPacket.worldSafe === true
+          && ack?.context === context && ack.activation === activation && ack.requestNonce === combatIntent?.nonce
+          && ack.requestedSuspended === true && ack.suspended === true) {
+        request = {nonce:'offline-constructors-'+Date.now()+'-'+(++constructorSelectionSerial),
+          action:'select-visible-trucks', context, activation, combatIntentNonce:ack.requestNonce};
+        try {
+          current.FS.writeFile('/tmp/warzone-constructor-selection-v90.json.tmp', JSON.stringify(request), {encoding:'utf8'});
+          current.FS.rename('/tmp/warzone-constructor-selection-v90.json.tmp', '/tmp/warzone-constructor-selection-v90.json');
+          pendingConstructorSelection={module:current,request};
+        } catch (error) { return {ok:false, reason:'native-unavailable'}; }
+      }
+      if (request) {
+        if (combatIntent?.nonce !== request.combatIntentNonce) { cancelConstructorSelection(); return {ok:false, reason:'selection-cancelled'}; }
+        const result = combatPacket?.constructorSelection;
+        if (result?.nonce === request.nonce) {
+          pendingConstructorSelection=null;
+          const ids = result.selectedIds;
+          if (result.context !== context || result.activation !== activation || result.combatIntentNonce !== request.combatIntentNonce
+              || result.ok !== true || !Array.isArray(ids) || !ids.every(id=>Number.isInteger(id)&&id>0) || new Set(ids).size !== ids.length)
+            return {ok:false, reason:result.reason || 'selection-changed'};
+          return {ok:true, selectedIds:ids.slice(), player:combatPacket.player, current:active};
+        }
+      }
+      await new Promise(resolve=>setTimeout(resolve,25));
+    }
+    cancelConstructorSelection();return {ok:false, reason:'selection-timeout'};
+  }
+  function exactCombatSelection(value) {
+    const combat = value?.combatIds, selected = value?.selectedIds;
+    if (!Array.isArray(combat) || !Array.isArray(selected) || !combat.length || combat.length !== selected.length) return false;
+    if (![...combat, ...selected].every(id => Number.isInteger(id) && id > 0)) return false;
+    const wanted = new Set(combat), actual = new Set(selected);
+    return wanted.size === combat.length && actual.size === selected.length && selected.every(id => wanted.has(id));
+  }
+  function refreshCombatSelection() {
+    const current = window.LaunchedModule || window.Module;
+    const now = typeof performance !== 'undefined' && typeof performance.now === 'function' ? performance.now() : Date.now();
+    const session = window.__towersHtml?.session;
+    let value = null;
+    try { value = JSON.parse(current?.FS?.readFile('/tmp/warzone-combat-selection-v89.json', {encoding:'utf8'})); } catch (_) {}
+    const valid = value?.schemaVersion === 89 && Number.isInteger(value.frame) && value.frame >= 0
+      && Number.isFinite(value.gameTime) && Number.isFinite(value.realTime)
+      && Number.isInteger(value.player) && value.player >= 0 && value.combatSelection?.player === value.player
+      && value.playing === true && value.worldSafe === true;
+    if (!valid) combatSelectionWatch = null;
+    else {
+      const previous = combatSelectionWatch;
+      if (!previous || previous.module !== current || previous.session !== session || previous.player !== value.player
+          || value.frame < previous.frame || value.gameTime < previous.gameTime) {
+        combatSelectionWatch = {module:current, session, player:value.player, frame:value.frame, gameTime:value.gameTime, at:now, ready:false};
+      } else {
+        if (value.frame > previous.frame) { previous.frame = value.frame; previous.at = now; previous.ready = true; }
+        previous.gameTime = value.gameTime;
+      }
+    }
+    allCombatSelected = Boolean(valid && combatSelectionWatch?.ready && now - combatSelectionWatch.at < 1500
+      && state.battleActive && state.hudVisible && !document.hidden && !window.__towersHtml?.isEnded?.()
+      && exactCombatSelection(value.combatSelection));
+    refreshCombatLock(value);
+    const hudDocument = commandDocument();
+    for (const id of ['wt-all-combat', 'wt-campaign-all-combat']) {
+      const button = hudDocument.getElementById(id);
+      if (button) button.dataset.combatSelected = String(allCombatSelected);
+    }
+    return allCombatSelected;
+  }
+
   function updateCombatHud() {
     const hudDocument = commandDocument();
     const all = hudDocument.getElementById("blocknight-select-all");
     const auto = hudDocument.getElementById("blocknight-auto-fight");
     const box = hudDocument.getElementById("blocknight-box-select");
     const queue = hudDocument.getElementById("blocknight-queue-orders");
-    if (all) all.classList.toggle("active", campaign ? window.__warzoneCampaign?.report?.().allCombat === true : state.combatLock);
+    if (all) all.classList.toggle("active", state.combatLock);
+    paintCombatMode();
+    hudDocument.getElementById('wt-all-combat')?.setAttribute('aria-pressed', String(state.combatLock));
     if (auto) auto.classList.toggle("active", state.autoFight);
     if (box) box.classList.toggle("active", state.boxMode);
     if (queue) queue.classList.toggle("active", state.queueMode);
@@ -684,11 +846,17 @@
   }
 
   function toggleCombatLock(force) {
-    if (campaign) return window.__warzoneCampaign?.toggleAllCombat?.(force) || false;
     cancelCombatInput();
+    refreshCombatLock();
+    if (window.__warzoneDuelConfig?.mode !== 'duel' && !combatWorld?.context) return false;
     state.combatLock = typeof force === "boolean" ? force : !state.combatLock;
+    combatOverride = ''; ++combatOrderSerial;
+    combatOffNonces.clear();
+    if (state.combatLock) combatActivation = 'offline-combat-user-'+Date.now()+'-'+(++combatIntentSerial);
+    combatOffPending = !state.combatLock;
     if (!state.combatLock) state.autoFight = false;
-    if (state.combatLock) selectAllCombat();
+    if (state.combatLock && window.__warzoneDuelConfig?.mode === 'duel') selectAllCombat();
+    refreshCombatLock();
     updateCombatHud();
     return state.combatLock;
   }
@@ -723,8 +891,7 @@
     cancelCombatInput();
     state.autoFight = typeof force === "boolean" ? force : !state.autoFight;
     if (state.autoFight) {
-      state.combatLock = true;
-      selectAllCombat();
+      toggleCombatLock(true);
       // A native Patrol is armed only when a destination is supplied.
     }
     updateCombatHud();
@@ -735,7 +902,6 @@
     cancelCombatInput();
     state.boxMode = typeof force === "boolean" ? force : !state.boxMode;
     if (state.boxMode) {
-      state.combatLock = false;
       state.autoFight = false;
       vibrate(12);
     }
@@ -808,7 +974,28 @@
     return true;
   }
 
-  function queueCombatOrder(x, y, patrol) {
+  async function queueCombatOrder(x, y, patrol) {
+    if (window.__warzoneDuelConfig?.mode !== 'duel') {
+      const activation = combatActivation, context = combatWorld?.context, order = ++combatOrderSerial, generation = combatSerial;
+      const started = combatNow();
+      while (true) {
+        refreshCombatLock();
+        if (!state.combatLock || combatActivation !== activation || combatWorld?.context !== context || order !== combatOrderSerial
+            || generation !== combatSerial || !state.battleActive || combatOverride) return false;
+        const ack = combatPacket?.combatLock;
+        if (combatPacket?.playing && ack?.enabled === true && ack.activation === activation && ack.context === context
+            && exactCombatSelection(combatPacket.combatSelection)) break;
+        if (combatNow() - started >= 2500) { combatError = 'Native combat selection was not ready for this order.'; return false; }
+        await new Promise(resolve => setTimeout(resolve, 20));
+      }
+      if(patrol){
+        patrolArmed=true;pressKey('q','KeyQ',81);
+        combatLater(()=>{if(state.combatLock&&combatActivation===activation&&combatWorld?.context===context&&order===combatOrderSerial)contextualClick(x,y,state.queueMode);patrolArmed=false;},67);
+        state.patrolOrders+=1;
+      }else contextualClick(x, y, state.queueMode);
+      state.combatOrders += 1;
+      feedback(x, y, patrol?'patrol':'order'); vibrate(8); return true;
+    }
     if (!selectAllCombat()) return false;
     const delay = patrol ? 155 : 105;
     if (patrol) {
@@ -1680,11 +1867,11 @@
         button.id = id;
         button.type = "button";
         const iconNames = {
-          "blocknight-select-all": "stack", "blocknight-auto-fight": "arrows-clockwise",
+          "blocknight-select-all": "stack", "wt-all-combat": "stack", "blocknight-auto-fight": "arrows-clockwise",
           "blocknight-box-select": "selection", "blocknight-queue-orders": "stack-plus",
           "blocknight-stop": "hand-palm", "blocknight-base": "house",
           "blocknight-zoom-close": "x", "blocknight-zoom-battle": "crosshair",
-          "blocknight-zoom-map": "map-pin", "blocknight-tech": "flask",
+          "blocknight-zoom-map": "map-pin", "blocknight-tech": "flask", "wt-open-players": "stack",
           "blocknight-help": "question", "blocknight-music": "music-notes", "blocknight-save": "save", "blocknight-rewards": "crystal", "blocknight-lassat": "crosshair", "wt-select-move": "crosshair", "wt-select-trucks": "stack", "wt-deselect-units": "deselect", "wt-demolish": "x", "wt-intelligence": "crosshair"
         };
         const icon = document.createElement("img");
@@ -1707,7 +1894,7 @@
         return button;
       };
       const all = makeButton("blocknight-select-all", "ALL",
-        "Keep all combat units selected (constructors excluded)", async()=>{const enabled=state.combatLock;if(window.__warzoneCommands?.afterBuildExit)await window.__warzoneCommands.afterBuildExit(()=>toggleCombatLock(!enabled));else toggleCombatLock(!enabled);});
+        "Keep all combat units selected (constructors excluded)", ()=>{const result=toggleCombatLock();window.__warzoneCommands?.afterBuildExit?.(()=>true);return result;});
       const auto = makeButton("blocknight-auto-fight", "AUTO",
         "Native Patrol orders for all combat units", async()=>{const enabled=state.autoFight;if(window.__warzoneCommands?.afterBuildExit)await window.__warzoneCommands.afterBuildExit(()=>toggleAutoFight(!enabled));else toggleAutoFight(!enabled);});
       const box = makeButton("blocknight-box-select", "BOX",
@@ -1753,6 +1940,15 @@
       const orderGroup = document.createElement("div");
       orderGroup.className = "bn-command-group";
       orderGroup.append(all, auto, box, queue, stop, base);
+      if (window.__warzoneCommands?.tower && !campaign && window.__warzoneDuelConfig?.mode !== 'duel') {
+        const headerAll = makeButton('wt-all-combat', 'ALL COMBAT',
+          'Keep all owned combat units selected; press again to turn off and deselect combat units', () => {
+            const result=toggleCombatLock();window.__warzoneCommands?.afterBuildExit?.(()=>true);return result;
+          });
+        headerAll.setAttribute('aria-pressed', 'false');
+        headerAll.dataset.combatSelected = 'false';
+        orderGroup.appendChild(headerAll);
+      }
       const techGroup = document.createElement("div");
       techGroup.className = "bn-command-group";
       techGroup.append(tech);
@@ -1794,6 +1990,12 @@
         laser.style.display = 'none';
         techGroup.append(laser);
       }
+      const players=makeButton('wt-open-players','PLAYERS','Show current players and spectators',()=>{
+        if(!prepareHeaderMenu('players'))return;
+        window.__warzoneCommands?.toggle?.('players');
+      });
+      players.setAttribute('aria-controls','wt-command-pages');players.setAttribute('aria-expanded','false');
+      techGroup.append(players);
       techGroup.append(help);
       window.WarzoneRewards?.updateBalance?.();
       if (window.__warzoneCommands?.tower) {
@@ -1857,6 +2059,7 @@
     }
     hud.hidden = false;
     state.hudVisible = true;
+    refreshCombatSelection();
     showBattlefieldViewport();
     updateCombatHud();
     window.WarzoneMusic?.setBattleActive?.(true);
@@ -1872,12 +2075,18 @@
   }
 
   function setHeaderMenuState(id, open) {
-    const aliases = {research:'blocknight-tech',tech:'blocknight-tech',help:'blocknight-help',music:'blocknight-music',rewards:'blocknight-rewards',build:'wt-open-build',factory:'wt-open-factory',production:'wt-open-factory',queue:'wt-open-queue'};
+    const aliases = {research:'blocknight-tech',tech:'blocknight-tech',help:'blocknight-help',music:'blocknight-music',rewards:'blocknight-rewards',build:'wt-open-build',factory:'wt-open-factory',production:'wt-open-factory',queue:'wt-open-queue',players:'wt-open-players'};
     const button = commandDocument().getElementById(aliases[id] || id);
     if (!button) return;
+    const wasOpen = button.getAttribute('aria-expanded') === 'true';
     button.setAttribute('aria-expanded', String(Boolean(open)));
     button.setAttribute('aria-pressed', String(Boolean(open)));
     button.classList.toggle('active', Boolean(open));
+    if (wasOpen && !open) {
+      const pages = window.__warzoneCommands?.report?.() || {};
+      if (!pages.buildOpen && !pages.placement && !pages.selectingTrucks && !pages.nativeMenu && !pages.exitingBuild && !pages.demolition)
+        resumeCombatSelection();
+    }
   }
 
   function closeHelp() {
@@ -2688,7 +2897,8 @@
         }
         state.taps += 1;
       } else if (state.combatLock && isBattlefieldPoint(gesture.x, gesture.y)) {
-        queueCombatOrder(gesture.x, gesture.y, state.autoFight);
+        if (combatOverride) contextualClick(gesture.x, gesture.y, state.queueMode);
+        else void queueCombatOrder(gesture.x, gesture.y, state.autoFight);
       } else if (state.queueMode && isQueuePlacementPoint(gesture.x, gesture.y)) {
         if(!window.__warzoneCommands?.queueNativeSite?.(gesture.x,gesture.y,state.replayingPointers))contextualClick(gesture.x, gesture.y, true);
         feedback(gesture.x, gesture.y, "order");
@@ -2735,7 +2945,7 @@
       state.queueModifierHeld = false;
     }
     if (clearModes) {
-      state.queueMode=false;state.combatLock=false;state.autoFight=false;
+      state.queueMode=false;state.autoFight=false;
       setQueueModifier(false,true);
       dispatchKey('Shift','ShiftLeft',16,false,false,false,1);
     }
@@ -2751,7 +2961,7 @@
     if (active) { state.battleActive = true; if (canvas()) canvas().inert = false; window.WarzoneMusic?.setBattleActive?.(true); return; }
     // Release held buttons before disabling dispatch. A transition out of the
     // battle must never send Escape into the next native screen.
-    releaseAll(true, false);
+    resetCombatMode(); releaseAll(true, false);
     state.battleActive = false;
     window.WarzoneMusic?.setBattleActive?.(false);
     state.hudVisible = false;
@@ -2882,8 +3092,10 @@
   }, true);
   window.addEventListener("pagehide", () => {
     clearZoomAckTimer();
+    resetCombatMode();
     releaseAll(true);
   });
+  window.addEventListener('warzone-battle-ended', resetCombatMode);
 
   prepareCanvas();
   const canvasTimer = setInterval(() => {
@@ -2910,14 +3122,15 @@
     selectAllUnits,
     selectAllTrucks,
     toggleCombatLock,
+    refreshCombatLock, holdCombatSelection, resumeCombatSelection, resetCombatMode,
     toggleAutoFight,
     toggleBoxMode,
     toggleQueueMode,
     stopSelected,
     jumpToBase,
     nativeClick: (x, y, button = 0) => click(button, x, y),
-    nativeSelectClick: (x,y,add=false)=>{state.manualSelectionRevision += 1;return click(0,x,y,add);},
-    nativeWorldClick,nativeBoxSelect,nativeSelectionBounds,
+    nativeSelectClick: (x,y,add=false)=>{state.manualSelectionRevision += 1;cancelConstructorSelection();return click(0,x,y,add);},
+    nativeWorldClick,nativeBoxSelect,nativeSelectionBounds,nativeSelectVisibleTrucks,
     isBattlefieldPoint,
     nativeMenuClick,
     nativeUiClick,
@@ -2966,6 +3179,9 @@
       cameraFacingError: state.cameraFacingError,
       lastRadarPoint: state.lastRadarPoint,
       combatLock: state.combatLock,
+      combatLockRequested: state.combatLock, combatLockSuspended:Boolean(combatSuspended()), combatOverride,
+      combatLockState:combatPacket?.combatLock||null, combatContext:combatWorld?.context||'', combatError,
+      allCombatSelected,
       autoFight: state.autoFight,
       boxMode: state.boxMode,
       queueMode: state.queueMode,
@@ -3005,6 +3221,24 @@
     })
   };
 
+  function physicalCombatInput(event) {
+    if (forwardedPointers.has(event) || !(event.pointerType === 'touch' || event.pointerType === 'pen' || event.isTrusted === true)) return;
+    if (event.type === 'pointerdown') { combatPhysicalPointers.add(event.pointerId); ++combatOrderSerial; cancelConstructorSelection(); }
+    else { combatPhysicalPointers.delete(event.pointerId); combatInteractionUntil = combatNow() + 160; }
+    refreshCombatLock();
+  }
+  const combatFenceTargets = new Set([document, commandDocument()].map(doc=>doc.defaultView || window));
+  const combatFenceTypes = ['pointerdown','pointerup','pointercancel'];
+  for (const target of combatFenceTargets) for (const type of combatFenceTypes)
+    target.addEventListener(type, physicalCombatInput, {capture:true, passive:true});
+  window.addEventListener('blur', () => { combatPhysicalPointers.clear(); combatInteractionUntil = combatNow() + 160; refreshCombatLock(); });
+  const combatSelectionTimer = setInterval(refreshCombatSelection, 100);
+  window.addEventListener('pagehide', () => {
+    combatFenceDisposed = true; ++combatOrderSerial; cancelConstructorSelection();
+    for (const target of combatFenceTargets) for (const type of combatFenceTypes) target.removeEventListener(type, physicalCombatInput, true);
+    combatFenceTargets.clear(); combatPhysicalPointers.clear();
+    clearInterval(combatSelectionTimer); combatSelectionWatch = null; allCombatSelected = false;
+  });
   return "warzone-towers-touch-v49-music-controls";
 })();
 

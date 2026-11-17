@@ -1,0 +1,396 @@
+{
+  "kind": "Native0.90 source/build/integration reproduction inputs",
+  "files": [
+    {
+      "path": "tools/build-native-selection-089.py",
+      "bytes": 12461,
+      "sha256": "a81d781943765215e0efe716d8306948b3087bd7bc8e5fa68503a5fdd82b1643"
+    },
+    {
+      "path": "tools/build-native-selection-090.py",
+      "bytes": 6967,
+      "sha256": "6a906ae3309c7efc6862f44373ff35520665a81cd8cac2bd76c48e891cc3c443"
+    },
+    {
+      "path": "tools/build-native-selection-cold-089.sh",
+      "bytes": 2338,
+      "sha256": "c19a188960d1b8f31b188f7cde5aa25e860fb69fd9d502b58c9135cf07145693"
+    },
+    {
+      "path": "tools/build-native-selection-cold-090.sh",
+      "bytes": 490,
+      "sha256": "8a17bba9a82d9ee6dc93a063bc6f8e6ec1eaa9aba0d0abade120baa64c3b38e9"
+    },
+    {
+      "path": "tools/check-native-constructors-090.py",
+      "bytes": 6094,
+      "sha256": "561e7d5ebdfcac66f533c42401cc417ff570feb5ab5fb98519f85cf9bcab35ae"
+    },
+    {
+      "path": "tools/check-native-loader-pairs-090.py",
+      "bytes": 6801,
+      "sha256": "c9cc90fc7b2c90ddfcca20078a5cd63b061ce591b7f89d0a0dc2bd749c1dae98"
+    },
+    {
+      "path": "tools/check-native-selection-089.py",
+      "bytes": 7243,
+      "sha256": "99fb7f62811e56826b479319756a4076695215519a93e18a1190d996909d77f8"
+    },
+    {
+      "path": "tools/check-native-selection-090.py",
+      "bytes": 6544,
+      "sha256": "2cbaf636f08b975544aaf74a7132cc53ce55f62380a2977f7acd805cb65a5c53"
+    },
+    {
+      "path": "tools/integrate-native-selection-090.py",
+      "bytes": 14916,
+      "sha256": "d4c3deb9ff8ee5720931dddac4e378d4b25e1749a95e1cfb7cb303b191cb25bd"
+    },
+    {
+      "path": "tools/prepare-native-selection-090.py",
+      "bytes": 13890,
+      "sha256": "18252975e000f57893c22f4c78a264cb87d633e439cd6ed367be92a004a647e2"
+    },
+    {
+      "path": "tools/prepare-native-selection-cold-089.py",
+      "bytes": 2868,
+      "sha256": "def1a6d94f5ae35c7001675c596a3290f74cb43df273cfa04b925c553426b956"
+    },
+    {
+      "path": "tools/prepare-native-selection-cold-090.py",
+      "bytes": 2000,
+      "sha256": "2afa77001d5ba82af2acdbcac3e90315bf558c469eaf53c94180151a0cfde3a9"
+    },
+    {
+      "path": "tools/rebuild-native-constructors-090.py",
+      "bytes": 3828,
+      "sha256": "1f97ccb457dd490698dfda635f0e9e90ebe78983ac39f5abbc419528ed911ac7"
+    },
+    {
+      "path": "vendor/native-090/BUILD.md",
+      "bytes": 4593,
+      "sha256": "7a64b40dab143f91682c504d214df97493b12ce71a1b971ccc4ce296d13b9675"
+    },
+    {
+      "path": "vendor/native-090/CONTRACT.md",
+      "bytes": 3247,
+      "sha256": "b11bef09bb4df3d88809a7f4c4e120132ffb1f9f228c842214519b55a44b772d"
+    },
+    {
+      "path": "vendor/native-090/baseline089-to090-delta.json",
+      "bytes": 5922,
+      "sha256": "66895412d6839e87cead0a877de2d946724fa24564c36f862692318f0788b875"
+    },
+    {
+      "path": "vendor/native-090/bootstrap/multiplayer/CMakeCache.txt",
+      "bytes": 51493,
+      "sha256": "90dadcd30594e229c4f0549e5f1bcca98e6b8c102d72231d465d3c157fdd77f5"
+    },
+    {
+      "path": "vendor/native-090/bootstrap/multiplayer/baseline-git.patch",
+      "bytes": 51846,
+      "sha256": "bd67df2fe953d20206c0cce373c657df990d36d2c6a6e9efef5821e4763d1adc"
+    },
+    {
+      "path": "vendor/native-090/bootstrap/multiplayer/source/lib/sdl/main_sdl.cpp",
+      "bytes": 127504,
+      "sha256": "f3c3efa2b148648e83c1f851f46d84ec5786d32283795a78498fc2770f574d36"
+    },
+    {
+      "path": "vendor/native-090/bootstrap/multiplayer/source/src/display3d.cpp",
+      "bytes": 144998,
+      "sha256": "43f52868a1ac6fa5a7be609d8940c9db7dfba8d7a3b7140e5c29e79f7f9940ac"
+    },
+    {
+      "path": "vendor/native-090/bootstrap/multiplayer/source/src/hci.cpp",
+      "bytes": 84627,
+      "sha256": "1896ac855e999655c430e16446804fb461c444cf5f054254a7828863737e1af7"
+    },
+    {
+      "path": "vendor/native-090/bootstrap/multiplayer/source/src/mobile-room-map-preview.cpp.inc",
+      "bytes": 5206,
+      "sha256": "e1b785ae5e5d38ebfce173dc739ec388598af980722bacb6880e623d835f6544"
+    },
+    {
+      "path": "vendor/native-090/bootstrap/multiplayer/source/src/mobile-room-native.cpp.inc",
+      "bytes": 15396,
+      "sha256": "eb35b040cf1ce8430ae9fb1887f90703f5874707fa0c576546ed1df2e3204a83"
+    },
+    {
+      "path": "vendor/native-090/bootstrap/multiplayer/source/src/multiint.cpp",
+      "bytes": 268712,
+      "sha256": "ef576f51f0b1bf9c8a40ade00d68331e278b673ba0cefeefbff72a58b12fdda0"
+    },
+    {
+      "path": "vendor/native-090/bootstrap/multiplayer/source/src/quickjs_backend.cpp",
+      "bytes": 190604,
+      "sha256": "4224840b9a7fda8f333e1a009f82bcf455509d519be75312b36c13786fb4611a"
+    },
+    {
+      "path": "vendor/native-090/bootstrap/multiplayer/source/src/wrappers.cpp",
+      "bytes": 13524,
+      "sha256": "d23f339dda4ab0e951934993b93ee0681d350773e6cb6494ec120f2cd5fb5fe3"
+    },
+    {
+      "path": "vendor/native-090/bootstrap/offline/CMakeCache.txt",
+      "bytes": 52579,
+      "sha256": "69d378558fcac997a34656e8cdf906bf6e79cc284025d10cb8dba424647b5e04"
+    },
+    {
+      "path": "vendor/native-090/bootstrap/offline/baseline-git.patch",
+      "bytes": 58203,
+      "sha256": "70d981df597f01023bd49e38f2da4f0fbfeffbfb8026420b271c5750814803aa"
+    },
+    {
+      "path": "vendor/native-090/bootstrap/offline/source/lib/sdl/main_sdl.cpp",
+      "bytes": 128201,
+      "sha256": "dce7553f4719e1becfec8ede07d147965b3ea72ca926bde240e3b650a93f3470"
+    },
+    {
+      "path": "vendor/native-090/bootstrap/offline/source/src/console.cpp",
+      "bytes": 20710,
+      "sha256": "282b50dd3bbdf8f5b8703ab74fd6875057d3a848a8ced36434260f6b221f5176"
+    },
+    {
+      "path": "vendor/native-090/bootstrap/offline/source/src/display3d.cpp",
+      "bytes": 145254,
+      "sha256": "3b5c1a41144011805819d15e9bfac6f1289d726da276433bfeb237904c0fa15f"
+    },
+    {
+      "path": "vendor/native-090/bootstrap/offline/source/src/droid.cpp",
+      "bytes": 116982,
+      "sha256": "5b8f8d8c6cca08bdcec70b34f6de9fee3fff0de2bc4ae5815ff1025390ddc1f1"
+    },
+    {
+      "path": "vendor/native-090/bootstrap/offline/source/src/hci.cpp",
+      "bytes": 103857,
+      "sha256": "b99c89e580856201e6e884f0105e7a6aabaa0e55d66f39e5284ac21ecf2dbdc4"
+    },
+    {
+      "path": "vendor/native-090/bootstrap/offline/source/src/intdisplay.cpp",
+      "bytes": 53946,
+      "sha256": "99645ec2555ba7dca7c41ebe75f955df46c3890e07b4606e0b8488df7613bb27"
+    },
+    {
+      "path": "vendor/native-090/bootstrap/offline/source/src/keybind.cpp",
+      "bytes": 67898,
+      "sha256": "5730cf9a2b791a6a437f4e0da040e9dbb75e8befb48dc02caefb1a8e824355ed"
+    },
+    {
+      "path": "vendor/native-090/bootstrap/offline/source/src/loadsave.cpp",
+      "bytes": 38035,
+      "sha256": "b58f01a03b551cbc589ef468f6a0572bd49978f9ba88db503eb761a3518b3341"
+    },
+    {
+      "path": "vendor/native-090/bootstrap/offline/source/src/main.cpp",
+      "bytes": 65720,
+      "sha256": "c0d9fad6803313b48d4aeccc592dc2a157778f2198101593711d111ea976cb6c"
+    },
+    {
+      "path": "vendor/native-090/bootstrap/offline/source/src/quickjs_backend.cpp",
+      "bytes": 160041,
+      "sha256": "13137dd600eb21ff1506e01e81a5624fd514447d82bb58328bc335eeae009b68"
+    },
+    {
+      "path": "vendor/native-090/bootstrap/offline/source/src/radar.cpp",
+      "bytes": 29776,
+      "sha256": "e92fcfb9151aa18adf36208ea53835ca7f7ee0e3347da6968628ba8747866f0d"
+    },
+    {
+      "path": "vendor/native-090/bootstrap/offline/source/src/research.cpp",
+      "bytes": 63224,
+      "sha256": "06b8999191bb0160e6b73c268f8ddd69347102133ecc221aee23504973dc918a"
+    },
+    {
+      "path": "vendor/native-090/build-plan.json",
+      "bytes": 30007,
+      "sha256": "00a4caf9ed172758b4a8b5269924d6e75c93b46413154837ae3b3dee71978faa"
+    },
+    {
+      "path": "vendor/native-090/checks/constructor-checks.json",
+      "bytes": 374,
+      "sha256": "08bf199155c5fffdcade13813fcd74353b5ff72c4b6ff2e366c70bc841ca6398"
+    },
+    {
+      "path": "vendor/native-090/checks/loader-pairs.json",
+      "bytes": 14933,
+      "sha256": "ca340e2c85f8d36d3a10d8d2c160991221186e58e9220f98c51413b5fd2c3e67"
+    },
+    {
+      "path": "vendor/native-090/checks/source-checks.json",
+      "bytes": 728,
+      "sha256": "f08ee44fa5225ec51b105960e96f8b2c359558dbca9abdcea3f808ad56ea58d9"
+    },
+    {
+      "path": "vendor/native-090/logs/compile-multiplayer-display3d.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "vendor/native-090/logs/compile-multiplayer-quickjs_backend.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "vendor/native-090/logs/compile-offline-display3d.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "vendor/native-090/logs/compile-offline-hci-constructors.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "vendor/native-090/logs/compile-offline-hci.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "vendor/native-090/logs/compile-shared051-droid.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "vendor/native-090/logs/link-constructors-shared.log",
+      "bytes": 154,
+      "sha256": "ccddb57ff85231dc46bd7945c7f1d77948272be7114626858ce4e4e31adfdd60"
+    },
+    {
+      "path": "vendor/native-090/logs/link-constructors-towers.log",
+      "bytes": 154,
+      "sha256": "ccddb57ff85231dc46bd7945c7f1d77948272be7114626858ce4e4e31adfdd60"
+    },
+    {
+      "path": "vendor/native-090/logs/link-multiplayer.log",
+      "bytes": 154,
+      "sha256": "ccddb57ff85231dc46bd7945c7f1d77948272be7114626858ce4e4e31adfdd60"
+    },
+    {
+      "path": "vendor/native-090/logs/link-shared.log",
+      "bytes": 154,
+      "sha256": "ccddb57ff85231dc46bd7945c7f1d77948272be7114626858ce4e4e31adfdd60"
+    },
+    {
+      "path": "vendor/native-090/logs/link-towers.log",
+      "bytes": 154,
+      "sha256": "ccddb57ff85231dc46bd7945c7f1d77948272be7114626858ce4e4e31adfdd60"
+    },
+    {
+      "path": "vendor/native-090/native-build.json",
+      "bytes": 130073,
+      "sha256": "22c393d1f688b02d70a245cad8bafe19bfa838bd3acc3e33026f2dd1520f4df3"
+    },
+    {
+      "path": "vendor/native-090/patches/multiplayer/display3d.cpp.patch",
+      "bytes": 2385,
+      "sha256": "2703d92d5ab740f14935103f5099a6b2c32b7654e21a51f300d6dbb0c0fd7486"
+    },
+    {
+      "path": "vendor/native-090/patches/multiplayer/quickjs_backend.cpp.patch",
+      "bytes": 10192,
+      "sha256": "2f008f0bb1e4e5c2befda544ca84e6cb790948e7fa78104b805f1fcc217b8ad8"
+    },
+    {
+      "path": "vendor/native-090/patches/offline/display3d.cpp.patch",
+      "bytes": 2385,
+      "sha256": "dc4d0931e6996fb4f5481e3a51ac590102bf01bb5be0c633bd5cecc58c38bc3d"
+    },
+    {
+      "path": "vendor/native-090/patches/offline/hci.cpp.patch",
+      "bytes": 9872,
+      "sha256": "0c8e793b5f87d9fb9afec1832fe3eef3ca85440308b8e35d16c37884f0a40e5c"
+    },
+    {
+      "path": "vendor/native-090/proof/multiplayer-cache-after.json",
+      "bytes": 98636,
+      "sha256": "7bbd08fafdeb854ae6a44e59910d1d2a08427ca27f71134bdd67df48ce8d5998"
+    },
+    {
+      "path": "vendor/native-090/proof/multiplayer-cache-before.json",
+      "bytes": 98636,
+      "sha256": "7bbd08fafdeb854ae6a44e59910d1d2a08427ca27f71134bdd67df48ce8d5998"
+    },
+    {
+      "path": "vendor/native-090/proof/offline-cache-after.json",
+      "bytes": 98636,
+      "sha256": "779f7a83aa6f936e58e86bc870e79e0be64e7667ef8c131c4a1b7cfe80bf0e78"
+    },
+    {
+      "path": "vendor/native-090/proof/offline-cache-before.json",
+      "bytes": 98636,
+      "sha256": "779f7a83aa6f936e58e86bc870e79e0be64e7667ef8c131c4a1b7cfe80bf0e78"
+    },
+    {
+      "path": "vendor/native-090/proof/offline-constructor-cache-after.json",
+      "bytes": 98636,
+      "sha256": "779f7a83aa6f936e58e86bc870e79e0be64e7667ef8c131c4a1b7cfe80bf0e78"
+    },
+    {
+      "path": "vendor/native-090/proof/offline-constructor-cache-before.json",
+      "bytes": 98636,
+      "sha256": "779f7a83aa6f936e58e86bc870e79e0be64e7667ef8c131c4a1b7cfe80bf0e78"
+    },
+    {
+      "path": "vendor/native-090/proof/protocol-header.h",
+      "bytes": 409,
+      "sha256": "4be9b0d6ada7ee383824bfe54e3ee4e3986c2a868d9a75bfe9fff6b84ee870ec"
+    },
+    {
+      "path": "vendor/native-090/recipes/build-native-blueprint.sh",
+      "bytes": 2668,
+      "sha256": "6f3835c7eb8441c216f7e0b056affe22b34eb60e2985341029c866ca75e9bc26"
+    },
+    {
+      "path": "vendor/native-090/recipes/integrate-multiplayer-native-082.py",
+      "bytes": 3599,
+      "sha256": "e7ecf6b41df3f5395fc7a596de6d2847642fec15ffbf4511baf194955479d6e6"
+    },
+    {
+      "path": "vendor/native-090/recipes/integrate-native-runtime.py",
+      "bytes": 9705,
+      "sha256": "30014384925fdb0dda52d338244fd07d300c1223b841d56e8443a85b77e34ee3"
+    },
+    {
+      "path": "vendor/native-090/runtime-integration.json",
+      "bytes": 27608,
+      "sha256": "22424fee023ccbbd77eb86b9848f2b09412efdd81bea937ac93b2ab566f188e5"
+    },
+    {
+      "path": "vendor/native-090/source-preparation.json",
+      "bytes": 1116,
+      "sha256": "bd1d5b617a1decad2f5af391f7edb5d2155ae4d54885b9d14cca8f601f802290"
+    },
+    {
+      "path": "vendor/native-090/source/common/mobile-combat-latch-v90.h",
+      "bytes": 4086,
+      "sha256": "8484adb052e916ffa4c53f87c962eac21b71fc5988c200e03dec5788cc794303"
+    },
+    {
+      "path": "vendor/native-090/source/multiplayer/src/display3d.cpp",
+      "bytes": 143939,
+      "sha256": "f58d042b143d85e7d5a91ac65ed8fb862e82f8410e211f5225c491343e10d8cf"
+    },
+    {
+      "path": "vendor/native-090/source/multiplayer/src/quickjs_backend.cpp",
+      "bytes": 188382,
+      "sha256": "957d63a68afae9c6fe297f9419bc813388272f5706a485e2d8103d82ad3bf5f2"
+    },
+    {
+      "path": "vendor/native-090/source/offline/src/display3d.cpp",
+      "bytes": 144195,
+      "sha256": "b6d5044cd1bbd3497766ea7aa1afd544182242cd77a3b1a64e86eccd0feb82dd"
+    },
+    {
+      "path": "vendor/native-090/source/offline/src/hci.cpp",
+      "bytes": 111851,
+      "sha256": "75e4dbe058bcd99009ff4a7e45a3247fc04d4c9169faae5e52f6d4a3764bc105"
+    },
+    {
+      "path": "vendor/native-090/source/shared051/src/droid.cpp",
+      "bytes": 115923,
+      "sha256": "b32c09a40baf1f34b1b00c33b2928f8e771b35646e65508a3331dd0104ccfea4"
+    }
+  ],
+  "constructorCorrectionIncluded": true
+}

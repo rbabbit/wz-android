@@ -1,5 +1,28 @@
 # Known issues and verification limits
 
+## Warzone Towers 0.86 - Verification scope
+
+The exact signed candidate is bound by SHA256 in qa/delivery-086. Its private
+MP waiting-room and match Home/Recents/screen-off journeys retained the native
+session and advancing clocks. Android16 foreground-service network exemption
+was observed, compared with baseline APP_BACKGROUND socket destruction. This
+does not guarantee survival after force-stop, process death, network loss or
+an ended host match. Directory failures and actual match termination remain
+separate; the DNS fixture changed only one directory response and retried the
+real network successfully.
+
+Runtime production, offline prepared/seeded fixture provenance and replacement
+installation results are recorded with explicit limits in the current
+[release notes](releases/0.86.md) and qa/delivery-086/verification.json. The old
+Towers phone-save fixture failed its reward-record guard; it was replaced for
+production checks by the existing complete native checkpoint, without changing
+the wallet guard or ledger. No physical-phone or full-match/all-map acceptance
+is claimed. The inherited emulator black-terrain limitation remains.
+
+Updates download a complete APK and require Android installation approval. No
+delta or arbitrary code hot patching is implemented. Same appId/signing identity
+is mandatory. Keep the APK and full source for v0.85 and all older fallbacks.
+
 ## Warzone Towers 0.85 — Scoped menu corrections
 
 No emulator, device, browser or gameplay run was performed, as explicitly

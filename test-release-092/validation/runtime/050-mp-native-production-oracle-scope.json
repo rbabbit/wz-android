@@ -1,0 +1,121 @@
+{
+  "recordKind": "Source-only QA oracle scope clarification; no new runtime test",
+  "candidate": "C:\\timerApp\\candidates\\players-polish-0.92-20261117",
+  "exactAppRuntimeAPKReference": "134246af423c0ea04b375409f41d179813a739968d260855e73784a9109b6b66",
+  "sources": [
+    {
+      "key": "mpRuntime",
+      "path": "C:\\timerApp\\candidates\\players-polish-0.92-20261117\\app\\src\\main\\assets\\multiplayer\\mobile-ui-runtime.js",
+      "sha256": "9331445e72ad4593c8b1b6385a6a5eb54f33046340519fe74de8d85579bb0790",
+      "wholeFileUnchangedFromAcceptedNetworkBaseline": true,
+      "sites": [
+        {
+          "startLine": 1,
+          "endLine": 7,
+          "text": "/* Player-private UI queues; this file is evaluated by the native UI context,\n   never registered with the synchronized game rules or its timer system. */\nvar eventChat=function(){},eventResearched=function(){};\nvar mpMobileTimers=[];\nfunction namespace(){}\nfunction setTimer(){}\nfunction queue(name,delay,arg){mpMobileTimers.push({name:name,due:gameTime+Number(delay||0),arg:arg});}"
+        },
+        {
+          "startLine": 14,
+          "endLine": 21,
+          "text": "function mpMobileTick(){\n if(!wtcmd_started){wtcmd_indexStats();wtcmd_started=true;dump('WTREADY:'+JSON.stringify({version:70,alwaysQueue:true}));}\n wtcmd_poll();blockNightV32PollQueueCommand();\n Object.keys(blockNightV28Queues).forEach(function(id){blockNightV28StartNext(Number(id));});\n wtcmd_tickBuilds();wtcmd_tickProduction();\n var due=mpMobileTimers.filter(function(t){return t.due<=gameTime;});mpMobileTimers=mpMobileTimers.filter(function(t){return t.due>gameTime;});\n due.slice(0,32).forEach(function(t){if(typeof globalThis[t.name]==='function')globalThis[t.name](t.arg);});\n blockNightEmitResearchSnapshotV23();"
+        },
+        {
+          "startLine": 230,
+          "endLine": 230,
+          "text": "var wtcmd_finishedUnits = [];"
+        },
+        {
+          "startLine": 603,
+          "endLine": 606,
+          "text": "\nfunction wtcmd_selectedUnits()\n{\n    return enumSelected().filter(function(d){return d.type===DROID&&d.player===selectedPlayer;}).map(function(d){return {id:d.id,x:d.x,y:d.y,z:d.z,order:d.order,constructor:wtcmd_isBuilder(d)};});"
+        },
+        {
+          "startLine": 966,
+          "endLine": 966,
+          "text": "        templates: templates.map(function(t){return Object.assign({},t,{id:wtcmd_templateKey(t)});}), finishedUnits: wtcmd_finishedUnits.slice(-16), finishedBuilds: wtcmd_finishedBuilds.slice(-32) };"
+        },
+        {
+          "startLine": 1632,
+          "endLine": 1638,
+          "text": "        if (factory.status !== BUILT || !structureIdle(factory)) return;\n        const previous = wtcmd_factoryActive[key];\n        if (previous && gameTime - previous.started < 1200) return;\n        if (previous) {\n            // Native production finished; explicit UI cancellation already removed its active record.\n            previous.status = \"done\"; delete wtcmd_factoryActive[key];\n        }"
+        },
+        {
+          "startLine": 1649,
+          "endLine": 1658,
+          "text": "        // buildDroid replaces equal-name templates. A stable factory suffix\n        // prevents production at one factory cancelling another factory's unit.\n        const nativeName = d.name + \" \u00b7 F\" + factory.id;\n        let accepted = false;\n        try { accepted = buildDroid.apply(null, [factory, nativeName, d.body, d.propulsion, null, \"\"].concat(d.turrets)); }\n        catch (_) { /* Native validation can reject an incompatible factory. Keep its queue. */ }\n        if (accepted) {\n            jobs.shift(); job.started = gameTime; job.status = \"producing\";\n            wtcmd_factoryActive[key] = job;\n        } else { job.status = \"blocked\"; job.reason = \"factory-incompatible\"; }"
+        },
+        {
+          "startLine": 1811,
+          "endLine": 1819,
+          "text": "function wtcmd_eventDroidBuilt(droid, factory)\n{\n    if (!factory || droid.player !== selectedPlayer) return;\n    const key = String(factory.id), active = wtcmd_factoryActive[key];\n    if (!active) return;\n    active.status = \"done\";delete wtcmd_factoryActive[key];\n    wtcmd_finishedUnits.push({ id: droid.id, factoryId: factory.id, name: active.design.name,\n        body: active.design.body, propulsion: active.design.propulsion, gameTime: gameTime });\n    wtcmd_finishedUnits = wtcmd_finishedUnits.slice(-32);"
+        }
+      ]
+    },
+    {
+      "key": "mpNativeBridge",
+      "path": "C:\\timerApp\\candidates\\players-polish-0.92-20261117\\vendor\\native-091\\source\\multiplayer\\src\\quickjs_backend.cpp",
+      "sha256": "8de0c082a38e968095744aaa02780642f60f4d359598f796e9c61ca69551b60e",
+      "wholeFileUnchangedFromAcceptedNetworkBaseline": true,
+      "sites": [
+        {
+          "startLine": 3985,
+          "endLine": 3989,
+          "text": "// Client-side mobile UI context for the official 4.7 multiplayer engine.\n// It is not a registered game/rules script, owns no simulation timers, and is\n// not included in synchronized script saves or the game's DATA_SCRIPT hash.\n// Its only mutations are ordinary native queued player orders/local selection.\n#if defined(__EMSCRIPTEN__)"
+        },
+        {
+          "startLine": 4246,
+          "endLine": 4254,
+          "text": "void quickjs_scripting_instance::tickMultiplayerUI()\n{\n    if(player()!=selectedPlayer||!mpMobileCanIssueOrders())return;\n    updateGameTime(gameTime);\n    const char script[]=\"mpMobileTick()\";\n    JSValue value=JS_Eval_BypassLimitedContext(ctx,script,sizeof(script)-1,\"<mobile-client-ui-tick>\",JS_EVAL_TYPE_GLOBAL);\n    if(JS_IsException(value)){const auto error=QuickJS_DumpError(ctx);debug(LOG_ERROR,\"Mobile UI tick: %s\",error.c_str());}\n    JS_FreeValue(ctx,value);\n}"
+        },
+        {
+          "startLine": 4426,
+          "endLine": 4430,
+          "text": "    if(canIssueOrders&&!mpMobileVM){const auto script=mpMobileReadFile(\"/tmp/mp-mobile-ui.js\");if(!script.empty()){\n        auto vm=std::make_unique<quickjs_scripting_instance>(selectedPlayer,\"mobile-client-ui\",\"/tmp\");\n        if(vm->initializeMultiplayerUI(script))mpMobileVM=std::move(vm);else mpMobileUIContext=nullptr;\n    }}\n    if(canIssueOrders&&mpMobileVM&&gameTime-mpMobileLastTick>=100){mpMobileLastTick=gameTime;mpMobileVM->tickMultiplayerUI();}"
+        }
+      ]
+    },
+    {
+      "key": "sharedCommands",
+      "path": "C:\\timerApp\\candidates\\players-polish-0.92-20261117\\app\\src\\main\\assets\\warzone-command-pages.js",
+      "sha256": "35eb02f60f7bab61c7838e6b633f48a64f3f5f42252c31f0089aaa0c8831ea91",
+      "wholeFileUnchangedFromAcceptedNetworkBaseline": false,
+      "sites": [
+        {
+          "startLine": 96,
+          "endLine": 96,
+          "text": "    if(!['state','demolish-state','preview-build','validate-design'].includes(reply.action)){state.history.push(reply);state.history=state.history.slice(-100);}"
+        },
+        {
+          "startLine": 962,
+          "endLine": 973,
+          "text": "      if(!state.productionRequests.has(key)||epoch!==state.manufacturingEpoch)return;state.productionRequests.delete(key);\n      if(reply.ok){\n        feedback.accepted+=Number(reply.result?.count)||count;\n        if(all)for(const row of reply.result?.factories||[]){const peer=peers.find(f=>f.id===row.factoryId);if(peer){peer.repeat=row.repeat;state.productionRepeatDrafts.set(repeatDraftKey(peer.id,recipe.key),Boolean(row.repeat?.enabled));}}\n        if(all&&reply.result?.skippedFactoryIds?.length){feedback.error='Some factory queues are full. Check Queue.';notify(feedback.error);}\n      }\n      else {feedback.error=reason(reply.reason);notify(feedback.error);}\n      updateProductionFeedback();\n      // Only the native state reply updates jobs/counts; never invent a queue row.\n      if(!window.__towersHtml?.isEnded?.())send('state',{}, {fresh:true});\n      setTimeout(()=>{if(state.productionFeedback.get(factoryId)===feedback&&!productionRequestsFor(factoryId).length){state.productionFeedback.delete(factoryId);updateProductionFeedback();}},4000);\n    }).catch(error=>{"
+        }
+      ]
+    }
+  ],
+  "findings": [
+    "The MP client UI context is separate from registered synchronized game/rules scripts. Its namespace function is a no-op and its explicit tick polls commands/production rather than receiving ordinary DroidBuilt events.",
+    "wtcmd_finishedUnits is populated only by wtcmd_eventDroidBuilt; the snapshot exposes its last16 entries. The MP private VM does not provide the normal DroidBuilt delivery guarantee, so an empty list is not evidence that native MP production failed.",
+    "The MP production tick detects a previously active job whose native factory became idle and retires that active record without appending finishedUnits. Normal native production can therefore complete while that list stays empty.",
+    "The short productionFeedback message is deleted after4000ms. A10s observation that misses that message is not a rejected production request.",
+    "The shared command report retains the latest100 non-read-only ACK replies in history. Match action queue-production, exact nonce, ok=true, count and factoryId; then independently observe the actual native factory job/progress before opening Players.",
+    "state.selectedUnits has only id,x,y,z,order,constructor. It does not expose name. Do not assert a unit name from this field.",
+    "The production API uses the native name Design1 display-name plus a stable factory suffix. An actual pre-Players factory production/name observation may be recorded, but it must not be relabelled as a born-unit name read.",
+    "For this controlled private fixture, accepted native history+actual factory work before Players, a later new owned combat ID while Players is open, native unit ID/position after normal close, and native selected-ID restoration are meaningful separate observations. Preserve earlier failed helper/name assertions; do not invent missing fields or infer physical paint."
+  ],
+  "separateRuntimeObservationProvidedByRoot": {
+    "scope": "Parent-reported existing runtime proof; this source record does not execute or independently repeat it",
+    "secondIndependentOrdinaryBirthID": 160693,
+    "initialEarlierBirthID": 160691,
+    "afterPlayersCloseNativeSelectedIDs": [
+      160691,
+      160693
+    ],
+    "prePlayersACKAndNativeJobObservedByParent": true,
+    "noBornUnitNameClaimFromSelectedUnits": true
+  },
+  "deviceActions": false,
+  "hostActions": false,
+  "appSourceChanges": false,
+  "earlierIncompleteQAReportsPreserved": true
+}

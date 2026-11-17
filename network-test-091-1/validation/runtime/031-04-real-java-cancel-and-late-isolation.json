@@ -1,0 +1,46 @@
+{
+  "scope": "Two real native GET dispatches canceled by production fetch AbortSignal and XHR.abort; subsequent real GET succeeds. Synthetic late callback explicitly API-injected.",
+  "cancelJavaOutcomes": [
+    {
+      "id": 852291841,
+      "category": "list",
+      "result": "canceled",
+      "line": "Lobby HTTP 852291841 list result=canceled stage=connecting status=0 bytes=0 protocol=unavailable elapsedMs=3 network=wifi-validated"
+    },
+    {
+      "id": 852291842,
+      "category": "list",
+      "result": "canceled",
+      "line": "Lobby HTTP 852291842 list result=canceled stage=connecting status=0 bytes=0 protocol=unavailable elapsedMs=2 network=wifi-validated"
+    }
+  ],
+  "probe": {
+    "abortResult": {
+      "before": {
+        "main": true,
+        "pending": 0,
+        "relayed": 0
+      },
+      "fetch": "AbortError",
+      "xhr": {
+        "abort": 1,
+        "load": 0,
+        "loadend": 1
+      }
+    },
+    "freshPending": {
+      "main": true,
+      "pending": 1,
+      "relayed": 1
+    },
+    "injectedLateCallbackAccepted": false
+  },
+  "freshRealGet": {
+    "bodyBytes": 7497,
+    "looksLikeDirectory": true,
+    "state": "success",
+    "status": 200
+  },
+  "noPOSTOrJoinRequests": true,
+  "networkSettingsChanged": false
+}

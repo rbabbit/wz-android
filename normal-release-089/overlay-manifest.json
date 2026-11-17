@@ -1,0 +1,704 @@
+{
+  "schemaVersion": 1,
+  "versionCode": 89,
+  "versionName": "0.89",
+  "profile": "normal-updater-apk-only",
+  "completeBaselineArchive": "warzone-towers-0.87-google-play-source.zip",
+  "completeBaselineSHA256": "1ba4c59a0804793284faaeb25121d1239873bca161a87951594e7e660c3f6320",
+  "completeBaselineMembers": 14008,
+  "retainedPlayFiles": [
+    {
+      "path": "AGENTS.md",
+      "baselineSHA256": "1fd84b33b26554098f6ab2a41d1a4db21af481574f561326a84ed0ccdc222f91",
+      "playSHA256": "c46fd5f61ae5ceb6b3d934bce6cbf8d1335468fc5709904ac9fc65f16567fcef"
+    },
+    {
+      "path": "app/build.gradle.kts",
+      "baselineSHA256": "3ea7a91e8f6133074c1a7c62de1a24a12b3f8f31d18513cb9f65adda49b08417",
+      "playSHA256": "695b707fe0dde47a6f6570e71f06e0d460d5d6ab7d673b0236926181204623e5"
+    },
+    {
+      "path": "app/src/main/AndroidManifest.xml",
+      "baselineSHA256": "be84f826d23b4e26f2a2f3fd2c2d03bca78b5f029f0eb32390d71c718398d100",
+      "playSHA256": "98405e971c714ee594a460f1ef67ed2e2c1ddfbeea2543185e6878b795368654"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MainActivity.java",
+      "baselineSHA256": "bf720bec791d3df6bb4f6e0afa0fb75f53025a9f57ee3945b06117394ac20e47",
+      "playSHA256": "0c4b5b3e9e828217e079bea5c9b38ac1e275a90ad84c8d0d596962d68d400258"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/HomeModesView.java",
+      "baselineSHA256": "b31f7e1d41640ccd3dc0af1956694bd8610fb79a3bf9d0ed4f556e1a024400c7",
+      "playSHA256": "f712e2d656b0e899192cf89ebcfc60ac4b2151ef9c6f7af7846a1a0538f89e70"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MultiplayerActivity.java",
+      "baselineSHA256": "8fa99397b54c332284b9cbb000b6a48b0a52376141284a7aad5f3e0cc13f0bae",
+      "playSHA256": "028af2f8d6c7d25fceddff442f1f59c49b873097356e419361de97eac11d938c"
+    },
+    {
+      "path": "app/src/playRelease/AndroidManifest.xml",
+      "baselineSHA256": null,
+      "playSHA256": "a705f0f191935a6c6d1151fe5e81469b3b5fe8459812a5f331d279493c5f3768"
+    },
+    {
+      "path": "app/src/playRelease/java/com/rbabbit/blocknight/warzone/AppUpdateController.java",
+      "baselineSHA256": null,
+      "playSHA256": "58ddf86b8dab9a283d7a48a0c7b97f70d2d4714c29f2e6a991490bee93076c28"
+    },
+    {
+      "path": "tools/build-play-release.py",
+      "baselineSHA256": null,
+      "playSHA256": "b40d0e5554c96ccd72c6a24141dfdea12124059f980a1ff7ecf1131aba92d0d1"
+    }
+  ],
+  "retainedProfileFiles": [
+    {
+      "path": "google-play-release/FALLBACKS.json",
+      "sha256": "f341c7a99c327c5d27e94704a41b34f82410becb116f98ca081db37f5c6e9aa7"
+    },
+    {
+      "path": "google-play-release/README.md",
+      "sha256": "863d9178a515491258a011a6026714abb0756fd39c6ce1a97ebd81910cc390fe"
+    },
+    {
+      "path": "google-play-release/RELEASE-NOTES.md",
+      "sha256": "88566357873069a53e724b03083d3e8f95b848a761f690331d8a30af8bf5d6ec"
+    },
+    {
+      "path": "google-play-release/SOURCE-PROVENANCE.json",
+      "sha256": "57811cee507ca29ecb9ddb9c78c24f8d98d3099badb2f56d496dfc46aedd22c2"
+    },
+    {
+      "path": "google-play-release/VALIDATION.json",
+      "sha256": "a4abbcc818d63ee923ae9798a8717ec2c3d58e9f319d6acd24b589925c7be5df"
+    },
+    {
+      "path": "google-play-release/overlay-manifest.json",
+      "sha256": "dcf80a4818ecb058de137032d1f2bd0918c2cf7a3c8c6a234de918b475a28fb4"
+    },
+    {
+      "path": "google-play-release/overrides/AGENTS.md",
+      "sha256": "c46fd5f61ae5ceb6b3d934bce6cbf8d1335468fc5709904ac9fc65f16567fcef"
+    },
+    {
+      "path": "google-play-release/overrides/app/build.gradle.kts",
+      "sha256": "695b707fe0dde47a6f6570e71f06e0d460d5d6ab7d673b0236926181204623e5"
+    },
+    {
+      "path": "google-play-release/overrides/app/src/main/AndroidManifest.xml",
+      "sha256": "98405e971c714ee594a460f1ef67ed2e2c1ddfbeea2543185e6878b795368654"
+    },
+    {
+      "path": "google-play-release/overrides/app/src/main/java/com/rbabbit/blocknight/warzone/HomeModesView.java",
+      "sha256": "f712e2d656b0e899192cf89ebcfc60ac4b2151ef9c6f7af7846a1a0538f89e70"
+    },
+    {
+      "path": "google-play-release/overrides/app/src/main/java/com/rbabbit/blocknight/warzone/MainActivity.java",
+      "sha256": "0c4b5b3e9e828217e079bea5c9b38ac1e275a90ad84c8d0d596962d68d400258"
+    },
+    {
+      "path": "google-play-release/overrides/app/src/main/java/com/rbabbit/blocknight/warzone/MultiplayerActivity.java",
+      "sha256": "028af2f8d6c7d25fceddff442f1f59c49b873097356e419361de97eac11d938c"
+    },
+    {
+      "path": "google-play-release/overrides/app/src/playRelease/AndroidManifest.xml",
+      "sha256": "a705f0f191935a6c6d1151fe5e81469b3b5fe8459812a5f331d279493c5f3768"
+    },
+    {
+      "path": "google-play-release/overrides/app/src/playRelease/java/com/rbabbit/blocknight/warzone/AppUpdateController.java",
+      "sha256": "58ddf86b8dab9a283d7a48a0c7b97f70d2d4714c29f2e6a991490bee93076c28"
+    },
+    {
+      "path": "google-play-release/overrides/tools/build-play-release.py",
+      "sha256": "b40d0e5554c96ccd72c6a24141dfdea12124059f980a1ff7ecf1131aba92d0d1"
+    },
+    {
+      "path": "google-play-release/package-complete-source.py",
+      "sha256": "c1237c02c4a6d44a3cb02b943c44d6c1f389c23b299816d3fa995fbbd9f178ee"
+    },
+    {
+      "path": "google-play-release/prepare-and-build.py",
+      "sha256": "838d8dafb01ee635951e7f84740e529fa47739803e7499c57227616b6d2afe4a"
+    }
+  ],
+  "files": [
+    {
+      "path": "AGENTS.md",
+      "rootBaselineSHA256": "1fd84b33b26554098f6ab2a41d1a4db21af481574f561326a84ed0ccdc222f91",
+      "normalSHA256": "faa5dde37d030a224aa5eb01f46b92c0a73a13d536eb9f9748acefde89eb8b98",
+      "bytes": 82644
+    },
+    {
+      "path": "app/build.gradle.kts",
+      "rootBaselineSHA256": "3ea7a91e8f6133074c1a7c62de1a24a12b3f8f31d18513cb9f65adda49b08417",
+      "normalSHA256": "bc14ce831fa5455539471a51fb0659a45c0c79340a157633f579e4be99e08031",
+      "bytes": 2991
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/session.js",
+      "rootBaselineSHA256": "061cbe682d7f1e2bc179e2b05b9853443d7ac325ef1ba87060383f0391b01b98",
+      "normalSHA256": "46bc31029c1c28da00ca98440bc3b4581af10d56db0c42a7375f590175333a2c",
+      "bytes": 28129
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/warzone2100.js",
+      "rootBaselineSHA256": "834f87b00f87f32630360bb15bf818ad7d63a91d0ccbb12018a9d3a53bc43a76",
+      "normalSHA256": "4cfbd94c7954deb61c84c49e43fcd8dcbd53268c445998d283a3e310f846c89b",
+      "bytes": 726317
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/warzone2100.wasm",
+      "rootBaselineSHA256": "1d050920393ab7be2d7871a8a269e5d5487b567bf9e46457ecb1104553c38d0d",
+      "normalSHA256": "2f884ca84c3c29bdbeed8102d710c40e73b29320d1e99c1ff64d97269d252fbc",
+      "bytes": 13611211
+    },
+    {
+      "path": "app/src/main/assets/warzone-campaign-hud.js",
+      "rootBaselineSHA256": "8980d11e9fbf18dbe9b5d5e1846e43d0b11dde0a34d5017ace780a2c658da586",
+      "normalSHA256": "f8ded40a391bf1bc967827abef1d3bc722b124d26a2f040d0a69b2f4c5f472c1",
+      "bytes": 17227
+    },
+    {
+      "path": "app/src/main/assets/warzone-touch-controls.js",
+      "rootBaselineSHA256": "ab600b66e42a65e0802d14d08cf7748efe2ba40f93faf1a1ab14b7c83dc34eb9",
+      "normalSHA256": "2c3838315e65422c77acdf83ebdc13a0abcc6033d86868d27291b402268f9cf6",
+      "bytes": 154307
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/towers-game-controls.css",
+      "rootBaselineSHA256": "a07401b9b120bd6e12e34b3b173cfc14ae354eb5dfab2a4dd24608d1fae9e7d0",
+      "normalSHA256": "0cc407c8a9e3aec65fef68efda907429135dc69f3f18f57b61e3e6563d847f67",
+      "bytes": 21377
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100-campaign.js",
+      "rootBaselineSHA256": "1ae7c30db5ba69f26206a921ce4e122d7e7727cec56188e86c3663820ee420bb",
+      "normalSHA256": "d70a3c7495d32fb53fac1b90785d51188bb0e6027919ea1d8d9b485b7d71f408",
+      "bytes": 795091
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100-duel.js",
+      "rootBaselineSHA256": "6ef65429d1f496bfe5c52e2d8d770b28eaf319d77cb0d61675abd5d78d5420b5",
+      "normalSHA256": "dac4a4453bc36362543bc639f8aed1b31b9c8ef0f63c7b151fbeec4e85addf7c",
+      "bytes": 752866
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100-ffa.js",
+      "rootBaselineSHA256": "b7c403da49cfe84dc717d5b4eafaffb2079014aee44907160389d5d987327c75",
+      "normalSHA256": "0bd77ca6d8f1c4bef0dd4acbdcf2a9633ce579c5ce3929c3f63d811f2c16cbb0",
+      "bytes": 804647
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100-towers-052.js",
+      "rootBaselineSHA256": "e656e66ef6f539760cf400a4b61a3ed6e22e5d23ee984ef7db9a431c607465a7",
+      "normalSHA256": "99ea1dcfc0b39713c237c85e8bd6a9f46355fe40f4b2e5dd733a5fce4b1c57b3",
+      "bytes": 794125
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100-towers-052.wasm",
+      "rootBaselineSHA256": "2924f46aa75d9b27b92494f01d56239856ad06b2164cd7131144a3a5faeb87db",
+      "normalSHA256": "e3cccd033a5874d0451aaa095cdef6c8146dcdb95ec1288f36d9482ab9b6b236",
+      "bytes": 13517386
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100.js",
+      "rootBaselineSHA256": "fdf0c4807323b15a00cbe92947db2fb6b2da771384af9f3fba08fc5be03c5949",
+      "normalSHA256": "31cf341a79f14fb4d8cb2220871df3c3be6c1d618b977285026406d067b871d4",
+      "bytes": 794130
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100.wasm",
+      "rootBaselineSHA256": "497c65308d3e85f0b5370ec0ff0eb48e6a0876e735ad45e3b280829c7f3c2a06",
+      "normalSHA256": "b1addc472eb09750e3c33dc3979af3c13e9266e439d894cead015616572e7caf",
+      "bytes": 13519049
+    },
+    {
+      "path": "release-records/ISSUES-AND-CHECKS.md",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "5571b883c041da1f630df8431238c9a5d434cb1b428e7aea529e2456d0807107",
+      "bytes": 2285
+    },
+    {
+      "path": "release-records/all-combat-ui-089-checks.json",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "9b2f7d6f28dd8a4e2ee549506e5eaab97508fa4536183ae7e1ab62c06fba5f67",
+      "bytes": 1508
+    },
+    {
+      "path": "release-records/apk-integrity.json",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "e7dabd14207235af70c25c5865ef0ab963d2eb339d96e786c1fe5b2f62987035",
+      "bytes": 1622
+    },
+    {
+      "path": "release-records/campaign-layout-js-089-checks.json",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "dc82a63a782a9127e9fa3c6e7843738167aebf1f3b02cb730a5b15489f38a9e9",
+      "bytes": 2345
+    },
+    {
+      "path": "release-records/deployment-independent-review.json",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "ea0c97cb830d478c078a5fe6f83e0fd5a610eb632a74e70db9b5e6d12cb815b3",
+      "bytes": 3091
+    },
+    {
+      "path": "release-records/initial-fallback.json",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "09d5fbc9cf68d91c8b532909e90d662ae8597d110eea169c363d4201298e6d7d",
+      "bytes": 1622
+    },
+    {
+      "path": "release-records/source-package-independent-review.json",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "1471ba88fedcb8766ace983d8eefc49ed96458a1d9f2ad4173942d6b982ba270",
+      "bytes": 1264
+    },
+    {
+      "path": "release-records/vps-deploy-guard-checks.json",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "59c52c42791c2b15b0049608f1d44402c6f733e8c7cac2e8e967c008d96d58f3",
+      "bytes": 1265
+    },
+    {
+      "path": "tools/build-native-selection-089.py",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "a81d781943765215e0efe716d8306948b3087bd7bc8e5fa68503a5fdd82b1643",
+      "bytes": 12461
+    },
+    {
+      "path": "tools/build-native-selection-cold-089.sh",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "c19a188960d1b8f31b188f7cde5aa25e860fb69fd9d502b58c9135cf07145693",
+      "bytes": 2338
+    },
+    {
+      "path": "tools/build-normal-apk.py",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "ba54608acdc7c5702f41dc186deb5a4c07390f7809e32ff71482b9d4d4a05f4b",
+      "bytes": 1781
+    },
+    {
+      "path": "tools/campaign-ui-fixture-089.cjs",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "b933076c3fb21bbd3b40779df333bc7daab2411515f6c3229ad2fc4fa3eefd66",
+      "bytes": 4579
+    },
+    {
+      "path": "tools/check-all-combat-ui-089.cjs",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "30bcb35aa7999bed4e18ab3ceb59a3f189a667fdf4615797739e6fe267b09c88",
+      "bytes": 9653
+    },
+    {
+      "path": "tools/check-campaign-header-089.cjs",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "13cb4800809c1dcdfcc8d626cf08198c94e3de56646bbf7e550b63f203648c13",
+      "bytes": 12847
+    },
+    {
+      "path": "tools/check-deploy-update-089.py",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "5d293343e809886ca65280f5151561900375045427289b4a2311e2f9ab942330",
+      "bytes": 13005
+    },
+    {
+      "path": "tools/check-native-loader-pairs-089.py",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "b4260891c031169c129d50b9926015b2181f1f08ef7bab83b55ef738eb08f468",
+      "bytes": 6716
+    },
+    {
+      "path": "tools/check-native-selection-089.py",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "99fb7f62811e56826b479319756a4076695215519a93e18a1190d996909d77f8",
+      "bytes": 7243
+    },
+    {
+      "path": "tools/deploy-warzone-update-089.py",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "bf86a39a3074d1a5e4c259f03d2a40e5f6e690d14a3e5ee00cdad24348114ec4",
+      "bytes": 21349
+    },
+    {
+      "path": "tools/integrate-native-selection-089.py",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "919409e0f68b7f600eab16b8b0130bc1d73b7c78d6b51a47e0d5499949bf545d",
+      "bytes": 14740
+    },
+    {
+      "path": "tools/prepare-native-selection-cold-089.py",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "def1a6d94f5ae35c7001675c596a3290f74cb43df273cfa04b925c553426b956",
+      "bytes": 2868
+    },
+    {
+      "path": "tools/verify-normal-apk-089.py",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "dbf136cd1055ea7c9dc30c97d3fcf48f23cc5829c53efd1517be6dd0caef4b59",
+      "bytes": 5792
+    },
+    {
+      "path": "vendor/native-089/BOOTSTRAP.md",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "55030f9813165520d2a012c0f364e0071bc14dce1c1c5f240884e8a0f64dddd7",
+      "bytes": 7117
+    },
+    {
+      "path": "vendor/native-089/bootstrap/multiplayer/CMakeCache.txt",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "90dadcd30594e229c4f0549e5f1bcca98e6b8c102d72231d465d3c157fdd77f5",
+      "bytes": 51493
+    },
+    {
+      "path": "vendor/native-089/bootstrap/multiplayer/baseline-git.patch",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "bd67df2fe953d20206c0cce373c657df990d36d2c6a6e9efef5821e4763d1adc",
+      "bytes": 51846
+    },
+    {
+      "path": "vendor/native-089/bootstrap/multiplayer/source/lib/sdl/main_sdl.cpp",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "f3c3efa2b148648e83c1f851f46d84ec5786d32283795a78498fc2770f574d36",
+      "bytes": 127504
+    },
+    {
+      "path": "vendor/native-089/bootstrap/multiplayer/source/src/display3d.cpp",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "43f52868a1ac6fa5a7be609d8940c9db7dfba8d7a3b7140e5c29e79f7f9940ac",
+      "bytes": 144998
+    },
+    {
+      "path": "vendor/native-089/bootstrap/multiplayer/source/src/hci.cpp",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "1896ac855e999655c430e16446804fb461c444cf5f054254a7828863737e1af7",
+      "bytes": 84627
+    },
+    {
+      "path": "vendor/native-089/bootstrap/multiplayer/source/src/mobile-room-map-preview.cpp.inc",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "e1b785ae5e5d38ebfce173dc739ec388598af980722bacb6880e623d835f6544",
+      "bytes": 5206
+    },
+    {
+      "path": "vendor/native-089/bootstrap/multiplayer/source/src/mobile-room-native.cpp.inc",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "eb35b040cf1ce8430ae9fb1887f90703f5874707fa0c576546ed1df2e3204a83",
+      "bytes": 15396
+    },
+    {
+      "path": "vendor/native-089/bootstrap/multiplayer/source/src/multiint.cpp",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "ef576f51f0b1bf9c8a40ade00d68331e278b673ba0cefeefbff72a58b12fdda0",
+      "bytes": 268712
+    },
+    {
+      "path": "vendor/native-089/bootstrap/multiplayer/source/src/quickjs_backend.cpp",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "4224840b9a7fda8f333e1a009f82bcf455509d519be75312b36c13786fb4611a",
+      "bytes": 190604
+    },
+    {
+      "path": "vendor/native-089/bootstrap/multiplayer/source/src/wrappers.cpp",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "d23f339dda4ab0e951934993b93ee0681d350773e6cb6494ec120f2cd5fb5fe3",
+      "bytes": 13524
+    },
+    {
+      "path": "vendor/native-089/bootstrap/offline/CMakeCache.txt",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "69d378558fcac997a34656e8cdf906bf6e79cc284025d10cb8dba424647b5e04",
+      "bytes": 52579
+    },
+    {
+      "path": "vendor/native-089/bootstrap/offline/baseline-git.patch",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "70d981df597f01023bd49e38f2da4f0fbfeffbfb8026420b271c5750814803aa",
+      "bytes": 58203
+    },
+    {
+      "path": "vendor/native-089/bootstrap/offline/source/lib/sdl/main_sdl.cpp",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "dce7553f4719e1becfec8ede07d147965b3ea72ca926bde240e3b650a93f3470",
+      "bytes": 128201
+    },
+    {
+      "path": "vendor/native-089/bootstrap/offline/source/src/console.cpp",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "282b50dd3bbdf8f5b8703ab74fd6875057d3a848a8ced36434260f6b221f5176",
+      "bytes": 20710
+    },
+    {
+      "path": "vendor/native-089/bootstrap/offline/source/src/display3d.cpp",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "3b5c1a41144011805819d15e9bfac6f1289d726da276433bfeb237904c0fa15f",
+      "bytes": 145254
+    },
+    {
+      "path": "vendor/native-089/bootstrap/offline/source/src/droid.cpp",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "5b8f8d8c6cca08bdcec70b34f6de9fee3fff0de2bc4ae5815ff1025390ddc1f1",
+      "bytes": 116982
+    },
+    {
+      "path": "vendor/native-089/bootstrap/offline/source/src/hci.cpp",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "b99c89e580856201e6e884f0105e7a6aabaa0e55d66f39e5284ac21ecf2dbdc4",
+      "bytes": 103857
+    },
+    {
+      "path": "vendor/native-089/bootstrap/offline/source/src/intdisplay.cpp",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "99645ec2555ba7dca7c41ebe75f955df46c3890e07b4606e0b8488df7613bb27",
+      "bytes": 53946
+    },
+    {
+      "path": "vendor/native-089/bootstrap/offline/source/src/keybind.cpp",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "5730cf9a2b791a6a437f4e0da040e9dbb75e8befb48dc02caefb1a8e824355ed",
+      "bytes": 67898
+    },
+    {
+      "path": "vendor/native-089/bootstrap/offline/source/src/loadsave.cpp",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "b58f01a03b551cbc589ef468f6a0572bd49978f9ba88db503eb761a3518b3341",
+      "bytes": 38035
+    },
+    {
+      "path": "vendor/native-089/bootstrap/offline/source/src/main.cpp",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "c0d9fad6803313b48d4aeccc592dc2a157778f2198101593711d111ea976cb6c",
+      "bytes": 65720
+    },
+    {
+      "path": "vendor/native-089/bootstrap/offline/source/src/quickjs_backend.cpp",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "13137dd600eb21ff1506e01e81a5624fd514447d82bb58328bc335eeae009b68",
+      "bytes": 160041
+    },
+    {
+      "path": "vendor/native-089/bootstrap/offline/source/src/radar.cpp",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "e92fcfb9151aa18adf36208ea53835ca7f7ee0e3347da6968628ba8747866f0d",
+      "bytes": 29776
+    },
+    {
+      "path": "vendor/native-089/bootstrap/offline/source/src/research.cpp",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "06b8999191bb0160e6b73c268f8ddd69347102133ecc221aee23504973dc918a",
+      "bytes": 63224
+    },
+    {
+      "path": "vendor/native-089/bootstrap/retained-snapshot.json",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "e26a5594fc92e08009341baa7e907c9f31909622971cbd288828ad491a0372a0",
+      "bytes": 4662
+    },
+    {
+      "path": "vendor/native-089/build-plan.json",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "1e790a27ebcf8a41c53bea9c4d1cb5096f94bfaafefb3e42ffd6a7f58b3a63c1",
+      "bytes": 21267
+    },
+    {
+      "path": "vendor/native-089/checks/loader-pairs.json",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "a9262c2c0f8beb93b5299bfb869a33d814c946202d48cf83c60eebd41f31f83e",
+      "bytes": 14933
+    },
+    {
+      "path": "vendor/native-089/checks/source-checks.json",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "b1f987eaa86d87d2057f57bba3776e90a10a8439c4e06b657305d660aa5401fd",
+      "bytes": 576
+    },
+    {
+      "path": "vendor/native-089/integrated/multiplayer/runtime-integration.json",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "7a082a084a0290b4e3c96a1c5d3fb2b048634f208cd94153f069e686aafb80fc",
+      "bytes": 4050
+    },
+    {
+      "path": "vendor/native-089/integrated/shared-campaign/runtime-integration.json",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "62bfd833a0366d1ae78db5cdf906ace91df81ce53ba59eb1cb4b04c0fac6ca2a",
+      "bytes": 3960
+    },
+    {
+      "path": "vendor/native-089/integrated/shared-duel/runtime-integration.json",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "fd9fce9d4f7c9390b9c23e064e0e9faf3e93ea321b2564d525233304d4edc21a",
+      "bytes": 3935
+    },
+    {
+      "path": "vendor/native-089/integrated/shared-ffa/runtime-integration.json",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "975f5ef182c4180fb9f18791ff3a4775aafc08edfd7a19dcd845992f2cf50086",
+      "bytes": 3935
+    },
+    {
+      "path": "vendor/native-089/integrated/shared/runtime-integration.json",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "47dacea258d09aeeddfb53a7d6efcc358d1055c95c0e779f99d62985d3b0a930",
+      "bytes": 4281
+    },
+    {
+      "path": "vendor/native-089/integrated/towers/runtime-integration.json",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "b8a82e221a58b611cb427d4a8cda912253efaef55b650c0cd1448604618f57a9",
+      "bytes": 4119
+    },
+    {
+      "path": "vendor/native-089/logs/compile-multiplayer-display3d.cpp.log",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "vendor/native-089/logs/compile-offline-display3d.cpp.log",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "vendor/native-089/logs/compile-offline-hci.cpp.log",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "vendor/native-089/logs/compile-shared051-droid.cpp.log",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "vendor/native-089/logs/link-multiplayer.log",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "ccddb57ff85231dc46bd7945c7f1d77948272be7114626858ce4e4e31adfdd60",
+      "bytes": 154
+    },
+    {
+      "path": "vendor/native-089/logs/link-shared.log",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "ccddb57ff85231dc46bd7945c7f1d77948272be7114626858ce4e4e31adfdd60",
+      "bytes": 154
+    },
+    {
+      "path": "vendor/native-089/logs/link-towers.log",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "ccddb57ff85231dc46bd7945c7f1d77948272be7114626858ce4e4e31adfdd60",
+      "bytes": 154
+    },
+    {
+      "path": "vendor/native-089/native-build.json",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "0d0b72cb911f999d88c0a6d04847fc8abab8f1bf32d84260ad321a5768e81035",
+      "bytes": 104100
+    },
+    {
+      "path": "vendor/native-089/patches/multiplayer/display3d.cpp.patch",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "479951a20acec4ed847653ef42848c8208d6d1951087748ca8782c2b68d29275",
+      "bytes": 2307
+    },
+    {
+      "path": "vendor/native-089/patches/offline/display3d.cpp.patch",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "433f9719e7688927fb83459e54e571a742cf9abebdbb77d807172c70a88800db",
+      "bytes": 2307
+    },
+    {
+      "path": "vendor/native-089/patches/offline/hci.cpp.patch",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "9d51445727d98a0724a473d07706c75f467d0b6589841c855bb2c507458143e8",
+      "bytes": 2299
+    },
+    {
+      "path": "vendor/native-089/proof/multiplayer-cache-after.json",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "7bbd08fafdeb854ae6a44e59910d1d2a08427ca27f71134bdd67df48ce8d5998",
+      "bytes": 98636
+    },
+    {
+      "path": "vendor/native-089/proof/multiplayer-cache-before.json",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "7bbd08fafdeb854ae6a44e59910d1d2a08427ca27f71134bdd67df48ce8d5998",
+      "bytes": 98636
+    },
+    {
+      "path": "vendor/native-089/proof/offline-cache-after.json",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "779f7a83aa6f936e58e86bc870e79e0be64e7667ef8c131c4a1b7cfe80bf0e78",
+      "bytes": 98636
+    },
+    {
+      "path": "vendor/native-089/proof/offline-cache-before.json",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "779f7a83aa6f936e58e86bc870e79e0be64e7667ef8c131c4a1b7cfe80bf0e78",
+      "bytes": 98636
+    },
+    {
+      "path": "vendor/native-089/proof/protocol-header.h",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "4be9b0d6ada7ee383824bfe54e3ee4e3986c2a868d9a75bfe9fff6b84ee870ec",
+      "bytes": 409
+    },
+    {
+      "path": "vendor/native-089/recipes/build-native-blueprint.sh",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "6f3835c7eb8441c216f7e0b056affe22b34eb60e2985341029c866ca75e9bc26",
+      "bytes": 2668
+    },
+    {
+      "path": "vendor/native-089/recipes/integrate-multiplayer-native-082.py",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "e7ecf6b41df3f5395fc7a596de6d2847642fec15ffbf4511baf194955479d6e6",
+      "bytes": 3599
+    },
+    {
+      "path": "vendor/native-089/recipes/integrate-native-runtime.py",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "30014384925fdb0dda52d338244fd07d300c1223b841d56e8443a85b77e34ee3",
+      "bytes": 9705
+    },
+    {
+      "path": "vendor/native-089/runtime-integration.json",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "4fad7cad2ab86b937b70e7c356f9be0be3fbfc88941a2a94fd729c0aaf4253e8",
+      "bytes": 27608
+    },
+    {
+      "path": "vendor/native-089/source-provenance-manifest.json",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "8ee6edddbf0210063cc561ae7b02ff75a43adff4fabd95051f5231bee42b9681",
+      "bytes": 9187
+    },
+    {
+      "path": "vendor/native-089/source/multiplayer/src/display3d.cpp",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "65adaf80b7bf0adffdef769612fac808c21bb0cef057b3934eca61110b8a6d38",
+      "bytes": 145099
+    },
+    {
+      "path": "vendor/native-089/source/offline/src/display3d.cpp",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "2fbb13666fed87b55152be8b5f6f70a13c2ec2e5ae0e51f8e9808ce9e45b2d44",
+      "bytes": 145355
+    },
+    {
+      "path": "vendor/native-089/source/offline/src/hci.cpp",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "51ff92855e417554a8e1b5785279a9cac77214f141f0fe90655291910dda9e64",
+      "bytes": 105768
+    },
+    {
+      "path": "vendor/native-089/source/shared051/src/droid.cpp",
+      "rootBaselineSHA256": null,
+      "normalSHA256": "b32c09a40baf1f34b1b00c33b2928f8e771b35646e65508a3331dd0104ccfea4",
+      "bytes": 115923
+    }
+  ]
+}

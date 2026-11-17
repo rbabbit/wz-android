@@ -18,12 +18,15 @@
   let panelOpen=false,lastMiddleDown=-Infinity,lastLeftDown=-Infinity;
   let lastPoint={x:0,y:0},lastAction='idle',lastError='';
   let manualSelectionRevision=0,combatLock=false,facadeSerial=0;
+  let combatContext='',combatOverride='',combatOffPending=false,combatGestureSerial=0;
+  const combatOffNonces=new Set();
   let combatIntent=null,combatQueries=0,combatInteractionUntil=0,combatTimer=null,combatPageHidden=false,combatActivation='',combatActivationSerial=0;
   const heldKeys=new Map();
   const canvas=()=>document.getElementById('canvas');
   const modal=()=>{
     const help=window.parent?.WarzoneHost?window.parent.document.getElementById('warzone-towers-help-overlay'):null;
-    return Boolean(window.__warzoneCommands?.isOpen?.()||window.__warzoneIntelligence?.isOpen?.()||window.__blockNightResearch?.report?.().open||window.__blockNightResearch?.report?.().opening||help&&!help.hidden);
+    const music=parentDocument().getElementById('wt-map-music-menu');
+    return Boolean(window.__warzoneCommands?.isOpen?.()||window.__warzoneIntelligence?.isOpen?.()||window.__blockNightResearch?.report?.().open||window.__blockNightResearch?.report?.().opening||help&&!help.hidden||music&&!music.hidden);
   };
   const ordersAllowed=()=>{const s=window.PcMultiplayerState;return s?.canIssueOrders!==false&&s?.spectator!==true&&!(Number.isInteger(s?.realPlayer)&&Number.isInteger(s?.player)&&s.realPlayer!==s.player);};
   const worldReady=()=>{const s=window.PcMultiplayerState;return enabled&&phase==='game'&&s?.worldReady===true&&(typeof s.cameraSafe==='boolean'?s.cameraSafe:s.worldSafe!==false)&&s.nativeMenuOpen!==true;};
@@ -31,32 +34,64 @@
   function combatSuspended(){
     const pages=window.__warzoneCommands?.report?.()||{};
     return !worldReady()||!ordersAllowed()||document.hidden||combatPageHidden||modal()||Boolean(pages.buildOpen||pages.placement||pages.selectingTrucks||pages.nativeMenu||pages.nativeClosing||pages.exitingBuild||pages.buildingOpening||window.__warzoneCommands?.isDemolishing?.())||
-      points.size>0||heldMouse!==null||heldKeys.size>0||jobs.length>0||Boolean(activeJob&&!activeJob.finished)||combatQueries>0||performance.now()<combatInteractionUntil;
+      Boolean(combatOverride)||points.size>0||heldMouse!==null||heldKeys.size>0||jobs.some(job=>!job.awaitingCombat)||Boolean(activeJob&&!activeJob.finished&&!activeJob.awaitingCombat)||combatQueries>0||performance.now()<combatInteractionUntil
+      ||Boolean(parentDocument().activeElement&&/^(INPUT|TEXTAREA|SELECT)$/.test(parentDocument().activeElement.tagName||'')||document.activeElement?.isContentEditable);
   }
   function refreshCombatLock(force=false){
     const native=window.PcMultiplayerNative,snapshot=native?.state?.combatLock;
-    if(!ordersAllowed())combatLock=false;
-    // Acknowledged native overrides (selection/control groups/session end) are
-    // authoritative. An old OFF snapshot cannot cancel a newly requested ON.
-    if(!force&&combatLock&&combatIntent?.enabled===true&&combatIntent.nonce&&snapshot?.requestNonce===combatIntent.nonce&&snapshot.enabled===false)combatLock=false;
+    const context=typeof snapshot?.context==='string'?snapshot.context:'';
+    if(!ordersAllowed()||combatContext&&context!==combatContext){combatLock=false;combatActivation='';combatOverride='';combatOffPending=false;combatOffNonces.clear();combatIntent=null;}
+    combatContext=context;
+    native?.cancelGuardedInput?.();
+    if(!context)return false;
+    if(combatOffPending&&snapshot?.context===context&&snapshot.activation===combatActivation
+        &&(combatOffNonces.has(snapshot.deselectNonce)||combatOffNonces.has(snapshot.deselectAppliedNonce)))combatOffPending=false;
     const suspended=combatSuspended();
-    if(force||!combatIntent||combatIntent.enabled!==combatLock||combatIntent.suspended!==suspended){
-      if(native?.setCombatLock?.({enabled:combatLock,suspended,activation:combatActivation})===true){
-        combatIntent={enabled:combatLock,suspended,activation:combatActivation,nonce:native.combatLockIntent?.nonce||null};
+    if(force||combatOffPending&&combatIntent?.deselect!==true||!combatIntent||combatIntent.enabled!==combatLock||combatIntent.suspended!==suspended||combatIntent.context!==context){
+      if(native?.setCombatLock?.({enabled:combatLock,suspended,activation:combatActivation,context,deselect:combatOffPending})===true){
+        combatIntent={enabled:combatLock,suspended,activation:combatActivation,deselect:combatOffPending,nonce:native.combatLockIntent?.nonce||null};
+        combatIntent.context=context;if(combatOffPending&&combatIntent.nonce)combatOffNonces.add(combatIntent.nonce);
       }
     }
-    return snapshot?.enabled===true;
+    native?.cancelGuardedInput?.();return combatLock;
   }
   function setCombatLock(value){
-    if(typeof value!=='boolean'||value&&(!worldReady()||!ordersAllowed()))return false;
-    const previous=combatLock,previousIntent=combatIntent,previousActivation=combatActivation;combatLock=value;
-    // A native manual selection blocks this activation, including a late
-    // unsuspend written before its snapshot arrives. Only a new user enable
-    // receives a new activation; background refreshes cannot re-arm it.
+    refreshCombatLock();
+    if(typeof value!=='boolean'||value&&(!enabled||phase!=='game'||window.PcMultiplayerState?.worldReady!==true||!ordersAllowed()))return false;
+    if(!combatContext)return false;
+    combatLock=value;combatOverride='';combatOffPending=!value;combatOffNonces.clear();
+    // Each user ON receives a fresh activation and cancels an older pending
+    // OFF. Ordinary input only suspends the effective native selection policy.
     if(value)combatActivation='mp-combat-user-'+Date.now()+'-'+(++combatActivationSerial);
     refreshCombatLock(true);
-    if(combatIntent===previousIntent){combatLock=previous;combatActivation=previousActivation;return false;}
     return value;
+  }
+  function holdCombatSelection(reason='constructors'){combatOverride=String(reason);refreshCombatLock();return true;}
+  function resumeCombatSelection(reason){if(!reason||combatOverride===reason)combatOverride='';refreshCombatLock();return !combatOverride;}
+  function resetCombatMode(){combatLock=false;combatOverride='';combatOffPending=false;combatOffNonces.clear();combatIntent=null;refreshCombatLock(true);}
+  async function nativeSelectVisibleTrucks(options={}){
+    holdCombatSelection('constructors');
+    const native=window.PcMultiplayerNative,context=combatContext,activation=combatActivation,requested=combatLock;
+    const token=generation,manual=manualSelectionRevision,gesture=combatGestureSerial,started=performance.now();
+    const timeout=Math.min(2500,Math.max(1,Number(options.timeout)||2500));
+    const active=()=>options.current?.()!==false&&worldReady()&&ordersAllowed()&&!combatPageHidden&&!document.hidden
+      &&native===window.PcMultiplayerNative&&context===combatContext&&activation===combatActivation&&requested===combatLock
+      &&token===generation&&manual===manualSelectionRevision&&gesture===combatGestureSerial&&combatOverride==='constructors';
+    while(performance.now()-started<timeout){
+      refreshCombatLock();if(!active()||!context)return {ok:false,reason:'selection-cancelled'};
+      const ack=native?.state?.combatLock,intent=native?.combatLockIntent;
+      if(ack?.context===context&&ack.activation===activation&&ack.requestNonce===intent?.nonce&&ack.requestedSuspended===true&&ack.suspended===true){
+        const dispatchCurrent=()=>active()&&performance.now()-started<timeout;
+        const reply=await native.command('select-visible-trucks',{},dispatchCurrent,Math.max(1,timeout-(performance.now()-started)));
+        if(!active())return {ok:false,reason:'selection-cancelled'};
+        const ids=reply?.selectedIds;
+        if(reply?.ok!==true||!Array.isArray(ids)||!ids.every(id=>Number.isInteger(id)&&id>0)||new Set(ids).size!==ids.length)
+          return {ok:false,reason:reply?.reason||'selection-changed'};
+        return {ok:true,selectedIds:ids.slice(),player:native.state.player,current:active};
+      }
+      await new Promise(resolve=>setTimeout(resolve,25));
+    }
+    return {ok:false,reason:'selection-timeout'};
   }
   const toggleCombatLock=()=>{refreshCombatLock();return setCombatLock(!combatLock);};
   function watchCombatLock(){
@@ -131,12 +166,27 @@
   }
   const cameraJob=job=>job?.kind==='pan'||job?.kind==='radar'||job?.cameraOnly===true;
   function live(job,token){return worldReady()&&token===generation&&!job.cancelled&&(ordersAllowed()||cameraJob(job));}
-  function enqueue(job){if(!worldReady()||!ordersAllowed()&&!cameraJob(job))return false;if(jobs.length>=24){counts.dropped++;return false;}jobs.push(job);refreshCombatLock();pump();return true;}
+  function enqueue(job){if(!worldReady()||!ordersAllowed()&&!cameraJob(job))return false;if(jobs.length>=24){counts.dropped++;return false;}
+    if(job.kind==='click'&&job.button===0&&!cameraJob(job)&&combatLock&&!combatOverride){job.awaitingCombat=true;job.combatGesture=combatGestureSerial;}
+    jobs.push(job);refreshCombatLock();pump();return true;}
+  async function awaitCombatSelection(job,token){
+    const activation=combatActivation,context=combatContext,started=performance.now();
+    while(live(job,token)&&combatLock&&!combatOverride&&combatActivation===activation&&combatContext===context&&job.combatGesture===combatGestureSerial){
+      refreshCombatLock();const ack=window.PcMultiplayerNative?.state?.combatLock;
+      const combat=ack?.combatIds,selected=ack?.selectedIds;
+      if(ack?.enabled===true&&ack.context===context&&ack.activation===activation&&Array.isArray(combat)&&Array.isArray(selected)
+          &&combat.length===selected.length&&combat.every(id=>selected.includes(id)))return true;
+      if(performance.now()-started>=2500){lastError='Native combat selection was not ready for this order.';return false;}
+      await new Promise(resolve=>setTimeout(resolve,20));
+    }
+    return false;
+  }
   async function pump(){
     if(pumping)return;pumping=true;
     try{
       while(enabled&&jobs.length){
         const job=activeJob=jobs.shift(),token=generation;if(!live(job,token)){finishJob(job,false);continue;}focus();
+        if(job.awaitingCombat){if(!await awaitCombatSelection(job,token)){finishJob(job,false);continue;}job.awaitingCombat=false;refreshCombatLock();}
         if(job.kind==='key'){
           const modifier=job.ctrl?{value:'Control',code:'ControlLeft',number:17,flag:'ctrlKey'}:
             job.shift?{value:'Shift',code:'ShiftLeft',number:16,flag:'shiftKey'}:null;
@@ -178,7 +228,7 @@
     return enqueue({kind:'click',x:point.x,y:point.y,button,cameraOnly:point.region==='radar'});
   }
   function beginDrag(gesture,kind){
-    if(kind==='box'){if(!ordersAllowed())return;setCombatLock(false);if(combatLock){clearLong();gesture.moved=true;gesture.job={cancelled:true,ended:true};return;}}
+    if(kind==='box'&&!ordersAllowed())return;
     clearLong();gesture.kind=kind;gesture.moved=true;
     gesture.job={kind,start:{...gesture.start},x:gesture.x,y:gesture.y,ended:false};
     if(kind==='pan'){counts.pans++;lastAction='pan';}else if(kind==='box'){counts.boxes++;lastAction='box-select';}
@@ -265,6 +315,7 @@
     if(!target||event.target!==target&&!tracked)return;
     own(event);
     if(event.type==='pointerdown'){
+      ++combatGestureSerial;
       try{target.setPointerCapture(event.pointerId);}catch{}
       points.set(event.pointerId,{x:event.clientX,y:event.clientY});
       refreshCombatLock();
@@ -335,9 +386,9 @@
     if(!game()||!ordersAllowed())return false;
     const normalized=String(action).toLowerCase();
     if(['research','manufacturing','build','queue'].includes(normalized))return window.parent?.PcMultiplayerSession?.command(normalized)||false;
-    if(normalized==='deselect'){setCombatLock(false);if(combatLock)return false;manualSelectionRevision++;releaseAll();return window.PcMultiplayerNative?.command('deselect',{});}
-    if(normalized==='trucks'){setCombatLock(false);if(combatLock)return false;manualSelectionRevision++;releaseAll();return window.__warzoneCommands?.selectNearbyTrucks?.();}
-    if(normalized==='all-units'){setCombatLock(false);if(combatLock)return false;}
+    if(normalized==='combat'||normalized==='all-combat')return setCombatLock(true);
+    if(normalized==='deselect'){manualSelectionRevision++;releaseAll();combatQueries++;refreshCombatLock();return Promise.resolve(window.PcMultiplayerNative?.command('deselect',{})).finally(()=>{combatQueries--;refreshCombatLock();});}
+    if(normalized==='trucks'){manualSelectionRevision++;releaseAll();return window.__warzoneCommands?.selectNearbyTrucks?.();}
     const binding=commands[normalized];if(!binding)return false;
     clearLong();if(single||multi)releaseAll();counts.commandCalls++;lastAction='command:'+action;
     if(['combat','all-combat','all-units'].includes(normalized))manualSelectionRevision++;
@@ -345,7 +396,7 @@
   }
   function setPhase(value){
     const next=['room','game','frontend','loading'].includes(value)?value:'frontend';
-    if(next!==phase){if(next!=='game')setCombatLock(false);releaseAll();panelOpen=false;phase=next;lastAction='phase:'+phase;refreshCombatLock();}
+    if(next!==phase){if(next!=='game')resetCombatMode();releaseAll();panelOpen=false;phase=next;lastAction='phase:'+phase;refreshCombatLock();}
     return phase;
   }
   function enable(){
@@ -354,20 +405,22 @@
   }
   for(const type of ['pointerdown','pointermove','pointerup','pointercancel'])document.addEventListener(type,pointer,{capture:true,passive:false});
   for(const type of ['touchstart','contextmenu','dragstart','selectstart'])document.addEventListener(type,event=>{if(enabled&&event.target===canvas())event.preventDefault();},{capture:true,passive:false});
-  window.addEventListener('blur',()=>releaseAll());window.addEventListener('pagehide',()=>{combatPageHidden=true;setCombatLock(false);releaseAll();enabled=false;clearTimeout(combatTimer);combatTimer=null;});
+  window.addEventListener('blur',()=>releaseAll());window.addEventListener('pagehide',()=>{combatPageHidden=true;resetCombatMode();releaseAll();enabled=false;clearTimeout(combatTimer);combatTimer=null;});
   document.addEventListener('visibilitychange',()=>{if(document.hidden)releaseAll();refreshCombatLock();});
   const report=()=>({version:2,enabled,phase,...counts,pointers:points.size,queued:jobs.length,
       activeJob:activeJob?.kind||null,heldMouse,heldKeys:[...heldKeys.keys()],gesture:multi?.mode||single?.kind||null,
       panelOpen,lastAction,lastError,commands:Object.keys(commands),manualSelectionRevision,canIssueOrders:ordersAllowed(),cameraSafe:worldReady(),hudVisible:enabled&&phase==='game'&&ordersAllowed(),battleActive:enabled&&phase==='game',
       pendingClicks:jobs.length+(activeJob&&!activeJob.finished?1:0),queuedPointerEvents:0,gestureActive:points.size>0||heldMouse!==null||heldKeys.size>0,
-      pinchSteps:counts.pinches,tiltMoves:counts.tilts,rotationMoves:counts.rotations,combatLock:window.PcMultiplayerNative?.state?.combatLock?.enabled===true,
-      combatLockRequested:combatLock,combatLockSuspended:combatSuspended(),combatLockState:window.PcMultiplayerNative?.state?.combatLock||null,baseJumps:counts.commandCalls});
-  window.PcMultiplayerControls=Object.freeze({enable,setPhase,command,releaseAll,report,setCombatLock,toggleCombatLock,refreshCombatLock});
+      pinchSteps:counts.pinches,tiltMoves:counts.tilts,rotationMoves:counts.rotations,combatLock,
+      combatLockRequested:combatLock,combatOverride,combatContext,combatLockSuspended:combatSuspended(),combatLockState:window.PcMultiplayerNative?.state?.combatLock||null,baseJumps:counts.commandCalls});
+  window.PcMultiplayerControls=Object.freeze({enable,setPhase,command,releaseAll,report,setCombatLock,toggleCombatLock,refreshCombatLock,holdCombatSelection,resumeCombatSelection,resetCombatMode});
   function parentDocument(){return window.parent?.WarzoneHost?window.parent.document:document;}
   function setHeaderMenuState(id,open){
-    const aliases={factory:'wt-open-factory',queue:'wt-open-queue',build:'wt-open-build'};
+    const aliases={factory:'wt-open-factory',queue:'wt-open-queue',build:'wt-open-build',players:'wt-open-players'};
     const control=parentDocument().getElementById(aliases[id]||id);if(!control)return;
+    const wasOpen=control.getAttribute('aria-expanded')==='true';
     control.setAttribute('aria-expanded',String(Boolean(open)));control.classList.toggle('active',Boolean(open));
+    if(wasOpen&&!open){const pages=window.__warzoneCommands?.report?.()||{};if(!pages.buildOpen&&!pages.placement&&!pages.selectingTrucks&&!pages.nativeMenu&&!pages.exitingBuild&&!pages.demolition)resumeCombatSelection();}
   }
   function closeHelp(){const node=parentDocument().getElementById('warzone-towers-help-overlay');if(!node||node.hidden)return false;node.hidden=true;setHeaderMenuState('blocknight-help',false);return true;}
   function prepareHeaderMenu(id){
@@ -388,9 +441,9 @@
     return new Promise(resolve=>{const job={kind:'click',x,y,button,ctrl,resolve,nonce:++facadeSerial};if(!enqueue(job))resolve(false);});
   }
   window.__kalaWarzoneTouch={version:70,ready:true,report,releaseAll,resumeInput:pump,isGestureActive:()=>report().gestureActive,
-    nativeSelectionBounds,nativeBoxSelect,nativeWorldClick,nativeMenuClick:(x,y,ctrl=false)=>nativeWorldClick(x,y,ctrl),
+    nativeSelectionBounds,nativeBoxSelect,nativeWorldClick,nativeSelectVisibleTrucks,nativeMenuClick:(x,y,ctrl=false)=>nativeWorldClick(x,y,ctrl),
     nativeUiClick:(x,y)=>nativeWorldClick(x,y),nativeClick:(x,y,button=0)=>nativeWorldClick(x,y,false,button),
-    nativeSelectClick:(x,y,add=false)=>{setCombatLock(false);if(combatLock)return Promise.resolve(false);manualSelectionRevision++;return nativeWorldClick(x,y,add);},
+    nativeSelectClick:(x,y,add=false)=>{manualSelectionRevision++;return nativeWorldClick(x,y,add);},
     queuedClick:(x,y)=>nativeWorldClick(x,y,true),nativeMove:(x,y,buttons=0)=>worldReady()&&(ordersAllowed()||buttons===0)&&mouse('pointermove',{x,y},-1,buttons),
     nativePressKey:(value,code,number,shift=false)=>enqueue({kind:'key',value,code,number,shift}),
     isBattlefieldPoint:(x,y)=>hit(x,y)==='world',setHeaderMenuState,prepareHeaderMenu,closeHelp,
@@ -398,5 +451,6 @@
     selectAllCombat:()=>command('combat'),selectAllUnits:()=>command('all-units'),selectAllTrucks:()=>command('trucks'),
     stopSelected:()=>command('stop'),jumpToBase:()=>command('base'),
     toggleCombatLock,
+    refreshCombatLock,holdCombatSelection,resumeCombatSelection,resetCombatMode,
     showHelp:()=>window.parent?.PcMultiplayerSession?.command('help'),toggleHelp:()=>window.parent?.PcMultiplayerSession?.command('help')};
 })();

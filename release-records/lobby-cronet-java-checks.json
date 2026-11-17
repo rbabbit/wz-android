@@ -1,0 +1,27 @@
+{
+  "passed": true,
+  "scope": "actual pure Java policy/identity execution, pinned SDK API compile and scoped source contracts",
+  "policyResult": "actual-policy-checks=59",
+  "cronetCompilePassed": true,
+  "compileNotes": "Note: C:\\timerApp\\candidates\\mobile-network-test-20261117\\app\\src\\main\\java\\com\\rbabbit\\blocknight\\warzone\\CronetLobbyHttp.java uses or overrides a deprecated API.\nNote: Recompile with -Xlint:deprecation for details.",
+  "sourceSHA256": {
+    "app/src/main/java/com/rbabbit/blocknight/warzone/LobbyHttpPolicy.java": "7a115535e49d5677cb4cc60cba5595a38e8a005d2c9d5068d71c8738b6da2215",
+    "app/src/main/java/com/rbabbit/blocknight/warzone/CronetLobbyHttp.java": "c76bd16fb32574ce12bdd6fc3cae9eb0e49e56dab2e28c7e328226d5c585fdc2",
+    "app/src/main/java/com/rbabbit/blocknight/warzone/MultiplayerActivity.java": "fc627dca61dbd36d3b4201f228a822c4fa8b7432918264dc0336b949dd0778ab"
+  },
+  "dependencies": [
+    {
+      "url": "https://dl.google.com/dl/android/maven2/org/chromium/net/cronet/500.1.0/cronet-500.1.0.aar",
+      "bytes": 655111,
+      "sha256": "d0cbb75a3e558166a1e21747d75b788b2650ddf8bec321b727b0878f01addcf8"
+    },
+    {
+      "url": "https://dl.google.com/dl/android/maven2/org/chromium/net/cronet-bundled/500.1.0/cronet-bundled-500.1.0.aar",
+      "bytes": 13956135,
+      "sha256": "fa286aeebe66dcab4a64df017d566cb8ec563c3bb63af527997c3a4e056bf295"
+    }
+  ],
+  "androidRuntimeTested": false,
+  "cellularSuccessClaimed": false,
+  "deviceOrVPSOperations": false
+}

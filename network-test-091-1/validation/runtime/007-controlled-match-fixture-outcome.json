@@ -1,0 +1,84 @@
+{
+  "scope": "Final controlled own official-host test; phone captures/transport result sealed by root",
+  "fixturePort": 22200,
+  "testName": "OWNED NETWORK CHECK DO NOT JOIN 3881C7",
+  "publicGameID": "9bfd14e4-f41d-43fb-a1fc-e07ca61002f5",
+  "requestedLeaseSeconds": 900,
+  "verifiedLeaseSeconds": 900,
+  "mappingOwnershipVerified": true,
+  "officialPublishedNativeID": true,
+  "expectedPhoneParticipant": "NETCHECK7C3D(m)",
+  "expectedPhoneSlot": 1,
+  "participantGuard": {
+    "unexpectedParticipant": false,
+    "ownedPhoneParticipantObserved": true,
+    "observedNonHostSlots": [
+      1
+    ]
+  },
+  "hostAcceptedExpectedPhoneUTC": "2026-11-17T13:41:39Z",
+  "phoneSignedRequestJoinReportedByRoot": {
+    "httpStatuses": [
+      200,
+      200
+    ],
+    "protocol": "h3",
+    "milliseconds": [
+      317,
+      361
+    ],
+    "tcpOpened": true
+  },
+  "stockHostStartUTC": "2026-11-17T13:42:08Z",
+  "stockHostStartObserved": true,
+  "phoneDataCheckReceivedAndVerified": false,
+  "hostDataCheckSendAfterLeaveIsNotVerification": true,
+  "phoneSocketClosedAndPlayerLeftUTC": "2026-11-17T13:43:22Z",
+  "hostGameTimeAtPlayerLeave": 102,
+  "phoneNormalCancelReportedByRoot": true,
+  "phoneRendererFailureReportedByRoot": "TypeError involving undefined ModelViewProjectionMatrix at13:42:11; loading cover remained.",
+  "controlledMatchVerified": false,
+  "phoneWorldClockAndOrdinaryMovementVerified": false,
+  "hostStopped": true,
+  "hostExitCode": 0,
+  "nativeHostCleanup": "host-exited-normally",
+  "supervisorStopReason": "bounded-300seconds-after-publication",
+  "mappingCleanup": {
+    "verifiedAbsent714": true,
+    "deleted": true,
+    "state": "deleted-and-absent"
+  },
+  "postStopListing": {
+    "verifiedRemoved": true,
+    "ownID": "9bfd14e4-f41d-43fb-a1fc-e07ca61002f5",
+    "httpStatus": 200,
+    "ownIDStillListed": false
+  },
+  "fixtureStatusWriterFailureThisRun": false,
+  "priorFixtureHistory": [
+    {
+      "port": 22196,
+      "result": "Initial strict finite readback failed without retaining fields; no host start; later exact714absence verified.",
+      "mappingRecordSHA256": "a15b8068e7bd865cea1ff75a7215b44a9308fb38eeb59ecef06884c4fd207918"
+    },
+    {
+      "port": 22197,
+      "result": "Requested600; router reported finite900; exact owned entry deleted and714verified; no host start.",
+      "mappingRecordSHA256": "af9ba3a40ec16e9c7336a3e9dc38ad19fc271370a278e0ad6f5214a7632005ee"
+    },
+    {
+      "port": 22198,
+      "result": "Finite900; officially published; inbound join rejected6WRONGPASSWORD; bounded480s expiry; exact mapping delete714 and listing removal verified.",
+      "mappingRecordSHA256": "d6be2e2c1e725b8c26e3b83fd64ce0bd7297b240e432911d7bcbf6b9b740a2ce"
+    },
+    {
+      "port": 22199,
+      "result": "Expected named phone accepted; telemetry PermissionError in fixture status writer caused owned host termination; unrelated guardfalse; mappingdelete714 verified.",
+      "mappingRecordSHA256": "ff49d7308d0edfa5438380d288232721a2ee6f9d69ae40bc899362c3206f4332"
+    }
+  ],
+  "privateDataExported": false,
+  "rawPrivateLogSHA256": "e8a2a6d14679d99dc39561edf4e4a18d39cd3a70d24f5b2d3a4431def94dc580",
+  "mappingRecordSHA256": "c7610d8c1e57b0ecca7adbab69f8d43fa32fe2822138e6fb6d60a627bd087136",
+  "nativeStatusSHA256": "bf95ef07923aeccc84eded1e5e731b1233e1328e23080f6687e24ad4069b40ce"
+}

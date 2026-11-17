@@ -2,11 +2,12 @@
 (() => {
  'use strict';
  let prepared=null,module=null,serial=0,cameraSerial=0,combatSerial=0,lastEvent=0,lastAcknowledgedEvent=0,lastTerrainRevision=-1,lastRoomKey='',lastRoomDelivery=0,roomPending=false,queue=Promise.resolve(),polling=false,stopped=false;
+ let guardedInput=null;
  const prefix='/data/mp/multiplay/script/rules/';
  const fencedInput={pointer:0,mouse:0,touch:0,wheel:0};
  let roomPreviewCache=null;
  const native=globalThis.PcMultiplayerNative={state:null,room:null,terrain:null,reports:{ready:false,reports:[]},errors:[],
-  prepare,ready:initialize,poll,refresh:()=>{poll();return Promise.resolve(native.state);},command,roomCommand,roomMapPreview,setCamera,cancelCamera,setCombatLock,combatLockIntent:null,researchReports:()=>native.reports};
+  prepare,ready:initialize,poll,refresh:()=>{poll();return Promise.resolve(native.state);},command,roomCommand,roomMapPreview,setCamera,cancelCamera,setCombatLock,combatLockIntent:null,researchReports:()=>native.reports,cancelGuardedInput};
  const ordersAllowed=()=>native.state?.canIssueOrders!==false&&native.state?.spectator!==true&&!(Number.isInteger(native.state?.realPlayer)&&Number.isInteger(native.state?.player)&&native.state.realPlayer!==native.state.player);
  function fail(error){const text=String(error?.message||error);if(native.errors.at(-1)!==text)native.errors.push(text);if(native.errors.length>30)native.errors.shift();console.warn('Multiplayer UI: '+text);}
  function prepare(){
@@ -82,20 +83,31 @@
    }
   }catch(error){fail(error);}finally{polling=false;}
  }
- function command(action,data={}){
+ function cancelGuardedInput(){
+  const pending=guardedInput;if(!pending||pending.current()!==false)return;
+  guardedInput=null;
+  try{const path='/tmp/mp-mobile-input.json',request=read(path);
+   if(request?.nonce===pending.nonce&&request.action==='select-visible-trucks')module.FS.writeFile(path,JSON.stringify({nonce:pending.nonce+'-cancel',action:'cancel'}));
+  }catch(error){fail(error);}
+ }
+ function command(action,data={},current=()=>true,timeout=2500){
   const run=()=>new Promise(resolve=>{
+   if(current()===false){resolve({ok:false,reason:'selection-cancelled'});return;}
    if(stopped||!module?.FS||!native.state?.worldReady){resolve({ok:false,reason:'world-not-ready'});return;}
    if(!ordersAllowed()){resolve({ok:false,reason:'spectator-read-only'});return;}
    const nonce='mp-ui-'+Date.now()+'-'+(++serial),request={...data,action,nonce};
-   try{module.FS.writeFile('/tmp/mp-mobile-input.json',JSON.stringify(request));}catch(error){fail(error);resolve({ok:false,reason:'native-unavailable'});return;}
+   let expired=false;
+   try{module.FS.writeFile('/tmp/mp-mobile-input.json',JSON.stringify(request));if(action==='select-visible-trucks')guardedInput={nonce,current:()=>!expired&&current()};}catch(error){fail(error);resolve({ok:false,reason:'native-unavailable'});return;}
    const start=performance.now();
    const inspect=()=>{
+    if(current()===false){cancelGuardedInput();resolve({ok:false,reason:'selection-cancelled'});return;}
     if(stopped){resolve({ok:false,reason:'session-ended'});return;}
     poll();
+    if(current()===false){cancelGuardedInput();resolve({ok:false,reason:'selection-cancelled'});return;}
     if(stopped||!native.state?.worldReady||!ordersAllowed()){resolve({ok:false,reason:stopped?'session-ended':!ordersAllowed()?'spectator-read-only':'world-not-ready'});return;}
     const response=read('/tmp/mp-mobile-input-result.json');
-    if(response?.nonce===nonce){resolve(response);return;}
-    if(performance.now()-start>=2500){resolve({ok:false,reason:'native-timeout'});return;}
+    if(response?.nonce===nonce){if(guardedInput?.nonce===nonce)guardedInput=null;resolve(response);return;}
+    if(performance.now()-start>=Math.min(2500,Math.max(1,timeout))){expired=true;cancelGuardedInput();resolve({ok:false,reason:'native-timeout'});return;}
     setTimeout(inspect,16);
    };inspect();
   });
@@ -171,7 +183,9 @@
   if(value.enabled&&(stopped||native.state?.worldReady!==true||!ordersAllowed()))return false;
   const activation=value.activation===undefined&&!value.enabled?native.combatLockIntent?.activation||'':value.activation;
   if(typeof activation!=='string'||activation.length>160||value.enabled&&!activation.length)return false;
-  const request={nonce:'mp-combat-'+Date.now()+'-'+(++combatSerial),activation,enabled:value.enabled,suspended:value.suspended};
+  const context=value.context===undefined?native.state?.combatLock?.context:value.context;
+  if(typeof context!=='string'||!context.length||context!==native.state?.combatLock?.context)return false;
+  const request={nonce:'mp-combat-'+Date.now()+'-'+(++combatSerial),activation,context,deselect:value.deselect===true,enabled:value.enabled,suspended:value.suspended};
   try{
    module.FS.writeFile('/tmp/mp-mobile-combat.json.tmp',JSON.stringify(request));
    module.FS.rename('/tmp/mp-mobile-combat.json.tmp','/tmp/mp-mobile-combat.json');

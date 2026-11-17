@@ -36,6 +36,7 @@ final class GraphicsSetupView extends FrameLayout {
         void campaignNew();
         void map(String id);
         default void homePage(boolean modesVisible) {}
+        default void updates() {}
     }
 
     private static final int INK = TowersTheme.TEXT, MUTED = TowersTheme.SECONDARY;

@@ -1,0 +1,451 @@
+{
+  "passed": true,
+  "candidateAPK_SHA256": "dc1a273437f8393e66ebfbdb8886b06a4ddab82dec419553165bb07611efdf38",
+  "versionCode": 89,
+  "versionName": "0.89",
+  "certificateSHA256": "4499efe00477c7c724c06a1dd96f935864548665c13ab5e2bd0a9c0f83f7cb15",
+  "modesVerified": [
+    "towers",
+    "ffa",
+    "campaign",
+    "multiplayer"
+  ],
+  "nativeSelectionAndBarsVerified": true,
+  "navigationAndInputRestored": true,
+  "recordedUTC": "2026-11-16T15:21:57.328382+00:00",
+  "environment": {
+    "serial": "emulator-5562",
+    "owned": true,
+    "user5558Untouched": true,
+    "oldPilot5560OffAndPreserved": true,
+    "physicalViewport": [
+      2400,
+      1080
+    ],
+    "webViewVersion": "159.0.8154.4",
+    "blackTerrainInheritedFromBaseline": true
+  },
+  "observations": {
+    "campaign": {
+      "realNativeCombatIds": [
+        160025,
+        160087,
+        160089,
+        160091,
+        160287
+      ],
+      "defaultAllPartialMixedDeselectColorPassed": true,
+      "selectedBarsRemovedBracketsRetained": true,
+      "menuReturns2Each": [
+        "Research",
+        "Manufacturing",
+        "Queue"
+      ],
+      "postMenuActualNativeSelection": 160287,
+      "evidence": [
+        "42-b2-campaign-allcombat",
+        "43-b2-campaign-partial",
+        "44-b2-campaign-mixed",
+        "45b-b2-campaign-deselected-ack",
+        "48-b2-campaign-after-menu-selection"
+      ]
+    },
+    "towers": {
+      "seeded": true,
+      "combatIds": [
+        1900001,
+        1900003
+      ],
+      "defaultAllPartialMixedDeselectColorPassed": true,
+      "selectedBarsRemovedBracketsRetained": true,
+      "headerOnceTopAndReachable": true,
+      "physicalHeaderSizes": [
+        [
+          2400,
+          1080
+        ],
+        [
+          1920,
+          1080
+        ],
+        [
+          1280,
+          720
+        ]
+      ],
+      "actual16by9LayoutCSSWidth": 1063,
+      "evidence": [
+        "55-b2-towers-allcombat-seeded",
+        "56-b2-towers-partial-seeded",
+        "57-b2-towers-mixed-seeded",
+        "58-b2-towers-deselected",
+        "59-b2-towers-header-1920",
+        "60-b2-towers-header-1280"
+      ]
+    },
+    "ffa": {
+      "seeded": false,
+      "rejectedSeedReason": "canonical metadata.mapName guard; no native game launched for rejected archive",
+      "originalNativeSave": "wt_050cc8325b0d4a6dac3767de00740011",
+      "ordinaryProductionCombatIds": [
+        164187,
+        164195
+      ],
+      "defaultAllPartialMixedDeselectColorPassed": true,
+      "newUnitEligibleSetObserved": true,
+      "stickyIntentTruePartialSelectionCorrectlyWhite": true,
+      "selectedBarsRemovedBracketsRetained": true,
+      "productionEvidence": "ffa-delivery-production.json",
+      "evidence": [
+        "72-b2-ffa-first-ordinary-combat",
+        "73-b2-ffa-second-new-unit-state",
+        "75-b2-ffa-allcombat-radar-centred",
+        "76-b2-ffa-mixed-ordinary",
+        "77-b2-ffa-deselected"
+      ],
+      "laterFixtureCombatLoss": "native combat2\u21920 and trucks6\u21922 atgame536s prevented later movement completion; not claimed gameplay regression"
+    },
+    "multiplayer": {
+      "seeded": false,
+      "privateHostPort": 22190,
+      "nativeOrdinaryCombatIds": [
+        160749,
+        160757
+      ],
+      "defaultAndExactAllAndEmptyArmyColorsPassed": true,
+      "selectedBarsRemovedBracketsRetained": true,
+      "realIMEShowBackCancelCycles": 2,
+      "postIMENativeTruckSelected": 160003,
+      "postIMEViewportRestored": [
+        1164,
+        554
+      ],
+      "evidence": [
+        "95-b2-mp-allcombat-ordinary",
+        "94-b2-mp-post-ime-world-selected",
+        "91-b2-mp-ime-open-1",
+        "92-b2-mp-ime-back-1",
+        "91-b2-mp-ime-open-2",
+        "92-b2-mp-ime-back-2",
+        "98-b2-mp-empty-army-after-combat"
+      ],
+      "movementFirstProbe": "native MOVE2 accepted but within1tile target and integerpositions unchanged; not labelled regression",
+      "laterFixtureCombatLoss": "pair alreadydestroyed before secondprobe firstsample atgame628s; no repeated armies started",
+      "remaining": [],
+      "idleHumanFixture": {
+        "hostPort": 22190,
+        "spectatorHost": false,
+        "AI": false,
+        "phonePlayer": 1,
+        "realPlayer": 1,
+        "enemyHumanHostTeam": 1,
+        "phoneTeam": 0,
+        "inactivityMinutesMP": 0,
+        "gameTimeLimitMinutesMP": 0,
+        "modOrNativeSeed": false
+      },
+      "ordinaryIdleFixtureCombatIds": [
+        160691,
+        160693
+      ],
+      "defaultAllPartialMixedDeselectColorPassed": true,
+      "clearLaneMovementCompleted": true,
+      "movementEvidence": "mp-idle-clear-lane-movement.json",
+      "inputReleased": true,
+      "headerPaintMeasuredGreenPixels": 718
+    }
+  },
+  "limits": [
+    "Inherited emulator black terrain remains; models, selection brackets, HUD and bar removal inspected on actual native emulator screenshots.",
+    "Towers render/selection fixture contains2 explicitly disclosed stock MG droids in an existing native save; Campaign original units, FFA and MP ordinary production were observed.",
+    "Rejected FFA seeded archive violated canonical mapName guard; original early FFA save used instead, with2 ordinary units produced.",
+    "Hostile FFA/firstMP worlds later lost prepared units in real AI combat; no movement pass claimed from those expired worlds. Remaining MP checks used supported idle enemy human host with2 ordinary MG units, no AI/mod/engine changes.",
+    "Physical1280x720 and1920x1080 app auto-scaled to1063CSS layoutwidth; no claim of656CSS runtimeviewport. Actual top header and wave controls fit and hit-tested.",
+    "First B1 native loader alias mismatch corrected by parent before B2; all runtime successes here reference exact B2 dc1a2734.",
+    "Selected-unit horizontal health bars removed; stock hover health inspection remains as requested implementation scope.",
+    "This focused proof precedes publication; real in-app update journey is separate and not yet passed.",
+    "A transient102 screenshot was observed with blank header by parent despite current DOM geometry; it is cited for movement/corners only. Fresh106 header paint was directly inspected and independently measured718green text pixels; no header-hiding regression claimed from transient capture."
+  ],
+  "evidenceFiles": [
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\b2-installed.json",
+      "sha256": "658866ea9e96e20795f5fa7602d732ef42e63a7037d952fcb36c7d239a9a2720",
+      "bytes": 350
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\runtime-validation.json",
+      "sha256": "2e5d600eb02fd9fd5554e19dc7155baf8e4bc1315a3af417890cfe1b830b0c82",
+      "bytes": 7855
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\b2-actual-served-campaign.json",
+      "sha256": "68ee23fc0eaec9583195283e2d89c3b9583282022e5797e6604cf35d1ff2b2c1",
+      "bytes": 104
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\campaign-menu-returns.json",
+      "sha256": "3d32b397dfeef89edc7c199df9bc6f74bbf2c1affbd33e082bfa33bf55fe9b83",
+      "bytes": 1253
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\ffa-delivery-production.json",
+      "sha256": "3d17a6e102f0f90404c1a690a356621db6c404fbf7e63e39c02b7094ffab6ad0",
+      "bytes": 88296
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\mp-ime-returns.json",
+      "sha256": "b71120616072cecf0fe8bfdc119cde48864c3e0ff085463d18e7c6b4c9b56c97",
+      "bytes": 838
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\mp-idle-production-requests.json",
+      "sha256": "9d5834020135afa89c85795a58717f57d3cbfc0d367251fe9f43ae228681a8d5",
+      "bytes": 17810
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\mp-idle-clear-lane-movement.json",
+      "sha256": "8f66631460d56c95f70a4347e8f7c72c8054710de2291e46450c6478ffda23a1",
+      "bytes": 22274
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\mp-final-selection-proof.json",
+      "sha256": "50002b116dca16673ca33478cdc55028c319a6f3073414d95057f1edfc93b674",
+      "bytes": 1121
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\private-host-idle\\host.py",
+      "sha256": "85d413b62fc294cbb5dc11cd76166ee51aa24c198ecd06c7ba5a77f22f873575",
+      "bytes": 2875
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\private-host-idle\\configdir\\autohost\\mobile-room",
+      "sha256": "9f1b0eae34f667b08b6ef535a4cf843e38bf6dcd0a6787712998ff278a4f96c5",
+      "bytes": 475
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\41-b2-campaign-default-metrics.json",
+      "sha256": "7bfe2407afde31501f9c96be6feebae7768336e43cf0f3ce55c97fc024484719",
+      "bytes": 35279
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\42-b2-campaign-allcombat-metrics.json",
+      "sha256": "87dba5e520f491a0f05e272c158a78025066d3883a7a05fb25ada9ff8ab74416",
+      "bytes": 36788
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\43-b2-campaign-partial-metrics.json",
+      "sha256": "ecc5f278d62fc86db4d9e44578cd44dad5c2b3a0b0a88c3becfc8b72412239c6",
+      "bytes": 47226
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\44-b2-campaign-mixed-metrics.json",
+      "sha256": "9ff1ae0dd00025e70197465d1c991a3e64b0c3173917483dc0d3eea85dd7b0f7",
+      "bytes": 49664
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\45b-b2-campaign-deselected-ack-metrics.json",
+      "sha256": "8e244113f27e1bacbf86ed7962a8c46e4ae877d7d9d0e68f239e8d495ed53ad5",
+      "bytes": 46138
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\48-b2-campaign-after-menu-selection-metrics.json",
+      "sha256": "686cda5207bbef771ddbe0c543d3241d8a189be2a50d42278dd7aad4c9ac852b",
+      "bytes": 46564
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\54-b2-towers-default-seeded-metrics.json",
+      "sha256": "92da4827f86ea42fe6a6ff5d7092f7ba1e1991301ca6509e5b285d2199c6e4af",
+      "bytes": 48447
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\55-b2-towers-allcombat-seeded-metrics.json",
+      "sha256": "840e0dcd0b4c04cff4ccca7e4ae37bee0a517295a97f8a2f71ae53113f766e0c",
+      "bytes": 49158
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\56-b2-towers-partial-seeded-metrics.json",
+      "sha256": "eed6122664a022580ecbda4b83fa6d863bb9e1b27977d2552283426a9b25fae1",
+      "bytes": 48941
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\57-b2-towers-mixed-seeded-metrics.json",
+      "sha256": "38f222112167181eb0731c45ae7951e86e40a72b9e1e0007d2daadf967cb1019",
+      "bytes": 50710
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\58-b2-towers-deselected-metrics.json",
+      "sha256": "0a01cb9cb8a4c6fdd71d63c1704d4aa3888d670035a9c597d74832e049e5c25c",
+      "bytes": 48645
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\70-b2-ffa-original-default-metrics.json",
+      "sha256": "1e0c23e1d4a10699e3666954322746300f124b770672993ab71e5a9cf46f6632",
+      "bytes": 60578
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\72-b2-ffa-first-ordinary-combat-metrics.json",
+      "sha256": "e58674af1b26ccbf0f534a41982f7089ba86f4d17631497558b934a84f37d360",
+      "bytes": 66371
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\73-b2-ffa-second-new-unit-state-metrics.json",
+      "sha256": "620d835a2eb8394bf732f9a3c3a7caec293101c6e8c823f7e21db61d3c2d4676",
+      "bytes": 63514
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\75-b2-ffa-allcombat-radar-centred-metrics.json",
+      "sha256": "b477c8f08c9fc96255398c00f122aac724e555ba5e91c982f18e813a8f27da12",
+      "bytes": 63921
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\76-b2-ffa-mixed-ordinary-metrics.json",
+      "sha256": "d16aa6c178fc6a414e3cdd5f7489969bb5e9df27e3fc047aded09114719727c8",
+      "bytes": 66086
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\77-b2-ffa-deselected-metrics.json",
+      "sha256": "43df7bf462a9682ce9ed935cea4a5c5effa2d103e69d13b9b413107bc4a290f7",
+      "bytes": 63331
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\94-b2-mp-post-ime-world-selected-metrics.json",
+      "sha256": "4d12db08a81fc23d3d3915bf0e75e6440c7be064101cc9b6cf9430a8a0815e94",
+      "bytes": 43974
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\95-b2-mp-allcombat-ordinary-metrics.json",
+      "sha256": "d7f1e475089456f995aeda4730d4a311885bece8404cb3ae4a312704e26e4e95",
+      "bytes": 44340
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\100-b2-mp-idle-host-start-metrics.json",
+      "sha256": "a9142c9b9dfa927adf89ee3f0ce49359f0e9d74dce1daf7ec193501783b4f03c",
+      "bytes": 39023
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\102-b2-mp-idle-movement-complete-metrics.json",
+      "sha256": "59bedd6f92fdeaca130bb94f95ef5c12e71dc0f56bb4177e0c07c8275b56d6ee",
+      "bytes": 43299
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\103-b2-mp-idle-partial-metrics.json",
+      "sha256": "65fcdfcce0e47f8a1a04f49825fb2638fc448cb4ecc250e48a5ee76540f5b6df",
+      "bytes": 42948
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\104-b2-mp-idle-mixed-metrics.json",
+      "sha256": "3dfc74095feb1cdbddfbd7af1ff072aafbf6829fca9861b5a2df9df70acf1292",
+      "bytes": 44011
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\105-b2-mp-idle-deselected-metrics.json",
+      "sha256": "562cbc848f96bf7e1cb670e093bf4bdf3bb80a8e99252b2b72068022bcb39f82",
+      "bytes": 42557
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\106-b2-mp-idle-all-final-metrics.json",
+      "sha256": "449410cb971fc9d56c5e5880c3869108c2e6b60ada2dddf7cf83b722f595f2f8",
+      "bytes": 43294
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\11-baseline-campaign-allcombat-selected.png",
+      "sha256": "5e2895f816890c41211b4ec2f850f3ce34716099d0ccf9d077aa4afcbbd91f7b",
+      "bytes": 476001
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\26-baseline-towers-selected.png",
+      "sha256": "d5ecc7b1ccaf0e9bc7a404448ee172a606165ad209341a81b07f16fd12e4a0ff",
+      "bytes": 410532
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\42-b2-campaign-allcombat.png",
+      "sha256": "b370a3dcddb10043507b675f52d081ff3154c0f33113153a951205da0511bdda",
+      "bytes": 482728
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\55-b2-towers-allcombat-seeded.png",
+      "sha256": "4fea19d07e3831818e5f6192b67b1f089ed52825d610a878cbadf60043b3d67e",
+      "bytes": 403316
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\59-b2-towers-header-1920.png",
+      "sha256": "09f614b4530384ba534412a00c8b91929ab6fe921e1d4f5126e08486c22439bf",
+      "bytes": 379046
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\60-b2-towers-header-1280.png",
+      "sha256": "dc97d67f830661bba0d2ea6fd1c2e2b21eae4b43a727e403f46718012edddc99",
+      "bytes": 194126
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\75-b2-ffa-allcombat-radar-centred.png",
+      "sha256": "38682d31ea1138093b966ebcf7c9d41d36638ea19953afda7201180a9688147f",
+      "bytes": 949128
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\91-b2-mp-ime-open-1.png",
+      "sha256": "4c02bad35c16411aab45b2ce4f8a42825f7088404eb0891089b6a87622f33003",
+      "bytes": 151686
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\92-b2-mp-ime-back-1.png",
+      "sha256": "16c3cb0bd21f43fc552affbc1de21f9896078f98d10898c1a598415b35bb298f",
+      "bytes": 412778
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\91-b2-mp-ime-open-2.png",
+      "sha256": "3ce0984aa68ded4b1adada2b6f277bdd160e8d76ed64d452dfa818be4ace93de",
+      "bytes": 152059
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\92-b2-mp-ime-back-2.png",
+      "sha256": "28f2bb4a4631a5094ea14458e5e6049406c6ce361eee342a4ec0f5ea20b8bd13",
+      "bytes": 412281
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\94-b2-mp-post-ime-world-selected.png",
+      "sha256": "25d27f53f393beaec489032f3f731c8f0ba6f88c9c9fa95a8b93ecd198782e73",
+      "bytes": 734176
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\95-b2-mp-allcombat-ordinary.png",
+      "sha256": "7bd922bd20d4de689519d9fb6abdd092fce04dabde43228be29795f3e42f78d9",
+      "bytes": 732677
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\102-b2-mp-idle-movement-complete.png",
+      "sha256": "106d7559cdac602c0bf431343cc08e80040a765e32016ac228c452d24b016695",
+      "bytes": 696154
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\103-b2-mp-idle-partial.png",
+      "sha256": "7897c09377bfbdecadf7cbb10102a4ea67dd3671cc3418802a528e1d1c32ab06",
+      "bytes": 695500
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\104-b2-mp-idle-mixed.png",
+      "sha256": "999ddc484c05982010197b25033e8c87b79a85b262f5bdc28e7c068058a2d650",
+      "bytes": 695142
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\105-b2-mp-idle-deselected.png",
+      "sha256": "7814ed0ee9d5c4184b605ff1268b6b46c22ae90b25e2c311a26b7b6316201e5b",
+      "bytes": 719943
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\106-b2-mp-idle-all-final.png",
+      "sha256": "53ee92fd90de379f895f0a0da18fef5a97339b8c8ac4f931cbda05ee6dfce6c2",
+      "bytes": 720702
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\59-b2-towers-header-1920-geometry.json",
+      "sha256": "72811655ad1fd04f1181083257b789a4e70a551433d8a5247f7e5c6e6c812061",
+      "bytes": 6103
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\60-b2-towers-header-1280-geometry.json",
+      "sha256": "3115df3d35a8f061b7e07b0aa0bf73c5643d224ffea555cefe3e6e4ff8b61964",
+      "bytes": 6103
+    }
+  ]
+}

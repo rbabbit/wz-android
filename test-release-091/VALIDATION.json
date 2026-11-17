@@ -1,0 +1,41 @@
+{
+  "passed": false,
+  "status": "incomplete",
+  "createdUTC": "2026-11-17T00:09:42.443334+00:00",
+  "candidateAPK_SHA256": "22825e1ca4420659b81d228649e0564d205ccb3c832044f23da3befc3b22181e",
+  "candidateAPK_bytes": 613128952,
+  "versionCode": 91,
+  "versionName": "0.91",
+  "certificateSHA256": "4499efe00477c7c724c06a1dd96f935864548665c13ab5e2bd0a9c0f83f7cb15",
+  "sourceProfileManifestSHA256": "a7e64798ed2c5e974f96a62ac7ebe6048c798abf216105138db65839dabe23c8",
+  "integrityProof": {
+    "path": "apk-integrity.json",
+    "sha256": "faad871f056acd2a5392f0ae3273155a95547ca259f3ed1df66823565471c4c6"
+  },
+  "runtimeProof": {
+    "path": "focused-runtime.json",
+    "sha256": "4ad51f146c234265b0802b13531de55542e4b9a2511cf6bc914cfd07a6a74d0c"
+  },
+  "auditSHA256": "0edabffd40a5b2699e0b958bd2de4875f1bc22402ea12019d999df8e21f7ac3d",
+  "sourceRestorationVerified": true,
+  "modeVerificationScope": "Four-mode observed native/core gameplay; actual physical Players pages in Towers/Campaign/FFA. MP native/DOM and labeled WebView.draw evidence do not establish physical presentation.",
+  "modesVerified": [
+    "towers",
+    "ffa",
+    "campaign",
+    "multiplayer"
+  ],
+  "rolesVerified": [
+    "player",
+    "spectator"
+  ],
+  "observedCoreGameplayChecksPassed": true,
+  "layoutAndTouchVerified": false,
+  "gameplayAndInputPreserved": false,
+  "remainingVerification": [
+    "Actual physical MP Players/header/native fallback/observer table presentation remains unverified: ADB captures were black even though native/DOM function advanced. Java WebView.draw renders HTML and is explicitly diagnostic, not a physical-screen pass.",
+    "Immediate CLOSE touch after actual landscape rotation restore was not acknowledged. Existing evidence cannot distinguish transition dispatch/mapping from a button handling failure; settled touch-after-rotation is unverified. No repeat/recovery was attempted.",
+    "Full world graphical correctness is not established: inherited terrain blackness remains in offline worlds, and MP physical composition is black. Selected models and header colors where actually visible are limited evidence, not a complete renderer pass."
+  ],
+  "publicationPerformed": false
+}

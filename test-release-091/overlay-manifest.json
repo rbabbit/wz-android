@@ -1,0 +1,3353 @@
+{
+  "schemaVersion": 1,
+  "versionCode": 91,
+  "versionName": "0.91",
+  "profile": "local-test-normal-apk-only",
+  "completeBaselineArchive": "warzone-towers-0.90-test-source.zip",
+  "completeBaselineSHA256": "657f72b0f880d283ee4e83937cb2ba945119e0a1fb0399a26cc9b781705274a8",
+  "completeBaselineMembers": 14383,
+  "priorEffectiveFiles": {
+    "AGENTS.md": "2dd3af29624eb95fdd1b2adb35da2af1eeb58d31348aea951e1c80d2c95a903d",
+    "app/build.gradle.kts": "e69f8b3ab8c4b5c5e50f663dbf4cea25b78c5afbf6c997a8113454c4576b3924",
+    "app/src/main/AndroidManifest.xml": "98405e971c714ee594a460f1ef67ed2e2c1ddfbeea2543185e6878b795368654",
+    "app/src/main/java/com/rbabbit/blocknight/warzone/MainActivity.java": "0c4b5b3e9e828217e079bea5c9b38ac1e275a90ad84c8d0d596962d68d400258",
+    "app/src/main/java/com/rbabbit/blocknight/warzone/HomeModesView.java": "f712e2d656b0e899192cf89ebcfc60ac4b2151ef9c6f7af7846a1a0538f89e70",
+    "app/src/main/java/com/rbabbit/blocknight/warzone/MultiplayerActivity.java": "028af2f8d6c7d25fceddff442f1f59c49b873097356e419361de97eac11d938c",
+    "app/src/playRelease/AndroidManifest.xml": "a705f0f191935a6c6d1151fe5e81469b3b5fe8459812a5f331d279493c5f3768",
+    "app/src/playRelease/java/com/rbabbit/blocknight/warzone/AppUpdateController.java": "58ddf86b8dab9a283d7a48a0c7b97f70d2d4714c29f2e6a991490bee93076c28",
+    "tools/build-play-release.py": "b40d0e5554c96ccd72c6a24141dfdea12124059f980a1ff7ecf1131aba92d0d1",
+    "app/src/main/assets/multiplayer/session.js": "40929ede2b65ee4b1adf5ee5237a602b91ac32e944755b6247c15bed60f15588",
+    "app/src/main/assets/multiplayer/warzone2100.js": "c1d2dd319639041486717ec606cd1d05cbf79485d869aacd6329da9c337433ea",
+    "app/src/main/assets/multiplayer/warzone2100.wasm": "b0586374d4f8d1e017ee88a26bb062dbb7114e2b4517cd7e7f58cc9022344125",
+    "app/src/main/assets/warzone-campaign-hud.js": "3e008580535bf53dd850e451d561c606d9e9471f0f49221b1d4d669ed3d40536",
+    "app/src/main/assets/warzone-touch-controls.js": "392d069c07483677e752bf07d194e2b4bad7d3f06da59bbcb2c86f1d39fc9250",
+    "app/src/main/assets/warzone/ui/towers-game-controls.css": "f790fa99760acf68ba580749de433dcdb21116c384e736bb53b0cf7b28078c61",
+    "app/src/main/assets/warzone/warzone2100-campaign.js": "ef69f6826f099dde9823532609da4bba6fbe2fe5959c094c1b69a88edc5b85fd",
+    "app/src/main/assets/warzone/warzone2100-duel.js": "a7c479363a594385d5ac5a77b5331e6d32f7bd0a7667f123cd09cfa0c89e4fde",
+    "app/src/main/assets/warzone/warzone2100-ffa.js": "28d776ac00994b0960af686be6450b06029d2571687d77ce42b4523968f76aa7",
+    "app/src/main/assets/warzone/warzone2100-towers-052.js": "cfc9d2d183fdfc7a8f6fe7ba82e984ea7bddd8d2c4a392d87639af1131750289",
+    "app/src/main/assets/warzone/warzone2100-towers-052.wasm": "defca4e2532abce2832b22a74e0bcdf87451b4876a045bbe213d934b637a7577",
+    "app/src/main/assets/warzone/warzone2100.js": "80f54324b5b8861c5e07c14becdd37eccccb502271cc37f622d6b214453ff92c",
+    "app/src/main/assets/warzone/warzone2100.wasm": "eefcf462ba169877d276cdb92773d8fa16fe8f9a6070222275166fa9ffa6a144",
+    "release-records/ISSUES-AND-CHECKS.md": "a28e69e7e870ddc1ad51670abeb7cbfdfe7d39633b4ba3dce07d6a43f16997d6",
+    "release-records/all-combat-ui-089-checks.json": "9b2f7d6f28dd8a4e2ee549506e5eaab97508fa4536183ae7e1ab62c06fba5f67",
+    "release-records/apk-integrity.json": "e7dabd14207235af70c25c5865ef0ab963d2eb339d96e786c1fe5b2f62987035",
+    "release-records/campaign-layout-js-089-checks.json": "dc82a63a782a9127e9fa3c6e7843738167aebf1f3b02cb730a5b15489f38a9e9",
+    "release-records/deployment-independent-review.json": "ea0c97cb830d478c078a5fe6f83e0fd5a610eb632a74e70db9b5e6d12cb815b3",
+    "release-records/initial-fallback.json": "41737cc106f1830897801a929a400bed3816491e388a8015bdea95df65702f16",
+    "release-records/source-package-independent-review.json": "1471ba88fedcb8766ace983d8eefc49ed96458a1d9f2ad4173942d6b982ba270",
+    "release-records/vps-deploy-guard-checks.json": "59c52c42791c2b15b0049608f1d44402c6f733e8c7cac2e8e967c008d96d58f3",
+    "tools/build-native-selection-089.py": "a81d781943765215e0efe716d8306948b3087bd7bc8e5fa68503a5fdd82b1643",
+    "tools/build-native-selection-cold-089.sh": "c19a188960d1b8f31b188f7cde5aa25e860fb69fd9d502b58c9135cf07145693",
+    "tools/build-normal-apk.py": "ba54608acdc7c5702f41dc186deb5a4c07390f7809e32ff71482b9d4d4a05f4b",
+    "tools/campaign-ui-fixture-089.cjs": "b933076c3fb21bbd3b40779df333bc7daab2411515f6c3229ad2fc4fa3eefd66",
+    "tools/check-all-combat-ui-089.cjs": "30bcb35aa7999bed4e18ab3ceb59a3f189a667fdf4615797739e6fe267b09c88",
+    "tools/check-campaign-header-089.cjs": "13cb4800809c1dcdfcc8d626cf08198c94e3de56646bbf7e550b63f203648c13",
+    "tools/check-deploy-update-089.py": "5d293343e809886ca65280f5151561900375045427289b4a2311e2f9ab942330",
+    "tools/check-native-loader-pairs-089.py": "b4260891c031169c129d50b9926015b2181f1f08ef7bab83b55ef738eb08f468",
+    "tools/check-native-selection-089.py": "99fb7f62811e56826b479319756a4076695215519a93e18a1190d996909d77f8",
+    "tools/deploy-warzone-update-089.py": "bf86a39a3074d1a5e4c259f03d2a40e5f6e690d14a3e5ee00cdad24348114ec4",
+    "tools/integrate-native-selection-089.py": "919409e0f68b7f600eab16b8b0130bc1d73b7c78d6b51a47e0d5499949bf545d",
+    "tools/prepare-native-selection-cold-089.py": "def1a6d94f5ae35c7001675c596a3290f74cb43df273cfa04b925c553426b956",
+    "tools/verify-normal-apk-089.py": "dbf136cd1055ea7c9dc30c97d3fcf48f23cc5829c53efd1517be6dd0caef4b59",
+    "vendor/native-089/BOOTSTRAP.md": "55030f9813165520d2a012c0f364e0071bc14dce1c1c5f240884e8a0f64dddd7",
+    "vendor/native-089/bootstrap/multiplayer/CMakeCache.txt": "90dadcd30594e229c4f0549e5f1bcca98e6b8c102d72231d465d3c157fdd77f5",
+    "vendor/native-089/bootstrap/multiplayer/baseline-git.patch": "bd67df2fe953d20206c0cce373c657df990d36d2c6a6e9efef5821e4763d1adc",
+    "vendor/native-089/bootstrap/multiplayer/source/lib/sdl/main_sdl.cpp": "f3c3efa2b148648e83c1f851f46d84ec5786d32283795a78498fc2770f574d36",
+    "vendor/native-089/bootstrap/multiplayer/source/src/display3d.cpp": "43f52868a1ac6fa5a7be609d8940c9db7dfba8d7a3b7140e5c29e79f7f9940ac",
+    "vendor/native-089/bootstrap/multiplayer/source/src/hci.cpp": "1896ac855e999655c430e16446804fb461c444cf5f054254a7828863737e1af7",
+    "vendor/native-089/bootstrap/multiplayer/source/src/mobile-room-map-preview.cpp.inc": "e1b785ae5e5d38ebfce173dc739ec388598af980722bacb6880e623d835f6544",
+    "vendor/native-089/bootstrap/multiplayer/source/src/mobile-room-native.cpp.inc": "eb35b040cf1ce8430ae9fb1887f90703f5874707fa0c576546ed1df2e3204a83",
+    "vendor/native-089/bootstrap/multiplayer/source/src/multiint.cpp": "ef576f51f0b1bf9c8a40ade00d68331e278b673ba0cefeefbff72a58b12fdda0",
+    "vendor/native-089/bootstrap/multiplayer/source/src/quickjs_backend.cpp": "4224840b9a7fda8f333e1a009f82bcf455509d519be75312b36c13786fb4611a",
+    "vendor/native-089/bootstrap/multiplayer/source/src/wrappers.cpp": "d23f339dda4ab0e951934993b93ee0681d350773e6cb6494ec120f2cd5fb5fe3",
+    "vendor/native-089/bootstrap/offline/CMakeCache.txt": "69d378558fcac997a34656e8cdf906bf6e79cc284025d10cb8dba424647b5e04",
+    "vendor/native-089/bootstrap/offline/baseline-git.patch": "70d981df597f01023bd49e38f2da4f0fbfeffbfb8026420b271c5750814803aa",
+    "vendor/native-089/bootstrap/offline/source/lib/sdl/main_sdl.cpp": "dce7553f4719e1becfec8ede07d147965b3ea72ca926bde240e3b650a93f3470",
+    "vendor/native-089/bootstrap/offline/source/src/console.cpp": "282b50dd3bbdf8f5b8703ab74fd6875057d3a848a8ced36434260f6b221f5176",
+    "vendor/native-089/bootstrap/offline/source/src/display3d.cpp": "3b5c1a41144011805819d15e9bfac6f1289d726da276433bfeb237904c0fa15f",
+    "vendor/native-089/bootstrap/offline/source/src/droid.cpp": "5b8f8d8c6cca08bdcec70b34f6de9fee3fff0de2bc4ae5815ff1025390ddc1f1",
+    "vendor/native-089/bootstrap/offline/source/src/hci.cpp": "b99c89e580856201e6e884f0105e7a6aabaa0e55d66f39e5284ac21ecf2dbdc4",
+    "vendor/native-089/bootstrap/offline/source/src/intdisplay.cpp": "99645ec2555ba7dca7c41ebe75f955df46c3890e07b4606e0b8488df7613bb27",
+    "vendor/native-089/bootstrap/offline/source/src/keybind.cpp": "5730cf9a2b791a6a437f4e0da040e9dbb75e8befb48dc02caefb1a8e824355ed",
+    "vendor/native-089/bootstrap/offline/source/src/loadsave.cpp": "b58f01a03b551cbc589ef468f6a0572bd49978f9ba88db503eb761a3518b3341",
+    "vendor/native-089/bootstrap/offline/source/src/main.cpp": "c0d9fad6803313b48d4aeccc592dc2a157778f2198101593711d111ea976cb6c",
+    "vendor/native-089/bootstrap/offline/source/src/quickjs_backend.cpp": "13137dd600eb21ff1506e01e81a5624fd514447d82bb58328bc335eeae009b68",
+    "vendor/native-089/bootstrap/offline/source/src/radar.cpp": "e92fcfb9151aa18adf36208ea53835ca7f7ee0e3347da6968628ba8747866f0d",
+    "vendor/native-089/bootstrap/offline/source/src/research.cpp": "06b8999191bb0160e6b73c268f8ddd69347102133ecc221aee23504973dc918a",
+    "vendor/native-089/bootstrap/retained-snapshot.json": "e26a5594fc92e08009341baa7e907c9f31909622971cbd288828ad491a0372a0",
+    "vendor/native-089/build-plan.json": "1e790a27ebcf8a41c53bea9c4d1cb5096f94bfaafefb3e42ffd6a7f58b3a63c1",
+    "vendor/native-089/checks/loader-pairs.json": "a9262c2c0f8beb93b5299bfb869a33d814c946202d48cf83c60eebd41f31f83e",
+    "vendor/native-089/checks/source-checks.json": "b1f987eaa86d87d2057f57bba3776e90a10a8439c4e06b657305d660aa5401fd",
+    "vendor/native-089/integrated/multiplayer/runtime-integration.json": "7a082a084a0290b4e3c96a1c5d3fb2b048634f208cd94153f069e686aafb80fc",
+    "vendor/native-089/integrated/shared-campaign/runtime-integration.json": "62bfd833a0366d1ae78db5cdf906ace91df81ce53ba59eb1cb4b04c0fac6ca2a",
+    "vendor/native-089/integrated/shared-duel/runtime-integration.json": "fd9fce9d4f7c9390b9c23e064e0e9faf3e93ea321b2564d525233304d4edc21a",
+    "vendor/native-089/integrated/shared-ffa/runtime-integration.json": "975f5ef182c4180fb9f18791ff3a4775aafc08edfd7a19dcd845992f2cf50086",
+    "vendor/native-089/integrated/shared/runtime-integration.json": "47dacea258d09aeeddfb53a7d6efcc358d1055c95c0e779f99d62985d3b0a930",
+    "vendor/native-089/integrated/towers/runtime-integration.json": "b8a82e221a58b611cb427d4a8cda912253efaef55b650c0cd1448604618f57a9",
+    "vendor/native-089/logs/compile-multiplayer-display3d.cpp.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "vendor/native-089/logs/compile-offline-display3d.cpp.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "vendor/native-089/logs/compile-offline-hci.cpp.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "vendor/native-089/logs/compile-shared051-droid.cpp.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "vendor/native-089/logs/link-multiplayer.log": "ccddb57ff85231dc46bd7945c7f1d77948272be7114626858ce4e4e31adfdd60",
+    "vendor/native-089/logs/link-shared.log": "ccddb57ff85231dc46bd7945c7f1d77948272be7114626858ce4e4e31adfdd60",
+    "vendor/native-089/logs/link-towers.log": "ccddb57ff85231dc46bd7945c7f1d77948272be7114626858ce4e4e31adfdd60",
+    "vendor/native-089/native-build.json": "0d0b72cb911f999d88c0a6d04847fc8abab8f1bf32d84260ad321a5768e81035",
+    "vendor/native-089/patches/multiplayer/display3d.cpp.patch": "479951a20acec4ed847653ef42848c8208d6d1951087748ca8782c2b68d29275",
+    "vendor/native-089/patches/offline/display3d.cpp.patch": "433f9719e7688927fb83459e54e571a742cf9abebdbb77d807172c70a88800db",
+    "vendor/native-089/patches/offline/hci.cpp.patch": "9d51445727d98a0724a473d07706c75f467d0b6589841c855bb2c507458143e8",
+    "vendor/native-089/proof/multiplayer-cache-after.json": "7bbd08fafdeb854ae6a44e59910d1d2a08427ca27f71134bdd67df48ce8d5998",
+    "vendor/native-089/proof/multiplayer-cache-before.json": "7bbd08fafdeb854ae6a44e59910d1d2a08427ca27f71134bdd67df48ce8d5998",
+    "vendor/native-089/proof/offline-cache-after.json": "779f7a83aa6f936e58e86bc870e79e0be64e7667ef8c131c4a1b7cfe80bf0e78",
+    "vendor/native-089/proof/offline-cache-before.json": "779f7a83aa6f936e58e86bc870e79e0be64e7667ef8c131c4a1b7cfe80bf0e78",
+    "vendor/native-089/proof/protocol-header.h": "4be9b0d6ada7ee383824bfe54e3ee4e3986c2a868d9a75bfe9fff6b84ee870ec",
+    "vendor/native-089/recipes/build-native-blueprint.sh": "6f3835c7eb8441c216f7e0b056affe22b34eb60e2985341029c866ca75e9bc26",
+    "vendor/native-089/recipes/integrate-multiplayer-native-082.py": "e7ecf6b41df3f5395fc7a596de6d2847642fec15ffbf4511baf194955479d6e6",
+    "vendor/native-089/recipes/integrate-native-runtime.py": "30014384925fdb0dda52d338244fd07d300c1223b841d56e8443a85b77e34ee3",
+    "vendor/native-089/runtime-integration.json": "4fad7cad2ab86b937b70e7c356f9be0be3fbfc88941a2a94fd729c0aaf4253e8",
+    "vendor/native-089/source-provenance-manifest.json": "8ee6edddbf0210063cc561ae7b02ff75a43adff4fabd95051f5231bee42b9681",
+    "vendor/native-089/source/multiplayer/src/display3d.cpp": "65adaf80b7bf0adffdef769612fac808c21bb0cef057b3934eca61110b8a6d38",
+    "vendor/native-089/source/offline/src/display3d.cpp": "2fbb13666fed87b55152be8b5f6f70a13c2ec2e5ae0e51f8e9808ce9e45b2d44",
+    "vendor/native-089/source/offline/src/hci.cpp": "51ff92855e417554a8e1b5785279a9cac77214f141f0fe90655291910dda9e64",
+    "vendor/native-089/source/shared051/src/droid.cpp": "b32c09a40baf1f34b1b00c33b2928f8e771b35646e65508a3331dd0104ccfea4",
+    "app/src/main/assets/multiplayer/mobile-controls.js": "4b7970c51739d2eb39face85286039ad432f9074ac52b25b89128f6ae91a5c1f",
+    "app/src/main/assets/multiplayer/native-ui-adapter.js": "b785a7c199bfc90f232f28557226cb77d50dd1a3577219154b36fcdb593f5378",
+    "app/src/main/assets/warzone-command-pages.js": "3a28bddc853dcc65cae6a3388f715a3fbf9366053b5e03f13930e2d1b4ec5a15",
+    "release-records/all-combat-ui-090-checks.json": "60fae0b1603138fc6215080c24da0639af7905f33621ad7f9eacd787eb57c9fb",
+    "release-records/native-ui-contract-review-090.json": "05ec535b66a014296d123a731cc90ed62cb00926185c7a5516cafc696f7c4b8d",
+    "tools/build-native-selection-090.py": "6a906ae3309c7efc6862f44373ff35520665a81cd8cac2bd76c48e891cc3c443",
+    "tools/build-native-selection-cold-090.sh": "8a17bba9a82d9ee6dc93a063bc6f8e6ec1eaa9aba0d0abade120baa64c3b38e9",
+    "tools/check-all-combat-ui-090.cjs": "2aee3e286cad8035c4250564bf3315ace58ece21e91236da163530f54d0960da",
+    "tools/check-native-constructors-090.py": "561e7d5ebdfcac66f533c42401cc417ff570feb5ab5fb98519f85cf9bcab35ae",
+    "tools/check-native-loader-pairs-090.py": "c9cc90fc7b2c90ddfcca20078a5cd63b061ce591b7f89d0a0dc2bd749c1dae98",
+    "tools/check-native-selection-090.py": "2cbaf636f08b975544aaf74a7132cc53ce55f62380a2977f7acd805cb65a5c53",
+    "tools/combat-ui-fixture-090.cjs": "132d088cb8500688b764e1c9bd69285465791f4e75a6e72afcb1c91e1a746fe7",
+    "tools/integrate-native-selection-090.py": "d4c3deb9ff8ee5720931dddac4e378d4b25e1749a95e1cfb7cb303b191cb25bd",
+    "tools/prepare-native-selection-090.py": "18252975e000f57893c22f4c78a264cb87d633e439cd6ed367be92a004a647e2",
+    "tools/prepare-native-selection-cold-090.py": "2afa77001d5ba82af2acdbcac3e90315bf558c469eaf53c94180151a0cfde3a9",
+    "tools/rebuild-native-constructors-090.py": "1f97ccb457dd490698dfda635f0e9e90ebe78983ac39f5abbc419528ed911ac7",
+    "tools/verify-normal-apk-090.py": "725e81c2528a960cd50fbe3aaccb27f90d4150b74e37a9f071cdf6a487d59980",
+    "vendor/native-090/BUILD.md": "7a64b40dab143f91682c504d214df97493b12ce71a1b971ccc4ce296d13b9675",
+    "vendor/native-090/CONTRACT.md": "b11bef09bb4df3d88809a7f4c4e120132ffb1f9f228c842214519b55a44b772d",
+    "vendor/native-090/baseline089-to090-delta.json": "66895412d6839e87cead0a877de2d946724fa24564c36f862692318f0788b875",
+    "vendor/native-090/bootstrap/multiplayer/CMakeCache.txt": "90dadcd30594e229c4f0549e5f1bcca98e6b8c102d72231d465d3c157fdd77f5",
+    "vendor/native-090/bootstrap/multiplayer/baseline-git.patch": "bd67df2fe953d20206c0cce373c657df990d36d2c6a6e9efef5821e4763d1adc",
+    "vendor/native-090/bootstrap/multiplayer/source/lib/sdl/main_sdl.cpp": "f3c3efa2b148648e83c1f851f46d84ec5786d32283795a78498fc2770f574d36",
+    "vendor/native-090/bootstrap/multiplayer/source/src/display3d.cpp": "43f52868a1ac6fa5a7be609d8940c9db7dfba8d7a3b7140e5c29e79f7f9940ac",
+    "vendor/native-090/bootstrap/multiplayer/source/src/hci.cpp": "1896ac855e999655c430e16446804fb461c444cf5f054254a7828863737e1af7",
+    "vendor/native-090/bootstrap/multiplayer/source/src/mobile-room-map-preview.cpp.inc": "e1b785ae5e5d38ebfce173dc739ec388598af980722bacb6880e623d835f6544",
+    "vendor/native-090/bootstrap/multiplayer/source/src/mobile-room-native.cpp.inc": "eb35b040cf1ce8430ae9fb1887f90703f5874707fa0c576546ed1df2e3204a83",
+    "vendor/native-090/bootstrap/multiplayer/source/src/multiint.cpp": "ef576f51f0b1bf9c8a40ade00d68331e278b673ba0cefeefbff72a58b12fdda0",
+    "vendor/native-090/bootstrap/multiplayer/source/src/quickjs_backend.cpp": "4224840b9a7fda8f333e1a009f82bcf455509d519be75312b36c13786fb4611a",
+    "vendor/native-090/bootstrap/multiplayer/source/src/wrappers.cpp": "d23f339dda4ab0e951934993b93ee0681d350773e6cb6494ec120f2cd5fb5fe3",
+    "vendor/native-090/bootstrap/offline/CMakeCache.txt": "69d378558fcac997a34656e8cdf906bf6e79cc284025d10cb8dba424647b5e04",
+    "vendor/native-090/bootstrap/offline/baseline-git.patch": "70d981df597f01023bd49e38f2da4f0fbfeffbfb8026420b271c5750814803aa",
+    "vendor/native-090/bootstrap/offline/source/lib/sdl/main_sdl.cpp": "dce7553f4719e1becfec8ede07d147965b3ea72ca926bde240e3b650a93f3470",
+    "vendor/native-090/bootstrap/offline/source/src/console.cpp": "282b50dd3bbdf8f5b8703ab74fd6875057d3a848a8ced36434260f6b221f5176",
+    "vendor/native-090/bootstrap/offline/source/src/display3d.cpp": "3b5c1a41144011805819d15e9bfac6f1289d726da276433bfeb237904c0fa15f",
+    "vendor/native-090/bootstrap/offline/source/src/droid.cpp": "5b8f8d8c6cca08bdcec70b34f6de9fee3fff0de2bc4ae5815ff1025390ddc1f1",
+    "vendor/native-090/bootstrap/offline/source/src/hci.cpp": "b99c89e580856201e6e884f0105e7a6aabaa0e55d66f39e5284ac21ecf2dbdc4",
+    "vendor/native-090/bootstrap/offline/source/src/intdisplay.cpp": "99645ec2555ba7dca7c41ebe75f955df46c3890e07b4606e0b8488df7613bb27",
+    "vendor/native-090/bootstrap/offline/source/src/keybind.cpp": "5730cf9a2b791a6a437f4e0da040e9dbb75e8befb48dc02caefb1a8e824355ed",
+    "vendor/native-090/bootstrap/offline/source/src/loadsave.cpp": "b58f01a03b551cbc589ef468f6a0572bd49978f9ba88db503eb761a3518b3341",
+    "vendor/native-090/bootstrap/offline/source/src/main.cpp": "c0d9fad6803313b48d4aeccc592dc2a157778f2198101593711d111ea976cb6c",
+    "vendor/native-090/bootstrap/offline/source/src/quickjs_backend.cpp": "13137dd600eb21ff1506e01e81a5624fd514447d82bb58328bc335eeae009b68",
+    "vendor/native-090/bootstrap/offline/source/src/radar.cpp": "e92fcfb9151aa18adf36208ea53835ca7f7ee0e3347da6968628ba8747866f0d",
+    "vendor/native-090/bootstrap/offline/source/src/research.cpp": "06b8999191bb0160e6b73c268f8ddd69347102133ecc221aee23504973dc918a",
+    "vendor/native-090/build-plan.json": "00a4caf9ed172758b4a8b5269924d6e75c93b46413154837ae3b3dee71978faa",
+    "vendor/native-090/checks/constructor-checks.json": "08bf199155c5fffdcade13813fcd74353b5ff72c4b6ff2e366c70bc841ca6398",
+    "vendor/native-090/checks/loader-pairs.json": "ca340e2c85f8d36d3a10d8d2c160991221186e58e9220f98c51413b5fd2c3e67",
+    "vendor/native-090/checks/source-checks.json": "f08ee44fa5225ec51b105960e96f8b2c359558dbca9abdcea3f808ad56ea58d9",
+    "vendor/native-090/integrated/multiplayer/runtime-integration.json": "0d0e90e61e70bac081df79e7ea435f954be8ebb43757aace2af110fba58d8d05",
+    "vendor/native-090/integrated/shared-campaign/runtime-integration.json": "cbe0009b3cdf07cd38f77781c8e79fd35964a894120fa32e0b6d5a7ddcd70cb5",
+    "vendor/native-090/integrated/shared-duel/runtime-integration.json": "5d444ed354e6f783b849a9831ca41109efcf9cbb9a72972ca1aa5b7e80e2da5e",
+    "vendor/native-090/integrated/shared-ffa/runtime-integration.json": "f321344f341ff8f6b702a66f83a74455b5e2685682a8e7cb16a425f3c4ad79eb",
+    "vendor/native-090/integrated/shared/runtime-integration.json": "869a60ea68faef9a5009b54e8769e250b4caa0a53e4477508a22743ca645529b",
+    "vendor/native-090/integrated/towers/runtime-integration.json": "37065c88bd89f590090e2e78bbe3500c50bcc813928316e14fb731e80194ae5e",
+    "vendor/native-090/logs/compile-multiplayer-display3d.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "vendor/native-090/logs/compile-multiplayer-quickjs_backend.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "vendor/native-090/logs/compile-offline-display3d.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "vendor/native-090/logs/compile-offline-hci-constructors.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "vendor/native-090/logs/compile-offline-hci.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "vendor/native-090/logs/compile-shared051-droid.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "vendor/native-090/logs/link-constructors-shared.log": "ccddb57ff85231dc46bd7945c7f1d77948272be7114626858ce4e4e31adfdd60",
+    "vendor/native-090/logs/link-constructors-towers.log": "ccddb57ff85231dc46bd7945c7f1d77948272be7114626858ce4e4e31adfdd60",
+    "vendor/native-090/logs/link-multiplayer.log": "ccddb57ff85231dc46bd7945c7f1d77948272be7114626858ce4e4e31adfdd60",
+    "vendor/native-090/logs/link-shared.log": "ccddb57ff85231dc46bd7945c7f1d77948272be7114626858ce4e4e31adfdd60",
+    "vendor/native-090/logs/link-towers.log": "ccddb57ff85231dc46bd7945c7f1d77948272be7114626858ce4e4e31adfdd60",
+    "vendor/native-090/native-build.json": "22c393d1f688b02d70a245cad8bafe19bfa838bd3acc3e33026f2dd1520f4df3",
+    "vendor/native-090/patches/multiplayer/display3d.cpp.patch": "2703d92d5ab740f14935103f5099a6b2c32b7654e21a51f300d6dbb0c0fd7486",
+    "vendor/native-090/patches/multiplayer/quickjs_backend.cpp.patch": "2f008f0bb1e4e5c2befda544ca84e6cb790948e7fa78104b805f1fcc217b8ad8",
+    "vendor/native-090/patches/offline/display3d.cpp.patch": "dc4d0931e6996fb4f5481e3a51ac590102bf01bb5be0c633bd5cecc58c38bc3d",
+    "vendor/native-090/patches/offline/hci.cpp.patch": "0c8e793b5f87d9fb9afec1832fe3eef3ca85440308b8e35d16c37884f0a40e5c",
+    "vendor/native-090/proof/multiplayer-cache-after.json": "7bbd08fafdeb854ae6a44e59910d1d2a08427ca27f71134bdd67df48ce8d5998",
+    "vendor/native-090/proof/multiplayer-cache-before.json": "7bbd08fafdeb854ae6a44e59910d1d2a08427ca27f71134bdd67df48ce8d5998",
+    "vendor/native-090/proof/offline-cache-after.json": "779f7a83aa6f936e58e86bc870e79e0be64e7667ef8c131c4a1b7cfe80bf0e78",
+    "vendor/native-090/proof/offline-cache-before.json": "779f7a83aa6f936e58e86bc870e79e0be64e7667ef8c131c4a1b7cfe80bf0e78",
+    "vendor/native-090/proof/offline-constructor-cache-after.json": "779f7a83aa6f936e58e86bc870e79e0be64e7667ef8c131c4a1b7cfe80bf0e78",
+    "vendor/native-090/proof/offline-constructor-cache-before.json": "779f7a83aa6f936e58e86bc870e79e0be64e7667ef8c131c4a1b7cfe80bf0e78",
+    "vendor/native-090/proof/protocol-header.h": "4be9b0d6ada7ee383824bfe54e3ee4e3986c2a868d9a75bfe9fff6b84ee870ec",
+    "vendor/native-090/recipes/build-native-blueprint.sh": "6f3835c7eb8441c216f7e0b056affe22b34eb60e2985341029c866ca75e9bc26",
+    "vendor/native-090/recipes/integrate-multiplayer-native-082.py": "e7ecf6b41df3f5395fc7a596de6d2847642fec15ffbf4511baf194955479d6e6",
+    "vendor/native-090/recipes/integrate-native-runtime.py": "30014384925fdb0dda52d338244fd07d300c1223b841d56e8443a85b77e34ee3",
+    "vendor/native-090/runtime-integration.json": "22424fee023ccbbd77eb86b9848f2b09412efdd81bea937ac93b2ab566f188e5",
+    "vendor/native-090/source-preparation.json": "bd1d5b617a1decad2f5af391f7edb5d2155ae4d54885b9d14cca8f601f802290",
+    "vendor/native-090/source-provenance-manifest.json": "509b4546d4a7817687908cf15a63f62941aa22b05c9bb2969aa393596f48ed21",
+    "vendor/native-090/source/common/mobile-combat-latch-v90.h": "8484adb052e916ffa4c53f87c962eac21b71fc5988c200e03dec5788cc794303",
+    "vendor/native-090/source/multiplayer/src/display3d.cpp": "f58d042b143d85e7d5a91ac65ed8fb862e82f8410e211f5225c491343e10d8cf",
+    "vendor/native-090/source/multiplayer/src/quickjs_backend.cpp": "957d63a68afae9c6fe297f9419bc813388272f5706a485e2d8103d82ad3bf5f2",
+    "vendor/native-090/source/offline/src/display3d.cpp": "b6d5044cd1bbd3497766ea7aa1afd544182242cd77a3b1a64e86eccd0feb82dd",
+    "vendor/native-090/source/offline/src/hci.cpp": "75e4dbe058bcd99009ff4a7e45a3247fc04d4c9169faae5e52f6d4a3764bc105",
+    "vendor/native-090/source/shared051/src/droid.cpp": "b32c09a40baf1f34b1b00c33b2928f8e771b35646e65508a3331dd0104ccfea4"
+  },
+  "priorOverrideSources": {
+    "AGENTS.md": "test-release-090/overrides/AGENTS.md",
+    "app/build.gradle.kts": "test-release-090/overrides/app/build.gradle.kts",
+    "app/src/main/AndroidManifest.xml": "google-play-release/overrides/app/src/main/AndroidManifest.xml",
+    "app/src/main/java/com/rbabbit/blocknight/warzone/MainActivity.java": "google-play-release/overrides/app/src/main/java/com/rbabbit/blocknight/warzone/MainActivity.java",
+    "app/src/main/java/com/rbabbit/blocknight/warzone/HomeModesView.java": "google-play-release/overrides/app/src/main/java/com/rbabbit/blocknight/warzone/HomeModesView.java",
+    "app/src/main/java/com/rbabbit/blocknight/warzone/MultiplayerActivity.java": "google-play-release/overrides/app/src/main/java/com/rbabbit/blocknight/warzone/MultiplayerActivity.java",
+    "app/src/playRelease/AndroidManifest.xml": "google-play-release/overrides/app/src/playRelease/AndroidManifest.xml",
+    "app/src/playRelease/java/com/rbabbit/blocknight/warzone/AppUpdateController.java": "google-play-release/overrides/app/src/playRelease/java/com/rbabbit/blocknight/warzone/AppUpdateController.java",
+    "tools/build-play-release.py": "google-play-release/overrides/tools/build-play-release.py",
+    "app/src/main/assets/multiplayer/session.js": "test-release-090/overrides/app/src/main/assets/multiplayer/session.js",
+    "app/src/main/assets/multiplayer/warzone2100.js": "test-release-090/overrides/app/src/main/assets/multiplayer/warzone2100.js",
+    "app/src/main/assets/multiplayer/warzone2100.wasm": "test-release-090/overrides/app/src/main/assets/multiplayer/warzone2100.wasm",
+    "app/src/main/assets/warzone-campaign-hud.js": "test-release-090/overrides/app/src/main/assets/warzone-campaign-hud.js",
+    "app/src/main/assets/warzone-touch-controls.js": "test-release-090/overrides/app/src/main/assets/warzone-touch-controls.js",
+    "app/src/main/assets/warzone/ui/towers-game-controls.css": "test-release-090/overrides/app/src/main/assets/warzone/ui/towers-game-controls.css",
+    "app/src/main/assets/warzone/warzone2100-campaign.js": "test-release-090/overrides/app/src/main/assets/warzone/warzone2100-campaign.js",
+    "app/src/main/assets/warzone/warzone2100-duel.js": "test-release-090/overrides/app/src/main/assets/warzone/warzone2100-duel.js",
+    "app/src/main/assets/warzone/warzone2100-ffa.js": "test-release-090/overrides/app/src/main/assets/warzone/warzone2100-ffa.js",
+    "app/src/main/assets/warzone/warzone2100-towers-052.js": "test-release-090/overrides/app/src/main/assets/warzone/warzone2100-towers-052.js",
+    "app/src/main/assets/warzone/warzone2100-towers-052.wasm": "test-release-090/overrides/app/src/main/assets/warzone/warzone2100-towers-052.wasm",
+    "app/src/main/assets/warzone/warzone2100.js": "test-release-090/overrides/app/src/main/assets/warzone/warzone2100.js",
+    "app/src/main/assets/warzone/warzone2100.wasm": "test-release-090/overrides/app/src/main/assets/warzone/warzone2100.wasm",
+    "release-records/ISSUES-AND-CHECKS.md": "test-release-090/overrides/release-records/ISSUES-AND-CHECKS.md",
+    "release-records/all-combat-ui-089-checks.json": "normal-release-089/overrides/release-records/all-combat-ui-089-checks.json",
+    "release-records/apk-integrity.json": "normal-release-089/overrides/release-records/apk-integrity.json",
+    "release-records/campaign-layout-js-089-checks.json": "normal-release-089/overrides/release-records/campaign-layout-js-089-checks.json",
+    "release-records/deployment-independent-review.json": "normal-release-089/overrides/release-records/deployment-independent-review.json",
+    "release-records/initial-fallback.json": "test-release-090/overrides/release-records/initial-fallback.json",
+    "release-records/source-package-independent-review.json": "normal-release-089/overrides/release-records/source-package-independent-review.json",
+    "release-records/vps-deploy-guard-checks.json": "normal-release-089/overrides/release-records/vps-deploy-guard-checks.json",
+    "tools/build-native-selection-089.py": "normal-release-089/overrides/tools/build-native-selection-089.py",
+    "tools/build-native-selection-cold-089.sh": "normal-release-089/overrides/tools/build-native-selection-cold-089.sh",
+    "tools/build-normal-apk.py": "test-release-090/overrides/tools/build-normal-apk.py",
+    "tools/campaign-ui-fixture-089.cjs": "normal-release-089/overrides/tools/campaign-ui-fixture-089.cjs",
+    "tools/check-all-combat-ui-089.cjs": "normal-release-089/overrides/tools/check-all-combat-ui-089.cjs",
+    "tools/check-campaign-header-089.cjs": "normal-release-089/overrides/tools/check-campaign-header-089.cjs",
+    "tools/check-deploy-update-089.py": "normal-release-089/overrides/tools/check-deploy-update-089.py",
+    "tools/check-native-loader-pairs-089.py": "normal-release-089/overrides/tools/check-native-loader-pairs-089.py",
+    "tools/check-native-selection-089.py": "normal-release-089/overrides/tools/check-native-selection-089.py",
+    "tools/deploy-warzone-update-089.py": "normal-release-089/overrides/tools/deploy-warzone-update-089.py",
+    "tools/integrate-native-selection-089.py": "normal-release-089/overrides/tools/integrate-native-selection-089.py",
+    "tools/prepare-native-selection-cold-089.py": "normal-release-089/overrides/tools/prepare-native-selection-cold-089.py",
+    "tools/verify-normal-apk-089.py": "normal-release-089/overrides/tools/verify-normal-apk-089.py",
+    "vendor/native-089/BOOTSTRAP.md": "normal-release-089/overrides/vendor/native-089/BOOTSTRAP.md",
+    "vendor/native-089/bootstrap/multiplayer/CMakeCache.txt": "normal-release-089/overrides/vendor/native-089/bootstrap/multiplayer/CMakeCache.txt",
+    "vendor/native-089/bootstrap/multiplayer/baseline-git.patch": "normal-release-089/overrides/vendor/native-089/bootstrap/multiplayer/baseline-git.patch",
+    "vendor/native-089/bootstrap/multiplayer/source/lib/sdl/main_sdl.cpp": "normal-release-089/overrides/vendor/native-089/bootstrap/multiplayer/source/lib/sdl/main_sdl.cpp",
+    "vendor/native-089/bootstrap/multiplayer/source/src/display3d.cpp": "normal-release-089/overrides/vendor/native-089/bootstrap/multiplayer/source/src/display3d.cpp",
+    "vendor/native-089/bootstrap/multiplayer/source/src/hci.cpp": "normal-release-089/overrides/vendor/native-089/bootstrap/multiplayer/source/src/hci.cpp",
+    "vendor/native-089/bootstrap/multiplayer/source/src/mobile-room-map-preview.cpp.inc": "normal-release-089/overrides/vendor/native-089/bootstrap/multiplayer/source/src/mobile-room-map-preview.cpp.inc",
+    "vendor/native-089/bootstrap/multiplayer/source/src/mobile-room-native.cpp.inc": "normal-release-089/overrides/vendor/native-089/bootstrap/multiplayer/source/src/mobile-room-native.cpp.inc",
+    "vendor/native-089/bootstrap/multiplayer/source/src/multiint.cpp": "normal-release-089/overrides/vendor/native-089/bootstrap/multiplayer/source/src/multiint.cpp",
+    "vendor/native-089/bootstrap/multiplayer/source/src/quickjs_backend.cpp": "normal-release-089/overrides/vendor/native-089/bootstrap/multiplayer/source/src/quickjs_backend.cpp",
+    "vendor/native-089/bootstrap/multiplayer/source/src/wrappers.cpp": "normal-release-089/overrides/vendor/native-089/bootstrap/multiplayer/source/src/wrappers.cpp",
+    "vendor/native-089/bootstrap/offline/CMakeCache.txt": "normal-release-089/overrides/vendor/native-089/bootstrap/offline/CMakeCache.txt",
+    "vendor/native-089/bootstrap/offline/baseline-git.patch": "normal-release-089/overrides/vendor/native-089/bootstrap/offline/baseline-git.patch",
+    "vendor/native-089/bootstrap/offline/source/lib/sdl/main_sdl.cpp": "normal-release-089/overrides/vendor/native-089/bootstrap/offline/source/lib/sdl/main_sdl.cpp",
+    "vendor/native-089/bootstrap/offline/source/src/console.cpp": "normal-release-089/overrides/vendor/native-089/bootstrap/offline/source/src/console.cpp",
+    "vendor/native-089/bootstrap/offline/source/src/display3d.cpp": "normal-release-089/overrides/vendor/native-089/bootstrap/offline/source/src/display3d.cpp",
+    "vendor/native-089/bootstrap/offline/source/src/droid.cpp": "normal-release-089/overrides/vendor/native-089/bootstrap/offline/source/src/droid.cpp",
+    "vendor/native-089/bootstrap/offline/source/src/hci.cpp": "normal-release-089/overrides/vendor/native-089/bootstrap/offline/source/src/hci.cpp",
+    "vendor/native-089/bootstrap/offline/source/src/intdisplay.cpp": "normal-release-089/overrides/vendor/native-089/bootstrap/offline/source/src/intdisplay.cpp",
+    "vendor/native-089/bootstrap/offline/source/src/keybind.cpp": "normal-release-089/overrides/vendor/native-089/bootstrap/offline/source/src/keybind.cpp",
+    "vendor/native-089/bootstrap/offline/source/src/loadsave.cpp": "normal-release-089/overrides/vendor/native-089/bootstrap/offline/source/src/loadsave.cpp",
+    "vendor/native-089/bootstrap/offline/source/src/main.cpp": "normal-release-089/overrides/vendor/native-089/bootstrap/offline/source/src/main.cpp",
+    "vendor/native-089/bootstrap/offline/source/src/quickjs_backend.cpp": "normal-release-089/overrides/vendor/native-089/bootstrap/offline/source/src/quickjs_backend.cpp",
+    "vendor/native-089/bootstrap/offline/source/src/radar.cpp": "normal-release-089/overrides/vendor/native-089/bootstrap/offline/source/src/radar.cpp",
+    "vendor/native-089/bootstrap/offline/source/src/research.cpp": "normal-release-089/overrides/vendor/native-089/bootstrap/offline/source/src/research.cpp",
+    "vendor/native-089/bootstrap/retained-snapshot.json": "normal-release-089/overrides/vendor/native-089/bootstrap/retained-snapshot.json",
+    "vendor/native-089/build-plan.json": "normal-release-089/overrides/vendor/native-089/build-plan.json",
+    "vendor/native-089/checks/loader-pairs.json": "normal-release-089/overrides/vendor/native-089/checks/loader-pairs.json",
+    "vendor/native-089/checks/source-checks.json": "normal-release-089/overrides/vendor/native-089/checks/source-checks.json",
+    "vendor/native-089/integrated/multiplayer/runtime-integration.json": "normal-release-089/overrides/vendor/native-089/integrated/multiplayer/runtime-integration.json",
+    "vendor/native-089/integrated/shared-campaign/runtime-integration.json": "normal-release-089/overrides/vendor/native-089/integrated/shared-campaign/runtime-integration.json",
+    "vendor/native-089/integrated/shared-duel/runtime-integration.json": "normal-release-089/overrides/vendor/native-089/integrated/shared-duel/runtime-integration.json",
+    "vendor/native-089/integrated/shared-ffa/runtime-integration.json": "normal-release-089/overrides/vendor/native-089/integrated/shared-ffa/runtime-integration.json",
+    "vendor/native-089/integrated/shared/runtime-integration.json": "normal-release-089/overrides/vendor/native-089/integrated/shared/runtime-integration.json",
+    "vendor/native-089/integrated/towers/runtime-integration.json": "normal-release-089/overrides/vendor/native-089/integrated/towers/runtime-integration.json",
+    "vendor/native-089/logs/compile-multiplayer-display3d.cpp.log": "normal-release-089/overrides/vendor/native-089/logs/compile-multiplayer-display3d.cpp.log",
+    "vendor/native-089/logs/compile-offline-display3d.cpp.log": "normal-release-089/overrides/vendor/native-089/logs/compile-offline-display3d.cpp.log",
+    "vendor/native-089/logs/compile-offline-hci.cpp.log": "normal-release-089/overrides/vendor/native-089/logs/compile-offline-hci.cpp.log",
+    "vendor/native-089/logs/compile-shared051-droid.cpp.log": "normal-release-089/overrides/vendor/native-089/logs/compile-shared051-droid.cpp.log",
+    "vendor/native-089/logs/link-multiplayer.log": "normal-release-089/overrides/vendor/native-089/logs/link-multiplayer.log",
+    "vendor/native-089/logs/link-shared.log": "normal-release-089/overrides/vendor/native-089/logs/link-shared.log",
+    "vendor/native-089/logs/link-towers.log": "normal-release-089/overrides/vendor/native-089/logs/link-towers.log",
+    "vendor/native-089/native-build.json": "normal-release-089/overrides/vendor/native-089/native-build.json",
+    "vendor/native-089/patches/multiplayer/display3d.cpp.patch": "normal-release-089/overrides/vendor/native-089/patches/multiplayer/display3d.cpp.patch",
+    "vendor/native-089/patches/offline/display3d.cpp.patch": "normal-release-089/overrides/vendor/native-089/patches/offline/display3d.cpp.patch",
+    "vendor/native-089/patches/offline/hci.cpp.patch": "normal-release-089/overrides/vendor/native-089/patches/offline/hci.cpp.patch",
+    "vendor/native-089/proof/multiplayer-cache-after.json": "normal-release-089/overrides/vendor/native-089/proof/multiplayer-cache-after.json",
+    "vendor/native-089/proof/multiplayer-cache-before.json": "normal-release-089/overrides/vendor/native-089/proof/multiplayer-cache-before.json",
+    "vendor/native-089/proof/offline-cache-after.json": "normal-release-089/overrides/vendor/native-089/proof/offline-cache-after.json",
+    "vendor/native-089/proof/offline-cache-before.json": "normal-release-089/overrides/vendor/native-089/proof/offline-cache-before.json",
+    "vendor/native-089/proof/protocol-header.h": "normal-release-089/overrides/vendor/native-089/proof/protocol-header.h",
+    "vendor/native-089/recipes/build-native-blueprint.sh": "normal-release-089/overrides/vendor/native-089/recipes/build-native-blueprint.sh",
+    "vendor/native-089/recipes/integrate-multiplayer-native-082.py": "normal-release-089/overrides/vendor/native-089/recipes/integrate-multiplayer-native-082.py",
+    "vendor/native-089/recipes/integrate-native-runtime.py": "normal-release-089/overrides/vendor/native-089/recipes/integrate-native-runtime.py",
+    "vendor/native-089/runtime-integration.json": "normal-release-089/overrides/vendor/native-089/runtime-integration.json",
+    "vendor/native-089/source-provenance-manifest.json": "normal-release-089/overrides/vendor/native-089/source-provenance-manifest.json",
+    "vendor/native-089/source/multiplayer/src/display3d.cpp": "normal-release-089/overrides/vendor/native-089/source/multiplayer/src/display3d.cpp",
+    "vendor/native-089/source/offline/src/display3d.cpp": "normal-release-089/overrides/vendor/native-089/source/offline/src/display3d.cpp",
+    "vendor/native-089/source/offline/src/hci.cpp": "normal-release-089/overrides/vendor/native-089/source/offline/src/hci.cpp",
+    "vendor/native-089/source/shared051/src/droid.cpp": "normal-release-089/overrides/vendor/native-089/source/shared051/src/droid.cpp",
+    "app/src/main/assets/multiplayer/mobile-controls.js": "test-release-090/overrides/app/src/main/assets/multiplayer/mobile-controls.js",
+    "app/src/main/assets/multiplayer/native-ui-adapter.js": "test-release-090/overrides/app/src/main/assets/multiplayer/native-ui-adapter.js",
+    "app/src/main/assets/warzone-command-pages.js": "test-release-090/overrides/app/src/main/assets/warzone-command-pages.js",
+    "release-records/all-combat-ui-090-checks.json": "test-release-090/overrides/release-records/all-combat-ui-090-checks.json",
+    "release-records/native-ui-contract-review-090.json": "test-release-090/overrides/release-records/native-ui-contract-review-090.json",
+    "tools/build-native-selection-090.py": "test-release-090/overrides/tools/build-native-selection-090.py",
+    "tools/build-native-selection-cold-090.sh": "test-release-090/overrides/tools/build-native-selection-cold-090.sh",
+    "tools/check-all-combat-ui-090.cjs": "test-release-090/overrides/tools/check-all-combat-ui-090.cjs",
+    "tools/check-native-constructors-090.py": "test-release-090/overrides/tools/check-native-constructors-090.py",
+    "tools/check-native-loader-pairs-090.py": "test-release-090/overrides/tools/check-native-loader-pairs-090.py",
+    "tools/check-native-selection-090.py": "test-release-090/overrides/tools/check-native-selection-090.py",
+    "tools/combat-ui-fixture-090.cjs": "test-release-090/overrides/tools/combat-ui-fixture-090.cjs",
+    "tools/integrate-native-selection-090.py": "test-release-090/overrides/tools/integrate-native-selection-090.py",
+    "tools/prepare-native-selection-090.py": "test-release-090/overrides/tools/prepare-native-selection-090.py",
+    "tools/prepare-native-selection-cold-090.py": "test-release-090/overrides/tools/prepare-native-selection-cold-090.py",
+    "tools/rebuild-native-constructors-090.py": "test-release-090/overrides/tools/rebuild-native-constructors-090.py",
+    "tools/verify-normal-apk-090.py": "test-release-090/overrides/tools/verify-normal-apk-090.py",
+    "vendor/native-090/BUILD.md": "test-release-090/overrides/vendor/native-090/BUILD.md",
+    "vendor/native-090/CONTRACT.md": "test-release-090/overrides/vendor/native-090/CONTRACT.md",
+    "vendor/native-090/baseline089-to090-delta.json": "test-release-090/overrides/vendor/native-090/baseline089-to090-delta.json",
+    "vendor/native-090/bootstrap/multiplayer/CMakeCache.txt": "test-release-090/overrides/vendor/native-090/bootstrap/multiplayer/CMakeCache.txt",
+    "vendor/native-090/bootstrap/multiplayer/baseline-git.patch": "test-release-090/overrides/vendor/native-090/bootstrap/multiplayer/baseline-git.patch",
+    "vendor/native-090/bootstrap/multiplayer/source/lib/sdl/main_sdl.cpp": "test-release-090/overrides/vendor/native-090/bootstrap/multiplayer/source/lib/sdl/main_sdl.cpp",
+    "vendor/native-090/bootstrap/multiplayer/source/src/display3d.cpp": "test-release-090/overrides/vendor/native-090/bootstrap/multiplayer/source/src/display3d.cpp",
+    "vendor/native-090/bootstrap/multiplayer/source/src/hci.cpp": "test-release-090/overrides/vendor/native-090/bootstrap/multiplayer/source/src/hci.cpp",
+    "vendor/native-090/bootstrap/multiplayer/source/src/mobile-room-map-preview.cpp.inc": "test-release-090/overrides/vendor/native-090/bootstrap/multiplayer/source/src/mobile-room-map-preview.cpp.inc",
+    "vendor/native-090/bootstrap/multiplayer/source/src/mobile-room-native.cpp.inc": "test-release-090/overrides/vendor/native-090/bootstrap/multiplayer/source/src/mobile-room-native.cpp.inc",
+    "vendor/native-090/bootstrap/multiplayer/source/src/multiint.cpp": "test-release-090/overrides/vendor/native-090/bootstrap/multiplayer/source/src/multiint.cpp",
+    "vendor/native-090/bootstrap/multiplayer/source/src/quickjs_backend.cpp": "test-release-090/overrides/vendor/native-090/bootstrap/multiplayer/source/src/quickjs_backend.cpp",
+    "vendor/native-090/bootstrap/multiplayer/source/src/wrappers.cpp": "test-release-090/overrides/vendor/native-090/bootstrap/multiplayer/source/src/wrappers.cpp",
+    "vendor/native-090/bootstrap/offline/CMakeCache.txt": "test-release-090/overrides/vendor/native-090/bootstrap/offline/CMakeCache.txt",
+    "vendor/native-090/bootstrap/offline/baseline-git.patch": "test-release-090/overrides/vendor/native-090/bootstrap/offline/baseline-git.patch",
+    "vendor/native-090/bootstrap/offline/source/lib/sdl/main_sdl.cpp": "test-release-090/overrides/vendor/native-090/bootstrap/offline/source/lib/sdl/main_sdl.cpp",
+    "vendor/native-090/bootstrap/offline/source/src/console.cpp": "test-release-090/overrides/vendor/native-090/bootstrap/offline/source/src/console.cpp",
+    "vendor/native-090/bootstrap/offline/source/src/display3d.cpp": "test-release-090/overrides/vendor/native-090/bootstrap/offline/source/src/display3d.cpp",
+    "vendor/native-090/bootstrap/offline/source/src/droid.cpp": "test-release-090/overrides/vendor/native-090/bootstrap/offline/source/src/droid.cpp",
+    "vendor/native-090/bootstrap/offline/source/src/hci.cpp": "test-release-090/overrides/vendor/native-090/bootstrap/offline/source/src/hci.cpp",
+    "vendor/native-090/bootstrap/offline/source/src/intdisplay.cpp": "test-release-090/overrides/vendor/native-090/bootstrap/offline/source/src/intdisplay.cpp",
+    "vendor/native-090/bootstrap/offline/source/src/keybind.cpp": "test-release-090/overrides/vendor/native-090/bootstrap/offline/source/src/keybind.cpp",
+    "vendor/native-090/bootstrap/offline/source/src/loadsave.cpp": "test-release-090/overrides/vendor/native-090/bootstrap/offline/source/src/loadsave.cpp",
+    "vendor/native-090/bootstrap/offline/source/src/main.cpp": "test-release-090/overrides/vendor/native-090/bootstrap/offline/source/src/main.cpp",
+    "vendor/native-090/bootstrap/offline/source/src/quickjs_backend.cpp": "test-release-090/overrides/vendor/native-090/bootstrap/offline/source/src/quickjs_backend.cpp",
+    "vendor/native-090/bootstrap/offline/source/src/radar.cpp": "test-release-090/overrides/vendor/native-090/bootstrap/offline/source/src/radar.cpp",
+    "vendor/native-090/bootstrap/offline/source/src/research.cpp": "test-release-090/overrides/vendor/native-090/bootstrap/offline/source/src/research.cpp",
+    "vendor/native-090/build-plan.json": "test-release-090/overrides/vendor/native-090/build-plan.json",
+    "vendor/native-090/checks/constructor-checks.json": "test-release-090/overrides/vendor/native-090/checks/constructor-checks.json",
+    "vendor/native-090/checks/loader-pairs.json": "test-release-090/overrides/vendor/native-090/checks/loader-pairs.json",
+    "vendor/native-090/checks/source-checks.json": "test-release-090/overrides/vendor/native-090/checks/source-checks.json",
+    "vendor/native-090/integrated/multiplayer/runtime-integration.json": "test-release-090/overrides/vendor/native-090/integrated/multiplayer/runtime-integration.json",
+    "vendor/native-090/integrated/shared-campaign/runtime-integration.json": "test-release-090/overrides/vendor/native-090/integrated/shared-campaign/runtime-integration.json",
+    "vendor/native-090/integrated/shared-duel/runtime-integration.json": "test-release-090/overrides/vendor/native-090/integrated/shared-duel/runtime-integration.json",
+    "vendor/native-090/integrated/shared-ffa/runtime-integration.json": "test-release-090/overrides/vendor/native-090/integrated/shared-ffa/runtime-integration.json",
+    "vendor/native-090/integrated/shared/runtime-integration.json": "test-release-090/overrides/vendor/native-090/integrated/shared/runtime-integration.json",
+    "vendor/native-090/integrated/towers/runtime-integration.json": "test-release-090/overrides/vendor/native-090/integrated/towers/runtime-integration.json",
+    "vendor/native-090/logs/compile-multiplayer-display3d.log": "test-release-090/overrides/vendor/native-090/logs/compile-multiplayer-display3d.log",
+    "vendor/native-090/logs/compile-multiplayer-quickjs_backend.log": "test-release-090/overrides/vendor/native-090/logs/compile-multiplayer-quickjs_backend.log",
+    "vendor/native-090/logs/compile-offline-display3d.log": "test-release-090/overrides/vendor/native-090/logs/compile-offline-display3d.log",
+    "vendor/native-090/logs/compile-offline-hci-constructors.log": "test-release-090/overrides/vendor/native-090/logs/compile-offline-hci-constructors.log",
+    "vendor/native-090/logs/compile-offline-hci.log": "test-release-090/overrides/vendor/native-090/logs/compile-offline-hci.log",
+    "vendor/native-090/logs/compile-shared051-droid.log": "test-release-090/overrides/vendor/native-090/logs/compile-shared051-droid.log",
+    "vendor/native-090/logs/link-constructors-shared.log": "test-release-090/overrides/vendor/native-090/logs/link-constructors-shared.log",
+    "vendor/native-090/logs/link-constructors-towers.log": "test-release-090/overrides/vendor/native-090/logs/link-constructors-towers.log",
+    "vendor/native-090/logs/link-multiplayer.log": "test-release-090/overrides/vendor/native-090/logs/link-multiplayer.log",
+    "vendor/native-090/logs/link-shared.log": "test-release-090/overrides/vendor/native-090/logs/link-shared.log",
+    "vendor/native-090/logs/link-towers.log": "test-release-090/overrides/vendor/native-090/logs/link-towers.log",
+    "vendor/native-090/native-build.json": "test-release-090/overrides/vendor/native-090/native-build.json",
+    "vendor/native-090/patches/multiplayer/display3d.cpp.patch": "test-release-090/overrides/vendor/native-090/patches/multiplayer/display3d.cpp.patch",
+    "vendor/native-090/patches/multiplayer/quickjs_backend.cpp.patch": "test-release-090/overrides/vendor/native-090/patches/multiplayer/quickjs_backend.cpp.patch",
+    "vendor/native-090/patches/offline/display3d.cpp.patch": "test-release-090/overrides/vendor/native-090/patches/offline/display3d.cpp.patch",
+    "vendor/native-090/patches/offline/hci.cpp.patch": "test-release-090/overrides/vendor/native-090/patches/offline/hci.cpp.patch",
+    "vendor/native-090/proof/multiplayer-cache-after.json": "test-release-090/overrides/vendor/native-090/proof/multiplayer-cache-after.json",
+    "vendor/native-090/proof/multiplayer-cache-before.json": "test-release-090/overrides/vendor/native-090/proof/multiplayer-cache-before.json",
+    "vendor/native-090/proof/offline-cache-after.json": "test-release-090/overrides/vendor/native-090/proof/offline-cache-after.json",
+    "vendor/native-090/proof/offline-cache-before.json": "test-release-090/overrides/vendor/native-090/proof/offline-cache-before.json",
+    "vendor/native-090/proof/offline-constructor-cache-after.json": "test-release-090/overrides/vendor/native-090/proof/offline-constructor-cache-after.json",
+    "vendor/native-090/proof/offline-constructor-cache-before.json": "test-release-090/overrides/vendor/native-090/proof/offline-constructor-cache-before.json",
+    "vendor/native-090/proof/protocol-header.h": "test-release-090/overrides/vendor/native-090/proof/protocol-header.h",
+    "vendor/native-090/recipes/build-native-blueprint.sh": "test-release-090/overrides/vendor/native-090/recipes/build-native-blueprint.sh",
+    "vendor/native-090/recipes/integrate-multiplayer-native-082.py": "test-release-090/overrides/vendor/native-090/recipes/integrate-multiplayer-native-082.py",
+    "vendor/native-090/recipes/integrate-native-runtime.py": "test-release-090/overrides/vendor/native-090/recipes/integrate-native-runtime.py",
+    "vendor/native-090/runtime-integration.json": "test-release-090/overrides/vendor/native-090/runtime-integration.json",
+    "vendor/native-090/source-preparation.json": "test-release-090/overrides/vendor/native-090/source-preparation.json",
+    "vendor/native-090/source-provenance-manifest.json": "test-release-090/overrides/vendor/native-090/source-provenance-manifest.json",
+    "vendor/native-090/source/common/mobile-combat-latch-v90.h": "test-release-090/overrides/vendor/native-090/source/common/mobile-combat-latch-v90.h",
+    "vendor/native-090/source/multiplayer/src/display3d.cpp": "test-release-090/overrides/vendor/native-090/source/multiplayer/src/display3d.cpp",
+    "vendor/native-090/source/multiplayer/src/quickjs_backend.cpp": "test-release-090/overrides/vendor/native-090/source/multiplayer/src/quickjs_backend.cpp",
+    "vendor/native-090/source/offline/src/display3d.cpp": "test-release-090/overrides/vendor/native-090/source/offline/src/display3d.cpp",
+    "vendor/native-090/source/offline/src/hci.cpp": "test-release-090/overrides/vendor/native-090/source/offline/src/hci.cpp",
+    "vendor/native-090/source/shared051/src/droid.cpp": "test-release-090/overrides/vendor/native-090/source/shared051/src/droid.cpp"
+  },
+  "acceptedRootHashes": {
+    "AGENTS.md": [
+      "1fd84b33b26554098f6ab2a41d1a4db21af481574f561326a84ed0ccdc222f91",
+      "2dd3af29624eb95fdd1b2adb35da2af1eeb58d31348aea951e1c80d2c95a903d",
+      "c46fd5f61ae5ceb6b3d934bce6cbf8d1335468fc5709904ac9fc65f16567fcef",
+      "faa5dde37d030a224aa5eb01f46b92c0a73a13d536eb9f9748acefde89eb8b98"
+    ],
+    "app/build.gradle.kts": [
+      "3ea7a91e8f6133074c1a7c62de1a24a12b3f8f31d18513cb9f65adda49b08417",
+      "695b707fe0dde47a6f6570e71f06e0d460d5d6ab7d673b0236926181204623e5",
+      "bc14ce831fa5455539471a51fb0659a45c0c79340a157633f579e4be99e08031",
+      "e69f8b3ab8c4b5c5e50f663dbf4cea25b78c5afbf6c997a8113454c4576b3924"
+    ],
+    "app/src/main/AndroidManifest.xml": [
+      "98405e971c714ee594a460f1ef67ed2e2c1ddfbeea2543185e6878b795368654",
+      "be84f826d23b4e26f2a2f3fd2c2d03bca78b5f029f0eb32390d71c718398d100"
+    ],
+    "app/src/main/java/com/rbabbit/blocknight/warzone/MainActivity.java": [
+      "0c4b5b3e9e828217e079bea5c9b38ac1e275a90ad84c8d0d596962d68d400258",
+      "bf720bec791d3df6bb4f6e0afa0fb75f53025a9f57ee3945b06117394ac20e47"
+    ],
+    "app/src/main/java/com/rbabbit/blocknight/warzone/HomeModesView.java": [
+      "b31f7e1d41640ccd3dc0af1956694bd8610fb79a3bf9d0ed4f556e1a024400c7",
+      "f712e2d656b0e899192cf89ebcfc60ac4b2151ef9c6f7af7846a1a0538f89e70"
+    ],
+    "app/src/main/java/com/rbabbit/blocknight/warzone/MultiplayerActivity.java": [
+      "028af2f8d6c7d25fceddff442f1f59c49b873097356e419361de97eac11d938c",
+      "8fa99397b54c332284b9cbb000b6a48b0a52376141284a7aad5f3e0cc13f0bae"
+    ],
+    "app/src/playRelease/AndroidManifest.xml": [
+      null,
+      "a705f0f191935a6c6d1151fe5e81469b3b5fe8459812a5f331d279493c5f3768"
+    ],
+    "app/src/playRelease/java/com/rbabbit/blocknight/warzone/AppUpdateController.java": [
+      null,
+      "58ddf86b8dab9a283d7a48a0c7b97f70d2d4714c29f2e6a991490bee93076c28"
+    ],
+    "tools/build-play-release.py": [
+      null,
+      "b40d0e5554c96ccd72c6a24141dfdea12124059f980a1ff7ecf1131aba92d0d1"
+    ],
+    "app/src/main/assets/multiplayer/session.js": [
+      "061cbe682d7f1e2bc179e2b05b9853443d7ac325ef1ba87060383f0391b01b98",
+      "40929ede2b65ee4b1adf5ee5237a602b91ac32e944755b6247c15bed60f15588",
+      "46bc31029c1c28da00ca98440bc3b4581af10d56db0c42a7375f590175333a2c"
+    ],
+    "app/src/main/assets/multiplayer/warzone2100.js": [
+      "4cfbd94c7954deb61c84c49e43fcd8dcbd53268c445998d283a3e310f846c89b",
+      "834f87b00f87f32630360bb15bf818ad7d63a91d0ccbb12018a9d3a53bc43a76",
+      "c1d2dd319639041486717ec606cd1d05cbf79485d869aacd6329da9c337433ea"
+    ],
+    "app/src/main/assets/multiplayer/warzone2100.wasm": [
+      "1d050920393ab7be2d7871a8a269e5d5487b567bf9e46457ecb1104553c38d0d",
+      "2f884ca84c3c29bdbeed8102d710c40e73b29320d1e99c1ff64d97269d252fbc",
+      "b0586374d4f8d1e017ee88a26bb062dbb7114e2b4517cd7e7f58cc9022344125"
+    ],
+    "app/src/main/assets/warzone-campaign-hud.js": [
+      "3e008580535bf53dd850e451d561c606d9e9471f0f49221b1d4d669ed3d40536",
+      "8980d11e9fbf18dbe9b5d5e1846e43d0b11dde0a34d5017ace780a2c658da586",
+      "f8ded40a391bf1bc967827abef1d3bc722b124d26a2f040d0a69b2f4c5f472c1"
+    ],
+    "app/src/main/assets/warzone-touch-controls.js": [
+      "2c3838315e65422c77acdf83ebdc13a0abcc6033d86868d27291b402268f9cf6",
+      "392d069c07483677e752bf07d194e2b4bad7d3f06da59bbcb2c86f1d39fc9250",
+      "ab600b66e42a65e0802d14d08cf7748efe2ba40f93faf1a1ab14b7c83dc34eb9"
+    ],
+    "app/src/main/assets/warzone/ui/towers-game-controls.css": [
+      "0cc407c8a9e3aec65fef68efda907429135dc69f3f18f57b61e3e6563d847f67",
+      "a07401b9b120bd6e12e34b3b173cfc14ae354eb5dfab2a4dd24608d1fae9e7d0",
+      "f790fa99760acf68ba580749de433dcdb21116c384e736bb53b0cf7b28078c61"
+    ],
+    "app/src/main/assets/warzone/warzone2100-campaign.js": [
+      "1ae7c30db5ba69f26206a921ce4e122d7e7727cec56188e86c3663820ee420bb",
+      "d70a3c7495d32fb53fac1b90785d51188bb0e6027919ea1d8d9b485b7d71f408",
+      "ef69f6826f099dde9823532609da4bba6fbe2fe5959c094c1b69a88edc5b85fd"
+    ],
+    "app/src/main/assets/warzone/warzone2100-duel.js": [
+      "6ef65429d1f496bfe5c52e2d8d770b28eaf319d77cb0d61675abd5d78d5420b5",
+      "a7c479363a594385d5ac5a77b5331e6d32f7bd0a7667f123cd09cfa0c89e4fde",
+      "dac4a4453bc36362543bc639f8aed1b31b9c8ef0f63c7b151fbeec4e85addf7c"
+    ],
+    "app/src/main/assets/warzone/warzone2100-ffa.js": [
+      "0bd77ca6d8f1c4bef0dd4acbdcf2a9633ce579c5ce3929c3f63d811f2c16cbb0",
+      "28d776ac00994b0960af686be6450b06029d2571687d77ce42b4523968f76aa7",
+      "b7c403da49cfe84dc717d5b4eafaffb2079014aee44907160389d5d987327c75"
+    ],
+    "app/src/main/assets/warzone/warzone2100-towers-052.js": [
+      "99ea1dcfc0b39713c237c85e8bd6a9f46355fe40f4b2e5dd733a5fce4b1c57b3",
+      "cfc9d2d183fdfc7a8f6fe7ba82e984ea7bddd8d2c4a392d87639af1131750289",
+      "e656e66ef6f539760cf400a4b61a3ed6e22e5d23ee984ef7db9a431c607465a7"
+    ],
+    "app/src/main/assets/warzone/warzone2100-towers-052.wasm": [
+      "2924f46aa75d9b27b92494f01d56239856ad06b2164cd7131144a3a5faeb87db",
+      "defca4e2532abce2832b22a74e0bcdf87451b4876a045bbe213d934b637a7577",
+      "e3cccd033a5874d0451aaa095cdef6c8146dcdb95ec1288f36d9482ab9b6b236"
+    ],
+    "app/src/main/assets/warzone/warzone2100.js": [
+      "31cf341a79f14fb4d8cb2220871df3c3be6c1d618b977285026406d067b871d4",
+      "80f54324b5b8861c5e07c14becdd37eccccb502271cc37f622d6b214453ff92c",
+      "fdf0c4807323b15a00cbe92947db2fb6b2da771384af9f3fba08fc5be03c5949"
+    ],
+    "app/src/main/assets/warzone/warzone2100.wasm": [
+      "497c65308d3e85f0b5370ec0ff0eb48e6a0876e735ad45e3b280829c7f3c2a06",
+      "b1addc472eb09750e3c33dc3979af3c13e9266e439d894cead015616572e7caf",
+      "eefcf462ba169877d276cdb92773d8fa16fe8f9a6070222275166fa9ffa6a144"
+    ],
+    "release-records/ISSUES-AND-CHECKS.md": [
+      null,
+      "5571b883c041da1f630df8431238c9a5d434cb1b428e7aea529e2456d0807107",
+      "a28e69e7e870ddc1ad51670abeb7cbfdfe7d39633b4ba3dce07d6a43f16997d6"
+    ],
+    "release-records/all-combat-ui-089-checks.json": [
+      null,
+      "9b2f7d6f28dd8a4e2ee549506e5eaab97508fa4536183ae7e1ab62c06fba5f67"
+    ],
+    "release-records/apk-integrity.json": [
+      null,
+      "e7dabd14207235af70c25c5865ef0ab963d2eb339d96e786c1fe5b2f62987035"
+    ],
+    "release-records/campaign-layout-js-089-checks.json": [
+      null,
+      "dc82a63a782a9127e9fa3c6e7843738167aebf1f3b02cb730a5b15489f38a9e9"
+    ],
+    "release-records/deployment-independent-review.json": [
+      null,
+      "ea0c97cb830d478c078a5fe6f83e0fd5a610eb632a74e70db9b5e6d12cb815b3"
+    ],
+    "release-records/initial-fallback.json": [
+      null,
+      "09d5fbc9cf68d91c8b532909e90d662ae8597d110eea169c363d4201298e6d7d",
+      "41737cc106f1830897801a929a400bed3816491e388a8015bdea95df65702f16"
+    ],
+    "release-records/source-package-independent-review.json": [
+      null,
+      "1471ba88fedcb8766ace983d8eefc49ed96458a1d9f2ad4173942d6b982ba270"
+    ],
+    "release-records/vps-deploy-guard-checks.json": [
+      null,
+      "59c52c42791c2b15b0049608f1d44402c6f733e8c7cac2e8e967c008d96d58f3"
+    ],
+    "tools/build-native-selection-089.py": [
+      null,
+      "a81d781943765215e0efe716d8306948b3087bd7bc8e5fa68503a5fdd82b1643"
+    ],
+    "tools/build-native-selection-cold-089.sh": [
+      null,
+      "c19a188960d1b8f31b188f7cde5aa25e860fb69fd9d502b58c9135cf07145693"
+    ],
+    "tools/build-normal-apk.py": [
+      null,
+      "ba54608acdc7c5702f41dc186deb5a4c07390f7809e32ff71482b9d4d4a05f4b"
+    ],
+    "tools/campaign-ui-fixture-089.cjs": [
+      null,
+      "b933076c3fb21bbd3b40779df333bc7daab2411515f6c3229ad2fc4fa3eefd66"
+    ],
+    "tools/check-all-combat-ui-089.cjs": [
+      null,
+      "30bcb35aa7999bed4e18ab3ceb59a3f189a667fdf4615797739e6fe267b09c88"
+    ],
+    "tools/check-campaign-header-089.cjs": [
+      null,
+      "13cb4800809c1dcdfcc8d626cf08198c94e3de56646bbf7e550b63f203648c13"
+    ],
+    "tools/check-deploy-update-089.py": [
+      null,
+      "5d293343e809886ca65280f5151561900375045427289b4a2311e2f9ab942330"
+    ],
+    "tools/check-native-loader-pairs-089.py": [
+      null,
+      "b4260891c031169c129d50b9926015b2181f1f08ef7bab83b55ef738eb08f468"
+    ],
+    "tools/check-native-selection-089.py": [
+      null,
+      "99fb7f62811e56826b479319756a4076695215519a93e18a1190d996909d77f8"
+    ],
+    "tools/deploy-warzone-update-089.py": [
+      null,
+      "bf86a39a3074d1a5e4c259f03d2a40e5f6e690d14a3e5ee00cdad24348114ec4"
+    ],
+    "tools/integrate-native-selection-089.py": [
+      null,
+      "919409e0f68b7f600eab16b8b0130bc1d73b7c78d6b51a47e0d5499949bf545d"
+    ],
+    "tools/prepare-native-selection-cold-089.py": [
+      null,
+      "def1a6d94f5ae35c7001675c596a3290f74cb43df273cfa04b925c553426b956"
+    ],
+    "tools/verify-normal-apk-089.py": [
+      null,
+      "dbf136cd1055ea7c9dc30c97d3fcf48f23cc5829c53efd1517be6dd0caef4b59"
+    ],
+    "vendor/native-089/BOOTSTRAP.md": [
+      null,
+      "55030f9813165520d2a012c0f364e0071bc14dce1c1c5f240884e8a0f64dddd7"
+    ],
+    "vendor/native-089/bootstrap/multiplayer/CMakeCache.txt": [
+      null,
+      "90dadcd30594e229c4f0549e5f1bcca98e6b8c102d72231d465d3c157fdd77f5"
+    ],
+    "vendor/native-089/bootstrap/multiplayer/baseline-git.patch": [
+      null,
+      "bd67df2fe953d20206c0cce373c657df990d36d2c6a6e9efef5821e4763d1adc"
+    ],
+    "vendor/native-089/bootstrap/multiplayer/source/lib/sdl/main_sdl.cpp": [
+      null,
+      "f3c3efa2b148648e83c1f851f46d84ec5786d32283795a78498fc2770f574d36"
+    ],
+    "vendor/native-089/bootstrap/multiplayer/source/src/display3d.cpp": [
+      null,
+      "43f52868a1ac6fa5a7be609d8940c9db7dfba8d7a3b7140e5c29e79f7f9940ac"
+    ],
+    "vendor/native-089/bootstrap/multiplayer/source/src/hci.cpp": [
+      null,
+      "1896ac855e999655c430e16446804fb461c444cf5f054254a7828863737e1af7"
+    ],
+    "vendor/native-089/bootstrap/multiplayer/source/src/mobile-room-map-preview.cpp.inc": [
+      null,
+      "e1b785ae5e5d38ebfce173dc739ec388598af980722bacb6880e623d835f6544"
+    ],
+    "vendor/native-089/bootstrap/multiplayer/source/src/mobile-room-native.cpp.inc": [
+      null,
+      "eb35b040cf1ce8430ae9fb1887f90703f5874707fa0c576546ed1df2e3204a83"
+    ],
+    "vendor/native-089/bootstrap/multiplayer/source/src/multiint.cpp": [
+      null,
+      "ef576f51f0b1bf9c8a40ade00d68331e278b673ba0cefeefbff72a58b12fdda0"
+    ],
+    "vendor/native-089/bootstrap/multiplayer/source/src/quickjs_backend.cpp": [
+      null,
+      "4224840b9a7fda8f333e1a009f82bcf455509d519be75312b36c13786fb4611a"
+    ],
+    "vendor/native-089/bootstrap/multiplayer/source/src/wrappers.cpp": [
+      null,
+      "d23f339dda4ab0e951934993b93ee0681d350773e6cb6494ec120f2cd5fb5fe3"
+    ],
+    "vendor/native-089/bootstrap/offline/CMakeCache.txt": [
+      null,
+      "69d378558fcac997a34656e8cdf906bf6e79cc284025d10cb8dba424647b5e04"
+    ],
+    "vendor/native-089/bootstrap/offline/baseline-git.patch": [
+      null,
+      "70d981df597f01023bd49e38f2da4f0fbfeffbfb8026420b271c5750814803aa"
+    ],
+    "vendor/native-089/bootstrap/offline/source/lib/sdl/main_sdl.cpp": [
+      null,
+      "dce7553f4719e1becfec8ede07d147965b3ea72ca926bde240e3b650a93f3470"
+    ],
+    "vendor/native-089/bootstrap/offline/source/src/console.cpp": [
+      null,
+      "282b50dd3bbdf8f5b8703ab74fd6875057d3a848a8ced36434260f6b221f5176"
+    ],
+    "vendor/native-089/bootstrap/offline/source/src/display3d.cpp": [
+      null,
+      "3b5c1a41144011805819d15e9bfac6f1289d726da276433bfeb237904c0fa15f"
+    ],
+    "vendor/native-089/bootstrap/offline/source/src/droid.cpp": [
+      null,
+      "5b8f8d8c6cca08bdcec70b34f6de9fee3fff0de2bc4ae5815ff1025390ddc1f1"
+    ],
+    "vendor/native-089/bootstrap/offline/source/src/hci.cpp": [
+      null,
+      "b99c89e580856201e6e884f0105e7a6aabaa0e55d66f39e5284ac21ecf2dbdc4"
+    ],
+    "vendor/native-089/bootstrap/offline/source/src/intdisplay.cpp": [
+      null,
+      "99645ec2555ba7dca7c41ebe75f955df46c3890e07b4606e0b8488df7613bb27"
+    ],
+    "vendor/native-089/bootstrap/offline/source/src/keybind.cpp": [
+      null,
+      "5730cf9a2b791a6a437f4e0da040e9dbb75e8befb48dc02caefb1a8e824355ed"
+    ],
+    "vendor/native-089/bootstrap/offline/source/src/loadsave.cpp": [
+      null,
+      "b58f01a03b551cbc589ef468f6a0572bd49978f9ba88db503eb761a3518b3341"
+    ],
+    "vendor/native-089/bootstrap/offline/source/src/main.cpp": [
+      null,
+      "c0d9fad6803313b48d4aeccc592dc2a157778f2198101593711d111ea976cb6c"
+    ],
+    "vendor/native-089/bootstrap/offline/source/src/quickjs_backend.cpp": [
+      null,
+      "13137dd600eb21ff1506e01e81a5624fd514447d82bb58328bc335eeae009b68"
+    ],
+    "vendor/native-089/bootstrap/offline/source/src/radar.cpp": [
+      null,
+      "e92fcfb9151aa18adf36208ea53835ca7f7ee0e3347da6968628ba8747866f0d"
+    ],
+    "vendor/native-089/bootstrap/offline/source/src/research.cpp": [
+      null,
+      "06b8999191bb0160e6b73c268f8ddd69347102133ecc221aee23504973dc918a"
+    ],
+    "vendor/native-089/bootstrap/retained-snapshot.json": [
+      null,
+      "e26a5594fc92e08009341baa7e907c9f31909622971cbd288828ad491a0372a0"
+    ],
+    "vendor/native-089/build-plan.json": [
+      null,
+      "1e790a27ebcf8a41c53bea9c4d1cb5096f94bfaafefb3e42ffd6a7f58b3a63c1"
+    ],
+    "vendor/native-089/checks/loader-pairs.json": [
+      null,
+      "a9262c2c0f8beb93b5299bfb869a33d814c946202d48cf83c60eebd41f31f83e"
+    ],
+    "vendor/native-089/checks/source-checks.json": [
+      null,
+      "b1f987eaa86d87d2057f57bba3776e90a10a8439c4e06b657305d660aa5401fd"
+    ],
+    "vendor/native-089/integrated/multiplayer/runtime-integration.json": [
+      null,
+      "7a082a084a0290b4e3c96a1c5d3fb2b048634f208cd94153f069e686aafb80fc"
+    ],
+    "vendor/native-089/integrated/shared-campaign/runtime-integration.json": [
+      null,
+      "62bfd833a0366d1ae78db5cdf906ace91df81ce53ba59eb1cb4b04c0fac6ca2a"
+    ],
+    "vendor/native-089/integrated/shared-duel/runtime-integration.json": [
+      null,
+      "fd9fce9d4f7c9390b9c23e064e0e9faf3e93ea321b2564d525233304d4edc21a"
+    ],
+    "vendor/native-089/integrated/shared-ffa/runtime-integration.json": [
+      null,
+      "975f5ef182c4180fb9f18791ff3a4775aafc08edfd7a19dcd845992f2cf50086"
+    ],
+    "vendor/native-089/integrated/shared/runtime-integration.json": [
+      null,
+      "47dacea258d09aeeddfb53a7d6efcc358d1055c95c0e779f99d62985d3b0a930"
+    ],
+    "vendor/native-089/integrated/towers/runtime-integration.json": [
+      null,
+      "b8a82e221a58b611cb427d4a8cda912253efaef55b650c0cd1448604618f57a9"
+    ],
+    "vendor/native-089/logs/compile-multiplayer-display3d.cpp.log": [
+      null,
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    ],
+    "vendor/native-089/logs/compile-offline-display3d.cpp.log": [
+      null,
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    ],
+    "vendor/native-089/logs/compile-offline-hci.cpp.log": [
+      null,
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    ],
+    "vendor/native-089/logs/compile-shared051-droid.cpp.log": [
+      null,
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    ],
+    "vendor/native-089/logs/link-multiplayer.log": [
+      null,
+      "ccddb57ff85231dc46bd7945c7f1d77948272be7114626858ce4e4e31adfdd60"
+    ],
+    "vendor/native-089/logs/link-shared.log": [
+      null,
+      "ccddb57ff85231dc46bd7945c7f1d77948272be7114626858ce4e4e31adfdd60"
+    ],
+    "vendor/native-089/logs/link-towers.log": [
+      null,
+      "ccddb57ff85231dc46bd7945c7f1d77948272be7114626858ce4e4e31adfdd60"
+    ],
+    "vendor/native-089/native-build.json": [
+      null,
+      "0d0b72cb911f999d88c0a6d04847fc8abab8f1bf32d84260ad321a5768e81035"
+    ],
+    "vendor/native-089/patches/multiplayer/display3d.cpp.patch": [
+      null,
+      "479951a20acec4ed847653ef42848c8208d6d1951087748ca8782c2b68d29275"
+    ],
+    "vendor/native-089/patches/offline/display3d.cpp.patch": [
+      null,
+      "433f9719e7688927fb83459e54e571a742cf9abebdbb77d807172c70a88800db"
+    ],
+    "vendor/native-089/patches/offline/hci.cpp.patch": [
+      null,
+      "9d51445727d98a0724a473d07706c75f467d0b6589841c855bb2c507458143e8"
+    ],
+    "vendor/native-089/proof/multiplayer-cache-after.json": [
+      null,
+      "7bbd08fafdeb854ae6a44e59910d1d2a08427ca27f71134bdd67df48ce8d5998"
+    ],
+    "vendor/native-089/proof/multiplayer-cache-before.json": [
+      null,
+      "7bbd08fafdeb854ae6a44e59910d1d2a08427ca27f71134bdd67df48ce8d5998"
+    ],
+    "vendor/native-089/proof/offline-cache-after.json": [
+      null,
+      "779f7a83aa6f936e58e86bc870e79e0be64e7667ef8c131c4a1b7cfe80bf0e78"
+    ],
+    "vendor/native-089/proof/offline-cache-before.json": [
+      null,
+      "779f7a83aa6f936e58e86bc870e79e0be64e7667ef8c131c4a1b7cfe80bf0e78"
+    ],
+    "vendor/native-089/proof/protocol-header.h": [
+      null,
+      "4be9b0d6ada7ee383824bfe54e3ee4e3986c2a868d9a75bfe9fff6b84ee870ec"
+    ],
+    "vendor/native-089/recipes/build-native-blueprint.sh": [
+      null,
+      "6f3835c7eb8441c216f7e0b056affe22b34eb60e2985341029c866ca75e9bc26"
+    ],
+    "vendor/native-089/recipes/integrate-multiplayer-native-082.py": [
+      null,
+      "e7ecf6b41df3f5395fc7a596de6d2847642fec15ffbf4511baf194955479d6e6"
+    ],
+    "vendor/native-089/recipes/integrate-native-runtime.py": [
+      null,
+      "30014384925fdb0dda52d338244fd07d300c1223b841d56e8443a85b77e34ee3"
+    ],
+    "vendor/native-089/runtime-integration.json": [
+      null,
+      "4fad7cad2ab86b937b70e7c356f9be0be3fbfc88941a2a94fd729c0aaf4253e8"
+    ],
+    "vendor/native-089/source-provenance-manifest.json": [
+      null,
+      "8ee6edddbf0210063cc561ae7b02ff75a43adff4fabd95051f5231bee42b9681"
+    ],
+    "vendor/native-089/source/multiplayer/src/display3d.cpp": [
+      null,
+      "65adaf80b7bf0adffdef769612fac808c21bb0cef057b3934eca61110b8a6d38"
+    ],
+    "vendor/native-089/source/offline/src/display3d.cpp": [
+      null,
+      "2fbb13666fed87b55152be8b5f6f70a13c2ec2e5ae0e51f8e9808ce9e45b2d44"
+    ],
+    "vendor/native-089/source/offline/src/hci.cpp": [
+      null,
+      "51ff92855e417554a8e1b5785279a9cac77214f141f0fe90655291910dda9e64"
+    ],
+    "vendor/native-089/source/shared051/src/droid.cpp": [
+      null,
+      "b32c09a40baf1f34b1b00c33b2928f8e771b35646e65508a3331dd0104ccfea4"
+    ],
+    "app/src/main/assets/multiplayer/mobile-controls.js": [
+      "299c4e37960a4a25ba3ec1a8acc634e8df8f55011aac58bcf3efba84149cd2d5",
+      "4b7970c51739d2eb39face85286039ad432f9074ac52b25b89128f6ae91a5c1f"
+    ],
+    "app/src/main/assets/multiplayer/native-ui-adapter.js": [
+      "b785a7c199bfc90f232f28557226cb77d50dd1a3577219154b36fcdb593f5378",
+      "f8f984d1307937ef2adc220951682b53fc25b5d7ad856c9ce29a8d4f8b258d3e"
+    ],
+    "app/src/main/assets/warzone-command-pages.js": [
+      "3a28bddc853dcc65cae6a3388f715a3fbf9366053b5e03f13930e2d1b4ec5a15",
+      "64c9d126860d333b1c5f92f1e10df4186b4e6776dd60b2f88d72f00c9c073a2e"
+    ],
+    "release-records/all-combat-ui-090-checks.json": [
+      null,
+      "60fae0b1603138fc6215080c24da0639af7905f33621ad7f9eacd787eb57c9fb"
+    ],
+    "release-records/native-ui-contract-review-090.json": [
+      null,
+      "05ec535b66a014296d123a731cc90ed62cb00926185c7a5516cafc696f7c4b8d"
+    ],
+    "tools/build-native-selection-090.py": [
+      null,
+      "6a906ae3309c7efc6862f44373ff35520665a81cd8cac2bd76c48e891cc3c443"
+    ],
+    "tools/build-native-selection-cold-090.sh": [
+      null,
+      "8a17bba9a82d9ee6dc93a063bc6f8e6ec1eaa9aba0d0abade120baa64c3b38e9"
+    ],
+    "tools/check-all-combat-ui-090.cjs": [
+      null,
+      "2aee3e286cad8035c4250564bf3315ace58ece21e91236da163530f54d0960da"
+    ],
+    "tools/check-native-constructors-090.py": [
+      null,
+      "561e7d5ebdfcac66f533c42401cc417ff570feb5ab5fb98519f85cf9bcab35ae"
+    ],
+    "tools/check-native-loader-pairs-090.py": [
+      null,
+      "c9cc90fc7b2c90ddfcca20078a5cd63b061ce591b7f89d0a0dc2bd749c1dae98"
+    ],
+    "tools/check-native-selection-090.py": [
+      null,
+      "2cbaf636f08b975544aaf74a7132cc53ce55f62380a2977f7acd805cb65a5c53"
+    ],
+    "tools/combat-ui-fixture-090.cjs": [
+      null,
+      "132d088cb8500688b764e1c9bd69285465791f4e75a6e72afcb1c91e1a746fe7"
+    ],
+    "tools/integrate-native-selection-090.py": [
+      null,
+      "d4c3deb9ff8ee5720931dddac4e378d4b25e1749a95e1cfb7cb303b191cb25bd"
+    ],
+    "tools/prepare-native-selection-090.py": [
+      null,
+      "18252975e000f57893c22f4c78a264cb87d633e439cd6ed367be92a004a647e2"
+    ],
+    "tools/prepare-native-selection-cold-090.py": [
+      null,
+      "2afa77001d5ba82af2acdbcac3e90315bf558c469eaf53c94180151a0cfde3a9"
+    ],
+    "tools/rebuild-native-constructors-090.py": [
+      null,
+      "1f97ccb457dd490698dfda635f0e9e90ebe78983ac39f5abbc419528ed911ac7"
+    ],
+    "tools/verify-normal-apk-090.py": [
+      null,
+      "725e81c2528a960cd50fbe3aaccb27f90d4150b74e37a9f071cdf6a487d59980"
+    ],
+    "vendor/native-090/BUILD.md": [
+      null,
+      "7a64b40dab143f91682c504d214df97493b12ce71a1b971ccc4ce296d13b9675"
+    ],
+    "vendor/native-090/CONTRACT.md": [
+      null,
+      "b11bef09bb4df3d88809a7f4c4e120132ffb1f9f228c842214519b55a44b772d"
+    ],
+    "vendor/native-090/baseline089-to090-delta.json": [
+      null,
+      "66895412d6839e87cead0a877de2d946724fa24564c36f862692318f0788b875"
+    ],
+    "vendor/native-090/bootstrap/multiplayer/CMakeCache.txt": [
+      null,
+      "90dadcd30594e229c4f0549e5f1bcca98e6b8c102d72231d465d3c157fdd77f5"
+    ],
+    "vendor/native-090/bootstrap/multiplayer/baseline-git.patch": [
+      null,
+      "bd67df2fe953d20206c0cce373c657df990d36d2c6a6e9efef5821e4763d1adc"
+    ],
+    "vendor/native-090/bootstrap/multiplayer/source/lib/sdl/main_sdl.cpp": [
+      null,
+      "f3c3efa2b148648e83c1f851f46d84ec5786d32283795a78498fc2770f574d36"
+    ],
+    "vendor/native-090/bootstrap/multiplayer/source/src/display3d.cpp": [
+      null,
+      "43f52868a1ac6fa5a7be609d8940c9db7dfba8d7a3b7140e5c29e79f7f9940ac"
+    ],
+    "vendor/native-090/bootstrap/multiplayer/source/src/hci.cpp": [
+      null,
+      "1896ac855e999655c430e16446804fb461c444cf5f054254a7828863737e1af7"
+    ],
+    "vendor/native-090/bootstrap/multiplayer/source/src/mobile-room-map-preview.cpp.inc": [
+      null,
+      "e1b785ae5e5d38ebfce173dc739ec388598af980722bacb6880e623d835f6544"
+    ],
+    "vendor/native-090/bootstrap/multiplayer/source/src/mobile-room-native.cpp.inc": [
+      null,
+      "eb35b040cf1ce8430ae9fb1887f90703f5874707fa0c576546ed1df2e3204a83"
+    ],
+    "vendor/native-090/bootstrap/multiplayer/source/src/multiint.cpp": [
+      null,
+      "ef576f51f0b1bf9c8a40ade00d68331e278b673ba0cefeefbff72a58b12fdda0"
+    ],
+    "vendor/native-090/bootstrap/multiplayer/source/src/quickjs_backend.cpp": [
+      null,
+      "4224840b9a7fda8f333e1a009f82bcf455509d519be75312b36c13786fb4611a"
+    ],
+    "vendor/native-090/bootstrap/multiplayer/source/src/wrappers.cpp": [
+      null,
+      "d23f339dda4ab0e951934993b93ee0681d350773e6cb6494ec120f2cd5fb5fe3"
+    ],
+    "vendor/native-090/bootstrap/offline/CMakeCache.txt": [
+      null,
+      "69d378558fcac997a34656e8cdf906bf6e79cc284025d10cb8dba424647b5e04"
+    ],
+    "vendor/native-090/bootstrap/offline/baseline-git.patch": [
+      null,
+      "70d981df597f01023bd49e38f2da4f0fbfeffbfb8026420b271c5750814803aa"
+    ],
+    "vendor/native-090/bootstrap/offline/source/lib/sdl/main_sdl.cpp": [
+      null,
+      "dce7553f4719e1becfec8ede07d147965b3ea72ca926bde240e3b650a93f3470"
+    ],
+    "vendor/native-090/bootstrap/offline/source/src/console.cpp": [
+      null,
+      "282b50dd3bbdf8f5b8703ab74fd6875057d3a848a8ced36434260f6b221f5176"
+    ],
+    "vendor/native-090/bootstrap/offline/source/src/display3d.cpp": [
+      null,
+      "3b5c1a41144011805819d15e9bfac6f1289d726da276433bfeb237904c0fa15f"
+    ],
+    "vendor/native-090/bootstrap/offline/source/src/droid.cpp": [
+      null,
+      "5b8f8d8c6cca08bdcec70b34f6de9fee3fff0de2bc4ae5815ff1025390ddc1f1"
+    ],
+    "vendor/native-090/bootstrap/offline/source/src/hci.cpp": [
+      null,
+      "b99c89e580856201e6e884f0105e7a6aabaa0e55d66f39e5284ac21ecf2dbdc4"
+    ],
+    "vendor/native-090/bootstrap/offline/source/src/intdisplay.cpp": [
+      null,
+      "99645ec2555ba7dca7c41ebe75f955df46c3890e07b4606e0b8488df7613bb27"
+    ],
+    "vendor/native-090/bootstrap/offline/source/src/keybind.cpp": [
+      null,
+      "5730cf9a2b791a6a437f4e0da040e9dbb75e8befb48dc02caefb1a8e824355ed"
+    ],
+    "vendor/native-090/bootstrap/offline/source/src/loadsave.cpp": [
+      null,
+      "b58f01a03b551cbc589ef468f6a0572bd49978f9ba88db503eb761a3518b3341"
+    ],
+    "vendor/native-090/bootstrap/offline/source/src/main.cpp": [
+      null,
+      "c0d9fad6803313b48d4aeccc592dc2a157778f2198101593711d111ea976cb6c"
+    ],
+    "vendor/native-090/bootstrap/offline/source/src/quickjs_backend.cpp": [
+      null,
+      "13137dd600eb21ff1506e01e81a5624fd514447d82bb58328bc335eeae009b68"
+    ],
+    "vendor/native-090/bootstrap/offline/source/src/radar.cpp": [
+      null,
+      "e92fcfb9151aa18adf36208ea53835ca7f7ee0e3347da6968628ba8747866f0d"
+    ],
+    "vendor/native-090/bootstrap/offline/source/src/research.cpp": [
+      null,
+      "06b8999191bb0160e6b73c268f8ddd69347102133ecc221aee23504973dc918a"
+    ],
+    "vendor/native-090/build-plan.json": [
+      null,
+      "00a4caf9ed172758b4a8b5269924d6e75c93b46413154837ae3b3dee71978faa"
+    ],
+    "vendor/native-090/checks/constructor-checks.json": [
+      null,
+      "08bf199155c5fffdcade13813fcd74353b5ff72c4b6ff2e366c70bc841ca6398"
+    ],
+    "vendor/native-090/checks/loader-pairs.json": [
+      null,
+      "ca340e2c85f8d36d3a10d8d2c160991221186e58e9220f98c51413b5fd2c3e67"
+    ],
+    "vendor/native-090/checks/source-checks.json": [
+      null,
+      "f08ee44fa5225ec51b105960e96f8b2c359558dbca9abdcea3f808ad56ea58d9"
+    ],
+    "vendor/native-090/integrated/multiplayer/runtime-integration.json": [
+      null,
+      "0d0e90e61e70bac081df79e7ea435f954be8ebb43757aace2af110fba58d8d05"
+    ],
+    "vendor/native-090/integrated/shared-campaign/runtime-integration.json": [
+      null,
+      "cbe0009b3cdf07cd38f77781c8e79fd35964a894120fa32e0b6d5a7ddcd70cb5"
+    ],
+    "vendor/native-090/integrated/shared-duel/runtime-integration.json": [
+      null,
+      "5d444ed354e6f783b849a9831ca41109efcf9cbb9a72972ca1aa5b7e80e2da5e"
+    ],
+    "vendor/native-090/integrated/shared-ffa/runtime-integration.json": [
+      null,
+      "f321344f341ff8f6b702a66f83a74455b5e2685682a8e7cb16a425f3c4ad79eb"
+    ],
+    "vendor/native-090/integrated/shared/runtime-integration.json": [
+      null,
+      "869a60ea68faef9a5009b54e8769e250b4caa0a53e4477508a22743ca645529b"
+    ],
+    "vendor/native-090/integrated/towers/runtime-integration.json": [
+      null,
+      "37065c88bd89f590090e2e78bbe3500c50bcc813928316e14fb731e80194ae5e"
+    ],
+    "vendor/native-090/logs/compile-multiplayer-display3d.log": [
+      null,
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    ],
+    "vendor/native-090/logs/compile-multiplayer-quickjs_backend.log": [
+      null,
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    ],
+    "vendor/native-090/logs/compile-offline-display3d.log": [
+      null,
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    ],
+    "vendor/native-090/logs/compile-offline-hci-constructors.log": [
+      null,
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    ],
+    "vendor/native-090/logs/compile-offline-hci.log": [
+      null,
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    ],
+    "vendor/native-090/logs/compile-shared051-droid.log": [
+      null,
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    ],
+    "vendor/native-090/logs/link-constructors-shared.log": [
+      null,
+      "ccddb57ff85231dc46bd7945c7f1d77948272be7114626858ce4e4e31adfdd60"
+    ],
+    "vendor/native-090/logs/link-constructors-towers.log": [
+      null,
+      "ccddb57ff85231dc46bd7945c7f1d77948272be7114626858ce4e4e31adfdd60"
+    ],
+    "vendor/native-090/logs/link-multiplayer.log": [
+      null,
+      "ccddb57ff85231dc46bd7945c7f1d77948272be7114626858ce4e4e31adfdd60"
+    ],
+    "vendor/native-090/logs/link-shared.log": [
+      null,
+      "ccddb57ff85231dc46bd7945c7f1d77948272be7114626858ce4e4e31adfdd60"
+    ],
+    "vendor/native-090/logs/link-towers.log": [
+      null,
+      "ccddb57ff85231dc46bd7945c7f1d77948272be7114626858ce4e4e31adfdd60"
+    ],
+    "vendor/native-090/native-build.json": [
+      null,
+      "22c393d1f688b02d70a245cad8bafe19bfa838bd3acc3e33026f2dd1520f4df3"
+    ],
+    "vendor/native-090/patches/multiplayer/display3d.cpp.patch": [
+      null,
+      "2703d92d5ab740f14935103f5099a6b2c32b7654e21a51f300d6dbb0c0fd7486"
+    ],
+    "vendor/native-090/patches/multiplayer/quickjs_backend.cpp.patch": [
+      null,
+      "2f008f0bb1e4e5c2befda544ca84e6cb790948e7fa78104b805f1fcc217b8ad8"
+    ],
+    "vendor/native-090/patches/offline/display3d.cpp.patch": [
+      null,
+      "dc4d0931e6996fb4f5481e3a51ac590102bf01bb5be0c633bd5cecc58c38bc3d"
+    ],
+    "vendor/native-090/patches/offline/hci.cpp.patch": [
+      null,
+      "0c8e793b5f87d9fb9afec1832fe3eef3ca85440308b8e35d16c37884f0a40e5c"
+    ],
+    "vendor/native-090/proof/multiplayer-cache-after.json": [
+      null,
+      "7bbd08fafdeb854ae6a44e59910d1d2a08427ca27f71134bdd67df48ce8d5998"
+    ],
+    "vendor/native-090/proof/multiplayer-cache-before.json": [
+      null,
+      "7bbd08fafdeb854ae6a44e59910d1d2a08427ca27f71134bdd67df48ce8d5998"
+    ],
+    "vendor/native-090/proof/offline-cache-after.json": [
+      null,
+      "779f7a83aa6f936e58e86bc870e79e0be64e7667ef8c131c4a1b7cfe80bf0e78"
+    ],
+    "vendor/native-090/proof/offline-cache-before.json": [
+      null,
+      "779f7a83aa6f936e58e86bc870e79e0be64e7667ef8c131c4a1b7cfe80bf0e78"
+    ],
+    "vendor/native-090/proof/offline-constructor-cache-after.json": [
+      null,
+      "779f7a83aa6f936e58e86bc870e79e0be64e7667ef8c131c4a1b7cfe80bf0e78"
+    ],
+    "vendor/native-090/proof/offline-constructor-cache-before.json": [
+      null,
+      "779f7a83aa6f936e58e86bc870e79e0be64e7667ef8c131c4a1b7cfe80bf0e78"
+    ],
+    "vendor/native-090/proof/protocol-header.h": [
+      null,
+      "4be9b0d6ada7ee383824bfe54e3ee4e3986c2a868d9a75bfe9fff6b84ee870ec"
+    ],
+    "vendor/native-090/recipes/build-native-blueprint.sh": [
+      null,
+      "6f3835c7eb8441c216f7e0b056affe22b34eb60e2985341029c866ca75e9bc26"
+    ],
+    "vendor/native-090/recipes/integrate-multiplayer-native-082.py": [
+      null,
+      "e7ecf6b41df3f5395fc7a596de6d2847642fec15ffbf4511baf194955479d6e6"
+    ],
+    "vendor/native-090/recipes/integrate-native-runtime.py": [
+      null,
+      "30014384925fdb0dda52d338244fd07d300c1223b841d56e8443a85b77e34ee3"
+    ],
+    "vendor/native-090/runtime-integration.json": [
+      null,
+      "22424fee023ccbbd77eb86b9848f2b09412efdd81bea937ac93b2ab566f188e5"
+    ],
+    "vendor/native-090/source-preparation.json": [
+      null,
+      "bd1d5b617a1decad2f5af391f7edb5d2155ae4d54885b9d14cca8f601f802290"
+    ],
+    "vendor/native-090/source-provenance-manifest.json": [
+      null,
+      "509b4546d4a7817687908cf15a63f62941aa22b05c9bb2969aa393596f48ed21"
+    ],
+    "vendor/native-090/source/common/mobile-combat-latch-v90.h": [
+      null,
+      "8484adb052e916ffa4c53f87c962eac21b71fc5988c200e03dec5788cc794303"
+    ],
+    "vendor/native-090/source/multiplayer/src/display3d.cpp": [
+      null,
+      "f58d042b143d85e7d5a91ac65ed8fb862e82f8410e211f5225c491343e10d8cf"
+    ],
+    "vendor/native-090/source/multiplayer/src/quickjs_backend.cpp": [
+      null,
+      "957d63a68afae9c6fe297f9419bc813388272f5706a485e2d8103d82ad3bf5f2"
+    ],
+    "vendor/native-090/source/offline/src/display3d.cpp": [
+      null,
+      "b6d5044cd1bbd3497766ea7aa1afd544182242cd77a3b1a64e86eccd0feb82dd"
+    ],
+    "vendor/native-090/source/offline/src/hci.cpp": [
+      null,
+      "75e4dbe058bcd99009ff4a7e45a3247fc04d4c9169faae5e52f6d4a3764bc105"
+    ],
+    "vendor/native-090/source/shared051/src/droid.cpp": [
+      null,
+      "b32c09a40baf1f34b1b00c33b2928f8e771b35646e65508a3331dd0104ccfea4"
+    ]
+  },
+  "retainedProfileFiles": [
+    {
+      "path": "google-play-release/FALLBACKS.json",
+      "sha256": "f341c7a99c327c5d27e94704a41b34f82410becb116f98ca081db37f5c6e9aa7"
+    },
+    {
+      "path": "google-play-release/overlay-manifest.json",
+      "sha256": "dcf80a4818ecb058de137032d1f2bd0918c2cf7a3c8c6a234de918b475a28fb4"
+    },
+    {
+      "path": "google-play-release/overrides/AGENTS.md",
+      "sha256": "c46fd5f61ae5ceb6b3d934bce6cbf8d1335468fc5709904ac9fc65f16567fcef"
+    },
+    {
+      "path": "google-play-release/overrides/app/build.gradle.kts",
+      "sha256": "695b707fe0dde47a6f6570e71f06e0d460d5d6ab7d673b0236926181204623e5"
+    },
+    {
+      "path": "google-play-release/overrides/app/src/main/AndroidManifest.xml",
+      "sha256": "98405e971c714ee594a460f1ef67ed2e2c1ddfbeea2543185e6878b795368654"
+    },
+    {
+      "path": "google-play-release/overrides/app/src/main/java/com/rbabbit/blocknight/warzone/HomeModesView.java",
+      "sha256": "f712e2d656b0e899192cf89ebcfc60ac4b2151ef9c6f7af7846a1a0538f89e70"
+    },
+    {
+      "path": "google-play-release/overrides/app/src/main/java/com/rbabbit/blocknight/warzone/MainActivity.java",
+      "sha256": "0c4b5b3e9e828217e079bea5c9b38ac1e275a90ad84c8d0d596962d68d400258"
+    },
+    {
+      "path": "google-play-release/overrides/app/src/main/java/com/rbabbit/blocknight/warzone/MultiplayerActivity.java",
+      "sha256": "028af2f8d6c7d25fceddff442f1f59c49b873097356e419361de97eac11d938c"
+    },
+    {
+      "path": "google-play-release/overrides/app/src/playRelease/AndroidManifest.xml",
+      "sha256": "a705f0f191935a6c6d1151fe5e81469b3b5fe8459812a5f331d279493c5f3768"
+    },
+    {
+      "path": "google-play-release/overrides/app/src/playRelease/java/com/rbabbit/blocknight/warzone/AppUpdateController.java",
+      "sha256": "58ddf86b8dab9a283d7a48a0c7b97f70d2d4714c29f2e6a991490bee93076c28"
+    },
+    {
+      "path": "google-play-release/overrides/tools/build-play-release.py",
+      "sha256": "b40d0e5554c96ccd72c6a24141dfdea12124059f980a1ff7ecf1131aba92d0d1"
+    },
+    {
+      "path": "google-play-release/package-complete-source.py",
+      "sha256": "c1237c02c4a6d44a3cb02b943c44d6c1f389c23b299816d3fa995fbbd9f178ee"
+    },
+    {
+      "path": "google-play-release/prepare-and-build.py",
+      "sha256": "838d8dafb01ee635951e7f84740e529fa47739803e7499c57227616b6d2afe4a"
+    },
+    {
+      "path": "google-play-release/README.md",
+      "sha256": "863d9178a515491258a011a6026714abb0756fd39c6ce1a97ebd81910cc390fe"
+    },
+    {
+      "path": "google-play-release/RELEASE-NOTES.md",
+      "sha256": "88566357873069a53e724b03083d3e8f95b848a761f690331d8a30af8bf5d6ec"
+    },
+    {
+      "path": "google-play-release/SOURCE-PROVENANCE.json",
+      "sha256": "57811cee507ca29ecb9ddb9c78c24f8d98d3099badb2f56d496dfc46aedd22c2"
+    },
+    {
+      "path": "google-play-release/VALIDATION.json",
+      "sha256": "a4abbcc818d63ee923ae9798a8717ec2c3d58e9f319d6acd24b589925c7be5df"
+    },
+    {
+      "path": "normal-release-089/APK-INTEGRITY.json",
+      "sha256": "e7dabd14207235af70c25c5865ef0ab963d2eb339d96e786c1fe5b2f62987035"
+    },
+    {
+      "path": "normal-release-089/ATTACHMENTS.json",
+      "sha256": "f54fabbd8b346ef217d0ddc0429e5db2ad3ce6a0d40c3c29182888cddc14a019"
+    },
+    {
+      "path": "normal-release-089/AUDIT.md",
+      "sha256": "21edbe6a4526e053b41cd71c5c1c789ea56521003f140ca07848724129513d13"
+    },
+    {
+      "path": "normal-release-089/check-update-attachments.py",
+      "sha256": "d4209799b51db4d9463c2d13fbb372f5bbeaf8e8ed5e16e7fff57a7a2a6ebb19"
+    },
+    {
+      "path": "normal-release-089/overlay-manifest.json",
+      "sha256": "581d3cfc217623c0317853b06b70bebec68a01bbfd37ddc6c2b287b83a8092d8"
+    },
+    {
+      "path": "normal-release-089/overrides/AGENTS.md",
+      "sha256": "faa5dde37d030a224aa5eb01f46b92c0a73a13d536eb9f9748acefde89eb8b98"
+    },
+    {
+      "path": "normal-release-089/overrides/app/build.gradle.kts",
+      "sha256": "bc14ce831fa5455539471a51fb0659a45c0c79340a157633f579e4be99e08031"
+    },
+    {
+      "path": "normal-release-089/overrides/app/src/main/assets/multiplayer/session.js",
+      "sha256": "46bc31029c1c28da00ca98440bc3b4581af10d56db0c42a7375f590175333a2c"
+    },
+    {
+      "path": "normal-release-089/overrides/app/src/main/assets/multiplayer/warzone2100.js",
+      "sha256": "4cfbd94c7954deb61c84c49e43fcd8dcbd53268c445998d283a3e310f846c89b"
+    },
+    {
+      "path": "normal-release-089/overrides/app/src/main/assets/multiplayer/warzone2100.wasm",
+      "sha256": "2f884ca84c3c29bdbeed8102d710c40e73b29320d1e99c1ff64d97269d252fbc"
+    },
+    {
+      "path": "normal-release-089/overrides/app/src/main/assets/warzone/ui/towers-game-controls.css",
+      "sha256": "0cc407c8a9e3aec65fef68efda907429135dc69f3f18f57b61e3e6563d847f67"
+    },
+    {
+      "path": "normal-release-089/overrides/app/src/main/assets/warzone/warzone2100-campaign.js",
+      "sha256": "d70a3c7495d32fb53fac1b90785d51188bb0e6027919ea1d8d9b485b7d71f408"
+    },
+    {
+      "path": "normal-release-089/overrides/app/src/main/assets/warzone/warzone2100-duel.js",
+      "sha256": "dac4a4453bc36362543bc639f8aed1b31b9c8ef0f63c7b151fbeec4e85addf7c"
+    },
+    {
+      "path": "normal-release-089/overrides/app/src/main/assets/warzone/warzone2100-ffa.js",
+      "sha256": "0bd77ca6d8f1c4bef0dd4acbdcf2a9633ce579c5ce3929c3f63d811f2c16cbb0"
+    },
+    {
+      "path": "normal-release-089/overrides/app/src/main/assets/warzone/warzone2100-towers-052.js",
+      "sha256": "99ea1dcfc0b39713c237c85e8bd6a9f46355fe40f4b2e5dd733a5fce4b1c57b3"
+    },
+    {
+      "path": "normal-release-089/overrides/app/src/main/assets/warzone/warzone2100-towers-052.wasm",
+      "sha256": "e3cccd033a5874d0451aaa095cdef6c8146dcdb95ec1288f36d9482ab9b6b236"
+    },
+    {
+      "path": "normal-release-089/overrides/app/src/main/assets/warzone/warzone2100.js",
+      "sha256": "31cf341a79f14fb4d8cb2220871df3c3be6c1d618b977285026406d067b871d4"
+    },
+    {
+      "path": "normal-release-089/overrides/app/src/main/assets/warzone/warzone2100.wasm",
+      "sha256": "b1addc472eb09750e3c33dc3979af3c13e9266e439d894cead015616572e7caf"
+    },
+    {
+      "path": "normal-release-089/overrides/app/src/main/assets/warzone-campaign-hud.js",
+      "sha256": "f8ded40a391bf1bc967827abef1d3bc722b124d26a2f040d0a69b2f4c5f472c1"
+    },
+    {
+      "path": "normal-release-089/overrides/app/src/main/assets/warzone-touch-controls.js",
+      "sha256": "2c3838315e65422c77acdf83ebdc13a0abcc6033d86868d27291b402268f9cf6"
+    },
+    {
+      "path": "normal-release-089/overrides/release-records/all-combat-ui-089-checks.json",
+      "sha256": "9b2f7d6f28dd8a4e2ee549506e5eaab97508fa4536183ae7e1ab62c06fba5f67"
+    },
+    {
+      "path": "normal-release-089/overrides/release-records/apk-integrity.json",
+      "sha256": "e7dabd14207235af70c25c5865ef0ab963d2eb339d96e786c1fe5b2f62987035"
+    },
+    {
+      "path": "normal-release-089/overrides/release-records/campaign-layout-js-089-checks.json",
+      "sha256": "dc82a63a782a9127e9fa3c6e7843738167aebf1f3b02cb730a5b15489f38a9e9"
+    },
+    {
+      "path": "normal-release-089/overrides/release-records/deployment-independent-review.json",
+      "sha256": "ea0c97cb830d478c078a5fe6f83e0fd5a610eb632a74e70db9b5e6d12cb815b3"
+    },
+    {
+      "path": "normal-release-089/overrides/release-records/initial-fallback.json",
+      "sha256": "09d5fbc9cf68d91c8b532909e90d662ae8597d110eea169c363d4201298e6d7d"
+    },
+    {
+      "path": "normal-release-089/overrides/release-records/ISSUES-AND-CHECKS.md",
+      "sha256": "5571b883c041da1f630df8431238c9a5d434cb1b428e7aea529e2456d0807107"
+    },
+    {
+      "path": "normal-release-089/overrides/release-records/source-package-independent-review.json",
+      "sha256": "1471ba88fedcb8766ace983d8eefc49ed96458a1d9f2ad4173942d6b982ba270"
+    },
+    {
+      "path": "normal-release-089/overrides/release-records/vps-deploy-guard-checks.json",
+      "sha256": "59c52c42791c2b15b0049608f1d44402c6f733e8c7cac2e8e967c008d96d58f3"
+    },
+    {
+      "path": "normal-release-089/overrides/tools/build-native-selection-089.py",
+      "sha256": "a81d781943765215e0efe716d8306948b3087bd7bc8e5fa68503a5fdd82b1643"
+    },
+    {
+      "path": "normal-release-089/overrides/tools/build-native-selection-cold-089.sh",
+      "sha256": "c19a188960d1b8f31b188f7cde5aa25e860fb69fd9d502b58c9135cf07145693"
+    },
+    {
+      "path": "normal-release-089/overrides/tools/build-normal-apk.py",
+      "sha256": "ba54608acdc7c5702f41dc186deb5a4c07390f7809e32ff71482b9d4d4a05f4b"
+    },
+    {
+      "path": "normal-release-089/overrides/tools/campaign-ui-fixture-089.cjs",
+      "sha256": "b933076c3fb21bbd3b40779df333bc7daab2411515f6c3229ad2fc4fa3eefd66"
+    },
+    {
+      "path": "normal-release-089/overrides/tools/check-all-combat-ui-089.cjs",
+      "sha256": "30bcb35aa7999bed4e18ab3ceb59a3f189a667fdf4615797739e6fe267b09c88"
+    },
+    {
+      "path": "normal-release-089/overrides/tools/check-campaign-header-089.cjs",
+      "sha256": "13cb4800809c1dcdfcc8d626cf08198c94e3de56646bbf7e550b63f203648c13"
+    },
+    {
+      "path": "normal-release-089/overrides/tools/check-deploy-update-089.py",
+      "sha256": "5d293343e809886ca65280f5151561900375045427289b4a2311e2f9ab942330"
+    },
+    {
+      "path": "normal-release-089/overrides/tools/check-native-loader-pairs-089.py",
+      "sha256": "b4260891c031169c129d50b9926015b2181f1f08ef7bab83b55ef738eb08f468"
+    },
+    {
+      "path": "normal-release-089/overrides/tools/check-native-selection-089.py",
+      "sha256": "99fb7f62811e56826b479319756a4076695215519a93e18a1190d996909d77f8"
+    },
+    {
+      "path": "normal-release-089/overrides/tools/deploy-warzone-update-089.py",
+      "sha256": "bf86a39a3074d1a5e4c259f03d2a40e5f6e690d14a3e5ee00cdad24348114ec4"
+    },
+    {
+      "path": "normal-release-089/overrides/tools/integrate-native-selection-089.py",
+      "sha256": "919409e0f68b7f600eab16b8b0130bc1d73b7c78d6b51a47e0d5499949bf545d"
+    },
+    {
+      "path": "normal-release-089/overrides/tools/prepare-native-selection-cold-089.py",
+      "sha256": "def1a6d94f5ae35c7001675c596a3290f74cb43df273cfa04b925c553426b956"
+    },
+    {
+      "path": "normal-release-089/overrides/tools/verify-normal-apk-089.py",
+      "sha256": "dbf136cd1055ea7c9dc30c97d3fcf48f23cc5829c53efd1517be6dd0caef4b59"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/bootstrap/multiplayer/baseline-git.patch",
+      "sha256": "bd67df2fe953d20206c0cce373c657df990d36d2c6a6e9efef5821e4763d1adc"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/bootstrap/multiplayer/CMakeCache.txt",
+      "sha256": "90dadcd30594e229c4f0549e5f1bcca98e6b8c102d72231d465d3c157fdd77f5"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/bootstrap/multiplayer/source/lib/sdl/main_sdl.cpp",
+      "sha256": "f3c3efa2b148648e83c1f851f46d84ec5786d32283795a78498fc2770f574d36"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/bootstrap/multiplayer/source/src/display3d.cpp",
+      "sha256": "43f52868a1ac6fa5a7be609d8940c9db7dfba8d7a3b7140e5c29e79f7f9940ac"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/bootstrap/multiplayer/source/src/hci.cpp",
+      "sha256": "1896ac855e999655c430e16446804fb461c444cf5f054254a7828863737e1af7"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/bootstrap/multiplayer/source/src/mobile-room-map-preview.cpp.inc",
+      "sha256": "e1b785ae5e5d38ebfce173dc739ec388598af980722bacb6880e623d835f6544"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/bootstrap/multiplayer/source/src/mobile-room-native.cpp.inc",
+      "sha256": "eb35b040cf1ce8430ae9fb1887f90703f5874707fa0c576546ed1df2e3204a83"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/bootstrap/multiplayer/source/src/multiint.cpp",
+      "sha256": "ef576f51f0b1bf9c8a40ade00d68331e278b673ba0cefeefbff72a58b12fdda0"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/bootstrap/multiplayer/source/src/quickjs_backend.cpp",
+      "sha256": "4224840b9a7fda8f333e1a009f82bcf455509d519be75312b36c13786fb4611a"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/bootstrap/multiplayer/source/src/wrappers.cpp",
+      "sha256": "d23f339dda4ab0e951934993b93ee0681d350773e6cb6494ec120f2cd5fb5fe3"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/bootstrap/offline/baseline-git.patch",
+      "sha256": "70d981df597f01023bd49e38f2da4f0fbfeffbfb8026420b271c5750814803aa"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/bootstrap/offline/CMakeCache.txt",
+      "sha256": "69d378558fcac997a34656e8cdf906bf6e79cc284025d10cb8dba424647b5e04"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/bootstrap/offline/source/lib/sdl/main_sdl.cpp",
+      "sha256": "dce7553f4719e1becfec8ede07d147965b3ea72ca926bde240e3b650a93f3470"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/bootstrap/offline/source/src/console.cpp",
+      "sha256": "282b50dd3bbdf8f5b8703ab74fd6875057d3a848a8ced36434260f6b221f5176"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/bootstrap/offline/source/src/display3d.cpp",
+      "sha256": "3b5c1a41144011805819d15e9bfac6f1289d726da276433bfeb237904c0fa15f"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/bootstrap/offline/source/src/droid.cpp",
+      "sha256": "5b8f8d8c6cca08bdcec70b34f6de9fee3fff0de2bc4ae5815ff1025390ddc1f1"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/bootstrap/offline/source/src/hci.cpp",
+      "sha256": "b99c89e580856201e6e884f0105e7a6aabaa0e55d66f39e5284ac21ecf2dbdc4"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/bootstrap/offline/source/src/intdisplay.cpp",
+      "sha256": "99645ec2555ba7dca7c41ebe75f955df46c3890e07b4606e0b8488df7613bb27"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/bootstrap/offline/source/src/keybind.cpp",
+      "sha256": "5730cf9a2b791a6a437f4e0da040e9dbb75e8befb48dc02caefb1a8e824355ed"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/bootstrap/offline/source/src/loadsave.cpp",
+      "sha256": "b58f01a03b551cbc589ef468f6a0572bd49978f9ba88db503eb761a3518b3341"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/bootstrap/offline/source/src/main.cpp",
+      "sha256": "c0d9fad6803313b48d4aeccc592dc2a157778f2198101593711d111ea976cb6c"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/bootstrap/offline/source/src/quickjs_backend.cpp",
+      "sha256": "13137dd600eb21ff1506e01e81a5624fd514447d82bb58328bc335eeae009b68"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/bootstrap/offline/source/src/radar.cpp",
+      "sha256": "e92fcfb9151aa18adf36208ea53835ca7f7ee0e3347da6968628ba8747866f0d"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/bootstrap/offline/source/src/research.cpp",
+      "sha256": "06b8999191bb0160e6b73c268f8ddd69347102133ecc221aee23504973dc918a"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/bootstrap/retained-snapshot.json",
+      "sha256": "e26a5594fc92e08009341baa7e907c9f31909622971cbd288828ad491a0372a0"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/BOOTSTRAP.md",
+      "sha256": "55030f9813165520d2a012c0f364e0071bc14dce1c1c5f240884e8a0f64dddd7"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/build-plan.json",
+      "sha256": "1e790a27ebcf8a41c53bea9c4d1cb5096f94bfaafefb3e42ffd6a7f58b3a63c1"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/checks/loader-pairs.json",
+      "sha256": "a9262c2c0f8beb93b5299bfb869a33d814c946202d48cf83c60eebd41f31f83e"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/checks/source-checks.json",
+      "sha256": "b1f987eaa86d87d2057f57bba3776e90a10a8439c4e06b657305d660aa5401fd"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/integrated/multiplayer/runtime-integration.json",
+      "sha256": "7a082a084a0290b4e3c96a1c5d3fb2b048634f208cd94153f069e686aafb80fc"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/integrated/shared/runtime-integration.json",
+      "sha256": "47dacea258d09aeeddfb53a7d6efcc358d1055c95c0e779f99d62985d3b0a930"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/integrated/shared-campaign/runtime-integration.json",
+      "sha256": "62bfd833a0366d1ae78db5cdf906ace91df81ce53ba59eb1cb4b04c0fac6ca2a"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/integrated/shared-duel/runtime-integration.json",
+      "sha256": "fd9fce9d4f7c9390b9c23e064e0e9faf3e93ea321b2564d525233304d4edc21a"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/integrated/shared-ffa/runtime-integration.json",
+      "sha256": "975f5ef182c4180fb9f18791ff3a4775aafc08edfd7a19dcd845992f2cf50086"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/integrated/towers/runtime-integration.json",
+      "sha256": "b8a82e221a58b611cb427d4a8cda912253efaef55b650c0cd1448604618f57a9"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/logs/compile-multiplayer-display3d.cpp.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/logs/compile-offline-display3d.cpp.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/logs/compile-offline-hci.cpp.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/logs/compile-shared051-droid.cpp.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/logs/link-multiplayer.log",
+      "sha256": "ccddb57ff85231dc46bd7945c7f1d77948272be7114626858ce4e4e31adfdd60"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/logs/link-shared.log",
+      "sha256": "ccddb57ff85231dc46bd7945c7f1d77948272be7114626858ce4e4e31adfdd60"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/logs/link-towers.log",
+      "sha256": "ccddb57ff85231dc46bd7945c7f1d77948272be7114626858ce4e4e31adfdd60"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/native-build.json",
+      "sha256": "0d0b72cb911f999d88c0a6d04847fc8abab8f1bf32d84260ad321a5768e81035"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/patches/multiplayer/display3d.cpp.patch",
+      "sha256": "479951a20acec4ed847653ef42848c8208d6d1951087748ca8782c2b68d29275"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/patches/offline/display3d.cpp.patch",
+      "sha256": "433f9719e7688927fb83459e54e571a742cf9abebdbb77d807172c70a88800db"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/patches/offline/hci.cpp.patch",
+      "sha256": "9d51445727d98a0724a473d07706c75f467d0b6589841c855bb2c507458143e8"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/proof/multiplayer-cache-after.json",
+      "sha256": "7bbd08fafdeb854ae6a44e59910d1d2a08427ca27f71134bdd67df48ce8d5998"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/proof/multiplayer-cache-before.json",
+      "sha256": "7bbd08fafdeb854ae6a44e59910d1d2a08427ca27f71134bdd67df48ce8d5998"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/proof/offline-cache-after.json",
+      "sha256": "779f7a83aa6f936e58e86bc870e79e0be64e7667ef8c131c4a1b7cfe80bf0e78"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/proof/offline-cache-before.json",
+      "sha256": "779f7a83aa6f936e58e86bc870e79e0be64e7667ef8c131c4a1b7cfe80bf0e78"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/proof/protocol-header.h",
+      "sha256": "4be9b0d6ada7ee383824bfe54e3ee4e3986c2a868d9a75bfe9fff6b84ee870ec"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/recipes/build-native-blueprint.sh",
+      "sha256": "6f3835c7eb8441c216f7e0b056affe22b34eb60e2985341029c866ca75e9bc26"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/recipes/integrate-multiplayer-native-082.py",
+      "sha256": "e7ecf6b41df3f5395fc7a596de6d2847642fec15ffbf4511baf194955479d6e6"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/recipes/integrate-native-runtime.py",
+      "sha256": "30014384925fdb0dda52d338244fd07d300c1223b841d56e8443a85b77e34ee3"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/runtime-integration.json",
+      "sha256": "4fad7cad2ab86b937b70e7c356f9be0be3fbfc88941a2a94fd729c0aaf4253e8"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/source/multiplayer/src/display3d.cpp",
+      "sha256": "65adaf80b7bf0adffdef769612fac808c21bb0cef057b3934eca61110b8a6d38"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/source/offline/src/display3d.cpp",
+      "sha256": "2fbb13666fed87b55152be8b5f6f70a13c2ec2e5ae0e51f8e9808ce9e45b2d44"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/source/offline/src/hci.cpp",
+      "sha256": "51ff92855e417554a8e1b5785279a9cac77214f141f0fe90655291910dda9e64"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/source/shared051/src/droid.cpp",
+      "sha256": "b32c09a40baf1f34b1b00c33b2928f8e771b35646e65508a3331dd0104ccfea4"
+    },
+    {
+      "path": "normal-release-089/overrides/vendor/native-089/source-provenance-manifest.json",
+      "sha256": "8ee6edddbf0210063cc561ae7b02ff75a43adff4fabd95051f5231bee42b9681"
+    },
+    {
+      "path": "normal-release-089/package-complete-source.py",
+      "sha256": "0803d9cbb7887fd65354725dedf4d209c80d3751ded95cc3e15246eaab2acaa3"
+    },
+    {
+      "path": "normal-release-089/PACKAGING-CHECKS.json",
+      "sha256": "3b443cc07bdd9682369b8183472c3a6fb024bb4b59f78c8735c1f7cce7d34fdc"
+    },
+    {
+      "path": "normal-release-089/prepare-and-build.py",
+      "sha256": "feed1cfeb8d819510c4d9053fe95e6c47e2f3e7202f54c4abd67429c0e8c1523"
+    },
+    {
+      "path": "normal-release-089/PUBLICATION.json",
+      "sha256": "27f33d6dad9b293d880457a875b830c559c496df65d0dc35bc5331b88256f4e6"
+    },
+    {
+      "path": "normal-release-089/README.md",
+      "sha256": "a0f38d64b06b8e7cf5a81986a057bf90426eeda4ed3599aa65f98ace61a3a6e7"
+    },
+    {
+      "path": "normal-release-089/RELEASE-NOTES.md",
+      "sha256": "06e2eb262da82ae43b8a500bed215cfb17b89a9c04c5bcc551748964f126858d"
+    },
+    {
+      "path": "normal-release-089/RESTORE-CHECK.json",
+      "sha256": "b90276825380f98678ca13b55eac2a6a65bc3bf35ce97a41fb665d6e591e0564"
+    },
+    {
+      "path": "normal-release-089/RUNTIME.json",
+      "sha256": "3b0c774246cf1377c8822b6da1495225369a302813e01163cb1031bab5038b78"
+    },
+    {
+      "path": "normal-release-089/UPDATE-JOURNEY.json",
+      "sha256": "07fd802d8c8236002d346dd86cef40897cd7d2c1d87730adfa1d93b1039d2f71"
+    },
+    {
+      "path": "normal-release-089/validation/update-journey/07fd802d8c8236002d346dd86cef40897cd7d2c1d87730adfa1d93b1039d2f71/evidence-001.json",
+      "sha256": "0c164de72d6ab223f15e3e5ffc8aa864521e7a7b05f97d2efcaa825eb65fd17f"
+    },
+    {
+      "path": "normal-release-089/validation/update-journey/07fd802d8c8236002d346dd86cef40897cd7d2c1d87730adfa1d93b1039d2f71/evidence-002.json",
+      "sha256": "777ab075a52e90cdefe207b587393c666e21742ab100ba6e59cb2a8a8ff73313"
+    },
+    {
+      "path": "normal-release-089/validation/update-journey/07fd802d8c8236002d346dd86cef40897cd7d2c1d87730adfa1d93b1039d2f71/evidence-003.json",
+      "sha256": "6812bf8ca9e0fec22cc3ffccbfe09cd57c0ced749837b30ab25c26338486c9da"
+    },
+    {
+      "path": "normal-release-089/validation/update-journey/07fd802d8c8236002d346dd86cef40897cd7d2c1d87730adfa1d93b1039d2f71/evidence-004.json",
+      "sha256": "84152ccddceee25c77af863e7f27952537ce08f474f4af9e8db070acb97c88c7"
+    },
+    {
+      "path": "normal-release-089/validation/update-journey/07fd802d8c8236002d346dd86cef40897cd7d2c1d87730adfa1d93b1039d2f71/evidence-005.json",
+      "sha256": "aa7489dcf93ba690d0cd32f16a4bfba3209bdcee1cb259d2348ab613f86720a7"
+    },
+    {
+      "path": "normal-release-089/validation/update-journey/07fd802d8c8236002d346dd86cef40897cd7d2c1d87730adfa1d93b1039d2f71/evidence-006.json",
+      "sha256": "f9bc831e5cb179dc2abbfa0fccb9bf918f3f8ebb8e2da6ed80e6452ab3187ce0"
+    },
+    {
+      "path": "normal-release-089/validation/update-journey/07fd802d8c8236002d346dd86cef40897cd7d2c1d87730adfa1d93b1039d2f71/evidence-007.json",
+      "sha256": "587d9be4f5cf62d7ad82f6269524b60100870551e7f8d8e8e09144f2f59880f2"
+    },
+    {
+      "path": "normal-release-089/validation/update-journey/07fd802d8c8236002d346dd86cef40897cd7d2c1d87730adfa1d93b1039d2f71/evidence-008.json",
+      "sha256": "e03efc39e1ff7bc3220f2404a316213c03ac646b45216cceb23c93c0e2ce6e9d"
+    },
+    {
+      "path": "normal-release-089/validation/update-journey/07fd802d8c8236002d346dd86cef40897cd7d2c1d87730adfa1d93b1039d2f71/evidence-009.json",
+      "sha256": "897f2550ad567c9ced063168030af6cf85d34d7748b95e89ca9bf799bd5e666f"
+    },
+    {
+      "path": "normal-release-089/validation/update-journey/07fd802d8c8236002d346dd86cef40897cd7d2c1d87730adfa1d93b1039d2f71/evidence-010.json",
+      "sha256": "b9f983f8d8689eeccf992f4f04af605a85aa362727b0e06c1a56242fc7e3602f"
+    },
+    {
+      "path": "normal-release-089/validation/update-journey/07fd802d8c8236002d346dd86cef40897cd7d2c1d87730adfa1d93b1039d2f71/evidence-011.json",
+      "sha256": "4870ca404485f9a72787e11574dea41d8a898d84516a16c16fd17d336aac9417"
+    },
+    {
+      "path": "normal-release-089/validation/update-journey/07fd802d8c8236002d346dd86cef40897cd7d2c1d87730adfa1d93b1039d2f71/evidence-012.json",
+      "sha256": "58155e4d74fa485f7aa7e1bca209d6d37853fde9ec113198653b68811ffc4fd5"
+    },
+    {
+      "path": "normal-release-089/validation/update-journey/07fd802d8c8236002d346dd86cef40897cd7d2c1d87730adfa1d93b1039d2f71/evidence-013.png",
+      "sha256": "68533a24c4ee7fce09ef53c8f44b9ec60f3d68f1b28aae509efb9d4949e1ed37"
+    },
+    {
+      "path": "normal-release-089/validation/update-journey/07fd802d8c8236002d346dd86cef40897cd7d2c1d87730adfa1d93b1039d2f71/evidence-014.png",
+      "sha256": "1bd62f5684f901efd4a58762486e7ae9d2d54d09e0e673c044c55c9875e52d6d"
+    },
+    {
+      "path": "normal-release-089/validation/update-journey/07fd802d8c8236002d346dd86cef40897cd7d2c1d87730adfa1d93b1039d2f71/evidence-015.png",
+      "sha256": "ad9ae6c91b167505702e74cb22f17ca91f50038b8ad8e1c78d7b00d712ce13ce"
+    },
+    {
+      "path": "normal-release-089/validation/update-journey/07fd802d8c8236002d346dd86cef40897cd7d2c1d87730adfa1d93b1039d2f71/evidence-016.png",
+      "sha256": "c8efe3b8862f2d87bc31bc846ef0bc01971bfd7c31993bdf7da9b4881c6066d2"
+    },
+    {
+      "path": "normal-release-089/validation/update-journey/07fd802d8c8236002d346dd86cef40897cd7d2c1d87730adfa1d93b1039d2f71/evidence-017.png",
+      "sha256": "913714973d40b28f8d5ba23c1aaac7e79ebdde41ed065b76ec981e770692f7a4"
+    },
+    {
+      "path": "normal-release-089/validation/update-journey/07fd802d8c8236002d346dd86cef40897cd7d2c1d87730adfa1d93b1039d2f71/evidence-018.json",
+      "sha256": "37cb354bdea7fbfb1b5f4f05989d46908cc95878f2ecc5c0690e57d1fe52a818"
+    },
+    {
+      "path": "normal-release-089/validation/update-journey/07fd802d8c8236002d346dd86cef40897cd7d2c1d87730adfa1d93b1039d2f71/evidence-019.png",
+      "sha256": "280c64fa80bcb998c48af369e252a7bcf4a92d2b47b311c4c36afc75ce855b6e"
+    },
+    {
+      "path": "normal-release-089/validation/update-journey/07fd802d8c8236002d346dd86cef40897cd7d2c1d87730adfa1d93b1039d2f71/evidence-020.png",
+      "sha256": "8948d2f09833d3b547e897503e151c3eb22909d930b0438847361ac2d1adf334"
+    },
+    {
+      "path": "normal-release-089/validation/update-journey/07fd802d8c8236002d346dd86cef40897cd7d2c1d87730adfa1d93b1039d2f71/evidence-021.png",
+      "sha256": "df15fa86b8962bcff5e37b9a6046551d9b6d7e93c93daf69b2e167bd0f190aa3"
+    },
+    {
+      "path": "normal-release-089/validation/update-journey/07fd802d8c8236002d346dd86cef40897cd7d2c1d87730adfa1d93b1039d2f71/evidence-022.json",
+      "sha256": "2680ee941be70c46345b2cf938227493f205479e0e8f4ba8d29ba592239a1f3b"
+    },
+    {
+      "path": "normal-release-089/validation/update-journey/07fd802d8c8236002d346dd86cef40897cd7d2c1d87730adfa1d93b1039d2f71/evidence-023.png",
+      "sha256": "7dcaeefe905e0e1f7a95055406baf8ad7faae942c5fa10ed6a6c751c0bfc933e"
+    },
+    {
+      "path": "normal-release-089/validation/update-journey/07fd802d8c8236002d346dd86cef40897cd7d2c1d87730adfa1d93b1039d2f71/evidence-024.png",
+      "sha256": "7c658a550e0b13a5f50fdfcdd09b65fbb13e5923bb58578a6363d3cd014d9b42"
+    },
+    {
+      "path": "normal-release-089/validation/update-journey/07fd802d8c8236002d346dd86cef40897cd7d2c1d87730adfa1d93b1039d2f71/evidence-025.png",
+      "sha256": "9125cd803f9c67abc1f003a8c07d031f28ccf786c6d39e849fc567cf493bd0f3"
+    },
+    {
+      "path": "normal-release-089/validation/update-journey/07fd802d8c8236002d346dd86cef40897cd7d2c1d87730adfa1d93b1039d2f71/evidence-026.json",
+      "sha256": "95435e80a4f7fa44bcb8f5d1d51940ff8681d106c1e89a282aea9c008fb86e5d"
+    },
+    {
+      "path": "normal-release-089/validation/update-journey/07fd802d8c8236002d346dd86cef40897cd7d2c1d87730adfa1d93b1039d2f71/evidence-027.png",
+      "sha256": "5c15c4f75a1d7b300f35812de2e04982f789c928aba5609752542b8529803ffd"
+    },
+    {
+      "path": "normal-release-089/validation/update-journey/07fd802d8c8236002d346dd86cef40897cd7d2c1d87730adfa1d93b1039d2f71/evidence-028.png",
+      "sha256": "db13cd0a8ca415d1a1b6932891ee410069d0b9e41934383cc68411d32dd17608"
+    },
+    {
+      "path": "normal-release-089/validation/update-journey/07fd802d8c8236002d346dd86cef40897cd7d2c1d87730adfa1d93b1039d2f71/evidence-029.png",
+      "sha256": "9cc6466cce6b6da2e4b0559793927c3d0df09de0c7448f52c1ef702c56525175"
+    },
+    {
+      "path": "normal-release-089/validation/update-journey/07fd802d8c8236002d346dd86cef40897cd7d2c1d87730adfa1d93b1039d2f71/evidence-030.json",
+      "sha256": "6e06b4ecb46a717a85a622fb036c763023b66751e7b4739b89fefa6100ef180d"
+    },
+    {
+      "path": "normal-release-089/validation/update-journey/07fd802d8c8236002d346dd86cef40897cd7d2c1d87730adfa1d93b1039d2f71/evidence-031.png",
+      "sha256": "f3ac06b0df0df3d78b27b72bc32ea4db4a0904d4f87531d2fc905ca2008533dc"
+    },
+    {
+      "path": "normal-release-089/validation/update-journey/07fd802d8c8236002d346dd86cef40897cd7d2c1d87730adfa1d93b1039d2f71/evidence-032.json",
+      "sha256": "d7324df342527634c36683a2bd8617af163ddb79a76319576203dc8005c6d68c"
+    },
+    {
+      "path": "normal-release-089/validation/update-journey/07fd802d8c8236002d346dd86cef40897cd7d2c1d87730adfa1d93b1039d2f71/evidence-033.json",
+      "sha256": "570053e084c811522a13617ebb6ca86524e77335fcc7ca91ba5b133933074ddb"
+    },
+    {
+      "path": "normal-release-089/validation/update-journey/07fd802d8c8236002d346dd86cef40897cd7d2c1d87730adfa1d93b1039d2f71/evidence-034.json",
+      "sha256": "250073419094bb5f4b7fe0e5e922fcffacca3b3ee6e500512d3a59c6416c0545"
+    },
+    {
+      "path": "normal-release-089/validation/update-journey/07fd802d8c8236002d346dd86cef40897cd7d2c1d87730adfa1d93b1039d2f71/evidence-035.png",
+      "sha256": "1c9f14e8fbeca01dca03f96830253c843a4fce5333faa839819b058dcc473757"
+    },
+    {
+      "path": "normal-release-089/validation/update-journey/07fd802d8c8236002d346dd86cef40897cd7d2c1d87730adfa1d93b1039d2f71/evidence-036.json",
+      "sha256": "08bc35379264425fc87636ea42cc2d49fcc53684328f5a9d70839655e3adc48c"
+    },
+    {
+      "path": "normal-release-089/validation/update-journey/07fd802d8c8236002d346dd86cef40897cd7d2c1d87730adfa1d93b1039d2f71/evidence-037.png",
+      "sha256": "2bf1441c20f2fa2b6ca78592658c643b1bfb750e8a2581f7de40c46ec196d3da"
+    },
+    {
+      "path": "normal-release-089/VALIDATION.json",
+      "sha256": "3ff1d9b4f6911fb7677e3303b104f17feb89d1f0a8b5507022c79a587c9cc830"
+    },
+    {
+      "path": "test-release-090/APK-INTEGRITY.json",
+      "sha256": "5526f323fe529e13f42643848765a9f33301508eea2e51d2935395e2ba4a4225"
+    },
+    {
+      "path": "test-release-090/AUDIT.md",
+      "sha256": "3856aa6d41dc751f55bcdce5045817eccb4684424682e9a1aa289ab8b4adb81e"
+    },
+    {
+      "path": "test-release-090/overlay-manifest.json",
+      "sha256": "440dec652c3262ec6059f61ac8edf6670c143970c6c0bf829656197f4f76ca42"
+    },
+    {
+      "path": "test-release-090/overrides/AGENTS.md",
+      "sha256": "2dd3af29624eb95fdd1b2adb35da2af1eeb58d31348aea951e1c80d2c95a903d"
+    },
+    {
+      "path": "test-release-090/overrides/app/build.gradle.kts",
+      "sha256": "e69f8b3ab8c4b5c5e50f663dbf4cea25b78c5afbf6c997a8113454c4576b3924"
+    },
+    {
+      "path": "test-release-090/overrides/app/src/main/assets/multiplayer/mobile-controls.js",
+      "sha256": "4b7970c51739d2eb39face85286039ad432f9074ac52b25b89128f6ae91a5c1f"
+    },
+    {
+      "path": "test-release-090/overrides/app/src/main/assets/multiplayer/native-ui-adapter.js",
+      "sha256": "b785a7c199bfc90f232f28557226cb77d50dd1a3577219154b36fcdb593f5378"
+    },
+    {
+      "path": "test-release-090/overrides/app/src/main/assets/multiplayer/session.js",
+      "sha256": "40929ede2b65ee4b1adf5ee5237a602b91ac32e944755b6247c15bed60f15588"
+    },
+    {
+      "path": "test-release-090/overrides/app/src/main/assets/multiplayer/warzone2100.js",
+      "sha256": "c1d2dd319639041486717ec606cd1d05cbf79485d869aacd6329da9c337433ea"
+    },
+    {
+      "path": "test-release-090/overrides/app/src/main/assets/multiplayer/warzone2100.wasm",
+      "sha256": "b0586374d4f8d1e017ee88a26bb062dbb7114e2b4517cd7e7f58cc9022344125"
+    },
+    {
+      "path": "test-release-090/overrides/app/src/main/assets/warzone/ui/towers-game-controls.css",
+      "sha256": "f790fa99760acf68ba580749de433dcdb21116c384e736bb53b0cf7b28078c61"
+    },
+    {
+      "path": "test-release-090/overrides/app/src/main/assets/warzone/warzone2100-campaign.js",
+      "sha256": "ef69f6826f099dde9823532609da4bba6fbe2fe5959c094c1b69a88edc5b85fd"
+    },
+    {
+      "path": "test-release-090/overrides/app/src/main/assets/warzone/warzone2100-duel.js",
+      "sha256": "a7c479363a594385d5ac5a77b5331e6d32f7bd0a7667f123cd09cfa0c89e4fde"
+    },
+    {
+      "path": "test-release-090/overrides/app/src/main/assets/warzone/warzone2100-ffa.js",
+      "sha256": "28d776ac00994b0960af686be6450b06029d2571687d77ce42b4523968f76aa7"
+    },
+    {
+      "path": "test-release-090/overrides/app/src/main/assets/warzone/warzone2100-towers-052.js",
+      "sha256": "cfc9d2d183fdfc7a8f6fe7ba82e984ea7bddd8d2c4a392d87639af1131750289"
+    },
+    {
+      "path": "test-release-090/overrides/app/src/main/assets/warzone/warzone2100-towers-052.wasm",
+      "sha256": "defca4e2532abce2832b22a74e0bcdf87451b4876a045bbe213d934b637a7577"
+    },
+    {
+      "path": "test-release-090/overrides/app/src/main/assets/warzone/warzone2100.js",
+      "sha256": "80f54324b5b8861c5e07c14becdd37eccccb502271cc37f622d6b214453ff92c"
+    },
+    {
+      "path": "test-release-090/overrides/app/src/main/assets/warzone/warzone2100.wasm",
+      "sha256": "eefcf462ba169877d276cdb92773d8fa16fe8f9a6070222275166fa9ffa6a144"
+    },
+    {
+      "path": "test-release-090/overrides/app/src/main/assets/warzone-campaign-hud.js",
+      "sha256": "3e008580535bf53dd850e451d561c606d9e9471f0f49221b1d4d669ed3d40536"
+    },
+    {
+      "path": "test-release-090/overrides/app/src/main/assets/warzone-command-pages.js",
+      "sha256": "3a28bddc853dcc65cae6a3388f715a3fbf9366053b5e03f13930e2d1b4ec5a15"
+    },
+    {
+      "path": "test-release-090/overrides/app/src/main/assets/warzone-touch-controls.js",
+      "sha256": "392d069c07483677e752bf07d194e2b4bad7d3f06da59bbcb2c86f1d39fc9250"
+    },
+    {
+      "path": "test-release-090/overrides/release-records/all-combat-ui-090-checks.json",
+      "sha256": "60fae0b1603138fc6215080c24da0639af7905f33621ad7f9eacd787eb57c9fb"
+    },
+    {
+      "path": "test-release-090/overrides/release-records/initial-fallback.json",
+      "sha256": "41737cc106f1830897801a929a400bed3816491e388a8015bdea95df65702f16"
+    },
+    {
+      "path": "test-release-090/overrides/release-records/ISSUES-AND-CHECKS.md",
+      "sha256": "a28e69e7e870ddc1ad51670abeb7cbfdfe7d39633b4ba3dce07d6a43f16997d6"
+    },
+    {
+      "path": "test-release-090/overrides/release-records/native-ui-contract-review-090.json",
+      "sha256": "05ec535b66a014296d123a731cc90ed62cb00926185c7a5516cafc696f7c4b8d"
+    },
+    {
+      "path": "test-release-090/overrides/tools/build-native-selection-090.py",
+      "sha256": "6a906ae3309c7efc6862f44373ff35520665a81cd8cac2bd76c48e891cc3c443"
+    },
+    {
+      "path": "test-release-090/overrides/tools/build-native-selection-cold-090.sh",
+      "sha256": "8a17bba9a82d9ee6dc93a063bc6f8e6ec1eaa9aba0d0abade120baa64c3b38e9"
+    },
+    {
+      "path": "test-release-090/overrides/tools/build-normal-apk.py",
+      "sha256": "ba54608acdc7c5702f41dc186deb5a4c07390f7809e32ff71482b9d4d4a05f4b"
+    },
+    {
+      "path": "test-release-090/overrides/tools/check-all-combat-ui-090.cjs",
+      "sha256": "2aee3e286cad8035c4250564bf3315ace58ece21e91236da163530f54d0960da"
+    },
+    {
+      "path": "test-release-090/overrides/tools/check-native-constructors-090.py",
+      "sha256": "561e7d5ebdfcac66f533c42401cc417ff570feb5ab5fb98519f85cf9bcab35ae"
+    },
+    {
+      "path": "test-release-090/overrides/tools/check-native-loader-pairs-090.py",
+      "sha256": "c9cc90fc7b2c90ddfcca20078a5cd63b061ce591b7f89d0a0dc2bd749c1dae98"
+    },
+    {
+      "path": "test-release-090/overrides/tools/check-native-selection-090.py",
+      "sha256": "2cbaf636f08b975544aaf74a7132cc53ce55f62380a2977f7acd805cb65a5c53"
+    },
+    {
+      "path": "test-release-090/overrides/tools/combat-ui-fixture-090.cjs",
+      "sha256": "132d088cb8500688b764e1c9bd69285465791f4e75a6e72afcb1c91e1a746fe7"
+    },
+    {
+      "path": "test-release-090/overrides/tools/integrate-native-selection-090.py",
+      "sha256": "d4c3deb9ff8ee5720931dddac4e378d4b25e1749a95e1cfb7cb303b191cb25bd"
+    },
+    {
+      "path": "test-release-090/overrides/tools/prepare-native-selection-090.py",
+      "sha256": "18252975e000f57893c22f4c78a264cb87d633e439cd6ed367be92a004a647e2"
+    },
+    {
+      "path": "test-release-090/overrides/tools/prepare-native-selection-cold-090.py",
+      "sha256": "2afa77001d5ba82af2acdbcac3e90315bf558c469eaf53c94180151a0cfde3a9"
+    },
+    {
+      "path": "test-release-090/overrides/tools/rebuild-native-constructors-090.py",
+      "sha256": "1f97ccb457dd490698dfda635f0e9e90ebe78983ac39f5abbc419528ed911ac7"
+    },
+    {
+      "path": "test-release-090/overrides/tools/verify-normal-apk-090.py",
+      "sha256": "725e81c2528a960cd50fbe3aaccb27f90d4150b74e37a9f071cdf6a487d59980"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/baseline089-to090-delta.json",
+      "sha256": "66895412d6839e87cead0a877de2d946724fa24564c36f862692318f0788b875"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/bootstrap/multiplayer/baseline-git.patch",
+      "sha256": "bd67df2fe953d20206c0cce373c657df990d36d2c6a6e9efef5821e4763d1adc"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/bootstrap/multiplayer/CMakeCache.txt",
+      "sha256": "90dadcd30594e229c4f0549e5f1bcca98e6b8c102d72231d465d3c157fdd77f5"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/bootstrap/multiplayer/source/lib/sdl/main_sdl.cpp",
+      "sha256": "f3c3efa2b148648e83c1f851f46d84ec5786d32283795a78498fc2770f574d36"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/bootstrap/multiplayer/source/src/display3d.cpp",
+      "sha256": "43f52868a1ac6fa5a7be609d8940c9db7dfba8d7a3b7140e5c29e79f7f9940ac"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/bootstrap/multiplayer/source/src/hci.cpp",
+      "sha256": "1896ac855e999655c430e16446804fb461c444cf5f054254a7828863737e1af7"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/bootstrap/multiplayer/source/src/mobile-room-map-preview.cpp.inc",
+      "sha256": "e1b785ae5e5d38ebfce173dc739ec388598af980722bacb6880e623d835f6544"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/bootstrap/multiplayer/source/src/mobile-room-native.cpp.inc",
+      "sha256": "eb35b040cf1ce8430ae9fb1887f90703f5874707fa0c576546ed1df2e3204a83"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/bootstrap/multiplayer/source/src/multiint.cpp",
+      "sha256": "ef576f51f0b1bf9c8a40ade00d68331e278b673ba0cefeefbff72a58b12fdda0"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/bootstrap/multiplayer/source/src/quickjs_backend.cpp",
+      "sha256": "4224840b9a7fda8f333e1a009f82bcf455509d519be75312b36c13786fb4611a"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/bootstrap/multiplayer/source/src/wrappers.cpp",
+      "sha256": "d23f339dda4ab0e951934993b93ee0681d350773e6cb6494ec120f2cd5fb5fe3"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/bootstrap/offline/baseline-git.patch",
+      "sha256": "70d981df597f01023bd49e38f2da4f0fbfeffbfb8026420b271c5750814803aa"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/bootstrap/offline/CMakeCache.txt",
+      "sha256": "69d378558fcac997a34656e8cdf906bf6e79cc284025d10cb8dba424647b5e04"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/bootstrap/offline/source/lib/sdl/main_sdl.cpp",
+      "sha256": "dce7553f4719e1becfec8ede07d147965b3ea72ca926bde240e3b650a93f3470"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/bootstrap/offline/source/src/console.cpp",
+      "sha256": "282b50dd3bbdf8f5b8703ab74fd6875057d3a848a8ced36434260f6b221f5176"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/bootstrap/offline/source/src/display3d.cpp",
+      "sha256": "3b5c1a41144011805819d15e9bfac6f1289d726da276433bfeb237904c0fa15f"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/bootstrap/offline/source/src/droid.cpp",
+      "sha256": "5b8f8d8c6cca08bdcec70b34f6de9fee3fff0de2bc4ae5815ff1025390ddc1f1"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/bootstrap/offline/source/src/hci.cpp",
+      "sha256": "b99c89e580856201e6e884f0105e7a6aabaa0e55d66f39e5284ac21ecf2dbdc4"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/bootstrap/offline/source/src/intdisplay.cpp",
+      "sha256": "99645ec2555ba7dca7c41ebe75f955df46c3890e07b4606e0b8488df7613bb27"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/bootstrap/offline/source/src/keybind.cpp",
+      "sha256": "5730cf9a2b791a6a437f4e0da040e9dbb75e8befb48dc02caefb1a8e824355ed"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/bootstrap/offline/source/src/loadsave.cpp",
+      "sha256": "b58f01a03b551cbc589ef468f6a0572bd49978f9ba88db503eb761a3518b3341"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/bootstrap/offline/source/src/main.cpp",
+      "sha256": "c0d9fad6803313b48d4aeccc592dc2a157778f2198101593711d111ea976cb6c"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/bootstrap/offline/source/src/quickjs_backend.cpp",
+      "sha256": "13137dd600eb21ff1506e01e81a5624fd514447d82bb58328bc335eeae009b68"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/bootstrap/offline/source/src/radar.cpp",
+      "sha256": "e92fcfb9151aa18adf36208ea53835ca7f7ee0e3347da6968628ba8747866f0d"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/bootstrap/offline/source/src/research.cpp",
+      "sha256": "06b8999191bb0160e6b73c268f8ddd69347102133ecc221aee23504973dc918a"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/build-plan.json",
+      "sha256": "00a4caf9ed172758b4a8b5269924d6e75c93b46413154837ae3b3dee71978faa"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/BUILD.md",
+      "sha256": "7a64b40dab143f91682c504d214df97493b12ce71a1b971ccc4ce296d13b9675"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/checks/constructor-checks.json",
+      "sha256": "08bf199155c5fffdcade13813fcd74353b5ff72c4b6ff2e366c70bc841ca6398"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/checks/loader-pairs.json",
+      "sha256": "ca340e2c85f8d36d3a10d8d2c160991221186e58e9220f98c51413b5fd2c3e67"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/checks/source-checks.json",
+      "sha256": "f08ee44fa5225ec51b105960e96f8b2c359558dbca9abdcea3f808ad56ea58d9"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/CONTRACT.md",
+      "sha256": "b11bef09bb4df3d88809a7f4c4e120132ffb1f9f228c842214519b55a44b772d"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/integrated/multiplayer/runtime-integration.json",
+      "sha256": "0d0e90e61e70bac081df79e7ea435f954be8ebb43757aace2af110fba58d8d05"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/integrated/shared/runtime-integration.json",
+      "sha256": "869a60ea68faef9a5009b54e8769e250b4caa0a53e4477508a22743ca645529b"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/integrated/shared-campaign/runtime-integration.json",
+      "sha256": "cbe0009b3cdf07cd38f77781c8e79fd35964a894120fa32e0b6d5a7ddcd70cb5"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/integrated/shared-duel/runtime-integration.json",
+      "sha256": "5d444ed354e6f783b849a9831ca41109efcf9cbb9a72972ca1aa5b7e80e2da5e"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/integrated/shared-ffa/runtime-integration.json",
+      "sha256": "f321344f341ff8f6b702a66f83a74455b5e2685682a8e7cb16a425f3c4ad79eb"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/integrated/towers/runtime-integration.json",
+      "sha256": "37065c88bd89f590090e2e78bbe3500c50bcc813928316e14fb731e80194ae5e"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/logs/compile-multiplayer-display3d.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/logs/compile-multiplayer-quickjs_backend.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/logs/compile-offline-display3d.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/logs/compile-offline-hci-constructors.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/logs/compile-offline-hci.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/logs/compile-shared051-droid.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/logs/link-constructors-shared.log",
+      "sha256": "ccddb57ff85231dc46bd7945c7f1d77948272be7114626858ce4e4e31adfdd60"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/logs/link-constructors-towers.log",
+      "sha256": "ccddb57ff85231dc46bd7945c7f1d77948272be7114626858ce4e4e31adfdd60"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/logs/link-multiplayer.log",
+      "sha256": "ccddb57ff85231dc46bd7945c7f1d77948272be7114626858ce4e4e31adfdd60"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/logs/link-shared.log",
+      "sha256": "ccddb57ff85231dc46bd7945c7f1d77948272be7114626858ce4e4e31adfdd60"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/logs/link-towers.log",
+      "sha256": "ccddb57ff85231dc46bd7945c7f1d77948272be7114626858ce4e4e31adfdd60"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/native-build.json",
+      "sha256": "22c393d1f688b02d70a245cad8bafe19bfa838bd3acc3e33026f2dd1520f4df3"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/patches/multiplayer/display3d.cpp.patch",
+      "sha256": "2703d92d5ab740f14935103f5099a6b2c32b7654e21a51f300d6dbb0c0fd7486"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/patches/multiplayer/quickjs_backend.cpp.patch",
+      "sha256": "2f008f0bb1e4e5c2befda544ca84e6cb790948e7fa78104b805f1fcc217b8ad8"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/patches/offline/display3d.cpp.patch",
+      "sha256": "dc4d0931e6996fb4f5481e3a51ac590102bf01bb5be0c633bd5cecc58c38bc3d"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/patches/offline/hci.cpp.patch",
+      "sha256": "0c8e793b5f87d9fb9afec1832fe3eef3ca85440308b8e35d16c37884f0a40e5c"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/proof/multiplayer-cache-after.json",
+      "sha256": "7bbd08fafdeb854ae6a44e59910d1d2a08427ca27f71134bdd67df48ce8d5998"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/proof/multiplayer-cache-before.json",
+      "sha256": "7bbd08fafdeb854ae6a44e59910d1d2a08427ca27f71134bdd67df48ce8d5998"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/proof/offline-cache-after.json",
+      "sha256": "779f7a83aa6f936e58e86bc870e79e0be64e7667ef8c131c4a1b7cfe80bf0e78"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/proof/offline-cache-before.json",
+      "sha256": "779f7a83aa6f936e58e86bc870e79e0be64e7667ef8c131c4a1b7cfe80bf0e78"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/proof/offline-constructor-cache-after.json",
+      "sha256": "779f7a83aa6f936e58e86bc870e79e0be64e7667ef8c131c4a1b7cfe80bf0e78"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/proof/offline-constructor-cache-before.json",
+      "sha256": "779f7a83aa6f936e58e86bc870e79e0be64e7667ef8c131c4a1b7cfe80bf0e78"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/proof/protocol-header.h",
+      "sha256": "4be9b0d6ada7ee383824bfe54e3ee4e3986c2a868d9a75bfe9fff6b84ee870ec"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/recipes/build-native-blueprint.sh",
+      "sha256": "6f3835c7eb8441c216f7e0b056affe22b34eb60e2985341029c866ca75e9bc26"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/recipes/integrate-multiplayer-native-082.py",
+      "sha256": "e7ecf6b41df3f5395fc7a596de6d2847642fec15ffbf4511baf194955479d6e6"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/recipes/integrate-native-runtime.py",
+      "sha256": "30014384925fdb0dda52d338244fd07d300c1223b841d56e8443a85b77e34ee3"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/runtime-integration.json",
+      "sha256": "22424fee023ccbbd77eb86b9848f2b09412efdd81bea937ac93b2ab566f188e5"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/source/common/mobile-combat-latch-v90.h",
+      "sha256": "8484adb052e916ffa4c53f87c962eac21b71fc5988c200e03dec5788cc794303"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/source/multiplayer/src/display3d.cpp",
+      "sha256": "f58d042b143d85e7d5a91ac65ed8fb862e82f8410e211f5225c491343e10d8cf"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/source/multiplayer/src/quickjs_backend.cpp",
+      "sha256": "957d63a68afae9c6fe297f9419bc813388272f5706a485e2d8103d82ad3bf5f2"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/source/offline/src/display3d.cpp",
+      "sha256": "b6d5044cd1bbd3497766ea7aa1afd544182242cd77a3b1a64e86eccd0feb82dd"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/source/offline/src/hci.cpp",
+      "sha256": "75e4dbe058bcd99009ff4a7e45a3247fc04d4c9169faae5e52f6d4a3764bc105"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/source/shared051/src/droid.cpp",
+      "sha256": "b32c09a40baf1f34b1b00c33b2928f8e771b35646e65508a3331dd0104ccfea4"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/source-preparation.json",
+      "sha256": "bd1d5b617a1decad2f5af391f7edb5d2155ae4d54885b9d14cca8f601f802290"
+    },
+    {
+      "path": "test-release-090/overrides/vendor/native-090/source-provenance-manifest.json",
+      "sha256": "509b4546d4a7817687908cf15a63f62941aa22b05c9bb2969aa393596f48ed21"
+    },
+    {
+      "path": "test-release-090/package-complete-source.py",
+      "sha256": "6402708f96efcad046a7d30a4dfb5dffc3374ecd8645e5d6c30786b90099ed88"
+    },
+    {
+      "path": "test-release-090/package-incomplete-checkpoint.py",
+      "sha256": "93906c3782ba5fa48a4ea81c6a6c76cdf206b5b088751c22caf9d86f913e010e"
+    },
+    {
+      "path": "test-release-090/PACKAGING-CHECKS.json",
+      "sha256": "7749e1733191048b7049b7251990b376e1913b6693c6b490afb4485ead8707ce"
+    },
+    {
+      "path": "test-release-090/prepare-and-build.py",
+      "sha256": "36484d1be3269c97378c5ecb8072da1ee2500ca0317c20a527cefa35e7d9499b"
+    },
+    {
+      "path": "test-release-090/README.md",
+      "sha256": "2fbfcd0dcf7586c213fd90aa1f92dcec8b17f7f9c0a83bbf743eeee5913b7953"
+    },
+    {
+      "path": "test-release-090/RESTORE-CHECK.json",
+      "sha256": "ed6a21cd609247d99ac417c92b1da99f232bc0cb8c73bbd8db5c97445c0c6b95"
+    },
+    {
+      "path": "test-release-090/RUNTIME-ATTACHMENTS.json",
+      "sha256": "3dbb8b8ce1f5ffc4fdde6141dfcedbe57448a59af6bf343371d1d9b7aa24afa4"
+    },
+    {
+      "path": "test-release-090/RUNTIME.json",
+      "sha256": "7f83c608cad652e1e570d84954ad888f55f53dd8876c3b47516166d45baf7bf9"
+    },
+    {
+      "path": "test-release-090/SOURCE-RESTORATION.json",
+      "sha256": "14a040af8ca154415039963fe2967e0f43dc9fdd66e671f4f87a4d8f3de5cc33"
+    },
+    {
+      "path": "test-release-090/validation/runtime/001-03-baseline089-campaign-secondtap-off-metrics.json",
+      "sha256": "b035a2af904495cb846f1d103e55a9d40823bffbb5c9e7a2b4f8ad8d62b1abfd"
+    },
+    {
+      "path": "test-release-090/validation/runtime/002-03-baseline089-campaign-secondtap-off.png",
+      "sha256": "15cd9ef163e0adc234fa51a2fb512bbb0d71c0e8bda61b0535c638a8b68c74aa"
+    },
+    {
+      "path": "test-release-090/validation/runtime/003-100-final-mp-ordinary-structure-completed-metrics.json",
+      "sha256": "7004946a3d1d7bcd5e795b3c22f01e7b55b7ec5556f51a87f878b547376651e5"
+    },
+    {
+      "path": "test-release-090/validation/runtime/004-100-final-mp-ordinary-structure-completed.png",
+      "sha256": "4ae134af83f2c39acb1b33178f9df6ff728640a1a3d6d2f7ddc00451c5c964e3"
+    },
+    {
+      "path": "test-release-090/validation/runtime/005-101-final-mp-build-auto-return-metrics.json",
+      "sha256": "2085bf0f4b3ebbaf242474b22d56336a557345f9a7df91213167a22edb4137f2"
+    },
+    {
+      "path": "test-release-090/validation/runtime/006-101-final-mp-build-auto-return.png",
+      "sha256": "4ae134af83f2c39acb1b33178f9df6ff728640a1a3d6d2f7ddc00451c5c964e3"
+    },
+    {
+      "path": "test-release-090/validation/runtime/007-102-final-mp-after-repeated-menus-metrics.json",
+      "sha256": "8808df981946f0b3c573ee5aed8d731629d87d6bd76de5e84ca1ec9dece15d5d"
+    },
+    {
+      "path": "test-release-090/validation/runtime/008-102-final-mp-after-repeated-menus.png",
+      "sha256": "4ae134af83f2c39acb1b33178f9df6ff728640a1a3d6d2f7ddc00451c5c964e3"
+    },
+    {
+      "path": "test-release-090/validation/runtime/009-103-final-mp-ime-1-open-metrics.json",
+      "sha256": "7898df0b595d3302a8b95da71bda852c258f5ea084c8f43143064df4d448666b"
+    },
+    {
+      "path": "test-release-090/validation/runtime/010-103-final-mp-ime-1-open.png",
+      "sha256": "6988123da56bd3c630f67e6431a0518aa5cb1e626b09c5d2538eb2c92da3bf7f"
+    },
+    {
+      "path": "test-release-090/validation/runtime/011-103-final-mp-ime-2-open-metrics.json",
+      "sha256": "1c482bc6d8e6117a39b484b1638f5a705fc97c05c985efad302b3c3a24d68317"
+    },
+    {
+      "path": "test-release-090/validation/runtime/012-103-final-mp-ime-2-open.png",
+      "sha256": "984f9e44c937bee2b54feeb51cef017748f2cf45c575a70a19569702cd421338"
+    },
+    {
+      "path": "test-release-090/validation/runtime/013-104-final-mp-ime-1-back-metrics.json",
+      "sha256": "7f398173d8767dcb3b469cd3715007d762763ad78a738cfd63aff563592cc667"
+    },
+    {
+      "path": "test-release-090/validation/runtime/014-104-final-mp-ime-1-back.png",
+      "sha256": "8fb2eb1e936792d5eeedcd3f24a663f8cbc3ce3f7eea8e56f0c6b76b039879db"
+    },
+    {
+      "path": "test-release-090/validation/runtime/015-104-final-mp-ime-2-back-metrics.json",
+      "sha256": "3d42cca68c41eb8f855db24bb0f8b49ea84088477db21246b1cdb3c959882e2f"
+    },
+    {
+      "path": "test-release-090/validation/runtime/016-104-final-mp-ime-2-back.png",
+      "sha256": "10fb7fc71b97bc6c0e9a1836d819ce55ab7275f107cf37d8c46dc0b17a990e1b"
+    },
+    {
+      "path": "test-release-090/validation/runtime/017-105-final-mp-after-ime-returns-metrics.json",
+      "sha256": "4f078a99e56dcb30a2decd5ce3f0076f486c6c319af44704d7a57487783fe67d"
+    },
+    {
+      "path": "test-release-090/validation/runtime/018-105-final-mp-after-ime-returns.png",
+      "sha256": "0c4d99e48d9ff9036bbea1659316c70b0209a506d7086e3e90059331a206033d"
+    },
+    {
+      "path": "test-release-090/validation/runtime/019-106-final-mp-post-ime-input-metrics.json",
+      "sha256": "6a46dbbb6d5048d1b59e6a373d878decb393933c814e3f23cc629009eae1216e"
+    },
+    {
+      "path": "test-release-090/validation/runtime/020-106-final-mp-post-ime-input.png",
+      "sha256": "4ae134af83f2c39acb1b33178f9df6ff728640a1a3d6d2f7ddc00451c5c964e3"
+    },
+    {
+      "path": "test-release-090/validation/runtime/021-107-final-mp-off-physical-assertions.json",
+      "sha256": "fe752569362c035de3669ecf50215c7e2a58a808dc3569908d9821eff8bc253b"
+    },
+    {
+      "path": "test-release-090/validation/runtime/022-107-final-mp-off-physical-metrics.json",
+      "sha256": "14d35c37b5fa597103fa39de4a680e0da1d814af23c9f5ba0a1c4d5920008bed"
+    },
+    {
+      "path": "test-release-090/validation/runtime/023-107-final-mp-off-physical.png",
+      "sha256": "90ef51bf81cc57f51d697b39eaedc1e020dd7e14a0fb63ab5c9bd85b971023c6"
+    },
+    {
+      "path": "test-release-090/validation/runtime/024-60-final-towers-on-assertions.json",
+      "sha256": "234b98f2867ffc7d49775a1c2dc962c8807e12428b9da77455571dcc2b62cb72"
+    },
+    {
+      "path": "test-release-090/validation/runtime/025-60-final-towers-on-metrics.json",
+      "sha256": "d65e2160a95917054d2d828b0e186076bb6fc4b2e978c0762592c7584ec46bcf"
+    },
+    {
+      "path": "test-release-090/validation/runtime/026-60-final-towers-on.png",
+      "sha256": "18e73ed454fddf0590c9c8020b4fcaf90ba4af55633a9f0372400d6dd6b9d67c"
+    },
+    {
+      "path": "test-release-090/validation/runtime/027-61-final-towers-native-trucks-assertions.json",
+      "sha256": "673213fae4071277e64c7fa94f0ce0a9c5666ec93116ed5c6c36828d4d4d6319"
+    },
+    {
+      "path": "test-release-090/validation/runtime/028-61-final-towers-native-trucks-metrics.json",
+      "sha256": "d1edf73a4a1e5baa9c0328cb7bd64634b0791d3b8396050b6a1228e6753de8bf"
+    },
+    {
+      "path": "test-release-090/validation/runtime/029-61-final-towers-native-trucks.png",
+      "sha256": "d3b7c9ca3f7f65606888af412ff7eaecfcce250d5484b512b6efec6a6a954cde"
+    },
+    {
+      "path": "test-release-090/validation/runtime/030-62-final-towers-build-participants-assertions.json",
+      "sha256": "673213fae4071277e64c7fa94f0ce0a9c5666ec93116ed5c6c36828d4d4d6319"
+    },
+    {
+      "path": "test-release-090/validation/runtime/031-62-final-towers-build-participants-metrics.json",
+      "sha256": "c6466105b11f088c4b5beaccc757efeb39505e4d6397aba7721976dd9a3c423b"
+    },
+    {
+      "path": "test-release-090/validation/runtime/032-62-final-towers-build-participants.png",
+      "sha256": "01ff2396dbc04372023e3f96eab079352bfce12ace75adb232e5315afc9a6d1d"
+    },
+    {
+      "path": "test-release-090/validation/runtime/033-63-final-towers-resumed-combat-assertions.json",
+      "sha256": "18fc44b0ac72f57570f7666fd2927dde5885cf67a55a96cfd8de96539d29d35a"
+    },
+    {
+      "path": "test-release-090/validation/runtime/034-63-final-towers-resumed-combat-metrics.json",
+      "sha256": "155150ed733a9d9c79940ca8b512269bdd1cc65a132a6b2c8f5a9bfc3ba35f9d"
+    },
+    {
+      "path": "test-release-090/validation/runtime/035-63-final-towers-resumed-combat.png",
+      "sha256": "d32b733b3bc22ac75025079da5276583d0e560a853f806609f4dc99795b60cad"
+    },
+    {
+      "path": "test-release-090/validation/runtime/036-64-final-towers-off-assertions.json",
+      "sha256": "016a2a1082b788fc04cea37509384e7885fd81b952919a5220c11ba37dca1736"
+    },
+    {
+      "path": "test-release-090/validation/runtime/037-64-final-towers-off-metrics.json",
+      "sha256": "e7eb17906483b7e2a1bd4d2d7000454ff90fa5a67fd8da3606edc50bcee59512"
+    },
+    {
+      "path": "test-release-090/validation/runtime/038-64-final-towers-off.png",
+      "sha256": "79c6d5b22ff5e16f7716c9e4491f65ce7bd90a6ba51c8108cc7bc48a919af289"
+    },
+    {
+      "path": "test-release-090/validation/runtime/039-74-presentation-room-after-draw.png",
+      "sha256": "4ae134af83f2c39acb1b33178f9df6ff728640a1a3d6d2f7ddc00451c5c964e3"
+    },
+    {
+      "path": "test-release-090/validation/runtime/040-74-presentation-room-before-draw.png",
+      "sha256": "fb5acf68204d3917b31ac8966e7426c7a2e56270fd2bb3d62098a5f2cd1b1a71"
+    },
+    {
+      "path": "test-release-090/validation/runtime/041-74-presentation-room-java-view.json",
+      "sha256": "56d7a2177609bf447d6792f983b1fa003c2851073a0c85a4180fcbcd831a4953"
+    },
+    {
+      "path": "test-release-090/validation/runtime/042-74-presentation-room-view-draw.png",
+      "sha256": "0d827850957b658fd821636de24e249b2060e7d841817cb11655e73ba4866018"
+    },
+    {
+      "path": "test-release-090/validation/runtime/043-80-final-campaign-default-assertions.json",
+      "sha256": "1295b1109cd487ca268e3654283fc17cc875ed6b72f9a9ac496e280610ad43e5"
+    },
+    {
+      "path": "test-release-090/validation/runtime/044-80-final-campaign-default-metrics.json",
+      "sha256": "0e944286d2546cb3aa74f6ff44a5cc357ab4cc4642ea3c4a23b8adecf4319ed4"
+    },
+    {
+      "path": "test-release-090/validation/runtime/045-80-final-campaign-default.png",
+      "sha256": "d4ae23a5ec249f0a10898faea46f1cf875f0fce9a03e46e67ecb97a2dfb54731"
+    },
+    {
+      "path": "test-release-090/validation/runtime/046-81-final-campaign-on-assertions.json",
+      "sha256": "746fd7b6ce8d09e1f16471fa7f68455ccea1cfb3b107b35c21988e9d9403c671"
+    },
+    {
+      "path": "test-release-090/validation/runtime/047-81-final-campaign-on-metrics.json",
+      "sha256": "80dbfbc306a9c8dbe288b4772c8191af856f5ccadc30fc6d0362780d980cee1c"
+    },
+    {
+      "path": "test-release-090/validation/runtime/048-81-final-campaign-on.png",
+      "sha256": "0c7382d78855f8179748190162ec5189fbc05bd2d7d1ea735a3e5fcca1a68ca0"
+    },
+    {
+      "path": "test-release-090/validation/runtime/049-82-final-campaign-off-assertions.json",
+      "sha256": "e62a2d20907d30792c7ab63367a538bca95edbb5129a565550eb754c48eff020"
+    },
+    {
+      "path": "test-release-090/validation/runtime/050-82-final-campaign-off-metrics.json",
+      "sha256": "86976a6e94443f29e10b72bf926ba1b5fb30d2df1d9513b9d558b88a2c6dc38b"
+    },
+    {
+      "path": "test-release-090/validation/runtime/051-82-final-campaign-off.png",
+      "sha256": "3d82a3b66bc35cc049eeda7d88ba0b24065b0919c9736075f892421cd4e443bf"
+    },
+    {
+      "path": "test-release-090/validation/runtime/052-83-final-campaign-manual-all-off-assertions.json",
+      "sha256": "5ce628433422390251263cd35e4b6762bc0adce650381ff00daea173e9d2c64b"
+    },
+    {
+      "path": "test-release-090/validation/runtime/053-83-final-campaign-manual-all-off-metrics.json",
+      "sha256": "92c07f3915a750d74bacf666d9ba81cb27119b8a774f42bdcf265e29526f5406"
+    },
+    {
+      "path": "test-release-090/validation/runtime/054-83-final-campaign-manual-all-off.png",
+      "sha256": "f4b9549ad4a2e31d0df19f4b856f566577ae3d4bca33f008ed7c666fdf089577"
+    },
+    {
+      "path": "test-release-090/validation/runtime/055-84-final-ffa-default-assertions.json",
+      "sha256": "6029a2e5337936ba8ef0a2a6defc2374a0356891ef68e5fbea07a1d9f655cb8b"
+    },
+    {
+      "path": "test-release-090/validation/runtime/056-84-final-ffa-default-metrics.json",
+      "sha256": "0493a65cfa1a01c37a91ce44eb9a0e2ef12ffb23ceec88a27c4a1c163f6e6e4d"
+    },
+    {
+      "path": "test-release-090/validation/runtime/057-84-final-ffa-default.png",
+      "sha256": "11c7dbc95c4258162a09ce8525cb8f143e08152113d1ff701a7aedb0b0e1e68b"
+    },
+    {
+      "path": "test-release-090/validation/runtime/058-85-final-ffa-real-combat-on-assertions.json",
+      "sha256": "482449e197d4d9aa5c24e579a754425ebd47b70cc3d2a0d321fe39d3c8c1bbed"
+    },
+    {
+      "path": "test-release-090/validation/runtime/059-85-final-ffa-real-combat-on-metrics.json",
+      "sha256": "e354d5420f7a8f11d1e04dc7958611eaea464ca77590582799c65d3ff36727f4"
+    },
+    {
+      "path": "test-release-090/validation/runtime/060-85-final-ffa-real-combat-on.png",
+      "sha256": "a493019c0f3832c8d665e6e05a7e36ed1278ba0c01c5494e636acb888e77a3b4"
+    },
+    {
+      "path": "test-release-090/validation/runtime/061-86-final-ffa-ordinary-newborn-on-assertions.json",
+      "sha256": "3d05e2d0b9d61f7dc42a775e996c70af8a4d0c5d7d62f70026358672ade165ed"
+    },
+    {
+      "path": "test-release-090/validation/runtime/062-86-final-ffa-ordinary-newborn-on-metrics.json",
+      "sha256": "201997c6d71ba5d041be4dcd734c522d1456e868e7ba3d29b19d00b647bba2a5"
+    },
+    {
+      "path": "test-release-090/validation/runtime/063-86-final-ffa-ordinary-newborn-on.png",
+      "sha256": "aa0ccaf92ceb068b76e47783e81d9aa0aaf4ceb6957dfa73872486009114c1c4"
+    },
+    {
+      "path": "test-release-090/validation/runtime/064-87-final-ffa-off-assertions.json",
+      "sha256": "3c9d17cdb93a485c0a4bd4fd71d002d1bb3227e92499c4014d7fd7d6b26aeaf4"
+    },
+    {
+      "path": "test-release-090/validation/runtime/065-87-final-ffa-off-metrics.json",
+      "sha256": "81aca45dc71143aa0419e47c8ccad81f1954d55d985de87ed1c6474ef99127af"
+    },
+    {
+      "path": "test-release-090/validation/runtime/066-87-final-ffa-off.png",
+      "sha256": "f72248e4f145a4589d0628ea721e5945141dd0c68bba2e938621d24cb7124c58"
+    },
+    {
+      "path": "test-release-090/validation/runtime/067-90-final-mp-empty-on-assertions.json",
+      "sha256": "b3b8121d71ab01df70424d4f7b1728a1832ae64319728ca11cb89f2a13fd36bc"
+    },
+    {
+      "path": "test-release-090/validation/runtime/068-90-final-mp-empty-on-draw-color.json",
+      "sha256": "8594a420868ef6c2dd27e7ebd55ddd5c5f19dee512428ab32cb8e3d5fbcacfd2"
+    },
+    {
+      "path": "test-release-090/validation/runtime/069-90-final-mp-empty-on-java-view.json",
+      "sha256": "14e3a9a9c6a90dd4e7e0afab058bc227f449c81eecd1d8e55de5d16b46f93385"
+    },
+    {
+      "path": "test-release-090/validation/runtime/070-90-final-mp-empty-on-metrics.json",
+      "sha256": "edf09d2364d1156e889700f86ecaa713cf84a57841e5736891c0ed2e8cb0cd70"
+    },
+    {
+      "path": "test-release-090/validation/runtime/071-90-final-mp-empty-on-view-draw.png",
+      "sha256": "b42d1426e180324c7fa39bad249a640ff1b73cfeac0ec08aeb2db8b5b9549a45"
+    },
+    {
+      "path": "test-release-090/validation/runtime/072-90-final-mp-empty-on.png",
+      "sha256": "198fb2719e7118561621633a74812efaf3078b96a9697d691b5350509ee624b8"
+    },
+    {
+      "path": "test-release-090/validation/runtime/073-91-final-mp-newborn-on-metrics.json",
+      "sha256": "f3f8d5ea400c1fa9e57a079e41f8d2ce94fc1e18097ab9119829592eed99ef69"
+    },
+    {
+      "path": "test-release-090/validation/runtime/074-91-final-mp-newborn-on.png",
+      "sha256": "16ec238623959748bd8318a82215ad3e0bbed88137918b8f829af183f62b1f18"
+    },
+    {
+      "path": "test-release-090/validation/runtime/075-92-final-mp-off-deselected-metrics.json",
+      "sha256": "25c6f7f5ff114556524ff990f53c3d08b2caff06d9a9c2e5df47ad2d1eefe02a"
+    },
+    {
+      "path": "test-release-090/validation/runtime/076-92-final-mp-off-deselected.png",
+      "sha256": "4ae134af83f2c39acb1b33178f9df6ff728640a1a3d6d2f7ddc00451c5c964e3"
+    },
+    {
+      "path": "test-release-090/validation/runtime/077-93-final-mp-newborn-off-metrics.json",
+      "sha256": "8511047925d84bf2b5dbed7e1e96e12247cf6a2eec4d012ca4800c0db37f7833"
+    },
+    {
+      "path": "test-release-090/validation/runtime/078-93-final-mp-newborn-off.png",
+      "sha256": "4ae134af83f2c39acb1b33178f9df6ff728640a1a3d6d2f7ddc00451c5c964e3"
+    },
+    {
+      "path": "test-release-090/validation/runtime/079-94-final-mp-global-two-on-metrics.json",
+      "sha256": "b567799a9d543195747888853a7b244835602b3af08f07943e1c390317b08aa0"
+    },
+    {
+      "path": "test-release-090/validation/runtime/080-94-final-mp-global-two-on.png",
+      "sha256": "16ec238623959748bd8318a82215ad3e0bbed88137918b8f829af183f62b1f18"
+    },
+    {
+      "path": "test-release-090/validation/runtime/081-95-final-mp-native-movement-completed-metrics.json",
+      "sha256": "eef1e9dc184825bf2db13e9ae54ef98faa8e47bbfa3141c7be23a4cd82fe97a0"
+    },
+    {
+      "path": "test-release-090/validation/runtime/082-95-final-mp-native-movement-completed.png",
+      "sha256": "4ae134af83f2c39acb1b33178f9df6ff728640a1a3d6d2f7ddc00451c5c964e3"
+    },
+    {
+      "path": "test-release-090/validation/runtime/083-96-final-mp-native-trucks-assertions.json",
+      "sha256": "7170732d96a95b2fbc22ac59b9e048b92bc9c90a8887788c3900f620cd22299c"
+    },
+    {
+      "path": "test-release-090/validation/runtime/084-96-final-mp-native-trucks-metrics.json",
+      "sha256": "afd5beba22a2f07a6e5085bbbfc73d9a8a33efcc06cf2ec90dddf6ef9da6f4ab"
+    },
+    {
+      "path": "test-release-090/validation/runtime/085-96-final-mp-native-trucks.png",
+      "sha256": "321725291c321c3bb3c33b3d47ffb342cc587684115e41077e2d7cb55c6773ba"
+    },
+    {
+      "path": "test-release-090/validation/runtime/086-96b-final-mp-constructor-inspect-metrics.json",
+      "sha256": "7096bf5868fee5f308835633c0707afe58bb15f0916045834078a43f3f59e04d"
+    },
+    {
+      "path": "test-release-090/validation/runtime/087-96b-final-mp-constructor-inspect.png",
+      "sha256": "4ae134af83f2c39acb1b33178f9df6ff728640a1a3d6d2f7ddc00451c5c964e3"
+    },
+    {
+      "path": "test-release-090/validation/runtime/088-97-final-mp-combat-resume-painted-metrics.json",
+      "sha256": "899a54dfbba71542b19c81e3a5c23bac4361f0e87f19f4ada93e44a10a9048eb"
+    },
+    {
+      "path": "test-release-090/validation/runtime/089-97-final-mp-combat-resume-painted.png",
+      "sha256": "4ae134af83f2c39acb1b33178f9df6ff728640a1a3d6d2f7ddc00451c5c964e3"
+    },
+    {
+      "path": "test-release-090/validation/runtime/090-99-final-mp-compact-control-java-view.json",
+      "sha256": "6b195b0825d26192f60e5a1c53a9fdf1c6357f0b146b5f46d62ed71954333e27"
+    },
+    {
+      "path": "test-release-090/validation/runtime/091-99-final-mp-compact-control-view-draw.png",
+      "sha256": "f1ff3bc55412cd49a3d9f2186b919d6a89dd185d2bdfeaf8ea5640c2aa5e0594"
+    },
+    {
+      "path": "test-release-090/validation/runtime/092-99-final-mp-compact-physical-control-metrics.json",
+      "sha256": "e13735fac172663ca18c6dd93a92f8d8678c50c31e7d9a5989e46965c4350c81"
+    },
+    {
+      "path": "test-release-090/validation/runtime/093-99-final-mp-compact-physical-control.png",
+      "sha256": "e8866c8d986c0078d41913fbd96ae5b7a962415d672aad82d53b9822fdd06308"
+    },
+    {
+      "path": "test-release-090/validation/runtime/094-baseline-issues.json",
+      "sha256": "59a8b871b9fd2504ae8867bf6ff2f677b0862c21a8d4cea9b56c1b0a49add4a0"
+    },
+    {
+      "path": "test-release-090/validation/runtime/095-corrected090-installed.json",
+      "sha256": "9666c14b30fef9d21f7c792f6879c6417a09554188a77f079cf764e2ad9550a5"
+    },
+    {
+      "path": "test-release-090/validation/runtime/096-delivery-apk.json",
+      "sha256": "1c01fd08b15e4addaaef03f62fc3eba256c8b180c96bbaf8ca399f9dc7996ce1"
+    },
+    {
+      "path": "test-release-090/validation/runtime/097-emulator-software-launch.json",
+      "sha256": "f009ffb0730a4de7867b1de133dd9fea9960f667536a496e17eefa499de0ab6f"
+    },
+    {
+      "path": "test-release-090/validation/runtime/098-failed-swangle-2g-mp-paint-metrics.json",
+      "sha256": "e4b254cdf3ea9ad28b08b5c1fa33cd7bc25350c8e2a3b0024f0c988f843f5316"
+    },
+    {
+      "path": "test-release-090/validation/runtime/099-failed-swangle-2g-mp-paint.png",
+      "sha256": "4ae134af83f2c39acb1b33178f9df6ff728640a1a3d6d2f7ddc00451c5c964e3"
+    },
+    {
+      "path": "test-release-090/validation/runtime/100-final-ffa-ordinary-production.json",
+      "sha256": "e1ffbe064d796690fe2f5a2ae3afeaa6d04ea945a4774131794e2e5720db9baf"
+    },
+    {
+      "path": "test-release-090/validation/runtime/101-final-mp-ime-functional-returns.json",
+      "sha256": "2b944e162eb4acae15da8e58576d8a06d1fbdf6225bcb72ec14ceb8abaa3e836"
+    },
+    {
+      "path": "test-release-090/validation/runtime/102-final-mp-native-movement.json",
+      "sha256": "49be1be8eab7bc4264a8435ec28700b4a817145f8855fe83f3f55a748749c184"
+    },
+    {
+      "path": "test-release-090/validation/runtime/103-final-mp-ordinary-construction.json",
+      "sha256": "ffb02d66ccea86187a57c14cec0f3b13b132cd4da4b19e9f9ae732f9877db528"
+    },
+    {
+      "path": "test-release-090/validation/runtime/104-final-mp-post-ime-native-movement.json",
+      "sha256": "8e0d2467eae8f7c3d3538396f47e0fd650aafcc454e2ce79dd879bc1626e077e"
+    },
+    {
+      "path": "test-release-090/validation/runtime/105-final-mp-repeated-menu-returns.json",
+      "sha256": "22fc8274b49496b6a5e95334fcc882c2557f46588a09c046e42d514dc5ee5f88"
+    },
+    {
+      "path": "test-release-090/validation/runtime/106-final-towers-constructor-movement.json",
+      "sha256": "d195719226f542c781fc0e9e05cbbfaad191046cec817a87e38933d0213614a6"
+    },
+    {
+      "path": "test-release-090/validation/runtime/107-gpu-alternate-preservation.json",
+      "sha256": "9d6b5e3470c507b955a9a006b6fff405c7d22fadf41961519fd64b05fdb59581"
+    },
+    {
+      "path": "test-release-090/VALIDATION.json",
+      "sha256": "aff8d7bacc139adc6b12402711c28e824e4a096e0dcceee659302e54fbfe1809"
+    }
+  ],
+  "files": [
+    {
+      "path": "AGENTS.md",
+      "rootBaselineSHA256": "1fd84b33b26554098f6ab2a41d1a4db21af481574f561326a84ed0ccdc222f91",
+      "priorSHA256": "2dd3af29624eb95fdd1b2adb35da2af1eeb58d31348aea951e1c80d2c95a903d",
+      "testSHA256": "7c2992c1c014acb39fcf6f6697de3c70ed3e8d186f1c6336857c7b5eb5faaa36",
+      "bytes": 85175
+    },
+    {
+      "path": "app/build.gradle.kts",
+      "rootBaselineSHA256": "3ea7a91e8f6133074c1a7c62de1a24a12b3f8f31d18513cb9f65adda49b08417",
+      "priorSHA256": "e69f8b3ab8c4b5c5e50f663dbf4cea25b78c5afbf6c997a8113454c4576b3924",
+      "testSHA256": "bc86673538b81b921e76a6deab87ef869b57d7cc401701456e86b8736040e02f",
+      "bytes": 2991
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/index.html",
+      "rootBaselineSHA256": "a0ae7ee7fa7d4cab2245646304fe2491c0128af17ac9cedc5d2cc885ba4ef0ee",
+      "priorSHA256": "a0ae7ee7fa7d4cab2245646304fe2491c0128af17ac9cedc5d2cc885ba4ef0ee",
+      "testSHA256": "00bb8ebfb742082d623cb87463fed5f262a82cc56f679a2cafd08ef40e105ace",
+      "bytes": 7744
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/mobile-controls.js",
+      "rootBaselineSHA256": "299c4e37960a4a25ba3ec1a8acc634e8df8f55011aac58bcf3efba84149cd2d5",
+      "priorSHA256": "4b7970c51739d2eb39face85286039ad432f9074ac52b25b89128f6ae91a5c1f",
+      "testSHA256": "7bc849baf4eab088b9400b0ef5a83ff7d5782cc4ec55c646b8f2546af45866e2",
+      "bytes": 34415
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/multiplayer.css",
+      "rootBaselineSHA256": "fdb122b4b0427bd209ebb2f56285846f4a86dd2b993b1aa1d5383675b433a549",
+      "priorSHA256": "fdb122b4b0427bd209ebb2f56285846f4a86dd2b993b1aa1d5383675b433a549",
+      "testSHA256": "69f8f38349dbeaefa399703d9bac80954a50d868c4fb88cca9119cc691188ba6",
+      "bytes": 15023
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/session.js",
+      "rootBaselineSHA256": "061cbe682d7f1e2bc179e2b05b9853443d7ac325ef1ba87060383f0391b01b98",
+      "priorSHA256": "40929ede2b65ee4b1adf5ee5237a602b91ac32e944755b6247c15bed60f15588",
+      "testSHA256": "0070c120504de76c8bdc6b58a2025870966df21a7f9c9c4f1a6d8d5416b8d469",
+      "bytes": 28567
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/warzone2100.js",
+      "rootBaselineSHA256": "834f87b00f87f32630360bb15bf818ad7d63a91d0ccbb12018a9d3a53bc43a76",
+      "priorSHA256": "c1d2dd319639041486717ec606cd1d05cbf79485d869aacd6329da9c337433ea",
+      "testSHA256": "ad76aa51c6948bd05d55c0102248e20f640f66dba4bc952c79c34b32c50df6b5",
+      "bytes": 726332
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/warzone2100.wasm",
+      "rootBaselineSHA256": "1d050920393ab7be2d7871a8a269e5d5487b567bf9e46457ecb1104553c38d0d",
+      "priorSHA256": "b0586374d4f8d1e017ee88a26bb062dbb7114e2b4517cd7e7f58cc9022344125",
+      "testSHA256": "1eb6d626fefe6d3843c23ec36eda8bf566c54326ec98e46e6db6bd805e000d2f",
+      "bytes": 13667877
+    },
+    {
+      "path": "app/src/main/assets/warzone-command-pages.js",
+      "rootBaselineSHA256": "64c9d126860d333b1c5f92f1e10df4186b4e6776dd60b2f88d72f00c9c073a2e",
+      "priorSHA256": "3a28bddc853dcc65cae6a3388f715a3fbf9366053b5e03f13930e2d1b4ec5a15",
+      "testSHA256": "3d8f6c1104106e87426a45546b4b0cc0e5229147895b1712de021c8c77b289f1",
+      "bytes": 211616
+    },
+    {
+      "path": "app/src/main/assets/warzone-touch-controls.js",
+      "rootBaselineSHA256": "ab600b66e42a65e0802d14d08cf7748efe2ba40f93faf1a1ab14b7c83dc34eb9",
+      "priorSHA256": "392d069c07483677e752bf07d194e2b4bad7d3f06da59bbcb2c86f1d39fc9250",
+      "testSHA256": "e13496847769b868cc40f00c3dcfa646574dd25ccbd7f0e2f60f74b9e681ff3b",
+      "bytes": 170690
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/towers-game-controls.css",
+      "rootBaselineSHA256": "a07401b9b120bd6e12e34b3b173cfc14ae354eb5dfab2a4dd24608d1fae9e7d0",
+      "priorSHA256": "f790fa99760acf68ba580749de433dcdb21116c384e736bb53b0cf7b28078c61",
+      "testSHA256": "f56bc55685a9c57d5517319a0118541d1a2d9b1ce2b79c7b0f407579e3d94fe2",
+      "bytes": 26953
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100-campaign.js",
+      "rootBaselineSHA256": "1ae7c30db5ba69f26206a921ce4e122d7e7727cec56188e86c3663820ee420bb",
+      "priorSHA256": "ef69f6826f099dde9823532609da4bba6fbe2fe5959c094c1b69a88edc5b85fd",
+      "testSHA256": "8df0e66be281e646ddc7920a139448a8a273659e7d41a14a5c46fe8e876394f5",
+      "bytes": 795106
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100-duel.js",
+      "rootBaselineSHA256": "6ef65429d1f496bfe5c52e2d8d770b28eaf319d77cb0d61675abd5d78d5420b5",
+      "priorSHA256": "a7c479363a594385d5ac5a77b5331e6d32f7bd0a7667f123cd09cfa0c89e4fde",
+      "testSHA256": "d0c98f1a0018cc9d863d979e4c247f6cfe93db504894285824f0f39034cf82fa",
+      "bytes": 752881
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100-ffa.js",
+      "rootBaselineSHA256": "b7c403da49cfe84dc717d5b4eafaffb2079014aee44907160389d5d987327c75",
+      "priorSHA256": "28d776ac00994b0960af686be6450b06029d2571687d77ce42b4523968f76aa7",
+      "testSHA256": "1e8133490640f2db45422aa766d7ff156f1bf1cb872211413fe22c2761adf13d",
+      "bytes": 804662
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100-towers-052.js",
+      "rootBaselineSHA256": "e656e66ef6f539760cf400a4b61a3ed6e22e5d23ee984ef7db9a431c607465a7",
+      "priorSHA256": "cfc9d2d183fdfc7a8f6fe7ba82e984ea7bddd8d2c4a392d87639af1131750289",
+      "testSHA256": "2d8529307a4e2ea68efb1220efbd6a0fa3815211d0d3804d18ee0f548808e60a",
+      "bytes": 794140
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100-towers-052.wasm",
+      "rootBaselineSHA256": "2924f46aa75d9b27b92494f01d56239856ad06b2164cd7131144a3a5faeb87db",
+      "priorSHA256": "defca4e2532abce2832b22a74e0bcdf87451b4876a045bbe213d934b637a7577",
+      "testSHA256": "c8b6b025e05935216be6cf4fc9ae9556704fe8b563757b9fddeb912172b0b404",
+      "bytes": 13584698
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100.js",
+      "rootBaselineSHA256": "fdf0c4807323b15a00cbe92947db2fb6b2da771384af9f3fba08fc5be03c5949",
+      "priorSHA256": "80f54324b5b8861c5e07c14becdd37eccccb502271cc37f622d6b214453ff92c",
+      "testSHA256": "3022028a1c14dabdf1fe6415b7e2beeb3643785416aa7c59bf41f55d1ed5889f",
+      "bytes": 794145
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100.wasm",
+      "rootBaselineSHA256": "497c65308d3e85f0b5370ec0ff0eb48e6a0876e735ad45e3b280829c7f3c2a06",
+      "priorSHA256": "eefcf462ba169877d276cdb92773d8fa16fe8f9a6070222275166fa9ffa6a144",
+      "testSHA256": "c8fb51b3c8d8c84d1ef97fd0d909fad4b806ef3af80673ffd8599b4eba9f46e3",
+      "bytes": 13587004
+    },
+    {
+      "path": "release-records/PLAYERS-AUDIT-AND-CHECKS.md",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "f5ae1bde05b2a4caf850fe54c9d707165a50aa32eca54faf02e6228d105d4cc9",
+      "bytes": 9395
+    },
+    {
+      "path": "release-records/initial-fallback.json",
+      "rootBaselineSHA256": null,
+      "priorSHA256": "41737cc106f1830897801a929a400bed3816491e388a8015bdea95df65702f16",
+      "testSHA256": "7be36a1ea1d35b221b7123e6d0c0972176cf649cb70283f1cf0bbe3c74d0abdd",
+      "bytes": 1100
+    },
+    {
+      "path": "release-records/players-combat-regression-091.json",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "eb9a6b04a30123d9537d24046a89dc85468c4d460a2372f2b29436731df3afba",
+      "bytes": 13817
+    },
+    {
+      "path": "release-records/players-native-ui-review-091.json",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "a2e68140e423e1ea4d2e94e2930e31bc44f1ae67382d9add69f7bdc18fe6524c",
+      "bytes": 3589
+    },
+    {
+      "path": "release-records/players-ui-091-checks.json",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "9497993f1bfd9c927443d2817fe851ce016d913115a2ad4361acc69f8c12ee84",
+      "bytes": 14079
+    },
+    {
+      "path": "release-records/scoped-asset-changes.json",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "26cca78448e2abfa4fef684c65ba0dfcb91f4804e0830b1c6cf3e8daa8ad2ae5",
+      "bytes": 4754
+    },
+    {
+      "path": "tools/build-native-players-091.py",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "c9f40f53814bf2eab55ae9218f1ce090b117f505d5ab1c12bff44f12c35880a6",
+      "bytes": 6032
+    },
+    {
+      "path": "tools/build-native-players-cold-091.sh",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "9cd0282d14db49fa89ff3034ac0b1165e93c7d0182a6d6fcf8e8c91a60163778",
+      "bytes": 562
+    },
+    {
+      "path": "tools/build-normal-apk.py",
+      "rootBaselineSHA256": null,
+      "priorSHA256": "ba54608acdc7c5702f41dc186deb5a4c07390f7809e32ff71482b9d4d4a05f4b",
+      "testSHA256": "ba54608acdc7c5702f41dc186deb5a4c07390f7809e32ff71482b9d4d4a05f4b",
+      "bytes": 1781
+    },
+    {
+      "path": "tools/check-native-loader-pairs-091.py",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "0e5e002081e24a3b95236bef522713b152d5ae9ef3202eceb4bdc556ca5f2529",
+      "bytes": 6806
+    },
+    {
+      "path": "tools/check-native-players-091.py",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "225389400f0cf7528d06e07411febc03daccbf16a826ce7ea636fc4913e09e9d",
+      "bytes": 10791
+    },
+    {
+      "path": "tools/check-players-ui-091.cjs",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "07a30904a0098caf68cb7b8930b3f6d3b0da86057b524c4061288477732b168a",
+      "bytes": 26066
+    },
+    {
+      "path": "tools/freeze-players-assets-091.py",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "9aa5cfc8518d5fdae8c2f1b0ef64bfae53c87d3d8694a62ecc475fcb653cd1d7",
+      "bytes": 2378
+    },
+    {
+      "path": "tools/integrate-native-players-091.py",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "cd9c35e0b35d19e2afd050326cf4134d5154a5b983747bc2248c40888a914a6c",
+      "bytes": 14921
+    },
+    {
+      "path": "tools/prepare-native-players-091.py",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "20a0490bfded9acb0e9c6bb3e7f0eb336552d985621af7d048183b230f6d1696",
+      "bytes": 3163
+    },
+    {
+      "path": "tools/prepare-native-players-cold-091.py",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "3933287c453b76e513215375078a90daa3f5990f29dcbea7cd81f997563921ad",
+      "bytes": 2102
+    },
+    {
+      "path": "tools/verify-normal-apk-091.py",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "06e54d8dd5ac31b25e32f17d42505b0184ecca97cbe4d38db0ad7939c5f9b6de",
+      "bytes": 7762
+    },
+    {
+      "path": "vendor/native-091/BUILD-PLAN.md",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "f5602be1512e6d0dfe7556d341d9bcd76081c287ad7d2e5f87cea951952fbd9e",
+      "bytes": 2429
+    },
+    {
+      "path": "vendor/native-091/BUILD.md",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "88128e50d1d5899d2f2a9d3f6dc20c77c4b895399cb02636bf91893c845ec4ab",
+      "bytes": 4354
+    },
+    {
+      "path": "vendor/native-091/CONTRACT.md",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "30fd6847be81c129c453a7e76e5ff91637fc474e7ee57b30c7d30d727e6149a9",
+      "bytes": 7351
+    },
+    {
+      "path": "vendor/native-091/build-plan.json",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "1f8fa78ffdc05ba1b54756d177dfa3e0f95ff02affdd352620dff83fa4fa577e",
+      "bytes": 31761
+    },
+    {
+      "path": "vendor/native-091/checks/fixture-generic/warzone-players-nav-result-v91.json",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "d3b6b7db6d371a8efaa94a3e75faea6c5bafbe871791f40b2755477170521bae",
+      "bytes": 157
+    },
+    {
+      "path": "vendor/native-091/checks/fixture-generic/warzone-players-nav-v91.json",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "278a0d9e067739c270c254bd6e85d81cd2508b13cc48fd7db8b7090e642ddb6d",
+      "bytes": 67
+    },
+    {
+      "path": "vendor/native-091/checks/fixture-generic/warzone-players-v91.json",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "90f5d33e975306bd4b4144fd94a295c0b82c50a7b4438b17ea7e2fdb6e419ca0",
+      "bytes": 3019
+    },
+    {
+      "path": "vendor/native-091/checks/fixture-towers/warzone-players-nav-result-v91.json",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "d3b6b7db6d371a8efaa94a3e75faea6c5bafbe871791f40b2755477170521bae",
+      "bytes": 157
+    },
+    {
+      "path": "vendor/native-091/checks/fixture-towers/warzone-players-nav-v91.json",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "278a0d9e067739c270c254bd6e85d81cd2508b13cc48fd7db8b7090e642ddb6d",
+      "bytes": 67
+    },
+    {
+      "path": "vendor/native-091/checks/fixture-towers/warzone-players-v91.json",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "5c9c8b86465f9fa8186d4d04b03454436398246117101f02ae4518f05f1e5df8",
+      "bytes": 3032
+    },
+    {
+      "path": "vendor/native-091/checks/loader-pairs.json",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "7e6f1bcd80a5e375ec264f321ebb816147a42c21a3bfa6bdf687cee85bf705df",
+      "bytes": 14933
+    },
+    {
+      "path": "vendor/native-091/checks/source-checks.json",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "0255040758c872c79a45fb47ebbe552a5e163224520176a4728acc7712666e4c",
+      "bytes": 545
+    },
+    {
+      "path": "vendor/native-091/integrated/multiplayer/runtime-integration.json",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "492ba91f1fc4130eb65a20ffc10e1f629948098763d516fc1a6e8ec225d5cb59",
+      "bytes": 4050
+    },
+    {
+      "path": "vendor/native-091/integrated/shared-campaign/runtime-integration.json",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "10fd983375172e1ad9737a7e0456cad10089d03aff7755243a60c931ac3c38e3",
+      "bytes": 3960
+    },
+    {
+      "path": "vendor/native-091/integrated/shared-duel/runtime-integration.json",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "7cb877dac48f61400b09e397f31cee3edef4140ec3ed34fbc7a4e047a820aeaf",
+      "bytes": 3935
+    },
+    {
+      "path": "vendor/native-091/integrated/shared-ffa/runtime-integration.json",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "6823b00f65be97218474f0865c8474e936e0acb0eda576414bbcc83359ac6303",
+      "bytes": 3935
+    },
+    {
+      "path": "vendor/native-091/integrated/shared/runtime-integration.json",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "788810b5e5d46dccc5652805a5a6ddadd3955d1172448d369285492f89ff9baa",
+      "bytes": 4281
+    },
+    {
+      "path": "vendor/native-091/integrated/towers/runtime-integration.json",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "a7d73363906b0660f68743166fc4262814592cf68b3dca93961727e3053e3684",
+      "bytes": 4119
+    },
+    {
+      "path": "vendor/native-091/logs/compile-multiplayer-quickjs_backend.cpp.log",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "vendor/native-091/logs/compile-multiplayer-spectatorwidgets.cpp.log",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "vendor/native-091/logs/compile-offline-spectatorwidgets.cpp.log",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "vendor/native-091/logs/compile-shared-hci.cpp.log",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "vendor/native-091/logs/compile-towers-hci.cpp.log",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "vendor/native-091/logs/link-multiplayer.log",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "ccddb57ff85231dc46bd7945c7f1d77948272be7114626858ce4e4e31adfdd60",
+      "bytes": 154
+    },
+    {
+      "path": "vendor/native-091/logs/link-shared.log",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "ccddb57ff85231dc46bd7945c7f1d77948272be7114626858ce4e4e31adfdd60",
+      "bytes": 154
+    },
+    {
+      "path": "vendor/native-091/logs/link-towers.log",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "ccddb57ff85231dc46bd7945c7f1d77948272be7114626858ce4e4e31adfdd60",
+      "bytes": 154
+    },
+    {
+      "path": "vendor/native-091/native-build.json",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "ce7bc53fcf0cf0b6c8d2ac69d92d06195f456092c56b1816f85cc19336efee17",
+      "bytes": 125840
+    },
+    {
+      "path": "vendor/native-091/patches/multiplayer/quickjs_backend.cpp.patch",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "7034b7493a08e00b5000d7593a54f3a7c13703dcd1080bd67a12a4256a328780",
+      "bytes": 725
+    },
+    {
+      "path": "vendor/native-091/patches/multiplayer/spectatorwidgets.cpp.patch",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "f92267522ba912a61eb3688c404d3919763cd2078f0ebc576e328dfdac3364da",
+      "bytes": 493
+    },
+    {
+      "path": "vendor/native-091/patches/offline/hci.cpp.patch",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "b9bf6134d1b6278f2bdec032af8f9fb9f80f2b9a2d71cb7e4b0bf05c211123eb",
+      "bytes": 687
+    },
+    {
+      "path": "vendor/native-091/patches/offline/spectatorwidgets.cpp.patch",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "f92267522ba912a61eb3688c404d3919763cd2078f0ebc576e328dfdac3364da",
+      "bytes": 493
+    },
+    {
+      "path": "vendor/native-091/proof/multiplayer-cache-after.json",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "7bbd08fafdeb854ae6a44e59910d1d2a08427ca27f71134bdd67df48ce8d5998",
+      "bytes": 98636
+    },
+    {
+      "path": "vendor/native-091/proof/multiplayer-cache-before.json",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "7bbd08fafdeb854ae6a44e59910d1d2a08427ca27f71134bdd67df48ce8d5998",
+      "bytes": 98636
+    },
+    {
+      "path": "vendor/native-091/proof/native-build-before-former-participant.json",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "26507f8f081d1e2172ca98da3d8f98e1facbd3d882007fd7c95334d5da97f6f9",
+      "bytes": 125845
+    },
+    {
+      "path": "vendor/native-091/proof/native-build-before-native-name-fallback.json",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "3acad08ffde2b4efb7469572ea44152479055b3d3a3915ab3d296878f681fd3b",
+      "bytes": 125843
+    },
+    {
+      "path": "vendor/native-091/proof/offline-cache-after.json",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "779f7a83aa6f936e58e86bc870e79e0be64e7667ef8c131c4a1b7cfe80bf0e78",
+      "bytes": 98636
+    },
+    {
+      "path": "vendor/native-091/proof/offline-cache-before.json",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "779f7a83aa6f936e58e86bc870e79e0be64e7667ef8c131c4a1b7cfe80bf0e78",
+      "bytes": 98636
+    },
+    {
+      "path": "vendor/native-091/proof/protocol-header.h",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "4be9b0d6ada7ee383824bfe54e3ee4e3986c2a868d9a75bfe9fff6b84ee870ec",
+      "bytes": 409
+    },
+    {
+      "path": "vendor/native-091/recipes/build-native-blueprint.sh",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "6f3835c7eb8441c216f7e0b056affe22b34eb60e2985341029c866ca75e9bc26",
+      "bytes": 2668
+    },
+    {
+      "path": "vendor/native-091/recipes/integrate-multiplayer-native-082.py",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "e7ecf6b41df3f5395fc7a596de6d2847642fec15ffbf4511baf194955479d6e6",
+      "bytes": 3599
+    },
+    {
+      "path": "vendor/native-091/recipes/integrate-native-runtime.py",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "30014384925fdb0dda52d338244fd07d300c1223b841d56e8443a85b77e34ee3",
+      "bytes": 9705
+    },
+    {
+      "path": "vendor/native-091/runtime-integration.json",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "db1d80cc935abe6dbc8135a369f1f63c00c360e7f53ea9e5a612d28422553cd4",
+      "bytes": 27608
+    },
+    {
+      "path": "vendor/native-091/source-preparation.json",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "1254d77afebce9e1ce6bee74abfb9d816fb2aa7dc231450e5b0b2f83b0cb5243",
+      "bytes": 1316
+    },
+    {
+      "path": "vendor/native-091/source-provenance-manifest.json",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "94846f0e38a4f0638b0ed7cfa12b5af4389fb64944445062f64ec10e9e43265b",
+      "bytes": 12823
+    },
+    {
+      "path": "vendor/native-091/source/common/mobile-players-policy-v91.h",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "6e498f70634524943c4760470185b49f615af3d7233ed6f5b83c632722919947",
+      "bytes": 1351
+    },
+    {
+      "path": "vendor/native-091/source/common/mobile-players-v91.h",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "5b244c443a59c2d33d5e06085026aa3625bcaa67eed90c34c52336f1f8c3696a",
+      "bytes": 12626
+    },
+    {
+      "path": "vendor/native-091/source/multiplayer/src/quickjs_backend.cpp",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "8de0c082a38e968095744aaa02780642f60f4d359598f796e9c61ca69551b60e",
+      "bytes": 192893
+    },
+    {
+      "path": "vendor/native-091/source/multiplayer/src/spectatorwidgets.cpp",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "c5e50dbef910c1e7cd0677324bb1d14840635b9777812f18dabd526b5d83b0b7",
+      "bytes": 32328
+    },
+    {
+      "path": "vendor/native-091/source/offline/src/hci.cpp",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "32340899af584361043417a7f2029d9ec24300004d293a5034361993b7c0c8b7",
+      "bytes": 115713
+    },
+    {
+      "path": "vendor/native-091/source/offline/src/spectatorwidgets.cpp",
+      "rootBaselineSHA256": null,
+      "priorSHA256": null,
+      "testSHA256": "c5e50dbef910c1e7cd0677324bb1d14840635b9777812f18dabd526b5d83b0b7",
+      "bytes": 32328
+    }
+  ]
+}

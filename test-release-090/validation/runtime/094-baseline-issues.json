@@ -1,0 +1,66 @@
+{
+  "baselineAPK_SHA256": "dc1a273437f8393e66ebfbdb8886b06a4ddab82dec419553165bb07611efdf38",
+  "freshBaselinePhase": "Campaign original realnative checkpoint, player0, worldSafe=true, frame249+",
+  "physicalViewport": [
+    2400,
+    1080
+  ],
+  "nativeCombatIds": [
+    160025,
+    160087,
+    160089,
+    160091,
+    160287
+  ],
+  "firstTap": {
+    "intentAllCombat": true,
+    "selectedAll5": true,
+    "textRGB": [
+      99,
+      230,
+      130
+    ],
+    "backgroundRGB": [
+      37,
+      37,
+      37
+    ]
+  },
+  "secondTap": {
+    "intentAllCombat": false,
+    "ariaPressed": false,
+    "nativeSelectedStill5": true,
+    "textStillGreen": true,
+    "desiredOffDeselectMissing": true
+  },
+  "actualBackgroundPixelAt732_30": [
+    37,
+    37,
+    37
+  ],
+  "whiteCornerPixelsNearNativeCombat160287": 82,
+  "cornersVisuallyPresent": true,
+  "existingNewProductionEvidence": "C:/timerApp/normal-update-089-20261116/73-b2-ffa-second-new-unit-state-metrics.json",
+  "issues": [
+    "OFFintent remains visuallyGREEN and keeps5nativecombatselected",
+    "buttonsurface#252525 instead ofblack#000",
+    "white native selectioncorners remain",
+    "existing exact89 FFA newunit completion leftnewunit unselected and turnedWHITE despiteONintent"
+  ],
+  "candidateChecklist": [
+    "latchedON staysgreen acrossnativeframes/selection/menus/panning",
+    "global allownedcombat acrossmap + allnewcombat automaticallyincluded; constructors excluded",
+    "secondtoggleOFF clearslatch and DESELECTS",
+    "actualCSS#000 + sampledblack background, actualgreen/whitetextpixels",
+    "bothhorizontalhealthbars andwhiteselectioncorners absentall4modes",
+    "normalnativeinput/orders/production/layout regressions scopedtochanges"
+  ],
+  "fixtureRecovery": {
+    "oneOwnedEmulatorSystemUIStartupANR": true,
+    "component": "com.android.systemui",
+    "resolvedWith": "oneWait on specificSystemUI dialog; appMainalive; subsequentnativeCampaignhealthy",
+    "noAppReloadOrDataReset": true
+  },
+  "fallbackFullUserdata": "fallback-normal089-userdata.json",
+  "appSourceEdits": false
+}

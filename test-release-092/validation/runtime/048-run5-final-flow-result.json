@@ -1,0 +1,3181 @@
+{
+  "status": "incomplete",
+  "firstJobAlreadyCompleted": "run5-existing-production-after-bound.json",
+  "independentSecondOrdinaryProduction": true,
+  "steps": {
+    "preflight": {
+      "brief": {
+        "commands": {
+          "buildOpen": false,
+          "closes": 1,
+          "exitingBuild": false,
+          "factory": 160411,
+          "nativeClosing": false,
+          "nativeMenu": "",
+          "navigationRevision": 4,
+          "opens": 2,
+          "page": "factory",
+          "pending": 1,
+          "pendingItem": "",
+          "placement": "",
+          "productionFeedback": {
+            "message": "",
+            "tone": "done"
+          },
+          "productionPending": [],
+          "selectingTrucks": false
+        },
+        "native": {
+          "canIssueOrders": true,
+          "combatLock": {
+            "activation": "mp-combat-user-1794941741780-1",
+            "combatIds": [
+              160691
+            ],
+            "context": "native-combat90:40825:1:1",
+            "deselectAppliedNonce": "",
+            "deselectNonce": "",
+            "enabled": true,
+            "pendingDeselect": false,
+            "reason": "temporary",
+            "requestNonce": "mp-combat-1794941757246-8",
+            "requestedSuspended": true,
+            "revision": 7,
+            "selectedIds": [],
+            "suspended": true
+          },
+          "frame": 803,
+          "gameTime": 79302,
+          "phase": "game",
+          "player": 1,
+          "realPlayer": 1,
+          "rendered": true,
+          "spectator": false,
+          "worldSafe": true
+        },
+        "players": {
+          "availableTabs": [
+            "participants",
+            "spectators"
+          ],
+          "context": "players91:40825:1",
+          "detailTab": "economy",
+          "nativeMenu": null,
+          "open": false,
+          "pending": false,
+          "ready": true,
+          "tab": "participants",
+          "viewRevision": 1,
+          "viewer": {
+            "canIssueOrders": true,
+            "ownsViewedPlayer": true,
+            "realPlayer": 1,
+            "role": "player",
+            "viewedPlayer": 1
+          }
+        },
+        "room": null,
+        "session": {
+          "active": true,
+          "errors": [
+            "warning |18:53:15: [buildFeature:255] Feature not aligned. position (11392,3328), size (1,1) (**Further warnings of this type are suppressed.)",
+            "warning |18:53:15: [buildFeature:255] Feature not aligned. position (6784,10112), size (1,1) (**Further warnings of this type are suppressed.)",
+            "warning |18:53:15: [buildFeature:255] Feature not aligned. position (10752,8704), size (1,1) (**Further warnings of this type are suppressed.)"
+          ],
+          "phase": "game"
+        },
+        "touch": {
+          "activeJob": null,
+          "combatOverride": "",
+          "heldKeys": [],
+          "heldMouse": null,
+          "pendingClicks": 0,
+          "pointers": 0,
+          "queued": 0
+        }
+      },
+      "native": {
+        "action": "state",
+        "gameTime": 80402,
+        "nonce": "cmd-1794942028267-276",
+        "ok": true,
+        "reason": "",
+        "result": {
+          "alwaysQueue": true,
+          "buildings": [
+            {
+              "id": "A0CyborgFactory",
+              "power": 100
+            },
+            {
+              "id": "A0FacMod1",
+              "power": 100
+            },
+            {
+              "id": "A0HardcreteMk1CWall",
+              "power": 25
+            },
+            {
+              "id": "A0HardcreteMk1Gate",
+              "power": 50
+            },
+            {
+              "id": "A0HardcreteMk1Wall",
+              "power": 25
+            },
+            {
+              "id": "A0LightFactory",
+              "power": 100
+            },
+            {
+              "id": "A0PowMod1",
+              "power": 0
+            },
+            {
+              "id": "A0PowerGenerator",
+              "power": 50
+            },
+            {
+              "id": "A0ResearchFacility",
+              "power": 100
+            },
+            {
+              "id": "A0ResearchModule1",
+              "power": 100
+            },
+            {
+              "id": "A0ResourceExtractor",
+              "power": 0
+            },
+            {
+              "id": "A0TankTrap",
+              "power": 15
+            },
+            {
+              "id": "GuardTower1",
+              "power": 100
+            },
+            {
+              "id": "GuardTower6",
+              "power": 100
+            },
+            {
+              "id": "PillBox1",
+              "power": 100
+            },
+            {
+              "id": "PillBox4",
+              "power": 100
+            },
+            {
+              "id": "PillBox5",
+              "power": 100
+            },
+            {
+              "id": "Sys-SensoTower01",
+              "power": 50
+            },
+            {
+              "id": "Sys-SensoTower02",
+              "power": 100
+            },
+            {
+              "id": "WallTower02",
+              "power": 100
+            }
+          ],
+          "construction": [],
+          "constructionSites": [],
+          "facilityBlockers": [
+            {
+              "bodySize": 1,
+              "id": 160691,
+              "x": 12,
+              "y": 10,
+              "z": 2
+            },
+            {
+              "bodySize": 1,
+              "id": 160007,
+              "x": 14,
+              "y": 10,
+              "z": 2
+            },
+            {
+              "bodySize": 1,
+              "id": 160005,
+              "x": 15,
+              "y": 10,
+              "z": 2
+            }
+          ],
+          "facilityTargets": [
+            {
+              "breadth": 3,
+              "id": 160409,
+              "itemId": "A0LightFactory",
+              "kind": "factory",
+              "moduleId": "A0FacMod1",
+              "modules": 0,
+              "nativeStatus": 1,
+              "ready": true,
+              "width": 3,
+              "x": 6,
+              "y": 8,
+              "z": 2
+            },
+            {
+              "breadth": 3,
+              "id": 160411,
+              "itemId": "A0LightFactory",
+              "kind": "factory",
+              "moduleId": "A0FacMod1",
+              "modules": 1,
+              "nativeStatus": 1,
+              "ready": true,
+              "width": 3,
+              "x": 10,
+              "y": 8,
+              "z": 2
+            },
+            {
+              "breadth": 2,
+              "id": 160431,
+              "itemId": "A0ResearchFacility",
+              "kind": "research",
+              "moduleId": "A0ResearchModule1",
+              "modules": 1,
+              "nativeStatus": 1,
+              "ready": true,
+              "width": 2,
+              "x": 9,
+              "y": 5,
+              "z": 2
+            },
+            {
+              "breadth": 2,
+              "id": 160435,
+              "itemId": "A0ResearchFacility",
+              "kind": "research",
+              "moduleId": "A0ResearchModule1",
+              "modules": 1,
+              "nativeStatus": 1,
+              "ready": true,
+              "width": 2,
+              "x": 12,
+              "y": 5,
+              "z": 2
+            },
+            {
+              "breadth": 2,
+              "id": 160457,
+              "itemId": "A0CyborgFactory",
+              "kind": "cyborg",
+              "moduleId": "",
+              "modules": 0,
+              "nativeStatus": 1,
+              "ready": true,
+              "width": 1,
+              "x": 14,
+              "y": 8,
+              "z": 2
+            }
+          ],
+          "factories": [
+            {
+              "active": null,
+              "currentProduction": null,
+              "id": 160409,
+              "idle": true,
+              "kind": "Factory",
+              "modules": 0,
+              "number": 1,
+              "progress": {
+                "available": false,
+                "completedBuildPoints": null,
+                "currentId": "",
+                "currentName": "",
+                "ratio": null,
+                "state": "idle",
+                "templateId": null,
+                "totalBuildPoints": null
+              },
+              "queue": [],
+              "queueKnown": true,
+              "ready": true,
+              "repeat": {
+                "design": null,
+                "enabled": false,
+                "key": ""
+              },
+              "templates": [
+                "ConstructionDroid",
+                "native:[\"Design 1 \u00b7 F160411\",\"Body1REC\",\"wheeled01\",[\"MG1Mk1\"],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]"
+              ],
+              "type": 1,
+              "waitingReason": null,
+              "x": 6,
+              "y": 8
+            },
+            {
+              "active": null,
+              "currentProduction": null,
+              "id": 160411,
+              "idle": true,
+              "kind": "Factory",
+              "modules": 1,
+              "number": 2,
+              "progress": {
+                "available": false,
+                "completedBuildPoints": null,
+                "currentId": "",
+                "currentName": "",
+                "ratio": null,
+                "state": "idle",
+                "templateId": null,
+                "totalBuildPoints": null
+              },
+              "queue": [],
+              "queueKnown": true,
+              "ready": true,
+              "repeat": {
+                "design": null,
+                "enabled": false,
+                "key": ""
+              },
+              "templates": [
+                "ConstructionDroid",
+                "native:[\"Design 1 \u00b7 F160411\",\"Body1REC\",\"wheeled01\",[\"MG1Mk1\"],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]"
+              ],
+              "type": 1,
+              "waitingReason": null,
+              "x": 10,
+              "y": 8
+            },
+            {
+              "active": null,
+              "currentProduction": null,
+              "id": 160457,
+              "idle": true,
+              "kind": "Cyborg factory",
+              "modules": 0,
+              "number": 3,
+              "progress": {
+                "available": false,
+                "completedBuildPoints": null,
+                "currentId": "",
+                "currentName": "",
+                "ratio": null,
+                "state": "idle",
+                "templateId": null,
+                "totalBuildPoints": null
+              },
+              "queue": [],
+              "queueKnown": true,
+              "ready": true,
+              "repeat": {
+                "design": null,
+                "enabled": false,
+                "key": ""
+              },
+              "templates": [
+                "Cyb-Cannon-GROUND",
+                "Cyb-Chain-GROUND",
+                "Cyb-ComEng",
+                "Cyb-Flamer-GROUND",
+                "Cyb-Gren",
+                "Cyb-Mechanic"
+              ],
+              "type": 16,
+              "waitingReason": null,
+              "x": 14,
+              "y": 8
+            }
+          ],
+          "finishedBuilds": [],
+          "finishedUnits": [],
+          "gameTime": 80402,
+          "hasHQ": true,
+          "jobs": [],
+          "mapHeight": 96,
+          "mapWidth": 96,
+          "moduleTargets": [
+            {
+              "breadth": 3,
+              "eligible": true,
+              "id": 160409,
+              "itemId": "A0LightFactory",
+              "kind": "FACTORY",
+              "maximum": 2,
+              "moduleId": "A0FacMod1",
+              "modules": 0,
+              "name": "Factory",
+              "nativeStatus": 1,
+              "reserved": 0,
+              "status": "eligible",
+              "statusReason": "",
+              "width": 3,
+              "x": 6,
+              "y": 8,
+              "z": 2
+            },
+            {
+              "breadth": 3,
+              "eligible": true,
+              "id": 160411,
+              "itemId": "A0LightFactory",
+              "kind": "FACTORY",
+              "maximum": 2,
+              "moduleId": "A0FacMod1",
+              "modules": 1,
+              "name": "Factory",
+              "nativeStatus": 1,
+              "reserved": 0,
+              "status": "eligible",
+              "statusReason": "",
+              "width": 3,
+              "x": 10,
+              "y": 8,
+              "z": 2
+            },
+            {
+              "breadth": 2,
+              "eligible": false,
+              "id": 160427,
+              "itemId": "A0PowerGenerator",
+              "kind": "POWER GENERATOR",
+              "maximum": 1,
+              "moduleId": "A0PowMod1",
+              "modules": 1,
+              "name": "Power Generator",
+              "nativeStatus": 1,
+              "reserved": 0,
+              "status": "full",
+              "statusReason": "module-limit",
+              "width": 2,
+              "x": 21,
+              "y": 6,
+              "z": 3
+            },
+            {
+              "breadth": 2,
+              "eligible": false,
+              "id": 160431,
+              "itemId": "A0ResearchFacility",
+              "kind": "RESEARCH",
+              "maximum": 1,
+              "moduleId": "A0ResearchModule1",
+              "modules": 1,
+              "name": "Research Facility",
+              "nativeStatus": 1,
+              "reserved": 0,
+              "status": "full",
+              "statusReason": "module-limit",
+              "width": 2,
+              "x": 9,
+              "y": 5,
+              "z": 2
+            },
+            {
+              "breadth": 2,
+              "eligible": false,
+              "id": 160435,
+              "itemId": "A0ResearchFacility",
+              "kind": "RESEARCH",
+              "maximum": 1,
+              "moduleId": "A0ResearchModule1",
+              "modules": 1,
+              "name": "Research Facility",
+              "nativeStatus": 1,
+              "reserved": 0,
+              "status": "full",
+              "statusReason": "module-limit",
+              "width": 2,
+              "x": 12,
+              "y": 5,
+              "z": 2
+            }
+          ],
+          "nativeBuildOptions": [
+            "A0ADemolishStructure",
+            "A0CyborgFactory",
+            "A0FacMod1",
+            "A0HardcreteMk1Gate",
+            "A0HardcreteMk1Wall",
+            "A0LightFactory",
+            "A0PowMod1",
+            "A0PowerGenerator",
+            "A0ResearchFacility",
+            "A0ResearchModule1",
+            "A0ResourceExtractor",
+            "A0TankTrap",
+            "GuardTower1",
+            "GuardTower6",
+            "PillBox1",
+            "PillBox4",
+            "PillBox5",
+            "Sys-SensoTower01",
+            "Sys-SensoTower02",
+            "WallTower02"
+          ],
+          "nativeMenu": "",
+          "parts": [
+            "Body1REC",
+            "HalfTrack",
+            "wheeled01",
+            "Cannon1-VTOL",
+            "Cannon1Mk1",
+            "Flame1Mk1",
+            "MG1-VTOL",
+            "MG1Mk1",
+            "MG2-VTOL",
+            "MG2Mk1",
+            "Mortar1Mk1",
+            "Rocket-Pod",
+            "Rocket-VTOL-Pod",
+            "SensorTurret1Mk1",
+            "LightRepair1",
+            "Spade1Mk1",
+            "CommandBrain01"
+          ],
+          "player": 1,
+          "power": 2756,
+          "recoveryContext": "",
+          "researchQueues": [
+            {
+              "labId": 160435,
+              "topicIds": []
+            },
+            {
+              "labId": 160431,
+              "topicIds": []
+            }
+          ],
+          "rewards": null,
+          "selectedUnits": [],
+          "templates": [
+            {
+              "body": "Body1REC",
+              "brain": "ZNULLBRAIN",
+              "construct": "Spade1Mk1",
+              "cost": 62,
+              "droidType": 3,
+              "ecm": "ZNULLECM",
+              "fullname": "Truck Viper Wheels",
+              "id": "ConstructionDroid",
+              "name": "ConstructionDroid",
+              "points": 310,
+              "power": 62,
+              "propulsion": "wheeled01",
+              "repair": "ZNULLREPAIR",
+              "sensor": "ZNULLSENSOR",
+              "weapons": []
+            },
+            {
+              "body": "CyborgLightBody",
+              "brain": "ZNULLBRAIN",
+              "construct": "ZNULLCONSTRUCT",
+              "cost": 87,
+              "droidType": 5,
+              "ecm": "ZNULLECM",
+              "fullname": "Heavy Gunner Cyborg",
+              "id": "Cyb-Cannon-GROUND",
+              "name": "Cyb-Cannon-GROUND",
+              "points": 382,
+              "power": 87,
+              "propulsion": "CyborgLegs",
+              "repair": "ZNULLREPAIR",
+              "sensor": "ZNULLSENSOR",
+              "weapons": [
+                "CyborgCannon"
+              ]
+            },
+            {
+              "body": "CyborgLightBody",
+              "brain": "ZNULLBRAIN",
+              "construct": "ZNULLCONSTRUCT",
+              "cost": 67,
+              "droidType": 5,
+              "ecm": "ZNULLECM",
+              "fullname": "Machinegunner Cyborg",
+              "id": "Cyb-Chain-GROUND",
+              "name": "Cyb-Chain-GROUND",
+              "points": 302,
+              "power": 67,
+              "propulsion": "CyborgLegs",
+              "repair": "ZNULLREPAIR",
+              "sensor": "ZNULLSENSOR",
+              "weapons": [
+                "CyborgChaingun"
+              ]
+            },
+            {
+              "body": "CyborgLightBody",
+              "brain": "ZNULLBRAIN",
+              "construct": "CyborgSpade",
+              "cost": 37,
+              "droidType": 10,
+              "ecm": "ZNULLECM",
+              "fullname": "Combat Engineer Cyborg",
+              "id": "Cyb-ComEng",
+              "name": "Cyb-ComEng",
+              "points": 207,
+              "power": 37,
+              "propulsion": "CyborgLegs",
+              "repair": "ZNULLREPAIR",
+              "sensor": "ZNULLSENSOR",
+              "weapons": []
+            },
+            {
+              "body": "CyborgLightBody",
+              "brain": "ZNULLBRAIN",
+              "construct": "ZNULLCONSTRUCT",
+              "cost": 82,
+              "droidType": 5,
+              "ecm": "ZNULLECM",
+              "fullname": "Flamer Cyborg",
+              "id": "Cyb-Flamer-GROUND",
+              "name": "Cyb-Flamer-GROUND",
+              "points": 342,
+              "power": 82,
+              "propulsion": "CyborgLegs",
+              "repair": "ZNULLREPAIR",
+              "sensor": "ZNULLSENSOR",
+              "weapons": [
+                "CyborgFlamer01"
+              ]
+            },
+            {
+              "body": "CyborgLightBody",
+              "brain": "ZNULLBRAIN",
+              "construct": "ZNULLCONSTRUCT",
+              "cost": 107,
+              "droidType": 5,
+              "ecm": "ZNULLECM",
+              "fullname": "Grenadier Cyborg",
+              "id": "Cyb-Gren",
+              "name": "Cyb-Gren",
+              "points": 462,
+              "power": 107,
+              "propulsion": "CyborgLegs",
+              "repair": "ZNULLREPAIR",
+              "sensor": "ZNULLSENSOR",
+              "weapons": [
+                "Cyb-Wpn-Grenade"
+              ]
+            },
+            {
+              "body": "CyborgLightBody",
+              "brain": "ZNULLBRAIN",
+              "construct": "ZNULLCONSTRUCT",
+              "cost": 62,
+              "droidType": 11,
+              "ecm": "ZNULLECM",
+              "fullname": "Mechanic Cyborg",
+              "id": "Cyb-Mechanic",
+              "name": "Cyb-Mechanic",
+              "points": 242,
+              "power": 62,
+              "propulsion": "CyborgLegs",
+              "repair": "CyborgRepair",
+              "sensor": "ZNULLSENSOR",
+              "weapons": []
+            },
+            {
+              "body": "Body1REC",
+              "brain": "ZNULLBRAIN",
+              "construct": "ZNULLCONSTRUCT",
+              "cost": 55,
+              "droidType": 0,
+              "ecm": "ZNULLECM",
+              "fullname": "Design 1 \u00b7 F160411",
+              "id": "native:[\"Design 1 \u00b7 F160411\",\"Body1REC\",\"wheeled01\",[\"MG1Mk1\"],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+              "name": "",
+              "points": 275,
+              "power": 55,
+              "propulsion": "wheeled01",
+              "repair": "ZNULLREPAIR",
+              "sensor": "ZNULLSENSOR",
+              "weapons": [
+                "MG1Mk1"
+              ]
+            }
+          ],
+          "trucks": [
+            {
+              "action": 0,
+              "building": false,
+              "id": 160007,
+              "order": 0,
+              "queued": 0,
+              "rate": 9,
+              "selected": false,
+              "x": 14,
+              "y": 10,
+              "z": 2
+            },
+            {
+              "action": 0,
+              "building": false,
+              "id": 160005,
+              "order": 0,
+              "queued": 0,
+              "rate": 9,
+              "selected": false,
+              "x": 15,
+              "y": 10,
+              "z": 2
+            }
+          ],
+          "version": 1
+        }
+      },
+      "priorHistory": [
+        {
+          "action": "queue-production",
+          "gameTime": 32802,
+          "nonce": "cmd-1794941779607-122",
+          "ok": true,
+          "reason": "queued",
+          "result": {
+            "count": 1,
+            "factoryId": 160411,
+            "repeat": {
+              "design": null,
+              "enabled": false,
+              "key": ""
+            }
+          }
+        }
+      ]
+    },
+    "ACKandJob": {
+      "history": [
+        {
+          "action": "queue-production",
+          "gameTime": 32802,
+          "nonce": "cmd-1794941779607-122",
+          "ok": true,
+          "reason": "queued",
+          "result": {
+            "count": 1,
+            "factoryId": 160411,
+            "repeat": {
+              "design": null,
+              "enabled": false,
+              "key": ""
+            }
+          }
+        },
+        {
+          "action": "queue-production",
+          "gameTime": 82702,
+          "nonce": "cmd-1794942041105-284",
+          "ok": true,
+          "reason": "queued",
+          "result": {
+            "count": 1,
+            "factoryId": 160411,
+            "repeat": {
+              "design": null,
+              "enabled": false,
+              "key": ""
+            }
+          }
+        }
+      ],
+      "native": {
+        "action": "state",
+        "gameTime": 84102,
+        "nonce": "cmd-1794942048116-290",
+        "ok": true,
+        "reason": "",
+        "result": {
+          "alwaysQueue": true,
+          "buildings": [
+            {
+              "id": "A0CyborgFactory",
+              "power": 100
+            },
+            {
+              "id": "A0FacMod1",
+              "power": 100
+            },
+            {
+              "id": "A0HardcreteMk1CWall",
+              "power": 25
+            },
+            {
+              "id": "A0HardcreteMk1Gate",
+              "power": 50
+            },
+            {
+              "id": "A0HardcreteMk1Wall",
+              "power": 25
+            },
+            {
+              "id": "A0LightFactory",
+              "power": 100
+            },
+            {
+              "id": "A0PowMod1",
+              "power": 0
+            },
+            {
+              "id": "A0PowerGenerator",
+              "power": 50
+            },
+            {
+              "id": "A0ResearchFacility",
+              "power": 100
+            },
+            {
+              "id": "A0ResearchModule1",
+              "power": 100
+            },
+            {
+              "id": "A0ResourceExtractor",
+              "power": 0
+            },
+            {
+              "id": "A0TankTrap",
+              "power": 15
+            },
+            {
+              "id": "GuardTower1",
+              "power": 100
+            },
+            {
+              "id": "GuardTower6",
+              "power": 100
+            },
+            {
+              "id": "PillBox1",
+              "power": 100
+            },
+            {
+              "id": "PillBox4",
+              "power": 100
+            },
+            {
+              "id": "PillBox5",
+              "power": 100
+            },
+            {
+              "id": "Sys-SensoTower01",
+              "power": 50
+            },
+            {
+              "id": "Sys-SensoTower02",
+              "power": 100
+            },
+            {
+              "id": "WallTower02",
+              "power": 100
+            }
+          ],
+          "construction": [],
+          "constructionSites": [],
+          "facilityBlockers": [
+            {
+              "bodySize": 1,
+              "id": 160691,
+              "x": 12,
+              "y": 10,
+              "z": 2
+            },
+            {
+              "bodySize": 1,
+              "id": 160007,
+              "x": 14,
+              "y": 10,
+              "z": 2
+            },
+            {
+              "bodySize": 1,
+              "id": 160005,
+              "x": 15,
+              "y": 10,
+              "z": 2
+            }
+          ],
+          "facilityTargets": [
+            {
+              "breadth": 3,
+              "id": 160409,
+              "itemId": "A0LightFactory",
+              "kind": "factory",
+              "moduleId": "A0FacMod1",
+              "modules": 0,
+              "nativeStatus": 1,
+              "ready": true,
+              "width": 3,
+              "x": 6,
+              "y": 8,
+              "z": 2
+            },
+            {
+              "breadth": 3,
+              "id": 160411,
+              "itemId": "A0LightFactory",
+              "kind": "factory",
+              "moduleId": "A0FacMod1",
+              "modules": 1,
+              "nativeStatus": 1,
+              "ready": true,
+              "width": 3,
+              "x": 10,
+              "y": 8,
+              "z": 2
+            },
+            {
+              "breadth": 2,
+              "id": 160431,
+              "itemId": "A0ResearchFacility",
+              "kind": "research",
+              "moduleId": "A0ResearchModule1",
+              "modules": 1,
+              "nativeStatus": 1,
+              "ready": true,
+              "width": 2,
+              "x": 9,
+              "y": 5,
+              "z": 2
+            },
+            {
+              "breadth": 2,
+              "id": 160435,
+              "itemId": "A0ResearchFacility",
+              "kind": "research",
+              "moduleId": "A0ResearchModule1",
+              "modules": 1,
+              "nativeStatus": 1,
+              "ready": true,
+              "width": 2,
+              "x": 12,
+              "y": 5,
+              "z": 2
+            },
+            {
+              "breadth": 2,
+              "id": 160457,
+              "itemId": "A0CyborgFactory",
+              "kind": "cyborg",
+              "moduleId": "",
+              "modules": 0,
+              "nativeStatus": 1,
+              "ready": true,
+              "width": 1,
+              "x": 14,
+              "y": 8,
+              "z": 2
+            }
+          ],
+          "factories": [
+            {
+              "active": null,
+              "currentProduction": null,
+              "id": 160409,
+              "idle": true,
+              "kind": "Factory",
+              "modules": 0,
+              "number": 1,
+              "progress": {
+                "available": false,
+                "completedBuildPoints": null,
+                "currentId": "",
+                "currentName": "",
+                "ratio": null,
+                "state": "idle",
+                "templateId": null,
+                "totalBuildPoints": null
+              },
+              "queue": [],
+              "queueKnown": true,
+              "ready": true,
+              "repeat": {
+                "design": null,
+                "enabled": false,
+                "key": ""
+              },
+              "templates": [
+                "ConstructionDroid",
+                "native:[\"Design 1 \u00b7 F160411\",\"Body1REC\",\"wheeled01\",[\"MG1Mk1\"],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]"
+              ],
+              "type": 1,
+              "waitingReason": null,
+              "x": 6,
+              "y": 8
+            },
+            {
+              "active": {
+                "design": {
+                  "body": "Body1REC",
+                  "cost": 55,
+                  "droidType": 0,
+                  "id": "design-1794860875468-1",
+                  "name": "Design 1",
+                  "native": {
+                    "body": "Body1REC",
+                    "brain": "ZNULLBRAIN",
+                    "construct": "ZNULLCONSTRUCT",
+                    "cost": 55,
+                    "droidType": 0,
+                    "ecm": "ZNULLECM",
+                    "fullname": "Design 1",
+                    "id": "",
+                    "name": "",
+                    "points": 275,
+                    "power": 55,
+                    "propulsion": "wheeled01",
+                    "repair": "ZNULLREPAIR",
+                    "sensor": "ZNULLSENSOR",
+                    "weapons": [
+                      "MG1Mk1"
+                    ]
+                  },
+                  "points": 275,
+                  "propulsion": "wheeled01",
+                  "turrets": [
+                    "MG1Mk1"
+                  ]
+                },
+                "id": "cmd-1794942041105-284-0",
+                "reason": "",
+                "started": 82702,
+                "status": "producing"
+              },
+              "currentProduction": {
+                "body": "Body1REC",
+                "brain": "ZNULLBRAIN",
+                "construct": "ZNULLCONSTRUCT",
+                "cost": 55,
+                "droidType": 0,
+                "ecm": "ZNULLECM",
+                "name": "Design 1",
+                "nativeTemplateId": 226184,
+                "points": 275,
+                "propulsion": "wheeled01",
+                "repair": "ZNULLREPAIR",
+                "sensor": "ZNULLSENSOR",
+                "turrets": [
+                  "MG1Mk1"
+                ],
+                "weapons": [
+                  "MG1Mk1"
+                ]
+              },
+              "id": 160411,
+              "idle": false,
+              "kind": "Factory",
+              "modules": 1,
+              "number": 2,
+              "progress": {
+                "available": true,
+                "completedBuildPoints": 6,
+                "currentId": "160411:226184:83902",
+                "currentName": "Design 1",
+                "ratio": 0.02181818181818182,
+                "remainingSeconds": 14,
+                "state": "building",
+                "templateId": 226184,
+                "totalBuildPoints": 275
+              },
+              "queue": [],
+              "queueKnown": true,
+              "ready": true,
+              "repeat": {
+                "design": null,
+                "enabled": false,
+                "key": ""
+              },
+              "templates": [
+                "ConstructionDroid",
+                "native:[\"Design 1 \u00b7 F160411\",\"Body1REC\",\"wheeled01\",[\"MG1Mk1\"],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]"
+              ],
+              "type": 1,
+              "waitingReason": null,
+              "x": 10,
+              "y": 8
+            },
+            {
+              "active": null,
+              "currentProduction": null,
+              "id": 160457,
+              "idle": true,
+              "kind": "Cyborg factory",
+              "modules": 0,
+              "number": 3,
+              "progress": {
+                "available": false,
+                "completedBuildPoints": null,
+                "currentId": "",
+                "currentName": "",
+                "ratio": null,
+                "state": "idle",
+                "templateId": null,
+                "totalBuildPoints": null
+              },
+              "queue": [],
+              "queueKnown": true,
+              "ready": true,
+              "repeat": {
+                "design": null,
+                "enabled": false,
+                "key": ""
+              },
+              "templates": [
+                "Cyb-Cannon-GROUND",
+                "Cyb-Chain-GROUND",
+                "Cyb-ComEng",
+                "Cyb-Flamer-GROUND",
+                "Cyb-Gren",
+                "Cyb-Mechanic"
+              ],
+              "type": 16,
+              "waitingReason": null,
+              "x": 14,
+              "y": 8
+            }
+          ],
+          "finishedBuilds": [],
+          "finishedUnits": [],
+          "gameTime": 84102,
+          "hasHQ": true,
+          "jobs": [],
+          "mapHeight": 96,
+          "mapWidth": 96,
+          "moduleTargets": [
+            {
+              "breadth": 3,
+              "eligible": true,
+              "id": 160409,
+              "itemId": "A0LightFactory",
+              "kind": "FACTORY",
+              "maximum": 2,
+              "moduleId": "A0FacMod1",
+              "modules": 0,
+              "name": "Factory",
+              "nativeStatus": 1,
+              "reserved": 0,
+              "status": "eligible",
+              "statusReason": "",
+              "width": 3,
+              "x": 6,
+              "y": 8,
+              "z": 2
+            },
+            {
+              "breadth": 3,
+              "eligible": true,
+              "id": 160411,
+              "itemId": "A0LightFactory",
+              "kind": "FACTORY",
+              "maximum": 2,
+              "moduleId": "A0FacMod1",
+              "modules": 1,
+              "name": "Factory",
+              "nativeStatus": 1,
+              "reserved": 0,
+              "status": "eligible",
+              "statusReason": "",
+              "width": 3,
+              "x": 10,
+              "y": 8,
+              "z": 2
+            },
+            {
+              "breadth": 2,
+              "eligible": false,
+              "id": 160427,
+              "itemId": "A0PowerGenerator",
+              "kind": "POWER GENERATOR",
+              "maximum": 1,
+              "moduleId": "A0PowMod1",
+              "modules": 1,
+              "name": "Power Generator",
+              "nativeStatus": 1,
+              "reserved": 0,
+              "status": "full",
+              "statusReason": "module-limit",
+              "width": 2,
+              "x": 21,
+              "y": 6,
+              "z": 3
+            },
+            {
+              "breadth": 2,
+              "eligible": false,
+              "id": 160431,
+              "itemId": "A0ResearchFacility",
+              "kind": "RESEARCH",
+              "maximum": 1,
+              "moduleId": "A0ResearchModule1",
+              "modules": 1,
+              "name": "Research Facility",
+              "nativeStatus": 1,
+              "reserved": 0,
+              "status": "full",
+              "statusReason": "module-limit",
+              "width": 2,
+              "x": 9,
+              "y": 5,
+              "z": 2
+            },
+            {
+              "breadth": 2,
+              "eligible": false,
+              "id": 160435,
+              "itemId": "A0ResearchFacility",
+              "kind": "RESEARCH",
+              "maximum": 1,
+              "moduleId": "A0ResearchModule1",
+              "modules": 1,
+              "name": "Research Facility",
+              "nativeStatus": 1,
+              "reserved": 0,
+              "status": "full",
+              "statusReason": "module-limit",
+              "width": 2,
+              "x": 12,
+              "y": 5,
+              "z": 2
+            }
+          ],
+          "nativeBuildOptions": [
+            "A0ADemolishStructure",
+            "A0CyborgFactory",
+            "A0FacMod1",
+            "A0HardcreteMk1Gate",
+            "A0HardcreteMk1Wall",
+            "A0LightFactory",
+            "A0PowMod1",
+            "A0PowerGenerator",
+            "A0ResearchFacility",
+            "A0ResearchModule1",
+            "A0ResourceExtractor",
+            "A0TankTrap",
+            "GuardTower1",
+            "GuardTower6",
+            "PillBox1",
+            "PillBox4",
+            "PillBox5",
+            "Sys-SensoTower01",
+            "Sys-SensoTower02",
+            "WallTower02"
+          ],
+          "nativeMenu": "",
+          "parts": [
+            "Body1REC",
+            "HalfTrack",
+            "wheeled01",
+            "Cannon1-VTOL",
+            "Cannon1Mk1",
+            "Flame1Mk1",
+            "MG1-VTOL",
+            "MG1Mk1",
+            "MG2-VTOL",
+            "MG2Mk1",
+            "Mortar1Mk1",
+            "Rocket-Pod",
+            "Rocket-VTOL-Pod",
+            "SensorTurret1Mk1",
+            "LightRepair1",
+            "Spade1Mk1",
+            "CommandBrain01"
+          ],
+          "player": 1,
+          "power": 2716,
+          "recoveryContext": "",
+          "researchQueues": [
+            {
+              "labId": 160435,
+              "topicIds": []
+            },
+            {
+              "labId": 160431,
+              "topicIds": []
+            }
+          ],
+          "rewards": null,
+          "selectedUnits": [],
+          "templates": [
+            {
+              "body": "Body1REC",
+              "brain": "ZNULLBRAIN",
+              "construct": "Spade1Mk1",
+              "cost": 62,
+              "droidType": 3,
+              "ecm": "ZNULLECM",
+              "fullname": "Truck Viper Wheels",
+              "id": "ConstructionDroid",
+              "name": "ConstructionDroid",
+              "points": 310,
+              "power": 62,
+              "propulsion": "wheeled01",
+              "repair": "ZNULLREPAIR",
+              "sensor": "ZNULLSENSOR",
+              "weapons": []
+            },
+            {
+              "body": "CyborgLightBody",
+              "brain": "ZNULLBRAIN",
+              "construct": "ZNULLCONSTRUCT",
+              "cost": 87,
+              "droidType": 5,
+              "ecm": "ZNULLECM",
+              "fullname": "Heavy Gunner Cyborg",
+              "id": "Cyb-Cannon-GROUND",
+              "name": "Cyb-Cannon-GROUND",
+              "points": 382,
+              "power": 87,
+              "propulsion": "CyborgLegs",
+              "repair": "ZNULLREPAIR",
+              "sensor": "ZNULLSENSOR",
+              "weapons": [
+                "CyborgCannon"
+              ]
+            },
+            {
+              "body": "CyborgLightBody",
+              "brain": "ZNULLBRAIN",
+              "construct": "ZNULLCONSTRUCT",
+              "cost": 67,
+              "droidType": 5,
+              "ecm": "ZNULLECM",
+              "fullname": "Machinegunner Cyborg",
+              "id": "Cyb-Chain-GROUND",
+              "name": "Cyb-Chain-GROUND",
+              "points": 302,
+              "power": 67,
+              "propulsion": "CyborgLegs",
+              "repair": "ZNULLREPAIR",
+              "sensor": "ZNULLSENSOR",
+              "weapons": [
+                "CyborgChaingun"
+              ]
+            },
+            {
+              "body": "CyborgLightBody",
+              "brain": "ZNULLBRAIN",
+              "construct": "CyborgSpade",
+              "cost": 37,
+              "droidType": 10,
+              "ecm": "ZNULLECM",
+              "fullname": "Combat Engineer Cyborg",
+              "id": "Cyb-ComEng",
+              "name": "Cyb-ComEng",
+              "points": 207,
+              "power": 37,
+              "propulsion": "CyborgLegs",
+              "repair": "ZNULLREPAIR",
+              "sensor": "ZNULLSENSOR",
+              "weapons": []
+            },
+            {
+              "body": "CyborgLightBody",
+              "brain": "ZNULLBRAIN",
+              "construct": "ZNULLCONSTRUCT",
+              "cost": 82,
+              "droidType": 5,
+              "ecm": "ZNULLECM",
+              "fullname": "Flamer Cyborg",
+              "id": "Cyb-Flamer-GROUND",
+              "name": "Cyb-Flamer-GROUND",
+              "points": 342,
+              "power": 82,
+              "propulsion": "CyborgLegs",
+              "repair": "ZNULLREPAIR",
+              "sensor": "ZNULLSENSOR",
+              "weapons": [
+                "CyborgFlamer01"
+              ]
+            },
+            {
+              "body": "CyborgLightBody",
+              "brain": "ZNULLBRAIN",
+              "construct": "ZNULLCONSTRUCT",
+              "cost": 107,
+              "droidType": 5,
+              "ecm": "ZNULLECM",
+              "fullname": "Grenadier Cyborg",
+              "id": "Cyb-Gren",
+              "name": "Cyb-Gren",
+              "points": 462,
+              "power": 107,
+              "propulsion": "CyborgLegs",
+              "repair": "ZNULLREPAIR",
+              "sensor": "ZNULLSENSOR",
+              "weapons": [
+                "Cyb-Wpn-Grenade"
+              ]
+            },
+            {
+              "body": "CyborgLightBody",
+              "brain": "ZNULLBRAIN",
+              "construct": "ZNULLCONSTRUCT",
+              "cost": 62,
+              "droidType": 11,
+              "ecm": "ZNULLECM",
+              "fullname": "Mechanic Cyborg",
+              "id": "Cyb-Mechanic",
+              "name": "Cyb-Mechanic",
+              "points": 242,
+              "power": 62,
+              "propulsion": "CyborgLegs",
+              "repair": "CyborgRepair",
+              "sensor": "ZNULLSENSOR",
+              "weapons": []
+            },
+            {
+              "body": "Body1REC",
+              "brain": "ZNULLBRAIN",
+              "construct": "ZNULLCONSTRUCT",
+              "cost": 55,
+              "droidType": 0,
+              "ecm": "ZNULLECM",
+              "fullname": "Design 1 \u00b7 F160411",
+              "id": "native:[\"Design 1 \u00b7 F160411\",\"Body1REC\",\"wheeled01\",[\"MG1Mk1\"],\"ZNULLCONSTRUCT\",\"ZNULLSENSOR\",\"ZNULLREPAIR\",\"ZNULLBRAIN\",\"ZNULLECM\"]",
+              "name": "",
+              "points": 275,
+              "power": 55,
+              "propulsion": "wheeled01",
+              "repair": "ZNULLREPAIR",
+              "sensor": "ZNULLSENSOR",
+              "weapons": [
+                "MG1Mk1"
+              ]
+            }
+          ],
+          "trucks": [
+            {
+              "action": 0,
+              "building": false,
+              "id": 160007,
+              "order": 0,
+              "queued": 0,
+              "rate": 9,
+              "selected": false,
+              "x": 14,
+              "y": 10,
+              "z": 2
+            },
+            {
+              "action": 0,
+              "building": false,
+              "id": 160005,
+              "order": 0,
+              "queued": 0,
+              "rate": 9,
+              "selected": false,
+              "x": 15,
+              "y": 10,
+              "z": 2
+            }
+          ],
+          "version": 1
+        }
+      }
+    },
+    "birth": {
+      "newNativeCombatID": 160693,
+      "events": [
+        {
+          "native": {
+            "canIssueOrders": true,
+            "combatLock": {
+              "activation": "mp-combat-user-1794941741780-1",
+              "combatIds": [
+                160691
+              ],
+              "context": "native-combat90:40825:1:1",
+              "deselectAppliedNonce": "",
+              "deselectNonce": "",
+              "enabled": true,
+              "pendingDeselect": false,
+              "reason": "temporary",
+              "requestNonce": "mp-combat-1794941757246-8",
+              "requestedSuspended": true,
+              "revision": 7,
+              "selectedIds": [],
+              "suspended": true
+            },
+            "frame": 890,
+            "gameTime": 88002,
+            "phase": "game",
+            "player": 1,
+            "realPlayer": 1,
+            "rendered": true,
+            "spectator": false,
+            "worldSafe": true
+          },
+          "players": {
+            "availableTabs": [
+              "participants",
+              "spectators"
+            ],
+            "context": "players91:40825:1",
+            "detailTab": "economy",
+            "nativeMenu": null,
+            "open": true,
+            "pending": false,
+            "ready": true,
+            "tab": "participants",
+            "viewRevision": 1,
+            "viewer": {
+              "canIssueOrders": true,
+              "ownsViewedPlayer": true,
+              "realPlayer": 1,
+              "role": "player",
+              "viewedPlayer": 1
+            }
+          }
+        },
+        {
+          "native": {
+            "canIssueOrders": true,
+            "combatLock": {
+              "activation": "mp-combat-user-1794941741780-1",
+              "combatIds": [
+                160691
+              ],
+              "context": "native-combat90:40825:1:1",
+              "deselectAppliedNonce": "",
+              "deselectNonce": "",
+              "enabled": true,
+              "pendingDeselect": false,
+              "reason": "temporary",
+              "requestNonce": "mp-combat-1794941757246-8",
+              "requestedSuspended": true,
+              "revision": 7,
+              "selectedIds": [],
+              "suspended": true
+            },
+            "frame": 894,
+            "gameTime": 88402,
+            "phase": "game",
+            "player": 1,
+            "realPlayer": 1,
+            "rendered": true,
+            "spectator": false,
+            "worldSafe": true
+          },
+          "players": {
+            "availableTabs": [
+              "participants",
+              "spectators"
+            ],
+            "context": "players91:40825:1",
+            "detailTab": "economy",
+            "nativeMenu": null,
+            "open": true,
+            "pending": false,
+            "ready": true,
+            "tab": "participants",
+            "viewRevision": 1,
+            "viewer": {
+              "canIssueOrders": true,
+              "ownsViewedPlayer": true,
+              "realPlayer": 1,
+              "role": "player",
+              "viewedPlayer": 1
+            }
+          }
+        },
+        {
+          "native": {
+            "canIssueOrders": true,
+            "combatLock": {
+              "activation": "mp-combat-user-1794941741780-1",
+              "combatIds": [
+                160691
+              ],
+              "context": "native-combat90:40825:1:1",
+              "deselectAppliedNonce": "",
+              "deselectNonce": "",
+              "enabled": true,
+              "pendingDeselect": false,
+              "reason": "temporary",
+              "requestNonce": "mp-combat-1794941757246-8",
+              "requestedSuspended": true,
+              "revision": 7,
+              "selectedIds": [],
+              "suspended": true
+            },
+            "frame": 898,
+            "gameTime": 88802,
+            "phase": "game",
+            "player": 1,
+            "realPlayer": 1,
+            "rendered": true,
+            "spectator": false,
+            "worldSafe": true
+          },
+          "players": {
+            "availableTabs": [
+              "participants",
+              "spectators"
+            ],
+            "context": "players91:40825:1",
+            "detailTab": "economy",
+            "nativeMenu": null,
+            "open": true,
+            "pending": false,
+            "ready": true,
+            "tab": "participants",
+            "viewRevision": 1,
+            "viewer": {
+              "canIssueOrders": true,
+              "ownsViewedPlayer": true,
+              "realPlayer": 1,
+              "role": "player",
+              "viewedPlayer": 1
+            }
+          }
+        },
+        {
+          "native": {
+            "canIssueOrders": true,
+            "combatLock": {
+              "activation": "mp-combat-user-1794941741780-1",
+              "combatIds": [
+                160691
+              ],
+              "context": "native-combat90:40825:1:1",
+              "deselectAppliedNonce": "",
+              "deselectNonce": "",
+              "enabled": true,
+              "pendingDeselect": false,
+              "reason": "temporary",
+              "requestNonce": "mp-combat-1794941757246-8",
+              "requestedSuspended": true,
+              "revision": 7,
+              "selectedIds": [],
+              "suspended": true
+            },
+            "frame": 901,
+            "gameTime": 89102,
+            "phase": "game",
+            "player": 1,
+            "realPlayer": 1,
+            "rendered": true,
+            "spectator": false,
+            "worldSafe": true
+          },
+          "players": {
+            "availableTabs": [
+              "participants",
+              "spectators"
+            ],
+            "context": "players91:40825:1",
+            "detailTab": "economy",
+            "nativeMenu": null,
+            "open": true,
+            "pending": false,
+            "ready": true,
+            "tab": "participants",
+            "viewRevision": 1,
+            "viewer": {
+              "canIssueOrders": true,
+              "ownsViewedPlayer": true,
+              "realPlayer": 1,
+              "role": "player",
+              "viewedPlayer": 1
+            }
+          }
+        },
+        {
+          "native": {
+            "canIssueOrders": true,
+            "combatLock": {
+              "activation": "mp-combat-user-1794941741780-1",
+              "combatIds": [
+                160691
+              ],
+              "context": "native-combat90:40825:1:1",
+              "deselectAppliedNonce": "",
+              "deselectNonce": "",
+              "enabled": true,
+              "pendingDeselect": false,
+              "reason": "temporary",
+              "requestNonce": "mp-combat-1794941757246-8",
+              "requestedSuspended": true,
+              "revision": 7,
+              "selectedIds": [],
+              "suspended": true
+            },
+            "frame": 906,
+            "gameTime": 89602,
+            "phase": "game",
+            "player": 1,
+            "realPlayer": 1,
+            "rendered": true,
+            "spectator": false,
+            "worldSafe": true
+          },
+          "players": {
+            "availableTabs": [
+              "participants",
+              "spectators"
+            ],
+            "context": "players91:40825:1",
+            "detailTab": "economy",
+            "nativeMenu": null,
+            "open": true,
+            "pending": false,
+            "ready": true,
+            "tab": "participants",
+            "viewRevision": 1,
+            "viewer": {
+              "canIssueOrders": true,
+              "ownsViewedPlayer": true,
+              "realPlayer": 1,
+              "role": "player",
+              "viewedPlayer": 1
+            }
+          }
+        },
+        {
+          "native": {
+            "canIssueOrders": true,
+            "combatLock": {
+              "activation": "mp-combat-user-1794941741780-1",
+              "combatIds": [
+                160691
+              ],
+              "context": "native-combat90:40825:1:1",
+              "deselectAppliedNonce": "",
+              "deselectNonce": "",
+              "enabled": true,
+              "pendingDeselect": false,
+              "reason": "temporary",
+              "requestNonce": "mp-combat-1794941757246-8",
+              "requestedSuspended": true,
+              "revision": 7,
+              "selectedIds": [],
+              "suspended": true
+            },
+            "frame": 910,
+            "gameTime": 90002,
+            "phase": "game",
+            "player": 1,
+            "realPlayer": 1,
+            "rendered": true,
+            "spectator": false,
+            "worldSafe": true
+          },
+          "players": {
+            "availableTabs": [
+              "participants",
+              "spectators"
+            ],
+            "context": "players91:40825:1",
+            "detailTab": "economy",
+            "nativeMenu": null,
+            "open": true,
+            "pending": false,
+            "ready": true,
+            "tab": "participants",
+            "viewRevision": 1,
+            "viewer": {
+              "canIssueOrders": true,
+              "ownsViewedPlayer": true,
+              "realPlayer": 1,
+              "role": "player",
+              "viewedPlayer": 1
+            }
+          }
+        },
+        {
+          "native": {
+            "canIssueOrders": true,
+            "combatLock": {
+              "activation": "mp-combat-user-1794941741780-1",
+              "combatIds": [
+                160691
+              ],
+              "context": "native-combat90:40825:1:1",
+              "deselectAppliedNonce": "",
+              "deselectNonce": "",
+              "enabled": true,
+              "pendingDeselect": false,
+              "reason": "temporary",
+              "requestNonce": "mp-combat-1794941757246-8",
+              "requestedSuspended": true,
+              "revision": 7,
+              "selectedIds": [],
+              "suspended": true
+            },
+            "frame": 914,
+            "gameTime": 90402,
+            "phase": "game",
+            "player": 1,
+            "realPlayer": 1,
+            "rendered": true,
+            "spectator": false,
+            "worldSafe": true
+          },
+          "players": {
+            "availableTabs": [
+              "participants",
+              "spectators"
+            ],
+            "context": "players91:40825:1",
+            "detailTab": "economy",
+            "nativeMenu": null,
+            "open": true,
+            "pending": false,
+            "ready": true,
+            "tab": "participants",
+            "viewRevision": 1,
+            "viewer": {
+              "canIssueOrders": true,
+              "ownsViewedPlayer": true,
+              "realPlayer": 1,
+              "role": "player",
+              "viewedPlayer": 1
+            }
+          }
+        },
+        {
+          "native": {
+            "canIssueOrders": true,
+            "combatLock": {
+              "activation": "mp-combat-user-1794941741780-1",
+              "combatIds": [
+                160691
+              ],
+              "context": "native-combat90:40825:1:1",
+              "deselectAppliedNonce": "",
+              "deselectNonce": "",
+              "enabled": true,
+              "pendingDeselect": false,
+              "reason": "temporary",
+              "requestNonce": "mp-combat-1794941757246-8",
+              "requestedSuspended": true,
+              "revision": 7,
+              "selectedIds": [],
+              "suspended": true
+            },
+            "frame": 917,
+            "gameTime": 90702,
+            "phase": "game",
+            "player": 1,
+            "realPlayer": 1,
+            "rendered": true,
+            "spectator": false,
+            "worldSafe": true
+          },
+          "players": {
+            "availableTabs": [
+              "participants",
+              "spectators"
+            ],
+            "context": "players91:40825:1",
+            "detailTab": "economy",
+            "nativeMenu": null,
+            "open": true,
+            "pending": false,
+            "ready": true,
+            "tab": "participants",
+            "viewRevision": 1,
+            "viewer": {
+              "canIssueOrders": true,
+              "ownsViewedPlayer": true,
+              "realPlayer": 1,
+              "role": "player",
+              "viewedPlayer": 1
+            }
+          }
+        },
+        {
+          "native": {
+            "canIssueOrders": true,
+            "combatLock": {
+              "activation": "mp-combat-user-1794941741780-1",
+              "combatIds": [
+                160691
+              ],
+              "context": "native-combat90:40825:1:1",
+              "deselectAppliedNonce": "",
+              "deselectNonce": "",
+              "enabled": true,
+              "pendingDeselect": false,
+              "reason": "temporary",
+              "requestNonce": "mp-combat-1794941757246-8",
+              "requestedSuspended": true,
+              "revision": 7,
+              "selectedIds": [],
+              "suspended": true
+            },
+            "frame": 922,
+            "gameTime": 91202,
+            "phase": "game",
+            "player": 1,
+            "realPlayer": 1,
+            "rendered": true,
+            "spectator": false,
+            "worldSafe": true
+          },
+          "players": {
+            "availableTabs": [
+              "participants",
+              "spectators"
+            ],
+            "context": "players91:40825:1",
+            "detailTab": "economy",
+            "nativeMenu": null,
+            "open": true,
+            "pending": false,
+            "ready": true,
+            "tab": "participants",
+            "viewRevision": 1,
+            "viewer": {
+              "canIssueOrders": true,
+              "ownsViewedPlayer": true,
+              "realPlayer": 1,
+              "role": "player",
+              "viewedPlayer": 1
+            }
+          }
+        },
+        {
+          "native": {
+            "canIssueOrders": true,
+            "combatLock": {
+              "activation": "mp-combat-user-1794941741780-1",
+              "combatIds": [
+                160691
+              ],
+              "context": "native-combat90:40825:1:1",
+              "deselectAppliedNonce": "",
+              "deselectNonce": "",
+              "enabled": true,
+              "pendingDeselect": false,
+              "reason": "temporary",
+              "requestNonce": "mp-combat-1794941757246-8",
+              "requestedSuspended": true,
+              "revision": 7,
+              "selectedIds": [],
+              "suspended": true
+            },
+            "frame": 926,
+            "gameTime": 91602,
+            "phase": "game",
+            "player": 1,
+            "realPlayer": 1,
+            "rendered": true,
+            "spectator": false,
+            "worldSafe": true
+          },
+          "players": {
+            "availableTabs": [
+              "participants",
+              "spectators"
+            ],
+            "context": "players91:40825:1",
+            "detailTab": "economy",
+            "nativeMenu": null,
+            "open": true,
+            "pending": false,
+            "ready": true,
+            "tab": "participants",
+            "viewRevision": 1,
+            "viewer": {
+              "canIssueOrders": true,
+              "ownsViewedPlayer": true,
+              "realPlayer": 1,
+              "role": "player",
+              "viewedPlayer": 1
+            }
+          }
+        },
+        {
+          "native": {
+            "canIssueOrders": true,
+            "combatLock": {
+              "activation": "mp-combat-user-1794941741780-1",
+              "combatIds": [
+                160691
+              ],
+              "context": "native-combat90:40825:1:1",
+              "deselectAppliedNonce": "",
+              "deselectNonce": "",
+              "enabled": true,
+              "pendingDeselect": false,
+              "reason": "temporary",
+              "requestNonce": "mp-combat-1794941757246-8",
+              "requestedSuspended": true,
+              "revision": 7,
+              "selectedIds": [],
+              "suspended": true
+            },
+            "frame": 930,
+            "gameTime": 92002,
+            "phase": "game",
+            "player": 1,
+            "realPlayer": 1,
+            "rendered": true,
+            "spectator": false,
+            "worldSafe": true
+          },
+          "players": {
+            "availableTabs": [
+              "participants",
+              "spectators"
+            ],
+            "context": "players91:40825:1",
+            "detailTab": "economy",
+            "nativeMenu": null,
+            "open": true,
+            "pending": false,
+            "ready": true,
+            "tab": "participants",
+            "viewRevision": 1,
+            "viewer": {
+              "canIssueOrders": true,
+              "ownsViewedPlayer": true,
+              "realPlayer": 1,
+              "role": "player",
+              "viewedPlayer": 1
+            }
+          }
+        },
+        {
+          "native": {
+            "canIssueOrders": true,
+            "combatLock": {
+              "activation": "mp-combat-user-1794941741780-1",
+              "combatIds": [
+                160691
+              ],
+              "context": "native-combat90:40825:1:1",
+              "deselectAppliedNonce": "",
+              "deselectNonce": "",
+              "enabled": true,
+              "pendingDeselect": false,
+              "reason": "temporary",
+              "requestNonce": "mp-combat-1794941757246-8",
+              "requestedSuspended": true,
+              "revision": 7,
+              "selectedIds": [],
+              "suspended": true
+            },
+            "frame": 934,
+            "gameTime": 92402,
+            "phase": "game",
+            "player": 1,
+            "realPlayer": 1,
+            "rendered": true,
+            "spectator": false,
+            "worldSafe": true
+          },
+          "players": {
+            "availableTabs": [
+              "participants",
+              "spectators"
+            ],
+            "context": "players91:40825:1",
+            "detailTab": "economy",
+            "nativeMenu": null,
+            "open": true,
+            "pending": false,
+            "ready": true,
+            "tab": "participants",
+            "viewRevision": 1,
+            "viewer": {
+              "canIssueOrders": true,
+              "ownsViewedPlayer": true,
+              "realPlayer": 1,
+              "role": "player",
+              "viewedPlayer": 1
+            }
+          }
+        },
+        {
+          "native": {
+            "canIssueOrders": true,
+            "combatLock": {
+              "activation": "mp-combat-user-1794941741780-1",
+              "combatIds": [
+                160691
+              ],
+              "context": "native-combat90:40825:1:1",
+              "deselectAppliedNonce": "",
+              "deselectNonce": "",
+              "enabled": true,
+              "pendingDeselect": false,
+              "reason": "temporary",
+              "requestNonce": "mp-combat-1794941757246-8",
+              "requestedSuspended": true,
+              "revision": 7,
+              "selectedIds": [],
+              "suspended": true
+            },
+            "frame": 938,
+            "gameTime": 92802,
+            "phase": "game",
+            "player": 1,
+            "realPlayer": 1,
+            "rendered": true,
+            "spectator": false,
+            "worldSafe": true
+          },
+          "players": {
+            "availableTabs": [
+              "participants",
+              "spectators"
+            ],
+            "context": "players91:40825:1",
+            "detailTab": "economy",
+            "nativeMenu": null,
+            "open": true,
+            "pending": false,
+            "ready": true,
+            "tab": "participants",
+            "viewRevision": 1,
+            "viewer": {
+              "canIssueOrders": true,
+              "ownsViewedPlayer": true,
+              "realPlayer": 1,
+              "role": "player",
+              "viewedPlayer": 1
+            }
+          }
+        },
+        {
+          "native": {
+            "canIssueOrders": true,
+            "combatLock": {
+              "activation": "mp-combat-user-1794941741780-1",
+              "combatIds": [
+                160691
+              ],
+              "context": "native-combat90:40825:1:1",
+              "deselectAppliedNonce": "",
+              "deselectNonce": "",
+              "enabled": true,
+              "pendingDeselect": false,
+              "reason": "temporary",
+              "requestNonce": "mp-combat-1794941757246-8",
+              "requestedSuspended": true,
+              "revision": 7,
+              "selectedIds": [],
+              "suspended": true
+            },
+            "frame": 942,
+            "gameTime": 93202,
+            "phase": "game",
+            "player": 1,
+            "realPlayer": 1,
+            "rendered": true,
+            "spectator": false,
+            "worldSafe": true
+          },
+          "players": {
+            "availableTabs": [
+              "participants",
+              "spectators"
+            ],
+            "context": "players91:40825:1",
+            "detailTab": "economy",
+            "nativeMenu": null,
+            "open": true,
+            "pending": false,
+            "ready": true,
+            "tab": "participants",
+            "viewRevision": 1,
+            "viewer": {
+              "canIssueOrders": true,
+              "ownsViewedPlayer": true,
+              "realPlayer": 1,
+              "role": "player",
+              "viewedPlayer": 1
+            }
+          }
+        },
+        {
+          "native": {
+            "canIssueOrders": true,
+            "combatLock": {
+              "activation": "mp-combat-user-1794941741780-1",
+              "combatIds": [
+                160691
+              ],
+              "context": "native-combat90:40825:1:1",
+              "deselectAppliedNonce": "",
+              "deselectNonce": "",
+              "enabled": true,
+              "pendingDeselect": false,
+              "reason": "temporary",
+              "requestNonce": "mp-combat-1794941757246-8",
+              "requestedSuspended": true,
+              "revision": 7,
+              "selectedIds": [],
+              "suspended": true
+            },
+            "frame": 946,
+            "gameTime": 93602,
+            "phase": "game",
+            "player": 1,
+            "realPlayer": 1,
+            "rendered": true,
+            "spectator": false,
+            "worldSafe": true
+          },
+          "players": {
+            "availableTabs": [
+              "participants",
+              "spectators"
+            ],
+            "context": "players91:40825:1",
+            "detailTab": "economy",
+            "nativeMenu": null,
+            "open": true,
+            "pending": false,
+            "ready": true,
+            "tab": "participants",
+            "viewRevision": 1,
+            "viewer": {
+              "canIssueOrders": true,
+              "ownsViewedPlayer": true,
+              "realPlayer": 1,
+              "role": "player",
+              "viewedPlayer": 1
+            }
+          }
+        },
+        {
+          "native": {
+            "canIssueOrders": true,
+            "combatLock": {
+              "activation": "mp-combat-user-1794941741780-1",
+              "combatIds": [
+                160691
+              ],
+              "context": "native-combat90:40825:1:1",
+              "deselectAppliedNonce": "",
+              "deselectNonce": "",
+              "enabled": true,
+              "pendingDeselect": false,
+              "reason": "temporary",
+              "requestNonce": "mp-combat-1794941757246-8",
+              "requestedSuspended": true,
+              "revision": 7,
+              "selectedIds": [],
+              "suspended": true
+            },
+            "frame": 950,
+            "gameTime": 94002,
+            "phase": "game",
+            "player": 1,
+            "realPlayer": 1,
+            "rendered": true,
+            "spectator": false,
+            "worldSafe": true
+          },
+          "players": {
+            "availableTabs": [
+              "participants",
+              "spectators"
+            ],
+            "context": "players91:40825:1",
+            "detailTab": "economy",
+            "nativeMenu": null,
+            "open": true,
+            "pending": false,
+            "ready": true,
+            "tab": "participants",
+            "viewRevision": 1,
+            "viewer": {
+              "canIssueOrders": true,
+              "ownsViewedPlayer": true,
+              "realPlayer": 1,
+              "role": "player",
+              "viewedPlayer": 1
+            }
+          }
+        },
+        {
+          "native": {
+            "canIssueOrders": true,
+            "combatLock": {
+              "activation": "mp-combat-user-1794941741780-1",
+              "combatIds": [
+                160691
+              ],
+              "context": "native-combat90:40825:1:1",
+              "deselectAppliedNonce": "",
+              "deselectNonce": "",
+              "enabled": true,
+              "pendingDeselect": false,
+              "reason": "temporary",
+              "requestNonce": "mp-combat-1794941757246-8",
+              "requestedSuspended": true,
+              "revision": 7,
+              "selectedIds": [],
+              "suspended": true
+            },
+            "frame": 954,
+            "gameTime": 94402,
+            "phase": "game",
+            "player": 1,
+            "realPlayer": 1,
+            "rendered": true,
+            "spectator": false,
+            "worldSafe": true
+          },
+          "players": {
+            "availableTabs": [
+              "participants",
+              "spectators"
+            ],
+            "context": "players91:40825:1",
+            "detailTab": "economy",
+            "nativeMenu": null,
+            "open": true,
+            "pending": false,
+            "ready": true,
+            "tab": "participants",
+            "viewRevision": 1,
+            "viewer": {
+              "canIssueOrders": true,
+              "ownsViewedPlayer": true,
+              "realPlayer": 1,
+              "role": "player",
+              "viewedPlayer": 1
+            }
+          }
+        },
+        {
+          "native": {
+            "canIssueOrders": true,
+            "combatLock": {
+              "activation": "mp-combat-user-1794941741780-1",
+              "combatIds": [
+                160691
+              ],
+              "context": "native-combat90:40825:1:1",
+              "deselectAppliedNonce": "",
+              "deselectNonce": "",
+              "enabled": true,
+              "pendingDeselect": false,
+              "reason": "temporary",
+              "requestNonce": "mp-combat-1794941757246-8",
+              "requestedSuspended": true,
+              "revision": 7,
+              "selectedIds": [],
+              "suspended": true
+            },
+            "frame": 958,
+            "gameTime": 94802,
+            "phase": "game",
+            "player": 1,
+            "realPlayer": 1,
+            "rendered": true,
+            "spectator": false,
+            "worldSafe": true
+          },
+          "players": {
+            "availableTabs": [
+              "participants",
+              "spectators"
+            ],
+            "context": "players91:40825:1",
+            "detailTab": "economy",
+            "nativeMenu": null,
+            "open": true,
+            "pending": false,
+            "ready": true,
+            "tab": "participants",
+            "viewRevision": 1,
+            "viewer": {
+              "canIssueOrders": true,
+              "ownsViewedPlayer": true,
+              "realPlayer": 1,
+              "role": "player",
+              "viewedPlayer": 1
+            }
+          }
+        },
+        {
+          "native": {
+            "canIssueOrders": true,
+            "combatLock": {
+              "activation": "mp-combat-user-1794941741780-1",
+              "combatIds": [
+                160691
+              ],
+              "context": "native-combat90:40825:1:1",
+              "deselectAppliedNonce": "",
+              "deselectNonce": "",
+              "enabled": true,
+              "pendingDeselect": false,
+              "reason": "temporary",
+              "requestNonce": "mp-combat-1794941757246-8",
+              "requestedSuspended": true,
+              "revision": 7,
+              "selectedIds": [],
+              "suspended": true
+            },
+            "frame": 962,
+            "gameTime": 95202,
+            "phase": "game",
+            "player": 1,
+            "realPlayer": 1,
+            "rendered": true,
+            "spectator": false,
+            "worldSafe": true
+          },
+          "players": {
+            "availableTabs": [
+              "participants",
+              "spectators"
+            ],
+            "context": "players91:40825:1",
+            "detailTab": "economy",
+            "nativeMenu": null,
+            "open": true,
+            "pending": false,
+            "ready": true,
+            "tab": "participants",
+            "viewRevision": 1,
+            "viewer": {
+              "canIssueOrders": true,
+              "ownsViewedPlayer": true,
+              "realPlayer": 1,
+              "role": "player",
+              "viewedPlayer": 1
+            }
+          }
+        },
+        {
+          "native": {
+            "canIssueOrders": true,
+            "combatLock": {
+              "activation": "mp-combat-user-1794941741780-1",
+              "combatIds": [
+                160691
+              ],
+              "context": "native-combat90:40825:1:1",
+              "deselectAppliedNonce": "",
+              "deselectNonce": "",
+              "enabled": true,
+              "pendingDeselect": false,
+              "reason": "temporary",
+              "requestNonce": "mp-combat-1794941757246-8",
+              "requestedSuspended": true,
+              "revision": 7,
+              "selectedIds": [],
+              "suspended": true
+            },
+            "frame": 966,
+            "gameTime": 95602,
+            "phase": "game",
+            "player": 1,
+            "realPlayer": 1,
+            "rendered": true,
+            "spectator": false,
+            "worldSafe": true
+          },
+          "players": {
+            "availableTabs": [
+              "participants",
+              "spectators"
+            ],
+            "context": "players91:40825:1",
+            "detailTab": "economy",
+            "nativeMenu": null,
+            "open": true,
+            "pending": false,
+            "ready": true,
+            "tab": "participants",
+            "viewRevision": 1,
+            "viewer": {
+              "canIssueOrders": true,
+              "ownsViewedPlayer": true,
+              "realPlayer": 1,
+              "role": "player",
+              "viewedPlayer": 1
+            }
+          }
+        },
+        {
+          "native": {
+            "canIssueOrders": true,
+            "combatLock": {
+              "activation": "mp-combat-user-1794941741780-1",
+              "combatIds": [
+                160691
+              ],
+              "context": "native-combat90:40825:1:1",
+              "deselectAppliedNonce": "",
+              "deselectNonce": "",
+              "enabled": true,
+              "pendingDeselect": false,
+              "reason": "temporary",
+              "requestNonce": "mp-combat-1794941757246-8",
+              "requestedSuspended": true,
+              "revision": 7,
+              "selectedIds": [],
+              "suspended": true
+            },
+            "frame": 970,
+            "gameTime": 96002,
+            "phase": "game",
+            "player": 1,
+            "realPlayer": 1,
+            "rendered": true,
+            "spectator": false,
+            "worldSafe": true
+          },
+          "players": {
+            "availableTabs": [
+              "participants",
+              "spectators"
+            ],
+            "context": "players91:40825:1",
+            "detailTab": "economy",
+            "nativeMenu": null,
+            "open": true,
+            "pending": false,
+            "ready": true,
+            "tab": "participants",
+            "viewRevision": 1,
+            "viewer": {
+              "canIssueOrders": true,
+              "ownsViewedPlayer": true,
+              "realPlayer": 1,
+              "role": "player",
+              "viewedPlayer": 1
+            }
+          }
+        },
+        {
+          "native": {
+            "canIssueOrders": true,
+            "combatLock": {
+              "activation": "mp-combat-user-1794941741780-1",
+              "combatIds": [
+                160691
+              ],
+              "context": "native-combat90:40825:1:1",
+              "deselectAppliedNonce": "",
+              "deselectNonce": "",
+              "enabled": true,
+              "pendingDeselect": false,
+              "reason": "temporary",
+              "requestNonce": "mp-combat-1794941757246-8",
+              "requestedSuspended": true,
+              "revision": 7,
+              "selectedIds": [],
+              "suspended": true
+            },
+            "frame": 974,
+            "gameTime": 96402,
+            "phase": "game",
+            "player": 1,
+            "realPlayer": 1,
+            "rendered": true,
+            "spectator": false,
+            "worldSafe": true
+          },
+          "players": {
+            "availableTabs": [
+              "participants",
+              "spectators"
+            ],
+            "context": "players91:40825:1",
+            "detailTab": "economy",
+            "nativeMenu": null,
+            "open": true,
+            "pending": false,
+            "ready": true,
+            "tab": "participants",
+            "viewRevision": 1,
+            "viewer": {
+              "canIssueOrders": true,
+              "ownsViewedPlayer": true,
+              "realPlayer": 1,
+              "role": "player",
+              "viewedPlayer": 1
+            }
+          }
+        },
+        {
+          "native": {
+            "canIssueOrders": true,
+            "combatLock": {
+              "activation": "mp-combat-user-1794941741780-1",
+              "combatIds": [
+                160691
+              ],
+              "context": "native-combat90:40825:1:1",
+              "deselectAppliedNonce": "",
+              "deselectNonce": "",
+              "enabled": true,
+              "pendingDeselect": false,
+              "reason": "temporary",
+              "requestNonce": "mp-combat-1794941757246-8",
+              "requestedSuspended": true,
+              "revision": 7,
+              "selectedIds": [],
+              "suspended": true
+            },
+            "frame": 978,
+            "gameTime": 96802,
+            "phase": "game",
+            "player": 1,
+            "realPlayer": 1,
+            "rendered": true,
+            "spectator": false,
+            "worldSafe": true
+          },
+          "players": {
+            "availableTabs": [
+              "participants",
+              "spectators"
+            ],
+            "context": "players91:40825:1",
+            "detailTab": "economy",
+            "nativeMenu": null,
+            "open": true,
+            "pending": false,
+            "ready": true,
+            "tab": "participants",
+            "viewRevision": 1,
+            "viewer": {
+              "canIssueOrders": true,
+              "ownsViewedPlayer": true,
+              "realPlayer": 1,
+              "role": "player",
+              "viewedPlayer": 1
+            }
+          }
+        },
+        {
+          "native": {
+            "canIssueOrders": true,
+            "combatLock": {
+              "activation": "mp-combat-user-1794941741780-1",
+              "combatIds": [
+                160691
+              ],
+              "context": "native-combat90:40825:1:1",
+              "deselectAppliedNonce": "",
+              "deselectNonce": "",
+              "enabled": true,
+              "pendingDeselect": false,
+              "reason": "temporary",
+              "requestNonce": "mp-combat-1794941757246-8",
+              "requestedSuspended": true,
+              "revision": 7,
+              "selectedIds": [],
+              "suspended": true
+            },
+            "frame": 981,
+            "gameTime": 97102,
+            "phase": "game",
+            "player": 1,
+            "realPlayer": 1,
+            "rendered": true,
+            "spectator": false,
+            "worldSafe": true
+          },
+          "players": {
+            "availableTabs": [
+              "participants",
+              "spectators"
+            ],
+            "context": "players91:40825:1",
+            "detailTab": "economy",
+            "nativeMenu": null,
+            "open": true,
+            "pending": false,
+            "ready": true,
+            "tab": "participants",
+            "viewRevision": 1,
+            "viewer": {
+              "canIssueOrders": true,
+              "ownsViewedPlayer": true,
+              "realPlayer": 1,
+              "role": "player",
+              "viewedPlayer": 1
+            }
+          }
+        },
+        {
+          "native": {
+            "canIssueOrders": true,
+            "combatLock": {
+              "activation": "mp-combat-user-1794941741780-1",
+              "combatIds": [
+                160691
+              ],
+              "context": "native-combat90:40825:1:1",
+              "deselectAppliedNonce": "",
+              "deselectNonce": "",
+              "enabled": true,
+              "pendingDeselect": false,
+              "reason": "temporary",
+              "requestNonce": "mp-combat-1794941757246-8",
+              "requestedSuspended": true,
+              "revision": 7,
+              "selectedIds": [],
+              "suspended": true
+            },
+            "frame": 985,
+            "gameTime": 97502,
+            "phase": "game",
+            "player": 1,
+            "realPlayer": 1,
+            "rendered": true,
+            "spectator": false,
+            "worldSafe": true
+          },
+          "players": {
+            "availableTabs": [
+              "participants",
+              "spectators"
+            ],
+            "context": "players91:40825:1",
+            "detailTab": "economy",
+            "nativeMenu": null,
+            "open": true,
+            "pending": false,
+            "ready": true,
+            "tab": "participants",
+            "viewRevision": 1,
+            "viewer": {
+              "canIssueOrders": true,
+              "ownsViewedPlayer": true,
+              "realPlayer": 1,
+              "role": "player",
+              "viewedPlayer": 1
+            }
+          }
+        },
+        {
+          "native": {
+            "canIssueOrders": true,
+            "combatLock": {
+              "activation": "mp-combat-user-1794941741780-1",
+              "combatIds": [
+                160691,
+                160693
+              ],
+              "context": "native-combat90:40825:1:1",
+              "deselectAppliedNonce": "",
+              "deselectNonce": "",
+              "enabled": true,
+              "pendingDeselect": false,
+              "reason": "temporary",
+              "requestNonce": "mp-combat-1794941757246-8",
+              "requestedSuspended": true,
+              "revision": 7,
+              "selectedIds": [],
+              "suspended": true
+            },
+            "frame": 990,
+            "gameTime": 98002,
+            "phase": "game",
+            "player": 1,
+            "realPlayer": 1,
+            "rendered": true,
+            "spectator": false,
+            "worldSafe": true
+          },
+          "players": {
+            "availableTabs": [
+              "participants",
+              "spectators"
+            ],
+            "context": "players91:40825:1",
+            "detailTab": "economy",
+            "nativeMenu": null,
+            "open": true,
+            "pending": false,
+            "ready": true,
+            "tab": "participants",
+            "viewRevision": 1,
+            "viewer": {
+              "canIssueOrders": true,
+              "ownsViewedPlayer": true,
+              "realPlayer": 1,
+              "role": "player",
+              "viewedPlayer": 1
+            }
+          }
+        }
+      ]
+    },
+    "selected": {
+      "commands": {
+        "buildOpen": false,
+        "closes": 2,
+        "exitingBuild": false,
+        "factory": 160411,
+        "nativeClosing": false,
+        "nativeMenu": "",
+        "navigationRevision": 6,
+        "opens": 3,
+        "page": "",
+        "pending": 0,
+        "pendingItem": "",
+        "placement": "",
+        "productionFeedback": {
+          "message": "",
+          "tone": "done"
+        },
+        "productionPending": [],
+        "selectingTrucks": false
+      },
+      "native": {
+        "canIssueOrders": true,
+        "combatLock": {
+          "activation": "mp-combat-user-1794941741780-1",
+          "combatIds": [
+            160691,
+            160693
+          ],
+          "context": "native-combat90:40825:1:1",
+          "deselectAppliedNonce": "",
+          "deselectNonce": "",
+          "enabled": true,
+          "pendingDeselect": false,
+          "reason": "on",
+          "requestNonce": "mp-combat-1794942136459-9",
+          "requestedSuspended": false,
+          "revision": 9,
+          "selectedIds": [
+            160691,
+            160693
+          ],
+          "suspended": false
+        },
+        "frame": 1027,
+        "gameTime": 101702,
+        "phase": "game",
+        "player": 1,
+        "realPlayer": 1,
+        "rendered": true,
+        "spectator": false,
+        "worldSafe": true
+      },
+      "players": {
+        "availableTabs": [
+          "participants",
+          "spectators"
+        ],
+        "context": "players91:40825:1",
+        "detailTab": "economy",
+        "nativeMenu": null,
+        "open": false,
+        "pending": false,
+        "ready": true,
+        "tab": "participants",
+        "viewRevision": 1,
+        "viewer": {
+          "canIssueOrders": true,
+          "ownsViewedPlayer": true,
+          "realPlayer": 1,
+          "role": "player",
+          "viewedPlayer": 1
+        }
+      },
+      "room": null,
+      "session": {
+        "active": true,
+        "errors": [
+          "warning |18:53:15: [buildFeature:255] Feature not aligned. position (11392,3328), size (1,1) (**Further warnings of this type are suppressed.)",
+          "warning |18:53:15: [buildFeature:255] Feature not aligned. position (6784,10112), size (1,1) (**Further warnings of this type are suppressed.)",
+          "warning |18:53:15: [buildFeature:255] Feature not aligned. position (10752,8704), size (1,1) (**Further warnings of this type are suppressed.)"
+        ],
+        "phase": "game"
+      },
+      "touch": {
+        "activeJob": null,
+        "combatOverride": "",
+        "heldKeys": [],
+        "heldMouse": null,
+        "pendingClicks": 0,
+        "pointers": 0,
+        "queued": 0
+      }
+    }
+  },
+  "errorType": "AssertionError",
+  "error": "{'constructor': False, 'id': 160693, 'order': 25, 'x': 11, 'y': 10, 'z': 2}",
+  "asyncRealFingerClickReceipts": [
+    {
+      "target": {
+        "selector": "[aria-label=\"Manufacture Design 1\"]",
+        "target": {
+          "enabled": true,
+          "hit": true,
+          "id": "",
+          "rect": {
+            "bottom": 270,
+            "height": 34,
+            "left": 623.9166870117188,
+            "right": 731.0000228881836,
+            "top": 236,
+            "width": 107.08333587646484,
+            "x": 623.9166870117188,
+            "y": 236
+          },
+          "text": "MANUFACTURE",
+          "visible": true
+        },
+        "physical": [
+          1452,
+          493
+        ],
+        "geometry": {
+          "activity": "com.rbabbit.blocknight.warzone.MultiplayerActivity",
+          "css": {
+            "dpr": 3,
+            "height": 554,
+            "url": "/multiplayer/index.html",
+            "visual": {
+              "height": 360,
+              "offsetLeft": 0,
+              "offsetTop": 0,
+              "width": 1164
+            },
+            "width": 1164
+          },
+          "physical": [
+            2400,
+            1080
+          ],
+          "bounds": [
+            131,
+            0,
+            2400,
+            1080
+          ],
+          "source": "Actual dumpsys MultiplayerActivity WebView/nativeLobbyView sibling hierarchy; uniform fitViewport verified",
+          "measuredUTC": "2026-11-17T19:00:36.545782+00:00",
+          "nativeVirtualRect": [
+            131,
+            0,
+            3623,
+            1662
+          ],
+          "nativeAvailableRect": [
+            131,
+            0,
+            2400,
+            1080
+          ],
+          "nativeParentRect": [
+            0,
+            0,
+            2400,
+            1080
+          ],
+          "derivedScaleX": 0.6497709049255441,
+          "derivedScaleY": 0.6498194945848376,
+          "derivedUniformScale": 0.6497951997551908,
+          "virtualCSSDprTolerancePixels": 4.0,
+          "webViewFlags": "VFED..C..",
+          "nativeAvailableViewClass": "com.rbabbit.blocknight.warzone.MultiplayerLobbyView",
+          "nativeLobbyFlags": "GFE...C..",
+          "webViewVisible": true,
+          "uiaFailureType": null,
+          "nativeMethodExplicitlyRequested": true
+        }
+      },
+      "input": "Real Android SOURCE_TOUCHSCREEN async native injection,60ms requested press",
+      "clicks": [
+        {
+          "pointerType": "touch",
+          "target": "<button type=\"button\" data-produce=\"design-1794860875468-1\" aria-busy=\"false\" aria-label=\"Manufacture Design 1\" data-compatible=\"true\" class=\"wt-primary wt-factory-produce\">MANUFACTURE</button>",
+          "trusted": true,
+          "type": "click"
+        }
+      ]
+    },
+    {
+      "target": {
+        "selector": "#wt-open-players",
+        "target": {
+          "enabled": true,
+          "hit": true,
+          "id": "wt-open-players",
+          "rect": {
+            "bottom": 48,
+            "height": 36,
+            "left": 448.91668701171875,
+            "right": 507.4062728881836,
+            "top": 12,
+            "width": 58.489585876464844,
+            "x": 448.91668701171875,
+            "y": 12
+          },
+          "text": "PLAYERS",
+          "visible": true
+        },
+        "physical": [
+          1063,
+          58
+        ],
+        "geometry": {
+          "activity": "com.rbabbit.blocknight.warzone.MultiplayerActivity",
+          "css": {
+            "dpr": 3,
+            "height": 554,
+            "url": "/multiplayer/index.html",
+            "visual": {
+              "height": 360,
+              "offsetLeft": 0,
+              "offsetTop": 0,
+              "width": 1164
+            },
+            "width": 1164
+          },
+          "physical": [
+            2400,
+            1080
+          ],
+          "bounds": [
+            131,
+            0,
+            2400,
+            1080
+          ],
+          "source": "Actual dumpsys MultiplayerActivity WebView/nativeLobbyView sibling hierarchy; uniform fitViewport verified",
+          "measuredUTC": "2026-11-17T19:00:36.545782+00:00",
+          "nativeVirtualRect": [
+            131,
+            0,
+            3623,
+            1662
+          ],
+          "nativeAvailableRect": [
+            131,
+            0,
+            2400,
+            1080
+          ],
+          "nativeParentRect": [
+            0,
+            0,
+            2400,
+            1080
+          ],
+          "derivedScaleX": 0.6497709049255441,
+          "derivedScaleY": 0.6498194945848376,
+          "derivedUniformScale": 0.6497951997551908,
+          "virtualCSSDprTolerancePixels": 4.0,
+          "webViewFlags": "VFED..C..",
+          "nativeAvailableViewClass": "com.rbabbit.blocknight.warzone.MultiplayerLobbyView",
+          "nativeLobbyFlags": "GFE...C..",
+          "webViewVisible": true,
+          "uiaFailureType": null,
+          "nativeMethodExplicitlyRequested": true
+        }
+      },
+      "input": "Real Android SOURCE_TOUCHSCREEN async native injection,60ms requested press",
+      "clicks": [
+        {
+          "pointerType": "touch",
+          "target": "<button id=\"wt-open-players\" data-command=\"players\" aria-expanded=\"false\" class=\"\">PLAYERS</button>",
+          "trusted": true,
+          "type": "click"
+        }
+      ]
+    },
+    {
+      "target": {
+        "selector": "#wt-open-players",
+        "target": {
+          "enabled": true,
+          "hit": true,
+          "id": "wt-open-players",
+          "rect": {
+            "bottom": 48,
+            "height": 36,
+            "left": 448.91668701171875,
+            "right": 507.4062728881836,
+            "top": 12,
+            "width": 58.489585876464844,
+            "x": 448.91668701171875,
+            "y": 12
+          },
+          "text": "PLAYERS",
+          "visible": true
+        },
+        "physical": [
+          1063,
+          58
+        ],
+        "geometry": {
+          "activity": "com.rbabbit.blocknight.warzone.MultiplayerActivity",
+          "css": {
+            "dpr": 3,
+            "height": 554,
+            "url": "/multiplayer/index.html",
+            "visual": {
+              "height": 360,
+              "offsetLeft": 0,
+              "offsetTop": 0,
+              "width": 1164
+            },
+            "width": 1164
+          },
+          "physical": [
+            2400,
+            1080
+          ],
+          "bounds": [
+            131,
+            0,
+            2400,
+            1080
+          ],
+          "source": "Actual dumpsys MultiplayerActivity WebView/nativeLobbyView sibling hierarchy; uniform fitViewport verified",
+          "measuredUTC": "2026-11-17T19:00:36.545782+00:00",
+          "nativeVirtualRect": [
+            131,
+            0,
+            3623,
+            1662
+          ],
+          "nativeAvailableRect": [
+            131,
+            0,
+            2400,
+            1080
+          ],
+          "nativeParentRect": [
+            0,
+            0,
+            2400,
+            1080
+          ],
+          "derivedScaleX": 0.6497709049255441,
+          "derivedScaleY": 0.6498194945848376,
+          "derivedUniformScale": 0.6497951997551908,
+          "virtualCSSDprTolerancePixels": 4.0,
+          "webViewFlags": "VFED..C..",
+          "nativeAvailableViewClass": "com.rbabbit.blocknight.warzone.MultiplayerLobbyView",
+          "nativeLobbyFlags": "GFE...C..",
+          "webViewVisible": true,
+          "uiaFailureType": null,
+          "nativeMethodExplicitlyRequested": true
+        }
+      },
+      "input": "Real Android SOURCE_TOUCHSCREEN async native injection,60ms requested press",
+      "clicks": [
+        {
+          "pointerType": "touch",
+          "target": "<button id=\"wt-open-players\" data-command=\"players\" aria-expanded=\"true\" class=\"active\">PLAYERS</button>",
+          "trusted": true,
+          "type": "click"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "passed": true,
+  "checks": [
+    "Offline requires advancing current native frames, then confirms exact selection with lock off",
+    "Offline rejects empty, partial, mixed, duplicate and malformed native ID sets",
+    "Offline clears stale, unsafe, hidden, ended, changed-player/module/session and rewound world observations",
+    "MP display follows exact native selection independently of acknowledged lock intent",
+    "Wall-clock reversal cannot extend the native freshness window",
+    "MP fails closed for stale, spectator, viewed-other-player, unsafe and transitioned sessions",
+    "Campaign keeps lock aria intent but visual selection comes only from native observer",
+    "Towers and FFA restore one header control while Campaign and legacy Duel retain their existing layouts"
+  ],
+  "scope": "Actual JavaScript observers and header clients in VM fixtures; no APK/native rendering or browser geometry claims.",
+  "sources": [
+    {
+      "path": "warzone-touch-controls.js",
+      "sha256": "2c3838315e65422c77acdf83ebdc13a0abcc6033d86868d27291b402268f9cf6"
+    },
+    {
+      "path": "warzone-campaign-hud.js",
+      "sha256": "f8ded40a391bf1bc967827abef1d3bc722b124d26a2f040d0a69b2f4c5f472c1"
+    },
+    {
+      "path": "multiplayer/session.js",
+      "sha256": "46bc31029c1c28da00ca98440bc3b4581af10d56db0c42a7375f590175333a2c"
+    },
+    {
+      "path": "warzone/ui/towers-game-controls.css",
+      "sha256": "0cc407c8a9e3aec65fef68efda907429135dc69f3f18f57b61e3e6563d847f67"
+    }
+  ]
+}

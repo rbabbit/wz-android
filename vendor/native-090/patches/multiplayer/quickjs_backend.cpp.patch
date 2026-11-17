@@ -1,0 +1,167 @@
+--- a/src/quickjs_backend.cpp
++++ b/src/quickjs_backend.cpp
+@@ -4050,51 +4050,18 @@
+     return GetGameMode()==GS_NORMAL&&gameInitialised&&!mpMobileLoading&&mpMobileViewReady&&mpMobileOwner().ownsViewedPlayer;
+ }
+ 
+-// BEGIN MP_COMBAT_SELECTION_POLICY
+-// Client selection only: this helper cannot issue orders or change control groups.
+-struct MpCombatSelectionUnit { uint32_t id; bool combat; bool selected; };
+-struct MpCombatSelectionPolicy {
+-    bool enabled=false,requestedSuspended=false,suspended=false,baseline=false;
+-    unsigned long revision=0;
+-    std::string reason="off",requestNonce,activation,blockedActivation;
+-    std::set<uint32_t> observedOwn,expectedSelection;
+-    void stop(const char *why) {
+-        if(enabled&&std::string(why)=="manual-selection"&&!activation.empty())blockedActivation=activation;
+-        if(enabled||requestedSuspended||baseline){++revision;}
+-        enabled=false;requestedSuspended=false;suspended=false;baseline=false;
+-        reason=why;observedOwn.clear();expectedSelection.clear();
+-    }
+-    void intent(bool on,bool pause,const std::string &nonce,const std::string &token="") {
+-        requestNonce=nonce;
+-        const auto nextActivation=token.empty()?nonce:token;
+-        if(on&&nextActivation==blockedActivation){if(!enabled)reason="manual-selection";++revision;return;}
+-        if(!enabled||requestedSuspended!=pause||activation!=nextActivation)baseline=false;
+-        enabled=on;requestedSuspended=on&&pause;suspended=requestedSuspended;
+-        activation=nextActivation;++revision;
+-        if(!on){stop("off");return;}
+-        reason=pause?"temporary":"on";
+-    }
+-    bool reconcile(const std::vector<MpCombatSelectionUnit> &units,bool safe) {
+-        if(!enabled)return false;
+-        suspended=requestedSuspended||!safe;
+-        if(suspended){reason=requestedSuspended?"temporary":"world-unsafe";baseline=false;return false;}
+-        std::set<uint32_t> own,combat,current;
+-        for(const auto &unit:units){own.insert(unit.id);if(unit.combat)combat.insert(unit.id);if(unit.selected)current.insert(unit.id);}
+-        if(baseline){
+-            // Death/ownership changes prune expectations. Newly created units
+-            // may inherit stock group selection; that is not a manual override.
+-            bool manual=false;
+-            for(const auto id:expectedSelection)if(combat.count(id)&&!current.count(id)){manual=true;break;}
+-            if(!manual)for(const auto id:current)if(!expectedSelection.count(id)&&observedOwn.count(id)){manual=true;break;}
+-            if(manual){stop("manual-selection");return false;}
+-        }
+-        const bool changed=current!=combat;
+-        if(changed||expectedSelection!=combat)++revision;
+-        observedOwn=std::move(own);expectedSelection=std::move(combat);baseline=true;reason="on";
+-        return changed;
+-    }
+-};
+-// END MP_COMBAT_SELECTION_POLICY
++#include "mobile-combat-latch-v90.h"
++using MpCombatSelectionPolicy=MobileCombatLatchV90;
++
++static nlohmann::json mobileCombatAckV90(const MobileCombatLatchV90 &policy,
++    const nlohmann::json &combat, const nlohmann::json &selected)
++{
++    return {{"enabled",policy.enabled},{"suspended",policy.suspended},{"requestedSuspended",policy.requestedSuspended},
++        {"reason",policy.reason},{"requestNonce",policy.requestNonce},{"activation",policy.activation},{"context",policy.context},
++        {"pendingDeselect",policy.pendingDeselect},{"deselectNonce",policy.deselectNonce},{"deselectAppliedNonce",policy.deselectAppliedNonce},
++        {"combatIds",combat},{"selectedIds",selected},{"revision",policy.revision}};
++}
++
+ static MpCombatSelectionPolicy mpMobileCombatPolicy;
+ static std::string mpMobileCombatInputNonce;
+ static nlohmann::json mpMobileCombatState={{"enabled",false},{"suspended",false},{"reason","off"},{"combatIds",nlohmann::json::array()},{"selectedIds",nlohmann::json::array()},{"revision",0},{"requestNonce",""}};
+@@ -4164,47 +4131,54 @@
+     const bool closed=fclose(f)==0;
+     return ok&&closed&&rename(temporary.c_str(),path)==0;
+ }
++
++static void mpMobileCombatReadIntentV90()
++{
++    FILE *file=fopen("/tmp/mp-mobile-combat.json","rb"); if(!file)return;
++    char bytes[2049];const auto length=fread(bytes,1,2049,file);fclose(file);if(length>2048)return;
++    const auto request=nlohmann::json::parse(bytes,bytes+length,nullptr,false);
++    if(!request.is_object() || !request.contains("nonce") || !request["nonce"].is_string()
++        || !request.contains("enabled") || !request["enabled"].is_boolean()
++        || !request.contains("suspended") || !request["suspended"].is_boolean()
++        || !request.contains("activation") || !request["activation"].is_string()
++        || !request.contains("context") || !request["context"].is_string()
++        || !request.contains("deselect") || !request["deselect"].is_boolean())return;
++    const auto nonce=request["nonce"].get<std::string>(),activation=request["activation"].get<std::string>(),context=request["context"].get<std::string>();
++    if(nonce.empty() || nonce.size()>160 || activation.size()>160 || context.size()>160)return;
++    mpMobileCombatPolicy.intent(request["enabled"].get<bool>(),request["suspended"].get<bool>(),nonce,activation,context,request["deselect"].get<bool>());
++}
++
+ static void mpMobileCombatIntent()
+ {
+-    const auto data=mpMobileReadFile("/tmp/mp-mobile-combat.json",1024);
+-    if(data.empty())return;
+-    const auto request=nlohmann::json::parse(data,nullptr,false);
+-    if(!request.is_object()||!request.contains("nonce")||!request["nonce"].is_string()
+-        ||!request.contains("enabled")||!request["enabled"].is_boolean()
+-        ||!request.contains("suspended")||!request["suspended"].is_boolean()
+-        ||!request.contains("activation")||!request["activation"].is_string())return;
+-    const auto nonce=request["nonce"].get<std::string>();
+-    if(nonce.empty()||nonce==mpMobileCombatInputNonce)return;
+-    mpMobileCombatInputNonce=nonce;
+-    const bool world=mpMobileCanIssueOrders();
+-    const auto activation=request["activation"].get<std::string>();
+-    if(request["enabled"].get<bool>()&&(activation.empty()||activation.size()>160))return;
+-    mpMobileCombatPolicy.intent(world&&request["enabled"].get<bool>(),request["suspended"].get<bool>(),nonce,activation);
+-}
++    mpMobileCombatPolicy.observeWorld(mpMobileCanIssueOrders(),selectedPlayer,gameTime,realTime);
++    mpMobileCombatReadIntentV90();
++}
++
+ static void mpMobileCombatFrame(bool world,bool safe)
+ {
+-    std::vector<MpCombatSelectionUnit> units;
+-    if(world&&selectedPlayer<MAX_PLAYERS)for(const DROID *droid:apsDroidLists[selectedPlayer])units.push_back({droid->id,mpMobileCombatEligible(droid),droid->selected!=0});
+-    if(!world)mpMobileCombatPolicy.stop("session-ended");
+-    if(world&&mpMobileCombatPolicy.reconcile(units,safe)){
+-        for(DROID *droid:apsDroidLists[selectedPlayer]){
+-            const bool wanted=mpMobileCombatPolicy.expectedSelection.count(droid->id)>0;
+-            if(wanted&&!droid->selected)SelectDroid(droid,true);
+-            else if(!wanted&&droid->selected)DeSelectDroid(droid);
+-        }
++    std::vector<MobileCombatUnitV90> units;
++    if(world&&selectedPlayer<MAX_PLAYERS)for(const DROID *droid:apsDroidLists[selectedPlayer])
++        units.push_back({droid->id,mpMobileCombatEligible(droid),droid->selected!=0});
++    const auto changes=mpMobileCombatPolicy.reconcile(units,safe);
++    if(changes.changed())
++    {
++        for(DROID *droid:apsDroidLists[selectedPlayer])
++            if(changes.select.count(droid->id))SelectDroid(droid,true);
++            else if(changes.deselect.count(droid->id))DeSelectDroid(droid);
+         intRefreshScreen();triggerEventSelected();
+     }
+     auto combat=nlohmann::json::array(),selected=nlohmann::json::array();
+     std::set<uint32_t> combatIds,selectedIds;
+-    if(world&&selectedPlayer<MAX_PLAYERS)for(const DROID *droid:apsDroidLists[selectedPlayer]){
++    if(world&&selectedPlayer<MAX_PLAYERS)for(const DROID *droid:apsDroidLists[selectedPlayer])
++    {
+         if(mpMobileCombatEligible(droid))combatIds.insert(droid->id);
+         if(droid->selected)selectedIds.insert(droid->id);
+     }
+-    for(const auto id:combatIds)combat.push_back(id);for(const auto id:selectedIds)selected.push_back(id);
+-    mpMobileCombatState={{"enabled",mpMobileCombatPolicy.enabled},{"suspended",mpMobileCombatPolicy.suspended},
+-        {"requestedSuspended",mpMobileCombatPolicy.requestedSuspended},{"reason",mpMobileCombatPolicy.reason},
+-        {"combatIds",combat},{"selectedIds",selected},{"revision",mpMobileCombatPolicy.revision},{"requestNonce",mpMobileCombatPolicy.requestNonce},{"activation",mpMobileCombatPolicy.activation}};
+-}
++    for(const auto id:combatIds)combat.push_back(id);
++    for(const auto id:selectedIds)selected.push_back(id);
++    mpMobileCombatState=mobileCombatAckV90(mpMobileCombatPolicy,combat,selected);
++}
++
+ static void mpMobilePruneEvents()
+ {
+     const auto text=mpMobileReadFile("/tmp/mp-mobile-events-ack",32);
+@@ -4332,7 +4306,6 @@
+     const auto action=request.value("action",std::string());bool ok=false;
+     const bool allowed=mpMobileCanIssueOrders();
+     if(allowed&&(action=="deselect"||action=="select-box"||action=="select-visible-trucks")) {
+-        if(mpMobileCombatPolicy.enabled&&!mpMobileCombatPolicy.requestedSuspended)mpMobileCombatPolicy.stop("manual-selection");
+         const bool add=request.value("add",false);
+         double left=request.value("left",0.0),top=request.value("top",0.0),right=request.value("right",0.0),bottom=request.value("bottom",0.0);
+         if(action!="select-box"||(std::isfinite(left)&&std::isfinite(top)&&std::isfinite(right)&&std::isfinite(bottom))) {
+@@ -4405,7 +4378,6 @@
+     // Consume only this native object-menu dispatch; keep normal spectator
+     // world viewing/camera behavior, without opening an owned or stock panel.
+     if(!mpMobileCanIssueOrders())return true;
+-    if(object->type==OBJ_DROID&&mpMobileCombatPolicy.enabled)mpMobileCombatPolicy.stop("manual-selection");
+     intResetScreen(true);
+     if(object->type==OBJ_STRUCTURE){
+         const auto *structure=castStructure(object);

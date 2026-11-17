@@ -1,0 +1,19 @@
+--- a/src/display3d.cpp
++++ b/src/display3d.cpp
+@@ -3550,9 +3550,13 @@
+ 	}
+ 
+ 	/* Power bars */
+-	batchedMultiRectRenderer.addRect(PIERECT_DrawRequest(psDroid->sDisplay.screenX - psDroid->sDisplay.screenR - 1, psDroid->sDisplay.screenY + psDroid->sDisplay.screenR + 2, psDroid->sDisplay.screenX + psDroid->sDisplay.screenR + 1, psDroid->sDisplay.screenY + psDroid->sDisplay.screenR + 6, WZCOL_RELOAD_BACKGROUND), rectGroup);
+-	batchedMultiRectRenderer.addRect(PIERECT_DrawRequest(psDroid->sDisplay.screenX - psDroid->sDisplay.screenR, psDroid->sDisplay.screenY + psDroid->sDisplay.screenR + 3, psDroid->sDisplay.screenX - psDroid->sDisplay.screenR + damage, psDroid->sDisplay.screenY + psDroid->sDisplay.screenR + 4, powerCol), rectGroup);
+-	batchedMultiRectRenderer.addRect(PIERECT_DrawRequest(psDroid->sDisplay.screenX - psDroid->sDisplay.screenR, psDroid->sDisplay.screenY + psDroid->sDisplay.screenR + 4, psDroid->sDisplay.screenX - psDroid->sDisplay.screenR + damage, psDroid->sDisplay.screenY + psDroid->sDisplay.screenR + 5, powerColShadow), rectGroup);
++	// Normal0.89: retain selection corners and all unrelated status.
++	if (!psDroid->selected)
++	{
++		batchedMultiRectRenderer.addRect(PIERECT_DrawRequest(psDroid->sDisplay.screenX - psDroid->sDisplay.screenR - 1, psDroid->sDisplay.screenY + psDroid->sDisplay.screenR + 2, psDroid->sDisplay.screenX + psDroid->sDisplay.screenR + 1, psDroid->sDisplay.screenY + psDroid->sDisplay.screenR + 6, WZCOL_RELOAD_BACKGROUND), rectGroup);
++		batchedMultiRectRenderer.addRect(PIERECT_DrawRequest(psDroid->sDisplay.screenX - psDroid->sDisplay.screenR, psDroid->sDisplay.screenY + psDroid->sDisplay.screenR + 3, psDroid->sDisplay.screenX - psDroid->sDisplay.screenR + damage, psDroid->sDisplay.screenY + psDroid->sDisplay.screenR + 4, powerCol), rectGroup);
++		batchedMultiRectRenderer.addRect(PIERECT_DrawRequest(psDroid->sDisplay.screenX - psDroid->sDisplay.screenR, psDroid->sDisplay.screenY + psDroid->sDisplay.screenR + 4, psDroid->sDisplay.screenX - psDroid->sDisplay.screenR + damage, psDroid->sDisplay.screenY + psDroid->sDisplay.screenR + 5, powerColShadow), rectGroup);
++	}
+ 	batchedMultiRectRenderer.addRect(PIERECT_DrawRequest(
+ 		psDroid->sDisplay.screenX - psDroid->sDisplay.screenR - 3,
+ 		psDroid->sDisplay.screenY + psDroid->sDisplay.screenR,

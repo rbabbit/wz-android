@@ -5,7 +5,6 @@
       || new URLSearchParams(location.search).get('mode') === 'campaign')) return;
   const host = window.parent?.WarzoneHost ? window.parent : window, doc = host.document;
   const FRAME = '/tmp/warzone-campaign-state-v51.json';
-  const CONTROL = '/data/base/script/campaign/mobile/campaign-control.json';
   const state = {snapshot:null,frame:null,allCombat:false,selectionPending:false,selectionRequests:0,
     selectedCount:0,lastSelection:0,lastError:'',intent:'',intentKey:'',serial:0,interactionUntil:0,
     nativeVisible:false,offsets:{},partials:{},ended:false,physicalPointers:new Set(),briefingKey:false};
@@ -36,34 +35,11 @@
       ||window.WarzoneSavedGames?.ready===false;
   }
   function writeIntent(force=false) {
-    const value={enabled:state.allCombat,suspended:Boolean(suspended())},key=JSON.stringify(value);
-    if(!force&&key===state.intentKey)return true;
-    // The campaign control file is part of the native preload package. Do not
-    // create it from the host while Emscripten is still creating that package.
-    const current=module(),fs=current?.FS;if(current?.calledRun!==true||!state.frame||!fs?.writeFile||!fs?.rename)return false;
-    try{
-      const nonce='campaign-ui-'+Date.now()+'-'+(++state.serial);
-      fs.writeFile(CONTROL+'.tmp',JSON.stringify({nonce,...value}),{encoding:'utf8'});
-      fs.rename(CONTROL+'.tmp',CONTROL);state.intent=nonce;state.intentKey=key;return true;
-    }catch(error){state.lastError=String(error.message||error);return false;}
+    // One shared requested latch owns all offline modes in v0.90.
+    return window.__kalaWarzoneTouch?.refreshCombatLock?.() || false;
   }
   function toggleAllCombat(force) {
-    state.allCombat=typeof force==='boolean'?force:!state.allCombat;
-    state.interactionUntil=0;state.lastSelection=0;writeIntent(true);render();
-    if(state.allCombat)void selectCombat();return state.allCombat;
-  }
-  async function selectCombat() {
-    if(!state.allCombat||state.selectionPending||suspended()||!writeIntent())return false;
-    const commands=window.__warzoneCommands;if(!commands?.send)return false;
-    const intent=state.intent,session=state.snapshot.session;state.selectionPending=true;state.lastSelection=Date.now();state.selectionRequests++;
-    try{
-      const reply=await commands.send('campaign-select-combat',{intent});
-      if(intent!==state.intent||session!==state.snapshot?.session||!state.allCombat)return false;
-      if(reply.ok){state.selectedCount=Number(reply.result?.count||reply.result?.selectedCount||reply.result?.selectedIds?.length||0);state.lastError='';return true;}
-      if(!['suspended','selection-suspended','native-panel','not-world-safe'].includes(reply.reason))state.lastError=String(reply.reason||'Combat selection is unavailable.');
-    }catch(error){state.lastError=String(error.message||error);}
-    finally{state.selectionPending=false;render();}
-    return false;
+    const value=window.__kalaWarzoneTouch?.toggleCombatLock?.(force)||false;state.allCombat=value;render();return value;
   }
   function revealNativeUi() {
     void window.__warzoneIntelligence?.close?.(true);
@@ -118,7 +94,7 @@
       body.wt-campaign #wt-campaign-native-back[hidden]{display:none!important}`;doc.head.appendChild(style);
     const all=doc.createElement('button');all.id='wt-campaign-all-combat';all.type='button';all.innerHTML='<img src="/warzone/ui/icons/stack.svg" alt=""><span>ALL COMBAT</span>';
     all.setAttribute('aria-pressed','false');all.title='Keep combat units selected; constructors, sensors, repair units and transports are excluded';
-    all.addEventListener('click',()=>toggleAllCombat());
+    all.addEventListener('click',()=>{toggleAllCombat();window.__warzoneCommands?.afterBuildExit?.(()=>true);});
     // Reuse the Base command group and its accepted spacing/selected styles.
     // Research remains first; Intelligence reports are in the unit drawer.
     const group=element('blocknight-base')?.parentElement;
@@ -137,7 +113,8 @@
     for(const id of ['wt-field-centre','wt-field-toggle','lab-ops','wt-status-panel']){const node=element(id);if(node){node.style.visibility=native?'hidden':'';node.inert=native;}}
     const back=element('wt-campaign-native-back');if(back)back.hidden=!native||video;
     if(!state.snapshot)return;
-    const all=element('wt-campaign-all-combat');if(all){all.classList.toggle('active',state.allCombat);all.setAttribute('aria-pressed',String(state.allCombat));all.disabled=state.ended;}
+    state.allCombat=window.__kalaWarzoneTouch?.report?.().combatLockRequested===true;
+    const all=element('wt-campaign-all-combat');if(all){all.dataset.combatEnabled=String(state.allCombat);all.classList.toggle('active',state.allCombat);all.setAttribute('aria-pressed',String(state.allCombat));all.disabled=state.ended;}
     const footer=element('blocknight-select-all');if(footer){footer.classList.toggle('active',state.allCombat);footer.setAttribute('aria-pressed',String(state.allCombat));}
     const status=element('warzone-campaign-status');if(status){
       const seconds=Math.max(0,Math.floor(Number(state.snapshot.missionTime)||0));
@@ -195,7 +172,7 @@
     if(state.frame?.playing||state.frame?.video)window.__kalaWarzoneTouch?.setBattleActive?.(true);
     const native=nativeUiActive();if(native&&!state.nativeVisible)revealNativeUi();state.nativeVisible=native;
     pollLogs(fs,current);writeIntent();render();
-    if(state.allCombat&&!suspended()&&Date.now()-state.lastSelection>=500)void selectCombat();
+    // The common native frame policy includes newly produced combat units.
   }
   doc.addEventListener('pointerdown',event=>{if(event.target.closest?.('button,input,select')&&!event.target.closest?.('#wt-campaign-all-combat,#blocknight-select-all')){state.interactionUntil=Date.now()+250;writeIntent(true);}},true);
   function physicalPointer(event){return event.pointerType==='touch'||event.pointerType==='pen'||event.pointerType==='mouse'&&event.isTrusted===true;}
@@ -223,7 +200,7 @@
     briefingKeyActive:()=>state.briefingKey,
     handleBack:()=>window.__warzoneIntelligence?.handleBack?.()||(nativeUiActive()&&Boolean(state.frame)?closeNativeUi():false),
     refreshIntent:()=>writeIntent(true),
-    report:()=>({snapshot:state.snapshot,frame:state.frame,nativeState:state.frame,allCombat:state.allCombat,suspended:Boolean(suspended()),selectedCount:state.selectedCount,
+    report:()=>({snapshot:state.snapshot,frame:state.frame,nativeState:state.frame,allCombat:window.__kalaWarzoneTouch?.report?.().combatLockRequested===true,suspended:Boolean(suspended()),selectedCount:state.selectedCount,
       selectionPending:state.selectionPending,selectionRequests:state.selectionRequests,lastError:state.lastError,intent:state.intent,
       physicalPointerCount:state.physicalPointers.size,inputSettling:Date.now()<state.interactionUntil})};
   setInterval(poll,150);

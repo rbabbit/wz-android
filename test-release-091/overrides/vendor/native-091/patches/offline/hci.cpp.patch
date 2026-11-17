@@ -1,0 +1,18 @@
+--- a/src/hci.cpp
++++ b/src/hci.cpp
+@@ -2434,6 +2434,7 @@
+ }
+ 
+ 
++#include "mobile-players-v91.h"
+ // BEGIN NORMAL090_NATIVE_COMBAT_LATCH
+ #include "geometry.h"
+ #include "mobile-combat-latch-v90.h"
+@@ -2517,6 +2518,7 @@
+ {
+ #if defined(__EMSCRIPTEN__)
+     static uint64_t publicationSerial=0;
++    mobilePlayersFrameV91(GetGameMode()==GS_NORMAL&&gameInitialised&&!loop_GetVideoStatus());
+     const bool playing=GetGameMode()==GS_NORMAL && gameInitialised && selectedPlayer<MAX_PLAYERS
+         && realSelectedPlayer==selectedPlayer && !NetPlay.players[selectedPlayer].isSpectator;
+     const bool video=loop_GetVideoStatus(),paused=gamePaused()||gameUpdatePaused();

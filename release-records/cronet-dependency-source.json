@@ -1,0 +1,57 @@
+{
+  "scope": "Pinned public dependency/source/license provenance only; no phone/server request data",
+  "artifact": "org.chromium.net:cronet-bundled:500.1.0",
+  "artifacts": [
+    {
+      "coordinate": "org.chromium.net:cronet:500.1.0",
+      "aarURL": "https://dl.google.com/dl/android/maven2/org/chromium/net/cronet/500.1.0/cronet-500.1.0.aar",
+      "aarBytes": 655111,
+      "aarSHA256": "d0cbb75a3e558166a1e21747d75b788b2650ddf8bec321b727b0878f01addcf8",
+      "pomURL": "https://dl.google.com/dl/android/maven2/org/chromium/net/cronet/500.1.0/cronet-500.1.0.pom",
+      "pomSHA256": "f447a32d81cf038b09b4665c142125c579822f8e059ac12f4d40527cafd1f5f4",
+      "classesJarSHA256": "da0d224d49346e06d6fa87d6ea6df1b899983ca20934035fb10b05c7dffa9721"
+    },
+    {
+      "coordinate": "org.chromium.net:cronet-bundled:500.1.0",
+      "aarURL": "https://dl.google.com/dl/android/maven2/org/chromium/net/cronet-bundled/500.1.0/cronet-bundled-500.1.0.aar",
+      "aarBytes": 13956135,
+      "aarSHA256": "fa286aeebe66dcab4a64df017d566cb8ec563c3bb63af527997c3a4e056bf295",
+      "pomURL": "https://dl.google.com/dl/android/maven2/org/chromium/net/cronet-bundled/500.1.0/cronet-bundled-500.1.0.pom",
+      "pomSHA256": "cfe01abcd8f934f6db07eb6ba189983be5da4cfb04ff7881d3dd6b94b5cece8d",
+      "classesJarSHA256": "b853d70a07be9f67d5b5989025edc12228b0d2b04e9c7443e67d632f4f39f51e",
+      "nativeLibraryVersion": "155.0.8059.16",
+      "minSDK": 24,
+      "jni": [
+        {
+          "path": "jni/arm64-v8a/libcronet.155.0.8059.16.so",
+          "sha256": "a1e67b83633a7cd848d6e5b023c77a89c4536360ee9ddd1db58688fff43abe38"
+        },
+        {
+          "path": "jni/armeabi-v7a/libcronet.155.0.8059.16.so",
+          "sha256": "5b7e2326be04e690548bd1fd85125b4a847b487a026ddf1c020075615f30c3c4"
+        },
+        {
+          "path": "jni/x86/libcronet.155.0.8059.16.so",
+          "sha256": "5e8bae529f820f3a4071592b3df9611c2dc10d90e2366b35597d74973508d4cf"
+        },
+        {
+          "path": "jni/x86_64/libcronet.155.0.8059.16.so",
+          "sha256": "c177e52f3dfcf8d89f42c15e30278a543f68a93aa181604c1621d39afc65026b"
+        }
+      ],
+      "license": {
+        "source": "third_party_licenses.txt inside exact official bundled AAR",
+        "path": "vendor/cronet-500.1.0/LICENSES.txt",
+        "bytes": 445003,
+        "sha256": "df9654cc9b0879e04fbe5ad8e0e12fc8c1932384bab15c89af6080a86c48a5c3"
+      }
+    }
+  ],
+  "provider": "App-Packaged-Cronet-Provider",
+  "publicSource": "https://chromium.googlesource.com/chromium/src/+/155.0.8059.16/",
+  "publicLicense": "https://chromium.googlesource.com/chromium/src/+/155.0.8059.16/LICENSE",
+  "apiReference": "https://developer.android.com/develop/connectivity/cronet/reference/org/chromium/net/CronetEngine",
+  "coldBuild": "Use the normal test profile build with --online to resolve exact pinned Google Maven dependencies; no Play Services provider or dynamic download is needed at app runtime.",
+  "echNegotiationVerified": false,
+  "cellularSuccessClaimed": false
+}

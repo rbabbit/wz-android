@@ -63,10 +63,24 @@ final class HomeModesView extends FrameLayout {
         hub.setOnClickListener(v -> actions.hub());
         addView(hub);
 
-        version = text("rbabbit v" + GraphicsSetupView.appVersion(context), 10,
+        String installedVersion = GraphicsSetupView.appVersion(context);
+        version = text("rbabbit v" + installedVersion
+                + (BuildConfig.PLAY_STORE_BUILD ? "" : " - Check for updates"), 12,
                 TowersTheme.SECONDARY);
-        version.setContentDescription("rbabbit, version " + GraphicsSetupView.appVersion(context));
-        version.setSingleLine(true);
+        version.setContentDescription((BuildConfig.PLAY_STORE_BUILD
+                ? "Installed version " : "Check for updates. Installed version ") + installedVersion);
+        version.setGravity(Gravity.CENTER);
+        version.setMinHeight(dp(48));
+        version.setPadding(dp(8), 0, dp(8), 0);
+        if (!BuildConfig.PLAY_STORE_BUILD) {
+            version.setBackground(new RippleDrawable(ColorStateList.valueOf(TowersTheme.RIPPLE), null, null));
+            version.setOnClickListener(v -> actions.updates());
+        } else {
+            version.setClickable(false);
+            version.setFocusable(false);
+        }
+        version.setSingleLine(false);
+        version.setMaxLines(2);
         addView(version);
         status = text("", 12, TowersTheme.TEXT);
         status.setMaxLines(2);
@@ -132,7 +146,7 @@ final class HomeModesView extends FrameLayout {
         HomeMenuLayout.Result safeLayout = HomeMenuLayout.measure(width, height, density,
                 safeLeft, safeTop, safeRight, safeBottom, labelWidths, fontHeight, 0);
         int footerWidth = safeLayout.contentRight - safeLayout.contentLeft;
-        version.setTextSize(TypedValue.COMPLEX_UNIT_SP, 10);
+        version.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
         version.measure(MeasureSpec.makeMeasureSpec(footerWidth,
                 MeasureSpec.AT_MOST), MeasureSpec.makeMeasureSpec(height, MeasureSpec.AT_MOST));
         if (status.getVisibility() == VISIBLE) {

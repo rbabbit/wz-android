@@ -1,0 +1,87 @@
+{
+  "version": "0.86",
+  "passed": true,
+  "emulatorUsed": false,
+  "actualNativeEngineExecuted": false,
+  "checksPassed": 48,
+  "checks": [
+    "towers: one authoritative ALL command manufactures once at each owned completed compatible vehicle factory",
+    "towers: cyborg ALL is independent, skips uncompleted lower IDs, and vehicle designs cannot reach cyborgs",
+    "towers: stale/nonfirst/VTOL ALL requests fail before mutation and first changes follow actual native inventory",
+    "towers: module and 64-job capacity checks skip peers without touching unrelated queues",
+    "towers: ALL cycle OFF preserves active units/FIFO and a different repeat design; STOP stays local",
+    "towers: ALL cycle on idle factories cannot create manufacture; capacity waits and peer native rejections remain bounded",
+    "towers: batch repeat state survives ordinary script save/load and does not auto-enroll new factories",
+    "ffa: one authoritative ALL command manufactures once at each owned completed compatible vehicle factory",
+    "ffa: cyborg ALL is independent, skips uncompleted lower IDs, and vehicle designs cannot reach cyborgs",
+    "ffa: stale/nonfirst/VTOL ALL requests fail before mutation and first changes follow actual native inventory",
+    "ffa: module and 64-job capacity checks skip peers without touching unrelated queues",
+    "ffa: ALL cycle OFF preserves active units/FIFO and a different repeat design; STOP stays local",
+    "ffa: ALL cycle on idle factories cannot create manufacture; capacity waits and peer native rejections remain bounded",
+    "ffa: batch repeat state survives ordinary script save/load and does not auto-enroll new factories",
+    "campaign: one authoritative ALL command manufactures once at each owned completed compatible vehicle factory",
+    "campaign: cyborg ALL is independent, skips uncompleted lower IDs, and vehicle designs cannot reach cyborgs",
+    "campaign: stale/nonfirst/VTOL ALL requests fail before mutation and first changes follow actual native inventory",
+    "campaign: module and 64-job capacity checks skip peers without touching unrelated queues",
+    "campaign: ALL cycle OFF preserves active units/FIFO and a different repeat design; STOP stays local",
+    "campaign: ALL cycle on idle factories cannot create manufacture; capacity waits and peer native rejections remain bounded",
+    "campaign: batch repeat state survives ordinary script save/load and does not auto-enroll new factories",
+    "multiplayer: one authoritative ALL command manufactures once at each owned completed compatible vehicle factory",
+    "multiplayer: cyborg ALL is independent, skips uncompleted lower IDs, and vehicle designs cannot reach cyborgs",
+    "multiplayer: stale/nonfirst/VTOL ALL requests fail before mutation and first changes follow actual native inventory",
+    "multiplayer: module and 64-job capacity checks skip peers without touching unrelated queues",
+    "multiplayer: ALL cycle OFF preserves active units/FIFO and a different repeat design; STOP stays local",
+    "multiplayer: ALL cycle on idle factories cannot create manufacture; capacity waits and peer native rejections remain bounded",
+    "multiplayer: batch repeat state survives ordinary script save/load and does not auto-enroll new factories",
+    "towers: ALL appears only beside cycles on first vehicle/cyborg factory, not factory 2 or VTOL",
+    "towers: idle ALL/cycle only arm scope; Manufacture sends one explicit native batch and suppresses peer racing requests",
+    "towers: ALL cycle toggle addresses matching peer state, rolls back failure and preserves factory/page callback identity",
+    "towers: new session/rewind and destroyed source clear ALL drafts without changing finite default or unrelated category",
+    "towers: after STOP on factory 1 the ALL cycle still exposes and disables matching sibling repeat policies",
+    "ffa: ALL appears only beside cycles on first vehicle/cyborg factory, not factory 2 or VTOL",
+    "ffa: idle ALL/cycle only arm scope; Manufacture sends one explicit native batch and suppresses peer racing requests",
+    "ffa: ALL cycle toggle addresses matching peer state, rolls back failure and preserves factory/page callback identity",
+    "ffa: new session/rewind and destroyed source clear ALL drafts without changing finite default or unrelated category",
+    "ffa: after STOP on factory 1 the ALL cycle still exposes and disables matching sibling repeat policies",
+    "campaign: ALL appears only beside cycles on first vehicle/cyborg factory, not factory 2 or VTOL",
+    "campaign: idle ALL/cycle only arm scope; Manufacture sends one explicit native batch and suppresses peer racing requests",
+    "campaign: ALL cycle toggle addresses matching peer state, rolls back failure and preserves factory/page callback identity",
+    "campaign: new session/rewind and destroyed source clear ALL drafts without changing finite default or unrelated category",
+    "campaign: after STOP on factory 1 the ALL cycle still exposes and disables matching sibling repeat policies",
+    "multiplayer: ALL appears only beside cycles on first vehicle/cyborg factory, not factory 2 or VTOL",
+    "multiplayer: idle ALL/cycle only arm scope; Manufacture sends one explicit native batch and suppresses peer racing requests",
+    "multiplayer: ALL cycle toggle addresses matching peer state, rolls back failure and preserves factory/page callback identity",
+    "multiplayer: new session/rewind and destroyed source clear ALL drafts without changing finite default or unrelated category",
+    "multiplayer: after STOP on factory 1 the ALL cycle still exposes and disables matching sibling repeat policies"
+  ],
+  "sources": [
+    {
+      "path": "scenario/warzone-towers-commands.js",
+      "sha256": "57f89e1c0b9d35765198ceb815788d521ef492ad89b42b0545497d4e11c7ac66"
+    },
+    {
+      "path": "campaign/commands.js",
+      "sha256": "7b825f382afdb7d3bed88ca63ed6bb4a3e739c05a1be85b31dc0f2cc4406c3df"
+    },
+    {
+      "path": "scenario/ffa/commands.js",
+      "sha256": "fe50f43c08e7ef12cd2ae31758352e1884578340515304caa18348cad2855843"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/mobile-ui-runtime.js",
+      "sha256": "9331445e72ad4593c8b1b6385a6a5eb54f33046340519fe74de8d85579bb0790"
+    },
+    {
+      "path": "app/src/main/assets/warzone-command-pages.js",
+      "sha256": "64c9d126860d333b1c5f92f1e10df4186b4e6776dd60b2f88d72f00c9c073a2e"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/towers-commands.css",
+      "sha256": "41d113242168c9978e1fd796361b001f6b6d72a7f89d5103d1e2529a7675e09b"
+    },
+    {
+      "path": "tools/test-manufacturing-all-086.cjs",
+      "sha256": "54497821dfc746a3e07bc5e7662be1bddfc175722518286143e67b8ab8c80b2d"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "recordedUTC": "2026-11-17T15:54:41.901450+00:00",
+  "baselineAPK_SHA256": "a19848c0ecfac6a4b20b1510f5889b771fd739de340da7e842916d59cfe020d3",
+  "userAcceptedWorkingBaseline": true,
+  "reproducedInActualOwnedEmulator": true,
+  "physicalViewport": [
+    2400,
+    1080
+  ],
+  "evidence": {
+    "path": "C:\\timerApp\\players-polish-092-20261117\\02-baseline-towers-players.png",
+    "sha256": "ea88dd3b7745dc5bec7c0047811193f2dccd883bca45b762b741e9792788f541"
+  },
+  "preparedArchivesFingerprintsVerified": true,
+  "fixtureDisclosure": {
+    "Towers": "Retained original4constructors plus2previouslyseededMGs; loadedrealengine state, no current seeding.",
+    "Campaign": "Retained5realcombat save.",
+    "FFA": "Retainedunmodifiednative save andnormalfactory."
+  },
+  "issues": [
+    "Full-screen blackpage hidesbattlefield; oversizedcards wasteheight.",
+    "RedundantPLAYERS/mode/role/readOnlyintro plusCloseandPlayerControls.",
+    "Roster requirescompactlive table andmodeappropriatestatfields.",
+    "MPParticipants/Spectators/Details tabsandDetailsEconomyArmy/Upgrades grouping.",
+    "Preservefreshness/permissionguard; tab/focus/scroll duringliveupdates; shieldworldinputwhileopen."
+  ],
+  "requiredChecks": [
+    "ActualTowers/Campaign/FFA/MPplayer/spectator engine snapshots andscreens.",
+    "ExactdeliveryAPKnowedsigner/sourceintegrity.",
+    "GlobalPLAYERS repeatedtoggleandBack; Research/Build/IME returns.",
+    "Selectionlatch/nativeorders andordinaryproduction duringmodal.",
+    "Compactviewports andnativephysicalscreenchecks."
+  ],
+  "codeEditsStarted": false,
+  "publicationAuthorized": false
+}

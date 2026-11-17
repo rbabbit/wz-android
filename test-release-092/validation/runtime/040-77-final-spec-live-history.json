@@ -1,0 +1,674 @@
+{
+  "passed": true,
+  "scope": "Observed spectator Economy DOM/native telemetry only; not physical paint or gameplay input",
+  "configuredSourcePollMs": 150,
+  "sourcePollNote": "warzone-command-pages.js final setInterval150ms; actual data repaint may be held after input/focus and need not follow every native frame",
+  "requestedObservationSeconds": 4.0,
+  "maxNativeObservationAgeSeconds": 2.0,
+  "context": [
+    "players91:38415:1",
+    "players91:38415:1",
+    13,
+    13
+  ],
+  "samples": [
+    {
+      "elapsedSeconds": 2.0831198999658227,
+      "readDurationMs": 2083.117,
+      "context": [
+        "players91:38415:1",
+        "players91:38415:1",
+        13,
+        13
+      ],
+      "native": {
+        "capabilities": {
+          "fullSpectatorStats": true,
+          "legacyPlayers": false,
+          "legacySpectatorStats": true,
+          "readOnly": true,
+          "teamMode": true
+        },
+        "context": "players91:38415:1",
+        "frame": 247,
+        "gameTime": 126702,
+        "mode": "multiplayer",
+        "nativeMenu": {
+          "players": false,
+          "spectatorStats": false
+        },
+        "players": [
+          {
+            "ai": false,
+            "allocated": true,
+            "colorIndex": 2,
+            "colorRGB": [
+              144,
+              144,
+              144
+            ],
+            "connectionFlags": [],
+            "connectionState": "connected",
+            "host": true,
+            "human": true,
+            "id": 0,
+            "kind": "human",
+            "local": false,
+            "name": "Room Host",
+            "observerDetails": {
+              "kills": 0,
+              "kineticArmor": {
+                "cyborg": 0,
+                "tank": 0
+              },
+              "labUsePercent": 0,
+              "power": 2991,
+              "powerLost": "0",
+              "powerRate": "+4",
+              "powerWon": "0",
+              "thermalArmor": {
+                "cyborg": 0,
+                "tank": 0
+              },
+              "units": 2,
+              "weaponGrades": [
+                {
+                  "grade": 3,
+                  "id": 0,
+                  "name": "MG"
+                },
+                {
+                  "grade": 1,
+                  "id": 1,
+                  "name": "Cannons"
+                },
+                {
+                  "grade": 1,
+                  "id": 4,
+                  "name": "Rockets"
+                },
+                {
+                  "grade": 3,
+                  "id": 7,
+                  "name": "Flame"
+                },
+                {
+                  "grade": 3,
+                  "id": 10,
+                  "name": "A-A"
+                }
+              ]
+            },
+            "position": 0,
+            "relationship": "observer",
+            "spectator": false,
+            "state": "active",
+            "stats": {
+              "kills": 0,
+              "pingMs": null,
+              "power": 2991,
+              "score": 0,
+              "structures": 24,
+              "units": 2
+            },
+            "team": 1,
+            "viewed": false
+          },
+          {
+            "ai": true,
+            "allocated": false,
+            "colorIndex": 0,
+            "colorRGB": [
+              16,
+              112,
+              16
+            ],
+            "connectionFlags": [],
+            "connectionState": null,
+            "host": false,
+            "human": false,
+            "id": 1,
+            "kind": "ai",
+            "local": false,
+            "name": "Green-",
+            "observerDetails": {
+              "kills": 0,
+              "kineticArmor": {
+                "cyborg": 0,
+                "tank": 0
+              },
+              "labUsePercent": 86.04832424006236,
+              "power": 1397,
+              "powerLost": "0",
+              "powerRate": "+3",
+              "powerWon": "0",
+              "thermalArmor": {
+                "cyborg": 0,
+                "tank": 0
+              },
+              "units": 12,
+              "weaponGrades": [
+                {
+                  "grade": 3,
+                  "id": 0,
+                  "name": "MG"
+                },
+                {
+                  "grade": 1,
+                  "id": 1,
+                  "name": "Cannons"
+                },
+                {
+                  "grade": 2,
+                  "id": 4,
+                  "name": "Rockets"
+                },
+                {
+                  "grade": 3,
+                  "id": 7,
+                  "name": "Flame"
+                },
+                {
+                  "grade": 3,
+                  "id": 10,
+                  "name": "A-A"
+                }
+              ]
+            },
+            "position": 1,
+            "relationship": "observer",
+            "spectator": false,
+            "state": "active",
+            "stats": {
+              "kills": 0,
+              "pingMs": null,
+              "power": 1397,
+              "score": 0,
+              "structures": 31,
+              "units": 12
+            },
+            "team": 0,
+            "viewed": false
+          }
+        ],
+        "ready": true,
+        "realTime": 358004,
+        "schemaVersion": 91,
+        "spectators": [
+          {
+            "ai": false,
+            "allocated": true,
+            "colorIndex": null,
+            "colorRGB": null,
+            "connectionFlags": [],
+            "connectionState": "connected",
+            "host": false,
+            "human": true,
+            "id": 13,
+            "kind": "spectator",
+            "local": true,
+            "name": "NoobCrusher1(m)",
+            "observerDetails": null,
+            "position": 13,
+            "relationship": "observer",
+            "spectator": true,
+            "state": "spectator",
+            "stats": {
+              "kills": null,
+              "pingMs": null,
+              "power": null,
+              "score": null,
+              "structures": null,
+              "units": null
+            },
+            "team": null,
+            "viewed": true
+          }
+        ],
+        "viewer": {
+          "canIssueOrders": false,
+          "ownsViewedPlayer": false,
+          "realPlayer": 13,
+          "role": "spectator",
+          "viewedPlayer": 13
+        }
+      },
+      "columns": [
+        "PLAYER",
+        "POWER",
+        "RATE",
+        "LOST",
+        "WON",
+        "LAB USE",
+        "KILLS",
+        "UNITS"
+      ],
+      "expectedFormattedRows": [
+        {
+          "playerId": 0,
+          "name": "Room Host",
+          "cells": [
+            "2991",
+            "+4",
+            "0",
+            "0",
+            "0%",
+            "0",
+            "2"
+          ],
+          "host": true
+        },
+        {
+          "playerId": 1,
+          "name": "Green-",
+          "cells": [
+            "1397",
+            "+3",
+            "0",
+            "0",
+            "86.05%",
+            "0",
+            "12"
+          ],
+          "host": false
+        }
+      ],
+      "renderedRows": [
+        {
+          "name": "Room Host",
+          "cells": [
+            "2990",
+            "+4",
+            "0",
+            "0",
+            "0%",
+            "0",
+            "2"
+          ]
+        },
+        {
+          "name": "Green-",
+          "cells": [
+            "1396",
+            "+3",
+            "0",
+            "0",
+            "86.14%",
+            "0",
+            "12"
+          ]
+        }
+      ]
+    },
+    {
+      "elapsedSeconds": 4.130152500001714,
+      "readDurationMs": 1995.744,
+      "context": [
+        "players91:38415:1",
+        "players91:38415:1",
+        13,
+        13
+      ],
+      "native": {
+        "capabilities": {
+          "fullSpectatorStats": true,
+          "legacyPlayers": false,
+          "legacySpectatorStats": true,
+          "readOnly": true,
+          "teamMode": true
+        },
+        "context": "players91:38415:1",
+        "frame": 248,
+        "gameTime": 127302,
+        "mode": "multiplayer",
+        "nativeMenu": {
+          "players": false,
+          "spectatorStats": false
+        },
+        "players": [
+          {
+            "ai": false,
+            "allocated": true,
+            "colorIndex": 2,
+            "colorRGB": [
+              144,
+              144,
+              144
+            ],
+            "connectionFlags": [],
+            "connectionState": "connected",
+            "host": true,
+            "human": true,
+            "id": 0,
+            "kind": "human",
+            "local": false,
+            "name": "Room Host",
+            "observerDetails": {
+              "kills": 0,
+              "kineticArmor": {
+                "cyborg": 0,
+                "tank": 0
+              },
+              "labUsePercent": 0,
+              "power": 2993,
+              "powerLost": "0",
+              "powerRate": "+4",
+              "powerWon": "0",
+              "thermalArmor": {
+                "cyborg": 0,
+                "tank": 0
+              },
+              "units": 2,
+              "weaponGrades": [
+                {
+                  "grade": 3,
+                  "id": 0,
+                  "name": "MG"
+                },
+                {
+                  "grade": 1,
+                  "id": 1,
+                  "name": "Cannons"
+                },
+                {
+                  "grade": 1,
+                  "id": 4,
+                  "name": "Rockets"
+                },
+                {
+                  "grade": 3,
+                  "id": 7,
+                  "name": "Flame"
+                },
+                {
+                  "grade": 3,
+                  "id": 10,
+                  "name": "A-A"
+                }
+              ]
+            },
+            "position": 0,
+            "relationship": "observer",
+            "spectator": false,
+            "state": "active",
+            "stats": {
+              "kills": 0,
+              "pingMs": null,
+              "power": 2993,
+              "score": 0,
+              "structures": 24,
+              "units": 2
+            },
+            "team": 1,
+            "viewed": false
+          },
+          {
+            "ai": true,
+            "allocated": false,
+            "colorIndex": 0,
+            "colorRGB": [
+              16,
+              112,
+              16
+            ],
+            "connectionFlags": [],
+            "connectionState": null,
+            "host": false,
+            "human": false,
+            "id": 1,
+            "kind": "ai",
+            "local": false,
+            "name": "Green-",
+            "observerDetails": {
+              "kills": 0,
+              "kineticArmor": {
+                "cyborg": 0,
+                "tank": 0
+              },
+              "labUsePercent": 85.91331269349845,
+              "power": 1249,
+              "powerLost": "0",
+              "powerRate": "+3",
+              "powerWon": "0",
+              "thermalArmor": {
+                "cyborg": 0,
+                "tank": 0
+              },
+              "units": 12,
+              "weaponGrades": [
+                {
+                  "grade": 3,
+                  "id": 0,
+                  "name": "MG"
+                },
+                {
+                  "grade": 1,
+                  "id": 1,
+                  "name": "Cannons"
+                },
+                {
+                  "grade": 2,
+                  "id": 4,
+                  "name": "Rockets"
+                },
+                {
+                  "grade": 3,
+                  "id": 7,
+                  "name": "Flame"
+                },
+                {
+                  "grade": 3,
+                  "id": 10,
+                  "name": "A-A"
+                }
+              ]
+            },
+            "position": 1,
+            "relationship": "observer",
+            "spectator": false,
+            "state": "active",
+            "stats": {
+              "kills": 0,
+              "pingMs": null,
+              "power": 1249,
+              "score": 0,
+              "structures": 31,
+              "units": 12
+            },
+            "team": 0,
+            "viewed": false
+          }
+        ],
+        "ready": true,
+        "realTime": 359489,
+        "schemaVersion": 91,
+        "spectators": [
+          {
+            "ai": false,
+            "allocated": true,
+            "colorIndex": null,
+            "colorRGB": null,
+            "connectionFlags": [],
+            "connectionState": "connected",
+            "host": false,
+            "human": true,
+            "id": 13,
+            "kind": "spectator",
+            "local": true,
+            "name": "NoobCrusher1(m)",
+            "observerDetails": null,
+            "position": 13,
+            "relationship": "observer",
+            "spectator": true,
+            "state": "spectator",
+            "stats": {
+              "kills": null,
+              "pingMs": null,
+              "power": null,
+              "score": null,
+              "structures": null,
+              "units": null
+            },
+            "team": null,
+            "viewed": true
+          }
+        ],
+        "viewer": {
+          "canIssueOrders": false,
+          "ownsViewedPlayer": false,
+          "realPlayer": 13,
+          "role": "spectator",
+          "viewedPlayer": 13
+        }
+      },
+      "columns": [
+        "PLAYER",
+        "POWER",
+        "RATE",
+        "LOST",
+        "WON",
+        "LAB USE",
+        "KILLS",
+        "UNITS"
+      ],
+      "expectedFormattedRows": [
+        {
+          "playerId": 0,
+          "name": "Room Host",
+          "cells": [
+            "2993",
+            "+4",
+            "0",
+            "0",
+            "0%",
+            "0",
+            "2"
+          ],
+          "host": true
+        },
+        {
+          "playerId": 1,
+          "name": "Green-",
+          "cells": [
+            "1249",
+            "+3",
+            "0",
+            "0",
+            "85.91%",
+            "0",
+            "12"
+          ],
+          "host": false
+        }
+      ],
+      "renderedRows": [
+        {
+          "name": "Room Host",
+          "cells": [
+            "2993",
+            "+4",
+            "0",
+            "0",
+            "0%",
+            "0",
+            "2"
+          ]
+        },
+        {
+          "name": "Green-",
+          "cells": [
+            "1249",
+            "+3",
+            "0",
+            "0",
+            "85.91%",
+            "0",
+            "12"
+          ]
+        }
+      ]
+    }
+  ],
+  "renderedChanges": [
+    {
+      "elapsedSeconds": 2.0831198999658227,
+      "rendered": [
+        {
+          "name": "Room Host",
+          "cells": [
+            "2990",
+            "+4",
+            "0",
+            "0",
+            "0%",
+            "0",
+            "2"
+          ]
+        },
+        {
+          "name": "Green-",
+          "cells": [
+            "1396",
+            "+3",
+            "0",
+            "0",
+            "86.14%",
+            "0",
+            "12"
+          ]
+        }
+      ]
+    },
+    {
+      "elapsedSeconds": 4.130152500001714,
+      "rendered": [
+        {
+          "name": "Room Host",
+          "cells": [
+            "2993",
+            "+4",
+            "0",
+            "0",
+            "0%",
+            "0",
+            "2"
+          ]
+        },
+        {
+          "name": "Green-",
+          "cells": [
+            "1249",
+            "+3",
+            "0",
+            "0",
+            "85.91%",
+            "0",
+            "12"
+          ]
+        }
+      ]
+    }
+  ],
+  "error": null,
+  "ownedCommandsIssued": false,
+  "UIInputIssued": false,
+  "finalDOMMatchesRecentSameContextNativePackets": [
+    {
+      "ageSeconds": 0.0,
+      "observedAtSeconds": 4.130152500001714,
+      "nativeFrame": 248,
+      "nativeRealTime": 359489,
+      "nativeGameTime": 127302
+    }
+  ],
+  "nativeGameAndRealClockAdvanced": true,
+  "actualDisplayedHostPowerAdvanced": true,
+  "hostName": "Room Host",
+  "firstDisplayedHostPower": "2990",
+  "lastDisplayedHostPower": "2993",
+  "observedRenderedDataChangeIntervalsMs": [
+    2047.033
+  ],
+  "observedIntervalNote": "Wall intervals between sampled DOM value changes, with RPC/sampling latency; these are not asserted to be the exact configured poll period",
+  "elapsedSeconds": 4.181
+}

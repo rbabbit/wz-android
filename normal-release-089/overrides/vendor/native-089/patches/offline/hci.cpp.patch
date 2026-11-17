@@ -1,0 +1,47 @@
+--- a/src/hci.cpp
++++ b/src/hci.cpp
+@@ -2433,8 +2433,44 @@
+         {"radar",nlohmann::json::parse(campaignMobileRadarStateJSON())}}.dump();
+ }
+ 
++
++// BEGIN NORMAL089_READONLY_COMBAT_SELECTION
++// Local display observation only: never changes selection, orders or game state.
++static void normalMobileCombatSelectionFrame()
++{
++#if defined(__EMSCRIPTEN__)
++    static uint64_t publicationSerial = 0;
++    const bool playing = GetGameMode() == GS_NORMAL && gameInitialised
++        && selectedPlayer < MAX_PLAYERS && realSelectedPlayer == selectedPlayer
++        && !NetPlay.players[selectedPlayer].isSpectator;
++    const bool video = loop_GetVideoStatus();
++    const bool paused = gamePaused() || gameUpdatePaused();
++    const bool menu = InGameOpUp || isInGamePopupUp || bLoadSaveUp
++        || intHelpOverlayIsUp() || intMode != INT_NORMAL;
++    std::set<uint32_t> combat, selected;
++    if (playing) for (const DROID *droid : apsDroidLists[selectedPlayer])
++    {
++        if (droid->asWeaps[0].nStat > 0 && !droid->isTransporter() && isSelectable(droid)) combat.insert(droid->id);
++        if (droid->selected) selected.insert(droid->id);
++    }
++    auto combatIds = nlohmann::json::array(), selectedIds = nlohmann::json::array();
++    for (const auto id : combat) combatIds.push_back(id);
++    for (const auto id : selected) selectedIds.push_back(id);
++    const auto value = nlohmann::json{{"schemaVersion",89},{"frame",++publicationSerial},
++        {"gameTime",gameTime},{"realTime",realTime},{"player",selectedPlayer},
++        {"playing",playing},{"worldSafe",playing && !video && !paused && !menu},
++        {"combatSelection",{{"player",selectedPlayer},{"combatIds",combatIds},{"selectedIds",selectedIds}}}}.dump();
++    FILE *file = fopen("/tmp/warzone-combat-selection-v89.json.tmp", "wb");
++    if (!file) return;
++    fwrite(value.data(),1,value.size(),file); fclose(file);
++    rename("/tmp/warzone-combat-selection-v89.json.tmp","/tmp/warzone-combat-selection-v89.json");
++#endif
++}
++// END NORMAL089_READONLY_COMBAT_SELECTION
++
+ void campaignMobileFrame()
+ {
++    normalMobileCombatSelectionFrame();
+     if (!campaignMobileEnabled()) return;
+     const auto value = campaignMobileNativeStateJSON();
+     FILE *file = fopen("/tmp/warzone-campaign-state-v51.json.tmp", "wb");

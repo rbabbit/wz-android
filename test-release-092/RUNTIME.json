@@ -1,0 +1,363 @@
+{
+  "passed": true,
+  "status": "passed",
+  "scope": "Approved clean-v2 Players presentation and relevant navigation/input/production regressions on exact normal0.92 delivery APK; limits and seeded/private fixtures are explicit.",
+  "modesVerified": [
+    "towers",
+    "campaign",
+    "ffa",
+    "multiplayer"
+  ],
+  "playersPolishVerified": true,
+  "navigationAndInputVerified": true,
+  "permissionAndFreshnessVerified": true,
+  "layoutAndTouchVerified": true,
+  "verifiedChecks": [
+    "Baseline reproduced before edits; accepted0.91-network.1 and first0.92 fallback/source/saved checkpoints preserved.",
+    "Exact134246af423c0ea04b375409f41d179813a739968d260855e73784a9109b6b66/v92 installed in place and rehashed after all journeys. Normal signing key unchanged; APK delivery copy has identical bytes.",
+    "All four mode-specific clean Players surfaces physically reviewed; clutter headings/subtitles/Close removed; global PLAYERS toggle retained. Native rows, Host/You/colour identities and private em dashes verified.",
+    "Physical2400x1080 and1280x720 Towers/FFA layouts fit with field/minimap exposed; current compact real-finger toggle and Android Back verified.",
+    "Towers existing4 constructors: actual MOVE acknowledgement and completed changed native positions, Build-to-Players handoff, restored prepared combat selection, OFF deselect and normal Home return.",
+    "Campaign known2-side panel/status visibility, two actual Enter/Tab IME-open/Android-Back/Cancel cycles without saving, actual five-combat MOVE acknowledgement/positions after keyboard return, OFF and normal Home return.",
+    "FFA normal factory ACK and progressing job, unit166599 born while Players open, restored ON including new unit, OFF empty, compact finger toggle/Back and normal picker-to-Home return. Same progressing job continued after80wall-second bound; no requeue.",
+    "Multiplayer real owned1/1 player role and both native DATA_CHECK stages. Private production ACK/job observed before Players; second independent unit160693 appeared while Players stayed open, rendered own unit count3-to4, then ON restored selected160691/160693 after closing Players.",
+    "Multiplayer production observation corrected against source schema: native MP UI VM finishedUnits is not a valid birth oracle, feedback text expires and selectedUnits has no name. Persistent ACK/job, actual new combat IDs, positions and native restored selection are preserved as evidence.",
+    "Targeted fresh multiplayer ON/OFF showed matching native deselect nonce/applied nonce and empty selection; initial combat count was zero. Actual native Return stopped session/service, restored lobby and normal BACK returned Home.",
+    "Real native spectator13 cannot issue owned commands; Participants/Spectators/Details and Economy/Upgrades rendered native cells, including live changes and retained scroll/focus. Actual FINGER horizontal swipe moved table52.6667CSSpx, sticky identity stayed fixed and rightmost A-A was reachable.",
+    "Focused source VM14 checks passed for roles/freshness/rows/context/scroll contracts; runtime freshness/native clock samples and public role restrictions are separately captured. Java/native/networking/ALL COMBAT sources remain baseline-identical.",
+    "All8 owned private host sessions stopped; external test helper only was uninstalled and QA forward27889 removed. App/source archives and three prepared saved-game hashes remain intact. No publication or AAB build."
+  ],
+  "remainingVerification": [],
+  "limitations": [
+    "Retained emulator terrain is black as in accepted baseline. Host-GPU foreground/header/minimap/Players pixels are visible and reviewed; no terrain fix or all-device graphics claim.",
+    "Private native multiplayer hosts used a synthetic directory only for routing. No public match was joined and no new physical-phone cellular/Wi-Fi transport claim; accepted networking fix is preserved byte-for-byte.",
+    "Current Campaign repeated keyboard cycles use real Android hardware Enter/Tab plus measured source-mouse controls; real finger gestures/navigation are verified separately. Early500ms pointer-without-click fixtures, callback loss during native context teardown and short native-menu waits are not product defects.",
+    "OFF with nonempty native combat sets is observed offline; the last targeted MP OFF/deselect-ack check started with zero combat units. MP5 does separately prove native newborn combat selection after Players closes.",
+    "Historical first-iteration checks are not substituted for final APK observations. Original incomplete helper reports remain preserved with explicit combined completion/source-schema corrections."
+  ],
+  "fixtures": [
+    "Owned emulator-5562 only; user5558, retained5560 and phone were not operated. Same retained userdata and saved-game archives; no wipe/uninstall of target app.",
+    "Towers uses original4 constructors plus previously seeded combat IDs1900001/1900003, disclosed as seeded; no current army spawn.",
+    "Campaign/FFA use original unmodified native save checkpoints. Current FFA unit166599 and multiplayer units160691/160693 are ordinary native factory production, never script spawned.",
+    "MP5 second ordinary job was started only after first job had actually completed/native factory was idle. Targeted MP6 reused the same stock native scenario and performed no production or seeding.",
+    "External same-signer QA helper is separate from delivery app. Final touch fixture uses asynchronous native SOURCE_TOUCHSCREEN/FINGER events with trusted browser click receipts and measured native input timing; no fake DOM click or app-method wrapper."
+  ],
+  "candidateAPK_SHA256": "134246af423c0ea04b375409f41d179813a739968d260855e73784a9109b6b66",
+  "bytes": 640638187,
+  "versionCode": 92,
+  "versionName": "0.92",
+  "certificateSHA256": "4499efe00477c7c724c06a1dd96f935864548665c13ab5e2bd0a9c0f83f7cb15",
+  "normalBuild": true,
+  "evidenceFiles": [
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\baseline-identity-and-saves.json",
+      "sha256": "551ba8d77c46e239f52507d262c887ea4d303d11abcd36efe55dd5ce36b40fbb",
+      "bytes": 859
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\initial-audit-checklist.json",
+      "sha256": "8bfad1d5c04201f1bf182bdc43ffb4cf82641b392b251832b2181b040adb8fd9",
+      "bytes": 1656
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\71-final-build-installed.json",
+      "sha256": "173137f6e971e2053650b42fa05806944cdba14f06ffa6ae14012df6c027838e",
+      "bytes": 383
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\final-css-only-APK-delta.json",
+      "sha256": "f3f31d1cee59c501e122df993772eabeef3834d990d250cc3e9b376ac70a190c",
+      "bytes": 494
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\final-towers-r2-result.json",
+      "sha256": "76d016f97177d36d66b6a2ba1e04711d60764f46ff03c3448297ff1aa9ab5fb5",
+      "bytes": 207701
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\final-towers-r2-completion.json",
+      "sha256": "43c4dd8c3f512afecceb05a898a8cf45f8e30beb40bdbf7de66aa1017ac14e56",
+      "bytes": 1392
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\final-towers-r2-standard-open.png",
+      "sha256": "899780976db48be150bbb571c9cfd04f290f4dd4390293689c435fa43738907f",
+      "bytes": 459353
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\final-towers-r2-compact.png",
+      "sha256": "187255b39555354f787038cb71709da1c08a507c17e8b442c7bf12ced1e91379",
+      "bytes": 190907
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\final-towers-r2-build-players.png",
+      "sha256": "ff43762c7c5db9a73ab2539dbefd971605b149597ba67424a07e455db220516a",
+      "bytes": 466714
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\final-campaign-result.json",
+      "sha256": "704ce7eee9b7dd15cce0ebf7727ddbbfc62b9eae77727773ae1f758934328fb3",
+      "bytes": 73115
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\final-campaign-combined-completion.json",
+      "sha256": "e5d454ab14af530a3f5f7dbac435c6dbb4c23bb95b05cd05e2a4f2dab4322518",
+      "bytes": 4013
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\final-campaign-keyboard-completion.json",
+      "sha256": "eaf23ba0eaa21b4de9fbc0b5b2beb6418b9c3915771e5ddf67320b7fea051ee3",
+      "bytes": 52375
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\final-campaign-players.json",
+      "sha256": "78f4a4ae383f3ca0c5e435a85ea8c5e70684e24b5f76ee8b060b10959f441ab3",
+      "bytes": 30384
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\final-campaign-players.png",
+      "sha256": "e37b648ab15fb54d01483592b64bcb3180f3dfcfc28371620694fcc534ed0c59",
+      "bytes": 740963
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\final-campaign-ime2-keyboard-open.png",
+      "sha256": "b1bdb237361c752f6966a08cd5b483803eb7629b0686e397b9f103e2b1cb0dae",
+      "bytes": 180743
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\final-campaign-ime2-keyboard-back.png",
+      "sha256": "a77516f32d37add4956eea88dde76278ceb34dbfa6bae44cba1c884b06ee0185",
+      "bytes": 526209
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\final-campaign-keyboard-post-ime-move.png",
+      "sha256": "d2953ae23bda1a607757b05b937ddac89a5daa66d169234b868fc21bdac5f215",
+      "bytes": 1073031
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\final-campaign-cancel-full-events-adb.json",
+      "sha256": "c2014ae11ca863b17432442bf6d29beeb0be5fd369545224ce29c93d3bd9a763",
+      "bytes": 5797
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\final-ffa-loaded-result.json",
+      "sha256": "17e874bafd6f0a7f7afa4c2aa3fafa9c84658bfb4aebb00d9abb9206e7f03b64",
+      "bytes": 78165
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\final-ffa-loaded-players.json",
+      "sha256": "ce49cfa984ae901d22c887dbd54a0a98c1ca38db668e10c001020ef09ba11d10",
+      "bytes": 49731
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\final-ffa-loaded-players.png",
+      "sha256": "b99843b49d474a4c98227b1bd3f7d4b254dffc62a43bbce2b481e9a34d4b61cc",
+      "bytes": 994842
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\final-ffa-loaded-compact.png",
+      "sha256": "4a2ec0fac6544bf4580725fd9d533c59bc7bda4522d17688e60efb68564479db",
+      "bytes": 453947
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\final-ffa-async-resume-result.json",
+      "sha256": "be5669aea455ea22e177249165250360d0ef19725dafeee2ea957767ccb8ad00",
+      "bytes": 15156
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\final-ffa-async-resume-on-production-ack.json",
+      "sha256": "e3885b246e91c792174b58975b0e6898eefab23820612b835910d873c855267f",
+      "bytes": 96745
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\final-ffa-async-resume-on-production-incomplete.json",
+      "sha256": "760103eb322c4ec5ac11f66085da2be0c46df0ffbde9b42d604167286a4df53e",
+      "bytes": 168865
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\final-ffa-async-completion.json",
+      "sha256": "985d627199430c6886531d844e2bf1e541e1f228074fff26fc422207c86b3e68",
+      "bytes": 85528
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\final-ffa-final-combined-completion.json",
+      "sha256": "0ac053b612dca36ee093c130f0550f7115659e0de0798235c54b9683bd92a942",
+      "bytes": 1260
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\final-ffa-async-born-panel.json",
+      "sha256": "6834f1ff0224fa5063d412c967b20828aa1e462aff84bed8ea9a63f268c9ae00",
+      "bytes": 73447
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\final-ffa-async-born-panel.png",
+      "sha256": "2b898f3f5a4b3885cd4d1d9cdab8e4f044ceea4338ec9c6e0d0595b63a6d482c",
+      "bytes": 995219
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\final-ffa-async-compact-final-compact.png",
+      "sha256": "b656fa36d0f84b73385d227e6ec03020c78671e3bb67aee9d821d67a17665fe4",
+      "bytes": 455506
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\75a-final-real-finger-observation.json",
+      "sha256": "bd1500fe6e034c6eca4af704be586655e5bbc226fefd71ca0f16f79714c0d987",
+      "bytes": 32601
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\75-final-spec-horizontal-touch.json",
+      "sha256": "4f915a7a5a0a0c07e9d8eba0187b0c9ff03f2efa7844d65a37d819b8bffc4a6e",
+      "bytes": 3193
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\74-final-spec-participants.json",
+      "sha256": "7ced24a0e5c309510bf45f9ea16fba4b115c4aaf3263eb0d0831692d762411cd",
+      "bytes": 21207
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\74-final-spec-participants.png",
+      "sha256": "3dc93d1faaa8d0e56329a157a2e4c6f097501e00b571a0064b717557551359ae",
+      "bytes": 590960
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\75-final-spec-upgrades-scrolled.png",
+      "sha256": "329af2b20e9ffd7d60f6a84f346483151e01782f70434ebd85dcf34a80ef3630",
+      "bytes": 560198
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\76-final-spec-watchers.json",
+      "sha256": "b93c4a028b9495bb14985a88beb249096c20f8fb1385f9e6c72b10d6dff8278f",
+      "bytes": 19147
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\76-final-spec-watchers.png",
+      "sha256": "f4e867b18545ac78b37e0b8d31ecfaf0e8a3e2ad2d5a1c0325662013f54dd282",
+      "bytes": 613294
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\77-final-spec-economy.json",
+      "sha256": "f6818c1ac084e1766f41fb746a86326adb6b1dbefcf5187211e134819b10d5ce",
+      "bytes": 22367
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\77-final-spec-economy.png",
+      "sha256": "178e3c56f8330480bfc870a30cecd2f2328bb85aa7a1fb8d8e72da8d6912aca0",
+      "bytes": 553911
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\77-final-spec-live-history.json",
+      "sha256": "1c1a9303c8fbd98a4ff88ebecce967b1b4a4bc5a16405fd5c296f6a70f834861",
+      "bytes": 16909
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\79-final-spec-journey-outcome.json",
+      "sha256": "7f7d7af5a6092feeadd3f58fa3f5220bb4ec30e69d65a6675284a3a43c07d818",
+      "bytes": 888
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\61a-spectator-data-check-scope.json",
+      "sha256": "6e18ae4b6ccc213e4473c9225c86c13e4090f0c1bb3abdffe7783c2f74137e18",
+      "bytes": 3298
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\run5-ready-transition-completion.json",
+      "sha256": "9c2b2580b5a954020f65ea54c186bb2880e42bb3350adb844665b2baae8c5199",
+      "bytes": 5673
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\run5-resumed-async-03-initial-players-tap.json",
+      "sha256": "c38c8ed3588f4cc1288a67e652485585835837cab70dfb1631b23e0503e95a1e",
+      "bytes": 31289
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\run5-resumed-async-04-initial-panel.json",
+      "sha256": "41a0d35dab6b7d0339e73b1cc0dc2a4d0901824ffbc7f7c06d085f72d80c69e9",
+      "bytes": 35658
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\run5-resumed-async-04-initial-panel.png",
+      "sha256": "9afa0a37257d1ce131e1072c27b06478f7ce57c68458dfd834e4ac74f137781d",
+      "bytes": 650500
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\run5-final-second-job-ACK.json",
+      "sha256": "b149c1585991f4a91aa8729b07c713dac10b23d2b90b57cfd66a1fae56619b89",
+      "bytes": 18928
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\run5-final-flow-result.json",
+      "sha256": "4b0a26ad33159aa1711f58de0450774e5faae882b5bdc4fe8f1684a242fee2e5",
+      "bytes": 96980
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\run5-production-corrected-oracle-completion.json",
+      "sha256": "cb227b3095bc97859667ac34b807b56a9dc45789368496609c67c5c608ea6caf",
+      "bytes": 1518
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\mp-native-production-oracle-scope.json",
+      "sha256": "84da987ff769831b22b542830ac74b99eaf65fbb05b4dbf04e4bd835e1ba7cce",
+      "bytes": 10790
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\run5-final-job-players-open.png",
+      "sha256": "d5cef4e5279e0db080b5241378d1c1cf7cee7d942e292629de33ff6918984249",
+      "bytes": 650448
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\run5-final-born-panel.json",
+      "sha256": "237e84c2b93390e20f024c6c4bf991087525929c1c0cca9801cbbcf1c1434bac",
+      "bytes": 39641
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\run5-final-born-panel.png",
+      "sha256": "d6965cbbcfb1dc17c58c9584e2e166ab4ca436d37939cd3d74deffd28ab0badd",
+      "bytes": 649650
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\run5-final-bounded-cleanup.json",
+      "sha256": "5ec3c0d95291352012cd564f210df5d8ad70fbd943b6069e7eab8d3bf7a8d326",
+      "bytes": 2767
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\run6-targeted-native-ON-OFF.json",
+      "sha256": "3f5d34c4a8b2f55b6c1d7a4c7ecd27004689ed6f5bab15073e442c9a98c6c21f",
+      "bytes": 4763
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\run6-targeted-result.json",
+      "sha256": "3491c17b859e33eb7a069b1f5aef27d0866184ff42dbc3a36bfdedffe4d715af",
+      "bytes": 33589
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\run6-final-combined-completion.json",
+      "sha256": "e726be9dfc23d7361dcd4795edbed03eff88d8516e4c1ff208a0818c86393567",
+      "bytes": 2994
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\run6-targeted-native-Return-dialog.png",
+      "sha256": "223bddd0ec6efe59d595f228139dc421be49b7bf54749e4eeeaee0bfde99a84e",
+      "bytes": 483685
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\run6-targeted-observed-lobby.png",
+      "sha256": "a37305abf2177a1dbc946ddbedb891b3d20c21207b20f0315d8266ce468645c6",
+      "bytes": 114472
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\run6-targeted-observed-Home.png",
+      "sha256": "abd0e16839d8af95f18c732f5716460829af6feae4cbd5e415ef7ea23cb35234",
+      "bytes": 1120956
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\final-exact-delivery-and-cleanup-preflight.json",
+      "sha256": "2d529355300e7a184780ad70e505fb9be407158be2bc9a59489964d3b528d8a6",
+      "bytes": 2580
+    },
+    {
+      "path": "C:\\timerApp\\players-polish-092-20261117\\final-external-helper-cleanup.json",
+      "sha256": "be009cff864a418c3c23f74a67a37f13dab4a24b7496b77ea11f6ea6641d062a",
+      "bytes": 176
+    }
+  ]
+}

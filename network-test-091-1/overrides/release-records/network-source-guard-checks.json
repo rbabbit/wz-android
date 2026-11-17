@@ -1,0 +1,47 @@
+{
+  "passed": true,
+  "packagerSHA256": "ad7b6766e9727450d78fb90c5e16c287aae80cd15cd1c71f78234166183b4dd2",
+  "focusedChecks": [
+    "UIAutomator false attribute accepted with node schema",
+    "password string false outside UIAutomator refused",
+    "UIAutomator true attribute remains refused",
+    "unverified node geometry does not exempt password"
+  ],
+  "previousFullGuardReport": {
+    "passed": true,
+    "packagerSHA256": "2bbef6ac323081063dd67278a7900f5adfe9900a9f0c477167b94ec1b74a5d48",
+    "checks": [
+      "actual stage accepts exact repeated failed/incomplete metadata",
+      "changed existing attachment refused before any payload write",
+      "path traversal refused",
+      "reported symlink manifest target refused before any payload write",
+      "private JSON field refused: joinToken",
+      "private JSON field refused: joinTokens",
+      "private JSON field refused: gamePassword",
+      "private JSON field refused: lobbyConnectToken",
+      "private JSON field refused: hostPassword",
+      "private JSON field refused: phoneSerial",
+      "private JSON field refused: Authorization",
+      "private JSON field refused: attest",
+      "private source suffix refused",
+      "private key bytes refused",
+      "curated boolean/hash evidence remains usable",
+      "proof bound enforced",
+      "private evidence subtree refused: official-owned-host",
+      "private evidence subtree refused: private-host",
+      "private evidence subtree refused: userdata",
+      "private evidence subtree refused: raw-phone",
+      "private evidence subtree refused: ChromeDownloads",
+      "owned root curated evidence allowed"
+    ],
+    "scope": "actual helper guards; full chained restoration runs only after source freeze",
+    "symlinkCheck": "Path.is_symlink observation substituted; Windows symlink privilege unavailable",
+    "archiveCreated": false,
+    "phoneOperations": false,
+    "publicationPerformed": false
+  },
+  "scope": "Only focused UIAutomator false-attribute guard regression; prior full guard proof retained",
+  "archiveCreated": false,
+  "phoneOperations": false,
+  "publicationPerformed": false
+}

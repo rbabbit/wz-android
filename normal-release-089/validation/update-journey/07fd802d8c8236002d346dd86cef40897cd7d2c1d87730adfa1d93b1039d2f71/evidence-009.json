@@ -1,0 +1,26 @@
+{
+  "beforeHelperStart": true,
+  "installerAppUpdatedScreenCaptured": true,
+  "DoneOrOpenNotPressedYet": true,
+  "targetPIDReturnCode": 1,
+  "targetPIDStdout": "",
+  "targetApplicationProcessAbsent": true,
+  "topActivity": [
+    "topResumedActivity=ActivityRecord{10345972 u0 com.google.android.packageinstaller/com.android.packageinstaller.v2.ui.InstallLaunch t9}",
+    "ResumedActivity: ActivityRecord{10345972 u0 com.google.android.packageinstaller/com.android.packageinstaller.v2.ui.InstallLaunch t9}"
+  ],
+  "activityManagerTargetEvents": [
+    "11-16 15:26:39.492   730  1897 I ActivityTaskManager: START u0 {flg=0x10000000 xflg=0x5 cmp=com.rbabbit.warzonetowers.lab/com.rbabbit.blocknight.warzone.MainActivity} with LAUNCH_MULTIPLE from uid 2000 (com.android.shell) (BAL_ALLOW_PERMISSION) result code=0",
+    "11-16 15:26:39.877   730   762 I ActivityManager: Start proc 2847:com.rbabbit.warzonetowers.lab/u0a227 for next-top-activity {com.rbabbit.warzonetowers.lab/com.rbabbit.blocknight.warzone.MainActivity}",
+    "11-16 15:26:43.933   730  1897 I ActivityManager: Start proc 2972:com.google.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0/u0ai9000 for  {com.rbabbit.warzonetowers.lab/org.chromium.content.app.SandboxedProcessService0:0}",
+    "11-16 15:26:48.185   730   751 I ActivityTaskManager: Displayed com.rbabbit.warzonetowers.lab/com.rbabbit.blocknight.warzone.MainActivity for user 0: +8s809ms",
+    "11-16 15:35:37.832   730  1069 I ActivityTaskManager: START u0 {act=android.settings.MANAGE_UNKNOWN_APP_SOURCES dat=package: xflg=0x4 cmp=com.android.settings/.Settings$ManageAppExternalSourcesActivity} with LAUNCH_MULTIPLE from uid 10227 (com.rbabbit.warzonetowers.lab) (sr=248521211) (BAL_ALLOW_VISIBLE_WINDOW) result code=0",
+    "11-16 15:36:03.969   730  1907 I ActivityTaskManager: START u0 {act=android.intent.action.VIEW dat=content://com.rbabbit.warzonetowers.lab.updates/... typ=application/vnd.android.package-archive flg=0x1 xflg=0x4 cmp=com.google.android.packageinstaller/com.android.packageinstaller.InstallStart clip={text/uri-list hasLabel(14) {U(content)}}} with LAUNCH_MULTIPLE from uid 10227 (com.rbabbit.warzonetowers.lab) (sr=248521211) (BAL_ALLOW_VISIBLE_WINDOW) result code=0",
+    "11-16 15:36:04.251   730  1907 I ActivityTaskManager: START u0 {act=android.intent.action.VIEW dat=content://com.rbabbit.warzonetowers.lab.updates/... typ=application/vnd.android.package-archive flg=0x2000001 xflg=0x4 cmp=com.google.android.packageinstaller/com.android.packageinstaller.v2.ui.InstallLaunch clip={text/uri-list hasLabel(14) {U(content)}} (has extras)} with LAUNCH_MULTIPLE from uid 10113 (com.google.android.packageinstaller) (sr=232842967) (BAL_ALLOW_VISIBLE_WINDOW) result code=0",
+    "11-16 15:37:22.896   730   761 I ActivityManager: Force stopping com.rbabbit.warzonetowers.lab appid=10227 user=-1: installPackageLI",
+    "11-16 15:37:22.900   730   761 I ActivityManager: Killing 2847:com.rbabbit.warzonetowers.lab/u0a227 (adj 101): stop com.rbabbit.warzonetowers.lab due to installPackageLI",
+    "11-16 15:37:22.968   730   761 W ActivityTaskManager: Force removing ActivityRecord{248521211 u0 com.rbabbit.warzonetowers.lab/com.rbabbit.blocknight.warzone.MainActivity t9 f}}: app died, no saved state",
+    "11-16 15:37:23.049   730   794 I ActivityManager: Force stopping com.rbabbit.warzonetowers.lab appid=10227 user=0: pkg removed"
+  ],
+  "capturedUTC": "2026-11-16T15:38:37.080888+00:00"
+}

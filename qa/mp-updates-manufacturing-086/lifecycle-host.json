@@ -1,0 +1,59 @@
+{
+  "version": "0.86",
+  "passed": true,
+  "emulatorUsed": false,
+  "engineExecuted": false,
+  "scope": "Actual shipped MP RAF adapter, lifecycle callbacks and directory functions in deterministic host VM. Android/native survival remains a separate runtime check.",
+  "checks": [
+    "Foreground uses original RAF, preserves timestamps and supports cancellation",
+    "Background pulse advances one pending generation, never runs cancelled/native callbacks twice",
+    "Recents compositor frames and background pulses cannot multiply frame rate; disposal drains pending work",
+    "Activity background callback releases input and preserves the same active session and child",
+    "Actual Java Join protection precedes posted UI work and survives immediate Home without duplicate service starts",
+    "Initial DNS failure is short and actionable, with no exception dump",
+    "Directory outage retains the last actual list and labels it stale; success clears the error",
+    "Live room/match fences manual, online, visibility and native resume directory fetches",
+    "Resume/network retry is bounded by cooldown, in-flight state and freshness",
+    "Native list shows directory error once and keeps independent host-return notices"
+  ],
+  "checksPassed": 10,
+  "fatal": null,
+  "sources": [
+    {
+      "path": "app/src/main/assets/multiplayer/background-frames.js",
+      "sha256": "659c79290ae6d69d5c89a2260ecb99f7bf8aa61b26eab54db4be804ca5b3503a"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/lobby-ui.js",
+      "sha256": "11c6142ba6e8e5d7e78de619adc5ce41a4bb6394c00251ec0017a3dde8950232"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/native-landing.js",
+      "sha256": "97d72ec104b908ba4d916ac015c7a6bb843b6cfc60f674154b7a9904d6d8718d"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/session.js",
+      "sha256": "061cbe682d7f1e2bc179e2b05b9853443d7ac325ef1ba87060383f0391b01b98"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/engine.html",
+      "sha256": "4e18702274ad073dac8c5f211c6049e8c1ebcd9e17620f7ccb5e559fd805066e"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MultiplayerActivity.java",
+      "sha256": "8fa99397b54c332284b9cbb000b6a48b0a52376141284a7aad5f3e0cc13f0bae"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MultiplayerSessionService.java",
+      "sha256": "8250dcd44cf561fde9fdfd79d4f49a1721b92fec40e25a0d991a963382a28bee"
+    },
+    {
+      "path": "app/src/main/java/com/rbabbit/blocknight/warzone/MultiplayerLobbyView.java",
+      "sha256": "56e5b91942f82fe0854b2c10dfffabd712006f644f2146f3464d24bba6e8ac8e"
+    },
+    {
+      "path": "tools/test-multiplayer-lifecycle-086.cjs",
+      "sha256": "8c7c391cf241e12360f075909b40181b888ea5f9929913954ba9e1e966966045"
+    }
+  ]
+}

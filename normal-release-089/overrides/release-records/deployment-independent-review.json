@@ -1,0 +1,50 @@
+{
+  "kind": "Independent read-only deployment review",
+  "recordedUTC": "2026-11-16T15:29:43.969753+00:00",
+  "file": "C:\\timerApp\\candidates\\normal-0.89-20261116\\tools\\deploy-warzone-update-089.py",
+  "sha256": "bf86a39a3074d1a5e4c259f03d2a40e5f6e690d14a3e5ee00cdad24348114ec4",
+  "mainOrSSHExecutedByReviewer": false,
+  "status": "No remaining source blocker identified for authorized publication after exact runtime proof gates pass",
+  "resolvedFindings": [
+    "Both canonical files must match old/our-new identity before any rollback",
+    "Destination identity checked again immediately before each rollback replace",
+    "Unknown concurrent APK/feed is preserved and private backup reports rollback refusal",
+    "SIGHUP/SIGTERM enter controlled rollback and repeat signals are ignored during recovery",
+    "Private deployment record uses fsync plus atomic replacement"
+  ],
+  "checked": [
+    "Explicit --publish gate",
+    "Exact local signed normal APK hash/version/signer identity",
+    "Runtime evidence files bound by SHA256",
+    "All four modes and native/navigation evidence required",
+    "Strict known-host SSH; structured argv and quoted remote Python",
+    "Private nonblocking flock held across both verification handshakes",
+    "Pinned old APK/feed and website/Caddy guards",
+    "Full canonical HTTPS APK verified before feed swap",
+    "Full feed bytes and metadata verified after swap"
+  ],
+  "limits": [
+    "Review is source-only; no live SSH-disconnect or VPS rollback test was performed by this reviewer",
+    "Host-only ten-check suite is separate evidence and includes mocked signal dispatch",
+    "SIGKILL/host crash cannot execute Python rollback; preserve private recovery backups",
+    "A noncooperating concurrent writer can race a final identity check; unknown observed canonical bytes fail closed instead of being overwritten"
+  ],
+  "homepagePinRefresh": {
+    "previousReviewedScriptSHA256": "2624c4bfb46b02956bba604ee65409d6efe9a8105f37799f00fe26203cf74dc2",
+    "previousReviewRecordSHA256": "3999c4101dc42f7ed7d6faa81f50ed5976189f28987d720ee876208418d9211e",
+    "onlyHomepageHashAndSizeLiteralsChanged": true,
+    "exactOldScriptRecoveredByReversingLiterals": true,
+    "oldIndexSHA256": "3dcf21ddff7c3723bc7d0a2ed70cab9b66dace346655931ce2e0a3a2028573c8",
+    "oldIndexBytes": 3354,
+    "newIndexSHA256": "885948ff9728386a48a3a9521206d61d7bf5132db6ad055d9a71b8e141b32c53",
+    "newIndexBytes": 3367,
+    "observationPath": "release-records/vps-guard-observation.json",
+    "observationSHA256": "5a49a130066de34ab57369cefbf87bc2a2722641eb13fc22345bcca90df0711f",
+    "caddyPinUnchanged": true,
+    "firstAttemptCanonicalSwapOccurred": false,
+    "firstPreflightFailurePath": "release-records/vps-deployment-first-preflight-failure.json",
+    "firstPreflightFailureSHA256": "6bed9f8d570b0d60041d719fa16f38a3f5f2cbf17b05e7765ef976853542b2b4",
+    "SSHOrNetworkExecutedByReviewer": false,
+    "newHostGuardProofSHA256": "59c52c42791c2b15b0049608f1d44402c6f733e8c7cac2e8e967c008d96d58f3"
+  }
+}

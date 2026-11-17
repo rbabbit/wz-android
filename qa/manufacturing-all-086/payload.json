@@ -1,0 +1,153 @@
+{
+  "version": "0.86",
+  "passed": true,
+  "emulatorUsed": false,
+  "actualNativeEngineExecuted": false,
+  "noNativeBuild": true,
+  "fallbackSHA256": "0dfbbe17ced73df3f310ac41bb4d51f799227466f050961530bd5e484d378465",
+  "sourceScope": [
+    {
+      "path": "scenario/warzone-towers-commands.js",
+      "changedFunctions": [
+        "wtcmd_setProductionRepeat",
+        "wtcmd_queueProduction"
+      ],
+      "addedFunctions": [
+        "wtcmd_allProductionFactories",
+        "wtcmd_setAllProductionRepeat"
+      ]
+    },
+    {
+      "path": "campaign/commands.js",
+      "changedFunctions": [
+        "wtcmd_setProductionRepeat",
+        "wtcmd_queueProduction"
+      ],
+      "addedFunctions": [
+        "wtcmd_allProductionFactories",
+        "wtcmd_setAllProductionRepeat"
+      ]
+    },
+    {
+      "path": "scenario/ffa/commands.js",
+      "changedFunctions": [
+        "wtcmd_setProductionRepeat",
+        "wtcmd_queueProduction"
+      ],
+      "addedFunctions": [
+        "wtcmd_allProductionFactories",
+        "wtcmd_setAllProductionRepeat"
+      ]
+    }
+  ],
+  "payloads": [
+    {
+      "loader": "warzone2100-towers-052.js",
+      "data": "warzone2100.data",
+      "onlyChangedVirtualFile": "/data/mp/tests/warzone-towers-commands.js",
+      "sourceAssembly": [
+        "scenario/warzone-towers-commands.js"
+      ],
+      "baselineDataBytes": 78266517,
+      "baselineDataSHA256": "89abeb52888e2d3bb79c8112a6296d24a8f2f9470f12fc60b3be6848e418b992",
+      "dataBytes": 78365356,
+      "dataSHA256": "a60f8401c98fe478bd6ed4914ff2a09ca96909e73f76cf9465a1ba3bcb08ce6a",
+      "loaderSHA256": "e656e66ef6f539760cf400a4b61a3ed6e22e5d23ee984ef7db9a431c607465a7",
+      "sourceContentSHA256": "57f89e1c0b9d35765198ceb815788d521ef492ad89b42b0545497d4e11c7ac66",
+      "runtimeBodySHA256": "c9989daf8c39b5b83a9d0112a8688137268c1722f9890afc133f462aaf4bb9d8",
+      "originalDataPrefixUnchanged": true,
+      "compiledProgramUnchanged": true,
+      "unchangedOtherVirtualFiles": 4291
+    },
+    {
+      "loader": "warzone2100-campaign.js",
+      "data": "warzone2100-campaign.data",
+      "onlyChangedVirtualFile": "/data/base/script/campaign/mobile/campaign-bridge.js",
+      "sourceAssembly": [
+        "campaign/mobile-events.js",
+        "campaign/research-bridge.js",
+        "campaign/commands.js"
+      ],
+      "baselineDataBytes": 78898121,
+      "baselineDataSHA256": "ed7629e455cfee64c4ff0b5f45ddaf595aa0fd72c7e4910833e6d3cc87965700",
+      "dataBytes": 79002086,
+      "dataSHA256": "e46d5fd97d974316805847a2eb550951120282f81aecbafa9331081c91fcaa03",
+      "loaderSHA256": "1ae7c30db5ba69f26206a921ce4e122d7e7727cec56188e86c3663820ee420bb",
+      "sourceContentSHA256": "e407955274c59f2477ff977f742d5f61557433e765f1866f3a6fb7a3978c31f3",
+      "runtimeBodySHA256": "f25de76ca32dc72a894b92e394f0f45ea5b55227a1a424570edd9a074bff8ddd",
+      "originalDataPrefixUnchanged": true,
+      "compiledProgramUnchanged": true,
+      "unchangedOtherVirtualFiles": 4299
+    },
+    {
+      "loader": "warzone2100-ffa.js",
+      "data": "warzone2100-ffa.data",
+      "onlyChangedVirtualFile": "/data/mp/tests/ffa-commands.js",
+      "sourceAssembly": [
+        "scenario/ffa/commands.js"
+      ],
+      "baselineDataBytes": 75004849,
+      "baselineDataSHA256": "fc714bc1181961a238c23f5c0f2e6c23b66e5e58eed80eec1287f06e4408d3c3",
+      "dataBytes": 75103384,
+      "dataSHA256": "7a121336ab3830a585bb962ff2978019f23273f1075c0359fa78fb8da0b7ca98",
+      "loaderSHA256": "b7c403da49cfe84dc717d5b4eafaffb2079014aee44907160389d5d987327c75",
+      "sourceContentSHA256": "fe50f43c08e7ef12cd2ae31758352e1884578340515304caa18348cad2855843",
+      "runtimeBodySHA256": "40fcc449a33766ffc5732ad04a849d3c07a84c524bd033dba84ff678fec60c3d",
+      "originalDataPrefixUnchanged": true,
+      "compiledProgramUnchanged": true,
+      "unchangedOtherVirtualFiles": 4376
+    }
+  ],
+  "frozenNativeAssets": [
+    {
+      "path": "app/src/main/assets/multiplayer/warzone2100.data",
+      "sha256": "9e89d11c8b67b5f68ddc0be43290233c28cd43b3d2a96fea1a7b4beaf83b8424"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/warzone2100.js",
+      "sha256": "834f87b00f87f32630360bb15bf818ad7d63a91d0ccbb12018a9d3a53bc43a76"
+    },
+    {
+      "path": "app/src/main/assets/multiplayer/warzone2100.wasm",
+      "sha256": "1d050920393ab7be2d7871a8a269e5d5487b567bf9e46457ecb1104553c38d0d"
+    },
+    {
+      "path": "app/src/main/assets/warzone/music/music.data",
+      "sha256": "602ea6c69f4073a9617676a39f8397232953637a9b7a36e7cc28e93dd15184cd"
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100-duel.data",
+      "sha256": "584a8be5958871b7d1f133bb4d3ef514737d8cf17b959be05f6659a828ceac47"
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100-duel.js",
+      "sha256": "6ef65429d1f496bfe5c52e2d8d770b28eaf319d77cb0d61675abd5d78d5420b5"
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100-towers-052.wasm",
+      "sha256": "2924f46aa75d9b27b92494f01d56239856ad06b2164cd7131144a3a5faeb87db"
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100.js",
+      "sha256": "fdf0c4807323b15a00cbe92947db2fb6b2da771384af9f3fba08fc5be03c5949"
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100.wasm",
+      "sha256": "497c65308d3e85f0b5370ec0ff0eb48e6a0876e735ad45e3b280829c7f3c2a06"
+    }
+  ],
+  "sources": [
+    {
+      "path": "tools/embed-manufacturing-all-086.py",
+      "sha256": "51af7302dae0b1e92322b292b15ed1f3caf86bfe891bd5f636d6634944adc3b3"
+    },
+    {
+      "path": "tools/compose-manufacturing-077.cjs",
+      "sha256": "6ce081662423a35daa937291134ace9aad19331e33397fdfcff49617660b19e4"
+    },
+    {
+      "path": "tools/compose-multiplayer-ui-077.cjs",
+      "sha256": "ec9c2a9b11a424ed5ad6cd304d207360dbc8059a0129f2f96e51a68a17d717c0"
+    }
+  ]
+}

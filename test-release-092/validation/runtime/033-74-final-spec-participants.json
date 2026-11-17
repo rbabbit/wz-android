@@ -1,0 +1,906 @@
+{
+  "commands": {
+    "acks": 0,
+    "buildOpen": false,
+    "buildParticipants": [],
+    "buildingOpening": false,
+    "closes": 0,
+    "demolition": null,
+    "demolitionOpening": false,
+    "exitingBuild": false,
+    "factory": 0,
+    "factoryMenuOpen": false,
+    "factoryQueueOpen": false,
+    "factoryRecipeKey": "",
+    "history": [],
+    "lastLine": null,
+    "linePlacement": null,
+    "lineValidations": 0,
+    "modulePending": [],
+    "moduleTargets": [],
+    "nativeBuildGroup": [],
+    "nativeBuildPlaced": false,
+    "nativeBuildSawWork": false,
+    "nativeClosing": false,
+    "nativeHudHidden": false,
+    "nativeItem": "",
+    "nativeMenu": "",
+    "nativePendingSites": 0,
+    "nativeToolReady": false,
+    "opens": 1,
+    "page": "players",
+    "pending": 0,
+    "pendingItem": "",
+    "placement": "",
+    "placements": 0,
+    "productionFeedback": {
+      "message": "",
+      "tone": "done"
+    },
+    "productionPending": [],
+    "rejects": 0,
+    "saved": [
+      {
+        "body": "Body1REC",
+        "cost": 55,
+        "droidType": 0,
+        "id": "design-1794860875468-1",
+        "name": "Design 1",
+        "points": 275,
+        "propulsion": "wheeled01",
+        "turrets": [
+          "MG1Mk1"
+        ]
+      }
+    ],
+    "selectingTrucks": false,
+    "session": "",
+    "siteChecks": 0,
+    "snapshot": null,
+    "terrain": {
+      "active": false,
+      "error": "",
+      "heightQueries": 0,
+      "lastPickMs": 0,
+      "maxPickMs": 0,
+      "observations": 55,
+      "observedAt": 67986.18999999994,
+      "picks": 0,
+      "reads": 9,
+      "ready": true,
+      "revision": 9,
+      "triangleTests": 0
+    },
+    "timeouts": 0,
+    "version": 77,
+    "writes": 0
+  },
+  "content": {
+    "background": "rgb(17, 17, 17)",
+    "clientWidth": 885,
+    "color": "rgb(244, 244, 244)",
+    "dataset": {},
+    "display": "block",
+    "hidden": false,
+    "id": "wt-page-content",
+    "rect": {
+      "bottom": 226.5,
+      "height": 156.5,
+      "left": 10,
+      "right": 894.6354370117188,
+      "top": 70,
+      "width": 884.6354370117188,
+      "x": 10,
+      "y": 70
+    },
+    "scrollLeft": 0,
+    "scrollTop": 0,
+    "scrollWidth": 885,
+    "selected": null,
+    "text": "PARTICIPANTS 2\nSPECTATORS 1\nDETAILS\nPLAYER\tTEAM\tTYPE\tSCORE\tKILLS\tUNITS\tSTRUCTURES\tPOWER\tPING\n\nRoom Host\nHost\n\t2\tHuman\t0\t0\t2\t24\t2532\t\u2014\n\nGreen-\n\t1\tAI\t0\t0\t2\t28\t2213\t\u2014",
+    "visibility": "visible"
+  },
+  "error": null,
+  "frame": {
+    "bottom": 554,
+    "height": 494,
+    "left": 0,
+    "right": 1164,
+    "top": 60,
+    "width": 1164,
+    "x": 0,
+    "y": 60
+  },
+  "headers": [
+    {
+      "background": "rgba(0, 0, 0, 0)",
+      "clientWidth": 0,
+      "color": "rgb(244, 244, 244)",
+      "display": "none",
+      "hidden": true,
+      "id": "wt-command-tabs",
+      "rect": {
+        "bottom": 0,
+        "height": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "width": 0,
+        "x": 0,
+        "y": 0
+      },
+      "scrollLeft": 0,
+      "scrollTop": 0,
+      "scrollWidth": 0,
+      "selected": null,
+      "text": "\u2190DesignBlueprints",
+      "visibility": "visible"
+    },
+    {
+      "background": "rgb(37, 37, 37)",
+      "clientWidth": 0,
+      "color": "rgb(244, 244, 244)",
+      "display": "none",
+      "hidden": false,
+      "id": "wt-players-close",
+      "rect": {
+        "bottom": 0,
+        "height": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "width": 0,
+        "x": 0,
+        "y": 0
+      },
+      "scrollLeft": 0,
+      "scrollTop": 0,
+      "scrollWidth": 0,
+      "selected": null,
+      "text": "CLOSE",
+      "visibility": "visible"
+    },
+    {
+      "background": "rgb(0, 0, 0)",
+      "clientWidth": 0,
+      "color": "rgb(255, 255, 255)",
+      "display": "none",
+      "hidden": true,
+      "id": "wt-players-native-back",
+      "rect": {
+        "bottom": 0,
+        "height": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0,
+        "width": 0,
+        "x": 0,
+        "y": 0
+      },
+      "scrollLeft": 0,
+      "scrollTop": 0,
+      "scrollWidth": 0,
+      "selected": null,
+      "text": "BACK TO GAME",
+      "visibility": "visible"
+    }
+  ],
+  "icons": [
+    {
+      "complete": true,
+      "naturalHeight": 150,
+      "naturalWidth": 150,
+      "src": "https://appassets.androidplatform.net/warzone/ui/icons/stack.svg"
+    },
+    {
+      "complete": true,
+      "naturalHeight": 150,
+      "naturalWidth": 150,
+      "src": "https://appassets.androidplatform.net/warzone/ui/icons/stack.svg"
+    },
+    {
+      "complete": true,
+      "naturalHeight": 150,
+      "naturalWidth": 150,
+      "src": "https://appassets.androidplatform.net/warzone/ui/icons/stack.svg"
+    }
+  ],
+  "mp": {
+    "cameraSafe": true,
+    "canIssueOrders": false,
+    "combatLock": {
+      "activation": "",
+      "combatIds": [],
+      "context": "",
+      "deselectAppliedNonce": "",
+      "deselectNonce": "",
+      "enabled": false,
+      "pendingDeselect": false,
+      "reason": "off",
+      "requestNonce": "",
+      "requestedSuspended": true,
+      "revision": 0,
+      "selectedIds": [],
+      "suspended": true
+    },
+    "gameTime": 8702,
+    "lobbyReady": false,
+    "nativeMenuOpen": false,
+    "networkName": "NoobCrusher1(m)",
+    "phase": "game",
+    "player": 13,
+    "playerName": "NoobCrusher1(m)",
+    "power": 0,
+    "protocolMajor": 16384,
+    "protocolMinor": 104,
+    "queuedPower": 0,
+    "radar": {
+      "bottom": 511,
+      "left": 908,
+      "right": 1181,
+      "top": 238,
+      "visible": true
+    },
+    "realPlayer": 13,
+    "rendered": true,
+    "roomGeneration": "",
+    "spectator": true,
+    "uiStatus": {
+      "connectionText": "",
+      "connections": [],
+      "kind": "normal",
+      "timerText": ""
+    },
+    "view": {
+      "camera": {
+        "distance": 2600,
+        "limits": {
+          "distanceMax": 5000,
+          "distanceMin": 0,
+          "pitchMax": 65353,
+          "pitchMin": 49516,
+          "yawPeriod": 65536
+        },
+        "pitch": 58254,
+        "requestNonce": "",
+        "x": 6144,
+        "y": 6144,
+        "yaw": 0
+      },
+      "capturedAt": 64281,
+      "frame": 55,
+      "height": 494,
+      "left": 0,
+      "matrix": [
+        1.7350515127182007,
+        0,
+        0,
+        0,
+        0,
+        2.985731601715088,
+        -0.6653484106063843,
+        -0.6556609869003296,
+        0,
+        2.801938056945801,
+        0.7928950190544128,
+        0.7813505530357361,
+        -10660.1572265625,
+        16151.900390625,
+        7211.0283203125,
+        7761.2314453125
+      ],
+      "top": 0,
+      "width": 1164
+    },
+    "worldReady": true,
+    "worldSafe": true
+  },
+  "mpControls": {
+    "activeJob": null,
+    "baseJumps": 0,
+    "battleActive": true,
+    "boxes": 0,
+    "cameraSafe": true,
+    "canIssueOrders": false,
+    "cancels": 11,
+    "combatContext": "",
+    "combatLock": false,
+    "combatLockRequested": false,
+    "combatLockState": {
+      "activation": "",
+      "combatIds": [],
+      "context": "",
+      "deselectAppliedNonce": "",
+      "deselectNonce": "",
+      "enabled": false,
+      "pendingDeselect": false,
+      "reason": "off",
+      "requestNonce": "",
+      "requestedSuspended": true,
+      "revision": 0,
+      "selectedIds": [],
+      "suspended": true
+    },
+    "combatLockSuspended": true,
+    "combatOverride": "",
+    "commandCalls": 0,
+    "commands": [
+      "combat",
+      "all-combat",
+      "all-units",
+      "trucks",
+      "stop",
+      "base",
+      "manufacturing",
+      "research",
+      "build"
+    ],
+    "dropped": 0,
+    "enabled": true,
+    "gesture": null,
+    "gestureActive": false,
+    "heldKeys": [],
+    "heldMouse": null,
+    "hudVisible": false,
+    "lastAction": "phase:game",
+    "lastError": "",
+    "manualSelectionRevision": 0,
+    "panMoves": 0,
+    "panelOpen": false,
+    "pans": 0,
+    "pendingClicks": 0,
+    "phase": "game",
+    "pinchSteps": 0,
+    "pinches": 0,
+    "pointers": 0,
+    "queued": 0,
+    "queuedPointerEvents": 0,
+    "rightClicks": 0,
+    "rotationMoves": 0,
+    "rotations": 0,
+    "taps": 0,
+    "tiltMoves": 0,
+    "tilts": 0,
+    "version": 2
+  },
+  "native": {
+    "capabilities": {
+      "fullSpectatorStats": true,
+      "legacyPlayers": false,
+      "legacySpectatorStats": true,
+      "readOnly": true,
+      "teamMode": true
+    },
+    "context": "players91:38415:1",
+    "frame": 22,
+    "gameTime": 8302,
+    "mode": "multiplayer",
+    "nativeMenu": {
+      "players": false,
+      "spectatorStats": false
+    },
+    "players": [
+      {
+        "ai": false,
+        "allocated": true,
+        "colorIndex": 2,
+        "colorRGB": [
+          144,
+          144,
+          144
+        ],
+        "connectionFlags": [],
+        "connectionState": "connected",
+        "host": true,
+        "human": true,
+        "id": 0,
+        "kind": "human",
+        "local": false,
+        "name": "Room Host",
+        "observerDetails": {
+          "kills": 0,
+          "kineticArmor": {
+            "cyborg": 0,
+            "tank": 0
+          },
+          "labUsePercent": 0,
+          "power": 2532,
+          "powerLost": "0",
+          "powerRate": "+4",
+          "powerWon": "0",
+          "thermalArmor": {
+            "cyborg": 0,
+            "tank": 0
+          },
+          "units": 2,
+          "weaponGrades": [
+            {
+              "grade": 3,
+              "id": 0,
+              "name": "MG"
+            },
+            {
+              "grade": 1,
+              "id": 1,
+              "name": "Cannons"
+            },
+            {
+              "grade": 1,
+              "id": 4,
+              "name": "Rockets"
+            },
+            {
+              "grade": 3,
+              "id": 7,
+              "name": "Flame"
+            },
+            {
+              "grade": 3,
+              "id": 10,
+              "name": "A-A"
+            }
+          ]
+        },
+        "position": 0,
+        "relationship": "observer",
+        "spectator": false,
+        "state": "active",
+        "stats": {
+          "kills": 0,
+          "pingMs": null,
+          "power": 2532,
+          "score": 0,
+          "structures": 24,
+          "units": 2
+        },
+        "team": 1,
+        "viewed": false
+      },
+      {
+        "ai": true,
+        "allocated": false,
+        "colorIndex": 0,
+        "colorRGB": [
+          16,
+          112,
+          16
+        ],
+        "connectionFlags": [],
+        "connectionState": null,
+        "host": false,
+        "human": false,
+        "id": 1,
+        "kind": "ai",
+        "local": false,
+        "name": "Green-",
+        "observerDetails": {
+          "kills": 0,
+          "kineticArmor": {
+            "cyborg": 0,
+            "tank": 0
+          },
+          "labUsePercent": 0,
+          "power": 2213,
+          "powerLost": "0",
+          "powerRate": "+3",
+          "powerWon": "0",
+          "thermalArmor": {
+            "cyborg": 0,
+            "tank": 0
+          },
+          "units": 2,
+          "weaponGrades": [
+            {
+              "grade": 3,
+              "id": 0,
+              "name": "MG"
+            },
+            {
+              "grade": 1,
+              "id": 1,
+              "name": "Cannons"
+            },
+            {
+              "grade": 1,
+              "id": 4,
+              "name": "Rockets"
+            },
+            {
+              "grade": 3,
+              "id": 7,
+              "name": "Flame"
+            },
+            {
+              "grade": 3,
+              "id": 10,
+              "name": "A-A"
+            }
+          ]
+        },
+        "position": 1,
+        "relationship": "observer",
+        "spectator": false,
+        "state": "active",
+        "stats": {
+          "kills": 0,
+          "pingMs": null,
+          "power": 2213,
+          "score": 0,
+          "structures": 28,
+          "units": 2
+        },
+        "team": 0,
+        "viewed": false
+      }
+    ],
+    "ready": true,
+    "realTime": 63410,
+    "schemaVersion": 91,
+    "spectators": [
+      {
+        "ai": false,
+        "allocated": true,
+        "colorIndex": null,
+        "colorRGB": null,
+        "connectionFlags": [],
+        "connectionState": "connected",
+        "host": false,
+        "human": true,
+        "id": 13,
+        "kind": "spectator",
+        "local": true,
+        "name": "NoobCrusher1(m)",
+        "observerDetails": null,
+        "position": 13,
+        "relationship": "observer",
+        "spectator": true,
+        "state": "spectator",
+        "stats": {
+          "kills": null,
+          "pingMs": null,
+          "power": null,
+          "score": null,
+          "structures": null,
+          "units": null
+        },
+        "team": null,
+        "viewed": true
+      }
+    ],
+    "viewer": {
+      "canIssueOrders": false,
+      "ownsViewedPlayer": false,
+      "realPlayer": 13,
+      "role": "spectator",
+      "viewedPlayer": 13
+    }
+  },
+  "page": {
+    "background": "rgb(17, 17, 17)",
+    "clientWidth": 885,
+    "color": "rgb(244, 244, 244)",
+    "dataset": {
+      "page": "players"
+    },
+    "display": "flex",
+    "hidden": false,
+    "id": "wt-command-pages",
+    "rect": {
+      "bottom": 226.5,
+      "height": 156.5,
+      "left": 10,
+      "right": 894.6354370117188,
+      "top": 70,
+      "width": 884.6354370117188,
+      "x": 10,
+      "y": 70
+    },
+    "scrollLeft": 0,
+    "scrollTop": 0,
+    "scrollWidth": 885,
+    "selected": null,
+    "text": "PARTICIPANTS 2\nSPECTATORS 1\nDETAILS\nPLAYER\tTEAM\tTYPE\tSCORE\tKILLS\tUNITS\tSTRUCTURES\tPOWER\tPING\n\nRoom Host\nHost\n\t2\tHuman\t0\t0\t2\t24\t2532\t\u2014\n\nGreen-\n\t1\tAI\t0\t0\t2\t28\t2213\t\u2014",
+    "visibility": "visible"
+  },
+  "report": {
+    "availableTabs": [
+      "participants",
+      "spectators",
+      "details"
+    ],
+    "context": "players91:38415:1",
+    "detailTab": "economy",
+    "nativeMenu": null,
+    "open": true,
+    "pending": false,
+    "ready": true,
+    "tab": "participants",
+    "viewRevision": 1,
+    "viewer": {
+      "canIssueOrders": false,
+      "ownsViewedPlayer": false,
+      "realPlayer": 13,
+      "role": "spectator",
+      "viewedPlayer": 13
+    }
+  },
+  "rows": [
+    {
+      "background": "rgba(0, 0, 0, 0)",
+      "badges": [
+        "Host"
+      ],
+      "cells": [
+        "2",
+        "Human",
+        "0",
+        "0",
+        "2",
+        "24",
+        "2532",
+        "\u2014"
+      ],
+      "clientWidth": 853,
+      "color": "rgb(244, 244, 244)",
+      "display": "table-row",
+      "hidden": false,
+      "id": "",
+      "metrics": [],
+      "name": "Room Host",
+      "playerId": "0",
+      "rect": {
+        "bottom": 184.5,
+        "height": 33.5,
+        "left": 26,
+        "right": 878.6354370117188,
+        "top": 151,
+        "width": 852.6354370117188,
+        "x": 26,
+        "y": 151
+      },
+      "scrollLeft": 0,
+      "scrollTop": 0,
+      "scrollWidth": 853,
+      "selected": null,
+      "text": "Room Host\nHost\n\t2\tHuman\t0\t0\t2\t24\t2532\t\u2014",
+      "visibility": "visible"
+    },
+    {
+      "background": "rgba(0, 0, 0, 0)",
+      "badges": [],
+      "cells": [
+        "1",
+        "AI",
+        "0",
+        "0",
+        "2",
+        "28",
+        "2213",
+        "\u2014"
+      ],
+      "clientWidth": 853,
+      "color": "rgb(244, 244, 244)",
+      "display": "table-row",
+      "hidden": false,
+      "id": "",
+      "metrics": [],
+      "name": "Green-",
+      "playerId": "1",
+      "rect": {
+        "bottom": 218,
+        "height": 33.5,
+        "left": 26,
+        "right": 878.6354370117188,
+        "top": 184.5,
+        "width": 852.6354370117188,
+        "x": 26,
+        "y": 184.5
+      },
+      "scrollLeft": 0,
+      "scrollTop": 0,
+      "scrollWidth": 853,
+      "selected": null,
+      "text": "Green-\n\t1\tAI\t0\t0\t2\t28\t2213\t\u2014",
+      "visibility": "visible"
+    }
+  ],
+  "tables": [
+    {
+      "background": "rgba(0, 0, 0, 0)",
+      "clientWidth": 853,
+      "color": "rgb(244, 244, 244)",
+      "columns": [
+        "PLAYER",
+        "TEAM",
+        "TYPE",
+        "SCORE",
+        "KILLS",
+        "UNITS",
+        "STRUCTURES",
+        "POWER",
+        "PING"
+      ],
+      "display": "block",
+      "focus": false,
+      "hidden": false,
+      "id": "",
+      "rect": {
+        "bottom": 218.5,
+        "height": 97.5,
+        "left": 26,
+        "right": 878.6354370117188,
+        "top": 121,
+        "width": 852.6354370117188,
+        "x": 26,
+        "y": 121
+      },
+      "scrollLeft": 0,
+      "scrollTop": 0,
+      "scrollWidth": 853,
+      "selected": null,
+      "text": "PLAYER\tTEAM\tTYPE\tSCORE\tKILLS\tUNITS\tSTRUCTURES\tPOWER\tPING\n\nRoom Host\nHost\n\t2\tHuman\t0\t0\t2\t24\t2532\t\u2014\n\nGreen-\n\t1\tAI\t0\t0\t2\t28\t2213\t\u2014",
+      "visibility": "visible"
+    }
+  ],
+  "tabs": [
+    {
+      "background": "rgb(244, 244, 244)",
+      "clientWidth": 144,
+      "color": "rgb(16, 16, 16)",
+      "display": "block",
+      "hidden": false,
+      "id": "",
+      "rect": {
+        "bottom": 112,
+        "height": 34,
+        "left": 26,
+        "right": 169.921875,
+        "top": 78,
+        "width": 143.921875,
+        "x": 26,
+        "y": 78
+      },
+      "scrollLeft": 0,
+      "scrollTop": 0,
+      "scrollWidth": 144,
+      "selected": "true",
+      "tab": "participants",
+      "text": "PARTICIPANTS 2",
+      "visibility": "visible"
+    },
+    {
+      "background": "rgb(37, 37, 37)",
+      "clientWidth": 132,
+      "color": "rgb(244, 244, 244)",
+      "display": "block",
+      "hidden": false,
+      "id": "",
+      "rect": {
+        "bottom": 112,
+        "height": 34,
+        "left": 179.921875,
+        "right": 311.4322967529297,
+        "top": 78,
+        "width": 131.5104217529297,
+        "x": 179.921875,
+        "y": 78
+      },
+      "scrollLeft": 0,
+      "scrollTop": 0,
+      "scrollWidth": 132,
+      "selected": "false",
+      "tab": "spectators",
+      "text": "SPECTATORS 1",
+      "visibility": "visible"
+    },
+    {
+      "background": "rgb(37, 37, 37)",
+      "clientWidth": 84,
+      "color": "rgb(244, 244, 244)",
+      "display": "block",
+      "hidden": false,
+      "id": "",
+      "rect": {
+        "bottom": 112,
+        "height": 34,
+        "left": 321.43231201171875,
+        "right": 405.3906478881836,
+        "top": 78,
+        "width": 83.95833587646484,
+        "x": 321.43231201171875,
+        "y": 78
+      },
+      "scrollLeft": 0,
+      "scrollTop": 0,
+      "scrollWidth": 84,
+      "selected": "false",
+      "tab": "details",
+      "text": "DETAILS",
+      "visibility": "visible"
+    }
+  ],
+  "touch": {
+    "activeJob": null,
+    "baseJumps": 0,
+    "battleActive": true,
+    "boxes": 0,
+    "cameraSafe": true,
+    "canIssueOrders": false,
+    "cancels": 11,
+    "combatContext": "",
+    "combatLock": false,
+    "combatLockRequested": false,
+    "combatLockState": {
+      "activation": "",
+      "combatIds": [],
+      "context": "",
+      "deselectAppliedNonce": "",
+      "deselectNonce": "",
+      "enabled": false,
+      "pendingDeselect": false,
+      "reason": "off",
+      "requestNonce": "",
+      "requestedSuspended": true,
+      "revision": 0,
+      "selectedIds": [],
+      "suspended": true
+    },
+    "combatLockSuspended": true,
+    "combatOverride": "",
+    "commandCalls": 0,
+    "commands": [
+      "combat",
+      "all-combat",
+      "all-units",
+      "trucks",
+      "stop",
+      "base",
+      "manufacturing",
+      "research",
+      "build"
+    ],
+    "dropped": 0,
+    "enabled": true,
+    "gesture": null,
+    "gestureActive": false,
+    "heldKeys": [],
+    "heldMouse": null,
+    "hudVisible": false,
+    "lastAction": "phase:game",
+    "lastError": "",
+    "manualSelectionRevision": 0,
+    "panMoves": 0,
+    "panelOpen": false,
+    "pans": 0,
+    "pendingClicks": 0,
+    "phase": "game",
+    "pinchSteps": 0,
+    "pinches": 0,
+    "pointers": 0,
+    "queued": 0,
+    "queuedPointerEvents": 0,
+    "rightClicks": 0,
+    "rotationMoves": 0,
+    "rotations": 0,
+    "taps": 0,
+    "tiltMoves": 0,
+    "tilts": 0,
+    "version": 2
+  },
+  "url": "/multiplayer/index.html",
+  "viewport": {
+    "dpr": 3,
+    "height": 554,
+    "visual": {
+      "height": 360,
+      "offsetLeft": 0,
+      "offsetTop": 0,
+      "width": 1164
+    },
+    "width": 1164
+  },
+  "physicalViewport": [
+    2400,
+    1080
+  ]
+}

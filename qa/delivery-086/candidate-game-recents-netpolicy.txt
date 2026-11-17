@@ -1,0 +1,1318 @@
+System ready: true
+Restrict background: false
+Restrict power: false
+Device idle: false
+Restricted networking mode: false
+Low Power Standby mode: false
+Metered ifaces: {eth0}
+
+Flags:
+com.android.server.net.use_metered_firewall_chains: true
+com.android.server.net.use_different_delays_for_background_chain: false
+com.android.server.net.never_apply_rules_to_core_uids: true
+
+mRestrictBackgroundLowPowerMode: false
+mRestrictBackgroundBeforeBsm: false
+mLoadedRestrictBackground: false
+mRestrictBackgroundChangedInBsm: false
+
+Network policies:
+  NetworkPolicy{template=NetworkTemplate: matchRule=CARRIER, matchSubscriberIds=[310260...], matchWifiNetworkKeys=[], metered=YES cycleRule=RecurrenceRule{start=2025-01-14T00:00Z[Europe/London] end=null period=P1M} warningBytes=2147483648 limitBytes=-1 lastWarningSnooze=-1 lastLimitSnooze=-1 lastRapidSnooze=-1 metered=true inferred=true}
+
+Subscription plans:
+
+Active subscriptions:
+  1=310260...
+
+Merged subscriptions: [310260...]
+Default platform warning bytes: 2147483648
+
+Policy for UIDs:
+  UID=10111 policy=4 (ALLOW_METERED_BACKGROUND)
+  UID=10155 policy=4 (ALLOW_METERED_BACKGROUND)
+  UID=10213 policy=4 (ALLOW_METERED_BACKGROUND)
+  UID=10216 policy=4 (ALLOW_METERED_BACKGROUND)
+Power save whitelist (except idle) app ids:
+  UID=2000: true
+  UID=10104: true
+  UID=10106: true
+  UID=10107: true
+  UID=10111: true
+  UID=10119: true
+  UID=10149: true
+  UID=10153: true
+  UID=10155: true
+  UID=10156: true
+  UID=10199: true
+  UID=10213: true
+  UID=10216: true
+  UID=10226: true
+Power save whitelist app ids:
+  UID=2000: true
+  UID=10106: true
+  UID=10107: true
+  UID=10111: true
+  UID=10155: true
+  UID=10156: true
+  UID=10199: true
+  UID=10213: true
+  UID=10216: true
+  UID=10226: true
+Default restrict background allowlist uids:
+  UID=10111
+  UID=10155
+  UID=10213
+  UID=10216
+
+
+Status for all known UIDs:
+  UID=-1 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=1000 state=null blocked_state={blocked=NONE,allowed=RESTRICTED_MODE_PERMISSIONS,effective=NONE} 
+    callback_info=null 
+  UID=1001 state={procState=PER ,seq=21,cap=LCMNFUATI} blocked_state={blocked=NONE,allowed=RESTRICTED_MODE_PERMISSIONS,effective=NONE} 
+    callback_info={uid=1001,proc_state=PER ,seq=21,cap=LCMNFUATI,pending=false} 
+  UID=1002 state={procState=PER ,seq=54,cap=LCMNFUATI} blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info={uid=1002,proc_state=PER ,seq=54,cap=LCMNFUATI,pending=false} 
+  UID=1027 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=1068 state={procState=PER ,seq=20,cap=LCMNFUATI} blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info={uid=1068,proc_state=PER ,seq=20,cap=LCMNFUATI,pending=false} 
+  UID=1073 state={procState=PER ,seq=14,cap=LCMNFUATI} blocked_state={blocked=NONE,allowed=RESTRICTED_MODE_PERMISSIONS,effective=NONE} 
+    callback_info={uid=1073,proc_state=PER ,seq=14,cap=LCMNFUATI,pending=false} 
+  UID=2000 state={procState=CEM ,seq=753,cap=-------T-} blocked_state={blocked=NONE,allowed=RESTRICTED_MODE_PERMISSIONS,effective=NONE} 
+    callback_info={uid=2000,proc_state=CEM ,seq=753,cap=-------T-,pending=false} 
+  UID=10000 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10001 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10002 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10003 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10004 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10005 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10006 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10007 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10008 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10009 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10010 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10011 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10012 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10013 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10014 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10015 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10016 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10017 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10018 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10019 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10020 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10021 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10022 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10023 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10024 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10025 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10026 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10027 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10028 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10029 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10030 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10031 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10032 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10033 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10034 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10035 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10036 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10037 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10038 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10039 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10040 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10041 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10042 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10043 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10044 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10045 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10046 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10047 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10048 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10049 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10050 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10051 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10052 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10053 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10054 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10055 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10056 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10057 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10058 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10059 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10060 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10061 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10062 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10063 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10064 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10065 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10066 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10067 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10068 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10069 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10070 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10071 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10072 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10073 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10074 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10075 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10076 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10077 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10078 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10079 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10080 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10081 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10082 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10083 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10084 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10085 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10086 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10087 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10088 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10089 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10090 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10091 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10092 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10093 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10094 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10095 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10096 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10097 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10098 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10099 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10100 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10101 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10102 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10103 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10104 state={procState=LAST,seq=2887,cap=--------I} blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info={uid=10104,proc_state=LAST,seq=2887,cap=--------I,pending=false} 
+  UID=10105 state=null blocked_state={blocked=APP_BACKGROUND,allowed=NONE,effective=APP_BACKGROUND} 
+    callback_info=null 
+  UID=10106 state={procState=CEM ,seq=1128,cap=-------T-} blocked_state={blocked=APP_BACKGROUND,allowed=POWER_SAVE_ALLOWLIST|POWER_SAVE_EXCEPT_IDLE_ALLOWLIST,effective=NONE} 
+    callback_info={uid=10106,proc_state=CEM ,seq=1128,cap=-------T-,pending=false} 
+  UID=10107 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10108 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10109 state={procState=CEM ,seq=709,cap=-------T-} blocked_state={blocked=APP_BACKGROUND,allowed=NONE,effective=APP_BACKGROUND} 
+    callback_info={uid=10109,proc_state=CEM ,seq=709,cap=-------T-,pending=false} 
+  UID=10110 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10111 state={procState=LAST,seq=1446,cap=-------TI} blocked_state={blocked=APP_BACKGROUND,allowed=POWER_SAVE_ALLOWLIST|POWER_SAVE_EXCEPT_IDLE_ALLOWLIST|RESTRICTED_MODE_PERMISSIONS|METERED_USER_EXEMPTED,effective=NONE} 
+    callback_info={uid=10111,proc_state=LAST,seq=1446,cap=-------TI,pending=false} 
+  UID=10112 state={procState=CEM ,seq=1330,cap=---------} blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info={uid=10112,proc_state=CEM ,seq=1330,cap=---------,pending=false} 
+  UID=10113 state={procState=CEM ,seq=1035,cap=-------T-} blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info={uid=10113,proc_state=CEM ,seq=1035,cap=-------T-,pending=false} 
+  UID=10114 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10115 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10116 state={procState=CEM ,seq=733,cap=-------T-} blocked_state={blocked=APP_BACKGROUND,allowed=NONE,effective=APP_BACKGROUND} 
+    callback_info={uid=10116,proc_state=CEM ,seq=733,cap=-------T-,pending=false} 
+  UID=10117 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10119 state=null blocked_state={blocked=APP_BACKGROUND,allowed=POWER_SAVE_EXCEPT_IDLE_ALLOWLIST,effective=NONE} 
+    callback_info=null 
+  UID=10120 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10121 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10122 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10123 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10124 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10125 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10126 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10127 state=null blocked_state={blocked=APP_BACKGROUND,allowed=RESTRICTED_MODE_PERMISSIONS,effective=APP_BACKGROUND} 
+    callback_info=null 
+  UID=10128 state=null blocked_state={blocked=APP_BACKGROUND,allowed=RESTRICTED_MODE_PERMISSIONS,effective=APP_BACKGROUND} 
+    callback_info=null 
+  UID=10129 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10130 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10131 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10132 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10133 state=null blocked_state={blocked=APP_BACKGROUND,allowed=NONE,effective=APP_BACKGROUND} 
+    callback_info=null 
+  UID=10134 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10135 state=null blocked_state={blocked=APP_BACKGROUND,allowed=NONE,effective=APP_BACKGROUND} 
+    callback_info=null 
+  UID=10136 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10137 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10138 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10139 state={procState=LAST,seq=2350,cap=-------TI} blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info={uid=10139,proc_state=LAST,seq=2350,cap=-------TI,pending=false} 
+  UID=10140 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10141 state={procState=CEM ,seq=1101,cap=-------T-} blocked_state={blocked=APP_BACKGROUND,allowed=NONE,effective=APP_BACKGROUND} 
+    callback_info={uid=10141,proc_state=CEM ,seq=1101,cap=-------T-,pending=false} 
+  UID=10142 state=null blocked_state={blocked=APP_BACKGROUND,allowed=NONE,effective=APP_BACKGROUND} 
+    callback_info=null 
+  UID=10143 state={procState=CEM ,seq=865,cap=-------T-} blocked_state={blocked=APP_BACKGROUND,allowed=NONE,effective=APP_BACKGROUND} 
+    callback_info={uid=10143,proc_state=CEM ,seq=865,cap=-------T-,pending=false} 
+  UID=10144 state={procState=CEM ,seq=3017,cap=---------} blocked_state={blocked=APP_BACKGROUND,allowed=NONE,effective=APP_BACKGROUND} 
+    callback_info={uid=10144,proc_state=CEM ,seq=3017,cap=---------,pending=false} 
+  UID=10145 state={procState=BFGS,seq=326,cap=LCMNFUATI} blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info={uid=10145,proc_state=BFGS,seq=326,cap=LCMNFUATI,pending=false} 
+  UID=10146 state={procState=CEM ,seq=1209,cap=-------T-} blocked_state={blocked=APP_BACKGROUND,allowed=RESTRICTED_MODE_PERMISSIONS,effective=APP_BACKGROUND} 
+    callback_info={uid=10146,proc_state=CEM ,seq=1209,cap=-------T-,pending=false} 
+  UID=10147 state={procState=CEM ,seq=661,cap=-------T-} blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info={uid=10147,proc_state=CEM ,seq=661,cap=-------T-,pending=false} 
+  UID=10148 state={procState=CEM ,seq=670,cap=-------T-} blocked_state={blocked=APP_BACKGROUND,allowed=NONE,effective=APP_BACKGROUND} 
+    callback_info={uid=10148,proc_state=CEM ,seq=670,cap=-------T-,pending=false} 
+  UID=10149 state={procState=CEM ,seq=650,cap=-------T-} blocked_state={blocked=APP_BACKGROUND,allowed=POWER_SAVE_EXCEPT_IDLE_ALLOWLIST,effective=NONE} 
+    callback_info={uid=10149,proc_state=CEM ,seq=650,cap=-------T-,pending=false} 
+  UID=10150 state=null blocked_state={blocked=APP_BACKGROUND,allowed=NONE,effective=APP_BACKGROUND} 
+    callback_info=null 
+  UID=10151 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10152 state={procState=CEM ,seq=2991,cap=---------} blocked_state={blocked=APP_BACKGROUND,allowed=NONE,effective=APP_BACKGROUND} 
+    callback_info={uid=10152,proc_state=CEM ,seq=2991,cap=---------,pending=false} 
+  UID=10153 state={procState=CEM ,seq=5170,cap=---------} blocked_state={blocked=APP_BACKGROUND,allowed=POWER_SAVE_EXCEPT_IDLE_ALLOWLIST,effective=NONE} 
+    callback_info={uid=10153,proc_state=CEM ,seq=5170,cap=---------,pending=false} 
+  UID=10154 state={procState=BFGS,seq=187,cap=---NFU-TI} blocked_state={blocked=APP_BACKGROUND,allowed=FOREGROUND|RESTRICTED_MODE_PERMISSIONS|NOT_IN_BACKGROUND|METERED_FOREGROUND,effective=NONE} 
+    callback_info={uid=10154,proc_state=BFGS,seq=187,cap=---NFU-TI,pending=false} 
+  UID=10155 state={procState=FGS ,seq=5663,cap=LCMNFUATI} blocked_state={blocked=APP_BACKGROUND,allowed=FOREGROUND|POWER_SAVE_ALLOWLIST|POWER_SAVE_EXCEPT_IDLE_ALLOWLIST|RESTRICTED_MODE_PERMISSIONS|NOT_IN_BACKGROUND|METERED_USER_EXEMPTED|METERED_FOREGROUND,effective=NONE} 
+    callback_info={uid=10155,proc_state=FGS ,seq=5663,cap=LCMNFUATI,pending=false} 
+  UID=10156 state={procState=LAST,seq=2351,cap=-------TI} blocked_state={blocked=APP_BACKGROUND,allowed=POWER_SAVE_ALLOWLIST|POWER_SAVE_EXCEPT_IDLE_ALLOWLIST,effective=NONE} 
+    callback_info={uid=10156,proc_state=LAST,seq=2351,cap=-------TI,pending=false} 
+  UID=10157 state={procState=CEM ,seq=3096,cap=-------T-} blocked_state={blocked=APP_BACKGROUND,allowed=NONE,effective=APP_BACKGROUND} 
+    callback_info={uid=10157,proc_state=CEM ,seq=3096,cap=-------T-,pending=false} 
+  UID=10158 state={procState=BFGS,seq=842,cap=LCMNFUATI} blocked_state={blocked=APP_BACKGROUND,allowed=FOREGROUND|NOT_IN_BACKGROUND|METERED_FOREGROUND,effective=NONE} 
+    callback_info={uid=10158,proc_state=BFGS,seq=842,cap=LCMNFUATI,pending=false} 
+  UID=10159 state={procState=LAST,seq=5137,cap=--------I} blocked_state={blocked=APP_BACKGROUND,allowed=NONE,effective=APP_BACKGROUND} 
+    callback_info={uid=10159,proc_state=LAST,seq=5137,cap=--------I,pending=false} 
+  UID=10160 state=null blocked_state={blocked=APP_BACKGROUND,allowed=NONE,effective=APP_BACKGROUND} 
+    callback_info=null 
+  UID=10161 state={procState=CEM ,seq=687,cap=-------T-} blocked_state={blocked=APP_BACKGROUND,allowed=NONE,effective=APP_BACKGROUND} 
+    callback_info={uid=10161,proc_state=CEM ,seq=687,cap=-------T-,pending=false} 
+  UID=10162 state={procState=CEM ,seq=2987,cap=---------} blocked_state={blocked=APP_BACKGROUND,allowed=NONE,effective=APP_BACKGROUND} 
+    callback_info={uid=10162,proc_state=CEM ,seq=2987,cap=---------,pending=false} 
+  UID=10163 state=null blocked_state={blocked=APP_BACKGROUND,allowed=NONE,effective=APP_BACKGROUND} 
+    callback_info=null 
+  UID=10164 state=null blocked_state={blocked=APP_BACKGROUND,allowed=NONE,effective=APP_BACKGROUND} 
+    callback_info=null 
+  UID=10165 state={procState=CEM ,seq=1041,cap=-------T-} blocked_state={blocked=APP_BACKGROUND,allowed=NONE,effective=APP_BACKGROUND} 
+    callback_info={uid=10165,proc_state=CEM ,seq=1041,cap=-------T-,pending=false} 
+  UID=10166 state={procState=IMPB,seq=2331,cap=-------TI} blocked_state={blocked=APP_BACKGROUND,allowed=NOT_IN_BACKGROUND,effective=NONE} 
+    callback_info={uid=10166,proc_state=IMPB,seq=2331,cap=-------TI,pending=false} 
+  UID=10167 state=null blocked_state={blocked=APP_BACKGROUND,allowed=NONE,effective=APP_BACKGROUND} 
+    callback_info=null 
+  UID=10168 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10169 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10170 state={procState=CEM ,seq=7137,cap=---------} blocked_state={blocked=APP_BACKGROUND,allowed=NONE,effective=APP_BACKGROUND} 
+    callback_info={uid=10170,proc_state=CEM ,seq=7137,cap=---------,pending=false} 
+  UID=10171 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10172 state={procState=CEM ,seq=1053,cap=-------T-} blocked_state={blocked=APP_BACKGROUND,allowed=NONE,effective=APP_BACKGROUND} 
+    callback_info={uid=10172,proc_state=CEM ,seq=1053,cap=-------T-,pending=false} 
+  UID=10173 state=null blocked_state={blocked=APP_BACKGROUND,allowed=NONE,effective=APP_BACKGROUND} 
+    callback_info=null 
+  UID=10174 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10175 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10176 state=null blocked_state={blocked=APP_BACKGROUND,allowed=NONE,effective=APP_BACKGROUND} 
+    callback_info=null 
+  UID=10177 state={procState=LAST,seq=2426,cap=--------I} blocked_state={blocked=APP_BACKGROUND,allowed=NONE,effective=APP_BACKGROUND} 
+    callback_info={uid=10177,proc_state=LAST,seq=2426,cap=--------I,pending=false} 
+  UID=10178 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10179 state=null blocked_state={blocked=APP_BACKGROUND,allowed=NONE,effective=APP_BACKGROUND} 
+    callback_info=null 
+  UID=10180 state=null blocked_state={blocked=APP_BACKGROUND,allowed=NONE,effective=APP_BACKGROUND} 
+    callback_info=null 
+  UID=10181 state=null blocked_state={blocked=APP_BACKGROUND,allowed=NONE,effective=APP_BACKGROUND} 
+    callback_info=null 
+  UID=10182 state=null blocked_state={blocked=APP_BACKGROUND,allowed=NONE,effective=APP_BACKGROUND} 
+    callback_info=null 
+  UID=10183 state={procState=LAST,seq=2434,cap=--------I} blocked_state={blocked=APP_BACKGROUND,allowed=NONE,effective=APP_BACKGROUND} 
+    callback_info={uid=10183,proc_state=LAST,seq=2434,cap=--------I,pending=false} 
+  UID=10184 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10185 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10186 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10187 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10188 state=null blocked_state={blocked=APP_BACKGROUND,allowed=NONE,effective=APP_BACKGROUND} 
+    callback_info=null 
+  UID=10189 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10190 state=null blocked_state={blocked=APP_BACKGROUND,allowed=NONE,effective=APP_BACKGROUND} 
+    callback_info=null 
+  UID=10191 state={procState=TOP ,seq=7611,cap=LCMNFUATI} blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info={uid=10191,proc_state=TOP ,seq=7611,cap=LCMNFUATI,pending=false} 
+  UID=10192 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10193 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10194 state={procState=PER ,seq=5113,cap=LCMNFUATI} blocked_state={blocked=APP_BACKGROUND,allowed=FOREGROUND|TOP|NOT_IN_BACKGROUND|METERED_FOREGROUND,effective=NONE} 
+    callback_info={uid=10194,proc_state=PER ,seq=5113,cap=LCMNFUATI,pending=false} 
+  UID=10195 state=null blocked_state={blocked=APP_BACKGROUND,allowed=NONE,effective=APP_BACKGROUND} 
+    callback_info=null 
+  UID=10196 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10197 state={procState=LAST,seq=837,cap=-------TI} blocked_state={blocked=APP_BACKGROUND,allowed=NONE,effective=APP_BACKGROUND} 
+    callback_info={uid=10197,proc_state=LAST,seq=837,cap=-------TI,pending=false} 
+  UID=10198 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10199 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10200 state={procState=CEM ,seq=1020,cap=-------T-} blocked_state={blocked=APP_BACKGROUND,allowed=NONE,effective=APP_BACKGROUND} 
+    callback_info={uid=10200,proc_state=CEM ,seq=1020,cap=-------T-,pending=false} 
+  UID=10201 state={procState=CEM ,seq=895,cap=-------T-} blocked_state={blocked=APP_BACKGROUND,allowed=NONE,effective=APP_BACKGROUND} 
+    callback_info={uid=10201,proc_state=CEM ,seq=895,cap=-------T-,pending=false} 
+  UID=10202 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10203 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10204 state=null blocked_state={blocked=APP_BACKGROUND,allowed=NONE,effective=APP_BACKGROUND} 
+    callback_info=null 
+  UID=10205 state={procState=LAST,seq=2423,cap=-------TI} blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info={uid=10205,proc_state=LAST,seq=2423,cap=-------TI,pending=false} 
+  UID=10206 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10207 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10208 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10209 state=null blocked_state={blocked=APP_BACKGROUND,allowed=NONE,effective=APP_BACKGROUND} 
+    callback_info=null 
+  UID=10210 state=null blocked_state={blocked=APP_BACKGROUND,allowed=NONE,effective=APP_BACKGROUND} 
+    callback_info=null 
+  UID=10211 state={procState=PER ,seq=226,cap=LCMNFUATI} blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info={uid=10211,proc_state=PER ,seq=226,cap=LCMNFUATI,pending=false} 
+  UID=10212 state={procState=CEM ,seq=4463,cap=---------} blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info={uid=10212,proc_state=CEM ,seq=4463,cap=---------,pending=false} 
+  UID=10213 state=null blocked_state={blocked=APP_BACKGROUND,allowed=POWER_SAVE_ALLOWLIST|POWER_SAVE_EXCEPT_IDLE_ALLOWLIST|RESTRICTED_MODE_PERMISSIONS|METERED_USER_EXEMPTED,effective=NONE} 
+    callback_info=null 
+  UID=10214 state=null blocked_state={blocked=APP_BACKGROUND,allowed=NONE,effective=APP_BACKGROUND} 
+    callback_info=null 
+  UID=10215 state={procState=BFGS,seq=93,cap=LCMNFUATI} blocked_state={blocked=APP_BACKGROUND,allowed=FOREGROUND|NOT_IN_BACKGROUND|METERED_FOREGROUND,effective=NONE} 
+    callback_info={uid=10215,proc_state=BFGS,seq=93,cap=LCMNFUATI,pending=false} 
+  UID=10216 state={procState=CEM ,seq=2519,cap=-------T-} blocked_state={blocked=APP_BACKGROUND,allowed=POWER_SAVE_ALLOWLIST|POWER_SAVE_EXCEPT_IDLE_ALLOWLIST|METERED_USER_EXEMPTED,effective=NONE} 
+    callback_info={uid=10216,proc_state=CEM ,seq=2519,cap=-------T-,pending=false} 
+  UID=10217 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10218 state={procState=CEM ,seq=6903,cap=---------} blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info={uid=10218,proc_state=CEM ,seq=6903,cap=---------,pending=false} 
+  UID=10219 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10220 state=null blocked_state={blocked=APP_BACKGROUND,allowed=NONE,effective=APP_BACKGROUND} 
+    callback_info=null 
+  UID=10221 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10222 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10223 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10224 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10225 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10226 state={procState=LAST,seq=2381,cap=--------I} blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info={uid=10226,proc_state=LAST,seq=2381,cap=--------I,pending=false} 
+  UID=10227 state=null blocked_state={blocked=APP_BACKGROUND,allowed=NONE,effective=APP_BACKGROUND} 
+    callback_info=null 
+  UID=10228 state=null blocked_state={blocked=APP_BACKGROUND,allowed=NONE,effective=APP_BACKGROUND} 
+    callback_info=null 
+  UID=10229 state={procState=CEM ,seq=1936,cap=---------} blocked_state={blocked=APP_BACKGROUND,allowed=NONE,effective=APP_BACKGROUND} 
+    callback_info={uid=10229,proc_state=CEM ,seq=1936,cap=---------,pending=false} 
+  UID=10230 state=null blocked_state={blocked=APP_BACKGROUND,allowed=NONE,effective=APP_BACKGROUND} 
+    callback_info=null 
+  UID=10231 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10232 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10233 state=null blocked_state={blocked=NONE,allowed=NONE,effective=NONE} 
+    callback_info=null 
+  UID=10234 state=null blocked_state={blocked=APP_BACKGROUND,allowed=NONE,effective=APP_BACKGROUND} 
+    callback_info=null 
+  UID=10235 state={procState=TOP ,seq=7323,cap=LCMNFUATI} blocked_state={blocked=APP_BACKGROUND,allowed=FOREGROUND|TOP|NOT_IN_BACKGROUND|METERED_FOREGROUND,effective=NONE} 
+    callback_info={uid=10235,proc_state=TOP ,seq=7325,cap=LCMNFUATI,pending=false} 
+  UID=10236 state=null blocked_state={blocked=APP_BACKGROUND,allowed=NONE,effective=APP_BACKGROUND} 
+    callback_info=null 
+  UID=99001 state={procState=BTOP,seq=7324,cap=---NFU-TI} blocked_state=null 
+    callback_info={uid=99001,proc_state=BTOP,seq=7324,cap=---NFU-TI,pending=false} 
+
+Admin restricted uids for metered data:
+  u0: {}
+
+Network to interfaces:
+  100: {wlan0}
+
+Active notifications: {}
+
+Stats:
+  updateNetworkEnabledNL(): count=23, total=0.3ms, avg=0.015ms, max calls/s=6 max dur/s=0.1ms max time=0.1ms
+  isUidNetworkingBlocked(): count=0, total=0.0ms, avg=0.000ms, max calls/s=0 max dur/s=0.0ms max time=0.0ms
+
+mEventLogs (most recent first):
+  2026-11-16T00:54:16:588 - Firewall rule changed: 20170-background-default
+  2026-11-16T00:54:16:588 - Firewall rule changed: 10170-background-default
+  2026-11-16T00:54:11:311 - Firewall rule changed: 20170-background-allow
+  2026-11-16T00:54:11:311 - Firewall rule changed: 10170-background-allow
+  2026-11-16T00:53:58:566 - temp-power-save whitelist for 1000 changed to: false; reason=UNKNOWN <null>
+  2026-11-16T00:53:48:563 - temp-power-save whitelist for 1000 changed to: true; reason=ALARM_MANAGER_WHILE_IDLE <9bf7a8a com.android.server.audio.action.CHECK_MUSIC_ACTIVE/u0>
+  2026-11-16T00:53:07:457 - Firewall rule changed: 20166-standby-default
+  2026-11-16T00:53:07:457 - Firewall rule changed: 10166-standby-default
+  2026-11-16T00:53:07:457 - App idle state of uid 10166: true
+  2026-11-16T00:52:52:176 - Firewall rule changed: 20229-standby-default
+  2026-11-16T00:52:52:176 - Firewall rule changed: 10229-standby-default
+  2026-11-16T00:52:52:176 - App idle state of uid 10229: true
+  2026-11-16T00:52:52:175 - Firewall rule changed: 20146-standby-default
+  2026-11-16T00:52:52:175 - Firewall rule changed: 10146-standby-default
+  2026-11-16T00:52:52:175 - App idle state of uid 10146: true
+  2026-11-16T00:52:38:106 - temp-power-save whitelist for 1000 changed to: false; reason=UNKNOWN <null>
+  2026-11-16T00:52:28:091 - temp-power-save whitelist for 1000 changed to: true; reason=ALARM_MANAGER_WHILE_IDLE <cfb91aa com.android.server.audio.action.CHECK_MUSIC_ACTIVE/u0>
+  2026-11-16T00:52:06:866 - Firewall rule changed: 20170-background-default
+  2026-11-16T00:52:06:866 - Firewall rule changed: 10170-background-default
+  2026-11-16T00:52:01:860 - Firewall rule changed: 20170-standby-default
+  2026-11-16T00:52:01:860 - Firewall rule changed: 10170-standby-default
+  2026-11-16T00:52:01:860 - Firewall rule changed: 20170-metered_allow-default
+  2026-11-16T00:52:01:860 - Firewall rule changed: 10170-metered_allow-default
+  2026-11-16T00:52:01:860 - Firewall rule changed: 20170-metered_deny_user-default
+  2026-11-16T00:52:01:860 - Firewall rule changed: 10170-metered_deny_user-default
+  2026-11-16T00:52:01:860 - Firewall rule changed: 20170-metered_deny_admin-default
+  2026-11-16T00:52:01:860 - Firewall rule changed: 10170-metered_deny_admin-default
+  2026-11-16T00:51:55:658 - Firewall rule changed: 20170-background-allow
+  2026-11-16T00:51:55:658 - Firewall rule changed: 10170-background-allow
+  2026-11-16T00:51:55:658 - Firewall rule changed: 20170-standby-default
+  2026-11-16T00:51:55:658 - Firewall rule changed: 10170-standby-default
+  2026-11-16T00:51:55:658 - Firewall rule changed: 20170-metered_allow-allow
+  2026-11-16T00:51:55:658 - Firewall rule changed: 10170-metered_allow-allow
+  2026-11-16T00:51:55:658 - Firewall rule changed: 20170-metered_deny_user-default
+  2026-11-16T00:51:55:658 - Firewall rule changed: 10170-metered_deny_user-default
+  2026-11-16T00:51:55:658 - Firewall rule changed: 20170-metered_deny_admin-default
+  2026-11-16T00:51:55:658 - Firewall rule changed: 10170-metered_deny_admin-default
+  2026-11-16T00:51:02:903 - Firewall rule changed: 20153-background-allow
+  2026-11-16T00:51:02:903 - Firewall rule changed: 10153-background-allow
+  2026-11-16T00:50:59:927 - temp-power-save whitelist for 1000 changed to: false; reason=UNKNOWN <null>
+  2026-11-16T00:50:56:021 - Firewall rule changed: 20153-background-allow
+  2026-11-16T00:50:56:021 - Firewall rule changed: 10153-background-allow
+  2026-11-16T00:50:41:929 - Firewall rule changed: 20159-background-default
+  2026-11-16T00:50:41:929 - Firewall rule changed: 10159-background-default
+  2026-11-16T00:50:40:112 - Firewall rule changed: 20153-background-allow
+  2026-11-16T00:50:40:112 - Firewall rule changed: 10153-background-allow
+  2026-11-16T00:50:36:914 - Firewall rule changed: 20159-standby-default
+  2026-11-16T00:50:36:914 - Firewall rule changed: 10159-standby-default
+  2026-11-16T00:50:36:914 - Firewall rule changed: 20159-metered_allow-default
+  2026-11-16T00:50:36:914 - Firewall rule changed: 10159-metered_allow-default
+  2026-11-16T00:50:36:914 - Firewall rule changed: 20159-metered_deny_user-default
+  2026-11-16T00:50:36:914 - Firewall rule changed: 10159-metered_deny_user-default
+  2026-11-16T00:50:36:914 - Firewall rule changed: 20159-metered_deny_admin-default
+  2026-11-16T00:50:36:914 - Firewall rule changed: 10159-metered_deny_admin-default
+  2026-11-16T00:50:35:100 - Firewall rule changed: 20153-background-allow
+  2026-11-16T00:50:35:100 - Firewall rule changed: 10153-background-allow
+  2026-11-16T00:50:35:034 - Firewall rule changed: 20153-background-allow
+  2026-11-16T00:50:35:034 - Firewall rule changed: 10153-background-allow
+  2026-11-16T00:50:30:532 - Firewall rule changed: 20235-background-allow
+  2026-11-16T00:50:30:532 - Firewall rule changed: 10235-background-allow
+  2026-11-16T00:50:30:532 - Firewall rule changed: 20235-standby-default
+  2026-11-16T00:50:30:532 - Firewall rule changed: 10235-standby-default
+  2026-11-16T00:50:30:532 - Firewall rule changed: 20235-metered_allow-allow
+  2026-11-16T00:50:30:532 - Firewall rule changed: 10235-metered_allow-allow
+  2026-11-16T00:50:30:532 - Firewall rule changed: 20235-metered_deny_user-default
+  2026-11-16T00:50:30:532 - Firewall rule changed: 10235-metered_deny_user-default
+  2026-11-16T00:50:30:532 - Firewall rule changed: 20235-metered_deny_admin-default
+  2026-11-16T00:50:30:532 - Firewall rule changed: 10235-metered_deny_admin-default
+  2026-11-16T00:50:30:113 - Firewall rule changed: 20153-background-allow
+  2026-11-16T00:50:30:113 - Firewall rule changed: 10153-background-allow
+  2026-11-16T00:50:29:999 - Firewall rule changed: 20159-background-allow
+  2026-11-16T00:50:29:999 - Firewall rule changed: 10159-background-allow
+  2026-11-16T00:50:29:999 - Firewall rule changed: 20159-standby-default
+  2026-11-16T00:50:29:999 - Firewall rule changed: 10159-standby-default
+  2026-11-16T00:50:29:999 - Firewall rule changed: 20159-metered_allow-allow
+  2026-11-16T00:50:29:999 - Firewall rule changed: 10159-metered_allow-allow
+  2026-11-16T00:50:29:999 - Firewall rule changed: 20159-metered_deny_user-default
+  2026-11-16T00:50:29:999 - Firewall rule changed: 10159-metered_deny_user-default
+  2026-11-16T00:50:29:999 - Firewall rule changed: 20159-metered_deny_admin-default
+  2026-11-16T00:50:29:999 - Firewall rule changed: 10159-metered_deny_admin-default
+  2026-11-16T00:50:29:937 - Firewall rule changed: 20235-metered_allow-default
+  2026-11-16T00:50:29:937 - Firewall rule changed: 10235-metered_allow-default
+  2026-11-16T00:50:29:937 - Firewall rule changed: 20235-metered_deny_user-default
+  2026-11-16T00:50:29:937 - Firewall rule changed: 10235-metered_deny_user-default
+  2026-11-16T00:50:29:937 - Firewall rule changed: 20235-metered_deny_admin-default
+  2026-11-16T00:50:29:937 - Firewall rule changed: 10235-metered_deny_admin-default
+  2026-11-16T00:50:29:937 - Firewall rule changed: 20235-background-default
+  2026-11-16T00:50:29:937 - Firewall rule changed: 10235-background-default
+  2026-11-16T00:50:29:937 - Firewall rule changed: 20235-standby-default
+  2026-11-16T00:50:29:937 - Firewall rule changed: 10235-standby-default
+  2026-11-16T00:50:29:924 - temp-power-save whitelist for 1000 changed to: true; reason=KEY_CHAIN <keychain>
+  2026-11-16T00:50:29:836 - Firewall rule changed: 20235-background-default
+  2026-11-16T00:50:29:836 - Firewall rule changed: 10235-background-default
+  2026-11-16T00:50:29:835 - Firewall rule changed: 20235-metered_allow-default
+  2026-11-16T00:50:29:835 - Firewall rule changed: 10235-metered_allow-default
+  2026-11-16T00:50:29:835 - Firewall rule changed: 20235-metered_deny_user-default
+  2026-11-16T00:50:29:835 - Firewall rule changed: 10235-metered_deny_user-default
+  2026-11-16T00:50:29:835 - Firewall rule changed: 20235-metered_deny_admin-default
+  2026-11-16T00:50:29:835 - Firewall rule changed: 10235-metered_deny_admin-default
+  2026-11-16T00:49:26:674 - Firewall rule changed: 20170-background-default
+  2026-11-16T00:49:26:674 - Firewall rule changed: 10170-background-default
+  2026-11-16T00:49:21:655 - Firewall rule changed: 20170-background-allow
+  2026-11-16T00:49:21:655 - Firewall rule changed: 10170-background-allow
+  2026-11-16T00:49:06:578 - Firewall rule changed: 20170-background-default
+  2026-11-16T00:49:06:578 - Firewall rule changed: 10170-background-default
+  2026-11-16T00:49:01:563 - Firewall rule changed: 20170-standby-default
+  2026-11-16T00:49:01:563 - Firewall rule changed: 10170-standby-default
+  2026-11-16T00:49:01:563 - Firewall rule changed: 20170-metered_allow-default
+  2026-11-16T00:49:01:563 - Firewall rule changed: 10170-metered_allow-default
+  2026-11-16T00:49:01:563 - Firewall rule changed: 20170-metered_deny_user-default
+  2026-11-16T00:49:01:563 - Firewall rule changed: 10170-metered_deny_user-default
+  2026-11-16T00:49:01:563 - Firewall rule changed: 20170-metered_deny_admin-default
+  2026-11-16T00:49:01:563 - Firewall rule changed: 10170-metered_deny_admin-default
+  2026-11-16T00:48:55:348 - Firewall rule changed: 20170-background-allow
+  2026-11-16T00:48:55:348 - Firewall rule changed: 10170-background-allow
+  2026-11-16T00:48:55:348 - Firewall rule changed: 20170-standby-default
+  2026-11-16T00:48:55:348 - Firewall rule changed: 10170-standby-default
+  2026-11-16T00:48:55:348 - Firewall rule changed: 20170-metered_allow-allow
+  2026-11-16T00:48:55:348 - Firewall rule changed: 10170-metered_allow-allow
+  2026-11-16T00:48:55:347 - Firewall rule changed: 20170-metered_deny_user-default
+  2026-11-16T00:48:55:347 - Firewall rule changed: 10170-metered_deny_user-default
+  2026-11-16T00:48:55:347 - Firewall rule changed: 20170-metered_deny_admin-default
+  2026-11-16T00:48:55:347 - Firewall rule changed: 10170-metered_deny_admin-default
+  2026-11-16T00:48:16:519 - Firewall rule changed: 20235-background-allow
+  2026-11-16T00:48:16:519 - Firewall rule changed: 10235-background-allow
+  2026-11-16T00:48:16:519 - Firewall rule changed: 20235-standby-default
+  2026-11-16T00:48:16:519 - Firewall rule changed: 10235-standby-default
+  2026-11-16T00:48:16:519 - Firewall rule changed: 20235-metered_allow-allow
+  2026-11-16T00:48:16:519 - Firewall rule changed: 10235-metered_allow-allow
+  2026-11-16T00:48:16:519 - Firewall rule changed: 20235-metered_deny_user-default
+  2026-11-16T00:48:16:519 - Firewall rule changed: 10235-metered_deny_user-default
+  2026-11-16T00:48:16:519 - Firewall rule changed: 20235-metered_deny_admin-default
+  2026-11-16T00:48:16:519 - Firewall rule changed: 10235-metered_deny_admin-default
+  2026-11-16T00:47:06:345 - Firewall rule changed: 20170-background-default
+  2026-11-16T00:47:06:345 - Firewall rule changed: 10170-background-default
+  2026-11-16T00:47:01:289 - Firewall rule changed: 20170-background-allow
+  2026-11-16T00:47:01:288 - Firewall rule changed: 10170-background-allow
+  2026-11-16T00:46:43:752 - temp-power-save whitelist for 1000 changed to: false; reason=UNKNOWN <null>
+  2026-11-16T00:46:33:740 - temp-power-save whitelist for 1000 changed to: true; reason=ALARM_MANAGER_WHILE_IDLE <da7122b com.android.server.audio.action.CHECK_MUSIC_ACTIVE/u0>
+  2026-11-16T00:46:06:292 - Firewall rule changed: 20170-background-default
+  2026-11-16T00:46:06:292 - Firewall rule changed: 10170-background-default
+  2026-11-16T00:46:01:278 - Firewall rule changed: 20170-standby-default
+  2026-11-16T00:46:01:278 - Firewall rule changed: 10170-standby-default
+  2026-11-16T00:46:01:278 - Firewall rule changed: 20170-metered_allow-default
+  2026-11-16T00:46:01:278 - Firewall rule changed: 10170-metered_allow-default
+  2026-11-16T00:46:01:277 - Firewall rule changed: 20170-metered_deny_user-default
+  2026-11-16T00:46:01:277 - Firewall rule changed: 10170-metered_deny_user-default
+  2026-11-16T00:46:01:277 - Firewall rule changed: 20170-metered_deny_admin-default
+  2026-11-16T00:46:01:277 - Firewall rule changed: 10170-metered_deny_admin-default
+  2026-11-16T00:45:55:091 - Firewall rule changed: 20170-background-allow
+  2026-11-16T00:45:55:091 - Firewall rule changed: 10170-background-allow
+  2026-11-16T00:45:55:091 - Firewall rule changed: 20170-standby-default
+  2026-11-16T00:45:55:091 - Firewall rule changed: 10170-standby-default
+  2026-11-16T00:45:55:091 - Firewall rule changed: 20170-metered_allow-allow
+  2026-11-16T00:45:55:091 - Firewall rule changed: 10170-metered_allow-allow
+  2026-11-16T00:45:55:090 - Firewall rule changed: 20170-metered_deny_user-default
+  2026-11-16T00:45:55:090 - Firewall rule changed: 10170-metered_deny_user-default
+  2026-11-16T00:45:55:090 - Firewall rule changed: 20170-metered_deny_admin-default
+  2026-11-16T00:45:55:090 - Firewall rule changed: 10170-metered_deny_admin-default
+  2026-11-16T00:45:54:708 - Firewall rule changed: 20235-background-default
+  2026-11-16T00:45:54:708 - Firewall rule changed: 10235-background-default
+  2026-11-16T00:45:54:187 - Firewall rule changed: 20170-background-default
+  2026-11-16T00:45:54:187 - Firewall rule changed: 10170-background-default
+  2026-11-16T00:45:49:698 - Firewall rule changed: 20235-standby-default
+  2026-11-16T00:45:49:698 - Firewall rule changed: 10235-standby-default
+  2026-11-16T00:45:49:698 - Firewall rule changed: 20235-metered_allow-default
+  2026-11-16T00:45:49:698 - Firewall rule changed: 10235-metered_allow-default
+  2026-11-16T00:45:49:697 - Firewall rule changed: 20235-metered_deny_user-default
+  2026-11-16T00:45:49:697 - Firewall rule changed: 10235-metered_deny_user-default
+  2026-11-16T00:45:49:697 - Firewall rule changed: 20235-metered_deny_admin-default
+  2026-11-16T00:45:49:697 - Firewall rule changed: 10235-metered_deny_admin-default
+  2026-11-16T00:45:49:018 - Firewall rule changed: 20170-background-allow
+  2026-11-16T00:45:49:018 - Firewall rule changed: 10170-background-allow
+  2026-11-16T00:44:24:656 - Firewall rule changed: 20157-background-default
+  2026-11-16T00:44:24:656 - Firewall rule changed: 10157-background-default
+  2026-11-16T00:44:24:656 - Firewall rule changed: 20157-standby-default
+  2026-11-16T00:44:24:656 - Firewall rule changed: 10157-standby-default
+  2026-11-16T00:44:24:656 - temp-power-save whitelist for 10157 changed to: false; reason=UNKNOWN <null>
+  2026-11-16T00:44:23:137 - Firewall rule changed: 20170-background-default
+  2026-11-16T00:44:23:137 - Firewall rule changed: 10170-background-default
+  2026-11-16T00:44:18:008 - Firewall rule changed: 20170-background-allow
+  2026-11-16T00:44:18:008 - Firewall rule changed: 10170-background-allow
+  2026-11-16T00:44:09:692 - Firewall rule changed: 20170-background-default
+  2026-11-16T00:44:09:692 - Firewall rule changed: 10170-background-default
+  2026-11-16T00:44:09:660 - Firewall rule changed: 20157-background-allow
+  2026-11-16T00:44:09:660 - Firewall rule changed: 10157-background-allow
+  2026-11-16T00:44:04:652 - Firewall rule changed: 20157-background-allow
+  2026-11-16T00:44:04:652 - Firewall rule changed: 10157-background-allow
+  2026-11-16T00:44:04:642 - Firewall rule changed: 20157-background-allow
+  2026-11-16T00:44:04:642 - Firewall rule changed: 10157-background-allow
+  2026-11-16T00:44:04:642 - Firewall rule changed: 20157-standby-default
+  2026-11-16T00:44:04:642 - Firewall rule changed: 10157-standby-default
+  2026-11-16T00:44:04:642 - temp-power-save whitelist for 10157 changed to: true; reason=UNKNOWN <96682aa Intent { flg=0x10 xflg=0x4 cmp=com.google.android.settings.intelligence/.modules.routines.impl.WifiBroadcastReceiver (has extras) }/u0>
+  2026-11-16T00:44:04:642 - Firewall rule changed: 20157-background-allow
+  2026-11-16T00:44:04:642 - Firewall rule changed: 10157-background-allow
+  2026-11-16T00:44:04:532 - Firewall rule changed: 20157-background-allow
+  2026-11-16T00:44:04:532 - Firewall rule changed: 10157-background-allow
+  2026-11-16T00:44:04:522 - Firewall rule changed: 20170-background-allow
+  2026-11-16T00:44:04:522 - Firewall rule changed: 10170-background-allow
+  2026-11-16T00:44:04:511 - Firewall rule changed: 20235-background-allow
+  2026-11-16T00:44:04:511 - Firewall rule changed: 10235-background-allow
+  2026-11-16T00:44:04:511 - Firewall rule changed: 20235-standby-default
+  2026-11-16T00:44:04:511 - Firewall rule changed: 10235-standby-default
+  2026-11-16T00:44:04:511 - Firewall rule changed: 20235-metered_allow-allow
+  2026-11-16T00:44:04:511 - Firewall rule changed: 10235-metered_allow-allow
+  2026-11-16T00:44:04:511 - Firewall rule changed: 20235-metered_deny_user-default
+  2026-11-16T00:44:04:511 - Firewall rule changed: 10235-metered_deny_user-default
+  2026-11-16T00:44:04:511 - Firewall rule changed: 20235-metered_deny_admin-default
+  2026-11-16T00:44:04:511 - Firewall rule changed: 10235-metered_deny_admin-default
+  2026-11-16T00:44:04:386 - Firewall rule changed: 20194-background-allow
+  2026-11-16T00:44:04:386 - Firewall rule changed: 10194-background-allow
+  2026-11-16T00:44:04:384 - Firewall rule changed: 20194-standby-default
+  2026-11-16T00:44:04:384 - Firewall rule changed: 10194-standby-default
+  2026-11-16T00:44:04:384 - Firewall rule changed: 20194-metered_allow-allow
+  2026-11-16T00:44:04:384 - Firewall rule changed: 10194-metered_allow-allow
+  2026-11-16T00:44:04:384 - Firewall rule changed: 20194-metered_deny_user-default
+  2026-11-16T00:44:04:384 - Firewall rule changed: 10194-metered_deny_user-default
+  2026-11-16T00:44:04:384 - Firewall rule changed: 20194-metered_deny_admin-default
+  2026-11-16T00:44:04:384 - Firewall rule changed: 10194-metered_deny_admin-default
+  2026-11-16T00:44:03:825 - Firewall rule changed: 20144-background-default
+  2026-11-16T00:44:03:825 - Firewall rule changed: 10144-background-default
+  2026-11-16T00:43:58:810 - Firewall rule changed: 20144-standby-default
+  2026-11-16T00:43:58:810 - Firewall rule changed: 10144-standby-default
+  2026-11-16T00:43:58:810 - Firewall rule changed: 20144-metered_allow-default
+  2026-11-16T00:43:58:810 - Firewall rule changed: 10144-metered_allow-default
+  2026-11-16T00:43:58:810 - Firewall rule changed: 20144-metered_deny_user-default
+  2026-11-16T00:43:58:810 - Firewall rule changed: 10144-metered_deny_user-default
+  2026-11-16T00:43:58:810 - Firewall rule changed: 20144-metered_deny_admin-default
+  2026-11-16T00:43:58:810 - Firewall rule changed: 10144-metered_deny_admin-default
+  2026-11-16T00:43:38:724 - Firewall rule changed: 20152-background-default
+  2026-11-16T00:43:38:724 - Firewall rule changed: 10152-background-default
+  2026-11-16T00:43:38:709 - Firewall rule changed: 20162-background-default
+  2026-11-16T00:43:38:709 - Firewall rule changed: 10162-background-default
+  2026-11-16T00:43:33:685 - Firewall rule changed: 20162-background-allow
+  2026-11-16T00:43:33:685 - Firewall rule changed: 10162-background-allow
+  2026-11-16T00:43:33:586 - Firewall rule changed: 20152-background-allow
+  2026-11-16T00:43:33:586 - Firewall rule changed: 10152-background-allow
+  2026-11-16T00:43:33:456 - Firewall rule changed: 20152-background-allow
+  2026-11-16T00:43:33:456 - Firewall rule changed: 10152-background-allow
+  2026-11-16T00:43:30:225 - Firewall rule changed: 20170-background-default
+  2026-11-16T00:43:30:225 - Firewall rule changed: 10170-background-default
+  2026-11-16T00:43:22:110 - Firewall rule changed: 20153-background-allow
+  2026-11-16T00:43:22:110 - Firewall rule changed: 10153-background-allow
+  2026-11-16T00:43:22:110 - Firewall rule changed: 20153-standby-default
+  2026-11-16T00:43:22:110 - Firewall rule changed: 10153-standby-default
+  2026-11-16T00:43:22:110 - temp-power-save whitelist for 10153 changed to: false; reason=UNKNOWN <null>
+  2026-11-16T00:43:20:828 - Firewall rule changed: 20157-background-default
+  2026-11-16T00:43:20:828 - Firewall rule changed: 10157-background-default
+  2026-11-16T00:43:20:828 - Firewall rule changed: 20157-standby-default
+  2026-11-16T00:43:20:828 - Firewall rule changed: 10157-standby-default
+  2026-11-16T00:43:20:827 - temp-power-save whitelist for 10157 changed to: false; reason=UNKNOWN <null>
+  2026-11-16T00:43:19:376 - Firewall rule changed: 20216-background-allow
+  2026-11-16T00:43:19:376 - Firewall rule changed: 10216-background-allow
+  2026-11-16T00:43:19:376 - Firewall rule changed: 20216-standby-default
+  2026-11-16T00:43:19:376 - Firewall rule changed: 10216-standby-default
+  2026-11-16T00:43:19:376 - temp-power-save whitelist for 10216 changed to: false; reason=UNKNOWN <null>
+  2026-11-16T00:43:19:138 - Firewall rule changed: 20111-background-allow
+  2026-11-16T00:43:19:138 - Firewall rule changed: 10111-background-allow
+  2026-11-16T00:43:19:138 - Firewall rule changed: 20111-standby-default
+  2026-11-16T00:43:19:138 - Firewall rule changed: 10111-standby-default
+  2026-11-16T00:43:19:138 - temp-power-save whitelist for 10111 changed to: false; reason=UNKNOWN <null>
+  2026-11-16T00:43:19:044 - Firewall rule changed: 20141-background-default
+  2026-11-16T00:43:19:044 - Firewall rule changed: 10141-background-default
+  2026-11-16T00:43:19:044 - Firewall rule changed: 20141-standby-default
+  2026-11-16T00:43:19:044 - Firewall rule changed: 10141-standby-default
+  2026-11-16T00:43:19:044 - temp-power-save whitelist for 10141 changed to: false; reason=UNKNOWN <null>
+  2026-11-16T00:43:18:996 - Firewall rule changed: 20152-background-default
+  2026-11-16T00:43:18:996 - Firewall rule changed: 10152-background-default
+  2026-11-16T00:43:18:996 - Firewall rule changed: 20152-standby-default
+  2026-11-16T00:43:18:996 - Firewall rule changed: 10152-standby-default
+  2026-11-16T00:43:18:996 - temp-power-save whitelist for 10152 changed to: false; reason=UNKNOWN <null>
+  2026-11-16T00:43:18:458 - temp-power-save whitelist for 10113 changed to: false; reason=UNKNOWN <null>
+  2026-11-16T00:43:18:206 - Firewall rule changed: 20200-background-default
+  2026-11-16T00:43:18:206 - Firewall rule changed: 10200-background-default
+  2026-11-16T00:43:18:205 - Firewall rule changed: 20200-standby-default
+  2026-11-16T00:43:18:205 - Firewall rule changed: 10200-standby-default
+  2026-11-16T00:43:18:205 - temp-power-save whitelist for 10200 changed to: false; reason=UNKNOWN <null>
+  2026-11-16T00:43:18:078 - Firewall rule changed: 20158-background-allow
+  2026-11-16T00:43:18:078 - Firewall rule changed: 10158-background-allow
+  2026-11-16T00:43:18:078 - Firewall rule changed: 20158-standby-default
+  2026-11-16T00:43:18:078 - Firewall rule changed: 10158-standby-default
+  2026-11-16T00:43:18:078 - temp-power-save whitelist for 10158 changed to: false; reason=UNKNOWN <null>
+  2026-11-16T00:43:17:522 - temp-power-save whitelist for 10205 changed to: false; reason=UNKNOWN <null>
+  2026-11-16T00:43:16:914 - Firewall rule changed: 20159-background-default
+  2026-11-16T00:43:16:914 - Firewall rule changed: 10159-background-default
+  2026-11-16T00:43:16:913 - Firewall rule changed: 20159-standby-default
+  2026-11-16T00:43:16:913 - Firewall rule changed: 10159-standby-default
+  2026-11-16T00:43:16:913 - temp-power-save whitelist for 10159 changed to: false; reason=UNKNOWN <null>
+  2026-11-16T00:43:16:705 - Firewall rule changed: 20165-background-default
+  2026-11-16T00:43:16:705 - Firewall rule changed: 10165-background-default
+  2026-11-16T00:43:16:705 - Firewall rule changed: 20165-standby-default
+  2026-11-16T00:43:16:705 - Firewall rule changed: 10165-standby-default
+  2026-11-16T00:43:16:705 - temp-power-save whitelist for 10165 changed to: false; reason=UNKNOWN <null>
+  2026-11-16T00:43:16:628 - Firewall rule changed: 20170-background-allow
+  2026-11-16T00:43:16:628 - Firewall rule changed: 10170-background-allow
+  2026-11-16T00:43:16:628 - Firewall rule changed: 20170-standby-default
+  2026-11-16T00:43:16:628 - Firewall rule changed: 10170-standby-default
+  2026-11-16T00:43:16:628 - temp-power-save whitelist for 10170 changed to: false; reason=UNKNOWN <null>
+  2026-11-16T00:43:16:329 - temp-power-save whitelist for 10145 changed to: false; reason=UNKNOWN <null>
+  2026-11-16T00:43:16:329 - Firewall rule changed: 20201-background-default
+  2026-11-16T00:43:16:329 - Firewall rule changed: 10201-background-default
+  2026-11-16T00:43:16:329 - Firewall rule changed: 20201-standby-default
+  2026-11-16T00:43:16:329 - Firewall rule changed: 10201-standby-default
+  2026-11-16T00:43:16:329 - temp-power-save whitelist for 10201 changed to: false; reason=UNKNOWN <null>
+  2026-11-16T00:43:16:327 - Firewall rule changed: 20216-background-allow
+  2026-11-16T00:43:16:327 - Firewall rule changed: 10216-background-allow
+  2026-11-16T00:43:16:317 - Firewall rule changed: 20166-background-allow
+  2026-11-16T00:43:16:317 - Firewall rule changed: 10166-background-allow
+  2026-11-16T00:43:16:317 - Firewall rule changed: 20166-standby-default
+  2026-11-16T00:43:16:317 - Firewall rule changed: 10166-standby-default
+  2026-11-16T00:43:16:317 - temp-power-save whitelist for 10166 changed to: false; reason=UNKNOWN <null>
+  2026-11-16T00:43:15:998 - Firewall rule changed: 20146-background-default
+  2026-11-16T00:43:15:998 - Firewall rule changed: 10146-background-default
+  2026-11-16T00:43:15:998 - Firewall rule changed: 20146-standby-default
+  2026-11-16T00:43:15:998 - Firewall rule changed: 10146-standby-default
+  2026-11-16T00:43:15:997 - temp-power-save whitelist for 10146 changed to: false; reason=UNKNOWN <null>
+  2026-11-16T00:43:15:737 - Firewall rule changed: 20155-background-allow
+  2026-11-16T00:43:15:737 - Firewall rule changed: 10155-background-allow
+  2026-11-16T00:43:15:737 - Firewall rule changed: 20155-standby-default
+  2026-11-16T00:43:15:737 - Firewall rule changed: 10155-standby-default
+  2026-11-16T00:43:15:737 - temp-power-save whitelist for 10155 changed to: false; reason=UNKNOWN <null>
+  2026-11-16T00:43:15:732 - Firewall rule changed: 20143-background-default
+  2026-11-16T00:43:15:732 - Firewall rule changed: 10143-background-default
+  2026-11-16T00:43:15:732 - Firewall rule changed: 20143-standby-default
+  2026-11-16T00:43:15:732 - Firewall rule changed: 10143-standby-default
+  2026-11-16T00:43:15:732 - temp-power-save whitelist for 10143 changed to: false; reason=UNKNOWN <null>
+  2026-11-16T00:43:15:719 - Firewall rule changed: 20157-background-allow
+  2026-11-16T00:43:15:719 - Firewall rule changed: 10157-background-allow
+  2026-11-16T00:43:15:572 - Firewall rule changed: 20183-background-default
+  2026-11-16T00:43:15:572 - Firewall rule changed: 10183-background-default
+  2026-11-16T00:43:15:462 - Firewall rule changed: 20177-background-default
+  2026-11-16T00:43:15:462 - Firewall rule changed: 10177-background-default
+  2026-11-16T00:43:15:324 - Firewall rule changed: 20156-background-allow
+  2026-11-16T00:43:15:324 - Firewall rule changed: 10156-background-allow
+  2026-11-16T00:43:15:324 - Firewall rule changed: 20156-standby-default
+  2026-11-16T00:43:15:324 - Firewall rule changed: 10156-standby-default
+  2026-11-16T00:43:15:324 - temp-power-save whitelist for 10156 changed to: false; reason=UNKNOWN <null>
+  2026-11-16T00:43:15:149 - Firewall rule changed: 20170-background-allow
+  2026-11-16T00:43:15:149 - Firewall rule changed: 10170-background-allow
+  2026-11-16T00:43:14:999 - temp-power-save whitelist for 10211 changed to: false; reason=UNKNOWN <null>
+  2026-11-16T00:43:14:928 - Firewall rule changed: 20159-background-allow
+  2026-11-16T00:43:14:928 - Firewall rule changed: 10159-background-allow
+  2026-11-16T00:43:14:872 - temp-power-save whitelist for 10218 changed to: false; reason=UNKNOWN <null>
+  2026-11-16T00:43:14:840 - Firewall rule changed: 20156-background-allow
+  2026-11-16T00:43:14:840 - Firewall rule changed: 10156-background-allow
+  2026-11-16T00:43:14:611 - Firewall rule changed: 20154-background-allow
+  2026-11-16T00:43:14:611 - Firewall rule changed: 10154-background-allow
+  2026-11-16T00:43:14:611 - Firewall rule changed: 20154-standby-default
+  2026-11-16T00:43:14:611 - Firewall rule changed: 10154-standby-default
+  2026-11-16T00:43:14:611 - temp-power-save whitelist for 10154 changed to: false; reason=UNKNOWN <null>
+  2026-11-16T00:43:14:434 - temp-power-save whitelist for 2000 changed to: false; reason=UNKNOWN <null>
+  2026-11-16T00:43:14:314 - Firewall rule changed: 20106-background-allow
+  2026-11-16T00:43:14:314 - Firewall rule changed: 10106-background-allow
+  2026-11-16T00:43:14:314 - Firewall rule changed: 20106-standby-default
+  2026-11-16T00:43:14:314 - Firewall rule changed: 10106-standby-default
+  2026-11-16T00:43:14:314 - temp-power-save whitelist for 10106 changed to: false; reason=UNKNOWN <null>
+  2026-11-16T00:43:13:970 - Firewall rule changed: 20116-background-default
+  2026-11-16T00:43:13:970 - Firewall rule changed: 10116-background-default
+  2026-11-16T00:43:13:970 - Firewall rule changed: 20116-standby-default
+  2026-11-16T00:43:13:970 - Firewall rule changed: 10116-standby-default
+  2026-11-16T00:43:13:970 - temp-power-save whitelist for 10116 changed to: false; reason=UNKNOWN <null>
+  2026-11-16T00:43:13:754 - temp-power-save whitelist for 1000 changed to: false; reason=UNKNOWN <null>
+  2026-11-16T00:43:13:631 - Firewall rule changed: 20109-background-default
+  2026-11-16T00:43:13:631 - Firewall rule changed: 10109-background-default
+  2026-11-16T00:43:13:631 - Firewall rule changed: 20109-standby-default
+  2026-11-16T00:43:13:631 - Firewall rule changed: 10109-standby-default
+  2026-11-16T00:43:13:631 - temp-power-save whitelist for 10109 changed to: false; reason=UNKNOWN <null>
+  2026-11-16T00:43:13:544 - Firewall rule changed: 20215-background-allow
+  2026-11-16T00:43:13:544 - Firewall rule changed: 10215-background-allow
+  2026-11-16T00:43:13:544 - Firewall rule changed: 20215-standby-default
+  2026-11-16T00:43:13:544 - Firewall rule changed: 10215-standby-default
+  2026-11-16T00:43:13:544 - temp-power-save whitelist for 10215 changed to: false; reason=UNKNOWN <null>
+  2026-11-16T00:43:13:511 - Firewall rule changed: 20144-background-allow
+  2026-11-16T00:43:13:511 - Firewall rule changed: 10144-background-allow
+  2026-11-16T00:43:13:511 - Firewall rule changed: 20144-standby-default
+  2026-11-16T00:43:13:511 - Firewall rule changed: 10144-standby-default
+  2026-11-16T00:43:13:511 - temp-power-save whitelist for 10144 changed to: false; reason=UNKNOWN <null>
+  2026-11-16T00:43:13:457 - Firewall rule changed: 20197-background-default
+  2026-11-16T00:43:13:457 - Firewall rule changed: 10197-background-default
+  2026-11-16T00:43:13:457 - Firewall rule changed: 20197-standby-default
+  2026-11-16T00:43:13:457 - Firewall rule changed: 10197-standby-default
+  2026-11-16T00:43:13:457 - temp-power-save whitelist for 10197 changed to: false; reason=UNKNOWN <null>
+  2026-11-16T00:43:13:408 - Firewall rule changed: 20161-background-default
+  2026-11-16T00:43:13:408 - Firewall rule changed: 10161-background-default
+  2026-11-16T00:43:13:407 - Firewall rule changed: 20161-standby-default
+  2026-11-16T00:43:13:407 - Firewall rule changed: 10161-standby-default
+  2026-11-16T00:43:13:407 - temp-power-save whitelist for 10161 changed to: false; reason=UNKNOWN <null>
+  2026-11-16T00:43:13:123 - Firewall rule changed: 20148-background-default
+  2026-11-16T00:43:13:123 - Firewall rule changed: 10148-background-default
+  2026-11-16T00:43:13:123 - Firewall rule changed: 20148-standby-default
+  2026-11-16T00:43:13:123 - Firewall rule changed: 10148-standby-default
+  2026-11-16T00:43:13:123 - temp-power-save whitelist for 10148 changed to: false; reason=UNKNOWN <null>
+  2026-11-16T00:43:12:730 - temp-power-save whitelist for 10147 changed to: false; reason=UNKNOWN <null>
+  2026-11-16T00:43:12:545 - temp-power-save whitelist for 10139 changed to: false; reason=UNKNOWN <null>
+  2026-11-16T00:43:12:496 - Firewall rule changed: 20153-background-allow
+  2026-11-16T00:43:12:496 - Firewall rule changed: 10153-background-allow
+  2026-11-16T00:43:12:490 - Firewall rule changed: 20229-background-default
+  2026-11-16T00:43:12:490 - Firewall rule changed: 10229-background-default
+  2026-11-16T00:43:12:216 - Firewall rule changed: 20149-background-allow
+  2026-11-16T00:43:12:216 - Firewall rule changed: 10149-background-allow
+
+mNetworkBlockedLogs (most recent first):
+
+mUidStateChangeLogs (most recent first):
+  2026-11-16T00:54:27:196 - 10191:TOP :LCMNFUATI:7611
+  2026-11-16T00:54:26:141 - 10191:BFGS:---NFU-TI:7518
+  2026-11-16T00:54:25:477 - 10235:TOP :LCMNFUATI:7325
+  2026-11-16T00:54:25:476 - 99001:BTOP:---NFU-TI:7324
+  2026-11-16T00:54:25:471 - 10235:TOP :LCMNFUATI:7323
+  2026-11-16T00:54:12:011 - 10235:FGS :---NFUATI:7200
+  2026-11-16T00:54:12:010 - 99001:FGS :---NFU-TI:7199
+  2026-11-16T00:54:11:583 - 10170:CEM :---------:7137
+  2026-11-16T00:54:11:311 - 10170:TRNB:-------TI:7071
+  2026-11-16T00:54:11:247 - 10191:TOP :LCMNFUATI:7016
+  2026-11-16T00:54:11:234 - 10191:TOP :LCMNFUATI:7013
+  2026-11-16T00:52:37:038 - 10218:CEM :---------:6903
+  2026-11-16T00:52:36:546 - 10235:TOP :LCMNFUATI:6755
+  2026-11-16T00:52:36:544 - 99001:BTOP:---NFU-TI:6754
+  2026-11-16T00:52:36:536 - 10235:TOP :LCMNFUATI:6753
+  2026-11-16T00:52:26:967 - 10218:IMPF:-------TI:6691
+  2026-11-16T00:52:26:522 - 10235:FGS :---NFUATI:6499
+  2026-11-16T00:52:26:520 - 99001:FGS :---NFU-TI:6498
+  2026-11-16T00:52:25:354 - 10191:BFGS:---NFU-TI:6282
+  2026-11-16T00:52:25:272 - 10235:TOP :LCMNFUATI:6172
+  2026-11-16T00:52:11:384 - 10191:TOP :LCMNFUATI:6096
+  2026-11-16T00:52:01:860 - 10170:LAST:--------I:6084
+  2026-11-16T00:51:55:658 - 10170:BFGS:----F--TI:6062
+  2026-11-16T00:51:44:637 - 10191:BFGS:---NFU-TI:5959
+  2026-11-16T00:51:44:163 - 10235:TOP :LCMNFUATI:5763
+  2026-11-16T00:51:44:162 - 99001:BTOP:---NFU-TI:5761
+  2026-11-16T00:51:44:158 - 10235:TOP :LCMNFUATI:5760
+  2026-11-16T00:51:31:350 - 10155:FGS :LCMNFUATI:5663
+  2026-11-16T00:51:31:350 - 10235:FGS :---NFUATI:5637
+  2026-11-16T00:51:31:347 - 99001:FGS :---NFU-TI:5636
+  2026-11-16T00:51:30:343 - 10191:TOP :LCMNFUATI:5457
+  2026-11-16T00:51:30:329 - 10191:TOP :LCMNFUATI:5456
+  2026-11-16T00:51:21:206 - 10155:BTOP:LCMNFUATI:5251
+  2026-11-16T00:51:21:110 - 10235:TOP :LCMNFUATI:5193
+  2026-11-16T00:50:57:891 - 10153:CEM :---------:5170
+  2026-11-16T00:50:56:021 - 10153:TRNB:-------TI:5164
+  2026-11-16T00:50:47:364 - 10155:BFGS:LCMNFUATI:5159
+  2026-11-16T00:50:40:465 - 10218:CEM :---------:5145
+  2026-11-16T00:50:36:914 - 10159:LAST:--------I:5137
+  2026-11-16T00:50:35:102 - 10153:CEM :---------:5127
+  2026-11-16T00:50:35:100 - 10153:SVC :-------TI:5125
+  2026-11-16T00:50:35:036 - 10153:CEM :---------:5124
+  2026-11-16T00:50:35:034 - 10153:SVC :-------TI:5120
+  2026-11-16T00:50:32:905 - 10194:PER :LCMNFUATI:5113
+  2026-11-16T00:50:31:571 - 99001:BTOP:---NFU-TI:4854
+  2026-11-16T00:50:31:558 - 10155:BTOP:LCMNFUATI:4850
+  2026-11-16T00:50:31:528 - 99001:CEM :-------TI:4845
+  2026-11-16T00:50:31:008 - 10155:BFGS:LCMNFUATI:4772
+  2026-11-16T00:50:31:008 - 10159:BFGS:----F--TI:4771
+  2026-11-16T00:50:31:003 - 10191:BFGS:---NFU-TI:4770
+  2026-11-16T00:50:30:856 - 10235:TOP :LCMNFUATI:4755
+  2026-11-16T00:50:30:651 - 10153:CEM :---------:4748
+  2026-11-16T00:50:30:531 - 10235:TOP :LCMNFUATI:4744
+  2026-11-16T00:50:30:327 - 10194:PERU:LCMNFUATI:4738
+  2026-11-16T00:50:30:113 - 10153:RCVR:-------TI:4730
+  2026-11-16T00:50:30:003 - 10155:BTOP:LCMNFUATI:4726
+  2026-11-16T00:50:29:999 - 10159:BTOP:----F--TI:4725
+  2026-11-16T00:50:29:983 - 10218:IMPF:-------TI:4724
+  2026-11-16T00:50:29:845 - 99000:CEM :---------:4518
+  2026-11-16T00:49:35:469 - 10212:CEM :---------:4463
+  2026-11-16T00:49:35:467 - 10212:RCVR:-------TI:4462
+  2026-11-16T00:49:35:100 - 10212:CEM :---------:4458
+  2026-11-16T00:49:35:094 - 10212:RCVR:-------TI:4457
+  2026-11-16T00:49:21:662 - 10170:CEM :---------:4386
+  2026-11-16T00:49:21:656 - 10191:TOP :LCMNFUATI:4380
+  2026-11-16T00:49:21:655 - 10170:TRNB:-------TI:4378
+  2026-11-16T00:49:21:651 - 10191:TOP :LCMNFUATI:4376
+  2026-11-16T00:49:21:651 - 10191:TOP :LCMNFUATI:4375
+  2026-11-16T00:49:01:563 - 10170:LAST:--------I:4358
+  2026-11-16T00:48:55:347 - 10170:BFGS:----F--TI:4340
+  2026-11-16T00:48:16:943 - 10191:BFGS:---NFU-TI:4224
+  2026-11-16T00:48:16:566 - 10235:TOP :LCMNFUATI:4033
+  2026-11-16T00:48:16:565 - 99000:BTOP:---NFU-TI:4032
+  2026-11-16T00:48:16:519 - 10235:TOP :LCMNFUATI:4031
+  2026-11-16T00:47:01:330 - 10170:CEM :---------:3949
+  2026-11-16T00:47:01:287 - 10170:TRNB:-------TI:3943
+  2026-11-16T00:46:01:277 - 10170:LAST:--------I:3903
+  2026-11-16T00:45:55:090 - 10170:BFGS:----F--TI:3877
+  2026-11-16T00:45:49:697 - 10235:LAST:-------TI:3762
+  2026-11-16T00:45:49:696 - 99000:LAST:-------TI:3761
+  2026-11-16T00:45:49:178 - 10170:CEM :---------:3699
+  2026-11-16T00:45:49:018 - 10170:TRNB:-------TI:3630
+  2026-11-16T00:45:48:988 - 10191:TOP :LCMNFUATI:3576
+  2026-11-16T00:45:48:976 - 10191:TOP :LCMNFUATI:3575
+  2026-11-16T00:44:53:068 - 10155:BFGS:LCMNFUATI:3529
+  2026-11-16T00:44:37:899 - 10155:BTOP:LCMNFUATI:3347
+  2026-11-16T00:44:37:814 - 10235:TOP :LCMNFUATI:3289
+  2026-11-16T00:44:21:614 - 10155:BFGS:LCMNFUATI:3276
+  2026-11-16T00:44:18:117 - 10170:CEM :---------:3268
+  2026-11-16T00:44:18:007 - 10170:TRNB:-------TI:3262
+  2026-11-16T00:44:07:145 - 10194:PER :LCMNFUATI:3235
+  2026-11-16T00:44:06:838 - 10191:BFGS:---NFU-TI:3143
+  2026-11-16T00:44:05:720 - 10155:BTOP:LCMNFUATI:3115
+  2026-11-16T00:44:05:560 - 99000:BTOP:---NFU-TI:3113
+  2026-11-16T00:44:05:535 - 99000:CEM :-------TI:3112
+  2026-11-16T00:44:04:886 - 10235:TOP :LCMNFUATI:3109
+  2026-11-16T00:44:04:691 - 10170:CEM :---------:3100
+  2026-11-16T00:44:04:656 - 10157:CEM :-------T-:3096
+  2026-11-16T00:44:04:652 - 10157:RCVR:-------TI:3094
+  2026-11-16T00:44:04:646 - 10157:CEM :-------T-:3092
+  2026-11-16T00:44:04:642 - 10157:RCVR:-------TI:3090
+  2026-11-16T00:44:04:601 - 10157:CEM :---------:3088
+  2026-11-16T00:44:04:532 - 10157:TRNB:-------TI:3082
+  2026-11-16T00:44:04:522 - 10170:TRNB:-------TI:3080
+  2026-11-16T00:44:04:511 - 10235:TOP :LCMNFUATI:3079
+  2026-11-16T00:44:04:405 - 10235:CEM :---------:3025
+  2026-11-16T00:44:04:384 - 10194:PERU:LCMNFUATI:3023
+  2026-11-16T00:43:58:811 - 10144:CEM :---------:3017
+  2026-11-16T00:43:58:810 - 10144:SVC :-------TI:3016
+  2026-11-16T00:43:42:652 - 10218:CEM :---------:2999
+  2026-11-16T00:43:33:713 - 10152:CEM :---------:2991
+  2026-11-16T00:43:33:708 - 10162:CEM :---------:2987
+  2026-11-16T00:43:33:685 - 10162:RCVR:-------TI:2986
+  2026-11-16T00:43:33:586 - 10152:TRNB:-------TI:2983
+  2026-11-16T00:43:33:478 - 10152:CEM :---------:2978
+  2026-11-16T00:43:33:456 - 10152:TRNB:-------TI:2967
+  2026-11-16T00:43:32:317 - 10218:IMPF:-------TI:2960
+  2026-11-16T00:43:25:752 - 10218:LAST:--------I:2927
+  2026-11-16T00:43:25:218 - 10170:CEM :---------:2924
+  2026-11-16T00:43:21:271 - 10104:LAST:--------I:2887
+  2026-11-16T00:43:15:701 - 10218:IMPF:-------TI:2708
+  2026-11-16T00:43:15:239 - 10104:BFGS:----F--TI:2683
+  2026-11-16T00:43:15:149 - 10170:RCVR:-------TI:2669
+  2026-11-16T00:43:14:874 - 10104:LAST:--------I:2662
+  2026-11-16T00:43:11:327 - 10216:CEM :-------T-:2519
+  2026-11-16T00:43:11:315 - 10216:IMPF:-------TI:2516
+  2026-11-16T00:43:10:718 - 10157:LAST:-------TI:2444
+  2026-11-16T00:43:10:630 - 10218:LAST:-------TI:2435
+  2026-11-16T00:43:10:571 - 10183:LAST:--------I:2434
+  2026-11-16T00:43:10:461 - 10177:LAST:--------I:2426
+  2026-11-16T00:43:10:305 - 10205:LAST:-------TI:2423
+  2026-11-16T00:43:10:097 - 10216:CEM :-------T-:2412
+  2026-11-16T00:43:10:072 - 10216:IMPF:-------TI:2402
+  2026-11-16T00:43:09:971 - 10226:LAST:--------I:2381
+  2026-11-16T00:43:09:914 - 10159:LAST:-------TI:2371
+  2026-11-16T00:43:09:839 - 10156:LAST:-------TI:2351
+  2026-11-16T00:43:09:819 - 10139:LAST:-------TI:2350
+  2026-11-16T00:43:09:819 - 10156:TRNB:-------TI:2335
+  2026-11-16T00:43:09:818 - 10157:TRNB:-------TI:2334
+  2026-11-16T00:43:09:803 - 10159:TRNB:-------TI:2332
+  2026-11-16T00:43:09:800 - 10166:IMPB:-------TI:2331
+  2026-11-16T00:43:09:800 - 10177:TRNB:-------TI:2330
+  2026-11-16T00:43:09:796 - 10183:TRNB:-------TI:2329
+  2026-11-16T00:43:09:795 - 10205:TRNB:-------TI:2328
+  2026-11-16T00:43:09:795 - 10218:TRNB:-------TI:2327
+  2026-11-16T00:43:09:773 - 10226:TRNB:-------TI:2326
+  2026-11-16T00:43:07:937 - 10216:CEM :-------T-:2029
+  2026-11-16T00:43:07:924 - 10216:IMPF:-------TI:2025
+  2026-11-16T00:43:07:496 - 10153:CEM :-------T-:1952
+  2026-11-16T00:43:07:493 - 10153:SVC :-------TI:1948
+  2026-11-16T00:43:07:477 - 10229:CEM :---------:1936
+  2026-11-16T00:43:07:464 - 10229:SVC :-------TI:1922
+  2026-11-16T00:43:07:459 - 10139:BFGS:----F--TI:1917
+  2026-11-16T00:43:07:459 - 10156:BFGS:----F--TI:1913
+  2026-11-16T00:43:07:459 - 10157:BFGS:----F--TI:1912
+  2026-11-16T00:43:07:459 - 10159:BFGS:----F--TI:1910
+  2026-11-16T00:43:07:459 - 10166:BFGS:----F--TI:1909
+  2026-11-16T00:43:07:459 - 10177:BFGS:----F--TI:1908
+  2026-11-16T00:43:07:459 - 10183:BFGS:----F--TI:1907
+  2026-11-16T00:43:07:459 - 10205:BFGS:----F--TI:1906
+  2026-11-16T00:43:07:459 - 10218:BFGS:----F--TI:1905
+  2026-11-16T00:43:07:451 - 10226:BFGS:----F--TI:1904
+  2026-11-16T00:43:07:391 - 10153:BFGS:---NFU-TI:1893
+  2026-11-16T00:43:04:899 - 10153:CEM :-------T-:1569
+  2026-11-16T00:43:04:897 - 10153:SVC :-------TI:1566
+  2026-11-16T00:43:04:819 - 10153:BFGS:---NFU-TI:1530
+  2026-11-16T00:43:04:572 - 10183:SVC :-------TI:1512
+  2026-11-16T00:43:04:519 - 10177:SVC :-------TI:1506
+  2026-11-16T00:43:04:500 - 10153:CEM :-------T-:1504
+  2026-11-16T00:43:04:461 - 10218:SVC :-------TI:1496
+  2026-11-16T00:43:04:333 - 10183:CEM :-------TI:1494
+  2026-11-16T00:43:04:199 - 10205:SVC :-------TI:1466
+  2026-11-16T00:43:04:149 - 10177:CEM :-------TI:1457
+  2026-11-16T00:43:04:063 - 10111:LAST:-------TI:1446
+  2026-11-16T00:43:03:855 - 10159:SVC :-------TI:1438
+  2026-11-16T00:43:03:851 - 10226:SVC :-------TI:1437
+  2026-11-16T00:43:03:822 - 10156:SVC :-------TI:1429
+  2026-11-16T00:43:03:758 - 10139:SVC :-------TI:1424
+  2026-11-16T00:43:03:406 - 10152:CEM :-------T-:1414
+  2026-11-16T00:43:03:166 - 10162:CEM :---------:1405
+  2026-11-16T00:43:03:133 - 10162:RCVR:-------TI:1402
+  2026-11-16T00:43:02:892 - 10216:CEM :-------T-:1380
+  2026-11-16T00:43:02:853 - 10216:IMPF:-------TI:1376
+  2026-11-16T00:43:02:588 - 10153:TRNB:-------TI:1358
+  2026-11-16T00:43:02:437 - 10157:SVC :-------TI:1335
+  2026-11-16T00:43:02:400 - 10162:CEM :-------TI:1332
+  2026-11-16T00:43:02:385 - 10112:CEM :---------:1330
+  2026-11-16T00:43:02:326 - 10112:RCVR:-------TI:1313
+  2026-11-16T00:43:02:293 - 10153:CEM :-------T-:1310
+  2026-11-16T00:43:02:184 - 10112:CEM :-------TI:1295
+  2026-11-16T00:43:01:672 - 10153:RCVR:-------TI:1266
+  2026-11-16T00:43:00:990 - 10155:BFGS:LCMNFUATI:1222
+  2026-11-16T00:43:00:987 - 10159:LAST:-------TI:1221
+  2026-11-16T00:43:00:920 - 10153:CEM :-------TI:1218
+  2026-11-16T00:43:00:885 - 10212:CEM :---------:1216
+  2026-11-16T00:43:00:853 - 10212:RCVR:-------TI:1211
+  2026-11-16T00:43:00:852 - 10146:CEM :-------T-:1209
+  2026-11-16T00:43:00:849 - 10229:CEM :-------T-:1207
+  2026-11-16T00:43:00:830 - 10157:CEM :-------T-:1195
+  2026-11-16T00:43:00:303 - 10212:CEM :-------TI:1180
+  2026-11-16T00:43:00:215 - 10157:RCVR:-------TI:1169
+  2026-11-16T00:42:59:817 - 10170:LAST:-------TI:1150
+  2026-11-16T00:42:59:806 - 10152:TRNB:-------TI:1145
+  2026-11-16T00:42:59:591 - 10106:CEM :-------T-:1128
+  2026-11-16T00:42:59:591 - 10157:CEM :-------TI:1127
+  2026-11-16T00:42:59:510 - 10216:CEM :-------T-:1117
+  2026-11-16T00:42:59:348 - 10106:RCVR:-------TI:1110
+  2026-11-16T00:42:59:299 - 10216:RCVR:-------TI:1106
+  2026-11-16T00:42:59:231 - 10152:CEM :-------T-:1103
+  2026-11-16T00:42:59:135 - 10141:CEM :-------T-:1101
+  2026-11-16T00:42:59:096 - 10216:CEM :-------TI:1098
+  2026-11-16T00:42:59:090 - 10170:TRNB:-------TI:1096
+  2026-11-16T00:42:59:022 - 10141:RCVR:-------TI:1088
+  2026-11-16T00:42:58:892 - 10141:CEM :-------TI:1080
+  2026-11-16T00:42:58:850 - 10152:RCVR:-------TI:1075
+  2026-11-16T00:42:58:772 - 10218:CEM :-------T-:1066
+  2026-11-16T00:42:58:710 - 10172:CEM :-------T-:1053
+  2026-11-16T00:42:58:617 - 10152:CEM :-------TI:1043
+  2026-11-16T00:42:58:552 - 10165:CEM :-------T-:1041
+  2026-11-16T00:42:58:473 - 10165:SVC :-------TI:1036
+  2026-11-16T00:42:58:473 - 10113:CEM :-------T-:1035
+  2026-11-16T00:42:58:436 - 10113:RCVR:-------TI:1033
+  2026-11-16T00:42:58:276 - 10200:CEM :-------T-:1020
+  2026-11-16T00:42:58:250 - 10113:CEM :-------TI:1019
+  2026-11-16T00:42:58:183 - 10200:RCVR:-------TI:1017
+  2026-11-16T00:42:57:962 - 10111:BFGS:----F--TI:986
+  2026-11-16T00:42:57:919 - 10200:CEM :-------TI:984
+  2026-11-16T00:42:57:630 - 10205:CEM :-------T-:967
+  2026-11-16T00:42:57:519 - 10205:RCVR:-------TI:955
+  2026-11-16T00:42:57:207 - 10205:CEM :-------TI:933
+  2026-11-16T00:42:56:636 - 10170:LAST:-------TI:907
+  2026-11-16T00:42:56:374 - 10170:RCVR:-------TI:896
+  2026-11-16T00:42:56:374 - 10201:CEM :-------T-:895
+  2026-11-16T00:42:56:374 - 10111:RCVR:-------TI:894
+  2026-11-16T00:42:56:317 - 10201:RCVR:-------TI:887
+  2026-11-16T00:42:55:984 - 10201:CEM :-------TI:868
+  2026-11-16T00:42:55:735 - 10143:CEM :-------T-:865
+  2026-11-16T00:42:55:601 - 10143:RCVR:-------TI:851
+  2026-11-16T00:42:55:444 - 10158:BFGS:LCMNFUATI:842
+  2026-11-16T00:42:55:439 - 10170:LAST:-------TI:838
+  2026-11-16T00:42:55:439 - 10197:LAST:-------TI:837
+  2026-11-16T00:42:55:409 - 10111:LAST:--------I:832
+  2026-11-16T00:42:55:408 - 10143:CEM :-------TI:831
+  2026-11-16T00:42:55:325 - 10156:CEM :-------T-:828
+  2026-11-16T00:42:55:183 - 10156:RCVR:-------TI:814
+  2026-11-16T00:42:54:475 - 10156:CEM :-------TI:757
+  2026-11-16T00:42:54:440 - 2000:CEM :-------T-:753
+  2026-11-16T00:42:54:430 - 2000:RCVR:-------TI:751
+  2026-11-16T00:42:54:376 - 2000:CEM :-------TI:747
+  2026-11-16T00:42:54:332 - 10106:CEM :-------T-:746
+  2026-11-16T00:42:54:306 - 10106:RCVR:-------TI:743
+  2026-11-16T00:42:54:131 - 10106:CEM :-------TI:737
+  2026-11-16T00:42:54:065 - 10165:BFGS:---NFU-TI:735
+  2026-11-16T00:42:53:989 - 10116:CEM :-------T-:733
+  2026-11-16T00:42:53:964 - 10116:RCVR:-------TI:730
+  2026-11-16T00:42:53:884 - 10116:CEM :-------TI:723
+  2026-11-16T00:42:53:637 - 10109:CEM :-------T-:709
+  2026-11-16T00:42:53:635 - 10165:CEM :-------TI:697
+  2026-11-16T00:42:53:433 - 10161:CEM :-------T-:687
+  2026-11-16T00:42:53:404 - 10161:RCVR:-------TI:681
+  2026-11-16T00:42:53:297 - 10148:CEM :-------T-:670
+  2026-11-16T00:42:52:801 - 10161:CEM :-------TI:662
+  2026-11-16T00:42:52:736 - 10147:CEM :-------T-:661
+  2026-11-16T00:42:52:714 - 10147:RCVR:-------TI:659
+  2026-11-16T00:42:52:660 - 10147:CEM :-------TI:651
+  2026-11-16T00:42:52:660 - 10149:CEM :-------T-:650
+  2026-11-16T00:42:52:646 - 10139:CEM :-------T-:648
+  2026-11-16T00:42:52:538 - 10139:RCVR:-------TI:645
+  2026-11-16T00:42:52:449 - 10149:TRNB:-------TI:642
+  2026-11-16T00:42:52:417 - 10139:CEM :-------TI:632
+  2026-11-16T00:42:52:417 - 10149:CEM :-------T-:626
+  2026-11-16T00:42:52:139 - 10149:RCVR:-------TI:613
+  2026-11-16T00:42:52:041 - 10172:TRNB:-------TI:594
+  2026-11-16T00:42:51:994 - 10226:CEM :-------T-:591
+  2026-11-16T00:42:51:983 - 10148:RCVR:-------TI:587
+  2026-11-16T00:42:51:973 - 10172:CEM :-------T-:582
+  2026-11-16T00:42:51:961 - 10149:CEM :-------TI:580
+  2026-11-16T00:42:51:943 - 10229:SVC :-------TI:579
+  2026-11-16T00:42:51:769 - 10226:RCVR:-------TI:563
+  2026-11-16T00:42:51:592 - 10172:RCVR:-------TI:545
+  2026-11-16T00:42:51:373 - 10229:CEM :-------TI:521
+  2026-11-16T00:42:51:229 - 10170:BTOP:---NFU-TI:497
+  2026-11-16T00:42:50:782 - 10172:CEM :-------TI:471
+  2026-11-16T00:42:50:711 - 10148:CEM :---------:460
+  2026-11-16T00:42:50:429 - 10144:BFGS:---NFU-TI:428
+  2026-11-16T00:42:50:398 - 10148:IMPF:-------TI:426
+  2026-11-16T00:42:50:349 - 10146:RCVR:-------TI:423
+  2026-11-16T00:42:49:406 - 10159:BTOP:----F--TI:395
+  2026-11-16T00:42:49:319 - 10111:BFGS:----F--TI:377
+  2026-11-16T00:42:49:124 - 10144:CEM :-------TI:365
+  2026-11-16T00:42:49:103 - 10170:CEM :-------TI:364
+  2026-11-16T00:42:48:963 - 10155:BTOP:LCMNFUATI:362
+  2026-11-16T00:42:48:925 - 10158:BTOP:LCMNFUATI:361
+  2026-11-16T00:42:48:692 - 10148:CEM :-------TI:348
+  2026-11-16T00:42:48:678 - 10197:BTOP:----F--TI:346
+  2026-11-16T00:42:48:605 - 10111:CEM :-------TI:345
+  2026-11-16T00:42:48:293 - 10145:BFGS:LCMNFUATI:326
+  2026-11-16T00:42:48:121 - 10159:CEM :---------:286
+  2026-11-16T00:42:48:082 - 10197:CEM :-------TI:273
+  2026-11-16T00:42:48:068 - 10104:BFGS:----F--TI:272
+  2026-11-16T00:42:47:788 - 10137:CEM :---------:252
+  2026-11-16T00:42:47:658 - 10146:CEM :-------TI:247
+  2026-11-16T00:42:47:468 - 10137:SVC :-------TI:246
+  2026-11-16T00:42:46:646 - 10211:PER :LCMNFUATI:226
+  2026-11-16T00:42:46:389 - 10226:CEM :-------T-:223
+  2026-11-16T00:42:46:029 - 10104:CEM :-------TI:211
+  2026-11-16T00:42:45:469 - 10158:BFGS:LCMNFUATI:210
+  2026-11-16T00:42:45:248 - 10154:BFGS:---NFU-TI:187
+  2026-11-16T00:42:44:952 - 10226:RCVR:-------TI:181
+  2026-11-16T00:42:44:002 - 10155:BFGS:---NFU-TI:159
+  2026-11-16T00:42:43:811 - 10226:CEM :-------TI:155
+  2026-11-16T00:42:43:247 - 10154:CEM :-------TI:149
+  2026-11-16T00:42:43:187 - 10145:CEM :-------TI:148
+  2026-11-16T00:42:43:015 - 10158:CEM :-------TI:136
+  2026-11-16T00:42:43:015 - 10211:CEM :-------TI:135
+  2026-11-16T00:42:42:585 - 10155:TRNB:-------TI:118
+  2026-11-16T00:42:42:563 - 10166:IMPB:-------TI:117
+  2026-11-16T00:42:42:024 - 10137:BFGS:---NFU-TI:112
+  2026-11-16T00:42:41:842 - 10137:CEM :-------TI:98
+  2026-11-16T00:42:41:061 - 10215:BFGS:LCMNFUATI:93
+  2026-11-16T00:42:40:940 - 10166:CEM :-------TI:92
+  2026-11-16T00:42:40:853 - 10215:IMPF:-------TI:90
+  2026-11-16T00:42:39:961 - 10155:CEM :-------TI:79
+  2026-11-16T00:42:38:694 - 10218:IMPF:-------TI:55
+  2026-11-16T00:42:38:672 - 1002:PER :LCMNFUATI:54
+  2026-11-16T00:42:38:663 - 10215:CEM :---------:51
+  2026-11-16T00:42:38:645 - 10215:SVC :-------TI:49
+  2026-11-16T00:42:38:330 - 10191:TOP :LCMNFUATI:29
+  2026-11-16T00:42:38:323 - 10215:BFGS:LCMNFUATI:26
+  2026-11-16T00:42:38:278 - 10215:CEM :-------TI:24
+  2026-11-16T00:42:38:270 - 10218:CEM :-------TI:23
+  2026-11-16T00:42:38:251 - 10191:TOP :LCMNFUATI:22
+  2026-11-16T00:42:38:251 - 1001:PER :LCMNFUATI:21
+  2026-11-16T00:42:38:241 - 1068:PER :LCMNFUATI:20
+  2026-11-16T00:42:38:147 - 1002:CEM :-------TI:18
+  2026-11-16T00:42:38:097 - 1001:CEM :---------:17
+  2026-11-16T00:42:38:081 - 1068:CEM :---------:16
+  2026-11-16T00:42:37:843 - 1073:PER :LCMNFUATI:14
+  2026-11-16T00:42:37:057 - 1037:PER :LCMNFUATI:13
+
+MultipathPolicyTracker:
+  Network 101: quota 3834363, budget 3807933. Preference: HANDOVER|RELIABILITY

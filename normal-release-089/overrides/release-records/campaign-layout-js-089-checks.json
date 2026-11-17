@@ -1,0 +1,61 @@
+{
+  "version": "0.89",
+  "passed": true,
+  "checksPassed": 8,
+  "checks": [
+    {
+      "name": "Campaign header preserves primary Research and groups ALL COMBAT with Base; native Intelligence remains in the unit drawer",
+      "passed": true
+    },
+    {
+      "name": "Header ALL COMBAT retains persistent native selection intent, selected state and physical-input fences",
+      "passed": true
+    },
+    {
+      "name": "Current native chapter uses bundled Towers font; absent countdown adds no filler and fractional timers are whole seconds",
+      "passed": true
+    },
+    {
+      "name": "Full-width header measures actual groups: chapter remains visible in free space and yields when controls grow",
+      "passed": true
+    },
+    {
+      "name": "Campaign zero-facility footer uses compact truthful captions while Towers retains accepted captions",
+      "passed": true
+    },
+    {
+      "name": "Campaign footer uses content width capped to viewport; every added selector is Campaign-scoped and no accepted stylesheet changes",
+      "passed": true
+    },
+    {
+      "name": "Native Intel/transport/video retain ownership of complete footer and return controls with no generic header Intel duplicate",
+      "passed": true
+    },
+    {
+      "name": "Towers does not install Campaign class, status, ALL control or header overrides",
+      "passed": true
+    }
+  ],
+  "emulatorUsed": false,
+  "actualNativeEngineExecuted": false,
+  "scope": "Actual Campaign HUD and activity-dock controllers in controlled DOM/VM fixtures; CSS constraints are source checks, not a browser layout claim. Exact-APK header/footer fit and native input require emulator evidence.",
+  "sources": [
+    {
+      "path": "app/src/main/assets/warzone-campaign-hud.js",
+      "sha256": "f8ded40a391bf1bc967827abef1d3bc722b124d26a2f040d0a69b2f4c5f472c1"
+    },
+    {
+      "path": "app/src/main/assets/warzone/ui/lab-ui.js",
+      "sha256": "23cc9d6117596c9fa2378b44ac0a6b247d81bb1c5318610dcf74b85521639811"
+    },
+    {
+      "path": "tools/check-campaign-header-089.cjs",
+      "sha256": "13cb4800809c1dcdfcc8d626cf08198c94e3de56646bbf7e550b63f203648c13"
+    },
+    {
+      "path": "tools/campaign-ui-fixture-089.cjs",
+      "sha256": "b933076c3fb21bbd3b40779df333bc7daab2411515f6c3229ad2fc4fa3eefd66"
+    }
+  ],
+  "recordedUTC": "2026-11-16T13:42:10.747Z"
+}

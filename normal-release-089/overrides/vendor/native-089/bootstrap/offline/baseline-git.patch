@@ -1,0 +1,1412 @@
+diff --git a/lib/sdl/main_sdl.cpp b/lib/sdl/main_sdl.cpp
+index 7edcc9c..8f06c06 100644
+--- a/lib/sdl/main_sdl.cpp
++++ b/lib/sdl/main_sdl.cpp
+@@ -62,6 +62,7 @@
+ #include <locale.h>
+ #include <atomic>
+ #include <chrono>
++#include <cstdio>
+ 
+ #if defined(WZ_OS_MAC)
+ #include "cocoa_sdl_helpers.h"
+@@ -1706,6 +1707,24 @@ static void inputHandleMouseWheelEvent(SDL_MouseWheelEvent *wheel)
+ 	}
+ }
+ 
++// The Towers WebView uses middle-button presses only for touch-camera drags.
++// A rapid second swipe must remain a held drag, not the desktop double-click
++// state that inputNewFrame clears even while the finger is still down.
++static bool towersTouchMiddleDrag()
++{
++#if defined(__EMSCRIPTEN__)
++	FILE *marker = std::fopen("/tmp/warzone-towers-ui-v34", "rb");
++	if (marker) { const bool enabled = std::fgetc(marker) == '1'; std::fclose(marker); if (enabled) return true; }
++	marker = std::fopen("/tmp/warzone-campaign-mobile-v51", "rb");
++	if (!marker) return false;
++	const bool enabled = std::fgetc(marker) == '1';
++	std::fclose(marker);
++	return enabled;
++#else
++	return false;
++#endif
++}
++
+ /*!
+  * Handle mouse button events (We can handle up to 5)
+  */
+@@ -1742,7 +1761,8 @@ static void inputHandleMouseButtonEvent(SDL_MouseButtonEvent *buttonEvent)
+ 		    || aMouseState[mouseKeyCode].state == KEY_PRESSRELEASE)
+ 		{
+ 			// whether double click or not
+-			if (realTime - aMouseState[mouseKeyCode].lastdown < DOUBLE_CLICK_INTERVAL)
++			const bool towersPanPress = mouseKeyCode == MOUSE_MMB && towersTouchMiddleDrag();
++			if (!towersPanPress && realTime - aMouseState[mouseKeyCode].lastdown < DOUBLE_CLICK_INTERVAL)
+ 			{
+ 				aMouseState[mouseKeyCode].state = KEY_DOUBLECLICK;
+ 				aMouseState[mouseKeyCode].lastdown = 0;
+diff --git a/src/console.cpp b/src/console.cpp
+index a1b37df..c7ede5f 100644
+--- a/src/console.cpp
++++ b/src/console.cpp
+@@ -44,6 +44,34 @@
+ #include <deque>
+ #include <chrono>
+ #include <set>
++#include <cstdio>
++
++// Towers opts in with the existing transient UI marker; never saved to disk.
++static bool towersSageTheme()
++{
++#ifdef __EMSCRIPTEN__
++	FILE *marker = fopen("/tmp/warzone-towers-ui-v34", "rb");
++	if (!marker) return false;
++	const bool enabled = fgetc(marker) == '1';
++	fclose(marker);
++	return enabled;
++#else
++	return false;
++#endif
++}
++
++static PIELIGHT towersSageColour(uint8_t r, uint8_t g, uint8_t b)
++{
++	PIELIGHT colour;
++	colour.fromRGBA(r, g, b, 255);
++	return colour;
++}
++
++static void towersConsoleBoxFill(int x1, int y1, int x2, int y2)
++{
++	if (towersSageTheme()) pie_UniTransBoxFill(x1, y1, x2, y2, towersSageColour(17,17,17));
++	else iV_TransBoxFill(x1, y1, x2, y2);
++}
+ 
+ // FIXME: When we switch over to full JS, use class version of this file
+ 
+@@ -342,6 +370,7 @@ void	flushConsoleMessages()
+ /** Sets console text color depending on message type */
+ PIELIGHT getConsoleTextColor(int player)
+ {
++	if (towersSageTheme()) return towersSageColour(244,244,244);
+ 	// System messages
+ 	if (player == SYSTEM_MESSAGE)
+ 	{
+@@ -452,12 +481,12 @@ void displayOldMessages(bool mode)
+ 		// if user wants to add a bit more contrast to the text
+ 		if (showBackgroundColor)
+ 		{
+-			iV_TransBoxFill(historyConsole.topX + nudgeright - CON_BORDER_WIDTH, historyConsole.topY - historyConsole.textDepth - CON_BORDER_HEIGHT,
++			towersConsoleBoxFill(historyConsole.topX + nudgeright - CON_BORDER_WIDTH, historyConsole.topY - historyConsole.textDepth - CON_BORDER_HEIGHT,
+ 			                historyConsole.topX + historyConsole.width, historyConsole.topY + (NumDisplayLines * linePitch) + CON_BORDER_HEIGHT);
+ 		}
+ 		for (int i = startpos; i < count; ++i)
+ 		{
+-			PIELIGHT colour = mode ? WZCOL_CONS_TEXT_USER_ALLY : getConsoleTextColor((*WhichMessages)[i].player);
++			PIELIGHT colour = towersSageTheme() ? towersSageColour(244,244,244) : mode ? WZCOL_CONS_TEXT_USER_ALLY : getConsoleTextColor((*WhichMessages)[i].player);
+ 			console_drawtext((*WhichMessages)[i].display, colour, historyConsole.topX + nudgeright, TextYpos, (*WhichMessages)[i].JustifyType, historyConsole.width);
+ 			TextYpos += (*WhichMessages)[i].display.lineSize();
+ 		}
+@@ -490,7 +519,8 @@ void	displayConsoleMessages()
+ 	{
+ 		auto i = InfoMessages.end() - 1;		// we can only show the last one...
+ 		int tmp = pie_GetVideoBufferWidth();
+-		drawBlueBox(0, 0,tmp, 18);
++		if (towersSageTheme()) pie_UniTransBoxFill(0, 0, tmp, 18, towersSageColour(17,17,17));
++		else drawBlueBox(0, 0,tmp, 18);
+ 		tmp -= i->display.width();
+ 		console_drawtext(i->display, getConsoleTextColor(i->player), tmp - 6, linePitch - 2, i->JustifyType, i->display.width());
+ 	}
+@@ -501,7 +531,7 @@ void	displayConsoleMessages()
+ 		// Draw the blue background for the text (only in game, not lobby)
+ 		if (bTextBoxActive && GetGameMode() == GS_NORMAL)
+ 		{
+-			iV_TransBoxFill(mainConsole.topX - CON_BORDER_WIDTH,
++			towersConsoleBoxFill(mainConsole.topX - CON_BORDER_WIDTH,
+ 							mainConsole.topY - mainConsole.textDepth - CON_BORDER_HEIGHT,
+ 							mainConsole.topX + mainConsole.width,
+ 							mainConsole.topY + (getNumberConsoleMessages() * linePitch) + CON_BORDER_HEIGHT - linePitch);
+diff --git a/src/display3d.cpp b/src/display3d.cpp
+index 32bcb85..0f448cb 100644
+--- a/src/display3d.cpp
++++ b/src/display3d.cpp
+@@ -1140,14 +1140,14 @@ void draw3DScene()
+ 		char buildInfo[255];
+ 		bool showMs = (gameTimeGetMod() < Rational(1, 4));
+ 		getAsciiTime(buildInfo, showMs ? graphicsTime : gameTime, showMs);
+-		txtLevelName.render(RET_X + 134, 410 + E_H, WZCOL_TEXT_MEDIUM);
++		// Towers provides its map/wave status outside the native scene.
+ 		const DebugInputManager& dbgInputManager = gInputManager.debugManager();
+ 		if (dbgInputManager.debugMappingsAllowed())
+ 		{
+ 			txtDebugStatus.render(RET_X + 134, 436 + E_H, WZCOL_TEXT_MEDIUM);
+ 		}
+ 		txtCurrentTime.setText(buildInfo, font_small);
+-		txtCurrentTime.render(RET_X + 134, 422 + E_H, WZCOL_TEXT_MEDIUM);
++		// Towers provides its map/wave status outside the native scene.
+ 	}
+ 
+ 	while (playerPos.r.y > DEG(360))
+@@ -2140,6 +2140,15 @@ static void renderBuildOrder(uint8_t droidPlayer, DroidOrder const &order, STRUC
+ 	{
+ 		drawLineBuild(droidPlayer, stats, pos, order.pos2, order.direction, state);
+ 	}
++	// Scripted build orders carry tile-centre positions for every footprint.
++	// Match buildStructureDir's parity snap for this visual blueprint only.
++	// Use the rotated size; never alter the actual order or foundation rules.
++	if (order.type == DORDER_BUILD && !IsStatExpansionModule(stats))
++	{
++		const Vector2i size = stats->size(order.direction);
++		pos.x = (pos.x & ~TILE_MASK) + size.x % 2 * TILE_UNITS / 2;
++		pos.y = (pos.y & ~TILE_MASK) + size.y % 2 * TILE_UNITS / 2;
++	}
+ 	if ((order.type == DORDER_BUILD || order.type == DORDER_BUILDMODULE) && !tileHasIncompatibleStructure(mapTile(map_coord(pos)), stats, order.index))
+ 	{
+ 		StructureBounds b = getStructureBounds(stats, pos, order.direction);
+diff --git a/src/droid.cpp b/src/droid.cpp
+index dfdc0e8..3e57164 100644
+--- a/src/droid.cpp
++++ b/src/droid.cpp
+@@ -76,6 +76,33 @@
+ #include "qtscript.h"
+ #include "campaigninfo.h"
+ 
++
++#if defined(__EMSCRIPTEN__)
++#include <nlohmann/json.hpp>
++
++// Only the custom Towers UI consumes this notice. Campaign, Duel and ordinary
++// native builds retain their stock console notice, score and loss sound.
++static bool towersUnitLossNoticeEnabled()
++{
++    FILE *file = fopen("/tmp/warzone-towers-ui-v34", "rb");
++    if (!file) return false;
++    const bool enabled = fgetc(file) == '1';
++    fclose(file);
++    return enabled;
++}
++
++static void towersUnitLossNotice(const DROID *droid)
++{
++    const nlohmann::json notice = {
++        {"kind", "unit-lost"}, {"id", droid->id}, {"name", droid->aName},
++        {"constructor", droid->droidType == DROID_CONSTRUCT || droid->droidType == DROID_CYBORG_CONSTRUCT},
++        {"player", droid->player}, {"gameTime", gameTime}
++    };
++    const std::string packet = notice.dump(-1, ' ', false, nlohmann::json::error_handler_t::replace);
++    fprintf(stderr, "BNNOTICE:%s\n", packet.c_str());
++}
++#endif
++
+ #define DEFAULT_RECOIL_TIME	(GAME_TICKS_PER_SEC/4)
+ #define	DROID_DAMAGE_SPREAD	(16 - rand()%32)
+ #define	DROID_REPAIR_SPREAD	(20 - rand()%40)
+@@ -336,8 +363,14 @@ int32_t droidDamage(DROID *psDroid, PROJECTILE *psProjectile, unsigned damage, W
+ 		// Deal with score increase/decrease and messages to the player
+ 		if (psDroid->player == selectedPlayer)
+ 		{
+-			// TRANSLATORS:	Refers to the loss of a single unit, known by its name
+-			CONPRINTF(_("%s Lost!"), objInfo(psDroid));
++#if defined(__EMSCRIPTEN__)
++			if (towersUnitLossNoticeEnabled()) towersUnitLossNotice(psDroid);
++			else
++#endif
++			{
++				// TRANSLATORS: Refers to the loss of a single unit, known by its name
++				CONPRINTF(_("%s Lost!"), objInfo(psDroid));
++			}
+ 			scoreUpdateVar(WD_UNITS_LOST);
+ 			audio_QueueTrackMinDelayPos(ID_SOUND_UNIT_DESTROYED, UNIT_LOST_DELAY,
+ 										psDroid->pos.x, psDroid->pos.y, psDroid->pos.z);
+diff --git a/src/hci.cpp b/src/hci.cpp
+index 32abd2c..6f71d6f 100644
+--- a/src/hci.cpp
++++ b/src/hci.cpp
+@@ -902,8 +902,11 @@ bool createReplayControllerOverlay()
+ }
+ 
+ /* Initialise the in game interface */
++namespace { static void towersIntelligenceReset(); }
++
+ bool intInitialise()
+ {
++	towersIntelligenceReset();
+ 	for (auto &i : ReticuleEnabled)
+ 	{
+ 		i.Hidden = false;
+@@ -996,6 +999,7 @@ bool intInitialise()
+ /* Shut down the in game interface */
+ void interfaceShutDown()
+ {
++	towersIntelligenceReset();
+ 	intRemoveIntelMapNoAnim(); // always call to ensure overlay screen is destroyed
+ 
+ 	if (replayOverlayScreen)
+@@ -1971,6 +1975,474 @@ static void intStopStructPosition()
+ 
+ 
+ /* Display the widgets for the in game interface */
++#include <cstdio>
++#include <cmath>
++#include <unordered_set>
++#include <vector>
++#include "mapdisplay.h"
++#include "structure.h"
++#include "intimage.h"
++#include "lib/ivis_opengl/pieclip.h"
++#include "lib/ivis_opengl/piematrix.h"
++#include "lib/ivis_opengl/piemode.h"
++#include "lib/sound/mixer.h"
++#include "lib/sound/track.h"
++#include "lib/sound/audio.h"
++#ifdef __EMSCRIPTEN__
++#include <GLES3/gl3.h>
++#endif
++
++// Towers-only completed-research metadata and genuine native PIE preview.
++// This is inserted into hci.cpp so paused native menus can retire it too.
++#ifdef __EMSCRIPTEN__
++namespace {
++using TowersIntelJson = nlohmann::json;
++struct TowersIntelRetiredRect { int x, y, width, height; };
++struct TowersIntelState
++{
++	std::string nonce;
++	std::string topicId;
++	bool open = false;
++	bool rectValid = false;
++	std::vector<TowersIntelRetiredRect> retiredRects;
++	int x = 0, y = 0, width = 0, height = 0;
++	UDWORD lastPoll = 0, lastActivity = 0, lastGameTime = 0;
++	uint64_t frames = 0;
++	bool initialCaptured = false, initialKnown = false;
++	UDWORD initialPlayer = MAX_PLAYERS;
++	std::unordered_set<std::string> initialIds;
++	AUDIO_STREAM *stream = nullptr;
++	TowersIntelJson reply;
++	std::string closedReason;
++};
++static TowersIntelState towersIntel;
++
++static void towersIntelRetireRect()
++{
++	if (towersIntel.rectValid) towersIntel.retiredRects.push_back({towersIntel.x,towersIntel.y,towersIntel.width,towersIntel.height});
++	towersIntel.rectValid = false;
++}
++
++static void towersIntelClearRetiredRects()
++{
++	if (gameUpdatePaused()) for (const auto &rect : towersIntel.retiredRects)
++		pie_BoxFill(rect.x,rect.y,rect.x+rect.width,rect.y+rect.height,WZCOL_BLACK);
++	towersIntel.retiredRects.clear();
++}
++
++static bool towersIntelEnabled()
++{
++	FILE *file = fopen("/tmp/warzone-towers-ui-v34", "rb");
++	if (file) { const bool enabled = fgetc(file) == '1'; fclose(file); if (enabled) return true; }
++	file = fopen("/tmp/warzone-campaign-mobile-v51", "rb");
++	if (!file) return false;
++	const bool enabled = fgetc(file) == '1';
++	fclose(file);
++	return enabled;
++}
++
++static void towersIntelStopAudio()
++{
++	if (towersIntel.stream) sound_StopStream(towersIntel.stream);
++	towersIntel.stream = nullptr;
++}
++
++static void towersIntelClose(const char *reason)
++{
++	towersIntelStopAudio();
++	towersIntelRetireRect();
++	towersIntel.open = false;
++	towersIntel.rectValid = false;
++	towersIntel.topicId.clear();
++	towersIntel.closedReason = reason;
++	if (towersIntel.reply.is_null() && !towersIntel.nonce.empty())
++		towersIntel.reply = {{"nonce",towersIntel.nonce},{"ok",false},{"error",reason}};
++}
++
++static void towersIntelligenceReset()
++{
++	towersIntelStopAudio();
++	towersIntel = TowersIntelState{};
++	remove("/tmp/warzone-towers-intelligence-command.json");
++	remove("/tmp/warzone-towers-intelligence-state.json");
++}
++
++static RESEARCH *towersIntelCompleted(const std::string &id)
++{
++	if (selectedPlayer >= MAX_PLAYERS || asPlayerResList[selectedPlayer].size() != asResearch.size()) return nullptr;
++	RESEARCH *research = nullptr;
++	for (auto &entry : asResearch) if (entry.id.toUtf8() == id) { research = &entry; break; }
++	if (!research || research->index < 0 || size_t(research->index) >= asResearch.size()
++	    || !IsResearchCompleted(&asPlayerResList[selectedPlayer][research->index])) return nullptr;
++	return research;
++}
++
++static const char *towersIntelCategory(const RESEARCH &research)
++{
++	switch (research.iconID)
++	{
++	case IMAGE_RES_DROIDTECH: return "Vehicles";
++	case IMAGE_RES_CYBORGTECH: return "Cyborgs";
++	case IMAGE_RES_WEAPONTECH: return "Weapons";
++	case IMAGE_RES_COMPUTERTECH: return "Computers";
++	case IMAGE_RES_POWERTECH: return "Power";
++	case IMAGE_RES_SYSTEMTECH: return "Systems";
++	case IMAGE_RES_STRUCTURETECH: return "Structures";
++	case IMAGE_RES_DEFENCE: return "Defences";
++	default: return "Research";
++	}
++}
++
++static const char *towersIntelAudio(const RESEARCH &research)
++{
++	// Same category mapping as W_INTELLIGENCEOVERLAY_FORM::intIntelButtonPressed.
++	switch (research.iconID)
++	{
++	case IMAGE_RES_DROIDTECH:
++	case IMAGE_RES_CYBORGTECH: return "sequenceaudio/res_droid.ogg";
++	case IMAGE_RES_WEAPONTECH: return "sequenceaudio/res_weapons.ogg";
++	case IMAGE_RES_COMPUTERTECH: return "sequenceaudio/res_com.ogg";
++	case IMAGE_RES_POWERTECH: return "sequenceaudio/res_pow.ogg";
++	case IMAGE_RES_SYSTEMTECH: return "sequenceaudio/res_systech.ogg";
++	case IMAGE_RES_STRUCTURETECH:
++	case IMAGE_RES_DEFENCE: return "sequenceaudio/res_strutech.ogg";
++	default: return nullptr;
++	}
++}
++
++static bool towersIntelModel(const RESEARCH &research, std::string &kind)
++{
++	kind.clear();
++	if (!research.psStat)
++	{
++		if (research.pIMD && research.pIMD->displayModel()) { kind = "research"; return true; }
++		return false;
++	}
++	if (StatIsStructure(research.psStat))
++	{
++		const auto *stat = static_cast<const STRUCTURE_STATS *>(research.psStat);
++		if (!stat->pIMD.empty() && stat->pIMD[0] && stat->pIMD[0]->displayModel()) { kind = "structure"; return true; }
++		return false;
++	}
++	const auto component = StatIsComponent(research.psStat);
++	if (component == COMP_NUMCOMPONENTS) return false;
++	const iIMDShape *shape = nullptr, *mount = nullptr;
++	if (!StatGetComponentIMD(research.psStat, component, &shape, &mount) || !shape) return false;
++	kind = "component";
++	return true;
++}
++
++static TowersIntelJson towersIntelSummary(RESEARCH &research)
++{
++	bool hasMessage = false, read = true;
++	for (const MESSAGE *message : apsMessages[selectedPlayer])
++	{
++		if (message->type == MSG_RESEARCH && message->pViewData && message->pViewData == research.pViewData)
++		{
++			hasMessage = true;
++			read = read && message->read;
++		}
++	}
++	std::string modelKind;
++	const auto id = research.id.toUtf8();
++	const char *audio = towersIntelAudio(research);
++	TowersIntelJson initial = nullptr;
++	if (towersIntel.initialKnown && towersIntel.initialPlayer == selectedPlayer) initial = towersIntel.initialIds.count(id) != 0;
++	return {{"id",id},{"name",getLocalizedStatsName(&research)},{"iconId",research.iconID},
++	        {"major",research.techCode == TC_MAJOR},
++	        {"hasReport",research.pViewData && research.pViewData->type == VIEW_RES && !research.pViewData->textMsg.empty()},
++	        {"hasMessage",hasMessage},{"read",hasMessage ? TowersIntelJson(read) : TowersIntelJson(nullptr)},
++	        {"initialGrant",initial},{"hasModel",towersIntelModel(research,modelKind)},
++	        {"modelKind",modelKind},{"category",towersIntelCategory(research)},
++	        {"categoryAudio",audio ? TowersIntelJson(audio) : TowersIntelJson(nullptr)}};
++}
++
++static TowersIntelJson towersIntelDetails(RESEARCH &research)
++{
++	auto result = towersIntelSummary(research);
++	result["description"] = TowersIntelJson::array();
++	if (research.pViewData && research.pViewData->type == VIEW_RES)
++	{
++		for (const auto &paragraph : research.pViewData->textMsg) result["description"].push_back(paragraph.toUtf8());
++	}
++	result["results"] = research.results;
++	result["unlocks"] = TowersIntelJson::array();
++	for (auto index : research.pStructureResults)
++	{
++		if (asStructureStats && index < numStructureStats)
++		{
++			const auto &stat = asStructureStats[index];
++			result["unlocks"].push_back({{"id",stat.id.toUtf8()},{"name",getLocalizedStatsName(&stat)},{"kind","structure"}});
++		}
++	}
++	for (const auto *stat : research.componentResults)
++	{
++		if (stat) result["unlocks"].push_back({{"id",stat->id.toUtf8()},{"name",getLocalizedStatsName(stat)},{"kind","component"}});
++	}
++	result["replacements"] = TowersIntelJson::array();
++	for (const auto &replacement : research.componentReplacement)
++	{
++		if (replacement.pOldComponent && replacement.pNewComponent)
++			result["replacements"].push_back({{"oldId",replacement.pOldComponent->id.toUtf8()},
++				{"oldName",getLocalizedStatsName(replacement.pOldComponent)},
++				{"newId",replacement.pNewComponent->id.toUtf8()},
++				{"newName",getLocalizedStatsName(replacement.pNewComponent)}});
++	}
++	return result;
++}
++
++static void towersIntelPlayReport(RESEARCH &research)
++{
++	towersIntelStopAudio();
++	const char *audio = towersIntelAudio(research);
++	if (!audio) return;
++	towersIntel.stream = audio_PlayStream(audio,sound_GetUIVolume(),[](const AUDIO_STREAM *stream,const void *) {
++		if (stream == towersIntel.stream) towersIntel.stream = nullptr;
++	},nullptr);
++}
++
++static bool towersIntelRect(const TowersIntelJson &request)
++{
++	towersIntelRetireRect();
++	if (!request.contains("rect") || !request["rect"].is_object()) return false;
++	const auto &rect = request["rect"];
++	for (const auto *key : {"x","y","width","height"}) if (!rect.contains(key) || !rect[key].is_number()) return false;
++	const double x=rect["x"].get<double>(), y=rect["y"].get<double>(),
++		width=rect["width"].get<double>(), height=rect["height"].get<double>();
++	if (!std::isfinite(x) || !std::isfinite(y) || !std::isfinite(width) || !std::isfinite(height)
++	    || x < 0 || y < 0 || width < 32 || height < 32
++	    || x+width > pie_GetVideoBufferWidth() || y+height > pie_GetVideoBufferHeight()) return false;
++	towersIntel.x = int(std::lround(x)); towersIntel.y = int(std::lround(y));
++	towersIntel.width = int(std::lround(width)); towersIntel.height = int(std::lround(height));
++	towersIntel.rectValid = towersIntel.x+towersIntel.width <= pie_GetVideoBufferWidth()
++		&& towersIntel.y+towersIntel.height <= pie_GetVideoBufferHeight();
++	return towersIntel.rectValid;
++}
++
++static void towersIntelPoll()
++{
++	if (realTime-towersIntel.lastPoll < 75) return;
++	towersIntel.lastPoll = realTime;
++	FILE *file = fopen("/tmp/warzone-towers-intelligence-command.json","rb");
++	if (!file) return;
++	char buffer[8193];
++	const size_t count = fread(buffer,1,sizeof(buffer),file);
++	fclose(file);
++	if (!count || count == sizeof(buffer)) return;
++	const auto request = TowersIntelJson::parse(buffer,buffer+count,nullptr,false);
++	if (request.is_discarded() || !request.is_object() || !request.contains("nonce") || !request["nonce"].is_string()) return;
++	const auto nonce = request["nonce"].get<std::string>();
++	if (nonce.empty() || nonce.size() > 128 || nonce == towersIntel.nonce) return;
++	towersIntel.nonce = nonce;
++	towersIntel.reply = {{"nonce",nonce},{"ok",false}};
++	if (!request.contains("action") || !request["action"].is_string()) { towersIntel.reply["error"]="invalid-action"; return; }
++	const auto action = request["action"].get<std::string>();
++	const bool playAudio = request.contains("playAudio") && request["playAudio"].is_boolean() && request["playAudio"].get<bool>();
++	if (action == "close")
++	{
++		towersIntelClose("closed");
++		if (playAudio) audio_PlayTrack(ID_SOUND_WINDOWCLOSE);
++		towersIntel.reply["ok"] = true;
++		return;
++	}
++	if (selectedPlayer >= MAX_PLAYERS || asPlayerResList[selectedPlayer].size() != asResearch.size())
++	{ towersIntel.reply["error"]="research-not-ready"; return; }
++	if (InGameOpUp || isInGamePopupUp || bLoadSaveUp || intMode == INT_DESIGN || intMode == INT_INTELMAP)
++	{ towersIntelClose("native-menu"); towersIntel.reply["error"]="native-menu"; return; }
++	if (action == "open" || action == "list")
++	{
++		if (action == "open") towersIntelClose("opened");
++		towersIntel.open = true;
++		towersIntel.closedReason.clear();
++		towersIntel.reply["history"] = TowersIntelJson::array();
++		for (auto &research : asResearch)
++			if (IsResearchCompleted(&asPlayerResList[selectedPlayer][research.index]))
++				towersIntel.reply["history"].push_back(towersIntelSummary(research));
++		if (action == "open" && playAudio) audio_PlayTrack(ID_SOUND_WINDOWOPEN);
++	}
++	else if (action == "select" || action == "layout" || action == "replay" || action == "highlight")
++	{
++		if (!request.contains("topicId") || !request["topicId"].is_string()) { towersIntel.reply["error"]="invalid-topic"; return; }
++		const auto id = request["topicId"].get<std::string>();
++		RESEARCH *research = towersIntelCompleted(id);
++		if (!research) { towersIntel.reply["error"]="topic-not-completed"; return; }
++		if (action == "highlight")
++		{
++			if (playAudio) audio_PlayTrack(ID_SOUND_BUTTON_CLICK_3);
++		}
++		else
++		{
++			towersIntel.open = true;
++			if (towersIntel.topicId != id) { towersIntelStopAudio(); towersIntelRetireRect(); }
++			towersIntel.topicId = id;
++			if (action == "select" || request.contains("rect"))
++			{
++				const bool valid = towersIntelRect(request);
++				if (request.contains("rect") && !valid) { towersIntel.reply["error"]="invalid-rect"; return; }
++			}
++			if (action == "select" || action == "replay")
++			{
++				for (MESSAGE *message : apsMessages[selectedPlayer])
++					if (research->pViewData && message->type == MSG_RESEARCH && message->pViewData == research->pViewData) message->read = true;
++				if (playAudio) { audio_PlayTrack(ID_SOUND_SELECT); towersIntelPlayReport(*research); }
++			}
++			towersIntel.reply["selected"] = towersIntelDetails(*research);
++		}
++	}
++	else if (action == "heartbeat")
++	{
++		if (!towersIntel.open) { towersIntel.reply["error"]="not-open"; return; }
++	}
++	else { towersIntel.reply["error"]="invalid-action"; return; }
++	towersIntel.closedReason.clear();
++	towersIntel.lastActivity = realTime;
++	towersIntel.reply["ok"] = true;
++}
++
++static bool towersIntelRender()
++{
++	if (!towersIntel.open) return false;
++	if (realTime-towersIntel.lastActivity > 2500) { towersIntelClose("lease-expired"); return false; }
++	if (!towersIntel.rectValid || towersIntel.topicId.empty()) return false;
++	RESEARCH *research = towersIntelCompleted(towersIntel.topicId);
++	std::string kind;
++	if (!research) { towersIntelClose("topic-not-completed"); return false; }
++	if (!towersIntelModel(*research,kind)) return false;
++	if (towersIntel.x+towersIntel.width > pie_GetVideoBufferWidth() || towersIntel.y+towersIntel.height > pie_GetVideoBufferHeight()) return false;
++	GLint viewport[4], oldScissor[4];
++	GLfloat oldDepthRange[2];
++	glGetIntegerv(GL_VIEWPORT,viewport);
++	glGetIntegerv(GL_SCISSOR_BOX,oldScissor);
++	glGetFloatv(GL_DEPTH_RANGE,oldDepthRange);
++	const GLboolean wasScissor = glIsEnabled(GL_SCISSOR_TEST);
++	const double sx = double(viewport[2])/pie_GetVideoBufferWidth(), sy = double(viewport[3])/pie_GetVideoBufferHeight();
++	glEnable(GL_SCISSOR_TEST);
++	glScissor(viewport[0]+int(std::floor(towersIntel.x*sx)),
++		viewport[1]+int(std::floor((pie_GetVideoBufferHeight()-towersIntel.y-towersIntel.height)*sy)),
++		int(std::ceil(towersIntel.width*sx)),int(std::ceil(towersIntel.height*sy)));
++	pie_BeginInterface();
++	pie_BoxFill(towersIntel.x,towersIntel.y,towersIntel.x+towersIntel.width,towersIntel.y+towersIntel.height,WZCOL_BLACK);
++	// Fit the unchanged original 238x168 native preview projection into the slot.
++	// These UI-only globals and GL state are restored before any other engine work.
++	const int nativeWidth=pie_GetVideoBufferWidth(), nativeHeight=pie_GetVideoBufferHeight();
++	const int oldOriginX=rendSurface.xcentre, oldOriginY=rendSurface.ycentre;
++	const double fit=std::min(double(towersIntel.width)/238.0,double(towersIntel.height)/168.0);
++	const double fittedWidth=238.0*fit, fittedHeight=168.0*fit;
++	const double fittedX=towersIntel.x+(towersIntel.width-fittedWidth)/2.0;
++	const double fittedY=towersIntel.y+(towersIntel.height-fittedHeight)/2.0;
++	glViewport(viewport[0]+int(std::lround(fittedX*sx)),
++		viewport[1]+int(std::lround((nativeHeight-fittedY-fittedHeight)*sy)),
++		std::max(1,int(std::lround(fittedWidth*sx))),std::max(1,int(std::lround(fittedHeight*sy))));
++	pie_SetVideoBufferWidth(238); pie_SetVideoBufferHeight(168);
++	renderResearchToBuffer(research,119,84,true);
++	pie_SetVideoBufferWidth(nativeWidth); pie_SetVideoBufferHeight(nativeHeight);
++	pie_SetGeometricOffset(oldOriginX,oldOriginY);
++	glViewport(viewport[0],viewport[1],viewport[2],viewport[3]);
++	glDepthRangef(oldDepthRange[0],oldDepthRange[1]);
++	glScissor(oldScissor[0],oldScissor[1],oldScissor[2],oldScissor[3]);
++	if (!wasScissor) glDisable(GL_SCISSOR_TEST);
++	++towersIntel.frames;
++	return true;
++}
++
++static void towersIntelPublish(bool active)
++{
++	if (towersIntel.reply.is_null()) return;
++	auto reply = towersIntel.reply;
++	reply["gameTime"] = gameTime;
++	reply["viewport"] = {{"width",pie_GetVideoBufferWidth()},{"height",pie_GetVideoBufferHeight()}};
++	reply["preview"] = {{"active",active},{"topicId",towersIntel.topicId},{"frames",towersIntel.frames},
++		{"realTime",realTime},{"rotationPeriodMs",2000},{"reason",towersIntel.closedReason},
++		{"rect",{{"x",towersIntel.x},{"y",towersIntel.y},{"width",towersIntel.width},{"height",towersIntel.height}}}};
++	const std::string bytes = reply.dump();
++	FILE *file = fopen("/tmp/warzone-towers-intelligence-state.json.tmp","wb");
++	if (file)
++	{
++		const bool wrote = fwrite(bytes.data(),1,bytes.size(),file) == bytes.size();
++		const bool closed = fclose(file) == 0;
++		if (wrote && closed) rename("/tmp/warzone-towers-intelligence-state.json.tmp","/tmp/warzone-towers-intelligence-state.json");
++	}
++	towersIntel.reply = nullptr;
++}
++
++static void towersIntelligenceFrame()
++{
++	if (!towersIntelEnabled())
++	{ if (towersIntel.open) towersIntelClose("disabled"); towersIntelClearRetiredRects(); towersIntelPublish(false); return; }
++	if (selectedPlayer >= MAX_PLAYERS || asResearch.empty() || asPlayerResList[selectedPlayer].size() != asResearch.size())
++	{ if (towersIntel.open) towersIntelClose("research-not-ready"); towersIntelClearRetiredRects(); towersIntelPublish(false); return; }
++	if (!towersIntel.initialCaptured)
++	{
++		towersIntel.initialCaptured = true;
++		towersIntel.initialKnown = gameTime <= 1000;
++		towersIntel.initialPlayer = selectedPlayer;
++		if (towersIntel.initialKnown)
++			for (const auto &research : asResearch)
++				if (IsResearchCompleted(&asPlayerResList[selectedPlayer][research.index])) towersIntel.initialIds.insert(research.id.toUtf8());
++	}
++	if (gameTime < towersIntel.lastGameTime)
++	{
++		towersIntelClose("game-loaded");
++		towersIntel.initialKnown = false;
++		towersIntel.initialIds.clear();
++	}
++	towersIntel.lastGameTime = gameTime;
++	if (InGameOpUp || isInGamePopupUp || bLoadSaveUp || intMode == INT_DESIGN || intMode == INT_INTELMAP)
++		if (towersIntel.open) towersIntelClose("native-menu");
++	towersIntelPoll();
++	// A live world already replaced old pixels; paused scenes need explicit clear.
++	towersIntelClearRetiredRects();
++	const bool active = towersIntelRender();
++	// Rendering may itself retire a lease/invalid selection. Clear that old
++	// viewport before publishing its close acknowledgement as well.
++	towersIntelClearRetiredRects();
++	towersIntelPublish(active);
++}
++} // namespace
++#else
++namespace { static void towersIntelligenceReset() {} }
++static void towersIntelligenceFrame() {}
++#endif
++
++
++// Campaign opts into touch/native observation without Towers autosave/UI policy.
++static bool campaignMobileEnabled()
++{
++#if defined(__EMSCRIPTEN__)
++    FILE *file = fopen("/tmp/warzone-campaign-mobile-v51", "rb");
++    if (!file) return false;
++    const bool enabled = fgetc(file) == '1'; fclose(file); return enabled;
++#else
++    return false;
++#endif
++}
++
++extern std::string campaignMobileRadarStateJSON();
++std::string campaignMobileNativeStateJSON()
++{
++    const bool video = loop_GetVideoStatus();
++    const bool paused = gamePaused() || gameUpdatePaused();
++    const bool help = intHelpOverlayIsUp();
++    const bool menu = InGameOpUp || isInGamePopupUp || bLoadSaveUp || help || intMode != INT_NORMAL;
++    const bool playing = GetGameMode() == GS_NORMAL && game.type == LEVEL_TYPE::CAMPAIGN;
++    return nlohmann::json{{"mode","campaign"},{"gameTime",gameTime},{"nativeLevel",getLevelName()},
++        {"realTime",realTime},{"video",video},{"paused",paused},{"nativeMode",intMode},
++        {"playing",playing},{"transportOpen",intMode == INT_TRANSPORTER},
++        {"intelligenceOpen",intMode == INT_INTELMAP},{"nativeMenuOpen",menu},
++        {"worldSafe",playing && !video && !paused && !menu},
++        {"radar",nlohmann::json::parse(campaignMobileRadarStateJSON())}}.dump();
++}
++
++void campaignMobileFrame()
++{
++    if (!campaignMobileEnabled()) return;
++    const auto value = campaignMobileNativeStateJSON();
++    FILE *file = fopen("/tmp/warzone-campaign-state-v51.json.tmp", "wb");
++    if (!file) return;
++    fwrite(value.data(),1,value.size(),file); fclose(file);
++    rename("/tmp/warzone-campaign-state-v51.json.tmp","/tmp/warzone-campaign-state-v51.json");
++}
++
+ void intDisplayWidgets()
+ {
+ 	/*draw the background for the design screen and the Intelligence screen*/
+@@ -2015,6 +2487,7 @@ void intDisplayWidgets()
+ 	{
+ 		displayLoadSave();
+ 	}
++	towersIntelligenceFrame();
+ }
+ 
+ void intShowWidgetHelp()
+@@ -2693,7 +3166,12 @@ void addIntelScreen()
+ 	intMode = INT_INTELMAP;
+ 
+ 	//lock the reticule button
+-	widgSetButtonState(psWScreen, IDRET_INTEL_MAP, WBUT_CLICKLOCK);
++	// The Campaign mobile host removes the stock reticule. Intel itself
++	// remains native; only lock its optional button when that button exists.
++	if (!campaignMobileEnabled() || widgGetFromID(psWScreen, IDRET_INTEL_MAP) != nullptr)
++	{
++		widgSetButtonState(psWScreen, IDRET_INTEL_MAP, WBUT_CLICKLOCK);
++	}
+ 
+ 	//add the power bar - for looks!
+ 	intShowPowerBar();
+diff --git a/src/intdisplay.cpp b/src/intdisplay.cpp
+index 5a34440..bb72967 100644
+--- a/src/intdisplay.cpp
++++ b/src/intdisplay.cpp
+@@ -72,6 +72,28 @@
+ 
+ #include "multiplay.h"
+ #include "qtscript.h"
++#include <cstdio>
++
++// Towers opts in with the existing transient UI marker; never saved to disk.
++static bool towersSageTheme()
++{
++#ifdef __EMSCRIPTEN__
++	FILE *marker = fopen("/tmp/warzone-towers-ui-v34", "rb");
++	if (!marker) return false;
++	const bool enabled = fgetc(marker) == '1';
++	fclose(marker);
++	return enabled;
++#else
++	return false;
++#endif
++}
++
++static PIELIGHT towersSageColour(uint8_t r, uint8_t g, uint8_t b)
++{
++	PIELIGHT colour;
++	colour.fromRGBA(r, g, b, 255);
++	return colour;
++}
+ 
+ // Is a button widget highlighted, either because the cursor is over it or it is flashing.
+ //
+@@ -181,6 +203,8 @@ void PowerBar::display(int xOffset, int yOffset)
+ 	SDWORD		BarWidth, textWidth = 0;
+ 	SDWORD		iX, iY;
+ 
++	const bool sage = towersSageTheme();
++	const UDWORD previewPower = ManuPower;
+ 	double desiredPower = getPowerMinusQueued(selectedPlayer);
+ 	static double displayPower;
+ 	static unsigned lastRealTime;
+@@ -199,6 +223,18 @@ void PowerBar::display(int xOffset, int yOffset)
+ 	textWidth = cache.wzText.width();
+ 	BarWidth -= textWidth;
+ 
++	if (sage)
++	{
++		// This is a display scale, not a power-storage limit. The original
++		// fixed pixels-per-power scale was already full around 2500 power.
++		double displayRange = 5000.;
++		while (std::max(displayPower, static_cast<double>(previewPower)) > displayRange)
++			displayRange *= 2.;
++		ManPow = static_cast<SDWORD>(previewPower * static_cast<double>(BarWidth) / displayRange);
++		Avail = static_cast<SDWORD>(displayPower * BarWidth / displayRange);
++		if (displayPower < 0 && Avail == 0) Avail = -1;
++	}
++
+ 	if (ManPow > Avail)
+ 	{
+ 		Empty = BarWidth - ManPow;
+@@ -236,45 +272,61 @@ void PowerBar::display(int xOffset, int yOffset)
+ 	x0 += iV_GetImageWidth(IntImages, IMAGE_PBAR_TOP);
+ 
+ 	BatchedImageDrawRequests imageDrawBatch(true); // defer drawing
++	// Actual resource values stay native; the Towers scale leaves visible headroom.
++	auto drawPowerImage = [&](unsigned image, int px, int py, int width)
++	{
++		PIELIGHT colour = image == IMAGE_PBAR_AVAIL ? towersSageColour(244,244,244)
++		    : image == IMAGE_PBAR_USED ? towersSageColour(188,188,188)
++		    : image == IMAGE_PBAR_REQUIRED ? towersSageColour(112,112,112)
++		    : towersSageColour(37,37,37);
++		pie_UniTransBoxFill(px, py, px + width, py + iV_GetImageHeight(IntImages, image), colour);
++	};
+ 
+ 	//fill in the empty section behind text
+ 	if (textWidth > 0)
+ 	{
+-		iV_DrawImageRepeatX(IntImages, IMAGE_PBAR_EMPTY, x0 - 1, y0, textWidth + 1, defaultProjectionMatrix(), true, &imageDrawBatch); // Overdraw by 1 to reduce seam with left-beginning-piece when scaling
++		if (sage) drawPowerImage(IMAGE_PBAR_EMPTY, x0 - 1, y0, textWidth + 1);
++		else iV_DrawImageRepeatX(IntImages, IMAGE_PBAR_EMPTY, x0 - 1, y0, textWidth + 1, defaultProjectionMatrix(), true, &imageDrawBatch); // Overdraw by 1 to reduce seam with left-beginning-piece when scaling
+ 		x0 += textWidth;
+ 	}
+ 
+ 	//draw the left-most beginning tip
+ 	//to reduce a visible seam when scaling, this must come *after* the empty / text section above
+-	iV_DrawImage(IntImages, IMAGE_PBAR_TOP, top_x0, top_y0, defaultProjectionMatrix(), &imageDrawBatch);
++	if (sage) drawPowerImage(IMAGE_PBAR_TOP, top_x0, top_y0, iV_GetImageWidth(IntImages, IMAGE_PBAR_TOP));
++	else iV_DrawImage(IntImages, IMAGE_PBAR_TOP, top_x0, top_y0, defaultProjectionMatrix(), &imageDrawBatch);
+ 
+ 	//draw required section
+ 	if (ManPow > Avail)
+ 	{
+ 		//draw the required in red
+-		iV_DrawImageRepeatX(IntImages, IMAGE_PBAR_USED, x0, y0, ManPow, defaultProjectionMatrix(), true, &imageDrawBatch);
++		if (sage) drawPowerImage(IMAGE_PBAR_USED, x0, y0, ManPow);
++		else iV_DrawImageRepeatX(IntImages, IMAGE_PBAR_USED, x0, y0, ManPow, defaultProjectionMatrix(), true, &imageDrawBatch);
+ 	}
+ 	else
+ 	{
+-		iV_DrawImageRepeatX(IntImages, IMAGE_PBAR_REQUIRED, x0, y0, ManPow, defaultProjectionMatrix(), true, &imageDrawBatch);
++		if (sage) drawPowerImage(IMAGE_PBAR_REQUIRED, x0, y0, ManPow);
++		else iV_DrawImageRepeatX(IntImages, IMAGE_PBAR_REQUIRED, x0, y0, ManPow, defaultProjectionMatrix(), true, &imageDrawBatch);
+ 	}
+ 	x0 += ManPow;
+ 
+ 	//draw the available section if any!
+ 	if (Avail - ManPow > 0)
+ 	{
+-		iV_DrawImageRepeatX(IntImages, IMAGE_PBAR_AVAIL, x0, y0, Avail - ManPow, defaultProjectionMatrix(), true, &imageDrawBatch);
++		if (sage) drawPowerImage(IMAGE_PBAR_AVAIL, x0, y0, Avail - ManPow);
++		else iV_DrawImageRepeatX(IntImages, IMAGE_PBAR_AVAIL, x0, y0, Avail - ManPow, defaultProjectionMatrix(), true, &imageDrawBatch);
+ 		x0 += Avail - ManPow;
+ 	}
+ 
+ 	//fill in the rest with empty section
+ 	if (Empty > 0)
+ 	{
+-		iV_DrawImageRepeatX(IntImages, IMAGE_PBAR_EMPTY, x0, y0, Empty + 1, defaultProjectionMatrix(), true, &imageDrawBatch); // Overdraw by 1 to reduce seam with right-end-piece when scaling
++		if (sage) drawPowerImage(IMAGE_PBAR_EMPTY, x0, y0, Empty + 1);
++		else iV_DrawImageRepeatX(IntImages, IMAGE_PBAR_EMPTY, x0, y0, Empty + 1, defaultProjectionMatrix(), true, &imageDrawBatch); // Overdraw by 1 to reduce seam with right-end-piece when scaling
+ 		x0 += Empty;
+ 	}
+ 
+-	iV_DrawImage(IntImages, IMAGE_PBAR_BOTTOM, x0, y0, defaultProjectionMatrix(), &imageDrawBatch);
++	if (sage) drawPowerImage(IMAGE_PBAR_BOTTOM, x0, y0, iV_GetImageWidth(IntImages, IMAGE_PBAR_BOTTOM));
++	else iV_DrawImage(IntImages, IMAGE_PBAR_BOTTOM, x0, y0, defaultProjectionMatrix(), &imageDrawBatch);
+ 
+ 	imageDrawBatch.draw(true);
+ 
+@@ -300,12 +352,12 @@ void PowerBar::display(int xOffset, int yOffset)
+ 	{
+ 		auto needTextWidth = cache.wzNeedText.width();
+ 		auto textX = iX + (this->width() - needTextWidth) / 2;
+-		pie_UniTransBoxFill(textX - 3, y0 + 1, textX + needTextWidth + 3, y0 + this->height() - 1, WZCOL_TRANSPARENT_BOX);
+-		cache.wzNeedText.render(textX, iY - 1, (realTime / 1250) % 5 ? WZCOL_WHITE: WZCOL_RED);
++		pie_UniTransBoxFill(textX - 3, y0 + 1, textX + needTextWidth + 3, y0 + this->height() - 1, sage ? towersSageColour(17,17,17) : WZCOL_TRANSPARENT_BOX);
++		cache.wzNeedText.render(textX, iY - 1, sage ? towersSageColour(244,244,244) : (realTime / 1250) % 5 ? WZCOL_WHITE: WZCOL_RED);
+ 	}
+ 
+ 	// draw text value
+-	cache.wzText.render(iX, iY, Avail < 0 ? WZCOL_RED : WZCOL_TEXT_BRIGHT);
++	cache.wzText.render(iX, iY, sage ? towersSageColour(244,244,244) : Avail < 0 ? WZCOL_RED : WZCOL_TEXT_BRIGHT);
+ }
+ 
+ IntFancyButton::IntFancyButton()
+diff --git a/src/keybind.cpp b/src/keybind.cpp
+index b69bc1f..e6cf954 100644
+--- a/src/keybind.cpp
++++ b/src/keybind.cpp
+@@ -20,6 +20,8 @@
+ #include <cstring>
+ #include <nonstd/optional.hpp>
+ 
++#include <stdio.h>
++
+ #include "lib/framework/frame.h"
+ #include "lib/framework/wzapp.h"
+ #include "lib/framework/rational.h"
+@@ -92,6 +94,39 @@
+ 	Alex McLean, Pumpkin Studios, EIDOS Interactive.
+ */
+ 
++// Only the Towers HTML host opts in. This transient libc/MEMFS marker is
++// never stored with saves/preferences; other modes retain their stock notices.
++static bool towersOwnsRoutineNotices()
++{
++#ifdef __EMSCRIPTEN__
++	FILE *marker = fopen("/tmp/warzone-towers-ui-v34", "rb");
++	if (!marker)
++	{
++		return false;
++	}
++	const bool enabled = fgetc(marker) == '1';
++	fclose(marker);
++	return enabled;
++#else
++	return false;
++#endif
++}
++
++// Emit only after the existing native camera action has completed. The
++// original camera mutations and non-Towers console behavior are unchanged.
++static void towersCameraAlignmentNotice(const char *direction, const char *stockMessage)
++{
++	if (!towersOwnsRoutineNotices())
++	{
++		CONPRINTF("%s", stockMessage);
++		return;
++	}
++#ifdef __EMSCRIPTEN__
++	fprintf(stderr, "BNNOTICE:{\"kind\":\"camera\",\"direction\":\"%s\",\"gameTime\":%u}\n",
++	        direction, static_cast<unsigned int>(gameTime));
++#endif
++}
++
+ extern char	ScreenDumpPath[];
+ 
+ bool	bMovePause = false;
+@@ -349,7 +384,7 @@ void	kf_FaceSouth()
+ 	{
+ 		camToggleStatus();
+ 	}
+-	CONPRINTF("%s", _("View Aligned to South"));
++	towersCameraAlignmentNotice("south", _("View Aligned to South"));
+ }
+ // --------------------------------------------------------------------------
+ void	kf_FaceEast()
+@@ -359,7 +394,7 @@ void	kf_FaceEast()
+ 	{
+ 		camToggleStatus();
+ 	}
+-	CONPRINTF("%s", _("View Aligned to East"));
++	towersCameraAlignmentNotice("east", _("View Aligned to East"));
+ }
+ // --------------------------------------------------------------------------
+ void	kf_FaceWest()
+@@ -369,7 +404,7 @@ void	kf_FaceWest()
+ 	{
+ 		camToggleStatus();
+ 	}
+-	CONPRINTF("%s", _("View Aligned to West"));
++	towersCameraAlignmentNotice("west", _("View Aligned to West"));
+ }
+ // --------------------------------------------------------------------------
+ 
+@@ -1357,7 +1392,7 @@ void	kf_SeekNorth()
+ 	{
+ 		camToggleStatus();
+ 	}
+-	CONPRINTF("%s", _("View Aligned to North"));
++	towersCameraAlignmentNotice("north", _("View Aligned to North"));
+ }
+ 
+ MappableFunction kf_ScrollCamera(const int horizontal, const int vertical)
+@@ -2625,7 +2660,10 @@ void kf_QuickSave()
+ 	}
+ 	if (saveGame(filename, GTYPE_SAVE_MIDMISSION)) // still expects a .gam filename... TODO: FIX
+ 	{
+-		console(_("QuickSave"));
++		if (!towersOwnsRoutineNotices())
++		{
++			console(_("QuickSave"));
++		}
+ 	}
+ 	else
+ 	{
+diff --git a/src/loadsave.cpp b/src/loadsave.cpp
+index 3703175..7f2e73c 100644
+--- a/src/loadsave.cpp
++++ b/src/loadsave.cpp
+@@ -29,6 +29,7 @@
+ #include "lib/framework/file.h"
+ #include "lib/framework/physfs_ext.h"
+ #include <ctime>
++#include <cstdio>
+ 
+ #include "lib/framework/frame.h"
+ #include "lib/framework/input.h"
+@@ -1131,8 +1132,24 @@ static void freeAutoSaveSlot(SAVEGAME_LOC loc)
+ 	deleteSaveGame_classic(savefile);
+ }
+ 
++
++// The phone Towers host owns explicit Save; never schedule native autosaves.
++static bool towersDisablesAutoSave()
++{
++#ifdef __EMSCRIPTEN__
++	FILE *marker = fopen("/tmp/warzone-towers-ui-v34", "rb");
++	if (!marker) return false;
++	const bool enabled = fgetc(marker) == '1';
++	fclose(marker);
++	return enabled;
++#else
++	return false;
++#endif
++}
++
+ static bool doAutoSave()
+ {
++	if (towersDisablesAutoSave()) return false;
+ 	const char *dir = bMultiPlayer ? SAVEGAME_SKI_AUTO : SAVEGAME_CAM_AUTO;
+ 	// Backward compatibility: remove later
+ 	if (!freeAutoSaveSlot_old(dir))
+@@ -1163,6 +1180,7 @@ static bool doAutoSave()
+ 
+ bool autoSave(bool force)
+ {
++	if (towersDisablesAutoSave()) return false;
+ 	// Bail out if we're running a _true_ multiplayer game or are playing a tutorial/debug/cheating/autogames
+ 	const DebugInputManager& dbgInputManager = gInputManager.debugManager();
+ 	if (!autosaveEnabled || runningMultiplayer() || bInTutorial || dbgInputManager.debugMappingsAllowed() || Cheated || autogame_enabled())
+diff --git a/src/main.cpp b/src/main.cpp
+index 46522b8..a008e3f 100644
+--- a/src/main.cpp
++++ b/src/main.cpp
+@@ -1171,6 +1171,20 @@ static void runTitleLoop()
+  * The mainloop.
+  * Fetches events, executes appropriate code
+  */
++
++// Only the separate Campaign host opts into native intro playback and state.
++extern void campaignMobileFrame();
++static bool campaignMobileStartup()
++{
++#if defined(__EMSCRIPTEN__)
++    FILE *file = fopen("/tmp/warzone-campaign-mobile-v51", "rb");
++    if (!file) return false;
++    const bool enabled = fgetc(file) == '1'; fclose(file); return enabled;
++#else
++    return false;
++#endif
++}
++
+ void mainLoop()
+ {
+ 	frameUpdate(); // General housekeeping
+@@ -1215,6 +1229,7 @@ void mainLoop()
+ 		autoSave(true);
+ 	}
+ 
++	campaignMobileFrame();
+ 	wzApplyCursor();
+ 	runNotifications();
+ 	wz_command_interface_process_queued_status_output();
+@@ -2099,7 +2114,17 @@ int realmain(int argc, char *argv[])
+ 		initSaveGameLoad();
+ 		break;
+ 	case GS_NORMAL:
+-		if (!startGameLoop())
++		if (campaignMobileStartup() && game.type == LEVEL_TYPE::CAMPAIGN && strcmp(aLevelName,"CAM_1A") == 0)
++		{
++			// Reuse the ordinary title-video -> queued STARTGAME path. Loading a
++			// campaign save uses GS_SAVEGAMELOAD and never replays this intro.
++			startTitleLoop(true);
++			SPinit(LEVEL_TYPE::CAMPAIGN); sstrcpy(aLevelName,"CAM_1A");
++			queuedTilecodeChange = TITLECODE_STARTGAME;
++			seq_ClearSeqList(); seq_AddSeqToList("cam1/c001.ogg",nullptr,"cam1/c001.txa",false);
++			seq_StartNextFullScreenVideo();
++		}
++		else if (!startGameLoop())
+ 		{
+ 			// Attempted to load straight into a game from the command-line, but starting the game loop (loading the map, etc) failed
+ 			// Treat this as a failure and queue an exit
+diff --git a/src/quickjs_backend.cpp b/src/quickjs_backend.cpp
+index 3681404..fb27d33 100644
+--- a/src/quickjs_backend.cpp
++++ b/src/quickjs_backend.cpp
+@@ -47,6 +47,7 @@
+ #include "display3d.h"
+ #include "intelmap.h"
+ #include "hci.h"
++#include "selection.h"
+ #include "wrappers.h"
+ #include "challenge.h"
+ #include "research.h"
+@@ -863,6 +864,203 @@ JSValue convResearch(const RESEARCH *psResearch, JSContext *ctx, int player)
+ //;; * ```hasIndirect``` One or more of the structure's weapons are indirect. (3.2+ only)
+ //;; * ```health``` Percentage that this structure is damaged (where 100 means not damaged at all).
+ //;;
++#include <cstdio>
++#include "structure.h"
++#include "power.h"
++#include "cmddroid.h"
++#include "group.h"
++
++
++// These campaign APIs are observational or ordinary native selection only.
++extern std::string campaignMobileNativeStateJSON();
++static bool campaignMobileScriptEnabled()
++{
++#if defined(__EMSCRIPTEN__)
++    FILE *file = fopen("/tmp/warzone-campaign-mobile-v51", "rb");
++    if (!file) return false;
++    const bool enabled = fgetc(file) == '1'; fclose(file); return enabled;
++#else
++    return false;
++#endif
++}
++static bool mobileProductionEnabled()
++{
++    FILE *file = fopen("/tmp/warzone-towers-ui-v34", "rb");
++    if (file) { const bool enabled = fgetc(file) == '1'; fclose(file); if (enabled) return true; }
++    return campaignMobileScriptEnabled();
++}
++static JSValue campaignMobileStateJS(JSContext *ctx, JSValueConst, int, JSValueConst *)
++{
++    if (!campaignMobileScriptEnabled()) return JS_UNDEFINED;
++    const auto value = campaignMobileNativeStateJSON();
++    return JS_ParseJSON(ctx,value.c_str(),value.size(),"campaign-mobile-state");
++}
++
++// Preserve a standing combat selection without deselecting/reselecting it on
++// every maintenance tick. Match native selCombat and isSelectable predicates;
++// emit one normal selection refresh only when the actual set changes.
++static unsigned campaignReconcileCombatSelection()
++{
++    unsigned count = 0;
++    bool changed = false;
++    for (DROID *droid : apsDroidLists[selectedPlayer])
++    {
++        const bool eligible = droid->asWeaps[0].nStat > 0 && !droid->isTransporter() && isSelectable(droid);
++        if (eligible) ++count;
++        if (droid->selected != eligible)
++        {
++            droid->selected = eligible;
++            changed = true;
++        }
++    }
++    if (changed)
++    {
++        intRefreshScreen();
++        triggerEventSelected();
++    }
++    return count;
++}
++
++static JSValue campaignSelectCombatJS(JSContext *ctx, JSValueConst, int, JSValueConst *)
++{
++    if (!campaignMobileScriptEnabled() || game.type != LEVEL_TYPE::CAMPAIGN
++        || engineToInstanceMap.at(ctx)->player() != selectedPlayer) return JS_FALSE;
++    const auto state = nlohmann::json::parse(campaignMobileNativeStateJSON());
++    if (!state.value("worldSafe",false)) return JS_FALSE;
++    // Re-read the latest HTML intent; an in-flight command must not steal a
++    // builder/transport selection after the user opens another control.
++    FILE *file = fopen("/data/base/script/campaign/mobile/campaign-control.json","rb");
++    if (!file) return JS_FALSE;
++    char buffer[4097]; const size_t length = fread(buffer,1,4096,file); fclose(file);
++    const auto control = nlohmann::json::parse(buffer,buffer+length,nullptr,false);
++    if (!control.is_object() || !control.value("enabled",false) || control.value("suspended",true)) return JS_FALSE;
++    const unsigned count = campaignReconcileCombatSelection();
++    JSValue result = JS_NewObject(ctx), ids = JS_NewArray(ctx); uint32_t index=0;
++    for (const DROID *droid : apsDroidLists[selectedPlayer])
++        if (droid->selected) JS_SetPropertyUint32(ctx,ids,index++,JS_NewUint32(ctx,droid->id));
++    JS_SetPropertyStr(ctx,result,"ok",JS_TRUE);
++    JS_SetPropertyStr(ctx,result,"count",JS_NewUint32(ctx,count));
++    JS_SetPropertyStr(ctx,result,"selectedIds",ids);
++    return result;
++}
++
++// Towers-only read-only native production observation. No orders, power requests,
++// queue mutation, timers, rendering or random state are changed here.
++static JSValue towersProductionState(const STRUCTURE *structure, JSContext *ctx)
++{
++	const auto type = structure->pStructureType->type;
++	if (structure->player != selectedPlayer || !structure->pFunctionality
++		|| (type != REF_FACTORY && type != REF_CYBORG_FACTORY && type != REF_VTOL_FACTORY))
++	{
++		return JS_UNDEFINED;
++	}
++	if (!mobileProductionEnabled()) return JS_UNDEFINED;
++	const FACTORY &factory = structure->pFunctionality->factory;
++	const DROID_TEMPLATE *subject = factory.psSubject;
++	JSValue value = JS_NewObject(ctx);
++	bool nativeQueueEmpty = productionPlayer == structure->player && factory.pendingCount == 0;
++	if (factory.psAssemblyPoint && factory.psAssemblyPoint->factoryType < NUM_FACTORY_TYPES)
++	{
++		const auto &runs = asProductionRun[factory.psAssemblyPoint->factoryType];
++		if (factory.psAssemblyPoint->factoryInc < runs.size())
++		{
++			for (const auto &entry : runs[factory.psAssemblyPoint->factoryInc])
++			{
++				if (entry.numRemaining() > 0) nativeQueueEmpty = false;
++			}
++		}
++	}
++	else nativeQueueEmpty = false;
++	if (factory.productionLoops != 0) nativeQueueEmpty = false;
++	QuickJS_DefinePropertyValue(ctx, value, "nativeQueueEmpty", JS_NewBool(ctx, nativeQueueEmpty), JS_PROP_ENUMERABLE);
++	QuickJS_DefinePropertyValue(ctx, value, "active", JS_NewBool(ctx, subject != nullptr), JS_PROP_ENUMERABLE);
++	if (!subject) return value;
++
++	const int total = std::max(1, static_cast<int>(calcTemplateBuild(subject)));
++	const int remaining = std::max(0, std::min(total, factory.buildPointsRemaining));
++	const int rate = getBuildingProductionPoints(structure);
++	const int player = structure->player;
++	bool capacityLimited = IsPlayerDroidLimitReached(player);
++	switch (droidTemplateType(subject))
++	{
++	case DROID_COMMAND:
++		capacityLimited = capacityLimited || !structureExists(player, REF_COMMAND_CONTROL, true, false)
++			|| getNumCommandDroids(player) >= getMaxCommanders(player);
++		break;
++	case DROID_CONSTRUCT:
++	case DROID_CYBORG_CONSTRUCT:
++		capacityLimited = capacityLimited || getNumConstructorDroids(player) >= getMaxConstructors(player);
++		break;
++	default: break;
++	}
++	// This mirrors only the pure commander-group capacity predicate. The engine's
++	// checkHaltOnMaxUnitsReached also emits notices, so it must never be called here.
++	if (!bMultiPlayer && factory.psCommander && !templateIsIDF(subject)
++		&& subject->getPropulsionStats()->propulsionType != PROPULSION_TYPE_LIFT)
++	{
++		const unsigned members = factory.psCommander->psGroup ? factory.psCommander->psGroup->getNumMembers() : 0;
++		capacityLimited = capacityLimited || members >= cmdDroidMaxGroup(factory.psCommander);
++	}
++	const bool waitingCapacity = capacityLimited && (factory.timeStarted == ACTION_START_TIME || remaining == 0);
++	const bool held = factory.timeStartHold != 0 || gamePaused()
++		|| (bMultiPlayer && structure->resistance < static_cast<int>(structureResistance(structure->pStructureType, player)));
++	const bool waitingPower = remaining == total && checkPowerRequest(structure) >= 0;
++	const char *state = held ? "paused" : waitingCapacity ? "waiting-capacity"
++		: waitingPower ? "waiting-power" : rate > 0 ? "building" : "paused";
++	QuickJS_DefinePropertyValue(ctx, value, "templateId", JS_NewUint32(ctx, subject->multiPlayerID), JS_PROP_ENUMERABLE);
++	QuickJS_DefinePropertyValue(ctx, value, "currentName", JS_NewString(ctx, getStatsName(subject)), JS_PROP_ENUMERABLE);
++	JSValue subjectDesign = convTemplate(subject, ctx);
++	QuickJS_DefinePropertyValue(ctx, subjectDesign, "templateId", JS_NewUint32(ctx, subject->multiPlayerID), JS_PROP_ENUMERABLE);
++	QuickJS_DefinePropertyValue(ctx, value, "subjectDesign", subjectDesign, JS_PROP_ENUMERABLE);
++	QuickJS_DefinePropertyValue(ctx, value, "timeStarted", JS_NewUint32(ctx, factory.timeStarted), JS_PROP_ENUMERABLE);
++	QuickJS_DefinePropertyValue(ctx, value, "totalBuildPoints", JS_NewInt32(ctx, total), JS_PROP_ENUMERABLE);
++	QuickJS_DefinePropertyValue(ctx, value, "remainingBuildPoints", JS_NewInt32(ctx, remaining), JS_PROP_ENUMERABLE);
++	QuickJS_DefinePropertyValue(ctx, value, "buildPointsPerSecond", JS_NewInt32(ctx, rate), JS_PROP_ENUMERABLE);
++	QuickJS_DefinePropertyValue(ctx, value, "state", JS_NewString(ctx, state), JS_PROP_ENUMERABLE);
++	return value;
++}
++
++
++// A deliberate Towers command may cancel only the exact observed current unit.
++// Keep refunds and power requests in the original native cancellation routine.
++static JSValue towersCancelProductionJS(JSContext *ctx, JSValueConst, int argc, JSValueConst *argv)
++{
++#ifdef __EMSCRIPTEN__
++	if (argc != 3 || engineToInstanceMap.at(ctx)->player() != selectedPlayer) return JS_FALSE;
++	if (!mobileProductionEnabled()) return JS_FALSE;
++	uint32_t identity[3];
++	for (int i = 0; i < 3; ++i)
++	{
++		double value;
++		if (!JS_IsNumber(argv[i]) || JS_ToFloat64(ctx, &value, argv[i]) < 0
++			|| !(value >= 0 && value <= std::numeric_limits<uint32_t>::max())
++			|| value != static_cast<uint32_t>(value)) return JS_FALSE;
++		identity[i] = static_cast<uint32_t>(value);
++	}
++	STRUCTURE *structure = IdToStruct(identity[0], selectedPlayer);
++	if (!structure || structure->player != selectedPlayer || structure->status != SS_BUILT
++		|| !structure->isFactory() || !structure->pFunctionality) return JS_FALSE;
++	FACTORY &factory = structure->pFunctionality->factory;
++	if (!factory.psSubject || factory.psSubject->multiPlayerID != identity[1]
++		|| factory.timeStarted != identity[2] || factory.pendingCount != 0
++		|| factory.productionLoops != 0 || productionPlayer != selectedPlayer
++		|| !factory.psAssemblyPoint || factory.psAssemblyPoint->factoryType >= NUM_FACTORY_TYPES) return JS_FALSE;
++	// App FIFO entries live in the scenario. Never clear or rewrite a stock run.
++	const auto &runs = asProductionRun[factory.psAssemblyPoint->factoryType];
++	if (factory.psAssemblyPoint->factoryInc < runs.size())
++	{
++		for (const auto &entry : runs[factory.psAssemblyPoint->factoryInc])
++		{
++			if (entry.numRemaining() > 0) return JS_FALSE;
++		}
++	}
++	cancelProduction(structure, ModeImmediate, false);
++	return JS_NewBool(ctx, factory.psSubject == nullptr);
++#else
++	return JS_FALSE;
++#endif
++}
++
+ JSValue convStructure(const STRUCTURE *psStruct, JSContext *ctx)
+ {
+ 	bool aa = false;
+@@ -920,6 +1118,11 @@ JSValue convStructure(const STRUCTURE *psStruct, JSContext *ctx)
+ 	{
+ 		QuickJS_DefinePropertyValue(ctx, value, "modules", JS_NULL, JS_PROP_ENUMERABLE);
+ 	}
++	JSValue productionObservation = towersProductionState(psStruct, ctx);
++	if (!JS_IsUndefined(productionObservation))
++	{
++		QuickJS_DefinePropertyValue(ctx, value, "towersProduction", productionObservation, JS_PROP_ENUMERABLE);
++	}
+ 	JSValue weaponlist = JS_NewArray(ctx);
+ 	for (int j = 0; j < psStruct->numWeaps; j++)
+ 	{
+@@ -3513,6 +3716,8 @@ bool quickjs_scripting_instance::registerFunctions(const std::string& scriptName
+ 	ASSERT_OR_RETURN(false, !JS_IsException(upgrades), "Failure to create upgrades object");
+ 	JS_DefinePropertyValueStr(ctx, global_obj, "Upgrades", upgrades, JS_PROP_WRITABLE | JS_PROP_ENUMERABLE);
+ 
++	JS_SetPropertyStr(ctx,global_obj,"campaignMobileState",JS_NewCFunction(ctx,campaignMobileStateJS,"campaignMobileState",0));
++	JS_SetPropertyStr(ctx,global_obj,"campaignSelectCombat",JS_NewCFunction(ctx,campaignSelectCombatJS,"campaignSelectCombat",0));
+ 	// Register functions to the script engine here
+ 	JS_REGISTER_FUNC_NAME(_, 1, JS_FUNC_IMPL_NAME(translate)); // WZAPI
+ 	JS_REGISTER_FUNC2(dump, 1, MAX_JS_VARARGS);
+@@ -3618,6 +3823,7 @@ bool quickjs_scripting_instance::registerFunctions(const std::string& scriptName
+ 	JS_REGISTER_FUNC2(addBeacon, 3, 4); // WZAPI
+ 	JS_REGISTER_FUNC(removeBeacon, 1); // WZAPI
+ 	JS_REGISTER_FUNC(getDroidProduction, 1); // WZAPI
++	JS_REGISTER_FUNC_NAME(towersCancelProduction, 3, towersCancelProductionJS); // Towers exact-current cancellation
+ 	JS_REGISTER_FUNC2(getDroidLimit, 0, 2); // WZAPI
+ 	JS_REGISTER_FUNC(getExperienceModifier, 1); // WZAPI
+ 	JS_REGISTER_FUNC2(setDroidLimit, 2, 3); // WZAPI
+diff --git a/src/radar.cpp b/src/radar.cpp
+index 9be2950..83d265e 100644
+--- a/src/radar.cpp
++++ b/src/radar.cpp
+@@ -19,6 +19,7 @@
+ */
+ #include <string.h>
+ #include <cstdlib>
++#include <nlohmann/json.hpp>
+ 
+ #include "lib/framework/frame.h"
+ #include "lib/framework/fixedpoint.h"
+@@ -798,6 +799,22 @@ static void DrawRadarExtras(const glm::mat4 &modelViewProjectionMatrix)
+ }
+ 
+ /** Does a screen coordinate lie within the radar area? */
++
++// Observation only: the separate Campaign host needs the actual scroll-area
++// radar, not a rectangle inferred from the full map or widget diagonal.
++std::string campaignMobileRadarStateJSON()
++{
++    const uint16_t inverseAngle = static_cast<uint16_t>(rotateRadar ? -playerPos.r.y : 0);
++    const bool visible = !loop_GetVideoStatus() && !gameUpdatePaused()
++        && pRadarWidget && pRadarWidget->visible() && radarVisible()
++        && radarWidth > 0 && radarHeight > 0;
++    return nlohmann::json{{"visible",visible},{"centerX",radarCenterX},{"centerY",radarCenterY},
++        {"width",radarWidth},{"height",radarHeight},
++        {"rotation",rotateRadar ? playerPos.r.y * (M_PI / 32768.0) : 0.0},
++        {"inverseCos",iCos(inverseAngle)/65536.0},{"inverseSin",iSin(inverseAngle)/65536.0},
++        {"viewportWidth",pie_GetVideoBufferWidth()},{"viewportHeight",pie_GetVideoBufferHeight()}}.dump();
++}
++
+ bool CoordInRadar(int x, int y)
+ {
+ 	Vector2f pos;
+diff --git a/src/research.cpp b/src/research.cpp
+index f4614db..f9abf7f 100644
+--- a/src/research.cpp
++++ b/src/research.cpp
+@@ -26,6 +26,8 @@
+ #include <string.h>
+ #include <map>
+ 
++#include <stdio.h>
++
+ #include "lib/framework/frame.h"
+ #include "lib/netplay/sync_debug.h"
+ #include "lib/ivis_opengl/imd.h"
+@@ -48,6 +50,24 @@
+ #include "stats.h"
+ #include "wzapi.h"
+ 
++// Only the Towers HTML host opts in. This transient libc/MEMFS marker is
++// never stored with saves/preferences; other modes retain their stock notices.
++static bool towersOwnsRoutineNotices()
++{
++#ifdef __EMSCRIPTEN__
++	FILE *marker = fopen("/tmp/warzone-towers-ui-v34", "rb");
++	if (!marker)
++	{
++		return false;
++	}
++	const bool enabled = fgetc(marker) == '1';
++	fclose(marker);
++	return enabled;
++#else
++	return false;
++#endif
++}
++
+ // The stores for the research stats
+ std::vector<RESEARCH> asResearch;
+ optional<ResearchUpgradeCalculationMode> researchUpgradeCalcMode;
+@@ -1268,7 +1288,7 @@ void researchResult(UDWORD researchIndex, UBYTE player, bool bDisplay, STRUCTURE
+ 		audio_QueueTrack(ID_SOUND_RESEARCH_COMPLETED);
+ 	}
+ 
+-	if (player == selectedPlayer && bDisplay)
++	if (player == selectedPlayer && bDisplay && !towersOwnsRoutineNotices())
+ 	{
+ 		//add console text message
+ 		snprintf(consoleMsg, MAX_RESEARCH_MSG_SIZE, _("Research completed: %s"), getLocalizedStatsName(pResearch));

@@ -1,0 +1,35 @@
+{
+  "passed": true,
+  "version": "0.91",
+  "baseline": "0.90",
+  "sourceChanges": [
+    {
+      "family": "offline",
+      "path": "src/hci.cpp",
+      "beforeSHA256": "75e4dbe058bcd99009ff4a7e45a3247fc04d4c9169faae5e52f6d4a3764bc105",
+      "afterSHA256": "32340899af584361043417a7f2029d9ec24300004d293a5034361993b7c0c8b7"
+    },
+    {
+      "family": "offline",
+      "path": "src/spectatorwidgets.cpp",
+      "beforeSHA256": "0770747f436781d6ada77c8f04f0bca799dff42e1c995c57eec0175fdf6cde3c",
+      "afterSHA256": "c5e50dbef910c1e7cd0677324bb1d14840635b9777812f18dabd526b5d83b0b7",
+      "baselineNewlinesNormalized": true
+    },
+    {
+      "family": "multiplayer",
+      "path": "src/quickjs_backend.cpp",
+      "beforeSHA256": "957d63a68afae9c6fe297f9419bc813388272f5706a485e2d8103d82ad3bf5f2",
+      "afterSHA256": "8de0c082a38e968095744aaa02780642f60f4d359598f796e9c61ca69551b60e"
+    },
+    {
+      "family": "multiplayer",
+      "path": "src/spectatorwidgets.cpp",
+      "beforeSHA256": "0770747f436781d6ada77c8f04f0bca799dff42e1c995c57eec0175fdf6cde3c",
+      "afterSHA256": "c5e50dbef910c1e7cd0677324bb1d14840635b9777812f18dabd526b5d83b0b7",
+      "baselineNewlinesNormalized": true
+    }
+  ],
+  "unconditionalOfflineAndMPFramePublication": true,
+  "compiled": false
+}

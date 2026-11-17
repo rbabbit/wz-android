@@ -1,0 +1,12 @@
+--- a/src/spectatorwidgets.cpp
++++ b/src/spectatorwidgets.cpp
+@@ -81,6 +81,9 @@
+ static std::shared_ptr<W_SCREEN> statsOverlay = nullptr;
+ static std::shared_ptr<W_BUTTON> specStatsButton = nullptr;
+ static std::shared_ptr<SpectatorStatsView> globalStatsForm = nullptr;
++
++// Read-only observation for the mobile Players navigation ACK.
++bool mobileSpectatorStatsOpenV91() { return globalStatsForm != nullptr; }
+ 
+ #define SPEC_STATS_BUTTON_X RET_X
+ #define SPEC_STATS_BUTTON_Y 20

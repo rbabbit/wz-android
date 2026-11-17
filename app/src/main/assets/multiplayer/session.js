@@ -14,6 +14,13 @@
  globalThis.addEventListener?.('pagehide',()=>{child()?.WarzoneMapMusic?.dispose?.();nativeSessionActive(false);});
  function record(type,detail){session.events.push({at:Date.now(),type,detail});if(session.events.length>200)session.events.shift();}
  function child(){try{return frame?.contentWindow;}catch{return null;}}
+ // Android lifecycle controls the pump, never the session's join/leave state.
+ session.setBackground=value=>{
+  session.background=Boolean(value);child()?.PcBackgroundFrames?.setBackground?.(session.background);
+  if(session.background)child()?.PcMultiplayerControls?.releaseAll?.();
+  record('background',session.background);
+ };
+ session.backgroundPulse=()=>{if(session.active&&session.background)child()?.PcBackgroundFrames?.pulse?.();};
  function viewport(){
   const header=byId('warzone-command-strip');
   const height=session.phase==='game'&&header&&!header.hidden?Math.ceil(header.getBoundingClientRect?.().height||58):0;
@@ -46,9 +53,10 @@
   for(const id of ['blocknight-tech','wt-open-factory','wt-open-queue','blocknight-base','blocknight-combat']){const node=byId(id);if(node)node.hidden=denied;}
   if(denied){
    byId('unit-controls').hidden=true;
-   for(const id of ['wt-field-centre','wt-build-sidebar','wt-command-pages']){const node=byId(id);if(node)node.hidden=true;}
+   for(const id of ['wt-field-centre','wt-build-sidebar']){const node=byId(id);if(node)node.hidden=true;}
    byId('wt-field-toggle')?.setAttribute?.('aria-expanded','false');
-   if(!ownerUiDenied){w?.__warzoneCommands?.close?.();w?.__blockNightResearch?.close?.();w?.__warzoneIntelligence?.close?.();globalThis.TowersStatus?.close?.();w?.PcMultiplayerControls?.setCombatLock?.(false);w?.PcMultiplayerControls?.releaseAll?.();}
+   const pages=w?.__warzoneCommands?.report?.();if(pages?.page!=='players'){const panel=byId('wt-command-pages');if(panel)panel.hidden=true;}
+   if(!ownerUiDenied){if(pages?.page!=='players')w?.__warzoneCommands?.close?.();w?.__blockNightResearch?.close?.();w?.__warzoneIntelligence?.close?.();globalThis.TowersStatus?.close?.();w?.PcMultiplayerControls?.resetCombatMode?.();w?.PcMultiplayerControls?.releaseAll?.();}
   }
   ownerUiDenied=denied;
  }
@@ -255,8 +263,8 @@
   try{return dispatchCommand(action);}finally{child()?.PcMultiplayerControls?.refreshCombatLock?.();syncCombatButton();}
  }
  function dispatchCommand(action){
-  const w=child();if(!w||session.phase!=='game'||action!=='music'&&!ownerAllowed())return false;
-  if(['research','manufacturing','queue','build','demolish','intelligence','music'].includes(action)){byId('wt-field-centre').hidden=true;byId('wt-field-toggle')?.setAttribute?.('aria-expanded','false');}
+  const w=child();if(!w||session.phase!=='game'||!['music','players'].includes(action)&&!ownerAllowed())return false;
+  if(['research','manufacturing','queue','build','demolish','intelligence','music','players'].includes(action)){byId('wt-field-centre').hidden=true;byId('wt-field-toggle')?.setAttribute?.('aria-expanded','false');}
   const commands=w.__warzoneCommands,research=w.__blockNightResearch;
   if(action!=='music')w.WarzoneMapMusic?.closeMenu?.(false);
   if(action!=='intelligence')w.__warzoneIntelligence?.close?.();
@@ -265,6 +273,7 @@
    commands?.close?.();research?.close?.();globalThis.TowersStatus?.close?.();w.PcMultiplayerControls?.releaseAll?.();
    return w.WarzoneMapMusic.showMenu(byId('blocknight-music'),document);
   }
+  if(action==='players'){if(!commands){toast('Players are connecting to the game…');return false;}research?.close?.();return commands.toggle('players');}
   if(action==='research'){
    if(!research){toast('Research is connecting to the game…');return false;}
    const open=research.report?.();if(open?.open||open?.opening)research.close();else research.open();return true;
@@ -275,7 +284,7 @@
   }
   if(action==='demolish'){if(!commands)return false;commands.toggleDemolish?.();return true;}
   if(action==='intelligence')return w.__warzoneIntelligence?.toggle?.()||w.WarzoneIntelligence?.toggle?.()||toast('No intelligence reports are available yet.');
-  if(action==='combat')return w.PcMultiplayerControls?.toggleCombatLock?.()||false;
+   if(action==='combat'){const value=w.PcMultiplayerControls?.toggleCombatLock?.()||false;commands?.afterBuildExit?.(()=>true);return value;}
   return w.PcMultiplayerControls?.command(action);
  }
  session.command=command;
@@ -304,9 +313,28 @@
  };
  if(globalThis.ResizeObserver&&byId('warzone-command-strip'))new ResizeObserver(viewport).observe(byId('warzone-command-strip'));
  globalThis.addEventListener?.('resize',viewport);viewport();
+ let combatSelectionWatch=null;
+ function confirmedCombatSelection(){
+  const w=child(),value=w?.PcMultiplayerNative?.state,view=value?.view;
+  const now=typeof performance!=='undefined'&&typeof performance.now==='function'?performance.now():Date.now();
+  const valid=session.phase==='game'&&ownerAllowed()&&value?.phase==='game'&&value.worldReady===true&&value.worldSafe===true
+   &&value.canIssueOrders===true&&value.spectator!==true&&Number.isInteger(value.player)&&value.player===value.realPlayer
+   &&Number.isInteger(view?.frame)&&view.frame>=0&&Number.isFinite(value.gameTime)&&!document.hidden;
+  if(!valid){combatSelectionWatch=null;return false;}
+  const previous=combatSelectionWatch;
+  if(!previous||previous.window!==w||previous.generation!==generation||previous.player!==value.player||view.frame<previous.frame||value.gameTime<previous.gameTime)
+   combatSelectionWatch={window:w,generation,player:value.player,frame:view.frame,gameTime:value.gameTime,at:now,ready:false};
+  else{if(view.frame>previous.frame){previous.frame=view.frame;previous.at=now;previous.ready=true;}previous.gameTime=value.gameTime;}
+  if(!combatSelectionWatch.ready||now-combatSelectionWatch.at>=1500)return false;
+  const combat=value.combatLock?.combatIds,selected=value.combatLock?.selectedIds;
+  if(!Array.isArray(combat)||!Array.isArray(selected)||!combat.length||combat.length!==selected.length||![...combat,...selected].every(id=>Number.isInteger(id)&&id>0))return false;
+  const wanted=new Set(combat),actual=new Set(selected);
+  return wanted.size===combat.length&&actual.size===selected.length&&selected.every(id=>wanted.has(id));
+ }
  function syncCombatButton(){
   const button=byId('blocknight-combat');if(!button)return;
   const state=child()?.PcMultiplayerControls?.report?.(),enabled=session.phase==='game'&&ownerAllowed()&&Boolean(state?.combatLock);
+  const selected=confirmedCombatSelection();button.dataset.combatSelected=String(selected);button.dataset.combatEnabled=String(enabled);
   button.setAttribute('aria-pressed',String(enabled));button.classList.toggle('active',enabled);
   button.dataset.suspended=String(enabled&&Boolean(state?.combatLockSuspended));
  }

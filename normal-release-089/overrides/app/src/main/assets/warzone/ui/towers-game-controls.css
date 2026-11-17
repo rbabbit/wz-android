@@ -1,0 +1,534 @@
+/* v0.46: the selected Soft Rectangle control uses ordinary rounded UI surfaces.
+ * No raster face, clipping polygon or geometry-changing press. Existing hit
+ * targets, artwork, labels, actions and game commands remain unchanged.
+ * Loaded last in both host and game documents.
+ */
+body.wt-towers-polished {--wt-button-radius:5px;--wt-dock-clearance:64px}
+
+body.wt-towers-polished :is(
+  #warzone-command-strip #blocknight-combat-hud button,
+  #warzone-towers-next-wave,
+  #lab-ops>button,
+  #wt-field-centre button,
+  #wt-field-toggle,
+  #wt-placement-map,
+  #wt-command-pages button:not(.wt-factory-design-select),
+  #wt-build-sidebar nav button,
+  #wt-build-sidebar .wt-sidebar-exit,
+  #wt-build-sidebar .wt-all-sites,
+  #wt-build-sidebar .wt-sidebar-collapse,
+  #wt-build-status button,
+  #wt-native-back,
+  #blocknight-research-shell.wt-towers-research .bn-tech-lab,
+  #blocknight-research-shell.wt-towers-research .bn-tech-category,
+  #blocknight-research-shell.wt-towers-research .bn-tech-assign,
+  #blocknight-research-shell.wt-towers-research .bn-tech-queue-remove,
+  #wt-status-families button,
+  #wt-map-music-menu button,
+  #wt-demolish-bar button,
+  #warzone-towers-help.wt-towers-guide button,
+  #wt-intelligence-panel>header button,
+  #wt-wave-incoming>button,
+  #warzone-towers-preparation button
+) {
+  --wt-button-bg:var(--towers-control,#252525);
+  --wt-button-ink:var(--towers-text,#f4f4f4);
+  --wt-button-muted:var(--towers-muted,#bcbcbc);
+  --wt-button-edge:#404040;
+  --wt-button-icon-filter:invert(1);
+  appearance:none;-webkit-appearance:none;
+  border-radius:var(--wt-button-radius)!important;
+  background:var(--wt-button-bg)!important;background-image:none!important;
+  box-shadow:inset 0 0 0 1px var(--wt-button-edge),inset 0 1px 0 #ffffff14!important;
+  color:var(--wt-button-ink)!important;text-shadow:none!important;filter:none!important;
+  -webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;
+  -webkit-user-select:none;user-select:none;transition:none;
+}
+
+/* Surface and ink travel together, including nested labels and line icons. */
+
+body.wt-towers-polished :is(
+  #warzone-command-strip #blocknight-combat-hud button,
+  #warzone-towers-next-wave,
+  #lab-ops>button,
+  #wt-field-centre button,
+  #wt-field-toggle,
+  #wt-placement-map,
+  #wt-command-pages button:not(.wt-factory-design-select),
+  #wt-build-sidebar nav button,
+  #wt-build-sidebar .wt-sidebar-exit,
+  #wt-build-sidebar .wt-all-sites,
+  #wt-build-sidebar .wt-sidebar-collapse,
+  #wt-build-status button,
+  #wt-native-back,
+  #blocknight-research-shell.wt-towers-research .bn-tech-lab,
+  #blocknight-research-shell.wt-towers-research .bn-tech-category,
+  #blocknight-research-shell.wt-towers-research .bn-tech-assign,
+  #blocknight-research-shell.wt-towers-research .bn-tech-queue-remove,
+  #wt-status-families button,
+  #wt-map-music-menu button,
+  #wt-demolish-bar button,
+  #warzone-towers-help.wt-towers-guide button,
+  #wt-intelligence-panel>header button,
+  #wt-wave-incoming>button,
+  #warzone-towers-preparation button
+):is(.active,.wt-primary,.wt-status-selected,[aria-pressed=true],[aria-expanded=true]),
+body.wt-towers-polished #blocknight-research-shell.wt-towers-research .bn-tech-assign:not(:disabled),
+body.wt-towers-polished #warzone-command-strip #blocknight-combat-hud #blocknight-tech,
+body.wt-towers-polished #warzone-command-strip #blocknight-save:is([data-save-state=saving],[data-save-state=saved],[data-save-state=error]) {
+  --wt-button-bg:var(--towers-selected,#f4f4f4);
+  --wt-button-ink:var(--towers-ink,#101010);--wt-button-muted:#454545;
+  --wt-button-edge:#e4e4e4;--wt-button-icon-filter:none;
+}
+
+/* Playback alone never selects Music. The existing open state owns selection. */
+
+body.wt-towers-polished #warzone-command-strip #blocknight-combat-hud #blocknight-music[aria-expanded=false] {
+  --wt-button-bg:var(--towers-control,#252525);--wt-button-ink:var(--towers-text,#f4f4f4);
+  --wt-button-muted:var(--towers-muted,#bcbcbc);--wt-button-edge:#404040;--wt-button-icon-filter:invert(1);
+}
+
+body.wt-towers-polished #warzone-command-strip #blocknight-combat-hud :is(#blocknight-tech,#blocknight-save,#blocknight-music) {
+  background:var(--wt-button-bg)!important;color:var(--wt-button-ink)!important;
+}
+
+body.wt-towers-polished :is(
+  #warzone-command-strip #blocknight-combat-hud button,
+  #warzone-towers-next-wave,
+  #lab-ops>button,
+  #wt-field-centre button,
+  #wt-field-toggle,
+  #wt-placement-map,
+  #wt-command-pages button:not(.wt-factory-design-select),
+  #wt-build-sidebar nav button,
+  #wt-build-sidebar .wt-sidebar-exit,
+  #wt-build-sidebar .wt-all-sites,
+  #wt-build-sidebar .wt-sidebar-collapse,
+  #wt-build-status button,
+  #wt-native-back,
+  #blocknight-research-shell.wt-towers-research .bn-tech-lab,
+  #blocknight-research-shell.wt-towers-research .bn-tech-category,
+  #blocknight-research-shell.wt-towers-research .bn-tech-assign,
+  #blocknight-research-shell.wt-towers-research .bn-tech-queue-remove,
+  #wt-status-families button,
+  #wt-map-music-menu button,
+  #wt-demolish-bar button,
+  #warzone-towers-help.wt-towers-guide button,
+  #wt-intelligence-panel>header button,
+  #wt-wave-incoming>button,
+  #warzone-towers-preparation button
+) :is(b,strong,span,em) {
+  color:var(--wt-button-ink)!important;
+}
+
+body.wt-towers-polished :is(
+  #warzone-command-strip #blocknight-combat-hud button,
+  #warzone-towers-next-wave,
+  #lab-ops>button,
+  #wt-field-centre button,
+  #wt-field-toggle,
+  #wt-placement-map,
+  #wt-command-pages button:not(.wt-factory-design-select),
+  #wt-build-sidebar nav button,
+  #wt-build-sidebar .wt-sidebar-exit,
+  #wt-build-sidebar .wt-all-sites,
+  #wt-build-sidebar .wt-sidebar-collapse,
+  #wt-build-status button,
+  #wt-native-back,
+  #blocknight-research-shell.wt-towers-research .bn-tech-lab,
+  #blocknight-research-shell.wt-towers-research .bn-tech-category,
+  #blocknight-research-shell.wt-towers-research .bn-tech-assign,
+  #blocknight-research-shell.wt-towers-research .bn-tech-queue-remove,
+  #wt-status-families button,
+  #wt-map-music-menu button,
+  #wt-demolish-bar button,
+  #warzone-towers-help.wt-towers-guide button,
+  #wt-intelligence-panel>header button,
+  #wt-wave-incoming>button,
+  #warzone-towers-preparation button
+) small {
+  color:var(--wt-button-muted)!important;
+}
+
+body.wt-towers-polished :is(
+  #warzone-command-strip #blocknight-combat-hud button,
+  #warzone-towers-next-wave,
+  #lab-ops>button,
+  #wt-field-centre button,
+  #wt-field-toggle,
+  #wt-placement-map,
+  #wt-command-pages button:not(.wt-factory-design-select),
+  #wt-build-sidebar nav button,
+  #wt-build-sidebar .wt-sidebar-exit,
+  #wt-build-sidebar .wt-all-sites,
+  #wt-build-sidebar .wt-sidebar-collapse,
+  #wt-build-status button,
+  #wt-native-back,
+  #blocknight-research-shell.wt-towers-research .bn-tech-lab,
+  #blocknight-research-shell.wt-towers-research .bn-tech-category,
+  #blocknight-research-shell.wt-towers-research .bn-tech-assign,
+  #blocknight-research-shell.wt-towers-research .bn-tech-queue-remove,
+  #wt-status-families button,
+  #wt-map-music-menu button,
+  #wt-demolish-bar button,
+  #warzone-towers-help.wt-towers-guide button,
+  #wt-intelligence-panel>header button,
+  #wt-wave-incoming>button,
+  #warzone-towers-preparation button
+) img[src*="/ui/icons/"]:not([src$="/crystal.svg"]) {
+  filter:var(--wt-button-icon-filter)!important;
+}
+
+body.wt-towers-polished #warzone-command-strip #blocknight-combat-hud :is(#blocknight-tech,#blocknight-save,#blocknight-music) img[src*="/ui/icons/"] {
+  filter:var(--wt-button-icon-filter)!important;
+}
+
+body.wt-towers-polished #blocknight-rewards img {
+  filter:none!important;
+}
+
+/* Press feedback changes paint, never the actual pointer-up hit rectangle. */
+
+body.wt-towers-polished :is(
+  #warzone-command-strip #blocknight-combat-hud button,
+  #warzone-towers-next-wave,
+  #lab-ops>button,
+  #wt-field-centre button,
+  #wt-field-toggle,
+  #wt-placement-map,
+  #wt-command-pages button:not(.wt-factory-design-select),
+  #wt-build-sidebar nav button,
+  #wt-build-sidebar .wt-sidebar-exit,
+  #wt-build-sidebar .wt-all-sites,
+  #wt-build-sidebar .wt-sidebar-collapse,
+  #wt-build-status button,
+  #wt-native-back,
+  #blocknight-research-shell.wt-towers-research .bn-tech-lab,
+  #blocknight-research-shell.wt-towers-research .bn-tech-category,
+  #blocknight-research-shell.wt-towers-research .bn-tech-assign,
+  #blocknight-research-shell.wt-towers-research .bn-tech-queue-remove,
+  #wt-status-families button,
+  #wt-map-music-menu button,
+  #wt-demolish-bar button,
+  #warzone-towers-help.wt-towers-guide button,
+  #wt-intelligence-panel>header button,
+  #wt-wave-incoming>button,
+  #warzone-towers-preparation button
+):is(.wt-pressing,:active):not(:disabled):not([aria-disabled=true]) {
+  --wt-button-bg:var(--towers-pressed,#151515)!important;
+  --wt-button-ink:var(--towers-text,#f4f4f4)!important;--wt-button-muted:var(--towers-muted,#bcbcbc)!important;
+  --wt-button-edge:#303030!important;--wt-button-icon-filter:invert(1)!important;
+  transform:none!important;box-shadow:inset 0 1px 3px #00000066,inset 0 0 0 1px var(--wt-button-edge)!important;
+}
+
+body.wt-towers-polished :is(
+  #warzone-command-strip #blocknight-combat-hud button,
+  #warzone-towers-next-wave,
+  #lab-ops>button,
+  #wt-field-centre button,
+  #wt-field-toggle,
+  #wt-placement-map,
+  #wt-command-pages button:not(.wt-factory-design-select),
+  #wt-build-sidebar nav button,
+  #wt-build-sidebar .wt-sidebar-exit,
+  #wt-build-sidebar .wt-all-sites,
+  #wt-build-sidebar .wt-sidebar-collapse,
+  #wt-build-status button,
+  #wt-native-back,
+  #blocknight-research-shell.wt-towers-research .bn-tech-lab,
+  #blocknight-research-shell.wt-towers-research .bn-tech-category,
+  #blocknight-research-shell.wt-towers-research .bn-tech-assign,
+  #blocknight-research-shell.wt-towers-research .bn-tech-queue-remove,
+  #wt-status-families button,
+  #wt-map-music-menu button,
+  #wt-demolish-bar button,
+  #warzone-towers-help.wt-towers-guide button,
+  #wt-intelligence-panel>header button,
+  #wt-wave-incoming>button,
+  #warzone-towers-preparation button
+):is(:disabled,[aria-disabled=true]) {
+  --wt-button-bg:#1c1c1c!important;--wt-button-ink:var(--towers-disabled,#888888)!important;
+  --wt-button-muted:var(--towers-disabled,#888888)!important;--wt-button-edge:#303030!important;
+  --wt-button-icon-filter:invert(.6)!important;opacity:1!important;transform:none!important;cursor:default;
+}
+
+body.wt-towers-polished :is(
+  #warzone-command-strip #blocknight-combat-hud button,
+  #warzone-towers-next-wave,
+  #lab-ops>button,
+  #wt-field-centre button,
+  #wt-field-toggle,
+  #wt-placement-map,
+  #wt-command-pages button:not(.wt-factory-design-select),
+  #wt-build-sidebar nav button,
+  #wt-build-sidebar .wt-sidebar-exit,
+  #wt-build-sidebar .wt-all-sites,
+  #wt-build-sidebar .wt-sidebar-collapse,
+  #wt-build-status button,
+  #wt-native-back,
+  #blocknight-research-shell.wt-towers-research .bn-tech-lab,
+  #blocknight-research-shell.wt-towers-research .bn-tech-category,
+  #blocknight-research-shell.wt-towers-research .bn-tech-assign,
+  #blocknight-research-shell.wt-towers-research .bn-tech-queue-remove,
+  #wt-status-families button,
+  #wt-map-music-menu button,
+  #wt-demolish-bar button,
+  #warzone-towers-help.wt-towers-guide button,
+  #wt-intelligence-panel>header button,
+  #wt-wave-incoming>button,
+  #warzone-towers-preparation button
+):is([aria-busy=true],.wt-control-busy,.pending):not(:disabled) {
+  --wt-button-bg:#303030!important;--wt-button-ink:var(--towers-text,#f4f4f4)!important;
+  --wt-button-muted:var(--towers-muted,#bcbcbc)!important;--wt-button-edge:#646464!important;--wt-button-icon-filter:invert(1)!important;
+}
+
+body.wt-towers-polished :is(
+  #warzone-command-strip #blocknight-combat-hud button,
+  #warzone-towers-next-wave,
+  #lab-ops>button,
+  #wt-field-centre button,
+  #wt-field-toggle,
+  #wt-placement-map,
+  #wt-command-pages button:not(.wt-factory-design-select),
+  #wt-build-sidebar nav button,
+  #wt-build-sidebar .wt-sidebar-exit,
+  #wt-build-sidebar .wt-all-sites,
+  #wt-build-sidebar .wt-sidebar-collapse,
+  #wt-build-status button,
+  #wt-native-back,
+  #blocknight-research-shell.wt-towers-research .bn-tech-lab,
+  #blocknight-research-shell.wt-towers-research .bn-tech-category,
+  #blocknight-research-shell.wt-towers-research .bn-tech-assign,
+  #blocknight-research-shell.wt-towers-research .bn-tech-queue-remove,
+  #wt-status-families button,
+  #wt-map-music-menu button,
+  #wt-demolish-bar button,
+  #warzone-towers-help.wt-towers-guide button,
+  #wt-intelligence-panel>header button,
+  #wt-wave-incoming>button,
+  #warzone-towers-preparation button
+):focus-visible {
+  outline:2px solid var(--wt-button-ink)!important;outline-offset:-3px;
+}
+
+/* Inventory rows retain their flat current layout and original coloured artwork. */
+
+body.wt-towers-polished :is(#wt-sidebar-catalogue>button,#wt-intelligence-list>button,#blocknight-research-shell .bn-tech-card) {
+  border-radius:var(--wt-button-radius)!important;
+}
+
+body.wt-towers-polished #wt-command-pages .wt-factory-design-select {
+  background:transparent!important;box-shadow:none!important;
+}
+
+body.wt-towers-polished #wt-sidebar-catalogue>button.active :is(strong,b,span,small),
+body.wt-towers-polished #wt-intelligence-list>button.active :is(b,small) {
+  color:var(--towers-ink,#101010)!important;
+}
+
+body.wt-towers-polished #blocknight-research-shell.wt-towers-research .bn-tech-card.selected:after {
+  background:#353535;color:#f4f4f4;
+}
+
+body.wt-towers-polished #blocknight-research-shell.wt-towers-research .bn-tech-lab.active i {
+  background:var(--wt-button-ink);
+}
+
+/* Let button faces sit on the battlefield without an enclosing header/footer slab. */
+
+body.wt-towers-polished #warzone-command-strip,
+body.wt-towers-polished #warzone-command-strip #blocknight-combat-hud,
+body.wt-towers-polished #warzone-command-strip .bn-command-group,
+body.wt-towers-polished #lab-ops,
+body.wt-towers-polished #wt-field-centre {
+  background:transparent!important;border-color:transparent!important;box-shadow:none!important;
+}
+
+body.wt-towers-polished #warzone-towers-wave-hud {
+  background:var(--towers-panel,#111111)!important;border-radius:var(--wt-button-radius);
+}
+
+body.wt-towers-polished #warzone-towers-wave-hud .wt-wave-detail {
+  color:var(--towers-muted,#bcbcbc);
+}
+
+body.wt-towers-polished #wt-field-toggle-count {
+  background:transparent;color:inherit;
+}
+
+/* Keep the delivered footer widths, scrolling, collapse and Build clearance. */
+body.wt-towers-polished #warzone-command-strip .bn-command-group {gap:3px}
+body.wt-towers-polished #warzone-command-strip #blocknight-combat-hud button {
+  margin-top:1px;margin-bottom:1px;
+}
+body.wt-towers-polished #lab-ops[data-collapsed] {
+  width:282px;
+  max-width:calc(100vw - 64px);
+  padding:3px;
+  gap:3px;
+  overflow-x:auto;
+  overflow-y:hidden;
+  scrollbar-width:none;
+  overscroll-behavior-x:contain;
+  touch-action:pan-x;
+}
+body.wt-towers-polished #lab-ops::-webkit-scrollbar {display:none}
+body.wt-towers-polished #lab-ops[data-collapsed] :is([data-lab-panel],[data-footer-build]) {
+  flex:1 0 auto;
+  min-width:max-content;
+  min-height:42px;
+  padding:5px 10px;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  justify-content:center;
+  gap:3px;
+  text-align:left;
+  outline:none;
+}
+body.wt-towers-polished #lab-ops :is([data-lab-panel],[data-footer-build]) b {
+  font-weight:500;
+  white-space:nowrap;
+  color:var(--towers-text,#f4f4f4);
+}
+body.wt-towers-polished #lab-ops :is([data-lab-panel],[data-footer-build]) small {
+  white-space:nowrap;
+  color:var(--towers-muted,#bcbcbc);
+}
+body.wt-towers-polished #lab-ops-toggle {flex:0 0 22px}
+body.wt-towers-polished #lab-ops[data-collapsed=true] {width:auto;overflow:visible}
+body.wt-towers-polished #lab-ops[data-collapsed=true] [data-footer-build] {display:none!important}
+body.wt-towers-polished #lab-ops[data-collapsed=true] #lab-ops-toggle {flex-basis:auto}
+/* The legacy shell hid the whole activity dock in Build. Its Build control now
+ * owns the close action, so an explicitly visible dock must stay reachable.
+ */
+body.wt-towers-polished[data-build-sidebar=true] #lab-ops:not([hidden]) {display:flex!important}
+body.wt-towers-polished[data-build-sidebar=true] #wt-build-sidebar {
+  max-height:calc(100dvh - var(--wt-command-top,56px) - 10px - var(--wt-dock-clearance));
+}
+
+
+body.wt-towers-polished :is(
+  #warzone-command-strip #blocknight-combat-hud button,
+  #warzone-towers-next-wave,
+  #lab-ops>button,
+  #wt-field-centre button,
+  #wt-field-toggle,
+  #wt-placement-map,
+  #wt-command-pages button:not(.wt-factory-design-select),
+  #wt-build-sidebar nav button,
+  #wt-build-sidebar .wt-sidebar-exit,
+  #wt-build-sidebar .wt-all-sites,
+  #wt-build-sidebar .wt-sidebar-collapse,
+  #wt-build-status button,
+  #wt-native-back,
+  #blocknight-research-shell.wt-towers-research .bn-tech-lab,
+  #blocknight-research-shell.wt-towers-research .bn-tech-category,
+  #blocknight-research-shell.wt-towers-research .bn-tech-assign,
+  #blocknight-research-shell.wt-towers-research .bn-tech-queue-remove,
+  #wt-status-families button,
+  #wt-map-music-menu button,
+  #wt-demolish-bar button,
+  #warzone-towers-help.wt-towers-guide button,
+  #wt-intelligence-panel>header button,
+  #wt-wave-incoming>button,
+  #warzone-towers-preparation button
+) :is(b,strong,span,em) {
+  color:var(--wt-button-ink)!important;
+}
+
+body.wt-towers-polished :is(
+  #warzone-command-strip #blocknight-combat-hud button,
+  #warzone-towers-next-wave,
+  #lab-ops>button,
+  #wt-field-centre button,
+  #wt-field-toggle,
+  #wt-placement-map,
+  #wt-command-pages button:not(.wt-factory-design-select),
+  #wt-build-sidebar nav button,
+  #wt-build-sidebar .wt-sidebar-exit,
+  #wt-build-sidebar .wt-all-sites,
+  #wt-build-sidebar .wt-sidebar-collapse,
+  #wt-build-status button,
+  #wt-native-back,
+  #blocknight-research-shell.wt-towers-research .bn-tech-lab,
+  #blocknight-research-shell.wt-towers-research .bn-tech-category,
+  #blocknight-research-shell.wt-towers-research .bn-tech-assign,
+  #blocknight-research-shell.wt-towers-research .bn-tech-queue-remove,
+  #wt-status-families button,
+  #wt-map-music-menu button,
+  #wt-demolish-bar button,
+  #warzone-towers-help.wt-towers-guide button,
+  #wt-intelligence-panel>header button,
+  #wt-wave-incoming>button,
+  #warzone-towers-preparation button
+) small {
+  color:var(--wt-button-muted)!important;
+}
+
+@media(prefers-reduced-motion:reduce) {
+body.wt-towers-polished :is(
+  #warzone-command-strip #blocknight-combat-hud button,
+  #warzone-towers-next-wave,
+  #lab-ops>button,
+  #wt-field-centre button,
+  #wt-field-toggle,
+  #wt-placement-map,
+  #wt-command-pages button:not(.wt-factory-design-select),
+  #wt-build-sidebar nav button,
+  #wt-build-sidebar .wt-sidebar-exit,
+  #wt-build-sidebar .wt-all-sites,
+  #wt-build-sidebar .wt-sidebar-collapse,
+  #wt-build-status button,
+  #wt-native-back,
+  #blocknight-research-shell.wt-towers-research .bn-tech-lab,
+  #blocknight-research-shell.wt-towers-research .bn-tech-category,
+  #blocknight-research-shell.wt-towers-research .bn-tech-assign,
+  #blocknight-research-shell.wt-towers-research .bn-tech-queue-remove,
+  #wt-status-families button,
+  #wt-map-music-menu button,
+  #wt-demolish-bar button,
+  #warzone-towers-help.wt-towers-guide button,
+  #wt-intelligence-panel>header button,
+  #wt-wave-incoming>button,
+  #warzone-towers-preparation button
+) {transition:none!important;animation:none!important;transform:none!important}
+}
+
+/* The selected build row already supplies white; its cost label needs no
+ * second black backing underneath dark selected ink. */
+body.wt-towers-polished #wt-sidebar-catalogue>button.active>small {
+  background:transparent;color:var(--towers-ink,#101010)!important;
+}
+
+/* Flat inventory rows use the same immediate press paint without gaining
+ * frames or changing their geometry. Existing feedback clears on release,
+ * cancellation, movement, disabled state or loss of visibility. */
+body.wt-towers-polished :is(
+  #wt-sidebar-catalogue>button,
+  #blocknight-research-shell.wt-towers-research .bn-tech-card,
+  #wt-intelligence-list>button
+):is(.wt-pressing,:active):not(:disabled):not([aria-disabled=true]) {
+  background:var(--towers-pressed,#151515)!important;
+  color:var(--towers-text,#f4f4f4)!important;
+  transform:none!important;
+}
+body.wt-towers-polished :is(
+  #wt-sidebar-catalogue>button,
+  #blocknight-research-shell.wt-towers-research .bn-tech-card,
+  #wt-intelligence-list>button
+):is(.wt-pressing,:active):not(:disabled):not([aria-disabled=true]) :is(strong,b,span,small,em) {
+  color:var(--towers-text,#f4f4f4)!important;
+}
+
+/* ALL COMBAT keeps its dark surface. Only a fresh native selection set turns
+ * its text green; aria-pressed continues to describe persistent command intent. */
+body.wt-towers-polished #warzone-command-strip #blocknight-combat-hud :is(#wt-all-combat,#wt-campaign-all-combat,#blocknight-combat):not(:disabled):not([aria-disabled=true]) {
+  --wt-button-bg:var(--towers-control,#252525);
+  --wt-button-ink:var(--towers-text,#f4f4f4);
+  --wt-button-muted:var(--towers-muted,#bcbcbc);
+  --wt-button-edge:#404040;--wt-button-icon-filter:invert(1);
+}
+body.wt-towers-polished #warzone-command-strip #blocknight-combat-hud :is(#wt-all-combat,#wt-campaign-all-combat,#blocknight-combat)[data-combat-selected=true]:not(:disabled):not([aria-disabled=true]) {
+  --wt-button-ink:#63e682!important;
+}

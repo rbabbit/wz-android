@@ -1,0 +1,309 @@
+{
+  "passed": true,
+  "inAppUpdateJourneyVerified": true,
+  "candidateAPK_SHA256": "dc1a273437f8393e66ebfbdb8886b06a4ddab82dec419553165bb07611efdf38",
+  "versionCode": 89,
+  "versionName": "0.89",
+  "certificateSHA256": "4499efe00477c7c724c06a1dd96f935864548665c13ab5e2bd0a9c0f83f7cb15",
+  "downloadedAPK_SHA256": "dc1a273437f8393e66ebfbdb8886b06a4ddab82dec419553165bb07611efdf38",
+  "downloadedAPKBytes": 612927776,
+  "installedAPK_SHA256": "dc1a273437f8393e66ebfbdb8886b06a4ddab82dec419553165bb07611efdf38",
+  "installedAPKBytes": 612927776,
+  "recordedUTC": "2026-11-16T15:44:23.465747+00:00",
+  "environment": {
+    "serial": "emulator-5562",
+    "Android": "16/API36.1",
+    "WebView": "159.0.8154.4",
+    "ownedEnvironmentReused": true,
+    "user5558Untouched": true,
+    "oldPilot5560OffAndPreserved": true,
+    "localTestedB2FullUserdataPreserved": "C:\\timerApp\\normal-update-089-20261116\\tested-b2-data\\Warzone_Normal_089_5562.avd"
+  },
+  "origin": {
+    "versionCode": 86,
+    "versionName": "0.86",
+    "APK_SHA256": "475a4cc87aca6be4348082f7e48b3e22e9eddcf6347475438b4ff06e329ae05b",
+    "certificateSHA256": "4499efe00477c7c724c06a1dd96f935864548665c13ab5e2bd0a9c0f83f7cb15",
+    "sameConsistentReadySnapshotRestored": true,
+    "fullAVDSnapshot25FilesHashVerified": true,
+    "all34DataFilesHashVerifiedBeforeRestoredMain": true,
+    "downgradeOrUninstallUsed": false
+  },
+  "stages": [
+    {
+      "name": "ManualCheckForUpdates",
+      "observed": "Normal086 Home\u2192actual Version0.89 available dialog from live published feed89."
+    },
+    {
+      "name": "FreshNetworkDownload",
+      "observed": "No updatecache existed initially. Actual in-app transfer0\u2192612927776bytes; start/midprogress screenshots and byte observations retained."
+    },
+    {
+      "name": "FullCacheAndAppValidation",
+      "observed": "AppUpdater downloaded-and-verified dialog. Independent full cached file SHA256/stat under normal086 run-as before Android Install matched exactB2. This is measured cachedfile identity, not a copied expected feedhash."
+    },
+    {
+      "name": "ScopedUnknownSourcePermission",
+      "observed": "Normal Android Install unknown apps Settings for WarzoneTowers0.86; Allowfromthissource checked; returned toAppUpdater Install."
+    },
+    {
+      "name": "SystemInstallerUpdate",
+      "observed": "Actual PackageInstaller received content://com.rbabbit.warzonetowers.lab.updates/warzone2100-andriod.apk, asked Update this app?, and user-authorized Update action reached App updated. Target package was not installed through ADB for this journey."
+    },
+    {
+      "name": "InstalledIdentityAndBeforeMainPreservation",
+      "observed": "Installed base.apk full SHA/stat matched exactB2. At Appupdated, before helperstart, target process was absent and PackageInstaller top; ActivityManager targetevents retained. External same-signer helper launch=none initialized Application only, measured34file hashes matching immediate pre-SystemInstall. Done/Open had not yet beenpressed. ThenDone returnedAndroidlauncher; explicitMain launch followed."
+    },
+    {
+      "name": "PostUpdateMainAndCurrentFeed",
+      "observed": "Actual Home says v0.89\u2013Checkforupdates; currentfeed check returns latestavailable Installed0.89."
+    },
+    {
+      "name": "PreservedCampaignAndNativeInput",
+      "observed": "Campaign list still7saves and Videosready. Loaded original realnative checkpoint; original Design1/2 blueprints present;5 original combat IDs confirmed. Actual ALLCOMBAT tap selects5 and paints green with brackets/no selectedhealthbars; physical tanktap selects160287 and paintswhite; heldMouse=null/heldKeys=[]/gestureActive=false."
+    }
+  ],
+  "preservation": {
+    "all34MatchImmediatelyBeforeInstallAndBeforeNewMain": true,
+    "changed": [],
+    "actualTargetProcessAbsentBeforeHelper": true,
+    "installerStillTopBeforeFingerprint": true,
+    "ApplicationInitializedByExternalInstrumentation": true,
+    "MainNotLaunchedByHelperBeforeFingerprint": true,
+    "fingerprintsBeforeDoneOrOpen": true,
+    "noMainAutoResumeObservedInActivityLifecycle": "updater-post-installer-before-helper-lifecycle.json",
+    "beforeFingerprint": "updater-before-system-install-data.json",
+    "afterFingerprint": "updater-after-install-before-main-data.json"
+  },
+  "postUpdate": {
+    "homeVersion": "0.89",
+    "latestResponse": "You have the latest available version. Installed:0.89",
+    "preservedCampaignSaveCount": 7,
+    "preservedBlueprintNames": [
+      "Design 1",
+      "Design 2"
+    ],
+    "nativeCombatIds": [
+      160025,
+      160087,
+      160089,
+      160091,
+      160287
+    ],
+    "actualAllSelectionGreenRGB": [
+      99,
+      230,
+      130
+    ],
+    "partialSelectedId": 160287,
+    "partialWhiteRGB": [
+      244,
+      244,
+      244
+    ],
+    "backgroundRGB": [
+      37,
+      37,
+      37
+    ],
+    "inputReleased": true,
+    "physicalViewport": [
+      2400,
+      1080
+    ]
+  },
+  "certificateVerification": "Cached and installed full SHA match exactB2 verified by host apksigner4499; runtime AppUpdater also completed its strict installed/candidate signer+package/version gate before Install. No new signer or Play migration used.",
+  "limits": [
+    "Owned emulator has inherited black terrain; actual native models, brackets, HUD, colors and selectedbar removal were visually inspected.",
+    "Before-Main file hashing initializes target Application through external same-signer instrumentation; no target Activity started until explicit Main launch after fingerprints and Done.",
+    "This is the normal self-update APK path. GooglePlay bundle/release was not modified or tested by this updater journey.",
+    "Cleanup of only the owned external helper and5562 follows and is recorded separately; focused-runtime.json and referenced evidence remain unchanged."
+  ],
+  "evidenceFiles": [
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\updater-baseline-restored.json",
+      "sha256": "0c164de72d6ab223f15e3e5ffc8aa864521e7a7b05f97d2efcaa825eb65fd17f",
+      "bytes": 4743
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\updater-restored086-before-main.json",
+      "sha256": "777ab075a52e90cdefe207b587393c666e21742ab100ba6e59cb2a8a8ff73313",
+      "bytes": 6240
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\updater-cache-before-check.json",
+      "sha256": "6812bf8ca9e0fec22cc3ffccbfe09cd57c0ced749837b30ab25c26338486c9da",
+      "bytes": 196
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\updater-live-feed.json",
+      "sha256": "84152ccddceee25c77af863e7f27952537ce08f474f4af9e8db070acb97c88c7",
+      "bytes": 1256
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\updater-download-progress.json",
+      "sha256": "aa7489dcf93ba690d0cd32f16a4bfba3209bdcee1cb259d2348ab613f86720a7",
+      "bytes": 16888
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\updater-cached-apk-measured.json",
+      "sha256": "f9bc831e5cb179dc2abbfa0fccb9bf918f3f8ebb8e2da6ed80e6452ab3187ce0",
+      "bytes": 412
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\updater-before-system-install-data.json",
+      "sha256": "587d9be4f5cf62d7ad82f6269524b60100870551e7f8d8e8e09144f2f59880f2",
+      "bytes": 6110
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\updater-installer-intent-observed.json",
+      "sha256": "e03efc39e1ff7bc3220f2404a316213c03ac646b45216cceb23c93c0e2ce6e9d",
+      "bytes": 2634
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\updater-post-installer-before-helper-lifecycle.json",
+      "sha256": "897f2550ad567c9ced063168030af6cf85d34d7748b95e89ca9bf799bd5e666f",
+      "bytes": 3513
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\updater-installed-apk-measured.json",
+      "sha256": "b9f983f8d8689eeccf992f4f04af605a85aa362727b0e06c1a56242fc7e3602f",
+      "bytes": 526
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\updater-after-install-before-main-data.json",
+      "sha256": "4870ca404485f9a72787e11574dea41d8a898d84516a16c16fd17d336aac9417",
+      "bytes": 8201
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\updater-external-helper-preinstalled.json",
+      "sha256": "58155e4d74fa485f7aa7e1bca209d6d37853fde9ec113198653b68811ffc4fd5",
+      "bytes": 235
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\107b-updater-normal086-home-visible.png",
+      "sha256": "68533a24c4ee7fce09ef53c8f44b9ec60f3d68f1b28aae509efb9d4949e1ed37",
+      "bytes": 1120969
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\108-updater-live089-available.png",
+      "sha256": "1bd62f5684f901efd4a58762486e7ae9d2d54d09e0e673c044c55c9875e52d6d",
+      "bytes": 340361
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\109-updater-download-start.png",
+      "sha256": "ad9ae6c91b167505702e74cb22f17ca91f50038b8ad8e1c78d7b00d712ce13ce",
+      "bytes": 333088
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\109-updater-download-middle.png",
+      "sha256": "c8efe3b8862f2d87bc31bc846ef0bc01971bfd7c31993bdf7da9b4881c6066d2",
+      "bytes": 333395
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\110-updater-downloaded-verified.png",
+      "sha256": "913714973d40b28f8d5ba23c1aaac7e79ebdde41ed065b76ec981e770692f7a4",
+      "bytes": 358145
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\110-updater-downloaded-verified.json",
+      "sha256": "37cb354bdea7fbfb1b5f4f05989d46908cc95878f2ecc5c0690e57d1fe52a818",
+      "bytes": 2674
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\111-updater-install-source-permission.png",
+      "sha256": "280c64fa80bcb998c48af369e252a7bcf4a92d2b47b311c4c36afc75ce855b6e",
+      "bytes": 362649
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\112-updater-android-unknown-source-settings.png",
+      "sha256": "8948d2f09833d3b547e897503e151c3eb22909d930b0438847361ac2d1adf334",
+      "bytes": 171435
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\113-updater-android-source-allowed.png",
+      "sha256": "df15fa86b8962bcff5e37b9a6046551d9b6d7e93c93daf69b2e167bd0f190aa3",
+      "bytes": 169938
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\113-updater-android-source-allowed.json",
+      "sha256": "2680ee941be70c46345b2cf938227493f205479e0e8f4ba8d29ba592239a1f3b",
+      "bytes": 4963
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\114-updater-return-from-settings.png",
+      "sha256": "7dcaeefe905e0e1f7a95055406baf8ad7faae942c5fa10ed6a6c751c0bfc933e",
+      "bytes": 408737
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\116-updater-android-update-confirmation.png",
+      "sha256": "7c658a550e0b13a5f50fdfcdd09b65fbb13e5923bb58578a6363d3cd014d9b42",
+      "bytes": 313776
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\118-updater-android-app-updated.png",
+      "sha256": "9125cd803f9c67abc1f003a8c07d031f28ccf786c6d39e849fc567cf493bd0f3",
+      "bytes": 578250
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\118-updater-android-app-updated.json",
+      "sha256": "95435e80a4f7fa44bcb8f5d1d51940ff8681d106c1e89a282aea9c008fb86e5d",
+      "bytes": 2636
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\119-updater-done-before-explicit-main.png",
+      "sha256": "5c15c4f75a1d7b300f35812de2e04982f789c928aba5609752542b8529803ffd",
+      "bytes": 1387795
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\120-updated089-home.png",
+      "sha256": "db13cd0a8ca415d1a1b6932891ee410069d0b9e41934383cc68411d32dd17608",
+      "bytes": 1120981
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\121-updated089-latest-response.png",
+      "sha256": "9cc6466cce6b6da2e4b0559793927c3d0df09de0c7448f52c1ef702c56525175",
+      "bytes": 409548
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\121-updated089-latest-response.json",
+      "sha256": "6e06b4ecb46a717a85a622fb036c763023b66751e7b4739b89fefa6100ef180d",
+      "bytes": 2597
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\122-updated089-preserved-campaign-saves.png",
+      "sha256": "f3ac06b0df0df3d78b27b72bc32ea4db4a0904d4f87531d2fc905ca2008533dc",
+      "bytes": 659501
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\122-updated089-preserved-campaign-saves.json",
+      "sha256": "d7324df342527634c36683a2bd8617af163ddb79a76319576203dc8005c6d68c",
+      "bytes": 24139
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\123-updated089-campaign-ready-metrics.json",
+      "sha256": "570053e084c811522a13617ebb6ca86524e77335fcc7ca91ba5b133933074ddb",
+      "bytes": 37237
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\124-updated089-campaign-allcombat-metrics.json",
+      "sha256": "250073419094bb5f4b7fe0e5e922fcffacca3b3ee6e500512d3a59c6416c0545",
+      "bytes": 36378
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\124-updated089-campaign-allcombat.png",
+      "sha256": "1c9f14e8fbeca01dca03f96830253c843a4fce5333faa839819b058dcc473757",
+      "bytes": 568788
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\125-updated089-campaign-physical-input-metrics.json",
+      "sha256": "08bc35379264425fc87636ea42cc2d49fcc53684328f5a9d70839655e3adc48c",
+      "bytes": 35973
+    },
+    {
+      "path": "C:\\timerApp\\normal-update-089-20261116\\125-updated089-campaign-physical-input.png",
+      "sha256": "2bf1441c20f2fa2b6ca78592658c643b1bfb750e8a2581f7de40c46ec196d3da",
+      "bytes": 562001
+    }
+  ]
+}

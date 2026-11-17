@@ -1,0 +1,312 @@
+{
+  "passed": true,
+  "checks": [
+    "Offline requested latch is independent of empty/manual/partial/new native selection",
+    "Offline OFF survives suspension mailbox rewrite before native consumes it, then retires only on matching ACK",
+    "Offline same-context cleanup disables without deselect and keeps native activation token",
+    "Ordinary release, constructor hold/build move and actual menu-close preserve request and resume effectively",
+    "Offline context/module/session change resets without an explicit deselect operation",
+    "Offline ON-order ACK wait cannot issue a late order after newer OFF or changed context",
+    "Offline order waits for actual native selected IDs and preserves native Patrol after ACK",
+    "Offline native constructor request waits for exact suspension ACK and validates its scoped result",
+    "Offline native constructor empty ACK succeeds; mismatched result and stale user/context/manual work fail closed",
+    "Shared native picker commits exact constructor IDs, accepts empty and fences failed same-view retries",
+    "MP requested latch remains ON through actual selection changes and ordinary release/menu suspension",
+    "MP OFF transport bit survives a pre-native suspension rewrite and cleanup retains activation",
+    "MP constructor hold persists until explicit combat return, preserving requested ON",
+    "MP native constructor facade waits for suspension ACK, returns exact IDs and cancels stale work",
+    "Actual MP adapter refuses stale queued selectors and cancels only its own pending selection nonce",
+    "Latest ON supersedes an unconsumed OFF in both transports without reviving its deselect bit",
+    "MP rapid ON-order cannot leak a click after OFF/context/ownership loss and releases held input",
+    "MP native selection ACK unblocks a legitimate order without Ctrl+A selection spam",
+    "Campaign delegates all intent and has no competing selection command/file writer",
+    "Shared constructor workflow preserves override during TRUCKS preparation and resumes on build exit",
+    "All 35 actual camera functions match retained normal89; no088 focus/preset pilot code"
+  ],
+  "checksPassed": 21,
+  "sources": [
+    {
+      "path": "warzone-touch-controls.js",
+      "sha256": "e13496847769b868cc40f00c3dcfa646574dd25ccbd7f0e2f60f74b9e681ff3b"
+    },
+    {
+      "path": "warzone-campaign-hud.js",
+      "sha256": "3e008580535bf53dd850e451d561c606d9e9471f0f49221b1d4d669ed3d40536"
+    },
+    {
+      "path": "warzone-command-pages.js",
+      "sha256": "3d8f6c1104106e87426a45546b4b0cc0e5229147895b1712de021c8c77b289f1"
+    },
+    {
+      "path": "multiplayer/mobile-controls.js",
+      "sha256": "7bc849baf4eab088b9400b0ef5a83ff7d5782cc4ec55c646b8f2546af45866e2"
+    },
+    {
+      "path": "multiplayer/session.js",
+      "sha256": "0070c120504de76c8bdc6b58a2025870966df21a7f9c9c4f1a6d8d5416b8d469"
+    },
+    {
+      "path": "multiplayer/native-ui-adapter.js",
+      "sha256": "b785a7c199bfc90f232f28557226cb77d50dd1a3577219154b36fcdb593f5378"
+    },
+    {
+      "path": "warzone/ui/towers-game-controls.css",
+      "sha256": "f56bc55685a9c57d5517319a0118541d1a2d9b1ce2b79c7b0f407579e3d94fe2"
+    }
+  ],
+  "cameraFunctions": [
+    {
+      "path": "warzone-touch-controls.js",
+      "function": "advancePan",
+      "sha256": "50b2076e353faeff8e649dbcda9878c37c5fb652e3257bc2518eaf8a8b02ab31",
+      "currentSHA256": "50b2076e353faeff8e649dbcda9878c37c5fb652e3257bc2518eaf8a8b02ab31",
+      "unchanged": true
+    },
+    {
+      "path": "warzone-touch-controls.js",
+      "function": "panPoint",
+      "sha256": "b9ae7b8cd298df2deaa7196dc409107eca7d6b07e668060fcb06f3f7b02b261a",
+      "currentSHA256": "b9ae7b8cd298df2deaa7196dc409107eca7d6b07e668060fcb06f3f7b02b261a",
+      "unchanged": true
+    },
+    {
+      "path": "warzone-touch-controls.js",
+      "function": "clearPanMove",
+      "sha256": "2f9df12adb6429bab3a8d361c4b100589036e02f9c4cb4d4f796e3b3b864e89f",
+      "currentSHA256": "2f9df12adb6429bab3a8d361c4b100589036e02f9c4cb4d4f796e3b3b864e89f",
+      "unchanged": true
+    },
+    {
+      "path": "warzone-touch-controls.js",
+      "function": "flushPanMove",
+      "sha256": "0d7c4910e9aa9aef19c0d020139e7392a44daa57beffa94a938379b897dbddb4",
+      "currentSHA256": "0d7c4910e9aa9aef19c0d020139e7392a44daa57beffa94a938379b897dbddb4",
+      "unchanged": true
+    },
+    {
+      "path": "warzone-touch-controls.js",
+      "function": "schedulePanMove",
+      "sha256": "47483ee4a0acf1c818071d58d99b8143320e3d2878f8742af11d81e63aaf8dfb",
+      "currentSHA256": "47483ee4a0acf1c818071d58d99b8143320e3d2878f8742af11d81e63aaf8dfb",
+      "unchanged": true
+    },
+    {
+      "path": "warzone-touch-controls.js",
+      "function": "clearPanReleaseCallbacks",
+      "sha256": "d627451243260d1147d6667c5b8df72327abe2230e71c06cbfe2ec766e9ca63c",
+      "currentSHA256": "d627451243260d1147d6667c5b8df72327abe2230e71c06cbfe2ec766e9ca63c",
+      "unchanged": true
+    },
+    {
+      "path": "warzone-touch-controls.js",
+      "function": "panPhase",
+      "sha256": "b8b739dd3c9974c876ec8a21b8e0fe6caa099e387329dce6301caa33fa391743",
+      "currentSHA256": "b8b739dd3c9974c876ec8a21b8e0fe6caa099e387329dce6301caa33fa391743",
+      "unchanged": true
+    },
+    {
+      "path": "warzone-touch-controls.js",
+      "function": "releasePanEndpoint",
+      "sha256": "125d9a1b9bc7b5651b527e36249e6699467f991ad3e2802d0528ef2f7188e727",
+      "currentSHA256": "125d9a1b9bc7b5651b527e36249e6699467f991ad3e2802d0528ef2f7188e727",
+      "unchanged": true
+    },
+    {
+      "path": "warzone-touch-controls.js",
+      "function": "schedulePanRelease",
+      "sha256": "db06e6e5edc971757691c801c759b15729f005213927590955d6f293d64d9b73",
+      "currentSHA256": "db06e6e5edc971757691c801c759b15729f005213927590955d6f293d64d9b73",
+      "unchanged": true
+    },
+    {
+      "path": "warzone-touch-controls.js",
+      "function": "advancePanRelease",
+      "sha256": "053e699c545059b1d75e486cab9c06ade580aaf4c8f13965c82dd2e9d3e7e2cb",
+      "currentSHA256": "053e699c545059b1d75e486cab9c06ade580aaf4c8f13965c82dd2e9d3e7e2cb",
+      "unchanged": true
+    },
+    {
+      "path": "warzone-touch-controls.js",
+      "function": "finishFramePan",
+      "sha256": "8677a6ad5fea5c90d65e89eeee02b3c578b20ab6e56f08e2cd4a097676a1ffd8",
+      "currentSHA256": "8677a6ad5fea5c90d65e89eeee02b3c578b20ab6e56f08e2cd4a097676a1ffd8",
+      "unchanged": true
+    },
+    {
+      "path": "warzone-touch-controls.js",
+      "function": "cancelFramePan",
+      "sha256": "783ceb7651b975e2ca451b2380b4fed42761670b8f17ad65d4c75583190110a2",
+      "currentSHA256": "783ceb7651b975e2ca451b2380b4fed42761670b8f17ad65d4c75583190110a2",
+      "unchanged": true
+    },
+    {
+      "path": "warzone-touch-controls.js",
+      "function": "beginPan",
+      "sha256": "2d1bd9c1d7294204263cbe24e3331e6f151d9da764348205a079e7199fcfe23d",
+      "currentSHA256": "2d1bd9c1d7294204263cbe24e3331e6f151d9da764348205a079e7199fcfe23d",
+      "unchanged": true
+    },
+    {
+      "path": "warzone-touch-controls.js",
+      "function": "handleMultiMove",
+      "sha256": "5cff5ec1e52016ff251bc9302d7ac3b7097bbb7aa7ee45fc84acd362350624d4",
+      "currentSHA256": "5cff5ec1e52016ff251bc9302d7ac3b7097bbb7aa7ee45fc84acd362350624d4",
+      "unchanged": true
+    },
+    {
+      "path": "warzone-touch-controls.js",
+      "function": "endMultiIfNeeded",
+      "sha256": "b8b158e5989202d8f852a79e18b97788a58540216bfb45e3b1e4119a533e3187",
+      "currentSHA256": "b8b158e5989202d8f852a79e18b97788a58540216bfb45e3b1e4119a533e3187",
+      "unchanged": true
+    },
+    {
+      "path": "warzone-touch-controls.js",
+      "function": "rotationAllowed",
+      "sha256": "d6f509b35d89aa79be894370cd7e83605df39f2ab87471f2fb81a755e17620a2",
+      "currentSHA256": "d6f509b35d89aa79be894370cd7e83605df39f2ab87471f2fb81a755e17620a2",
+      "unchanged": true
+    },
+    {
+      "path": "warzone-touch-controls.js",
+      "function": "rotationIntentReady",
+      "sha256": "ab975ae00a840d26dd3aecf3e22cf3758ab3f6b5a1213c6a6781aa264d8cff78",
+      "currentSHA256": "ab975ae00a840d26dd3aecf3e22cf3758ab3f6b5a1213c6a6781aa264d8cff78",
+      "unchanged": true
+    },
+    {
+      "path": "warzone-touch-controls.js",
+      "function": "zoomIntentReady",
+      "sha256": "56d33ba9cd4223c991091e0482165a24a2868d167d5616408b33d188ae14836b",
+      "currentSHA256": "56d33ba9cd4223c991091e0482165a24a2868d167d5616408b33d188ae14836b",
+      "unchanged": true
+    },
+    {
+      "path": "warzone-touch-controls.js",
+      "function": "radarPoint",
+      "sha256": "94808c7dda77ea97f197824008901bd1fb487d39bb819424aabef5d758ad4366",
+      "currentSHA256": "94808c7dda77ea97f197824008901bd1fb487d39bb819424aabef5d758ad4366",
+      "unchanged": true
+    },
+    {
+      "path": "warzone-touch-controls.js",
+      "function": "nativeUiRects",
+      "sha256": "3123b5e27158e4fa89ccbf282f37d1d805eca0d5b6a0828f09a05eaff184971e",
+      "currentSHA256": "3123b5e27158e4fa89ccbf282f37d1d805eca0d5b6a0828f09a05eaff184971e",
+      "unchanged": true
+    },
+    {
+      "path": "warzone-touch-controls.js",
+      "function": "zoom",
+      "sha256": "2ffd5f897df21bb4ab836cf7ba4d9512998db92a2603cd0f5845c7cceef816ce",
+      "currentSHA256": "2ffd5f897df21bb4ab836cf7ba4d9512998db92a2603cd0f5845c7cceef816ce",
+      "unchanged": true
+    },
+    {
+      "path": "warzone-touch-controls.js",
+      "function": "applyZoomPreset",
+      "sha256": "af57fcc41d4af50f8d2928bedb2999052e14190e46389d0ec5e0ed6ccf87d013",
+      "currentSHA256": "af57fcc41d4af50f8d2928bedb2999052e14190e46389d0ec5e0ed6ccf87d013",
+      "unchanged": true
+    },
+    {
+      "path": "warzone-touch-controls.js",
+      "function": "faceOpponent",
+      "sha256": "53a0eb81e893e8882c91fb1e607f68c539be8acc50d44a2944d1f2c2af1b627e",
+      "currentSHA256": "53a0eb81e893e8882c91fb1e607f68c539be8acc50d44a2944d1f2c2af1b627e",
+      "unchanged": true
+    },
+    {
+      "path": "multiplayer/mobile-controls.js",
+      "function": "bounds",
+      "sha256": "19430d44a62d2cae95d7602eefe86c5556957e5bc709e2d3f653c73cc3b4759a",
+      "currentSHA256": "19430d44a62d2cae95d7602eefe86c5556957e5bc709e2d3f653c73cc3b4759a",
+      "unchanged": true
+    },
+    {
+      "path": "multiplayer/mobile-controls.js",
+      "function": "contains",
+      "sha256": "8ce03f0f83dfa2c6c579728516df19c39f82b7d0da281abd20ab4a6b70b6a267",
+      "currentSHA256": "8ce03f0f83dfa2c6c579728516df19c39f82b7d0da281abd20ab4a6b70b6a267",
+      "unchanged": true
+    },
+    {
+      "path": "multiplayer/mobile-controls.js",
+      "function": "nativeRegions",
+      "sha256": "13754550216c5fb6a83b07ddb2c7db2b7dcfd1a74ca29a3b7cd0f1cce9625636",
+      "currentSHA256": "13754550216c5fb6a83b07ddb2c7db2b7dcfd1a74ca29a3b7cd0f1cce9625636",
+      "unchanged": true
+    },
+    {
+      "path": "multiplayer/mobile-controls.js",
+      "function": "parentBlocked",
+      "sha256": "04c1b312183ba22d1a1782ebd3620d393028be3020a2f864d8b8bd430a9fad22",
+      "currentSHA256": "04c1b312183ba22d1a1782ebd3620d393028be3020a2f864d8b8bd430a9fad22",
+      "unchanged": true
+    },
+    {
+      "path": "multiplayer/mobile-controls.js",
+      "function": "hit",
+      "sha256": "e28ebeaff39cf8d3c0229e425f9451654c4077c93c7bde7870f1216f5d81611f",
+      "currentSHA256": "e28ebeaff39cf8d3c0229e425f9451654c4077c93c7bde7870f1216f5d81611f",
+      "unchanged": true
+    },
+    {
+      "path": "multiplayer/mobile-controls.js",
+      "function": "mouse",
+      "sha256": "1fd1e01e1045922b6db1805184725834cdaad2b5942a22f73a7da2288c0d17f0",
+      "currentSHA256": "1fd1e01e1045922b6db1805184725834cdaad2b5942a22f73a7da2288c0d17f0",
+      "unchanged": true
+    },
+    {
+      "path": "multiplayer/mobile-controls.js",
+      "function": "setCamera",
+      "sha256": "45c49677b6750064df105f6445b498f311a7a36530f5d2faefdcb9c67f3eca4f",
+      "currentSHA256": "45c49677b6750064df105f6445b498f311a7a36530f5d2faefdcb9c67f3eca4f",
+      "unchanged": true
+    },
+    {
+      "path": "multiplayer/mobile-controls.js",
+      "function": "newMulti",
+      "sha256": "baec8cfd311930615d057b3e4eaaccc40f0a6481d40d4cade12a026bea2db99f",
+      "currentSHA256": "baec8cfd311930615d057b3e4eaaccc40f0a6481d40d4cade12a026bea2db99f",
+      "unchanged": true
+    },
+    {
+      "path": "multiplayer/mobile-controls.js",
+      "function": "rotateReady",
+      "sha256": "e69ec00f494156900dc6b7fd6bfcb97e65bafd5388510a521d676c2e39f1331d",
+      "currentSHA256": "e69ec00f494156900dc6b7fd6bfcb97e65bafd5388510a521d676c2e39f1331d",
+      "unchanged": true
+    },
+    {
+      "path": "multiplayer/mobile-controls.js",
+      "function": "flushMulti",
+      "sha256": "0d3c9c4864cbaedab7c5ab3b40ba724b5111702b64e56c4d415de1e779f18904",
+      "currentSHA256": "0d3c9c4864cbaedab7c5ab3b40ba724b5111702b64e56c4d415de1e779f18904",
+      "unchanged": true
+    },
+    {
+      "path": "multiplayer/mobile-controls.js",
+      "function": "scheduleMulti",
+      "sha256": "785db9b9b8ef091104f247f32cc4fde50104b6f5e7ed4b2042efb2ecdde1c2c4",
+      "currentSHA256": "785db9b9b8ef091104f247f32cc4fde50104b6f5e7ed4b2042efb2ecdde1c2c4",
+      "unchanged": true
+    },
+    {
+      "path": "multiplayer/mobile-controls.js",
+      "function": "releaseCamera",
+      "sha256": "0227e9ad5649234222e5efa213520ef764efb988092bf13202377b1aaa62c0e6",
+      "currentSHA256": "0227e9ad5649234222e5efa213520ef764efb988092bf13202377b1aaa62c0e6",
+      "unchanged": true
+    }
+  ],
+  "inputIntegrationSeamsChanged": [
+    "pointer input suspension/gesture cancellation",
+    "input pump native selection ACK barrier",
+    "constructor hold and native selection intent"
+  ],
+  "normal089CameraFunctionsPreserved": true,
+  "abandoned088PilotExcluded": true,
+  "scope": "Actual JS/VFS/DOM VM checks; native reconciliation/production/selected-decoration rendering and exact-APK gameplay are verified separately."
+}

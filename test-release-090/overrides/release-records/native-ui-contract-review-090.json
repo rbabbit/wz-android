@@ -1,0 +1,67 @@
+{
+  "passed": true,
+  "kind": "Independent read-only native/UI mailbox seam review",
+  "recordedUTC": "2026-11-16T20:55:47.518861+00:00",
+  "actualAPKRuntime": false,
+  "appFilesEditedByReviewer": false,
+  "sources": [
+    {
+      "path": "warzone-touch-controls.js",
+      "sha256": "392d069c07483677e752bf07d194e2b4bad7d3f06da59bbcb2c86f1d39fc9250"
+    },
+    {
+      "path": "warzone-campaign-hud.js",
+      "sha256": "3e008580535bf53dd850e451d561c606d9e9471f0f49221b1d4d669ed3d40536"
+    },
+    {
+      "path": "warzone-command-pages.js",
+      "sha256": "3a28bddc853dcc65cae6a3388f715a3fbf9366053b5e03f13930e2d1b4ec5a15"
+    },
+    {
+      "path": "multiplayer/mobile-controls.js",
+      "sha256": "4b7970c51739d2eb39face85286039ad432f9074ac52b25b89128f6ae91a5c1f"
+    },
+    {
+      "path": "multiplayer/session.js",
+      "sha256": "40929ede2b65ee4b1adf5ee5237a602b91ac32e944755b6247c15bed60f15588"
+    },
+    {
+      "path": "multiplayer/native-ui-adapter.js",
+      "sha256": "b785a7c199bfc90f232f28557226cb77d50dd1a3577219154b36fcdb593f5378"
+    },
+    {
+      "path": "warzone/ui/towers-game-controls.css",
+      "sha256": "f790fa99760acf68ba580749de433dcdb21116c384e736bb53b0cf7b28078c61"
+    }
+  ],
+  "sourceCheckReportSHA256": "60fae0b1603138fc6215080c24da0639af7905f33621ad7f9eacd787eb57c9fb",
+  "nativePolicySHA256": "8484adb052e916ffa4c53f87c962eac21b71fc5988c200e03dec5788cc794303",
+  "nativeIntegrationSHA256": "22424fee023ccbbd77eb86b9848f2b09412efdd81bea937ac93b2ab566f188e5",
+  "resolvedFindings": [
+    "Explicit OFF stays asserted across mailbox suspension rewrites until matching native OFF-cycle nonce acknowledgement",
+    "Same-context cleanup preserves activation and sends deselect=false; world/module/session change discards old delivery state",
+    "Native pending OFF survives later same-activation OFF suspension writes; newer ON cancels it",
+    "Non-Duel native Patrol Q and cancellation retained after native selection ACK",
+    "Offline constructor request waits for exact current suspension ACK and is scoped to context/activation/current combat-intent nonce",
+    "Offline and MP pending constructor writes are invalidated synchronously on physical/manual/session cancellation, only if still owning the matching selector nonce",
+    "Expired queued MP constructor selection is refused before native mailbox write"
+  ],
+  "reviewed": [
+    "Offline/Campaign single intent owner and no competing Campaign500ms selection writer",
+    "Context/activation/nonce/deselect request serialization matches native parser and ACK fields",
+    "Latched requested display is separate from actual IDs and native temporary suspension",
+    "Constructor override survives short TRUCKS query until known build/menu/combat-return exit",
+    "Queued first-order barrier exits on newer OFF/context/session/owner loss and avoids input-pump self-suspension",
+    "All7 current source hashes match the21-group host evidence",
+    "Final pointer fence listens on child/parent windows in capture phase before document event ownership stops propagation",
+    "Explicit header OFF toggles synchronously before asynchronous afterBuildExit in Towers/FFA/Campaign/MP",
+    "Native visible-constructor ACK IDs match the shared picker fresh selectedUnits constructor-only/owner/unique exact-set check before builder-group commit",
+    "Empty visible constructor set is accepted; failed or changed-view attempts do not commit stale builder IDs or invoke recursive tile-volume drag recovery",
+    "Offline parent/child pointer capture listeners are removed on pagehide; MP preserves existing authoritative native selection action"
+  ],
+  "remaining": [
+    "Actual corrected Android APK constructor/build completion, selection/new production/OFF/menu/IME/input behavior must be verified; this is independent source/contract review only."
+  ],
+  "nativeConstructorSourceSHA256": "75e4dbe058bcd99009ff4a7e45a3247fc04d4c9169faae5e52f6d4a3764bc105",
+  "nativeConstructorHostProofSHA256": "08bf199155c5fffdcade13813fcd74353b5ff72c4b6ff2e366c70bc841ca6398"
+}

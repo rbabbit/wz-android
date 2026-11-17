@@ -1,0 +1,88 @@
+{
+  "status": "observed",
+  "exactAPK": "134246af423c0ea04b375409f41d179813a739968d260855e73784a9109b6b66",
+  "originalResult": "run6-targeted-result.json",
+  "originalSHA256": "3491c17b859e33eb7a069b1f5aef27d0866184ff42dbc3a36bfdedffe4d715af",
+  "nativeONOFFProof": "run6-targeted-native-ON-OFF.json",
+  "actualNativeReturnPrompt": "run6-targeted-native-Return-dialog.png",
+  "actualReturnPressedBeforeContextWasUnloaded": true,
+  "initialEvalCallbackLostDuringNativeReturn": true,
+  "activityAfterReturn": {
+    "state": {
+      "activity": "com.rbabbit.blocknight.warzone.MultiplayerActivity",
+      "finishing": false,
+      "destroyed": false,
+      "sessionActive": false,
+      "sessionServiceStarted": false,
+      "activityResumed": true
+    },
+    "ok": true
+  },
+  "sessionAfterReturn": {
+    "active": false,
+    "phase": "lobby"
+  },
+  "directoryRemoved": {
+    "alreadyAbsentAfterNormalReturn": true,
+    "installed": false
+  },
+  "Home": {
+    "nativeHomeReady": true,
+    "noBackOverlay": true
+  },
+  "archivesAfter": {
+    "samePreparedArchives": true,
+    "files": [
+      {
+        "path": "files/campaign-saved-games/wt_c052b42eb5a24ee0b5a77333fbf8d94d.zip",
+        "exists": true,
+        "bytes": 153152,
+        "sha256": "2c99f8a340eda0d7a676fc777a63b4a303d3b9fa5b9b335b6ebad3151c2f7bc0"
+      },
+      {
+        "path": "files/towers-saved-games/wt_a727da01bea84c46b59e88cf08551e70.zip",
+        "exists": true,
+        "bytes": 81009,
+        "sha256": "80c969dea27557378e0254872374f4992574f014dea55f6ee1575a9570645bb2"
+      },
+      {
+        "path": "files/ffa-saved-games/wt_89d04ba79d124c5787e53d2798c3589f.zip",
+        "exists": true,
+        "bytes": 387674,
+        "sha256": "d74edf4f41c163513611c1fe6502b7f2e00fce4aeebf5605b3843bd8be22bcbe"
+      }
+    ]
+  },
+  "ownedHostStatus": {
+    "startedUTC": "2026-11-17T19:07:32.015516+00:00",
+    "state": "stopped",
+    "role": "player",
+    "port": 22210,
+    "publicRegistration": false,
+    "routerOrUPnPChanges": false,
+    "syntheticDirectoryOnly": true,
+    "nativeGameplayMocked": false,
+    "maxSeconds": 240,
+    "telemetryWriteFailures": 0,
+    "rawLogsPrivate": true,
+    "ownedProcess": {
+      "pid": 20432,
+      "executable": "C:\\Program Files\\Warzone 2100\\bin\\warzone2100.exe",
+      "configdir": "C:\\timerApp\\players-polish-092-20261117\\private-host-player-run6\\private\\configdir",
+      "port": 22210,
+      "verified": true
+    },
+    "nativeWorldStarted": true,
+    "listenerProbes": 2,
+    "listening": null,
+    "listenerObservation": "not-reprobed-after-initial-ready-or-native-world",
+    "nativeDataCheckReceived": true,
+    "nativeDataCheck2Received": true,
+    "initialListeningConfirmed": true,
+    "stopReason": "host-exited",
+    "cleanup": "host-exited-normally",
+    "finishedUTC": "2026-11-17T19:09:51.232008+00:00",
+    "exitCode": 0
+  },
+  "noRepeatedReturnOrReadyInput": true
+}

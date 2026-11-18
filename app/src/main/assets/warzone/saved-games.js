@@ -4,6 +4,8 @@
   if (window.WarzoneSavedGames || window.__warzoneDuelConfig?.mode === 'duel') return;
   if(window.__warzoneFfaMode===true||window.__warzoneFfaConfig?.mode==='ffa'||new URLSearchParams(location.search).get('mode')==='ffa'){installCampaignSaves(true);return;}
   if(window.__warzoneCampaignMode===true||new URLSearchParams(location.search).get('mode')==='campaign'){installCampaignSaves();return;}
+  const survivalConfig=window.__warzoneSurvivalConfig;
+  const survival=survivalConfig?.mode==='survival'&&Object.isFrozen(survivalConfig);
   const docSession = window.__towersHtml?.session || window.__towersHtmlSession || '';
   const MAX_BYTES = 32 * 1024 * 1024, MAX_FILES = 256;
   const state = {loading:false,ready:true,busy:false,ended:false,error:'',serial:0,savedId:'',hydrated:false,
@@ -59,12 +61,17 @@
   function jsonBytes(bytes) { return JSON.parse(new TextDecoder().decode(bytes)); }
   function savedGlobals(script, logicalSession) {
     return Object.values(script).find(value => value && typeof value === 'object'
-      && value.wtreward_match?.session === logicalSession && value.warzoneTowersWaves_state);
+      && value.wtreward_match?.session === logicalSession && value.warzoneTowersWaves_state
+      && (!survival || value.survivalIdentity?.version===94 && value.survivalIdentity.mode==='survival'
+        && value.survivalIdentity.profile==='survival' && value.survivalIdentity.map===survivalConfig.map
+        && value.survivalIdentity.level===survivalConfig.level && value.survivalIdentity.player===0 && value.survivalIdentity.enemyPlayer===1));
   }
   function validatePayload(value) {
     if (!value?.metadata || !/^wt_[a-f0-9]{32}$/.test(value.metadata.id || '')) throw Error('The saved game slot is invalid.');
     const decoded = decodeFiles(value.files), gam = jsonBytes(decoded.get('gam.json'));
     const meta = value.metadata;
+    if(survival ? meta.mode!=='survival'||meta.profile!=='survival'||meta.mapId!==survivalConfig.map||meta.nativeLevel!==survivalConfig.level||meta.totalRounds!==60
+      : meta.mode==='survival'||meta.profile==='survival') throw Error('The saved game belongs to another mode.');
     if (typeof meta.session !== 'string' || !/^[A-Za-z0-9_-]{1,96}$/.test(meta.session)
         || !Number.isInteger(meta.gameTime) || meta.gameTime < 0 || gam.gameTime !== meta.gameTime
         || !meta.nativeLevel || gam.levelName !== meta.nativeLevel
@@ -189,6 +196,7 @@
         throw Error('The native game did not restore the saved battle.');
       const proof = {ok:true,session:caps.session,mapId:payload.metadata.mapId,nativeLevel:payload.metadata.nativeLevel,
         gameTime:fresh.gameTime,savedGameTime:payload.metadata.gameTime,rewards:fresh.result};
+      if(survival) Object.assign(proof,{mode:'survival',profile:'survival'});
       if (bridge()?.savedGameRestored?.(docSession, payload.metadata.id, JSON.stringify(proof)) !== true)
         throw Error('The saved game could not be verified.');
       active(token); state.ready = true; emitState(); return true;
@@ -295,6 +303,11 @@
       const metadata = {session:logicalSession,mapId:new URLSearchParams(location.search).get('map') || 'td2',nativeLevel:gam.levelName,
         gameTime:gam.gameTime,wave:savedWave.wave,totalRounds:liveWave?.totalRounds,totalWaves:liveWave?.totalRounds,
         baseConfig:fresh.result.baseConfig,rewards:fresh.result};
+      if(survival) {
+        if(gam.levelName!==survivalConfig.level||liveWave?.mode!=='survival'||liveWave.map!==survivalConfig.map||liveWave.totalRounds!==60)
+          throw Error('The Survival save identity could not be verified.');
+        Object.assign(metadata,{mode:'survival',profile:'survival'});
+      }
       active(token);
       if (bridge()?.rewardInventorySnapshot?.(docSession,JSON.stringify(fresh.result)) !== true)
         throw Error('The saved purchase inventory could not be verified.');

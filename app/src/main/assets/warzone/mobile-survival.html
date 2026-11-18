@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script>
+const survivalMaps=[{"id":"tdn2","name":"EMAG TDN2","level":"Survival-TDN2-T1","rounds":60,"prepSeconds":240,"preview":"survival/previews/tdn2.png","width":128,"height":128},{"id":"wave","name":"EMAG Wave","level":"Survival-Wave-T1","rounds":60,"prepSeconds":240,"preview":"survival/previews/wave.png","width":128,"height":128}];
+const survivalRequestedMap=new URLSearchParams(location.search).get('map');
+const survivalMap=survivalMaps.find(value=>value.id===survivalRequestedMap);
+if(!survivalMap)throw Error('Unknown Survival map.');
+window.__warzoneSurvivalConfig=Object.freeze({mode:'survival',profile:'survival',map:survivalMap.id,mapName:survivalMap.name,level:survivalMap.level,player:0,enemyPlayer:1,players:2});
+window.__warzoneSurvivalMaps=survivalMaps;
+</script>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+  <title>Warzone Towers</title>
+  <style>
+    html, body { position:fixed; inset:0; width: 100%; height: 100%; margin: 0; overflow: clip; overscroll-behavior:none; background: #05090b; }
+    #warzone-host { position: fixed; inset: 0; display: grid; grid-template-rows: 0 minmax(0, 1fr); width: 100%; height: 100%; }
+    body[data-playing="true"] #warzone-host { grid-template-rows: var(--wt-command-top,56px) minmax(0, 1fr); }
+    @media (max-width: 1100px) {
+      body[data-playing="true"] #warzone-host { grid-template-rows: var(--wt-command-top,104px) minmax(0, 1fr); }
+    }
+    #warzone-command-strip { position: relative; min-width: 0; overflow: hidden; }
+    #warzone-command-strip #blocknight-combat-hud { position: absolute; }
+    #warzone-game-frame { display: block; width: 100%; height: 100%; min-width: 0; min-height: 0; border: 0; }
+    body[data-battle-ended="true"] #warzone-game-frame { visibility: hidden; pointer-events: none; }
+    body[data-battle-ended="true"] #warzone-command-strip { display: none; }
+  </style>
+</head>
+<body>
+  <main id="warzone-host">
+    <header id="warzone-command-strip" aria-label="Battle commands"></header>
+    <iframe id="warzone-game-frame" title="Warzone battlefield" allow="autoplay; fullscreen; cross-origin-isolated"></iframe>
+  </main>
+  <script>
+    // Give the unchanged engine a real viewport, rather than shrinking its
+    // finished frame. Browser layout and SDL now agree on both dimensions.
+    window.WarzoneHost = {
+      resetScroll() {
+        if(scrollX||scrollY)scrollTo(0,0);
+        document.documentElement.scrollTop=document.body.scrollTop=0;
+      },
+      setPlaying() {
+        if (!document.getElementById("warzone-game-frame").contentWindow.__towersHtml?.isActive?.()) return false;
+        document.body.dataset.playing = "true";
+        dispatchEvent(new Event("warzone-battle-ready"));
+        return true;
+      },
+      endBattle() {
+        document.body.dataset.battleEnded = "true";
+        document.body.dataset.playing = "false";
+        document.body.dataset.research = "false";
+        const frame = document.getElementById("warzone-game-frame");
+        frame.inert = true;
+        document.getElementById("warzone-command-strip").hidden = true;
+        for (const id of ['lab-ops','warzone-towers-help-overlay']) {
+          const node = document.getElementById(id); if (node) node.hidden = true;
+        }
+        dispatchEvent(new Event("warzone-battle-ended"));
+      },
+      setResearchOpen(open) { document.body.dataset.research = String(Boolean(open)); },
+      restoreBattlefield() {
+        const frame = document.getElementById("warzone-game-frame");
+        if (!frame.contentWindow.__towersHtml?.isActive?.()) return false;
+        const header = document.getElementById("warzone-command-strip");
+        document.body.dataset.playing = "true";
+        if (!frame.contentWindow.__blockNightResearch?.report().open) document.body.dataset.research = "false";
+        header.hidden = false;
+        frame.hidden = false;
+        scrollTo(0, 0);
+        document.documentElement.scrollTop = document.body.scrollTop = 0;
+        document.documentElement.scrollLeft = document.body.scrollLeft = 0;
+        frame.contentWindow.scrollTo(0, 0);
+      }
+    };
+    addEventListener('scroll',()=>WarzoneHost.resetScroll(),{passive:true});
+    document.getElementById("warzone-game-frame").src = "index-survival.html" + location.search;
+  </script>
+</body>
+</html>

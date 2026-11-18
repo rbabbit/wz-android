@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="referrer" content="no-referrer"><title>Replay</title><link rel="stylesheet" href="viewer.css"></head>
+<body><div id="compatibility" hidden inert aria-hidden="true">
+  <div class="page-shell">
+    <main id="top">
+      <section class="section-grid">
+        <div class="section-head replay-analyzer-intro">
+          <div class="replay-analyzer-heading">
+            <p class="replay-analyzer-title">Replay Analyzer</p>
+            <h2 class="replay-analyzer-subtitle">See what a replay contains.</h2>
+          </div>
+          <p class="replay-analyzer-description">
+            Load a Warzone 2100 <code>.wzrp</code> file to inspect its match metadata, players, embedded map, duration, and recorded network messages.
+          </p>
+        </div>
+
+        <article class="data-card">
+          <div class="replay-analyzer-grid">
+            <div class="replay-field">
+              <div class="replay-file-picker">
+                <input
+                  class="replay-file-input"
+                  id="replayFile"
+                  type="file"
+                  accept=".wzrp,application/octet-stream"
+                >
+                <label class="replay-file-button" for="replayFile">Select reply file</label>
+                <span class="replay-file-name" id="replayFileName">No file selected</span>
+              </div>
+            </div>
+            <span class="replay-choice-separator">OR</span>
+            <button class="replay-action replay-action-secondary" id="replayDemo" type="button">Test demo</button>
+            <span class="replay-choice-separator">OR</span>
+            <div class="replay-field replay-url-field">
+              <input
+                id="replayUrl"
+                type="url"
+                inputmode="url"
+                aria-label="Replay URL"
+                placeholder="https://.../replay.wzrp"
+              >
+              <button class="replay-action replay-url-go" id="replayUrlGo" type="button">Go</button>
+            </div>
+          </div>
+          <div class="replay-analyzer-actions">
+            <p class="replay-status" id="replayStatus" role="status" aria-live="polite">
+              Choose a local replay or paste its direct URL.
+            </p>
+          </div>
+        </article>
+
+        <div class="replay-results" id="replayResults" hidden>
+          <div class="replay-summary-grid" id="replaySummary"></div>
+          <section class="replay-match-summary" id="replayMatchSummary" hidden></section>
+          <p class="data-card replay-status" id="replayStatsNotice" role="status" hidden></p>
+
+          <article class="data-card replay-results-section replay-players-panel">
+            <h3>Players</h3>
+            <div class="replay-player-team-tables" id="replayPlayerTables">
+              <div class="stats-table-wrap replay-table-wrap">
+                <table class="stats-table replay-table">
+                  <thead id="replayPlayersHeadA"></thead>
+                  <tbody id="replayPlayers"></tbody>
+                  <tbody id="replayPlayersB"></tbody>
+                </table>
+              </div>
+            </div>
+          </article>
+
+          <article class="data-card replay-results-section" id="replayTelemetryPanel" hidden>
+            <details>
+              <summary class="replay-telemetry-summary">Extended telemetry<span class="replay-telemetry-status" id="replayTelemetryStatus"></span></summary>
+              <p id="replayTelemetryNote"></p>
+              <div class="stats-table-wrap"><table class="replay-telemetry-table">
+                <thead><tr><th>Metric</th><th>Coverage</th><th>Meaning / limitation</th></tr></thead>
+                <tbody id="replayTelemetryCoverage"></tbody>
+              </table></div>
+              <div class="stats-table-wrap"><table class="replay-telemetry-table">
+                <thead><tr><th>Player</th><th>Units completed</th><th>Structures completed</th><th>Completed unit value</th><th>Observed units destroyed</th><th>Ownership transfers in / out</th><th>Own lab completions</th><th>Structures replaced</th></tr></thead>
+                <tbody id="replayTelemetryPlayers"></tbody>
+              </table></div>
+              <label for="replayTelemetryFilter">Recorded event type</label>
+              <select id="replayTelemetryFilter"><option value="">All events</option></select>
+              <div class="stats-table-wrap"><table class="replay-telemetry-table">
+                <thead><tr><th>Time</th><th>Event</th><th>Player</th><th>Details</th></tr></thead>
+                <tbody id="replayTelemetryEvents"></tbody>
+              </table></div>
+              <button type="button" class="replay-action" id="replayTelemetryMore" hidden>Show more events</button>
+            </details>
+          </article>
+
+          <article class="data-card replay-results-section" id="replayBattlefieldPanel" hidden>
+            <div class="replay-extended-heading replay-battlefield-heading">
+              <h3 aria-label="Battlefield">
+                <span class="replay-battlefield-logo-frame">
+                  <img class="replay-battlefield-logo" src="assets/battlefield-logo-v3.png" alt="Battlefield">
+                </span>
+              </h3>
+              <div class="replay-battlefield-controls">
+                <label class="replay-battlefield-option" for="replayBattlefieldViewMode">
+                  View
+                  <select id="replayBattlefieldViewMode">
+                    <option value="2d">2D</option>
+                    <option value="3d" selected>3D</option>
+                  </select>
+                </label>
+                <label class="replay-battlefield-option" for="replayBattlefieldTileQuality">
+                  Quality
+                  <select id="replayBattlefieldTileQuality" disabled>
+                    <option value="low">Low</option>
+                    <option value="medium" selected>Medium</option>
+                    <option value="high">High</option>
+                    <option value="ultra">Ultra</option>
+                  </select>
+                </label>
+                <label class="replay-battlefield-option" for="replayBattlefieldTiles">
+                  <input id="replayBattlefieldTiles" type="checkbox" checked disabled>
+                  Tiles
+                </label>
+                <label class="replay-battlefield-option" for="replayBattlefieldBackground" hidden>
+                  <input id="replayBattlefieldBackground" type="checkbox" checked>
+                  Map background
+                </label>
+                <label class="replay-battlefield-option" for="replayBattlefieldDroids">
+                  <input id="replayBattlefieldDroids" type="checkbox" checked>
+                  Units
+                </label>
+                <label class="replay-battlefield-option" for="replayBattlefieldStructures">
+                  <input id="replayBattlefieldStructures" type="checkbox" checked>
+                  Structures
+                </label>
+                <label class="replay-battlefield-option" for="replayBattlefieldBattleMarkers">
+                  <input id="replayBattlefieldBattleMarkers" type="checkbox" checked>
+                  Battle markers
+                </label>
+              </div>
+              <p id="replayBattlefieldMeta"></p>
+            </div>
+            <div class="replay-battlefield-layout">
+              <aside class="replay-battlefield-sidebar">
+                <div class="replay-battlefield-stat-groups" aria-hidden="true">
+                  <span class="replay-battlefield-stat-group">Players</span>
+                  <span class="replay-battlefield-stat-group">Status</span>
+                  <span class="replay-battlefield-stat-group-grid">
+                    <span class="replay-battlefield-stat-group score">Score</span>
+                    <span class="replay-battlefield-stat-group kd">K/D</span>
+                    <span class="replay-battlefield-stat-group kills">Kills</span>
+                    <span class="replay-battlefield-stat-group units has-subgroups">
+                      <span class="replay-battlefield-stat-group-label">Units</span>
+                      <span class="replay-battlefield-stat-subgroups single">
+                        <span class="alive">Alive</span>
+                      </span>
+                    </span>
+                    <span class="replay-battlefield-stat-group buildings has-subgroups">
+                      <span class="replay-battlefield-stat-group-label">Buildings</span>
+                      <span class="replay-battlefield-stat-subgroups single">
+                        <span class="alive">Alive</span>
+                      </span>
+                    </span>
+                    <span class="replay-battlefield-stat-group research">Research</span>
+                    <span class="replay-battlefield-stat-group power">Power</span>
+                  </span>
+                </div>
+                <div class="replay-battlefield-legend" id="replayBattlefieldLegend"></div>
+                <section class="replay-battlefield-momentum" id="replayBattlefieldMomentum" hidden>
+                  <div class="replay-battlefield-momentum-heading">
+                    <span class="replay-battlefield-momentum-title">
+                      <h5 id="replayBattlefieldMomentumTitle">Team momentum</h5>
+                      <button
+                        class="replay-battlefield-help"
+                        type="button"
+                        aria-label="What team momentum means"
+                        aria-describedby="replayBattlefieldMomentumHelp"
+                      >?</button>
+                      <span
+                        class="replay-battlefield-help-tooltip"
+                        id="replayBattlefieldMomentumHelp"
+                        role="tooltip"
+                      >Overall team strength at each moment: an equal-weight average of score, K/D, units alive, structures alive, research activity, and power.</span>
+                    </span>
+                    <output id="replayBattlefieldMomentumValue">A 0% · B 0%</output>
+                  </div>
+                  <div class="replay-battlefield-momentum-metrics" id="replayBattlefieldMomentumMetrics" aria-label="Graph statistic">
+                    <button class="replay-battlefield-momentum-metric" type="button" data-metric="momentum" aria-pressed="true">Momentum</button>
+                    <button class="replay-battlefield-momentum-metric" type="button" data-metric="score" aria-pressed="false">Score</button>
+                    <button class="replay-battlefield-momentum-metric" type="button" data-metric="kd" aria-pressed="false">K/D</button>
+                    <button class="replay-battlefield-momentum-metric" type="button" data-metric="kills" aria-pressed="false">Kills</button>
+                    <button class="replay-battlefield-momentum-metric" type="button" data-metric="units" aria-pressed="false">Units</button>
+                    <button class="replay-battlefield-momentum-metric" type="button" data-metric="buildings" aria-pressed="false">Buildings</button>
+                    <button class="replay-battlefield-momentum-metric" type="button" data-metric="research" aria-pressed="false">Research</button>
+                    <button class="replay-battlefield-momentum-metric" type="button" data-metric="power" aria-pressed="false">Power</button>
+                  </div>
+                  <svg
+                    class="replay-battlefield-momentum-chart"
+                    id="replayBattlefieldMomentumChart"
+                    viewBox="0 0 600 220"
+                    preserveAspectRatio="none"
+                    role="img"
+                    aria-label="Team momentum throughout the replay"
+                  ></svg>
+                </section>
+              </aside>
+              <div class="replay-battlefield-stage">
+                <div class="replay-battlefield-unsupported" role="status">
+                  <img
+                    class="replay-battlefield-unsupported-logo"
+                    src="assets/battlefield-logo-v3.png"
+                    alt="Battlefield"
+                  >
+                  <span>Not Supported</span>
+                </div>
+                <canvas
+                  class="replay-battlefield-canvas"
+                  id="replayBattlefieldCanvas"
+                  width="900"
+                  height="600"
+                  aria-label="Animated top-down battlefield replay. Use the mouse wheel to zoom and drag to pan."
+                ></canvas>
+                <canvas
+                  class="replay-battlefield-canvas"
+                  id="replayBattlefield3dCanvas"
+                  width="900"
+                  height="600"
+                  aria-label="Animated three-dimensional tactical battlefield replay. Use the mouse wheel to zoom and drag to pan."
+                  hidden
+                ></canvas>
+                <div
+                  class="replay-battlefield-loading"
+                  id="replayBattlefieldLoading"
+                  role="status"
+                  aria-live="polite"
+                  hidden
+                >
+                  <span class="replay-battlefield-loading-spinner" aria-hidden="true"></span>
+                  <span class="replay-battlefield-loading-message">
+                    <strong>Please wait</strong>
+                    <small>Loading…</small>
+                  </span>
+                </div>
+                <canvas
+                  class="replay-battlefield-minimap"
+                  id="replayBattlefieldMinimap"
+                  width="180"
+                  height="120"
+                  aria-label="Battlefield minimap showing the visible area."
+                ></canvas>
+                <button
+                  class="replay-battlefield-minimap-toggle replay-fixed-tooltip"
+                  id="replayBattlefieldMinimapToggle"
+                  type="button"
+                  aria-label="Hide minimap"
+                  aria-pressed="false"
+                  data-tooltip="Hide minimap"
+                >
+                  <svg viewBox="0 0 16 16" aria-hidden="true">
+                    <rect x="2.5" y="3" width="11" height="10" rx="1.5"></rect>
+                    <path d="M5 10.5h6"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div class="replay-battlefield-map-controls">
+              <span class="replay-battlefield-zoom" aria-label="Battlefield zoom controls">
+                <button class="replay-action replay-radio-control replay-fixed-tooltip" id="replayBattlefieldRotateLeft" type="button" aria-label="Rotate map left" data-tooltip="Rotate map left">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3 3 6l3 3M3 6h5a5 5 0 1 1-4.4 7.4"/></svg>
+                </button>
+                <button class="replay-action replay-radio-control replay-fixed-tooltip" id="replayBattlefieldRotateRight" type="button" aria-label="Rotate map right" data-tooltip="Rotate map right">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M13 5V2m0 0h-3m3 0-2.2 2.2A5 5 0 1 0 13 9"/></svg>
+                </button>
+                <button class="replay-action replay-radio-control replay-fixed-tooltip" id="replayBattlefieldResetView" type="button" aria-label="Reset view" data-tooltip="Reset view">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M13.5 6A5.5 5.5 0 0 0 4 3L2 5m0 0V2m0 3h3M2.5 10A5.5 5.5 0 0 0 12 13l2-2m0 0v3m0-3h-3"/></svg>
+                </button>
+                <button class="replay-action replay-radio-control replay-fixed-tooltip" id="replayBattlefieldZoomOut" type="button" aria-label="Zoom out" data-tooltip="Zoom out">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10"/></svg>
+                </button>
+                <input class="replay-battlefield-zoom-slider" id="replayBattlefieldZoomSlider" type="range" min="75" max="1600" step="5" value="156" aria-label="Battlefield zoom">
+                <output id="replayBattlefieldZoom">156%</output>
+                <button class="replay-action replay-radio-control replay-fixed-tooltip" id="replayBattlefieldZoomIn" type="button" aria-label="Zoom in" data-tooltip="Zoom in">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M8 3v10"/></svg>
+                </button>
+                <button class="replay-action replay-radio-control replay-fixed-tooltip" id="replayBattlefieldFullscreen" type="button" aria-label="Full screen" data-tooltip="Full screen">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3H3v3m7-3h3v3M6 13H3v-3m7 3h3v-3"/></svg>
+                </button>
+              </span>
+            </div>
+            <div class="replay-battlefield-footer">
+              <label class="replay-battlefield-option" for="replayBattlefieldSpeed">
+                Speed
+                <input
+                  class="replay-battlefield-speed-slider"
+                  id="replayBattlefieldSpeed"
+                  type="range"
+                  min="0"
+                  max="3"
+                  step="1"
+                  value="2"
+                  aria-label="Playback speed"
+                >
+                <output class="replay-battlefield-speed-value" id="replayBattlefieldSpeedValue" for="replayBattlefieldSpeed">4×</output>
+              </label>
+              <button
+                class="replay-battlefield-play-toggle replay-fixed-tooltip"
+                id="replayBattlefieldPlay"
+                type="button"
+                aria-label="Play replay"
+                data-tooltip="Play replay"
+              ><span class="replay-battlefield-play-icon" aria-hidden="true"></span></button>
+              <label class="replay-battlefield-timeline" for="replayBattlefieldRange">
+                <output id="replayBattlefieldTime">0:00</output>
+                <input id="replayBattlefieldRange" type="range" min="0" max="0" value="0" step="100">
+                <output id="replayBattlefieldDuration">0:00</output>
+              </label>
+            </div>
+            <p class="replay-battlefield-status" id="replayBattlefieldStatus"></p>
+          </article>
+
+          <article class="data-card replay-results-section" id="replayResearchPanel" hidden style="display: none;">
+            <div class="replay-extended-heading">
+              <h3>Research timeline</h3>
+              <p id="replayResearchMeta"></p>
+            </div>
+            <div class="replay-event-filters replay-research-filters">
+              <div class="replay-field">
+                <label for="replayResearchPlayer">Player</label>
+                <select id="replayResearchPlayer">
+                  <option value="">All players</option>
+                </select>
+              </div>
+              <div class="replay-field">
+                <label for="replayResearchSearch">Search research</label>
+                <input id="replayResearchSearch" type="search" placeholder="Body, weapon, factory…">
+              </div>
+            </div>
+            <p class="replay-extended-note" id="replayResearchNote"></p>
+            <div class="stats-table-wrap replay-table-wrap">
+              <table class="stats-table replay-table">
+                <thead>
+                  <tr>
+                    <th>Time</th>
+                    <th>Player</th>
+                    <th>Research</th>
+                  </tr>
+                </thead>
+                <tbody id="replayResearchEvents"></tbody>
+              </table>
+            </div>
+          </article>
+
+          <article class="data-card replay-results-section" hidden>
+            <h3>Network message inventory</h3>
+            <p>Official message names are shown alongside their numeric replay IDs.</p>
+            <div class="stats-table-wrap replay-table-wrap">
+              <table class="stats-table replay-table">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Messages</th>
+                    <th>Payload bytes</th>
+                    <th>Players</th>
+                  </tr>
+                </thead>
+                <tbody id="replayMessages"></tbody>
+              </table>
+            </div>
+          </article>
+
+          <article class="data-card replay-results-section" hidden>
+            <h3>Decoded event timeline</h3>
+            <div class="replay-event-filters">
+              <div class="replay-field">
+                <label for="replayEventCategory">Event category</label>
+                <select id="replayEventCategory">
+                  <option value="">All categories</option>
+                </select>
+              </div>
+              <div class="replay-field">
+                <label for="replayEventPlayer">Player</label>
+                <select id="replayEventPlayer">
+                  <option value="">All players</option>
+                </select>
+              </div>
+              <div class="replay-field">
+                <label for="replayEventSearch">Search events</label>
+                <input id="replayEventSearch" type="search" placeholder="Research, manufacture, attack…">
+              </div>
+            </div>
+            <p id="replayEventsNote"></p>
+            <div class="stats-table-wrap replay-table-wrap">
+              <table class="stats-table replay-table">
+                <thead>
+                  <tr>
+                    <th>Time</th>
+                    <th>Player</th>
+                    <th>Event</th>
+                    <th>Details</th>
+                  </tr>
+                </thead>
+                <tbody id="replayEvents"></tbody>
+              </table>
+            </div>
+          </article>
+
+          <article class="data-card replay-results-section" hidden>
+            <details>
+              <summary>Raw extracted JSON</summary>
+              <pre class="replay-raw" id="replayRawJson"></pre>
+            </details>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  
+  
+  
+  
+</div>
+<script src="viewer-layout.js"></script><script src="stats/replay-telemetry.js"></script><script src="renderer.js"></script></body></html>

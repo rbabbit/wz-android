@@ -27,6 +27,7 @@ final class GraphicsSetupView extends FrameLayout {
         void start(String graphicsMode, String map, String matchMode, String duelWeapon);
         void rewards();
         void savedGames();
+        default void survival() {}
         void campaign();
         void ffa();
         void multiplayer();
@@ -46,7 +47,7 @@ final class GraphicsSetupView extends FrameLayout {
     private final LinearLayout matchChoices, weaponChoices, difficultyChoices, launchActions, message;
     private final TextView detail, status;
     private final Button towers, duel, cannon, rockets, easy, medium, hard;
-    private final Button start, rewards, savedGames, homeBack;
+    private final Button start, rewards, savedGames, homeBack, survival;
     private final LinearLayout homeActions;
     private final MapPreviewPager maps;
     private final WarzoneSplashView splash;
@@ -195,6 +196,11 @@ final class GraphicsSetupView extends FrameLayout {
         homeActions.addView(homeBack, new LinearLayout.LayoutParams(-2, dp(48)));
         screenTitle=text("TOWERS",20,INK);screenTitle.setTypeface(face);screenTitle.setGravity(Gravity.CENTER_VERTICAL);
         homeActions.addView(screenTitle,new LinearLayout.LayoutParams(-2,dp(48)));
+        survival = button("PLAY SURVIVAL", false);
+        survival.setTextSize(13); survival.setSingleLine(true); survival.setPadding(dp(10), 0, dp(10), 0);
+        survival.setContentDescription("Play Survival, choose a map");
+        survival.setOnClickListener(v -> { maps.settleSelection(); actions.survival(); });
+        homeActions.addView(survival, new LinearLayout.LayoutParams(-2, dp(48)));
         LinearLayout.LayoutParams rewardsParams = new LinearLayout.LayoutParams(-2, dp(48));
         rewardsParams.leftMargin = dp(8);
         homeActions.addView(rewards, rewardsParams);
@@ -517,20 +523,23 @@ final class GraphicsSetupView extends FrameLayout {
 
     /** Content-sized native header, with title left and saved actions right. */
     private final class HeaderRow extends LinearLayout {
-        private int backWidth,rewardWidth,saveWidth,titleWidth;
+        private int backWidth,rewardWidth,saveWidth,titleWidth,survivalWidth;
         HeaderRow(Context context) {super(context);}
         @Override protected void onMeasure(int width,int height) {
             int w=MeasureSpec.getSize(width),h=MeasureSpec.getSize(height),gap=dp(8);
             backWidth=Math.max(dp(64),desiredButtonWidth(homeBack));
             rewardWidth=Math.max(dp(100),desiredButtonWidth(rewards));
             saveWidth=Math.max(dp(96),desiredButtonWidth(savedGames));
-            int remaining=Math.max(0,w-backWidth-gap*3);
-            if(rewardWidth+saveWidth>remaining) {
-                int total=rewardWidth+saveWidth;
-                rewardWidth=Math.round(remaining*rewardWidth/(float)Math.max(1,total));saveWidth=remaining-rewardWidth;
+            survivalWidth=Math.max(dp(122),desiredButtonWidth(survival));
+            int remaining=Math.max(0,w-backWidth-gap*4);
+            if(rewardWidth+saveWidth+survivalWidth>remaining) {
+                int total=rewardWidth+saveWidth+survivalWidth;
+                rewardWidth=Math.round(remaining*rewardWidth/(float)Math.max(1,total));
+                saveWidth=Math.round(remaining*saveWidth/(float)Math.max(1,total));
+                survivalWidth=remaining-rewardWidth-saveWidth;
             }
-            titleWidth=Math.max(0,w-backWidth-rewardWidth-saveWidth-gap*3);
-            View[] views={homeBack,screenTitle,rewards,savedGames};int[] widths={backWidth,titleWidth,rewardWidth,saveWidth};
+            titleWidth=Math.max(0,w-backWidth-rewardWidth-saveWidth-survivalWidth-gap*4);
+            View[] views={homeBack,screenTitle,survival,rewards,savedGames};int[] widths={backWidth,titleWidth,survivalWidth,rewardWidth,saveWidth};
             for(int i=0;i<views.length;i++)views[i].measure(MeasureSpec.makeMeasureSpec(widths[i],MeasureSpec.EXACTLY),MeasureSpec.makeMeasureSpec(h,MeasureSpec.EXACTLY));
             setMeasuredDimension(w,h);
         }
@@ -540,6 +549,7 @@ final class GraphicsSetupView extends FrameLayout {
             screenTitle.layout(backWidth+gap,0,backWidth+gap+titleWidth,h);
             savedGames.layout(w-saveWidth,0,w,h);
             rewards.layout(w-saveWidth-gap-rewardWidth,0,w-saveWidth-gap,h);
+            survival.layout(w-saveWidth-rewardWidth-survivalWidth-gap*2,0,w-saveWidth-rewardWidth-gap*2,h);
         }
     }
 

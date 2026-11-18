@@ -1,0 +1,56 @@
+{
+  "passed": true,
+  "version": "0.93",
+  "baseline": "0.92/native0.91",
+  "sourceChanges": [
+    {
+      "family": "offline",
+      "path": "src/hci.cpp",
+      "baselineSource": "/mnt/c/timerApp/github-staging/wz-android-0.92/vendor/native-091/source/offline/src/hci.cpp",
+      "beforeSHA256": "32340899af584361043417a7f2029d9ec24300004d293a5034361993b7c0c8b7",
+      "afterSHA256": "329be81255d0a98cfd74801acceefe4c3aa37f1f00da6f06edd5d014fffb4c75"
+    },
+    {
+      "family": "multiplayer",
+      "path": "src/quickjs_backend.cpp",
+      "baselineSource": "/mnt/c/timerApp/github-staging/wz-android-0.92/vendor/native-091/source/multiplayer/src/quickjs_backend.cpp",
+      "beforeSHA256": "8de0c082a38e968095744aaa02780642f60f4d359598f796e9c61ca69551b60e",
+      "afterSHA256": "b781c5b6f180986e7e9bf730c34d9547977892f72f4c2d048dc67a54b557b96a"
+    },
+    {
+      "family": "offline",
+      "path": "src/order.cpp",
+      "baselineSource": "/home/punkech/wz-blueprint-20261107/source/src/order.cpp",
+      "beforeSHA256": "b4728852201fdb4634e13efe6eb1dd9437156fd21762720430524e041f8f1f97",
+      "afterSHA256": "6fe9b43b7c80feb00367efff675d177bd103826f51d5686ed6bdcdd31f03c45c"
+    },
+    {
+      "family": "multiplayer",
+      "path": "src/order.cpp",
+      "baselineSource": "/home/punkech/wz-mp-070/source/src/order.cpp",
+      "beforeSHA256": "b4728852201fdb4634e13efe6eb1dd9437156fd21762720430524e041f8f1f97",
+      "afterSHA256": "6fe9b43b7c80feb00367efff675d177bd103826f51d5686ed6bdcdd31f03c45c"
+    },
+    {
+      "family": "offline",
+      "path": "src/keybind.cpp",
+      "baselineSource": "/home/punkech/wz-blueprint-20261107/source/src/keybind.cpp",
+      "beforeSHA256": "5730cf9a2b791a6a437f4e0da040e9dbb75e8befb48dc02caefb1a8e824355ed",
+      "afterSHA256": "eebd9e22c85860213ef4844d9a2e00eeed0af7d55317268f5693a400ec74c351"
+    },
+    {
+      "family": "multiplayer",
+      "path": "src/keybind.cpp",
+      "baselineSource": "/home/punkech/wz-mp-070/source/src/keybind.cpp",
+      "beforeSHA256": "fc44389817ad6f1e4452db02ce4253ce701aca9406554770a33ad8c7fa9cda4b",
+      "afterSHA256": "4aab72d6b0b63fa1be3acfd9cf06486c89f5068e7687c8f26343554473f0790f"
+    }
+  ],
+  "mediumHealthThreshold": 75,
+  "allOwnedCombat": true,
+  "newbornNativeEnumeration": true,
+  "synchronizedSecondaryOrders": true,
+  "protectedGroupedDispatch": true,
+  "protectedUIStopDispatch": true,
+  "protectedPhysicalS": true
+}

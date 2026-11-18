@@ -1,14 +1,18 @@
 # Warzone Towers
 
-**Current test revision:0.92 (version code92).** Clean Players panels across Campaign, Towers, FFA and multiplayer, with native participant/spectator identities and permission-guarded observer details. The accepted cellular lobby fix and normal updater/signing path are retained. This branch is a test backup, not a stable/main promotion.
+**Current test revision: 0.95 (version code95).** The combined backup includes automatic Medium-damage repair and protected ALL COMBAT (0.93), single-player Survival on TDN2/Wave plus crystal-only More Fortress items and save/load fixes (0.94), and Hub Watch Replay with battlefield/minimap/playback controls (0.95). Accepted cellular lobby networking and polished Players panels are retained.
 
-[APK and complete source backup](https://github.com/rbabbit/wz-android/releases/tag/v0.92-test) · [Test notes and hashes](archive/v0.92-test/) · [Sealed runtime and62 captures](test-release-092/) · [Approved mockups](docs/mockups/players-clean-v2/)
+[Normal test APKs and complete source backup](https://github.com/rbabbit/wz-android/releases/tag/v0.95-test) · [Combined backup inventory](docs/releases/0.95-combined-test-backup.md) · [Latest replay audit](archive/v0.95-test/AUDIT095.md)
 
-The Git checkout already contains the restored current source. Run `git lfs pull` after cloning to obtain the two original LFS payloads. Build with `tools/build-normal-apk.py` and your existing private signing key, JDK and Android SDK. The complete release ZIP preserves its historical root and restoration profiles; follow `test-release-092/README.md` after extracting that ZIP.
+The Git checkout contains the effective current source. Run `git lfs pull` after cloning for the two original LFS payloads. Build with `tools/build-normal-apk.py`, your existing normal signing key, JDK and Android SDK. The complete source ZIP preserves the original tree and restoration profiles; after extracting, follow `test-release-095/README.md` to apply the exact0.95 build inputs. Private keys and passwords are excluded.
 
-The exact delivery APK was checked in the owned emulator using prepared saves and private native matches. Terrain remained black in that emulator; foreground models, navigation and Players pixels were inspected. Review the audit for native production/selection/input checks, seeded fixtures and limits. No new physical-phone cellular test is claimed.
+The exact normal APKs are retained separately as0.93,0.94 and0.95 release assets. Focused emulator checks cover their changed paths; see the sealed audits for prepared fixtures and limits. Replay checks used two real public recordings, native-frame validation, touch controls, Back, offline Retry and phone/compact layouts. Later Survival waves, every replay and physical-phone performance are not claimed.
 
-GitHub backup publication was explicitly authorized on2026-11-17 after the local test delivery. Historical sealed records retain their original publication:false statements. No VPS/update-feed, Google Play or stable release promotion is part of this backup; no new AAB was built.
+The user authorized this private GitHub backup on2026-11-18. Historical sealed records keep their original publication flags. No VPS/update-feed or Google Play change, AAB build or stable release promotion is included.
+
+## Previous test backup: 0.92
+
+[Players0.92 APK/source backup](https://github.com/rbabbit/wz-android/releases/tag/v0.92-test), [sealed checks](test-release-092/) and [approved mockups](docs/mockups/players-clean-v2/) remain preserved.
 
 **Development revision: 0.86 (86)** adds live Multiplayer background protection,
 concise directory retry errors, manual signed-APK updates from wz2100.uk, and

@@ -1,0 +1,45 @@
+{
+  "checks": [
+    "Selection ACK initially contains only healthy commandable units",
+    "New current-context UI STOP is consumed",
+    "An active RTR introduced after the selection ACK is not cancelled by UI STOP",
+    "Guarded UI STOP sends a synchronized order only to ready selected owned combat units",
+    "ACK reports a complete disjoint stopped/protected selected-unit partition",
+    "Duplicate UI STOP cannot issue twice",
+    "Repair OFF does not let UI STOP cancel the active damaged RTB",
+    "Zero-ready selection is acknowledged as a harmless no-op",
+    "Threshold crossing before the retreat order is also protected at dispatch",
+    "ON protects a damaged HQ fallback waiter above the retreat threshold",
+    "Fully healed ready unit can receive UI STOP",
+    "Unsafe UI STOP is rejected without an order",
+    "An unsafe request is consumed and cannot execute later",
+    "Cancellation is a consumed no-op even while unsafe or combat is OFF",
+    "Same-nonce cancellation replaces an unconsumed mailbox request and prevents later STOP replay",
+    "Stale context cannot stop units",
+    "Retired combat activation cannot stop units",
+    "ALL COMBAT OFF rejects its old UI stop request",
+    "Observer cannot issue UI STOP",
+    "Actual retained-family physical S dispatch skips a newly active RTR but stops the ready unit",
+    "Actual retained-family physical S dispatch skips a newly active RTR but stops the ready unit",
+    "Physical S also preserves active full-health rearming",
+    "Ordinary manual physical STOP remains available when ALL COMBAT is OFF"
+  ],
+  "passed": true,
+  "actualAndroidRun": false,
+  "nativeDroidAndNetworkCallsStubbed": true,
+  "staleSelectionThenNativeStateTransition": true,
+  "extractedActualKeyboardFunctions": [
+    {
+      "family": "offline",
+      "path": "vendor/native-093/source/offline/src/keybind.cpp",
+      "sha256": "eebd9e22c85860213ef4844d9a2e00eeed0af7d55317268f5693a400ec74c351"
+    },
+    {
+      "family": "multiplayer",
+      "path": "vendor/native-093/source/multiplayer/src/keybind.cpp",
+      "sha256": "4aab72d6b0b63fa1be3acfd9cf06486c89f5068e7687c8f26343554473f0790f"
+    }
+  ],
+  "helperSHA256": "9166144786ab9c956fc29d00284a82cf012c4699ce4e9677ce5cea208024c0d7",
+  "scope": "Actual shared UI STOP helper and both actual keyboard functions with native APIs stubbed; no physical Android input or real-time race reproduction claim"
+}

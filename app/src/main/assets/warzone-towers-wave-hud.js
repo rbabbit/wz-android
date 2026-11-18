@@ -248,7 +248,12 @@
     const index = line.indexOf(marker);
     if (index < 0) return;
     try {
-      state.snapshot = JSON.parse(line.slice(index + marker.length));
+      const packet = JSON.parse(line.slice(index + marker.length));
+      const config = window.__warzoneSurvivalConfig;
+      const survival = config?.mode === 'survival' && Object.isFrozen(config);
+      if (packet.mode !== (survival ? 'survival' : 'tower-defense')) return;
+      if (survival && (packet.profile !== 'survival' || packet.map !== config.map || packet.nativeLevel !== config.level || packet.totalRounds !== 60)) return;
+      state.snapshot = packet;
       render();
     } catch (_) {
       state.errors += 1;

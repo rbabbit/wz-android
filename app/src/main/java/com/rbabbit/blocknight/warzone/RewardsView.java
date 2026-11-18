@@ -44,6 +44,7 @@ final class RewardsView extends FrameLayout {
     private static final String[] CATEGORIES = {"Fortresses", "Defences", "Artillery", "Support"};
     private final Actions actions;
     private final boolean inGame;
+    private final String profile, mapId;
     private final Typeface face;
     private final LinearLayout drawer, rows;
     private final ScrollView scroll;
@@ -65,7 +66,12 @@ final class RewardsView extends FrameLayout {
 
     RewardsView(Context context, String mapId, String mapName, int balance,
             Map<String, Integer> inventory, Map<String, Integer> loadout, boolean inGame, Actions actions) {
+        this(context,"towers",mapId,mapName,balance,inventory,loadout,inGame,actions);
+    }
+    RewardsView(Context context, String profile, String mapId, String mapName, int balance,
+            Map<String, Integer> inventory, Map<String, Integer> loadout, boolean inGame, Actions actions) {
         super(context);
+        this.profile=RewardCatalog.profile(profile);this.mapId=mapId;
         this.actions = actions;
         this.inGame = inGame;
         face = Typeface.createFromAsset(context.getAssets(), "warzone/ui/Oswald.ttf");
@@ -238,6 +244,12 @@ final class RewardsView extends FrameLayout {
         if (busy) return;
         dismissOwnedPopup();
         selectedId = entry.id;
+        if (!entry.requires.isEmpty() && count(loadout,entry.requires)<1) {
+            showFeedback(entry.id,"Select "+RewardCatalog.get(entry.requires).name+" first",true);return;
+        }
+        if (inGame && entry.moreFortress && entry.consumedOnApply() && count(loadout,entry.id)>0) {
+            showFeedback(entry.id,"Applied this run",true);return;
+        }
         if (maxQuantity(entry) < 1) {
             showFeedback(entry.id, entry.fortress ? "Fortress limit reached" : "Maximum stock reached", true);
             return;
@@ -293,6 +305,8 @@ final class RewardsView extends FrameLayout {
     }
 
     private int maxQuantity(RewardCatalog.Item item) {
+        if(!eligible(item)||!item.requires.isEmpty()&&count(loadout,item.requires)<1)return 0;
+        if(inGame&&item.moreFortress&&item.consumedOnApply())return Math.max(0,1-count(loadout,item.id));
         if (inGame) {
             if (item.fortress) return 3;
             if ("laser_sat".equals(item.id) || item.nativeId.isEmpty()) return 1;
@@ -309,6 +323,7 @@ final class RewardsView extends FrameLayout {
     }
 
     private int maxOwned(RewardCatalog.Item item) {
+        if(!eligible(item)||!item.requires.isEmpty()&&count(loadout,item.requires)<1)return 0;
         int available = Math.min(count(inventory, item.id), item.maxPerMatch);
         if (item.fortress) {
             int other = 0;
@@ -318,9 +333,12 @@ final class RewardsView extends FrameLayout {
         return available;
     }
 
+    private boolean eligible(RewardCatalog.Item item) {
+        try{RewardCatalog.requireEligible(item,profile,mapId);return true;}catch(IllegalArgumentException error){return false;}
+    }
     private List<RewardCatalog.Item> visibleItems() {
         List<RewardCatalog.Item> values = new ArrayList<>();
-        for (RewardCatalog.Item item : RewardCatalog.list()) if (category.equals(item.category)) values.add(item);
+        for (RewardCatalog.Item item : RewardCatalog.list()) if (category.equals(item.category)&&eligible(item)) values.add(item);
         return values;
     }
 
@@ -349,14 +367,14 @@ final class RewardsView extends FrameLayout {
 
     private String itemStatus(RewardCatalog.Item entry) {
         if (!inGame) return "Stored " + count(inventory, entry.id);
-        if (entry.nativeId.isEmpty()) return loadout.containsKey(entry.id) ? "Applied this match" : "Not applied";
+        if (entry.consumedOnApply()) return loadout.containsKey(entry.id) ? "Applied this match" : "Not applied";
         return "This match " + count(loadout, entry.id);
     }
 
     private final class ItemRow {
         final RewardCatalog.Item entry;
         final LinearLayout root;
-        final TextView name, status, amount;
+        final TextView name, status, amount, details;
         final Button owned;
         int background = Integer.MIN_VALUE;
 
@@ -392,6 +410,8 @@ final class RewardsView extends FrameLayout {
             name.setMaxLines(2);
             name.setEllipsize(TextUtils.TruncateAt.END);
             labels.addView(name, new LinearLayout.LayoutParams(-1, -2));
+            details=copy(entry.description,10,MUTED);details.setMaxLines(4);details.setEllipsize(TextUtils.TruncateAt.END);
+            details.setVisibility(entry.moreFortress?VISIBLE:GONE);labels.addView(details,new LinearLayout.LayoutParams(-1,-2));
             status = copy("", 10, MUTED);
             status.setDuplicateParentStateEnabled(true);
             status.setMaxLines(2);
@@ -440,6 +460,7 @@ final class RewardsView extends FrameLayout {
             root.setEnabled(!busy);
             boolean light = fill == TowersTheme.PRIMARY;
             name.setTextColor(TowersTheme.buttonText(light));
+            details.setTextColor(TowersTheme.controlText(light,MUTED));
             amount.setTextColor(TowersTheme.buttonText(light));
             String text = itemStatus(entry);
             if (pending) text += " · " + ("buy".equals(pendingKind) ? "Adding…" : "Saving…");
@@ -454,7 +475,7 @@ final class RewardsView extends FrameLayout {
             owned.setEnabled(!busy);
             owned.setContentDescription("Choose stored " + entry.name + " quantity, " + selected
                     + " selected from " + stored + " stored");
-            root.setContentDescription("Buy 1 " + entry.name + " for " + entry.price + " crystals. " + text);
+            root.setContentDescription("Buy 1 " + entry.name + " for " + entry.price + " crystals. " + entry.description + " " + text);
         }
     }
 
@@ -567,6 +588,7 @@ final class RewardsView extends FrameLayout {
     }
 
     private Bitmap image(String id) {
+        if(id.startsWith("mf_"))return moreFortressImage(id);
         if (artwork.containsKey(id)) return artwork.get(id);
         String filename;
         switch (id) {
@@ -598,6 +620,23 @@ final class RewardsView extends FrameLayout {
         } catch (Exception problem) { Log.w("TowersRewards", "Reward image unavailable: " + filename, problem); }
         artwork.put(id, result);
         return result;
+    }
+
+    private Bitmap moreFortressImage(String id) {
+        if(artwork.containsKey(id))return artwork.get(id);
+        String path;
+        switch(id){
+            case "mf_aa_flak":case "mf_assault_gun":case "mf_flamer":case "mf_laser":case "mf_rim116":case "mf_howitzer":case "mf_atgm_emplacement":
+                path="warzone/more-fortress-icons/"+id+".png";break;
+            case "mf_atgm_design":path="warzone/more-fortress-icons/mf_atgm_emplacement.png";break;
+            case "mf_fortress_sensor":path="warzone/research-icons/Wide Spectrum Sensor Tower.gif";break;
+            default:path="warzone/research-icons/Improved Hardcrete.gif";
+        }
+        Bitmap result=null;
+        try(InputStream input=getContext().getAssets().open(path)){
+            BitmapFactory.Options options=new BitmapFactory.Options();options.inScaled=false;result=BitmapFactory.decodeStream(input,null,options);
+        }catch(Exception error){Log.w("TowersRewards","Reward image unavailable: "+path,error);}
+        artwork.put(id,result);return result;
     }
 
     private ImageView crystal() {

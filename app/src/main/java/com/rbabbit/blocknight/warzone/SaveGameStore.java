@@ -42,7 +42,7 @@ final class SaveGameStore {
   }
 
   SaveGameStore(Context context, String mode) {
-    if (!"towers".equals(mode) && !"campaign".equals(mode) && !"ffa".equals(mode))
+    if (!"towers".equals(mode) && !"campaign".equals(mode) && !"ffa".equals(mode) && !"survival".equals(mode))
       throw new IllegalArgumentException("Invalid saved game mode.");
     this.mode = mode;
     root = new File(context.getFilesDir(), mode + "-saved-games");
@@ -143,6 +143,7 @@ final class SaveGameStore {
       }
       validateNativeGam(meta, gamData);
       if ("ffa".equals(meta.optString("mode"))) validateFfaArchive(meta, mainData, scriptData);
+      if ("survival".equals(mode)) validateSurvivalArchive(meta, scriptData);
       Set<String> actual = new HashSet<>();
       Enumeration<? extends ZipEntry> entries = zip.entries();
       while (entries.hasMoreElements()) if (!actual.add(entries.nextElement().getName())) throw new IOException("Duplicate saved game file.");
@@ -158,6 +159,14 @@ final class SaveGameStore {
         : mode.equals(savedMode);
     if (!sameMode)
       throw new IOException("This save belongs to a different game mode.");
+    if ("survival".equals(mode)) {
+      String map = metadata.optString("mapId");
+      if (!"survival".equals(metadata.optString("profile")) || !SurvivalMapCatalog.isKnownId(map)
+          || !SurvivalMapCatalog.get(map).mapName.equals(metadata.optString("nativeLevel")))
+        throw new IOException("Invalid Survival save identity.");
+    } else if ("towers".equals(mode) && !"towers".equals(metadata.optString("profile", "towers"))) {
+      throw new IOException("This save belongs to a different Towers profile.");
+    }
     if ("ffa".equals(mode)) {
       String map = metadata.optString("mapId");
       int players = FfaMapCatalog.playerCount(map);
@@ -172,6 +181,22 @@ final class SaveGameStore {
     if (!metadata.getString("session").matches("[A-Za-z0-9_-]{1,96}")
         || !metadata.getString("mapId").matches("[a-zA-Z0-9_-]{1,64}"))
       throw new IOException("Invalid save identity.");
+  }
+  private static void validateSurvivalArchive(JSONObject metadata, byte[] scriptData) throws Exception {
+    if (scriptData == null) throw new IOException("The saved Survival state is incomplete.");
+    JSONObject script = new JSONObject(new String(scriptData, StandardCharsets.UTF_8));
+    for (Iterator<String> keys = script.keys(); keys.hasNext();) {
+      JSONObject context = script.optJSONObject(keys.next());
+      if (context == null) continue;
+      JSONObject identity = context.optJSONObject("survivalIdentity"), reward = context.optJSONObject("wtreward_match");
+      if (identity == null || reward == null || context.optJSONObject("warzoneTowersWaves_state") == null) continue;
+      if (identity.optInt("version", -1) == 94 && "survival".equals(identity.optString("mode"))
+          && "survival".equals(identity.optString("profile")) && identity.optInt("player", -1) == 0
+          && identity.optInt("enemyPlayer", -1) == 1 && metadata.getString("mapId").equals(identity.optString("map"))
+          && metadata.getString("nativeLevel").equals(identity.optString("level"))
+          && metadata.getString("session").equals(reward.optString("session"))) return;
+    }
+    throw new IOException("The saved Survival rules did not match this battle.");
   }
   private static void validateNativeGam(JSONObject metadata, byte[] data) throws Exception {
     if (data == null) throw new IOException("The saved game is missing gam.json.");

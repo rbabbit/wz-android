@@ -1,13 +1,13 @@
 /* Matched4.7 client UI bridge: no WASM addresses, rules mods or simulation hooks. */
 (() => {
  'use strict';
- let prepared=null,module=null,serial=0,cameraSerial=0,combatSerial=0,lastEvent=0,lastAcknowledgedEvent=0,lastTerrainRevision=-1,lastRoomKey='',lastRoomDelivery=0,roomPending=false,queue=Promise.resolve(),polling=false,stopped=false;
+ let prepared=null,module=null,serial=0,cameraSerial=0,combatSerial=0,repairSerial=0,lastEvent=0,lastAcknowledgedEvent=0,lastTerrainRevision=-1,lastRoomKey='',lastRoomDelivery=0,roomPending=false,queue=Promise.resolve(),polling=false,stopped=false;
  let guardedInput=null;
  const prefix='/data/mp/multiplay/script/rules/';
  const fencedInput={pointer:0,mouse:0,touch:0,wheel:0};
  let roomPreviewCache=null;
  const native=globalThis.PcMultiplayerNative={state:null,room:null,terrain:null,reports:{ready:false,reports:[]},errors:[],
-  prepare,ready:initialize,poll,refresh:()=>{poll();return Promise.resolve(native.state);},command,roomCommand,roomMapPreview,setCamera,cancelCamera,setCombatLock,combatLockIntent:null,researchReports:()=>native.reports,cancelGuardedInput};
+  prepare,ready:initialize,poll,refresh:()=>{poll();return Promise.resolve(native.state);},command,roomCommand,roomMapPreview,setCamera,cancelCamera,setCombatLock,combatLockIntent:null,setRepairPolicy,repairPolicyIntent:null,combatStopIntent:null,researchReports:()=>native.reports,cancelGuardedInput};
  const ordersAllowed=()=>native.state?.canIssueOrders!==false&&native.state?.spectator!==true&&!(Number.isInteger(native.state?.realPlayer)&&Number.isInteger(native.state?.player)&&native.state.realPlayer!==native.state.player);
  function fail(error){const text=String(error?.message||error);if(native.errors.at(-1)!==text)native.errors.push(text);if(native.errors.length>30)native.errors.shift();console.warn('Multiplayer UI: '+text);}
  function prepare(){
@@ -87,7 +87,7 @@
   const pending=guardedInput;if(!pending||pending.current()!==false)return;
   guardedInput=null;
   try{const path='/tmp/mp-mobile-input.json',request=read(path);
-   if(request?.nonce===pending.nonce&&request.action==='select-visible-trucks')module.FS.writeFile(path,JSON.stringify({nonce:pending.nonce+'-cancel',action:'cancel'}));
+   if(request?.nonce===pending.nonce&&request.action===pending.action&&['select-visible-trucks','stop-selected'].includes(request.action))module.FS.writeFile(path,JSON.stringify({nonce:pending.nonce+'-cancel',action:'cancel'}));
   }catch(error){fail(error);}
  }
  function command(action,data={},current=()=>true,timeout=2500){
@@ -97,7 +97,11 @@
    if(!ordersAllowed()){resolve({ok:false,reason:'spectator-read-only'});return;}
    const nonce='mp-ui-'+Date.now()+'-'+(++serial),request={...data,action,nonce};
    let expired=false;
-   try{module.FS.writeFile('/tmp/mp-mobile-input.json',JSON.stringify(request));if(action==='select-visible-trucks')guardedInput={nonce,current:()=>!expired&&current()};}catch(error){fail(error);resolve({ok:false,reason:'native-unavailable'});return;}
+   try{
+    module.FS.writeFile('/tmp/mp-mobile-input.json',JSON.stringify(request));
+    if(['select-visible-trucks','stop-selected'].includes(action))guardedInput={nonce,action,current:()=>!expired&&current()};
+    if(action==='stop-selected')native.combatStopIntent=Object.freeze(request);
+   }catch(error){fail(error);resolve({ok:false,reason:'native-unavailable'});return;}
    const start=performance.now();
    const inspect=()=>{
     if(current()===false){cancelGuardedInput();resolve({ok:false,reason:'selection-cancelled'});return;}
@@ -190,6 +194,18 @@
    module.FS.writeFile('/tmp/mp-mobile-combat.json.tmp',JSON.stringify(request));
    module.FS.rename('/tmp/mp-mobile-combat.json.tmp','/tmp/mp-mobile-combat.json');
    native.combatLockIntent=Object.freeze(request);return true;
+  }catch(error){fail(error);return false;}
+ }
+ function setRepairPolicy(value){
+  if(stopped||!module?.FS||!value||typeof value.enabled!=='boolean'||native.state?.worldReady!==true||!ordersAllowed())return false;
+  const ack=native.state?.repairPolicy,context=value.context;
+  if(ack?.schemaVersion!==93||ack.canIssueOrders!==true||typeof context!=='string'||!context.length
+      ||context!==ack.context||context!==native.state?.combatLock?.context)return false;
+  const request={enabled:value.enabled,context,nonce:'mp-repair-'+Date.now()+'-'+(++repairSerial)};
+  try{
+   module.FS.writeFile('/tmp/mp-mobile-repair-v93.json.tmp',JSON.stringify(request));
+   module.FS.rename('/tmp/mp-mobile-repair-v93.json.tmp','/tmp/mp-mobile-repair-v93.json');
+   native.repairPolicyIntent=Object.freeze(request);return true;
   }catch(error){fail(error);return false;}
  }
  globalThis.__towersHtml={session:'multiplayer-'+Date.now(),isActive:()=>!!native.state?.worldReady&&ordersAllowed(),isEnded:()=>stopped||!ordersAllowed(),

@@ -1,0 +1,40 @@
+{
+  "passed": true,
+  "scope": "Focused actual-function VM/source checks and syntax; separate from exact Android gameplay. Repeated only to persist previously missing machine-readable proof.",
+  "candidateAPK_SHA256": "4f48c3e3ba80c6562ce711a4adab17704cd40737bc0362e6732bd58ecf2862b1",
+  "checks": [
+    {
+      "path": "tools/check-repair-ui-093.cjs",
+      "sha256": "61762a9445f13746f57c170fdda4a2c209d2503f79636ea656ddd4ba43fd6d1c",
+      "returnCode": 0,
+      "stdout": "{\n  \"scope\": \"Actual extracted UI transition/selection functions; native simulation and Android runtime are separate\",\n  \"checks\": [\n    \"Offline unmanaged native save stances cause no initial write\",\n    \"Offline ON writes an atomic context-bound request and waits for native ACK\",\n    \"Offline stale context, stale nonce and unconfirmed queued stance never turn green\",\n    \"Offline green follows native application and remains through newborn synchronization\",\n    \"Offline OFF clears green immediately and ignores the older ON acknowledgement\",\n    \"Offline rapid ON-OFF keeps only newest native intent authoritative\",\n    \"Offline new native context resets global toggle without overwriting loaded stances\",\n    \"Offline missing owner acknowledgement and duel mode cannot write a repair policy\",\n    \"MP actual adapter writes no unmanaged initial policy and waits for matching applied ACK\",\n    \"MP native acknowledged ON survives newborn pending; OFF cancels its visual latch\",\n    \"MP spectator, viewed-player mismatch, hidden page and stale context cannot write\",\n    \"MP raw native adapter rejects malformed/stale/foreign repair requests\",\n    \"Offline and MP selection ACKs require the exact commandable/protected partition\",\n    \"Offline mass movement dispatches ready combat only; all-repairing and empty armies no-op without timeout\",\n    \"MP empty/all-protected selection safely no-ops while ALL COMBAT remains latched\",\n    \"All four modes use canonical controls and approved black/green Repair faces\"\n  ],\n  \"passed\": true,\n  \"checkCount\": 16\n}\n",
+      "stderr": ""
+    },
+    {
+      "path": "tools/check-repair-stop-ui-093.cjs",
+      "sha256": "27a4723c279541fa07a984fa1fac33ac4847c4e895e8a9193cb1bbcaec41e530",
+      "returnCode": 0,
+      "stdout": "{\n  \"passed\": true,\n  \"scope\": \"Actual extracted UI routes and ACK validation; native/Android checks separate\",\n  \"checkCount\": 8,\n  \"checks\": [\n    \"Offline and MP ACKs bind schema/nonce/context/activation and exact stopped/protected selected partition\",\n    \"Offline ALL COMBAT STOP posts native mailbox and only matching native ACK completes diagnostics\",\n    \"Offline protected-only ACK is a successful no-op; stale world cancels without later success\",\n    \"Offline timeout replaces pending native request with cancel and clears pending state\",\n    \"Offline ordinary, constructor FIFO and Duel STOP retain legacy rule path, including tool teardown\",\n    \"MP route is guarded only while ALL COMBAT owns selection; worker/manual/observer behavior stays distinct\",\n    \"MP pending STOP/truck cancellation replaces only its own current mailbox request\",\n    \"MP queued STOP completes only its matching live ACK; context change and cancellation cannot count stale success\"\n  ]\n}\n",
+      "stderr": ""
+    }
+  ],
+  "syntax": [
+    {
+      "path": "warzone-touch-controls.js",
+      "sha256": "e3071db7274bc0c1dde5acba71a33bc0790b0f09ee3a0544d1ea17323d801989",
+      "returnCode": 0
+    },
+    {
+      "path": "multiplayer/mobile-controls.js",
+      "sha256": "8628f9a403a7251134d7300e09522652beef901a4a5c462a8582b7dd649576b9",
+      "returnCode": 0
+    },
+    {
+      "path": "multiplayer/native-ui-adapter.js",
+      "sha256": "c382753aa4ab0565b3cc22456bee7c761c5daeed2e2a2b634de8b032ec249f76",
+      "returnCode": 0
+    }
+  ],
+  "deviceOperations": false,
+  "sourceMutation": false
+}

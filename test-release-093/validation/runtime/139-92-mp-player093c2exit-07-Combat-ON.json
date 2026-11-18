@@ -1,0 +1,310 @@
+{
+  "before": {
+    "buttons": [
+      {
+        "disabled": false,
+        "hidden": false,
+        "id": "blocknight-combat",
+        "pressed": "false",
+        "text": "ALL COMBAT"
+      },
+      {
+        "disabled": false,
+        "hidden": false,
+        "id": "blocknight-repair",
+        "pressed": "true",
+        "text": "REPAIR"
+      },
+      {
+        "disabled": false,
+        "hidden": false,
+        "id": "leave",
+        "pressed": null,
+        "text": "LOBBY"
+      }
+    ],
+    "controls": {
+      "combatLock": false,
+      "repairPolicyEnabled": true,
+      "repairPolicyIntent": {
+        "context": "native-combat90:56859:1:1",
+        "enabled": true,
+        "nonce": "mp-repair-1794957185367-1"
+      },
+      "repairPolicyPending": false,
+      "repairPolicyRequested": true
+    },
+    "directory": {
+      "games": [
+        {
+          "id": "qa-repair-093-candidate2-exitonly-player",
+          "joinable": true
+        }
+      ],
+      "loading": false
+    },
+    "fixture": {
+      "fixtureId": "qa-repair-093-candidate2-exitonly-player",
+      "installed": true,
+      "port": 22224,
+      "role": "player"
+    },
+    "http": {
+      "main": true,
+      "pending": 0,
+      "relayed": 0
+    },
+    "native": {
+      "canIssueOrders": true,
+      "combatLock": {
+        "activation": "",
+        "combatIds": [],
+        "commandableIds": [],
+        "context": "native-combat90:56859:1:1",
+        "deselectAppliedNonce": "",
+        "deselectNonce": "",
+        "enabled": false,
+        "pendingDeselect": false,
+        "player": 1,
+        "protectedIds": [],
+        "reason": "off",
+        "requestNonce": "mp-combat-1794957161604-2",
+        "requestedSuspended": false,
+        "revision": 2,
+        "selectedIds": [],
+        "suspended": false
+      },
+      "frame": 60,
+      "gameTime": 5102,
+      "phase": "game",
+      "player": 1,
+      "realPlayer": 1,
+      "rendered": true,
+      "repairPolicy": {
+        "applied": true,
+        "appliedIds": [],
+        "canIssueOrders": true,
+        "combatIds": [],
+        "context": "native-combat90:56859:1:1",
+        "diagnosticUnitsTruncated": false,
+        "enabled": true,
+        "failedIds": [],
+        "managed": true,
+        "pending": false,
+        "pendingIds": [],
+        "protectedIds": [],
+        "reason": "on",
+        "requestNonce": "mp-repair-1794957185367-1",
+        "revision": 2,
+        "schemaVersion": 93,
+        "scope": "owned-combat-map",
+        "thresholdHealthPercent": 75,
+        "units": [],
+        "worldSafe": true
+      },
+      "spectator": false,
+      "worldReady": true,
+      "worldSafe": true
+    },
+    "path": "/multiplayer/index.html",
+    "room": null,
+    "session": {
+      "active": true,
+      "phase": "game"
+    }
+  },
+  "fingerTap": {
+    "selector": "#blocknight-combat",
+    "target": {
+      "enabled": true,
+      "hit": true,
+      "id": "blocknight-combat",
+      "rect": {
+        "bottom": 48,
+        "height": 36,
+        "left": 349.9583435058594,
+        "right": 445.9166793823242,
+        "top": 12,
+        "width": 95.95833587646484,
+        "x": 349.9583435058594,
+        "y": 12
+      },
+      "text": "ALL COMBAT",
+      "visible": true
+    },
+    "physical": [
+      907,
+      58
+    ],
+    "geometry": {
+      "activity": "com.rbabbit.blocknight.warzone.MultiplayerActivity",
+      "css": {
+        "dpr": 3,
+        "height": 554,
+        "url": "/multiplayer/index.html",
+        "visual": {
+          "height": 360,
+          "offsetLeft": 0,
+          "offsetTop": 0,
+          "width": 1164
+        },
+        "width": 1164
+      },
+      "physical": [
+        2400,
+        1080
+      ],
+      "bounds": [
+        131,
+        0,
+        2400,
+        1080
+      ],
+      "source": "Actual dumpsys MultiplayerActivity WebView/nativeLobbyView sibling hierarchy; uniform fitViewport verified",
+      "measuredUTC": "2026-11-17T23:13:01.072764+00:00",
+      "nativeVirtualRect": [
+        131,
+        0,
+        3623,
+        1662
+      ],
+      "nativeAvailableRect": [
+        131,
+        0,
+        2400,
+        1080
+      ],
+      "nativeParentRect": [
+        0,
+        0,
+        2400,
+        1080
+      ],
+      "derivedScaleX": 0.6497709049255441,
+      "derivedScaleY": 0.6498194945848376,
+      "derivedUniformScale": 0.6497951997551908,
+      "virtualCSSDprTolerancePixels": 4.0,
+      "webViewFlags": "VFED..C..",
+      "nativeAvailableViewClass": "com.rbabbit.blocknight.warzone.MultiplayerLobbyView",
+      "nativeLobbyFlags": "GFE...C..",
+      "webViewVisible": true,
+      "uiaFailureType": null,
+      "nativeMethodExplicitlyRequested": true
+    }
+  },
+  "after": {
+    "buttons": [
+      {
+        "disabled": false,
+        "hidden": false,
+        "id": "blocknight-combat",
+        "pressed": "true",
+        "text": "ALL COMBAT"
+      },
+      {
+        "disabled": false,
+        "hidden": false,
+        "id": "blocknight-repair",
+        "pressed": "true",
+        "text": "REPAIR"
+      },
+      {
+        "disabled": false,
+        "hidden": false,
+        "id": "leave",
+        "pressed": null,
+        "text": "LOBBY"
+      }
+    ],
+    "controls": {
+      "combatLock": true,
+      "repairPolicyEnabled": true,
+      "repairPolicyIntent": {
+        "context": "native-combat90:56859:1:1",
+        "enabled": true,
+        "nonce": "mp-repair-1794957185367-1"
+      },
+      "repairPolicyPending": false,
+      "repairPolicyRequested": true
+    },
+    "directory": {
+      "games": [
+        {
+          "id": "qa-repair-093-candidate2-exitonly-player",
+          "joinable": true
+        }
+      ],
+      "loading": false
+    },
+    "fixture": {
+      "fixtureId": "qa-repair-093-candidate2-exitonly-player",
+      "installed": true,
+      "port": 22224,
+      "role": "player"
+    },
+    "http": {
+      "main": true,
+      "pending": 0,
+      "relayed": 0
+    },
+    "native": {
+      "canIssueOrders": true,
+      "combatLock": {
+        "activation": "mp-combat-user-1794957198804-1",
+        "combatIds": [],
+        "commandableIds": [],
+        "context": "native-combat90:56859:1:1",
+        "deselectAppliedNonce": "",
+        "deselectNonce": "",
+        "enabled": true,
+        "pendingDeselect": false,
+        "player": 1,
+        "protectedIds": [],
+        "reason": "on",
+        "requestNonce": "mp-combat-1794957199043-5",
+        "requestedSuspended": false,
+        "revision": 4,
+        "selectedIds": [],
+        "suspended": false
+      },
+      "frame": 82,
+      "gameTime": 7302,
+      "phase": "game",
+      "player": 1,
+      "realPlayer": 1,
+      "rendered": true,
+      "repairPolicy": {
+        "applied": true,
+        "appliedIds": [],
+        "canIssueOrders": true,
+        "combatIds": [],
+        "context": "native-combat90:56859:1:1",
+        "diagnosticUnitsTruncated": false,
+        "enabled": true,
+        "failedIds": [],
+        "managed": true,
+        "pending": false,
+        "pendingIds": [],
+        "protectedIds": [],
+        "reason": "on",
+        "requestNonce": "mp-repair-1794957185367-1",
+        "revision": 2,
+        "schemaVersion": 93,
+        "scope": "owned-combat-map",
+        "thresholdHealthPercent": 75,
+        "units": [],
+        "worldSafe": true
+      },
+      "spectator": false,
+      "worldReady": true,
+      "worldSafe": true
+    },
+    "path": "/multiplayer/index.html",
+    "room": null,
+    "session": {
+      "active": true,
+      "phase": "game"
+    }
+  },
+  "nonemptyBefore": false
+}

@@ -63,7 +63,7 @@ final class SavedGamesView extends FrameLayout {
 
         LinearLayout header = new LinearLayout(context);
         header.setGravity(Gravity.CENTER_VERTICAL);
-        TextView title = copy("ffa".equals(mode) ? "FFA SAVES" : "campaign".equals(mode) ? "CAMPAIGN SAVES" : "SAVED GAMES", 20, INK);
+        TextView title = copy("survival".equals(mode) ? "SURVIVAL SAVES" : "ffa".equals(mode) ? "FFA SAVES" : "campaign".equals(mode) ? "CAMPAIGN SAVES" : "SAVED GAMES", 20, INK);
         title.setTypeface(face);
         title.setSingleLine(true);
         title.setEllipsize(TextUtils.TruncateAt.END);

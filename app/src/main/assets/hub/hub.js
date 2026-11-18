@@ -12,6 +12,39 @@
   let state = {status: 'loading', summary: {complete: false}};
   let route = {view: 'results', board: 'global', search: '', offset: 0};
   const history = [];
+  let replayFrame = null, replayTrigger = null, activeReplayUrl = '';
+
+  function trustedReplay(value) {
+    try {
+      const url = new URL(value);
+      if (url.protocol !== 'https:' || url.username || url.password || url.port && url.port !== '443' || url.hash) return null;
+      if (url.hostname === 'warzone2100.retropaganda.info' && /^\/replays\/[0-9]{10,20}\.wzrp$/.test(url.pathname) && !url.search) return url.href;
+      if (url.hostname === 'desktop-0467j9q.tail41fd3a.ts.net' && /^\/wzstats\/api\/v1\/replays\/[a-f0-9]{64}$/.test(url.pathname) && !url.search) return url.href;
+    } catch (_) {}
+    return null;
+  }
+  function replayLifecycle(name) {
+    try { replayFrame?.contentWindow?.dispatchEvent(new Event(name)); } catch (_) {}
+  }
+  function closeReplay(restoreFocus = true) {
+    if (!replayFrame) return false;
+    const frame = replayFrame; replayFrame = null; activeReplayUrl = '';
+    try { frame.contentWindow?.WarzoneReplay?.dispose?.(); } catch (_) {}
+    frame.remove(); document.body.classList.remove('hub-replay-open');
+    if (restoreFocus && replayTrigger?.isConnected) replayTrigger.focus({preventScroll: true});
+    replayTrigger = null; return true;
+  }
+  function watchReplay(value, trigger) {
+    const replay = trustedReplay(value);
+    if (!replay || disposed || paused || replayFrame) return;
+    replayTrigger = trigger; activeReplayUrl = replay;
+    const frame = document.createElement('iframe');
+    frame.id = 'hub-replay-frame'; frame.title = 'Battlefield replay'; frame.className = 'hub-replay-frame';
+    frame.setAttribute('allow', 'fullscreen'); frame.setAttribute('allowfullscreen', '');
+    frame.src = 'replay/index.html?replay=' + encodeURIComponent(replay);
+    frame.addEventListener('load', () => { if (paused) replayLifecycle('warzone-hub-pause'); });
+    replayFrame = frame; document.body.classList.add('hub-replay-open'); document.body.append(frame);
+  }
 
   function node(tag, className, text) {
     const value = document.createElement(tag);
@@ -186,6 +219,13 @@
     const meta = detailHeading(match.mapName || 'Unknown map', 'Match result');
     [date(match.endDate || match.startDate, true), duration(match.duration), number(playerCount(match)) + ' players', match.version ? 'Warzone ' + match.version : '']
       .filter(Boolean).forEach(value => meta.append(node('span', '', value)));
+    const replay = trustedReplay(match.replayUrl);
+    const watch = button('Watch Replay', 'watch-replay', () => watchReplay(replay, watch));
+    watch.disabled = !replay;
+    watch.setAttribute('aria-label', replay ? 'Watch this match replay' : 'Replay unavailable for this match');
+    const replayActions = node('div', 'replay-actions'); replayActions.append(watch);
+    if (!replay) replayActions.append(node('span', 'replay-unavailable', 'Replay unavailable for this match.'));
+    main.append(replayActions);
     main.append(node('h3', 'detail-heading', 'Players'));
     for (const player of players(match)) {
       const row = node('article', 'detail-player');
@@ -252,6 +292,7 @@
     query(true);
   }
   function back() {
+    if (closeReplay()) return true;
     if (!history.length) return false;
     route = history.pop();
     lastResult = null;
@@ -316,17 +357,18 @@
   function pause() {
     if (disposed || paused) return;
     clearTimeout(searchTimer);
+    replayLifecycle('warzone-hub-pause');
     send('cancel');
     paused = true;
     if (worker) { worker.terminate(); worker = null; }
   }
   function resume() {
     if (disposed || !paused) return;
-    paused = false; load();
+    paused = false; replayLifecycle('warzone-hub-resume'); load();
   }
   function dispose() {
     if (disposed) return;
-    pause(); disposed = true;
+    pause(); closeReplay(false); disposed = true;
   }
   tabs.results.addEventListener('click', () => showRoot('results'));
   tabs.rankings.addEventListener('click', () => showRoot('rankings'));
@@ -345,7 +387,8 @@
   addEventListener('pagehide', dispose);
   document.addEventListener('visibilitychange', () => { if (document.hidden) pause(); else resume(); });
   window.WarzoneHub = Object.freeze({back, dispose, pause, resume,
-    report: () => ({view: route.view, board: route.board, offset: route.offset || 0, historyDepth: history.length,
+    report: () => ({view: route.view, board: route.board, search: route.search || '', offset: route.offset || 0, historyDepth: history.length,
+      replayActive: Boolean(replayFrame), replayUrl: activeReplayUrl,
       status: state.status, paused, disposed, workerActive: Boolean(worker), requestId: queryId,
       summary: {complete: Boolean((state.summary || {}).complete), gameCount: (state.summary || {}).gameCount,
         playerCount: (state.summary || {}).playerCount, cached: Boolean((state.summary || {}).cached)}})});

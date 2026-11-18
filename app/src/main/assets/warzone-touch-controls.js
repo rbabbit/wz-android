@@ -664,7 +664,65 @@
   let combatIntentSerial = 0, combatOrderSerial = 0, combatInteractionUntil = 0, combatOffPending = false, combatError = '';
   const combatPhysicalPointers = new Set();
   const combatOffNonces = new Set();
+  let repairRequested = null, repairIntent = null, repairConfirmedNonce = '', repairContext = '', repairError = '';
+  let repairEnabled = false, repairPending = false, repairIntentSerial = 0;
+  let pendingCombatStop = null, lastCombatStopAck = null, lastCombatStopRequest = null, lastStopRoute = '', combatStopError = '', combatStopSerial = 0;
   function combatNow() { return typeof performance !== 'undefined' && typeof performance.now === 'function' ? performance.now() : Date.now(); }
+  function resetRepairPolicy() {
+    repairRequested = null; repairIntent = null; repairConfirmedNonce = ''; repairContext = ''; repairError = '';
+    repairEnabled = false; repairPending = false; paintRepairMode();
+  }
+  function repairPolicyMatches(ack, intent, context) {
+    return Boolean(ack?.schemaVersion === 93 && ack.managed === true && ack.canIssueOrders === true
+      && intent && ack.context === context && intent.context === context
+      && ack.requestNonce === intent.nonce && ack.enabled === intent.enabled);
+  }
+  function repairCanToggle() {
+    const ack = combatPacket?.repairPolicy, current = window.LaunchedModule || window.Module;
+    return state.battleActive && !state.stopNonce && !window.__towersHtml?.isEnded?.()
+      && window.__warzoneDuelConfig?.mode !== 'duel' && current?.calledRun === true
+      && Boolean(current?.FS?.writeFile && current?.FS?.rename && combatWorld?.context)
+      && ack?.schemaVersion === 93 && ack.canIssueOrders === true && ack.context === combatWorld.context;
+  }
+  function paintRepairMode() {
+    const doc = commandDocument();
+    for (const id of ['wt-repair', 'wt-campaign-repair']) {
+      const button = doc.getElementById(id); if (!button) continue;
+      button.dataset.repairEnabled = String(repairEnabled); button.dataset.repairPending = String(repairPending);
+      button.classList.toggle('active', repairEnabled); button.setAttribute('aria-pressed', String(repairEnabled));
+      button.setAttribute('aria-busy', String(repairPending)); button.disabled = !repairCanToggle();
+      button.title = repairError || (repairPending ? (repairEnabled
+        ? 'Automatic repair retreat is ON; applying Medium damage to new combat units'
+        : 'Waiting for the native game to apply the repair setting') : repairEnabled
+        ? 'Automatic repair retreat at 75% health is ON for all your combat units and new production; press to turn OFF'
+        : 'Enable automatic repair retreat at 75% health for all your combat units and new production');
+    }
+  }
+  function refreshRepairPolicy() {
+    const context = combatWorld?.context || '', ack = combatPacket?.repairPolicy;
+    if (repairContext && repairContext !== context) resetRepairPolicy();
+    repairContext = context;
+    if (repairRequested !== null && !repairIntent && repairCanToggle()) {
+      const request = {enabled:repairRequested, context, nonce:'offline-repair-'+Date.now()+'-'+(++repairIntentSerial)};
+      try {
+        const fs = (window.LaunchedModule || window.Module).FS, path = '/tmp/warzone-repair-policy-v93.json';
+        fs.writeFile(path+'.tmp', JSON.stringify(request), {encoding:'utf8'}); fs.rename(path+'.tmp', path);
+        repairIntent = request; repairError = '';
+      } catch (error) { repairError = String(error.message || error); }
+    }
+    const matching = repairPolicyMatches(ack, repairIntent, context);
+    if (matching && ack.applied === true && ack.pending === false) repairConfirmedNonce = repairIntent.nonce;
+    // An acknowledged ON remains green while a newborn's native stance is
+    // synchronizing. A fresh ON cannot turn green from requested intent alone.
+    repairEnabled = Boolean(repairRequested === true && matching && repairConfirmedNonce === repairIntent.nonce);
+    repairPending = repairRequested !== null && (!matching || ack.pending === true || ack.applied !== true);
+    paintRepairMode(); return repairEnabled;
+  }
+  function toggleRepairPolicy(force) {
+    refreshCombatSelection(); if (!repairCanToggle()) return false;
+    repairRequested = typeof force === 'boolean' ? force : repairRequested !== true;
+    repairIntent = null; repairConfirmedNonce = ''; repairError = ''; refreshRepairPolicy(); return repairRequested;
+  }
   function paintCombatMode() {
     const doc = commandDocument();
     for (const id of ['wt-all-combat', 'wt-campaign-all-combat', 'blocknight-select-all']) {
@@ -691,6 +749,7 @@
     const context = value.combatLock.context, session = window.__towersHtml?.session;
     if (combatWorld && (combatWorld.module !== current || combatWorld.session !== session || combatWorld.context !== context)) {
       state.combatLock = false; combatActivation = ''; combatOverride = ''; combatOffPending = false; combatOffNonces.clear(); combatIntent = null; ++combatOrderSerial;
+      resetRepairPolicy();
     }
     combatWorld = {module:current, session, context};
   }
@@ -699,6 +758,7 @@
     const current = window.LaunchedModule || window.Module;
     if (combatWorld && (combatWorld.module !== current || combatWorld.session !== window.__towersHtml?.session)) {
       state.combatLock=false;combatActivation='';combatOverride='';combatOffPending=false;combatOffNonces.clear();combatIntent=null;combatWorld=null;++combatOrderSerial;
+      resetRepairPolicy();
     }
     if (!value) { try { value = JSON.parse(current?.FS?.readFile('/tmp/warzone-combat-selection-v89.json', {encoding:'utf8'})); } catch (_) {} }
     if (value) { combatPacket = value; bindCombatWorld(value, current); }
@@ -719,9 +779,9 @@
     }
     paintCombatMode(); return true;
   }
-  function holdCombatSelection(reason = 'constructors') { combatOverride = String(reason); refreshCombatLock(); return true; }
+  function holdCombatSelection(reason = 'constructors') { cancelGuardedCombatStop('selection-overridden'); combatOverride = String(reason); refreshCombatLock(); return true; }
   function resumeCombatSelection(reason) { if (!reason || combatOverride === reason) combatOverride = ''; refreshCombatLock(); return !combatOverride; }
-  function resetCombatMode() { state.combatLock = false; combatOverride = ''; combatOffPending = false; combatOffNonces.clear(); combatIntent = null; ++combatOrderSerial; refreshCombatLock(); }
+  function resetCombatMode() { cancelGuardedCombatStop('combat-mode-reset'); state.combatLock = false; combatOverride = ''; combatOffPending = false; combatOffNonces.clear(); combatIntent = null; ++combatOrderSerial; refreshCombatLock(); }
   let constructorSelectionSerial = 0, combatFenceDisposed = false, pendingConstructorSelection = null;
   function cancelConstructorSelection() {
     const pending=pendingConstructorSelection;if(!pending)return;
@@ -777,11 +837,17 @@
     cancelConstructorSelection();return {ok:false, reason:'selection-timeout'};
   }
   function exactCombatSelection(value) {
-    const combat = value?.combatIds, selected = value?.selectedIds;
-    if (!Array.isArray(combat) || !Array.isArray(selected) || !combat.length || combat.length !== selected.length) return false;
-    if (![...combat, ...selected].every(id => Number.isInteger(id) && id > 0)) return false;
-    const wanted = new Set(combat), actual = new Set(selected);
-    return wanted.size === combat.length && actual.size === selected.length && selected.every(id => wanted.has(id));
+    const all = value?.combatIds, combat = value?.commandableIds ?? all, selected = value?.selectedIds;
+    if (!Array.isArray(all) || !Array.isArray(combat) || !Array.isArray(selected) || combat.length !== selected.length) return false;
+    if (![...all, ...combat, ...selected].every(id => Number.isInteger(id) && id > 0)) return false;
+    const owned = new Set(all), wanted = new Set(combat), actual = new Set(selected);
+    if (owned.size !== all.length || wanted.size !== combat.length || actual.size !== selected.length
+        || combat.some(id => !owned.has(id)) || selected.some(id => !wanted.has(id))) return false;
+    const protectedIds = value?.protectedIds;
+    if (protectedIds !== undefined && (!Array.isArray(protectedIds) || new Set(protectedIds).size !== protectedIds.length
+        || protectedIds.some(id => !Number.isInteger(id) || !owned.has(id) || wanted.has(id))
+        || protectedIds.length + combat.length !== all.length)) return false;
+    return true;
   }
   function refreshCombatSelection() {
     const current = window.LaunchedModule || window.Module;
@@ -808,6 +874,8 @@
       && state.battleActive && state.hudVisible && !document.hidden && !window.__towersHtml?.isEnded?.()
       && exactCombatSelection(value.combatSelection));
     refreshCombatLock(value);
+    refreshRepairPolicy();
+    pollGuardedCombatStop();
     const hudDocument = commandDocument();
     for (const id of ['wt-all-combat', 'wt-campaign-all-combat']) {
       const button = hudDocument.getElementById(id);
@@ -843,9 +911,11 @@
         button.setAttribute("aria-pressed", String(selected));
       }
     }
+    paintRepairMode();
   }
 
   function toggleCombatLock(force) {
+    cancelGuardedCombatStop('combat-mode-changed');
     cancelCombatInput();
     refreshCombatLock();
     if (window.__warzoneDuelConfig?.mode !== 'duel' && !combatWorld?.context) return false;
@@ -932,12 +1002,80 @@
     return result;
   }
 
+  function guardedStopAckMatches(ack, request) {
+    if (!ack || ack.schemaVersion !== 93 || !request || ack.nonce !== request.nonce
+        || ack.context !== request.context || ack.activation !== request.activation || typeof ack.ok !== 'boolean') return false;
+    const arrays = [ack.stoppedIds, ack.protectedIds, ack.selectedIds];
+    if (arrays.some(ids => !Array.isArray(ids) || new Set(ids).size !== ids.length
+        || ids.some(id => !Number.isInteger(id) || id <= 0))) return false;
+    const selected = new Set(ack.selectedIds), protectedIds = new Set(ack.protectedIds);
+    if (ack.protectedIds.some(id => !selected.has(id))
+        || ack.stoppedIds.some(id => !selected.has(id) || protectedIds.has(id))) return false;
+    return ack.ok ? ack.stoppedIds.length + ack.protectedIds.length === ack.selectedIds.length : !ack.stoppedIds.length;
+  }
+  function guardedCombatStopCurrent(pending) {
+    return pendingCombatStop === pending && state.stopNonce === pending.request.nonce && state.battleActive
+      && !document.hidden && !window.__towersHtml?.isEnded?.() && state.combatLock && !combatOverride
+      && pending.module === (window.LaunchedModule || window.Module) && pending.session === window.__towersHtml?.session
+      && pending.request.context === combatWorld?.context && pending.request.activation === combatActivation;
+  }
+  function cancelGuardedCombatStop(reason = 'stop-cancelled') {
+    const pending = pendingCombatStop; if (!pending) return false;
+    pendingCombatStop = null;
+    try {
+      const fs = pending.module.FS, path = '/tmp/warzone-combat-stop-v93.json';
+      const current = JSON.parse(fs.readFile(path, {encoding:'utf8'}));
+      if (current.nonce === pending.request.nonce) {
+        fs.writeFile(path+'.tmp', JSON.stringify({...pending.request, nonce:pending.request.nonce+'-cancel', cancel:true}), {encoding:'utf8'});
+        fs.rename(path+'.tmp', path);
+      }
+    } catch (_) { /* Context fencing still rejects a request from an old world. */ }
+    clearTimeout(state.stopTimer); state.stopTimer = null;
+    if (state.stopNonce === pending.request.nonce) state.stopNonce = null;
+    combatStopError = reason; updateCombatHud(); return true;
+  }
+  function pollGuardedCombatStop() {
+    const pending = pendingCombatStop; if (!pending) return;
+    if (!guardedCombatStopCurrent(pending)) { cancelGuardedCombatStop('stop-cancelled'); return; }
+    const ack = combatPacket?.combatStop;
+    if (ack?.nonce !== pending.request.nonce) return;
+    if (!guardedStopAckMatches(ack, pending.request)) { cancelGuardedCombatStop('invalid-stop-ack'); return; }
+    pendingCombatStop = null; clearTimeout(state.stopTimer); state.stopTimer = null; state.stopNonce = null;
+    lastCombatStopAck = ack; combatStopError = ack.ok ? '' : String(ack.reason || 'stop-not-applied');
+    if (ack.ok) {
+      state.stopAcks += 1; state.stoppedUnitIds = ack.stoppedIds.slice(); toggleQueueMode(false); vibrate(12);
+    } else window.BlockNightAndroid?.showNotice('STOP could not be applied. Please try again.');
+    updateCombatHud();
+  }
+  function startGuardedCombatStop() {
+    const current = window.LaunchedModule || window.Module;
+    const context = combatWorld?.context, activation = combatActivation;
+    if (!state.battleActive || !state.combatLock || combatOverride || !context || !activation || current?.calledRun !== true
+        || !current?.FS?.writeFile || !current?.FS?.rename) return false;
+    const request = {nonce:'offline-combat-stop-'+Date.now()+'-'+(++combatStopSerial), context, activation};
+    try {
+      current.FS.writeFile('/tmp/warzone-combat-stop-v93.json.tmp', JSON.stringify(request), {encoding:'utf8'});
+      current.FS.rename('/tmp/warzone-combat-stop-v93.json.tmp', '/tmp/warzone-combat-stop-v93.json');
+    } catch (error) { combatStopError = String(error.message || error); return false; }
+    pendingCombatStop = {request, module:current, session:window.__towersHtml?.session};
+    lastCombatStopRequest = request; lastStopRoute = 'native-combat-v93';
+    state.stopNonce = request.nonce; state.stopOrders += 1; combatStopError = '';
+    state.stopTimer = setTimeout(() => {
+      if (pendingCombatStop?.request.nonce !== request.nonce) return;
+      cancelGuardedCombatStop('native-stop-timeout');
+      window.BlockNightAndroid?.showNotice('STOP has not responded. Please try it again.');
+    }, 3000);
+    updateCombatHud(); return true;
+  }
   function stopSelected() {
     if (state.stopNonce) return true;
+    const guardedCombat = window.__warzoneDuelConfig?.mode !== 'duel' && state.combatLock && !combatOverride;
     const fs = zoomModule()?.FS;
     if (!fs?.writeFile || !fs?.rename) return false;
     window.__warzoneCommands?.cancelLinePlacement?.(null,true);
     releaseAll(); state.autoFight = false;
+    if (guardedCombat) return startGuardedCombatStop();
+    lastStopRoute = 'rules-fifo';
     const nonce = `${Date.now().toString(36)}-stop-${state.stopOrders + 1}`;
     const path = (campaign ? '/data/base/script/campaign/mobile/' : '/data/mp/multiplay/script/rules/') + 'warzone-towers-control-command.json';
     try {
@@ -984,7 +1122,12 @@
             || generation !== combatSerial || !state.battleActive || combatOverride) return false;
         const ack = combatPacket?.combatLock;
         if (combatPacket?.playing && ack?.enabled === true && ack.activation === activation && ack.context === context
-            && exactCombatSelection(combatPacket.combatSelection)) break;
+            && exactCombatSelection(combatPacket.combatSelection)) {
+          if (!(combatPacket.combatSelection.commandableIds ?? combatPacket.combatSelection.combatIds).length) {
+            combatError = ''; return false;
+          }
+          break;
+        }
         if (combatNow() - started >= 2500) { combatError = 'Native combat selection was not ready for this order.'; return false; }
         await new Promise(resolve => setTimeout(resolve, 20));
       }
@@ -1867,7 +2010,7 @@
         button.id = id;
         button.type = "button";
         const iconNames = {
-          "blocknight-select-all": "stack", "wt-all-combat": "stack", "blocknight-auto-fight": "arrows-clockwise",
+          "blocknight-select-all": "stack", "wt-all-combat": "stack", "wt-repair": "wrench", "blocknight-auto-fight": "arrows-clockwise",
           "blocknight-box-select": "selection", "blocknight-queue-orders": "stack-plus",
           "blocknight-stop": "hand-palm", "blocknight-base": "house",
           "blocknight-zoom-close": "x", "blocknight-zoom-battle": "crosshair",
@@ -1948,6 +2091,10 @@
         headerAll.setAttribute('aria-pressed', 'false');
         headerAll.dataset.combatSelected = 'false';
         orderGroup.appendChild(headerAll);
+        const repair = makeButton('wt-repair', 'REPAIR',
+          'Enable automatic repair retreat at 75% health for all your combat units and new production', toggleRepairPolicy);
+        repair.setAttribute('aria-pressed', 'false'); repair.setAttribute('aria-busy', 'false'); repair.dataset.repairEnabled = 'false';
+        orderGroup.appendChild(repair);
       }
       const techGroup = document.createElement("div");
       techGroup.className = "bn-command-group";
@@ -2961,7 +3108,7 @@
     if (active) { state.battleActive = true; if (canvas()) canvas().inert = false; window.WarzoneMusic?.setBattleActive?.(true); return; }
     // Release held buttons before disabling dispatch. A transition out of the
     // battle must never send Escape into the next native screen.
-    resetCombatMode(); releaseAll(true, false);
+    resetCombatMode(); resetRepairPolicy(); releaseAll(true, false);
     state.battleActive = false;
     window.WarzoneMusic?.setBattleActive?.(false);
     state.hudVisible = false;
@@ -3093,9 +3240,10 @@
   window.addEventListener("pagehide", () => {
     clearZoomAckTimer();
     resetCombatMode();
+    resetRepairPolicy();
     releaseAll(true);
   });
-  window.addEventListener('warzone-battle-ended', resetCombatMode);
+  window.addEventListener('warzone-battle-ended', () => { resetCombatMode(); resetRepairPolicy(); });
 
   prepareCanvas();
   const canvasTimer = setInterval(() => {
@@ -3122,6 +3270,7 @@
     selectAllUnits,
     selectAllTrucks,
     toggleCombatLock,
+    toggleRepairPolicy, refreshRepairPolicy, resetRepairPolicy, bindTouchCommand,
     refreshCombatLock, holdCombatSelection, resumeCombatSelection, resetCombatMode,
     toggleAutoFight,
     toggleBoxMode,
@@ -3181,6 +3330,9 @@
       combatLock: state.combatLock,
       combatLockRequested: state.combatLock, combatLockSuspended:Boolean(combatSuspended()), combatOverride,
       combatLockState:combatPacket?.combatLock||null, combatContext:combatWorld?.context||'', combatError,
+      repairPolicyRequested:repairRequested, repairPolicyEnabled:repairEnabled, repairPolicyPending:repairPending,
+      repairPolicyState:combatPacket?.repairPolicy||null, repairPolicyIntent:repairIntent,
+      repairPolicyConfirmedNonce:repairConfirmedNonce, repairPolicyError:repairError,
       allCombatSelected,
       autoFight: state.autoFight,
       boxMode: state.boxMode,
@@ -3201,6 +3353,8 @@
       stopPending: Boolean(state.stopNonce),
       stopAcks: state.stopAcks,
       stoppedUnitIds: state.stoppedUnitIds.slice(),
+      guardedStopPending:Boolean(pendingCombatStop), guardedStopIntent:pendingCombatStop?.request || lastCombatStopRequest,
+      guardedStopState:lastCombatStopAck, guardedStopError:combatStopError, guardedStopRoute:lastStopRoute,
       baseJumps: state.baseJumps,
       feedbacks: state.feedbacks,
       doubleTaps: state.doubleTaps,

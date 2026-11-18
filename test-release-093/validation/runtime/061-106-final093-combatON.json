@@ -1,0 +1,976 @@
+{
+  "before": {
+    "buttons": [
+      {
+        "background": "rgb(0, 0, 0)",
+        "busy": null,
+        "color": "rgb(244, 244, 244)",
+        "disabled": false,
+        "hidden": false,
+        "id": "wt-all-combat",
+        "pressed": "false",
+        "rect": {
+          "bottom": 47,
+          "height": 36,
+          "left": 322.625,
+          "right": 419.4166717529297,
+          "top": 11,
+          "width": 96.79167175292969,
+          "x": 322.625,
+          "y": 11
+        },
+        "text": "ALL COMBAT"
+      },
+      {
+        "background": "rgb(0, 0, 0)",
+        "busy": "false",
+        "color": "rgb(99, 230, 130)",
+        "disabled": false,
+        "hidden": false,
+        "id": "wt-repair",
+        "pressed": "true",
+        "rect": {
+          "bottom": 47,
+          "height": 36,
+          "left": 422.41668701171875,
+          "right": 493.84898376464844,
+          "top": 11,
+          "width": 71.43229675292969,
+          "x": 422.41668701171875,
+          "y": 11
+        },
+        "text": "REPAIR"
+      }
+    ],
+    "cachedCommandsClock": 244902,
+    "frame": {
+      "bottom": 554,
+      "height": 496,
+      "left": 0,
+      "right": 1231.3333740234375,
+      "top": 58,
+      "width": 1231.3333740234375,
+      "x": 0,
+      "y": 58
+    },
+    "gameTime": 244902,
+    "native": null,
+    "parent": {
+      "dpr": 3,
+      "height": 554,
+      "url": "/warzone/mobile.html",
+      "width": 1231
+    },
+    "touch": {
+      "active": true,
+      "allCombatSelected": false,
+      "autoFight": false,
+      "baseJumps": 0,
+      "battleActive": true,
+      "boxCadenceWaits": 0,
+      "boxMode": false,
+      "boxPressGaps": [],
+      "boxSelections": 0,
+      "cameraFacingError": "",
+      "cameraFacingPending": false,
+      "cameraFacings": 0,
+      "cameraHeading": null,
+      "coalescedSamples": 0,
+      "combatContext": "native-combat90:8675:1:0",
+      "combatError": "",
+      "combatLock": false,
+      "combatLockRequested": false,
+      "combatLockState": {
+        "activation": "offline-combat-user-1794954256540-4",
+        "combatIds": [
+          164481,
+          1900001,
+          1900003,
+          1930001,
+          1930003,
+          1930005
+        ],
+        "commandableIds": [
+          164481,
+          1900001,
+          1900003,
+          1930001,
+          1930003,
+          1930005
+        ],
+        "context": "native-combat90:8675:1:0",
+        "deselectAppliedNonce": "offline-combat-1794955146028-32",
+        "deselectNonce": "offline-combat-1794955146028-32",
+        "enabled": false,
+        "pendingDeselect": false,
+        "player": 0,
+        "protectedIds": [],
+        "reason": "off",
+        "requestNonce": "offline-combat-1794955159677-35",
+        "requestedSuspended": false,
+        "revision": 38,
+        "selectedIds": [],
+        "suspended": false
+      },
+      "combatLockSuspended": false,
+      "combatOrders": 2,
+      "combatOverride": "",
+      "doubleTaps": 0,
+      "facilityError": "",
+      "facilityOpens": 0,
+      "feedbacks": 2,
+      "gestureActive": false,
+      "guardedStopError": "",
+      "guardedStopIntent": {
+        "activation": "offline-combat-user-1794954256540-4",
+        "context": "native-combat90:8675:1:0",
+        "nonce": "offline-combat-stop-1794954315710-1"
+      },
+      "guardedStopPending": false,
+      "guardedStopRoute": "native-combat-v93",
+      "guardedStopState": {
+        "action": "stop-selected",
+        "activation": "offline-combat-user-1794954256540-4",
+        "context": "native-combat90:8675:1:0",
+        "nonce": "offline-combat-stop-1794954315710-1",
+        "ok": true,
+        "protectedIds": [],
+        "reason": "queued",
+        "schemaVersion": 93,
+        "selectedIds": [
+          1900003,
+          1930003
+        ],
+        "skippedProtectedIds": [],
+        "stoppedIds": [
+          1900003,
+          1930003
+        ]
+      },
+      "heldKeys": [],
+      "hudVisible": true,
+      "intercepted": 4,
+      "lastFacility": null,
+      "lastNativeLeftDownAt": 835668.6449999996,
+      "lastPanDispatchMs": null,
+      "lastPanStartLatencyMs": null,
+      "lastRadarPoint": null,
+      "lastZoomDistance": null,
+      "manualSelectAlls": 0,
+      "manualSelectionRevision": 0,
+      "maxPanDispatchMs": 0,
+      "mouseEvents": 8,
+      "nativeObjectsOpen": false,
+      "nativeRenderFrames": 1994,
+      "nativeStatsOpen": false,
+      "orders": 0,
+      "panContextResets": 0,
+      "panHeldTimeouts": 0,
+      "panMoves": 0,
+      "panPhase": "idle",
+      "panQueueOverflows": 0,
+      "panQueuedPointers": 0,
+      "panRearms": 0,
+      "panUnobservedRearms": 0,
+      "pans": 0,
+      "patrolOrders": 0,
+      "pendingClicks": 0,
+      "pinchSteps": 0,
+      "pointerCaptures": 2,
+      "queueMode": false,
+      "queueModifierHeld": false,
+      "queuedOrders": 0,
+      "queuedPointerEvents": 0,
+      "radarDrags": 0,
+      "radarMoves": 0,
+      "radarTaps": 0,
+      "repairPolicyConfirmedNonce": "offline-repair-1794955159447-3",
+      "repairPolicyEnabled": true,
+      "repairPolicyError": "",
+      "repairPolicyIntent": {
+        "context": "native-combat90:8675:1:0",
+        "enabled": true,
+        "nonce": "offline-repair-1794955159447-3"
+      },
+      "repairPolicyPending": false,
+      "repairPolicyRequested": true,
+      "repairPolicyState": {
+        "applied": true,
+        "appliedIds": [
+          164481,
+          1900001,
+          1900003,
+          1930001,
+          1930003,
+          1930005
+        ],
+        "canIssueOrders": true,
+        "combatIds": [
+          164481,
+          1900001,
+          1900003,
+          1930001,
+          1930003,
+          1930005
+        ],
+        "context": "native-combat90:8675:1:0",
+        "diagnosticUnitsTruncated": false,
+        "enabled": true,
+        "failedIds": [],
+        "managed": true,
+        "pending": false,
+        "pendingIds": [],
+        "protectedIds": [],
+        "reason": "on",
+        "requestNonce": "offline-repair-1794955159447-3",
+        "revision": 8,
+        "schemaVersion": 93,
+        "scope": "owned-combat-map",
+        "thresholdHealthPercent": 75,
+        "units": [
+          {
+            "action": 6,
+            "body": 380,
+            "health": 380,
+            "healthPercent": 100,
+            "id": 164481,
+            "maxHealth": 380,
+            "order": 25,
+            "orderPosition": {
+              "x": 4693,
+              "y": 7461
+            },
+            "orderTargetId": 0,
+            "originalBody": 380,
+            "pendingRepairLevel": 75,
+            "protected": false,
+            "repairLevel": 75,
+            "selected": false,
+            "tilePosition": {
+              "x": 36.6640625,
+              "y": 58.2890625
+            },
+            "worldPosition": {
+              "x": 4693,
+              "y": 7461,
+              "z": 128
+            },
+            "x": 4693,
+            "y": 7461,
+            "z": 128
+          },
+          {
+            "action": 6,
+            "body": 205,
+            "health": 205,
+            "healthPercent": 100,
+            "id": 1930005,
+            "maxHealth": 205,
+            "order": 25,
+            "orderPosition": {
+              "x": 4694,
+              "y": 7286
+            },
+            "orderTargetId": 0,
+            "originalBody": 205,
+            "pendingRepairLevel": 75,
+            "protected": false,
+            "repairLevel": 75,
+            "selected": false,
+            "tilePosition": {
+              "x": 35.515625,
+              "y": 57.71875
+            },
+            "worldPosition": {
+              "x": 4546,
+              "y": 7388,
+              "z": 128
+            },
+            "x": 4546,
+            "y": 7388,
+            "z": 128
+          },
+          {
+            "action": 6,
+            "body": 205,
+            "health": 205,
+            "healthPercent": 100,
+            "id": 1930003,
+            "maxHealth": 205,
+            "order": 25,
+            "orderPosition": {
+              "x": 4626,
+              "y": 7332
+            },
+            "orderTargetId": 0,
+            "originalBody": 205,
+            "pendingRepairLevel": 75,
+            "protected": false,
+            "repairLevel": 75,
+            "selected": false,
+            "tilePosition": {
+              "x": 36.0703125,
+              "y": 57.125
+            },
+            "worldPosition": {
+              "x": 4617,
+              "y": 7312,
+              "z": 128
+            },
+            "x": 4617,
+            "y": 7312,
+            "z": 128
+          },
+          {
+            "action": 6,
+            "body": 205,
+            "health": 205,
+            "healthPercent": 100,
+            "id": 1930001,
+            "maxHealth": 205,
+            "order": 25,
+            "orderPosition": {
+              "x": 4769,
+              "y": 7417
+            },
+            "orderTargetId": 0,
+            "originalBody": 205,
+            "pendingRepairLevel": 75,
+            "protected": false,
+            "repairLevel": 75,
+            "selected": false,
+            "tilePosition": {
+              "x": 37.2578125,
+              "y": 57.9453125
+            },
+            "worldPosition": {
+              "x": 4769,
+              "y": 7417,
+              "z": 128
+            },
+            "x": 4769,
+            "y": 7417,
+            "z": 128
+          },
+          {
+            "action": 6,
+            "body": 154,
+            "health": 154,
+            "healthPercent": 75,
+            "id": 1900003,
+            "maxHealth": 205,
+            "order": 25,
+            "orderPosition": {
+              "x": 4699,
+              "y": 7374
+            },
+            "orderTargetId": 0,
+            "originalBody": 205,
+            "pendingRepairLevel": 75,
+            "protected": false,
+            "repairLevel": 75,
+            "selected": false,
+            "tilePosition": {
+              "x": 37.6796875,
+              "y": 57.3046875
+            },
+            "worldPosition": {
+              "x": 4823,
+              "y": 7335,
+              "z": 128
+            },
+            "x": 4823,
+            "y": 7335,
+            "z": 128
+          },
+          {
+            "action": 6,
+            "body": 205,
+            "health": 205,
+            "healthPercent": 100,
+            "id": 1900001,
+            "maxHealth": 205,
+            "order": 25,
+            "orderPosition": {
+              "x": 4635,
+              "y": 7420
+            },
+            "orderTargetId": 0,
+            "originalBody": 205,
+            "pendingRepairLevel": 75,
+            "protected": false,
+            "repairLevel": 75,
+            "selected": false,
+            "tilePosition": {
+              "x": 36.1640625,
+              "y": 57.875
+            },
+            "worldPosition": {
+              "x": 4629,
+              "y": 7408,
+              "z": 128
+            },
+            "x": 4629,
+            "y": 7408,
+            "z": 128
+          }
+        ],
+        "worldSafe": true
+      },
+      "rotationHeld": null,
+      "rotationMoves": 0,
+      "rotationSteps": 0,
+      "saveNames": 0,
+      "selectAlls": 0,
+      "stickyBuildActivations": 0,
+      "stopAcks": 1,
+      "stopOrders": 1,
+      "stopPending": false,
+      "stoppedUnitIds": [
+        1900003,
+        1930003
+      ],
+      "taps": 0,
+      "tiltHeld": null,
+      "tiltMoves": 0,
+      "version": 57,
+      "zoomAcks": 0,
+      "zoomCommandErrors": 0,
+      "zoomCommandWrites": 0,
+      "zoomPending": false,
+      "zoomPreset": null,
+      "zoomPresetSelections": 0,
+      "zoomWheelEvents": 0
+    }
+  },
+  "tap": {
+    "selector": "#wt-all-combat",
+    "target": {
+      "enabled": true,
+      "hit": true,
+      "id": "wt-all-combat",
+      "rect": {
+        "bottom": 47,
+        "height": 36,
+        "left": 322.625,
+        "right": 419.4166717529297,
+        "top": 11,
+        "width": 96.79167175292969,
+        "x": 322.625,
+        "y": 11
+      },
+      "text": "ALL COMBAT",
+      "visible": true
+    },
+    "physical": [
+      723,
+      57
+    ],
+    "geometry": {
+      "activity": "com.rbabbit.blocknight.warzone.MainActivity",
+      "css": {
+        "dpr": 3,
+        "height": 554,
+        "url": "/warzone/mobile.html",
+        "visual": {
+          "height": 360,
+          "offsetLeft": 0,
+          "offsetTop": 0,
+          "width": 1231.3333740234375
+        },
+        "width": 1231
+      },
+      "physical": [
+        2400,
+        1080
+      ],
+      "bounds": [
+        0,
+        0,
+        2400,
+        1080
+      ],
+      "source": "Actual dumpsys MainActivity EngineWebView and full-parent-root hierarchy; uniform Main fitViewport verified",
+      "measuredUTC": "2026-11-17T22:37:34.006443+00:00",
+      "nativeVirtualRect": [
+        0,
+        0,
+        3694,
+        1662
+      ],
+      "nativeAvailableRect": [
+        0,
+        0,
+        2400,
+        1080
+      ],
+      "nativeParentRect": [
+        0,
+        0,
+        2400,
+        1080
+      ],
+      "derivedScaleX": 0.6497022198159177,
+      "derivedScaleY": 0.6498194945848376,
+      "derivedUniformScale": 0.6497608572003777,
+      "virtualCSSDprTolerancePixels": 4.0,
+      "webViewFlags": "VFED..CL.",
+      "nativeAvailableViewClass": "android.widget.FrameLayout",
+      "nativeLobbyFlags": null,
+      "webViewVisible": true,
+      "uiaFailureType": null,
+      "nativeMethodExplicitlyRequested": true
+    }
+  },
+  "after": {
+    "buttons": [
+      {
+        "background": "rgb(0, 0, 0)",
+        "busy": null,
+        "color": "rgb(99, 230, 130)",
+        "disabled": false,
+        "hidden": false,
+        "id": "wt-all-combat",
+        "pressed": "true",
+        "rect": {
+          "bottom": 47,
+          "height": 36,
+          "left": 322.625,
+          "right": 419.4166717529297,
+          "top": 11,
+          "width": 96.79167175292969,
+          "x": 322.625,
+          "y": 11
+        },
+        "text": "ALL COMBAT"
+      },
+      {
+        "background": "rgb(0, 0, 0)",
+        "busy": "false",
+        "color": "rgb(99, 230, 130)",
+        "disabled": false,
+        "hidden": false,
+        "id": "wt-repair",
+        "pressed": "true",
+        "rect": {
+          "bottom": 47,
+          "height": 36,
+          "left": 422.41668701171875,
+          "right": 493.84898376464844,
+          "top": 11,
+          "width": 71.43229675292969,
+          "x": 422.41668701171875,
+          "y": 11
+        },
+        "text": "REPAIR"
+      }
+    ],
+    "cachedCommandsClock": 246902,
+    "frame": {
+      "bottom": 554,
+      "height": 496,
+      "left": 0,
+      "right": 1231.3333740234375,
+      "top": 58,
+      "width": 1231.3333740234375,
+      "x": 0,
+      "y": 58
+    },
+    "gameTime": 247102,
+    "native": null,
+    "parent": {
+      "dpr": 3,
+      "height": 554,
+      "url": "/warzone/mobile.html",
+      "width": 1231
+    },
+    "touch": {
+      "active": true,
+      "allCombatSelected": true,
+      "autoFight": false,
+      "baseJumps": 0,
+      "battleActive": true,
+      "boxCadenceWaits": 0,
+      "boxMode": false,
+      "boxPressGaps": [],
+      "boxSelections": 0,
+      "cameraFacingError": "",
+      "cameraFacingPending": false,
+      "cameraFacings": 0,
+      "cameraHeading": null,
+      "coalescedSamples": 0,
+      "combatContext": "native-combat90:8675:1:0",
+      "combatError": "",
+      "combatLock": true,
+      "combatLockRequested": true,
+      "combatLockState": {
+        "activation": "offline-combat-user-1794955171948-37",
+        "combatIds": [
+          164481,
+          1900001,
+          1900003,
+          1930001,
+          1930003,
+          1930005
+        ],
+        "commandableIds": [
+          164481,
+          1900001,
+          1900003,
+          1930001,
+          1930003,
+          1930005
+        ],
+        "context": "native-combat90:8675:1:0",
+        "deselectAppliedNonce": "offline-combat-1794955146028-32",
+        "deselectNonce": "offline-combat-1794955146028-32",
+        "enabled": true,
+        "pendingDeselect": false,
+        "player": 0,
+        "protectedIds": [],
+        "reason": "on",
+        "requestNonce": "offline-combat-1794955172178-39",
+        "requestedSuspended": false,
+        "revision": 41,
+        "selectedIds": [
+          164481,
+          1900001,
+          1900003,
+          1930001,
+          1930003,
+          1930005
+        ],
+        "suspended": false
+      },
+      "combatLockSuspended": false,
+      "combatOrders": 2,
+      "combatOverride": "",
+      "doubleTaps": 0,
+      "facilityError": "",
+      "facilityOpens": 0,
+      "feedbacks": 2,
+      "gestureActive": false,
+      "guardedStopError": "",
+      "guardedStopIntent": {
+        "activation": "offline-combat-user-1794954256540-4",
+        "context": "native-combat90:8675:1:0",
+        "nonce": "offline-combat-stop-1794954315710-1"
+      },
+      "guardedStopPending": false,
+      "guardedStopRoute": "native-combat-v93",
+      "guardedStopState": {
+        "action": "stop-selected",
+        "activation": "offline-combat-user-1794954256540-4",
+        "context": "native-combat90:8675:1:0",
+        "nonce": "offline-combat-stop-1794954315710-1",
+        "ok": true,
+        "protectedIds": [],
+        "reason": "queued",
+        "schemaVersion": 93,
+        "selectedIds": [
+          1900003,
+          1930003
+        ],
+        "skippedProtectedIds": [],
+        "stoppedIds": [
+          1900003,
+          1930003
+        ]
+      },
+      "heldKeys": [],
+      "hudVisible": true,
+      "intercepted": 4,
+      "lastFacility": null,
+      "lastNativeLeftDownAt": 835668.6449999996,
+      "lastPanDispatchMs": null,
+      "lastPanStartLatencyMs": null,
+      "lastRadarPoint": null,
+      "lastZoomDistance": null,
+      "manualSelectAlls": 0,
+      "manualSelectionRevision": 0,
+      "maxPanDispatchMs": 0,
+      "mouseEvents": 8,
+      "nativeObjectsOpen": false,
+      "nativeRenderFrames": 2016,
+      "nativeStatsOpen": false,
+      "orders": 0,
+      "panContextResets": 0,
+      "panHeldTimeouts": 0,
+      "panMoves": 0,
+      "panPhase": "idle",
+      "panQueueOverflows": 0,
+      "panQueuedPointers": 0,
+      "panRearms": 0,
+      "panUnobservedRearms": 0,
+      "pans": 0,
+      "patrolOrders": 0,
+      "pendingClicks": 0,
+      "pinchSteps": 0,
+      "pointerCaptures": 2,
+      "queueMode": false,
+      "queueModifierHeld": false,
+      "queuedOrders": 0,
+      "queuedPointerEvents": 0,
+      "radarDrags": 0,
+      "radarMoves": 0,
+      "radarTaps": 0,
+      "repairPolicyConfirmedNonce": "offline-repair-1794955159447-3",
+      "repairPolicyEnabled": true,
+      "repairPolicyError": "",
+      "repairPolicyIntent": {
+        "context": "native-combat90:8675:1:0",
+        "enabled": true,
+        "nonce": "offline-repair-1794955159447-3"
+      },
+      "repairPolicyPending": false,
+      "repairPolicyRequested": true,
+      "repairPolicyState": {
+        "applied": true,
+        "appliedIds": [
+          164481,
+          1900001,
+          1900003,
+          1930001,
+          1930003,
+          1930005
+        ],
+        "canIssueOrders": true,
+        "combatIds": [
+          164481,
+          1900001,
+          1900003,
+          1930001,
+          1930003,
+          1930005
+        ],
+        "context": "native-combat90:8675:1:0",
+        "diagnosticUnitsTruncated": false,
+        "enabled": true,
+        "failedIds": [],
+        "managed": true,
+        "pending": false,
+        "pendingIds": [],
+        "protectedIds": [],
+        "reason": "on",
+        "requestNonce": "offline-repair-1794955159447-3",
+        "revision": 8,
+        "schemaVersion": 93,
+        "scope": "owned-combat-map",
+        "thresholdHealthPercent": 75,
+        "units": [
+          {
+            "action": 6,
+            "body": 380,
+            "health": 380,
+            "healthPercent": 100,
+            "id": 164481,
+            "maxHealth": 380,
+            "order": 25,
+            "orderPosition": {
+              "x": 4693,
+              "y": 7461
+            },
+            "orderTargetId": 0,
+            "originalBody": 380,
+            "pendingRepairLevel": 75,
+            "protected": false,
+            "repairLevel": 75,
+            "selected": true,
+            "tilePosition": {
+              "x": 36.6640625,
+              "y": 58.2890625
+            },
+            "worldPosition": {
+              "x": 4693,
+              "y": 7461,
+              "z": 128
+            },
+            "x": 4693,
+            "y": 7461,
+            "z": 128
+          },
+          {
+            "action": 6,
+            "body": 205,
+            "health": 205,
+            "healthPercent": 100,
+            "id": 1930005,
+            "maxHealth": 205,
+            "order": 25,
+            "orderPosition": {
+              "x": 4694,
+              "y": 7286
+            },
+            "orderTargetId": 0,
+            "originalBody": 205,
+            "pendingRepairLevel": 75,
+            "protected": false,
+            "repairLevel": 75,
+            "selected": true,
+            "tilePosition": {
+              "x": 35.515625,
+              "y": 57.71875
+            },
+            "worldPosition": {
+              "x": 4546,
+              "y": 7388,
+              "z": 128
+            },
+            "x": 4546,
+            "y": 7388,
+            "z": 128
+          },
+          {
+            "action": 6,
+            "body": 205,
+            "health": 205,
+            "healthPercent": 100,
+            "id": 1930003,
+            "maxHealth": 205,
+            "order": 25,
+            "orderPosition": {
+              "x": 4626,
+              "y": 7332
+            },
+            "orderTargetId": 0,
+            "originalBody": 205,
+            "pendingRepairLevel": 75,
+            "protected": false,
+            "repairLevel": 75,
+            "selected": true,
+            "tilePosition": {
+              "x": 36.0703125,
+              "y": 57.125
+            },
+            "worldPosition": {
+              "x": 4617,
+              "y": 7312,
+              "z": 128
+            },
+            "x": 4617,
+            "y": 7312,
+            "z": 128
+          },
+          {
+            "action": 6,
+            "body": 205,
+            "health": 205,
+            "healthPercent": 100,
+            "id": 1930001,
+            "maxHealth": 205,
+            "order": 25,
+            "orderPosition": {
+              "x": 4769,
+              "y": 7417
+            },
+            "orderTargetId": 0,
+            "originalBody": 205,
+            "pendingRepairLevel": 75,
+            "protected": false,
+            "repairLevel": 75,
+            "selected": true,
+            "tilePosition": {
+              "x": 37.2578125,
+              "y": 57.9453125
+            },
+            "worldPosition": {
+              "x": 4769,
+              "y": 7417,
+              "z": 128
+            },
+            "x": 4769,
+            "y": 7417,
+            "z": 128
+          },
+          {
+            "action": 6,
+            "body": 154,
+            "health": 154,
+            "healthPercent": 75,
+            "id": 1900003,
+            "maxHealth": 205,
+            "order": 25,
+            "orderPosition": {
+              "x": 4699,
+              "y": 7374
+            },
+            "orderTargetId": 0,
+            "originalBody": 205,
+            "pendingRepairLevel": 75,
+            "protected": false,
+            "repairLevel": 75,
+            "selected": true,
+            "tilePosition": {
+              "x": 37.6796875,
+              "y": 57.3046875
+            },
+            "worldPosition": {
+              "x": 4823,
+              "y": 7335,
+              "z": 128
+            },
+            "x": 4823,
+            "y": 7335,
+            "z": 128
+          },
+          {
+            "action": 6,
+            "body": 205,
+            "health": 205,
+            "healthPercent": 100,
+            "id": 1900001,
+            "maxHealth": 205,
+            "order": 25,
+            "orderPosition": {
+              "x": 4635,
+              "y": 7420
+            },
+            "orderTargetId": 0,
+            "originalBody": 205,
+            "pendingRepairLevel": 75,
+            "protected": false,
+            "repairLevel": 75,
+            "selected": true,
+            "tilePosition": {
+              "x": 36.1640625,
+              "y": 57.875
+            },
+            "worldPosition": {
+              "x": 4629,
+              "y": 7408,
+              "z": 128
+            },
+            "x": 4629,
+            "y": 7408,
+            "z": 128
+          }
+        ],
+        "worldSafe": true
+      },
+      "rotationHeld": null,
+      "rotationMoves": 0,
+      "rotationSteps": 0,
+      "saveNames": 0,
+      "selectAlls": 0,
+      "stickyBuildActivations": 0,
+      "stopAcks": 1,
+      "stopOrders": 1,
+      "stopPending": false,
+      "stoppedUnitIds": [
+        1900003,
+        1930003
+      ],
+      "taps": 0,
+      "tiltHeld": null,
+      "tiltMoves": 0,
+      "version": 57,
+      "zoomAcks": 0,
+      "zoomCommandErrors": 0,
+      "zoomCommandWrites": 0,
+      "zoomPending": false,
+      "zoomPreset": null,
+      "zoomPresetSelections": 0,
+      "zoomWheelEvents": 0
+    }
+  }
+}

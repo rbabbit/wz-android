@@ -50,7 +50,7 @@
  function renderOwnership(){
   const denied=session.phase==='game'&&!ownerAllowed(),w=child();
   document.body.classList.toggle('mp-observer',denied);
-  for(const id of ['blocknight-tech','wt-open-factory','wt-open-queue','blocknight-base','blocknight-combat']){const node=byId(id);if(node)node.hidden=denied;}
+  for(const id of ['blocknight-tech','wt-open-factory','wt-open-queue','blocknight-base','blocknight-combat','blocknight-repair']){const node=byId(id);if(node)node.hidden=denied;}
   if(denied){
    byId('unit-controls').hidden=true;
    for(const id of ['wt-field-centre','wt-build-sidebar']){const node=byId(id);if(node)node.hidden=true;}
@@ -260,7 +260,7 @@
  byId('direct-join').onclick=()=>{const host=byId('address').value.trim();if(host&&!/\s/.test(host))start(['--join='+host,'--window','--resolution='+innerWidth+'x'+innerHeight,'--noshadows']);};
  function toast(message){const node=byId('mp-toast');if(!node)return;node.textContent=message;node.hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>{node.hidden=true;},3500);}
  function command(action){
-  try{return dispatchCommand(action);}finally{child()?.PcMultiplayerControls?.refreshCombatLock?.();syncCombatButton();}
+  try{return dispatchCommand(action);}finally{child()?.PcMultiplayerControls?.refreshCombatLock?.();syncCombatButton();syncRepairButton();}
  }
  function dispatchCommand(action){
   const w=child();if(!w||session.phase!=='game'||!['music','players'].includes(action)&&!ownerAllowed())return false;
@@ -285,6 +285,7 @@
   if(action==='demolish'){if(!commands)return false;commands.toggleDemolish?.();return true;}
   if(action==='intelligence')return w.__warzoneIntelligence?.toggle?.()||w.WarzoneIntelligence?.toggle?.()||toast('No intelligence reports are available yet.');
    if(action==='combat'){const value=w.PcMultiplayerControls?.toggleCombatLock?.()||false;commands?.afterBuildExit?.(()=>true);return value;}
+  if(action==='repair')return w.PcMultiplayerControls?.toggleRepairPolicy?.()||false;
   return w.PcMultiplayerControls?.command(action);
  }
  session.command=command;
@@ -326,8 +327,8 @@
    combatSelectionWatch={window:w,generation,player:value.player,frame:view.frame,gameTime:value.gameTime,at:now,ready:false};
   else{if(view.frame>previous.frame){previous.frame=view.frame;previous.at=now;previous.ready=true;}previous.gameTime=value.gameTime;}
   if(!combatSelectionWatch.ready||now-combatSelectionWatch.at>=1500)return false;
-  const combat=value.combatLock?.combatIds,selected=value.combatLock?.selectedIds;
-  if(!Array.isArray(combat)||!Array.isArray(selected)||!combat.length||combat.length!==selected.length||![...combat,...selected].every(id=>Number.isInteger(id)&&id>0))return false;
+  const combat=value.combatLock?.commandableIds??value.combatLock?.combatIds,selected=value.combatLock?.selectedIds;
+  if(!Array.isArray(combat)||!Array.isArray(selected)||combat.length!==selected.length||![...combat,...selected].every(id=>Number.isInteger(id)&&id>0))return false;
   const wanted=new Set(combat),actual=new Set(selected);
   return wanted.size===combat.length&&actual.size===selected.length&&selected.every(id=>wanted.has(id));
  }
@@ -338,8 +339,21 @@
   button.setAttribute('aria-pressed',String(enabled));button.classList.toggle('active',enabled);
   button.dataset.suspended=String(enabled&&Boolean(state?.combatLockSuspended));
  }
+ function syncRepairButton(){
+  const button=byId('blocknight-repair');if(!button)return;
+  const state=child()?.PcMultiplayerControls?.report?.(),allowed=session.phase==='game'&&ownerAllowed();
+  const enabled=allowed&&state?.repairPolicyEnabled===true,pending=allowed&&state?.repairPolicyPending===true;
+  button.dataset.repairEnabled=String(enabled);button.dataset.repairPending=String(pending);
+  button.setAttribute('aria-pressed',String(enabled));button.setAttribute('aria-busy',String(pending));button.classList.toggle('active',enabled);
+  button.disabled=!allowed||state?.repairPolicyCanToggle!==true;
+  button.title=state?.repairPolicyError||(pending?(enabled
+    ?'Automatic repair retreat is ON; applying Medium damage to new combat units'
+    :'Waiting for the native game to apply the repair setting'):enabled
+    ?'Automatic repair retreat at 75% health is ON for all your combat units and new production; press to turn OFF'
+    :'Enable automatic repair retreat at 75% health for all your combat units and new production');
+ }
  function syncChrome(){
-  syncCombatButton();renderOwnership();if(session.phase!=='game')return;
+  syncCombatButton();syncRepairButton();renderOwnership();if(session.phase!=='game')return;
   const w=child(),page=byId('wt-command-pages'),research=w?.document?.getElementById('blocknight-research-shell');
   const full=Boolean(page&&!page.hidden||research&&!research.hidden||w?.__warzoneIntelligence?.isOpen?.());
   byId('unit-controls').hidden=full||!ownerAllowed();

@@ -94,6 +94,9 @@ public final class MainActivity extends Activity {
   private CampaignVideoStore campaignVideos;
   private SaveGameStore campaignSaves;
   private SaveGameStore ffaSaves;
+  private SaveGameStore survivalSaves;
+  private SurvivalSetupView survivalSetup;
+  private String survivalMapId = "tdn2";
   private FfaSetupView ffaSetup;
   private String ffaDifficulty = "easy";
   private String ffaMapId = "emag";
@@ -191,12 +194,14 @@ public final class MainActivity extends Activity {
     saveGames = new SaveGameStore(this);
     campaignSaves = new SaveGameStore(this, true);
     ffaSaves = new SaveGameStore(this, "ffa");
+    survivalSaves = new SaveGameStore(this, "survival");
+    survivalMapId = SurvivalMapCatalog.normalizeId(getPreferences(MODE_PRIVATE).getString("survival_map_id", "tdn2"));
     campaignVideos = new CampaignVideoStore(this);
     String savedWalletError = null;
     JSONArray pinnedRuns = rewards.pinnedRuns();
     for (int i = 0; i < pinnedRuns.length(); i++) {
       String run = pinnedRuns.optString(i);
-      try { if (!saveGames.hasRun(run)) rewards.unpinRun(run); }
+      try { if (!saveGames.hasRun(run) && !survivalSaves.hasRun(run)) rewards.unpinRun(run); }
       catch (RuntimeException error) { savedWalletError = "Saved-game stock could not be reconciled. Restart to retry."; }
     }
     musicEnabled = getPreferences(MODE_PRIVATE).getBoolean("music_enabled", true);
@@ -245,6 +250,8 @@ public final class MainActivity extends Activity {
               @Override
               public void savedGames() { showSavedGames(); }
               @Override
+              public void survival() { showSurvivalSetup(); }
+              @Override
               public void campaign() { showCampaignSetup(); }
               @Override
               public void ffa() { showFfaSetup(); }
@@ -275,6 +282,43 @@ public final class MainActivity extends Activity {
     root.addView(graphicsSetup, new FrameLayout.LayoutParams(-1, -1));
     if (completionError != null) graphicsSetup.showError(completionError);
   }
+
+  private void showSurvivalSetup() {
+    if (survivalSetup != null || graphicsSetup == null || loadingOverlay != null) return;
+    cancelCampaignHomeCheck();
+    graphicsSetup.setVisibility(View.GONE);
+    survivalSetup = new SurvivalSetupView(this, survivalMapId, new SurvivalSetupView.Actions() {
+      @Override public void start(String selected) {
+        survivalMapId = SurvivalMapCatalog.get(selected).id;
+        matchMode = "survival";
+        getPreferences(MODE_PRIVATE).edit().putString("survival_map_id", survivalMapId).apply();
+        closeSurvivalSetup(); startGame();
+      }
+      @Override public void map(String selected) {
+        survivalMapId = SurvivalMapCatalog.get(selected).id;
+        getPreferences(MODE_PRIVATE).edit().putString("survival_map_id", survivalMapId).apply();
+      }
+      @Override public void saves() { showSavedGames(); }
+      @Override public void rewards() { showRewards(false); }
+      @Override public void back() { closeSurvivalSetup(); }
+    });
+    survivalSetup.setRewardBalance(rewards.balance());
+    root.addView(survivalSetup, new FrameLayout.LayoutParams(-1, -1));
+    survivalSetup.requestFocus();
+  }
+
+  private void closeSurvivalSetup() {
+    if (survivalSetup != null) {
+      survivalMapId = survivalSetup.selectedMap();
+      root.removeView(survivalSetup); survivalSetup = null;
+    }
+    if (graphicsSetup != null) { graphicsSetup.setVisibility(View.VISIBLE); graphicsSetup.showTowersMap(); }
+  }
+
+  private String currentRewardProfile() { return survivalSetup != null || graphicsSetup == null && isSurvivalBattle() ? "survival" : "towers"; }
+  private String currentRewardMap() { return graphicsSetup == null ? battleLaunch.mapId : survivalSetup != null ? survivalSetup.selectedMap() : graphicsSetup.selectedMap(); }
+  private MapLevelCatalog.Level currentTowersLevel() { return isSurvivalBattle() ? SurvivalMapCatalog.get(battleLaunch.mapId) : MapLevelCatalog.get(this).level(battleLaunch.mapId); }
+  private SaveGameStore currentTowersSaves() { return isSurvivalBattle() ? survivalSaves : saveGames; }
 
   private void showGuide() {
     if (guideView != null || hubView != null || graphicsSetup == null || campaignHomeBusy) return;
@@ -525,7 +569,7 @@ public final class MainActivity extends Activity {
     loadingSaveId = "";
     restoringGame = false;
     battleLaunch = new BattleLaunchSpec(
-        matchMode, duelWeapon, "ffa".equals(matchMode) ? ffaMapId : mapId, musicEnabled && musicCached, ffaDifficulty);
+        matchMode, duelWeapon, "survival".equals(matchMode) ? survivalMapId : "ffa".equals(matchMode) ? ffaMapId : mapId, musicEnabled && musicCached, ffaDifficulty);
     closeCampaignSetup();
     closeFfaSetup();
     getPreferences(MODE_PRIVATE)
@@ -539,7 +583,7 @@ public final class MainActivity extends Activity {
     createLoadingPanel();
     rewardRunId = isTowersBattle() ? battleSession : "";
     if (isTowersBattle()) {
-      try { rewards.begin(rewardRunId, battleLaunch.mapId); }
+      try { rewards.begin(rewardRunId, battleLaunch.mapId, battleLaunch.matchMode); }
       catch (RuntimeException error) {
         returnToMainMenu();
         graphicsSetup.showError(error.getMessage());
@@ -555,10 +599,10 @@ public final class MainActivity extends Activity {
         || loadingOverlay != null || graphicsSetup != null)) return;
     if (!inGame && graphicsSetup == null) return;
     if (!inGame) cancelCampaignHomeCheck();
-    final String selectedMap = inGame ? battleLaunch.mapId : graphicsSetup.selectedMap();
-    MapLevelCatalog.Level level = MapLevelCatalog.get(this).level(selectedMap);
-    rewardsView = new RewardsView(this, selectedMap, level.name, rewards.balance(), rewards.inventory(),
-        inGame ? rewards.active(rewardRunId) : rewards.loadout(), inGame,
+    final String selectedMap = currentRewardMap(), profile = currentRewardProfile();
+    MapLevelCatalog.Level level = "survival".equals(profile) ? SurvivalMapCatalog.get(selectedMap) : MapLevelCatalog.get(this).level(selectedMap);
+    rewardsView = new RewardsView(this, profile, selectedMap, level.name, rewards.balance(), rewards.inventory(),
+        inGame ? rewards.active(rewardRunId) : rewards.loadout(profile), inGame,
         new RewardsView.Actions() {
           @Override public void buy(String id, int quantity) {
             if (rewardsView == null) return;
@@ -574,16 +618,17 @@ public final class MainActivity extends Activity {
                 return;
               }
               if (graphicsSetup == null) return;
-              rewards.buy(id, quantity);
+              rewards.buy(id, quantity, profile, selectedMap);
               graphicsSetup.setRewardBalance(rewards.balance());
-              rewardsView.completeMutation(rewards.balance(), rewards.inventory(), rewards.loadout());
+              if (survivalSetup != null) survivalSetup.setRewardBalance(rewards.balance());
+              rewardsView.completeMutation(rewards.balance(), rewards.inventory(), rewards.loadout(profile));
             } catch (RuntimeException error) { rewardsView.showError(error.getMessage()); }
           }
           @Override public void equip(String id, int quantity) {
             if (inGame || graphicsSetup == null || rewardsView == null) return;
             try {
-              rewards.equip(id, quantity);
-              rewardsView.completeMutation(rewards.balance(), rewards.inventory(), rewards.loadout());
+              rewards.equip(id, quantity, profile, selectedMap);
+              rewardsView.completeMutation(rewards.balance(), rewards.inventory(), rewards.loadout(profile));
             } catch (RuntimeException error) { rewardsView.showError(error.getMessage()); }
           }
           @Override public void close() { closeRewards(); }
@@ -615,8 +660,9 @@ public final class MainActivity extends Activity {
 
   private void refreshRewardBalance() {
     if (graphicsSetup != null) graphicsSetup.setRewardBalance(rewards.balance());
+    if (survivalSetup != null) survivalSetup.setRewardBalance(rewards.balance());
     if (rewardsView != null) rewardsView.refresh(rewards.balance(), rewards.inventory(),
-        graphicsSetup != null ? rewards.loadout() : rewards.active(rewardRunId));
+        graphicsSetup != null ? rewards.loadout(currentRewardProfile()) : rewards.active(rewardRunId));
     if (webView != null && graphicsSetup == null && !battleSession.isEmpty())
       webView.evaluateJavascript("window.WarzoneRewards?.updateBalance?.();true", null);
   }
@@ -679,6 +725,7 @@ public final class MainActivity extends Activity {
     livePurchaseTransaction = "";
     livePurchaseDocument = "";
     if (rewardsView != null) { root.removeView(rewardsView); rewardsView = null; }
+    if (survivalSetup != null) survivalSetup.setRewardBalance(rewards.balance());
     if (webView != null && graphicsSetup == null && !battleSession.isEmpty())
       webView.evaluateJavascript("window.WarzoneRewards?.drawerChanged(false);true", null);
     rewardsHeaderBottomCss = 0; rewardsViewportWidthCss = 0;
@@ -689,24 +736,26 @@ public final class MainActivity extends Activity {
   private void showSavedGames() {
     if (graphicsSetup == null || savedGamesView != null || rewardsView != null) return;
     cancelCampaignHomeCheck();
-    savedGamesView = new SavedGamesView(this, saveGames.list(), new SavedGamesView.Actions() {
-      @Override public void load(String id) { loadSavedGame(id); }
+    final boolean survival = survivalSetup != null;
+    final SaveGameStore store = survival ? survivalSaves : saveGames;
+    savedGamesView = new SavedGamesView(this, store.list(), new SavedGamesView.Actions() {
+      @Override public void load(String id) { loadSavedGame(id, survival); }
       @Override public void delete(String id) {
         String failure = null;
         try {
-          String run = saveGames.delete(id);
-          if (!saveGames.hasRun(run)) rewards.unpinRun(run);
+          String run = store.delete(id);
+          if (!saveGames.hasRun(run) && !survivalSaves.hasRun(run)) rewards.unpinRun(run);
         } catch (Exception error) { failure = error.getMessage() == null ? "Saved-game deletion could not finish. Restart to retry." : error.getMessage(); }
         finally {
           if (savedGamesView != null) {
-            savedGamesView.refresh(saveGames.list());
+            savedGamesView.refresh(store.list());
             if (failure != null) savedGamesView.showError(failure);
           }
           if (graphicsSetup != null) graphicsSetup.setRewardBalance(rewards.balance());
         }
       }
       @Override public void close() { closeSavedGames(); }
-    });
+    }, survival ? "survival" : "towers");
     root.addView(savedGamesView, new FrameLayout.LayoutParams(-1, -1));
   }
 
@@ -714,21 +763,21 @@ public final class MainActivity extends Activity {
     if (savedGamesView != null) { root.removeView(savedGamesView); savedGamesView = null; }
   }
 
-  private void loadSavedGame(String id) {
+  private void loadSavedGame(String id, boolean survival) {
     if (graphicsSetup == null || savedGamesView == null || loadingOverlay != null) return;
     cancelCampaignHomeCheck();
     try {
-      JSONObject payload = saveGames.load(id), metadata = payload.getJSONObject("metadata");
+      JSONObject payload = (survival ? survivalSaves : saveGames).load(id), metadata = payload.getJSONObject("metadata");
       String savedMap = metadata.getString("mapId"), run = metadata.getString("session");
-      MapLevelCatalog.get(this).level(savedMap);
-      rewards.resumeRun(run, savedMap);
+      if (survival) SurvivalMapCatalog.get(savedMap); else MapLevelCatalog.get(this).level(savedMap);
+      rewards.resumeRun(run, savedMap, survival ? "survival" : "towers");
       rewardRunId = run;
       rewardSession = run; // Cleanup can suspend the correct run if setup fails before a new document exists.
       closeSavedGames();
-      mapId = savedMap;
-      matchMode = "towers";
-      battleLaunch = new BattleLaunchSpec("towers", duelWeapon, mapId, musicEnabled && musicCached);
-      getPreferences(MODE_PRIVATE).edit().putString("map_id", mapId).apply();
+      if (survival) { closeSurvivalSetup(); survivalMapId = savedMap; } else mapId = savedMap;
+      matchMode = survival ? "survival" : "towers";
+      battleLaunch = new BattleLaunchSpec(matchMode, duelWeapon, savedMap, musicEnabled && musicCached);
+      getPreferences(MODE_PRIVATE).edit().putString(survival ? "survival_map_id" : "map_id", savedMap).apply();
       root.removeView(graphicsSetup);
       graphicsSetup = null;
       loadingSave = payload;
@@ -746,6 +795,8 @@ public final class MainActivity extends Activity {
   private boolean completeRewardQuote(String session, JSONObject quote) {
     try {
       if (!session.equals(rewardSession) || quote == null || !rewardRunId.equals(quote.optString("session")) || !quote.optBoolean("applied")) return false;
+      if (battleLaunch == null || !battleLaunch.matchMode.equals(quote.optString("profile", "towers"))
+          || !battleLaunch.mapId.equals(quote.optString("map", battleLaunch.mapId))) return false;
       JSONObject remaining = quote.getJSONObject("remaining");
       JSONObject expected = rewards.resumeCaps(rewardRunId).getJSONObject("items");
       for (java.util.Iterator<String> it = expected.keys(); it.hasNext();) if (!remaining.has(it.next())) return false;
@@ -764,21 +815,24 @@ public final class MainActivity extends Activity {
     if (isDuelBattle()) { showReplayPanel(won); return; }
     if (battleSession.isEmpty() || !battleOutcome.isEmpty() || battleLaunch == null) return;
     final String playedMap = battleLaunch.mapId;
-    MapLevelCatalog.Level level = MapLevelCatalog.get(this).level(playedMap);
+    MapLevelCatalog.Level level = currentTowersLevel();
     RewardLedger.Receipt receipt;
-    try { receipt = rewards.finish(rewardRunId, won, level.difficulty, level.rounds,
-        battleSession.equals(rewardTerminalFreshSession), completionMapGroups().get(level.difficulty)); }
+    try { receipt = isSurvivalBattle()
+        ? rewards.finish(rewardRunId, won, level.difficulty, level.rounds, battleSession.equals(rewardTerminalFreshSession))
+        : rewards.finish(rewardRunId, won, level.difficulty, level.rounds,
+            battleSession.equals(rewardTerminalFreshSession), completionMapGroups().get(level.difficulty)); }
     catch (RuntimeException error) {
       // Never display an invented credit when storage fails.
       showAppNotice(error.getMessage(), true);
-      mapId = playedMap;
+      if (isSurvivalBattle()) survivalMapId = playedMap; else mapId = playedMap;
       returnToMainMenu();
       return;
     }
     if (receipt == null) return;
     battleOutcome = won ? "victory" : "defeated";
-    mapId = playedMap;
-    getPreferences(MODE_PRIVATE).edit().putString("map_id", mapId).apply();
+    boolean survival = isSurvivalBattle();
+    if (survival) survivalMapId = playedMap; else mapId = playedMap;
+    getPreferences(MODE_PRIVATE).edit().putString(survival ? "survival_map_id" : "map_id", playedMap).apply();
     // Unload the ended engine before showing Home. The stock loss/frontend
     // screen never becomes a destination, and the played map remains selected.
     returnToMainMenu();
@@ -843,7 +897,8 @@ public final class MainActivity extends Activity {
   private String gameUrl() {
     BattleLaunchSpec launch = battleLaunch;
     String url =
-        (launch.isCampaign() ? ORIGIN + "/warzone/mobile-campaign.html?blocknight=1&mode=campaign"
+        (launch.isSurvival() ? ORIGIN + "/warzone/mobile-survival.html?blocknight=1&mode=survival"
+            : launch.isCampaign() ? ORIGIN + "/warzone/mobile-campaign.html?blocknight=1&mode=campaign"
             : launch.isFfa() ? ORIGIN + "/warzone/mobile-ffa.html?blocknight=1&mode=ffa&bnFfaDifficulty=" + launch.ffaDifficulty
                 + "&bnFfaBotType=" + launch.ffaBotType + "&bnFfaMap=" + launch.mapId
                 + (restoringGame ? "&bnFfaRestore=1" : "")
@@ -868,7 +923,8 @@ public final class MainActivity extends Activity {
 
   private boolean isCampaignBattle() { return battleLaunch != null && battleLaunch.isCampaign(); }
   private boolean isFfaBattle() { return battleLaunch != null && battleLaunch.isFfa(); }
-  private boolean isTowersBattle() { return battleLaunch != null && "towers".equals(battleLaunch.matchMode); }
+  private boolean isSurvivalBattle() { return battleLaunch != null && battleLaunch.isSurvival(); }
+  private boolean isTowersBattle() { return battleLaunch != null && ("towers".equals(battleLaunch.matchMode) || isSurvivalBattle()); }
 
   private void createWebView() {
     webView = new EngineWebView(this);
@@ -951,6 +1007,7 @@ public final class MainActivity extends Activity {
                 || !("/warzone/mobile.html".equals(page.getPath())
                     || "/warzone/mobile-duel.html".equals(page.getPath())
                     || "/warzone/mobile-ffa.html".equals(page.getPath())
+                    || "/warzone/mobile-survival.html".equals(page.getPath())
                     || "/warzone/mobile-campaign.html".equals(page.getPath()))) return;
             verifyEnginePrerequisites();
           }
@@ -1366,7 +1423,7 @@ public final class MainActivity extends Activity {
       if (session == null || !session.equals(rewardSession) || rewards == null || battleLaunch == null
           || packet == null || packet.length() > 262144) return 0;
       try {
-        int credited = rewards.progress(rewardRunId, packet, MapLevelCatalog.get(MainActivity.this).level(battleLaunch.mapId).rounds);
+        int credited = rewards.progress(rewardRunId, packet, currentTowersLevel().rounds);
         JSONObject data = new JSONObject(packet);
         if (("victory".equals(data.optString("phase")) || "defeated".equals(data.optString("phase")))
             && completeRewardQuote(session, data.optJSONObject("rewards"))) rewardTerminalFreshSession = session;
@@ -1388,7 +1445,7 @@ public final class MainActivity extends Activity {
         if (!completeRewardQuote(session, quote)) return false;
         JSONObject progress = new JSONObject().put("wave", 0)
             .put("completedWaves", quote.optJSONArray("completedWaves")) .put("rewards", quote);
-        int credited = rewards.progress(rewardRunId, progress.toString(), MapLevelCatalog.get(MainActivity.this).level(battleLaunch.mapId).rounds);
+        int credited = rewards.progress(rewardRunId, progress.toString(), currentTowersLevel().rounds);
         rewardInventoryFreshSession = session;
         if (credited > 0) runOnUiThread(() -> {
           if (session.equals(rewardSession))
@@ -1565,14 +1622,17 @@ public final class MainActivity extends Activity {
         JSONObject metadata = new JSONObject(metadataJSON);
         if (!run.equals(metadata.getString("session")) || battleLaunch == null
             || !battleLaunch.mapId.equals(metadata.getString("mapId"))) throw new IOException("The saved match identity did not match.");
-        MapLevelCatalog.Level level = MapLevelCatalog.get(MainActivity.this).level(battleLaunch.mapId);
+        MapLevelCatalog.Level level = currentTowersLevel();
+        if (isSurvivalBattle() && (!"survival".equals(metadata.optString("mode"))
+            || !"survival".equals(metadata.optString("profile")) || !level.mapName.equals(metadata.optString("nativeLevel"))))
+          throw new IOException("The saved Survival identity did not match this battle.");
         metadata.put("mapName", level.name).put("difficulty", level.difficulty).put("totalWaves", level.rounds);
         rewards.pinRun(run);
         pinned = true;
-        String id = saveGames.save(metadata, new JSONObject(filesJSON));
+        String id = currentTowersSaves().save(metadata, new JSONObject(filesJSON));
         return new JSONObject().put("ok", true).put("id", id).toString();
       } catch (Exception error) {
-        if (pinned && !saveGames.hasRun(run)) {
+        if (pinned && !saveGames.hasRun(run) && !survivalSaves.hasRun(run)) {
           try { rewards.unpinRun(run); } catch (RuntimeException ignored) { }
         }
         try { return new JSONObject().put("ok", false).put("error", String.valueOf(error.getMessage())).toString(); }
@@ -1587,6 +1647,8 @@ public final class MainActivity extends Activity {
         if (session == null || !session.equals(rewardSession) || !id.equals(loadingSaveId) || payload == null) return false;
         JSONObject metadata = payload.getJSONObject("metadata"), state = new JSONObject(stateJSON);
         if (!state.optBoolean("ok") || !rewardRunId.equals(state.optString("session"))
+            || isSurvivalBattle() && (!"survival".equals(metadata.optString("profile"))
+                || !"survival".equals(state.optString("profile")))
             || !battleLaunch.mapId.equals(state.optString("mapId"))
             || !metadata.getString("nativeLevel").equals(state.optString("nativeLevel"))
             || state.optLong("gameTime", -1) < metadata.getLong("gameTime")
@@ -1870,7 +1932,8 @@ public final class MainActivity extends Activity {
   }
 
   private void returnToMainMenu() {
-    final boolean returnToTowersMap = graphicsSetup == null && isTowersBattle();
+    final boolean returnToSurvival = graphicsSetup == null && isSurvivalBattle();
+    final boolean returnToTowersMap = graphicsSetup == null && isTowersBattle() && !returnToSurvival;
     final boolean returnToFfa = graphicsSetup == null && isFfaBattle();
     cancelCampaignHomeCheck();
     dismissBriefing();
@@ -1879,6 +1942,7 @@ public final class MainActivity extends Activity {
     closeSavedGames();
     closeCampaignSetup();
     closeFfaSetup();
+    closeSurvivalSetup();
     dismissRewardReceipt();
     if (rewards != null && !rewardSession.isEmpty()) {
       try { rewards.abandon(rewardRunId, rewardSession.equals(rewardInventoryFreshSession)); }
@@ -1906,6 +1970,7 @@ public final class MainActivity extends Activity {
     webView.loadUrl("about:blank");
     if (graphicsSetup == null) showGraphicsSetup();
     if (returnToTowersMap) graphicsSetup.showTowersMap();
+    if (returnToSurvival) showSurvivalSetup();
     if (returnToFfa) showFfaSetup();
   }
 
@@ -1984,7 +2049,7 @@ public final class MainActivity extends Activity {
         : "WARZONE 1v1\n\nDEFEAT\n\nYour command centre was destroyed\n\nTap to try again";
     return won
         ? "WARZONE TOWERS\n\nVICTORY\n\nAll "
-            + MapLevelCatalog.get(this).level(battleLaunch != null ? battleLaunch.mapId : mapId).rounds
+            + currentTowersLevel().rounds
             + " rounds cleared\n\nTap to play again"
         : "WARZONE TOWERS\n\nYOU HAVE FAILED\n\nCommand centre destroyed\n\nTap to try again";
   }
@@ -2056,7 +2121,7 @@ public final class MainActivity extends Activity {
               evaluateTouchTapThen(
                   585,
                   isDuelBattle() || isFfaBattle() ? 30 : 30
-                      + 40 * MapLevelCatalog.get(this).level(battleLaunch.mapId).humanPosition,
+                      + 40 * currentTowersLevel().humanPosition,
                   "Ready",
                   1500,
                   this::finishStartupAutomation));
@@ -2080,7 +2145,7 @@ public final class MainActivity extends Activity {
         "(() => {const r=window."
             + (isFfaBattle() ? "__warzoneFfa" : isDuelBattle() ? "__warzoneDuel" : "__warzoneTowersWaves") + "?.report?.();"
             + "return Boolean(document.getElementById('canvas')"
-            + "&&r?.snapshot?.mode==='" + (isFfaBattle() ? "ffa" : isDuelBattle() ? "duel" : "tower-defense") + "');})()";
+            + "&&r?.snapshot?.mode==='" + (isFfaBattle() ? "ffa" : isDuelBattle() ? "duel" : isSurvivalBattle() ? "survival" : "tower-defense") + "');})()";
     webView.evaluateJavascript(
         script,
         result -> {
@@ -2291,6 +2356,7 @@ public final class MainActivity extends Activity {
         if ("index.html".equals(path) || "mobile.html".equals(path)
             || "index-duel.html".equals(path) || "mobile-duel.html".equals(path)
             || "index-ffa.html".equals(path) || "mobile-ffa.html".equals(path)
+            || "index-survival.html".equals(path) || "mobile-survival.html".equals(path)
             || "index-campaign.html".equals(path) || "mobile-campaign.html".equals(path)) {
           headers.put("Cross-Origin-Opener-Policy", "same-origin");
           headers.put("Document-Isolation-Policy", "isolate-and-require-corp");
@@ -2577,6 +2643,7 @@ public final class MainActivity extends Activity {
     if (campaignSetup != null) { closeCampaignSetup(); return; }
     if (ffaSetup != null) { closeFfaSetup(); return; }
     if (rewardsView != null) { closeRewards(); return; }
+    if (survivalSetup != null) { closeSurvivalSetup(); return; }
     if (rewardReceipt != null) { dismissRewardReceipt(); return; }
     if (mainMenuDialog != null) {
       mainMenuDialog.cancel();

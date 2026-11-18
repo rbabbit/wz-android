@@ -1,0 +1,25 @@
+{
+  "baseline": "Normal0.92 SHA256134246af423c0ea04b375409f41d179813a739968d260855e73784a9109b6b66; complete source and original saves preserved",
+  "sourceFindings": [
+    "Native Medium retreat<=75% health, OFF lets active tripsfinish",
+    "ALLCOMBAT currently selects every owned armedunit including return/repair states",
+    "World dispatch native path needs protected-unitguard, not only JS ACK",
+    "Factory/commander inheritance and MP privateVM need native owned-unit enrollment",
+    "Existing Players/cellular/updater/signing must remain intact"
+  ],
+  "checks": [
+    "Reproduce baseline ALLCOMBAT repair selection",
+    "Native real thresholdboundary and destination/fallback",
+    "ALLCOMBAT staysgreen while excludesreturning/repairing/rearming",
+    "Repeated MOVE/ATTACK orders do not override retreat; allprotected0ready is safe",
+    "Fullyrepaired units becomecommandable again",
+    "Newordinaryproduction inherits Medium; noncombatconstructors unaffected",
+    "OFF stopsfuture retreats and leavesactive returnorder",
+    "Allmodes header/repeatedmenus/Players/IMEBack/inputrestore",
+    "MP ownership, synchronizedpolicy and spectator/replay denial",
+    "Normal exactdelivery APK identity/signature and noVPSpublication"
+  ],
+  "baselineFixtureIssue": "First FFA QA089seed failed existing native-save identity check beforeworld. Not productrepair defect; switched known Towersfixture. Original archiveunchanged.",
+  "fixtureDisclosure": "Prepared saves and independent seeded damage/repairfacility fixture; ordinaryproduction verified separately",
+  "publication": false
+}

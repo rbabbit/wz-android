@@ -1,0 +1,607 @@
+--- upstream/replay-analyzer.js
++++ app/src/main/assets/hub/replay/renderer.js
+@@ -1,5 +1,33 @@
++/* Adapted for Warzone Towers' focused replay viewer. Upstream MIT notice in LICENSE. */
+ (function () {
+-  const wzstatsPublishedUrl = new URL("stats/published/matches.json", document.baseURI);
++  let replayDisposed = false;
++  let replayLifecyclePaused = document.hidden;
++  let replayResumeOnVisible = false;
++  const replayRequests = new Set();
++  const replayErrors = [];
++  async function replayFetch(input, options = {}) {
++    if (replayDisposed) throw new DOMException("Replay closed", "AbortError");
++    const remote = new URL(String(input), document.baseURI);
++    const isRemote = remote.origin !== location.origin;
++    const requestURL = isRemote
++      ? new URL("/hub-replay-data?url=" + encodeURIComponent(remote.href), location.origin).href
++      : remote.href;
++    const controller = new AbortController();
++    const abort = () => controller.abort();
++    if (options.signal?.aborted) controller.abort();
++    options.signal?.addEventListener("abort", abort, { once: true });
++    const timeout = setTimeout(abort, isRemote ? 45000 : 20000);
++    replayRequests.add(controller);
++    try {
++      return await fetch(requestURL, { ...options, signal: controller.signal });
++    } finally {
++      clearTimeout(timeout);
++      replayRequests.delete(controller);
++      options.signal?.removeEventListener("abort", abort);
++    }
++  }
++
++  const wzstatsPublishedUrl = new URL("https://maway2000.github.io/boha/stats/published/matches.json");
+   const replayFile = document.getElementById("replayFile");
+   const replayFileName = document.getElementById("replayFileName");
+   const replayUrl = document.getElementById("replayUrl");
+@@ -544,49 +572,15 @@
+       return null;
+     }
+ 
+-    let match = null;
+-    for (const indexUrl of [
+-      "https://desktop-0467j9q.tail41fd3a.ts.net/wzstats/data/wavehoster-live.json",
+-      new URL("stats/published/wavehoster.json", document.baseURI)
+-    ]) {
+-      const controller = new AbortController();
+-      const timeout = setTimeout(() => controller.abort(), 5000);
+-      try {
+-        const response = await fetch(indexUrl, {cache: "no-store", signal: controller.signal});
+-        if (response.ok) {
+-          const payload = await response.json();
+-          const game = payload.format === 1 && payload.source === "WaveHoster" && (payload.games || []).find(item => (
+-            replaySha256 ? item.replaySha256 === replaySha256 : replayId && item.id === String(replayId)
+-          ));
+-          if (game && Number.isSafeInteger(game.matchId) && game.matchId > 0 && /^[a-f0-9]{64}$/.test(game.replaySha256 || "")) {
+-            match = {id: game.matchId, replay_sha256: game.replaySha256,
+-              started_at: game.startedAt,
+-              replay_url: `https://desktop-0467j9q.tail41fd3a.ts.net/wzstats/api/v1/replays/${game.replaySha256}`, players: []};
+-          }
+-        }
+-      } catch (_) {
+-        // Saved results remain available when live hosting cannot be reached.
+-      } finally {
+-        clearTimeout(timeout);
+-      }
+-      if (match) break;
+-    }
+-
++    let match = appReplayMatch;
+     if (!match) {
+-      const matchesResponse = await fetch(wzstatsPublishedUrl, { cache: "no-store" });
+-      if (!matchesResponse.ok) {
+-        throw new Error(`Unable to load the published match index (${matchesResponse.status}).`);
+-      }
+-
+-      const matchesPayload = await matchesResponse.json();
+-      match = (matchesPayload.matches || []).find((item) => (
++      const index = await appPublishedIndex();
++      match = index.matches.find(item => (
+         (replaySha256 && item.replay_sha256 === replaySha256)
+         || (replayId && String(item.source_match_id) === String(replayId))
+       ));
+-      if (!match) {
+-        return null;
+-      }
+-    }
++    }
++    if (!match) return null;
+ 
+     let detailMatch = null;
+     let detailError = "";
+@@ -594,13 +588,13 @@
+       const detailUrl = `https://desktop-0467j9q.tail41fd3a.ts.net/wzstats/api/v1/matches/${encodeURIComponent(match.id)}`;
+       let detailResponse;
+       try {
+-        detailResponse = await fetch(detailUrl, { cache: "no-store" });
++        detailResponse = await replayFetch(detailUrl, { cache: "no-store" });
+       } catch (error) {
+         // On the Tailscale host, MagicDNS resolves the public Funnel hostname to
+         // its local 100.x address. Retry explicitly so Firefox can show its
+         // Local Network Access permission prompt. Public Funnel clients keep
+         // using the normal request above because their address is public.
+-        detailResponse = await fetch(detailUrl, {
++        detailResponse = await replayFetch(detailUrl, {
+           cache: "no-store",
+           targetAddressSpace: "local"
+         });
+@@ -1442,7 +1436,7 @@
+     if (archiveUrl.origin !== window.location.origin) {
+       throw new Error("The verified map archive must use the analyzer's origin.");
+     }
+-    const response = await fetch(archiveUrl, { cache: "force-cache" });
++    const response = await replayFetch(archiveUrl, { cache: "force-cache" });
+     if (!response.ok) {
+       throw new Error(`Verified map archive download failed with HTTP ${response.status}.`);
+     }
+@@ -3597,6 +3591,8 @@
+   }
+ 
+   function updateBattlefieldPlayerStats(force = false) {
++    return; // No statistics panel in the app viewer.
++
+     if (!battlefieldExtraction) {
+       return;
+     }
+@@ -3825,6 +3821,8 @@
+   }
+ 
+   function startBattlefieldPlayback() {
++    if (replayDisposed) return;
++    if (replayLifecyclePaused) { replayResumeOnVisible = true; return; }
+     if (!battlefieldFrames.length || battlefield3dLoading) return;
+     if (battlefieldCurrentTime >= Number(battlefieldRange.max)) {
+       battlefieldCurrentTime = 0;
+@@ -4110,7 +4108,7 @@
+   }
+ 
+   async function fetchBattlefieldJson(url) {
+-    const response = await fetch(url);
++    const response = await replayFetch(url);
+     if (!response.ok) {
+       throw new Error(`Unable to load battlefield model data (${response.status}): ${url}`);
+     }
+@@ -5676,6 +5674,7 @@
+   }
+ 
+   function drawBattlefield() {
++    if (replayDisposed || replayLifecyclePaused) return;
+     if (battlefield3dIsActive()) {
+       drawBattlefield3d();
+       return;
+@@ -6166,8 +6165,7 @@
+       battlefieldMeta.textContent = `${battlefieldFrames.length.toLocaleString()} frames · battlefield preview not supported for uploaded replays`;
+       battlefieldStatus.textContent = "Not Supported";
+     }
+-    populateBattlefieldLegend(extraction);
+-    renderBattlefieldMomentum(extraction);
++    // The app viewer deliberately has no player tables or momentum graph.
+     if (previewSupported) setBattlefieldViewMode(battlefieldViewMode?.value || "3d");
+   }
+ 
+@@ -6300,62 +6298,21 @@
+   }
+ 
+   function renderExtendedAnalysis(extraction) {
+-    renderExtendedTelemetry(extraction);
+-    const engineAnalysis = extraction.engineAnalysis;
+-    const extended = engineAnalysis?.extended;
+-    const timeline = Array.isArray(extended?.researchTimeline) ? extended.researchTimeline : [];
+-    const tacticalReplay = extended?.tacticalReplay;
+-    const positionFrames = Array.isArray(tacticalReplay?.positionFrames)
+-      ? tacticalReplay.positionFrames
+-      : [];
+-    const battlefieldPositionFrames = positionFrames.filter((frame) => !frame.eventsOnly);
+-
+-    const previewRequested = Boolean(extraction.battlefieldPreviewSupported);
+-    const previewAvailable = previewRequested && battlefieldPositionFrames.length > 0;
+-    battlefieldPanel.classList.toggle("is-unsupported", !previewAvailable);
+-    battlefieldPanel.hidden = !previewRequested && battlefieldPositionFrames.length === 0;
+-    if (previewAvailable) {
+-      battlefieldUnsupported.textContent = "Not Supported";
++    const tacticalReplay = extraction.engineAnalysis?.extended?.tacticalReplay;
++    const frames = Array.isArray(tacticalReplay?.positionFrames) ? tacticalReplay.positionFrames : [];
++    const supported = Boolean(extraction.battlefieldPreviewSupported && frames.some(frame => !frame.eventsOnly));
++    battlefieldPanel.classList.toggle("is-unsupported", !supported);
++    battlefieldPanel.hidden = false;
++    if (supported) {
+       renderBattlefield(extraction, tacticalReplay, true);
+     } else {
+       stopBattlefieldPlayback();
+       resetBattlefield3dReplay();
+       battlefieldFrames = [];
+       battlefieldExtraction = null;
+-      battlefieldOwnersUsePositions = false;
+       battlefieldTerrain = null;
+-      battlefieldDroidDefinitions = new Map();
+-      battlefieldStructureDefinitions = new Map();
+-      battlefieldDestroyedAt = new Map();
+-      battlefieldMomentumSeries = [];
+-      battlefieldMomentumDuration = 0;
+-      battlefieldMomentum.hidden = true;
+-      battlefieldMomentumChart.replaceChildren();
+-      battlefieldSpriteCache.clear();
+-      battlefieldSpriteBufferGeneration += 1;
+-      battlefieldSpriteBufferScheduled = false;
+-      const unavailableMessage = extraction.battlefieldPreviewError
+-        || (previewRequested ? "Battlefield telemetry unavailable" : "Not Supported");
+-      battlefieldUnsupported.textContent = unavailableMessage;
+-      battlefieldMeta.textContent = extraction.battlefieldPreviewError || "";
+-      battlefieldStatus.textContent = unavailableMessage;
+-      if (battlefieldPositionFrames.length) {
+-        battlefieldMeta.textContent = "Battlefield preview is not supported for uploaded replays";
+-        battlefieldStatus.textContent = "Not Supported";
+-      }
+-    }
+-
+-    researchPanel.hidden = timeline.length === 0;
+-    if (timeline.length) {
+-      researchMeta.textContent = `${timeline.length.toLocaleString()} completed topics`;
+-      researchPlayer.replaceChildren();
+-      appendOption(researchPlayer, "", "All players");
+-      extraction.players
+-        .filter((player) => !player.spectator)
+-        .sort((left, right) => left.position - right.position)
+-        .forEach((player) => appendOption(researchPlayer, String(player.position), player.name));
+-      researchSearch.value = "";
+-      renderResearchTimeline(extraction);
++      battlefieldUnsupported.textContent = "Replay view is unavailable for this match.";
++      battlefieldStatus.textContent = extraction.battlefieldPreviewError || "Battlefield telemetry unavailable";
+     }
+   }
+ 
+@@ -6428,192 +6385,81 @@
+   }
+ 
+   function renderExtraction(extraction) {
+-    const statsNotice = document.getElementById("replayStatsNotice");
+-    statsNotice.textContent = recordedSummaryNotice(extraction);
+-    statsNotice.hidden = !statsNotice.textContent;
+-    const playerCount = extraction.players.filter((player) => !player.spectator).length;
+-    const observerCount = extraction.players.length - playerCount;
+-    const hostPlayer = extraction.players.find((player) => player.admin);
+-
+-    replaceChildren(summary, [
+-      renderSummaryItem("Map", extraction.match.map),
+-      renderSummaryItem("Duration", formatDuration(extraction.match.elapsedMilliseconds)),
+-      renderSummaryItem("Players / observers", `${playerCount} / ${observerCount}`),
+-      renderSummaryItem("Date", formatReplayDate(extraction.publishedStats?.endDate || latestReplayId)),
+-      renderSummaryItem("Host", hostPlayer ? hostPlayer.name : "Unknown")
+-    ]);
+-
+-    const awardsByPlayer = calculatePlayerAwards(
+-      extraction.players,
+-      extraction.events.records,
+-      hasCompletePlayerDepartureHistory(extraction),
+-      extraction.match,
+-      extraction.messages.types
+-    );
+-    const researchActivityByPlayer = calculateResearchActivity(
+-      extraction.players,
+-      extraction.events.records,
+-      extraction.match.elapsedMilliseconds
+-    );
+-    extraction.players.forEach((player) => {
+-      player.researchActivity = researchActivityByPlayer.get(player);
+-    });
+-    renderCompactMatchSummary(extraction);
+     renderExtendedAnalysis(extraction);
+-    const competitors = extraction.players.filter((player) => !player.spectator);
+-    const teamOrder = [...new Set(competitors.map((player) => Number(player.team)))].sort((left, right) => left - right);
+-    const firstTeam = teamOrder[0];
+-    const firstTeamPlayers = competitors.filter((player) => Number(player.team) === firstTeam);
+-    const secondTeamPlayers = competitors.filter((player) => Number(player.team) !== firstTeam);
+-    const renderPlayerRows = () => {
+-      replaceChildren(
+-        playersBody,
+-        sortPlayers(firstTeamPlayers, awardsByPlayer).map((player) => (
+-          createPlayerRow(
+-            player,
+-            extraction.players,
+-            extraction.events.records,
+-            awardsByPlayer.get(player),
+-            researchActivityByPlayer.get(player),
+-            "A"
+-          )
+-        ))
+-      );
+-      replaceChildren(
+-        playersBodyB,
+-        sortPlayers(secondTeamPlayers, awardsByPlayer).map((player) => (
+-          createPlayerRow(
+-            player,
+-            extraction.players,
+-            extraction.events.records,
+-            awardsByPlayer.get(player),
+-            researchActivityByPlayer.get(player),
+-            "B"
+-          )
+-        ))
+-      );
+-    };
+-
+-    const createPlayerHeaders = () => {
+-      const playerHeaderGroups = document.createElement("tr");
+-      playerHeaderGroups.append(
+-        createPlayerSortHeader("Slot", "position", { rowSpan: 2 }, renderPlayerRows),
+-        createPlayerSortHeader("Nick", "name", { rowSpan: 2 }, renderPlayerRows),
+-        createPlayerSortHeader("Score", "score", { rowSpan: 2 }, renderPlayerRows),
+-        createPlayerSortHeader("KD", "totalKd", { rowSpan: 2 }, renderPlayerRows),
+-        createPlayerSortHeader("Power won", "powerWon", { rowSpan: 2 }, renderPlayerRows),
+-        createPlayerSortHeader("Power lost", "powerLost", { rowSpan: 2 }, renderPlayerRows),
+-        createPlayerSortHeader("Res", "researchActivity", { rowSpan: 2 }, renderPlayerRows),
+-        createHeaderCell("Units", {
+-          colSpan: 5,
+-          scope: "colgroup",
+-          className: "replay-stat-group"
+-        }),
+-        createHeaderCell("Structures", {
+-          colSpan: 5,
+-          scope: "colgroup",
+-          className: "replay-stat-group"
+-        }),
+-        createPlayerAwardsHeader(renderPlayerRows)
+-      );
+-
+-      const playerHeaderDetails = document.createElement("tr");
+-      playerHeaderDetails.className = "replay-stat-details";
+-      playerHeaderDetails.append(
+-        createPlayerSortHeader("Built", "droidsBuilt", {}, renderPlayerRows),
+-        createPlayerSortHeader("Lost", "droidsLost", {}, renderPlayerRows),
+-        createPlayerSortHeader("Kills", "kills", {}, renderPlayerRows),
+-        createPlayerSortHeader("Alive", "remainingDroids", {}, renderPlayerRows),
+-        createPlayerSortHeader("KD", "kd", {}, renderPlayerRows),
+-        createPlayerSortHeader("Built", "structuresBuilt", {}, renderPlayerRows),
+-        createPlayerSortHeader("Lost", "structuresLost", {}, renderPlayerRows),
+-        createPlayerSortHeader("Kills", "structuresDestroyed", {}, renderPlayerRows),
+-        createPlayerSortHeader("Alive", "remainingStructures", {}, renderPlayerRows),
+-        createPlayerSortHeader("KD", "structureKd", {}, renderPlayerRows)
+-      );
+-      return [playerHeaderGroups, playerHeaderDetails];
+-    };
+-    replaceChildren(playersHead, createPlayerHeaders());
+-    updatePlayerSortIndicators();
+-    renderPlayerRows();
+-
+-    replaceChildren(messagesBody, extraction.messages.types.map((message) => {
+-      const row = document.createElement("tr");
+-      row.append(
+-        createCell(message.type),
+-        createCell(message.name),
+-        createCell(message.count.toLocaleString()),
+-        createCell(message.payloadBytes.toLocaleString()),
+-        createCell(message.players.join(", "))
+-      );
+-      return row;
+-    }));
+-
+-    populateEventFilters(extraction);
+-    const displayedEvents = renderEventTimeline(extraction);
+-
+-    const rawPreview = {
+-      ...extraction,
+-      events: {
+-        ...extraction.events,
+-        records: displayedEvents,
+-        previewTruncated: extraction.events.count > displayedEventLimit
+-      }
+-    };
+-    rawJson.textContent = JSON.stringify(rawPreview, null, 2);
+     results.hidden = false;
+   }
+ 
+   function setStatus(message, isError = false) {
++    if (replayDisposed) return;
++    if (isError) replayErrors.push(String(message));
+     status.textContent = message;
+     status.classList.toggle("replay-status-error", isError);
+   }
+ 
++  let appPublishedIndexPromise = null;
++  let appReplayMatch = null;
++  const appSharedIndex = (() => {
++    try {
++      const owner = parent !== window && parent.location.origin === location.origin ? parent : window;
++      return owner.__warzoneReplayIndexCache ||= { data: null, expires: 0, pending: null };
++    } catch (_) { return { data: null, expires: 0, pending: null }; }
++  })();
++  async function appPublishedIndex() {
++    if (appSharedIndex.data && appSharedIndex.expires > Date.now()) return appSharedIndex.data;
++    if (appSharedIndex.pending) return appSharedIndex.pending;
++    if (!appPublishedIndexPromise) {
++      appPublishedIndexPromise = (async () => {
++        const response = await replayFetch(wzstatsPublishedUrl, { cache: "no-store" });
++        if (!response.ok) throw new Error("The replay list could not be loaded. Please try again.");
++        const index = await response.json();
++        if (!Array.isArray(index.matches)) throw new Error("The replay list is unavailable.");
++        // Keep only real identity fields needed by later replay opens, not the
++        // much larger leaderboard/player statistics payload.
++        const data = { matches: index.matches.map(item => ({ id: item.id,
++          source_match_id: item.source_match_id, replay_sha256: item.replay_sha256,
++          replay_url: item.replay_url, started_at: item.started_at, ended_at: item.ended_at })) };
++        appSharedIndex.data = data;
++        appSharedIndex.expires = Date.now() + 300000;
++        return data;
++      })().catch(error => {
++        if (appSharedIndex.pending === appPublishedIndexPromise) appSharedIndex.pending = null;
++        appPublishedIndexPromise = null;
++        throw error;
++      }).finally(() => {
++        if (appSharedIndex.pending === appPublishedIndexPromise) appSharedIndex.pending = null;
++      });
++      appSharedIndex.pending = appPublishedIndexPromise;
++    }
++    return appPublishedIndexPromise;
++  }
+   async function loadReplay() {
+-    const file = replayFile.files[0];
+-    const urlValue = replayUrl.value.trim();
+     latestReplayId = "";
+     latestReplaySha256 = "";
+-
+-    if (!file && !urlValue) {
+-      throw new Error("Choose a replay file or paste a replay URL first.");
+-    }
+-
+-    if (file) {
+-      latestReplayId = extractReplayId(file.name);
+-      return file.arrayBuffer();
+-    }
+-
+-    const url = new URL(urlValue);
+-    if (url.protocol !== "https:" && url.protocol !== "http:") {
+-      throw new Error("Replay URLs must use HTTP or HTTPS.");
+-    }
+-
++    appReplayMatch = null;
++    const value = replayUrl.value.trim();
++    const url = new URL(value);
++    if (url.origin !== "https://warzone2100.retropaganda.info"
++        || !/^\/replays\/\d{10,}\.wzrp$/.test(url.pathname)
++        || url.search || url.hash) {
++      throw new Error("This replay link is not supported.");
++    }
+     latestReplayId = extractReplayId(url.href);
+-    latestReplaySha256 = extractReplaySha256(url.href);
+-    setStatus("Downloading replay…");
+-    let response;
+-    try {
+-      response = await fetch(url.href);
+-    } catch (downloadError) {
+-      // Some upstream files are plain WZrp despite Content-Encoding: br.
+-      // Browsers cannot ignore that header; use our verified stored copy.
+-      if (url.origin !== "https://warzone2100.retropaganda.info" || !latestReplayId) {
+-        throw downloadError;
+-      }
+-      const indexResponse = await fetch(wzstatsPublishedUrl, { cache: "no-store" });
+-      if (!indexResponse.ok) throw downloadError;
+-      const index = await indexResponse.json();
+-      const match = (index.matches || []).find(item => String(item.source_match_id) === latestReplayId);
+-      if (!match || !/^[a-f0-9]{64}$/.test(match.replay_sha256 || "")) throw downloadError;
+-      setStatus("Downloading stored replay copy…");
+-      response = await fetch(`https://desktop-0467j9q.tail41fd3a.ts.net/wzstats/api/v1/replays/${match.replay_sha256}`);
+-    }
+-    if (!response.ok) {
+-      throw new Error(`Replay download failed with HTTP ${response.status}.`);
+-    }
+-
+-    return response.arrayBuffer();
++    setStatus("Finding replay…");
++    const index = await appPublishedIndex();
++    const match = index.matches.find(item => String(item.source_match_id) === latestReplayId);
++    if (!match || !Number.isSafeInteger(Number(match.id)) || Number(match.id) <= 0
++        || !/^[a-f0-9]{64}$/.test(match.replay_sha256 || "")) {
++      throw new Error("Replay view is not available for this match yet.");
++    }
++    appReplayMatch = match;
++    setStatus("Loading replay…");
++    const response = await replayFetch(`https://desktop-0467j9q.tail41fd3a.ts.net/wzstats/api/v1/replays/${match.replay_sha256}`);
++    if (!response.ok) throw new Error("The replay could not be downloaded. Please try again.");
++    const bytes = await response.arrayBuffer();
++    const actualSHA256 = await calculateReplaySha256(bytes);
++    if (actualSHA256 !== match.replay_sha256) throw new Error("The replay identity could not be verified.");
++    latestReplaySha256 = actualSHA256;
++    return bytes;
+   }
+ 
+   async function analyzeReplay(allowPublishedBattlefield = false) {
+@@ -7065,4 +6911,118 @@
+       renderResearchTimeline(latestExtraction);
+     }
+   });
++  // App integration: read-only observation and lifecycle control, no game-state mutation.
++  let replayBootTimedOut = false;
++  const replayBootTimeout = setTimeout(() => {
++    if (replayDisposed || (!analysisRunning && !battlefield3dLoading)) return;
++    replayBootTimedOut = true;
++    replayRequests.forEach(request => request.abort());
++    stopBattlefieldPlayback();
++    setStatus("Replay loading timed out. Please try again.", true);
++  }, 90000);
++
++  function pauseReplay() {
++    if (replayDisposed || replayLifecyclePaused) return;
++    replayResumeOnVisible = battlefieldPlaying || battlefield3dResumeAfterLoading;
++    replayLifecyclePaused = true;
++    stopBattlefieldPlayback();
++  }
++
++  function resumeReplay() {
++    if (replayDisposed || !replayLifecyclePaused) return;
++    replayLifecyclePaused = false;
++    if (replayResumeOnVisible) {
++      replayResumeOnVisible = false;
++      autoplayBattlefieldWhenReady();
++    }
++    drawBattlefield();
++  }
++
++  function disposeReplay() {
++    if (replayDisposed) return;
++    replayDisposed = true;
++    clearTimeout(replayBootTimeout);
++    // A removed iframe must never leave its aborted Promise in the parent Hub.
++    if (appSharedIndex.pending === appPublishedIndexPromise) appSharedIndex.pending = null;
++    replayRequests.forEach(request => request.abort());
++    replayRequests.clear();
++    stopBattlefieldPlayback();
++    battlefield3dResumeAfterLoading = false;
++    battlefieldSpriteBufferGeneration += 1;
++    if (battlefield3dLoadingHideTimer) clearTimeout(battlefield3dLoadingHideTimer);
++    const disposed = new Set();
++    const disposeOnce = value => {
++      if (!value || disposed.has(value)) return;
++      disposed.add(value);
++      value.dispose?.();
++    };
++    battlefield3d?.scene?.traverse?.(object => {
++      disposeOnce(object.geometry);
++      const materials = Array.isArray(object.material) ? object.material : [object.material];
++      materials.filter(Boolean).forEach(material => {
++        Object.values(material).filter(value => value?.isTexture).forEach(disposeOnce);
++        disposeOnce(material);
++      });
++    });
++    resetBattlefield3dReplay();
++    battlefield3d?.renderer?.dispose?.();
++    battlefield3d?.renderer?.forceContextLoss?.();
++    battlefieldModelLibraryPromise?.then(library => {
++      library.renderer?.dispose?.();
++      library.renderer?.forceContextLoss?.();
++    }).catch(() => {});
++    battlefieldFrames = [];
++    battlefieldExtraction = null;
++    latestExtraction = null;
++    document.documentElement.classList.remove("replay-battlefield-scroll-lock");
++    document.getElementById("replayLoadOverlay")?.remove();
++  }
++
++  function replayReport() {
++    const canvas = battlefield3dIsActive() ? battlefield3dCanvas : battlefieldCanvas;
++    const rect = canvas?.getBoundingClientRect();
++    const frame = battlefieldFrames.length ? battlefieldFramePair(battlefieldCurrentTime).current : null;
++    return {
++      version: 95,
++      sourceCommit: "dcaf96520aa47f7a71160cae33da32e5ece1d5f0",
++      ready: Boolean(battlefieldFrames.length && !analysisRunning && !replayDisposed),
++      supported: Boolean(battlefieldFrames.length),
++      disposed: replayDisposed,
++      lifecyclePaused: replayLifecyclePaused,
++      loading: analysisRunning || battlefield3dLoading,
++      timedOut: replayBootTimedOut,
++      playing: battlefieldPlaying,
++      time: battlefieldCurrentTime,
++      duration: Number(battlefieldRange.max),
++      speed: battlefieldPlaybackSpeed(),
++      view: battlefieldViewMode.value,
++      active3d: battlefield3dIsActive(),
++      presented3d: Boolean(battlefield3d?.hasPresentedFrame),
++      frames: battlefieldFrames.length,
++      visibleFrame: frame ? { time: frame.time, droids: frame.droids?.length || 0, structures: frame.structures?.length || 0 } : null,
++      modelDefinitions: { droids: battlefieldDroidDefinitions.size, structures: battlefieldStructureDefinitions.size },
++      models: battlefield3d?.prototypes?.size || 0,
++      objects: battlefield3d?.objects?.size || 0,
++      terrain: Boolean(battlefieldTerrain),
++      terrainTiles: Boolean(battlefieldTerrain?.tileCanvas),
++      camera: { ...battlefieldView },
++      canvas: rect ? { width: rect.width, height: rect.height, pixelWidth: canvas.width, pixelHeight: canvas.height } : null,
++      pendingRequests: replayRequests.size,
++      sourceReplay: latestReplayId,
++      sourceSHA256: latestReplaySha256,
++      status: status.textContent,
++      errors: replayErrors.slice(-10),
++      analyticsVisible: false,
++      viewport: { width: innerWidth, height: innerHeight, dpr: devicePixelRatio }
++    };
++  }
++
++  window.WarzoneReplay = Object.freeze({ report: replayReport, pause: pauseReplay, resume: resumeReplay, dispose: disposeReplay });
++  window.HubReplay = window.WarzoneReplay;
++  window.addEventListener("warzone-hub-pause", pauseReplay);
++  window.addEventListener("warzone-hub-resume", resumeReplay);
++  window.addEventListener("pagehide", disposeReplay, { once: true });
++  document.addEventListener("visibilitychange", () => document.hidden ? pauseReplay() : resumeReplay());
++  document.getElementById("replayRetry")?.addEventListener("click", () => location.reload());
++
+ })();

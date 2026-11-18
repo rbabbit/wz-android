@@ -1,0 +1,22 @@
+{
+  "scope": "Actual reward/command source in Node VM with simulated native APIs; not emulator or gameplay proof",
+  "checksPassed": 11,
+  "checks": [
+    "Twelve new purchase types and actual additive catalogs, with one designable weapon",
+    "Unpaid structures and ATGM design remain gated even after an accidental availability grant",
+    "One purchased fortress is quota limited, never natural, and destruction does not replenish it",
+    "Missing or conflicting actual profile/map denies new purchases before side effects",
+    "ATGM licence uses native availability arity without component0 errors or repeated grants",
+    "Sensor adds48 percent of base only once, preserving unrelated upgrades and the other player",
+    "Concrete tiers each add100 percent base defensive HP, sequentially, without healing or HQ change",
+    "Live transactions replay once; concrete dependencies and per-run licence/effect caps fail closed",
+    "Restoring an older native world reapplies later funded effects once without increasing phone caps",
+    "Sorted native save JSON restores readiness and paid deltas over reconstructed researched stats in both profiles",
+    "Mixed old and new fortress stock shares cap3, and legacy stock still uses normal quota logic"
+  ],
+  "componentAvailabilityContract": "componentAvailable([deprecatedComponentType,]componentName) uses the current script player; makeComponentAvailable(componentName,player) retains its player argument",
+  "arityRegression": "Licensed component is actually available; no unknown component0 lookup and only one makeAvailable call across repeated ticks",
+  "saveLoadRegression": "Saved JS namespace keys are recursively sorted; native Upgrades reconstruct from completed research without direct writes; GameLoaded restores paid deltas, canonical apply readiness succeeds, repeated ticks/resume and second load do not stack or renew stock",
+  "emulatorUsed": false,
+  "researchCompleted": false
+}

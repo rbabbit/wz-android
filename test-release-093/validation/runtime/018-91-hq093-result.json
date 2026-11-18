@@ -1,0 +1,1346 @@
+{
+  "passed": true,
+  "seeded": true,
+  "initialRTB": {
+    "buttons": [
+      {
+        "background": "rgb(0, 0, 0)",
+        "busy": null,
+        "color": "rgb(99, 230, 130)",
+        "disabled": false,
+        "hidden": false,
+        "id": "wt-all-combat",
+        "pressed": "true",
+        "rect": {
+          "bottom": 47,
+          "height": 36,
+          "left": 322.625,
+          "right": 419.4166717529297,
+          "top": 11,
+          "width": 96.79167175292969,
+          "x": 322.625,
+          "y": 11
+        },
+        "text": "ALL COMBAT"
+      },
+      {
+        "background": "rgb(0, 0, 0)",
+        "busy": "false",
+        "color": "rgb(99, 230, 130)",
+        "disabled": false,
+        "hidden": false,
+        "id": "wt-repair",
+        "pressed": "true",
+        "rect": {
+          "bottom": 47,
+          "height": 36,
+          "left": 422.41668701171875,
+          "right": 493.84898376464844,
+          "top": 11,
+          "width": 71.43229675292969,
+          "x": 422.41668701171875,
+          "y": 11
+        },
+        "text": "REPAIR"
+      }
+    ],
+    "cachedCommandsClock": 43902,
+    "frame": {
+      "bottom": 554,
+      "height": 496,
+      "left": 0,
+      "right": 1231.3333740234375,
+      "top": 58,
+      "width": 1231.3333740234375,
+      "x": 0,
+      "y": 58
+    },
+    "gameTime": 44202,
+    "native": null,
+    "parent": {
+      "dpr": 3,
+      "height": 554,
+      "url": "/warzone/mobile.html",
+      "width": 1231
+    },
+    "touch": {
+      "active": true,
+      "allCombatSelected": true,
+      "autoFight": false,
+      "baseJumps": 0,
+      "battleActive": true,
+      "boxCadenceWaits": 0,
+      "boxMode": false,
+      "boxPressGaps": [],
+      "boxSelections": 0,
+      "cameraFacingError": "",
+      "cameraFacingPending": false,
+      "cameraFacings": 0,
+      "cameraHeading": null,
+      "coalescedSamples": 0,
+      "combatContext": "native-combat90:8720:1:0",
+      "combatError": "",
+      "combatLock": true,
+      "combatLockRequested": true,
+      "combatLockState": {
+        "activation": "offline-combat-user-1794953279674-6",
+        "combatIds": [
+          1900001,
+          1900003,
+          1930001,
+          1930003,
+          1930005
+        ],
+        "commandableIds": [
+          1900003,
+          1930003
+        ],
+        "context": "native-combat90:8720:1:0",
+        "deselectAppliedNonce": "",
+        "deselectNonce": "",
+        "enabled": true,
+        "pendingDeselect": false,
+        "player": 0,
+        "protectedIds": [
+          1900001,
+          1930001,
+          1930005
+        ],
+        "reason": "on",
+        "requestNonce": "offline-combat-1794953279854-8",
+        "requestedSuspended": false,
+        "revision": 8,
+        "selectedIds": [
+          1900003,
+          1930003
+        ],
+        "suspended": false
+      },
+      "combatLockSuspended": false,
+      "combatOrders": 0,
+      "combatOverride": "",
+      "doubleTaps": 0,
+      "facilityError": "",
+      "facilityOpens": 0,
+      "feedbacks": 0,
+      "gestureActive": false,
+      "heldKeys": [],
+      "hudVisible": true,
+      "intercepted": 0,
+      "lastFacility": null,
+      "lastPanDispatchMs": null,
+      "lastPanStartLatencyMs": null,
+      "lastRadarPoint": null,
+      "lastZoomDistance": null,
+      "manualSelectAlls": 0,
+      "manualSelectionRevision": 0,
+      "maxPanDispatchMs": 0,
+      "mouseEvents": 0,
+      "nativeObjectsOpen": false,
+      "nativeRenderFrames": 0,
+      "nativeStatsOpen": false,
+      "orders": 0,
+      "panContextResets": 0,
+      "panHeldTimeouts": 0,
+      "panMoves": 0,
+      "panPhase": "idle",
+      "panQueueOverflows": 0,
+      "panQueuedPointers": 0,
+      "panRearms": 0,
+      "panUnobservedRearms": 0,
+      "pans": 0,
+      "patrolOrders": 0,
+      "pendingClicks": 0,
+      "pinchSteps": 0,
+      "pointerCaptures": 0,
+      "queueMode": false,
+      "queueModifierHeld": false,
+      "queuedOrders": 0,
+      "queuedPointerEvents": 0,
+      "radarDrags": 0,
+      "radarMoves": 0,
+      "radarTaps": 0,
+      "repairPolicyConfirmedNonce": "offline-repair-1794953266189-1",
+      "repairPolicyEnabled": true,
+      "repairPolicyError": "",
+      "repairPolicyIntent": {
+        "context": "native-combat90:8720:1:0",
+        "enabled": true,
+        "nonce": "offline-repair-1794953266189-1"
+      },
+      "repairPolicyPending": false,
+      "repairPolicyRequested": true,
+      "repairPolicyState": {
+        "applied": true,
+        "appliedIds": [
+          1900001,
+          1900003,
+          1930001,
+          1930003,
+          1930005
+        ],
+        "canIssueOrders": true,
+        "combatIds": [
+          1900001,
+          1900003,
+          1930001,
+          1930003,
+          1930005
+        ],
+        "context": "native-combat90:8720:1:0",
+        "diagnosticUnitsTruncated": false,
+        "enabled": true,
+        "failedIds": [],
+        "managed": true,
+        "pending": false,
+        "pendingIds": [],
+        "protectedIds": [
+          1900001,
+          1930001,
+          1930005
+        ],
+        "reason": "on",
+        "requestNonce": "offline-repair-1794953266189-1",
+        "revision": 3,
+        "schemaVersion": 93,
+        "scope": "owned-combat-map",
+        "thresholdHealthPercent": 75,
+        "units": [
+          {
+            "action": 1,
+            "body": 153,
+            "health": 153,
+            "healthPercent": 74,
+            "id": 1930005,
+            "maxHealth": 205,
+            "order": 13,
+            "orderPosition": {
+              "x": 0,
+              "y": 0
+            },
+            "orderTargetId": 0,
+            "originalBody": 205,
+            "pendingRepairLevel": 75,
+            "protected": true,
+            "repairLevel": 75,
+            "selected": false,
+            "tilePosition": {
+              "x": 16.8125,
+              "y": 14.4609375
+            },
+            "worldPosition": {
+              "x": 2152,
+              "y": 1851,
+              "z": 128
+            },
+            "x": 2152,
+            "y": 1851,
+            "z": 128
+          },
+          {
+            "action": 0,
+            "body": 205,
+            "health": 205,
+            "healthPercent": 100,
+            "id": 1930003,
+            "maxHealth": 205,
+            "order": 25,
+            "orderPosition": {
+              "x": 4544,
+              "y": 7616
+            },
+            "orderTargetId": 0,
+            "originalBody": 205,
+            "pendingRepairLevel": 75,
+            "protected": false,
+            "repairLevel": 75,
+            "selected": true,
+            "tilePosition": {
+              "x": 35.5,
+              "y": 59.5
+            },
+            "worldPosition": {
+              "x": 4544,
+              "y": 7616,
+              "z": 128
+            },
+            "x": 4544,
+            "y": 7616,
+            "z": 128
+          },
+          {
+            "action": 1,
+            "body": 102,
+            "health": 102,
+            "healthPercent": 49,
+            "id": 1930001,
+            "maxHealth": 205,
+            "order": 13,
+            "orderPosition": {
+              "x": 0,
+              "y": 0
+            },
+            "orderTargetId": 0,
+            "originalBody": 205,
+            "pendingRepairLevel": 75,
+            "protected": true,
+            "repairLevel": 75,
+            "selected": false,
+            "tilePosition": {
+              "x": 33.015625,
+              "y": 63.8203125
+            },
+            "worldPosition": {
+              "x": 4226,
+              "y": 8169,
+              "z": 128
+            },
+            "x": 4226,
+            "y": 8169,
+            "z": 128
+          },
+          {
+            "action": 0,
+            "body": 154,
+            "health": 154,
+            "healthPercent": 75,
+            "id": 1900003,
+            "maxHealth": 205,
+            "order": 25,
+            "orderPosition": {
+              "x": 4032,
+              "y": 7616
+            },
+            "orderTargetId": 0,
+            "originalBody": 205,
+            "pendingRepairLevel": 75,
+            "protected": false,
+            "repairLevel": 75,
+            "selected": true,
+            "tilePosition": {
+              "x": 31.5,
+              "y": 59.5
+            },
+            "worldPosition": {
+              "x": 4032,
+              "y": 7616,
+              "z": 128
+            },
+            "x": 4032,
+            "y": 7616,
+            "z": 128
+          },
+          {
+            "action": 1,
+            "body": 153,
+            "health": 153,
+            "healthPercent": 74,
+            "id": 1900001,
+            "maxHealth": 205,
+            "order": 13,
+            "orderPosition": {
+              "x": 0,
+              "y": 0
+            },
+            "orderTargetId": 0,
+            "originalBody": 205,
+            "pendingRepairLevel": 75,
+            "protected": true,
+            "repairLevel": 75,
+            "selected": false,
+            "tilePosition": {
+              "x": 31.125,
+              "y": 63.640625
+            },
+            "worldPosition": {
+              "x": 3984,
+              "y": 8146,
+              "z": 128
+            },
+            "x": 3984,
+            "y": 8146,
+            "z": 128
+          }
+        ],
+        "worldSafe": true
+      },
+      "rotationHeld": null,
+      "rotationMoves": 0,
+      "rotationSteps": 0,
+      "saveNames": 0,
+      "selectAlls": 0,
+      "stickyBuildActivations": 0,
+      "stopAcks": 0,
+      "stopOrders": 0,
+      "stopPending": false,
+      "stoppedUnitIds": [],
+      "taps": 0,
+      "tiltHeld": null,
+      "tiltMoves": 0,
+      "version": 57,
+      "zoomAcks": 0,
+      "zoomCommandErrors": 0,
+      "zoomCommandWrites": 0,
+      "zoomPending": false,
+      "zoomPreset": null,
+      "zoomPresetSelections": 0,
+      "zoomWheelEvents": 0
+    }
+  },
+  "samples": [
+    {
+      "clock": 44902,
+      "unit": {
+        "action": 1,
+        "body": 102,
+        "health": 102,
+        "healthPercent": 49,
+        "id": 1930001,
+        "maxHealth": 205,
+        "order": 13,
+        "orderPosition": {
+          "x": 0,
+          "y": 0
+        },
+        "orderTargetId": 0,
+        "originalBody": 205,
+        "pendingRepairLevel": 75,
+        "protected": true,
+        "repairLevel": 75,
+        "selected": false,
+        "tilePosition": {
+          "x": 33.1328125,
+          "y": 64.8671875
+        },
+        "worldPosition": {
+          "x": 4241,
+          "y": 8303,
+          "z": 128
+        },
+        "x": 4241,
+        "y": 8303,
+        "z": 128
+      },
+      "lock": {
+        "activation": "offline-combat-user-1794953279674-6",
+        "combatIds": [
+          1900001,
+          1900003,
+          1930001,
+          1930003,
+          1930005
+        ],
+        "commandableIds": [
+          1900003,
+          1930003
+        ],
+        "context": "native-combat90:8720:1:0",
+        "deselectAppliedNonce": "",
+        "deselectNonce": "",
+        "enabled": true,
+        "pendingDeselect": false,
+        "player": 0,
+        "protectedIds": [
+          1900001,
+          1930001,
+          1930005
+        ],
+        "reason": "on",
+        "requestNonce": "offline-combat-1794953279854-8",
+        "requestedSuspended": false,
+        "revision": 8,
+        "selectedIds": [
+          1900003,
+          1930003
+        ],
+        "suspended": false
+      }
+    },
+    {
+      "clock": 45302,
+      "unit": {
+        "action": 1,
+        "body": 102,
+        "health": 102,
+        "healthPercent": 49,
+        "id": 1930001,
+        "maxHealth": 205,
+        "order": 13,
+        "orderPosition": {
+          "x": 0,
+          "y": 0
+        },
+        "orderTargetId": 0,
+        "originalBody": 205,
+        "pendingRepairLevel": 75,
+        "protected": true,
+        "repairLevel": 75,
+        "selected": false,
+        "tilePosition": {
+          "x": 33.0859375,
+          "y": 65.4140625
+        },
+        "worldPosition": {
+          "x": 4235,
+          "y": 8373,
+          "z": 128
+        },
+        "x": 4235,
+        "y": 8373,
+        "z": 128
+      },
+      "lock": {
+        "activation": "offline-combat-user-1794953279674-6",
+        "combatIds": [
+          1900001,
+          1900003,
+          1930001,
+          1930003,
+          1930005
+        ],
+        "commandableIds": [
+          1900003,
+          1930003
+        ],
+        "context": "native-combat90:8720:1:0",
+        "deselectAppliedNonce": "",
+        "deselectNonce": "",
+        "enabled": true,
+        "pendingDeselect": false,
+        "player": 0,
+        "protectedIds": [
+          1900001,
+          1930001,
+          1930005
+        ],
+        "reason": "on",
+        "requestNonce": "offline-combat-1794953279854-8",
+        "requestedSuspended": false,
+        "revision": 8,
+        "selectedIds": [
+          1900003,
+          1930003
+        ],
+        "suspended": false
+      }
+    },
+    {
+      "clock": 45702,
+      "unit": {
+        "action": 1,
+        "body": 102,
+        "health": 102,
+        "healthPercent": 49,
+        "id": 1930001,
+        "maxHealth": 205,
+        "order": 13,
+        "orderPosition": {
+          "x": 0,
+          "y": 0
+        },
+        "orderTargetId": 0,
+        "originalBody": 205,
+        "pendingRepairLevel": 75,
+        "protected": true,
+        "repairLevel": 75,
+        "selected": false,
+        "tilePosition": {
+          "x": 33.046875,
+          "y": 65.9609375
+        },
+        "worldPosition": {
+          "x": 4230,
+          "y": 8443,
+          "z": 128
+        },
+        "x": 4230,
+        "y": 8443,
+        "z": 128
+      },
+      "lock": {
+        "activation": "offline-combat-user-1794953279674-6",
+        "combatIds": [
+          1900001,
+          1900003,
+          1930001,
+          1930003,
+          1930005
+        ],
+        "commandableIds": [
+          1900003,
+          1930003
+        ],
+        "context": "native-combat90:8720:1:0",
+        "deselectAppliedNonce": "",
+        "deselectNonce": "",
+        "enabled": true,
+        "pendingDeselect": false,
+        "player": 0,
+        "protectedIds": [
+          1900001,
+          1930001,
+          1930005
+        ],
+        "reason": "on",
+        "requestNonce": "offline-combat-1794953279854-8",
+        "requestedSuspended": false,
+        "revision": 8,
+        "selectedIds": [
+          1900003,
+          1930003
+        ],
+        "suspended": false
+      }
+    },
+    {
+      "clock": 46002,
+      "unit": {
+        "action": 1,
+        "body": 102,
+        "health": 102,
+        "healthPercent": 49,
+        "id": 1930001,
+        "maxHealth": 205,
+        "order": 13,
+        "orderPosition": {
+          "x": 0,
+          "y": 0
+        },
+        "orderTargetId": 0,
+        "originalBody": 205,
+        "pendingRepairLevel": 75,
+        "protected": true,
+        "repairLevel": 75,
+        "selected": false,
+        "tilePosition": {
+          "x": 33.015625,
+          "y": 66.3671875
+        },
+        "worldPosition": {
+          "x": 4226,
+          "y": 8495,
+          "z": 128
+        },
+        "x": 4226,
+        "y": 8495,
+        "z": 128
+      },
+      "lock": {
+        "activation": "offline-combat-user-1794953279674-6",
+        "combatIds": [
+          1900001,
+          1900003,
+          1930001,
+          1930003,
+          1930005
+        ],
+        "commandableIds": [
+          1900003,
+          1930003
+        ],
+        "context": "native-combat90:8720:1:0",
+        "deselectAppliedNonce": "",
+        "deselectNonce": "",
+        "enabled": true,
+        "pendingDeselect": false,
+        "player": 0,
+        "protectedIds": [
+          1900001,
+          1930001,
+          1930005
+        ],
+        "reason": "on",
+        "requestNonce": "offline-combat-1794953279854-8",
+        "requestedSuspended": false,
+        "revision": 8,
+        "selectedIds": [
+          1900003,
+          1930003
+        ],
+        "suspended": false
+      }
+    },
+    {
+      "clock": 46502,
+      "unit": {
+        "action": 1,
+        "body": 102,
+        "health": 102,
+        "healthPercent": 49,
+        "id": 1930001,
+        "maxHealth": 205,
+        "order": 13,
+        "orderPosition": {
+          "x": 0,
+          "y": 0
+        },
+        "orderTargetId": 0,
+        "originalBody": 205,
+        "pendingRepairLevel": 75,
+        "protected": true,
+        "repairLevel": 75,
+        "selected": false,
+        "tilePosition": {
+          "x": 32.953125,
+          "y": 66.90625
+        },
+        "worldPosition": {
+          "x": 4218,
+          "y": 8564,
+          "z": 128
+        },
+        "x": 4218,
+        "y": 8564,
+        "z": 128
+      },
+      "lock": {
+        "activation": "offline-combat-user-1794953279674-6",
+        "combatIds": [
+          1900001,
+          1900003,
+          1930001,
+          1930003,
+          1930005
+        ],
+        "commandableIds": [
+          1900003,
+          1930003
+        ],
+        "context": "native-combat90:8720:1:0",
+        "deselectAppliedNonce": "",
+        "deselectNonce": "",
+        "enabled": true,
+        "pendingDeselect": false,
+        "player": 0,
+        "protectedIds": [
+          1900001,
+          1930001,
+          1930005
+        ],
+        "reason": "on",
+        "requestNonce": "offline-combat-1794953279854-8",
+        "requestedSuspended": false,
+        "revision": 8,
+        "selectedIds": [
+          1900003,
+          1930003
+        ],
+        "suspended": false
+      }
+    },
+    {
+      "clock": 46802,
+      "unit": {
+        "action": 1,
+        "body": 102,
+        "health": 102,
+        "healthPercent": 49,
+        "id": 1930001,
+        "maxHealth": 205,
+        "order": 13,
+        "orderPosition": {
+          "x": 0,
+          "y": 0
+        },
+        "orderTargetId": 0,
+        "originalBody": 205,
+        "pendingRepairLevel": 75,
+        "protected": true,
+        "repairLevel": 75,
+        "selected": false,
+        "tilePosition": {
+          "x": 32.90625,
+          "y": 67.4375
+        },
+        "worldPosition": {
+          "x": 4212,
+          "y": 8632,
+          "z": 128
+        },
+        "x": 4212,
+        "y": 8632,
+        "z": 128
+      },
+      "lock": {
+        "activation": "offline-combat-user-1794953279674-6",
+        "combatIds": [
+          1900001,
+          1900003,
+          1930001,
+          1930003,
+          1930005
+        ],
+        "commandableIds": [
+          1900003,
+          1930003
+        ],
+        "context": "native-combat90:8720:1:0",
+        "deselectAppliedNonce": "",
+        "deselectNonce": "",
+        "enabled": true,
+        "pendingDeselect": false,
+        "player": 0,
+        "protectedIds": [
+          1900001,
+          1930001,
+          1930005
+        ],
+        "reason": "on",
+        "requestNonce": "offline-combat-1794953279854-8",
+        "requestedSuspended": false,
+        "revision": 8,
+        "selectedIds": [
+          1900003,
+          1930003
+        ],
+        "suspended": false
+      }
+    },
+    {
+      "clock": 47202,
+      "unit": {
+        "action": 1,
+        "body": 102,
+        "health": 102,
+        "healthPercent": 49,
+        "id": 1930001,
+        "maxHealth": 205,
+        "order": 13,
+        "orderPosition": {
+          "x": 0,
+          "y": 0
+        },
+        "orderTargetId": 0,
+        "originalBody": 205,
+        "pendingRepairLevel": 75,
+        "protected": true,
+        "repairLevel": 75,
+        "selected": false,
+        "tilePosition": {
+          "x": 32.859375,
+          "y": 67.96875
+        },
+        "worldPosition": {
+          "x": 4206,
+          "y": 8700,
+          "z": 128
+        },
+        "x": 4206,
+        "y": 8700,
+        "z": 128
+      },
+      "lock": {
+        "activation": "offline-combat-user-1794953279674-6",
+        "combatIds": [
+          1900001,
+          1900003,
+          1930001,
+          1930003,
+          1930005
+        ],
+        "commandableIds": [
+          1900003,
+          1930003
+        ],
+        "context": "native-combat90:8720:1:0",
+        "deselectAppliedNonce": "",
+        "deselectNonce": "",
+        "enabled": true,
+        "pendingDeselect": false,
+        "player": 0,
+        "protectedIds": [
+          1900001,
+          1930001,
+          1930005
+        ],
+        "reason": "on",
+        "requestNonce": "offline-combat-1794953279854-8",
+        "requestedSuspended": false,
+        "revision": 8,
+        "selectedIds": [
+          1900003,
+          1930003
+        ],
+        "suspended": false
+      }
+    },
+    {
+      "clock": 47602,
+      "unit": {
+        "action": 1,
+        "body": 102,
+        "health": 102,
+        "healthPercent": 49,
+        "id": 1930001,
+        "maxHealth": 205,
+        "order": 13,
+        "orderPosition": {
+          "x": 0,
+          "y": 0
+        },
+        "orderTargetId": 0,
+        "originalBody": 205,
+        "pendingRepairLevel": 75,
+        "protected": true,
+        "repairLevel": 75,
+        "selected": false,
+        "tilePosition": {
+          "x": 32.796875,
+          "y": 68.5234375
+        },
+        "worldPosition": {
+          "x": 4198,
+          "y": 8771,
+          "z": 128
+        },
+        "x": 4198,
+        "y": 8771,
+        "z": 128
+      },
+      "lock": {
+        "activation": "offline-combat-user-1794953279674-6",
+        "combatIds": [
+          1900001,
+          1900003,
+          1930001,
+          1930003,
+          1930005
+        ],
+        "commandableIds": [
+          1900003,
+          1930003
+        ],
+        "context": "native-combat90:8720:1:0",
+        "deselectAppliedNonce": "",
+        "deselectNonce": "",
+        "enabled": true,
+        "pendingDeselect": false,
+        "player": 0,
+        "protectedIds": [
+          1900001,
+          1930001,
+          1930005
+        ],
+        "reason": "on",
+        "requestNonce": "offline-combat-1794953279854-8",
+        "requestedSuspended": false,
+        "revision": 8,
+        "selectedIds": [
+          1900003,
+          1930003
+        ],
+        "suspended": false
+      }
+    },
+    {
+      "clock": 48002,
+      "unit": {
+        "action": 1,
+        "body": 102,
+        "health": 102,
+        "healthPercent": 49,
+        "id": 1930001,
+        "maxHealth": 205,
+        "order": 13,
+        "orderPosition": {
+          "x": 0,
+          "y": 0
+        },
+        "orderTargetId": 0,
+        "originalBody": 205,
+        "pendingRepairLevel": 75,
+        "protected": true,
+        "repairLevel": 75,
+        "selected": false,
+        "tilePosition": {
+          "x": 32.7578125,
+          "y": 68.9296875
+        },
+        "worldPosition": {
+          "x": 4193,
+          "y": 8823,
+          "z": 128
+        },
+        "x": 4193,
+        "y": 8823,
+        "z": 128
+      },
+      "lock": {
+        "activation": "offline-combat-user-1794953279674-6",
+        "combatIds": [
+          1900001,
+          1900003,
+          1930001,
+          1930003,
+          1930005
+        ],
+        "commandableIds": [
+          1900003,
+          1930003
+        ],
+        "context": "native-combat90:8720:1:0",
+        "deselectAppliedNonce": "",
+        "deselectNonce": "",
+        "enabled": true,
+        "pendingDeselect": false,
+        "player": 0,
+        "protectedIds": [
+          1900001,
+          1930001,
+          1930005
+        ],
+        "reason": "on",
+        "requestNonce": "offline-combat-1794953279854-8",
+        "requestedSuspended": false,
+        "revision": 8,
+        "selectedIds": [
+          1900003,
+          1930003
+        ],
+        "suspended": false
+      }
+    },
+    {
+      "clock": 48402,
+      "unit": {
+        "action": 1,
+        "body": 102,
+        "health": 102,
+        "healthPercent": 49,
+        "id": 1930001,
+        "maxHealth": 205,
+        "order": 13,
+        "orderPosition": {
+          "x": 0,
+          "y": 0
+        },
+        "orderTargetId": 0,
+        "originalBody": 205,
+        "pendingRepairLevel": 75,
+        "protected": true,
+        "repairLevel": 75,
+        "selected": false,
+        "tilePosition": {
+          "x": 32.875,
+          "y": 68.984375
+        },
+        "worldPosition": {
+          "x": 4208,
+          "y": 8830,
+          "z": 128
+        },
+        "x": 4208,
+        "y": 8830,
+        "z": 128
+      },
+      "lock": {
+        "activation": "offline-combat-user-1794953279674-6",
+        "combatIds": [
+          1900001,
+          1900003,
+          1930001,
+          1930003,
+          1930005
+        ],
+        "commandableIds": [
+          1900003,
+          1930003
+        ],
+        "context": "native-combat90:8720:1:0",
+        "deselectAppliedNonce": "",
+        "deselectNonce": "",
+        "enabled": true,
+        "pendingDeselect": false,
+        "player": 0,
+        "protectedIds": [
+          1900001,
+          1930001,
+          1930005
+        ],
+        "reason": "on",
+        "requestNonce": "offline-combat-1794953279854-8",
+        "requestedSuspended": false,
+        "revision": 8,
+        "selectedIds": [
+          1900003,
+          1930003
+        ],
+        "suspended": false
+      }
+    },
+    {
+      "clock": 48802,
+      "unit": {
+        "action": 1,
+        "body": 102,
+        "health": 102,
+        "healthPercent": 49,
+        "id": 1930001,
+        "maxHealth": 205,
+        "order": 13,
+        "orderPosition": {
+          "x": 0,
+          "y": 0
+        },
+        "orderTargetId": 0,
+        "originalBody": 205,
+        "pendingRepairLevel": 75,
+        "protected": true,
+        "repairLevel": 75,
+        "selected": false,
+        "tilePosition": {
+          "x": 32.9609375,
+          "y": 69.0625
+        },
+        "worldPosition": {
+          "x": 4219,
+          "y": 8840,
+          "z": 128
+        },
+        "x": 4219,
+        "y": 8840,
+        "z": 128
+      },
+      "lock": {
+        "activation": "offline-combat-user-1794953279674-6",
+        "combatIds": [
+          1900001,
+          1900003,
+          1930001,
+          1930003,
+          1930005
+        ],
+        "commandableIds": [
+          1900003,
+          1930003
+        ],
+        "context": "native-combat90:8720:1:0",
+        "deselectAppliedNonce": "",
+        "deselectNonce": "",
+        "enabled": true,
+        "pendingDeselect": false,
+        "player": 0,
+        "protectedIds": [
+          1900001,
+          1930001,
+          1930005
+        ],
+        "reason": "on",
+        "requestNonce": "offline-combat-1794953279854-8",
+        "requestedSuspended": false,
+        "revision": 8,
+        "selectedIds": [
+          1900003,
+          1930003
+        ],
+        "suspended": false
+      }
+    },
+    {
+      "clock": 49202,
+      "unit": {
+        "action": 1,
+        "body": 102,
+        "health": 102,
+        "healthPercent": 49,
+        "id": 1930001,
+        "maxHealth": 205,
+        "order": 13,
+        "orderPosition": {
+          "x": 0,
+          "y": 0
+        },
+        "orderTargetId": 0,
+        "originalBody": 205,
+        "pendingRepairLevel": 75,
+        "protected": true,
+        "repairLevel": 75,
+        "selected": false,
+        "tilePosition": {
+          "x": 32.9609375,
+          "y": 69.0625
+        },
+        "worldPosition": {
+          "x": 4219,
+          "y": 8840,
+          "z": 128
+        },
+        "x": 4219,
+        "y": 8840,
+        "z": 128
+      },
+      "lock": {
+        "activation": "offline-combat-user-1794953279674-6",
+        "combatIds": [
+          1900001,
+          1900003,
+          1930001,
+          1930003,
+          1930005
+        ],
+        "commandableIds": [
+          1900003,
+          1930003
+        ],
+        "context": "native-combat90:8720:1:0",
+        "deselectAppliedNonce": "",
+        "deselectNonce": "",
+        "enabled": true,
+        "pendingDeselect": false,
+        "player": 0,
+        "protectedIds": [
+          1900001,
+          1930001,
+          1930005
+        ],
+        "reason": "on",
+        "requestNonce": "offline-combat-1794953279854-8",
+        "requestedSuspended": false,
+        "revision": 8,
+        "selectedIds": [
+          1900003,
+          1930003
+        ],
+        "suspended": false
+      }
+    },
+    {
+      "clock": 49702,
+      "unit": {
+        "action": 0,
+        "body": 102,
+        "health": 102,
+        "healthPercent": 49,
+        "id": 1930001,
+        "maxHealth": 205,
+        "order": 13,
+        "orderPosition": {
+          "x": 0,
+          "y": 0
+        },
+        "orderTargetId": 0,
+        "originalBody": 205,
+        "pendingRepairLevel": 75,
+        "protected": true,
+        "repairLevel": 75,
+        "selected": false,
+        "tilePosition": {
+          "x": 32.9609375,
+          "y": 69.0625
+        },
+        "worldPosition": {
+          "x": 4219,
+          "y": 8840,
+          "z": 128
+        },
+        "x": 4219,
+        "y": 8840,
+        "z": 128
+      },
+      "lock": {
+        "activation": "offline-combat-user-1794953279674-6",
+        "combatIds": [
+          1900001,
+          1900003,
+          1930001,
+          1930003,
+          1930005
+        ],
+        "commandableIds": [
+          1900003,
+          1930003
+        ],
+        "context": "native-combat90:8720:1:0",
+        "deselectAppliedNonce": "",
+        "deselectNonce": "",
+        "enabled": true,
+        "pendingDeselect": false,
+        "player": 0,
+        "protectedIds": [
+          1900001,
+          1930001,
+          1930005
+        ],
+        "reason": "on",
+        "requestNonce": "offline-combat-1794953279854-8",
+        "requestedSuspended": false,
+        "revision": 8,
+        "selectedIds": [
+          1900003,
+          1930003
+        ],
+        "suspended": false
+      }
+    },
+    {
+      "clock": 50102,
+      "unit": {
+        "action": 0,
+        "body": 102,
+        "health": 102,
+        "healthPercent": 49,
+        "id": 1930001,
+        "maxHealth": 205,
+        "order": 25,
+        "orderPosition": {
+          "x": 4219,
+          "y": 8840
+        },
+        "orderTargetId": 0,
+        "originalBody": 205,
+        "pendingRepairLevel": 75,
+        "protected": true,
+        "repairLevel": 75,
+        "selected": false,
+        "tilePosition": {
+          "x": 32.9609375,
+          "y": 69.0625
+        },
+        "worldPosition": {
+          "x": 4219,
+          "y": 8840,
+          "z": 128
+        },
+        "x": 4219,
+        "y": 8840,
+        "z": 128
+      },
+      "lock": {
+        "activation": "offline-combat-user-1794953279674-6",
+        "combatIds": [
+          1900001,
+          1900003,
+          1930001,
+          1930003,
+          1930005
+        ],
+        "commandableIds": [
+          1900003,
+          1930003
+        ],
+        "context": "native-combat90:8720:1:0",
+        "deselectAppliedNonce": "",
+        "deselectNonce": "",
+        "enabled": true,
+        "pendingDeselect": false,
+        "player": 0,
+        "protectedIds": [
+          1900001,
+          1930001,
+          1930005
+        ],
+        "reason": "on",
+        "requestNonce": "offline-combat-1794953279854-8",
+        "requestedSuspended": false,
+        "revision": 8,
+        "selectedIds": [
+          1900003,
+          1930003
+        ],
+        "suspended": false
+      }
+    }
+  ],
+  "HQDoesNotHeal": true,
+  "damagedHQWaitingProtected": true
+}

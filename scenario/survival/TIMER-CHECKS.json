@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "checks": 4,
+  "results": [
+    "Including real scenario scripts allocates no native timers",
+    "Repeated new-world bridge/command initialization keeps one timer per function",
+    "Legacy saved timer IDs restore without collision; repeated maintenance initialization preserves single wave deadline",
+    "New saved timer IDs restore without collision; repeated maintenance initialization preserves single wave deadline"
+  ],
+  "nativeWavesExecuted": 0,
+  "scope": "Real script functions with native-compatible timer-ID restoration model; exact APK save/load is verified separately."
+}

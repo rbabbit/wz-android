@@ -6,13 +6,15 @@
   const ffa = window.__warzoneFfaConfig?.mode === 'ffa' && Object.isFrozen(window.__warzoneFfaConfig);
   const session = new URLSearchParams(location.search).get('battle_session') || window.__towersHtmlSession || '';
   const config=window.__warzoneDuelConfig;
-  const duel=config?.mode==='duel'&&Object.isFrozen(config),mode=ffa?'ffa':campaign?'campaign':duel?'duel':'tower-defense';
+  const survival=window.__warzoneSurvivalConfig?.mode==='survival'&&Object.isFrozen(window.__warzoneSurvivalConfig);
+  const duel=config?.mode==='duel'&&Object.isFrozen(config),mode=ffa?'ffa':campaign?'campaign':duel?'duel':survival?'survival':'tower-defense';
   let result = '', phase = 'loading', exitReason = '', menuRequested = false;
   function activate(wave) {
     // Only a packet emitted by the running scenario establishes a battle.
     // Pausing stops scenario ticks; absence of a packet is never an exit.
     if (phase === 'ended' || !wave || wave.mode !== mode) return false;
     if(duel&&(!['active','victory','defeated'].includes(wave.phase)||wave.humanBranch!==config.humanBranch||wave.botBranch!==config.botBranch))return false;
+    if(survival&&(wave.map!==window.__warzoneSurvivalConfig.map||wave.nativeLevel!==window.__warzoneSurvivalConfig.level||wave.profile!=='survival'||wave.totalRounds!==60))return false;
     if (!duel && !campaign && !ffa) {
       const credited = window.BlockNightAndroid?.rewardProgress?.(session, JSON.stringify({
         wave:wave.wave, phase:wave.phase, completedWaves:wave.completedWaves || [], rewards:wave.rewards || null}));

@@ -1,0 +1,90 @@
+--- a/src/hci.cpp
++++ b/src/hci.cpp
+@@ -2437,13 +2437,24 @@
+ #include "mobile-players-v91.h"
+ // BEGIN NORMAL090_NATIVE_COMBAT_LATCH
+ #include "geometry.h"
+-#include "mobile-combat-latch-v90.h"
++#include "mobile-combat-latch-v93.h"
++#include "mobile-repair-policy-v93.h"
++#include "mobile-guarded-stop-v93.h"
+ static MobileCombatLatchV90 normalMobileCombatPolicyV90;
++static MobileRepairPolicyV93 normalMobileRepairPolicyV93;
++bool mobileCombatProtectsV93(const DROID *droid)
++{
++    return normalMobileCombatPolicyV90.enabled && normalMobileCombatPolicyV90.previousOwned
++        && selectedPlayer<MAX_PLAYERS && realSelectedPlayer==selectedPlayer && !NETisReplay()
++        && droid && droid->player==selectedPlayer && normalMobileRepairPolicyV93.protects(droid);
++}
+ 
+ static nlohmann::json mobileCombatAckV90(const MobileCombatLatchV90 &policy,
+-    const nlohmann::json &combat, const nlohmann::json &selected)
+-{
+-    return {{"enabled",policy.enabled},{"suspended",policy.suspended},{"requestedSuspended",policy.requestedSuspended},
++    const nlohmann::json &combat, const nlohmann::json &selected, const std::set<uint32_t> &protectedIds)
++{
++    auto commandable=nlohmann::json::array();
++    for(const auto &id:combat)if(!protectedIds.count(id.get<uint32_t>()))commandable.push_back(id);
++    return {{"player",selectedPlayer},{"commandableIds",commandable},{"protectedIds",protectedIds},{"enabled",policy.enabled},{"suspended",policy.suspended},{"requestedSuspended",policy.requestedSuspended},
+         {"reason",policy.reason},{"requestNonce",policy.requestNonce},{"activation",policy.activation},{"context",policy.context},
+         {"pendingDeselect",policy.pendingDeselect},{"deselectNonce",policy.deselectNonce},{"deselectAppliedNonce",policy.deselectAppliedNonce},
+         {"combatIds",combat},{"selectedIds",selected},{"revision",policy.revision}};
+@@ -2466,6 +2477,18 @@
+     normalMobileCombatPolicyV90.intent(request["enabled"].get<bool>(),request["suspended"].get<bool>(),nonce,activation,context,request["deselect"].get<bool>());
+ }
+ 
++
++static MobileGuardedStopV93 normalMobileGuardedStopV93;
++static void normalMobileStopFrameV93(bool owned,bool safe,const std::vector<DROID*> &droids)
++{
++    const auto &policy=normalMobileCombatPolicyV90;
++    normalMobileGuardedStopV93.observeContext(owned?policy.context:std::string());
++    FILE *file=fopen("/tmp/warzone-combat-stop-v93.json","rb");if(!file)return;
++    char bytes[1025];const auto length=fread(bytes,1,sizeof(bytes),file);fclose(file);if(length>1024)return;
++    const auto request=nlohmann::json::parse(bytes,bytes+length,nullptr,false);
++    normalMobileGuardedStopV93.apply(request,owned,safe,policy.enabled,policy.context,policy.activation,
++        selectedPlayer,droids,[](const DROID *droid){return mobileCombatProtectsV93(droid);});
++}
+ 
+ // A separate one-shot mailbox cannot rewrite the persistent combat intent.
+ static nlohmann::json normalMobileConstructorAckV90={{"nonce",""},{"ok",false},{"reason","idle"},{"selectedIds",nlohmann::json::array()}};
+@@ -2520,16 +2543,22 @@
+     static uint64_t publicationSerial=0;
+     mobilePlayersFrameV91(GetGameMode()==GS_NORMAL&&gameInitialised&&!loop_GetVideoStatus());
+     const bool playing=GetGameMode()==GS_NORMAL && gameInitialised && selectedPlayer<MAX_PLAYERS
+-        && realSelectedPlayer==selectedPlayer && !NetPlay.players[selectedPlayer].isSpectator;
++        && realSelectedPlayer==selectedPlayer && !NetPlay.players[selectedPlayer].isSpectator && !NETisReplay();
+     const bool video=loop_GetVideoStatus(),paused=gamePaused()||gameUpdatePaused();
+     const bool menu=InGameOpUp||isInGamePopupUp||bLoadSaveUp||intHelpOverlayIsUp()||intMode!=INT_NORMAL;
+     const bool safe=playing&&!video&&!paused&&!menu;
+     normalMobileCombatPolicyV90.observeWorld(playing,selectedPlayer,gameTime,realTime);
+     normalMobileCombatIntentV90();
++    normalMobileRepairPolicyV93.observeContext(playing,normalMobileCombatPolicyV90.context);
++    normalMobileRepairPolicyV93.readIntent("/tmp/warzone-repair-policy-v93.json");
++    std::vector<DROID*> repairDroids;
++    if(playing)for(DROID *droid:apsDroidLists[selectedPlayer])repairDroids.push_back(droid);
++    normalMobileRepairPolicyV93.frame(playing,safe,repairDroids);
++    normalMobileStopFrameV93(playing,safe,repairDroids);
+     normalMobileConstructorFrameV90(playing,safe);
+     std::vector<MobileCombatUnitV90> units;
+     if(playing)for(const DROID *droid:apsDroidLists[selectedPlayer])
+-        units.push_back({droid->id,droid->asWeaps[0].nStat>0&&!droid->isTransporter()&&isSelectable(droid),droid->selected!=0});
++        units.push_back({droid->id,droid->asWeaps[0].nStat>0&&!droid->isTransporter()&&isSelectable(droid),droid->selected!=0,normalMobileRepairPolicyV93.protects(droid)});
+     const auto changes=normalMobileCombatPolicyV90.reconcile(units,safe);
+     if(changes.changed())
+     {
+@@ -2547,10 +2576,12 @@
+     auto combatIds=nlohmann::json::array(),selectedIds=nlohmann::json::array();
+     for(const auto id:combat)combatIds.push_back(id);
+     for(const auto id:selected)selectedIds.push_back(id);
++    for(auto &unit:normalMobileRepairPolicyV93.units)unit["selected"]=selected.count(unit["id"].get<uint32_t>())!=0;
+     const auto value=nlohmann::json{{"schemaVersion",89},{"frame",++publicationSerial},
+         {"gameTime",gameTime},{"realTime",realTime},{"player",selectedPlayer},{"playing",playing},{"worldSafe",safe},
+-        {"combatSelection",{{"player",selectedPlayer},{"combatIds",combatIds},{"selectedIds",selectedIds}}},
+-        {"combatLock",mobileCombatAckV90(normalMobileCombatPolicyV90,combatIds,selectedIds)},
++        {"repairPolicy",normalMobileRepairPolicyV93.snapshot()},{"combatStop",normalMobileGuardedStopV93.ack},
++        {"combatSelection",mobileCombatAckV90(normalMobileCombatPolicyV90,combatIds,selectedIds,normalMobileRepairPolicyV93.protectedIds)},
++        {"combatLock",mobileCombatAckV90(normalMobileCombatPolicyV90,combatIds,selectedIds,normalMobileRepairPolicyV93.protectedIds)},
+         {"constructorSelection",normalMobileConstructorAckV90}}.dump();
+     FILE *file=fopen("/tmp/warzone-combat-selection-v89.json.tmp","wb");if(!file)return;
+     fwrite(value.data(),1,value.size(),file);fclose(file);

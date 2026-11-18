@@ -1,0 +1,92 @@
+{
+  "passed": true,
+  "candidateAPK_SHA256": "4f48c3e3ba80c6562ce711a4adab17704cd40737bc0362e6732bd58ecf2862b1",
+  "physicalSTOPInputsSent": 1,
+  "actualNativeACK": {
+    "action": "stop-selected",
+    "activation": "offline-combat-user-1794954256540-4",
+    "context": "native-combat90:8675:1:0",
+    "nonce": "offline-combat-stop-1794954315710-1",
+    "ok": true,
+    "protectedIds": [],
+    "reason": "queued",
+    "schemaVersion": 93,
+    "selectedIds": [
+      1900003,
+      1930003
+    ],
+    "skippedProtectedIds": [],
+    "stoppedIds": [
+      1900003,
+      1930003
+    ]
+  },
+  "actualNativeOrdersAfter": [
+    {
+      "id": 1930005,
+      "order": 14,
+      "action": 1,
+      "orderTargetId": 1930101,
+      "health": 153,
+      "tilePosition": {
+        "x": 38.125,
+        "y": 19
+      },
+      "protected": true
+    },
+    {
+      "id": 1930003,
+      "order": 25,
+      "action": 6,
+      "orderTargetId": 0,
+      "health": 205,
+      "tilePosition": {
+        "x": 38.3515625,
+        "y": 59.3125
+      },
+      "protected": false
+    },
+    {
+      "id": 1930001,
+      "order": 25,
+      "action": 0,
+      "orderTargetId": 0,
+      "health": 205,
+      "tilePosition": {
+        "x": 44.28125,
+        "y": 61.578125
+      },
+      "protected": false
+    },
+    {
+      "id": 1900003,
+      "order": 25,
+      "action": 6,
+      "orderTargetId": 0,
+      "health": 154,
+      "tilePosition": {
+        "x": 37.671875,
+        "y": 58.5078125
+      },
+      "protected": false
+    },
+    {
+      "id": 1900001,
+      "order": 25,
+      "action": 0,
+      "orderTargetId": 0,
+      "health": 205,
+      "tilePosition": {
+        "x": 44.875,
+        "y": 61.359375
+      },
+      "protected": false
+    }
+  ],
+  "nativeClockBefore": 46402,
+  "nativeClockAfter": 62602,
+  "farRepairTripRemainedRTR14ToProvider1930101": true,
+  "normalSTOPRoute": "native-combat-v93",
+  "QAOracleCorrection": "The existing click-only observer falsely timed out after actual pointerup command: compact Unit controls collapse before synthesized click. Actual matching native ACK/stopAcks1 proves the one dispatch; STOP was not repeated. Dedicated passive trusted-pointerup helper is used for subsequent STOP checks. Guard25/action6 after STOP is normal auto-fire near seeded unarmed enemy; not interpreted as continued MOVE or a failed STOP.",
+  "raceBoundaryClaim": "Same-tick stale-selection transition proved by labeled native harness, not claimed as a forced live race."
+}

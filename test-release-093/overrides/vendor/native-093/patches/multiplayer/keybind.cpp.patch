@@ -1,0 +1,24 @@
+--- a/src/keybind.cpp
++++ b/src/keybind.cpp
+@@ -2119,6 +2119,12 @@
+ }
+ 
+ // --------------------------------------------------------------------------
++#if defined(__EMSCRIPTEN__)
++extern bool mobileCombatProtectsV93(const DROID *droid);
++#else
++static bool mobileCombatProtectsV93(const DROID *) { return false; }
++#endif
++
+ MappableFunction kf_OrderDroid(const DroidOrderType order)
+ {
+ 	return [order]() {
+@@ -2127,7 +2133,7 @@
+ 
+ 		for (DROID* psDroid : apsDroidLists[selectedPlayer])
+ 		{
+-			if (psDroid->selected)
++			if (psDroid->selected && (order != DORDER_STOP || !mobileCombatProtectsV93(psDroid)))
+ 			{
+ 				orderDroid(psDroid, order, ModeQueue);
+ 			}

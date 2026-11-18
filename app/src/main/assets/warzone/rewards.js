@@ -46,7 +46,7 @@
       if (!Number.isInteger(quantity) || quantity < 1 || quantity > 999) { fail('An inventory quantity is invalid.'); state.applying=false; return; }
       items[id] = quantity;
     }
-    const rewards = {session:value.session,items,research:value.research === true,supply:value.supply === true};
+    const rewards = {session:value.session,profile:value.profile,map:value.map,items,research:value.research === true,supply:value.supply === true};
     try {
       const reply = await commands.send('apply-rewards', {rewards});
       if (state.ended) return;

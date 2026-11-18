@@ -12,7 +12,7 @@
   const PINCH_START=11, MULTI_START=11, TILT_STEP=32;
   const ROTATE_START=Math.PI/24, ROTATE_HANDOFF=Math.PI/12;
   const forwarded=new WeakSet(), points=new Map(), jobs=[];
-  const counts={taps:0,rightClicks:0,pans:0,panMoves:0,boxes:0,pinches:0,tilts:0,rotations:0,commandCalls:0,cancels:0,dropped:0};
+  const counts={taps:0,rightClicks:0,pans:0,panMoves:0,boxes:0,pinches:0,tilts:0,rotations:0,commandCalls:0,cancels:0,dropped:0,stopOrders:0,stopAcks:0};
   let enabled=false,phase='room',single=null,multi=null,ignoreUntilUp=false;
   let generation=0,pumping=false,activeJob=null,heldMouse=null,longTimer=null,multiTimer=null,intentTimer=null;
   let panelOpen=false,lastMiddleDown=-Infinity,lastLeftDown=-Infinity;
@@ -21,6 +21,8 @@
   let combatContext='',combatOverride='',combatOffPending=false,combatGestureSerial=0;
   const combatOffNonces=new Set();
   let combatIntent=null,combatQueries=0,combatInteractionUntil=0,combatTimer=null,combatPageHidden=false,combatActivation='',combatActivationSerial=0;
+  let repairRequested=null,repairIntent=null,repairContext='',repairConfirmedNonce='',repairEnabled=false,repairPending=false,repairError='';
+  let pendingCombatStop=null,lastCombatStopAck=null,lastCombatStopRequest=null,lastStopRoute='',combatStopError='',stoppedUnitIds=[];
   const heldKeys=new Map();
   const canvas=()=>document.getElementById('canvas');
   const modal=()=>{
@@ -43,7 +45,7 @@
     if(!ordersAllowed()||combatContext&&context!==combatContext){combatLock=false;combatActivation='';combatOverride='';combatOffPending=false;combatOffNonces.clear();combatIntent=null;}
     combatContext=context;
     native?.cancelGuardedInput?.();
-    if(!context)return false;
+    if(!context){refreshRepairPolicy();return false;}
     if(combatOffPending&&snapshot?.context===context&&snapshot.activation===combatActivation
         &&(combatOffNonces.has(snapshot.deselectNonce)||combatOffNonces.has(snapshot.deselectAppliedNonce)))combatOffPending=false;
     const suspended=combatSuspended();
@@ -53,9 +55,55 @@
         combatIntent.context=context;if(combatOffPending&&combatIntent.nonce)combatOffNonces.add(combatIntent.nonce);
       }
     }
-    native?.cancelGuardedInput?.();return combatLock;
+    native?.cancelGuardedInput?.();refreshRepairPolicy();return combatLock;
+  }
+  function repairPolicyMatches(ack,intent,context){
+    return Boolean(ack?.schemaVersion===93&&ack.managed===true&&ack.canIssueOrders===true&&intent
+      &&ack.context===context&&intent.context===context&&ack.requestNonce===intent.nonce&&ack.enabled===intent.enabled);
+  }
+  function resetRepairPolicy(){
+    repairRequested=null;repairIntent=null;repairContext='';repairConfirmedNonce='';repairEnabled=false;repairPending=false;repairError='';
+  }
+  function repairCanToggle(){
+    const native=window.PcMultiplayerNative,ack=native?.state?.repairPolicy;
+    return enabled&&phase==='game'&&!combatPageHidden&&!document.hidden&&ordersAllowed()&&native?.state?.worldReady===true
+      &&ack?.schemaVersion===93&&ack.canIssueOrders===true&&Boolean(combatContext)&&ack.context===combatContext;
+  }
+  function refreshRepairPolicy(){
+    const native=window.PcMultiplayerNative,ack=native?.state?.repairPolicy;
+    const context=combatContext;
+    if(!ordersAllowed()||repairContext&&repairContext!==context)resetRepairPolicy();
+    repairContext=context;
+    if(repairRequested!==null&&!repairIntent&&repairCanToggle()){
+      if(native?.setRepairPolicy?.({enabled:repairRequested,context})===true){repairIntent=native.repairPolicyIntent;repairError='';}
+      else repairError='The native repair setting is not available yet.';
+    }
+    const matching=repairPolicyMatches(ack,repairIntent,context);
+    if(matching&&ack.applied===true&&ack.pending===false)repairConfirmedNonce=repairIntent.nonce;
+    repairEnabled=Boolean(repairRequested===true&&matching&&repairConfirmedNonce===repairIntent.nonce);
+    repairPending=repairRequested!==null&&(!matching||ack.pending===true||ack.applied!==true);
+    return repairEnabled;
+  }
+  function toggleRepairPolicy(force){
+    refreshCombatLock();if(!repairCanToggle())return false;
+    repairRequested=typeof force==='boolean'?force:repairRequested!==true;
+    repairIntent=null;repairConfirmedNonce='';repairError='';refreshRepairPolicy();return repairRequested;
+  }
+  function exactCombatSelection(value){
+    const all=value?.combatIds,combat=value?.commandableIds??all,selected=value?.selectedIds;
+    if(!Array.isArray(all)||!Array.isArray(combat)||!Array.isArray(selected)||combat.length!==selected.length)return false;
+    if(![...all,...combat,...selected].every(id=>Number.isInteger(id)&&id>0))return false;
+    const owned=new Set(all),wanted=new Set(combat),actual=new Set(selected);
+    if(owned.size!==all.length||wanted.size!==combat.length||actual.size!==selected.length
+      ||combat.some(id=>!owned.has(id))||selected.some(id=>!wanted.has(id)))return false;
+    const protectedIds=value?.protectedIds;
+    if(protectedIds!==undefined&&(!Array.isArray(protectedIds)||new Set(protectedIds).size!==protectedIds.length
+      ||protectedIds.some(id=>!Number.isInteger(id)||!owned.has(id)||wanted.has(id))
+      ||protectedIds.length+combat.length!==all.length))return false;
+    return true;
   }
   function setCombatLock(value){
+    cancelGuardedCombatStop('combat-mode-changed');
     refreshCombatLock();
     if(typeof value!=='boolean'||value&&(!enabled||phase!=='game'||window.PcMultiplayerState?.worldReady!==true||!ordersAllowed()))return false;
     if(!combatContext)return false;
@@ -66,9 +114,9 @@
     refreshCombatLock(true);
     return value;
   }
-  function holdCombatSelection(reason='constructors'){combatOverride=String(reason);refreshCombatLock();return true;}
+  function holdCombatSelection(reason='constructors'){cancelGuardedCombatStop('selection-overridden');combatOverride=String(reason);refreshCombatLock();return true;}
   function resumeCombatSelection(reason){if(!reason||combatOverride===reason)combatOverride='';refreshCombatLock();return !combatOverride;}
-  function resetCombatMode(){combatLock=false;combatOverride='';combatOffPending=false;combatOffNonces.clear();combatIntent=null;refreshCombatLock(true);}
+  function resetCombatMode(){cancelGuardedCombatStop('combat-mode-reset');combatLock=false;combatOverride='';combatOffPending=false;combatOffNonces.clear();combatIntent=null;refreshCombatLock(true);}
   async function nativeSelectVisibleTrucks(options={}){
     holdCombatSelection('constructors');
     const native=window.PcMultiplayerNative,context=combatContext,activation=combatActivation,requested=combatLock;
@@ -173,9 +221,10 @@
     const activation=combatActivation,context=combatContext,started=performance.now();
     while(live(job,token)&&combatLock&&!combatOverride&&combatActivation===activation&&combatContext===context&&job.combatGesture===combatGestureSerial){
       refreshCombatLock();const ack=window.PcMultiplayerNative?.state?.combatLock;
-      const combat=ack?.combatIds,selected=ack?.selectedIds;
-      if(ack?.enabled===true&&ack.context===context&&ack.activation===activation&&Array.isArray(combat)&&Array.isArray(selected)
-          &&combat.length===selected.length&&combat.every(id=>selected.includes(id)))return true;
+      if(ack?.enabled===true&&ack.context===context&&ack.activation===activation&&exactCombatSelection(ack)){
+        if(!(ack.commandableIds??ack.combatIds).length){lastError='';lastAction='combat-waiting-for-repair';return false;}
+        return true;
+      }
       if(performance.now()-started>=2500){lastError='Native combat selection was not ready for this order.';return false;}
       await new Promise(resolve=>setTimeout(resolve,20));
     }
@@ -382,21 +431,66 @@
     stop:{value:'s',code:'KeyS',number:83},base:{value:'b',code:'KeyB',number:66},
     manufacturing:{value:'F1',code:'F1',number:112},research:{value:'F2',code:'F2',number:113},build:{value:'F3',code:'F3',number:114}
   };
+  function guardedStopAckMatches(ack,request){
+    if(!ack||ack.schemaVersion!==93||!request||ack.nonce!==request.nonce||ack.context!==request.context
+      ||ack.activation!==request.activation||typeof ack.ok!=='boolean')return false;
+    const arrays=[ack.stoppedIds,ack.protectedIds,ack.selectedIds];
+    if(arrays.some(ids=>!Array.isArray(ids)||new Set(ids).size!==ids.length||ids.some(id=>!Number.isInteger(id)||id<=0)))return false;
+    const selected=new Set(ack.selectedIds),protectedIds=new Set(ack.protectedIds);
+    if(ack.protectedIds.some(id=>!selected.has(id))||ack.stoppedIds.some(id=>!selected.has(id)||protectedIds.has(id)))return false;
+    return ack.ok?ack.stoppedIds.length+ack.protectedIds.length===ack.selectedIds.length:!ack.stoppedIds.length;
+  }
+  function cancelGuardedCombatStop(reason='stop-cancelled'){
+    const pending=pendingCombatStop;if(!pending)return false;
+    pendingCombatStop=null;clearTimeout(pending.timer);combatStopError=reason;
+    pending.native?.cancelGuardedInput?.();pending.resolve(false);return true;
+  }
+  function startGuardedCombatStop(){
+    if(pendingCombatStop)return pendingCombatStop.promise;
+    const native=window.PcMultiplayerNative,context=combatContext,activation=combatActivation;
+    if(!game()||!ordersAllowed()||!combatLock||combatOverride||!context||!activation||typeof native?.command!=='function')return false;
+    releaseAll();
+    const pending={native,context,activation,timer:null,promise:null,resolve:null};
+    pending.promise=new Promise(resolve=>{pending.resolve=resolve;});pendingCombatStop=pending;
+    const current=()=>pendingCombatStop===pending&&enabled&&phase==='game'&&!combatPageHidden&&!document.hidden
+      &&ordersAllowed()&&combatLock&&!combatOverride&&native===window.PcMultiplayerNative
+      &&combatContext===context&&combatActivation===activation;
+    const finish=ack=>{
+      if(pendingCombatStop!==pending)return;
+      const request=native.combatStopIntent;
+      if(request?.context===context&&request.activation===activation)lastCombatStopRequest=request;
+      const valid=current()&&guardedStopAckMatches(ack,request);
+      pendingCombatStop=null;clearTimeout(pending.timer);native.cancelGuardedInput?.();
+      if(valid){lastCombatStopAck=ack;combatStopError=ack.ok?'':String(ack.reason||'stop-not-applied');}
+      else combatStopError=String(ack?.reason||'invalid-stop-ack');
+      if(valid&&ack.ok){counts.stopAcks++;stoppedUnitIds=ack.stoppedIds.slice();lastError='';}
+      else lastError=combatStopError;
+      pending.resolve(Boolean(valid&&ack.ok));
+    };
+    counts.commandCalls++;counts.stopOrders++;lastAction='command:stop';lastStopRoute='native-combat-v93';combatStopError='';
+    pending.timer=setTimeout(()=>cancelGuardedCombatStop('native-stop-timeout'),3000);
+    try{Promise.resolve(native.command('stop-selected',{context,activation},current,2500)).then(finish,error=>finish({ok:false,reason:String(error?.message||error)}));}
+    catch(error){finish({ok:false,reason:String(error?.message||error)});}
+    return pending.promise;
+  }
   function command(action){
     if(!game()||!ordersAllowed())return false;
     const normalized=String(action).toLowerCase();
     if(['research','manufacturing','build','queue'].includes(normalized))return window.parent?.PcMultiplayerSession?.command(normalized)||false;
     if(normalized==='combat'||normalized==='all-combat')return setCombatLock(true);
+    if(normalized==='repair')return toggleRepairPolicy();
+    if(normalized==='stop'&&combatLock&&!combatOverride)return startGuardedCombatStop();
     if(normalized==='deselect'){manualSelectionRevision++;releaseAll();combatQueries++;refreshCombatLock();return Promise.resolve(window.PcMultiplayerNative?.command('deselect',{})).finally(()=>{combatQueries--;refreshCombatLock();});}
     if(normalized==='trucks'){manualSelectionRevision++;releaseAll();return window.__warzoneCommands?.selectNearbyTrucks?.();}
     const binding=commands[normalized];if(!binding)return false;
+    if(normalized==='stop')lastStopRoute='keyboard-fifo';
     clearLong();if(single||multi)releaseAll();counts.commandCalls++;lastAction='command:'+action;
     if(['combat','all-combat','all-units'].includes(normalized))manualSelectionRevision++;
     return enqueue({kind:'key',...binding});
   }
   function setPhase(value){
     const next=['room','game','frontend','loading'].includes(value)?value:'frontend';
-    if(next!==phase){if(next!=='game')resetCombatMode();releaseAll();panelOpen=false;phase=next;lastAction='phase:'+phase;refreshCombatLock();}
+    if(next!==phase){if(next!=='game'){resetCombatMode();resetRepairPolicy();}releaseAll();panelOpen=false;phase=next;lastAction='phase:'+phase;refreshCombatLock();}
     return phase;
   }
   function enable(){
@@ -405,15 +499,20 @@
   }
   for(const type of ['pointerdown','pointermove','pointerup','pointercancel'])document.addEventListener(type,pointer,{capture:true,passive:false});
   for(const type of ['touchstart','contextmenu','dragstart','selectstart'])document.addEventListener(type,event=>{if(enabled&&event.target===canvas())event.preventDefault();},{capture:true,passive:false});
-  window.addEventListener('blur',()=>releaseAll());window.addEventListener('pagehide',()=>{combatPageHidden=true;resetCombatMode();releaseAll();enabled=false;clearTimeout(combatTimer);combatTimer=null;});
+  window.addEventListener('blur',()=>releaseAll());window.addEventListener('pagehide',()=>{combatPageHidden=true;resetCombatMode();resetRepairPolicy();releaseAll();enabled=false;clearTimeout(combatTimer);combatTimer=null;});
   document.addEventListener('visibilitychange',()=>{if(document.hidden)releaseAll();refreshCombatLock();});
   const report=()=>({version:2,enabled,phase,...counts,pointers:points.size,queued:jobs.length,
       activeJob:activeJob?.kind||null,heldMouse,heldKeys:[...heldKeys.keys()],gesture:multi?.mode||single?.kind||null,
       panelOpen,lastAction,lastError,commands:Object.keys(commands),manualSelectionRevision,canIssueOrders:ordersAllowed(),cameraSafe:worldReady(),hudVisible:enabled&&phase==='game'&&ordersAllowed(),battleActive:enabled&&phase==='game',
       pendingClicks:jobs.length+(activeJob&&!activeJob.finished?1:0),queuedPointerEvents:0,gestureActive:points.size>0||heldMouse!==null||heldKeys.size>0,
       pinchSteps:counts.pinches,tiltMoves:counts.tilts,rotationMoves:counts.rotations,combatLock,
-      combatLockRequested:combatLock,combatOverride,combatContext,combatLockSuspended:combatSuspended(),combatLockState:window.PcMultiplayerNative?.state?.combatLock||null,baseJumps:counts.commandCalls});
-  window.PcMultiplayerControls=Object.freeze({enable,setPhase,command,releaseAll,report,setCombatLock,toggleCombatLock,refreshCombatLock,holdCombatSelection,resumeCombatSelection,resetCombatMode});
+      combatLockRequested:combatLock,combatOverride,combatContext,combatLockSuspended:combatSuspended(),combatLockState:window.PcMultiplayerNative?.state?.combatLock||null,
+      repairPolicyRequested:repairRequested,repairPolicyEnabled:repairEnabled,repairPolicyPending:repairPending,repairPolicyState:window.PcMultiplayerNative?.state?.repairPolicy||null,
+      repairPolicyIntent:repairIntent,repairPolicyConfirmedNonce:repairConfirmedNonce,repairPolicyError:repairError,repairPolicyCanToggle:repairCanToggle(),
+      stopPending:Boolean(pendingCombatStop),stoppedUnitIds:stoppedUnitIds.slice(),guardedStopPending:Boolean(pendingCombatStop),
+      guardedStopIntent:pendingCombatStop?.native?.combatStopIntent||lastCombatStopRequest,guardedStopState:lastCombatStopAck,
+      guardedStopError:combatStopError,guardedStopRoute:lastStopRoute,baseJumps:counts.commandCalls});
+  window.PcMultiplayerControls=Object.freeze({enable,setPhase,command,releaseAll,report,setCombatLock,toggleCombatLock,refreshCombatLock,holdCombatSelection,resumeCombatSelection,resetCombatMode,toggleRepairPolicy,refreshRepairPolicy,resetRepairPolicy});
   function parentDocument(){return window.parent?.WarzoneHost?window.parent.document:document;}
   function setHeaderMenuState(id,open){
     const aliases={factory:'wt-open-factory',queue:'wt-open-queue',build:'wt-open-build',players:'wt-open-players'};
@@ -451,6 +550,7 @@
     selectAllCombat:()=>command('combat'),selectAllUnits:()=>command('all-units'),selectAllTrucks:()=>command('trucks'),
     stopSelected:()=>command('stop'),jumpToBase:()=>command('base'),
     toggleCombatLock,
+    toggleRepairPolicy,refreshRepairPolicy,resetRepairPolicy,
     refreshCombatLock,holdCombatSelection,resumeCombatSelection,resetCombatMode,
     showHelp:()=>window.parent?.PcMultiplayerSession?.command('help'),toggleHelp:()=>window.parent?.PcMultiplayerSession?.command('help')};
 })();

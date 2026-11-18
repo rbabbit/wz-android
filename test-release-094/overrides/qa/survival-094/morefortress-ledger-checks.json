@@ -1,0 +1,60 @@
+{
+  "scope": "Actual RewardCatalog/Ledger/Store on JVM; Android preferences simulated, no emulator/gameplay proof",
+  "checksPassed": 28,
+  "checks": [
+    "31catalog items preserve19stock and add12MoreFortress purchases",
+    "existing prices preserved",
+    "v4wallet stock and Waves loadout preserved without Survival leakage",
+    "shared wallet with separate profile selections and exact charge",
+    "foreign profile rejected",
+    "wrong Survival map rejected",
+    "native base config bound to profile map and purchased licence",
+    "one-shot licence remains active but is consumed and nonrefundable",
+    "saved run cannot move to another profile",
+    "live reservation binds profile map and exact crystal cost",
+    "wrong-map native proof cannot commit or refund",
+    "wrong proof retains same pending reservation",
+    "native journal commits the paid sensor effect",
+    "duplicate native proof never pays or grants twice",
+    "sensor limited to one application per run",
+    "restart and save resume preserve paid effect context",
+    "full matching resumed quote keeps consumed effects without new charge",
+    "ConcreteII requires selected ConcreteI before charge",
+    "dependency rejection is atomic",
+    "all concrete tiers charge40plus70plus100 and select once",
+    "cannot remove prerequisite while dependent tiers selected",
+    "all tier tokens consumed exactly once when run applies",
+    "concrete tier cannot be applied a second time",
+    "new and stock fortresses share maximum3",
+    "shared stock reserved once and other profile cannot duplicate it",
+    "wallet persists explicit v5 profile model",
+    "failed preference write rejects purchase",
+    "failed write restores wallet stock and both loadouts"
+  ],
+  "sources": [
+    {
+      "path": "app\\src\\main\\java\\com\\rbabbit\\blocknight\\warzone\\RewardCatalog.java",
+      "sha256": "1b85f487e4fd08e44e2c14757618144630fb3df1a261da73276cd3d7a65e7757"
+    },
+    {
+      "path": "app\\src\\main\\java\\com\\rbabbit\\blocknight\\warzone\\RewardLedger.java",
+      "sha256": "5672ac881615105d6e08cd3d04531c41abfe08f95b8ce74c2199f8ae69a02af4"
+    },
+    {
+      "path": "app\\src\\main\\java\\com\\rbabbit\\blocknight\\warzone\\RewardStore.java",
+      "sha256": "fc7b59235e21c0d6623f8e6d51f8b1650fd4377203c10dee849fdc7338a58ecb"
+    },
+    {
+      "path": "tools\\MoreFortressLedgerCheck094.java",
+      "sha256": "8b848109adc1f162eac7898a96a023c8cc8bfa4758aa74945e267721296a51db"
+    },
+    {
+      "path": "tools\\reward-ledger-fixture\\android\\content\\Context.java",
+      "sha256": "9d62ed70564e25ca1f77345502bce95dcd9d32d2452402c6ae82a862936c0d0c"
+    },
+    {
+      "path": "tools\\reward-ledger-fixture\\android\\content\\SharedPreferences.java",
+      "sha256": "dd31d677d1f58a231566284e7433776d174af9d2a3953569a977286ae6c060ad"
+    }
+  ]
+}

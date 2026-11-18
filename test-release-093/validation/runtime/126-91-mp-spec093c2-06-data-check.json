@@ -1,0 +1,17 @@
+{
+  "nativePlayerID": 13,
+  "dataCheckReceived": true,
+  "dataCheck2Received": false,
+  "receipts": [
+    "** Received NET_DATA_CHECK from player 13"
+  ],
+  "failureMarkers": [],
+  "dataCheck2Applicable": false,
+  "stage2Scope": {
+    "source": "C:\\timerApp\\_official_warzone2100_src\\src\\multiplay.cpp",
+    "sha256": "cddff82021d7cc2d87b62cc7a8639142d45b5df8ddea082627fc7b491deef6f6",
+    "stage2ApplicableToHighSlotSpectator": false,
+    "proof": "Host sendDataCheck2 iterates playable slots and skips spectator players; initial NET_DATA_CHECK remains required.",
+    "earlierExactSourceReceipt": "C:\\timerApp\\repair-toggle-093-20261117\\80-mp-spec093-06-data-check-scope.json"
+  }
+}

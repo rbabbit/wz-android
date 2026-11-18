@@ -396,5 +396,20 @@ eventResearched = function (research, structure, player)
 	}
 };
 
-setTimer("blockNightV32PollBridgeCommands", 120);
-setTimer("warzoneTowersDiagnosticSnapshot", 5000);
+// Register only after a new native level starts. Script inclusion happens
+// before native saved timer IDs are restored; allocating here during include
+// would collide with saved IDs1/2. The saved timer queue owns load/resume.
+var warzoneTowersBridge_started = false;
+namespace("warzoneTowersBridge_");
+function warzoneTowersBridge_eventStartLevel()
+{
+    if (warzoneTowersBridge_started) return;
+    warzoneTowersBridge_started = true;
+    setTimer("blockNightV32PollBridgeCommands", 120);
+    setTimer("warzoneTowersDiagnosticSnapshot", 5000);
+}
+function warzoneTowersBridge_eventGameLoaded()
+{
+    // Also migrates old saves that already contain both native timers.
+    warzoneTowersBridge_started = true;
+}

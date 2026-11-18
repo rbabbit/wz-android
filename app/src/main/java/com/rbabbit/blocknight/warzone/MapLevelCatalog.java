@@ -19,7 +19,9 @@ final class MapLevelCatalog {
         final int rounds, preparationSeconds, humanPosition, entryCount;
         final boolean northFacing, legacy;
 
-        Level(JSONObject value) throws Exception {
+        Level(JSONObject value) throws Exception { this(value, false); }
+
+        Level(JSONObject value, boolean survival) throws Exception {
             id = value.getString("id");
             name = value.getString("name");
             difficulty = value.getString("difficulty");
@@ -34,7 +36,7 @@ final class MapLevelCatalog {
             northFacing = value.getBoolean("northFacing");
             legacy = value.getBoolean("legacy");
             entryCount = value.optInt("entryCount", 0);
-            if (!isKnownId(id) || !("easy".equals(difficulty) || "medium".equals(difficulty)
+            if (!(survival ? SurvivalMapCatalog.isKnownId(id) : isKnownId(id)) || !("easy".equals(difficulty) || "medium".equals(difficulty)
                     || "hard".equals(difficulty)) || rounds < 1 || humanPosition < 0
                     || humanPosition > 7) throw new IllegalArgumentException("Invalid map: " + id);
         }

@@ -1,0 +1,137 @@
+{
+  "target": {
+    "selector": "#wt-field-centre button[data-command=\"stop\"]",
+    "target": {
+      "enabled": true,
+      "hit": true,
+      "id": "",
+      "rect": {
+        "bottom": 418,
+        "height": 74,
+        "left": 44,
+        "right": 118,
+        "top": 344,
+        "width": 74,
+        "x": 44,
+        "y": 344
+      },
+      "text": "STOP",
+      "visible": true
+    },
+    "physical": [
+      289,
+      743
+    ],
+    "geometry": {
+      "activity": "com.rbabbit.blocknight.warzone.MultiplayerActivity",
+      "css": {
+        "dpr": 3,
+        "height": 554,
+        "url": "/multiplayer/index.html",
+        "visual": {
+          "height": 360,
+          "offsetLeft": 0,
+          "offsetTop": 0,
+          "width": 1164
+        },
+        "width": 1164
+      },
+      "physical": [
+        2400,
+        1080
+      ],
+      "bounds": [
+        131,
+        0,
+        2400,
+        1080
+      ],
+      "source": "Actual dumpsys MultiplayerActivity WebView/nativeLobbyView sibling hierarchy; uniform fitViewport verified",
+      "measuredUTC": "2026-11-17T23:01:27.565612+00:00",
+      "nativeVirtualRect": [
+        131,
+        0,
+        3623,
+        1662
+      ],
+      "nativeAvailableRect": [
+        131,
+        0,
+        2400,
+        1080
+      ],
+      "nativeParentRect": [
+        0,
+        0,
+        2400,
+        1080
+      ],
+      "derivedScaleX": 0.6497709049255441,
+      "derivedScaleY": 0.6498194945848376,
+      "derivedUniformScale": 0.6497951997551908,
+      "virtualCSSDprTolerancePixels": 4.0,
+      "webViewFlags": "VFED..C..",
+      "nativeAvailableViewClass": "com.rbabbit.blocknight.warzone.MultiplayerLobbyView",
+      "nativeLobbyFlags": "GFE...C..",
+      "webViewVisible": true,
+      "uiaFailureType": null,
+      "nativeMethodExplicitlyRequested": true
+    }
+  },
+  "input": "One real Android SOURCE_TOUCHSCREEN DOWN/UP,60ms requested; pointerup is native command activation, click may be suppressed after drawer collapse.",
+  "queuedNativeInput": {
+    "touch": {
+      "framesQueued": 2,
+      "allQueued": true,
+      "inputPath": "UiAutomation.injectInputEvent(event,false) / SOURCE_TOUCHSCREEN real FINGER",
+      "deliveryVerified": false,
+      "downTimeUptimeMs": 22059825,
+      "firstEventUptimeMs": 22059825,
+      "lastEventUptimeMs": 22059918,
+      "upTimeUptimeMs": 22059918,
+      "actualDownUpDurationMs": 93,
+      "actualFirstLastDurationMs": 93,
+      "timings": [
+        {
+          "frame": 0,
+          "action": 0,
+          "pointerCount": 1,
+          "requestedDelayMs": 0,
+          "downTimeUptimeMs": 22059825,
+          "eventTimeUptimeMs": 22059825,
+          "injectionStartedUptimeMs": 22059825,
+          "injectionReturnedUptimeMs": 22059856,
+          "injectionCallDurationMs": 31,
+          "queued": true
+        },
+        {
+          "frame": 1,
+          "action": 1,
+          "pointerCount": 1,
+          "requestedDelayMs": 60,
+          "downTimeUptimeMs": 22059825,
+          "eventTimeUptimeMs": 22059918,
+          "injectionStartedUptimeMs": 22059918,
+          "injectionReturnedUptimeMs": 22059951,
+          "injectionCallDurationMs": 33,
+          "queued": true
+        }
+      ]
+    },
+    "ok": true
+  },
+  "trustedEvents": [
+    {
+      "pointerType": "touch",
+      "target": "",
+      "trusted": true,
+      "type": "pointerdown"
+    },
+    {
+      "pointerType": "touch",
+      "target": "",
+      "trusted": true,
+      "type": "pointerup"
+    }
+  ]
+}

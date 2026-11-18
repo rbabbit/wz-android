@@ -390,7 +390,7 @@ function wtcmd_idle(droid)
 
 function wtcmd_partAvailable(id)
 {
-    return Boolean(wtcmd_components[id] && wtcmd_native[id] && componentAvailable(id));
+    return Boolean(wtcmd_components[id] && wtcmd_native[id] && componentAvailable(id) && (typeof wtreward_componentAllowed!=="function" || wtreward_componentAllowed(id)));
 }
 
 function wtcmd_selectedUnits()
@@ -1147,7 +1147,7 @@ function wtcmd_templateAvailable(template)
 {
     const d = wtcmd_templateParts(template);
     return [d.body, d.propulsion].concat(d.turrets).every(function (id) {
-        return wtcmd_native[id] && componentAvailable(id);
+        return wtcmd_native[id] && componentAvailable(id) && (typeof wtreward_componentAllowed!=="function" || wtreward_componentAllowed(id));
     });
 }
 
@@ -1584,6 +1584,9 @@ function wtcmd_tick()
 function wtcmd_initialize()
 {
     wtcmd_indexStats();hideInterface();wtcmd_started = true;
+    // A loaded world restores its old maintenance timer before this queued
+    // initializer runs. Keep one copy across repeated native loads.
+    removeTimer("wtcmd_tick");
     setTimer("wtcmd_tick", 250);
     dump("WTREADY:" + JSON.stringify({ version: 1, alwaysQueue: true }));
 }

@@ -98,7 +98,11 @@
     // Reuse the Base command group and its accepted spacing/selected styles.
     // Research remains first; Intelligence reports are in the unit drawer.
     const group=element('blocknight-base')?.parentElement;
-    if(group)group.appendChild(all);else{const controls=doc.createElement('div');controls.className='bn-command-group';controls.appendChild(all);hud.appendChild(controls);}
+    const repair=doc.createElement('button');repair.id='wt-campaign-repair';repair.type='button';repair.innerHTML='<img src="/warzone/ui/icons/wrench.svg" alt=""><span>REPAIR</span>';
+    repair.setAttribute('aria-pressed','false');repair.setAttribute('aria-busy','false');repair.dataset.repairEnabled='false';
+    repair.title='Enable automatic repair retreat at 75% health for all your combat units and new production';
+    window.__kalaWarzoneTouch?.bindTouchCommand?.(repair,()=>window.__kalaWarzoneTouch?.toggleRepairPolicy?.());
+    if(group)group.append(all,repair);else{const controls=doc.createElement('div');controls.className='bn-command-group';controls.append(all,repair);hud.appendChild(controls);}
     const status=doc.createElement('aside');status.id='warzone-campaign-status';status.innerHTML='<div><strong></strong><small hidden></small></div>';
     (element('warzone-command-strip')||hud).appendChild(status);
     const back=doc.createElement('button');back.id='wt-campaign-native-back';back.type='button';back.textContent='BACK TO GAME';back.hidden=true;back.addEventListener('click',closeNativeUi);doc.body.appendChild(back);
@@ -115,6 +119,7 @@
     if(!state.snapshot)return;
     state.allCombat=window.__kalaWarzoneTouch?.report?.().combatLockRequested===true;
     const all=element('wt-campaign-all-combat');if(all){all.dataset.combatEnabled=String(state.allCombat);all.classList.toggle('active',state.allCombat);all.setAttribute('aria-pressed',String(state.allCombat));all.disabled=state.ended;}
+    window.__kalaWarzoneTouch?.refreshRepairPolicy?.();
     const footer=element('blocknight-select-all');if(footer){footer.classList.toggle('active',state.allCombat);footer.setAttribute('aria-pressed',String(state.allCombat));}
     const status=element('warzone-campaign-status');if(status){
       const seconds=Math.max(0,Math.floor(Number(state.snapshot.missionTime)||0));

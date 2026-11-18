@@ -9,16 +9,28 @@ import java.util.Map;
 /** Canonical portable reward stock; shared by wallet policy and the native shop. */
 final class RewardCatalog {
   static final class Item {
-    final String id, name, category, nativeId, description;
+    final String id, name, category, nativeId, description, kind, requires;
     final int price, maxPerMatch;
-    final boolean fortress;
+    final boolean fortress, moreFortress;
 
     Item(String id, String name, String category, int price, String nativeId,
         String description, boolean fortress, int maxPerMatch) {
       this.id = id; this.name = name; this.category = category; this.price = price;
       this.nativeId = nativeId; this.description = description;
       this.fortress = fortress; this.maxPerMatch = maxPerMatch;
+      this.kind = nativeId.isEmpty() ? "effect" : "structure";
+      this.moreFortress = false; this.requires = "";
     }
+    Item(String id, String name, String category, int price, String nativeId,
+        String description, boolean fortress, String kind, String requires) {
+      this.id=id; this.name=name; this.category=category; this.price=price;
+      this.nativeId=nativeId; this.description=description; this.fortress=fortress;
+      this.kind=kind; this.requires=requires; this.moreFortress=true;
+      this.maxPerMatch="structure".equals(kind) ? (fortress ? 3 : 999) : 1;
+    }
+    boolean structure() { return "structure".equals(kind); }
+    boolean consumedOnApply() { return !structure(); }
+    boolean inNativeItems() { return !"research".equals(id) && !"supply".equals(id); }
   }
 
   private static Item building(String id, String name, String category, int price,
@@ -48,7 +60,55 @@ final class RewardCatalog {
       new Item("research", "Research accelerator", "Support", 60, "",
           "25% faster research for one match. You choose the topics.", false, 1),
       new Item("supply", "Supply reserve", "Support", 30, "",
-          "+1,000 starting power for one match.", false, 1)));
+          "+1,000 starting power for one match.", false, 1),
+      more("mf_aa_flak", "AA Flak Fortress", "Fortresses", 140, "X-Super-AA", true,
+          "Air targets only. Survival incoming waves are ground-only. Normal build power applies."),
+      more("mf_assault_gun", "Assault Gun Fortress", "Fortresses", 110, "X-Super-AG", true,
+          "Rapid-fire ground and air defence. Normal build power applies."),
+      more("mf_flamer", "Flamer Fortress", "Fortresses", 110, "X-Super-Flame", true,
+          "Short-range ground flame defence. Normal build power applies."),
+      more("mf_laser", "Laser Fortress", "Fortresses", 200, "X-Super-Laser", true,
+          "Ground and air laser defence. Normal build power applies."),
+      more("mf_rim116", "RIM-116 AA Fortress", "Fortresses", 220, "X-Super-RIM116", true,
+          "Air targets only. Survival incoming waves are ground-only. Normal build power applies."),
+      more("mf_howitzer", "M1299 Howitzer Fortress", "Fortresses", 240, "X-Super-Howitzer", true,
+          "Long-range ground artillery with a minimum firing range. Normal build power applies."),
+      more("mf_atgm_emplacement", "ATGM Emplacement", "Defences", 35, "Emplacement-ATGM", false,
+          "Ground anti-tank missiles with a minimum firing range. Normal build power applies."),
+      new Item("mf_atgm_design", "ATGM design licence", "Support", 60, "Rocket-ATGM",
+          "Unlocks the ATGM weapon in Design for this run. Normal manufacturing power applies.", false, "component", ""),
+      new Item("mf_fortress_sensor", "Fortress sensor upgrade", "Support", 40, "FortressSensor",
+          "+48% of base fortress sensor range for this run. Does not unlock a fortress.", false, "upgrade", ""),
+      new Item("mf_concrete_1", "Concrete I", "Support", 40, "",
+          "+100% of base wall and defence hit points for this run.", false, "upgrade", ""),
+      new Item("mf_concrete_2", "Concrete II", "Support", 70, "",
+          "Requires Concrete I. Adds another +100% of base wall and defence hit points.", false, "upgrade", "mf_concrete_1"),
+      new Item("mf_concrete_3", "Concrete III", "Support", 100, "",
+          "Requires Concrete II. Adds another +100% of base wall and defence hit points; no healing effect.", false, "upgrade", "mf_concrete_2")));
+
+  private static Item more(String id, String name, String category, int price, String nativeId,
+      boolean fortress, String description) {
+    return new Item(id,name,category,price,nativeId,description,fortress,"structure","");
+  }
+
+  static String profile(String value) {
+    if (!"towers".equals(value) && !"survival".equals(value))
+      throw new IllegalArgumentException("Rewards are only available in Waves and Survival.");
+    return value;
+  }
+  static void requireEligible(Item item, String profile, String map) {
+    profile(profile);
+    if (map == null || map.isEmpty() || "survival".equals(profile)
+        && !"tdn2".equals(map) && !"wave".equals(map))
+      throw new IllegalArgumentException("This map is not eligible for these Rewards.");
+  }
+  static void requireDependencies(Map<String,Integer> selected) {
+    for (String id : selected.keySet()) {
+      Item item=get(id);
+      if (selected.get(id)>0 && !item.requires.isEmpty() && selected.getOrDefault(item.requires,0)<1)
+        throw new IllegalArgumentException("Select " + get(item.requires).name + " before " + item.name + ".");
+    }
+  }
 
   private static final Map<String, Item> BY_ID;
   static {

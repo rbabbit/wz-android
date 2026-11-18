@@ -18,12 +18,20 @@ final class RewardLedger {
   String pendingAdReward = "";
   final Map<String, Integer> inventory = new LinkedHashMap<>();
   final Map<String, Integer> loadout = new LinkedHashMap<>();
+  final Map<String, Integer> survivalLoadout = new LinkedHashMap<>();
+  Map<String,Integer> loadout(String profile) { return "survival".equals(RewardCatalog.profile(profile)) ? survivalLoadout : loadout; }
+  private void trimLoadoutsToStock() {
+    for (Map<String,Integer> chosen : java.util.Arrays.asList(loadout,survivalLoadout))
+      for (String id : new LinkedHashSet<>(chosen.keySet())) { int n=Math.min(count(chosen,id),count(inventory,id)); if(n<1)chosen.remove(id);else chosen.put(id,n); }
+    for(Map<String,Integer> chosen:java.util.Arrays.asList(loadout,survivalLoadout))
+      for(RewardCatalog.Item item:RewardCatalog.list())if(!item.requires.isEmpty()&&count(chosen,item.requires)<1)chosen.remove(item.id);
+  }
   final Set<String> completed = new HashSet<>();
   final Set<String> claimedDifficultyBonuses = new LinkedHashSet<>();
   final LinkedHashMap<String, Run> runs = new LinkedHashMap<>();
 
   static final class Run {
-    final String session, map;
+    final String session, map, profile;
     final Map<String, Integer> baseItems;
     final Map<String, Integer> items = new LinkedHashMap<>();
     final Map<String, Integer> remaining = new LinkedHashMap<>();
@@ -34,8 +42,9 @@ final class RewardLedger {
     String inventoryPurchaseFloor = "";
     int wave, waveCredits, completionCredits, difficultyCredits;
     Receipt receipt;
-    Run(String session, String map, Map<String, Integer> items) {
-      this.session = session; this.map = map;
+    Run(String session, String map, Map<String, Integer> items) { this(session,map,"towers",items); }
+    Run(String session, String map, String profile, Map<String, Integer> items) {
+      this.session = session; this.map = map; this.profile=RewardCatalog.profile(profile);
       this.baseItems = Collections.unmodifiableMap(new LinkedHashMap<>(items));
       this.items.putAll(items);
       remaining.putAll(items);
@@ -93,15 +102,20 @@ final class RewardLedger {
       throw new IllegalArgumentException("Return Home before changing your inventory.");
   }
 
-  void buy(String id, int quantity) {
+  void buy(String id, int quantity) { buy(id,quantity,"towers","home"); }
+  void buy(String id, int quantity, String profile, String map) {
     requireHome();
+    Map<String,Integer> loadout=loadout(profile);
     RewardCatalog.Item item = RewardCatalog.get(id);
+    RewardCatalog.requireEligible(item,profile,map);
     if (quantity < 1 || quantity > 999 || owned(id) + quantity > 999)
       throw new IllegalArgumentException("Choose a quantity from 1 to 999.");
     if (item.fortress && ownedFortresses(null) + quantity > 3)
       throw new IllegalArgumentException("You can store at most three fortresses in total.");
     if ("laser_sat".equals(id) && owned(id) + quantity > 1)
       throw new IllegalArgumentException("You can store one Laser Satellite Command Post.");
+    Map<String,Integer> selected=new LinkedHashMap<>(loadout);
+    selected.put(id,Math.min(count(selected,id)+quantity,item.maxPerMatch));RewardCatalog.requireDependencies(selected);
     int cost = Math.multiplyExact(item.price, quantity);
     if (cost > balance) throw new IllegalArgumentException("Not enough crystals.");
     balance -= cost;
@@ -111,36 +125,47 @@ final class RewardLedger {
     if (take > 0) loadout.put(id, take);
   }
 
-  void equip(String id, int quantity) {
+  void equip(String id, int quantity) { equip(id,quantity,"towers","home"); }
+  void equip(String id, int quantity, String profile, String map) {
     requireHome();
+    Map<String,Integer> loadout=loadout(profile);
     RewardCatalog.Item item = RewardCatalog.get(id);
+    RewardCatalog.requireEligible(item,profile,map);
     if (quantity < 0 || quantity > count(inventory, id) || quantity > item.maxPerMatch)
       throw new IllegalArgumentException("That quantity is not available in your inventory.");
     if (item.fortress && fortressCount(loadout) - count(loadout, id) + quantity > 3)
       throw new IllegalArgumentException("Take at most three fortresses into one match.");
+    Map<String,Integer> selected=new LinkedHashMap<>(loadout);
+    if(quantity==0)selected.remove(id);else selected.put(id,quantity);RewardCatalog.requireDependencies(selected);
     if (quantity == 0) loadout.remove(id); else loadout.put(id, quantity);
   }
 
-  Run begin(String session, String map) {
+  Run begin(String session, String map) { return begin(session,map,"towers"); }
+  Run begin(String session, String map, String profile) {
+    Map<String,Integer> loadout=loadout(profile);
+    if(map==null||map.isEmpty())throw new IllegalArgumentException("Missing map identity.");
     if (session == null || session.isEmpty()) throw new IllegalArgumentException("Missing match identity.");
     Run previous = runs.get(session);
     if (previous != null) {
-      if (!previous.map.equals(map) || previous.settled || previous.suspended) throw new IllegalArgumentException("This match has already ended.");
+      if (!previous.map.equals(map) || !previous.profile.equals(profile) || previous.settled || previous.suspended) throw new IllegalArgumentException("This match has already ended.");
       return previous;
     }
     requireHome();
+    RewardCatalog.requireDependencies(loadout);
     for (String id : loadout.keySet()) {
+      RewardCatalog.requireEligible(RewardCatalog.get(id),profile,map);
       int quantity = count(loadout, id);
       if (quantity < 1 || quantity > count(inventory, id) || quantity > RewardCatalog.get(id).maxPerMatch)
         throw new IllegalArgumentException("Please check your next-match quantities.");
     }
     if (fortressCount(loadout) > 3) throw new IllegalArgumentException("Take at most three fortresses.");
-    Run run = new Run(session, map, loadout);
+    Run run = new Run(session, map, profile, loadout);
     for (String id : loadout.keySet()) {
       int left = count(inventory, id) - count(loadout, id);
       if (left == 0) inventory.remove(id); else inventory.put(id, left);
     }
     loadout.clear();
+    trimLoadoutsToStock();
     runs.put(session, run);
     if (runs.size() > 128) {
       java.util.Iterator<Run> it = runs.values().iterator();
@@ -154,7 +179,7 @@ final class RewardLedger {
 
   void applied(String session) {
     Run run = active(session); run.applied = true;
-    for (String id : run.items.keySet()) if (RewardCatalog.get(id).nativeId.isEmpty()) run.remaining.put(id, 0);
+    for (String id : run.items.keySet()) if (RewardCatalog.get(id).consumedOnApply()) run.remaining.put(id, 0);
   }
 
   /** Only native cleared-wave IDs pay; the started-wave number is informational. */
@@ -164,7 +189,7 @@ final class RewardLedger {
       throw new IllegalArgumentException("Invalid cleared wave.");
     if (remaining != null) for (String id : remaining.keySet()) {
       int quantity = remaining.get(id);
-      if (!run.items.containsKey(id) || RewardCatalog.get(id).nativeId.isEmpty()
+      if (!run.items.containsKey(id) || !RewardCatalog.get(id).inNativeItems()
           || quantity < 0 || quantity > count(run.items, id)) throw new IllegalArgumentException("Invalid remaining reward quantity.");
     }
     run.wave = Math.max(run.wave, Math.min(Math.max(0, wave), total));
@@ -270,8 +295,9 @@ final class RewardLedger {
   }
 
   private void restoreUnused(Run run, boolean all) {
+    Map<String,Integer> loadout=loadout(run.profile);
     for (String id : run.items.keySet()) {
-      int quantity = all ? count(run.items, id) : RewardCatalog.get(id).nativeId.isEmpty() ? 0 : count(run.remaining, id);
+      int quantity = all ? count(run.items, id) : RewardCatalog.get(id).consumedOnApply() ? 0 : count(run.remaining, id);
       quantity = Math.max(0, quantity - count(run.refunded, id));
       if (quantity <= 0) continue;
       inventory.put(id, Math.addExact(count(inventory, id), quantity));
@@ -306,7 +332,7 @@ final class RewardLedger {
   }
 
   private void discardUnknownRemaining(Run run) {
-    for (String id : run.items.keySet()) if (!RewardCatalog.get(id).nativeId.isEmpty()) run.remaining.put(id, 0);
+    for (String id : run.items.keySet()) if (!RewardCatalog.get(id).consumedOnApply()) run.remaining.put(id, 0);
   }
 
   LiveTx reserveLive(String session, String transactionId, String itemId, int quantity) {
@@ -318,6 +344,8 @@ final class RewardLedger {
       throw new IllegalArgumentException("Your previous purchase is still being confirmed. Retry that item and quantity first.");
     }
     RewardCatalog.Item item = RewardCatalog.get(itemId);
+    RewardCatalog.requireEligible(item,run.profile,run.map);
+    Map<String,Integer> selected=new LinkedHashMap<>(run.items);selected.put(itemId,count(selected,itemId)+quantity);RewardCatalog.requireDependencies(selected);
     if (quantity < 1 || quantity > 999 || count(run.items, itemId) + quantity > item.maxPerMatch)
       throw new IllegalArgumentException("That quantity exceeds this match's purchase limit.");
     if (item.fortress && (fortressCount(run.items) + quantity > 3 || ownedFortresses(run) + quantity > 3))
@@ -346,7 +374,7 @@ final class RewardLedger {
     Map<String, Integer> projected = new LinkedHashMap<>(run.items);
     projected.put(tx.itemId, cumulative);
     Set<String> expected = new LinkedHashSet<>();
-    for (String id : projected.keySet()) if (!RewardCatalog.get(id).nativeId.isEmpty()) expected.add(id);
+    for (String id : projected.keySet()) if (RewardCatalog.get(id).inNativeItems()) expected.add(id);
     if (nativeRemaining == null || !nativeRemaining.keySet().equals(expected))
       throw new IllegalArgumentException("Incomplete applied purchase inventory.");
     for (String id : nativeRemaining.keySet()) {
@@ -355,7 +383,7 @@ final class RewardLedger {
         throw new IllegalArgumentException("Invalid applied purchase inventory.");
     }
     run.items.put(tx.itemId, cumulative);
-    if (item.nativeId.isEmpty()) run.remaining.put(tx.itemId, 0);
+    if (item.consumedOnApply()) run.remaining.put(tx.itemId, 0);
     else run.remaining.put(tx.itemId, Math.addExact(count(run.remaining, tx.itemId), tx.quantity));
     for (String id : nativeRemaining.keySet()) {
       Integer left = nativeRemaining.get(id);
@@ -399,9 +427,11 @@ final class RewardLedger {
     }
   }
 
-  Run resumeRun(String session, String map) {
+  Run resumeRun(String session, String map) { return resumeRun(session,map,"towers"); }
+  Run resumeRun(String session, String map, String profile) {
+    Map<String,Integer> loadout=loadout(profile);
     Run run = runs.get(session);
-    if (run == null || !run.map.equals(map))
+    if (run == null || !run.map.equals(map) || !run.profile.equals(profile))
       throw new IllegalArgumentException("This saved match's wallet record is no longer available.");
     if (!run.settled && !run.suspended) return run;
     requireHome();
@@ -410,9 +440,10 @@ final class RewardLedger {
       int left = count(inventory, id) - amount;
       if (left == 0) inventory.remove(id); else inventory.put(id, left);
       if (count(loadout, id) > left) { if (left == 0) loadout.remove(id); else loadout.put(id, left); }
-      if (!RewardCatalog.get(id).nativeId.isEmpty()) run.remaining.put(id, Math.min(count(run.remaining, id), amount));
+      if (!RewardCatalog.get(id).consumedOnApply()) run.remaining.put(id, Math.min(count(run.remaining, id), amount));
       run.refunded.remove(id);
     }
+    trimLoadoutsToStock();
     run.pinned = true; run.suspended = false; run.settled = false; run.returnAllowed = false; run.receipt = null;
     run.inventoryPurchaseFloor = "";
     run.awaitingResumeInventory = true;

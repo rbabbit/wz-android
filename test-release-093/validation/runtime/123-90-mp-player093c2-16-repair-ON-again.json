@@ -1,0 +1,1423 @@
+{
+  "before": {
+    "buttons": [
+      {
+        "background": "rgb(0, 0, 0)",
+        "busy": null,
+        "color": "rgb(99, 230, 130)",
+        "dataset": {
+          "combatEnabled": "true",
+          "combatSelected": "true",
+          "command": "combat",
+          "suspended": "false"
+        },
+        "disabled": false,
+        "display": "block",
+        "hidden": false,
+        "id": "blocknight-combat",
+        "pressed": "true",
+        "rect": {
+          "bottom": 48,
+          "height": 36,
+          "left": 349.9583435058594,
+          "right": 445.9166793823242,
+          "top": 12,
+          "width": 95.95833587646484,
+          "x": 349.9583435058594,
+          "y": 12
+        },
+        "text": "ALL COMBAT",
+        "visibility": "visible"
+      },
+      {
+        "background": "rgb(0, 0, 0)",
+        "busy": "false",
+        "color": "rgb(244, 244, 244)",
+        "dataset": {
+          "command": "repair",
+          "repairEnabled": "false",
+          "repairPending": "false"
+        },
+        "disabled": false,
+        "display": "block",
+        "hidden": false,
+        "id": "blocknight-repair",
+        "pressed": "false",
+        "rect": {
+          "bottom": 48,
+          "height": 36,
+          "left": 448.91668701171875,
+          "right": 519.5156478881836,
+          "top": 12,
+          "width": 70.59896087646484,
+          "x": 448.91668701171875,
+          "y": 12
+        },
+        "text": "REPAIR",
+        "visibility": "visible"
+      },
+      {
+        "background": "rgb(37, 37, 37)",
+        "busy": null,
+        "color": "rgb(244, 244, 244)",
+        "dataset": {
+          "command": "players"
+        },
+        "disabled": false,
+        "display": "block",
+        "hidden": false,
+        "id": "wt-open-players",
+        "pressed": null,
+        "rect": {
+          "bottom": 48,
+          "height": 36,
+          "left": 522.515625,
+          "right": 581.0052108764648,
+          "top": 12,
+          "width": 58.489585876464844,
+          "x": 522.515625,
+          "y": 12
+        },
+        "text": "PLAYERS",
+        "visibility": "visible"
+      }
+    ],
+    "commands": {
+      "factory": 160411,
+      "history": [
+        {
+          "action": "queue-production",
+          "gameTime": 28102,
+          "nonce": "cmd-1794956213772-102",
+          "ok": true,
+          "reason": "queued",
+          "result": {
+            "count": 1,
+            "factoryId": 160411,
+            "repeat": {
+              "design": null,
+              "enabled": false,
+              "key": ""
+            }
+          }
+        }
+      ],
+      "page": "",
+      "productionFeedback": {
+        "message": "",
+        "tone": "done"
+      },
+      "productionPending": [],
+      "snapshotClock": 101102
+    },
+    "controls": {
+      "activeJob": null,
+      "baseJumps": 1,
+      "battleActive": true,
+      "boxes": 0,
+      "cameraSafe": true,
+      "canIssueOrders": true,
+      "cancels": 21,
+      "combatContext": "native-combat90:52347:1:1",
+      "combatLock": true,
+      "combatLockRequested": true,
+      "combatLockState": {
+        "activation": "mp-combat-user-1794956554173-2",
+        "combatIds": [
+          160691
+        ],
+        "commandableIds": [
+          160691
+        ],
+        "context": "native-combat90:52347:1:1",
+        "deselectAppliedNonce": "mp-combat-1794956542437-17",
+        "deselectNonce": "mp-combat-1794956542437-17",
+        "enabled": true,
+        "pendingDeselect": false,
+        "player": 1,
+        "protectedIds": [],
+        "reason": "on",
+        "requestNonce": "mp-combat-1794956567332-23",
+        "requestedSuspended": false,
+        "revision": 21,
+        "selectedIds": [
+          160691
+        ],
+        "suspended": false
+      },
+      "combatLockSuspended": false,
+      "combatOverride": "",
+      "commandCalls": 1,
+      "commands": [
+        "combat",
+        "all-combat",
+        "all-units",
+        "trucks",
+        "stop",
+        "base",
+        "manufacturing",
+        "research",
+        "build"
+      ],
+      "dropped": 0,
+      "enabled": true,
+      "gesture": null,
+      "gestureActive": false,
+      "guardedStopError": "",
+      "guardedStopIntent": {
+        "action": "stop-selected",
+        "activation": "mp-combat-user-1794956105483-1",
+        "context": "native-combat90:52347:1:1",
+        "nonce": "mp-ui-1794956501521-2"
+      },
+      "guardedStopPending": false,
+      "guardedStopRoute": "native-combat-v93",
+      "guardedStopState": {
+        "action": "stop-selected",
+        "activation": "mp-combat-user-1794956105483-1",
+        "context": "native-combat90:52347:1:1",
+        "nonce": "mp-ui-1794956501521-2",
+        "ok": true,
+        "protectedIds": [],
+        "reason": "queued",
+        "schemaVersion": 93,
+        "selectedIds": [
+          160691
+        ],
+        "skippedProtectedIds": [],
+        "stoppedIds": [
+          160691
+        ]
+      },
+      "heldKeys": [],
+      "heldMouse": null,
+      "hudVisible": true,
+      "lastAction": "command:stop",
+      "lastError": "",
+      "manualSelectionRevision": 1,
+      "panMoves": 0,
+      "panelOpen": false,
+      "pans": 0,
+      "pendingClicks": 0,
+      "phase": "game",
+      "pinchSteps": 0,
+      "pinches": 0,
+      "pointers": 0,
+      "queued": 0,
+      "queuedPointerEvents": 0,
+      "repairPolicyCanToggle": true,
+      "repairPolicyConfirmedNonce": "mp-repair-1794956567110-2",
+      "repairPolicyEnabled": false,
+      "repairPolicyError": "",
+      "repairPolicyIntent": {
+        "context": "native-combat90:52347:1:1",
+        "enabled": false,
+        "nonce": "mp-repair-1794956567110-2"
+      },
+      "repairPolicyPending": false,
+      "repairPolicyRequested": false,
+      "repairPolicyState": {
+        "applied": true,
+        "appliedIds": [
+          160691
+        ],
+        "canIssueOrders": true,
+        "combatIds": [
+          160691
+        ],
+        "context": "native-combat90:52347:1:1",
+        "diagnosticUnitsTruncated": false,
+        "enabled": false,
+        "failedIds": [],
+        "managed": true,
+        "pending": false,
+        "pendingIds": [],
+        "protectedIds": [],
+        "reason": "off",
+        "requestNonce": "mp-repair-1794956567110-2",
+        "revision": 3,
+        "schemaVersion": 93,
+        "scope": "owned-combat-map",
+        "thresholdHealthPercent": 75,
+        "units": [
+          {
+            "action": 0,
+            "body": 205,
+            "health": 205,
+            "healthPercent": 100,
+            "id": 160691,
+            "maxHealth": 205,
+            "order": 25,
+            "orderPosition": {
+              "x": 1601,
+              "y": 858
+            },
+            "orderTargetId": 0,
+            "originalBody": 205,
+            "pendingRepairLevel": 0,
+            "protected": false,
+            "repairLevel": 0,
+            "selected": true,
+            "tilePosition": {
+              "x": 12.5078125,
+              "y": 6.703125
+            },
+            "worldPosition": {
+              "x": 1601,
+              "y": 858,
+              "z": 342
+            },
+            "x": 1601,
+            "y": 858,
+            "z": 342
+          }
+        ],
+        "worldSafe": true
+      },
+      "rightClicks": 0,
+      "rotationMoves": 0,
+      "rotations": 0,
+      "stopAcks": 1,
+      "stopOrders": 1,
+      "stopPending": false,
+      "stoppedUnitIds": [
+        160691
+      ],
+      "taps": 1,
+      "tiltMoves": 0,
+      "tilts": 0,
+      "version": 2
+    },
+    "directory": {
+      "error": "",
+      "games": [
+        {
+          "compatible": true,
+          "connections": [
+            "tcp:ip4"
+          ],
+          "id": "qa-repair-093-candidate2-player",
+          "ipv4Tcp": true,
+          "joinable": true,
+          "map": "Sk-Mountain",
+          "name": "PRIVATE REPAIR093 CANDIDATE2 \u00b7 player",
+          "players": {
+            "current": 1,
+            "max": 4
+          },
+          "private": false,
+          "unavailable": "",
+          "version": "4.7.0"
+        }
+      ],
+      "hideEmpty": false,
+      "loading": false,
+      "stale": false
+    },
+    "exports": {
+      "controlsToggle": "function",
+      "nativeSetter": "function"
+    },
+    "fixture": {
+      "blockedOfficialRequests": 0,
+      "declaredDirectoryCounts": {
+        "current": 1,
+        "liveOccupancyMeasured": false,
+        "maximum": 4
+      },
+      "delegatedRequests": 0,
+      "directoryDataSynthetic": true,
+      "fixtureId": "qa-repair-093-candidate2-player",
+      "host": "10.0.2.2",
+      "idResolutionSynthetic": true,
+      "installed": true,
+      "mode": "parent-global-property",
+      "nativeGameplayMocked": false,
+      "pendingSynthetic": 0,
+      "port": 22222,
+      "publicRequestsSentByFixture": false,
+      "readyStateMocked": false,
+      "requests": [
+        {
+          "canceled": false,
+          "delivered": true,
+          "kind": "listing",
+          "method": "GET",
+          "requestId": 18022860
+        },
+        {
+          "canceled": false,
+          "delivered": true,
+          "kind": "id-resolution",
+          "method": "POST",
+          "requestId": 18022861
+        },
+        {
+          "canceled": false,
+          "delivered": true,
+          "kind": "id-resolution",
+          "method": "POST",
+          "requestId": 18022862
+        }
+      ],
+      "role": "player"
+    },
+    "http": {
+      "main": true,
+      "pending": 0,
+      "relayed": 0
+    },
+    "native": {
+      "canIssueOrders": true,
+      "capturedAt": 560464,
+      "combatLock": {
+        "activation": "mp-combat-user-1794956554173-2",
+        "combatIds": [
+          160691
+        ],
+        "commandableIds": [
+          160691
+        ],
+        "context": "native-combat90:52347:1:1",
+        "deselectAppliedNonce": "mp-combat-1794956542437-17",
+        "deselectNonce": "mp-combat-1794956542437-17",
+        "enabled": true,
+        "pendingDeselect": false,
+        "player": 1,
+        "protectedIds": [],
+        "reason": "on",
+        "requestNonce": "mp-combat-1794956567332-23",
+        "requestedSuspended": false,
+        "revision": 21,
+        "selectedIds": [
+          160691
+        ],
+        "suspended": false
+      },
+      "frame": 1024,
+      "gameTime": 101302,
+      "phase": "game",
+      "player": 1,
+      "realPlayer": 1,
+      "rendered": true,
+      "repairPolicy": {
+        "applied": true,
+        "appliedIds": [
+          160691
+        ],
+        "canIssueOrders": true,
+        "combatIds": [
+          160691
+        ],
+        "context": "native-combat90:52347:1:1",
+        "diagnosticUnitsTruncated": false,
+        "enabled": false,
+        "failedIds": [],
+        "managed": true,
+        "pending": false,
+        "pendingIds": [],
+        "protectedIds": [],
+        "reason": "off",
+        "requestNonce": "mp-repair-1794956567110-2",
+        "revision": 3,
+        "schemaVersion": 93,
+        "scope": "owned-combat-map",
+        "thresholdHealthPercent": 75,
+        "units": [
+          {
+            "action": 0,
+            "body": 205,
+            "health": 205,
+            "healthPercent": 100,
+            "id": 160691,
+            "maxHealth": 205,
+            "order": 25,
+            "orderPosition": {
+              "x": 1601,
+              "y": 858
+            },
+            "orderTargetId": 0,
+            "originalBody": 205,
+            "pendingRepairLevel": 0,
+            "protected": false,
+            "repairLevel": 0,
+            "selected": true,
+            "tilePosition": {
+              "x": 12.5078125,
+              "y": 6.703125
+            },
+            "worldPosition": {
+              "x": 1601,
+              "y": 858,
+              "z": 342
+            },
+            "x": 1601,
+            "y": 858,
+            "z": 342
+          }
+        ],
+        "worldSafe": true
+      },
+      "spectator": false,
+      "worldReady": true,
+      "worldSafe": true
+    },
+    "path": "/multiplayer/index.html",
+    "players": {
+      "availableTabs": [
+        "participants",
+        "spectators"
+      ],
+      "context": "players91:52347:1",
+      "detailTab": "economy",
+      "nativeMenu": null,
+      "open": false,
+      "pending": false,
+      "ready": true,
+      "tab": "participants",
+      "viewRevision": 1,
+      "viewer": {
+        "canIssueOrders": true,
+        "ownsViewedPlayer": true,
+        "realPlayer": 1,
+        "role": "player",
+        "viewedPlayer": 1
+      }
+    },
+    "publication": null,
+    "publicationError": "[object Object]",
+    "room": null,
+    "session": {
+      "active": true,
+      "phase": "game"
+    },
+    "touch": {
+      "activeJob": null,
+      "baseJumps": 1,
+      "battleActive": true,
+      "boxes": 0,
+      "cameraSafe": true,
+      "canIssueOrders": true,
+      "cancels": 21,
+      "combatContext": "native-combat90:52347:1:1",
+      "combatLock": true,
+      "combatLockRequested": true,
+      "combatLockState": {
+        "activation": "mp-combat-user-1794956554173-2",
+        "combatIds": [
+          160691
+        ],
+        "commandableIds": [
+          160691
+        ],
+        "context": "native-combat90:52347:1:1",
+        "deselectAppliedNonce": "mp-combat-1794956542437-17",
+        "deselectNonce": "mp-combat-1794956542437-17",
+        "enabled": true,
+        "pendingDeselect": false,
+        "player": 1,
+        "protectedIds": [],
+        "reason": "on",
+        "requestNonce": "mp-combat-1794956567332-23",
+        "requestedSuspended": false,
+        "revision": 21,
+        "selectedIds": [
+          160691
+        ],
+        "suspended": false
+      },
+      "combatLockSuspended": false,
+      "combatOverride": "",
+      "commandCalls": 1,
+      "commands": [
+        "combat",
+        "all-combat",
+        "all-units",
+        "trucks",
+        "stop",
+        "base",
+        "manufacturing",
+        "research",
+        "build"
+      ],
+      "dropped": 0,
+      "enabled": true,
+      "gesture": null,
+      "gestureActive": false,
+      "guardedStopError": "",
+      "guardedStopIntent": {
+        "action": "stop-selected",
+        "activation": "mp-combat-user-1794956105483-1",
+        "context": "native-combat90:52347:1:1",
+        "nonce": "mp-ui-1794956501521-2"
+      },
+      "guardedStopPending": false,
+      "guardedStopRoute": "native-combat-v93",
+      "guardedStopState": {
+        "action": "stop-selected",
+        "activation": "mp-combat-user-1794956105483-1",
+        "context": "native-combat90:52347:1:1",
+        "nonce": "mp-ui-1794956501521-2",
+        "ok": true,
+        "protectedIds": [],
+        "reason": "queued",
+        "schemaVersion": 93,
+        "selectedIds": [
+          160691
+        ],
+        "skippedProtectedIds": [],
+        "stoppedIds": [
+          160691
+        ]
+      },
+      "heldKeys": [],
+      "heldMouse": null,
+      "hudVisible": true,
+      "lastAction": "command:stop",
+      "lastError": "",
+      "manualSelectionRevision": 1,
+      "panMoves": 0,
+      "panelOpen": false,
+      "pans": 0,
+      "pendingClicks": 0,
+      "phase": "game",
+      "pinchSteps": 0,
+      "pinches": 0,
+      "pointers": 0,
+      "queued": 0,
+      "queuedPointerEvents": 0,
+      "repairPolicyCanToggle": true,
+      "repairPolicyConfirmedNonce": "mp-repair-1794956567110-2",
+      "repairPolicyEnabled": false,
+      "repairPolicyError": "",
+      "repairPolicyIntent": {
+        "context": "native-combat90:52347:1:1",
+        "enabled": false,
+        "nonce": "mp-repair-1794956567110-2"
+      },
+      "repairPolicyPending": false,
+      "repairPolicyRequested": false,
+      "repairPolicyState": {
+        "applied": true,
+        "appliedIds": [
+          160691
+        ],
+        "canIssueOrders": true,
+        "combatIds": [
+          160691
+        ],
+        "context": "native-combat90:52347:1:1",
+        "diagnosticUnitsTruncated": false,
+        "enabled": false,
+        "failedIds": [],
+        "managed": true,
+        "pending": false,
+        "pendingIds": [],
+        "protectedIds": [],
+        "reason": "off",
+        "requestNonce": "mp-repair-1794956567110-2",
+        "revision": 3,
+        "schemaVersion": 93,
+        "scope": "owned-combat-map",
+        "thresholdHealthPercent": 75,
+        "units": [
+          {
+            "action": 0,
+            "body": 205,
+            "health": 205,
+            "healthPercent": 100,
+            "id": 160691,
+            "maxHealth": 205,
+            "order": 25,
+            "orderPosition": {
+              "x": 1601,
+              "y": 858
+            },
+            "orderTargetId": 0,
+            "originalBody": 205,
+            "pendingRepairLevel": 0,
+            "protected": false,
+            "repairLevel": 0,
+            "selected": true,
+            "tilePosition": {
+              "x": 12.5078125,
+              "y": 6.703125
+            },
+            "worldPosition": {
+              "x": 1601,
+              "y": 858,
+              "z": 342
+            },
+            "x": 1601,
+            "y": 858,
+            "z": 342
+          }
+        ],
+        "worldSafe": true
+      },
+      "rightClicks": 0,
+      "rotationMoves": 0,
+      "rotations": 0,
+      "stopAcks": 1,
+      "stopOrders": 1,
+      "stopPending": false,
+      "stoppedUnitIds": [
+        160691
+      ],
+      "taps": 1,
+      "tiltMoves": 0,
+      "tilts": 0,
+      "version": 2
+    }
+  },
+  "physicalFingerTap": {
+    "selector": "#blocknight-repair",
+    "target": {
+      "enabled": true,
+      "hit": true,
+      "id": "blocknight-repair",
+      "rect": {
+        "bottom": 48,
+        "height": 36,
+        "left": 448.91668701171875,
+        "right": 519.5156478881836,
+        "top": 12,
+        "width": 70.59896087646484,
+        "x": 448.91668701171875,
+        "y": 12
+      },
+      "text": "REPAIR",
+      "visible": true
+    },
+    "physical": [
+      1075,
+      58
+    ],
+    "geometry": {
+      "activity": "com.rbabbit.blocknight.warzone.MultiplayerActivity",
+      "css": {
+        "dpr": 3,
+        "height": 554,
+        "url": "/multiplayer/index.html",
+        "visual": {
+          "height": 360,
+          "offsetLeft": 0,
+          "offsetTop": 0,
+          "width": 1164
+        },
+        "width": 1164
+      },
+      "physical": [
+        2400,
+        1080
+      ],
+      "bounds": [
+        131,
+        0,
+        2400,
+        1080
+      ],
+      "source": "Actual dumpsys MultiplayerActivity WebView/nativeLobbyView sibling hierarchy; uniform fitViewport verified",
+      "measuredUTC": "2026-11-17T23:02:18.835169+00:00",
+      "nativeVirtualRect": [
+        131,
+        0,
+        3623,
+        1662
+      ],
+      "nativeAvailableRect": [
+        131,
+        0,
+        2400,
+        1080
+      ],
+      "nativeParentRect": [
+        0,
+        0,
+        2400,
+        1080
+      ],
+      "derivedScaleX": 0.6497709049255441,
+      "derivedScaleY": 0.6498194945848376,
+      "derivedUniformScale": 0.6497951997551908,
+      "virtualCSSDprTolerancePixels": 4.0,
+      "webViewFlags": "VFED..C..",
+      "nativeAvailableViewClass": "com.rbabbit.blocknight.warzone.MultiplayerLobbyView",
+      "nativeLobbyFlags": "GFE...C..",
+      "webViewVisible": true,
+      "uiaFailureType": null,
+      "nativeMethodExplicitlyRequested": true
+    }
+  },
+  "after": {
+    "buttons": [
+      {
+        "background": "rgb(0, 0, 0)",
+        "busy": null,
+        "color": "rgb(99, 230, 130)",
+        "dataset": {
+          "combatEnabled": "true",
+          "combatSelected": "true",
+          "command": "combat",
+          "suspended": "false"
+        },
+        "disabled": false,
+        "display": "block",
+        "hidden": false,
+        "id": "blocknight-combat",
+        "pressed": "true",
+        "rect": {
+          "bottom": 48,
+          "height": 36,
+          "left": 349.9583435058594,
+          "right": 445.9166793823242,
+          "top": 12,
+          "width": 95.95833587646484,
+          "x": 349.9583435058594,
+          "y": 12
+        },
+        "text": "ALL COMBAT",
+        "visibility": "visible"
+      },
+      {
+        "background": "rgb(0, 0, 0)",
+        "busy": "false",
+        "color": "rgb(99, 230, 130)",
+        "dataset": {
+          "command": "repair",
+          "repairEnabled": "true",
+          "repairPending": "false"
+        },
+        "disabled": false,
+        "display": "block",
+        "hidden": false,
+        "id": "blocknight-repair",
+        "pressed": "true",
+        "rect": {
+          "bottom": 48,
+          "height": 36,
+          "left": 448.91668701171875,
+          "right": 519.5156478881836,
+          "top": 12,
+          "width": 70.59896087646484,
+          "x": 448.91668701171875,
+          "y": 12
+        },
+        "text": "REPAIR",
+        "visibility": "visible"
+      },
+      {
+        "background": "rgb(37, 37, 37)",
+        "busy": null,
+        "color": "rgb(244, 244, 244)",
+        "dataset": {
+          "command": "players"
+        },
+        "disabled": false,
+        "display": "block",
+        "hidden": false,
+        "id": "wt-open-players",
+        "pressed": null,
+        "rect": {
+          "bottom": 48,
+          "height": 36,
+          "left": 522.515625,
+          "right": 581.0052108764648,
+          "top": 12,
+          "width": 58.489585876464844,
+          "x": 522.515625,
+          "y": 12
+        },
+        "text": "PLAYERS",
+        "visibility": "visible"
+      }
+    ],
+    "commands": {
+      "factory": 160411,
+      "history": [
+        {
+          "action": "queue-production",
+          "gameTime": 28102,
+          "nonce": "cmd-1794956213772-102",
+          "ok": true,
+          "reason": "queued",
+          "result": {
+            "count": 1,
+            "factoryId": 160411,
+            "repeat": {
+              "design": null,
+              "enabled": false,
+              "key": ""
+            }
+          }
+        }
+      ],
+      "page": "",
+      "productionFeedback": {
+        "message": "",
+        "tone": "done"
+      },
+      "productionPending": [],
+      "snapshotClock": 104102
+    },
+    "controls": {
+      "activeJob": null,
+      "baseJumps": 1,
+      "battleActive": true,
+      "boxes": 0,
+      "cameraSafe": true,
+      "canIssueOrders": true,
+      "cancels": 21,
+      "combatContext": "native-combat90:52347:1:1",
+      "combatLock": true,
+      "combatLockRequested": true,
+      "combatLockState": {
+        "activation": "mp-combat-user-1794956554173-2",
+        "combatIds": [
+          160691
+        ],
+        "commandableIds": [
+          160691
+        ],
+        "context": "native-combat90:52347:1:1",
+        "deselectAppliedNonce": "mp-combat-1794956542437-17",
+        "deselectNonce": "mp-combat-1794956542437-17",
+        "enabled": true,
+        "pendingDeselect": false,
+        "player": 1,
+        "protectedIds": [],
+        "reason": "on",
+        "requestNonce": "mp-combat-1794956567332-23",
+        "requestedSuspended": false,
+        "revision": 21,
+        "selectedIds": [
+          160691
+        ],
+        "suspended": false
+      },
+      "combatLockSuspended": false,
+      "combatOverride": "",
+      "commandCalls": 1,
+      "commands": [
+        "combat",
+        "all-combat",
+        "all-units",
+        "trucks",
+        "stop",
+        "base",
+        "manufacturing",
+        "research",
+        "build"
+      ],
+      "dropped": 0,
+      "enabled": true,
+      "gesture": null,
+      "gestureActive": false,
+      "guardedStopError": "",
+      "guardedStopIntent": {
+        "action": "stop-selected",
+        "activation": "mp-combat-user-1794956105483-1",
+        "context": "native-combat90:52347:1:1",
+        "nonce": "mp-ui-1794956501521-2"
+      },
+      "guardedStopPending": false,
+      "guardedStopRoute": "native-combat-v93",
+      "guardedStopState": {
+        "action": "stop-selected",
+        "activation": "mp-combat-user-1794956105483-1",
+        "context": "native-combat90:52347:1:1",
+        "nonce": "mp-ui-1794956501521-2",
+        "ok": true,
+        "protectedIds": [],
+        "reason": "queued",
+        "schemaVersion": 93,
+        "selectedIds": [
+          160691
+        ],
+        "skippedProtectedIds": [],
+        "stoppedIds": [
+          160691
+        ]
+      },
+      "heldKeys": [],
+      "heldMouse": null,
+      "hudVisible": true,
+      "lastAction": "command:stop",
+      "lastError": "",
+      "manualSelectionRevision": 1,
+      "panMoves": 0,
+      "panelOpen": false,
+      "pans": 0,
+      "pendingClicks": 0,
+      "phase": "game",
+      "pinchSteps": 0,
+      "pinches": 0,
+      "pointers": 0,
+      "queued": 0,
+      "queuedPointerEvents": 0,
+      "repairPolicyCanToggle": true,
+      "repairPolicyConfirmedNonce": "mp-repair-1794956582856-3",
+      "repairPolicyEnabled": true,
+      "repairPolicyError": "",
+      "repairPolicyIntent": {
+        "context": "native-combat90:52347:1:1",
+        "enabled": true,
+        "nonce": "mp-repair-1794956582856-3"
+      },
+      "repairPolicyPending": false,
+      "repairPolicyRequested": true,
+      "repairPolicyState": {
+        "applied": true,
+        "appliedIds": [
+          160691
+        ],
+        "canIssueOrders": true,
+        "combatIds": [
+          160691
+        ],
+        "context": "native-combat90:52347:1:1",
+        "diagnosticUnitsTruncated": false,
+        "enabled": true,
+        "failedIds": [],
+        "managed": true,
+        "pending": false,
+        "pendingIds": [],
+        "protectedIds": [],
+        "reason": "on",
+        "requestNonce": "mp-repair-1794956582856-3",
+        "revision": 4,
+        "schemaVersion": 93,
+        "scope": "owned-combat-map",
+        "thresholdHealthPercent": 75,
+        "units": [
+          {
+            "action": 0,
+            "body": 205,
+            "health": 205,
+            "healthPercent": 100,
+            "id": 160691,
+            "maxHealth": 205,
+            "order": 25,
+            "orderPosition": {
+              "x": 1601,
+              "y": 858
+            },
+            "orderTargetId": 0,
+            "originalBody": 205,
+            "pendingRepairLevel": 75,
+            "protected": false,
+            "repairLevel": 75,
+            "selected": true,
+            "tilePosition": {
+              "x": 12.5078125,
+              "y": 6.703125
+            },
+            "worldPosition": {
+              "x": 1601,
+              "y": 858,
+              "z": 342
+            },
+            "x": 1601,
+            "y": 858,
+            "z": 342
+          }
+        ],
+        "worldSafe": true
+      },
+      "rightClicks": 0,
+      "rotationMoves": 0,
+      "rotations": 0,
+      "stopAcks": 1,
+      "stopOrders": 1,
+      "stopPending": false,
+      "stoppedUnitIds": [
+        160691
+      ],
+      "taps": 1,
+      "tiltMoves": 0,
+      "tilts": 0,
+      "version": 2
+    },
+    "directory": {
+      "error": "",
+      "games": [
+        {
+          "compatible": true,
+          "connections": [
+            "tcp:ip4"
+          ],
+          "id": "qa-repair-093-candidate2-player",
+          "ipv4Tcp": true,
+          "joinable": true,
+          "map": "Sk-Mountain",
+          "name": "PRIVATE REPAIR093 CANDIDATE2 \u00b7 player",
+          "players": {
+            "current": 1,
+            "max": 4
+          },
+          "private": false,
+          "unavailable": "",
+          "version": "4.7.0"
+        }
+      ],
+      "hideEmpty": false,
+      "loading": false,
+      "stale": false
+    },
+    "exports": {
+      "controlsToggle": "function",
+      "nativeSetter": "function"
+    },
+    "fixture": {
+      "blockedOfficialRequests": 0,
+      "declaredDirectoryCounts": {
+        "current": 1,
+        "liveOccupancyMeasured": false,
+        "maximum": 4
+      },
+      "delegatedRequests": 0,
+      "directoryDataSynthetic": true,
+      "fixtureId": "qa-repair-093-candidate2-player",
+      "host": "10.0.2.2",
+      "idResolutionSynthetic": true,
+      "installed": true,
+      "mode": "parent-global-property",
+      "nativeGameplayMocked": false,
+      "pendingSynthetic": 0,
+      "port": 22222,
+      "publicRequestsSentByFixture": false,
+      "readyStateMocked": false,
+      "requests": [
+        {
+          "canceled": false,
+          "delivered": true,
+          "kind": "listing",
+          "method": "GET",
+          "requestId": 18022860
+        },
+        {
+          "canceled": false,
+          "delivered": true,
+          "kind": "id-resolution",
+          "method": "POST",
+          "requestId": 18022861
+        },
+        {
+          "canceled": false,
+          "delivered": true,
+          "kind": "id-resolution",
+          "method": "POST",
+          "requestId": 18022862
+        }
+      ],
+      "role": "player"
+    },
+    "http": {
+      "main": true,
+      "pending": 0,
+      "relayed": 0
+    },
+    "native": {
+      "canIssueOrders": true,
+      "capturedAt": 574922,
+      "combatLock": {
+        "activation": "mp-combat-user-1794956554173-2",
+        "combatIds": [
+          160691
+        ],
+        "commandableIds": [
+          160691
+        ],
+        "context": "native-combat90:52347:1:1",
+        "deselectAppliedNonce": "mp-combat-1794956542437-17",
+        "deselectNonce": "mp-combat-1794956542437-17",
+        "enabled": true,
+        "pendingDeselect": false,
+        "player": 1,
+        "protectedIds": [],
+        "reason": "on",
+        "requestNonce": "mp-combat-1794956567332-23",
+        "requestedSuspended": false,
+        "revision": 21,
+        "selectedIds": [
+          160691
+        ],
+        "suspended": false
+      },
+      "frame": 1053,
+      "gameTime": 104202,
+      "phase": "game",
+      "player": 1,
+      "realPlayer": 1,
+      "rendered": true,
+      "repairPolicy": {
+        "applied": true,
+        "appliedIds": [
+          160691
+        ],
+        "canIssueOrders": true,
+        "combatIds": [
+          160691
+        ],
+        "context": "native-combat90:52347:1:1",
+        "diagnosticUnitsTruncated": false,
+        "enabled": true,
+        "failedIds": [],
+        "managed": true,
+        "pending": false,
+        "pendingIds": [],
+        "protectedIds": [],
+        "reason": "on",
+        "requestNonce": "mp-repair-1794956582856-3",
+        "revision": 4,
+        "schemaVersion": 93,
+        "scope": "owned-combat-map",
+        "thresholdHealthPercent": 75,
+        "units": [
+          {
+            "action": 0,
+            "body": 205,
+            "health": 205,
+            "healthPercent": 100,
+            "id": 160691,
+            "maxHealth": 205,
+            "order": 25,
+            "orderPosition": {
+              "x": 1601,
+              "y": 858
+            },
+            "orderTargetId": 0,
+            "originalBody": 205,
+            "pendingRepairLevel": 75,
+            "protected": false,
+            "repairLevel": 75,
+            "selected": true,
+            "tilePosition": {
+              "x": 12.5078125,
+              "y": 6.703125
+            },
+            "worldPosition": {
+              "x": 1601,
+              "y": 858,
+              "z": 342
+            },
+            "x": 1601,
+            "y": 858,
+            "z": 342
+          }
+        ],
+        "worldSafe": true
+      },
+      "spectator": false,
+      "worldReady": true,
+      "worldSafe": true
+    },
+    "path": "/multiplayer/index.html",
+    "players": {
+      "availableTabs": [
+        "participants",
+        "spectators"
+      ],
+      "context": "players91:52347:1",
+      "detailTab": "economy",
+      "nativeMenu": null,
+      "open": false,
+      "pending": false,
+      "ready": true,
+      "tab": "participants",
+      "viewRevision": 1,
+      "viewer": {
+        "canIssueOrders": true,
+        "ownsViewedPlayer": true,
+        "realPlayer": 1,
+        "role": "player",
+        "viewedPlayer": 1
+      }
+    },
+    "publication": null,
+    "publicationError": "[object Object]",
+    "room": null,
+    "session": {
+      "active": true,
+      "phase": "game"
+    },
+    "touch": {
+      "activeJob": null,
+      "baseJumps": 1,
+      "battleActive": true,
+      "boxes": 0,
+      "cameraSafe": true,
+      "canIssueOrders": true,
+      "cancels": 21,
+      "combatContext": "native-combat90:52347:1:1",
+      "combatLock": true,
+      "combatLockRequested": true,
+      "combatLockState": {
+        "activation": "mp-combat-user-1794956554173-2",
+        "combatIds": [
+          160691
+        ],
+        "commandableIds": [
+          160691
+        ],
+        "context": "native-combat90:52347:1:1",
+        "deselectAppliedNonce": "mp-combat-1794956542437-17",
+        "deselectNonce": "mp-combat-1794956542437-17",
+        "enabled": true,
+        "pendingDeselect": false,
+        "player": 1,
+        "protectedIds": [],
+        "reason": "on",
+        "requestNonce": "mp-combat-1794956567332-23",
+        "requestedSuspended": false,
+        "revision": 21,
+        "selectedIds": [
+          160691
+        ],
+        "suspended": false
+      },
+      "combatLockSuspended": false,
+      "combatOverride": "",
+      "commandCalls": 1,
+      "commands": [
+        "combat",
+        "all-combat",
+        "all-units",
+        "trucks",
+        "stop",
+        "base",
+        "manufacturing",
+        "research",
+        "build"
+      ],
+      "dropped": 0,
+      "enabled": true,
+      "gesture": null,
+      "gestureActive": false,
+      "guardedStopError": "",
+      "guardedStopIntent": {
+        "action": "stop-selected",
+        "activation": "mp-combat-user-1794956105483-1",
+        "context": "native-combat90:52347:1:1",
+        "nonce": "mp-ui-1794956501521-2"
+      },
+      "guardedStopPending": false,
+      "guardedStopRoute": "native-combat-v93",
+      "guardedStopState": {
+        "action": "stop-selected",
+        "activation": "mp-combat-user-1794956105483-1",
+        "context": "native-combat90:52347:1:1",
+        "nonce": "mp-ui-1794956501521-2",
+        "ok": true,
+        "protectedIds": [],
+        "reason": "queued",
+        "schemaVersion": 93,
+        "selectedIds": [
+          160691
+        ],
+        "skippedProtectedIds": [],
+        "stoppedIds": [
+          160691
+        ]
+      },
+      "heldKeys": [],
+      "heldMouse": null,
+      "hudVisible": true,
+      "lastAction": "command:stop",
+      "lastError": "",
+      "manualSelectionRevision": 1,
+      "panMoves": 0,
+      "panelOpen": false,
+      "pans": 0,
+      "pendingClicks": 0,
+      "phase": "game",
+      "pinchSteps": 0,
+      "pinches": 0,
+      "pointers": 0,
+      "queued": 0,
+      "queuedPointerEvents": 0,
+      "repairPolicyCanToggle": true,
+      "repairPolicyConfirmedNonce": "mp-repair-1794956582856-3",
+      "repairPolicyEnabled": true,
+      "repairPolicyError": "",
+      "repairPolicyIntent": {
+        "context": "native-combat90:52347:1:1",
+        "enabled": true,
+        "nonce": "mp-repair-1794956582856-3"
+      },
+      "repairPolicyPending": false,
+      "repairPolicyRequested": true,
+      "repairPolicyState": {
+        "applied": true,
+        "appliedIds": [
+          160691
+        ],
+        "canIssueOrders": true,
+        "combatIds": [
+          160691
+        ],
+        "context": "native-combat90:52347:1:1",
+        "diagnosticUnitsTruncated": false,
+        "enabled": true,
+        "failedIds": [],
+        "managed": true,
+        "pending": false,
+        "pendingIds": [],
+        "protectedIds": [],
+        "reason": "on",
+        "requestNonce": "mp-repair-1794956582856-3",
+        "revision": 4,
+        "schemaVersion": 93,
+        "scope": "owned-combat-map",
+        "thresholdHealthPercent": 75,
+        "units": [
+          {
+            "action": 0,
+            "body": 205,
+            "health": 205,
+            "healthPercent": 100,
+            "id": 160691,
+            "maxHealth": 205,
+            "order": 25,
+            "orderPosition": {
+              "x": 1601,
+              "y": 858
+            },
+            "orderTargetId": 0,
+            "originalBody": 205,
+            "pendingRepairLevel": 75,
+            "protected": false,
+            "repairLevel": 75,
+            "selected": true,
+            "tilePosition": {
+              "x": 12.5078125,
+              "y": 6.703125
+            },
+            "worldPosition": {
+              "x": 1601,
+              "y": 858,
+              "z": 342
+            },
+            "x": 1601,
+            "y": 858,
+            "z": 342
+          }
+        ],
+        "worldSafe": true
+      },
+      "rightClicks": 0,
+      "rotationMoves": 0,
+      "rotations": 0,
+      "stopAcks": 1,
+      "stopOrders": 1,
+      "stopPending": false,
+      "stoppedUnitIds": [
+        160691
+      ],
+      "taps": 1,
+      "tiltMoves": 0,
+      "tilts": 0,
+      "version": 2
+    }
+  }
+}

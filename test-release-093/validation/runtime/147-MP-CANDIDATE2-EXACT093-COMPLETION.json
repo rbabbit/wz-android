@@ -1,0 +1,469 @@
+{
+  "status": "observed-scoped-candidate2-MP-checks",
+  "recordedUTC": "2026-11-17T23:16:51.411985+00:00",
+  "exactAPK": {
+    "path": "C:\\timerApp\\repair-toggle-093-20261117\\candidate-093-second.apk",
+    "sha256": "4f48c3e3ba80c6562ce711a4adab17704cd40737bc0362e6732bd58ecf2862b1",
+    "bytes": 640785707,
+    "versionCode": 93,
+    "versionName": "0.93",
+    "normalSignerSHA256": "4499efe00477c7c724c06a1dd96f935864548665c13ab5e2bd0a9c0f83f7cb15",
+    "signerProof": "Root verified normal4499 signature; this agent independently rehashed installed APK/version multiple times."
+  },
+  "player": {
+    "actualNativePlayer": 1,
+    "nativeDataChecks": {
+      "nativePlayerID": 1,
+      "dataCheckReceived": true,
+      "dataCheck2Received": true,
+      "receipts": [
+        "** Received NET_DATA_CHECK from player 1",
+        "** Received NET_DATA_CHECK2 from player 1"
+      ],
+      "failureMarkers": [],
+      "dataCheck2Applicable": true,
+      "stage2Scope": null
+    },
+    "ordinaryProduction": {
+      "oneACK": {
+        "action": "queue-production",
+        "gameTime": 28102,
+        "nonce": "cmd-1794956213772-102",
+        "ok": true,
+        "reason": "queued",
+        "result": {
+          "count": 1,
+          "factoryId": 160411,
+          "repeat": {
+            "design": null,
+            "enabled": false,
+            "key": ""
+          }
+        }
+      },
+      "actualNativeJobObserved": true,
+      "oneNewCombatId": 160691,
+      "actualNewbornNativeRow": {
+        "action": 1,
+        "body": 205,
+        "health": 205,
+        "healthPercent": 100,
+        "id": 160691,
+        "maxHealth": 205,
+        "order": 2,
+        "orderPosition": {
+          "x": 1600,
+          "y": 1344
+        },
+        "orderTargetId": 0,
+        "originalBody": 205,
+        "pendingRepairLevel": 75,
+        "protected": false,
+        "repairLevel": 75,
+        "selected": false,
+        "tilePosition": {
+          "x": 10.046875,
+          "y": 10.109375
+        },
+        "worldPosition": {
+          "x": 1286,
+          "y": 1294,
+          "z": 345
+        },
+        "x": 1286,
+        "y": 1294,
+        "z": 345
+      },
+      "birthNativeClock": 44402,
+      "nativeClockAuthoritative": true,
+      "seeded": false,
+      "eventDroidBuiltInjected": false,
+      "noRequeue": true,
+      "PlayersOpenDuringBirth": true,
+      "PlayersClosedSelectionRestored": [
+        160691
+      ]
+    },
+    "realMOVE": {
+      "actualTouchAndTerrainPickObserved": true,
+      "validatedTile": [
+        12,
+        6
+      ],
+      "intendedWorld": [
+        1600,
+        832
+      ],
+      "nativeRoundedWorld": [
+        1601,
+        831
+      ],
+      "nativePositionChangedFrom": [
+        1570,
+        1342
+      ],
+      "nativePositionReached": [
+        1601,
+        858
+      ],
+      "nativeMoveCompletedToGuardBeforeSTOP": true,
+      "midMotionStopClaim": false,
+      "QAOracleCorrection": "Exact-equality target rejected successful physical MOVE due1world-unit rounding. Same session resumed; no second MOVE, queue, native damage or order injection."
+    },
+    "guardedSTOP": {
+      "actualACK": {
+        "action": "stop-selected",
+        "activation": "mp-combat-user-1794956105483-1",
+        "context": "native-combat90:52347:1:1",
+        "nonce": "mp-ui-1794956501521-2",
+        "ok": true,
+        "protectedIds": [],
+        "reason": "queued",
+        "schemaVersion": 93,
+        "selectedIds": [
+          160691
+        ],
+        "skippedProtectedIds": [],
+        "stoppedIds": [
+          160691
+        ]
+      },
+      "route": "native-combat-v93",
+      "oneTrustedPointerup": true,
+      "stopAcks": 1,
+      "actualNativeOrderAfter": 0,
+      "actualRepairLevelAfter": 75,
+      "guardedDispatchProven": true,
+      "noActiveDamagedMPProtectionClaim": true
+    },
+    "AllCombatOFFFromNonempty": {
+      "before": [
+        160691
+      ],
+      "after": [],
+      "deselectNonce": "mp-combat-1794956542437-17",
+      "deselectAppliedNonce": "mp-combat-1794956542437-17"
+    },
+    "RepairOFFThenONNativeLevels": [
+      0,
+      75
+    ],
+    "initialFeatureSessionExit": {
+      "port": 22222,
+      "confirmedReturnPressed": false,
+      "fixtureLimit": "600-second owned host lifetime expired after all feature checks and actual LOBBY confirmation opened; safe window preflight refused the vanished Dialog. Actual inactive native Lobby then BACK/Home observed. No successful production or feature session rerun.",
+      "coveredBySeparateFreshExitOnly": true
+    }
+  },
+  "spectator": {
+    "actualNativeRealPlayer": 13,
+    "nativeDataChecks": {
+      "nativePlayerID": 13,
+      "dataCheckReceived": true,
+      "dataCheck2Received": false,
+      "receipts": [
+        "** Received NET_DATA_CHECK from player 13"
+      ],
+      "failureMarkers": [],
+      "dataCheck2Applicable": false,
+      "stage2Scope": {
+        "source": "C:\\timerApp\\_official_warzone2100_src\\src\\multiplay.cpp",
+        "sha256": "cddff82021d7cc2d87b62cc7a8639142d45b5df8ddea082627fc7b491deef6f6",
+        "stage2ApplicableToHighSlotSpectator": false,
+        "proof": "Host sendDataCheck2 iterates playable slots and skips spectator players; initial NET_DATA_CHECK remains required.",
+        "earlierExactSourceReceipt": "C:\\timerApp\\repair-toggle-093-20261117\\80-mp-spec093-06-data-check-scope.json"
+      }
+    },
+    "repairExports": {
+      "controlsAPI": "PcMultiplayerControls.toggleRepairPolicy(true)",
+      "controlsResult": false,
+      "nativeAPI": "PcMultiplayerNative.setRepairPolicy({enabled:true,context})",
+      "nativeResult": false,
+      "nativePolicyUnchanged": true
+    },
+    "STOPExports": {
+      "facade": "__kalaWarzoneTouch.stopSelected()",
+      "facadeResult": false,
+      "nativeAPI": "PcMultiplayerNative.command('stop-selected',{context,activation})",
+      "nativeResult": {
+        "ok": false,
+        "reason": "spectator-read-only"
+      },
+      "nativePolicyUnchanged": true,
+      "artificialFalsePredicate": false
+    },
+    "actualRoleReadonlyThroughout": true,
+    "RepairAndAllCombatControlsHidden": true,
+    "PlayersTabsPhysicallyReviewed": [
+      "participants",
+      "spectators",
+      "details"
+    ],
+    "oneGlobalPlayersOpenCloseCycle": true,
+    "oneActualConfirmedReturn": true,
+    "nativeLobbyServiceStopped": true,
+    "actualNativeBackToHome": true,
+    "teardownObservation": "The HTML eval callback timed out during WebView destruction after the one Return touch. Actual native Lobby sessionActivefalse/serviceStartedfalse was immediately verified directly; no Return repeated."
+  },
+  "freshOwnerExitOnly": {
+    "prefix": "92-mp-player093c2exit",
+    "port": 22224,
+    "actualNativeRealPlayer": 1,
+    "bothNativeDataChecks": true,
+    "RepairONNativeACK": true,
+    "AllCombatONNativeACK": true,
+    "oneActualLobbyThenFocusedReturn": true,
+    "nativeLobbyServiceStopped": true,
+    "oneNativeBackToHome": true,
+    "productionOrMovementOrSTOPRepeated": false,
+    "separateUniqueHostClaim": true
+  },
+  "limitations": [
+    "Private MP scenario has no active damaged repair provider; no MP retreat/healing/completion claim. Root exact-APK offline prepared states cover those cases.",
+    "Inherited emulator black terrain remains; real foreground units/buildings, header, minimap, native Dialog, Players and Home screens were physically inspected.",
+    "No compact MP viewport or Android Back pane-close claim. Existing MP Back opens Return confirmation; actual Players toggle return was tested.",
+    "Native same-tick race harness is separate synthetic unit coverage; this MP pass did not inject health/orders/native state."
+  ],
+  "fixtures": {
+    "onlyDevice": "emulator-5562",
+    "officialNativeHostBinarySHA256": "45ac9f9a68e1fae77386d74ee18304ce2c719eaf9ba68b807621bd9e39311775",
+    "syntheticDirectoryAndResolutionOnly": true,
+    "nativeGameplayReadinessRolesAndDataChecksReal": true,
+    "publicMatchJoined": false,
+    "UPnPOrRouterChanges": false
+  },
+  "ownedHostCleanup": [
+    {
+      "port": 22222,
+      "pid": 34828,
+      "state": "stopped",
+      "stopReason": "bounded-lifetime",
+      "cleanup": "verified-owned-PID-terminate",
+      "identityVerified": true
+    },
+    {
+      "port": 22223,
+      "pid": 4592,
+      "state": "stopped",
+      "stopReason": "operator-stop",
+      "cleanup": "verified-owned-PID-terminate",
+      "identityVerified": true
+    },
+    {
+      "port": 22224,
+      "pid": 14980,
+      "state": "stopped",
+      "stopReason": "host-exited",
+      "cleanup": "host-exited-normally",
+      "identityVerified": true
+    }
+  ],
+  "finalHandoff": {
+    "actualHome": true,
+    "physicalViewport": [
+      2400,
+      1080
+    ],
+    "oneVisibleFocusedMainWindow": true,
+    "noDialog": true,
+    "installedAPKUnchanged": true,
+    "originalThreeSavesUnchanged": true,
+    "helperRetained": true,
+    "emulator5562ReleasedToRoot": true,
+    "noFurtherDeviceOperationsByThisAgent": true
+  },
+  "changesDuringQA": {
+    "applicationOrSourceBuildChanges": false,
+    "APKReinstalled": false,
+    "permissionsOrSettingsChanged": false,
+    "VPSOrFeedOrGitHubOrPlayPublication": false,
+    "AABProduced": false
+  },
+  "evidenceFiles": [
+    {
+      "path": "C:\\timerApp\\repair-toggle-093-20261117\\90-mp-player093c2-06-data-check.json",
+      "bytes": 293,
+      "sha256": "defc970ebdf49dc3620e5186a70dcec8755f8ec37256971bd182b12f82a8502f"
+    },
+    {
+      "path": "C:\\timerApp\\repair-toggle-093-20261117\\90-mp-player093c2-09-one-ACK-job.json",
+      "bytes": 20781,
+      "sha256": "a417b83ff1e207fe4edf5213cffe0c727018289638af7f1d07b82d03597e230a"
+    },
+    {
+      "path": "C:\\timerApp\\repair-toggle-093-20261117\\90-mp-player093c2-11-native-birth-policy.json",
+      "bytes": 42848,
+      "sha256": "4717bbd96508314eb3a50dd650b101b5f97270e796251688657e5bdf72bf7a93"
+    },
+    {
+      "path": "C:\\timerApp\\repair-toggle-093-20261117\\90-mp-player093c2-12-newborn-selected.json",
+      "bytes": 15262,
+      "sha256": "a1c26383aca0be1279b8c0030146d7688f7f94a9b0c667eb303e2b11f6535ea3"
+    },
+    {
+      "path": "C:\\timerApp\\repair-toggle-093-20261117\\90-mp-player093c2-13-real-MOVE.json",
+      "bytes": 20236,
+      "sha256": "7d6b62603c6e5f9f7289446d42e84f9113f0a5bc513de61c4455a4d38a3d4c4d"
+    },
+    {
+      "path": "C:\\timerApp\\repair-toggle-093-20261117\\90-mp-player093c2-13-MOVE-visible-site.json",
+      "bytes": 790,
+      "sha256": "ce075d1c84b43dc0cdc3df593f69676bf6385188e5c524f042552560c5b0cfde"
+    },
+    {
+      "path": "C:\\timerApp\\repair-toggle-093-20261117\\90-mp-player093c2-13-MOVE-observed-rounded.json",
+      "bytes": 16916,
+      "sha256": "c37944b0e7ccb0f8328527b9d90fd49dc31e61873de31a20061b4a5d6e27f63a"
+    },
+    {
+      "path": "C:\\timerApp\\repair-toggle-093-20261117\\90-mp-player093c2-14-STOP-pointer-receipt.json",
+      "bytes": 3622,
+      "sha256": "d53f8516944d3ee492946afdfdb66cd92ad9ffb74c6984a81cfa91f98447ff97"
+    },
+    {
+      "path": "C:\\timerApp\\repair-toggle-093-20261117\\90-mp-player093c2-14-guarded-STOP-ACK.json",
+      "bytes": 72557,
+      "sha256": "5169be5a0c927f11722f4ede6ea9a9c9ad083a39ab4e81d3b7f23a986b3c217b"
+    },
+    {
+      "path": "C:\\timerApp\\repair-toggle-093-20261117\\90-mp-player093c2-14-native-after-STOP.json",
+      "bytes": 16507,
+      "sha256": "a861d46c9e8773eb00ba5aab60f7cc5d1c109df4c2d9d5d77e80cdce0c58771a"
+    },
+    {
+      "path": "C:\\timerApp\\repair-toggle-093-20261117\\90-mp-player093c2-14-after-STOP.png",
+      "bytes": 658162,
+      "sha256": "79293c92892ab78560abd411ed1fffade0f37661abd2cddc78e340da0cf3df68"
+    },
+    {
+      "path": "C:\\timerApp\\repair-toggle-093-20261117\\90-mp-player093c2-15-nonempty-combat-OFF.json",
+      "bytes": 37839,
+      "sha256": "eda722c852fe0369f2cd113d5befe37fffc91a16359e85ad6ea15a0b750c21eb"
+    },
+    {
+      "path": "C:\\timerApp\\repair-toggle-093-20261117\\90-mp-player093c2-16-repair-OFF.json",
+      "bytes": 38054,
+      "sha256": "71a1bb6467763c60d8d4d3e7b2847f9a2cdd05fdc1cec9c05ad271d652e12d7e"
+    },
+    {
+      "path": "C:\\timerApp\\repair-toggle-093-20261117\\90-mp-player093c2-16-repair-ON-again.json",
+      "bytes": 38057,
+      "sha256": "3d8846fdcef2329b880343672119306ebdf30065ba3ac6cf2950509f8641e4b0"
+    },
+    {
+      "path": "C:\\timerApp\\repair-toggle-093-20261117\\90-mp-player093c2-18-after-host-bound-observed.json",
+      "bytes": 13000,
+      "sha256": "22e3f32b7026ad2bbafc1f47568edbc974ab239edc4a52053bc4027f1d6d191b"
+    },
+    {
+      "path": "C:\\timerApp\\repair-toggle-093-20261117\\90-mp-player093c2-20-host-cleanup.json",
+      "bytes": 1515,
+      "sha256": "2632130d01bc9d3f4c75e5b57ba572e5c18e7fecc912474775be36b68cbec18c"
+    },
+    {
+      "path": "C:\\timerApp\\repair-toggle-093-20261117\\91-mp-spec093c2-06-data-check.json",
+      "bytes": 709,
+      "sha256": "dcd248a56bd64c7dccefcdacaf55e8464821e12b5762993e1c0b1f0568b57313"
+    },
+    {
+      "path": "C:\\timerApp\\repair-toggle-093-20261117\\91-mp-spec093c2-07-repair-actual-export-denial.json",
+      "bytes": 31308,
+      "sha256": "fcdecf2d9ecf712324ebc485af48e37663790bc0b5976ac157447042f30cd702"
+    },
+    {
+      "path": "C:\\timerApp\\repair-toggle-093-20261117\\91-mp-spec093c2-07-STOP-actual-export-denial.json",
+      "bytes": 14149,
+      "sha256": "aae3e77c3f3a987aa6060f0a1da5d8812723b5e3b9658ab812874354906f579d"
+    },
+    {
+      "path": "C:\\timerApp\\repair-toggle-093-20261117\\91-mp-spec093c2-08-Players.png",
+      "bytes": 591984,
+      "sha256": "8bf1ae2f0595f98a4b72ee4273059f117c4375306f766f75707bb305424d1cae"
+    },
+    {
+      "path": "C:\\timerApp\\repair-toggle-093-20261117\\91-mp-spec093c2-08-Spectators.png",
+      "bytes": 612961,
+      "sha256": "ccfa9c052cbc0d8b6cce5140e28858a2e36ea399731132cbc9392ecce0884179"
+    },
+    {
+      "path": "C:\\timerApp\\repair-toggle-093-20261117\\91-mp-spec093c2-08-Details.png",
+      "bytes": 554533,
+      "sha256": "c55ff29e957b9b40188fc5ac7c6fdba42b818428961c0a13b376bf2164eddc3b"
+    },
+    {
+      "path": "C:\\timerApp\\repair-toggle-093-20261117\\91-mp-spec093c2-09-readonly-return.json",
+      "bytes": 11378,
+      "sha256": "9da03a51046dab0f440be2d58f4c701eb236a559209a7661c8295d13512b343f"
+    },
+    {
+      "path": "C:\\timerApp\\repair-toggle-093-20261117\\91-mp-spec093c2-10-Return-dialog.png",
+      "bytes": 517619,
+      "sha256": "e05ec951123232e961243a766eab3c41d710b024d425b625d3bbf90286eeb8b0"
+    },
+    {
+      "path": "C:\\timerApp\\repair-toggle-093-20261117\\91-mp-spec093c2-11-real-Return.json",
+      "bytes": 3445,
+      "sha256": "51790fc478b6a0a151fb128279f5c453b88f6cb2d959d3202342d67ac1878ae9"
+    },
+    {
+      "path": "C:\\timerApp\\repair-toggle-093-20261117\\91-mp-spec093c2-11-after-Return-observed.json",
+      "bytes": 30496,
+      "sha256": "441cd72438efced6ac34fd7bdf77f5f72ed2886387f157d7d34bf57e6b457133"
+    },
+    {
+      "path": "C:\\timerApp\\repair-toggle-093-20261117\\91-mp-spec093c2-13-host-cleanup.json",
+      "bytes": 1520,
+      "sha256": "abaa68591a2cd53fa46564779149ac9fdff286f28e11e8a4c974617209afff0e"
+    },
+    {
+      "path": "C:\\timerApp\\repair-toggle-093-20261117\\92-mp-player093c2exit-06-data-check.json",
+      "bytes": 293,
+      "sha256": "defc970ebdf49dc3620e5186a70dcec8755f8ec37256971bd182b12f82a8502f"
+    },
+    {
+      "path": "C:\\timerApp\\repair-toggle-093-20261117\\92-mp-player093c2exit-07-Repair-ON.json",
+      "bytes": 7628,
+      "sha256": "703e8d3b063997355fd75d3e0cc9a71175acaaad2f645f970dc6e8dc1cc32cf1"
+    },
+    {
+      "path": "C:\\timerApp\\repair-toggle-093-20261117\\92-mp-player093c2exit-07-Combat-ON.json",
+      "bytes": 7815,
+      "sha256": "7f9e355179b75bd2a6badea430de2c817f878f098f1aa87cf5f65f5748d9bcf3"
+    },
+    {
+      "path": "C:\\timerApp\\repair-toggle-093-20261117\\92-mp-player093c2exit-08-Return-before-touch.png",
+      "bytes": 486692,
+      "sha256": "b4d82235f14aedb971fc06cf6c992eb65f19b042834323b78eda868205f7ae36"
+    },
+    {
+      "path": "C:\\timerApp\\repair-toggle-093-20261117\\92-mp-player093c2exit-09-actual-Return.json",
+      "bytes": 3445,
+      "sha256": "1185f856d9c6f40c60f30f6ad46a7b9bbf0a8eae0eda02075e09a0107afdeeae"
+    },
+    {
+      "path": "C:\\timerApp\\repair-toggle-093-20261117\\92-mp-player093c2exit-09-native-Lobby.json",
+      "bytes": 18578,
+      "sha256": "a35022b10f54da6c76d95c00aec11c308351f981575d507de237ffbdfb1d5a25"
+    },
+    {
+      "path": "C:\\timerApp\\repair-toggle-093-20261117\\92-mp-player093c2exit-10-Home.png",
+      "bytes": 1121062,
+      "sha256": "40bbbe054373a26ef0b27a4f57dcc1564703f48b9aef215f5e5306c296f660cd"
+    },
+    {
+      "path": "C:\\timerApp\\repair-toggle-093-20261117\\92-mp-player093c2exit-11-host-cleanup.json",
+      "bytes": 1213,
+      "sha256": "f882d819a2a832891f56ad6b5e971c369a3b65e0d89fd2457e59644b45b86a91"
+    },
+    {
+      "path": "C:\\timerApp\\repair-toggle-093-20261117\\92-mp-player093c2exit-11-final-identity.json",
+      "bytes": 1421,
+      "sha256": "baf67b3d75f412543656c860a2a2b8c2438c4e2548f353f78207203ea13a3494"
+    },
+    {
+      "path": "C:\\timerApp\\repair-toggle-093-20261117\\92-mp-player093c2exit-11-final-windows.json",
+      "bytes": 147248,
+      "sha256": "39c1ff46d1413c75d74f1bbfc57a99981fdc7fabcef85ed7dbcf4f85a38cd989"
+    }
+  ]
+}

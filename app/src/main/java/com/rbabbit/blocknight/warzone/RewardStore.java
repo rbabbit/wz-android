@@ -62,20 +62,24 @@ final class RewardStore {
     transaction(() -> { ledger.cancelAdReward(token); return null; });
   }
   synchronized Map<String, Integer> inventory() { return RewardLedger.copy(ledger.inventory); }
-  synchronized Map<String, Integer> loadout() { return RewardLedger.copy(ledger.loadout); }
+  synchronized Map<String, Integer> loadout() { return loadout("towers"); }
+  synchronized Map<String,Integer> loadout(String profile) { return RewardLedger.copy(ledger.loadout(profile)); }
   synchronized Map<String, Integer> active(String session) {
     RewardLedger.Run run = ledger.runs.get(session);
     if (run == null || run.settled || run.suspended) return Collections.emptyMap();
     Map<String, Integer> result = new LinkedHashMap<>();
     for (String id : run.items.keySet()) {
-      int count = RewardCatalog.get(id).nativeId.isEmpty() ? run.items.get(id) : RewardLedger.count(run.remaining, id);
+      int count = RewardCatalog.get(id).consumedOnApply() ? run.items.get(id) : RewardLedger.count(run.remaining, id);
       result.put(id, count);
     }
     return RewardLedger.copy(result);
   }
-  synchronized void buy(String id, int quantity) { transaction(() -> { ledger.buy(id, quantity); return null; }); }
-  synchronized void equip(String id, int quantity) { transaction(() -> { ledger.equip(id, quantity); return null; }); }
-  synchronized void begin(String session, String map) { transaction(() -> { ledger.begin(session, map); return null; }); }
+  synchronized void buy(String id,int quantity) { buy(id,quantity,"towers","home"); }
+  synchronized void buy(String id,int quantity,String profile,String map) { transaction(() -> { ledger.buy(id,quantity,profile,map);return null; }); }
+  synchronized void equip(String id,int quantity) { equip(id,quantity,"towers","home"); }
+  synchronized void equip(String id,int quantity,String profile,String map) { transaction(() -> { ledger.equip(id,quantity,profile,map);return null; }); }
+  synchronized void begin(String session,String map) { begin(session,map,"towers"); }
+  synchronized void begin(String session,String map,String profile) { transaction(() -> { ledger.begin(session,map,profile);return null; }); }
   synchronized void pinRun(String session) { transaction(() -> { ledger.pinRun(session); return null; }); }
   synchronized void unpinRun(String session) { transaction(() -> { ledger.unpinRun(session); return null; }); }
   /** Snapshot used to recover a file deletion interrupted before its wallet unpin. */
@@ -84,7 +88,8 @@ final class RewardStore {
     for (RewardLedger.Run run : ledger.runs.values()) if (run.pinned) result.put(run.session);
     return result;
   }
-  synchronized void resumeRun(String session, String map) { transaction(() -> { ledger.resumeRun(session, map); return null; }); }
+  synchronized void resumeRun(String session,String map) { resumeRun(session,map,"towers"); }
+  synchronized void resumeRun(String session,String map,String profile) { transaction(() -> { ledger.resumeRun(session,map,profile);return null; }); }
   synchronized void applied(String session) {
     RewardLedger.Run run = ledger.runs.get(session);
     if (run != null && run.applied) return;
@@ -145,8 +150,8 @@ final class RewardStore {
       RewardLedger.Run run = ledger.runs.get(session);
       if (run == null || run.settled || run.suspended) return "{}";
       JSONObject items = new JSONObject();
-      for (String id : run.baseItems.keySet()) if (!RewardCatalog.get(id).nativeId.isEmpty()) items.put(id, run.baseItems.get(id));
-      result.put("session", session).put("items", items).put("research", RewardLedger.count(run.baseItems, "research") > 0)
+      for (String id : run.baseItems.keySet()) if (RewardCatalog.get(id).inNativeItems()) items.put(id, run.baseItems.get(id));
+      result.put("session", session).put("profile",run.profile).put("map",run.map).put("items", items).put("research", RewardLedger.count(run.baseItems, "research") > 0)
           .put("supply", RewardLedger.count(run.baseItems, "supply") > 0).put("balance", balance())
           .put("pendingTransactions", pendingLive(session));
       return result.toString();
@@ -154,7 +159,7 @@ final class RewardStore {
   }
 
   synchronized String reserveLive(String session, String id, int quantity) {
-    return transaction(() -> liveConfig(session,
+    return transaction(() -> liveConfig(ledger.runs.get(session),
         ledger.reserveLive(session, "live-" + java.util.UUID.randomUUID(), id, quantity)).toString());
   }
 
@@ -168,6 +173,7 @@ final class RewardStore {
       if ("rejected".equals(tx.status)) return false;
       JSONObject quote = new JSONObject(replyJSON);
       if (!session.equals(quote.optString("session"))) return false;
+      requireQuoteContext(run,quote);
       if (journalHas(quote.opt("transactions"), transactionId)) {
         requireCurrentInventory(run, quote);
         Map<String, Integer> remaining = readCounts(quote.getJSONObject("remaining"));
@@ -192,7 +198,7 @@ final class RewardStore {
     JSONArray result = new JSONArray();
     RewardLedger.Run run = ledger.runs.get(session);
     if (run != null) for (RewardLedger.LiveTx tx : run.transactions.values())
-      if ("pending".equals(tx.status)) result.put(liveConfig(session, tx));
+      if ("pending".equals(tx.status)) result.put(liveConfig(run, tx));
     return result;
   }
 
@@ -201,10 +207,10 @@ final class RewardStore {
     if (run == null) throw new IllegalArgumentException("This saved match's wallet record is no longer available.");
     try {
       JSONObject items = new JSONObject(), remaining = new JSONObject();
-      for (String id : run.items.keySet()) if (!RewardCatalog.get(id).nativeId.isEmpty()) {
+      for (String id : run.items.keySet()) if (RewardCatalog.get(id).inNativeItems()) {
         items.put(id, run.items.get(id)); remaining.put(id, RewardLedger.count(run.remaining, id));
       }
-      return new JSONObject().put("session", session).put("items", items).put("remaining", remaining)
+      return new JSONObject().put("session", session).put("profile",run.profile).put("map",run.map).put("items", items).put("remaining", remaining)
           .put("research", RewardLedger.count(run.items, "research") > 0)
           .put("supply", RewardLedger.count(run.items, "supply") > 0)
           .put("pendingTransactions", pendingLive(session));
@@ -227,11 +233,11 @@ final class RewardStore {
     catch (Exception error) { throw new IllegalArgumentException("The resumed purchase inventory could not be verified.", error); }
   }
 
-  private static JSONObject liveConfig(String session, RewardLedger.LiveTx tx) {
+  private static JSONObject liveConfig(RewardLedger.Run run, RewardLedger.LiveTx tx) {
     try {
       JSONObject items = new JSONObject();
-      if (!RewardCatalog.get(tx.itemId).nativeId.isEmpty()) items.put(tx.itemId, tx.quantity);
-      return new JSONObject().put("session", session).put("transactionId", tx.id).put("items", items)
+      if (RewardCatalog.get(tx.itemId).inNativeItems()) items.put(tx.itemId, tx.quantity);
+      return new JSONObject().put("session", run.session).put("profile",run.profile).put("map",run.map).put("transactionId", tx.id).put("items", items)
           .put("research", "research".equals(tx.itemId)).put("supply", "supply".equals(tx.itemId));
     } catch (Exception error) { throw new IllegalStateException(error); }
   }
@@ -247,10 +253,10 @@ final class RewardStore {
           Map<String, Integer> projected = new LinkedHashMap<>(run.items);
           projected.put(tx.itemId, RewardLedger.count(projected, tx.itemId) + tx.quantity);
           validatePartialRemaining(projected, remaining);
-          if (!RewardCatalog.get(tx.itemId).nativeId.isEmpty() && !remaining.containsKey(tx.itemId))
+          if (RewardCatalog.get(tx.itemId).inNativeItems() && !remaining.containsKey(tx.itemId))
             throw new IllegalArgumentException("Missing resumed purchase inventory.");
           observation = new LinkedHashMap<>();
-          for (String id : projected.keySet()) if (!RewardCatalog.get(id).nativeId.isEmpty())
+          for (String id : projected.keySet()) if (RewardCatalog.get(id).inNativeItems())
             observation.put(id, RewardLedger.count(run.remaining, id) + (id.equals(tx.itemId) ? tx.quantity : 0));
         }
         ledger.commitLive(run.session, tx.id, observation);
@@ -259,7 +265,7 @@ final class RewardStore {
 
   private static void validateRemaining(RewardLedger.Run run, Map<String, Integer> remaining) {
     Set<String> expected = new LinkedHashSet<>();
-    for (String id : run.items.keySet()) if (!RewardCatalog.get(id).nativeId.isEmpty()) expected.add(id);
+    for (String id : run.items.keySet()) if (RewardCatalog.get(id).inNativeItems()) expected.add(id);
     if (!remaining.keySet().equals(expected)) throw new IllegalArgumentException("Incomplete native reward inventory.");
     for (String id : remaining.keySet()) if (remaining.get(id) > RewardLedger.count(run.items, id))
       throw new IllegalArgumentException("Invalid native reward quantity.");
@@ -271,12 +277,21 @@ final class RewardStore {
 
   private static void validatePartialRemaining(Map<String, Integer> items, Map<String, Integer> remaining) {
     for (String id : remaining.keySet())
-      if (!items.containsKey(id) || RewardCatalog.get(id).nativeId.isEmpty()
+      if (!items.containsKey(id) || !RewardCatalog.get(id).inNativeItems()
           || remaining.get(id) > RewardLedger.count(items, id))
         throw new IllegalArgumentException("Invalid partial resumed purchase inventory.");
   }
 
+  private static void requireQuoteContext(RewardLedger.Run run,JSONObject quote) {
+    boolean strict="survival".equals(run.profile);
+    for(String id:run.items.keySet())strict|=RewardCatalog.get(id).moreFortress;
+    for(RewardLedger.LiveTx tx:run.transactions.values())if("pending".equals(tx.status))strict|=RewardCatalog.get(tx.itemId).moreFortress;
+    if((strict||quote.has("profile")||quote.has("map"))&&(!run.profile.equals(quote.optString("profile"))||!run.map.equals(quote.optString("map"))))
+      throw new IllegalArgumentException("This purchase belongs to another match profile or map.");
+  }
+
   private static void requireCurrentInventory(RewardLedger.Run run, JSONObject quote) {
+    requireQuoteContext(run,quote);
     if (!run.inventoryPurchaseFloor.isEmpty()
         && !journalHas(quote.opt("transactions"), run.inventoryPurchaseFloor))
       throw new IllegalArgumentException("The native inventory predates the latest purchase.");
@@ -311,14 +326,15 @@ final class RewardStore {
 
   private static String encode(RewardLedger value) {
     try {
-      JSONObject root = new JSONObject().put("version", 4).put("balance", value.balance)
+      JSONObject root = new JSONObject().put("version", 5).put("balance", value.balance)
           .put("pendingAdReward", value.pendingAdReward)
           .put("inventory", new JSONObject(value.inventory)).put("loadout", new JSONObject(value.loadout))
+          .put("survivalLoadout",new JSONObject(value.survivalLoadout))
           .put("completed", new JSONArray(value.completed))
           .put("claimedDifficultyBonuses", new JSONArray(value.claimedDifficultyBonuses));
       JSONArray runs = new JSONArray();
       for (RewardLedger.Run run : value.runs.values()) {
-        JSONObject item = new JSONObject().put("session", run.session).put("map", run.map)
+        JSONObject item = new JSONObject().put("session", run.session).put("map", run.map).put("profile",run.profile)
             .put("baseItems", new JSONObject(run.baseItems)).put("items", new JSONObject(run.items))
             .put("remaining", new JSONObject(run.remaining)).put("refunded", new JSONObject(run.refunded))
             .put("clearedWaves", new JSONArray(run.clearedWaves)).put("waveCredits", run.waveCredits)
@@ -366,7 +382,7 @@ final class RewardStore {
     try {
       JSONObject root = new JSONObject(saved);
       int version = root.getInt("version");
-      if (version != 1 && version != 2 && version != 3 && version != 4) throw new IllegalArgumentException("Unsupported wallet version.");
+      if (version != 1 && version != 2 && version != 3 && version != 4 && version != 5) throw new IllegalArgumentException("Unsupported wallet version.");
       RewardLedger value = new RewardLedger();
       value.balance = root.getInt("balance");
       if (value.balance < 0) throw new IllegalArgumentException("Invalid wallet balance.");
@@ -405,18 +421,27 @@ final class RewardStore {
       value.inventory.putAll(readCounts(root.getJSONObject("inventory")));
       value.loadout.putAll(readCounts(root.getJSONObject("loadout")));
       value.loadout.values().removeIf(quantity -> quantity == 0);
+      if(version>=5)value.survivalLoadout.putAll(readCounts(root.getJSONObject("survivalLoadout")));
+      if(version<5)for(String id:value.inventory.keySet())if(RewardCatalog.get(id).moreFortress)throw new IllegalArgumentException("New stock requires its current wallet version.");
       for (String id : value.loadout.keySet()) if (value.loadout.get(id) > RewardLedger.count(value.inventory, id)
           || value.loadout.get(id) > RewardCatalog.get(id).maxPerMatch) throw new IllegalArgumentException("Invalid next-match quantities.");
       if (RewardLedger.fortressCount(value.loadout) > 3) throw new IllegalArgumentException("Invalid fortress loadout.");
+      for(Map<String,Integer> chosen:java.util.Arrays.asList(value.loadout,value.survivalLoadout)){
+        chosen.values().removeIf(n->n==0);
+        for(String id:chosen.keySet())if(chosen.get(id)>RewardLedger.count(value.inventory,id)||chosen.get(id)>RewardCatalog.get(id).maxPerMatch)throw new IllegalArgumentException("Invalid profile loadout.");
+        if(RewardLedger.fortressCount(chosen)>3)throw new IllegalArgumentException("Invalid profile fortress loadout.");RewardCatalog.requireDependencies(chosen);
+      }
       JSONArray runs = root.getJSONArray("runs");
       for (int i = 0; i < runs.length(); i++) {
         JSONObject item = runs.getJSONObject(i);
         Map<String, Integer> purchased = readCounts(item.getJSONObject("items"));
         Map<String, Integer> initial = version >= 3 ? readCounts(item.getJSONObject("baseItems")) : purchased;
-        RewardLedger.Run run = new RewardLedger.Run(item.getString("session"), item.getString("map"), initial);
+        RewardLedger.Run run = new RewardLedger.Run(item.getString("session"), item.getString("map"),version>=5?item.getString("profile"):"towers", initial);
         if (run.session.isEmpty() || run.map.isEmpty() || value.runs.containsKey(run.session))
           throw new IllegalArgumentException("Invalid saved match identity.");
         run.items.clear(); run.items.putAll(purchased);
+        RewardCatalog.requireDependencies(run.items);
+        for(String id:run.items.keySet()){RewardCatalog.requireEligible(RewardCatalog.get(id),run.profile,run.map);if(version<5&&RewardCatalog.get(id).moreFortress)throw new IllegalArgumentException("New run stock requires current wallet version.");}
         for (String id : run.items.keySet()) if (run.items.get(id) < 1 || run.items.get(id) > RewardCatalog.get(id).maxPerMatch)
           throw new IllegalArgumentException("Invalid purchased match quantity.");
         for (String id : run.baseItems.keySet()) if (run.baseItems.get(id) > RewardLedger.count(run.items, id))
@@ -480,7 +505,7 @@ final class RewardStore {
           // quantities as returned, then reclaim available bank stock on resume.
           if (run.settled) for (String id : run.items.keySet()) {
             int quantity = !run.applied ? run.items.get(id)
-                : RewardCatalog.get(id).nativeId.isEmpty() ? 0 : RewardLedger.count(run.remaining, id);
+                : RewardCatalog.get(id).consumedOnApply() ? 0 : RewardLedger.count(run.remaining, id);
             if (quantity > 0) run.refunded.put(id, quantity);
           }
         }

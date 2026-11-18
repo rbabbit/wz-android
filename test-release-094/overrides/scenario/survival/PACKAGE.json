@@ -1,0 +1,894 @@
+{
+  "version": 94,
+  "noNativeBuild": true,
+  "frozenWASM": {
+    "warzone2100.wasm": "4b0784550ac582e47d3f8ca7437377749925f4ccb0829533a979ed80e1e7aa00",
+    "warzone2100-towers-052.wasm": "ecee0e3d8849acc6be5ad46748ff27852e1249600b05b33966b002748159f17e"
+  },
+  "preservedOtherModeNativeFiles": {
+    "app/src/main/assets/warzone/warzone2100-campaign.data": "e46d5fd97d974316805847a2eb550951120282f81aecbafa9331081c91fcaa03",
+    "app/src/main/assets/warzone/warzone2100-campaign.js": "aeb9b9dd4c9158c2c52bdd66c09a891c987b2233afd646b91b6dbad17f6b65d8",
+    "app/src/main/assets/warzone/warzone2100-duel.data": "584a8be5958871b7d1f133bb4d3ef514737d8cf17b959be05f6659a828ceac47",
+    "app/src/main/assets/warzone/warzone2100-duel.js": "312dbd1ef4b081f842c758b3c6b3485eaae09eaafccfd010aa47a08cc424bffb",
+    "app/src/main/assets/warzone/warzone2100-ffa.data": "7a121336ab3830a585bb962ff2978019f23273f1075c0359fa78fb8da0b7ca98",
+    "app/src/main/assets/warzone/warzone2100-ffa.js": "5d1aaf6b36437c121f30dc0b77509b7bbbdecd43075e52f5a6ee75e5911baef4",
+    "app/src/main/assets/warzone/warzone2100-towers-052.wasm": "ecee0e3d8849acc6be5ad46748ff27852e1249600b05b33966b002748159f17e",
+    "app/src/main/assets/warzone/warzone2100.wasm": "4b0784550ac582e47d3f8ca7437377749925f4ccb0829533a979ed80e1e7aa00"
+  },
+  "suppliedSurvival": {
+    "source": "vendor/survival-094/original/emag-survival.zip",
+    "sha256": "aa510333b961b84fdd14d709b625a3b994e112ef2a125223aa15809bb8936b0f"
+  },
+  "moreFortress": {
+    "source": "vendor/survival-094/original/MoreFortress-v0.6.wz",
+    "sha256": "19d58e8d729387e11d431247fb6d5c24965b4814b7018a4bad3be3cc51b6b73b",
+    "researchImported": false,
+    "stats": {
+      "structure": [
+        "Emplacement-ATGM",
+        "X-Super-AA",
+        "X-Super-AG",
+        "X-Super-Flame",
+        "X-Super-Howitzer",
+        "X-Super-Laser",
+        "X-Super-RIM116"
+      ],
+      "weapons": [
+        "AAGunSuper",
+        "AGFort",
+        "FlameSuper",
+        "HowitzerSuper",
+        "LaserSuper",
+        "RIM116Super",
+        "Rocket-ATGM"
+      ]
+    },
+    "files": [
+      {
+        "path": "components/weapons/ag_barrel_3x.pie",
+        "sha256": "e63aa18929e6ac4c4ff544248164b2cbc612c800154200447e73b53085ce5fa0"
+      },
+      {
+        "path": "components/weapons/atgm_mount.pie",
+        "sha256": "21af7cb56b605b29dcf1ff9352b1416a84ea00e3084b787f63962dad03504065"
+      },
+      {
+        "path": "components/weapons/atgm_weapon.pie",
+        "sha256": "6dff7b60188820eac374ee9bb979a9ac5487b3cf6fc7eef4464df693e9ed2ec6"
+      },
+      {
+        "path": "components/weapons/gnhair-3x.pie",
+        "sha256": "264dbcfdf62d95ef520cc6fe5eeadac8f2ce61cfd3df597e6d89e16e42ecbb04"
+      },
+      {
+        "path": "components/weapons/gnhhowt-3x.pie",
+        "sha256": "64660f6dc78677480e752aefc4f8b0ad63a79d778f9cb28499bfd659915cb745"
+      },
+      {
+        "path": "components/weapons/gnmflmr-3x.pie",
+        "sha256": "fb978ebc339a53c92b889f1e8469f81a73b65c53edc2c932454bc3288f665209"
+      },
+      {
+        "path": "components/weapons/gnmmort-2x.pie",
+        "sha256": "43070365d65ff53de9f651e3c9e05fbce028ee17c9a7adb07456c3b41f609ff6"
+      },
+      {
+        "path": "components/weapons/gnmmorti-2x.pie",
+        "sha256": "c22b930431e7c40ed2d1201de87df2a6be754e9e94394e1bf9abe103cf4dca66"
+      },
+      {
+        "path": "components/weapons/las_barrel_3x.pie",
+        "sha256": "ecc54ae9c52fac6f53c4d714d0066bc23f0a8babc843d1194fbffdc7ef15cc7d"
+      },
+      {
+        "path": "components/weapons/las_body_3x.pie",
+        "sha256": "2f8bf97f75742cd952f303eca1d3af0e15530e604a5d8b56c877f4d4b641b665"
+      },
+      {
+        "path": "components/weapons/mg_body_3x.pie",
+        "sha256": "78cbb8aeaddbeafc4110101dab62ebda6618271934950d2beba636573e171c4e"
+      },
+      {
+        "path": "components/weapons/rim-116.pie",
+        "sha256": "a141f9a7bd8ed2c43b8224c348dabd3ebe16852f4b0ec554aa35e737cf7d6c29"
+      },
+      {
+        "path": "components/weapons/trhair-3x.pie",
+        "sha256": "00e28f8c67b4600a8ba228b6a48c70ad0f663b870710dcdab1d4f456e29f2710"
+      },
+      {
+        "path": "components/weapons/trhhowt-3x.pie",
+        "sha256": "721a79279f10d0d76db91c4d4afd82510f20a4381c55e2a811deab3d7761eb56"
+      },
+      {
+        "path": "components/weapons/trmflmr-3x.pie",
+        "sha256": "7a45712cf174b4c1f41d7b44db654310ea0a72bfa83fbffd52664025a1aa2fde"
+      },
+      {
+        "path": "components/weapons/trmmort-2x.pie",
+        "sha256": "c015b9df2ac12229a673b623c23ea2f0c26843bcbd4e83b6c70ec5f2ca9beaf4"
+      },
+      {
+        "path": "effects/fxaalsht-3x.pie",
+        "sha256": "33b137fabe94cf868f79be3425365a166364dbe6152f4dcf1a82b2e7cc6c3931"
+      },
+      {
+        "path": "effects/fxcammo-5x.pie",
+        "sha256": "c125739708b73a84fac66165cf1c5ce3ea21afafddcea69e8a71309a0a917178"
+      },
+      {
+        "path": "effects/fxcan75m-3x.pie",
+        "sha256": "77adc167a0d3f421c52a673c8190c0c80b612fb5816c2822a091a93ad58b416f"
+      },
+      {
+        "path": "effects/fxdirtsp-3x.pie",
+        "sha256": "1dcb9bcad17a9232afa8df88e43ed985ea69db5b282b724557fb540a102be9aa"
+      },
+      {
+        "path": "effects/fxmethit-2x.pie",
+        "sha256": "4a4aae59469717e36d90766a32cb87b7ec1c65c492ecec37dd6860442ab5a67c"
+      },
+      {
+        "path": "effects/fxmgnvul-mf-2x.pie",
+        "sha256": "07ca9c6a583706185c16635c7fe21dfbc9f6b45f7fac1fd092003d3f098e214b"
+      },
+      {
+        "path": "effects/fxmmort-2x.pie",
+        "sha256": "56567fa299caa9f93f2052f33d82c4c705283f4e539d2bee2cd63aacb0deff1f"
+      },
+      {
+        "path": "effects/fxmplme-blue.pie",
+        "sha256": "f5336a25e9bb809d378a0bb63886195e1039c3f043cbf36af87363baa094edd2"
+      },
+      {
+        "path": "effects/fxplammo_4x.pie",
+        "sha256": "23ac1a0294a58f20a1cc06a272c08379e68fd8a4b81b8786a9f9f8b725a2b075"
+      },
+      {
+        "path": "effects/fxssplsh-3x.pie",
+        "sha256": "9b2dba1f0b0ba25eddc68175be1f1d82890c79e224ec88877634da1a62194d31"
+      },
+      {
+        "path": "effects/fxtracerh-2x.pie",
+        "sha256": "9c72574b6e71a657515b24a43b5402e006537d82586d740732d27e5acf84379a"
+      },
+      {
+        "path": "structs/blmrtpit-2x.pie",
+        "sha256": "8aa74bfb96314a0dfa70e1de7b222ee4a7a2cd734169fbba05e53cae0d8e3ba1"
+      },
+      {
+        "path": "structs/dual_fortress_base.pie",
+        "sha256": "18b16822114c65bc3e6836e97850454cbddf57594c7aef09faa5818ef7340d93"
+      },
+      {
+        "path": "structs/stwpfcan-x3.pie",
+        "sha256": "38eda9bfcf0c13256ebf47e0df9d297430ba470511c3359b4e21d1c332680e58"
+      }
+    ]
+  },
+  "mapProfiles": [
+    {
+      "id": "tdn2",
+      "name": "EMAG TDN2",
+      "level": "Survival-TDN2-T1",
+      "archive": "5c-EMAG-TDN2-",
+      "folder": "5c-EMAG-TDN2",
+      "sourceEntry": "emag suvival/5c-EMAG-TDN2-178298c4a25e1a0ff02f92f8fe270fce8bfaa2d4e35e682a69bbb6e17ce806e5.wz",
+      "sourceSHA256": "178298c4a25e1a0ff02f92f8fe270fce8bfaa2d4e35e682a69bbb6e17ce806e5",
+      "width": 128,
+      "height": 128,
+      "players": 2,
+      "rounds": 60,
+      "prepSeconds": 240,
+      "nativeObjects": "Version2 JSON converted from INI; startpos0/1 swapped, geometry/IDs/modules preserved; unused positions2–4 and binary duplicates omitted",
+      "humanNativePlayer": 0,
+      "humanStartPosition": 0,
+      "originalHumanStartPosition": 1,
+      "enemyNativePlayer": 1,
+      "enemyStartPosition": 1,
+      "originalEnemyStartPosition": 0,
+      "humanStructures": {
+        "A0LightFactory": 5,
+        "A0PowerGenerator": 5,
+        "A0ResearchFacility": 5,
+        "A0CommandCentre": 1,
+        "A0ResourceExtractor": 20,
+        "A0Sat-linkCentre": 1
+      },
+      "humanTrucks": 8,
+      "humanHQ": {
+        "id": "1945",
+        "startpos": "1",
+        "name": "A0CommandCentre",
+        "position": "768, 768, 0",
+        "rotation": "0, 0, 0",
+        "modules": "0"
+      },
+      "removedStructures": 111,
+      "removedDroids": 24,
+      "terrainByteIdentical": true,
+      "mappings": [
+        {
+          "file": "game.map",
+          "sha256": "8effdfb7cee0204c6c9c8cc952e7cddc312f39e2a1f5cace235cd1dc5b4f9680"
+        },
+        {
+          "file": "ttypes.ttp",
+          "sha256": "12e6e97c592aa3d8c3515afdd83d8ffc84cf855ada7f469339d243f2dc673f33"
+        },
+        {
+          "file": "feature.json",
+          "sha256": "fcb53c1a6c71e021a56b85fa6a6013a803c74efec95cfb8e56637fd81a34384a",
+          "sourceINI": "feature.ini",
+          "sourceINISHA256": "ddee351372c7feae3d0d232622113b775b6921a23197560f69f17c82ed17f713"
+        },
+        {
+          "file": "droid.json",
+          "sha256": "f503f442702a5fecaefa194e89c402dd5ead3ba25b99c6590b6fa1fc80aa4abd",
+          "sourceINI": "droid.ini",
+          "sourceINISHA256": "1e2356a141b910127a257ea809eb62e2c1b47e7cdc7c80a110fc889d6e87212e"
+        },
+        {
+          "file": "struct.json",
+          "sha256": "b0b29b3772c8852d172319e6f33d624a23d6534b61f69e4b129a18d1f5dda963",
+          "sourceINI": "struct.ini",
+          "sourceINISHA256": "dd117542630499b2f5efbd68d22b360f727b2387efe56f5e093be743869586d6"
+        }
+      ],
+      "preview": "survival/previews/tdn2.png",
+      "previewMethod": "Actual tile types/heights, oil and human start; map overview, not gameplay screenshot"
+    },
+    {
+      "id": "wave",
+      "name": "EMAG Wave",
+      "level": "Survival-Wave-T1",
+      "archive": "5c-EMAG-Wave-",
+      "folder": "5c-Nussub",
+      "sourceEntry": "emag suvival/5c-EMAG-Wave-0a5bb38539f0763dad5b475a7edc3097c9abfaa6bd91c33e3832cc090481a490.wz",
+      "sourceSHA256": "0a5bb38539f0763dad5b475a7edc3097c9abfaa6bd91c33e3832cc090481a490",
+      "width": 128,
+      "height": 128,
+      "players": 2,
+      "rounds": 60,
+      "prepSeconds": 240,
+      "nativeObjects": "Version2 JSON converted from INI; startpos0/1 swapped, geometry/IDs/modules preserved; unused positions2–4 and binary duplicates omitted",
+      "humanNativePlayer": 0,
+      "humanStartPosition": 0,
+      "originalHumanStartPosition": 1,
+      "enemyNativePlayer": 1,
+      "enemyStartPosition": 1,
+      "originalEnemyStartPosition": 0,
+      "humanStructures": {
+        "A0ResourceExtractor": 40,
+        "A0Sat-linkCentre": 1,
+        "A0ResearchFacility": 5,
+        "A0PowerGenerator": 10,
+        "A0CommandCentre": 1,
+        "A0LightFactory": 5,
+        "A0CyborgFactory": 5
+      },
+      "humanTrucks": 4,
+      "humanHQ": {
+        "id": "2183",
+        "startpos": "1",
+        "name": "A0CommandCentre",
+        "position": "1664, 1664, 0",
+        "rotation": "32768, 0, 0",
+        "modules": "0"
+      },
+      "removedStructures": 201,
+      "removedDroids": 12,
+      "terrainByteIdentical": true,
+      "mappings": [
+        {
+          "file": "game.map",
+          "sha256": "f78967e2c65cc35c5d51df09f299ae7f2debaa2953894bd8d8ed6e18e211c300"
+        },
+        {
+          "file": "ttypes.ttp",
+          "sha256": "12e6e97c592aa3d8c3515afdd83d8ffc84cf855ada7f469339d243f2dc673f33"
+        },
+        {
+          "file": "feature.json",
+          "sha256": "a836f1be72027d86a205d3c5e7d5ae4008845d1e59a2b534eba7ee62e065f36b",
+          "sourceINI": "feature.ini",
+          "sourceINISHA256": "1d1bd3c82cfb14745880f1117573135d8f9381a1dccde149e8d4dd6af4f84def"
+        },
+        {
+          "file": "droid.json",
+          "sha256": "296cfa84caccd97b075f7c5d5e570e1d8ffb55ac15e603c85fab4b7437bf2bd6",
+          "sourceINI": "droid.ini",
+          "sourceINISHA256": "3a1c4573dcccd6dcef94c03f72e6c6f65da255e7cb6bf70099cd3079003f986f"
+        },
+        {
+          "file": "struct.json",
+          "sha256": "99ae321717021d758bff73687cac543a08b03b2bab7e87318442696bdefb0cee",
+          "sourceINI": "struct.ini",
+          "sourceINISHA256": "72c159f78334b6c9fb3ee2cbc0fbd81dafd63a0bffc3a3bc446f2b1490166a63"
+        }
+      ],
+      "preview": "survival/previews/wave.png",
+      "previewMethod": "Actual tile types/heights, oil and human start; map overview, not gameplay screenshot"
+    }
+  ],
+  "oneSuppliedScheduler": true,
+  "firstWaitSeconds": 240,
+  "rounds": 60,
+  "verificationScope": "Static package/syntax/early configuration; gameplay early-game checks are separate, later waves deliberately untested",
+  "towersOverrides": [
+    {
+      "path": "/data/mp/stats/structure.json",
+      "sha256": "566496b008404b9db16840f52520f902501c4e1571b3810c50d9435d986de60a",
+      "bytes": 56999
+    },
+    {
+      "path": "/data/mp/stats/weapons.json",
+      "sha256": "7293e252154d6f7c1192e6976c8086f8135e65aa52762bc269cfb8c898890f4d",
+      "bytes": 97954
+    },
+    {
+      "path": "/data/mp/components/weapons/ag_barrel_3x.pie",
+      "sha256": "e63aa18929e6ac4c4ff544248164b2cbc612c800154200447e73b53085ce5fa0",
+      "bytes": 2624
+    },
+    {
+      "path": "/data/mp/components/weapons/atgm_mount.pie",
+      "sha256": "21af7cb56b605b29dcf1ff9352b1416a84ea00e3084b787f63962dad03504065",
+      "bytes": 1061
+    },
+    {
+      "path": "/data/mp/components/weapons/atgm_weapon.pie",
+      "sha256": "6dff7b60188820eac374ee9bb979a9ac5487b3cf6fc7eef4464df693e9ed2ec6",
+      "bytes": 2378
+    },
+    {
+      "path": "/data/mp/components/weapons/gnhair-3x.pie",
+      "sha256": "264dbcfdf62d95ef520cc6fe5eeadac8f2ce61cfd3df597e6d89e16e42ecbb04",
+      "bytes": 3148
+    },
+    {
+      "path": "/data/mp/components/weapons/gnhhowt-3x.pie",
+      "sha256": "64660f6dc78677480e752aefc4f8b0ad63a79d778f9cb28499bfd659915cb745",
+      "bytes": 2406
+    },
+    {
+      "path": "/data/mp/components/weapons/gnmflmr-3x.pie",
+      "sha256": "fb978ebc339a53c92b889f1e8469f81a73b65c53edc2c932454bc3288f665209",
+      "bytes": 3256
+    },
+    {
+      "path": "/data/mp/components/weapons/gnmmort-2x.pie",
+      "sha256": "43070365d65ff53de9f651e3c9e05fbce028ee17c9a7adb07456c3b41f609ff6",
+      "bytes": 2396
+    },
+    {
+      "path": "/data/mp/components/weapons/gnmmorti-2x.pie",
+      "sha256": "c22b930431e7c40ed2d1201de87df2a6be754e9e94394e1bf9abe103cf4dca66",
+      "bytes": 2358
+    },
+    {
+      "path": "/data/mp/components/weapons/las_barrel_3x.pie",
+      "sha256": "ecc54ae9c52fac6f53c4d714d0066bc23f0a8babc843d1194fbffdc7ef15cc7d",
+      "bytes": 1165
+    },
+    {
+      "path": "/data/mp/components/weapons/las_body_3x.pie",
+      "sha256": "2f8bf97f75742cd952f303eca1d3af0e15530e604a5d8b56c877f4d4b641b665",
+      "bytes": 945
+    },
+    {
+      "path": "/data/mp/components/weapons/mg_body_3x.pie",
+      "sha256": "78cbb8aeaddbeafc4110101dab62ebda6618271934950d2beba636573e171c4e",
+      "bytes": 1459
+    },
+    {
+      "path": "/data/mp/components/weapons/rim-116.pie",
+      "sha256": "a141f9a7bd8ed2c43b8224c348dabd3ebe16852f4b0ec554aa35e737cf7d6c29",
+      "bytes": 6481
+    },
+    {
+      "path": "/data/mp/components/weapons/trhair-3x.pie",
+      "sha256": "00e28f8c67b4600a8ba228b6a48c70ad0f663b870710dcdab1d4f456e29f2710",
+      "bytes": 1353
+    },
+    {
+      "path": "/data/mp/components/weapons/trhhowt-3x.pie",
+      "sha256": "721a79279f10d0d76db91c4d4afd82510f20a4381c55e2a811deab3d7761eb56",
+      "bytes": 3486
+    },
+    {
+      "path": "/data/mp/components/weapons/trmflmr-3x.pie",
+      "sha256": "7a45712cf174b4c1f41d7b44db654310ea0a72bfa83fbffd52664025a1aa2fde",
+      "bytes": 3751
+    },
+    {
+      "path": "/data/mp/components/weapons/trmmort-2x.pie",
+      "sha256": "c015b9df2ac12229a673b623c23ea2f0c26843bcbd4e83b6c70ec5f2ca9beaf4",
+      "bytes": 3215
+    },
+    {
+      "path": "/data/mp/effects/fxaalsht-3x.pie",
+      "sha256": "33b137fabe94cf868f79be3425365a166364dbe6152f4dcf1a82b2e7cc6c3931",
+      "bytes": 971
+    },
+    {
+      "path": "/data/mp/effects/fxcammo-5x.pie",
+      "sha256": "c125739708b73a84fac66165cf1c5ce3ea21afafddcea69e8a71309a0a917178",
+      "bytes": 413
+    },
+    {
+      "path": "/data/mp/effects/fxcan75m-3x.pie",
+      "sha256": "77adc167a0d3f421c52a673c8190c0c80b612fb5816c2822a091a93ad58b416f",
+      "bytes": 1305
+    },
+    {
+      "path": "/data/mp/effects/fxdirtsp-3x.pie",
+      "sha256": "1dcb9bcad17a9232afa8df88e43ed985ea69db5b282b724557fb540a102be9aa",
+      "bytes": 485
+    },
+    {
+      "path": "/data/mp/effects/fxmethit-2x.pie",
+      "sha256": "4a4aae59469717e36d90766a32cb87b7ec1c65c492ecec37dd6860442ab5a67c",
+      "bytes": 489
+    },
+    {
+      "path": "/data/mp/effects/fxmgnvul-mf-2x.pie",
+      "sha256": "07ca9c6a583706185c16635c7fe21dfbc9f6b45f7fac1fd092003d3f098e214b",
+      "bytes": 657
+    },
+    {
+      "path": "/data/mp/effects/fxmmort-2x.pie",
+      "sha256": "56567fa299caa9f93f2052f33d82c4c705283f4e539d2bee2cd63aacb0deff1f",
+      "bytes": 657
+    },
+    {
+      "path": "/data/mp/effects/fxmplme-blue.pie",
+      "sha256": "f5336a25e9bb809d378a0bb63886195e1039c3f043cbf36af87363baa094edd2",
+      "bytes": 215
+    },
+    {
+      "path": "/data/mp/effects/fxplammo_4x.pie",
+      "sha256": "23ac1a0294a58f20a1cc06a272c08379e68fd8a4b81b8786a9f9f8b725a2b075",
+      "bytes": 281
+    },
+    {
+      "path": "/data/mp/effects/fxssplsh-3x.pie",
+      "sha256": "9b2dba1f0b0ba25eddc68175be1f1d82890c79e224ec88877634da1a62194d31",
+      "bytes": 1045
+    },
+    {
+      "path": "/data/mp/effects/fxtracerh-2x.pie",
+      "sha256": "9c72574b6e71a657515b24a43b5402e006537d82586d740732d27e5acf84379a",
+      "bytes": 267
+    },
+    {
+      "path": "/data/mp/structs/blmrtpit-2x.pie",
+      "sha256": "8aa74bfb96314a0dfa70e1de7b222ee4a7a2cd734169fbba05e53cae0d8e3ba1",
+      "bytes": 2125
+    },
+    {
+      "path": "/data/mp/structs/dual_fortress_base.pie",
+      "sha256": "18b16822114c65bc3e6836e97850454cbddf57594c7aef09faa5818ef7340d93",
+      "bytes": 8284
+    },
+    {
+      "path": "/data/mp/structs/stwpfcan-x3.pie",
+      "sha256": "38eda9bfcf0c13256ebf47e0df9d297430ba470511c3359b4e21d1c332680e58",
+      "bytes": 6154
+    },
+    {
+      "path": "/data/mp/tests/warzone-towers-rewards.js",
+      "sha256": "b74c8b2661165afb88b1b3e1f671627ff7578d43764baf2cccba4c70b4267e52",
+      "bytes": 34486
+    },
+    {
+      "path": "/data/mp/tests/warzone-towers-catalog.json",
+      "sha256": "6d6680d7025af2d6343e75be01c4ad16b9ddac95da60dbb4001be257ec28f64a",
+      "bytes": 51846
+    },
+    {
+      "path": "/data/mp/multiplay/script/rules/warzone-towers-catalog.json",
+      "sha256": "6d6680d7025af2d6343e75be01c4ad16b9ddac95da60dbb4001be257ec28f64a",
+      "bytes": 51846
+    },
+    {
+      "path": "/data/mp/tests/warzone-towers-commands.js",
+      "sha256": "62a2f19f29b3654d4e6ce308e9f933ea83f4eb5830e8e714912cd82d65864d4a",
+      "bytes": 99186
+    },
+    {
+      "path": "/data/mp/tests/warzone-towers-bridge.js",
+      "sha256": "7d49175aa558507abee7beaa2985e6353a440d35e7c003cdeaadc0dc16dfa3d4",
+      "bytes": 16823
+    },
+    {
+      "path": "/data/mp/tests/reward-context-094.json",
+      "sha256": "6d6645ea3e071a92051b422187c2551fa9e186abf9bbbb61e9741f9781b2c266",
+      "bytes": 2358
+    },
+    {
+      "path": "/data/mp/multiplay/script/rules/reward-context-094.json",
+      "sha256": "6d6645ea3e071a92051b422187c2551fa9e186abf9bbbb61e9741f9781b2c266",
+      "bytes": 2358
+    },
+    {
+      "path": "/data/mp/tests/reward-context-094.js",
+      "sha256": "f04921a67407810ac154f9e5d1d90ec60ab1a02d9086f435aa3f8c9415e67533",
+      "bytes": 537
+    },
+    {
+      "path": "/data/mp/multiplay/script/rules/init.js",
+      "sha256": "882315aa171163ac956b9da5e4c5d4aed8de6dc2cda057fda464d640ae3c8c9b",
+      "bytes": 412
+    },
+    {
+      "path": "/data/mp/tests/warzone-towers-rules.js",
+      "sha256": "882315aa171163ac956b9da5e4c5d4aed8de6dc2cda057fda464d640ae3c8c9b",
+      "bytes": 412
+    }
+  ],
+  "survivalOverrides": [
+    {
+      "path": "/data/mp/config.js",
+      "sha256": "43be2fe0542596407eb16ca063756cbace895fd5435d0fd7a578ee5195e4714e",
+      "bytes": 8494
+    },
+    {
+      "path": "/data/mp/multiplay/script/mods/Scavengers.js",
+      "sha256": "49f2e1c1c25b322a8ae9f86512e1361c7ea3651aef617654ac66c01555f5a302",
+      "bytes": 697
+    },
+    {
+      "path": "/data/mp/multiplay/script/mods/SaveLoad.js",
+      "sha256": "88b8ff33f586330459989cfc2ea2f2b24dceea5b96082def96dcc9b9fe34a31f",
+      "bytes": 1086
+    },
+    {
+      "path": "/data/mp/multiplay/script/mods/Spawner.js",
+      "sha256": "e3e9599bde2a795230958429c6a9992e7d1ac84533aefd6e7f45c7dbb9a501d0",
+      "bytes": 2033
+    },
+    {
+      "path": "/data/mp/multiplay/script/mods/Template.js",
+      "sha256": "195cd8f684ab18925748f2af10b09005141ebaed1c58b73b4e8807dfba6697b0",
+      "bytes": 2598
+    },
+    {
+      "path": "/data/mp/multiplay/script/mods/configAPI.js",
+      "sha256": "078df359dfcd88a47d7c1fdd3f1f36f8bbf442b9d02de263fa02f8baa8e5771c",
+      "bytes": 948
+    },
+    {
+      "path": "/data/mp/multiplay/script/mods/configReader.js",
+      "sha256": "8b611f4c0bd687420f30b4e2f52f9d7c6ca9e5684199e886769259985abae59c",
+      "bytes": 1070
+    },
+    {
+      "path": "/data/mp/multiplay/script/mods/init.js",
+      "sha256": "c6329426f9e58dfbae3a56657cb93eaf8c79d396ebeaf18863fa022c2128427d",
+      "bytes": 397
+    },
+    {
+      "path": "/data/mp/multiplay/script/mods/tools.js",
+      "sha256": "704b7e350e3c139d1c3819432de9f57c69a6fa2e5642b0a005b34c3f7054f21f",
+      "bytes": 15421
+    },
+    {
+      "path": "/data/mp/multiplay/script/mods/towerDefense.js",
+      "sha256": "7129557fc3d8326103f92d86db70a789cc74b90454ab47f7cb614f576a8e1eb2",
+      "bytes": 2264
+    },
+    {
+      "path": "/data/mp/multiplay/script/rules/endconditions.js",
+      "sha256": "9e0cc64701aab88ea8a05e6f1d3fed0b9d97399b53bf50074d20d4b40380e83d",
+      "bytes": 2838
+    },
+    {
+      "path": "/data/mp/multiplay/script/rules/oildrum.js",
+      "sha256": "cfa87a4b46b24c9ddbd7540da938e3537592d83ca0b6ec496abde052d35dbab4",
+      "bytes": 26
+    },
+    {
+      "path": "/data/mp/multiplay/script/rules/printsettings.js",
+      "sha256": "b59eaa5621fdf9d69b2d410cb9128933f0c9f3f12e54fadfd1c3ccb962984f21",
+      "bytes": 405
+    },
+    {
+      "path": "/data/mp/multiplay/script/rules/reticule.js",
+      "sha256": "a5ce187bbd5e6965444de5e091b6a70c3a5197eacd1e09e4ba73d6bf991631b6",
+      "bytes": 4032
+    },
+    {
+      "path": "/data/mp/multiplay/script/rules/setup/base.js",
+      "sha256": "dcb51e887f6a5b73126250296562215257c042a0ac826f63612e5cf67cbb2784",
+      "bytes": 1544
+    },
+    {
+      "path": "/data/mp/multiplay/script/scavengers/init.js",
+      "sha256": "128913aab09ad4bb1d57c076b541128878c2d4622dcca83497092979f34b5de4",
+      "bytes": 46
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/Scavengers.js",
+      "sha256": "7be6dbeb534404ee774b88ec23b73aace582ee8316ebd32726537eae63afc8c6",
+      "bytes": 758
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/Scavengers.json",
+      "sha256": "7cf4529bc86c164b44050127169262532a89728933d8fdd5dbcc1364953ce31d",
+      "bytes": 104
+    },
+    {
+      "path": "/data/mp/multiplay/script/rules/config.js",
+      "sha256": "43be2fe0542596407eb16ca063756cbace895fd5435d0fd7a578ee5195e4714e",
+      "bytes": 8494
+    },
+    {
+      "path": "/data/mp/multiplay/script/mods/config.js",
+      "sha256": "43be2fe0542596407eb16ca063756cbace895fd5435d0fd7a578ee5195e4714e",
+      "bytes": 8494
+    },
+    {
+      "path": "/data/mp/multiplay/script/mods/configReader.js",
+      "sha256": "cab5ccad87e693829f0ffed2d4d74ce6651a3aaa514d7fad5d8e26bcadde9913",
+      "bytes": 1253
+    },
+    {
+      "path": "/data/mp/tests/warzone-towers-waves.js",
+      "sha256": "8aa37cd700a3bd689dd69c8d2291367a88c1fbeb90c5cb944826d8a77e9a1430",
+      "bytes": 10240
+    },
+    {
+      "path": "/data/mp/tests/warzone-towers-objective.js",
+      "sha256": "8c1b2ae12de8e20a3cd1a99ee96f85fa9140826d3015fa48101ee501f0a32261",
+      "bytes": 1120
+    },
+    {
+      "path": "/data/mp/tests/warzone-towers-bridge.js",
+      "sha256": "d9b21a8231883bad39a1fc1aef057d7b5c81ad2d58d7f8ed0a06022f229f6db1",
+      "bytes": 16461
+    },
+    {
+      "path": "/data/mp/tests/warzone-towers-commands.js",
+      "sha256": "e7a7641aea943576c93e16ea38a25e2f999422782ea29201dc4135e5b8b9e631",
+      "bytes": 97561
+    },
+    {
+      "path": "/data/mp/tests/warzone-towers-rewards.js",
+      "sha256": "b74c8b2661165afb88b1b3e1f671627ff7578d43764baf2cccba4c70b4267e52",
+      "bytes": 34486
+    },
+    {
+      "path": "/data/mp/tests/warzone-towers-catalog.json",
+      "sha256": "6d6680d7025af2d6343e75be01c4ad16b9ddac95da60dbb4001be257ec28f64a",
+      "bytes": 51846
+    },
+    {
+      "path": "/data/mp/multiplay/script/rules/warzone-towers-catalog.json",
+      "sha256": "6d6680d7025af2d6343e75be01c4ad16b9ddac95da60dbb4001be257ec28f64a",
+      "bytes": 51846
+    },
+    {
+      "path": "/data/mp/tests/warzone-towers-command.json",
+      "sha256": "df1e324fde90935439fb53fd2b4e630cd44bef94521b08577196f684f2081a65",
+      "bytes": 30
+    },
+    {
+      "path": "/data/mp/multiplay/script/rules/warzone-towers-command.json",
+      "sha256": "df1e324fde90935439fb53fd2b4e630cd44bef94521b08577196f684f2081a65",
+      "bytes": 30
+    },
+    {
+      "path": "/data/mp/tests/warzone-towers-control-command.json",
+      "sha256": "99cbb1c61cd9c00eb89e7f8b9b6fc8fbdfc8ba4546d074495c308e3bd39ac59a",
+      "bytes": 37
+    },
+    {
+      "path": "/data/mp/multiplay/script/rules/warzone-towers-control-command.json",
+      "sha256": "99cbb1c61cd9c00eb89e7f8b9b6fc8fbdfc8ba4546d074495c308e3bd39ac59a",
+      "bytes": 37
+    },
+    {
+      "path": "/data/mp/tests/warzone-towers-wave-command.json",
+      "sha256": "1dc532fa58bae1a70d84c9022f73c59dd2bc5498c6499bb2991fca804b5c7e7f",
+      "bytes": 25
+    },
+    {
+      "path": "/data/mp/multiplay/script/rules/warzone-towers-wave-command.json",
+      "sha256": "1dc532fa58bae1a70d84c9022f73c59dd2bc5498c6499bb2991fca804b5c7e7f",
+      "bytes": 25
+    },
+    {
+      "path": "/data/mp/tests/blocknight-queue-command.json",
+      "sha256": "53dd57002898f6f166540e6d7aa63789601354abc7340c558d71981fb7df721c",
+      "bytes": 36
+    },
+    {
+      "path": "/data/mp/multiplay/script/rules/blocknight-queue-command.json",
+      "sha256": "53dd57002898f6f166540e6d7aa63789601354abc7340c558d71981fb7df721c",
+      "bytes": 36
+    },
+    {
+      "path": "/data/mp/tests/blocknight-zoom-command.json",
+      "sha256": "bdd487b46d532a234f7a1293b54fa86d79c807d0e0fea8e455442c819374a081",
+      "bytes": 60
+    },
+    {
+      "path": "/data/mp/multiplay/script/rules/blocknight-zoom-command.json",
+      "sha256": "bdd487b46d532a234f7a1293b54fa86d79c807d0e0fea8e455442c819374a081",
+      "bytes": 60
+    },
+    {
+      "path": "/data/mp/tests/survival-config.json",
+      "sha256": "11e2c0c517a21a2c5b5a24a278840645029df102eeae522e78de34ad0c89152c",
+      "bytes": 120
+    },
+    {
+      "path": "/data/mp/multiplay/script/survival-config.json",
+      "sha256": "11e2c0c517a21a2c5b5a24a278840645029df102eeae522e78de34ad0c89152c",
+      "bytes": 120
+    },
+    {
+      "path": "/data/mp/multiplay/script/rules/survival-config.json",
+      "sha256": "11e2c0c517a21a2c5b5a24a278840645029df102eeae522e78de34ad0c89152c",
+      "bytes": 120
+    },
+    {
+      "path": "/data/mp/multiplay/script/rules/init.js",
+      "sha256": "7d3e2e34d85c9aacfaeec6c30cbd51de6c85e5c7ca7ad67923f2c1963c90788b",
+      "bytes": 450
+    },
+    {
+      "path": "/data/mp/tests/survival-policy.js",
+      "sha256": "cd9e36461a753306bca0f236e0271e12c283eafc94d9aab8ddc24f0bc32a0bcd",
+      "bytes": 1481
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/survival-enemy.js",
+      "sha256": "72d67ee582fb29db18d7cdc0f55161834b307dd34d38968051ee12b256bbc3a8",
+      "bytes": 434
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/survival-enemy.json",
+      "sha256": "694dacf12c1989b5329cb85fa27b767bc8f97186ad8fe16dc9b5c71807b61aaf",
+      "bytes": 61
+    },
+    {
+      "path": "/data/mp/multiplay/script/rules/printsettings.js",
+      "sha256": "f831daf3f3861dc0dfe832345dfd034dcd6e5242e9d885b4c509be40194348f5",
+      "bytes": 32
+    },
+    {
+      "path": "/data/mp/multiplay/maps/survival-tdn2/game.map",
+      "sha256": "8effdfb7cee0204c6c9c8cc952e7cddc312f39e2a1f5cace235cd1dc5b4f9680",
+      "bytes": 49176
+    },
+    {
+      "path": "/data/mp/multiplay/maps/survival-tdn2/ttypes.ttp",
+      "sha256": "12e6e97c592aa3d8c3515afdd83d8ffc84cf855ada7f469339d243f2dc673f33",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/survival-tdn2/feature.json",
+      "sha256": "fcb53c1a6c71e021a56b85fa6a6013a803c74efec95cfb8e56637fd81a34384a",
+      "bytes": 5586
+    },
+    {
+      "path": "/data/mp/multiplay/maps/survival-tdn2/droid.json",
+      "sha256": "f503f442702a5fecaefa194e89c402dd5ead3ba25b99c6590b6fa1fc80aa4abd",
+      "bytes": 836
+    },
+    {
+      "path": "/data/mp/multiplay/maps/survival-tdn2/struct.json",
+      "sha256": "b0b29b3772c8852d172319e6f33d624a23d6534b61f69e4b129a18d1f5dda963",
+      "bytes": 3863
+    },
+    {
+      "path": "/data/mp/multiplay/maps/survival-tdn2.gam",
+      "sha256": "13588b6a88011384d149a80316452d1eb4403e94d7358db8ce3b95ddab53aa50",
+      "bytes": 52
+    },
+    {
+      "path": "/data/mp/tests/survival-tdn2.json",
+      "sha256": "9f24887a091c2e5b953f2dc0e705d27b81b8cf128a5e5fea9c742fea5944309f",
+      "bytes": 708
+    },
+    {
+      "path": "/data/mp/multiplay/maps/survival-wave/game.map",
+      "sha256": "f78967e2c65cc35c5d51df09f299ae7f2debaa2953894bd8d8ed6e18e211c300",
+      "bytes": 49176
+    },
+    {
+      "path": "/data/mp/multiplay/maps/survival-wave/ttypes.ttp",
+      "sha256": "12e6e97c592aa3d8c3515afdd83d8ffc84cf855ada7f469339d243f2dc673f33",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/survival-wave/feature.json",
+      "sha256": "a836f1be72027d86a205d3c5e7d5ae4008845d1e59a2b534eba7ee62e065f36b",
+      "bytes": 11546
+    },
+    {
+      "path": "/data/mp/multiplay/maps/survival-wave/droid.json",
+      "sha256": "296cfa84caccd97b075f7c5d5e570e1d8ffb55ac15e603c85fab4b7437bf2bd6",
+      "bytes": 760
+    },
+    {
+      "path": "/data/mp/multiplay/maps/survival-wave/struct.json",
+      "sha256": "99ae321717021d758bff73687cac543a08b03b2bab7e87318442696bdefb0cee",
+      "bytes": 7090
+    },
+    {
+      "path": "/data/mp/multiplay/maps/survival-wave.gam",
+      "sha256": "13588b6a88011384d149a80316452d1eb4403e94d7358db8ce3b95ddab53aa50",
+      "bytes": 52
+    },
+    {
+      "path": "/data/mp/tests/survival-wave.json",
+      "sha256": "165b9e3d751641b66c0132a7a3ec6f8e908cfc2dcdee63246e3f0a600d1d2318",
+      "bytes": 708
+    },
+    {
+      "path": "/data/mp/addon.lev",
+      "sha256": "0045d3398751fbaecf1ef23ee6df7662ecbaa8f623b50ab13221c3011034a09e",
+      "bytes": 15582
+    },
+    {
+      "path": "/data/mp/stats/structure.json",
+      "sha256": "566496b008404b9db16840f52520f902501c4e1571b3810c50d9435d986de60a",
+      "bytes": 56999
+    },
+    {
+      "path": "/data/mp/tests/reward-context-094.json",
+      "sha256": "6d6645ea3e071a92051b422187c2551fa9e186abf9bbbb61e9741f9781b2c266",
+      "bytes": 2358
+    },
+    {
+      "path": "/data/mp/multiplay/script/rules/reward-context-094.json",
+      "sha256": "6d6645ea3e071a92051b422187c2551fa9e186abf9bbbb61e9741f9781b2c266",
+      "bytes": 2358
+    },
+    {
+      "path": "/data/mp/tests/reward-context-094.js",
+      "sha256": "f04921a67407810ac154f9e5d1d90ec60ab1a02d9086f435aa3f8c9415e67533",
+      "bytes": 537
+    }
+  ],
+  "outputs": [
+    {
+      "path": "app/src/main/assets/warzone/warzone2100.data",
+      "bytes": 78845403,
+      "sha256": "4fec68df0c27d37d586609c7c828e69b626689534635f2cfac7bceae3d86a65c"
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100.js",
+      "bytes": 800411,
+      "sha256": "3ac3d3f6e610c25bbd784033af73be5bb5ed8bd1100239f8ebc5c2269a746827"
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100-towers-052.js",
+      "bytes": 800411,
+      "sha256": "47d44f1db19bae0f59562ad5d72226f1492a3a42550a265205e9c8979d6d3790"
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100-survival.js",
+      "bytes": 802601,
+      "sha256": "905df467bafdd26b3748d8bee1df00a5436b373f67aeab8a1544db625456dfff"
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100-survival.data",
+      "bytes": 79382954,
+      "sha256": "b7174d085e3723d51954895d21e57f7777048adf50c38f0009492d423fad1f0e"
+    },
+    {
+      "path": "app/src/main/assets/warzone/index-survival.html",
+      "bytes": 101819,
+      "sha256": "163cba3b88ad52324f4927d06e3b7073233551a68c57a769c8bf362cde038246"
+    },
+    {
+      "path": "app/src/main/assets/warzone/mobile-survival.html",
+      "bytes": 4428,
+      "sha256": "c93d118ba14b8f5e3bdcd1dcc8d16659424ac07a265eef5230f126fa6134eb16"
+    }
+  ]
+}

@@ -532,6 +532,18 @@ body.wt-towers-polished #warzone-command-strip #blocknight-combat-hud :is(#wt-al
   --wt-button-ink:#63e682!important;
 }
 
+/* Repair is a persistent native stance. Green follows its acknowledged ON;
+ * later enrollment of new units uses the same latch without changing its face. */
+body.wt-towers-polished #warzone-command-strip #blocknight-combat-hud :is(#wt-repair,#wt-campaign-repair,#blocknight-repair) {
+  --wt-button-bg:#000!important;
+  --wt-button-ink:#f4f4f4!important;
+  --wt-button-muted:var(--towers-muted,#bcbcbc);
+  --wt-button-edge:#404040;--wt-button-icon-filter:invert(1);
+}
+body.wt-towers-polished #warzone-command-strip #blocknight-combat-hud :is(#wt-repair,#wt-campaign-repair,#blocknight-repair)[data-repair-enabled=true] {
+  --wt-button-ink:#63e682!important;
+}
+
 
 /* Clean Players surface; native visibility and gameplay handlers are unchanged. */
 #wt-players-close{display:none!important}

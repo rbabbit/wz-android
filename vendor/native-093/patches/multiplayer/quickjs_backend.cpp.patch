@@ -1,0 +1,112 @@
+--- a/src/quickjs_backend.cpp
++++ b/src/quickjs_backend.cpp
+@@ -4000,6 +4000,7 @@
+ #include <set>
+ #include "terrain.h"
+ #include "geometry.h"
++#include "lib/netplay/netreplay.h"
+ #include "display.h"
+ #include "lib/widget/label.h"
+ #include "lib/sound/mixer.h"
+@@ -4047,22 +4048,33 @@
+ }
+ static bool mpMobileCanIssueOrders()
+ {
+-    return GetGameMode()==GS_NORMAL&&gameInitialised&&!mpMobileLoading&&mpMobileViewReady&&mpMobileOwner().ownsViewedPlayer;
+-}
+-
+-#include "mobile-combat-latch-v90.h"
++    return GetGameMode()==GS_NORMAL&&gameInitialised&&!mpMobileLoading&&mpMobileViewReady&&mpMobileOwner().ownsViewedPlayer&&!NETisReplay();
++}
++
++#include "mobile-combat-latch-v93.h"
++#include "mobile-repair-policy-v93.h"
++#include "mobile-guarded-stop-v93.h"
+ using MpCombatSelectionPolicy=MobileCombatLatchV90;
+ 
+ static nlohmann::json mobileCombatAckV90(const MobileCombatLatchV90 &policy,
+-    const nlohmann::json &combat, const nlohmann::json &selected)
+-{
+-    return {{"enabled",policy.enabled},{"suspended",policy.suspended},{"requestedSuspended",policy.requestedSuspended},
++    const nlohmann::json &combat, const nlohmann::json &selected, const std::set<uint32_t> &protectedIds)
++{
++    auto commandable=nlohmann::json::array();
++    for(const auto &id:combat)if(!protectedIds.count(id.get<uint32_t>()))commandable.push_back(id);
++    return {{"player",selectedPlayer},{"commandableIds",commandable},{"protectedIds",protectedIds},{"enabled",policy.enabled},{"suspended",policy.suspended},{"requestedSuspended",policy.requestedSuspended},
+         {"reason",policy.reason},{"requestNonce",policy.requestNonce},{"activation",policy.activation},{"context",policy.context},
+         {"pendingDeselect",policy.pendingDeselect},{"deselectNonce",policy.deselectNonce},{"deselectAppliedNonce",policy.deselectAppliedNonce},
+         {"combatIds",combat},{"selectedIds",selected},{"revision",policy.revision}};
+ }
+ 
+ static MpCombatSelectionPolicy mpMobileCombatPolicy;
++static MobileRepairPolicyV93 mpMobileRepairPolicyV93;
++bool mobileCombatProtectsV93(const DROID *droid)
++{
++    return mpMobileCombatPolicy.enabled && mpMobileCanIssueOrders()
++        && droid && droid->player==selectedPlayer && mpMobileRepairPolicyV93.protects(droid);
++}
++static MobileGuardedStopV93 mpMobileGuardedStopV93;
+ static std::string mpMobileCombatInputNonce;
+ static nlohmann::json mpMobileCombatState={{"enabled",false},{"suspended",false},{"reason","off"},{"combatIds",nlohmann::json::array()},{"selectedIds",nlohmann::json::array()},{"revision",0},{"requestNonce",""}};
+ static bool mpMobileCombatEligible(const DROID *droid)
+@@ -4156,9 +4168,15 @@
+ 
+ static void mpMobileCombatFrame(bool world,bool safe)
+ {
++    mpMobileRepairPolicyV93.observeContext(world,mpMobileCombatPolicy.context);
++    mpMobileRepairPolicyV93.readIntent("/tmp/mp-mobile-repair-v93.json");
++    std::vector<DROID*> repairDroids;
++    if(world&&selectedPlayer<MAX_PLAYERS)for(DROID *droid:apsDroidLists[selectedPlayer])repairDroids.push_back(droid);
++    mpMobileRepairPolicyV93.frame(world,safe,repairDroids);
++    mpMobileGuardedStopV93.observeContext(world?mpMobileCombatPolicy.context:std::string());
+     std::vector<MobileCombatUnitV90> units;
+     if(world&&selectedPlayer<MAX_PLAYERS)for(const DROID *droid:apsDroidLists[selectedPlayer])
+-        units.push_back({droid->id,mpMobileCombatEligible(droid),droid->selected!=0});
++        units.push_back({droid->id,mpMobileCombatEligible(droid),droid->selected!=0,mpMobileRepairPolicyV93.protects(droid)});
+     const auto changes=mpMobileCombatPolicy.reconcile(units,safe);
+     if(changes.changed())
+     {
+@@ -4176,7 +4194,8 @@
+     }
+     for(const auto id:combatIds)combat.push_back(id);
+     for(const auto id:selectedIds)selected.push_back(id);
+-    mpMobileCombatState=mobileCombatAckV90(mpMobileCombatPolicy,combat,selected);
++    for(auto &unit:mpMobileRepairPolicyV93.units)unit["selected"]=selectedIds.count(unit["id"].get<uint32_t>())!=0;
++    mpMobileCombatState=mobileCombatAckV90(mpMobileCombatPolicy,combat,selected,mpMobileRepairPolicyV93.protectedIds);
+ }
+ 
+ static void mpMobilePruneEvents()
+@@ -4305,6 +4324,15 @@
+     mpMobileInputNonce=nonce;
+     const auto action=request.value("action",std::string());bool ok=false;
+     const bool allowed=mpMobileCanIssueOrders();
++    if(action=="stop-selected") {
++        const bool safe=allowed&&!InGameOpUp&&!isInGamePopupUp&&!bLoadSaveUp&&intMode==INT_NORMAL&&!gamePaused()&&!gameUpdatePaused();
++        std::vector<DROID*> droids;
++        if(allowed)for(DROID *droid:apsDroidLists[selectedPlayer])droids.push_back(droid);
++        mpMobileGuardedStopV93.apply(request,allowed,safe,mpMobileCombatPolicy.enabled,
++            mpMobileCombatPolicy.context,mpMobileCombatPolicy.activation,selectedPlayer,droids,
++            [](const DROID *droid){return mobileCombatProtectsV93(droid);});
++        mpMobileWriteFile("/tmp/mp-mobile-input-result.json",mpMobileGuardedStopV93.ack.dump());return;
++    }
+     if(allowed&&(action=="deselect"||action=="select-box"||action=="select-visible-trucks")) {
+         const bool add=request.value("add",false);
+         double left=request.value("left",0.0),top=request.value("top",0.0),right=request.value("right",0.0),bottom=request.value("bottom",0.0);
+@@ -4403,7 +4431,7 @@
+     const bool nativeMenu=InGameOpUp||isInGamePopupUp||bLoadSaveUp||intMode!=INT_NORMAL;
+     const bool safe=world&&!nativeMenu&&!gamePaused()&&!gameUpdatePaused();
+     const auto owner=mpMobileOwner();
+-    const bool canIssueOrders=world&&owner.ownsViewedPlayer;
++    const bool canIssueOrders=world&&owner.ownsViewedPlayer&&!NETisReplay();
+     if(!canIssueOrders&&mpMobileVM){mpMobileUIContext=nullptr;mpMobileVM.reset();mpMobileLastTick=0;mpMobileEvents.clear();++mpMobileEventSerial;}
+     mpMobileCombatIntent();
+     if(world)mpMobileInput();
+@@ -4415,7 +4443,7 @@
+         {"nativeMenuOpen",nativeMenu},{"worldSafe",safe},{"cameraSafe",safe},{"player",selectedPlayer},{"realPlayer",realSelectedPlayer},{"spectator",owner.spectator},{"canIssueOrders",canIssueOrders},{"playerName",std::string(sPlayer)},{"networkName",realSelectedPlayer<NetPlay.players.size()?std::string(NetPlay.players[realSelectedPlayer].name):std::string()},{"protocolMajor",NETGetMajorVersion()},{"protocolMinor",NETGetMinorVersion()},{"gameTime",gameTime},
+         {"power",canIssueOrders?getPower(selectedPlayer):0},{"queuedPower",canIssueOrders?getQueuedPower(selectedPlayer):0},
+         {"uiStatus",world?mpMobileStatus():nlohmann::json{{"timerText",""},{"connectionText",""},{"kind","normal"},{"connections",nlohmann::json::array()}}},
+-        {"combatLock",mpMobileCombatState},
++        {"combatLock",mpMobileCombatState},{"repairPolicy",mpMobileRepairPolicyV93.snapshot()},
+         {"view",{{"matrix",mpMobileMatrix},{"frame",mpMobileFrameSerial},{"capturedAt",realTime},{"width",pie_GetVideoBufferWidth()},{"height",pie_GetVideoBufferHeight()},{"left",0},{"top",0},
+         {"camera",{{"x",playerPos.p.x},{"y",playerPos.p.z},{"yaw",playerPos.r.y},{"pitch",playerPos.r.x},{"distance",getViewDistance()},
+         {"requestNonce",mpMobileAppliedCameraNonce},{"limits",{{"yawPeriod",DEG(360)},{"pitchMin",DEG(360+MIN_PLAYER_X_ANGLE)},{"pitchMax",DEG(360+MAX_PLAYER_X_ANGLE)},{"distanceMin",MINDISTANCE},{"distanceMax",NETisReplay()?MAXDISTANCE_REPLAY:MAXDISTANCE}}}}}}},{"radar",radar}};

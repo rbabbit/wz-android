@@ -20,14 +20,15 @@ final class BattleLaunchSpec {
   BattleLaunchSpec(String matchMode, String duelWeapon, String mapId, boolean musicEnabled, String difficulty, String botType) {
     this.matchMode = matchMode(matchMode);
     this.duelWeapon = duelWeapon(duelWeapon);
-    this.mapId = "ffa".equals(this.matchMode) ? ffaMapId(mapId) : mapId(mapId);
+    this.mapId = "ffa".equals(this.matchMode) ? ffaMapId(mapId)
+        : "survival".equals(this.matchMode) ? SurvivalMapCatalog.get(mapId).id : mapId(mapId);
     this.musicEnabled = musicEnabled;
     this.ffaDifficulty = ffaDifficulty(difficulty);
     this.ffaBotType = ffaBotType(botType);
   }
 
   static String matchMode(String value) {
-    return "ffa".equals(value) ? "ffa" : "campaign".equals(value) ? "campaign" : "duel".equals(value) ? "duel" : "towers";
+    return "survival".equals(value) ? "survival" : "ffa".equals(value) ? "ffa" : "campaign".equals(value) ? "campaign" : "duel".equals(value) ? "duel" : "towers";
   }
   static String ffaDifficulty(String value) {
     String normalized = value == null ? "" : value.toLowerCase(java.util.Locale.ROOT);
@@ -51,6 +52,7 @@ final class BattleLaunchSpec {
   }
   boolean isDuel() { return "duel".equals(matchMode); }
   boolean isCampaign() { return "campaign".equals(matchMode); }
+  boolean isSurvival() { return "survival".equals(matchMode); }
   static String campaignChapter(String level) {
     String name = level == null ? "" : level.toUpperCase(java.util.Locale.ROOT);
     if (name.startsWith("CAM_1") || name.startsWith("SUB_1")) return "Alpha campaign";

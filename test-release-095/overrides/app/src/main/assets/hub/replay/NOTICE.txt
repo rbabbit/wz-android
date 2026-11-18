@@ -1,0 +1,16 @@
+Warzone Towers focused replay viewer
+
+Adapted from MaWay2000/boha by MM, pinned source commit dcaf96520aa47f7a71160cae33da32e5ece1d5f0.
+https://github.com/MaWay2000/boha
+The upstream web code is MIT licensed; see LICENSE and mapmaker/LICENSE.
+Adaptations: focused battlefield layout; native allowlisted data proxy; lifecycle
+pause/dispose and read-only QA report. Raw replay parsing, real telemetry-derived
+positions, map terrain, Three.js models and camera/playback retain upstream logic.
+Hidden inert compatibility DOM is retained; analytics UI is not rendered or shown.
+
+Warzone 2100 game data/models/textures retain upstream provenance and licenses.
+See COPYING.WARZONE, COPYING.WARZONE.README and assets/vendor/warzone-effects/.
+Three.js is MIT licensed; see mapmaker/js/THREE-LICENSE.txt.
+No third-party accounts or credentials are bundled. Replays require online raw
+replay data and compatible processed replay telemetry; unsupported matches are
+reported as unavailable, never replaced by invented or simulated footage.

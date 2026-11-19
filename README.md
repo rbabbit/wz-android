@@ -1,6 +1,12 @@
 # Warzone Towers
 
-**Current test revision: 0.95 (version code95).** The combined backup includes automatic Medium-damage repair and protected ALL COMBAT (0.93), single-player Survival on TDN2/Wave plus crystal-only More Fortress items and save/load fixes (0.94), and Hub Watch Replay with battlefield/minimap/playback controls (0.95). Accepted cellular lobby networking and polished Players panels are retained.
+**Current Maps test revision: 0.99.10 (version code 110).** Maps includes the official map catalogue, all supported player counts, bot and difficulty selection, the compact map preview/menu and paging fixes, plus FFA or locked Teams with presets, editable player assignments and team save/load support. The additional Dumbot25a, RatBot personalities and Wally sources, runtime assets and licence notices are included.
+
+[Maps feature and build notes](docs/releases/0.99.10-maps.md). The checkout includes the runtime assets needed to build this revision; regenerating the extra bot bundle is optional. No tests were run for the Teams delivery or this source-only GitHub commit, as requested. This commit does not upload an APK or change the VPS update feed.
+
+## Preserved combined test backup: 0.95
+
+The combined backup includes automatic Medium-damage repair and protected ALL COMBAT (0.93), single-player Survival on TDN2/Wave plus crystal-only More Fortress items and save/load fixes (0.94), and Hub Watch Replay with battlefield/minimap/playback controls (0.95). Accepted cellular lobby networking and polished Players panels are retained.
 
 [Normal test APKs and complete source backup](https://github.com/rbabbit/wz-android/releases/tag/v0.95-test) · [Combined backup inventory](docs/releases/0.95-combined-test-backup.md) · [Latest replay audit](archive/v0.95-test/AUDIT095.md)
 

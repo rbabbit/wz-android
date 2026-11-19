@@ -354,6 +354,18 @@
     const feedback=(phase,status)=>{state.phase=phase;state.status=status;state.statusAt=Date.now();emit();};
     const validName=name=>{if(typeof name!=='string'||!name||name.length>240||name.startsWith('/')||name.includes('\\')||name.split('/').some(part=>!part||part==='.'||part==='..'||!/^[A-Za-z0-9_.-]{1,80}$/.test(part)))throw Error('The '+label+' save contains an invalid file name.');return name;};
     const json=bytes=>JSON.parse(new TextDecoder().decode(bytes));
+    function teamSetup(value,count=ffaDescriptor()?.players){
+      const gameType=value?.gameType??'ffa',entries=value?.teams;
+      if(!Number.isInteger(count)||count<2||count>10||!['ffa','teams'].includes(gameType))throw Error('The saved map game type is invalid.');
+      const teams=entries===undefined&&gameType==='ffa'?Array.from({length:count},(_,i)=>i):entries;
+      if(!Array.isArray(teams)||teams.length!==count||teams.some((team,i)=>!Number.isInteger(team)||team<0||team>=count||(gameType==='ffa'&&team!==i))
+          ||gameType==='teams'&&new Set(teams).size<2)throw Error('The saved map teams are invalid.');
+      return{gameType,teams:[...teams]};
+    }
+    function sameTeamSetup(left,right){
+      const first=teamSetup(left),second=teamSetup(right);
+      return first.gameType===second.gameType&&first.teams.every((team,i)=>team===second.teams[i]);
+    }
     function decode(values){
       if(!values||Array.isArray(values)||typeof values!=='object')throw Error('The '+label+' save files are missing.');
       const entries=Object.entries(values);if(!entries.length||entries.length>256)throw Error('The '+label+' save has too many files.');
@@ -366,19 +378,25 @@
     function ffaGlobals(decoded,metadata){
       return Object.values(json(decoded.get('scriptstate.json'))).find(value=>value&&typeof value==='object'
         &&value.ffaSession===metadata.session&&value.ffaConfig?.mode==='ffa'&&value.ffaConfig.map===metadata.mapId
-        &&value.ffaConfig.difficulty===metadata.difficulty&&value.ffaConfig.player===0&&!value.ffaOutcome);
+        &&value.ffaConfig.difficulty===metadata.difficulty&&value.ffaConfig.player===0&&!value.ffaOutcome&&sameTeamSetup(value.ffaConfig,metadata));
     }
     function savedBotType(metadata){
       if(!Object.prototype.hasOwnProperty.call(metadata,'botType'))return 'nullbot';
-      if(!['cobra','nullbot'].includes(metadata.botType))throw Error('The FFA save bot identity is invalid.');
+      if(!window.WarzoneDownloadedMaps?.nativeBot(metadata.botType))throw Error('The FFA save bot identity is invalid.');
       return metadata.botType;
     }
     function liveBotType(snapshot){
-      const type=snapshot?.botType,script=type==='cobra'?'Cobra.js':'ffa-nullbot.js';
-      if(!['cobra','nullbot'].includes(type)||!Array.isArray(snapshot.players))throw Error('The native FFA bot identity is unavailable.');
+      const type=snapshot?.botType,identity=window.WarzoneDownloadedMaps?.nativeBot(type),script=identity?.script.split('/').pop();
+      if(!identity||!Array.isArray(snapshot.players))throw Error('The native FFA bot identity is unavailable.');
       if(type!==config?.botType)throw Error('The native FFA bots do not match the requested match.');
       const count=ffaDescriptor()?.players;
       if(!count||snapshot.map!==config.map||snapshot.maxPlayers!==count||snapshot.players.length!==count)throw Error('The native FFA map or player count is unavailable.');
+      if(!sameTeamSetup(snapshot,config))throw Error('The native map teams do not match this match.');
+      const setup=teamSetup(config);
+      if(setup.gameType==='teams')for(let player=0;player<count;player++){
+        const slots=snapshot.players.filter(value=>value.player===player);
+        if(slots.length!==1||slots[0].team!==setup.teams[player])throw Error('The native player slots do not match their teams.');
+      }
       for(let player=1;player<count;player++){
         const bots=snapshot.players.filter(value=>value.player===player);
         if(bots.length!==1||bots[0].botType!==type||String(bots[0].scriptName||'').split(/[\\/]/).pop()!==script)
@@ -387,19 +405,20 @@
       return type;
     }
     function validateFfaBots(decoded,metadata,gam){
-      const type=savedBotType(metadata),name=type==='cobra'?'Cobra':'NullBot (ground)',script=type==='cobra'?'Cobra':'ffa-nullbot';
+      const type=savedBotType(metadata),identity=window.WarzoneDownloadedMaps.nativeBot(type),name=identity.name,script=identity.script.split('/').pop().replace(/\.js$/,'');
       const main=json(decoded.get('main.json')),savedScripts=json(decoded.get('scriptstate.json'));
       const difficulty={easy:1,medium:2,hard:3}[metadata.difficulty];
       const map=ffaDescriptor(),count=map?.players;
+      const setup=teamSetup(metadata,count),alliance=setup.gameType==='teams'?2:0;
       if(!count||!Array.isArray(gam.netPlayers)||!Array.isArray(main.players)||gam.multiMaxPlayers!==count||main.maxPlayers!==count
           ||main.levelName!==map.level||gam.levelName!==map.level||main.selectedPlayer!==0||gam.netSelectedPlayer!==0
-          ||main.allianceSetting!==0||gam.multiAlliance!==0)throw Error('The saved FFA map or bot identity is missing.');
+          ||main.allianceSetting!==alliance||gam.multiAlliance!==alliance)throw Error('The saved map or bot identity is missing.');
       for(let player=0;player<count;player++){
         const slot=main.players.filter(value=>value.index===player),native=gam.netPlayers[player];
-        if(slot.length!==1||!native||slot[0].position!==player||slot[0].team!==player||native.position!==player||native.team!==player
+        if(slot.length!==1||!native||slot[0].position!==player||slot[0].team!==setup.teams[player]||native.position!==player||native.team!==setup.teams[player]
             ||Boolean(slot[0].allocated)!==(player===0)||Boolean(native.allocated)!==(player===0)
-            ||!Array.isArray(slot[0].alliances)||slot[0].alliances.length<count||slot[0].alliances.slice(0,count).some((value,other)=>other!==player&&value!==0))
-          throw Error('The saved FFA slots are not independent opponents.');
+            ||!Array.isArray(slot[0].alliances)||slot[0].alliances.length<count||slot[0].alliances.slice(0,count).some((value,other)=>value!==(setup.teams[player]===setup.teams[other]?3:0)))
+          throw Error('The saved player slots or alliances do not match their teams.');
       }
       for(let player=1;player<count;player++){
         const native=gam.netPlayers[player],players=main.players.filter(value=>value.index===player);
@@ -424,7 +443,7 @@
       }
       if(ffa){
         const type=validateFfaBots(decoded,metadata,gam);
-        if(restoring&&config.botType!==type)throw Error('The FFA save belongs to different bots.');
+        if(restoring&&(config.botType!==type||!sameTeamSetup(config,metadata)))throw Error('The saved match belongs to different bots or teams.');
       }
       return decoded;
     }
@@ -479,7 +498,7 @@
       const botType=liveBotType(snapshot);
       if(botType!==savedBotType(metadata)||native.botType!==botType)throw Error('The restored FFA bots did not match the saved match.');
       const proof={ok:true,mode:'ffa',session:metadata.session,mapId:metadata.mapId,mapName:metadata.mapName,players:ffaDescriptor().players,bots:ffaDescriptor().bots,difficulty:metadata.difficulty,
-        botType,nativeLevel:native.nativeLevel,gameTime:Number(native.gameTime),savedGameTime:metadata.gameTime};
+        botType,...teamSetup(metadata),nativeLevel:native.nativeLevel,gameTime:Number(native.gameTime),savedGameTime:metadata.gameTime};
       if(bridge()?.ffaRestored?.(docSession,metadata.id,JSON.stringify(proof))!==true)throw Error('The restored FFA could not be verified.');
       if(state.ended)throw Error('The FFA save was cancelled.');
       state.ready=true;emit();return true;
@@ -530,7 +549,7 @@
         await new Promise((resolve,reject)=>{const timer=setTimeout(()=>reject(Error('Writing the '+label+' save took too long.')),Math.max(1,deadline-Date.now()));fs.syncfs(false,error=>{clearTimeout(timer);error?reject(Error('The '+label+' save could not be written.')):resolve();});});
         const captured=capture(fs,root),gam=json(captured.decoded.get('gam.json'));
         if(gam.gameTime!==saved.gam.gameTime||gam.levelName!==saved.gam.levelName)throw Error('The '+label+' checkpoint changed while saving.');
-        const metadata=ffa?{mode:'ffa',session:missionSession,mapId:mission.map,mapName:ffaDescriptor().name,players:ffaDescriptor().players,bots:ffaDescriptor().bots,difficulty:mission?.difficulty,botType:liveBotType(mission),nativeLevel:gam.levelName,gameTime:gam.gameTime}
+        const metadata=ffa?{mode:'ffa',session:missionSession,mapId:mission.map,mapName:ffaDescriptor().name,players:ffaDescriptor().players,bots:ffaDescriptor().bots,difficulty:mission?.difficulty,botType:liveBotType(mission),...teamSetup(config),nativeLevel:gam.levelName,gameTime:gam.gameTime}
           :{mode:'campaign',session:missionSession||docSession,mission:mission?.mission||gam.levelName,nativeLevel:gam.levelName,mapId:gam.levelName,gameTime:gam.gameTime};
         if(ffa){
           validate({metadata:{...metadata,id:'wt_'+'0'.repeat(32)},files:captured.values});

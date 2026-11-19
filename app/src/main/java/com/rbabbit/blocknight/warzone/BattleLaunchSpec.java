@@ -8,6 +8,7 @@ final class BattleLaunchSpec {
   final boolean musicEnabled;
   final String ffaDifficulty;
   final String ffaBotType;
+  final int[] mapTeams;
 
   BattleLaunchSpec(String matchMode, String duelWeapon, String mapId, boolean musicEnabled) {
     this(matchMode, duelWeapon, mapId, musicEnabled, "easy");
@@ -18,6 +19,10 @@ final class BattleLaunchSpec {
   }
 
   BattleLaunchSpec(String matchMode, String duelWeapon, String mapId, boolean musicEnabled, String difficulty, String botType) {
+    this(matchMode, duelWeapon, mapId, musicEnabled, difficulty, botType, null);
+  }
+
+  BattleLaunchSpec(String matchMode, String duelWeapon, String mapId, boolean musicEnabled, String difficulty, String botType, int[] teams) {
     this.matchMode = matchMode(matchMode);
     this.duelWeapon = duelWeapon(duelWeapon);
     this.mapId = "challenge".equals(this.matchMode) ? challengeMapId(mapId) : "ffa".equals(this.matchMode) ? ffaMapId(mapId)
@@ -25,6 +30,9 @@ final class BattleLaunchSpec {
     this.musicEnabled = musicEnabled;
     this.ffaDifficulty = ffaDifficulty(difficulty);
     this.ffaBotType = "challenge".equals(this.matchMode) ? "dumbot25a" : ffaBotType(botType);
+    if (teams != null && (!isFfa() || !FfaMapCatalog.isDownloaded(this.mapId)))
+      throw new IllegalArgumentException("Team selection is available for downloaded Maps games.");
+    this.mapTeams = teams == null ? null : MapsTeamSetup.validate(teams, FfaMapCatalog.playerCount(this.mapId));
   }
 
   static String matchMode(String value) {
@@ -36,10 +44,10 @@ final class BattleLaunchSpec {
   }
   static String ffaBotType(String value) {
     if (value == null || value.isEmpty() || "nullbot".equals(value)) return "nullbot";
-    if ("cobra".equals(value)) return "cobra";
+    if (MapsBotCatalog.isKnownId(value)) return value;
     throw new IllegalArgumentException("Invalid FFA bot identity.");
   }
-  static String ffaBotName(String value) { return "cobra".equals(ffaBotType(value)) ? "Cobra" : "NullBot"; }
+  static String ffaBotName(String value) { return MapsBotCatalog.get(ffaBotType(value)).name; }
   static String ffaMapId(String value) {
     if (value == null || value.isEmpty()) return "emag";
     if (!FfaMapCatalog.isKnownId(value)) throw new IllegalArgumentException("Unknown FFA map.");

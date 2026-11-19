@@ -13,6 +13,7 @@ function prepareFfaModule(module, config) {
         if (!installed && left === 0 && module.FS
             && module.FS.analyzePath("/data/mp/multiplay/script/ffa-config.json").exists) {
             if (module.calledRun) throw new Error("FFA config arrived after native startup");
+            if (window.WarzoneDownloadedMaps) window.WarzoneDownloadedMaps.install(module, config);
             const limits = config.structureLimits || {};
             if (Object.keys(limits).length) {
                 // Initial map structures are parsed before eventGameInit.

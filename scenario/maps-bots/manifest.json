@@ -1,0 +1,295 @@
+{
+  "version": 1,
+  "bots": [
+    {
+      "id": "dumbot25a",
+      "name": "Dumbot25a",
+      "script": "multiplay/skirmish/maps-dumbot25a.js"
+    },
+    {
+      "id": "ratbot",
+      "name": "RatBot",
+      "script": "multiplay/skirmish/ratbot/personality_cannons.js"
+    },
+    {
+      "id": "ratbot_mg",
+      "name": "RatBot MG",
+      "script": "multiplay/skirmish/ratbot/personality_mg.js"
+    },
+    {
+      "id": "squeedlerbot",
+      "name": "Squeedlerbot",
+      "script": "multiplay/skirmish/ratbot/personality_squeedlers.js"
+    },
+    {
+      "id": "wally",
+      "name": "Wally",
+      "script": "multiplay/skirmish/wally.js"
+    }
+  ],
+  "sources": [
+    {
+      "file": "ratbot-master.zip",
+      "sha256": "895297b75f10eac1b8ce4649e1db201873ca472b8867fd8aa3544dee13b78990",
+      "files": [
+        {
+          "path": "multiplay/skirmish/ratbot.json",
+          "sha256": "030fcae096006790e5c71051e1d58fbf823192ce7db46c2671b35e06b4b91559"
+        },
+        {
+          "path": "multiplay/skirmish/ratbot/main.js",
+          "sha256": "1a69db7d4f7d807ec0902588a8c0c4b8d8971e694fa811f554f80d2db678c5c3"
+        },
+        {
+          "path": "multiplay/skirmish/ratbot/personality_cannons.js",
+          "sha256": "5ac377490f9b91b6dbce05db4d781c7fc95e2aed8a0796e941a9d7b4f2dc019e"
+        },
+        {
+          "path": "multiplay/skirmish/ratbot/personality_mg.js",
+          "sha256": "57ed50b2e8db265bfdc1ab27dd6e6da70a67aef2ffea46b686aa7cfef396d18d"
+        },
+        {
+          "path": "multiplay/skirmish/ratbot/personality_squeedlers.js",
+          "sha256": "aba26be9c4a40582a8cdd9f97852f10bc9499ef097220dc2dc90b37aba3298b8"
+        },
+        {
+          "path": "multiplay/skirmish/ratbot/wztypes.js",
+          "sha256": "6883b9d25e749e82d626beb5ed1d1820cbddeb1a264d1fa33a39e96751ffa6f7"
+        },
+        {
+          "path": "multiplay/skirmish/ratbot_mg.json",
+          "sha256": "97bb2110819f6ef9793b88a8c20795fcaab069479f4b10288b4bd22bac0c198c"
+        },
+        {
+          "path": "multiplay/skirmish/squeedlerbot.json",
+          "sha256": "c5e42ea275c25ea71308604fad2e28df55b078f38c3aeb4b9788deb20a68acb3"
+        }
+      ]
+    },
+    {
+      "file": "warzone2100AI-main.zip",
+      "sha256": "e89b28f5e76427f823637ba96a5f3519bb32dbd6363269df7bf0debc44ed7e7c",
+      "files": [
+        {
+          "path": "README.md",
+          "sha256": "19324eeae093311238806d8b8b1f1d3ba034c20dc843b04e35d0240ed4480ad9"
+        },
+        {
+          "path": "multiplay/skirmish/AUTHORS",
+          "sha256": "11e9992cedb2b10f1e9b74b8f8333761a5448a2d7406a4c8ed238a76e182ef0d"
+        },
+        {
+          "path": "multiplay/skirmish/LICENSE",
+          "sha256": "de124e5a899ae4074ebf5c0f790494178ab66d310606b86203d67a6f3ef45168"
+        },
+        {
+          "path": "multiplay/skirmish/wally.js",
+          "sha256": "7c253c36ce5b2ba73bd118850e62155fc49b9843d76d1bfe2fbebc43333a5334"
+        },
+        {
+          "path": "multiplay/skirmish/wally.json",
+          "sha256": "37fdee6ace1892b2ec00983911b1e2bb70054bf336dc0bd8aa3624485cb28d95"
+        },
+        {
+          "path": "multiplay/skirmish/wally_includes/attack.js",
+          "sha256": "dc87355dba217ab25f8f11a3878d807477ab47f909a801e1cce3a4554c08523b"
+        },
+        {
+          "path": "multiplay/skirmish/wally_includes/build.js",
+          "sha256": "afd6e4b25a0a7711a1f9c10912e6a659c03a9c872ecee1fc193bd19bfef7ccf8"
+        },
+        {
+          "path": "multiplay/skirmish/wally_includes/buildUtility.js",
+          "sha256": "762cb1de764da1501b2e8a1de5e10c2609d83cd0bfbae3075f93ef4f1579007d"
+        },
+        {
+          "path": "multiplay/skirmish/wally_includes/chat.js",
+          "sha256": "2bd2ba47ff076c0d7bbe22125c8430c89c35caca6a3100673908d698e6895351"
+        },
+        {
+          "path": "multiplay/skirmish/wally_includes/functionsUtility.js",
+          "sha256": "a814c99c4a07c62168cd111ee272cbf26d542c33302d13ed8bd3e1029319d7aa"
+        },
+        {
+          "path": "multiplay/skirmish/wally_includes/help.js",
+          "sha256": "630ec359f0435786157454435ca274f6de2f46e7307d5dc0d2724c9c8e2e210e"
+        },
+        {
+          "path": "multiplay/skirmish/wally_includes/laserlink.js",
+          "sha256": "d173dab194c9effb5b4f9f4d016498ea328526d376a1c3a23615631d68887c25"
+        },
+        {
+          "path": "multiplay/skirmish/wally_includes/production.js",
+          "sha256": "bf1dbde88603d3304c170aed6f3aa064efa09afeff9c1f2d4d72b14714f8b6c7"
+        },
+        {
+          "path": "multiplay/skirmish/wally_includes/productionTactics.js",
+          "sha256": "9e02f67572c503058aa2f29d7ed2002516c610580bce15fea9628148050c3d1b"
+        },
+        {
+          "path": "multiplay/skirmish/wally_includes/productionUtility.js",
+          "sha256": "09fd225bdcc05620dc8512b47cc51ed4507cb27a1438babab4da0312b642d37c"
+        },
+        {
+          "path": "multiplay/skirmish/wally_includes/research.js",
+          "sha256": "0324d70794d3b4898422f990964986bc0bdaef1ef4bb709054ee700bac532b62"
+        },
+        {
+          "path": "multiplay/skirmish/wally_includes/researchUtility.js",
+          "sha256": "52d4c851678a799093de17f932d89a7855085cd8205709fa7d2777d7038ebddf"
+        },
+        {
+          "path": "multiplay/skirmish/wally_includes/start.js",
+          "sha256": "8512ab29f96f4847dee7b231ef0fbe84cf80726f0049b6e699a99cbf997a45e2"
+        }
+      ]
+    },
+    {
+      "source": "scenario/challenge/stock/dumbot25a",
+      "record": "scenario/challenge/DUMBOT.json"
+    }
+  ],
+  "runtimeFiles": [
+    {
+      "path": "/data/mp/multiplay/skirmish/dumb25a/argParse.js",
+      "sha256": "b767815cf649d29e400d3610d613fe8c3dbf7fe5506cc86370d9e53de78ddbf9"
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/dumb25a/asStats.js",
+      "sha256": "631eb0db3e7f2320c8ab02bb1a1ed681191eda5bd1ea3fefee38eab80b5c6106"
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/dumb25a/dumbComm.js",
+      "sha256": "678f5c551a8d3d067b8769b91c8fd02298ffa16641b37f7d1918afdbda101eea"
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/dumb25a/dumbProduction.js",
+      "sha256": "321309df560a2c154a0d0878316893e9cc1158a0d1ba17b8d5460056a2d559a6"
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/dumb25a/dumbResearch.js",
+      "sha256": "279735d5738fb0312fc846724741bd9c4611004dc6c2360858fc4b6c879d6f93"
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/dumb25a/dumbTank.js",
+      "sha256": "11e0d73b7474be927bdfea05fd87cf2bb40cf71df0b5e6e1ade72af2e716abc5"
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/dumb25a/dumbTruck.js",
+      "sha256": "9993336a983789a8112dd90c7888d8535bc5fee85f032f2d9c1688e94c80fa8b"
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/dumb25a/EXT_DACTION.js",
+      "sha256": "dd2a14988e2b91bdd4b2a48c92416577e94d3880a8032296bbfa8e4bf4175375"
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/dumb25a/LIB.js",
+      "sha256": "f675091b6c75e71cdebf9591638570421cb7926785ada9dc0b8a6acdcdbb267e"
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/maps-dumbot25a.js",
+      "sha256": "94688930245fff8d76f6c78ed9b091f08eeccd5109eb07de289c06d27a1b43c3"
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/maps-dumbot25a.json",
+      "sha256": "1b05453017332f1df64caabb258c4adb5a9420358bb1405b3804be6528e66782"
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/maps-ratbot.json",
+      "sha256": "7a99f486cb4ca52837bf82fa37fdcb740b0f42d534bb07d0fda239d96cb7441c"
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/maps-ratbot_mg.json",
+      "sha256": "9ebf02c79c6812824586f631dee4da191a9e3261ceabd2ae98f77c47f5f7247d"
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/maps-squeedlerbot.json",
+      "sha256": "7e28dc62a01e3b7013b5e22b32c83e3f4a04818a9f5ec60b05798eabea672372"
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/maps-wally.json",
+      "sha256": "e9f5bc14ad4f0b0f03bc3f186bb29049264746c6eb013473f1bab8be1e634c49"
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/ratbot/main.js",
+      "sha256": "6c078c9b8d58f2f8eff7609aa3162bb297788ca204460571b9844effffa6d4c3"
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/ratbot/personality_cannons.js",
+      "sha256": "5ac377490f9b91b6dbce05db4d781c7fc95e2aed8a0796e941a9d7b4f2dc019e"
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/ratbot/personality_mg.js",
+      "sha256": "57ed50b2e8db265bfdc1ab27dd6e6da70a67aef2ffea46b686aa7cfef396d18d"
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/ratbot/personality_squeedlers.js",
+      "sha256": "aba26be9c4a40582a8cdd9f97852f10bc9499ef097220dc2dc90b37aba3298b8"
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/ratbot/wztypes.js",
+      "sha256": "c2937c9a1370866cb8e887163ca87c60cf0a1fa6f26f404e90531304ea7669aa"
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/wally.js",
+      "sha256": "7c253c36ce5b2ba73bd118850e62155fc49b9843d76d1bfe2fbebc43333a5334"
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/wally_includes/attack.js",
+      "sha256": "dc87355dba217ab25f8f11a3878d807477ab47f909a801e1cce3a4554c08523b"
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/wally_includes/build.js",
+      "sha256": "afd6e4b25a0a7711a1f9c10912e6a659c03a9c872ecee1fc193bd19bfef7ccf8"
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/wally_includes/buildUtility.js",
+      "sha256": "762cb1de764da1501b2e8a1de5e10c2609d83cd0bfbae3075f93ef4f1579007d"
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/wally_includes/chat.js",
+      "sha256": "2bd2ba47ff076c0d7bbe22125c8430c89c35caca6a3100673908d698e6895351"
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/wally_includes/functionsUtility.js",
+      "sha256": "a814c99c4a07c62168cd111ee272cbf26d542c33302d13ed8bd3e1029319d7aa"
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/wally_includes/help.js",
+      "sha256": "630ec359f0435786157454435ca274f6de2f46e7307d5dc0d2724c9c8e2e210e"
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/wally_includes/laserlink.js",
+      "sha256": "d173dab194c9effb5b4f9f4d016498ea328526d376a1c3a23615631d68887c25"
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/wally_includes/production.js",
+      "sha256": "bf1dbde88603d3304c170aed6f3aa064efa09afeff9c1f2d4d72b14714f8b6c7"
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/wally_includes/productionTactics.js",
+      "sha256": "9e02f67572c503058aa2f29d7ed2002516c610580bce15fea9628148050c3d1b"
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/wally_includes/productionUtility.js",
+      "sha256": "09fd225bdcc05620dc8512b47cc51ed4507cb27a1438babab4da0312b642d37c"
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/wally_includes/research.js",
+      "sha256": "0324d70794d3b4898422f990964986bc0bdaef1ef4bb709054ee700bac532b62"
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/wally_includes/researchUtility.js",
+      "sha256": "52d4c851678a799093de17f932d89a7855085cd8205709fa7d2777d7038ebddf"
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/wally_includes/start.js",
+      "sha256": "8512ab29f96f4847dee7b231ef0fbe84cf80726f0049b6e699a99cbf997a45e2"
+    }
+  ],
+  "adaptations": [
+    "RatBot modern-API constant aliases; Easy3x/Medium1.8x/Hard1x periodic decision intervals; native save timer ownership and prototype restoration.",
+    "Dumbot proven Challenge timer lifecycle without Challenge dependencies; saved independent cannon/rocket choice; Easy3x/Medium1.8x/Hard1x decision intervals.",
+    "Wally unmodified, including its native15s/5s/0s difficulty reaction delays."
+  ]
+}

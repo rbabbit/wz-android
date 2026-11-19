@@ -22,7 +22,10 @@
       (doc.getElementById('warzone-command-strip')||hud).appendChild(label);
     }
     label.querySelector('strong').textContent=(state.snapshot.mapName||config.mapName||'EMAG FFA')+' · '+state.snapshot.difficulty.replace(/^./,x=>x.toUpperCase());
-    label.querySelector('small').textContent=(playerCount-1)+' '+(state.snapshot.botType==='cobra'?'Cobra':'NullBot')+(playerCount===2?' bot':' bots')+' · VTOL off';
+    const botName=window.WarzoneDownloadedMaps?.nativeBot(state.snapshot.botType)?.name||(state.snapshot.botType==='cobra'?'Cobra':'NullBot');
+    const teamGame=config.gameType==='teams',allies=teamGame?config.teams.filter(team=>team===config.teams[0]).length-1:0;
+    label.querySelector('small').textContent=(teamGame?'Team '+String.fromCharCode(65+config.teams[0])+' · '+allies+' allies · '+(playerCount-allies-1)+' opponents':
+      (playerCount-1)+' '+botName+(playerCount===2?' bot':' bots'))+' · VTOL '+(config.vtol?'on':'off');
     label.hidden=false;
     const right=Array.from(hud.children).reduce((value,node)=>Math.max(value,node.getBoundingClientRect().right),0);
     label.hidden=right+8>label.getBoundingClientRect().left;
@@ -31,11 +34,21 @@
     if(state.ended||packet?.mode!=='ffa'||packet.map!==config.map||typeof packet.session!=='string'
       ||packet.difficulty!==config.difficulty||!Number.isFinite(Number(packet.gameTime))
       ||packet.nativeLevel!==(config.level||'FFA-EMAG-T1')||packet.maxPlayers!==playerCount)return false;
-    const script=packet.botType==='cobra'?'Cobra.js':'ffa-nullbot.js';
-    if(!['cobra','nullbot'].includes(packet.botType)||packet.botType!==config.botType||!Array.isArray(packet.players)||packet.players.length!==playerCount
+    const identity=window.WarzoneDownloadedMaps?.nativeBot(packet.botType),script=identity?.script.split('/').pop();
+    if(!identity||packet.botType!==config.botType||!Array.isArray(packet.players)||packet.players.length!==playerCount
         ||Array.from({length:playerCount-1},(_,i)=>i+1).some(player=>{const bots=packet.players.filter(value=>value.player===player);return bots.length!==1
           ||bots[0].botType!==packet.botType||String(bots[0].scriptName||'').split(/[\\/]/).pop()!==script;})){
       state.lastError='The native FFA bot identity could not be verified.';return false;
+    }
+    if(config.map.startsWith('download-')&&(packet.gameType!==config.gameType
+        ||packet.alliancesType!==(config.gameType==='teams'?2:0)
+        ||!Array.isArray(packet.teams)||packet.teams.length!==playerCount
+        ||config.teams.some((team,player)=>packet.teams[player]!==team
+          ||packet.players.find(value=>value.player===player)?.team!==team)
+        ||!Array.isArray(packet.alliances)||packet.alliances.length!==playerCount
+        ||packet.alliances.some((row,player)=>!Array.isArray(row)||row.length!==playerCount
+          ||row.some((allied,other)=>Boolean(allied)!==(config.teams[player]===config.teams[other]))))){
+      state.lastError='The native map teams could not be verified.';return false;
     }
     if(state.snapshot?.session!==packet.session){
       window.__kalaWarzoneTouch?.releaseAll?.(true,false);

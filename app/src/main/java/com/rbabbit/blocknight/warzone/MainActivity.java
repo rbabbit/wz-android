@@ -102,6 +102,10 @@ public final class MainActivity extends Activity {
   private SurvivalSetupView survivalSetup;
   private String survivalMapId = "tdn2";
   private FfaSetupView ffaSetup;
+  private MapsStore mapsStore;
+  private MapsSetupView mapsSetup;
+  private String ffaBotType = "cobra";
+  private int[] mapsTeams;
   private String ffaDifficulty = "easy";
   private String ffaMapId = "emag";
   private int campaignHomeGeneration;
@@ -167,6 +171,11 @@ public final class MainActivity extends Activity {
     musicCatalog = new MusicTrackCatalog(this);
     mapMusicIndex = new MapMusicIndex(this, musicCatalog);
     rewards = new RewardStore(this);
+    mapsStore = new MapsStore(this);
+    for (JSONObject installed : mapsStore.installedMaps()) {
+      try { FfaMapCatalog.registerDownloaded(installed); }
+      catch (Exception error) { Log.w(TAG, "An installed map could not be loaded", error); }
+    }
     saveGames = new SaveGameStore(this);
     campaignSaves = new SaveGameStore(this, true);
     ffaSaves = new SaveGameStore(this, "ffa");
@@ -443,6 +452,8 @@ public final class MainActivity extends Activity {
     closeSavedGames();
     ffaSetup = new FfaSetupView(this, new FfaSetupView.Actions() {
       @Override public void start(String selectedMap, String difficulty) {
+        ffaBotType = "cobra";
+        mapsTeams = null;
         ffaMapId = BattleLaunchSpec.ffaMapId(selectedMap);
         ffaDifficulty = BattleLaunchSpec.ffaDifficulty(difficulty);
         getPreferences(MODE_PRIVATE).edit().putString("ffa_difficulty", ffaDifficulty)
@@ -457,7 +468,8 @@ public final class MainActivity extends Activity {
       @Override public void saves() { showFfaSaves(); }
       @Override public void back() { closeFfaSetup(); }
       @Override public void challenge() { closeFfaSetup(); showChallengeSetup(); }
-    }, ffaMapId, ffaDifficulty);
+      @Override public void maps() { closeFfaSetup(); showMapsSetup(); }
+    }, FfaMapCatalog.isDownloaded(ffaMapId) ? "emag" : ffaMapId, ffaDifficulty);
     root.addView(ffaSetup, new FrameLayout.LayoutParams(-1, -1));
   }
 
@@ -469,8 +481,32 @@ public final class MainActivity extends Activity {
     }
   }
 
+  private void showMapsSetup() {
+    if (graphicsSetup == null || mapsSetup != null || loadingOverlay != null) return;
+    mapsSetup = new MapsSetupView(this, mapsStore, new MapsSetupView.Actions() {
+      @Override public void start(JSONObject installed, String difficulty, String botType, int[] teams) {
+        try {
+          FfaMapCatalog.registerDownloaded(installed);
+          ffaMapId = BattleLaunchSpec.ffaMapId(installed.getString("id"));
+          ffaDifficulty = BattleLaunchSpec.ffaDifficulty(difficulty);
+          ffaBotType = MapsBotCatalog.get(botType).id;
+          mapsTeams = MapsTeamSetup.validate(teams, installed.getInt("players"));
+          matchMode = "ffa";
+          launchGame();
+        } catch (Exception error) { showAppNotice(String.valueOf(error.getMessage()), true); }
+      }
+      @Override public void saves() { showFfaSaves(); }
+      @Override public void back() { closeMapsSetup(); showFfaSetup(); }
+    });
+    root.addView(mapsSetup, new FrameLayout.LayoutParams(-1, -1));
+  }
+
+  private void closeMapsSetup() {
+    if (mapsSetup != null) { root.removeView(mapsSetup); mapsSetup = null; }
+  }
+
   private void showFfaSaves() {
-    if (graphicsSetup == null || ffaSetup == null || savedGamesView != null || loadingOverlay != null) return;
+    if (graphicsSetup == null || (ffaSetup == null && mapsSetup == null) || savedGamesView != null || loadingOverlay != null) return;
     savedGamesView = new SavedGamesView(this, ffaSaves.list(), new SavedGamesView.Actions() {
       @Override public void load(String id) { loadFfaSave(id); }
       @Override public void delete(String id) {
@@ -488,10 +524,12 @@ public final class MainActivity extends Activity {
       JSONObject payload = ffaSaves.load(id);
       ffaDifficulty = BattleLaunchSpec.ffaDifficulty(payload.getJSONObject("metadata").getString("difficulty"));
       ffaMapId = BattleLaunchSpec.ffaMapId(payload.getJSONObject("metadata").getString("mapId"));
+      mapsTeams = MapsTeamSetup.fromMetadata(payload.getJSONObject("metadata"), FfaMapCatalog.playerCount(ffaMapId));
       matchMode = "ffa";
       battleLaunch = new BattleLaunchSpec("ffa", duelWeapon, ffaMapId, musicEnabled && musicCached, ffaDifficulty,
-          BattleLaunchSpec.ffaBotType(payload.getJSONObject("metadata").optString("botType")));
+          BattleLaunchSpec.ffaBotType(payload.getJSONObject("metadata").optString("botType")), mapsTeams);
       closeFfaSetup();
+      closeMapsSetup();
       ffaMapId = battleLaunch.mapId;
       getPreferences(MODE_PRIVATE).edit().putString("ffa_map_id", ffaMapId).putString("ffa_difficulty", ffaDifficulty).apply();
       root.removeView(graphicsSetup); graphicsSetup = null;
@@ -625,10 +663,12 @@ public final class MainActivity extends Activity {
     loadingSaveId = "";
     restoringGame = false;
     battleLaunch = new BattleLaunchSpec(
-        matchMode, "challenge".equals(matchMode) ? challengeWeapon : duelWeapon, "challenge".equals(matchMode) ? challengeMapId : "survival".equals(matchMode) ? survivalMapId : "ffa".equals(matchMode) ? ffaMapId : mapId, musicEnabled && musicCached, "challenge".equals(matchMode) ? challengeDifficulty : ffaDifficulty);
+        matchMode, "challenge".equals(matchMode) ? challengeWeapon : duelWeapon, "challenge".equals(matchMode) ? challengeMapId : "survival".equals(matchMode) ? survivalMapId : "ffa".equals(matchMode) ? ffaMapId : mapId, musicEnabled && musicCached, "challenge".equals(matchMode) ? challengeDifficulty : ffaDifficulty, ffaBotType,
+        "ffa".equals(matchMode) && FfaMapCatalog.isDownloaded(ffaMapId) ? mapsTeams : null);
     closeCampaignSetup();
     closeFfaSetup();
     closeChallengeSetup();
+    closeMapsSetup();
     getPreferences(MODE_PRIVATE)
         .edit()
         .putString("map_id", mapId)
@@ -1354,6 +1394,35 @@ public final class MainActivity extends Activity {
 
   public final class EngineBridge {
     @JavascriptInterface
+    public String mapsLaunchPayload(String session) {
+      try {
+        BattleLaunchSpec launch = battleLaunch;
+        if (launch == null || !launch.isFfa() || !FfaMapCatalog.isDownloaded(launch.mapId)
+            || session == null || !session.equals(battleSession) || graphicsSetup != null || mainMenuReturnPending)
+          return "{}";
+        JSONObject payload = mapsStore.installBundle(launch.mapId);
+        MapsBotCatalog.Bot bot = MapsBotCatalog.get(launch.ffaBotType);
+        if (bot.needsAssetBundle()) {
+          try (InputStream input = getAssets().open("warzone/maps-bots/files.json");
+               ByteArrayOutputStream output = new ByteArrayOutputStream()) {
+            byte[] block = new byte[8192]; int count;
+            while ((count = input.read(block)) != -1) {
+              if (output.size() + count > 4 * 1024 * 1024) throw new IOException("Bundled map bots are too large.");
+              output.write(block, 0, count);
+            }
+            payload.put("botFiles", new JSONArray(output.toString(StandardCharsets.UTF_8.name())));
+          }
+        }
+        return payload.put("session", session).put("difficulty", launch.ffaDifficulty)
+            .put("gameType", MapsTeamSetup.gameType(launch.mapTeams))
+            .put("teams", MapsTeamSetup.toJson(launch.mapTeams, FfaMapCatalog.playerCount(launch.mapId)))
+            .put("bot", new JSONObject().put("id", bot.id).put("name", bot.name).put("script", bot.script)).toString();
+      } catch (Exception error) {
+        Log.w(TAG, "Installed map could not be prepared", error);
+        return "{}";
+      }
+    }
+    @JavascriptInterface
     public String appVersion() { return GraphicsSetupView.appVersion(MainActivity.this); }
 
     @JavascriptInterface
@@ -1495,7 +1564,8 @@ public final class MainActivity extends Activity {
             || !metadata.has("botType") || !battleLaunch.ffaBotType.equals(metadata.optString("botType"))
             || map == null || !map.level.equals(metadata.optString("nativeLevel"))
             || metadata.optInt("players", "emag".equals(map.id) ? 4 : -1) != map.players
-            || metadata.optInt("bots", "emag".equals(map.id) ? 3 : -1) != map.bots)
+            || metadata.optInt("bots", "emag".equals(map.id) ? 3 : -1) != map.bots
+            || !MapsTeamSetup.matches(metadata, battleLaunch.mapTeams, map.players))
           throw new IOException("The saved FFA match did not match.");
         metadata.put("mapName", map.name).put("players", map.players).put("bots", map.bots);
         String id = ffaSaves.save(metadata, new JSONObject(filesJSON));
@@ -1521,6 +1591,8 @@ public final class MainActivity extends Activity {
             || !metadata.getString("difficulty").equals(state.optString("difficulty"))
             || !battleLaunch.ffaBotType.equals(BattleLaunchSpec.ffaBotType(metadata.optString("botType")))
             || !state.has("botType") || !battleLaunch.ffaBotType.equals(state.optString("botType"))
+            || !MapsTeamSetup.matches(metadata, battleLaunch.mapTeams, FfaMapCatalog.playerCount(battleLaunch.mapId))
+            || !MapsTeamSetup.matches(state, battleLaunch.mapTeams, FfaMapCatalog.playerCount(battleLaunch.mapId))
             || !metadata.getString("nativeLevel").equals(state.optString("nativeLevel"))
             || state.optLong("gameTime", -1) < metadata.getLong("gameTime")) return false;
         loadingSave = null;
@@ -1741,7 +1813,7 @@ public final class MainActivity extends Activity {
         webView.requestFocus();
         if (isCampaignBattle()) { startupAutomationStarted = true; awaitCampaignCanvas(0, battleSession); }
         else if (restoringGame) { startupAutomationStarted = true; awaitBattlefieldReady(0); }
-        else if (isChallengeBattle()) beginChallengeStartup();
+        else if (isChallengeBattle() || (isFfaBattle() && FfaMapCatalog.isDownloaded(battleLaunch.mapId))) beginChallengeStartup();
         else beginStartupAutomation();
         if (touchTestMode) {
           webView.postDelayed(MainActivity.this::selectAllUnitsForTouchTest, 30000);
@@ -1934,6 +2006,7 @@ public final class MainActivity extends Activity {
     final boolean returnToSurvival = graphicsSetup == null && isSurvivalBattle();
     final boolean returnToTowersMap = graphicsSetup == null && isTowersBattle() && !returnToSurvival;
     final boolean returnToFfa = graphicsSetup == null && isFfaBattle();
+    final boolean returnToMaps = returnToFfa && FfaMapCatalog.isDownloaded(battleLaunch.mapId);
     final boolean returnToChallenge = graphicsSetup == null && isChallengeBattle();
     cancelCampaignHomeCheck();
     dismissBriefing();
@@ -1942,6 +2015,7 @@ public final class MainActivity extends Activity {
     closeSavedGames();
     closeCampaignSetup();
     closeFfaSetup();
+    closeMapsSetup();
     closeChallengeSetup();
     closeSurvivalSetup();
     dismissRewardReceipt();
@@ -1972,7 +2046,8 @@ public final class MainActivity extends Activity {
     if (graphicsSetup == null) showGraphicsSetup();
     if (returnToTowersMap) graphicsSetup.showTowersMap();
     if (returnToSurvival) showSurvivalSetup();
-    if (returnToFfa) showFfaSetup();
+    if (returnToMaps) showMapsSetup();
+    else if (returnToFfa) showFfaSetup();
     if (returnToChallenge) showChallengeSetup();
   }
 
@@ -2121,9 +2196,9 @@ public final class MainActivity extends Activity {
     final String startupSession = battleSession;
     updateLoadingStatus("OPENING THE CHALLENGE…");
     webView.postDelayed(() -> {
-      if (!startupSession.equals(battleSession) || graphicsSetup != null || !isChallengeBattle()) return;
+      if (!startupSession.equals(battleSession) || graphicsSetup != null || !isSkirmishBattle()) return;
       evaluateTouchTapThen(170, 392, "Start Hosting", 1500, () -> {
-        if (!startupSession.equals(battleSession) || !isChallengeBattle()) return;
+        if (!startupSession.equals(battleSession) || !isSkirmishBattle()) return;
         updateLoadingStatus("DEPLOYING TO THE BATTLEFIELD…");
         evaluateTouchTapThen(585, 30, "Ready", 1500, this::finishStartupAutomation);
       });
@@ -2676,6 +2751,10 @@ public final class MainActivity extends Activity {
     if (battleBriefing != null) return;
     if (campaignHomeBusy) { cancelCampaignHomeCheck(); return; }
     if (savedGamesView != null) { closeSavedGames(); return; }
+    if (mapsSetup != null) {
+      if (mapsSetup.dismissInput()) return;
+      closeMapsSetup(); showFfaSetup(); return;
+    }
     if (campaignSetup != null) { closeCampaignSetup(); return; }
     if (ffaSetup != null) { closeFfaSetup(); return; }
     if (rewardsView != null) { closeRewards(); return; }

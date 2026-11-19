@@ -32,6 +32,15 @@ final class FfaMapCatalog {
             bots = value.getInt("bots");
             width = value.getInt("width");
             height = value.getInt("height");
+            boolean downloaded = isDownloaded(id);
+            if (downloaded) {
+                if (!level.equals("FFA-" + id.substring(9, 21) + "-T1") || name.trim().isEmpty()
+                        || players < 2 || players > 10 || bots != players - 1
+                        || width < 1 || height < 1 || width > 512 || height > 512
+                        || !mapDirectory.equals(id) || !sourceSHA256.equals(id.substring(9)))
+                    throw new IllegalArgumentException("Invalid installed map: " + id);
+                return;
+            }
             if (!isKnownId(id) || !level.equals(nativeLevel(id)) || name.trim().isEmpty()
                     || players != playerCount(id) || bots != players - 1
                     || width < 1 || height < 1 || width > 512 || height > 512
@@ -44,6 +53,7 @@ final class FfaMapCatalog {
     }
 
     private static FfaMapCatalog instance;
+    private static final Map<String, MapInfo> downloadedMaps = new java.util.concurrent.ConcurrentHashMap<>();
     private final Map<String, MapInfo> byId = new LinkedHashMap<>();
     private final List<MapInfo> maps;
 
@@ -77,11 +87,20 @@ final class FfaMapCatalog {
     List<MapInfo> maps() { return maps; }
 
     /** Unknown identities stay unknown; save/launch callers must not silently relabel them. */
-    MapInfo map(String id) { return byId.get(id); }
+    MapInfo map(String id) { return isDownloaded(id) ? downloadedMaps.get(id) : byId.get(id); }
+
+    static void registerDownloaded(JSONObject value) throws Exception {
+        if (!isDownloaded(value.optString("id"))) throw new IllegalArgumentException("Invalid installed map identity.");
+        MapInfo map = new MapInfo(value);
+        downloadedMaps.put(map.id, map);
+    }
+
+    static boolean isDownloaded(String id) { return id != null && id.matches("download-[a-f0-9]{64}"); }
 
     static boolean isKnownId(String id) { return nativeLevel(id) != null; }
 
     static int playerCount(String id) {
+        if (isDownloaded(id)) { MapInfo map = downloadedMaps.get(id); return map == null ? 0 : map.players; }
         int generated = generatedPlayerCount(id);
         return generated != 0 ? generated : !isKnownId(id) ? 0 : "emaj-6p".equals(id) ? 6 : 4;
     }
@@ -95,6 +114,7 @@ final class FfaMapCatalog {
 
     static String nativeLevel(String id) {
         if (id == null) return null;
+        if (isDownloaded(id)) { MapInfo map = downloadedMaps.get(id); return map == null ? null : map.level; }
         switch (id) {
             case "emag": return "FFA-EMAG-T1";
             case "contact": return "FFA-CONTACT-T1";

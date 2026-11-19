@@ -148,7 +148,8 @@ final class SavedGamesView extends FrameLayout {
                     : "challenge".equals(save.optString("mode")) ? "Dumbot25a · "
                         + ("rockets".equals(save.optString("weapon")) ? "Rockets" : "Cannon")
                     : "ffa".equals(save.optString("mode")) ? bots + " "
-                        + BattleLaunchSpec.ffaBotName(save.optString("botType")) + (bots == 1 ? " bot" : " bots") + " · Free for all"
+                        + BattleLaunchSpec.ffaBotName(save.optString("botType")) + (bots == 1 ? " bot" : " bots")
+                        + ("teams".equals(save.optString("gameType")) ? " · Teams" : " · Free for all")
                     : "Wave " + wave + (total > 0 ? " / " + total : "");
             TextView progress = copy(detail, 12, INK);
             progress.setPadding(0, dp(3), 0, 0);

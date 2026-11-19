@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "bots": [
+    {
+      "id": "dumbot25a",
+      "name": "Dumbot25a",
+      "script": "multiplay/skirmish/maps-dumbot25a.js"
+    },
+    {
+      "id": "ratbot",
+      "name": "RatBot",
+      "script": "multiplay/skirmish/ratbot/personality_cannons.js"
+    },
+    {
+      "id": "ratbot_mg",
+      "name": "RatBot MG",
+      "script": "multiplay/skirmish/ratbot/personality_mg.js"
+    },
+    {
+      "id": "squeedlerbot",
+      "name": "Squeedlerbot",
+      "script": "multiplay/skirmish/ratbot/personality_squeedlers.js"
+    },
+    {
+      "id": "wally",
+      "name": "Wally",
+      "script": "multiplay/skirmish/wally.js"
+    }
+  ],
+  "adaptations": [
+    "RatBot modern-API constant aliases; Easy3x/Medium1.8x/Hard1x periodic decision intervals; native save timer ownership and prototype restoration.",
+    "Dumbot proven Challenge timer lifecycle without Challenge dependencies; saved independent cannon/rocket choice; Easy3x/Medium1.8x/Hard1x decision intervals.",
+    "Wally unmodified, including its native15s/5s/0s difficulty reaction delays."
+  ]
+}

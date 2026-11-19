@@ -189,9 +189,10 @@ final class SaveGameStore {
               || "medium".equals(metadata.optString("difficulty")) || "hard".equals(metadata.optString("difficulty"))))
         throw new IOException("Invalid FFA save identity.");
       ffaBotType(metadata);
+      ffaTeams(metadata);
     }
     if (!metadata.getString("session").matches("[A-Za-z0-9_-]{1,96}")
-        || !metadata.getString("mapId").matches("[a-zA-Z0-9_-]{1,64}"))
+        || !metadata.getString("mapId").matches("[a-zA-Z0-9_-]{1,80}"))
       throw new IOException("Invalid save identity.");
   }
   private static void validateSurvivalArchive(JSONObject metadata, byte[] scriptData) throws Exception {
@@ -220,22 +221,23 @@ final class SaveGameStore {
         || metadata.has("nativeLevel") && !level.equals(metadata.getString("nativeLevel")))
       throw new IOException("The native save did not match the current battle.");
     if ("ffa".equals(metadata.optString("mode"))) {
-      String expected = "cobra".equals(ffaBotType(metadata)) ? "Cobra" : "NullBot (ground)";
+      String expected = ffaAIName(metadata);
       int difficulty = "hard".equals(metadata.optString("difficulty")) ? 3
           : "medium".equals(metadata.optString("difficulty")) ? 2 : 1;
       JSONArray players = gam.optJSONArray("netPlayers");
       int count = FfaMapCatalog.playerCount(metadata.optString("mapId"));
+      int[] teams = ffaTeams(metadata);
       if (players == null || players.length() < count || gam.optInt("multiMaxPlayers", -1) != count
-          || gam.optInt("netSelectedPlayer", -1) != 0 || gam.optInt("multiAlliance", -1) != 0)
+          || gam.optInt("netSelectedPlayer", -1) != 0 || gam.optInt("multiAlliance", -1) != (teams == null ? 0 : 2))
         throw new IOException("The saved FFA player slots did not match their map.");
       JSONObject human = players.optJSONObject(0);
       if (human == null || human.optInt("allocated", -1) != 1
-          || human.optInt("position", -1) != 0 || human.optInt("team", -1) != 0)
+          || human.optInt("position", -1) != 0 || human.optInt("team", -1) != (teams == null ? 0 : teams[0]))
         throw new IOException("The saved FFA human slot is invalid.");
       for (int i = 1; i < count; i++) {
         JSONObject player = players.optJSONObject(i);
         if (player == null || !expected.equals(player.optString("aiName")) || player.optInt("difficulty", -1) != difficulty
-            || player.optInt("allocated", -1) != 0 || player.optInt("position", -1) != i || player.optInt("team", -1) != i)
+            || player.optInt("allocated", -1) != 0 || player.optInt("position", -1) != i || player.optInt("team", -1) != (teams == null ? i : teams[i]))
           throw new IOException("The saved FFA bots did not match their native files.");
       }
     }
@@ -247,12 +249,12 @@ final class SaveGameStore {
     JSONObject scripts = new JSONObject(new String(scriptData, StandardCharsets.UTF_8));
     String map = metadata.getString("mapId"), level = FfaMapCatalog.nativeLevel(map);
     int count = FfaMapCatalog.playerCount(map);
+    int[] teams = ffaTeams(metadata);
     int difficulty = "hard".equals(metadata.optString("difficulty")) ? 3
         : "medium".equals(metadata.optString("difficulty")) ? 2 : 1;
-    boolean cobra = "cobra".equals(ffaBotType(metadata));
-    String expectedName = cobra ? "Cobra" : "NullBot (ground)", expectedScript = cobra ? "Cobra" : "ffa-nullbot";
+    String expectedName = ffaAIName(metadata), expectedScript = ffaScriptName(metadata);
     if (!level.equals(main.optString("levelName")) || main.optInt("maxPlayers", -1) != count
-        || main.optInt("selectedPlayer", -1) != 0 || main.optInt("allianceSetting", -1) != 0)
+        || main.optInt("selectedPlayer", -1) != 0 || main.optInt("allianceSetting", -1) != (teams == null ? 0 : 2))
       throw new IOException("The saved FFA configuration did not match its map.");
     JSONArray players = main.optJSONArray("players");
     if (players == null) throw new IOException("The saved FFA players are missing.");
@@ -262,7 +264,7 @@ final class SaveGameStore {
       if (player == null) continue;
       int i = player.optInt("index", -1);
       if (i < 0 || i >= count) continue;
-      if (!seen.add(i) || player.optInt("position", -1) != i || player.optInt("team", -1) != i
+      if (!seen.add(i) || player.optInt("position", -1) != i || player.optInt("team", -1) != (teams == null ? i : teams[i])
           || player.optBoolean("allocated", false) != (i == 0))
         throw new IOException("The saved FFA player configuration is invalid.");
       if (i > 0) {
@@ -274,12 +276,13 @@ final class SaveGameStore {
       JSONArray alliances = player.optJSONArray("alliances");
       if (alliances == null || alliances.length() < count) throw new IOException("The saved FFA alliances are missing.");
       for (int other = 0; other < count; other++)
-        if (alliances.optInt(other, -1) != (i == other ? 3 : 0))
-          throw new IOException("The saved FFA is not a free-for-all match.");
+        if (alliances.optInt(other, -1) != (i == other || teams != null && teams[i] == teams[other] ? 3 : 0))
+          throw new IOException("The saved match alliances do not match its teams.");
     }
     if (seen.size() != count) throw new IOException("The saved FFA player slots are incomplete.");
     Set<Integer> contexts = new HashSet<>();
     JSONObject rules = null;
+    boolean scavengerContext = false;
     for (Iterator<String> it = scripts.keys(); it.hasNext();) {
       String key = it.next();
       if (!key.matches("globals_[0-9]+")) continue;
@@ -287,6 +290,12 @@ final class SaveGameStore {
       if (context == null) continue;
       int player = context.optInt("me", -1);
       if (player > 0) {
+        if (FfaMapCatalog.isDownloaded(map) && player == Math.max(7, count) && player >= count
+            && "init".equals(context.optString("scriptName"))) {
+          if (scavengerContext) throw new IOException("The saved map has repeated scavenger state.");
+          scavengerContext = true;
+          continue;
+        }
         if (player >= count || !expectedScript.equals(context.optString("scriptName")) || !contexts.add(player))
           throw new IOException("The saved FFA AI contexts are inconsistent.");
       }
@@ -305,7 +314,9 @@ final class SaveGameStore {
         || !metadata.getString("difficulty").equals(config.optString("difficulty")) || config.optInt("player", -1) != 0
         || config.optInt("players", "emag".equals(map) ? 4 : -1) != count
         || !level.equals(config.optString("level", "emag".equals(map) ? "FFA-EMAG-T1" : ""))
-        || !ffaBotType(metadata).equals(config.optString("botType", "nullbot")))
+        || !ffaBotType(metadata).equals(config.optString("botType", "nullbot"))
+        || !MapsTeamSetup.matches(config, teams, count)
+        || scavengerContext && !config.optBoolean("scavengers"))
       throw new IOException("The saved FFA rules did not match its map or opponents.");
   }
 
@@ -345,11 +356,37 @@ final class SaveGameStore {
       throw new IOException("The saved Challenge profile, branch or purchases do not match.");
   }
 
+  private static int[] ffaTeams(JSONObject metadata) throws Exception {
+    int[] teams = MapsTeamSetup.fromMetadata(metadata, FfaMapCatalog.playerCount(metadata.optString("mapId")));
+    if (teams != null && !FfaMapCatalog.isDownloaded(metadata.optString("mapId")))
+      throw new IOException("Teams are only available for downloaded Maps matches.");
+    return teams;
+  }
+
   private static String ffaBotType(JSONObject metadata) throws IOException {
+    if (FfaMapCatalog.isDownloaded(metadata.optString("mapId"))) {
+      String value = metadata.optString("botType");
+      if (!MapsBotCatalog.isKnownId(value)) throw new IOException("Invalid downloaded map bot identity.");
+      return value;
+    }
     if (!metadata.has("botType")) return "nullbot";
     String value = metadata.optString("botType");
     if (!"cobra".equals(value) && !"nullbot".equals(value)) throw new IOException("Invalid FFA bot identity.");
     return value;
+  }
+
+  private static String ffaAIName(JSONObject metadata) throws IOException {
+    String botType = ffaBotType(metadata);
+    return FfaMapCatalog.isDownloaded(metadata.optString("mapId"))
+        ? MapsBotCatalog.get(botType).name : "cobra".equals(botType) ? "Cobra" : "NullBot (ground)";
+  }
+
+  private static String ffaScriptName(JSONObject metadata) throws IOException {
+    String botType = ffaBotType(metadata);
+    if (!FfaMapCatalog.isDownloaded(metadata.optString("mapId")))
+      return "cobra".equals(botType) ? "Cobra" : "ffa-nullbot";
+    String script = MapsBotCatalog.get(botType).script;
+    return script.substring(script.lastIndexOf('/') + 1, script.length() - 3);
   }
 
   private File file(String id, String suffix) throws IOException {

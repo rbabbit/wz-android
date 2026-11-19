@@ -1,8 +1,8 @@
 # Warzone Towers
 
-**Current Maps test revision: 0.99.10 (version code 110).** Maps includes the official map catalogue, all supported player counts, bot and difficulty selection, the compact map preview/menu and paging fixes, plus FFA or locked Teams with presets, editable player assignments and team save/load support. The additional Dumbot25a, RatBot personalities and Wally sources, runtime assets and licence notices are included.
+**Current Maps test revision: 0.99.11 (version code 111).** The Maps screen uses an adaptive compact three-column grid, a full map preview, compact settings and a full-width DOWNLOAD & PLAY action. Maps includes the official map catalogue, all supported player counts, bot and difficulty selection, paging fixes, plus FFA or locked Teams with presets, editable player assignments and team save/load support. The additional Dumbot25a, RatBot personalities and Wally sources, runtime assets and licence notices are included.
 
-[Maps feature and build notes](docs/releases/0.99.10-maps.md). The checkout includes the runtime assets needed to build this revision; regenerating the extra bot bundle is optional. No tests were run for the Teams delivery or this source-only GitHub commit, as requested. This commit does not upload an APK or change the VPS update feed.
+[Latest Maps layout notes](docs/releases/0.99.11-maps-layout.md) · [0.99.10 Maps feature and build notes](docs/releases/0.99.10-maps.md). The checkout includes the runtime assets needed to build this revision; regenerating the extra bot bundle is optional. No tests were run for this layout delivery or GitHub commit, as requested. This commit does not upload an APK or change the VPS update feed.
 
 ## Preserved combined test backup: 0.95
 

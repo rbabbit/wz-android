@@ -46,7 +46,7 @@ final class MapsSetupView extends FrameLayout {
         void back();
         void saves();
     }
-    private int pageSize = 8;
+    private int pageSize = 12;
     private final MapsStore store;
     private final Actions actions;
     private final Typeface face;
@@ -55,6 +55,7 @@ final class MapsSetupView extends FrameLayout {
     private Future<?> previewWork;
     private final LinearLayout shell, body, listPanel, details;
     private final MapGrid rows;
+    private final SettingsRow settings;
     private final Spinner sizes, gameType, bot, difficulty;
     private final EditText search;
     private final TextView status, pageLabel, mapName, mapFacts, mapCredits, opponentFacts;
@@ -94,18 +95,18 @@ final class MapsSetupView extends FrameLayout {
         shell.addView(header, new LinearLayout.LayoutParams(-1, -2));
 
         body = row();
-        LinearLayout.LayoutParams bodyParams = new LinearLayout.LayoutParams(-1, 0, 1); bodyParams.topMargin = dp(10);
+        LinearLayout.LayoutParams bodyParams = new LinearLayout.LayoutParams(-1, 0, 1); bodyParams.topMargin = dp(6);
         shell.addView(body, bodyParams);
         listPanel = column();
-        body.addView(listPanel, new LinearLayout.LayoutParams(0, -1, .38f));
-        LinearLayout filters = row(); filters.setPadding(0, 0, 0, dp(8));
+        body.addView(listPanel, new LinearLayout.LayoutParams(0, -1, .51f));
+        LinearLayout filters = row(); filters.setPadding(0, 0, 0, dp(5));
         search = new EditText(context); search.setTextSize(12); search.setSingleLine(true); search.setTextColor(TowersTheme.TEXT);
         search.setHintTextColor(TowersTheme.SECONDARY); search.setHint("Search maps"); search.setContentDescription("Search maps by name or author");
         search.setPadding(dp(10), 0, dp(10), 0); search.setBackground(TowersTheme.control(context, TowersTheme.CONTROL, 4));
-        filters.addView(search, weighted(1.5f, dp(36), 0));
+        filters.addView(search, weighted(1.5f, dp(34), 0));
         String[] groups = {"All players", "2 players", "3 players", "4 players", "5 players", "6 players", "7 players", "8 players", "9 players", "10 players", "Downloaded"};
         sizes = spinner(groups); sizes.setContentDescription("Filter maps by player count or downloaded maps");
-        filters.addView(sizes, weighted(1, dp(36), 6)); listPanel.addView(filters, new LinearLayout.LayoutParams(-1, -2));
+        filters.addView(sizes, weighted(1, dp(34), 6)); listPanel.addView(filters, new LinearLayout.LayoutParams(-1, -2));
         search.addTextChangedListener(new TextWatcher() {
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
             public void onTextChanged(CharSequence s, int start, int before, int count) { firstMapIndex = 0; filter(); }
@@ -119,14 +120,13 @@ final class MapsSetupView extends FrameLayout {
         previous.setContentDescription("Previous page of maps"); next.setContentDescription("Next page of maps");
         previous.setOnClickListener(v -> changePage(-1)); next.setOnClickListener(v -> changePage(1));
         pageLabel = text("", 11, TowersTheme.SECONDARY); pageLabel.setGravity(Gravity.CENTER); pageLabel.setSingleLine(true);
-        LinearLayout pageCopy = column(); pageCopy.setGravity(Gravity.CENTER);
-        pageCopy.addView(pageLabel, new LinearLayout.LayoutParams(-1, -2));
-        pages.addView(previous, new LinearLayout.LayoutParams(dp(36), dp(34)));
-        pages.addView(pageCopy, weighted(1, dp(38), 0)); pages.addView(next, new LinearLayout.LayoutParams(dp(36), dp(34)));
-        LinearLayout.LayoutParams pageParams = new LinearLayout.LayoutParams(-1, -2); pageParams.topMargin = dp(5);
+        previous.setPadding(0, 0, 0, 0); next.setPadding(0, 0, 0, 0);
+        pages.addView(previous, new LinearLayout.LayoutParams(dp(32), dp(36)));
+        pages.addView(pageLabel, weighted(1, dp(36), 0)); pages.addView(next, new LinearLayout.LayoutParams(dp(32), dp(36)));
+        LinearLayout.LayoutParams pageParams = new LinearLayout.LayoutParams(-1, -2); pageParams.topMargin = dp(3);
         listPanel.addView(pages, pageParams);
 
-        details = column(); details.setPadding(dp(22), 0, 0, 0);
+        details = column(); details.setPadding(dp(16), 0, 0, 0);
         mapName = text("Choose a map", 17, TowersTheme.TEXT); mapName.setTypeface(face); mapName.setMaxLines(2);
         mapName.setEllipsize(android.text.TextUtils.TruncateAt.END); details.addView(mapName, new LinearLayout.LayoutParams(-1, -2));
         mapFacts = text("", 12, TowersTheme.SECONDARY); details.addView(mapFacts, new LinearLayout.LayoutParams(-1, -2));
@@ -136,22 +136,18 @@ final class MapsSetupView extends FrameLayout {
         details.addView(preview, imageParams);
         mapCredits = text("", 10, TowersTheme.SECONDARY); mapCredits.setGravity(Gravity.CENTER);
         details.addView(mapCredits, new LinearLayout.LayoutParams(-1, -2));
-        body.addView(details, new LinearLayout.LayoutParams(0, -1, .62f));
+        body.addView(details, new LinearLayout.LayoutParams(0, -1, .49f));
 
-        LinearLayout modeChoices = row(); modeChoices.setPadding(0, dp(5), 0, 0);
         gameType = spinner(new String[]{"FFA", "Teams"}); gameType.setContentDescription("Game type: free for all or teams");
         teamButton = button("Set teams", false); teamButton.setVisibility(GONE);
+        teamButton.setTextSize(12); teamButton.setPadding(dp(6), 0, dp(6), 0);
         teamButton.setOnClickListener(v -> openTeamSetup());
-        modeChoices.addView(gameType, weighted(1, dp(34), 0));
-        modeChoices.addView(teamButton, weighted(1, dp(34), 6));
-        listPanel.addView(modeChoices, new LinearLayout.LayoutParams(-1, -2));
         gameType.setOnItemSelectedListener(selection(() -> {
             if (syncingGameType || selected == null || busy) return;
             teamButton.setVisibility(gameType.getSelectedItemPosition() == 1 ? VISIBLE : GONE);
             saveTeamSetup(); updateSelectedFacts();
         }));
 
-        LinearLayout choices = row(); choices.setPadding(0, dp(5), 0, 0);
         String[] botNames = new String[MapsBotCatalog.ALL.size()];
         for (int i = 0; i < botNames.length; i++) botNames[i] = MapsBotCatalog.ALL.get(i).name;
         bot = spinner(botNames); bot.setContentDescription("Opponent bot");
@@ -161,15 +157,19 @@ final class MapsSetupView extends FrameLayout {
         String preferredDifficulty = preferences.getString("difficulty", "easy");
         difficulty.setSelection("hard".equals(preferredDifficulty) ? 2 : "medium".equals(preferredDifficulty) ? 1 : 0);
         bot.setOnItemSelectedListener(selection(this::updateSelectedFacts));
-        choices.addView(bot, weighted(1, dp(36), 0)); choices.addView(difficulty, weighted(1, dp(36), 6));
-        listPanel.addView(choices, new LinearLayout.LayoutParams(-1, -2));
-        opponentFacts = text("", 11, TowersTheme.SECONDARY); opponentFacts.setPadding(0, dp(4), 0, dp(4));
+        settings = new SettingsRow(context);
+        for (View control : new View[]{gameType, teamButton, bot, difficulty}) settings.addView(control);
+        LinearLayout.LayoutParams settingsParams = new LinearLayout.LayoutParams(-1, -2); settingsParams.topMargin = dp(4);
+        listPanel.addView(settings, settingsParams);
+        opponentFacts = text("", 11, TowersTheme.SECONDARY); opponentFacts.setPadding(0, dp(2), 0, dp(2));
+        opponentFacts.setSingleLine(true); opponentFacts.setEllipsize(android.text.TextUtils.TruncateAt.END);
+        opponentFacts.setIncludeFontPadding(false);
         listPanel.addView(opponentFacts, new LinearLayout.LayoutParams(-1, -2));
         status = text("", 11, TowersTheme.SECONDARY); status.setMaxLines(2); status.setVisibility(GONE);
         status.setAccessibilityLiveRegion(ACCESSIBILITY_LIVE_REGION_POLITE); listPanel.addView(status, new LinearLayout.LayoutParams(-1, -2));
         play = button("DOWNLOAD & PLAY", true); play.setEnabled(false);
         play.setOnClickListener(v -> downloadAndPlay());
-        LinearLayout.LayoutParams playParams = new LinearLayout.LayoutParams(-1, dp(40)); playParams.topMargin = dp(3);
+        LinearLayout.LayoutParams playParams = new LinearLayout.LayoutParams(-1, dp(36)); playParams.topMargin = dp(3);
         listPanel.addView(play, playParams);
 
         setOnApplyWindowInsetsListener((view, insets) -> {
@@ -272,7 +272,9 @@ final class MapsSetupView extends FrameLayout {
                 ? teamSummary(teamIds) : "You + " + (selected.players - 1) + (selected.players == 2 ? " bot" : " bots");
         opponentFacts.setText(opponents
                 + " · VTOL on" + (selected.scavengers > 0 ? " · Scavengers" : ""));
-        play.setText(store.isInstalled(selected) ? "PLAY" : "DOWNLOAD & PLAY"); play.setEnabled(!busy && selected.supported());
+        play.setText(store.isInstalled(selected) ? "PLAY" : "DOWNLOAD & PLAY");
+        play.setContentDescription((store.isInstalled(selected) ? "Play " : "Download and play ") + selected.name);
+        play.setEnabled(!busy && selected.supported());
     }
 
     private void loadTeamSetup(MapsStore.Entry entry) {
@@ -430,13 +432,60 @@ final class MapsSetupView extends FrameLayout {
         boolean wide = width > height;
         body.setOrientation(wide ? LinearLayout.HORIZONTAL : LinearLayout.VERTICAL);
         for (int i = 0; i < body.getChildCount(); i++) body.getChildAt(i).setLayoutParams(wide
-                ? new LinearLayout.LayoutParams(0, -1, i == 0 ? .38f : .62f) : new LinearLayout.LayoutParams(-1, 0, 1));
-        details.setPadding(wide ? dp(22) : 0, wide ? 0 : dp(8), 0, 0);
+                ? new LinearLayout.LayoutParams(0, -1, i == 0 ? .51f : .49f) : new LinearLayout.LayoutParams(-1, 0, 1));
+        details.setPadding(wide ? dp(16) : 0, wide ? 0 : dp(8), 0, 0);
+    }
+
+    /** Keep all setup controls together, using a second row only when needed. */
+    private final class SettingsRow extends FrameLayout {
+        private boolean twoRows;
+        private int controlHeight;
+
+        SettingsRow(Context context) { super(context); }
+
+        @Override protected void onMeasure(int widthSpec, int heightSpec) {
+            int width = MeasureSpec.getSize(widthSpec), gap = dp(5);
+            int fontHeight = (int) Math.ceil(android.util.TypedValue.applyDimension(
+                    android.util.TypedValue.COMPLEX_UNIT_SP, 12, getResources().getDisplayMetrics()));
+            controlHeight = Math.max(dp(34), fontHeight + dp(16));
+            float textScale = Math.max(1f, getResources().getConfiguration().fontScale);
+            int minimum = dp((teamButton.getVisibility() == VISIBLE ? 322 : 246) * textScale)
+                    + gap * (teamButton.getVisibility() == VISIBLE ? 3 : 2);
+            twoRows = width < minimum;
+            measureControls(0, twoRows ? 2 : 4, width, gap);
+            if (twoRows) measureControls(2, 4, width, gap);
+            setMeasuredDimension(width, controlHeight * (twoRows ? 2 : 1) + (twoRows ? gap : 0));
+        }
+
+        private void measureControls(int start, int end, int width, int gap) {
+            float total = 0;
+            int visible = 0;
+            for (int i = start; i < end; i++) if (getChildAt(i).getVisibility() != GONE) { total += controlWeight(i); visible++; }
+            int remaining = Math.max(0, width - Math.max(0, visible - 1) * gap), used = 0, count = 0;
+            for (int i = start; i < end; i++) {
+                View child = getChildAt(i); if (child.getVisibility() == GONE) continue;
+                int childWidth = ++count == visible ? remaining - used : Math.round(remaining * controlWeight(i) / total);
+                child.measure(MeasureSpec.makeMeasureSpec(Math.max(0, childWidth), MeasureSpec.EXACTLY),
+                        MeasureSpec.makeMeasureSpec(controlHeight, MeasureSpec.EXACTLY));
+                used += childWidth;
+            }
+        }
+
+        private float controlWeight(int index) { return index == 2 ? 1.35f : index == 3 ? 1.1f : 1f; }
+
+        @Override protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+            int x = 0, y = 0, gap = dp(5);
+            for (int i = 0; i < getChildCount(); i++) {
+                if (twoRows && i == 2) { x = 0; y = controlHeight + gap; }
+                View child = getChildAt(i); if (child.getVisibility() == GONE) continue;
+                child.layout(x, y, x + child.getMeasuredWidth(), y + controlHeight); x += child.getMeasuredWidth() + gap;
+            }
+        }
     }
 
     /** One contained page of cards, changed only by the previous/next buttons. */
     private final class MapGrid extends FrameLayout {
-        private int columns = 2, rowCount = 4, tileWidth, tileHeight;
+        private int columns = 3, rowCount = 4, tileWidth, tileHeight;
 
         MapGrid(Context context) {
             super(context);
@@ -444,11 +493,12 @@ final class MapsSetupView extends FrameLayout {
         }
 
         @Override protected void onMeasure(int widthSpec, int heightSpec) {
-            int width = MeasureSpec.getSize(widthSpec), height = MeasureSpec.getSize(heightSpec), gap = dp(6);
+            int width = MeasureSpec.getSize(widthSpec), height = MeasureSpec.getSize(heightSpec), gap = dp(4);
             int fontHeight = (int) Math.ceil(android.util.TypedValue.applyDimension(
-                    android.util.TypedValue.COMPLEX_UNIT_SP, 15, getResources().getDisplayMetrics()));
+                    android.util.TypedValue.COMPLEX_UNIT_SP, 12, getResources().getDisplayMetrics()));
             int minimum = Math.max(dp(38), fontHeight + dp(14));
-            columns = width >= dp(220) ? 2 : 1;
+            float textScale = Math.max(1f, getResources().getConfiguration().fontScale);
+            columns = width >= dp(350 * textScale) ? 3 : width >= dp(210) ? 2 : 1;
             rowCount = Math.max(1, Math.min(4, (height + gap) / Math.max(1, minimum + gap)));
             int capacity = columns * rowCount;
             // Weighted LinearLayout first probes with a provisional height.
@@ -459,7 +509,7 @@ final class MapsSetupView extends FrameLayout {
                 renderRows();
             }
             tileWidth = Math.max(0, (width - gap * (columns - 1)) / columns);
-            tileHeight = Math.max(0, Math.min(minimum + dp(4), (height - gap * (rowCount - 1)) / rowCount));
+            tileHeight = Math.max(0, Math.min(dp(52), (height - gap * (rowCount - 1)) / rowCount));
             for (int i = 0; i < getChildCount(); i++) {
                 View child = getChildAt(i);
                 child.measure(MeasureSpec.makeMeasureSpec(filtered.isEmpty() ? width : tileWidth, MeasureSpec.EXACTLY),
@@ -469,7 +519,7 @@ final class MapsSetupView extends FrameLayout {
         }
 
         @Override protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-            int gap = dp(6);
+            int gap = dp(4);
             for (int i = 0; i < getChildCount(); i++) {
                 View child = getChildAt(i);
                 int x = (i % columns) * (tileWidth + gap), y = (i / columns) * (tileHeight + gap);
@@ -488,7 +538,7 @@ final class MapsSetupView extends FrameLayout {
             setContentDescription(entry.name + ", " + entry.players + " players" + (store.isInstalled(entry) ? ", downloaded" : ""));
             setBackground(new RippleDrawable(ColorStateList.valueOf(TowersTheme.RIPPLE),
                     TowersTheme.control(getContext(), TowersTheme.CONTROL, 4), null));
-            name = text(entry.name, 12, TowersTheme.TEXT); count = text(entry.players + "p", 12, TowersTheme.TEXT);
+            name = text(entry.name, 12, TowersTheme.TEXT); count = text(entry.players + "p", 11, TowersTheme.TEXT);
             for (TextView text : new TextView[]{name, count}) {
                 text.setSingleLine(true); text.setTextColor(TowersTheme.buttonText(false)); text.setDuplicateParentStateEnabled(true);
                 text.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO); addView(text);

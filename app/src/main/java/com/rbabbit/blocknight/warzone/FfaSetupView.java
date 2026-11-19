@@ -37,13 +37,14 @@ final class FfaSetupView extends FrameLayout {
         void map(String mapId);
         void saves();
         void back();
+        default void challenge() { }
     }
 
     private final Typeface face;
     private final Actions actions;
     private final FfaMapCatalog catalog;
     private final FfaMapBrowserState browser;
-    private final Button easy, medium, hard, back, saves, start;
+    private final Button easy, medium, hard, back, saves, start, challenge;
     private final Button[] groupButtons = new Button[4];
     private final int[] groupKeys = {2, 3, 4, FfaMapBrowserState.ORIGINALS};
     private final CompactRow groups, choices;
@@ -73,6 +74,7 @@ final class FfaSetupView extends FrameLayout {
 
         back = action("BACK", false);back.setContentDescription("Back to game modes");
         saves = action("FFA SAVES", false);saves.setContentDescription("Open FFA saved games on this phone");
+        challenge = action("CHALLENGE", false);challenge.setContentDescription("Open single-player Challenge maps");
         start = action("START FFA", true);
         screenTitle=copy("FFA",20,TowersTheme.TEXT);screenTitle.setTypeface(face);
         screenTitle.setGravity(android.view.Gravity.CENTER_VERTICAL);
@@ -111,6 +113,7 @@ final class FfaSetupView extends FrameLayout {
         maps=new FfaPager(context);
         back.setOnClickListener(v -> { maps.settleSelection(); actions.back(); });
         saves.setOnClickListener(v -> { maps.settleSelection(); actions.saves(); });
+        challenge.setOnClickListener(v -> { maps.settleSelection(); actions.challenge(); });
         start.setOnClickListener(v -> { maps.settleSelection(); actions.start(mapId, difficulty); });
         addView(new LaunchPanel(context),new LayoutParams(-1,-1));
         setOnApplyWindowInsetsListener((view,insets) -> {
@@ -225,7 +228,7 @@ final class FfaSetupView extends FrameLayout {
     private final class LaunchPanel extends FrameLayout {
         private FfaSetupLayout layout;
         LaunchPanel(Context context) {
-            super(context);addView(back);addView(screenTitle);addView(saves);addView(maps);addView(previous);addView(position);addView(next);
+            super(context);addView(back);addView(screenTitle);addView(saves);addView(challenge);addView(maps);addView(previous);addView(position);addView(next);
             addView(heading);addView(groups);addView(choices);addView(facts);addView(start);
         }
         @Override protected void onMeasure(int width,int height) {
@@ -235,7 +238,8 @@ final class FfaSetupView extends FrameLayout {
             layout=FfaSetupLayout.calculate(w,h,density,insetLeft,insetTop,insetRight,insetBottom,heading.getMeasuredHeight(),contentWidth(start,128));
             heading.setVisibility(layout.compactHeading?GONE:VISIBLE);compactHeading.setVisibility(layout.compactHeading?VISIBLE:GONE);
             exact(back,contentWidth(back,72),layout.header.height());exact(saves,contentWidth(saves,96),layout.header.height());
-            exact(screenTitle,Math.max(0,layout.header.width()-back.getMeasuredWidth()-saves.getMeasuredWidth()-dp(24)),layout.header.height());
+            exact(challenge,contentWidth(challenge,100),layout.header.height());
+            exact(screenTitle,Math.max(0,layout.header.width()-back.getMeasuredWidth()-saves.getMeasuredWidth()-challenge.getMeasuredWidth()-dp(36)),layout.header.height());
             exact(maps,layout.preview.width(),layout.preview.height());exact(previous,layout.previous.width(),layout.previous.height());
             exact(position,layout.position.width(),layout.position.height());exact(next,layout.next.width(),layout.next.height());
             if(!layout.compactHeading)exact(heading,layout.heading.width(),layout.heading.height());
@@ -245,6 +249,7 @@ final class FfaSetupView extends FrameLayout {
         @Override protected void onLayout(boolean changed,int l,int t,int r,int b) {
             back.layout(layout.header.left,layout.header.top,layout.header.left+back.getMeasuredWidth(),layout.header.bottom);
             saves.layout(layout.header.right-saves.getMeasuredWidth(),layout.header.top,layout.header.right,layout.header.bottom);
+            challenge.layout(saves.getLeft()-dp(12)-challenge.getMeasuredWidth(),layout.header.top,saves.getLeft()-dp(12),layout.header.bottom);
             int titleLeft=layout.header.left+back.getMeasuredWidth()+dp(12);
             screenTitle.layout(titleLeft,layout.header.top,titleLeft+screenTitle.getMeasuredWidth(),layout.header.bottom);
             place(maps,layout.preview);place(previous,layout.previous);place(position,layout.position);place(next,layout.next);

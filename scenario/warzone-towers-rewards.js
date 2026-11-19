@@ -20,6 +20,7 @@ var wtreward_types = {
     ground_shaker:{id:"Emplacement-Howitzer150",research:"R-Defense-HvyHowitzer"},
     wide_sensor:{id:"Sys-SensoTowerWS",research:"R-Sys-Sensor-WSTower"},
     laser_sat:{id:"A0LasSatCommand",research:"R-Wpn-LasSat"},
+    satellite_uplink:{id:"A0Sat-linkCentre",research:"R-Sys-Sensor-UpLink",max:1},
     mf_aa_flak:{id:"X-Super-AA",more:true,fortress:true,max:3},
     mf_assault_gun:{id:"X-Super-AG",more:true,fortress:true,max:3},
     mf_flamer:{id:"X-Super-Flame",more:true,fortress:true,max:3},

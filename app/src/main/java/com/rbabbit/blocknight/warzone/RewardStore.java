@@ -134,6 +134,9 @@ final class RewardStore {
   synchronized RewardLedger.Receipt finish(String session, boolean won, String difficulty, int total, boolean authoritativeRemaining) {
     return transaction(() -> ledger.finish(session, won, difficulty, total, authoritativeRemaining));
   }
+  synchronized RewardLedger.Receipt finishChallenge(String session, boolean won, String difficulty, boolean authoritativeRemaining) {
+    return transaction(() -> ledger.finishChallenge(session, won, difficulty, authoritativeRemaining));
+  }
   synchronized RewardLedger.Receipt finish(String session, boolean won, String difficulty, int total,
       boolean authoritativeRemaining, Set<String> requiredDifficultyMapIds) {
     if (requiredDifficultyMapIds == null) throw new IllegalArgumentException("Missing difficulty map catalog.");
@@ -283,7 +286,7 @@ final class RewardStore {
   }
 
   private static void requireQuoteContext(RewardLedger.Run run,JSONObject quote) {
-    boolean strict="survival".equals(run.profile);
+    boolean strict="survival".equals(run.profile) || "challenge".equals(run.profile);
     for(String id:run.items.keySet())strict|=RewardCatalog.get(id).moreFortress;
     for(RewardLedger.LiveTx tx:run.transactions.values())if("pending".equals(tx.status))strict|=RewardCatalog.get(tx.itemId).moreFortress;
     if((strict||quote.has("profile")||quote.has("map"))&&(!run.profile.equals(quote.optString("profile"))||!run.map.equals(quote.optString("map"))))
@@ -326,10 +329,11 @@ final class RewardStore {
 
   private static String encode(RewardLedger value) {
     try {
-      JSONObject root = new JSONObject().put("version", 5).put("balance", value.balance)
+      JSONObject root = new JSONObject().put("version", 6).put("balance", value.balance)
           .put("pendingAdReward", value.pendingAdReward)
           .put("inventory", new JSONObject(value.inventory)).put("loadout", new JSONObject(value.loadout))
           .put("survivalLoadout",new JSONObject(value.survivalLoadout))
+          .put("challengeLoadout",new JSONObject(value.challengeLoadout))
           .put("completed", new JSONArray(value.completed))
           .put("claimedDifficultyBonuses", new JSONArray(value.claimedDifficultyBonuses));
       JSONArray runs = new JSONArray();
@@ -382,7 +386,7 @@ final class RewardStore {
     try {
       JSONObject root = new JSONObject(saved);
       int version = root.getInt("version");
-      if (version != 1 && version != 2 && version != 3 && version != 4 && version != 5) throw new IllegalArgumentException("Unsupported wallet version.");
+      if (version != 1 && version != 2 && version != 3 && version != 4 && version != 5 && version != 6) throw new IllegalArgumentException("Unsupported wallet version.");
       RewardLedger value = new RewardLedger();
       value.balance = root.getInt("balance");
       if (value.balance < 0) throw new IllegalArgumentException("Invalid wallet balance.");
@@ -422,21 +426,25 @@ final class RewardStore {
       value.loadout.putAll(readCounts(root.getJSONObject("loadout")));
       value.loadout.values().removeIf(quantity -> quantity == 0);
       if(version>=5)value.survivalLoadout.putAll(readCounts(root.getJSONObject("survivalLoadout")));
+      if(version>=6)value.challengeLoadout.putAll(readCounts(root.getJSONObject("challengeLoadout")));
       if(version<5)for(String id:value.inventory.keySet())if(RewardCatalog.get(id).moreFortress)throw new IllegalArgumentException("New stock requires its current wallet version.");
       for (String id : value.loadout.keySet()) if (value.loadout.get(id) > RewardLedger.count(value.inventory, id)
           || value.loadout.get(id) > RewardCatalog.get(id).maxPerMatch) throw new IllegalArgumentException("Invalid next-match quantities.");
       if (RewardLedger.fortressCount(value.loadout) > 3) throw new IllegalArgumentException("Invalid fortress loadout.");
-      for(Map<String,Integer> chosen:java.util.Arrays.asList(value.loadout,value.survivalLoadout)){
+      for(Map<String,Integer> chosen:java.util.Arrays.asList(value.loadout,value.survivalLoadout,value.challengeLoadout)){
         chosen.values().removeIf(n->n==0);
         for(String id:chosen.keySet())if(chosen.get(id)>RewardLedger.count(value.inventory,id)||chosen.get(id)>RewardCatalog.get(id).maxPerMatch)throw new IllegalArgumentException("Invalid profile loadout.");
         if(RewardLedger.fortressCount(chosen)>3)throw new IllegalArgumentException("Invalid profile fortress loadout.");RewardCatalog.requireDependencies(chosen);
       }
+      for(String id:value.challengeLoadout.keySet())RewardCatalog.requireEligible(RewardCatalog.get(id),"challenge","home");
       JSONArray runs = root.getJSONArray("runs");
       for (int i = 0; i < runs.length(); i++) {
         JSONObject item = runs.getJSONObject(i);
         Map<String, Integer> purchased = readCounts(item.getJSONObject("items"));
         Map<String, Integer> initial = version >= 3 ? readCounts(item.getJSONObject("baseItems")) : purchased;
         RewardLedger.Run run = new RewardLedger.Run(item.getString("session"), item.getString("map"),version>=5?item.getString("profile"):"towers", initial);
+        if ("challenge".equals(run.profile) && (version < 6 || !ChallengeMapCatalog.isKnownId(run.map)))
+          throw new IllegalArgumentException("Invalid saved Challenge identity.");
         if (run.session.isEmpty() || run.map.isEmpty() || value.runs.containsKey(run.session))
           throw new IllegalArgumentException("Invalid saved match identity.");
         run.items.clear(); run.items.putAll(purchased);
@@ -509,6 +517,9 @@ final class RewardStore {
             if (quantity > 0) run.refunded.put(id, quantity);
           }
         }
+        if ("challenge".equals(run.profile) && (run.wave != 0 || !run.clearedWaves.isEmpty() || run.waveCredits != 0
+            || run.difficultyCredits != 0 || run.receipt != null && (run.receipt.wave != 0 || run.receipt.total != 0)))
+          throw new IllegalArgumentException("Invalid Challenge reward history.");
         value.runs.put(run.session, run);
       }
       return value;

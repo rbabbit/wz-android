@@ -33,6 +33,7 @@ final class GraphicsSetupView extends FrameLayout {
         void multiplayer();
         void guide();
         void hub();
+        default void about() {}
         void campaignContinue();
         void campaignNew();
         void map(String id);

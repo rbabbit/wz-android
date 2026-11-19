@@ -89,11 +89,15 @@ public final class MainActivity extends Activity {
   private GraphicsSetupView graphicsSetup;
   private GuideView guideView;
   private HubView hubView;
+  private AboutView aboutView;
   private AppUpdateController appUpdates;
   private CampaignSetupView campaignSetup;
   private CampaignVideoStore campaignVideos;
   private SaveGameStore campaignSaves;
   private SaveGameStore ffaSaves;
+  private SaveGameStore challengeSaves;
+  private ChallengeSetupView challengeSetup;
+  private String challengeMapId = "firefight", challengeDifficulty = "easy", challengeWeapon = "cannon";
   private SaveGameStore survivalSaves;
   private SurvivalSetupView survivalSetup;
   private String survivalMapId = "tdn2";
@@ -194,6 +198,7 @@ public final class MainActivity extends Activity {
     saveGames = new SaveGameStore(this);
     campaignSaves = new SaveGameStore(this, true);
     ffaSaves = new SaveGameStore(this, "ffa");
+    challengeSaves = new SaveGameStore(this, "challenge");
     survivalSaves = new SaveGameStore(this, "survival");
     survivalMapId = SurvivalMapCatalog.normalizeId(getPreferences(MODE_PRIVATE).getString("survival_map_id", "tdn2"));
     campaignVideos = new CampaignVideoStore(this);
@@ -201,7 +206,7 @@ public final class MainActivity extends Activity {
     JSONArray pinnedRuns = rewards.pinnedRuns();
     for (int i = 0; i < pinnedRuns.length(); i++) {
       String run = pinnedRuns.optString(i);
-      try { if (!saveGames.hasRun(run) && !survivalSaves.hasRun(run)) rewards.unpinRun(run); }
+      try { if (!saveGames.hasRun(run) && !survivalSaves.hasRun(run) && !challengeSaves.hasRun(run)) rewards.unpinRun(run); }
       catch (RuntimeException error) { savedWalletError = "Saved-game stock could not be reconciled. Restart to retry."; }
     }
     musicEnabled = getPreferences(MODE_PRIVATE).getBoolean("music_enabled", true);
@@ -214,6 +219,8 @@ public final class MainActivity extends Activity {
     duelWeapon = BattleLaunchSpec.duelWeapon(getIntent().getStringExtra("duel_weapon"));
     ffaDifficulty = BattleLaunchSpec.ffaDifficulty(getPreferences(MODE_PRIVATE).getString("ffa_difficulty", "easy"));
     ffaMapId = FfaMapCatalog.normalizeId(getPreferences(MODE_PRIVATE).getString("ffa_map_id", "emag"));
+    challengeMapId = ChallengeMapCatalog.normalizeId(getPreferences(MODE_PRIVATE).getString("challenge_map_id", "firefight"));
+    challengeDifficulty = BattleLaunchSpec.ffaDifficulty(getPreferences(MODE_PRIVATE).getString("challenge_difficulty", "easy"));
     showGraphicsSetup();
     if (savedWalletError != null) graphicsSetup.showError(savedWalletError);
     rewardedAds.start();
@@ -265,9 +272,11 @@ public final class MainActivity extends Activity {
               @Override
               public void hub() { showHub(); }
               @Override
+              public void about() { showAbout(); }
+              @Override
               public void updates() {
                 if (!BuildConfig.PLAY_STORE_BUILD && appUpdates != null
-                    && graphicsSetup != null && guideView == null && hubView == null) appUpdates.show();
+                    && graphicsSetup != null && guideView == null && hubView == null && aboutView == null) appUpdates.show();
               }
               @Override
               public void campaignContinue() { openCampaignFromHome(true); }
@@ -315,13 +324,13 @@ public final class MainActivity extends Activity {
     if (graphicsSetup != null) { graphicsSetup.setVisibility(View.VISIBLE); graphicsSetup.showTowersMap(); }
   }
 
-  private String currentRewardProfile() { return survivalSetup != null || graphicsSetup == null && isSurvivalBattle() ? "survival" : "towers"; }
-  private String currentRewardMap() { return graphicsSetup == null ? battleLaunch.mapId : survivalSetup != null ? survivalSetup.selectedMap() : graphicsSetup.selectedMap(); }
+  private String currentRewardProfile() { return challengeSetup != null || graphicsSetup == null && isChallengeBattle() ? "challenge" : survivalSetup != null || graphicsSetup == null && isSurvivalBattle() ? "survival" : "towers"; }
+  private String currentRewardMap() { return graphicsSetup == null ? battleLaunch.mapId : challengeSetup != null ? challengeSetup.selectedMap() : survivalSetup != null ? survivalSetup.selectedMap() : graphicsSetup.selectedMap(); }
   private MapLevelCatalog.Level currentTowersLevel() { return isSurvivalBattle() ? SurvivalMapCatalog.get(battleLaunch.mapId) : MapLevelCatalog.get(this).level(battleLaunch.mapId); }
   private SaveGameStore currentTowersSaves() { return isSurvivalBattle() ? survivalSaves : saveGames; }
 
   private void showGuide() {
-    if (guideView != null || hubView != null || graphicsSetup == null || campaignHomeBusy) return;
+    if (guideView != null || hubView != null || aboutView != null || graphicsSetup == null || campaignHomeBusy) return;
     guideView = new GuideView(this, this::closeGuide);
     graphicsSetup.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS);
     root.addView(guideView, new FrameLayout.LayoutParams(-1, -1));
@@ -329,11 +338,30 @@ public final class MainActivity extends Activity {
   }
 
   private void showHub() {
-    if (hubView != null || guideView != null || graphicsSetup == null || campaignHomeBusy) return;
+    if (hubView != null || guideView != null || aboutView != null || graphicsSetup == null || campaignHomeBusy) return;
     hubView = new HubView(this, this::closeHub);
     graphicsSetup.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS);
     root.addView(hubView, new FrameLayout.LayoutParams(-1, -1));
     hubView.requestFocus();
+  }
+
+  private void showAbout() {
+    if (aboutView != null || hubView != null || guideView != null || graphicsSetup == null || campaignHomeBusy) return;
+    aboutView = new AboutView(this, this::closeAbout);
+    graphicsSetup.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS);
+    root.addView(aboutView, new FrameLayout.LayoutParams(-1, -1));
+    aboutView.requestFocus();
+  }
+
+  private void closeAbout() {
+    if (aboutView == null) return;
+    root.removeView(aboutView);
+    aboutView = null;
+    if (graphicsSetup != null) {
+      graphicsSetup.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_AUTO);
+      graphicsSetup.requestFocus();
+    }
+    immersive();
   }
 
   private void closeHub() {
@@ -457,6 +485,7 @@ public final class MainActivity extends Activity {
       }
       @Override public void saves() { showFfaSaves(); }
       @Override public void back() { closeFfaSetup(); }
+      @Override public void challenge() { closeFfaSetup(); showChallengeSetup(); }
     }, ffaMapId, ffaDifficulty);
     root.addView(ffaSetup, new FrameLayout.LayoutParams(-1, -1));
   }
@@ -498,6 +527,62 @@ public final class MainActivity extends Activity {
       loadingSave = payload; loadingSaveId = id; restoringGame = true;
       createLoadingPanel();
       webView.loadUrl(gameUrl());
+    } catch (Exception error) {
+      if (savedGamesView != null) savedGamesView.showError(error.getMessage());
+      else { returnToMainMenu(); graphicsSetup.showError(error.getMessage()); }
+    }
+  }
+
+  private void showChallengeSetup() {
+    if (graphicsSetup == null || challengeSetup != null || loadingOverlay != null) return;
+    cancelCampaignHomeCheck(); closeCampaignSetup(); closeFfaSetup(); closeRewards(); closeSavedGames();
+    challengeSetup = new ChallengeSetupView(this, new ChallengeSetupView.Actions() {
+      @Override public void start(String selectedMap, String difficulty) {
+        challengeMapId = BattleLaunchSpec.challengeMapId(selectedMap);
+        challengeDifficulty = BattleLaunchSpec.ffaDifficulty(difficulty);
+        // Choose once per new match. Restored games keep their saved branch.
+        challengeWeapon = new java.security.SecureRandom().nextBoolean() ? "cannon" : "rockets";
+        getPreferences(MODE_PRIVATE).edit().putString("challenge_map_id", challengeMapId).putString("challenge_difficulty", challengeDifficulty).apply();
+        matchMode = "challenge"; launchGame();
+      }
+      @Override public void map(String id) { challengeMapId = BattleLaunchSpec.challengeMapId(id); getPreferences(MODE_PRIVATE).edit().putString("challenge_map_id", id).apply(); }
+      @Override public void saves() { showChallengeSaves(); }
+      @Override public void rewards() { showRewards(false); }
+      @Override public void back() { closeChallengeSetup(); showFfaSetup(); }
+    }, challengeMapId, challengeDifficulty);
+    challengeSetup.setRewardBalance(rewards.balance());
+    root.addView(challengeSetup, new FrameLayout.LayoutParams(-1,-1)); challengeSetup.requestFocus();
+  }
+  private void closeChallengeSetup() {
+    closeSavedGames();
+    if (challengeSetup != null) { challengeMapId = challengeSetup.selectedMap(); root.removeView(challengeSetup); challengeSetup = null; }
+  }
+  private void showChallengeSaves() {
+    if (graphicsSetup == null || challengeSetup == null || savedGamesView != null || loadingOverlay != null) return;
+    savedGamesView = new SavedGamesView(this, challengeSaves.list(), new SavedGamesView.Actions() {
+      @Override public void load(String id) { loadChallengeSave(id); }
+      @Override public void delete(String id) {
+        try { String run = challengeSaves.delete(id); if (!saveGames.hasRun(run) && !survivalSaves.hasRun(run) && !challengeSaves.hasRun(run)) rewards.unpinRun(run); savedGamesView.refresh(challengeSaves.list()); }
+        catch (Exception error) { savedGamesView.showError(error.getMessage()); }
+      }
+      @Override public void close() { closeSavedGames(); }
+    }, "challenge"); root.addView(savedGamesView, new FrameLayout.LayoutParams(-1,-1));
+  }
+  private void loadChallengeSave(String id) {
+    if (graphicsSetup == null || savedGamesView == null || loadingOverlay != null) return;
+    try {
+      JSONObject payload = challengeSaves.load(id), metadata = payload.getJSONObject("metadata");
+      String selected = BattleLaunchSpec.challengeMapId(metadata.getString("mapId"));
+      String run = metadata.getString("rewardRunId");
+      rewards.resumeRun(run, selected, "challenge");
+      challengeDifficulty = BattleLaunchSpec.ffaDifficulty(metadata.getString("difficulty"));
+      challengeWeapon = metadata.getString("weapon"); challengeMapId = selected; matchMode = "challenge";
+      battleLaunch = new BattleLaunchSpec("challenge", challengeWeapon, selected, musicEnabled && musicCached, challengeDifficulty, "dumbot25a");
+      closeChallengeSetup(); challengeMapId = selected;
+      getPreferences(MODE_PRIVATE).edit().putString("challenge_map_id",selected).putString("challenge_difficulty",challengeDifficulty).apply();
+      root.removeView(graphicsSetup); graphicsSetup = null;
+      loadingSave = payload; loadingSaveId = id; restoringGame = true;
+      createLoadingPanel(); rewardRunId = run; webView.loadUrl(gameUrl());
     } catch (Exception error) {
       if (savedGamesView != null) savedGamesView.showError(error.getMessage());
       else { returnToMainMenu(); graphicsSetup.showError(error.getMessage()); }
@@ -569,9 +654,10 @@ public final class MainActivity extends Activity {
     loadingSaveId = "";
     restoringGame = false;
     battleLaunch = new BattleLaunchSpec(
-        matchMode, duelWeapon, "survival".equals(matchMode) ? survivalMapId : "ffa".equals(matchMode) ? ffaMapId : mapId, musicEnabled && musicCached, ffaDifficulty);
+        matchMode, "challenge".equals(matchMode) ? challengeWeapon : duelWeapon, "challenge".equals(matchMode) ? challengeMapId : "survival".equals(matchMode) ? survivalMapId : "ffa".equals(matchMode) ? ffaMapId : mapId, musicEnabled && musicCached, "challenge".equals(matchMode) ? challengeDifficulty : ffaDifficulty);
     closeCampaignSetup();
     closeFfaSetup();
+    closeChallengeSetup();
     getPreferences(MODE_PRIVATE)
         .edit()
         .putString("map_id", mapId)
@@ -581,8 +667,8 @@ public final class MainActivity extends Activity {
       graphicsSetup = null;
     }
     createLoadingPanel();
-    rewardRunId = isTowersBattle() ? battleSession : "";
-    if (isTowersBattle()) {
+    rewardRunId = isRewardBattle() ? battleSession : "";
+    if (isRewardBattle()) {
       try { rewards.begin(rewardRunId, battleLaunch.mapId, battleLaunch.matchMode); }
       catch (RuntimeException error) {
         returnToMainMenu();
@@ -595,13 +681,13 @@ public final class MainActivity extends Activity {
 
   private void showRewards(boolean inGame) {
     if (rewardsView != null || rewardReceipt != null || rewards == null) return;
-    if (inGame && (!isTowersBattle() || battleSession.isEmpty() || !battleOutcome.isEmpty()
+    if (inGame && (!isRewardBattle() || battleSession.isEmpty() || !battleOutcome.isEmpty()
         || loadingOverlay != null || graphicsSetup != null)) return;
     if (!inGame && graphicsSetup == null) return;
     if (!inGame) cancelCampaignHomeCheck();
     final String selectedMap = currentRewardMap(), profile = currentRewardProfile();
-    MapLevelCatalog.Level level = "survival".equals(profile) ? SurvivalMapCatalog.get(selectedMap) : MapLevelCatalog.get(this).level(selectedMap);
-    rewardsView = new RewardsView(this, profile, selectedMap, level.name, rewards.balance(), rewards.inventory(),
+    String selectedName = "challenge".equals(profile) ? ChallengeMapCatalog.get(this).map(selectedMap).name : "survival".equals(profile) ? SurvivalMapCatalog.get(selectedMap).name : MapLevelCatalog.get(this).level(selectedMap).name;
+    rewardsView = new RewardsView(this, profile, selectedMap, selectedName, rewards.balance(), rewards.inventory(),
         inGame ? rewards.active(rewardRunId) : rewards.loadout(profile), inGame,
         new RewardsView.Actions() {
           @Override public void buy(String id, int quantity) {
@@ -621,6 +707,7 @@ public final class MainActivity extends Activity {
               rewards.buy(id, quantity, profile, selectedMap);
               graphicsSetup.setRewardBalance(rewards.balance());
               if (survivalSetup != null) survivalSetup.setRewardBalance(rewards.balance());
+    if (challengeSetup != null) challengeSetup.setRewardBalance(rewards.balance());
               rewardsView.completeMutation(rewards.balance(), rewards.inventory(), rewards.loadout(profile));
             } catch (RuntimeException error) { rewardsView.showError(error.getMessage()); }
           }
@@ -661,6 +748,7 @@ public final class MainActivity extends Activity {
   private void refreshRewardBalance() {
     if (graphicsSetup != null) graphicsSetup.setRewardBalance(rewards.balance());
     if (survivalSetup != null) survivalSetup.setRewardBalance(rewards.balance());
+    if (challengeSetup != null) challengeSetup.setRewardBalance(rewards.balance());
     if (rewardsView != null) rewardsView.refresh(rewards.balance(), rewards.inventory(),
         graphicsSetup != null ? rewards.loadout(currentRewardProfile()) : rewards.active(rewardRunId));
     if (webView != null && graphicsSetup == null && !battleSession.isEmpty())
@@ -726,6 +814,7 @@ public final class MainActivity extends Activity {
     livePurchaseDocument = "";
     if (rewardsView != null) { root.removeView(rewardsView); rewardsView = null; }
     if (survivalSetup != null) survivalSetup.setRewardBalance(rewards.balance());
+    if (challengeSetup != null) challengeSetup.setRewardBalance(rewards.balance());
     if (webView != null && graphicsSetup == null && !battleSession.isEmpty())
       webView.evaluateJavascript("window.WarzoneRewards?.drawerChanged(false);true", null);
     rewardsHeaderBottomCss = 0; rewardsViewportWidthCss = 0;
@@ -744,7 +833,7 @@ public final class MainActivity extends Activity {
         String failure = null;
         try {
           String run = store.delete(id);
-          if (!saveGames.hasRun(run) && !survivalSaves.hasRun(run)) rewards.unpinRun(run);
+          if (!saveGames.hasRun(run) && !survivalSaves.hasRun(run) && !challengeSaves.hasRun(run)) rewards.unpinRun(run);
         } catch (Exception error) { failure = error.getMessage() == null ? "Saved-game deletion could not finish. Restart to retry." : error.getMessage(); }
         finally {
           if (savedGamesView != null) {
@@ -811,6 +900,7 @@ public final class MainActivity extends Activity {
 
   private void finishTowersRewards(boolean won) {
     if (isCampaignBattle()) return;
+    if (isChallengeBattle()) { finishChallenge(won); return; }
     if (isFfaBattle()) { finishFfa(won); return; }
     if (isDuelBattle()) { showReplayPanel(won); return; }
     if (battleSession.isEmpty() || !battleOutcome.isEmpty() || battleLaunch == null) return;
@@ -868,7 +958,7 @@ public final class MainActivity extends Activity {
   }
 
   private void prepareStartupBriefing(String session) {
-    if (isDuelBattle() || isCampaignBattle() || isFfaBattle() || restoringGame) {
+    if (isDuelBattle() || isCampaignBattle() || isSkirmishBattle() || restoringGame) {
       hideLoadingPanel(); webView.requestFocus(); return;
     }
     if (session.equals(startupBriefingSession)) return;
@@ -899,6 +989,9 @@ public final class MainActivity extends Activity {
     String url =
         (launch.isSurvival() ? ORIGIN + "/warzone/mobile-survival.html?blocknight=1&mode=survival"
             : launch.isCampaign() ? ORIGIN + "/warzone/mobile-campaign.html?blocknight=1&mode=campaign"
+            : launch.isChallenge() ? ORIGIN + "/warzone/mobile-challenge.html?blocknight=1&mode=challenge&bnFfaDifficulty=" + launch.ffaDifficulty
+                + "&bnFfaMap=" + launch.mapId + "&bnChallengeWeapon=" + launch.duelWeapon
+                + (restoringGame ? "&bnFfaRestore=1" : "")
             : launch.isFfa() ? ORIGIN + "/warzone/mobile-ffa.html?blocknight=1&mode=ffa&bnFfaDifficulty=" + launch.ffaDifficulty
                 + "&bnFfaBotType=" + launch.ffaBotType + "&bnFfaMap=" + launch.mapId
                 + (restoringGame ? "&bnFfaRestore=1" : "")
@@ -923,6 +1016,9 @@ public final class MainActivity extends Activity {
 
   private boolean isCampaignBattle() { return battleLaunch != null && battleLaunch.isCampaign(); }
   private boolean isFfaBattle() { return battleLaunch != null && battleLaunch.isFfa(); }
+  private boolean isChallengeBattle() { return battleLaunch != null && battleLaunch.isChallenge(); }
+  private boolean isSkirmishBattle() { return isFfaBattle() || isChallengeBattle(); }
+  private boolean isRewardBattle() { return isTowersBattle() || isChallengeBattle(); }
   private boolean isSurvivalBattle() { return battleLaunch != null && battleLaunch.isSurvival(); }
   private boolean isTowersBattle() { return battleLaunch != null && ("towers".equals(battleLaunch.matchMode) || isSurvivalBattle()); }
 
@@ -1007,6 +1103,7 @@ public final class MainActivity extends Activity {
                 || !("/warzone/mobile.html".equals(page.getPath())
                     || "/warzone/mobile-duel.html".equals(page.getPath())
                     || "/warzone/mobile-ffa.html".equals(page.getPath())
+                    || "/warzone/mobile-challenge.html".equals(page.getPath())
                     || "/warzone/mobile-survival.html".equals(page.getPath())
                     || "/warzone/mobile-campaign.html".equals(page.getPath()))) return;
             verifyEnginePrerequisites();
@@ -1018,7 +1115,7 @@ public final class MainActivity extends Activity {
           public boolean onConsoleMessage(ConsoleMessage message) {
             String engineMessage = message.message();
             if ((engineMessage.contains("BNWAVE:") || isDuelBattle() && engineMessage.contains("BNDUEL:")
-                    || isFfaBattle() && engineMessage.contains("BNFFA:"))
+                    || isSkirmishBattle() && engineMessage.contains("BNFFA:"))
                 && (engineMessage.contains("\"phase\":\"victory\"")
                     || engineMessage.contains("\"phase\":\"defeated\""))) {
               // Preserve a worker's explicit result before its subsequent quit
@@ -1115,7 +1212,7 @@ public final class MainActivity extends Activity {
     rewardSetupFailed = false;
     rewardTerminalFreshSession = "";
     rewardInventoryFreshSession = "";
-    rewardSession = isTowersBattle() ? battleSession : "";
+    rewardSession = isRewardBattle() ? battleSession : "";
     synchronized (musicPreferenceLock) {
       musicMapId = battleLaunch != null ? battleLaunch.mapId : mapId;
       musicMode = battleLaunch != null ? battleLaunch.matchMode : "towers";
@@ -1281,7 +1378,7 @@ public final class MainActivity extends Activity {
       webView.evaluateJavascript(
           "(() => {const original=constructWZModuleConfig;"
               + "constructWZModuleConfig=(args)=>{WZ_CONFIG_DIR_SUFFIX='"
-              + (isCampaignBattle() ? "-campaign-emulator-v51" : isFfaBattle() ? "-ffa-emulator-v60" : isDuelBattle() ? "-duel-emulator-v22" : "-emulator-v22") + "';"
+              + (isCampaignBattle() ? "-campaign-emulator-v51" : isSkirmishBattle() ? "-ffa-emulator-v60" : isDuelBattle() ? "-duel-emulator-v22" : "-emulator-v22") + "';"
               + "const m=original(args);m.arguments.push('--debug=all');return m;};})()",
           null);
     }
@@ -1306,7 +1403,11 @@ public final class MainActivity extends Activity {
   }
 
   private void installTouchControls() {
-    String[] scripts = isFfaBattle() ? new String[] {
+    String[] scripts = isChallengeBattle() ? new String[] {
+      "warzone-html-session.js", "warzone/ui/research-art.js", "warzone-terrain-picker.js",
+      "warzone-command-pages.js", "warzone/rewards.js", "warzone/challenge-saved-games.js", "warzone/rewarded-ads.js", "warzone-touch-controls.js",
+      "warzone-mobile-research.js", "warzone-intelligence.js", "warzone-challenge-hud.js"
+    } : isFfaBattle() ? new String[] {
       "warzone-html-session.js", "warzone/ui/research-art.js", "warzone-terrain-picker.js",
       "warzone-command-pages.js", "warzone/saved-games.js", "warzone-touch-controls.js",
       "warzone-mobile-research.js", "warzone-intelligence.js", "warzone-ffa-hud.js"
@@ -1341,7 +1442,7 @@ public final class MainActivity extends Activity {
         }
       }
       webView.evaluateJavascript(
-          (isFfaBattle() ? "window.__warzoneFfaMode=true;\n"
+          (isSkirmishBattle() ? "window.__warzoneFfaMode=true;\n"
               : isCampaignBattle() ? "window.__warzoneCampaignMode=true;\n"
               : isDuelBattle()
               ? "window.__warzoneDuelConfig=window.__warzoneDuelConfig||Object.freeze({mode:'duel',humanBranch:'"
@@ -1423,7 +1524,7 @@ public final class MainActivity extends Activity {
       if (session == null || !session.equals(rewardSession) || rewards == null || battleLaunch == null
           || packet == null || packet.length() > 262144) return 0;
       try {
-        int credited = rewards.progress(rewardRunId, packet, currentTowersLevel().rounds);
+        int credited = rewards.progress(rewardRunId, packet, isChallengeBattle() ? 0 : currentTowersLevel().rounds);
         JSONObject data = new JSONObject(packet);
         if (("victory".equals(data.optString("phase")) || "defeated".equals(data.optString("phase")))
             && completeRewardQuote(session, data.optJSONObject("rewards"))) rewardTerminalFreshSession = session;
@@ -1445,7 +1546,7 @@ public final class MainActivity extends Activity {
         if (!completeRewardQuote(session, quote)) return false;
         JSONObject progress = new JSONObject().put("wave", 0)
             .put("completedWaves", quote.optJSONArray("completedWaves")) .put("rewards", quote);
-        int credited = rewards.progress(rewardRunId, progress.toString(), currentTowersLevel().rounds);
+        int credited = rewards.progress(rewardRunId, progress.toString(), isChallengeBattle() ? 0 : currentTowersLevel().rounds);
         rewardInventoryFreshSession = session;
         if (credited > 0) runOnUiThread(() -> {
           if (session.equals(rewardSession))
@@ -1565,6 +1666,40 @@ public final class MainActivity extends Activity {
     }
 
     @JavascriptInterface
+    public String challengeSavePayload(String session) {
+      JSONObject payload=loadingSave;
+      return isChallengeBattle() && session!=null && session.equals(battleSession) && payload!=null ? payload.toString() : "{}";
+    }
+    @JavascriptInterface
+    public String challengeSave(String session,String metadataJSON,String filesJSON) {
+      boolean pinned=false;final String run=rewardRunId;
+      try {
+        if(!isChallengeBattle()||session==null||!session.equals(battleSession)||!session.equals(rewardSession)||graphicsSetup!=null||mainMenuReturnPending||!battleOutcome.isEmpty()
+            ||metadataJSON==null||metadataJSON.length()>65536||filesJSON==null||filesJSON.length()>48*1024*1024)throw new IOException("This Challenge save is no longer active.");
+        JSONObject meta=new JSONObject(metadataJSON);ChallengeMapCatalog.MapInfo map=ChallengeMapCatalog.get(MainActivity.this).map(battleLaunch.mapId);
+        if(!"challenge".equals(meta.optString("mode"))||!"challenge".equals(meta.optString("profile"))||!battleLaunch.mapId.equals(meta.optString("mapId"))||!map.level.equals(meta.optString("nativeLevel"))
+            ||!battleLaunch.ffaDifficulty.equals(meta.optString("difficulty"))||!battleLaunch.duelWeapon.equals(meta.optString("weapon"))||!"dumbot25a".equals(meta.optString("botType"))||!run.equals(meta.optString("rewardRunId"))||!meta.optBoolean("vtol")||meta.optInt("players",-1)!=2||meta.optInt("bots",-1)!=1)throw new IOException("The saved Challenge identity does not match.");
+        meta.put("mapName",map.name);rewards.pinRun(run);pinned=true;
+        String id=challengeSaves.save(meta,new JSONObject(filesJSON));return new JSONObject().put("ok",true).put("id",id).toString();
+      } catch(Exception error) {
+        if(pinned&&!saveGames.hasRun(run)&&!survivalSaves.hasRun(run)&&!challengeSaves.hasRun(run))try{rewards.unpinRun(run);}catch(RuntimeException ignored){}
+        try{return new JSONObject().put("ok",false).put("error",String.valueOf(error.getMessage())).toString();}catch(Exception ignored){return "{\"ok\":false}";}
+      }
+    }
+    @JavascriptInterface
+    public boolean challengeRestored(String session,String id,String stateJSON) {
+      try {
+        JSONObject payload=loadingSave;if(!isChallengeBattle()||session==null||!session.equals(battleSession)||!id.equals(loadingSaveId)||payload==null)return false;
+        JSONObject meta=payload.getJSONObject("metadata"),state=new JSONObject(stateJSON);
+        if(!state.optBoolean("ok")||!"challenge".equals(state.optString("mode"))||!"challenge".equals(state.optString("profile"))||!meta.getString("session").equals(state.optString("session"))||!rewardRunId.equals(state.optString("rewardRunId"))
+            ||!battleLaunch.mapId.equals(state.optString("mapId"))||!battleLaunch.ffaDifficulty.equals(state.optString("difficulty"))||!battleLaunch.duelWeapon.equals(state.optString("weapon"))||!state.optBoolean("vtol")||!"dumbot25a".equals(state.optString("botType"))
+            ||state.optInt("players",-1)!=2||state.optInt("bots",-1)!=1||!meta.getString("nativeLevel").equals(state.optString("nativeLevel"))||state.optLong("gameTime",-1)<meta.getLong("gameTime")||!completeRewardQuote(session,state.optJSONObject("rewards")))return false;
+        if(!rewards.confirmResumeInventory(rewardRunId,state.getJSONObject("rewards").toString()))return false;
+        loadingSave=null;return true;
+      } catch(Exception error){Log.w(TAG,"Challenge restoration could not verify",error);return false;}
+    }
+
+    @JavascriptInterface
     public String campaignSavePayload(String session) {
       JSONObject payload = loadingSave;
       return isCampaignBattle() && session != null && session.equals(battleSession) && payload != null
@@ -1632,7 +1767,7 @@ public final class MainActivity extends Activity {
         String id = currentTowersSaves().save(metadata, new JSONObject(filesJSON));
         return new JSONObject().put("ok", true).put("id", id).toString();
       } catch (Exception error) {
-        if (pinned && !saveGames.hasRun(run) && !survivalSaves.hasRun(run)) {
+        if (pinned && !saveGames.hasRun(run) && !survivalSaves.hasRun(run) && !challengeSaves.hasRun(run)) {
           try { rewards.unpinRun(run); } catch (RuntimeException ignored) { }
         }
         try { return new JSONObject().put("ok", false).put("error", String.valueOf(error.getMessage())).toString(); }
@@ -1743,6 +1878,7 @@ public final class MainActivity extends Activity {
         webView.requestFocus();
         if (isCampaignBattle()) { startupAutomationStarted = true; awaitCampaignCanvas(0, battleSession); }
         else if (restoringGame) { startupAutomationStarted = true; awaitBattlefieldReady(0); }
+        else if (isChallengeBattle()) beginChallengeStartup();
         else beginStartupAutomation();
         if (touchTestMode) {
           webView.postDelayed(MainActivity.this::selectAllUnitsForTouchTest, 30000);
@@ -1935,6 +2071,7 @@ public final class MainActivity extends Activity {
     final boolean returnToSurvival = graphicsSetup == null && isSurvivalBattle();
     final boolean returnToTowersMap = graphicsSetup == null && isTowersBattle() && !returnToSurvival;
     final boolean returnToFfa = graphicsSetup == null && isFfaBattle();
+    final boolean returnToChallenge = graphicsSetup == null && isChallengeBattle();
     cancelCampaignHomeCheck();
     dismissBriefing();
     startupBriefingSession = "";
@@ -1942,6 +2079,7 @@ public final class MainActivity extends Activity {
     closeSavedGames();
     closeCampaignSetup();
     closeFfaSetup();
+    closeChallengeSetup();
     closeSurvivalSetup();
     dismissRewardReceipt();
     if (rewards != null && !rewardSession.isEmpty()) {
@@ -1972,6 +2110,25 @@ public final class MainActivity extends Activity {
     if (returnToTowersMap) graphicsSetup.showTowersMap();
     if (returnToSurvival) showSurvivalSetup();
     if (returnToFfa) showFfaSetup();
+    if (returnToChallenge) showChallengeSetup();
+  }
+
+  private void finishChallenge(boolean won) {
+    if (battleSession.isEmpty() || !battleOutcome.isEmpty() || !isChallengeBattle()) return;
+    try {
+      RewardLedger.Receipt receipt = rewards.finishChallenge(rewardRunId, won, battleLaunch.ffaDifficulty, battleSession.equals(rewardTerminalFreshSession));
+      battleOutcome = won ? "victory" : "defeated";
+      final String name = ChallengeMapCatalog.get(this).map(battleLaunch.mapId).name, difficulty = battleLaunch.ffaDifficulty;
+      returnToMainMenu();
+      rewardReceipt = new RewardReceiptView(this, won, name, difficulty, 0, 0, receipt.earned, receipt.balance, receipt.reason, dp(32), this::dismissRewardReceipt);
+      root.addView(rewardReceipt, new FrameLayout.LayoutParams(-1,-1)); rewardReceipt.requestFocus();
+    } catch (RuntimeException error) {
+      // The native result has already retired the battlefield. Keep a storage
+      // failure actionable without displaying a credit that was not saved.
+      String detail = error.getMessage();
+      returnToMainMenu();
+      showAppNotice(detail, true);
+    }
   }
 
   private void finishFfa(boolean won) {
@@ -2094,6 +2251,22 @@ public final class MainActivity extends Activity {
         1200);
   }
 
+  /** The native --skirmish descriptor opens its locked lobby; start it without changing its air limits. */
+  private void beginChallengeStartup() {
+    if (startupAutomationStarted || webView == null || isFinishing()) return;
+    startupAutomationStarted = true;
+    final String startupSession = battleSession;
+    updateLoadingStatus("OPENING THE CHALLENGE…");
+    webView.postDelayed(() -> {
+      if (!startupSession.equals(battleSession) || graphicsSetup != null || !isChallengeBattle()) return;
+      evaluateTouchTapThen(170, 392, "Start Hosting", 1500, () -> {
+        if (!startupSession.equals(battleSession) || !isChallengeBattle()) return;
+        updateLoadingStatus("DEPLOYING TO THE BATTLEFIELD…");
+        evaluateTouchTapThen(585, 30, "Ready", 1500, this::finishStartupAutomation);
+      });
+    }, 1200);
+  }
+
   private void awaitCampaignCanvas(int attempt, String session) {
     if (webView == null || isFinishing() || !session.equals(battleSession) || graphicsSetup != null) return;
     webView.evaluateJavascript("(()=>{const n=window.__warzoneCampaign?.report?.().nativeState;"
@@ -2120,7 +2293,7 @@ public final class MainActivity extends Activity {
           () ->
               evaluateTouchTapThen(
                   585,
-                  isDuelBattle() || isFfaBattle() ? 30 : 30
+                  isDuelBattle() || isSkirmishBattle() ? 30 : 30
                       + 40 * currentTowersLevel().humanPosition,
                   "Ready",
                   1500,
@@ -2131,7 +2304,7 @@ public final class MainActivity extends Activity {
   }
 
   private void finishStartupAutomation() {
-    updateLoadingStatus(isDuelBattle() || isFfaBattle() ? "PREPARING THE MATCH…" : "PREPARING THE FIRST WAVE…");
+    updateLoadingStatus(isDuelBattle() || isSkirmishBattle() ? "PREPARING THE MATCH…" : "PREPARING THE FIRST WAVE…");
     awaitBattlefieldReady(0);
   }
 
@@ -2143,9 +2316,9 @@ public final class MainActivity extends Activity {
     if (webView == null || isFinishing() || !expectedSession.equals(battleSession) || graphicsSetup != null) return;
     String script =
         "(() => {const r=window."
-            + (isFfaBattle() ? "__warzoneFfa" : isDuelBattle() ? "__warzoneDuel" : "__warzoneTowersWaves") + "?.report?.();"
+            + (isSkirmishBattle() ? "__warzoneFfa" : isDuelBattle() ? "__warzoneDuel" : "__warzoneTowersWaves") + "?.report?.();"
             + "return Boolean(document.getElementById('canvas')"
-            + "&&r?.snapshot?.mode==='" + (isFfaBattle() ? "ffa" : isDuelBattle() ? "duel" : isSurvivalBattle() ? "survival" : "tower-defense") + "');})()";
+            + "&&r?.snapshot?.mode==='" + (isChallengeBattle() ? "challenge" : isFfaBattle() ? "ffa" : isDuelBattle() ? "duel" : isSurvivalBattle() ? "survival" : "tower-defense") + "');})()";
     webView.evaluateJavascript(
         script,
         result -> {
@@ -2170,7 +2343,7 @@ public final class MainActivity extends Activity {
     if (webView == null || isFinishing()) return;
     // Establish this map's battlefield-facing view while the splash still covers
     // the canvas. Waves and BASE must never change the camera direction.
-    if (!restoringGame && !isFfaBattle()) faceOpponent();
+    if (!restoringGame && !isSkirmishBattle()) faceOpponent();
     showCombatHud();
     awaitInitialCamera(0);
   }
@@ -2184,7 +2357,7 @@ public final class MainActivity extends Activity {
         || expectedSession.isEmpty() || !expectedSession.equals(battleSession) || rewardSetupFailed) return;
     webView.evaluateJavascript(
         "Boolean(window.__kalaWarzoneTouch?.report?.().cameraFacingPending===false"
-            + (isFfaBattle() ? "&&window.WarzoneSavedGames?.ready===true" : isDuelBattle()
+            + (isChallengeBattle() ? "&&window.WarzoneSavedGames?.ready===true&&window.WarzoneRewards?.ready===true" : isFfaBattle() ? "&&window.WarzoneSavedGames?.ready===true" : isDuelBattle()
                 ? "&&window.__warzoneDuel?.report?.().cameraRequested&&window.__warzoneDuel?.report?.().cameraReady"
                 : "&&window.WarzoneRewards?.ready===true") + ")",
         result -> {
@@ -2356,6 +2529,7 @@ public final class MainActivity extends Activity {
         if ("index.html".equals(path) || "mobile.html".equals(path)
             || "index-duel.html".equals(path) || "mobile-duel.html".equals(path)
             || "index-ffa.html".equals(path) || "mobile-ffa.html".equals(path)
+            || "index-challenge.html".equals(path) || "mobile-challenge.html".equals(path)
             || "index-survival.html".equals(path) || "mobile-survival.html".equals(path)
             || "index-campaign.html".equals(path) || "mobile-campaign.html".equals(path)) {
           headers.put("Cross-Origin-Opener-Policy", "same-origin");
@@ -2628,6 +2802,10 @@ public final class MainActivity extends Activity {
 
   @Override
   public void onBackPressed() {
+    if (aboutView != null) {
+      aboutView.back();
+      return;
+    }
     if (hubView != null) {
       hubView.back();
       return;
@@ -2645,6 +2823,7 @@ public final class MainActivity extends Activity {
     if (rewardsView != null) { closeRewards(); return; }
     if (survivalSetup != null) { closeSurvivalSetup(); return; }
     if (rewardReceipt != null) { dismissRewardReceipt(); return; }
+    if (challengeSetup != null) { closeChallengeSetup(); showFfaSetup(); return; }
     if (mainMenuDialog != null) {
       mainMenuDialog.cancel();
       return;

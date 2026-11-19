@@ -21,3 +21,23 @@ This candidate has independent mutable source files and frozen media/native hard
 
 # Authorized combined GitHub backup 0.95
 2026-11-18: user explicitly requested committing all recent work, including Repair0.93, Survival/MoreFortress0.94 and HubReplay0.95. Back up current complete source, historical restoration profiles, tested normalAPKs, checksums and curated QA to private rbabbit/wz-android on codex/hub-replay-0.95-test and test prerelease v0.95-test. This supersedes historical no-GitHub statements for this backup only. No VPS/update-feed, GooglePlay/AAB or stable/main promotion is authorized. Preserve all existing fallbacks and saved states; no additional runtime testing is needed for backup-only documentation/package changes. Never add private signing keys, credentials, app data/browser profiles, build caches or temporary host caches.
+
+# Authorized About & Licences test 0.96
+
+2026-11-18: audit actual bundled licences, add a small top-right Home About button and a serious document-style About & Licences page with official Warzone, upstream/Android repository and licence/source links. Preserve original notices offline; distinguish component terms and unresolved mod permissions accurately. Android repository remains private; no visibility or publication changes authorized. Deliver a normal test APK and corresponding complete source after exact owned5562 UI, link, navigation and layout checks. Preserve0.95fallbacks, seven prepared saves and5558/5560. NoVPS/updatefeed/GitHub/GooglePlay/AAB. Large files are immutable hardlinks until copied independently.
+
+# Authorized compact About button test 0.97
+
+2026-11-18: user accepted0.96 then authorized the previously proposed smaller About button. Reduce its visible face/text, retaining a usable tap target and top-right placement. The accompanying Hub replay minimap question explicitly says no work yet; leave all Hub/replay code/assets unchanged. Normal local test APK/source, focused exactAPK Home/layout/tap/Back checks in owned5562 only. Preserve all0.96fallbacks and data. NoVPS/feed/GitHub/Play/AAB; no need to repeat unrelated licence/gameplay/Recents suites. Large files remain immutable hardlinks.
+
+# Authorized Hub replay minimap removal test 0.98
+
+2026-11-18: user now explicitly authorizes removing the minimap from Hub replays while preserving the main replay and controls. Remove the minimap canvas/toggle and guard minimap-only renderer paths. Reproduce on a real replay before edits, then verify actual replay rendering, playback/seek/speed, camera controls, 2D/3D, cleared lower-right hit area, phone/compact layout and repeated Back/reopen on the exact normal APK. Preserve prepared save files, the compact About action and all older APK/source fallbacks. Owned5562 only; no unrelated gameplay/licence/Recents rerun. Normal local APK and matching source only; no VPS/feed/GitHub/GooglePlay/AAB or website changes. Large files remain immutable hardlinks.
+
+# Authorized FFA Challenge test 0.99
+
+2026-11-18: user authorized Challenge inside FFA with ten supplied two-player maps, one Dumbot25a opponent, Easy/Medium/Hard, cannon-or-rockets primary strategy chosen once per match and retained across saves/replay, VTOL enabled, and existing crystal wallet/general purchases with Challenge-specific win accounting. Keep More Fortress Towers/Survival-only. Keep ordinary FFA Cobra/VTOL-off and all previous modes unchanged; preserve authored scavenger NPCs. Exclude the unrelated waves mod in the ZIP. Deliver exact emulator-tested normal APK and complete matching source locally; no VPS/feed/GitHub/GooglePlay/site publication and no AAB. Preserve0.98fallbacks and original prepared saves. Owned5562 only; never operate5558/5560. Reproduce first, observe native bot identity/difficulty/production/orders, focused purchase/save/win idempotence and screen/navigation checks. Disclose seeded/diagnostic fixtures; no full later-wave runs. Hardlinked large files are immutable until independently replaced/copied.
+
+
+# Authorized GitHub 0.99.4 source and normal APK backup
+2026-11-19: User explicitly authorized committing all current source to private rbabbit/wz-android and uploading the normal 0.99.4 APK as a private prerelease in the background. No tests/emulators or upload polling were requested. Preserve earlier source history and fallbacks; do not change VPS/update feeds or publish to Google Play. Private signing inputs and caches must remain excluded.

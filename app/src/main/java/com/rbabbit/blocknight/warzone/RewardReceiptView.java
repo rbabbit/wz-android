@@ -52,8 +52,8 @@ final class RewardReceiptView extends FrameLayout {
         map.setGravity(won ? Gravity.CENTER : Gravity.START);
         add(body, map, 3);
         int reached = Math.max(0, Math.min(reachedWave, Math.max(0, totalWaves)));
-        TextView summary = copy(won ? "All " + totalWaves + " waves survived"
-                : "Reached wave " + reached + " of " + totalWaves, 13, INK);
+        TextView summary = copy(totalWaves == 0 ? (won ? "Challenge won" : "Challenge ended")
+                : won ? "All " + totalWaves + " waves survived" : "Reached wave " + reached + " of " + totalWaves, 13, INK);
         summary.setGravity(won ? Gravity.CENTER : Gravity.START);
         add(body, summary, won ? 8 : 7);
 
@@ -101,7 +101,7 @@ final class RewardReceiptView extends FrameLayout {
         footer.addView(button, buttonParams);
         add(body, footer, won ? 12 : 8);
         if (won) {
-            TextView returnLabel = copy(mapName + " is selected on Home", 11, MUTED);
+            TextView returnLabel = copy(mapName + " is selected on " + (totalWaves == 0 ? "Challenge" : "Home"), 11, MUTED);
             returnLabel.setGravity(Gravity.CENTER);
             body.addView(returnLabel, new LinearLayout.LayoutParams(-1, -2));
         }

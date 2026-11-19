@@ -63,7 +63,7 @@ final class SavedGamesView extends FrameLayout {
 
         LinearLayout header = new LinearLayout(context);
         header.setGravity(Gravity.CENTER_VERTICAL);
-        TextView title = copy("survival".equals(mode) ? "SURVIVAL SAVES" : "ffa".equals(mode) ? "FFA SAVES" : "campaign".equals(mode) ? "CAMPAIGN SAVES" : "SAVED GAMES", 20, INK);
+        TextView title = copy("challenge".equals(mode) ? "CHALLENGE SAVES" : "survival".equals(mode) ? "SURVIVAL SAVES" : "ffa".equals(mode) ? "FFA SAVES" : "campaign".equals(mode) ? "CAMPAIGN SAVES" : "SAVED GAMES", 20, INK);
         title.setTypeface(face);
         title.setSingleLine(true);
         title.setEllipsize(TextUtils.TruncateAt.END);
@@ -145,6 +145,8 @@ final class SavedGamesView extends FrameLayout {
             String detail = difficulty.isEmpty() ? "" : difficulty.toUpperCase(Locale.ROOT) + " · ";
             detail += "campaign".equals(save.optString("mode"))
                     ? "Campaign checkpoint"
+                    : "challenge".equals(save.optString("mode")) ? "Dumbot25a · "
+                        + ("rockets".equals(save.optString("weapon")) ? "Rockets" : "Cannon")
                     : "ffa".equals(save.optString("mode")) ? bots + " "
                         + BattleLaunchSpec.ffaBotName(save.optString("botType")) + (bots == 1 ? " bot" : " bots") + " · Free for all"
                     : "Wave " + wave + (total > 0 ? " / " + total : "");

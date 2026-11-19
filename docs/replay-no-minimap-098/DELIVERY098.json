@@ -1,0 +1,35 @@
+{
+  "passed": true,
+  "scope": "Remove Hub replay minimap and toggle; preserve main replay and controls",
+  "versionCode": 98,
+  "versionName": "0.98",
+  "APK": "C:\\timerApp\\Warzone-Towers-0.98-Test.apk",
+  "SHA256": "4b8385ab5add3a6bb765fa556b772b5f140287f8efd77f259f24b44b4ac0d554",
+  "bytes": 731577947,
+  "normalSignerSHA256": "4499efe00477c7c724c06a1dd96f935864548665c13ab5e2bd0a9c0f83f7cb15",
+  "sourceCandidate": "C:\\timerApp\\candidates\\replay-no-minimap-test-0.98-20261118",
+  "buildInputsUnchangedSinceBuild": 2249,
+  "verified": [
+    "Actual 0.97 replay minimap reproduced before edits.",
+    "Real public replay 1794989715726 renders exact unit positions in both 2D and 3D; no minimap or toggle DOM and no replay errors.",
+    "Playback advances; pause holds time; 4x speed and real timeline seek matched independently decoded recorded unit/structure counts.",
+    "Zoom in/out, rotate left/right, reset and an actual drag in the former minimap region passed. Main canvas receives that region.",
+    "Native view and quality selectors work; prior replay preferences restored exactly.",
+    "Phone 2400x1080 and compact 1280x720 layouts visually inspected; visible Back, reopen with saved minimapCollapsed:false, and repeated hardware Back return replay/match/results/Home.",
+    "Exact installed base.apk hash matches delivery; normal signer retained; seven saved-game archives byte-identical.",
+    "Only version and three Hub replay assets differ among 2249 app/build inputs. All 2170 other assets and smaller About source remain identical.",
+    "Final ordinary non-instrumented Home observed with original display/density/font restored; external helper removed."
+  ],
+  "limitations": [
+    "Owned Android emulator verification; physical-phone acceptance remains for user.",
+    "Focused replay checks only; no full-duration 31-minute playback or unrelated gameplay/network/licence/Recents regression rerun.",
+    "Existing prior licence and source-access publication limitations remain in the retained 0.96 audit."
+  ],
+  "fixtureDisclosure": "Real unchanged public replay and real Android touch input. Separate external instrumentation helper used only for read-only DOM/native state observation and trusted touch injection; no seeded gameplay, fabricated positions or injected replay frames. Helper removed after checks. Popup settling/zero-duration adb tap issues were corrected in the QA fixture without product edits.",
+  "fallback097Preserved": true,
+  "VPSuploaded": false,
+  "updateFeedChanged": false,
+  "GitHubPublished": false,
+  "GooglePlayPublished": false,
+  "AABbuilt": false
+}

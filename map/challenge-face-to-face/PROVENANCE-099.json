@@ -1,0 +1,120 @@
+{
+  "id": "face-to-face",
+  "source": "vendor/challenge-099/original/maps/face-to-face.wz",
+  "sourceSHA256": "4cdb9c7aa967e407e984e252096b14e0d42962a539d9541b9696055580b6cbd1",
+  "originalZIPMember": "1v1 maps/2p-RQ_face2face.wz",
+  "nativeFilesByteIdentical": true,
+  "author": {
+    "name": "Red_Queen"
+  },
+  "license": "GPL-2.0-or-later",
+  "mapVersion": 40,
+  "width": 40,
+  "height": 128,
+  "starts": [
+    {
+      "player": 0,
+      "x": 20.0,
+      "y": 10.0,
+      "units": 18
+    },
+    {
+      "player": 1,
+      "x": 20.0,
+      "y": 118.0,
+      "units": 18
+    }
+  ],
+  "baseCounts": {
+    "0": {
+      "A0ResourceExtractor": 80,
+      "A0PowerGenerator": 20,
+      "A0ResearchFacility": 6,
+      "A0ComDroidControl": 1,
+      "A0CommandCentre": 1,
+      "A0LightFactory": 6,
+      "A0CyborgFactory": 6,
+      "A0PowMod1": 20,
+      "A0ResearchModule1": 6,
+      "A0FacMod1": 6
+    },
+    "1": {
+      "A0ResourceExtractor": 80,
+      "A0CyborgFactory": 5,
+      "A0PowerGenerator": 20,
+      "A0ResearchFacility": 6,
+      "A0CommandCentre": 1,
+      "A0ComDroidControl": 1,
+      "A0LightFactory": 6,
+      "A0PowMod1": 20,
+      "A0ResearchModule1": 6,
+      "A0FacMod1": 6
+    }
+  },
+  "scavengers": true,
+  "scavengerStructures": 146,
+  "scavengerDroids": 0,
+  "requiredInitialStructureLimits": {
+    "A0PowerGenerator": 20,
+    "A0ResearchFacility": 6,
+    "A0LightFactory": 6,
+    "A0CyborgFactory": 6
+  },
+  "terrainCounts": {
+    "8": 726,
+    "4": 1,
+    "5": 1,
+    "6": 4392
+  },
+  "mappings": [
+    {
+      "original": "level.json",
+      "host": "map/challenge-face-to-face/level.json",
+      "virtual": "/data/mp/multiplay/maps/challenge-face-to-face/level.json",
+      "sha256": "5d98fed3ed85accb638656568ea7304116ab8fba95dd91f6592fb8aff5b82ac0"
+    },
+    {
+      "original": "droid.json",
+      "host": "map/challenge-face-to-face/droid.json",
+      "virtual": "/data/mp/multiplay/maps/challenge-face-to-face/droid.json",
+      "sha256": "534e393b4ef0873e0ab4ef48fe5e7ed4e247ed7a38c1d5ea53211455ade70e9d"
+    },
+    {
+      "original": "feature.json",
+      "host": "map/challenge-face-to-face/feature.json",
+      "virtual": "/data/mp/multiplay/maps/challenge-face-to-face/feature.json",
+      "sha256": "e77994130916dd4fec44c537a52d2a1032f798e83e064c0596ff50e32d6bc785"
+    },
+    {
+      "original": "gam.json",
+      "host": "map/challenge-face-to-face/gam.json",
+      "virtual": "/data/mp/multiplay/maps/challenge-face-to-face/gam.json",
+      "sha256": "e67a6330ba09d4962d1faaa931d20e1b5580872df5f5f8b35637e46a01ac85e7"
+    },
+    {
+      "original": "gam.json",
+      "host": "map/challenge-face-to-face/gam.json",
+      "virtual": "/data/mp/multiplay/maps/challenge-face-to-face.gam",
+      "sha256": "e67a6330ba09d4962d1faaa931d20e1b5580872df5f5f8b35637e46a01ac85e7"
+    },
+    {
+      "original": "game.map",
+      "host": "map/challenge-face-to-face/game.map",
+      "virtual": "/data/mp/multiplay/maps/challenge-face-to-face/game.map",
+      "sha256": "4704216c3609d227f47e1da415f2edf9593ac04d7d5f2fe3de6e484185fd8345"
+    },
+    {
+      "original": "struct.json",
+      "host": "map/challenge-face-to-face/struct.json",
+      "virtual": "/data/mp/multiplay/maps/challenge-face-to-face/struct.json",
+      "sha256": "12876e6066cafdd80bcfc66bedc56259866e4d198c4a4812ec56413c5a798bab"
+    },
+    {
+      "original": "ttypes.ttp",
+      "host": "map/challenge-face-to-face/ttypes.ttp",
+      "virtual": "/data/mp/multiplay/maps/challenge-face-to-face/ttypes.ttp",
+      "sha256": "5b10aa98775b2c9a9daa611335a32c191279c3503fb9c0f3d06f97932cdda915"
+    }
+  ],
+  "descriptor": "// Authored Challenge map; original bytes and credits in vendor/challenge-099.\nlevel FFA-CHFACE-T1\nplayers 2\ntype 14\ndataset MULTI_CAM_1\ngame \"multiplay/maps/challenge-face-to-face.gam\"\n"
+}

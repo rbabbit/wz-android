@@ -21,10 +21,10 @@
   const dock = document.createElement('aside');
   dock.id = 'lab-ops';
   dock.hidden = true;
-  dock.setAttribute('aria-label', isTowers() ? 'Analysis, manufacturing and Build' : 'Live research and production');
+  dock.setAttribute('aria-label', isTowers() ? 'Research, manufacturing and Build' : 'Live research and production');
   dock.innerHTML = (collapsible ? '<button type="button" id="lab-ops-toggle" aria-controls="lab-ops-research lab-ops-production" aria-label="Collapse activity dock">−</button>' : '') + '<button type="button" id="lab-ops-research" data-lab-panel="research"><b>RESEARCH</b><small>Loading…</small></button><button type="button" id="lab-ops-production" data-lab-panel="factory"><b>PRODUCTION</b><small>Loading…</small></button>';
   if (isTowers()) {
-    dock.querySelector('#lab-ops-research b').textContent = 'ANALYSIS';
+    dock.querySelector('#lab-ops-research b').textContent = 'RESEARCH';
     dock.querySelector('#lab-ops-production b').textContent = 'MANUFACTURING';
     const build = document.createElement('button');
     build.id = 'wt-open-build'; build.type = 'button'; build.dataset.footerBuild = 'true';

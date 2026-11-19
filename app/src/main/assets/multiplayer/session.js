@@ -332,11 +332,18 @@
   const wanted=new Set(combat),actual=new Set(selected);
   return wanted.size===combat.length&&actual.size===selected.length&&selected.every(id=>wanted.has(id));
  }
+ function menuNote(button,enabled,text){
+  const hud=byId('blocknight-combat-hud');let note=button.querySelector('.wt-menu-note');
+  if(!note){note=document.createElement('small');note.className='wt-menu-note';note.id=button.id+'-note';note.textContent=text;button.append(note);}
+  note.hidden=!enabled;if(enabled)button.setAttribute('aria-describedby',note.id);else button.removeAttribute('aria-describedby');
+  hud.classList.toggle('wt-show-notes',!!hud.querySelector('.wt-menu-note:not([hidden])'));
+ }
  function syncCombatButton(){
   const button=byId('blocknight-combat');if(!button)return;
   const state=child()?.PcMultiplayerControls?.report?.(),enabled=session.phase==='game'&&ownerAllowed()&&Boolean(state?.combatLock);
   const selected=confirmedCombatSelection();button.dataset.combatSelected=String(selected);button.dataset.combatEnabled=String(enabled);
   button.setAttribute('aria-pressed',String(enabled));button.classList.toggle('active',enabled);
+  menuNote(button,enabled,'All Combat Units Selected');
   button.dataset.suspended=String(enabled&&Boolean(state?.combatLockSuspended));
  }
  function syncRepairButton(){
@@ -345,6 +352,7 @@
   const enabled=allowed&&state?.repairPolicyEnabled===true,pending=allowed&&state?.repairPolicyPending===true;
   button.dataset.repairEnabled=String(enabled);button.dataset.repairPending=String(pending);
   button.setAttribute('aria-pressed',String(enabled));button.setAttribute('aria-busy',String(pending));button.classList.toggle('active',enabled);
+  menuNote(button,enabled,'Medium Damage Repair');
   button.disabled=!allowed||state?.repairPolicyCanToggle!==true;
   button.title=state?.repairPolicyError||(pending?(enabled
     ?'Automatic repair retreat is ON; applying Medium damage to new combat units'

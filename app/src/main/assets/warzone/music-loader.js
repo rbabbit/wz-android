@@ -6,7 +6,7 @@
   // filename is available before either engine starts and keeps that path intact.
   if (!/\/index-duel\.html$/.test(location.pathname)) {
     const session=parameters.get('battle_session')||'';
-    const mode=/\/index-ffa\.html$/.test(location.pathname)?'ffa':/\/index-campaign\.html$/.test(location.pathname)?'campaign':'map';
+    const mode=/\/index-challenge\.html$/.test(location.pathname)?'challenge':/\/index-ffa\.html$/.test(location.pathname)?'ffa':/\/index-campaign\.html$/.test(location.pathname)?'campaign':'map';
     const playlistMode=mode!=='map';
     const state={mode,cached:false,enabled:false,mapId:'',trackId:'',title:'',author:'',missionId:'',campaignSession:'',video:false,missionResults:false,
       url:'',battleActive:false,suspended:false,playing:false,loading:false,loadedBytes:0,error:'',disposed:false};
@@ -50,7 +50,7 @@
             throw Error('The music playlist is unavailable.');
           ids.add(id);return{id,title:String(track.title||''),author:String(track.author||''),url:local.href};
         });
-        const policy=window.WarzoneMusicCatalog?.playlists?.[mode]?.tracks;
+        const policy=window.WarzoneMusicCatalog?.playlists?.[mode==='challenge'?'ffa':mode]?.tracks;
         if(!Array.isArray(policy)||policy.length!==ids.size||policy.some(id=>!ids.has(id)))
           throw Error('The music playlist differs from the bundled albums.');
         result.tracks=policy.map(id=>result.tracks.find(track=>track.id===id));
@@ -102,7 +102,7 @@
       const status=menu.querySelector('[data-music-status]');
       status.textContent=state.error||(!state.cached?'The bundled soundtrack is unavailable.'
         :!state.enabled?'Music off. Sound effects are unchanged.'
-        :state.loading?'Starting music…':state.playing?playlistMode?'Playing the '+(mode==='ffa'?'FFA':'Campaign')+' playlist.':'Playing this map’s soundtrack.'
+        :state.loading?'Starting music…':state.playing?playlistMode?'Playing the '+(mode==='challenge'?'Challenge':mode==='ffa'?'FFA':'Campaign')+' playlist.':'Playing this map’s soundtrack.'
         :state.video?'Music paused for the Campaign video.'
         :state.missionResults?'Music paused on the mission results screen.'
         :state.suspended||document.hidden?'Music paused while the game is in the background.'
@@ -323,7 +323,7 @@
           `;host.head.appendChild(style);
         }
         menu=host.createElement('section');menu.id='wt-map-music-menu';menu.hidden=true;
-        menu.setAttribute('role','dialog');menu.setAttribute('aria-modal','false');menu.setAttribute('aria-label',playlistMode?(mode==='ffa'?'FFA music':'Campaign music'):'Map music');
+        menu.setAttribute('role','dialog');menu.setAttribute('aria-modal','false');menu.setAttribute('aria-label',playlistMode?(mode==='challenge'?'Challenge music':mode==='ffa'?'FFA music':'Campaign music'):'Map music');
         menu.innerHTML='<header><strong>MUSIC</strong><button type="button" data-music-close aria-label="Close music menu">×</button></header><div data-music-track></div><div data-music-author></div><div class="wt-music-switch" role="group" aria-label="Music playback"><button type="button" data-music-enabled="true">ON</button><button type="button" data-music-enabled="false">OFF</button></div><div data-music-status role="status" aria-live="polite"></div>';
         const command=typeof bind==='function'?bind:(button,action)=>button.addEventListener('click',action);
         command(menu.querySelector('[data-music-close]'),()=>closeMenu());

@@ -42,7 +42,7 @@ final class SaveGameStore {
   }
 
   SaveGameStore(Context context, String mode) {
-    if (!"towers".equals(mode) && !"campaign".equals(mode) && !"ffa".equals(mode) && !"survival".equals(mode))
+    if (!"towers".equals(mode) && !"campaign".equals(mode) && !"ffa".equals(mode) && !"survival".equals(mode) && !"challenge".equals(mode))
       throw new IllegalArgumentException("Invalid saved game mode.");
     this.mode = mode;
     root = new File(context.getFilesDir(), mode + "-saved-games");
@@ -101,7 +101,7 @@ final class SaveGameStore {
   synchronized JSONObject load(String id) throws Exception { return read(file(id, ".zip"), id); }
   synchronized boolean hasRun(String session) {
     JSONArray slots = list();
-    for (int i = 0; i < slots.length(); i++) if (session.equals(slots.optJSONObject(i).optString("session"))) return true;
+    for (int i = 0; i < slots.length(); i++) if (session.equals(slots.optJSONObject(i).optString("challenge".equals(mode) ? "rewardRunId" : "session"))) return true;
     return false;
   }
   synchronized String delete(String id) throws Exception {
@@ -111,7 +111,7 @@ final class SaveGameStore {
       metadata = new JSONObject(new String(bytes(zip, "metadata.json", 65536), StandardCharsets.UTF_8));
     }
     Files.delete(target.toPath());
-    return metadata.getString("session");
+    return metadata.getString("challenge".equals(mode) ? "rewardRunId" : "session");
   }
 
   private JSONObject read(File source, String id) throws Exception {
@@ -144,6 +144,7 @@ final class SaveGameStore {
       validateNativeGam(meta, gamData);
       if ("ffa".equals(meta.optString("mode"))) validateFfaArchive(meta, mainData, scriptData);
       if ("survival".equals(mode)) validateSurvivalArchive(meta, scriptData);
+      if ("challenge".equals(mode)) validateChallengeArchive(meta, gamData, mainData, scriptData);
       Set<String> actual = new HashSet<>();
       Enumeration<? extends ZipEntry> entries = zip.entries();
       while (entries.hasMoreElements()) if (!actual.add(entries.nextElement().getName())) throw new IOException("Duplicate saved game file.");
@@ -166,6 +167,17 @@ final class SaveGameStore {
         throw new IOException("Invalid Survival save identity.");
     } else if ("towers".equals(mode) && !"towers".equals(metadata.optString("profile", "towers"))) {
       throw new IOException("This save belongs to a different Towers profile.");
+    }
+    if ("challenge".equals(mode)) {
+      String map = metadata.optString("mapId");
+      if (!"challenge".equals(metadata.optString("profile")) || !ChallengeMapCatalog.isKnownId(map)
+          || !ChallengeMapCatalog.nativeLevel(map).equals(metadata.optString("nativeLevel"))
+          || metadata.optInt("players",-1)!=2 || metadata.optInt("bots",-1)!=1
+          || !"dumbot25a".equals(metadata.optString("botType")) || !metadata.optBoolean("vtol")
+          || !("cannon".equals(metadata.optString("weapon")) || "rockets".equals(metadata.optString("weapon")))
+          || !metadata.optString("rewardRunId").matches("[A-Za-z0-9_-]{1,96}")
+          || !("easy".equals(metadata.optString("difficulty")) || "medium".equals(metadata.optString("difficulty")) || "hard".equals(metadata.optString("difficulty"))))
+        throw new IOException("Invalid Challenge save identity.");
     }
     if ("ffa".equals(mode)) {
       String map = metadata.optString("mapId");
@@ -295,6 +307,42 @@ final class SaveGameStore {
         || !level.equals(config.optString("level", "emag".equals(map) ? "FFA-EMAG-T1" : ""))
         || !ffaBotType(metadata).equals(config.optString("botType", "nullbot")))
       throw new IOException("The saved FFA rules did not match its map or opponents.");
+  }
+
+  private static void validateChallengeArchive(JSONObject metadata, byte[] gamData, byte[] mainData, byte[] scriptData) throws Exception {
+    if (gamData==null || mainData==null || scriptData==null) throw new IOException("The saved Challenge state is incomplete.");
+    JSONObject gam=new JSONObject(new String(gamData,StandardCharsets.UTF_8)), main=new JSONObject(new String(mainData,StandardCharsets.UTF_8)), scripts=new JSONObject(new String(scriptData,StandardCharsets.UTF_8));
+    String map=metadata.getString("mapId"),level=ChallengeMapCatalog.nativeLevel(map),weapon=metadata.getString("weapon");
+    int difficulty="hard".equals(metadata.getString("difficulty"))?3:"medium".equals(metadata.getString("difficulty"))?2:1;
+    if (!level.equals(gam.optString("levelName")) || !level.equals(main.optString("levelName")) || gam.optInt("multiMaxPlayers",-1)!=2 || main.optInt("maxPlayers",-1)!=2
+        || gam.optInt("netSelectedPlayer",-1)!=0 || main.optInt("selectedPlayer",-1)!=0 || gam.optInt("multiAlliance",-1)!=0 || main.optInt("allianceSetting",-1)!=0)
+      throw new IOException("The saved Challenge configuration is invalid.");
+    JSONArray net=gam.getJSONArray("netPlayers"),players=main.getJSONArray("players");
+    for(int i=0;i<2;i++) {
+      JSONObject nativePlayer=net.optJSONObject(i),player=null;
+      for(int j=0;j<players.length();j++) { JSONObject row=players.optJSONObject(j); if(row!=null&&row.optInt("index",-1)==i) {if(player!=null)throw new IOException("Repeated Challenge player.");player=row;} }
+      if(nativePlayer==null||player==null||nativePlayer.optInt("position",-1)!=i||nativePlayer.optInt("team",-1)!=i||player.optInt("position",-1)!=i||player.optInt("team",-1)!=i
+          ||nativePlayer.optInt("allocated",-1)!=(i==0?1:0)||player.optBoolean("allocated",false)!=(i==0))throw new IOException("The saved Challenge slots are invalid.");
+      if(i==1&&(!"Dumbot25a".equals(nativePlayer.optString("aiName"))||!"Dumbot25a".equals(player.optString("nameAI"))||nativePlayer.optInt("difficulty",-1)!=difficulty||player.optInt("difficulty",-1)!=difficulty))throw new IOException("The saved Challenge opponent is invalid.");
+      JSONArray alliances=player.optJSONArray("alliances");
+      if(alliances==null||alliances.length()<2||alliances.optInt(1-i,-1)!=0)throw new IOException("The saved Challenge opponents are allied.");
+    }
+    JSONObject rules=null,bot=null;int bots=0;
+    for(Iterator<String> it=scripts.keys();it.hasNext();) {
+      String key=it.next();
+      // Group/trigger records repeat scriptName and me; only globals identify
+      // one live native script context for each opponent and the rules.
+      if(!key.matches("globals_[0-9]+"))continue;
+      JSONObject context=scripts.optJSONObject(key);if(context==null)continue;
+      if(context.optInt("me",-1)==1&&"challenge-dumb25a".equals(context.optString("scriptName"))){bot=context;bots++;}
+      if(context.has("ffaConfig")||context.has("ffaSession")){if(rules!=null||context.optInt("me",-1)!=0||!"init".equals(context.optString("scriptName")))throw new IOException("The saved Challenge rules are inconsistent.");rules=context;}
+    }
+    if(bots!=1||bot==null||rules==null||!metadata.getString("session").equals(rules.optString("ffaSession"))||!rules.optString("ffaOutcome","").isEmpty())throw new IOException("The saved Challenge rules or bot are missing.");
+    JSONObject cfg=rules.optJSONObject("ffaConfig"),reward=rules.optJSONObject("wtreward_match"),rewardConfig=reward==null?null:reward.optJSONObject("config");
+    if(cfg==null||!"challenge".equals(cfg.optString("mode"))||!map.equals(cfg.optString("map"))||!level.equals(cfg.optString("level"))||!weapon.equals(cfg.optString("weapon"))
+        ||!metadata.getString("difficulty").equals(cfg.optString("difficulty"))||cfg.optInt("player",-1)!=0||cfg.optInt("players",-1)!=2||cfg.optInt("bots",-1)!=1||!"dumbot25a".equals(cfg.optString("botType"))
+        ||reward==null||rewardConfig==null||!reward.optBoolean("applied")||!"challenge".equals(rewardConfig.optString("profile"))||!map.equals(rewardConfig.optString("map"))||!metadata.getString("rewardRunId").equals(reward.optString("session")))
+      throw new IOException("The saved Challenge profile, branch or purchases do not match.");
   }
 
   private static String ffaBotType(JSONObject metadata) throws IOException {

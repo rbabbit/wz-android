@@ -20,15 +20,15 @@ final class BattleLaunchSpec {
   BattleLaunchSpec(String matchMode, String duelWeapon, String mapId, boolean musicEnabled, String difficulty, String botType) {
     this.matchMode = matchMode(matchMode);
     this.duelWeapon = duelWeapon(duelWeapon);
-    this.mapId = "ffa".equals(this.matchMode) ? ffaMapId(mapId)
+    this.mapId = "challenge".equals(this.matchMode) ? challengeMapId(mapId) : "ffa".equals(this.matchMode) ? ffaMapId(mapId)
         : "survival".equals(this.matchMode) ? SurvivalMapCatalog.get(mapId).id : mapId(mapId);
     this.musicEnabled = musicEnabled;
     this.ffaDifficulty = ffaDifficulty(difficulty);
-    this.ffaBotType = ffaBotType(botType);
+    this.ffaBotType = "challenge".equals(this.matchMode) ? "dumbot25a" : ffaBotType(botType);
   }
 
   static String matchMode(String value) {
-    return "survival".equals(value) ? "survival" : "ffa".equals(value) ? "ffa" : "campaign".equals(value) ? "campaign" : "duel".equals(value) ? "duel" : "towers";
+    return "challenge".equals(value) ? "challenge" : "survival".equals(value) ? "survival" : "ffa".equals(value) ? "ffa" : "campaign".equals(value) ? "campaign" : "duel".equals(value) ? "duel" : "towers";
   }
   static String ffaDifficulty(String value) {
     String normalized = value == null ? "" : value.toLowerCase(java.util.Locale.ROOT);
@@ -46,6 +46,11 @@ final class BattleLaunchSpec {
     return value;
   }
   boolean isFfa() { return "ffa".equals(matchMode); }
+  boolean isChallenge() { return "challenge".equals(matchMode); }
+  static String challengeMapId(String value) {
+    if (!ChallengeMapCatalog.isKnownId(value)) throw new IllegalArgumentException("Unknown Challenge map.");
+    return value;
+  }
   static String duelWeapon(String value) { return "rockets".equals(value) ? "rockets" : "cannon"; }
   static String mapId(String value) {
     return MapLevelCatalog.normalizeId(value);

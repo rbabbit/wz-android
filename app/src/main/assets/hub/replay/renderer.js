@@ -5701,6 +5701,8 @@
   }
 
   function drawBattlefieldMinimap(map, structures, droids, fieldWidth, fieldHeight) {
+    // The focused Android replay has no minimap canvas.
+    if (!battlefieldMinimap) return;
     const minimapHeight = Math.max(90, Math.min(240, Math.round(battlefieldMinimap.width * map.height / map.width)));
     if (battlefieldMinimap.height !== minimapHeight) {
       battlefieldMinimap.height = minimapHeight;
@@ -6831,66 +6833,68 @@
   window.addEventListener("blur", () => {
     document.documentElement.classList.remove("replay-battlefield-scroll-lock");
   });
-  battlefieldMinimap.style.pointerEvents = "auto";
-  battlefieldMinimap.style.cursor = "crosshair";
-  battlefieldMinimap.style.touchAction = "none";
-  let battlefieldMinimapPointerId = null;
-
-  battlefieldMinimap.addEventListener("wheel", (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    const minimapRect = battlefieldMinimap.getBoundingClientRect();
-    const stageRect = battlefieldStage.getBoundingClientRect();
-    const minimumWidth = 100;
-    const maximumWidth = Math.max(minimumWidth, Math.min(420, stageRect.width * 0.55));
-    const scale = event.deltaY < 0 ? 1.12 : 1 / 1.12;
-    const nextWidth = Math.max(minimumWidth, Math.min(maximumWidth, minimapRect.width * scale));
-    battlefieldMinimap.style.width = `${Math.round(nextWidth)}px`;
-    positionBattlefieldMinimapToggle();
-  }, { passive: false });
-
-  const moveBattlefieldFromMinimap = (event) => {
-    const minimapRect = battlefieldMinimap.getBoundingClientRect();
-    const activeCanvas = battlefield3dIsActive() ? battlefield3dCanvas : battlefieldCanvas;
-    const canvasRect = activeCanvas.getBoundingClientRect();
-    const margin = 5;
-    const x = (event.clientX - minimapRect.left) / minimapRect.width * battlefieldMinimap.width;
-    const y = (event.clientY - minimapRect.top) / minimapRect.height * battlefieldMinimap.height;
-    const mapX = Math.max(0, Math.min(1, (x - margin) / (battlefieldMinimap.width - margin * 2)));
-    const mapY = Math.max(0, Math.min(1, (y - margin) / (battlefieldMinimap.height - margin * 2)));
-    if (battlefield3dIsActive()) {
-      battlefieldView.offsetX = (0.5 - mapX) * canvasRect.width * battlefieldView.scale;
-      battlefieldView.offsetY = (0.5 - mapY) * canvasRect.height * battlefieldView.scale;
-    } else {
-      const fieldWidth = Math.max(1, canvasRect.width - 24);
-      const fieldHeight = Math.max(1, canvasRect.height - 24);
-      battlefieldView.offsetX = (0.5 - mapX) * fieldWidth * battlefieldView.scale;
-      battlefieldView.offsetY = (0.5 - mapY) * fieldHeight * battlefieldView.scale;
-    }
-    drawBattlefield();
-  };
-
-  battlefieldMinimap.addEventListener("pointerdown", (event) => {
-    if (event.button !== 0) return;
-    event.preventDefault();
-    battlefieldMinimapPointerId = event.pointerId;
-    battlefieldMinimap.setPointerCapture(event.pointerId);
-    battlefieldMinimap.style.cursor = "grabbing";
-    moveBattlefieldFromMinimap(event);
-  });
-
-  battlefieldMinimap.addEventListener("pointermove", (event) => {
-    if (battlefieldMinimapPointerId !== event.pointerId || !(event.buttons & 1)) return;
-    moveBattlefieldFromMinimap(event);
-  });
-
-  const stopBattlefieldMinimapDrag = (event) => {
-    if (battlefieldMinimapPointerId !== event.pointerId) return;
-    battlefieldMinimapPointerId = null;
+  if (battlefieldMinimap) {
+    battlefieldMinimap.style.pointerEvents = "auto";
     battlefieldMinimap.style.cursor = "crosshair";
-  };
-  battlefieldMinimap.addEventListener("pointerup", stopBattlefieldMinimapDrag);
-  battlefieldMinimap.addEventListener("pointercancel", stopBattlefieldMinimapDrag);
+    battlefieldMinimap.style.touchAction = "none";
+    let battlefieldMinimapPointerId = null;
+
+    battlefieldMinimap.addEventListener("wheel", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      const minimapRect = battlefieldMinimap.getBoundingClientRect();
+      const stageRect = battlefieldStage.getBoundingClientRect();
+      const minimumWidth = 100;
+      const maximumWidth = Math.max(minimumWidth, Math.min(420, stageRect.width * 0.55));
+      const scale = event.deltaY < 0 ? 1.12 : 1 / 1.12;
+      const nextWidth = Math.max(minimumWidth, Math.min(maximumWidth, minimapRect.width * scale));
+      battlefieldMinimap.style.width = `${Math.round(nextWidth)}px`;
+      positionBattlefieldMinimapToggle();
+    }, { passive: false });
+
+    const moveBattlefieldFromMinimap = (event) => {
+      const minimapRect = battlefieldMinimap.getBoundingClientRect();
+      const activeCanvas = battlefield3dIsActive() ? battlefield3dCanvas : battlefieldCanvas;
+      const canvasRect = activeCanvas.getBoundingClientRect();
+      const margin = 5;
+      const x = (event.clientX - minimapRect.left) / minimapRect.width * battlefieldMinimap.width;
+      const y = (event.clientY - minimapRect.top) / minimapRect.height * battlefieldMinimap.height;
+      const mapX = Math.max(0, Math.min(1, (x - margin) / (battlefieldMinimap.width - margin * 2)));
+      const mapY = Math.max(0, Math.min(1, (y - margin) / (battlefieldMinimap.height - margin * 2)));
+      if (battlefield3dIsActive()) {
+        battlefieldView.offsetX = (0.5 - mapX) * canvasRect.width * battlefieldView.scale;
+        battlefieldView.offsetY = (0.5 - mapY) * canvasRect.height * battlefieldView.scale;
+      } else {
+        const fieldWidth = Math.max(1, canvasRect.width - 24);
+        const fieldHeight = Math.max(1, canvasRect.height - 24);
+        battlefieldView.offsetX = (0.5 - mapX) * fieldWidth * battlefieldView.scale;
+        battlefieldView.offsetY = (0.5 - mapY) * fieldHeight * battlefieldView.scale;
+      }
+      drawBattlefield();
+    };
+
+    battlefieldMinimap.addEventListener("pointerdown", (event) => {
+      if (event.button !== 0) return;
+      event.preventDefault();
+      battlefieldMinimapPointerId = event.pointerId;
+      battlefieldMinimap.setPointerCapture(event.pointerId);
+      battlefieldMinimap.style.cursor = "grabbing";
+      moveBattlefieldFromMinimap(event);
+    });
+
+    battlefieldMinimap.addEventListener("pointermove", (event) => {
+      if (battlefieldMinimapPointerId !== event.pointerId || !(event.buttons & 1)) return;
+      moveBattlefieldFromMinimap(event);
+    });
+
+    const stopBattlefieldMinimapDrag = (event) => {
+      if (battlefieldMinimapPointerId !== event.pointerId) return;
+      battlefieldMinimapPointerId = null;
+      battlefieldMinimap.style.cursor = "crosshair";
+    };
+    battlefieldMinimap.addEventListener("pointerup", stopBattlefieldMinimapDrag);
+    battlefieldMinimap.addEventListener("pointercancel", stopBattlefieldMinimapDrag);
+  }
 
   if (typeof ResizeObserver === "function") {
     const battlefieldResizeObserver = new ResizeObserver(() => drawBattlefield());

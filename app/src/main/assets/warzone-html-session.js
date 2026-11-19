@@ -4,10 +4,11 @@
   if (window.__towersHtml) return;
   const campaign = window.__warzoneCampaignMode === true || new URLSearchParams(location.search).get('mode') === 'campaign';
   const ffa = window.__warzoneFfaConfig?.mode === 'ffa' && Object.isFrozen(window.__warzoneFfaConfig);
+  const challenge = window.__warzoneFfaConfig?.mode === 'challenge' && Object.isFrozen(window.__warzoneFfaConfig);
   const session = new URLSearchParams(location.search).get('battle_session') || window.__towersHtmlSession || '';
   const config=window.__warzoneDuelConfig;
   const survival=window.__warzoneSurvivalConfig?.mode==='survival'&&Object.isFrozen(window.__warzoneSurvivalConfig);
-  const duel=config?.mode==='duel'&&Object.isFrozen(config),mode=ffa?'ffa':campaign?'campaign':duel?'duel':survival?'survival':'tower-defense';
+  const duel=config?.mode==='duel'&&Object.isFrozen(config),mode=challenge?'challenge':ffa?'ffa':campaign?'campaign':duel?'duel':survival?'survival':'tower-defense';
   let result = '', phase = 'loading', exitReason = '', menuRequested = false;
   function activate(wave) {
     // Only a packet emitted by the running scenario establishes a battle.
@@ -15,9 +16,9 @@
     if (phase === 'ended' || !wave || wave.mode !== mode) return false;
     if(duel&&(!['active','victory','defeated'].includes(wave.phase)||wave.humanBranch!==config.humanBranch||wave.botBranch!==config.botBranch))return false;
     if(survival&&(wave.map!==window.__warzoneSurvivalConfig.map||wave.nativeLevel!==window.__warzoneSurvivalConfig.level||wave.profile!=='survival'||wave.totalRounds!==60))return false;
-    if (!duel && !campaign && !ffa) {
+    if (challenge || !duel && !campaign && !ffa) {
       const credited = window.BlockNightAndroid?.rewardProgress?.(session, JSON.stringify({
-        wave:wave.wave, phase:wave.phase, completedWaves:wave.completedWaves || [], rewards:wave.rewards || null}));
+        wave:challenge?0:wave.wave, phase:wave.phase, completedWaves:challenge?[]:wave.completedWaves || [], rewards:wave.rewards || null}));
       if (Number(credited) > 0) window.WarzoneRewards?.waveCredited?.(Number(credited));
     }
     if (phase === 'playing') return true;
@@ -62,7 +63,7 @@
     } catch (_) { /* Never clear a newer request or remove a polled file. */ }
   }
   function finish(won) {
-    if((duel||ffa)&&result)return;
+    if((duel||ffa||challenge)&&result)return;
     if (result === 'exited' || result === 'victory' || result === 'defeated' && !won) return;
     result = won ? 'victory' : 'defeated';
     retire(result);
@@ -109,13 +110,13 @@
     // Retire input immediately, then flush saves before the confirmed WebView
     // unload. Never reveal or send keys into the engine's stock frontend.
     const leave = () => { if (phase !== 'ended') exit('main-menu'); };
-    if (!duel && !campaign && !ffa && window.WarzoneRewards?.prepareExit)
+    if ((challenge || !duel && !campaign && !ffa) && window.WarzoneRewards?.prepareExit)
       Promise.resolve(window.WarzoneRewards.prepareExit()).then(leave, leave);
     else leave();
     return true;
   }
   function observeNativeOutput(text) {
-    const prefix=ffa?'BNFFA:':campaign?'BNCAMPAIGN:':duel?'BNDUEL:':'BNWAVE:',marker = text.indexOf(prefix);
+    const prefix=ffa||challenge?'BNFFA:':campaign?'BNCAMPAIGN:':duel?'BNDUEL:':'BNWAVE:',marker = text.indexOf(prefix);
     if (marker >= 0) {
       try {
         const wave = JSON.parse(text.slice(marker + prefix.length));

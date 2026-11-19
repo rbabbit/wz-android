@@ -105,6 +105,7 @@
     if(group)group.append(all,repair);else{const controls=doc.createElement('div');controls.className='bn-command-group';controls.append(all,repair);hud.appendChild(controls);}
     const status=doc.createElement('aside');status.id='warzone-campaign-status';status.innerHTML='<div><strong></strong><small hidden></small></div>';
     (element('warzone-command-strip')||hud).appendChild(status);
+    window.__kalaWarzoneTouch?.compactToolbar?.();
     const back=doc.createElement('button');back.id='wt-campaign-native-back';back.type='button';back.textContent='BACK TO GAME';back.hidden=true;back.addEventListener('click',closeNativeUi);doc.body.appendChild(back);
   }
   function render() {

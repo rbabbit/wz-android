@@ -19,11 +19,15 @@ final class RewardLedger {
   final Map<String, Integer> inventory = new LinkedHashMap<>();
   final Map<String, Integer> loadout = new LinkedHashMap<>();
   final Map<String, Integer> survivalLoadout = new LinkedHashMap<>();
-  Map<String,Integer> loadout(String profile) { return "survival".equals(RewardCatalog.profile(profile)) ? survivalLoadout : loadout; }
+  final Map<String, Integer> challengeLoadout = new LinkedHashMap<>();
+  Map<String,Integer> loadout(String profile) {
+    String checked = RewardCatalog.profile(profile);
+    return "challenge".equals(checked) ? challengeLoadout : "survival".equals(checked) ? survivalLoadout : loadout;
+  }
   private void trimLoadoutsToStock() {
-    for (Map<String,Integer> chosen : java.util.Arrays.asList(loadout,survivalLoadout))
+    for (Map<String,Integer> chosen : java.util.Arrays.asList(loadout,survivalLoadout,challengeLoadout))
       for (String id : new LinkedHashSet<>(chosen.keySet())) { int n=Math.min(count(chosen,id),count(inventory,id)); if(n<1)chosen.remove(id);else chosen.put(id,n); }
-    for(Map<String,Integer> chosen:java.util.Arrays.asList(loadout,survivalLoadout))
+    for(Map<String,Integer> chosen:java.util.Arrays.asList(loadout,survivalLoadout,challengeLoadout))
       for(RewardCatalog.Item item:RewardCatalog.list())if(!item.requires.isEmpty()&&count(chosen,item.requires)<1)chosen.remove(item.id);
   }
   final Set<String> completed = new HashSet<>();
@@ -108,12 +112,13 @@ final class RewardLedger {
     Map<String,Integer> loadout=loadout(profile);
     RewardCatalog.Item item = RewardCatalog.get(id);
     RewardCatalog.requireEligible(item,profile,map);
+    if (!item.purchasable()) throw new IllegalArgumentException("This item is no longer sold.");
     if (quantity < 1 || quantity > 999 || owned(id) + quantity > 999)
       throw new IllegalArgumentException("Choose a quantity from 1 to 999.");
     if (item.fortress && ownedFortresses(null) + quantity > 3)
       throw new IllegalArgumentException("You can store at most three fortresses in total.");
-    if ("laser_sat".equals(id) && owned(id) + quantity > 1)
-      throw new IllegalArgumentException("You can store one Laser Satellite Command Post.");
+    if (item.structure() && item.maxPerMatch == 1 && owned(id) + quantity > 1)
+      throw new IllegalArgumentException("You can store one " + item.name + ".");
     Map<String,Integer> selected=new LinkedHashMap<>(loadout);
     selected.put(id,Math.min(count(selected,id)+quantity,item.maxPerMatch));RewardCatalog.requireDependencies(selected);
     int cost = Math.multiplyExact(item.price, quantity);
@@ -131,6 +136,7 @@ final class RewardLedger {
     Map<String,Integer> loadout=loadout(profile);
     RewardCatalog.Item item = RewardCatalog.get(id);
     RewardCatalog.requireEligible(item,profile,map);
+    if (!item.purchasable()) throw new IllegalArgumentException("This item is no longer sold.");
     if (quantity < 0 || quantity > count(inventory, id) || quantity > item.maxPerMatch)
       throw new IllegalArgumentException("That quantity is not available in your inventory.");
     if (item.fortress && fortressCount(loadout) - count(loadout, id) + quantity > 3)
@@ -144,6 +150,8 @@ final class RewardLedger {
   Run begin(String session, String map, String profile) {
     Map<String,Integer> loadout=loadout(profile);
     if(map==null||map.isEmpty())throw new IllegalArgumentException("Missing map identity.");
+    if ("challenge".equals(profile) && !ChallengeMapCatalog.isKnownId(map))
+      throw new IllegalArgumentException("Unknown Challenge map.");
     if (session == null || session.isEmpty()) throw new IllegalArgumentException("Missing match identity.");
     Run previous = runs.get(session);
     if (previous != null) {
@@ -185,6 +193,8 @@ final class RewardLedger {
   /** Only native cleared-wave IDs pay; the started-wave number is informational. */
   int progress(String session, int wave, int total, Set<Integer> cleared, Map<String, Integer> remaining) {
     Run run = active(session);
+    if ("challenge".equals(run.profile) && (wave != 0 || total != 0 || !cleared.isEmpty()))
+      throw new IllegalArgumentException("Challenge rewards do not have cleared waves.");
     for (Integer number : cleared) if (number == null || number < 1 || number > total)
       throw new IllegalArgumentException("Invalid cleared wave.");
     if (remaining != null) for (String id : remaining.keySet()) {
@@ -208,7 +218,7 @@ final class RewardLedger {
     if (!run.awaitingResumeInventory) return;
     // No wave IDs are credited here. Native resume already clamps old-world
     // allowances to these phone caps; observing its result can only reduce them.
-    progress(session, run.wave, Math.max(1, run.wave), Collections.emptySet(), remaining);
+    progress(session, run.wave, "challenge".equals(run.profile) ? 0 : Math.max(1, run.wave), Collections.emptySet(), remaining);
     run.awaitingResumeInventory = false;
   }
 
@@ -259,6 +269,7 @@ final class RewardLedger {
       Set<String> requiredDifficultyMapIds) {
     Run run = runs.get(session);
     if (run == null) throw new IllegalArgumentException("Unknown match.");
+    if ("challenge".equals(run.profile)) throw new IllegalArgumentException("Use the Challenge completion record.");
     if (requiredDifficultyMapIds != null) {
       validateDifficultyMaps(difficulty, requiredDifficultyMapIds);
       if (total < 1 || !requiredDifficultyMapIds.contains(run.map))
@@ -291,6 +302,32 @@ final class RewardLedger {
     run.suspended = run.pinned;
     run.receipt = new Receipt(won, run.map, run.wave, total,
         Math.addExact(Math.addExact(run.waveCredits, run.completionCredits), run.difficultyCredits), balance, reason);
+    return run.receipt;
+  }
+
+  /** A native 1v1 result pays once per run; restoring an older save cannot repay it. */
+  Receipt finishChallenge(String session, boolean won, String difficulty, boolean authoritativeRemaining) {
+    Run run = runs.get(session);
+    if (run == null || !"challenge".equals(run.profile)) throw new IllegalArgumentException("Unknown Challenge match.");
+    if (!validDifficulty(difficulty)) throw new IllegalArgumentException("Invalid Challenge difficulty.");
+    if (run.settled) return run.receipt;
+    int credited = 0;
+    String reason = won ? "Victory reward already saved" : "No victory reward this match";
+    if (won && !run.winPaid) {
+      int base = "hard".equals(difficulty) ? 100 : "medium".equals(difficulty) ? 80 : 60;
+      boolean first = completed.add("challenge:" + run.map + ":" + difficulty);
+      credited = base + (first ? 50 : 0);
+      run.winPaid = true;
+      run.completionCredits = credited;
+      reason = "Challenge won  +" + base + (first ? "\nFirst win on this map and difficulty  +50" : "");
+    }
+    balance = Math.addExact(balance, credited);
+    run.returnAllowed = !run.applied || authoritativeRemaining;
+    if (!run.pinned && run.returnAllowed) restoreUnused(run, !run.applied);
+    else if (!run.pinned) discardUnknownRemaining(run);
+    run.settled = true;
+    run.suspended = run.pinned;
+    run.receipt = new Receipt(won, run.map, 0, 0, run.completionCredits, balance, reason);
     return run.receipt;
   }
 
@@ -345,13 +382,14 @@ final class RewardLedger {
     }
     RewardCatalog.Item item = RewardCatalog.get(itemId);
     RewardCatalog.requireEligible(item,run.profile,run.map);
+    if (!item.purchasable()) throw new IllegalArgumentException("This item is no longer sold.");
     Map<String,Integer> selected=new LinkedHashMap<>(run.items);selected.put(itemId,count(selected,itemId)+quantity);RewardCatalog.requireDependencies(selected);
     if (quantity < 1 || quantity > 999 || count(run.items, itemId) + quantity > item.maxPerMatch)
       throw new IllegalArgumentException("That quantity exceeds this match's purchase limit.");
     if (item.fortress && (fortressCount(run.items) + quantity > 3 || ownedFortresses(run) + quantity > 3))
       throw new IllegalArgumentException("You can own and use at most three fortresses in total for this match.");
-    if ("laser_sat".equals(itemId) && owned(itemId) + quantity > 1)
-      throw new IllegalArgumentException("You can own one Laser Satellite Command Post.");
+    if (item.structure() && item.maxPerMatch == 1 && owned(itemId) + quantity > 1)
+      throw new IllegalArgumentException("You can own one " + item.name + ".");
     int cost = Math.multiplyExact(item.price, quantity);
     if (cost > balance) throw new IllegalArgumentException("Not enough crystals.");
     if (transactionId == null || transactionId.isEmpty() || run.transactions.containsKey(transactionId))

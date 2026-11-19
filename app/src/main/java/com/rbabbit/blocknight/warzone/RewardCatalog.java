@@ -28,6 +28,7 @@ final class RewardCatalog {
       this.kind=kind; this.requires=requires; this.moreFortress=true;
       this.maxPerMatch="structure".equals(kind) ? (fortress ? 3 : 999) : 1;
     }
+    boolean purchasable() { return !"mf_atgm_design".equals(id); }
     boolean structure() { return "structure".equals(kind); }
     boolean consumedOnApply() { return !structure(); }
     boolean inNativeItems() { return !"research".equals(id) && !"supply".equals(id); }
@@ -56,6 +57,7 @@ final class RewardCatalog {
       building("hellstorm", "Hellstorm Emplacement", "Artillery", 20, "Emplacement-RotHow", false, 999),
       building("ground_shaker", "Ground Shaker Emplacement", "Artillery", 20, "Emplacement-Howitzer150", false, 999),
       building("wide_sensor", "Wide Spectrum Sensor Tower", "Support", 10, "Sys-SensoTowerWS", false, 999),
+      building("satellite_uplink", "Satellite Uplink Centre", "Support", 100, "A0Sat-linkCentre", false, 1),
       building("laser_sat", "Laser Satellite Command Post", "Support", 250, "A0LasSatCommand", false, 1),
       new Item("research", "Research accelerator", "Support", 60, "",
           "25% faster research for one match. You choose the topics.", false, 1),
@@ -92,15 +94,18 @@ final class RewardCatalog {
   }
 
   static String profile(String value) {
-    if (!"towers".equals(value) && !"survival".equals(value))
-      throw new IllegalArgumentException("Rewards are only available in Waves and Survival.");
+    if (!"towers".equals(value) && !"survival".equals(value) && !"challenge".equals(value))
+      throw new IllegalArgumentException("Rewards are only available in Waves, Survival and Challenge.");
     return value;
   }
   static void requireEligible(Item item, String profile, String map) {
     profile(profile);
     if (map == null || map.isEmpty() || "survival".equals(profile)
-        && !"tdn2".equals(map) && !"wave".equals(map))
+        && !"tdn2".equals(map) && !"wave".equals(map)
+        || "challenge".equals(profile) && !"home".equals(map) && !ChallengeMapCatalog.isKnownId(map))
       throw new IllegalArgumentException("This map is not eligible for these Rewards.");
+    if ("challenge".equals(profile) && item.moreFortress)
+      throw new IllegalArgumentException("More Fortress items are only available in Towers games.");
   }
   static void requireDependencies(Map<String,Integer> selected) {
     for (String id : selected.keySet()) {

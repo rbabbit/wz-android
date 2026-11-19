@@ -1,0 +1,113 @@
+{
+  "id": "earthsea",
+  "source": "vendor/challenge-099/original/maps/earthsea.wz",
+  "sourceSHA256": "4c8ef5581af719b399cea5dab2837a1ece120f49971feffe5411c3ce47d46ee0",
+  "originalZIPMember": "1v1 maps/2p-Earthsea.wz",
+  "nativeFilesByteIdentical": true,
+  "author": {
+    "name": "Dede"
+  },
+  "license": "GPL-2.0-or-later",
+  "mapVersion": 40,
+  "width": 64,
+  "height": 99,
+  "starts": [
+    {
+      "player": 0,
+      "x": 45.0,
+      "y": 14.0,
+      "units": 2
+    },
+    {
+      "player": 1,
+      "x": 19.0,
+      "y": 86.0,
+      "units": 2
+    }
+  ],
+  "baseCounts": {
+    "0": {
+      "A0CommandCentre": 1,
+      "A0LightFactory": 5,
+      "A0PowerGenerator": 4,
+      "A0ResearchFacility": 5,
+      "A0CyborgFactory": 1,
+      "NEXUSWall": 15,
+      "NX-WallTower-BeamLas": 1
+    },
+    "1": {
+      "A0CommandCentre": 1,
+      "A0LightFactory": 5,
+      "A0ResearchFacility": 5,
+      "A0PowerGenerator": 8,
+      "A0CyborgFactory": 1,
+      "NEXUSWall": 16,
+      "NX-WallTower-BeamLas": 1
+    }
+  },
+  "scavengers": false,
+  "scavengerStructures": 0,
+  "scavengerDroids": 0,
+  "requiredInitialStructureLimits": {},
+  "terrainCounts": {
+    "5": 1231,
+    "4": 3704,
+    "8": 675,
+    "7": 344,
+    "3": 76,
+    "0": 8,
+    "2": 136,
+    "1": 162
+  },
+  "mappings": [
+    {
+      "original": "level.json",
+      "host": "map/challenge-earthsea/level.json",
+      "virtual": "/data/mp/multiplay/maps/challenge-earthsea/level.json",
+      "sha256": "36f8453ba42d09e662d58c6358286cdb2f6958ef81015939881512fe08f2e9ce"
+    },
+    {
+      "original": "droid.json",
+      "host": "map/challenge-earthsea/droid.json",
+      "virtual": "/data/mp/multiplay/maps/challenge-earthsea/droid.json",
+      "sha256": "90c6c003a2ba3942cb32347825ad389f1a7e360b2630dee23ac200fe24cfa8fd"
+    },
+    {
+      "original": "feature.json",
+      "host": "map/challenge-earthsea/feature.json",
+      "virtual": "/data/mp/multiplay/maps/challenge-earthsea/feature.json",
+      "sha256": "87d4449a425c4dbbeb477815fa0b8864444d29400443271b665df2e8cce28cf9"
+    },
+    {
+      "original": "gam.json",
+      "host": "map/challenge-earthsea/gam.json",
+      "virtual": "/data/mp/multiplay/maps/challenge-earthsea/gam.json",
+      "sha256": "d834d3d812b89c99ed79e46c27c9ffd6081e9d91228a97e33e76fc6fbd3723be"
+    },
+    {
+      "original": "gam.json",
+      "host": "map/challenge-earthsea/gam.json",
+      "virtual": "/data/mp/multiplay/maps/challenge-earthsea.gam",
+      "sha256": "d834d3d812b89c99ed79e46c27c9ffd6081e9d91228a97e33e76fc6fbd3723be"
+    },
+    {
+      "original": "game.map",
+      "host": "map/challenge-earthsea/game.map",
+      "virtual": "/data/mp/multiplay/maps/challenge-earthsea/game.map",
+      "sha256": "30b4b8a3c1da6059584c9d2933052b48f472805031ce76d811f85ad206abcaa0"
+    },
+    {
+      "original": "struct.json",
+      "host": "map/challenge-earthsea/struct.json",
+      "virtual": "/data/mp/multiplay/maps/challenge-earthsea/struct.json",
+      "sha256": "84902a9dbb9718c4c5df2fe8974da104d7568ed5fc345351ce13ba342214a8ce"
+    },
+    {
+      "original": "ttypes.ttp",
+      "host": "map/challenge-earthsea/ttypes.ttp",
+      "virtual": "/data/mp/multiplay/maps/challenge-earthsea/ttypes.ttp",
+      "sha256": "f37b514cf8319c8a3c7430d502fc803c7a4cf715e0e3ff6c7f82464c18a1eaf5"
+    }
+  ],
+  "descriptor": "// Authored Challenge map; original bytes and credits in vendor/challenge-099.\nlevel FFA-CHEARTHSEA-T1\nplayers 2\ntype 14\ndataset MULTI_CAM_1\ngame \"multiplay/maps/challenge-earthsea.gam\"\n"
+}

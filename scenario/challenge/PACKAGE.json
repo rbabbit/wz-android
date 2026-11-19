@@ -1,0 +1,2694 @@
+{
+  "passed": true,
+  "version": 1,
+  "mode": "challenge",
+  "players": 2,
+  "bots": 1,
+  "botType": "dumbot25a",
+  "vtol": true,
+  "maps": [
+    {
+      "id": "firefight",
+      "name": "DA-firefight1x1b",
+      "level": "FFA-CHFFIGHT-T1",
+      "mapDirectory": "challenge-firefight",
+      "preview": "challenge-previews/firefight.png",
+      "players": 2,
+      "bots": 1,
+      "width": 79,
+      "height": 149,
+      "tileset": "arizona",
+      "sourceSHA256": "c7a2453ab2128198cca38f577fba35a07db8fd32bea8fd99810c40cf5c0b567d",
+      "scavengers": true,
+      "description": "79 × 149. Two commanders. Authored scavenger positions. VTOL enabled.",
+      "structureLimits": {}
+    },
+    {
+      "id": "towers2",
+      "name": "DA-towers2",
+      "level": "FFA-CHTOWERS-T1",
+      "mapDirectory": "challenge-towers2",
+      "preview": "challenge-previews/towers2.png",
+      "players": 2,
+      "bots": 1,
+      "width": 239,
+      "height": 78,
+      "tileset": "rockies",
+      "sourceSHA256": "e4228af5fd5f350394a8bb60e03a50702357310984eb4c1d90f816b66fe86632",
+      "scavengers": true,
+      "description": "239 × 78. Two commanders. Authored scavenger positions. VTOL enabled.",
+      "structureLimits": {
+        "A0CyborgFactory": 6,
+        "A0ResearchFacility": 10
+      }
+    },
+    {
+      "id": "hells-pass",
+      "name": "HellsPass",
+      "level": "FFA-CHHELLS-T1",
+      "mapDirectory": "challenge-hells-pass",
+      "preview": "challenge-previews/hells-pass.png",
+      "players": 2,
+      "bots": 1,
+      "width": 50,
+      "height": 100,
+      "tileset": "arizona",
+      "sourceSHA256": "d86079ebc9b5a1b46732255a9f81c8c0736d138b83a98d691ec75e025e7ac375",
+      "scavengers": true,
+      "description": "50 × 100. Two commanders. Authored scavenger positions. VTOL enabled.",
+      "structureLimits": {}
+    },
+    {
+      "id": "fort-scav",
+      "name": "DO-FortScavWar2p",
+      "level": "FFA-CHFORTSCAV-T1",
+      "mapDirectory": "challenge-fort-scav",
+      "preview": "challenge-previews/fort-scav.png",
+      "players": 2,
+      "bots": 1,
+      "width": 59,
+      "height": 192,
+      "tileset": "arizona",
+      "sourceSHA256": "73300731dfe3fb7acb0828443a57cb253137bcde67dcad73e5565defe641c3d1",
+      "scavengers": true,
+      "description": "59 × 192. Two commanders. Authored scavenger positions. VTOL enabled.",
+      "structureLimits": {}
+    },
+    {
+      "id": "dramatic-scavs",
+      "name": "DramaticScavs",
+      "level": "FFA-CHDRAMATIC-T1",
+      "mapDirectory": "challenge-dramatic-scavs",
+      "preview": "challenge-previews/dramatic-scavs.png",
+      "players": 2,
+      "bots": 1,
+      "width": 80,
+      "height": 160,
+      "tileset": "arizona",
+      "sourceSHA256": "31a829b9835e356c8858bfccdadd93822d1596e1836f22a5be5d44bef3a61b5a",
+      "scavengers": true,
+      "description": "80 × 160. Two commanders. Authored scavenger positions. VTOL enabled.",
+      "structureLimits": {}
+    },
+    {
+      "id": "earthsea",
+      "name": "Earthsea",
+      "level": "FFA-CHEARTHSEA-T1",
+      "mapDirectory": "challenge-earthsea",
+      "preview": "challenge-previews/earthsea.png",
+      "players": 2,
+      "bots": 1,
+      "width": 64,
+      "height": 99,
+      "tileset": "arizona",
+      "sourceSHA256": "4c8ef5581af719b399cea5dab2837a1ece120f49971feffe5411c3ce47d46ee0",
+      "scavengers": false,
+      "description": "64 × 99. Two commanders. VTOL enabled.",
+      "structureLimits": {}
+    },
+    {
+      "id": "cross-flair",
+      "name": "H_Cross_Flair_3",
+      "level": "FFA-CHCROSS-T1",
+      "mapDirectory": "challenge-cross-flair",
+      "preview": "challenge-previews/cross-flair.png",
+      "players": 2,
+      "bots": 1,
+      "width": 100,
+      "height": 100,
+      "tileset": "urban",
+      "sourceSHA256": "f082e363561a6571b8cee16c69c7a5368895494f47270d378fbdf1dd089fedfb",
+      "scavengers": true,
+      "description": "100 × 100. Two commanders. Authored scavenger positions. VTOL enabled.",
+      "structureLimits": {}
+    },
+    {
+      "id": "no-hill",
+      "name": "NO_HILL",
+      "level": "FFA-CHNOHILL-T1",
+      "mapDirectory": "challenge-no-hill",
+      "preview": "challenge-previews/no-hill.png",
+      "players": 2,
+      "bots": 1,
+      "width": 100,
+      "height": 160,
+      "tileset": "arizona",
+      "sourceSHA256": "016aba74dbd767097ff85fe8f0a09a13d01e87ca3850d3a041eb97c414ce0b21",
+      "scavengers": false,
+      "description": "100 × 160. Two commanders. VTOL enabled.",
+      "structureLimits": {}
+    },
+    {
+      "id": "face-to-face",
+      "name": "RQ_face2face",
+      "level": "FFA-CHFACE-T1",
+      "mapDirectory": "challenge-face-to-face",
+      "preview": "challenge-previews/face-to-face.png",
+      "players": 2,
+      "bots": 1,
+      "width": 40,
+      "height": 128,
+      "tileset": "arizona",
+      "sourceSHA256": "4cdb9c7aa967e407e984e252096b14e0d42962a539d9541b9696055580b6cbd1",
+      "scavengers": true,
+      "description": "40 × 128. Two commanders. Authored scavenger positions. VTOL enabled.",
+      "structureLimits": {
+        "A0PowerGenerator": 20,
+        "A0ResearchFacility": 6,
+        "A0LightFactory": 6,
+        "A0CyborgFactory": 6
+      }
+    },
+    {
+      "id": "startup2",
+      "name": "StartUp2",
+      "level": "FFA-CHSTARTUP-T1",
+      "mapDirectory": "challenge-startup2",
+      "preview": "challenge-previews/startup2.png",
+      "players": 2,
+      "bots": 1,
+      "width": 64,
+      "height": 135,
+      "tileset": "arizona",
+      "sourceSHA256": "92d0c0c319f9a8e6783c45e2ff9c94e4a028041b1fc6e6b31e59e33c0ca689ba",
+      "scavengers": true,
+      "description": "64 × 135. Two commanders. Authored scavenger positions. VTOL enabled.",
+      "structureLimits": {}
+    }
+  ],
+  "compiledProgramNormalizedIdentical": true,
+  "noNativeBuild": true,
+  "sharedWASM": "warzone2100.wasm",
+  "stockPrefixBytes": 64424618,
+  "stockPrefixSHA256": "9e89d11c8b67b5f68ddc0be43290233c28cd43b3d2a96fea1a7b4beaf83b8424",
+  "stockResearchByteIdentical": true,
+  "allOriginalMPTemplatesUnchanged": true,
+  "templateCompatibility": {
+    "passed": true,
+    "referencedTemplatesByMap": {
+      "firefight": [
+        "BabaBusCan",
+        "BabaFireCan",
+        "ConstructionDroid"
+      ],
+      "towers2": [
+        "ConstructionDroid"
+      ],
+      "hells-pass": [
+        "BabaBusCan",
+        "BabaFireTruck",
+        "BabaRKJeep",
+        "ConstructionDroid"
+      ],
+      "fort-scav": [
+        "BabaRKJeep",
+        "CobraHMGHalfTrack",
+        "CobraLtA-Thalftrack",
+        "CobraMedCnHTrks",
+        "ConstructionDroid"
+      ],
+      "dramatic-scavs": [
+        "ConstructionDroid"
+      ],
+      "earthsea": [
+        "ConstructionDroid"
+      ],
+      "cross-flair": [
+        "ConstructionDroid"
+      ],
+      "no-hill": [
+        "ConstructionDroid"
+      ],
+      "face-to-face": [
+        "NX-M-Con-Hover"
+      ],
+      "startup2": [
+        "BaBaPeople",
+        "BabaJeep",
+        "ConstructionDroid"
+      ]
+    },
+    "aliases": {
+      "NX-M-Con-Hover": {
+        "source": "/data/base/stats/templates.json",
+        "definition": {
+          "body": "Body7ABT",
+          "construct": "Spade1Mk1",
+          "id": "NX-M-Con-Hover",
+          "name": "*NX-M-Con-Hover*",
+          "propulsion": "hover01",
+          "sensor": "NavGunSensor",
+          "type": "CONSTRUCT"
+        },
+        "reason": "Authored map references this stock campaign constructor; absent from stock MP template registry."
+      }
+    },
+    "allOriginalMPTemplatesUnchanged": true,
+    "originalMPTemplateCount": 280,
+    "finalTemplateCount": 281,
+    "mapObjectFilesUnchanged": true,
+    "campaignDefinitionCopiedExactly": true
+  },
+  "nativePreloadDirectories": [
+    "/data/base",
+    "/data/base/audio",
+    "/data/base/audio/coltive",
+    "/data/base/audio/countdown",
+    "/data/base/audio/extra",
+    "/data/base/audio/memressp/artbat",
+    "/data/base/audio/memressp/cmndrasi",
+    "/data/base/audio/memressp/cmndrvoc",
+    "/data/base/audio/memressp/combat",
+    "/data/base/audio/memressp/console",
+    "/data/base/audio/memressp/desnseq",
+    "/data/base/audio/memressp/detect",
+    "/data/base/audio/memressp/missmesg",
+    "/data/base/audio/memressp/power",
+    "/data/base/audio/memressp/productn",
+    "/data/base/audio/memressp/repair",
+    "/data/base/audio/memressp/research",
+    "/data/base/audio/memressp/routing",
+    "/data/base/audio/memressp/status",
+    "/data/base/audio/memressp/struct",
+    "/data/base/audio/memressp/trnsport",
+    "/data/base/audio/memressp/tutorial",
+    "/data/base/audio/memressp/vtols",
+    "/data/base/audio/multi",
+    "/data/base/audio/nexus",
+    "/data/base/audio/proxmessages",
+    "/data/base/audio/radclick",
+    "/data/base/audio/sfx/building",
+    "/data/base/audio/sfx/explons",
+    "/data/base/audio/sfx/interfce",
+    "/data/base/audio/sfx/misc",
+    "/data/base/audio/sfx/vehicle",
+    "/data/base/audio/sfx/weapons",
+    "/data/base/audio/taunts/taunt1",
+    "/data/base/audio/taunts/taunt2",
+    "/data/base/audio/taunts/taunt3",
+    "/data/base/audio/trnsppil",
+    "/data/base/audio/tutorial",
+    "/data/base/audio/vtoltalk",
+    "/data/base/campaigns",
+    "/data/base/components/bodies",
+    "/data/base/components/prop",
+    "/data/base/components/weapons",
+    "/data/base/effects",
+    "/data/base/features",
+    "/data/base/guidetopics/wz2100/general",
+    "/data/base/guidetopics/wz2100/structures",
+    "/data/base/guidetopics/wz2100/unitorders",
+    "/data/base/guidetopics/wz2100/units",
+    "/data/base/guidetopics/wz2100/units/commanders",
+    "/data/base/guidetopics/wz2100/units/propulsions",
+    "/data/base/guidetopics/wz2100/units/propulsions/vtols",
+    "/data/base/guidetopics/wz2100/units/sensors",
+    "/data/base/guidetopics/wz2100/weapons",
+    "/data/base/guidetopics/wz2100/weapons/bombs",
+    "/data/base/images",
+    "/data/base/images/flags",
+    "/data/base/images/frontend",
+    "/data/base/images/intfac",
+    "/data/base/images/notifications",
+    "/data/base/images/replay",
+    "/data/base/messages",
+    "/data/base/messages/strings",
+    "/data/base/misc",
+    "/data/base/misc/micnum",
+    "/data/base/misc/minum",
+    "/data/base/misc/mivnum",
+    "/data/base/misc/researchimds",
+    "/data/base/script",
+    "/data/base/script/campaign",
+    "/data/base/script/campaign/libcampaign_includes",
+    "/data/base/script/fastplay",
+    "/data/base/sequenceaudio",
+    "/data/base/sequenceaudio/cam1",
+    "/data/base/sequenceaudio/cam2",
+    "/data/base/sequenceaudio/cam3",
+    "/data/base/shaders",
+    "/data/base/shaders/vk",
+    "/data/base/stats",
+    "/data/base/structs",
+    "/data/base/texpages",
+    "/data/base/texpages/bdrops",
+    "/data/base/texpages/tertilesc1hw-128",
+    "/data/base/texpages/tertilesc2hw-128",
+    "/data/base/texpages/tertilesc3hw-128",
+    "/data/base/tileset",
+    "/data/base/wrf",
+    "/data/base/wrf/cam1",
+    "/data/base/wrf/cam1/cam1a",
+    "/data/base/wrf/cam1/cam1b",
+    "/data/base/wrf/cam1/cam1c",
+    "/data/base/wrf/cam1/cam1ca",
+    "/data/base/wrf/cam1/sub1-1",
+    "/data/base/wrf/cam1/sub1-2",
+    "/data/base/wrf/cam1/sub1-3",
+    "/data/base/wrf/cam1/sub1-4",
+    "/data/base/wrf/cam1/sub1-5",
+    "/data/base/wrf/cam1/sub1-7",
+    "/data/base/wrf/cam1/sub1-d",
+    "/data/base/wrf/cam2",
+    "/data/base/wrf/cam2/cam2b",
+    "/data/base/wrf/cam2/cam2c",
+    "/data/base/wrf/cam2/cam2start",
+    "/data/base/wrf/cam2/sub2-1",
+    "/data/base/wrf/cam2/sub2-2",
+    "/data/base/wrf/cam2/sub2-5",
+    "/data/base/wrf/cam2/sub2-6",
+    "/data/base/wrf/cam2/sub2-7",
+    "/data/base/wrf/cam2/sub2-8",
+    "/data/base/wrf/cam2/sub2-d",
+    "/data/base/wrf/cam3",
+    "/data/base/wrf/cam3/cam3-4",
+    "/data/base/wrf/cam3/cam3a",
+    "/data/base/wrf/cam3/cam3a-b",
+    "/data/base/wrf/cam3/cam3ad",
+    "/data/base/wrf/cam3/cam3b",
+    "/data/base/wrf/cam3/cam3c",
+    "/data/base/wrf/cam3/cam3d",
+    "/data/base/wrf/cam3/sub3-1",
+    "/data/base/wrf/cam3/sub3-2",
+    "/data/base/wrf/cam3/sub3-3",
+    "/data/base/wrf/fastplay",
+    "/data/base/wrf/fastplay/fastdemo",
+    "/data/base/wrf/tutorial",
+    "/data/base/wrf/tutorial/newtut",
+    "/data/fonts",
+    "/data/mods/campaign",
+    "/data/mp",
+    "/data/mp/anims",
+    "/data/mp/challenges",
+    "/data/mp/components/bodies",
+    "/data/mp/components/prop",
+    "/data/mp/components/weapons",
+    "/data/mp/effects",
+    "/data/mp/messages",
+    "/data/mp/messages/strings",
+    "/data/mp/multiplay/maps",
+    "/data/mp/multiplay/maps/10c-Emergence",
+    "/data/mp/multiplay/maps/10c-WaterLoop",
+    "/data/mp/multiplay/maps/2c-DustyMaze",
+    "/data/mp/multiplay/maps/2c-Roughness",
+    "/data/mp/multiplay/maps/2c-Vision",
+    "/data/mp/multiplay/maps/2c-highground",
+    "/data/mp/multiplay/maps/2c-startup",
+    "/data/mp/multiplay/maps/2c-urbanchasm",
+    "/data/mp/multiplay/maps/3c-Gamma",
+    "/data/mp/multiplay/maps/3c-Monocot_i",
+    "/data/mp/multiplay/maps/4c-DustyMaze-2v2",
+    "/data/mp/multiplay/maps/4c-DustyMaze-FFA",
+    "/data/mp/multiplay/maps/4c-basingstoke",
+    "/data/mp/multiplay/maps/4c-cockpit",
+    "/data/mp/multiplay/maps/4c-fishnet",
+    "/data/mp/multiplay/maps/4c-greatrift",
+    "/data/mp/multiplay/maps/4c-littleegypt",
+    "/data/mp/multiplay/maps/4c-mountain",
+    "/data/mp/multiplay/maps/4c-pyramidal",
+    "/data/mp/multiplay/maps/4c-rollinghills",
+    "/data/mp/multiplay/maps/4c-rush",
+    "/data/mp/multiplay/maps/4c-rush2",
+    "/data/mp/multiplay/maps/4c-urban-chaos",
+    "/data/mp/multiplay/maps/4c-urbanduel",
+    "/data/mp/multiplay/maps/4c-valleyofdeath",
+    "/data/mp/multiplay/maps/5c-bloat",
+    "/data/mp/multiplay/maps/6c-Entropy",
+    "/data/mp/multiplay/maps/6c-Melting",
+    "/data/mp/multiplay/maps/7c-Thales",
+    "/data/mp/multiplay/maps/8c-bananas",
+    "/data/mp/multiplay/maps/8c-beggarskanyon",
+    "/data/mp/multiplay/maps/8c-clover",
+    "/data/mp/multiplay/maps/8c-cockate",
+    "/data/mp/multiplay/maps/8c-concreteplayground",
+    "/data/mp/multiplay/maps/8c-gridlock",
+    "/data/mp/multiplay/maps/8c-hidensneak",
+    "/data/mp/multiplay/maps/8c-manhattan",
+    "/data/mp/multiplay/maps/8c-mizamaze",
+    "/data/mp/multiplay/maps/8c-sandcastles",
+    "/data/mp/multiplay/maps/8c-thepit",
+    "/data/mp/multiplay/maps/8c-wheeloffortune",
+    "/data/mp/multiplay/maps/8c-yinyang",
+    "/data/mp/multiplay/maps/8c-ziggurat",
+    "/data/mp/multiplay/maps/9c-WindFury",
+    "/data/mp/multiplay/maps/challenge-cross-flair",
+    "/data/mp/multiplay/maps/challenge-dramatic-scavs",
+    "/data/mp/multiplay/maps/challenge-earthsea",
+    "/data/mp/multiplay/maps/challenge-face-to-face",
+    "/data/mp/multiplay/maps/challenge-firefight",
+    "/data/mp/multiplay/maps/challenge-fort-scav",
+    "/data/mp/multiplay/maps/challenge-hells-pass",
+    "/data/mp/multiplay/maps/challenge-no-hill",
+    "/data/mp/multiplay/maps/challenge-startup2",
+    "/data/mp/multiplay/maps/challenge-towers2",
+    "/data/mp/multiplay/script",
+    "/data/mp/multiplay/script/functions",
+    "/data/mp/multiplay/script/mods",
+    "/data/mp/multiplay/script/rules",
+    "/data/mp/multiplay/script/rules/events",
+    "/data/mp/multiplay/script/rules/setup",
+    "/data/mp/multiplay/script/scavengers",
+    "/data/mp/multiplay/skirmish",
+    "/data/mp/multiplay/skirmish/bonecrusher",
+    "/data/mp/multiplay/skirmish/cobra_includes",
+    "/data/mp/multiplay/skirmish/cobra_rulesets",
+    "/data/mp/multiplay/skirmish/dumb25a",
+    "/data/mp/multiplay/skirmish/nb_common",
+    "/data/mp/multiplay/skirmish/nb_includes",
+    "/data/mp/multiplay/skirmish/nb_rulesets",
+    "/data/mp/multiplay/skirmish/nexus_includes",
+    "/data/mp/multiplay/skirmish/nexus_standards",
+    "/data/mp/multiplay/skirmish/semperfi_includes",
+    "/data/mp/stats",
+    "/data/mp/structs",
+    "/data/mp/tests",
+    "/data/mp/wrf",
+    "/share/locale/ar_SA/LC_MESSAGES",
+    "/share/locale/bg_BG/LC_MESSAGES",
+    "/share/locale/ca_ES/LC_MESSAGES",
+    "/share/locale/cs/LC_MESSAGES",
+    "/share/locale/da/LC_MESSAGES",
+    "/share/locale/de/LC_MESSAGES",
+    "/share/locale/el/LC_MESSAGES",
+    "/share/locale/en_GB/LC_MESSAGES",
+    "/share/locale/eo/LC_MESSAGES",
+    "/share/locale/es/LC_MESSAGES",
+    "/share/locale/et_EE/LC_MESSAGES",
+    "/share/locale/fa_IR/LC_MESSAGES",
+    "/share/locale/fi/LC_MESSAGES",
+    "/share/locale/fr/LC_MESSAGES",
+    "/share/locale/fy/LC_MESSAGES",
+    "/share/locale/ga/LC_MESSAGES",
+    "/share/locale/he_IL/LC_MESSAGES",
+    "/share/locale/hr/LC_MESSAGES",
+    "/share/locale/hu/LC_MESSAGES",
+    "/share/locale/id/LC_MESSAGES",
+    "/share/locale/it/LC_MESSAGES",
+    "/share/locale/ja_JP/LC_MESSAGES",
+    "/share/locale/ko/LC_MESSAGES",
+    "/share/locale/la/LC_MESSAGES",
+    "/share/locale/lt/LC_MESSAGES",
+    "/share/locale/my_MM/LC_MESSAGES",
+    "/share/locale/nb/LC_MESSAGES",
+    "/share/locale/nl/LC_MESSAGES",
+    "/share/locale/pl/LC_MESSAGES",
+    "/share/locale/pt/LC_MESSAGES",
+    "/share/locale/pt_BR/LC_MESSAGES",
+    "/share/locale/ro/LC_MESSAGES",
+    "/share/locale/ru/LC_MESSAGES",
+    "/share/locale/sk/LC_MESSAGES",
+    "/share/locale/sl/LC_MESSAGES",
+    "/share/locale/sr_RS/LC_MESSAGES",
+    "/share/locale/tr/LC_MESSAGES",
+    "/share/locale/tt_RU/LC_MESSAGES",
+    "/share/locale/uk_UA/LC_MESSAGES",
+    "/share/locale/zh_CN/LC_MESSAGES",
+    "/share/locale/zh_TW/LC_MESSAGES"
+  ],
+  "mapProofs": [
+    {
+      "id": "firefight",
+      "source": "vendor/challenge-099/original/maps/firefight.wz",
+      "sourceSHA256": "c7a2453ab2128198cca38f577fba35a07db8fd32bea8fd99810c40cf5c0b567d",
+      "originalZIPMember": "1v1 maps/2c-DA-firefight1x1b-c7a2453ab2128198cca38f577fba35a07db8fd32bea8fd99810c40cf5c0b567d (1).wz",
+      "nativeFilesByteIdentical": true,
+      "author": {
+        "name": "Not specified in supplied archive"
+      },
+      "license": "Not specified in supplied archive",
+      "mapVersion": 10,
+      "width": 79,
+      "height": 149,
+      "starts": [
+        {
+          "player": 0,
+          "x": 37.0,
+          "y": 143.0,
+          "units": 4
+        },
+        {
+          "player": 1,
+          "x": 37.0,
+          "y": 6.0,
+          "units": 4
+        }
+      ],
+      "baseCounts": {
+        "0": {
+          "A0VtolPad": 16,
+          "A0HardcreteMk1Wall": 10,
+          "A0CyborgFactory": 5,
+          "A0PowerGenerator": 4,
+          "A0HardcreteMk1Gate": 5,
+          "A0ResearchFacility": 5,
+          "A0ResourceExtractor": 16,
+          "A0VTolFactory1": 5,
+          "A0LightFactory": 5,
+          "A0CommandCentre": 1
+        },
+        "1": {
+          "A0HardcreteMk1Wall": 10,
+          "A0HardcreteMk1Gate": 5,
+          "A0VtolPad": 16,
+          "A0PowerGenerator": 4,
+          "A0ResearchFacility": 5,
+          "A0VTolFactory1": 5,
+          "A0CyborgFactory": 5,
+          "A0LightFactory": 5,
+          "A0CommandCentre": 1,
+          "A0ResourceExtractor": 16
+        }
+      },
+      "scavengers": true,
+      "scavengerStructures": 282,
+      "scavengerDroids": 40,
+      "requiredInitialStructureLimits": {},
+      "terrainCounts": {
+        "4": 3517,
+        "2": 494,
+        "8": 3486,
+        "5": 643,
+        "6": 1160,
+        "3": 789,
+        "0": 1682
+      },
+      "mappings": [
+        {
+          "original": "multiplay/maps/2c-DA-firefight1x1b.gam",
+          "host": "map/challenge-firefight/game.gam",
+          "virtual": "/data/mp/multiplay/maps/challenge-firefight/game.gam",
+          "sha256": "4b7894f2d3abd7f4c67caaf0577ce8c852f0009ea6a562daa5f49d8eeee03f7b"
+        },
+        {
+          "original": "multiplay/maps/2c-DA-firefight1x1b.gam",
+          "host": "map/challenge-firefight/game.gam",
+          "virtual": "/data/mp/multiplay/maps/challenge-firefight.gam",
+          "sha256": "4b7894f2d3abd7f4c67caaf0577ce8c852f0009ea6a562daa5f49d8eeee03f7b"
+        },
+        {
+          "original": "multiplay/maps/2c-DA-firefight1x1b/dinit.bjo",
+          "host": "map/challenge-firefight/dinit.bjo",
+          "virtual": "/data/mp/multiplay/maps/challenge-firefight/dinit.bjo",
+          "sha256": "5dc2d6d217c9b8f35e0765ade6d2f027a39b39769324e8a2bf7b284095bb26e5"
+        },
+        {
+          "original": "multiplay/maps/2c-DA-firefight1x1b/droid.ini",
+          "host": "map/challenge-firefight/droid.ini",
+          "virtual": "/data/mp/multiplay/maps/challenge-firefight/droid.ini",
+          "sha256": "eb4ed272163003346bcdf2bd1dba19751dac7c77ad49e9a0b674e447021243c6"
+        },
+        {
+          "original": "multiplay/maps/2c-DA-firefight1x1b/feat.bjo",
+          "host": "map/challenge-firefight/feat.bjo",
+          "virtual": "/data/mp/multiplay/maps/challenge-firefight/feat.bjo",
+          "sha256": "fbac59aebb61c5f0184f32b269c7b25cf62c08fc159b399b5ae7247f9b1568a1"
+        },
+        {
+          "original": "multiplay/maps/2c-DA-firefight1x1b/feature.ini",
+          "host": "map/challenge-firefight/feature.ini",
+          "virtual": "/data/mp/multiplay/maps/challenge-firefight/feature.ini",
+          "sha256": "b1c73434a11c1a94c59256b68c155d521f623bfcd043d900b244eff97733d0b9"
+        },
+        {
+          "original": "multiplay/maps/2c-DA-firefight1x1b/game.map",
+          "host": "map/challenge-firefight/game.map",
+          "virtual": "/data/mp/multiplay/maps/challenge-firefight/game.map",
+          "sha256": "3f9ae472da3ed483f5c69ea23794bcf83af06d7c8aebf99664d93b64318edb8e"
+        },
+        {
+          "original": "multiplay/maps/2c-DA-firefight1x1b/struct.bjo",
+          "host": "map/challenge-firefight/struct.bjo",
+          "virtual": "/data/mp/multiplay/maps/challenge-firefight/struct.bjo",
+          "sha256": "acc7e53d3e874daacdd4d9fb64339bae844717ad04f173cc844936867f20769f"
+        },
+        {
+          "original": "multiplay/maps/2c-DA-firefight1x1b/struct.ini",
+          "host": "map/challenge-firefight/struct.ini",
+          "virtual": "/data/mp/multiplay/maps/challenge-firefight/struct.ini",
+          "sha256": "a07b86792a01122e7b543b6ff171aec050aae5f34b4bdf9e6df98d98ec427e6c"
+        },
+        {
+          "original": "multiplay/maps/2c-DA-firefight1x1b/ttypes.ttp",
+          "host": "map/challenge-firefight/ttypes.ttp",
+          "virtual": "/data/mp/multiplay/maps/challenge-firefight/ttypes.ttp",
+          "sha256": "b3e6b3c5f337e02cf65984f1d80668e906dc56a5c24689d9b143da515099c3e3"
+        }
+      ],
+      "descriptor": "// Authored Challenge map; original bytes and credits in vendor/challenge-099.\nlevel FFA-CHFFIGHT-T1\nplayers 2\ntype 14\ndataset MULTI_CAM_1\ngame \"multiplay/maps/challenge-firefight.gam\"\n"
+    },
+    {
+      "id": "towers2",
+      "source": "vendor/challenge-099/original/maps/towers2.wz",
+      "sourceSHA256": "e4228af5fd5f350394a8bb60e03a50702357310984eb4c1d90f816b66fe86632",
+      "originalZIPMember": "1v1 maps/2c-DA-towers2-e4228af5fd5f350394a8bb60e03a50702357310984eb4c1d90f816b66fe86632.wz",
+      "nativeFilesByteIdentical": true,
+      "author": {
+        "name": "Not specified in supplied archive"
+      },
+      "license": "Not specified in supplied archive",
+      "mapVersion": 10,
+      "width": 239,
+      "height": 78,
+      "starts": [
+        {
+          "player": 0,
+          "x": 50.0,
+          "y": 39.0,
+          "units": 4
+        },
+        {
+          "player": 1,
+          "x": 189.0,
+          "y": 39.0,
+          "units": 4
+        }
+      ],
+      "baseCounts": {
+        "0": {
+          "A0CyborgFactory": 6,
+          "A0PowerGenerator": 4,
+          "A0VTolFactory1": 3,
+          "AASite-QuadMg1": 14,
+          "A0VtolPad": 9,
+          "A0HardcreteMk1Gate": 8,
+          "A0ResearchFacility": 10,
+          "A0HardcreteMk1Wall": 4,
+          "A0ResourceExtractor": 16,
+          "A0HardcreteMk1CWall": 8,
+          "A0LightFactory": 4,
+          "A0CommandCentre": 1
+        },
+        "1": {
+          "AASite-QuadMg1": 14,
+          "A0HardcreteMk1CWall": 8,
+          "A0HardcreteMk1Wall": 4,
+          "A0HardcreteMk1Gate": 8,
+          "A0ResearchFacility": 10,
+          "A0PowerGenerator": 4,
+          "A0CyborgFactory": 6,
+          "A0LightFactory": 4,
+          "A0ResourceExtractor": 16,
+          "A0VtolPad": 9,
+          "A0VTolFactory1": 3,
+          "A0CommandCentre": 1
+        }
+      },
+      "scavengers": true,
+      "scavengerStructures": 376,
+      "scavengerDroids": 0,
+      "requiredInitialStructureLimits": {
+        "A0CyborgFactory": 6,
+        "A0ResearchFacility": 10
+      },
+      "terrainCounts": {
+        "8": 2658,
+        "2": 1518,
+        "10": 600,
+        "0": 7680,
+        "5": 92,
+        "1": 1798,
+        "4": 120,
+        "6": 3384,
+        "7": 792
+      },
+      "mappings": [
+        {
+          "original": "multiplay/maps/2c-DA-towers2.gam",
+          "host": "map/challenge-towers2/game.gam",
+          "virtual": "/data/mp/multiplay/maps/challenge-towers2/game.gam",
+          "sha256": "921077024202f66f95f96929c081de49f7cd18d2ca5f92c142c1e057ad09d8e8"
+        },
+        {
+          "original": "multiplay/maps/2c-DA-towers2.gam",
+          "host": "map/challenge-towers2/game.gam",
+          "virtual": "/data/mp/multiplay/maps/challenge-towers2.gam",
+          "sha256": "921077024202f66f95f96929c081de49f7cd18d2ca5f92c142c1e057ad09d8e8"
+        },
+        {
+          "original": "multiplay/maps/2c-DA-towers2/dinit.bjo",
+          "host": "map/challenge-towers2/dinit.bjo",
+          "virtual": "/data/mp/multiplay/maps/challenge-towers2/dinit.bjo",
+          "sha256": "ce0e8ee61b04f5a59de9a77f27a3ac4bb3e5bb6cd55f837c8cfcb45522f377bd"
+        },
+        {
+          "original": "multiplay/maps/2c-DA-towers2/droid.ini",
+          "host": "map/challenge-towers2/droid.ini",
+          "virtual": "/data/mp/multiplay/maps/challenge-towers2/droid.ini",
+          "sha256": "3f814db61eb730364c4392f5e3c32883e61ac98522057b868b67ee52b8254b6d"
+        },
+        {
+          "original": "multiplay/maps/2c-DA-towers2/feat.bjo",
+          "host": "map/challenge-towers2/feat.bjo",
+          "virtual": "/data/mp/multiplay/maps/challenge-towers2/feat.bjo",
+          "sha256": "9435fbbcd2fd584cde09a0e845dea351af6e6cacac3db282b78febb5ab949143"
+        },
+        {
+          "original": "multiplay/maps/2c-DA-towers2/feature.ini",
+          "host": "map/challenge-towers2/feature.ini",
+          "virtual": "/data/mp/multiplay/maps/challenge-towers2/feature.ini",
+          "sha256": "a2374aa96a7f414bf997cde0cd9489cb04ef04fdf3e66c692f5b5ec38733e61c"
+        },
+        {
+          "original": "multiplay/maps/2c-DA-towers2/game.map",
+          "host": "map/challenge-towers2/game.map",
+          "virtual": "/data/mp/multiplay/maps/challenge-towers2/game.map",
+          "sha256": "dcce10d384827b2a3f7c0034752c09d564bb6f0a7f9b08abe0173525d33544dd"
+        },
+        {
+          "original": "multiplay/maps/2c-DA-towers2/struct.bjo",
+          "host": "map/challenge-towers2/struct.bjo",
+          "virtual": "/data/mp/multiplay/maps/challenge-towers2/struct.bjo",
+          "sha256": "22f0ef0225bff9f2067101b402e571309256b6b5449dc4bf161fae5f80c44adb"
+        },
+        {
+          "original": "multiplay/maps/2c-DA-towers2/struct.ini",
+          "host": "map/challenge-towers2/struct.ini",
+          "virtual": "/data/mp/multiplay/maps/challenge-towers2/struct.ini",
+          "sha256": "72232ed545f542bde11fd491f810e507bcec586be74532447388fa3a2aa1bc14"
+        },
+        {
+          "original": "multiplay/maps/2c-DA-towers2/ttypes.ttp",
+          "host": "map/challenge-towers2/ttypes.ttp",
+          "virtual": "/data/mp/multiplay/maps/challenge-towers2/ttypes.ttp",
+          "sha256": "a991dabf7d3866276a7d575edf3b63b2cec202221032bef92e59c8d9bded0f83"
+        }
+      ],
+      "descriptor": "// Authored Challenge map; original bytes and credits in vendor/challenge-099.\nlevel FFA-CHTOWERS-T1\nplayers 2\ntype 14\ndataset MULTI_CAM_3\ngame \"multiplay/maps/challenge-towers2.gam\"\n"
+    },
+    {
+      "id": "hells-pass",
+      "source": "vendor/challenge-099/original/maps/hells-pass.wz",
+      "sourceSHA256": "d86079ebc9b5a1b46732255a9f81c8c0736d138b83a98d691ec75e025e7ac375",
+      "originalZIPMember": "1v1 maps/2c-HellsPass-d86079ebc9b5a1b46732255a9f81c8c0736d138b83a98d691ec75e025e7ac375.wz",
+      "nativeFilesByteIdentical": true,
+      "author": {
+        "name": "Not specified in supplied archive"
+      },
+      "license": "Not specified in supplied archive",
+      "mapVersion": 10,
+      "width": 50,
+      "height": 100,
+      "starts": [
+        {
+          "player": 0,
+          "x": 29.0,
+          "y": 13.0,
+          "units": 8
+        },
+        {
+          "player": 1,
+          "x": 20.0,
+          "y": 86.0,
+          "units": 8
+        }
+      ],
+      "baseCounts": {
+        "0": {
+          "A0ResourceExtractor": 40,
+          "A0ResearchFacility": 5,
+          "A0PowerGenerator": 10,
+          "A0LightFactory": 5,
+          "A0CyborgFactory": 5,
+          "A0CommandCentre": 1,
+          "A0ResearchModule1": 5,
+          "A0PowMod1": 10,
+          "A0FacMod1": 10
+        },
+        "1": {
+          "A0ResearchFacility": 5,
+          "A0PowerGenerator": 10,
+          "A0ResourceExtractor": 40,
+          "A0LightFactory": 5,
+          "A0CyborgFactory": 5,
+          "A0CommandCentre": 1,
+          "A0ResearchModule1": 5,
+          "A0PowMod1": 10,
+          "A0FacMod1": 10
+        }
+      },
+      "scavengers": true,
+      "scavengerStructures": 182,
+      "scavengerDroids": 95,
+      "requiredInitialStructureLimits": {},
+      "terrainCounts": {
+        "5": 1154,
+        "4": 3472,
+        "8": 374
+      },
+      "mappings": [
+        {
+          "original": "multiplay/maps/2c-HellsPass.gam",
+          "host": "map/challenge-hells-pass/game.gam",
+          "virtual": "/data/mp/multiplay/maps/challenge-hells-pass/game.gam",
+          "sha256": "6c271a8f6e6e94ebeb1fd12cb4867d17be7e90d612f2eb0a40bd08ceca736933"
+        },
+        {
+          "original": "multiplay/maps/2c-HellsPass.gam",
+          "host": "map/challenge-hells-pass/game.gam",
+          "virtual": "/data/mp/multiplay/maps/challenge-hells-pass.gam",
+          "sha256": "6c271a8f6e6e94ebeb1fd12cb4867d17be7e90d612f2eb0a40bd08ceca736933"
+        },
+        {
+          "original": "multiplay/maps/2c-HellsPass/dinit.bjo",
+          "host": "map/challenge-hells-pass/dinit.bjo",
+          "virtual": "/data/mp/multiplay/maps/challenge-hells-pass/dinit.bjo",
+          "sha256": "8fdcda7c80d20c988daeee10d207477be4e735b31d8bd7fc391e3e6ad1a27fa9"
+        },
+        {
+          "original": "multiplay/maps/2c-HellsPass/feat.bjo",
+          "host": "map/challenge-hells-pass/feat.bjo",
+          "virtual": "/data/mp/multiplay/maps/challenge-hells-pass/feat.bjo",
+          "sha256": "de85ebd38c70999e956a9170675f9043005a97d90a35cb41022911751f8e04bc"
+        },
+        {
+          "original": "multiplay/maps/2c-HellsPass/game.map",
+          "host": "map/challenge-hells-pass/game.map",
+          "virtual": "/data/mp/multiplay/maps/challenge-hells-pass/game.map",
+          "sha256": "f92d6f3653f6639c1405d64af9407527fad06ff2e41ac088e82b6f145a910e1d"
+        },
+        {
+          "original": "multiplay/maps/2c-HellsPass/struct.bjo",
+          "host": "map/challenge-hells-pass/struct.bjo",
+          "virtual": "/data/mp/multiplay/maps/challenge-hells-pass/struct.bjo",
+          "sha256": "8771c66b91327b353ec684be6969804a741e62abbcf9f937e9acccaad2c8c2c3"
+        },
+        {
+          "original": "multiplay/maps/2c-HellsPass/ttypes.ttp",
+          "host": "map/challenge-hells-pass/ttypes.ttp",
+          "virtual": "/data/mp/multiplay/maps/challenge-hells-pass/ttypes.ttp",
+          "sha256": "b3e6b3c5f337e02cf65984f1d80668e906dc56a5c24689d9b143da515099c3e3"
+        }
+      ],
+      "descriptor": "// Authored Challenge map; original bytes and credits in vendor/challenge-099.\nlevel FFA-CHHELLS-T1\nplayers 2\ntype 14\ndataset MULTI_CAM_1\ngame \"multiplay/maps/challenge-hells-pass.gam\"\n"
+    },
+    {
+      "id": "fort-scav",
+      "source": "vendor/challenge-099/original/maps/fort-scav.wz",
+      "sourceSHA256": "73300731dfe3fb7acb0828443a57cb253137bcde67dcad73e5565defe641c3d1",
+      "originalZIPMember": "1v1 maps/2p-DO-FortScavWar2p.wz",
+      "nativeFilesByteIdentical": true,
+      "author": {
+        "name": "Doruletz"
+      },
+      "license": "CC0-1.0",
+      "mapVersion": 40,
+      "width": 59,
+      "height": 192,
+      "starts": [
+        {
+          "player": 0,
+          "x": 29.0,
+          "y": 4.0,
+          "units": 6
+        },
+        {
+          "player": 1,
+          "x": 30.0,
+          "y": 188.0,
+          "units": 6
+        }
+      ],
+      "baseCounts": {
+        "0": {
+          "A0CommandCentre": 1,
+          "A0PowerGenerator": 4,
+          "A0ComDroidControl": 1,
+          "A0ResearchFacility": 1,
+          "A0LightFactory": 5,
+          "A0ResourceExtractor": 36,
+          "P0-AASite-SAM2": 6,
+          "AASite-QuadRotMg": 12,
+          "GuardTower-ATMiss": 2,
+          "GuardTower-BeamLas": 4,
+          "Sys-SensoTowerWS": 2,
+          "Emplacement-Howitzer-Incenediary": 10
+        },
+        "1": {
+          "A0CommandCentre": 1,
+          "A0ResourceExtractor": 36,
+          "A0ComDroidControl": 1,
+          "A0PowerGenerator": 4,
+          "A0ResearchFacility": 1,
+          "A0LightFactory": 5,
+          "P0-AASite-SAM2": 6,
+          "AASite-QuadRotMg": 12,
+          "Emplacement-Howitzer-Incenediary": 10,
+          "Sys-SensoTowerWS": 2,
+          "GuardTower-BeamLas": 4,
+          "GuardTower-ATMiss": 2
+        }
+      },
+      "scavengers": true,
+      "scavengerStructures": 382,
+      "scavengerDroids": 24,
+      "requiredInitialStructureLimits": {},
+      "terrainCounts": {
+        "2": 600,
+        "8": 1349,
+        "6": 9287,
+        "9": 88,
+        "4": 4
+      },
+      "mappings": [
+        {
+          "original": "level.json",
+          "host": "map/challenge-fort-scav/level.json",
+          "virtual": "/data/mp/multiplay/maps/challenge-fort-scav/level.json",
+          "sha256": "562c7ed58f51602409d5a193d9d9fb8122324d1cd061b118bc5cdf9c83f717f6"
+        },
+        {
+          "original": "README.md",
+          "host": "map/challenge-fort-scav/README.md",
+          "virtual": "/data/mp/multiplay/maps/challenge-fort-scav/README.md",
+          "sha256": "8202d4976d0b40e915c65c21abac282ca9acf135ec104bda5caeae84a3674b64"
+        },
+        {
+          "original": "droid.json",
+          "host": "map/challenge-fort-scav/droid.json",
+          "virtual": "/data/mp/multiplay/maps/challenge-fort-scav/droid.json",
+          "sha256": "5916b710e764cd2b14d5bee4c2a474c3350cd614c4f1907111e68881565793f0"
+        },
+        {
+          "original": "feature.json",
+          "host": "map/challenge-fort-scav/feature.json",
+          "virtual": "/data/mp/multiplay/maps/challenge-fort-scav/feature.json",
+          "sha256": "c46a73c66f5e0c02c0fd94355f801291a8d4fd9e3309c8822279ce76537ef999"
+        },
+        {
+          "original": "gam.json",
+          "host": "map/challenge-fort-scav/gam.json",
+          "virtual": "/data/mp/multiplay/maps/challenge-fort-scav/gam.json",
+          "sha256": "2b4616c4997d62b014809ee390e490bb8b12866f22db603685dbb850d6fc458e"
+        },
+        {
+          "original": "gam.json",
+          "host": "map/challenge-fort-scav/gam.json",
+          "virtual": "/data/mp/multiplay/maps/challenge-fort-scav.gam",
+          "sha256": "2b4616c4997d62b014809ee390e490bb8b12866f22db603685dbb850d6fc458e"
+        },
+        {
+          "original": "game.map",
+          "host": "map/challenge-fort-scav/game.map",
+          "virtual": "/data/mp/multiplay/maps/challenge-fort-scav/game.map",
+          "sha256": "03022c70d880d5bdd584c3466bc138a195205dd1b3afd32892a748b5cd29aae3"
+        },
+        {
+          "original": "struct.json",
+          "host": "map/challenge-fort-scav/struct.json",
+          "virtual": "/data/mp/multiplay/maps/challenge-fort-scav/struct.json",
+          "sha256": "91fe932553e4a0822dbca335c5ce7c90a40fdf98e1fdad7c1286c7ed78ea2756"
+        },
+        {
+          "original": "ttypes.ttp",
+          "host": "map/challenge-fort-scav/ttypes.ttp",
+          "virtual": "/data/mp/multiplay/maps/challenge-fort-scav/ttypes.ttp",
+          "sha256": "5b10aa98775b2c9a9daa611335a32c191279c3503fb9c0f3d06f97932cdda915"
+        }
+      ],
+      "descriptor": "// Authored Challenge map; original bytes and credits in vendor/challenge-099.\nlevel FFA-CHFORTSCAV-T1\nplayers 2\ntype 14\ndataset MULTI_CAM_1\ngame \"multiplay/maps/challenge-fort-scav.gam\"\n"
+    },
+    {
+      "id": "dramatic-scavs",
+      "source": "vendor/challenge-099/original/maps/dramatic-scavs.wz",
+      "sourceSHA256": "31a829b9835e356c8858bfccdadd93822d1596e1836f22a5be5d44bef3a61b5a",
+      "originalZIPMember": "1v1 maps/2p-DramaticScavs.wz",
+      "nativeFilesByteIdentical": true,
+      "author": {
+        "name": "NoQ and vaut"
+      },
+      "license": "CC0-1.0",
+      "mapVersion": 40,
+      "width": 80,
+      "height": 160,
+      "starts": [
+        {
+          "player": 0,
+          "x": 11.0,
+          "y": 17.0,
+          "units": 4
+        },
+        {
+          "player": 1,
+          "x": 68.0,
+          "y": 142.0,
+          "units": 4
+        }
+      ],
+      "baseCounts": {
+        "0": {
+          "A0CyborgFactory": 5,
+          "A0HardcreteMk1Wall": 20,
+          "A0PowerGenerator": 10,
+          "A0RepairCentre3": 2,
+          "A0HardcreteMk1CWall": 2,
+          "A0ComDroidControl": 1,
+          "A0CommandCentre": 1,
+          "A0ResourceExtractor": 40,
+          "A0LightFactory": 5,
+          "A0ResearchFacility": 5,
+          "A0PowMod1": 10,
+          "A0FacMod1": 10,
+          "A0ResearchModule1": 5
+        },
+        "1": {
+          "A0HardcreteMk1CWall": 2,
+          "A0RepairCentre3": 2,
+          "A0HardcreteMk1Wall": 20,
+          "A0ResourceExtractor": 40,
+          "A0CommandCentre": 1,
+          "A0PowerGenerator": 10,
+          "A0CyborgFactory": 5,
+          "A0ComDroidControl": 1,
+          "A0ResearchFacility": 5,
+          "A0LightFactory": 5,
+          "A0PowMod1": 10,
+          "A0ResearchModule1": 5,
+          "A0FacMod1": 10
+        }
+      },
+      "scavengers": true,
+      "scavengerStructures": 16,
+      "scavengerDroids": 0,
+      "requiredInitialStructureLimits": {},
+      "terrainCounts": {
+        "4": 5436,
+        "5": 871,
+        "8": 2236,
+        "0": 1598,
+        "7": 787,
+        "2": 1090,
+        "3": 246,
+        "1": 474,
+        "6": 62
+      },
+      "mappings": [
+        {
+          "original": "level.json",
+          "host": "map/challenge-dramatic-scavs/level.json",
+          "virtual": "/data/mp/multiplay/maps/challenge-dramatic-scavs/level.json",
+          "sha256": "ac9210baa512beb8188f500fd1c004c9f2ccfe1980dbb13d7155ef5de56211c1"
+        },
+        {
+          "original": "droid.json",
+          "host": "map/challenge-dramatic-scavs/droid.json",
+          "virtual": "/data/mp/multiplay/maps/challenge-dramatic-scavs/droid.json",
+          "sha256": "d15a8dcce590fbcf4923bc22783b8269914db99336cc47e45c84a184420e372b"
+        },
+        {
+          "original": "feature.json",
+          "host": "map/challenge-dramatic-scavs/feature.json",
+          "virtual": "/data/mp/multiplay/maps/challenge-dramatic-scavs/feature.json",
+          "sha256": "eb3346a5febbee3943b4b229df393cb8d147afff44b43466404e826e45c2e3ab"
+        },
+        {
+          "original": "gam.json",
+          "host": "map/challenge-dramatic-scavs/gam.json",
+          "virtual": "/data/mp/multiplay/maps/challenge-dramatic-scavs/gam.json",
+          "sha256": "ef4a459857a05e840d86c942ad647d51518ecf896db88f643d56aa19954bef6c"
+        },
+        {
+          "original": "gam.json",
+          "host": "map/challenge-dramatic-scavs/gam.json",
+          "virtual": "/data/mp/multiplay/maps/challenge-dramatic-scavs.gam",
+          "sha256": "ef4a459857a05e840d86c942ad647d51518ecf896db88f643d56aa19954bef6c"
+        },
+        {
+          "original": "game.map",
+          "host": "map/challenge-dramatic-scavs/game.map",
+          "virtual": "/data/mp/multiplay/maps/challenge-dramatic-scavs/game.map",
+          "sha256": "1d73d3a81af3a351929b9e73c2568bc95d38a6afbd5ab6cd6238b09e7a2d9a77"
+        },
+        {
+          "original": "struct.json",
+          "host": "map/challenge-dramatic-scavs/struct.json",
+          "virtual": "/data/mp/multiplay/maps/challenge-dramatic-scavs/struct.json",
+          "sha256": "154387a7847df4ba77b750fde739d9368e2a44fe1db205bdb3359151787410f1"
+        },
+        {
+          "original": "ttypes.ttp",
+          "host": "map/challenge-dramatic-scavs/ttypes.ttp",
+          "virtual": "/data/mp/multiplay/maps/challenge-dramatic-scavs/ttypes.ttp",
+          "sha256": "5b10aa98775b2c9a9daa611335a32c191279c3503fb9c0f3d06f97932cdda915"
+        }
+      ],
+      "descriptor": "// Authored Challenge map; original bytes and credits in vendor/challenge-099.\nlevel FFA-CHDRAMATIC-T1\nplayers 2\ntype 14\ndataset MULTI_CAM_1\ngame \"multiplay/maps/challenge-dramatic-scavs.gam\"\n"
+    },
+    {
+      "id": "earthsea",
+      "source": "vendor/challenge-099/original/maps/earthsea.wz",
+      "sourceSHA256": "4c8ef5581af719b399cea5dab2837a1ece120f49971feffe5411c3ce47d46ee0",
+      "originalZIPMember": "1v1 maps/2p-Earthsea.wz",
+      "nativeFilesByteIdentical": true,
+      "author": {
+        "name": "Dede"
+      },
+      "license": "GPL-2.0-or-later",
+      "mapVersion": 40,
+      "width": 64,
+      "height": 99,
+      "starts": [
+        {
+          "player": 0,
+          "x": 45.0,
+          "y": 14.0,
+          "units": 2
+        },
+        {
+          "player": 1,
+          "x": 19.0,
+          "y": 86.0,
+          "units": 2
+        }
+      ],
+      "baseCounts": {
+        "0": {
+          "A0CommandCentre": 1,
+          "A0LightFactory": 5,
+          "A0PowerGenerator": 4,
+          "A0ResearchFacility": 5,
+          "A0CyborgFactory": 1,
+          "NEXUSWall": 15,
+          "NX-WallTower-BeamLas": 1
+        },
+        "1": {
+          "A0CommandCentre": 1,
+          "A0LightFactory": 5,
+          "A0ResearchFacility": 5,
+          "A0PowerGenerator": 8,
+          "A0CyborgFactory": 1,
+          "NEXUSWall": 16,
+          "NX-WallTower-BeamLas": 1
+        }
+      },
+      "scavengers": false,
+      "scavengerStructures": 0,
+      "scavengerDroids": 0,
+      "requiredInitialStructureLimits": {},
+      "terrainCounts": {
+        "5": 1231,
+        "4": 3704,
+        "8": 675,
+        "7": 344,
+        "3": 76,
+        "0": 8,
+        "2": 136,
+        "1": 162
+      },
+      "mappings": [
+        {
+          "original": "level.json",
+          "host": "map/challenge-earthsea/level.json",
+          "virtual": "/data/mp/multiplay/maps/challenge-earthsea/level.json",
+          "sha256": "36f8453ba42d09e662d58c6358286cdb2f6958ef81015939881512fe08f2e9ce"
+        },
+        {
+          "original": "droid.json",
+          "host": "map/challenge-earthsea/droid.json",
+          "virtual": "/data/mp/multiplay/maps/challenge-earthsea/droid.json",
+          "sha256": "90c6c003a2ba3942cb32347825ad389f1a7e360b2630dee23ac200fe24cfa8fd"
+        },
+        {
+          "original": "feature.json",
+          "host": "map/challenge-earthsea/feature.json",
+          "virtual": "/data/mp/multiplay/maps/challenge-earthsea/feature.json",
+          "sha256": "87d4449a425c4dbbeb477815fa0b8864444d29400443271b665df2e8cce28cf9"
+        },
+        {
+          "original": "gam.json",
+          "host": "map/challenge-earthsea/gam.json",
+          "virtual": "/data/mp/multiplay/maps/challenge-earthsea/gam.json",
+          "sha256": "d834d3d812b89c99ed79e46c27c9ffd6081e9d91228a97e33e76fc6fbd3723be"
+        },
+        {
+          "original": "gam.json",
+          "host": "map/challenge-earthsea/gam.json",
+          "virtual": "/data/mp/multiplay/maps/challenge-earthsea.gam",
+          "sha256": "d834d3d812b89c99ed79e46c27c9ffd6081e9d91228a97e33e76fc6fbd3723be"
+        },
+        {
+          "original": "game.map",
+          "host": "map/challenge-earthsea/game.map",
+          "virtual": "/data/mp/multiplay/maps/challenge-earthsea/game.map",
+          "sha256": "30b4b8a3c1da6059584c9d2933052b48f472805031ce76d811f85ad206abcaa0"
+        },
+        {
+          "original": "struct.json",
+          "host": "map/challenge-earthsea/struct.json",
+          "virtual": "/data/mp/multiplay/maps/challenge-earthsea/struct.json",
+          "sha256": "84902a9dbb9718c4c5df2fe8974da104d7568ed5fc345351ce13ba342214a8ce"
+        },
+        {
+          "original": "ttypes.ttp",
+          "host": "map/challenge-earthsea/ttypes.ttp",
+          "virtual": "/data/mp/multiplay/maps/challenge-earthsea/ttypes.ttp",
+          "sha256": "f37b514cf8319c8a3c7430d502fc803c7a4cf715e0e3ff6c7f82464c18a1eaf5"
+        }
+      ],
+      "descriptor": "// Authored Challenge map; original bytes and credits in vendor/challenge-099.\nlevel FFA-CHEARTHSEA-T1\nplayers 2\ntype 14\ndataset MULTI_CAM_1\ngame \"multiplay/maps/challenge-earthsea.gam\"\n"
+    },
+    {
+      "id": "cross-flair",
+      "source": "vendor/challenge-099/original/maps/cross-flair.wz",
+      "sourceSHA256": "f082e363561a6571b8cee16c69c7a5368895494f47270d378fbdf1dd089fedfb",
+      "originalZIPMember": "1v1 maps/2p-H_Cross_Flair_3.wz",
+      "nativeFilesByteIdentical": true,
+      "author": {
+        "name": "Spyro_Drag"
+      },
+      "license": "CC-BY-3.0 OR GPL-2.0-or-later",
+      "mapVersion": 40,
+      "width": 100,
+      "height": 100,
+      "starts": [
+        {
+          "player": 0,
+          "x": 6.0,
+          "y": 6.0,
+          "units": 2
+        },
+        {
+          "player": 1,
+          "x": 94.0,
+          "y": 94.0,
+          "units": 2
+        }
+      ],
+      "baseCounts": {
+        "0": {
+          "WallTower01": 5,
+          "A0HardcreteMk1Wall": 24,
+          "A0HardcreteMk1Gate": 4,
+          "WallTower04": 4,
+          "A0LightFactory": 2,
+          "A0ResourceExtractor": 4,
+          "A0ResearchFacility": 1,
+          "A0CommandCentre": 1,
+          "A0PowerGenerator": 1
+        },
+        "1": {
+          "A0HardcreteMk1Wall": 24,
+          "A0HardcreteMk1Gate": 4,
+          "A0ResourceExtractor": 4,
+          "A0PowerGenerator": 1,
+          "WallTower04": 4,
+          "A0LightFactory": 2,
+          "WallTower01": 5,
+          "A0CommandCentre": 1,
+          "A0ResearchFacility": 1
+        }
+      },
+      "scavengers": true,
+      "scavengerStructures": 252,
+      "scavengerDroids": 0,
+      "requiredInitialStructureLimits": {},
+      "terrainCounts": {
+        "8": 2624,
+        "7": 1140,
+        "1": 6164,
+        "4": 72
+      },
+      "mappings": [
+        {
+          "original": "level.json",
+          "host": "map/challenge-cross-flair/level.json",
+          "virtual": "/data/mp/multiplay/maps/challenge-cross-flair/level.json",
+          "sha256": "b1e07e63f0ff655cc72131c67354442a0d384144642addfac904087a8510d38c"
+        },
+        {
+          "original": "droid.json",
+          "host": "map/challenge-cross-flair/droid.json",
+          "virtual": "/data/mp/multiplay/maps/challenge-cross-flair/droid.json",
+          "sha256": "f04d93b0d94547988138eefb41dd208057c9e37de2126b320c729a8cc9a1e79c"
+        },
+        {
+          "original": "feature.json",
+          "host": "map/challenge-cross-flair/feature.json",
+          "virtual": "/data/mp/multiplay/maps/challenge-cross-flair/feature.json",
+          "sha256": "ab0044634d39d53a004e61bf416e1267b94932ebdaeeb82919ab95cc76ecad81"
+        },
+        {
+          "original": "gam.json",
+          "host": "map/challenge-cross-flair/gam.json",
+          "virtual": "/data/mp/multiplay/maps/challenge-cross-flair/gam.json",
+          "sha256": "3009e32b7664520281fb991d693a560635a347232b45fdf4e7bd15c8bf8f40da"
+        },
+        {
+          "original": "gam.json",
+          "host": "map/challenge-cross-flair/gam.json",
+          "virtual": "/data/mp/multiplay/maps/challenge-cross-flair.gam",
+          "sha256": "3009e32b7664520281fb991d693a560635a347232b45fdf4e7bd15c8bf8f40da"
+        },
+        {
+          "original": "game.map",
+          "host": "map/challenge-cross-flair/game.map",
+          "virtual": "/data/mp/multiplay/maps/challenge-cross-flair/game.map",
+          "sha256": "12c62f4c4b564924ec1abef8f15f50e684ba70c718afe266db5698d4c1a62495"
+        },
+        {
+          "original": "struct.json",
+          "host": "map/challenge-cross-flair/struct.json",
+          "virtual": "/data/mp/multiplay/maps/challenge-cross-flair/struct.json",
+          "sha256": "b18a2139bb78fda7c098e8682dd824c8cdade15a94fe0759584507b0e0ad93cf"
+        },
+        {
+          "original": "ttypes.ttp",
+          "host": "map/challenge-cross-flair/ttypes.ttp",
+          "virtual": "/data/mp/multiplay/maps/challenge-cross-flair/ttypes.ttp",
+          "sha256": "8195c0b7981ab0c2b7cf964eb05bd90fdb09f60785b02af142682214e002eb51"
+        }
+      ],
+      "descriptor": "// Authored Challenge map; original bytes and credits in vendor/challenge-099.\nlevel FFA-CHCROSS-T1\nplayers 2\ntype 14\ndataset MULTI_CAM_2\ngame \"multiplay/maps/challenge-cross-flair.gam\"\n"
+    },
+    {
+      "id": "no-hill",
+      "source": "vendor/challenge-099/original/maps/no-hill.wz",
+      "sourceSHA256": "016aba74dbd767097ff85fe8f0a09a13d01e87ca3850d3a041eb97c414ce0b21",
+      "originalZIPMember": "1v1 maps/2p-NO_HILL.wz",
+      "nativeFilesByteIdentical": true,
+      "author": {
+        "name": "BSS"
+      },
+      "license": "GPL-2.0-or-later",
+      "mapVersion": 40,
+      "width": 100,
+      "height": 160,
+      "starts": [
+        {
+          "player": 0,
+          "x": 62.0,
+          "y": 12.0,
+          "units": 10
+        },
+        {
+          "player": 1,
+          "x": 36.0,
+          "y": 149.0,
+          "units": 10
+        }
+      ],
+      "baseCounts": {
+        "0": {
+          "A0ResourceExtractor": 40,
+          "A0ResearchFacility": 5,
+          "A0PowerGenerator": 10,
+          "A0LightFactory": 1,
+          "A0CommandCentre": 1,
+          "A0ResearchModule1": 5,
+          "A0PowMod1": 10,
+          "A0FacMod1": 2
+        },
+        "1": {
+          "A0ResourceExtractor": 40,
+          "A0PowerGenerator": 10,
+          "A0ResearchFacility": 5,
+          "A0LightFactory": 1,
+          "A0CommandCentre": 1,
+          "A0PowMod1": 10,
+          "A0ResearchModule1": 5,
+          "A0FacMod1": 2
+        }
+      },
+      "scavengers": false,
+      "scavengerStructures": 0,
+      "scavengerDroids": 0,
+      "requiredInitialStructureLimits": {},
+      "terrainCounts": {
+        "4": 10614,
+        "5": 3473,
+        "8": 1801,
+        "1": 112
+      },
+      "mappings": [
+        {
+          "original": "level.json",
+          "host": "map/challenge-no-hill/level.json",
+          "virtual": "/data/mp/multiplay/maps/challenge-no-hill/level.json",
+          "sha256": "404bbad2caf49bf40f7f92f1fb458e1bfbed30bbcd91503fe7ce97ed57e97b49"
+        },
+        {
+          "original": "droid.json",
+          "host": "map/challenge-no-hill/droid.json",
+          "virtual": "/data/mp/multiplay/maps/challenge-no-hill/droid.json",
+          "sha256": "5f308be8bdc07cc33b6fed6c58aba75a4c7dfd075d64d713ec725fc0f3720714"
+        },
+        {
+          "original": "feature.json",
+          "host": "map/challenge-no-hill/feature.json",
+          "virtual": "/data/mp/multiplay/maps/challenge-no-hill/feature.json",
+          "sha256": "d9ddba6cc9a977cf607214f95964560fdec010f1a39acfd08b52271764db55a1"
+        },
+        {
+          "original": "gam.json",
+          "host": "map/challenge-no-hill/gam.json",
+          "virtual": "/data/mp/multiplay/maps/challenge-no-hill/gam.json",
+          "sha256": "1ac053cfb6b078832821dc84101adad76280393237f39016788d49378213f201"
+        },
+        {
+          "original": "gam.json",
+          "host": "map/challenge-no-hill/gam.json",
+          "virtual": "/data/mp/multiplay/maps/challenge-no-hill.gam",
+          "sha256": "1ac053cfb6b078832821dc84101adad76280393237f39016788d49378213f201"
+        },
+        {
+          "original": "game.map",
+          "host": "map/challenge-no-hill/game.map",
+          "virtual": "/data/mp/multiplay/maps/challenge-no-hill/game.map",
+          "sha256": "83512978104baa7d15a2dab02bd6674679ff1b5eddb02bfb9b217815a3dde1ad"
+        },
+        {
+          "original": "struct.json",
+          "host": "map/challenge-no-hill/struct.json",
+          "virtual": "/data/mp/multiplay/maps/challenge-no-hill/struct.json",
+          "sha256": "c08243e03136faee40117f737a414d63d09f9e850f3517a477f228b1551209f9"
+        },
+        {
+          "original": "ttypes.ttp",
+          "host": "map/challenge-no-hill/ttypes.ttp",
+          "virtual": "/data/mp/multiplay/maps/challenge-no-hill/ttypes.ttp",
+          "sha256": "5b10aa98775b2c9a9daa611335a32c191279c3503fb9c0f3d06f97932cdda915"
+        }
+      ],
+      "descriptor": "// Authored Challenge map; original bytes and credits in vendor/challenge-099.\nlevel FFA-CHNOHILL-T1\nplayers 2\ntype 14\ndataset MULTI_CAM_1\ngame \"multiplay/maps/challenge-no-hill.gam\"\n"
+    },
+    {
+      "id": "face-to-face",
+      "source": "vendor/challenge-099/original/maps/face-to-face.wz",
+      "sourceSHA256": "4cdb9c7aa967e407e984e252096b14e0d42962a539d9541b9696055580b6cbd1",
+      "originalZIPMember": "1v1 maps/2p-RQ_face2face.wz",
+      "nativeFilesByteIdentical": true,
+      "author": {
+        "name": "Red_Queen"
+      },
+      "license": "GPL-2.0-or-later",
+      "mapVersion": 40,
+      "width": 40,
+      "height": 128,
+      "starts": [
+        {
+          "player": 0,
+          "x": 20.0,
+          "y": 10.0,
+          "units": 18
+        },
+        {
+          "player": 1,
+          "x": 20.0,
+          "y": 118.0,
+          "units": 18
+        }
+      ],
+      "baseCounts": {
+        "0": {
+          "A0ResourceExtractor": 80,
+          "A0PowerGenerator": 20,
+          "A0ResearchFacility": 6,
+          "A0ComDroidControl": 1,
+          "A0CommandCentre": 1,
+          "A0LightFactory": 6,
+          "A0CyborgFactory": 6,
+          "A0PowMod1": 20,
+          "A0ResearchModule1": 6,
+          "A0FacMod1": 6
+        },
+        "1": {
+          "A0ResourceExtractor": 80,
+          "A0CyborgFactory": 5,
+          "A0PowerGenerator": 20,
+          "A0ResearchFacility": 6,
+          "A0CommandCentre": 1,
+          "A0ComDroidControl": 1,
+          "A0LightFactory": 6,
+          "A0PowMod1": 20,
+          "A0ResearchModule1": 6,
+          "A0FacMod1": 6
+        }
+      },
+      "scavengers": true,
+      "scavengerStructures": 146,
+      "scavengerDroids": 0,
+      "requiredInitialStructureLimits": {
+        "A0PowerGenerator": 20,
+        "A0ResearchFacility": 6,
+        "A0LightFactory": 6,
+        "A0CyborgFactory": 6
+      },
+      "terrainCounts": {
+        "8": 726,
+        "4": 1,
+        "5": 1,
+        "6": 4392
+      },
+      "mappings": [
+        {
+          "original": "level.json",
+          "host": "map/challenge-face-to-face/level.json",
+          "virtual": "/data/mp/multiplay/maps/challenge-face-to-face/level.json",
+          "sha256": "5d98fed3ed85accb638656568ea7304116ab8fba95dd91f6592fb8aff5b82ac0"
+        },
+        {
+          "original": "droid.json",
+          "host": "map/challenge-face-to-face/droid.json",
+          "virtual": "/data/mp/multiplay/maps/challenge-face-to-face/droid.json",
+          "sha256": "534e393b4ef0873e0ab4ef48fe5e7ed4e247ed7a38c1d5ea53211455ade70e9d"
+        },
+        {
+          "original": "feature.json",
+          "host": "map/challenge-face-to-face/feature.json",
+          "virtual": "/data/mp/multiplay/maps/challenge-face-to-face/feature.json",
+          "sha256": "e77994130916dd4fec44c537a52d2a1032f798e83e064c0596ff50e32d6bc785"
+        },
+        {
+          "original": "gam.json",
+          "host": "map/challenge-face-to-face/gam.json",
+          "virtual": "/data/mp/multiplay/maps/challenge-face-to-face/gam.json",
+          "sha256": "e67a6330ba09d4962d1faaa931d20e1b5580872df5f5f8b35637e46a01ac85e7"
+        },
+        {
+          "original": "gam.json",
+          "host": "map/challenge-face-to-face/gam.json",
+          "virtual": "/data/mp/multiplay/maps/challenge-face-to-face.gam",
+          "sha256": "e67a6330ba09d4962d1faaa931d20e1b5580872df5f5f8b35637e46a01ac85e7"
+        },
+        {
+          "original": "game.map",
+          "host": "map/challenge-face-to-face/game.map",
+          "virtual": "/data/mp/multiplay/maps/challenge-face-to-face/game.map",
+          "sha256": "4704216c3609d227f47e1da415f2edf9593ac04d7d5f2fe3de6e484185fd8345"
+        },
+        {
+          "original": "struct.json",
+          "host": "map/challenge-face-to-face/struct.json",
+          "virtual": "/data/mp/multiplay/maps/challenge-face-to-face/struct.json",
+          "sha256": "12876e6066cafdd80bcfc66bedc56259866e4d198c4a4812ec56413c5a798bab"
+        },
+        {
+          "original": "ttypes.ttp",
+          "host": "map/challenge-face-to-face/ttypes.ttp",
+          "virtual": "/data/mp/multiplay/maps/challenge-face-to-face/ttypes.ttp",
+          "sha256": "5b10aa98775b2c9a9daa611335a32c191279c3503fb9c0f3d06f97932cdda915"
+        }
+      ],
+      "descriptor": "// Authored Challenge map; original bytes and credits in vendor/challenge-099.\nlevel FFA-CHFACE-T1\nplayers 2\ntype 14\ndataset MULTI_CAM_1\ngame \"multiplay/maps/challenge-face-to-face.gam\"\n"
+    },
+    {
+      "id": "startup2",
+      "source": "vendor/challenge-099/original/maps/startup2.wz",
+      "sourceSHA256": "92d0c0c319f9a8e6783c45e2ff9c94e4a028041b1fc6e6b31e59e33c0ca689ba",
+      "originalZIPMember": "1v1 maps/2p-StartUp2.wz",
+      "nativeFilesByteIdentical": true,
+      "author": {
+        "name": "crab"
+      },
+      "license": "GPL-2.0-or-later",
+      "mapVersion": 40,
+      "width": 64,
+      "height": 135,
+      "starts": [
+        {
+          "player": 0,
+          "x": 47.0,
+          "y": 122.0,
+          "units": 2
+        },
+        {
+          "player": 1,
+          "x": 9.0,
+          "y": 22.0,
+          "units": 2
+        }
+      ],
+      "baseCounts": {
+        "0": {
+          "A0ResourceExtractor": 4,
+          "PillBox1": 2,
+          "A0HardcreteMk1Wall": 2,
+          "GuardTower1": 2,
+          "A0LightFactory": 2,
+          "A0CyborgFactory": 1,
+          "A0CommandCentre": 1,
+          "A0ResearchFacility": 2,
+          "A0PowerGenerator": 1,
+          "WallTower02": 2,
+          "A0FacMod1": 1,
+          "A0ResearchModule1": 2,
+          "A0PowMod1": 1
+        },
+        "1": {
+          "A0ResourceExtractor": 4,
+          "A0ResearchFacility": 2,
+          "A0CyborgFactory": 1,
+          "A0PowerGenerator": 1,
+          "A0LightFactory": 2,
+          "A0HardcreteMk1Wall": 2,
+          "WallTower02": 2,
+          "PillBox1": 2,
+          "GuardTower1": 2,
+          "A0CommandCentre": 1,
+          "A0ResearchModule1": 2,
+          "A0PowMod1": 1,
+          "A0FacMod1": 1
+        }
+      },
+      "scavengers": true,
+      "scavengerStructures": 67,
+      "scavengerDroids": 13,
+      "requiredInitialStructureLimits": {},
+      "terrainCounts": {
+        "4": 4960,
+        "5": 807,
+        "8": 1995,
+        "9": 125,
+        "0": 320,
+        "1": 248,
+        "2": 61,
+        "3": 4,
+        "6": 120
+      },
+      "mappings": [
+        {
+          "original": "level.json",
+          "host": "map/challenge-startup2/level.json",
+          "virtual": "/data/mp/multiplay/maps/challenge-startup2/level.json",
+          "sha256": "7abb869044dcbef589452a215201a9b765b334118be7feafadcc99ae5e93ff4a"
+        },
+        {
+          "original": "droid.json",
+          "host": "map/challenge-startup2/droid.json",
+          "virtual": "/data/mp/multiplay/maps/challenge-startup2/droid.json",
+          "sha256": "3e522e9144576574341a3f4950e58bccffd59cb98f900475236a5ae7e4a52365"
+        },
+        {
+          "original": "feature.json",
+          "host": "map/challenge-startup2/feature.json",
+          "virtual": "/data/mp/multiplay/maps/challenge-startup2/feature.json",
+          "sha256": "8b2382cf3a0243970e027836782802fbb3fa33da321055e770097969079285b7"
+        },
+        {
+          "original": "gam.json",
+          "host": "map/challenge-startup2/gam.json",
+          "virtual": "/data/mp/multiplay/maps/challenge-startup2/gam.json",
+          "sha256": "f9d54263f544c5c1909fc2f4b278416af10c2f477914fb7d7747999f31c13869"
+        },
+        {
+          "original": "gam.json",
+          "host": "map/challenge-startup2/gam.json",
+          "virtual": "/data/mp/multiplay/maps/challenge-startup2.gam",
+          "sha256": "f9d54263f544c5c1909fc2f4b278416af10c2f477914fb7d7747999f31c13869"
+        },
+        {
+          "original": "game.map",
+          "host": "map/challenge-startup2/game.map",
+          "virtual": "/data/mp/multiplay/maps/challenge-startup2/game.map",
+          "sha256": "8b764c16e07be4bb66fbe6662e43ac3c9e03e5e4bff89cc1abc68578992bdbd1"
+        },
+        {
+          "original": "struct.json",
+          "host": "map/challenge-startup2/struct.json",
+          "virtual": "/data/mp/multiplay/maps/challenge-startup2/struct.json",
+          "sha256": "a0305898cbad6f139183fdf41ba3e5290a503810759bb475ecd9039d78f0ec76"
+        },
+        {
+          "original": "ttypes.ttp",
+          "host": "map/challenge-startup2/ttypes.ttp",
+          "virtual": "/data/mp/multiplay/maps/challenge-startup2/ttypes.ttp",
+          "sha256": "2a8592ce4c7edeca810665e274ff3f996a4bff8f9b9696505f7f6360caccf609"
+        }
+      ],
+      "descriptor": "// Authored Challenge map; original bytes and credits in vendor/challenge-099.\nlevel FFA-CHSTARTUP-T1\nplayers 2\ntype 14\ndataset MULTI_CAM_1\ngame \"multiplay/maps/challenge-startup2.gam\"\n"
+    }
+  ],
+  "preservedExistingFiles": {
+    "app/src/main/assets/warzone/index-campaign.html": "9125109386919832f10fce7e41f8c613c5c799c5751bc1c9ad620b2848f62c67",
+    "app/src/main/assets/warzone/index-duel.html": "eceab8d7c32a22ad29bd8379a235da2669e89e1ea539ab97abe6b944151b4876",
+    "app/src/main/assets/warzone/index-ffa.html": "8803882047be5de76dd49f129a60b334c1cf842a6a64e199bb42106597145a1e",
+    "app/src/main/assets/warzone/index-survival.html": "163cba3b88ad52324f4927d06e3b7073233551a68c57a769c8bf362cde038246",
+    "app/src/main/assets/warzone/index.html": "009c5c7563727f8002f31212b53e22f81ce3cf2b55682feb598558a6f1249e6b",
+    "app/src/main/assets/warzone/mobile-campaign.html": "c9b387397b71ef43a5e1fcac6ab7487622186db086ddb066804654600af884c8",
+    "app/src/main/assets/warzone/mobile-duel.html": "78da4acbe2edcceffcb161a16aef230548a9fa83508e80e6f23c77a189d8d86a",
+    "app/src/main/assets/warzone/mobile-ffa.html": "98a16b5f825ac8e7e5f2d78658e064f96fb47de41e3c7455cd3690efac3ed794",
+    "app/src/main/assets/warzone/mobile-survival.html": "c93d118ba14b8f5e3bdcd1dcc8d16659424ac07a265eef5230f126fa6134eb16",
+    "app/src/main/assets/warzone/mobile.html": "a04071930c9e06e7283a198a37d28c56da124f42005b34732a1deff9ee33fbf6",
+    "app/src/main/assets/warzone/warzone2100-campaign.data": "e46d5fd97d974316805847a2eb550951120282f81aecbafa9331081c91fcaa03",
+    "app/src/main/assets/warzone/warzone2100-campaign.js": "aeb9b9dd4c9158c2c52bdd66c09a891c987b2233afd646b91b6dbad17f6b65d8",
+    "app/src/main/assets/warzone/warzone2100-duel.data": "584a8be5958871b7d1f133bb4d3ef514737d8cf17b959be05f6659a828ceac47",
+    "app/src/main/assets/warzone/warzone2100-duel.js": "312dbd1ef4b081f842c758b3c6b3485eaae09eaafccfd010aa47a08cc424bffb",
+    "app/src/main/assets/warzone/warzone2100-ffa.data": "7a121336ab3830a585bb962ff2978019f23273f1075c0359fa78fb8da0b7ca98",
+    "app/src/main/assets/warzone/warzone2100-ffa.js": "5d1aaf6b36437c121f30dc0b77509b7bbbdecd43075e52f5a6ee75e5911baef4",
+    "app/src/main/assets/warzone/warzone2100-survival.data": "b7174d085e3723d51954895d21e57f7777048adf50c38f0009492d423fad1f0e",
+    "app/src/main/assets/warzone/warzone2100-survival.js": "905df467bafdd26b3748d8bee1df00a5436b373f67aeab8a1544db625456dfff",
+    "app/src/main/assets/warzone/warzone2100-towers-052.js": "47d44f1db19bae0f59562ad5d72226f1492a3a42550a265205e9c8979d6d3790",
+    "app/src/main/assets/warzone/warzone2100-towers-052.wasm": "ecee0e3d8849acc6be5ad46748ff27852e1249600b05b33966b002748159f17e",
+    "app/src/main/assets/warzone/warzone2100.data": "4fec68df0c27d37d586609c7c828e69b626689534635f2cfac7bceae3d86a65c",
+    "app/src/main/assets/warzone/warzone2100.js": "3ac3d3f6e610c25bbd784033af73be5bb5ed8bd1100239f8ebc5c2269a746827",
+    "app/src/main/assets/warzone/warzone2100.wasm": "4b0784550ac582e47d3f8ca7437377749925f4ccb0829533a979ed80e1e7aa00"
+  },
+  "virtualOverrides": [
+    {
+      "path": "/data/mp/addon.lev",
+      "sha256": "449d3c48773d2614b50f87b0c2b2658ec94b701d4bbd4ea3789814d9a89a4e59",
+      "bytes": 9108
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-firefight/game.gam",
+      "sha256": "4b7894f2d3abd7f4c67caaf0577ce8c852f0009ea6a562daa5f49d8eeee03f7b",
+      "bytes": 52
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-firefight.gam",
+      "sha256": "4b7894f2d3abd7f4c67caaf0577ce8c852f0009ea6a562daa5f49d8eeee03f7b",
+      "bytes": 52
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-firefight/dinit.bjo",
+      "sha256": "5dc2d6d217c9b8f35e0765ade6d2f027a39b39769324e8a2bf7b284095bb26e5",
+      "bytes": 3660
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-firefight/droid.ini",
+      "sha256": "eb4ed272163003346bcdf2bd1dba19751dac7c77ad49e9a0b674e447021243c6",
+      "bytes": 5322
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-firefight/feat.bjo",
+      "sha256": "fbac59aebb61c5f0184f32b269c7b25cf62c08fc159b399b5ae7247f9b1568a1",
+      "bytes": 3660
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-firefight/feature.ini",
+      "sha256": "b1c73434a11c1a94c59256b68c155d521f623bfcd043d900b244eff97733d0b9",
+      "bytes": 4104
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-firefight/game.map",
+      "sha256": "3f9ae472da3ed483f5c69ea23794bcf83af06d7c8aebf99664d93b64318edb8e",
+      "bytes": 35377
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-firefight/struct.bjo",
+      "sha256": "acc7e53d3e874daacdd4d9fb64339bae844717ad04f173cc844936867f20769f",
+      "bytes": 58092
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-firefight/struct.ini",
+      "sha256": "a07b86792a01122e7b543b6ff171aec050aae5f34b4bdf9e6df98d98ec427e6c",
+      "bytes": 53649
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-firefight/ttypes.ttp",
+      "sha256": "b3e6b3c5f337e02cf65984f1d80668e906dc56a5c24689d9b143da515099c3e3",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-towers2/game.gam",
+      "sha256": "921077024202f66f95f96929c081de49f7cd18d2ca5f92c142c1e057ad09d8e8",
+      "bytes": 52
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-towers2.gam",
+      "sha256": "921077024202f66f95f96929c081de49f7cd18d2ca5f92c142c1e057ad09d8e8",
+      "bytes": 52
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-towers2/dinit.bjo",
+      "sha256": "ce0e8ee61b04f5a59de9a77f27a3ac4bb3e5bb6cd55f837c8cfcb45522f377bd",
+      "bytes": 620
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-towers2/droid.ini",
+      "sha256": "3f814db61eb730364c4392f5e3c32883e61ac98522057b868b67ee52b8254b6d",
+      "bytes": 876
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-towers2/feat.bjo",
+      "sha256": "9435fbbcd2fd584cde09a0e845dea351af6e6cacac3db282b78febb5ab949143",
+      "bytes": 27372
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-towers2/feature.ini",
+      "sha256": "a2374aa96a7f414bf997cde0cd9489cb04ef04fdf3e66c692f5b5ec38733e61c",
+      "bytes": 31202
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-towers2/game.map",
+      "sha256": "dcce10d384827b2a3f7c0034752c09d564bb6f0a7f9b08abe0173525d33544dd",
+      "bytes": 55950
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-towers2/struct.bjo",
+      "sha256": "22f0ef0225bff9f2067101b402e571309256b6b5449dc4bf161fae5f80c44adb",
+      "bytes": 72732
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-towers2/struct.ini",
+      "sha256": "72232ed545f542bde11fd491f810e507bcec586be74532447388fa3a2aa1bc14",
+      "bytes": 71028
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-towers2/ttypes.ttp",
+      "sha256": "a991dabf7d3866276a7d575edf3b63b2cec202221032bef92e59c8d9bded0f83",
+      "bytes": 192
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-hells-pass/game.gam",
+      "sha256": "6c271a8f6e6e94ebeb1fd12cb4867d17be7e90d612f2eb0a40bd08ceca736933",
+      "bytes": 52
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-hells-pass.gam",
+      "sha256": "6c271a8f6e6e94ebeb1fd12cb4867d17be7e90d612f2eb0a40bd08ceca736933",
+      "bytes": 52
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-hells-pass/dinit.bjo",
+      "sha256": "8fdcda7c80d20c988daeee10d207477be4e735b31d8bd7fc391e3e6ad1a27fa9",
+      "bytes": 8448
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-hells-pass/feat.bjo",
+      "sha256": "de85ebd38c70999e956a9170675f9043005a97d90a35cb41022911751f8e04bc",
+      "bytes": 6700
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-hells-pass/game.map",
+      "sha256": "f92d6f3653f6639c1405d64af9407527fad06ff2e41ac088e82b6f145a910e1d",
+      "bytes": 15024
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-hells-pass/struct.bjo",
+      "sha256": "8771c66b91327b353ec684be6969804a741e62abbcf9f937e9acccaad2c8c2c3",
+      "bytes": 43692
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-hells-pass/ttypes.ttp",
+      "sha256": "b3e6b3c5f337e02cf65984f1d80668e906dc56a5c24689d9b143da515099c3e3",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-fort-scav/level.json",
+      "sha256": "562c7ed58f51602409d5a193d9d9fb8122324d1cd061b118bc5cdf9c83f717f6",
+      "bytes": 311
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-fort-scav/README.md",
+      "sha256": "8202d4976d0b40e915c65c21abac282ca9acf135ec104bda5caeae84a3674b64",
+      "bytes": 2856
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-fort-scav/droid.json",
+      "sha256": "5916b710e764cd2b14d5bee4c2a474c3350cd614c4f1907111e68881565793f0",
+      "bytes": 3586
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-fort-scav/feature.json",
+      "sha256": "c46a73c66f5e0c02c0fd94355f801291a8d4fd9e3309c8822279ce76537ef999",
+      "bytes": 5921
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-fort-scav/gam.json",
+      "sha256": "2b4616c4997d62b014809ee390e490bb8b12866f22db603685dbb850d6fc458e",
+      "bytes": 166
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-fort-scav.gam",
+      "sha256": "2b4616c4997d62b014809ee390e490bb8b12866f22db603685dbb850d6fc458e",
+      "bytes": 166
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-fort-scav/game.map",
+      "sha256": "03022c70d880d5bdd584c3466bc138a195205dd1b3afd32892a748b5cd29aae3",
+      "bytes": 45336
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-fort-scav/struct.json",
+      "sha256": "91fe932553e4a0822dbca335c5ce7c90a40fdf98e1fdad7c1286c7ed78ea2756",
+      "bytes": 53146
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-fort-scav/ttypes.ttp",
+      "sha256": "5b10aa98775b2c9a9daa611335a32c191279c3503fb9c0f3d06f97932cdda915",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-dramatic-scavs/level.json",
+      "sha256": "ac9210baa512beb8188f500fd1c004c9f2ccfe1980dbb13d7155ef5de56211c1",
+      "bytes": 312
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-dramatic-scavs/droid.json",
+      "sha256": "d15a8dcce590fbcf4923bc22783b8269914db99336cc47e45c84a184420e372b",
+      "bytes": 788
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-dramatic-scavs/feature.json",
+      "sha256": "eb3346a5febbee3943b4b229df393cb8d147afff44b43466404e826e45c2e3ab",
+      "bytes": 6408
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-dramatic-scavs/gam.json",
+      "sha256": "ef4a459857a05e840d86c942ad647d51518ecf896db88f643d56aa19954bef6c",
+      "bytes": 166
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-dramatic-scavs.gam",
+      "sha256": "ef4a459857a05e840d86c942ad647d51518ecf896db88f643d56aa19954bef6c",
+      "bytes": 166
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-dramatic-scavs/game.map",
+      "sha256": "1d73d3a81af3a351929b9e73c2568bc95d38a6afbd5ab6cd6238b09e7a2d9a77",
+      "bytes": 51224
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-dramatic-scavs/struct.json",
+      "sha256": "154387a7847df4ba77b750fde739d9368e2a44fe1db205bdb3359151787410f1",
+      "bytes": 21829
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-dramatic-scavs/ttypes.ttp",
+      "sha256": "5b10aa98775b2c9a9daa611335a32c191279c3503fb9c0f3d06f97932cdda915",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-earthsea/level.json",
+      "sha256": "36f8453ba42d09e662d58c6358286cdb2f6958ef81015939881512fe08f2e9ce",
+      "bytes": 306
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-earthsea/droid.json",
+      "sha256": "90c6c003a2ba3942cb32347825ad389f1a7e360b2630dee23ac200fe24cfa8fd",
+      "bytes": 386
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-earthsea/feature.json",
+      "sha256": "87d4449a425c4dbbeb477815fa0b8864444d29400443271b665df2e8cce28cf9",
+      "bytes": 10024
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-earthsea/gam.json",
+      "sha256": "d834d3d812b89c99ed79e46c27c9ffd6081e9d91228a97e33e76fc6fbd3723be",
+      "bytes": 165
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-earthsea.gam",
+      "sha256": "d834d3d812b89c99ed79e46c27c9ffd6081e9d91228a97e33e76fc6fbd3723be",
+      "bytes": 165
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-earthsea/game.map",
+      "sha256": "30b4b8a3c1da6059584c9d2933052b48f472805031ce76d811f85ad206abcaa0",
+      "bytes": 25392
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-earthsea/struct.json",
+      "sha256": "84902a9dbb9718c4c5df2fe8974da104d7568ed5fc345351ce13ba342214a8ce",
+      "bytes": 5721
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-earthsea/ttypes.ttp",
+      "sha256": "f37b514cf8319c8a3c7430d502fc803c7a4cf715e0e3ff6c7f82464c18a1eaf5",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-cross-flair/level.json",
+      "sha256": "b1e07e63f0ff655cc72131c67354442a0d384144642addfac904087a8510d38c",
+      "bytes": 330
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-cross-flair/droid.json",
+      "sha256": "f04d93b0d94547988138eefb41dd208057c9e37de2126b320c729a8cc9a1e79c",
+      "bytes": 387
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-cross-flair/feature.json",
+      "sha256": "ab0044634d39d53a004e61bf416e1267b94932ebdaeeb82919ab95cc76ecad81",
+      "bytes": 2610
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-cross-flair/gam.json",
+      "sha256": "3009e32b7664520281fb991d693a560635a347232b45fdf4e7bd15c8bf8f40da",
+      "bytes": 167
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-cross-flair.gam",
+      "sha256": "3009e32b7664520281fb991d693a560635a347232b45fdf4e7bd15c8bf8f40da",
+      "bytes": 167
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-cross-flair/game.map",
+      "sha256": "12c62f4c4b564924ec1abef8f15f50e684ba70c718afe266db5698d4c1a62495",
+      "bytes": 40592
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-cross-flair/struct.json",
+      "sha256": "b18a2139bb78fda7c098e8682dd824c8cdade15a94fe0759584507b0e0ad93cf",
+      "bytes": 32610
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-cross-flair/ttypes.ttp",
+      "sha256": "8195c0b7981ab0c2b7cf964eb05bd90fdb09f60785b02af142682214e002eb51",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-no-hill/level.json",
+      "sha256": "404bbad2caf49bf40f7f92f1fb458e1bfbed30bbcd91503fe7ce97ed57e97b49",
+      "bytes": 304
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-no-hill/droid.json",
+      "sha256": "5f308be8bdc07cc33b6fed6c58aba75a4c7dfd075d64d713ec725fc0f3720714",
+      "bytes": 1844
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-no-hill/feature.json",
+      "sha256": "d9ddba6cc9a977cf607214f95964560fdec010f1a39acfd08b52271764db55a1",
+      "bytes": 5418
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-no-hill/gam.json",
+      "sha256": "1ac053cfb6b078832821dc84101adad76280393237f39016788d49378213f201",
+      "bytes": 167
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-no-hill.gam",
+      "sha256": "1ac053cfb6b078832821dc84101adad76280393237f39016788d49378213f201",
+      "bytes": 167
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-no-hill/game.map",
+      "sha256": "83512978104baa7d15a2dab02bd6674679ff1b5eddb02bfb9b217815a3dde1ad",
+      "bytes": 64024
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-no-hill/struct.json",
+      "sha256": "c08243e03136faee40117f737a414d63d09f9e850f3517a477f228b1551209f9",
+      "bytes": 12916
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-no-hill/ttypes.ttp",
+      "sha256": "5b10aa98775b2c9a9daa611335a32c191279c3503fb9c0f3d06f97932cdda915",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-face-to-face/level.json",
+      "sha256": "5d98fed3ed85accb638656568ea7304116ab8fba95dd91f6592fb8aff5b82ac0",
+      "bytes": 315
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-face-to-face/droid.json",
+      "sha256": "534e393b4ef0873e0ab4ef48fe5e7ed4e247ed7a38c1d5ea53211455ade70e9d",
+      "bytes": 3282
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-face-to-face/feature.json",
+      "sha256": "e77994130916dd4fec44c537a52d2a1032f798e83e064c0596ff50e32d6bc785",
+      "bytes": 11096
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-face-to-face/gam.json",
+      "sha256": "e67a6330ba09d4962d1faaa931d20e1b5580872df5f5f8b35637e46a01ac85e7",
+      "bytes": 166
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-face-to-face.gam",
+      "sha256": "e67a6330ba09d4962d1faaa931d20e1b5580872df5f5f8b35637e46a01ac85e7",
+      "bytes": 166
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-face-to-face/game.map",
+      "sha256": "4704216c3609d227f47e1da415f2edf9593ac04d7d5f2fe3de6e484185fd8345",
+      "bytes": 20504
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-face-to-face/struct.json",
+      "sha256": "12876e6066cafdd80bcfc66bedc56259866e4d198c4a4812ec56413c5a798bab",
+      "bytes": 40327
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-face-to-face/ttypes.ttp",
+      "sha256": "5b10aa98775b2c9a9daa611335a32c191279c3503fb9c0f3d06f97932cdda915",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-startup2/level.json",
+      "sha256": "7abb869044dcbef589452a215201a9b765b334118be7feafadcc99ae5e93ff4a",
+      "bytes": 306
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-startup2/droid.json",
+      "sha256": "3e522e9144576574341a3f4950e58bccffd59cb98f900475236a5ae7e4a52365",
+      "bytes": 1719
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-startup2/feature.json",
+      "sha256": "8b2382cf3a0243970e027836782802fbb3fa33da321055e770097969079285b7",
+      "bytes": 4394
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-startup2/gam.json",
+      "sha256": "f9d54263f544c5c1909fc2f4b278416af10c2f477914fb7d7747999f31c13869",
+      "bytes": 166
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-startup2.gam",
+      "sha256": "f9d54263f544c5c1909fc2f4b278416af10c2f477914fb7d7747999f31c13869",
+      "bytes": 166
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-startup2/game.map",
+      "sha256": "8b764c16e07be4bb66fbe6662e43ac3c9e03e5e4bff89cc1abc68578992bdbd1",
+      "bytes": 34748
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-startup2/struct.json",
+      "sha256": "a0305898cbad6f139183fdf41ba3e5290a503810759bb475ecd9039d78f0ec76",
+      "bytes": 11107
+    },
+    {
+      "path": "/data/mp/multiplay/maps/challenge-startup2/ttypes.ttp",
+      "sha256": "2a8592ce4c7edeca810665e274ff3f996a4bff8f9b9696505f7f6360caccf609",
+      "bytes": 204
+    },
+    {
+      "path": "/data/mp/tests/challenge-firefight-easy-cannon.json",
+      "sha256": "30a9be58448b999414e5fbb8264f75c53f6a93fbd2a37db37685fdcccc729fc7",
+      "bytes": 749
+    },
+    {
+      "path": "/data/mp/tests/challenge-firefight-easy-rockets.json",
+      "sha256": "30a9be58448b999414e5fbb8264f75c53f6a93fbd2a37db37685fdcccc729fc7",
+      "bytes": 749
+    },
+    {
+      "path": "/data/mp/tests/challenge-firefight-medium-cannon.json",
+      "sha256": "4a71ea66cfda14879f1d15bb679b6cb53a5f2ab7b00e7c3707c60164728823fe",
+      "bytes": 753
+    },
+    {
+      "path": "/data/mp/tests/challenge-firefight-medium-rockets.json",
+      "sha256": "4a71ea66cfda14879f1d15bb679b6cb53a5f2ab7b00e7c3707c60164728823fe",
+      "bytes": 753
+    },
+    {
+      "path": "/data/mp/tests/challenge-firefight-hard-cannon.json",
+      "sha256": "5345222ff01ac9fd095051dcede4b45104a8834881aa182cb21c931dd473e5ef",
+      "bytes": 749
+    },
+    {
+      "path": "/data/mp/tests/challenge-firefight-hard-rockets.json",
+      "sha256": "5345222ff01ac9fd095051dcede4b45104a8834881aa182cb21c931dd473e5ef",
+      "bytes": 749
+    },
+    {
+      "path": "/data/mp/tests/challenge-towers2-easy-cannon.json",
+      "sha256": "19af4f9eb18a8346376f9dc4f9acb8205b412e46366ff647a26b4607db70e66a",
+      "bytes": 743
+    },
+    {
+      "path": "/data/mp/tests/challenge-towers2-easy-rockets.json",
+      "sha256": "19af4f9eb18a8346376f9dc4f9acb8205b412e46366ff647a26b4607db70e66a",
+      "bytes": 743
+    },
+    {
+      "path": "/data/mp/tests/challenge-towers2-medium-cannon.json",
+      "sha256": "2e92c623a2873de772e3b88a1fa8d921b9310e6f7c4be7bb284c49bc66be0bf7",
+      "bytes": 747
+    },
+    {
+      "path": "/data/mp/tests/challenge-towers2-medium-rockets.json",
+      "sha256": "2e92c623a2873de772e3b88a1fa8d921b9310e6f7c4be7bb284c49bc66be0bf7",
+      "bytes": 747
+    },
+    {
+      "path": "/data/mp/tests/challenge-towers2-hard-cannon.json",
+      "sha256": "1405b5500c25d9803e140b4bd8ed66b9646ee6d0b05576f4833c7bac9bb0c34c",
+      "bytes": 743
+    },
+    {
+      "path": "/data/mp/tests/challenge-towers2-hard-rockets.json",
+      "sha256": "1405b5500c25d9803e140b4bd8ed66b9646ee6d0b05576f4833c7bac9bb0c34c",
+      "bytes": 743
+    },
+    {
+      "path": "/data/mp/tests/challenge-hells-pass-easy-cannon.json",
+      "sha256": "848c22f4a060623f36528fb6db6efb7003c6f8ccd474be078d0b1384217de308",
+      "bytes": 741
+    },
+    {
+      "path": "/data/mp/tests/challenge-hells-pass-easy-rockets.json",
+      "sha256": "848c22f4a060623f36528fb6db6efb7003c6f8ccd474be078d0b1384217de308",
+      "bytes": 741
+    },
+    {
+      "path": "/data/mp/tests/challenge-hells-pass-medium-cannon.json",
+      "sha256": "9fdb31c8ebc3a95e301373799491bdcba265f34b2ce746a9d21500774cc0d7f4",
+      "bytes": 745
+    },
+    {
+      "path": "/data/mp/tests/challenge-hells-pass-medium-rockets.json",
+      "sha256": "9fdb31c8ebc3a95e301373799491bdcba265f34b2ce746a9d21500774cc0d7f4",
+      "bytes": 745
+    },
+    {
+      "path": "/data/mp/tests/challenge-hells-pass-hard-cannon.json",
+      "sha256": "aecd0e0ff608f32f144d1a99d341661aeef032742c0e8fb8f64cfa52f33e9ef0",
+      "bytes": 741
+    },
+    {
+      "path": "/data/mp/tests/challenge-hells-pass-hard-rockets.json",
+      "sha256": "aecd0e0ff608f32f144d1a99d341661aeef032742c0e8fb8f64cfa52f33e9ef0",
+      "bytes": 741
+    },
+    {
+      "path": "/data/mp/tests/challenge-fort-scav-easy-cannon.json",
+      "sha256": "278a0e9a19b59b563827e3124675e1acdec1264bc5fa9a7f4a1bf0e4458511e8",
+      "bytes": 751
+    },
+    {
+      "path": "/data/mp/tests/challenge-fort-scav-easy-rockets.json",
+      "sha256": "278a0e9a19b59b563827e3124675e1acdec1264bc5fa9a7f4a1bf0e4458511e8",
+      "bytes": 751
+    },
+    {
+      "path": "/data/mp/tests/challenge-fort-scav-medium-cannon.json",
+      "sha256": "ca3aae04278612efd6a1280638c938482e80b67fdb1df0cfc0affa72be163d72",
+      "bytes": 755
+    },
+    {
+      "path": "/data/mp/tests/challenge-fort-scav-medium-rockets.json",
+      "sha256": "ca3aae04278612efd6a1280638c938482e80b67fdb1df0cfc0affa72be163d72",
+      "bytes": 755
+    },
+    {
+      "path": "/data/mp/tests/challenge-fort-scav-hard-cannon.json",
+      "sha256": "0d5a0901fc4842d4aa78e844c79df8d4653eb21194a73834a78486131ec15916",
+      "bytes": 751
+    },
+    {
+      "path": "/data/mp/tests/challenge-fort-scav-hard-rockets.json",
+      "sha256": "0d5a0901fc4842d4aa78e844c79df8d4653eb21194a73834a78486131ec15916",
+      "bytes": 751
+    },
+    {
+      "path": "/data/mp/tests/challenge-dramatic-scavs-easy-cannon.json",
+      "sha256": "3b75d20662858dd6da51c6d520db21a374f89216f3af1adb78bfc785faae49ef",
+      "bytes": 748
+    },
+    {
+      "path": "/data/mp/tests/challenge-dramatic-scavs-easy-rockets.json",
+      "sha256": "3b75d20662858dd6da51c6d520db21a374f89216f3af1adb78bfc785faae49ef",
+      "bytes": 748
+    },
+    {
+      "path": "/data/mp/tests/challenge-dramatic-scavs-medium-cannon.json",
+      "sha256": "110b81a0024bb223503ad0c74900123732a4957458301a00d5c92ff104c0fc34",
+      "bytes": 752
+    },
+    {
+      "path": "/data/mp/tests/challenge-dramatic-scavs-medium-rockets.json",
+      "sha256": "110b81a0024bb223503ad0c74900123732a4957458301a00d5c92ff104c0fc34",
+      "bytes": 752
+    },
+    {
+      "path": "/data/mp/tests/challenge-dramatic-scavs-hard-cannon.json",
+      "sha256": "99a14704c3302c48d2b5cc761bd677d8975dc6847335492c7d6b5179ff8386ca",
+      "bytes": 748
+    },
+    {
+      "path": "/data/mp/tests/challenge-dramatic-scavs-hard-rockets.json",
+      "sha256": "99a14704c3302c48d2b5cc761bd677d8975dc6847335492c7d6b5179ff8386ca",
+      "bytes": 748
+    },
+    {
+      "path": "/data/mp/tests/challenge-earthsea-easy-cannon.json",
+      "sha256": "ce2528d39495aea580f6b282fba74d99048b9d16ab1e3bd3409e9fee85bc8fba",
+      "bytes": 743
+    },
+    {
+      "path": "/data/mp/tests/challenge-earthsea-easy-rockets.json",
+      "sha256": "ce2528d39495aea580f6b282fba74d99048b9d16ab1e3bd3409e9fee85bc8fba",
+      "bytes": 743
+    },
+    {
+      "path": "/data/mp/tests/challenge-earthsea-medium-cannon.json",
+      "sha256": "49c8bb30e40b5c2a181dc039269e5208f0120e7ea6ac2a85e0dd493ec455f54e",
+      "bytes": 747
+    },
+    {
+      "path": "/data/mp/tests/challenge-earthsea-medium-rockets.json",
+      "sha256": "49c8bb30e40b5c2a181dc039269e5208f0120e7ea6ac2a85e0dd493ec455f54e",
+      "bytes": 747
+    },
+    {
+      "path": "/data/mp/tests/challenge-earthsea-hard-cannon.json",
+      "sha256": "3dc5808cd723a85c585010ecc4c7c90c2f47ad23e2cb3aa924967c90640fa8c7",
+      "bytes": 743
+    },
+    {
+      "path": "/data/mp/tests/challenge-earthsea-hard-rockets.json",
+      "sha256": "3dc5808cd723a85c585010ecc4c7c90c2f47ad23e2cb3aa924967c90640fa8c7",
+      "bytes": 743
+    },
+    {
+      "path": "/data/mp/tests/challenge-cross-flair-easy-cannon.json",
+      "sha256": "301150d4220a9d7abeb742f24cbccb53ee238f100ec08f549582822c00086308",
+      "bytes": 747
+    },
+    {
+      "path": "/data/mp/tests/challenge-cross-flair-easy-rockets.json",
+      "sha256": "301150d4220a9d7abeb742f24cbccb53ee238f100ec08f549582822c00086308",
+      "bytes": 747
+    },
+    {
+      "path": "/data/mp/tests/challenge-cross-flair-medium-cannon.json",
+      "sha256": "c319cb60cdbcbf7c36c30a8e7ec7b47e8abd47d588b13dae6002a4eec47ab8e4",
+      "bytes": 751
+    },
+    {
+      "path": "/data/mp/tests/challenge-cross-flair-medium-rockets.json",
+      "sha256": "c319cb60cdbcbf7c36c30a8e7ec7b47e8abd47d588b13dae6002a4eec47ab8e4",
+      "bytes": 751
+    },
+    {
+      "path": "/data/mp/tests/challenge-cross-flair-hard-cannon.json",
+      "sha256": "56c5f92e9380591e88ea1155f8526d0d0f6251b1ed4be929d80ef4cb094c6540",
+      "bytes": 747
+    },
+    {
+      "path": "/data/mp/tests/challenge-cross-flair-hard-rockets.json",
+      "sha256": "56c5f92e9380591e88ea1155f8526d0d0f6251b1ed4be929d80ef4cb094c6540",
+      "bytes": 747
+    },
+    {
+      "path": "/data/mp/tests/challenge-no-hill-easy-cannon.json",
+      "sha256": "5ec8df55636d1ed4159d456b43e0d8c2a3be16fc07620e46b49e83a17355d334",
+      "bytes": 740
+    },
+    {
+      "path": "/data/mp/tests/challenge-no-hill-easy-rockets.json",
+      "sha256": "5ec8df55636d1ed4159d456b43e0d8c2a3be16fc07620e46b49e83a17355d334",
+      "bytes": 740
+    },
+    {
+      "path": "/data/mp/tests/challenge-no-hill-medium-cannon.json",
+      "sha256": "1671bb61231bac2b620b1481c59aeb5576e583fa483ceaf2127201ef5296e160",
+      "bytes": 744
+    },
+    {
+      "path": "/data/mp/tests/challenge-no-hill-medium-rockets.json",
+      "sha256": "1671bb61231bac2b620b1481c59aeb5576e583fa483ceaf2127201ef5296e160",
+      "bytes": 744
+    },
+    {
+      "path": "/data/mp/tests/challenge-no-hill-hard-cannon.json",
+      "sha256": "c7ac4649bc9a53657d0d639d67f269890fa2b636661e8cc101b939a54cd9e6fd",
+      "bytes": 740
+    },
+    {
+      "path": "/data/mp/tests/challenge-no-hill-hard-rockets.json",
+      "sha256": "c7ac4649bc9a53657d0d639d67f269890fa2b636661e8cc101b939a54cd9e6fd",
+      "bytes": 740
+    },
+    {
+      "path": "/data/mp/tests/challenge-face-to-face-easy-cannon.json",
+      "sha256": "c80cd122ff7b40621a19b1008e513621280a7b1140d2692b0f60b5fd3b999f16",
+      "bytes": 743
+    },
+    {
+      "path": "/data/mp/tests/challenge-face-to-face-easy-rockets.json",
+      "sha256": "c80cd122ff7b40621a19b1008e513621280a7b1140d2692b0f60b5fd3b999f16",
+      "bytes": 743
+    },
+    {
+      "path": "/data/mp/tests/challenge-face-to-face-medium-cannon.json",
+      "sha256": "a2015420b6271c2b00a5a0cc562655a69c8be5703d34c7c1d48b1ab105d140c9",
+      "bytes": 747
+    },
+    {
+      "path": "/data/mp/tests/challenge-face-to-face-medium-rockets.json",
+      "sha256": "a2015420b6271c2b00a5a0cc562655a69c8be5703d34c7c1d48b1ab105d140c9",
+      "bytes": 747
+    },
+    {
+      "path": "/data/mp/tests/challenge-face-to-face-hard-cannon.json",
+      "sha256": "ee2e478a5829a80f003c916b3f3a7108e9e0e1041def5187118dc01858bbbe94",
+      "bytes": 743
+    },
+    {
+      "path": "/data/mp/tests/challenge-face-to-face-hard-rockets.json",
+      "sha256": "ee2e478a5829a80f003c916b3f3a7108e9e0e1041def5187118dc01858bbbe94",
+      "bytes": 743
+    },
+    {
+      "path": "/data/mp/tests/challenge-startup2-easy-cannon.json",
+      "sha256": "b52708533b46dda6d8b58b6daab829b1e03409df37be8f17bdd572092fe3fc5f",
+      "bytes": 742
+    },
+    {
+      "path": "/data/mp/tests/challenge-startup2-easy-rockets.json",
+      "sha256": "b52708533b46dda6d8b58b6daab829b1e03409df37be8f17bdd572092fe3fc5f",
+      "bytes": 742
+    },
+    {
+      "path": "/data/mp/tests/challenge-startup2-medium-cannon.json",
+      "sha256": "d8b6d4056a9c01246c1fc33449116f74b405686112d55b824d61087edc3de64e",
+      "bytes": 746
+    },
+    {
+      "path": "/data/mp/tests/challenge-startup2-medium-rockets.json",
+      "sha256": "d8b6d4056a9c01246c1fc33449116f74b405686112d55b824d61087edc3de64e",
+      "bytes": 746
+    },
+    {
+      "path": "/data/mp/tests/challenge-startup2-hard-cannon.json",
+      "sha256": "8a6a57edcd4683ef5a8d9cbc6eb5857af28cdcf31a2953870dfe2414ebc4ea31",
+      "bytes": 742
+    },
+    {
+      "path": "/data/mp/tests/challenge-startup2-hard-rockets.json",
+      "sha256": "8a6a57edcd4683ef5a8d9cbc6eb5857af28cdcf31a2953870dfe2414ebc4ea31",
+      "bytes": 742
+    },
+    {
+      "path": "/data/mp/tests/challenge-policy.js",
+      "sha256": "d45e2cd297cf6c25d7f51fc6dc9fff491f3af1088a1205d7c7cccfc3924957c3",
+      "bytes": 965
+    },
+    {
+      "path": "/data/mp/tests/challenge-rules.js",
+      "sha256": "7dc9df368cc2f3df5c65c2dbe517211257d70289fadcdaae7e354834d735450b",
+      "bytes": 8354
+    },
+    {
+      "path": "/data/mp/tests/challenge-research-bridge.js",
+      "sha256": "c8838b31c19ad7ac6c6f42c6c82cd3e6422829e9aab0189c023a7c3d421d6f7d",
+      "bytes": 15765
+    },
+    {
+      "path": "/data/mp/tests/challenge-commands.js",
+      "sha256": "cc8618d493804358976b3ae780aea97cbcd6adf79bc55afa3f98adf82238f267",
+      "bytes": 97841
+    },
+    {
+      "path": "/data/mp/multiplay/script/rules/init.js",
+      "sha256": "7dc9df368cc2f3df5c65c2dbe517211257d70289fadcdaae7e354834d735450b",
+      "bytes": 8354
+    },
+    {
+      "path": "/data/mp/multiplay/script/rules/endconditions.js",
+      "sha256": "c6708d6342de1b707942b8242f3bcc0db83e3dcc57be1c1200c1388e4b855f2a",
+      "bytes": 11004
+    },
+    {
+      "path": "/data/mp/stats/templates.json",
+      "sha256": "103ec1c4c06849bf166d8e756988be4203d7f2884a386118c24160f0c70cc63d",
+      "bytes": 62411
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/challenge-dumb25a.js",
+      "sha256": "c551ce90e1c3c9988788df45b1ea0cf58a2e42e2328f0c3348387d854cfb3585",
+      "bytes": 3879
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/challenge-dumb25a.json",
+      "sha256": "fa4d6aa93b078df530da544b9eb81357f4a4bf208f72cd11f1aa2518644eaf07",
+      "bytes": 119
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/dumb25a/argParse.js",
+      "sha256": "b767815cf649d29e400d3610d613fe8c3dbf7fe5506cc86370d9e53de78ddbf9",
+      "bytes": 2498
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/dumb25a/asStats.js",
+      "sha256": "631eb0db3e7f2320c8ab02bb1a1ed681191eda5bd1ea3fefee38eab80b5c6106",
+      "bytes": 7705
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/dumb25a/dumbComm.js",
+      "sha256": "678f5c551a8d3d067b8769b91c8fd02298ffa16641b37f7d1918afdbda101eea",
+      "bytes": 1662
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/dumb25a/dumbProduction.js",
+      "sha256": "321309df560a2c154a0d0878316893e9cc1158a0d1ba17b8d5460056a2d559a6",
+      "bytes": 11763
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/dumb25a/dumbResearch.js",
+      "sha256": "279735d5738fb0312fc846724741bd9c4611004dc6c2360858fc4b6c879d6f93",
+      "bytes": 12158
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/dumb25a/dumbTank.js",
+      "sha256": "11e0d73b7474be927bdfea05fd87cf2bb40cf71df0b5e6e1ade72af2e716abc5",
+      "bytes": 13700
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/dumb25a/dumbTruck.js",
+      "sha256": "9993336a983789a8112dd90c7888d8535bc5fee85f032f2d9c1688e94c80fa8b",
+      "bytes": 7114
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/dumb25a/EXT_DACTION.js",
+      "sha256": "dd2a14988e2b91bdd4b2a48c92416577e94d3880a8032296bbfa8e4bf4175375",
+      "bytes": 2968
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/dumb25a/LIB.js",
+      "sha256": "f675091b6c75e71cdebf9591638570421cb7926785ada9dc0b8a6acdcdbb267e",
+      "bytes": 4937
+    },
+    {
+      "path": "/data/mp/tests/challenge-rewards.js",
+      "sha256": "8ef2bba5ab88bf148cfe564cf4b8e316f831ec11bdecce37442396d672630166",
+      "bytes": 194
+    },
+    {
+      "path": "/data/mp/tests/challenge-reward-stock.js",
+      "sha256": "1bd7d991861b39f54ee7a3bfc611c79d5eb8680c46ecf2ae61dae20524d35659",
+      "bytes": 35505
+    },
+    {
+      "path": "/data/mp/multiplay/script/challenge-policy.json",
+      "sha256": "46816bc36959aa6198ee133c345cede99b7984cb8fa6208f2af17ea0a25aa4d0",
+      "bytes": 14934
+    },
+    {
+      "path": "/data/mp/multiplay/script/challenge-config.json",
+      "sha256": "66cbebb87b02019d0f72039449215a7c290df0cab0dcab5002cf1c9a040e8e33",
+      "bytes": 590
+    },
+    {
+      "path": "/data/mp/multiplay/script/challenge-maps.json",
+      "sha256": "8b2cbacbd9c3b99140362c1175353ad3c28c0a4f380b22c1690f27d5edb7e9bb",
+      "bytes": 4322
+    },
+    {
+      "path": "/data/mp/multiplay/script/rules/challenge-policy.json",
+      "sha256": "46816bc36959aa6198ee133c345cede99b7984cb8fa6208f2af17ea0a25aa4d0",
+      "bytes": 14934
+    },
+    {
+      "path": "/data/mp/multiplay/script/rules/challenge-config.json",
+      "sha256": "66cbebb87b02019d0f72039449215a7c290df0cab0dcab5002cf1c9a040e8e33",
+      "bytes": 590
+    },
+    {
+      "path": "/data/mp/multiplay/script/rules/challenge-maps.json",
+      "sha256": "8b2cbacbd9c3b99140362c1175353ad3c28c0a4f380b22c1690f27d5edb7e9bb",
+      "bytes": 4322
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/challenge-policy.json",
+      "sha256": "46816bc36959aa6198ee133c345cede99b7984cb8fa6208f2af17ea0a25aa4d0",
+      "bytes": 14934
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/challenge-config.json",
+      "sha256": "66cbebb87b02019d0f72039449215a7c290df0cab0dcab5002cf1c9a040e8e33",
+      "bytes": 590
+    },
+    {
+      "path": "/data/mp/multiplay/skirmish/challenge-maps.json",
+      "sha256": "8b2cbacbd9c3b99140362c1175353ad3c28c0a4f380b22c1690f27d5edb7e9bb",
+      "bytes": 4322
+    },
+    {
+      "path": "/data/mp/tests/warzone-towers-catalog.json",
+      "sha256": "6d6680d7025af2d6343e75be01c4ad16b9ddac95da60dbb4001be257ec28f64a",
+      "bytes": 51846
+    },
+    {
+      "path": "/data/mp/multiplay/script/rules/warzone-towers-catalog.json",
+      "sha256": "6d6680d7025af2d6343e75be01c4ad16b9ddac95da60dbb4001be257ec28f64a",
+      "bytes": 51846
+    },
+    {
+      "path": "/data/mp/tests/warzone-towers-command.json",
+      "sha256": "df1e324fde90935439fb53fd2b4e630cd44bef94521b08577196f684f2081a65",
+      "bytes": 30
+    },
+    {
+      "path": "/data/mp/multiplay/script/rules/warzone-towers-command.json",
+      "sha256": "df1e324fde90935439fb53fd2b4e630cd44bef94521b08577196f684f2081a65",
+      "bytes": 30
+    },
+    {
+      "path": "/data/mp/tests/warzone-towers-control-command.json",
+      "sha256": "99cbb1c61cd9c00eb89e7f8b9b6fc8fbdfc8ba4546d074495c308e3bd39ac59a",
+      "bytes": 37
+    },
+    {
+      "path": "/data/mp/multiplay/script/rules/warzone-towers-control-command.json",
+      "sha256": "99cbb1c61cd9c00eb89e7f8b9b6fc8fbdfc8ba4546d074495c308e3bd39ac59a",
+      "bytes": 37
+    },
+    {
+      "path": "/data/mp/tests/blocknight-queue-command.json",
+      "sha256": "53dd57002898f6f166540e6d7aa63789601354abc7340c558d71981fb7df721c",
+      "bytes": 36
+    },
+    {
+      "path": "/data/mp/multiplay/script/rules/blocknight-queue-command.json",
+      "sha256": "53dd57002898f6f166540e6d7aa63789601354abc7340c558d71981fb7df721c",
+      "bytes": 36
+    },
+    {
+      "path": "/data/mp/tests/blocknight-zoom-command.json",
+      "sha256": "bdd487b46d532a234f7a1293b54fa86d79c807d0e0fea8e455442c819374a081",
+      "bytes": 60
+    },
+    {
+      "path": "/data/mp/multiplay/script/rules/blocknight-zoom-command.json",
+      "sha256": "bdd487b46d532a234f7a1293b54fa86d79c807d0e0fea8e455442c819374a081",
+      "bytes": 60
+    },
+    {
+      "path": "/data/mp/multiplay/script/rules/warzone-towers-demolition-intent.json",
+      "sha256": "17bdf67ae7a9152e81e8908a6c37808e703761c4a272f2af2d45a7d430d0bb1b",
+      "bytes": 28
+    }
+  ],
+  "outputs": [
+    {
+      "path": "app/src/main/assets/warzone/warzone2100-challenge.js",
+      "sha256": "cae3de0f391d8a51337f89022eca3c6f75e3c316c63a1a5d9488d9d65ea01ede",
+      "bytes": 771738
+    },
+    {
+      "path": "app/src/main/assets/warzone/warzone2100-challenge.data",
+      "sha256": "bdc88418a771fe86ae442d20469ac5e969c1487459466babea661a89b4d49772",
+      "bytes": 65975521
+    },
+    {
+      "path": "app/src/main/assets/warzone/index-challenge.html",
+      "sha256": "a3c3c77d74528ffddbbf4c01b0d6fd0543bf6e5ec35f8b00efcd510da2aee07b",
+      "bytes": 115769
+    },
+    {
+      "path": "app/src/main/assets/warzone/mobile-challenge.html",
+      "sha256": "73c9174c4bd3019522c7ffdcfc5313040551d29e5160c3976c8546cf1a5f8d73",
+      "bytes": 8969
+    }
+  ]
+}

@@ -309,7 +309,7 @@ final class RewardsView extends FrameLayout {
         if(inGame&&item.moreFortress&&item.consumedOnApply())return Math.max(0,1-count(loadout,item.id));
         if (inGame) {
             if (item.fortress) return 3;
-            if ("laser_sat".equals(item.id) || item.nativeId.isEmpty()) return 1;
+            if (item.maxPerMatch == 1 || item.nativeId.isEmpty()) return 1;
             return 999;
         }
         int available = Math.max(0, 999 - count(inventory, item.id));
@@ -318,7 +318,7 @@ final class RewardsView extends FrameLayout {
             for (RewardCatalog.Item entry : RewardCatalog.list()) if (entry.fortress) stored += count(inventory, entry.id);
             available = Math.min(available, Math.max(0, 3 - stored));
         }
-        if ("laser_sat".equals(item.id)) available = Math.min(available, Math.max(0, 1 - count(inventory, item.id)));
+        if (item.structure() && item.maxPerMatch == 1) available = Math.min(available, Math.max(0, 1 - count(inventory, item.id)));
         return available;
     }
 
@@ -338,7 +338,7 @@ final class RewardsView extends FrameLayout {
     }
     private List<RewardCatalog.Item> visibleItems() {
         List<RewardCatalog.Item> values = new ArrayList<>();
-        for (RewardCatalog.Item item : RewardCatalog.list()) if (category.equals(item.category)&&eligible(item)) values.add(item);
+        for (RewardCatalog.Item item : RewardCatalog.list()) if (item.purchasable()&&category.equals(item.category)&&eligible(item)) values.add(item);
         return values;
     }
 
@@ -608,6 +608,7 @@ final class RewardsView extends FrameLayout {
             case "hellstorm": filename = "Hellstorm Emplacement.gif"; break;
             case "ground_shaker": filename = "Ground Shaker Emplacement.gif"; break;
             case "wide_sensor": filename = "Wide Spectrum Sensor Tower.gif"; break;
+            case "satellite_uplink": filename = "Satellite Uplink Centre.gif"; break;
             case "laser_sat": filename = "Laser Satellite Command Post.gif"; break;
             case "research": filename = "Research Module.gif"; break;
             case "supply": filename = "Power Module.gif"; break;

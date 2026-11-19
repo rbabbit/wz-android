@@ -87,13 +87,13 @@ final class MapMusicIndex {
     /** A playlist policy, never a fabricated mission-to-song assignment. */
     String stateJson(String mode, String mapId, String missionId, boolean cached,
             boolean enabled, boolean suspended, String origin) throws Exception {
-        boolean playlist = "ffa".equals(mode) || "campaign".equals(mode);
+        boolean playlist = "ffa".equals(mode) || "challenge".equals(mode) || "campaign".equals(mode);
         boolean survival = "survival".equals(mode);
         if (!playlist && !survival && !"towers".equals(mode) && !"tower-defense".equals(mode) && !"map".equals(mode))
             throw new IllegalArgumentException("Unknown music mode");
         String normalizedMap = survival ? SurvivalMapCatalog.get(mapId).id : playlist ? (mapId == null ? "" : mapId) : MapLevelCatalog.normalizeId(mapId);
         // Survival reuses the existing Iron Valley soundtrack without changing Waves assignments.
-        List<String> ids = playlist ? playlists.get(mode) : java.util.Collections.singletonList(track(survival ? "td2" : normalizedMap));
+        List<String> ids = playlist ? playlists.get("challenge".equals(mode) ? "ffa" : mode) : java.util.Collections.singletonList(track(survival ? "td2" : normalizedMap));
         JSONObject value = new JSONObject();
         value.put("cached", cached);
         value.put("enabled", cached && enabled);

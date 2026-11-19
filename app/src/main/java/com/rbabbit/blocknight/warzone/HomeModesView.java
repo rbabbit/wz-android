@@ -18,7 +18,7 @@ import android.widget.TextView;
 final class HomeModesView extends FrameLayout {
     private final Typeface face;
     private final ImageView logo, tank;
-    private final Button campaign, towers, ffa, multiplayer, guide, hub;
+    private final Button campaign, towers, ffa, multiplayer, guide, hub, about;
     private final TextView version, status, tagline;
     private HomeMenuLayout.Result menuLayout;
     private HomeMenuLayout.Box taglineBox;
@@ -62,6 +62,13 @@ final class HomeModesView extends FrameLayout {
         hub.setContentDescription("Game Hub: public multiplayer results and rankings");
         hub.setOnClickListener(v -> actions.hub());
         addView(hub);
+        about = button("About", false);
+        about.setTypeface(Typeface.DEFAULT);
+        about.setTextSize(11);
+        about.setPadding(dp(8), 0, dp(8), 0);
+        about.setContentDescription("About & Licences");
+        about.setOnClickListener(v -> actions.about());
+        addView(about);
 
         String installedVersion = GraphicsSetupView.appVersion(context);
         version = text("rbabbit v" + installedVersion
@@ -143,6 +150,18 @@ final class HomeModesView extends FrameLayout {
             fontHeight = Math.max(fontHeight, button.getPaint().getFontMetricsInt(null));
         }
         float density = getResources().getDisplayMetrics().density;
+        about.setTextSize(TypedValue.COMPLEX_UNIT_SP, 11);
+        int aboutFontHeight = about.getPaint().getFontMetricsInt(null);
+        int aboutWidth = Math.max(dp(56), (int) Math.ceil(about.getPaint().measureText("About")) + dp(20));
+        int aboutHeight = Math.max(dp(48), aboutFontHeight + dp(12));
+        int aboutFaceHeight = Math.max(dp(22), aboutFontHeight + dp(4));
+        int aboutInset = Math.max(0, (aboutHeight - aboutFaceHeight) / 2);
+        about.setBackground(new RippleDrawable(ColorStateList.valueOf(TowersTheme.RIPPLE),
+                new InsetDrawable(TowersTheme.control(getContext(), TowersTheme.CONTROL, 4),
+                        dp(4), aboutInset, dp(4), aboutInset), null));
+        exact(about, aboutWidth, aboutHeight);
+        // Preserve the existing tagline position while shrinking the ancillary action.
+        int aboutLeft = width - safeRight - dp(12) - Math.max(dp(72), aboutWidth);
         HomeMenuLayout.Result safeLayout = HomeMenuLayout.measure(width, height, density,
                 safeLeft, safeTop, safeRight, safeBottom, labelWidths, fontHeight, 0);
         int footerWidth = safeLayout.contentRight - safeLayout.contentLeft;
@@ -163,11 +182,11 @@ final class HomeModesView extends FrameLayout {
         exact(tank, menuLayout.tank.width, menuLayout.tank.height);
         tagline.measure(MeasureSpec.makeMeasureSpec(footerWidth, MeasureSpec.EXACTLY),
                 MeasureSpec.makeMeasureSpec(height, MeasureSpec.AT_MOST));
-        taglineBox = taglineBounds(menuLayout, safeTop, density, tagline.getMeasuredHeight());
+        taglineBox = taglineBounds(menuLayout, safeTop, density, tagline.getMeasuredHeight(), aboutLeft - dp(12));
         if (taglineBox.width != tagline.getMeasuredWidth()) {
             tagline.measure(MeasureSpec.makeMeasureSpec(taglineBox.width, MeasureSpec.EXACTLY),
                     MeasureSpec.makeMeasureSpec(height, MeasureSpec.AT_MOST));
-            taglineBox = taglineBounds(menuLayout, safeTop, density, tagline.getMeasuredHeight());
+            taglineBox = taglineBounds(menuLayout, safeTop, density, tagline.getMeasuredHeight(), aboutLeft - dp(12));
         }
         setMeasuredDimension(width, height);
     }
@@ -177,6 +196,7 @@ final class HomeModesView extends FrameLayout {
         place(tank, menuLayout.tank.left, menuLayout.tank.top);
         place(logo, menuLayout.logo.left, menuLayout.logo.top);
         if (taglineBox != null) place(tagline, taglineBox.left, taglineBox.top);
+        place(about, r - l - safeRight - dp(12) - about.getMeasuredWidth(), safeTop + dp(4));
         Button[] modes = {campaign, towers, ffa, multiplayer, guide, hub};
         for (int index = 0; index < modes.length; index++)
             place(modes[index], menuLayout.buttons[index].left, menuLayout.buttons[index].top);
@@ -238,11 +258,11 @@ final class HomeModesView extends FrameLayout {
     }
 
     private static HomeMenuLayout.Box taglineBounds(HomeMenuLayout.Result layout,
-            int safeTop, float density, int textHeight) {
-        int right = layout.contentRight;
+            int safeTop, float density, int textHeight, int maximumRight) {
+        int right = Math.min(layout.contentRight, maximumRight);
         int artTop = Math.min(layout.logo.top, layout.tank.top);
         if (textHeight + Math.round(2 * density) > artTop - safeTop) {
-            right = Math.max(layout.contentLeft, layout.tank.left - Math.round(12 * density));
+            right = Math.max(layout.contentLeft, Math.min(right, layout.tank.left - Math.round(12 * density)));
             artTop = layout.logo.top;
         }
         int top = Math.max(safeTop, Math.min(safeTop + Math.round(24 * density),

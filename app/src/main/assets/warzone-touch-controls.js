@@ -43,7 +43,8 @@
   const DOUBLE_TAP_MS = 290;
   const DOUBLE_TAP_SLOP = 28;
   const campaign = window.__warzoneCampaignMode === true || (typeof location !== 'undefined' && typeof URLSearchParams === 'function' && new URLSearchParams(location.search).get('mode') === 'campaign');
-  const ffa = window.__warzoneFfaConfig?.mode === 'ffa';
+  const challenge = window.__warzoneFfaConfig?.mode === 'challenge';
+  const ffa = challenge || window.__warzoneFfaConfig?.mode === 'ffa';
   const ZOOM_COMMAND_PATH = (campaign ? '/data/base/script/campaign/mobile/' : '/data/mp/multiplay/script/rules/') + 'blocknight-zoom-command.json';
   const ZOOM_PRESETS = Object.freeze({
     close: Object.freeze({ label: "NEAR", distance: 1600 }),
@@ -688,6 +689,7 @@
     const doc = commandDocument();
     for (const id of ['wt-repair', 'wt-campaign-repair']) {
       const button = doc.getElementById(id); if (!button) continue;
+      menuNote(button,repairEnabled,'Medium Damage Repair');
       button.dataset.repairEnabled = String(repairEnabled); button.dataset.repairPending = String(repairPending);
       button.classList.toggle('active', repairEnabled); button.setAttribute('aria-pressed', String(repairEnabled));
       button.setAttribute('aria-busy', String(repairPending)); button.disabled = !repairCanToggle();
@@ -727,6 +729,7 @@
     const doc = commandDocument();
     for (const id of ['wt-all-combat', 'wt-campaign-all-combat', 'blocknight-select-all']) {
       const button = doc.getElementById(id);
+      if (button && id!=='blocknight-select-all') menuNote(button,state.combatLock,'All Combat Units Selected');
       if (button) { button.dataset.combatEnabled = String(state.combatLock); button.classList.toggle('active', state.combatLock); button.setAttribute('aria-pressed', String(state.combatLock)); }
     }
   }
@@ -884,6 +887,43 @@
     return allCombatSelected;
   }
 
+  // Presentation only: keep the 0.99 groups, dimensions and handlers.
+  function menuNote(button, enabled, text) {
+    const hud=button.closest('#blocknight-combat-hud'); if(!hud)return;
+    let note=button.querySelector('.wt-menu-note');
+    if(!note){note=button.ownerDocument.createElement('small');note.className='wt-menu-note';note.id=button.id+'-note';note.textContent=text;button.appendChild(note);}
+    note.hidden=!enabled;
+    if(enabled)button.setAttribute('aria-describedby',note.id);else button.removeAttribute('aria-describedby');
+    hud.classList.toggle('wt-show-notes',!!hud.querySelector('.wt-menu-note:not([hidden])'));
+  }
+  function compactToolbar(doc=commandDocument()) {
+    const hud=doc.getElementById('blocknight-combat-hud');if(!hud)return;
+    hud.classList.add('wt-icon-toolbar');
+    const specs=[['blocknight-tech','Research','/warzone/ui/icons/flask.svg',true],
+      ['wt-open-factory','Manufacturing','/warzone/build-icons/A0LightFactory.png',true],
+      ['wt-open-queue','Queue','/warzone/ui/icons/stack-plus.svg',true],
+      ['blocknight-base','Base','/warzone/ui/icons/house.svg',true],
+      ['wt-all-combat','Combat','/warzone/ui/icons/stack.svg',false],
+      ['wt-campaign-all-combat','Combat','/warzone/ui/icons/stack.svg',false],
+      ['wt-repair','Repair','/warzone/ui/icons/wrench.svg',true],
+      ['wt-campaign-repair','Repair','/warzone/ui/icons/wrench.svg',true],
+      ['blocknight-music','Music','/warzone/ui/icons/music-notes.svg',true],
+      ['blocknight-rewards','Rewards','/warzone/ui/icons/crystal.svg',true],
+      ['blocknight-save','Save','/warzone/ui/icons/save.svg',true],
+      ['wt-open-players','Players',null,false],['blocknight-help','Help',null,false]];
+    for(const[id,label,src,only]of specs){
+      const b=doc.getElementById(id);if(!b)continue;
+      let caption=b.querySelector('span');
+      if(!caption){caption=doc.createElement('span');caption.textContent=label;b.appendChild(caption);}
+      for(const n of [...b.childNodes])if(n.nodeType===3)n.remove();
+      if(!['blocknight-save','blocknight-rewards'].includes(id)&&caption.textContent!==label)caption.textContent=label;
+      b.setAttribute('aria-label',['blocknight-save','blocknight-rewards'].includes(id)?caption.textContent:label);
+      b.classList.toggle('wt-icon-only',only);
+      if(src){let img=b.querySelector('img');if(!img){img=doc.createElement('img');img.alt='';b.prepend(img);}if(img.getAttribute('src')!==src)img.setAttribute('src',src);}
+      else b.querySelectorAll('img').forEach(img=>img.remove());
+    }
+  }
+
   function updateCombatHud() {
     const hudDocument = commandDocument();
     const all = hudDocument.getElementById("blocknight-select-all");
@@ -912,6 +952,7 @@
       }
     }
     paintRepairMode();
+    compactToolbar(hudDocument);
   }
 
   function toggleCombatLock(force) {
@@ -2110,7 +2151,7 @@
           'Crystal wallet and active match boosts', () => window.WarzoneRewards?.open?.());
         rewards.setAttribute('aria-expanded','false');
         techGroup.append(rewards);
-        if(campaign||ffa)rewards.remove();
+        if(campaign||ffa&&!challenge)rewards.remove();
         const save = makeButton('blocknight-save', 'SAVE',
           'Save this game on your phone', () => window.WarzoneSavedGames?.save?.());
         save.setAttribute('aria-live', 'polite');
@@ -2354,7 +2395,7 @@
             <p>Top <b>RESEARCH</b> opens the full page. Choose a lab and tap one or more available topics. Numbers show your selection order; tap a selected topic again to deselect it. <b>ADD TO LAB … QUEUE</b> adds the selection in that order. Each lab follows its own queue. Use <b>×</b> to remove a waiting topic.</p>
             <p>Tap one of your completed labs on the battlefield to open that lab’s full research page.</p></section>
           <section><h2>CHECK CURRENT ACTIVITY</h2>
-            <p>Bottom-left <b>ANALYSIS</b> and <b>MANUFACTURING</b> open narrow status panels while you watch the battlefield. Analysis shows each lab’s current topic and estimated progress; Manufacturing shows current units, with vehicle and cyborg tabs.</p>
+            <p>Bottom-left <b>RESEARCH</b> and <b>MANUFACTURING</b> open narrow status panels while you watch the battlefield. Analysis shows each lab’s current topic and estimated progress; Manufacturing shows current units, with vehicle and cyborg tabs.</p>
             <p>These panels show current work only. Use top <b>RESEARCH</b> or <b>MANUFACTURING</b> to change queues. Tap the selected footer button again to close the panel.</p></section>
           <section><h2>MAKE UNITS IN A FACTORY</h2>
             <p>Open top <b>MANUFACTURING</b>, or tap one of your completed factories on the battlefield. Select the intended factory, choose <b>QUANTITY</b> (1, 5, 10 or 20), then <b>PRODUCE</b> a compatible design. Orders belong to the selected factory. Use <b>UNITS</b>, <b>DESIGN</b> and <b>BLUEPRINTS</b> inside Manufacturing to switch tasks.</p>
@@ -2377,11 +2418,15 @@
         help.querySelector('.wt-help-eyebrow').textContent='WARZONE CAMPAIGN';
         help.querySelector('.wt-help-content').innerHTML='<section><h2>FOLLOW THE CAMPAIGN</h2><p>Read the original mission briefings in <b>INTELLIGENCE</b>. Recover artefacts to unlock research. Original enemies, mission timers and objectives apply.</p></section><section><h2>COMMAND YOUR UNITS</h2><p><b>ALL COMBAT</b> in the header keeps combat units selected, including new units. Constructors, repair units, sensors and transports are excluded. Turn it off to select units individually. Selection pauses while building, using native mission panels or reading a briefing.</p></section><section><h2>BUILD, RESEARCH &amp; MANUFACTURE</h2><p>Use the existing Build, Research and Manufacturing controls. Only parts and structures unlocked in the current campaign are available. Native transport loading and mission instructions remain part of the original game.</p></section><section><h2>SAVE &amp; RETURN</h2><p><b>SAVE</b> stores the complete campaign checkpoint on this phone. Campaign saves are separate from Towers. Android Back closes a mission panel first, then offers Return to Main Menu.</p></section>';
       }
-      if(ffa){
+      if(ffa&&!challenge){
         help.querySelector('.wt-help-eyebrow').textContent='FREE FOR ALL';
         help.querySelector('.wt-help-content').innerHTML='<section><h2>EMAG FREE FOR ALL</h2><p>You and three independent bots fight on the supplied EMAG map. Every player is an opponent. VTOL aircraft, factories and pads are disabled. Your chosen Easy, Medium or Hard difficulty applies to all three bots.</p></section><section><h2>BUILD YOUR ARMY</h2><p>Each authored base has trucks, research labs and a working economy. Build vehicle and cyborg factories, research ground technology, design units and manufacture your army. Use <b>BUILD</b>, <b>RESEARCH</b> and <b>MANUFACTURING</b>; tap a lab or factory to open its menu.</p></section><section><h2>COMMAND &amp; SURVIVE</h2><p>Tap to select or order, swipe to pan, pinch to zoom and use <b>BASE</b> to return home. The bottom-left drawer offers combat-unit selection, trucks, deselect, stop, demolish and Intelligence. The original skirmish rules decide victory when opposing players are eliminated; there are no Towers waves or crystal purchases in FFA.</p></section><section><h2>SAVE &amp; RETURN</h2><p><b>SAVE</b> stores this complete FFA match on your phone. Open <b>FFA SAVES</b> in the FFA setup to continue. FFA, Campaign and Towers saves are separate. Android Back closes the current menu, then offers Return to Main Menu.</p></section>';
       }
-      if (!duel) {
+      if(challenge){
+        help.querySelector('.wt-help-eyebrow').textContent='CHALLENGE';
+        help.querySelector('.wt-help-content').innerHTML='<section><h2>WIN THE CHALLENGE</h2><p>Defeat Dumbot25a on your chosen 1v1 map. Easy, Medium or Hard applies to the opponent. Its main weapon path is randomly cannon or rockets for each new match. Maps with scavengers retain their extra neutral enemies.</p></section><section><h2>GROUND &amp; AIR</h2><p>VTOL aircraft are enabled. Research their technology, build a VTOL factory and rearming pads, then manufacture aircraft. Use RESEARCH, BUILD and MANUFACTURING to develop your base.</p></section><section><h2>CRYSTALS</h2><p>Open REWARDS for this match’s available purchases. Wins earn crystals once per match, with a first-win bonus for each map and difficulty. More Fortress purchases remain in Towers and Survival.</p></section><section><h2>COMMAND &amp; SAVE</h2><p>ALL COMBAT keeps your combat units selected, including new units. REPAIR uses the medium-damage retreat policy. SAVE keeps this match, its weapon path and purchases on your phone. Continue from Challenge SAVES. Android Back closes the current menu first, then offers Return to Main Menu.</p></section>';
+      }
+      if (!duel && !challenge) {
         // The offline field guide shares the Home content and current mode data.
         // Keep the existing Help/input lifecycle; the reader never calls the game bridge.
         const reader = hudDocument.createElement('iframe');
@@ -3270,7 +3315,7 @@
     selectAllUnits,
     selectAllTrucks,
     toggleCombatLock,
-    toggleRepairPolicy, refreshRepairPolicy, resetRepairPolicy, bindTouchCommand,
+    toggleRepairPolicy, refreshRepairPolicy, resetRepairPolicy, bindTouchCommand, compactToolbar,
     refreshCombatLock, holdCombatSelection, resumeCombatSelection, resetCombatMode,
     toggleAutoFight,
     toggleBoxMode,

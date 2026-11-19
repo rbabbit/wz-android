@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <script>
+    const ffaLaunchQuery = new URLSearchParams(location.search);
+    const ffaDifficulty = ffaLaunchQuery.get('bnFfaDifficulty') || 'easy';
+    const challengeWeapon = ffaLaunchQuery.get('bnChallengeWeapon');
+    if (!['easy','medium','hard'].includes(ffaDifficulty) || !['cannon','rockets'].includes(challengeWeapon)) throw new Error('Invalid Challenge launch choices.');
+    const ffaMapCatalogue = [{"id":"firefight","name":"DA-firefight1x1b","level":"FFA-CHFFIGHT-T1","mapDirectory":"challenge-firefight","preview":"challenge-previews/firefight.png","players":2,"bots":1,"width":79,"height":149,"tileset":"arizona","sourceSHA256":"c7a2453ab2128198cca38f577fba35a07db8fd32bea8fd99810c40cf5c0b567d","scavengers":true,"description":"79 × 149. Two commanders. Authored scavenger positions. VTOL enabled.","structureLimits":{}},{"id":"towers2","name":"DA-towers2","level":"FFA-CHTOWERS-T1","mapDirectory":"challenge-towers2","preview":"challenge-previews/towers2.png","players":2,"bots":1,"width":239,"height":78,"tileset":"rockies","sourceSHA256":"e4228af5fd5f350394a8bb60e03a50702357310984eb4c1d90f816b66fe86632","scavengers":true,"description":"239 × 78. Two commanders. Authored scavenger positions. VTOL enabled.","structureLimits":{"A0CyborgFactory":6,"A0ResearchFacility":10}},{"id":"hells-pass","name":"HellsPass","level":"FFA-CHHELLS-T1","mapDirectory":"challenge-hells-pass","preview":"challenge-previews/hells-pass.png","players":2,"bots":1,"width":50,"height":100,"tileset":"arizona","sourceSHA256":"d86079ebc9b5a1b46732255a9f81c8c0736d138b83a98d691ec75e025e7ac375","scavengers":true,"description":"50 × 100. Two commanders. Authored scavenger positions. VTOL enabled.","structureLimits":{}},{"id":"fort-scav","name":"DO-FortScavWar2p","level":"FFA-CHFORTSCAV-T1","mapDirectory":"challenge-fort-scav","preview":"challenge-previews/fort-scav.png","players":2,"bots":1,"width":59,"height":192,"tileset":"arizona","sourceSHA256":"73300731dfe3fb7acb0828443a57cb253137bcde67dcad73e5565defe641c3d1","scavengers":true,"description":"59 × 192. Two commanders. Authored scavenger positions. VTOL enabled.","structureLimits":{}},{"id":"dramatic-scavs","name":"DramaticScavs","level":"FFA-CHDRAMATIC-T1","mapDirectory":"challenge-dramatic-scavs","preview":"challenge-previews/dramatic-scavs.png","players":2,"bots":1,"width":80,"height":160,"tileset":"arizona","sourceSHA256":"31a829b9835e356c8858bfccdadd93822d1596e1836f22a5be5d44bef3a61b5a","scavengers":true,"description":"80 × 160. Two commanders. Authored scavenger positions. VTOL enabled.","structureLimits":{}},{"id":"earthsea","name":"Earthsea","level":"FFA-CHEARTHSEA-T1","mapDirectory":"challenge-earthsea","preview":"challenge-previews/earthsea.png","players":2,"bots":1,"width":64,"height":99,"tileset":"arizona","sourceSHA256":"4c8ef5581af719b399cea5dab2837a1ece120f49971feffe5411c3ce47d46ee0","scavengers":false,"description":"64 × 99. Two commanders. VTOL enabled.","structureLimits":{}},{"id":"cross-flair","name":"H_Cross_Flair_3","level":"FFA-CHCROSS-T1","mapDirectory":"challenge-cross-flair","preview":"challenge-previews/cross-flair.png","players":2,"bots":1,"width":100,"height":100,"tileset":"urban","sourceSHA256":"f082e363561a6571b8cee16c69c7a5368895494f47270d378fbdf1dd089fedfb","scavengers":true,"description":"100 × 100. Two commanders. Authored scavenger positions. VTOL enabled.","structureLimits":{}},{"id":"no-hill","name":"NO_HILL","level":"FFA-CHNOHILL-T1","mapDirectory":"challenge-no-hill","preview":"challenge-previews/no-hill.png","players":2,"bots":1,"width":100,"height":160,"tileset":"arizona","sourceSHA256":"016aba74dbd767097ff85fe8f0a09a13d01e87ca3850d3a041eb97c414ce0b21","scavengers":false,"description":"100 × 160. Two commanders. VTOL enabled.","structureLimits":{}},{"id":"face-to-face","name":"RQ_face2face","level":"FFA-CHFACE-T1","mapDirectory":"challenge-face-to-face","preview":"challenge-previews/face-to-face.png","players":2,"bots":1,"width":40,"height":128,"tileset":"arizona","sourceSHA256":"4cdb9c7aa967e407e984e252096b14e0d42962a539d9541b9696055580b6cbd1","scavengers":true,"description":"40 × 128. Two commanders. Authored scavenger positions. VTOL enabled.","structureLimits":{"A0PowerGenerator":20,"A0ResearchFacility":6,"A0LightFactory":6,"A0CyborgFactory":6}},{"id":"startup2","name":"StartUp2","level":"FFA-CHSTARTUP-T1","mapDirectory":"challenge-startup2","preview":"challenge-previews/startup2.png","players":2,"bots":1,"width":64,"height":135,"tileset":"arizona","sourceSHA256":"92d0c0c319f9a8e6783c45e2ff9c94e4a028041b1fc6e6b31e59e33c0ca689ba","scavengers":true,"description":"64 × 135. Two commanders. Authored scavenger positions. VTOL enabled.","structureLimits":{}}];
+    const ffaMap = ffaMapCatalogue.find(map => map.id === (ffaLaunchQuery.get('bnFfaMap') || 'firefight'));
+    if (!ffaMap) throw new Error('Unknown Challenge map.');
+    window.__warzoneFfa = true;
+    window.__warzoneChallenge = true;
+    window.__warzoneFfaMaps = ffaMapCatalogue;
+    window.__warzoneFfaConfig = Object.freeze({mode:'challenge',map:ffaMap.id,mapName:ffaMap.name,level:ffaMap.level,players:2,bots:1,structureLimits:Object.freeze({...ffaMap.structureLimits}),difficulty:ffaDifficulty,player:0,botType:'dumbot25a',weapon:challengeWeapon,vtol:true,scavengers:ffaMap.scavengers});
+  </script>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+  <title>Warzone Towers</title>
+  <style>
+    html, body { position:fixed; inset:0; width: 100%; height: 100%; margin: 0; overflow: clip; overscroll-behavior:none; background: #05090b; }
+    #warzone-host { position: fixed; inset: 0; display: grid; grid-template-rows: 0 minmax(0, 1fr); width: 100%; height: 100%; }
+    body[data-playing="true"] #warzone-host { grid-template-rows: var(--wt-command-top,56px) minmax(0, 1fr); }
+    @media (max-width: 1100px) {
+      body[data-playing="true"] #warzone-host { grid-template-rows: var(--wt-command-top,104px) minmax(0, 1fr); }
+    }
+    #warzone-command-strip { position: relative; min-width: 0; overflow: hidden; }
+    #warzone-command-strip #blocknight-combat-hud { position: absolute; }
+    #warzone-game-frame { display: block; width: 100%; height: 100%; min-width: 0; min-height: 0; border: 0; }
+    body[data-battle-ended="true"] #warzone-game-frame { visibility: hidden; pointer-events: none; }
+    body[data-battle-ended="true"] #warzone-command-strip { display: none; }
+  </style>
+</head>
+<body>
+  <main id="warzone-host">
+    <header id="warzone-command-strip" aria-label="Battle commands"></header>
+    <iframe id="warzone-game-frame" title="Warzone battlefield" allow="autoplay; fullscreen; cross-origin-isolated"></iframe>
+  </main>
+  <script>
+    // Give the unchanged engine a real viewport, rather than shrinking its
+    // finished frame. Browser layout and SDL now agree on both dimensions.
+    window.WarzoneHost = {
+      resetScroll() {
+        if(scrollX||scrollY)scrollTo(0,0);
+        document.documentElement.scrollTop=document.body.scrollTop=0;
+      },
+      setPlaying() {
+        if (!document.getElementById("warzone-game-frame").contentWindow.__towersHtml?.isActive?.()) return false;
+        document.body.dataset.playing = "true";
+        dispatchEvent(new Event("warzone-battle-ready"));
+        return true;
+      },
+      endBattle() {
+        document.body.dataset.battleEnded = "true";
+        document.body.dataset.playing = "false";
+        document.body.dataset.research = "false";
+        const frame = document.getElementById("warzone-game-frame");
+        frame.inert = true;
+        document.getElementById("warzone-command-strip").hidden = true;
+        for (const id of ['lab-ops','warzone-towers-help-overlay']) {
+          const node = document.getElementById(id); if (node) node.hidden = true;
+        }
+        dispatchEvent(new Event("warzone-battle-ended"));
+      },
+      setResearchOpen(open) { document.body.dataset.research = String(Boolean(open)); },
+      restoreBattlefield() {
+        const frame = document.getElementById("warzone-game-frame");
+        if (!frame.contentWindow.__towersHtml?.isActive?.()) return false;
+        const header = document.getElementById("warzone-command-strip");
+        document.body.dataset.playing = "true";
+        if (!frame.contentWindow.__blockNightResearch?.report().open) document.body.dataset.research = "false";
+        header.hidden = false;
+        frame.hidden = false;
+        scrollTo(0, 0);
+        document.documentElement.scrollTop = document.body.scrollTop = 0;
+        document.documentElement.scrollLeft = document.body.scrollLeft = 0;
+        frame.contentWindow.scrollTo(0, 0);
+      }
+    };
+    addEventListener('scroll',()=>WarzoneHost.resetScroll(),{passive:true});
+    document.getElementById("warzone-game-frame").src = "index-challenge.html" + location.search;
+  </script>
+</body>
+</html>

@@ -596,3 +596,25 @@ body.wt-campaign:has(#wt-command-pages[data-page=players]:not([hidden])) #warzon
 body[data-players-native=true] :is(#warzone-command-strip,#lab-ops,#unit-controls,#wt-field-centre,#wt-field-toggle,#wt-build-sidebar,#wt-build-status,.wt-status-sidebar){visibility:hidden!important;pointer-events:none!important}
 @media(max-width:760px){body.wt-towers-polished #wt-command-pages[data-page=players]{width:calc(100vw - 20px)!important}#wt-command-pages[data-page=players] #wt-page-content{padding:7px 10px!important}.wt-players-content{font-size:15px}.wt-players-tabs,.wt-players-detail-tabs{gap:6px}.wt-players-tabs>button{padding-left:12px!important;padding-right:12px!important}.wt-players-table-wrap th,.wt-players-table-wrap td{padding:5px 8px}.wt-players-watchers{column-gap:12px}.wt-players-watcher{padding:8px 4px;font-size:18px}.wt-players-summary dl{gap:7px;padding:8px 4px 4px}.wt-players-summary dt{font-size:13px}.wt-players-summary dd{font-size:22px}}
 @media(max-width:460px){.wt-players-watchers{grid-template-columns:1fr}.wt-players-summary>.wt-players-identity{font-size:20px}.wt-players-summary dl{gap:4px}.wt-players-summary dt{font-size:11px}.wt-players-summary dd{font-size:19px}.wt-players-tabs>button{font-size:14px!important;padding-left:9px!important;padding-right:9px!important}}
+
+/* 0.99.1: requested labels/icons only; retain 0.99's compact button height. */
+body.wt-towers-polished #warzone-command-strip #blocknight-combat-hud.wt-icon-toolbar button.wt-icon-only {min-width:30px!important;width:30px!important;padding-left:7px!important;padding-right:7px!important}
+body.wt-towers-polished #warzone-command-strip #blocknight-combat-hud.wt-icon-toolbar button.wt-icon-only>span {display:none!important}
+body.wt-towers-polished #warzone-command-strip #blocknight-combat-hud.wt-icon-toolbar button img {display:inline-block!important;width:16px!important;height:16px!important}
+body.wt-towers-polished #warzone-command-strip #blocknight-combat-hud.wt-icon-toolbar #wt-open-factory img {filter:none!important}
+body.wt-towers-polished #warzone-command-strip #blocknight-combat-hud.wt-icon-toolbar {align-items:flex-start}
+body.wt-towers-polished #warzone-command-strip #blocknight-combat-hud.wt-show-notes {height:auto!important;padding-bottom:24px!important}
+body.wt-towers-polished #blocknight-combat-hud button:has(>.wt-menu-note) {position:relative;overflow:visible}
+body.wt-towers-polished #blocknight-combat-hud .wt-menu-note {position:absolute;left:0;top:calc(100% + 2px);box-sizing:border-box;width:100%;padding:1px 2px;background:#000;color:#fff!important;font:400 8px/1.1 system-ui,sans-serif!important;white-space:normal;text-align:left;pointer-events:none}
+body.wt-towers-polished #blocknight-combat-hud :is(#wt-repair,#wt-campaign-repair,#blocknight-repair) .wt-menu-note {width:98px}
+body.wt-towers-polished #blocknight-combat-hud .wt-menu-note[hidden] {display:none!important}
+
+body.wt-towers-polished #blocknight-combat-hud.wt-icon-toolbar :is(#wt-repair,#wt-campaign-repair,#blocknight-repair)[data-repair-enabled=true] img {filter:invert(79%) sepia(29%) saturate(887%) hue-rotate(82deg) brightness(99%) contrast(88%)!important}
+
+/* Slightly larger, separated controls; retain the single compact v0.99 row. */
+body.wt-towers-polished #warzone-command-strip #blocknight-combat-hud.wt-icon-toolbar {--wt-menu-size:clamp(36px,3.4vw,42px);--wt-menu-gap:clamp(8px,.9vw,14px);height:auto!important;flex-wrap:nowrap!important}
+body.wt-towers-polished #warzone-command-strip #blocknight-combat-hud.wt-icon-toolbar .bn-command-group {height:auto!important;min-height:40px;gap:var(--wt-menu-gap)!important;flex-wrap:nowrap}
+body.wt-towers-polished #warzone-command-strip #blocknight-combat-hud.wt-icon-toolbar .bn-command-group+.bn-command-group {margin-left:var(--wt-menu-gap)!important;padding-left:0!important}
+body.wt-towers-polished #warzone-command-strip #blocknight-combat-hud.wt-icon-toolbar button {height:40px!important;min-height:40px!important}
+body.wt-towers-polished #warzone-command-strip #blocknight-combat-hud.wt-icon-toolbar button.wt-icon-only {width:var(--wt-menu-size)!important;min-width:var(--wt-menu-size)!important;padding-left:7px!important;padding-right:7px!important}
+body.wt-towers-polished #warzone-command-strip #blocknight-combat-hud.wt-icon-toolbar button img {width:clamp(18px,1.7vw,22px)!important;height:clamp(18px,1.7vw,22px)!important}

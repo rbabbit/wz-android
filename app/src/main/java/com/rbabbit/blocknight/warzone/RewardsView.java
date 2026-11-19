@@ -35,8 +35,6 @@ final class RewardsView extends FrameLayout {
     interface Actions {
         void buy(String id, int quantity);
         void equip(String id, int quantity);
-        void watchAd();
-        void adPrivacy();
         void close();
     }
 
@@ -49,11 +47,6 @@ final class RewardsView extends FrameLayout {
     private final LinearLayout drawer, rows;
     private final ScrollView scroll;
     private final TextView wallet;
-    private final Button watchAd, adPrivacy;
-    private boolean adEnabled, adBusy;
-    private int adStatusGeneration;
-    private String adMessage = "";
-    private boolean adMessageVisible;
     private final Map<String, Button> categories = new LinkedHashMap<>();
     private final Map<String, Bitmap> artwork = new LinkedHashMap<>();
     private final Map<String, ItemRow> itemRows = new LinkedHashMap<>();
@@ -92,30 +85,8 @@ final class RewardsView extends FrameLayout {
         LinearLayout header = new LinearLayout(context);
         header.setGravity(Gravity.CENTER_VERTICAL);
         header.setMinimumHeight(dp(36));
-        watchAd = compactAction("Gain 10 Crystals", false, 12);
-        watchAd.setGravity(Gravity.CENTER);
-        watchAd.setSingleLine(false);
-        watchAd.setMaxLines(2);
-        watchAd.setMinHeight(dp(36));
-        watchAd.setTextColor(TowersTheme.buttonText(true));
-        watchAd.setBackgroundTintList(null);
-        watchAd.setBackground(new RippleDrawable(ColorStateList.valueOf(TowersTheme.PRIMARY_RIPPLE), TowersTheme.control(context, TowersTheme.PRIMARY, 5), null));
-        android.graphics.drawable.Drawable play = context.getDrawable(android.R.drawable.ic_media_play).mutate();
-        play.setTintList(TowersTheme.buttonText(true)); play.setBounds(0, 0, dp(12), dp(12));
-        watchAd.setCompoundDrawables(play, null, null, null);
-        watchAd.setCompoundDrawablePadding(dp(5));
-        watchAd.setContentDescription("Watch an optional ad to earn 10 crystals");
-        watchAd.setOnClickListener(v -> { if (!busy && !adBusy) actions.watchAd(); });
-        header.addView(watchAd, new LinearLayout.LayoutParams(dp(140), -2));
-        header.addView(new View(context), new LinearLayout.LayoutParams(0, 1, 1));
-        adPrivacy = compactAction("Privacy", false, 10);
-        adPrivacy.setTextColor(TowersTheme.controlText(false, MUTED));
-        adPrivacy.setBackgroundTintList(null);
-        adPrivacy.setBackground(new RippleDrawable(ColorStateList.valueOf(TowersTheme.RIPPLE), TowersTheme.control(context, TowersTheme.CONTROL, 5), null));
-        adPrivacy.setContentDescription("Change ad privacy choices");
-        adPrivacy.setVisibility(GONE);
-        adPrivacy.setOnClickListener(v -> { if (!busy && !adBusy) actions.adPrivacy(); });
-        header.addView(adPrivacy, new LinearLayout.LayoutParams(dp(46), dp(36)));
+        header.addView(copy("challenge".equals(profile) ? "" : "5 crystals per completed wave", 12, MUTED),
+                new LinearLayout.LayoutParams(0, -2, 1));
         LinearLayout.LayoutParams crystalParams = new LinearLayout.LayoutParams(dp(15), dp(17));
         crystalParams.leftMargin = dp(7);
         header.addView(crystal(), crystalParams);
@@ -184,48 +155,6 @@ final class RewardsView extends FrameLayout {
         pendingItemId = "";
         pendingKind = "";
         showFeedback(failedItem, message == null || message.isEmpty() ? "Could not save. Please retry." : message, true);
-    }
-
-    void setAdState(boolean enabled, boolean busy, boolean privacyRequired, String status, boolean testAds) {
-        boolean wasBusy = adBusy;
-        adEnabled = enabled;
-        adBusy = busy;
-        boolean quiet = status == null || status.isEmpty() || "Optional ad · 10 crystals".equals(status)
-                || "Ads are optional.".equals(status)
-                || status.startsWith("Ready ·") || "Checking ad privacy settings…".equals(status) && !busy;
-        String shown = quiet ? "" : status;
-        if (!shown.equals(adMessage)
-                || wasBusy && !adBusy && shown.startsWith("+10 crystals")) {
-            int generation = ++adStatusGeneration;
-            adMessage = shown;
-            adMessageVisible = !shown.isEmpty();
-            if (!adBusy && (shown.startsWith("+10 crystals") || shown.startsWith("Ad closed."))) postDelayed(() -> {
-                if (generation == adStatusGeneration && !adBusy) {
-                    adMessageVisible = false;
-                    updateAdControls();
-                }
-            }, 3000);
-        }
-        adPrivacy.setVisibility(privacyRequired ? VISIBLE : GONE);
-        updateAdControls();
-    }
-
-    private void updateAdControls() {
-        String label = "Gain 10 Crystals";
-        if (adBusy) label = "Please wait…";
-        else if (adMessageVisible && adMessage.startsWith("+10 crystals")) label = "+10 Crystals";
-        else if (adMessage.contains("earned") && adMessage.contains("sav")) label = "Save 10 Crystals";
-        else if (adMessage.contains("clearing") && adMessage.contains("retry")) label = "Retry ad";
-        else if (adMessageVisible && adMessage.startsWith("Ad closed.")) label = "No reward earned";
-        else if (adMessageVisible && !adEnabled) label = "Ad unavailable";
-        else if (adMessageVisible && (adMessage.contains("could not") || adMessage.contains("No ad available")
-                || adMessage.contains("unavailable") || adMessage.contains("Tap to retry"))) label = "Try ad again";
-        if (!label.contentEquals(watchAd.getText())) watchAd.setText(label);
-        watchAd.setContentDescription("Watch an optional ad to earn 10 crystals"
-                + (adMessage.isEmpty() ? "" : ". " + adMessage));
-        watchAd.setEnabled(adEnabled && !busy && !adBusy);
-        watchAd.setAlpha(watchAd.isEnabled() ? 1f : .55f);
-        adPrivacy.setEnabled(!busy && !adBusy);
     }
 
     private void setCategory(String value) {
@@ -343,7 +272,6 @@ final class RewardsView extends FrameLayout {
     }
 
     private void render() {
-        updateAdControls();
         String amount = Integer.toString(balance);
         if (!amount.contentEquals(wallet.getText())) wallet.setText(amount);
         wallet.setContentDescription(balance + " crystals");
@@ -583,7 +511,6 @@ final class RewardsView extends FrameLayout {
     @Override protected void onDetachedFromWindow() {
         dismissOwnedPopup();
         ++feedbackGeneration;
-        ++adStatusGeneration;
         super.onDetachedFromWindow();
     }
 

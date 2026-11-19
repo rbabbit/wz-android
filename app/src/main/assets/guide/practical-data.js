@@ -481,7 +481,7 @@ window.WarzoneGuidePracticalData = {
           steps: [
             {title: 'Research accelerator', text: 'For 60 crystals, lab research rate increases by 25% for one Towers match. You still choose and pay for the topics; the boost does not complete the research tree.'},
             {title: 'Supply reserve', text: 'For 30 crystals, start one Towers match with 1,000 extra power. Spend it through ordinary construction, research and manufacturing.'},
-            {title: 'Optional crystal reward', text: 'When available, the optional rewarded-ad action pays 10 crystals after its reward confirmation. Read your balance and item state before starting the next match.'}
+            {title: 'Earn crystals through play', text: 'Each completed wave earns 5 crystals. Keep playing to earn more for Rewards purchases.'}
           ],
           notes: ['These are Towers support purchases. They do not apply to Campaign or FFA and are separate from persistent phone blueprints.'],
           screenshotId: 'towers-rewards', callouts: [], related: ['towers-reward-stock', 'completion-and-crystals', 'phone-blueprints']

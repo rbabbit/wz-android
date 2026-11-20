@@ -3,6 +3,8 @@ plugins {
 }
 
 val playStoreBuild = providers.gradleProperty("playStoreBuild").map(String::toBoolean).orElse(false).get()
+val playGamesConfig = groovy.json.JsonSlurper().parse(file("src/main/assets/warzone/play-games.json")) as Map<*, *>
+val playGamesApplicationId = playGamesConfig["gamesApplicationId"]?.toString().orEmpty()
 
 android {
     namespace = "com.rbabbit.blocknight.warzone"
@@ -12,12 +14,13 @@ android {
         applicationId = "com.rbabbit.warzonetowers.lab"
         minSdk = 26
         targetSdk = 36
-        versionCode = 111
-        versionName = "0.99.11"
+        versionCode = 122
+        versionName = "0.99.22"
         buildConfigField("boolean", "PLAY_STORE_BUILD", playStoreBuild.toString())
+        resValue("string", "play_games_application_id", playGamesApplicationId)
     }
 
-    buildFeatures { buildConfig = true }
+    buildFeatures { buildConfig = true; resValues = true }
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -58,6 +61,10 @@ android {
 dependencies {
     implementation("org.chromium.net:cronet-bundled:500.1.0")
     implementation("androidx.webkit:webkit:1.18.0")
+    implementation("com.google.android.gms:play-services-games-v2:22.1.0")
+    if (playStoreBuild) {
+        implementation("com.google.android.play:app-update:2.1.0")
+    }
 }
 
 tasks.withType<org.gradle.api.tasks.compile.JavaCompile>().configureEach {

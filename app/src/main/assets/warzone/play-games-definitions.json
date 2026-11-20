@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "achievements": [
+    {"key":"campaign_first_mission","title":"First Mission","description":"Complete your first Campaign mission.","points":5,"type":"STANDARD","target":1},
+    {"key":"campaign_missions_5","title":"Campaign Veteran","description":"Complete five different Campaign missions.","points":15,"type":"INCREMENTAL","target":5},
+    {"key":"campaign_complete","title":"Campaign Complete","description":"Complete the Campaign.","points":25,"type":"STANDARD","target":1},
+    {"key":"towers_first_wave","title":"First Defence","description":"Clear your first Towers wave.","points":5,"type":"STANDARD","target":1},
+    {"key":"towers_victory","title":"Tower Defender","description":"Win a Towers game.","points":10,"type":"STANDARD","target":1},
+    {"key":"towers_hard_victory","title":"Unbroken Defence","description":"Win a Towers game on Hard.","points":20,"type":"STANDARD","target":1},
+    {"key":"survival_first_wave","title":"Survivor","description":"Clear your first Survival wave.","points":5,"type":"STANDARD","target":1},
+    {"key":"survival_run_5","title":"Hold the Line","description":"Clear five waves in one Survival game.","points":10,"type":"INCREMENTAL","target":5},
+    {"key":"survival_total_25","title":"Still Standing","description":"Clear 25 Survival waves across your games.","points":15,"type":"INCREMENTAL","target":25},
+    {"key":"ffa_victory","title":"Last Commander","description":"Win a Free for All game.","points":10,"type":"STANDARD","target":1},
+    {"key":"ffa_hard_victory","title":"Hard Fought","description":"Win a Free for All game on Hard.","points":20,"type":"STANDARD","target":1},
+    {"key":"challenge_victory","title":"Challenge Accepted","description":"Win a Challenge game.","points":10,"type":"STANDARD","target":1},
+    {"key":"challenge_hard_victory","title":"Challenge Master","description":"Win a Challenge game on Hard.","points":20,"type":"STANDARD","target":1},
+    {"key":"maps_completed","title":"New Battlefield","description":"Finish a game on a downloaded map.","points":5,"type":"STANDARD","target":1},
+    {"key":"maps_bots_3","title":"Adapt and Overcome","description":"Win downloaded-map games against three different bot types.","points":15,"type":"INCREMENTAL","target":3},
+    {"key":"maps_team_victory","title":"Together We Win","description":"Win a Teams game on a downloaded map.","points":10,"type":"STANDARD","target":1},
+    {"key":"mp_completed","title":"Into Multiplayer","description":"Complete a Multiplayer match as a player.","points":5,"type":"STANDARD","target":1},
+    {"key":"mp_victory","title":"Multiplayer Victory","description":"Win a Multiplayer match as a player.","points":10,"type":"STANDARD","target":1}
+  ],
+  "leaderboards": [
+    {"key":"waves_reached","title":"Waves Cleared","description":"Highest cleared wave, with faster time breaking ties. Separate boards require the same mode, map, difficulty, bot, player count and team rules.","order":"LARGER_IS_BETTER","format":"NUMERIC","classificationRequired":true,"scoreFormula":"wave * 1000000000 + (999999999 - elapsedMs)"},
+    {"key":"fastest_victory_ms","title":"Fastest Victory","description":"Fastest completed victory in milliseconds. Separate boards require the same mode, map, difficulty, bot, player count and team rules. Multiplayer scores require server verification.","order":"SMALLER_IS_BETTER","format":"TIME_MILLISECONDS","classificationRequired":true}
+  ]
+}

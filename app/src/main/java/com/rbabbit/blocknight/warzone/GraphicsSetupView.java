@@ -34,6 +34,7 @@ final class GraphicsSetupView extends FrameLayout {
         void guide();
         void hub();
         default void about() {}
+        default void playGames() {}
         void campaignContinue();
         void campaignNew();
         void map(String id);
@@ -451,6 +452,8 @@ final class GraphicsSetupView extends FrameLayout {
     }
 
     boolean isHomeModesVisible() { return !towersMapVisible; }
+
+    void focusPlayGames() { homeModes.focusPlayGames(); }
 
     boolean handleHomeBack() {
         if (!towersMapVisible) return false;

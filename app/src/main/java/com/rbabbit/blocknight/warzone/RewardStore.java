@@ -30,6 +30,18 @@ final class RewardStore {
   }
 
   synchronized int balance() { return ledger.balance; }
+  synchronized int clearedWave(String session) {
+    RewardLedger.Run run = ledger.runs.get(session);
+    int highest = 0;
+    if (run != null) for (int wave : run.clearedWaves) highest = Math.max(highest, wave);
+    return highest;
+  }
+  synchronized JSONArray clearedWaves(String session) {
+    JSONArray waves = new JSONArray();
+    RewardLedger.Run run = ledger.runs.get(session);
+    if (run != null) for (int wave : run.clearedWaves) waves.put(wave);
+    return waves;
+  }
   synchronized Set<String> completedMaps() {
     return Collections.unmodifiableSet(new LinkedHashSet<>(ledger.completed));
   }
@@ -361,6 +373,8 @@ final class RewardStore {
       value.inventory.put(id, RewardLedger.count(value.inventory, id) + 1);
     }
   }
+
+  static void validateBackup(String saved) { decode(saved); }
 
   private static RewardLedger decode(String saved) {
     try {

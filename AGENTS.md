@@ -41,3 +41,17 @@ This candidate has independent mutable source files and frozen media/native hard
 
 # Authorized GitHub 0.99.4 source and normal APK backup
 2026-11-19: User explicitly authorized committing all current source to private rbabbit/wz-android and uploading the normal 0.99.4 APK as a private prerelease in the background. No tests/emulators or upload polling were requested. Preserve earlier source history and fallbacks; do not change VPS/update feeds or publish to Google Play. Private signing inputs and caches must remain excluded.
+# Authorized channel-specific startup updates 0.99.22
+
+2026-11-20: User explicitly requests retaining Check for updates in both editions,
+silent startup checks in both, a signed normal APK uploaded to the VPS, a signed
+Google Play AAB using the existing private publisher key, and a GitHub update.
+NO tests, lint, QA runs, emulator or physical-device activity. This direct current
+request supersedes historical test-before-publication gates for this release.
+Website builds check only the existing small VPS feed and retain verified signed
+APK installation with explicit user consent. Play builds check through the official
+Play update API, open their Play Store listing and contain no direct APK updater.
+Preserve prior APKs, complete source, saves and remote fallback. Google Play Console
+upload is not authorized: deliver the signed AAB to the user. Signing credentials
+remain outside source, archives, logs and GitHub. No game or Google account setup changes.
+

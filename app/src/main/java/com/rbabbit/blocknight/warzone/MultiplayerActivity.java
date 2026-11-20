@@ -481,6 +481,36 @@ public final class MultiplayerActivity extends Activity {
     @JavascriptInterface public void closeConnections() {
       for (Connection connection : connections.values()) connection.finish(null);
     }
+    /** Native terminal reports only; leaving, joining and spectating never count. */
+    @JavascriptInterface public void playGamesEvent(String session, String json) {
+      if (destroyed.get() || !sessionActive || session == null || json == null || json.length() > 32768) return;
+      synchronized (musicPreferenceLock) {
+        if (session.isEmpty() || !session.equals(musicSession)) return;
+      }
+      try {
+        JSONObject event = new JSONObject(json);
+        String runId = event.optString("runId", "");
+        int player = event.optInt("localPlayer", -1), players = event.optInt("players", 0);
+        long elapsed = event.optLong("elapsedMs", -1);
+        String map = event.optString("map", "");
+        if (!"match_finished".equals(event.optString("kind"))
+            || !"multiplayer".equals(event.optString("mode"))
+            || !"native-gameover-report".equals(event.optString("source"))
+            || !event.optBoolean("verifiedResult") || !event.optBoolean("nativeCompleted")
+            || event.optBoolean("spectator", true) || !(event.opt("won") instanceof Boolean)
+            || !runId.startsWith("mp-" + session + "-") || runId.length() > 220
+            || !(runId + ":finished").equals(event.optString("eventId"))
+            || player < 0 || player >= 10 || players < 2 || players > 10 || elapsed <= 0
+            || map.isEmpty() || map.length() > 160 || map.codePoints().anyMatch(Character::isISOControl)) return;
+        // Local native proof can unlock personal achievements, never a verified
+        // global online board. No account sign-in or cloud operation happens here.
+        event.put("serverVerified", false).put("difficulty", "online");
+        String owner = getSharedPreferences("optional_play_games_v1", MODE_PRIVATE).getString("lastAccount", "");
+        new PlayGamesProgressStore(MultiplayerActivity.this).recordEvent(owner, event);
+      } catch (Exception unavailable) {
+        Log.w(TAG, "Optional multiplayer progress could not be recorded");
+      }
+    }
   }
 
   /** Only the soundtrack settings are exposed, never the main game's bridge. */

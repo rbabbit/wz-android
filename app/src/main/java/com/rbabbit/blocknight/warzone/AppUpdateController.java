@@ -32,21 +32,92 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import org.json.JSONObject;
 
-/** User-initiated, full signed-APK replacement. Never runs at app startup. */
+/** Quiet startup metadata check; full signed-APK downloads remain user-initiated. */
 final class AppUpdateController {
+    private static final int STARTUP_TIMEOUT_MS = 4000;
     private final Activity activity;
     private final Handler main = new Handler(Looper.getMainLooper());
     private final ExecutorService worker = Executors.newSingleThreadExecutor();
     private volatile HttpURLConnection connection;
     private volatile int generation;
     private boolean closed;
+    private boolean homeVisible, startupStarted, startupPromptShown;
+    private AppUpdatePolicy pendingStartupUpdate;
+    private AlertDialog startupPrompt;
     private AlertDialog dialog;
     private TextView message;
     private ProgressBar progress;
 
     AppUpdateController(Activity activity) { this.activity = activity; }
 
+    void onHomeVisible(boolean visible) {
+        if (closed) return;
+        homeVisible = visible;
+        if (!visible) {
+            if (startupPrompt != null) { startupPrompt.dismiss(); startupPrompt = null; }
+            return;
+        }
+        if (!startupStarted) {
+            startupStarted = true;
+            checkQuietly();
+        }
+        showStartupUpdateIfReady();
+    }
+
+    private void checkQuietly() {
+        int token = cancelWork();
+        worker.execute(() -> {
+            try {
+                AppUpdatePolicy feed = fetchFeed(token, STARTUP_TIMEOUT_MS, STARTUP_TIMEOUT_MS);
+                if (!feed.newerThan(version(installedPackage()))) return;
+                ensureActive(token);
+                main.post(() -> {
+                    if (closed || token != generation) return;
+                    pendingStartupUpdate = feed;
+                    showStartupUpdateIfReady();
+                });
+            } catch (Exception ignored) { /* Startup failures stay silent; manual checks remain available. */ }
+        });
+    }
+
+    private void showStartupUpdateIfReady() {
+        if (closed || !homeVisible || startupPromptShown || pendingStartupUpdate == null
+                || dialog != null || startupPrompt != null || activity.isFinishing() || activity.isDestroyed()) return;
+        AppUpdatePolicy feed = pendingStartupUpdate;
+        pendingStartupUpdate = null;
+        startupPromptShown = true;
+        AlertDialog prompt = new AlertDialog.Builder(activity).setTitle("Update available")
+                .setMessage("Version " + feed.versionName + " is available from wz2100.uk.\n\n"
+                        + "Download the complete app (" + megabytes(feed.sizeBytes)
+                        + ")? Your saves and progress stay in place.")
+                .setPositiveButton("Update", (ignored, which) -> {
+                    startupPrompt = null;
+                    if (!closed && homeVisible && !activity.isFinishing() && !activity.isDestroyed()) showDialog(feed);
+                })
+                .setNegativeButton("Later", null).create();
+        startupPrompt = prompt;
+        prompt.setOnDismissListener(ignored -> { if (startupPrompt == prompt) startupPrompt = null; });
+        try {
+            prompt.show();
+            if (prompt.getWindow() != null) prompt.getWindow().setBackgroundDrawableResource(android.R.color.black);
+            for (int which : new int[]{AlertDialog.BUTTON_POSITIVE, AlertDialog.BUTTON_NEGATIVE}) {
+                prompt.getButton(which).setTextColor(TowersTheme.TEXT);
+                prompt.getButton(which).setMinHeight(dp(48));
+            }
+        } catch (RuntimeException ignored) { startupPrompt = null; }
+    }
+
     void show() {
+        if (closed || dialog != null || activity.isFinishing() || activity.isDestroyed()) return;
+        // An explicit check takes priority over every in-flight or deferred startup result.
+        startupStarted = true;
+        pendingStartupUpdate = null;
+        cancelWork();
+        if (startupPrompt != null) { startupPrompt.dismiss(); startupPrompt = null; }
+        showDialog(null);
+    }
+
+    private void showDialog(AppUpdatePolicy acceptedUpdate) {
         if (closed || activity.isFinishing() || activity.isDestroyed()) return;
         if (dialog != null) return;
         LinearLayout body = new LinearLayout(activity);
@@ -74,7 +145,8 @@ final class AppUpdateController {
             button.setTextColor(TowersTheme.TEXT);
             button.setMinHeight(dp(48));
         }
-        check();
+        if (acceptedUpdate == null) check();
+        else download(acceptedUpdate);
     }
 
     private void check() {
@@ -102,7 +174,11 @@ final class AppUpdateController {
     }
 
     private AppUpdatePolicy fetchFeed(int token) throws Exception {
-        HttpURLConnection request = open(AppUpdatePolicy.FEED_URL, token);
+        return fetchFeed(token, 15000, 20000);
+    }
+
+    private AppUpdatePolicy fetchFeed(int token, int connectTimeout, int readTimeout) throws Exception {
+        HttpURLConnection request = open(AppUpdatePolicy.FEED_URL, token, connectTimeout, readTimeout);
         try {
             request.setRequestProperty("Accept", "application/json");
             if (request.getResponseCode() != 200) throw new IOException("The update server is unavailable.");
@@ -259,10 +335,14 @@ final class AppUpdateController {
     }
 
     private HttpURLConnection open(String url, int token) throws Exception {
+        return open(url, token, 15000, 20000);
+    }
+
+    private HttpURLConnection open(String url, int token, int connectTimeout, int readTimeout) throws Exception {
         ensureActive(token);
         HttpURLConnection request = (HttpURLConnection) new URL(url).openConnection();
         connection = request;
-        request.setConnectTimeout(15000); request.setReadTimeout(20000);
+        request.setConnectTimeout(connectTimeout); request.setReadTimeout(readTimeout);
         request.setInstanceFollowRedirects(false); request.setUseCaches(false);
         request.setRequestProperty("Accept-Encoding", "identity");
         try { ensureActive(token); }
@@ -309,6 +389,8 @@ final class AppUpdateController {
     private int dp(int value) { return Math.round(value * activity.getResources().getDisplayMetrics().density); }
     void close() {
         closed = true; cancelWork();
+        homeVisible = false; pendingStartupUpdate = null;
+        if (startupPrompt != null) { startupPrompt.dismiss(); startupPrompt = null; }
         if (dialog != null) dialog.dismiss();
         worker.shutdownNow();
     }

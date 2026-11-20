@@ -6,7 +6,7 @@
 <script>var Module={},LaunchedModule=null;var PcMultiplayerState={phase:'loading',nativeMenuOpen:false,worldReady:false};window.__warzoneMultiplayerMode=true;</script>
 <script src="/warzone/music-catalog.js"></script><script src="music.js"></script>
 <script src="socket-bridge.js"></script><script src="lobby-http.js"></script><script src="lobby-config.js"></script><script src="mobile-controls.js"></script>
-<script src="native-ui-adapter.js"></script><script src="/warzone/ui/research-art.js"></script><script src="terrain.js"></script><script src="/warzone-command-pages.js"></script><script src="/warzone-mobile-research.js"></script>
+<script src="play-games-progress.js"></script><script src="native-ui-adapter.js"></script><script src="/warzone/ui/research-art.js"></script><script src="terrain.js"></script><script src="/warzone-command-pages.js"></script><script src="/warzone-mobile-research.js"></script>
 <script src="intelligence.js"></script>
 <script src="background-frames.js"></script><script src="warzone2100.js"></script>
 <script>
@@ -21,7 +21,7 @@ function nativeMessage(message){parent.PcMultiplayerSession.message(String(messa
 async function boot(){
  try{await window.PcMultiplayerNativeUI?.prepare?.();}catch(error){nativeMessage(error?.stack||String(error));parent.PcMultiplayerSession.failed('The multiplayer interface could not load.');return;}
  const canvas=document.getElementById('canvas');canvas.width=innerWidth;canvas.height=innerHeight;
- Module={canvas,arguments:[...parent.PcMultiplayerSession.arguments,'--configdir='+wz_js_get_config_dir_path(),'--debug=net','--debug=info','--debug=warning','--flush-debug-stderr'],locateFile:p=>p,print:s=>console.log(s),printErr:nativeMessage,
+ Module={canvas,arguments:[...parent.PcMultiplayerSession.arguments,'--configdir='+wz_js_get_config_dir_path(),'--debug=net','--debug=info','--debug=warning','--flush-debug-stderr','--gamelog-output=log','--gamelog-outputkey=playerindex','--gamelog-outputnaming=default','--gamelog-frameinterval=0'],locateFile:p=>p,print:s=>console.log(s),printErr:nativeMessage,
   setStatus:s=>parent.PcMultiplayerSession.status(s),onRuntimeInitialized:()=>{PcLobbyConfig.apply(Module.FS,wz_js_get_config_dir_path(),parent.PcMultiplayerSession.playerName());window.PcMultiplayerNativeUI?.initialize?.(Module);},onAbort:s=>nativeMessage('Engine error: '+s)};
  try{LaunchedModule=await createWZModule(Module);window.PcMultiplayerNativeUI?.attach?.(LaunchedModule);PcMultiplayerControls.enable();parent.PcMultiplayerSession.engineReady();canvas.focus();}catch(error){nativeMessage(error?.stack||String(error));parent.PcMultiplayerSession.failed('The game could not start.');}
 }

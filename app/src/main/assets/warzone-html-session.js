@@ -16,6 +16,10 @@
     if (phase === 'ended' || !wave || wave.mode !== mode) return false;
     if(duel&&(!['active','victory','defeated'].includes(wave.phase)||wave.humanBranch!==config.humanBranch||wave.botBranch!==config.botBranch))return false;
     if(survival&&(wave.map!==window.__warzoneSurvivalConfig.map||wave.nativeLevel!==window.__warzoneSurvivalConfig.level||wave.profile!=='survival'||wave.totalRounds!==60))return false;
+    // The native simulation clock is used for optional score timing only.
+    if (!campaign && !duel && Number.isFinite(Number(wave.gameTime))) {
+      try { window.BlockNightAndroid?.playGamesFrame?.(session, JSON.stringify({mode:wave.mode,gameTime:Number(wave.gameTime)})); } catch (_) {}
+    }
     if (challenge || !duel && !campaign && !ffa) {
       const credited = window.BlockNightAndroid?.rewardProgress?.(session, JSON.stringify({
         wave:challenge?0:wave.wave, phase:wave.phase, completedWaves:challenge?[]:wave.completedWaves || [], rewards:wave.rewards || null}));

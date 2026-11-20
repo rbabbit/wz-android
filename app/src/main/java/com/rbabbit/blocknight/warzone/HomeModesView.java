@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 /** The compact mode chooser; each mode owns its detailed options. */
@@ -19,6 +20,7 @@ final class HomeModesView extends FrameLayout {
     private final Typeface face;
     private final ImageView logo, tank;
     private final Button campaign, towers, ffa, multiplayer, guide, hub, about;
+    private final ImageButton playGames;
     private final TextView version, status, tagline;
     private HomeMenuLayout.Result menuLayout;
     private HomeMenuLayout.Box taglineBox;
@@ -69,23 +71,28 @@ final class HomeModesView extends FrameLayout {
         about.setContentDescription("About & Licences");
         about.setOnClickListener(v -> actions.about());
         addView(about);
+        playGames = new ImageButton(context);
+        playGames.setImageResource(R.drawable.ic_play_games);
+        playGames.setImageTintList(ColorStateList.valueOf(TowersTheme.TEXT));
+        playGames.setScaleType(ImageView.ScaleType.FIT_CENTER);
+        playGames.setContentDescription("Play Games");
+        playGames.setTooltipText("Play Games");
+        playGames.setBackgroundTintList(null);
+        playGames.setStateListAnimator(null);
+        playGames.setMinimumWidth(0);
+        playGames.setMinimumHeight(0);
+        playGames.setOnClickListener(v -> actions.playGames());
+        addView(playGames);
 
         String installedVersion = GraphicsSetupView.appVersion(context);
-        version = text("rbabbit v" + installedVersion
-                + (BuildConfig.PLAY_STORE_BUILD ? "" : " - Check for updates"), 12,
+        version = text("rbabbit v" + installedVersion + " - Check for updates", 12,
                 TowersTheme.SECONDARY);
-        version.setContentDescription((BuildConfig.PLAY_STORE_BUILD
-                ? "Installed version " : "Check for updates. Installed version ") + installedVersion);
+        version.setContentDescription("Check for updates. Installed version " + installedVersion);
         version.setGravity(Gravity.CENTER);
         version.setMinHeight(dp(48));
         version.setPadding(dp(8), 0, dp(8), 0);
-        if (!BuildConfig.PLAY_STORE_BUILD) {
-            version.setBackground(new RippleDrawable(ColorStateList.valueOf(TowersTheme.RIPPLE), null, null));
-            version.setOnClickListener(v -> actions.updates());
-        } else {
-            version.setClickable(false);
-            version.setFocusable(false);
-        }
+        version.setBackground(new RippleDrawable(ColorStateList.valueOf(TowersTheme.RIPPLE), null, null));
+        version.setOnClickListener(v -> actions.updates());
         version.setSingleLine(false);
         version.setMaxLines(2);
         addView(version);
@@ -137,6 +144,8 @@ final class HomeModesView extends FrameLayout {
         tank.setVisibility(visible ? VISIBLE : INVISIBLE);
     }
 
+    void focusPlayGames() { playGames.requestFocus(); }
+
     @Override protected void onMeasure(int widthSpec, int heightSpec) {
         int width = MeasureSpec.getSize(widthSpec), height = MeasureSpec.getSize(heightSpec);
         tagline.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
@@ -160,6 +169,11 @@ final class HomeModesView extends FrameLayout {
                 new InsetDrawable(TowersTheme.control(getContext(), TowersTheme.CONTROL, 4),
                         dp(4), aboutInset, dp(4), aboutInset), null));
         exact(about, aboutWidth, aboutHeight);
+        playGames.setBackground(new RippleDrawable(ColorStateList.valueOf(TowersTheme.RIPPLE),
+                new InsetDrawable(TowersTheme.control(getContext(), TowersTheme.CONTROL, 4),
+                        dp(4), aboutInset, dp(4), aboutInset), null));
+        playGames.setPadding(dp(17), aboutInset + dp(2), dp(17), aboutInset + dp(2));
+        exact(playGames, aboutWidth, aboutHeight);
         // Preserve the existing tagline position while shrinking the ancillary action.
         int aboutLeft = width - safeRight - dp(12) - Math.max(dp(72), aboutWidth);
         HomeMenuLayout.Result safeLayout = HomeMenuLayout.measure(width, height, density,
@@ -182,11 +196,13 @@ final class HomeModesView extends FrameLayout {
         exact(tank, menuLayout.tank.width, menuLayout.tank.height);
         tagline.measure(MeasureSpec.makeMeasureSpec(footerWidth, MeasureSpec.EXACTLY),
                 MeasureSpec.makeMeasureSpec(height, MeasureSpec.AT_MOST));
-        taglineBox = taglineBounds(menuLayout, safeTop, density, tagline.getMeasuredHeight(), aboutLeft - dp(12));
+        taglineBox = taglineBounds(menuLayout, safeTop, density, tagline.getMeasuredHeight(),
+                safeLeft + dp(24) + aboutWidth, aboutLeft - dp(12));
         if (taglineBox.width != tagline.getMeasuredWidth()) {
             tagline.measure(MeasureSpec.makeMeasureSpec(taglineBox.width, MeasureSpec.EXACTLY),
                     MeasureSpec.makeMeasureSpec(height, MeasureSpec.AT_MOST));
-            taglineBox = taglineBounds(menuLayout, safeTop, density, tagline.getMeasuredHeight(), aboutLeft - dp(12));
+            taglineBox = taglineBounds(menuLayout, safeTop, density, tagline.getMeasuredHeight(),
+                    safeLeft + dp(24) + aboutWidth, aboutLeft - dp(12));
         }
         setMeasuredDimension(width, height);
     }
@@ -197,6 +213,7 @@ final class HomeModesView extends FrameLayout {
         place(logo, menuLayout.logo.left, menuLayout.logo.top);
         if (taglineBox != null) place(tagline, taglineBox.left, taglineBox.top);
         place(about, r - l - safeRight - dp(12) - about.getMeasuredWidth(), safeTop + dp(4));
+        place(playGames, safeLeft + dp(12), safeTop + dp(4));
         Button[] modes = {campaign, towers, ffa, multiplayer, guide, hub};
         for (int index = 0; index < modes.length; index++)
             place(modes[index], menuLayout.buttons[index].left, menuLayout.buttons[index].top);
@@ -258,17 +275,17 @@ final class HomeModesView extends FrameLayout {
     }
 
     private static HomeMenuLayout.Box taglineBounds(HomeMenuLayout.Result layout,
-            int safeTop, float density, int textHeight, int maximumRight) {
-        int right = Math.min(layout.contentRight, maximumRight);
+            int safeTop, float density, int textHeight, int minimumLeft, int maximumRight) {
+        int left = Math.max(layout.contentLeft, minimumLeft);
+        int right = Math.max(left, Math.min(layout.contentRight, maximumRight));
         int artTop = Math.min(layout.logo.top, layout.tank.top);
         if (textHeight + Math.round(2 * density) > artTop - safeTop) {
-            right = Math.max(layout.contentLeft, Math.min(right, layout.tank.left - Math.round(12 * density)));
+            right = Math.max(left, Math.min(right, layout.tank.left - Math.round(12 * density)));
             artTop = layout.logo.top;
         }
         int top = Math.max(safeTop, Math.min(safeTop + Math.round(24 * density),
                 artTop - textHeight - Math.round(2 * density)));
-        return new HomeMenuLayout.Box(layout.contentLeft, top,
-                right - layout.contentLeft, textHeight);
+        return new HomeMenuLayout.Box(left, top, right - left, textHeight);
     }
 
     private static void exact(View view, int width, int height) {

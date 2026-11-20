@@ -27,6 +27,7 @@
   if(stopped)return;let state=value;
   try{if(typeof value==='string')state=JSON.parse(value);}catch{return;}
   if(!state||typeof state!=='object')return;
+  try{globalThis.WarzoneMultiplayerProgress?.state?.(state,module);}catch(error){fail(error);}
   const previouslyAllowed=ordersAllowed();native.state=state;globalThis.PcMultiplayerState=Object.assign(globalThis.PcMultiplayerState||{},state);
   if(!ordersAllowed()){
    native.reports={ready:false,reports:[]};

@@ -3,32 +3,30 @@ package com.rbabbit.blocknight.warzone;
 import android.app.Activity;
 import android.os.Handler;
 import android.os.Looper;
+import android.webkit.JavascriptInterface;
 import android.webkit.RenderProcessGoneDetail;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebResourceResponse;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.Collections;
 import java.util.function.Consumer;
-import org.json.JSONException;
-import org.json.JSONTokener;
 
-/** Reads the old WebView library before cloud actions, even from the home screen. */
+/** Reads the legacy library and prior Warzone profiles on the app's WebView origin. */
 final class LegacyBlueprintImport extends WebViewClient {
     private static final String URL = "https://appassets.androidplatform.net/warzone/blueprint-import.html";
+    private static final String SCRIPT = "warzone/blueprint-recovery.js";
     private final BlueprintStore store;
     private final Consumer<Boolean> result;
     private final Handler handler = new Handler(Looper.getMainLooper());
     private final Runnable timeout = () -> finish(false);
-    private WebView reader;
+    private volatile WebView reader;
 
     static void prepare(Activity activity, Consumer<Boolean> result) {
-        BlueprintStore store = new BlueprintStore(activity);
-        if (store.importedLegacy()) {
-            result.accept(true);
-            return;
-        }
-        new LegacyBlueprintImport(store, result).read(activity);
+        new LegacyBlueprintImport(new BlueprintStore(activity), result).read(activity);
     }
 
     private LegacyBlueprintImport(BlueprintStore store, Consumer<Boolean> result) {
@@ -43,6 +41,7 @@ final class LegacyBlueprintImport extends WebViewClient {
             reader.getSettings().setDomStorageEnabled(true);
             reader.getSettings().setAllowFileAccess(false);
             reader.getSettings().setAllowContentAccess(false);
+            reader.addJavascriptInterface(new RecoveryBridge(), "AndroidBlueprintRecovery");
             reader.setWebViewClient(this);
             handler.postDelayed(timeout, 8000);
             reader.loadUrl(URL);
@@ -52,22 +51,39 @@ final class LegacyBlueprintImport extends WebViewClient {
     }
 
     @Override public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
-        if (!URL.equals(request.getUrl().toString()))
-            return new WebResourceResponse("text/plain", "UTF-8", 403, "Blocked", java.util.Collections.emptyMap(),
+        String url = request.getUrl().toString();
+        if (URL.equals(url)) {
+            String html = "<!doctype html><meta charset=utf-8><script defer src=/"
+                    + SCRIPT + "></script>";
+            return new WebResourceResponse("text/html", "UTF-8",
+                    new ByteArrayInputStream(html.getBytes(StandardCharsets.UTF_8)));
+        }
+        if (("https://appassets.androidplatform.net/" + SCRIPT).equals(url)) {
+            try {
+                return new WebResourceResponse("application/javascript", "UTF-8",
+                        view.getContext().getAssets().open(SCRIPT));
+            } catch (IOException missing) { handler.post(() -> finish(false)); }
+        }
+        return new WebResourceResponse("text/plain", "UTF-8", 403, "Blocked", Collections.emptyMap(),
                 new ByteArrayInputStream(new byte[0]));
-        return new WebResourceResponse("text/html", "UTF-8",
-            new ByteArrayInputStream("<!doctype html><title>Blueprint storage</title>".getBytes(java.nio.charset.StandardCharsets.UTF_8)));
     }
 
-    @Override public void onPageFinished(WebView view, String url) {
-        if (view != reader || !URL.equals(url)) return;
-        view.evaluateJavascript("localStorage.getItem('wt-designs-v1') || ''", raw -> {
-            if (view != reader) return;
-            try {
-                Object value = new JSONTokener(raw == null ? "null" : raw).nextValue();
-                finish(value instanceof String && store.importLegacy((String) value));
-            } catch (JSONException invalid) { finish(false); }
-        });
+    @Override public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+        return true;
+    }
+
+    public final class RecoveryBridge {
+        @JavascriptInterface public boolean importLegacyDesigns(String data) {
+            return reader != null && store.importLegacy(data);
+        }
+
+        @JavascriptInterface public boolean importNativeTemplates(String data) {
+            return reader != null && store.importNativeTemplates(data);
+        }
+
+        @JavascriptInterface public void complete(boolean ok) {
+            handler.post(() -> finish(ok));
+        }
     }
 
     @Override public boolean onRenderProcessGone(WebView view, RenderProcessGoneDetail detail) {

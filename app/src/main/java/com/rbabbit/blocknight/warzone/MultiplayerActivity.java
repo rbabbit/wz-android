@@ -387,6 +387,7 @@ public final class MultiplayerActivity extends Activity {
   public final class Navigation {
     @JavascriptInterface public String loadDesigns() { return blueprints.load(); }
     @JavascriptInterface public boolean importLegacyDesigns(String data) { return blueprints.importLegacy(data); }
+    @JavascriptInterface public boolean importNativeTemplates(String data) { return blueprints.importNativeTemplates(data); }
     @JavascriptInterface public String writeDesign(String data) { return blueprints.write(data); }
     @JavascriptInterface public String deleteDesign(String id) { return blueprints.delete(id); }
 

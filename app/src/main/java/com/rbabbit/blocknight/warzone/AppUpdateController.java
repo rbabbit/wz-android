@@ -86,9 +86,10 @@ final class AppUpdateController {
         AppUpdatePolicy feed = pendingStartupUpdate;
         pendingStartupUpdate = null;
         startupPromptShown = true;
+        String whatsNew = feed.notes.isEmpty() ? "" : "\n\nWhat's new\n" + feed.notes;
         AlertDialog prompt = new AlertDialog.Builder(activity).setTitle("Update available")
-                .setMessage("Version " + feed.versionName + " is available from wz2100.uk.\n\n"
-                        + "Download the complete app (" + megabytes(feed.sizeBytes)
+                .setMessage("Version " + feed.versionName + " is available from wz2100.uk."
+                        + whatsNew + "\n\nDownload the complete app (" + megabytes(feed.sizeBytes)
                         + ")? Your saves and progress stay in place.")
                 .setPositiveButton("Update", (ignored, which) -> {
                     startupPrompt = null;

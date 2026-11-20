@@ -227,6 +227,10 @@ public final class MainActivity extends Activity {
     challengeDifficulty = BattleLaunchSpec.ffaDifficulty(getPreferences(MODE_PRIVATE).getString("challenge_difficulty", "easy"));
     showGraphicsSetup();
     if (savedWalletError != null) graphicsSetup.showError(savedWalletError);
+    LegacyBlueprintImport.prepare(this, ok -> {
+      if (webView != null && !isFinishing() && !isDestroyed())
+        webView.evaluateJavascript("window.__warzoneCommands?.reloadBlueprints()", null);
+    });
   }
 
   private void showGraphicsSetup() {
@@ -1919,6 +1923,9 @@ public final class MainActivity extends Activity {
 
     @JavascriptInterface
     public boolean importLegacyDesigns(String data) { return blueprints.importLegacy(data); }
+
+    @JavascriptInterface
+    public boolean importNativeTemplates(String data) { return blueprints.importNativeTemplates(data); }
 
     @JavascriptInterface
     public String writeDesign(String data) { return blueprints.write(data); }

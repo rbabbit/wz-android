@@ -7,10 +7,12 @@
   const campaign = window.__warzoneCampaignMode === true || (typeof location !== 'undefined' && typeof URLSearchParams === 'function' && new URLSearchParams(location.search).get('mode') === 'campaign');
   const polishedTowers = window.__warzoneDuelConfig?.mode !== 'duel';
   const powerSymbol = polishedTowers ? '\u26a1\ufe0e' : '\u26a1';
+  const powerCost = cost => Number.isFinite(cost) ? `${powerSymbol} ${cost}` : 'Available';
   const blueprintBridge = window.BlockNightAndroid?.loadDesigns ? window.BlockNightAndroid
     : window.AndroidMultiplayer?.loadDesigns ? window.AndroidMultiplayer : null;
   const blueprintStorageKey = 'wt-designs-v1';
   const blueprintLimit = 200;
+  const importedTemplateFiles = new Map();
   const PATH = (campaign ? '/data/base/script/campaign/mobile/' : '/data/mp/multiplay/script/rules/') + 'warzone-towers-command.json';
   const state = {page:'',catalog:null,snapshot:null,pending:new Map(),serial:0,writes:0,acks:0,
     timeouts:0,lastWrite:0,lastPoll:0,nativeMenu:'',history:[],placement:null,session:'',category:'DEFENCES',search:'',buildChoice:'',buildOpen:false,siteChecks:0,cancelSerial:0,nativeHudHidden:false,pendingItem:'',designStep:'body',designSearch:'',nativeItem:'',
@@ -73,6 +75,25 @@
     try {
       state.saved = readLibrary(blueprintBridge ? blueprintBridge.loadDesigns() : localStorage.getItem(blueprintStorageKey));
     } catch (_) {}
+  }
+  function recoverMountedTemplates() {
+    const engine = module(), fs = engine?.FS;
+    const directory = engine?.WZVAL_configDirPath || window.wz_js_get_config_dir_path?.();
+    if (!blueprintBridge?.importNativeTemplates || !fs || !directory) return;
+    const userdata = directory + '/userdata';
+    let rulesets;
+    try { rulesets = fs.readdir(userdata); } catch (_) { return; }
+    for (const ruleset of rulesets) {
+      if (ruleset === '.' || ruleset === '..') continue;
+      const path = userdata + '/' + ruleset + '/templates.json';
+      try {
+        const {size, mtime} = fs.stat(path);
+        const revision = size + ':' + Number(mtime);
+        if (size > 512 * 1024 || importedTemplateFiles.get(path) === revision) continue;
+        const data = fs.readFile(path, {encoding:'utf8'});
+        if (blueprintBridge.importNativeTemplates(data)) importedTemplateFiles.set(path, revision);
+      } catch (_) { /* A ruleset may have no stored templates. */ }
+    }
   }
   function persistDesign(id, design) {
     try {
@@ -431,7 +452,10 @@
   }
   function toggleBuild(){return toggle('build');}
   function open(page='build'){
-    if(page==='saved'||page==='design'||page==='factory')loadSaved();
+    if(page==='saved'||page==='design'||page==='factory'){
+      recoverMountedTemplates();
+      loadSaved();
+    }
     finishDesignRename(false,false);
     if(campaign&&window.__warzoneCampaign?.nativeUiActive?.()){window.__warzoneCampaign.revealNativeUi();return false;}
     cancelDemolish();
@@ -763,10 +787,10 @@
     return `${state.confirmNew?`<div class="wt-draft-confirm"><span>Discard unsaved changes and start a new design?</span>${button('DISCARD CHANGES','data-action="discard-draft"')}${button('KEEP EDITING','data-action="keep-draft"','wt-primary')}</div>`:''}<div class="wt-compact-design"><nav class="wt-design-slots" aria-label="Design components">${steps.map(([key,n,label,id])=>button(`${image(findPart(id)||{group:key==='body'?'Body':key==='propulsion'?'Propulsion':'Weapon'})}<span><small>${label}</small><strong>${esc(findPart(id)?.name||'Choose component')}</strong></span><span class="wt-slot-chevron" aria-hidden="true">⌄</span>`,`data-step="${key}" aria-pressed="${active===key}"`,active===key?'wt-step active':'wt-step')).join('')}</nav><section class="wt-design-picker"><h2>Choose ${active==='body'?'body':active==='propulsion'?'propulsion':Number(active)>0?'extra weapon':'weapon / system'}</h2><div class="wt-parts-grid">${Number(active)>0?button('EMPTY SLOT',`data-part="" data-slot="${active}"`,'wt-part'):''}${parts.map(p=>button(`${image(p)}<strong>${esc(p.name)}</strong><small>${esc(p.group==='Body'?p.size||'BODY':p.group==='Propulsion'?p.propulsionType||'PROPULSION':p.group)}</small>`,`data-part="${esc(p.id)}" data-slot="${active}"`,(active==='body'?d.body:active==='propulsion'?d.propulsion:d.turrets[Number(active)])===p.id?'wt-part active':'wt-part')).join('')||'<p class="wt-empty">Research components in TECH to unlock more choices.</p>'}</div></section><div class="wt-design-summary wt-compact-save"><p id="wt-design-valid" role="status" aria-live="polite">${esc(status)}</p><form id="wt-design-form"><label for="wt-design-name-button">Unit name</label><button type="button" id="wt-design-name-button" data-action="rename-design" aria-haspopup="dialog"${busy?' disabled':''}>${esc(d.name||'Name your unit')}</button><input id="wt-design-name" type="hidden" value="${esc(d.name)}"><select id="wt-design-body" hidden tabindex="-1">${selectOptions('Body',d.body,'Choose body')}</select><select id="wt-design-propulsion" hidden tabindex="-1">${selectOptions('Propulsion',d.propulsion,'Choose propulsion')}</select>${Array.from({length:slots},(_,i)=>`<select hidden tabindex="-1" data-turret="${i}">${turretOptions(d.turrets[i]||'')}</select>`).join('')}</form><span id="wt-blueprint-name" hidden>${esc(d.name||'New design')}</span>${button(busy?'SAVING…':editing?'SAVE CHANGES':'SAVE BLUEPRINT','data-action="save-design" id="wt-save-design"'+(!state.validation?.ok||busy?' disabled':''),'wt-primary')}${editing?button('SAVE AS NEW','data-action="save-as-new" id="wt-save-as-new"'+(!state.validation?.ok||busy?' disabled':''),'wt-subtle'):''}${button('New design','data-action="new-design"','wt-subtle')}</div></div>`;
   }
   function renderCompactSaved(){
-    return `<div class="wt-compact-library"><p class="wt-library-note">Saved on this phone. Research components again in each battle.</p><div class="wt-card-grid">${state.saved.map(d=>`<article class="wt-command-card wt-library-row" data-library-id="${esc(d.id)}">${recipeArtwork(d)}<div class="wt-library-copy"><h2>${esc(d.name)}</h2><p>${esc(recipeDescription(d))}</p><small>${availableDesign(d)?`${powerSymbol} ${d.cost}`:'Research required this game'}</small></div><div class="wt-card-actions">${state.deletePending===d.id?`<span>Delete this design?</span>${button('DELETE',`data-confirm-delete="${esc(d.id)}"`)}${button('CANCEL',`data-cancel-delete="${esc(d.id)}"`,'wt-subtle')}`:`${!d.factoryTemplate||[d.body,d.propulsion,...d.turrets].every(id=>findPart(id))?button('EDIT',`data-edit="${esc(d.id)}"`,'wt-subtle'):''}${button('USE',`data-produce-design="${esc(d.id)}"`+(availableDesign(d)?'':' disabled'),'wt-primary')}${button('DELETE',`data-delete="${esc(d.id)}"`,'wt-subtle')}`}</div></article>`).join('')||'<p class="wt-empty">No saved blueprints yet. Open Design to create one.</p>'}</div></div>`;
+    return `<div class="wt-compact-library"><p class="wt-library-note">Saved on this phone. Research components again in each battle.</p><div class="wt-card-grid">${state.saved.map(d=>`<article class="wt-command-card wt-library-row" data-library-id="${esc(d.id)}">${recipeArtwork(d)}<div class="wt-library-copy"><h2>${esc(d.name)}</h2><p>${esc(recipeDescription(d))}</p><small>${availableDesign(d)?powerCost(d.cost):'Research required this game'}</small></div><div class="wt-card-actions">${state.deletePending===d.id?`<span>Delete this design?</span>${button('DELETE',`data-confirm-delete="${esc(d.id)}"`)}${button('CANCEL',`data-cancel-delete="${esc(d.id)}"`,'wt-subtle')}`:`${!d.factoryTemplate||[d.body,d.propulsion,...d.turrets].every(id=>findPart(id))?button('EDIT',`data-edit="${esc(d.id)}"`,'wt-subtle'):''}${button('USE',`data-produce-design="${esc(d.id)}"`+(availableDesign(d)?'':' disabled'),'wt-primary')}${button('DELETE',`data-delete="${esc(d.id)}"`,'wt-subtle')}`}</div></article>`).join('')||'<p class="wt-empty">No saved blueprints yet. Open Design to create one.</p>'}</div></div>`;
   }
   function renderSaved(){if(polishedTowers)return renderCompactSaved();return `<div class="wt-page-intro"><p>Your designs and factory templates stay saved on this phone between games and app restarts. Components must be researched in the current battle to produce them.</p>${button('NEW DESIGN','data-action="new-design"','wt-primary')}</div>
-    <div class="wt-card-grid">${state.saved.map(d=>`<article class="wt-command-card">${unitParts(d)}<div><h2>${esc(d.name)}</h2><p>${esc(findPart(d.body)?.name||d.body)} · ${esc(findPart(d.propulsion)?.name||d.propulsion)}</p><p>${availableDesign(d)?`${powerSymbol} ${d.cost} · Available`:'Research required this game'}</p></div><div class="wt-card-actions">${!d.factoryTemplate||[d.body,d.propulsion,...d.turrets].every(id=>findPart(id))?button('EDIT',`data-edit="${esc(d.id)}"`):'<span>FACTORY TEMPLATE · SAVED ON PHONE</span>'}${button(d.factoryTemplate?'USE TEMPLATE':'CHOOSE FACTORY',`data-produce-design="${esc(d.id)}"`+(availableDesign(d)?'':' disabled'),'wt-primary')}${state.deletePending===d.id?'<p>Delete this saved design?</p>'+button('DELETE PERMANENTLY',`data-confirm-delete="${esc(d.id)}"`)+button('CANCEL',`data-cancel-delete="${esc(d.id)}"`):button('DELETE',`data-delete="${esc(d.id)}"`,'wt-subtle')}</div></article>`).join('')||'<p class="wt-empty">No saved designs yet. Open DESIGN to create your first blueprint.</p>'}</div>`;}
+    <div class="wt-card-grid">${state.saved.map(d=>`<article class="wt-command-card">${unitParts(d)}<div><h2>${esc(d.name)}</h2><p>${esc(findPart(d.body)?.name||d.body)} · ${esc(findPart(d.propulsion)?.name||d.propulsion)}</p><p>${availableDesign(d)?powerCost(d.cost):'Research required this game'}</p></div><div class="wt-card-actions">${!d.factoryTemplate||[d.body,d.propulsion,...d.turrets].every(id=>findPart(id))?button('EDIT',`data-edit="${esc(d.id)}"`):'<span>FACTORY TEMPLATE · SAVED ON PHONE</span>'}${button(d.factoryTemplate?'USE TEMPLATE':'CHOOSE FACTORY',`data-produce-design="${esc(d.id)}"`+(availableDesign(d)?'':' disabled'),'wt-primary')}${state.deletePending===d.id?'<p>Delete this saved design?</p>'+button('DELETE PERMANENTLY',`data-confirm-delete="${esc(d.id)}"`)+button('CANCEL',`data-cancel-delete="${esc(d.id)}"`):button('DELETE',`data-delete="${esc(d.id)}"`,'wt-subtle')}</div></article>`).join('')||'<p class="wt-empty">No saved designs yet. Open DESIGN to create your first blueprint.</p>'}</div>`;}
   function templateEquipment(d){return d.turrets?.length?d.turrets.slice():d.weapons?.length?d.weapons.slice():[d.construct,d.repair,d.brain,d.ecm,d.sensor].filter(id=>id&&!/null/i.test(id)).slice(0,1);}
   function templateParts(d){return JSON.stringify([d.body,d.propulsion,templateEquipment(d)]);}
   function saveTemplate(id){
@@ -926,7 +950,7 @@
   }
   function factoryRecipeRow(recipe){
     const chosen=recipe.key===state.factoryRecipeKey,attrs=recipe.produceNative?`data-produce-template="${esc(recipe.produceId)}"`:`data-produce="${esc(recipe.produceId)}"`;
-    const status=!recipe.researched?'RESEARCH REQUIRED':!recipe.compatible?'FACTORY MODULES REQUIRED':`${powerSymbol} ${esc(recipe.cost)}`;
+    const status=!recipe.researched?'RESEARCH REQUIRED':!recipe.compatible?'FACTORY MODULES REQUIRED':powerCost(recipe.cost);
     const pending=productionRequestsFor(state.factory,recipe.produceNative?'template':'design',recipe.produceId).length>0;
     const factory=state.snapshot.factories.find(f=>f.id===state.factory),activity=factoryInlineStatus(recipe,factory),busy=productionScopeBusy(factory,recipe);
     return `<article class="wt-command-card wt-factory-design-row" data-recipe-key="${esc(recipe.key)}" data-selected-design="${chosen}">${button(`${recipeArtwork(recipe.display)}<span class="wt-factory-design-copy"><strong>${esc(recipe.name)}</strong><span class="wt-recipe-description">${esc(recipeDescription(recipe.display))}</span><small class="${recipe.compatible?'':'wt-design-unavailable'}">${status}</small></span>`,`data-factory-recipe-select="${esc(recipe.key)}" aria-pressed="${chosen}"`,'wt-factory-design-select')}<div class="wt-factory-inline-status" data-production-state="${esc(factory?productionStatus(factory).mode:'idle')}" ${activity?'':'hidden'}>${activity}</div><div class="wt-factory-recipe-actions">${repeatControl(recipe,factory)}${allProductionControl(recipe,factory)}${button(pending?'ADDING…':'MANUFACTURE',attrs+` aria-busy="${pending}" aria-label="Manufacture ${esc(recipe.name)}" data-compatible="${recipe.compatible}"`+(!recipe.compatible||pending||busy?' disabled':''),'wt-primary wt-factory-produce'+(pending?' pending':''))}</div></article>`;
@@ -1057,7 +1081,7 @@
   }
   function productionCard(d,native){
     const researched=native||!polishedTowers||availableDesign(d),compatible=(native||designFitsFactory(d,state.snapshot.factories.find(f=>f.id===state.factory)))&&researched;
-    return `<article class="wt-command-card" data-selected-design="${!native&&d.id===state.selected}">${unitParts(d)}<div><h2>${esc(native?String(d.fullname||d.name).replace(/\s*\u00b7\s*F\d+$/,''):d.fullname||d.name)}</h2>${!researched?'<p class="wt-design-unavailable">Research required this game</p>':`<p>${powerSymbol} ${d.cost}${compatible?'':' · Check factory type / modules'}</p>`}</div><div class="wt-card-actions">${button('PRODUCE',(native?`data-produce-template="${esc(d.id)}"`:`data-produce="${esc(d.id)}"`)+(compatible?'':' disabled'),'wt-primary')}${native?button('SAVE TO PHONE',`data-save-template="${esc(d.id)}"`,'wt-subtle'):''}${!native&&d.factoryTemplate?'<small>Saved on this phone</small>':''}</div></article>`;
+    return `<article class="wt-command-card" data-selected-design="${!native&&d.id===state.selected}">${unitParts(d)}<div><h2>${esc(native?String(d.fullname||d.name).replace(/\s*\u00b7\s*F\d+$/,''):d.fullname||d.name)}</h2>${!researched?'<p class="wt-design-unavailable">Research required this game</p>':`<p>${powerCost(d.cost)}${compatible?'':' · Check factory type / modules'}</p>`}</div><div class="wt-card-actions">${button('PRODUCE',(native?`data-produce-template="${esc(d.id)}"`:`data-produce="${esc(d.id)}"`)+(compatible?'':' disabled'),'wt-primary')}${native?button('SAVE TO PHONE',`data-save-template="${esc(d.id)}"`,'wt-subtle'):''}${!native&&d.factoryTemplate?'<small>Saved on this phone</small>':''}</div></article>`;
   }
   function factoryProgress(f){if(polishedTowers)return towersFactoryProgress(f);return `${f.active?`<div class="wt-active-production"><span class="wt-live-dot"></span> ${esc(f.active.design.name)}</div>`:''}<ol class="wt-production-list">${f.queue.map(j=>`<li><b>${esc(j.design.name)}</b><span>${esc(j.status)}</span></li>`).join('')}</ol><p>${f.waitingReason?`WAITING: ${esc(f.waitingReason.kind.toUpperCase())} LIMIT ${f.waitingReason.current} / ${f.waitingReason.limit}`:f.active?`PRODUCING: ${esc(f.active.design.name)}`:f.idle?'IDLE':'PRODUCING FROM FACTORY CONTROLS'} · ${f.queue.length} queued</p>${f.waitingReason?'<p>Recycle an existing unit of this type to make room, or clear the waiting queue.</p>':''}${f.queue[0]?.status==='blocked'?`<p>${esc(reason(f.queue[0].reason))} ${button('RETRY',`data-retry-production="${f.id}"`)}</p>`:''}${f.queue.length?button('CLEAR WAITING QUEUE',`data-clear-production="${f.id}"`):''}`;}
   function compactSiteRow(j){
@@ -2024,6 +2048,7 @@
   } catch (_) {}
   loadSaved();resetDraft();
   window.__warzoneCommands={tower:true,setSize:applySize,open,toggle,toggleBuild,openFactory,handlePanelBack,productionStatus,recipeThumbnail,close,closeNative,beginPlacement,cancelPlacement,placeAt,previewAt,canLinePlace,beginLinePlacement,updateLinePlacement,endLinePlacement,cancelLinePlacement,send,accept,
+    reloadBlueprints:()=>{loadSaved();if(state.page==='saved'||state.page==='factory')render();},
     revealNativePause,resetSession:()=>{if(campaign||['ffa','challenge'].includes(window.__warzoneFfaConfig?.mode)){endBattle();state.session='';state.siteNumbers.clear();state.nativeClosePromise=null;state.exitPromise=null;}},
     navigationRevision:()=>state.navigationSerial,
     playersReport:()=>({open:state.page==='players',ready:Boolean(playersState.value),context:playersState.watch?.context||'',viewer:playersState.value?.viewer||null,nativeMenu:playersState.nativeMenu,pending:Boolean(playersState.pending),tab:playersState.tab,detailTab:playersState.detailTab,availableTabs:playersTabs(playersState.value),viewRevision:playersState.viewRevision}),

@@ -3,10 +3,14 @@ package com.rbabbit.blocknight.warzone;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Base64;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,7 +20,7 @@ final class BlueprintStore {
     static final int MAX_DESIGNS = 200;
     static final int MAX_DOCUMENT = 512 * 1024;
     private static final String KEY = "saved_designs_v1";
-    private static final String IMPORTED = "saved_designs_web_imported";
+    private static final String RECOVERED = "recovered_blueprint_keys_v2";
     private static final String EMPTY = "{\"version\":1,\"designs\":[]}";
     private static final Object LOCK = new Object();
     private final SharedPreferences preferences;
@@ -33,37 +37,93 @@ final class BlueprintStore {
         return preferences.getString(KEY, EMPTY);
     }
 
-    boolean importedLegacy() {
-        return preferences.getBoolean(IMPORTED, false);
+    boolean importLegacy(String document) {
+        return recover(document, false);
     }
 
-    boolean importLegacy(String legacy) {
+    boolean importNativeTemplates(String document) {
+        return recover(document, true);
+    }
+
+    private boolean recover(String document, boolean nativeTemplates) {
+        if (document == null || document.isEmpty()) return true;
+        if (document.length() > MAX_DOCUMENT) return false;
         synchronized (LOCK) {
-            if (importedLegacy()) return true;
             try {
-                JSONArray incoming = parse(legacy == null || legacy.isEmpty() ? EMPTY : legacy);
+                JSONObject source = new JSONObject(document);
+                if (source.optInt("version") != 1) return false;
+                JSONArray incoming = source.optJSONArray(nativeTemplates ? "templates" : "designs");
+                if (incoming == null) return nativeTemplates && !source.has("templates");
+                if (incoming.length() == 0) return true;
                 JSONArray current = parse(load());
-                Map<String, JSONObject> byId = new HashMap<>();
+                Set<String> known = new HashSet<>();
+                Set<String> recovered = new HashSet<>(preferences.getStringSet(RECOVERED, Collections.emptySet()));
                 for (int i = 0; i < current.length(); i++) {
-                    JSONObject design = current.getJSONObject(i);
-                    byId.put(design.getString("id"), design);
+                    known.add(recoveryKey(current.getJSONObject(i)));
                 }
+                boolean changed = false;
+                int length = encode(current).length();
                 for (int i = 0; i < incoming.length(); i++) {
-                    JSONObject design = incoming.getJSONObject(i);
-                    JSONObject existing = byId.get(design.getString("id"));
-                    if (existing != null) {
-                        if (existing.toString().equals(design.toString())) continue;
-                        design.put("id", "design-" + UUID.randomUUID());
+                    JSONObject design;
+                    String key;
+                    try {
+                        design = incoming.getJSONObject(i);
+                        if (nativeTemplates) design = fromNativeTemplate(design);
+                        validateDesign(design);
+                        key = recoveryKey(design);
+                    } catch (JSONException invalidDesign) {
+                        continue;
                     }
-                    current.put(design);
-                    byId.put(design.getString("id"), design);
+                    if (recovered.contains(key)) continue;
+                    if (!known.contains(key)) {
+                        if (nativeTemplates || indexOf(current, design.getString("id")) >= 0)
+                            design.put("id", "recovered-" + key);
+                        int added = design.toString().length() + (current.length() == 0 ? 0 : 1);
+                        if (current.length() >= MAX_DESIGNS || length + added > MAX_DOCUMENT) continue;
+                        current.put(design);
+                        known.add(key);
+                        length += added;
+                    }
+                    changed |= recovered.add(key);
                 }
-                // Commit the merged library and migration flag together. The
-                // legacy copy stays untouched and cannot resurrect deletions.
-                return preferences.edit().putString(KEY, encode(current)).putBoolean(IMPORTED, true).commit();
+                // Remember recovered records even after deletion. Keep every source intact.
+                return !changed || preferences.edit().putString(KEY, encode(current))
+                        .putStringSet(RECOVERED, recovered).commit();
             } catch (JSONException invalid) {
                 return false;
             }
+        }
+    }
+
+    private static JSONObject fromNativeTemplate(JSONObject template) throws JSONException {
+        String name = template.getString("name").replaceFirst("(?:\\s*·\\s*F\\d+)+$", "").trim();
+        JSONArray turrets = new JSONArray();
+        JSONArray weapons = template.optJSONArray("weapons");
+        if (weapons != null) {
+            for (int i = 0; i < weapons.length(); i++) turrets.put(weapons.get(i));
+        }
+        if (turrets.length() == 0) {
+            for (String field : new String[]{"construct", "repair", "brain", "ecm", "sensor"}) {
+                String part = template.optString(field, "");
+                if (part.isEmpty() || part.startsWith("ZNULL")) continue;
+                turrets.put(part);
+                break;
+            }
+        }
+        return new JSONObject().put("id", "native").put("name", name)
+                .put("body", template.get("body")).put("propulsion", template.get("propulsion"))
+                .put("turrets", turrets).put("factoryTemplate", true);
+    }
+
+    private static String recoveryKey(JSONObject design) throws JSONException {
+        String name = design.getString("name").replaceFirst("(?:\\s*·\\s*F\\d+)+$", "").trim();
+        JSONArray parts = new JSONArray().put(name).put(design.getString("body"))
+                .put(design.getString("propulsion")).put(design.getJSONArray("turrets"));
+        try {
+            byte[] hash = MessageDigest.getInstance("SHA-256").digest(parts.toString().getBytes(StandardCharsets.UTF_8));
+            return Base64.encodeToString(hash, Base64.URL_SAFE | Base64.NO_PADDING | Base64.NO_WRAP);
+        } catch (NoSuchAlgorithmException unavailable) {
+            throw new IllegalStateException(unavailable);
         }
     }
 

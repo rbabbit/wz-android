@@ -14,8 +14,8 @@ android {
         applicationId = "com.rbabbit.warzonetowers.lab"
         minSdk = 26
         targetSdk = 36
-        versionCode = if (playStoreBuild) 139 else 138
-        versionName = if (playStoreBuild) "0.99.39" else "0.99.38"
+        versionCode = 144
+        versionName = "0.99.44"
         buildConfigField("boolean", "PLAY_STORE_BUILD", playStoreBuild.toString())
         resValue("string", "play_games_application_id", playGamesApplicationId)
     }

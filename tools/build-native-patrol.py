@@ -2,11 +2,14 @@
 
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
+import argparse
 import re
 import runpy
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / "vendor/native-patrol"
+PATROL_SOURCE = ROOT / "vendor/native-patrol/source"
+OUT = PATROL_SOURCE.parent
+STEERING = False
 BASE = ROOT / "vendor/native-093"
 ASSETS = ROOT / "app/src/main/assets"
 CACHES = {
@@ -33,10 +36,31 @@ void mobilePatrolForget(uint32_t id) { mobilePatrol.forget(id); }
     marker = f"    {repair}.frame({owner},{safe},repairDroids);"
     text = replace_once(text, marker, marker +
         f"\n    mobilePatrol.frame({owner} ? {combat}.context : std::string(), {safe}, repairDroids, {repair});")
+    if STEERING:
+        text = replace_once(text, "static MobilePatrol mobilePatrol;", '''static MobilePatrol mobilePatrol;
+#include "mobile-steering.h"
+static MobileSteering mobileSteering;''')
+        call = f"    mobilePatrol.frame({owner} ? {combat}.context : std::string(), {safe}, repairDroids, {repair});"
+        text = replace_once(text, call, call +
+            f"\n    mobileSteering.frame({owner} ? {combat}.context : std::string(), {safe}, repairDroids, {repair}, mobilePatrol);")
     return replace_once(text, json_anchor, json_anchor + '{"patrol",mobilePatrol.ack},')
 
 
 def patch_source(family, name, text):
+    if name == "droid.cpp":
+        anchor = '#include "campaigninfo.h"'
+        text = replace_once(text, anchor, anchor + '''
+#if defined(__EMSCRIPTEN__)
+#include "mobile-unit-loss.h"
+#endif
+''')
+        loss = '\t\t\tCONPRINTF(_("%s Lost!"), objInfo(psDroid));'
+        return replace_once(text, loss, '''#if defined(__EMSCRIPTEN__)
+\t\t\tif (!mobileUnitLossNotice(psDroid))
+#endif
+\t\t\t{
+\t''' + loss + '''
+\t\t\t}''')
     if name == "hci.cpp":
         return add_controller(text, "playing", "safe", "normalMobileRepairPolicyV93",
                               "normalMobileCombatPolicyV90", '{"repairPolicy",normalMobileRepairPolicyV93.snapshot()},')
@@ -64,7 +88,9 @@ def compile_object(job):
     cache = CACHES[family]
     source = OUT / "generated" / family / name
     source.parent.mkdir(parents=True, exist_ok=True)
-    patched = patch_source(family, name, (BASE / "source" / family / "src" / name).read_text())
+    original = (ROOT / "vendor/native-090/source/shared051/src/droid.cpp" if name == "droid.cpp"
+                else BASE / "source" / family / "src" / name)
+    patched = patch_source(family, name, original.read_text())
     # Shared and Towers hci sources are identical; compile the shared material
     # once per variant with its existing preprocessor flag.
     source = source.with_name(variant + "-" + name)
@@ -72,7 +98,7 @@ def compile_object(job):
     obj = OUT / "objects" / variant / (name + ".o")
     obj.parent.mkdir(parents=True, exist_ok=True)
     _, command = BUILD["compile_command"](cache, "src/" + name, source, obj)
-    include_dirs = [OUT / "source", BASE / "source/common", ROOT / "vendor/native-091/source/common",
+    include_dirs = [PATROL_SOURCE, BASE / "source/common", ROOT / "vendor/native-091/source/common",
                     ROOT / "vendor/native-090/source/common"]
     flags = [flag for path in include_dirs for flag in ("-iquote", str(path))]
     if variant == "towers":
@@ -92,6 +118,8 @@ def link(variant, objects):
         replacements[BUILD["target"](name)] = objects[family, name]
     name = "quickjs_backend.cpp" if variant == "multiplayer" else "hci.cpp"
     replacements[BUILD["target"](name)] = objects[variant, name]
+    if (variant, "droid.cpp") in objects:
+        replacements[BUILD["target"]("droid.cpp")] = objects[variant, "droid.cpp"]
     target = OUT / "raw" / variant
     target.mkdir(parents=True, exist_ok=True)
     cache = CACHES[family]
@@ -100,7 +128,7 @@ def link(variant, objects):
     print(f"Linked {variant}", flush=True)
 
 
-def integrate():
+def integrate(compact_loss):
     # Retain the active APK's asset indexes (including the 50 newer Towers
     # maps) and output hooks, using code only from the newly linked JS/WASM pair.
     aliases = {
@@ -131,6 +159,12 @@ def integrate():
             if variant == "multiplayer":
                 if not baseline.startswith(mp_prefix):
                     raise RuntimeError("Mobile network loader prefix changed")
+                if compact_loss:
+                    result = replace_once(result, stock_output,
+                        'var out=console.log.bind(console);'
+                        'var battleNoticeChannel=typeof BroadcastChannel=="function"?new BroadcastChannel("warzone-mp-unit-loss"):null;'
+                        'var err=(...args)=>{console.error(...args);const text=args.join(" ");'
+                        'if(text.startsWith("BNNOTICE:"))battleNoticeChannel?.postMessage(text);};var wasmBinary;')
                 result = replace_once(result, "if(flags&32){return-2}", "flags&=~32;")
                 result = replace_once(result, "preMain();readyPromiseResolve?.(Module);var noInitialRun=false;",
                     'preMain();Module["onRuntimeInitialized"]?.();readyPromiseResolve?.(Module);var noInitialRun=false;')
@@ -148,11 +182,24 @@ def integrate():
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--steering-output", type=Path, help="Build with army steering into a fresh output folder")
+    parser.add_argument("--compact-loss", action="store_true", help="Enable compact unit-loss notices in shared and multiplayer engines")
+    arguments = parser.parse_args()
+    if arguments.compact_loss and not arguments.steering_output:
+        parser.error("--compact-loss needs a fresh --steering-output folder")
+    if arguments.steering_output:
+        OUT = arguments.steering_output.resolve()
+        OUT.mkdir(parents=True, exist_ok=False)
+        STEERING = True
     jobs = [(variant, "offline", "hci.cpp") for variant in ("shared", "towers")]
     jobs.append(("multiplayer", "multiplayer", "quickjs_backend.cpp"))
     jobs.extend((family, family, name) for family in CACHES for name in ("order.cpp", "keybind.cpp"))
+    if arguments.compact_loss:
+        jobs.extend((variant, family, "droid.cpp") for variant, family in
+                    (("shared", "offline"), ("multiplayer", "multiplayer")))
     with ThreadPoolExecutor(max_workers=3) as pool:
         objects = dict(pool.map(compile_object, jobs))
     with ThreadPoolExecutor(max_workers=2) as pool:
         list(pool.map(lambda variant: link(variant, objects), ("shared", "towers", "multiplayer")))
-    integrate()
+    integrate(arguments.compact_loss)

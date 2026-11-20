@@ -1,8 +1,12 @@
-/* Non-blocking Towers notices. Native events remain the source of truth. */
+/* Non-blocking battle notices from the native engine. */
 (() => {
   'use strict';
-  if (window.WarzoneNotices || window.__warzoneDuelConfig?.mode === 'duel') return;
-  const doc = window.parent?.WarzoneHost ? window.parent.document : document;
+  if (window.WarzoneNotices) return;
+  const host = window.parent?.WarzoneHost ? window.parent : window;
+  const doc = host.document;
+  const multiplayer = window.__warzoneMultiplayerMode === true;
+  const unitLossOnly = multiplayer || window.__warzoneFfaMode === true
+    || window.__warzoneCampaignMode === true || window.__warzoneDuelConfig?.mode === 'duel';
   const seen = new Set();
   const logOffsets = new Map(), logPartials = new Map(), logDecoders = new Map();
   let timer = 0, lastTime = null, ended = false;
@@ -11,6 +15,8 @@
   style.textContent = `
     #wt-game-notice{position:fixed;left:10px;top:calc(var(--wt-command-top,56px) + 8px);z-index:2147483647;max-width:min(330px,calc(100vw - 190px));box-sizing:border-box;padding:9px 13px;border:1px solid #ffffff30;border-radius:6px;background:#080808;color:#fff;box-shadow:0 3px 12px #0005;pointer-events:none;font:14px/1.3 Towers,'Roboto Condensed',system-ui,sans-serif;overflow-wrap:anywhere}
     #wt-game-notice[hidden]{display:none}#wt-game-notice strong{display:block;color:#fff;font-weight:500}#wt-game-notice span{display:block;margin-top:3px;color:#fff;font:12px/1.3 system-ui,sans-serif}
+    #wt-game-notice[data-unit-loss]{left:auto;right:max(10px,env(safe-area-inset-right))}
+    #wt-game-notice[data-unit-loss] strong{font-weight:700}
     #wt-game-notice[data-research-topic]{pointer-events:auto;cursor:pointer}#wt-game-notice:focus-visible{outline:2px solid #8bd3cc;outline-offset:2px}
     @media(max-height:400px){#wt-game-notice{padding:6px 10px;font-size:12px}#wt-game-notice span{font-size:11px}}
   `;
@@ -21,9 +27,10 @@
   const title = doc.createElement('strong'), detail = doc.createElement('span');
   box.append(title, detail); doc.body.appendChild(box);
   function clear() { clearTimeout(timer); box.hidden = true; }
-  function show(text, description = '', topicId = '') {
+  function show(text, description = '', topicId = '', unitLost = false) {
     if (ended || window.__towersHtml?.isEnded?.() || window.__towersHtml?.report?.().phase === 'ended') return false;
     clearTimeout(timer);
+    box.toggleAttribute('data-unit-loss', unitLost);
     title.textContent = text; detail.textContent = description; detail.hidden = !description;
     if(topicId){box.setAttribute('data-research-topic',topicId);box.setAttribute('role','button');box.setAttribute('tabindex','0');box.setAttribute('aria-label',`${description}. Open Intelligence report`);}
     else {box.removeAttribute('data-research-topic');box.setAttribute('role','status');box.removeAttribute('tabindex');box.removeAttribute('aria-label');}
@@ -41,7 +48,8 @@
     return true;
   }
   function currentTimeAllows(time) {
-    const nativeTime = window.__warzoneTowersWaves?.report?.().snapshot?.gameTime;
+    const hud = window.__warzoneFfa || window.__warzoneCampaign || window.__warzoneDuel || window.__warzoneTowersWaves;
+    const nativeTime = multiplayer ? window.PcMultiplayerNative?.state?.gameTime : hud?.report?.().snapshot?.gameTime;
     const current = Number.isFinite(nativeTime) ? nativeTime : null;
     if (current === null) return true;
     if (lastTime !== null && current < lastTime) { seen.clear(); clear(); }
@@ -51,6 +59,7 @@
     return time <= current + 2000 && current <= time + 10000;
   }
   window.addEventListener('blocknight-research-completed', event => {
+    if (unitLossOnly) return;
     const value = event.detail;
     if (!value || Number(value.player) !== 0 || typeof value.name !== 'string' || !value.name.trim()) return;
     const time = Number(value.gameTime);
@@ -64,26 +73,32 @@
     show('Research complete', value.name, hasDefinition?(value.id||''):'');
   });
   function nativeNotice(value) {
-    if (ended || !value) return;
+    if (ended || !value || (unitLossOnly && value.kind !== 'unit-lost')) return;
     const time = Number(value.gameTime);
     if (!Number.isFinite(time) || time < 0 || !currentTimeAllows(time)) return;
+    const unitLost = value.kind === 'unit-lost';
     let text, key, description = '';
     if (value.kind === 'round') {
       const round = Number(value.round), total = Number(value.totalRounds);
       if (Number(value.player) !== 0 || !Number.isInteger(round) || !Number.isInteger(total)
           || round < 1 || total < round) return;
       text = `Round ${round} / ${total}`; key = `round:${round}:${total}:${time}`;
-    } else if (value.kind === 'unit-lost') {
-      if (value.player !== 0 || !Number.isInteger(value.id) || value.id <= 0
+    } else if (unitLost) {
+      const state = window.PcMultiplayerNative?.state;
+      if (multiplayer && (host.PcMultiplayerSession?.phase !== 'game' || state?.spectator
+          || state?.canIssueOrders === false || value.player !== state?.player)) return;
+      if (!Number.isInteger(value.player) || !Number.isInteger(value.id) || value.id <= 0
           || typeof value.name !== 'string' || !value.name.trim()
           || typeof value.constructor !== 'boolean' || typeof value.gameTime !== 'number') return;
       text = value.constructor ? 'Truck destroyed' : 'Unit destroyed';
-      description = value.name.trim(); key = `unit-lost:${value.id}:${time}`;
+      description = value.name.trim();
+      description = description.replace(/\s*·\s*F\d+$/u, '') || description;
+      key = `unit-lost:${value.id}:${time}`;
     } else if (value.kind === 'camera' && ['north','south','east','west'].includes(value.direction)) {
       text = `View aligned to ${value.direction[0].toUpperCase()}${value.direction.slice(1)}`;
       key = `camera:${value.direction}:${time}`;
     } else return;
-    if (remember(key) && show(text, description)) { nativeEvents++; lastNative = {...value}; }
+    if (remember(key) && show(text, description, '', unitLost)) { nativeEvents++; lastNative = {...value}; }
   }
   function engineText(text) {
     const marker = String(text).indexOf('BNNOTICE:');
@@ -92,7 +107,8 @@
     catch (_) { /* Unrelated native errors and malformed text keep their own route. */ }
   }
   window.addEventListener('blocknight-engine-output', event => engineText(event?.detail?.text || ''));
-  const channel = typeof BroadcastChannel === 'function' ? new BroadcastChannel('blocknight-engine-output') : null;
+  const channel = typeof BroadcastChannel === 'function'
+    ? new BroadcastChannel(multiplayer ? 'warzone-mp-unit-loss' : 'blocknight-engine-output') : null;
   channel?.addEventListener('message', event => engineText(event.data));
   function pollLogs() {
     if (ended) return;
@@ -116,10 +132,18 @@
       }
     } catch (_) { /* Runtime output remains active if a log is not ready. */ }
   }
-  const logTimer = typeof setInterval === 'function' ? setInterval(pollLogs,650) : 0;
-  window.addEventListener('warzone-battle-ended', () => {
+  const logTimer = multiplayer ? 0 : setInterval(pollLogs,650);
+  function end() {
+    if (ended) return;
     ended = true; seen.clear(); clear(); channel?.close();
-    if (typeof clearInterval === 'function') clearInterval(logTimer);
-  });
-  window.WarzoneNotices = {show, clear, report:()=>({shown,nativeEvents,lastNotice,lastNative,ended})};
+    clearInterval(logTimer);
+    if (multiplayer) { box.remove(); style.remove(); }
+  }
+  window.addEventListener('warzone-battle-ended', end, {once:true});
+  window.addEventListener('pagehide', end, {once:true});
+  function prepare(module) {
+    module.FS.mkdirTree('/tmp');
+    module.FS.writeFile('/tmp/warzone-mobile-unit-loss', '1');
+  }
+  window.WarzoneNotices = {show, clear, prepare, report:()=>({shown,nativeEvents,lastNotice,lastNative,ended})};
 })();

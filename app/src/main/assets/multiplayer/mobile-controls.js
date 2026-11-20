@@ -557,6 +557,14 @@
     window.__warzoneIntelligence?.close?.();return true;
   }
   function nativeSelectionBounds(){const b=bounds();return b?{left:b.left,top:b.top,right:b.right,bottom:b.bottom-24,radar:nativeRegions().radar||null}:null;}
+  function armySteeringState() {
+    const selection = window.PcMultiplayerNative?.state?.combatLock;
+    if (combatSuspended() || patrol.armed || patrol.pending || pendingCombatStop ||
+        !selection?.selectedIds?.some(id => selection.commandableIds?.includes(id))) return null;
+    const fs = (window.LaunchedModule || window.Module)?.FS;
+    const context = selection.context;
+    return fs && context ? {fs, context, bounds:nativeSelectionBounds()} : null;
+  }
   function nativeBoxSelect(left,top,right,bottom,add=false){
     const b=bounds(),view=window.PcMultiplayerNative?.state?.view;
     if(!game()||!ordersAllowed()||!b||!view||![view.width,view.height,left,top,right,bottom].every(Number.isFinite)||view.width<=0||view.height<=0||right<=left||bottom<=top||left<b.left||top<b.top||right>b.right||bottom>b.bottom)return Promise.resolve(false);
@@ -569,7 +577,7 @@
     return new Promise(resolve=>{const job={kind:'click',x,y,button,ctrl,resolve,nonce:++facadeSerial};if(!enqueue(job))resolve(false);});
   }
   window.__kalaWarzoneTouch={version:70,ready:true,report,releaseAll,resumeInput:pump,isGestureActive:()=>report().gestureActive,
-    nativeSelectionBounds,nativeBoxSelect,nativeWorldClick,nativeSelectVisibleTrucks,nativeMenuClick:(x,y,ctrl=false)=>nativeWorldClick(x,y,ctrl),
+    nativeSelectionBounds,nativeBoxSelect,nativeWorldClick,nativeSelectVisibleTrucks,armySteeringState,nativeMenuClick:(x,y,ctrl=false)=>nativeWorldClick(x,y,ctrl),
     nativeUiClick:(x,y)=>nativeWorldClick(x,y),nativeClick:(x,y,button=0)=>nativeWorldClick(x,y,false,button),
     nativeSelectClick:(x,y,add=false)=>{manualSelectionRevision++;return nativeWorldClick(x,y,add);},
     queuedClick:(x,y)=>nativeWorldClick(x,y,true),nativeMove:(x,y,buttons=0)=>worldReady()&&(ordersAllowed()||buttons===0)&&mouse('pointermove',{x,y},-1,buttons),

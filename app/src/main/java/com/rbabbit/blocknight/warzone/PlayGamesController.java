@@ -353,7 +353,7 @@ public final class PlayGamesController {
         long token=generation; String owner=playerId; busy=true;
         confirm(token,owner,"Back up to Google Play Games?",
                 "Upload this device’s local progress to your connected account? This replaces that account’s existing manual backup.",
-                "Upload backup",()->verifyIdentity(token,owner,()->{
+                "Upload backup",()->verifyIdentity(token,owner,()->prepareBlueprints(token,owner,()->{
                     message("Preparing your backup…");
                     io.execute(()->{
                         try {
@@ -370,13 +370,20 @@ public final class PlayGamesController {
                             });
                         } catch (Exception error) { activity.runOnUiThread(()->failure(token,"Could not prepare a backup within the 3 MB cloud limit. Local progress is unchanged.")); }
                     });
-                }));
+                })));
     }); }
     public void restoreBackup() { activity.runOnUiThread(()->{
         if (!ready()) return;
         long token=generation; String owner=playerId; busy=true;
-        verifyIdentity(token,owner,()->open(token,owner,false,null));
+        verifyIdentity(token,owner,()->prepareBlueprints(token,owner,()->open(token,owner,false,null)));
     }); }
+    private void prepareBlueprints(long token, String owner, Runnable action) {
+        LegacyBlueprintImport.prepare(activity, ok->{
+            if (!live(token,owner)) return;
+            if (ok) action.run();
+            else failure(token,"Could not read the existing blueprint library. Local progress is unchanged.");
+        });
+    }
     private void open(long token, String owner, boolean upload, byte[] bytes) {
         if (!live(token,owner)) return;
         message(upload?"Opening your cloud backup…":"Loading your cloud backup…");

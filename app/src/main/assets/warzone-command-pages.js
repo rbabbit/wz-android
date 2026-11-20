@@ -7,6 +7,10 @@
   const campaign = window.__warzoneCampaignMode === true || (typeof location !== 'undefined' && typeof URLSearchParams === 'function' && new URLSearchParams(location.search).get('mode') === 'campaign');
   const polishedTowers = window.__warzoneDuelConfig?.mode !== 'duel';
   const powerSymbol = polishedTowers ? '\u26a1\ufe0e' : '\u26a1';
+  const blueprintBridge = window.BlockNightAndroid?.loadDesigns ? window.BlockNightAndroid
+    : window.AndroidMultiplayer?.loadDesigns ? window.AndroidMultiplayer : null;
+  const blueprintStorageKey = 'wt-designs-v1';
+  const blueprintLimit = 200;
   const PATH = (campaign ? '/data/base/script/campaign/mobile/' : '/data/mp/multiplay/script/rules/') + 'warzone-towers-command.json';
   const state = {page:'',catalog:null,snapshot:null,pending:new Map(),serial:0,writes:0,acks:0,
     timeouts:0,lastWrite:0,lastPoll:0,nativeMenu:'',history:[],placement:null,session:'',category:'DEFENCES',search:'',buildChoice:'',buildOpen:false,siteChecks:0,cancelSerial:0,nativeHudHidden:false,pendingItem:'',designStep:'body',designSearch:'',nativeItem:'',
@@ -59,16 +63,35 @@
     timeout:'No reply yet. Your command is kept; Retry uses the same order.',
     'engine-rejected':'Warzone rejected this command. Your other queued orders were kept.'}[code] || String(code||''));
 
-  function loadSaved(){
-    try { const value=JSON.parse(window.BlockNightAndroid?.loadDesigns?.() || localStorage.getItem('wt-designs-v1') || '{}');
-      state.saved=Array.isArray(value.designs)?value.designs.filter(d=>d&&d.id&&d.name&&d.body&&d.propulsion&&Array.isArray(d.turrets)&&d.turrets.length>0&&d.turrets.length<=3).slice(0,100):[];
-      state.size=Number(localStorage.getItem('wt-command-size'))||1;
-    } catch (_) {state.saved=[];}
+  function readLibrary(data) {
+    const value = JSON.parse(data || '{}');
+    return Array.isArray(value.designs) ? value.designs.filter(d=>
+      d && d.id && d.name && d.body && d.propulsion && Array.isArray(d.turrets) &&
+      d.turrets.length > 0 && d.turrets.length <= 3).slice(0,blueprintLimit) : [];
   }
-  function persist(){
-    const json=JSON.stringify({version:1,designs:state.saved});
-    try {if(window.BlockNightAndroid?.saveDesigns)return window.BlockNightAndroid.saveDesigns(json)===true;
-      localStorage.setItem('wt-designs-v1',json);return true;}catch(_){return false;}
+  function loadSaved() {
+    try {
+      state.saved = readLibrary(blueprintBridge ? blueprintBridge.loadDesigns() : localStorage.getItem(blueprintStorageKey));
+    } catch (_) {}
+  }
+  function persistDesign(id, design) {
+    try {
+      if (blueprintBridge) {
+        const document = design ? blueprintBridge.writeDesign(JSON.stringify(design)) : blueprintBridge.deleteDesign(id);
+        if (!document) return false;
+        state.saved = readLibrary(document);
+      } else {
+        const designs = readLibrary(localStorage.getItem(blueprintStorageKey));
+        const index = designs.findIndex(item=>item.id===id);
+        if (design) {
+          if (index < 0 && designs.length >= blueprintLimit) return false;
+          designs[index < 0 ? designs.length : index] = design;
+        } else if (index >= 0) designs.splice(index,1);
+        localStorage.setItem(blueprintStorageKey,JSON.stringify({version:1,designs}));
+        state.saved = designs;
+      }
+      return true;
+    } catch (_) { return false; }
   }
   function send(action,data={},options={}){
     if(window.__towersHtml?.isEnded?.())return Promise.resolve({action,ok:false,reason:'battle-ended'});
@@ -383,6 +406,7 @@
       new host.MutationObserver(watch).observe(strip,{childList:true});watch();host.addEventListener('resize',schedule);doc.fonts?.ready.then(schedule);doc.fonts?.addEventListener('loadingdone',schedule);}
   }
   function openFactory(id){
+    loadSaved();
     const factory=state.snapshot?.factories.find(f=>f.id===Number(id)&&f.ready);
     if(!polishedTowers||!factory)return false;
     state.factory=factory.id;open('factory');return true;
@@ -407,6 +431,7 @@
   }
   function toggleBuild(){return toggle('build');}
   function open(page='build'){
+    if(page==='saved'||page==='design'||page==='factory')loadSaved();
     finishDesignRename(false,false);
     if(campaign&&window.__warzoneCampaign?.nativeUiActive?.()){window.__warzoneCampaign.revealNativeUi();return false;}
     cancelDemolish();
@@ -747,12 +772,11 @@
   function saveTemplate(id){
     const template=state.snapshot?.templates.find(t=>t.id===id);if(!template)return;
     if(state.saved.some(d=>templateParts(d)===templateParts(template))){notify('This template is already saved on your phone.');return;}
-    if(state.saved.length>=100){notify('The library holds 100 designs. Delete a design first.');return;}
+    if(state.saved.length>=blueprintLimit){notify('The blueprint library is full. Delete a design first.');return;}
     const turrets=templateEquipment(template);if(!template.body||!template.propulsion||!turrets.length||turrets.length>3){notify('This template cannot be saved.');return;}
     const name=String(template.fullname||template.name||'Unit template').replace(/(?: · F\d+)+$/,'').replace(/[\x00-\x1f]/g,' ').trim().slice(0,48);
     const design={id:`design-${Date.now()}-${++state.serial}`,name,body:template.body,propulsion:template.propulsion,turrets,cost:Number(template.cost)||0,points:Number(template.points)||0,droidType:template.droidType,factoryTemplate:true};
-    const before=state.saved.slice();state.saved.push(design);
-    if(!persist()){state.saved=before;notify('Could not save this template on your phone.');return;}
+    if(!persistDesign(design.id,design)){notify('Could not save this template on your phone.');return;}
     notify('Template saved on your phone. Available in BLUEPRINTS between games.');render();
   }
   function renderFactory(){
@@ -1886,15 +1910,13 @@
     readDraft();const sourceId=state.draft.id;if(state.saving.has(sourceId)||!state.validation?.ok||campaign&&state.snapshot?.hasHQ===false)return;
     const draft=payload(JSON.parse(JSON.stringify(state.draft))),version=state.validationSerial,context=state.designContextSerial;
     if(asNew)draft.id=`design-${Date.now()}-${++state.serial}`;
-    if(!state.saved.some(d=>d.id===draft.id)&&state.saved.length>=100){notify('The library holds 100 designs. Delete a design first.');return;}
+    if(!state.saved.some(d=>d.id===draft.id)&&state.saved.length>=blueprintLimit){notify('The blueprint library is full. Delete a design first.');return;}
     state.saving.add(sourceId);designStatus();
     send('save-design',{design:draft}).then(r=>{
       if(campaign&&context!==state.designContextSerial)return;
       if(!r.ok){notify(reason(r.reason));return;}
       const d={...r.result,id:draft.id};delete d.native;
-      const before=state.saved.slice(),index=state.saved.findIndex(v=>v.id===d.id);
-      if(index>=0)state.saved[index]=d;else state.saved.push(d);
-      if(!persist()){state.saved=before;notify('Could not save to this device. Try again.');return;}
+      if(!persistDesign(d.id,d)){notify('Could not save to this device. Try again.');return;}
       if(version===state.validationSerial&&sourceId===state.draft.id&&state.page==='design'){resetDraft(d);open('saved');}else if(state.page==='saved')render();
     }).finally(()=>{if(campaign&&context!==state.designContextSerial)return;state.saving.delete(sourceId);designStatus();});
   }
@@ -1935,7 +1957,7 @@
     else if(d.edit){const saved=state.saved.find(s=>s.id===d.edit);if(saved){resetDraft(saved);open('design');validateDraft();}}
     else if(d.delete){state.deletePending=d.delete;if(polishedTowers)state.libraryReveal={id:d.delete,focus:'[data-cancel-delete]'};render();if(!polishedTowers){const c=element('wt-page-content'),b=c?.querySelector('[data-cancel-delete]');if(b)c.scrollTop+=Math.max(0,b.getBoundingClientRect().bottom-c.getBoundingClientRect().bottom);}}
     else if(d.cancelDelete){state.deletePending='';if(polishedTowers)state.libraryReveal={id:d.cancelDelete,focus:'[data-delete]'};render();}
-    else if(d.confirmDelete){const before=state.saved.slice(),index=state.saved.findIndex(s=>s.id===d.confirmDelete);state.saved=state.saved.filter(s=>s.id!==d.confirmDelete);state.deletePending='';if(!persist()){state.saved=before;notify('Could not delete from this device. Your design was kept.');}if(polishedTowers)state.libraryReveal={id:state.saved[Math.min(index,state.saved.length-1)]?.id,focus:'[data-delete]'};render();}
+    else if(d.confirmDelete){const index=state.saved.findIndex(s=>s.id===d.confirmDelete);state.deletePending='';if(!persistDesign(d.confirmDelete,null))notify('Could not delete from this device. Your design was kept.');if(polishedTowers)state.libraryReveal={id:state.saved[Math.min(index,state.saved.length-1)]?.id,focus:'[data-delete]'};render();}
     else if(d.produceDesign){state.selected=d.produceDesign;const design=state.saved.find(s=>s.id===d.produceDesign),factories=state.snapshot.factories.filter(f=>f.ready&&designFitsFactory(design,f));if(!factories.some(f=>f.id===state.factory)&&factories.length)state.factory=factories[0].id;open('factory');}
     else if(d.saveTemplate){saveTemplate(d.saveTemplate);}
     else if(d.produce||d.produceTemplate){
@@ -1996,6 +2018,10 @@
   }
   window.addEventListener('warzone-battle-ended',endBattle);
   window.addEventListener('warzone-build-display-ready',()=>{updateSidebarQueue();const line=state.lineDrafts.get(state.linePreviewToken);if(line)paintLine(line);else if(state.placement&&state.previewPoint)window.WarzoneBuildDisplay.preview(state.placement,state.previewPoint);});
+  try {
+    blueprintBridge?.importLegacyDesigns?.(localStorage.getItem(blueprintStorageKey) ?? '');
+    state.size=Number(localStorage.getItem('wt-command-size'))||1;
+  } catch (_) {}
   loadSaved();resetDraft();
   window.__warzoneCommands={tower:true,setSize:applySize,open,toggle,toggleBuild,openFactory,handlePanelBack,productionStatus,recipeThumbnail,close,closeNative,beginPlacement,cancelPlacement,placeAt,previewAt,canLinePlace,beginLinePlacement,updateLinePlacement,endLinePlacement,cancelLinePlacement,send,accept,
     revealNativePause,resetSession:()=>{if(campaign||['ffa','challenge'].includes(window.__warzoneFfaConfig?.mode)){endBattle();state.session='';state.siteNumbers.clear();state.nativeClosePromise=null;state.exitPromise=null;}},

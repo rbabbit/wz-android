@@ -470,6 +470,15 @@
       radar:window.__warzoneCommands?.nativeHudHidden?.()?null:{left:cx-rw/2-3,top:cy-rh/2-3,right:cx+rw/2+3,bottom:cy+rh/2+3}};
   }
 
+  function armySteeringState() {
+    const selection = combatPacket?.combatSelection;
+    if (combatSuspended() || mobilePatrol.armed || mobilePatrol.pending || state.stopNonce ||
+        !selection?.selectedIds?.some(id => selection.commandableIds?.includes(id))) return null;
+    const fs = combatWorld?.module?.FS;
+    const context = combatWorld?.context;
+    return fs && context ? {fs, context, bounds:nativeSelectionBounds()} : null;
+  }
+
   function tapNormalized(normalizedX, normalizedY) {
     const target = canvas();
     if (!target) return false;
@@ -3358,7 +3367,7 @@
     jumpToBase,
     nativeClick: (x, y, button = 0) => click(button, x, y),
     nativeSelectClick: (x,y,add=false)=>{state.manualSelectionRevision += 1;cancelConstructorSelection();return click(0,x,y,add);},
-    nativeWorldClick,nativeBoxSelect,nativeSelectionBounds,nativeSelectVisibleTrucks,
+    nativeWorldClick,nativeBoxSelect,nativeSelectionBounds,nativeSelectVisibleTrucks,armySteeringState,
     isBattlefieldPoint,
     nativeMenuClick,
     nativeUiClick,

@@ -37,10 +37,13 @@ final class PlayGamesBackupStore {
     private static final int EXPANDED_LIMIT = 64 * 1024 * 1024;
     private static final int ENTRY_LIMIT = 34 * 1024 * 1024, ENTRY_COUNT = 512;
     private static final String FORMAT = "warzone-single-player-backup", WALLET = "prefs/towers_rewards.json";
+    private static final String BLUEPRINTS = "prefs/tank_blueprints.json";
+    private static final int BLUEPRINT_BYTES = BlueprintStore.MAX_DOCUMENT * 3;
     private static final List<String> MODES = Arrays.asList("towers", "campaign", "ffa", "survival", "challenge");
     private final Context context;
     private final File root, backups, journal;
     private final SharedPreferences rewards;
+    private final BlueprintStore blueprints;
 
     PlayGamesBackupStore(Context context) {
         this.context = context.getApplicationContext();
@@ -48,6 +51,7 @@ final class PlayGamesBackupStore {
         backups = new File(root, "play-games-backups");
         journal = new File(backups, "restore-pending.json");
         rewards = this.context.getSharedPreferences("towers_rewards", Context.MODE_PRIVATE);
+        blueprints = new BlueprintStore(this.context);
     }
 
     synchronized byte[] exportBackup() throws Exception {
@@ -99,7 +103,10 @@ final class PlayGamesBackupStore {
             if (path.contains("-saved-games/")) saves++;
             if (path.endsWith(".entry.json")) maps++;
         }
-        return saves + " saved games · " + maps + " downloaded maps · Crystals and progress";
+        byte[] designs = entries.get(BLUEPRINTS);
+        String library = designs == null ? "" :
+            " · " + BlueprintStore.parse(new String(designs, StandardCharsets.UTF_8)).length() + " blueprints";
+        return saves + " saved games · " + maps + " downloaded maps" + library + " · Crystals and progress";
     }
 
     /** Recover an interrupted replacement before the caller opens a battle or reads the wallet. */
@@ -128,6 +135,7 @@ final class PlayGamesBackupStore {
         }
         JSONObject wallet = new JSONObject().put("ledger_v1", rewards.contains("ledger_v1") ? rewards.getString("ledger_v1", null) : JSONObject.NULL);
         entries.put(WALLET, wallet.toString().getBytes(StandardCharsets.UTF_8));
+        entries.put(BLUEPRINTS, blueprints.load().getBytes(StandardCharsets.UTF_8));
         checkBounds(entries);
         return entries;
     }
@@ -167,6 +175,8 @@ final class PlayGamesBackupStore {
         JSONObject wallet = new JSONObject(new String(entries.get(WALLET), StandardCharsets.UTF_8));
         if (wallet.length() != 1 || !wallet.has("ledger_v1")) throw new IOException("The backup wallet is incomplete.");
         if (!wallet.isNull("ledger_v1")) RewardStore.validateBackup(wallet.getString("ledger_v1"));
+        if (entries.containsKey(BLUEPRINTS))
+            BlueprintStore.parse(new String(entries.get(BLUEPRINTS), StandardCharsets.UTF_8));
         Context staged = new ContextWrapper(context) {
             @Override public File getFilesDir() { return stage; }
             @Override public Context getApplicationContext() { return this; }
@@ -228,7 +238,8 @@ final class PlayGamesBackupStore {
                 String name = entry.getName();
                 if (entry.isDirectory() || !("manifest.json".equals(name) || allowed(name)) || entries.containsKey(name) || entries.size() > ENTRY_COUNT)
                     throw new IOException("The cloud backup contains unsupported or repeated files.");
-                int available = (int)Math.min("manifest.json".equals(name) ? 256 * 1024 : ENTRY_LIMIT, EXPANDED_LIMIT + 256 * 1024L - expanded);
+                int limit = "manifest.json".equals(name) ? 256 * 1024 : BLUEPRINTS.equals(name) ? BLUEPRINT_BYTES : ENTRY_LIMIT;
+                int available = (int)Math.min(limit, EXPANDED_LIMIT + 256 * 1024L - expanded);
                 byte[] data = read(zip, available);
                 expanded += data.length;
                 if (expanded > EXPANDED_LIMIT + 256 * 1024) throw tooLarge();
@@ -283,6 +294,10 @@ final class PlayGamesBackupStore {
         requireAllowed(stillAllowed);
         if (!editor.commit()) throw new IOException("The restored wallet could not be saved.");
         requireAllowed(stillAllowed);
+        // Archives made before blueprint backup leave the local library intact.
+        if (entries.containsKey(BLUEPRINTS))
+            blueprints.restore(new String(entries.get(BLUEPRINTS), StandardCharsets.UTF_8));
+        requireAllowed(stillAllowed);
     }
 
     private File stage(Map<String, byte[]> entries) throws Exception {
@@ -336,7 +351,7 @@ final class PlayGamesBackupStore {
     }
 
     private static boolean allowed(String name) {
-        if (WALLET.equals(name)) return true;
+        if (WALLET.equals(name) || BLUEPRINTS.equals(name)) return true;
         for (String mode : MODES) if (name.matches("files/" + mode + "-saved-games/wt_[a-f0-9]{32}\\.zip")) return true;
         return name.matches("files/downloaded-maps/(?:download-[a-f0-9]{64}\\.wz|[a-f0-9]{64}\\.entry\\.json)");
     }
@@ -345,7 +360,8 @@ final class PlayGamesBackupStore {
         if (!entries.containsKey(WALLET) || entries.size() > ENTRY_COUNT) throw new IOException("The backup is incomplete or contains too many files.");
         long size = 0;
         for (Map.Entry<String, byte[]> entry : entries.entrySet()) {
-            if (!allowed(entry.getKey()) || entry.getValue().length > ENTRY_LIMIT) throw new IOException("Unsupported backup file.");
+            int limit = BLUEPRINTS.equals(entry.getKey()) ? BLUEPRINT_BYTES : ENTRY_LIMIT;
+            if (!allowed(entry.getKey()) || entry.getValue().length > limit) throw new IOException("Unsupported backup file.");
             size += entry.getValue().length;
         }
         if (size > EXPANDED_LIMIT) throw tooLarge();

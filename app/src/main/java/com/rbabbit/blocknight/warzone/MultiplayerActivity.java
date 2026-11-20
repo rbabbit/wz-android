@@ -101,6 +101,7 @@ public final class MultiplayerActivity extends Activity {
   private FrameLayout root;
   private View.OnLayoutChangeListener viewportListener;
   private SharedPreferences playerPreferences;
+  private BlueprintStore blueprints;
   private String savedPlayerName = DEFAULT_PLAYER_NAME;
   private final Object playerProfileLock = new Object();
   private boolean engineViewportActive;
@@ -155,6 +156,7 @@ public final class MultiplayerActivity extends Activity {
     getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
     playerPreferences = getSharedPreferences(PLAYER_PROFILE, MODE_PRIVATE);
+    blueprints = new BlueprintStore(this);
     restorePlayerName();
     musicPreferences = getSharedPreferences(MUSIC_PROFILE, MODE_PRIVATE);
     musicStore = new MusicPackStore(this);
@@ -363,7 +365,8 @@ public final class MultiplayerActivity extends Activity {
 
   private static boolean sharedRenderer(String path) {
     return "warzone-command-pages.js".equals(path) || "warzone-mobile-research.js".equals(path)
-        || "warzone-terrain-picker.js".equals(path) || "warzone-intelligence.js".equals(path);
+        || "warzone-terrain-picker.js".equals(path) || "warzone-intelligence.js".equals(path)
+        || "warzone-towers-notices.js".equals(path);
   }
 
   private static boolean sharedUiAsset(String path) {
@@ -382,6 +385,11 @@ public final class MultiplayerActivity extends Activity {
   }
 
   public final class Navigation {
+    @JavascriptInterface public String loadDesigns() { return blueprints.load(); }
+    @JavascriptInterface public boolean importLegacyDesigns(String data) { return blueprints.importLegacy(data); }
+    @JavascriptInterface public String writeDesign(String data) { return blueprints.write(data); }
+    @JavascriptInterface public String deleteDesign(String id) { return blueprints.delete(id); }
+
     @JavascriptInterface public void setSessionActive(boolean active) {
       // This bridge call completes before the joining script proceeds. Back
       // must never wait for a JS callback behind a busy native engine frame.

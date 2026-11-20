@@ -1,6 +1,8 @@
 package com.rbabbit.blocknight.warzone;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -12,6 +14,9 @@ import android.graphics.Path;
 import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.Typeface;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.InsetDrawable;
+import android.graphics.drawable.RippleDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.text.TextPaint;
@@ -27,6 +32,7 @@ import android.view.ViewConfiguration;
 import android.view.ViewTreeObserver;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.webkit.WebView;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.OverScroller;
 import androidx.core.graphics.PathParser;
@@ -61,6 +67,9 @@ final class BattleControls extends FrameLayout {
   private final WebView web;
   private final Consumer<String> evaluateHost;
   private final SparseArray<CommandButton> buttons = new SparseArray<>();
+  private final ArmySteeringPad steeringPad;
+  private final Button steeringSizeButton;
+  private final SharedPreferences controlPreferences;
   private final LruCache<String, IconAsset> icons = new LruCache<>(16 * 1024 * 1024) {
     @Override protected int sizeOf(String key, IconAsset value) {
       return value.bitmap == null ? 8192 : value.bitmap.getAllocationByteCount();
@@ -85,6 +94,7 @@ final class BattleControls extends FrameLayout {
   private int horizontalScroller, verticalScroller, scrollTarget;
   private float touchX, touchY, previousX, previousY;
   private boolean scrolling, scrollHorizontally;
+  private boolean steeringSizeRevealed;
   private MotionEvent buildDown;
   private boolean buildDragging, buildDispatched;
   private VelocityTracker dragVelocity;
@@ -117,6 +127,13 @@ final class BattleControls extends FrameLayout {
     this.web = web;
     this.evaluateHost = evaluateHost;
     this.script = script;
+    controlPreferences = context.getSharedPreferences("battle_controls", Context.MODE_PRIVATE);
+    steeringPad = new ArmySteeringPad(context, this::evaluate, this::revealSteeringSize);
+    steeringPad.setVisibility(GONE);
+    addView(steeringPad, new FrameLayout.LayoutParams(1, 1));
+    steeringSizeButton = createSteeringSizeButton(context);
+    steeringSizeButton.setVisibility(GONE);
+    addView(steeringSizeButton, new FrameLayout.LayoutParams(1, 1));
     touchConfig = ViewConfiguration.get(context);
     fling = new OverScroller(context);
     setClipChildren(true);
@@ -146,8 +163,9 @@ final class BattleControls extends FrameLayout {
     finishBuildTouch(true);
     stopFling();
     releaseDragVelocity();
+    hideSteeringPad();
+    for (int i = 0; i < buttons.size(); i++) removeView(buttons.valueAt(i));
     buttons.clear();
-    removeAllViews();
     setVisibility(INVISIBLE);
     scrollTarget = 0;
     scrolling = false;
@@ -179,6 +197,7 @@ final class BattleControls extends FrameLayout {
   private boolean syncGeometry() {
     boolean shown = web.isShown() && (buttons.size() > 0 || buildDragging);
     if (snapshot == null || !web.isShown() || getWidth() <= 0 || getHeight() <= 0) {
+      hideSteeringPad();
       int visibility = shown ? VISIBLE : INVISIBLE;
       if (getVisibility() != visibility) setVisibility(visibility);
       return true;
@@ -196,10 +215,118 @@ final class BattleControls extends FrameLayout {
     if (!viewport.equals(geometry)) {
       viewport = geometry;
       updateButtons(snapshot.optJSONArray("buttons"));
+      updateSteeringPad(snapshot.optJSONArray("steering"));
     }
-    int visibility = buttons.size() > 0 || buildDragging ? VISIBLE : INVISIBLE;
+    int visibility = buttons.size() > 0 || buildDragging || steeringPad.getVisibility() == VISIBLE ? VISIBLE : INVISIBLE;
     if (getVisibility() != visibility) setVisibility(visibility);
     return true;
+  }
+
+  private void hideSteeringPad() {
+    steeringPad.stop();
+    steeringSizeRevealed = false;
+    if (steeringPad.getVisibility() != GONE) steeringPad.setVisibility(GONE);
+    if (steeringSizeButton.getVisibility() != GONE) steeringSizeButton.setVisibility(GONE);
+  }
+
+  private Button createSteeringSizeButton(Context context) {
+    Button button = new Button(context);
+    button.setAllCaps(false);
+    button.setTextSize(18);
+    button.setTextColor(0xFFF0E8CD);
+    button.setPadding(0, 0, 0, 0);
+    button.setMinimumWidth(0);
+    button.setMinimumHeight(0);
+    button.setStateListAnimator(null);
+    button.setBackgroundTintList(null);
+    GradientDrawable face = new GradientDrawable();
+    face.setShape(GradientDrawable.OVAL);
+    face.setColor(0xEB131615);
+    face.setStroke(1, 0xFF747874);
+    RippleDrawable ripple = new RippleDrawable(ColorStateList.valueOf(0x40FFFFFF), face, null);
+    button.setBackground(new InsetDrawable(ripple, steeringDp(10)));
+    button.setOnClickListener(view -> {
+      steeringPad.stop();
+      boolean enlarged = controlPreferences.getBoolean("large_army_steering", false);
+      controlPreferences.edit().putBoolean("large_army_steering", !enlarged).apply();
+      steeringSizeRevealed = false;
+      if (snapshot != null) updateSteeringPad(snapshot.optJSONArray("steering"));
+    });
+    return button;
+  }
+
+  private void revealSteeringSize() {
+    if (snapshot == null || !steeringPad.isShown()) return;
+    steeringSizeRevealed = true;
+    updateSteeringPad(snapshot.optJSONArray("steering"));
+  }
+
+  private int steeringDp(int value) {
+    return Math.round(value * getResources().getDisplayMetrics().density);
+  }
+
+  private void updateSteeringPad(JSONArray bounds) {
+    RectF box = rect(bounds);
+    if (box.isEmpty()) {
+      hideSteeringPad();
+      return;
+    }
+    int right = Math.round(box.right * scaleX + offsetX);
+    int bottom = Math.round(box.bottom * scaleY + offsetY);
+    int width = Math.round(box.width() * scaleX);
+    int height = Math.round(box.height() * scaleY);
+    int buttonSize = steeringDp(48);
+    if (right - width < 0 || bottom - height < 0 || width <= 0 || height <= 0 ||
+        right > getWidth() || bottom > getHeight()) {
+      hideSteeringPad();
+      return;
+    }
+    boolean enlarged = controlPreferences.getBoolean("large_army_steering", false);
+    if (enlarged) {
+      float factor = Math.max(1f, Math.min(1.45f,
+          Math.min((right - steeringDp(8)) / (float) width, (bottom - buttonSize - steeringDp(8)) / (float) height)));
+      width = Math.round(width * factor);
+      height = Math.round(height * factor);
+    }
+    int left = right - width;
+    int top = bottom - height;
+    FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) steeringPad.getLayoutParams();
+    if (params.leftMargin != left || params.topMargin != top || params.width != width || params.height != height) {
+      steeringPad.stop();
+      params.leftMargin = left;
+      params.topMargin = top;
+      params.width = width;
+      params.height = height;
+      steeringPad.setLayoutParams(params);
+    }
+    steeringPad.setVisibility(VISIBLE);
+
+    if (!steeringSizeRevealed && controlPreferences.contains("large_army_steering")) {
+      steeringSizeButton.setVisibility(GONE);
+      return;
+    }
+
+    int buttonLeft = Math.max(0, right - buttonSize);
+    int buttonTop = top - buttonSize;
+    if (buttonTop < 0 || buttonLeft + buttonSize > getWidth()) {
+      steeringSizeButton.setVisibility(GONE);
+      return;
+    }
+    FrameLayout.LayoutParams toggle = (FrameLayout.LayoutParams) steeringSizeButton.getLayoutParams();
+    if (toggle.leftMargin != buttonLeft || toggle.topMargin != buttonTop ||
+        toggle.width != buttonSize || toggle.height != buttonSize) {
+      toggle.leftMargin = buttonLeft;
+      toggle.topMargin = buttonTop;
+      toggle.width = buttonSize;
+      toggle.height = buttonSize;
+      steeringSizeButton.setLayoutParams(toggle);
+    }
+    String label = enlarged ? "−" : "+";
+    if (!label.contentEquals(steeringSizeButton.getText())) {
+      steeringSizeButton.setText(label);
+      steeringSizeButton.setContentDescription(enlarged ? "Use standard steering pad size" : "Enlarge steering pad");
+    }
+    steeringSizeButton.setVisibility(VISIBLE);
   }
 
   private void updateButtons(JSONArray items) {

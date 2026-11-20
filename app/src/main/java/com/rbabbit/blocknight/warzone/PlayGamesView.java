@@ -311,7 +311,7 @@ final class PlayGamesView extends FrameLayout {
     private void renderCloud() {
         contents.removeAllViews();sectionHeader("Your manual cloud backup");
         LinearLayout list=scrollingList();
-        list.addView(paragraph("Keep a copy of your saved games, Crystals and installed maps in your Google account."));
+        list.addView(paragraph("Keep a copy of your saved games, tank blueprints, Crystals and installed maps in your Google account."));
         addCloudCard(list,"Back up this device","Upload your current local progress to your account.","BACK UP",()->{
             controller.uploadBackup();refresh();
         });

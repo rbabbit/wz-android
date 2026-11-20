@@ -45,6 +45,7 @@
   byId('room-leave').hidden=!session.active||phase!=='room';
   if(!playing){if(byId('wt-field-centre'))byId('wt-field-centre').hidden=true;byId('wt-field-toggle')?.setAttribute?.('aria-expanded','false');}
   const w=child();if(w?.PcMultiplayerState)w.PcMultiplayerState.phase=phase;
+  if(!playing)w?.WarzoneNotices?.clear?.();
   w?.PcMultiplayerControls?.setPhase(phase);w?.WarzoneMapMusic?.setBattleActive?.(playing);renderOwnership();renderStatus();viewport();renderPower();
  }
  function renderOwnership(){
@@ -222,6 +223,7 @@
   generation++;session.active=false;roomSnapshot=null;globalThis.PcMultiplayerRoomUI?.reset?.();byId('transition').hidden=false;
   clearInterval(poll);clearTimeout(closeTimer);poll=null;closeTimer=null;
   child()?.PcMultiplayerControls?.releaseAll();child()?.WarzoneMapMusic?.dispose?.();
+  const engine=child();if(engine)engine.dispatchEvent(new engine.Event('warzone-battle-ended'));
   try{AndroidMultiplayer.closeConnections();}catch{}
   sockets.clear();frame?.remove();frame=null;byId('engine-host').replaceChildren();
   byId('engine-host').hidden=true;byId('setup').hidden=false;setPhase('lobby');

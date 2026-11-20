@@ -18,6 +18,9 @@
   const observedDocuments = new WeakSet();
   let sequence = 0, candidates = new Map(), scrollers = new Map(), previous = '', sampleFrame = 0;
   let buildScroll = null, buildSettleTimer = 0;
+  let steeringTarget = null, steeringSerial = 0;
+  const steeringPath = '/tmp/warzone-mobile-steering.json';
+  const steeringSession = 'steering-' + Date.now() + '-' + generation + '-';
   const n = value => parseFloat(value) || 0;
   const rect = (box, x = 0, y = 0) =>
     [box.left - x, box.top - y, box.right - x, box.bottom - y].map(v => Math.round(v * 100) / 100);
@@ -295,7 +298,8 @@
       id, node.scrollLeft, node.scrollWidth - node.clientWidth,
       node.scrollTop, node.scrollHeight - node.clientHeight,
     ]);
-    const payload = JSON.stringify({generation, width:innerWidth, height:innerHeight, buttons:visibleButtons, scrollBounds});
+    const payload = JSON.stringify({generation, width:innerWidth, height:innerHeight,
+      buttons:visibleButtons, scrollBounds, steering:steeringLayout()});
     if (payload === previous) return;
     previous = payload;
     AndroidBattleControls.postMessage(payload);
@@ -396,10 +400,65 @@
     scheduleSample();
   }
 
+  function steeringState() {
+    if (document.hidden || new URLSearchParams(location.search).has('replay')) return null;
+    const frame = document.getElementById('warzone-game-frame');
+    if (frame && !visible(frame, frame.getBoundingClientRect())) return null;
+    const game = frame?.contentWindow || window;
+    const state = game.__kalaWarzoneTouch?.armySteeringState?.();
+    return state?.bounds ? {...state, frame} : null;
+  }
+
+  function steeringLayout() {
+    const state = steeringState();
+    if (steeringTarget && (steeringTarget.context !== state?.context || steeringTarget.fs !== state?.fs))
+      stopSteering();
+    if (!state) return null;
+    const {left, top, right, bottom, radar} = state.bounds;
+    const size = Math.round(Math.min(104, (bottom - top) * 0.22));
+    if (size < 46) return null;
+    const x = Math.min(right - size - 12, (radar?.left ?? right) - size - 12);
+    const y = Math.min(bottom - size - 8, radar ? radar.bottom - size - 10 : bottom - size - 8);
+    if (x < left || y < top) return null;
+    const frame = state.frame;
+    const frameBox = frame?.getBoundingClientRect();
+    const ox = frame ? frameBox.left + frame.clientLeft : 0;
+    const oy = frame ? frameBox.top + frame.clientTop : 0;
+    return [x + ox, y + oy, x + ox + size, y + oy + size];
+  }
+
+  function writeSteering(state, x, y) {
+    try {
+      const nonce = steeringSession + (++steeringSerial);
+      state.fs.writeFile(steeringPath + '.tmp', JSON.stringify({nonce, context:state.context, x, y}));
+      state.fs.rename(steeringPath + '.tmp', steeringPath);
+    } catch (_) { /* The engine expires the held input if delivery stops. */ }
+  }
+
+  function stopSteering() {
+    if (!steeringTarget) return;
+    writeSteering(steeringTarget, 0, 0);
+    steeringTarget = null;
+  }
+
+  function steer(x, y) {
+    if (!Number.isFinite(x) || !Number.isFinite(y)) return;
+    const state = steeringState();
+    if (!state) { stopSteering(); return; }
+    if (steeringTarget && (steeringTarget.context !== state.context || steeringTarget.fs !== state.fs)) {
+      stopSteering();
+      return;
+    }
+    steeringTarget = state;
+    writeSteering(state, x, y);
+  }
+
   window.NativeBattleControls = {
     apply, press:id => activate(id, true), click:id => activate(id, false), scroll, beginBuildScroll, endBuildScroll,
+    steer, stopSteering,
   };
   document.addEventListener('visibilitychange', sample);
+  window.addEventListener('pagehide', stopSteering);
   window.addEventListener('resize', sample);
   setInterval(sample, 90);
   sample();

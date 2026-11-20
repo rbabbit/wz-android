@@ -94,6 +94,7 @@ public final class MainActivity extends Activity {
   private HubView hubView;
   private AboutView aboutView;
   private PlayGamesBackupStore playGamesBackups;
+  private BlueprintStore blueprints;
   private PlayGamesController playGames;
   private PlayGamesView playGamesView;
   private long playGamesRestoreGeneration;
@@ -175,6 +176,7 @@ public final class MainActivity extends Activity {
     appUpdates = new AppUpdateController(this);
     updateHomeLayoutListener = this::refreshUpdateHomeVisibility;
     root.getViewTreeObserver().addOnGlobalLayoutListener(updateHomeLayoutListener);
+    blueprints = new BlueprintStore(this);
     createWebView();
     musicStore = new MusicPackStore(this);
     musicCached = musicStore.ready();
@@ -1453,7 +1455,8 @@ public final class MainActivity extends Activity {
     webView.evaluateJavascript(
         "(() => {if(window.__towersLifecycleLogging)return;window.__towersLifecycleLogging=true;"
             + "const original=constructWZModuleConfig;constructWZModuleConfig=(args)=>{"
-            + "const m=original(args);if(!m.arguments.includes('--debug=main'))m.arguments.push('--debug=main');return m;};})()",
+            + "const m=original(args);if(!m.arguments.includes('--debug=main'))m.arguments.push('--debug=main');"
+            + "if(window.WarzoneNotices)m.preRun.push(window.WarzoneNotices.prepare);return m;};})()",
         null);
     // Explicit ADB diagnostic mode gets an isolated save directory and
     // verbose engine logs. Normal launches retain the player's data.
@@ -1487,15 +1490,15 @@ public final class MainActivity extends Activity {
 
   private void installTouchControls() {
     String[] scripts = isChallengeBattle() ? new String[] {
-      "warzone-html-session.js", "warzone/ui/research-art.js", "warzone-terrain-picker.js",
+      "warzone-html-session.js", "warzone/ui/research-art.js", "warzone-towers-notices.js", "warzone-terrain-picker.js",
       "warzone-command-pages.js", "warzone/rewards.js", "warzone/challenge-saved-games.js", "warzone/ui/mobile-patrol.js", "warzone-touch-controls.js",
       "warzone-mobile-research.js", "warzone-intelligence.js", "warzone-challenge-hud.js"
     } : isFfaBattle() ? new String[] {
-      "warzone-html-session.js", "warzone/ui/research-art.js", "warzone-terrain-picker.js",
+      "warzone-html-session.js", "warzone/ui/research-art.js", "warzone-towers-notices.js", "warzone-terrain-picker.js",
       "warzone-command-pages.js", "warzone/saved-games.js", "warzone/ui/mobile-patrol.js", "warzone-touch-controls.js",
       "warzone-mobile-research.js", "warzone-intelligence.js", "warzone-ffa-hud.js"
     } : isCampaignBattle() ? new String[] {
-      "warzone-html-session.js", "warzone/ui/research-art.js", "warzone-terrain-picker.js",
+      "warzone-html-session.js", "warzone/ui/research-art.js", "warzone-towers-notices.js", "warzone-terrain-picker.js",
       "warzone-command-pages.js", "warzone/saved-games.js", "warzone/ui/mobile-patrol.js", "warzone-touch-controls.js",
       "warzone-mobile-research.js", "warzone-intelligence.js", "warzone-campaign-hud.js"
     } : new String[] {
@@ -1911,38 +1914,17 @@ public final class MainActivity extends Activity {
 
     @JavascriptInterface
     public String loadDesigns() {
-      return getPreferences(MODE_PRIVATE)
-          .getString("saved_designs_v1", "{\"version\":1,\"designs\":[]}");
+      return blueprints.load();
     }
 
     @JavascriptInterface
-    public boolean saveDesigns(String data) {
-      if (data == null || data.length() > 262144) return false;
-      try {
-        JSONObject document = new JSONObject(data);
-        org.json.JSONArray designs = document.getJSONArray("designs");
-        if (document.optInt("version") != 1 || designs.length() > 100) return false;
-        for (int i = 0; i < designs.length(); i++) {
-          JSONObject design = designs.getJSONObject(i);
-          for (String key : new String[] {"id", "name", "body", "propulsion"}) {
-            String value = design.getString(key);
-            if (value.isEmpty() || value.length() > 128) return false;
-          }
-          org.json.JSONArray turrets = design.getJSONArray("turrets");
-          if (turrets.length() < 1 || turrets.length() > 3) return false;
-          for (int j = 0; j < turrets.length(); j++) {
-            String value = turrets.getString(j);
-            if (value.isEmpty() || value.length() > 128) return false;
-          }
-        }
-        return getPreferences(MODE_PRIVATE)
-            .edit()
-            .putString("saved_designs_v1", document.toString())
-            .commit();
-      } catch (Exception error) {
-        return false;
-      }
-    }
+    public boolean importLegacyDesigns(String data) { return blueprints.importLegacy(data); }
+
+    @JavascriptInterface
+    public String writeDesign(String data) { return blueprints.write(data); }
+
+    @JavascriptInterface
+    public String deleteDesign(String id) { return blueprints.delete(id); }
 
     @JavascriptInterface
     public String musicSelection() {

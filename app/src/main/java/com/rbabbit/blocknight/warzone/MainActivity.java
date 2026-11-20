@@ -147,6 +147,7 @@ public final class MainActivity extends Activity {
   private volatile JSONObject loadingSave;
   private volatile String loadingSaveId = "";
   private boolean restoringGame;
+  private boolean matchStartCounted;
   private boolean rewardSetupFailed;
   private TextView appNotice;
   private final Runnable dismissAppNotice = this::clearAppNotice;
@@ -1293,6 +1294,7 @@ public final class MainActivity extends Activity {
     mainMenuReturnPending = false;
     if (webView != null) webView.setVisibility(View.VISIBLE);
     battleSession = java.util.UUID.randomUUID().toString();
+    matchStartCounted = false;
     JSONObject progressMetadata = loadingSave == null ? null : loadingSave.optJSONObject("metadata");
     playGamesRunId = progressMetadata == null ? battleSession : progressMetadata.optString("progressRunId",
         progressMetadata.optString("rewardRunId", progressMetadata.optString("session", battleSession)));
@@ -2408,7 +2410,7 @@ public final class MainActivity extends Activity {
         + "return Boolean(window.LaunchedModule?.calledRun && document.getElementById('canvas')?.width>0 "
         + "&& (n?.video||n?.playing) && !window.WarzoneSavedGames?.restoring);})()", result -> {
       if (!session.equals(battleSession) || graphicsSetup != null) return;
-      if ("true".equals(result)) { hideLoadingPanel(); webView.requestFocus(); }
+      if ("true".equals(result)) { countMatchStart(); hideLoadingPanel(); webView.requestFocus(); }
       else if (attempt < 240) webView.postDelayed(() -> awaitCampaignCanvas(attempt + 1, session), 250);
       else {
         showEngineFailure("Campaign did not become ready. Tap to return Home.");
@@ -2476,11 +2478,19 @@ public final class MainActivity extends Activity {
 
   private void revealBattlefield() {
     if (webView == null || isFinishing()) return;
+    countMatchStart();
     // Establish this map's battlefield-facing view while the splash still covers
     // the canvas. Waves and BASE must never change the camera direction.
     if (!restoringGame && !isSkirmishBattle()) faceOpponent();
     showCombatHud();
     awaitInitialCamera(0);
+  }
+
+  private void countMatchStart() {
+    if (matchStartCounted || restoringGame || battleLaunch == null || touchTestMode
+        || touchSuiteMode || researchSuiteMode || getIntent().getBooleanExtra("engine_debug", false)) return;
+    matchStartCounted = true;
+    GameModeTotals.matchStarted(isCrystalSkirmish() ? "crystal-skirmish" : battleLaunch.matchMode);
   }
 
   private void awaitInitialCamera(int attempt) {

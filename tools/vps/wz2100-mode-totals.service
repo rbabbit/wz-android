@@ -1,0 +1,23 @@
+[Unit]
+Description=Warzone daily game mode totals
+
+[Service]
+DynamicUser=yes
+StateDirectory=wz2100-mode-totals
+StateDirectoryMode=0700
+UMask=0077
+ExecStart=/usr/bin/python3 /opt/wz2100-mode-totals/wz2100_mode_totals.py
+Restart=on-failure
+RestartSec=2s
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectHome=yes
+ProtectSystem=strict
+RestrictAddressFamilies=AF_INET AF_UNIX
+TasksMax=32
+MemoryMax=128M
+StandardOutput=null
+StandardError=null
+
+[Install]
+WantedBy=multi-user.target

@@ -487,6 +487,9 @@ public final class MultiplayerActivity extends Activity {
         fitViewport();
       });
     }
+    @JavascriptInterface public void countMatchStart() {
+      if (sessionActive && !destroyed.get()) GameModeTotals.matchStarted("multiplayer");
+    }
     @JavascriptInterface public void leave() {
       runOnUiThread(() -> onBackPressed());
     }

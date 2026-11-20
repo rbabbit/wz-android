@@ -14,12 +14,14 @@
 
   function directoryError(error) {
     const detail=String(error?.message||'');
+    const retry=globalThis.PcNativeLobby ? 'reopen the lobby' : 'Refresh';
     if (/UnknownHostException|Unable to resolve host|no address associated|DNS/i.test(detail))
-      return 'Public rooms unavailable: DNS lookup failed. Check your connection, then Refresh.';
-    if (/timed?\s*out|timeout/i.test(detail)) return 'Public rooms timed out. Refresh to try again.';
+      return `Public rooms unavailable: DNS lookup failed. Check your connection, then ${retry}.`;
+    if (/timed?\s*out|timeout/i.test(detail))
+      return globalThis.PcNativeLobby ? 'Public rooms timed out. Reopen the lobby to try again.' : 'Public rooms timed out. Refresh to try again.';
     if (/offline|network is unreachable|ENETUNREACH|not connected/i.test(detail))
-      return 'Public rooms unavailable while offline. Check your connection, then Refresh.';
-    return 'Public rooms unavailable. Check your connection, then Refresh.';
+      return `Public rooms unavailable while offline. Check your connection, then ${retry}.`;
+    return `Public rooms unavailable. Check your connection, then ${retry}.`;
   }
 
   const needsRefresh = () => !listingsAvailable || Boolean(listError) || Date.now()-lastSuccess>30000;

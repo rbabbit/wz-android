@@ -2,6 +2,7 @@ package com.rbabbit.blocknight.warzone;
 
 /** Validated choices captured once for a battle, including its replay. */
 final class BattleLaunchSpec {
+  static final String CRYSTAL_SKIRMISH_MAP = "crystal-skirmish";
   final String matchMode;
   final String duelWeapon;
   final String mapId;
@@ -25,7 +26,8 @@ final class BattleLaunchSpec {
   BattleLaunchSpec(String matchMode, String duelWeapon, String mapId, boolean musicEnabled, String difficulty, String botType, int[] teams) {
     this.matchMode = matchMode(matchMode);
     this.duelWeapon = duelWeapon(duelWeapon);
-    this.mapId = "challenge".equals(this.matchMode) ? challengeMapId(mapId) : "ffa".equals(this.matchMode) ? ffaMapId(mapId)
+    this.mapId = "challenge".equals(this.matchMode) ? challengeMapId(mapId)
+        : "ffa".equals(this.matchMode) ? (CRYSTAL_SKIRMISH_MAP.equals(mapId) ? mapId : ffaMapId(mapId))
         : "survival".equals(this.matchMode) ? SurvivalMapCatalog.get(mapId).id : mapId(mapId);
     this.musicEnabled = musicEnabled;
     this.ffaDifficulty = ffaDifficulty(difficulty);
@@ -54,6 +56,7 @@ final class BattleLaunchSpec {
     return value;
   }
   boolean isFfa() { return "ffa".equals(matchMode); }
+  boolean isCrystalSkirmish() { return isFfa() && CRYSTAL_SKIRMISH_MAP.equals(mapId); }
   boolean isChallenge() { return "challenge".equals(matchMode); }
   static String challengeMapId(String value) {
     if (!ChallengeMapCatalog.isKnownId(value)) throw new IllegalArgumentException("Unknown Challenge map.");

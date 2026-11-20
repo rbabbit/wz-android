@@ -124,6 +124,10 @@
     if (marker >= 0) {
       try {
         const wave = JSON.parse(text.slice(marker + prefix.length));
+        if (ffa && window.__warzoneFfaConfig.map === 'crystal-skirmish') {
+          window.__warzoneFfa?.accept?.(wave);
+          return;
+        }
         if(!activate(wave))return;
         if (!campaign && ['defeated','victory'].includes(wave.phase)) finish(wave.phase === 'victory');
       } catch (_) {}

@@ -103,6 +103,7 @@
     repair.title='Enable automatic repair retreat at 75% health for all your combat units and new production';
     window.__kalaWarzoneTouch?.bindTouchCommand?.(repair,()=>window.__kalaWarzoneTouch?.toggleRepairPolicy?.());
     if(group)group.append(all,repair);else{const controls=doc.createElement('div');controls.className='bn-command-group';controls.append(all,repair);hud.appendChild(controls);}
+    const patrol=element('blocknight-auto-fight');if(patrol)repair.after(patrol);
     const status=doc.createElement('aside');status.id='warzone-campaign-status';status.innerHTML='<div><strong></strong><small hidden></small></div>';
     (element('warzone-command-strip')||hud).appendChild(status);
     window.__kalaWarzoneTouch?.compactToolbar?.();

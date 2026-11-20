@@ -68,6 +68,7 @@ public final class MainActivity extends Activity {
 
   private FrameLayout root;
   private WebView webView;
+  private BattleControls battleControls;
   private String battleSession = "";
   private volatile String playGamesRunId = "";
   private volatile long playGamesElapsedMs = -1;
@@ -762,6 +763,18 @@ public final class MainActivity extends Activity {
   }
 
   private void launchGame() {
+    launchGame(new BattleLaunchSpec(
+        matchMode, "challenge".equals(matchMode) ? challengeWeapon : duelWeapon, "challenge".equals(matchMode) ? challengeMapId : "survival".equals(matchMode) ? survivalMapId : "ffa".equals(matchMode) ? ffaMapId : mapId, musicEnabled && musicCached, "challenge".equals(matchMode) ? challengeDifficulty : ffaDifficulty, ffaBotType,
+        "ffa".equals(matchMode) && FfaMapCatalog.isDownloaded(ffaMapId) ? mapsTeams : null));
+  }
+
+  private void launchCrystalSkirmish() {
+    if (graphicsSetup == null || rewardsView == null || !"towers".equals(currentRewardProfile())) return;
+    launchGame(new BattleLaunchSpec("ffa", "cannon", BattleLaunchSpec.CRYSTAL_SKIRMISH_MAP,
+        musicEnabled && musicCached, "easy", "cobra"));
+  }
+
+  private void launchGame(BattleLaunchSpec launch) {
     cancelCampaignHomeCheck();
     dismissBriefing();
     startupBriefingSession = "";
@@ -771,9 +784,7 @@ public final class MainActivity extends Activity {
     loadingSave = null;
     loadingSaveId = "";
     restoringGame = false;
-    battleLaunch = new BattleLaunchSpec(
-        matchMode, "challenge".equals(matchMode) ? challengeWeapon : duelWeapon, "challenge".equals(matchMode) ? challengeMapId : "survival".equals(matchMode) ? survivalMapId : "ffa".equals(matchMode) ? ffaMapId : mapId, musicEnabled && musicCached, "challenge".equals(matchMode) ? challengeDifficulty : ffaDifficulty, ffaBotType,
-        "ffa".equals(matchMode) && FfaMapCatalog.isDownloaded(ffaMapId) ? mapsTeams : null);
+    battleLaunch = launch;
     closeCampaignSetup();
     closeFfaSetup();
     closeChallengeSetup();
@@ -806,10 +817,15 @@ public final class MainActivity extends Activity {
     if (!inGame && graphicsSetup == null) return;
     if (!inGame) cancelCampaignHomeCheck();
     final String selectedMap = currentRewardMap(), profile = currentRewardProfile();
+    final boolean crystalSkirmishAvailable = !inGame && "towers".equals(profile);
+    final String crystalSkirmishOffer = !crystalSkirmishAvailable ? null
+        : rewards.wonCrystalSkirmishToday() ? "25 Krystals per completed match today"
+            : "35 Krystals for your first win today";
     String selectedName = "challenge".equals(profile) ? ChallengeMapCatalog.get(this).map(selectedMap).name : "survival".equals(profile) ? SurvivalMapCatalog.get(selectedMap).name : MapLevelCatalog.get(this).level(selectedMap).name;
     rewardsView = new RewardsView(this, profile, selectedMap, selectedName, rewards.balance(), rewards.inventory(),
-        inGame ? rewards.active(rewardRunId) : rewards.loadout(profile), inGame,
+        inGame ? rewards.active(rewardRunId) : rewards.loadout(profile), inGame, crystalSkirmishOffer,
         new RewardsView.Actions() {
+          @Override public void crystalSkirmish() { launchCrystalSkirmish(); }
           @Override public void buy(String id, int quantity) {
             if (rewardsView == null) return;
             try {
@@ -1069,6 +1085,7 @@ public final class MainActivity extends Activity {
 
   private boolean isCampaignBattle() { return battleLaunch != null && battleLaunch.isCampaign(); }
   private boolean isFfaBattle() { return battleLaunch != null && battleLaunch.isFfa(); }
+  private boolean isCrystalSkirmish() { return battleLaunch != null && battleLaunch.isCrystalSkirmish(); }
   private boolean isChallengeBattle() { return battleLaunch != null && battleLaunch.isChallenge(); }
   private boolean isSkirmishBattle() { return isFfaBattle() || isChallengeBattle(); }
   private boolean isRewardBattle() { return isTowersBattle() || isChallengeBattle(); }
@@ -1076,7 +1093,8 @@ public final class MainActivity extends Activity {
   private boolean isTowersBattle() { return battleLaunch != null && ("towers".equals(battleLaunch.matchMode) || isSurvivalBattle()); }
 
   private void createWebView() {
-    webView = new EngineWebView(this);
+    EngineWebView engine = new EngineWebView(this);
+    webView = engine;
     webView.setBackgroundColor(isDuelBattle() ? Color.BLACK : TowersTheme.BACKGROUND);
     webView.setOverScrollMode(View.OVER_SCROLL_NEVER);
     webView.setHorizontalScrollBarEnabled(false);
@@ -1150,6 +1168,11 @@ public final class MainActivity extends Activity {
           }
 
           @Override
+          public void onPageStarted(WebView view, String url, android.graphics.Bitmap favicon) {
+            if (battleControls != null) battleControls.reset();
+          }
+
+          @Override
           public void onPageFinished(WebView view, String url) {
             Uri page = Uri.parse(url);
             if (!"appassets.androidplatform.net".equals(page.getHost())
@@ -1159,6 +1182,7 @@ public final class MainActivity extends Activity {
                     || "/warzone/mobile-challenge.html".equals(page.getPath())
                     || "/warzone/mobile-survival.html".equals(page.getPath())
                     || "/warzone/mobile-campaign.html".equals(page.getPath()))) return;
+            if (battleControls != null) battleControls.pageReady(url);
             verifyEnginePrerequisites();
           }
         });
@@ -1207,6 +1231,7 @@ public final class MainActivity extends Activity {
         webView,
         new FrameLayout.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+    battleControls = BattleControls.attach(root, engine, engine::evaluateHostJavascript);
     webView.setPivotX(0f);
     webView.setPivotY(0f);
     viewportListener =
@@ -1463,15 +1488,15 @@ public final class MainActivity extends Activity {
   private void installTouchControls() {
     String[] scripts = isChallengeBattle() ? new String[] {
       "warzone-html-session.js", "warzone/ui/research-art.js", "warzone-terrain-picker.js",
-      "warzone-command-pages.js", "warzone/rewards.js", "warzone/challenge-saved-games.js", "warzone-touch-controls.js",
+      "warzone-command-pages.js", "warzone/rewards.js", "warzone/challenge-saved-games.js", "warzone/ui/mobile-patrol.js", "warzone-touch-controls.js",
       "warzone-mobile-research.js", "warzone-intelligence.js", "warzone-challenge-hud.js"
     } : isFfaBattle() ? new String[] {
       "warzone-html-session.js", "warzone/ui/research-art.js", "warzone-terrain-picker.js",
-      "warzone-command-pages.js", "warzone/saved-games.js", "warzone-touch-controls.js",
+      "warzone-command-pages.js", "warzone/saved-games.js", "warzone/ui/mobile-patrol.js", "warzone-touch-controls.js",
       "warzone-mobile-research.js", "warzone-intelligence.js", "warzone-ffa-hud.js"
     } : isCampaignBattle() ? new String[] {
       "warzone-html-session.js", "warzone/ui/research-art.js", "warzone-terrain-picker.js",
-      "warzone-command-pages.js", "warzone/saved-games.js", "warzone-touch-controls.js",
+      "warzone-command-pages.js", "warzone/saved-games.js", "warzone/ui/mobile-patrol.js", "warzone-touch-controls.js",
       "warzone-mobile-research.js", "warzone-intelligence.js", "warzone-campaign-hud.js"
     } : new String[] {
       "warzone-html-session.js",
@@ -1481,7 +1506,7 @@ public final class MainActivity extends Activity {
       "warzone-command-pages.js",
       "warzone/rewards.js",
       "warzone/saved-games.js",
-      "warzone-touch-controls.js",
+      "warzone/ui/mobile-patrol.js", "warzone-touch-controls.js",
       "warzone-mobile-research.js",
       isDuelBattle() ? "warzone-duel-ui.js" : "warzone-towers-wave-hud.js",
       "warzone/briefing.js",
@@ -1707,7 +1732,7 @@ public final class MainActivity extends Activity {
     @JavascriptInterface
     public String ffaSave(String session, String metadataJSON, String filesJSON) {
       try {
-        if (!isFfaBattle() || session == null || !session.equals(battleSession)
+        if (!isFfaBattle() || isCrystalSkirmish() || session == null || !session.equals(battleSession)
             || graphicsSetup != null || mainMenuReturnPending || !battleOutcome.isEmpty()
             || metadataJSON == null || metadataJSON.length() > 65536
             || filesJSON == null || filesJSON.length() > 48 * 1024 * 1024)
@@ -1968,7 +1993,8 @@ public final class MainActivity extends Activity {
         webView.requestFocus();
         if (isCampaignBattle()) { startupAutomationStarted = true; awaitCampaignCanvas(0, battleSession); }
         else if (restoringGame) { startupAutomationStarted = true; awaitBattlefieldReady(0); }
-        else if (isChallengeBattle() || (isFfaBattle() && FfaMapCatalog.isDownloaded(battleLaunch.mapId))) beginChallengeStartup();
+        else if (isChallengeBattle() || isCrystalSkirmish()
+            || (isFfaBattle() && FfaMapCatalog.isDownloaded(battleLaunch.mapId))) beginChallengeStartup();
         else beginStartupAutomation();
         if (touchTestMode) {
           webView.postDelayed(MainActivity.this::selectAllUnitsForTouchTest, 30000);
@@ -2158,9 +2184,10 @@ public final class MainActivity extends Activity {
   }
 
   private void returnToMainMenu() {
+    final boolean returnToCrystalSkirmish = graphicsSetup == null && isCrystalSkirmish();
     final boolean returnToSurvival = graphicsSetup == null && isSurvivalBattle();
     final boolean returnToTowersMap = graphicsSetup == null && isTowersBattle() && !returnToSurvival;
-    final boolean returnToFfa = graphicsSetup == null && isFfaBattle();
+    final boolean returnToFfa = graphicsSetup == null && isFfaBattle() && !returnToCrystalSkirmish;
     final boolean returnToMaps = returnToFfa && FfaMapCatalog.isDownloaded(battleLaunch.mapId);
     final boolean returnToChallenge = graphicsSetup == null && isChallengeBattle();
     cancelCampaignHomeCheck();
@@ -2199,7 +2226,7 @@ public final class MainActivity extends Activity {
     webView.stopLoading();
     webView.loadUrl("about:blank");
     if (graphicsSetup == null) showGraphicsSetup();
-    if (returnToTowersMap) graphicsSetup.showTowersMap();
+    if (returnToTowersMap || returnToCrystalSkirmish) graphicsSetup.showTowersMap();
     if (returnToSurvival) showSurvivalSetup();
     if (returnToMaps) showMapsSetup();
     else if (returnToFfa) showFfaSetup();
@@ -2229,12 +2256,32 @@ public final class MainActivity extends Activity {
 
   private void finishFfa(boolean won) {
     if (battleSession.isEmpty() || !battleOutcome.isEmpty()) return;
+    if (isCrystalSkirmish()) { finishCrystalSkirmish(won); return; }
     recordPlayGamesMatch(won);
     if (won && playGames != null && battleLaunch != null)
       playGames.recordVictory("ffa", battleLaunch.mapId, battleLaunch.ffaDifficulty);
     battleOutcome = won ? "victory" : "defeated";
     returnToMainMenu();
     showAppNotice(won ? "Victory — you won the free for all." : "Defeat — your forces were eliminated.", false);
+  }
+
+  private void finishCrystalSkirmish(boolean won) {
+    battleOutcome = won ? "victory" : "defeated";
+    try {
+      RewardLedger.Receipt receipt = rewards.finishCrystalSkirmish(battleSession, won);
+      returnToMainMenu();
+      if (receipt == null) return;
+      rewardReceipt = new RewardReceiptView(this, won, "Crystal Skirmish · Centerpede", "T4",
+          0, 0, receipt.earned, receipt.balance, receipt.reason, dp(32), () -> {
+            dismissRewardReceipt();
+            showRewards(false);
+          }, true);
+      root.addView(rewardReceipt, new FrameLayout.LayoutParams(-1, -1));
+      rewardReceipt.requestFocus();
+    } catch (RuntimeException error) {
+      returnToMainMenu();
+      showAppNotice(error.getMessage(), true);
+    }
   }
 
   private void showBattleExitPanel() {
@@ -2355,7 +2402,7 @@ public final class MainActivity extends Activity {
     if (startupAutomationStarted || webView == null || isFinishing()) return;
     startupAutomationStarted = true;
     final String startupSession = battleSession;
-    updateLoadingStatus("OPENING THE CHALLENGE…");
+    updateLoadingStatus(isCrystalSkirmish() ? "OPENING CRYSTAL SKIRMISH…" : "OPENING THE CHALLENGE…");
     webView.postDelayed(() -> {
       if (!startupSession.equals(battleSession) || graphicsSetup != null || !isSkirmishBattle()) return;
       evaluateTouchTapThen(170, 392, "Start Hosting", 1500, () -> {
@@ -2703,6 +2750,11 @@ public final class MainActivity extends Activity {
       if (x != 0 || y != 0) super.scrollTo(0, 0);
     }
 
+    // The toolbar and menu layouts are in the outer page, outside the game frame.
+    void evaluateHostJavascript(String script) {
+      super.evaluateJavascript(script, null);
+    }
+
     @Override
     public void evaluateJavascript(String script, ValueCallback<String> callback) {
       String routed =
@@ -2848,6 +2900,10 @@ public final class MainActivity extends Activity {
     if (root != null && viewportListener != null) {
       root.removeOnLayoutChangeListener(viewportListener);
       viewportListener = null;
+    }
+    if (battleControls != null) {
+      battleControls.detach(root);
+      battleControls = null;
     }
     if (webView != null) {
       webView.stopLoading();

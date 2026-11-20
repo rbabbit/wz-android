@@ -21,7 +21,9 @@
       label.innerHTML='<strong></strong><br><small></small>';
       (doc.getElementById('warzone-command-strip')||hud).appendChild(label);
     }
-    label.querySelector('strong').textContent=(state.snapshot.mapName||config.mapName||'EMAG FFA')+' · '+state.snapshot.difficulty.replace(/^./,x=>x.toUpperCase());
+    const matchLabel = config.map === 'crystal-skirmish' ? 'T4'
+      : state.snapshot.difficulty.replace(/^./, x => x.toUpperCase());
+    label.querySelector('strong').textContent=(state.snapshot.mapName||config.mapName||'EMAG FFA')+' · '+matchLabel;
     const botName=window.WarzoneDownloadedMaps?.nativeBot(state.snapshot.botType)?.name||(state.snapshot.botType==='cobra'?'Cobra':'NullBot');
     const teamGame=config.gameType==='teams',allies=teamGame?config.teams.filter(team=>team===config.teams[0]).length-1:0;
     label.querySelector('small').textContent=(teamGame?'Team '+String.fromCharCode(65+config.teams[0])+' · '+allies+' allies · '+(playerCount-allies-1)+' opponents':
@@ -34,6 +36,10 @@
     if(state.ended||packet?.mode!=='ffa'||packet.map!==config.map||typeof packet.session!=='string'
       ||packet.difficulty!==config.difficulty||!Number.isFinite(Number(packet.gameTime))
       ||packet.nativeLevel!==(config.level||'FFA-EMAG-T1')||packet.maxPlayers!==playerCount)return false;
+    if (config.map === 'crystal-skirmish'
+        && (packet.techLevel !== 4 || packet.mapWidth !== 30 || packet.mapHeight !== 30
+          || !['active', 'victory', 'defeated'].includes(packet.phase)
+          || (state.snapshot && state.snapshot.session !== packet.session))) return false;
     const identity=window.WarzoneDownloadedMaps?.nativeBot(packet.botType),script=identity?.script.split('/').pop();
     if(!identity||packet.botType!==config.botType||!Array.isArray(packet.players)||packet.players.length!==playerCount
         ||Array.from({length:playerCount-1},(_,i)=>i+1).some(player=>{const bots=packet.players.filter(value=>value.player===player);return bots.length!==1

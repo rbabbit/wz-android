@@ -5,6 +5,7 @@ import android.content.res.ColorStateList;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.RippleDrawable;
+import android.os.Build;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextUtils;
@@ -18,32 +19,33 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.GridView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
 /** Native public-list landing only. The existing web session owns all joins and games. */
 final class MultiplayerLobbyView extends LinearLayout {
-    interface Actions { void back();void refresh();void filter(boolean hide);boolean saveName(String base);void join(String id); }
+    private static final int BACKGROUND = 0xFF0A0C0B;
+    private static final int CARD = 0xFF141A18;
+    private static final int CARD_BORDER = 0xFF4B5751;
+    private static final int SAGE = 0xFFA8C79E;
+
+    interface Actions { void filter(boolean hide);boolean saveName(String base);void join(String id); }
     private final Actions actions;
     private final Typeface face;
     private final EditText name;
     private final CheckBox hide;
-    private final Button refresh;
     private final TextView status,empty;
-    private final ListView list;
     private final RoomAdapter adapter=new RoomAdapter();
     private boolean ready,loading,busy,settingFilter;
     private List<MultiplayerLobbyModel.Room> rooms=new ArrayList<>();
 
     MultiplayerLobbyView(Context context,Actions actions,String base) {
         super(context);this.actions=actions;face=Typeface.createFromAsset(context.getAssets(),"warzone/ui/Oswald.ttf");
-        setOrientation(VERTICAL);setBackgroundColor(0xff090909);setPadding(dp(14),dp(7),dp(14),dp(5));setClickable(true);setFocusableInTouchMode(true);
+        setOrientation(VERTICAL);setBackgroundColor(BACKGROUND);setPadding(dp(14),dp(10),dp(14),dp(5));setClickable(true);setFocusableInTouchMode(true);
         Header header=new Header(context);addView(header,new LayoutParams(-1,-2));
-        Button back=button("BACK",false);back.setTextSize(18);back.setMinimumWidth(dp(72));back.setContentDescription("Back to game modes");back.setOnClickListener(v->actions.back());header.addView(back,new ViewGroup.LayoutParams(-2,dp(48)));
-        TextView title=text("LOBBY",22,TowersTheme.TEXT);title.setPadding(dp(4),0,dp(12),0);header.addView(title,new ViewGroup.LayoutParams(-2,dp(48)));
         LinearLayout profile=new LinearLayout(context);profile.setGravity(Gravity.CENTER_VERTICAL);
         TextView label=text("Player name",17,TowersTheme.TEXT);label.setPadding(0,0,dp(8),0);profile.addView(label,new LayoutParams(-2,dp(48)));
         LinearLayout field=new LinearLayout(context);field.setGravity(Gravity.CENTER_VERTICAL);field.setBackground(TowersTheme.control(context,TowersTheme.CONTROL,5));
@@ -59,11 +61,35 @@ final class MultiplayerLobbyView extends LinearLayout {
         TextView suffix=text("(m)",20,TowersTheme.TEXT);suffix.setPadding(0,0,dp(10),0);suffix.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);field.addView(suffix,new LayoutParams(-2,dp(46)));profile.addView(field,new LayoutParams(-2,dp(46)));
         header.addView(profile,new ViewGroup.LayoutParams(-2,dp(48)));
         hide=new CheckBox(context);hide.setText("Hide empty");hide.setTypeface(face);hide.setTextSize(18);hide.setTextColor(TowersTheme.TEXT);hide.setButtonTintList(ColorStateList.valueOf(TowersTheme.TEXT));hide.setMinHeight(dp(48));hide.setPadding(dp(8),0,dp(7),0);hide.setOnCheckedChangeListener((v,checked)->{if(!settingFilter){adapter.refresh();actions.filter(checked);}});header.addView(hide,new ViewGroup.LayoutParams(-2,dp(48)));
-        refresh=button("REFRESH",false);refresh.setTextSize(18);refresh.setMinimumWidth(dp(98));refresh.setOnClickListener(v->actions.refresh());header.addView(refresh,new ViewGroup.LayoutParams(-2,dp(48)));
+        TextView title=text("Join Live Game",23,TowersTheme.TEXT);
+        title.setGravity(Gravity.END | Gravity.CENTER_VERTICAL);
+        if(Build.VERSION.SDK_INT>=28)title.setAccessibilityHeading(true);
+        header.addView(title,new ViewGroup.LayoutParams(-2,dp(48)));
+        View divider=new View(context);
+        divider.setBackgroundColor(SAGE);
+        LayoutParams dividerParams=new LayoutParams(-1,dp(1));
+        dividerParams.topMargin=dp(3);
+        dividerParams.bottomMargin=dp(8);
+        addView(divider,dividerParams);
         status=text("Loading rooms…",13,TowersTheme.SECONDARY);status.setPadding(dp(4),0,dp(4),0);status.setAccessibilityLiveRegion(View.ACCESSIBILITY_LIVE_REGION_POLITE);addView(status,new LayoutParams(-1,-2));
         FrameLayout body=new FrameLayout(context);addView(body,new LayoutParams(-1,0,1));
-        list=new ListView(context);list.setBackgroundColor(0xff090909);list.setDivider(null);list.setDividerHeight(0);list.setVerticalScrollBarEnabled(true);list.setClipToPadding(false);list.setPadding(0,dp(8),0,0);list.setAdapter(adapter);body.addView(list,new FrameLayout.LayoutParams(-1,-1));
-        empty=text("Loading public rooms…",18,TowersTheme.SECONDARY);empty.setGravity(Gravity.CENTER);empty.setPadding(dp(18),dp(8),dp(18),dp(8));body.addView(empty,new FrameLayout.LayoutParams(-1,-1));list.setEmptyView(empty);
+        GridView grid=new GridView(context) {
+            @Override protected void onMeasure(int widthSpec,int heightSpec) {
+                int width=MeasureSpec.getSize(widthSpec)-getPaddingLeft()-getPaddingRight();
+                int columns=Math.max(1,Math.min(3,(width+dp(8))/dp(204)));
+                if(getNumColumns()!=columns)setNumColumns(columns);
+                super.onMeasure(widthSpec,heightSpec);
+            }
+        };
+        grid.setStretchMode(GridView.STRETCH_COLUMN_WIDTH);
+        grid.setHorizontalSpacing(dp(8));
+        grid.setVerticalSpacing(dp(8));
+        grid.setVerticalScrollBarEnabled(true);
+        grid.setPadding(0,dp(14),0,dp(8));
+        grid.setClipToPadding(false);
+        grid.setAdapter(adapter);
+        body.addView(grid,new FrameLayout.LayoutParams(-1,-1));
+        empty=text("Loading public rooms…",18,TowersTheme.SECONDARY);empty.setGravity(Gravity.CENTER);empty.setPadding(dp(18),dp(8),dp(18),dp(8));body.addView(empty,new FrameLayout.LayoutParams(-1,-1));grid.setEmptyView(empty);
         name.setOnFocusChangeListener((v,focused)->{if(!focused)actions.saveName(name.getText().toString());});
         name.setOnEditorActionListener((v,action,event)->{if(action==EditorInfo.IME_ACTION_DONE){if(!actions.saveName(name.getText().toString()))return true;name.clearFocus();hideKeyboard();return true;}return false;});
         updateControls();requestFocus();
@@ -81,10 +107,37 @@ final class MultiplayerLobbyView extends LinearLayout {
     void profileError(String message) { status.setText(message);status.setVisibility(VISIBLE);name.requestFocus(); }
     String draft() { return name.getText().toString(); }
     void acceptedName(String base) { if(!name.getText().toString().equals(base)){name.setText(base);name.setSelection(name.length());} }
-    private void updateControls() { refresh.setEnabled(ready&&!loading&&!busy);hide.setEnabled(ready&&!busy);name.setEnabled(!busy); }
+    private void updateControls() { hide.setEnabled(ready&&!busy);name.setEnabled(!busy); }
     private void hideKeyboard(){android.view.inputmethod.InputMethodManager ime=(android.view.inputmethod.InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);if(ime!=null)ime.hideSoftInputFromWindow(getWindowToken(),0);}
     private TextView text(String value,int size,int color){TextView v=new TextView(getContext());v.setText(value);v.setTypeface(face);v.setTextSize(size);v.setTextColor(color);v.setGravity(Gravity.CENTER_VERTICAL);v.setIncludeFontPadding(false);return v;}
-    private Button button(String value,boolean primary){Button b=new Button(getContext());b.setText(value);b.setTypeface(face);b.setAllCaps(false);b.setTextColor(TowersTheme.buttonText(primary));b.setMinHeight(0);b.setMinimumHeight(0);b.setMinWidth(0);b.setMinimumWidth(0);b.setPadding(dp(10),0,dp(10),0);b.setBackgroundTintList(null);b.setBackground(new RippleDrawable(ColorStateList.valueOf(primary?TowersTheme.PRIMARY_RIPPLE:TowersTheme.RIPPLE),TowersTheme.control(getContext(),primary?TowersTheme.PRIMARY:TowersTheme.CONTROL,5),null));return b;}
+    private GradientDrawable cardBackground() {
+        GradientDrawable background=new GradientDrawable();
+        background.setColor(CARD);
+        background.setCornerRadius(dp(8));
+        background.setStroke(dp(1),CARD_BORDER);
+        return background;
+    }
+
+    private Button joinButton() {
+        Button button=new Button(getContext());
+        button.setTypeface(face);
+        button.setTextSize(18);
+        button.setAllCaps(false);
+        button.setSingleLine(true);
+        button.setPadding(dp(6),0,dp(6),0);
+        button.setMinimumWidth(0);
+        button.setMinWidth(0);
+        button.setElevation(0);
+        button.setStateListAnimator(null);
+        button.setBackgroundTintList(null);
+        int[][] states={{-android.R.attr.state_enabled},{}};
+        button.setTextColor(new ColorStateList(states,new int[]{TowersTheme.SECONDARY,TowersTheme.ON_PRIMARY}));
+        GradientDrawable fill=new GradientDrawable();
+        fill.setCornerRadius(dp(5));
+        fill.setColor(new ColorStateList(states,new int[]{TowersTheme.CONTROL,SAGE}));
+        button.setBackground(new RippleDrawable(ColorStateList.valueOf(TowersTheme.PRIMARY_RIPPLE),fill,null));
+        return button;
+    }
     private int dp(int value){return Math.round(value*getResources().getDisplayMetrics().density);}
     private final class RoomAdapter extends BaseAdapter {
         private List<MultiplayerLobbyModel.Room> visible=new ArrayList<>();
@@ -93,20 +146,61 @@ final class MultiplayerLobbyView extends LinearLayout {
         @Override public Object getItem(int p){return visible.get(p);}
         @Override public long getItemId(int p){return visible.get(p).id.hashCode();}
         @Override public View getView(int position,View reused,ViewGroup parent){
-            Row row=reused instanceof Row?(Row)reused:new Row();MultiplayerLobbyModel.Room room=visible.get(position);row.room=room;
-            row.map.setText(room.mapLabel());row.details.setText(room.roomLabel());row.count.setText(room.counts());row.join.setText(room.actionLabel());row.join.setEnabled(ready&&!loading&&!busy&&room.joinable());row.join.setContentDescription(room.joinable()?"Join "+room.roomLabel():room.roomLabel()+": "+room.reason());return row;
+            RoomCard card=reused instanceof RoomCard?(RoomCard)reused:new RoomCard();MultiplayerLobbyModel.Room room=visible.get(position);card.room=room;
+            card.map.setText(room.mapLabel());
+            card.details.setText(room.roomLabel());
+            card.count.setText(room.current==null?room.counts():room.current+" / "+room.maximum);
+            card.join.setText(room.actionLabel());
+            card.join.setEnabled(ready&&!loading&&!busy&&room.joinable());
+            card.join.setContentDescription(room.joinable()?"Join "+room.roomLabel():room.roomLabel()+": "+room.reason());
+            return card;
         }
     }
-    private final class Row extends LinearLayout {
+
+    private final class RoomCard extends LinearLayout {
         final TextView map,details,count;final Button join;MultiplayerLobbyModel.Room room;
-        Row(){super(MultiplayerLobbyView.this.getContext());setOrientation(HORIZONTAL);setGravity(Gravity.CENTER_VERTICAL);setPadding(dp(7),dp(9),dp(6),dp(9));
-            LinearLayout labels=new LinearLayout(getContext());labels.setOrientation(VERTICAL);labels.setPadding(0,0,dp(8),0);map=text("",23,TowersTheme.TEXT);map.setSingleLine(true);map.setEllipsize(TextUtils.TruncateAt.END);details=text("",16,TowersTheme.SECONDARY);details.setSingleLine(true);details.setEllipsize(TextUtils.TruncateAt.END);labels.addView(map,new LayoutParams(-1,-2));labels.addView(details,new LayoutParams(-1,-2));addView(labels,new LayoutParams(0,-2,1));
-            count=text("",23,TowersTheme.TEXT);count.setGravity(Gravity.CENTER);count.setMaxLines(2);addView(count,new LayoutParams(dp(83),-2));
-            join=button("JOIN",true);join.setTextSize(19);LayoutParams p=new LayoutParams(dp(94),dp(48));p.leftMargin=dp(8);addView(join,p);setMinimumHeight(dp(78));
-            join.setOnClickListener(v->{if(room==null||!room.joinable()||!ready||loading||busy)return;if(!actions.saveName(draft()))return;name.clearFocus();hideKeyboard();pending(true,"Joining room…");actions.join(room.id);});
+        RoomCard() {
+            super(MultiplayerLobbyView.this.getContext());
+            setOrientation(VERTICAL);
+            setPadding(dp(12),dp(13),dp(12),dp(10));
+            setBackground(cardBackground());
+            setLayoutParams(new GridView.LayoutParams(-1,dp(172)));
+
+            map=text("",24,TowersTheme.TEXT);
+            map.setSingleLine(true);
+            map.setEllipsize(TextUtils.TruncateAt.END);
+            addView(map,new LayoutParams(-1,-2));
+            details=text("",15,TowersTheme.SECONDARY);
+            details.setMaxLines(2);
+            details.setEllipsize(TextUtils.TruncateAt.END);
+            LayoutParams detailParams=new LayoutParams(-1,-2);
+            detailParams.topMargin=dp(4);
+            addView(details,detailParams);
+            addView(new View(getContext()),new LayoutParams(1,0,1));
+
+            LinearLayout footer=new LinearLayout(getContext());
+            footer.setGravity(Gravity.CENTER_VERTICAL);
+            addView(footer,new LayoutParams(-1,-2));
+            count=text("",21,TowersTheme.TEXT);
+            count.setMaxLines(2);
+            count.setEllipsize(TextUtils.TruncateAt.END);
+            footer.addView(count,new LayoutParams(0,-2,1));
+
+            join=joinButton();
+            LayoutParams joinParams=new LayoutParams(dp(88),dp(48));
+            joinParams.leftMargin=dp(6);
+            footer.addView(join,joinParams);
+            join.setOnClickListener(v->{
+                if(room==null||!room.joinable()||!ready||loading||busy)return;
+                if(!actions.saveName(draft()))return;
+                name.clearFocus();
+                hideKeyboard();
+                pending(true,"Joining room…");
+                actions.join(room.id);
+            });
         }
     }
-    /** Keep Refresh at the top-right while the other native controls wrap intact. */
+    /** Keep the title at the top right while the player name and filter wrap. */
     private final class Header extends ViewGroup {
         Header(Context c){super(c);}
         private int[][] bounds(int width){int n=getChildCount();int[] widths=new int[n],heights=new int[n];for(int i=0;i<n;i++){widths[i]=getChildAt(i).getMeasuredWidth();heights[i]=getChildAt(i).getMeasuredHeight();}return headerBounds(width,widths,heights,dp(7),dp(3));}

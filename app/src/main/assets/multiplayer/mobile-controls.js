@@ -7,6 +7,7 @@
   'use strict';
   if (window.PcMultiplayerControls) return;
 
+  const patrol = new window.MobilePatrolInput();
   const DENSITY=Math.max(1,Math.min(3,devicePixelRatio||1));
   const SLOP=Math.round(5+DENSITY), HOLD_MS=260, BOX_START=8;
   const PINCH_START=11, MULTI_START=11, TILT_STEP=32;
@@ -33,6 +34,25 @@
   const ordersAllowed=()=>{const s=window.PcMultiplayerState;return s?.canIssueOrders!==false&&s?.spectator!==true&&!(Number.isInteger(s?.realPlayer)&&Number.isInteger(s?.player)&&s.realPlayer!==s.player);};
   const worldReady=()=>{const s=window.PcMultiplayerState;return enabled&&phase==='game'&&s?.worldReady===true&&(typeof s.cameraSafe==='boolean'?s.cameraSafe:s.worldSafe!==false)&&s.nativeMenuOpen!==true;};
   const game=()=>worldReady()&&!modal();
+  function patrolState() {
+    const state = window.PcMultiplayerNative?.state;
+    const context = ordersAllowed() && state?.worldReady ? state.combatLock?.context : '';
+    patrol.observe(state?.patrol, context);
+    return {context, armed:Boolean(patrol.armed), pending:Boolean(patrol.pending),
+      status:patrol.status, available:Boolean(context && game() && !combatPageHidden)};
+  }
+  function togglePatrol(force) {
+    const status = patrolState();
+    if (!status.available) return false;
+    const selection = window.PcMultiplayerNative?.state?.combatLock;
+    const commandable = selection?.commandableIds ?? selection?.combatIds;
+    if (!patrol.armed && force !== false &&
+        !selection?.selectedIds?.some(id => commandable?.includes(id))) {
+      patrol.status = 'Select combat units first';
+      return false;
+    }
+    return patrol.toggle(status.context, force);
+  }
   function combatSuspended(){
     const pages=window.__warzoneCommands?.report?.()||{};
     return !worldReady()||!ordersAllowed()||document.hidden||combatPageHidden||modal()||Boolean(pages.buildOpen||pages.placement||pages.selectingTrucks||pages.nativeMenu||pages.nativeClosing||pages.exitingBuild||pages.buildingOpening||window.__warzoneCommands?.isDemolishing?.())||
@@ -206,6 +226,7 @@
   function releaseCamera(){releaseKeys();}
   function clearLong(){clearTimeout(longTimer);longTimer=null;}
   function releaseAll(){
+    patrol.cancel();
     clearLong();clearTimeout(multiTimer);multiTimer=null;clearTimeout(intentTimer);intentTimer=null;cancelJobs();releaseCamera();
     window.PcMultiplayerNative?.cancelCamera?.();
     if(single?.linePlacement)window.__warzoneCommands?.cancelLinePlacement?.(single.linePlacement);
@@ -412,8 +433,15 @@
       else if(s.job){Object.assign(s.job,{x:s.x,y:s.y,ended:true});s.job.cancelled=cancelled;}
       else if(!cancelled&&!ignoreUntilUp&&(ordersAllowed()||s.region==='radar')){
         const button=s.region==='radar'?2:game()&&s.region==='world'&&performance.now()-s.downAt>=HOLD_MS?2:0;
-        if(s.region==='world')manualSelectionRevision++;
-        click(s,button);
+        const target = s.region==='world' && hit(s.x,s.y)==='world' && patrol.armed;
+        if (target) {
+          const status = patrolState();
+          if (patrol.place(s.x,s.y,bounds(),window.LaunchedModule?.FS || window.Module?.FS,
+              status.available ? status.context : '')) lastAction='patrol';
+        } else {
+          if(s.region==='world')manualSelectionRevision++;
+          click(s,button);
+        }
       }
       single=null;
     }
@@ -512,7 +540,8 @@
       stopPending:Boolean(pendingCombatStop),stoppedUnitIds:stoppedUnitIds.slice(),guardedStopPending:Boolean(pendingCombatStop),
       guardedStopIntent:pendingCombatStop?.native?.combatStopIntent||lastCombatStopRequest,guardedStopState:lastCombatStopAck,
       guardedStopError:combatStopError,guardedStopRoute:lastStopRoute,baseJumps:counts.commandCalls});
-  window.PcMultiplayerControls=Object.freeze({enable,setPhase,command,releaseAll,report,setCombatLock,toggleCombatLock,refreshCombatLock,holdCombatSelection,resumeCombatSelection,resetCombatMode,toggleRepairPolicy,refreshRepairPolicy,resetRepairPolicy});
+  window.PcMultiplayerControls=Object.freeze({enable,setPhase,command,releaseAll,report,setCombatLock,toggleCombatLock,refreshCombatLock,holdCombatSelection,resumeCombatSelection,resetCombatMode,toggleRepairPolicy,refreshRepairPolicy,resetRepairPolicy,
+    togglePatrol,patrolState,cancelPatrol:()=>patrol.cancel()});
   function parentDocument(){return window.parent?.WarzoneHost?window.parent.document:document;}
   function setHeaderMenuState(id,open){
     const aliases={factory:'wt-open-factory',queue:'wt-open-queue',build:'wt-open-build',players:'wt-open-players'};

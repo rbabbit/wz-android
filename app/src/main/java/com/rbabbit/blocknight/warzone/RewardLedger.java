@@ -12,7 +12,11 @@ final class RewardLedger {
   static final int STARTER_CRYSTALS = 350;
   static final int WAVE_CRYSTALS = 5;
   static final int DIFFICULTY_COMPLETION_CRYSTALS = 1000;
+  static final int CRYSTAL_FIRST_WIN = 35;
+  static final int CRYSTAL_LATER_MATCH = 25;
   int balance = STARTER_CRYSTALS;
+  final Set<String> crystalWinDays = new LinkedHashSet<>();
+  String lastCrystalMatch = "";
   final Map<String, Integer> inventory = new LinkedHashMap<>();
   final Map<String, Integer> loadout = new LinkedHashMap<>();
   final Map<String, Integer> survivalLoadout = new LinkedHashMap<>();
@@ -69,6 +73,18 @@ final class RewardLedger {
       this.won = won; this.map = map; this.wave = wave; this.total = total;
       this.earned = earned; this.balance = balance; this.reason = reason;
     }
+  }
+
+  Receipt finishCrystalSkirmish(String session, boolean won, String day) {
+    if (session.isEmpty() || session.equals(lastCrystalMatch)) return null;
+    boolean alreadyWon = crystalWinDays.contains(day);
+    int earned = alreadyWon ? CRYSTAL_LATER_MATCH : won ? CRYSTAL_FIRST_WIN : 0;
+    balance = Math.addExact(balance, earned);
+    if (won) crystalWinDays.add(day);
+    lastCrystalMatch = session;
+    String reason = alreadyWon ? "Completed match reward"
+        : won ? "First win today" : "Win your first match today to start earning.";
+    return new Receipt(won, BattleLaunchSpec.CRYSTAL_SKIRMISH_MAP, 0, 0, earned, balance, reason);
   }
 
   static int price(String id) { return RewardCatalog.get(id).price; }

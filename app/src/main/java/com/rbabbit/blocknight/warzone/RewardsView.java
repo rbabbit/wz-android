@@ -36,6 +36,7 @@ final class RewardsView extends FrameLayout {
         void buy(String id, int quantity);
         void equip(String id, int quantity);
         void close();
+        default void crystalSkirmish() { }
     }
 
     private static final int INK = TowersTheme.TEXT, MUTED = TowersTheme.SECONDARY;
@@ -63,6 +64,12 @@ final class RewardsView extends FrameLayout {
     }
     RewardsView(Context context, String profile, String mapId, String mapName, int balance,
             Map<String, Integer> inventory, Map<String, Integer> loadout, boolean inGame, Actions actions) {
+        this(context, profile, mapId, mapName, balance, inventory, loadout, inGame, null, actions);
+    }
+
+    RewardsView(Context context, String profile, String mapId, String mapName, int balance,
+            Map<String, Integer> inventory, Map<String, Integer> loadout, boolean inGame,
+            String crystalSkirmishOffer, Actions actions) {
         super(context);
         this.profile=RewardCatalog.profile(profile);this.mapId=mapId;
         this.actions = actions;
@@ -99,6 +106,17 @@ final class RewardsView extends FrameLayout {
         walletParams.leftMargin = dp(4);
         header.addView(wallet, walletParams);
         drawer.addView(header, new LinearLayout.LayoutParams(-1, -2));
+
+        if (!inGame && crystalSkirmishOffer != null) {
+            Button skirmish = compactAction("CRYSTAL SKIRMISH", true, 14);
+            skirmish.setContentDescription("Play Crystal Skirmish on Centerpede. " + crystalSkirmishOffer);
+            skirmish.setOnClickListener(v -> { if (!busy) actions.crystalSkirmish(); });
+            drawer.addView(skirmish, new LinearLayout.LayoutParams(-1, dp(38)));
+            TextView offer = copy(crystalSkirmishOffer, 12, MUTED);
+            offer.setGravity(Gravity.CENTER);
+            offer.setPadding(0, dp(3), 0, dp(5));
+            drawer.addView(offer, new LinearLayout.LayoutParams(-1, -2));
+        }
 
         LinearLayout tabs = new LinearLayout(context);
         for (String name : CATEGORIES) {

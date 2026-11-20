@@ -50,7 +50,7 @@
  function renderOwnership(){
   const denied=session.phase==='game'&&!ownerAllowed(),w=child();
   document.body.classList.toggle('mp-observer',denied);
-  for(const id of ['blocknight-tech','wt-open-factory','wt-open-queue','blocknight-base','blocknight-combat','blocknight-repair']){const node=byId(id);if(node)node.hidden=denied;}
+  for(const id of ['blocknight-tech','wt-open-factory','wt-open-queue','blocknight-base','blocknight-combat','blocknight-repair','blocknight-patrol']){const node=byId(id);if(node)node.hidden=denied;}
   if(denied){
    byId('unit-controls').hidden=true;
    for(const id of ['wt-field-centre','wt-build-sidebar']){const node=byId(id);if(node)node.hidden=true;}
@@ -264,6 +264,7 @@
  }
  function dispatchCommand(action){
   const w=child();if(!w||session.phase!=='game'||!['music','players'].includes(action)&&!ownerAllowed())return false;
+  if (action !== 'patrol' && action !== 'repair') w.PcMultiplayerControls?.cancelPatrol?.();
   if(['research','manufacturing','queue','build','demolish','intelligence','music','players'].includes(action)){byId('wt-field-centre').hidden=true;byId('wt-field-toggle')?.setAttribute?.('aria-expanded','false');}
   const commands=w.__warzoneCommands,research=w.__blockNightResearch;
   if(action!=='music')w.WarzoneMapMusic?.closeMenu?.(false);
@@ -286,6 +287,11 @@
   if(action==='intelligence')return w.__warzoneIntelligence?.toggle?.()||w.WarzoneIntelligence?.toggle?.()||toast('No intelligence reports are available yet.');
    if(action==='combat'){const value=w.PcMultiplayerControls?.toggleCombatLock?.()||false;commands?.afterBuildExit?.(()=>true);return value;}
   if(action==='repair')return w.PcMultiplayerControls?.toggleRepairPolicy?.()||false;
+  if(action==='patrol'){
+   const armed=w.PcMultiplayerControls?.patrolState?.().armed;
+   const toggle=()=>{const result=w.PcMultiplayerControls?.togglePatrol?.(!armed);syncPatrolButton();return result;};
+   return commands?.afterBuildExit ? commands.afterBuildExit(toggle) : toggle();
+  }
   return w.PcMultiplayerControls?.command(action);
  }
  session.command=command;
@@ -352,7 +358,7 @@
   const enabled=allowed&&state?.repairPolicyEnabled===true,pending=allowed&&state?.repairPolicyPending===true;
   button.dataset.repairEnabled=String(enabled);button.dataset.repairPending=String(pending);
   button.setAttribute('aria-pressed',String(enabled));button.setAttribute('aria-busy',String(pending));button.classList.toggle('active',enabled);
-  menuNote(button,enabled,'Medium Damage Repair');
+  menuNote(button,enabled,'Med dmg');
   button.disabled=!allowed||state?.repairPolicyCanToggle!==true;
   button.title=state?.repairPolicyError||(pending?(enabled
     ?'Automatic repair retreat is ON; applying Medium damage to new combat units'
@@ -361,12 +367,24 @@
     :'Enable automatic repair retreat at 75% health for all your combat units and new production');
  }
  function syncChrome(){
-  syncCombatButton();syncRepairButton();renderOwnership();if(session.phase!=='game')return;
+  syncCombatButton();syncRepairButton();syncPatrolButton();renderOwnership();if(session.phase!=='game')return;
   const w=child(),page=byId('wt-command-pages'),research=w?.document?.getElementById('blocknight-research-shell');
   const full=Boolean(page&&!page.hidden||research&&!research.hidden||w?.__warzoneIntelligence?.isOpen?.());
   byId('unit-controls').hidden=full||!ownerAllowed();
   if(full){byId('wt-field-centre').hidden=true;byId('wt-field-toggle')?.setAttribute?.('aria-expanded','false');}
   w?.PcMultiplayerControls?.refreshCombatLock?.();
+ }
+ function syncPatrolButton(){
+  const button=byId('blocknight-patrol');if(!button)return;
+  const state=child()?.PcMultiplayerControls?.patrolState?.();
+  button.disabled=session.phase!=='game'||!ownerAllowed()||!state?.available||state.pending;
+  button.classList.toggle('active',Boolean(state?.armed));
+  button.setAttribute('aria-pressed',String(Boolean(state?.armed)));
+  button.setAttribute('aria-busy',String(Boolean(state?.pending)));
+  button.title=state?.status||'Select combat units, tap Patrol, then choose a destination';
+  menuNote(button,Boolean(state?.status),state?.status||'');
+  const note=button.querySelector('.wt-menu-note');
+  if(note&&note.textContent!==(state?.status||''))note.textContent=state?.status||'';
  }
  setInterval(syncChrome,250);
  session.report=()=>({active:session.active,phase:session.phase,nativeMode:lastMode,nativeUi,room:globalThis.PcMultiplayerRoomUI?.report?.()||null,loading:nativeLoading,loadingCoverVisible:Boolean(byId('loading-cover')&&!byId('loading-cover').hidden),roomEstablished,everReceived,status:session.statusText,playerName:joinName,sockets:[...sockets].map(([id,v])=>({id,...v})),events:session.events.slice(-40),errors:session.errors.slice(-20),controls:child()?.PcMultiplayerControls?.report()||null});

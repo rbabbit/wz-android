@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><title>Multiplayer</title>
-<link rel="stylesheet" href="/warzone/ui/towers-shell.css"><link rel="stylesheet" href="/warzone/ui/towers-monochrome.css"><link rel="stylesheet" href="/warzone/ui/towers-game-controls.css"><link rel="stylesheet" href="multiplayer.css"><link rel="stylesheet" href="room-ui.css"></head>
+<link rel="stylesheet" href="/warzone/ui/towers-shell.css"><link rel="stylesheet" href="/warzone/ui/towers-monochrome.css"><link rel="stylesheet" href="/warzone/ui/towers-game-controls.css"><link rel="stylesheet" href="multiplayer.css"><link rel="stylesheet" href="room-ui.css">
+<link rel="stylesheet" href="/warzone/ui/battle-toolbar-notes.css"></head>
 <body class="mp-shell wt-towers-polished">
 <main id="setup">
  <header class="lobby-heading"><h1>Multiplayer</h1><div class="lobby-namefield"><label for="player-name">Player name</label><div class="lobby-name-control"><input id="player-name" maxlength="24" autocomplete="nickname" autocapitalize="off" spellcheck="false" aria-describedby="player-name-suffix profile-status"><span id="player-name-suffix" contenteditable="false">(m)</span></div></div><div class="lobby-tools"><label class="lobby-toggle" for="hide-empty"><span>Hide empty</span><input id="hide-empty" type="checkbox"><span class="lobby-toggle-track" aria-hidden="true"><span></span></span></label><button id="lobby" type="button">Refresh</button></div></header>
@@ -11,9 +12,26 @@
 </main>
 <div id="engine-host" hidden></div>
 <main id="mp-room" hidden aria-hidden="true" aria-label="Multiplayer waiting room">
- <header class="mp-room-header"><button id="room-leave" type="button" class="dark">LEAVE</button><div class="mp-room-title"><h1 id="mp-room-title">Multiplayer room</h1><span id="mp-room-map" class="mp-room-map"></span></div><button id="mp-room-map-toggle" type="button" aria-expanded="false" aria-controls="mp-room-map-preview">MAP</button><div class="mp-room-counts"><span id="mp-room-counts"></span><span id="mp-room-spectators"></span></div></header>
- <div class="mp-room-content"><section class="mp-room-roster" aria-label="Room players"><div class="mp-room-heading"><h2>Players <span id="mp-room-roster-count"></span></h2><small>Team</small></div><div id="mp-room-players" class="mp-room-players" tabindex="0"></div></section><section class="mp-room-chat" aria-label="Room chat"><div class="mp-room-heading"><h2>Chat</h2></div><div id="mp-room-chat-log" class="mp-room-chat-log" role="log" aria-live="polite" aria-relevant="additions text" tabindex="0"></div><form id="mp-room-composer" class="mp-room-composer"><input id="mp-room-chat-input" type="text" maxlength="256" aria-label="Chat message" placeholder="Message the room…" autocomplete="off" enterkeyhint="send"><button id="mp-room-chat-send" type="submit">SEND</button></form></section></div>
- <footer class="mp-room-footer"><span id="mp-room-self" class="mp-room-self"></span><label class="mp-room-my-team">Your team<select id="mp-room-team" aria-label="Your team"></select></label><button id="mp-room-spectate" type="button" aria-pressed="false">SPECTATE</button><button id="mp-room-options-toggle" type="button" aria-expanded="false" aria-controls="mp-room-options">MATCH OPTIONS</button><span id="mp-room-ready-note" class="mp-room-note" role="status"></span><button id="mp-room-ready" type="button" class="room-primary" aria-pressed="false">READY</button><p id="mp-room-feedback" role="status" aria-live="polite"></p></footer>
+ <header class="mp-room-header">
+  <button id="room-leave" type="button" class="dark">LEAVE</button>
+  <div class="mp-room-title"><h1 id="mp-room-title">Multiplayer room</h1><span id="mp-room-map" class="mp-room-map"></span></div>
+  <button id="mp-room-map-toggle" type="button" aria-expanded="false" aria-controls="mp-room-map-preview">MAP</button>
+ </header>
+ <div class="mp-room-content">
+  <section class="mp-room-chat" aria-label="Room chat">
+   <div id="mp-room-chat-log" class="mp-room-chat-log" role="log" aria-live="polite" aria-relevant="additions text" tabindex="0"></div>
+   <form id="mp-room-composer" class="mp-room-composer">
+    <input id="mp-room-chat-input" type="text" maxlength="256" aria-label="Chat message" placeholder="Message the room…" autocomplete="off" enterkeyhint="send">
+    <button id="mp-room-chat-send" type="submit">SEND</button>
+   </form>
+  </section>
+  <section class="mp-room-roster" aria-labelledby="mp-room-counts">
+   <h2 id="mp-room-counts" class="mp-room-counts">Players</h2>
+   <span id="mp-room-spectators" class="mp-room-roster-summary"></span>
+   <div id="mp-room-players" class="mp-room-players" tabindex="0"></div>
+  </section>
+ </div>
+ <footer class="mp-room-footer"><label class="mp-room-my-team">Team<select id="mp-room-team" aria-label="Your team"></select></label><button id="mp-room-spectate" type="button" aria-pressed="false">SPECTATE</button><button id="mp-room-options-toggle" type="button" aria-expanded="false" aria-controls="mp-room-options">MATCH OPTIONS</button><span id="mp-room-ready-note" class="mp-room-note" role="status"></span><button id="mp-room-ready" type="button" class="room-primary" aria-pressed="false">READY</button><p id="mp-room-feedback" role="status" aria-live="polite"></p></footer>
  <aside id="mp-room-options" class="mp-room-options" hidden aria-label="Match options"><header><h2>Match options</h2><button id="mp-room-options-close" type="button">CLOSE</button></header><dl id="mp-room-options-list"></dl></aside>
  <aside id="mp-room-map-preview" class="mp-room-map-preview" hidden aria-label="Map preview"><header><h2 id="mp-room-preview-name"></h2><button id="mp-room-map-close" type="button">CLOSE</button></header><p id="mp-room-map-status" role="status"></p><canvas id="mp-room-map-canvas" hidden aria-label="Actual multiplayer map preview"></canvas></aside>
 </main>
@@ -21,6 +39,7 @@
  <button class="wt-icon-only" id="blocknight-tech" aria-label="Research" data-command="research" aria-expanded="false"><img src="/warzone/ui/icons/flask.svg" alt=""><span>RESEARCH</span></button><button class="wt-icon-only" id="wt-open-factory" aria-label="Manufacturing" data-command="manufacturing" aria-expanded="false"><img src="/warzone/build-icons/A0LightFactory.png" alt=""><span>MANUFACTURING</span></button><button class="wt-icon-only" id="wt-open-queue" aria-label="Queue" data-command="queue" aria-expanded="false"><img src="/warzone/ui/icons/stack-plus.svg" alt=""><span>QUEUE</span></button><button class="wt-icon-only" id="blocknight-base" aria-label="Base" data-command="base"><img src="/warzone/ui/icons/house.svg" alt=""><span>BASE</span></button><button id="blocknight-combat" data-command="combat" aria-pressed="false"><img src="/warzone/ui/icons/stack.svg" alt=""><span>Combat</span></button>
  <button class="wt-icon-only" id="blocknight-repair" aria-label="Repair" data-command="repair" aria-pressed="false" aria-busy="false" data-repair-enabled="false" title="Enable automatic repair retreat at 75% health for all your combat units and new production"><img src="/warzone/ui/icons/wrench.svg" alt=""><span>REPAIR</span></button>
  
+ <button id="blocknight-patrol" aria-label="Patrol" data-command="patrol" aria-pressed="false" aria-busy="false"><img src="/warzone/ui/icons/map-pin.svg" alt=""><span>PATROL</span></button>
  <button class="wt-icon-only" id="blocknight-music" aria-label="Music" data-command="music" aria-expanded="false"><img src="/warzone/ui/icons/music-notes.svg" alt=""><span>MUSIC</span></button>
  <button id="wt-open-players" data-command="players" aria-expanded="false">Players</button>
  <button id="leave" class="dark">LOBBY</button>

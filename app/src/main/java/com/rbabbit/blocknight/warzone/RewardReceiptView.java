@@ -22,6 +22,13 @@ final class RewardReceiptView extends FrameLayout {
     RewardReceiptView(Context context, boolean won, String mapName, String difficulty,
             int reachedWave, int totalWaves, int earned, int balance, String reason,
             int bottomClearance, Runnable close) {
+        this(context, won, mapName, difficulty, reachedWave, totalWaves, earned, balance, reason,
+                bottomClearance, close, false);
+    }
+
+    RewardReceiptView(Context context, boolean won, String mapName, String difficulty,
+            int reachedWave, int totalWaves, int earned, int balance, String reason,
+            int bottomClearance, Runnable close, boolean crystalSkirmish) {
         super(context);
         this.won = won;
         this.bottomClearance = Math.max(0, bottomClearance);
@@ -52,7 +59,8 @@ final class RewardReceiptView extends FrameLayout {
         map.setGravity(won ? Gravity.CENTER : Gravity.START);
         add(body, map, 3);
         int reached = Math.max(0, Math.min(reachedWave, Math.max(0, totalWaves)));
-        TextView summary = copy(totalWaves == 0 ? (won ? "Challenge won" : "Challenge ended")
+        TextView summary = copy(crystalSkirmish ? "Match complete"
+                : totalWaves == 0 ? (won ? "Challenge won" : "Challenge ended")
                 : won ? "All " + totalWaves + " waves survived" : "Reached wave " + reached + " of " + totalWaves, 13, INK);
         summary.setGravity(won ? Gravity.CENTER : Gravity.START);
         add(body, summary, won ? 8 : 7);
@@ -100,7 +108,7 @@ final class RewardReceiptView extends FrameLayout {
         else buttonParams.leftMargin = dp(10);
         footer.addView(button, buttonParams);
         add(body, footer, won ? 12 : 8);
-        if (won) {
+        if (won && !crystalSkirmish) {
             TextView returnLabel = copy(mapName + " is selected on " + (totalWaves == 0 ? "Challenge" : "Home"), 11, MUTED);
             returnLabel.setGravity(Gravity.CENTER);
             body.addView(returnLabel, new LinearLayout.LayoutParams(-1, -2));

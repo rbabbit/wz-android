@@ -49,15 +49,23 @@
   inspectPending();renderActions();return true;
  }
  function renderPlayers(){
-  const players=snapshot.players.slice().sort((a,b)=>Number(a.spectator)-Number(b.spectator)||(a.position??a.id)-(b.position??b.id));
+  const players=snapshot.players.filter(p=>occupied(p)&&(snapshot.blind!==true||p.id===snapshot.localPlayer));
+  players.sort((a,b)=>Number(a.spectator)-Number(b.spectator)||(a.position??a.id)-(b.position??b.id));
   const key=JSON.stringify([snapshot.localPlayer,snapshot.hostPlayer,players]);if(key===rosterKey)return;rosterKey=key;
   const list=$('mp-room-players'),view=scrollView(list,false),fragment=document.createDocumentFragment();
   for(const p of players){
-   const used=occupied(p),row=node('div','mp-room-player'+(p.id===snapshot.localPlayer?' local':'')+(!used?' open':''));row.dataset.playerId=String(p.id);
-   const team=node('span','mp-room-team',p.spectator?'S':teamLabel(p.team));row.append(team);
-   const name=node('span','mp-room-player-name',used?text(p.name||'Player',128):p.closed===true?'Closed slot':'Open slot');
-   const tags=[];if(p.local||p.id===snapshot.localPlayer)tags.push('You');if(p.host||p.id===snapshot.hostPlayer)tags.push('Host');if(used&&!p.allocated)tags.push('Bot');if(tags.length)name.append(node('small','',tags.join(' · ')));row.append(name);
-   row.append(node('span','mp-room-player-status',!used?'':p.spectator?'Spectator':!p.allocated?'Bot':p.downloading?'Downloading':p.ready?'Ready':'Not ready'));fragment.append(row);
+   const isLocal=p.id===snapshot.localPlayer;
+   const row=node('div','mp-room-player'+(isLocal?' local':''));row.dataset.playerId=String(p.id);
+   const name=node('span','mp-room-player-name',text(p.name||'Player',128));
+   const details=[];
+   if(isLocal)details.push('You');
+   if(p.host||p.id===snapshot.hostPlayer)details.push('Host');
+   if(!p.spectator&&Number.isInteger(p.team))details.push('Team '+teamLabel(p.team));
+   if(details.length)name.append(node('small','',details.join(' · ')));
+   row.append(name);
+   const status=p.spectator?'Spectator':!p.allocated?'Bot':p.downloading?'Downloading':p.ready?'Ready':'Waiting';
+   row.append(node('span','mp-room-player-status',status));
+   fragment.append(row);
   }
   list.replaceChildren(fragment);restoreScroll(list,view,false);rosterView=scrollView(list,false);
  }
@@ -99,8 +107,8 @@
  function closeMap(){const panel=$('mp-room-map-preview');panel.hidden=true;$('mp-room-map-toggle').setAttribute('aria-expanded','false');publishBackState();}
  function renderActions(){
   if(!snapshot)return;
-  const me=local(),s=localState(),p=snapshot.permissions,busy=Boolean(pending),team=$('mp-room-team'),ready=$('mp-room-ready'),spectate=$('mp-room-spectate');
-  $('mp-room-self').textContent=text(me?.name,128);const teams=Array.isArray(p.allowedTeams)?[...new Set(p.allowedTeams.filter(Number.isInteger))].slice(0,32):[];
+  const s=localState(),p=snapshot.permissions,busy=Boolean(pending),team=$('mp-room-team'),ready=$('mp-room-ready'),spectate=$('mp-room-spectate');
+  const teams=Array.isArray(p.allowedTeams)?[...new Set(p.allowedTeams.filter(Number.isInteger))].slice(0,32):[];
   const teamKey=JSON.stringify([teams,s.team]);if(team.dataset.options!==teamKey){team.dataset.options=teamKey;team.replaceChildren();for(const value of teams){const option=node('option','',teamLabel(value));option.value=String(value);option.selected=value===s.team;team.append(option);}if(!teams.includes(s.team)){const option=node('option','',teamLabel(s.team));option.value=String(s.team??'');option.selected=true;team.append(option);}}
   team.value=String(s.team??'');team.disabled=busy||p.canTeam!==true||s.spectator;team.title=team.disabled?'Team changes are currently unavailable.':'';
   ready.disabled=busy||p.canReady!==true||s.downloading;ready.textContent=pending?.action==='ready'?'WAITING…':s.ready?'READY ✓':'READY';ready.setAttribute('aria-pressed',String(s.ready));ready.title=text(p.readyReason||'');
@@ -108,7 +116,22 @@
   const chatBlocked=!['enabled','host-only'].includes(p.chatMode);$('mp-room-chat-input').disabled=chatBlocked;$('mp-room-chat-send').disabled=busy||chatBlocked||!$('mp-room-chat-input').value.trim();$('mp-room-chat-input').placeholder=chatBlocked?'Chat disabled by host':p.chatMode==='host-only'?'Message the host…':'Message the room…';
   const note=pending?pending.action==='chat'?'Sending…':'Waiting for the host…':s.downloading?'Downloading map…':s.spectator?'Spectating':p.canReady!==true?text(p.readyReason||'Not ready'):s.ready?'Ready':'Not ready';$('mp-room-ready-note').textContent=note;
  }
- function render(){if(!snapshot||!visible)return;const used=snapshot.players.filter(p=>occupied(p)&&!p.spectator).length,spectators=snapshot.players.filter(p=>p.allocated===true&&p.spectator).length,max=Number.isInteger(snapshot.maxPlayers)?snapshot.maxPlayers:'—',blind=snapshot.blind===true;$('mp-room-title').textContent=text(snapshot.roomName||'Multiplayer room',160);$('mp-room-map').textContent=text(snapshot.mapName,256);$('mp-room-map').title=text(snapshot.mapName,256);$('mp-room-counts').textContent=blind?'Players hidden':`Players ${used} / ${max}`;$('mp-room-spectators').textContent=blind?Number.isInteger(snapshot.readyPlayers)&&Number.isInteger(snapshot.waitingPlayers)?`${snapshot.readyPlayers} ready · ${snapshot.waitingPlayers} waiting`:'':`Spectators ${spectators}`;$('mp-room-roster-count').textContent=blind?'hidden':`${used} / ${max}`;renderPlayers();renderChat();renderOptions();renderMap();inspectPending();renderActions();}
+ function render(){
+  if(!snapshot||!visible)return;
+  const used=snapshot.players.filter(p=>occupied(p)&&!p.spectator).length;
+  const spectators=snapshot.players.filter(p=>p.allocated===true&&p.spectator).length;
+  const max=Number.isInteger(snapshot.maxPlayers)?snapshot.maxPlayers:'—';
+  const blind=snapshot.blind===true;
+  const hasReadyCounts=Number.isInteger(snapshot.readyPlayers)&&Number.isInteger(snapshot.waitingPlayers);
+  $('mp-room-title').textContent=text(snapshot.roomName||'Multiplayer room',160);
+  $('mp-room-map').textContent=text(snapshot.mapName,256);
+  $('mp-room-map').title=text(snapshot.mapName,256);
+  $('mp-room-counts').textContent=blind?'Players hidden':`Players ${used} / ${max}`;
+  const roomStatus=$('mp-room-spectators');
+  roomStatus.textContent=!blind&&spectators>0?`Spectators ${spectators}`:'';
+  if(blind&&hasReadyCounts)roomStatus.textContent=`${snapshot.readyPlayers} ready · ${snapshot.waitingPlayers} waiting`;
+  renderPlayers();renderChat();renderOptions();renderMap();inspectPending();renderActions();
+ }
  function accept(value){if(disposed||!valid(value))return false;if(snapshot&&value.generation===snapshot.generation&&value.revision<snapshot.revision)return false;if(snapshot?.generation!==value.generation){nativeViewport=null;lastViewportRevision=-1;chatFocused=false;chatSendPress=false;if(root.contains(document.activeElement))document.activeElement.blur();clearPending();snapshot=null;rosterKey=chatKey=optionsKey=previewKey='';chatRows.clear();$('mp-room-chat-log').replaceChildren();chatView=rosterView=null;$('mp-room-chat-input').value='';setFeedback('');closeOptions();closeMap();resize();}snapshot=value;render();publishBackState();return true;}
  function publishBackState(){try{globalThis.AndroidMultiplayer?.setRoomBackState?.(snapshot?.generation||'',visible,!$('mp-room-options').hidden||!$('mp-room-map-preview').hidden,visible&&chatFocused);}catch{}}
  function show(value){if(value&&!accept(value))return false;if(!snapshot||disposed)return false;visible=true;root.hidden=false;root.setAttribute('aria-hidden','false');document.documentElement.classList.add('mp-room-open');document.body.classList.add('mp-room-open');render();resize();publishBackState();return true;}

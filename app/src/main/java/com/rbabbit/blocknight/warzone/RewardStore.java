@@ -2,6 +2,7 @@ package com.rbabbit.blocknight.warzone;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -129,6 +130,12 @@ final class RewardStore {
   }
   synchronized RewardLedger.Receipt finishChallenge(String session, boolean won, String difficulty, boolean authoritativeRemaining) {
     return transaction(() -> ledger.finishChallenge(session, won, difficulty, authoritativeRemaining));
+  }
+  synchronized RewardLedger.Receipt finishCrystalSkirmish(String session, boolean won) {
+    return transaction(() -> ledger.finishCrystalSkirmish(session, won, LocalDate.now().toString()));
+  }
+  synchronized boolean wonCrystalSkirmishToday() {
+    return ledger.crystalWinDays.contains(LocalDate.now().toString());
   }
   synchronized RewardLedger.Receipt finish(String session, boolean won, String difficulty, int total,
       boolean authoritativeRemaining, Set<String> requiredDifficultyMapIds) {
@@ -323,6 +330,8 @@ final class RewardStore {
   private static String encode(RewardLedger value) {
     try {
       JSONObject root = new JSONObject().put("version", 6).put("balance", value.balance)
+          .put("crystalWinDays", new JSONArray(value.crystalWinDays))
+          .put("lastCrystalMatch", value.lastCrystalMatch)
           .put("inventory", new JSONObject(value.inventory)).put("loadout", new JSONObject(value.loadout))
           .put("survivalLoadout",new JSONObject(value.survivalLoadout))
           .put("challengeLoadout",new JSONObject(value.challengeLoadout))
@@ -384,6 +393,12 @@ final class RewardStore {
       RewardLedger value = new RewardLedger();
       value.balance = root.getInt("balance");
       if (value.balance < 0) throw new IllegalArgumentException("Invalid wallet balance.");
+      JSONArray crystalWinDays = root.optJSONArray("crystalWinDays");
+      if (crystalWinDays != null) {
+        for (int i = 0; i < crystalWinDays.length(); i++)
+          value.crystalWinDays.add(LocalDate.parse(crystalWinDays.getString(i)).toString());
+      }
+      value.lastCrystalMatch = root.optString("lastCrystalMatch", "");
       // Legacy ad-attempt tokens are ignored; saved balances and wave claims remain intact.
       JSONArray completed = root.getJSONArray("completed");
       for (int i = 0; i < completed.length(); i++) value.completed.add(completed.getString(i));

@@ -75,7 +75,7 @@ final class MapMusicIndex {
                     throw new IllegalArgumentException("Unknown map music assignment");
                 assignments.put(id, track);
             }
-            if (assignments.size() != 46) throw new IllegalArgumentException("Incomplete map music assignments");
+            if (assignments.size() != 96) throw new IllegalArgumentException("Incomplete map music assignments");
         } catch (Exception error) {
             throw new IllegalStateException("Map music catalog unavailable", error);
         }

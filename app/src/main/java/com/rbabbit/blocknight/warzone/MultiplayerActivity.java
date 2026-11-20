@@ -94,6 +94,7 @@ public final class MultiplayerActivity extends Activity {
   private final ScheduledExecutorService timeouts =
       Executors.newSingleThreadScheduledExecutor(r -> new Thread(r, "pc-socket-timeouts"));
   private MultiplayerWebView webView;
+  private BattleControls battleControls;
   private MultiplayerLobbyView nativeLobby;
   private String landingGeneration = "";
   private volatile boolean landingPageReady;
@@ -247,8 +248,14 @@ public final class MultiplayerActivity extends Activity {
           }
 
           @Override
+          public void onPageStarted(WebView view, String url, android.graphics.Bitmap favicon) {
+            if (battleControls != null) battleControls.reset();
+          }
+
+          @Override
           public void onPageFinished(WebView view, String url) {
             Log.i(TAG, "Page ready: " + url);
+            if (battleControls != null) battleControls.pageReady(url);
             view.evaluateJavascript(
                 "JSON.stringify({isolated:window.crossOriginIsolated,"
                     + "sharedArrayBuffer:typeof SharedArrayBuffer==='function',"
@@ -276,9 +283,8 @@ public final class MultiplayerActivity extends Activity {
         });
     configureIsolationAllowlist();
     root.addView(webView, new FrameLayout.LayoutParams(-1, -1, Gravity.TOP | Gravity.START));
+    battleControls = BattleControls.attach(root, webView, script -> webView.evaluateJavascript(script, null));
     nativeLobby = new MultiplayerLobbyView(this, new MultiplayerLobbyView.Actions() {
-      public void back() { onBackPressed(); }
-      public void refresh() { landingCall("refresh()"); }
       public void filter(boolean hide) { landingCall("setHideEmpty(" + hide + ")"); }
       public boolean saveName(String base) { return saveLandingName(base); }
       public void join(String id) { landingCall("join(" + JSONObject.quote(id) + ")"); }
@@ -1038,6 +1044,10 @@ public final class MultiplayerActivity extends Activity {
     timeouts.shutdownNow();
     if (lobbyHttp != null) lobbyHttp.close();
     if (root != null && viewportListener != null) root.removeOnLayoutChangeListener(viewportListener);
+    if (battleControls != null) {
+      battleControls.detach(root);
+      battleControls = null;
+    }
     if (webView != null) {
       webView.removeJavascriptInterface("AndroidSocketBridge");
       webView.removeJavascriptInterface("AndroidLobbyHttp");

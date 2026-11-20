@@ -2,6 +2,10 @@
 (() => {
   'use strict';
   if (window.WarzoneSavedGames || window.__warzoneDuelConfig?.mode === 'duel') return;
+  if (window.__warzoneFfaConfig?.map === 'crystal-skirmish') {
+    window.WarzoneSavedGames = Object.freeze({ready:true});
+    return;
+  }
   if(window.__warzoneFfaMode===true||window.__warzoneFfaConfig?.mode==='ffa'||new URLSearchParams(location.search).get('mode')==='ffa'){installCampaignSaves(true);return;}
   if(window.__warzoneCampaignMode===true||new URLSearchParams(location.search).get('mode')==='campaign'){installCampaignSaves();return;}
   const survivalConfig=window.__warzoneSurvivalConfig;

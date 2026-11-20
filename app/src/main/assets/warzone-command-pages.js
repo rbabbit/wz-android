@@ -1500,11 +1500,13 @@
       else{entry.busy=false;if(['selection-changed','game-reloaded','cancelled'].includes(reply.reason)){cancelDemolish();notify(reason(reply.reason));}else{notify(reason(reply.reason));refreshDemolition();updateDemolitionUI();}}
     });return true;
   }
-  doc.addEventListener('pointerdown',event=>{
-    if(!state.demolition&&!state.demolitionOpening)return;
-    const button=event.target?.closest?.('button,a,input');
-    if(button&&button.id!=='wt-demolish'&&!button.closest('#wt-demolish-bar'))cancelDemolish();
-  },{capture:true,passive:true});
+  function cancelDemolishForControl(target){
+    if(!state.demolition&&!state.demolitionOpening)return false;
+    const control=target?.closest?.('button,a,input');
+    if(!control||control.closest('#wt-demolish, [data-command="demolish"], #wt-demolish-bar'))return false;
+    return cancelDemolish();
+  }
+  doc.addEventListener('pointerdown',event=>cancelDemolishForControl(event.target),{capture:true,passive:true});
   document.addEventListener('keydown',event=>{
     if(event.key==='F8'||event.code==='F8')cancelDemolish();
     else if(event.key==='Escape'&&state.demolition){event.preventDefault();event.stopImmediatePropagation();cancelDemolish();}
@@ -2000,7 +2002,7 @@
     navigationRevision:()=>state.navigationSerial,
     playersReport:()=>({open:state.page==='players',ready:Boolean(playersState.value),context:playersState.watch?.context||'',viewer:playersState.value?.viewer||null,nativeMenu:playersState.nativeMenu,pending:Boolean(playersState.pending),tab:playersState.tab,detailTab:playersState.detailTab,availableTabs:playersTabs(playersState.value),viewRevision:playersState.viewRevision}),
     hidePreview:()=>{cancelLinePlacement();window.WarzoneBuildDisplay?.clearPreview();window.WarzoneBuildDisplay?.highlightDemolition?.(0);if(state.demolition){state.demolition.hoverId=0;updateDemolitionUI();}state.previewPoint=null;const ghost=document.getElementById('wt-build-ghost');if(ghost)ghost.setAttribute('hidden','');},
-    toggleDemolish,cancelDemolish,isDemolishing:()=>demolitionActive(),previewDemolish,demolishAt,
+    toggleDemolish,cancelDemolish,cancelDemolishForControl,isDemolishing:()=>demolitionActive(),previewDemolish,demolishAt,
     endBattle,isOpen:()=>Boolean(state.page),isPlacement:()=>Boolean(state.placement),nativeMenuOpen:()=>Boolean(state.nativeMenu&&state.nativeMenu!=='build'),nativeClosing:()=>Boolean(state.nativeClosePromise),nativeBuildOpen:()=>Boolean(state.placement)||state.nativeMenu==='build',nativeBuildMenuOpen:()=>state.nativeMenu==='build'&&!state.nativeToolReady,nativeHudHidden:()=>state.nativeHudHidden,nativeBuildTap,nativeBuildMenuTap,queueNativeSite,selectMode,afterBuildExit,selectNearbyTrucks,deselectUnits,openBuild,
     report:()=>({version:77,moduleTargets:moduleTargets(),modulePending:Array.from(state.modulePending.values()),truckSelection:state.truckSelection,selectingTrucks:Boolean(state.selectionPromise),page:state.page,buildOpen:state.buildOpen,nativeHudHidden:state.nativeHudHidden,pendingItem:state.pendingItem,siteChecks:state.siteChecks,pending:state.pending.size,writes:state.writes,acks:state.acks,timeouts:state.timeouts,
       placements:state.placements,rejects:state.rejects,opens:state.opens,closes:state.closes,placement:state.placement?.id,linePlacement:state.lineDrafts.has(state.linePreviewToken)?lineSummary(state.lineDrafts.get(state.linePreviewToken)):null,lineValidations:state.lineValidationCount,lastLine:state.lastLine,

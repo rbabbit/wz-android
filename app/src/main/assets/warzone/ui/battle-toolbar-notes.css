@@ -1,0 +1,36 @@
+#warzone-command-strip #blocknight-combat-hud.wt-show-notes {
+  height: auto !important;
+  padding-bottom: 24px !important;
+}
+
+#blocknight-combat-hud button:has(> .wt-menu-note) {
+  position: relative;
+  overflow: visible;
+}
+
+body :is(#warzone-command-strip #blocknight-combat-hud, #blocknight-combat-hud) button > small.wt-menu-note {
+  position: absolute;
+  top: calc(100% + 2px);
+  left: 0;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 1px 2px;
+  background: #000;
+  color: #fff !important;
+  font: 400 8px/1.1 system-ui, sans-serif !important;
+  letter-spacing: normal;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  text-align: left;
+  pointer-events: none;
+}
+
+:is(#warzone-command-strip #blocknight-combat-hud, #blocknight-combat-hud)
+  :is(#wt-repair, #wt-campaign-repair, #blocknight-repair, #blocknight-auto-fight, #blocknight-patrol) > .wt-menu-note {
+  text-align: center;
+  padding-inline: 0;
+}
+
+#blocknight-combat-hud .wt-menu-note[hidden] {
+  display: none !important;
+}

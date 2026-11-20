@@ -1,18 +1,14 @@
 package com.rbabbit.blocknight.warzone;
 
 import android.content.Context;
-import android.graphics.Typeface;
 import android.net.Uri;
-import android.view.Gravity;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import androidx.webkit.WebViewAssetLoader;
 import java.io.ByteArrayInputStream;
 
@@ -27,19 +23,6 @@ final class GuideView extends LinearLayout {
         close = onClose;
         setOrientation(VERTICAL);
         setBackgroundColor(TowersTheme.BACKGROUND);
-        LinearLayout bar = new LinearLayout(context);
-        bar.setGravity(Gravity.CENTER_VERTICAL);
-        bar.setPadding(dp(14), 0, dp(10), 0);
-        Typeface face = Typeface.createFromAsset(context.getAssets(), "warzone/ui/Oswald.ttf");
-        TextView title = new TextView(context);
-        title.setText("FIELD GUIDE");
-        title.setTypeface(face); title.setTextSize(19); title.setTextColor(TowersTheme.TEXT);
-        bar.addView(title, new LayoutParams(0, -2, 1));
-        Button home = RewardsView.action(context, face, "HOME", false);
-        home.setContentDescription("Close guide and return home");
-        home.setOnClickListener(v -> close.run());
-        bar.addView(home, new LayoutParams(dp(90), dp(48)));
-        addView(bar, new LayoutParams(-1, dp(50)));
 
         browser = new WebView(context);
         browser.setBackgroundColor(TowersTheme.BACKGROUND);
@@ -68,7 +51,7 @@ final class GuideView extends LinearLayout {
                     || uri.getPath() == null || !uri.getPath().startsWith("/assets/guide/");
             }
         });
-        addView(browser, new LayoutParams(-1, 0, 1));
+        addView(browser, new LayoutParams(-1, -1));
         browser.loadUrl("https://appassets.androidplatform.net/assets/guide/index.html");
     }
 
@@ -88,6 +71,4 @@ final class GuideView extends LinearLayout {
         disposed = true;
         browser.stopLoading(); removeView(browser); browser.destroy();
     }
-
-    private int dp(int value) { return Math.round(value * getResources().getDisplayMetrics().density); }
 }

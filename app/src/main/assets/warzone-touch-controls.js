@@ -593,7 +593,8 @@
     return true;
   }
 
-  let combatSerial=0, patrolArmed=false;
+  let combatSerial=0;
+  const mobilePatrol = new window.MobilePatrolInput();
   const combatTimers=new Set();
   function combatLater(action,delay){
     const generation=combatSerial;
@@ -604,9 +605,8 @@
     ++combatSerial;for(const timer of combatTimers)clearTimeout(timer);combatTimers.clear();
     if(!state.queueModifierHeld)dispatchKey('Control','ControlLeft',17,false);
     dispatchKey('a','KeyA',65,false);dispatchKey('u','KeyU',85,false);
-    const cancelledTool=patrolArmed;
-    patrolArmed=false;
-    if(cancelledTool&&cancelTool)pressKey('Escape','Escape',27);
+    const cancelledTool = mobilePatrol.cancel();
+    if (cancelledTool) paintPatrol();
     return cancelledTool&&cancelTool;
   }
   function ctrlShortcut(keyValue, code, keyCode) {
@@ -681,7 +681,7 @@
   function repairCanToggle() {
     const ack = combatPacket?.repairPolicy, current = window.LaunchedModule || window.Module;
     return state.battleActive && !state.stopNonce && !window.__towersHtml?.isEnded?.()
-      && window.__warzoneDuelConfig?.mode !== 'duel' && current?.calledRun === true
+      && current?.calledRun === true
       && Boolean(current?.FS?.writeFile && current?.FS?.rename && combatWorld?.context)
       && ack?.schemaVersion === 93 && ack.canIssueOrders === true && ack.context === combatWorld.context;
   }
@@ -689,7 +689,7 @@
     const doc = commandDocument();
     for (const id of ['wt-repair', 'wt-campaign-repair']) {
       const button = doc.getElementById(id); if (!button) continue;
-      menuNote(button,repairEnabled,'Medium Damage Repair');
+      menuNote(button,repairEnabled,'Med dmg');
       button.dataset.repairEnabled = String(repairEnabled); button.dataset.repairPending = String(repairPending);
       button.classList.toggle('active', repairEnabled); button.setAttribute('aria-pressed', String(repairEnabled));
       button.setAttribute('aria-busy', String(repairPending)); button.disabled = !repairCanToggle();
@@ -757,7 +757,6 @@
     combatWorld = {module:current, session, context};
   }
   function refreshCombatLock(value) {
-    if (window.__warzoneDuelConfig?.mode === 'duel') return state.combatLock;
     const current = window.LaunchedModule || window.Module;
     if (combatWorld && (combatWorld.module !== current || combatWorld.session !== window.__towersHtml?.session)) {
       state.combatLock=false;combatActivation='';combatOverride='';combatOffPending=false;combatOffNonces.clear();combatIntent=null;combatWorld=null;++combatOrderSerial;
@@ -765,6 +764,7 @@
     }
     if (!value) { try { value = JSON.parse(current?.FS?.readFile('/tmp/warzone-combat-selection-v89.json', {encoding:'utf8'})); } catch (_) {} }
     if (value) { combatPacket = value; bindCombatWorld(value, current); }
+    if (window.__warzoneDuelConfig?.mode === 'duel') return state.combatLock;
     const context = combatWorld?.context;
     if (!context || !current?.FS?.writeFile || !current?.FS?.rename || current.calledRun !== true) { paintCombatMode(); return false; }
     const ack=combatPacket?.combatLock;
@@ -878,6 +878,8 @@
       && exactCombatSelection(value.combatSelection));
     refreshCombatLock(value);
     refreshRepairPolicy();
+    mobilePatrol.observe(value?.patrol, value?.playing ? value.combatLock?.context : '');
+    paintPatrol();
     pollGuardedCombatStop();
     const hudDocument = commandDocument();
     for (const id of ['wt-all-combat', 'wt-campaign-all-combat']) {
@@ -907,6 +909,7 @@
       ['wt-campaign-all-combat','Combat','/warzone/ui/icons/stack.svg',false],
       ['wt-repair','Repair','/warzone/ui/icons/wrench.svg',true],
       ['wt-campaign-repair','Repair','/warzone/ui/icons/wrench.svg',true],
+      ['blocknight-auto-fight','Patrol','/warzone/ui/icons/map-pin.svg',false],
       ['blocknight-music','Music','/warzone/ui/icons/music-notes.svg',true],
       ['blocknight-rewards','Rewards','/warzone/ui/icons/crystal.svg',true],
       ['blocknight-save','Save','/warzone/ui/icons/save.svg',true],
@@ -927,13 +930,11 @@
   function updateCombatHud() {
     const hudDocument = commandDocument();
     const all = hudDocument.getElementById("blocknight-select-all");
-    const auto = hudDocument.getElementById("blocknight-auto-fight");
     const box = hudDocument.getElementById("blocknight-box-select");
     const queue = hudDocument.getElementById("blocknight-queue-orders");
     if (all) all.classList.toggle("active", state.combatLock);
     paintCombatMode();
     hudDocument.getElementById('wt-all-combat')?.setAttribute('aria-pressed', String(state.combatLock));
-    if (auto) auto.classList.toggle("active", state.autoFight);
     if (box) box.classList.toggle("active", state.boxMode);
     if (queue) queue.classList.toggle("active", state.queueMode);
     if (queue) queue.setAttribute("aria-pressed", String(state.queueMode));
@@ -952,6 +953,7 @@
       }
     }
     paintRepairMode();
+    paintPatrol();
     compactToolbar(hudDocument);
   }
 
@@ -998,15 +1000,43 @@
     });
   }
 
+  function paintPatrol() {
+    state.autoFight = Boolean(mobilePatrol.armed);
+    const button = commandDocument().getElementById('blocknight-auto-fight');
+    if (!button) return;
+    button.classList.toggle('active', state.autoFight);
+    button.setAttribute('aria-pressed', String(state.autoFight));
+    button.setAttribute('aria-busy', String(Boolean(mobilePatrol.pending)));
+    button.title = mobilePatrol.status || 'Select combat units, tap Patrol, then choose a destination';
+    menuNote(button, Boolean(mobilePatrol.status), mobilePatrol.status);
+    const note = button.querySelector('.wt-menu-note');
+    if (note && note.textContent !== mobilePatrol.status) note.textContent = mobilePatrol.status;
+    button.disabled = Boolean(state.stopNonce || mobilePatrol.pending) || !combatPacket?.worldSafe;
+  }
+
   function toggleAutoFight(force) {
-    cancelCombatInput();
-    state.autoFight = typeof force === "boolean" ? force : !state.autoFight;
-    if (state.autoFight) {
-      toggleCombatLock(true);
-      // A native Patrol is armed only when a destination is supplied.
+    refreshCombatSelection();
+    if (!state.battleActive || !combatPacket?.worldSafe || state.stopNonce) return false;
+    const selected = combatPacket.combatSelection;
+    if (!mobilePatrol.armed && force !== false &&
+        !selected.selectedIds?.some(id => selected.combatIds?.includes(id))) {
+      mobilePatrol.status = 'Select combat units first';
+      paintPatrol();
+      return false;
     }
-    updateCombatHud();
-    return state.autoFight;
+    const armed = mobilePatrol.toggle(combatWorld?.context, force);
+    paintPatrol();
+    return armed;
+  }
+
+  function placePatrol(x, y) {
+    if (!mobilePatrol.armed) return false;
+    const current = window.LaunchedModule || window.Module;
+    const placed = mobilePatrol.place(x, y, canvas()?.getBoundingClientRect(),
+      current?.FS, combatPacket?.worldSafe ? combatWorld?.context : '');
+    if (placed) { state.patrolOrders += 1; feedback(x, y, 'patrol'); vibrate(8); }
+    paintPatrol();
+    return placed;
   }
 
   function toggleBoxMode(force) {
@@ -1153,7 +1183,7 @@
     return true;
   }
 
-  async function queueCombatOrder(x, y, patrol) {
+  async function queueCombatOrder(x, y) {
     if (window.__warzoneDuelConfig?.mode !== 'duel') {
       const activation = combatActivation, context = combatWorld?.context, order = ++combatOrderSerial, generation = combatSerial;
       const started = combatNow();
@@ -1172,27 +1202,18 @@
         if (combatNow() - started >= 2500) { combatError = 'Native combat selection was not ready for this order.'; return false; }
         await new Promise(resolve => setTimeout(resolve, 20));
       }
-      if(patrol){
-        patrolArmed=true;pressKey('q','KeyQ',81);
-        combatLater(()=>{if(state.combatLock&&combatActivation===activation&&combatWorld?.context===context&&order===combatOrderSerial)contextualClick(x,y,state.queueMode);patrolArmed=false;},67);
-        state.patrolOrders+=1;
-      }else contextualClick(x, y, state.queueMode);
+      contextualClick(x, y, state.queueMode);
       state.combatOrders += 1;
-      feedback(x, y, patrol?'patrol':'order'); vibrate(8); return true;
+      feedback(x, y, 'order'); vibrate(8); return true;
     }
     if (!selectAllCombat()) return false;
-    const delay = patrol ? 155 : 105;
-    if (patrol) {
-      combatLater(() => {patrolArmed=true;pressKey("q", "KeyQ", 81);},88);
-    }
     // RightClickOrders is deliberately disabled. Warzone's native contextual
     // left click selects a unit when pressed on a unit and issues the correct
     // move / attack / repair order when pressed on a destination. Keeping the
     // same input path here makes ALL and AUTO agree with manual selection.
-    combatLater(() => {contextualClick(x, y, state.queueMode);patrolArmed=false;},delay);
+    combatLater(() => contextualClick(x, y, state.queueMode), 105);
     state.combatOrders += 1;
-    if (patrol) state.patrolOrders += 1;
-    feedback(x, y, patrol ? "patrol" : "order");
+    feedback(x, y, "order");
     vibrate(8);
     return true;
   }
@@ -2042,6 +2063,14 @@
         }
       }
 
+      if (!hudDocument.getElementById('wt-battle-toolbar-notes-style')) {
+        const noteStyles = hudDocument.createElement('link');
+        noteStyles.id = 'wt-battle-toolbar-notes-style';
+        noteStyles.rel = 'stylesheet';
+        noteStyles.href = '/warzone/ui/battle-toolbar-notes.css';
+        hudDocument.head.appendChild(noteStyles);
+      }
+
       hud = document.createElement("div");
       hud.id = "blocknight-combat-hud";
       hud.setAttribute("role", "toolbar");
@@ -2051,7 +2080,7 @@
         button.id = id;
         button.type = "button";
         const iconNames = {
-          "blocknight-select-all": "stack", "wt-all-combat": "stack", "wt-repair": "wrench", "blocknight-auto-fight": "arrows-clockwise",
+          "blocknight-select-all": "stack", "wt-all-combat": "stack", "wt-repair": "wrench", "blocknight-auto-fight": "map-pin",
           "blocknight-box-select": "selection", "blocknight-queue-orders": "stack-plus",
           "blocknight-stop": "hand-palm", "blocknight-base": "house",
           "blocknight-zoom-close": "x", "blocknight-zoom-battle": "crosshair",
@@ -2079,8 +2108,8 @@
       };
       const all = makeButton("blocknight-select-all", "ALL",
         "Keep all combat units selected (constructors excluded)", ()=>{const result=toggleCombatLock();window.__warzoneCommands?.afterBuildExit?.(()=>true);return result;});
-      const auto = makeButton("blocknight-auto-fight", "AUTO",
-        "Native Patrol orders for all combat units", async()=>{const enabled=state.autoFight;if(window.__warzoneCommands?.afterBuildExit)await window.__warzoneCommands.afterBuildExit(()=>toggleAutoFight(!enabled));else toggleAutoFight(!enabled);});
+      const auto = makeButton("blocknight-auto-fight", "PATROL",
+        "Select combat units, tap Patrol, then choose a destination", async()=>{const enabled=state.autoFight;if(window.__warzoneCommands?.afterBuildExit)await window.__warzoneCommands.afterBuildExit(()=>toggleAutoFight(!enabled));else toggleAutoFight(!enabled);});
       const box = makeButton("blocknight-box-select", "BOX",
         "One-shot rectangle selection: tap BOX, then drag", async()=>{const enabled=state.boxMode;if(window.__warzoneCommands?.afterBuildExit)await window.__warzoneCommands.afterBuildExit(()=>toggleBoxMode(!enabled));else toggleBoxMode(!enabled);});
       const queue = makeButton("blocknight-queue-orders", "+Q",
@@ -2123,7 +2152,7 @@
       help.setAttribute('aria-expanded','false');
       const orderGroup = document.createElement("div");
       orderGroup.className = "bn-command-group";
-      orderGroup.append(all, auto, box, queue, stop, base);
+      orderGroup.append(all, box, queue, stop, base);
       if (window.__warzoneCommands?.tower && !campaign && window.__warzoneDuelConfig?.mode !== 'duel') {
         const headerAll = makeButton('wt-all-combat', 'ALL COMBAT',
           'Keep all owned combat units selected; press again to turn off and deselect combat units', () => {
@@ -2132,11 +2161,14 @@
         headerAll.setAttribute('aria-pressed', 'false');
         headerAll.dataset.combatSelected = 'false';
         orderGroup.appendChild(headerAll);
+      }
+      if (!campaign) {
         const repair = makeButton('wt-repair', 'REPAIR',
-          'Enable automatic repair retreat at 75% health for all your combat units and new production', toggleRepairPolicy);
+          'Enable automatic repair retreat at 75% health for all your combat units and new production', () => toggleRepairPolicy());
         repair.setAttribute('aria-pressed', 'false'); repair.setAttribute('aria-busy', 'false'); repair.dataset.repairEnabled = 'false';
         orderGroup.appendChild(repair);
       }
+      orderGroup.appendChild(auto);
       const techGroup = document.createElement("div");
       techGroup.className = "bn-command-group";
       techGroup.append(tech);
@@ -2172,7 +2204,7 @@
         };
         window.addEventListener('warzone-save-state', syncSaveButton);
         syncSaveButton();
-        techGroup.append(save);
+        if (window.__warzoneFfaConfig?.map !== 'crystal-skirmish') techGroup.append(save);
         const laser = makeButton('blocknight-lassat', 'SELECT SAT',
           'Select your Laser Satellite Command Post, then target an enemy', () => window.WarzoneRewards?.armLaser?.());
         laser.style.display = 'none';
@@ -2214,10 +2246,9 @@
         const select=makeButton('wt-select-move','SELECT / MOVE','Exit build placement and return to unit selection and movement',()=>window.__warzoneCommands.selectMode());
         const trucks=makeButton('wt-select-trucks','TRUCKS','Select construction trucks visible in the battlefield',()=>window.__warzoneCommands.selectNearbyTrucks());
         all.querySelector?.('span')&&(all.querySelector('span').textContent='ALL UNITS');
-        auto.querySelector?.('span')&&(auto.querySelector('span').textContent='PATROL');
-        if(window.__warzoneDuelConfig?.mode==='duel')centre.append(select,all,auto,box,stop,trucks);
+        if(window.__warzoneDuelConfig?.mode==='duel')centre.append(select,all,box,stop,trucks);
         else {
-          auto.remove();box.remove();
+          box.remove();
           const demolish=makeButton('wt-demolish','DEMOLISH','Use selected construction trucks to demolish one of your structures',()=>window.__warzoneCommands.toggleDemolish());
           demolish.setAttribute('aria-pressed','false');
       const intelligence=makeButton('wt-intelligence','INTELLIGENCE','Show intelligence for the current battle',()=>campaign?window.__warzoneCampaign?.openIntel?.():window.__warzoneIntelligence?.toggle());
@@ -3067,6 +3098,9 @@
       if(!canceled&&!gesture.moved&&isBattlefieldPoint(gesture.x,gesture.y)){
         if(window.__warzoneCommands?.demolishAt?.(gesture.x,gesture.y))feedback(gesture.x,gesture.y,'order');
       }
+    } else if (!canceled && !gesture.moved && isBattlefieldPoint(gesture.x, gesture.y)
+        && placePatrol(gesture.x, gesture.y)) {
+      state.taps += 1;
     } else if (!canceled && !gesture.moved && isBattlefieldPoint(gesture.x,gesture.y)
         && window.WarzoneRewards?.handleTap?.(gesture.x,gesture.y)) {
       feedback(gesture.x,gesture.y,'order');state.taps += 1;
@@ -3090,7 +3124,7 @@
         state.taps += 1;
       } else if (state.combatLock && isBattlefieldPoint(gesture.x, gesture.y)) {
         if (combatOverride) contextualClick(gesture.x, gesture.y, state.queueMode);
-        else void queueCombatOrder(gesture.x, gesture.y, state.autoFight);
+        else void queueCombatOrder(gesture.x, gesture.y);
       } else if (state.queueMode && isQueuePlacementPoint(gesture.x, gesture.y)) {
         if(!window.__warzoneCommands?.queueNativeSite?.(gesture.x,gesture.y,state.replayingPointers))contextualClick(gesture.x, gesture.y, true);
         feedback(gesture.x, gesture.y, "order");

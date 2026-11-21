@@ -8,7 +8,7 @@
 body { margin: 0; }
 
 main {
-  width: min(44rem, 100% - 2rem);
+  width: min(65rem, 100% - 2rem);
   margin: clamp(1.5rem, 7vw, 4rem) auto;
 }
 
@@ -52,3 +52,10 @@ tbody th, tbody td, tfoot th, tfoot td { border-top: 1px solid #334439; }
 td, th:last-child { text-align: right; font-variant-numeric: tabular-nums; }
 tfoot { background: #223428; color: #ccedd4; font-weight: 700; }
 .note { margin: 1rem 0 0; color: #acbab0; font-size: .875rem; }
+section { margin-top: 2rem; }
+h2 { margin: 0 0 .75rem; font-size: 1.25rem; }
+.table-scroll { overflow-x: auto; }
+.play-time th, .play-time td { white-space: nowrap; }
+.play-time th:nth-child(n+4), .play-time td:nth-child(n+4) { text-align: right; }
+.play-time td:nth-child(-n+3), .play-time .empty { text-align: left; }
+.empty { color: #acbab0; }

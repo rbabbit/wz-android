@@ -108,6 +108,7 @@ public final class MultiplayerActivity extends Activity {
   private float commandStripCssHeight = DEFAULT_COMMAND_STRIP_CSS_HEIGHT;
   private AlertDialog leaveDialog;
   private volatile boolean sessionActive;
+  private final GameModeTotals.Tracker gameTotals = new GameModeTotals.Tracker();
   private volatile boolean activityResumed;
   private final Object sessionProtectionLock = new Object();
   private boolean sessionServiceStarted;
@@ -399,7 +400,11 @@ public final class MultiplayerActivity extends Activity {
       // The Join bridge completes before JS creates the engine. Request Android
       // protection here, so an immediate Home cannot overtake a posted UI task.
       if (active) startSessionProtectionFromJoin();
-      runOnUiThread(() -> { syncSessionProtection();publishActivityState(); });
+      runOnUiThread(() -> {
+        if (!active && wasActive) gameTotals.finish(false);
+        syncSessionProtection();
+        publishActivityState();
+      });
       if (!active && wasActive) landingPageReady = false;
       cacheRoomBackState(RoomBackState.EMPTY);
       synchronized (musicPreferenceLock) {
@@ -487,8 +492,13 @@ public final class MultiplayerActivity extends Activity {
         fitViewport();
       });
     }
-    @JavascriptInterface public void countMatchStart() {
-      if (sessionActive && !destroyed.get()) GameModeTotals.matchStarted("multiplayer");
+    @JavascriptInterface public void countMatchStart(String map) {
+      runOnUiThread(() -> {
+        if (!sessionActive || destroyed.get()) return;
+        GameModeTotals.matchStarted("multiplayer");
+        gameTotals.start("multiplayer", GameModeTotals.onlineMap(MultiplayerActivity.this, map),
+            "online", activityResumed);
+      });
     }
     @JavascriptInterface public void leave() {
       runOnUiThread(() -> onBackPressed());
@@ -520,6 +530,12 @@ public final class MultiplayerActivity extends Activity {
             || !(runId + ":finished").equals(event.optString("eventId"))
             || player < 0 || player >= 10 || players < 2 || players > 10 || elapsed <= 0
             || map.isEmpty() || map.length() > 160 || map.codePoints().anyMatch(Character::isISOControl)) return;
+        runOnUiThread(() -> {
+          // The bridge checked the current session above. Preserve callback
+          // order if the lobby clears musicSession before this runs.
+          gameTotals.setOnlineMap(GameModeTotals.onlineMap(MultiplayerActivity.this, map));
+          gameTotals.finish(true);
+        });
         // Local native proof can unlock personal achievements, never a verified
         // global online board. No account sign-in or cloud operation happens here.
         event.put("serverVerified", false).put("difficulty", "online");
@@ -915,6 +931,7 @@ public final class MultiplayerActivity extends Activity {
 
   private void returnToLobbyNative() {
     if (webView == null || pendingLobbyNavigation || destroyed.get()) return;
+    gameTotals.finish(false);
     synchronized (musicPreferenceLock) { musicSession = ""; }
     sessionActive = false;
     syncSessionProtection();
@@ -997,6 +1014,7 @@ public final class MultiplayerActivity extends Activity {
   @Override
   protected void onPause() {
     activityResumed = false;
+    gameTotals.setForeground(false);
     syncSessionProtection();publishActivityState();
     musicSuspended = true;
     multiplayerMusicLifecycle("suspend");
@@ -1007,6 +1025,7 @@ public final class MultiplayerActivity extends Activity {
   protected void onResume() {
     super.onResume();
     activityResumed = true;
+    gameTotals.setForeground(true);
     syncSessionProtection();publishActivityState();
     musicSuspended = false;
     multiplayerMusicLifecycle("resume");
@@ -1039,6 +1058,7 @@ public final class MultiplayerActivity extends Activity {
 
   @Override
   protected void onDestroy() {
+    if (isFinishing()) gameTotals.finish(false);
     multiplayerMusicLifecycle("dispose");
     destroyed.set(true);
     sessionActive = false;

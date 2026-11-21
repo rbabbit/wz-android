@@ -5,6 +5,7 @@
  let frame=null,poll=null,closeTimer=null,generation=0,everReceived=false,roomEstablished=false;
  let nativeLoading=false,terminalJoinFailure=false,lastMessage='',lastReason='',lastReasonKind='',lastMode=null,reasonCapture=null;
  let matchStartCounted=false;
+ let matchMap='';
  let nativeUi=null,roomSnapshot=null,joinName='',returning=false,toastTimer=null,lastPowerLayout=0,lastPowerKey='',ownerUiDenied=false;
  const revealable=s=>Boolean(s?.rendered&&(s.phase==='room'?s.lobbyReady:s.phase==='game'?s.worldReady:false));
  const ownerAllowed=()=>nativeUi?.canIssueOrders!==false&&nativeUi?.spectator!==true&&!(Number.isInteger(nativeUi?.realPlayer)&&Number.isInteger(nativeUi?.player)&&nativeUi.realPlayer!==nativeUi.player);
@@ -141,7 +142,7 @@
    setPhase(nativeUi.phase);uncover();
    if(!matchStartCounted&&nativeUi.phase==='game'&&nativeUi.canIssueOrders===true&&ownerAllowed()){
     matchStartCounted=true;
-    AndroidMultiplayer.countMatchStart?.();
+    AndroidMultiplayer.countMatchStart?.(matchMap);
    }
   }else{
    setPhase('connecting');cover('Joining game',session.statusText||'Connecting to the room…');
@@ -159,7 +160,9 @@
  session.roomState=value=>{
   if(!session.active||returning||nativeLoading||nativeUi?.phase!=='room'||nativeUi.roomGeneration!==value?.generation||!globalThis.PcMultiplayerRoomUI?.valid?.(value))return false;
   if(roomSnapshot?.generation===value.generation&&value.revision<roomSnapshot.revision)return false;
-  roomSnapshot=value;globalThis.PcMultiplayerRoomUI.accept(value);updateMode();return true;
+  roomSnapshot=value;
+  matchMap=typeof value.mapName==='string'?value.mapName:'';
+  globalThis.PcMultiplayerRoomUI.accept(value);updateMode();return true;
  };
  session.roomCommand=(action,data={})=>{
   const bridge=child()?.PcMultiplayerNative;
@@ -224,11 +227,14 @@
   if(!session.active)return;returning=true;cover('Leaving game','Returning to the multiplayer lobby…');child()?.PcMultiplayerControls?.releaseAll();session.returnToLobby(reason);
  };
  session.returnToLobby=reason=>{
-  if(!session.active)return;nativeSessionActive(false);returning=true;cover('Leaving game','Returning to the multiplayer lobby…');
+  if(!session.active)return;
+  const engine=child();
+  engine?.WarzoneMultiplayerProgress?.poll(engine.LaunchedModule);
+  nativeSessionActive(false);returning=true;cover('Leaving game','Returning to the multiplayer lobby…');
   generation++;session.active=false;roomSnapshot=null;globalThis.PcMultiplayerRoomUI?.reset?.();byId('transition').hidden=false;
   clearInterval(poll);clearTimeout(closeTimer);poll=null;closeTimer=null;
   child()?.PcMultiplayerControls?.releaseAll();child()?.WarzoneMapMusic?.dispose?.();
-  const engine=child();if(engine)engine.dispatchEvent(new engine.Event('warzone-battle-ended'));
+  if(engine)engine.dispatchEvent(new engine.Event('warzone-battle-ended'));
   try{AndroidMultiplayer.closeConnections();}catch{}
   sockets.clear();frame?.remove();frame=null;byId('engine-host').replaceChildren();
   byId('engine-host').hidden=true;byId('setup').hidden=false;setPhase('lobby');
@@ -256,7 +262,7 @@
   if(session.active)return false;
   if(!savePlayerName())return false;
   if(!nativeSessionActive(true)){byId('notice').textContent='Could not start multiplayer. Please reopen Multiplayer.';byId('notice').hidden=false;return false;}
-  generation++;session.active=true;session.arguments=Array.from(args);everReceived=false;roomEstablished=false;matchStartCounted=false;
+  generation++;session.active=true;session.arguments=Array.from(args);everReceived=false;roomEstablished=false;matchStartCounted=false;matchMap='';
   nativeLoading=false;nativeUi=null;roomSnapshot=null;globalThis.PcMultiplayerRoomUI?.reset?.();returning=false;terminalJoinFailure=false;lastMessage='';lastReason='';lastReasonKind='';lastMode=null;reasonCapture=null;sockets.clear();cancelReturn();cover('Joining game','Starting Warzone…');
   byId('setup').hidden=true;byId('notice').hidden=true;byId('engine-host').hidden=false;byId('room-leave').hidden=false;
   let musicSession='';try{musicSession=String(JSON.parse(AndroidMultiplayerMusic.musicState()).session||'');}catch{}

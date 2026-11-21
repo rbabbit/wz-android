@@ -148,6 +148,7 @@ public final class MainActivity extends Activity {
   private volatile String loadingSaveId = "";
   private boolean restoringGame;
   private boolean matchStartCounted;
+  private final GameModeTotals.Tracker gameTotals = new GameModeTotals.Tracker();
   private boolean rewardSetupFailed;
   private TextView appNotice;
   private final Runnable dismissAppNotice = this::clearAppNotice;
@@ -966,6 +967,7 @@ public final class MainActivity extends Activity {
   }
 
   private void finishTowersRewards(boolean won) {
+    gameTotals.finish(true);
     if (isCampaignBattle()) return;
     if (isChallengeBattle()) { finishChallenge(won); return; }
     if (isFfaBattle()) { finishFfa(won); return; }
@@ -1289,6 +1291,7 @@ public final class MainActivity extends Activity {
   }
 
   private void createLoadingPanel() {
+    gameTotals.finish(false);
     mapMusicLifecycle("dispose");
     dismissMainMenuDialog();
     mainMenuReturnPending = false;
@@ -1575,6 +1578,12 @@ public final class MainActivity extends Activity {
             || !event.optBoolean("nativeCompleted") || !event.optBoolean("won")
             || !("mission_completed".equals(kind) || "campaign_completed".equals(kind))
             || !mission.matches("(?:CAM|SUB)_[A-Z0-9_-]{1,60}")) return;
+        String difficulty = event.optString("difficulty");
+        runOnUiThread(() -> {
+          if (!session.equals(battleSession)) return;
+          gameTotals.setCampaignDifficulty(difficulty);
+          if ("campaign_completed".equals(kind)) gameTotals.finish(true);
+        });
         event.put("players", 1).put("botType", "scripted").put("strategy", "native");
         playGames.recordEvent(event);
       } catch (Exception ignored) { }
@@ -2175,6 +2184,7 @@ public final class MainActivity extends Activity {
   }
 
   private void returnToMainMenu() {
+    gameTotals.finish(false);
     final boolean returnToCrystalSkirmish = graphicsSetup == null && isCrystalSkirmish();
     final boolean returnToSurvival = graphicsSetup == null && isSurvivalBattle();
     final boolean returnToTowersMap = graphicsSetup == null && isTowersBattle() && !returnToSurvival;
@@ -2278,6 +2288,7 @@ public final class MainActivity extends Activity {
   private void showBattleExitPanel() {
     if (!isDuelBattle()) { returnToMainMenu(); return; }
     if (root == null || isFinishing() || isDestroyed() || !battleOutcome.isEmpty()) return;
+    gameTotals.finish(false);
     dismissMainMenuDialog();
     battleOutcome = "exited";
     mapMusicLifecycle("dispose");
@@ -2406,11 +2417,17 @@ public final class MainActivity extends Activity {
 
   private void awaitCampaignCanvas(int attempt, String session) {
     if (webView == null || isFinishing() || !session.equals(battleSession) || graphicsSetup != null) return;
-    webView.evaluateJavascript("(()=>{const n=window.__warzoneCampaign?.report?.().nativeState;"
-        + "return Boolean(window.LaunchedModule?.calledRun && document.getElementById('canvas')?.width>0 "
-        + "&& (n?.video||n?.playing) && !window.WarzoneSavedGames?.restoring);})()", result -> {
+    webView.evaluateJavascript("(()=>{const report=window.__warzoneCampaign?.report?.(), n=report?.nativeState;"
+        + "return window.LaunchedModule?.calledRun && document.getElementById('canvas')?.width>0 "
+        + "&& (n?.video||n?.playing) && !window.WarzoneSavedGames?.restoring "
+        + "? (report.snapshot?.statsDifficulty || 'unknown') : null;})()", result -> {
       if (!session.equals(battleSession) || graphicsSetup != null) return;
-      if ("true".equals(result)) { countMatchStart(); hideLoadingPanel(); webView.requestFocus(); }
+      if (result != null && result.startsWith("\"")) {
+        countMatchStart();
+        gameTotals.setCampaignDifficulty(result.substring(1, result.length() - 1));
+        hideLoadingPanel();
+        webView.requestFocus();
+      }
       else if (attempt < 240) webView.postDelayed(() -> awaitCampaignCanvas(attempt + 1, session), 250);
       else {
         showEngineFailure("Campaign did not become ready. Tap to return Home.");
@@ -2490,7 +2507,32 @@ public final class MainActivity extends Activity {
     if (matchStartCounted || restoringGame || battleLaunch == null || touchTestMode
         || touchSuiteMode || researchSuiteMode || getIntent().getBooleanExtra("engine_debug", false)) return;
     matchStartCounted = true;
-    GameModeTotals.matchStarted(isCrystalSkirmish() ? "crystal-skirmish" : battleLaunch.matchMode);
+    String mode = isCrystalSkirmish() ? "crystal-skirmish" : battleLaunch.matchMode;
+    GameModeTotals.matchStarted(mode);
+    String map;
+    String difficulty = "unknown";
+    switch (mode) {
+      case "campaign": map = BattleLaunchSpec.campaignChapter(musicMissionId); break;
+      case "duel": map = "RO 1v1 Half"; difficulty = "medium"; break;
+      case "crystal-skirmish":
+        map = "Crystal Skirmish";
+        difficulty = battleLaunch.ffaDifficulty;
+        break;
+      case "challenge":
+        map = ChallengeMapCatalog.get(this).map(battleLaunch.mapId).name;
+        difficulty = battleLaunch.ffaDifficulty;
+        break;
+      case "ffa":
+        map = FfaMapCatalog.isDownloaded(battleLaunch.mapId)
+            ? "Downloaded map" : FfaMapCatalog.get(this).map(battleLaunch.mapId).name;
+        difficulty = battleLaunch.ffaDifficulty;
+        break;
+      default:
+        MapLevelCatalog.Level level = currentTowersLevel();
+        map = level.name;
+        difficulty = level.difficulty;
+    }
+    gameTotals.start(mode, map, difficulty, activityResumed);
   }
 
   private void awaitInitialCamera(int attempt) {
@@ -2862,6 +2904,7 @@ public final class MainActivity extends Activity {
     cancelCampaignHomeCheck();
     clearAppNotice();
     activityResumed = false;
+    gameTotals.setForeground(false);
     refreshUpdateHomeVisibility();
     musicSuspended = true;
     mapMusicLifecycle("suspend");
@@ -2874,6 +2917,7 @@ public final class MainActivity extends Activity {
     if (playGames != null) playGames.refreshProgress();
     if (hubView != null) hubView.resume();
     activityResumed = true;
+    gameTotals.setForeground(true);
     musicSuspended = false;
     mapMusicLifecycle(musicSuspended ? "suspend" : "resume");
     refreshUpdateHomeVisibility();
@@ -2881,6 +2925,7 @@ public final class MainActivity extends Activity {
 
   @Override
   protected void onDestroy() {
+    if (isFinishing()) gameTotals.finish(false);
     if (root != null && updateHomeLayoutListener != null) {
       root.getViewTreeObserver().removeOnGlobalLayoutListener(updateHomeLayoutListener);
       updateHomeLayoutListener = null;
